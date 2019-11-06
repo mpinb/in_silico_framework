@@ -1,5 +1,7 @@
 import os
 import re
+
+import rw.rw
 import transformTools as tr
 import radii as radi
 import SimpleITK as sitk
@@ -104,7 +106,7 @@ class RadiusCalculatorForManyFiles:
             return "error"
 
 #       points = list(map(lambda x: map(lambda y: int(y/0.092), x), points))
-        points = map(lambda x: tr.read.convert_point(x, 1.0/0.092, 1.0/0.092, 1.0), points)
+        points = map(lambda x: rw.rw.convert_point(x, 1.0 / 0.092, 1.0 / 0.092, 1.0), points)
 
         return points
 

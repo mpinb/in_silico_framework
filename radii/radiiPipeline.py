@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import radii as radi
+import rw.rw
 import transformTools as tr
 import re
 import pandas as pd
@@ -170,9 +171,9 @@ class RadiiPipeline:
     def readExtractedRadii(self):
         '''will hanld reading ampoints with radii and uncertainties for diff. tresholds'''
         print(self.amOutput025)
-        self.allAmPointsWithRadius025, self.points025 = tr.read.multipleAmFiles(self.amOutput025)
-        self.allAmPointsWithRadius050, self.points050 = tr.read.multipleAmFiles(self.amOutput050)
-        self.allAmPointsWithRadius075, self.points075 = tr.read.multipleAmFiles(self.amOutput075)
+        self.allAmPointsWithRadius025, self.points025 = rw.rw.multipleAmFiles(self.amOutput025)
+        self.allAmPointsWithRadius050, self.points050 = rw.rw.multipleAmFiles(self.amOutput050)
+        self.allAmPointsWithRadius075, self.points075 = rw.rw.multipleAmFiles(self.amOutput075)
 
     def writeUncertainties(self):
         '''will write uncertainties in the output files'''
@@ -260,7 +261,7 @@ class RadiiPipeline:
         self.amWithRad = amWithRad
         self.spanFactor = spanFactor
 
-        pointsWithRadius = tr.read.hocFileComplete(self.hocFile)
+        pointsWithRadius = rw.rw.hocFileComplete(self.hocFile)
         #  pointsWithRadius = tr.read.hocFileReduced(self.hocFile)
         hocPointsSet = []
         pairs = []
@@ -299,12 +300,12 @@ class RadiiPipeline:
 
         self.trMatrix = trMatrix2
         print(amFile)
-        amPoints4D = tr.read.amFile(amFile)
+        amPoints4D = rw.rw.amFile(amFile)
 
         print("Applying the transofrmation matrix to the initial am points")
         trAmPoints4D = tr.exTrMatrix.applyTransformationMatrix(amPoints4D, trMatrix2)
 
-        hocPointsComplete = tr.read.hocFileComplete(self.hocFile)
+        hocPointsComplete = rw.rw.hocFileComplete(self.hocFile)
         hocSet = []
         for el in hocPointsComplete:
             hocSet.append([el[0], el[1], el[2]])

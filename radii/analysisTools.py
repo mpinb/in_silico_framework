@@ -2,6 +2,7 @@ import re
 import os
 import pandas as pd
 import radii as radi
+import rw.rw
 import transformTools as tr
 def allData(am050_tr_folder, radi_object):
     # the amPoints_hoc contains the transfromed am points to the hoc coordinates
@@ -41,14 +42,14 @@ def allData(am050_tr_folder, radi_object):
     for idx in range(file_numbers):
         # the following are coordinates with respect to
         # the individual slices
-        am025_pointsWithRad = tr.read.amFile(am025Paths[idx])
-        am050_pointsWithRad = tr.read.amFile(am050Paths[idx])
-        am075_pointsWithRad = tr.read.amFile(am075Paths[idx])
+        am025_pointsWithRad = rw.rw.amFile(am025Paths[idx])
+        am050_pointsWithRad = rw.rw.amFile(am050Paths[idx])
+        am075_pointsWithRad = rw.rw.amFile(am075Paths[idx])
 
         # the following are coordinates with applied transformation
         points_lenght = len(am050_pointsWithRad)
 
-        amTr_pointsWithRad = tr.read.amFile(amTrPaths[idx])
+        amTr_pointsWithRad = rw.rw.amFile(amTrPaths[idx])
         amPoints_in_hoc = tr.exTrMatrix.applyTransformationMatrix(amTr_pointsWithRad, trMatrix_hoc)
         amTr_points = [amTr_pointsWithRad[j][0:3] for j in range(points_lenght)]
 
