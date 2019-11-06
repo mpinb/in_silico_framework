@@ -271,7 +271,7 @@ class RadiiPipeline:
 
         amFile = self.amWithRad
 
-        amSet = radi.spacialGraph.getSpatialGraphPoints(amFile)
+        amSet = rw.rw.getSpatialGraphPoints(amFile)
 
         numberOfEdges = 2
 

@@ -42,7 +42,7 @@ for el in pointsWithRadius:
 
 # extract set2 points:
 # read the spacial Graph points
-points = radi.spacialGraph.getSpatialGraphPoints(amFile)
+points = rw.rw.getSpatialGraphPoints(amFile)
 set2 = points
 
 
@@ -187,7 +187,7 @@ print(endTime - startTime)
 # print("---------")
 
 initialAmPointsWithRad = rw.rw.amFile(amFile)
-initialAmPointsWithRad2 = radi.spacialGraph.getSpatialGraphPoints(amFile)
+initialAmPointsWithRad2 = rw.rw.getSpatialGraphPoints(amFile)
 
 
 

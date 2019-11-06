@@ -82,7 +82,7 @@ class RadiusCalculatorForManyFiles:
     def readPoints(self, dataFile):
         ''' return points of a am file, by using the function "getSpatialGraphPoints"'''
         try:
-            points = radi.spacialGraph.getSpatialGraphPoints(dataFile)
+            points = rw.rw.getSpatialGraphPoints(dataFile)
         except IOError as fnf_error:
             print(" ")
             print(fnf_error)
@@ -115,7 +115,7 @@ class RadiusCalculatorForManyFiles:
         radii = result
         radii = [r*0.092 for r in radii]
         try:
-            radi.spacialGraph.write_spacial_graph_with_thickness(inputDataFile, outputDataFile, radii)
+            rw.rw.write_spacial_graph_with_thickness(inputDataFile, outputDataFile, radii)
         except IOError as fnf_error:
             print(" ")
             print(fnf_error)
