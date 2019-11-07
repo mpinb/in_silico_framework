@@ -267,7 +267,7 @@ print("---------")
 # In the below we are writing the final hoc file with its radii
 print("writing the final result in the output hocFile")
 startTime = time.time()
-tr.write.hocFile(hocFile, hocFileOutput, hocWithRad)
+rw.rw.hocFile(hocFile, hocFileOutput, hocWithRad)
 endTime = time.time()
 print(endTime - startTime)
 

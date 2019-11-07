@@ -178,7 +178,7 @@ class RadiiPipeline:
     def writeUncertainties(self):
         '''will write uncertainties in the output files'''
         for amInputPath in self.amInputPathList:
-            tr.write.multipleAmFilesWithRadiusAndUncertainty(amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
+            rw.rw.multipleAmFilesWithRadiusAndUncertainty(amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
 
     def getAmFileWithRad(self):
         '''check if it need to ger amFile or not.'''
@@ -336,7 +336,7 @@ class RadiiPipeline:
 
         if (addRadii):
             print("writing the final result in the output hocFile")
-            tr.write.hocFile(self.hocFile, self.hocFileOutput, hocWithRad)
+            rw.rw.hocFile(self.hocFile, self.hocFileOutput, hocWithRad)
 
         egHocFile = self.outputDirectory + '/egHoc.txt'
         egAmFile = self.outputDirectory + '/egAm.txt'
