@@ -142,17 +142,17 @@ class RadiiPipeline:
                 imageName = os.path.basename(imageFilePath)
                 if spatialGraphName in imageName:
                     if (tr025):
-                        radi025=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.25)
+                        radi025= rw.rw.Rw(tresholdPercentage=0.25)
                         d = _paralellization_helper(radi025, amPth, imageFilePath, self.amOutput025, postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr050):
-                        radi050=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.5)
+                        radi050= rw.rw.Rw(tresholdPercentage=0.5)
                         d = _paralellization_helper(radi050, amPth, imageFilePath, self.amOutput050, postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr075):
-                        radi075=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.75)
+                        radi075= rw.rw.Rw(tresholdPercentage=0.75)
                         d = _paralellization_helper(radi075, amPth, imageFilePath, self.amOutput075, postMeasurment='yes')
                         delayeds.append(d)
 
