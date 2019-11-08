@@ -1,7 +1,7 @@
 import os
 import numpy as np
 import radii as radi
-import rw.rw
+from IO.IO import IO
 import transformTools as tr
 import re
 import pandas as pd
@@ -142,17 +142,17 @@ class RadiiPipeline:
                 imageName = os.path.basename(imageFilePath)
                 if spatialGraphName in imageName:
                     if (tr025):
-                        radi025= rw.rw.Rw(tresholdPercentage=0.25)
+                        radi025= IO(tresholdPercentage=0.25)
                         d = _paralellization_helper(radi025, amPth, imageFilePath, self.amOutput025, postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr050):
-                        radi050= rw.rw.Rw(tresholdPercentage=0.5)
+                        radi050= IO(tresholdPercentage=0.5)
                         d = _paralellization_helper(radi050, amPth, imageFilePath, self.amOutput050, postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr075):
-                        radi075= rw.rw.Rw(tresholdPercentage=0.75)
+                        radi075= IO(tresholdPercentage=0.75)
                         d = _paralellization_helper(radi075, amPth, imageFilePath, self.amOutput075, postMeasurment='yes')
                         delayeds.append(d)
 
@@ -171,14 +171,14 @@ class RadiiPipeline:
     def readExtractedRadii(self):
         '''will hanld reading ampoints with radii and uncertainties for diff. tresholds'''
         print(self.amOutput025)
-        self.allAmPointsWithRadius025, self.points025 = rw.rw.multipleAmFiles(self.amOutput025)
-        self.allAmPointsWithRadius050, self.points050 = rw.rw.multipleAmFiles(self.amOutput050)
-        self.allAmPointsWithRadius075, self.points075 = rw.rw.multipleAmFiles(self.amOutput075)
+        self.allAmPointsWithRadius025, self.points025 = IO.IO.multipleAmFiles(self.amOutput025)
+        self.allAmPointsWithRadius050, self.points050 = IO.IO.multipleAmFiles(self.amOutput050)
+        self.allAmPointsWithRadius075, self.points075 = IO.IO.multipleAmFiles(self.amOutput075)
 
     def writeUncertainties(self):
         '''will write uncertainties in the output files'''
         for amInputPath in self.amInputPathList:
-            rw.rw.multipleAmFilesWithRadiusAndUncertainty(amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
+            IO.IO.multipleAmFilesWithRadiusAndUncertainty(amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
 
     def getAmFileWithRad(self):
         '''check if it need to ger amFile or not.'''
@@ -261,7 +261,7 @@ class RadiiPipeline:
         self.amWithRad = amWithRad
         self.spanFactor = spanFactor
 
-        pointsWithRadius = rw.rw.hocFileComplete(self.hocFile)
+        pointsWithRadius = IO.IO.hocFileComplete(self.hocFile)
         #  pointsWithRadius = tr.read.hocFileReduced(self.hocFile)
         hocPointsSet = []
         pairs = []
@@ -271,7 +271,7 @@ class RadiiPipeline:
 
         amFile = self.amWithRad
 
-        amSet = rw.rw.getSpatialGraphPoints(amFile)
+        amSet = IO.IO.getSpatialGraphPoints(amFile)
 
         numberOfEdges = 2
 
@@ -300,12 +300,12 @@ class RadiiPipeline:
 
         self.trMatrix = trMatrix2
         print(amFile)
-        amPoints4D = rw.rw.amFile(amFile)
+        amPoints4D = IO.IO.amFile(amFile)
 
         print("Applying the transofrmation matrix to the initial am points")
         trAmPoints4D = tr.exTrMatrix.applyTransformationMatrix(amPoints4D, trMatrix2)
 
-        hocPointsComplete = rw.rw.hocFileComplete(self.hocFile)
+        hocPointsComplete = IO.IO.hocFileComplete(self.hocFile)
         hocSet = []
         for el in hocPointsComplete:
             hocSet.append([el[0], el[1], el[2]])
@@ -336,7 +336,7 @@ class RadiiPipeline:
 
         if (addRadii):
             print("writing the final result in the output hocFile")
-            rw.rw.hocFile(self.hocFile, self.hocFileOutput, hocWithRad)
+            IO.IO.hocFile(self.hocFile, self.hocFileOutput, hocWithRad)
 
         egHocFile = self.outputDirectory + '/egHoc.txt'
         egAmFile = self.outputDirectory + '/egAm.txt'

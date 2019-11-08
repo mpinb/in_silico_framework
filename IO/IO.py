@@ -6,10 +6,10 @@ import SimpleITK as sitk
 import radii as radi
 
 
-class Rw:
+class IO:
 
     """
-    The Rw is the superclass for the Rw module.
+    The IO is the superclass for the IO module.
 
     parameters
     ----------
@@ -27,8 +27,6 @@ class Rw:
         self.numberOfRaysForPostMeasurment = numberOfRaysForPostMeasurment
 
         self.radiusCalculator = radi.calcRad.RadiusCalculator(xyResolution=self.xyResolution, zResolution=self.zResolution, xySize=self.xySize, numberOfRays=self.numberOfRays, tresholdPercentage=self.tresholdPercentage)
-
-
 
 
     def convert_point(self, p, x_res = 0.092, y_res = 0.092, z_res = 1.0):

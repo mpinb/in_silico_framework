@@ -4,7 +4,7 @@ import SimpleITK as sitk
 import cv2
 import matplotlib.pyplot as plt
 
-import rw.rw
+import IO.IO
 
 nb_dir = os.path.split(os.getcwd())[0]
 if (nb_dir not in sys.path):
@@ -24,7 +24,7 @@ debug_s13_data = amDataPath + 'debug-S13_final_done_Alison_zScale_40.am'
 
 s13_r = amOutputPath + 's13-r.am'
 debug_s13_r = amOutputPath + 'debug-s13-r.am'
-s13_points = rw.rw.getSpatialGraphPoints(s13_data)
+s13_points = IO.IO.getSpatialGraphPoints(s13_data)
 
 s13_points = list(map(lambda x: map(lambda y: int(y/0.092), x), s13_points))
 
@@ -70,4 +70,4 @@ res = radi.radius.getRadiiHalfMax(s13_image, s13_points)
 
 radii = res[1]
 radii = [r*0.092 for r in radii]
-rw.rw.write_spacial_graph_with_thickness(s13_data, s13_r, radii)
+IO.IO.write_spacial_graph_with_thickness(s13_data, s13_r, radii)

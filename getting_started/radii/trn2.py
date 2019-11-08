@@ -7,7 +7,7 @@ from scipy.spatial import ConvexHull
 # importing modules from folders:
 # radii/radii/tranfromTools
 # radii/radii/radii
-import rw.rw
+import IO.IO
 import transformTools as tr
 import radii as radi
 
@@ -34,7 +34,7 @@ amFile = I.os.path.join(getting_started_dir,  amDataPath,'504_rad_merged.am')
 # extract set1 points:
 # Read the hoc points (reduced), then removing their radius from them
 # ( we need it to have only 3d data points to use an external package)
-pointsWithRadius = rw.rw.hocFileReduced(hocFile)
+pointsWithRadius = IO.IO.hocFileReduced(hocFile)
 hocSet = []
 for el in pointsWithRadius:
     hocSet.append([el[0], el[1], el[2]])
@@ -42,7 +42,7 @@ for el in pointsWithRadius:
 
 # extract set2 points:
 # read the spacial Graph points
-points = rw.rw.getSpatialGraphPoints(amFile)
+points = IO.IO.getSpatialGraphPoints(amFile)
 amSet = points
 
 
@@ -102,7 +102,7 @@ trMatrix2 = tr.exTrMatrix.getTransformation(dst_am, src_hoc)
 
 # In the below we read the points from amFile (actual set2 with their radius)
 # again but this time also we read their correspoinding radii
-amPoints4D = rw.rw.amFile(amFile)
+amPoints4D = IO.IO.amFile(amFile)
 
 
 # Now after getting the initial am points with their radius we will apply the
@@ -142,7 +142,7 @@ print(trAmPoints4D[56])
 # In the below we read the hoc file again this time completely,
 # i.e. without just taking two points from each sections
 print("reading hoc file completely")
-hocPointsComplete = rw.rw.hocFileComplete(hocFile)
+hocPointsComplete = IO.IO.hocFileComplete(hocFile)
 hocSet = []
 for el in hocPointsComplete:
     hocSet.append([el[0], el[1], el[2]])
