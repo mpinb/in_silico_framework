@@ -1,9 +1,9 @@
 import math
 import os
 import re
+import SimpleITK as sitk
 
 import radii as radi
-import rw
 
 
 class Rw:
@@ -210,7 +210,7 @@ class Rw:
             oneAmFilePoints =[]
             if am_file.endswith(".am"):
                 pathToAmFile = inputFolderPath + str(am_file)
-                oneAmFilePoints = amFile(pathToAmFile)
+                oneAmFilePoints = self.amFile(pathToAmFile)
                 amFilesSet[str(am_file)] = oneAmFilePoints
                 allAmPoints = allAmPoints + oneAmFilePoints
         return allAmPoints, amFilesSet
@@ -461,7 +461,7 @@ class Rw:
                     outputFile = outputFolderPath + str(specialGraphFile)
 
                     # write_spacial_graph_with_error(inputFile, outputFile, ucr)
-                    amFileWithRadiusAndUncertainty(inputFile, outputFile, pointsWithRad, ucrs)
+                    self.amFileWithRadiusAndUncertainty(inputFile, outputFile, pointsWithRad, ucrs)
         else:
             inputFile = inputFolderPath
             amFileName = os.path.basename(inputFile)
@@ -471,7 +471,7 @@ class Rw:
             pointsWithRad = [point[0:4] for point in points]
             ucrs = [point[4:6] for point in points]
 
-            amFileWithRadiusAndUncertainty(inputFile, outputFile, pointsWithRad, ucrs)
+            self.amFileWithRadiusAndUncertainty(inputFile, outputFile, pointsWithRad, ucrs)
 
 
 
@@ -532,7 +532,7 @@ class Rw:
     def readPoints(self, dataFile):
         ''' return points of a am file, by using the function "getSpatialGraphPoints"'''
         try:
-            points = rw.getSpatialGraphPoints(dataFile)
+            points = self.getSpatialGraphPoints(dataFile)
         except IOError as fnf_error:
             print(" ")
             print(fnf_error)
@@ -556,34 +556,34 @@ class Rw:
             return "error"
 
 #       points = list(map(lambda x: map(lambda y: int(y/0.092), x), points))
-        points = map(lambda x: rw.convert_point(x, 1.0 / 0.092, 1.0 / 0.092, 1.0), points)
+        points = map(lambda x: self.convert_point(x, 1.0 / 0.092, 1.0 / 0.092, 1.0), points)
 
         return points
 
     def writeResult(self, inputDataFile, outputDataFile, result):
-        '''This function will write the result of the extracted radii to final am file '''
+        """This function will write the result of the extracted radii to final am file """
         radii = result
         radii = [r*0.092 for r in radii]
         try:
-            rw.write_spacial_graph_with_thickness(inputDataFile, outputDataFile, radii)
+            self.write_spacial_graph_with_thickness(inputDataFile, outputDataFile, radii)
         except IOError as fnf_error:
             print(" ")
             print(fnf_error)
             print("for the file:")
-            print(dataFile)
+            print(outputDataFile)
             print("in wirteResult()")
             return "error"
         except UnicodeError as ucode_error:
             print(" ")
             print(ucode_error)
             print("for the file:")
-            print(dataFile)
+            print(outputDataFile)
             print("in wirteResult()")
             return "error"
         except ValueError as val_error:
             print(" ")
             print(val_error)
             print("for the file:")
-            print(dataFile)
+            print(outputDataFile)
             print("in wirteResult()")
             return "error"
