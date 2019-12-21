@@ -38,7 +38,7 @@ class ThicknessExtractor:
                  image_stack=None, slice_name=None):
         """ This is the main method for extracting Thickness
         - Inputs:
-            1. points: must be in the type transformation.Data.coordinate_2d, so they are a list of
+            1. am_points: must be in the type transformation.Data.coordinate_2d, so they are a list of
             2d values in micrometer
             2. Image is the path to tif file with a pixel size of xy_resolution.
             3. xy_resolution: pixelSize in micrometers as acquired by the microscope in one optical section.
@@ -98,7 +98,7 @@ class ThicknessExtractor:
 
         # the thicknesses_list is what you will finally searching for from this class. It contains the min_thickness of
         # each point which will be fill from all_data after all of the processing. The index of each thickness is the
-        # same as the index of point or in points list. So one can find the corresponding thickness of each point by
+        # same as the index of point or in am_points list. So one can find the corresponding thickness of each point by
         # looking at its index in thickness_list all over the program. Be careful that the thicknesses in thickness_list
         # is converted back to the coordinate_3d system. But the corresponding min_thickness
         # in all_data[point_index]["min_thickness"] is in image_coordinate system
@@ -111,11 +111,11 @@ class ThicknessExtractor:
     def get_all_data_by_points(self):
         """
         This is the main method of the class.
-        To extract the thicknesses of points from the image, after initiating the class, this method need to be called.
+        To extract the thicknesses of am_points from the image, after initiating the class, this method need to be called.
 
         """
 
-        # sort points for the 3D case to load image plane after image plane
+        # sort am_points for the 3D case to load image plane after image plane
         sort_indices = np.argsort([x[2] for x in self.points])
         sorted_points = [self.points[x] for x in sort_indices]
 
@@ -126,7 +126,7 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-            print str(idx) + " points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed."
+            print str(idx) + " am_points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed."
             sys.stdout.write("\033[F")
 
         all_data = {sort_indices[k]: v for k, v in all_data.iteritems()}
@@ -145,7 +145,7 @@ class ThicknessExtractor:
 
         :param point: The TYPE Must be transformation.coordinate_2d.
         so the point is in Micrometer unit.
-        :return: A dictionary of points as keys and all_data as the value.
+        :return: A dictionary of am_points as keys and all_data as the value.
         all_data itself is a dictionary of:
         1. back_profile, 2. front_profile, 3. thicknesses_list,
         4. min_thickness, 5. back_contour_index, 6. front_contour_index,
@@ -237,7 +237,7 @@ class ThicknessExtractor:
         for i in range(profile_indices_length):
 
             # this may not fail: point indices are in image
-            # all further points have been queried with
+            # all further am_points have been queried with
             # image.GetPixel(ray_indices[i+1])
             pixel_1_value = image.GetPixel(ray_indices[i])
 

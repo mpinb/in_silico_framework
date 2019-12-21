@@ -2,7 +2,7 @@
 transformation Module
 
 ==========
-This module contains methods to do transformation on different data points.
+This module contains methods to do transformation on different data am_points.
 
 
 Capabilities:
@@ -33,35 +33,17 @@ class AffineTransformation:
         self.points = None
         self.transformed_points = None
 
-    def set_transformation_matrix_by_am_file(self, input_path=None):
+    def set_transformation_matrix(self, matrix):
         """
-        This method can extract the amira transformation matrix written in am file.
+        matrix is a np.array
 
         """
-        if input_path is None:
-            input_path = self.input_path
-            assert input_path
-
-        matrix = []
-        vector = []
-        row = []
-        with open(input_path, 'r') as f:
-            lines = f.readlines()
-            for idx, line in enumerate(lines):
-                if line.rfind("TransformationMatrix") > -1:
-                    vector = IO.read_numbers_in_line(line)
-            for i in range(4):
-                for j in range(4):
-                    k = j + i * 4
-                    row.append(vector[k])
-                matrix.append(row)
-                row = []
         self.matrix = matrix
 
     def set_transformation_matrix_by_landmark_file(self, input_path=None):
         """
-        This method computes the transformation based on a landmark file containing 8 points.
-        The points are alternating between first and second coordinate system. Each pair of points is
+        This method computes the transformation based on a landmark file containing 8 am_points.
+        The am_points are alternating between first and second coordinate system. Each pair of am_points is
         set on corresponding structures. E.g. in the case of aligning morphologies,
         you would set the landmarks as follows:
 
@@ -69,7 +51,7 @@ class AffineTransformation:
         (2) On the corresponding point on the morphology in coordinate system 2
         (1) On another characteristic point on the morphology in coordinate system 1
         (2) On the corresponding point on the morphology in coordinate system 2
-            ... until you have 4 pairs of points.
+            ... until you have 4 pairs of am_points.
         """
         if input_path is None:
             input_path = self.input_path
@@ -85,7 +67,7 @@ class AffineTransformation:
     def set_transformation_matrix_by_aligned_points(self, src_points, dst_points):
         """
         This function will calculate the affine transformation matrix from
-        8 points (4 source points and 4 destination points)
+        8 am_points (4 source am_points and 4 destination am_points)
 
         """
 
@@ -105,7 +87,7 @@ class AffineTransformation:
 
     def transform_points(self, points, forwards=True):
         """
-        Applies transformation on points
+        Applies transformation on am_points
         forwards: True: transforms from coordinate system 1 to coordinate system 2
         False: transforms from coordinate system 2 to coordinate system 1
 
@@ -125,12 +107,12 @@ class AffineTransformation:
             p_listed = p.tolist()[0]
             transformed_points.append(p_listed[0:3] + point4D[3:])
 
-        self.transformed_points = transformed_points
+        return transformed_points
 
 
 class ConvertPoints:
     """
-    This class converts points from coordinate_2d to image_coordinate_2d adn vice versa
+    This class converts am_points from coordinate_2d to image_coordinate_2d adn vice versa
     inputs.
     x_res: The pixel size in micron for x axis
     y_res: The pixel size in micron for y axis
@@ -145,7 +127,7 @@ class ConvertPoints:
 
     def coordinate_2d_to_image_coordinate_2d(self, coordinate_2d):
         """
-        Converted points from coordinate_2d to image_coordinate_2d
+        Converted am_points from coordinate_2d to image_coordinate_2d
 
         :param coordinate_2d: TYPE: coordinate_2d
         :return: image_coordinate_2d: TYPE: 2d list of floats, but converted in the unit of the image.
@@ -157,7 +139,7 @@ class ConvertPoints:
 
     def image_coordinate_2d_to_coordinate_2d(self, image_coordinate_2d):
         """
-        Converted points from image_coordinate_2d to coordinate_2d
+        Converted am_points from image_coordinate_2d to coordinate_2d
 
         :param image_coordinate_2d: TYPE: 2d list of floats, but converted in th
         :return: coordinate_2d: TYPE: 2d list of floats

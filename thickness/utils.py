@@ -50,7 +50,7 @@ def make_directories(path):
 def get_slice_name(am_path, image_file):
     name = get_am_image_match([am_path], [image_file]).keys()
     if len(name) == 1:
-        return name[0]
+        return os.path.basename(name[0])
     elif len(name) == 0:
         return "No name found"
     elif len(name) > 1:
@@ -78,22 +78,21 @@ def get_am_image_match(am_paths, tif_paths):
 def get_nearest_point(point, points):
     neighbours = []
     width = 10
-    i = 1
-    while len(neighbours) is 0 and i <= 20:
+    while len(neighbours) is 0:
         neighbours = get_neighbours_of_point(point, points, width)
         width = width + width
-    if len(neighbours) is 0:
-        neighbours = points
     distances = [tr.get_distance(point, neighbour) for neighbour in neighbours]
     nearest_point = neighbours[distances.index(min(distances))]
     return nearest_point
 
 
 def get_neighbours_of_point(point, points, width=10):
-    cube = [[axis - width, axis + width] for axis in point]
-    # neighbours = [point for point in points for i in range(3) if cube[i][0] <= point[i] <= cube[i][1]]
-    neighbours = [point for point in points if contains(point, cube)]
-    return neighbours
+    points = np.array(points)
+    neighbours = points
+    for i in range(len(point)):
+        neighbours = neighbours[neighbours[:, i] >= point[i] - width]
+        neighbours = neighbours[neighbours[:, i] <= point[i] + width]
+    return neighbours.tolist()
 
 
 def contains(point, cube):
@@ -122,7 +121,7 @@ def create_image_stack_dict_of_slice(folder_path, subfolders = None):
     :param folder_path: path to the folder of slice images stack. eg. : ../3d/S023/
     :return: dict of path of tif files with the keys corresponding to part of image names.
     (The key extracted from the image name which must reasonably corresponds to the z_coordinate of
-    points in am_file)
+    am_points in am_file)
     """
     tif_folder_path = folder_path
     if subfolders:

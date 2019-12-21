@@ -11,21 +11,21 @@ File extensions
 1. .am
 Capabilities:
 - Reading  all data point with their associated attribute (e.g. VertexLabels, thickness)
-- Writing data points in 3d and their corresponding thickness
+- Writing data am_points in 3d and their corresponding thickness
 Limitations:
-- Not able to read other data than 3d positional points and their thickness
+- Not able to read other data than 3d positional am_points and their thickness
 - Only able to read and write in ascii format (In this module in the class amira_utils the are methods one can use to
  convert amira binary format to ascii format, for more details look at the amira_utils class docstring)
 
 2 .hoc
 Capabilities:
-- Reading data points (point coordinates and their associated thickness) of kind:
+- Reading data am_points (point coordinates and their associated thickness) of kind:
     1. ApicalDendrite
     2. BasalDendrite
     3. Dendrite
     4. Soma
 from the hoc file.
-- Writing data points (as kind of what it can read) in 3d and their associated thickness
+- Writing data am_points (as kind of what it can read) in 3d and their associated thickness
 Limitations:
 - Not able to construct the tree structure from the hoc file.
 - Not able to read the white matter data.
@@ -46,11 +46,12 @@ Tests
 import re
 import os
 from random import randrange
+import numpy as np
 
 
 class Am:
 
-    def __init__(self, input_path, output_path=None):
+    def __init__(self, input_path, output_path=None, read_ = True):
 
         if output_path is None:
             output_path = os.path.dirname(input_path) + "output_" + str(randrange(100))
@@ -60,7 +61,10 @@ class Am:
         self.input_path = input_path
         self.output_path = output_path
         self.transformation_matrix_exist = False
+        self.transformation_matrix = None
         self.all_data = {}
+        if read_:
+            self.read()
 
     def read(self):
         """
@@ -78,16 +82,41 @@ class Am:
                 data_section = False
                 data = []
                 for line in lines[config_end:]:
+                    line = line.replace('\r\n', '\n')
                     if line.rfind(command_sign) > -1:
                         data_section = True
                         continue
-                    if data_section and line != '\n':
-                        d = read_numbers_in_line(line)
-                        data.append(d)
-                    elif data_section and line == '\n':
+                    elif data_section and (line == '\n' or '@' in line):
                         data_section = False
+                    elif data_section and line != '\n':
+                        d = map(float, line.strip().split(' '))
+                        # d = read_numbers_in_line(line)
+                        data.append(d)
+
                 self.all_data[cs] = data
-        return self.all_data
+
+    def _read_transformation_matrix(self):
+        """
+        This method can extract the amira transformation matrix written in am file.
+
+        """
+        input_path = self.input_path
+
+        matrix = []
+        vector = []
+        row = []
+        with open(input_path, 'r') as f:
+            lines = f.readlines()
+            for idx, line in enumerate(lines):
+                if line.rfind("TransformationMatrix") > -1:
+                    vector = read_numbers_in_line(line)
+            for i in range(4):
+                for j in range(4):
+                    k = j + i * 4
+                    row.append(vector[k])
+                matrix.append(row)
+                row = []
+        self.transformation_matrix = np.array(matrix).T
 
     def write(self):
         """
@@ -130,8 +159,9 @@ class Am:
             commands_order = []
             header_end = None
             for idx, line in enumerate(lines):
-                # if line.rfind("TransformationMatrix") > -1:
-                    # self.transformation_matrix_exist = True
+                if line.rfind("TransformationMatrix") > -1:
+                    self.transformation_matrix_exist = True
+                    self._read_transformation_matrix()
                 if line.rfind("@") > -1:
                     if header_end is None:
                         header_end = idx
@@ -168,7 +198,7 @@ class Hoc:
         self.output_path = output_path
         self.input_path = input_path
         self.edges = read_hoc_file(input_path)
-        self.all_data = {"thicknesses": [], "nodes": [], "points": []}
+        self.all_data = {"thicknesses": [], "nodes": [], "am_points": []}
         self._process()
 
     def _process(self):
@@ -186,26 +216,26 @@ class Hoc:
         pts = []
         for e in self.edges:
             pts.extend(e.edgePts)
-        self.all_data['points'] = pts
+        self.all_data['am_points'] = pts
 
     def update_thicknesses(self):
         """
-        # Writing thicknesses of points to a specific hoc file.
+        # Writing thicknesses of am_points to a specific hoc file.
         # basically it do this: reading a file without the
-        # thicknesses of neuronal points and add the thickness to them in another hoc file
+        # thicknesses of neuronal am_points and add the thickness to them in another hoc file
         
         Inputs:
         - 1. thicknesses: A list of thicknesses, which are floats values, the order of
-        thicknesses list must be match with the oder of self.profile_data["points"]
+        thicknesses list must be match with the oder of self.profile_data["am_points"]
         
         - 2. input_path, if not given it will use self.input_path, the method will use this 
-        as a sample hoc file to create another Hoc file with thicknesses added to the corresponding points
+        as a sample hoc file to create another Hoc file with thicknesses added to the corresponding am_points
         
         - 3. output_path: The path of the desired output hoc file. If not given, the method will use self.output_path.   
         - 3. output_path: The path of the desired output hoc file. If not given, the method will use self.output_path.
         """
         thicknesses = self.all_data["thicknesses"]
-        hoc_points = self.all_data["points"]
+        hoc_points = self.all_data["am_points"]
         input_path = self.input_path
         output_path = self.output_path
 
@@ -282,7 +312,7 @@ def read_numbers_in_line(line):
 
 class Edge(object):
     '''
-    Edge obj contains list of points,
+    Edge obj contains list of am_points,
     diameter at each point, label,
     string hocLabel, parentID
     Used during reading of hoc files
@@ -440,7 +470,7 @@ def read_hoc_file(fname=''):
 
 def read_landmark_file(landmarkFilename):
     '''
-    returns list of (x,y,z) points
+    returns list of (x,y,z) am_points
     '''
     if not landmarkFilename.endswith('.landmarkAscii'):
         errstr = 'Wrong input format: has to be landmarkAscii format'
