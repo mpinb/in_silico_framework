@@ -20,7 +20,7 @@ Tests
 - The test functions are inside the test.py. One can also use them as example of how to use the functions.
 
 """
-import os
+
 import sys
 
 import numpy as np
@@ -29,11 +29,11 @@ import SimpleITK as sitk
 import transformation as tr
 from utils import get_size_of_object
 import utils as u
-import itertools
 
 
 class ThicknessExtractor:
-    def __init__(self, points, image_file=None, xy_resolution=0.092, z_resolution=0.5, ray_length_front_to_back_in_micron=20,
+    def __init__(self, points, image_file=None, xy_resolution=0.092, z_resolution=0.5,
+                 ray_length_front_to_back_in_micron=20,
                  number_of_rays=36, threshold_percentage=0.5, max_seed_correction_radius_in_micron=10, _3d=False,
                  image_stack=None, slice_name=None):
         """ This is the main method for extracting Thickness
@@ -91,7 +91,6 @@ class ThicknessExtractor:
         self.all_overlaps = []
         self.all_data = {}
 
-
         self.image_file = image_file
         if image_file is not None:
             self._set_image(image_file)
@@ -111,8 +110,8 @@ class ThicknessExtractor:
     def get_all_data_by_points(self):
         """
         This is the main method of the class.
-        To extract the thicknesses of am_points from the image, after initiating the class, this method need to be called.
-
+        To extract the thicknesses of am_points from the image, after initiating the class,
+        this method need to be called.
         """
 
         # sort am_points for the 3D case to load image plane after image plane
@@ -126,7 +125,8 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-            print str(idx) + " am_points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed."
+            print str(idx) + " am_points from " + str(
+                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
             sys.stdout.write("\033[F")
 
         all_data = {sort_indices[k]: v for k, v in all_data.iteritems()}
@@ -134,7 +134,7 @@ class ThicknessExtractor:
         print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
 
         # if self._3D is False:
-            # self.all_overlaps = self.update_all_data_with_overlaps()
+        # self.all_overlaps = self.update_all_data_with_overlaps()
 
         self._get_thicknesses_from_all_data()
         self._tidy_up()
@@ -243,9 +243,9 @@ class ThicknessExtractor:
 
             # this fails, if we have reached the end of the ray
             try:
-                _index = ray_indices[i+1]
+                _index = ray_indices[i + 1]
             except IndexError:
-                warnings.warn("End of ray reached! Center point intensity: {}".format (point_value))
+                warnings.warn("End of ray reached! Center point intensity: {}".format(point_value))
                 return ray_indices[i]
 
             # this fails, if the ray goes out of the image
@@ -258,9 +258,8 @@ class ThicknessExtractor:
                 contour_indices = ray_indices[i]
                 break
 
-        assert(contour_indices is not None)
+        assert (contour_indices is not None)
         return contour_indices
-
 
     def get_ray_points_indices(self, point, phi, front):
         """
@@ -323,7 +322,7 @@ class ThicknessExtractor:
 
         intensity_value = self.image.GetPixel([int(point[0]), int(point[1])])
         intensity_value2 = self.image.GetPixel([int(corrected_point[0]), int(corrected_point[1])])
-        assert(intensity_value2 >= intensity_value)
+        assert (intensity_value2 >= intensity_value)
         print 'original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
                                                                         corrected_point, intensity_value2)
         return corrected_point
@@ -346,23 +345,23 @@ class ThicknessExtractor:
         return overlaps
 
     def find_overlap(self, point_1, point_2):
-        data_1 = self._filter_all_data_by_point(point_1)
-        keys_1 = sorted(data_1.keys())
-        contours_1 = data_1[keys_1[0]]["contour_list"]
+        data_point_1 = self._filter_all_data_by_point(point_1)
+        keys_point_1 = sorted(data_point_1.keys())
+        contour_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
 
-        data_2 = self._filter_all_data_by_point(point_2)
-        keys_2 = sorted(data_2.keys())
-        contours_2 = data_2[keys_2[0]]["contour_list"]
+        data_point_2 = self._filter_all_data_by_point(point_2)
+        keys_point_2 = sorted(data_point_2.keys())
+        contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
-        if _check_overlap(contours_1, contours_2):
-            self.all_data[keys_1[0]]["overlaps"].append([point_1, point_2])
-            self.all_data[keys_2[0]]["overlaps"].append([point_2, point_1])
+        if _check_overlap(contour_list_point_1, contours_list_point_2):
+            self.all_data[keys_point_1[0]]["overlaps"].append([point_1, point_2])
+            self.all_data[keys_point_2[0]]["overlaps"].append([point_2, point_1])
 
             # if u.compare_points(point1, point2) >= 10E-14:
             return [point_1, point_2]
 
     def _filter_all_data_by_point(self, point):
-        return dict(filter(lambda x: x[1]["seed_corrected_point"] == point, self.all_data.items()))
+        return dict(filter(lambda x: x[1]["seed_corrected_point"] == point, self.all_data.iteritems()))
 
     def _set_image_file_by_point(self, point):
         z_coordinate_key = int(point[2])
@@ -380,11 +379,11 @@ class ThicknessExtractor:
         self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
 
 
-def _check_overlap(contour1, contour2):
-    polygon_lines1 = _create_polygon_lines_by_contours(contour1)
-    polygon_lines2 = _create_polygon_lines_by_contours(contour2)
-    for line1 in polygon_lines1:
-        for line2 in polygon_lines2:
+def _check_overlap(contour_1, contour_2):
+    polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
+    polygon_lines_2 = _create_polygon_lines_by_contours(contour_2)
+    for line1 in polygon_lines_1:
+        for line2 in polygon_lines_2:
             ints = _get_intersection(line1, line2)
             if line1[0][0] <= ints[0] <= line1[1][0] and line1[0][1] <= ints[1] <= line1[1][1]:
                 return True
