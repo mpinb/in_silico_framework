@@ -354,9 +354,9 @@ class ThicknessExtractor:
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
         if _check_overlap(contour_list_point_1, contours_list_point_2):
-            self.all_data[keys_point_1[0]]["overlaps"].append([point_1, point_2])
-            self.all_data[keys_point_2[0]]["overlaps"].append([point_2, point_1])
-
+            if _check_z_differece(point_1, point_2, delta_z = 0.01):
+                self.all_data[keys_point_1[0]]["overlaps"].append([point_1, point_2])
+                self.all_data[keys_point_2[0]]["overlaps"].append([point_2, point_1])
             # if u.compare_points(point1, point2) >= 10E-14:
             return [point_1, point_2]
 
@@ -378,6 +378,11 @@ class ThicknessExtractor:
         thickness_list = [self.all_data[idx]["min_thickness"] for idx in range(len(self.points))]
         self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
 
+def _check_z_differece(point1, point2, delta_z=0.1):
+    if abs(point1[2] - point2[2]) <= delta_z:
+        return True
+    else:
+        return False
 
 def _check_overlap(contour_1, contour_2):
     polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
