@@ -133,8 +133,8 @@ class ThicknessExtractor:
         self.all_data = all_data
         print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
 
-        # if self._3D is False:
-        # self.all_overlaps = self.update_all_data_with_overlaps()
+        if self._3D is False:
+            self.all_overlaps = self.update_all_data_with_overlaps()
 
         self._get_thicknesses_from_all_data()
         self._tidy_up()
@@ -323,8 +323,8 @@ class ThicknessExtractor:
         intensity_value = self.image.GetPixel([int(point[0]), int(point[1])])
         intensity_value2 = self.image.GetPixel([int(corrected_point[0]), int(corrected_point[1])])
         assert (intensity_value2 >= intensity_value)
-        print 'original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
-                                                                        corrected_point, intensity_value2)
+        # print 'original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
+        #                                                                 corrected_point, intensity_value2)
         return corrected_point
 
     def _tidy_up(self):
@@ -391,7 +391,6 @@ def _check_overlap(contour_1, contour_2):
 
 
 def _slope(p1, p2):
-    print p1
     if p1[0] - p2[0] == 0:
         return np.inf
     return (p1[1] - p2[1]) / (p1[0] - p2[0])
@@ -403,7 +402,7 @@ def _intercept(m, p2):
 
 def _create_polygon_lines_by_contours(contour):
     polygon_lines = []
-    edge_pairs = [[p1, p2] for i, p1 in enumerate(contour) for p2 in contour[i:] if p1 != p2 and p1 != []]
+    edge_pairs = _find_edges_of_polygon_from_contours(contour)
     for edge_pair in edge_pairs:
         p1 = edge_pair[0]
         p2 = edge_pair[1]
@@ -413,6 +412,12 @@ def _create_polygon_lines_by_contours(contour):
         polygon_lines.append(line)
     return polygon_lines
 
+def _find_edges_of_polygon_from_contours(contour):
+    edge_pairs = []
+    for c in range(2):
+        for i in range(len(contour)-1):
+            edge_pairs.append([contour[i][c], contour[i+1][c]])
+    return edge_pairs
 
 def _get_intersection(line1, line2):
     if line1[2] - line2[2] == 0:
