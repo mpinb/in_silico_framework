@@ -135,7 +135,6 @@ class ThicknessExtractor:
 
         if self._3D is False:
             self.all_overlaps = self.update_all_data_with_overlaps()
-
         self._get_thicknesses_from_all_data()
         self._tidy_up()
 
@@ -341,7 +340,9 @@ class ThicknessExtractor:
         for cube in cubes:
             if len(cube) == 0:
                 continue
-            overlaps.append(([self.find_overlap(p1, p2) for p1 in cube for p2 in cube if p1 != p2]))
+            overlaps.append([
+                    self.find_overlap(p1, p2) for p1 in cube for p2 in cube if p1 != p2
+            ])
         return overlaps
 
     def find_overlap(self, point_1, point_2):
@@ -354,11 +355,15 @@ class ThicknessExtractor:
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
         if _check_overlap(contour_list_point_1, contours_list_point_2):
-            if _check_z_differece(point_1, point_2, delta_z = 0.01):
-                self.all_data[keys_point_1[0]]["overlaps"].append([point_1, point_2])
-                self.all_data[keys_point_2[0]]["overlaps"].append([point_2, point_1])
+            if _check_z_differece(point_1, point_2, delta_z = 0.001):
+                self.all_data[keys_point_1[0]]["overlaps"].append(
+                    self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1, point_2]))
+                self.all_data[keys_point_2[0]]["overlaps"].append(
+                    self.convert_points.image_coordinate_2d_to_coordinate_2d([point_2, point_1]))
             # if u.compare_points(point1, point2) >= 10E-14:
             return [point_1, point_2]
+        else:
+            return []
 
     def _filter_all_data_by_point(self, point):
         return dict(filter(lambda x: x[1]["seed_corrected_point"] == point, self.all_data.iteritems()))
