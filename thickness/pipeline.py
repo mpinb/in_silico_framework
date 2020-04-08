@@ -184,6 +184,8 @@ class ExtractThicknessPipeline:
         self._run2()
 
     def _run1(self):
+        if self._parallel is not True:
+            print "working only with one cpu"
         self._initialize_project()
         self._setup_slice_objects()
         delays = self._extract_thicknesses()
