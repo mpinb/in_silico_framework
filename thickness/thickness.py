@@ -155,7 +155,7 @@ class ThicknessExtractor:
         all_data = {"converted_point_by_image_coordinate": point}
         if self._max_seed_correction_radius_in_image_coordinates:
             point = self._correct_seed(point)
-        all_data["seed_corrected_point"] = point
+        all_data["seed_corrected_point_in_image_coordinate"] = point
         self.seed_corrected_points.append(point)
         thicknesses_list = []
         min_thickness = np.Inf
@@ -336,26 +336,35 @@ class ThicknessExtractor:
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
         overlaps = []
-        cubes = [u.get_neighbours_of_point(point, points, width=2) for point in points]
+        all_overlaps = []
+        visited_pairs = []
+        cubes = [u.get_neighbours_of_point(point, points, width=0.02) for point in points]
         for cube in cubes:
             if len(cube) == 0:
                 continue
-            overlaps.append([
-                    self.find_overlap(p1, p2) for p1 in cube for p2 in cube if p1 != p2
-            ])
-        return overlaps
+            pairs = [[p1, p2] for i, p1 in enumerate(cube) for p2 in cube[i+1:]
+                     if p1 != p2 and [p1, p2] not in visited_pairs]
+            for pair in pairs:
+                overlap = self.look_for_possible_overlap(pair[0], pair[1])
+                if len(overlap) != 0:
+                    overlaps.append(overlap)
+                visited_pairs.append(pair)
+                visited_pairs.append(pair[::-1])
 
-    def find_overlap(self, point_1, point_2):
+            all_overlaps.append(overlaps)
+        return all_overlaps
+
+    def look_for_possible_overlap(self, point_1, point_2):
         data_point_1 = self._filter_all_data_by_point(point_1)
         keys_point_1 = sorted(data_point_1.keys())
-        contour_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
+        contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
 
         data_point_2 = self._filter_all_data_by_point(point_2)
         keys_point_2 = sorted(data_point_2.keys())
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
-        if _check_overlap(contour_list_point_1, contours_list_point_2):
-            if _check_z_differece(point_1, point_2, delta_z = 0.001):
+        if _check_contours_intersect(contours_list_point_1, contours_list_point_2):
+            if _check_z_differece(point_1, point_2, delta_z=0.001):
                 self.all_data[keys_point_1[0]]["overlaps"].append(
                     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1, point_2]))
                 self.all_data[keys_point_2[0]]["overlaps"].append(
@@ -366,7 +375,8 @@ class ThicknessExtractor:
             return []
 
     def _filter_all_data_by_point(self, point):
-        return dict(filter(lambda x: x[1]["seed_corrected_point"] == point, self.all_data.iteritems()))
+        return dict(filter(lambda x:
+                           x[1]["seed_corrected_point_in_image_coordinate"] == point, self.all_data.iteritems()))
 
     def _set_image_file_by_point(self, point):
         z_coordinate_key = int(point[2])
@@ -383,13 +393,15 @@ class ThicknessExtractor:
         thickness_list = [self.all_data[idx]["min_thickness"] for idx in range(len(self.points))]
         self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
 
+
 def _check_z_differece(point1, point2, delta_z=0.1):
     if abs(point1[2] - point2[2]) <= delta_z:
         return True
     else:
         return False
 
-def _check_overlap(contour_1, contour_2):
+
+def _check_contours_intersect(contour_1, contour_2):
     polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
     polygon_lines_2 = _create_polygon_lines_by_contours(contour_2)
     for line1 in polygon_lines_1:
@@ -422,12 +434,14 @@ def _create_polygon_lines_by_contours(contour):
         polygon_lines.append(line)
     return polygon_lines
 
+
 def _find_edges_of_polygon_from_contours(contour):
     edge_pairs = []
     for c in range(2):
-        for i in range(len(contour)-1):
-            edge_pairs.append([contour[i][c], contour[i+1][c]])
+        for i in range(len(contour) - 1):
+            edge_pairs.append([contour[i][c], contour[i + 1][c]])
     return edge_pairs
+
 
 def _get_intersection(line1, line2):
     if line1[2] - line2[2] == 0:
