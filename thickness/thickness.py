@@ -340,6 +340,7 @@ class ThicknessExtractor:
         visited_pairs = []
         cubes = [u.get_neighbours_of_point(point, points, width=0.02) for point in points]
         for cube in cubes:
+            # Check the cube size and remove the lines below
             if len(cube) == 0:
                 continue
             pairs = [[p1, p2] for i, p1 in enumerate(cube) for p2 in cube[i+1:]
@@ -348,6 +349,7 @@ class ThicknessExtractor:
                 overlap = self.look_for_possible_overlap(pair[0], pair[1])
                 if len(overlap) != 0:
                     overlaps.append(overlap)
+                # Check if I can remove the below line
                 visited_pairs.append(pair)
                 visited_pairs.append(pair[::-1])
 
@@ -356,6 +358,8 @@ class ThicknessExtractor:
 
     def look_for_possible_overlap(self, point_1, point_2):
         data_point_1 = self._filter_all_data_by_point(point_1)
+        # explain below lines
+        assert(len(data_point_1) == 1)
         keys_point_1 = sorted(data_point_1.keys())
         contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
 
@@ -364,7 +368,7 @@ class ThicknessExtractor:
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
         if _check_contours_intersect(contours_list_point_1, contours_list_point_2):
-            if _check_z_differece(point_1, point_2, delta_z=0.001):
+            if _check_z_differece(point_1, point_2, delta_z=2.0):
                 self.all_data[keys_point_1[0]]["overlaps"].append(
                     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1, point_2]))
                 self.all_data[keys_point_2[0]]["overlaps"].append(
@@ -375,6 +379,7 @@ class ThicknessExtractor:
             return []
 
     def _filter_all_data_by_point(self, point):
+        # using pythonic syntax -> dictionarry comprehension
         return dict(filter(lambda x:
                            x[1]["seed_corrected_point_in_image_coordinate"] == point, self.all_data.iteritems()))
 
