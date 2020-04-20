@@ -338,6 +338,7 @@ class ThicknessExtractor:
         overlaps = []
         all_overlaps = []
         visited_pairs = []
+        # mame cubes open in z direction
         cubes = [u.get_neighbours_of_point(point, points, width=0.02) for point in points]
         for cube in cubes:
             # Check the cube size and remove the lines below
