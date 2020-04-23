@@ -86,13 +86,29 @@ def get_nearest_point(point, points):
     return nearest_point
 
 
-def get_neighbours_of_point(point, points, width=10):
-    points = np.array(points)
-    neighbours = points
+def vector_length(point):
+    vector_length = 0
     for i in range(len(point)):
-        neighbours = neighbours[neighbours[:, i] >= point[i] - width]
-        neighbours = neighbours[neighbours[:, i] <= point[i] + width]
-    return neighbours.tolist()
+        vector_length = point[i] ** 2 + vector_length
+    return vector_length
+
+
+def get_neighbours_of_point(point, points, width=10, z_bond=np.inf, spanning_fcn="cube"):
+    neighbours = points
+    center = point
+
+    if spanning_fcn == "cube":
+        neighbours = np.array(neighbours)
+        for i in range(len(point)):
+            neighbours = neighbours[neighbours[:, i] >= point[i] - width]
+            neighbours = neighbours[neighbours[:, i] <= point[i] + width]
+        neighbours = neighbours.tolist()
+
+    if spanning_fcn == "cylinder":
+        neighbours = [neighbour for neighbour in neighbours if tr.get_distance(neighbour, center)**2 <= width**2]
+        if len(point) == 3:
+            neighbours = [neighbour for neighbour in neighbours if neighbour[2]**2 <= z_bond]
+    return neighbours
 
 
 def contains(point, cube):
@@ -115,7 +131,7 @@ def are_same_points(p1, p2):
         return False
 
 
-def create_image_stack_dict_of_slice(folder_path, subfolders = None):
+def create_image_stack_dict_of_slice(folder_path, subfolders=None):
     """
     :param channel: subfolder in folder path containing the images of the specified channel.
     :param folder_path: path to the folder of slice images stack. eg. : ../3d/S023/
@@ -126,9 +142,9 @@ def create_image_stack_dict_of_slice(folder_path, subfolders = None):
     tif_folder_path = folder_path
     if subfolders:
         tif_folder_path = get_files_by_folder(tif_folder_path, subfolders)
-    assert(len(tif_folder_path) == 1)
+    assert (len(tif_folder_path) == 1)
     tif_folder_path = tif_folder_path[0]
     slice_image_stack_list = get_files_by_folder(tif_folder_path, "tif")
     slice_image_stack_dict = {int(path.split('/')[-1].split('.')[0].split('_')[-1].strip('z')):
-                              path for path in slice_image_stack_list}
+                                  path for path in slice_image_stack_list}
     return slice_image_stack_dict

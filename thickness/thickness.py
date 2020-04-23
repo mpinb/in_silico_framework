@@ -125,13 +125,13 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-            print str(idx) + " am_points from " + str(
-                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
-            sys.stdout.write("\033[F")
+#            print str(idx) + " am_points from " + str(
+#                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
+#            sys.stdout.write("\033[F")
 
         all_data = {sort_indices[k]: v for k, v in all_data.iteritems()}
         self.all_data = all_data
-        print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
+#        print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
 
         if self._3D is False:
             self.all_overlaps = self.update_all_data_with_overlaps()
@@ -335,16 +335,20 @@ class ThicknessExtractor:
 
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
+        print(len(points[0]))
+        points_2d = [[p[0], p[1]] for p in points]
         overlaps = []
         all_overlaps = []
         visited_pairs = []
-        # mame cubes open in z direction
-        cubes = [u.get_neighbours_of_point(point, points, width=0.02) for point in points]
-        for cube in cubes:
-            # Check the cube size and remove the lines below
-            if len(cube) == 0:
+        # make cubes open in z direction -> Made by cylinder instead
+        # cubes = [u.get_neighbours_of_point(p_2d, points_2d, width=0.02) for p_2d in points_2d]
+        volumes = [u.get_neighbours_of_point(p_2d, points_2d, width=0.02, spanning_fcn="cylinder") for p_2d in
+                   points_2d]
+        for volume in volumes:
+            # Check the volume size and remove the lines below
+            if len(volume) == 0:
                 continue
-            pairs = [[p1, p2] for i, p1 in enumerate(cube) for p2 in cube[i+1:]
+            pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
                      if p1 != p2 and [p1, p2] not in visited_pairs]
             for pair in pairs:
                 overlap = self.look_for_possible_overlap(pair[0], pair[1])
@@ -360,7 +364,8 @@ class ThicknessExtractor:
     def look_for_possible_overlap(self, point_1, point_2):
         data_point_1 = self._filter_all_data_by_point(point_1)
         # explain below lines
-        assert(len(data_point_1) == 1)
+        print(data_point_1)
+#        assert (len(data_point_1) == 1)
         keys_point_1 = sorted(data_point_1.keys())
         contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
 
@@ -369,7 +374,7 @@ class ThicknessExtractor:
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
 
         if _check_contours_intersect(contours_list_point_1, contours_list_point_2):
-            if _check_z_differece(point_1, point_2, delta_z=2.0):
+            if _check_z_difference(point_1, point_2, delta_z=2.0):
                 self.all_data[keys_point_1[0]]["overlaps"].append(
                     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1, point_2]))
                 self.all_data[keys_point_2[0]]["overlaps"].append(
@@ -391,7 +396,7 @@ class ThicknessExtractor:
         self.current_z_coordinate = z_coordinate_key
 
     def _set_image(self, input_path):
-        print 'setting image path to {}'.format(input_path)
+        # print 'setting image path to {}'.format(input_path)
         self.image = _read_image(input_path)
         self.padded_image = _pad_image(self.image, self._max_seed_correction_radius_in_image_coordinates_in_pixel)
 
@@ -400,7 +405,7 @@ class ThicknessExtractor:
         self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
 
 
-def _check_z_differece(point1, point2, delta_z=0.1):
+def _check_z_difference(point1, point2, delta_z=0.1):
     if abs(point1[2] - point2[2]) <= delta_z:
         return True
     else:
