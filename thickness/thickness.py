@@ -125,13 +125,13 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-#            print str(idx) + " am_points from " + str(
-#                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
-#            sys.stdout.write("\033[F")
+        #            print str(idx) + " am_points from " + str(
+        #                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
+        #            sys.stdout.write("\033[F")
 
         all_data = {sort_indices[k]: v for k, v in all_data.iteritems()}
         self.all_data = all_data
-#        print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
+        #        print "size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.))
 
         if self._3D is False:
             self.all_overlaps = self.update_all_data_with_overlaps()
@@ -335,7 +335,6 @@ class ThicknessExtractor:
 
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
-        print(len(points[0]))
         points_2d = [[p[0], p[1]] for p in points]
         overlaps = []
         all_overlaps = []
@@ -345,9 +344,9 @@ class ThicknessExtractor:
         volumes = [u.get_neighbours_of_point(p_2d, points_2d, width=0.02, spanning_fcn="cylinder") for p_2d in
                    points_2d]
         for volume in volumes:
-            # Check the volume size and remove the lines below
-            if len(volume) == 0:
-                continue
+            # Check the volume size and remove the lines below -> we always have point
+            #            if len(volume) == 0:
+            #                continue
             pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
                      if p1 != p2 and [p1, p2] not in visited_pairs]
             for pair in pairs:
@@ -365,7 +364,7 @@ class ThicknessExtractor:
         data_point_1 = self._filter_all_data_by_point(point_1)
         # explain below lines
         print(data_point_1)
-#        assert (len(data_point_1) == 1)
+        #        assert (len(data_point_1) == 1)
         keys_point_1 = sorted(data_point_1.keys())
         contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
 

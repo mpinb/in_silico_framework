@@ -86,13 +86,6 @@ def get_nearest_point(point, points):
     return nearest_point
 
 
-def vector_length(point):
-    vector_length = 0
-    for i in range(len(point)):
-        vector_length = point[i] ** 2 + vector_length
-    return vector_length
-
-
 def get_neighbours_of_point(point, points, width=10, z_bond=np.inf, spanning_fcn="cube"):
     neighbours = points
     center = point
@@ -105,9 +98,9 @@ def get_neighbours_of_point(point, points, width=10, z_bond=np.inf, spanning_fcn
         neighbours = neighbours.tolist()
 
     if spanning_fcn == "cylinder":
-        neighbours = [neighbour for neighbour in neighbours if tr.get_distance(neighbour, center)**2 <= width**2]
+        neighbours = [ng for ng in neighbours if tr.get_distance(ng, center)**2 <= width**2]
         if len(point) == 3:
-            neighbours = [neighbour for neighbour in neighbours if neighbour[2]**2 <= z_bond]
+            neighbours = [ng for ng in neighbours if ng[2]**2 <= z_bond**2]
     return neighbours
 
 
