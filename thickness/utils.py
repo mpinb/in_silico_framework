@@ -86,22 +86,14 @@ def get_nearest_point(point, points):
     return nearest_point
 
 
-def get_neighbours_of_point(point, points, width=10, z_bond=np.inf, spanning_fcn="cube"):
-    neighbours = points
-    center = point
+def get_neighbours_of_point(point, points, width=10, dimensions=[0,1,2]):
+    neighbours = np.array(points)
 
-    if spanning_fcn == "cube":
-        neighbours = np.array(neighbours)
-        for i in range(len(point)):
-            neighbours = neighbours[neighbours[:, i] >= point[i] - width]
-            neighbours = neighbours[neighbours[:, i] <= point[i] + width]
-        neighbours = neighbours.tolist()
+    for i in dimensions:
+        neighbours = neighbours[neighbours[:, i] >= point[i] - width]
+        neighbours = neighbours[neighbours[:, i] <= point[i] + width]
 
-    if spanning_fcn == "cylinder":
-        neighbours = [ng for ng in neighbours if tr.get_distance(ng, center)**2 <= width**2]
-        if len(point) == 3:
-            neighbours = [ng for ng in neighbours if ng[2]**2 <= z_bond**2]
-    return neighbours
+    return neighbours.tolist()
 
 
 def contains(point, cube):
@@ -141,3 +133,20 @@ def create_image_stack_dict_of_slice(folder_path, subfolders=None):
     slice_image_stack_dict = {int(path.split('/')[-1].split('.')[0].split('_')[-1].strip('z')):
                                   path for path in slice_image_stack_list}
     return slice_image_stack_dict
+
+
+def check_segment(point_1, point_2, cell):
+    p1 = point_1
+    p2 = point_2
+
+    for e in cell.edgPts:
+        if p1 in e and p2 in e:
+            return True
+    return False
+
+
+def check_z_difference(point1, point2, delta_z=0.1):
+    if abs(point1[2] - point2[2]) <= delta_z:
+        return True
+    else:
+        return False

@@ -299,7 +299,7 @@ class ExtractThicknessPipeline:
                 self.all_thicknesses[self.default_threshold][nearest_point_index]
             )
             end = time.time()
-            if not idx % 100:
+            if not idx % 5000:
                 print "time:" + str(end - start)
                 print "point " + str(idx + 1) + "from " + str(total_points)
                 print "------------"

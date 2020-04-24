@@ -125,6 +125,7 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
+            all_data[idx]["overlaps_point_id"] = []
         #            print str(idx) + " am_points from " + str(
         #                len(sorted_points)) + " from slice " + self.slice_name + " are completed."
         #            sys.stdout.write("\033[F")
@@ -335,18 +336,12 @@ class ThicknessExtractor:
 
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
-        points_2d = [[p[0], p[1]] for p in points]
         overlaps = []
         all_overlaps = []
         visited_pairs = []
-        # make cubes open in z direction -> Made by cylinder instead
-        # cubes = [u.get_neighbours_of_point(p_2d, points_2d, width=0.02) for p_2d in points_2d]
-        volumes = [u.get_neighbours_of_point(p_2d, points_2d, width=0.02, spanning_fcn="cylinder") for p_2d in
-                   points_2d]
+        volumes = [u.get_neighbours_of_point(p, points, width=0.02, dimensions=[0, 1]) for p in
+                   points]
         for volume in volumes:
-            # Check the volume size and remove the lines below -> we always have point
-            #            if len(volume) == 0:
-            #                continue
             pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
                      if p1 != p2 and [p1, p2] not in visited_pairs]
             for pair in pairs:
@@ -354,6 +349,7 @@ class ThicknessExtractor:
                 if len(overlap) != 0:
                     overlaps.append(overlap)
                 # Check if I can remove the below line
+                # Answer: No Since [p1,p2] is same as [p2,p1] but the above cond. does not check for the inverse.
                 visited_pairs.append(pair)
                 visited_pairs.append(pair[::-1])
 
@@ -362,23 +358,31 @@ class ThicknessExtractor:
 
     def look_for_possible_overlap(self, point_1, point_2):
         data_point_1 = self._filter_all_data_by_point(point_1)
-        # explain below lines
-        print(data_point_1)
-        #        assert (len(data_point_1) == 1)
         keys_point_1 = sorted(data_point_1.keys())
+        original_point_1 = self.original_points[keys_point_1[0]]
         contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
+        # point_1_in_image_coordinate = data_point_1[keys_point_1[0]]["converted_point_by_image_coordinate"]
 
         data_point_2 = self._filter_all_data_by_point(point_2)
         keys_point_2 = sorted(data_point_2.keys())
+        original_point_2 = self.original_points[keys_point_2[0]]
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
+        # point_2_in_image_coordinate = data_point_2[keys_point_2[0]]["converted_point_by_image_coordinate"]
+
+        # print "seed_corrected_point", point_1
+        # print "original_point", original_point_1
+        # print "point_1 in image coordinate", point_1_in_image_coordinate
+        # print "original_point from translation",\
+        #     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1_in_image_coordinate])
 
         if _check_contours_intersect(contours_list_point_1, contours_list_point_2):
-            if _check_z_difference(point_1, point_2, delta_z=2.0):
-                self.all_data[keys_point_1[0]]["overlaps"].append(
-                    self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1, point_2]))
-                self.all_data[keys_point_2[0]]["overlaps"].append(
-                    self.convert_points.image_coordinate_2d_to_coordinate_2d([point_2, point_1]))
-            # if u.compare_points(point1, point2) >= 10E-14:
+            self.all_data[keys_point_1[0]]["overlaps"].append([original_point_1, original_point_2])
+            self.all_data[keys_point_2[0]]["overlaps"].append([original_point_2, original_point_1])
+
+            self.all_data[keys_point_1[0]]["overlaps_point_id"].append([keys_point_1[0], keys_point_2[0]])
+            self.all_data[keys_point_2[0]]["overlaps_point_id"].append([keys_point_2[0], keys_point_1[0]])
+
+        # if u.compare_points(point1, point2) >= 10E-14:
             return [point_1, point_2]
         else:
             return []
