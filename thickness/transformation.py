@@ -158,6 +158,7 @@ class ConvertPoints:
             raise NotImplementedError("Requires isotropic pixel size in x-y-direction!")
         return [t * self.x_res for t in thicknesses]
 
+
 def _scaling(points, scaling):
     if points is None:
         points = points

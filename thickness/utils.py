@@ -139,10 +139,17 @@ def check_segment(point_1, point_2, cell):
     p1 = point_1
     p2 = point_2
 
-    for e in cell.edgPts:
+    for e in cell.edgePts:
         if p1 in e and p2 in e:
             return True
     return False
+
+
+def get_segment_id(point, cell):
+    for e in cell:
+        if point in e.edgePts:
+            return e.hocLabel
+    return "no segment"
 
 
 def check_z_difference(point1, point2, delta_z=0.1):

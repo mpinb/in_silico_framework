@@ -20,15 +20,16 @@ Tests
 - The test functions are inside the test.py. One can also use them as example of how to use the functions.
 
 """
+from __future__ import division
 
 import sys
-
 import numpy as np
 import warnings
 import SimpleITK as sitk
 import transformation as tr
 from utils import get_size_of_object
 import utils as u
+import time
 
 
 class ThicknessExtractor:
@@ -42,6 +43,7 @@ class ThicknessExtractor:
             2d values in micrometer
             2. Image is the path to tif file with a pixel size of xy_resolution.
             3. xy_resolution: pixelSize in micrometers as acquired by the microscope in one optical section.
+            eg -> 0.092 micron/pixel
             4. z_resolution: z distance in micrometers between optical sections
             5. ray_length_front_to_back_in_micron: maximum distance from the seed point considered in micrometer.
 
@@ -182,7 +184,7 @@ class ThicknessExtractor:
         for i, ray_indices in enumerate(rays_indices):
 
             ray_length = len(ray_indices)
-            half_ray_length = (ray_length - 1) / 2
+            half_ray_length = (ray_length - 1) // 2
 
             back_contour_index = self.get_contour_index(point, ray_indices[0:half_ray_length + 1][::-1])
             front_contour_index = self.get_contour_index(point, ray_indices[half_ray_length:ray_length])
@@ -201,7 +203,6 @@ class ThicknessExtractor:
                 min_thickness = thickness
                 all_data["min_thickness"] = min_thickness
                 all_data["selected_ray_index"] = i
-
         all_data["contour_list"] = contour_list
         all_data["thicknesses_list"] = thicknesses_list
         return all_data
@@ -339,34 +340,58 @@ class ThicknessExtractor:
         overlaps = []
         all_overlaps = []
         visited_pairs = []
-        volumes = [u.get_neighbours_of_point(p, points, width=0.02, dimensions=[0, 1]) for p in
+        # start = time.time()
+        volumes = [[p, u.get_neighbours_of_point(p, points, width=108, dimensions=[0, 1])] for p in
                    points]
-        for volume in volumes:
-            pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
-                     if p1 != p2 and [p1, p2] not in visited_pairs]
+        # end = time.time()
+        # print "time for finding near points:" + str(end - start)
+        # print (len(points))
+        # print(len(volumes))
+        end = 0.0
+        for i, volume in enumerate(volumes):
+            start = time.time()
+            if not i % 300:
+                print "volume number:", i, "from", len(volumes)
+                print "number of points to check:", len(volume[1])
+                print "time:", end - start
+            # start = time.time()
+            # pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
+            #          if p1 != p2 and [p1, p2] not in visited_pairs]
+            center_point = volume[0]
+            ng_points = volume[1]
+            pairs = [[center_point, ng_point] for ng_point in ng_points if center_point != ng_point]
+            # end = time.time()
+            # print "time for getting pairs:" + str(end - start)
             for pair in pairs:
                 overlap = self.look_for_possible_overlap(pair[0], pair[1])
                 if len(overlap) != 0:
                     overlaps.append(overlap)
                 # Check if I can remove the below line
                 # Answer: No Since [p1,p2] is same as [p2,p1] but the above cond. does not check for the inverse.
-                visited_pairs.append(pair)
-                visited_pairs.append(pair[::-1])
+                # visited_pairs.append(pair)
+                # visited_pairs.append(pair[::-1])
 
             all_overlaps.append(overlaps)
+            end = time.time()
         return all_overlaps
 
     def look_for_possible_overlap(self, point_1, point_2):
+        # start = time.time()
         data_point_1 = self._filter_all_data_by_point(point_1)
         keys_point_1 = sorted(data_point_1.keys())
         original_point_1 = self.original_points[keys_point_1[0]]
         contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
         # point_1_in_image_coordinate = data_point_1[keys_point_1[0]]["converted_point_by_image_coordinate"]
+        min_thickness_point_1 = data_point_1[keys_point_1[0]]["min_thickness"]
 
         data_point_2 = self._filter_all_data_by_point(point_2)
         keys_point_2 = sorted(data_point_2.keys())
         original_point_2 = self.original_points[keys_point_2[0]]
         contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
+        min_thickness_point_2 = data_point_2[keys_point_2[0]]["min_thickness"]
+
+        # end = time.time()
+        # print "time for filtering data by point:" + str(end - start)
         # point_2_in_image_coordinate = data_point_2[keys_point_2[0]]["converted_point_by_image_coordinate"]
 
         # print "seed_corrected_point", point_1
@@ -374,15 +399,37 @@ class ThicknessExtractor:
         # print "point_1 in image coordinate", point_1_in_image_coordinate
         # print "original_point from translation",\
         #     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1_in_image_coordinate])
+        # start = time.time()
+        check_bool = _check_contours_intersect(contours_list_point_1, contours_list_point_2)
+        # check_circle_bool = _check_circle_overlap([point_1, min_thickness_point_1 / 2.0],
+        #                                          [point_2, min_thickness_point_2 / 2.0])
+        # if not check_bool and check_circle_bool:
+        #     print "contours overlap:", check_bool
+        #     print "circular overlap:", check_circle_bool
+        # end = time.time()
+        # print "time check for overlap:" + str(end - start)
 
-        if _check_contours_intersect(contours_list_point_1, contours_list_point_2):
-            self.all_data[keys_point_1[0]]["overlaps"].append([original_point_1, original_point_2])
-            self.all_data[keys_point_2[0]]["overlaps"].append([original_point_2, original_point_1])
+        if check_bool:
+            # start = time.time()
+            for l in self.all_data[keys_point_1[0]]["overlaps"], self.all_data[keys_point_2[0]]["overlaps"]:
+                for p in original_point_1, original_point_2:
+                    if not (p in l):
+                        l.append(p)
 
-            self.all_data[keys_point_1[0]]["overlaps_point_id"].append([keys_point_1[0], keys_point_2[0]])
-            self.all_data[keys_point_2[0]]["overlaps_point_id"].append([keys_point_2[0], keys_point_1[0]])
+            # for r in self.all_data[keys_point_1[0]]["overlaps_point_id"], self.all_data[keys_point_2[0]]["overlaps_point_id"]:
+            #     for p in keys_point_1[0], keys_point_2[0]:
+            #         if not (p in r):
+            #             r.append(p)
 
-        # if u.compare_points(point1, point2) >= 10E-14:
+            # end = time.time()
+            # print "time check for adding overlaps:" + str(end - start)
+            # self.all_data[keys_point_1[0]]["overlaps"].append(original_point_1)
+            # self.all_data[keys_point_2[0]]["overlaps"].append([original_point_2, original_point_1])
+
+            # self.all_data[keys_point_1[0]]["overlaps_point_id"].append([keys_point_1[0], keys_point_2[0]])
+            # self.all_data[keys_point_2[0]]["overlaps_point_id"].append([keys_point_2[0], keys_point_1[0]])
+
+            # if u.compare_points(point1, point2) >= 10E-14:
             return [point_1, point_2]
         else:
             return []
@@ -413,56 +460,6 @@ def _check_z_difference(point1, point2, delta_z=0.1):
         return True
     else:
         return False
-
-
-def _check_contours_intersect(contour_1, contour_2):
-    polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
-    polygon_lines_2 = _create_polygon_lines_by_contours(contour_2)
-    for line1 in polygon_lines_1:
-        for line2 in polygon_lines_2:
-            ints = _get_intersection(line1, line2)
-            if line1[0][0] <= ints[0] <= line1[1][0] and line1[0][1] <= ints[1] <= line1[1][1]:
-                return True
-    return False
-
-
-def _slope(p1, p2):
-    if p1[0] - p2[0] == 0:
-        return np.inf
-    return (p1[1] - p2[1]) / (p1[0] - p2[0])
-
-
-def _intercept(m, p2):
-    return -m * p2[0] + p2[1]
-
-
-def _create_polygon_lines_by_contours(contour):
-    polygon_lines = []
-    edge_pairs = _find_edges_of_polygon_from_contours(contour)
-    for edge_pair in edge_pairs:
-        p1 = edge_pair[0]
-        p2 = edge_pair[1]
-        m = _slope(p1, p2)
-        b = _intercept(m, p2)
-        line = [p1, p2, m, b]
-        polygon_lines.append(line)
-    return polygon_lines
-
-
-def _find_edges_of_polygon_from_contours(contour):
-    edge_pairs = []
-    for c in range(2):
-        for i in range(len(contour) - 1):
-            edge_pairs.append([contour[i][c], contour[i + 1][c]])
-    return edge_pairs
-
-
-def _get_intersection(line1, line2):
-    if line1[2] - line2[2] == 0:
-        return [np.inf, np.inf]
-    x = (line2[3] - line1[3]) / (line1[2] - line2[2])
-    y = line1[2] * x + line1[3]
-    return [x, y]
 
 
 def _circle_filter(x, y, r):
@@ -513,3 +510,543 @@ def _read_image(image_file):
     image_file_reader.SetFileName(image_file)
     image = image_file_reader.Execute()
     return image
+
+
+def _check_circle_overlap(c1, c2):
+    p1 = c1[0]
+    r1 = c1[1]
+
+    p2 = c2[0]
+    r2 = c2[1]
+
+    dist = tr.get_distance(p1, p2)
+    if dist <= r1 + r2:
+        return True
+    return False
+
+
+def _check_point_in_line(point, line):
+    """
+    check if a special position (point) in the line is bw to other points (p1, p2) in the line or not.
+
+    :param point: 2D point,[x,y], this point must be in the line already.
+    :param line: [p1,p2,m,b], p1,p2: points in the line, m is the slop and b is the intercept. p1, p2 are the
+    two corners on the polygon (only two of them which make the this side of the polygon).
+    :return: True if the input point is in this line bw two corners.
+    """
+
+    p1 = line[0]
+    p2 = line[1]
+    assert (p1 != p2)
+
+    if p1[0] <= p2[0]:
+        if p1[1] <= p2[1]:
+            if p1[0] <= point[0] <= p2[0] and p1[1] <= point[1] <= p2[1]:
+                return True
+        else:
+            if p1[0] <= point[0] <= p2[0] and p2[1] <= point[1] <= p1[1]:
+                return True
+
+    if p2[0] <= p1[0]:
+        if p1[1] <= p2[1]:
+            if p2[0] <= point[0] <= p1[0] and p1[1] <= point[1] <= p2[1]:
+                return True
+        else:
+            if p2[0] <= point[0] <= p1[0] and p2[1] <= point[1] <= p1[1]:
+                return True
+
+    #    origin = [0.0,0.0]
+    #    r1 = tr.get_distance(origin, p1)
+    #    r2 = tr.get_distance(origin, p2)
+    #    r = tr.get_distance(origin, point)
+    #    print r1,r2,r
+    #    if r1 <= r <= r2 or r2 <= r <= r1:
+    #        return True'
+    return False
+
+
+def _slope(p1, p2):
+    assert (p1 != p2)
+    #    if p1 == p2:
+    #        raise ValueError("Slope is undefined for identical points!")
+    if p1[0] - p2[0] == 0:
+        return np.inf
+    return (p1[1] - p2[1]) / (p1[0] - p2[0])
+
+
+def test_slope():
+    res = _slope([0, 1], [0, 2])
+    assert (res == np.inf)
+    #    try:
+    #        res = _slope([0,1],[0,1])
+    #    except ValueError:
+    #        pass
+    #    else:
+    #        raise RuntimeError("This should have caused a ZeroDivisionError!")
+    res = _slope([0, 0], [2, 2])
+    assert (res == 1)
+
+
+test_slope()
+
+
+def _intercept(m, p):
+    return -m * p[0] + p[1]
+
+
+def test_intercept():
+    m = 0
+    point = [0, 0]
+    assert (0 == _intercept(m, point))
+
+    m = np.inf
+    point = [1, 1]
+    assert (-np.inf == _intercept(m, point))
+
+    m = np.inf
+    point = [-1, -1]
+    assert (np.inf == _intercept(m, point))
+
+
+test_intercept()
+
+
+def _create_polygon_lines_by_contours(contour):
+    polygon_lines = []
+    edge_pairs = _find_edges_of_polygon_from_contours(contour)
+    for edge_pair in edge_pairs:
+        polygon_lines.append(_create_line(edge_pair[0], edge_pair[1]))
+    return polygon_lines
+
+
+def _create_line(p1, p2):
+    m = _slope(p1, p2)
+    b = _intercept(m, p2)
+    line = [p1, p2, m, b]
+    return line
+
+
+def _find_edges_of_polygon_from_contours(contour):
+    pts = [p[0] for p in contour] + [p[1] for p in contour]
+    pairs = zip(pts, pts[1:] + [pts[0]])
+    return [list(p) for p in pairs]  # convert tuple to list
+
+
+def test_find_edges_of_polygon_from_contours():
+    p1, p2, p3, p4 = [0, 1], [0, -1], [1, 0], [-1, 0]
+    pts = [[p1, p2], [p3, p4]]
+    edge_pairs = _find_edges_of_polygon_from_contours(pts)
+    edge_pairs_expected = [[p1, p3], [p3, p2], [p2, p4], [p4, p1]]
+    assert (edge_pairs == edge_pairs_expected)
+
+
+test_find_edges_of_polygon_from_contours()
+
+
+def _get_intersection(line1, line2):
+    if line1[2] == 0.0 and line2[2] == 0.0:
+        return "parallel, horizontal"
+
+    if line1[2] ** 2 == np.inf and line2[2] ** 2 == np.inf:
+        return "parallel, vertical"
+
+    if line1[2] == line2[2]:
+        return "parallel"
+
+    if line1[2] ** 2 == 0.0 and line2[2] ** 2 == np.inf:
+        return [line2[0][0], line1[0][1]]
+
+    if line1[2] ** 2 == np.inf and line2[2] ** 2 == 0.0:
+        return [line1[0][0], line2[0][1]]
+
+    if line1[2] ** 2 == np.inf and (line2[2] ** 2 != np.inf and line2[2] ** 2 != 0.0):
+        x = line1[0][0]
+        y = line2[2] * x + line2[3]
+        return [x, y]
+
+    if line2[2] ** 2 == np.inf and (line1[2] ** 2 != np.inf and line1[2] ** 2 != 0.0):
+        x = line2[0][0]
+        y = line1[2] * x + line1[3]
+        return [x, y]
+
+    if line1[2] ** 2 == 0.0 and line2[2] != np.inf and line2[2] != 0.0:
+        y = line1[0][1]
+        x = (y - line2[3]) / line2[2]
+        return [x, y]
+
+    if line2[2] ** 2 == 0.0 and line1[2] != np.inf and line1[2] != 0.0:
+        y = line2[0][1]
+        x = (y - line1[3]) / line1[2]
+        return [x, y]
+
+    x = (line2[3] - line1[3]) / (line1[2] - line2[2])
+    y = line1[2] * x + line1[3]
+    return [x, y]
+
+
+def _test_get_intersection():
+    # y = m1*x + b1
+    # y = m2*x + b2
+    # Solution:
+    # x = (b2 -b1)/(m1 - m2)
+    # y = m1(b2 -b1)/(m1 -m2) + b1 OR y = m1(b2 -b1)/(m1 -m2) + b1
+
+    # When the two lines are parallel m1 = m2
+    # line1: y = 1*x + 0
+    # line2: y = 1*x + 1
+    line1 = _create_line([0.0, 0.0], [1.0, 1.0])
+    line2 = _create_line([0.0, 1.0], [1.0, 2.0])
+    assert (_get_intersection(line1, line2) == "parallel")
+
+    # When the two lines are horizontal lines, m1 = m2 = 0
+    # line1: y = 0*x + 1
+    # line2: y = 0*x + 2
+    line1 = _create_line([0.0, 1.0], [1.0, 1.0])
+    line2 = _create_line([0.0, 2.0], [-1.0, 2.0])
+    assert (_get_intersection(line1, line2) == "parallel, horizontal")
+
+    # When the two lines are vertical lines, m1 = m2 = infinity
+    # line1: x = - 1
+    # line2: x = + 2
+    line1 = _create_line([-1.0, -2.0], [-1.0, 11.0])
+    line2 = _create_line([2.0, 1.0], [2.0, 3.0])
+    assert (_get_intersection(line1, line2) == "parallel, vertical")
+
+    # When one line is vertical, and the other is horizontal:
+    # line1: x = - 1
+    # line2: y = + 2
+    line1 = _create_line([-1.0, 1.0], [-1.0, 2.0])
+    line2 = _create_line([1.0, 2.0], [3.0, 2.0])
+    assert (_get_intersection(line1, line2) == [-1.0, 2.0])
+
+    # When one line is vertical, and the other is horizontal:
+    # line1: y =  3
+    # line2: x = - 2
+    line1 = _create_line([-1.0, 3.0], [1.0, 3.0])
+    line2 = _create_line([-2.0, 2.0], [-2.0, -8.0])
+    assert (_get_intersection(line1, line2) == [-2.0, 3.0])
+
+    # When one of the lines is horizontal and the other is not vertical nor horizontal:
+    # line1: y = -1
+    # line2: y = 2*x - 1
+    line1 = _create_line([-1.0, -1.0], [2.0, -1.0])
+    line2 = _create_line([0.0, -1.0], [1.0, 1.0])
+    assert (_get_intersection(line1, line2) == [0.0, -1.0])
+
+    # When one of the lines is vertical and the other is not vertical nor horizontal:
+    # line1: x = 2
+    # line2: y = 2*x - 1
+    line1 = _create_line([2.0, -1.0], [2.0, 1.0])
+    line2 = _create_line([0.0, -1.0], [1.0, 1.0])
+    assert (_get_intersection(line1, line2) == [2.0, 3.0])
+
+    # line1: y = 1*x + 1
+    # line2: x = 3
+    line1 = _create_line([1.0, 2.0], [2.0, 3.0])
+    line2 = _create_line([3., -1.0], [3.0, 1.0])
+    assert (_get_intersection(line1, line2) == [3.0, 4.0])
+
+    # when lines are not vertical nor horizontal:
+    # line1: y = 2*x + 1
+    # line2: y = -3*x +1
+    line1 = _create_line([0.0, 1.0], [1.0, 3.0])
+    line2 = _create_line([0.0, 1.0], [1.0, -2.0])
+    assert (_get_intersection(line1, line2) == [0.0, 1.0])
+
+
+_test_get_intersection()
+
+
+def _drop_duplications_from_contour(contours):
+    cs_dropped = [ctr for id_ctr, ctr in enumerate(contours)
+                   if ctr[0] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2] and
+                   ctr[1] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2]]
+    return cs_dropped
+
+
+def _test_drop_duplications_from_contour():
+    c1 = [[[2609, 3341], [2621, 3341]],
+            [[2609, 3343], [2618, 3339]],
+            [[2607, 3352], [2614, 3339]],
+            [[2613, 3344], [2613, 3340]],
+            [[2614, 3343], [2613, 3340]],
+            [[2615, 3342], [2611, 3340]]]
+
+    c1_dropped = [[[2609, 3341], [2621, 3341]],
+            [[2609, 3343], [2618, 3339]],
+            [[2607, 3352], [2614, 3339]],
+            [[2613, 3344], [2613, 3340]],
+            [[2615, 3342], [2611, 3340]]]
+    assert _drop_duplications_from_contour(c1) == c1_dropped
+
+
+    c2 = [[[2609, 3341], [2621, 3341]],
+            [[2609, 3343], [2618, 3339]],
+            [[2607, 3352], [2614, 3339]],
+            [[2607, 3352], [2614, 3339]],
+            [[2613, 3344], [2613, 3340]],
+            [[2614, 3343], [2613, 3340]],
+            [[2615, 3342], [2607, 3352]]]
+
+    c2_dropped = [[[2609, 3341], [2621, 3341]],
+            [[2609, 3343], [2618, 3339]],
+            [[2607, 3352], [2614, 3339]],
+            [[2613, 3344], [2613, 3340]]]
+
+    assert _drop_duplications_from_contour(c2) == c2_dropped
+
+_test_drop_duplications_from_contour()
+
+
+
+
+
+def _check_polygon_inside(line, polygon):
+    a_ints_line = [_get_intersection(line, p_line)
+                   for p_line in polygon
+                   if "parallel" not in str(_get_intersection(line, p_line))
+                   and _check_point_in_line(_get_intersection(line, p_line), p_line)]
+
+    # This is for a very rare case when one line is touching exactly the intersection of another two lines,
+    # In this case if the polygon is outside the other it will only have these two intersections, but if
+    # one polygon is inside the other one then for sure it has more than two intersections so the below
+    # condition will not full filled nad
+    if len(a_ints_line) < 2:
+        return False
+    if len(a_ints_line) == 2 and a_ints_line[0] == a_ints_line[1]:
+        return False
+
+    a_p = [[ints_p1, ints_p2] for ints_p1 in a_ints_line for ints_p2 in a_ints_line]
+    a_dists = [tr.get_distance(pp[0], pp[1]) for pp in a_p]
+    idx_max = a_dists.index(max(a_dists))
+    two_points = a_p[idx_max]
+    new_ints_line = _create_line(two_points[0], two_points[1])
+    if _check_point_in_line(line[0], new_ints_line) and _check_point_in_line(line[1], new_ints_line):
+        return True
+    return False
+
+
+def _check_contours_intersect(contour_1, contour_2):
+    if contour_1 == contour_2:
+        return True
+
+    contour_1 = _drop_duplications_from_contour(contour_1)
+    contour_2 = _drop_duplications_from_contour(contour_2)
+
+    polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
+    polygon_lines_2 = _create_polygon_lines_by_contours(contour_2)
+
+    for line1 in polygon_lines_1:
+        for line2 in polygon_lines_2:
+            ints = _get_intersection(line1, line2)
+            if "parallel" in str(ints):
+                continue
+            # check if intersect is in edges of both polygons
+            if _check_point_in_line(ints, line1):
+                if _check_point_in_line(ints, line2):
+                    return True
+    count_ints_p1 = []
+    count_ints_p2 = []
+    for id_l1, line1 in enumerate(polygon_lines_1):
+        for id_l2, line2 in enumerate(polygon_lines_2):
+            ints = _get_intersection(line1, line2)
+            if "parallel" in str(ints):
+                continue
+            if _check_point_in_line(ints, line1):
+                if _check_polygon_inside(line2, polygon_lines_1):
+                    count_ints_p1.append(True)
+            elif _check_point_in_line(ints, line2):
+                if _check_polygon_inside(line1, polygon_lines_2):
+                    count_ints_p2.append(True)
+
+        if len(count_ints_p1) >= len(2 * polygon_lines_2) or len(count_ints_p2) >= len(2 * polygon_lines_1):
+            return True
+    return False
+
+
+def recenter_contours(contours):
+    cs_f = [p for contour in contours for p in contour]
+    mean_xy = np.mean(np.array(cs_f), axis=0)
+    cs_centered = np.around((np.array(cs_f) - mean_xy), decimals=1).tolist()
+    cs_centered_list = [[cs_centered[idx], cs_centered[idx + 1]] for idx in range(0, len(cs_centered), 2)]
+    return cs_centered_list
+
+
+def get_overlap_contour_list(point, table):
+    idx = table[['x_slice', 'y_slice', 'z_slice']].values.tolist().index(point)
+    return table.iloc[idx]["contour_list_0.5"]
+
+
+def plot_polygons(polygons, plt):
+    colors = ["#0000FF", "#00FF00"]
+    f, ax = plt.subplots(1)
+    for p_id, polygon_lines in enumerate(polygons):
+
+        for line in polygon_lines:
+            ax.plot([line[0][0], line[1][0]], [line[0][1], line[1][1]], c=colors[p_id])
+
+
+def move_polygon_by_contour(contour_list, v):
+    return [[[c[0][0] + v, c[0][1] + v], [c[1][0] + v, c[1][1] + v]] for c in contour_list]
+
+
+def magnify_polygon_by_contour(contour_list, x):
+    return [[[c[0][0] * x, c[0][1] * x], [c[1][0] * x, c[1][1] * x]] for c in contour_list]
+
+
+def test_check_contours_intersect():
+    # Get some polygons from the actual data:
+    # The code for creating the hard coded contours from the actual data (the table),
+    # for that matter uncomment this or use them in a separate place.
+    #    p1_contour_list = table.iloc[20]["contour_list_0.5"]
+    #    p1_overlaps = table.iloc[20]["overlaps_0.5"]
+    #    p1_first_overlap = p1_overlaps[2]
+    #    p2_contour_list = get_overlap_contour_list(p1_first_overlap)
+    #    p1_cs = recenter_contours(p1_contour_list)
+    #    p2_cs = recenter_contours(p2_contour_list)
+    #    print p1_cs
+    #    print p2_cs
+
+    p1_contour_list = [[[-9.6, 0.2], [11.4, 0.2]],
+                       [[-8.6, 5.2], [9.4, -3.8]],
+                       [[-4.6, 10.2], [4.4, -4.8]],
+                       [[1.4, 6.2], [1.4, -4.8]],
+                       [[3.4, 5.2], [-4.6, -10.8]],
+                       [[5.4, 2.2], [-9.6, -5.8]]]
+    p2_contour_list = [[[-15.5, -0.7], [32.5, -0.7]],
+                       [[-17.5, 9.3], [6.5, -3.7]],
+                       [[-4.5, 7.3], [2.5, -3.7]],
+                       [[0.5, 3.3], [0.5, -4.7]],
+                       [[2.5, 3.3], [-0.5, -3.7]],
+                       [[4.5, 1.3], [-11.5, -7.7]]]
+
+    # When two polygons overlap:
+    p1_polygon = _create_polygon_lines_by_contours(p1_contour_list)
+    p2_polygon = _create_polygon_lines_by_contours(p2_contour_list)
+    #    plot_polygons([p1_polygon,p2_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list, p2_contour_list)
+    assert check_status
+
+    # When two polygons a bit overlap:
+    p2_contour_list_moved = move_polygon_by_contour(p2_contour_list, 12)
+
+    p2_polygon_moved = _create_polygon_lines_by_contours(p2_contour_list_moved)
+    #    plot_polygons([p1_polygon, p2_polygon_moved])
+
+    check_status = _check_contours_intersect(p1_contour_list, p2_contour_list_moved)
+    assert check_status
+
+    # When two polygons not overlap:
+    p2_contour_list_moved = move_polygon_by_contour(p2_contour_list, 15)
+
+    p2_polygon_moved = _create_polygon_lines_by_contours(p2_contour_list_moved)
+    #    plot_polygons([p1_polygon, p2_polygon_moved])
+
+    check_status = _check_contours_intersect(p1_contour_list, p2_contour_list_moved)
+    assert (not check_status)
+
+    # When one polygon is inside the other polygon:
+    p2_contour_list_magnified = magnify_polygon_by_contour(p2_contour_list, 1.0 / 5.0)
+
+    p2_polygon_magnified = _create_polygon_lines_by_contours(p2_contour_list_magnified)
+    #    plot_polygons([p1_polygon, p2_polygon_magnified])
+
+    check_status = _check_contours_intersect(p1_contour_list, p2_contour_list_magnified)
+    assert check_status
+
+    # When second polygon is inside the other polygon:
+    p2_contour_list_magnified = magnify_polygon_by_contour(p2_contour_list, 5.0)
+
+    p2_polygon_magnified = _create_polygon_lines_by_contours(p2_contour_list_magnified)
+    #    plot_polygons([p1_polygon, p2_polygon_magnified])
+
+    check_status = _check_contours_intersect(p1_contour_list, p2_contour_list_magnified)
+    assert check_status
+
+    # When the second polygon is perfectly the same as the first polygon:
+    p2_contour_list_magnified = magnify_polygon_by_contour(p2_contour_list, 5.0)
+
+    p2_polygon_magnified = _create_polygon_lines_by_contours(p2_contour_list_magnified)
+    #    plot_polygons([p1_polygon, p1_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list, p1_contour_list)
+    assert check_status
+
+    # When second polygon is the same as the other polygon but slightly smaller:
+    p1_contour_list_magnified = magnify_polygon_by_contour(p1_contour_list, 1.01)
+
+    p1_polygon_magnified = _create_polygon_lines_by_contours(p1_contour_list_magnified)
+    #   plot_polygons([p1_polygon, p1_polygon_magnified])
+
+    check_status = _check_contours_intersect(p1_contour_list, p1_contour_list_magnified)
+    assert check_status
+
+    # A new kind of points:
+    p1_contour_list_t = [[[2500, 3375], [2513, 3375]],
+                         [[2496, 3380], [2512, 3371]],
+                         [[2500, 3383], [2509, 3368]],
+                         [[2505, 3382], [2505, 3371]],
+                         [[2507, 3380], [2504, 3372]],
+                         [[2509, 3377], [2502, 3373]]]
+
+    p2_contour_list_t = [[[2480, 3386], [2494, 3386]],
+                         [[2477, 3391], [2512, 3372]],
+                         [[2485, 3389], [2489, 3382]],
+                         [[2487, 3388], [2487, 3383]],
+                         [[2488, 3388], [2486, 3383]],
+                         [[2489, 3387], [2483, 3384]]]
+
+    p1_polygon = _create_polygon_lines_by_contours(p1_contour_list_t)
+    p2_polygon = _create_polygon_lines_by_contours(p2_contour_list_t)
+    #    plot_polygons([p1_polygon,p2_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
+    assert check_status
+
+    # Second new problematic case:
+    p1_contour_list_t = [[[2500, 3375], [2513, 3375]],
+                         [[2496, 3380], [2512, 3371]],
+                         [[2500, 3383], [2509, 3368]],
+                         [[2505, 3382], [2505, 3371]],
+                         [[2507, 3380], [2504, 3372]],
+                         [[2509, 3377], [2502, 3373]]]
+    p2_contour_list_t = [[[2454, 3397], [2468, 3397]],
+                         [[2451, 3403], [2490, 3382]],
+                         [[2461, 3400], [2465, 3394]],
+                         [[2463, 3400], [2463, 3393]],
+                         [[2464, 3399], [2461, 3392]],
+                         [[2465, 3398], [2459, 3395]]]
+
+    p1_polygon = _create_polygon_lines_by_contours(p1_contour_list_t)
+    p2_polygon = _create_polygon_lines_by_contours(p2_contour_list_t)
+    #    plot_polygons([p1_polygon,p2_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
+    assert not check_status
+
+    # 3rd error test from the actual data
+    p1_contour_list_t = [[[2500, 3375], [2513, 3375]],
+                         [[2496, 3380], [2512, 3371]],
+                         [[2500, 3383], [2509, 3368]],
+                         [[2505, 3382], [2505, 3371]],
+                         [[2507, 3380], [2504, 3372]],
+                         [[2509, 3377], [2502, 3373]]]
+    p2_contour_list_t = [[[2430, 3402], [2453, 3402]],
+                         [[2432, 3408], [2448, 3400]],
+                         [[2441, 3405], [2445, 3398]],
+                         [[2443, 3404], [2443, 3398]],
+                         [[2443, 3403], [2442, 3399]],
+                         [[2444, 3403], [2441, 3401]]]
+
+    p1_polygon = _create_polygon_lines_by_contours(p1_contour_list_t)
+    p2_polygon = _create_polygon_lines_by_contours(p2_contour_list_t)
+    # plot_polygons([p1_polygon, p2_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
+    assert (not check_status)
+
+
+test_check_contours_intersect()
+
+
