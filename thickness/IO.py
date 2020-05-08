@@ -47,24 +47,26 @@ import re
 import os
 from random import randrange
 import numpy as np
+import utils as u
 
 
 class Am:
 
-    def __init__(self, input_path, output_path=None, read_ = True):
+    def __init__(self, input_path, output_path=None, hx_path=None, read_=True):
 
         if output_path is None:
             output_path = os.path.dirname(input_path) + "output_" + str(randrange(100))
 
         self.commands = {}
         self.config = {}
+        self.hx_path = hx_path
         self.input_path = input_path
         self.output_path = output_path
         self.transformation_matrix_exist = False
-        self.transformation_matrix = np.matrix([[ 1.,  0.,  0.,  0.],
-                                                [ 0.,  1.,  0.,  0.],
-                                                [ 0.,  0.,  1.,  0.],
-                                                [ 0.,  0.,  0.,  1.]])
+        self.transformation_matrix = np.matrix([[1., 0., 0., 0.],
+                                                [0., 1., 0., 0.],
+                                                [0., 0., 1., 0.],
+                                                [0., 0., 0., 1.]])
         self.all_data = {}
         if read_:
             self.read()
@@ -98,7 +100,31 @@ class Am:
 
                 self.all_data[cs] = data
 
-    def _read_transformation_matrix(self):
+    def _read_transformation_matrix_by_hx(self):
+        am_file_name = u.get_file_name_from_path(self.input_path)
+        vector = []
+        matrix = []
+        row = []
+        with open(self.hx_path, 'r') as f:
+            lines = f.readlines()
+            for idx, line in enumerate(lines):
+                if line.rfind(am_file_name) > -1 and line.rfind("setTransform") > -1:
+                    line = line.strip(am_file_name)
+                    line = line.strip(' ')
+                    line = line.strip('setTransform')
+                    line = line.strip(' ')
+                    line = line.strip()
+                    line = line.split(' ')
+                    vector = [float(l.strip()) for l in line if l]
+            for i in range(4):
+                for j in range(4):
+                    k = j + i * 4
+                    row.append(vector[k])
+                matrix.append(row)
+                row = []
+            self.transformation_matrix = np.array(matrix).T
+
+    def _read_transformation_matrix_by_am(self):
         """
         This method can extract the amira transformation matrix written in am file.
 
@@ -136,8 +162,7 @@ class Am:
             if x == int(x):
                 return str(int(x))
             else:
-                return  '{:.15e}'.format(x)
-
+                return '{:.15e}'.format(x)
 
         with open(self.output_path, "w") as data_file:
             data_file.writelines(self.all_data["config"])
@@ -153,22 +178,27 @@ class Am:
                 data_file.write(self.commands[cs])
                 data_file.write("\n")
                 for data in self.all_data[cs]:
-                    
+
                     string = ' '.join(map(format_number, data))
                     for item in string:
                         data_file.write(item)
                     data_file.write("\n")
 
     def _read_config_and_commands(self):
+        if self.hx_path:
+            self.transformation_matrix_exist = True
+            self._read_transformation_matrix_by_hx()
+
         with open(self.input_path, 'r') as fc:
             lines = fc.readlines()
             commands = {}
             commands_order = []
             header_end = None
             for idx, line in enumerate(lines):
-                if line.rfind("TransformationMatrix") > -1:
+                if line.rfind("TransformationMatrix") > -1 and self.hx_path is None:
                     self.transformation_matrix_exist = True
-                    self._read_transformation_matrix()
+                    self._read_transformation_matrix_by_am()
+
                 if line.rfind("@") > -1:
                     if header_end is None:
                         header_end = idx
@@ -178,7 +208,7 @@ class Am:
                         c = line.replace(command_sign, "").strip()
                         commands_order.append(c)
                         commands[c] = command_sign
-                    else: # searches for the first isolated occurence of @[number], which indicates beginning of data section
+                    else:  # searches for the first isolated occurence of @[number], which indicates beginning of data section
                         config_end = idx
                         break
             self.all_data["config"] = lines[:header_end]
@@ -191,9 +221,6 @@ class Am:
         self.commands[cs] = '@' + str(max_command + 1)
         self.all_data[cs] = data
         self._commands_order.append(cs)
-
-
-
 
 
 class Hoc:
