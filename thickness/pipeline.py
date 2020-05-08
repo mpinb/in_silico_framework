@@ -27,11 +27,11 @@ class SliceData:
         self.image_stack_input_path = None
         self.image_stack = None
 
-    def setup_am_file(self, path):
+    def setup_am_file(self, path, hx_path):
         if self.output_path is None:
             raise RuntimeError("Please first set_output_path by set_output_path('path')")
         self.am_file_path = path
-        self.am_object = IO.Am(self.am_file_path, self.output_path)
+        self.am_object = IO.Am(self.am_file_path, self.output_path, hx_path)
         self.am_points = self.am_object.all_data["POINT { float[3] EdgePointCoordinates }"]
         if self.am_object.transformation_matrix_exist:
             tr_object = tr.AffineTransformation()
@@ -93,6 +93,7 @@ class ExtractThicknessPipeline:
         self._3D = False
         # ---- files and folders
         self.hoc_file = None
+        self.hx_path = None
         self.hoc_object = None
         self.am_paths = []
         self.tif_paths = []
@@ -128,6 +129,9 @@ class ExtractThicknessPipeline:
 
     def set_am_paths_by_hx(self, folder_path_to_hx_file):
         self.am_paths = u.get_am_paths_from_hx(folder_path_to_hx_file)
+
+    def set_hx_path(self, path_to_hx_file):
+        self.hx_path = path_to_hx_file
 
     def set_output_path(self, path_to_output_folder):
         self.output_folder = path_to_output_folder
@@ -232,7 +236,7 @@ class ExtractThicknessPipeline:
                 slice_object = SliceData(slice_threshold=threshold)
                 slice_object.set_output_path(self.output_folder + "/" + str(threshold) +
                                              "/" + u.get_file_name_from_path(am_file))
-                slice_object.setup_am_file(am_file)
+                slice_object.setup_am_file(am_file, self.hx_path)
                 if self._3D:
                     slice_object.set_image_stack(u.get_am_image_match([am_file],
                                                                       self.image_stack_folder_paths)[am_file],
