@@ -86,8 +86,18 @@ def get_nearest_point(point, points):
     return nearest_point
 
 
-def get_neighbours_of_point(point, points, width=10, dimensions=[0,1,2]):
+def get_neighbours_of_point(point, points, width=10, dimensions=[0,1,2], indices=False):
+
     neighbours = np.array(points)
+    idx_neighbours = np.where(neighbours)
+
+    if indices:
+        for i in dimensions:
+            idx_neighbours = np.where[neighbours[:, i] >= point[i] - width]
+            neighbours = neighbours[idx_neighbours]
+            idx_neighbours = np.where[neighbours[:, i] <= point[i] + width]
+
+        return idx_neighbours.tolist()
 
     for i in dimensions:
         neighbours = neighbours[neighbours[:, i] >= point[i] - width]

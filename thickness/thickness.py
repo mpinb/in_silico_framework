@@ -336,13 +336,17 @@ class ThicknessExtractor:
         del self.contour_list
 
     def update_all_data_with_overlaps(self):
-        points = self.seed_corrected_points
+        seed_corrected_points = self.seed_corrected_points
+        points = self.points  # original points in image 2d coordinate
         overlaps = []
         all_overlaps = []
         visited_pairs = []
         # start = time.time()
-        volumes = [[p, u.get_neighbours_of_point(p, points, width=108, dimensions=[0, 1])] for p in
-                   points]
+        volumes = [[p_idx, u.get_neighbours_of_point(p, points, width=108, dimensions=[0, 1],
+                                                     indices=True)] for p, p_idx in enumerate(points)]
+
+        # volumes = [[p, u.get_neighbours_of_point(p, seed_corrected_points, width=108, dimensions=[0, 1])]
+        # for p in seed_corrected_points]
         # end = time.time()
         # print "time for finding near points:" + str(end - start)
         # print (len(points))
@@ -357,12 +361,17 @@ class ThicknessExtractor:
             # start = time.time()
             # pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
             #          if p1 != p2 and [p1, p2] not in visited_pairs]
-            center_point = volume[0]
-            ng_points = volume[1]
-            pairs = [[center_point, ng_point] for ng_point in ng_points if center_point != ng_point]
+         #   center_point = volume[0]
+         #   ng_points = volume[1]
+            center_point_idx = volume[0]
+            ng_points_idx = volume[1]
+            # pairs = [[center_point, ng_point] for ng_point in ng_points if center_point != ng_point]
+            pairs = [[center_point_idx, ng_point_idx] for ng_point_idx in ng_points_idx]
             # end = time.time()
             # print "time for getting pairs:" + str(end - start)
             for pair in pairs:
+                p1 = seed_corrected_points[pair[0]]
+                p2 = seed_corrected_points[pair[1]]
                 overlap = self.look_for_possible_overlap(pair[0], pair[1])
                 if len(overlap) != 0:
                     overlaps.append(overlap)
@@ -375,7 +384,7 @@ class ThicknessExtractor:
             end = time.time()
         return all_overlaps
 
-    def look_for_possible_overlap(self, point_1, point_2):
+    def look_for_possible_overlap(self, idx_point_1, idx_point_2):
         # start = time.time()
         data_point_1 = self._filter_all_data_by_point(point_1)
         keys_point_1 = sorted(data_point_1.keys())
@@ -400,21 +409,36 @@ class ThicknessExtractor:
         # print "original_point from translation",\
         #     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1_in_image_coordinate])
         # start = time.time()
-        check_bool = _check_contours_intersect(contours_list_point_1, contours_list_point_2)
-        # check_circle_bool = _check_circle_overlap([point_1, min_thickness_point_1 / 2.0],
-        #                                          [point_2, min_thickness_point_2 / 2.0])
+        # check_bool = _check_contours_intersect(contours_list_point_1, contours_list_point_2)
+        if point_1 == point_2:
+            check_circle_bool = True
+        else:
+            check_circle_bool = _check_circle_overlap([point_1, min_thickness_point_1 / 2.0],
+                                                      [point_2, min_thickness_point_2 / 2.0])
         # if not check_bool and check_circle_bool:
         #     print "contours overlap:", check_bool
         #     print "circular overlap:", check_circle_bool
         # end = time.time()
         # print "time check for overlap:" + str(end - start)
 
-        if check_bool:
+        if check_circle_bool:
             # start = time.time()
-            for l in self.all_data[keys_point_1[0]]["overlaps"], self.all_data[keys_point_2[0]]["overlaps"]:
-                for p in original_point_1, original_point_2:
-                    if not (p in l):
-                        l.append(p)
+            # for l in self.all_data[keys_point_1[0]]["overlaps"], self.all_data[keys_point_2[0]]["overlaps"]:
+            #     for p in original_point_1, original_point_2:
+            #         if not (p in l):
+            #             l.append(p)
+
+            ovs1 = self.all_data[keys_point_1[0]]["overlaps"]
+            if original_point_1 not in ovs1:
+                ovs1.append(original_point_1)
+            if original_point_2 not in ovs1:
+                ovs1.append(original_point_2)
+
+            ovs2 = self.all_data[keys_point_2[0]]["overlaps"]
+            if original_point_2 not in ovs2:
+                ovs2.append(original_point_2)
+            if original_point_1 not in ovs2:
+                ovs2.append(original_point_1)
 
             # for r in self.all_data[keys_point_1[0]]["overlaps_point_id"], self.all_data[keys_point_2[0]]["overlaps_point_id"]:
             #     for p in keys_point_1[0], keys_point_2[0]:
@@ -759,46 +783,43 @@ _test_get_intersection()
 
 def _drop_duplications_from_contour(contours):
     cs_dropped = [ctr for id_ctr, ctr in enumerate(contours)
-                   if ctr[0] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2] and
-                   ctr[1] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2]]
+                  if ctr[0] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2] and
+                  ctr[1] not in [c2 for ctr2 in contours[:id_ctr] for c2 in ctr2]]
     return cs_dropped
 
 
 def _test_drop_duplications_from_contour():
     c1 = [[[2609, 3341], [2621, 3341]],
-            [[2609, 3343], [2618, 3339]],
-            [[2607, 3352], [2614, 3339]],
-            [[2613, 3344], [2613, 3340]],
-            [[2614, 3343], [2613, 3340]],
-            [[2615, 3342], [2611, 3340]]]
+          [[2609, 3343], [2618, 3339]],
+          [[2607, 3352], [2614, 3339]],
+          [[2613, 3344], [2613, 3340]],
+          [[2614, 3343], [2613, 3340]],
+          [[2615, 3342], [2611, 3340]]]
 
     c1_dropped = [[[2609, 3341], [2621, 3341]],
-            [[2609, 3343], [2618, 3339]],
-            [[2607, 3352], [2614, 3339]],
-            [[2613, 3344], [2613, 3340]],
-            [[2615, 3342], [2611, 3340]]]
+                  [[2609, 3343], [2618, 3339]],
+                  [[2607, 3352], [2614, 3339]],
+                  [[2613, 3344], [2613, 3340]],
+                  [[2615, 3342], [2611, 3340]]]
     assert _drop_duplications_from_contour(c1) == c1_dropped
 
-
     c2 = [[[2609, 3341], [2621, 3341]],
-            [[2609, 3343], [2618, 3339]],
-            [[2607, 3352], [2614, 3339]],
-            [[2607, 3352], [2614, 3339]],
-            [[2613, 3344], [2613, 3340]],
-            [[2614, 3343], [2613, 3340]],
-            [[2615, 3342], [2607, 3352]]]
+          [[2609, 3343], [2618, 3339]],
+          [[2607, 3352], [2614, 3339]],
+          [[2607, 3352], [2614, 3339]],
+          [[2613, 3344], [2613, 3340]],
+          [[2614, 3343], [2613, 3340]],
+          [[2615, 3342], [2607, 3352]]]
 
     c2_dropped = [[[2609, 3341], [2621, 3341]],
-            [[2609, 3343], [2618, 3339]],
-            [[2607, 3352], [2614, 3339]],
-            [[2613, 3344], [2613, 3340]]]
+                  [[2609, 3343], [2618, 3339]],
+                  [[2607, 3352], [2614, 3339]],
+                  [[2613, 3344], [2613, 3340]]]
 
     assert _drop_duplications_from_contour(c2) == c2_dropped
 
+
 _test_drop_duplications_from_contour()
-
-
-
 
 
 def _check_polygon_inside(line, polygon):
@@ -1048,5 +1069,3 @@ def test_check_contours_intersect():
 
 
 test_check_contours_intersect()
-
-
