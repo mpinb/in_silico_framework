@@ -272,7 +272,7 @@ class Hoc:
         hoc_points = self.all_data["am_points"]
         input_path = self.input_path
         output_path = self.output_path
-
+        print output_path
         with open(input_path, 'r') as readHocFile:
             with open(output_path, 'w') as writeHocFile:
                 lines = readHocFile.readlines()

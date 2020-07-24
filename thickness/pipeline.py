@@ -83,8 +83,6 @@ class ExtractThicknessPipeline:
                  ray_length_front_to_back_in_micron=20,
                  max_seed_correction_radius_in_micron=10):
 
-
-
         # ---- flags and settings
         self._parallel = False
         self.client = None
@@ -153,11 +151,10 @@ class ExtractThicknessPipeline:
     def set_tif_paths_by_folder(self, folder_path_to_tif_files):
         self.tif_paths = u.get_files_by_folder(folder_path_to_tif_files, file_extension="tif")
 
-    def set_tif_3d_stack_by_folders(self, folder_paths, subfolders = None):
+    def set_tif_3d_stack_by_folders(self, folder_paths, subfolders=None):
         self._3D = True
         self.image_stack_folder_paths = folder_paths
         self.image_stack_folder_paths_subfolders = subfolders
-
 
     # TODO: EG: to put in init with defaults, set_thresholds, set_thickness..
     def set_thresholds(self, thresholds_list):
@@ -286,7 +283,7 @@ class ExtractThicknessPipeline:
             for key in sorted(all_slices_with_same_threshold.keys()):
                 slice_object = all_slices_with_same_threshold[key]
                 transformed_points = at.transform_points(slice_object.am_points_with_applied_am_file_transform,
-                                                       forwards=True)
+                                                         forwards=True)
                 slice_object.am_points_in_hoc_coordinate_system = transformed_points
                 slice_object.am_to_hoc_transformation_object = at
 
@@ -318,13 +315,16 @@ class ExtractThicknessPipeline:
         all_slices_with_default_threshold = self.all_slices[self.default_threshold]
         self.all_am_points = [point for key in sorted(all_slices_with_default_threshold.keys())
                               for point in all_slices_with_default_threshold[key].am_points]
-        self.all_am_points_with_applied_am_file_transform = [point for key in sorted(all_slices_with_default_threshold.keys())
-                              for point in all_slices_with_default_threshold[key].am_points_with_applied_am_file_transform]
+        self.all_am_points_with_applied_am_file_transform = [point for key in
+                                                             sorted(all_slices_with_default_threshold.keys())
+                                                             for point in all_slices_with_default_threshold[
+                                                                 key].am_points_with_applied_am_file_transform]
 
         self.all_am_points_in_hoc_coordinate_system = [tr_points for key in
                                                        sorted(all_slices_with_default_threshold.keys())
                                                        for tr_points in
-                                                       all_slices_with_default_threshold[key].am_points_in_hoc_coordinate_system]
+                                                       all_slices_with_default_threshold[
+                                                           key].am_points_in_hoc_coordinate_system]
         for threshold in self.thresholds_list:
             all_slices_with_same_threshold = self.all_slices[threshold]
             self.all_thicknesses = {threshold: [

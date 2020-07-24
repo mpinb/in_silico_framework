@@ -342,8 +342,8 @@ class ThicknessExtractor:
         all_overlaps = []
         visited_pairs = []
         # start = time.time()
-        volumes = [[p_idx, u.get_neighbours_of_point(p, points, width=108, dimensions=[0, 1],
-                                                     indices=True)] for p, p_idx in enumerate(points)]
+        volumes = [[p_idx, u.get_neighbours_of_point(p, points, width=108, dimensions=[0, 1], indices=True)] for
+                   p_idx, p in enumerate(points)]
 
         # volumes = [[p, u.get_neighbours_of_point(p, seed_corrected_points, width=108, dimensions=[0, 1])]
         # for p in seed_corrected_points]
@@ -361,17 +361,15 @@ class ThicknessExtractor:
             # start = time.time()
             # pairs = [[p1, p2] for i, p1 in enumerate(volume) for p2 in volume[i + 1:]
             #          if p1 != p2 and [p1, p2] not in visited_pairs]
-         #   center_point = volume[0]
-         #   ng_points = volume[1]
+            #   center_point = volume[0]
+            #   ng_points = volume[1]
             center_point_idx = volume[0]
             ng_points_idx = volume[1]
             # pairs = [[center_point, ng_point] for ng_point in ng_points if center_point != ng_point]
-            pairs = [[center_point_idx, ng_point_idx] for ng_point_idx in ng_points_idx]
+            index_pairs = [[center_point_idx, ng_point_idx] for ng_point_idx in ng_points_idx]
             # end = time.time()
             # print "time for getting pairs:" + str(end - start)
-            for pair in pairs:
-                p1 = seed_corrected_points[pair[0]]
-                p2 = seed_corrected_points[pair[1]]
+            for pair in index_pairs:
                 overlap = self.look_for_possible_overlap(pair[0], pair[1])
                 if len(overlap) != 0:
                     overlaps.append(overlap)
@@ -385,19 +383,38 @@ class ThicknessExtractor:
         return all_overlaps
 
     def look_for_possible_overlap(self, idx_point_1, idx_point_2):
-        # start = time.time()
-        data_point_1 = self._filter_all_data_by_point(point_1)
-        keys_point_1 = sorted(data_point_1.keys())
-        original_point_1 = self.original_points[keys_point_1[0]]
-        contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
-        # point_1_in_image_coordinate = data_point_1[keys_point_1[0]]["converted_point_by_image_coordinate"]
-        min_thickness_point_1 = data_point_1[keys_point_1[0]]["min_thickness"]
 
-        data_point_2 = self._filter_all_data_by_point(point_2)
-        keys_point_2 = sorted(data_point_2.keys())
-        original_point_2 = self.original_points[keys_point_2[0]]
-        contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
-        min_thickness_point_2 = data_point_2[keys_point_2[0]]["min_thickness"]
+        # start = time.time()
+        #        data_point_1 = self._filter_all_data_by_point(point_1)
+        #        keys_point_1 = sorted(data_point_1.keys())
+        #        original_point_1 = self.original_points[keys_point_1[0]]
+        #        contours_list_point_1 = data_point_1[keys_point_1[0]]["contour_list"]
+        # point_1_in_image_coordinate = data_point_1[keys_point_1[0]]["converted_point_by_image_coordinate"]
+        #        min_thickness_point_1 = data_point_1[keys_point_1[0]]["min_thickness"]
+        p_1 = self.points[idx_point_1]
+        p_2 = self.points[idx_point_2]
+
+        # Points in coordinates 2d
+        original_p1 = self.original_points[idx_point_1]
+        original_p2 = self.original_points[idx_point_2]
+
+        seed_corrected_p1 = self.seed_corrected_points[idx_point_1]
+        seed_corrected_p2 = self.seed_corrected_points[idx_point_2]
+        data_p1 = self._filter_all_data_by_index(idx_point_1)
+        data_p2 = self._filter_all_data_by_index(idx_point_2)
+        contour_list_p1 = data_p1["contour_list"]
+        contour_list_p2 = data_p2["contour_list"]
+        min_thickness_p1 = data_p1["min_thickness"]
+        min_thickness_p2 = data_p2["min_thickness"]
+
+        overlaps_p1 = data_p1["overlaps"]
+        overlaps_p2 = data_p2["overlaps"]
+
+        # data_point_2 = self._filter_all_data_by_point(point_2)
+        # keys_point_2 = sorted(data_point_2.keys())
+        # original_point_2 = self.original_points[keys_point_2[0]]
+        # contours_list_point_2 = data_point_2[keys_point_2[0]]["contour_list"]
+        # min_thickness_point_2 = data_point_2[keys_point_2[0]]["min_thickness"]
 
         # end = time.time()
         # print "time for filtering data by point:" + str(end - start)
@@ -409,36 +426,34 @@ class ThicknessExtractor:
         # print "original_point from translation",\
         #     self.convert_points.image_coordinate_2d_to_coordinate_2d([point_1_in_image_coordinate])
         # start = time.time()
-        # check_bool = _check_contours_intersect(contours_list_point_1, contours_list_point_2)
-        if point_1 == point_2:
-            check_circle_bool = True
-        else:
-            check_circle_bool = _check_circle_overlap([point_1, min_thickness_point_1 / 2.0],
-                                                      [point_2, min_thickness_point_2 / 2.0])
+        check_bool = _check_contours_intersect(contour_list_p1, contour_list_p2)
+
+        # if seed_corrected_p1 == seed_corrected_p2 or original_p1 == original_p2:
+        #     check_bool = True
+        # else:
+        #     check_bool = _check_circle_overlap([seed_corrected_p1, min_thickness_p1 / 2.0],
+        #                                               [seed_corrected_p2, min_thickness_p2 / 2.0])
         # if not check_bool and check_circle_bool:
         #     print "contours overlap:", check_bool
         #     print "circular overlap:", check_circle_bool
         # end = time.time()
         # print "time check for overlap:" + str(end - start)
 
-        if check_circle_bool:
+        if check_bool:
             # start = time.time()
             # for l in self.all_data[keys_point_1[0]]["overlaps"], self.all_data[keys_point_2[0]]["overlaps"]:
             #     for p in original_point_1, original_point_2:
             #         if not (p in l):
             #             l.append(p)
+            if original_p1 not in overlaps_p1:
+                overlaps_p1.append(original_p1)
+            if original_p2 not in overlaps_p1:
+                overlaps_p1.append(original_p2)
 
-            ovs1 = self.all_data[keys_point_1[0]]["overlaps"]
-            if original_point_1 not in ovs1:
-                ovs1.append(original_point_1)
-            if original_point_2 not in ovs1:
-                ovs1.append(original_point_2)
-
-            ovs2 = self.all_data[keys_point_2[0]]["overlaps"]
-            if original_point_2 not in ovs2:
-                ovs2.append(original_point_2)
-            if original_point_1 not in ovs2:
-                ovs2.append(original_point_1)
+            if original_p1 not in overlaps_p2:
+                overlaps_p2.append(original_p1)
+            if original_p2 not in overlaps_p2:
+                overlaps_p2.append(original_p2)
 
             # for r in self.all_data[keys_point_1[0]]["overlaps_point_id"], self.all_data[keys_point_2[0]]["overlaps_point_id"]:
             #     for p in keys_point_1[0], keys_point_2[0]:
@@ -454,7 +469,7 @@ class ThicknessExtractor:
             # self.all_data[keys_point_2[0]]["overlaps_point_id"].append([keys_point_2[0], keys_point_1[0]])
 
             # if u.compare_points(point1, point2) >= 10E-14:
-            return [point_1, point_2]
+            return [p_1, p_2]
         else:
             return []
 
@@ -462,6 +477,9 @@ class ThicknessExtractor:
         # using pythonic syntax -> dictionarry comprehension
         return dict(filter(lambda x:
                            x[1]["seed_corrected_point_in_image_coordinate"] == point, self.all_data.iteritems()))
+
+    def _filter_all_data_by_index(self, idx_point):
+        return self.all_data[idx_point]
 
     def _set_image_file_by_point(self, point):
         z_coordinate_key = int(point[2])
@@ -632,7 +650,7 @@ def test_intercept():
     assert (np.inf == _intercept(m, point))
 
 
-test_intercept()
+# test_intercept()
 
 
 def _create_polygon_lines_by_contours(contour):
@@ -664,7 +682,7 @@ def test_find_edges_of_polygon_from_contours():
     assert (edge_pairs == edge_pairs_expected)
 
 
-test_find_edges_of_polygon_from_contours()
+# test_find_edges_of_polygon_from_contours()
 
 
 def _get_intersection(line1, line2):
@@ -778,7 +796,7 @@ def _test_get_intersection():
     assert (_get_intersection(line1, line2) == [0.0, 1.0])
 
 
-_test_get_intersection()
+# _test_get_intersection()
 
 
 def _drop_duplications_from_contour(contours):
@@ -819,7 +837,7 @@ def _test_drop_duplications_from_contour():
     assert _drop_duplications_from_contour(c2) == c2_dropped
 
 
-_test_drop_duplications_from_contour()
+# _test_drop_duplications_from_contour()
 
 
 def _check_polygon_inside(line, polygon):
@@ -841,6 +859,9 @@ def _check_polygon_inside(line, polygon):
     a_dists = [tr.get_distance(pp[0], pp[1]) for pp in a_p]
     idx_max = a_dists.index(max(a_dists))
     two_points = a_p[idx_max]
+    # 2nd: Take this another review for the necessity of the below. Noted on 21 July 2020
+#    if two_points[0] == two_points[1]:
+#        return False
     new_ints_line = _create_line(two_points[0], two_points[1])
     if _check_point_in_line(line[0], new_ints_line) and _check_point_in_line(line[1], new_ints_line):
         return True
@@ -1068,4 +1089,4 @@ def test_check_contours_intersect():
     assert (not check_status)
 
 
-test_check_contours_intersect()
+# test_check_contours_intersect()

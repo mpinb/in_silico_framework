@@ -5,6 +5,7 @@ from definitions import ROOT_DIR
 import transformation as tr
 import cloudpickle as pickle
 import numpy as np
+from functools import reduce
 
 
 class SaveData:
@@ -89,15 +90,15 @@ def get_nearest_point(point, points):
 def get_neighbours_of_point(point, points, width=10, dimensions=[0,1,2], indices=False):
 
     neighbours = np.array(points)
-    idx_neighbours = np.where(neighbours)
+    filters = []
 
     if indices:
         for i in dimensions:
-            idx_neighbours = np.where[neighbours[:, i] >= point[i] - width]
-            neighbours = neighbours[idx_neighbours]
-            idx_neighbours = np.where[neighbours[:, i] <= point[i] + width]
-
-        return idx_neighbours.tolist()
+            neighbours_i = np.nonzero(neighbours[:, i] >= point[i] - width)
+            neighbours_j = np.nonzero(neighbours[:, i] <= point[i] + width)
+            neighbours_ij = np.intersect1d(neighbours_i, neighbours_j)
+            filters.append(neighbours_ij)
+        return list(reduce(np.intersect1d, filters))
 
     for i in dimensions:
         neighbours = neighbours[neighbours[:, i] >= point[i] - width]
