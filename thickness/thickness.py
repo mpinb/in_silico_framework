@@ -856,7 +856,9 @@ def _check_polygon_inside(line, polygon):
     if len(a_ints_line) == 2 and a_ints_line[0] == a_ints_line[1]:
         return False
 
-    a_p = [[ints_p1, ints_p2] for ints_p1 in a_ints_line for ints_p2 in a_ints_line]
+    a_p = [[ints_p1, ints_p2] for ints_p1 in a_ints_line for ints_p2 in a_ints_line if ints_p1 != ints_p2]
+    if len(a_p) == 0:
+        return False
     a_dists = [tr.get_distance(pp[0], pp[1]) for pp in a_p]
     idx_max = a_dists.index(max(a_dists))
     two_points = a_p[idx_max]
@@ -1089,7 +1091,7 @@ def test_check_contours_intersect():
     check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
     assert (not check_status)
 
-    # 4rd Error case from actuall data:
+    # 4rd Error case from actual data:
     p1_contour_list_t = [[[3843, 3283], [3922, 3283]],
                          [[3905, 3284], [3909, 3283]],
                          [[3908, 3283], [3908, 3283]],
@@ -1108,7 +1110,7 @@ def test_check_contours_intersect():
     check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
     assert (not check_status)
 
-    # 4rd Error case from actuall data:
+    # 4rd Error case from actual data:
     p1_contour_list_t = [[[3843, 3283], [3922, 3283]],
                          [[3905, 3284], [3909, 3283]],
                          [[3908, 3283], [3908, 3283]],
@@ -1127,4 +1129,28 @@ def test_check_contours_intersect():
     check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
     assert (not check_status)
 
+    # 5rd Error case from actual data:
+    p1_contour_list_t = [[[3380, 2716], [3389, 2716]],
+                         [[3370, 2725], [3388, 2716]],
+                         [[3386, 2717], [3388, 2715]],
+                         [[3387, 2717], [3387, 2715]],
+                         [[3387, 2717], [3387, 2715]],
+                         [[3387, 2716], [3385, 2715]]]
+
+    p2_contour_list_t = [[[3401, 2689], [3407, 2689]],
+                         [[3399, 2691], [3409, 2687]],
+                         [[3399, 2697], [3406, 2686]],
+                         [[3404, 2695], [3404, 2686]],
+                         [[3405, 2691], [3403, 2686]],
+                         [[3406, 2690], [3402, 2688]]]
+
+    p1_contour_list_t = _drop_duplications_from_contour(p1_contour_list_t)
+    p2_contour_list_t = _drop_duplications_from_contour(p2_contour_list_t)
+
+    p1_polygon = _create_polygon_lines_by_contours(p1_contour_list_t)
+    p2_polygon = _create_polygon_lines_by_contours(p2_contour_list_t)
+    # plot_polygons([p1_polygon,p2_polygon])
+
+    check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
+    assert(not check_status)
 # test_check_contours_intersect()
