@@ -877,6 +877,9 @@ def _check_contours_intersect(contour_1, contour_2):
 
     contour_1 = _drop_duplications_from_contour(contour_1)
     contour_2 = _drop_duplications_from_contour(contour_2)
+    
+    if len(contour_1) == 0 or len(contour_2) == 0:
+        return False
 
     polygon_lines_1 = _create_polygon_lines_by_contours(contour_1)
     polygon_lines_2 = _create_polygon_lines_by_contours(contour_2)
