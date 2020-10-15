@@ -428,14 +428,17 @@ class ThicknessExtractor:
         # start = time.time()
         check_bool = _check_contours_intersect(contour_list_p1, contour_list_p2)
 
+        # if check_bool:
         # if seed_corrected_p1 == seed_corrected_p2 or original_p1 == original_p2:
-        #     check_bool = True
+        #     check_bool2 = True
         # else:
-        #     check_bool = _check_circle_overlap([seed_corrected_p1, min_thickness_p1 / 2.0],
+        #     check_bool2 = _check_circle_overlap([seed_corrected_p1, min_thickness_p1 / 2.0],
         #                                               [seed_corrected_p2, min_thickness_p2 / 2.0])
+
         # if not check_bool and check_circle_bool:
         #     print "contours overlap:", check_bool
         #     print "circular overlap:", check_circle_bool
+       
         # end = time.time()
         # print "time check for overlap:" + str(end - start)
 
@@ -877,7 +880,7 @@ def _check_contours_intersect(contour_1, contour_2):
 
     contour_1 = _drop_duplications_from_contour(contour_1)
     contour_2 = _drop_duplications_from_contour(contour_2)
-    
+
     if len(contour_1) == 0 or len(contour_2) == 0:
         return False
 
@@ -1155,5 +1158,5 @@ def test_check_contours_intersect():
     # plot_polygons([p1_polygon,p2_polygon])
 
     check_status = _check_contours_intersect(p1_contour_list_t, p2_contour_list_t)
-    assert(not check_status)
+    assert (not check_status)
 # test_check_contours_intersect()

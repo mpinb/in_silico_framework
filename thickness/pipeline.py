@@ -211,6 +211,13 @@ class ExtractThicknessPipeline:
         data_table = self._compute_all_data_table()
         return data_table
 
+    def _example_1(self):
+        self._initialize_project()
+        self._setup_slice_objects()
+        self._transform_points()
+        self._write_am_outputs()
+        return "finished"
+
     def _initialize_project(self):
         print "---- initialize project ----"
         if self.output_folder is None:
@@ -340,17 +347,17 @@ class ExtractThicknessPipeline:
                                                  if len(thicknesses_in_threshold) ==
                                                  len(self.all_thicknesses.values()[0])])
 
-    def _write_am_outputs(self):
+    def _write_am_outputs(self, thickness=True):
         print "---- write am outputs ----"
         s = self
         for threshold in s.thresholds_list:
             for slice_name in sorted(s.all_slices[threshold]):
-                ### urgendt todo: update of thickness list should not be done here1!!!!
+                # urgent todo: update of thickness list should not be done here1!!!!
                 slice_object = s.all_slices[threshold][slice_name]
-                slice_object.am_object.add_data("POINT { float thickness }",
-                                                [[thickness]
-                                                 for thickness
-                                                 in slice_object.slice_thicknesses_object.thickness_list])
+                if thickness:
+                    slice_object.am_object.add_data("POINT { float thickness }",
+                                                    [[thickness] for thickness
+                                                     in slice_object.slice_thicknesses_object.thickness_list])
                 slice_object.am_object.write()
                 # slice_object.write_output(slice_object.am_points)
 
