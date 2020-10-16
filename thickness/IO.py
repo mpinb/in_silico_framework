@@ -116,13 +116,16 @@ class Am:
                     line = line.strip()
                     line = line.split(' ')
                     vector = [float(l.strip()) for l in line if l]
-            for i in range(4):
-                for j in range(4):
-                    k = j + i * 4
-                    row.append(vector[k])
-                matrix.append(row)
-                row = []
-            self.transformation_matrix = np.array(matrix).T
+            if len(vector) != 0:
+                for i in range(4):
+                    for j in range(4):
+                        k = j + i * 4
+                        row.append(vector[k])
+                    matrix.append(row)
+                    row = []
+                self.transformation_matrix = np.array(matrix).T
+            else:
+                self.transformation_matrix = np.identity(4)
 
     def _read_transformation_matrix_by_am(self):
         """

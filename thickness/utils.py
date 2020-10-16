@@ -5,6 +5,7 @@ from definitions import ROOT_DIR
 import transformation as tr
 import cloudpickle as pickle
 import numpy as np
+import IO
 from functools import reduce
 
 
@@ -87,8 +88,7 @@ def get_nearest_point(point, points):
     return nearest_point
 
 
-def get_neighbours_of_point(point, points, width=10, dimensions=[0,1,2], indices=False):
-
+def get_neighbours_of_point(point, points, width=10, dimensions=[0, 1, 2], indices=False):
     neighbours = np.array(points)
     filters = []
 
@@ -168,3 +168,34 @@ def check_z_difference(point1, point2, delta_z=0.1):
         return True
     else:
         return False
+
+
+def read_spatial_points(input_path, input_hx_path, output_path=None, file_format='am', get_tr_obj=False):
+    if file_format == "am":
+        points_object = IO.Am(input_path, output_path, input_hx_path)
+        points = points_object.all_data["POINT { float[3] EdgePointCoordinates }"]
+        if points_object.transformation_matrix_exist:
+            tr_object = tr.AffineTransformation()
+            tr_object.set_transformation_matrix(points_object.transformation_matrix)
+            points_transformed = tr_object.transform_points(points)
+        else:
+            points_transformed = points
+    else:
+        return "Not implemented"
+    if get_tr_obj:
+        return tr_object
+    else:
+        return points_transformed
+
+
+import pandas as pd
+
+
+def filter_table_by(data_table, point):
+    new_table = data_table[
+        data_table[['x_slice', 'y_slice', 'z_slice']].apply(lambda x: [x[0], x[1], x[2]] == point, axis=1)]
+    if len(new_table) != 0:
+        return new_table
+    not_det_table = pd.DataFrame()
+    not_det_table['segment_id'] = ['Not determined']
+    return not_det_table
