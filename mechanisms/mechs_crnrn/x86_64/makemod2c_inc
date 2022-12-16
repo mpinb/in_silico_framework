@@ -1,0 +1,192 @@
+./ampa.cpp: ../ampa.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "ampa.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./ampa.o: ./ampa.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./CaDynamics_E2.cpp: ../CaDynamics_E2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "CaDynamics_E2.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./CaDynamics_E2.o: ./CaDynamics_E2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./CaDynamics_E2_v2.cpp: ../CaDynamics_E2_v2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "CaDynamics_E2_v2.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./CaDynamics_E2_v2.o: ./CaDynamics_E2_v2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./Ca_HVA.cpp: ../Ca_HVA.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Ca_HVA.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./Ca_HVA.o: ./Ca_HVA.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./Ca_LVAst.cpp: ../Ca_LVAst.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Ca_LVAst.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./Ca_LVAst.o: ./Ca_LVAst.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./epsp.cpp: ../epsp.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "epsp.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./epsp.o: ./epsp.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./gsyn.cpp: ../gsyn.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "gsyn.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./gsyn.o: ./gsyn.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./Ih.cpp: ../Ih.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Ih.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./Ih.o: ./Ih.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./Im.cpp: ../Im.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Im.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./Im.o: ./Im.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./k2syn.cpp: ../k2syn.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "k2syn.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./k2syn.o: ./k2syn.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./K_Pst.cpp: ../K_Pst.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "K_Pst.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./K_Pst.o: ./K_Pst.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./K_Tst.cpp: ../K_Tst.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "K_Tst.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./K_Tst.o: ./K_Tst.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./Nap_Et2.cpp: ../Nap_Et2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "Nap_Et2.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./Nap_Et2.o: ./Nap_Et2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./NaTa_t.cpp: ../NaTa_t.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "NaTa_t.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./NaTa_t.o: ./NaTa_t.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./NaTg.cpp: ../NaTg.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "NaTg.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./NaTg.o: ./NaTg.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./NaTs2_t.cpp: ../NaTs2_t.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "NaTs2_t.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./NaTs2_t.o: ./NaTs2_t.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./netgaba.cpp: ../netgaba.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "netgaba.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./netgaba.o: ./netgaba.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./netglutamate.cpp: ../netglutamate.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "netglutamate.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./netglutamate.o: ./netglutamate.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./nmda2.cpp: ../nmda2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "nmda2.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./nmda2.o: ./nmda2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./nmda2_schiller.cpp: ../nmda2_schiller.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "nmda2_schiller.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./nmda2_schiller.o: ./nmda2_schiller.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./SK_E2.cpp: ../SK_E2.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "SK_E2.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./SK_E2.o: ./SK_E2.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./SKv3_1_copy.cpp: ../SKv3_1_copy.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "SKv3_1_copy.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./SKv3_1_copy.o: ./SKv3_1_copy.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./SKv3_1.cpp: ../SKv3_1.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "SKv3_1.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./SKv3_1.o: ./SKv3_1.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
+./vecevent.cpp: ../vecevent.mod
+	@printf " -> $(C_GREEN)NMODL$(C_RESET) $<\\n"
+	(cd "..";  MODLUNIT=$(NRNUNITS) $(NOCMODL) "vecevent.mod" -o "/gpfs/soma_fs/scratch/saka/project_src/in_silico_framework/mechanisms/channels_py3_wip/x86_64")
+
+./vecevent.o: ./vecevent.cpp
+	@printf " -> $(C_GREEN)Compiling$(C_RESET) $<\\n"
+	$(CXXCOMPILE) -I".." $(INCLUDES) -fPIC -c $< -o $@
+
