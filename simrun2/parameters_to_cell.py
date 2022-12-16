@@ -18,7 +18,7 @@ from .utils import *
 def parameters_to_cell(neuronParam, networkParam, synfile = None,\
                      dirPrefix = '', tStop = 345.0, scale_apical = scale_apical, \
                      range_vars = None, allPoints=False, \
-                     cell = None, evokedNW = None):
+                     cell = None, evokedNW = None, coreneuron=True):
     
     neuronParam = load_param_file_if_path_is_provided(neuronParam)
     networkParam = load_param_file_if_path_is_provided(networkParam)
@@ -45,5 +45,10 @@ def parameters_to_cell(neuronParam, networkParam, synfile = None,\
     tVec = h.Vector()
     tVec.record(h._ref_t)
     cell.t = tVec
-    scp.init_neuron_run(neuronParam.sim, vardt=False) #trigger the actual simulation
-    return cell, evokedNW
+    
+    if coreneuron:
+        scp.init_neuron_run(neuronParam.sim, vardt=False, coreneuron=True)
+    else: 
+        scp.init_neuron_run(neuronParam.sim, vardt=False) #trigger the actual simulation
+                       
+    return cell, evokedNWs

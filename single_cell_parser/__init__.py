@@ -107,7 +107,7 @@ def create_cell(parameters, scaleFunc=None, allPoints=False, setUpBiophysics = T
     parser.cell.neuronParam = parameters
     return parser.cell
 
-def init_neuron_run(simparam, vardt=False, *events):
+def init_neuron_run(simparam, vardt=False, *events, coreneuron=False):
     '''
     Default NEURON run with inital parameters
     according to parameter file.
@@ -148,8 +148,22 @@ def init_neuron_run(simparam, vardt=False, *events):
     neuron.h('init()')
 #    neuron.h('run()')
 #    neuron.h.finitialize(simparam.Vinit)
-    neuron.run(simparam.tStop)
+    if coreneuron:
+        cvode.cache_efficient(1)
 
+        pc = neuron.h.ParallelContext()
+        pc.set_maxstep(10)
+
+        # neuron.h.stdinit()
+        from neuron import coreneuron
+        coreneuron.enable=True
+
+        pc.psolve(simparam.tStop)
+
+    else: 
+        neuron.run(simparam.tStop)
+
+   
 def sec_distance_to_soma(currentSec):
     '''compute path length from sec(x=0) to soma'''
     parentSec = currentSec.parent

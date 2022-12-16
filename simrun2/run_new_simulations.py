@@ -106,6 +106,7 @@ def _evoked_activity(cellParamName, evokedUpParamName, dirPrefix = '', \
         tVec = h.Vector()
         tVec.record(h._ref_t)
         startTime = time.time()
+       # scp.init_neuron_run(neuronParameters.sim, vardt=False, coreneuron=True) #trigger the actual simulation
         scp.init_neuron_run(neuronParameters.sim, vardt=False) #trigger the actual simulation
         stopTime = time.time()
         simdt = stopTime - startTime
