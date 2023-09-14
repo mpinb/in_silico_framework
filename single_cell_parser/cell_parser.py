@@ -357,7 +357,101 @@ class CellParser(object):
                         for s in paramStrings:
                             s = '.'.join(('seg',mechName,s))
                             exec(s)
-            
+                            
+            # exponential distribution in the apical dendrite based on the distance by z
+            elif mech.spatial == 'exponential_by_z_dist':
+                ''' spatially exponential distribution:
+                f(x) = offset + linScale*exp(_lambda*(x-xOffset))'''
+                maxDist = self.cell.max_distance(label)
+    #                set origin to 0 of first branch with this label
+                if label == 'Soma':
+                    silent = h.distance(0, 0.0, sec=self.cell.soma)
+                else:
+                    for sec in self.cell.sections:
+                        if sec.label != label:
+                            continue
+                        if sec.parent.label == 'Soma':
+                            silent = h.distance(0, 0.0, sec=sec)
+                            break
+                relDistance = False
+                if mech['distance'] == 'relative':
+                    relDistance = True
+                offset = mech['offset']
+                linScale = mech['linScale']
+                _lambda = mech['_lambda']
+                xOffset = mech['xOffset']
+                for sec in self.cell.structures[label]:
+                    sec.insert(mechName)
+                    if label == 'ApicalDendrite':
+                        relPts_list = sec.relPts
+                        mid_soma = int(self.cell.soma.nrOfPts/2)
+                        z_distance_per_relPts = [sec.pts[i][2] - self.cell.soma.pts[mid_soma][2] for i in range(len(relPts_list))]
+                    for seg in sec:
+                        paramStrings = []
+                        for param in list(mech.keys()):
+                            if param == 'spatial' or param == 'distance' or param == 'offset'\
+                            or param == 'linScale' or param == '_lambda' or param == 'xOffset':
+                                continue
+                            if label == 'ApicalDendrite':
+                                dist = np.interp(seg.x, relPts_list, z_distance_per_relPts)
+                            else:
+                                dist = h.distance(seg.x, sec=sec)
+                            if relDistance:
+                                dist = dist/maxDist
+                            if not relDistance:
+                                dist = dist/1000
+                            rangeVarVal = mech[param]*(offset + linScale*np.exp(_lambda*(dist - xOffset)))
+                            s = param + '=' + str(rangeVarVal)
+                            paramStrings.append(s)
+                        for s in paramStrings:
+                            s = '.'.join(('seg',mechName,s))
+                            exec(s)
+
+            elif mech.spatial == 'capped_exponential':
+                ''' spatially exponential distribution until a maximum conductance, then uniform:
+                exponential function: f(x) = offset + linScale*exp(_lambda*(x-xOffset))'''
+                maxDist = self.cell.max_distance(label)
+#                set origin to 0 of first branch with this label
+                if label == 'Soma':
+                    silent = h.distance(0, 0.0, sec=self.cell.soma)
+                else:
+                    for sec in self.cell.sections:
+                        if sec.label != label:
+                            continue
+                        if sec.parent.label == 'Soma':
+                            silent = h.distance(0, 0.0, sec=sec)
+                            break
+                relDistance = False
+                if mech['distance'] == 'relative':
+                    relDistance = True
+                offset = mech['offset']
+                linScale = mech['linScale']
+                _lambda = mech['_lambda']
+                xOffset = mech['xOffset']
+                max_g = mech['max_g']
+                for sec in self.cell.structures[label]:
+                    sec.insert(mechName)
+                    for seg in sec:
+                        paramStrings = []
+                        for param in list(mech.keys()):
+                            if param == 'spatial' or param == 'distance' or param == 'offset' or param == 'max_g'\
+                            or param == 'linScale' or param == '_lambda' or param == 'xOffset':
+                                continue
+                            dist = h.distance(seg.x, sec=sec)
+                            if relDistance:
+                                dist = dist/maxDist
+                            rangeVarVal = mech[param]*(offset + linScale*np.exp(_lambda*(dist - xOffset)))
+                            if rangeVarVal < max_g:
+                                s = param + '=' + str(rangeVarVal)
+                                paramStrings.append(s)
+                            elif rangeVarVal >= max_g:
+                                s = param + '=' + str(max_g)
+                                paramStrings.append(s)
+                                print('reached_maxg')
+                        for s in paramStrings:
+                            s = '.'.join(('seg',mechName,s))
+                            exec(s)
+
             elif mech.spatial == 'sigmoid':
                 ''' spatially sigmoid distribution:
                 f(x) = offset + linScale/(1+exp((x-xOffset)/width))'''
