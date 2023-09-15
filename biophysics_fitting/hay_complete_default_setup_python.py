@@ -73,6 +73,9 @@ def interpolate_vt(voltage_trace_):
         t_new = np.arange(0, max(t), 0.025)
         vList_new = [np.interp(t_new, t, v) for v in voltage_trace_[k]['vList']] # I.np.interp
         out[k] = {'tVec': t_new, 'vList': vList_new}
+        if 'iList' in voltage_trace_[k]:
+            iList_new = [np.interp(t_new, t, i) for i in voltage_trace_[k]['iList']]
+            out[k] = {'tVec': t_new, 'vList': vList_new, 'iList': iList_new}  
     return out
 
 def map_truefalse_to_str(dict_):
