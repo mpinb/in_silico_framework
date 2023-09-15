@@ -32,7 +32,8 @@ def save_result(mdb_run, features, objectives):
     current_key = get_max_generation(mdb_run) + 1
     mdb_run.setitem(str(current_key), 
                     I.pd.concat([objectives, features], axis = 1), 
-                    dumper = I.dumper_pandas_to_msgpack)
+#                     dumper = I.dumper_pandas_to_msgpack)
+                    dumper = I.dumper_pandas_to_parquet)
 
 def setup_mdb_run(mdb_setup, run):
     '''mdb_setup contains a sub mdb for each run of the full optimization. This sub mdb is created here'''
@@ -99,6 +100,11 @@ def get_mymap(mdb_setup, mdb_run, c):
         combined_objectives_dict = list(map(combiner.combine, features_dicts))
         combined_objectives_lists = [[d[n] for n in combiner.setup.names] 
                                      for d in combined_objectives_dict]
+        # to label a "good" model
+        all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
+        if any(all_err_below_3):
+            mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
+            
         return numpy.array(combined_objectives_lists)
     return mymap
 
@@ -296,6 +302,10 @@ def eaAlphaMuPlusLambdaCheckpoint(
             mdb_run.setitem('{}_checkpoint'.format(gen), cp, dumper = I.dumper_to_pickle)
             #pickle.dump(cp, open(cp_filename, "wb"))
             #logger.debug('Wrote checkpoint to %s', cp_filename)
+            
+            
+        if 'satisfactory' in mdb.keys():
+                break
 
     return population #, logbook, history
 
