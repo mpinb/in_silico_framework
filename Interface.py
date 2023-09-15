@@ -109,6 +109,7 @@ from model_data_base.IO.LoaderDumper import numpy_to_npz as dumper_numpy_to_npz
 from model_data_base.IO.LoaderDumper import numpy_to_msgpack as dumper_numpy_to_msgpack
 from model_data_base.IO.LoaderDumper import pandas_to_pickle as dumper_pandas_to_pickle
 from model_data_base.IO.LoaderDumper import pandas_to_msgpack as dumper_pandas_to_msgpack
+from model_data_base.IO.LoaderDumper import pandas_to_parquet as dumper_pandas_to_parquet
 from model_data_base.IO.LoaderDumper import dask_to_msgpack as dumper_dask_to_msgpack
 from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack as dumper_dask_to_categorized_msgpack
 from model_data_base.IO.LoaderDumper import cell as dumper_cell
@@ -140,7 +141,6 @@ from model_data_base.utils import select, pandas_to_array, pooled_std
 from model_data_base.utils import skit, chunkIt
 from model_data_base.utils import cache
 from model_data_base import utils
-
 from model_data_base.model_data_base_register import get_mdb_by_unique_id
 from model_data_base.model_data_base_register import assimilate_remote_register
 from model_data_base.mdbopen import resolve_mdb_path, create_mdb_path
