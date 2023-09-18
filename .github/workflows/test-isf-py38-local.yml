@@ -6,8 +6,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: '*'
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]  # It already automatically runs on push, no need for a second trigger
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -19,7 +19,7 @@ jobs:
     defaults:
       run:
         shell: bash -l {0}
-    name: Py3.8 (local) build/test
+    name: ISF Py3.8 (local) build/test
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

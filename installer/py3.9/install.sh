@@ -140,14 +140,14 @@ python $SCRIPT_DIR/patch_dask_linux64.py
 echo "Dask library patched."
 
 # -------------------- 5. Patching pandas-msgpack -------------------- #
-print_title "5/6. Patching pandas-msgpack"
-PD_MSGPACK_HOME="$SCRIPT_DIR/pandas-msgpack"
-if [ ! -r "${PD_MSGPACK_HOME}" ]; then
-    git clone https://github.com/abast/pandas-msgpack.git
-fi
-git -C pandas-msgpack apply $SCRIPT_DIR/pandas_msgpack.patch
-cd $PD_MSGPACK_HOME; python setup.py build_ext --inplace --force install
-pip list | grep pandas
+# print_title "5/6. Patching pandas-msgpack"
+# PD_MSGPACK_HOME="$SCRIPT_DIR/pandas-msgpack"
+# if [ ! -r "${PD_MSGPACK_HOME}" ]; then
+#     git clone https://github.com/abast/pandas-msgpack.git
+# fi
+# git -C pandas-msgpack apply $SCRIPT_DIR/pandas_msgpack.patch
+# cd $PD_MSGPACK_HOME; python setup.py build_ext --inplace --force install
+# pip list | grep pandas
 
 # -------------------- 6. Compiling NEURON mechanisms -------------------- #
 print_title "6/6. Compiling NEURON mechanisms"
