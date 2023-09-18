@@ -3,7 +3,6 @@ import hashlib
 import numpy as np
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 import six
 if six.PY3:
     from multiprocessing import shared_memory

@@ -1,4 +1,0 @@
-- config: {host: spock, port: 8885, socket_timeout: 1}
-  type: redis
-- config: {host: localhost, port: 6379, socket_timeout: 1}
-  type: redis

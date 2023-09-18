@@ -1,0 +1,52 @@
+# Installation of in-silico-framework followed by CI tests.
+name: ISF Py3.9 (github) build/test
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    name: Py3.9 (github) build/test
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      # Install Anaconda3 and update conda package manager
+      - name: Download, install & build ISF for Python 3.9
+        run: |
+          CONDA_TARGET_DIR="$(pwd)/anaconda_isf3"
+          if [ -d "$CONDA_TARGET_DIR" ]; then
+            echo "Found existing installation in $HOME. Removing previous Anaconda installation..."
+            rm -r "$CONDA_TARGET_DIR"
+          else
+            echo "No previous Anaconda installation found. Continuing..."
+          fi
+          pushd .
+          cd installer/py3.9
+          ./install.sh $CONDA_TARGET_DIR || exit 1
+          popd
+          source $CONDA_TARGET_DIR/bin/activate
+          conda list
+      # Run in-silico-framework tests
+      - name: Test in-silico-framework
+        run: |
+          CONDA_TARGET_DIR="$(pwd)/anaconda_isf3"
+          source $CONDA_TARGET_DIR/bin/activate;
+          echo "Using Python: $(which python)"
+          export PYTHONPATH=$(pwd)
+          dask-scheduler --port=38786 --dashboard-address=38787 &
+          dask-worker localhost:38786 --nthreads 1 --nprocs 4 --memory-limit=100e15 &
+          pytest -rsx -vv --color=yes --cov-report xml:tests/coverage_reports/report_py3.xml --cov=. tests
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./tests/coverage_reports/report_py3.xml
+          verbose: true # optional (default = false)
+        

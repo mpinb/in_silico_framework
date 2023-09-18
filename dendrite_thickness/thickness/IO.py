@@ -37,11 +37,6 @@ each transformation for each file.) and the path files of the each slice.
 Limitations:
 - To read the transformations of each slice, it needs to connect to Amira.
 
-Tests
------
-
-- The test functions are inside the test.py. One can also use them as example of how to use the functions.
-
 """
 import re
 import os
@@ -191,9 +186,6 @@ class Am:
         self.commands[cs] = '@' + str(max_command + 1)
         self.all_data[cs] = data
         self._commands_order.append(cs)
-
-
-
 
 
 class Hoc:

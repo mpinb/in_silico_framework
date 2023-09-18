@@ -1,5 +1,0 @@
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this file>
-# platform: linux-64
-@EXPLICIT
-#https://repo.anaconda.com/pkgs/free/linux-64/git-2.11.1-0.tar.bz2

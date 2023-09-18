@@ -552,7 +552,7 @@ def _get_spatiotemporal_input(mdb, key, group):
     (trial, time, space)'''      
     keys = get_sorted_keys_by_group(mdb, key, group)
     out = [mdb[key][k] for k in keys]
-    print keys
+    print(keys)
     return out
 
 def get_spatiotemporal_inputs_from_biophysical_simulation(model, ntrials):
@@ -755,7 +755,7 @@ def reduced_model_network(model, out_mdb = None, rm = None, n_cells = 150, timeb
         WNI_boundary -= min(WNI_boundary)
 
     # APPLY THE REDUCED MODEL
-    print 'running reduced model network...'
+    print('running reduced model network...')
 
     WNI_df = I.pd.DataFrame(index = range(n_cells), columns = range(timebins)) # dataframe for recording WNI values for later reference
 

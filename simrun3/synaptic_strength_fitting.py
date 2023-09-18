@@ -12,7 +12,6 @@ from .get_cell_with_network import get_cell_with_network
 from biophysics_fitting.hay_evaluation import objectives_BAC, objectives_step
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 
 ###############################
 # First part: class to manage synaptic strength fitting

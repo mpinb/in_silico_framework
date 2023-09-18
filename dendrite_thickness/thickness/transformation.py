@@ -13,12 +13,6 @@ Capabilities:
 Limitations:
 -----------
 
-
-Tests
------
-
-- The test functions are inside the test.py. One can also use them as example of how to use the functions.
-
 """
 from . import IO
 import numpy as np

@@ -127,7 +127,7 @@ class LinkedViewsServer:
 
     def start(self, port=5000):                        
         if(self.thread is not None):
-            print(f"server already running at port {self.port}")
+            print("server already running at port {}".format(self.port))
             return        
         try:
             self.app = Flask(__name__)       
@@ -144,7 +144,7 @@ class LinkedViewsServer:
 
         self.thread = threading.Thread(target=_start)      
         self.thread.start()
-        print(f"server is running at port {self.port}")
+        print("server is running at port {}".format(self.port))
         self.start_logging()
         print("set data:        server.set_data(vaex_df)")
         print("stop server:     server.stop()")
@@ -155,7 +155,7 @@ class LinkedViewsServer:
             print("server is not running")
             return
 
-        print(f"Stopping server. If operation does not terminate, try to repeatedly reopen http://127.0.0.1:{self.port} in the browser.")
+        print("Stopping server. If operation does not terminate, try to repeatedly reopen http://127.0.0.1:{} in the browser.".format(self.port))
         self.stop_logging()
         self.server.shutdown()                
         self.thread.join()
@@ -165,7 +165,7 @@ class LinkedViewsServer:
     def start_logging(self):
         tmp_folder = Path(tempfile.gettempdir())
         log_filename = tmp_folder/"linked-views-server.log"
-        print(f"logs are written to {log_filename}")
+        print("logs are written to {}".format(log_filename))
         self.logfile_handler = logging.handlers.RotatingFileHandler(
             filename=log_filename,
             mode='w',
@@ -202,9 +202,9 @@ class LinkedViewsServer:
 
     def index(self):
         if(self.vaex_df):
-            return f"vaex df columns: {[name for name in list(self.vaex_df.columns)]}"
+            return "vaex df columns: {}".format([name for name in list(self.vaex_df.columns)])
         else:
-            return f"Tables: {[name for name in self.tables.keys()]}"
+            return "Tables: {}".format([name for name in self.tables.keys()])
 
 
     """
@@ -237,7 +237,7 @@ class LinkedViewsServer:
 
     def add_session(self, sessionData, name=None):
         if(name is None):
-            name = f"session-{len(self.objects)+1}"
+            name = "session-{}".format(len(self.objects)+1)
         sessionData["name"] = name
         self.objects.append(sessionData)
         return name 
@@ -500,7 +500,7 @@ class LinkedViewsServer:
         if(df_selected_indices is None):
             return "no selection"
         else:
-            return f"number of selected rows: {df_selected_indices.shape[0]}"
+            return "number of selected rows: {}".format(df_selected_indices.shape[0])
 
 
 
@@ -514,7 +514,7 @@ if __name__ == "__main__":
         pca = vaex.ml.PCA(features=columns, n_components=n_components)    
         df_transformed = pca.fit_transform(df)
         for component_idx in range(0, n_components):
-            df_transformed.rename(f"PCA_{component_idx}", f"{descriptor}-{component_idx+1}")
+            df_transformed.rename("PCA_{}".format(component_idx), "{}-{}".format(descriptor, component_idx+1))
         return df_transformed
 
     #data_folder = "/scratch/visual/bzfharth/in-silico-install-dir/project_src/in_silico_framework/getting_started/linked-views-example-data/backend_data_2023-06-22"

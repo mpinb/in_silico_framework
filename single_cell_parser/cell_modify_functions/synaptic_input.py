@@ -2,7 +2,6 @@ import warnings
 import single_cell_parser as scp
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 errstr = "The cell_modify_function synaptic_input is experimental! Make sure synapses "
 errstr += "are beeing activated as you expect and have the effect you expect!"
 

@@ -147,17 +147,10 @@ def extract_pt3add(line, selfcheck = False):
             raise ValueError("Can't reproduce input %s, result would be %s" %(line, construct_pt3add(values)))
     return values
 
-def test_pt3add():
-    teststr = "{pt3dadd(-191.183289, 445.022980, -402.017792, 0.450000)}\n"
-    assert(teststr == construct_pt3add(extract_pt3add(teststr)))
-
 def transform_point(p,x,y,z, coordinate_system = None):
     x_, y_, z_ = get_xyz(coordinate_system)
     return np.array(p)+x*x_+y*y_+z*z_
 
-def test_transform_point():
-    assert((transform_point(transform_point([0,0,0], 1, 0, 0, 'C2'), -1, 0, 0, 'C2') == [0,0,0]).all())
-    
 def get_soma_centroid(hocpath):
     from model_data_base.utils import silence_stdout
     source_soma_points = get_cell_object_from_hoc(hocpath).soma.pts
@@ -188,22 +181,6 @@ def move_hoc_xyz(hocpath, x,y,z, outpath = None, coordinate_system = 'D2'):
             os.makedirs(os.path.dirname(outpath))
         with open(outpath, 'w') as f:
             f.writelines(out)
-
-def test_move_hoc_xyz():
-    import getting_started
-    import single_cell_parser as scp
-    hocpath = scp.build_parameters(getting_started.neuronParam).neuron.filename
-    with utils.mkdtemp() as d:
-        centroid =  get_soma_centroid(hocpath) 
-        outpath1 = os.path.join(d, 'hoc.hoc') 
-        outpath2 = os.path.join(d, 'hoc2.hoc') 
-        move_hoc_xyz(hocpath, 1,2,3, outpath1, 'D2')
-        move_hoc_xyz(outpath1, -1,-2,-3, outpath2, 'D2')
-        centroid2 = get_soma_centroid(outpath2) 
-        np.testing.assert_almost_equal(centroid, centroid2)
-        move_hoc_xyz(outpath1, -1,-2,-3, outpath2, 'C2')
-        centroid2 = get_soma_centroid(outpath2)
-        assert((centroid != centroid2).all())
         
 def move_hoc_absolute(hocpath, x,y,z, outpath = None):
     '''moves hoc morphology such that soma centroid is at absolute position x,y,z.
@@ -214,33 +191,11 @@ def move_hoc_absolute(hocpath, x,y,z, outpath = None):
     x,y,z = np.array([x,y,z]) - get_soma_centroid(hocpath)
     move_hoc_xyz(hocpath, x,y,z, outpath = outpath, coordinate_system='D2')
 
-def test_move_hoc_absolute():
-    import getting_started
-    import single_cell_parser as scp
-    hocpath = scp.build_parameters(getting_started.neuronParam).neuron.filename
-    with utils.mkdtemp() as d:
-        outpath = os.path.join(d, 'hoc.hoc') 
-        move_hoc_absolute(hocpath, 0,0,0, outpath = outpath)
-        np.testing.assert_array_almost_equal(get_soma_centroid(outpath), [0,0,0])
-
 def move_hoc_to_hoc(hoc_in, hoc_reference, outpath = None, ):
     centroid_in = get_soma_centroid(hoc_in)
     centroid_reference = get_soma_centroid(hoc_reference)
     x,y,z = centroid_reference - centroid_in
     move_hoc_xyz(hoc_in, x,y,z, outpath = outpath, coordinate_system='D2')
-
-def test_move_hoc_to_hoc():
-    import getting_started
-    import single_cell_parser as scp  
-    hocpath = scp.build_parameters(getting_started.neuronParam).neuron.filename
-    with utils.mkdtemp() as d:
-        outpath1 = os.path.join(d, 'hoc.hoc') 
-        move_hoc_xyz(hocpath, 1,2,3, outpath1, 'C2')
-        outpath2 = os.path.join(d, 'hoc2.hoc') 
-        move_hoc_to_hoc(hoc_in = hocpath, hoc_reference = outpath1, outpath = outpath2)
-        centroid1 =  get_soma_centroid(outpath1) 
-        centroid2 =  get_soma_centroid(outpath2) 
-        np.testing.assert_almost_equal(centroid1, centroid2)
 
 @utils.cache
 def get_xyz(column):
@@ -267,16 +222,6 @@ def get_distance_below_L45_barrel_surface(p, barrel = 'C2'):
     three_points = edge_points[edge_points.label == barrel].drop('label', axis = 1).iloc[[0,10,20]].values.tolist()
     return get_distance_from_plane(*(three_points + [p]))[-1]
 
-def test_get_distance_below_L45_barrel_surface():
-    np.testing.assert_almost_equal(get_distance_below_L45_barrel_surface(barrel_center_points.loc['C2'],
-                                                                         barrel = 'C2'), 
-                                   0, 
-                                   decimal = 3)
-    np.testing.assert_almost_equal(get_distance_below_L45_barrel_surface(barrel_center_points.loc['D2'],
-                                                                         barrel = 'D2'), 
-                                   0, 
-                                   decimal = 3)
-
 
 def get_distance_below_L45_surface(p):
     '''surface is interpolated from barrel center points'''
@@ -284,12 +229,6 @@ def get_distance_below_L45_surface(p):
     three_nearest_points = barrel_center_points.apply(lambda x: calculate_point_distance(x.values, p),axis = 1).sort_values().index[:3].values
     three_nearest_points = barrel_center_points.loc[three_nearest_points].values.tolist()
     return get_distance_from_plane(*(three_nearest_points + [p]))[-1]
-
-def test_get_distance_below_L45_surface():
-    np.testing.assert_almost_equal(get_distance_below_L45_surface(barrel_center_points.loc['C2']), 0)
-    np.testing.assert_almost_equal(get_distance_below_L45_surface(barrel_center_points.loc['D2']), 0)
-#test_get_distance_below_L45_barrel_surface()
-#test_get_distance_below_L45_surface()
 
 def get_z_coordinate_necessary_to_put_point_in_specified_depth(p, depth, 
                            coordinate_system_z_move = 'C2',
@@ -323,28 +262,6 @@ def correct_hoc_depth(hoc_in, hoc_reference_or_depth,
                                       measure_fun = measure_fun)
     move_hoc_xyz(hoc_in, 0,0,z, outpath = outpath, coordinate_system = coordinate_system_z_move)
 
-def test_correct_hoc_depth():
-    import getting_started
-    import single_cell_parser as scp
-    hocpath = scp.build_parameters(getting_started.neuronParam).neuron.filename
-    with utils.mkdtemp() as d:
-        outpath = os.path.join(d, 'hoc.hoc') 
-        measure_fun = partial(get_distance_below_L45_barrel_surface, barrel = 'C2')
-        correct_hoc_depth(hoc_in = hocpath, hoc_reference_or_depth = 0, coordinate_system_z_move = 'C2', 
-                          measure_fun = measure_fun, 
-                          outpath = outpath)
-        centroid = get_soma_centroid(outpath)
-        depth = measure_fun(centroid)
-        np.testing.assert_almost_equal(depth, 0, decimal = 5)
-
-        outpath2 = os.path.join(d, 'hoc2.hoc') 
-        correct_hoc_depth(hoc_in = hocpath, hoc_reference_or_depth = 0, coordinate_system_z_move = 'D2', 
-                          measure_fun = measure_fun, 
-                          outpath = outpath2)
-        centroid2 = get_soma_centroid(outpath2)
-        depth2 = measure_fun(centroid2)
-        np.testing.assert_almost_equal(depth, 0, decimal = 5)
-        assert((centroid != centroid2).all())
         
 def get_3x3_C2_soma_centroids():
     return {'B1border': [-201.46530018181818, 470.56739184090895, -386.4753397045454],

@@ -8,7 +8,7 @@ import distributed
 import pytest
 from biophysics_fitting import hay_complete_default_setup, L5tt_parameter_setup
 from biophysics_fitting.parameters import param_to_kwargs
-from biophysics_fitting.optimizer import start_run
+from biophysics_fitting.optimizer import start_run, get_max_generation
 
 
 # class FakeFuture():
@@ -216,7 +216,11 @@ def get_features():
 #      'sAHPt3': 2.2630559405104367}
 #     return features
 
-
+def test_get_max_generation():
+    assert(get_max_generation({'0': 1}) == 0)
+    assert(get_max_generation({'0': 1, '10': 2}) == 10)
+    assert(get_max_generation({'0': 1, 10: 2}) == 10)
+    assert(get_max_generation({'3': 1, '10_ckeckpoint': 2}) == 3)
 
 #@decorators.testlevel(2)    
 def test_mini_optimization_run(capsys):

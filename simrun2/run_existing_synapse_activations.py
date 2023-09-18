@@ -22,7 +22,6 @@ import socket
 from . import utils
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
     
 def _evoked_activity(cellParamName, evokedUpParamName, synapse_activation_files, \
                      dirPrefix = '', tStop = 345.0, scale_apical = None, post_hook = {}, \

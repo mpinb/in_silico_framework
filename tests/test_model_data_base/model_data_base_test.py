@@ -10,6 +10,7 @@ import tempfile
 import warnings
 from pandas.util.testing import assert_frame_equal
 from model_data_base import IO
+import subprocess
 
 class TestModelDataBase(unittest.TestCase):       
     def setUp(self):        
@@ -83,11 +84,16 @@ class TestModelDataBase(unittest.TestCase):
         existing metadata'''
         self.fresh_mdb.setitem('test', 1, dumper = 'self')
         self.fresh_mdb.setitem('test2', 1, dumper = to_pickle)
-         
+        msg1= "{} =/= {}".format(self.fresh_mdb.metadata['test']['version'], model_data_base.get_versions()['version'])
+        msg2= "{} =/= {}".format(self.fresh_mdb.metadata['test2']['version'], model_data_base.get_versions()['version'])
+        msg_git = "\nDid the commit turn dirty during testing?\n"
+        msg_git += subprocess.check_output(['git status'], shell=True).decode('utf-8')
         self.assertEqual(self.fresh_mdb.metadata['test']['version'], \
-                         model_data_base.get_versions()['version'])
+                         model_data_base.get_versions()['version'],
+                         msg=msg1+msg_git)
         self.assertEqual(self.fresh_mdb.metadata['test2']['version'], \
-                         model_data_base.get_versions()['version'])
+                         model_data_base.get_versions()['version'],
+                         msg=msg2+msg_git)
         self.assertEqual(self.fresh_mdb.metadata['test']['dumper'], 'self')
         self.assertEqual(self.fresh_mdb.metadata['test2']['dumper'], 'to_pickle')
         self.assertEqual(self.fresh_mdb.metadata['test']['metadata_creation_time'], \

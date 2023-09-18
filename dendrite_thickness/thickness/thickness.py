@@ -14,11 +14,6 @@ Limitations:
 -----------
 
 
-Tests
------
-
-- The test functions are inside the test.py. One can also use them as example of how to use the functions.
-
 """
 import os
 import sys
@@ -30,7 +25,8 @@ from . import transformation as tr
 from .utils import get_size_of_object
 from . import utils as u
 import itertools
-
+import logging
+log = logging.getLogger(__name__)
 
 class ThicknessExtractor:
     def __init__(self, points, image_file=None, xy_resolution=0.092, z_resolution=0.5, ray_length_front_to_back_in_micron=20,
@@ -126,19 +122,18 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-            print(str(idx) + " am_points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed.")
+            log.info(str(idx) + " am_points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed.")
             sys.stdout.write("\033[F")
 
         import six
         all_data = {sort_indices[k]: v for k, v in six.iteritems(all_data)}
         self.all_data = all_data
-        print("size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.)))
+        log.info("size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.)))
 
         # if self._3D is False:
             # self.all_overlaps = self.update_all_data_with_overlaps()
 
         self._get_thicknesses_from_all_data()
-        self._tidy_up()
 
     def get_all_data_by_point(self, point):
         """
@@ -183,7 +178,8 @@ class ThicknessExtractor:
         for i, ray_indices in enumerate(rays_indices):
 
             ray_length = len(ray_indices)
-            half_ray_length = (ray_length - 1) / 2
+            assert ray_length % 2 == 1, "ray_length should be uneven"
+            half_ray_length = int((ray_length - 1) / 2)
 
             back_contour_index = self.get_contour_index(point, ray_indices[0:half_ray_length + 1][::-1])
             front_contour_index = self.get_contour_index(point, ray_indices[half_ray_length:ray_length])
@@ -216,7 +212,7 @@ class ThicknessExtractor:
                 pixel = [(int(x)) for x in ray_indices[i]]
                 intensity_value = image.GetPixel(pixel)
             except RuntimeError as error:
-                warnings.warn(error)
+                log.warn(error)
                 intensity_value = 0
             profile_values.append(intensity_value)
         return profile_values
@@ -228,7 +224,7 @@ class ThicknessExtractor:
         try:
             point_value = image.GetPixel(point_indices)
         except RuntimeError as error:
-            warnings.warn("Point outside the image! Assuming diameter 0")
+            log.warn("Point outside the image! Assuming diameter 0")
             return None
 
         # pointHalfValue = point_value/2.0
@@ -246,14 +242,14 @@ class ThicknessExtractor:
             try:
                 _index = ray_indices[i+1]
             except IndexError:
-                warnings.warn("End of ray reached! Center point intensity: {}".format (point_value))
+                log.warn("End of ray reached! Center point intensity: {}".format (point_value))
                 return ray_indices[i]
 
             # this fails, if the ray goes out of the image
             try:
                 pixel_2_value = image.GetPixel(_index)
             except IndexError as error:
-                warnings.warn("Ray goes out of image! Assuming diameter 0")
+                log.warn("Ray goes out of image! Assuming diameter 0")
 
             if pixel_1_value >= point_threshold_value >= pixel_2_value:
                 contour_indices = ray_indices[i]
@@ -313,6 +309,17 @@ class ThicknessExtractor:
         return ray_points_indices
 
     def _correct_seed(self, point):
+        """
+        Given an input point of format [x, y, intensity_value], this method corrects the point by 
+        finding the nearest point with the highest intensity value. How "near" is defined by the
+        self._max_seed_correction_radius_in_image_coordinates_in_pixel parameter.
+
+        Args:
+            point (array): The image coordinates of the point to be corrected. Format: [x, y, intensity_value]
+
+        Returns:
+            corrected_point: The corrected point. Format: [new_x, new_y, original_intensity_value]
+        """
         # point = [int(point[0]), int(point[1]), point[2]]
         radius = self._max_seed_correction_radius_in_image_coordinates_in_pixel
         point_in_padded_image = point[0] + radius, point[1] + radius
@@ -325,16 +332,9 @@ class ThicknessExtractor:
         intensity_value = self.image.GetPixel([int(point[0]), int(point[1])])
         intensity_value2 = self.image.GetPixel([int(corrected_point[0]), int(corrected_point[1])])
         assert(intensity_value2 >= intensity_value)
-        print('original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
+        log.info('original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
                                                                         corrected_point, intensity_value2))
         return corrected_point
-
-    def _tidy_up(self):
-        del self.image
-        del self.padded_image
-        del self.points
-        del self.convert_points
-        del self.contour_list
 
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
@@ -372,13 +372,21 @@ class ThicknessExtractor:
         self.current_z_coordinate = z_coordinate_key
 
     def _set_image(self, input_path):
-        print('setting image path to {}'.format(input_path))
+        log.info('setting image path to {}'.format(input_path))
         self.image = _read_image(input_path)
         self.padded_image = _pad_image(self.image, self._max_seed_correction_radius_in_image_coordinates_in_pixel)
 
     def _get_thicknesses_from_all_data(self):
         thickness_list = [self.all_data[idx]["min_thickness"] for idx in range(len(self.points))]
         self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
+
+    def __del__(self):
+        del self.image_stack
+        del self.padded_image
+        del self.points
+        del self.convert_points
+        del self.contour_list
+        del self.seed_corrected_points
 
 
 def _check_overlap(contour1, contour2):
@@ -393,7 +401,7 @@ def _check_overlap(contour1, contour2):
 
 
 def _slope(p1, p2):
-    print(p1)
+    log.info(p1)
     if p1[0] - p2[0] == 0:
         return np.inf
     return (p1[1] - p2[1]) / (p1[0] - p2[0])
@@ -425,6 +433,16 @@ def _get_intersection(line1, line2):
 
 
 def _circle_filter(x, y, r):
+    """Check if a point is within a circle of radius :param: r and center (0,0)
+
+    Args:
+        x (int/float)
+        y (int/float)
+        r (int/float)
+
+    Returns:
+        int: 1 if the point is within the circle, 0 otherwise
+    """
     if x ** 2 + y ** 2 <= r ** 2:
         return 1
     else:
@@ -438,9 +456,22 @@ def _pad_image(image, radius):
 
 
 def _crop_image(image_array, center, radius, circle=False):
+    """Given an image as a 2D array, this method crops it around :param:center.
+    The crop is either a square of size 2x:param:radius by 2x:param:radius and center :param:center,
+    or, in case :param:circle equals True, a circle with radius :param:radius.
+
+    Args:
+        image_array (array): The 2D image array
+        center (array): 1x2 array of xy coordinates. Coordinates should be the index of pixels. 
+        radius (int): size of the crop in both directions. Total size will be 
+        circle (bool, optional): _description_. Defaults to False.
+
+    Returns:
+        np.array: 2D array of the cropped image  # TODO 2 by N or 3 by N?
+    """
     c1, c2 = int(center[0]), int(center[1])
-    assert (c1 - radius >= 0)
-    assert (c2 - radius >= 0)
+    # assert (c1 - radius >= 0)
+    # assert (c2 - radius >= 0)
 
     return_ = image_array[c1 - radius:c1 + radius + 1, c2 - radius:c2 + radius + 1]
     # return_ = b_pad[c1:c1 + 2 * radius + 1, c2:c2 + 2 * radius + 1]

@@ -174,8 +174,8 @@ class ExtractThicknessPipeline:
         """ TODO: This function will call the poor function that we developed and not working well"""
         pass
 
-    def set_client_for_parallelization(self, url, port):
-        self.client = distributed.Client(str(url) + ":" + str(port))
+    def set_client_for_parallelization(self, client):
+        self.client = client
         print(self.client)
         self._parallel = True
 

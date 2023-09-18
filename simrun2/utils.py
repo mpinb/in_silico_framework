@@ -1,4 +1,6 @@
 from model_data_base.mdbopen import resolve_mdb_path
+import logging
+log = logging.getLogger(__name__)
 
 def load_param_file_if_path_is_provided(pathOrParam):
     import single_cell_parser as scp
@@ -39,7 +41,7 @@ def scale_apical(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
     
-    print('Scaled {:d} apical sections...'.format(scaleCount))
+    log.info('Scaled {:d} apical sections...'.format(scaleCount))
     
 class defaultValues:
     name = 'C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center'

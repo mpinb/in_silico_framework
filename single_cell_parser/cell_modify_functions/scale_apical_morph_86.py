@@ -1,3 +1,6 @@
+import logging
+log = logging.getLogger(__name__)
+
 def scale_apical_morph_86(cell):
     '''
     This is the method, robert has used for scaling the apical dendrite of CDK morphology 86
@@ -29,5 +32,5 @@ def scale_apical_morph_86(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
     
-    print('Scaled {:d} apical sections...'.format(scaleCount))
+    log.info('Scaled {:d} apical sections...'.format(scaleCount))
     return cell

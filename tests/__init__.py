@@ -5,7 +5,7 @@ from Interface import scp
 from getting_started import getting_started_dir # path to getting started folder
 from model_data_base.utils import silence_stdout
 
-def setup_current_injection_experiment():
+def setup_current_injection_experiment(rangevars=[]):
     """Sets up a current injection experiment of some .hoc and .param file.
     The following parameters define the experiment:
 
@@ -26,6 +26,9 @@ def setup_current_injection_experiment():
     iclamp.delay = 150 # give the cell time to reach steady state
     iclamp.dur = 5 # 5ms rectangular pulse
     iclamp.amp = 1.9 # 1.9 ?? todo ampere
+    for rv in rangevars:
+        cell.record_range_var(rv)
+
     scp.init_neuron_run(cell_param.sim, vardt=True) # run the simulation 
     
     return cell

@@ -478,7 +478,7 @@ if response.status_code == 200:  # 200 means success
     data = response.json()  # Assuming the server returns JSON data
     print(data)
 else:
-    print(f"Request failed with status code: {response.status_code}")
+    print("Request failed with status code: {}".format(response.status_code))
     print(response.text)  # Print the response content, which may contain the error message from the server
 
 """

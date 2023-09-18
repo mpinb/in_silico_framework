@@ -1,3 +1,6 @@
+import logging
+log = logging.getLogger(__name__)
+
 def scale_apical(cell, scale = None, compartment = 'ApicalDendrite'):
     '''
     This is the function used to scale the apical dendrite in the following
@@ -21,5 +24,5 @@ def scale_apical(cell, scale = None, compartment = 'ApicalDendrite'):
                 oldDiam = sec.diamList[i]
                 newDiam = scale*oldDiam
                 h.pt3dchange(i, newDiam, sec=sec)
-    print('Scaled {:d} apical sections...'.format(scaleCount))
+    log.info('Scaled {:d} apical sections...'.format(scaleCount))
     return cell

@@ -140,9 +140,6 @@ def simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode='re
     
     return tSpike
 
-def test_spike_detection_respects_threshold():
-    assert(spike_detection([0,1,2,3,4,5,6], [-5,-4,-3,-2,-1,0,1]) == [5])
-    assert(spike_detection([0,1,2,3,4,5,6], [-5,-4,-3,-2,-1,0,1], threshold=-2) == [-3])
     
 def PSTH_from_spike_times(spikeTimeVectors, binSize=1.0, tBegin=None, tEnd=None, aligned=True):
     '''

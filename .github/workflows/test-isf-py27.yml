@@ -1,14 +1,8 @@
 # Installation of in-silico-framework followed by CI tests.
-name: In-Silico-Framework (Python 2.7) install and test
+name: ISF Py2.7 (github) build/test
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master, refractor, testing ]
-  pull_request:
-    branches: [ master, refractor, testing ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -21,6 +15,7 @@ jobs:
     defaults:
       run:
         shell: bash -l {0}
+    name: Py2.7 (github) build/test
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -28,50 +23,28 @@ jobs:
       - uses: actions/checkout@v2
 
       # Install Anaconda2 and update conda package manager
-      - name: Install Anaconda2
+      - name: Download, install & build ISF for Python 2.7
         run: |
-          wget https://repo.anaconda.com/archive/Anaconda2-4.2.0-Linux-x86_64.sh --quiet
-          bash Anaconda2-4.2.0-Linux-x86_64.sh -b -p ~/conda2-isf
-          source ~/conda2-isf/bin/activate
-          conda info
-
-      # Updating the root environment. Install ISF dependencies (YAML)
-      # NOTE: The environment file (yaml) is in the ISF repository 'installer' folder
-      - name: Install ISF dependencies
-        run: |
-          source ~/conda2-isf/bin/activate
-          echo "Installing 'in silico framework' dependencies in silent mode."
-          conda-env create --name isf-py27 --file installer/env-isf-py27.yml --quiet
-          source activate isf-py27
-          conda list
-          
-      # Patch pandas library to support CategoricalIndex in msgpack format
-      - name: Patch pandas library
-        run: |
-          echo "Patching pandas library."
-          source ~/conda2-isf/bin/activate
-          source activate isf-py27
-          cd installer
-          python patch_pandas_linux64.py
-          conda list
-
-      # Compile neuron mechanisms
-      - name: Compile neuron mechanisms
-        run: |
-          echo "Compiling neuron mechanisms"
-          source ~/conda2-isf/bin/activate
-          source activate isf-py27
+          CONDA_TARGET_DIR="$(pwd)/anaconda_isf2"
+          if [ -d "$CONDA_TARGET_DIR" ]; then
+            echo "Found existing installation in $HOME. Removing previous Anaconda installation..."
+            rm -r "$CONDA_TARGET_DIR"
+          else
+            echo "No previous Anaconda installation found. Continuing..."
+          fi
           pushd .
-          cd mechanisms/channels_py2; nrnivmodl
+          cd installer/py2.7
+          ./install.sh $CONDA_TARGET_DIR || exit 1
           popd
-          cd mechanisms/netcon_py2; nrnivmodl
-          
+          source $CONDA_TARGET_DIR/bin/activate
+          conda list
       # Run in-silico-framework tests
       - name: Test in-silico-framework
         run: |
-          source ~/conda2-isf/bin/activate
-          source activate isf-py27
-          export PYTHONPATH="$(pwd)"
+          CONDA_TARGET_DIR="$(pwd)/anaconda_isf2"
+          source $CONDA_TARGET_DIR/bin/activate;
+          echo "Using Python: $(which python)"
+          export PYTHONPATH=$(pwd)
           dask-scheduler --port=28786 --bokeh-port=28787 &
           dask-worker localhost:28786 --nthreads 1 --nprocs 4 --memory-limit=100e15 &
           python -m pytest -rsx -vv --color=yes tests/

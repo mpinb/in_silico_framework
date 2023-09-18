@@ -5,6 +5,7 @@ import pandas as pd
 from . import parent_classes
 import pandas_msgpack
 
+
 def check(obj):
     '''checks wherther obj can be saved with this dumper'''
     return isinstance(obj, (pd.DataFrame, pd.Series)) #basically everything can be saved with pickle
@@ -26,7 +27,10 @@ def dump(obj, savedir, rows_per_file = None):
     '''rows_per_file: automatically splits dataframe, such that rows_per_file rows of the df are
     saved in each file. This helps with large dataframes which otherwise would hit the 1GB limit of msgpack.'''
 #     obj.to_msgpack(os.path.join(savedir, 'pandas_to_msgpack'), compress = 'blosc')
-    raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
+    import os
+    if not "IS_TESTING" in os.environ:
+        # Module was not called from within the test suite
+        raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
     import os
     if rows_per_file is not None:
         row = 0

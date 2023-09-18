@@ -110,28 +110,3 @@ def multi_stimulus_trial(netp, inter_stimulus_interval = 100, stims = 100, scale
 
         netp.network[syntype].celltype.pointcell.intervals = intervals
         netp.network[syntype].celltype.pointcell.probabilities = probabilities
-
-# testing
-# todo: move to testing module
-def test():
-    import getting_started
-    import single_cell_parser as scp
-    param = scp.build_parameters(getting_started.networkParam)
-    
-    assert(_has_evoked(param, 'L5tt_C2'))
-    assert(~_has_evoked(param, 'L1_Beta'))
-    assert(_celltype_matches('L5tt_C2', ['L5tt'], ['S1']))
-    assert(_celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['S1']))
-    assert(~_celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['D2']))
-    assert(_celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['D2', 'C2']))
-    
-    param = scp.build_parameters(getting_started.networkParam)
-    inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, ['L5tt'], ['S1'])
-    assert('L5tt' not in {k.split('_')[0] for k in list(param.network.keys())})
-    param = scp.build_parameters(getting_started.networkParam)
-    inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, ['L4ss'], ['S1'])
-    assert('L5tt' in {k.split('_')[0] for k in list(param.network.keys())})
-    param = scp.build_parameters(getting_started.networkParam)
-    inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, ['L5tt'], ['C2'])
-    assert('L5tt_C2' not in list(param.network.keys()))
-    assert('L5tt_D2' in list(param.network.keys()))

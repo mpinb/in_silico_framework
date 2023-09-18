@@ -25,7 +25,9 @@ class TestSQLiteBackend(unittest.TestCase):
         
     def tearDown(self):
         if os.path.exists(self.tempdir):
-            shutil.rmtree(self.tempdir)     
+            shutil.rmtree(self.tempdir)
+        distributed.client_object_duck_typed.restart()
+        
     
     def test_str_values_can_be_assigned(self):
         db = self.db
@@ -59,7 +61,7 @@ class TestSQLiteBackend(unittest.TestCase):
         job = {key: write_data_to_dict(self.path, key) for key in keys}
         job = dask.delayed(job)
          
-        c = distributed.Client(set_as_default = False)
+        c = distributed.client_object_duck_typed
         c.compute(job).result()
          
         assert(set(self.db.keys()) == set(keys))

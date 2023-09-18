@@ -11,7 +11,8 @@
 7. [Test Submit Jobs](#testing)
 8. [Default Ports](#ports)
 9. [Jupyter Extensions](#extensions)
-10. [References](#references)
+10. [Other Config](#other-config)
+11. [References](#references)
 
 ## Requirements
 
@@ -73,12 +74,13 @@ You will need to use your personal access token (PAT) instead of the password.
 
 ## Install
 
-In order to install `in-silico-framework` for both Python 2 and Python 3 run :
+In order to install `in-silico-framework` for both Python 2.7 and Python 3.8 run :
 
 ```bash
-cd $MYBASEDIR/project_src/in_silico_framework/installer
-./isf-install.sh -d -t py2 -i $MYBASEDIR/anaconda_isf2
-./isf-install.sh -d -t py3 -i $MYBASEDIR/anaconda_isf3
+cd $MYBASEDIR/project_src/in_silico_framework/installer/py2.7
+./install.sh $MYBASEDIR/anaconda_isf2
+cd $MYBASEDIR/project_src/in_silico_framework/installer/py3.8
+./install.sh $MYBASEDIR/anaconda_isf3
 ```
 
 ## Kernels
@@ -90,20 +92,18 @@ source_isf; python -m ipykernel install --name root --user --display-name isf2
 source_3; python -m ipykernel install --name base --user --display-name isf3
 ```
 
-> __Warning__: It is recommended to replace the local dask distributed config with the one provided in the [installer module](../installer/distributed.yaml)
-
 ## Cluster
-The [cluster](../cluster/) module provides various modules for cluster control. Two scripts tend to be used a lot, so it is worth adding them as an alias to your ~/.bashrc. You can name these commands however you want.  (NOTE: There is no _cluster_ module yet.)
+The [SLURM_scripts](../SLURM_scripts/) module provides various modules for cluster control. Two scripts tend to be used a lot, so it is worth adding them as an alias to your ~/.bashrc. You can name these commands however you want.
 ```bash
 alias submit="$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/submit.sh"
 alias jupylink="$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/jupyter_link.sh"
 ```
 
-Check if you can submit a job by requesting an interactive CPU partition (the `-c` and `-i` flags):
+Check if you can submit a job by requesting e.g. an interactive CPU partition (the `-c` and `-i` flags):
 
 ```bash
 source_3
-submit -c -i session1
+submit -ci session1
 ```
 
 Make sure that the job appears with `Running` (R) status in slurm job queue:
@@ -112,19 +112,14 @@ Make sure that the job appears with `Running` (R) status in slurm job queue:
 squeue --me
 ```
 
-Look at the corresponding management dir to find the ip address where `jupyter` is running:
-
-```bash
-cat management_dir_session1/scheduler.json
-```
-
-Find the link of the Jupyter server that's running on the interactive node:
+If the job launched succesfully, you should see the links to the jupyter and notebook servers. If not, you can always fetch them:
 ```bash
 jupylink session1
 ```
 
+If this also doesn't work, then likely something went wrong during job submission. Check the output and error log of your job. It should appear in your `$MYBASEDIR` under the filename `[err/out].slurm.soma*pu08*.<id>.slurm`. If you can't find it, then the job probably didn't launch at all. Check the output of `squeue --me` and `sinfo` to see if there are any nodes available.
+
 > __Warning__: It takes some time before the cluster has launched the jupyter server. You may need to wait a couple of seconds after submitting a job before this command will return a Jupyter link.
-> __Warning__: Jupyter servers are only launched on interactive sessions.
 
 Use putty to open a SOCKS-5 proxy to the login node (somalogin01 or somalogin02)
  - you can do this with the -D option of the `ssh` command
@@ -132,7 +127,7 @@ Use putty to open a SOCKS-5 proxy to the login node (somalogin01 or somalogin02)
  - Open firefox settings, search for proxy and activate SOCKS-5 proxy. IP: 127.0.0.1, PORT: 4040 (or the port number passed to the ssh command)
  - this is explained in more detail in chantals google doc: https://docs.google.com/document/d/1S0IM7HgRsRdGXN_WFeDqPMOL3iDt1Obosuikzzc8YNc/edit#heading=h.dbift17bl1rt
 
-You can now use firefox to run notebooks on the cluster by surfing to the link o fthe jupyter server. You may also run these ntoebooks in VSCode, or another IDE of choice.
+You can now use firefox to run notebooks on the cluster by surfing to the link o fthe jupyter server. You may also run these notebooks in VSCode, or another IDE of choice. See [this StackOverflow answer](https://stackoverflowteams.com/c/ibs/questions/256) for more info.
 
 ## Ports
 
@@ -166,9 +161,29 @@ jupyter contrib nbextension install --user
 jupyter nbextensions_configurator enable --user
 ```
 
+## Other config
+
+It is recommended to override some settings in the distributed config file. In particular the amount of memory per worker:
+
+```yml
+	memory:
+	target: 0.90  # target fraction to stay below
+	spill:  False # fraction at which we spill to disk
+	pause: False  # fraction at which we pause worker threads
+	terminate: False  # fraction at which we terminate the worker
+```
+[This StackOverflow answer](https://stackoverflow.com/questions/57997463/dask-warning-worker-exceeded-95-memory-budget) gives more information.
+
+An example on basic locking server config yml:
+```yml
+- config: {host: spock, port: 8885, socket_timeout: 1}
+  type: redis
+- config: {host: localhost, port: 6379, socket_timeout: 1}
+  type: redis
+```
+
 ## References
 
 --> located at Z:\Share\HowTos\How-to use the AXON cluster.txt
 --> https://docs.google.com/document/d/1S0IM7HgRsRdGXN_WFeDqPMOL3iDt1Obosuikzzc8YNc/edit#heading=h.dbift17bl1rt
-
 --> [Setting up SSH Tunnels and port-forwarding with MobaXTerm](https://blog.mobatek.net/post/ssh-tunnels-and-port-forwarding/)

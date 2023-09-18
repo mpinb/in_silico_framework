@@ -37,7 +37,7 @@ def append_PCA(df, columns, descriptor, n_components = 2):
     pca = vaex.ml.PCA(features=columns, n_components=n_components)    
     df_transformed = pca.fit_transform(df)
     for component_idx in range(0, n_components):
-        df_transformed.rename(f"PCA_{component_idx}", f"{descriptor}-{component_idx+1}")
+        df_transformed.rename("PCA_{}".format(component_idx), "{}-{}".format(descriptor, component_idx+1))
     print(df_transformed.get_column_names())
 
 

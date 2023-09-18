@@ -10,7 +10,6 @@ from biophysics_fitting.utils import execute_in_child_process
 from .utils import *
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 
 def convertible_to_int(x):
     try:

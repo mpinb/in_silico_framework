@@ -310,28 +310,6 @@ class PostCell:
         SAinh = PostCell._get_SA_array(SAinh, tStop)*inh_scale
         return rm.run(SAexc, SAinh, tStop = tStop, return_WNI = return_WNI, WNI_path = WNI_path)
 
-def test_apply_release_probability():
-    prob = 0.3
-    arr = [[[1,2,3],[2,3,4]],[[3,4,5]],[]]
-    reference_len = len(list(I.utils.flatten(arr)))    
-    _arr = [len(list(I.utils.flatten(PostCell._apply_release_probability_and_merge(arr, prob)))) \
-            / float(reference_len) 
-     for lv in range(10000)]
-    assert(I.np.mean(_arr) < prob+0.01)
-    assert(I.np.mean(_arr) > prob-0.01)
-    
-test_apply_release_probability()
-
-def test_get_SA_array():
-    array = [[1,2,3,2,3,4],[3,4,5],[]]
-    PostCell._get_SA_array(array, 5)
-    expected = I.np.array([[0, 1, 2, 2, 1],
-           [0, 0, 0, 1, 2],
-           [0, 0, 0, 0, 0]])
-    I.np.testing.assert_array_equal(PostCell._get_SA_array(array, 5), expected)
-    
-test_get_SA_array()
-    
 class Network:
     '''A class for creating and simulating an embedded network of reduced model neurons.'''
     def __init__(self, presynaptic_cells_dict, postsynaptic_cells_list, post_cells_dir, somadistance_dict):

@@ -33,6 +33,7 @@ import distributed
 # import pandas_msgpack # do not import this; it will break pickle in loaded dataframes
 from pandas_msgpack import to_msgpack, read_msgpack
 
+
 ####
 # if you want to use this as template to implement another dask dumper: 
 # lines that most likely need to be changed are marked with ###
@@ -238,7 +239,27 @@ class Loader(parent_classes.Loader):
     
         
 def dump(obj, savedir, repartition = False, get = None, categorize = True, client = None):
-    raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
+    """
+    Save an object to a file in a ModelDataBase in the pandas-msgpack format.
+    Has been deprecated since 2023-09-01. Please use another dumper.
+    This is only still available for testing purposes in support of backwards compatibility.
+
+    Args:
+        obj (_type_): The object to be saved
+        savedir (str or Path): Output directory to save the file in.
+        repartition (bool, optional): Whether or not to repartition.. Defaults to False.
+        get (_type_, optional): A getter method, e.g. dask.get. Defaults to None.
+        categorize (bool, optional): Defaults to True.
+        client (distributed.Client, optional): distributed.Client for parallellization. Defaults to None.
+        test (bool, optional): Whether or not the dumper is called from within a test method. Defaults to False.
+
+    Raises:
+        RuntimeError: _description_
+    """
+    import os
+    if not "IS_TESTING" in os.environ:
+        # Module was not called from within the test suite
+        raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
     if client is None:
         assert get is not None
         client = get

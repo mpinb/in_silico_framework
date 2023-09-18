@@ -38,3 +38,24 @@ def setup_jupyter_server(management_dir, ports):
     # append output to same file as notebook (ance the >> operator rather than >)
     os.system(command + "&>>{} &".format(os.path.join(management_dir,  "jupyter.txt")))
 
+if __name__ == "__main__":
+    import argparse
+    from setup_SLURM import get_process_number, read_user_port_numbers
+    parser = argparse.ArgumentParser()
+    parser.add_argument('management_dir')  # non-optional positional argument
+    # parser.add_argument("--nb_kwargs", dest="nb_kwargs_from_cline", action=StoreDictKeyPair, metavar="KEY1=VAL1,KEY2=VAL2...", nargs='?', const=None)
+    # parser.add_argument("--nb_suffix", nargs='?', const="-out", default="-out")
+    parser.add_argument("--launch_jupyter_server", default=True, action='store_true')
+    parser.add_argument('--notebook_name', nargs='?', const="", default=None)
+    args = parser.parse_args()
+
+    MANAGEMENT_DIR = args.management_dir
+    if not os.path.exists(MANAGEMENT_DIR):
+        try:    
+            os.makedirs(MANAGEMENT_DIR)
+        except OSError: # if another process was faster creating it
+            pass
+    PROCESS_NUMBER = get_process_number(MANAGEMENT_DIR)
+    PORTS = read_user_port_numbers()
+
+    setup_jupyter_server(MANAGEMENT_DIR, PORTS)

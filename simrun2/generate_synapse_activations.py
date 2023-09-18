@@ -16,7 +16,6 @@ import os
 import socket
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 
 
 def _evoked_activity(cellParamName, evokedUpParamName, dirPrefix = '', seed = None, nSweeps = 1000, tStop = 345):

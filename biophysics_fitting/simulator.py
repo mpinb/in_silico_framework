@@ -11,7 +11,6 @@ from .parameters import param_selector
 import time
 import logging
 log = logging.getLogger(__name__)
-log.propagate=True  # propagate to biophysics_fitting.__init__
 
 
 class Simulator_Setup:

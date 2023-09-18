@@ -13,7 +13,6 @@ import pandas as pd
 from .utils import *
 import logging
 log = logging.getLogger(__name__)
-log.propagate = True
 
 h = neuron.h
 
