@@ -40,14 +40,14 @@ def setup_soma_step_with_current(cell, amplitude = None, delay = None, duration 
 
 def setup_crit_freq_n(cell, delay=None, freq = None, amplitude = None, n_stim = None, duration = None):
     t = 1000/freq 
-    print(delay)
+    #print(delay)
     if isinstance(amplitude, list):
         amplitudes = amplitude
     else:
         amplitudes = [amplitude] * n_stim
     for i in range(n_stim):  
             setup_soma_step_with_current(cell, amplitude = amplitudes[i], delay = delay, duration = duration)
-            print(delay)
+            #print(delay)
             delay += t
 
 def record_crit_freq(cell, recSite1 = None, recSite2 = None):
@@ -203,21 +203,20 @@ class Crit_freq:
                  delay = None,
                  freq_list = None,
                  n_stim = None,
-                 definitions ={'Area':('Area',0,0),
-                                'Freq_list':('Freq_list',0,0), 
-                                'NumSpike':('NumSpike',0,0)},
-                 soma_threshold = -20):
+                 # definitions ={'Area':('Area',0,0),
+                 #                'Freq_list':('Freq_list',0,0), 
+                 #                'NumSpike':('NumSpike',0,0)},
+                 soma_threshold = 0):
         assert(n_stim is not None)
         self.delay = delay
-        self.definitions = definitions
+        # self.definitions = definitions
         self.n_stim = n_stim
         self.freq_list = freq_list
         self.soma_threshold = soma_threshold
         
     def get(self, **voltage_traces): 
         out = {}
-        for name,(_,mean,std) in iter(self.definitions.items()):
-#             out.update(getattr(self, name)(voltage_traces, mean, std))
+        for name in ['Area', 'Freq_list', 'NumSpike']:
             out.update(getattr(self, name)(voltage_traces))
         return out   
     
@@ -255,23 +254,33 @@ class Crit_freq:
 # Todo: make sure nan works as expected 
     
 def find_Crit_freq(dict_):
+    '''finalize function which gets called with the evaluation dict'''
+    if not 'crit_freq.Freq_list' in dict_:
+        print('crit_freq.Freq_list or crit_freq.Crit_freq not found. Skipping.')
+        return dict_
     area_list = [v for k,v in dict_.items() if 'Area' in k]
     freq_list =  dict_['crit_freq.Freq_list']
     area_ratio = dict([(freq,area_plus/area) for area, area_plus, freq in zip(area_list, (area_list[1:]), freq_list[1:])])
     if max(area_ratio.values())> 1.5: 
         dict_['crit_freq.Crit_freq'] = max(area_ratio, key = area_ratio.get)
     else:
-        dict_['crit_freq.Crit_freq'] = 0 
+        dict_['crit_freq.Crit_freq'] = float('nan')
 #     del(dict_['Freq_list'], dict_['Area1'], dict_['Area2'], dict_['Area3'], dict_['Area4'], dict_['Area5'])
     return dict_ #{'crit_freq.' + k:v for k,v in dict_.items()}
 #     return dict_['Crit_freq']
 #     return area_ratio 
 
 def combine(evaluation, freq_list = None):
+    crit_freq_found = False    
+    for k in evaluation.keys():
+        if 'crit_freq' in k:
+            crit_freq_found = True
+    if not crit_freq_found:
+        return evaluation
     out = []
     for stim in range(1, len(freq_list)+1):
         key = f'crit_freq.n_spikes{stim}'
-        print(key, evaluation[key])
+        # print(key, evaluation[key])
         out.extend(evaluation[key])
     out = I.np.array(out)
     error = out-1 # correct number of spikes are represented as 0, to little -1, too much +1
