@@ -39,6 +39,9 @@ import itertools
 from collections import defaultdict
 import cloudpickle
 import six
+import scipy 
+import scipy.signal 
+import math 
 
 ### logging setup
 import logging

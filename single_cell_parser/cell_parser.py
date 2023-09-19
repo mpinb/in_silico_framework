@@ -447,7 +447,6 @@ class CellParser(object):
                             elif rangeVarVal >= max_g:
                                 s = param + '=' + str(max_g)
                                 paramStrings.append(s)
-                                print('reached_maxg')
                         for s in paramStrings:
                             s = '.'.join(('seg',mechName,s))
                             exec(s)

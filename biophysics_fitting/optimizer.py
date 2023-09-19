@@ -13,6 +13,8 @@ import deap
 from bluepyopt.deapext import algorithms
 from bluepyopt.deapext.optimisations import WSListIndividual
 import Interface as I
+import six
+
 def robust_int(x):
     try: 
         return int(x)
@@ -30,10 +32,16 @@ def get_max_generation(mdb_run):
 
 def save_result(mdb_run, features, objectives):
     current_key = get_max_generation(mdb_run) + 1
-    mdb_run.setitem(str(current_key), 
-                    I.pd.concat([objectives, features], axis = 1), 
-#                     dumper = I.dumper_pandas_to_msgpack)
-                    dumper = I.dumper_pandas_to_parquet)
+    if six.PY2:
+        dumper = I.dumper_pandas_to_msgpack
+    elif six.PY3:
+        dumper = I.dumper_pandas_to_parquet
+    else:
+        raise RuntimeError()
+    mdb_run.setitem(str(current_key),
+                    I.pd.concat([objectives, features], axis = 1),
+                     dumper = dumper)
+
 
 def setup_mdb_run(mdb_setup, run):
     '''mdb_setup contains a sub mdb for each run of the full optimization. This sub mdb is created here'''
@@ -59,7 +67,7 @@ def get_objective_function(mdb_setup):
         return e
     return objective_function
     
-def get_mymap(mdb_setup, mdb_run, c):
+def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict = None):
     # CAVE! get_mymap is doing more, than just to return a map function.
     # - the map function ignores the first argument. 
     #   The first argument (i.e. the function to be mapped on the iterable) is ignored.
@@ -100,11 +108,18 @@ def get_mymap(mdb_setup, mdb_run, c):
         combined_objectives_dict = list(map(combiner.combine, features_dicts))
         combined_objectives_lists = [[d[n] for n in combiner.setup.names] 
                                      for d in combined_objectives_dict]
-        # to label a "good" model
-        all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
-        if any(all_err_below_3):
-            mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
+
+        # to label a "good" model if dict with boundaries for different objectives is given
+        if satisfactory_boundary_dict:
+            assert satisfactory_boundary_dict.keys() == combined_objectives_dict[0].keys()
+            all_err_below_boundary = [all(dict_[key]<=satisfactory_boundary_dict[key] for key in dict_.keys()) for dict_ in combined_objectives_dict]
+            if any(all_err_below_boundary):
+                mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_boundary) if x]
             
+#         all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
+#         if any(all_err_below_3):
+#             mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
+
         return numpy.array(combined_objectives_lists)
     return mymap
 
@@ -265,7 +280,6 @@ def eaAlphaMuPlusLambdaCheckpoint(
         #_record_stats(stats, logbook, start_gen, population, invalid_count)
         ## end commented out by arco
 
-
     # Begin the generational process
     for gen in range(start_gen + 1, ngen + 1):
 
@@ -301,11 +315,10 @@ def eaAlphaMuPlusLambdaCheckpoint(
             # save checkpoint in mdb
             mdb_run.setitem('{}_checkpoint'.format(gen), cp, dumper = I.dumper_to_pickle)
             #pickle.dump(cp, open(cp_filename, "wb"))
-            #logger.debug('Wrote checkpoint to %s', cp_filename)
-            
+            #logger.debug('Wrote checkpoint to %s', cp_filename)    
             
         if 'satisfactory' in mdb.keys():
-                break
+            break
 
     return population #, logbook, history
 
@@ -371,8 +384,8 @@ def get_population_with_different_n_objectives(old_pop, n_objectives):
         pop.append(ind)
     return pop
 	
-def start_run(mdb_setup, n, pop = None, client = None, continue_cp = False,
-              offspring_size=1000, eta=10, mutpb=0.3, cxpb=0.7, max_ngen = 600):
+def start_run(mdb_setup, n, pop = None, client = None, continue_cp = False, offspring_size=1000, 
+              eta=10, mutpb=0.3, cxpb=0.7, max_ngen = 600, satisfactory_boundary_dict = None):
     '''function to start an optimization run as specified in mdb_setup. The following attributes need
     to be defined in mdb_setup:
     
@@ -394,6 +407,9 @@ def start_run(mdb_setup, n, pop = None, client = None, continue_cp = False,
     20190111_fitting_CDK_morphologies_Kv3_1_slope_step.ipynb
     
     You can also have a look at the test case in test_biophysics_fitting.test_optimizer.py
+    
+    satisfactory_boundary_dict needs to be given if you want to stop the optimisation when 
+    a satisfactory models is found. Keys need to match the combined objectives. 
     '''
     # CAVE! get_mymap is doing more, than just to return a map function.
     # - the map function ignores the first argument. 
@@ -407,14 +423,14 @@ def start_run(mdb_setup, n, pop = None, client = None, continue_cp = False,
     #   mdb_setup[str(n)] then contains all the saved results
 
     mdb_run = setup_mdb_run(mdb_setup, n)
-    mymap = get_mymap(mdb_setup, n, client)
+    mymap = get_mymap(mdb_setup, n, client, satisfactory_boundary_dict = satisfactory_boundary_dict)
     len_objectives = len(mdb_setup['get_Combiner'](mdb_setup).setup.names)
     parameter_df = mdb_setup['params']
     evaluator_fun = mdb_setup['get_Evaluator'](mdb_setup)
     evaluator = my_ibea_evaluator(parameter_df, len_objectives)
     opt = bpop.optimisations.DEAPOptimisation(evaluator, offspring_size=offspring_size,                                                                                                                                            
                                               eta=eta, mutpb=mutpb, cxpb=cxpb, 
-                                              map_function = get_mymap(mdb_setup, mdb_run, client), 
+                                              map_function = get_mymap(mdb_setup, mdb_run, client, satisfactory_boundary_dict = satisfactory_boundary_dict), 
                                               seed=n)
     
     if continue_cp == True:
