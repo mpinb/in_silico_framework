@@ -112,7 +112,7 @@ def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict = None):
         # to label a "good" model if dict with boundaries for different objectives is given
         if satisfactory_boundary_dict:
             assert satisfactory_boundary_dict.keys() == combined_objectives_dict[0].keys()
-            all_err_below_boundary = [all(dict_[key]<satisfactory_boundary_dict[key] for key in dict_.keys()) for dict_ in combined_objectives_dict]
+            all_err_below_boundary = [all(dict_[key]<=satisfactory_boundary_dict[key] for key in dict_.keys()) for dict_ in combined_objectives_dict]
             if any(all_err_below_boundary):
                 mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_boundary) if x]
             
