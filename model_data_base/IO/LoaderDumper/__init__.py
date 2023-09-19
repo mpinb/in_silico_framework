@@ -19,7 +19,7 @@ and has to be passed to the get function. This is wrapped in the following load 
 which is the intended way to reload arbitrary objects saved with a Dumper.
 '''
 
-def load(savedir, load_data = True):
+def load(savedir, load_data = True, loader_kwargs = {}):
     '''Standard interface to load data, that was saved to savedir
     with an arbitrary dumper'''
 #     with open(os.path.join(savedir, 'Loader.pickle'), 'rb') as file_:
@@ -27,7 +27,7 @@ def load(savedir, load_data = True):
     myloader = compatibility.uncloudpickle_fun(os.path.join(savedir, 'Loader.pickle'))
     
     if load_data:
-        return myloader.get(savedir)
+        return myloader.get(savedir, **loader_kwargs)
     else:
         return myloader
 

@@ -3,10 +3,10 @@
 name: ISF Py2.7 (local) build/test
 # Controls when the workflow will run
 on:
-  push: 
-    branches: '*'
-  pull_request:
-    branches: [ master ]
+  workflow_run:
+    workflows: ["ISF Py3.8 (local) build/test"]  # Start after Py3.8 has run
+    types:
+      - completed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

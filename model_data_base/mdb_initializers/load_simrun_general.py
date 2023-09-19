@@ -121,7 +121,7 @@ def get_voltage_traces_divisions_by_metadata(metadata, repartition = None):
     divisions = list(divisions.sim_trail_index)
     if len(divisions) > 10000 and repartition:
         divisions = [d[0] for d in utils.chunkIt(divisions, 5000)]
-    return divisions + [metadata.iloc[-1].sim_trail_index]
+    return tuple(divisions + [metadata.iloc[-1].sim_trail_index])
 
 ############################################
 #Step three: read out the sim_trail_index from the soma voltage traces dask dataframe

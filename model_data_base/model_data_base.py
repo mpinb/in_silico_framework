@@ -348,14 +348,32 @@ class ModelDataBase(object):
         warnings.warn("get_sub_mdb is deprecated.  Use create_sub_mdb instead.")         
         return self.create_sub_mdb(key, register = register)
     
-    def __getitem__(self, arg):
+    def getitem(self, arg, **kwargs):
+        '''instead of mdb['key'], you can use mdb.getitem('key'). The advantage
+        is that this allows to pass additional arguments to the loader, e.g.
+        mdb.getitem('key', columns = [1,2,3]).'''
+        return self.__getitem__(arg, **kwargs)
+        
+    def _get_path(self, arg):
+        dummy = self._sql_backend[arg]
+        if isinstance(dummy, LoaderWrapper):
+            return os.path.join(self.basedir, dummy.relpath)
+        
+    def _get_dumper_string(savedir, arg):
+        path = self._get_path(arg)
+        if path is None:
+            return 'self'
+        else:
+            return IO.LoaderDumper.get_dumper_string_by_savedir(path)
+        
+    def __getitem__(self, arg, **kwargs):
         '''items can be retrieved from the ModelDataBase using this syntax:
         item = my_model_data_base[key]'''
         try:        
             # general case                
             dummy = self._sql_backend[arg]
             if isinstance(dummy, LoaderWrapper):
-                dummy = LoaderDumper.load(os.path.join(self.basedir, dummy.relpath)) 
+                dummy = LoaderDumper.load(os.path.join(self.basedir, dummy.relpath), loader_kwargs = kwargs) 
             if isinstance(dummy, FunctionWrapper):
                 dummy = dummy.fun()
             return dummy   

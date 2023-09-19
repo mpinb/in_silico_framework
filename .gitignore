@@ -35,6 +35,7 @@ mechanisms/channels_py3/x86_64/*
 mechanisms/channels_py2/x86_64/*
 mechanisms/netcon_py3/x86_64/*
 mechanisms/netcon_py2/x86_64/*
+SLURM_scripts/user_settings.ini
 
 #only template should be part of repository
 getting_started/biophysical_constraints/86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param

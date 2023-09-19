@@ -21,6 +21,8 @@ vaex-astro == 0.9.3
 vaex-jupyter == 0.8.2
 vaex-ml == 0.18.3
 
+pyarrow == 12.0.1
+
 ## model data base dependencies
 blosc==1.10.2
 fasteners==0.16
