@@ -253,22 +253,31 @@ class Crit_freq:
     
 # Todo: make sure nan works as expected 
     
-def find_Crit_freq(dict_):
+def find_Crit_freq(evaluation):
     '''finalize function which gets called with the evaluation dict'''
-    if not 'crit_freq.Freq_list' in dict_:
+    ### in case no crit. frequency stimuli have been simulated, do not cause an error
+    if not 'crit_freq.Freq_list' in evaluation:
         print('crit_freq.Freq_list or crit_freq.Crit_freq not found. Skipping.')
-        return dict_
-    area_list = [v for k,v in dict_.items() if 'Area' in k]
-    freq_list =  dict_['crit_freq.Freq_list']
-    area_ratio = dict([(freq,area_plus/area) for area, area_plus, freq in zip(area_list, (area_list[1:]), freq_list[1:])])
-    if max(area_ratio.values())> 1.5: 
-        dict_['crit_freq.Crit_freq'] = max(area_ratio, key = area_ratio.get)
-    else:
-        dict_['crit_freq.Crit_freq'] = float('nan')
-#     del(dict_['Freq_list'], dict_['Area1'], dict_['Area2'], dict_['Area3'], dict_['Area4'], dict_['Area5'])
-    return dict_ #{'crit_freq.' + k:v for k,v in dict_.items()}
-#     return dict_['Crit_freq']
-#     return area_ratio 
+        return evaluation
+    ### end of 'in case no crit. frequency stimuli have been simulated, do not cause an error'
+
+    if evaluation['crit_freq.num_spikes_error'] > 0: # stimuli didn't work, cannot determine crit. frequency
+        evaluation['crit_freq.Crit_freq'] = float('nan')
+    
+    else: # stimuli did work and we can compute the crit freq
+        area_list = [v for k,v in evaluation.items() if 'Area' in k]
+        freq_list =  evaluation['crit_freq.Freq_list']
+        area_ratio = dict([(freq,area_plus/area) for area, area_plus, freq in zip(area_list, (area_list[1:]), freq_list[1:])])
+        if max(area_ratio.values())> 1.5: 
+            evaluation['crit_freq.Crit_freq'] = max(area_ratio, key = area_ratio.get)
+        else:
+            evaluation['crit_freq.Crit_freq'] = float('nan')
+
+        crit_freq = evaluation['crit_freq.Crit_freq']
+    
+    evaluation['crit_freq.frequency_error'] = crit_freq_error(crit_freq)
+    
+    return evaluation #{'crit_freq.' + k:v for k,v in dict_.items()}
 
 def crit_freq_error(value):
     '''compute error from crit freq to match the empirical range (Larkum 1999, Kole 2007, Kole 2006, Berger )'''
@@ -290,13 +299,16 @@ def crit_freq_error(value):
     out = I.np.abs(value - center) / (width / target_error_representing_cutoff)    
     return out
 
-def combine(evaluation, freq_list = None):
+def check_AllStimuliWork(evaluation, freq_list = None):
     crit_freq_found = False    
+    ### in case no crit. frequency stimuli have been simulated, do not cause an error
     for k in evaluation.keys():
         if 'crit_freq' in k:
             crit_freq_found = True
     if not crit_freq_found:
         return evaluation
+    ### end of 'in case no crit. frequency stimuli have been simulated, do not cause an error'
+    
     out = []
     for stim in range(1, len(freq_list)+1):
         key = f'crit_freq.n_spikes{stim}'
@@ -307,8 +319,7 @@ def combine(evaluation, freq_list = None):
     error = 10*error**2 # correct number of spikes are represented as 0, not correct is 10
     error = sum(error)
     evaluation['crit_freq.num_spikes_error'] = error
-    crit_freq = evaluation['crit_freq.Crit_freq']
-    evaluation['crit_freq.frequency_error'] = crit_freq_error(crit_freq)
+
     return evaluation
 
 def put_name_of_stimulus_in_crit_freq_voltage_traces_dict(vt):
@@ -323,8 +334,10 @@ def modify_evaluator_to_evaluate_crit_freq_stimuli(e, freq_list = None, delay = 
                        delay = delay, n_stim = n_stim, soma_threshold = soma_threshold)
         e.setup.evaluate_funs.append([f'crit_freq{i}.hay_measure',cf.get,f'crit_freq{i}.features'])
     e.setup.pre_funs.append(put_name_of_stimulus_in_crit_freq_voltage_traces_dict)
-    e.setup.finalize_funs.append(find_Crit_freq)
-    e.setup.finalize_funs.append(I.partial(combine, freq_list = freq_list))
+    e.setup.finalize_funs.append(I.partial(check_AllStimuliWork, freq_list = freq_list))
+    e.setup.finalize_funs.append(find_Crit_freq)    
+
+
     
 
     
