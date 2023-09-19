@@ -50,7 +50,7 @@ def trace_check_err(t,v,stim_onset=None, stim_duration=None, punish = 250):
     # print('trace variance is ', I.np.var(v), I.np.var(v)*var_fact, stim_onset, stim_duration)
     return max(75,punish - I.np.var(v)*var_fact)
 
-def find_crossing(v, thresh):
+def find_crossing_old(v, thresh):
     '''Original NEURON doc:
     Function that giving a threshold returns a list of two vectors
     The first is the crossing up of that threshold
@@ -80,11 +80,25 @@ def find_crossing(v, thresh):
         #return [[],[]]
     return [avec, bvec]
 
-l = [1,1,2,3,3,3,2,1,3,1,1,1,1,1,3,1,1,1]
-assert(find_crossing(l, 2) == [[3, 8, 14], [6, 9, 15]])
-assert(find_crossing(l, 2.5) == [[3, 8, 14], [6, 9, 15]])
-# assert(find_crossing(l + [3], 2.5) == [[], []])
-
+def find_crossing(v,thresh):
+    '''Original NEURON doc:
+    Function that giving a threshold returns a list of two vectors
+    The first is the crossing up of that threshold
+    The second is the crossing down of that threshold
+    
+    Extended doku by Arco: returns [[],[]] if the number of crossing up vs crossing down is not equal.
+    This is the vectorized fast version of find_crossing_old. 
+    '''    
+    v = I.np.array(v) > thresh
+    thresh = 0.5    
+    upcross = I.np.where((v[:-1]<thresh) & (v[1:]>thresh))[0] + 1
+    downcross = I.np.where((v[:-1]>thresh) & (v[1:]<thresh))[0] + 1
+    if len(upcross) == 0:
+        return [[],[]]
+    downcross = downcross[downcross > upcross[0]]
+    if len(upcross) != len(downcross):
+        return [[],[]]
+    return [list(upcross), list(downcross)]
 
 def voltage_base(t, v, stim_delay):
     try:
