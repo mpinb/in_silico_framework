@@ -57,15 +57,21 @@ class Evaluator:
         #self.objectives = objectives
         self.setup = Evaluator_Setup()
         
-    def evaluate(self, features_dict):
+    def evaluate(self, features_dict, raise_ = True):
         '''Extracts features from a simulation result computed by Simulator.run()
         
         Details, how to set up the Evaluator are in the docstring of
-        the Evaluator class.'''        
+        the Evaluator class.
+        
+        raise_: if True will raise an error if the required voltage trace is not in features_dict. if False,
+        will not raise an error, and evaluate all features that can be evaluated given the provided features_dict.'''        
         ret = {}
         for fun in self.setup.pre_funs:
             features_dict = fun(features_dict)
         for in_name, fun, out_name in self.setup.evaluate_funs:
+            if not raise_:
+                if not in_name in features_dict:
+                    continue
             ret[out_name] = fun(**features_dict[in_name])
         for fun in self.setup.finalize_funs:
             ret = fun(ret)
