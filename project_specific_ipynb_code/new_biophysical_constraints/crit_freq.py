@@ -270,6 +270,26 @@ def find_Crit_freq(dict_):
 #     return dict_['Crit_freq']
 #     return area_ratio 
 
+def crit_freq_error(value):
+    '''compute error from crit freq to match the empirical range (Larkum 1999, Kole 2007, Kole 2006, Berger )'''
+    if I.np.isnan(value):
+        return 10 # 10 would be the error of one stimulus not evoking 1 AP
+    allowed_min = 60 # min of distribution
+    allowed_max = 200 # max of distribution
+    bulk_min = 70 # lower bound on bulk of distribution
+    bulk_max = 110 # upper bound on bulk of distribution
+    target_error_representing_cutoff = 3.2 # cutoff for other bAP and BAC objectives
+    
+    if bulk_min <= value <= bulk_max:
+        return 0
+    if allowed_min <= value <= allowed_max:
+        return 1    
+    
+    width = (allowed_max - allowed_min) / 2
+    center = (allowed_max + allowed_min) / 2
+    out = I.np.abs(value - center) / (width / target_error_representing_cutoff)    
+    return out
+
 def combine(evaluation, freq_list = None):
     crit_freq_found = False    
     for k in evaluation.keys():
@@ -286,7 +306,9 @@ def combine(evaluation, freq_list = None):
     error = out-1 # correct number of spikes are represented as 0, to little -1, too much +1
     error = 10*error**2 # correct number of spikes are represented as 0, not correct is 10
     error = sum(error)
-    evaluation['crit_freq.error'] = error
+    evaluation['crit_freq.num_spikes_error'] = error
+    crit_freq = evaluation['crit_freq.Crit_freq']
+    evaluation['crit_freq.frequency_error'] = crit_freq_error(crit_freq)
     return evaluation
 
 def put_name_of_stimulus_in_crit_freq_voltage_traces_dict(vt):
@@ -304,16 +326,14 @@ def modify_evaluator_to_evaluate_crit_freq_stimuli(e, freq_list = None, delay = 
     e.setup.finalize_funs.append(find_Crit_freq)
     e.setup.finalize_funs.append(I.partial(combine, freq_list = freq_list))
     
+
     
 ######################################################
 # Combiner which can evaluate the crit. freq. protocols
 ######################################################
 
 def modify_combiner_to_add_crit_freq_error(c, freq_list = None):
-    c.setup.append('crit_freq.error', ['crit_freq.error'])
-    
-    
-
+    c.setup.append('crit_freq.error', ['crit_freq.num_spikes_error', 'crit_freq.frequency_error'])
     
 ######################################################
 # visualize critical frequency 
