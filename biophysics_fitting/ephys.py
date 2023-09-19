@@ -96,8 +96,8 @@ def find_crossing(v,thresh):
     if len(upcross) == 0:
         return [[],[]]
     downcross = downcross[downcross > upcross[0]]
-    if len(upcross) != len(downcross):
-        return [[],[]]
+    #if len(upcross) != len(downcross):
+    #    return [[],[]]
     return [list(upcross), list(downcross)]
 
 def voltage_base(t, v, stim_delay):
