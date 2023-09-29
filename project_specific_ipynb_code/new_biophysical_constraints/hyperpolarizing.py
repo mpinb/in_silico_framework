@@ -8,7 +8,7 @@ from biophysics_fitting.hay_complete_default_setup import interpolate_vt
 from biophysics_fitting import utils
 from functools import partial
 from neuron import h 
-from crit_freq import setup_soma_step_with_current
+from project_specific_ipynb_code.new_biophysical_constraints.crit_freq import setup_soma_step_with_current
 
 ######################################################
 # Simulator which runs the hyperpolarizing stimuli protocols
@@ -21,27 +21,21 @@ def _append(cell, name, item):
         setattr(cell, name, [])
     getattr(cell, name).append(item)
     
-# make this nicer 
-def record_with_current(cell):
-    return {'tVec': tVec(cell), 
-        'vList': (vmSoma(cell), vmApical(cell, dist)), 
-        'iList': np.array(cell.iList)}
     
 def record_at_dist_with_current(cell, dist = None):
     if dist: 
         return {'tVec': tVec(cell), 
             'vList': (vmSoma(cell), vmApical(cell, dist)), 
             'iList': np.array(cell.iList)}
-    return record_with_current(cell)
     
-def modify_simulator_to_run_hyperpolarizing_stimuli(s, duration = None, delay = None, amplitude = None):
-    """typical defaults:duration = 1000, delay = 1000, amplitude = -0.05"""
+def modify_simulator_to_run_hyperpolarizing_stimuli(s, duration = None, delay = None, amplitude = None, dist = None):
+    """typical defaults:duration = 1000, delay = 1000, amplitude = -0.05, dist = 400"""
     tStop = duration + delay + 1000
     s.setup.stim_run_funs.append(['hyperpolarizing.run', param_to_kwargs(partial(run_fun, T = 34.0, Vinit = -75.0, dt = 0.025, 
                                                                                  recordingSites = [], tStart = 0.0, tStop = tStop, vardt = True))])
     s.setup.stim_setup_funs.append(['hyperpolarizing.stim', param_to_kwargs(partial(setup_soma_step_with_current, amplitude = amplitude, delay = delay,
                                                                                     duration = duration))])
-    s.setup.stim_response_measure_funs.append(['hyperpolarizing.measure', param_to_kwargs(partial(record_at_dist_with_current))])
+    s.setup.stim_response_measure_funs.append(['hyperpolarizing.measure', param_to_kwargs(partial(record_at_dist_with_current, dist = dist))])
     
     
 def modify_simulator_to_run_dend_hyperpolarizing_stimuli(s, duration = None, delay = None, amplitude = None, dist = None):
