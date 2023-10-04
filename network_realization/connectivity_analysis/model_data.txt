@@ -1,0 +1,1 @@
+Download 'model data (2021-v1)' from https://cortexinsilico.zib.de/download, extract zip-file, and replace this file with a symbolic link to the downloaded data.
