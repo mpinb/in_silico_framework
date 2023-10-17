@@ -86,14 +86,17 @@ except ImportError:
 # the current version. Use versioneer.py to be able 
 # to bundle package without the need of having git installed.
 from model_data_base._version import get_versions
-versions = get_versions()
-__version__ = versions['version']
-__git_revision__ = versions['full-revisionid']
-if __version__ == "0+unknown":
-    raise OSError("Commit not found\nVersion is {}\nRevision_id is {}). Git is not found, or something else went wrong.".format(__version__, __git_revision__))
-else:
-    print("Current version: {version}".format(version = __version__))
-    print("Current pid: {pid}".format(pid = os.getpid()))
+from model_data_base._module_versions import version_cached
+
+if not 'ISF_MINIMIZE_IO' in os.environ:
+    versions = get_versions()
+    __version__ = versions['version']
+    __git_revision__ = versions['full-revisionid']
+    if __version__ == "0+unknown":
+        raise OSError("Commit not found\nVersion is {}\nRevision_id is {}). Git is not found, or something else went wrong.".format(__version__, __git_revision__))
+    else:
+        print("Current version: {version}".format(version = __version__))
+        print("Current pid: {pid}".format(pid = os.getpid()))
 
 import barrel_cortex
 from barrel_cortex import excitatory, inhibitory, color_cellTypeColorMap, color_cellTypeColorMap_L6paper, color_cellTypeColorMap_L6paper_with_INH
@@ -209,7 +212,8 @@ from singlecell_input_mapper.evoked_network_param_from_template import create_ne
 from singlecell_input_mapper.ongoing_network_param_from_template import create_network_parameter \
            as create_ongoing_network_parameter           
 
-if get_versions()['dirty']: warnings.warn('The source folder has uncommited changes!')
+if not 'ISF_MINIMIZE_IO' in os.environ:
+    if get_versions()['dirty']: warnings.warn('The source folder has uncommited changes!')
 
 from SLURM_scripts.utils import get_user_port_numbers, get_client
 

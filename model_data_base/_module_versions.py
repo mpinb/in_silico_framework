@@ -5,10 +5,17 @@ from ._version import get_versions
 
 class Versions_cached:
     def __init__(self):
-        self._git_version = None
-        self._conda_list = None
-        self._module_version = None
-        self._hostname = None
+        if 'ISF_MINIMIZE_IO' in os.environ:
+            print('ISF_MINIMIZE_IO mode')
+            self._git_version = 'ISF_MINIMIZE_IO_mode'
+            self._conda_list = 'ISF_MINIMIZE_IO_mode'
+            self._module_version = {}
+            self._hostname = 'ISF_MINIMIZE_IO_mode'
+        else:
+            self._git_version = None
+            self._conda_list = None
+            self._module_version = None
+            self._hostname = None
     
     @staticmethod
     def _get_module_versions():
@@ -31,17 +38,17 @@ class Versions_cached:
         return get_versions()
     
     def get_module_versions(self):
-        if not self._module_version:
+        if self._module_version is None:
             self._module_version = self._get_module_versions()
         return self._module_version
     
     def get_conda_list(self):
-        if not self._conda_list:
+        if self._conda_list is None:
             self._conda_list = self._get_conda_list()
         return self._conda_list
     
     def get_git_version(self):
-        if not self._git_version:
+        if self._git_version is None:
             self._git_version = self._get_git_version()
         return self._git_version
     

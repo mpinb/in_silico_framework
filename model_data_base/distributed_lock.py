@@ -6,7 +6,9 @@ import os
 import warnings
 from compatibility import YamlLoader
 
-if 'ISF_DISTRIBUTED_LOCK_CONFIG' in os.environ:
+if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+    pass
+elif 'ISF_DISTRIBUTED_LOCK_CONFIG' in os.environ:
     config_path = os.environ['ISF_DISTRIBUTED_LOCK_CONFIG']
     with open(os.environ['ISF_DISTRIBUTED_LOCK_CONFIG'], 'r') as f:
         config = yaml.load(f, Loader=YamlLoader)
@@ -19,6 +21,8 @@ else:
 
 
 def get_client():
+    if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+        return None, None
     for server in config:
         print('trying to connect to distributed locking server {}'.format(str(server)))
         if server['type'] == 'redis':
@@ -54,6 +58,8 @@ def update_config(c):
     server, client = get_client()
 
 def get_lock(name):
+    if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+        raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')
     if server['type'] == 'file':
         import fasteners
         return fasteners.InterProcessLock(name)
@@ -67,6 +73,8 @@ def get_lock(name):
             'Current locking config is: {}'.format(str(server)))
         
 def get_read_lock(name):
+    if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+        raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')    
     if server['type'] == 'file':
         import fasteners
         return fasteners.InterProcessLock(name)
@@ -80,6 +88,8 @@ def get_read_lock(name):
             'Current locking config is: {}'.format(str(server)))
         
 def get_write_lock(name):
+    if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+        raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')    
     if server['type'] == 'file':
         import fasteners
         return fasteners.InterProcessLock(name)
