@@ -163,14 +163,16 @@ jupyter nbextensions_configurator enable --user
 
 ## Other config
 
-It is recommended to override some settings in the distributed config file. In particular the amount of memory per worker:
+It is recommended to override some settings in the distributed config yml file. In particular the amount of memory per worker, and whether or not dask should kill them if they eat up too much memory:
 
 ```yml
-	memory:
-	target: 0.90  # target fraction to stay below
-	spill:  False # fraction at which we spill to disk
-	pause: False  # fraction at which we pause worker threads
-	terminate: False  # fraction at which we terminate the worker
+distributed:
+  worker:
+    memory:
+      target: 0.90  # target fraction to stay below
+	  spill:  False # fraction at which we spill to disk
+	  pause: False  # fraction at which we pause worker threads
+	  terminate: False  # fraction at which we terminate the worker
 ```
 [This StackOverflow answer](https://stackoverflow.com/questions/57997463/dask-warning-worker-exceeded-95-memory-budget) gives more information.
 

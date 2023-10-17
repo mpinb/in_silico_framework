@@ -11,7 +11,7 @@ from .utils import get_cellnumbers_from_confile, split_network_param_in_one_elem
 from .get_cell_with_network import get_cell_with_network
 from biophysics_fitting.hay_evaluation import objectives_BAC, objectives_step
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 ###############################
 # First part: class to manage synaptic strength fitting

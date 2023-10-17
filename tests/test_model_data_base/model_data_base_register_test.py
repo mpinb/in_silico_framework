@@ -2,7 +2,7 @@ from .context import *
 from model_data_base.model_data_base import ModelDataBase, MdbException
 from model_data_base.model_data_base_register import _get_mdb_register, \
         ModelDataBaseRegister, get_mdb_by_unique_id, register_mdb
-import unittest
+import pytest
 
 def assert_search_mdb_did_not_fail(mdbr):
     keys = list(mdbr.mdb.keys())
@@ -10,11 +10,11 @@ def assert_search_mdb_did_not_fail(mdbr):
     #for k in keys: print (mdbr.mdb[k])
     assert(not keys)
     
-class TestModelDataBaseRegister(unittest.TestCase):       
-    def setUp(self):        
+class TestModelDataBaseRegister:       
+    def setup_class(self):        
         self.basetempdir = tempfile.mkdtemp()
         
-    def tearDown(self):
+    def teardown_class(self):
         shutil.rmtree(self.basetempdir)     
         
 # commented out, since we now define mdbr in the module itself
@@ -33,19 +33,20 @@ class TestModelDataBaseRegister(unittest.TestCase):
         
         mdbr = ModelDataBaseRegister(self.basetempdir)
         
-        self.assertTrue(get_mdb_by_unique_id(mdb1.get_id()).basedir == p1)
-        self.assertTrue(get_mdb_by_unique_id(mdb2.get_id()).basedir == p2)
-        self.assertTrue(get_mdb_by_unique_id(mdb3.get_id()).basedir == p3)
+        assert get_mdb_by_unique_id(mdb1.get_id()).basedir == p1
+        assert get_mdb_by_unique_id(mdb2.get_id()).basedir == p2
+        assert get_mdb_by_unique_id(mdb3.get_id()).basedir == p3
         
         mdb4 = ModelDataBase(os.path.join(self.basetempdir, 'test4'))
         register_mdb(mdb4)
-        self.assertTrue(get_mdb_by_unique_id(mdb4.get_id()).basedir == mdb4.basedir)
+        assert get_mdb_by_unique_id(mdb4.get_id()).basedir == mdb4.basedir
         assert_search_mdb_did_not_fail(mdbr)
         
     def test_unknown_id_raises_KeyError(self):
         mdbr = ModelDataBaseRegister(self.basetempdir)
                 
-        self.assertRaises(KeyError, lambda: get_mdb_by_unique_id('bla'))
+        with pytest.raises(KeyError):
+            get_mdb_by_unique_id('bla')
         assert_search_mdb_did_not_fail(mdbr)
         
         

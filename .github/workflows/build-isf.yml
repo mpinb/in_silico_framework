@@ -1,0 +1,105 @@
+# Builds ISF for any Python version (2.7/3.8/3.9), depending on the input
+name: Build ISF
+on:
+  workflow_call:
+    inputs:
+      py_version:
+        required: true
+        type: string
+    outputs:
+      runner_name: 
+        description: "Name of the runner the build ran on"
+        value: ${{ jobs.setup.outputs.runner_name }}
+jobs:
+
+  setup:
+    name: Check if build is necessary
+    runs-on: [ self-hosted, ibs3005 , "py${{ inputs.py_version }}" ]
+    defaults:
+      run:
+        shell: bash -l {0}
+    outputs:  # Save on which runner this ran, so the consequent test suite can run on the same one
+      needs_build: ${{ steps.needs_build.outputs.needs_build }}
+      runner_name: ${{ runner.name }}
+    
+    steps:
+    - uses: actions/checkout@v3
+      id: checkout
+      
+    - name: Check changes with previous commit
+      uses: dorny/paths-filter@v2
+      id: commit_changed
+      with:
+        # compare with the commit on the runner
+        base: ${{ github.ref }}
+        list-files: shell
+        filters: |
+          trigger_rebuild:
+            - "installer/py${{ inputs.py_version }}/**"
+            - "mechanisms/**"
+            - ".github/workflows/**"
+
+    - name: Check if (re)build is necessary
+      # (re)build only if:
+      # - the commit has changes in the directories specified in step "check changes with previous commit" (compared to whatever previous commit is on the runner)
+      # - the build does not exist (yet)
+      # - the previous build was not succesful for whatever reason
+      # the fromJSON(toJSON(...)) is necessary to convert the outputs to strings, otherwise github actions complains that it "might" not be able to acces the variables.
+      id: needs_build
+      run: |
+        echo "needs_build=false" >> $GITHUB_OUTPUT
+        if [ ${{ steps.commit_changed.outputs.trigger_rebuild }} == 'true' ]; then
+          echo "Previous commit has ${{ steps.commit_changed.outputs.trigger_rebuild_count }} changes that require a rebuild"
+          echo "Changes: "
+          echo ${{ steps.commit_changed.outputs.trigger_rebuild_files }}
+          echo "Rebuild necessary!"
+          echo "needs_build=true" >> $GITHUB_OUTPUT
+        elif [ ! -d $HOME/anaconda_isf${{ inputs.py_version }} ]; then
+          echo "Build does not exist yet"
+          echo "New build necessary!"
+          echo "needs_build=true" >> $GITHUB_OUTPUT
+        elif ! $(head -n 1 "$HOME/build_success${{ inputs.py_version }}.txt" | grep -Fxq success) ; then
+          echo "Previous build was not succesful"
+          echo "Rebuild necessary!"
+          echo "needs_build=true" >> $GITHUB_OUTPUT
+        else
+          echo "Previous commit has no changes that require a rebuild"
+          echo "Build already exists and was succesful"
+          echo "No rebuild necessary"
+        fi
+
+  build:
+    # This will only run if the build is actually necessary
+    # Which is tested for in jobs.setup
+    name: (re)build ISF
+    runs-on: ${{ needs.setup.outputs.runner_name }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    needs: setup
+    if: ${{ needs.setup.outputs.needs_build == 'true' }}
+
+    steps:
+    - name: (re)build ISF
+      run: |
+        CONDA_TARGET_DIR="$HOME/anaconda_isf${{ inputs.py_version }}"
+        if [ -d "$CONDA_TARGET_DIR" ]; then
+          echo "Found existing installation in $HOME. Removing previous Anaconda installation..."
+          rm -r "$CONDA_TARGET_DIR"
+        else
+          echo "No previous Anaconda installation found. Continuing..."
+        fi
+        pushd .
+        cd installer/py${{ inputs.py_version }}
+        ./install.sh $CONDA_TARGET_DIR || exit 1
+        popd
+        source $CONDA_TARGET_DIR/bin/activate
+        conda list
+
+    - name: Save success state
+      if: ${{ always() }}
+      run: |
+        echo "Build success = ${{ job.status }}"
+        echo ${{ job.status }} > $HOME/build_success${{ inputs.py_version }}.txt 
+
+            

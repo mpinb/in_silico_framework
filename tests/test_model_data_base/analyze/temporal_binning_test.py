@@ -1,7 +1,6 @@
 from ..context import *
 from .. import decorators
 from model_data_base.analyze.temporal_binning import *
-import unittest
 import pandas as pd
 import numpy as np
 import dask.dataframe as dd
@@ -9,10 +8,8 @@ from model_data_base.model_data_base import ModelDataBase
 
 npartitions = 80
 
-client = distributed.client_object_duck_typed
-
-class TestTemporalBinning(unittest.TestCase):
-    def setUp(self):
+class TestTemporalBinning:
+    def setup_class(self):
         self.pdf = pd.DataFrame({'blabla': ['a', 1, 3], \
                                 '1': [1, 5, 10], \
                                 '2': [15, 1, 30], \
@@ -27,16 +24,15 @@ class TestTemporalBinning(unittest.TestCase):
         np.testing.assert_array_equal(bins, np.array([0,10,20,30,40,50]))
         np.testing.assert_array_equal(hist, np.array([4/3.,2/3.,0/3.,1/3.,1/3.]))        
         
-    def test_temporal_binning_dask(self):
+    def test_temporal_binning_dask(self, client):
         ddf = dd.from_pandas(self.pdf, npartitions = 3)
         bins, hist = temporal_binning_dask(ddf, bin_size = 10, min_time = 0, max_time = 50, normalize = False, client = client)
         np.testing.assert_array_equal(bins, np.array([0,10,20,30,40,50]))
         np.testing.assert_array_equal(hist, np.array([4,2,0,1,1])) 
     
-    @decorators.testlevel(1)    
-    def test_binning_real_data(self):
-        with FreshlyInitializedMdb() as mdb:            
-            pdf = mdb['spike_times']
+    #@decorators.testlevel(1) 
+    def test_binning_real_data(self, client, fresh_mdb):
+        pdf = fresh_mdb['spike_times']
         #if dask: convert to pandas
         try:
             pdf = pdf.compute()

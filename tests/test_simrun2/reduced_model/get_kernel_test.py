@@ -14,20 +14,19 @@ def get_test_X_y(n_samples = 1000, n_timepoints = 100):
     y = dummy > np.random.rand(dummy.size)
     return X,y
 
-def get_test_Rm():
-    with FreshlyInitializedMdb() as mdb:
-        X,y = get_test_X_y(n_samples = 5000)
-        mdb['test_synapse_activation'] = X
-        mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
-        Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
-                     synapse_activation_window_width = 50)
-        Rm.fit([mdb])
+def get_test_Rm(fresh_mdb):
+    X,y = get_test_X_y(n_samples = 5000)
+    fresh_mdb['test_synapse_activation'] = X
+    fresh_mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
+    Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
+                    synapse_activation_window_width = 50)
+    Rm.fit([fresh_mdb])
     return Rm
 
 @pytest.mark.xfail(strict=False, reason="This test is statistical, and may sometimes fail.")
-def test_statistical_ReducedLdaModel_inference(): 
+def test_statistical_ReducedLdaModel_inference(fresh_mdb): 
     '''compare model infered from test data to expectancy'''
-    Rm = get_test_Rm()
+    Rm = get_test_Rm(fresh_mdb)
     Rm.plot() # make sure this can be executed
         
     assert 200 < np.array(Rm.lda_values).mean() < 400 ##!!
@@ -44,30 +43,28 @@ def test_statistical_ReducedLdaModel_inference():
     #mdb['reduced_model'] = Rm
 
 @pytest.mark.xfail(strict=False, reason="This test is statistical, and may sometimes fail.")
-def test_statistical_ReducedLdaModel_apply():
+def test_statistical_ReducedLdaModel_apply(fresh_mdb):
     '''compare model infered from test data to expectancy'''
-    with FreshlyInitializedMdb() as mdb:
-        X,y = get_test_X_y(n_samples = 5000)
-        mdb['test_synapse_activation'] = X
-        mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
-        Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
-                        synapse_activation_window_width = 50, cache = False)
-        Rm.fit([mdb])
-        mn = 0
-        res = Rm.apply_static(mdb, model_number = mn)
+    X,y = get_test_X_y(n_samples = 5000)
+    fresh_mdb['test_synapse_activation'] = X
+    fresh_mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
+    Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
+                    synapse_activation_window_width = 50, cache = False)
+    Rm.fit([fresh_mdb])
+    mn = 0
+    res = Rm.apply_static(fresh_mdb, model_number = mn)
     np.testing.assert_equal(res.lda_values, Rm.lda_values[mn])
     
 @pytest.mark.xfail(strict=False, reason="This test is statistical, and may sometimes fail.")
-def test_statistical_ReducedLdaModel_apply_data_outside_trainingsdata():
+def test_statistical_ReducedLdaModel_apply_data_outside_trainingsdata(fresh_mdb):
     '''compare model infered from test data to expectancy'''
-    with FreshlyInitializedMdb() as mdb:
-        X,y = get_test_X_y(n_samples = 5000)
-        mdb['test_synapse_activation'] = X
-        mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
-        Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
-                        synapse_activation_window_width = 50, cache = False)
-        Rm.fit([mdb])
-        mn = 0
+    X,y = get_test_X_y(n_samples = 5000)
+    fresh_mdb['test_synapse_activation'] = X
+    fresh_mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(0, np.NaN).replace(1, 100)
+    Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
+                    synapse_activation_window_width = 50, cache = False)
+    Rm.fit([fresh_mdb])
+    mn = 0
     res = Rm.apply_static({'test_synapse_activation': X-10000}, model_number = mn)
     assert res.p_spike.values.mean() == 0
     res = Rm.apply_static({'test_synapse_activation': X+10000}, model_number = mn)

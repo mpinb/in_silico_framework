@@ -16,7 +16,7 @@ from . import reader
 from .cell import PySection, Cell
 from . import cell_modify_functions
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 class CellParser(object):
     '''

@@ -68,15 +68,15 @@ class AffineTransformation:
         dst = self.dst_points = dst_points
         src = self.src_points = src_points
 
-        x = np.transpose(np.matrix([src[0], src[1], src[2], src[3]]))
-        y = np.transpose(np.matrix([dst[0], dst[1], dst[2], dst[3]]))
+        x = np.transpose(np.array([src[0], src[1], src[2], src[3]]))
+        y = np.transpose(np.array([dst[0], dst[1], dst[2], dst[3]]))
 
         # add ones on the bottom of x and y
-        x = np.matrix(np.vstack((x, [1.0, 1.0, 1.0, 1.0])))
-        y = np.matrix(np.vstack((y, [1.0, 1.0, 1.0, 1.0])))
+        x = np.array(np.vstack((x, [1.0, 1.0, 1.0, 1.0])))
+        y = np.array(np.vstack((y, [1.0, 1.0, 1.0, 1.0])))
         # solve for A2
 
-        matrix = y * x.I
+        matrix = np.dot(y, np.linalg.inv(x))
         self.matrix = matrix
 
     def transform_points(self, points, forwards=True):
@@ -94,11 +94,12 @@ class AffineTransformation:
         transformed_points = []
         for point4D in points:
             point = point4D[:3]
-            m_point = np.matrix(point)
+            m_point = np.array(point)
             m_tr_point = m_point.T
-            p = matrix * np.matrix(np.vstack((m_tr_point, 1.0)))
+            m_tr_point = np.append(m_point, 1.0)
+            p = np.dot(matrix, m_tr_point)
             p = np.array(p.T)
-            p_listed = p.tolist()[0]
+            p_listed = p.tolist()
             transformed_points.append(p_listed[0:3] + point4D[3:])
 
         return transformed_points
@@ -150,7 +151,7 @@ class ConvertPoints:
         Requires isotropic pixel size in x-y-direction'''
         if self.x_res != self.y_res:
             raise NotImplementedError("Requires isotropic pixel size in x-y-direction!")
-        return [t * self.x_res for t in thicknesses]
+        return [np.dot(t, self.x_res) for t in thicknesses]
 
 def _scaling(points, scaling):
     if points is None:
@@ -162,7 +163,7 @@ def _scaling(points, scaling):
             s = scaling[lv]
         except IndexError:
             s = 1
-        out.append(pp * s)
+        out.append(np.dot(pp, s))
     converted_points = out
     return converted_points
 

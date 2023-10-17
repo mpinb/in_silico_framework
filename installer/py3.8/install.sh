@@ -126,7 +126,7 @@ print_title "3/6. Installing PyPI dependencies"
 # 3.0 -- Downloading In-Silico-Framework pip dependencies (if necessary).
 if [ "${download_pip_packages_flag}" == "true" ]; then
     echo "Downloading In-Silico-Framework pip dependencies."
-    python -m pip --no-cache-dir download --no-deps -r pip_requirements.txt -d $SCRIPT_DIR/downloads/pip_packages
+    python -m pip --no-cache-dir download --no-deps -r $SCRIPT_DIR/pip_requirements.txt -d $SCRIPT_DIR/downloads/pip_packages
     echo "Download pip packages completed."
 fi
 # 3.1 -- Installing In-Silico-Framework pip dependencies.
@@ -156,5 +156,6 @@ cd $channels; nrnivmodl
 cd $netcon; nrnivmodl
 
 # -------------------- 7. Cleanup -------------------- #
+echo "Succesfully installed In-Silico-Framework for Python 3.8"
 rm $SCRIPT_DIR/tempfile
 exit 0

@@ -1,54 +1,73 @@
 # Installation of in-silico-framework followed by CI tests.
 # Builds ISF locally on the MPINB-hosted runner and runs all tests
-name: ISF Py2.7 (local) build/test
+name: ISF Py 2.7
 # Controls when the workflow will run
 on:
-  workflow_run:
-    workflows: ["ISF Py3.8 (local) build/test"]  # Start after Py3.8 has run
-    types:
-      - completed
-  # Allows you to run this workflow manually from the Actions tab
+  push:
+    branches: [ 'master' , 'testing' ]
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  
   build:
-    # The type of runner that the job will run on
-    runs-on: self-hosted
+    uses: ./.github/workflows/build-isf.yml
+    with:
+      py_version: 2.7
+
+  test:
+    name: Test Py2.7
+    needs: build  # assures there is a build of ISF
+    # Assure test runs on whatever runner the build ran on
+    # Note that runners are requested based on label, not on name
+    # So the runner should have a label equal to its name
+    runs-on: ${{ needs.build.outputs.runner_name }}
     defaults:
       run:
         shell: bash -l {0}
-    name: Py2.7 (local) build/test
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Test ISF for Python 2.7
+        run: |
+          echo "------------ Preliminary setup for tests -------------"
+          echo "Killing all dask processes on ${{ runner.name }} for user $USER (if they exist)"
+          pkill -U $USER dask-worker
+          pkill -U $USER dask-scheduler
+          echo "Creating tests/logs/ directory..."
+          mkdir -p ./tests/logs/
+          echo "Removing previous coverage files..."
+          rm .coverage.${{ runner.name }}.*
 
-      # Install Anaconda2 and update conda package manager
-      - name: Download, install & build ISF for Python 2.7
-        run: |
-          CONDA_TARGET_DIR="$(pwd)/anaconda_isf2"
-          if [ -d "$CONDA_TARGET_DIR" ]; then
-            echo "Found existing installation in $HOME. Removing previous Anaconda installation..."
-            rm -r "$CONDA_TARGET_DIR"
-          else
-            echo "No previous Anaconda installation found. Continuing..."
-          fi
-          pushd .
-          cd installer/py2.7
-          ./install.sh $CONDA_TARGET_DIR || exit 1
-          popd
+          echo "------------ Setting up environment -------------"
+          CONDA_TARGET_DIR="$HOME/anaconda_isf2.7"
           source $CONDA_TARGET_DIR/bin/activate
-          conda list
-      # Run in-silico-framework tests
-      - name: Test in-silico-framework
-        run: |
-          CONDA_TARGET_DIR="$(pwd)/anaconda_isf2"
-          source $CONDA_TARGET_DIR/bin/activate;
           echo "Using Python: $(which python)"
-          export PYTHONPATH=$(pwd)
-          dask-scheduler --port=28786 --bokeh-port=28787 &
-          dask-worker localhost:28786 --nthreads 1 --nprocs 4 --memory-limit=100e15 &
-          python -m pytest -rsx -vv --color=yes tests/
+          export PYTHONPATH=$(pwd):$HOME
+          echo $PYTHONPATH
+
+          echo "------------ Configuring Dask -------------"
+          name=${{ runner.name }}
+          runner_number=$( echo $name | grep -Eo '[0-9]+$' )
+          port_number=387${runner_number: -1}6
+          bokeh_port=387${runner_number: -1}7
+          echo "Launching Dask server on $name"
+          echo "Using port $port_number and bokeh port $bokeh_port"
+
+          echo "------------ Running tests -------------"
+          (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1)&
+          (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1)&
+          python -m pytest -rsx -vv --color=yes --dask_server_port $port_number tests/
+
+      - name: Cleanup dask orphan processes
+        if: ${{ always() }}
+        run: |
+          pkill -U $USER dask-scheduler
+          pkill -U $USER dask-worker
+
+      - name: Save test logs as artifacts
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }} 
+        with:
+          name: ${{ github.run_id }}_logs
+          path: ./tests/logs/

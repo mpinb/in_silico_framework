@@ -50,10 +50,10 @@ fi
 
 # 0.1 -- Check 1: Is Anaconda already downloaded?
 if [ -e "$SCRIPT_DIR/downloads/$anaconda_installer" ]; then
-    echo "Found Anaconda installer in installer/downloads"
+    echo "Found Anaconda installer in $SCRIPT_DIR/downloads"
     download_conda_flag="false"
 else
-    echo "No Anaconda installer found in installer/downloads. It will be downloaded."
+    echo "No Anaconda installer found in $SCRIPT_DIR/downloads. It will be downloaded."
     download_conda_flag="true"
 fi
 
@@ -102,7 +102,7 @@ echo "Activating environment by running \"source ${CONDA_INSTALL_PATH}/bin/activ
 source ${CONDA_INSTALL_PATH}/bin/activate
 conda info
 
-# -------------------- 2. Installing conda dependencies -------------------- #
+# -------------------- 2. Downloading conda dependencies -------------------- #
 print_title "2/5. Installing conda dependencies "
 # 2.0 -- Downloading In-Silico-Framework conda dependencies (if necessary).
 if [ "${download_conda_packages_flag}" == "true" ]; then
@@ -120,7 +120,7 @@ print_title "3/5. Installing PyPI dependencies"
 # 3.0 -- Downloading In-Silico-Framework pip dependencies (if necessary).
 if [ "${download_pip_packages_flag}" == "true" ]; then
     echo "Downloading In-Silico-Framework pip dependencies."
-    python -m pip --no-cache-dir download --no-deps -r pip_requirements.txt -d $SCRIPT_DIR/downloads/pip_packages
+    python -m pip --no-cache-dir download --no-deps -r $SCRIPT_DIR/pip_requirements.txt -d $SCRIPT_DIR/downloads/pip_packages
     echo "Download pip packages completed."
 fi
 # 3.1 -- Installing In-Silico-Framework pip dependencies.
@@ -138,5 +138,6 @@ cd $channels; nrnivmodl
 cd $netcon; nrnivmodl
 
 # -------------------- Cleanup -------------------- #
+echo "Succesfully installed In-Silico-Framework for Python 2.7."
 rm $SCRIPT_DIR/tempfile
 exit 0

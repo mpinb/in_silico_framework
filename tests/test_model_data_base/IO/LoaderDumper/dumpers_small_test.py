@@ -1,7 +1,5 @@
 from ...context import *
 from model_data_base.model_data_base import ModelDataBase
-from ... import decorators
-import unittest
 import tempfile
 import numpy as np
 from pandas.util.testing import assert_frame_equal
@@ -21,8 +19,8 @@ def robust_del_fun(mdb, key):
     except KeyError:
         pass
             
-class TestDumperSmall(unittest.TestCase): 
-    def setUp(self):
+class TestDumperSmall:
+    def setup_class(self):
         # set up model_data_base in temporary folder and initialize it.
         # This additionally is an implicit test, which ensures that the
         # initialization routine does not throw an error.
@@ -37,7 +35,7 @@ class TestDumperSmall(unittest.TestCase):
         self.ddf2 = dd.from_pandas(self.pdf2, npartitions = 2)
         assert(self.ddf.npartitions > 1)        
                        
-    def tearDown(self):
+    def teardown_class(self):
         if os.path.exists(self.path):
             shutil.rmtree(self.path)
             
@@ -71,10 +69,10 @@ class TestDumperSmall(unittest.TestCase):
     def test_dask_to_csv_small(self):
         self.data_frame_generic_small(self.pdf2, self.ddf2, dask_to_csv)
         
-    def test_dask_to_msgpack_small(self):
+    def test_dask_to_msgpack_small(self, client):
         self.data_frame_generic_small(self.pdf2, self.ddf2, dask_to_msgpack, client = client)     
         
-    def test_dask_to_categorized_msgpack_small(self):
+    def test_dask_to_categorized_msgpack_small(self, client):
         self.data_frame_generic_small(self.pdf2, self.ddf2, dask_to_categorized_msgpack, client = client)
         
     def test_pandas_to_msgpack_small(self):
@@ -102,8 +100,8 @@ class TestDumperSmall(unittest.TestCase):
         fun(np.random.randint(5, size=(100,)))
         fun(np.array([]))
         
-    def test_reduced_lda_model(self):
-        Rm = get_test_Rm()
+    def test_reduced_lda_model(self, fresh_mdb):
+        Rm = get_test_Rm(fresh_mdb)
         # does not change the original object
         st = Rm.st
         lda_values = Rm.lda_values
@@ -112,10 +110,10 @@ class TestDumperSmall(unittest.TestCase):
         
         self.mdb.setitem('rm', Rm, dumper = reduced_lda_model)
         
-        self.assertIs(st, Rm.st)
-        self.assertIs(lda_values, Rm.lda_values)
-        self.assertIs(lda_value_dicts, Rm.lda_value_dicts)
-        self.assertIs(mdb_list, Rm.mdb_list)
+        assert st is Rm.st
+        assert lda_values is Rm.lda_values
+        assert lda_value_dicts is Rm.lda_value_dicts
+        assert mdb_list is Rm.mdb_list
         
         # can be loaded
         Rm_reloaded = self.mdb['rm']

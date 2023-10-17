@@ -122,7 +122,6 @@ https://repo.continuum.io/pkgs/free/linux-64/seaborn-0.8-py27_0.tar.bz2
 #https://repo.continuum.io/pkgs/free/linux-64/setuptools-36.4.0-py27_1.tar.bz2
 #https://conda.anaconda.org/conda-forge/linux-64/singledispatch-3.4.0.3-py27_0.tar.bz2
 #https://conda.anaconda.org/conda-forge/linux-64/sip-4.18-py27_0.tar.bz2
-#https://conda.anaconda.org/conda-forge/linux-64/six-1.10.0-py27_0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/snappy-1.1.6-0.tar.bz2
 https://conda.anaconda.org/conda-forge/linux-64/sortedcontainers-2.0.4-py27_0.tar.bz2
 https://conda.anaconda.org/anaconda/linux-64/sqlite-3.33.0-h62c20be_0.tar.bz2

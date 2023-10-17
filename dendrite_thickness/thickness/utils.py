@@ -17,7 +17,7 @@ class SaveData:
         f.close()
 
     def load(self):
-        if os.path.isfile(self.data_file) is False:
+        if os.path.isfile(self.data_file) == False:
             return None
         f = open(self.data_file, 'rb')
         return pickle.load(f)
@@ -78,7 +78,7 @@ def get_am_image_match(am_paths, tif_paths):
 def get_nearest_point(point, points):
     neighbours = []
     width = 10
-    while len(neighbours) is 0:
+    while len(neighbours) == 0:
         neighbours = get_neighbours_of_point(point, points, width)
         width = width + width
     distances = [tr.get_distance(point, neighbour) for neighbour in neighbours]

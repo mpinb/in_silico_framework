@@ -1,6 +1,6 @@
 import single_cell_parser.analyze as sca
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 def silence_synapses_by_somadist_and_spike_source(cell, evokedNW, 
                                             soma_dist_ranges = None, 
                                             spike_sources = None):
