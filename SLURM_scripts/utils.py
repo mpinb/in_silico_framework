@@ -40,3 +40,12 @@ def get_client():
     else:
         client = distributed.Client(ip+':'+client_port)
     return client
+
+def tear_down_cluster(client):
+    import os
+    def get_jobid():
+        return os.environ['SLURM_JOBID']
+    str_ = 'scancel '
+    for jid in set(client.run(get_jobid).values()):
+        str_ += jid + ' '
+    print(str_)
