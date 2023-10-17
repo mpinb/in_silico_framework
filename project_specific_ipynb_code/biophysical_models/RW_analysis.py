@@ -21,14 +21,16 @@ def read_pickle(seed_folder, particle_id):
     df_names = [p for p in I.os.listdir(path) if p.endswith('.pickle')]
     df_names = sorted(df_names, key = lambda x: int(x.split('.')[0]))
     dfs = [I.pd.read_pickle(I.os.path.join(path, p)) for p in df_names]
+    if len(dfs) == 0:
+        return 'empty'
     df = I.pd.concat(dfs).reset_index(drop=True)
     df['iteration'] = df.index
     df['particle_id'] = particle_id
     return df
 
-def read_all(basedir, n_particles = 1000):
+def read_all(basedir, n_particles_start = 0, n_particles_end = 1000):
     fun = I.dask.delayed(read_pickle)
-    ds = [fun(basedir, i) for i in range(n_particles)]
+    ds = [fun(basedir, i) for i in range(n_particles_start, n_particles_end)]
     return ds
 
 class Load:
