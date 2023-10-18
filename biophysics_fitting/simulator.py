@@ -10,7 +10,7 @@ import single_cell_parser as scp
 from .parameters import param_selector
 import time
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 
 class Simulator_Setup:

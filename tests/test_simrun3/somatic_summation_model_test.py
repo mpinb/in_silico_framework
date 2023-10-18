@@ -1,5 +1,4 @@
 from . import decorators
-import unittest
 from . import context
 import numpy as np
 import pandas as pd
@@ -47,11 +46,8 @@ def get_fake_synapse_activation_dataframe():
              ['Generic2', 1, 5, 15, 25]]
     return pd.DataFrame(array, columns = columns, index = index)  
 
-class TestSomaticSummationModel(unittest.TestCase):       
-    def setUp(self):
-        pass
-
-    @decorators.testlevel(1)    
+class TestSomaticSummationModel:
+    #@decorators.testlevel(1)    
     def test_roll_rows_independently(self):
         A = np.array([[1,2,3],[2,3,4],[3,4,5]])    
         A_rolled = roll_rows_independently(A, np.array([1,0,-1])) 

@@ -1,7 +1,7 @@
-import unittest
 import shutil
 import os
 import numpy as np
+import pytest
 import dask
 import distributed
 from ..context import *
@@ -14,36 +14,40 @@ def write_data_to_dict(path, key):
     dict_[key] = data
             
             
-class TestTupleCloudSQLiteDict(unittest.TestCase):
-    def setUp(self):
+class TestTupleCloudSQLiteDict:
+    def setup_class(self):
         self.tempdir = tempfile.mkdtemp()
         self.path = os.path.join(self.tempdir, 'tuplecloudsql_test.db')
         self.db = SqliteDict(self.path, autocommit = True, flag = 'c')
         
-    def tearDown(self):
+    def teardown_class(self):
         self.db.close()
         if os.path.exists(self.tempdir):
             shutil.rmtree(self.tempdir)
             
     def test_check_key(self):
-        self.assertRaises(ValueError, lambda: check_key(1))
+        with pytest.raises(ValueError):
+            check_key(1)
         check_key('1')
-        self.assertRaises(ValueError, lambda: check_key((1,)))
+        with pytest.raises(ValueError):
+            check_key((1,))
         check_key(('1',)) 
-        self.assertRaises(ValueError, lambda: check_key('@'))
-        self.assertRaises(ValueError, lambda: check_key(('@asd', 'asd')))      
+        with pytest.raises(ValueError):
+            check_key('@')
+        with pytest.raises(ValueError):
+            check_key(('@asd', 'asd'))
     
     def test_str_values_can_be_assigned(self):
         db = self.db
         db['test'] = 'test'
-        self.assertEqual(db['test'], 'test')
+        assert db['test'] == 'test'
     
     def test_tuple_values_can_be_assigned(self):
         db = self.db
         db[('test',)] = 'test'
-        self.assertEqual(db[('test',)], 'test')  
+        assert db[('test',)] == 'test'  
         db[('test','abc')] = 'test2'
-        self.assertEqual(db[('test','abc')], 'test2')  
+        assert db[('test','abc')] == 'test2'  
         
     def test_pixelObject_can_be_assigned(self):
         db = self.db

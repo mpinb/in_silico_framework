@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from .utils import *
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 h = neuron.h
 

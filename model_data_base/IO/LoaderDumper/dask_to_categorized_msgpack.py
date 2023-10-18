@@ -257,7 +257,7 @@ def dump(obj, savedir, repartition = False, get = None, categorize = True, clien
         RuntimeError: _description_
     """
     import os
-    if not "IS_TESTING" in os.environ:
+    if not "ISF_IS_TESTING" in os.environ:
         # Module was not called from within the test suite
         raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
     if client is None:

@@ -16,7 +16,7 @@ import single_cell_parser.analyze as sca
 import pandas as pd
 import json
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 class Cell(object):
     '''

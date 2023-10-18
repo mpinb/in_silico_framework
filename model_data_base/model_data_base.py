@@ -401,9 +401,9 @@ class ModelDataBase(object):
         if self.readonly is True:
             raise MdbException("DB is in readonly mode. Blocked writing attempt to key %s" % key)
         #this exists, so jupyter notebooks will not crash when they try to write something
-        elif self.readonly is 'warning': 
+        elif self.readonly == 'warning': 
             warnings.warn("DB is in readonly mode. Blocked writing attempt to key %s" % key)
-        elif self.readonly is False:
+        elif self.readonly == False:
             pass
         else:
             raise MdbException("Readonly attribute should be True, False or 'warning, but is: %s" % self.readonly)

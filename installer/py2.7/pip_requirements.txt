@@ -84,4 +84,4 @@ tenacity==7.0.0
 #tqdm==4.62.3
 #wcwidth==0.2.5
 #webencodings==0.5.1
-pytest==2.9.2
+pytest==2.9.2  # installed by anaconda

@@ -16,7 +16,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 h = neuron.h
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 def test_BAC_firing(fname):
     neuronParameters = scp.build_parameters(fname)

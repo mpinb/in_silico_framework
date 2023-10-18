@@ -11,7 +11,7 @@ from . import synapse_mapper as smap
 from . import sim_control
 import numpy as np
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 '''anatomical parameters'''
 # ? look @ vpm -> L5tt mapping results

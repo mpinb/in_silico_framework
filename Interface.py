@@ -46,17 +46,17 @@ import math
 ### logging setup
 import logging
 # All loggers will inherit the root logger's level and handlers
-root_logger = logging.getLogger()
+isf_logger = logging.getLogger("ISF")
 # Redirect warnings to the logging system. This will format them accordingly.
 logging.captureWarnings(True)
-if not any([h.name == "root_logger_stream_handler" for h in root_logger.handlers]):
+if not any([h.name == "isf_logger_stream_handler" for h in isf_logger.handlers]):
     # If the stream handler hasn't been set yet: set it.
     # a singular stream handler, so that all logs can redirect to this one
-    root_logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
-    root_logger_stream_handler.name = "root_logger_stream_handler"
-    root_logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name)s: %(message)s"))
-    root_logger.handlers = [root_logger_stream_handler]  # Additional handlers can always be configured.
-root_logger_stream_handler = [h for h in root_logger.handlers if h.name == "root_logger_stream_handler"][0]
+    isf_logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
+    isf_logger_stream_handler.name = "isf_logger_stream_handler"
+    isf_logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name)s: %(message)s"))
+    isf_logger.handlers = [isf_logger_stream_handler]  # Additional handlers can always be configured.
+isf_logger_stream_handler = [h for h in isf_logger.handlers if h.name == "isf_logger_stream_handler"][0]
 
 try:
     from IPython import display

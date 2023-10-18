@@ -1,8 +1,6 @@
-import unittest
 import tempfile
 import warnings
 from ..context import *
-from .. import decorators
 from model_data_base.mdb_initializers.load_simrun_general \
             import optimize as optimize_simrun_general
 from model_data_base.mdb_initializers.synapse_activation_binning \
@@ -12,25 +10,12 @@ from model_data_base.IO.LoaderDumper import dask_to_csv, dask_to_msgpack, dask_t
 from model_data_base.utils import silence_stdout
 import distributed
 
-client = distributed.client_object_duck_typed
-
 optimize_simrun_general = silence_stdout(optimize_simrun_general)
 
-class TestSynapseActivationBinning(unittest.TestCase):
-    def setUp(self):
-        # set up model_data_base in temporary folder and initialize it.
-        # This additionally is an implicit test, which ensures that the
-        # initialization routine does not throw an error
-        self.fmdb = FreshlyInitializedMdb()
-        self.mdb = self.fmdb.__enter__()
-        optimize_simrun_general(self.mdb, client = client)
-                       
-    def tearDown(self):
-        self.fmdb.__exit__()
-        
-    def test_API(self):
-        init_synapse_activation(self.mdb, groupby = 'EI')
-        init_synapse_activation(self.mdb, groupby = ['EI'])
-        init_synapse_activation(self.mdb, groupby = ['EI', 'proximal'])        
+def test_API(fresh_mdb, client):
+    optimize_simrun_general(fresh_mdb, client = client)
+    init_synapse_activation(fresh_mdb, groupby = 'EI')
+    init_synapse_activation(fresh_mdb, groupby = ['EI'])
+    init_synapse_activation(fresh_mdb, groupby = ['EI', 'proximal'])        
         
         

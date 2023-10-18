@@ -2,7 +2,12 @@ import os
 import hashlib
 import numpy as np
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
+import tempfile
+import shutil
+import compatibility
+import signal
+
 import tempfile
 import shutil
 import compatibility
@@ -111,7 +116,7 @@ if six.PY3:
             )
 
         def __repr__(self):
-            return f'{self.__class__.__name__}({self.name!r}, size={self.size})'
+            return '{class_name}({name!r}, size={size})'.format(class_name=self.__class__.__name__, name=self.name, size=self.size)
 
         @property
         def buf(self):

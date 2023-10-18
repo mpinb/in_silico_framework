@@ -17,7 +17,7 @@ from neuron import h
 import six
 import math
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 from . import network_modify_functions
 

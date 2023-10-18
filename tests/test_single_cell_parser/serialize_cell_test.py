@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-import unittest
 import os
 import numpy as np
 import neuron
@@ -13,8 +12,8 @@ import mechanisms
 from .context import *
 
 
-class TestSerializeCell(unittest.TestCase): 
-    def setUp(self):
+class TestSerializeCell: 
+    def setup_class(self):
         cell_param = os.path.join(getting_started_dir, \
                             'biophysical_constraints', \
                             '86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param')

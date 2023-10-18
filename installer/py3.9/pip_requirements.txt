@@ -43,6 +43,14 @@ bluepyopt==1.9.126
 pypdf2==1.26.0
 neo==0.9.0
 
+## pytest
+pytest==7.4.0
+pytest-cov==4.1.0
+coverage==7.3.0
+pytest-xdist==3.3.1
+execnet==2.0.2  # for pytest-xdist
+exceptiongroup==1.1.2
+
 ## misc
 chart-studio==1.1.0
 fastjsonschema==2.15.3
@@ -55,7 +63,4 @@ torch==1.8.1
 torchaudio==0.8.1
 torchvision==0.9.1
 dash==2.9.3
-pytest==6.1.1
-pytest-cov==4.1.0
-coverage==7.3.0
-pipdeptree==2.13.
+pipdeptree==2.13.0

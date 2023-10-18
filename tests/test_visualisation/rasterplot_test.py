@@ -1,13 +1,12 @@
 from .context import *
 from visualize.rasterplot import *
-import unittest
 import dask.dataframe as dd
 import pandas as pd
 from . import decorators
 from model_data_base.model_data_base import ModelDataBase 
 
-class TestRasterplot(unittest.TestCase):
-    def setUp(self):
+class TestRasterplot:
+    def setup_class(self):
         self.df = pd.DataFrame({'1': [1,2,3,4,5], \
                            '2': [2,1,6,3,4], \
                            '3': [7,3,4,1,2], \
@@ -29,7 +28,7 @@ class TestRasterplot(unittest.TestCase):
         from matplotlib.axes import Axes
         fig = plt.figure(figsize = (15,3))
         ax = fig.add_subplot(1,1,1)
-        self.assertIsInstance(rasterplot(self.df, tlim = (0,350)), Figure)
-        self.assertIs(rasterplot(self.df, tlim = (0,350), fig = fig), fig)
-        self.assertIs(rasterplot(self.df, tlim = (0,350), fig = ax), ax)
+        assert isinstance(rasterplot(self.df, tlim = (0,350)), Figure)
+        assert rasterplot(self.df, tlim = (0,350), fig = fig) is fig
+        assert rasterplot(self.df, tlim = (0,350), fig = ax) is ax
         plt.close()

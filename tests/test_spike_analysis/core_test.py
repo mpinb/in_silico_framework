@@ -1,6 +1,5 @@
 from .context import *
 from spike_analysis.core import *
-import unittest
 import numpy as np
 import pandas as pd
 

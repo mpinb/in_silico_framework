@@ -4,7 +4,7 @@ for single cell simulations
 with NeuroNet subcellular synapse distributions
 '''
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 import tables #so florida servers have no problem with neuron
 from .writer import write_cell_simulation
 from .writer import write_landmark_file

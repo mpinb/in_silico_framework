@@ -12,7 +12,7 @@ import six
 import distributed
 import subprocess
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 AM_FILE = os.path.join(CURRENT_DIR, 'test_files', 'am_files', 'rest', 'S13_final_done_Alison_zScale_40.am')
 IMAGE_FILE = os.path.join(CURRENT_DIR, 'test_files', 'image_files', 'rest', 'S13_max_z_projection.tif')
@@ -111,7 +111,7 @@ def test_crop_image():
                                          np.array([[0, 3, 0], [3, 4, 5], [0, 5, 0]]))
 
 
-def test_pipeline():
+def test_pipeline(client):
     am_folder_path = os.path.join(CURRENT_DIR, 'test_files', 'am_files')
     tif_folder_path = os.path.join(CURRENT_DIR, 'test_files', 'image_files')
     hoc_file_path = os.path.join(CURRENT_DIR, 'test_files', 'WR58_Cell5_L5TT_Final.hoc')
@@ -140,5 +140,5 @@ def test_pipeline():
     # p.set_thickness_extractor_parameters()
     p.set_am_to_hoc_transformation_by_landmarkAscii(bijective_points_path)
     if six.PY3:  # Only works on Py3?
-        p.set_client_for_parallelization(distributed.client_object_duck_typed)
+        p.set_client_for_parallelization(client)
     df = p.run()

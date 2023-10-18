@@ -13,7 +13,7 @@ from project_specific_ipynb_code.hot_zone import get_main_bifurcation_section
 from model_data_base.mdb_initializers.prepare_ANN_batches import get_binsize
 
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 def get_section_distances_df_from_cell(cell, spatial_binsize_goal=50): 
     """Given a Cell object, produce the section_distances_dataframe, i.e. a DataFrame with the following information:

@@ -15,8 +15,7 @@ from .utils import *
 import os
 import socket
 import logging
-log = logging.getLogger(__name__)
-
+log = logging.getLogger("ISF").getChild(__name__)
 
 def _evoked_activity(cellParamName, evokedUpParamName, dirPrefix = '', seed = None, nSweeps = 1000, tStop = 345):
     '''

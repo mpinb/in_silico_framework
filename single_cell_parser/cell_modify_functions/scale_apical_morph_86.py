@@ -1,5 +1,5 @@
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 def scale_apical_morph_86(cell):
     '''

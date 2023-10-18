@@ -9,7 +9,7 @@ import pandas as pd
 from biophysics_fitting.utils import execute_in_child_process
 from .utils import *
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger("ISF").getChild(__name__)
 
 def convertible_to_int(x):
     try:
