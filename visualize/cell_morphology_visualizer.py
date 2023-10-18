@@ -1227,14 +1227,21 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         df = self.morphology.copy()
         fig_cell = self._get_interactive_cell(
             background_color=background_color)
-        if highlight_section:
+        if isinstance(highlight_section, int):
             fig_cell.add_traces(
                 px.scatter_3d(df[df['sec_n'] == highlight_section], x="x", y="y", z='z',
                               hover_data=["x", "y", "z", 'sec_n', "diameter"], size="diameter")
                 .update_traces(marker=dict(line=dict(width=0), color='red'))
                 .data
             )
-
+        elif isinstance(highlight_section, dict):
+            for highlight_section_, color in highlight_section.items():
+                fig_cell.add_traces(
+                    px.scatter_3d(df[df['sec_n'] == highlight_section_], x="x", y="y", z='z',
+                                  hover_data=["x", "y", "z", 'sec_n', "diameter"], size="diameter")
+                    .update_traces(marker=dict(line=dict(width=0), color=color))
+                    .data
+                )
         # create FigureWidget from figure
         # f = go.FigureWidget(data=fig_cell.data, layout=fig_cell.layout)
         return fig_cell
