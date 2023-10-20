@@ -58,7 +58,7 @@ class Hyperpolarizing:
                  amplitude = -0.05, 
                  definitions={'Rin':('Rin',30,7),  #Stuart.Spruston1998,  Berger.etal2003,  @Dembrow.etal2010, @Beaulieu-Laroche.etal2018
                              'Sag':('Sag',21.55, 5.05), # Dembrow 2010
-                             'Attenuation':('Attenuation',30,6.7)}):  #spread param (std) is calculated from the range 
+                             'Attenuation':('Attenuation',0.30,0.067)}):  #spread param (std) is calculated from the range 
     
         self.delay = delay
         self.duration = duration
@@ -114,8 +114,8 @@ class Hyperpolarizing:
     
 class Dend_hyperpolarizing:
     def __init__(self, 
-                 delay = 300,
-                 duration = 200,
+                 delay = 1000,
+                 duration = 1000,
                  amplitude = -0.05, 
                  definitions={'Dend_Rin':('Dend_Rin',30,5)}): #Beaulieu-Laroche.etal2018, Kalmbach.etal2013 
     
@@ -156,5 +156,5 @@ def modify_combiner_to_add_hyperpolarizing_stimuli_error(c):
     c.setup.append('hyperpolarizing.Rin', ['hyperpolarizing.Rin'])
     c.setup.append('hyperpolarizing.Sag', ['hyperpolarizing.Sag'])
     c.setup.append('hyperpolarizing.Attenuation', ['hyperpolarizing.Attenuation'])
-    c.setup.append('hyperpolarizing.Dend_Rin', ['hyperpolarizing..Dend_Rin'])
+    c.setup.append('hyperpolarizing.Dend_Rin', ['hyperpolarizing.Dend_Rin'])
     

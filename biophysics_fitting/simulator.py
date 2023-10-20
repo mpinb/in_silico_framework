@@ -288,7 +288,7 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
     def __init__(self):
         self.setup = Simulator_Setup()
 
-    def get_simulated_cell(self, params, stim): 
+    def get_simulated_cell(self, params, stim, simulate = True): 
         '''returns cell and parameters used to set up cell.
         The cell is simulated with the specified stimulus.
         
@@ -304,8 +304,9 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
         # run simulation
         name, fun = self.setup.get_stim_run_fun_by_stim(stim)
         #print name,param_selector(params, name)
-        cell = fun(cell, params = param_selector(params, name))
-        log.info("simulating {} took {} seconds".format(stim, time.time()-t))
+        if simulate:
+            cell = fun(cell, params = param_selector(params, name))
+            log.info("simulating {} took {} seconds".format(stim, time.time()-t))
         return cell, params
 
     def run(self, params, stims = None):

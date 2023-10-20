@@ -71,7 +71,7 @@ def record_chirp_dist(cell, recSite_dist = None, recSite2 = None):
 
     
 def modify_simulator_to_run_chirp_stimuli(s, delay = None, duration = None, final_freq  = None, dist = None):
-    """typical defaults: delay = 300, duration = 20000, final_freq = 20, dist = 400"""
+    """typical defaults: delay = 300, duration = 10000, final_freq = 20, dist = 400"""
     
     tStop = duration + delay
     
@@ -93,6 +93,16 @@ def modify_simulator_to_run_chirp_stimuli(s, delay = None, duration = None, fina
 # Evaluator which can evaluate the chirp protocol
 ######################################################
 
+def polyfilt_smoothing(freq_axis, Z_P):
+    '''Z_P is either ZAP or ZPP'''
+    cropped_Z_P =  [y for x, y in zip(freq_axis, Z_P) if x>= 1]
+    cropped_freq =  [x for x, y in zip(freq_axis, Z_P) if x>= 1]
+
+    coefs = I.np.polyfit(cropped_freq, cropped_Z_P, 13)
+
+    freq_axis_high_res = I.np.arange(0.0,20.0001,0.01)
+    fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
+    return freq_axis_high_res, fit
 
 #new evaluation with fitting 
 class Chirp: 
@@ -143,14 +153,15 @@ class Chirp:
         response_fft = self.fft_mag(voltage_traces, v)
         ZAP = response_fft/stim_fft
         
-        cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 0.5]
-        cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 0.5]
+#         cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 0.5]
+#         cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 0.5]
         
-        coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
+#         coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
 #         fit = [I.np.polyval(coefs, x) for x in freq_axis]
-        freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
-        fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
-        
+#         freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
+#         fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
+        freq_axis_high_res, fit = polyfilt_smoothing(freq_axis, ZAP)
+
         Res_freq = freq_axis_high_res[(np.where(fit == max(fit)))[0]][0]
 #         y = I.scipy.signal.savgol_filter(ZAP, window_length = 19, polyorder = 3, mode='interp')
 #         Res_freq = freq_axis[(np.where(y == max(y)))[0]][0]
@@ -170,8 +181,10 @@ class Chirp:
         signal_start, freq_axis, freq_indx = self.variables(voltage_traces)
 
         z_ratio = I.np.fft.rfft(v[signal_start:])/I.np.fft.rfft(i[signal_start:])
+        ZPP = (I.np.angle(z_ratio)[1:freq_indx])*(180/I.np.pi)
         
-        return {'chirp.ZPP': (I.np.angle(z_ratio)[1:freq_indx])*(180/I.np.pi), 'chirp.freq_axis': freq_axis }
+        freq_axis_high_res, fit = polyfilt_smoothing(freq_axis, ZPP)
+        return {'chirp.ZPP': fit, 'chirp.freq_axis': freq_axis, 'chirp.freq_axis_high_res': freq_axis_high_res}
     
     
 class Chirp_dend: 
@@ -221,14 +234,15 @@ class Chirp_dend:
         response_fft = self.fft_mag(voltage_traces, v_dendrite)
         ZAP = response_fft/stim_fft
 
-        cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 0.5]
-        cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 0.5]
+#         cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 0.5]
+#         cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 0.5]
         
-        coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
+#         coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
 #         fit = [I.np.polyval(coefs, x) for x in freq_axis]
         
-        freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
-        fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
+#         freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
+#         fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
+        freq_axis_high_res, fit = polyfilt_smoothing(freq_axis, ZAP)
         
         Res_freq = freq_axis_high_res[(np.where(fit == max(fit)))[0]][0]
 #         y = I.scipy.signal.savgol_filter(ZAP, window_length = 19, polyorder = 3, mode='interp')
@@ -250,14 +264,16 @@ class Chirp_dend:
         response_fft = self.fft_mag(voltage_traces, v)
         ZAP = response_fft/stim_fft
         
-        cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 0.5]
-        cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 0.5]
+#         cropped_ZAP =  [y for x, y in zip(freq_axis, ZAP) if x>= 1]
+#         cropped_freq =  [x for x, y in zip(freq_axis, ZAP) if x>= 1]
         
-        coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
+#         coefs = I.np.polyfit(cropped_freq, cropped_ZAP, 13)
         
-        freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
-        fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
-        
+#         freq_axis_high_res = I.np.arange(0.5,20.0001,0.01)
+#         fit = [I.np.polyval(coefs, x) for x in freq_axis_high_res]
+
+        freq_axis_high_res, fit = polyfilt_smoothing(freq_axis, ZAP)
+    
         Transfer = freq_axis_high_res[(np.where(fit == max(fit)))[0]][0]
         
 #         ZAP = I.scipy.signal.savgol_filter(ZAP, window_length = 19, polyorder = 3, mode='interp')
@@ -271,31 +287,70 @@ class Chirp_dend:
         signal_start, freq_axis, freq_indx = self.variables(voltage_traces)
         
         z_ratio = I.np.fft.rfft(v[signal_start:])/I.np.fft.rfft(i[signal_start:])
+        ZPP = (I.np.angle(z_ratio)[1:freq_indx])*(180/I.np.pi)
         
-        return {'chirp.ZPP_dend': (I.np.angle(z_ratio)[1:freq_indx])*(180/I.np.pi), 'chirp.freq_axis': freq_axis}
+        freq_axis_high_res, fit = polyfilt_smoothing(freq_axis, ZPP)
+        
+        return {'chirp.ZPP_dend': fit, 'chirp.freq_axis': freq_axis,  'chirp.freq_axis_high_res': freq_axis_high_res}
 
-    
+
+
 def Synch(dict_): 
-        dict_['chirp.ZPP_filtered'] = ndi.uniform_filter1d(dict_['chirp.ZPP'], size = 16, mode='nearest') 
-        dict_['chirp.ZPP_dend_filtered'] = ndi.uniform_filter1d(dict_['chirp.ZPP_dend'], size = 16, mode='nearest')
+    #ZPP: impedance phase profile
+    #ZAP: impedance amplitude profile
+#         dict_['chirp.ZPP_filtered'] = #ndi.uniform_filter1d(dict_['chirp.ZPP'], size = 16, mode='nearest') 
+#         dict_['chirp.ZPP_dend_filtered'] = # ndi.uniform_filter1d(dict_['chirp.ZPP_dend'], size = 16, mode='nearest')
 
         synch = {}
 
-        for x, a1, a2 in zip(dict_['chirp.freq_axis'], dict_['chirp.ZPP_filtered'], dict_['chirp.ZPP_dend_filtered']): 
-            if abs(a1 - a2) < 0.5 and x>1:
+#         for x, a1, a2 in zip(dict_['chirp.freq_axis'], dict_['chirp.ZPP_filtered'], dict_['chirp.ZPP_dend_filtered']): 
+#             if abs(a1 - a2) < 0.5 and x>1:
+#                 synch[x] = (a1, a2)
+        
+#         if synch:
+#             synch_freq = [key for i,key in enumerate(synch.keys()) if i ==  I.math.ceil(len(synch)/2)-1][0]
+#         else:
+#             synch_freq = -1000
+
+        T, A1, A2 = dict_['chirp.freq_axis_high_res'], dict_['chirp.ZPP'], dict_['chirp.ZPP_dend']
+        
+        for x, a1, a2 in zip(T, A1, A2): 
+            if abs(a1 - a2) < 0.5 and x>1: # below 1 Hz is not sampled by the chirp stimulus
                 synch[x] = (a1, a2)
 
-        del(dict_['chirp.ZPP'], dict_['chirp.ZPP_dend'], 
-            dict_['chirp.ZPP_filtered'], dict_['chirp.ZPP_dend_filtered'])
+        if synch:       
+            # seperate intervals in which the two curves are close
+            intervals = [] # intervals refers to the consecutive timepoints in which both curves are close
+            in_interval = False
+            for t in T:
+                if t in synch:
+                    if in_interval == False:
+                        intervals.append([]) # intervals refers to the consecutive timepoints in which both curves are close
+                    a1, a2 = synch[t]
+                    intervals[-1].append((t, a1-a2))
+                    in_interval = True        
+                else:
+                    in_interval = False
 
-        
-        if synch:
-            synch_freq = [key for i,key in enumerate(synch.keys()) if i ==  I.math.ceil(len(synch)/2)-1][0]
-        else:
+            # select intervals, which contain a crossing
+            intervals_with_crossing = []
+            for i in intervals:
+                differences = [x[1] for x in i]
+                max_ = max(differences)
+                min_ = min(differences)
+                if (max_ > 0) and (min_ < 0):
+                    intervals_with_crossing.append(i)
+
+            if intervals_with_crossing: 
+                selected_interval = intervals_with_crossing[-1]
+                synch_freq = I.np.mean([x[0] for x in selected_interval])
+            else: 
+                synch_freq = -1000
+                dict_['chirp.no_intervals_with_crosssing'] = True
+        #     synch_freq = [(x+y)/2 for (x,y) in synch_freq]
+        else: 
             synch_freq = -1000
-
-            
-    #     synch_freq = [(x+y)/2 for (x,y) in synch_freq]
+            dict_['chirp.not_close'] = True
 
         mean = 6.63
         std = 1.5 
@@ -303,14 +358,16 @@ def Synch(dict_):
         dict_['chirp.synch_freq.raw'] = synch_freq
         dict_['chirp.synch_freq'] = (synch_freq - mean)/std
         
+#         del(dict_['chirp.ZPP'], dict_['chirp.ZPP_dend'])
+        
         return dict_
     
     
 def modify_evaluator_to_evaluate_chirp_stimuli(e, delay = None, duration = None):
-    """typical defaults: delay = 300, duration = 20000"""
+    """typical defaults: delay = 300, duration = 10000"""
     
-    chirp = Chirp(delay = 300, duration = 20000)
-    chirp_dend = Chirp_dend(delay = 300, duration = 20000)
+    chirp = Chirp(delay = delay, duration = duration)
+    chirp_dend = Chirp_dend(delay = delay, duration = duration)
     
     e.setup.evaluate_funs.append(['chirp.hay_measure', chirp.get,'chirp.features'])
     e.setup.evaluate_funs.append(['chirp_dend.hay_measure', chirp_dend.get,'chirp_dend.features'])

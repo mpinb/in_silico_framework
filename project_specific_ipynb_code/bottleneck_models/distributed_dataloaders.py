@@ -49,6 +49,7 @@ class snsDataset(Dataset):
         self.mode = mode
         self.cache = {}
         self.augment_fun = augment_fun
+
         if train_dataset_size > 0:
             self.train_dataset = snsDataset(sns, names, 'memory', augment_fun, 
                                         start_row = shape[0] - train_dataset_size,
@@ -163,6 +164,7 @@ def expand_SINGLE_BIOPHYSICS_dataset(batch, dendritic_compartments = [0], device
     return SA, VT, AP_SOMA, AP_DEND, ISI_SOMA, ISI_DEND, None, None
 
 
+
 def get_default_dataset(dataset_name, mode = 'memmap', dendritic_compartments = [0], device = None, 
                         split_by_rank = True, train_dataset_size = 0):
     mdb = I.ModelDataBase('/gpfs/soma_fs/scratch/abast/results/20230920_create_ANN_training_dataset_for_hypernetwork_training/')    
@@ -176,8 +178,7 @@ def get_default_dataset(dataset_name, mode = 'memmap', dendritic_compartments = 
                                                device = device,
                                                dendritic_compartments = dendritic_compartments)],
                       names = ['SA', 'ISI_SOMA', 'AP_SOMA', 'VT_SOMA', 'ISI_DEND', 'AP_DEND', 'VT_DEND'],
-                      train_dataset_size = train_dataset_size)  
-        
+                      train_dataset_size = train_dataset_size)          
     elif dataset_name == '400k_BIOPHYSICS':
         sns = mdb['shared_numpy_store2_fixed']
         snsd = snsDataset(sns, 

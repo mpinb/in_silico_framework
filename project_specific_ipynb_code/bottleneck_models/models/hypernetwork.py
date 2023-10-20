@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+
 import torch
 from torch import nn
 
@@ -84,7 +85,6 @@ class Model(torch.nn.Module):
         # def forward_biopysics(BIOPHYSICS_DENDRITIC_LOCATION):
         #     defined outside of the class
         
-
         def forward_concatenate(dot_out, ISI_SOMA, ISI_DEND):
             list_ = [dot_out]
             if self.bottleneck_ISI_soma:
