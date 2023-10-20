@@ -38,22 +38,35 @@ class snsDataset(Dataset):
         self.sns = sns
         self.names = names
         _, shape, _ = sns._get_metadata_from_name(names[0])
-        self.len_ = shape[0] - train_dataset_size
-        # self.start_row = start_row
-        # self.end_row = end_row - train_dataset_size
+        self.len_whole_dataset = shape[0]
+        
+        if split_by_rank:
+            if start_row is not None or end_row is not None:
+                raise NotImplementedError()
+        if start_row is None:
+            start_row = 0
+        if end_row is None:
+            end_row = self.len_whole_dataset 
+        
+        end_row = end_row - train_dataset_size
+        
+        self.len_ = end_row - start_row
+
+        self.start_row = start_row
+        self.end_row = end_row
+        
         self.allow_create_shm = allow_create_shm
         if split_by_rank:
-            assert(start_row is None)
-            assert(end_row is None)
             self.start_row, self.end_row, self.len_ = get_slice_by_rank(self.len_, use_local_world_size)
         self.mode = mode
         self.cache = {}
         self.augment_fun = augment_fun
 
         if train_dataset_size > 0:
-            self.train_dataset = snsDataset(sns, names, 'memory', augment_fun, 
-                                        start_row = shape[0] - train_dataset_size,
-                                        end_row = shape[0],
+            # print('start row of training dataset', self.end_row)
+            self.test_dataset = snsDataset(sns, names, 'memory', augment_fun, 
+                                        start_row = self.end_row,
+                                        end_row = self.end_row + train_dataset_size,
                                         split_by_rank = False,
                                         allow_create_shm = False,
                                         train_dataset_size = 0)
