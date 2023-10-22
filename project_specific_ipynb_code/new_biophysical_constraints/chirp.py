@@ -169,7 +169,7 @@ class Chirp:
 #             Res_freq = sorted(zip(y, freq_axis), reverse = True)[1][1]
 #             Res_initial_ignored = True 
         
-        return {'chirp.res_freq': (Res_freq- mean)/std, 'chirp.res_freq.raw': Res_freq }
+        return {'chirp.res_freq.normalized': (Res_freq- mean)/std, 'chirp.res_freq.raw': Res_freq,'chirp.res_freq': I.np.abs((Res_freq- mean)/std)}
 #     , 'chirp.ZAP': ZAP, 'chirp.signal_start': signal_start, 'chirp.stim_fft': stim_fft, 
 #                 'chirp.response_fft': response_fft, 'chirp.fit': fit, 'chirp.freq_axis_high_res': freq_axis_high_res}
 #                 Unfiltered_ZAP': ZAP}
@@ -251,7 +251,7 @@ class Chirp_dend:
 #             Res_freq = sorted(zip(y, freq_axis), reverse = True)[1][1]
 #             Res_initial_ignored = True 
         
-        return {'chirp.res_freq_dend': (Res_freq- mean)/std, 'chirp.res_freq_dend_raw': Res_freq}
+        return {'chirp.res_freq_dend': I.np.abs((Res_freq- mean)/std), 'chirp.res_freq_dend.normalized': (Res_freq- mean)/std, 'chirp.res_freq_dend_raw': Res_freq}
 #     , 'chirp.ZAP_dend': ZAP, 'chirp.fit_dend': fit}
    
     def Transfer_dend(self, voltage_traces, mean, std):
@@ -279,7 +279,9 @@ class Chirp_dend:
 #         ZAP = I.scipy.signal.savgol_filter(ZAP, window_length = 19, polyorder = 3, mode='interp')
 #         Transfer = freq_axis[(np.where(ZAP == max(ZAP)))[0]][0]
         
-        return {'chirp.transfer_dend': (Transfer - mean)/std, 'chirp.transfer_dend.raw': Transfer}
+        return {'chirp.transfer_dend': I.np.abs((Transfer - mean)/std), 
+                'chirp.transfer_dend.normalized': (Transfer - mean)/std,
+                'chirp.transfer_dend.raw': Transfer}
 #                 'ZAP_transfer': ZAP, 'chirp.fit_transfer': fit}
                  
     def ZPP_dend(self, voltage_traces, mean, std): 
@@ -311,7 +313,9 @@ def Synch(dict_):
 #             synch_freq = [key for i,key in enumerate(synch.keys()) if i ==  I.math.ceil(len(synch)/2)-1][0]
 #         else:
 #             synch_freq = -1000
-
+        if not 'chirp.freq_axis_high_res' in dict_:
+            return dict_
+        
         T, A1, A2 = dict_['chirp.freq_axis_high_res'], dict_['chirp.ZPP'], dict_['chirp.ZPP_dend']
         
         for x, a1, a2 in zip(T, A1, A2): 
@@ -356,7 +360,8 @@ def Synch(dict_):
         std = 1.5 
 
         dict_['chirp.synch_freq.raw'] = synch_freq
-        dict_['chirp.synch_freq'] = (synch_freq - mean)/std
+        dict_['chirp.synch_freq.normalized'] = (synch_freq - mean)/std
+        dict_['chirp.synch_freq'] = I.np.abs((synch_freq - mean)/std)
         
 #         del(dict_['chirp.ZPP'], dict_['chirp.ZPP_dend'])
         

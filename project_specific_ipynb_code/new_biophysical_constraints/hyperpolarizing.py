@@ -80,7 +80,7 @@ class Hyperpolarizing:
         
         Rin = (np.average(v[0][int(c[0]):int(b[0])]) - v[0][int(np.where(t == (self.delay-20))[0])])/self.amplitude
        
-        return {'hyperpolarizing.Rin.raw': Rin, 'hyperpolarizing.Rin.normalized': (Rin - mean)/std, 'hyperpolarizing.Rin':(Rin - mean)/std}
+        return {'hyperpolarizing.Rin.raw': Rin, 'hyperpolarizing.Rin.normalized': (Rin - mean)/std, 'hyperpolarizing.Rin':I.np.abs((Rin - mean)/std)}
 
     def Sag(self, voltage_traces, mean, std):
         
@@ -94,7 +94,7 @@ class Hyperpolarizing:
         sag_difference = np.average(v[0][int(c[0]):int(b[0])]) - I.np.amin(v[0][int(d):])
         sag = (sag_difference/(I.np.amin(v[0][int(d):])-baseline))*-100
     
-        return {'hyperpolarizing.Sag.raw': sag, 'hyperpolarizing.Sag.normalized': (sag - mean)/std, 'hyperpolarizing.Sag':(sag - mean)/std}
+        return {'hyperpolarizing.Sag.raw': sag, 'hyperpolarizing.Sag.normalized': (sag - mean)/std, 'hyperpolarizing.Sag':I.np.abs((sag - mean)/std)}
    
     def Attenuation(self,  voltage_traces, mean, std): 
         t,v,i = voltage_traces['tVec'],voltage_traces['vList'], voltage_traces['iList']
@@ -109,7 +109,7 @@ class Hyperpolarizing:
         v1 =  np.min(v[1][int(b[0]):]) - v1_baseline
     
         Attenuation = v1/v0
-        return {'hyperpolarizing.Attenuation.raw': Attenuation, 'hyperpolarizing.Attenuation.normalized': (Attenuation - mean)/std, 'hyperpolarizing.Attenuation':(Attenuation - mean)/std}           
+        return {'hyperpolarizing.Attenuation.raw': Attenuation, 'hyperpolarizing.Attenuation.normalized': (Attenuation - mean)/std, 'hyperpolarizing.Attenuation':I.np.abs((Attenuation - mean)/std)}           
     
     
 class Dend_hyperpolarizing:
@@ -138,7 +138,7 @@ class Dend_hyperpolarizing:
         
         Rin = (np.average(v[1][int(c[0]):int(b[0])]) - v[1][int(np.where(t == (self.delay-20))[0])])/self.amplitude
        
-        return {'hyperpolarizing.Dend_Rin.raw': Rin, 'hyperpolarizing.Dend_Rin.normalized': (Rin - mean)/std, 'hyperpolarizing.Dend_Rin':(Rin - mean)/std}
+        return {'hyperpolarizing.Dend_Rin.raw': Rin, 'hyperpolarizing.Dend_Rin.normalized': (Rin - mean)/std, 'hyperpolarizing.Dend_Rin':I.np.abs((Rin - mean)/std)}
     
 def modify_evaluator_to_evaluate_hyperpolarizing_stimuli(e): 
     hpz = Hyperpolarizing()
