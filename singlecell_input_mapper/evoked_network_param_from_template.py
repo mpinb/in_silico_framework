@@ -7,7 +7,9 @@ from model_data_base.mdbopen import mdbopen
 
 #evokedPrefix = '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/evoked_activity/'
 #evokedPrefix = '/home/abast/test/neurosim_getting_started/getting_started_files/functional_constraints/evoked_activity/PW_SuW_RF_CDK/'
-evokedPrefix = os.path.join(getting_started.parent, 'functional_constraints/evoked_activity/PW_SuW_RF_CDK/')
+evokedPrefix = os.path.join(
+    getting_started.parent,
+    'functional_constraints/evoked_activity/PW_SuW_RF_CDK/')
 #L2EvokedName = evokedPrefix + 'L2_3x3_PSTH_template_0-50_10ms.param'
 #L34EvokedName = evokedPrefix + 'L34_3x3_PSTH_template_0-20_1ms_20-50_10ms.param'
 #L4pyEvokedName = evokedPrefix + 'L4py_3x3_PSTH_template_0-50_10ms.param'
@@ -157,10 +159,10 @@ SymLocal4EvokedParam = scp.build_parameters(SymLocal4EvokedName)
 SymLocal5EvokedParam = scp.build_parameters(SymLocal5EvokedName)
 SymLocal6EvokedParam = scp.build_parameters(SymLocal6EvokedName)
 #evokedTemplates = {'L5tt': L5ttEvokedParam,\
-                    #'L6cc': L6ccEvokedParam,\
-                    #'VPM': VPMEvokedParam}
+#'L6cc': L6ccEvokedParam,\
+#'VPM': VPMEvokedParam}
 #evokedTemplates = {'L6cc': L6ccEvokedParam,\
-                    #'VPM': VPMEvokedParam}
+#'VPM': VPMEvokedParam}
 #evokedTemplates = {'VPM': VPMEvokedParam}
 # control:
 evokedTemplates = {'L2': L2EvokedParam,\
@@ -351,43 +353,57 @@ surroundColumns = {'A1': {'Alpha': 4, 'A1': 5, 'A2': 6, 'B1': 8, 'B2': 9},\
 surroundPSTHLookup = {1: 'D3', 2: 'D2', 3: 'D1', 4: 'C3', 5: 'C2',\
                         6: 'C1', 7: 'B3', 8: 'B2', 9: 'B1'}
 
-deflectionOffset = 245.0 #ms; to allow same analysis as CDK JPhys 2007
+deflectionOffset = 245.0  #ms; to allow same analysis as CDK JPhys 2007
 #deflectionOffset = 345.0 #ms; model2 needs more time to get to steady state
 
 # write cluster parameter file yes/no
 clusterParameters = False
 
-def create_network_parameter(templateParamName, cellNumberFileName, 
-                             synFileName, conFileName, whisker, outFileName, write_all_celltypes = False):
+
+def create_network_parameter(templateParamName,
+                             cellNumberFileName,
+                             synFileName,
+                             conFileName,
+                             whisker,
+                             outFileName,
+                             write_all_celltypes=False):
     print('*************')
-    print('creating network parameter file from template {:s}'.format(templateParamName))
+    print('creating network parameter file from template {:s}'.format(
+        templateParamName))
     print('*************')
-    
+
     templateParam = scp.build_parameters(templateParamName)
     cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
-    
-    nwParam = scp.NTParameterSet({'info': templateParam.info, 'NMODL_mechanisms': templateParam.NMODL_mechanisms})
-#    nwParam.info = templateParam.info
-#    nwParam.NMODL_mechanisms = templateParam.NMODL_mechanisms
+
+    nwParam = scp.NTParameterSet({
+        'info': templateParam.info,
+        'NMODL_mechanisms': templateParam.NMODL_mechanisms
+    })
+    #    nwParam.info = templateParam.info
+    #    nwParam.NMODL_mechanisms = templateParam.NMODL_mechanisms
     nwParam.network = {}
-    
+
     if clusterParameters:
         clusterBasePath = '/gpfs01/bethge/home/regger'
         nwParamCluster = scp.NTParameterSet({'info': templateParam.info})
-        nwParamCluster.NMODL_mechanisms = templateParam.NMODL_mechanisms.tree_copy()
+        nwParamCluster.NMODL_mechanisms = templateParam.NMODL_mechanisms.tree_copy(
+        )
         nwParamCluster.network = {}
         synFileNameIndex = synFileName.find('L5tt')
-        synFileNameCluster = clusterBasePath + '/data/' + synFileName[synFileNameIndex:]
+        synFileNameCluster = clusterBasePath + '/data/' + synFileName[
+            synFileNameIndex:]
         conFileNameCluster = synFileNameCluster[:-4] + '.con'
         for mech in nwParamCluster.NMODL_mechanisms:
             mechPath = nwParamCluster.NMODL_mechanisms[mech]
             if '/nas1/Data_regger' in mechPath:
                 mechPathIndex = mechPath.find('L5tt')
-                newMechPath = clusterBasePath + '/data/' + mechPath[mechPathIndex:]
+                newMechPath = clusterBasePath + '/data/' + mechPath[
+                    mechPathIndex:]
             if '/home/regger' in mechPath:
                 newMechPath = clusterBasePath + mechPath[12:]
             nwParamCluster.NMODL_mechanisms[mech] = newMechPath
-    
+
+
 #    for cellType in cellTypeColumnNumbers.keys():
     for cellType in list(templateParam.network.keys()):
         cellTypeParameters = templateParam.network[cellType]
@@ -398,30 +414,47 @@ def create_network_parameter(templateParamName, cellNumberFileName,
             cellTypeName = cellType + '_' + column
             nwParam.network[cellTypeName] = cellTypeParameters.tree_copy()
             if clusterParameters:
-                nwParamCluster.network[cellTypeName] = cellTypeParameters.tree_copy()
+                nwParamCluster.network[
+                    cellTypeName] = cellTypeParameters.tree_copy()
             PSTH = whisker_evoked_PSTH(column, whisker, cellType)
             if PSTH is not None:
                 interval = nwParam.network[cellTypeName].pop('interval')
-                nwParam.network[cellTypeName].celltype = {'spiketrain': {'interval': interval}}
+                nwParam.network[cellTypeName].celltype = {
+                    'spiketrain': {
+                        'interval': interval
+                    }
+                }
                 nwParam.network[cellTypeName].celltype['pointcell'] = PSTH
-                nwParam.network[cellTypeName].celltype['pointcell']['offset'] = deflectionOffset
+                nwParam.network[cellTypeName].celltype['pointcell'][
+                    'offset'] = deflectionOffset
                 if clusterParameters:
-                    interval = nwParamCluster.network[cellTypeName].pop('interval')
-                    nwParamCluster.network[cellTypeName].celltype = {'spiketrain': {'interval': interval}}
-                    nwParamCluster.network[cellTypeName].celltype['pointcell'] = PSTH
-                    nwParamCluster.network[cellTypeName].celltype['pointcell']['offset'] = deflectionOffset
+                    interval = nwParamCluster.network[cellTypeName].pop(
+                        'interval')
+                    nwParamCluster.network[cellTypeName].celltype = {
+                        'spiketrain': {
+                            'interval': interval
+                        }
+                    }
+                    nwParamCluster.network[cellTypeName].celltype[
+                        'pointcell'] = PSTH
+                    nwParamCluster.network[cellTypeName].celltype['pointcell'][
+                        'offset'] = deflectionOffset
             nwParam.network[cellTypeName].cellNr = numberOfCells
-            nwParam.network[cellTypeName].synapses.distributionFile = synFileName
+            nwParam.network[
+                cellTypeName].synapses.distributionFile = synFileName
             nwParam.network[cellTypeName].synapses.connectionFile = conFileName
             if clusterParameters:
                 nwParamCluster.network[cellTypeName].cellNr = numberOfCells
-                nwParamCluster.network[cellTypeName].synapses.distributionFile = synFileNameCluster
-                nwParamCluster.network[cellTypeName].synapses.connectionFile = conFileNameCluster
-    
+                nwParamCluster.network[
+                    cellTypeName].synapses.distributionFile = synFileNameCluster
+                nwParamCluster.network[
+                    cellTypeName].synapses.connectionFile = conFileNameCluster
+
     nwParam.save(outFileName)
     clusterOutFileName = outFileName[:-6] + '_cluster.param'
     if clusterParameters:
         nwParamCluster.save(clusterOutFileName)
+
 
 def whisker_evoked_PSTH(column, deflectedWhisker, cellType):
     columns = list(surroundColumns[deflectedWhisker].keys())
@@ -433,6 +466,7 @@ def whisker_evoked_PSTH(column, deflectedWhisker, cellType):
     PSTHstr = cellType + '_' + PSTHwhisker
     PSTH = evokedTemplate[PSTHstr]
     return PSTH
+
 
 def load_cell_number_file(cellNumberFileName):
     cellTypeColumnNumbers = {}
@@ -450,21 +484,24 @@ def load_cell_number_file(cellNumberFileName):
             if cellType not in cellTypeColumnNumbers:
                 cellTypeColumnNumbers[cellType] = {}
             cellTypeColumnNumbers[cellType][column] = numberOfCells
-    
+
     return cellTypeColumnNumbers
 
+
 if __name__ == '__main__':
-#    if len(sys.argv) == 7:
+    #    if len(sys.argv) == 7:
     if len(sys.argv) == 6:
         templateParamName = sys.argv[1]
         cellNumberFileName = sys.argv[2]
         synFileName = sys.argv[3]
-#        conFileName = sys.argv[4]
+        #        conFileName = sys.argv[4]
         conFileName = synFileName[:-4] + '.con'
         whisker = sys.argv[4]
         outFileName = sys.argv[5]
-        create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName)
+        create_network_parameter(templateParamName, cellNumberFileName,
+                                 synFileName, conFileName, whisker, outFileName)
     else:
-#        print 'parameters: [templateParamName] [cellNumberFileName] [synFileName] [conFileName] [deflected whisker] [outFileName]'
-        print('parameters: [ongoingTemplateParamName] [cellNumberFileName] [synFileName (absolute path)] [deflected whisker] [outFileName]')
-    
+        #        print 'parameters: [templateParamName] [cellNumberFileName] [synFileName] [conFileName] [deflected whisker] [outFileName]'
+        print(
+            'parameters: [ongoingTemplateParamName] [cellNumberFileName] [synFileName (absolute path)] [deflected whisker] [outFileName]'
+        )

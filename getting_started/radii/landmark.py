@@ -6,7 +6,6 @@
 import Interface as I
 import re
 
-
 # inputFile = '/home/amir/Projects/radii/radii/data/neuron1/landmark/conFile.txt'
 # outputFile = '/home/amir/Projects/radii/radii/data/neuron1/landmark/hocFile'
 # outputFile = '/home/amir/Projects/radii/radii/data/neuron1/landmark/hocFile_reduced'
@@ -24,7 +23,6 @@ outputEgAm = '/home/amir/Projects/in_silico_framework/getting_started/radii/data
 inputAmTr = '/home/amir/Projects/in_silico_framework/getting_started/radii/data/neuron2/amTransformed2.txt'
 outputAmTr = '/home/amir/Projects/in_silico_framework/getting_started/radii/data/neuron2/landmark/am2_transformed_landmark'
 
-
 # opening and reading txt file and set their points to a list of
 # arrays of points
 points = []
@@ -36,9 +34,6 @@ with open(inputEgHoc, 'r') as hocLand:
         points.append(point)
 I.scp.write_landmark_file(outputEgHoc, points)
 
-
-
-
 points = []
 with open(inputEgAm, 'r') as amLand:
     lines = amLand.readlines()
@@ -47,7 +42,6 @@ with open(inputEgAm, 'r') as amLand:
         point = list(map(float, matches))
         points.append(point)
 I.scp.write_landmark_file(outputEgAm, points)
-
 
 points = []
 with open(inputAmTr, 'r') as trLand:

@@ -9,6 +9,7 @@ import numpy as np
 from . import synapse
 from collections import Sequence
 import neuron
+
 nrn = neuron.nrn
 h = neuron.h
 from itertools import chain
@@ -16,14 +17,16 @@ import single_cell_parser.analyze as sca
 import pandas as pd
 import json
 import logging
+
 log = logging.getLogger("ISF").getChild(__name__)
+
 
 class Cell(object):
     '''
     Cell object providing morphological information
     and hoc interface
     '''
-    
+
     def __init__(self):
         '''
         Constructor:
@@ -59,20 +62,20 @@ class Cell(object):
         self.hoc_path = None
         self.id = None
         self.soma = None
-#        TODO: implement trees in python to avoid
-#        NEURON section stack problems that may occur
-#        during use of SectionLists
-#        tree and branches are set up by CellParser
+        #        TODO: implement trees in python to avoid
+        #        NEURON section stack problems that may occur
+        #        during use of SectionLists
+        #        tree and branches are set up by CellParser
         self.tree = None
-#        branches are all processes attached to soma
+        #        branches are all processes attached to soma
         self.branches = {}
-#        structures are all processes with different labels
-#        (e.g., Dendrite, ApicalDendrite, ApicalTuft, Myelin etc..
+        #        structures are all processes with different labels
+        #        (e.g., Dendrite, ApicalDendrite, ApicalTuft, Myelin etc..
         self.structures = {}
-#        simply list of all sections
+        #        simply list of all sections
         self.sections = []  # TODO: what type are these elements?
         self.synapses = {}
-#        TODO: this should be read from parameter file (e_pas)
+        #        TODO: this should be read from parameter file (e_pas)
         self.E = -70.0
         self.changeSynParamDict = {}
         self.tVec = None
@@ -81,7 +84,7 @@ class Cell(object):
         self.network_param = None
         self.network_sim_param = None
         self.section_adjacency_map = None
-    
+
     def re_init_cell(self, replayMode=False):
         '''re-initialize for next simulation run'''
         for sec in self.sections:
@@ -91,23 +94,23 @@ class Cell(object):
             for syn in self.synapses[synType]:
                 syn.disconnect_hoc_synapse()
             if replayMode:
-                self.synapses[synType] = []                
-    
+                self.synapses[synType] = []
+
     def record_range_var(self, var, mech=None):
         #allow specifying mech and var in var. this is closer to the neuron syntax
         if '.' in var:
             mech, var = var.split('.')
-            
+
         for sec in self.sections:
             try:
                 sec._init_range_var_recording(var, mech)
-            except (NameError, AttributeError):    
+            except (NameError, AttributeError):
                 ## if mechanism not in segment: continue
-                ## this leaves the duty to take care of missing range vars to 
+                ## this leaves the duty to take care of missing range vars to
                 ## all further functions relying on that values. I.e. they should
-                ## check, if the range var is existent in the respective segment or not                       
+                ## check, if the range var is existent in the respective segment or not
                 pass
-    
+
     def distance_between_pts(self, sec1, x1, sec2, x2):
         '''computes path length between to points given by
         location x1 and x2 in sections sec1 and sec2
@@ -123,19 +126,19 @@ class Cell(object):
             sec2 = self.sections[sec2]
             x1 = sec1.relPts(x1)
             x2 = sec2.relPts(x2)
-#        set origin
+        # set origin
         silent = h.distance(0, x1, sec=sec1)
         return h.distance(x2, sec=sec2)
-    
+
     def distance_to_soma(self, sec, x):
         '''computes path length between soma and point given by
         location x in sections sec or by ptID x and section ID sec'''
-#        assume the user knows what they're doing...
+        #        assume the user knows what they're doing...
         if isinstance(sec, int):
             return self.distance_between_pts(self.soma.secID, 0, sec, x)
         else:
             return self.distance_between_pts(self.soma, 0.0, sec, x)
-    
+
     def max_distance(self, label):
         '''computes maximum path length to soma
         of all branches with the same label'''
@@ -144,10 +147,14 @@ class Cell(object):
         maxDist = 0.0
 
         if label == "SpineHead" or label == "SpineNeck":
-            distances = [self.distance_to_soma(sec, 1.0) for sec in self.sections if sec.label == label]
+            distances = [
+                self.distance_to_soma(sec, 1.0)
+                for sec in self.sections
+                if sec.label == label
+            ]
             maxDist = max(distances)
         else:
-#        set origin to 0 of first branch with this label
+            #        set origin to 0 of first branch with this label
             for sec in self.sections:
                 if sec.label != label:
                     continue
@@ -158,31 +165,38 @@ class Cell(object):
                 for sec in branchSectionList:
                     secRef = h.SectionRef(sec=sec)
                     if not secRef.nchild():
-    #                    dist = self.distance_to_soma(sec, 1.0)
+                        #                    dist = self.distance_to_soma(sec, 1.0)
                         dist = h.distance(1.0, sec=sec)
                         if dist > maxDist:
                             maxDist = dist
         return maxDist
-    
-    def add_synapse(self, secID, ptID, ptx, preType='Generic', postType='Generic'):
+
+    def add_synapse(self,
+                    secID,
+                    ptID,
+                    ptx,
+                    preType='Generic',
+                    postType='Generic'):
         if preType not in self.synapses:
             self.synapses[preType] = []
         newSyn = synapse.Synapse(secID, ptID, ptx, preType, postType)
         newSyn.coordinates = np.array(self.sections[secID].pts[ptID])
         self.synapses[preType].append(newSyn)
         return self.synapses[preType][-1]
-    
+
     def remove_synapses(self, preType=None):
         if preType is None:
             return
-#        remove all
+        # remove all
         if preType == 'All' or preType == 'all':
             for synType in list(self.synapses.keys()):
                 synapses = self.synapses[synType]
                 del synapses[:]
                 del self.synapses[synType]
             return
-#        only one type
+
+
+        # only one type
         else:
             try:
                 synapses = self.synapses[preType]
@@ -194,8 +208,8 @@ class Cell(object):
 
     def init_time_recording(self):
         self.tVec = h.Vector()
-        self.tVec.record(h._ref_t, sec = self.sections[0])          
-    
+        self.tVec.record(h._ref_t, sec=self.sections[0])
+
     def change_synapse_parameters(self):
         '''
         Change parameters of synapses during simulation.
@@ -204,7 +218,8 @@ class Cell(object):
         This allows automatic update of parameter sets
         according to their relative timing.
         '''
-        raise NotImplementedError('Synapse parameter change does not work correctly with VecStim!')
+        raise NotImplementedError(
+            'Synapse parameter change does not work correctly with VecStim!')
         """ Old code
         eventList = self.changeSynParamDict.keys()
         eventList.sort()
@@ -242,7 +257,7 @@ class Cell(object):
                        for t in syn.preCell.spikeTimes:
                            if t >= tChange:
                                if np.random.rand() < prelNew:
-#                                    syn.releaseSite.append(t)
+                                    # syn.releaseSite.append(t)
                                    newSpikes.append(t)
                                    syn.releaseSite.spikeTimes.append(t)
                                    print '\t\tnew release time %.2f' % (t)
@@ -250,7 +265,7 @@ class Cell(object):
                            print '\t\told NetCon: %s' % (syn.netcons[0])
                            print '\t\told NetCon valid: %d' % (syn.netcons[0].valid())
                            del syn.netcons[0]
-#                            syn.netcons = []
+                           # syn.netcons = []
                            print '\t\tcreating new VecStim'
                            del syn.releaseSite.spikes
                            syn.releaseSite.spikes = h.VecStim()
@@ -321,7 +336,9 @@ class Cell(object):
 #                                    syn.netcons[0].weight[0] = recep.weight
     """
 
-    def get_synapse_activation_dataframe(self, max_spikes = 20, sim_trial_index = 0): 
+    def get_synapse_activation_dataframe(self,
+                                         max_spikes=20,
+                                         sim_trial_index=0):
         syn_types = []
         syn_IDs = []
         spike_times = []
@@ -338,8 +355,10 @@ class Cell(object):
                     syn_IDs.append(syn)
 
                     ## get spike times
-                    st_temp = [self.synapses[celltype][syn].releaseSite.spikeTimes[:]]
-                    st_temp.append([np.nan]* (max_spikes - len(st_temp[0])))
+                    st_temp = [
+                        self.synapses[celltype][syn].releaseSite.spikeTimes[:]
+                    ]
+                    st_temp.append([np.nan] * (max_spikes - len(st_temp[0])))
                     st_temp = list(chain.from_iterable(st_temp))
                     spike_times.append(st_temp)
 
@@ -351,23 +370,29 @@ class Cell(object):
 
                     ## calculate synapse somadistances
                     sec = self.sections[secID]
-                    soma_distances.append(sca.compute_syn_distance(self, self.synapses[celltype][syn]))
-                    
+                    soma_distances.append(
+                        sca.compute_syn_distance(self,
+                                                 self.synapses[celltype][syn]))
 
         ## write synapse activation df
-        columns = ['synapse_type', 'synapse_ID', 'soma_distance', 'section_ID', 
-                   'section_pt_ID', 'dendrite_label']
-        sa_pd = dict(list(zip(columns, [syn_types, syn_IDs, soma_distances, sec_IDs, pt_IDs, dend_labels])))
+        columns = [
+            'synapse_type', 'synapse_ID', 'soma_distance', 'section_ID',
+            'section_pt_ID', 'dendrite_label'
+        ]
+        sa_pd = dict(
+            list(
+                zip(columns, [
+                    syn_types, syn_IDs, soma_distances, sec_IDs, pt_IDs,
+                    dend_labels
+                ])))
         sa_pd = pd.DataFrame(sa_pd)[columns]
-        
-        st_df = pd.DataFrame(columns = list(range(max_spikes)), data = np.asarray(spike_times))
-    
-        sa_pd = pd.concat([sa_pd, st_df], axis = 1)
-        
-        
+
+        st_df = pd.DataFrame(columns=list(range(max_spikes)),
+                             data=np.asarray(spike_times))
+
+        sa_pd = pd.concat([sa_pd, st_df], axis=1)
 
         sa_pd.index = [sim_trial_index] * len(sa_pd)
-
 
         return sa_pd
 
@@ -388,18 +413,22 @@ class Cell(object):
             for child_section_n, section in enumerate(self.sections):
                 # get parents
                 section_adjacency_map[child_section_n] = {
-                    "parents": [self.sections.index(section.parent)] if section.parent else [],
-                    "children": [self.sections.index(c) for c in section.children()]
-                    }
+                    "parents": [self.sections.index(section.parent)]
+                               if section.parent else [],
+                    "children": [
+                        self.sections.index(c) for c in section.children()
+                    ]
+                }
             self.section_adjacency_map = section_adjacency_map
         return self.section_adjacency_map
+
 
 class PySection(nrn.Section):
     '''
     Subclass of nrn.Section providing additional geometric
     and mechanism information/ handling methods
     '''
-    
+
     def __init__(self, name=None, cell=None, label=None):
         '''
         structure
@@ -451,7 +480,6 @@ class PySection(nrn.Section):
             nrn.Section.__init__(self)
         else:
             nrn.Section.__init__(self, name=name, cell=cell)
-        
         '''structure'''
         self.label = label
         '''reference to parent section'''
@@ -481,7 +509,7 @@ class PySection(nrn.Section):
         self.recVList = []
         '''dict of range variables recorded'''
         self.recordVars = {}
-    
+
     def set_3d_geometry(self, pts, diams):
         '''
         invokes NEURON 3D geometry setup
@@ -492,22 +520,22 @@ class PySection(nrn.Section):
         self.pts = pts
         self.nrOfPts = len(pts)
         self.diamList = diams
-        
-#        silent output in dummy instead of stdout
+
+        #        silent output in dummy instead of stdout
         dummy = h.pt3dclear(sec=self)
         for i in range(len(self.pts)):
             x, y, z = self.pts[i]
             d = self.diamList[i]
             dummy = h.pt3dadd(x, y, z, d, sec=self)
-        
+
 #        not good! set after passive properties have been assigned
 #        self.nseg = self.nrOfPts
-        
+
         self._compute_bounds()
         self._compute_relative_pts()
 #        execute after nr of segments has been determined
 #        self._init_vm_recording()
-    
+
     def set_segments(self, nrOfSegments):
         '''
         Set spatial discretization. should be used
@@ -519,10 +547,10 @@ class PySection(nrn.Section):
         self._compute_seg_pts()
         self._compute_seg_diameters()
         self._compute_total_area()
-#        TODO: find a way to make this more efficient,
-#        i.e. allocate memory before running simulation
+        #        TODO: find a way to make this more efficient,
+        #        i.e. allocate memory before running simulation
         self._init_vm_recording()
-    
+
     def _compute_seg_diameters(self):
         '''fill list of diameters of all segments.
         Approximation for visualization purposes only.
@@ -537,22 +565,22 @@ class PySection(nrn.Section):
                     minDist = dist
                     minID = i
             self.segDiams.append(self.diamList[minID])
-    
+
     def _compute_total_area(self):
         '''computes total area of all NEURON segments in this section'''
         area = 0.0
-        dx = 1.0/self.nseg
+        dx = 1.0 / self.nseg
         for i in range(self.nseg):
-            x = (i+0.5)*dx
+            x = (i + 0.5) * dx
             area += h.area(x, sec=self)
         self.area = area
-    
+
     def _compute_bounds(self):
         pts = self.pts
         xMin, xMax = pts[0][0], pts[0][0]
         yMin, yMax = pts[0][1], pts[0][1]
         zMin, zMax = pts[0][2], pts[0][2]
-        for i in range(1,len(pts)):
+        for i in range(1, len(pts)):
             if pts[i][0] < xMin:
                 xMin = pts[i][0]
             if pts[i][0] > xMax:
@@ -566,22 +594,22 @@ class PySection(nrn.Section):
             if pts[i][2] > zMax:
                 zMax = pts[i][2]
         self.bounds = xMin, xMax, yMin, yMax, zMin, zMax
-    
+
     def _compute_relative_pts(self):
         self.relPts = [0.0]
         ptLength = 0.0
         pts = self.pts
-        for i in range(len(pts)-1):
-            pt1, pt2 = np.array(pts[i]), np.array(pts[i+1])
-            ptLength += np.sqrt(np.sum(np.square(pt1-pt2)))
-            x = ptLength/self.L
+        for i in range(len(pts) - 1):
+            pt1, pt2 = np.array(pts[i]), np.array(pts[i + 1])
+            ptLength += np.sqrt(np.sum(np.square(pt1 - pt2)))
+            x = ptLength / self.L
             self.relPts.append(x)
 #        avoid roundoff errors:
-        norm = 1.0/self.relPts[-1]
-        for i in range(len(self.relPts)-1):
+        norm = 1.0 / self.relPts[-1]
+        for i in range(len(self.relPts) - 1):
             self.relPts[i] *= norm
         self.relPts[-1] = 1.0
-    
+
     def _compute_seg_pts(self):
         ''' compute 3D center points of segments
         by approximating section as straight line
@@ -592,61 +620,63 @@ class PySection(nrn.Section):
             vec = p1 - p0
             dist = np.sqrt(np.dot(vec, vec))
             vec /= dist
-#            endpoint stays the same:
-            segLength = dist/self.nseg
-#            total length stays the same (straightening of dendrite;
-#             however this moves branch points):
-#            segLength = self.L/self.nseg
+            #            endpoint stays the same:
+            segLength = dist / self.nseg
+            #            total length stays the same (straightening of dendrite;
+            #             however this moves branch points):
+            #            segLength = self.L/self.nseg
             for i in range(self.nseg):
-                segPt = p0 + (i+0.5)*segLength*vec
+                segPt = p0 + (i + 0.5) * segLength * vec
                 self.segPts.append(segPt)
-                self.segx.append((i+0.5)/self.nseg)
+                self.segx.append((i + 0.5) / self.nseg)
         else:
             self.segPts = [self.pts[0]]
-    
+
     def _init_vm_recording(self):
         ''' set up recording of Vm at every point.
         TODO: recVList[0] should store voltage recorded at
         intermediate node between this and parent segment?'''
-#        beginVec = h.Vector()
-#        beginVec.record(self(0)._ref_v, sec=self)
-#        self.recVList.append(beginVec)
+        #        beginVec = h.Vector()
+        #        beginVec.record(self(0)._ref_v, sec=self)
+        #        self.recVList.append(beginVec)
         for seg in self:
             vmVec = h.Vector()
             vmVec.record(seg._ref_v, sec=self)
             self.recVList.append(vmVec)
+
+
 #        endVec = h.Vector()
 #        endVec.record(self(1)._ref_v, sec=self)
 #        self.recVList.append(endVec)
-    
+
     def _re_init_vm_recording(self):
         '''resize Vm vectors to 0 to avoid NEURON segfaults'''
         for vec in self.recVList:
             vec.resize(0)
-    
+
     def _re_init_range_var_recording(self):
         '''resize Vm vectors to 0 to avoid NEURON segfaults'''
         for key in list(self.recordVars.keys()):
             for vec in self.recordVars[key]:
                 vec.resize(0)
-    
+
     def _init_range_var_recording(self, var, mech=None):
         if mech is None:
             if not var in list(self.recordVars.keys()):
                 self.recordVars[var] = []
                 for seg in self:
                     vec = h.Vector()
-                    hRef = eval('seg._ref_'+var)
-                    log.info('seg._ref_'+var)
+                    hRef = eval('seg._ref_' + var)
+                    log.info('seg._ref_' + var)
                     vec.record(hRef, sec=self)
                     self.recordVars[var].append(vec)
         else:
             if not var in list(self.recordVars.keys()):
-                key = mech+'.'+var
+                key = mech + '.' + var
                 self.recordVars[key] = []
                 for seg in self:
                     vec = h.Vector()
-                    hRef = eval('seg.'+mech+'._ref_'+var)
+                    hRef = eval('seg.' + mech + '._ref_' + var)
                     #print ('seg.'+mech+'._ref_'+var)
                     vec.record(hRef, sec=self)
                     self.recordVars[key].append(vec)
@@ -660,7 +690,7 @@ class PointCell(object):
     
     initialize with list (iterable) of spike times
     '''
-    
+
     def __init__(self, spikeTimes=None):
         '''
         self.spikeTimes = list(spikeTimes)
@@ -681,80 +711,92 @@ class PointCell(object):
         self.playing = False
         self.synapseList = None
         self.spike_source = {}
-    
+
     def is_active(self):
         return self.playing
-    
+
     def play(self):
         '''Activate point cell'''
         if self.spikeVec.size() and not self.playing:
             self.spikes.play(self.spikeVec)
             self.playing = True
-    
-    def append(self, spikeT, spike_source = None):
+
+    def append(self, spikeT, spike_source=None):
         '''append additional spike time'''
-        assert(spike_source is not None)
+        assert spike_source is not None
         self.spikeTimes.append(spikeT)
         self.spikeTimes.sort()
         self.spikeVec.append(spikeT)
         self.spikeVec.sort()
         self.playing = True
         self.spike_source[spikeT] = spike_source
-    
-    def compute_spike_train_times(self, interval, noise, start=0.0, stop=-1.0, nSpikes=None, spike_source = None):
+
+    def compute_spike_train_times(self,
+                                  interval,
+                                  noise,
+                                  start=0.0,
+                                  stop=-1.0,
+                                  nSpikes=None,
+                                  spike_source=None):
         '''Activate point cell'''
-        assert(spike_source is not None)
+        assert spike_source is not None
         self.rand = np.random.RandomState(np.random.randint(123456, 1234567))
         self.spikeInterval = interval
         self.noiseParam = noise
         self.start = start
         self.stop = stop
-        
+
         if self.stop < self.start and nSpikes is None:
             errstr = 'Trying to activate SpikeTrain without number of spikes or t stop parameter!'
             raise RuntimeError(errstr)
-        
+
         if nSpikes is not None:
             lastSpike = 0.0
             for i in range(nSpikes):
                 if i == 0:
-                    tSpike = self.start + self._next_interval() - self.spikeInterval*(1 - self.noiseParam)
+                    tSpike = self.start + self._next_interval(
+                    ) - self.spikeInterval * (1 - self.noiseParam)
                     if tSpike < 0:
                         tSpike = 0
                 else:
                     tSpike = lastSpike + self._next_interval()
-                self.append(tSpike, spike_source = spike_source)
+                self.append(tSpike, spike_source=spike_source)
                 lastSpike = tSpike
         elif self.stop > self.start:
             lastSpike = 0.0
             while True:
                 if lastSpike == 0:
-                    tSpike = self.start + self._next_interval() - self.spikeInterval*(1 - self.noiseParam)
+                    tSpike = self.start + self._next_interval(
+                    ) - self.spikeInterval * (1 - self.noiseParam)
                     if tSpike < 0:
                         tSpike = 0
                 else:
                     tSpike = lastSpike + self._next_interval()
                 if tSpike > self.stop:
                     break
-                self.append(tSpike, spike_source = spike_source)
+                self.append(tSpike, spike_source=spike_source)
                 lastSpike = tSpike
-        
+
+
 #        if self.spikeVec.size() and not self.playing:
 #            self.spikes.play(self.spikeVec)
 #            self.playing = True
-        
+
     def _next_interval(self):
         if self.noiseParam == 0:
             return self.spikeInterval
         else:
-            return (1 - self.noiseParam)*self.spikeInterval + self.noiseParam*self.spikeInterval*self.rand.exponential()
-    
+            return (
+                1 - self.noiseParam
+            ) * self.spikeInterval + self.noiseParam * self.spikeInterval * self.rand.exponential(
+            )
+
     def _add_synapse_pointer(self, synapse):
         if self.synapseList is None:
             self.synapseList = [synapse]
         else:
             self.synapseList.append(synapse)
-    
+
     def turn_off(self):
         '''M. Hines: Note that one can turn off a VecStim without destroying it
         by using VecStim.play() with no args. Turn it back on by
@@ -775,7 +817,7 @@ class SpikeTrain(PointCell):
     parameters and plays them as a regular point cell.
     Computation of spike times as in NEURON NetStim.
     '''
-    
+
     def __init__(self):
         PointCell.__init__(self)
         self.rand = np.random.RandomState(np.random.randint(123456, 1234567))
@@ -784,35 +826,37 @@ class SpikeTrain(PointCell):
         self.start = 0.0
         self.stop = -1.0
         self.playing = False
-    
+
     def set_interval(self, interval):
         self.spikeInterval = interval
-    
+
     def set_noise(self, noise):
         self.noiseParam = noise
-    
+
     def set_start(self, start):
         self.start = start
-    
+
     def set_stop(self, stop):
         self.stop = stop
-    
+
     def is_active(self):
         return self.playing
-    
+
     def compute_spike_times(self, nSpikes=None):
         '''Activate point cell'''
         if self.spikeInterval is None:
-            raise RuntimeError('Trying to activate SpikeTrain without mean interval')
+            raise RuntimeError(
+                'Trying to activate SpikeTrain without mean interval')
         if self.stop < self.start and nSpikes is None:
             errstr = 'Trying to activate SpikeTrain without number of spikes or t stop parameter!'
             raise RuntimeError(errstr)
-        
+
         if nSpikes is not None:
             lastSpike = 0.0
             for i in range(nSpikes):
                 if i == 0:
-                    tSpike = self.start + self._next_interval() - self.spikeInterval*(1 - self.noiseParam)
+                    tSpike = self.start + self._next_interval(
+                    ) - self.spikeInterval * (1 - self.noiseParam)
                     if tSpike < 0:
                         tSpike = 0
                 else:
@@ -823,7 +867,8 @@ class SpikeTrain(PointCell):
             lastSpike = 0.0
             while True:
                 if lastSpike == 0:
-                    tSpike = self.start + self._next_interval() - self.spikeInterval*(1 - self.noiseParam)
+                    tSpike = self.start + self._next_interval(
+                    ) - self.spikeInterval * (1 - self.noiseParam)
                     if tSpike < 0:
                         tSpike = 0
                 else:
@@ -832,24 +877,29 @@ class SpikeTrain(PointCell):
                     break
                 self.append(tSpike)
                 lastSpike = tSpike
-        
+
+
 #        if self.spikeVec.size() and not self.playing:
 #            self.spikes.play(self.spikeVec)
 #            self.playing = True
-        
+
     def _next_interval(self):
         if self.noiseParam == 0:
             return self.spikeInterval
         else:
-            return (1 - self.noiseParam)*self.spikeInterval + self.noiseParam*self.spikeInterval*self.rand.exponential()
+            return (
+                1 - self.noiseParam
+            ) * self.spikeInterval + self.noiseParam * self.spikeInterval * self.rand.exponential(
+            )
+
 
 class SynParameterChanger():
+
     def __init__(self, cell, synParam, t):
         self.cell = cell
         self.synParam = synParam
         self.tEvent = t
         self.cell.changeSynParamDict[self.tEvent] = self.synParam
-    
+
     def cvode_event(self):
         h.cvode.event(self.tEvent, self.cell.change_synapse_parameters)
-

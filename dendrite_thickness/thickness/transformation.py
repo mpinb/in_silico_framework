@@ -19,6 +19,7 @@ import numpy as np
 
 
 class AffineTransformation:
+
     def __init__(self):
         self.input_path = None
         self.matrix = None
@@ -56,9 +57,11 @@ class AffineTransformation:
         points_system_1 = pair_landmark_points[::2]
         points_system_2 = pair_landmark_points[1::2]
 
-        self.set_transformation_matrix_by_aligned_points(points_system_1, points_system_2)
+        self.set_transformation_matrix_by_aligned_points(
+            points_system_1, points_system_2)
 
-    def set_transformation_matrix_by_aligned_points(self, src_points, dst_points):
+    def set_transformation_matrix_by_aligned_points(self, src_points,
+                                                    dst_points):
         """
         This function will calculate the affine transformation matrix from
         8 am_points (4 source am_points and 4 destination am_points)
@@ -103,7 +106,7 @@ class AffineTransformation:
             transformed_points.append(p_listed[0:3] + point4D[3:])
 
         return transformed_points
-    
+
     def get_amira_transformation_matrix(self):
         return ' '.join(map(str, list(np.array(self.matrix.T).ravel())))
 
@@ -150,8 +153,10 @@ class ConvertPoints:
         '''coverts thickness (scaled with pixel size) to micron.
         Requires isotropic pixel size in x-y-direction'''
         if self.x_res != self.y_res:
-            raise NotImplementedError("Requires isotropic pixel size in x-y-direction!")
+            raise NotImplementedError(
+                "Requires isotropic pixel size in x-y-direction!")
         return [np.dot(t, self.x_res) for t in thicknesses]
+
 
 def _scaling(points, scaling):
     if points is None:
@@ -170,4 +175,4 @@ def _scaling(points, scaling):
 
 def get_distance(p1, p2):
     assert (len(p1) == len(p2))
-    return np.sqrt(sum((pp1 - pp2) ** 2 for pp1, pp2 in zip(p1, p2)))
+    return np.sqrt(sum((pp1 - pp2)**2 for pp1, pp2 in zip(p1, p2)))

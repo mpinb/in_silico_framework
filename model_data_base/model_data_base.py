@@ -516,7 +516,7 @@ class ModelDataBase(object):
         #find dumper
         if dumper is None:
             dumper = self._find_dumper(item)
-        assert(dumper is not None)
+        assert dumper is not None
         
         #write data
         self._setitem_no_metadata(key, item, dumper, **kwargs)

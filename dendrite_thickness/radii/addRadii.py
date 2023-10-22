@@ -1,4 +1,3 @@
-
 import transformTools as tr
 
 
@@ -16,8 +15,8 @@ def findNextPair(trPoints, hocPoint):
             dual = newPoint
     return dual
 
-def filterPoints(transformedPoints, hocPoints, observerIndex):
 
+def filterPoints(transformedPoints, hocPoints, observerIndex):
     """
     Since it is hard and time consuming to comput the function findNextPair
     for all points so we need somehow reduce the amount of points that we are
@@ -25,8 +24,6 @@ def filterPoints(transformedPoints, hocPoints, observerIndex):
     help this by considering a cubic space around the concerning points
     and only taking into account those points that are inside of the cubic
     """
-
-
 
     trP = transformedPoints
     preIdx = observerIndex - 1
@@ -58,8 +55,11 @@ def filterPoints(transformedPoints, hocPoints, observerIndex):
         z_start = p_1[2] - delta
         z_end = p_0[2] + delta
 
-    subSet = [p for p in trP if (x_start <= p[0] and p[0] <= x_end) and
-              (y_start <= p[1] and p[1] <= y_end) and (z_start <= p[2] and p[2] <= z_end)]
+    subSet = [
+        p for p in trP if (x_start <= p[0] and p[0] <= x_end) and
+        (y_start <= p[1] and p[1] <= y_end) and
+        (z_start <= p[2] and p[2] <= z_end)
+    ]
 
     #Spherical Calculations:
 

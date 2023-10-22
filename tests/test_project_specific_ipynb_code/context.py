@@ -6,7 +6,13 @@ import getting_started
 getting_started_folder = getting_started.parent
 
 n_cells = 1086
-morph_lengths = {'CDK84': 30, 'CDK85': 25, 'CDK86': 32, 'CDK89': 29, 'CDK91': 26}
+morph_lengths = {
+    'CDK84': 30,
+    'CDK85': 25,
+    'CDK86': 32,
+    'CDK89': 29,
+    'CDK91': 26
+}
 
 cellParamName = os.path.join(getting_started_folder, \
                              'biophysical_constraints', \

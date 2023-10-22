@@ -35,7 +35,7 @@ from pandas_msgpack import to_msgpack, read_msgpack
 
 
 ####
-# if you want to use this as template to implement another dask dumper: 
+# if you want to use this as template to implement another dask dumper:
 # lines that most likely need to be changed are marked with ###
 ####
 ############################
@@ -51,25 +51,36 @@ def str_to_category(pdf):
         pdf.index = pd.Categorical(pdf.index, ordered=False)
         pdf.index.name = index_name
 
+
 def category_to_str(pdf):
-    '''careful: changes pdf!'''  
-    for c in pdf.select_dtypes(include = ['category']).columns:
-        pdf[c] = pdf[c].astype('object')#map(str)#astype('object')
+    '''careful: changes pdf!'''
+    for c in pdf.select_dtypes(include=['category']).columns:
+        pdf[c] = pdf[c].astype('object')  #map(str)#astype('object')
     if str(pdf.index.dtype) == 'category':
-        pdf.index = pdf.index.astype('object')#map(str)
+        pdf.index = pdf.index.astype('object')  #map(str)
     return pdf
+
+
 ####################################################
 # custom to_csv method, because the one of dask does eat all the memory
 # this method has to the aim to be as simple as possible
 #####################################################
 def get_writer_function(categorize):
     '''returns function, that stores pandas dataframe'''
+
     def ddf_save_chunks(pdf, path, number, digits):
         if categorize:
             str_to_category(pdf)
+
+
 #         pdf.to_msgpack(path.replace('*', str(number).zfill(digits)), compress = 'blosc') ###
-        to_msgpack(path.replace('*', str(number).zfill(digits)), pdf, compress = 'blosc')
+        to_msgpack(path.replace('*',
+                                str(number).zfill(digits)),
+                   pdf,
+                   compress='blosc')
+
     return ddf_save_chunks
+
 
 @dask.delayed()
 def bundle_delayeds(*args):
@@ -79,19 +90,20 @@ def bundle_delayeds(*args):
     '''
     pass
 
+
 ############################################
 # original version. bad performance in case of complex dask dataframes
 #############################################
 # def my_dask_writer(ddf, path, optimize_graph = False, get = settings.multiprocessing_scheduler):
 #     ''' Very simple method to store a dask dataframe to a bunch of files.
-#     The reason for it's creation is a lot of frustration with the respective 
-#     dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes 
+#     The reason for it's creation is a lot of frustration with the respective
+#     dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes
 #     takes all the ram (512GB!) or takes a very long time to "optimize" / merge the graph.
-#     
+#
 #     Update: this issue was addressed here:
 #     https://github.com/dask/dask/issues/1888
 #     '''
-#     
+#
 #     ddf_save_chunks = get_writer_function()
 #     ddf = ddf.to_delayed()
 #     l = len(ddf)
@@ -117,10 +129,10 @@ def bundle_delayeds(*args):
 # from model_data_base.utils import chunkIt
 # def my_dask_writer(ddf, path, optimize_graph = False, get = settings.multiprocessing_scheduler):
 #     ''' Very simple method to store a dask dataframe to a bunch of files.
-#     The reason for it's creation is a lot of frustration with the respective 
-#     dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes 
+#     The reason for it's creation is a lot of frustration with the respective
+#     dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes
 #     takes all the ram (512GB!) or takes a very long time to "optimize" / merge the graph.
-#      
+#
 #     Update: this issue was addressed here:
 #     https://github.com/dask/dask/issues/1888
 #     '''
@@ -135,35 +147,41 @@ def bundle_delayeds(*args):
 #         mdb['path'] = path
 #         mdb['ddf'] = ddf
 #         print 'db successful'
-#         
+#
 #         @dask.delayed(traverse = False)
 #         def save_chunk(mdb, numbers):
 #             fun = mdb['fun']
 #             ndigits = mdb['ndigits']
 #             path = mdb['path']
 #             ddf = mdb['ddf']
-#             
+#
 #             for number in numbers:
 #                 pdf = ddf.get_partition(number).compute(get = dask.async.get_sync)
 #                 fun(pdf, path, number, ndigits)
-#         
+#
 #         print 'execute!'
 #         delayeds = [save_chunk(mdb, chunk) for chunk in chunkIt(range(ddf.npartitions), 100)]
-#         dask.delayed(delayeds).compute(get=get)  
+#         dask.delayed(delayeds).compute(get=get)
 #     except:
 #         print 'reraise exception'
-#         raise  
+#         raise
 #     finally:
 #         shutil.rmtree(f)
-#     return 
-
+#     return
 
 ######################################################
 # reasonable performance: just do the serialization yourself
 ######################################################
 from model_data_base.utils import chunkIt
 import cloudpickle
-def my_dask_writer(ddf, path, optimize_graph = False, categorize = True, client = None): #get = compatibility.multiprocessing_scheduler,
+
+
+def my_dask_writer(
+        ddf,
+        path,
+        optimize_graph=False,
+        categorize=True,
+        client=None):  #get = compatibility.multiprocessing_scheduler,
     ''' Very simple method to store a dask dataframe to a bunch of files.
     There was a lot of frustration with the respective dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes 
     takes all the ram (512GB!) or takes a very long time to "optimize" / merge the graph.
@@ -173,72 +191,86 @@ def my_dask_writer(ddf, path, optimize_graph = False, categorize = True, client 
     '''
     fun = get_writer_function(categorize)
     ndigits = len(str(ddf.npartitions))
-        
+
     @dask.delayed()
-    def save_chunk(s, numbers):   
-        ddf = cloudpickle.loads(s)      
+    def save_chunk(s, numbers):
+        ddf = cloudpickle.loads(s)
         dask_options = dask.context._globals
-        dask.config.set(callbacks=set()) #disable progress bars etc. 
+        dask.config.set(callbacks=set())  #disable progress bars etc.
         for number in numbers:
-            pdf = ddf.get_partition(number).compute(get = dask.get) #get = compatibility.synchronous_scheduler
+            pdf = ddf.get_partition(number).compute(
+                get=dask.get)  #get = compatibility.synchronous_scheduler
             fun(pdf, path, number, ndigits)
         dask.context._globals = dask_options
-    
+
     ddf_scattered = client.scatter(cloudpickle.dumps(ddf))
     #folder = tempfile.mkdtemp()
     #path = os.path.join(folder, 'dump')
     #print path
     #with open(path, 'w') as f:
     #    f.write(cloudpickle.dumps(ddf))
-        
-        
 
-    delayeds = [save_chunk(ddf_scattered, chunk) for chunk in chunkIt(list(range(ddf.npartitions)), 10000)] #max 5000 tasks writing at the same time
-    futures = client.compute(delayeds) #dask.delayed(delayeds).compute(get=get)
-    client.gather(futures) # throw an error if there was an error
-        
-        
+    delayeds = [
+        save_chunk(ddf_scattered, chunk)
+        for chunk in chunkIt(list(range(ddf.npartitions)), 10000)
+    ]  #max 5000 tasks writing at the same time
+    futures = client.compute(delayeds)  #dask.delayed(delayeds).compute(get=get)
+    client.gather(futures)  # throw an error if there was an error
+
+
 ########################################################
 # actual dumper
-########################################################    
-fileglob = 'dask_to_msgpack.*.csv' ###
+########################################################
+fileglob = 'dask_to_msgpack.*.csv'  ###
+
+
 def check(obj):
     '''checks wherther obj can be saved with this dumper'''
-    return isinstance(obj, dd.DataFrame) # and (obj.index.dtype == 'object')
+    return isinstance(obj, dd.DataFrame)  # and (obj.index.dtype == 'object')
+
 
 class Loader(parent_classes.Loader):
-    def __init__(self, meta, index_name = None, divisions = None):        
+
+    def __init__(self, meta, index_name=None, divisions=None):
         self.index_name = index_name
         self.meta = meta
         self.divisions = divisions
-    def get(self, savedir, verbose = False):  
+
+    def get(self, savedir, verbose=False):
         #if dtypes is not defined (old mdb_versions) set it to None
         try:
             self.dtypes
         except AttributeError:
             self.dtypes = None
-            
-            
-#         my_reader = lambda x: category_to_str(pd.read_msgpack(x))  ### 
+
+
+#         my_reader = lambda x: category_to_str(pd.read_msgpack(x))  ###
         my_reader = lambda x: category_to_str(read_msgpack(x))
-        
+
         if self.divisions:
-            if verbose: print('loaded dask dataframe with known divisions')
+            if verbose:
+                print('loaded dask dataframe with known divisions')
             #it does not seem to be a good idea to pass the long index list through the delayed interface
             #therefore the list is contained in this function enclosure
             ddf = [dask.delayed(my_reader, traverse = False)(fname) \
                    for fname in sorted(glob.glob(os.path.join(savedir, fileglob)))]
-            ddf = dd.from_delayed(ddf, divisions = self.divisions, meta = self.meta)
+            ddf = dd.from_delayed(ddf, divisions=self.divisions, meta=self.meta)
         else:
-            if verbose: print('loaded dask dataframe without known divisions')            
+            if verbose:
+                print('loaded dask dataframe without known divisions')
             ddf = [dask.delayed(my_reader, traverse = False)(fname) \
                    for fname in sorted(glob.glob(os.path.join(savedir, fileglob)))]
-            ddf = dd.from_delayed(ddf, meta = self.meta)   
+            ddf = dd.from_delayed(ddf, meta=self.meta)
         ddf.index.name = self.index_name
         return ddf
-    
-        
-def dump(obj, savedir, repartition = False, get = None, categorize = True, client = None):
+
+
+def dump(obj,
+         savedir,
+         repartition=False,
+         get=None,
+         categorize=True,
+         client=None):
     """
     Save an object to a file in a ModelDataBase in the pandas-msgpack format.
     Has been deprecated since 2023-09-01. Please use another dumper.
@@ -259,25 +291,30 @@ def dump(obj, savedir, repartition = False, get = None, categorize = True, clien
     import os
     if not "ISF_IS_TESTING" in os.environ:
         # Module was not called from within the test suite
-        raise RuntimeError('pandas-msgpack is not supported anymore in the model_data_base')
+        raise RuntimeError(
+            'pandas-msgpack is not supported anymore in the model_data_base')
     if client is None:
         assert get is not None
         client = get
     if repartition:
         if obj.npartitions > 10000:
             obj = myrepartition(obj, 10000)
-    
-    my_dask_writer(obj, os.path.join(savedir, fileglob), categorize = categorize, client = client)
+
+    my_dask_writer(obj,
+                   os.path.join(savedir, fileglob),
+                   categorize=categorize,
+                   client=client)
     meta = obj._meta
     index_name = obj.index.name
     if obj.known_divisions:
-        assert(obj.npartitions + 1 == len(obj.divisions))
+        assert obj.npartitions + 1 == len(obj.divisions)
         divisions = obj.divisions
     else:
         divisions = None
-        
+
+
 #     with open(os.path.join(savedir, 'Loader.pickle'), 'wb') as file_:
 #         cloudpickle.dump(Loader(meta, index_name = index_name, divisions = divisions), file_)
-    compatibility.cloudpickle_fun(Loader(meta, index_name = index_name, divisions = divisions), os.path.join(savedir, 'Loader.pickle'))
-        
-        
+    compatibility.cloudpickle_fun(
+        Loader(meta, index_name=index_name, divisions=divisions),
+        os.path.join(savedir, 'Loader.pickle'))

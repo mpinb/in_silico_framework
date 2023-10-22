@@ -38,19 +38,21 @@ index2WhiskerLUT = {1: 'B1', 2: 'B2', 3: 'B3',\
             4: 'C1', 5: 'C2', 6: 'C3',\
             7: 'D1', 8: 'D2', 9: 'D3'}
 
+
 def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
     '''
     loads cluster files from CDK recordings and automatically
     determines avg ongoing activity and evoked PSTH for cell type
     '''
-    UpDownStateCorrection = 0.4571    
+    UpDownStateCorrection = 0.4571
     stimulusOnset = 145.0
-    ongoingBegin = 20.0 # 100ms pre-stimulus
+    ongoingBegin = 20.0  # 100ms pre-stimulus
     ongoingDur = 100.0
-#    ongoingBegin = 0.0 # 100ms pre-stimulus
-    PSTHEnd = 195.0 # 0-50ms here
+    #    ongoingBegin = 0.0 # 100ms pre-stimulus
+    PSTHEnd = 195.0  # 0-50ms here
     # load all spike time files for all whiskers of all recorded cells
-    print('Calculating average evoked PSTH for all cells in folder {:s}'.format(cellTypeFolder))
+    print('Calculating average evoked PSTH for all cells in folder {:s}'.format(
+        cellTypeFolder))
     fnames = []
     scan_directory(cellTypeFolder, fnames, '.cluster1')
     cellSpikeTimes = {}
@@ -68,16 +70,16 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
     for cell in cellSpikeTimes:
         ongoingSpikes = 0.0
         ongoingTrials = 0.0
-#        PW = ''
-#        for whisker in cellSpikeTimes[cell]:
-#            if 'PW' in whisker:
-#                splitName = whisker.split('_')
-#                PW = splitName[0]
+        #        PW = ''
+        #        for whisker in cellSpikeTimes[cell]:
+        #            if 'PW' in whisker:
+        #                splitName = whisker.split('_')
+        #                PW = splitName[0]
         for whisker in cellSpikeTimes[cell]:
-#            splitName = whisker.split('_')
-#            whiskerName = splitName[0]
-#            if whiskerName in surroundColumns[PW]:
-#            print whiskerName
+            #            splitName = whisker.split('_')
+            #            whiskerName = splitName[0]
+            #            if whiskerName in surroundColumns[PW]:
+            #            print whiskerName
             for trial in cellSpikeTimes[cell][whisker]:
                 ongoingTrials += 1
                 for t in cellSpikeTimes[cell][whisker][trial]:
@@ -85,18 +87,20 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
                         ongoingSpikes += 1
 #                        if '85' in cell:
 #                            print t
-        spontRate = ongoingSpikes/ongoingTrials*0.01 # per ms
+        spontRate = ongoingSpikes / ongoingTrials * 0.01  # per ms
         rates.append(spontRate)
         print('\tcell name: {:s}'.format(cell))
-        print('\tSpontaneous firing rate = {:.2f} Hz'.format(spontRate*1000.0))
+        print('\tSpontaneous firing rate = {:.2f} Hz'.format(spontRate *
+                                                             1000.0))
 #        print '\tongoing spikes: %.0f' % (ongoingSpikes)
 #        print '\tongoing trials: %.0f' % (ongoingTrials)
     avgRate = np.mean(rates)
-    print('Average spontaneous firing rate = {:.2f} Hz'.format(avgRate*1000.0))
+    print('Average spontaneous firing rate = {:.2f} Hz'.format(avgRate *
+                                                               1000.0))
     # collect all spike times and repetitions
     # 0-50ms post-stimulus PW-aligned
-    trialsPerWhisker = dict([(i,0) for i in range(1,10)])
-    spikesPerWhisker = dict([(i,[]) for i in range(1,10)])
+    trialsPerWhisker = dict([(i, 0) for i in range(1, 10)])
+    spikesPerWhisker = dict([(i, []) for i in range(1, 10)])
     for cell in cellSpikeTimes:
         PW = ''
         for whisker in cellSpikeTimes[cell]:
@@ -120,21 +124,22 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
                 if col == 5:
                     print(cell)
                     print('PW: ', PW)
-                    print('APs per stim: ', float(tmpSpikes)/tmpTrials)
+                    print('APs per stim: ', float(tmpSpikes) / tmpTrials)
     # create 1ms resolution PSTH per whisker and subtract
     # spontaneous activity per 1ms bin
     numberOfBins = 50
-    PSTHrange = (stimulusOnset,PSTHEnd)
+    PSTHrange = (stimulusOnset, PSTHEnd)
     whiskerPSTH = {}
     for col in spikesPerWhisker:
         nrOfTrials = trialsPerWhisker[col]
-        hist, bins = np.histogram(spikesPerWhisker[col], numberOfBins, PSTHrange)
-#        hist = 1.0/nrOfTrials*hist - avgRate
-        hist = UpDownStateCorrection*(1.0/nrOfTrials*hist - avgRate)
+        hist, bins = np.histogram(spikesPerWhisker[col], numberOfBins,
+                                  PSTHrange)
+        #        hist = 1.0/nrOfTrials*hist - avgRate
+        hist = UpDownStateCorrection * (1.0 / nrOfTrials * hist - avgRate)
         whiskerPSTH[col] = hist, bins
         print('whisker: ', index2WhiskerLUT[col])
         print('sum PSTH: ', np.sum(hist))
-    
+
     whiskers = list(whiskerPSTH.keys())
     whiskers.sort()
     with mdbopen(outFileName, 'w') as PSTHFile:
@@ -150,14 +155,15 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
             if PSTH is not None:
                 hist, bins = PSTH
                 for i in range(len(hist)):
-                    interval = bins[i], bins[i+1]
+                    interval = bins[i], bins[i + 1]
                     prob = hist[i]
                     if prob > 0:
                         intervals.append(interval)
                         probabilities.append(prob)
             line = ''
             for interval in intervals:
-                line += '(%.1f,%.1f),' % (interval[0]-stimulusOnset, interval[1]-stimulusOnset)
+                line += '(%.1f,%.1f),' % (interval[0] - stimulusOnset,
+                                          interval[1] - stimulusOnset)
             line = line[:-1] + '],\n'
             line += '  \"probabilities\": ['
             PSTHFile.write(line)
@@ -167,7 +173,8 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
             line = line[:-1] + '],\n},\n'
             PSTHFile.write(line)
         PSTHFile.write('}')
-    
+
+
 #    # collect all spike times and repetitions
 #    # 0-50ms for B2 only (for L5tt experiments)
 #    trialsPerB2 = 0
@@ -196,30 +203,34 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
 #    print 'D4:'
 #    print 'AP per stim: ', spikeProb
 
+
 def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
     print('*************')
-    print('creating evoked PSTH from spike times in {:s}'.format(spikeTimesName))
+    print(
+        'creating evoked PSTH from spike times in {:s}'.format(spikeTimesName))
     print('*************')
-    
-    whiskerSpikeTimes, whiskerDeflectionTrials = load_spike_times(spikeTimesName)
+
+    whiskerSpikeTimes, whiskerDeflectionTrials = load_spike_times(
+        spikeTimesName)
     whiskers = list(whiskerSpikeTimes.keys())
     whiskers.sort()
     whiskerPSTH = {}
     numberOfBins = 50
     #numberOfBins = 5
-    PSTHrange = (0,50)
-    ongoingCorrection = ongoingRate*0.001
+    PSTHrange = (0, 50)
+    ongoingCorrection = ongoingRate * 0.001
     #ongoingCorrection = ongoingRate*0.01
     for whisker in whiskers:
-        hist, bins = np.histogram(whiskerSpikeTimes[whisker], numberOfBins, PSTHrange)
+        hist, bins = np.histogram(whiskerSpikeTimes[whisker], numberOfBins,
+                                  PSTHrange)
         norm = float(whiskerDeflectionTrials[whisker])
         if norm:
-            hist = 1.0/norm*hist
+            hist = 1.0 / norm * hist
             hist = hist - ongoingCorrection
             whiskerPSTH[whisker] = hist, bins
         else:
             whiskerPSTH[whisker] = None
-    
+
     with mdbopen(outFileName, 'w') as PSTHFile:
         PSTHFile.write('{\n')
         for whisker in whiskers:
@@ -233,9 +244,9 @@ def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
             if PSTH is not None:
                 hist, bins = PSTH
                 for i in range(len(hist)):
-                    interval = bins[i], bins[i+1]
+                    interval = bins[i], bins[i + 1]
                     prob = hist[i]
-                    if 1:#prob > 0:
+                    if 1:  #prob > 0:
                         intervals.append(interval)
                         probabilities.append(prob)
             line = ''
@@ -250,6 +261,7 @@ def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
             line = line[:-1] + '],\n},\n'
             PSTHFile.write(line)
         PSTHFile.write('}')
+
 
 def load_spike_times(spikeTimesName):
     whiskers = {0: 'B1', 1: 'B2', 2: 'B3',\
@@ -280,14 +292,15 @@ def load_spike_times(spikeTimesName):
                     continue
                 whiskerDeflectionTrials[whisker] += 1
                 whiskerSpikeTimes[whisker].append(t)
-    
+
     return whiskerSpikeTimes, whiskerDeflectionTrials
+
 
 def load_cluster_trials(fname):
     data = np.loadtxt(fname, unpack=True)
     trialNumber = data[1]
     spikeTimes = data[3]
-    spikeTimes = 0.1*spikeTimes # CDK files in 0.1ms
+    spikeTimes = 0.1 * spikeTimes  # CDK files in 0.1ms
     trialsSpikeTimes = {}
     for i in range(len(trialNumber)):
         nr = int(trialNumber[i])
@@ -296,8 +309,9 @@ def load_cluster_trials(fname):
         t = spikeTimes[i]
         if t > 0.0:
             trialsSpikeTimes[nr].append(t)
-    
+
     return trialsSpikeTimes
+
 
 def scan_directory(path, fnames, suffix):
     for fname in glob.glob(os.path.join(path, '*')):
@@ -307,6 +321,7 @@ def scan_directory(path, fnames, suffix):
             fnames.append(fname)
         else:
             continue
+
 
 if __name__ == '__main__':
     if len(sys.argv) == 5:
@@ -320,5 +335,6 @@ if __name__ == '__main__':
         outFileName = sys.argv[2]
         create_average_celltype_PSTH_from_clusters(folderName, outFileName)
     else:
-        print('parameters: [spikeTimesName] [cellType] [ongoingRate (Hz)] [outFileName]')
-    
+        print(
+            'parameters: [spikeTimesName] [cellType] [ongoingRate (Hz)] [outFileName]'
+        )

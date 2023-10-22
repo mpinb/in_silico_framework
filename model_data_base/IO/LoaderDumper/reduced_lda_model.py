@@ -22,11 +22,15 @@ from . import numpy_to_npz
 import pandas as pd
 import compatibility
 
+
 def check(obj):
     '''checks wherther obj can be saved with this dumper'''
-    return isinstance(obj, ReducedLdaModel) #basically everything can be saved with pickle
+    return isinstance(
+        obj, ReducedLdaModel)  #basically everything can be saved with pickle
+
 
 class Loader(parent_classes.Loader):
+
     def get(self, savedir):
         mdb = ModelDataBase(savedir)
         Rm = mdb['Rm']
@@ -36,27 +40,32 @@ class Loader(parent_classes.Loader):
             for k in list(d.keys()):
                 key = 'lda_value_dicts_' + str(lv)
                 d[k] = mdb[key]
-                lv +=1            
-        Rm.lda_values = [sum(lda_value_dict.values()) for lda_value_dict in Rm.lda_value_dicts]  
-        return Rm        
-    
+                lv += 1
+        Rm.lda_values = [
+            sum(lda_value_dict.values())
+            for lda_value_dict in Rm.lda_value_dicts
+        ]
+        return Rm
+
+
 def dump(obj, savedir):
     mdb = ModelDataBase(savedir)
     Rm = obj
     # keep references of original objects
-    try: # some older versions do not have this attribute
+    try:  # some older versions do not have this attribute
         st = Rm.st
     except AttributeError:
         st = Rm.st = pd.DataFrame()
     lda_values = Rm.lda_values
     lda_value_dicts = Rm.lda_value_dicts
     mdb_list = Rm.mdb_list
-    
+
     try:
-        mdb.setitem('st', Rm.st.round(decimals = 2).astype('f2').reset_index(drop = True), 
-                    dumper = pandas_to_msgpack)
+        mdb.setitem('st',
+                    Rm.st.round(decimals=2).astype('f2').reset_index(drop=True),
+                    dumper=pandas_to_msgpack)
         del Rm.st
-        del Rm.lda_values # can be recalculated
+        del Rm.lda_values  # can be recalculated
         lv = 0
         lda_value_dicts = Rm.lda_value_dicts
         new_lda_value_dicts = []
@@ -64,20 +73,22 @@ def dump(obj, savedir):
             new_lda_value_dicts.append({})
             for k in list(d.keys()):
                 key = 'lda_value_dicts_' + str(lv)
-                mdb.setitem(key, d[k].round(decimals = 2), dumper=numpy_to_npz)
+                mdb.setitem(key, d[k].round(decimals=2), dumper=numpy_to_npz)
                 new_lda_value_dicts[-1][k] = key
-                lv +=1
+                lv += 1
         Rm.lda_value_dicts = new_lda_value_dicts
         # convert mdb_list to mdb ids
-        Rm.mdb_list = [m.get_id() if not isinstance(m,str) else m for m in Rm.mdb_list]    
+        Rm.mdb_list = [
+            m.get_id() if not isinstance(m, str) else m for m in Rm.mdb_list
+        ]
         mdb['Rm'] = Rm
     finally:
-    # revert changes to object, deepcopy was causing pickling errors
+        # revert changes to object, deepcopy was causing pickling errors
         Rm.st = st
         Rm.lda_values = lda_values
-        Rm.lda_value_dicts = lda_value_dicts  
+        Rm.lda_value_dicts = lda_value_dicts
         Rm.mdb_list = mdb_list
-#         with open(os.path.join(savedir, 'Loader.pickle'), 'wb') as file_:
-#             cloudpickle.dump(Loader(), file_)
-        compatibility.cloudpickle_fun(Loader(), os.path.join(savedir, 'Loader.pickle'))
-
+        #         with open(os.path.join(savedir, 'Loader.pickle'), 'wb') as file_:
+        #             cloudpickle.dump(Loader(), file_)
+        compatibility.cloudpickle_fun(Loader(),
+                                      os.path.join(savedir, 'Loader.pickle'))

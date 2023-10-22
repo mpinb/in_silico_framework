@@ -9,7 +9,6 @@
 # This code was inspired by:
 #  * http://code.activestate.com/recipes/576638-draft-for-an-sqlite3-based-dbm/
 #  * http://code.activestate.com/recipes/526618/
-
 """
 2016-09-27: Modified by abast: use cloudpickle instead of pickle
 
@@ -41,14 +40,17 @@ import six
 from threading import Thread
 
 try:
-    __version__ = __import__('pkg_resources').get_distribution('sqlitedict').version
+    __version__ = __import__('pkg_resources').get_distribution(
+        'sqlitedict').version
 except:
     __version__ = '?'
 
 major_version = sys.version_info[0]
 if major_version < 3:  # py <= 2.x
     if sys.version_info[1] < 5:  # py <= 2.4
-        raise ImportError("sqlitedict requires python 2.5 or higher (python 3.3 or higher supported)")
+        raise ImportError(
+            "sqlitedict requires python 2.5 or higher (python 3.3 or higher supported)"
+        )
 
     # necessary to use exec()_ as this would be a SyntaxError in python3.
     # this is an exact port of six.reraise():
@@ -67,6 +69,7 @@ if major_version < 3:  # py <= 2.x
     exec_("def reraise(tp, value, tb=None):\n"
           "    raise tp, value, tb\n")
 else:
+
     def reraise(tp, value, tb=None):
         if value is None:
             value = tp()
@@ -74,12 +77,13 @@ else:
             raise value.with_traceback(tb)
         raise value
 
+
 # try:
 #     from cPickle import dumps, loads, HIGHEST_PROTOCOL as PICKLE_PROTOCOL
 # except ImportError:
 #     from pickle import dumps, loads, HIGHEST_PROTOCOL as PICKLE_PROTOCOL
 
-from cloudpickle import dumps, loads#, HIGHEST_PROTOCOL as PICKLE_PROTOCOL
+from cloudpickle import dumps, loads  #, HIGHEST_PROTOCOL as PICKLE_PROTOCOL
 
 # some Python 3 vs 2 imports
 try:
@@ -91,7 +95,6 @@ try:
     from queue import Queue
 except ImportError:
     from six.moves import queue as Queue
-
 
 logger = logging.getLogger(__name__)
 
@@ -115,8 +118,12 @@ def decode(obj):
 class SqliteDict(DictClass):
     VALID_FLAGS = ['c', 'r', 'w', 'n']
 
-    def __init__(self, filename=None, tablename='unnamed', flag='c',
-                 autocommit=False, journal_mode="DELETE"):
+    def __init__(self,
+                 filename=None,
+                 tablename='unnamed',
+                 flag='c',
+                 autocommit=False,
+                 journal_mode="DELETE"):
         """
         Initialize a thread-safe sqlite-backed dictionary. The dictionary will
         be a table `tablename` in database file `filename`. A single file (=database)
@@ -155,7 +162,8 @@ class SqliteDict(DictClass):
         dirname = os.path.dirname(filename)
         if dirname:
             if not os.path.exists(dirname):
-                raise RuntimeError('Error! The directory does not exist, %s' % dirname)
+                raise RuntimeError('Error! The directory does not exist, %s' %
+                                   dirname)
 
         self.filename = filename
         if '"' in tablename:
@@ -173,7 +181,10 @@ class SqliteDict(DictClass):
             self.clear()
 
     def _new_conn(self):
-        return SqliteMultithread(self.filename, autocommit=self.autocommit, journal_mode=self.journal_mode, flag = self.flag)
+        return SqliteMultithread(self.filename,
+                                 autocommit=self.autocommit,
+                                 journal_mode=self.journal_mode,
+                                 flag=self.flag)
 
     def __enter__(self):
         if not hasattr(self, 'conn') or self.conn is None:
@@ -221,16 +232,16 @@ class SqliteDict(DictClass):
         for key, value in self.conn.select(GET_ITEMS):
             yield key, decode(value)
 
-    def keys(self): 
-#         return self.iterkeys() if major_version > 2 else list(self.iterkeys())
+    def keys(self):
+        #         return self.iterkeys() if major_version > 2 else list(self.iterkeys())
         return list(self.iterkeys())
 
     def values(self):
-#         return self.itervalues() if major_version > 2 else list(self.itervalues())
+        #         return self.itervalues() if major_version > 2 else list(self.itervalues())
         return list(self.itervalues())
 
     def items(self):
-#         return self.iteritems() if major_version > 2 else list(self.iteritems())
+        #         return self.iteritems() if major_version > 2 else list(self.iteritems())
         return list(self.iteritems())
 
     def __contains__(self, key):
@@ -297,6 +308,7 @@ class SqliteDict(DictClass):
         """
         if self.conn is not None:
             self.conn.commit(blocking)
+
     sync = commit
 
     def close(self, do_log=True, force=False):
@@ -344,6 +356,7 @@ class SqliteDict(DictClass):
             # in __del__ method.
             pass
 
+
 # Adding extra methods for python 2 compatibility (at import time)
 if major_version == 2:
     SqliteDict.__nonzero__ = SqliteDict.__bool__
@@ -359,6 +372,7 @@ class SqliteMultithread(Thread):
     in a separate thread (in the same order they arrived).
 
     """
+
     def __init__(self, filename, autocommit, journal_mode, flag):
         super(SqliteMultithread, self).__init__()
         self.filename = filename
@@ -374,7 +388,9 @@ class SqliteMultithread(Thread):
 
     def run(self):
         if self.autocommit:
-            conn = sqlite3.connect(self.filename, isolation_level=None, check_same_thread=False)
+            conn = sqlite3.connect(self.filename,
+                                   isolation_level=None,
+                                   check_same_thread=False)
         else:
             conn = sqlite3.connect(self.filename, check_same_thread=False)
         if not self.flag == 'r':
@@ -414,8 +430,10 @@ class SqliteMultithread(Thread):
                     self.log.error('Inner exception:')
                     for item in traceback.format_list(inner_stack):
                         self.log.error(item)
-                    self.log.error('')  # deliniate traceback & exception w/blank line
-                    for item in traceback.format_exception_only(e_type, e_value):
+                    self.log.error(
+                        '')  # deliniate traceback & exception w/blank line
+                    for item in traceback.format_exception_only(
+                            e_type, e_value):
                         self.log.error(item)
 
                     self.log.error('')  # exception & outer stack w/blank line
@@ -453,8 +471,9 @@ class SqliteMultithread(Thread):
             # exception, we should not repeatedly re-raise it.
             self.exception = None
 
-            self.log.error('An exception occurred from a previous statement, view '
-                           'the logging namespace "sqlitedict" for outer stack.')
+            self.log.error(
+                'An exception occurred from a previous statement, view '
+                'the logging namespace "sqlitedict" for outer stack.')
 
             # The third argument to raise is the traceback object, and it is
             # substituted instead of the current location as the place where
@@ -490,7 +509,8 @@ class SqliteMultithread(Thread):
         request is dequeued, and although you can iterate over the result normally
         (`for res in self.select(): ...`), the entire result will be in memory.
         """
-        res = Queue()  # results of the select will appear as items in this queue
+        res = Queue(
+        )  # results of the select will appear as items in this queue
         self.execute(req, arg, res)
         while True:
             rec = res.get()
@@ -531,4 +551,6 @@ class SqliteMultithread(Thread):
             # returning (by semaphore '--no more--'
             self.select_one('--close--')
             self.join()
+
+
 #endclass SqliteMultithread

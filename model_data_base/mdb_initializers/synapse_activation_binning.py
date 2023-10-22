@@ -19,69 +19,87 @@ from ..analyze import excitatory, inhibitory
 from ..analyze.temporal_binning import universal as temporal_binning
 from ..IO.LoaderDumper import numpy_to_msgpack as numpy_to_msgpack
 
+
 def prefun(df):
     dummy = df.synapse_type.str.split('_')
     df['celltype'] = dummy.str[0]
     df['presynaptic_column'] = dummy.str[1]
-    df['proximal'] = (df.soma_distance < 500).replace(True, 'prox').replace(False, 'dist')
-    df['EI'] = df['celltype'].isin(excitatory).replace(True, 'EXC').replace(False, 'INH')
+    df['proximal'] = (df.soma_distance
+                      < 500).replace(True, 'prox').replace(False, 'dist')
+    df['EI'] = df['celltype'].isin(excitatory).replace(True, 'EXC').replace(
+        False, 'INH')
     bs = 50
-    df['binned_somadist'] = df.soma_distance.div(bs).map(np.floor).astype(int).map(lambda x: '{}to{}'.format(x*bs, x*bs+bs))    
+    df['binned_somadist'] = df.soma_distance.div(bs).map(np.floor).astype(
+        int).map(lambda x: '{}to{}'.format(x * bs, x * bs + bs))
     return df
- 
-def postfun(s, maxtime = None):
+
+
+def postfun(s, maxtime=None):
     # default_value_size = s.dropna().iloc[0].shape
     default_value_size = (maxtime,)
     defaultvalue = np.zeros(default_value_size)
     s_old = s
     # s = s.map(lambda x: defaultvalue if( isinstance(x, float) and np.isnan(x)) else x)
-    s = s.map(lambda x: defaultvalue if((isinstance(x, float) and np.isnan(x)) or (x is None)) else x)
+    s = s.map(lambda x: defaultvalue
+              if ((isinstance(x, float) and np.isnan(x)) or (x is None)) else x)
     return np.vstack(s.values)
 
-def applyfun(pdf, maxtime = None):
-    return temporal_binning(pdf, min_time = 0, max_time = maxtime, bin_size = 1, normalize = False)[1]
+
+def applyfun(pdf, maxtime=None):
+    return temporal_binning(pdf,
+                            min_time=0,
+                            max_time=maxtime,
+                            bin_size=1,
+                            normalize=False)[1]
 
 
 
 def synapse_activation_postprocess_pandas(pdf, groupby = '', \
-                                          prefun = None, 
-                                          applyfun = None, 
+                                          prefun = None,
+                                          applyfun = None,
                                           postfun = None):
     '''see docstring of synapse_activation_postprocess_dask'''
 
-    if not isinstance(groupby, list): groupby = [groupby]
+    if not isinstance(groupby, list):
+        groupby = [groupby]
     pdf = prefun(pdf)
     groups = pdf.groupby([pdf.index] + groupby).apply(applyfun)
-    
+
     for lv in range(len(groupby)):
         groups = groups.unstack(1)
     keys = list(groups.columns)
     out = {key: postfun(groups[key]) for key in keys}
     return out
 
+
 @dask.delayed
 def merge_results_together(dicts):
     out = defaultdict(lambda: [])
     all_keys = set([x for d in dicts for x in list(d.keys())])
     for d in dicts:
-        for key in all_keys:#d.keys():
+        for key in all_keys:  #d.keys():
             if key in d:
                 out[key].append(d[key])
             else:
-                out[key].append(np.zeros(d[list(d.keys())[0]].shape)) #fill with zeros
+                out[key].append(np.zeros(d[list(
+                    d.keys())[0]].shape))  #fill with zeros
 
     for key in list(out.keys()):
         out[key] = np.vstack(out[key])
     return out
 
-def tree_reduction(delayeds, aggregate_fun, length = 7):
+
+def tree_reduction(delayeds, aggregate_fun, length=7):
     if len(delayeds) > length:
-        chunks = [delayeds[i:i+length] for i  in range(0, len(delayeds), length)]
+        chunks = [
+            delayeds[i:i + length] for i in range(0, len(delayeds), length)
+        ]
         delayeds = [aggregate_fun(chunk) for chunk in chunks]
         return tree_reduction(delayeds, aggregate_fun, length)
     else:
         return aggregate_fun(delayeds)
-    
+
+
 def synapse_activation_postprocess_dask(ddf, **kwargs):
     '''
     Calculates bins of synapse activation dask dataframe per trail.
@@ -114,8 +132,8 @@ def synapse_activation_postprocess_dask(ddf, **kwargs):
     '''
     fun = dask.delayed(synapse_activation_postprocess_pandas)
     ds = ddf.to_delayed()
-    
-    #special case: if mdb is defined: isolate that keyword 
+
+    #special case: if mdb is defined: isolate that keyword
     #for later use
     if 'mdb' in kwargs:
         mdb = kwargs['mdb']
@@ -126,41 +144,47 @@ def synapse_activation_postprocess_dask(ddf, **kwargs):
         get = kwargs['get']
         del kwargs['get']
     else:
-        get = None        
-         
+        get = None
+
     ds = [fun(d, **kwargs) for d in ds]
     ret = tree_reduction(ds, merge_results_together)
-    
+
     if mdb is not None:
-        assert('groupby' in kwargs)
+        assert 'groupby' in kwargs
         save_groupby_delayed = dask.delayed(save_groupby)
         ret_saved = save_groupby_delayed(mdb, ret, kwargs['groupby'])
-        ret_saved.compute(get = get)
+        ret_saved.compute(get=get)
         # data = ret.compute(get = get)
         # save_groupby(mdb, data, kwargs['groupby'])
     else:
         return ret
+
 
 @dask.delayed
 def save_groupby(mdb, result, groupby):
     '''saves the result of synapse_activation_postprocess_dask to a model data base.
     
     A new model data base within mdb is created and the numpy arrays are stored there.'''
-    if not isinstance(groupby, list): groupby = [groupby]    
-    identifier = tuple(['synapse_activation_binned', 't1'] + ['__'.join(groupby)])
+    if not isinstance(groupby, list):
+        groupby = [groupby]
+    identifier = tuple(['synapse_activation_binned', 't1'] +
+                       ['__'.join(groupby)])
     try:
         del mdb[identifier]
     except:
         pass
     sub_mdb = mdb.create_sub_mdb(identifier)
     for key in result:
-        sub_mdb.setitem(key, result[key], dumper = numpy_to_msgpack)
-        
-def init(mdb, groupby = '', get = None, 
-         prefun = prefun, 
-         applyfun = applyfun, 
-         postfun = postfun,
-         maxtime = 400):
+        sub_mdb.setitem(key, result[key], dumper=numpy_to_msgpack)
+
+
+def init(mdb,
+         groupby='',
+         get=None,
+         prefun=prefun,
+         applyfun=applyfun,
+         postfun=postfun,
+         maxtime=400):
     '''
     Binning synapse activations.
     
@@ -187,8 +211,8 @@ def init(mdb, groupby = '', get = None,
     
     returns: None. The binned synapse activation data will be stored in mdb.
     '''
-    applyfun = partial(applyfun, maxtime = maxtime)
-    postfun = partial(postfun, maxtime = maxtime)
+    applyfun = partial(applyfun, maxtime=maxtime)
+    postfun = partial(postfun, maxtime=maxtime)
     synapse_activation_postprocess_dask(mdb['synapse_activation'], \
                                         groupby = groupby, mdb = mdb, \
                                         get = get, \

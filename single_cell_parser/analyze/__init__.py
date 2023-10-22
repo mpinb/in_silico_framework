@@ -4,7 +4,6 @@ library for analysis of simulation data
 and anatomical data (synapse distances etc...)
 '''
 
-
 from .membrane_potential_analysis import SpikeInit
 from .membrane_potential_analysis import vm_mean
 from .membrane_potential_analysis import vm_std

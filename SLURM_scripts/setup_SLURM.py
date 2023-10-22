@@ -33,22 +33,25 @@ class StoreDictKeyPair(argparse.Action):
     used for notebook run kwargs (not yet implemented in submit.sh or setup_SLURM)
 
     """
+
     def __call__(self, parser, namespace, values, option_string=None):
         my_dict = {}
         for kv in values.split(","):
-            k,v = kv.split("=")
+            k, v = kv.split("=")
             my_dict[k] = eval(v)
         setattr(namespace, self.dest, my_dict)
+
 
 @contextmanager
 def Lock(management_dir):
     # Code to acquire resource, e.g.:
-    lock  = fasteners.InterProcessLock(os.path.join(management_dir, 'lock'))
+    lock = fasteners.InterProcessLock(os.path.join(management_dir, 'lock'))
     lock.acquire()
     try:
         yield lock
     finally:
         lock.release()
+
 
 def get_process_number(management_dir):
     with Lock(management_dir) as lock:
@@ -70,6 +73,7 @@ def get_process_number(management_dir):
         print('I am process number {}'.format(x))
     return x
 
+
 def reset_process_number(management_dir):
     with Lock(management_dir) as lock:
         p = lock.path  # this is a regular string in Python 2
@@ -78,6 +82,7 @@ def reset_process_number(management_dir):
         p += '_sync'
         with open(p, 'w') as f:
             f.write('')
+
 
 def read_user_port_numbers():
     ### setting up user-defined port numbers ###
@@ -88,26 +93,35 @@ def read_user_port_numbers():
     ports = config['PORT_NUMBERS']
     return ports
 
-def main(management_dir, launch_jupyter_server=True, notebook=None, nb_kwargs=None):
+
+def main(management_dir,
+         launch_jupyter_server=True,
+         notebook=None,
+         nb_kwargs=None):
     if os.path.exists(management_dir):
-        try:    
+        try:
             os.makedirs(management_dir)
-        except OSError: # if another process was faster creating it
+        except OSError:  # if another process was faster creating it
             pass
     PROCESS_NUMBER = get_process_number(management_dir)
     PORTS = read_user_port_numbers()
 
     if PROCESS_NUMBER == 0:
         setup_locking_server(management_dir, PORTS)
-        setup_dask_scheduler(management_dir, PORTS)  # this process creates scheduler.json and scheduler3.json
+        setup_dask_scheduler(
+            management_dir,
+            PORTS)  # this process creates scheduler.json and scheduler3.json
         if launch_jupyter_server:
             setup_jupyter_server(management_dir, PORTS)
         # Set the IP adress of whatever node you got assigned as a environment variable
     # TODO: why doesn't this work? It does not seem to be added to the environment variables
-    ip = gethostbyname(gethostname())  # fetches the ip of the current host, usually "somnalogin01" or "somalogin02"
+    ip = gethostbyname(
+        gethostname()
+    )  # fetches the ip of the current host, usually "somnalogin01" or "somalogin02"
     os.environ['IP_MAIN'] = ip
-    os.environ['IP_INFINIBAND'] = ip.replace('100', '102')  # a bit hackish, but it works
-        
+    os.environ['IP_INFINIBAND'] = ip.replace(
+        '100', '102')  # a bit hackish, but it works
+
     setup_locking_config(management_dir)
     setup_dask_workers(management_dir)
 
@@ -115,14 +129,17 @@ def main(management_dir, launch_jupyter_server=True, notebook=None, nb_kwargs=No
         run_notebook(notebook, nb_kwargs=nb_kwargs)
         exit(0)  # quit SLURM when notebook has finished running
     else:
-        time.sleep(60*60*24*365)
+        time.sleep(60 * 60 * 24 * 365)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('management_dir')  # non-optional positional argument
     # parser.add_argument("--nb_kwargs", dest="nb_kwargs_from_cline", action=StoreDictKeyPair, metavar="KEY1=VAL1,KEY2=VAL2...", nargs='?', const=None)
     # parser.add_argument("--nb_suffix", nargs='?', const="-out", default="-out")
-    parser.add_argument("--launch_jupyter_server", default=True, action='store_true')
+    parser.add_argument("--launch_jupyter_server",
+                        default=True,
+                        action='store_true')
     parser.add_argument('--notebook_name', nargs='?', const="", default=None)
     args = parser.parse_args()
 
@@ -133,7 +150,9 @@ if __name__ == "__main__":
         print("Launching Jupyter server: {}".format(LAUNCH_JUPYTER_SERVER))
     print('using management dir {}'.format(MANAGEMENT_DIR))
 
-    main(MANAGEMENT_DIR, LAUNCH_JUPYTER_SERVER,
-         notebook=args.notebook_name, 
-         #nb_kwargs=args.nb_kwargs
-         )
+    main(
+        MANAGEMENT_DIR,
+        LAUNCH_JUPYTER_SERVER,
+        notebook=args.notebook_name,
+        #nb_kwargs=args.nb_kwargs
+    )

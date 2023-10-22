@@ -39,31 +39,34 @@ import os
 import sys
 import cloudpickle
 
+
 def convertible_to_int(x):
-        try:
-            int(x)
-            return True
-        except:
-            return False
-        
-def save_delayeds_in_folder(folder_, ds, files_per_folder = 100):
+    try:
+        int(x)
+        return True
+    except:
+        return False
+
+
+def save_delayeds_in_folder(folder_, ds, files_per_folder=100):
     n_folders = int(np.ceil(len(ds) / files_per_folder))
     for lv, d in enumerate(ds):
         subdir = str(lv % n_folders)
         if not os.path.exists(folder_.join(subdir)):
             os.makedirs(folder_.join(subdir))
-        with open(folder_.join(subdir).join(str(lv+1)), 'wb') as f:
+        with open(folder_.join(subdir).join(str(lv + 1)), 'wb') as f:
             cloudpickle.dump(d, f)
     with open(folder_.join('slurm.sh'), 'w') as f:
-        f.write(dask2slrm_TEMPLATE.format(len(ds)+1, sys.executable))
+        f.write(dask2slrm_TEMPLATE.format(len(ds) + 1, sys.executable))
     with open(folder_.join('run.py'), 'w') as f:
         f.write(runpy_TEMPLATE.format(folder_, n_folders))
-        
+
+
 def check_all_done(folder_):
-    subdirs =  [f for f in os.listdir(folder_) if convertible_to_int(f)]
+    subdirs = [f for f in os.listdir(folder_) if convertible_to_int(f)]
     for s in subdirs:
         full_path = os.path.join(folder_, s)
         ds = os.listdir(full_path)
         for d in ds:
             if not d.endswith('.done'):
-                print(s,d)
+                print(s, d)

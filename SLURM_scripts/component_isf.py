@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 from curses.ascii import isdigit
 
@@ -43,9 +42,9 @@ else:
 logger.info('using management dir {}'.format(management_dir))
 
 if not os.path.exists(management_dir):
-    try:    
+    try:
         os.makedirs(management_dir)
-    except OSError: # if another process was faster creating it
+    except OSError:  # if another process was faster creating it
         pass
 
 #NOTE: last bit of information is to use the hostname
@@ -64,15 +63,18 @@ lock_server = {'axon': 'axon01:21811', 'soma': 'somalogin01-hs:33333'}
 #################################
 
 from contextlib import contextmanager
+
+
 @contextmanager
 def Lock():
     # Code to acquire resource, e.g.:
-    lock  = fasteners.InterProcessLock(os.path.join(management_dir, 'lock'))    
+    lock = fasteners.InterProcessLock(os.path.join(management_dir, 'lock'))
     lock.acquire()
     try:
         yield lock
     finally:
         lock.release()
+
 
 def get_process_number():
     with Lock() as lock:
@@ -91,11 +93,13 @@ def get_process_number():
         logger.info('I am process number {}'.format(x))
     return x
 
+
 def reset_process_number():
     with Lock() as lock:
         p = lock.path + b'_sync'
         with open(p, 'w') as f:
             f.write('')
+
 
 process_number = get_process_number()
 
@@ -106,32 +110,39 @@ process_number = get_process_number()
 def get_locking_file_path():
     return os.path.join(management_dir, 'locking_server')
 
+
 def setup_locking_server(cluster):
     logger.info('setting up locking server')
-    #command = 'redis-server --save "" --appendonly no --port 8885 --protected-mode no &'    
+    #command = 'redis-server --save "" --appendonly no --port 8885 --protected-mode no &'
     #config = [dict(type = 'redis', config = dict(host = socket.gethostname(), port = 8885, socket_timeout = 1))]
     #config = [{'config': {'host': socket.gethostname(), 'port': 8885, 'socket_timeout': 1}, 'type': 'redis'}]
     config = [{'config': {'hosts': lock_server[cluster]}, 'type': 'zookeeper'}]
     with open(get_locking_file_path(), 'w') as f:
         f.write(yaml.dump(config))
 
+
 def setup_locking_config():
     logger.info('updating locking configuration to use new server')
     while not os.path.exists(get_locking_file_path()):
         time.sleep(1)
-    os.environ['ISF_DISTRIBUTED_LOCK_CONFIG'] = get_locking_file_path() 
+    os.environ['ISF_DISTRIBUTED_LOCK_CONFIG'] = get_locking_file_path()
     check_locking_config()
+
 
 def check_locking_config():
     logger.info('locking configuration')
     logger.info('distributed lock server: {}'.format(mdb_dist_lock.server))
     logger.info('distributed lock client: {}'.format(mdb_dist_lock.client))
 
+
 #################################################
 # setting up dask-scheduler
 #################################################
 def _get_sfile(management_dir):
-    return os.path.join(management_dir, 'scheduler.json'), os.path.join(management_dir, 'scheduler3.json')
+    return os.path.join(management_dir,
+                        'scheduler.json'), os.path.join(management_dir,
+                                                        'scheduler3.json')
+
 
 def setup_dask_scheduler(management_dir):
     logger.info('setting up dask-scheduler')
@@ -147,43 +158,47 @@ def setup_dask_scheduler(management_dir):
     logger.debug(command)
     os.system(command)
 
+
 #################################################
 # setting up dask-workers
 #################################################
 def setup_dask_workers(management_dir):
     logger.info('setting up dask-workers')
-    n_cpus = psutil.cpu_count(logical=False) # maybe one less
+    n_cpus = psutil.cpu_count(logical=False)  # maybe one less
     sfile, sfile3 = _get_sfile(management_dir)
 
     if six.PY2:
         command = 'dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --memory-limit=100e9 &'
-        command = command.format(nprocs = n_cpus, sfile = sfile)
-    else: # assume we are using python3
+        command = command.format(nprocs=n_cpus, sfile=sfile)
+    else:  # assume we are using python3
         command = 'dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --memory-limit=100e9 &'
         #command = "dask-worker --nworkers='auto' --memory-limit='auto' --scheduler-file={sfile} &"
-        command = command.format(nprocs = n_cpus, sfile = sfile3)
+        command = command.format(nprocs=n_cpus, sfile=sfile3)
         #command = command.format(sfile = sfile3)
 
     logger.debug(command)
     os.system(command)
+
 
 ##############################################
 # setting up jupyter-notebook
 #############################################
 def setup_jupyter_notebook(custom_port):
     logger.info("setting up jupyter notebook ({}) ".format(custom_port))
-    check_locking_config() 
+    check_locking_config()
 
     if six.PY2:
         command = "jupyter-notebook --ip='*' --no-browser --port={port}"
-        command = command.format(port = custom_port)
+        command = command.format(port=custom_port)
     else:
         #command = "jupyter-lab --ip='*' --no-browser --port={port} --NotebookApp.token='' --NotebookApp.password=''"
         command = "jupyter-lab --no-browser --port={port}"
-        command = command.format(port = custom_port)
+        command = command.format(port=custom_port)
 
     logger.debug(command)
     os.system(command)
+
+
 if __name__ == "__main__":
     if process_number == 0:
         setup_locking_server(cluster)

@@ -46,20 +46,21 @@ import numpy as np
 
 class Am:
 
-    def __init__(self, input_path, output_path=None, read_ = True):
+    def __init__(self, input_path, output_path=None, read_=True):
 
         if output_path is None:
-            output_path = os.path.dirname(input_path) + "output_" + str(randrange(100))
+            output_path = os.path.dirname(input_path) + "output_" + str(
+                randrange(100))
 
         self.commands = {}
         self.config = {}
         self.input_path = input_path
         self.output_path = output_path
         self.transformation_matrix_exist = False
-        self.transformation_matrix = np.array([[ 1.,  0.,  0.,  0.],
-                                                [ 0.,  1.,  0.,  0.],
-                                                [ 0.,  0.,  1.,  0.],
-                                                [ 0.,  0.,  0.,  1.]])
+        self.transformation_matrix = np.array([[1., 0., 0.,
+                                                0.], [0., 1., 0., 0.],
+                                               [0., 0., 1., 0.],
+                                               [0., 0., 0., 1.]])
         self.all_data = {}
         if read_:
             self.read()
@@ -127,12 +128,12 @@ class Am:
         self._write_from_dict()
 
     def _write_from_dict(self):
+
         def format_number(x):
             if x == int(x):
                 return str(int(x))
             else:
-                return  '{:.15e}'.format(x)
-
+                return '{:.15e}'.format(x)
 
         with open(self.output_path, "w") as data_file:
             data_file.writelines(self.all_data["config"])
@@ -148,7 +149,7 @@ class Am:
                 data_file.write(self.commands[cs])
                 data_file.write("\n")
                 for data in self.all_data[cs]:
-                    
+
                     string = ' '.join(map(format_number, data))
                     for item in string:
                         data_file.write(item)
@@ -173,7 +174,7 @@ class Am:
                         c = line.replace(command_sign, "").strip()
                         commands_order.append(c)
                         commands[c] = command_sign
-                    else: # searches for the first isolated occurence of @[number], which indicates beginning of data section
+                    else:  # searches for the first isolated occurence of @[number], which indicates beginning of data section
                         config_end = idx
                         break
             self.all_data["config"] = lines[:header_end]
@@ -182,7 +183,8 @@ class Am:
         self._commands_order = commands_order
 
     def add_data(self, cs, data):
-        max_command = max([int(v.strip('@ ')) for v in list(self.commands.values())])
+        max_command = max(
+            [int(v.strip('@ ')) for v in list(self.commands.values())])
         self.commands[cs] = '@' + str(max_command + 1)
         self.all_data[cs] = data
         self._commands_order.append(cs)
@@ -193,7 +195,8 @@ class Hoc:
     def __init__(self, input_path, output_path=None):
 
         if output_path is None:
-            output_path = os.path.dirname(input_path) + "output_" + str(randrange(100))
+            output_path = os.path.dirname(input_path) + "output_" + str(
+                randrange(100))
         self.output_path = output_path
         self.input_path = input_path
         self.edges = read_hoc_file(input_path)
@@ -252,8 +255,8 @@ class Hoc:
                     createCommand = line.rfind("create")
                     pt3daddCommand = line.rfind("pt3dadd")
 
-                    if not neuron_section and ((createCommand > -1)
-                                               and (soma + apical + dend > -3)):
+                    if not neuron_section and ((createCommand > -1) and
+                                               (soma + apical + dend > -3)):
                         neuron_section = True
 
                     if neuron_section and (line == '\n'):
@@ -267,10 +270,10 @@ class Hoc:
                         matches = re.findall(r'-?\d+\.\d?\d+|\-?\d+', line)
                         point = list(map(float, matches))
 
-                        writeHocFile.write('{{pt3dadd({:f},{:f},{:f},{:f})}}\n'.format(hoc_point[0],
-                                                                                       hoc_point[1],
-                                                                                       hoc_point[2],
-                                                                                       thickness))
+                        writeHocFile.write(
+                            '{{pt3dadd({:f},{:f},{:f},{:f})}}\n'.format(
+                                hoc_point[0], hoc_point[1], hoc_point[2],
+                                thickness))
                         in_neuron_line_number = in_neuron_line_number + 1
                     else:
                         writeHocFile.write(line)
@@ -304,7 +307,8 @@ def read_numbers_in_line(line):
     matches = re.findall(r'-?\d+\.\d+[e]?[+-]?\d+|\-?\d+[e]?', line)
     if not matches:
         raise RuntimeError(
-            "Expected number in line {} but did not set_transformation_matrix_by_aligned_points any".format(line))
+            "Expected number in line {} but did not set_transformation_matrix_by_aligned_points any"
+            .format(line))
     data = list(map(float, matches))
     return data
 
@@ -341,7 +345,6 @@ def read_hoc_file(fname=''):
         #        simply store list of edges
         #        cell is parsed in CellParser
         cell = []
-
         '''
         set up all temporary data structures
         that hold the cell morphology
@@ -365,7 +368,6 @@ def read_hoc_file(fname=''):
                 #                    '''ignore daVinci registration'''
                 #                    if '/* EOF */' in line:
                 #                        break
-
                 '''read pts belonging to current segment'''
                 if readPts:
                     if 'Spine' in line:
@@ -373,7 +375,11 @@ def read_hoc_file(fname=''):
                     if 'pt3dadd' in line:
                         ptStr = line.partition('(')[2].partition(')')[0]
                         ptStrList = ptStr.split(',')
-                        tmpEdgePtList.append([float(ptStrList[0]), float(ptStrList[1]), float(ptStrList[2])])
+                        tmpEdgePtList.append([
+                            float(ptStrList[0]),
+                            float(ptStrList[1]),
+                            float(ptStrList[2])
+                        ])
                         tmpDiamList.append(float(ptStrList[3]))
                         edgePtCnt += 1
                         continue
@@ -381,7 +387,6 @@ def read_hoc_file(fname=''):
                         readPts = 0
                         tmpEdgePtCntList.append(edgePtCnt)
                         edgePtCnt = 0
-
                 '''determine type of section'''
                 '''and insert section name'''
                 if 'soma' in line and 'create' in line:
@@ -392,7 +397,8 @@ def read_hoc_file(fname=''):
                     segmentInsertOrder[tmpLine.split()[1]] = insertCnt
                     tmpHocLabelList.append(tmpLine.split()[1])
                     insertCnt += 1
-                if ('dend' in line or 'BasalDendrite' in line) and 'create' in line:
+                if ('dend' in line or
+                        'BasalDendrite' in line) and 'create' in line:
                     tmpLabelList.append('Dendrite')
                     readPts = 1
                     edgePtCnt = 0
@@ -416,7 +422,6 @@ def read_hoc_file(fname=''):
                     segmentInsertOrder[tmpLine.split()[1]] = insertCnt
                     tmpHocLabelList.append(tmpLine.split()[1])
                     insertCnt += 1
-
                 '''determine connectivity'''
                 if 'connect' in line:
                     #                        if 'soma' in line:
@@ -427,14 +432,13 @@ def read_hoc_file(fname=''):
                     name_end = parentStr.find('(')
                     conEnd = parentStr.find(')')
                     segmentParentMap[insertCnt - 1] = parentStr[:name_end]
-                    segmentConMap[insertCnt - 1] = float(parentStr[name_end + 1:conEnd])
+                    segmentConMap[insertCnt - 1] = float(parentStr[name_end +
+                                                                   1:conEnd])
 
         #            end for loop
-
         '''make sure EOF doesn't mess anything up'''
         if len(tmpEdgePtCntList) == len(tmpLabelList) - 1 and edgePtCnt:
             tmpEdgePtCntList.append(edgePtCnt)
-
         '''put everything into Cell'''
         ptListIndex = 0
         if len(tmpEdgePtCntList) == len(tmpLabelList):
@@ -442,8 +446,10 @@ def read_hoc_file(fname=''):
                 #                data belonging to this segment
                 thisSegmentID = tmpLabelList[n]
                 thisNrOfEdgePts = tmpEdgePtCntList[n]
-                thisSegmentPtList = tmpEdgePtList[ptListIndex:ptListIndex + thisNrOfEdgePts]
-                thisSegmentDiamList = tmpDiamList[ptListIndex:ptListIndex + thisNrOfEdgePts]
+                thisSegmentPtList = tmpEdgePtList[ptListIndex:ptListIndex +
+                                                  thisNrOfEdgePts]
+                thisSegmentDiamList = tmpDiamList[ptListIndex:ptListIndex +
+                                                  thisNrOfEdgePts]
                 ptListIndex += thisNrOfEdgePts
                 #                create edge
                 segment = Edge()
@@ -459,10 +465,13 @@ def read_hoc_file(fname=''):
                 if segment.is_valid():
                     cell.append(segment)
                 else:
-                    raise IOError('Logical error reading hoc file: invalid segment')
+                    raise IOError(
+                        'Logical error reading hoc file: invalid segment')
 
         else:
-            raise IOError('Logical error reading hoc file: Number of labels does not equal number of edges')
+            raise IOError(
+                'Logical error reading hoc file: Number of labels does not equal number of edges'
+            )
 
         return cell
 

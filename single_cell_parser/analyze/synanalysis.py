@@ -8,6 +8,7 @@ import numpy as np
 import single_cell_parser as scp
 from model_data_base.mdbopen import mdbopen
 
+
 def compute_synapse_distances_times(fname, cell, t=None, synTypes=None):
     synDistances = {}
     synTimes = {}
@@ -29,21 +30,24 @@ def compute_synapse_distances_times(fname, cell, t=None, synTypes=None):
                 tmpSynTimes = syn.releaseSite.spikeTimes[:]
                 synTimes[synType].append(tmpSynTimes)
             synCnt += 1
-    
-    scp.write_synapse_activation_file(fname, cell, synTypes, synDistances, synTimes, activeSyns)
+
+    scp.write_synapse_activation_file(fname, cell, synTypes, synDistances,
+                                      synTimes, activeSyns)
+
 
 def synapse_activation_times(tVec, cntVec):
     synTVec = []
     for i in range(1, len(cntVec)):
-        if cntVec[i] > cntVec[i-1]:
+        if cntVec[i] > cntVec[i - 1]:
             synTVec.append(tVec[i])
     return synTVec
+
 
 def synapse_distances(pname):
     parameters = scp.build_parameters(pname)
     cellParam = parameters.network.post
     preParam = parameters.network.pre
-    
+
     parser = scp.CellParser(cellParam.filename)
     parser.spatialgraph_to_cell()
     cell = parser.cell
@@ -52,7 +56,7 @@ def synapse_distances(pname):
         synDist = scp.read_synapse_realization(synapseFName)
         mapper = scp.SynapseMapper(cell, synDist)
         mapper.map_synapse_realization()
-    
+
     for synType in list(cell.synapses.keys()):
         dist = compute_syn_distances(cell, synType)
         name = parameters.info.outputname
@@ -63,13 +67,14 @@ def synapse_distances(pname):
             header = 'Distance to soma (micron)\n'
             distFile.write(header)
             for d in dist:
-                distFile.write(str(d)+'\n')
+                distFile.write(str(d) + '\n')
+
 
 def synapse_distances_2D(pname):
     parameters = scp.build_parameters(pname)
     cellParam = parameters.network.post
     preParam = parameters.network.pre
-    
+
     parser = scp.CellParser(cellParam.filename)
     parser.spatialgraph_to_cell()
     cell = parser.cell
@@ -78,7 +83,7 @@ def synapse_distances_2D(pname):
         synDist = scp.read_synapse_realization(synapseFName)
         mapper = scp.SynapseMapper(cell, synDist)
         mapper.map_synapse_realization()
-    
+
     for synType in list(cell.synapses.keys()):
         dist = compute_syn_distances_2Dprojected(cell, synType)
         name = parameters.info.outputname
@@ -89,33 +94,34 @@ def synapse_distances_2D(pname):
             header = 'Distance to soma (micron)\n'
             distFile.write(header)
             for d in dist:
-                distFile.write(str(d)+'\n')
+                distFile.write(str(d) + '\n')
 
-# def compute_syn_distances(cell, synType, label=None): 
+
+# def compute_syn_distances(cell, synType, label=None):
 #     '''
 #     computes distances of all synapses on dendrite w.r.t. soma
-    
+
 #     cell is cell object with attached synapses
 #     presynaptic cell type given by synType (string)
 #     optional: dendrite type given by label (string)
-    
+
 #     returns 1D numpy array of distances to soma
 #     '''
 #     if not cell.synapses.has_key(synType):
 #         errStr = 'Cell does not have synapses of type %s' % synType
 #         raise KeyError(errStr)
-    
+
 #     distances = []
 #     for syn in cell.synapses[synType]:
 #         currentSec = cell.sections[syn.secID]
 #         if label is not None and currentSec.label != label:
 #             continue
-        
+
 #         if currentSec.label == 'Soma':
 #             dist = 0.0
 #             distances.append(dist)
 #             continue
-        
+
 #         parentSec = currentSec.parent
 #         '''compute distance from synapse location to parent branch first'''
 #         dist = 0.0
@@ -127,7 +133,7 @@ def synapse_distances_2D(pname):
 #             parentSec = currentSec.parent
 #             parentLabel = parentSec.label
 #         distances.append(dist)
-    
+
 #     return np.array(distances)
 
 
@@ -145,8 +151,8 @@ def compute_syn_distances_2Dprojected(cell, synType, label=None):
     if synType not in cell.synapses:
         errStr = 'Cell does not have synapses of type %s' % synType
         raise KeyError(errStr)
-    
-    somaLoc = cell.soma.pts[cell.soma.nrOfPts//2]
+
+    somaLoc = cell.soma.pts[cell.soma.nrOfPts // 2]
     distances = []
     for syn in cell.synapses[synType]:
         currentSec = cell.sections[syn.secID]
@@ -158,11 +164,13 @@ def compute_syn_distances_2Dprojected(cell, synType, label=None):
         distances.append(dist)
     return np.array(distances)
 
-def get_dist(x1, x2):
-    assert(len(x1) == len(x2))
-    return np.sqrt(sum((xx1-xx2)**2 for xx1, xx2 in zip(x1, x2)))
 
-def compute_distance_to_soma(sec, x, cell = None, consider_gap_to_soma = False):
+def get_dist(x1, x2):
+    assert len(x1) == len(x2)
+    return np.sqrt(sum((xx1 - xx2)**2 for xx1, xx2 in zip(x1, x2)))
+
+
+def compute_distance_to_soma(sec, x, cell=None, consider_gap_to_soma=False):
     '''Computes the distance from a point specified by section and sectionx to the soma.
 
     sec: section of cell, either a PySection object or an int
@@ -170,7 +178,7 @@ def compute_distance_to_soma(sec, x, cell = None, consider_gap_to_soma = False):
     cell: single_cell_parser Cell object, optional (only required if sec is given as an int)
     consider_gap_to_soma: boolean, optional. Accounts for the fact that dendrites don't actually touch the soma.
 
-    '''    
+    '''
 
     if isinstance(sec, int) and cell is not None:
         sec = cell.sections[sec]
@@ -182,9 +190,9 @@ def compute_distance_to_soma(sec, x, cell = None, consider_gap_to_soma = False):
         dist = 0.0
     else:
         parentSec = currentSec.parent
-        
+
         dist = 0.0
-        dist = x*currentSec.L
+        dist = x * currentSec.L
         parentLabel = parentSec.label
         while parentLabel != 'Soma':
             dist += parentSec.L * currentSec.parentx
@@ -195,12 +203,25 @@ def compute_distance_to_soma(sec, x, cell = None, consider_gap_to_soma = False):
             dist += get_dist(currentSec.pts[0], parentSec.pts[-1])
     return dist
 
-def compute_syn_distance(cell, syn, consider_gap_to_soma = False): ## same as Robert's method but can get one synapse at a time
+
+def compute_syn_distance(
+    cell,
+    syn,
+    consider_gap_to_soma=False
+):  ## same as Robert's method but can get one synapse at a time
     currentSec = cell.sections[syn.secID]
     x = syn.x
-    return compute_distance_to_soma(currentSec, x, consider_gap_to_soma = consider_gap_to_soma)
+    return compute_distance_to_soma(currentSec,
+                                    x,
+                                    consider_gap_to_soma=consider_gap_to_soma)
 
-def compute_syn_distances(cell, synType, label=None, consider_gap_to_soma = False): ## updated to use new method for getting somadistance of one synapse at a time
+
+def compute_syn_distances(
+    cell,
+    synType,
+    label=None,
+    consider_gap_to_soma=False
+):  ## updated to use new method for getting somadistance of one synapse at a time
     '''
      computes distances of all synapses on dendrite w.r.t. soma
     

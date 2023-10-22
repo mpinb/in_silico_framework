@@ -15,11 +15,10 @@ amOutputPath = str('../data/report/output/am/')
 outputFolderPath = str('../data/report/output/am/')
 tifOutputPath = str('../data/report/output/tif/')
 
-
 import radii as radi
+
 getRad = radi.exRadSets.exRadSets
 
 # extract all radii from all am files in folder path and writing them
 # in output files in outputFolderPath
 getRad(amDataPath, tifDataPath, outputFolderPath)
-

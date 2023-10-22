@@ -67,7 +67,7 @@ class Model(nn.Module):
         # output layer, dimensionality 1-4, depending on amount of targets predicted by the network
         # (can be: somatic AP probability, somatic membrane potential, dendritic AP probability, dendrtic membrane potential)
         self.output_layer = nn.Linear(in_features = layer_width, out_features = output_size, bias = True)
-    
+
     def forward(self, X_ISI_MCM_list):
         '''
         X_ISI_list: a list containing two elements.
@@ -174,8 +174,6 @@ def get_descriptor(self):
     descriptor += '__' + ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
     return descriptor
 
-
-
 def clear_tracking():
     global model_out_tracking, desired_outputs_tracking
     model_out_tracking = []
@@ -241,7 +239,6 @@ def closure(tracking = False):
     #if len(counter) == 5:
     #raise
     return loss
-
 
 # track and compute metrics of accuracy during training  
 def log(detailed_log = False, print_ = False):
@@ -311,6 +308,7 @@ def save():
             I.cloudpickle.dump(loss_collection, f)
 
 # training loop             
+
 def train():
     print('I save to', savedir)
     global batch, epoch, mode, loss, ind

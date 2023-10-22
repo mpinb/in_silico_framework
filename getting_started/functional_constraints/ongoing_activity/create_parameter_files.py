@@ -1,8 +1,7 @@
-
 import sys
 import os.path
 
-whiskers = ['B1','B2','B3','C1','C2','C3','D1','D2','D3']
+whiskers = ['B1', 'B2', 'B3', 'C1', 'C2', 'C3', 'D1', 'D2', 'D3']
 #whiskers = ['B1','B2','B3','C1','C2','C3','D1','D2','D3','E2']
 #whiskers = ['B1','B2','B3','C1','C3','D1','D2','D3','E2']
 #cellLocations = ['B1border','B2border','B3border','C1border',\
@@ -26,6 +25,7 @@ synParamName += 'ongoing_activity_celltype_template_exc_conductances_fitted_NMDA
 #synParamName = '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/ongoing_activity/ongoing_activity_celltype_template_exc_conductances_fitted_dynamic_syns.param'
 outPath = '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/ongoing_activity/'
 
+
 def create_param_file_script(fname, outName):
     if not fname.endswith('.sh'):
         fname += '.sh'
@@ -38,22 +38,27 @@ def create_param_file_script(fname, outName):
             line += ' '
             line += synParamName
             line += ' '
-            line += os.path.join(locationBaseName, cellLocation, locationFolderNames[cellLocation], 'NumberOfConnectedCells.csv')
+            line += os.path.join(locationBaseName, cellLocation,
+                                 locationFolderNames[cellLocation],
+                                 'NumberOfConnectedCells.csv')
             line += ' '
-            line += os.path.join(locationBaseName, cellLocation, locationFolderNames[cellLocation], locationFolderNames[cellLocation])
+            line += os.path.join(locationBaseName, cellLocation,
+                                 locationFolderNames[cellLocation],
+                                 locationFolderNames[cellLocation])
             line += '.syn'
-#                line += ' '
-#                line += whisker
+            #                line += ' '
+            #                line += whisker
             # output name
             line += ' '
             line += outPath
-#                line += whisker
-#                line += '_'
+            #                line += whisker
+            #                line += '_'
             line += outName
             line += '_'
             line += cellLocation
             line += '.param\n'
             scriptFile.write(line)
+
 
 if __name__ == '__main__':
     scriptName = sys.argv[1]

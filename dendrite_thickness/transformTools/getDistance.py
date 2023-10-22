@@ -2,13 +2,16 @@ import numpy as np
 import math
 from scipy.spatial import ConvexHull
 
+
 def constructEdges(points):
     """
     we give this function a set of points and it will reaturn us all edges,
     that is possible to create from those points;
 
     """
+
     class Edge:
+
         def __init__(self, distance, start, end):
             self.distance = distance
             self.start = start
@@ -55,8 +58,9 @@ def distance(point_i, point_j):
     the length of an edge
     """
 
-    dist = math.sqrt((point_j[0]-point_i[0])**2 + (point_j[1]-point_i[1])**2 +
-                   (point_j[2]-point_i[2])**2)
+    dist = math.sqrt((point_j[0] - point_i[0])**2 +
+                     (point_j[1] - point_i[1])**2 +
+                     (point_j[2] - point_i[2])**2)
     return dist
 
 
@@ -71,7 +75,7 @@ def longestOptimalEdges(edges, spanFactor):
 
     firstLongestEdge = sortedEdges[0]
 
-    span = getMean(sortedEdges)/spanFactor
+    span = getMean(sortedEdges) / spanFactor
     shortestEdges = []
 
     for edg in sortedEdges_revers:
@@ -80,18 +84,19 @@ def longestOptimalEdges(edges, spanFactor):
         side2 = distance(shortEdge.end, firstLongestEdge.start)
         side3 = distance(shortEdge.start, firstLongestEdge.end)
         side4 = distance(shortEdge.end, firstLongestEdge.end)
-        if (edg.distance > span and side1 > span and side2 > span and side3 > span and side4 > span):
+        if (edg.distance > span and side1 > span and side2 > span and
+                side3 > span and side4 > span):
             shortestEdges.append(shortEdge)
 
-    sorted_shortestEdges = sorted(shortestEdges, key=lambda x: x.distance, reverse=True)
+    sorted_shortestEdges = sorted(shortestEdges,
+                                  key=lambda x: x.distance,
+                                  reverse=True)
     secondLongestEdge = sorted_shortestEdges[0]
 
     return [firstLongestEdge, secondLongestEdge]
 
 
-
 def matchDirection(sett):
-
     """
         In this function we need to match the direction of edges to each other
         Suppos we have two edges that we know their are corresponding to
@@ -116,46 +121,45 @@ def matchDirection(sett):
     centerOfSet2 = 0.0
     length = len(sett)
 
+    longestEdgCenter_A = (np.array(sett[0][0].start) +
+                          np.array(sett[0][0].end)) / 2.0
+    longestEdgCenter_B = (np.array(sett[0][1].start) +
+                          np.array(sett[0][1].end)) / 2.0
 
+    disA_start = distance(sett[1][0].start, longestEdgCenter_A)
+    disB_start = distance(sett[1][1].start, longestEdgCenter_B)
 
-    longestEdgCenter_A = (np.array(sett[0][0].start) + np.array(sett[0][0].end))/2.0
-    longestEdgCenter_B = (np.array(sett[0][1].start) + np.array(sett[0][1].end))/2.0
-
-    disA_start = distance(sett[1][0].start , longestEdgCenter_A)
-    disB_start = distance(sett[1][1].start , longestEdgCenter_B)
-
-    disA_end = distance(sett[1][0].end , longestEdgCenter_A)
-    disB_end = distance(sett[1][1].end , longestEdgCenter_B)
+    disA_end = distance(sett[1][0].end, longestEdgCenter_A)
+    disB_end = distance(sett[1][1].end, longestEdgCenter_B)
 
     deltaA = disA_start - disA_end
     deltaB = disB_start - disB_end
 
-
-    if (deltaA*deltaB < 0.0):
+    if (deltaA * deltaB < 0.0):
         tempStart = sett[1][1].start
         tempEnd = sett[1][1].end
         sett[1][1].end = tempStart
         sett[1][1].start = tempEnd
 
-    second_longestEdgCenter_A = (np.array(sett[1][0].start) + np.array(sett[1][0].end))/2.0
-    second_longestEdgCenter_B = (np.array(sett[1][1].start) + np.array(sett[1][1].end))/2.0
+    second_longestEdgCenter_A = (np.array(sett[1][0].start) +
+                                 np.array(sett[1][0].end)) / 2.0
+    second_longestEdgCenter_B = (np.array(sett[1][1].start) +
+                                 np.array(sett[1][1].end)) / 2.0
 
-    second_disA_start = distance(sett[0][0].start , second_longestEdgCenter_A)
-    second_disB_start = distance(sett[0][1].start , second_longestEdgCenter_B)
+    second_disA_start = distance(sett[0][0].start, second_longestEdgCenter_A)
+    second_disB_start = distance(sett[0][1].start, second_longestEdgCenter_B)
 
-    second_disA_end = distance(sett[0][0].end , second_longestEdgCenter_A)
-    second_disB_end = distance(sett[0][1].end , second_longestEdgCenter_B)
+    second_disA_end = distance(sett[0][0].end, second_longestEdgCenter_A)
+    second_disB_end = distance(sett[0][1].end, second_longestEdgCenter_B)
 
     deltaA_sec = second_disA_start - second_disA_end
     deltaB_sec = second_disB_start - second_disB_end
 
-
-    if (deltaA_sec*deltaB_sec < 0.0):
+    if (deltaA_sec * deltaB_sec < 0.0):
         tempStart = sett[0][1].start
         tempEnd = sett[0][1].end
         sett[0][1].end = tempStart
         sett[0][1].start = tempEnd
-
 
     # for i in range(length):
 
@@ -175,7 +179,6 @@ def matchDirection(sett):
     # print(centerOfSet1)
     # print(centerOfSet2)
 
-
     # for i in range(length):
 
     #     deltaSet1 = distance(centerOfSet1, sett[i][0].start)\
@@ -190,7 +193,6 @@ def matchDirection(sett):
     #     startToCenter_set2 = distance(centerOfSet2, sett[i][1].start)
     #     endToCenter_set2 = distance(centerOfSet2, sett[i][1].end)
 
-
     #     if (startToCenter_set1 < endToCenter_set1 and startToCenter_set2 < endToCenter_set2):
     #         continue
     #     else:
@@ -200,12 +202,12 @@ def matchDirection(sett):
     #         sett[i][1].end = tempStart
     #         sett[i][1].start = tempEnd
 
-        # print(deltaSet2)
-        # if (deltaSet1*deltaSet2 < 0):
-        #     print("yessssss")
-        #     temp = sett[i][1].start
-        #     sett[i][1].start = sett[i][1].end
-        #     sett[i][1].end = temp
+    # print(deltaSet2)
+    # if (deltaSet1*deltaSet2 < 0):
+    #     print("yessssss")
+    #     temp = sett[i][1].start
+    #     sett[i][1].start = sett[i][1].end
+    #     sett[i][1].end = temp
 
     return sett
 
@@ -219,9 +221,11 @@ def removeSameEdges(setEg, edg):
     """
     setEg.remove(edg)
     for el in setEg:
-        if (edg.start == el.start or edg.start == el.end or edg.end == el.start or edg.end == el.end):
+        if (edg.start == el.start or edg.start == el.end or
+                edg.end == el.start or edg.end == el.end):
             setEg.remove(el)
     return setEg
+
 
 def getMean(sett):
     '''Calculate the avarege length of all edges in an edges set'''

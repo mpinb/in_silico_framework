@@ -24,17 +24,25 @@ from matplotlib.text import Annotation
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 POPULATION_TO_COLOR_DICT = {
-    'INT': 'black', 
-    'L4ss': 'orange', 
-    'L5st': 'cyan', 
+    'INT': 'black',
+    'L4ss': 'orange',
+    'L5st': 'cyan',
     'L5tt': 'lime',
     'L6CC': 'yellow',
     'VPM': 'red',
     'L23': 'magenta',
-    'inactive': 'white'}
+    'inactive': 'white'
+}
 """Colors in which the synaptic input are going to be shown"""
 
-def write_video_from_images(images, out_path, fps=24, images_format = '.png', quality=5, codec='mpeg4', auto_sort_paths=True ):
+
+def write_video_from_images(images,
+                            out_path,
+                            fps=24,
+                            images_format='.png',
+                            quality=5,
+                            codec='mpeg4',
+                            auto_sort_paths=True):
     '''
     Creates a video from a set of images. Images must be specified as a list of images, a directory with images or a list of directories with images.
     Uses glob pattern pmatching if a directory of images is specified (allows for using the "*" as a wildcard). Glob is not enabled by default on Windows machines.
@@ -50,43 +58,69 @@ def write_video_from_images(images, out_path, fps=24, images_format = '.png', qu
         - auto_sort_paths: paths to images sorted
     '''
     subprocess.call(["module load", "ffmpeg"], shell=True)
-    
+
     if not out_path.endswith('.mp4'):
         raise ValueError('output path must be the path to an mp4 video!')
     # make it a list if we want to auto_sort_paths since this is what find_files_and_order_them expects
     if isinstance(images, str) and auto_sort_paths == True:
         if not os.path.isdir(images):
-            raise ValueError('images must be a path to a folder or a list of folders or a list of images')
+            raise ValueError(
+                'images must be a path to a folder or a list of folders or a list of images'
+            )
         images = [images]
-        
+
     # call ffmpeg directly
-    if isinstance(images, str) and os.path.isdir(images) and auto_sort_paths == False:
-        out = subprocess.call(["ffmpeg", "-y", "-r", str(fps), "-i", images+"/%*"+images_format, 
-                                       "-vcodec", codec, "-q:v", str(quality), "-r", str(fps), out_path]) 
+    if isinstance(images,
+                  str) and os.path.isdir(images) and auto_sort_paths == False:
+        out = subprocess.call([
+            "ffmpeg", "-y", "-r",
+            str(fps), "-i", images + "/%*" + images_format, "-vcodec", codec,
+            "-q:v",
+            str(quality), "-r",
+            str(fps), out_path
+        ])
     #
     elif isinstance(images, list):
         if auto_sort_paths:
-            listFrames = find_files_and_order_them(images,images_format)
+            listFrames = find_files_and_order_them(images, images_format)
         else:
             listFrames = images
         with mkdtemp() as temp_folder:
-            for i,file in enumerate(listFrames):
-                new_name = str(i+1).zfill(6)+images_format
-                shutil.copy(file,os.path.join(temp_folder, new_name))
-            out = subprocess.call(["ffmpeg", "-y", "-r", str(fps), "-i", str(temp_folder+"/%*"+images_format), 
-                                   "-vcodec", str(codec), "-q:v", str(quality), "-r", str(fps), str(out_path)])
+            for i, file in enumerate(listFrames):
+                new_name = str(i + 1).zfill(6) + images_format
+                shutil.copy(file, os.path.join(temp_folder, new_name))
+            out = subprocess.call([
+                "ffmpeg", "-y", "-r",
+                str(fps), "-i",
+                str(temp_folder + "/%*" + images_format), "-vcodec",
+                str(codec), "-q:v",
+                str(quality), "-r",
+                str(fps),
+                str(out_path)
+            ])
     else:
-        raise ValueError("images must be a list of images, a directory with images or a list of directories with images")
-        
+        raise ValueError(
+            "images must be a list of images, a directory with images or a list of directories with images"
+        )
+
     if out == 0:
         print('Video created successfully!')
     else:
         print('Something went wrong. Make sure:')
-        print(' - the module ffmpeg is loaded, otherwise use the command: module load ffmpeg')
-        print(' - the param images is a list of images, a directory with images or a list of directories with images')
+        print(
+            ' - the module ffmpeg is loaded, otherwise use the command: module load ffmpeg'
+        )
+        print(
+            ' - the param images is a list of images, a directory with images or a list of directories with images'
+        )
         print(' - images_format is specified properly')
-    
-def write_gif_from_images(images, out_path, interval=40, images_format = '.png', auto_sort_paths=True):
+
+
+def write_gif_from_images(images,
+                          out_path,
+                          interval=40,
+                          images_format='.png',
+                          auto_sort_paths=True):
     '''
     Creates a gif from a set of images, and saves it to :@param out_path:.
 
@@ -101,25 +135,35 @@ def write_gif_from_images(images, out_path, interval=40, images_format = '.png',
     if six.PY3:
         from PIL import Image
     else:
-        raise EnvironmentError("PIL.Image could not be imported. Writing gifs will not work. Try on a Python 3 environment with PIL installed.")
+        raise EnvironmentError(
+            "PIL.Image could not be imported. Writing gifs will not work. Try on a Python 3 environment with PIL installed."
+        )
 
     if not out_path.endswith('.gif'):
         raise ValueError('output path must be the path to a gif!')
-    
+
     # make it a list if we want to auto_sort_paths since this is what find_files_and_order_them expects
     if isinstance(images, str) and (auto_sort_paths == True):
         if not os.path.isdir(images):
-            raise ValueError('images must be a path to a folder or a list of folders or a list of images')
+            raise ValueError(
+                'images must be a path to a folder or a list of folders or a list of images'
+            )
         images = [images]
-    
+
     # call ffmpeg directly
-    if isinstance(images, str) and os.path.isdir(images) and (auto_sort_paths == False):
+    if isinstance(images, str) and os.path.isdir(images) and (auto_sort_paths
+                                                              == False):
         frames = []
         for f in os.listdir(images):
             if f.endswith(images_format):
-                frames.append(Image.open(os.path.join(images,f)))
-        # Save into a GIF file that loops forever   
-        frames[0].save(out_path, format='GIF', append_images=frames[1:], save_all=True, duration=interval, loop=0)
+                frames.append(Image.open(os.path.join(images, f)))
+        # Save into a GIF file that loops forever
+        frames[0].save(out_path,
+                       format='GIF',
+                       append_images=frames[1:],
+                       save_all=True,
+                       duration=interval,
+                       loop=0)
     elif isinstance(images, list):
         if auto_sort_paths:
             listFrames = find_files_and_order_them(images, images_format)
@@ -127,25 +171,39 @@ def write_gif_from_images(images, out_path, interval=40, images_format = '.png',
             listFrames = images
         with mkdtemp() as temp_folder:
             for i, file in enumerate(listFrames):
-                new_name = str(i+1).zfill(6)+images_format
+                new_name = str(i + 1).zfill(6) + images_format
                 shutil.copy(file, os.path.join(temp_folder, new_name))
                 frames = []
                 for f in os.listdir(temp_folder):
                     if f.endswith(images_format):
                         frames.append(Image.open(os.path.join(images, f)))
-                # Save into a GIF file that loops forever   
-                frames[0].save(out_path, format='GIF', append_images=frames[1:], save_all=True, duration=interval, loop=0)
+                # Save into a GIF file that loops forever
+                frames[0].save(out_path,
+                               format='GIF',
+                               append_images=frames[1:],
+                               save_all=True,
+                               duration=interval,
+                               loop=0)
     else:
-        raise ValueError("images must be a list of images, a directory with images or a list of directories with images")
+        raise ValueError(
+            "images must be a list of images, a directory with images or a list of directories with images"
+        )
     print('Gif created successfully!')
 
-def _load_base64(filename, extension = 'png'):
+
+def _load_base64(filename, extension='png'):
     #https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html_writer.py
     with open(filename, 'rb') as f:
         data = f.read()
-    return 'data:image/{0};base64,{1}'.format(extension,b64encode(data).decode('ascii'))
-    
-def display_animation_from_images(files, interval=10, style=False, animID = None, embedded = False):
+    return 'data:image/{0};base64,{1}'.format(extension,
+                                              b64encode(data).decode('ascii'))
+
+
+def display_animation_from_images(files,
+                                  interval=10,
+                                  style=False,
+                                  animID=None,
+                                  embedded=False):
     '''
     Creates an IPython animation out of files specified in a globstring or a list of paths.
 
@@ -159,21 +217,27 @@ def display_animation_from_images(files, interval=10, style=False, animID = None
     CAVEAT: the paths need to be relative to the location of the ipynb / html file, since
     the are resolved in the browser and not by python'''
     if animID is None:
-        animID = np.random.randint(10000000000000) # needs to be unique within one ipynb
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
+        animID = np.random.randint(
+            10000000000000)  # needs to be unique within one ipynb
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
     template = env.get_template('animation_template.html')
 
     if isinstance(files, str):
-        if os.path.isdir(files): # folder provieded --> convert to globstring
+        if os.path.isdir(files):  # folder provieded --> convert to globstring
             files = os.path.join(files, '*.png')
         listFrames = sorted(glob.glob(files))
     else:
         listFrames = files
     if embedded:
         listFrames = [_load_base64(f) for f in listFrames]
-    htmlSrc = template.render(ID=animID, listFrames=listFrames, interval=interval, style=style)
+    htmlSrc = template.render(ID=animID,
+                              listFrames=listFrames,
+                              interval=interval,
+                              style=style)
     IPython.display.display(IPython.display.HTML(htmlSrc))
-      
+
+
 def find_files_and_order_them(files, files_format='.png'):
     '''
     Args:
@@ -201,12 +265,13 @@ def find_files_and_order_them(files, files_format='.png'):
     '''
 
     if isinstance(files, str):
-        if os.path.isdir(files): # folder provided --> convert to globstring
-            files = os.path.join(files, '*'+files_format)
-        listFiles = sorted(glob.glob(files)) # list of files
-        files_no_number_name = [] # files whose name does not starts with a number
-        files_number_name = [] # files whose name starts with a number
-        numbers = [] # list of numbers in the files names to be ordered
+        if os.path.isdir(files):  # folder provided --> convert to globstring
+            files = os.path.join(files, '*' + files_format)
+        listFiles = sorted(glob.glob(files))  # list of files
+        files_no_number_name = [
+        ]  # files whose name does not starts with a number
+        files_number_name = []  # files whose name starts with a number
+        numbers = []  # list of numbers in the files names to be ordered
         for file in listFiles:
             _, file_name = os.path.split(file)
             file_name, _ = os.path.splitext(file_name)
@@ -217,14 +282,17 @@ def find_files_and_order_them(files, files_format='.png'):
             except:
                 files_no_number_name.append(file)
         idxs_in_order = sorted(range(len(numbers)), key=lambda k: numbers[k])
-        files_number_name_in_order = [files_number_name[i] for i in idxs_in_order]
+        files_number_name_in_order = [
+            files_number_name[i] for i in idxs_in_order
+        ]
         listFiles = files_number_name_in_order + files_no_number_name
 
     elif isinstance(files, list):
         listFiles = []
         for elem in files:
-            listFiles += find_files_and_order_them(elem,files_format)
+            listFiles += find_files_and_order_them(elem, files_format)
     return listFiles
+
 
 class Arrow3D(FancyArrowPatch):
 
@@ -241,7 +309,7 @@ class Arrow3D(FancyArrowPatch):
         xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
         self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
         super().draw(renderer)
-        
+
     def do_3d_projection(self, renderer=None):
         x1, y1, z1 = self._xyz
         dx, dy, dz = self._dxdydz
@@ -250,7 +318,8 @@ class Arrow3D(FancyArrowPatch):
         xs, ys, zs = proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
         self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
 
-        return np.min(zs) 
+        return np.min(zs)
+
 
 def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
     '''Add an 3d arrow to an `Axes3D` instance.'''
@@ -258,54 +327,60 @@ def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
     arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
     ax.add_artist(arrow)
 
-def draw_arrow(morphology, ax, 
-               highlight_section=None, 
-               highlight_x=None, 
-               highlight_arrow_args=None, 
+
+def draw_arrow(morphology,
+               ax,
+               highlight_section=None,
+               highlight_x=None,
+               highlight_arrow_args=None,
                arrow_size=50):
-    
-    assert type(highlight_section) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(highlight_section)
-    assert highlight_section in morphology['sec_n'], "The given section id is not present in the cell morphology"        
+
+    assert type(
+        highlight_section
+    ) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(
+        highlight_section)
+    assert highlight_section in morphology[
+        'sec_n'], "The given section id is not present in the cell morphology"
 
     setattr(Axes3D, 'arrow3D', _arrow3D)
     if highlight_arrow_args is None:
         highlight_arrow_args = {}
-    
+
     # overwrite defaults if they were set
-    x = dict(mutation_scale=20, ec ='black', fc='white')
+    x = dict(mutation_scale=20, ec='black', fc='white')
     x.update(highlight_arrow_args)
     highlight_arrow_args = x
-    
+
     morphology = morphology.copy()
-    morphology = morphology.fillna(0) # soma section gets 0 as section ID
+    morphology = morphology.fillna(0)  # soma section gets 0 as section ID
     df = morphology[morphology['sec_n'] == highlight_section]
     if highlight_x is not None:
-        index = np.argmin(np.abs(df.relPts-highlight_x))
-        x, y, z = df.iloc[index][['x','y','z']]
+        index = np.argmin(np.abs(df.relPts - highlight_x))
+        x, y, z = df.iloc[index][['x', 'y', 'z']]
     elif highlight_section is not None:
-        x, y, z = morphology[morphology['sec_n'] == highlight_section][['x', 'y', 'z']].mean(axis=0)
+        x, y, z = morphology[morphology['sec_n'] == highlight_section][[
+            'x', 'y', 'z'
+        ]].mean(axis=0)
     else:
-        raise ValueError("Please provide either a section index to highlight, or a distance from soma x.")
+        raise ValueError(
+            "Please provide either a section index to highlight, or a distance from soma x."
+        )
 
     # get start of arrow
-    start_x, start_y, start_z = x, y, z+arrow_size
+    start_x, start_y, start_z = x, y, z + arrow_size
     dx, dy, dz = 0, 0, -arrow_size
     ddx = ddy = 0
-    
+
     if 'rotation' in highlight_arrow_args:
         alpha = highlight_arrow_args['rotation']
         del highlight_arrow_args['rotation']
-        dx2, dz2 = np.dot(np.array([[np.cos(alpha), -np.sin(alpha)], 
-                              [np.sin(alpha), np.cos(alpha)]]), 
-                              [dx,dz])
+        dx2, dz2 = np.dot(
+            np.array([[np.cos(alpha), -np.sin(alpha)],
+                      [np.sin(alpha), np.cos(alpha)]]), [dx, dz])
         start_x = start_x + (dx - dx2)
         start_z = start_z + (dz - dz2)
         dx = dx2
         dz = dz2
-    
+
     #print(start_x, start_y)
-    ax.arrow3D(
-        start_x, start_y, start_z,
-        dx, dy, dz,
-        **highlight_arrow_args
-    )
+    ax.arrow3D(start_x, start_y, start_z, dx, dy, dz, **highlight_arrow_args)

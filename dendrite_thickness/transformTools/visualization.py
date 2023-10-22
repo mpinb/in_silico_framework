@@ -37,16 +37,15 @@ def plotCell(points, clr, sz):
     y = pd.Series([point[1] for point in points])
     z = pd.Series([point[2] for point in points])
 
-
-    trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(
-            size=sz,
-            color=clr,
-            colorscale='Viridis',
-        )
-    )
+    trace = go.Scatter3d(x=x,
+                         y=y,
+                         z=z,
+                         mode='markers',
+                         marker=dict(
+                             size=sz,
+                             color=clr,
+                             colorscale='Viridis',
+                         ))
 
     data = [trace]
 
@@ -55,40 +54,26 @@ def plotCell(points, clr, sz):
         height=1080,
         autosize=True,
         title='Spactial Data point',
-        scene=dict(
-            xaxis=dict(
-                gridcolor='rgb(255, 255, 255)',
-                zerolinecolor='rgb(255, 255, 255)',
-                showbackground=True,
-                backgroundcolor='rgb(230, 230,230)'
-            ),
-            yaxis=dict(
-                gridcolor='rgb(255, 255, 255)',
-                zerolinecolor='rgb(255, 255, 255)',
-                showbackground=True,
-                backgroundcolor='rgb(230, 230,230)'
-            ),
-            zaxis=dict(
-                gridcolor='rgb(255, 255, 255)',
-                zerolinecolor='rgb(255, 255, 255)',
-                showbackground=True,
-                backgroundcolor='rgb(230, 230,230)'
-            ),
-            camera=dict(
-                up=dict(
-                    x=0,
-                    y=0,
-                    z=1
-                ),
-                eye=dict(
-                    x=-1.7428,
-                    y=1.0707,
-                    z=0.7100,
-                )
-            ),
-            aspectratio = dict( x=1, y=1, z=0.7 ),
-            aspectmode = 'manual'
-        ),
+        scene=dict(xaxis=dict(gridcolor='rgb(255, 255, 255)',
+                              zerolinecolor='rgb(255, 255, 255)',
+                              showbackground=True,
+                              backgroundcolor='rgb(230, 230,230)'),
+                   yaxis=dict(gridcolor='rgb(255, 255, 255)',
+                              zerolinecolor='rgb(255, 255, 255)',
+                              showbackground=True,
+                              backgroundcolor='rgb(230, 230,230)'),
+                   zaxis=dict(gridcolor='rgb(255, 255, 255)',
+                              zerolinecolor='rgb(255, 255, 255)',
+                              showbackground=True,
+                              backgroundcolor='rgb(230, 230,230)'),
+                   camera=dict(up=dict(x=0, y=0, z=1),
+                               eye=dict(
+                                   x=-1.7428,
+                                   y=1.0707,
+                                   z=0.7100,
+                               )),
+                   aspectratio=dict(x=1, y=1, z=0.7),
+                   aspectmode='manual'),
     )
 
     fig = dict(data=data, layout=layout)

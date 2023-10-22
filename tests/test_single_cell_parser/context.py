@@ -4,6 +4,7 @@ import sys
 import tempfile
 import getting_started
 import neuron
+
 h = neuron.h
 
 parent = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

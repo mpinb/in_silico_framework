@@ -34,19 +34,24 @@ def evaluation_function_incremental_helper(p,
         if verbose:
             print('evaluating stimulus', stim)
         with silence_stdout:
-            voltage_traces_ = s.run(p, stims = [stim])
+            voltage_traces_ = s.run(p, stims=[stim])
             voltage_traces.update(voltage_traces_)
-            # this is currently specific to the hay simulator / evaluator, which gets confused if 
+            # this is currently specific to the hay simulator / evaluator, which gets confused if
             # any voltage traces beyond what it expects are present
             # thus filter it out and have a 'clean' voltage_traces_for_evaluation
-            voltage_traces_for_evaluation = {k:v for k,v in voltage_traces.items() if k.endswith('hay_measure')}
+            voltage_traces_for_evaluation = {
+                k: v
+                for k, v in voltage_traces.items()
+                if k.endswith('hay_measure')
+            }
             e = evaluators_by_stimulus[stim]
             evaluation_ = e.evaluate(voltage_traces_for_evaluation)
             evaluation.update(evaluation_)
         error = max(pd.Series(evaluation_)[objectives_by_stimulus[stim]])
         if error > cutoffs[stim]:
-            if verbose: 
-                print('stimulus', stim, 'has an error of', error, '- skipping further evaluation')
+            if verbose:
+                print('stimulus', stim, 'has an error of', error,
+                      '- skipping further evaluation')
             #for k in full_evaluation_keys:
             #    if not k in evaluation:
             #        evaluation[k] = float('nan')

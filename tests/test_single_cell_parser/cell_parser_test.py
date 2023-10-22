@@ -1,6 +1,7 @@
 from single_cell_parser.cell_parser import CellParser
 from .context import h, fname
 
+
 def test_cell_parser():
     testParser = CellParser(fname)
     testParser.spatialgraph_to_cell(parameters=None)

@@ -8,6 +8,7 @@ import numpy as np
 
 
 class SaveData:
+
     def __init__(self, data_file):
         self.data_file = data_file
 
@@ -36,7 +37,11 @@ def get_am_paths_from_hx(hx_path, verbose=False):
 
 
 def get_files_by_folder(path_to_folder, file_extension=""):
-    return [path_to_folder + "/" + f for f in os.listdir(path_to_folder) if f.endswith(file_extension)]
+    return [
+        path_to_folder + "/" + f
+        for f in os.listdir(path_to_folder)
+        if f.endswith(file_extension)
+    ]
 
 
 def make_directories(path):
@@ -69,8 +74,10 @@ def get_am_image_match(am_paths, tif_paths):
         slice_name = re.findall(r'[sS]\d+', am_file_name)[0]
         for tif_path in tif_paths:
             tif_file_name = os.path.basename(tif_path)
-            tif_file_name_slice_identifier = re.findall(r'[sS]\d+', tif_file_name)[0]
-            if int(slice_name.strip('Ss')) == int(tif_file_name_slice_identifier.strip('Ss')):
+            tif_file_name_slice_identifier = re.findall(r'[sS]\d+',
+                                                        tif_file_name)[0]
+            if int(slice_name.strip('Ss')) == int(
+                    tif_file_name_slice_identifier.strip('Ss')):
                 am_image_match[am_path] = tif_path
     return am_image_match
 
@@ -96,7 +103,8 @@ def get_neighbours_of_point(point, points, width=10):
 
 
 def contains(point, cube):
-    return [point[i] for i in range(3) if cube[i][0] <= point[i] <= cube[i][1]] == point
+    return [point[i] for i in range(3) if cube[i][0] <= point[i] <= cube[i][1]
+           ] == point
 
 
 def get_size_of_object(obj):
@@ -115,7 +123,7 @@ def are_same_points(p1, p2):
         return False
 
 
-def create_image_stack_dict_of_slice(folder_path, subfolders = None):
+def create_image_stack_dict_of_slice(folder_path, subfolders=None):
     """
     :param channel: subfolder in folder path containing the images of the specified channel.
     :param folder_path: path to the folder of slice images stack. eg. : ../3d/S023/
@@ -126,9 +134,11 @@ def create_image_stack_dict_of_slice(folder_path, subfolders = None):
     tif_folder_path = folder_path
     if subfolders:
         tif_folder_path = get_files_by_folder(tif_folder_path, subfolders)
-    assert(len(tif_folder_path) == 1)
+    assert len(tif_folder_path) == 1
     tif_folder_path = tif_folder_path[0]
     slice_image_stack_list = get_files_by_folder(tif_folder_path, "tif")
-    slice_image_stack_dict = {int(path.split('/')[-1].split('.')[0].split('_')[-1].strip('z')):
-                              path for path in slice_image_stack_list}
+    slice_image_stack_dict = {
+        int(path.split('/')[-1].split('.')[0].split('_')[-1].strip('z')): path
+        for path in slice_image_stack_list
+    }
     return slice_image_stack_dict

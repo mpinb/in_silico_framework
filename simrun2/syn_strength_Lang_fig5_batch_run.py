@@ -9,14 +9,18 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 
-def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = False):
+
+def create_summary(dirName,
+                   cellTypeName,
+                   detectionThreshold=0.1,
+                   makeplots=False):
     fnames = []
     cellTypeNames = [cellTypeName]
     scan_directory(dirName, fnames, cellTypeNames)
     print('Analyzing {:d} files!'.format(len(fnames)))
-    print('cell type names', str (cellTypeNames))
-#    for f in  fnames:
-#        print f
+    print('cell type names', str(cellTypeNames))
+    #    for f in  fnames:
+    #        print f
     allData = {}
     for fname in fnames:
         splitName = fname.split('_')
@@ -25,22 +29,24 @@ def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = 
         if gAMPA not in list(allData.keys()):
             allData[gAMPA] = {}
         if gNMDA in allData[gAMPA]:
-            if makeplots: create_plots(fname)
+            if makeplots:
+                create_plots(fname)
             fileData = load_data(fname)
             allData[gAMPA][gNMDA]['Vm'].extend(fileData[0])
             allData[gAMPA][gNMDA]['T'].extend(fileData[1])
         else:
             allData[gAMPA][gNMDA] = {}
-            if makeplots: create_plots(fname)
+            if makeplots:
+                create_plots(fname)
             fileData = load_data(fname)
             allData[gAMPA][gNMDA]['Vm'] = list(fileData[0][:])
             allData[gAMPA][gNMDA]['T'] = list(fileData[1][:])
-    
+
     tPSPStart = 100.0
 
     # There has been a controvery what detection threasholds for the aPSP should be used. Roberts thesis, page 65f. mentions 0.1mV for intracortical cells and 0.15mV for thalamocortocal projections.
     #
-    # However, in the code I found it to be the other way round. 
+    # However, in the code I found it to be the other way round.
     #
     # As robert suggested, I've then been looking up the threashold in the papers, Robert is refering to in his thesis.
     # This is, for the intracortical threashold Schnepel & Boucsein, Cerebral Cortex, 2015. However, in that paper, I find a threashold of 0.15 mV.
@@ -53,13 +59,13 @@ def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = 
     #
     # Marcel suggests to use a threashold of 0.1 to have more data in the analysis.
     # I also make a sensitivity analysis
-    
+
     #################################
     # roberts code with the old threasholds
     #################################
 
-#    detectionThreshold = 0.1 # VPM
-#    detectionThreshold = 0.15 # intracortical
+    #    detectionThreshold = 0.1 # VPM
+    #    detectionThreshold = 0.15 # intracortical
 
     ##########################
     # use uniform threashold now
@@ -91,11 +97,12 @@ def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = 
             epspMed = np.median(VmDetected)
             epspMin = np.min(VmDetected)
             epspMax = np.max(VmDetected)
-            tMean = np.mean(np.array(tPSPDetected)-tPSPStart)
-            tStd = np.std(np.array(tPSPDetected)-tPSPStart)
-            tMed = np.median(np.array(tPSPDetected)-tPSPStart)
-            summaryData[gAMPAStr][gNMDAStr] = epspMean, epspStd, epspMed, epspMin, epspMax, tMean, tStd, tMed
-    
+            tMean = np.mean(np.array(tPSPDetected) - tPSPStart)
+            tStd = np.std(np.array(tPSPDetected) - tPSPStart)
+            tMed = np.median(np.array(tPSPDetected) - tPSPStart)
+            summaryData[gAMPAStr][
+                gNMDAStr] = epspMean, epspStd, epspMed, epspMin, epspMax, tMean, tStd, tMed
+
     gAMPAStr = list(summaryData.keys())
     gAMPAStr.sort()
     #gNMDAStr = summaryData[gAMPAStr[0]].keys()
@@ -120,11 +127,13 @@ def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = 
                 line += str(summaryData[gAMPA][gNMDA][i])
             line += '\n'
             outFile.write(line)
+
+
 #    for fname in fnames:
 #        splitName = fname.split('_')
 #        gEx = splitName[2]
 #        summaryData[gEx] = create_plots(fname)
-#    
+#
 #    gExStr = summaryData.keys()
 #    gExStr.sort()
 #    outName = dirName
@@ -144,6 +153,7 @@ def create_summary(dirName, cellTypeName, detectionThreshold = 0.1, makeplots = 
 #            line += '\n'
 #            outFile.write(line)
 
+
 def scan_directory(path, fnames, cellTypeNames):
     for fname in glob.glob(os.path.join(path, '*')):
         if os.path.isdir(fname):
@@ -156,37 +166,41 @@ def scan_directory(path, fnames, cellTypeNames):
         else:
             continue
 
+
 def load_data(fname):
     try:
         synID, somaV, somaT = np.loadtxt(fname, skiprows=1, unpack=True)
     except ValueError:
         print('file {} is empty! Skipping. Please double-check!'.format(fname))
-        return [],[]
-    try: ## why?
+        return [], []
+    try:  ## why?
         return list(somaV), list(somaT)
     except TypeError:
         return [somaV], [somaT]
+
 
 def create_plots(fname):
     somaV, somaT = load_data(fname)
     somaV = np.array(somaV)
     somaT = np.array(somaT)
-    
+
     outName = fname[:-4]
     epspName = outName + '_epsp_hist.pdf'
     dtName = outName + '_dt_hist.pdf'
-    
+
     epspMean = np.mean(somaV)
     epspStd = np.std(somaV)
     epspMed = np.median(somaV)
     plt.figure()
-    plt.hist(somaV,bins=np.arange(0,1,.05))
+    plt.hist(somaV, bins=np.arange(0, 1, .05))
     plt.xlabel('uEPSP amplitude at soma [$mV$]')
     plt.ylabel('frequency')
-    titleStr = os.path.basename(fname) + ' mean uEPSP = %.2f$\pm$%.2f $mV$; median = %.2f' % (epspMean,epspStd,epspMed)
+    titleStr = os.path.basename(
+        fname) + ' mean uEPSP = %.2f$\pm$%.2f $mV$; median = %.2f' % (
+            epspMean, epspStd, epspMed)
     plt.title(titleStr)
     plt.savefig(epspName, bbox_inches=0)
-    
+
     #tMean = np.mean(somaT-10.0)
     #tStd = np.std(somaT-10.0)
     #tMed = np.median(somaT-10.0)
@@ -198,10 +212,9 @@ def create_plots(fname):
     #plt.title(titleStr2)
     #plt.savefig(dtName, bbox_inches=0)
 
+
 if __name__ == '__main__':
     dirName = sys.argv[1]
-#    create_plots(fname)
+    #    create_plots(fname)
     cellTypeNames = sys.argv[2:]
     create_summary(dirName, cellTypeNames)
-    
-    

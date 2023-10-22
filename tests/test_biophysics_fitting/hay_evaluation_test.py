@@ -13,7 +13,7 @@ import numpy as np
 #     y_new = hay_objective_function(x)
 #     y = get_feasible_model_objectives().y
 #     try:
-#         assert(max(np.abs((y - y_new[y.index].values))) < 0.05)
+#         assert max(np.abs((y - y_new[y.index].values))) < 0.05
 #     except:
 #         print(y)
 #         print(y_new[y.index].values)

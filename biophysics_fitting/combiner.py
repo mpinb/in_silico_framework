@@ -4,16 +4,19 @@ Created on Nov 08, 2018
 @author: abast
 '''
 
+
 class Combiner_Setup:
+
     def __init__(self):
         self.combinations = []
         self.names = []
         self.combinefun = None
-        
+
     def append(self, name, combination):
         self.combinations.append(combination)
         self.names.append(name)
-        
+
+
 class Combiner:
     '''This  class can be used to combine features (usually) computed by an Evaluator object.
     
@@ -41,10 +44,11 @@ class Combiner:
     combined_features = c.combine(features)
     combined_features
     > {'combination1': 2, 'combination2': 4}
-    '''    
+    '''
+
     def __init__(self):
         self.setup = Combiner_Setup()
-        
+
     def combine(self, features):
         '''Combines features that are computed by an Evaluator class.
         

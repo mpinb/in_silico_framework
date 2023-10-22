@@ -1,7 +1,7 @@
 import os
+
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(ROOT_DIR, 'configuration.conf')
-
 """Definitions of Data structures:
         1. coordinate_2d, TYPE: 2d list of floats
         2. image_coordinate_2d, TYPE: 2d list of floats, in a relative unit such that 1 reflects the pixel size:

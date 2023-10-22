@@ -7,6 +7,7 @@ from neuron import h
 from collections import Sequence
 import numpy as np
 
+
 class Synapse(object):
     '''
     Synapse base class
@@ -16,7 +17,12 @@ class Synapse(object):
     Biophysical mechanisms are specified in subclasses
     '''
 
-    def __init__(self, edgeID, edgePtID, edgex, preCellType='', postCellType=''):
+    def __init__(self,
+                 edgeID,
+                 edgePtID,
+                 edgex,
+                 preCellType='',
+                 postCellType=''):
         '''
         ID of attached section in cell.sections
         self.secID = edgeID
@@ -62,10 +68,10 @@ class Synapse(object):
         self.weight = None
         self._active = False
         self.pruned = False
-    
+
     def is_active(self):
         return self._active
-    
+
     def activate_hoc_syn(self, source, preCell, targetCell, receptors):
         '''setup of all necessary hoc connections.
         stores all mechanisms and NetCons for reference counting.'''
@@ -99,7 +105,7 @@ class Synapse(object):
             self.receptors[recepStr] = newSyn
             self.netcons.append(newNetcon)
         self._active = True
-    
+
     def disconnect_hoc_synapse(self):
         if self.releaseSite:
             self.releaseSite.turn_off()
@@ -108,16 +114,26 @@ class Synapse(object):
         self.receptors = {}
         self.weight = None
         self._active = False
-    
+
+
 class ExSyn(Synapse):
     '''
     simple excitatory synapse for playing around
     '''
-    
+
     def __init__(self, edgeID, edgePtID, preCellType='', postCellType=''):
-        Synapse.__init__(self, edgeID, edgePtID, preCellType='', postCellType='')
-    
-    def activate_hoc_syn(self, source, targetCell, threshold=10.0, delay=0.0, weight=0.0):
+        Synapse.__init__(self,
+                         edgeID,
+                         edgePtID,
+                         preCellType='',
+                         postCellType='')
+
+    def activate_hoc_syn(self,
+                         source,
+                         targetCell,
+                         threshold=10.0,
+                         delay=0.0,
+                         weight=0.0):
         x = targetCell.sections[self.secID].relPts[self.ptID]
         hocSec = targetCell.sections[self.secID]
         self.syn = h.ExpSyn(x, hocSec)
@@ -125,5 +141,3 @@ class ExSyn(Synapse):
         self.syn.e = 0.0
         self.netcon = h.NetCon(source, self.syn, threshold, delay, weight)
         self._active = True
-
-

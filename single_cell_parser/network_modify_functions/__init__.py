@@ -10,7 +10,10 @@ Such a function can for example be used to deactivate specific synapses at a som
 
 import logging
 import importlib
+
 log = logging.getLogger("ISF").getChild(__name__)
+
+
 def get(funname):
     module = importlib.import_module(__name__ + '.' + funname)
     fun = getattr(module, funname)

@@ -14,12 +14,12 @@ def read(file):
     with open(file, 'r') as f:
         lines = f.readlines()
         for idx, line in enumerate(lines):
-            if line.rfind("TransformationMatrix")>-1:
+            if line.rfind("TransformationMatrix") > -1:
                 matches = re.findall('-?\d+\.\d+|-?\d+', line)
                 vector = list(map(float, matches))
         for i in range(4):
             for j in range(4):
-                k = j + i*4
+                k = j + i * 4
                 row.append(vector[k])
             matrix.append(row)
             row = []
@@ -37,8 +37,8 @@ def getTransformation(src, dst):
     y = np.transpose(np.matrix([dst[0], dst[1], dst[2], dst[3]]))
 
     # add ones on the bottom of x and y
-    x = np.matrix(np.vstack((x,[1.0,1.0,1.0,1.0])))
-    y = np.matrix(np.vstack((y,[1.0,1.0,1.0,1.0])))
+    x = np.matrix(np.vstack((x, [1.0, 1.0, 1.0, 1.0])))
+    y = np.matrix(np.vstack((y, [1.0, 1.0, 1.0, 1.0])))
     # solve for A2
 
     trMatrix = y * x.I
@@ -55,7 +55,7 @@ def applyTransformationMatrix(points, matrix):
         point = point4D[:3]
         mPoint = np.matrix(point)
         mTrPoint = mPoint.T
-        p = matrix*np.matrix(np.vstack((mTrPoint, 1.0)))
+        p = matrix * np.matrix(np.vstack((mTrPoint, 1.0)))
         p = np.array(p.T)
         p_listed = p.tolist()[0]
         # raw_input("somet")

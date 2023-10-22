@@ -1,20 +1,26 @@
-
 import numpy as np
 import math
 import warnings
 
+
 class RadiusCalculator:
-    def __init__(self, xyResolution=0.092, zResolution=0.5, xySize=20,
-                 numberOfRays=36, tresholdPercentage=0.5, numberOfRaysForPostMeasurment=20):
+
+    def __init__(self,
+                 xyResolution=0.092,
+                 zResolution=0.5,
+                 xySize=20,
+                 numberOfRays=36,
+                 tresholdPercentage=0.5,
+                 numberOfRaysForPostMeasurment=20):
         self.xyResolution = xyResolution
         self.zResolution = zResolution
         self.xySize = xySize
         self.numberOfRays = numberOfRays
         self.rayLengthPerDirection = xySize / 2.0
-        self.rayLengthPerDirectionOfImageCoordinates = self.rayLengthPerDirection/xyResolution
+        self.rayLengthPerDirectionOfImageCoordinates = self.rayLengthPerDirection / xyResolution
         self.tresholdPercentage = tresholdPercentage
 
-        self.rayLengthPerDirectionOfImageCoordinatesForPostMeasurment = 0.50/xyResolution # self.rayLengthPerDirectionOfImageCoordinates/10
+        self.rayLengthPerDirectionOfImageCoordinatesForPostMeasurment = 0.50 / xyResolution  # self.rayLengthPerDirectionOfImageCoordinates/10
         self.numberOfRaysForPostMeasurment = numberOfRaysForPostMeasurment
         self.debug_postMeasurementPoints = []
         self.orig_pointsWithIntensity = []
@@ -35,10 +41,18 @@ class RadiusCalculator:
         raysProfiles = []
         rays = []
         for i in range(self.numberOfRays):
-            phi = i*(np.pi/self.numberOfRays)
+            phi = i * (np.pi / self.numberOfRays)
 
-            frontCoordinates = self.getRayPointCoordinates(image, point, phi, front=True, postMeasurment='no')
-            backCoordinates = self.getRayPointCoordinates(image, point, phi, front=False, postMeasurment='no')
+            frontCoordinates = self.getRayPointCoordinates(image,
+                                                           point,
+                                                           phi,
+                                                           front=True,
+                                                           postMeasurment='no')
+            backCoordinates = self.getRayPointCoordinates(image,
+                                                          point,
+                                                          phi,
+                                                          front=False,
+                                                          postMeasurment='no')
 
             ray = self.constructRay(frontCoordinates, backCoordinates, point)
             rays.append(ray)
@@ -47,7 +61,6 @@ class RadiusCalculator:
             raysProfiles.append(rayProfile)
 
         return rays, raysProfiles
-
 
     def getRadiusFromProfile(self, image, point, postMeasurment='no'):
         radiusList = []
@@ -60,21 +73,30 @@ class RadiusCalculator:
         rays = []
         selectedProfileIndex = 1000
         if postMeasurment == 'yes':
-            rays, raysProfileList = self.getHigherResolutionProfiles(image, point)
+            rays, raysProfileList = self.getHigherResolutionProfiles(
+                image, point)
             point_pm = self.postMeasurmentFunction(image, rays, raysProfileList)
             point_pm = [point_pm[0], point_pm[1], point[2]]
-            intensities = self.getProfileValues(image, [point[:2], point_pm[:2]])
+            intensities = self.getProfileValues(image,
+                                                [point[:2], point_pm[:2]])
             self.orig_pointsWithIntensity.append([point, intensities[0]])
             self.pm_pointsWithIntensity.append([point_pm, intensities[1]])
             self.debug_postMeasurementPoints.append(point)
             return self.getRadiusFromProfile(image, point, postMeasurment='no')
 
-
         for i in range(self.numberOfRays):
-            phi = i*(np.pi/self.numberOfRays)
+            phi = i * (np.pi / self.numberOfRays)
 
-            frontCoordinate = self.getRayPointCoordinates(image, point, phi, front=True, postMeasurment='no')
-            backCoordinate = self.getRayPointCoordinates(image, point, phi, front=False, postMeasurment='no')
+            frontCoordinate = self.getRayPointCoordinates(image,
+                                                          point,
+                                                          phi,
+                                                          front=True,
+                                                          postMeasurment='no')
+            backCoordinate = self.getRayPointCoordinates(image,
+                                                         point,
+                                                         phi,
+                                                         front=False,
+                                                         postMeasurment='no')
 
             ray = self.constructRay(frontCoordinate, backCoordinate, point)
             rays.append(ray)
@@ -85,13 +107,15 @@ class RadiusCalculator:
         for i, ray in enumerate(rays):
 
             rayLength = len(ray)
-            halfRayLength = (rayLength-1)/2
+            halfRayLength = (rayLength - 1) / 2
 
-            backCounterPoint = self.getCounterIndex(image, point, list(reversed(ray[0:halfRayLength+1])))
-            frontCounterPoint = self.getCounterIndex(image, point, ray[halfRayLength:rayLength])
+            backCounterPoint = self.getCounterIndex(
+                image, point, list(reversed(ray[0:halfRayLength + 1])))
+            frontCounterPoint = self.getCounterIndex(
+                image, point, ray[halfRayLength:rayLength])
 
             if (len(backCounterPoint) == 2 and len(frontCounterPoint) == 2):
-                radius = self.getDistance(backCounterPoint,frontCounterPoint)
+                radius = self.getDistance(backCounterPoint, frontCounterPoint)
             counterList.append([backCounterPoint, frontCounterPoint])
 
             radiusList.append(radius)
@@ -105,15 +129,22 @@ class RadiusCalculator:
         self.counterList.append(counterList)
         return backProfile, frontProfile, radiusList, minRadius, backCounterPoint, frontCounterPoint, counterList, raysProfileList, rays, selectedProfileIndex
 
-
     def getHigherResolutionProfiles(self, image, point):
         raysProfileList = []
         rays = []
         for i in range(self.numberOfRaysForPostMeasurment):
-            phi = i*(np.pi/self.numberOfRaysForPostMeasurment)
+            phi = i * (np.pi / self.numberOfRaysForPostMeasurment)
 
-            frontCoordinate = self.getRayPointCoordinates(image, point, phi, front=True, postMeasurment='yes')
-            backCoordinate = self.getRayPointCoordinates(image, point, phi, front=False, postMeasurment='yes')
+            frontCoordinate = self.getRayPointCoordinates(image,
+                                                          point,
+                                                          phi,
+                                                          front=True,
+                                                          postMeasurment='yes')
+            backCoordinate = self.getRayPointCoordinates(image,
+                                                         point,
+                                                         phi,
+                                                         front=False,
+                                                         postMeasurment='yes')
 
             ray = self.constructRay(frontCoordinate, backCoordinate, point)
             rays.append(ray)
@@ -126,7 +157,7 @@ class RadiusCalculator:
     def postMeasurmentFunction(self, image, rays, raysProfileList):
 
         maxIntensity = 0
-        centerPoint = rays[0][(len(rays[0])-1)/2]
+        centerPoint = rays[0][(len(rays[0]) - 1) / 2]
         for idx, rayProfile in enumerate(raysProfileList):
 
             indexOfMaxValue = np.argmax(np.array(rayProfile))
@@ -139,12 +170,11 @@ class RadiusCalculator:
 
         return centerPoint
 
-
     def constructRay(self, frontProfileIndices, backProfileIndices, point):
         centerPointIndex = [int(point[0]), int(point[1])]
-        ray = list(reversed(backProfileIndices)) + [centerPointIndex] + frontProfileIndices
+        ray = list(reversed(backProfileIndices)) + [centerPointIndex
+                                                   ] + frontProfileIndices
         return ray
-
 
     def getProfileValues(self, image, profileIndices):
         profileValues = []
@@ -159,7 +189,6 @@ class RadiusCalculator:
             profileValues.append(intensityValue)
         return profileValues
 
-
     def getCounterIndex(self, image, point, profileIndices):
 
         try:
@@ -169,11 +198,11 @@ class RadiusCalculator:
             pointValue = 0.0
 
         # pointHalfValue = pointValue/2.0
-        pointTresholdValue = pointValue*self.tresholdPercentage
+        pointTresholdValue = pointValue * self.tresholdPercentage
 
         profileIndicesLength = len(profileIndices)
         contourIndices = []
-        for i in range(profileIndicesLength-1):
+        for i in range(profileIndicesLength - 1):
 
             try:
                 pixel_1_value = image.GetPixel(profileIndices[i])
@@ -182,11 +211,10 @@ class RadiusCalculator:
                 pixel_1_value = 0.0
 
             try:
-                pixel_2_value = image.GetPixel(profileIndices[i+1])
+                pixel_2_value = image.GetPixel(profileIndices[i + 1])
             except IndexError as error:
                 print(error)
                 pixel_2_value = 0.0
-
 
             if pixel_1_value >= pointTresholdValue and pixel_2_value <= pointTresholdValue:
                 contourIndices = profileIndices[i]
@@ -194,12 +222,16 @@ class RadiusCalculator:
 
         return contourIndices
 
-
     def getDistance(self, point_1, point_2):
-        return np.sqrt((point_1[0]-point_2[0])**2+(point_1[1]-point_2[1])**2)
+        return np.sqrt((point_1[0] - point_2[0])**2 +
+                       (point_1[1] - point_2[1])**2)
 
-
-    def getRayPointCoordinates(self, image, point, phi, front, postMeasurment='no'):
+    def getRayPointCoordinates(self,
+                               image,
+                               point,
+                               phi,
+                               front,
+                               postMeasurment='no'):
 
         if postMeasurment == 'no':
             rayLength = self.rayLengthPerDirectionOfImageCoordinates
@@ -236,7 +268,8 @@ class RadiusCalculator:
             x_f = x_f + x_i
             y_f = y_f + y_i
 
-            if (x_new <= 1 or y_new <= 1 or x_new >= imageWidth or y_new >= imageHeight):
+            if (x_new <= 1 or y_new <= 1 or x_new >= imageWidth or
+                    y_new >= imageHeight):
                 break
             else:
                 profileIndices.append([int(x_new), int(y_new)])

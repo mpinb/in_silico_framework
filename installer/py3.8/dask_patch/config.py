@@ -9,9 +9,7 @@ import warnings
 
 import yaml
 
-
 no_default = "__no_default__"
-
 
 paths = [
     os.getenv("DASK_ROOT_CONFIG", "/etc/dask"),
@@ -26,12 +24,9 @@ if "DASK_CONFIG" in os.environ:
 else:
     PATH = os.path.join(os.path.expanduser("~"), ".config", "dask")
 
-
 global_config = config = {}
 
-
 config_lock = threading.Lock()
-
 
 defaults = []
 
@@ -137,15 +132,13 @@ def collect_yaml(paths=paths):
             if os.path.isdir(path):
                 try:
                     file_paths.extend(
-                        sorted(
-                            [
-                                os.path.join(path, p)
-                                for p in os.listdir(path)
-                                if os.path.splitext(p)[1].lower()
-                                in (".json", ".yaml", ".yml")
-                            ]
-                        )
-                    )
+                        sorted([
+                            os.path.join(path, p)
+                            for p in os.listdir(path)
+                            if os.path.splitext(p)[1].lower() in (".json",
+                                                                  ".yaml",
+                                                                  ".yml")
+                        ]))
                 except OSError:
                     # Ignore permission errors
                     pass
@@ -241,7 +234,8 @@ def ensure_file(source, destination=None, comment=True):
 
             if comment:
                 lines = [
-                    "# " + line if line.strip() and not line.startswith("#") else line
+                    "# " +
+                    line if line.strip() and not line.startswith("#") else line
                     for line in lines
                 ]
 
@@ -565,13 +559,12 @@ def check_deprecations(key: str, deprecations: dict = deprecations):
     if key in deprecations:
         new = deprecations[key]
         if new:
-            warnings.warn(
-                'Configuration key "{}" has been deprecated. '
-                'Please use "{}" instead'.format(key, new)
-            )
+            warnings.warn('Configuration key "{}" has been deprecated. '
+                          'Please use "{}" instead'.format(key, new))
             return new
         else:
-            raise ValueError('Configuration value "{}" has been removed'.format(key))
+            raise ValueError(
+                'Configuration value "{}" has been removed'.format(key))
     else:
         return key
 

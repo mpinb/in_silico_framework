@@ -7,7 +7,8 @@ import pandas as pd
 import time
 import dask
 
-def convert_point(p, x_res = 0.092, y_res = 0.092, z_res = 1.0):
+
+def convert_point(p, x_res=0.092, y_res=0.092, z_res=1.0):
     '''todo: use this function consistently to convert 
     pixel locations to coordinates!'''
     out = []
@@ -17,11 +18,16 @@ def convert_point(p, x_res = 0.092, y_res = 0.092, z_res = 1.0):
             s = scaling[lv]
         except IndexError:
             s = 1
-        out.append(pp*s)
+        out.append(pp * s)
     return out
 
+
 @dask.delayed
-def _paralellization_helper(radiiObject, amPth, imageFilePath, amOutput, postMeasurment='yes'):
+def _paralellization_helper(radiiObject,
+                            amPth,
+                            imageFilePath,
+                            amOutput,
+                            postMeasurment='yes'):
     radiiObject.exRadSets(amPth, imageFilePath, amOutput, postMeasurment='yes')
     sliceName = getSliceName(amPth, imageFilePath)
     print(sliceName)
@@ -33,16 +39,17 @@ def _paralellization_helper(radiiObject, amPth, imageFilePath, amOutput, postMea
     ray_points = radiiObject.radiusCalculator.counterList
     # cave: this needs to be moved to a place wherer we are aware of the x/y/z resolution!
     # Here, the default (0.092 / 0.092 / 0.5) is used, but that might change from usecase to usecase.
-    
+
     orig_temp = [(convert_point(x[0]), x[1]) for x in orig_temp]
     pm_temp = [(convert_point(x[0]), x[1]) for x in pm_temp]
-   
-    radiiDetails["Treshold"] = radiiObject.tresholdPercentage 
+
+    radiiDetails["Treshold"] = radiiObject.tresholdPercentage
     radiiDetails["Inten. orig points"] = orig_temp
     radiiDetails["Inten. post points"] = pm_temp
     radiiDetails["Ray points"] = ray_points
 
-    return  radiiDetails
+    return radiiDetails
+
 
 def getSliceName(amPth, imageFilePath):
     am = os.path.basename(amPth)
@@ -64,7 +71,13 @@ class RadiiPipeline:
     4. amWithRad: if provided then the class can be use to run the findTransformation method.
 
     """
-    def __init__(self, amInputPathList, maxZPathList, hocFile, outputFolder, amWithRad="default"):
+
+    def __init__(self,
+                 amInputPathList,
+                 maxZPathList,
+                 hocFile,
+                 outputFolder,
+                 amWithRad="default"):
         self.amInputPathList = amInputPathList
         self.maxZPathList = maxZPathList
         self.hocFile = hocFile
@@ -111,7 +124,6 @@ class RadiiPipeline:
             os.mkdir(outputDirectory)
         return outputDirectory
 
-
     def createOutputDirectories(self):
         '''will creat the output directory with the name of the cell'''
 
@@ -127,7 +139,6 @@ class RadiiPipeline:
         if not os.path.isdir(self.amOutput075):
             os.mkdir(self.amOutput075)
 
-
     def extractRadii(self, tr025=True, tr050=True, tr075=True):
         '''will handle the calling of exRadSets function for different tresholdPercentages '''
         if not os.path.isdir(self.amWithErrorsDirectory):
@@ -141,43 +152,62 @@ class RadiiPipeline:
                 imageName = os.path.basename(imageFilePath)
                 if spatialGraphName in imageName:
                     if (tr025):
-                        radi025=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.25)
-                        d = _paralellization_helper(radi025, amPth, imageFilePath, self.amOutput025, postMeasurment='yes')
+                        radi025 = radi.exRadSets.RadiusCalculatorForManyFiles(
+                            tresholdPercentage=0.25)
+                        d = _paralellization_helper(radi025,
+                                                    amPth,
+                                                    imageFilePath,
+                                                    self.amOutput025,
+                                                    postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr050):
-                        radi050=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.5)
-                        d = _paralellization_helper(radi050, amPth, imageFilePath, self.amOutput050, postMeasurment='yes')
+                        radi050 = radi.exRadSets.RadiusCalculatorForManyFiles(
+                            tresholdPercentage=0.5)
+                        d = _paralellization_helper(radi050,
+                                                    amPth,
+                                                    imageFilePath,
+                                                    self.amOutput050,
+                                                    postMeasurment='yes')
                         delayeds.append(d)
 
                     if (tr075):
-                        radi075=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.75)
-                        d = _paralellization_helper(radi075, amPth, imageFilePath, self.amOutput075, postMeasurment='yes')
+                        radi075 = radi.exRadSets.RadiusCalculatorForManyFiles(
+                            tresholdPercentage=0.75)
+                        d = _paralellization_helper(radi075,
+                                                    amPth,
+                                                    imageFilePath,
+                                                    self.amOutput075,
+                                                    postMeasurment='yes')
                         delayeds.append(d)
 
                     #radi025.exRadSets(amPth, imageFilePath, self.amOutput025, postMeasurment='yes')
-           
+
                     break
         return delayeds
-
 
     def extractUncertainties(self):
         '''extract uncertainties for diff. tresholds and add them to file by calling addUncertainties'''
         self.readExtractedRadii()
-        self.amWithUcrs = radi.calcError.addUncertainties(self.points050, self.points025, self.points075)
+        self.amWithUcrs = radi.calcError.addUncertainties(
+            self.points050, self.points025, self.points075)
         self.writeUncertainties()
 
     def readExtractedRadii(self):
         '''will hanld reading ampoints with radii and uncertainties for diff. tresholds'''
         print(self.amOutput025)
-        self.allAmPointsWithRadius025, self.points025 = tr.read.multipleAmFiles(self.amOutput025)
-        self.allAmPointsWithRadius050, self.points050 = tr.read.multipleAmFiles(self.amOutput050)
-        self.allAmPointsWithRadius075, self.points075 = tr.read.multipleAmFiles(self.amOutput075)
+        self.allAmPointsWithRadius025, self.points025 = tr.read.multipleAmFiles(
+            self.amOutput025)
+        self.allAmPointsWithRadius050, self.points050 = tr.read.multipleAmFiles(
+            self.amOutput050)
+        self.allAmPointsWithRadius075, self.points075 = tr.read.multipleAmFiles(
+            self.amOutput075)
 
     def writeUncertainties(self):
         '''will write uncertainties in the output files'''
         for amInputPath in self.amInputPathList:
-            tr.write.multipleAmFilesWithRadiusAndUncertainty(amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
+            tr.write.multipleAmFilesWithRadiusAndUncertainty(
+                amInputPath, self.amWithErrorsDirectory, self.amWithUcrs)
 
     def getAmFileWithRad(self):
         '''check if it need to ger amFile or not.'''
@@ -196,7 +226,6 @@ class RadiiPipeline:
     #     am050Paths = [self.amOutput050 + amFile for amFile in os.listdir(self.amOutput050) if amFile.endswith(".am")]
     #     am075Paths = [self.amOutput075 + amFile for amFile in os.listdir(self.amOutput075) if amFile.endswith(".am")]
 
-
     #     for amPath in am050Paths:
     #         am050_pointsWithRad = tr.read.am(amPath)
     #         amFileName = os.path.basename(amPath)
@@ -208,12 +237,10 @@ class RadiiPipeline:
     #                 break
     #         point5d = [point4d.append(sliceName) for point4d in am050_pointsWithRad]
 
-
     #     print(amPathsList)
     #     # df = pandas.read_csv('hrdata.csv',
     #     # names=['Employee', 'Hired', 'Salary', 'Sick Days'])
     #     # df.to_csv('hrdata_modified.csv')
-
 
     #         radi050=radi.exRadSets.RadiusCalculatorForManyFiles(tresholdPercentage=0.50)
     #         for idx, amPth in enumerate(self.amInputPathList):
@@ -225,13 +252,12 @@ class RadiiPipeline:
     #                     radi050.exRadSets(amPth, imageFilePath, self.amOutput050, postMeasurment='yes')
     #                     break
 
-
-
-
-
-
-    def findTransformation(self, amWithRad, spanFactor = 10.0, addRadii = True, findingPairPoints=True, pairPoints = []):
-
+    def findTransformation(self,
+                           amWithRad,
+                           spanFactor=10.0,
+                           addRadii=True,
+                           findingPairPoints=True,
+                           pairPoints=[]):
         """
         find the transformation between amFile and HocFile.
         inputs:
@@ -255,7 +281,9 @@ class RadiiPipeline:
 
         assert self.amWithRad != "Default"
         if (findingPairPoints == False and pairPoints == []):
-            raise ValueError("When you adjust the input findingPairPoints) to false you need to provide the pairPoints Manuallly and pass it through the array pairPoints")
+            raise ValueError(
+                "When you adjust the input findingPairPoints) to false you need to provide the pairPoints Manuallly and pass it through the array pairPoints"
+            )
 
         self.amWithRad = amWithRad
         self.spanFactor = spanFactor
@@ -278,7 +306,8 @@ class RadiiPipeline:
         dst_am = []
 
         if (findingPairPoints):
-            matchedSet = tr.getDistance.matchEdges(hocPointsSet, amSet, numberOfEdges, spanFactor)
+            matchedSet = tr.getDistance.matchEdges(hocPointsSet, amSet,
+                                                   numberOfEdges, spanFactor)
 
             for point in matchedSet:
                 src_hoc.append(point[0].start)
@@ -302,7 +331,8 @@ class RadiiPipeline:
         amPoints4D = tr.read.amFile(amFile)
 
         print("Applying the transofrmation matrix to the initial am points")
-        trAmPoints4D = tr.exTrMatrix.applyTransformationMatrix(amPoints4D, trMatrix2)
+        trAmPoints4D = tr.exTrMatrix.applyTransformationMatrix(
+            amPoints4D, trMatrix2)
 
         hocPointsComplete = tr.read.hocFileComplete(self.hocFile)
         hocSet = []
@@ -311,7 +341,9 @@ class RadiiPipeline:
 
         self.amPointsTransformed_hoc = trAmPoints4D
 
-        print("In the process of finding pairs in between hoc file and the transformed points to add radi to hocpoint")
+        print(
+            "In the process of finding pairs in between hoc file and the transformed points to add radi to hocpoint"
+        )
         startTime = time.time()
         if addRadii:
             pairs = radi.addRadii.findPairs(trAmPoints4D, hocSet)
@@ -340,27 +372,30 @@ class RadiiPipeline:
         egHocFile = self.outputDirectory + '/egHoc.txt'
         egAmFile = self.outputDirectory + '/egAm.txt'
         with open(egHocFile, 'w') as f:
-            for idx in range(0, len(src_hoc)-1, 2):
+            for idx in range(0, len(src_hoc) - 1, 2):
                 startPoint = src_hoc[idx]
-                endPoint = src_hoc[idx+1]
-                f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1], startPoint[2]))
-                f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1], endPoint[2]))
-
+                endPoint = src_hoc[idx + 1]
+                f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0],
+                                                     startPoint[1],
+                                                     startPoint[2]))
+                f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1],
+                                                     endPoint[2]))
 
         with open(egAmFile, 'w') as f:
-            for idx in range(0, len(dst_am)-1, 2):
+            for idx in range(0, len(dst_am) - 1, 2):
                 startPoint = dst_am[idx]
-                endPoint = dst_am[idx+1]
-                f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1], startPoint[2]))
-                f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1], endPoint[2]))
-
+                endPoint = dst_am[idx + 1]
+                f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0],
+                                                     startPoint[1],
+                                                     startPoint[2]))
+                f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1],
+                                                     endPoint[2]))
 
         amTrFile = self.outputDirectory + '/amTransformed.txt'
         with open(amTrFile, 'w') as f:
             for it in trAmPoints4D:
                 f.write('{:f}\t{:f}\t{:f} \n'.format(it[0], it[1], it[2]))
         return 0
-
 
     ### test code below
     def test_something():

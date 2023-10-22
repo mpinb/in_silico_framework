@@ -12,10 +12,13 @@ import six
 import distributed
 import subprocess
 import logging
+
 log = logging.getLogger("ISF").getChild(__name__)
 
-AM_FILE = os.path.join(CURRENT_DIR, 'test_files', 'am_files', 'rest', 'S13_final_done_Alison_zScale_40.am')
-IMAGE_FILE = os.path.join(CURRENT_DIR, 'test_files', 'image_files', 'rest', 'S13_max_z_projection.tif')
+AM_FILE = os.path.join(CURRENT_DIR, 'test_files', 'am_files', 'rest',
+                       'S13_final_done_Alison_zScale_40.am')
+IMAGE_FILE = os.path.join(CURRENT_DIR, 'test_files', 'image_files', 'rest',
+                          'S13_max_z_projection.tif')
 
 
 def test_am_read():
@@ -48,7 +51,9 @@ def test_am_read():
     #   Test 4
     log.info("TEST 4")
     log.info('profile_data["POINT { float[3] EdgePointCoordinates }"]')
-    defined_point = [1.849200057983398E01, 5.106000137329102E01, 1.310999989509583E00]
+    defined_point = [
+        1.849200057983398E01, 5.106000137329102E01, 1.310999989509583E00
+    ]
     point = am_object.all_data["POINT { float[3] EdgePointCoordinates }"][3]
 
     log.info("The point read from the file is as the same as the one from the " \
@@ -66,14 +71,15 @@ def test_am_write():
     log.info("***********")
     am_object = IO.Am(AM_FILE)
     am_object.read()
-    am_object.output_path = os.path.join(CURRENT_DIR, 'test_files', 'output', 'test_write.am')
+    am_object.output_path = os.path.join(CURRENT_DIR, 'test_files', 'output',
+                                         'test_write.am')
     if not os.path.exists(am_object.output_path):
         with open(am_object.output_path, "w"):
             pass  # create empty file
 
     #   Test 1
     am_object.write()
-        
+
 
 def test_correct_seed():
     """
@@ -91,32 +97,43 @@ def test_correct_seed():
     rx_object = th.ThicknessExtractor([], image_file=IMAGE_FILE)
     corrected_point = rx_object._correct_seed(image_point)
     assert corrected_point == [2333, 2283, 149]
-    original_intensity = rx_object.image.GetPixel([int(image_point[0]), int(image_point[1])])
-    new_intensity = rx_object.image.GetPixel([int(corrected_point[0]), int(corrected_point[1])])
+    original_intensity = rx_object.image.GetPixel(
+        [int(image_point[0]), int(image_point[1])])
+    new_intensity = rx_object.image.GetPixel(
+        [int(corrected_point[0]),
+         int(corrected_point[1])])
     assert new_intensity > original_intensity
+
 
 def test_crop_image():
     a = [[1, 2, 3, 4, 5], [2, 3, 4, 5, 6], [3, 4, 5, 6, 7]]
     a = np.array(a)
-    
+
     # 0 pixels surrounding
     assert th._crop_image(a, (0, 0), 0) == np.array([[1]])
-    
+
     # 1 pixels surrounding, zero pad the rest
     radius = 1
     a_padded = np.pad(a, radius, 'constant', constant_values=0)
-    np.testing.assert_array_almost_equal(th._crop_image(a_padded, (0+radius, 0+radius), 1), np.array([[0, 0, 0], [0, 1, 2], [0, 2, 3]]))
-    np.testing.assert_array_almost_equal(th._crop_image(a_padded, (0+radius, 4+radius), 1), np.array([[0, 0, 0], [4, 5, 0], [5, 6, 0]]))
-    np.testing.assert_array_almost_equal(th._crop_image(a_padded, [1+radius, 2+radius], 1, circle=True),
-                                         np.array([[0, 3, 0], [3, 4, 5], [0, 5, 0]]))
+    np.testing.assert_array_almost_equal(
+        th._crop_image(a_padded, (0 + radius, 0 + radius), 1),
+        np.array([[0, 0, 0], [0, 1, 2], [0, 2, 3]]))
+    np.testing.assert_array_almost_equal(
+        th._crop_image(a_padded, (0 + radius, 4 + radius), 1),
+        np.array([[0, 0, 0], [4, 5, 0], [5, 6, 0]]))
+    np.testing.assert_array_almost_equal(
+        th._crop_image(a_padded, [1 + radius, 2 + radius], 1, circle=True),
+        np.array([[0, 3, 0], [3, 4, 5], [0, 5, 0]]))
 
 
 def test_pipeline(client):
     am_folder_path = os.path.join(CURRENT_DIR, 'test_files', 'am_files')
     tif_folder_path = os.path.join(CURRENT_DIR, 'test_files', 'image_files')
-    hoc_file_path = os.path.join(CURRENT_DIR, 'test_files', 'WR58_Cell5_L5TT_Final.hoc')
+    hoc_file_path = os.path.join(CURRENT_DIR, 'test_files',
+                                 'WR58_Cell5_L5TT_Final.hoc')
     output_folder_path = os.path.join(CURRENT_DIR, 'test_files', 'output')
-    bijective_points_path = os.path.join(CURRENT_DIR, 'test_files', 'manual_landmarks.landmarkAscii')
+    bijective_points_path = os.path.join(CURRENT_DIR, 'test_files',
+                                         'manual_landmarks.landmarkAscii')
 
     p = pipeline.ExtractThicknessPipeline()
 

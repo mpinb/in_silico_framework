@@ -1,10 +1,9 @@
-
 import os
 import re
 import math
 
 
-def convert_point(p, x_res = 0.092, y_res = 0.092, z_res = 1.0):
+def convert_point(p, x_res=0.092, y_res=0.092, z_res=1.0):
     out = []
     scaling = [x_res, y_res, z_res]
     for lv, pp in enumerate(p):
@@ -12,8 +11,9 @@ def convert_point(p, x_res = 0.092, y_res = 0.092, z_res = 1.0):
             s = scaling[lv]
         except IndexError:
             s = 1
-        out.append(pp*s)
+        out.append(pp * s)
     return out
+
 
 def hocFileComplete(inputFilePath):
     '''Reading all neuronal points of a hoc file'''
@@ -29,8 +29,8 @@ def hocFileComplete(inputFilePath):
             createCommand = line.rfind("create")
             pt3daddCommand = line.rfind("pt3dadd")
 
-            if not neuron_section and ((createCommand > -1)
-                                       and (soma + apical + dend > -3)):
+            if not neuron_section and ((createCommand > -1) and
+                                       (soma + apical + dend > -3)):
                 neuron_section = True
 
             if neuron_section and (line == '\n'):
@@ -69,8 +69,8 @@ def hocFileReduced(inputFilePath):
             # print(lineNumber)
             # print("the content:")
             # print(line)
-            if not neuron_section and ((createCommand > -1)
-                                       and (soma + apical + dend > -3)):
+            if not neuron_section and ((createCommand > -1) and
+                                       (soma + apical + dend > -3)):
                 neuron_section = True
                 # print("in_neuron True")
 
@@ -82,7 +82,7 @@ def hocFileReduced(inputFilePath):
                 # print("in_neuron True and line empty")
 
             if (pt3daddCommand > -1) and neuron_section:
-                in_neuron_line_number = in_neuron_line_number + 1;
+                in_neuron_line_number = in_neuron_line_number + 1
                 line = line.replace("pt3dadd", "")
                 matches = re.findall('-?\d+\.\d?\d+|\-?\d+', line)
                 point = list(map(float, matches))
@@ -92,6 +92,7 @@ def hocFileReduced(inputFilePath):
                 else:
                     lastPoint = point
     return points
+
 
 def amFile(inputFilePath):
     """
@@ -114,12 +115,12 @@ def amFile(inputFilePath):
             if line_thickness > -1:
                 char_idx = l.rfind("@")
                 thickness_sign_number = l[char_idx + 1]
-                thickness_sign = "@"+ thickness_sign_number
+                thickness_sign = "@" + thickness_sign_number
 
             elif (line_edge > -1):
                 char_idx = l.rfind("@")
-                edge_sign_number = l[char_idx + 1 ]
-                edge_sign = "@"+ edge_sign_number
+                edge_sign_number = l[char_idx + 1]
+                edge_sign = "@" + edge_sign_number
 
         for lineNumber, line in enumerate(lines):
 
@@ -152,7 +153,7 @@ def amFile(inputFilePath):
                 # matches = re.findall('-?\d+\.\d+e[+-]?\d+', line)
                 matches = re.findall('-?\d+\.\d+[e]?[+-]?\d+', line)
                 if matches == []:
-                    matches = [0.0,0.0]
+                    matches = [0.0, 0.0]
                 rad = list(map(float, matches))
                 rads.append(rad)
 
@@ -166,19 +167,18 @@ def amFile(inputFilePath):
 
 
 def multipleAmFiles(inputFolderPath):
-
     """
     Input a folder path which contains the am files
     Output the am files with radius as a dictionary of am files paths
     and a full array of all points with their radii
     """
 
-    oneAmFilePoints =[]
+    oneAmFilePoints = []
     allAmPoints = []
     amFilesSet = {}
 
     for am_file in os.listdir(inputFolderPath):
-        oneAmFilePoints =[]
+        oneAmFilePoints = []
         if am_file.endswith(".am"):
             pathToAmFile = inputFolderPath + str(am_file)
             oneAmFilePoints = amFile(pathToAmFile)

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def addUncertainties(amFilesDict050, amFilesDict025, amFilesDict075):
     """
     input:
@@ -17,9 +18,9 @@ def addUncertainties(amFilesDict050, amFilesDict025, amFilesDict075):
         points025 = amFilesDict025[amFile]
         points075 = amFilesDict075[amFile]
         for idx, point in enumerate(points):
-            ucr = points025[idx][3]-points075[idx][3]
+            ucr = points025[idx][3] - points075[idx][3]
             if (points[idx][3] != 0.0):
-                rel_ucr = (ucr)/points[idx][3]
+                rel_ucr = (ucr) / points[idx][3]
             else:
                 rel_ucr = 0
             points[idx].append(ucr)

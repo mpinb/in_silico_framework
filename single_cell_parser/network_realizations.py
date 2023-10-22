@@ -16,11 +16,12 @@ from .network import NetworkMapper
 from sumatra.parameters import build_parameters
 import neuron
 
+
 def create_synapse_realization(pname):
     parameters = build_parameters(pname)
     cellParam = parameters.network.post
     preParam = parameters.network.pre
-    
+
     parser = cell_parser.CellParser(cellParam.filename)
     parser.spatialgraph_to_cell()
     cell = parser.cell
@@ -29,7 +30,7 @@ def create_synapse_realization(pname):
         synDist = reader.read_scalar_field(synapseFName)
         mapper = SynapseMapper(cell, synDist)
         mapper.create_synapses(preType)
-    
+
     for synType in list(cell.synapses.keys()):
         name = parameters.info.outputname
         name += '_'
@@ -44,7 +45,7 @@ def create_synapse_realization(pname):
         writer.write_landmark_file(name, synapseList)
         tmpSyns = {}
         tmpSyns[synType] = cell.synapses[synType]
-        writer.write_cell_synapse_locations(name+'.syn', tmpSyns, cell.id)
+        writer.write_cell_synapse_locations(name + '.syn', tmpSyns, cell.id)
 
 
 def create_functional_network(cellParamName, nwParamName):

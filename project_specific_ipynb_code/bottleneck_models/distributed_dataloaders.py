@@ -61,7 +61,6 @@ class snsDataset(Dataset):
         self.mode = mode
         self.cache = {}
         self.augment_fun = augment_fun
-
         if train_dataset_size > 0:
             # print('start row of training dataset', self.end_row)
             self.test_dataset = snsDataset(sns, names, 'memory', augment_fun, 
@@ -175,8 +174,6 @@ def expand_SINGLE_BIOPHYSICS_dataset(batch, dendritic_compartments = [0], device
         raise ValueError('dendritic location not contained in dataset')
         
     return SA, VT, AP_SOMA, AP_DEND, ISI_SOMA, ISI_DEND, None, None
-
-
 
 def get_default_dataset(dataset_name, mode = 'memmap', dendritic_compartments = [0], device = None, 
                         split_by_rank = True, train_dataset_size = 0):

@@ -61,6 +61,7 @@ labels2int = {\
     "Septum":                 0,\
               }
 
+
 def write_landmark_file(fname=None, landmarkList=None):
     '''
     write Amira landmark file
@@ -70,18 +71,19 @@ def write_landmark_file(fname=None, landmarkList=None):
     if fname is None:
         err_str = 'No landmark output file name given'
         raise RuntimeError(err_str)
-    
+
     #if not landmarkList:
     #    print 'Landmark list empty!'
-        #return
+    #return
     nrCoords = 3 if not landmarkList else len(landmarkList[0])
     if nrCoords != 3:
-        err_str = 'Landmarks have wrong format! Number of coordinates is ' + str(nrCoords) + ', should be 3'
+        err_str = 'Landmarks have wrong format! Number of coordinates is ' + str(
+            nrCoords) + ', should be 3'
         raise RuntimeError(err_str)
-    
+
     if not fname.endswith('.landmarkAscii'):
         fname += '.landmarkAscii'
-    
+
     with mdbopen(fname, 'w') as landmarkFile:
         nrOfLandmarks = len(landmarkList)
         header = '# AmiraMesh 3D ASCII 2.0\n\n'\
@@ -98,6 +100,7 @@ def write_landmark_file(fname=None, landmarkList=None):
             line = '%.6f %.6f %.6f\n' % (pt[0], pt[1], pt[2])
             landmarkFile.write(line)
 
+
 def write_sim_results(fname, t, v):
     with mdbopen(fname, 'w') as outputFile:
         header = '# t\tvsoma'
@@ -109,6 +112,7 @@ def write_sim_results(fname, t, v):
             line += str(v[i])
             line += '\n'
             outputFile.write(line)
+
 
 def write_all_traces(fname, t, vTraces):
     with mdbopen(fname, 'w') as outputFile:
@@ -124,7 +128,8 @@ def write_all_traces(fname, t, vTraces):
                 line += str(vTraces[j][i])
             line += '\n'
             outputFile.write(line)
-    
+
+
 def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     '''
     writes list of all synapses with the locations
@@ -133,7 +138,7 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# Synapse distribution file\n'
         header += '# corresponding to cell: '
@@ -154,7 +159,8 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
                 line += str(syn.x)
                 line += '\n'
                 outputFile.write(line)
-    
+
+
 def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
     '''
     writes list of all synapses with the locations
@@ -164,7 +170,7 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# Synapse distribution file\n'
         header += '# corresponding to cell: '
@@ -188,7 +194,10 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
                 line += '\n'
                 outputFile.write(line)
 
-def write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None):
+
+def write_functional_realization_map(fname=None,
+                                     functionalMap=None,
+                                     anatomicalID=None):
     '''
     writes list of all functional connections
     coded by tuples (cell type, presynaptic cell index, synapse index).
@@ -197,10 +206,10 @@ def write_functional_realization_map(fname=None, functionalMap=None, anatomicalI
     if fname is None or functionalMap is None or anatomicalID is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
-    
+
     if not fname.endswith('.con') and not fname.endswith('.CON'):
         fname += '.con'
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# Functional realization file; only valid with synapse realization:\n'
         header += '# ' + anatomicalID
@@ -216,11 +225,17 @@ def write_functional_realization_map(fname=None, functionalMap=None, anatomicalI
             line += '\n'
             outputFile.write(line)
 
-def write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDistances=None, synTimes=None, activeSyns=None):
+
+def write_synapse_activation_file(fname=None,
+                                  cell=None,
+                                  synTypes=None,
+                                  synDistances=None,
+                                  synTimes=None,
+                                  activeSyns=None):
     if fname is None or cell is None or synTypes is None or synDistances is None or synTimes is None or activeSyns is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# synapse type\t'
         header += 'synapse ID\t'
@@ -255,11 +270,12 @@ def write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDista
                 line += '\n'
                 outputFile.write(line)
 
+
 def write_synapse_weight_file(fname=None, cell=None):
     if fname is None or cell is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# synapse type\t'
         header += 'synapse ID\t'
@@ -289,6 +305,7 @@ def write_synapse_weight_file(fname=None, cell=None):
                     line += '\n'
                     outputFile.write(line)
 
+
 def write_PSTH(fname=None, PSTH=None, bins=None):
     '''
     Write PSTH and time bins of PSTH, where
@@ -298,7 +315,7 @@ def write_PSTH(fname=None, PSTH=None, bins=None):
     if fname is None or PSTH is None or bins is None:
         err_str = 'Incomplete data! Cannot write PSTH'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# bin begin\t'
         header += 'bin end\t'
@@ -307,11 +324,12 @@ def write_PSTH(fname=None, PSTH=None, bins=None):
         for i in range(len(PSTH)):
             line = str(bins[i])
             line += '\t'
-            line += str(bins[i+1])
+            line += str(bins[i + 1])
             line += '\t'
             line += str(PSTH[i])
             line += '\n'
             outputFile.write(line)
+
 
 def write_spike_times_file(fname=None, spikeTimes=None):
     '''
@@ -323,7 +341,7 @@ def write_spike_times_file(fname=None, spikeTimes=None):
     if fname is None or spikeTimes is None:
         err_str = 'Incomplete data! Cannot write spike times file'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outFile:
         header = '# trial\tspike times\n'
         outFile.write(header)
@@ -338,6 +356,7 @@ def write_spike_times_file(fname=None, spikeTimes=None):
             line += '\n'
             outFile.write(line)
 
+
 def write_presynaptic_spike_times(fname=None, cells=None):
     '''
     Write cell type, PC and spike times of all connected
@@ -346,7 +365,7 @@ def write_presynaptic_spike_times(fname=None, cells=None):
     if fname is None or cells is None:
         err_str = 'Incomplete data! Cannot write presynaptic spike times'
         raise RuntimeError(err_str)
-    
+
     with mdbopen(fname, 'w') as outputFile:
         header = '# presynaptic cell type\tcell ID\tspike times\n'
         outputFile.write(header)
@@ -369,7 +388,14 @@ def write_presynaptic_spike_times(fname=None, cells=None):
                 line += '\n'
                 outputFile.write(line)
 
-def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoints=False, step_frames = 10, selected_index = None):
+
+def write_cell_simulation(fname=None,
+                          cell=None,
+                          traces=None,
+                          tVec=None,
+                          allPoints=False,
+                          step_frames=10,
+                          selected_index=None):
     '''
     write Amira SpatialGraph files corresponding to time steps
     of entire simulation run. Recorded quantities are passed
@@ -392,9 +418,9 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
     if fname is None or cell is None or traces is None or tVec is None:
         err_str = 'Incomplete data! Cannot write SpatialGraph simulation results'
         raise RuntimeError(err_str)
-    
+
     axonLabels = ['Axon', 'AIS', 'Myelin']
-    
+
     totalNrPts = 0
     nrOfEdges = 0
     for sec in cell.tree:
@@ -408,13 +434,13 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
 
     if not os.path.exists(os.path.dirname(fname)):
         os.makedirs(os.path.dirname(fname))
-    
+
     header = "# AmiraMesh 3D ASCII 2.0" + "\n"
     header += "# This SpatialGraph file was created by the Neuron Registration Tool NeuroMap " + "\n"
     header += "# NeuroMap was programmed by Robert Egger," + "\n"
     header += "# Max-Planck-Florida Institute, Jupiter, Florida " + "\n"
     header += "" + "\n"
-    header += "define VERTEX " + str(nrOfEdges*2) + "\n"
+    header += "define VERTEX " + str(nrOfEdges * 2) + "\n"
     header += "define EDGE " + str(nrOfEdges) + "\n"
     header += "define POINT " + str(totalNrPts) + "\n"
     header += "" + "\n"
@@ -579,21 +605,23 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
     header += "" + "\n"
     header += "POINT { float[3] EdgePointCoordinates } @6 " + "\n"
     header += "POINT { float Diameter } @7 " + "\n"
-    
+
     dataIndex = []
     for i in range(len(traces)):
-#        dataIndex.append(str(i + 7))
-#        header += "POINT { float " + traces[i] + " } @" + str(i + 7) + "\n"
+        #        dataIndex.append(str(i + 7))
+        #        header += "POINT { float " + traces[i] + " } @" + str(i + 7) + "\n"
         dataIndex.append(str(i + 8))
         header += "POINT { float " + traces[i] + " } @" + str(i + 8) + "\n"
-    
+
     for i in range(len(tVec)):
         if selected_index is not None:
             if not i in selected_index:
                 continue
+
+
 #        only write every 10th time step for visualization
 #        (step size for vis. will then be 0.25ms)
-        if i%step_frames:
+        if i % step_frames:
             continue
         stepFName = fname
         stepFName += '_'
@@ -601,7 +629,7 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
         stepFName += '.am'
         with mdbopen(stepFName, 'w') as outFile:
             outFile.write(header)
-            
+
             outFile.write('\n@1 # Vertices xyz coordinates\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -616,7 +644,7 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                 line2 = '%.6f %.6f %.6f\n' % (v2[0], v2[1], v2[2])
                 outFile.write(line1)
                 outFile.write(line2)
-            
+
             outFile.write('\n@2 # Vertex Graph Label\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -624,16 +652,16 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                 line = '%d\n' % labels2int[sec.label]
                 outFile.write(line)
                 outFile.write(line)
-            
+
             outFile.write('\n@3 # Edge Identifiers\n')
             j = 0
             for sec in cell.tree:
                 if sec.label in axonLabels:
                     continue
-                line = '%d %d\n' % (2*j, 2*j+1)
+                line = '%d %d\n' % (2 * j, 2 * j + 1)
                 outFile.write(line)
                 j += 1
-            
+
             outFile.write('\n@4 # Number of Points per Edge\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -643,14 +671,14 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                 else:
                     line = '%d\n' % sec.nrOfPts
                 outFile.write(line)
-            
+
             outFile.write('\n@5 # Edge Graph Labels\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
                     continue
                 line = '%d\n' % labels2int[sec.label]
                 outFile.write(line)
-            
+
             outFile.write('\n@6 # Point xyz coordinates\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -663,7 +691,7 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                     for pt in sec.pts:
                         line = '%.6f %.6f %.6f\n' % (pt[0], pt[1], pt[2])
                         outFile.write(line)
-            
+
             outFile.write('\n@7 # Diameter at Point\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -671,7 +699,7 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                 for diam in sec.segDiams:
                     line = '%.6f\n' % diam
                     outFile.write(line)
-            
+
             outFile.write('\n@8 # Vm at Point\n')
             for sec in cell.tree:
                 if sec.label in axonLabels:
@@ -679,37 +707,38 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                 for vec in sec.recVList:
                     line = '%.6f\n' % vec[i]
                     outFile.write(line)
-            
+
             if len(traces) > 1:
                 for j in range(len(traces))[1:]:
                     var = traces[j]
-                    outFile.write('\n@%d # %s at Point\n' % (j+8, var))
+                    outFile.write('\n@%d # %s at Point\n' % (j + 8, var))
                     for sec in cell.tree:
                         if sec.label in axonLabels:
                             continue
-                        
-                        #Roberts original code only covered the case, that the mechanisms exist in 
+
+                        #Roberts original code only covered the case, that the mechanisms exist in
                         #every section:
                         #for vec in sec.recordVars[var]:
                         #    line = '%.6f\n' % vec[i]
-                        #    outFile.write(line) 
+                        #    outFile.write(line)
                         #END OF FUNCTION
                         #
-                        #The following code extends this by first checking, if the segment contains the 
+                        #The following code extends this by first checking, if the segment contains the
                         #mechanism. If not, a zero-vector is used
                         #
                         #todo: allow other values than zero
-                        
+
                         #convert neuron section to convenient python list
-                        segment_list = [seg for seg in sec] 
+                        segment_list = [seg for seg in sec]
                         #this is a seperated count variable for segments, that actually contain the mechanism
-                        lv_for_record_vars = 0 
+                        lv_for_record_vars = 0
                         #whereas lv reflects the number of segments, that have been processed
                         for lv, seg in enumerate(segment_list):
                             ## check if mechanism is in section
                             try:
                                 href = eval('seg.' + var)
-                                dummy_vec=sec.recordVars[var][lv_for_record_vars]
+                                dummy_vec = sec.recordVars[var][
+                                    lv_for_record_vars]
                                 lv_for_record_vars = lv_for_record_vars + 1
                                 line = '%.6f\n' % dummy_vec[i]
                             ##if not: use standard value
@@ -717,25 +746,23 @@ def write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoin
                                 line = '%.6f\n' % 0
 
                             outFile.write(line)
-                            
-                        assert(lv_for_record_vars == len(sec.recordVars[var]))        
-    
-    
-    
-    
+
+                        assert lv_for_record_vars == len(sec.recordVars[var])
+
+
 def write_functional_map(fname, functionalMap):
     totalNrPts = 0
     for key in list(functionalMap.keys()):
         totalNrPts += len(functionalMap[key])
-    
+
     header = "# AmiraMesh 3D ASCII 2.0" + "\n"
     header += "# This SpatialGraph file was created by the Neuron Registration Tool NeuroMap " + "\n"
     header += "# NeuroMap was programmed by Robert Egger," + "\n"
     header += "# Max-Planck-Florida Institute, Jupiter, Florida " + "\n"
     header += "" + "\n"
-    header += "define VERTEX " + str(totalNrPts*2) + "\n"
+    header += "define VERTEX " + str(totalNrPts * 2) + "\n"
     header += "define EDGE " + str(totalNrPts) + "\n"
-    header += "define POINT " + str(totalNrPts*2) + "\n"
+    header += "define POINT " + str(totalNrPts * 2) + "\n"
     header += "" + "\n"
     header += "Parameters {GraphLabels {" + "\n"
     header += "        Neuron { " + "\n"
@@ -897,10 +924,10 @@ def write_functional_map(fname, functionalMap):
     header += "EDGE { int GraphLabels } @5 " + "\n"
     header += "" + "\n"
     header += "POINT { float[3] EdgePointCoordinates } @6 " + "\n"
-    
+
     with mdbopen(fname, 'w') as outFile:
         outFile.write(header)
-        
+
         outFile.write('\n@1 # Vertices xyz coordinates\n')
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
@@ -909,43 +936,42 @@ def write_functional_map(fname, functionalMap):
                 line2 = '%.6f %.6f %.6f\n' % (v2[0], v2[1], v2[2])
                 outFile.write(line1)
                 outFile.write(line2)
-        
+
         outFile.write('\n@2 # Vertex Graph Label\n')
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
                 line = '3\n'
                 outFile.write(line)
                 outFile.write(line)
-        
+
         outFile.write('\n@3 # Edge Identifiers\n')
         j = 0
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
-                line = '%d %d\n' % (2*j, 2*j+1)
+                line = '%d %d\n' % (2 * j, 2 * j + 1)
                 outFile.write(line)
                 j += 1
-        
+
         outFile.write('\n@4 # Number of Points per Edge\n')
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
                 line = '2\n'
                 outFile.write(line)
-        
+
         outFile.write('\n@5 # Edge Graph Labels\n')
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
                 line = '3\n'
                 outFile.write(line)
-        
+
         outFile.write('\n@6 # Point xyz coordinates\n')
         for key in list(functionalMap.keys()):
             for pair in functionalMap[key]:
                 for pt in pair:
                     line = '%.6f %.6f %.6f\n' % (pt[0], pt[1], pt[2])
                     outFile.write(line)
-    
-    
-    
+
+
 ##############
 # added by arco
 ##############
@@ -1058,12 +1084,14 @@ create HxDisplayVertices "VERTEXVIEWID"
 import matplotlib as mpl
 import matplotlib.cm as cm
 
+
 def value_to_color(v, vmin=0, vmax=1):
     '''https://stackoverflow.com/questions/15140072/how-to-map-number-to-color-using-matplotlibs-colormap'''
     norm = mpl.colors.Normalize(vmin=vmin, vmax=vmax)
     cmap = cm.inferno
     m = cm.ScalarMappable(norm=norm, cmap=cmap)
     return m.to_rgba(v)[:-1]
+
 
 def generate_landmark_template(landmark_name, c, vertexviewid, len):
     return template_landmark\
@@ -1073,7 +1101,8 @@ def generate_landmark_template(landmark_name, c, vertexviewid, len):
         .replace('BBBB', str(c[2]))\
         .replace('VERTEXVIEWID', str(vertexviewid))\
         .replace('LEN', str(len))
-        
+
+
 # def write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin = 0, vmax = 10, vbinsize = .1):
 #     import os
 #     if not os.path.exists(basedir):
@@ -1088,28 +1117,34 @@ def generate_landmark_template(landmark_name, c, vertexviewid, len):
 #             print c
 #             f.write(generate_landmark_template(landmark_name, c, lv))
 #             lv = lv + 1
-            
-def write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin = 0, vmax = 10, vbinsize = .1):
+
+
+def write_landmarks_colorcoded_to_folder(basedir,
+                                         landmarks,
+                                         values,
+                                         vmin=0,
+                                         vmax=10,
+                                         vbinsize=.1):
     import os
     from itertools import groupby
     # os.makedirs(basedir)
     lv = 0
-    key = lambda x: int(x[1]/vbinsize)    
+    key = lambda x: int(x[1] / vbinsize)
     complete_list = list(zip(landmarks.tolist(), values.tolist()))
-    complete_list = sorted(complete_list, key = key)
-    
+    complete_list = sorted(complete_list, key=key)
+
     with open(os.path.join(basedir, 'out.hx'), 'w') as f:
         f.write(template_init)
-        for v, group in groupby(complete_list, key = key):
-            v = v*vbinsize                        
-            landmark_name = str(v)+'.landmarkAscii'
-            print('writing landmarks for values between {} and {} to {}'.format(v, 
-                                                                                v+vbinsize, 
-                                                                                landmark_name))
+        for v, group in groupby(complete_list, key=key):
+            v = v * vbinsize
+            landmark_name = str(v) + '.landmarkAscii'
+            print('writing landmarks for values between {} and {} to {}'.format(
+                v, v + vbinsize, landmark_name))
             group = list(zip(*group))
-            l, _ = group[0], group[1]        
+            l, _ = group[0], group[1]
             print(len(l))
             write_landmark_file(os.path.join(basedir, landmark_name), l)
-            c = value_to_color(v, vmin = vmin, vmax =vmax)
-            f.write(generate_landmark_template(landmark_name, c, lv, len(l)-1))
+            c = value_to_color(v, vmin=vmin, vmax=vmax)
+            f.write(generate_landmark_template(landmark_name, c, lv,
+                                               len(l) - 1))
             lv = lv + 1

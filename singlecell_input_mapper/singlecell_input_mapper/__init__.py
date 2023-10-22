@@ -4,7 +4,7 @@
 # registered into standard barrel cortex model.
 # Based on methods and data presented in:
 # Egger, Dercksen et al., Frontiers Neuroanatomy 2014
-# 
+#
 # Inputs:
 # - single neuron morphology
 # - 3D PST densities for normalization of innervation calculations

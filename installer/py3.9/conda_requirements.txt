@@ -1,1 +1,1 @@
-https://repo.anaconda.com/pkgs/main/linux-64/pandas-1.1.3-py38he6710b0_0.tar.bz2
+https://repo.anaconda.com/pkgs/main/linux-64/pandas-1.1.3-py39h31985d5_0.tar.bz2

@@ -1,4 +1,3 @@
-
 #It is just a test sample code.
 
 # coding: utf-8
@@ -8,35 +7,28 @@
 
 # In[1]:
 
-
 import os
 import sys
+
 nb_dir = os.path.split(os.getcwd())[0]
 if (nb_dir not in sys.path):
     sys.path.append(nb_dir)
-
 
 # Here we import needed packages
 
 # In[2]:
 
-
 import radii as radi
 import SimpleITK as sitk
 import matplotlib.pyplot as plt
-
 
 # Set path of different raw data folders and output folders.
 
 # In[3]:
 
-
 amDataPath = str('../data/am/')
 tifDataPath = str('../data/tif/')
 amOutputPath = str('../output/am/')
-
-
-
 
 for root, dirs, files in os.walk("."):
     for filename in files:
@@ -46,13 +38,9 @@ for root, dirs, files in os.walk("."):
     for dirsname in dirs:
         print(dirsname)
 
-
-
-
 # Loadin the raw data for a slice and creating array of points from them
 
 # In[4]:
-
 
 #  s13_data = amDataPath + 'S13_final_done_Alison_zScale_40.am'
 #  debug_s13_data = amDataPath + 'debug-S13_final_done_Alison_zScale_40.am'
@@ -77,18 +65,13 @@ for root, dirs, files in os.walk("."):
 
 # In[6]:
 
-
 #plt.imshow(sitk.GetArrayViewFromImage(s13_image));
-
 
 # In[6]:
 
-
 #  res = radi.radius.getRadiiHalfMax(s13_image, s13_points)
 
-
 # In[8]:
-
 
 #  radii = res[1]
 #  radii = [r*0.092 for r in radii]

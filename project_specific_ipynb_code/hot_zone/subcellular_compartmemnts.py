@@ -1,13 +1,15 @@
 import Interface as I
 
+
 def get_section_description_df(cell):
     import project_specific_ipynb_code
     t = 0
-    main_bifurc_sec = project_specific_ipynb_code.hot_zone.get_main_bifurcation_section(cell)
+    main_bifurc_sec = project_specific_ipynb_code.hot_zone.get_main_bifurcation_section(
+        cell)
     trunk_sections = [main_bifurc_sec]
     while True:
         sec = trunk_sections[-1].parent
-        if  sec.label == 'Soma':
+        if sec.label == 'Soma':
             break
         else:
             trunk_sections.append(sec)
@@ -30,7 +32,7 @@ def get_section_description_df(cell):
     for lv, sec in enumerate(cell.sections):
         if not sec.label in ['Dendrite', 'ApicalDendrite']:
             continue
-        out[lv] = {'neuron_section_label':sec.label,
+        out[lv] = {'neuron_section_label': sec.label,
                    'detailed_section_label': '3_tuft' if sec in tuft_sections\
                                                         else '2_trunk' if sec in trunk_sections\
                                                         else '1_oblique' if sec in oblique_sections\

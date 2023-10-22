@@ -37,8 +37,13 @@ def dict_to_code(mapping):
     return '\n'.join(lines)
 
 
-def run_notebook(notebook_name, nb_suffix='-out', out_path='.', nb_kwargs=None,
-                 insert_pos=1, timeout=3600, execute_kwargs=None):
+def run_notebook(notebook_name,
+                 nb_suffix='-out',
+                 out_path='.',
+                 nb_kwargs=None,
+                 insert_pos=1,
+                 timeout=3600,
+                 execute_kwargs=None):
     """Runs a notebook and saves the output in a new notebook.
     Executes a notebook, optionally passing "arguments" in a way roughly
     similar to passing arguments to a function.
@@ -97,7 +102,7 @@ def run_notebook(notebook_name, nb_suffix='-out', out_path='.', nb_kwargs=None,
         # Execution failed, print a message then raise.
         msg = 'Error executing the notebook "%s".\n\n' % notebook_name
         msg += 'See notebook "%s" for the traceback.' % nb_name_output
-        print('[nbrun.py]: '+msg)
+        print('[nbrun.py]: ' + msg)
         raise
     else:
         # On successful execution, add timestamping cell
@@ -117,4 +122,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    run_notebook(notebook_name=args.notebook_name, nb_kwargs=args.nb_kwargs_from_cline, nb_suffix=args.nb_suffix)
+    run_notebook(notebook_name=args.notebook_name,
+                 nb_kwargs=args.nb_kwargs_from_cline,
+                 nb_suffix=args.nb_suffix)

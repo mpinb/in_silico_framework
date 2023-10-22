@@ -3,6 +3,8 @@ import os
 import pandas as pd
 import radii as radi
 import transformTools as tr
+
+
 def allData(am050_tr_folder, radi_object):
     # the amPoints_hoc contains the transfromed am points to the hoc coordinates
     # and it is also contains the extracted radi for tht specific points
@@ -24,11 +26,27 @@ def allData(am050_tr_folder, radi_object):
 
     am_hoc_pairs = radi_object.am_hoc_pairs
 
-    am025Paths = [amOutput025 + amFile for amFile in os.listdir(amOutput025) if amFile.endswith(".am")]
-    am050Paths = [amOutput050 + amFile for amFile in os.listdir(amOutput050) if amFile.endswith(".am")]
-    am075Paths = [amOutput075 + amFile for amFile in os.listdir(amOutput075) if amFile.endswith(".am")]
+    am025Paths = [
+        amOutput025 + amFile
+        for amFile in os.listdir(amOutput025)
+        if amFile.endswith(".am")
+    ]
+    am050Paths = [
+        amOutput050 + amFile
+        for amFile in os.listdir(amOutput050)
+        if amFile.endswith(".am")
+    ]
+    am075Paths = [
+        amOutput075 + amFile
+        for amFile in os.listdir(amOutput075)
+        if amFile.endswith(".am")
+    ]
 
-    amTrPaths = [am050_tr_folder + "/" + amFile for amFile in os.listdir(am050_tr_folder) if amFile.endswith(".am")]
+    amTrPaths = [
+        am050_tr_folder + "/" + amFile
+        for amFile in os.listdir(am050_tr_folder)
+        if amFile.endswith(".am")
+    ]
 
     df = pd.DataFrame()
     df_tr = pd.DataFrame()
@@ -49,7 +67,8 @@ def allData(am050_tr_folder, radi_object):
         points_lenght = len(am050_pointsWithRad)
 
         amTr_pointsWithRad = tr.read.amFile(amTrPaths[idx])
-        amPoints_in_hoc = tr.exTrMatrix.applyTransformationMatrix(amTr_pointsWithRad, trMatrix_hoc)
+        amPoints_in_hoc = tr.exTrMatrix.applyTransformationMatrix(
+            amTr_pointsWithRad, trMatrix_hoc)
         amTr_points = [amTr_pointsWithRad[j][0:3] for j in range(points_lenght)]
 
         # extract radii
@@ -66,29 +85,31 @@ def allData(am050_tr_folder, radi_object):
                 break
 
         # putting the data from one slice into a temporary data frame
-        df_temp = pd.DataFrame(am025_pointsWithRad, columns=["x", "y", "z", "radius 025"])  
+        df_temp = pd.DataFrame(am025_pointsWithRad,
+                               columns=["x", "y", "z", "radius 025"])
 
         # adding the slice name to all points of the temporary data frame of one slice
-        df_temp.insert(0, "slice", sliceName) 
+        df_temp.insert(0, "slice", sliceName)
 
         # adding the different treshold of radii of the slice to the temporary data frame
         df_temp["radius 050"] = rads_050
         df_temp["radius 075"] = rads_075
 
-        # append the temporary data frame to the whole cell data frame 
-        df = df.append(df_temp) 
+        # append the temporary data frame to the whole cell data frame
+        df = df.append(df_temp)
 
         # adding the coordinates of the transformed am files to a new temporary data frame
         df_tr_temp = pd.DataFrame(amTr_points, columns=["x_hx", "y_hx", "z_hx"])
-        
+
         # appending the new temporary data frame of tr points to the whole cell tr data frame
         df_tr = df_tr.append(df_tr_temp)
 
     # Join the two data frame for tr points and the raw points together
-    df_beforeFinalTransform = pd.concat([df,df_tr], axis=1)
+    df_beforeFinalTransform = pd.concat([df, df_tr], axis=1)
 
     am_in_hoc_coord = [point[0:3] for point in amPoints_in_hoc]
-    df_am_in_hoc_coord = pd.DataFrame(am_in_hoc_coord, columns=["x_hoc","y_hoc","z_hoc"])
+    df_am_in_hoc_coord = pd.DataFrame(am_in_hoc_coord,
+                                      columns=["x_hoc", "y_hoc", "z_hoc"])
 
     # df_all = pd.concat([df_beforeFinalTransform, df_am_in_hoc_coord.reindex(df_beforeFinalTransform.index)], axis=1)
 

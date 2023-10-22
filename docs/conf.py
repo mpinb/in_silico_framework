@@ -22,7 +22,6 @@ version = '0.0.1'
 ## Make your modules available in sys.path
 sys.path.append(os.path.join(os.path.abspath(os.pardir)))
 
-
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -54,7 +53,7 @@ autodoc_default_options = {
 ## Generate autodoc stubs with summaries from code
 autosummary_generate = True
 autosummary_imported_members = False  # do not show all imported modules per module, this is too bloated
-paramlinks_hyperlink_param='name'
+paramlinks_hyperlink_param = 'name'
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -95,7 +94,6 @@ pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
-
 
 # -- Options for HTML output ----------------------------------------------
 

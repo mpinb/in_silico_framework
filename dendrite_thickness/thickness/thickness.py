@@ -26,12 +26,24 @@ from .utils import get_size_of_object
 from . import utils as u
 import itertools
 import logging
+
 log = logging.getLogger("ISF").getChild(__name__)
 
+
 class ThicknessExtractor:
-    def __init__(self, points, image_file=None, xy_resolution=0.092, z_resolution=0.5, ray_length_front_to_back_in_micron=20,
-                 number_of_rays=36, threshold_percentage=0.5, max_seed_correction_radius_in_micron=10, _3d=False,
-                 image_stack=None, slice_name=None):
+
+    def __init__(self,
+                 points,
+                 image_file=None,
+                 xy_resolution=0.092,
+                 z_resolution=0.5,
+                 ray_length_front_to_back_in_micron=20,
+                 number_of_rays=36,
+                 threshold_percentage=0.5,
+                 max_seed_correction_radius_in_micron=10,
+                 _3d=False,
+                 image_stack=None,
+                 slice_name=None):
         """ This is the main method for extracting Thickness
         - Inputs:
             1. am_points: must be in the type transformation.Data.coordinate_2d, so they are a list of
@@ -46,8 +58,10 @@ class ThicknessExtractor:
         # slice_name is a handy object that can help distinguishes between multiple instances of this class.
         self.slice_name = slice_name
         self.original_points = points
-        self.convert_points = tr.ConvertPoints(xy_resolution, xy_resolution, z_resolution)
-        points_in_image_coordinates_2d = self.convert_points.coordinate_2d_to_image_coordinate_2d(self.original_points)
+        self.convert_points = tr.ConvertPoints(xy_resolution, xy_resolution,
+                                               z_resolution)
+        points_in_image_coordinates_2d = self.convert_points.coordinate_2d_to_image_coordinate_2d(
+            self.original_points)
         self.points = points_in_image_coordinates_2d  # image_coordinate_2d, TYPE: 2d list of floats,
         # but converted in the unit of the image.
         self.seed_corrected_points = []
@@ -87,7 +101,6 @@ class ThicknessExtractor:
         self.all_overlaps = []
         self.all_data = {}
 
-
         self.image_file = image_file
         if image_file is not None:
             self._set_image(image_file)
@@ -122,16 +135,19 @@ class ThicknessExtractor:
             data = self.get_all_data_by_point(point)
             all_data[idx] = data
             all_data[idx]["overlaps"] = []
-            log.info(str(idx) + " am_points from " + str(len(sorted_points)) + " from slice " + self.slice_name + " are completed.")
+            log.info(
+                str(idx) + " am_points from " + str(len(sorted_points)) +
+                " from slice " + self.slice_name + " are completed.")
             sys.stdout.write("\033[F")
 
         import six
         all_data = {sort_indices[k]: v for k, v in six.iteritems(all_data)}
         self.all_data = all_data
-        log.info("size of object in MB all_data: " + str(get_size_of_object(all_data) / (1024. * 1024.)))
+        log.info("size of object in MB all_data: " +
+                 str(get_size_of_object(all_data) / (1024. * 1024.)))
 
         # if self._3D is False:
-            # self.all_overlaps = self.update_all_data_with_overlaps()
+        # self.all_overlaps = self.update_all_data_with_overlaps()
 
         self._get_thicknesses_from_all_data()
 
@@ -163,13 +179,19 @@ class ThicknessExtractor:
         for i in range(self.number_of_rays):
             phi = i * (np.pi / self.number_of_rays)
 
-            front_ray_indices = self.get_ray_points_indices(point, phi, front=True)
-            back_ray_indices = self.get_ray_points_indices(point, phi, front=False)
+            front_ray_indices = self.get_ray_points_indices(point,
+                                                            phi,
+                                                            front=True)
+            back_ray_indices = self.get_ray_points_indices(point,
+                                                           phi,
+                                                           front=False)
 
-            ray_indices = _construct_ray_from_half_rays(front_ray_indices, back_ray_indices, point)
+            ray_indices = _construct_ray_from_half_rays(front_ray_indices,
+                                                        back_ray_indices, point)
             rays_indices.append(ray_indices)
 
-            ray_intensity_profile = self.get_intensity_profile_from_ray_indices(ray_indices)
+            ray_intensity_profile = self.get_intensity_profile_from_ray_indices(
+                ray_indices)
             rays_intensity_profile.append(ray_intensity_profile)
 
         # all_data["rays_indices"] = rays_indices
@@ -181,8 +203,10 @@ class ThicknessExtractor:
             assert ray_length % 2 == 1, "ray_length should be uneven"
             half_ray_length = int((ray_length - 1) / 2)
 
-            back_contour_index = self.get_contour_index(point, ray_indices[0:half_ray_length + 1][::-1])
-            front_contour_index = self.get_contour_index(point, ray_indices[half_ray_length:ray_length])
+            back_contour_index = self.get_contour_index(
+                point, ray_indices[0:half_ray_length + 1][::-1])
+            front_contour_index = self.get_contour_index(
+                point, ray_indices[half_ray_length:ray_length])
             all_data["back_contour_index"] = back_contour_index
             all_data["front_contour_index"] = front_contour_index
             if back_contour_index is None or front_contour_index is None:
@@ -190,7 +214,8 @@ class ThicknessExtractor:
             else:
                 assert (len(back_contour_index) == 2)
                 assert (len(front_contour_index) == 2)
-                thickness = tr.get_distance(back_contour_index, front_contour_index)
+                thickness = tr.get_distance(back_contour_index,
+                                            front_contour_index)
             contour_list.append([back_contour_index, front_contour_index])
             thicknesses_list.append(thickness)
 
@@ -240,9 +265,11 @@ class ThicknessExtractor:
 
             # this fails, if we have reached the end of the ray
             try:
-                _index = ray_indices[i+1]
+                _index = ray_indices[i + 1]
             except IndexError:
-                log.warn("End of ray reached! Center point intensity: {}".format (point_value))
+                log.warn(
+                    "End of ray reached! Center point intensity: {}".format(
+                        point_value))
                 return ray_indices[i]
 
             # this fails, if the ray goes out of the image
@@ -255,9 +282,8 @@ class ThicknessExtractor:
                 contour_indices = ray_indices[i]
                 break
 
-        assert(contour_indices is not None)
+        assert contour_indices is not None
         return contour_indices
-
 
     def get_ray_points_indices(self, point, phi, front):
         """
@@ -323,27 +349,42 @@ class ThicknessExtractor:
         # point = [int(point[0]), int(point[1]), point[2]]
         radius = self._max_seed_correction_radius_in_image_coordinates_in_pixel
         point_in_padded_image = point[0] + radius, point[1] + radius
-        cropped_image = _crop_image(self.padded_image, point_in_padded_image, radius, circle=True)
-        indices_of_max_value = np.argwhere(cropped_image == np.amax(cropped_image)).ravel()
-        corrected_point = [indices_of_max_value[0] + point[0] - radius,
-                           indices_of_max_value[1] + point[1] - radius,
-                           point[2]]
+        cropped_image = _crop_image(self.padded_image,
+                                    point_in_padded_image,
+                                    radius,
+                                    circle=True)
+        indices_of_max_value = np.argwhere(
+            cropped_image == np.amax(cropped_image)).ravel()
+        corrected_point = [
+            indices_of_max_value[0] + point[0] - radius,
+            indices_of_max_value[1] + point[1] - radius, point[2]
+        ]
 
         intensity_value = self.image.GetPixel([int(point[0]), int(point[1])])
-        intensity_value2 = self.image.GetPixel([int(corrected_point[0]), int(corrected_point[1])])
-        assert(intensity_value2 >= intensity_value)
-        log.info('original_point: {} / {} corrected_point: {} / {}'.format(point, intensity_value,
-                                                                        corrected_point, intensity_value2))
+        intensity_value2 = self.image.GetPixel(
+            [int(corrected_point[0]),
+             int(corrected_point[1])])
+        assert intensity_value2 >= intensity_value
+        log.info('original_point: {} / {} corrected_point: {} / {}'.format(
+            point, intensity_value, corrected_point, intensity_value2))
         return corrected_point
 
     def update_all_data_with_overlaps(self):
         points = self.seed_corrected_points
         overlaps = []
-        cubes = [u.get_neighbours_of_point(point, points, width=2) for point in points]
+        cubes = [
+            u.get_neighbours_of_point(point, points, width=2)
+            for point in points
+        ]
         for cube in cubes:
             if len(cube) == 0:
                 continue
-            overlaps.append(([self.find_overlap(p1, p2) for p1 in cube for p2 in cube if p1 != p2]))
+            overlaps.append(([
+                self.find_overlap(p1, p2)
+                for p1 in cube
+                for p2 in cube
+                if p1 != p2
+            ]))
         return overlaps
 
     def find_overlap(self, point_1, point_2):
@@ -363,7 +404,10 @@ class ThicknessExtractor:
             return [point_1, point_2]
 
     def _filter_all_data_by_point(self, point):
-        return dict([x for x in list(self.all_data.items()) if x[1]["seed_corrected_point"] == point])
+        return dict([
+            x for x in list(self.all_data.items())
+            if x[1]["seed_corrected_point"] == point
+        ])
 
     def _set_image_file_by_point(self, point):
         z_coordinate_key = int(point[2])
@@ -374,11 +418,17 @@ class ThicknessExtractor:
     def _set_image(self, input_path):
         log.info('setting image path to {}'.format(input_path))
         self.image = _read_image(input_path)
-        self.padded_image = _pad_image(self.image, self._max_seed_correction_radius_in_image_coordinates_in_pixel)
+        self.padded_image = _pad_image(
+            self.image,
+            self._max_seed_correction_radius_in_image_coordinates_in_pixel)
 
     def _get_thicknesses_from_all_data(self):
-        thickness_list = [self.all_data[idx]["min_thickness"] for idx in range(len(self.points))]
-        self.thickness_list = self.convert_points.thickness_to_micron(thickness_list)
+        thickness_list = [
+            self.all_data[idx]["min_thickness"]
+            for idx in range(len(self.points))
+        ]
+        self.thickness_list = self.convert_points.thickness_to_micron(
+            thickness_list)
 
     def __del__(self):
         del self.image_stack
@@ -395,7 +445,8 @@ def _check_overlap(contour1, contour2):
     for line1 in polygon_lines1:
         for line2 in polygon_lines2:
             ints = _get_intersection(line1, line2)
-            if line1[0][0] <= ints[0] <= line1[1][0] and line1[0][1] <= ints[1] <= line1[1][1]:
+            if line1[0][0] <= ints[0] <= line1[1][0] and line1[0][1] <= ints[
+                    1] <= line1[1][1]:
                 return True
     return False
 
@@ -413,7 +464,10 @@ def _intercept(m, p2):
 
 def _create_polygon_lines_by_contours(contour):
     polygon_lines = []
-    edge_pairs = [[p1, p2] for i, p1 in enumerate(contour) for p2 in contour[i:] if p1 != p2 and p1 != []]
+    edge_pairs = [[p1, p2]
+                  for i, p1 in enumerate(contour)
+                  for p2 in contour[i:]
+                  if p1 != p2 and p1 != []]
     for edge_pair in edge_pairs:
         p1 = edge_pair[0]
         p2 = edge_pair[1]
@@ -443,7 +497,7 @@ def _circle_filter(x, y, r):
     Returns:
         int: 1 if the point is within the circle, 0 otherwise
     """
-    if x ** 2 + y ** 2 <= r ** 2:
+    if x**2 + y**2 <= r**2:
         return 1
     else:
         return 0
@@ -473,12 +527,15 @@ def _crop_image(image_array, center, radius, circle=False):
     # assert (c1 - radius >= 0)
     # assert (c2 - radius >= 0)
 
-    return_ = image_array[c1 - radius:c1 + radius + 1, c2 - radius:c2 + radius + 1]
+    return_ = image_array[c1 - radius:c1 + radius + 1,
+                          c2 - radius:c2 + radius + 1]
     # return_ = b_pad[c1:c1 + 2 * radius + 1, c2:c2 + 2 * radius + 1]
 
     if circle:
-        return_ = [[value * _circle_filter(row_lv - radius, col_lv - radius, radius)
-                    for col_lv, value in enumerate(row)]
+        return_ = [[
+            value * _circle_filter(row_lv - radius, col_lv - radius, radius)
+            for col_lv, value in enumerate(row)
+        ]
                    for row_lv, row in enumerate(return_)]
         return_ = np.array(return_)
     return return_
@@ -493,7 +550,8 @@ def _construct_ray_from_half_rays(front_ray_indices, back_ray_indices, point):
 
     """
     center_point_index = [int(point[0]), int(point[1])]
-    ray = list(reversed(back_ray_indices)) + [center_point_index] + front_ray_indices
+    ray = list(reversed(back_ray_indices)) + [center_point_index
+                                             ] + front_ray_indices
     return ray
 
 

@@ -8,6 +8,7 @@
 
 set -e  # exit if error occurs
 
+WORKING_DIR=$(pwd)
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 anaconda_installer=Anaconda3-2020.11-Linux-x86_64.sh
 channels=$SCRIPT_DIR/../../mechanisms/channels_py3
@@ -43,6 +44,7 @@ done
 
 # -------------------- 0. Setup -------------------- #
 print_title "0/6. Preliminary checks"
+pushd . # save this dir on stack
 # 0.0 -- Create downloads folder (if it does not exist)
 if [ ! -d "$SCRIPT_DIR/downloads" ]; then
     mkdir $SCRIPT_DIR/downloads;
@@ -97,10 +99,12 @@ if [[ "${download_conda_flag}" == "true" ]]; then
 fi
 # 1.1 -- Installing Anaconda
 echo "Anaconda will be installed in: ${CONDA_INSTALL_PATH}"
-bash $SCRIPT_DIR/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH};
-echo "Activating environment by running \"source ${CONDA_INSTALL_PATH}/bin/activate\""
-source ${CONDA_INSTALL_PATH}/bin/activate
+bash ${SCRIPT_DIR}/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH};
+echo "Activating environment by running \"source ${CONDA_INSTALL_PATH}/bin/activate\"";
+source ${CONDA_INSTALL_PATH}/bin/activate;
 conda info
+echo $(which python)
+echo $(python --version)
 
 # -------------------- 2. Installing conda dependencies -------------------- #
 print_title "2/6. Installing conda dependencies "
@@ -139,9 +143,10 @@ python $SCRIPT_DIR/patch_dask_linux64.py
 echo "Dask library patched."
 
 # -------------------- 5. Patching pandas-msgpack -------------------- #
-print_title "5/6. Patching pandas-msgpack"
+print_title "5/6. Installing & patching pandas-msgpack"
 PD_MSGPACK_HOME="$SCRIPT_DIR/pandas-msgpack"
 if [ ! -r "${PD_MSGPACK_HOME}" ]; then
+    cd $SCRIPT_DIR
     echo "Cloning pandas-msgpack from GitHub."
     git clone https://github.com/abast/pandas-msgpack.git;
 fi
@@ -154,6 +159,8 @@ print_title "6/6. Compiling NEURON mechanisms"
 echo "Compiling NEURON mechanisms."
 cd $channels; nrnivmodl
 cd $netcon; nrnivmodl
+popd
+pushd .
 
 # -------------------- 7. Cleanup -------------------- #
 echo "Succesfully installed In-Silico-Framework for Python 3.8"

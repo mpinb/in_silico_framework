@@ -1,7 +1,9 @@
 import logging
+
 log = logging.getLogger("ISF").getChild(__name__)
 
-def scale_apical(cell, scale = None, compartment = 'ApicalDendrite'):
+
+def scale_apical(cell, scale=None, compartment='ApicalDendrite'):
     '''
     This is the function used to scale the apical dendrite in the following
     optimizations:
@@ -14,7 +16,7 @@ def scale_apical(cell, scale = None, compartment = 'ApicalDendrite'):
     after creating complete cell
     '''
     import neuron
-    h = neuron.h    
+    h = neuron.h
     scaleCount = 0
     for sec in cell.sections:
         if sec.label == 'ApicalDendrite':
@@ -22,7 +24,7 @@ def scale_apical(cell, scale = None, compartment = 'ApicalDendrite'):
             scaleCount += 1
             for i in range(sec.nrOfPts):
                 oldDiam = sec.diamList[i]
-                newDiam = scale*oldDiam
+                newDiam = scale * oldDiam
                 h.pt3dchange(i, newDiam, sec=sec)
     log.info('Scaled {:d} apical sections...'.format(scaleCount))
     return cell

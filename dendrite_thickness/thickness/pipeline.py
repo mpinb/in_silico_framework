@@ -11,6 +11,7 @@ import time
 
 
 class SliceData:
+
     def __init__(self, slice_name=None, slice_threshold=None):
         self.slice_name = slice_name
         self.am_file_path = None
@@ -29,14 +30,18 @@ class SliceData:
 
     def setup_am_file(self, path):
         if self.output_path is None:
-            raise RuntimeError("Please first set_output_path by set_output_path('path')")
+            raise RuntimeError(
+                "Please first set_output_path by set_output_path('path')")
         self.am_file_path = path
         self.am_object = IO.Am(self.am_file_path, self.output_path)
-        self.am_points = self.am_object.all_data["POINT { float[3] EdgePointCoordinates }"]
+        self.am_points = self.am_object.all_data[
+            "POINT { float[3] EdgePointCoordinates }"]
         if self.am_object.transformation_matrix_exist:
             tr_object = tr.AffineTransformation()
-            tr_object.set_transformation_matrix(self.am_object.transformation_matrix)
-            self.am_points_with_applied_am_file_transform = tr_object.transform_points(self.am_points)
+            tr_object.set_transformation_matrix(
+                self.am_object.transformation_matrix)
+            self.am_points_with_applied_am_file_transform = tr_object.transform_points(
+                self.am_points)
         else:
             self.am_points_with_applied_am_file_transform = self.am_points
 
@@ -51,26 +56,30 @@ class SliceData:
             self.slice_name = slice_name
         else:
             if self.image_file_path:
-                self.slice_name = u.get_slice_name(self.am_file_path, self.image_file_path)
+                self.slice_name = u.get_slice_name(self.am_file_path,
+                                                   self.image_file_path)
             elif self.image_stack_input_path:
-                self.slice_name = u.get_slice_name(self.am_file_path, self.image_stack_input_path)
+                self.slice_name = u.get_slice_name(self.am_file_path,
+                                                   self.image_stack_input_path)
             else:
-                raise ValueError('Neither image_file_path nor image_stack_input_path are set. ' +
-                                 'Cannot infer slice name.')
+                raise ValueError(
+                    'Neither image_file_path nor image_stack_input_path are set. '
+                    + 'Cannot infer slice name.')
 
     def set_image_stack(self, input_path, subfolders=None):
         self.image_stack_input_path = input_path
-        self.image_stack = u.create_image_stack_dict_of_slice(input_path, subfolders)
+        self.image_stack = u.create_image_stack_dict_of_slice(
+            input_path, subfolders)
 
-    def compute(self, xy_resolution, z_resolution, ray_length_front_to_back_in_micron,
-                number_of_rays, threshold_percentage, max_seed_correction_radius_in_micron,
-                _3d, image_stack, slice_name):
-        slice_thicknesses_object = th.ThicknessExtractor(self.am_points, self.image_file_path,
-                                                         xy_resolution, z_resolution,
-                                                         ray_length_front_to_back_in_micron,
-                                                         number_of_rays, threshold_percentage,
-                                                         max_seed_correction_radius_in_micron,
-                                                         _3d, image_stack, slice_name)
+    def compute(self, xy_resolution, z_resolution,
+                ray_length_front_to_back_in_micron, number_of_rays,
+                threshold_percentage, max_seed_correction_radius_in_micron, _3d,
+                image_stack, slice_name):
+        slice_thicknesses_object = th.ThicknessExtractor(
+            self.am_points, self.image_file_path, xy_resolution, z_resolution,
+            ray_length_front_to_back_in_micron, number_of_rays,
+            threshold_percentage, max_seed_correction_radius_in_micron, _3d,
+            image_stack, slice_name)
         self.slice_thicknesses_object = slice_thicknesses_object
         # data element for am_object must be themselves a list. That is why we put each thickness to a list in below.
         # self.am_object.add_data("POINT { float thickness }",
@@ -79,11 +88,13 @@ class SliceData:
 
 
 class ExtractThicknessPipeline:
-    def __init__(self, xy_resolution=0.092, z_resolution=0.5, number_of_rays=36,
+
+    def __init__(self,
+                 xy_resolution=0.092,
+                 z_resolution=0.5,
+                 number_of_rays=36,
                  ray_length_front_to_back_in_micron=20,
                  max_seed_correction_radius_in_micron=10):
-
-
 
         # ---- flags and settings
         self._parallel = False
@@ -124,7 +135,8 @@ class ExtractThicknessPipeline:
         self.am_paths = am_paths_list
 
     def set_am_paths_by_folder(self, folder_path_to_am_files):
-        self.am_paths = u.get_files_by_folder(folder_path_to_am_files, file_extension="am")
+        self.am_paths = u.get_files_by_folder(folder_path_to_am_files,
+                                              file_extension="am")
 
     def set_am_paths_by_hx(self, folder_path_to_hx_file):
         self.am_paths = u.get_am_paths_from_hx(folder_path_to_hx_file)
@@ -139,21 +151,21 @@ class ExtractThicknessPipeline:
         if self.output_folder is None:
             raise RuntimeError("Please first set_output_path")
         else:
-            self.hoc_object = IO.Hoc(self.hoc_file,
-                                     self.output_folder + "/"
-                                     + u.get_file_name_from_path(self.hoc_file))
+            self.hoc_object = IO.Hoc(
+                self.hoc_file, self.output_folder + "/" +
+                u.get_file_name_from_path(self.hoc_file))
 
     def set_tif_paths_by_list(self, tif_paths_list):
         self.tif_paths = tif_paths_list
 
     def set_tif_paths_by_folder(self, folder_path_to_tif_files):
-        self.tif_paths = u.get_files_by_folder(folder_path_to_tif_files, file_extension="tif")
+        self.tif_paths = u.get_files_by_folder(folder_path_to_tif_files,
+                                               file_extension="tif")
 
-    def set_tif_3d_stack_by_folders(self, folder_paths, subfolders = None):
+    def set_tif_3d_stack_by_folders(self, folder_paths, subfolders=None):
         self._3D = True
         self.image_stack_folder_paths = folder_paths
         self.image_stack_folder_paths_subfolders = subfolders
-
 
     # TODO: EG: to put in init with defaults, set_thresholds, set_thickness..
     def set_thresholds(self, thresholds_list):
@@ -168,7 +180,9 @@ class ExtractThicknessPipeline:
 
     def set_am_to_hoc_transformation_by_landmarkAscii(self, input_path):
         bijective_list_points = IO.read_landmark_file(input_path)
-        self.am_to_hoc_bijective_points = [list(p) for p in bijective_list_points]
+        self.am_to_hoc_bijective_points = [
+            list(p) for p in bijective_list_points
+        ]
 
     def set_bijective_points_automatically(self):
         """ TODO: This function will call the poor function that we developed and not working well"""
@@ -228,16 +242,19 @@ class ExtractThicknessPipeline:
             print("In threshold: " + str(threshold))
             for am_file in self.am_paths:
                 slice_object = SliceData(slice_threshold=threshold)
-                slice_object.set_output_path(self.output_folder + "/" + str(threshold) +
-                                             "/" + u.get_file_name_from_path(am_file))
+                slice_object.set_output_path(self.output_folder + "/" +
+                                             str(threshold) + "/" +
+                                             u.get_file_name_from_path(am_file))
                 slice_object.setup_am_file(am_file)
                 if self._3D:
-                    slice_object.set_image_stack(u.get_am_image_match([am_file],
-                                                                      self.image_stack_folder_paths)[am_file],
-                                                 self.image_stack_folder_paths_subfolders)
+                    slice_object.set_image_stack(
+                        u.get_am_image_match(
+                            [am_file], self.image_stack_folder_paths)[am_file],
+                        self.image_stack_folder_paths_subfolders)
                 else:
-                    slice_object.set_image_file_path(u.get_am_image_match([am_file],
-                                                                          self.tif_paths)[am_file])
+                    slice_object.set_image_file_path(
+                        u.get_am_image_match([am_file],
+                                             self.tif_paths)[am_file])
                 slice_object.set_slice_name()
                 print("--------")
                 print("Setting up slice:" + slice_object.slice_name)
@@ -253,34 +270,37 @@ class ExtractThicknessPipeline:
             for slice_name in sorted(s.all_slices[threshold]):
                 slice_object = s.all_slices[threshold][slice_name]
                 if s._parallel:
-                    delay = _parallel_helper(slice_object.am_points, slice_object.image_file_path, s.xy_resolution,
-                                             s.z_resolution,
-                                             s.ray_length_front_to_back_in_micron,
-                                             s.number_of_rays, threshold,
-                                             s.max_seed_correction_radius_in_micron, s._3D,
-                                             slice_object.image_stack, slice_object.slice_name)
+                    delay = _parallel_helper(
+                        slice_object.am_points, slice_object.image_file_path,
+                        s.xy_resolution, s.z_resolution,
+                        s.ray_length_front_to_back_in_micron, s.number_of_rays,
+                        threshold, s.max_seed_correction_radius_in_micron,
+                        s._3D, slice_object.image_stack,
+                        slice_object.slice_name)
                     delays.append(delay)
                 else:
                     slice_object.compute(s.xy_resolution, s.z_resolution,
                                          s.ray_length_front_to_back_in_micron,
                                          s.number_of_rays, threshold,
-                                         s.max_seed_correction_radius_in_micron, s._3D, slice_object.image_stack,
-                                         slice_object.slice_name
-                                         )
+                                         s.max_seed_correction_radius_in_micron,
+                                         s._3D, slice_object.image_stack,
+                                         slice_object.slice_name)
 
         return delays
 
     def _transform_points(self):
         print("---- transform am_points ----")
         at = tr.AffineTransformation()
-        at.set_transformation_matrix_by_aligned_points(self.am_to_hoc_bijective_points[::2],
-                                                       self.am_to_hoc_bijective_points[1::2])
+        at.set_transformation_matrix_by_aligned_points(
+            self.am_to_hoc_bijective_points[::2],
+            self.am_to_hoc_bijective_points[1::2])
         for threshold in self.thresholds_list:
             all_slices_with_same_threshold = self.all_slices[threshold]
             for key in sorted(all_slices_with_same_threshold.keys()):
                 slice_object = all_slices_with_same_threshold[key]
-                transformed_points = at.transform_points(slice_object.am_points_with_applied_am_file_transform,
-                                                       forwards=True)
+                transformed_points = at.transform_points(
+                    slice_object.am_points_with_applied_am_file_transform,
+                    forwards=True)
                 slice_object.am_points_in_hoc_coordinate_system = transformed_points
                 slice_object.am_to_hoc_transformation_object = at
 
@@ -291,11 +311,10 @@ class ExtractThicknessPipeline:
         for idx, hoc_point in enumerate(self.hoc_object.all_data["am_points"]):
             start = time.time()
             nearest_point_index = self.all_am_points_in_hoc_coordinate_system.index(
-                u.get_nearest_point(hoc_point, self.all_am_points_in_hoc_coordinate_system)
-            )
-            self.hoc_object.all_data["thicknesses"].append(
-                self.all_thicknesses[self.default_threshold][nearest_point_index]
-            )
+                u.get_nearest_point(
+                    hoc_point, self.all_am_points_in_hoc_coordinate_system))
+            self.hoc_object.all_data["thicknesses"].append(self.all_thicknesses[
+                self.default_threshold][nearest_point_index])
             end = time.time()
             if not idx % 100:
                 print("time:" + str(end - start))
@@ -305,34 +324,51 @@ class ExtractThicknessPipeline:
 
     def _compute_all_data_table(self):
         print("---- compute all data table ----")
-        return an.get_all_data_output_table(self.all_slices, self.default_threshold)
+        return an.get_all_data_output_table(self.all_slices,
+                                            self.default_threshold)
 
     def _stacking_all_slices(self):
         print("---- stacking all slices ----")
-        all_slices_with_default_threshold = self.all_slices[self.default_threshold]
-        self.all_am_points = [point for key in sorted(all_slices_with_default_threshold.keys())
-                              for point in all_slices_with_default_threshold[key].am_points]
-        self.all_am_points_with_applied_am_file_transform = [point for key in sorted(all_slices_with_default_threshold.keys())
-                              for point in all_slices_with_default_threshold[key].am_points_with_applied_am_file_transform]
+        all_slices_with_default_threshold = self.all_slices[
+            self.default_threshold]
+        self.all_am_points = [
+            point for key in sorted(all_slices_with_default_threshold.keys())
+            for point in all_slices_with_default_threshold[key].am_points
+        ]
+        self.all_am_points_with_applied_am_file_transform = [
+            point for key in sorted(all_slices_with_default_threshold.keys())
+            for point in all_slices_with_default_threshold[key].
+            am_points_with_applied_am_file_transform
+        ]
 
-        self.all_am_points_in_hoc_coordinate_system = [tr_points for key in
-                                                       sorted(all_slices_with_default_threshold.keys())
-                                                       for tr_points in
-                                                       all_slices_with_default_threshold[key].am_points_in_hoc_coordinate_system]
+        self.all_am_points_in_hoc_coordinate_system = [
+            tr_points
+            for key in sorted(all_slices_with_default_threshold.keys())
+            for tr_points in all_slices_with_default_threshold[key].
+            am_points_in_hoc_coordinate_system
+        ]
         for threshold in self.thresholds_list:
             all_slices_with_same_threshold = self.all_slices[threshold]
-            self.all_thicknesses = {threshold: [
-                all_slices_with_same_threshold[key].slice_thicknesses_object.thickness_list[index]
-                for key in sorted(all_slices_with_same_threshold.keys())
-                for index in range(len(all_slices_with_same_threshold[key].am_points))]}
+            self.all_thicknesses = {
+                threshold: [
+                    all_slices_with_same_threshold[key].
+                    slice_thicknesses_object.thickness_list[index]
+                    for key in sorted(all_slices_with_same_threshold.keys())
+                    for index in range(
+                        len(all_slices_with_same_threshold[key].am_points))
+                ]
+            }
 
         print("Number of all am_points: " + str(len(self.all_am_points)))
         assert len(self.all_am_points) == len(
             self.all_am_points_in_hoc_coordinate_system) == len(
-            list(self.all_thicknesses.values())[0])
-        assert len(self.all_thicknesses) == len([1 for thicknesses_in_threshold in list(self.all_thicknesses.values())
-                                                 if len(thicknesses_in_threshold) ==
-                                                 len(list(self.all_thicknesses.values())[0])])
+                list(self.all_thicknesses.values())[0])
+        assert len(self.all_thicknesses) == len([
+            1
+            for thicknesses_in_threshold in list(self.all_thicknesses.values())
+            if len(thicknesses_in_threshold) == len(
+                list(self.all_thicknesses.values())[0])
+        ])
 
     def _write_am_outputs(self):
         print("---- write am outputs ----")
@@ -341,10 +377,10 @@ class ExtractThicknessPipeline:
             for slice_name in sorted(s.all_slices[threshold]):
                 ### urgendt todo: update of thickness list should not be done here1!!!!
                 slice_object = s.all_slices[threshold][slice_name]
-                slice_object.am_object.add_data("POINT { float thickness }",
-                                                [[thickness]
-                                                 for thickness
-                                                 in slice_object.slice_thicknesses_object.thickness_list])
+                slice_object.am_object.add_data(
+                    "POINT { float thickness }",
+                    [[thickness] for thickness in
+                     slice_object.slice_thicknesses_object.thickness_list])
                 slice_object.am_object.write()
                 # slice_object.write_output(slice_object.am_points)
 
@@ -361,16 +397,15 @@ class ExtractThicknessPipeline:
 
 @dask.delayed
 def _parallel_helper(points, image_file_path, xy_resolution, z_resolution,
-                     ray_length_front_to_back_in_micron,
-                     number_of_rays, threshold,
-                     max_seed_correction_radius_in_micron, _3d, image_stack, slice_name):
-    slice_thicknesses_object = th.ThicknessExtractor(points, image_file_path,
-                                                     xy_resolution, z_resolution,
-                                                     ray_length_front_to_back_in_micron,
-                                                     number_of_rays, threshold,
-                                                     max_seed_correction_radius_in_micron, _3d,
-                                                     image_stack, slice_name)
+                     ray_length_front_to_back_in_micron, number_of_rays,
+                     threshold, max_seed_correction_radius_in_micron, _3d,
+                     image_stack, slice_name):
+    slice_thicknesses_object = th.ThicknessExtractor(
+        points, image_file_path, xy_resolution, z_resolution,
+        ray_length_front_to_back_in_micron, number_of_rays, threshold,
+        max_seed_correction_radius_in_micron, _3d, image_stack, slice_name)
 
     return slice_thicknesses_object
+
 
 # _parallel_helper_delayed = dask.delayed(_parallel_helper)

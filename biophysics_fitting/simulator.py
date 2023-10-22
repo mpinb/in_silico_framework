@@ -10,10 +10,12 @@ import single_cell_parser as scp
 from .parameters import param_selector
 import time
 import logging
+
 log = logging.getLogger("ISF").getChild(__name__)
 
 
 class Simulator_Setup:
+
     def __init__(self):
         self.cell_param_generator = None
         self.cell_param_modify_funs = []
@@ -21,57 +23,63 @@ class Simulator_Setup:
         self.cell_modify_funs = []
         self.stim_setup_funs = []
         self.stim_run_funs = []
-        self.stim_response_measure_funs = [] 
-        self.params_modify_funs = []       
+        self.stim_response_measure_funs = []
+        self.params_modify_funs = []
         self.check_funs = []
-    
+
     def check(self):
         if self.cell_param_generator is None:
             raise ValueError('cell_param_generator must be set')
         if self.cell_generator is None:
-            raise ValueError('cell_generator must be set')  
-        self._check_first_element_of_name_is_the_same(self.stim_setup_funs, self.stim_run_funs)
-        self._check_first_element_of_name_is_the_same(self.stim_setup_funs, self.stim_response_measure_funs)
+            raise ValueError('cell_generator must be set')
+        self._check_first_element_of_name_is_the_same(self.stim_setup_funs,
+                                                      self.stim_run_funs)
+        self._check_first_element_of_name_is_the_same(
+            self.stim_setup_funs, self.stim_response_measure_funs)
         for fun in self.check_funs:
             fun()
         #if not len(self.stim_setup_funs) == len(self.stim_result_extraction_fun):
-        #    raise ValueError('run_fun must be set') 
-        
+        #    raise ValueError('run_fun must be set')
+
     def _check_not_none(self, var, varname, procedure_descirption):
         if var is None:
-            raise ValueError('{} is None after execution of {}. '.format(varname, procedure_descirption) + 
+            raise ValueError('{} is None after execution of {}. '.format(
+                varname, procedure_descirption) +
                              'Please check, that the function returns a value!')
-            
+
     def _check_first_element_of_name_is_the_same(self, list1, list2):
         # lists are stim_setup_funs, stim_run_funs, response_measure_fun
-        
+
         # extract names
         names1 = [x[0] for x in list1]
         names2 = [x[0] for x in list2]
-                 
+
         # prefix
         prefix1 = list({x.split('.')[0] for x in names1})
         prefix2 = list({x.split('.')[0] for x in names2})
-        
-        assert(tuple(sorted(prefix1)) == tuple(sorted(prefix2)))
-        
+
+        assert tuple(sorted(prefix1)) == tuple(sorted(prefix2))
+
     def get_stims(self):
         return [x[0].split('.')[0] for x in self.stim_run_funs]
-    
+
     def get_stim_setup_fun_by_stim(self, stim):
         l = [x for x in self.stim_setup_funs if x[0].split('.')[0] == stim]
-        assert(len(l) == 1)
+        assert len(l) == 1
         return l[0]
-    
+
     def get_stim_run_fun_by_stim(self, stim):
         l = [x for x in self.stim_run_funs if x[0].split('.')[0] == stim]
-        assert(len(l) == 1)
-        return l[0]   
-    
+        assert len(l) == 1
+        return l[0]
+
     def get_stim_response_measure_fun(self, stim):
-        l = [x for x in self.stim_response_measure_funs if x[0].split('.')[0] == stim]
-        return l # [0]     
-    
+        l = [
+            x for x in self.stim_response_measure_funs
+            if x[0].split('.')[0] == stim
+        ]
+        return l  # [0]
+
     def get_params(self, params):
         '''returns cell parameters that have been modified by the params_modify_funs.'''
         for name, fun in self.params_modify_funs:
@@ -88,18 +96,19 @@ class Simulator_Setup:
         cell_param = self.cell_param_generator()
         for name, fun in self.cell_param_modify_funs:
             #print name
-            #print len(params), len(param_selector(params, name))            
-            cell_param = fun(cell_param, params = param_selector(params, name))
+            #print len(params), len(param_selector(params, name))
+            cell_param = fun(cell_param, params=param_selector(params, name))
             self._check_not_none(cell_param, 'cell_param', name)
-        return cell_param    
-    
-    def get_cell_params_with_default_sim_prams(self, params, 
-                                               recordingSites = [], 
-                                               tStart = 0.0, 
-                                               tStop = 295, 
-                                               dt = 0.025,
-                                               Vinit = -75.0,
-                                               T = 34.0):
+        return cell_param
+
+    def get_cell_params_with_default_sim_prams(self,
+                                               params,
+                                               recordingSites=[],
+                                               tStart=0.0,
+                                               tStop=295,
+                                               dt=0.025,
+                                               Vinit=-75.0,
+                                               T=34.0):
         '''returns complete neuron parameter object that can be used for further simulations
         i.e. with the simrun module or with roberts scripts.
         
@@ -107,13 +116,21 @@ class Simulator_Setup:
         the Simulator class.
         '''
         NTParameterSet = scp.NTParameterSet
-        sim_param = {'tStart': tStart, 'tStop': tStop, 'dt': dt, 'Vinit': Vinit,
-                     'T': T, 'recordingSites': recordingSites}
+        sim_param = {
+            'tStart': tStart,
+            'tStop': tStop,
+            'dt': dt,
+            'Vinit': Vinit,
+            'T': T,
+            'recordingSites': recordingSites
+        }
         NMODL_mechanisms = {}
-        return NTParameterSet({'neuron': self.get_cell_params(params), 
-                               'sim': sim_param, 
-                               'NMODL_mechanisms': NMODL_mechanisms})
-        
+        return NTParameterSet({
+            'neuron': self.get_cell_params(params),
+            'sim': sim_param,
+            'NMODL_mechanisms': NMODL_mechanisms
+        })
+
     def get(self, params):
         '''Returns a cell with set up biophysics and params. This is the main interface.
         
@@ -125,7 +142,7 @@ class Simulator_Setup:
         cell = self.cell_generator(cell_params)
         for name, fun in self.cell_modify_funs:
             #print len(param_selector(params, name))
-            cell = fun(cell, params = param_selector(params, name))
+            cell = fun(cell, params=param_selector(params, name))
             self._check_not_none(cell, 'cell', name)
         return cell, params
 
@@ -285,6 +302,7 @@ This can be done by using the params_wo_kwargs method in biophysics_fitting.para
 the function as follows:
 s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_setup_function))
 '''
+
     def __init__(self):
         self.setup = Simulator_Setup()
 
@@ -295,12 +313,12 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
         Details, how to set up the Simulator are in the docstring of
         the Simulator class.'''
         t = time.time()
-        # get cell object with biophysics            
-        cell, params = self.setup.get(params) 
+        # get cell object with biophysics
+        cell, params = self.setup.get(params)
         # set up stimulus
         name, fun = self.setup.get_stim_setup_fun_by_stim(stim)
         #print name, param_selector(params, name)
-        fun(cell, params = param_selector(params, name))
+        fun(cell, params=param_selector(params, name))
         # run simulation
         name, fun = self.setup.get_stim_run_fun_by_stim(stim)
         #print name,param_selector(params, name)
@@ -309,8 +327,8 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
             log.info("simulating {} took {} seconds".format(stim, time.time()-t))
         return cell, params
 
-    def run(self, params, stims = None):
-            '''Simulates all stimuli for a given parameter vector.
+    def run(self, params, stims=None):
+        '''Simulates all stimuli for a given parameter vector.
             Returns: Dictionary where stim_response_measure_funs names are keys, 
             return values of the stim_response_measure_funs (usually voltage traces) are values.
             
@@ -319,32 +337,40 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
             Details, how to set up the Simulator are in the docstring of
             the Simulator class.        
             '''
-            if stims is None:
-                stims = self.setup.get_stims()
-            if isinstance(stims, str):
-                stims = [stims]
-            self.setup.check()
-            out = {}            
-            for stim in stims:
-                cell, params = self.get_simulated_cell(params, stim)
-                # extract result
-                for name, fun in self.setup.get_stim_response_measure_fun(stim):
-                    result = fun(cell, params = param_selector(params, name))
-                    out.update({name: result})
-                del cell
-            return out
+        if stims is None:
+            stims = self.setup.get_stims()
+        if isinstance(stims, str):
+            stims = [stims]
+        self.setup.check()
+        out = {}
+        for stim in stims:
+            cell, params = self.get_simulated_cell(params, stim)
+            # extract result
+            for name, fun in self.setup.get_stim_response_measure_fun(stim):
+                result = fun(cell, params=param_selector(params, name))
+                out.update({name: result})
+            del cell
+        return out
+
 
 def run_fun(cell,
-            T = 34.0, Vinit = -75.0, dt = 0.025, 
-            recordingSites = [], tStart = 0.0, tStop = 250.0, 
-            vardt = True, silent = True):
+            T=34.0,
+            Vinit=-75.0,
+            dt=0.025,
+            recordingSites=[],
+            tStart=0.0,
+            tStop=250.0,
+            vardt=True,
+            silent=True):
     '''Default function to run a simulation'''
     from sumatra.parameters import NTParameterSet
-    sim = {'T': T,
-           'Vinit': Vinit,
-           'dt': dt,
-           'recordingSites': recordingSites,
-           'tStart': tStart,
-           'tStop': tStop}    
-    scp.init_neuron_run(NTParameterSet(sim), vardt = vardt)
+    sim = {
+        'T': T,
+        'Vinit': Vinit,
+        'dt': dt,
+        'recordingSites': recordingSites,
+        'tStart': tStart,
+        'tStop': tStop
+    }
+    scp.init_neuron_run(NTParameterSet(sim), vardt=vardt)
     return cell

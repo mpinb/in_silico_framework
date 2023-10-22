@@ -14,14 +14,15 @@ from numpy.testing import assert_array_equal
 import distributed
 import tempfile
 
+
 def robust_del_fun(mdb, key):
     try:
         del mdb[key]
     except KeyError:
         pass
-        
 
-def real_data_generic(mdb_, dumper_, client_= None):
+
+def real_data_generic(mdb_, dumper_, client_=None):
     """Helper method for further tests
     Does not ask for any fixtures
 
@@ -31,29 +32,41 @@ def real_data_generic(mdb_, dumper_, client_= None):
         client_ (distributed.Client, optional): client object. Defaults to None.
     """
     if client_ is None:
-        mdb_.setitem('voltage_traces2', mdb_['voltage_traces'], dumper = dumper_)
+        mdb_.setitem('voltage_traces2', mdb_['voltage_traces'], dumper=dumper_)
     else:
-        mdb_.setitem('voltage_traces2', mdb_['voltage_traces'], dumper = dumper_, client = client_)
+        mdb_.setitem('voltage_traces2',
+                     mdb_['voltage_traces'],
+                     dumper=dumper_,
+                     client=client_)
     dummy = mdb_['voltage_traces2']
-    b = mdb_['voltage_traces'].compute(get = dask.multiprocessing.get)
-    a = dummy.compute(get = dask.multiprocessing.get)
-    assert_frame_equal(a, b)   
-    
+    b = mdb_['voltage_traces'].compute(get=dask.multiprocessing.get)
+    a = dummy.compute(get=dask.multiprocessing.get)
+    assert_frame_equal(a, b)
+
     if client_ is None:
-        mdb_.setitem('synapse_activation2', mdb_['synapse_activation'], dumper = dumper_)
+        mdb_.setitem('synapse_activation2',
+                     mdb_['synapse_activation'],
+                     dumper=dumper_)
     else:
-        mdb_.setitem('synapse_activation2', mdb_['synapse_activation'], dumper = dumper_, client = client_)
+        mdb_.setitem('synapse_activation2',
+                     mdb_['synapse_activation'],
+                     dumper=dumper_,
+                     client=client_)
     dummy = mdb_['synapse_activation2']
-    b = mdb_['synapse_activation'].compute(get = dask.multiprocessing.get)
-    a = dummy.compute(get = dask.multiprocessing.get)
-    assert_frame_equal(a, b)        
+    b = mdb_['synapse_activation'].compute(get=dask.multiprocessing.get)
+    a = dummy.compute(get=dask.multiprocessing.get)
+    assert_frame_equal(a, b)
+
 
 def test_dask_to_csv_real_data(fresh_mdb):
     real_data_generic(mdb_=fresh_mdb, dumper_=dask_to_csv, client_=None)
 
+
 def test_dask_to_categorized_msgpack_real_data(client, fresh_mdb):
-    real_data_generic(mdb_=fresh_mdb, dumper_=dask_to_categorized_msgpack, client_=client)        
+    real_data_generic(mdb_=fresh_mdb,
+                      dumper_=dask_to_categorized_msgpack,
+                      client_=client)
+
 
 def test_dask_to_msgpack_real_data(client, fresh_mdb):
     real_data_generic(mdb_=fresh_mdb, dumper_=dask_to_msgpack, client_=client)
-    

@@ -3,21 +3,14 @@ import time
 
 from scipy.spatial import ConvexHull
 
-
 # importing modules from folders:
 # radii/radii/tranfromTools
 # radii/radii/radii
 import transformTools as tr
 import radii as radi
 
-
-
 import Interface as I
 from getting_started import getting_started_dir
-
-
-
-
 
 # Creating varianles for the address of hoc, am_final, and hoc-output Folders
 hocDataPath = str('radii/data/neuron2/hoc/')
@@ -25,10 +18,11 @@ amDataPath = str('radii/data/neuron2/am_final/')
 outputFolderPath = str('radii/data/neuron2/output/')
 
 # Adding the name of files to their folder path and assing them to variables
-hocFile = I.os.path.join(getting_started_dir, hocDataPath,"504_GP_WR662_cell_1171_PoM_checked_RE.hoc")
-hocFileOutput = I.os.path.join(getting_started_dir,outputFolderPath,"504_hocFileWithRad.hoc")
-amFile = I.os.path.join(getting_started_dir,  amDataPath,'504_rad_merged.am')
-
+hocFile = I.os.path.join(getting_started_dir, hocDataPath,
+                         "504_GP_WR662_cell_1171_PoM_checked_RE.hoc")
+hocFileOutput = I.os.path.join(getting_started_dir, outputFolderPath,
+                               "504_hocFileWithRad.hoc")
+amFile = I.os.path.join(getting_started_dir, amDataPath, '504_rad_merged.am')
 
 # extract set1 points:
 # Read the hoc points (reduced), then removing their radius from them
@@ -38,12 +32,10 @@ hocSet = []
 for el in pointsWithRadius:
     hocSet.append([el[0], el[1], el[2]])
 
-
 # extract set2 points:
 # read the spacial Graph points
 points = radi.spacialGraph.getSpatialGraphPoints(amFile)
 amSet = points
-
 
 # -- Bellow (commented) there is a test for looking at the convecHall points in a landmark file
 # trMatrix = tr.exTrMatrix.read(amFile)
@@ -61,7 +53,6 @@ amSet = points
 # with open(conFile, 'w') as f:
 #     for item in set2:
 #         f.write('{:f}\t{:f}\t{:f} \n'.format(item[0], item[1], item[2]))
-
 
 # In this section we are finding the longest matched edges from set1 and set2:
 
@@ -103,7 +94,6 @@ trMatrix2 = tr.exTrMatrix.getTransformation(dst_am, src_hoc)
 # again but this time also we read their correspoinding radii
 amPoints4D = tr.read.amFile(amFile)
 
-
 # Now after getting the initial am points with their radius we will apply the
 # transformation matrix on them
 print("Applying the transofrmation matrix to the initial am points")
@@ -113,12 +103,11 @@ for point4D in amPoints4D:
     mPoint = np.matrix(point)
     mTrPoint = mPoint.T
 
-    p = trMatrix2*np.matrix(np.vstack((mTrPoint, 1.0)))
+    p = trMatrix2 * np.matrix(np.vstack((mTrPoint, 1.0)))
     p = np.array(p.T)
     p_listed = p.tolist()[0]
     # raw_input("somet")
     trAmPoints4D.append([p_listed[0], p_listed[1], p_listed[2], point4D[3]])
-
 
 # it is small test to see if the amFileReader is working well enough or not
 # for this we check some sample points from the both am readers function
@@ -161,8 +150,6 @@ print((amPoints4D[100]))
 print((trAmPoints4DList[10]))
 print((amPoints4D[10]))
 
-
-
 print((trAmPoints4DList[1293]))
 print((amPoints4D[1293]))
 
@@ -173,7 +160,6 @@ print((amPoints4D[1293]))
 # pairs = radi.addRadii.findPairs(trAmPoints4DList, hocSet)
 # endTime = time.time()
 # print(endTime - startTime)
-
 
 # Little Test of the function above
 
@@ -196,8 +182,6 @@ print((amPoints4D[1293]))
 # initialAmPointsWithRad = tr.read.amFile(amFile)
 # initialAmPointsWithRad2 = radi.spacialGraph.getSpatialGraphPoints(amFile)
 
-
-
 # Little Test of the reading functions again
 # print(initialAmPointsWithRad[0])
 # print(initialAmPointsWithRad2[0])
@@ -215,7 +199,6 @@ print((amPoints4D[1293]))
 # hocWithRad = []
 # newHPoint = []
 
-
 # In the below codes, we are adding radii to corresponding hoc point,
 # based on the pairs that we found from the above codes
 # print("adding radii to corresponding hoc point, based on the pairs")
@@ -230,29 +213,27 @@ print((amPoints4D[1293]))
 # testTrAmPoints4D = I.os.path.join(getting_started_dir, outTestFolder, trAmPoints4DFile)
 # testAmPoints4D = I.os.path.join(getting_started_dir, outTestFolder, amPoints4DFile)
 
-
 # with open(testPairs, 'w') as f:
-    # for pai in pairs:
-        # f.write('[[{:f},{:f},{:f},{:f}],\t[{:f},{:f},{:f}]] \n'.format(pai[0][0],pai[0][1],pai[0][2],pai[0][3], pai[1][0], pai[1][1], pai[1][2]))
+# for pai in pairs:
+# f.write('[[{:f},{:f},{:f},{:f}],\t[{:f},{:f},{:f}]] \n'.format(pai[0][0],pai[0][1],pai[0][2],pai[0][3], pai[1][0], pai[1][1], pai[1][2]))
 
 # with open(testTrAmPoints4D, 'w') as f:
-    # for tp in trAmPoints4DList:
-        # f.write('[{:f},{:f},{:f},{:f}] \n'.format(tp[0],tp[1],tp[2],tp[3]))
+# for tp in trAmPoints4DList:
+# f.write('[{:f},{:f},{:f},{:f}] \n'.format(tp[0],tp[1],tp[2],tp[3]))
 
 # with open(testAmPoints4D, 'w') as f:
-    # for ap in amPoints4D:
-        # f.write('[{:f},{:f},{:f},{:f}] \n'.format(ap[0],ap[1],ap[2],ap[3]))
+# for ap in amPoints4D:
+# f.write('[{:f},{:f},{:f},{:f}] \n'.format(ap[0],ap[1],ap[2],ap[3]))
 
 # for pair in pairs:
-    # newHPoint = pair[1]
-    # dual = pair[0]
-    # newHPoint.append(dual[3])
-    # hocWithRad.append(newHPoint)
-    # newHPoint = []
+# newHPoint = pair[1]
+# dual = pair[0]
+# newHPoint.append(dual[3])
+# hocWithRad.append(newHPoint)
+# newHPoint = []
 
 # endTime = time.time()
 # print(endTime - startTime)
-
 
 # test between to different hoc file arrays derived from above functions
 # print(hocSet[0])
@@ -285,17 +266,19 @@ with open(egHocFile, 'w') as f:
     for item in matchedSet:
         startPoint = item[0].start
         endPoint = item[0].end
-        f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1], startPoint[2]))
-        f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1], endPoint[2]))
-
+        f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1],
+                                             startPoint[2]))
+        f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1],
+                                             endPoint[2]))
 
 with open(egAmFile, 'w') as f:
     for item in matchedSet:
         startPoint = item[1].start
         endPoint = item[1].end
-        f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1], startPoint[2]))
-        f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1], endPoint[2]))
-
+        f.write('{:f}\t{:f}\t{:f} \n'.format(startPoint[0], startPoint[1],
+                                             startPoint[2]))
+        f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1],
+                                             endPoint[2]))
 
 amTrFile = '/home/amir/Projects/in_silico_framework/getting_started/radii/data/neuron2/amTransformed2.txt'
 with open(amTrFile, 'w') as f:
