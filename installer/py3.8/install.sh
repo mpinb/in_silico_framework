@@ -92,7 +92,7 @@ if [[ "${download_conda_flag}" == "false" && "${download_conda_packages_flag}" =
 fi
 
 # -------------------- 1. Installing Anaconda -------------------- #
-print_title "1/6. Installing Anaconda"
+print_title "1/5. Installing Anaconda"
 # 1.0 -- Downloading Anaconda (if necessary).
 if [[ "${download_conda_flag}" == "true" ]]; then
     echo "Downloading ${anaconda_installer}"
@@ -111,7 +111,7 @@ echo $(which python)
 echo $(python --version)
 
 # -------------------- 2. Installing conda dependencies -------------------- #
-print_title "2/6. Installing conda dependencies "
+print_title "2/5. Installing conda dependencies "
 # 2.0 -- Downloading In-Silico-Framework conda dependencies (if necessary).
 if [ "${download_conda_packages_flag}" == "true" ]; then
     # Get all lines starting with http (not #http), return empty string if there are none
@@ -130,7 +130,7 @@ sed "s|https://.*/|$SCRIPT_DIR/downloads/conda_packages/|" $SCRIPT_DIR/conda_req
 conda update --file $SCRIPT_DIR/tempfile --quiet
 
 # -------------------- 3. Installing PyPI dependencies -------------------- #
-print_title "3/6. Installing PyPI dependencies"
+print_title "3/5. Installing PyPI dependencies"
 # 3.0 -- Downloading In-Silico-Framework pip dependencies (if necessary).
 if [ "${download_pip_packages_flag}" == "true" ]; then
     echo "Downloading In-Silico-Framework pip dependencies."
@@ -141,13 +141,8 @@ fi
 echo "Installing In-Silico-Framework pip dependencies."
 python -m pip --no-cache-dir install --no-deps -r $SCRIPT_DIR/pip_requirements.txt --no-index --find-links $SCRIPT_DIR/downloads/pip_packages
 
-# -------------------- 4. Patching dask library -------------------- #
-print_title "4/6. Patching dask library"
-python $SCRIPT_DIR/patch_dask_linux64.py
-echo "Dask library patched."
-
 # -------------------- 5. Patching pandas-msgpack -------------------- #
-print_title "5/6. Installing & patching pandas-msgpack"
+print_title "4/5. Installing & patching pandas-msgpack"
 PD_MSGPACK_HOME="$SCRIPT_DIR/pandas-msgpack"
 if [ ! -d "${PD_MSGPACK_HOME}" ]; then
     cd $SCRIPT_DIR
@@ -159,7 +154,7 @@ cd $PD_MSGPACK_HOME; python setup.py build_ext --inplace --force install
 pip list | grep pandas
 
 # -------------------- 6. Compiling NEURON mechanisms -------------------- #
-print_title "6/6. Compiling NEURON mechanisms"
+print_title "5/5. Compiling NEURON mechanisms"
 echo "Compiling NEURON mechanisms."
 cd $channels; nrnivmodl
 cd $netcon; nrnivmodl
