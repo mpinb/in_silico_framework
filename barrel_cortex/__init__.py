@@ -42,6 +42,13 @@ color_cellTypeColorMap_L6paper_with_INH = {'L2': '#119fe4', 'L34': '#0037fe', 'L
                     'L4sp': '#66b56d', 'L4ss': '#66b56d', 'L5st': '#ffec00', 'L5tt': 'orange',\
                     'L6cc': '#ef9f9e', 'L6ccinv': '#e30210', 'L6ct': '#9933fe', 'VPM': '#1d1d1a', 'INH': '#d8d8d8'}
 
+def synapse_group_function_L6paper(celltype):
+    celltype = celltype.split('_')[0]
+    if celltype in inhibitory:
+        return 'INH'
+    else:
+        return celltype
+
 color_cellTypeColorMapHotZone = {
     'L23': '#27aae2',
     'L4ss': '#9e1f64',
@@ -51,6 +58,29 @@ color_cellTypeColorMapHotZone = {
     'VPM': '#019444',
     'INT': '#999999'
 }
+
+def synapse_group_function_HZpaper(celltype):
+    if '_' in celltype:
+        celltype = celltype.split('_')[0]
+    if celltype in inhibitory or celltype == 'INH':
+        key = 'INT'
+    elif celltype in ('L4ss', 'L4py', 'L4sp'):
+        key = 'L4ss'
+    elif celltype == 'L5st':
+        key = 'L5st'
+    elif celltype == 'L5tt':
+        key = 'L5tt'
+    elif celltype == 'L6cc':
+        key = 'L6CC'
+    elif celltype == 'VPM':
+        key = 'VPM'
+    elif celltype in ('L2', 'L34'):
+        key = 'L23'
+    elif celltype in ('L6ct', 'L6ccinv'):
+        key = 'inactive'
+    else:
+        raise ValueError(celltype)
+    return key
 
 excitatory = [
     'L6cc', 'L2', 'VPM', 'L4py', 'L4ss', 'L4sp', 'L5st', 'L6ct', 'L34',
