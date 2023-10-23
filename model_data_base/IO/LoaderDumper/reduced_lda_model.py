@@ -63,7 +63,7 @@ def dump(obj, savedir):
     try:
         mdb.setitem('st',
                     Rm.st.round(decimals=2).astype('f2').reset_index(drop=True),
-                    dumper=dumper_pandas_to_parquet)
+                    dumper=pandas_to_parquet)
         del Rm.st
         del Rm.lda_values  # can be recalculated
         lv = 0
