@@ -28,7 +28,7 @@ class TestDumperSmall:
         # initialization routine does not throw an error.
         self.path = tempfile.mkdtemp()
         self.mdb = ModelDataBase(self.path)
-        self.pdf = pd.DataFrame({0: [1,2,3,4,5,6], 1: ['1', '2', '3', '1', '2', '3'], '2': [1, '2', 3, 1, '2', 3], \
+        self.pdf = pd.DataFrame({0: [1,2,3,4,5,6], 1: ['1', '2', '3', '1', '2', '3'], '2': [False, True, True, False, True, False], \
                                  'myname': ['bla', 'bla', 'bla', 'bla', 'bla', 'bla']})
         self.ddf = dd.from_pandas(self.pdf, npartitions=2)
         #for to_csv methods, since it cannot provide support for mixed dtypes

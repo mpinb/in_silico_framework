@@ -20,6 +20,7 @@ class Loader(parent_classes.Loader):
 
 
 def dump(obj, savedir):
-    obj.astype(str).to_parquet(os.path.join(savedir, 'pandas_to_parquet.parquet'))
+    obj.columns = obj.columns.astype(str)
+    obj.to_parquet(os.path.join(savedir, 'pandas_to_parquet.parquet'))
     compatibility.cloudpickle_fun(Loader(),
                                   os.path.join(savedir, 'Loader.pickle'))
