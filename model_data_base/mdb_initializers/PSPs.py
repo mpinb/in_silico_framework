@@ -1,7 +1,7 @@
 import os
 import single_cell_parser as scp
 from model_data_base.mdbopen import create_mdb_path, resolve_mdb_path
-from model_data_base.IO.LoaderDumper import pandas_to_msgpack
+from model_data_base.IO.LoaderDumper import pandas_to_parquet
 
 
 def get_confile_form_network_param(n):
@@ -75,7 +75,7 @@ def init(mdb,
     pspmdb.setitem(
         'parameterfiles',
         get_parameterfiles_df_with_confile_and_neuron_param_path(mdb),
-        dumper=pandas_to_msgpack)
+        dumper=pandas_to_parquet)
     psps_out = []
     keys_out = []
     for index, row in pdf.iterrows():

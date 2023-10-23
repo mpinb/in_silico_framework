@@ -17,7 +17,7 @@ import os, cloudpickle
 from simrun2.reduced_model.get_kernel import ReducedLdaModel
 from model_data_base.model_data_base import ModelDataBase
 from model_data_base.model_data_base_register import get_mdb_by_unique_id
-from . import pandas_to_msgpack
+from . import pandas_to_parquet
 from . import numpy_to_npz
 import pandas as pd
 import compatibility
@@ -63,7 +63,7 @@ def dump(obj, savedir):
     try:
         mdb.setitem('st',
                     Rm.st.round(decimals=2).astype('f2').reset_index(drop=True),
-                    dumper=pandas_to_msgpack)
+                    dumper=dumper_pandas_to_parquet)
         del Rm.st
         del Rm.lda_values  # can be recalculated
         lv = 0

@@ -12,7 +12,7 @@ import dask
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 from model_data_base import utils, ModelDataBase
-from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack, pandas_to_pickle, to_cloudpickle, to_pickle, pandas_to_msgpack
+from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack, pandas_to_pickle, to_cloudpickle, to_pickle, pandas_to_parquet
 from model_data_base.model_data_base import get_progress_bar_function,\
     MdbException
 from model_data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format as read_sa
@@ -503,7 +503,7 @@ def _build_core(mdb, repartition=None):
     mdb['sim_trail_index'] = mdb['voltage_traces'].index.compute()
 
     print('generate metadata ...')
-    mdb.setitem('metadata', create_metadata(mdb), dumper=pandas_to_msgpack)
+    mdb.setitem('metadata', create_metadata(mdb), dumper=pandas_to_parquet)
 
     print('add divisions to voltage traces dataframe')
     vt.divisions = get_voltage_traces_divisions_by_metadata(
@@ -704,7 +704,7 @@ def init(mdb, simresult_path,  \
         vt = mdb['voltage_traces']
         mdb.setitem('spike_times',
                     spike_detection(vt),
-                    dumper=pandas_to_msgpack)
+                    dumper=pandas_to_parquet)
     print('Initialization succesful.')
 
 
@@ -733,13 +733,13 @@ def add_dendritic_spike_times(mdb, dendritic_spike_times_threshold=-30.):
         st = spike_detection(vt, threshold=dendritic_spike_times_threshold)
         m.setitem(kk + '_' + str(dendritic_spike_times_threshold),
                   st,
-                  dumper=pandas_to_msgpack)
+                  dumper=pandas_to_parquet)
 
 
 def _get_dumper(value):
     '''tries to automativcally infer the best dumper for each table'''
     if isinstance(value, pd.DataFrame):
-        return pandas_to_msgpack
+        return pandas_to_parquet
     elif isinstance(value, dd.DataFrame):
         return dask_to_categorized_msgpack
     else:
