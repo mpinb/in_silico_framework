@@ -6,7 +6,7 @@ from pandas.util.testing import assert_frame_equal
 import dask.dataframe as dd
 import pandas as pd
 import dask
-from  model_data_base.IO.LoaderDumper import dask_to_csv, numpy_to_npy, pandas_to_parquet, \
+from  model_data_base.IO.LoaderDumper import dask_to_csv, numpy_to_npy, pandas_to_parquet, dask_to_parquet, \
                                 pandas_to_msgpack, to_pickle, pandas_to_pickle, dask_to_msgpack, \
                                 dask_to_categorized_msgpack, to_cloudpickle, reduced_lda_model
 from tests.test_simrun2.reduced_model.get_kernel_test import get_test_Rm
@@ -57,6 +57,7 @@ class TestDumperSmall:
         a = dask.compute(dummy)[0].reset_index(drop=True)
         b = pdf.reset_index(drop=True)
         assert_frame_equal(a, b)
+        
         #sorted index set
         self.clean_up()
         if client is None:
@@ -91,6 +92,9 @@ class TestDumperSmall:
 
     def test_pandas_to_parquet_small(self):
         self.data_frame_generic_small(self.pdf, self.pdf, pandas_to_parquet)
+
+    def test_dask_to_parquet_small(self, client):
+        self.data_frame_generic_small(self.pdf, self.ddf, dask_to_parquet, client=client)
     
     def test_pandas_to_pickle_small(self):
         self.data_frame_generic_small(self.pdf, self.pdf, pandas_to_pickle)
