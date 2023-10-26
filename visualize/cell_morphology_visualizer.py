@@ -591,10 +591,10 @@ class CellMorphologyVisualizer(CMVDataParser):
 
         # Add legends
         if self.synapse_legend:
-            for key in POPULATION_TO_COLOR_DICT.keys():
+            for key in self.population_to_color_dict.keys():
                 if key != 'inactive':
                     ax.scatter3D([], [], [],
-                                 color=POPULATION_TO_COLOR_DICT[key],
+                                 color=self.population_to_color_dict[key],
                                  label=key,
                                  edgecolor='grey',
                                  s=75)
@@ -683,7 +683,7 @@ class CellMorphologyVisualizer(CMVDataParser):
                     synapses=synapses,
                     time_point=time_point,
                     save=filename,
-                    population_to_color_dict=POPULATION_TO_COLOR_DICT,
+                    population_to_color_dict=self.population_to_color_dict,
                     azim=self.azim,
                     dist=self.dist,
                     roll=self.roll,
