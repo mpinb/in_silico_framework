@@ -68,7 +68,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/conda_packages)" ]; then
     echo "No conda packages found in downloads/conda_packages. They will be downloaded."
     download_conda_packages_flag="true"
 else
-    echo "Found conda packages in downloads/conda_packages. They will not be redownloaded"
+    echo "Warning: found conda packages in downloads/conda_packages. They will not be redownloaded. If you have changed the conda_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_conda_packages_flag="false"
 fi
 
@@ -81,7 +81,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/pip_packages)" ]; then
     echo "No PyPI packages found in downloads/pip_packages. They will be downloaded."
     download_pip_packages_flag="true"
 else
-    echo "Found PyPI packages in downloads/pip_packages. They will not be redownloaded."
+    echo "Warning: found PyPI packages in downloads/pip_packages. They will not be redownloaded. If you have changed the pip_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_pip_packages_flag="false"
 fi
 

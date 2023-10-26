@@ -101,3 +101,4 @@ installer/py*/downloads/**
 
 SLURM_scripts/user_settings
 test.log
+installer/py*.*/downloads/**
