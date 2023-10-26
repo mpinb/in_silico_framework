@@ -3,12 +3,12 @@
 # even before pytest discovery
 # useful to setup whatever needs to be done before the actual testing or test discovery, such as the distributed.client_object_duck_typed
 # for setting environment variables, use pytest.ini or .env instead
-import os, shutil, logging, socket, pytest, tempfile, distributed, model_data_base, dask, six
+import os, shutil, logging, socket, pytest, tempfile, distributed, model_data_base, dask, six, getting_started, Interface  # Interface just to check if setup works. is in essence already a test
 from model_data_base.mdb_initializers.load_simrun_general import init
 from model_data_base.utils import silence_stdout
-import Interface as I
+import pandas as pd
+import dask.dataframe as dd
 from Interface import get_client, isf_logger, isf_logger_stream_handler
-import getting_started
 
 log = logging.getLogger("ISF").getChild(__name__)
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
