@@ -15,6 +15,8 @@ interactive="0"
 notebook=""
 notebook_kwargs=""
 
+PYTHON_EXECUTABLE="$(which python)"
+
 help() {
   cat <<EOF
     Usage: $0 [options] {job name}
@@ -260,7 +262,7 @@ if [ ! -z "$tpn" ]; then
 fi
 
 ################### Normal submission (batch or interactive job) ###################
-run_str="srun -n1 -N$nodes -c$cores python -u \$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/setup_SLURM.py \$MYBASEDIR/management_dir_$name"
+run_str="srun -n1 -N$nodes -c$cores $PYTHON_EXECUTABLE -u \$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/setup_SLURM.py \$MYBASEDIR/management_dir_$name"
 if [ $interactive == "1" ]; then
   run_str=$run_str" --launch_jupyter_server"
 fi
