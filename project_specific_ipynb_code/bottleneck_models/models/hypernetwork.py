@@ -164,7 +164,7 @@ def forward_biopysics(self, BIOPHYSICS_DENDRITIC_LOCATION):
     weights = self.weights_output_layer_(out)
     return weights
         
-def show(savepath = None, model = None, model_kwargs = None, params = 0):
+def show(savepath = None, model = None, model_kwargs = None, params = 0, title = None):
     import Interface as I
     sorted_index = [0, 61, 1, 32, 91, 230, 10, 48, 79, 33, 62, 2, 92, 104, 11, 22, 40, 63, 76, 231, 
                     34, 234, 64, 12, 56, 71, 3, 49, 20, 23, 45, 88, 6, 27, 41, 80, 93, 16, 68, 77, 
@@ -186,7 +186,6 @@ def show(savepath = None, model = None, model_kwargs = None, params = 0):
     temporal_window_width = model.temporal_window_width
     model.bottleneck_size = 1
     # n_spatial_bins = 238 # new dataset
-    epoch = '1'
     # visualize the Linear1Model
     # weights = model.state_dict()['module.linear1.weight'].data.cpu().detach().numpy()
     # # visualize the Hypernetwork
@@ -211,9 +210,10 @@ def show(savepath = None, model = None, model_kwargs = None, params = 0):
         weights_for_fig = I.np.concatenate([I.np.transpose(weights1[0]), I.np.transpose(weights1[1])], axis = 0)
         im = axes[lv,0].imshow(weights_for_fig, vmin = -scaling, vmax = scaling, cmap='seismic', interpolation = 'none')
         fig.colorbar(im, cax = axes[lv,1]) 
-        title = 'epoch_{}_batch_{}'.format(epoch, 'nan')
         axes[lv,0].set_title(title)
     if savepath:
         fig.savefig(I.os.path.join(savepath, title+'.png'))
+        with open(I.os.path.join(savepath, title+'.pickle'), 'wb') as f:
+            I.cloudpickle.dump(model_new, f)
     I.plt.show()
     I.plt.close()
