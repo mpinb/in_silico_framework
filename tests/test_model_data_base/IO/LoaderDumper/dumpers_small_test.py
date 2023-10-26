@@ -103,7 +103,7 @@ def test_numpy_to_npy(fresh_mdb, pdf):
     fun(np.random.randint(5, size=(100,)))
     fun(np.array([]))
 
-def test_reduced_lda_model(fresh_mdb, pdf, fresh_mdb):
+def test_reduced_lda_model(fresh_mdb):
         Rm = get_test_Rm(fresh_mdb)
         # does not change the original object
         st = Rm.st
