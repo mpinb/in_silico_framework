@@ -74,11 +74,11 @@ def test_dask_to_categorized_msgpack_small(fresh_mdb, pdf, ddf, client):
 def test_pandas_to_msgpack_small(fresh_mdb, pdf):
     data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), pandas_to_msgpack)
 
-@pytest.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
+@pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_pandas_to_parquet_small(fresh_mdb, pdf):
     data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), pandas_to_parquet)
 
-@pytest.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
+@pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_dask_to_parquet_small(fresh_mdb, pdf, ddf, client):
     data_frame_generic_small(fresh_mdb, pdf, ddf, dask_to_parquet, client=client)
 
