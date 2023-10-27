@@ -45,6 +45,8 @@ class Loader(parent_classes.Loader):
         if os.path.exists(os.path.join(savedir, 'divisions.json')):
             with open(os.path.join(savedir, 'divisions.json')) as f:
                 divisions = json.load(f)
+                if isinstance(divisions, list):
+                    divisions = tuple(divisions)  # for py3.9
                 ddf.divisions = divisions
                 print('load dask dataframe with known divisions')
         return ddf
@@ -69,8 +71,6 @@ def dump(obj, savedir, schema=None, client=None):
     client.gather(futures)
     
     if obj.divisions is not None:
-        if isinstance(obj.divisions, list):
-            obj.divisions = tuple(obj.divisions)  # for py3.9
         with open(os.path.join(savedir, 'divisions.json'), 'w') as f:
             json.dump(obj.divisions, f)
 
