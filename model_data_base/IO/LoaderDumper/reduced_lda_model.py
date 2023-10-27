@@ -21,6 +21,7 @@ from . import pandas_to_parquet, pandas_to_msgpack
 from . import numpy_to_npz
 import pandas as pd
 import compatibility
+import six
 
 
 def check(obj):
