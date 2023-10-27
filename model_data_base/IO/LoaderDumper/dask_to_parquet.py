@@ -55,7 +55,7 @@ def dump(obj, savedir, schema=None, client=None):
         index_name = obj.index.name
 
     # convert to string
-    obj = df_colnames_to_str(df)  # overrides original object
+    obj = df_colnames_to_str(obj)  # overrides original object
     delayeds = obj.to_delayed()
 
     # save object
