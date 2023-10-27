@@ -77,5 +77,5 @@ def dump(obj, savedir, schema=None, client=None):
 
     # reset original colnames
     obj.columns = columns
-    if df.index.name is not None:
-        df.index.name = index_name
+    if obj.index.name is not None:
+        obj.index.name = index_name
