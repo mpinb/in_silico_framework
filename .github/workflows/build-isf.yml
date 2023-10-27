@@ -31,6 +31,7 @@ jobs:
       id: commit_changed
       with:
         list-files: shell
+        base: HEAD
         filters: |
           trigger_rebuild:
             - "installer/py${{ inputs.py_version }}/**"
