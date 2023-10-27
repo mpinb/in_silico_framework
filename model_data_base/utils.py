@@ -401,7 +401,7 @@ def df_colnames_to_str(df):
     Returns:
         df (pd.DataFrame | dask.DataFrame): the same dataframe, but with string type column and index names.
     """
-    if not all([type(e) == str for e in df.columns])
+    if not all([type(e) == str for e in df.columns]):
         log.warning("Converting the following column names to string for saving with parquet: {}".format(df.columns))
         df.columns = df.columns.astype(str)
     if df.index.name is not None:
