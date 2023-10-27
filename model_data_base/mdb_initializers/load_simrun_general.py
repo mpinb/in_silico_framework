@@ -479,7 +479,7 @@ def write_param_files_to_folder(df,
 ###########################################################################################
 # Build database using the helper functions above
 ###########################################################################################
-def _build_core(mdb, repartition=None):
+def _build_core(mdb, repartition=None, metadata_dumper=pandas_to_parquet):
     assert repartition is not None
     print('---building data base core---')
 
@@ -503,7 +503,7 @@ def _build_core(mdb, repartition=None):
     mdb['sim_trail_index'] = mdb['voltage_traces'].index.compute()
 
     print('generate metadata ...')
-    mdb.setitem('metadata', create_metadata(mdb), dumper=pandas_to_parquet)
+    mdb.setitem('metadata', create_metadata(mdb), dumper=metadata_dumper)
 
     print('add divisions to voltage traces dataframe')
     vt.divisions = get_voltage_traces_divisions_by_metadata(
@@ -675,7 +675,7 @@ def init(mdb, simresult_path,  \
 #with get_progress_bar_function()():
     mdb['simresult_path'] = simresult_path
     if core:
-        _build_core(mdb, repartition=repartition)
+        _build_core(mdb, repartition=repartition, metadata_dumper=dumper)
         if rewrite_in_optimized_format:
             optimize(mdb,
                      select=['voltage_traces'],
