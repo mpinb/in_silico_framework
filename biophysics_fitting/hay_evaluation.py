@@ -53,7 +53,7 @@ def setup_hay_evaluator(testing=False):
     central_file_name = 'fit_config_89_CDK20050712_BAC_step_arco_run1.hoc'
 
     with StreamToLogger(
-            logger 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             neuron.h.central_file_name
             if not neuron.h.central_file_name == central_file_name:
