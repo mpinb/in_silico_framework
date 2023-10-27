@@ -6,9 +6,6 @@ import dask
 import json
 from . import parent_classes
 from model_data_base.utils import df_colnames_to_str
-import logging
-logger = logging.getLogger("ISF").getChild(__name__)
-
 
 def check(obj):
     '''checks wherther obj can be saved with this dumper'''
@@ -25,12 +22,20 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 
 @dask.delayed
 def save_helper(savedir, df, n_partitions, partition):
-    # convert column names and index names to str
+    # save original columns and index name
+    columns = df.columns
+    if df.index.name is not None:
+        index_name = df.index.name
+    # convert to string
     df = df_colnames_to_str(df)  # overrides original object
-    return df.to_parquet(
+    yield df.to_parquet(
         os.path.join(
             savedir,
             'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)))
+    # reset original colnames
+    df.columns = columns
+    if df.index.name is not None:
+        df.index.name = index_name
 
 
 class Loader(parent_classes.Loader):

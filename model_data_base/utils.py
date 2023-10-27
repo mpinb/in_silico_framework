@@ -12,6 +12,8 @@ import numpy as np
 import distributed
 import six
 from six.moves import cPickle
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def chunkIt(seq, num):
