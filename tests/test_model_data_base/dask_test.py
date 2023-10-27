@@ -39,3 +39,6 @@ def test_join_operation_of_dask():
 
     assert_frame_equal(pandas_join.sort_index(axis=1), dask_from_delayed_join.compute().sort_index(axis=1))
     assert_frame_equal(pandas_join.sort_index(axis=1), dask_from_pandas_join.compute().sort_index(axis=1))
+
+def test_divisions(ddf):
+    assert ddf.divisions[0] is not None
