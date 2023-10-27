@@ -11,6 +11,7 @@ import dask.dataframe as dd
 from Interface import get_client
 from Interface import logger as isf_logger
 from Interface import logger_stream_handler as isf_logger_stream_handler
+from model_data_base.IO.LoaderDumper import pandas_to_msgpack
 
 logger = logging.getLogger("ISF").getChild(__name__)
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -183,6 +184,7 @@ if six.PY3:  # pytest can be parallellized on py3: use unique ids for mdbs
 
 elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
 
+    # Py2 needs msgpack dumper, as parquet was not yet implemented for pandas DataFrames
     @pytest.yield_fixture
     def fresh_mdb():
         """Pytest fixture for a ModelDataBase object with a unique temp path.
@@ -210,7 +212,8 @@ elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers
                  TEST_DATA_FOLDER,
                  rewrite_in_optimized_format=False,
                  parameterfiles=False,
-                 dendritic_voltage_traces=False)
+                 dendritic_voltage_traces=False,
+                 dumper=pandas_to_msgpack)  # no Parquet dumper
 
         yield mdb
         # cleanup

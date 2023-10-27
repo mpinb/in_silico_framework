@@ -642,7 +642,7 @@ def init(mdb, simresult_path,  \
          spike_times = True,  burst_times = False, \
          repartition = True, scheduler = None, rewrite_in_optimized_format = True,
          dendritic_spike_times = True, dendritic_spike_times_threshold = -30.,
-         client = None, n_chunks = 5000):
+         client = None, n_chunks = 5000, dumper = pandas_to_parquet):
     '''Use this function to load simulation data generated with the simrun2 module 
     into a ModelDataBase. 
     
@@ -693,18 +693,19 @@ def init(mdb, simresult_path,  \
                      select=['cell_activation', 'synapse_activation'],
                      repartition=False,
                      scheduler=scheduler,
-                     client=client)
+                     client=client,
+                     dumper=dumper)
     if dendritic_voltage_traces:
         add_dendritic_voltage_traces(mdb, rewrite_in_optimized_format,
                                      dendritic_spike_times, repartition,
                                      dendritic_spike_times_threshold, scheduler,
-                                     client)
+                                     client, dumper=dumper)
     if spike_times:
         print("---spike times---")
         vt = mdb['voltage_traces']
         mdb.setitem('spike_times',
                     spike_detection(vt),
-                    dumper=pandas_to_parquet)
+                    dumper=dumper)
     print('Initialization succesful.')
 
 
@@ -714,14 +715,16 @@ def add_dendritic_voltage_traces(mdb,
                                  repartition=True,
                                  dendritic_spike_times_threshold=-30.,
                                  scheduler=None,
-                                 client=None):
+                                 client=None,
+                                 dumper=None):
     _build_dendritic_voltage_traces(mdb, repartition=repartition)
     if rewrite_in_optimized_format:
         optimize(mdb['dendritic_recordings'],
                  select=list(mdb['dendritic_recordings'].keys()),
                  repartition=False,
                  scheduler=scheduler,
-                 client=client)
+                 client=client,
+                 dumper=dumper)
     if dendritic_spike_times:
         add_dendritic_spike_times(mdb, dendritic_spike_times_threshold)
 

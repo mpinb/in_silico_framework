@@ -38,7 +38,7 @@ def get_max_generation(mdb_run):
 def save_result(mdb_run, features, objectives):
     current_key = get_max_generation(mdb_run) + 1
     if six.PY2:
-        dumper = I.dumper_pandas_to_parquet
+        dumper = I.dumper_pandas_to_msgpack
     elif six.PY3:
         dumper = I.dumper_pandas_to_parquet
     else:
