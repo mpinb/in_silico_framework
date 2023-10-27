@@ -227,7 +227,7 @@ def hay_evaluate(cur_stim, tvec, vList):
         hoc_vList.append(h.Vector().from_python(v))
 
     with StreamToLogger(
-            logger 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             x = h.calculator.get_organism_stimulus_error(
                 feature_mean_list.o(cur_stim),
