@@ -5,6 +5,9 @@ import pandas as pd
 import dask
 import json
 from . import parent_classes
+from model_data_base.utils import df_colnames_to_str
+import logging
+log = logging.getLogger("ISF").getChild(__name__)
 
 
 def check(obj):
@@ -23,9 +26,7 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 @dask.delayed
 def save_helper(savedir, df, n_partitions, partition):
     # convert column names and index names to str
-    df.columns = df.columns.astype(str)
-    if df.index.name is not None:
-        df.index.name = str(df.index.name)
+    df = df_colnames_to_str(df)  # overrides original object
     return df.to_parquet(
         os.path.join(
             savedir,

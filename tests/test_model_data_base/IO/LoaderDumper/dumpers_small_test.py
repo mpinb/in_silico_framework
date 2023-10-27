@@ -6,6 +6,7 @@ from model_data_base.IO.LoaderDumper import dask_to_csv, numpy_to_npy, pandas_to
                                 dask_to_categorized_msgpack, to_cloudpickle, reduced_lda_model
 from tests.test_simrun2.reduced_model.get_kernel_test import get_test_Rm
 from numpy.testing import assert_array_equal
+from model_data_base.utils import df_colnames_to_str
 
 
 def robust_del_fun(mdb, key):
@@ -41,7 +42,9 @@ def data_frame_generic_small(mdb, pdf, ddf, dumper, client=None):
     dummy = mdb['test']
     a = dask.compute(dummy)[0].reset_index(drop=True)
     b = pdf.reset_index(drop=True)
-    assert_frame_equal(a, b)
+    if dumper in (pandas_to_parquet, dask_to_parquet):
+        b = df_colnames_to_str(b)
+    assert_frame_equal(a, b, check_column_type= dumper is in (pandas_to_parquet, dask_to_parquet))
     
     #sorted index set
     clean_up(mdb)
@@ -51,6 +54,8 @@ def data_frame_generic_small(mdb, pdf, ddf, dumper, client=None):
         mdb.setitem('test', ddf.set_index(0), dumper=dumper, client=client)
     dummy = mdb['test']
     a = dask.compute(dummy)[0]
+    if dumper in (pandas_to_parquet, dask_to_parquet):
+        b = df_colnames_to_str(b)
     b = pdf.set_index(0)
     assert_frame_equal(a, b)
 
