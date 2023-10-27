@@ -8,7 +8,9 @@ from model_data_base.mdb_initializers.load_simrun_general import init
 from model_data_base.utils import silence_stdout
 import pandas as pd
 import dask.dataframe as dd
-from Interface import get_client, isf_logger, isf_logger_stream_handler
+from Interface import get_client
+from Interface import logger as isf_logger
+from Interface import logger_stream_handler as isf_logger_stream_handler
 
 logger = logging.getLogger("ISF").getChild(__name__)
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -64,7 +66,7 @@ def pytest_configure(config):
     isf_logger.setLevel(
         logging.WARNING)  # set logging level of ISF logger to WARNING
     # Suppress logs from verbose modules so they don't show in stdout
-    isf_logger_stream_handler.addFilter(
+    isf_logger.addFilter(
         ModuleFilter(suppress_modules_list))  # suppress logs from this module
     # redirect test ouput to log file with more verbose output
     if not os.path.exists(os.path.join(CURRENT_DIR, "logs")):
