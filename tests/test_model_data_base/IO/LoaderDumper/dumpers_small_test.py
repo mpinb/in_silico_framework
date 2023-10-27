@@ -61,29 +61,29 @@ def test_dask_to_msgpack_small(fresh_mdb, pdf, ddf, client):
         client=client)
 
 def test_dask_to_categorized_msgpack_small(fresh_mdb, pdf, ddf, client):
-    data_frame_generic_small(fresh_mdb, pdf, ddf2, dask_to_categorized_msgpack,
+    data_frame_generic_small(fresh_mdb, pdf, ddf, dask_to_categorized_msgpack,
         client=client)
 
 def test_pandas_to_msgpack_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, pandas_to_msgpack)
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), pandas_to_msgpack)
 
 def test_pandas_to_parquet_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, pandas_to_parquet)
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), pandas_to_parquet)
 
 def test_dask_to_parquet_small(fresh_mdb, pdf, ddf, client):
     data_frame_generic_small(fresh_mdb, pdf, ddf, dask_to_parquet, client=client)
 
 def test_pandas_to_pickle_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, pandas_to_pickle)
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), pandas_to_pickle)
 
 def test_to_pickle_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, to_pickle)
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), to_pickle)
 
 def test_to_cloudpickle_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, to_cloudpickle)
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), to_cloudpickle)
 
 def test_self_small(fresh_mdb, pdf):
-    data_frame_generic_small(fresh_mdb, pdf, pdf, 'self')
+    data_frame_generic_small(fresh_mdb, pdf, pdf.copy(), 'self')
 
 def test_numpy_to_npy(fresh_mdb, pdf):
 
