@@ -23,7 +23,7 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 @dask.delayed
 def save_helper(savedir, df, n_partitions, partition):
     # save original columns and index name
-    assert all([type(e) == str for e in df.columns]), "This method requires that all column names of the dataframe are strings, but they are {}".format([type(e) for e in df.columns]])
+    assert all([type(e) == str for e in df.columns]), "This method requires that all column names of the dataframe are strings, but they are {}".format([type(e) for e in df.columns])
     if df.index.name is not None:
         assert type(df.index.name) == str, "This method requires that the index name of the dataframe is a string, but it is {}".format(type(df.index.name))
     return df.to_parquet(
