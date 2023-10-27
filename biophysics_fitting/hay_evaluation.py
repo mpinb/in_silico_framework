@@ -143,7 +143,7 @@ def hay_objective_function(x):
 
     h.organism[0].set_genome(x)
     with StreamToLogger(
-            logger 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             h.evaluator.evaluate_population(o)
         except:
