@@ -22,6 +22,10 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 
 @dask.delayed
 def save_helper(savedir, df, n_partitions, partition):
+    # convert column names and index names to str
+    df.columns = df.columns.astype(str)
+    if df.index.name is not None:
+        df.index.name = str(df.index.name)
     return df.to_parquet(
         os.path.join(
             savedir,
