@@ -23,20 +23,11 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 @dask.delayed
 def save_helper(savedir, df, n_partitions, partition):
     # save original columns and index name
-    columns = df.columns
-    if df.index.name is not None:
-        index_name = df.index.name
-    # convert to string
-    df = df_colnames_to_str(df)  # overrides original object
-    yield df.to_parquet(
+    assert df.columns == df.columns.astype(str), "this method requires that all column names are strings"
+    return df.to_parquet(
         os.path.join(
             savedir,
             'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)))
-    # reset original colnames
-    df.columns = columns
-    if df.index.name is not None:
-        df.index.name = index_name
-
 
 class Loader(parent_classes.Loader):
 
@@ -58,7 +49,16 @@ class Loader(parent_classes.Loader):
 
 
 def dump(obj, savedir, schema=None, client=None):
+    # fetch original column names
+    columns = obj.columns
+    if obj.index.name is not None:
+        index_name = obj.index.name
+
+    # convert to string
+    obj = df_colnames_to_str(df)  # overrides original object
     delayeds = obj.to_delayed()
+
+    # save object
     delayeds = [
         save_helper(savedir, d, len(delayeds), lv)
         for lv, d in enumerate(delayeds)
@@ -72,3 +72,8 @@ def dump(obj, savedir, schema=None, client=None):
     #obj.to_parquet(os.path.join(savedir, 'pandas_to_parquet.parquet'), schema = schema)
     compatibility.cloudpickle_fun(Loader(),
                                   os.path.join(savedir, 'Loader.pickle'))
+
+    # reset original colnames
+    obj.columns = columns
+    if df.index.name is not None:
+        df.index.name = index_name
