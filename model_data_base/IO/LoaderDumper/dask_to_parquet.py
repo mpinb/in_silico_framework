@@ -21,12 +21,12 @@ def load_helper(savedir, n_partitions, partition, columns=None):
 
 
 @dask.delayed
-def save_helper(savedir, df, n_partitions, partition):
+def save_helper(savedir, delayed_df, n_partitions, partition):
     # save original columns and index name
-    assert all([type(e) == str for e in df.columns]), "This method requires that all column names of the dataframe are strings, but they are {}".format([type(e) for e in df.columns])
-    if df.index.name is not None:
-        assert type(df.index.name) == str, "This method requires that the index name of the dataframe is a string, but it is {}".format(type(df.index.name))
-    return df.to_parquet(
+    assert all([type(e) == str for e in delayed_df.columns]), "This method requires that all column names of the dataframe are strings, but they are {}".format([type(e) for e in delayed_df.columns])
+    if delayed_df.index.name is not None:
+        assert type(delayed_df.index.name) == str, "This method requires that the index name of the dataframe is a string, but it is {}".format(type(delayed_df.index.name))
+    return delayed_df.to_parquet(
         os.path.join(
             savedir,
             'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)))
@@ -56,17 +56,18 @@ def dump(obj, savedir, schema=None, client=None):
     if obj.index.name is not None:
         index_name = obj.index.name
 
-    # convert to string
-    obj = df_colnames_to_str(obj)  # overrides original object
     delayeds = obj.to_delayed()
+    delayeds = [dask.delayed(df_colnames_to_str)(e) for e in delayeds]
 
     # save object
     delayeds = [
         save_helper(savedir, d, len(delayeds), lv)
         for lv, d in enumerate(delayeds)
     ]
+
     futures = client.compute(delayeds)
     client.gather(futures)
+    
     if obj.divisions is not None:
         with open(os.path.join(savedir, 'divisions.json'), 'w') as f:
             json.dump(obj.divisions, f)
