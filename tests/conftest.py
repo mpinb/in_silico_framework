@@ -10,7 +10,7 @@ import pandas as pd
 import dask.dataframe as dd
 from Interface import get_client, isf_logger, isf_logger_stream_handler
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 TEST_DATA_FOLDER = os.path.join(getting_started.parent, \
                               'example_simulation_data', \
@@ -247,6 +247,3 @@ elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers
         # cleanup
         if os.path.exists(tempdir):
             shutil.rmtree(tempdir)
-
-
-#    def approx(a, b):

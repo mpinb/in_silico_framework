@@ -14,7 +14,7 @@ from model_data_base.mdb_initializers.prepare_ANN_batches import get_binsize
 
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def get_section_distances_df_from_cell(cell, spatial_binsize_goal=50):
@@ -165,7 +165,7 @@ def get_voltage_array_from_cell(cell,
     dt = cell.t[1] - cell.t[0]  # most often 0.025
     every_other_index = int(temporal_resolution / dt)
     if max_time > cell.t[-1]:
-        log.warning(
+        logger.warning(
             "Specified max_time of {0} is larger than simulation time of {1}. Voltage traces can only be calcualted until {1} ms"
             .format(max_time, cell.t[-1]))
     # assert step size of 0.025
@@ -288,7 +288,7 @@ def _evoked_activity(mdb,
         NotImplementedError: _description_
         NotImplementedError: _description_
     """
-    log.info('saving to ', outdir)
+    logger.info('saving to ', outdir)
     import neuron
     h = neuron.h
     sti_bases = [s[:s.rfind('/')] for s in stis]
@@ -296,9 +296,9 @@ def _evoked_activity(mdb,
         raise NotImplementedError
     sti_base = sti_bases[0]
     sa = sa.content
-    log.info('start loading synapse activations')
+    logger.info('start loading synapse activations')
     sa = sa.loc[stis].compute(scheduler="synchronous")
-    log.info('done loading synapse activations')
+    logger.info('done loading synapse activations')
     sa = {s: g for s, g in sa.groupby(sa.index)}
 
     #outdir_absolute = os.path.join(outdir, sti_base)
@@ -369,13 +369,13 @@ def _evoked_activity(mdb,
             additional_evokedNW.create_saved_network2()
         stopTime = time.time()
         setupdt = stopTime - start_time
-        log.info('Network setup time: {:.2f} s'.format(setupdt))
+        logger.info('Network setup time: {:.2f} s'.format(setupdt))
 
         # synTypes = list(cell.synapses.keys())  # unused
         # synTypes.sort()  # unused
 
         #-------------- Run simulation --------------#
-        log.info('Testing evoked response properties run {:d} of {:d}'.format(
+        logger.info('Testing evoked response properties run {:d} of {:d}'.format(
             lv + 1, len(stis)))
         tVec = h.Vector()
         tVec.record(h._ref_t)
@@ -384,7 +384,7 @@ def _evoked_activity(mdb,
                             vardt=False)  #trigger the actual simulation
         stopTime = time.time()
         simdt = stopTime - start_time
-        log.info('NEURON runtime: {:.2f} s'.format(simdt))
+        logger.info('NEURON runtime: {:.2f} s'.format(simdt))
 
         # vmSoma = np.array(cell.soma.recVList[0])  # unused
         t = np.array(tVec)
@@ -420,7 +420,7 @@ def _evoked_activity(mdb,
         for additional_evokedNW in additional_evokedNWs:
             additional_evokedNW.re_init_network()
 
-        log.info('-------------------------------')
+        logger.info('-------------------------------')
 
     # WARNING: this is the dt of the cell that was last run. TODO: is this always the same dt in this loop?
     #-------------- Transform data to ANN batch format --------------#
@@ -535,7 +535,7 @@ def rerun_mdb(mdb,
         myfun = execute_in_child_process(myfun)
 
     myfun = dask.delayed(myfun)
-    log.info('outdir is', outdir)
+    logger.info('outdir is', outdir)
     for stis in sim_trial_index_array:
         d = myfun(mdb,
                   stis,

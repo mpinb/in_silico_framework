@@ -1,7 +1,7 @@
 from model_data_base.mdbopen import resolve_mdb_path
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def load_param_file_if_path_is_provided(pathOrParam):
@@ -46,7 +46,7 @@ def scale_apical(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
 
-    log.info('Scaled {:d} apical sections...'.format(scaleCount))
+    logger.info('Scaled {:d} apical sections...'.format(scaleCount))
 
 
 class defaultValues:

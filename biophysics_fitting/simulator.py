@@ -11,7 +11,7 @@ from .parameters import param_selector
 import time
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class Simulator_Setup:
@@ -324,7 +324,7 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
         #print name,param_selector(params, name)
         if simulate:
             cell = fun(cell, params = param_selector(params, name))
-            log.info("simulating {} took {} seconds".format(stim, time.time()-t))
+            logger.info("simulating {} took {} seconds".format(stim, time.time()-t))
         return cell, params
 
     def run(self, params, stims=None):

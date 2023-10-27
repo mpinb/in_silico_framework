@@ -7,7 +7,7 @@ import json
 from . import parent_classes
 from model_data_base.utils import df_colnames_to_str
 import logging
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def check(obj):

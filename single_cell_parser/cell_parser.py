@@ -17,7 +17,7 @@ from .cell import PySection, Cell
 from . import cell_modify_functions
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
@@ -81,7 +81,7 @@ class CellParser(object):
                     parameters.spatialgraph_modify_functions.keys()):
                 self.rieke_spines(parameters)
             else:
-                log.info("No spines are being added...")
+                logger.info("No spines are being added...")
         except AttributeError:
             pass
 
@@ -151,11 +151,11 @@ class CellParser(object):
             #if not 'rieke_spines' in parameters.spatialgraph_modify_functions.keys():
             #    if label == 'SpineHead' or label == 'SpineNeck':
             #        continue
-            log.info('    Adding membrane properties to %s' % label)
+            logger.info('    Adding membrane properties to %s' % label)
             self.insert_membrane_properties(label, parameters[label].properties)
 
 #        spatial discretization
-        log.info('    Setting up spatial discretization...')
+        logger.info('    Setting up spatial discretization...')
         if 'discretization' in parameters:
             f = parameters['discretization']['f']
             max_seg_length = parameters['discretization']['max_seg_length']
@@ -179,7 +179,7 @@ class CellParser(object):
                         continue
             except AttributeError:
                 pass
-            log.info('    Adding membrane range mechanisms to %s' % label)
+            logger.info('    Adding membrane range mechanisms to %s' % label)
             self.insert_range_mechanisms(label,
                                          parameters[label].mechanisms.range)
             if 'ions' in parameters[label].properties:
@@ -198,20 +198,20 @@ class CellParser(object):
     def apply_cell_modify_functions(self, parameters):
         if 'cell_modify_functions' in list(parameters.keys()):
             if self.cell_modify_functions_applied == True:
-                log.info('Cell modify functions have already been applied. We '+\
+                logger.info('Cell modify functions have already been applied. We '+\
                 'are now modifying the cell again. Please doublecheck, whether '+\
                 'this is intended. This should not occur, if the cell is setup '+\
                 'up using the recommended way, i.e. by calling '+\
                 'single_cell_parser.create_cell')
             for funname in list(parameters.cell_modify_functions.keys()):
                 kwargs = parameters.cell_modify_functions[funname]
-                log.info('Applying cell_modify_function {} with parameters {}'.
+                logger.info('Applying cell_modify_function {} with parameters {}'.
                          format(funname, str(kwargs)))
                 fun = cell_modify_functions.get(funname)
                 self.cell = fun(self.cell, **kwargs)
             self.cell_modify_functions_applied = True
         else:
-            log.info('No cell_modify_functions to apply')
+            logger.info('No cell_modify_functions to apply')
 
         self.cell.neuron_param = parameters
 
@@ -272,7 +272,7 @@ class CellParser(object):
 
         for mechName in list(mechs.keys()):
             mech = mechs[mechName]
-            log.info(
+            logger.info(
                 '        Inserting mechanism %s with spatial distribution %s' %
                 (mechName, mech.spatial))
             if mech.spatial == 'uniform':
@@ -548,7 +548,7 @@ class CellParser(object):
                                 continue
                             dist = h.distance(seg.x, sec=sec)
                             if secID in outsideScale_sections:
-                                # log.info('setting section {} to outsidescale'.format(secID))
+                                # logger.info('setting section {} to outsidescale'.format(secID))
                                 rangeVarVal = mech[param] * outsideScale
                             elif begin <= dist <= end:
                                 rangeVarVal = mech[param]
@@ -793,18 +793,18 @@ class CellParser(object):
                             maxLabel = label
 
 
-#                    log.info sec.name()
-#                    log.info '\tnr of points: %d' % sec.nrOfPts
-#                    log.info '\tnr of segments: %d' % sec.nseg
+#                    logger.info sec.name()
+#                    logger.info '\tnr of points: %d' % sec.nrOfPts
+#                    logger.info '\tnr of segments: %d' % sec.nseg
         totalL = avgL
         avgL /= totalNSeg
-        log.info(
+        logger.info(
             '    frequency used for determining discretization: {}'.format(f))
-        log.info('    maximum segment length: {}'.format(max_seg_length))
-        log.info('    Total number of compartments in model: %d' % totalNSeg)
-        log.info('    Total length of model cell: %.2f' % totalL)
-        log.info('    Average compartment length: %.2f' % avgL)
-        log.info('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
+        logger.info('    maximum segment length: {}'.format(max_seg_length))
+        logger.info('    Total number of compartments in model: %d' % totalNSeg)
+        logger.info('    Total length of model cell: %.2f' % totalL)
+        logger.info('    Average compartment length: %.2f' % avgL)
+        logger.info('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
 
     def _create_ais(self):
         '''create axon hillock and AIS for proper spike initiation
@@ -835,10 +835,10 @@ class CellParser(object):
         hillTaper = (aisDiam - hillBeginDiam) / (nseg - 1)  # from 4mu to 1mu
         hillStep = hillLength / (nseg - 1)
 
-        log.info('Creating AIS:')
-        log.info('    soma diameter: %.2f' % somaDiam)
-        log.info('    axon hillock diameter: %.2f' % hillBeginDiam)
-        log.info('    initial segment diameter: %.2f' % aisDiam)
+        logger.info('Creating AIS:')
+        logger.info('    soma diameter: %.2f' % somaDiam)
+        logger.info('    axon hillock diameter: %.2f' % hillBeginDiam)
+        logger.info('    initial segment diameter: %.2f' % aisDiam)
         '''myelin & nodes'''
         myelinSeg = 25  # nr of segments internode section
         #        myelinDiam = 1.5 # [um]
@@ -950,10 +950,10 @@ class CellParser(object):
         #        hillTaper = (aisDiam-hillBeginDiam)/(hillSeg-1)
         #        hillStep = hillLength/(hillSeg-1)
 
-        log.info('Creating AIS:')
-        log.info('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
-        log.info('    initial segment diameter: {:.2f}'.format(aisDiam))
-        log.info('    myelin diameter: {:.2f}'.format(myelinDiam))
+        logger.info('Creating AIS:')
+        logger.info('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
+        logger.info('    initial segment diameter: {:.2f}'.format(aisDiam))
+        logger.info('    myelin diameter: {:.2f}'.format(myelinDiam))
 
         zAxis = np.array([0, 0, 1])
 
@@ -1010,11 +1010,11 @@ class CellParser(object):
         spineheadDiam = parameters.spatialgraph_modify_functions.rieke_spines.spine_morphology.spineheadDiam
         spineheadLength = parameters.spatialgraph_modify_functions.rieke_spines.spine_morphology.spineheadLength
 
-        log.info("Creating dendritic spines:")
-        log.info(("    spine neck length: {}".format(spineneckLength)))
-        log.info(("    spine neck diameter: {}".format(spineneckDiam)))
-        log.info(("    spine head length: {}".format(spineheadLength)))
-        log.info(("    spine head diameter: {}".format(spineheadDiam)))
+        logger.info("Creating dendritic spines:")
+        logger.info(("    spine neck length: {}".format(spineneckLength)))
+        logger.info(("    spine neck diameter: {}".format(spineneckDiam)))
+        logger.info(("    spine head length: {}".format(spineheadLength)))
+        logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
         excitatory = [
             'L6cc', 'L2', 'VPM', 'L4py', 'L4ss', 'L4sp', 'L5st', 'L6ct', 'L34',

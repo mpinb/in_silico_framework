@@ -18,7 +18,7 @@ import pandas as pd
 import json
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class Cell(object):
@@ -203,7 +203,7 @@ class Cell(object):
                 del synapses[:]
                 del self.synapses[preType]
             except KeyError:
-                log.info('Synapses of type ' + preType + ' not present on cell')
+                logger.info('Synapses of type ' + preType + ' not present on cell')
             return
 
     def init_time_recording(self):
@@ -667,7 +667,7 @@ class PySection(nrn.Section):
                 for seg in self:
                     vec = h.Vector()
                     hRef = eval('seg._ref_' + var)
-                    log.info('seg._ref_' + var)
+                    logger.info('seg._ref_' + var)
                     vec.record(hRef, sec=self)
                     self.recordVars[var].append(vec)
         else:

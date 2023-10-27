@@ -17,7 +17,7 @@ import os
 import socket
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def _evoked_activity(cellParamName,
@@ -49,7 +49,7 @@ def _evoked_activity(cellParamName,
     '''
     assert seed is not None
     np.random.seed(seed)
-    log.info("seed: %i" % seed)
+    logger.info("seed: %i" % seed)
     neuronParameters = scp.build_parameters(cellParamName)
     evokedUpNWParameters = scp.build_parameters(
         evokedUpParamName)  ##sumatra function for reading in parameter file
@@ -85,19 +85,19 @@ def _evoked_activity(cellParamName,
         evokedNW.create_saved_network2()
         stopTime = time.time()
         setupdt = stopTime - startTime
-        log.info('Network setup time: %.2f s' % setupdt)
+        logger.info('Network setup time: %.2f s' % setupdt)
 
         synTypes = list(cell.synapses.keys())
         synTypes.sort()
 
-        log.info('writing simulation results')
+        logger.info('writing simulation results')
         fname = 'simulation'
         fname += '_run%04d' % nRun
 
         t = None
         synName = dirName + '/' + fname + '_synapses.csv'
         out.append(synName)
-        log.info('computing active synapse properties')
+        logger.info('computing active synapse properties')
         sca.compute_synapse_distances_times(synName, cell, t, synTypes)
         preSynCellsName = dirName + '/' + fname + '_presynaptic_cells.csv'
         scp.write_presynaptic_spike_times(preSynCellsName, evokedNW.cells)
@@ -107,9 +107,9 @@ def _evoked_activity(cellParamName,
         cell.re_init_cell()
         evokedNW.re_init_network()
 
-        log.info('-------------------------------')
+        logger.info('-------------------------------')
 
-    log.info('writing simulation parameter files')
+    logger.info('writing simulation parameter files')
     neuronParameters.save(os.path.join(dirName, 'neuron_model.param'))
     evokedUpNWParameters.save(os.path.join(dirName, 'network_model.param'))
     return out

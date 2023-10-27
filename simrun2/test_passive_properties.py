@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 h = neuron.h
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def test_passive_props(fname):
@@ -48,11 +48,11 @@ def test_passive_props(fname):
         if sec.label == 'AIS' or sec.label == 'Myelin':
             axonArea += sec.area
 
-    log.info('total area = {:.2f} micron^2'.format(totalArea))
-    log.info('soma area = {:.2f} micron^2'.format(somaArea))
-    log.info('apical area = {:.2f} micron^2'.format(apicalArea))
-    log.info('basal area = {:.2f} micron^2'.format(basalArea))
-    log.info('axon area = {:.2f} micron^2'.format(axonArea))
+    logger.info('total area = {:.2f} micron^2'.format(totalArea))
+    logger.info('soma area = {:.2f} micron^2'.format(somaArea))
+    logger.info('apical area = {:.2f} micron^2'.format(apicalArea))
+    logger.info('basal area = {:.2f} micron^2'.format(basalArea))
+    logger.info('axon area = {:.2f} micron^2'.format(axonArea))
 
     tStop = 600.0
     neuronParameters.sim.tStop = tStop
@@ -70,14 +70,14 @@ def test_passive_props(fname):
         iclamp.dur = tIDur
         iclamp.amp = iAmp
 
-        log.info('current stimulation: {:.2f} nA'.format(iAmp))
+        logger.info('current stimulation: {:.2f} nA'.format(iAmp))
         tVec = h.Vector()
         tVec.record(h._ref_t)
         startTime = time.time()
         scp.init_neuron_run(neuronParameters.sim, vardt=True)
         stopTime = time.time()
         dt = stopTime - startTime
-        log.info('NEURON runtime: {:.2f} s'.format(dt))
+        logger.info('NEURON runtime: {:.2f} s'.format(dt))
 
         vmSoma = np.array(cell.soma.recVList[0])
         t = np.array(tVec)
@@ -86,14 +86,14 @@ def test_passive_props(fname):
 
         tau = compute_tau_effective(t[np.where(t >= tIStart)],
                                     vmSoma[np.where(t >= tIStart)])
-        log.info('tau = {:.2fms}'.format(tau))
+        logger.info('tau = {:.2fms}'.format(tau))
         dVEffective = vmSoma[-1] - vmSoma[np.where(t >= tIStart)][0]
         RInEffective = dVEffective / iAmp
-        log.info('RIn = {:.2f}MOhm'.format(RInEffective))
+        logger.info('RIn = {:.2f}MOhm'.format(RInEffective))
 
         cell.re_init_cell()
 
-        log.info('-------------------------------')
+        logger.info('-------------------------------')
 
     showPlots = True
     if showPlots:
@@ -150,7 +150,7 @@ def scale_apical(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
 
-    log.info('Scaled {:d} apical sections...'.format(scaleCount))
+    logger.info('Scaled {:d} apical sections...'.format(scaleCount))
 
 
 def write_sim_results(fname, t, v):

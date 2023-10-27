@@ -3,7 +3,7 @@ import hashlib
 import numpy as np
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 import tempfile
 import shutil
 import compatibility
@@ -169,7 +169,7 @@ if six.PY3:
             _posixshmem.shm_unlink(self._path)
             #unregister(self._name, "shared_memory")
 else:
-    log.warning(
+    logger.warning(
         "multiprocessing.shared_memory can not be imported in Python 2 (available in >=Py3.8)"
     )
 #from . import shared_memory_bugfixed as shared_memory

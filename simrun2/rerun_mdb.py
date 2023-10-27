@@ -10,7 +10,7 @@ from biophysics_fitting.utils import execute_in_child_process
 from .utils import *
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def convertible_to_int(x):
@@ -49,7 +49,7 @@ def _evoked_activity(mdb,
                      neuron_folder=None,
                      network_folder=None,
                      sa=None):
-    log.info('saving to ', outdir)
+    logger.info('saving to ', outdir)
     import neuron
     h = neuron.h
     sti_bases = [s[:s.rfind('/')] for s in stis]
@@ -57,9 +57,9 @@ def _evoked_activity(mdb,
         raise NotImplementedError
     sti_base = sti_bases[0]
     sa = sa.content
-    log.info('start loading synapse activations')
+    logger.info('start loading synapse activations')
     sa = sa.loc[stis].compute(scheduler="synchronous")
-    log.info('done loading synapse activations')
+    logger.info('done loading synapse activations')
     sa = {s: g for s, g in sa.groupby(sa.index)}
 
     outdir_absolute = os.path.join(outdir, sti_base)
@@ -119,12 +119,12 @@ def _evoked_activity(mdb,
             additional_evokedNW.create_saved_network2()
         stopTime = time.time()
         setupdt = stopTime - startTime
-        log.info('Network setup time: {:.2f} s'.format(setupdt))
+        logger.info('Network setup time: {:.2f} s'.format(setupdt))
 
         synTypes = list(cell.synapses.keys())
         synTypes.sort()
 
-        log.info('Testing evoked response properties run {:d} of {:d}'.format(
+        logger.info('Testing evoked response properties run {:d} of {:d}'.format(
             lv + 1, len(stis)))
         tVec = h.Vector()
         tVec.record(h._ref_t)
@@ -133,7 +133,7 @@ def _evoked_activity(mdb,
                             vardt=False)  #trigger the actual simulation
         stopTime = time.time()
         simdt = stopTime - startTime
-        log.info('NEURON runtime: {:.2f} s'.format(simdt))
+        logger.info('NEURON runtime: {:.2f} s'.format(simdt))
 
         vmSoma = np.array(cell.soma.recVList[0])
         t = np.array(tVec)
@@ -142,12 +142,12 @@ def _evoked_activity(mdb,
         for RSManager in recSiteManagers:
             RSManager.update_recordings()
 
-        log.info('writing simulation results')
+        logger.info('writing simulation results')
         fname = 'simulation'
         fname += '_run%07d' % sti_number
 
         synName = outdir_absolute + '/' + fname + '_synapses.csv'
-        log.info('computing active synapse properties')
+        logger.info('computing active synapse properties')
         sca.compute_synapse_distances_times(
             synName, cell, t,
             synTypes)  #calls scp.write_synapse_activation_file
@@ -159,7 +159,7 @@ def _evoked_activity(mdb,
         for additional_evokedNW in additional_evokedNWs:
             additional_evokedNW.re_init_network()
 
-        log.info('-------------------------------')
+        logger.info('-------------------------------')
     vTraces = np.array(vTraces)
     dendTraces = []
     uniqueID = sti_base.strip('/').split('_')[-1]
@@ -175,7 +175,7 @@ def _evoked_activity(mdb,
             dendTraces.append(tmpTraces)
     dendTraces = np.array(dendTraces)
 
-    log.info('writing simulation parameter files')
+    logger.info('writing simulation parameter files')
     neuron_param.save(
         os.path.join(outdir_absolute, uniqueID + '_neuron_model.param'))
     network_param.save(
@@ -230,7 +230,7 @@ def rerun_mdb(mdb,
         myfun = execute_in_child_process(myfun)
 
     myfun = dask.delayed(myfun)
-    log.info('outdir is', outdir)
+    logger.info('outdir is', outdir)
     for stis in sim_trial_index_array:
         d = myfun(mdb,
                   stis,
