@@ -35,6 +35,7 @@ jobs:
 
           echo "------------ Setting up environment -------------"
           CONDA_TARGET_DIR="$HOME/anaconda_isf3.8"
+          echo $(which source)
           source $CONDA_TARGET_DIR/bin/activate
           echo "Using Python: $(which python)"
           export PYTHONPATH=$(pwd):$HOME
