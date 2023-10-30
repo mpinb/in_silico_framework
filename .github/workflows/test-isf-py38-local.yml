@@ -63,6 +63,7 @@ jobs:
       - name: Cleanup dask orphan processes
         if: ${{ always() }}
         run: |
+          echo "Killing all dask processes on ${{ runner.name }} for user $USER (if they exist)"
           pkill -U $USER dask-scheduler
           pkill -U $USER dask-worker
 
