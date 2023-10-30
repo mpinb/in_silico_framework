@@ -32,6 +32,7 @@ jobs:
           mkdir -p ./tests/logs/
           echo "Removing previous coverage files..."
           rm .coverage.${{ runner.name }}.*
+          unset DISPLAY
 
           echo "------------ Setting up environment -------------"
           CONDA_TARGET_DIR="$HOME/anaconda_isf3.8"

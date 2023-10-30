@@ -39,6 +39,7 @@ jobs:
           trigger_rebuild:
             - "installer/py${{ inputs.py_version }}/**"
             - "mechanisms/**"
+            - ".github/workflows/**"
 
     - name: Check if (re)build is necessary
       # (re)build only if:

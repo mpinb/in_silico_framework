@@ -38,6 +38,7 @@ jobs:
           mkdir -p ./tests/logs/
           echo "Removing previous coverage files..."
           rm .coverage.${{ runner.name }}.*
+          unset DISPLAY
 
           echo "------------ Setting up environment -------------"
           CONDA_TARGET_DIR="$HOME/anaconda_isf2.7"
@@ -55,9 +56,14 @@ jobs:
           echo "Using port $port_number and bokeh port $bokeh_port"
 
           echo "------------ Running tests -------------"
+          if [ ! -d "$HOME/tmp" ]; then
+            mkdir $HOME/tmp
+          fi
+          export TMPDIR=$HOME/tmp
           (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1)&
           (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1)&
           python -m pytest -rsx -vv --color=yes --dask_server_port $port_number tests/
+          rm -rf $HOME/tmp
 
       - name: Cleanup dask orphan processes
         if: ${{ always() }}
