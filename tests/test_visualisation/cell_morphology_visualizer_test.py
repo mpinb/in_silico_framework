@@ -1,7 +1,7 @@
 from visualize.cell_morphology_visualizer import CellMorphologyVisualizer, CellMorphologyInteractiveVisualizer
 from .context import *
 from single_cell_parser.serialize_cell import *
-from tests import setup_current_injection_experiment
+from tests import setup_synapse_activation_experiment
 import six
 import pytest
 import distributed
@@ -10,7 +10,7 @@ import distributed
 class TestCellMorphologyVisualizer:
 
     def setup_class(self):
-        self.cell = setup_current_injection_experiment()
+        self.cell = setup_synapse_activation_experiment()
         self.cmv = CellMorphologyVisualizer(
             self.cell, align_trunk=six.PY3
         )  # don't align trunk in py2, ithas no scipy Rotation object
@@ -90,7 +90,7 @@ class TestCellMorphologyInteractiveVisualizer:
 
     def setup_class(self):
         self.ion_keyword = 'NaTa_t.ina'
-        self.cell = setup_current_injection_experiment(
+        self.cell = setup_synapse_activation_experiment(
             rangevars=[self.ion_keyword])
         self.cmiv = CellMorphologyInteractiveVisualizer(cell=self.cell,
                                                         align_trunk=six.PY3,

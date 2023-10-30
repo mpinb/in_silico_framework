@@ -35,3 +35,32 @@ def setup_current_injection_experiment(rangevars=[]):
     scp.init_neuron_run(cell_param.sim, vardt=True)  # run the simulation
 
     return cell
+
+def setup_synapse_activation_experiment(rangevars = []):
+    """Sets up a current injection experiment of some .hoc and .param file.
+    The following parameters define the experiment:
+
+    Returns:
+        cell: a cell object that contains the simulation.
+    """
+    
+    import getting_started
+    import single_cell_parser as scp
+    
+    neup = scp.NTParameterSet(getting_started.neuronParam)
+    netp = scp.NTParameterSet(getting_started.networkParam)
+    
+    cell = scp.create_cell(neup.neuron)
+    evokedNW = scp.NetworkMapper(cell, netp.network, neup.sim)
+    evokedNW.create_saved_network2()
+    
+    neup.sim.tStop = 10
+
+    for rv in rangevars:
+        cell.record_range_var(rv)
+        
+    scp.init_neuron_run(neup.sim, vardt=False)
+    
+    evokedNW.re_init_network()
+
+    return cell

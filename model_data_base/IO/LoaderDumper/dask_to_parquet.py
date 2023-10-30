@@ -73,7 +73,6 @@ def dump(obj, savedir, schema=None, client=None):
     if obj.divisions is not None:
         with open(os.path.join(savedir, 'divisions.json'), 'w') as f:
             json.dump(obj.divisions, f)
-
     #obj.to_parquet(os.path.join(savedir, 'pandas_to_parquet.parquet'), schema = schema)
     compatibility.cloudpickle_fun(Loader(),
                                   os.path.join(savedir, 'Loader.pickle'))

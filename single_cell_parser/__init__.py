@@ -19,6 +19,7 @@ from .writer import write_presynaptic_spike_times
 from .writer import write_spike_times_file
 from .reader import read_scalar_field
 from .reader import read_synapse_realization
+from .reader import read_functional_realization_map
 from .reader import read_synapse_activation_file
 from .reader import read_complete_synapse_activation_file
 from .reader import read_spike_times_file
