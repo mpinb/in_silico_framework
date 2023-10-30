@@ -16,15 +16,6 @@ import distributed
 import socket
 if six.PY3:
     from scipy.spatial.transform import Rotation
-    from dash import Dash, dcc, html, Input, Output, State
-    from dash.exceptions import PreventUpdate
-    from dash import callback_context as ctx
-    import plotly.offline as py
-    import plotly.tools as tls
-    import plotly.io as pio
-    import plotly.graph_objects as go
-    import plotly.express as px
-    from plotly.subplots import make_subplots
 else:
     # let ImportWarnings show up when importing this module through Interface
     warnings.filterwarnings("default", category=ImportWarning, module=__name__)
