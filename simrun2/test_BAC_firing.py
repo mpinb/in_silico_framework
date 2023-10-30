@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 h = neuron.h
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def test_BAC_firing(fname):
@@ -87,11 +87,11 @@ def test_BAC_firing(fname):
         if sec.label == 'AIS' or sec.label == 'Myelin':
             axonArea += sec.area
 
-    log.info('total area = {:.2f} micron^2'.format(totalArea))
-    log.info('soma area = {:.2f} micron^2'.format(somaArea))
-    log.info('apical area = {:.2f} micron^2'.format(apicalArea))
-    log.info('basal area = {:.2f} micron^2'.format(basalArea))
-    log.info('axon area = {:.2f} micron^2'.format(axonArea))
+    logger.info('total area = {:.2f} micron^2'.format(totalArea))
+    logger.info('soma area = {:.2f} micron^2'.format(somaArea))
+    logger.info('apical area = {:.2f} micron^2'.format(apicalArea))
+    logger.info('basal area = {:.2f} micron^2'.format(basalArea))
+    logger.info('axon area = {:.2f} micron^2'.format(axonArea))
 
     tStop = 600.0
     neuronParameters.sim.tStop = tStop
@@ -222,29 +222,29 @@ def soma_injection(cell,
                    apicalInjectionDistance,
                    simParam,
                    saveVisualization=False):
-    log.info('selected apical section:')
+    logger.info('selected apical section:')
     #    h.psection(sec=apicalSec)
-    log.info(apicalSec.name())
+    logger.info(apicalSec.name())
     somaDist = cell.distance_to_soma(apicalSec, 0.0)
     apicalx = (apicalInjectionDistance - somaDist) / apicalSec.L
-    log.info('distance to soma: {:.2f} micron'.format(somaDist))
-    log.info('apicalInjectionDistance: {:.2f} micron'.format(
+    logger.info('distance to soma: {:.2f} micron'.format(somaDist))
+    logger.info('apicalInjectionDistance: {:.2f} micron'.format(
         apicalInjectionDistance))
-    log.info('apicalx: {:.2f}'.format(apicalx))
+    logger.info('apicalx: {:.2f}'.format(apicalx))
 
     iclamp = h.IClamp(0.5, sec=cell.soma)
     iclamp.delay = delay
     iclamp.dur = duration
     iclamp.amp = amplitude
 
-    log.info('soma current injection: {:.2f} nA'.format(amplitude))
+    logger.info('soma current injection: {:.2f} nA'.format(amplitude))
     tVec = h.Vector()
     tVec.record(h._ref_t)
     startTime = time.time()
     scp.init_neuron_run(simParam, vardt=True)
     stopTime = time.time()
     dt = stopTime - startTime
-    log.info('NEURON runtime: {:.2f} s'.format(dt))
+    logger.info('NEURON runtime: {:.2f} s'.format(dt))
 
     vmSoma = np.array(cell.soma.recVList[0])
     minSeg = -1
@@ -278,15 +278,15 @@ def apical_injection(cell,
                      tauDecay,
                      simParam,
                      saveVisualization=False):
-    log.info('selected apical section:')
+    logger.info('selected apical section:')
     #    h.psection(sec=apicalBifurcationSec)
-    log.info(apicalBifurcationSec.name())
+    logger.info(apicalBifurcationSec.name())
     somaDist = cell.distance_to_soma(apicalBifurcationSec, 0.0)
     apicalx = (apicalInjectionDistance - somaDist) / apicalBifurcationSec.L
-    log.info('distance to soma: {:.2f} micron'.format(somaDist))
-    log.info('apicalInjectionDistance: {:.2f} micron'.format(
+    logger.info('distance to soma: {:.2f} micron'.format(somaDist))
+    logger.info('apicalInjectionDistance: {:.2f} micron'.format(
         apicalInjectionDistance))
-    log.info('apicalx: {:.2f}'.format(apicalx))
+    logger.info('apicalx: {:.2f}'.format(apicalx))
 
     iclamp = h.epsp(apicalx, sec=apicalBifurcationSec)
     iclamp.onset = delay
@@ -294,14 +294,14 @@ def apical_injection(cell,
     iclamp.tau0 = tauRise
     iclamp.tau1 = tauDecay
 
-    log.info('apical current injection: {:.2f} nA'.format(amplitude))
+    logger.info('apical current injection: {:.2f} nA'.format(amplitude))
     tVec = h.Vector()
     tVec.record(h._ref_t)
     startTime = time.time()
     scp.init_neuron_run(simParam, vardt=True)
     stopTime = time.time()
     dt = stopTime - startTime
-    log.info('NEURON runtime: {:.2f} s'.format(dt))
+    logger.info('NEURON runtime: {:.2f} s'.format(dt))
 
     vmSoma = np.array(cell.soma.recVList[0])
     minSeg = -1
@@ -326,15 +326,15 @@ def apical_injection(cell,
 
 def soma_apical_injection(cell, somaAmplitude, somaDelay, somaDuration, apicalBifurcationSec, apicalInjectionDistance, apicalAmplitude,\
                           apicalDelayDt, apicalTauRise, apicalTauDecay, simParam, saveVisualization=False):
-    log.info('selected apical section:')
+    logger.info('selected apical section:')
     #    h.psection(sec=apicalBifurcationSec)
-    log.info(apicalBifurcationSec.name())
+    logger.info(apicalBifurcationSec.name())
     somaDist = cell.distance_to_soma(apicalBifurcationSec, 0.0)
     apicalx = (apicalInjectionDistance - somaDist) / apicalBifurcationSec.L
-    log.info('distance to soma: {:.2f} micron'.format(somaDist))
-    log.info('apicalInjectionDistance: {:.2f} micron'.format(
+    logger.info('distance to soma: {:.2f} micron'.format(somaDist))
+    logger.info('apicalInjectionDistance: {:.2f} micron'.format(
         apicalInjectionDistance))
-    log.info('apicalx: {:.2f}'.format(apicalx))
+    logger.info('apicalx: {:.2f}'.format(apicalx))
 
     iclamp = h.IClamp(0.5, sec=cell.soma)
     iclamp.delay = somaDelay
@@ -347,15 +347,15 @@ def soma_apical_injection(cell, somaAmplitude, somaDelay, somaDuration, apicalBi
     iclamp2.tau0 = apicalTauRise
     iclamp2.tau1 = apicalTauDecay
 
-    log.info('soma current injection: {:.2f} nA'.format(somaAmplitude))
-    log.info('apical current injection: {:.2f} nA'.format(apicalAmplitude))
+    logger.info('soma current injection: {:.2f} nA'.format(somaAmplitude))
+    logger.info('apical current injection: {:.2f} nA'.format(apicalAmplitude))
     tVec = h.Vector()
     tVec.record(h._ref_t)
     startTime = time.time()
     scp.init_neuron_run(simParam, vardt=True)
     stopTime = time.time()
     dt = stopTime - startTime
-    log.info('NEURON runtime: {:.2f} s'.format(dt))
+    logger.info('NEURON runtime: {:.2f} s'.format(dt))
 
     vmSoma = np.array(cell.soma.recVList[0])
     minSeg = -1
@@ -426,7 +426,7 @@ def scale_apical(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
 
-    log.info('Scaled {:d} apical sections...'.format(scaleCount))
+    logger.info('Scaled {:d} apical sections...'.format(scaleCount))
 
 
 def write_sim_results(fname, t, v):

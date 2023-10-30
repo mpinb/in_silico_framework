@@ -22,6 +22,8 @@ def setup_dask_scheduler(management_dir, ports):
             Each key must have a port number as value.
             Should be specified in ./user_settings.ini
     """
+    from distributed.versions import get_versions
+    print("versions:\n", get_versions())
     print('-' * 50)
     print('setting up dask-scheduler')
     sfile, sfile3 = _get_sfile(management_dir)

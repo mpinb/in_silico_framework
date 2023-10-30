@@ -21,6 +21,7 @@ vaex-astro==0.9.3
 vaex-jupyter==0.8.2
 vaex-ml==0.18.3
 flask-cors==4.0.0
+flask==1.1.2
 
 ## model data base dependencies
 pyarrow==13.0.0
@@ -51,6 +52,11 @@ coverage==7.3.0
 pytest-xdist==3.3.1
 execnet==2.0.2  # for pytest-xdist
 exceptiongroup==1.1.2
+
+## docs
+furo==2023.9.10  # also installs sphinx
+sphinx-paramlinks  # no explicit version
+
 
 ## misc
 chart-studio==1.1.0

@@ -3,14 +3,17 @@
 # even before pytest discovery
 # useful to setup whatever needs to be done before the actual testing or test discovery, such as the distributed.client_object_duck_typed
 # for setting environment variables, use pytest.ini or .env instead
-import os, shutil, logging, socket, pytest, tempfile, distributed, model_data_base, dask, six
+import os, shutil, logging, socket, pytest, tempfile, distributed, model_data_base, dask, six, getting_started, Interface  # Interface just to check if setup works. is in essence already a test
 from model_data_base.mdb_initializers.load_simrun_general import init
 from model_data_base.utils import silence_stdout
-import Interface as I
-from Interface import get_client, isf_logger, isf_logger_stream_handler
-import getting_started
+import pandas as pd
+import dask.dataframe as dd
+from Interface import get_client
+from Interface import logger as isf_logger
+from Interface import logger_stream_handler as isf_logger_stream_handler
+from model_data_base.IO.LoaderDumper import pandas_to_msgpack
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 TEST_DATA_FOLDER = os.path.join(getting_started.parent, \
                               'example_simulation_data', \
@@ -64,7 +67,7 @@ def pytest_configure(config):
     isf_logger.setLevel(
         logging.WARNING)  # set logging level of ISF logger to WARNING
     # Suppress logs from verbose modules so they don't show in stdout
-    isf_logger_stream_handler.addFilter(
+    isf_logger.addFilter(
         ModuleFilter(suppress_modules_list))  # suppress logs from this module
     # redirect test ouput to log file with more verbose output
     if not os.path.exists(os.path.join(CURRENT_DIR, "logs")):
@@ -95,6 +98,20 @@ def client(pytestconfig):
     return distributed.Client('localhost:{}'.format(
         pytestconfig.getoption("--dask_server_port")))
 
+@pytest.fixture
+def pdf():
+    """Returns a pandas DataFrame with various types. No column has mixed value types though.
+
+    Returns:
+        pd.DataFrame: A dataframe
+    """
+    return pd.DataFrame({0: [1,2,3,4,5,6], 1: ['1', '2', '3', '1', '2', '3'], '2': [False, True, True, False, True, False], \
+                                 'myname': ['bla', 'bla', 'bla', 'bla', 'bla', 'bla']})
+
+@pytest.fixture
+def ddf(pdf):
+    ddf = dd.from_pandas(pdf, npartitions=2)
+    return ddf
 
 if six.PY3:  # pytest can be parallellized on py3: use unique ids for mdbs
 
@@ -167,6 +184,7 @@ if six.PY3:  # pytest can be parallellized on py3: use unique ids for mdbs
 
 elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
 
+    # Py2 needs msgpack dumper, as parquet was not yet implemented for pandas DataFrames
     @pytest.yield_fixture
     def fresh_mdb():
         """Pytest fixture for a ModelDataBase object with a unique temp path.
@@ -194,7 +212,8 @@ elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers
                  TEST_DATA_FOLDER,
                  rewrite_in_optimized_format=False,
                  parameterfiles=False,
-                 dendritic_voltage_traces=False)
+                 dendritic_voltage_traces=False,
+                 dumper=pandas_to_msgpack)  # no Parquet dumper
 
         yield mdb
         # cleanup
@@ -233,6 +252,3 @@ elif six.PY2:  # old pytest version needs explicit @pytest.yield_fixture markers
         # cleanup
         if os.path.exists(tempdir):
             shutil.rmtree(tempdir)
-
-
-#    def approx(a, b):

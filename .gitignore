@@ -95,9 +95,7 @@ installer/bla/jupyter_highlight_selected_word-0.2.0-py27_0.tar.bz2
 installer/bla/jupyter_latex_envs-1.4.4-py27_0.tar.bz2
 installer/bla/jupyter_nbextensions_configurator-0.4.0-py27_0.tar.bz2
 installer/x86_64/mod_func.c
-installer/py*/downloads/pip_packages/*
-installer/py*/downloads/conda_packages/*
-installer/py*/downloads/**
 
 SLURM_scripts/user_settings
 test.log
+installer/py*.*/downloads/**

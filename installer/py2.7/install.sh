@@ -66,7 +66,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/conda_packages)" ]; then
     echo "No conda packages found in downloads/conda_packages. They will be downloaded."
     download_conda_packages_flag="true"
 else
-    echo "Found conda packages in downloads/conda_packages. They will not be downloaded"
+    echo "Warning: found conda packages in downloads/conda_packages. They will not be redownloaded. If you have changed the conda_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_conda_packages_flag="false"
 fi
 
@@ -79,7 +79,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/pip_packages)" ]; then
     echo "No PyPI packages found in downloads/pip_packages. They will be downloaded."
     download_pip_packages_flag="true"
 else
-    echo "Found PyPI packages in downloads/pip_packages. They will not be downloaded."
+    echo "Warning: found PyPI packages in downloads/pip_packages. They will not be redownloaded. If you have changed the pip_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_pip_packages_flag="false"
 fi
 
@@ -89,7 +89,7 @@ if [[ "${download_conda_flag}" == "false" && "${download_conda_packages_flag}" =
 fi
 
 # -------------------- 1. Installing Anaconda -------------------- #
-print_title "1/5. Installing Anaconda"
+print_title "1/6. Installing Anaconda"
 # 1.0 -- Downloading Anaconda (if necessary).
 if [[ "${download_conda_flag}" == "true" ]]; then
     echo "Downloading ${anaconda_installer}"
@@ -104,7 +104,7 @@ source ${CONDA_INSTALL_PATH}/bin/activate
 conda info
 
 # -------------------- 2. Downloading conda dependencies -------------------- #
-print_title "2/5. Installing conda dependencies "
+print_title "2/6. Installing conda dependencies "
 # 2.0 -- Downloading In-Silico-Framework conda dependencies (if necessary).
 if [ "${download_conda_packages_flag}" == "true" ]; then
     echo "Downloading In-Silico-Framework conda dependencies."
@@ -118,7 +118,7 @@ conda update --file $SCRIPT_DIR/tempfile --quiet
 cd $WORKING_DIR
 
 # -------------------- 3. Installing PyPI dependencies -------------------- #
-print_title "3/5. Installing PyPI dependencies"
+print_title "3/6. Installing PyPI dependencies"
 # 3.0 -- Downloading In-Silico-Framework pip dependencies (if necessary).
 if [ "${download_pip_packages_flag}" == "true" ]; then
     echo "Downloading In-Silico-Framework pip dependencies."
@@ -131,12 +131,16 @@ python -m pip --no-cache-dir install --no-deps -r $SCRIPT_DIR/pip_requirements.t
 cd $WORKING_DIR
 
 # -------------------- 4. Patching pandas library -------------------- #
-print_title "4/5. Patch pandas to support CategoricalIndex"
+print_title "4/6. Patch pandas to support CategoricalIndex"
 python $SCRIPT_DIR/patch_pandas_linux64.py
 cd $WORKING_DIR
 
-# -------------------- 5. Compiling NEURON mechanisms -------------------- #
-print_title "5/5. Compiling NEURON mechanisms"
+# -------------------- 5. installing the ipykernel -------------------- #
+print_title "5/6. Installing the ipykernel"
+python -m ipykernel install --name base --user --display-name isf2.7
+
+# -------------------- 6. Compiling NEURON mechanisms -------------------- #
+print_title "6/6. Compiling NEURON mechanisms"
 echo "Compiling NEURON mechanisms."
 cd $channels; nrnivmodl
 cd $netcon; nrnivmodl

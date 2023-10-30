@@ -47,21 +47,21 @@ import math
 ### logging setup
 import logging
 # All loggers will inherit the root logger's level and handlers
-isf_logger = logging.getLogger("ISF")
+logger = logging.getLogger("ISF")
 # Redirect warnings to the logging system. This will format them accordingly.
 logging.captureWarnings(True)
-if not any([h.name == "isf_logger_stream_handler" for h in isf_logger.handlers
+if not any([h.name == "logger_stream_handler" for h in logger.handlers
            ]):
     # If the stream handler hasn't been set yet: set it.
     # a singular stream handler, so that all logs can redirect to this one
-    isf_logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
-    isf_logger_stream_handler.name = "isf_logger_stream_handler"
-    isf_logger_stream_handler.setFormatter(
+    logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
+    logger_stream_handler.name = "logger_stream_handler"
+    logger_stream_handler.setFormatter(
         logging.Formatter("[%(levelname)s] %(name)s: %(message)s"))
-    isf_logger.handlers = [isf_logger_stream_handler
+    logger.handlers = [logger_stream_handler
                           ]  # Additional handlers can always be configured.
-isf_logger_stream_handler = [
-    h for h in isf_logger.handlers if h.name == "isf_logger_stream_handler"
+logger_stream_handler = [
+    h for h in logger.handlers if h.name == "logger_stream_handler"
 ][0]
 
 try:
@@ -78,7 +78,7 @@ except ImportError:
 #
 #     log = file if hasattr(file,'write') else sys.stderr
 #     traceback.print_stack(file=log)
-#     log.write(warnings.formatwarning(message, category, filename, lineno, line))
+#     logger.write(warnings.formatwarning(message, category, filename, lineno, line))
 #
 # warnings.showwarning = warn_with_traceback
 

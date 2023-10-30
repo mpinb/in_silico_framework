@@ -11,7 +11,7 @@ Such a function can for example be used to deactivate specific synapses at a som
 import logging
 import importlib
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def get(funname):

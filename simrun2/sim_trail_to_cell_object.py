@@ -13,7 +13,7 @@ import pandas as pd
 from .utils import *
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 h = neuron.h
 
@@ -174,7 +174,7 @@ def trail_to_cell_object(name = None, cellName = None, networkName = None, synap
                                 vardt=False)  #trigger the actual simulation
             stopTime = time.time()
             simdt = stopTime - startTime
-            log.info('NEURON runtime: {:.2f} s'.format(simdt))
+            logger.info('NEURON runtime: {:.2f} s'.format(simdt))
             t = np.array(tVec)
             vmSoma = np.array(cell.soma.recVList[0])
             cell.t = np.array(t[offsetBin:])

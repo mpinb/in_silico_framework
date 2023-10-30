@@ -17,7 +17,7 @@ import contextlib, io
 import logging
 from .utils import StreamToLogger
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 # moved to the bottom to resolve circular import
 # from .hay_complete_default_setup import get_hay_problem_description, get_hay_objective_names, get_hay_params_pdf
 
@@ -42,7 +42,7 @@ def setup_hay_evaluator(testing=False):
     import neuron
     h = neuron.h
 
-    log.warning(
+    logger.warning(
         "Setting up hay evaluator. This loads several variables " +
         "to the NEURON envioronment. Also, it creates a unconnected " +
         "cell (which is very small ~ 1 compartment) which has the purpose " +
@@ -53,7 +53,7 @@ def setup_hay_evaluator(testing=False):
     central_file_name = 'fit_config_89_CDK20050712_BAC_step_arco_run1.hoc'
 
     with StreamToLogger(
-            log, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             neuron.h.central_file_name
             if not neuron.h.central_file_name == central_file_name:
@@ -143,7 +143,7 @@ def hay_objective_function(x):
 
     h.organism[0].set_genome(x)
     with StreamToLogger(
-            log, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             h.evaluator.evaluate_population(o)
         except:
@@ -227,7 +227,7 @@ def hay_evaluate(cur_stim, tvec, vList):
         hoc_vList.append(h.Vector().from_python(v))
 
     with StreamToLogger(
-            log, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
+            logger, 10) as sys.stdout:  # redirect to log with level DEBUG (10)
         try:
             x = h.calculator.get_organism_stimulus_error(
                 feature_mean_list.o(cur_stim),

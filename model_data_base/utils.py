@@ -12,6 +12,8 @@ import numpy as np
 import distributed
 import six
 from six.moves import cPickle
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def chunkIt(seq, num):
@@ -389,4 +391,23 @@ def myrepartition(ddf, N):
         assert len(divisions) - 1 == len(delayeds)
         return dd.from_delayed(delayeds, meta = meta, divisions = divisions)
     
+def df_colnames_to_str(df):
+    """
+    Converts the column names and index names of a dataframe to string.
+    Useful for dumping using the pandas_to_parquet dumper, or dask_to_parquet dumper.
+    Warning: This overwrites the original object, in favor of the overhead of creating a copy on every write.
 
+    Args:
+        df (pd.DataFrame | dask.DataFrame): a DataFrame
+
+    Returns:
+        df (pd.DataFrame | dask.DataFrame): the same dataframe, but with string type column and index names.
+    """
+    if not all([type(e) == str for e in df.columns]):
+        logger.warning("Converting the following column names to string for saving with parquet: {}".format(df.columns))
+        df.columns = df.columns.astype(str)
+    if df.index.name is not None:
+        if not type(df.index.name) == str:
+            logger.warning("Converting the following index name to string for saving with parquet: {}".format(df.index.name))
+            df.index.name = str(df.index.name)
+    return df

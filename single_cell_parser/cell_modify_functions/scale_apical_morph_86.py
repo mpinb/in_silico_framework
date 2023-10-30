@@ -1,6 +1,6 @@
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def scale_apical_morph_86(cell):
@@ -36,5 +36,5 @@ def scale_apical_morph_86(cell):
 #                d = sec.diamList[i]
 #                dummy = h.pt3dadd(x, y, z, d, sec=sec)
 
-    log.info('Scaled {:d} apical sections...'.format(scaleCount))
+    logger.info('Scaled {:d} apical sections...'.format(scaleCount))
     return cell

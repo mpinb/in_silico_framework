@@ -17,10 +17,11 @@ import os, cloudpickle
 from simrun2.reduced_model.get_kernel import ReducedLdaModel
 from model_data_base.model_data_base import ModelDataBase
 from model_data_base.model_data_base_register import get_mdb_by_unique_id
-from . import pandas_to_msgpack
+from . import pandas_to_parquet, pandas_to_msgpack
 from . import numpy_to_npz
 import pandas as pd
 import compatibility
+import six
 
 
 def check(obj):
@@ -60,10 +61,15 @@ def dump(obj, savedir):
     lda_value_dicts = Rm.lda_value_dicts
     mdb_list = Rm.mdb_list
 
+    if six.PY2:
+        st_dumper = pandas_to_msgpack
+    elif six.PY3:
+        st_dumper = pandas_to_parquet
+
     try:
         mdb.setitem('st',
-                    Rm.st.round(decimals=2).astype('f2').reset_index(drop=True),
-                    dumper=pandas_to_msgpack)
+                    Rm.st.round(decimals=2).astype(float).reset_index(drop=True),
+                    dumper=st_dumper)
         del Rm.st
         del Rm.lda_values  # can be recalculated
         lv = 0

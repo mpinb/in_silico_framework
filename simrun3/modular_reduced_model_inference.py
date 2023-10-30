@@ -769,7 +769,7 @@ class DataExtractor_daskDataframeColumn(DataExtractor):  #rieketodo
             slice_ = self.client.compute(slice_).result()
             cache.setitem(complete_key,
                           slice_,
-                          dumper=I.dumper_pandas_to_msgpack)
+                          dumper=I.dumper_pandas_to_parquet)
         self.data = cache[complete_key]
         # after the setup, the object must be serializable and therefore must not contain a client objectz
         self.client = None

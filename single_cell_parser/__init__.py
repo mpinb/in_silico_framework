@@ -5,7 +5,7 @@ with NeuroNet subcellular synapse distributions
 '''
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 import tables  #so florida servers have no problem with neuron
 from .writer import write_cell_simulation
 from .writer import write_landmark_file
@@ -19,6 +19,7 @@ from .writer import write_presynaptic_spike_times
 from .writer import write_spike_times_file
 from .reader import read_scalar_field
 from .reader import read_synapse_realization
+from .reader import read_functional_realization_map
 from .reader import read_synapse_activation_file
 from .reader import read_complete_synapse_activation_file
 from .reader import read_spike_times_file
@@ -88,20 +89,20 @@ def create_cell(parameters, scaleFunc=None, allPoints=False, setUpBiophysics = T
             'Keyword scaleFunc is deprecated! ' +
             'New: To ensure reproducability, scaleFunc should be specified in the parameters, as described in single_cell_parser.cell_modify_funs'
         )
-    log.info('-------------------------------')
-    log.info('Starting setup of cell model...')
+    logger.info('-------------------------------')
+    logger.info('Starting setup of cell model...')
     axon = False
 
     if 'AIS' in list(parameters.keys()):
         axon = True
 
-    log.info('Loading cell morphology...')
+    logger.info('Loading cell morphology...')
     parser = CellParser(parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
     if setUpBiophysics:
-        log.info('Setting up biophysical model...')
+        logger.info('Setting up biophysical model...')
         parser.set_up_biophysics(parameters, allPoints)
-    log.info('-------------------------------')
+    logger.info('-------------------------------')
 
     parser.apply_cell_modify_functions(parameters)
     parser.cell.init_time_recording()
@@ -210,7 +211,7 @@ def spines_update_synapse_distribution_file(cell, synapse_distribution_file,
 
     with open(new_synapse_distribution_file, "w") as synapse_file:
         synapse_file.writelines(file_data)
-    log.info("Success: .syn file updated")
+    logger.info("Success: .syn file updated")
 
 
 def spines_update_network_paramfile(new_synapse_distribution_file,
@@ -221,4 +222,4 @@ def spines_update_network_paramfile(new_synapse_distribution_file,
         network_param.network[
             i].synapses.distributionFile = new_synapse_distribution_file
     network_param.save(new_network_paramfile)
-    log.info("Success: network.param file updated")
+    logger.info("Success: network.param file updated")

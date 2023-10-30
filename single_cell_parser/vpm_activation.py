@@ -12,7 +12,7 @@ from . import sim_control
 import numpy as np
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 '''anatomical parameters'''
 # ? look @ vpm -> L5tt mapping results
 # vpm -> L4 about 0.4; therefore 0.2 good guess
@@ -114,7 +114,7 @@ def run_sim():
             spikeTimes.append(spikeTVec)
             vpmConnectedCells[i].play(spikeTVec)
 
-    log.info('{:d} active & connected VPM cells!'.format(len(spikeTimes)))
+    logger.info('{:d} active & connected VPM cells!'.format(len(spikeTimes)))
     _assign_functional_synapses(cell, vpmConnectedCells)
 
     sim = sim_control.SimControl(cell=cell, sim_time=30, dt=0.025, T=6)

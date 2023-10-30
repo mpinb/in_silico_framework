@@ -15,6 +15,8 @@ interactive="0"
 notebook=""
 notebook_kwargs=""
 
+PYTHON_EXECUTABLE="$(which python)"
+
 help() {
   cat <<EOF
     Usage: $0 [options] {job name}
@@ -170,7 +172,7 @@ function QOS_precheck {
 args_precheck $# $1;
 
 # Parse options
-while getopts "hN:n:m:t:cgiIp:T:r:Ab:" OPT;
+while getopts "hN:n:m:t:cgiIp:T:r:Ab:K:" OPT;
 do
   case "$OPT" in
     h) usage
@@ -187,6 +189,7 @@ do
     r) gres=${OPTARG};;
     A) partition="GPU-a100";;  # appendix to start the correct python file
     b) notebook=${OPTARG};;
+    K) notebook_kwargs=${OPTARG};;
     \?) # incorrect option
       echo "Error: Invalid option"
       exit 1;;
@@ -260,7 +263,7 @@ if [ ! -z "$tpn" ]; then
 fi
 
 ################### Normal submission (batch or interactive job) ###################
-run_str="srun -n1 -N$nodes -c$cores python -u \$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/setup_SLURM.py \$MYBASEDIR/management_dir_$name"
+run_str="srun -n1 -N$nodes -c$cores $PYTHON_EXECUTABLE -u \$MYBASEDIR/project_src/in_silico_framework/SLURM_scripts/setup_SLURM.py \$MYBASEDIR/management_dir_$name"
 if [ $interactive == "1" ]; then
   run_str=$run_str" --launch_jupyter_server"
 fi
@@ -274,6 +277,20 @@ if [ ! -z $notebook ]; then
     exit 1
   fi
   run_str=$run_str" --notebook_name $notebook"
+fi
+
+if [ ! -z $notebook_kwargs ]; then
+  if [ $interactive == 1 ]; then
+    echo "Please submit notebooks as a batch job, not interactive."
+    echo "Beware that the default submit options is interactive."
+    echo "You can e.g. manually set the partition to GPU/CPU with the -p flag"
+    exit 1
+  fi
+  if [ -z $notebook ]; then
+    echo "Warning: notebook_kwargs passed, but no notebook name passed. Please pass a notebook name with the -b flag."
+    exit 1
+  fi
+  run_str=$run_str" --nb_kwargs $notebook_kwargs"
 fi
 
 # TODO: hard thing is to get SLURM to run two tasks and distribute resources accordingly. Maybe it's easier to implement nbrun in setup_SLURM and consider it 1 task?

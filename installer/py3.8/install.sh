@@ -69,7 +69,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/conda_packages)" ]; then
     echo "No conda packages found in downloads/conda_packages. They will be downloaded."
     download_conda_packages_flag="true"
 else
-    echo "Found conda packages in downloads/conda_packages. They will not be downloaded"
+    echo "Warning: found conda packages in downloads/conda_packages. They will not be redownloaded. If you have changed the conda_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_conda_packages_flag="false"
 fi
 
@@ -82,7 +82,7 @@ elif [ ! "$(ls -A $SCRIPT_DIR/downloads/pip_packages)" ]; then
     echo "No PyPI packages found in downloads/pip_packages. They will be downloaded."
     download_pip_packages_flag="true"
 else
-    echo "Found PyPI packages in downloads/pip_packages. They will not be downloaded."
+    echo "Warning: found PyPI packages in downloads/pip_packages. They will not be redownloaded. If you have changed the pip_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_pip_packages_flag="false"
 fi
 
@@ -141,13 +141,8 @@ fi
 echo "Installing In-Silico-Framework pip dependencies."
 python -m pip --no-cache-dir install --no-deps -r $SCRIPT_DIR/pip_requirements.txt --no-index --find-links $SCRIPT_DIR/downloads/pip_packages
 
-# -------------------- 4. Patching dask library -------------------- #
-print_title "4/6. Patching dask library"
-python $SCRIPT_DIR/patch_dask_linux64.py
-echo "Dask library patched."
-
 # -------------------- 5. Patching pandas-msgpack -------------------- #
-print_title "5/6. Installing & patching pandas-msgpack"
+print_title "4/6. Installing & patching pandas-msgpack"
 PD_MSGPACK_HOME="$SCRIPT_DIR/pandas-msgpack"
 if [ ! -d "${PD_MSGPACK_HOME}" ]; then
     cd $SCRIPT_DIR
@@ -158,13 +153,17 @@ fi
 cd $PD_MSGPACK_HOME; python setup.py build_ext --inplace --force install
 pip list | grep pandas
 
-# -------------------- 6. Compiling NEURON mechanisms -------------------- #
+# -------------------- 6. installing the ipykernel -------------------- #
+print_title "5/6. Installing & patching pandas-msgpack"
+python -m ipykernel install --name base --user --display-name isf3.8
+
+# -------------------- 7. Compiling NEURON mechanisms -------------------- #
 print_title "6/6. Compiling NEURON mechanisms"
 echo "Compiling NEURON mechanisms."
 cd $channels; nrnivmodl
 cd $netcon; nrnivmodl
 
-# -------------------- 7. Cleanup -------------------- #
+# -------------------- Cleanup -------------------- #
 echo "Succesfully installed In-Silico-Framework for Python 3.8"
 rm $SCRIPT_DIR/tempfile
 popd

@@ -23,14 +23,18 @@ jobs:
       runner_name: ${{ runner.name }}
     
     steps:
+    - id: prev_commit
+      run: echo "prev_commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
     - uses: actions/checkout@v3
       id: checkout
-      
+
     - name: Check changes with previous commit
       uses: dorny/paths-filter@v2
       id: commit_changed
       with:
         list-files: shell
+        base: ${{ steps.prev_commit.outputs.prev_commit }}
         filters: |
           trigger_rebuild:
             - "installer/py${{ inputs.py_version }}/**"
@@ -42,7 +46,6 @@ jobs:
       # - the commit has changes in the directories specified in step "check changes with previous commit" (compared to whatever previous commit is on the runner)
       # - the build does not exist (yet)
       # - the previous build was not succesful for whatever reason
-      # the fromJSON(toJSON(...)) is necessary to convert the outputs to strings, otherwise github actions complains that it "might" not be able to acces the variables.
       id: needs_build
       run: |
         echo "needs_build=false" >> $GITHUB_OUTPUT

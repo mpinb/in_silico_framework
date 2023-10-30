@@ -13,7 +13,7 @@ import distributed
 import subprocess
 import logging
 
-log = logging.getLogger("ISF").getChild(__name__)
+logger = logging.getLogger("ISF").getChild(__name__)
 
 AM_FILE = os.path.join(CURRENT_DIR, 'test_files', 'am_files', 'rest',
                        'S13_final_done_Alison_zScale_40.am')
@@ -22,53 +22,53 @@ IMAGE_FILE = os.path.join(CURRENT_DIR, 'test_files', 'image_files', 'rest',
 
 
 def test_am_read():
-    log.info(AM_FILE)
-    log.info("***********")
-    log.info("TEST Am.read() method:")
-    log.info("***********")
+    logger.info(AM_FILE)
+    logger.info("***********")
+    logger.info("TEST Am.read() method:")
+    logger.info("***********")
 
     #   Test 1
-    log.info("TEST 1")
-    log.info("print the test file path:")
-    log.info(AM_FILE)
-    log.info("------")
+    logger.info("TEST 1")
+    logger.info("print the test file path:")
+    logger.info(AM_FILE)
+    logger.info("------")
     am_object = IO.Am(AM_FILE)
 
     #   Test 2
-    log.info("TEST 2")
-    log.info("am_object:")
-    log.info("output_path: " + am_object.output_path)
-    log.info("input_path: " + am_object.input_path)
-    log.info("-------")
+    logger.info("TEST 2")
+    logger.info("am_object:")
+    logger.info("output_path: " + am_object.output_path)
+    logger.info("input_path: " + am_object.input_path)
+    logger.info("-------")
 
     #  Test 3
-    log.info("TEST 3")
+    logger.info("TEST 3")
     am_object.read()
-    log.info("commands: ")
-    log.info(am_object.commands)
-    log.info("-------")
+    logger.info("commands: ")
+    logger.info(am_object.commands)
+    logger.info("-------")
 
     #   Test 4
-    log.info("TEST 4")
-    log.info('profile_data["POINT { float[3] EdgePointCoordinates }"]')
+    logger.info("TEST 4")
+    logger.info('profile_data["POINT { float[3] EdgePointCoordinates }"]')
     defined_point = [
         1.849200057983398E01, 5.106000137329102E01, 1.310999989509583E00
     ]
     point = am_object.all_data["POINT { float[3] EdgePointCoordinates }"][3]
 
-    log.info("The point read from the file is as the same as the one from the " \
+    logger.info("The point read from the file is as the same as the one from the " \
           "Am.read() method: " + \
           str(utils.are_same_points(defined_point, point)))
     assert utils.are_same_points(defined_point, point)
-    log.info("-------")
+    logger.info("-------")
 
     del am_object
 
 
 def test_am_write():
-    log.info("***********")
-    log.info("TEST Am.write() method:")
-    log.info("***********")
+    logger.info("***********")
+    logger.info("TEST Am.write() method:")
+    logger.info("***********")
     am_object = IO.Am(AM_FILE)
     am_object.read()
     am_object.output_path = os.path.join(CURRENT_DIR, 'test_files', 'output',
@@ -87,9 +87,9 @@ def test_correct_seed():
     Input is [x, y, original_intensity]
     Output is [new_x, new_y, original_intensity] (for some reason)
     """
-    log.info("***********")
-    log.info("TEST thicknesses._correct_seed() method:")
-    log.info("***********")
+    logger.info("***********")
+    logger.info("TEST thicknesses._correct_seed() method:")
+    logger.info("***********")
     # image point and its value, extracted using ImageJ:
     # x = 2400, y = 2364, value = 149
     # the maximum value in a area of thickness 10 micron is 181 at [2333, 2283]
@@ -138,21 +138,21 @@ def test_pipeline(client):
     p = pipeline.ExtractThicknessPipeline()
 
     p.set_am_paths_by_folder(am_folder_path)
-    log.info("set_am_paths_by_folder test, should log.info the first am file")
-    log.info(p.am_paths[0])
+    logger.info("set_am_paths_by_folder test, should logger.info the first am file")
+    logger.info(p.am_paths[0])
 
     p.set_tif_paths_by_folder(tif_folder_path)
-    log.info("set_tif_paths_by_folder test, should log.info the first tif file")
-    log.info(p.tif_paths[0])
-    log.info(os.path.basename(p.am_paths[0]))
+    logger.info("set_tif_paths_by_folder test, should logger.info the first tif file")
+    logger.info(p.tif_paths[0])
+    logger.info(os.path.basename(p.am_paths[0]))
 
     p.set_output_path(output_folder_path)
-    log.info("set_output_path test, should log.info the output folder path")
-    log.info(p.set_output_path)
+    logger.info("set_output_path test, should logger.info the output folder path")
+    logger.info(p.set_output_path)
 
     p.set_hoc_file(hoc_file_path)
-    log.info("set_hoc_file test, should log.info the hoc file path")
-    log.info(p.hoc_file)
+    logger.info("set_hoc_file test, should logger.info the hoc file path")
+    logger.info(p.hoc_file)
 
     # p.set_thickness_extractor_parameters()
     p.set_am_to_hoc_transformation_by_landmarkAscii(bijective_points_path)

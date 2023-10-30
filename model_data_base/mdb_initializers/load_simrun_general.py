@@ -3,28 +3,23 @@ Use the init function in this module to load simulation data generated
 with the simrun2 module into a ModelDataBase.
 '''
 
-import os, glob, shutil, fnmatch
-import hashlib
+import os, glob, shutil, fnmatch, hashlib, six, dask, compatibility, scandir, warnings
 import numpy as np
 import pandas as pd
 import dask.dataframe as dd
-import dask
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 from model_data_base import utils, ModelDataBase
-from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack, pandas_to_pickle, to_cloudpickle, to_pickle, pandas_to_msgpack
+from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack, pandas_to_pickle, \
+    to_cloudpickle, to_pickle, pandas_to_parquet, dask_to_msgpack, pandas_to_msgpack, \
+        get_dumper_string_by_dumper_module, dask_to_parquet
 from model_data_base.model_data_base import get_progress_bar_function,\
     MdbException
 from model_data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format as read_sa
 from model_data_base.IO.roberts_formats import read_pandas_cell_activation_from_roberts_format as read_ca
 from model_data_base.analyze.spike_detection import spike_detection
 # from model_data_base.analyze.burst_detection import burst_detection
-from model_data_base.IO.LoaderDumper import dask_to_msgpack
-from model_data_base.IO.LoaderDumper import get_dumper_string_by_dumper_module
 from model_data_base.utils import mkdtemp
-import compatibility
-import warnings
-import scandir
 
 ############################################
 # Step one: create filelist containing paths to all soma voltage trace files
@@ -149,7 +144,6 @@ def get_voltage_traces_divisions_by_metadata(metadata, repartition=None):
     if len(divisions) > 10000 and repartition:
         divisions = [d[0] for d in utils.chunkIt(divisions, 5000)]
     return tuple(divisions + [metadata.iloc[-1].sim_trail_index])
-
 
 ############################################
 #Step three: read out the sim_trail_index from the soma voltage traces dask dataframe
@@ -479,7 +473,7 @@ def write_param_files_to_folder(df,
 ###########################################################################################
 # Build database using the helper functions above
 ###########################################################################################
-def _build_core(mdb, repartition=None):
+def _build_core(mdb, repartition=None, metadata_dumper=pandas_to_parquet):
     assert repartition is not None
     print('---building data base core---')
 
@@ -493,8 +487,7 @@ def _build_core(mdb, repartition=None):
 
     print('generate voltage traces dataframe...')
     #vt = read_voltage_traces_by_filenames(mdb['simresult_path'], mdb['file_list'])
-    vt = read_voltage_traces_by_filenames(mdb['simresult_path'],
-                                          filelist,
+    vt = read_voltage_traces_by_filenames(mdb['simresult_path'], filelist,
                                           repartition=repartition)
 
     mdb.setitem('voltage_traces', vt, dumper=to_cloudpickle)
@@ -503,7 +496,7 @@ def _build_core(mdb, repartition=None):
     mdb['sim_trail_index'] = mdb['voltage_traces'].index.compute()
 
     print('generate metadata ...')
-    mdb.setitem('metadata', create_metadata(mdb), dumper=pandas_to_msgpack)
+    mdb.setitem('metadata', create_metadata(mdb), dumper=metadata_dumper)
 
     print('add divisions to voltage traces dataframe')
     vt.divisions = get_voltage_traces_divisions_by_metadata(
@@ -511,8 +504,8 @@ def _build_core(mdb, repartition=None):
     mdb.setitem('voltage_traces', vt, dumper=to_cloudpickle)
 
 
-def _build_synapse_activation(mdb, repartition=False, n_chunks=5000):
 
+def _build_synapse_activation(mdb, repartition=False, n_chunks=5000):
     def template(key, paths, file_reader_fun, dumper):
         print('counting commas')
         max_commas = get_max_commas(paths) + 1
@@ -642,7 +635,7 @@ def init(mdb, simresult_path,  \
          spike_times = True,  burst_times = False, \
          repartition = True, scheduler = None, rewrite_in_optimized_format = True,
          dendritic_spike_times = True, dendritic_spike_times_threshold = -30.,
-         client = None, n_chunks = 5000):
+         client = None, n_chunks = 5000, dumper = pandas_to_parquet):
     '''Use this function to load simulation data generated with the simrun2 module 
     into a ModelDataBase. 
     
@@ -663,6 +656,14 @@ def init(mdb, simresult_path,  \
     
     client: dask distributed Client object.
     '''
+    assert dumper in (pandas_to_msgpack, pandas_to_parquet), \
+        "Please use a pandas-compatible dumper. You used {}.".format(dumper)
+    if dumper == pandas_to_msgpack and six.PY3:
+        raise DeprecationError(
+            "The pandas_to_msgpack dumper is deprecated for Python 3.8 and onwards. Use pandas_to_parquet instead. \
+                If you _really_ need to use pandas_to_msgpack for whatever reason, use ISF Py2.7 and pretend to be the \
+                test suite by overriding the environment variable ISF_IS_TESTING. See\
+                model_data_base.IO.LoaderDumper.pandas_to_msgpack.dump")
     if burst_times:
         raise ValueError('deprecated!')
     if rewrite_in_optimized_format:
@@ -675,7 +676,7 @@ def init(mdb, simresult_path,  \
 #with get_progress_bar_function()():
     mdb['simresult_path'] = simresult_path
     if core:
-        _build_core(mdb, repartition=repartition)
+        _build_core(mdb, repartition=repartition, metadata_dumper=pandas_to_parquet)
         if rewrite_in_optimized_format:
             optimize(mdb,
                      select=['voltage_traces'],
@@ -693,18 +694,19 @@ def init(mdb, simresult_path,  \
                      select=['cell_activation', 'synapse_activation'],
                      repartition=False,
                      scheduler=scheduler,
-                     client=client)
+                     client=client,
+                     dumper=dumper)
     if dendritic_voltage_traces:
         add_dendritic_voltage_traces(mdb, rewrite_in_optimized_format,
                                      dendritic_spike_times, repartition,
                                      dendritic_spike_times_threshold, scheduler,
-                                     client)
+                                     client, dumper=dumper)
     if spike_times:
         print("---spike times---")
         vt = mdb['voltage_traces']
         mdb.setitem('spike_times',
                     spike_detection(vt),
-                    dumper=pandas_to_msgpack)
+                    dumper=dumper)
     print('Initialization succesful.')
 
 
@@ -714,17 +716,18 @@ def add_dendritic_voltage_traces(mdb,
                                  repartition=True,
                                  dendritic_spike_times_threshold=-30.,
                                  scheduler=None,
-                                 client=None):
+                                 client=None,
+                                 dumper=None):
     _build_dendritic_voltage_traces(mdb, repartition=repartition)
     if rewrite_in_optimized_format:
         optimize(mdb['dendritic_recordings'],
                  select=list(mdb['dendritic_recordings'].keys()),
                  repartition=False,
                  scheduler=scheduler,
-                 client=client)
+                 client=client,
+                 dumper=dumper)
     if dendritic_spike_times:
         add_dendritic_spike_times(mdb, dendritic_spike_times_threshold)
-
 
 def add_dendritic_spike_times(mdb, dendritic_spike_times_threshold=-30.):
     m = mdb.create_sub_mdb('dendritic_spike_times', raise_=False)
@@ -733,15 +736,15 @@ def add_dendritic_spike_times(mdb, dendritic_spike_times_threshold=-30.):
         st = spike_detection(vt, threshold=dendritic_spike_times_threshold)
         m.setitem(kk + '_' + str(dendritic_spike_times_threshold),
                   st,
-                  dumper=pandas_to_msgpack)
+                  dumper=pandas_to_parquet)
 
 
 def _get_dumper(value):
     '''tries to automativcally infer the best dumper for each table'''
     if isinstance(value, pd.DataFrame):
-        return pandas_to_msgpack
+        return pandas_to_parquet
     elif isinstance(value, dd.DataFrame):
-        return dask_to_categorized_msgpack
+        return dask_to_parquet
     else:
         raise NotImplementedError()
 
@@ -799,15 +802,10 @@ def optimize(mdb,
                 print('optimizing {} using dumper {}'.format(str(key), \
                                              get_dumper_string_by_dumper_module(dumper)))
                 if isinstance(value, dd.DataFrame):
-                    mdb.setitem(key,
-                                value,
-                                dumper=dumper,
-                                scheduler=scheduler,
-                                repartition=repartition,
-                                client=client)
+                    value = convert_df_columns_to_str(value)
+                    mdb.setitem(key, value, dumper = dumper, client = client)
                 else:
-                    mdb.setitem(key, value, dumper=dumper, scheduler=scheduler)
-
+                    mdb.setitem(key, value, dumper = dumper, scheduler=scheduler)
 
 def load_param_files_from_mdb(mdb, sti):
     import single_cell_parser as scp
@@ -837,3 +835,7 @@ def load_initialized_cell_and_evokedNW_from_mdb(mdb,
     else:
         evokedNW.create_saved_network2()
     return cell, evokedNW
+
+def convert_df_columns_to_str(df):
+    df = df.rename(columns={col: '{}'.format(col) for col in df.columns if type(col)!=str})
+    return df
