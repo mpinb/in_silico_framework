@@ -65,7 +65,7 @@ jobs:
         else
           echo "Previous commit has no changes that require a rebuild"
           echo "Build already exists and was succesful"
-          echo "No rebuild necessary"
+          echo "No rebuild necessary" 
         fi
 
   build:
