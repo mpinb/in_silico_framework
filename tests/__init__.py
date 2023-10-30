@@ -36,7 +36,7 @@ def setup_current_injection_experiment(rangevars=[]):
 
     return cell
 
-def setup_synapse_activation_experiment():
+def setup_synapse_activation_experiment(rangevars = []):
     """Sets up a current injection experiment of some .hoc and .param file.
     The following parameters define the experiment:
 
@@ -55,7 +55,10 @@ def setup_synapse_activation_experiment():
     evokedNW.create_saved_network2()
     
     neup.sim.tStop = 10
-    
+
+    for rv in rangevars:
+        cell.record_range_var(rv)
+        
     scp.init_neuron_run(neup.sim, vardt=False)
     
     evokedNW.re_init_network()
