@@ -12,7 +12,7 @@ import single_cell_parser.analyze as sca
 from model_data_base import utils, ModelDataBase
 from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack, pandas_to_pickle, \
     to_cloudpickle, to_pickle, pandas_to_parquet, dask_to_msgpack, pandas_to_msgpack, \
-        get_dumper_string_by_dumper_module
+        get_dumper_string_by_dumper_module, dask_to_parquet
 from model_data_base.model_data_base import get_progress_bar_function,\
     MdbException
 from model_data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format as read_sa
