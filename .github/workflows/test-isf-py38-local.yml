@@ -62,7 +62,7 @@ jobs:
           export TMPDIR=$HOME/tmp
           (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1)&
           (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 --local-directory="." > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1)&
-          pytest -n 6 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port $port_number tests/ > ./tests/logs/pytest_log_${{ github.run_id }}.log 2>&1
+          pytest -n 6 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port $port_number tests/
           rm -rf $TMPDIR
 
       - name: Cleanup dask orphan processes
