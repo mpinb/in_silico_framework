@@ -30,6 +30,7 @@ import compatibility
 import time
 from model_data_base.utils import chunkIt, myrepartition, mkdtemp
 import distributed
+import six
 # import pandas_msgpack # do not import this; it will break pickle in loaded dataframes
 from pandas_msgpack import to_msgpack, read_msgpack
 
@@ -54,6 +55,24 @@ def str_to_category(pdf):
 
 def category_to_str(pdf):
     '''careful: changes pdf!'''
+    if six.PY3: # when loading data saved in py2 within py3
+        columns = []
+        index = []
+        for c in pdf.columns:
+            if isinstance(c, bytes):
+                columns.append(c.decode('utf-8'))
+            else:
+                columns.append(c)
+        for i in pdf.index:
+            if isinstance(i, bytes):
+                index.append(i.decode('utf-8'))
+            else:
+                index.append(i)
+        pdf.index = index
+        pdf.columns = columns
+        for name, value in pdf.iloc[0].iteritems():
+            if isinstance(value, bytes):
+                pdf[name] = pdf[name].str.decode('utf-8')
     for c in pdf.select_dtypes(include=['category']).columns:
         pdf[c] = pdf[c].astype('object')  #map(str)#astype('object')
     if str(pdf.index.dtype) == 'category':
