@@ -30,6 +30,7 @@ jobs:
     steps:
       - name: Test ISF for Python 2.7
         run: |
+          set -e
           echo "------------ Preliminary setup for tests -------------"
           echo "Killing all dask processes on ${{ runner.name }} for user $USER (if they exist)"
           pkill -U $USER dask-worker

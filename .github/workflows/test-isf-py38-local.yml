@@ -27,6 +27,7 @@ jobs:
     steps:
       - name: Test in-silico-framework for Python 3.8
         run: |
+          set -e
           echo "------------ Preliminary setup for tests -------------"
           echo "Creating tests/logs/ directory..."
           mkdir -p ./tests/logs/
