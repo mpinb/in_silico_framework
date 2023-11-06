@@ -60,7 +60,7 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     
     # put repqrtition here
     if repartition:
-        if obj.npartitions >= repartition * 2
+        if obj.npartitions >= repartition * 2:
             ds = obj.to_delayed()
             concat_delayed_pandas_dfs = dask.delayed(pd.concat)
             ds_concat = [concat_delayed_pandas_dfs(chunk) for chunk in utils.chunkIt(ds, repartition)]
