@@ -63,13 +63,13 @@ jobs:
           (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1)&
           (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1)&
           python -m pytest -rsx -vv --color=yes --dask_server_port $port_number tests/
-          rm -rf $HOME/tmp
 
       - name: Cleanup dask orphan processes
         if: ${{ always() }}
         run: |
           pkill -U $USER dask-scheduler
           pkill -U $USER dask-worker
+          rm -rf $TMPDIR
 
       - name: Save test logs as artifacts
         uses: actions/upload-artifact@v3
