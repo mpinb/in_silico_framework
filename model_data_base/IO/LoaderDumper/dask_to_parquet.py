@@ -5,7 +5,7 @@ import pandas as pd
 import dask
 import json
 from . import parent_classes
-from model_data_base.utils import df_colnames_to_str
+from model_data_base.utils import df_colnames_to_str, chunkIt
 
 def check(obj):
     '''checks wherther obj can be saved with this dumper'''
@@ -52,12 +52,23 @@ class Loader(parent_classes.Loader):
         return ddf
 
 
-def dump(obj, savedir, schema=None, client=None):
+def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     # fetch original column names
     columns = obj.columns
     if obj.index.name is not None:
         index_name = obj.index.name
-
+    
+    # put repqrtition here
+    if repartition:
+        if obj.npartitions >= repartition * 2
+            ds = obj.to_delayed()
+            concat_delayed_pandas_dfs = dask.delayed(pd.concat)
+            ds_concat = [concat_delayed_pandas_dfs(chunk) for chunk in utils.chunkIt(ds, repartition)]
+            divisions_concat = [chunk[0] for chunk in utils.chunkIt(sa.divisions[:-1], repartition)] + [sa.divisions[-1]]
+            ddf_concat = dask.dataframe.from_delayed(divisions_concat)
+            ddf_concat.divisions = divisions_concat
+            obj = ddf_concat
+    
     delayeds = obj.to_delayed()
     delayeds = [dask.delayed(df_colnames_to_str)(e) for e in delayeds]
 
