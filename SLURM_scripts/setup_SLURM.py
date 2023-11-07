@@ -135,7 +135,7 @@ def main(management_dir,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('management_dir')  # non-optional positional argument
-    # parser.add_argument("--nb_kwargs", dest="nb_kwargs_from_cline", action=StoreDictKeyPair, metavar="KEY1=VAL1,KEY2=VAL2...", nargs='?', const=None)
+    parser.add_argument("--nb_kwargs", dest="nb_kwargs_from_cline", action=StoreDictKeyPair, metavar="KEY1=VAL1,KEY2=VAL2...", nargs='?', const=None)
     # parser.add_argument("--nb_suffix", nargs='?', const="-out", default="-out")
     parser.add_argument("--launch_jupyter_server",
                         default=True,
@@ -150,9 +150,13 @@ if __name__ == "__main__":
         print("Launching Jupyter server: {}".format(LAUNCH_JUPYTER_SERVER))
     print('using management dir {}'.format(MANAGEMENT_DIR))
 
+    if args.notebook_name is not None:
+        print("Running notebook {}".format(args.notebook_name))
+        print("with kwargs {}".format(args.nb_kwargs_from_cline))
+
     main(
         MANAGEMENT_DIR,
         LAUNCH_JUPYTER_SERVER,
         notebook=args.notebook_name,
-        #nb_kwargs=args.nb_kwargs
+        nb_kwargs=args.nb_kwargs_from_cline
     )

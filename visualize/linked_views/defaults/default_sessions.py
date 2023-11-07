@@ -1,4 +1,4 @@
-def biophysics_fitting_1():
+def biophysics_fitting_vaex_1():
     return {
         "data": {
             "grammar": {
@@ -56,7 +56,7 @@ def biophysics_fitting_1():
     }
 
 
-def biophysics_fitting_2():
+def biophysics_fitting_vaex_2():
     return {
         "data": {
             "grammar": {
@@ -117,6 +117,164 @@ def biophysics_fitting_2():
                         "y": 0
                     }]
                 }
+            }
+        }
+    }
+
+def biophysics_fitting_pandas():
+    return {
+        "data": {
+            "grammar": {
+                "grid": {
+                    "cols": 18,
+                    "rowHeight": 80,
+                    "width": 1900
+                },
+                "initialLayout": "L1",
+                "interactions": {
+                    "charges-parcoord": [
+                        {
+                            "action": {
+                                "assignSelection": [
+                                    "charges-parcoord",
+                                    "umap channel expression",
+                                    "umap channel utilization",
+                                    "energy efficiency vs. Ca_HVA expression"
+                                ]
+                            }
+                        }
+                    ],
+                    "energy efficiency vs. Ca_HVA expression": [                        
+                        {
+                            "action": {
+                                "intersectSelection": [
+                                    "umap channel utilization",
+                                    "umap channel expression",
+                                    "parcoords",
+                                    "PCA 1"
+                                ]
+                            },
+                            "filter": {
+                                "currentLayout": "L1"
+                            }
+                        }
+                    ],
+                    "umap channel expression": [
+                        {
+                            "action": {
+                                "intersectSelection": [
+                                    "charges-parcoord",
+                                    "umap channel expression",
+                                    "umap channel utilization",
+                                    "energy efficiency vs. Ca_HVA expression"
+                                ]
+                            }
+                        }
+                    ],
+                    "umap channel utilization": [
+                        {
+                            "action": {
+                                "intersectSelection": [
+                                    "charges-parcoord",
+                                    "umap channel expression",
+                                    "umap channel utilization",
+                                    "energy efficiency vs. Ca_HVA expression"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "layouts": {
+                    "L1": [
+                        {
+                            "h": 5,
+                            "view": "umap channel expression",
+                            "w": 5,
+                            "x": 0,
+                            "y": 0
+                        },
+                        {
+                            "h": 5,
+                            "view": "umap channel utilization",
+                            "w": 5,
+                            "x": 5,
+                            "y": 0
+                        },
+                        {
+                            "h": 5,
+                            "view": "energy efficiency vs. Ca_HVA expression",
+                            "w": 5,
+                            "x": 10,
+                            "y": 0
+                        },
+                        {
+                            "h": 3,
+                            "view": "charges-parcoord",
+                            "w": 18,
+                            "x": 0,
+                            "y": 5
+                        }
+                    ]
+                },
+                "views": [
+                    {
+                        "dataColumn": [
+                            "BAC_bifurcation_charges.Ca_HVA.ica",
+                            "BAC_dist_charge",
+                            "constants_bifurcation.SKv3_1.gSKv3_1bar"
+                        ],
+                        "dataTable": "pandas_df",
+                        "id": 2,
+                        "maxNumDatasources": 3,
+                        "minNumDatasources": 2,
+                        "name": "energy efficiency vs. Ca_HVA expression",
+                        "type": "regl-scatterplot"
+                    },
+                    {
+                        "dataColumn": [
+                            "BAC_bifurcation_charges.Ca_LVAst.ica",
+                            "BAC_bifurcation_charges.SK_E2.ik",
+                            "BAC_bifurcation_charges.Im.ik",
+                            "BAC_bifurcation_charges.SKv3_1.ik",
+                            "BAC_bifurcation_charges.NaTa_t.ina",
+                            "BAC_bifurcation_charges.Ca_HVA.ica",
+                            "BAC_bifurcation_charges.Ih.ihcn",
+                            "BAC_dist_charge"
+                        ],
+                        "dataTable": "pandas_df",
+                        "id": 4,
+                        "maxNumDatasources": 30,
+                        "minNumDatasources": 2,
+                        "name": "charges-parcoord",
+                        "type": "plotly-parallelcoords"
+                    },
+                    {
+                        "dataColumn": [
+                            "umap_charges_x",
+                            "umap_charges_y",
+                            "BAC_dist_charge"
+                        ],
+                        "dataTable": "pandas_df",
+                        "id": 5,
+                        "maxNumDatasources": 3,
+                        "minNumDatasources": 2,
+                        "name": "umap channel utilization",
+                        "type": "regl-scatterplot"
+                    },
+                    {
+                        "dataColumn": [
+                            "umap_params_x",
+                            "umap_params_y",
+                            "BAC_dist_charge"
+                        ],
+                        "dataTable": "pandas_df",
+                        "id": 6,
+                        "maxNumDatasources": 3,
+                        "minNumDatasources": 2,
+                        "name": "umap channel expression",
+                        "type": "regl-scatterplot"
+                    }
+                ]
             }
         }
     }

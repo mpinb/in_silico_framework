@@ -668,6 +668,7 @@ class NetworkMapper:
             # Generates poisson train activity from a modulated PSTH
             # from a mean activity, a modulation, and different cells in the population have different modulation phases.
             # The distribution of cells phases is defined as uniform/normal, etc
+            rate_before_t_offset = networkParameters.rate_before_t_offset
             mean_rate = networkParameters.mean_rate
             M = networkParameters.max_modulation
             freq = networkParameters.modulation_frequency  # Hz
@@ -696,11 +697,10 @@ class NetworkMapper:
                                          len(self.cells[preCellType]))
             else:
                 phase = np.zeros(len(self.cells[preCellType]))
-
-            for i, cell in enumerate(self.cells[preCellType]):
-                rates = np.full(n_bins, mean_rate) * (1 + M * np.sin(
-                    np.linspace(0, 2 * np.pi * n_cycles, n_bins) + phase[i]))
-                rates[0] = mean_rate
+            
+            for i,cell in enumerate(self.cells[preCellType]):
+                rates = np.full(n_bins,mean_rate)*(1+ M*np.sin(np.linspace(0,2*np.pi*n_cycles,n_bins)+phase[i]))
+                rates[0] = rate_before_t_offset
                 spikeTimes = sample_times_from_rates(bins, rates)
                 for spike_time in spikeTimes:
                     cell.append(spike_time,

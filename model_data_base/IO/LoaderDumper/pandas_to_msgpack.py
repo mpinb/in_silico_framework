@@ -40,7 +40,7 @@ def dump(obj, savedir, rows_per_file=None):
     if not "ISF_IS_TESTING" in os.environ:
         # Module was not called from within the test suite
         raise RuntimeError(
-            'pandas-msgpack is not supported anymore in the model_data_base')
+            'pandas-msgpack is not supported anymore in the model_data_base since Python 3.8')
     import os
     if rows_per_file is not None:
         row = 0

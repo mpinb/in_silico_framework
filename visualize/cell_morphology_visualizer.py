@@ -8,12 +8,13 @@ import os
 import dask
 import time
 from single_cell_parser import serialize_cell
-from .utils import write_video_from_images, write_gif_from_images, display_animation_from_images, draw_arrow, POPULATION_TO_COLOR_DICT
+from .utils import write_video_from_images, write_gif_from_images, display_animation_from_images, draw_arrow
 import warnings
 from barrel_cortex import inhibitory
 import six
 import distributed
 import socket
+import barrel_cortex
 if six.PY3:
     from scipy.spatial.transform import Rotation
     from dash import Dash, dcc, html, Input, Output, State
@@ -34,8 +35,7 @@ else:
     warnings.warn(
         "Interactive visualizations only work on Py3. Dash and plotly are not compatible with the Py2 version of ISF."
     )
-
-
+    
 class CMVDataParser:
 
     def __init__(self, cell, align_trunk=True):
@@ -389,50 +389,22 @@ class CMVDataParser:
          - time_point: time point from which we want to gather the synapse activations
         '''
 
-        def match_model_celltype_to_PSTH_celltype(celltype):
-            if '_' in celltype:
-                celltype = celltype.split('_')[0]
-            if celltype in inhibitory or celltype == 'INH':
-                key = 'INT'
-            elif celltype in ('L4ss', 'L4py', 'L4sp'):
-                key = 'L4ss'
-            elif celltype == 'L5st':
-                key = 'L5st'
-            elif celltype == 'L5tt':
-                key = 'L5tt'
-            elif celltype == 'L6cc':
-                key = 'L6CC'
-            elif celltype == 'VPM':
-                key = 'VPM'
-            elif celltype in ('L2', 'L34'):
-                key = 'L23'
-            elif celltype in ('L6ct', 'L6ccinv'):
-                key = 'inactive'
-            else:
-                raise ValueError(celltype)
-            return key
+        synapses = {}
 
-        synapses = {
-            'INT': [],
-            'L4ss': [],
-            'L5st': [],
-            'L5tt': [],
-            'L6CC': [],
-            'VPM': [],
-            'L23': []
-        }
         for population in self.cell.synapses.keys():
             for synapse in self.cell.synapses[population]:
-                if synapse["preCell"] is None:
+                if synapse.preCell is None:
                     continue
-                for spikeTime in synapse["preCell"]["spikeTimes"]:
-                    if time_point - self.time_show_syn_activ < spikeTime < time_point + self.time_show_syn_activ:
-                        population_name = match_model_celltype_to_PSTH_celltype(
+                for spikeTime in synapse.preCell.spikeTimes:
+                    if time_point <= spikeTime < time_point + self.time_show_syn_activ:
+                        population_name = self.synapse_group_function(
                             population)
-                        pt = synapse["coordinates"]
+                        pt = synapse.coordinates
                         if self.rotation_with_zaxis is not None:  # no alignment with z-axis
                             pt = self.rotation_with_zaxis.apply(
-                                synapse["coordinates"] - self.soma_center)
+                                synapse.coordinates - self.soma_center)
+                        if not population_name in synapses:
+                            synapses[population_name] = []
                         synapses[population_name].append(pt)
         return synapses
 
@@ -536,6 +508,10 @@ class CellMorphologyVisualizer(CMVDataParser):
         """whether the voltage legend should appear in the plot"""
         self.highlight_arrow_args = None
         """Additional arguments for the arrow. See available kwargs on https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow"""
+        
+        self.synapse_group_function = barrel_cortex.synapse_group_function_HZpaper
+        
+        self.population_to_color_dict = barrel_cortex.color_cellTypeColorMapHotZone    
 
     def _plot_cell_voltage_synapses_in_morphology_3d(self,
                                                      voltage,
@@ -595,7 +571,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         if show_synapses:
             for population in synapses.keys():
                 for synapse in synapses[population]:
-                    color = POPULATION_TO_COLOR_DICT[population]
+                    color = self.population_to_color_dict[population]
                     ax.scatter3D(synapse[0],
                                  synapse[1],
                                  synapse[2],
@@ -615,10 +591,10 @@ class CellMorphologyVisualizer(CMVDataParser):
 
         # Add legends
         if self.synapse_legend:
-            for key in POPULATION_TO_COLOR_DICT.keys():
+            for key in self.population_to_color_dict.keys():
                 if key != 'inactive':
                     ax.scatter3D([], [], [],
-                                 color=POPULATION_TO_COLOR_DICT[key],
+                                 color=self.population_to_color_dict[key],
                                  label=key,
                                  edgecolor='grey',
                                  s=75)
@@ -707,7 +683,7 @@ class CellMorphologyVisualizer(CMVDataParser):
                     synapses=synapses,
                     time_point=time_point,
                     save=filename,
-                    population_to_color_dict=POPULATION_TO_COLOR_DICT,
+                    population_to_color_dict=self.population_to_color_dict,
                     azim=self.azim,
                     dist=self.dist,
                     roll=self.roll,

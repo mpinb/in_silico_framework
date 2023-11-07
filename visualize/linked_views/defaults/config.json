@@ -4,46 +4,13 @@
             "type": "regl-scatterplot",
             "min_num_datasources": 2,
             "max_num_datasources": 3,
-            "table": "simulation_samples.csv"
-        },
-        {
-            "type": "regl-scatterplot-large",
-            "min_num_datasources": 2,
-            "max_num_datasources": 3,
-            "table": "simulations_sampled-100000_all_valid.csv"
-        },
-        {
-            "type": "scatterplot PCA",
-            "min_num_datasources": 2,
-            "max_num_datasources": 50,
-            "table": "simulation_samples.csv"
+            "table": "pandas_df"
         },
         {
             "type": "plotly-parallelcoords",
             "min_num_datasources": 2,
             "max_num_datasources": 30,
-            "table": "simulation_samples.csv"
-        },
-        {
-            "type": "anatomical-view",
-            "min_num_datasources": 0,
-            "max_num_datasources": 3,
-            "table": "simulation_samples.csv",
-            "configuration": {
-                "name": "single-morphology"
-            }
-        },
-        {
-            "type": "voltage-trace",
-            "min_num_datasources": 0,
-            "max_num_datasources": 3,
-            "table": "simulation_samples.csv"
-        },
-        {
-            "type": "time-control",
-            "min_num_datasources": 0,
-            "max_num_datasources": 3,
-            "table": "simulation_samples.csv"
+            "table": "pandas_df"
         },
         {
             "type": "density-2-channel",

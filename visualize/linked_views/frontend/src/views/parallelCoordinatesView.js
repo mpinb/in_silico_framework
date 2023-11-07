@@ -3,6 +3,8 @@ import Plot from 'react-plotly.js';
 import CoordinatedView from '../core/coordinatedView';
 import { SelectionEvent } from '../core/interactionEvent';
 import { getValueOrDefault } from '../core/utilCore';
+import { deepCopy } from '../core/utilCore';
+
 
 
 const empty_traces = [
@@ -102,6 +104,15 @@ class ParallelCoordinates extends CoordinatedView {
 
   updateSelection() {
     this.buildTraces(this.selection);
+    
+    if (this.dataTable === "pandas_df") {
+      const request_data = {
+        table: this.dataTable,
+        view_name: this.name,
+        indices: deepCopy(this.selection)
+      }
+      this.dataManager.setIndicesSelection(request_data);
+    }
   }
 
   componentWillUnmount() {

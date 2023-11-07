@@ -27,12 +27,12 @@ def setup_dask_scheduler(management_dir, ports):
     print('-' * 50)
     print('setting up dask-scheduler')
     sfile, sfile3 = _get_sfile(management_dir)
-    command = 'dask-scheduler --scheduler-file={} --port={} --bokeh-port={} --interface=ib0 &'
-    command = command.format(sfile, ports['dask_client_2'],
-                             ports['dask_dashboard_2'])
-    print(command)
-    os.system(command)
-    command = '''bash -ci "source ~/.bashrc; source_3; dask-scheduler --scheduler-file={} --port={} --interface=ib0 --dashboard-address=:{}" &'''
+    # command = 'dask-scheduler --scheduler-file={} --port={} --bokeh-port={} --interface=ib0 &'
+    # command = command.format(sfile, ports['dask_client_2'],
+    #                          ports['dask_dashboard_2'])
+    # print(command)
+    # os.system(command)
+    command = '''dask-scheduler --scheduler-file={} --port={} --interface=ib0 --dashboard-address=:{} &'''
     command = command.format(sfile3, ports['dask_client_3'],
                              ports['dask_dashboard_3'])
     print(command)
@@ -55,11 +55,11 @@ def setup_dask_workers(management_dir):
     print('setting up dask-workers')
     n_cpus = os.environ['SLURM_CPUS_PER_TASK']
     sfile, sfile3 = _get_sfile(management_dir)
-    command = 'dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --memory-limit=100e9 --local-directory $JOB_TMPDIR &'.format(
-        nprocs=n_cpus, sfile=sfile)
-    print(command)
-    os.system(command)
-    command = '''bash -ci "source ~/.bashrc; source_3; dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --local-directory $JOB_TMPDIR --memory-limit=100e9" &'''
+    # command = 'dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --memory-limit=100e9 --local-directory $JOB_TMPDIR &'.format(
+    #     nprocs=n_cpus, sfile=sfile)
+    # print(command)
+    # os.system(command)
+    command = '''dask-worker --nthreads 1  --nprocs {nprocs} --scheduler-file={sfile} --local-directory $JOB_TMPDIR --memory-limit=100e9 &'''
     command = command.format(nprocs=n_cpus, sfile=sfile3)
     print(command)
     os.system(command)

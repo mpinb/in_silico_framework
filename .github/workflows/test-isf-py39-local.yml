@@ -37,6 +37,7 @@ jobs:
           echo "Removing previous coverage files..."
           rm .coverage.${{ runner.name }}.*
           unset DISPLAY
+          unset DISPLAY
 
           echo "------------ Setting up environment -------------"
           CONDA_TARGET_DIR="$HOME/anaconda_isf3.9"
@@ -59,6 +60,10 @@ jobs:
           echo "Using port $port_number and bokeh port $bokeh_port"
 
           echo "------------ Running tests -------------"
+          if [ ! -d "$HOME/tmp" ]; then
+            mkdir $HOME/tmp
+          fi
+          export TMPDIR=$HOME/tmp
           if [ ! -d "$HOME/tmp" ]; then
             mkdir $HOME/tmp
           fi
@@ -88,6 +93,29 @@ jobs:
           files: ./tests/logs/report_py39.xml
           verbose: true # optional (default = false)
       
+  docs:
+    name: Build documentation
+    needs: test 
+    runs-on: ["ibs3005", "runner1"]
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - name: Build docs
+        run: |
+          echo "------------ Setting up environment -------------"
+          CONDA_TARGET_DIR="$HOME/anaconda_isf3.9"
+          source $CONDA_TARGET_DIR/bin/activate
+          echo "Using Python: $(which python)"
+          export PYTHONPATH=$(pwd):$HOME
+          echo $PYTHONPATH
+
+          echo "------------ Building docs -------------"
+          cd docs
+          make clean
+          make html
+          cd ..
   docs:
     name: Build documentation
     needs: test 

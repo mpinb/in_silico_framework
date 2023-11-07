@@ -91,6 +91,23 @@ After the installation is completed, proceed to install the IPython Kernels:
 source_isf; python -m ipykernel install --name root --user --display-name isf2
 source_3; python -m ipykernel install --name base --user --display-name isf3
 ```
+## Setting up VSCode
+
+Open config file in VSCode and copy over the following replacing the username:
+Host somalogin01
+  HostName somalogin01
+  User meulemeester
+
+Host somacpu* somagpu*
+  HostName %h
+  User meulemeester
+  ProxyCommand ssh -vv -W %h:%p somalogin01
+  ProxyJump somalogin01
+
+  Generate and SSH key using Powershell
+  ssh-keygen -b 4096
+
+  Download and install VScode extension "Remote -SSH" and copy over the public ssh key into trusted keys
 
 ## Cluster
 The [SLURM_scripts](../SLURM_scripts/) module provides various modules for cluster control. Two scripts tend to be used a lot, so it is worth adding them as an alias to your ~/.bashrc. You can name these commands however you want.

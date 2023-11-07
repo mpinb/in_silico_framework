@@ -60,6 +60,7 @@ npm install --global serve
 ## Known issues
 
 - Mac OS: Safari browser leads to connection problems with Python server (related to CORS). Recommended workaround: use Firefox browser on Mac OS.
+- Linux: Google Chrome browser: artefacts with lasso selection in scatter plots; Firefox browser: parallel coordinates selection not working; Recommended workaround: use Chromium browser.
 
 <!--
 If there are certificate errors downloading packages during install or run use the following setting before executing meteor command.

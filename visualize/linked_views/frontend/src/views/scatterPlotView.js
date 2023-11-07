@@ -39,13 +39,23 @@ class ReglScatterPlot extends CoordinatedView {
         return;
       }
       this.scatterplot.select(deepCopy(this.selection), { preventEvent: true });
-    } catch(e) {
+      
+      if (this.dataTable === "pandas_df") {
+        const request_data = {
+          table: this.dataTable,
+          view_name: this.name,
+          indices: deepCopy(this.selection)
+        }
+        this.dataManager.setIndicesSelection(request_data);
+      }
+
+    } catch (e) {
       console.log(e);
     }
   }
 
 
-  handleSelect(eventArgs) {    
+  handleSelect(eventArgs) {
     this.notifyInteraction(new SelectionEvent(this.name, this.dataTable).setIndices(eventArgs.points));
   }
 
@@ -81,7 +91,7 @@ class ReglScatterPlot extends CoordinatedView {
       colorBy: this.has_color ? 'valueA' : undefined,
       keyMap: { alt: 'lasso', shift: 'rotate' }
     });
-    
+
     let format = this.embedding === "PCA" ? "flat-normalized-PCA" : "flat-normalized";
     let that = this;
     this.dataManager.loadValues((data) => {
@@ -89,7 +99,7 @@ class ReglScatterPlot extends CoordinatedView {
       if (this.has_color) {
         values = values.map(v => [v[0], v[1], 0.5 * (v[2] + 1)]);
       }
-      that.scatterplot.draw(values);      
+      that.scatterplot.draw(values);
 
       that.scatterplot.subscribe("select", this.handleSelect.bind(this));
       that.scatterplot.subscribe("deselect", this.handleDeselect.bind(this));

@@ -438,6 +438,16 @@ export class DataManager {
             });           
     }
 
+    setIndicesSelection(data) {        
+        axios.post(this.getDataServerURL('/setIndicesSelection'), data, { headers })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {                
+                console.log(error);
+            });           
+    }
+
 
     getResource(callback, filename) {
         if (this.cachedResource) {

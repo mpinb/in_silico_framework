@@ -1,5 +1,5 @@
 import os
-from setup_locking_server import check_locking_config
+from SLURM_scripts.setup_locking_server import check_locking_config
 
 
 ##############################################

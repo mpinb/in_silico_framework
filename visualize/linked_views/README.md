@@ -9,13 +9,25 @@ Supports the creation of web-based data analytics dashboards consisting of linke
 
 ## Running the application
 
-### 1. Start backend server (standalone Python server as in paper)
-Navigate to this folder, activate Python 3.8 environment of In-Silico-Framework (see [setup instructions](../../installer/README.md)), and start data server.
+### 1a. Interactive usage with jupyter notebooks
+Start backend server in jupyter notebook (use Python 3.8 environment of In-Silico-Framework as kernel, see [setup instructions](../../installer/README.md)). 
+```
+example_vaex.ipynb
+```
+
+### 1b. Legacy mode (start server from command line as in paper)
+Navigate to this folder, activate Python 3.8 environment of In-Silico-Framework (see [setup instructions](../../installer/README.md)), and start data server from a console.
 ```
 source_3
-python data_server.py ../../getting_started/linked-views-example-data/case_study_1
+python server.py ../../getting_started/linked-views-example-data/case_study_1
 ```
 Replace `case_study_1` with `case_study_2` to view the second case study from the paper (excluding membrane potentials).
+To inspect the membrane potentials over time on the dendrite [download](https://cloud.zib.de/s/jmF7dejCm92Hpi6) the precomputed simulation data from case study 2 and additionally start the compute server.
+```
+source_3
+python compute_server.py <path-to>/case_study_2/simulation_data
+```
+
 
 ### 2. Start web-based frontend
 Please refer to the [documentation](frontend/README.md) in the frontend folder.
