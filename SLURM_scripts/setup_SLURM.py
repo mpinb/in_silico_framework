@@ -19,7 +19,7 @@ import sys
 import time
 import configparser
 from SLURM_scripts.setup_locking_server import setup_locking_server, setup_locking_config
-from SLURM_scripts.setup_dask import setup_dask_scheduler, setup_dask_workers
+from SLURM_scripts.setup_dask_workers import setup_dask_scheduler, setup_dask_workers
 from SLURM_scripts.setup_jupyter_server import setup_jupyter_server
 from contextlib import contextmanager
 import argparse
@@ -73,7 +73,6 @@ def get_process_number(management_dir):
         print('I am process number {}'.format(x))
     return x
 
-
 # def get_process_number(management_dir):
 #     return int(os.environ['SLURM_PROCID'])
 
@@ -93,8 +92,8 @@ def read_user_port_numbers():
         os.path.join(os.getcwd(), os.path.dirname(__file__)))
     config = configparser.ConfigParser()
     config.read(os.path.join(__location__, 'user_settings.ini'))
-    # ports = config['PORT_NUMBERS']
-    return config # ports
+    ports = config['PORT_NUMBERS']
+    return ports
 
 
 def main(management_dir,
@@ -137,20 +136,8 @@ def main(management_dir,
         if sleep:
             time.sleep(60 * 60 * 24 * 365)
 
-import signal 
-
-def signal_SIGUSR1(signal, frame):
-    import numpy as np
-    import os
-    import sys
-    print('SIGUSR1 received, requeuing')
-    time.sleep(np.random.rand()*5)
-    os.system('scontrol requeue ' + os.environ['SLURM_JOB_ID'])
-    sys.exit(0)
 
 if __name__ == "__main__":
-    #signal.signal(signal.SIGUSR1, signal_SIGUSR1)
-    #signal.signal(signal.SIGTERM, signal_SIGUSR1)
     parser = argparse.ArgumentParser()
     parser.add_argument('management_dir')  # non-optional positional argument
     parser.add_argument("--nb_kwargs", dest="nb_kwargs_from_cline", action=StoreDictKeyPair, metavar="KEY1=VAL1,KEY2=VAL2...", nargs='?', const=None)

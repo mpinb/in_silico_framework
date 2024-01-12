@@ -21,7 +21,7 @@ def setup_locking_server(management_dir, ports):
         ports (dict | dict-like): A dictionary of port numbers to use for the dask setup.
             Must containg the following keys: 'dask_client_2', 'dask_dashboard_2', 'dask_client_3' and 'dask_dashboard_3'
             Each key must have a port number as value.
-            Should be specified in config/user_settings.ini
+            Should be specified in ./user_settings.ini
     
     """
     print('-' * 50)
@@ -36,7 +36,7 @@ def setup_locking_server(management_dir, ports):
         },
         'type': 'zookeeper'
     }]
-    config = [{'type': 'file'}]  # uncomment this line if zookeeper is not running (i.e., you receive an error similar to 'No handlers could be found for logger "kazoo.client"')
+    # config = [{'type': 'file'}]  # uncomment this line if zookeeper is not running (i.e., you receive an error similar to 'No handlers could be found for logger "kazoo.client"')
     with open(get_locking_file_path(management_dir), 'w') as f:
         f.write(yaml.dump(config))
     setup_locking_config(management_dir)
@@ -55,11 +55,10 @@ def setup_locking_config(management_dir):
 
 
 def check_locking_config():
-    from model_data_base.distributed_lock import get_client as get_locking_client
-    server, client = get_locking_client()
+    import model_data_base.distributed_lock
     print('locking configuration')
-    print(server)
-    print(client)
+    print(model_data_base.distributed_lock.server)
+    print(model_data_base.distributed_lock.client)
     #assert model_data_base.distributed_lock.server['type'] == 'redis'
     #import socket
     #socket.gethostname()

@@ -98,8 +98,11 @@ export class DataManager {
                 that.dataServerConnected = false;
                 callback(false);
             } else {
+                if (typeof responseData === 'string' || responseData instanceof String){
+                    responseData = JSON.parse(responseData)      
+                }
+                              
                 that.dataServerConnected = true;
-
                 that.metaData = responseData.meta_data;
                 that.available_views = responseData.available_views;            
                 that.table_mapping = responseData.table_mapping;
