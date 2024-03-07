@@ -8,7 +8,77 @@ class Data:
         for k,v in kwargs.items():
             setattr(self, k, v)
             
-def _get_ddf_RW_exploration_template(mdb, key, name, selected_keys, columns = None, inside = True, persist = False):
+# PCA plot
+def get_index(dataframe, channel):
+    '''computes the depolarization or hyperpolarization index'''
+    if channel in hyperpo_channels:
+        norm = dataframe[hyperpo_channels].sum(axis = 1)
+    elif channel in depo_channels:
+        norm = dataframe[depo_channels].sum(axis = 1)
+    return dataframe[channel] / norm
+
+def get_depolarization_index(dataframe):
+    CaHVA = get_index(dataframe, 'BAC_bifurcation_charges.Ca_HVA.ica')
+    CaLVA = get_index(dataframe, 'BAC_bifurcation_charges.Ca_LVAst.ica')
+    return (CaLVA-CaHVA)/(CaHVA+CaLVA)
+
+def get_hyperpolarization_index(dataframe):
+    Im = get_index(dataframe, 'BAC_bifurcation_charges.Im.ik')
+    Sk = get_index(dataframe, 'BAC_bifurcation_charges.SK_E2.ik')
+    return (Sk-Im)/(Im+Sk)
+
+def augment_ddf_with_PCA_space(ddf, hz_current_columns = None, pca_components = None):
+    def _helper(df):
+        df['pc0'] = I.np.dot(df[hz_current_columns], pca_components[0])
+        df['pc1'] = I.np.dot(df[hz_current_columns], pca_components[1])
+        df['depolarization_index'] = get_depolarization_index(df)
+        df['hyperpolarization_index'] = get_hyperpolarization_index(df)
+        return df
+    meta_ = _helper(ddf.head())
+    ddf_augmented = ddf.map_partitions(_helper, meta = meta_)
+    return ddf_augmented
+
+def augment_ddf_with_mean_error(ddf, objectives = None):
+    def _helper(df):
+        df['mean_error'] = df[objectives].mean(axis=1)
+        df['max_error'] = df[objectives].max(axis=1)
+        return df
+    meta_ = _helper(ddf.head())
+    ddf_augmented = ddf.map_partitions(_helper, meta = meta_)
+    return ddf_augmented
+
+hz_current_columns = ['BAC_bifurcation_charges.Ca_HVA.ica',
+ 'BAC_bifurcation_charges.SK_E2.ik',
+ 'BAC_bifurcation_charges.Ca_LVAst.ica',
+ 'BAC_bifurcation_charges.NaTa_t.ina',
+ 'BAC_bifurcation_charges.Im.ik',
+ 'BAC_bifurcation_charges.SKv3_1.ik']
+
+pca_components = I.np.array([[  7.63165639e-01,   6.29498003e-01,  -8.63749227e-02,
+          2.74177180e-04,  -1.40787230e-02,   1.16839883e-01],
+       [  5.24587951e-01,  -5.64428021e-01,   5.25520353e-01,
+         -1.39713239e-03,   3.57672349e-01,   4.61019458e-02]])
+
+hz_current_columns_short = [k.split('.')[1] for k in hz_current_columns]
+
+depo_channels = [ 'BAC_bifurcation_charges.Ca_HVA.ica',
+                  'BAC_bifurcation_charges.Ca_LVAst.ica',
+                  'BAC_bifurcation_charges.NaTa_t.ina']
+
+hyperpo_channels = ['BAC_bifurcation_charges.SK_E2.ik',
+                   'BAC_bifurcation_charges.Im.ik',
+                   'BAC_bifurcation_charges.SKv3_1.ik']
+
+
+            
+def _get_ddf_RW_exploration_template(mdb, key, name, selected_keys, columns = None, inside = True, persist = False, 
+                                     augment_success_rates = False, 
+                                     augment_new_energy_metrics = False,
+                                     augment_PCA = False,
+                                     augment_PCA_components = None,
+                                     augment_PCA_hz_current_columns = None,
+                                     augment_mean_error = False,
+                                     augment_mean_error_objectives = None):
     out = {}
     s = {}
     e = {}
@@ -16,8 +86,25 @@ def _get_ddf_RW_exploration_template(mdb, key, name, selected_keys, columns = No
     m = {}
     if inside:
         key = key + '_inside'
+    if augment_success_rates:
+        assert inside
     for k in selected_keys:
         out[k] = mdb[k].getitem(key, columns = columns) 
+        if augment_PCA: # needs to be done before new_energy metrics augmentation or dask will raise an error about a column order mimatch
+            errmsg = 'if augment_PCA is true, augment_PCA_hz_current_columns and augment_PCA_components need to be set. Default values are: \n'
+            errmsg += 'hz_current_columns: {} \n \n'.format(hz_current_columns)
+            errmsg += 'pca_components: {} \n \n'.format(pca_components)
+            assert augment_PCA_components is not None
+            assert augment_PCA_hz_current_columns is not None
+            out[k] = augment_ddf_with_PCA_space(out[k], pca_components = augment_PCA_components,
+                                                hz_current_columns = augment_PCA_hz_current_columns)
+        if augment_mean_error:
+            out[k] = augment_ddf_with_mean_error(out[k], objectives = augment_mean_error_objectives)
+        if augment_success_rates:
+            out[k] = I.dask.dataframe.concat([out[k], mdb[k].getitem(key + '_augment_success_rates')], axis = 1)
+        if augment_new_energy_metrics:
+            assert inside
+            out[k] = I.dask.dataframe.concat([out[k], mdb[k].getitem(key + '_augment_new_energy_metrics')], axis = 1)
         m[k] = mdb[k]
         s[k] = mdb[k]['get_Simulator'](mdb[k])
         e[k] = mdb[k]['get_Evaluator'](mdb[k])
@@ -31,7 +118,9 @@ def _get_ddf_RW_exploration_template(mdb, key, name, selected_keys, columns = No
                     c = c, 
                     m = m, 
                     param_names = list(mdb[k]['params'].index),
-                    name = name)
+                    name = name,
+                    mdb = mdb,
+                    key = key)
     return out_data
 
 
@@ -158,6 +247,12 @@ get_ddf_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing_no_Att_cf_fixed_ru
                                                  mdb_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing, 
                                                  'noAtt_cf_fixed_run1_20231228',
                                                  'get_ddf_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing_no_Att_cf_fixed_run1_20231228',
+                                                 selected_keys = ['WR64','WR71','88','89','91'])
+
+get_ddf_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing_no_Att_cf_fixed_run1_20231228 = I.partial(_get_ddf_RW_exploration_template,
+                                                 mdb_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing, 
+                                                 'noAtt_cf_fixed_run1_20231228',
+                                                 'get_ddf_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing_no_Att_cf_fixed_run1_20231228_final',
                                                  selected_keys = ['WR64','WR71','88','89','91'])
 
 get_ddf_RW_exploration_new_Ih_crit_freq_chirp_hyperpolarizing_no_Att_cf_fixed_run1_20231228_RW_0_01 = I.partial(_get_ddf_RW_exploration_template,
