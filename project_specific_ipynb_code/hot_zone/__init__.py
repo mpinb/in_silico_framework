@@ -1,3 +1,4 @@
+from visualize.rasterplot import rasterplot2
 import Interface as I
 
 ######################

@@ -155,6 +155,7 @@ class RW:
                 n_suggestion += 1
                 movement = np.random.randn(len(self.params_to_explore))
                 movement = movement/get_vector_norm(movement)
+                #sample step size from a normal distribution
                 step_size = np.random.rand()*(self.max_step_size-self.min_step_size)+self.min_step_size
                 movement = movement * step_size
                 p_proposal = p_normalized_selected_np + movement

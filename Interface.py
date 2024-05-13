@@ -109,6 +109,7 @@ from model_data_base.IO.LoaderDumper import pandas_to_msgpack as dumper_pandas_t
 from model_data_base.IO.LoaderDumper import pandas_to_parquet as dumper_pandas_to_parquet
 from model_data_base.IO.LoaderDumper import dask_to_msgpack as dumper_dask_to_msgpack
 from model_data_base.IO.LoaderDumper import dask_to_categorized_msgpack as dumper_dask_to_categorized_msgpack
+from model_data_base.IO.LoaderDumper import dask_to_parquet as dumper_dask_to_parquet
 from model_data_base.IO.LoaderDumper import cell as dumper_cell
 from model_data_base.IO.LoaderDumper import to_pickle as dumper_to_pickle
 from model_data_base.IO.LoaderDumper import to_cloudpickle as dumper_to_cloudpickle
@@ -256,9 +257,6 @@ def get_client(client_port=38786, timeout=120):
         ip = gethostbyname(
             hostname
         )  # fetches the ip of the current host, usually "somnalogin01" or "somalogin02"
-        if 'soma' in hostname:
-            #we're on the soma cluster and have infiniband
-            ip = ip.replace('100', '102')  # a bit hackish, but it works
     logger.info("Getting client with ip {}".format(ip))
     c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got client {}".format(c))

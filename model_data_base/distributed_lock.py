@@ -80,14 +80,31 @@ def update_config(c):
     config = c
     server, client = get_client()
 
-
+class InterProcessLockNoWritePermission:
+    '''if write permissions, locking necessary, if not, not. 
+    then lock aquire returns true without a lock'''
+    def __init__(self, path):
+        if os.access(path, os.W_OK):
+            import fasteners
+            self.lock = fasteners.InterProcessLock(path)
+        else:
+            self.lock = None
+            
+    def acquire(self):
+        if self.lock:
+            return self.lock.acquire()
+        return True
+    
+    def release(self):
+        if self.lock:
+            self.lock.release()
+            
 def get_lock(name):
     if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
         raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')
     if server['type'] == 'file':
-        import fasteners
+        return InterProcessLockNoWritePermission(name)
 
-        return fasteners.InterProcessLock(name)
     elif server["type"] == "redis":
         import redis
 
@@ -104,9 +121,8 @@ def get_read_lock(name):
     if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
         raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')    
     if server['type'] == 'file':
-        import fasteners
-
-        return fasteners.InterProcessLock(name)
+        return InterProcessLockNoWritePermission(name)
+    
     elif server["type"] == "redis":
         import redis
 
@@ -123,12 +139,10 @@ def get_write_lock(name):
     if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
         raise RuntimeError('ISF_DISTRIBUTED_LOCK_BLOCK is defined, which turns off locking.')    
     if server['type'] == 'file':
-        import fasteners
-
-        return fasteners.InterProcessLock(name)
+        return InterProcessLockNoWritePermission(name)
+    
     elif server["type"] == "redis":
         import redis
-
         return redis.lock.Lock(client, name, timeout=300)
     elif server["type"] == "zookeeper":
         return client.WriteLock(name)

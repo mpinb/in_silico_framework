@@ -36,12 +36,17 @@ class Loader(parent_classes.Loader):
     def get(self, savedir, columns=None):
         fnames = os.listdir(savedir)
         fnames = [f for f in fnames if 'pandas_to_parquet' in f]
+        meta = pd.read_parquet(os.path.join(savedir,fnames[0])).head(0)
+        if columns is None: 
+            columns = meta.columns
+        else:
+            meta = meta[columns]
         n_partitions = int(fnames[0].split('.')[1])
         delayeds = [
             load_helper(savedir, n_partitions, partition, columns=columns)
             for partition in range(n_partitions)
         ]
-        ddf = dask.dataframe.from_delayed(delayeds)
+        ddf = dask.dataframe.from_delayed(delayeds, meta = meta)
         if os.path.exists(os.path.join(savedir, 'divisions.json')):
             with open(os.path.join(savedir, 'divisions.json')) as f:
                 divisions = json.load(f)
