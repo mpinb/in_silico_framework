@@ -137,11 +137,14 @@ class NetworkMapper:
                 logger.info('applying', funname, 'with parameters', params)
                 fun(self.postCell, self, **params)
 
-    def reconnect_saved_synapses(self, synInfoName, synWeightName=None):
+    def reconnect_saved_synapses(self, synInfoName, synWeightName=None, include_silent_synapses = False):
         '''
         Public interface
         used for setting up saved synapse
         locations and activation times
+        
+        include_silent_synapses: also creates synapses that were not active. This maintains the synapse id, 
+            but maybe slightly slower.
         '''
         logger.info('***************************')
         logger.info('creating saved network and')
@@ -155,6 +158,28 @@ class NetworkMapper:
             synInfo = reader.read_synapse_activation_file(synInfoName)
         else:
             synInfo = synInfoName
+        if include_silent_synapses:
+            def complete_syn(syn):
+                "adds synapses that do not have any activity back in such that synapse ID matches the id of the synapse"
+                syn_out = {}
+                for syntype in syn:
+                    syn_out[syntype] = []
+                    syn_id = 0
+                    syn_index = 0
+                    while True:
+                        try:
+                            s = syn[syntype][syn_id]
+                        except IndexError:
+                            break
+                        if syn_index < s[0]:
+                            syn_out[syntype].append([syn_index, -1, -1, [], -1])
+                            syn_index += 1
+                        else:
+                            syn_out[syntype].append(s)
+                            syn_id += 1 
+                            syn_index += 1
+                return syn_out
+            synInfo = complete_syn(synInfo)
         synTypes = list(synInfo.keys())
         for synType in synTypes:
             logger.info(
