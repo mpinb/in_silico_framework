@@ -77,10 +77,12 @@ def read_voltage_traces_from_csv(prefix, fname):
         data = data.reshape(len(data), 1)
     t = data[0]
     data = data[1:]
+    
+    # FIX TO SOLVE ISSUE WHEN SIMULATED SIM TRAIL INDICES ARE NOT CONTINUOUS 
+    INDICES = sorted([int(f.split('_')[1][3:]) for f in os.listdir(os.path.dirname(full_fname)) if 'synapses' in f])
     index = [
         str(os.path.join(os.path.dirname(fname),
-                         str(index).zfill(6))) for index in range(len(data))
-    ]  ##this will be the sim_trail_index
+                         str(index).zfill(6))) for index in INDICES]  ##this will be the sim_trail_index
     #print index
     df = pd.DataFrame(data, columns=t)
     df['sim_trail_index'] = index
@@ -139,8 +141,11 @@ def read_voltage_traces_by_filenames(prefix,
 
 def get_voltage_traces_divisions_by_metadata(metadata, repartition=None):
     assert repartition is not None
-    divisions = metadata[metadata.trailnr == min(metadata.trailnr)]
-    divisions = list(divisions.sim_trail_index)
+    #divisions = metadata[metadata.trailnr == min(metadata.trailnr)]
+    #divisions = list(divisions.sim_trail_index)
+    divisions = metadata.sim_trail_index.str.split('/').str[:-1].str.join('/')
+    divisions.index = metadata.sim_trail_index
+    divisions = divisions.drop_duplicates().index.tolist()
     if len(divisions) > 10000 and repartition:
         divisions = [d[0] for d in utils.chunkIt(divisions, 5000)]
     return tuple(divisions + [metadata.iloc[-1].sim_trail_index])
