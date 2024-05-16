@@ -25,6 +25,7 @@ class Simulator_Setup:
         self.stim_run_funs = []
         self.stim_response_measure_funs = []
         self.params_modify_funs = []
+        self.params_modify_funs_after_cell_generation = []
         self.check_funs = []
 
     def check(self):
@@ -86,6 +87,12 @@ class Simulator_Setup:
             params = fun(params)
         return params
 
+    def get_params_after_cell_generation(self, params,cell):
+        '''returns cell parameters that have been modified by the params_modify_funs.'''
+        for name, fun in self.params_modify_funs_after_cell_generation:
+            params = fun(params,cell)
+        return params
+
     def get_cell_params(self, params):
         '''returns cell NTParameterSet structure used for the single_cell_parser.create_cell. 
         This is helpful for inspecting, what parameters have effectively been used for the simulation.
@@ -144,6 +151,7 @@ class Simulator_Setup:
             #print len(param_selector(params, name))
             cell = fun(cell, params=param_selector(params, name))
             self._check_not_none(cell, 'cell', name)
+        params = self.get_params_after_cell_generation(params,cell)
         return cell, params
 
 
