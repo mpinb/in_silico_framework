@@ -110,7 +110,7 @@ def _evoked_activity(mdb,
 
         evokedNW = scp.NetworkMapper(cell, network_param.network,
                                      neuron_param.sim)
-        evokedNW.reconnect_saved_synapses(syn)
+        evokedNW.reconnect_saved_synapses(syn, include_silent_synapses = True)
         additional_evokedNWs = [
             scp.NetworkMapper(cell, p.network, neuron_param.sim)
             for p in additional_network_params
