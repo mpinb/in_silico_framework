@@ -741,15 +741,20 @@ def get_charges(ca, tmin=295, tmax=350):
     return vs
 
 
-def evaluate_currents(voltage_traces_dict):
+def evaluate_currents(voltage_traces_dict, stim = None):
+    '''stim: either bAP or BAC, when the currents need to be evaluated for only one of them'''
+    out_ = {}
     vt = voltage_traces_dict
     range_vars = [
         'SK_E2.ik', 'Im.ik', 'Ca_LVAst.ica', 'SKv3_1.ik', 'Ca_HVA.ica',
         'Ih.ihcn', 'NaTa_t.ina'
     ]
-    out_ = {}
-    keys = vt['bAP.range_vars'].keys(
-    )  # recording sites, also includes proximal and distal site
+    stim_range_vars = ['bAP.range_vars', 'BAC.range_vars']
+    if stim: 
+        stim_range_vars = [stim + '.range_vars']
+        
+    keys = vt[stim_range_vars[0]].keys()  
+    # recording sites, also includes proximal and distal site
     # rename proximal and distal site, which is indicated by the numerical value of its soma distance to 'prox' and 'dist'
     min_ = min([k for k in keys if I.utils.convertible_to_int(k)])
     max_ = max([k for k in keys if I.utils.convertible_to_int(k)])
@@ -762,20 +767,18 @@ def evaluate_currents(voltage_traces_dict):
     }
     keys_new = [dict_[k] for k in keys]
     # update names in dictionary accordingly
+    
     vt_new = {
         kk: {
             kn: vt[kk][k] for kn, k in zip(keys_new, keys)
-        } for kk in ['bAP.range_vars', 'BAC.range_vars']
+        } for kk in stim_range_vars
     }
     # save densities of mechanisms at respective location
-    out_['constants_bifurcation'] = vt_new['BAC.range_vars']['bifurcation'][
-        'constants'].item()
-    out_['constants_prox'] = vt_new['BAC.range_vars']['prox']['constants'].item(
-    )
-    out_['constants_dist'] = vt_new['BAC.range_vars']['dist']['constants'].item(
-    )
+    out_['constants_bifurcation'] = vt_new[stim_range_vars[0]]['bifurcation']['constants'].item()
+    out_['constants_prox'] = vt_new[stim_range_vars[0]]['prox']['constants'].item()
+    out_['constants_dist'] = vt_new[stim_range_vars[0]]['dist']['constants'].item()
     # save currents at respective location
-    for stim in ['bAP.range_vars', 'BAC.range_vars']:
+    for stim in stim_range_vars:
         prefix = stim.split('.')[0]
         tVec = vt[prefix + '.' + 'hay_measure']['tVec']
         for k in keys_new:

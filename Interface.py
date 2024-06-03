@@ -239,7 +239,8 @@ def print_module_versions():
 
 
 def get_client(client_port=38786, timeout=120):
-    """Gets the distributed.client object if dask has been setup
+    """
+    Gets the distributed.client object if dask has been setup
 
     Returns:
         Client: the client object
@@ -257,11 +258,13 @@ def get_client(client_port=38786, timeout=120):
         ip = gethostbyname(
             hostname
         )  # fetches the ip of the current host, usually "somnalogin01" or "somalogin02"
+        if not ip.split('.')[-1][0] == '2': # check if interactive node via node number, if not there is infiniband 
+            ip = ip.replace('100', '102')  # a bit hackish, but it works
     logger.info("Getting client with ip {}".format(ip))
     c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got client {}".format(c))
     return c
-
+   
 print("\n\n")
 print_module_versions()
 

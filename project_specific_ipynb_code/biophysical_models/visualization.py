@@ -8,7 +8,11 @@ from biophysics_fitting.ephys import spike_count
 
 from matplotlib import gridspec
 from matplotlib.gridspec import GridSpec
+
+from typing import List
+from copy import deepcopy
 # from . import 
+
 
 #definitions 
 offsets = {'bAP.hay_measure':295, 
@@ -118,19 +122,6 @@ def combine_conductances(cell,  g_combinations_dict):
         out[key]['gbar_list'] = gbar_list
     return out
 
-
-# objective graphs 
-def format_objective_graph(ax): 
-    ax.tick_params(labelbottom=True, labelleft=True)
-    ax.spines['bottom'].set_visible(True)
-    ax.spines['left'].set_visible(True)
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
-    ax.margins(x=0.1, y =0.1)
-    ax.tick_params(axis='both', which='major', labelsize=16)
-    ax.get_xaxis().set_visible(True)
-    ax.get_yaxis().set_visible(True)
-
     
 
 def plot_AUC(evaluation, ax):
@@ -171,7 +162,7 @@ def plot_Rin(evaluation, ax):
     values = [evaluation['hyperpolarizing.Rin.raw'], evaluation['hyperpolarizing.Dend_Rin.raw']]
     names = ['Soma', 'Dendrite']
     ax.plot(names, values,  c = 'k', marker = '.', markersize = 20, linestyle='dashed')
-    ax.set_ylabel(' Resistance (Ω)', fontsize = 16)
+    ax.set_ylabel(' Resistance (MΩ)', fontsize = 16)
     
     
 # ploting functions 
@@ -217,35 +208,41 @@ def plot_vt_from_name_specific_ax(voltage_traces, name, ax, colors):
     
     
 #plot morphology
-def plot_morphology_specific_ax(m, ax_morph, colors):
+def plot_morphology_specific_ax(m, ax_morph = None, colors = None, offset = None):
+    '''needs a list of colors for plotting the markers of injection sites'''
     from project_specific_ipynb_code.hot_zone import get_cell_object_from_hoc
     path = m['fixed_params']['morphology.filename']
     cell = get_cell_object_from_hoc(path) 
-    pts = []
-    soma_distances = [0, 
-                      m['fixed_params']['bAP.hay_measure.recSite1'], 
-                      m['fixed_params']['bAP.hay_measure.recSite2'], 
-                      400]
-    for sd in soma_distances:
-        sec, secx = biophysics_fitting.utils.get_inner_section_at_distance(cell, sd)
-        pt_index = I.np.argmin(I.np.abs(secx - I.np.array(sec.relPts)))
-        pts.append(sec.pts[pt_index])
-    pts = I.np.array(pts)
-    I.plt.figure(figsize = (5,15))
+    if not ax_morph: 
+        I.plt.figure(figsize = (5,15))
+        ax_morph = I.plt.gca()
+    xs = [x[1]  for sec in cell.sections for x in sec.pts if sec.label in ['Dendrite', 'ApicalDendrite', 'Soma']]
+    offset = min(xs)
     for sec in cell.sections:
         if not sec.label in ['Dendrite', 'ApicalDendrite', 'Soma']:
             continue
-        xs = [x[1] for x in sec.pts]
+        xs = [x[1] - offset for x in sec.pts]
         zs = [x[2] for x in sec.pts]
         ax_morph.plot(xs,zs, c = 'k')
-#     ax_morph.plot(pts[0,1],pts[0,2], marker = 'o', c = 'k', fillstyle = 'none', markersize = 20)
-    ax_morph.plot(pts[1,1],pts[1,2], 'o', c = colors[0], markersize = 10)
-    ax_morph.plot(pts[2,1],pts[2,2], 'o', c = colors[1], markersize = 10)
-    ax_morph.plot(pts[3,1],pts[3,2], 'o', c = colors[2], markersize = 10)
     ax_morph.set_aspect('equal')
+    if colors:
+        pts = []
+        soma_distances = [0, 
+                          m['fixed_params']['bAP.hay_measure.recSite1'], 
+                          m['fixed_params']['bAP.hay_measure.recSite2'], 
+                          400]
+        for sd in soma_distances:
+            sec, secx = I.biophysics_fitting.utils.get_inner_section_at_distance(cell, sd)
+            pt_index = I.np.argmin(I.np.abs(secx - I.np.array(sec.relPts)))
+            pts.append(sec.pts[pt_index])
+        pts = I.np.array(pts)
+        #     ax_morph.plot(pts[0,1],pts[0,2], marker = 'o', c = 'k', fillstyle = 'none', markersize = 20)
+        ax_morph.plot(pts[1,1],pts[1,2], 'o', c = colors[0], markersize = 10)
+        ax_morph.plot(pts[2,1],pts[2,2], 'o', c = colors[1], markersize = 10)
+        ax_morph.plot(pts[3,1],pts[3,2], 'o', c = colors[2], markersize = 10)
     
     
-    
+   
 def plot_conductance_profiles_nested_gs(cell, cond_combinations_dict, gs, fig): 
     gbar_dict = combine_conductances(cell, cond_combinations_dict)
 #     fig, axes = I.plt.subplots(4,1)
@@ -266,14 +263,30 @@ def plot_conductance_profiles_nested_gs(cell, cond_combinations_dict, gs, fig):
         
         
         
-def format_axes(fig):
-    for ax in fig.axes:
+def format_axes(fig = None, axes: List = None):
+    '''need to give either a fig or axes (as list)'''
+    if fig: 
+        axes = fig.axes
+    for ax in axes:
         ax.tick_params(labelbottom=False, labelleft=False)
         for key in ax.spines.keys():
             ax.spines[key].set_visible(False)
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
         
+        
+# objective graphs 
+def format_objective_graph(ax): 
+    ax.spines['bottom'].set_visible(True)
+    ax.spines['left'].set_visible(True)
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.margins(x=0.1, y =0.1)
+    ax.tick_params(labelbottom=True, labelleft=True)
+    ax.tick_params(axis='both', which='major', labelsize=16)
+    ax.get_xaxis().set_visible(True)
+    ax.get_yaxis().set_visible(True)
+    
         
         
 def visualize_vt_new_figureset(vt, evaluation, m, save_dir = None, file_name = None, offsets = None, 
@@ -316,3 +329,101 @@ def visualize_vt_new_figureset(vt, evaluation, m, save_dir = None, file_name = N
         axes[1].tick_params(labelrotation = 25)    
         
     return fig, gs
+
+
+params_name_mapping = {
+    'ephys.NaTa_t.soma.gNaTa_tbar': 's.Na_t',
+    'ephys.Nap_Et2.soma.gNap_Et2bar': 's.Na_p',
+    'ephys.K_Pst.soma.gK_Pstbar': 's.K_p',
+    'ephys.K_Tst.soma.gK_Tstbar': 's.K_t',
+    'ephys.SK_E2.soma.gSK_E2bar': 's.SK',
+    'ephys.SKv3_1.soma.gSKv3_1bar': 's.Kv_3.1',
+    'ephys.Ca_HVA.soma.gCa_HVAbar': 's.Ca_H',
+    'ephys.Ca_LVAst.soma.gCa_LVAstbar': 's.Ca_L',
+    'ephys.CaDynamics_E2.soma.gamma': 's.Y',
+    'ephys.CaDynamics_E2.soma.decay': 's.T_decay',
+    'ephys.none.soma.g_pas': 's.leak',
+    'ephys.none.axon.g_pas': 'ax.leak',
+    'ephys.none.dend.g_pas': 'b.leak',
+    'ephys.none.apic.g_pas': 'a.leak',
+    'ephys.NaTa_t.axon.gNaTa_tbar': 'ax.Na_t',
+    'ephys.Nap_Et2.axon.gNap_Et2bar': 'ax.Na_p',
+    'ephys.K_Pst.axon.gK_Pstbar': 'ax.K_p',
+    'ephys.K_Tst.axon.gK_Tstbar': 'ax.K_t',
+    'ephys.SK_E2.axon.gSK_E2bar': 'ax.SK',
+    'ephys.SKv3_1.axon.gSKv3_1bar': 'ax.Kv_3.1',
+    'ephys.Ca_HVA.axon.gCa_HVAbar': 'ax.Ca_H',
+    'ephys.Ca_LVAst.axon.gCa_LVAstbar': 'ax.Ca_L',
+    'ephys.CaDynamics_E2.axon.gamma': 'ax.Y',
+    'ephys.CaDynamics_E2.axon.decay': 'ax.T_decay',
+    'ephys.Im.apic.gImbar': 'a.I_m',
+    'ephys.NaTa_t.apic.gNaTa_tbar': 'a.Na_t',
+    'ephys.SKv3_1.apic.gSKv3_1bar': 'a.Kv_3.1',
+    'ephys.Ca_HVA.apic.gCa_HVAbar': 'a.Ca_H',
+    'ephys.Ca_LVAst.apic.gCa_LVAstbar': 'a.Ca_L',
+    'ephys.SK_E2.apic.gSK_E2bar': 'a.SK',
+    'ephys.CaDynamics_E2.apic.gamma': 'a.Y',
+    'ephys.CaDynamics_E2.apic.decay': 'a.T_decay',
+    'ephys.SKv3_1.apic.offset': 'a.Kv_3.1_offset',
+    'ephys.SKv3_1.apic.slope': 'a.Kv_3.1_slope',
+    'scale_apical.scale': 'a.scale'
+}
+
+
+ordered_all_params = [ 's.leak',
+ 'ax.leak',
+ 'b.leak',
+ 'a.leak',
+ 's.Ca_H',
+ 's.Ca_L',
+ 's.K_p',
+ 's.K_t',
+ 's.Kv_3.1',
+ 's.Na_p',
+ 's.Na_t',
+ 's.SK',
+ 's.T_decay',
+ 's.Y',
+ 'ax.Ca_H',
+ 'ax.Ca_L',
+ 'ax.K_p',
+ 'ax.K_t',
+ 'ax.Kv_3.1',
+ 'ax.Na_p',
+ 'ax.Na_t',
+ 'ax.SK',
+ 'ax.T_decay',
+ 'ax.Y',
+ 'a.Ca_H',
+ 'a.Ca_L',
+ 'a.I_m',
+ 'a.Kv_3.1',
+ 'a.Na_t',
+ 'a.SK',
+ 'a.T_decay',
+ 'a.Y',
+ 'a.Ih_linScale',
+ 'a.Ih_max',
+ 'a.Kv_3.1_offset',
+ 'a.Kv_3.1_slope',
+ 'a.scale']
+
+## probably just add the new_params_name_mapping would make more sense 
+def get_new_params_name_mapping(old_mapping): 
+    #Ca v2
+    ca_keys_v2_list = [key.split('.') for key in old_mapping.keys() if 'CaDynamics_E2' in key]
+    ca_keys = [key for key in old_mapping.keys() if 'CaDynamics_E2' in key]
+    for list_ in ca_keys_v2_list: 
+        list_[1] = 'CaDynamics_E2_v2'
+    ca_keys_v2 = [('.').join(list_) for list_ in ca_keys_v2_list]
+    
+    new_mapping = deepcopy(old_mapping)
+    for old_key, new_key in zip(ca_keys, ca_keys_v2):
+        new_mapping[new_key] = new_mapping[old_key]
+        del new_mapping[old_key]
+        
+    #add Ih 
+    new_mapping['ephys.Ih.apic.linScale'] = 'a.Ih_linScale'
+    new_mapping['ephys.Ih.apic.max_g'] = 'a.Ih_max'
+    
+    return new_mapping

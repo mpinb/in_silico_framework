@@ -284,6 +284,29 @@ get_ddf_RW_exploration_new_constraints_no_Att_20231228 = I.partial(_get_ddf_RW_e
                                                  'get_ddf_RW_exploration_new_constraints_no_Att_20231228',
                                                  selected_keys = ['WR64','WR71','88','89','91'])
 
+
+##The database below contains: 
+# 'RW_exploration_1BAC_and_bAP': models ran with only 1BAC and bAP constraints with the models from get_ddf_RW_exploration_new_constraints_no_Att_20231228 as seed points. 
+mdb_RW_exploration_1BAC_bAP = I.ModelDataBase('/gpfs/soma_fs/scratch/saka/results/20240508_RW_exploration_1BAC_and_bAP')
+
+get_ddf_RW_exploration_1BAC_bAP = I.partial(_get_ddf_RW_exploration_template,
+                                                 mdb_RW_exploration_1BAC_bAP, 
+                                                 'RW_exploration_1BAC_and_bAP',
+                                                 'get_ddf_RW_exploration_1BAC_bAP',
+                                                 selected_keys = ['WR64','WR71','88','89','91'])
+
+##The database below contains: 
+# 'RW_exploration_WR64_decrease_total_charge_at_HZ': models ran with all constraints (bAP, 2BAC, step, hyperpolarizing, chirp, critical frequency) of WR64, with a condition that the new models need to have less charge exchanged at HZ (thus more energy efficieny) with the most energy efficient model for WR64 from get_ddf_RW_exploration_new_constraints_no_Att_20231228 as the seedpoint. 
+mdb_RW_exploration_WR64_decrease_total_charge_at_HZ = I.ModelDataBase('/gpfs/soma_fs/scratch/saka/results/20240524_RW_exploration_WR64_decrease_total_charge_at_HZ')
+
+get_ddf_RW_exploration_WR64_decrease_total_charge_at_HZ  = I.partial(_get_ddf_RW_exploration_template,
+                                                 mdb_RW_exploration_WR64_decrease_total_charge_at_HZ , 
+                                                 'exploration_WR64_decrease_total_charge_at_HZ',
+                                                 'get_ddf_RW_exploration_WR64_decrease_total_charge_at_HZ',
+                                                 selected_keys = ['WR64'])
+
+
+
 ## The database below contains
 # - Results from the exploration utilizing the wave/lattice search approach. All experiments thus far have been run on the WR64 morphology.
 # The following files can be found in each result subdirectory:
