@@ -1,4 +1,4 @@
-import transformTools as tr
+import dendrite_thickness.transformTools as tr
 
 
 def findNextPair(trPoints, hocPoint):

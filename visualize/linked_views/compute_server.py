@@ -189,16 +189,16 @@ def downsample_spatial_resolution(morphology, voltage_timeseries):
     return voltage_timeseries_downsampled
 
 
-def run_simulation(mdb, parameters, morphologyName, morphologyCache, tstart=T_START, tend=T_END, tstim=T_STIM, tpostStim = T_POSTSTIM, tstep=1):
+def run_simulation(db, parameters, morphologyName, morphologyCache, tstart=T_START, tend=T_END, tstim=T_STIM, tpostStim = T_POSTSTIM, tstep=1):
         
     if(parameters is None):
-        df = mdb['examplary_models']
+        df = db['examplary_models']
         params_py3 = getParamsCols()
         model_idx = 0
         parameters = df.iloc[model_idx][params_py3]
         
     def get_simulator(id_, py2 = False):
-        s = mdb[id_]['get_Simulator'](mdb[id_])
+        s = db[id_]['get_Simulator'](db[id_])
         return s
 
     s = get_simulator(morphologyName)
@@ -218,14 +218,14 @@ def run_simulation(mdb, parameters, morphologyName, morphologyCache, tstart=T_ST
     cmv.write_vtk_frames(out_dir="./vtk_tmp", t_start=tstart, t_end=tend, t_step=tstep, scalar_data="vm")
     return downsample_spatial_resolution(morphologyCache[morphologyName], cmv.voltage_timeseries)
 
-def computeMorphology(mdb, morphology, tmpFolder, tstart=245, tend=310, tstep=1):
-    df = mdb['examplary_models']
+def computeMorphology(db, morphology, tmpFolder, tstart=245, tend=310, tstep=1):
+    df = db['examplary_models']
     params_py3 = getParamsCols()
     model_idx = 10
     parameters = df.iloc[model_idx][params_py3]
 
     def get_simulator(id_, py2 = False):
-        s = mdb[id_]['get_Simulator'](mdb[id_])
+        s = db[id_]['get_Simulator'](db[id_])
         return s
 
     s = get_simulator(morphology)
@@ -316,7 +316,7 @@ def load_traces_from_cache(filename):
 @app.route("/computeServer/getSimulation", methods=["GET", "POST"])
 @cross_origin()
 def getSimulation():
-    #global mdb
+    #global db
     #global morphologies
     global cacheFolder
 
@@ -335,7 +335,7 @@ def getSimulation():
             filename_cache = cacheFolder/"voltage_traces_{}".format(originalIdx)
             voltage_timeseries = load_traces_from_cache(filename_cache)
             if(voltage_timeseries is None):
-                #voltage_timeseries = run_simulation(mdb, parameterValues, 'WR64', morphologies)
+                #voltage_timeseries = run_simulation(db, parameterValues, 'WR64', morphologies)
                 #write_traces_to_cache(filename_cache, voltage_timeseries)
                 raise RuntimeError(f"Precomputed simulation data not available for sample idx {originalIdx}.")
             else:
@@ -371,7 +371,7 @@ if __name__ == "__main__":
     assert os.path.exists(cacheFolder)
     cacheFolder = Path(cacheFolder)
 
-    #mdb = I.ModelDataBase('/scratch/visual/bzfharth/model_database')
+    #db = I.DataBase('/scratch/visual/bzfharth/model_database')
 
     #tmpFolder = "vtk_tmp/morphologies"
     #cacheFolder = Path("simulation_data_cache")
@@ -380,8 +380,8 @@ if __name__ == "__main__":
 
     # morphologies = {}  # name -> json
     #morphologyName = 'WR64'
-    #morphologies[morphologyName] = computeMorphology(mdb, morphologyName, tmpFolder)
+    #morphologies[morphologyName] = computeMorphology(db, morphologyName, tmpFolder)
 
-    #run_simulation(mdb, None, morphologyName, morphologies)
+    #run_simulation(db, None, morphologyName, morphologies)
 
     app.run(host="localhost", port=5001)

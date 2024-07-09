@@ -1,8 +1,6 @@
 from __future__ import absolute_import
 import os
 import sys
-import tempfile
-import getting_started
 import neuron
 
 h = neuron.h

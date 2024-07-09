@@ -3,18 +3,16 @@ autor: arco
 date: 16.09.2016
 '''
 import numpy as np
-from ._decorators import return_figure_or_axis
 
 
 class PixelObject():
     '''holds all the information necessary to reconstruct a plot out of an array'''
 
-    def __init__(self, extent, fig=None, array=None):
-        s = "either fig or array has to be specified"
-        if fig is None and array is None:
-            raise ValueError(s)
-        if not fig is None and not array is None:
-            raise ValueError(s)
+    def __init__(self, extent, ax=None, array=None):
+        if ax is None and array is None:
+            raise ValueError("Please specify an ax or an array (not both)")
+        if not ax is None and not array is None:
+            raise ValueError("Please specify either an ax, or an array, not both)")
         if not extent:
             raise ValueError(
                 "extent / axis has to be specified to generate PixelObject")
@@ -23,17 +21,28 @@ class PixelObject():
         if isinstance(array, np.ndarray):
             self.array = array
 
-        if fig is not None:
+        if ax is not None:
+            fig = ax.get_figure()
+            print(ax)
+            print(fig)
             self.array = fig2np(fig)
 
 
-@return_figure_or_axis
-def show_pixel_object(pixelObject, fig=None):
-    fig.imshow(pixelObject.array,
+def show_pixel_object(pixelObject, ax=None):
+    """ Displays a PixelObject on an axis
+
+    Args:
+        pixelObject (PixelObject): the PixelObject to display
+        ax (matplotlib.pyplot.Axes): the axis to display the PixelObject on
+
+    Returns
+        ax (matplotlib.pyplot.Axes): the axis with the PixelObject displayed    
+    """
+    ax.imshow(pixelObject.array,
                interpolation='nearest',
                extent=pixelObject.extent,
                aspect='auto')
-    return fig
+    return ax
 
 
 def fig2np(fig):

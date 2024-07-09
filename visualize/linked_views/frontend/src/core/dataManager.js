@@ -27,8 +27,14 @@ function normalizeDensityValues(values, invalidValue = -999999) {
     let max_value = undefined;
 
     if (valid_values.length) {
-        min_value = Math.min(...valid_values);
-        max_value = Math.max(...valid_values);
+        [min_value, max_value] = valid_values.reduce((acc, val) => {
+            acc[0] = ( acc[0] === undefined || val < acc[0] ) ? val : acc[0]
+            acc[1] = ( acc[1] === undefined || val > acc[1] ) ? val : acc[1]
+            return acc;
+        }, []);
+        // Unpacking values is risky in JS as it can yield RangeError: too many function arguments
+        // min_value = Math.min(...valid_values);
+        // max_value = Math.max(...valid_values);
     }
 
     return {

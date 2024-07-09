@@ -1,0 +1,350 @@
+
+{	
+	"info":
+	{
+		"name":		"hay_2011_dend_test", 
+		"author":	"regger",
+		"date": 	"15Oct2014",
+	},
+	
+	"NMODL_mechanisms":
+	{
+        "channels": "/",
+	},
+	
+	"mech_globals":
+	{
+	},
+	
+	"neuron":
+	{
+		"filename": "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center.hoc",
+		
+		"Soma":
+		{
+			"properties":
+			{
+				"Ra": 100.0,
+				"cm": 1.0,
+                
+                "ions":
+                {
+                    "ek": -85.0,
+                    "ena": 50.0,
+                },
+			},
+			
+			"mechanisms":
+			{
+				"global":
+				{
+					
+				},
+				
+				"range":
+				{
+                    "pas":
+                    {
+                        "spatial": "uniform",
+                        "g": 0.0000326,
+                        "e": -90,
+                    },
+                    "Ca_LVAst":
+                    {
+                        "spatial": "uniform",
+                        "gCa_LVAstbar": 0.00462,
+                    },
+                    "Ca_HVA":
+                    {
+                        "spatial": "uniform",
+                        "gCa_HVAbar": 0.000642,
+                    },
+                    "SKv3_1":
+                    {
+                        "spatial": "uniform",
+                        "gSKv3_1bar": 0.983,
+                    },
+                    "SK_E2":
+                    {
+                        "spatial": "uniform",
+                        "gSK_E2bar": 0.0492,
+                    },
+                    "K_Tst":
+                    {
+                        "spatial": "uniform",
+                        "gK_Tstbar": 0.0471,
+                    },
+                    "K_Pst":
+                    {
+                        "spatial": "uniform",
+                        "gK_Pstbar": 0.0,
+                    },
+                    "Nap_Et2":
+                    {
+                        "spatial": "uniform",
+                        "gNap_Et2bar": 0.00499,
+                    },
+                    "NaTa_t":
+                    {
+                        "spatial": "uniform",
+                        "gNaTa_tbar": 2.43,
+                    },
+                    "CaDynamics_E2":
+                    {
+                        "spatial": "uniform",
+                        "decay": 770.0,
+                        "gamma": 0.000616,
+                    },
+                    "Ih":
+                    {
+                        "spatial": "uniform",
+                        "gIhbar": 0.00008,
+                    },
+				},
+			},
+		},
+		
+		"Dendrite":
+		{
+			"properties":
+			{
+				"Ra": 100.0,
+				"cm": 2.0,
+			},
+			
+			"mechanisms":
+			{
+				"global":
+				{
+					
+				},
+				
+				"range":
+				{
+                    "pas":
+                    {
+                        "spatial": "uniform",
+                        "g": 0.0000631,
+                        "e": -90.0,
+                    },
+                    "Ih":
+                    {
+                        "spatial": "uniform",
+                        "gIhbar": 0.0002,
+                    },
+				},
+			},
+		},
+		
+		"ApicalDendrite":
+		{
+			"properties":
+			{
+				"Ra": 100.0,
+				"cm": 2.0,
+                
+                "ions":
+                {
+                    "ek": -85.0,
+                    "ena": 50.0,
+                },
+			},
+			
+			"mechanisms":
+			{
+				"global":
+				{
+					
+				},
+				
+				"range":
+				{
+                    "pas":
+                    {
+                        "spatial": "uniform",
+                        "g": 0.0000882,
+                        "e": -90,
+                    },
+                    "SK_E2":
+                    {
+                        "spatial": "uniform",
+                        "gSK_E2bar": 0.0034,
+                    },
+                    "Ca_LVAst":
+                    {
+                        "spatial": "uniform_range",
+                        "gCa_LVAstbar": 0.104,
+                        "begin": 900.0,
+                        "end": 1100.0,
+                        "outsidescale": 0.010000,
+                    },
+                    "Ca_HVA":
+                    {
+                        "spatial": "uniform_range",
+                        "gCa_HVAbar": 0.00452,
+                        "begin": 900.0,
+                        "end": 1100.0,
+                        "outsidescale": 0.100000,
+                    },
+                    "CaDynamics_E2":
+                    {
+                        "spatial": "uniform",
+                        "decay": 133.0,
+                        "gamma": 0.0005,
+                    },
+                    "SKv3_1":
+                    {
+                        "spatial": "uniform",
+                        "gSKv3_1bar": 0.0112,
+                    },
+                    "NaTa_t":
+                    {
+                        "spatial": "uniform",
+                        "gNaTa_tbar": 0.0252,
+                    },
+                    "Im":
+                    {
+                        "spatial": "uniform",
+                        "gImbar": 0.000179,
+                    },
+                    "Ih":
+                    {
+                        "spatial": "exponential",
+                        "distance": "relative",
+                        "gIhbar": 0.0002,
+                        "offset": -0.8696,
+                        "linScale": 2.0870,
+                        "_lambda": 3.6161,
+                        "xOffset": 0.0,
+                    },
+				},
+			},
+		},
+        
+        "AIS":
+        {
+            "properties":
+            {
+                "Ra": 100.0,
+                "cm": 1.0,
+                
+                "ions":
+                {
+                    "ek": -85.0,
+                    "ena": 50.0,
+                },
+            },
+            
+            "mechanisms":
+            {
+                "global":
+                {
+                    
+                },
+                
+                "range":
+                {
+                    "pas":
+                    {
+                        "spatial": "uniform",
+                        "g": 0.0000256,
+                        "e": -90,
+                    },
+                    "Ca_LVAst":
+                    {
+                        "spatial": "uniform",
+                        "gCa_LVAstbar": 0.00858,
+                    },
+                    "Ca_HVA":
+                    {
+                        "spatial": "uniform",
+                        "gCa_HVAbar": 0.000692,
+                    },
+                    "SKv3_1":
+                    {
+                        "spatial": "uniform",
+                        "gSKv3_1bar": 0.958,
+                    },
+                    "SK_E2":
+                    {
+                        "spatial": "uniform",
+                        "gSK_E2bar": 0.0000577,
+                    },
+                    "K_Tst":
+                    {
+                        "spatial": "uniform",
+                        "gK_Tstbar": 0.0841,
+                    },
+                    "K_Pst":
+                    {
+                        "spatial": "uniform",
+                        "gK_Pstbar": 0.773,
+                    },
+                    "Nap_Et2":
+                    {
+                        "spatial": "uniform",
+                        "gNap_Et2bar": 0.00146,
+                    },
+                    "NaTa_t":
+                    {
+                        "spatial": "uniform",
+                        "gNaTa_tbar": 0.088,
+                    },
+                    "CaDynamics_E2":
+                    {
+                        "spatial": "uniform",
+                        "decay": 507.0,
+                        "gamma": 0.0175,
+                    },
+                    "Ih":
+                    {
+                        "spatial": "uniform",
+                        "gIhbar": 0.00008,
+                    },
+                },
+            },
+        },
+        
+        "Myelin":
+        {
+            "properties":
+            {
+                "Ra": 100.0,
+                "cm": 0.02,
+            },
+            
+            "mechanisms":
+            {
+                "global":
+                {
+                    
+                },
+                
+                "range":
+                {
+                    "pas":
+                    {
+                        "spatial": "uniform",
+                        "g": 0.00004,
+                        "e": -90.0,
+                    },
+                },
+            },
+        },
+	},
+	
+	"sim":
+	{
+		"Vinit": -75.0,
+		"tStart": 0.0,
+		"tStop": 250.0,
+		"dt": 0.025,
+		"T": 34.0,
+		"recordingSites": ["/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/apical_proximal_distal_rec_sites.landmarkAscii"],
+	},
+}
+
+
+
+
+

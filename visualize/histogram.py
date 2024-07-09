@@ -2,11 +2,10 @@ from ._decorators import *
 
 
 @dask_to_pandas
-@return_figure_or_axis  # has to be before subsequent_calls_per_line
 @subsequent_calls_per_line
 def histogram(hist_bins,
               colormap=None,
-              fig=None,
+              ax=None,
               label=None,
               groupby_attribute=None):
     '''expects a tuple of the format (bins,hist)
@@ -17,6 +16,11 @@ def histogram(hist_bins,
     In this case, the label attribute has no function (to be precise: it is overwritten
     by the decorator subsequent_calls_per_line)
     '''
+
+    if ax is None:
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
     if isinstance(hist_bins, pd.Series):
         hist_bins = hist_bins.iloc[0]
 
@@ -26,7 +30,6 @@ def histogram(hist_bins,
     x = list(bins) + [bins[-1]]
     y = [0] + list(hist) + [0]
 
-    ax = fig  #.add_subplot(1,1,1) automatically done by return_figure_or_axis
     if colormap:
         color = colormap[label]
         ax.step(x, y, color=color, label=label)
@@ -38,15 +41,19 @@ def histogram(hist_bins,
     #except TypeError:
     #    pass
 
-    return fig
+    return ax.get_figure()
 
 
 def histogram2(hist_bins, color=None, ax=None, label=None, mode='step'):
     '''hist_bins: tuple of the format (bins,hist) where bins needs to be one element longer than hist
         bins: bin edges; hist: bin values
     '''
+
     if ax is None:
-        ax = plt.gca()
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+
     bins, hist = hist_bins
 
     # add points, so we always start  at 0

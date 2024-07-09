@@ -2,7 +2,7 @@ import numpy as np
 from .context import *
 from visualize.histogram import *
 
-from model_data_base.analyze import temporal_binning
+from data_base.analyze import temporal_binning
 
 
 class TestHistogram:
@@ -28,6 +28,5 @@ class TestHistogram:
         ax = fig.add_subplot(1, 1, 1)
         pds = pd.Series({'A': self.testhist, 'labelB': self.testhist})
         assert isinstance(histogram(pds), Figure)
-        assert histogram(pds, fig=fig) is fig
-        assert histogram(pds, fig=ax) is ax
+        assert histogram(pds, ax=ax) is fig
         plt.close()

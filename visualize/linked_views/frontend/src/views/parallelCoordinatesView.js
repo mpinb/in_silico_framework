@@ -105,7 +105,7 @@ class ParallelCoordinates extends CoordinatedView {
   updateSelection() {
     this.buildTraces(this.selection);
     
-    if (this.dataTable === "pandas_df") {
+    if (this.dataTable === "Abstract DataFrame") {
       const request_data = {
         table: this.dataTable,
         view_name: this.name,

@@ -1,7 +1,7 @@
 import os
 import numpy as np
-import radii as radi
-import transformTools as tr
+import dendrite_thickness.radii as radi
+import dendrite_thickness.transformTools as tr
 import re
 import pandas as pd
 import time
@@ -86,11 +86,11 @@ class RadiiPipeline:
 
         self.outputDirectory = self.initOutputDirectory(outputFolder)
 
-        self.amWithErrorsDirectory = self.outputDirectory + "/amWithErrors/"
-        self.amOutput025 = self.outputDirectory + "/am025/"
-        self.amOutput050 = self.outputDirectory + "/am050/"
-        self.amOutput075 = self.outputDirectory + "/am075/"
-        self.hocFileOutput = self.outputDirectory + "/hocFileWithRad.hoc"
+        self.amWithErrorsDirectory = os.path.join(self.outputDirectory, "amWithErrors")
+        self.amOutput025 = os.path.join(self.outputDirectory, "am025")
+        self.amOutput050 = os.path.join(self.outputDirectory, "am050")
+        self.amOutput075 = os.path.join(self.outputDirectory, "am075")
+        self.hocFileOutput = os.path.join(self.outputDirectory, "hocFileWithRad.hoc")
         self.amWithUcrs = {}
         self.points025 = {}
         self.points050 = {}
@@ -119,7 +119,7 @@ class RadiiPipeline:
         """
         cellPath = os.path.dirname(os.path.dirname(self.amInputPathList[0]))
         cellFolderName = os.path.basename(cellPath)
-        outputDirectory = folder + cellFolderName
+        outputDirectory = os.path.join(folder, cellFolderName)
         if not (os.path.isdir(outputDirectory)):
             os.mkdir(outputDirectory)
         return outputDirectory
@@ -369,8 +369,8 @@ class RadiiPipeline:
             print("writing the final result in the output hocFile")
             tr.write.hocFile(self.hocFile, self.hocFileOutput, hocWithRad)
 
-        egHocFile = self.outputDirectory + '/egHoc.txt'
-        egAmFile = self.outputDirectory + '/egAm.txt'
+        egHocFile = os.path.join(self.outputDirectory, '/egHoc.txt')
+        egAmFile = os.path.join(self.outputDirectory, '/egAm.txt')
         with open(egHocFile, 'w') as f:
             for idx in range(0, len(src_hoc) - 1, 2):
                 startPoint = src_hoc[idx]
@@ -391,7 +391,7 @@ class RadiiPipeline:
                 f.write('{:f}\t{:f}\t{:f} \n'.format(endPoint[0], endPoint[1],
                                                      endPoint[2]))
 
-        amTrFile = self.outputDirectory + '/amTransformed.txt'
+        amTrFile = os.path.join(self.outputDirectory, 'amTransformed.txt')
         with open(amTrFile, 'w') as f:
             for it in trAmPoints4D:
                 f.write('{:f}\t{:f}\t{:f} \n'.format(it[0], it[1], it[2]))

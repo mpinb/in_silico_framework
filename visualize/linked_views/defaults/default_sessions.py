@@ -14,7 +14,7 @@ def biophysics_fitting_vaex_1():
                     "maxNumDatasources": 2,
                     "minNumDatasources": 2,
                     "name": "2-channel",
-                    "dataTable": "vaex_df",
+                    "dataTable": "Abstract DataFrame",
                     "type": "density-2-channel"
                 }, {
                     "configuration": {
@@ -32,7 +32,7 @@ def biophysics_fitting_vaex_1():
                     "maxNumDatasources": 3,
                     "minNumDatasources": 3,
                     "name": "3-channel",
-                    "dataTable": "vaex_df",
+                    "dataTable": "Abstract DataFrame",
                     "type": "density-3-channel"
                 }],
                 "grid": {
@@ -74,7 +74,7 @@ def biophysics_fitting_vaex_2():
                     "maxNumDatasources": 2,
                     "minNumDatasources": 2,
                     "name": "2-channel",
-                    "dataTable": "vaex_df",
+                    "dataTable": "Abstract DataFrame",
                     "type": "density-2-channel"
                 }, {
                     "configuration": {
@@ -92,7 +92,7 @@ def biophysics_fitting_vaex_2():
                     "maxNumDatasources": 3,
                     "minNumDatasources": 3,
                     "name": "3-channel",
-                    "dataTable": "vaex_df",
+                    "dataTable": "Abstract DataFrame",
                     "type": "density-3-channel"
                 }],
                 "grid": {
@@ -223,7 +223,7 @@ def biophysics_fitting_pandas():
                             "BAC_dist_charge",
                             "constants_bifurcation.SKv3_1.gSKv3_1bar"
                         ],
-                        "dataTable": "pandas_df",
+                        "dataTable": "Abstract DataFrame",
                         "id": 2,
                         "maxNumDatasources": 3,
                         "minNumDatasources": 2,
@@ -241,7 +241,7 @@ def biophysics_fitting_pandas():
                             "BAC_bifurcation_charges.Ih.ihcn",
                             "BAC_dist_charge"
                         ],
-                        "dataTable": "pandas_df",
+                        "dataTable": "Abstract DataFrame",
                         "id": 4,
                         "maxNumDatasources": 30,
                         "minNumDatasources": 2,
@@ -254,7 +254,7 @@ def biophysics_fitting_pandas():
                             "umap_charges_y",
                             "BAC_dist_charge"
                         ],
-                        "dataTable": "pandas_df",
+                        "dataTable": "Abstract DataFrame",
                         "id": 5,
                         "maxNumDatasources": 3,
                         "minNumDatasources": 2,
@@ -267,7 +267,7 @@ def biophysics_fitting_pandas():
                             "umap_params_y",
                             "BAC_dist_charge"
                         ],
-                        "dataTable": "pandas_df",
+                        "dataTable": "Abstract DataFrame",
                         "id": 6,
                         "maxNumDatasources": 3,
                         "minNumDatasources": 2,

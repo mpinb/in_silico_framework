@@ -5,19 +5,7 @@ import matplotlib.pyplot as plt
 
 Figure = plt.Figure
 Axes = plt.Axes
-from model_data_base.utils import skit
-
-##
-# todo: this is overcomplicated and should be removed
-#
-##
-
-
-class ForceReturnException(Exception):
-
-    def __init__(self, return_value):
-        self.return_value = return_value
-
+from data_base.utils import skit
 
 def dask_to_pandas(fun):
     '''decorator, that checks every passed parameter.
@@ -99,41 +87,3 @@ def subsequent_calls_per_line(plotfun):
     retfun.__doc__ = plotfun.__doc__
     return retfun
 
-
-def return_figure_or_axis(plotfun):
-    '''decorator, that looks, if the fig attribute is specified in kwargs.
-    If fig is specified and isinstance plt.fiugre:
-        create axis, replace fig with axis, but return fig
-    If fig is specified and isinstance axis:
-        do not change kwargs. return axis
-    If fig is not specified:
-        create figure, create axis, call plotfunction with axis
-        return figure
-        
-    To override this behaviour, the called plot function can raise a
-    ForceReturnException. The exception has to contain the value,
-    that should be returned.
-    '''
-
-    def retfun(*args, **kwargs):
-        try:
-            if 'fig' in kwargs and kwargs['fig'] is not None:
-                fig = kwargs['fig']
-                if isinstance(fig, Figure):
-                    kwargs['fig'] = fig.add_subplot(1, 1, 1)
-                    plotfun(*args, **kwargs)
-                    #plt.close(fig)
-                    return fig
-                if isinstance(fig, Axes):
-                    return plotfun(*args, **kwargs)
-            else:
-                fig = plt.figure()
-                kwargs['fig'] = fig.add_subplot(1, 1, 1)
-                ret = plotfun(*args, **kwargs)
-                #plt.close(fig)
-                return fig
-        except ForceReturnException as e:
-            return e.return_value
-
-    retfun.__doc__ = plotfun.__doc__
-    return retfun

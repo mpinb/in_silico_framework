@@ -32,18 +32,19 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 class ThicknessExtractor:
 
-    def __init__(self,
-                 points,
-                 image_file=None,
-                 xy_resolution=0.092,
-                 z_resolution=0.5,
-                 ray_length_front_to_back_in_micron=20,
-                 number_of_rays=36,
-                 threshold_percentage=0.5,
-                 max_seed_correction_radius_in_micron=10,
-                 _3d=False,
-                 image_stack=None,
-                 slice_name=None):
+    def __init__(
+            self,
+            points,
+            image_file=None,
+            xy_resolution=0.092,
+            z_resolution=0.5,
+            ray_length_front_to_back_in_micron=20,
+            number_of_rays=36,
+            threshold_percentage=0.5,
+            max_seed_correction_radius_in_micron=10,
+            _3d=False,
+            image_stack=None,
+            slice_name=None):
         """ This is the main method for extracting Thickness
         - Inputs:
             1. am_points: must be in the type transformation.Data.coordinate_2d, so they are a list of
@@ -200,7 +201,6 @@ class ThicknessExtractor:
         for i, ray_indices in enumerate(rays_indices):
 
             ray_length = len(ray_indices)
-            assert ray_length % 2 == 1, "ray_length should be uneven"
             half_ray_length = int((ray_length - 1) / 2)
 
             back_contour_index = self.get_contour_index(
@@ -487,7 +487,7 @@ def _get_intersection(line1, line2):
 
 
 def _circle_filter(x, y, r):
-    """Check if a point is within a circle of radius :param: r and center (0,0)
+    """Check if a point is within a circle of radius :paramref: r and center (0,0)
 
     Args:
         x (int/float)
@@ -510,9 +510,9 @@ def _pad_image(image, radius):
 
 
 def _crop_image(image_array, center, radius, circle=False):
-    """Given an image as a 2D array, this method crops it around :param:center.
-    The crop is either a square of size 2x:param:radius by 2x:param:radius and center :param:center,
-    or, in case :param:circle equals True, a circle with radius :param:radius.
+    """Given an image as a 2D array, this method crops it around :paramref:center.
+    The crop is either a square of size 2x:paramref:radius by 2x:paramref:radius and center :paramref:center,
+    or, in case :paramref:circle equals True, a circle with radius :paramref:radius.
 
     Args:
         image_array (array): The 2D image array

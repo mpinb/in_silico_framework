@@ -1,15 +1,25 @@
-# Installation of in-silico-framework followed by CI tests.
-# Builds ISF locally on the MPINB-hosted runner and runs all tests
-name: ISF Py 2.7
-# Controls when the workflow will run
+name: Py 2.7
 on:
-  push:
-    branches: [ 'master' , 'testing' ]
+  pull_request:  # run on the PR base to check if the changes work before merging.
+    # Note that this will also run upon any activity in the PR
+    branches: [ 'master', 'develop' , 'testing' , 'mdbv2_compatibility']
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md  # don't run workflow when README changes
+      - CHANGELOG.md # Should never be edited anyway
+      - .gitignore
+      - .github/**
+  pull_request_target:  # run on PR target after closing the PR
+    types:
+      - closed
+    paths-ignore:
+        - README.md  # don't run workflow when README changes
+        - CHANGELOG.md # Should never be edited anyway
+        - .gitignore
+        - .github/**
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  
   build:
     uses: ./.github/workflows/build-isf.yml
     with:
@@ -37,9 +47,10 @@ jobs:
           pkill -U $USER dask-scheduler
           echo "Creating tests/logs/ directory..."
           mkdir -p ./tests/logs/
-          echo "Removing previous coverage files..."
-          rm .coverage.${{ runner.name }}.*
-          unset DISPLAY
+          if [ -f .coverage.${{ runner.name }}.* ]; then
+            echo "Removing previous coverage files..."
+            rm .coverage.${{ runner.name }}.*
+          fi
 
           echo "------------ Setting up environment -------------"
           CONDA_TARGET_DIR="$HOME/anaconda_isf2.7"
@@ -56,14 +67,17 @@ jobs:
           echo "Launching Dask server on $name"
           echo "Using port $port_number and bokeh port $bokeh_port"
 
+          export DASK_CONFIG=./config/dask_config.yml
+
           echo "------------ Running tests -------------"
+          unset DISPLAY
           if [ ! -d "$HOME/tmp" ]; then
             mkdir $HOME/tmp
           fi
           export TMPDIR=$HOME/tmp
-          (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1)&
-          (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1)&
-          python -m pytest -rsx -vv --color=yes --dask_server_port $port_number tests/
+          (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port --host=localhost --preload="mechanisms"> ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1) & \
+          (dask-worker localhost:$port_number --nthreads 1 --nprocs 6 --memory-limit=100e15 > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1) & \
+          python -m pytest -rsx -vv --color=yes --dask_server_port $port_number tests/ -s || exit 1;
           rm -rf $HOME/tmp
 
       - name: Cleanup dask orphan processes
@@ -78,4 +92,5 @@ jobs:
         if: ${{ always() }} 
         with:
           name: ${{ github.run_id }}_logs
-          path: ./tests/logs/
+          path: |
+            ./tests/logs/

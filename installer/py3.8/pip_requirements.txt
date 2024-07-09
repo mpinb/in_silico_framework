@@ -20,9 +20,9 @@ vaex-server==0.8.1
 vaex-astro==0.9.3
 vaex-jupyter==0.8.2
 vaex-ml==0.18.3
-tabulate==0.9.0
+# tabulate==0.9.0
 pyarrow==12.0.1
-flask-cors==4.0.0
+# flask-cors==4.0.0
 
 ## model data base dependencies
 blosc==1.10.2

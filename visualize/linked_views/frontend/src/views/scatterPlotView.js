@@ -40,7 +40,7 @@ class ReglScatterPlot extends CoordinatedView {
       }
       this.scatterplot.select(deepCopy(this.selection), { preventEvent: true });
       
-      if (this.dataTable === "pandas_df") {
+      if (this.dataTable === "Abstract DataFrame") {
         const request_data = {
           table: this.dataTable,
           view_name: this.name,

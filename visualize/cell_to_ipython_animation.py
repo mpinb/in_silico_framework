@@ -8,7 +8,7 @@ import jinja2
 import functools
 from base64 import b64encode
 import multiprocessing
-from model_data_base.utils import chunkIt
+from data_base.utils import chunkIt
 
 html_template = 'animation_template.html'
 
@@ -155,13 +155,15 @@ def get_lines(cell, n, range_vars='Vm'):
                     [parent_idx_segment][n]
                 ]
             except:
-                [np.NaN]
-            if not vec_list:
+                traces_dummy = [np.NaN]
+            if not currentSec_backup.recordVars[range_vars[0]]:
+                traces_dummy.append(np.nan)
                 continue  #if range mechanism is not in section: continue
-            for vec in vec_list:
+            for vec in currentSec_backup.recordVars[range_vars[0]]:
                 traces_dummy.append(vec[n])
                 #sec.recordVars[range_vars[0]][lv_for_record_vars]
-
+        
+        assert(len(distance_dummy) == len(traces_dummy))
         if len(distance_dummy) == 2:
             label = currentSec_backup.label
             if not label in list(points_lines.keys()):

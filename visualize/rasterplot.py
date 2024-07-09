@@ -14,8 +14,8 @@ TODO:
 # from compatibility import multiprocessing_scheduler
 import matplotlib.pyplot as plt
 from ._decorators import *
-from model_data_base.analyze._helper_functions import is_int
-from model_data_base.utils import convertible_to_int
+from data_base.analyze._helper_functions import is_int
+from data_base.utils import convertible_to_int
 
 
 def rasterplot2(st,
@@ -91,15 +91,14 @@ def rasterplot2_pdf_grouped(pdf,
 
 
 @dask_to_pandas
-@return_figure_or_axis
-def rasterplot(df,
-               colormap=None,
-               fig=None,
-               label=None,
-               groupby_attribute=None,
-               tlim=None,
-               figsize=(15, 3),
-               reset_index=True):
+def rasterplot(
+    df,
+    colormap=None,
+    ax=None,
+    label=None,
+    groupby_attribute=None,
+    tlim=None,
+    reset_index=True):
     '''
     creates a rasterplot,
     expects dataframe in the usual spike times format
@@ -108,6 +107,11 @@ def rasterplot(df,
     if df is a pandas.DataFrame, serial plotting is used
     '''
 
+    if ax is None:
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+    else:
+        fig = ax.get_figure()
     if reset_index:
         df = df.reset_index()
 
@@ -116,7 +120,7 @@ def rasterplot(df,
         for label, group_df in groups:
             rasterplot(group_df,
                        colormap=colormap,
-                       fig=fig,
+                       ax=ax,
                        label=label,
                        groupby_attribute=None,
                        reset_index=False)
@@ -126,7 +130,6 @@ def rasterplot(df,
     df = df[relevant_columns]
     times_all = []
     trails_all = []
-    ax = fig  #before: ax = fig.add_subplot(1,1,1), now managed by decorator  return_figure_or_axis
 
     # fig.patch.set_alpha(0.0)
     # axes = plt.axes()
@@ -145,8 +148,8 @@ def rasterplot(df,
     if tlim:
         ax.set_xlim(tlim)
     # plt.gca().set_position([0.05, 0.05, 0.95, 0.95])
-
     return fig
+
 
 
 ######################################

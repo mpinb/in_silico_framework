@@ -1,15 +1,20 @@
 #!/usr/bin/python
-
+"""
+Create a parameterfile
+"""
 import sys, os
 import single_cell_parser as scp
 import getting_started
-from model_data_base.mdbopen import mdbopen
+from data_base.dbopen import dbopen
 
 #evokedPrefix = '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/evoked_activity/'
 #evokedPrefix = '/home/abast/test/neurosim_getting_started/getting_started_files/functional_constraints/evoked_activity/PW_SuW_RF_CDK/'
 evokedPrefix = os.path.join(
     getting_started.parent,
-    'functional_constraints/evoked_activity/PW_SuW_RF_CDK/')
+    'example_data',
+    'functional_constraints',
+    'evoked_activity',
+    'PW_SuW_RF_CDK') + '/'
 #L2EvokedName = evokedPrefix + 'L2_3x3_PSTH_template_0-50_10ms.param'
 #L34EvokedName = evokedPrefix + 'L34_3x3_PSTH_template_0-20_1ms_20-50_10ms.param'
 #L4pyEvokedName = evokedPrefix + 'L4py_3x3_PSTH_template_0-50_10ms.param'
@@ -360,13 +365,71 @@ deflectionOffset = 245.0  #ms; to allow same analysis as CDK JPhys 2007
 clusterParameters = False
 
 
-def create_network_parameter(templateParamName,
-                             cellNumberFileName,
-                             synFileName,
-                             conFileName,
-                             whisker,
-                             outFileName,
-                             write_all_celltypes=False):
+def create_network_parameter(
+    templateParamName,
+    cellNumberFileName,
+    synFileName,
+    conFileName,
+    whisker,
+    outFileName,
+    write_all_celltypes=False):
+    """Generate and write out a network parameter file defining a passive whisker touch scenario.
+    
+    This method reads in a template file for a network, where the possible parameters of each celltype are already defined.
+    It then sets the PSTH (i.e. spike probability per temporal bin) for each cell, depending on the celltype, columnm, and which whisker was deflected.
+    Spike probabilities only depend on the celltype, column, and deflected whisker.
+    Spike times are Poisson sampled from the PSTH.
+    A spike does not guarantee a synapse relase, but the probability of release is set for each celltype.
+    
+    The template file contains the key "network" with the following info for each celltype:
+    
+        - celltype: 'spiketrain' or 'pointcell'
+        - interval: spike interval
+        - synapses: containing receptor information (type, weight and time dynamics) and release probability
+        - releaseProb: probability that a synapse gets activated if the cell spikes
+            
+    Args:
+        templateParamName (str): Name of the template parameter file.
+        cellNumberFileName (str): Name of the file containing the number of cells for each celltype and column.
+        
+        
+    Example:
+    
+        >>> parsed = json.loads(templateParamName)
+        >>> print(json.dumps(parsed, indent=4))
+        {
+            "info": ...
+            "network": {
+                "L5tt": {
+                    "celltype": "spiketrain",
+                    "interval": 909.1,  # average ongoing spike interval
+                    "synapses": {
+                        "receptors": {
+                            "glutamate_syn": {
+                                "threshold": 0.0,
+                                "delay": 0.0,
+                                "parameter": {  # parameters for the neuron mechanisms - see mechanisms/l5pt/channels_py3/netglutamate_new.mod
+                                    "tau1": 26.0,  # nmda inactivation
+                                    "tau2": 2.0,  # nmda activation
+                                    "tau3": 2.0,  # ampa inactivation
+                                    "tau4": 0.1,  # ampa activation
+                                    "decayampa": 1.0,  # ampa decay time
+                                    "decaynmda": 1.0,  # nmda decay time
+                                    "facilampa": 0.0,
+                                    "facilnmda": 0.0,
+                                },
+                                "weight": [1.38, 1.38],  EXC/INH weights
+                            },
+                        }
+                    "releaseProb": 0.6,  # probability that a synapse gets activated if the cell spikes
+                    }, 
+                "L4py": {...},
+                ...
+                }
+            },
+            "NMODL_mechanisms": {...}
+        }
+    """
     print('*************')
     print('creating network parameter file from template {:s}'.format(
         templateParamName))
@@ -404,9 +467,13 @@ def create_network_parameter(templateParamName,
             nwParamCluster.NMODL_mechanisms[mech] = newMechPath
 
 
-#    for cellType in cellTypeColumnNumbers.keys():
+    # for cellType in cellTypeColumnNumbers.keys():
     for cellType in list(templateParam.network.keys()):
         cellTypeParameters = templateParam.network[cellType]
+        # CellTyepeParameters typically include :
+        # 'celltype': 'spiketrain' or "pointcell"
+        # 'interval': spike interval
+        # 'synapses': containing receptor information (kind and time dynamics) and release probability
         for column in list(cellTypeColumnNumbers[cellType].keys()):
             numberOfCells = cellTypeColumnNumbers[cellType][column]
             if numberOfCells == 0 and not write_all_celltypes:
@@ -416,6 +483,8 @@ def create_network_parameter(templateParamName,
             if clusterParameters:
                 nwParamCluster.network[
                     cellTypeName] = cellTypeParameters.tree_copy()
+            
+            # Assign proper PSTH, depending on the column, the deflected whisker and the cell type
             PSTH = whisker_evoked_PSTH(column, whisker, cellType)
             if PSTH is not None:
                 interval = nwParam.network[cellTypeName].pop('interval')
@@ -425,8 +494,7 @@ def create_network_parameter(templateParamName,
                     }
                 }
                 nwParam.network[cellTypeName].celltype['pointcell'] = PSTH
-                nwParam.network[cellTypeName].celltype['pointcell'][
-                    'offset'] = deflectionOffset
+                nwParam.network[cellTypeName].celltype['pointcell']['offset'] = deflectionOffset
                 if clusterParameters:
                     interval = nwParamCluster.network[cellTypeName].pop(
                         'interval')
@@ -470,7 +538,7 @@ def whisker_evoked_PSTH(column, deflectedWhisker, cellType):
 
 def load_cell_number_file(cellNumberFileName):
     cellTypeColumnNumbers = {}
-    with mdbopen(cellNumberFileName, 'r') as cellNumberFile:
+    with dbopen(cellNumberFileName, 'r') as cellNumberFile:
         lineCnt = 0
         for line in cellNumberFile:
             if line:

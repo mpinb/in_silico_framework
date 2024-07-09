@@ -2,7 +2,7 @@
 
 import sys
 import single_cell_parser as scp
-from model_data_base.mdbopen import mdbopen
+from data_base.dbopen import dbopen
 
 
 def create_network_parameter(templateParamName,
@@ -45,7 +45,7 @@ def create_network_parameter(templateParamName,
 
 def load_cell_number_file(cellNumberFileName):
     cellTypeColumnNumbers = {}
-    with mdbopen(cellNumberFileName, 'r') as cellNumberFile:
+    with dbopen(cellNumberFileName, 'r') as cellNumberFile:
         lineCnt = 0
         for line in cellNumberFile:
             if line:

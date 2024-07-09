@@ -1,8 +1,8 @@
 import re
 import os
 import pandas as pd
-import radii as radi
-import transformTools as tr
+import dendrite_thickness.radii as radi
+import dendrite_thickness.transformTools as tr
 
 
 def allData(am050_tr_folder, radi_object):

@@ -20,7 +20,21 @@ author = 'Arco Bast, Amir Najafgholi, Maria Royo Cano, Rieke Fruengel, Matt Keat
 release = '0.0.1'
 version = '0.0.1'
 ## Make your modules available in sys.path
-sys.path.append(os.path.join(os.path.abspath(os.pardir)))
+project_root = os.path.join(os.path.abspath(os.pardir))
+sys.path.append(project_root)
+## copy over tutorials
+import shutil
+shutil.rmtree(os.path.join(project_root, 'docs', 'tutorials'), ignore_errors=True)
+shutil.copytree(os.path.join(project_root, 'getting_started', 'tutorials'),
+                os.path.join(project_root, 'docs', 'tutorials'))
+shutil.copy(os.path.join(project_root, 'getting_started', 'Introduction_to_ISF.ipynb'),
+                os.path.join(project_root, 'docs', 'Introduction_to_ISF.ipynb'))
+# Figures need to be in the _autosummary directory
+if os.path.exists(os.path.join(project_root, 'docs', '_autosummary', '_images')):
+    shutil.rmtree(os.path.join(project_root, 'docs', '_autosummary', '_images'))
+shutil.copytree(os.path.join(project_root, 'docs', '_static', '_images'),
+                os.path.join(project_root, 'docs', '_autosummary', '_images'))
+
 
 # -- General configuration ------------------------------------------------
 
@@ -37,10 +51,28 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.coverage',
     'sphinx.ext.intersphinx',
-    ## Include autosymmary
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'nbsphinx',  # for rendering tutorial notebooks
+    'sphinxcontrib.bibtex'  # for citations
 ]
+
+bibtex_bibfiles = ['bibliography.bib']
+
+# Napoleon settings
+napoleon_google_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = True
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True
+napoleon_preprocess_types = False  # otherwise custom argument types will not work
+napoleon_type_aliases = None
+napoleon_attr_annotations = True
 
 ## Include Python objects as they appear in source files
 ## Default: alphabetically ('alphabetical')
@@ -48,12 +80,20 @@ extensions = [
 ## Default flags used by autodoc directives
 autodoc_default_options = {
     'members': True,
-    'show-inheritance': True,
+    'show-inheritance': False,
 }
+
+autoclass_content = 'both'  # document both the class docstring, as well as __init__
 ## Generate autodoc stubs with summaries from code
-autosummary_generate = True
+autosummary_generate = ['modules.rst']
 autosummary_imported_members = False  # do not show all imported modules per module, this is too bloated
 paramlinks_hyperlink_param = 'name'
+
+# Don't run notebooks
+nbsphinx_execute = 'never'
+pygments_style = "python"
+nbsphinx_codecell_lexer = "python"
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -77,7 +117,7 @@ exclude_patterns = ['_build']
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-#add_module_names = True
+add_module_names = False  # less verbose for nested packages
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
@@ -105,8 +145,9 @@ html_theme = "furo"
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "light_logo": "_figures/isf-logo-black.png",
-    "dark_logo": "_figures/isf-logo-white.png",
+    "light_logo": "_images/isf-logo-black.png",
+    "dark_logo": "_images/isf-logo-white.png",
+    "sidebar_hide_name": True,
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -134,6 +175,12 @@ html_theme_options = {
 html_static_path = ['_static']
 html_css_files = [
     'default.css',  # relative to html_static_path defined above
+    'style.css',
+    'downarr.svg'
+]
+
+html_js_files = [
+    'overview.js'
 ]
 
 # Add any extra paths that contain custom files (such as robots.txt or

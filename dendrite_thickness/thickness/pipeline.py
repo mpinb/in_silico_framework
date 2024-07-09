@@ -195,7 +195,8 @@ class ExtractThicknessPipeline:
 
     def run(self):
         self._run1()
-        self._run2()
+        df = self._run2()
+        return df
 
     def _run1(self):
         self._initialize_project()
@@ -219,8 +220,8 @@ class ExtractThicknessPipeline:
         self._transform_points()
         self._stacking_all_slices()
         self._update_hoc_file_with_thicknesses()
-        data_table = self._compute_all_data_table()
-        return data_table
+        self._compute_all_data_table()
+        # return data_table  # this can get big
 
     def _initialize_project(self):
         print("---- initialize project ----")

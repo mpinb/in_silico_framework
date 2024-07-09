@@ -3,7 +3,7 @@ import plotly
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as enp
-import transformTools as tr
+import dendrite_thickness.transformTools as tr
 import re
 import Interface as I
 from getting_started import getting_started_dir

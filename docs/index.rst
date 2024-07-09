@@ -3,8 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to In-Silico Framework (ISF)'s documentation!
+The In-Silico Framework (ISF)
 =====================================================
+
+ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
+
+.. raw:: html
+   :file: ./overview.html
+
+
 
 Module list
 =============
@@ -14,28 +21,55 @@ Module list
    :recursive:
 
    Interface
-   SLURM_scripts
    barrel_cortex
    biophysics_fitting
-   ..compatibility
-   getting_started
-   ..mechanisms
-   model_data_base
-   ..nbrun
-   ..project_specific_ipynb_code
-   simrun2
-   simrun3
-   single_cell_analyzer
+   data_base
+   simrun
    single_cell_parser
    singlecell_input_mapper
    spike_analysis
-   ..tests
    visualize
 
-Usage
-==================
+Tutorials
+=============
+.. nbgallery::
+   :caption: Introduction
+   :glob:
 
-Take a look at the :py:mod:`getting_started` module for various notebooks on how to use ISF.
+   Introduction_to_ISF.ipynb
+
+
+.. nbgallery::
+   :caption: 1. Neuron models
+   :glob:
+
+   tutorials/1. neuron models/*
+
+.. nbgallery::
+   :caption: 2. Network models
+   :glob:
+
+   tutorials/2. network models/*
+
+.. nbgallery::
+   :caption: 3. Multiscale models
+   :glob:
+
+   tutorials/2. network models/*
+
+
+.. nbgallery::
+   :caption: 4. Analytically tractable reduced models
+   :glob:
+
+   tutorials/4. reduced models/*
+
+.. nbgallery::
+   :caption: 5. Analysis
+   :glob:
+
+   tutorials/5. analysis/*
+
 
 Indices and tables
 ==================
@@ -43,3 +77,10 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Bibliography
+===========
+
+.. bibliography:: bibliography.bib
+   :style: unsrt
+   :cited:

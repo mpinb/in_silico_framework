@@ -5,17 +5,17 @@ import logging
 from logging import handlers
 import tempfile
 import threading
-import util
+from visualize.linked_views import util
 import glob
 import json
 import pandas as pd
 import numpy as np
 import vaex
 import vaex.ml
-
+from visualize.linked_views.data import PandasTableWrapper, VaexTableWrapper, mask_invalid_values
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
-
+import warnings
 from pathlib import Path
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -43,7 +43,7 @@ def load_tables(data_folder, config, max_num_rows = 50000):
             randomState = np.random.RandomState(seed)
             df = df.sample(sampleSize, random_state=randomState)
 
-        columns_data = df.to_dict(orient="records")
+        columns_data = df.to_dict()
         tables[basename] = {}
         tables[basename]["flat"] = df
         tables[basename]["records"] = columns_data
@@ -51,12 +51,21 @@ def load_tables(data_folder, config, max_num_rows = 50000):
     return tables
 
 
-def load_table_from_df(df):
+# def load_table_from_df(df):
+#     tables = {}
+#     basename = "pandas_df"
+#     tables[basename] = {}
+#     tables[basename]["flat"] = df
+#     columns_data = df.to_dict()
+#     tables[basename]["records"] = columns_data
+#     return tables
+
+def load_table_from_adf(adf):
     tables = {}
-    basename = "pandas_df"
+    basename = "Abstract DataFrame"
     tables[basename] = {}
-    tables[basename]["flat"] = df
-    columns_data = df.to_dict(orient="records")
+    tables[basename]["flat"] = adf
+    columns_data = adf.to_dict()
     tables[basename]["records"] = columns_data
     return tables
 
@@ -67,23 +76,30 @@ def write_objects_to_file(filenameProjects, objects):
     with open(filenameProjects, 'w') as file:
         json.dump(objects, file)
 
-def get_data_ranges(df):
+def get_data_ranges(adf):
+    """
+    Given an abstract dataframe, return the data ranges for each column.
+
+    Args:
+        adf: data.AbstractDataFrame
+    """
+    col_names = adf.columns
     ranges = {}
-    ranges["min"] = df.min().to_list()
-    ranges["max"] = df.max().to_list()
+    ranges["min"] = adf.min().tolist()
+    ranges["max"] = adf.max().tolist()
     return ranges 
 
-def get_data_ranges_vaex(df):
-    col_names = df.get_column_names()
-    ranges = {}
-    ranges["min"] = df.min(col_names).tolist()
-    ranges["max"] = df.max(col_names).tolist()
-    return ranges 
+# def get_data_ranges_vaex(df):
+#     col_names = df.get_column_names()
+#     ranges = {}
+#     ranges["min"] = df.min(col_names).tolist()
+#     ranges["max"] = df.max(col_names).tolist()
+#     return ranges 
 
 def normalize(df, low=-1, high=1):
     scaler = MinMaxScaler(feature_range=(low, high))
     df_normalized = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-    return df_normalized
+    return PandasTableWrapper(df_normalized)
 
 def getPCA(df):    
     scaler = StandardScaler()
@@ -101,13 +117,13 @@ def getPCA(df):
     
 class LinkedViewsServer:
     def __init__(self, config_file_path = None, data_folder=None):
-        if(config_file_path is not None):
+        if config_file_path is not None:
             self.config_file_path = config_file_path
         else:
             self.config_file_path = Path(os.path.dirname(__file__))/"defaults"/"config.json"        
 
         self.data_folder = None 
-        if(data_folder):
+        if data_folder:
             self.data_folder = Path(data_folder)
             self.resourceDir = self.data_folder/"resources"
             self.config_file_path = self.data_folder/"config.json"
@@ -116,14 +132,15 @@ class LinkedViewsServer:
         self.filenameProjects = None
 
         self.thread = None    
-        self.vaex_df = None
+        self.abstract_df = None
         self.selections = {}
+        """Dictionary of selection config per view. Keeps track of the selected columns and bins per view"""
         self.active_selection = None
 
         print(self.config_file_path)
         self.config = util.loadJson(self.config_file_path)
 
-        if(self.data_folder):
+        if self.data_folder:
             self.tables = load_tables(self.data_folder, self.config)
             self.filenameProjects = self.data_folder/"projects.json"
             # Load objects from the file on server startup
@@ -136,14 +153,13 @@ class LinkedViewsServer:
             self.tables = {}
             self.objects = []
 
-
     def start(self, port=5000):                        
         if(self.thread is not None):
             print("server is running at port {}".format(self.port))
             return        
         try:
-            self.app = Flask(__name__)       
-            CORS(self.app)     
+            self.app = Flask(__name__)
+            CORS(self.app)   
             self.server = make_server('0.0.0.0', port, self.app)                        
             self.port = port
             self.init_routes()
@@ -154,6 +170,7 @@ class LinkedViewsServer:
         def _start():
             self.server.serve_forever()
 
+        
         self.thread = threading.Thread(target=_start)      
         self.thread.start()
         print("server is running at port {}".format(self.port))
@@ -161,7 +178,6 @@ class LinkedViewsServer:
         print("set data:        server.set_data(df)")        
         print("stop server:     server.stop()")
         
-
     def stop(self):
         if(self.thread is None):
             print("server is not running")
@@ -175,8 +191,8 @@ class LinkedViewsServer:
         print("Server stopped.")
 
     def start_logging(self):
-        tmp_folder = Path(tempfile.gettempdir())
-        log_filename = tmp_folder/"linked-views-server.log"
+        tmp_folder = tempfile.mkdtemp()
+        log_filename = os.path.join(tmp_folder, "linked-views-server.log")
         print("logs are written to {}".format(log_filename))
         self.logfile_handler = logging.handlers.RotatingFileHandler(
             filename=log_filename,
@@ -186,7 +202,8 @@ class LinkedViewsServer:
         self.logfile_handler.setLevel(logging.INFO)
         formatter = logging.Formatter("%(asctime)s [%(levelname)s]: %(message)s", "%Y-%m-%d %H:%M:%S")
         self.logfile_handler.setFormatter(formatter)
-        logging.getLogger().addHandler(self.logfile_handler)
+        self.logger = logging.getLogger()
+        self.logger.addHandler(self.logfile_handler)
 
     def stop_logging(self):
         logging.getLogger().removeHandler(self.logfile_handler)
@@ -194,19 +211,18 @@ class LinkedViewsServer:
     def set_data(self, df):
         assert self.server is not None
 
-        if(isinstance(df, pd.DataFrame)):
-            self.tables = load_table_from_df(df)
-            self.config["cached_tables"] = ["pandas_df"]
-        elif(isinstance(df, vaex.DataFrame)):
-            self.vaex_df = df        
-            self.vaex_columns = df.get_column_names()         
-            self.vaex_df["row_index"] = np.arange(self.vaex_df.shape[0])
-            self.vaex_data_ranges = get_data_ranges_vaex(df)
+        if isinstance(df, pd.DataFrame):
+            self.abstract_df = PandasTableWrapper(df)
+            self.config["cached_tables"] = ["Abstract DataFrame"]
+        elif isinstance(df, vaex.DataFrame):
+            df["row_index"] = np.arange(df.shape[0])
+            self.abstract_df = VaexTableWrapper(df)        
+            self.config["cached_tables"] = ["Abstract DataFrame"]
         else:
             raise TypeError(df)
-
-        
-    
+        self.tables = load_table_from_adf(self.abstract_df)
+        self.columns = self.abstract_df.columns
+        self.data_ranges = get_data_ranges(self.abstract_df)
 
     def init_routes(self):
         self.app.add_url_rule('/', 'index', self.index)
@@ -223,12 +239,12 @@ class LinkedViewsServer:
         self.app.add_url_rule("/dataServer/setIndicesSelection", "setIndicesSelection", self.setIndicesSelection, methods=["POST"])
 
     def index(self):
-        if(self.vaex_df):
-            return "vaex df columns: {}".format([name for name in list(self.vaex_df.columns)])
+        if self.abstract_df:
+            return "{} columns: {}".format(
+                self.abstract_df.__class__.__name__,
+                self.abstract_df.columns)
         else:
             return "Tables: {}".format([name for name in self.tables.keys()])
-
-
 
     """
     ########################################################################################
@@ -257,7 +273,6 @@ class LinkedViewsServer:
         write_objects_to_file(self.filenameProjects, self.objects)
         return jsonify(new_object)
 
-
     def add_session(self, sessionData, name=None):
         if(name is None):
             name = "session-{}".format(len(self.objects)+1)
@@ -268,20 +283,17 @@ class LinkedViewsServer:
     def remove_session(self, name):
         self.delete_object(name)
 
-
     def get_session(self, name):
         for session in self.objects:
             if(session["name"] == name):
                 return session
         return None
 
-
     """
     ########################################################################################
                                     end of session storage
     ########################################################################################
     """
-
 
     #@app.route("/matrixServer/getMetaData", methods=["GET", "POST"])
     #@cross_origin()
@@ -290,23 +302,30 @@ class LinkedViewsServer:
             if request.data:
                 data = request.get_json(force=True)
                 
-                meta_data = []            
+                meta_data = []        
                 for tableName, tableData in self.tables.items():
-                    df = tableData["flat"]            
+                    adf = tableData["flat"]
                     meta_data.append({
                         "name" : tableName,
-                        "num_rows" : df.shape[0],
-                        "columns" : df.columns.to_list(),
-                        "data_ranges" : get_data_ranges(df)                
+                        "num_rows" : adf.shape[0],
+                        "columns" : self.columns,
+                        "data_ranges" : get_data_ranges(adf)                
                     })
+                    for md in meta_data:
+                        for key, val in md.items():
+                            try:
+                                json.dumps({key: val})
+                            except Exception as e:
+                                print("Could not json dump {}:{}".format(key, val))
+                                raise
 
-                if(self.vaex_df is not None):                       
-                    meta_data.append({
-                        "name" : "vaex_df",
-                        "num_rows" : self.vaex_df.shape[0],
-                        "columns" : self.vaex_columns,
-                        "data_ranges" : self.vaex_data_ranges#'get_data_ranges_vaex(self.vaex_df)                
-                    })
+                # if self.abstract_df is not None:                       
+                #     meta_data.append({
+                #         "name" : "Abstract DataFrame",
+                #         "num_rows" : self.abstract_df.shape[0],
+                #         "columns" : self.columns,
+                #         "data_ranges" : self.data_ranges#'get_data_ranges_vaex(self.abstract_df)                
+                #     })
 
 
                 response_data = {
@@ -315,8 +334,13 @@ class LinkedViewsServer:
                     "table_mapping" : self.config["table_mapping"],
                     "cached_tables" : self.config["cached_tables"]
                 }
+                for key, val in response_data.items():
+                    try:
+                        json.dumps(response_data)
+                    except:
+                        print("could not json serialize {}: {}".format (key, val))
+                        raise
                 return json.dumps(response_data)
-
 
     #@app.route("/matrixServer/getResourceJSON", methods=["GET", "POST"])
     #@cross_origin()
@@ -329,7 +353,7 @@ class LinkedViewsServer:
                 filename = self.resourceDir/resourceName
                 print(filename)
 
-                if(not os.path.exists(filename)):
+                if not os.path.exists(filename):
                     raise ValueError(filename)
                 else:
                     jsonData = util.loadJson(filename)
@@ -338,105 +362,126 @@ class LinkedViewsServer:
                         "filename" : resourceName,
                         "jsonData" : jsonData
                     }
-
+                    
                     return json.dumps(response_data)
-
-
 
     #@app.route("/matrixServer/getValues", methods=["GET", "POST"])
     #@cross_origin()
     def getValues(self):
+        """
+        Fetches the values from a request JSON, filters them based on columns and indices, converts them to one of the following formats:
+            - expanded: a list of dictionaries, where each dictionary represents a row
+            - flat: a list of lists, where each list represents a row
+            - flat-normalized: a list of lists, where each list represents a row and the values are normalized to [-1,1]
+            - flat-normalized-PCA: a list of lists, where each list represents a row and the values are normalized to [-1,1] and reduced to 2 dimensions using PCA
+
+        This is an initial data parser that is used before passing the dataframe for further operations (e.g. density computation).
         
+        Raises:
+            ValueError: If the data format is not one of the above.
+
+        Returns:
+            json.dumps: The response data
+        """
         if request.method == "POST":
             if request.data:
                 data = request.get_json(force=True)
 
                 tableName = data["table"]
-                df = self.tables[tableName]["flat"]
+                adf = self.tables[tableName]["flat"]
 
                 columns = data["columns"]
                 indices = data["indices"]
-                format = data["format"]
-                #print(columns)
-                #print(set(columns) - set(df.columns))
-                assert set(columns).issubset(set(df.columns))
-                assert len(indices) == 0 or max(indices) < df.shape[0]            
+                data_format = data["format"]
+                assert set(columns).issubset(set(adf.columns))
+                assert len(indices) == 0 or max(indices) < adf.shape[0]         
 
+                # update df attr of Abstract DataFrame
+                filtered_adf = adf
                 if(len(indices) == 0):
-                    filtered_df = df[columns]
+                    filtered_adf.df = adf.df[columns]
                 else:
-                    filtered_df = df.iloc[indices][columns]
+                    filtered_adf.df = adf.df.iloc[indices][columns]
 
-                if(format == "expanded"):
-                    values = filtered_df.to_dict(orient="records")
-                elif(format == "flat"):
-                    values = filtered_df.values.tolist()
-                elif(format == "flat-normalized"):
-                    values = normalize(filtered_df).values.tolist()
-                elif(format == "flat-normalized-PCA"):
-                    values = getPCA(filtered_df) 
+                if data_format == "expanded":
+                    values = filtered_adf.to_dict()
+                elif data_format == "flat":
+                    values = filtered_adf.df.values.tolist()
+                elif data_format == "flat-normalized":
+                    values = normalize(filtered_adf).values.tolist()
+                elif data_format == "flat-normalized-PCA":
+                    values = getPCA(filtered_adf) 
                 else:
-                    raise ValueError(format)
+                    raise ValueError(data_format)
 
                 response_data = {
                     "columns" : columns,
                     "indices" : indices,
                     "values" : values,
-                    "data_ranges" : get_data_ranges(filtered_df)
+                    "data_ranges" : get_data_ranges(filtered_adf)
                 }
 
                 return json.dumps(response_data)
     
+    def getDensity(self):
+        """
+        Fetches the request JSON, computes aggregate statistics in 2D bins and returns the result. 
+        Aggregation can be performed on a subset of the data, specified by a selection.
+        The density can be computed in the following formats:
+            - count: the number of data points in each bin
+            - min: the minimum value in each bin
+            - max: the maximum value in each bin
+            - mean: the mean value in each bin
+            - median: the median value in each bin
 
-    def getDensity(self): 
+        Raises:
+            ValueError: If the aggregation format is not in ["count", "min", "max", "mean", "median"].
+            AssertionError: If the name of the table is not "Abstract DataFrame".
+            AssertionError: If the number of columns is not 2 for agg_format in ["count"] and 3 for agg_format in ["min", "max", "mean", "median"].
+
+        Returns:
+            _type_: _description_
+        """
         self.last_request = request.data
         if request.method == "POST":            
             if request.data:
                 data = request.get_json(force=True)
 
-                tableName = data["table"]
-                if(tableName not in ["vaex_df"]):
-                    raise ValueError(tableName)
+                assert data["table"] == "Abstract DataFrame", \
+                    "Only Abstract DataFrames are supported. \
+                    If you are not using pandas or vaex tables, please create a wrapper in data.py."
 
-                df = self.vaex_df
-              
+                adf = self.abstract_df
                 columns = data["columns"]                
-                #indices = data["indices"]
-                format = data["format"]
-                if(format in ["count"]):
+                # indices = data["indices"]
+                agg_format = data["format"]
+                if agg_format in ["count"]:
                     assert len(columns) == 2
-                elif(format in ["min", "max", "mean", "median"]):
+                    value_column=None
+                elif agg_format in ["min", "max", "mean", "median"]:
                     assert len(columns) == 3
                     value_column = columns[2]
                 else:
-                    raise ValueError(format)
+                    raise ValueError(agg_format)
 
                 binbycols = columns[0:2]
-                density_grid_shape = tuple(data["density_grid_shape"])
+                density_grid_shape = tuple(data["density_grid_shape"])                
                 nCells = density_grid_shape[0] * density_grid_shape[1]
                 #indices = np.arange(nCells)
                                                 
-                minmax_x = df.minmax(binbycols[0])
-                minmax_y = df.minmax(binbycols[1])
+                minmax_x = adf.minmax(binbycols[0])
+                minmax_y = adf.minmax(binbycols[1])
                 data_ranges = [minmax_x.tolist(), minmax_y.tolist()]
+                values = adf.calc_binned_statistic(
+                    operation=agg_format, expression = value_column,
+                    binby=binbycols, shape=density_grid_shape, 
+                    selection=self.active_selection,
+                    limits=data_ranges
+                    )
                 
-                if(format == "count"):
-                    values = df.count(binby=binbycols, shape=density_grid_shape, selection=self.active_selection, limits=data_ranges).astype(float)
-                    values[values == 0] = np.nan
-                elif(format == "min"):                    
-                    values = df.min(value_column, binby=binbycols, shape=density_grid_shape, selection=self.active_selection, limits=data_ranges)
-                    values[values > 10**100] = np.nan
-                elif(format == "max"):                    
-                    values = df.max(value_column, binby=binbycols, shape=density_grid_shape, selection=self.active_selection, limits=data_ranges)
-                    values[values < -10**100] = np.nan
-                elif(format == "mean"):                    
-                    values = df.mean(value_column, binby=binbycols, shape=density_grid_shape, selection=self.active_selection, limits=data_ranges)
-                elif(format == "median"):
-                    values = df.median_approx(value_column, binby=binbycols, shape=density_grid_shape, selection=self.active_selection, limits=data_ranges)
-                else:
-                    raise ValueError(format)             
-
-                values = np.nan_to_num(values, nan=INVALID_NUMBER)
+                values = mask_invalid_values(
+                    values=values, 
+                    operation=agg_format, mask_value=INVALID_NUMBER)        
                 
                 response_data = {
                     "columns" : columns,
@@ -449,7 +494,6 @@ class LinkedViewsServer:
 
                 return json.dumps(response_data)
 
-
     def setDensityPlotSelection(self): 
         self.last_request = request.data
         if request.method == "POST":            
@@ -461,9 +505,9 @@ class LinkedViewsServer:
                 bin_ranges = data["bin_ranges"]
                 selection_name = data["selection_name"]
                 
-                assert table == "vaex_df"
+                assert table == "Abstract DataFrame"  # vaex_df
                 for column in columns:
-                    assert column in self.vaex_columns
+                    assert column in self.columns
 
                 self.selections[selection_name] = {
                     "columns" : columns,
@@ -473,8 +517,13 @@ class LinkedViewsServer:
                 response_data = {}
                 return json.dumps(response_data)
 
-
     def setIndicesSelection(self): 
+        """
+        Saves the selection for a particular view. Does not return any response data.
+
+        Returns:
+            None: An empty JSON as response.
+        """
         self.last_request = request.data
         if request.method == "POST":            
             if request.data:
@@ -484,30 +533,32 @@ class LinkedViewsServer:
                 view_name = data["view_name"]                
                 indices = data["indices"]
                 
-                assert table == "pandas_df"
+                assert table == "Abstract DataFrame"  # pandas_df
                 
                 self.selections[view_name] = sorted(indices)
 
                 response_data = {}
                 return json.dumps(response_data)
 
-
     def computeSelection(self, return_indices=True):
-        if("global" in self.selections):
-            columns = self.selections["global"]["columns"] 
-            col1 = columns[0]
-            col2 = columns[1]
+        """
+        Reads in the selection config for the global view and computes the indices of the selected rows.
+        This is necessary to sync selections across views.
 
+        Args:
+            return_indices (bool, optional): _description_. Defaults to True.
+
+        Returns:
+            _type_: _description_
+        """
+        if "global" in self.selections:
+            columns = self.selections["global"]["columns"] 
             ranges = self.selections["global"]["bin_ranges"]
 
-            self.vaex_df.select_nothing(name="selection_global")
-            for idx, range_i in enumerate(ranges):    
-                limit_i = [(range_i[0][0], range_i[0][1]), (range_i[1][0], range_i[1][1])]        
-                self.vaex_df.select_rectangle(self.vaex_df[col1], self.vaex_df[col2], limit_i, name="selection_global", mode="or")
+            adf = self.abstract_df
+            df_selected_indices = adf.compute_selection(columns=columns, bin_ranges=ranges)
             self.active_selection = "selection_global"
-
-            if(return_indices):
-                df_selected_indices = self.vaex_df.evaluate(self.vaex_df["row_index"], selection="selection_global")
+            if return_indices:
                 return df_selected_indices
             else:
                 return "selection_global"
@@ -518,21 +569,18 @@ class LinkedViewsServer:
     def resetSelection(self):
         self.active_selection = None
 
-
     def getSelections(self):
         return self.selections
 
     def getSelectionFromView(self, view_name):
-        if(view_name not in self.selections):
+        if view_name not in self.selections:
             return []
         else:
             return self.selections[view_name]
 
-
-
     def getSelectedIndices(self):
         df_selected_indices = self.computeSelection()
-        if(df_selected_indices is None):
+        if df_selected_indices is None:
             return "no selection"
         else:
             return "number of selected rows: {}".format(df_selected_indices.shape[0])

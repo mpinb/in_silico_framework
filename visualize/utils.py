@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from base64 import b64encode
 import subprocess
-from model_data_base.utils import mkdtemp
+from data_base.utils import mkdtemp
 import math
 
 from mpl_toolkits.mplot3d.proj3d import proj_transform
@@ -283,7 +283,7 @@ def find_files_and_order_them(files, files_format='.png'):
 
 
 class Arrow3D(FancyArrowPatch):
-
+    """see https://gist.github.com/WetHat/1d6cd0f7309535311a539b42cccca89c"""
     def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
         super().__init__((0, 0), (0, 0), *args, **kwargs)
         self._xyz = (x, y, z)
@@ -320,7 +320,7 @@ def draw_arrow(morphology,
                ax,
                highlight_section=None,
                highlight_x=None,
-               highlight_arrow_args=None,
+               highlight_arrow_kwargs=None,
                arrow_size=50):
 
     assert type(
@@ -331,13 +331,13 @@ def draw_arrow(morphology,
         'sec_n'], "The given section id is not present in the cell morphology"
 
     setattr(Axes3D, 'arrow3D', _arrow3D)
-    if highlight_arrow_args is None:
-        highlight_arrow_args = {}
+    if highlight_arrow_kwargs is None:
+        highlight_arrow_kwargs = {}
 
     # overwrite defaults if they were set
     x = dict(mutation_scale=20, ec='black', fc='white')
-    x.update(highlight_arrow_args)
-    highlight_arrow_args = x
+    x.update(highlight_arrow_kwargs)
+    highlight_arrow_kwargs = x
 
     morphology = morphology.copy()
     morphology = morphology.fillna(0)  # soma section gets 0 as section ID
@@ -354,21 +354,55 @@ def draw_arrow(morphology,
             "Please provide either a section index to highlight, or a distance from soma x."
         )
 
-    # get start of arrow
-    start_x, start_y, start_z = x, y, z + arrow_size
-    dx, dy, dz = 0, 0, -arrow_size
+    # get start of arrow: point down
+    start_x, start_y, start_z = x, y, z
+    dx, dy, dz = 0, 0, 0
     ddx = ddy = 0
+    if 'orientation' in highlight_arrow_kwargs:
+        orientation = highlight_arrow_kwargs['orientation']
+        del highlight_arrow_kwargs['orientation']
+        if 'x' in orientation:
+            start_x += arrow_size
+            dx -= arrow_size
+        if 'y' in orientation:
+            start_y += arrow_size
+            dy -= arrow_size
+        if 'z' in orientation:
+            start_z += arrow_size
+            dz -= arrow_size
+    else:
+        # point down by default
+        start_z += arrow_size
+        dz -= arrow_size
 
-    if 'rotation' in highlight_arrow_args:
-        alpha = highlight_arrow_args['rotation']
-        del highlight_arrow_args['rotation']
+    if 'rotation' in highlight_arrow_kwargs:
+        print("rotating arrow")
+        alpha = highlight_arrow_kwargs['rotation']
+        del highlight_arrow_kwargs['rotation']
         dx2, dz2 = np.dot(
             np.array([[np.cos(alpha), -np.sin(alpha)],
                       [np.sin(alpha), np.cos(alpha)]]), [dx, dz])
-        start_x = start_x + (dx - dx2)
-        start_z = start_z + (dz - dz2)
+        start_x = start_x - dx2 + dx
+        start_z = start_z - dz2 + dz
         dx = dx2
         dz = dz2
 
     #print(start_x, start_y)
-    ax.arrow3D(start_x, start_y, start_z, dx, dy, dz, **highlight_arrow_args)
+    ax.arrow3D(start_x, start_y, start_z, dx, dy, dz, **highlight_arrow_kwargs)
+
+
+def segments_to_poly(segments, diameters, n_faces):
+    """
+    Given a list of segments, this methods converts them to polygons that neatly connect without seam
+
+    Args:
+        segments: a 2D list defining pairs of points. Each point pair defines a single segment
+        diameters: diameters associated with the segments
+        n_faces: amount of faces in the polygon tube
+    """
+
+    polygons = []
+    for i in range(len(segments)):
+        
+        
+        prev_poly

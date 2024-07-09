@@ -1,0 +1,11 @@
+distributed:
+# https://stackoverflow.com/questions/57997463/dask-warning-worker-exceeded-95-memory-budget
+  worker:
+    memory:
+      target: 0.90
+      spill:  False 
+      pause: False
+      terminate: False
+  scheduler:
+    preload:
+      - "import mechanisms"

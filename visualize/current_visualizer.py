@@ -82,19 +82,20 @@ class CurrentAnalysis:
         else:
             self.voltage_trace = None
 
-    def plot_areas(self,
-                   ax=None,
-                   normalized=False,
-                   plot_net=False,
-                   plot_voltage=False,
-                   t_stim=295,
-                   select_window_relative_to_stim=(0, 55)):
+    def plot_areas(
+            self,
+            ax=None,
+            normalized=False,
+            plot_net=False,
+            plot_voltage=False,
+            t_stim=295,
+            select_window_relative_to_stim=(0, 55)):
         t = np.array(self.t) - t_stim
         if ax is None:
             fig = plt.figure(figsize=(10, 4), dpi=200)
             ax = fig.add_subplot(111)
 
-        def __helper(currents, plot_label=True):
+        def __helper(ax, currents, plot_label=True):
             dummy = np.cumsum(currents, axis=0)
             dummy = np.vstack([np.zeros(dummy.shape[1]), dummy])
             for lv, rv in enumerate(self.rangeVars):
@@ -110,15 +111,19 @@ class CurrentAnalysis:
                                 linewidth=0)
 
         if normalized:
-            __helper(self.depolarizing_currents_normalized)
-            __helper(self.hyperpolarizing_currents_normalized, False)
+            __helper(ax, self.depolarizing_currents_normalized)
+            __helper(ax, self.hyperpolarizing_currents_normalized, plot_label=False)
             ax.plot(t, self.depolarizing_currents_sum + 1, c='k')
             ax.plot(t, self.hyperpolarizing_currents_sum - 1, c='k')
         else:
-            __helper(self.depolarizing_currents)
-            __helper(self.hyperpolarizing_currents, False)
+            __helper(ax, self.depolarizing_currents)
+            __helper(ax, self.hyperpolarizing_currents, False)
         if plot_net:
             ax.plot(t, self.net_current, 'k', label='net current')
+        ax.set_ylabel("Current (nA)")
+        ax.set_xlabel("Time (ms)")
+        plt.legend()
+
         if plot_voltage:
             ax2 = ax.twinx()
             select = (t >= select_window_relative_to_stim[0]) & (
@@ -127,6 +132,7 @@ class CurrentAnalysis:
             ax2.plot(x, y, 'k')
             x, y = t[select], np.array(self.voltage_trace)[select]
             ax2.plot(x, y, c=CALCIUM_ORANGE)
+        ax2.set_ylabel("Membrane potential (mV)")
 
     def plot_lines(self, ax=None, legend=True):
         if ax is None:

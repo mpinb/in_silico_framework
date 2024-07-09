@@ -4,7 +4,7 @@ import sys
 import numpy as np
 import os, os.path
 import glob
-from model_data_base import mdbopen
+from data_base import dbopen
 
 # anatomical PC + surround columns (3x3)
 # ranging from (potentially) 1-9, starting at row-1, arc-1,
@@ -142,7 +142,7 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
 
     whiskers = list(whiskerPSTH.keys())
     whiskers.sort()
-    with mdbopen(outFileName, 'w') as PSTHFile:
+    with dbopen(outFileName, 'w') as PSTHFile:
         PSTHFile.write('{\n')
         for whisker in whiskers:
             intervals = []
@@ -231,7 +231,7 @@ def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
         else:
             whiskerPSTH[whisker] = None
 
-    with mdbopen(outFileName, 'w') as PSTHFile:
+    with dbopen(outFileName, 'w') as PSTHFile:
         PSTHFile.write('{\n')
         for whisker in whiskers:
             intervals = []
@@ -273,7 +273,7 @@ def load_spike_times(spikeTimesName):
     whiskerSpikeTimes = {'B1': [], 'B2': [], 'B3': [],\
                         'C1': [], 'C2': [], 'C3': [],\
                         'D1': [], 'D2': [], 'D3': []}
-    with mdbopen(spikeTimesName, 'r') as spikeTimesFile:
+    with dbopen(spikeTimesName, 'r') as spikeTimesFile:
         lineCnt = 0
         for line in spikeTimesFile:
             if line:

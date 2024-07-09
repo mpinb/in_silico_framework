@@ -23,60 +23,51 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 class Cell(object):
     '''
-    Cell object providing morphological information
-    and hoc interface
+    Cell object containing morphological information, hoc interface, and simulation data of single-cell simulations.
+    The main purpose is as a dataclass containing this information, but not to create or configure it on its own.
+    It is a helper class for other methods. 
+    E.g. :class:`~single_cell_parser.cell_parser.CellParser` creates morphological attributes using the class defined here.
+
+    Notable attributes:
+    - sections: a list of PySection objects
+        - sections[0] is the soma
+        - Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time
+    - synapses: a dictionary of lists of Synapse objects
+    - tVec: a hoc Vector recording time
+
+    WARNING: while it contains similar methods, this is not the same class as :class:`~singlecell_input_mapper.cell.Cell`:
     '''
 
     def __init__(self):
         '''
-        Constructor:
-        
-        self.id = None
-        
-        self.soma = None
-        
-        TODO: implement trees in python to avoid
-        NEURON section stack problems that may occur
-        during use of SectionLists
-        tree and branches are set up by CellParser
-        self.tree = None
-        
-        branches are all processes attached to soma
-        self.branches = {}
-        
-        structures are all processes with different labels
-        (e.g., Dendrite, ApicalDendrite, ApicalTuft, Myelin etc..
-        self.structures = {}
-        
-        simply list of all sections
-        self.sections = []
-        
-        self.synapses = {}
-        
-        TODO: this should be read from parameter file (e_pas)
-        self.E = -70.0
+        Attributes: 
+            hoc_path (str)
+            id (str | int, optional)
+            soma (PySection)
+            tree (neuron.h.SectionList)
+            branches ({str: neuron.h.SectionList}): maps the section ID of the root seciton of each dendritic subtree to its corresponding section list.
+            structures ({str: [PySection]}): All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...)
+            sections ([PySection]): All sections.
+            synapses (dict)
+            E (float): Default resting membrane potential. Defaults to -70.0
+            changeSynParamDict
+            tVec (neuron.h.Vector): Time vector.
+            neuron_param
+            neuron_sim_param
+            network_param
+            network_sim_param
+            section_adjacency_map (dict): maps each section (by ID) to its parent sections and children sections.
         '''
-        # TODO: right now, the cell information (points, connectivity, Vm...) has to be accessed on a section-by-section basis. Why isn't this information availabe as a flat array?
-        # TODO: is it worth it to implement this extraction?
 
         self.hoc_path = None
         self.id = None
         self.soma = None
-        #        TODO: implement trees in python to avoid
-        #        NEURON section stack problems that may occur
-        #        during use of SectionLists
-        #        tree and branches are set up by CellParser
-        self.tree = None
-        #        branches are all processes attached to soma
+        self.tree = None  # TODO: implement trees in python to avoid NEURON section stack problems that may occur during use of SectionLists
         self.branches = {}
-        #        structures are all processes with different labels
-        #        (e.g., Dendrite, ApicalDendrite, ApicalTuft, Myelin etc..
         self.structures = {}
-        #        simply list of all sections
-        self.sections = []  # TODO: what type are these elements?
+        self.sections = []
         self.synapses = {}
-        #        TODO: this should be read from parameter file (e_pas)
-        self.E = -70.0
+        self.E = -70.0  # TODO: this should be read in from the paramfile (e_pas)
         self.changeSynParamDict = {}
         self.tVec = None
         self.neuron_param = None
@@ -171,12 +162,16 @@ class Cell(object):
                             maxDist = dist
         return maxDist
 
-    def add_synapse(self,
-                    secID,
-                    ptID,
-                    ptx,
-                    preType='Generic',
-                    postType='Generic'):
+    def add_synapse(
+        self,
+        secID,
+        ptID,
+        ptx,
+        preType='Generic',
+        postType='Generic'):
+        """Add a :class:`~single_cell_parser.synapse.Synapse` to the cell object.
+        
+        """
         if preType not in self.synapses:
             self.synapses[preType] = []
         newSyn = synapse.Synapse(secID, ptID, ptx, preType, postType)

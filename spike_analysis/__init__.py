@@ -1,3 +1,3 @@
-import logging
-
-logger = logging.getLogger("ISF").getChild(__name__)
+"""
+Provides readers for ephys data, and analysis routines to extract action potentials.
+"""

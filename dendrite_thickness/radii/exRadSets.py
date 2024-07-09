@@ -1,7 +1,7 @@
 import os
 import re
-import transformTools as tr
-import radii as radi
+import dendrite_thickness.transformTools as tr
+from dendrite_thickness import radii as radi
 import SimpleITK as sitk
 
 
@@ -48,7 +48,7 @@ class RadiusCalculatorForManyFiles:
                   path_to_am,
                   path_to_tif,
                   path_to_output_folder,
-                  postMeasurment='no'):
+                  postMeasurment=False):
         """
         extraxt radii sets of bunch of files from the folder of path_to_am
         and writ them to and output folder
@@ -57,13 +57,14 @@ class RadiusCalculatorForManyFiles:
         if (os.path.isdir(path_to_am) and os.path.isdir(path_to_tif)):
             for spacialGraphFile in os.listdir(path_to_am):
                 if spacialGraphFile.endswith(".am"):
-                    points = self.readPoints(path_to_am + spacialGraphFile)
+                    points = self.readPoints(
+                        os.path.join(path_to_am, spacialGraphFile))
                     if points == "error":
                         continue
                     spacialGraphIndicator = re.findall(r'[sS]\d+',
                                                        spacialGraphFile)[0]
-                    outputFile = path_to_output_folder + spacialGraphIndicator + \
-                        "_with_r" + ".am"
+                    outputFile = os.path.join(
+                        path_to_output_folder, spacialGraphIndicator + "_with_r.am")
                     for imageFile in os.listdir(path_to_tif):
                         if imageFile.startswith(spacialGraphIndicator):
                             image = self.readImage(path_to_tif + imageFile)
@@ -71,15 +72,16 @@ class RadiusCalculatorForManyFiles:
                             result = self.radiusCalculator.getProfileOfThesePoints(
                                 image, points, postMeasurment)
                             print(imageFile)
-                            self.writeResult(path_to_am + spacialGraphFile,
-                                             outputFile, result)
+                            self.writeResult(
+                                os.path.join(path_to_am, spacialGraphFile,
+                                             outputFile, result))
                             break
         else:
             points = self.readPoints(path_to_am)
             if points == "error":
                 return "error"
             amFileName = os.path.basename(path_to_am)
-            outputFile = path_to_output_folder + "/" + amFileName
+            outputFile = os.path.join(path_to_output_folder, amFileName)
             imageFile = path_to_tif
             image = self.readImage(imageFile)
             result = self.radiusCalculator.getProfileOfThesePoints(

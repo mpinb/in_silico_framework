@@ -1,11 +1,21 @@
-"""Partly copy pasted from the BluePyOpt package, however extended, such that a start population can be defined.
-Also extended, such that the optimizations can be organized in a model data base.
-Also extended to be executed on a distributed system using dask.
-Also extended to return all objectives, not only the combined ones.
-Note: the population needs to be in a special format. Use methods in biophysics_fitting.population 
-to create a population.
+"""Multi-objective optimization algorithm.
 
-The main interface is the function start_run."""
+This code has been adapted from [BluePyOpt](https://github.com/BlueBrain/BluePyOpt) :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+
+It has been adapted, such that::
+
+    - a start population can be defined.
+    - such that the optimizations can be organized in a model data base.
+    - to be executed on a distributed system using dask.
+    - to return all objectives, not only the combined ones.
+    
+Note::
+
+    the population needs to be in a special format. 
+    Use methods in biophysics_fitting.population to create a population.
+
+The main interface is the function :py:meth:`start_run`.
+"""
 import time
 import bluepyopt as bpop
 import numpy
@@ -16,17 +26,34 @@ import Interface as I
 import six
 
 
+
 def robust_int(x):
+    """Robustly convert something to an integer.
+    
+    Returns None if the conversion is not possible.
+    
+    Args:
+        x: The object to be converted.
+        
+    Returns:
+        int | None: The converted object."""
     try:
         return int(x)
     except:
         return None
 
 
-def get_max_generation(mdb_run):
-    '''returns the index of the next iteration'''
+def get_max_generation(db_run):
+    '''Returns the index of the next iteration in a database. 
+    If the database is empty, it returns -1.
+    
+    Args:
+        db_run (data_base.DataBase): The database.
+        
+    Returns:
+        int: The index of the next iteration. If the database is empty, it returns -1.'''
     keys = [
-        robust_int(x) for x in list(mdb_run.keys()) if robust_int(x) is not None
+        robust_int(x) for x in list(db_run.keys()) if robust_int(x) is not None
     ]
     if not keys:
         current_key = -1
@@ -35,34 +62,61 @@ def get_max_generation(mdb_run):
     return current_key
 
 
-def save_result(mdb_run, features, objectives):
-    current_key = get_max_generation(mdb_run) + 1
+def save_result(db_run, features, objectives):
+    """Save the results of an optimization iteration in a database.
+    
+    Args:
+        db_run (data_base.DataBase): The database.
+        features (pd.DataFrame): The features of the optimization iteration.
+        objectives (pd.DataFrame): The objectives of the optimization iteration.
+    
+    Returns:
+        None. The results are saved in the database."""
+    current_key = get_max_generation(db_run) + 1
     if six.PY2:
         dumper = I.dumper_pandas_to_msgpack
     elif six.PY3:
         dumper = I.dumper_pandas_to_parquet
     else:
         raise RuntimeError()
-    mdb_run.setitem(str(current_key),
-                    I.pd.concat([objectives, features], axis=1),
-                    dumper=dumper)
+    db_run.set(
+        str(current_key),
+        I.pd.concat([objectives, features], axis=1),
+        dumper=dumper)
 
 
-def setup_mdb_run(mdb_setup, run):
-    '''mdb_setup contains a sub mdb for each run of the full optimization. This sub mdb is created here'''
-    if not str(run) in list(mdb_setup.keys()):
-        mdb_setup.create_sub_mdb(str(run))
-    mdb_run = mdb_setup[str(run)]
-    mdb_run['0'] = ''
-    if not 'checkpoint' in list(mdb_run.keys()):
-        mdb_run.create_managed_folder('checkpoint')
-    return mdb_run
+def setup_db_run(db_setup, run):
+    '''Create a sub-database for each run of the optimization algorithm.
+    db_setup contains a sub db for each run of the full optimization. This sub db is created here.
+    
+    Args:
+        db_setup (data_base.DataBase): The database containing the setup of the optimization.
+        run (int): The index of the optimization run.
+        
+    Returns:
+        data_base.DataBase: The database for the optimization run containing sub-databases..'''
+    if not str(run) in list(db_setup.keys()):
+        db_setup.create_sub_db(str(run))
+    db_run = db_setup[str(run)]
+    db_run['0'] = ''
+    if not 'checkpoint' in list(db_run.keys()):
+        db_run.create_managed_folder('checkpoint')
+    return db_run
 
 
-def get_objective_function(mdb_setup):
-    parameter_df = mdb_setup['params']
-    Simulator = mdb_setup['get_Simulator'](mdb_setup)
-    Evaluator = mdb_setup['get_Evaluator'](mdb_setup)
+def get_objective_function(db_setup):
+    """Get the objective function for the optimization.
+    
+    This objective function takes parameters values, runs a simulation, and evaluates the simulation.
+    
+    Args:
+        db_setup (data_base.DataBase): The database containing the setup of the optimization.
+        
+    Returns:
+        function: The objective function for the optimization."""
+    parameter_df = db_setup['params']
+    Simulator = db_setup['get_Simulator'](db_setup)
+    Evaluator = db_setup['get_Evaluator'](db_setup)
 
     def objective_function(param_values):
         p = I.pd.Series(param_values, index=parameter_df.index)
@@ -76,20 +130,20 @@ def get_objective_function(mdb_setup):
     return objective_function
 
 
-def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict=None):
-    # CAVE! get_mymap is doing more, than just to return a map function.
+def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error = 3):
+    # CAVE! get_mymap is doing more than just returning a map function.
     # - the map function ignores the first argument.
     #   The first argument (i.e. the function to be mapped on the iterable) is ignored.
-    #   Instead, that function is hardcoded. It is defined in mdb_setup['get_Evaluator']
+    #   Instead, that function is hardcoded. It is defined in db_setup['get_Evaluator']
     #   This was neccessary, as my_ibea_evaluator and the deap individuals were causing pickle errors
-    # - mymap also saves the features. As the bluepyopt optimizer only sees the sumarized
+    # - mymap also saves the features. As the bluepyopt optimizer only sees the summarized
     #   features (maximum of several individual features, see Hay et. al.), mymap is the ideal
     #   place to insert a routine that saves all features before they get sumarized.
-    # - mymap also creates a sub mdb in mdb_setup. The name of the sub_mdb is specified by n: It is str(n)
-    #   mdb_setup[str(n)] then contains all the saved results    objective_fun = get_objective_function(mdb_setup)
-    combiner = mdb_setup['get_Combiner'](mdb_setup)
-    params = mdb_setup['params'].index
-    objective_fun = get_objective_function(mdb_setup)
+    # - mymap also creates a sub db in db_setup. The name of the sub_db is specified by n: It is str(n)
+    #   db_setup[str(n)] then contains all the saved results    objective_fun = get_objective_function(db_setup)
+    combiner = db_setup['get_Combiner'](db_setup)
+    params = db_setup['params'].index
+    objective_fun = get_objective_function(db_setup)
 
     def mymap(func, iterable):
         params_list = list(map(list, iterable))
@@ -106,6 +160,15 @@ def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict=None):
             time.sleep(3 * 60)
             print('Rescheduling ...')
             return mymap(func, iterable)
+        except RuntimeError:
+            if reschedule_on_runtime_error >= 0:
+                print(
+                    'Got a RuntimeError while gathering futures. This may be dask related, or it may be a RuntimeError raised by the' + 
+                    'Evaluator. Remaining attempts: {}. Waiting for 3 Minutes, then reschedule.'.format(reschedule_on_runtime_error)
+                )
+                return mymap(func, iterable, n_reschedule_on_runtime_error = n_reschedule_on_runtime_error - 1)
+            else:
+                raise 
         except:
             I.distributed.wait(futures)
             for lv, f in enumerate(futures):
@@ -116,10 +179,10 @@ def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict=None):
                     errstr += 'Parameters are: {}\n'.format(
                         dict(params_pd.iloc[lv]))
                     raise ValueError(errstr)
-##        features_dicts = map(objective_fun, params_list) # temp rieke
+        # features_dicts = map(objective_fun, params_list) # temp rieke
         features_dicts = c.gather(futures)  #temp rieke
         features_pd = I.pd.DataFrame(features_dicts)
-        save_result(mdb_run, params_pd, features_pd)
+        save_result(db_run, params_pd, features_pd)
         combined_objectives_dict = list(map(combiner.combine, features_dicts))
         combined_objectives_lists = [[d[n]
                                       for n in combiner.setup.names]
@@ -135,14 +198,14 @@ def get_mymap(mdb_setup, mdb_run, c, satisfactory_boundary_dict=None):
                 for dict_ in combined_objectives_dict
             ]
             if any(all_err_below_boundary):
-                mdb_setup['satisfactory'] = [
+                db_setup['satisfactory'] = [
                     i for (i, x) in enumerate(all_err_below_boundary) if x
                 ]
 
 
-#         all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
-#         if any(all_err_below_3):
-#             mdb_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
+         # all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
+         # if any(all_err_below_3):
+         #     db_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
 
         return numpy.array(combined_objectives_lists)
 
@@ -241,42 +304,44 @@ def _get_offspring(parents, toolbox, cxpb, mutpb):
     return deap.algorithms.varAnd(parents, toolbox, cxpb, mutpb)
 
 
-def eaAlphaMuPlusLambdaCheckpoint(population,
-                                  toolbox,
-                                  mu,
-                                  cxpb,
-                                  mutpb,
-                                  ngen,
-                                  stats=None,
-                                  halloffame=None,
-                                  cp_frequency=1,
-                                  mdb_run=None,
-                                  continue_cp=False,
-                                  mdb=None):
+def eaAlphaMuPlusLambdaCheckpoint(
+        population,
+        toolbox,
+        mu,
+        cxpb,
+        mutpb,
+        ngen,
+        stats=None,
+        halloffame=None,
+        cp_frequency=1,
+        db_run=None,
+        continue_cp=False,
+        db=None):
     r"""This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
+    
     Args:
         population(list of deap Individuals)
         toolbox(deap Toolbox)
-        mu(int): Total parent population size of EA
-        cxpb(float): Crossover probability
-        mutpb(float): Mutation probability
-        ngen(int): Total number of generation to run
-        stats(deap.tools.Statistics): generation of statistics
-        halloffame(deap.tools.HallOfFame): hall of fame
-        cp_frequency(int): generations between checkpoints
-        cp_filename(ModelDataBase or None): mdb_run, where the checkpoint is stored in [generation]_checlpoint. Was: path to checkpoint filename
-        continue_cp(bool): whether to continue
+        mu (int): Total parent population size of EA
+        cxpb (float): Crossover probability
+        mutpb (float): Mutation probability
+        ngen (int): Total number of generation to run
+        stats (deap.tools.Statistics): generation of statistics
+        halloffame (deap.tools.HallOfFame): hall of fame
+        cp_frequency (int): generations between checkpoints
+        cp_filename (DataBase or None): db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+        continue_cp (bool): whether to continue
     """
-    # added by arco
-    if mdb_run is not None:
-        assert isinstance(mdb_run, I.ModelDataBase)  # mdb_run
+    # --- added by arco
+    if db_run is not None:
+        assert db_run.__class__.__name__ in ("ModelDataBase", "ISFDataBase")  # db_run
     assert halloffame is None
-    # end added by arco
+    # --- end added by arco
 
     if continue_cp:
         # A file name has been given, then load the data from the file
-        key = '{}_checkpoint'.format(get_max_generation(mdb_run))
-        cp = mdb_run[key]  #pickle.load(open(cp_filename, "r"))
+        key = '{}_checkpoint'.format(get_max_generation(db_run))
+        cp = db_run[key]  #pickle.load(open(cp_filename, "r"))
         population = cp["population"]
         parents = cp["parents"]
         start_gen = cp["generation"]
@@ -306,8 +371,8 @@ def eaAlphaMuPlusLambdaCheckpoint(population,
     # Begin the generational process
     for gen in range(start_gen + 1, ngen + 1):
 
-        if mdb is not None:
-            I.utils.wait_until_key_removed(mdb, 'pause')
+        if db is not None:
+            I.utils.wait_until_key_removed(db, 'pause')
 
         offspring = _get_offspring(parents, toolbox, cxpb, mutpb)
 
@@ -326,7 +391,7 @@ def eaAlphaMuPlusLambdaCheckpoint(population,
         #logger.info(logbook.stream)
         ## end commented out by arco
 
-        if (mdb_run and cp_frequency and gen % cp_frequency == 0):
+        if (db_run and cp_frequency and gen % cp_frequency == 0):
             cp = dict(
                 population=population,
                 generation=gen,
@@ -335,14 +400,14 @@ def eaAlphaMuPlusLambdaCheckpoint(population,
                 history=None,  # history, // arco
                 logbook=None,  # logbook, // arco
                 rndstate=random.getstate())
-            # save checkpoint in mdb
-            mdb_run.setitem('{}_checkpoint'.format(gen),
+            # save checkpoint in db
+            db_run.set('{}_checkpoint'.format(gen),
                             cp,
                             dumper=I.dumper_to_pickle)
             #pickle.dump(cp, open(cp_filename, "wb"))
             #logger.debug('Wrote checkpoint to %s', cp_filename)
 
-        if 'satisfactory' in mdb.keys(
+        if 'satisfactory' in db.keys(
         ) and gen > 1:  #gen>1 to make sure a checkpoint is created
             break
 
@@ -354,17 +419,25 @@ def eaAlphaMuPlusLambdaCheckpoint(population,
 #####################################################
 
 
-def run(self,
+def run(
+        self,
         max_ngen=10,
         offspring_size=None,
         continue_cp=False,
         cp_filename=None,
         cp_frequency=1,
         pop=None,
-        mdb=None):
-    """Copy pasted from the BluePyOpt package, however extended, such that a start population can be defined.
-    Note: the population needs to be in a special format. Use methods in biophysics_fitting.population 
-    to create a population."""
+        db=None
+        ):
+    """
+    This method is a class method of the BluePyOpt optimisations.DEAPOptimisation class.
+    It is extended here such that a start population can be defined.
+    Running actual optimization is done with the :meth:`~biophysics_fitting.optimizer.start_run`, which further extends this method.
+    
+    Note: 
+        the population needs to be in a special format. Use methods in biophysics_fitting.population 
+        to create a population.
+    """
     # Allow run function to override offspring_size
     # TODO probably in the future this should not be an object field anymore
     # keeping for backward compatibility
@@ -376,7 +449,7 @@ def run(self,
         pop = self.toolbox.population(n=offspring_size)
     else:
         print("initialized with population of size {:s}".format(len(pop)))
-        assert (continue_cp == False)
+        assert continue_cp == False
 
     ## commented out by arco
     #stats = deap.tools.Statistics(key=lambda ind: ind.fitness.sum)
@@ -399,13 +472,20 @@ def run(self,
         cp_frequency=cp_frequency,
         continue_cp=continue_cp,
         cp_filename=cp_filename,
-        mdb=mdb)
+        db=db)
 
     return pop
 
 
 def get_population_with_different_n_objectives(old_pop, n_objectives):
-    '''function to adapt the number of objectives of individuals'''
+    '''function to adapt the number of objectives of individuals
+    
+    Args:
+        old_pop: list of deap.Individuals
+        n_objectives (int): number of objectives
+        
+    Returns:
+        list of deap.Individuals: population with adapted number of objectives'''
     pop = []
     for p in old_pop:
         ind = WSListIndividual(p, obj_size=n_objectives)
@@ -413,61 +493,75 @@ def get_population_with_different_n_objectives(old_pop, n_objectives):
     return pop
 
 
-def start_run(mdb_setup,
-              n,
-              pop=None,
-              client=None,
-              continue_cp=False,
-              offspring_size=1000,
-              eta=10,
-              mutpb=0.3,
-              cxpb=0.7,
-              max_ngen=600,
-              satisfactory_boundary_dict=None):
-    '''function to start an optimization run as specified in mdb_setup. The following attributes need
-    to be defined in mdb_setup:
+def start_run(
+        db_setup,
+        n,
+        pop=None,
+        client=None,
+        continue_cp=False,
+        offspring_size=1000,
+        eta=10,
+        mutpb=0.3,
+        cxpb=0.7,
+        max_ngen=600,
+        satisfactory_boundary_dict=None
+        ):
+    '''
+    Start an optimization run as specified in db_setup.
+
+    Args:
+        db_setup (data_base.DataBase): a DataBase containing the setup of the optimization. It must include::
+        
+                - params ... this is a pandas.DataFrame with the parameternames as index and the columns min_ and max_
+                - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
+                - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
+                - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object
+                
+            get_Simulator, get_Evaluator, get_Combiner accept the db_setup data_base as argument. 
+            This allows, that e.g. the Simular can depend on the data_base. Therefore it is e.g. possible, 
+            that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
+            updated accordingly.
+            
+        n (int): a seedpoint for the optimization randomization.
+        pop (list of deap.Individuals | None): The previous population if the optimization is continued. None if a new optimization is started.
+        client (distributed.Client | None): A distributed client. If None, the optimization is run on the local machine.
+        continue_cp (bool): If True, the optimization is continued. If False, a new optimization is started.
+        offspring_size (int): The number of individuals in the offspring.
+        eta (int): The number of parents selected for each offspring.
+        mutpb (float): The mutation probability.
+        cxpb (float): The crossover probability.
+        max_ngen (int): The maximum number of generations.
+        satisfactory_boundary_dict (dict | None): A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
     
-    - params ... this is a pandas.DataFrame with the parameternames as index and the columns min_ and max_
-    - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
-    - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
-    - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object
-    
-    get_Simulator, get_Evaluator, get_Combiner accept the mdb_setup model_data_base as argument.
-    
-    This allows, that e.g. the Simular can depend on the model_data_base. Therefore it is e.g. possible, 
-    that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
-    updated accordingly.
-    
-    For an exemplary setup of a Simulaotr, Evaluator and Combiner object, see 
+        
+    For an exemplary setup of a Simulator, Evaluator and Combiner object, see 
     biophysics_fitting.hay_complete_default_setup.
     
     For on examplary setup of a complete optimization project see 
-    20190111_fitting_CDK_morphologies_Kv3_1_slope_step.ipynb
+    getting_started/tutorials/1. neuron models/1.3 Generation.ipynb
     
-    You can also have a look at the test case in test_biophysics_fitting.test_optimizer.py
-    
-    satisfactory_boundary_dict needs to be given if you want to stop the optimisation when 
-    a satisfactory models is found. Keys need to match the combined objectives. 
+    You can also have a look at the test case in tests.test_biophysics_fitting.optimizer_test.py
     '''
     # CAVE! get_mymap is doing more, than just to return a map function.
     # - the map function ignores the first argument.
     #   The first argument (i.e. the function to be mapped on the iterable) is ignored.
-    #   Instead, that function is hardcoded. It is defined in mdb_setup['get_Evaluator']
+    #   Instead, that function is hardcoded. It is defined in db_setup['get_Evaluator']
     #   This was neccessary, as my_ibea_evaluator and the deap individuals were causing pickle errors
     # - mymap also saves the features. As the bluepyopt optimizer only sees the sumarized
     #   features (maximum of several individual features, see Hay et. al.), mymap is the ideal
     #   place to insert a routine that saves all features before they get sumarized.
-    # - mymap also creates a sub mdb in mdb_setup. The name of the sub_mdb is specified by n: It is str(n)
-    #   mdb_setup[str(n)] then contains all the saved results
+    # - mymap also creates a sub db in db_setup. The name of the sub_db is specified by n: It is str(n)
+    #   db_setup[str(n)] then contains all the saved results
 
-    mdb_run = setup_mdb_run(mdb_setup, n)
-    mymap = get_mymap(mdb_setup,
-                      n,
-                      client,
-                      satisfactory_boundary_dict=satisfactory_boundary_dict)
-    len_objectives = len(mdb_setup['get_Combiner'](mdb_setup).setup.names)
-    parameter_df = mdb_setup['params']
-    evaluator_fun = mdb_setup['get_Evaluator'](mdb_setup)
+    db_run = setup_db_run(db_setup, n)
+    mymap = get_mymap(
+        db_setup,
+        n,
+        client,
+        satisfactory_boundary_dict=satisfactory_boundary_dict)
+    len_objectives = len(db_setup['get_Combiner'](db_setup).setup.names)
+    parameter_df = db_setup['params']
+    evaluator_fun = db_setup['get_Evaluator'](db_setup)
     evaluator = my_ibea_evaluator(parameter_df, len_objectives)
     opt = bpop.optimisations.DEAPOptimisation(
         evaluator,
@@ -476,8 +570,8 @@ def start_run(mdb_setup,
         mutpb=mutpb,
         cxpb=cxpb,
         map_function=get_mymap(
-            mdb_setup,
-            mdb_run,
+            db_setup,
+            db_run,
             client,
             satisfactory_boundary_dict=satisfactory_boundary_dict),
         seed=n)
@@ -486,15 +580,15 @@ def start_run(mdb_setup,
         # if we want to continue a preexisting optimization, no population may be provided
         # also check, whether the optimization really exists
         assert pop is None
-        if not str(n) in list(mdb_setup.keys()):
+        if not str(n) in list(db_setup.keys()):
             raise ValueError(
-                'run {} is not in mdb_setup. Nothing to continue'.format(n))
+                'run {} is not in db_setup. Nothing to continue'.format(n))
     if continue_cp == False:
         # if we want to start a new optimization, ckeck that there is not an old optimizatation
         # that would be overwritten.
-        if get_max_generation(mdb_run) > 0:
+        if get_max_generation(db_run) > 0:
             raise ValueError(
-                'for n = {}, an optimization is already in mdb_setup. Either choose continue_cp=True or delete the optimization.'
+                'for n = {}, an optimization is already in db_setup. Either choose continue_cp=True or delete the optimization.'
                 .format(n))
         if pop is not None:
             # if population is provided, make sure it fits the number of objectives of the current optimization
@@ -522,15 +616,15 @@ def start_run(mdb_setup,
         halloffame=None,  # self.hof,
         cp_frequency=1,
         continue_cp=continue_cp,
-        mdb_run=mdb_run,
-        mdb=mdb_setup)
+        db_run=db_run,
+        db=db_setup)
 
     return pop
 
     pop = run(opt,
               max_ngen=max_ngen,
-              cp_filename=mdb_run,
+              cp_filename=db_run,
               continue_cp=continue_cp,
               pop=pop,
-              mdb=mdb_setup)
+              db=db_setup)
     return pop

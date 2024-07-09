@@ -2,38 +2,38 @@
     "available_views": [
         {
             "type": "regl-scatterplot",
-            "min_num_datasources": 2,
-            "max_num_datasources": 3,
-            "table": "pandas_df"
+            "minNumDatasources": 2,
+            "maxNumDatasources": 3,
+            "dataTable": "Abstract DataFrame"
         },
         {
             "type": "plotly-parallelcoords",
-            "min_num_datasources": 2,
-            "max_num_datasources": 30,
-            "table": "pandas_df"
+            "minNumDatasources": 2,
+            "maxNumDatasources": 30,
+            "dataTable": "Abstract DataFrame"
         },
         {
             "type": "density-2-channel",
-            "min_num_datasources": 2,
-            "max_num_datasources": 2,
-            "table": "vaex_df",
+            "minNumDatasources": 2,
+            "maxNumDatasources": 2,
+            "dataTable": "Abstract DataFrame",
             "configuration": {
             	"format" : "count",
                 "density_grid_shape": [100,100],
-                "point_size": 5,
-                "point_opacity": 0.8                
+                "pointSize": 5,
+                "pointOpacity": 0.8                
             }
         },
         {
             "type": "density-3-channel",
-            "min_num_datasources": 3,
-            "max_num_datasources": 3,
-            "table": "vaex_df",
+            "minNumDatasources": 3,
+            "maxNumDatasources": 3,
+            "dataTable": "Abstract DataFrame",
             "configuration": {
             	"format" : "mean",
                 "density_grid_shape": [100,100],
-                "point_size": 5,
-                "point_opacity": 0.8
+                "pointSize": 5,
+                "pointOpacity": 0.8
             }
         }
     ],

@@ -1,16 +1,15 @@
 # import global variables from context
-from .context import PARENT, DATA_DIR
-import distributed, os, tempfile, six, shutil, pytest
+from .context import  DATA_DIR
+import os, tempfile, six, shutil, pytest
 import pandas as pd
 import numpy as np
 import single_cell_parser as scp
-from model_data_base import utils
+from data_base import utils
 from functools import partial
-from model_data_base.IO.LoaderDumper import to_cloudpickle, pandas_to_pickle
-from model_data_base.model_data_base import ModelDataBase
-from model_data_base.utils import silence_stdout
+from data_base.IO.LoaderDumper import to_cloudpickle, pandas_to_pickle
+from data_base.data_base import DataBase
+from data_base.utils import silence_stdout
 from biophysics_fitting import hay_complete_default_setup, L5tt_parameter_setup
-from biophysics_fitting.parameters import param_to_kwargs
 from biophysics_fitting.optimizer import start_run, get_max_generation
 
 # class FakeFuture():
@@ -27,7 +26,7 @@ from biophysics_fitting.optimizer import start_run, get_max_generation
 from biophysics_fitting.hay_evaluation import setup_hay_evaluator
 
 
-def set_up_mdb(step=False):
+def set_up_db(step=False):
     '''completely sets up a model data base in a temporary folder for opimization'''
 
     def get_template():
@@ -50,8 +49,7 @@ def set_up_mdb(step=False):
         cell_param.cell_modify_functions.scale_apical.scale = params['scale']
         return cell_param
 
-    params = hay_complete_default_setup.get_feasible_model_params().drop('x',
-                                                                         axis=1)
+    params = hay_complete_default_setup.get_feasible_model_params().drop('x', axis=1)
     params.index = 'ephys.' + params.index
     params = params.append(
         pd.DataFrame({
@@ -71,8 +69,8 @@ def set_up_mdb(step=False):
         }, index=['scale_apical.scale']))
     params = params.sort_index()
 
-    def get_Simulator(mdb_setup, step=step):
-        fixed_params = mdb_setup['get_fixed_params'](mdb_setup)
+    def get_Simulator(db_setup, step=step):
+        fixed_params = db_setup['get_fixed_params'](db_setup)
         s = hay_complete_default_setup.get_Simulator(pd.Series(fixed_params),
                                                      step=step)
         s.setup.cell_param_generator = get_template
@@ -80,26 +78,26 @@ def set_up_mdb(step=False):
         #s.setup.cell_modify_funs.append(('scale_apical', param_to_kwargs(scale_apical)))
         return s
 
-    def get_Evaluator(mdb_setup, step=step):
+    def get_Evaluator(db_setup, step=step):
         return hay_complete_default_setup.get_Evaluator(step=step)
 
-    def get_Combiner(mdb_setup, step=step):
+    def get_Combiner(db_setup, step=step):
         return hay_complete_default_setup.get_Combiner(step=step)
 
     tempdir = tempfile.mkdtemp()
-    mdb = ModelDataBase(tempdir)
-    mdb.create_sub_mdb('86')
+    db = DataBase(tempdir)
+    db.create_sub_db('86')
 
-    mdb['86'].create_managed_folder('morphology')
+    db['86'].create_managed_folder('morphology')
     shutil.copy(
         os.path.join(
             DATA_DIR,
             '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2.hoc'
-        ), mdb['86']['morphology'].join(
+        ), db['86']['morphology'].join(
             '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2.hoc'
         ))  #
 
-    mdb['86']['fixed_params'] = {
+    db['86']['fixed_params'] = {
         'BAC.hay_measure.recSite': 835,
         'BAC.stim.dist': 835,
         'bAP.hay_measure.recSite1': 835,
@@ -109,25 +107,25 @@ def set_up_mdb(step=False):
         'morphology.filename': None
     }
 
-    def get_fixed_params(mdb_setup):
-        fixed_params = mdb_setup['fixed_params']
-        fixed_params['morphology.filename'] = mdb_setup['morphology'].get_file(
+    def get_fixed_params(db_setup):
+        fixed_params = db_setup['fixed_params']
+        fixed_params['morphology.filename'] = db_setup['morphology'].get_file(
             'hoc')
         return fixed_params
 
-    mdb['86']['get_fixed_params'] = get_fixed_params
-    mdb['86'].setitem('params', params, dumper=pandas_to_pickle)
-    mdb['86'].setitem('get_Simulator',
+    db['86']['get_fixed_params'] = get_fixed_params
+    db['86'].set('params', params, dumper=pandas_to_pickle)
+    db['86'].set('get_Simulator',
                       partial(get_Simulator, step=True),
                       dumper=to_cloudpickle)
-    mdb['86'].setitem('get_Evaluator',
+    db['86'].set('get_Evaluator',
                       partial(get_Evaluator, step=True),
                       dumper=to_cloudpickle)
-    mdb['86'].setitem('get_Combiner',
+    db['86'].set('get_Combiner',
                       partial(get_Combiner, step=True),
                       dumper=to_cloudpickle)
 
-    return mdb
+    return db
 
 
 def get_params():
@@ -270,22 +268,22 @@ def test_get_max_generation():
 
 def test_mini_optimization_run(capsys, client):
     c = client
-    mdb = set_up_mdb(step=False)
+    db = set_up_db(step=False)
     try:
-        start_run(mdb['86'], 1, client=c, offspring_size=2, max_ngen=2)
+        start_run(db['86'], 1, client=c, offspring_size=2, max_ngen=2)
         # accessing simulation results of run
         keys = [
             int(k)
-            for k in list(mdb['86']['1'].keys())
+            for k in list(db['86']['1'].keys())
             if utils.convertible_to_int(k)
         ]
         assert max(keys) == 2
         # if continue_cp is not set (defaults to False), an Exception is raised if the same
         # optimization is started again
         with pytest.raises(ValueError):
-            start_run(mdb['86'], 1, client=c, offspring_size=2, max_ngen=4)
+            start_run(db['86'], 1, client=c, offspring_size=2, max_ngen=4)
         # with continue_cp = True, the optimization gets continued
-        start_run(mdb['86'],
+        start_run(db['86'],
                   1,
                   client=c,
                   offspring_size=2,
@@ -293,31 +291,33 @@ def test_mini_optimization_run(capsys, client):
                   continue_cp=True)
         keys = [
             int(k)
-            for k in list(mdb['86']['1'].keys())
+            for k in list(db['86']['1'].keys())
             if utils.convertible_to_int(k)
         ]
         assert max(keys) == 4
-        start_run(mdb['86'], 2, client=c, offspring_size=2, max_ngen=2)
+        start_run(db['86'], 2, client=c, offspring_size=2, max_ngen=2)
         keys = [
             int(k)
-            for k in list(mdb['86']['2'].keys())
+            for k in list(db['86']['2'].keys())
             if utils.convertible_to_int(k)
         ]
         assert max(keys) == 2
     except:
-        shutil.rmtree(mdb.basedir)
+        shutil.rmtree(db.basedir)
         raise
 
 
-@pytest.mark.skipif(six.PY3, reason="This test is not Py3 compatible")
+@pytest.mark.skipif(
+    six.PY3, 
+    reason="This test is not Py3 compatible: `TypeError: an integer is required (got type str)` during `r = cloudpickle.load(f, encoding='latin1')`"
+)
 @pytest.mark.skipif(
     six.PY2,
-    reason=
-    "This test errors on Py2. Idk why., I can't read in get_Simulator or other similar objects. Cloudpickle is being annoying."
+    reason="The legacy database is unreadable: `TypeError: range() integer end argument expected, got list` while trying `if cell_count >= 0` (cloudpickle.py, l1041)."
 )
 def test_ON_HOLD_legacy_simulator_and_new_simulator_give_same_results():
     """
-    TODO: make this test compatible with py3. Currently, it can not read the simulator object from mdb_legacy
+    This test is incompatible with py3.
     it yields:
     ```
     TypeError                                 Traceback (most recent call last)
@@ -328,6 +328,31 @@ def test_ON_HOLD_legacy_simulator_and_new_simulator_give_same_results():
         4 r
 
     TypeError: an integer is required (got type str)
+
+    This test is also incompatible with Py2. It yields:
+    ```
+    >>> s_legacy = db_legacy['86']['get_Simulator'](db_legacy['86'])
+    Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+    File "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/isf_data_base/isf_data_base.py", line 376, in __getitem__
+        dummy = LoaderDumper.load(os.path.join(self.basedir, dummy.relpath), loader_kwargs = kwargs) 
+    File "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/isf_data_base/IO/LoaderDumper/__init__.py", line 32, in load
+        return myloader.get(savedir, **loader_kwargs)
+    File "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/isf_data_base/IO/LoaderDumper/to_cloudpickle.py", line 17, in get
+        os.path.join(savedir, 'to_pickle_dump'))
+    File "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/compatibility.py", line 48, in pandas_unpickle_fun
+        return uncloudpickle_fun(file_path)
+    File "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/compatibility.py", line 44, in uncloudpickle_fun
+        return cloudpickle.load(f)
+    File "/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2/lib/python2.7/pickle.py", line 1384, in load
+        return Unpickler(file).load()
+    File "/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2/lib/python2.7/pickle.py", line 864, in load
+        dispatch[key](self)
+    File "/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2/lib/python2.7/pickle.py", line 1139, in load_reduce
+        value = func(*args)
+    File "/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2/lib/python2.7/site-packages/cloudpickle/cloudpickle.py", line 1041, in _make_skel_func
+        if cell_count >= 0 else
+    TypeError: range() integer end argument expected, got list.
     ```
     """
     setup_hay_evaluator(
@@ -337,16 +362,16 @@ def test_ON_HOLD_legacy_simulator_and_new_simulator_give_same_results():
     # before testing reproducability, it is therefore necessary to initialize
     # the evaluator
 
-    mdb_legacy = ModelDataBase(os.path.join(
+    mdb_legacy = DataBase(os.path.join(
         DATA_DIR, 'example_Kv3_1_slope_variable_dend_scale_step'),
                                readonly=True)  #
 
-    mdb_new = set_up_mdb(step=True)
+    db_new = set_up_db(step=True)
     try:
         s_legacy = mdb_legacy['86']['get_Simulator'](mdb_legacy['86'])
-        s_new = mdb_new['86']['get_Simulator'](mdb_new['86'])
+        s_new = db_new['86']['get_Simulator'](db_new['86'])
         e_legacy = mdb_legacy['86']['get_Evaluator'](mdb_legacy['86'])
-        e_new = mdb_new['86']['get_Evaluator'](mdb_new['86'])
+        e_new = db_new['86']['get_Evaluator'](db_new['86'])
         with silence_stdout:
             # initialize
             features_legacy = e_legacy.evaluate(s_legacy.run(get_params()))
@@ -355,7 +380,7 @@ def test_ON_HOLD_legacy_simulator_and_new_simulator_give_same_results():
             features_new = e_new.evaluate(s_new.run(get_params()))
 
     except:
-        shutil.rmtree(mdb_new.basedir)
+        shutil.rmtree(db_new.basedir)
         raise
 
     for k in list(features_legacy.keys()):
@@ -369,14 +394,14 @@ def test_reproducability():
     # this changes the step size and can therefore minimally change the results.
     # before testing reproducability, it is therefore necessary to initialize
     # the evaluator
-    mdb_new = set_up_mdb(step=True)
+    db_new = set_up_db(step=True)
     try:
-        s_new = mdb_new['86']['get_Simulator'](mdb_new['86'], step=False)
-        e_new = mdb_new['86']['get_Evaluator'](mdb_new['86'], step=False)
+        s_new = db_new['86']['get_Simulator'](db_new['86'], step=False)
+        e_new = db_new['86']['get_Evaluator'](db_new['86'], step=False)
         with silence_stdout:
             features_new = e_new.evaluate(s_new.run(get_params()))
     except:
-        shutil.rmtree(mdb_new.basedir)
+        shutil.rmtree(db_new.basedir)
         raise
 
     features_legacy = get_features()

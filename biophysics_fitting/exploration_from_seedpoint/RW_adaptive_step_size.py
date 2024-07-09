@@ -1,3 +1,8 @@
+"""
+This module provides code to perform a random walk with step size through biophysical parameter space.
+This proved to not provide much additional speedup or accuracy for the usecase of the Oberlaender lab in Bonn (L5PT cells in the rat barrel cortex), and is not under development for the foreseeable future.
+"""
+
 # from functools import partial
 # import os
 # import pandas as pd
@@ -5,7 +10,7 @@
 # import cloudpickle
 # import shutil
 # from .utils import get_vector_norm
-# from model_data_base.utils import silence_stdout
+# from data_base.utils import silence_stdout
 # import time
 # import sys
 # 

@@ -10,7 +10,12 @@ Supports the creation of web-based data analytics dashboards consisting of linke
 ## Running the application
 
 ### 1a. Interactive usage with jupyter notebooks
-Start backend server in jupyter notebook (use Python 3.8 environment of In-Silico-Framework as kernel, see [setup instructions](../../installer/README.md)). 
+Setting up the data server is done in 3 steps, which are also outlined in [example/ipynb](./example.ipynb).
+To start the data server:
+1. Start the server on a port (5000 by default)
+2. Set a dataframe (only pandas or vaex are currently supported)
+3. Set a session. There are 3 (default session)[./defaults/default_sessions] configured.
+Start backend server in jupyter notebook (use Python 3.8 or 3.9 environment of In-Silico-Framework as kernel, see [setup instructions](../../installer/README.md)). 
 ```
 example_vaex.ipynb
 ```

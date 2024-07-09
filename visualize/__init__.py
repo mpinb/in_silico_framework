@@ -1,6 +1,5 @@
 """
-This init file imports all the important classes from this directory. This way, each submodule in this directory can focus on a single task, and this __init__ file then
-serves as an easy importable module in Interface.
+Visualization toolbox. Provides modules for visualizing cell morphologies, ion currents, membrane voltage, rasterplots, PSTHs...
 
 Authors: Arco Bast, Maria Royo, Bjorge Meulemeester
 """
@@ -14,3 +13,20 @@ import numpy as np
 import logging
 
 logger = logging.getLogger("ISF").getChild(__name__)
+
+def svg2emf(filename, path_to_inkscape="/usr/bin/inkscape"):
+    '''
+    Converts svg to emf, which can be imported in word using inkscape.
+    
+    Args:
+        filename (str): the filename of the svg file
+        path_to_inkscape (str): the path to the inkscape binary
+    
+    Returns:
+        None
+    '''
+    command = ' '.join([
+        'env -i', path_to_inkscape, "--file", filename, "--export-emf",
+        filename[:-4] + ".emf"
+    ])
+    logger.info(os.system(command))

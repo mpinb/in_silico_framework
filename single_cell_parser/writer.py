@@ -1,4 +1,4 @@
-from model_data_base.mdbopen import mdbopen
+from data_base.dbopen import dbopen
 import os
 '''
 Created on Mar 8, 2012
@@ -84,7 +84,7 @@ def write_landmark_file(fname=None, landmarkList=None):
     if not fname.endswith('.landmarkAscii'):
         fname += '.landmarkAscii'
 
-    with mdbopen(fname, 'w') as landmarkFile:
+    with dbopen(fname, 'w') as landmarkFile:
         nrOfLandmarks = len(landmarkList)
         header = '# AmiraMesh 3D ASCII 2.0\n\n'\
                 'define Markers ' + str(nrOfLandmarks) + '\n\n'\
@@ -102,7 +102,7 @@ def write_landmark_file(fname=None, landmarkList=None):
 
 
 def write_sim_results(fname, t, v):
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# t\tvsoma'
         header += '\n\n'
         outputFile.write(header)
@@ -115,7 +115,7 @@ def write_sim_results(fname, t, v):
 
 
 def write_all_traces(fname, t, vTraces):
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = 't'
         for i in range(len(vTraces)):
             header += '\tVm run %02d' % i
@@ -139,7 +139,7 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
         err_str = 'Incomplete data! Cannot write synapse location file'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# Synapse distribution file\n'
         header += '# corresponding to cell: '
         header += cellID
@@ -171,7 +171,7 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
         err_str = 'Incomplete data! Cannot write synapse location file'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# Synapse distribution file\n'
         header += '# corresponding to cell: '
         header += cellID
@@ -210,7 +210,7 @@ def write_functional_realization_map(fname=None,
     if not fname.endswith('.con') and not fname.endswith('.CON'):
         fname += '.con'
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# Functional realization file; only valid with synapse realization:\n'
         header += '# ' + anatomicalID
         header += '\n'
@@ -226,17 +226,18 @@ def write_functional_realization_map(fname=None,
             outputFile.write(line)
 
 
-def write_synapse_activation_file(fname=None,
-                                  cell=None,
-                                  synTypes=None,
-                                  synDistances=None,
-                                  synTimes=None,
-                                  activeSyns=None):
+def write_synapse_activation_file(
+    fname=None,
+    cell=None,
+    synTypes=None,
+    synDistances=None,
+    synTimes=None,
+    activeSyns=None):
     if fname is None or cell is None or synTypes is None or synDistances is None or synTimes is None or activeSyns is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# synapse type\t'
         header += 'synapse ID\t'
         header += 'soma distance\t'
@@ -272,11 +273,28 @@ def write_synapse_activation_file(fname=None,
 
 
 def write_synapse_weight_file(fname=None, cell=None):
+    """Write out a synapse weight file.
+    
+    This file contains the following information:
+    
+    - synapse type
+    - synapse ID
+    - section ID
+    - section pt ID
+    - receptor type
+    - synapse weights
+    
+    Args:
+        fname (str): The name of the file to write to.
+        cell (:class:`single_cell_parser.cell.Cell`): The cell object, containing synapses.
+    
+    Returns:
+        None. Writes out the synapse weight file to :paramref:`fname`."""
     if fname is None or cell is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# synapse type\t'
         header += 'synapse ID\t'
         header += 'section ID\t'
@@ -316,7 +334,7 @@ def write_PSTH(fname=None, PSTH=None, bins=None):
         err_str = 'Incomplete data! Cannot write PSTH'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# bin begin\t'
         header += 'bin end\t'
         header += 'APs/trial/bin\n'
@@ -342,7 +360,7 @@ def write_spike_times_file(fname=None, spikeTimes=None):
         err_str = 'Incomplete data! Cannot write spike times file'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outFile:
+    with dbopen(fname, 'w') as outFile:
         header = '# trial\tspike times\n'
         outFile.write(header)
         trials = list(spikeTimes.keys())
@@ -366,7 +384,7 @@ def write_presynaptic_spike_times(fname=None, cells=None):
         err_str = 'Incomplete data! Cannot write presynaptic spike times'
         raise RuntimeError(err_str)
 
-    with mdbopen(fname, 'w') as outputFile:
+    with dbopen(fname, 'w') as outputFile:
         header = '# presynaptic cell type\tcell ID\tspike times\n'
         outputFile.write(header)
         preTypes = list(cells.keys())
@@ -627,7 +645,7 @@ def write_cell_simulation(fname=None,
         stepFName += '_'
         stepFName += '%07.3f' % tVec[i]
         stepFName += '.am'
-        with mdbopen(stepFName, 'w') as outFile:
+        with dbopen(stepFName, 'w') as outFile:
             outFile.write(header)
 
             outFile.write('\n@1 # Vertices xyz coordinates\n')
@@ -925,7 +943,7 @@ def write_functional_map(fname, functionalMap):
     header += "" + "\n"
     header += "POINT { float[3] EdgePointCoordinates } @6 " + "\n"
 
-    with mdbopen(fname, 'w') as outFile:
+    with dbopen(fname, 'w') as outFile:
         outFile.write(header)
 
         outFile.write('\n@1 # Vertices xyz coordinates\n')

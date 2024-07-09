@@ -5,7 +5,7 @@ Created on Nov 3, 2012
 '''
 
 import numpy as np
-from model_data_base.mdbopen import mdbopen
+from data_base.dbopen import dbopen
 
 
 def vm_mean(vVec, tVec, tStim, dtStim):
@@ -295,7 +295,7 @@ class RecordingSiteManager(object):
             raise RuntimeError(errstr)
 
         landmarks = []
-        with mdbopen(landmarkFilename, 'r') as landmarkFile:
+        with dbopen(landmarkFilename, 'r') as landmarkFile:
             readPoints = False
             for line in landmarkFile:
                 stripLine = line.strip()

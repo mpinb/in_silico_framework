@@ -17,12 +17,13 @@ class Synapse(object):
     Biophysical mechanisms are specified in subclasses
     '''
 
-    def __init__(self,
-                 edgeID,
-                 edgePtID,
-                 edgex,
-                 preCellType='',
-                 postCellType=''):
+    def __init__(
+        self,
+        edgeID,
+        edgePtID,
+        edgex,
+        preCellType='',
+        postCellType=''):
         '''
         ID of attached section in cell.sections
         self.secID = edgeID

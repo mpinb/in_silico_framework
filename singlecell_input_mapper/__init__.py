@@ -1,3 +1,3 @@
-import logging
-
-logger = logging.getLogger("ISF").getChild(__name__)
+"""
+Registers cells in a dense connectome.
+"""

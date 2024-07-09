@@ -5,14 +5,14 @@ from functools import partial
 import neo
 import pandas as pd
 import numpy as np
-from model_data_base import utils as mdb_utils
+from data_base import utils as db_utils
 from collections import defaultdict
 import tempfile
 import matplotlib.pyplot as plt
 from IPython import display
 import seaborn as sns
-from model_data_base.analyze.spike_detection import spike_in_interval as mdb_analyze_spike_in_interval
-from model_data_base.analyze.temporal_binning import universal as temporal_binning
+from data_base.analyze.spike_detection import spike_in_interval as mdb_analyze_spike_in_interval
+from data_base.analyze.temporal_binning import universal as temporal_binning
 from visualize import histogram
 
 ################################
@@ -493,7 +493,7 @@ def strip_st(st):
         A pandas DataFrame, in which all columns that cannot be converted to integer are filtered out,
         i.e. the DataFrame contains only spike times and no metadata.
     """
-    return st[[c for c in st.columns if mdb_utils.convertible_to_int(c)]]
+    return st[[c for c in st.columns if db_utils.convertible_to_int(c)]]
 
 
 import pandas as pd
@@ -1170,7 +1170,7 @@ class STAPlugin_extract_column_in_filtered_dataframe(STAPlugin_TEMPLATE):
 
     def setup(self, spike_times_analysis):
         df = spike_times_analysis.get(self.source)
-        df = mdb_utils.select(df, **self.select)
+        df = db_utils.select(df, **self.select)
         column = list(df[self.column_name])
         self._result = column
 
@@ -1213,7 +1213,7 @@ class STAPlugin_response_probability_in_period(STAPlugin_TEMPLATE):
         else:
             t_start, t_end = self.t_start, self.t_end
         st = spike_times_analysis.get(self.source)
-        self._by_trial = mdb_analyze_spike_in_interval(st, t_start, t_end)
+        self._by_trial = db_analyze_spike_in_interval(st, t_start, t_end)
         self._result = np.mean(self._by_trial)
 
 
@@ -1462,7 +1462,7 @@ class AnalyzeFile:
         return text
 
     def get_onset_spike_probability(self):
-        return mdb_analyze_spike_in_interval(self.st, *self.periods['1onset']).mean()
+        return db_analyze_spike_in_interval(self.st, *self.periods['1onset']).mean()
 
     def _get_fig(self, ax=None):
         if ax is not None:

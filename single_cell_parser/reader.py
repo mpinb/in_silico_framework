@@ -6,7 +6,7 @@ Created on Mar 8, 2012
 
 import numpy as np
 from . import scalar_field
-from model_data_base.mdbopen import mdbopen
+from data_base.dbopen import dbopen
 import logging
 
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -35,10 +35,27 @@ class Edge(object):
 
 
 def read_hoc_file(fname=''):
+    """Reads a hoc file and returns a list of Edge objects.
+    
+    This list of sections is parsed to a :class:`~single_cell_parser.cell_parser.CellParser` object
+    using :py:meth:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
+    
+    Warning:
+        The module :py:mod:`singlecell_input_mapper` also conains a 
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file` 
+        method with subtle differences. A notable difference is that this method reads in axon sections,
+        while the :py:mod:`singlecell_input_mapper` variant does.
+
+    Args:
+        fname (str): The name of the file to be read.
+
+    Returns:
+        list: A list of :class:`Edge` objects.
+    """
     if not fname.endswith('.hoc') and not fname.endswith('.HOC'):
         raise IOError('Input file is not a .hoc file!')
 
-    with mdbopen(fname, 'r') as neuronFile:
+    with dbopen(fname, 'r') as neuronFile:
         logger.info("Reading hoc file %s" % fname)
         #        cell = co.Cell()
         #        simply store list of edges
@@ -64,9 +81,9 @@ def read_hoc_file(fname=''):
                 '''skip comments'''
                 if '/*' in line and '*/' in line:
                     continue
-#                    '''ignore daVinci registration'''
-#                    if '/* EOF */' in line:
-#                        break
+                    # '''ignore daVinci registration'''
+                    # if '/* EOF */' in line:
+                    #     break
                 '''read pts belonging to current segment'''
                 if readPts:
                     if 'Spine' in line:
@@ -135,7 +152,7 @@ def read_hoc_file(fname=''):
                                                                    1:conEnd])
 
 
-#            end for loop
+            # end for loop
         '''make sure EOF doesn't mess anything up'''
         if len(tmpEdgePtCntList) == len(tmpLabelList) - 1 and edgePtCnt:
             tmpEdgePtCntList.append(edgePtCnt)
@@ -180,15 +197,15 @@ def read_scalar_field(fname=''):
     if not fname.endswith('.am') and not fname.endswith('.AM'):
         raise IOError('Input file is not an Amira Mesh file!')
 
-    with mdbopen(fname, 'r') as meshFile:
-        #            logger.info "Reading Amira Mesh file", fname
+    with dbopen(fname, 'r') as meshFile:
+        # logger.info "Reading Amira Mesh file", fname
         mesh = None
         extent, dims, bounds, origin, spacing = [], [], [], [], [0., 0., 0.]
         dataSection, hasExtent, hasBounds = False, False, False
         index = 0
         for line in meshFile:
             if line.strip():
-                #                    set up lattice
+                # set up lattice
                 if not dataSection:
                     if 'define' in line and 'Lattice' in line:
                         dimStr = line.strip().split()[-3:]
@@ -216,7 +233,7 @@ def read_scalar_field(fname=''):
                     if '@1' in line and line[:2] == '@1':
                         dataSection = True
                         continue
-#                    main data loop
+                # main data loop
                 else:
                     data = float(line.strip())
                     k = index // (dims[0] * dims[1])
@@ -224,9 +241,7 @@ def read_scalar_field(fname=''):
                     i = index - dims[0] * (j + dims[1] * k)
                     mesh[i, j, k] = data
                     index += 1
-
-
-#                        logger.info 'i,j,k = %s,%s,%s' % (i, j, k)
+                    # logger.info 'i,j,k = %s,%s,%s' % (i, j, k)
 
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
@@ -236,7 +251,7 @@ def read_synapse_realization(fname):
         raise IOError('Input file is not a synapse realization file!')
 
     synapses = {}
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             stripLine = line.strip()
             if not stripLine or stripLine[0] == '#':
@@ -258,7 +273,7 @@ def read_pruned_synapse_realization(fname):
         raise IOError('Input file is not a synapse realization file!')
 
     synapses = {}
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             stripLine = line.strip()
             if not stripLine or stripLine[0] == '#':
@@ -288,7 +303,7 @@ def read_functional_realization_map(fname):
     connections = {}
     anatomicalID = None
     lineCnt = 0
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             stripLine = line.strip()
             if not stripLine:
@@ -311,19 +326,24 @@ def read_functional_realization_map(fname):
 
 
 def read_synapse_activation_file(fname):
-    '''
-    reads list of all functional synapses and their activation times.
-    Input: file of format:
-        synapse type\\tsynapse ID\\tsoma distance\\tsection ID\\tsection pt ID\\tdendrite label\\tactivation times
-    returns: dictionary with cell types as keys and list of synapse locations and activation times,
-    coded as tuples: (synapse ID, section ID, section pt ID, [t1, t2, ... , tn])
+    '''Reads list of all functional synapses and their activation times.
+    
+    In contrast to :py:meth:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
+    
+    Args:
+        fname (str): 
+            Filename of a synapse activation file.
+            Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+    
+    Returns: 
+        dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples: (synapse ID, section ID, section pt ID, [t1, t2, ... , tn])
     '''
     #    logger.info 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     #    logger.info 'reading synapse activation file'
     #    logger.info 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     synapses = {}
     lineCnt = 0
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             if not lineCnt:
                 lineCnt += 1
@@ -365,15 +385,21 @@ def read_synapse_activation_file(fname):
 
 
 def read_complete_synapse_activation_file(fname):
-    '''
-    reads list of all functional synapses and their activation times.
-    Input: file of format:
-        synapse type\\tsynapse ID\\tsoma distance\\tsection ID\\tsection pt ID\\tdendrite label\\tactivation times
-    returns: dictionary with cell types as keys and list of synapse locations and activation times,
-    coded as tuples: (synapse ID, soma distance, section ID, point ID, structure label, [t1, t2, ... , tn])
+    '''Reads list of all functional synapses and their activation times.
+    
+    This reader also returns "structure label" in addition to the columns of :py:func:`read_synapse_activation_file`.
+    
+    
+    Args: 
+        fname (str): 
+            Filename of a synapse activation file.
+            Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+    
+    Returns: 
+        dict: A dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples: (synapse ID, soma distance, section ID, point ID, structure label, [t1, t2, ... , tn])
     '''
     synapses = {}
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             line = line.strip()
             if not line:
@@ -393,8 +419,8 @@ def read_complete_synapse_activation_file(fname):
                 if tStr:
                     synTimes.append(float(tStr))
             if cellType not in synapses:
-                synapses[cellType] = [(synID, somaDist, secID, ptID, structure,
-                                       synTimes)]
+                synapses[cellType] = [(
+                    synID, somaDist, secID, ptID, structure, synTimes)]
             else:
                 synapses[cellType].append(
                     (synID, somaDist, secID, ptID, structure, synTimes))
@@ -405,14 +431,17 @@ def read_complete_synapse_activation_file(fname):
 def read_spike_times_file(fname):
     '''
     reads list of all trials and spike times within these trials.
-    Input: file of format:
-        trial nr.\\tactivation times (comma-separated list or empty)
-    returns:
-        dictionary with trial numbers as keys (integers), and tuples of spike times
-        in each trial as values
+    
+    Args:
+        fname (str): 
+            file of format:
+            trial nr.   activation times (comma-separated list or empty)
+    
+    Returns:
+        dict: Dictionary with trial numbers as keys (integers), and tuples of spike times in each trial as values
     '''
     spikeTimes = {}
-    with mdbopen(fname, 'r') as spikeTimeFile:
+    with dbopen(fname, 'r') as spikeTimeFile:
         for line in spikeTimeFile:
             line = line.strip()
             if not line:
@@ -437,11 +466,13 @@ def read_spike_times_file(fname):
 
 
 def read_synapse_weight_file(fname):
-    '''
-    reads list of all anatomical synapses and their maximum conductance values.
-    Input: file of format:
-        synapse type\\\tsynapse ID\tsection ID\\tsection pt ID\\treceptor type (string)\\tconductance values
-    Returns: two (!!!) dictionaries with cell types as keys, ordered the same as the anatomical synapses:
+    '''Reads list of all anatomical synapses and their maximum conductance values.
+    
+    Args: 
+        fname (str): Synapse weight filename. See: :py:meth:`~single_cell_parser.writer.write_synapse_weight_file`.
+    
+    Returns: 
+        tuple: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
         1st with section ID and pt ID, 2nd with synaptic weights, coded as dictionaries
         (keys=receptor strings) containing weights: (gmax_0, gmax_1, ... , gmax_n)
     '''
@@ -450,7 +481,7 @@ def read_synapse_weight_file(fname):
     #    logger.info 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
     synWeights, synLocations = {}, {}
     lineCnt = 0
-    with mdbopen(fname, 'r') as synFile:
+    with dbopen(fname, 'r') as synFile:
         for line in synFile:
             if not lineCnt:
                 lineCnt += 1
@@ -490,7 +521,7 @@ def read_landmark_file(landmarkFilename):
         raise RuntimeError(errstr)
 
     landmarks = []
-    with mdbopen(landmarkFilename, 'r') as landmarkFile:
+    with dbopen(landmarkFilename, 'r') as landmarkFile:
         readPoints = False
         for line in landmarkFile:
             stripLine = line.strip()

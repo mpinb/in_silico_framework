@@ -1,0 +1,13 @@
+#!/bin/sh
+if test "x${NRNHOME}" = "x" ; then
+	NRNHOME="/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2"
+fi
+if test "x${NRNBIN}" = "x" ; then
+	NRNBIN="/gpfs/soma_fs/scratch/meulemeester/anaconda_isf2/bin/"
+fi
+if test "" = "yes" ; then
+	NRNIV="${NRNBIN}nrniv.app/Contents/MacOS/nrniv"
+else
+	NRNIV="${NRNBIN}nrniv"
+fi
+"${NRNIV}" -dll "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/mechanisms/l5pt/channels_py2/x86_64/.libs/libnrnmech.so" "$@"

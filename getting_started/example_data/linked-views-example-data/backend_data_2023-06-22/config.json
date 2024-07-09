@@ -1,0 +1,75 @@
+{
+    "available_views": [
+        {
+            "type": "regl-scatterplot",
+            "min_num_datasources": 2,
+            "max_num_datasources": 3,
+            "table": "simulation_samples.csv"
+        },
+        {
+            "type": "regl-scatterplot-large",
+            "min_num_datasources": 2,
+            "max_num_datasources": 3,
+            "table": "simulations_sampled-100000_all_valid.csv"
+        },
+        {
+            "type": "scatterplot PCA",
+            "min_num_datasources": 2,
+            "max_num_datasources": 50,
+            "table": "simulation_samples.csv"
+        },
+        {
+            "type": "plotly-parallelcoords",
+            "min_num_datasources": 2,
+            "max_num_datasources": 30,
+            "table": "simulation_samples.csv"
+        },
+        {
+            "type": "anatomical-view",
+            "min_num_datasources": 0,
+            "max_num_datasources": 3,
+            "table": "simulation_samples.csv",
+            "configuration": {
+                "name": "single-morphology"
+            }
+        },
+        {
+            "type": "voltage-trace",
+            "min_num_datasources": 0,
+            "max_num_datasources": 3,
+            "table": "simulation_samples.csv"
+        },
+        {
+            "type": "time-control",
+            "min_num_datasources": 0,
+            "max_num_datasources": 3,
+            "table": "simulation_samples.csv"
+        },
+        {
+            "type": "density-2-channel",
+            "min_num_datasources": 2,
+            "max_num_datasources": 2,
+            "table": "Abstract DataFrame",
+            "configuration": {
+            	"format" : "count",
+                "density_grid_shape": [100,100],
+                "point_size": 5,
+                "point_opacity": 0.8                
+            }
+        },
+        {
+            "type": "density-3-channel",
+            "min_num_datasources": 3,
+            "max_num_datasources": 3,
+            "table": "Abstract DataFrame",
+            "configuration": {
+            	"format" : "mean",
+                "density_grid_shape": [100,100],
+                "point_size": 5,
+                "point_opacity": 0.8
+            }
+        }
+    ],
+    "cached_tables" : [],
+    "sampling_settings" : {}
+}

@@ -1,9 +1,17 @@
 '''
+This module concerns itself with setting up a cell with biophysical details and simulation parameters.
+
+The :class:`Simulator_Setup` class is an inherent attribute of the :class:`Simulator` class, and should only be accessed as such.
+It takes care of equipping a cell with biophysical details, using convenient pd.Series objects as parameter vectors.
+
+The class :class:`Simulator` is used to transform a parameter vector into simulated voltage traces.
+It allows to apply a variety of stimuli to the cell and extract voltage traces.
+
+The results of this module can be used in conjunction with :py:mod:`~biophysics_fitting.evaluator` to iteratively run and evaluate simulations.
+
 Created on Nov 08, 2018
 
 @author: abast
-
-For detailed documentation start with the docstring of the Simulator class.
 '''
 
 import single_cell_parser as scp
@@ -15,7 +23,95 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class Simulator_Setup:
+    """Class for setting up cells with biophysical details.
+    
+    This class is an inherent attribute of the :class:`Simulator` class, and should only be accessed as such.
+    This class concerns with setting up a cell with biophysical details.
+    
+    Usually, a simulation contains fixed parameters, specific to the cell (e.g. the filename of the morphology)
+    and/or stimulus protocol (e.g. recording sites). Such fixed parameters can be defined by adding
+    :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :paramref:`param_modify_funs`. 
+    A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace 
+    of the apical dendrite. Make sure that the :class:`Simulator` :paramref:`stim_run_fun` reads the 
+    parameter :paramref:`recSite` and sets up the stimulus accordingly (see :class:`Simulator`).
+    
+    Attributes:
+        cell_param_generator (callable): A function that generates a :class:`NTParameterSet` cell parameter object.
+        cell_param_modify_funs (list): list of functions that modify the cell parameters.
+        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object.
+        cell_modify_funs (list): List of functions that modify the cell object.
+        stim_setup_funs (list): List of functions that set up the stimulus.
+        stim_run_funs (list): List of functions that each run a simulation.
+        stim_response_measure_funs (list): List of functions that extract voltage traces from the cell.
+        params_modify_funs (list): List of functions that modify the biophysical parameter vector.
+        check_funs (list): List of functions that check the setup. Useful for debugging.
+    
+    Example::
 
+        >>> def param_modify_function(params):
+        >>>    # alter params
+        >>>    return params
+           
+        >>> def cell_params_generator(params, template):
+        >>>    cell_params = template.copy()
+        >>>    # Fill in template with params
+        >>>    return cell_params
+            
+        >>> def cell_param_modify_function(cell_params):
+        >>>     # alter cell_params
+        >>>     return cell_params
+            
+        >>> def cell_generator(cell_params):
+        >>>     return single_cell_parser.create_cell(cell_params)
+            
+        >>> def cell_modify_functions(cell):
+        >>>     # alter cell
+        >>>     return cell
+            
+        >>> s = Simulator() # instantiate simulator object
+        >>> fixed_params = {'stim_1.measure_fun.recSite': 835, 'stim_1.stim_setup.dist': 835}
+        >>> s.setup.params_modify_funs.append([
+            'fixed_params', 
+            partial(set_fixed_params, fixed_params=fixed_params)
+            ])
+        >>> s.setup.cell_param_generator =  cell_params_generator
+        >>> s.setup.cell_generator = cell_generator
+        >>> s.setup.params_modify_funs.append(['modify_param_1', param_modify_fun])
+        >>> s.setup.cell_param_modify_funs.append(['modify_cell_param_1', cell_param_modify_fun])
+        >>> s.setup.cell_modify_funs.append(['modify_cell_1', cell_modify_fun])
+        
+    Notable methods:
+    
+        >>> s.setup.get(params)
+        cell, params
+    
+    Each function that receives the biophysical parameter vector 
+    (i.e. :paramref:`cell_param_modify_funs` and :paramref:`cell_modify_funs`)
+    only sees a subset of the parameter vector that is provided by the user. This subset is determined 
+    by the name by which the function is registered.
+    
+    Example::
+
+        >>> params = {
+        >>>     'apical_scaling.scale': 2,
+        >>>     'ephys.soma.gKv': 0.001,
+        >>>     'ephys.soma.gNav': 0.01
+        >>>    }
+
+        >>> def scale_apical(params, **kwargs):
+        >>>     params['scale'] = kwargs['scale']
+        
+        >>> def ephys(cell, **kwargs):
+        >>>     cell.soma.gKv = kwargs['soma.gKv']
+        >>>     cell.soma.gNav = kwargs['soma.Nav']
+        
+        >>> s.setup.params_modify_funs.append([
+            'apical_scaling',  # name must equal the prefix of the parameter, i.e. 'apical_scaling'
+            partial(scale_apical, 'scale' = 2)])
+        >>> s.setup.cell_modify_funs.append([
+            'ephys',  # name must equal the prefix of the parameter, i.e. 'ephys'
+            partial(ephys, 'soma.gKv'=1, 'soma.gNav'=2)])
+    """
     def __init__(self):
         self.cell_param_generator = None
         self.cell_param_modify_funs = []
@@ -25,6 +121,7 @@ class Simulator_Setup:
         self.stim_run_funs = []
         self.stim_response_measure_funs = []
         self.params_modify_funs = []
+        self.params_modify_funs_after_cell_generation = []
         self.check_funs = []
 
     def check(self):
@@ -81,39 +178,76 @@ class Simulator_Setup:
         return l  # [0]
 
     def get_params(self, params):
-        '''returns cell parameters that have been modified by the params_modify_funs.'''
+        '''Get the modified biophysical parameters.
+        Applies each method in :paramref:`params_modify_funs` to the parameter vector.
+        
+        Args:
+            params (pd.Series): The parameter vector.
+            
+        Returns:
+            (pd.Series): Modified parameters.
+        '''
         for name, fun in self.params_modify_funs:
             params = fun(params)
         return params
 
+    def get_params_after_cell_generation(self, params,cell):
+        '''returns cell parameters that have been modified by the params_modify_funs.'''
+        for name, fun in self.params_modify_funs_after_cell_generation:
+            params = fun(params,cell)
+        return params
+
     def get_cell_params(self, params):
-        '''returns cell NTParameterSet structure used for the single_cell_parser.create_cell. 
-        This is helpful for inspecting, what parameters have effectively been used for the simulation.
+        '''Get the cell parameters as an NTParameterSet from the parameter vector.
         
-        Details, how to set up the Simulator are in the docstring of
-        the Simulator class.'''
+        This can be used with :py:meth:`single_cell_parser.create_cell` to
+        create a :class:`~single_cell_parser.cell.Cell` object.
+        This is helpful for inspecting what parameters have effectively been used for the simulation.
+        
+        Args:
+            params (pd.Series): The parameter vector.
+            
+        Returns:
+            NTParameterSet: The cell parameters.
+        '''
         params = self.get_params(params)
         cell_param = self.cell_param_generator()
         for name, fun in self.cell_param_modify_funs:
             #print name
             #print len(params), len(param_selector(params, name))
-            cell_param = fun(cell_param, params=param_selector(params, name))
+            try:
+                cell_param = fun(cell_param, params=param_selector(params, name))
+            except Exception as e:
+                logger.error("Could not run the cell parameter modify function {} ({})".format(name, fun))
+                logger.error(e)
+                raise
             self._check_not_none(cell_param, 'cell_param', name)
         return cell_param
 
-    def get_cell_params_with_default_sim_prams(self,
-                                               params,
-                                               recordingSites=[],
-                                               tStart=0.0,
-                                               tStop=295,
-                                               dt=0.025,
-                                               Vinit=-75.0,
-                                               T=34.0):
-        '''returns complete neuron parameter object that can be used for further simulations
-        i.e. with the simrun module or with roberts scripts.
+    def get_cell_params_with_default_sim_prams(
+            self,
+            params,
+            recordingSites=[],
+            tStart=0.0,
+            tStop=295,
+            dt=0.025,
+            Vinit=-75.0,
+            T=34.0):
+        '''Get a neuron parameter object.
         
-        Details, how to set up the Simulator are in the docstring of
-        the Simulator class.
+        Constructs a complete neuron parameter object that can be used for further simulations with e.g. :py:mod:`simrun`.
+        
+        Args:
+            params (pd.Series): The parameter vector.
+            recordingSites ([float]): The recording site (um).
+            tStart (float): The start time of the simulation (ms).
+            tStop (float): The stop time of the simulation (ms).
+            dt (float): The time step of the simulation (ms).
+            Vinit (float): The initial voltage (mV).
+            T (float): The temperature (Celsius).
+            
+        Returns:
+            NTParameterSet: The neuron parameter object.
         '''
         NTParameterSet = scp.NTParameterSet
         sim_param = {
@@ -132,186 +266,124 @@ class Simulator_Setup:
         })
 
     def get(self, params):
-        '''Returns a cell with set up biophysics and params. This is the main interface.
+        '''Get the cell with set up biophysics and params. 
         
-        Details, how to set up the Simulator are in the docstring of
-        the Simulator class.'''
+        This is the main interfac to set up a cell object with biophysical parameters.
+        
+        Args:
+            params (pd.Series): The parameter vector.
+            
+        Returns:
+            cell, params: The cell object and the parameter vector.
+        '''
         # params = self.get_params(params) we do not want to apply this twice
         cell_params = self.get_cell_params(params)
         params = self.get_params(params)
         cell = self.cell_generator(cell_params)
         for name, fun in self.cell_modify_funs:
             #print len(param_selector(params, name))
-            cell = fun(cell, params=param_selector(params, name))
+            try:
+                cell = fun(cell, params=param_selector(params, name))
+            except Exception as e:
+                logger.error("Could not run the cell modify function {} ({})\n{}".format(name, fun, e))
+                raise
             self._check_not_none(cell, 'cell', name)
+        params = self.get_params_after_cell_generation(params,cell)
         return cell, params
 
 
 class Simulator:
-    ''' This class can be used to transform a parameter vector into simulated voltage traces.
-
-The usual application is to specify biophysical parameters in a parameter vector and simulate
-current injection responses depending on these parameters.
-
-For a simulator object s, the main functions are:
-s.run(params): returns a dictionary with the specified voltagetraces for all stimuli
-s.get_simulated_cell(params, stim): returns params and cell object for stimulus stim
-s.setup.get(params):
-    Returns a cell with set up biophysics
-s.setup.get_cell_params(params): returns cell NTParameterSet structure used for the 
-    single_cell_parser.create_cell. This is helpful for inspecting, what parameters 
-    have effectively been used for the simulation
-s.setup.get_cell_params_with_default_sim_prams(params, ...): returns complete neuron parameter file
-    that can be used for further simulations, i.e. with the simrun module or with roberts scripts.
-
-The "program flow" can be split in two parts.
-(1) creating a cell object with set up biophysics from a parameter vector
-(2) applying a variety of stimuli to such cell objects
-
-An examplary specification of such a program flow can be found in the module hay_complete_default_setup.
-
-The pipeline for (1) is as follows:
-params: provided by the user: I.pd.Series object (keys: parameter names, values: parameter values)
-    --> apply param_modify_functions (takes and returns a parameter vector, can alter it in any way)
-          |
-          |     |---- cell_param template
-       cell_params_generator
-          |     |
-          v     v
-cell_params: nested parameter structure, created from modified parameters and a template
-    --> apply cell_param_modify_functions (takes and returns a NTParameterSet object, can alter it in any way)
-          |
-        cell_generator(cell_params)  
-          |
-          v
-cell object: created from the modified cell_params object by calling the 'cell_generator'
-    --> apply cell_modify_functions (takes and returns a cell object, can alter it in any way)
-            Caveat: Try to avoid the usage of cell_modify_functions. While this allows 
-            for any possible modification, it can be difficult to reproduce the result 
-            later, as the cell object is different from what is expected by the cell_param 
-            object. If possible, try to fully specify the cell in the cell_param object. Here,
-            it is also possible to spcify cell modifying functions, see 
-            single_cell_parser.cell_modify_functions.
-
-What form do the functions need to have?
-def example_cell_param_template_generator():
-    #return a I.scp.NTParameterSet object as template. Ideally, all parameters, that need to be
-    #filled in from the pasrameter vector have the value None, because it is tested, that
-    #all None values have been replaced. E.g.
-    return I.scp.NTParameterSet({'filename': path_to_hoc_morphology, 'Soma': somatic biophysical parameters})
+    '''This class can be used to transform a parameter vector into simulated voltage traces.
     
-def cell_generator(cell_param):
-    return I.scp.create_cell(cell_params)
+    This is typically done in two steps:
     
-def example_cell_param_modify_function(cell_param, params)
-    # do something to the cell param object depending on params
-    return cell_param
+    1. Set up a cell with biophysics from a parameter vector. See :class:`Simulator_Setup`
+    2. Apply a variety of stimuli to the cell and extract voltage traces.    
     
-def example_cell_modify_function(cell, params)
-    # do something to the cell object depending on params
-    return cell
+    An examplary specification of such a program flow can be found in the module :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Simulator`.
         
-Such functions can be registered to the Simlator object. Each function is registered with a name.
-
-Each function, that receive the parameter vector (i.e. cell_param_modify_funs and cell_modify_funs)
-only see a subset of the parameter vector that is provided by the user. This subset is determined 
-by the name of the function.
-
-E.g. let's assume, we have the parameters:
-{'apical_scaling.scale': 2,
- 'ephys.soma.gKv': 0.001,
- 'ephys.soma.gNav': 0.01
- }
-
-Then, a function that is registered under the name 'apical_scaling' would get the following parameters:
-{'scale': 2}
-
-The function, that is registered under the name 'ephys' would get the following parameters:
-{'soma.gKv': 0.001,
- 'soma.Nav': 0.01}
+    The usual application is to specify biophysical parameters in a parameter vector and simulate
+    current injection responses depending on these parameters.
+    
+    Example:
+    
+        >>> def stim_setup_fun(cell, params):
+        >>>     # set up some stimulus
+        >>>     return cell
+        
+        >>> def stim_run_fun(cell, params):
+        >>>     # run the simulation
+        >>>     return cell
  
-Usually, a simulation contains fixed parameters, e.g. the filename of the morphology. Such fixed
-parameters can be defined 
-
-How can pipeline (1) be set up?
-s = Simulator() # instantiate simulator object
-s.setup # Simualtor_Setup object, that contains all elements defining the pipeline above
-s.setup.cell_param_generator =  example_cell_param_template_generator
-s.setup.cell_generator = cell_generator
-s.setup.params_modify_funs.append('name_of_param_modify_fun', example_cell_param_modify_function)
-s.setup.cell_param_modify_funs.append('name_of_cell_param_modify_fun', example_cell_param_modify_function)
-s.setup.cell_modify_funs.append('name_of_cell_modify_fun', example_cell_modify_function)
-
-The pipeline for (2) is as follows:
-Let s be the Simulator object
-
-params: provided by the user: I.pd.Series object
-   |
-   |
-  s.setup.get(params): triggers pipeline (1), results in a biophysically set up cell
-   |
-   v
-For each stimulus: 
-    --> stim_setup_funs
-    --> stim_run_funs
-    --> stim_response_measure_funs
-       
-What form do the functions need to have?
-def stim_setup_funs(cell, params):
-    # set up some stimulus
-    return cell
+        >>> def stim_response_measure_fun(cell, params)
+        >>>     # extract voltage traces from the cell
+        >>>     # Extract ionic currents from the cell?
+        >>>     return result
     
-def stim_run_fun(cell, params):
-    # run the simulation
-    return cell
+        >>> params = pd.Series({"param1": 1, "param2": 2})
+        
+        >>> s = Simulator()
+        >>> cell, params = s.setup.get(params)
+        >>> s.setup.stim_setup_funs.append(
+            ['stim_1.setup', stim_setup_fun])
+        >>> s.setup.stim_run_funs.append(
+            ['stim_1.run', stim_run_fun])
+        >>> s.setup.stim_response_measure_funs.append(
+            ['stim_1.measure', stim_response_measure_fun])
+            
+    Often, it is easier to write functions that accept keyword arguments instead of full parameter vectors
+    This can be done by using :py:meth:`~biophysics_fitting.parameters.params_to_kwargs`.
     
-def stim_response_measure_funs(cell, params)
-    # extract voltage traces from the cell
-    return result
+    Example:
     
-How can pipeline (2) be set up?
-The names for stim_setup_funs, stim_run_funs and stim_response_measure_funs need to start
-with the name of the simulus followed by a dot. For each stimulus, each of the three
-functions needs to be defined exatly once, e.g. you could do something like:
-
-s.setup.stim_setup_funs.append(BAC.stim_setup, examplary_stim_setup_function)
-s.setup.stim_run_funs.append(BAC.run_fun, examplary_stim_run_function)
-s.setup.stim_response_measure_funs.append(BAC.measure_fun, examplary_stim_response_measure_function)
-
-A typical usecase is to use the fixed parameters to specify to soma distance for a 
-voltage trace of the apical dendrite. E.g.
-{'BAC.measure_fun.recSite': 835,
-'BAC.stim_setup.dist': 835}
-
-You would need to make sure, that your examplary_stim_run_fun reads the parameter 'recSite'
-and sets up the stimulus accordingly.
-
-Often, it is easier to write functions, that do not accept a parameter vector, but instead
-keyword arguments. E.g. it might be desirable to write the examplary_stim_setup_funs like this
-def examplary_stim_setup_function(cell, recSite = None):
-    # set up current injection at soma distance recSite
-    return cell
+        >>> def stim_setup_function(cell, recSite = None):
+        >>>    # I dont need the :paramref:`params` argument, but I ask recSite directly
+        >>>    # set up current injection at soma distance recSite
+        >>>    return cell
+            
+        >>> s.setup.stim_setup_funs.append([
+                BAC.stim_setup, 
+                params_to_kwargs(stim_setup_function)
+            ])
     
-Instead of:
-def examplary_stim_setup_function(cell, params)
-    recSite = params['recSite']
-    # set up current injection at soma distance recSite
-    return cell
+    Notable methods::
     
-This can be done by using the params_wo_kwargs method in biophysics_fitting.parameters. You would register
-the function as follows:
-s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_setup_function))
-'''
+        >>> s.run(params): returns a dictionary with the specified voltage traces for all stimuli
+        {'stim_1': {'tVec': ..., 'vList': [[...], ...]}, 'stim_2': ...}
+        
+        >>> s.get_simulated_cell(params, stim)
+        cell, params  # cell has simulation data
+        
+        >>> s.setup.get(params):
+        cell  # with bipohysics set up
+        
+        >>> s.setup.get_cell_params(params)
+        cell_params
+        
+        >>> s.setup.get_cell_params_with_default_sim_prams(params, ...)
+        neuron_parameter_file
+    
+    Note:
+        The names for stim_setup_funs, stim_run_funs and stim_response_measure_funs need to start
+            with the name of the simulus followed by a dot. For each stimulus, each of the three
+            functions needs to be defined exactly once. 
+    '''
 
     def __init__(self):
         self.setup = Simulator_Setup()
 
     def get_simulated_cell(self, params, stim, simulate = True): 
-        '''returns cell and parameters used to set up cell.
-        The cell is simulated with the specified stimulus.
+        '''Get the simulated cell.
         
-        Details, how to set up the Simulator are in the docstring of
-        the Simulator class.'''
+        Args:
+            params (pd.Series): The parameter vector of biophysical parameters.
+            stim (str): The stimulus to apply.
+            simulate (bool): Whether to run the simulation (True), or only set up the simulation (False).
+            
+        Returns:
+            cell, params: The cell object and the parameter vector.
+        
+        '''
         t = time.time()
         # get cell object with biophysics
         cell, params = self.setup.get(params)
@@ -329,14 +401,16 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
 
     def run(self, params, stims=None):
         '''Simulates all stimuli for a given parameter vector.
-            Returns: Dictionary where stim_response_measure_funs names are keys, 
+        
+        Args:
+            params: The parameter vector.
+            stims (str | [str]): which sitmuli to run. Either a str (for one stimulus) or a list of str.
+            
+        Returns: 
+            dict: Dictionary where stim_response_measure_funs names are keys, 
             return values of the stim_response_measure_funs (usually voltage traces) are values.
             
-            stims: which sitmuli to run. Either a str (for one stimulus) or a list of str.
-
-            Details, how to set up the Simulator are in the docstring of
-            the Simulator class.        
-            '''
+        '''
         if stims is None:
             stims = self.setup.get_stims()
         if isinstance(stims, str):
@@ -353,16 +427,32 @@ s.setup.stim_setup_funs.append(BAC.stim_setup, params_to_kwargs(examplary_stim_s
         return out
 
 
-def run_fun(cell,
-            T=34.0,
-            Vinit=-75.0,
-            dt=0.025,
-            recordingSites=[],
-            tStart=0.0,
-            tStop=250.0,
-            vardt=True,
-            silent=True):
-    '''Default function to run a simulation'''
+def run_fun(
+    cell,
+    T=34.0,
+    Vinit=-75.0,
+    dt=0.025,
+    recordingSites=[],
+    tStart=0.0,
+    tStop=250.0,
+    vardt=True,
+    silent=True):
+    '''Default function to run a simulation.
+    
+    Args:
+        cell: The cell object.
+        T (float): The temperature (Celsius).
+        Vinit (float): The initial voltage (mV).
+        dt (float): The time step (ms).
+        recordingSites ([float]): The recording sites (um).
+        tStart (float): The start time of the simulation (ms).
+        tStop (float): The stop time of the simulation (ms).
+        vardt (bool): Whether to use variable time step.
+        silent (bool): Whether to suppress output.
+        
+    Returns:
+        :class:`~single_cell_parser.cell.Cell`: The cell object, containing simulation data.
+    '''
     from sumatra.parameters import NTParameterSet
     sim = {
         'T': T,

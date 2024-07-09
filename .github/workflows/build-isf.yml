@@ -39,7 +39,7 @@ jobs:
           trigger_rebuild:
             - "installer/py${{ inputs.py_version }}/**"
             - "mechanisms/**"
-            - ".github/workflows/**"
+            - ".github/workflows/build-isf.yml"
 
     - name: Check if (re)build is necessary
       # (re)build only if:
@@ -92,15 +92,27 @@ jobs:
         fi
         pushd .
         cd installer/py${{ inputs.py_version }}
-        ./install.sh $CONDA_TARGET_DIR || exit 1
+        set -o pipefail
+        ./install.sh -p $CONDA_TARGET_DIR | tee $HOME/build_output_${{ inputs.py_version }}.txt
+        exit_status=${PIPESTATUS[0]}
         popd
         source $CONDA_TARGET_DIR/bin/activate
         conda list
+        exit $exit_status
 
     - name: Save success state
       if: ${{ always() }}
       run: |
         echo "Build success = ${{ job.status }}"
         echo ${{ job.status }} > $HOME/build_success${{ inputs.py_version }}.txt 
+
+    - name: Save build output as artifact
+      uses: actions/upload-artifact@v3
+      if: ${{ always() }} 
+      with:
+        name: ${{ github.run_id }}_build_output
+        path: |
+          $HOME/build_output_${{ inputs.py_version }}.txt
+
 
             

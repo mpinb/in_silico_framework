@@ -6,7 +6,7 @@ It contains methods for parsing cell data, such as morphology and membrane prope
 
 It provides methods for interacting with NEURON or Amira files in Python. 
 
-While it is possible to launch simulations with this module, to run many simulations in a scalable way (using a high-perfomance cluster) use the modules [simrun2](../simrun2/) and/or [simrun3](../simrun3/).
+While it is possible to launch simulations with this module, to run many simulations in a scalable way (using a high-perfomance cluster) use the modules [simrun](../simrun/) and/or [simrun](../simrun/).
 
 This module makes heavy use of [single cell analyser](../single_cell_analyzer/) as well.
 

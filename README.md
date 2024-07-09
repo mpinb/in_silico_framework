@@ -1,30 +1,32 @@
 <div align="center">
 
-<img src=./docs/_static/_figures/isf-logo-white.png#gh-dark-mode-only width='350'>
-<img src=./docs/_static/_figures/isf-logo-black.png#gh-light-mode-only width='350'>
+<img src=./docs/_static/_images/isf-logo-white.png#gh-dark-mode-only width='350'>
+<img src=./docs/_static/_images/isf-logo-black.png#gh-light-mode-only width='350'>
 
 # The In-Silico-Framework (ISF)
-[![In-Silico-Framework (Python 2.7) install and test](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py27-local.yml/badge.svg)](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py27-local.yml)
-[![In-Silico-Framework (Python 3.8) install and test](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py38-local.yml/badge.svg)](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py38-local.yml)
-[![In-Silico-Framework (Python 3.9) install and test](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py39-local.yml/badge.svg)](https://github.com/research-center-caesar/in_silico_framework/actions/workflows/test-isf-py39-local.yml)
+[![In-Silico-Framework (Python 2.7) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml)
+[![In-Silico-Framework (Python 3.8) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml)
+[![In-Silico-Framework (Python 3.9) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py39-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py39-local.yml)
 [![codecov](https://codecov.io/gh/mpinb/in_silico_framework/graph/badge.svg?token=V4P4QMFM12)](https://codecov.io/gh/mpinb/in_silico_framework)
+
+https://github.com/mpinb/in_silico_framework/assets/38312921/adcc0ea7-154e-4713-b81f-4ce2fc4b33c4
+
 </div>
+
+ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
 
 ## Installation
 
-Every student needs to be able to synchronize their repository with https://github.com/research-center-caesar/in_silico_framework. Detailed instructions on how to install the repo are given in the [installer directory](./installer/).
-
-## Documentation
-
-The current state of the documentation is currently [locally hosted on ibs3005](http://10.40.130.27:8000/) (only accessible via somalogin01/02).
-
-Documentation is a work in progress. It is generated automatically from docstrings using Sphinx autosummary. Missing entries in the documentation are generally due to missing docstrings in the source code.
+Detailed instructions on how to install the repo are given in the [installer directory](./installer/).
 
 ## Usage
 
-The [Interface module](./Interface.py) glues together all submodules and gives direct access to them. Rather than importing individual submodules, it is recommended to access them via Interface. Most of your code will probably start with
-```python
-import Interface as I
-```
-
-A walkthrough of the capabilities of ISF is presented in the ["Getting Started" notebook](./getting_started/getting_started.ipynb).
+The [getting started directory](./getting_started) provides an introduction on how to use ISF, including:
+- [basic usage](./getting_started/Introduction_to_ISF.ipynb)
+- [data analysis](<./getting_started/tutorials/1. data analysis>)
+- [biophysics](<./getting_started/tutorials/2. biophysics>)
+- [synaptic simulations](<./getting_started/tutorials/3. synaptic simulations>)
+- [reduced models](<./getting_started/tutorials/4. reduced models>)
+- [network-level simulations](<./getting_started/tutorials/5. network simulations>)
+- [visualization](<./getting_started/tutorials/6. visualization>)
+- [data management](<./getting_started/tutorials/7. data management>)

@@ -1,0 +1,106 @@
+table {
+  border-collapse: separate;
+  border-spacing: 10px 0;
+}
+
+td>img {
+  display: block;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr {
+  vertical-align: top;
+  padding: 0px;
+}
+
+td {
+  padding: 0px;
+}
+
+.organigram-fixed-cell {
+  display: table-cell;
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
+  height: 50px;
+  width: 80%;
+  background: rgba(0, 128, 0, 0);
+}
+
+.organigram-header {
+  display: table-cell;
+  border-collapse: collapse;
+  text-align: center;
+  vertical-align: middle;
+  width: 10%;
+  background: rgba(0, 128, 0, 0);
+}
+
+.organigram-expandable-cell {
+  display: table-cell;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.organigram-button {
+  width: 100%;
+  height: 50px;
+  border-collapse: collapse;
+  border: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #f29b30;
+  background-clip: content-box;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  transition: height 0.2s ease-out;
+  font-size: 15px;
+}
+
+.organigram-button:hover {
+  background-color: #ffbc69;
+}
+
+.organigram-collapsible-content {
+  display: flex;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.2s ease-out;
+  background-color: #fbe3c5;
+  /* border: solid black; */
+} 
+
+
+#in-vivo {
+  background-color: #006c66;
+  background-clip: content-box;
+  color: white;
+}
+
+#ISF {
+  background-color: #f29b30;
+  background-clip: content-box;
+  color: white;
+}
+
+#Output {
+  background-color: #c1272d;
+  background-clip: content-box;
+  color: white;
+}
+
+#neuron-button {
+  width: calc(50% - 5px);
+  margin-right: 5px;
+  float: left;
+}
+
+#network-button{
+  width: calc(50% - 5px);
+  vertical-align: top;
+  float: right;
+  margin-left: 5px;
+}
