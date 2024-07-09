@@ -1,4 +1,5 @@
 name: Py 3.8
+env: ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true
 on:
   pull_request:  # run on the PR base to check if the changes work before merging.
     # Note that this will also run upon any activity in the PR

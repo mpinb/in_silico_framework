@@ -1,5 +1,6 @@
 # Builds ISF for any Python version (2.7/3.8/3.9), depending on the input
 name: Build ISF
+env: ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true
 on:
   workflow_call:
     inputs:
