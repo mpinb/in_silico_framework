@@ -3,6 +3,7 @@ on:
   pull_request: # run on the PR base to check if the changes work before merging.
     # Note that this will also run upon any activity in the PR
     types: [opened, synchronize]
+    branches: [develop, master]
     paths-ignore:
       - README.md  # don't run workflow when README changes
       - CHANGELOG.md # Should never be edited anyway
