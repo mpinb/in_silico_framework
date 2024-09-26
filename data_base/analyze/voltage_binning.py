@@ -39,30 +39,41 @@ def get_bins(bin_size=None, min_=None, max_=None):
     return bins
 
 
-def calculate_vdensity_array_dask(v,
-                                  bin_size=0.05,
-                                  ymin=-100,
-                                  ymax=50,
-                                  xmin=None,
-                                  xmax=None):
+def calculate_vdensity_array_dask(
+    v,
+    bin_size=0.05,
+    ymin=-100,
+    ymax=50,
+    xmin=None,
+    xmax=None):
     '''
     takes a pandas or dask dataframe v, that has to hasve the structure of a usual
     voltage_traces dataframe:
-     - columns convertible to int / float resemble resemble timepoints
-     - the values of these columns are of type float
+    
+    Args:
+        v (pd.Dataframe | dask.DataFrame): a voltage traces dataframe. Column indices float and reflect timepoints
+        bin_size (float): the size of the bins
+        ymin (float): the minimum voltage value
+        ymax (float): the maximum voltage value
+        xmin (float): the minimum time value (unused)
+        xmax (float): the maximum time value (unused) 
      
-     cave: currently only implemented for pandas. If dask dataframe is passed, it
-     will be monolitically load into memory! 
-     #Todo: try aproach with dask delayed
+    Note:
+        caveat: currently only implemented for pandas. If dask dataframe is passed, it
+        will be monolitically load into memory! 
+    
+    Todo: 
+        try aproach with dask delayed
      
-     xmin and xmax can be passed, but have no effect     
-     '''
+    xmin and xmax can be passed, but have no effect     
+    '''
 
     def fun(x):
-        out = calculate_vdensity_array_pd(x,
-                                          bin_size=bin_size,
-                                          ymin=ymin,
-                                          ymax=ymax)
+        out = calculate_vdensity_array_pd(
+            x,
+            bin_size=bin_size,
+            ymin=ymin,
+            ymax=ymax)
         return pd.Series({'A': out})
 
     out = v.map_partitions(fun, meta='object').sum()

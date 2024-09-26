@@ -60,7 +60,7 @@ class Loader(parent_classes.Loader):
             load_helper(savedir, n_partitions, partition, meta=self.meta, columns=columns)
             for partition in range(n_partitions)
         ]
-        ddf = dask.dataframe.from_delayed(delayeds)
+        ddf = dask.dataframe.from_delayed(delayeds, meta=self.meta)
         if os.path.exists(os.path.join(savedir, 'divisions.json')):
             with open(os.path.join(savedir, 'divisions.json')) as f:
                 divisions = json.load(f)

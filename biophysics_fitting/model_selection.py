@@ -1,3 +1,8 @@
+"""
+This module provides convenience methods to fetch the resulting models from the database,
+and to select the best models based on the evaluation results.
+"""
+
 import pandas as pd
 from collections import defaultdict
 from .hay_evaluation import objectives_BAC, objectives_step
@@ -5,7 +10,6 @@ from data_base.utils import convertible_to_int
 
 
 def get_model_pdf_from_db(db):
-
     def augment_pdf(pdf, i, j):
         pdf['model_id'] = '_'.join([db.get_id(), str(i), str(j)])
         pdf['model_id'] = pdf['model_id'] + '_' + pd.Series(
@@ -32,12 +36,30 @@ def get_model_pdf_from_db(db):
     return out, pd.concat(list(out.values()))
 
 
-def get_pdf_selected(pdf,
-                     BAC_limit=3.5,
-                     step_limit=4.5,
-                     objectives_BAC=objectives_BAC,
-                     objectives_step=objectives_step):
-
+def get_pdf_selected(
+    pdf,
+    BAC_limit=3.5,
+    step_limit=4.5,
+    objectives_BAC=objectives_BAC,
+    objectives_step=objectives_step
+    ):
+    """Select models based on cutoffs from a DataFrame.
+    
+    Filters the dataframe such that all models are within 
+    desired range of the objective, and sorts it by its
+    deviation from the empirical mean.
+    See :py:mod:`~biophysics_fitting.evaluator.Evaluator` for more information
+    on evaluation voltage traces..
+    
+    Args:
+        pdf (pd.DataFrame): A DataFrame with model evaluations.
+        BAC_limit (float): The cutoff for the BAC.
+        step_limit (float): The cutoff for the step.
+        objectives_BAC (list): The objectives for the BAC.
+        objectives_step (list): The objectives for the step.
+        
+    Returns:
+        A filtered DataFrame and the model_id of the best model."""
     objectives = objectives_BAC + objectives_step
     pdf['sort_column'] = pdf[objectives].max(axis=1)
     p = pdf[(pdf[objectives_step].max(axis=1) < step_limit) &

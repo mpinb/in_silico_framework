@@ -1,4 +1,7 @@
-'''The content of this module is mostly a reimplementation of the Hay et.al. 2011 methods used for extracting features'''
+'''
+The content of this module is mostly a reimplementation of the Hay et.al. 2011 methods used for extracting features.
+See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+'''
 import numpy as np
 
 
@@ -14,12 +17,13 @@ def trace_check(
         vmax=None,  ## added by arco
         name=''):
     """
-    Check the properties of a voltage trace:
-    1. Check that at least minspikenum are present.
-    2. Check if it properly returns to rest.
-    3. Check that there are no spikes before stimulus onset (in soma or dendrite).
-    4. Check if last spike is before deadline.
-    5. Check that the maximum dendritic depolarization before stimulus onset is not too large.
+    Check the properties of a voltage trace::
+    
+        1. Check that at least minspikenum are present.
+        2. Check if it properly returns to rest.
+        3. Check that there are no spikes before stimulus onset (in soma or dendrite).
+        4. Check if last spike is before deadline.
+        5. Check that the maximum dendritic depolarization before stimulus onset is not too large.
 
     Args:
         t (array): Time array.
@@ -50,7 +54,6 @@ def trace_check(
     try:
         t_first_spike = t[crossing_up[0]]
         t_last_spike = t[crossing_up[-1]]
-
     except IndexError:
         out[name + '.check_no_spike_before_stimulus'] = True
         out[name + '.check_last_spike_before_deadline'] = True
@@ -58,27 +61,67 @@ def trace_check(
         out[name +
             '.check_no_spike_before_stimulus'] = t_first_spike >= stim_onset
         deadline = stim_duration * 1.05 + stim_onset
-        out[name +
-            '.check_last_spike_before_deadline'] = deadline >= t_last_spike
+        out[name + '.check_last_spike_before_deadline'] = \
+            deadline >= t_last_spike
+    
     if vmax is None:
         out[name + '.check_max_prestim_dendrite_depo'] = float('nan')
     else:
-        out[name +
-            '.check_max_prestim_dendrite_depo'] = trace_check_max_prestim_dendrite_depo(
-                t, vmax, stim_onset, max_prestim_dendrite_depo)
+        out[name + '.check_max_prestim_dendrite_depo'] = \
+            trace_check_max_prestim_dendrite_depo(
+                t, 
+                vmax, 
+                stim_onset, 
+                max_prestim_dendrite_depo
+            )
     return out
 
 
-def trace_check_max_prestim_dendrite_depo(t,
-                                          vmax,
-                                          stim_onset,
-                                          max_prestim_dendrite_depo=None):
-    '''added by arco to check whether anywhere in the dendrite there is a spike before stimulus onset'''
+def trace_check_max_prestim_dendrite_depo(
+    t,
+    vmax,
+    stim_onset,
+    max_prestim_dendrite_depo=None
+    ):
+    '''
+    Check whether anywhere in the dendritic, there is a spike before stimulus onset
+    
+    Args:
+        t (array): Time array.
+        vmax (array): The voltage maximum, taken over all dendrites, at each given timepoint.
+        stim_onset (float): Time of stimulus onset (ms).
+        max_prestim_dendrite_depo (float): 
+            Maximum dendritic depolarization before stimulus onset (mV).
+            If some dendrite section exceeds this value, it is considered a spike.
+            
+    Returns:
+        bool: Whether or not a spike is detected before stimulus onset.
+    '''
     select = t < stim_onset
     return max(vmax[select]) <= max_prestim_dendrite_depo
 
 
-def trace_check_err(t, v, stim_onset=None, stim_duration=None, punish=250):
+def trace_check_err(
+    t, 
+    v, 
+    stim_onset=None, 
+    stim_duration=None, 
+    punish=250
+    ):
+    """
+    Returns a basic trace error that penalizes traces with low variance.
+    Useful for an evolutionary algorithm, when the voltage trace is not spiking yet, and
+    spike-related error functions cannot be applied yet. This tells the algorithm to 
+    reward variance in a non-spiking voltage trace -- at least something is happening.
+    
+    Args:
+        t (array): Time array.
+        v (array): Voltage array.
+        stim_onset (float): Time of stimulus onset.
+        stim_duration (float): Duration of stimulus.
+        punish (float): Baseline penalty for low variance. 
+            Default: 250 mV^2.
+    """
     select = (t >= stim_onset - 100) & (t <= stim_onset + stim_duration / 2.)
     v = v[select]
     t = t[select]
@@ -88,12 +131,15 @@ def trace_check_err(t, v, stim_onset=None, stim_duration=None, punish=250):
 
 
 def find_crossing_old(v, thresh):
-    '''Original NEURON doc:
+    '''
+    Original NEURON doc:
     Function that giving a threshold returns a list of two vectors
     The first is the crossing up of that threshold
     The second is the crossing down of that threshold
     
-    Extended doku by Arco: returns [[],[]] if the number of crossing up vs crossing down is not equal.'''
+    Note:
+        Extended by Arco: returns [[],[]] if the number of crossing up vs crossing down is not equal.
+    '''
     assert thresh is not None
     avec = []
     bvec = []
@@ -119,13 +165,18 @@ def find_crossing_old(v, thresh):
 
 
 def find_crossing(v, thresh):
-    '''Original NEURON doc:
+    '''
+    Original NEURON doc:
     Function that giving a threshold returns a list of two vectors
     The first is the crossing up of that threshold
     The second is the crossing down of that threshold
     
-    Extended doku by Arco: returns [[],[]] if the number of crossing up vs crossing down is not equal.
-    This is the vectorized fast version of find_crossing_old. 
+    Args:
+        v (array): Voltage array.
+        thresh (float): Threshold voltage (mV).
+        
+    Returns:
+        list: List of index vectors. One for upcrossing, one for downcrossing.
     '''
     v = np.array(v) > thresh
     thresh = 0.5
@@ -140,8 +191,7 @@ def find_crossing(v, thresh):
 
 
 def voltage_base(t, v, stim_delay):
-    """
-    Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.
+    """Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.
 
     Args:
         t (numpy.ndarray): Array of time values.
@@ -164,20 +214,23 @@ def voltage_base(t, v, stim_delay):
         return v[ta:ts + 1].mean()
 
 
-def voltage_base2(voltage_traces, recSiteID, t0):
-    """
-    Returns the voltage at a given time point t0 for a specific recording site ID.
+def voltage_base2(
+    voltage_traces,
+    t0,
+    recSiteID='recSiteID',
+    ):
+    """Fetch the voltage at a given time point t0 for a specific recording site ID.
 
     Args:
-    - voltage_traces (dict): A dictionary containing voltage traces for different recording sites.
-    - recSiteID (int): The ID of the recording site for which the voltage is to be returned.
-    - t0 (float): The time point at which the voltage is to be returned.
+        voltage_traces (dict): A dictionary containing voltage traces for different recording sites.
+        recSiteID (int): The ID of the recording site for which the voltage is to be returned.
+        t0 (float): The time point at which the voltage is to be returned.
 
     Returns:
-    - The voltage at time point t0 for the specified recording site ID.
+        The voltage at time point t0 for the specified recording site ID.
     """
     t = voltage_traces['baseline']['tVec']
-    v = voltage_traces['baseline']['vList']['recSiteID']
+    v = voltage_traces['baseline']['vList'][recSiteID]
     i = np.argmin(np.abs(t - t0))
     return v[i]
 

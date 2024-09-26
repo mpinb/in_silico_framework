@@ -74,6 +74,14 @@ Tutorials
 Indices and tables
 ==================
 
+* :doc:`./file_formats`
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Bibliography
+============
+
+.. bibliography:: bibliography.bib
+   :style: unsrt
+   :cited:

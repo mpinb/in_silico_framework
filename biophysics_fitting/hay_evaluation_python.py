@@ -1,4 +1,7 @@
 '''
+A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+This module provides methods to run Hay's stimulus protocols, and evaluate the resulting voltage traces.
+
 Created on Nov 08, 2018
 
 @author: abast
@@ -14,23 +17,39 @@ objectives_step = [
     'DI2', 'ISIcv1', 'ISIcv2', 'ISIcv3', 'TTFS1', 'TTFS2', 'TTFS3', 'fAHPd1',
     'fAHPd2', 'fAHPd3', 'mf1', 'mf2', 'mf3', 'sAHPd1', 'sAHPd2', 'sAHPd3',
     'sAHPt1', 'sAHPt2', 'sAHPt3'
-]
+]  # objectives for the step current injection protocol
 
 objectives_BAC = [
     'BAC_APheight', 'BAC_ISI', 'BAC_ahpdepth', 'BAC_caSpike_height',
     'BAC_caSpike_width', 'BAC_spikecount', 'bAP_APheight', 'bAP_APwidth',
     'bAP_att2', 'bAP_att3', 'bAP_spikecount'
-]
+]  # objectives for the BAC and bAP protocols
 
 from .ephys import *
 
 
 def normalize(raw, mean, std):
+    """Normalize a raw value.
+    
+    Args:
+        raw: raw value
+        mean: mean value
+        std: standard deviation
+        
+    Returns
+        float: normalized value"""
     return np.mean(np.abs(raw - mean)) / std
 
 
 def nan_if_error(fun):
-
+    """Wrapper method that returns nan if an error occurs.
+    
+    Args:
+        fun: function to run
+        
+    Returns
+        function: wrapped function
+    """
     def helper(*args, **kwargs):
         try:
             return fun(*args, **kwargs)
@@ -46,8 +65,7 @@ class BAC:
     to assess the accuracy of some simulation based on the voltage trace
     it produced. These metrics were introduced by Idan Segev, and illustrated in
     "Ion channel distributions in cortical neurons are optimized for energy-efficient
-    active dendritic computations" by Arco Bast and Marcel Oberlaender.
-    TODO: link doi when published.
+    active dendritic computations" by Arco Bast and Marcel Oberlaender :cite:`Guest_Bast_Narayanan_Oberlaender`.
     """
 
     def __init__(
@@ -64,21 +82,22 @@ class BAC:
         punish_returning_to_rest_tolerance=2.,
         punish_max_prestim_dendrite_depo=-50,
         prefix='',
-        definitions={
-            'BAC_APheight': ('AP_height', 25.0, 5.0),
-            'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
-            'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
-            'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
-            'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
-            'BAC_spikecount': ('Spikecount', 3.0, 0.01)
-        }):
+        definitions=None
+        ):
 
         self.hot_zone_thresh = hot_zone_thresh
         self.soma_thresh = soma_thresh
         self.ca_max_after_nth_somatic_spike = ca_max_after_nth_somatic_spike
         self.stim_onset = stim_onset
         self.stim_duration = stim_duration
-        self.definitions = definitions
+        self.definitions = definitions if definitions is not None else {
+            'BAC_APheight': ('AP_height', 25.0, 5.0),
+            'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
+            'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
+            'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
+            'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
+            'BAC_spikecount': ('Spikecount', 3.0, 0.01)
+        }
         self.repolarization = repolarization
         self.punish = punish
         self.punish_last_spike_after_deadline = punish_last_spike_after_deadline
@@ -112,11 +131,12 @@ class BAC:
         # checking for problems in voltage trace
         t, v = voltage_traces['tVec'], voltage_traces['vList'][0]
         vmax = None  # voltage_traces['vMax']
-        err = trace_check_err(t,
-                              v,
-                              stim_onset=self.stim_onset,
-                              stim_duration=self.stim_duration,
-                              punish=self.punish)
+        err = trace_check_err(
+            t,
+            v,
+            stim_onset=self.stim_onset,
+            stim_duration=self.stim_duration,
+            punish=self.punish)
         err_flags = trace_check(
             t,
             v,

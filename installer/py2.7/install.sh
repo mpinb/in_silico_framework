@@ -8,7 +8,6 @@
 
 set -eE
 set -o pipefail
-trap 'echo "Error: Command on line $LINENO failed. Exiting with error code 1."; exit 1' ERR
 
 # Check if git is available
 if ! command -v git &> /dev/null; then
@@ -63,7 +62,7 @@ function _setArgs {
   done
 }
 
-_setArgs "$@";
+_setArgs "$@"
 if [ -z $CONDA_INSTALL_PATH  ]; then
         echo 'Missing -p or --path. Please provide an installation path for the environment.' >&2
         exit 1
@@ -80,7 +79,7 @@ CONDA_INSTALL_PATH=$(realpath "$CONDA_INSTALL_PATH")
 print_title "0/5. Preliminary checks"
 # 0.0 -- Create downloads folder (if it does not exist)
 if [ ! -d "$SCRIPT_DIR/downloads" ]; then
-    mkdir $SCRIPT_DIR/downloads;
+    mkdir $SCRIPT_DIR/downloads
 fi
 
 # 0.1 -- Check 1: Is Anaconda already downloaded?
@@ -128,13 +127,13 @@ print_title "1/6. Installing Anaconda"
 # 1.0 -- Downloading Anaconda (if necessary).
 if [[ "${download_conda_flag}" == "true" ]]; then
     echo "Downloading ${anaconda_installer}"
-    wget https://repo.anaconda.com/archive/${anaconda_installer} -N --quiet -P $SCRIPT_DIR/downloads;
+    wget --no-check-certificate https://repo.anaconda.com/archive/${anaconda_installer} -N --quiet -P $SCRIPT_DIR/downloads
 fi
 # 1.1 -- Installing Anaconda
 echo "Anaconda will be installed in: ${CONDA_INSTALL_PATH}"
-bash $SCRIPT_DIR/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH};
+bash $SCRIPT_DIR/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH}
 echo "Activating environment by running \"source ${CONDA_INSTALL_PATH}/bin/activate root\""
-source ${CONDA_INSTALL_PATH}/bin/activate root;
+source ${CONDA_INSTALL_PATH}/bin/activate root
 conda info
 
 # -------------------- 2. Downloading conda dependencies -------------------- #
@@ -181,7 +180,7 @@ for d in $(find $SCRIPT_DIR/../../mechanisms/*/*py2* -maxdepth 1 -type d)
 do
     if [ $(find $d -maxdepth 1 -name "*.mod" -print -quit) ]; then
         echo "compiling mechanisms in $d"
-        cd $d;
+        cd $d
         
         COMPILATION_DIR=$(find $d -mindepth 2 -type f -name "*.c" -printf '%h\n' | head -n 1 || true)
         if [ -d "$COMPILATION_DIR" ]; then
@@ -199,28 +198,22 @@ do
         fi
         
         # Verify if compilation was succesful
-        cd $d;
+        cd $d
         COMPILATION_DIR=$(find $d -type f -name "*.c" -printf '%h\n' | head -n 1 || true)
         if [ -d "$COMPILATION_DIR" ]; then
             LA_FILE=$(find "$COMPILATION_DIR" -name "*.la" -print -quit)
             if [ ! -f "$LA_FILE" ]; then
                 echo "$COMPILATION_DIR does not contain a .la file. Compilation was unsuccesful. Please inspect the output of nrnivmodl for further information."
-                exit 1;
+                exit 1
             fi 
         else
             echo "No directory found containing *.c files. Compilation was unsuccesful."
-            exit 1;
+            exit 1
         fi
 
     fi
 done
 
 # -------------------- Cleanup -------------------- #
-echo -e "\e[1;32m*****************************************************************\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*   Succesfully installed In-Silico-Framework for Python 2.7.   *\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*****************************************************************\e[0m"
-
 rm $SCRIPT_DIR/tempfile
 exit 0

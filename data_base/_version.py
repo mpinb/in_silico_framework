@@ -13,6 +13,8 @@ import os
 import re
 import subprocess
 import sys
+import functools
+import six
 
 
 def get_keywords():
@@ -54,16 +56,30 @@ HANDLERS = {}
 
 
 def register_vcs_handler(vcs, method):  # decorator
-    """Decorator to mark a method as the handler for a particular VCS."""
-
+    """Decorator to mark a method as the handler for a particular VCS.
+    
+    Tries to keep the metadata of the original method by using functools.wraps().
+    This breaks in Py2 if :paramref:method does not have a __module__ atrribute,
+    Which is the case if :paramref:method is e.g. a lambda function or string (see :py:meth:`git_get_keywords`).
+    
+    Example:
+    
+        >>> @register_vcs_handler("git", "get_keywords")
+        ... def git_get_keywords(versionfile_abs):
+        
+    """
     def decorate(f):
         """Store f in HANDLERS[vcs][method]."""
         if vcs not in HANDLERS:
             HANDLERS[vcs] = {}
         HANDLERS[vcs][method] = f
         return f
-
-    return decorate
+    if hasattr(method, "__module__"):
+        # Try and preserve the metadata of the original method
+        # Useful for e.g. during testing, or requestion __doc__
+        return functools.wraps(method)(decorate)
+    else:
+        return decorate
 
 
 def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False):

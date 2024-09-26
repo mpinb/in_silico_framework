@@ -44,7 +44,7 @@ class DataBase(object):
 def get_db_by_unique_id(unique_id):
     db_path = _get_db_register().registry[unique_id]
     db = DataBase(db_path, nocreate=True)
-    assert db.get_id() == unique_id
+    assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
 
 def is_model_data_base(path):

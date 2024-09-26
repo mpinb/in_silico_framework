@@ -8,7 +8,7 @@ Axes = plt.Axes
 from data_base.utils import skit
 
 def dask_to_pandas(fun):
-    '''decorator, that checks every passed parameter.
+    '''Decorator that checks every passed parameter.
     If subtype of dask.dataframe is found, it is converted
     to the corresponding pandas type.
     

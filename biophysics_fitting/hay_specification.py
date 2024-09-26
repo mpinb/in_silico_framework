@@ -1,9 +1,19 @@
+"""
+This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+"""
+import pandas as pd
+
 ##############################################
 # hay parameters: parameterboundaries ...
 ##############################################
 
 
 def get_hay_objective_names():
+    """Get the names of the objectives used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    
+    Returns:
+        list: The names of the objectives.
+    """
     return [
         'bAP_APwidth', 'bAP_APheight', 'bAP_spikecount', 'bAP_att2', 'bAP_att3',
         'BAC_ahpdepth', 'BAC_APheight', 'BAC_ISI', 'BAC_caSpike_height',
@@ -16,6 +26,10 @@ def get_hay_objective_names():
 
 
 def get_hay_param_names():
+    """Get the names of the parameters used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    
+    Returns:
+        list: The names of the parameters."""
     return [
         'NaTa_t.soma.gNaTa_tbar', 'Nap_Et2.soma.gNap_Et2bar',
         'K_Pst.soma.gK_Pstbar', 'K_Tst.soma.gK_Tstbar', 'SK_E2.soma.gSK_E2bar',
@@ -36,6 +50,10 @@ def get_hay_param_names():
 
 
 def get_hay_params_pdf():
+    """Get the parameter boundaries used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    
+    Returns:
+        pd.DataFrame: The parameter boundaries."""
     d = {
         'max': [
             4.0, 0.01, 1.0, 0.1, 0.1, 2.0, 0.001, 0.01, 0.05, 1000.0, 4.0, 0.01,
@@ -53,6 +71,72 @@ def get_hay_params_pdf():
 
 
 def get_hay_problem_description():
+    """Get the problem description used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    
+    The resulting pd.DataFrame contains the following columns:
+        
+        - objective: The name of the objective as an acronym, prefixed with the stimulus.
+        - feature: The full name of the objective.
+        - stim_name: The name of the stimulus.
+        - stim_type: The type of the stimulus (bAP, BAC or SquarePulse).
+        - mean: The empirically observed mean value of the feature.
+        - std: The empirically observed standard deviation of the feature.
+        
+    The names of the objectives are prefixed with the stimulus name. The suffix
+    acronyms mean the following:
+    
+    .. list-table:: 
+        :header-rows: 1
+
+        * - Objective
+          - Meaning
+        * - spikecount
+          - Amount of spikes
+        * - APheight
+          - AP height
+        * - APwidth
+          - AP width
+        * - att2
+          - Attenuation of the bAP between soma and recSite 1
+        * - att3
+          - Attenuation of the bAP between soma and recSite 2
+        * - ahpdepth
+          - After-hyperpolarization depth
+        * - ISI
+          - Interspike interval
+        * - caSpike_height
+          - height of the Ca2+-spike
+        * - caSpike_width
+          - Width of the Ca2+-spike
+        * - mf1
+          - Spike frequency
+        * - AI1
+          - Adaptation index
+        * - ISIcv1
+          - Interspike interval: coefficient of variation
+        * - DI1
+          - Initial burst interspike interval (time between first and second AP)
+        * - TTFS1
+          - First spike latency
+        * - APh1
+          - AP height
+        * - fAHPd1
+          - Fast AP depth
+        * - sAHPd1
+          - Slow after-hyperpolarization depth
+        * - sAHPt1
+          - Slow after-hyperpolarization time
+        * - APw1
+          - Ap half-width
+    
+    Returns:
+        pd.DataFrame: The problem description, containing the objectives, objective names, stimulus type, mean and std for each objective.
+    
+    Note:
+        These features are unique to Layer 5 Pyramidal Neurons in the Rat Barrel Cortex.
+        Other celltypes will have different values for these features, and may not even
+        have these features at all. See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     d = {
         'feature': {
             0: 'Spikecount',
@@ -345,6 +429,14 @@ def get_hay_problem_description():
 
 
 def get_feasible_model_params():
+    """Get the parameters of a feasible model.
+    
+    These are sensible parameters, but have no guarantee to provide a working model.
+    Useful for testing purposes, or as a quick seedpoint for the :py:mod:`biophysics_fitting.optimizer`.
+    
+    Returns:
+        pd.DataFrame: The parameters of a feasible model.
+    """
     pdf = get_hay_params_pdf()
     x = [
         1.971849, 0.000363, 0.008663, 0.099860, 0.073318, 0.359781, 0.000530,
@@ -358,6 +450,12 @@ def get_feasible_model_params():
 
 
 def get_feasible_model_objectives():
+    """Get the objectives of a feasible model.
+    
+    These are typical values of a working model. Useful for testing purposes.
+    
+    Returns:
+        pd.DataFrame: The objectives of a feasible model."""
     pdf = get_hay_problem_description()
     index = get_hay_objective_names()
     y = [

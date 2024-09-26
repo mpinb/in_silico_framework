@@ -1,10 +1,18 @@
 #!/usr/bin/python
+"""
+Create PSTHs from spike times.
 
+Attention:
+    This module is specific to the data gathering process and file formats used by the `Oberlaender lab in Bonn <https://mpinb.mpg.de/en/research-groups/groups/in-silico-brain-sciences/research-focus-ibs.html>`_.
+    If you are in the process of adapting this module to your own data, please focus on the output format of each method, rather than tyring to apply these blindly to your files.
+
+This module calculates the 
+"""
 import sys
 import numpy as np
 import os, os.path
 import glob
-from data_base import dbopen
+from data_base.dbopen import dbopen
 
 # anatomical PC + surround columns (3x3)
 # ranging from (potentially) 1-9, starting at row-1, arc-1,
@@ -40,21 +48,47 @@ index2WhiskerLUT = {1: 'B1', 2: 'B2', 3: 'B3',\
 
 
 def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
+    '''Loads cluster recording files and writes out the average ongoing activity for a given cell type.
+        
+    Args:
+        cellTypeFolder (str): 
+            The folder containing the .cluster recording files of spike times. 
+            Each file in this folder should contain the spike times of a single cell under a specific experimental condition (e.g. deflecting a single whisker).
+        outFileName (str): The name of the output file.
+        
+    Returns:
+        None. Writes the average ongoing activity to the output file.
+    
+    Example:
+        >>> create_average_celltype_PSTH_from_clusters(
+            'getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84', 
+            'L5_PSTH_UpState.param')
+        {
+            "getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84_B1": {
+                "distribution": "PSTH",
+                "intervals": [(6.0,7.0)],
+                "probabilities": [0.0216],
+            },
+            "getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84_B2": {
+                ...
+            },
+        }
     '''
-    loads cluster files from CDK recordings and automatically
-    determines avg ongoing activity and evoked PSTH for cell type
-    '''
-    UpDownStateCorrection = 0.4571
+    UpDownStateCorrection = 0.4571  # TODO: what is this magic number
     stimulusOnset = 145.0
     ongoingBegin = 20.0  # 100ms pre-stimulus
     ongoingDur = 100.0
     #    ongoingBegin = 0.0 # 100ms pre-stimulus
     PSTHEnd = 195.0  # 0-50ms here
     # load all spike time files for all whiskers of all recorded cells
-    print('Calculating average evoked PSTH for all cells in folder {:s}'.format(
-        cellTypeFolder))
+    
+    print('Calculating average evoked PSTH for all cells in folder {:s}'.format(cellTypeFolder))
+    
+    # Recursively get all .cluster1 files in a directory
     fnames = []
     scan_directory(cellTypeFolder, fnames, '.cluster1')
+    
+    # gather spike times per cell for each round of trials.
     cellSpikeTimes = {}
     for fname in fnames:
         whiskerSpikeTimes = load_cluster_trials(fname)
@@ -64,8 +98,9 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
         if cellName not in cellSpikeTimes:
             cellSpikeTimes[cellName] = {}
         cellSpikeTimes[cellName][trialName] = whiskerSpikeTimes
-    # calculate spontaneous activity (all spikes 100ms pre-stim
-    # across all cells, whiskers, trials)
+    
+    # calculate spontaneous activity, i.e. all spikes that are
+    # 100ms pre-stim across all cells, whiskers, trials
     rates = []
     for cell in cellSpikeTimes:
         ongoingSpikes = 0.0
@@ -85,20 +120,18 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
                 for t in cellSpikeTimes[cell][whisker][trial]:
                     if ongoingBegin <= t < ongoingBegin + ongoingDur:
                         ongoingSpikes += 1
-#                        if '85' in cell:
-#                            print t
+                        # if '85' in cell:
+                        #     print t
         spontRate = ongoingSpikes / ongoingTrials * 0.01  # per ms
         rates.append(spontRate)
         print('\tcell name: {:s}'.format(cell))
-        print('\tSpontaneous firing rate = {:.2f} Hz'.format(spontRate *
-                                                             1000.0))
-#        print '\tongoing spikes: %.0f' % (ongoingSpikes)
-#        print '\tongoing trials: %.0f' % (ongoingTrials)
+        print('\tSpontaneous firing rate = {:.2f} Hz'.format(spontRate *1000.0))
+        # print '\tongoing spikes: %.0f' % (ongoingSpikes)
+        # print '\tongoing trials: %.0f' % (ongoingTrials)
     avgRate = np.mean(rates)
-    print('Average spontaneous firing rate = {:.2f} Hz'.format(avgRate *
-                                                               1000.0))
-    # collect all spike times and repetitions
-    # 0-50ms post-stimulus PW-aligned
+    print('Average spontaneous firing rate = {:.2f} Hz'.format(avgRate *1000.0))
+    
+    # collect all spike times and repetitions 0-50ms post-stimulus PW-aligned
     trialsPerWhisker = dict([(i, 0) for i in range(1, 10)])
     spikesPerWhisker = dict([(i, []) for i in range(1, 10)])
     for cell in cellSpikeTimes:
@@ -142,6 +175,7 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
 
     whiskers = list(whiskerPSTH.keys())
     whiskers.sort()
+    
     with dbopen(outFileName, 'w') as PSTHFile:
         PSTHFile.write('{\n')
         for whisker in whiskers:
@@ -205,6 +239,38 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
 
 
 def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
+    """Reads in spike times and creates a PSTH for evoked activity for each whisker.
+    
+    Args:
+        spikeTimesName (str): Filepath of the .cluster file containing spike time recordings.
+        cellType (str): Cell type.
+        ongoingRate (float): The ongoing firing rate for this cell type.
+        outFileName (str): Filename to write to.
+    
+    Example:
+        >>> create_evoked_PSTH(
+            'getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84/C1_040929-129-ctx.cluster1', 
+            cellType='L5tt', 
+            ongoingrate=2.64, 
+            outFileName='PSTH.param')
+        >>> with open('PSTH.param', 'r) as f:
+        ...     content = f.readlines()
+        >>> print(content)
+        {
+            "L5tt_B1": {
+                "distribution": "PSTH",
+                "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
+                "probabilities": [-0.0000,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,0.0227,-0.0000,0.0227,0.0227,0.0227,-0.0000,-0.0000,-0.0000,-0.0000],
+            },
+            "L5tt_B2": {
+                "distribution": "PSTH",
+                "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
+                "probabilities": [0.1363,0.0227,0.0227,0.0227,0.0909,0.0909,0.1136,0.0227,0.0227,0.0227,0.0227,0.0227,0.0454,0.0454,0.0227,0.0682,0.0909,0.0454,0.0454,0.0227,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000,-0.0000],
+            },
+            "L5tt_B3": {...},
+            ...
+        }
+        """
     print('*************')
     print(
         'creating evoked PSTH from spike times in {:s}'.format(spikeTimesName))
@@ -264,6 +330,17 @@ def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
 
 
 def load_spike_times(spikeTimesName):
+    """Reads in .cluster files containing spike time recordings
+    
+    Args;
+        spikeTimesname (str): Name of the .cluster file.
+        
+    Returns:
+        tuple: Tuple of 2 dictioinaries.
+        The first contains the spike times per whisker.
+        The second contains the amount of trials per whisker.
+    
+    """
     whiskers = {0: 'B1', 1: 'B2', 2: 'B3',\
                 3: 'C1', 4: 'C2', 5: 'C3',\
                 6: 'D1', 7: 'D2', 8: 'D3'}
@@ -297,6 +374,38 @@ def load_spike_times(spikeTimesName):
 
 
 def load_cluster_trials(fname):
+    """Reads in a cluster file and returns a dictionary with the spike times for each trial.
+    
+    Args:
+        fname (str): The name of the .cluster file.
+        
+    Returns:
+        dict: A dictionary with the spike times for each trial.
+        
+    Example:
+        >>> load_cluster_trials('getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84/C1_040929-129-ctx.cluster1')
+        {
+            0: [87.80000000000001, 138.70000000000002, 151.6, 430.40000000000003, 471.1, 478.90000000000003], 
+            1: [], 
+            2: [], 
+            3: [], 
+            4: [129.9, 265.7, 269.7], 
+            5: [283.8, 290.1, 459.20000000000005], 
+            6: [13.100000000000001, 90.10000000000001, 95.0, 387.90000000000003], 
+            7: [], 
+            8: [], 
+            9: [], 
+            10: [], 
+            11: [], 
+            12: [320.6], 
+            13: [34.0], 
+            14: [], 
+            15: [110.80000000000001, 464.0], 
+            16: [317.5, 409.1, 483.90000000000003], 
+            17: [65.5], 
+            18: [43.6], 
+            19: []}
+    """
     data = np.loadtxt(fname, unpack=True)
     trialNumber = data[1]
     spikeTimes = data[3]
@@ -314,6 +423,16 @@ def load_cluster_trials(fname):
 
 
 def scan_directory(path, fnames, suffix):
+    """Recursively scans a directory for files with a specific suffix.
+    
+    Args:
+        path (str): The path of the directory to scan.
+        fnames (list): A list to store the file names.
+        suffix (str): The suffix of the files to look for.
+    
+    Returns:
+        None. Updates :paramref:`fnames` in place.
+    """
     for fname in glob.glob(os.path.join(path, '*')):
         if os.path.isdir(fname):
             scan_directory(fname, fnames, suffix)

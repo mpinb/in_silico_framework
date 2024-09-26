@@ -66,47 +66,47 @@ def _max_commas(path):
         max_commas = max(commas_linewise)
     return max_commas
 
-def _read_roberts_csv_uneven_length_helper(path, header, sim_trail_index = 'no_sim_trail_assigned', \
+def _read_roberts_csv_uneven_length_helper(path, header, sim_trial_index = 'no_sim_trial_assigned', \
                                            max_commas = None, set_index = True):
     '''general function for reading roberts csv files. 
-    Supports vectorized arguments for path and sim_trail_index. If you provide a list for
-    sim_trail_index and path, the result will be one big dataframe containing the data
+    Supports vectorized arguments for path and sim_trial_index. If you provide a list for
+    sim_trial_index and path, the result will be one big dataframe containing the data
     of all paths specified, normalized with respect to the overall maximum number of 
     delimiters.
     '''
     if isinstance(path, (list, tuple)):
         #checks for the vectorized case
-        assert isinstance(sim_trail_index, (list, tuple))
+        assert isinstance(sim_trial_index, (list, tuple))
         assert max_commas is not None
     else:
         path = [path]
-        sim_trail_index = [sim_trail_index]
+        sim_trial_index = [sim_trial_index]
 
     if max_commas is None:
         max_commas = max([_max_commas(p) for p in path])
 
-    def fun(path, sim_trail_index):
+    def fun(path, sim_trial_index):
         '''read single file'''
         df = read_csv_uneven_length(path, max_commas, header=header, skiprows=1)
-        df['sim_trail_index'] = sim_trail_index
+        df['sim_trial_index'] = sim_trial_index
         return df
 
-    p_sti_tuples = list(zip(path, sim_trail_index))
+    p_sti_tuples = list(zip(path, sim_trial_index))
 
     df = pd.concat([fun(p, sti) for p, sti in p_sti_tuples])
     if set_index:
-        df.set_index('sim_trail_index', inplace=True)
+        df.set_index('sim_trial_index', inplace=True)
     return df
 
 
 def read_pandas_synapse_activation_from_roberts_format(
         path,
-        sim_trail_index='no_sim_trail_assigned',
+        sim_trial_index='no_sim_trial_assigned',
         max_commas=None,
         set_index=True):
     '''reads synapse activation file from simulation and converts it to pandas table'''
     header = 'synapse_type,synapse_ID,soma_distance,section_ID,section_pt_ID,dendrite_label,'
-    return _read_roberts_csv_uneven_length_helper(path, header, sim_trail_index,
+    return _read_roberts_csv_uneven_length_helper(path, header, sim_trial_index,
                                                   max_commas, set_index)
 
 
@@ -124,11 +124,11 @@ def synapse_activation_df_to_roberts_synapse_activation(sa):
         synapses[values.synapse_type].append(tuple_)
     return synapses
 
-def read_pandas_cell_activation_from_roberts_format(path, sim_trail_index = 'no_sim_trail_assigned', \
+def read_pandas_cell_activation_from_roberts_format(path, sim_trial_index = 'no_sim_trial_assigned', \
                                                     max_commas = None, set_index = True):
     '''reads cell activation file from simulation and converts it to pandas table'''
     header = 'presynaptic_cell_type,cell_ID,'
-    return _read_roberts_csv_uneven_length_helper(path, header, sim_trail_index,
+    return _read_roberts_csv_uneven_length_helper(path, header, sim_trial_index,
                                                   max_commas, set_index)
 
 

@@ -1,15 +1,15 @@
 '''
-This module gives convenient access to all subpackages and submodules in ISF:
+This module gives API access to all subpackages and submodules in ISF::
 
-    - biophysics_fitting
-    - data_base
-    - dendrite_thickness
-    - NEURON mechanisms
-    - simrun
-    - single_cell_parser
-    - single_cell_input_mapper
-    - spike_analysis
-    - visualize
+    - :py:mod:`biophysics_fitting`
+    - :py:mod:`data_base`
+    - :py:mod:`dendrite_thickness`
+    - :py:mod:`NEURON mechanisms`
+    - :py:mod:`simrun`
+    - :py:mod:`single_cell_parser`
+    - :py:mod:`singlecell_input_mapper`
+    - :py:mod:`spike_analysis`
+    - :py:mod:`visualize`
 
 The recommended use is to import it in a jupyter notebook in the following manner::
 
@@ -131,16 +131,16 @@ load_initialized_cell_and_evokedNW_from_db = db_init_simrun_general.load_initial
 #for compatibility, deprecated!
 synapse_activation_binning_dask = db_init_synapse_activation_binning.synapse_activation_postprocess_dask
 db_init_crossing_over = db_init_roberts_simulations = db_init_simrun_general
-mdb_init_crossing_over = db_init_crossing_over
 
-#--------------- mdb
-from data_base.db_initializers import load_simrun_general as db_init_simrun_general
-from data_base.db_initializers import synapse_activation_binning as db_init_synapse_activation_binning
-load_param_files_from_mdb = db_init_simrun_general.load_param_files_from_db
-load_initialized_cell_and_evokedNW_from_mdb = db_init_simrun_general.load_initialized_cell_and_evokedNW_from_db
+#-------------- mdb: deprecated. Use db instead.
+mdb_init_crossing_over = db_init_crossing_over
+from data_base.model_data_base.mdb_initializers import load_simrun_general as mdb_init_simrun_general
+from data_base.model_data_base.mdb_initializers import synapse_activation_binning as mdb_init_synapse_activation_binning
+load_param_files_from_mdb = mdb_init_simrun_general.load_param_files_from_mdb
+load_initialized_cell_and_evokedNW_from_mdb = mdb_init_simrun_general.load_initialized_cell_and_evokedNW_from_mdb
 #for compatibility, deprecated!
 synapse_activation_binning_dask = db_init_synapse_activation_binning.synapse_activation_postprocess_dask
-db_init_crossing_over = db_init_roberts_simulations = db_init_simrun_general
+mdb_init_crossing_over = mdb_init_roberts_simulations = mdb_init_simrun_general
 
 from data_base.analyze import split_synapse_activation  #, color_cellTypeColorMap, excitatory, inhibitory
 from data_base.utils import silence_stdout
@@ -173,13 +173,16 @@ try:
         as simrun_generate_synapse_activations
     from simrun.run_new_simulations import run_new_simulations \
         as simrun_run_new_simulations
-    from simrun.sim_trail_to_cell_object import simtrail_to_cell_object \
-        as simrun_simtrail_to_cell_object
-    from simrun.sim_trail_to_cell_object import trail_to_cell_object \
-        as simrun_trail_to_cell_object
+    from simrun.sim_trial_to_cell_object import simtrial_to_cell_object \
+        as simrun_simtrial_to_cell_object
+    from simrun.sim_trial_to_cell_object import trial_to_cell_object \
+        as simrun_trial_to_cell_object
     from simrun.parameters_to_cell import parameters_to_cell as simrun_parameters_to_cell
     from simrun.rerun_db import rerun_db as simrun_rerun_db
+    # compatibility
     simrun_rerun_mdb = simrun_rerun_db
+    simrun_simtrail_to_cell_object = simrun_simtrial_to_cell_object
+    simrun_trial_to_cell_object = simrun_trial_to_cell_object
 
 except ImportError:
     logger.warning("Could not import full-compartmental-model simulator")
@@ -228,19 +231,13 @@ except ImportError:
 from functools import partial
 
 
-def svg2emf(filename, path_to_inkscape="/usr/bin/inkscape"):
-    '''converts svg to emf, which can be imported in word using inkscape. '''
-    command = ' '.join([
-        'env -i', path_to_inkscape, "--file", filename, "--export-emf",
-        filename[:-4] + ".emf"
-    ])
-    logger.info(os.system(command))
-
-
 from data_base._module_versions import version_cached
 
 
 def print_module_versions():
+    """
+    Print the version of each module in ISF.
+    """
     module_versions = ["{}: {}".format(x,version_cached.get_module_versions()[x])\
                        for x in sorted(version_cached.get_module_versions().keys())]
     logger.info("Loaded modules with __version__ attribute are:\n" + ', '.join(module_versions))
@@ -249,6 +246,10 @@ def print_module_versions():
 def get_client(client_port=38786, timeout=120):
     """
     Gets the distributed.client object if dask has been setup
+    
+    Args:
+        client_port (int): the port to use for the client
+        timeout (int|float): the timeout for the client (in seconds)
 
     Returns:
         Client: the client object

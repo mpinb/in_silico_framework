@@ -1,16 +1,51 @@
 #!/usr/bin/python
+"""
+Create a network parameter template file.
+
+
+"""
+
+
 
 import sys
 import single_cell_parser as scp
 from data_base.dbopen import dbopen
 
 
-def create_network_parameter(templateParamName,
-                             cellNumberFileName,
-                             synFileName,
-                             conFileName,
-                             outFileName,
-                             write_all_celltypes=False):
+def create_network_parameter(
+    templateParamName,
+    cellNumberFileName,
+    synFileName,
+    conFileName,
+    outFileName,
+    write_all_celltypes=False
+    ):
+    """Create a template network parameter file from a template parameter file and a cell number file.
+    
+    The parameter file defines the PSTHs for each cell type under some in-vivo condition. For the template, ongoing activity is set as a default value for each cell type.
+    The network parameter file converts the PSTHs to firing rates in fixed temporal bins, and adds the following information:
+    
+    - synapse types
+    - mechanisms
+    - dynamics
+    - release probabilities
+        
+    Args:
+        templateParamName (str): 
+            Name of the template param containing the PSTHs for each cell type. 
+            These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
+        cellNumberFileName (str):
+            Name of the file containing the amount of cells per column in the barrel cortex.
+        synFileName (str): 
+            Name of the `.syn` file, defining the synapse types.
+        conFileName (str): 
+            Name of the `.con` file, defining the connections.
+        outFileName (str): 
+            Name of the output file.
+        write_all_celltypes (bool): 
+            Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+    
+    """
     print('*************')
     print('creating network parameter file from template {:s}'.format(
         templateParamName))
@@ -44,6 +79,57 @@ def create_network_parameter(templateParamName,
 
 
 def load_cell_number_file(cellNumberFileName):
+    """Load the cell number file.
+    
+    The cell number file must have the following format::
+    
+        Anatomical_area Presynaptic_cell_type   n_cells
+        A1	cell_type_1	8
+        A1	cell_type_2	14
+        ...
+
+    Args:
+        cellNumberFileName (str): Path to the cell number file.
+        
+    Returns:
+        dict: Dictionary of the form {celltype: {column: nr_of_cells}}
+        
+    Example:
+        >>> load_cell_number_file(
+        ...    'getting_started/example_data/anatomical_constraints/'
+        ...    '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center_synapses_20150504-1611_10389/'
+        ...    '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center_synapses_20150504-1611_10389/'
+        ...    'NumberOfConnectedCells.csv'
+        ...    )
+        {
+            'L4py': {
+                'A1': 8, 
+                'A2': 1, 
+                'A3': 7, 
+                'A4': 3, 
+                'Alpha': 9, 
+                'B1': 72, 
+                'B2': 30, 
+                'B3': 97, 
+                'B4': 30, 
+                'Beta': 0, 
+                'C1': 59, 
+                'C2': 374, 
+                'C3': 88, 
+                'C4': 3, 
+                'D1': 22, 
+                'D2': 89, 
+                'D3': 59, 
+                'D4': 0, 
+                'Delta': 0, 
+                'E1': 0, 
+                'E2': 0, 
+                'E3': 0, 
+                'E4': 0, 
+                'Gamma': 16}, 
+                'L6cc': {...}, 
+                ...    
+    """
     cellTypeColumnNumbers = {}
     with dbopen(cellNumberFileName, 'r') as cellNumberFile:
         lineCnt = 0

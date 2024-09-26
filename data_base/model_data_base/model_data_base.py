@@ -164,7 +164,6 @@ class ModelDataBase(object):
         mdb['voltage_traces']
         mdb['synapse_activation']
         mdb['spike_times']
-        mdb['metadata']
         mdb['cell_activation']
         
         Further more, it is possible to assign new elements to the database

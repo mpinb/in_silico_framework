@@ -7,11 +7,31 @@ import numpy as np
 
 
 class ScalarField(object):
-    '''
-    implements 3D scalar field based on numpy array
-    used for e.g. sub-cellular synapse distributions
-    modeled after vtkImageData; i.e. regular mesh
-    with extent[6], spacing[3], and boundingBox[xMin, xMax, ... , zMax]
+    '''3D scalar fields based on numpy arrays
+    
+    A convenience class around numpy array for 3D scalar fields.
+    The class provides methods to access scalar values at arbitrary
+    3D coordinates, to get the bounding box of a voxel, and to get
+    the center of a voxel.
+
+    Attributes:
+        mesh (numpy.ndarray): 
+            3D numpy array representing the scalar field.
+        origin (tuple): 
+            3-tuple of floats representing the origin of the scalar field.
+        extent (tuple): 
+            6-tuple of integers representing the extent of the scalar field.
+            Note that the extent always starts at 0: 
+            Format: (0, xmax - xmin, 0, ymax - ymin, 0, zmax - zmin)
+        spacing (tuple): 
+            3-tuple of floats representing the spacing of the scalar field.
+            If all values are equal, the scalar field has cubic voxels.
+        boundingBox (tuple): 
+            6-tuple of floats representing the bounding box of the scalar field.
+            Format: (xmin, xmax, ymin, ymax, zmin, zmax)
+    
+    This class is used for e.g. assigning sub-cellular synapse distributions
+    modeled after vtkImageData, i.e. a regular mesh.
     '''
 
     mesh = None
@@ -22,7 +42,17 @@ class ScalarField(object):
 
     def __init__(self, mesh=None, origin=(), extent=(), spacing=(), bBox=()):
         '''
-        Constructor
+        Args:
+            mesh (numpy.ndarray):
+                3D numpy array representing the scalar field.
+            origin (tuple):
+                3-tuple of floats representing the origin of the scalar field.
+            extent (tuple):
+                6-tuple of integers representing the extent of the scalar field.
+            spacing (tuple):
+                3-tuple of floats representing the spacing of the scalar field.
+            bBox (tuple):
+                6-tuple of floats representing the bounding box of the scalar field.
         '''
         if mesh is not None:
             self.mesh = np.copy(mesh)
@@ -36,13 +66,15 @@ class ScalarField(object):
             self.boundingBox = tuple(bBox)
 
 
-#        if self.mesh is not None:
-#            self.resize_mesh()
+        # if self.mesh is not None:
+        #     self.resize_mesh()
 
     def resize_mesh(self):
-        '''
-        resize mesh to bounding box around non-zero voxels
-        also updates extent and boundingBox
+        '''Resizes mesh to non-zero scalar data.
+         
+        This method resizes the mesh such that the bounding box 
+        wraps around voxels that contain non-zero scalar data.
+        Also updates :py:attr:`extent` and :py:attr:`boundingBox`
         '''
         roi = np.nonzero(self.mesh)
         iMin = np.min(roi[0])
@@ -71,9 +103,16 @@ class ScalarField(object):
         del newMesh
 
     def get_scalar(self, xyz):
-        '''
-        does perform range checking; however, if outside
-        of bounding box, simply returns 0, so use with caution!
+        '''Fetch the scalar value of the voxel containing the point xyz.
+
+        Warning:
+            Returns 0 if :paramref:`xyz` is outside the bounding box.
+
+        Args:
+            xyz (tuple): The 3D coordinates of the point.
+
+        Returns:
+            float: The scalar value of the voxel containing the point, 0 if outside bounding box.
         '''
         x, y, z = xyz
         delta = 1.0e-6
@@ -95,6 +134,13 @@ class ScalarField(object):
         return self.mesh[i, j, k]
 
     def is_in_bounds(self, xyz):
+        """Check if point is within bounding box of mesh.
+        
+        Args:
+            xyz (tuple): The 3D coordinates of the point.
+            
+        Returns:
+            bool: True if point is within bounding box, False otherwise."""
         x, y, z = xyz
         delta = 1.0e-6
         if x < self.boundingBox[0] + delta:
@@ -112,8 +158,17 @@ class ScalarField(object):
         return True
 
     def get_mesh_coordinates(self, xyz):
-        '''
-        does NOT perform range checking; index may be invalid!
+        '''Fetch the mesh index of the voxel containing the point xyz.
+
+        Warning:
+            This method does not perform range checking.
+            If :paramref:`xyz` is outside the bounding box, the index will be out of bounds for the :py:attr:`mesh`.
+
+        Args:
+            xyz (tuple): The 3D coordinates of the point.
+
+        Returns:
+            tuple: The :py:attr:`mesh` index of the voxel containing the point. 
         '''
         x, y, z = xyz
         i = int((x - self.origin[0]) // self.spacing[0])
@@ -122,9 +177,13 @@ class ScalarField(object):
         return i, j, k
 
     def get_voxel_bounds(self, ijk):
-        '''
-        returns bounding box of voxel given by indices
-        i,j,k. Does NOT perform bounds checking!
+        '''Gets the bounding box of voxel given by indices i,j,k. 
+        
+        Args:   
+            ijk (tuple): tuple of 3 integers: the indices of voxel in mesh.
+        
+        Warning:
+            Does not perform bounds checking. The voxel bounds may be beyond the span of the mesh.
         '''
         i, j, k = ijk
         xMin = self.origin[0] + i * self.spacing[0]
@@ -136,9 +195,16 @@ class ScalarField(object):
         return xMin, xMax, yMin, yMax, zMin, zMax
 
     def get_voxel_center(self, ijk):
-        '''
-        returns 3D center of voxel given by indices
-        i,j,k. Does NOT perform bounds checking!
+        '''Fetch the center of the voxel given by indices i,j,k.
+
+        Warning:
+            Does not perform bounds checking. The voxel center may be outside the span of the mesh.
+        
+        Args:
+            ijk (tuple): tuple of 3 integers: the indices of voxel in mesh.
+        
+        Returns:
+            tuple: The 3D coordinates of the center of the voxel.
         '''
         i, j, k = ijk
         x = self.origin[0] + (i + 0.5) * self.spacing[0]

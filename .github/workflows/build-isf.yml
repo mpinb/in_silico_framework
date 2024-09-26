@@ -97,7 +97,7 @@ jobs:
         exit_status=${PIPESTATUS[0]}
         popd
         source $CONDA_TARGET_DIR/bin/activate
-        conda list
+        conda list 
         exit $exit_status
 
     - name: Save success state

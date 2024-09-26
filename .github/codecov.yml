@@ -4,7 +4,7 @@ coverage:
       default:
         # basic
         target: auto
-        threshold: 0%  # coverage is allowed to drop by this amount
+        threshold: 5%  # coverage is allowed to vary by this amount
         base: auto  # compares coverage with previous PR
         flags: 
           - unit

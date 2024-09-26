@@ -67,7 +67,7 @@ def sa_to_vt_bypassing_lock(db_loader_dict,
                             individual_weights=False,
                             select_celltypes=None):
     '''simulates the somatic summation model for given synapse activation. 
-    The synapse activation dataframe sa may contain several simtrails.
+    The synapse activation dataframe sa may contain several simtrials.
     The PSPs matching the anatomical location are automatically loaded. For this,
     it is necessary that the model data base has been initialized with 
     data_base.db_initializers.PSPs.init'''

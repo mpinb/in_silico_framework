@@ -11,6 +11,8 @@ import inspect
 import six
 from collections import defaultdict
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 def get_cellnumbers_from_confile(confile):
     con = scp.reader.read_functional_realization_map(confile)
@@ -101,11 +103,14 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def load_param_file_if_path_is_provided(pathOrParam):
     import single_cell_parser as scp
     if isinstance(pathOrParam, str):
+        logger.debug("Reading parameter file from database path: {}".format(pathOrParam))
         pathOrParam = resolve_db_path(pathOrParam)
         return scp.build_parameters(pathOrParam)
     elif isinstance(pathOrParam, dict):
+        logger.debug("Building NTParameterSet from dictionary")
         return scp.NTParameterSet(pathOrParam)
     else:
+        logger.debug("Returning parameter object as is (type: {})".format(type(pathOrParam)))
         return pathOrParam
 
 

@@ -13,7 +13,7 @@ def fresh_db(worker_id):
     Contains 8 keys with data:
     1. simresult_path
     2. filelist
-    3. sim_trail_index
+    3. sim_trial_index
     4. metadata
     5. voltage_traces
     6. synapse_activation
@@ -49,7 +49,7 @@ def fresh_mdb(worker_id):
     Contains 8 keys with data:
     1. simresult_path
     2. filelist
-    3. sim_trail_index
+    3. sim_trial_index
     4. metadata
     5. voltage_traces
     6. synapse_activation

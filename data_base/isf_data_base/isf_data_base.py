@@ -704,8 +704,17 @@ class ISFDataBase:
             self.set(key, ret, **kwargs)
             return ret    
     
-    def keys(self):
-        '''returns the keys of the database as string objects'''
+    def keys(self, recurse=False):
+        '''Get the keys of the database.
+        
+        If recurse is set to True, all keys of subdatabases will be returned as well.
+        
+        Args:
+            recurse (bool, optional): Whether to return all keys, including subdatabase keys. Defaults to False.
+            
+        Returns:
+            tuple: The keys of the database as tuple or nested tuple of strings.
+        '''
         all_keys = self._basedir.iterdir()
         keys_ =  tuple(
             e.name for e in all_keys 
@@ -716,7 +725,23 @@ class ISFDataBase:
                 "metadata.db.lock"] # dbv1 compatibility
             and ".deleting." not in e.name
             )
+        
+        if recurse == True:
+            return self._subkeys(keys=[(k,) for k in keys_])
         return keys_
+    
+    def _subkeys(self, keys=None):
+        """Returns all keys of a database, including their subdatabase keys."""
+        if keys is None:
+            keys = [(k,) for k in self.keys(recurse=False)]
+        subkeys = []
+        for key in keys:
+            if is_db(self._convert_key_to_path(key)):
+                sub_db_keys = [key + (e,) for e in self.get(key).keys()]
+                subkeys.extend(self._subkeys(sub_db_keys))
+            else:
+                subkeys.append(key)
+        return tuple(subkeys)
 
     def __setitem__(self, key, value):
         self.set(key, value)

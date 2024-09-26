@@ -1,5 +1,48 @@
 '''
-Cell parser and synapse mapper for single cell simulations with NeuroNet subcellular synapse distributions.
+Cell parser and synapse mapper for single cell simulations.
+
+This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
+from NEURON hoc files, and to map synapse locations to these cells.
+It is specialized to handle biophysical models of neurons, and to run simulations with these models.
+
+Attention:
+    This package has similar, but not identical functionality as 
+    :py:mod:`singlecell_input_mapper.singlecell_input_mapper`. 
+    This package is specialized to handle biophysical and electrical properties of neurons,
+    while :py:mod:`singlecell_input_mapper.singlecell_input_mapper` is specialized to handle 
+    morphological and connectivity attributes of single cells. 
+    
+    It is unlikely to confuse the two in practice; the classes and methods from 
+    :py:mod:`singlecell_input_mapper.singlecell_input_mapper` are used by the pipeline method
+    :py:mod:`singlecell_input_mapper.map_singlecell_inputs`, and rarely directly invoked or imported.
+    In addition, the pipeline of creating anatomical realizations is very distinct from the pipeline of 
+    creating biophysical models, and crossover between the two pipelines is unlikely. 
+    Nonetheless, beware of the following classes and methods that are duplicates only in name:
+    
+    .. list-table:: 
+        :header-rows: 1
+
+        * - :py:mod:`singlecell_input_mapper.singlecell_input_mapper`
+          - :py:mod:`single_cell_parser`
+        * - :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+          - :class:`~single_cell_parser.cell.Cell`
+        * - :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`
+          - :class:`~single_cell_parser.cell_parser.CellParser`
+        * - :class:`~singlecell_input_mapper.singlecell_input_mapper.reader.Edge`
+          - :class:`~single_cell_parser.reader.Edge`
+        * - :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+          - :class:`~single_cell_parser.synapse_mapper.SynapseMapper`
+        * - :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
+          - :class:`~single_cell_parser.scalar_field.ScalarField`
+        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+          - :py:class:`~single_cell_parser.network.NetworkMapper`
+        * - :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
+          - :py:meth:`~single_cell_parser.synapse.Synapse`
+        * - :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`
+          - :py:meth:`~single_cell_parser.reader.read_hoc_file`
+        * - :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field`
+          - :py:meth:`~single_cell_parser.reader.read_scalar_field`
+
 '''
 import logging
 
@@ -45,6 +88,15 @@ from data_base.dbopen import dbopen
 # commonly used functions required for running single neuron simulations
 #------------------------------------------------------------------------------
 def build_parameters(filename, fast_but_security_risk=True):
+    """Read in a parameter file and return a NTParameterSet object.
+    
+    Args:
+        filename (str): path to the parameter file
+        fast_but_security_risk (bool): If True, the parameter file is read in using eval. This is faster, but can be a security risk if the file is not trusted.
+        
+    Returns:
+        NTParameterSet: The parameter file as a NTParameterSet object.
+    """
     from data_base.dbopen import resolve_db_path
     filename = resolve_db_path(filename)
 
@@ -83,20 +135,59 @@ def create_cell(
         setUpBiophysics = True,
         silent = False
         ):
-    '''
-    Default way of creating NEURON cell models;
-    includes spatial discretization and inserts
-    biophysical mechanisms according to parameter file
+    '''Creating NEURON cell models from cell parameters.
+    
+    Adds spatial discretization and inserts biophysical mechanisms according to parameter file
 
     Args:
-        - parameters (dict | dict-like):
+        parameters (dict | dict-like):
             A nested dictionary structure. Should include at least the keys 'filename' and one key per structure present in the `.hoc` file (e.g. "AIS", "Soma" ...). 
             Optional keys include: 'cell_modify_functions', 'discretization'
-        - scaleFunc (bool): 
-            DEPRECATED,  should be specified in the parameters, as described in :meth:`single_cell_parser.cell_modify_funs`
-        - allPoints (bool): Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule). 
+        scaleFunc (bool): 
+            DEPRECATED,  should be specified in the parameters, as described in :meth:`~single_cell_parser.cell_modify_funs`
+        allPoints (bool): 
+            Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule). 
             Will be passed to ``full``in :meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
-        - setUpBiophysics (bool): whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
+        setUpBiophysics (bool): 
+            Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
+        
+    Example:
+    
+        >>> parameters
+        {
+            'info': {...},
+            'neuron': {
+                'filename': 'getting_started/example_data/anatomical_constraints/*.hoc',
+                'Soma': {
+                    'properties': {
+                        'Ra': 100.0,
+                        'cm': 1.0,
+                        'ions': {'ek': -85.0, 'ena': 50.0}
+                        },
+                    'mechanisms': {
+                        'global': {},
+                        'range': {
+                            'pas': {
+                                'spatial': 'uniform',
+                                'g': 3.26e-05,
+                                'e': -90},
+                            'Ca_LVAst': {
+                                'spatial': 'uniform',
+                                'gCa_LVAstbar': 0.00462},
+                            'Ca_HVA': {...},
+                            ...,}}},
+                'Dendrite': {...},
+                'ApicalDendrite': {...},
+                'AIS': {...},
+                'Myelin': {...},
+            'sim': {
+                'Vinit': -75.0,
+                'tStart': 0.0,
+                'tStop': 250.0,
+                'dt': 0.025,
+                'T': 34.0,
+                'recordingSites': ['getting_started/example_data/apical_proximal_distal_rec_sites.landmarkAscii']}
+        }
     '''
     if scaleFunc is not None:
         warnings.warn(

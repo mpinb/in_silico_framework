@@ -12,7 +12,7 @@ def _helper(x, threshold=0):
     '''reads out a voltage trace, so it can be fed into simple_spike_detection()
     and converts the result back to pd.Series, so the result can be concatenated 
     to a dask dataframe'''
-    t = x.index.values
+    t = x.index.values.astype(float)
     values = x.values
     spikes = simple_spike_detection(
         t,

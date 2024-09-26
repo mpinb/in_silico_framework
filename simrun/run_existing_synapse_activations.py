@@ -209,27 +209,25 @@ def run_existing_synapse_activations(cellParamName, evokedUpParamName, synapseAc
     seed is generated using the seed generator.
     
     Parameters:
-        cellParamName: str, Path to cell parameter file, containing information about:
-            - info: autor, date, name
-            - NMODL_mechanisms: path to NEURON mechanisms
-            - neuron: 
-                -path to hoc-file
-                - per subcellular compartment (Soma, AIS, ...):
-                    - electrical properties
-                    - mechanisms
-        evokedUpParamName: str, Path to network parameter file, containing information about:
-                                - autor, name, date
-                                - for each cell-type: 
-                                    synapse: release probability, path to distribution file, receptor and associated parameters
-                                    connectionFile: path to connection file
-                                    cell number
-                                    celltype: pointcell, spiketrain
-        synapseActivationGlob: List of paths to synapse activation files or globstring
-        nSweeps: number of synapse activations per process
-        nprocs: number of independent processes
-        tStop: time in ms at which the synaptic input should stop.
+        cellParamName (str): 
+            Path to a cell parameter file (e.g. getting_started/example_data/biophysical_constraints/*.param), 
+            containing information about the neuron morphology (link to a .hoc file) and biophysical properties.
+            See :py:meth:`~single_cell_parser.create_cell` for more information on the structure and contents of this filetype
+        evokedUpParamName (str): 
+            Path to network parameter file (e.g. getting_started/example_data/functional_constraints/network.param),
+            containing information on synapse and network parameters per cell type. See :py:meth:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
+            for more information on the structure and contents of this filetype
+        synapseActivationGlob (list): 
+            List of paths to synapse activation files or globstring
+        nSweeps (int): 
+            number of synapse activations per process
+        nprocs (int): 
+            number of independent processes
+        tStop (float): 
+            time in ms at which the synaptic input should stop.
         
-    Returns: Delayed object. Can be computed with arbitrary scheduler.'''
+    Returns: Delayed object. Can be computed with arbitrary scheduler.
+    '''
 
     if not auto_organize_results_folder:
         if not nprocs == 1:

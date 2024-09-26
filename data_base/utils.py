@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys, os, time, random, string, warnings, six, cloudpickle, \
     contextlib, io, dask, distributed, logging, tempfile, shutil, \
-         signal, logging, threading, hashlib, collections, inspect, json
+         signal, logging, threading, hashlib, collections, inspect, \
+             json, functools
 from six.moves.cPickle import PicklingError # this import format has potential issues (see six documentation) -rieke
 from pathlib import Path
 from copy import deepcopy
@@ -206,6 +207,7 @@ def cache(function):
             hash = hashlib.md5(cloudpickle.dumps([args, kwargs])).hexdigest()
         return hash
     
+    @functools.wraps(function)
     def wrapper(*args, **kwargs):
         key = get_key(*args, **kwargs)
         if key in memo:

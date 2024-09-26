@@ -8,7 +8,6 @@
 
 set -eE
 set -o pipefail
-trap 'echo "Error: Command on line $LINENO failed. Exiting with error code 1."; exit 1' ERR
 
 # Check if git is available
 if ! command -v git &> /dev/null; then
@@ -67,7 +66,7 @@ function _setArgs {
 }
 
 
-_setArgs "$@";
+_setArgs "$@"
 if [ -z $CONDA_INSTALL_PATH  ]; then
         echo 'Missing -p or --path. Please provide an installation path for the environment.' >&2
         exit 1
@@ -87,7 +86,7 @@ print_title "0/6. Preliminary checks"
 pushd .  # save this dir on stack
 # 0.0 -- Create downloads folder (if it does not exist)
 if [ ! -d "$SCRIPT_DIR/downloads" ]; then
-    mkdir $SCRIPT_DIR/downloads;
+    mkdir $SCRIPT_DIR/downloads
 fi
 
 # 0.1 -- Check 1: Is Anaconda already downloaded?
@@ -135,16 +134,16 @@ print_title "1/6. Installing Anaconda"
 # 1.0 -- Downloading Anaconda (if necessary).
 if [[ "${download_conda_flag}" == "true" ]]; then
     echo "Downloading ${anaconda_installer}"
-    wget https://repo.anaconda.com/archive/${anaconda_installer} -N --quiet -P $SCRIPT_DIR/downloads;
+    wget --no-check-certificate https://repo.anaconda.com/archive/${anaconda_installer} -N -P $SCRIPT_DIR/downloads
 fi
 # 1.1 -- Installing Anaconda
 echo "Anaconda will be installed in: ${CONDA_INSTALL_PATH}"
-bash ${SCRIPT_DIR}/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH};
+bash ${SCRIPT_DIR}/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH}
 # setup conda in current shell; avoid having to restart shell
-eval $($CONDA_INSTALL_PATH/bin/conda shell.bash hook);
-source ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh;
-echo "Activating environment by running \"conda activate ${CONDA_INSTALL_PATH}/\"";
-conda activate ${CONDA_INSTALL_PATH}/;
+eval $($CONDA_INSTALL_PATH/bin/conda shell.bash hook)
+source ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh
+echo "Activating environment by running \"conda activate ${CONDA_INSTALL_PATH}/\""
+conda activate ${CONDA_INSTALL_PATH}/
 conda info
 echo $(which python)
 echo $(python --version)
@@ -195,7 +194,7 @@ fi
 #                                                                     ^
 #error: command '/usr/bin/gcc' failed with exit code 1
 pip install cython==0.29.21  
-cd $PD_MSGPACK_HOME; python setup.py build_ext --inplace --force install
+cd $PD_MSGPACK_HOME && python setup.py build_ext --inplace --force install
 pip list | grep pandas
 pip install cython==0.29.32  # restore cython version
 
@@ -211,7 +210,7 @@ for d in $(find $SCRIPT_DIR/../../mechanisms/*/*py3* -maxdepth 1 -type d)
 do
     if [ $(find $d -maxdepth 1 -name "*.mod" -print -quit) ]; then
         echo "compiling mechanisms in $d"
-        cd $d;
+        cd $d
         
         COMPILATION_DIR=$(find $d -mindepth 2 -type f -name "*.c" -printf '%h\n' | head -n 1 || true)
         if [ -d "$COMPILATION_DIR" ]; then
@@ -234,21 +233,16 @@ do
             SO_FILE=$(find "$COMPILATION_DIR" -name "*.so" -print -quit)
             if [ ! -f "$SO_FILE" ]; then
                 echo "$COMPILATION_DIR does not contain a .so file. Compilation was unsuccesful. Please inspect the output of nrnivmodl for further information."
-                exist 1;
+                exit 1
             fi 
         else
             echo "No directory found containing *.c files. Compilation was unsuccesful."
-            exit 1;
+            exit 1
         fi
 
     fi
 done
 
 #-------------------- Cleanup -------------------- #
-echo -e "\e[1;32m*****************************************************************\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*   Succesfully installed In-Silico-Framework for Python 3.9.   *\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*****************************************************************\e[0m"
 rm $SCRIPT_DIR/tempfile
 exit 0

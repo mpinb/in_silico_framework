@@ -1,19 +1,13 @@
-import os
-# import cloudpickle
-import compatibility, json, yaml
-from .utils import read_object_meta
-from data_base.exceptions import DataBaseException
-from inspect import getmodule
-import importlib
-import pandas as pd
-import numpy as np
 '''Module implements a database concept, using two interfaces:
 (1) the dump function
 (2) the loader class
 
-To save an object, the dump method is called, e.g.
- > import myDumper
- > myDumper.dump(obj, savedir)
+To save an object, the dump method is called, e.g:
+
+..highlight:: python
+..code-block:: python
+    import myDumper
+    myDumper.dump(obj, savedir)
  
 This saves the object using a method specified in the respective dump method.
 Additionally, a file Loader.pickle is created. This contains a Loader object,
@@ -24,6 +18,17 @@ moving of the data, the path of the data is not saved within the Loader object
 and has to be passed to the get function. This is wrapped in the following load function,
 which is the intended way to reload arbitrary objects saved with a Dumper.
 '''
+
+import os
+# import cloudpickle
+import compatibility, json, yaml
+from .utils import read_object_meta
+from data_base.exceptions import DataBaseException
+from inspect import getmodule
+import importlib
+import pandas as pd
+import numpy as np
+
 
 def load(savedir, load_data=True, loader_kwargs={}):
     '''Standard interface to load data, that was saved to savedir

@@ -10,11 +10,24 @@ from data_base.dbopen import dbopen
 
 
 class Edge(object):
-    '''
-    Edge object contains list of points,
-    diameter at each point, label,
-    string hocLabel, parentID
-    Used during reading of hoc files
+    '''Convenience class around NEURON's section objects.
+
+    Used during reading of hoc files.
+    Attributes are set during :py:meth:`read_hoc_file`.
+
+    Warning:
+        :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader.Edge` class,
+        more specialized for biophysical properties of segments.
+        A notable difference is that this class is not used to read in axon segments,
+        while the :py:mod:`single_cell_parser` variant is.
+
+    Attributes:
+        label (str): The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
+        hocLabel (str): The label of the segment as defined in the hoc file.
+        edgePts (list): A list of points that define the segment.
+        diameterList (list): A list of diameters for each point in edgePts.
+        parentID (int): The ID of the parent segment.
+        parentConnect (float): The parent segment.
     '''
 
     def is_valid(self):
@@ -32,21 +45,35 @@ class Edge(object):
 
 
 def read_hoc_file(fname=''):
+    """Reads a hoc file and returns a list of Edge objects.
+    
+    This list of sections is parsed to a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` object
+    using :py:meth:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`.
+    
+    Warning:
+        The module :py:mod:`single_cell_parser` also conains a :py:meth:`~single_cell_parser.reader.read_hoc_file` 
+        method with subtle differences. A notable difference is that this method does not read in axon sections,
+        while the :py:mod:`single_cell_parser` variant does.
+
+    Args:
+        fname (str): The name of the file to be read.
+
+    Returns:
+        list: A list of :class:`Edge` objects.
+    """
     #    TODO: skip reading axonal sections! Only interested in dendrites/soma here
     if not fname.endswith('.hoc') and not fname.endswith('.HOC'):
         raise IOError('Input file is not a .hoc file!')
 
     with dbopen(fname, 'r') as neuronFile:
         print("Reading hoc file", fname)
-        #        cell = co.Cell()
-        #        simply store list of edges
-        #        cell is parsed in CellParser
+        # cell = co.Cell()
+        # simply store list of edges
+        # cell is parsed in CellParser
         cell = []
-        '''
-        set up all temporary data structures
-        that hold the cell morphology
-        before turning it into a Cell
-        '''
+        
+        # set up all temporary data structures that hold 
+        # the cell morphology before turning it into a Cell
         tmpEdgePtList = []
         tmpEdgePtCntList = []
         tmpDiamList = []
@@ -59,13 +86,14 @@ def read_hoc_file(fname=''):
 
         for line in neuronFile:
             if line:
-                '''skip comments'''
+                # 0. skip comments
                 if '/*' in line and '*/' in line:
                     continue
-#                    '''ignore daVinci registration'''
-#                    if '/* EOF */' in line:
-#                        break
-                '''read pts belonging to current segment'''
+                    # '''ignore daVinci registration'''
+                    # if '/* EOF */' in line:
+                    #     break
+                
+                # 1. read pts belonging to current segment
                 if readPts:
                     if 'Spine' in line:
                         continue
@@ -84,8 +112,8 @@ def read_hoc_file(fname=''):
                         readPts = 0
                         tmpEdgePtCntList.append(edgePtCnt)
                         edgePtCnt = 0
-                '''determine type of section'''
-                '''and insert section name'''
+                
+                # 2. determine type of section and insert section name
                 if 'soma' in line and 'create' in line:
                     tmpLabelList.append('Soma')
                     readPts = 1
@@ -113,18 +141,19 @@ def read_hoc_file(fname=''):
                     insertCnt += 1
                 if 'axon' in line and 'create' in line:
                     readPts = 0
-#                    tmpLabelList.append('Axon')
-#                    readPts = 1
-#                    edgePtCnt = 0
-#                    tmpLine = line.strip('{} \t\n\r')
-#                    segmentInsertOrder[tmpLine.split()[1]] = insertCnt
-#                    tmpHocLabelList.append(tmpLine.split()[1])
-#                    insertCnt += 1
-                '''determine connectivity'''
+                    # tmpLabelList.append('Axon')
+                    # readPts = 1
+                    # edgePtCnt = 0
+                    # tmpLine = line.strip('{} \t\n\r')
+                    # segmentInsertOrder[tmpLine.split()[1]] = insertCnt
+                    # tmpHocLabelList.append(tmpLine.split()[1])
+                    # insertCnt += 1
+                
+                # 3. determine connectivity
                 if 'connect' in line and readPts:
-                    #                        if 'soma' in line:
-                    #                            segmentParentMap[insertCnt-1] = 'soma'
-                    #                            continue
+                    # if 'soma' in line:
+                    #   segmentParentMap[insertCnt-1] = 'soma'
+                    #   continue
                     splitLine = line.split(',')
                     parentStr = splitLine[1].strip()
                     name_end = parentStr.find('(')
@@ -132,17 +161,17 @@ def read_hoc_file(fname=''):
                     segmentParentMap[insertCnt - 1] = parentStr[:name_end]
                     segmentConMap[insertCnt - 1] = float(parentStr[name_end +
                                                                    1:conEnd])
-
-
-#            end for loop
-        '''make sure EOF doesn't mess anything up'''
+            # end for loop
+        
+        # 4. make sure EOF doesn't mess anything up
         if len(tmpEdgePtCntList) == len(tmpLabelList) - 1 and edgePtCnt:
             tmpEdgePtCntList.append(edgePtCnt)
-        '''put everything into Cell'''
+        
+        # 5. put everything into Cell
         ptListIndex = 0
         if len(tmpEdgePtCntList) == len(tmpLabelList):
             for n in range(len(tmpEdgePtCntList)):
-                #                data belonging to this segment
+                # data belonging to this segment
                 thisSegmentID = tmpLabelList[n]
                 thisNrOfEdgePts = tmpEdgePtCntList[n]
                 thisSegmentPtList = tmpEdgePtList[ptListIndex:ptListIndex +
@@ -150,7 +179,7 @@ def read_hoc_file(fname=''):
                 thisSegmentDiamList = tmpDiamList[ptListIndex:ptListIndex +
                                                   thisNrOfEdgePts]
                 ptListIndex += thisNrOfEdgePts
-                #                create edge
+                # create edge
                 segment = Edge()
                 segment.label = thisSegmentID
                 segment.hocLabel = tmpHocLabelList[n]
@@ -219,7 +248,7 @@ def read_scalar_field(fname=''):
                     if '@1' in line and line[:2] == '@1':
                         dataSection = True
                         continue
-#                    main data loop
+                    # main data loop
                 else:
                     data = float(line.strip())
                     k = index // (dims[0] * dims[1])
@@ -229,12 +258,33 @@ def read_scalar_field(fname=''):
                     index += 1
 
 
-#                        print 'i,j,k = %s,%s,%s' % (i, j, k)
+                        # print 'i,j,k = %s,%s,%s' % (i, j, k)
 
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
 def read_connections_spreadsheet(fname):
+    """Reads a spreadsheet with connection probabilities between cell types
+
+    Args:
+        fname (str): The name of the file to be read
+    
+    Returns:
+        dict: A dictionary with the following structure: {EXC: {celltype: {norm: value, ...}, ...}, INH: {...}}
+        
+    Example:
+        
+        >>> connectionsSpreadsheet = read_connections_spreadsheet('connections.csv')
+        >>> connectionsSpreadsheet
+        {'EXC': {
+            celltype_1: {
+                'SOMA_LENGTH': 0.1, 'SOMA_AREA': 0.2, ...
+                },
+            celltype_2: {...},
+            },
+        'INH': {...}
+        }    
+    """
     connectionSpreadsheet = {}
     connectionSpreadsheet['EXC'] = {}
     connectionSpreadsheet['INH'] = {}
@@ -265,6 +315,14 @@ def read_connections_spreadsheet(fname):
 
 
 def read_celltype_numbers_spreadsheet(fname):
+    """Reads a spreadsheet with cell type numbers for each anatomical area.
+
+    Args:
+        fname (str): The name of the file to be read
+
+    Returns:
+        dict: A dictionary with the following structure: {anatomical_area: {cell_type: number_of_cells, ...}, ...}
+    """
     columns = None
     cellTypeNumbers = {}
 

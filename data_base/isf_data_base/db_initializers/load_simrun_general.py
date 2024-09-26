@@ -53,7 +53,7 @@ def make_filelist(directory, suffix='vm_all_traces.csv'):
 
 ############################################
 #Step two: generate dask dataframe containing the voltagetraces
-#This dataframe then contains the sim_trail_index
+#This dataframe then contains the sim_trial_index
 ############################################
 @dask.delayed
 def read_voltage_traces_from_files_pandas(prefix, fnames):
@@ -85,14 +85,15 @@ def read_voltage_traces_from_csv(prefix, fname):
         data = data.reshape(len(data), 1)
     t = data[0]
     data = data[1:]
+    # In case the simulation trial indices are not consecutive
+    INDICES = sorted([int(f.split('_')[1][3:]) for f in os.listdir(os.path.dirname(full_fname)) if 'synapses' in f])
     index = [
         str(os.path.join(os.path.dirname(fname),
-                         str(index).zfill(6))) for index in range(len(data))
-    ]  ##this will be the sim_trail_index
+                         str(index).zfill(6))) for index in INDICES]  ##this will be the sim_trail_indexndex = [
     #print index
     df = pd.DataFrame(data, columns=t)
-    df['sim_trail_index'] = index
-    df.set_index('sim_trail_index', inplace=True)
+    df['sim_trial_index'] = index
+    df.set_index('sim_trial_index', inplace=True)
     return df
 
 
@@ -110,11 +111,11 @@ def read_voltage_traces_from_npz(prefix, fname):
     index = [
         str(os.path.join(sim_trial_index_base,
                          str(index).zfill(6))) for index in range(len(vt))
-    ]  ##this will be the sim_trail_index
+    ]  ##this will be the sim_trial_index
 
     df = pd.DataFrame(vt, columns=t)
-    df['sim_trail_index'] = index
-    df.set_index('sim_trail_index', inplace=True)
+    df['sim_trial_index'] = index
+    df.set_index('sim_trial_index', inplace=True)
 
     return df
 
@@ -148,24 +149,24 @@ def read_voltage_traces_by_filenames(
 
 def get_voltage_traces_divisions_by_metadata(metadata, repartition=None):
     assert repartition is not None
-    divisions = metadata[metadata.trailnr == min(metadata.trailnr)]
-    divisions = list(divisions.sim_trail_index)
+    divisions = metadata[metadata.trialnr == min(metadata.trialnr)]
+    divisions = list(divisions.sim_trial_index)
     if len(divisions) > 10000 and repartition:
         divisions = [d[0] for d in chunkIt(divisions, 5000)]
-    return tuple(divisions + [metadata.iloc[-1].sim_trail_index])
+    return tuple(divisions + [metadata.iloc[-1].sim_trial_index])
 
 ############################################
-#Step three: read out the sim_trail_index from the soma voltage traces dask dataframe
+#Step three: read out the sim_trial_index from the soma voltage traces dask dataframe
 #this is expensive and might be optimized
 ###########################################
 #this is done directly in the _build function below
 
 
 ############################################
-#Step four: generate metadata dataframe out of sim_trail_indices
+#Step four: generate metadata dataframe out of sim_trial_indices
 ############################################
 @dask.delayed
-def create_metadata_parallelization_helper(sim_trail_index, simresult_path):
+def create_metadata_parallelization_helper(sim_trial_index, simresult_path):
 
     def determine_zfill_used_in_simulation(globstring):
         '''number of digits like 0001 or 000001 is not consitent accros 
@@ -178,74 +179,74 @@ def create_metadata_parallelization_helper(sim_trail_index, simresult_path):
 
     def voltage_trace_file_list(x):
         '''returns part of the metadata dataframe.'''
-        path = x.sim_trail_index
-        path, trailnr = os.path.split(path)
+        path = x.sim_trial_index
+        path, trialnr = os.path.split(path)
         voltage_traces_file_name = os.path.basename(path)
         voltage_traces_file_name = voltage_traces_file_name.split('_')[-1] \
                                         + '_vm_all_traces.csv'
 
         return pd.Series({'path': path, \
-                          'trailnr': trailnr, \
+                          'trialnr': trialnr, \
                           'voltage_traces_file_name': voltage_traces_file_name})
 
     def synaptic_file_list(x):
         '''returns part of the metadata dataframe.'''
-        testpath = os.path.join(simresult_path, os.path.dirname(list(sim_trail_index.sim_trail_index)[0]), \
+        testpath = os.path.join(simresult_path, os.path.dirname(list(sim_trial_index.sim_trial_index)[0]), \
                                 '*%s*.csv')
         zfill_synapses = determine_zfill_used_in_simulation(testpath %
                                                             'synapses')
         synapses_file_name = "simulation_run%s_synapses.csv" % str(
-            int(x.trailnr)).zfill(zfill_synapses)
+            int(x.trialnr)).zfill(zfill_synapses)
         return pd.Series({'synapses_file_name': synapses_file_name})
 
     def cells_file_list(x):
         '''returns part of the metadata dataframe.'''
-        testpath = os.path.join(simresult_path, os.path.dirname(list(sim_trail_index.sim_trail_index)[0]), \
+        testpath = os.path.join(simresult_path, os.path.dirname(list(sim_trial_index.sim_trial_index)[0]), \
                                 '*%s*.csv')
         zfill_cells = determine_zfill_used_in_simulation(testpath % 'cells')
         cells_file_name = "simulation_run%s_presynaptic_cells.csv" % str(
-            int(x.trailnr)).zfill(zfill_cells)
+            int(x.trialnr)).zfill(zfill_cells)
         return pd.Series({'cells_file_name': cells_file_name})
 
-    path_trailnr = sim_trail_index.apply(voltage_trace_file_list, axis=1)
-    sim_trail_index_complete = pd.concat((sim_trail_index, path_trailnr),
+    path_trialnr = sim_trial_index.apply(voltage_trace_file_list, axis=1)
+    sim_trial_index_complete = pd.concat((sim_trial_index, path_trialnr),
                                          axis=1)
     try:
-        synaptic_files = path_trailnr.apply(synaptic_file_list, axis=1)
-        sim_trail_index_complete = pd.concat(
-            (sim_trail_index_complete, synaptic_files), axis=1)
+        synaptic_files = path_trialnr.apply(synaptic_file_list, axis=1)
+        sim_trial_index_complete = pd.concat(
+            (sim_trial_index_complete, synaptic_files), axis=1)
     except IndexError:  # special case if synapse activation data is not in the simulation folder
         warnings.warn('could not find synapse activation files')
     try:
-        cell_files = path_trailnr.apply(cells_file_list, axis=1)
-        sim_trail_index_complete = pd.concat(
-            (sim_trail_index_complete, cell_files), axis=1)
+        cell_files = path_trialnr.apply(cells_file_list, axis=1)
+        sim_trial_index_complete = pd.concat(
+            (sim_trial_index_complete, cell_files), axis=1)
     except IndexError:
         warnings.warn('could not find cell activation files')
-    return sim_trail_index_complete
+    return sim_trial_index_complete
 
 
 def create_metadata(db):
-    '''Generates metadata out of a pd.Series containing the sim_trail_indices'''
+    '''Generates metadata out of a pd.Series containing the sim_trial_indices'''
     simresult_path = db['simresult_path']
-    sim_trail_index = list(db['sim_trail_index'])
-    sim_trail_index = pd.DataFrame(dict(sim_trail_index=list(sim_trail_index)))
-    sim_trail_index_dask = dask.dataframe.from_pandas(sim_trail_index,
+    sim_trial_index = list(db['sim_trial_index'])
+    sim_trial_index = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
+    sim_trial_index_dask = dask.dataframe.from_pandas(sim_trial_index,
                                                       npartitions=5000)
-    sim_trail_index_delayed = sim_trail_index_dask.to_delayed()
-    sim_trail_index_complete = [
+    sim_trial_index_delayed = sim_trial_index_dask.to_delayed()
+    sim_trial_index_complete = [
         create_metadata_parallelization_helper(d, simresult_path)
-        for d in sim_trail_index_delayed
+        for d in sim_trial_index_delayed
     ]
-    sim_trail_index_complete = dask.compute(sim_trail_index_complete)
+    sim_trial_index_complete = dask.compute(sim_trial_index_complete)
     return pd.concat(
-        sim_trail_index_complete[0]
-    )  # create_metadata_parallelization_helper(sim_trail_index, simresult_path)
+        sim_trial_index_complete[0]
+    )  # create_metadata_parallelization_helper(sim_trial_index, simresult_path)
 
 
 ###########################################
 # Step five: rewrite synapse and cell activation data to
-# a  format, that can be read by pandas and attach sim_trail_index to it
+# a  format, that can be read by pandas and attach sim_trial_index to it
 ###########################################
 from data_base.IO.roberts_formats import _max_commas
 
@@ -352,24 +353,24 @@ def get_file(self, suffix):
         return os.path.join(self, l[0])
 
 
-def generate_param_file_hashes(simresult_path, sim_trail_index):
+def generate_param_file_hashes(simresult_path, sim_trial_index):
     logging.info("find unique parameterfiles")
 
     def fun(x):
-        sim_trail_folder = os.path.dirname(x.sim_trail_index)
-        identifier = os.path.basename(sim_trail_folder).split('_')[-1]
-        return sim_trail_folder, identifier
+        sim_trial_folder = os.path.dirname(x.sim_trial_index)
+        identifier = os.path.basename(sim_trial_folder).split('_')[-1]
+        return sim_trial_folder, identifier
 
     def fun_network(x):
-        sim_trail_folder, identifier = fun(x)
-        #return os.path.join(simresult_path, sim_trail_folder, identifier + '_network_model.param')
-        return get_file(os.path.join(simresult_path, sim_trail_folder),
+        sim_trial_folder, identifier = fun(x)
+        #return os.path.join(simresult_path, sim_trial_folder, identifier + '_network_model.param')
+        return get_file(os.path.join(simresult_path, sim_trial_folder),
                         '_network_model.param')
 
     def fun_neuron(x):
-        sim_trail_folder, identifier = fun(x)
-        # return os.path.join(simresult_path, sim_trail_folder, identifier + '_neuron_model.param')
-        return get_file(os.path.join(simresult_path, sim_trail_folder),
+        sim_trial_folder, identifier = fun(x)
+        # return os.path.join(simresult_path, sim_trial_folder, identifier + '_neuron_model.param')
+        return get_file(os.path.join(simresult_path, sim_trial_folder),
                         '_neuron_model.param')
 
     @dask.delayed
@@ -384,7 +385,7 @@ def generate_param_file_hashes(simresult_path, sim_trail_index):
             lambda x: hashlib.md5(open(x, 'rb').read()).hexdigest())
         return df
 
-    df = pd.DataFrame(dict(sim_trail_index=list(sim_trail_index)))
+    df = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
     ddf = dd.from_pandas(df, npartitions=3000).to_delayed()
     delayeds = [_helper(df) for df in ddf]
     return delayeds  # dask.delayed(delayeds)
@@ -393,8 +394,7 @@ def generate_param_file_hashes(simresult_path, sim_trail_index):
 #####################################
 # step seven point one: replace paths in param files with relative dbpaths
 #####################################
-from ..dbopen import create_db_path
-
+from data_base.dbopen import create_db_path
 
 def create_db_path_print(path, replace_dict={}):
     ## replace_dict: todo
@@ -501,7 +501,7 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_parquet):
     db.set('voltage_traces', vt, dumper=to_cloudpickle)
     
     logging.info('generate index ...')
-    db['sim_trail_index'] = db['voltage_traces'].index.compute()
+    db['sim_trial_index'] = db['voltage_traces'].index.compute()
 
     logging.info('generate metadata ...')
     db.set('metadata', create_metadata(db), dumper=metadata_dumper)
@@ -518,7 +518,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
         max_commas = get_max_commas(paths) + 1
         #print max_commas
         logging.info('generate dataframe')
-        path_sti_tuples = list(zip(paths, list(db['sim_trail_index'])))
+        path_sti_tuples = list(zip(paths, list(db['sim_trial_index'])))
         if repartition and len(paths) > 10000:
             path_sti_tuples = chunkIt(path_sti_tuples, n_chunks)
             delayeds = [
@@ -561,9 +561,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
 def _get_rec_site_managers(db):
     param_files = glob.glob(os.path.join(db['parameterfiles_cell_folder'],
                                          '*'))
-    param_files = [p for p in param_files if not p.endswith('Loader.pickle') \
-        and not p.endswith("Loader.json") \
-            and not p.endswith('metadata.json')]
+    param_files = [p for p in param_files if not p.endswith(('Loader.pickle', 'Loader.json', 'metadata.json'))]
     logging.info(len(param_files))
     rec_sites = []
     for param_file in param_files:
@@ -614,12 +612,13 @@ def _build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None):
 
 def _build_param_files(db, client):
     logging.info('---moving parameter files---')
-    ds = generate_param_file_hashes(db['simresult_path'],
-                                    db['sim_trail_index'])
+    ds = generate_param_file_hashes(
+        db['simresult_path'],
+        db['sim_trial_index'])
     futures = client.compute(ds)
     result = client.gather(futures)
     df = pd.concat(result)
-    df.set_index('sim_trail_index', inplace=True)
+    df.set_index('sim_trial_index', inplace=True)
     if 'parameterfiles_cell_folder' in list(db.keys()):
         del db['parameterfiles_cell_folder']
     if 'parameterfiles_network_folder' in list(db.keys()):
@@ -636,7 +635,7 @@ def _build_param_files(db, client):
         'path_network', 'hash_network', network_param_to_dbpath)
     client.gather(client.compute(ds))
 
-    db['parameterfiles'] = df
+    db.set('parameterfiles', df, dumper=pandas_to_parquet)
 
 def init(
         db, 

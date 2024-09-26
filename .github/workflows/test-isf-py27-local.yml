@@ -1,28 +1,35 @@
-# Installation of in-silico-framework followed by CI tests.
-# Builds ISF locally on the MPINB-hosted runner and runs all tests
 name: Py 2.7
-# Controls when the workflow will run
-
 on:
-  push:
-    branches: [ 'master' , 'testing' , 'mdbv2_compatibility']
+  pull_request:  # run on the PR base to check if the changes work before merging.
+    # Note that this will also run upon any activity in the PR
+    branches: [ 'master', 'develop' , 'testing' , 'mdbv2_compatibility', 'installer']
+    types: [opened, synchronize]
     paths-ignore:
       - README.md  # don't run workflow when README changes
       - CHANGELOG.md # Should never be edited anyway
       - .gitignore
       - .github/**
-  pull_request_target:  # only run on PR if it is closed, not while open
+  pull_request_target:  # run on PR target after closing the PR
     types:
       - closed
+    paths-ignore:
+        - README.md  # don't run workflow when README changes
+        - CHANGELOG.md # Should never be edited anyway
+        - .gitignore
+        - .github/**
+  push:
+    branches:
+      - testing
+      - installer
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  
   build:
     uses: ./.github/workflows/build-isf.yml
     with:
       py_version: 2.7
+    # Py2 uses the defaults channel, which we currently dont have a license for
+    if: false
 
   test:
     name: Test Py2.7
@@ -34,6 +41,8 @@ jobs:
     defaults:
       run:
         shell: bash -l {0}
+    # Py2 uses the defaults channel, which we currently dont have a license for
+    if: false
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

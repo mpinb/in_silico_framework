@@ -1,4 +1,8 @@
 '''
+This module provides a complete setup for the Hay stimulus protocol on a Layer 5 Pyramidal Tract (L5PT) neuron.
+While :py:mod:`~biophysics_fitting.hay_evaluation` is a direct Python translation of :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`,
+this module has been adapted to allow for more flexibility and integration with ISF.
+
 Created on Nov 08, 2018
 
 @author: abast
@@ -32,6 +36,16 @@ from .combiner import Combiner
 
 
 def get_fixed_params_example():
+    """Get an example of cell-specific fixed params.
+    
+    Fixed parameters are parameters that are required for a stimulus protocol.
+    They are specific to a stimulus protocol, and to the morphology of the cell.
+    This method provides an example of such fixed parameters for a L5PT and the
+    bAP and BAC stimuli.
+        
+    Returns:
+        dict: A dictionary with the fixed parameters.
+    """
     fixed_params = {
         'hot_zone.max_':
             614,
@@ -52,17 +66,54 @@ def get_fixed_params_example():
 
 
 def record_bAP(cell, recSite1=None, recSite2=None):
+    """Extract the voltage traces from the soma and two apical dendritic locations.
+    
+    These can be used to quantify the voltage trace of a backpropagating AP (bAP)
+    stimulus in a pyramidal neuron. The two apical recording sites are used
+    to calculate e.g. backpropagation attenuation.
+    
+    Uses the convenience methods :py:meth:`~biophysics_fitting.utils.vmSoma` and :py:meth:`~biophysics_fitting.utils.vmApical`.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        recSite1 (float): The distance (um) from the soma to the first recording site.
+        recSite2 (float): The distance (um) from the soma to the second recording site.
+        
+    Returns:
+        dict: A dictionary with the voltage traces.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     assert recSite1 is not None
     assert recSite2 is not None
     return {
         'tVec':
             tVec(cell),
-        'vList': (vmSoma(cell), vmApical(cell,
-                                         recSite1), vmApical(cell, recSite2))
+        'vList': (
+            vmSoma(cell), 
+            vmApical(cell, recSite1), 
+            vmApical(cell, recSite2))
     }
 
 
 def record_BAC(cell, recSite=None):
+    """Extract the voltage traces from the soma and an apical dendritic location.
+    
+    These can be used to quantify the voltage trace of a bAP-Activated Ca2+ (BAC) stimulus.
+    
+    Uses the convenience methods :py:meth:`~biophysics_fitting.utils.vmSoma` and :py:meth:`~biophysics_fitting.utils.vmApical`.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        recSite (float): The distance (um) from the soma to the apical recording site.
+        
+    Returns:
+        dict: A dictionary with the voltage traces.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     return {
         'tVec': tVec(cell),
         'vList': (vmSoma(cell), vmApical(cell, recSite))
@@ -70,10 +121,55 @@ def record_BAC(cell, recSite=None):
 
 
 def record_Step(cell):
+    """Extract the voltage trace from the soma.
+    
+    These can be used to quantify the response of the soma to step currents.
+    
+    Uses the convenience method :py:meth:`~biophysics_fitting.utils.vmSoma`.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        
+    Returns:
+        dict: A dictionary with the voltage traces.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     return {'tVec': tVec(cell), 'vList': [vmSoma(cell)]}
 
 
 def get_Simulator(fixed_params, step=False):
+    """Set up a Simulator object for the Hay stimulus protocol on a Layer 5 Pyramidal Tract (L5PT) neuron.
+    
+    This method sets up a simulator object for the Hay stimulus protocol.
+    It sets: 
+    
+    - The cell-specific :paramref:`fixed_params`
+    - The cell morphology (see :py:meth:`~biophysics_fitting.L5tt_parameter_setup.set_morphology`)
+    - Electrophysiolgoical parameter naming conventions (see :py:meth:`~biophysics_fitting.L5tt_parameter_setup.set_ephys`)
+    - Cell parameter naming convention (see :py:meth:`~biophysics_fitting.L5tt_parameter_setup.set_param` and :py:meth:`~biophysics_fitting.L5tt_parameter_setup.set_many_param`)
+    - The location of the hot zone, where there is a high density of HVA and LVA CA channels (see :py:meth:`~biophysics_fitting.L5tt_parameter_setup.set_hot_zone`)
+    - The cell generator method (see :py:meth:`~single_cell_parser.create_cell`)
+    - The stimulus setup functions for the bAP and BAC stimuli (see :py:meth:`~biophysics_fitting.setup_stim.setup_bAP` and :py:meth:`~biophysics_fitting.setup_stim.setup_BAC`)
+    - (optional) The stimulus setup functions for the step currents (see :py:meth:`~biophysics_fitting.setup_stim.setup_StepOne`, :py:meth:`~biophysics_fitting.setup_stim.setup_StepTwo`, and :py:meth:`~biophysics_fitting.setup_stim.setup_StepThree`)
+    - The stimulus run functions for the bAP and BAC stimuli (see :py:meth:`~biophysics_fitting.simulator.run_fun`)
+    - (optional) The stimulus run functions for the step currents (see :py:meth:`~biophysics_fitting.simulator.run_fun`)
+    - The stimulus response measurement functions for the bAP and BAC stimuli (see :py:meth:`~record_bAP` and :py:meth:`~record_BAC`)
+    - (optional) The stimulus response measurement functions for the step currents (see :py:meth:`~record_Step`)
+        
+    Args:
+        fixed_params (dict): The fixed parameters for the cell and stimulus protocol.
+        step (bool): Whether to include the step currents in the setup.
+        
+    Returns:
+        :class:`~biophysics_fitting.simulator.Simulator`: The simulator object, set up for the Hay stimulus protocol for a specific L5PT.
+        
+    
+    Note:
+        Other morphologies will require different fixed parameters, stimuli, and measurement functions, and thus a different setup for a Simulator.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     s = Simulator()
     s.setup.cell_param_generator = get_L5tt_template
     s.setup.params_modify_funs.append(
@@ -164,6 +260,18 @@ def get_Simulator(fixed_params, step=False):
 
 
 def interpolate_vt(voltage_trace_):
+    """Interpolate a voltage trace so that is has fixed time interval.
+    
+    The NEURON simulator allows for a variable time step, which can make
+    comparing voltage traces difficult.
+    This function interpolates the voltage traces so that they have a fixed time interval of 0.025 ms.
+    
+    Args:
+        voltage_trace_ (dict): A dictionary of voltage traces. Must contain the keys `tVec` and `vList`.
+        
+    Returns:
+        dict: A dictionary of voltage traces with a fixed time interval.
+    """
     out = {}
     for k in voltage_trace_:
         t = voltage_trace_[k]['tVec']
@@ -181,6 +289,22 @@ def interpolate_vt(voltage_trace_):
 
 
 def get_Evaluator(step=False, interpolate_voltage_trace=False):
+    """Set up an Evaluator object for the Hay stimulus protocol on L5PTs.
+    
+    This method sets up an evaluator object for the Hay stimulus protocol.
+    It sets::
+    
+        - The interpolation of the voltage traces (see :py:meth:`interpolate_vt`)
+        - The evaluation functions for the bAP and BAC stimuli (see :py:meth:`hay_evaluate_BAC` and :py:meth:`hay_evaluate_bAP`)
+        - (optional) The evaluation functions for the step currents (see :py:meth:`hay_evaluate_StepOne`, :py:meth:`hay_evaluate_StepTwo`, and :py:meth:`hay_evaluate_StepThree`)
+        
+    Args:
+        step (bool): Whether to include the step currents in the setup.
+        interpolate_voltage_trace (bool): Whether to interpolate the voltage traces.
+        
+    Returns:
+        :class:`~biophysics_fitting.evaluator.Evaluator`: The evaluator object, set up for the Hay stimulus protocol.
+    """
     e = Evaluator()
 
     if interpolate_voltage_trace:
@@ -215,6 +339,17 @@ def get_Evaluator(step=False, interpolate_voltage_trace=False):
 
 
 def get_Combiner(step=False, include_DI3=False):
+    """Set up a Combiner for the Hay stimulus protocol on L5PTs.
+    
+    It aggregates objectives in categories, depending on the stimulus and the measurement.
+    
+    Args:
+        step (bool): Whether to include the step currents in the setup.
+        include_DI3 (bool): Whether to include the DI3 measurement in the setup.
+        
+    Returns:
+        :class:`~biophysics_fitting.combiner.Combiner`: The combiner object, set up for the Hay stimulus protocol.
+    """
     #up to 20220325, DI3 has not been included and was not in the fit_features file.
     c = Combiner()
     c.setup.append('bAP_somatic_spike',
@@ -248,6 +383,15 @@ def get_Combiner(step=False, include_DI3=False):
 
 
 def get_hay_objective_names():
+    """The objective names for the Hay stimulus protocol.
+    
+    Returns:
+        list: A list of the objective names.
+        
+    Note:
+        The objectives are specific to the L5PT and the Hay stimulus protocol.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     return [
         'bAP_APwidth', 'bAP_APheight', 'bAP_spikecount', 'bAP_att2', 'bAP_att3',
         'BAC_ahpdepth', 'BAC_APheight', 'BAC_ISI', 'BAC_caSpike_height',
@@ -260,6 +404,17 @@ def get_hay_objective_names():
 
 
 def get_hay_param_names():
+    """The parameter names for the Hay stimulus protocol.
+    
+    Contains all the biophysical parameters for a L5PT as considered in the Hay stimulus protocol.
+    
+    Returns:
+        list: A list of the parameter names.
+        
+    Note:
+        The parameters are specific to the L5PT and the Hay stimulus protocol.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     return [
         'NaTa_t.soma.gNaTa_tbar', 'Nap_Et2.soma.gNap_Et2bar',
         'K_Pst.soma.gK_Pstbar', 'K_Tst.soma.gK_Tstbar', 'SK_E2.soma.gSK_E2bar',
@@ -280,6 +435,18 @@ def get_hay_param_names():
 
 
 def get_hay_params_pdf():
+    """Get the ranges for the biophysical parameters of an L5PT.
+    
+    conductance parameters (gbar or gpas) are in units of [S/cm^2]
+    tau parameters are in units of [ms]
+    gamma parameters are a fraction and unitless
+    
+    Returns:
+        pd.DataFrame: A DataFrame with the parameter names as index and the ranges as columns.
+        
+    Note:
+        The parameters are specific to the L5PT and the Hay stimulus protocol.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`."""
     d = {
         'max': [
             4.0, 0.01, 1.0, 0.1, 0.1, 2.0, 0.001, 0.01, 0.05, 1000.0, 4.0, 0.01,
@@ -297,6 +464,20 @@ def get_hay_params_pdf():
 
 
 def get_hay_problem_description():
+    """Get the problem description for the Hay stimulus protocol.
+    
+    This method returns a dataframe that contains the objective names,
+    the average value per objective, and the std per objective.
+    Each objective is associated with a specific input stimulus, given in the 'stim_name' column.
+    This distribution of parametrized responses can be used to quantify a cell's response to a specific stimulus.
+    
+    Returns:
+        pd.DataFrame: A DataFrame with the problem description.
+        
+    Note:
+        The objectives are specific to the L5PT and the Hay stimulus protocol.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    """
     d = {
         'feature': {
             0: 'Spikecount',
@@ -589,6 +770,26 @@ def get_hay_problem_description():
 
 
 def get_feasible_model_params():
+    """Get a set of feasible model parameters.
+    
+    This datframe contains biophysical parameters that are not only within range,
+    but also likely values to find.
+    They are however not guaranteed to yield realistic responses to a stimulus, when
+    applied to a L5PT. 
+    In general, the response of a cell with these biophysical parameters
+    heavily depends on the morphology as well.
+    
+    Conductance parameters (gbar or gpas) are in units of [S/cm^2]
+    Tau parameters are time constants in units of [ms]
+    Gamma parameters are a fraction and unitless
+    
+    Returns:
+        pd.DataFrame: A DataFrame with the parameter names as index, feasible values as column 'x', and the min and max.
+        
+    Note:
+        The parameters are specific to the L5PT and the Hay stimulus protocol.
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    """
     pdf = get_hay_params_pdf()
     x = [
         1.971849, 0.000363, 0.008663, 0.099860, 0.073318, 0.359781, 0.000530,
@@ -602,6 +803,10 @@ def get_feasible_model_params():
 
 
 def get_feasible_model_objectives():
+    """Get a set of feasible values for the objectives of a biophysical model.
+    
+    Returns:
+        pd.DataFrame: An example DataFrame with the objective names as index, feasible values as column 'y'."""
     pdf = get_hay_problem_description()
     index = get_hay_objective_names()
     y = [

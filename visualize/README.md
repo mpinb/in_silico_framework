@@ -16,7 +16,7 @@ In either case, when using Jupyterlab 2.x, one must install nodejs `source_3; co
 from Interface import CellMorphologyVisualizer
 # make a visualisation to Cell object
 t_end = 100
-cell = Interface.simrun_simtrail_to_cell_object(db,sim, tStop=t_end)
+cell = Interface.simrun_simtrial_to_cell_object(db,sim, tStop=t_end)
 
 # create a single cell visualizer object from the cell
 cv = visualize.CellMorphologyVisualizer(cell)

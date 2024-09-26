@@ -32,7 +32,7 @@ def convolve_matrix_with_kernel(X, kernel):
 #    return np.dot(X, kernel)
 
 # def synaptic_input_to_lda_values(X, t, start = 0, n = 1000):
-#     #calculate lda values of selected trails (start, n) at selected timepoint (t)
+#     #calculate lda values of selected trials (start, n) at selected timepoint (t)
 #     EXC = np.c_[np.zeros((n,l)), X[:,:300]]
 #     INH = np.c_[np.zeros((n,l)), X[:,300:]]
 #     EXC = EXC[:,180+t+l:265+t+l]
@@ -79,7 +79,7 @@ def calculateFractionAbleToSpike(rawPSTH, refractory_period):
     n_deactivated = [0]
     for e in rawPSTH:
         diff = able_to_spike[
-            -1] * e  # amount of trails that would spike right now
+            -1] * e  # amount of trials that would spike right now
         if len(n_deactivated) >= refractory_period:
             activated = n_deactivated[-refractory_period]
         else:
@@ -90,14 +90,16 @@ def calculateFractionAbleToSpike(rawPSTH, refractory_period):
 
 
 def correct_PSTH_by_refractory_period(PSTH, refractory_period):
-    '''return_ = 'only_PSTH' or  'PSTH_and_abletospike' '''
+    '''
+    return_ = 'only_PSTH' or  'PSTH_and_abletospike' 
+    '''
     if not refractory_period:
         return np.ones(len(PSTH))
     able_to_spike = [1]
     n_deactivated = [0]
     for e in PSTH:
-        diff = able_to_spike[
-            -1] * e  # amount of trails that would spike right now
+        # amount of trails that would spike right now
+        diff = able_to_spike[-1] * e  
         if len(n_deactivated) >= refractory_period:
             activated = n_deactivated[-refractory_period]
         else:
@@ -146,7 +148,7 @@ def get_reduced_model(kernel_dict,
     nonlinearity_LUT: dictionary, that contains values of nonlinearity. Keys are refractory periods. E.g.
         you could have a dict like this: {0: pd.Series([0,0,.1,.2,.4,.3,.1,0,0]), 10: pd.Series([[0,0,.1,.2,.4,.8,1,1,1]])}.
     
-    combine_fun: function to combine convolutions of a single trail together. Default:  sum
+    combine_fun: function to combine convolutions of a single trial together. Default:  sum
     
     LUT_resolution: reolution of the nonlinearity_LUT. E.g. in case LUT_resolution == 1, the pd.Series objects 
         in the nonlinearity_LUT are expect to have keys for [...,0,1,2,3, ...], in case of LUT_resolution == 2,

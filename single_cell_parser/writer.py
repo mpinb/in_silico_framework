@@ -226,12 +226,13 @@ def write_functional_realization_map(fname=None,
             outputFile.write(line)
 
 
-def write_synapse_activation_file(fname=None,
-                                  cell=None,
-                                  synTypes=None,
-                                  synDistances=None,
-                                  synTimes=None,
-                                  activeSyns=None):
+def write_synapse_activation_file(
+    fname=None,
+    cell=None,
+    synTypes=None,
+    synDistances=None,
+    synTimes=None,
+    activeSyns=None):
     if fname is None or cell is None or synTypes is None or synDistances is None or synTimes is None or activeSyns is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)
@@ -272,6 +273,23 @@ def write_synapse_activation_file(fname=None,
 
 
 def write_synapse_weight_file(fname=None, cell=None):
+    """Write out a synapse weight file.
+    
+    This file contains the following information:
+    
+    - synapse type
+    - synapse ID
+    - section ID
+    - section pt ID
+    - receptor type
+    - synapse weights
+    
+    Args:
+        fname (str): The name of the file to write to.
+        cell (:class:`single_cell_parser.cell.Cell`): The cell object, containing synapses.
+    
+    Returns:
+        None. Writes out the synapse weight file to :paramref:`fname`."""
     if fname is None or cell is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
         raise RuntimeError(err_str)

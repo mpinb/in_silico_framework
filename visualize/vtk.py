@@ -1,4 +1,4 @@
-'''This module contains functions to save simulation data in vtk compatible formats'''
+'''Save simulation data in vtk compatible formats'''
 
 import os
 import numpy as np
@@ -6,7 +6,10 @@ import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 
-def convert_amira_surf_to_vtk(surf_file, outname='surface', outdir='.'):
+def convert_amira_surf_to_vtk(
+    surf_file, 
+    outname='surface', 
+    outdir='.'):
     """Given the path to an amira .surf file, this method converts it to a .vtk surface file.
 
     Args:
@@ -55,11 +58,12 @@ def convert_amira_surf_to_vtk(surf_file, outname='surface', outdir='.'):
                 of.write('\n')
 
 
-def write_vtk_pointcloud_file(out_name=None,
-                              out_dir='.',
-                              points=None,
-                              scalar_data=None,
-                              scalar_data_names=None):
+def write_vtk_pointcloud_file(
+    out_name=None,
+    out_dir='.',
+    points=None,
+    scalar_data=None,
+    scalar_data_names=None):
     '''
     write Amira landmark file
     landmarkList has to be iterable of tuples,
@@ -181,13 +185,16 @@ def save_cells_landmark_files_vtk(
             scalar_data = [out_scalar],
             scalar_data_names = ['celltype'])
 
+
 def write_vtk_skeleton_file(
     lookup_table,
     out_name, 
     out_dir, 
     point_scalar_data=None, 
     n_decimals=2):
-    """_summary_
+    """Write a .vtk file that represents a skeleton of a neuron.
+    
+    Supports overlaying scalar data on the skeleton, such as section diameters, membrane voltages, etc.
 
     Args:
         out_name (_type_): _description_
@@ -224,7 +231,6 @@ def write_vtk_skeleton_file(
     for dataname, data in point_scalar_data.items():
         assert len(data) == len(lookup_table), \
             "Length of point scalar data \"{}\" does not match number of points. Scalar data: {}. Amount of points: {}".format(dataname, len(data), len(lookup_table))
-
     
     # write out all data to .vtk file
     with open(
@@ -269,3 +275,53 @@ def write_vtk_skeleton_file(
                 of.write("SCALARS {} float 1\nLOOKUP_TABLE default\n".format(name))
                 of.write(point_scalar_str_(data))
     
+    
+def convert_amira_lattice_to_vtk(
+    surf_file,
+    outname="lattice",
+    outdir="."):
+    """Convert an AMIRA lattice file to vtk structured points.
+    """
+    with open(surf_file) as f:
+        lines = f.readlines()
+
+        header_split = [
+            i for i in range(len(lines)) if "@1" in lines[i]
+        ][1]
+        
+        header = lines[:header_split]
+        
+        co_type_line = [l for l in header if "coordtype" in l.lower()][0]
+        co_type = co_type_line.split()[1].strip('\"')
+        assert co_type == "uniform", "Only uniform lattice files are supported for this method. Coordinate type of given file is {}.".format(co_type)
+        
+        lattice_line = [l for l in header if "define lattice" in l.lower()][0]
+        nx, ny, nz = tuple(int(num) for num in lattice_line.split()[2:])
+        
+        spacing_line = [l for l in header if "spacing" in l.lower()][0]
+        # cast is not necessary as we write out to text, but a good check to see if the data is valid
+        dx, dy, dz = tuple(float(num.rstrip(",")) for num in spacing_line.split()[1:])
+        
+        bounding_box_line = [l for l in header if "boundingbox" in l.lower()][0]
+        minx, maxx, miny, maxy, minz, maxz = [num.rstrip(",") for num in bounding_box_line.split()[1:]]
+        
+        queryline = [l for l in header if "query" in l.lower()][0]
+        query = queryline.split()[1].lstrip("\"").rstrip("\",")
+
+        data = [float(e.rstrip()) for e in lines[header_split+1 : nx*ny*nz+header_split+1]]
+        trail = lines[nx*ny*nz+header_split+1:]
+        assert all([e.rstrip() == "" for e in trail]), "Trailing data in amira lattice file: found {} extra datapoints: {}".format(len(trail), trail)
+
+        with open(os.path.join(outdir, outname) + '.vtk', 'w+', encoding="utf-8") as of:
+            of.write(
+                "# vtk DataFile Version 4.0\nLattice\nASCII\nDATASET STRUCTURED_POINTS\n"
+            )
+            of.write("DIMENSIONS {} {} {}\n".format(nx, ny, nz))
+            of.write("ORIGIN {} {} {}\n".format(minx, miny, minz))
+            of.write("SPACING {} {} {}\n".format(dx, dy, dz))
+
+            of.write('POINT_DATA {}\nSCALARS {} {} {}\n'.format(
+                nx*ny*nz, query, "float", 1))
+            of.write("LOOKUP_TABLE default\n")
+            for d in data:
+                of.write("{}\n".format(d))

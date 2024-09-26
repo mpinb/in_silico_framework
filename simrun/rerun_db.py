@@ -36,19 +36,23 @@ def synapse_activation_df_to_roberts_synapse_activation(sa):
     return synapses
 
 
-def _evoked_activity(db,
-                     stis,
-                     outdir,
-                     tStop=None,
-                     neuron_param_modify_functions=[],
-                     network_param_modify_functions=[],
-                     synapse_activation_modify_functions=[],
-                     additional_network_params=[],
-                     recreate_cell_every_run=None,
-                     parameterfiles=None,
-                     neuron_folder=None,
-                     network_folder=None,
-                     sa=None):
+def _evoked_activity(
+    db,
+    stis,
+    outdir,
+    tStop=None,
+    neuron_param_modify_functions=[],
+    network_param_modify_functions=[],
+    synapse_activation_modify_functions=[],
+    additional_network_params=[],
+    recreate_cell_every_run=None,
+    parameterfiles=None,
+    neuron_folder=None,
+    network_folder=None,
+    sa=None
+    ):
+    """
+    """
     logger.info('saving to ', outdir)
     import neuron
     h = neuron.h
@@ -110,7 +114,7 @@ def _evoked_activity(db,
 
         evokedNW = scp.NetworkMapper(cell, network_param.network,
                                      neuron_param.sim)
-        evokedNW.reconnect_saved_synapses(syn)
+        evokedNW.reconnect_saved_synapses(syn, include_silent_synapses = True)
         additional_evokedNWs = [
             scp.NetworkMapper(cell, p.network, neuron_param.sim)
             for p in additional_network_params
@@ -188,27 +192,31 @@ class Opaque:
         self.content = content
 
 
-def rerun_db(db,
-              outdir,
-              tStop=None,
-              neuron_param_modify_functions=[],
-              network_param_modify_functions=[],
-              synapse_activation_modify_functions=[],
-              stis=None,
-              silent=False,
-              additional_network_params=[],
-              child_process=False):
+def rerun_db(
+    db,
+    outdir,
+    tStop=None,
+    neuron_param_modify_functions=[],
+    network_param_modify_functions=[],
+    synapse_activation_modify_functions=[],
+    stis=None,
+    silent=False,
+    additional_network_params=[],
+    child_process=False):
     '''
-    db: model data base initialized with I.db_init_simrun_general to be resimulated
-    outdir: location where simulation files are supposed to be stored
-    tStop: end of simulation
-    neuron_param_modify_functions: list of functions which take a neuron param file and may return it changed
-    network_param_modify_functions: list of functions which take a network param file and may return it changed
-    synapse_activation_modify_functions: list of function, which take a synapse activation dataframe and may return it changed
-    stis: sim_trial_indices which are to be resimulated. If None, the whole database is going to be resimulated.
-    silent: suppress output to stdout
-    child_process: run simulation in child process. This can help if dask workers time out during the simulation.
-    recreate_cell_every_run: set to True if you use synapse_activation as cell modify function.'''
+    Args:
+        db: model data base initialized with I.db_init_simrun_general to be resimulated
+        outdir: location where simulation files are supposed to be stored
+        tStop: end of simulation
+        neuron_param_modify_functions: list of functions which take a neuron param file and may return it changed
+        network_param_modify_functions: list of functions which take a network param file and may return it changed
+        synapse_activation_modify_functions: list of function, which take a synapse activation dataframe and may return it changed
+        stis: sim_trial_indices which are to be resimulated. If None, the whole database is going to be resimulated.
+        silent: suppress output to stdout
+        child_process: run simulation in child process. This can help if dask workers time out during the simulation.
+        recreate_cell_every_run: set to True if you use synapse_activation as cell modify function.
+        
+    '''
     parameterfiles = db['parameterfiles']
     neuron_folder = db['parameterfiles_cell_folder']
     network_folder = db['parameterfiles_network_folder']

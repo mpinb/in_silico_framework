@@ -102,7 +102,7 @@ def tree_reduction(delayeds, aggregate_fun, length=7):
 
 def synapse_activation_postprocess_dask(ddf, **kwargs):
     '''
-    Calculates bins of synapse activation dask dataframe per trail.
+    Calculates bins of synapse activation dask dataframe per trial.
     #Todo: make this method out of core
     
     args:
@@ -128,7 +128,7 @@ def synapse_activation_postprocess_dask(ddf, **kwargs):
     
     returns: 
         dask.delayed object. If computed, this will return a dictionary 
-        containing numpy arrays. rows: sim trails, columns: bins
+        containing numpy arrays. rows: sim trials, columns: bins
     '''
     fun = dask.delayed(synapse_activation_postprocess_pandas)
     ds = ddf.to_delayed()

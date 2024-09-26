@@ -1,3 +1,14 @@
+"""
+Explore viable biophysical models from a given seedpoint.
+Given the following empirical constraints:
+
+    - a set of biophysical parameters
+    - a morphology
+    - empirically recorded responses to defined stimulus protocols (see e.g. :py:meth:`biophysics_fitting.hay_specification.get_hay_problem_description`).
+
+this package provides methods and full workflows that allow you to make random variations on the input biophysical parameters, run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
+Eventually, this random walk through parameter space can explore very diverse biophysical models that are all within the empirical constraints.
+"""
 from functools import partial
 import os
 import pandas as pd
@@ -19,10 +30,34 @@ def evaluation_function_incremental_helper(
         additional_evaluation_functions = [],
         objectives_by_stimulus = None):
     '''
-    global variables: 
-    evaluators_by_stimulus
-    objectives_dict
+    Helper function for the evaluation function. 
+    As soon as a single stimulus shows that a biophysical model does not match the objectives,
+    it is not necessary to evaluate the other stimuli.
+    This method runs the evaluation functions one by one and exits prematurely as soon as an objective
+    is above the desired cutoff defined in :paramref:`cutoffs`.
+    
+    Args:
+        p (dict): dictionary of parameter values used in the simulation. See :py:mod:`~biophysics_fitting.hay_complete_default_setup` for an example.
+        s (Simulator): Simulator object.
+        cutoffs (dict): Dictionary with keys that are in :paramref:`stim_order`. Values are floats that define a maximum allowed error for any objective corresponding to that stimulus.
+            Note that each stimulus evokes a voltage trace that is parametrized by multiple objectives, each with their own error.
+            This method checks if the largest error exceeds some value.
+            Default: {'bAP':3.2, 'BAC': 3.2, 'StepOne':4.5, 'StepTwo': 4.5, 'StepThree': 4.5}, as used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`
+        stim_order (array-like): Order in which stimuli are simulated.
+            Default: ['bAP', 'BAC', 'StepOne', 'StepTwo', 'StepThree'], which is the order of stimuli used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`
+        verbose (bool): If True, print intermediate results.
+        evaluators_by_stimulus (dict): Dictionary with keys that are in :paramref:`stim_order`. Values are evaluators that are used to evaluate the voltage traces.
+        additional_evaluation_functions (list): List of functions that are called after the voltage traces are evaluated. The results are added to the evaluation dict, and returned.
+        objectives_by_stimulus (dict): Dictionary with keys that are in :paramref:`stim_order`. Values are lists of objectives that are used to evaluate the voltage traces.
+        
+    Returns:
+        tuple: (bool, dict). The first value is True if all stimuli are within the cutoffs, False otherwise.
+            The second value is a dictionary with the evaluation results.
     '''
+    
+    if stim_order is None:
+        # Default value: :cite:`Hay_Hill_Schuermann_Markram_Segev_2011`
+        stim_order = ['bAP', 'BAC', 'StepOne', 'StepTwo', 'StepThree']
 
     cutoffs = cutoffs or {
             'bAP':3.2, 

@@ -1,4 +1,6 @@
 '''
+This module provides methods to run Hay's stimulus protocols, and evaluate the resulting voltage traces.
+
 Created on Nov 08, 2018
 
 @author: abast
@@ -25,12 +27,30 @@ neuron_basedir = os.path.join(os.path.dirname(__file__), 'MOEA_EH_minimal')
 
 
 def setup_hay_evaluator(testing=False):
-    '''
-    this adds a stump cell to the neuron environment,which is
-    necessary to acces the hay evaluate functions. For the vairalbe time step solver,
-    this changes the step size and can therefore minimally change the results.
-    before testing reproducability, it is therefore necessary to initialize
-    the evaluator
+    '''Set up the NEURON simulator environment for evaluation.
+    
+    This method adds a stump cell to the neuron environment, which is
+    necessary to access the Hay evaluate functions. 
+    It makes the following current stimuli available for NEURON:
+
+        - bAP
+        - BAC
+        - SquarePulse (for the step currents)
+    
+    Args:
+        testing (bool): If True, the function will test the reproducibility of the Hay evaluator.
+        
+    Returns:
+        None
+    
+    Note:
+        For the variable time step solver, this changes the step size and can 
+        therefore minimally change the results. Before testing reproducability, 
+        it is therefore necessary to initialize the evaluator.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+        
     '''
     # todo: this also creates a cell which is simulated in neuron
     # therefore the evaluator should be set up without
@@ -43,12 +63,13 @@ def setup_hay_evaluator(testing=False):
     h = neuron.h
 
     logger.warning(
-        "Setting up hay evaluator. This loads several variables " +
-        "to the NEURON envioronment. Also, it creates a unconnected " +
-        "cell (which is very small ~ 1 compartment) which has the purpose " +
+        "Setting up hay evaluator. This loads several variables "
+        "to the NEURON environment. Also, it creates an unconnected "
+        "cell (which is very small ~ 1 compartment) which has the purpose "
         "to 'just be there' such that the functionality necessary to evaluate "
-        + "voltage traces is available. This has the side effect that in the " +
-        "case of the variable time step solver, the timesteps can be changed.")
+        "voltage traces is available. This has the side effect that in the "
+        "case of the variable time step solver, the timesteps can be changed."
+    )
 
     central_file_name = 'fit_config_89_CDK20050712_BAC_step_arco_run1.hoc'
 
@@ -70,6 +91,10 @@ def setup_hay_evaluator(testing=False):
 
 
 def is_setup():
+    """Check if the NEURON environment is set up for the Hay evaluator.
+    
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information."""
     import neuron
     h = neuron.h
     try:
@@ -184,6 +209,9 @@ def test():
 
 
 def get_cur_stim(stim):
+    """Get an input current stimulus from the Hay evaluator.
+    
+    Fetches either the bAP, BAC, or step current input stimuli from the Hay evaluator."""
     setup_hay_evaluator()
     sol = h.mc.get_sol()
     stim_count = len(sol)
@@ -193,11 +221,20 @@ def get_cur_stim(stim):
 
 
 def hay_evaluate(cur_stim, tvec, vList):
-    '''
+    '''Evaluate a stimulus as described by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+    
+    Args:
+        cur_stim (int): The stimulus to evaluate.
+        tvec (list): The time vector.
+        vList (list): The voltage list.
+    
+    Returns:
+        dict: A dictionary with the feature names as keys and the feature values as values.
+    
     Note: 
         I had the problem with python segfaulting as soon as this function got executed.
         In that case, make sure, the mechanisms are correctly compiled and loaded.
-        You can load the mechanisms by importing the mechanisms module.
+        You can load the mechanisms by importing the mechanisms module. - Arco
     '''
     setup_hay_evaluator()
     feature_mean_list = h.evaluator.feature_mean_list
@@ -285,26 +322,77 @@ def hay_evaluate(cur_stim, tvec, vList):
 
 
 def hay_evaluate_bAP(tVec=None, vList=None):
+    """Evaluate the bAP stimulus.
+    
+    Args:
+        tVec (list): The time vector.
+        vList (list): The voltage list.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information."""
     cur_stim = get_cur_stim('bAP')
     return hay_evaluate(cur_stim, tVec, vList)
 
 
 def hay_evaluate_BAC(tVec=None, vList=None):
+    """Evaluate the BAC stimulus.
+    
+    See py:meth:`~biophysics_fitting.setup_stim.setup_BAC` for more info on the BAC stimulus.
+
+    Args:
+        tVec (list): The time vector.
+        vList (list): The voltage list.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information."""
     cur_stim = get_cur_stim('BAC')
     return hay_evaluate(cur_stim, tVec, vList)
 
 
 def hay_evaluate_StepOne(tVec=None, vList=None):
+    """Evaluate the StepOne stimulus.
+    
+    See py:meth:`~biophysics_fitting.setup_stim.setup_StepOne` for more info on the StepOne stimulus.
+
+    Args:
+        tVec (list): The time vector.
+        vList (list): The voltage list.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     cur_stim = get_cur_stim('StepOne')
     return hay_evaluate(cur_stim, tVec, vList)
 
 
 def hay_evaluate_StepTwo(tVec=None, vList=None):
+    """Evaluate the StepTwo stimulus.
+     
+    See py:meth:`~biophysics_fitting.setup_stim.setup_StepTwo` for more info on the StepTwo stimulus.
+
+    Args:
+        tVec (list): The time vector.
+        vList (list): The voltage list.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """ 
     cur_stim = get_cur_stim('StepTwo')
     return hay_evaluate(cur_stim, tVec, vList)
 
 
 def hay_evaluate_StepThree(tVec=None, vList=None):
+    """Evaluate the StepThree stimulus.
+    
+    See py:meth:`~biophysics_fitting.setup_stim.setup_StepThree` for more info on the StepThree stimulus.
+    
+    Args:
+        tVec (list): The time vector.
+        vList (list): The voltage list.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     cur_stim = get_cur_stim('StepThree')
     return hay_evaluate(cur_stim, tVec, vList)
 

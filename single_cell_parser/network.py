@@ -46,6 +46,11 @@ class NetworkMapper:
         
         network parameter set (i.e., parameters.network.pre)
         self.nwParam = nwParam
+        
+        Args:
+            postCell (:class:`single_cell_parser.cell.Cell`): The cell to map synapses onto.
+            nwParam (:class:`sumatra.parameters.NTParameterSet`): The network parameter set.
+            simParam (:class:`sumatra.parameters.NTParameterSet`): The simulation parameter set. Default: None.
         '''
         self.cells = {}
         self.connected_cells = {}
@@ -117,8 +122,9 @@ class NetworkMapper:
         weights = None
         if synWeightName:
             weights, locations = reader.read_synapse_weight_file(synWeightName)
-        self._map_complete_anatomical_realization(weights,
-                                                  full_network=full_network)
+        self._map_complete_anatomical_realization(
+            weights,
+            full_network=full_network)
         self._apply_network_modify_functions()
         logger.info('***************************')
         logger.info('network complete!')
@@ -137,24 +143,51 @@ class NetworkMapper:
                 logger.info('applying', funname, 'with parameters', params)
                 fun(self.postCell, self, **params)
 
-    def reconnect_saved_synapses(self, synInfoName, synWeightName=None):
+    def reconnect_saved_synapses(self, synInfoName, synWeightName=None, include_silent_synapses = False):
         '''
         Public interface
         used for setting up saved synapse
         locations and activation times
+        
+        include_silent_synapses: also creates synapses that were not active. This maintains the synapse id, 
+            but maybe slightly slower.
         '''
         logger.info('***************************')
         logger.info('creating saved network and')
         logger.info('activating synapses with saved times')
         logger.info('***************************')
+        
         weights = None
         locations = None
         if synWeightName:
             weights, locations = reader.read_synapse_weight_file(synWeightName)
+        
         if isinstance(synInfoName, str):
             synInfo = reader.read_synapse_activation_file(synInfoName)
         else:
             synInfo = synInfoName
+        if include_silent_synapses:
+            def complete_syn(syn):
+                "adds synapses that do not have any activity back in such that synapse ID matches the id of the synapse"
+                syn_out = {}
+                for syntype in syn:
+                    syn_out[syntype] = []
+                    syn_id = 0
+                    syn_index = 0
+                    while True:
+                        try:
+                            s = syn[syntype][syn_id]
+                        except IndexError:
+                            break
+                        if syn_index < s[0]:
+                            syn_out[syntype].append([syn_index, -1, -1, [], -1])
+                            syn_index += 1
+                        else:
+                            syn_out[syntype].append(s)
+                            syn_id += 1 
+                            syn_index += 1
+                return syn_out
+            synInfo = complete_syn(synInfo)
         synTypes = list(synInfo.keys())
         for synType in synTypes:
             logger.info(
@@ -173,7 +206,7 @@ class NetworkMapper:
                     logger.info(
                         '\tAttached {:s} receptor with weight distribution uniform'
                         .format(receptorType))
-#            for syn in synInfo[synType]:
+            # for syn in synInfo[synType]:
             for i in range(len(synInfo[synType])):
                 syn = synInfo[synType][i]
                 synID, secID, ptID, synTimes, somaDist = syn
@@ -200,11 +233,12 @@ class NetworkMapper:
                     for recepStr in list(synParameters.receptors.keys()):
                         receptor = synParameters.receptors[recepStr]
                         self._assign_synapse_weights(receptor, recepStr, newSyn)
-                activate_functional_synapse(newSyn,
-                                            self.postCell,
-                                            newCell,
-                                            synParameters,
-                                            forceSynapseActivation=True)
+                activate_functional_synapse(
+                    newSyn,
+                    self.postCell,
+                    newCell,
+                    synParameters,
+                    forceSynapseActivation=True)
         logger.info('***************************')
         logger.info('network complete!')
         logger.info('***************************')
@@ -531,6 +565,7 @@ class NetworkMapper:
                     spikeTimes[i] = 0.1
                 self.cells[preCellType][active[i]].append(
                     spikeTimes[i], spike_source='pointcell_normal')
+        
         elif dist == 'uniform':
             active, = np.where(
                 np.random.uniform(
@@ -543,6 +578,7 @@ class NetworkMapper:
                     spikeTimes[i] = 0.1
                 self.cells[preCellType][active[i]].append(
                     spikeTimes[i], spike_source='pointcell_uniform')
+        
         elif dist == 'lognormal':
             active, = np.where(
                 np.random.uniform(
@@ -556,6 +592,7 @@ class NetworkMapper:
                     spikeTimes[i] = 0.1
                 self.cells[preCellType][active[i]].append(
                     spikeTimes[i], spike_source='pointcell_lognormal')
+        
         elif dist == 'PSTH':
             bins = networkParameters.intervals
             probabilities = networkParameters.probabilities
@@ -575,14 +612,13 @@ class NetworkMapper:
                 for j in range(len(active)):
                     self.cells[preCellType][active[j]].append(
                         spikeTimes[j], spike_source='pointcell_PSTH')
+        
         elif dist == 'PSTH_absolute_number':
             bins = networkParameters.intervals
             number_active_synapses = networkParameters.number_active_synapses
             offset = networkParameters.offset
             if len(bins) != len(number_active_synapses):
-                errstr = 'Time bins and probabilities of PSTH for cell type %s have unequal length! ' % preCellType
-                errstr += 'len(bins) = %d - len(probabilities) = %d' % (
-                    len(bins), len(probabilities))
+                errstr = 'Time bins and probabilities of PSTH for cell type {} have unequal length! len(bins) = {} - len(probabilities) = {}'.format(preCellType, len(bins), len(probabilities))
                 raise RuntimeError(errstr)
             for i in range(len(bins)):  ##fill all cells bin after bin
                 tBegin, tEnd = bins[i]
@@ -598,9 +634,11 @@ class NetworkMapper:
                     logger.info(
                         'Switching from drawing without replacement to drawing with replacement.'
                     )
-                    active = np.random.choice(list(range(nrOfCells)),
-                                              nas,
-                                              replace=True)
+                    
+                    active = np.random.choice(
+                        list(range(nrOfCells)),
+                        nas,
+                        replace=True)
                 spikeTimes = offset + tBegin + (
                     tEnd - tBegin) * np.random.uniform(size=len(active))
                 for j in range(len(active)):
@@ -926,17 +964,21 @@ class NetworkMapper:
                                                 changeParam[synType].synapses)
         logger.info('---------------------------')
 
-    def _map_complete_anatomical_realization(self,
-                                             weights=None,
-                                             full_network=False):
-        '''
-        Connects anatomical synapses to spike
-        generators (PointCells/SpikeTrains) according to anatomical
+    def _map_complete_anatomical_realization(
+        self,
+        weights=None,
+        full_network=False):
+        '''Connect anatomical synapses of :paramref:`~postCell` to spike generators according to anatomical
         connection file.
         
-        full_network: set to True if (non-sequential) cellids from barrel cortex embedding are used,
-            set to False, if single_cell network embedding from single_cell_input_mapper is used, in which 
-            cellids are sequential. 
+        Spike generators may be PointCells, or SpikeTrains.
+        
+        Args:
+            weights (dict): Weights for each synapse type.
+            full_network (bool): Defines which cell IDS to use.
+                If True: (non-sequential) cell ids from the network embedding are used. 
+                If False, single_cell network embedding from single_cell_input_mapper 
+                is used, in which cell ids are sequential.
         '''
         previousConnectionFile = ''
         synapses = self.postCell.synapses
@@ -949,8 +991,12 @@ class NetworkMapper:
             if synType == 'network_modify_functions':  # not a synapse type
                 continue
             if full_network:
+                # Sequential counter
                 synapse_counter = 0
+            
             funcMapName = self.nwParam[synType].synapses.connectionFile
+           
+            # 1. Load anatomical connectivity file  -------------------------------------------
             if funcMapName != previousConnectionFile:
                 logger.info('loading anatomical connectivity file {:s}'.format(
                     funcMapName))
@@ -960,25 +1006,28 @@ class NetworkMapper:
             else:
                 logger.info('anatomical connectivity file already loaded')
                 # connections, anatomicalID = previousConnections, previousAnatomicalID
-            logger.info(
-                'setting up functional connectivity for cell type %s'.format(
-                    synType))
+            
+            # 2. Connect synapses -------------------------------------------------------------
+            logger.info('setting up functional connectivity for cell type %s'.format(synType))
             activeSyn = 0
             connectedCells = set()
+            
             try:
                 functionalMap = connections[synType]
             except KeyError:  # if there are celltypes in the network param file that aren't in the functional map (con file)
                 logger.info(
-                    'skipping {}, which occurs in nw param but not confile'.
+                    'skipping {}, which occurs in network parameters, but not confile'.
                     format(synType))
                 continue
             logger.info('including {}'.format(synType))
-            anatomicalRealizationName = self.nwParam[
-                synType].synapses.distributionFile.split('/')[-1]
+            anatomicalRealizationName = self.nwParam[synType].synapses.distributionFile.split('/')[-1]
             if anatomicalID != anatomicalRealizationName:
                 errstr = 'Functional mapping %s does not correspond to anatomical realization %s' \
                 % (anatomicalID, anatomicalRealizationName)
                 #raise RuntimeError(errstr)
+            
+            ## 2.1 Connect synapses to presynaptic cells --------------------------------------
+            # Simply count the amount of cells for logger output
             if self.nwParam[synType].celltype == 'pointcell':
                 nrOfSyns = len(synapses[synType])
                 nrOfCells = len(self.cells[synType])
@@ -1003,6 +1052,8 @@ class NetworkMapper:
                             .format(synType, nrOfSyns, nrOfCells))
                 except AttributeError:
                     pass
+            
+            # Connect them, depending on the cell type
             for con in functionalMap:
                 cellType, cellID, synID = con
                 if cellType != synType:
@@ -1017,16 +1068,15 @@ class NetworkMapper:
 
                 else:
                     connectedCells.add(cellID)
+                    # Consecutive cell indices
                     cell_index = len(connectedCells) - 1
                     preSynCell = self.cells[synType][cell_index]
-
                     syn = synapses[synType][synapse_counter]
                     synapse_counter += 1
 
-
-#                if cellType not in visTest.keys():
-#                    visTest[cellType] = []
-#                visTest[cellType].append((cellType, cellID, synID))
+                # if cellType not in visTest.keys():
+                #      visTest[cellType] = []
+                #  visTest[cellType].append((cellType, cellID, synID))
 
                 synParameters = self.nwParam[synType].synapses
                 if weights:
@@ -1037,8 +1087,12 @@ class NetworkMapper:
                         self._assign_synapse_weights(receptor, recepStr, syn)
                 if preSynCell.is_active():
                     if not syn.pruned:
-                        activate_functional_synapse(syn, self.postCell,
-                                                    preSynCell, synParameters)
+                        activate_functional_synapse(
+                            syn, 
+                            self.postCell,
+                            preSynCell, 
+                            synParameters
+                            )
                     if syn.is_active():
                         activeSyn += 1
                     preSynCell._add_synapse_pointer(syn)
@@ -1057,6 +1111,14 @@ class NetworkMapper:
         logger.info('---------------------------')
 
     def _assign_synapse_weights(self, receptor, recepStr, syn):
+        """Assign synapse weights according to distribution specified in network parameters.
+        
+        Args:
+            receptor (dict): Receptor parameters from network parameter file.
+            recepStr (str): Receptor name.
+            syn (Synapse): Synapse object.
+            
+        """
         if syn.weight is None:
             syn.weight = {}
         if recepStr not in syn.weight:
@@ -1092,14 +1154,15 @@ class NetworkMapper:
                 syn.weight[recepStr].append(receptor.weight)
 
 
-def activate_functional_synapse(syn,
-                                cell,
-                                preSynCell,
-                                synParameters,
-                                tChange=None,
-                                synParametersChange=None,
-                                forceSynapseActivation=False,
-                                releaseTimes=None):
+def activate_functional_synapse(
+        syn,
+        cell,
+        preSynCell,
+        synParameters,
+        tChange=None,
+        synParametersChange=None,
+        forceSynapseActivation=False,
+        releaseTimes=None):
     '''Default method to activate single synapse.
     Currently, this implementation expects all presynaptic spike
     times to be pre-computed; can thus not be used in recurrent

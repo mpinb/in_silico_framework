@@ -14,7 +14,7 @@ from simrun.utils import scale_apical
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
-import simrun.sim_trail_to_cell_object
+import simrun.sim_trial_to_cell_object
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format
 # from compatibility import synchronous_scheduler
 from mechanisms import l5pt as l5pt_mechanisms
@@ -126,7 +126,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
 
 
 #@decorators.testlevel(2)
-def test_reproduce_simulation_trail_from_roberts_model_control(tmpdir, client):
+def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName,

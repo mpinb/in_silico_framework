@@ -129,7 +129,7 @@ def rasterplot(
     relevant_columns = [_ for _ in df.columns if is_int(_)]
     df = df[relevant_columns]
     times_all = []
-    trails_all = []
+    trials_all = []
 
     # fig.patch.set_alpha(0.0)
     # axes = plt.axes()
@@ -139,12 +139,12 @@ def rasterplot(
         row = list(row)
         times = [time for time in row if is_int(time)]
         times_all.extend(times)
-        trails_all.extend([index] * len(times))
+        trials_all.extend([index] * len(times))
     if colormap:
         color = colormap[label]
-        ax.plot(times_all, trails_all, 'k|', color=color, label=label)
+        ax.plot(times_all, trials_all, 'k|', color=color, label=label)
     else:
-        ax.plot(times_all, trails_all, 'k|', label=label)
+        ax.plot(times_all, trials_all, 'k|', label=label)
     if tlim:
         ax.set_xlim(tlim)
     # plt.gca().set_position([0.05, 0.05, 0.95, 0.95])
@@ -211,7 +211,7 @@ def rasterplot(
 #
 #     relevant_columns = [_ for _ in df if is_int(_)]
 #     times_all = []
-#     trails_all = []
+#     trials_all = []
 #     ax = fig #fig.add_subplot(1,1,1)
 #
 #     fig.patch.set_alpha(0.0)
@@ -223,12 +223,12 @@ def rasterplot(
 #         row = list(row)
 #         times = [time for time in row if is_int(time)]
 #         times_all.extend(times)
-#         trails_all.extend([index]*len(times))
+#         trials_all.extend([index]*len(times))
 #     if colormap:
 #         color =  colormap[label]
-#         ax.plot(times_all, trails_all, 'k|', color = color, label = label)
+#         ax.plot(times_all, trials_all, 'k|', color = color, label = label)
 #     else:
-#         ax.plot(times_all, trails_all, 'k|', label = label)
+#         ax.plot(times_all, trials_all, 'k|', label = label)
 #     if tlim:
 #         ax.set_xlim(tlim)
 #     plt.gca().set_position([0.05, 0.05, 0.95, 0.95])

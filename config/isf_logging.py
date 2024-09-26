@@ -1,4 +1,4 @@
-"""Set up logging for the ISF package."""
+"""Set up logging for ISF."""
 import logging, sys
 
 class LastPartFilter(logging.Filter):

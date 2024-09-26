@@ -8,7 +8,6 @@
 
 set -eE
 set -o pipefail
-trap 'echo "Error: Command on line $LINENO failed. Exiting with error code 1."; exit 1' ERR
 
 # Check if git is available
 if ! command -v git &> /dev/null; then
@@ -27,6 +26,7 @@ pushd . # save this dir on stack
 # Global variables
 WORKING_DIR=$(pwd)
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+echo "Script directory: $SCRIPT_DIR"
 anaconda_installer=Anaconda3-2020.11-Linux-x86_64.sh
 CONDA_INSTALL_PATH=""
 INSTALL_NODE=false
@@ -90,7 +90,7 @@ CONDA_INSTALL_PATH=$(realpath "$CONDA_INSTALL_PATH")
 print_title "0/6. Preliminary checks"
 # 0.0 -- Create downloads folder (if it does not exist)
 if [ ! -d "$SCRIPT_DIR/downloads" ]; then
-    mkdir $SCRIPT_DIR/downloads;
+    mkdir $SCRIPT_DIR/downloads
 fi
 
 # 0.1 -- Check 1: Is Anaconda already downloaded?
@@ -108,10 +108,10 @@ if [ ! -d "$SCRIPT_DIR/downloads/conda_packages" ]; then
     mkdir $SCRIPT_DIR/downloads/conda_packages # conda packages download directory
     download_conda_packages_flag="true"
 elif [ ! "$(ls -A $SCRIPT_DIR/downloads/conda_packages)" ]; then
-    echo "No conda packages found in downloads/conda_packages. They will be downloaded."
+    echo "No conda packages found in $SCRIPT_DIR/downloads/conda_packages. They will be downloaded."
     download_conda_packages_flag="true"
 else
-    echo "Warning: found conda packages in downloads/conda_packages. They will not be redownloaded. If you have changed the conda_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
+    echo "Warning: found conda packages in $SCRIPT_DIR/downloads/conda_packages. They will not be redownloaded. If you have changed the conda_requirements.txt file, you should remove this folder or its contents before attemtping a reinstall."
     download_conda_packages_flag="false"
 fi
 
@@ -138,16 +138,16 @@ print_title "1/6. Installing Anaconda"
 # 1.0 -- Downloading Anaconda (if necessary).
 if [[ "${download_conda_flag}" == "true" ]]; then
     echo "Downloading ${anaconda_installer}"
-    wget https://repo.anaconda.com/archive/${anaconda_installer} -N --quiet -P $SCRIPT_DIR/downloads;
+    wget --no-check-certificate https://repo.anaconda.com/archive/${anaconda_installer} -N --quiet -P $SCRIPT_DIR/downloads
 fi
 # 1.1 -- Installing Anaconda
 echo "Anaconda will be installed in: ${CONDA_INSTALL_PATH}"
 bash ${SCRIPT_DIR}/downloads/${anaconda_installer} -b -p ${CONDA_INSTALL_PATH};
 # setup conda in current shell; avoid having to restart shell
-eval $($CONDA_INSTALL_PATH/bin/conda shell.bash hook);
-source ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh || exit 1;
-echo "Activating environment by running \"conda activate ${CONDA_INSTALL_PATH}/\"";
-conda activate ${CONDA_INSTALL_PATH}/;
+eval $($CONDA_INSTALL_PATH/bin/conda shell.bash hook)
+source ${CONDA_INSTALL_PATH}/etc/profile.d/conda.sh || exit 1
+echo "Activating environment by running \"conda activate ${CONDA_INSTALL_PATH}/\""
+conda activate ${CONDA_INSTALL_PATH}/
 conda info
 echo $(which python)
 echo $(python --version)
@@ -249,10 +249,5 @@ done
 
 
 # -------------------- Cleanup -------------------- #
-echo -e "\e[1;32m*****************************************************************\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*   Succesfully installed In-Silico-Framework for Python 3.8.   *\e[0m"
-echo -e "\e[1;32m*                                                               *\e[0m"
-echo -e "\e[1;32m*****************************************************************\e[0m"
 rm $SCRIPT_DIR/tempfile
 exit 0

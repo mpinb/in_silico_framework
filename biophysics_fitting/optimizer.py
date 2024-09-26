@@ -1,11 +1,21 @@
-"""Partly copy pasted from the BluePyOpt package, however extended, such that a start population can be defined.
-Also extended, such that the optimizations can be organized in a model data base.
-Also extended to be executed on a distributed system using dask.
-Also extended to return all objectives, not only the combined ones.
-Note: the population needs to be in a special format. Use methods in biophysics_fitting.population 
-to create a population.
+"""Multi-objective optimization algorithm.
 
-The main interface is the function start_run."""
+This code has been adapted from [BluePyOpt](https://github.com/BlueBrain/BluePyOpt) :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+
+It has been adapted, such that::
+
+    - a start population can be defined.
+    - such that the optimizations can be organized in a model data base.
+    - to be executed on a distributed system using dask.
+    - to return all objectives, not only the combined ones.
+    
+Note::
+
+    the population needs to be in a special format. 
+    Use methods in biophysics_fitting.population to create a population.
+
+The main interface is the function :py:meth:`start_run`.
+"""
 import time
 import bluepyopt as bpop
 import numpy
@@ -18,6 +28,15 @@ import six
 
 
 def robust_int(x):
+    """Robustly convert something to an integer.
+    
+    Returns None if the conversion is not possible.
+    
+    Args:
+        x: The object to be converted.
+        
+    Returns:
+        int | None: The converted object."""
     try:
         return int(x)
     except:
@@ -25,7 +44,14 @@ def robust_int(x):
 
 
 def get_max_generation(db_run):
-    '''returns the index of the next iteration'''
+    '''Returns the index of the next iteration in a database. 
+    If the database is empty, it returns -1.
+    
+    Args:
+        db_run (data_base.DataBase): The database.
+        
+    Returns:
+        int: The index of the next iteration. If the database is empty, it returns -1.'''
     keys = [
         robust_int(x) for x in list(db_run.keys()) if robust_int(x) is not None
     ]
@@ -37,6 +63,15 @@ def get_max_generation(db_run):
 
 
 def save_result(db_run, features, objectives):
+    """Save the results of an optimization iteration in a database.
+    
+    Args:
+        db_run (data_base.DataBase): The database.
+        features (pd.DataFrame): The features of the optimization iteration.
+        objectives (pd.DataFrame): The objectives of the optimization iteration.
+    
+    Returns:
+        None. The results are saved in the database."""
     current_key = get_max_generation(db_run) + 1
     if six.PY2:
         dumper = I.dumper_pandas_to_msgpack
@@ -44,13 +79,22 @@ def save_result(db_run, features, objectives):
         dumper = I.dumper_pandas_to_parquet
     else:
         raise RuntimeError()
-    db_run.set(str(current_key),
-                    I.pd.concat([objectives, features], axis=1),
-                    dumper=dumper)
+    db_run.set(
+        str(current_key),
+        I.pd.concat([objectives, features], axis=1),
+        dumper=dumper)
 
 
 def setup_db_run(db_setup, run):
-    '''db_setup contains a sub db for each run of the full optimization. This sub db is created here'''
+    '''Create a sub-database for each run of the optimization algorithm.
+    db_setup contains a sub db for each run of the full optimization. This sub db is created here.
+    
+    Args:
+        db_setup (data_base.DataBase): The database containing the setup of the optimization.
+        run (int): The index of the optimization run.
+        
+    Returns:
+        data_base.DataBase: The database for the optimization run containing sub-databases..'''
     if not str(run) in list(db_setup.keys()):
         db_setup.create_sub_db(str(run))
     db_run = db_setup[str(run)]
@@ -61,6 +105,15 @@ def setup_db_run(db_setup, run):
 
 
 def get_objective_function(db_setup):
+    """Get the objective function for the optimization.
+    
+    This objective function takes parameters values, runs a simulation, and evaluates the simulation.
+    
+    Args:
+        db_setup (data_base.DataBase): The database containing the setup of the optimization.
+        
+    Returns:
+        function: The objective function for the optimization."""
     parameter_df = db_setup['params']
     Simulator = db_setup['get_Simulator'](db_setup)
     Evaluator = db_setup['get_Evaluator'](db_setup)
@@ -78,12 +131,12 @@ def get_objective_function(db_setup):
 
 
 def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error = 3):
-    # CAVE! get_mymap is doing more, than just to return a map function.
+    # CAVE! get_mymap is doing more than just returning a map function.
     # - the map function ignores the first argument.
     #   The first argument (i.e. the function to be mapped on the iterable) is ignored.
     #   Instead, that function is hardcoded. It is defined in db_setup['get_Evaluator']
     #   This was neccessary, as my_ibea_evaluator and the deap individuals were causing pickle errors
-    # - mymap also saves the features. As the bluepyopt optimizer only sees the sumarized
+    # - mymap also saves the features. As the bluepyopt optimizer only sees the summarized
     #   features (maximum of several individual features, see Hay et. al.), mymap is the ideal
     #   place to insert a routine that saves all features before they get sumarized.
     # - mymap also creates a sub db in db_setup. The name of the sub_db is specified by n: It is str(n)
@@ -126,7 +179,7 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
                     errstr += 'Parameters are: {}\n'.format(
                         dict(params_pd.iloc[lv]))
                     raise ValueError(errstr)
-##        features_dicts = map(objective_fun, params_list) # temp rieke
+        # features_dicts = map(objective_fun, params_list) # temp rieke
         features_dicts = c.gather(futures)  #temp rieke
         features_pd = I.pd.DataFrame(features_dicts)
         save_result(db_run, params_pd, features_pd)
@@ -150,9 +203,9 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
                 ]
 
 
-#         all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
-#         if any(all_err_below_3):
-#             db_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
+         # all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
+         # if any(all_err_below_3):
+         #     db_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
 
         return numpy.array(combined_objectives_lists)
 
@@ -279,11 +332,11 @@ def eaAlphaMuPlusLambdaCheckpoint(
         cp_filename (DataBase or None): db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
         continue_cp (bool): whether to continue
     """
-    # added by arco
+    # --- added by arco
     if db_run is not None:
         assert db_run.__class__.__name__ in ("ModelDataBase", "ISFDataBase")  # db_run
     assert halloffame is None
-    # end added by arco
+    # --- end added by arco
 
     if continue_cp:
         # A file name has been given, then load the data from the file
@@ -379,7 +432,7 @@ def run(
     """
     This method is a class method of the BluePyOpt optimisations.DEAPOptimisation class.
     It is extended here such that a start population can be defined.
-    Running actual optimization is done with the :meth:~`biophysics_fitting.optimizer.start_run`, which further extends this method.
+    Running actual optimization is done with the :meth:`~biophysics_fitting.optimizer.start_run`, which further extends this method.
     
     Note: 
         the population needs to be in a special format. Use methods in biophysics_fitting.population 
@@ -425,7 +478,14 @@ def run(
 
 
 def get_population_with_different_n_objectives(old_pop, n_objectives):
-    '''function to adapt the number of objectives of individuals'''
+    '''function to adapt the number of objectives of individuals
+    
+    Args:
+        old_pop: list of deap.Individuals
+        n_objectives (int): number of objectives
+        
+    Returns:
+        list of deap.Individuals: population with adapted number of objectives'''
     pop = []
     for p in old_pop:
         ind = WSListIndividual(p, obj_size=n_objectives)
@@ -450,16 +510,18 @@ def start_run(
     Start an optimization run as specified in db_setup.
 
     Args:
-        db_setup (data_base.DataBase): 
-            a DataBase containing the setup of the optimization. It must include:
+        db_setup (data_base.DataBase): a DataBase containing the setup of the optimization. It must include::
+        
                 - params ... this is a pandas.DataFrame with the parameternames as index and the columns min_ and max_
                 - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
                 - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
                 - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object
+                
             get_Simulator, get_Evaluator, get_Combiner accept the db_setup data_base as argument. 
             This allows, that e.g. the Simular can depend on the data_base. Therefore it is e.g. possible, 
             that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
             updated accordingly.
+            
         n (int): a seedpoint for the optimization randomization.
         pop (list of deap.Individuals | None): The previous population if the optimization is continued. None if a new optimization is started.
         client (distributed.Client | None): A distributed client. If None, the optimization is run on the local machine.

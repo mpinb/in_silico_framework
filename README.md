@@ -1,7 +1,7 @@
 <div align="center">
 
-<img src=./docs/_static/_figures/isf-logo-white.png#gh-dark-mode-only width='350'>
-<img src=./docs/_static/_figures/isf-logo-black.png#gh-light-mode-only width='350'>
+<img src=./docs/_static/_images/isf-logo-white.png#gh-dark-mode-only width='350'>
+<img src=./docs/_static/_images/isf-logo-black.png#gh-light-mode-only width='350'>
 
 # The In-Silico-Framework (ISF)
 [![In-Silico-Framework (Python 2.7) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml)

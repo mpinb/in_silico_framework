@@ -1,3 +1,10 @@
+"""
+This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
+
+These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :py:mod:`~biophysics_fitting.simulator`.
+"""
+
+
 #########################################
 # naming converters scp <--> hay
 #########################################
@@ -5,6 +12,17 @@ import six
 
 
 def hay_param_to_scp_neuron_param(p):
+    """Convert a Hay parameter name to a SCP neuron parameter name.
+    
+    Args:
+        p (str): The Hay parameter name.
+        
+    Returns:
+        str: The SCP neuron parameter name.
+        
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+    """
     p = p.split('.')
     if p[1] == 'axon':
         p[1] = 'AIS'
@@ -21,6 +39,13 @@ def hay_param_to_scp_neuron_param(p):
 
 
 def hay_params_to_scp_neuron_params(params):
+    """Convert a list of Hay parameter names to a list of SCP neuron parameter names.
+    
+    Args:
+        params (list): The list of Hay parameter names.
+        
+    Returns:
+        list: The list of SCP neuron parameter names."""
     return [hay_param_to_scp_neuron_param(p) for p in params]
 
 
@@ -30,6 +55,28 @@ def hay_params_to_scp_neuron_params(params):
 
 
 def get_L5tt_template():
+    """Get a template cell parameter dictionary for a L5PT cell.
+    
+    This method returns a nested dictionary-like object that can be used to set up a L5PT cell for simulations.
+    The values of each key are set to None or default values, and need to be filled in with the actual values.
+    This dictionary-like parameter structure is used by e.g. the :class:`~biophysics_fitting.simulator.Simulator` object.
+    It provides information on:
+    
+    - For each section label (for an L5PT: Soma, AIS, ApicalDendrite, Dendrite, Myelin):
+        - neuron.<section_label>.mechanisms: active biophysics of the cell (e.g. ion channel densities)
+        - neuron.<section_label>.properties: passive biophysics of the cell (e.g. membrane capacitance)
+    - sim: simulation parameters:
+        - T: temperature
+        - Vinit: initial voltage
+        - dt: time step
+        - recordingSites: recording sites
+        - tStart: start time
+        - tStop: stop time
+            
+    Returns:
+        sumatra.parameters.NTParameterSet (dict-like): The template cell parameters.       
+    
+    """
     p = {
         'NMODL_mechanisms': {
             'channels': '/'
@@ -278,6 +325,16 @@ def get_L5tt_template():
     return NTParameterSet(p['neuron'])
 
 def get_L5tt_template_v2():
+    """Get a template cell parameter dictionary for a L5PT cell.
+    
+    This method is identical to :py:meth:`get_L5tt_template`, but adds the following specifications::
+    
+        - The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see :py:mod:`mechanisms`).
+        - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
+        
+    Returns:
+        sumatra.NTParameterSet (dict-like): The template cell parameters.
+    """
     neup = get_L5tt_template()
     for loc in neup:
         if loc == 'filename':
@@ -307,14 +364,29 @@ def get_L5tt_template_v2():
         'neuron': neup}
     return NTParameterSet(p['neuron'])
 
+
 def set_morphology(cell_param, filename=None):
+    """Add the morphology to a cell parameter object.
+    
+    The morphology is simply a path to a .hoc file in string format.
+    
+    Args:
+        cell_param (sumatra.parameters.NTParameterSet | dict): The cell parameter dictionary.
+        filename (str): The path to the .hoc file.
+        
+    Returns:
+        sumatra.parameters.NTParameterSet | dict: The updated cell parameter dictionary."""
     cell_param.filename = filename
     return cell_param
 
 
 def set_ephys(cell_param, params=None):
-    """
-    Updates cell_param file. Parameter names reflect the hay naming convention.
+    """Updates cell_param file. 
+    
+    Parameter names reflect the Hay naming convention.
+    
+    Note:
+        See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
     """
     for k, v in six.iteritems(params):
         cell_param[hay_param_to_scp_neuron_param(k)] = float(v)
@@ -322,8 +394,24 @@ def set_ephys(cell_param, params=None):
 
 
 def set_param(cell_param, params=None):
-    """
-    Updates cell_param file. Parameter names reflect the hierarchy in the cell_param file itself.
+    """Updates cell_param given a dict of params in the dot naming convention.
+    
+    Cell parameters are nested dictionaries, while the input parameters are flat dictionaries,
+    where the hierarchy is defined by dots.
+    
+    Example::
+
+        cell_param = {'a': {'b': {'c': 2}}}
+        params = {'a.b.c': 3}
+        set_param(cell_param, params)
+        # returns {'a': {'b': {'c': 3}}}
+        
+    Args:
+        cell_param (dict): The cell parameter nested dictionary.
+        params (dict): The parameter flat dictionary.
+    
+    Returns:
+        dict: The updated cell_param.
     """
     for k, v in six.iteritems(params):
         p = cell_param
@@ -334,6 +422,26 @@ def set_param(cell_param, params=None):
 
 
 def set_many_param(cell_param, params=None):
+    """Updates cell_param given a dict of params in the dot naming convention.
+    
+    This method is almost identical to :py:meth:`set_param`, but it has a different behavior when
+    a parameter name appears both as a top-level key and as a nested key in :paramref:`params`. In this case, the top-level
+    key will be used as the master value.
+    
+    Example::
+
+        cell_param = {'a': {'b': {'c': 0}}}
+        params = {'a': True, 'a.b.c': False}
+        set_many_param(cell_param, params)
+        # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
+        
+    Args:
+        cell_param (dict): The cell parameter nested dictionary.
+        params (dict): The parameter flat dictionary.
+        
+    Returns:
+        dict: The updated cell_param.
+    """
 
     master_values = {}
 
@@ -353,8 +461,20 @@ def set_many_param(cell_param, params=None):
 
 
 def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
-    """
-    Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+    """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+    
+    Args:
+        cell_param (dict): The cell parameter dictionary.
+        min_ (float): The minimum distance from the soma.
+        max_ (float): The maximum distance from the soma.
+        outsidescale_sections (list): A list of sections where the channels should be inserted.
+        
+    Returns:
+        sumatra.parameters.NTParameterSet | dict: The updated cell_param.
+        
+    Note:
+        This method is specific for a L5PT.
+        For more information about the hot zone, refer to :cite:t:`Guest_Bast_Narayanan_Oberlaender`
     """
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['begin'] = min_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['end'] = max_

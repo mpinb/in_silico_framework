@@ -10,40 +10,29 @@ import numpy as np
 
 
 class SynapseMapper(object):
-    '''
-    SynapseMapper assigns synapses to neuron morphology
-    self.cell is neuron SpatialGraph
-    self.synDist is average synapse distribution (3D scalar field)
-    self.isDensity: True - synapse distribution interpreted as avg
-        density; actual number of synapses assigned is drawn from a 
-        Poisson distribution
-        False - synapse distribution interpreted as actual number of
-        synapses per voxel and directly assigned
-    self.voxelEdgeMap: dictionary mapping synapse distribution mesh
-        coordinates on list with pairs of indices that correspond
-        to the edge and edgePt ID of all morphology points inside that voxel
-    '''
-
+    '''Assign synapses to a neuron morphology based on a synapse distribution.'''
+    
     def __init__(self, cell=None, synDist=None, isDensity=True):
         '''
-        synapses are mapped onto this cell
-        self.cell = cell
+        Args:
+            cell (:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
+            synDist (:class:`~single_cell_parser.scalar_field.ScalarField`): The average synapse distribution (a 3D scalar field).
+            isDensity (bool): 
+                If True, then the synapse distribution is interpreted as an average density, and the actual number of synapses that will be assigned is drawn from a Poisson distribution. 
+                If False, then the synapse distribution :paramref:`synDist` is interpreted as the actual number of synapses per voxel. 
         
-        synapse distribution
-        self.synDist = synDist
-        
-        flag: 1 - distribution is density; 0 - distribution is realization
-        self.isDensity = isDensity
-        
-        stores edge/voxel correspondence for mapping
-        self.voxelEdgeMap = {}
+        Attributes:
+            cell (:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
+            synDist (:class:`~single_cell_parser.scalar_field.ScalarField`): The synapse distribution.
+            isDensity (bool): Flag for distribution type: (1) density or (0) realization.
+            voxelEdgeMap (dict): Dictionary that maps voxel edges to (sectionID, pointID) pairs.
         '''
         self.cell = cell
         self.synDist = synDist
         self.isDensity = isDensity
         self.voxelEdgeMap = {}
-#        seed = 1234567890
-#        self.ranGen = np.random.RandomState(seed)
+        # seed = 1234567890
+        # self.ranGen = np.random.RandomState(seed)
 
     def map_synapse_realization(self):
         '''

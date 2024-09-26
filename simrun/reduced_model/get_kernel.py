@@ -121,10 +121,10 @@ def get_lookup_series_from_lda_values_spike_data(lda_values, spike, spike_before
                                                  lookup_series_stepsize = 3):
     '''
     
-    lda_values: one-dimensional array containing lda_values of trail
+    lda_values: one-dimensional array containing lda_values of trial
     spike: one-dimensional array containing True / False
     mask: one-dimensional array containing True / False.
-        If True: the respective trail will be ignored.
+        If True: the respective trial will be ignored.
     '''
     pdf2 = pd.DataFrame(dict(lda_values=lda_values, spike=spike))
     if spike_before is not None:

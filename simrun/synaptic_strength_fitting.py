@@ -168,8 +168,9 @@ class PSPs:
             method, merged=True, merge_celltype_kwargs=merge_celltype_kwargs)
         return ePSP_summary_statistics(vt, **ePSP_summary_statistics_kwargs)
 
-    def get_optimal_g(self, measured_data, method='dynamic_baseline'):
-        pdf = self.get_summary_statistics(method=method)
+    def get_optimal_g(self, measured_data, method='dynamic_baseline',merge_celltype_kwargs=None):
+        if merge_celltype_kwargs is None: merge_celltype_kwargs = {}
+        pdf = self.get_summary_statistics(method=method, merge_celltype_kwargs=merge_celltype_kwargs)
         pdf = pdf.reset_index()
         pdf = pdf.groupby('celltype').apply(linear_fit_pdf)
         pdf = I.pd.concat([pdf, measured_data], axis=1)
@@ -677,10 +678,7 @@ def get_tMax_vMax(t, v, tStim=None, tEnd=None):
 
 
 def merge_celltypes(vt,
-                    detection_strings=[
-                        'L2', 'L34', 'L4', 'L5st', 'L5tt', 'L6cc', 'L6ct',
-                        'VPM_C2'
-                    ],
+                    detection_strings=['L2', 'L34', 'L4', 'L5st', 'L5tt', 'L6cc', 'L6ct', 'VPM_C2'],
                     celltype_must_be_in=None):
     '''concatenates voltagetraces of celltypes'''
     if celltype_must_be_in is None:

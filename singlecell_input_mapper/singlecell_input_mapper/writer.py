@@ -7,6 +7,8 @@ from __future__ import absolute_import
 from .scalar_field import ScalarField
 from .generate_nr_of_cells_spreadsheet import con_file_to_NumberOfConnectedCells_sheet
 from data_base.dbopen import dbopen
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 labels2int = {\
     "Neuron":                 2,\
@@ -65,23 +67,27 @@ labels2int = {\
 
 
 def write_landmark_file(fname=None, landmarkList=None):
-    '''
-    write Amira landmark file
-    landmarkList has to be iterable of tuples,
-    each of which holds 3 float coordinates
+    '''Write Amira landmark file
+
+    Args:
+        fname (str): Name of the output file
+        landmarkList (array): List of tuples, each of which holds 3 float coordinates
+
+    Raises:
+        RuntimeError: If no file name is given
     '''
     if fname is None:
         err_str = 'No landmark output file name given'
         raise RuntimeError(err_str)
 
 
-#    if not landmarkList:
-#        print 'Landmark list empty!'
-#        return
-#    nrCoords = len(landmarkList[0])
-#    if nrCoords != 3:
-#        err_str = 'Landmarks have wrong format! Number of coordinates is ' + str(nrCoords) + ', should be 3'
-#        raise RuntimeError(err_str)
+    # if not landmarkList:
+    #     print 'Landmark list empty!'
+    #     return
+    # nrCoords = len(landmarkList[0])
+    # if nrCoords != 3:
+    #     err_str = 'Landmarks have wrong format! Number of coordinates is ' + str(nrCoords) + ', should be 3'
+    #     raise RuntimeError(err_str)
 
     if not fname.endswith('.landmarkAscii'):
         fname += '.landmarkAscii'
@@ -104,9 +110,20 @@ def write_landmark_file(fname=None, landmarkList=None):
 
 
 def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
-    '''
-    writes list of all synapses with the locations
-    coded by section ID and section x of cell with ID 'cellID'
+    '''Write a .syn file, containing all synapses and their corresponding cellID, sectionID and x.
+    
+    The locations of each synapse are coded by section ID and section x of cell with ID :paramref:`cellID`.
+
+    Args:
+        fname (str): Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
+        synapses (dict): Dictionary containing synapse objects. Keys are synapse types, values are lists of synapse objects
+        cellID (str): ID of the cell the synapses belong to
+
+    Raises:
+        RuntimeError: If any of the input arguments is `None`
+
+    Returns:
+        None
     '''
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
@@ -157,13 +174,28 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
                     outputFile.write(line)
 
 
-def write_anatomical_realization_map(fname=None,
-                                     functionalMap=None,
-                                     anatomicalID=None):
-    '''
-    writes list of all functional connections
-    coded by tuples (cell type, presynaptic cell index, synapse index).
-    Only valid for anatomical synapse realization given by anatomicalID
+def write_anatomical_realization_map(
+        fname=None,
+        functionalMap=None,
+        anatomicalID=None):
+    '''Writes a .con file containing a list of all functional connections.
+     
+    Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
+    Only valid for an anatomical synapse realization with ID :paramref:`anatomicalID`.
+    Uses :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet` 
+    to generate the number of connected cells spreadsheet.
+
+    Args:
+        fname (str): Name of the output file
+        functionalMap (list): List of tuples, each containing the cell type, presynaptic cell index and synapse index
+        anatomicalID (str): ID of the anatomical realization
+
+    Warning:
+        A .con file is only valid with a corresponding .syn file.
+        See :py:meth:`~write_cell_synapse_locations`
+
+    Returns:
+        None. Writes results to disk.
     '''
     if fname is None or functionalMap is None or anatomicalID is None:
         err_str = 'Incomplete data! Cannot write functional realization file'
@@ -193,9 +225,39 @@ def write_anatomical_realization_map(fname=None,
     con_file_to_NumberOfConnectedCells_sheet(fname)
 
 
-def write_sample_connectivity_summary(fname=None,
-                                      cellTypeSummaryData=None,
-                                      columnSummaryData=None):
+def write_sample_connectivity_summary(
+        fname=None,
+        cellTypeSummaryData=None,
+        columnSummaryData=None):
+    """Write a summary of a single connectivity realization to a file.
+
+    The input summary tables can be computed with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+    For each cell type, this method writes a summary on the following attributes of each structure:
+    
+    - Presynaptic cell type
+    - Number of synapses
+    - Mean path length to soma
+    - SD path length to soma
+    - Connected presynaptic cells
+    - Total presynaptic cells
+    - Convergence
+    - Number of synapses
+
+    If the brain has been subdivided in separate anatomical areas (and :paramref:`columnSummaryData` is not None), 
+    the summary is also written for each area.
+
+    Args:
+        fname (str): Name of the output file
+        cellTypeSummaryData (dict): Dictionary containing the summary data for each cell type
+            Must contain at least a key for each presynaptic cell type.
+            May additionally include a key for each anatomical structure, and as values 
+            another dictionary with the rpesynaptic cell types as keys.
+            Values contain the information as mentioned above.
+        columnSummaryData (dict): Dictionary containing the summary data for each column.
+
+    Returns:
+        None. Writes the results to disk.
+    """
     if fname is None or cellTypeSummaryData is None or columnSummaryData is None:
         #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
         #    if fname is None or columnSummaryData is None:
@@ -206,26 +268,26 @@ def write_sample_connectivity_summary(fname=None,
         fname += '.csv'
 
 
-#    with open(fname, 'w') as outFile:
-#        header = '# connectivity summary\n'
-#        header += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tConnected presynaptic cells\tTotal presynaptic cells\n'
-#        outFile.write(header)
-#        columns = columnSummaryData.keys()
-#        columns.sort()
-#        if len(columns):
-#            preCellTypes = columnSummaryData[columns[0]].keys()
-#            preCellTypes.sort()
-#            for col in columns:
-#                for preCellType in preCellTypes:
-#                    data = columnSummaryData[col][preCellType]
-#                    line = col + '\t' + preCellType + '\t'
-#                    line += str(data[0])
-#                    line += '\t'
-#                    line += str(data[1])
-#                    line += '\t'
-#                    line += str(data[2])
-#                    line += '\n'
-#                    outFile.write(line)
+    # with open(fname, 'w') as outFile:
+    #     header = '# connectivity summary\n'
+    #     header += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tConnected presynaptic cells\tTotal presynaptic cells\n'
+    #     outFile.write(header)
+    #     columns = columnSummaryData.keys()
+    #     columns.sort()
+    #     if len(columns):
+    #         preCellTypes = columnSummaryData[columns[0]].keys()
+    #         preCellTypes.sort()
+    #         for col in columns:
+    #             for preCellType in preCellTypes:
+    #                data = columnSummaryData[col][preCellType]
+    #                line = col + '\t' + preCellType + '\t'
+    #                line += str(data[0])
+    #                line += '\t'
+    #                line += str(data[1])
+    #                line += '\t'
+    #                line += str(data[2])
+    #                line += '\n'
+    #                outFile.write(line)
 
     outCellTypes = ('L2','L34','L4py','L4sp','L4ss','L5st','L5tt','L6cc','L6ccinv','L6ct','VPM',\
                     'L1','L23Trans','L45Peak','L45Sym','L56Trans','SymLocal1','SymLocal2',\
@@ -248,6 +310,7 @@ def write_sample_connectivity_summary(fname=None,
             try:
                 data = cellTypeSummaryData[preCellType]
             except KeyError:
+                logger.warning("Cell type summary data does not contain cell type %s" % preCellType)
                 continue
             totalSynapses = data[0]
             nrOfConnectedCells = data[1]
@@ -332,12 +395,13 @@ def write_sample_connectivity_summary(fname=None,
         columns = list(columnSummaryData.keys())
         columns.sort()
         if len(columns):
-            #            preCellTypes = columnSummaryData[columns[0]].keys()
-            #            preCellTypes.sort()
+            # preCellTypes = columnSummaryData[columns[0]].keys()
+            # preCellTypes.sort()
             for col in columns:
                 for preCellType in outCellTypes:
                     try:
                         data = columnSummaryData[col][preCellType]
+                        logger.info("Column %s does not contain cell type %s" % (col, preCellType))
                     except KeyError:
                         continue
                     totalSynapses = data[0]
@@ -414,8 +478,35 @@ def write_sample_connectivity_summary(fname=None,
                     outFile.write(line)
 
 
-def write_population_connectivity_summary(fname=None,
-                                          populationDistribution=None):
+def write_population_connectivity_summary(
+        fname=None,
+        populationDistribution=None
+        ):
+    """Write a summary of populations of connectivity realizations to a file.
+
+    The populationDistribution can be calculated with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+    For each cell type, this method writes a summary on the same attributes for each cell structure as :py:meth:`write_sample_connectivity_summary`, namely:
+    
+    - Presynaptic cell type
+    - Number of synapses
+    - Mean path length to soma
+    - SD path length to soma
+    - Connected presynaptic cells
+    - Total presynaptic cells
+    - Convergence
+    - Number of synapses
+    
+    In addition, however, it also writes out the standard deviation of these values, taken across network realizations.
+
+    Args:
+        fname (str): Name of the output file
+        populationDistribution (dict): Dictionary containing the summary data for each cell type
+            Must contain at least a key for each presynaptic cell type.
+            Values are lists of the form [mean, std] for each of the attributes mentioned above.
+
+    Returns:
+        None. Writes the results to disk.
+    """
     if fname is None or populationDistribution is None:
         #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
         #    if fname is None or columnSummaryData is None:
@@ -556,6 +647,23 @@ def write_population_and_sample_connectivity_summary(
         populationDistribution=None,
         cellTypeSummaryData=None,
         columnSummaryData=None):
+    """
+    Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
+
+    Useful for comparing the results of a single realization to the average over multiple realizations.
+    Consult :py:meth:`write_sample_connectivity_summary` and :py:meth:`write_population_connectivity_summary` for details on the input data.
+    :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+    :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+
+    Args:
+        fname (str): Name of the output file
+        populationDistribution (dict): Dictionary containing the summary data for each cell type across network realizations.
+        cellTypeSummaryData (dict): Dictionary containing the summary data for each cell type
+        columnSummaryData (dict): Dictionary containing the summary data for each anatomical area
+
+    Returns:
+        None. Writes the results to disk.
+    """
     if fname is None or populationDistribution is None or cellTypeSummaryData is None or columnSummaryData is None:
         #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
         #    if fname is None or columnSummaryData is None:
@@ -889,6 +997,19 @@ def write_population_and_sample_connectivity_summary(
 
 
 def write_scalar_field(fname=None, scalarField=None):
+    """Write a scalar field to an AmiraMesh file.
+
+    These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert_amira_lattice_to_vtk`
+    for visualization in VTK-compatible renderers.
+    
+    Args:
+        fname (str): Name of the output file
+        scalarField (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`): 
+            Scalar field to be written to disk
+        
+    Returns:
+        None. Writes the results to disk.
+    """
     if fname is None or scalarField is None:
         err_str = 'Incomplete data! Cannot write scalar field file'
         raise RuntimeError(err_str)

@@ -11,14 +11,14 @@ def test_saved_and_reloaded_synapse_file_is_identical(tmpdir):
         'simulation_run0000_synapses.csv')
     assert os.path.exists(synapse_file_path)
     synapse_pdf = read_pandas_synapse_activation_from_roberts_format(\
-                            synapse_file_path, sim_trail_index = 'asdasd')
+                            synapse_file_path, sim_trial_index = 'asdasd')
 
     try:
         path_file = os.path.join(tmpdir.dirname, 'test.csv')
         write_pandas_synapse_activation_to_roberts_format(
             path_file, synapse_pdf)
         synapse_pdf_reloaded = read_pandas_synapse_activation_from_roberts_format(
-            path_file, sim_trail_index='asdasd')
+            path_file, sim_trial_index='asdasd')
     except:
         raise
 

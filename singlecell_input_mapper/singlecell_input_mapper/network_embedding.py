@@ -12,31 +12,45 @@ from .cell import PointCell
 from . import writer
 from .synapse_mapper import SynapseMapper, SynapseDensity
 from data_base.dbopen import dbopen
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class NetworkMapper:
-    '''
-    Handles connectivity of presynaptic populations
-    to multi-compartmental neuron model.
+    '''Connect presynaptic cells to a postsynaptic cell model.
+
+    This class is used to create anatomical realizations of connectivity.
+    Given a :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` of boutons, 
+    it computes all possible synapse densities that have non-zero overlap with every voxel this bouton field.
+    These synapse density fields depend on the presence of post-synaptic dendrites in the bouton field,
+    which in turn depends on the location and morphology of the post-syanptic neuron.
+    The synapse density fields are further used as probability distributions to Poisson sample 
+    mutiple realizations of synaptic connections between pre-synaptic cells, and the post-synaptic cell
+    (see :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`).
+    
+    Attributes:
+        cells (dict): 
+            Presynaptic cells, ordered by anatomical area and cell type. 
+            This attribute is filled by 
+            :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
+        connected_cells (dict): Indices of all active presynaptic cells, ordered by cell type.
+        postCell (:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): Reference to postsynaptic (multi-compartment) cell model.
+        postCellType (str): Postsynaptic cell type.
     '''
 
-    def __init__(self, postCell, postCellType, cellTypeNumbersSpreadsheet,
-                 connectionsSpreadsheet, exPST, inhPST):
-        '''
-        dictionary holding all presynaptic cells
-        ordered by cell type
-        self.cells = {}
-        
-        dictionary holding indices of
-        all active presynaptic cells
-        ordered by cell type
-        self.connected_cells = {}
-        
-        reference to postsynaptic (multi-compartment) cell model
-        self.postCell = postCell
-        
-        postsynaptic cell type
-        self.postCellType = postCellType
+    def __init__(
+        self, 
+        postCell, 
+        postCellType, 
+        cellTypeNumbersSpreadsheet,
+        connectionsSpreadsheet, 
+        exPST, 
+        inhPST):
+        '''        
+        Args:
+            postCell (:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): The cell object to map synapses onto.
+            postCellType (str): The type of the postsynaptic cell.
+            cellTypeNumbersSpreadsheet (dict): Number of presynaptic cells per cell type and anatomical_area.
         '''
         self.cells = {}
         self.connected_cells = {}
@@ -49,269 +63,351 @@ class NetworkMapper:
         self.exPST = exPST
         self.inhPST = inhPST
         self.mapper = SynapseMapper(postCell)
-#        seed = int(time.time())
-#        self.ranGen = np.random.RandomState(seed)
+        # seed = int(time.time())
+        # self.ranGen = np.random.RandomState(seed)
 
-    def create_network_embedding(self,
-                                 postCellName,
-                                 boutonDensities,
-                                 nrOfSamples=50):
-        '''
-        Public interface:
-        used for creating fixed network connectivity.
+    def create_network_embedding(
+        self,
+        postCellName,
+        boutonDensities,
+        nrOfSamples=50):
+        '''Create a single network realization from a bouton density field.
+
+        This is the main method to create anatomical realizations of connectivity.
+        It creates :paramref:`nrOfSamples` network realizations, and saves the most representative
+        realization to disk. The most representative realization is determined by comparing
+        the distribution of anatomical parameters across the population of realizations using
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
+
+        Args:
+            postCellName (str):
+                Path to the postsynaptic .hoc morphology file.
+            boutonDensities (dict):
+                Dictionary of bouton densities, ordered by anatomical area and cell type.
+            nrOfSamples (int):
+                Number of network realizations to create.
         
-        Give this network realization a (somewhat) unique name!!!!     
-        then save it at the same location as the anatomical realization
-        IMPORTANT: assumes path names to anatomical realization files
-        work from the working directory! so should be correct relative, or
-        preferably absolute paths.
+        Warning:
+            Give this network realization a (somewhat) unique name!   
+            Then save it at the same location as the anatomical realization
+        
+        Warning:
+            Assumes path names to anatomical realization files are relative to the working directory. 
+            These paths should be correct relative, or preferably absolute paths.
+        
+        Returns:
+            None. Writes output files to disk.
         '''
-
         self._create_presyn_cells()
-        columns = list(self.cells.keys())
-        preCellTypes = self.cells[columns[0]]
-        cellTypeSynapseDensities = self._precompute_column_celltype_synapse_densities(
+        anatomical_areas = list(self.cells.keys())
+        preCellTypes = self.cells[anatomical_areas[0]]
+        cellTypeSynapseDensities = self._precompute_anatomical_area_celltype_synapse_densities(
             boutonDensities)
         sampleConnectivityData = []
         cellTypeSpecificPopulation = []
         for i in range(nrOfSamples):
-            print('Generating network embedding sample {:d}'.format(i))
+            logger.info('Generating network embedding sample {:d}'.format(i))
             self.postCell.remove_synapses('All')
-            for col in columns:
+            for anatomical_area in anatomical_areas:
                 for preCellType in preCellTypes:
-                    for preCell in self.cells[col][preCellType]:
+                    for preCell in self.cells[anatomical_area][preCellType]:
                         preCell.synapseList = None
-            connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_realization(
-                cellTypeSynapseDensities)
-            synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable = self._compute_summary_tables(
-                connectedCells, connectedCellsPerStructure)
-            connectivityData = connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable
+            connectivityMap, connectedCells, connectedCellsPerStructure = \
+                self._create_anatomical_realization(cellTypeSynapseDensities)
+            (
+                synapseLocations,
+                cellSynapseLocations, 
+                cellTypeSummaryTable, 
+                anatomicalAreaSummaryTable
+            ) = self._compute_summary_tables(
+                connectedCells, 
+                connectedCellsPerStructure
+            )
+            connectivityData = connectivityMap, synapseLocations, \
+                                cellSynapseLocations, cellTypeSummaryTable,\
+                                anatomicalAreaSummaryTable
             sampleConnectivityData.append(connectivityData)
             cellTypeSpecificPopulation.append(cellTypeSummaryTable)
-            print('---------------------------')
+            logger.info('---------------------------')
 
         populationDistribution = self._compute_parameter_distribution(
             cellTypeSpecificPopulation)
         representativeIndex = self._get_representative_sample(
             cellTypeSpecificPopulation, populationDistribution)
-        connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable = sampleConnectivityData[
-            representativeIndex]
-        self._write_population_output_files(postCellName,
-                                            populationDistribution,
-                                            connectivityMap, synapseLocations,
-                                            cellSynapseLocations,
-                                            cellTypeSummaryTable,
-                                            columnSummaryTable)
+        (connectivityMap, 
+         synapseLocations, 
+         cellSynapseLocations, 
+         cellTypeSummaryTable, 
+         anatomicalAreaSummaryTable
+            ) = sampleConnectivityData[representativeIndex]
+        self._write_population_output_files(
+            postCellName,
+            populationDistribution,
+            connectivityMap, 
+            synapseLocations,
+            cellSynapseLocations,
+            cellTypeSummaryTable,
+            anatomicalAreaSummaryTable)
 
         #        for testing convergence:
         #        self._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
 
         #        for testing basic functionality:
-        #        connectivityMap, synapseLocations, cellTypeSummaryTable, columnSummaryTable = sampleConnectivityData[0]
-        #        self._write_output_files(postCellName, connectivityMap, synapseLocations, cellTypeSummaryTable, columnSummaryTable)
+        #        connectivityMap, synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable = sampleConnectivityData[0]
+        #        self._write_output_files(postCellName, connectivityMap, synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable)
 
-        print('Done generating network embedding!')
-        print('---------------------------')
+        logger.info('Done generating network embedding!')
+        logger.info('---------------------------')
 
-    def create_network_embedding_for_simulations(self, postCellName,
-                                                 boutonDensities,
-                                                 nrOfRealizations):
-        '''
-        Public interface:
-        used for creating fixed network connectivity for use in Monte Carlo simulations.
-        Same principle as above method, but creates fixed number of network realizations
-        to allow investigating effects of anatomical variability on neuron responses.
-        Give this network realization a (somewhat) unique name!!!!     
-        then save it at the same location as the anatomical realization
-        IMPORTANT: assumes path names to anatomical realization files
-        work from the working directory! so should be correct relative, or
-        preferably absolute paths.
+    def create_network_embedding_for_simulations(
+        self, 
+        postCellName,
+        boutonDensities,
+        nrOfRealizations):
+        '''Create multiple network realizations from a bouton density field.
+        
+        Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
+        Same principle as :py:meth:`~create_network_embedding`, but rather than taking
+        the most representative sample, this method saves all :paramref:`nrOfRealizations` network 
+        realizations to allow investigating the effects of anatomical variability on neuron responses.
+
+        Warning:
+            Give this network realization a (somewhat) unique name!     
+            Then save it at the same location as the anatomical realization
+        
+        Warning:
+            Assumes path names to anatomical realization files are relative to the working directory. 
+            These paths should be correct relative, or preferably absolute paths.
+            
+        Args:
+            postCellName (str):
+                Path to the postsynaptic .hoc morphology file.
+            boutonDensities (dict):
+                Dictionary of bouton densities, ordered by anatomical area and cell type.
+            nrOfRealizations (int):
+                Number of network realizations to create.
+
+        Returns:
+            None. Writes output files to disk.
         '''
         self._create_presyn_cells()
-        columns = list(self.cells.keys())
-        preCellTypes = self.cells[columns[0]]
-        cellTypeSynapseDensities = self._precompute_column_celltype_synapse_densities(
-            boutonDensities)
+        anatomical_areas = list(self.cells.keys())
+        preCellTypes = self.cells[anatomical_areas[0]]
+        cellTypeSynapseDensities = \
+            self._precompute_anatomical_area_celltype_synapse_densities(
+                boutonDensities)
 
         cellTypeSpecificPopulation = []
         for i in range(nrOfRealizations):
-            print('Creating realization {:d} of {:d}'.format(
+            logger.info('Creating realization {:d} of {:d}'.format(
                 i + 1, nrOfRealizations))
             self.postCell.remove_synapses('All')
-            for col in columns:
+            for anatomical_area in anatomical_areas:
                 for preCellType in preCellTypes:
-                    for preCell in self.cells[col][preCellType]:
+                    for preCell in self.cells[anatomical_area][preCellType]:
                         preCell.synapseList = None
-#            for col in columns:
-#                for preCellType in preCellTypes:
-#                    nrOfDensities = len(cellTypeSynapseDensities[col][preCellType])
-#                    if not nrOfDensities:
-#                        continue
-#                    #=======================================================================
-#                    # for testing purposes: write 3D synapse density
-#                    #=======================================================================
-##                    for structure in self.postCell.structures.keys():
-##                        for i in range(nrOfDensities):
-##                            outDensity = cellTypeSynapseDensities[col][preCellType][i][structure]
-##                            outNamePrefix = postCellName[:-4]
-##                            synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,col,preCellType,str(i)))
-##                            writer.write_scalar_field(synapseDensityName, outDensity)
-#
-#                    print '---------------------------'
-#                    print 'Computed %d synapse densities of type %s in column %s!' % (nrOfDensities,preCellType,col)
-#                    print 'Assigning synapses from cell type %s in column %s' % (preCellType, col)
-#                    totalNumber = len(self.cells[col][preCellType])
-#                    densityIDs = np.random.randint(0, nrOfDensities, totalNumber)
-#                    count = 0
-#                    skipCount = 0
-#                    for i in range(totalNumber):
-#                        preCell = self.cells[col][preCellType][i]
-#                        count += 1
-#                        print '    Computing synapses for presynaptic cell %d of %d...\r' %  (count,totalNumber),
-#                        sys.stdout.flush()
-#                        densityID = densityIDs[i]
-#                        synapseDensity = cellTypeSynapseDensities[col][preCellType][densityID]
-#                        if synapseDensity is None:
-#                            skipCount += 1
-#                            continue
-#                        self.mapper.synDist = synapseDensity
-#                        synapseType = '_'.join((preCellType,col))
-#                        preCell.synapseList = self.mapper.create_synapses(synapseType)
-#                        for newSyn in preCell.synapseList:
-#                            newSyn.preCell = preCell
-#                    print ''
-#                    print '    Skipped %d empty synapse densities...' % skipCount
-#
-#            connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_connectivity_map()
-            connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_realization(
-                cellTypeSynapseDensities)
-            self._generate_output_files(postCellName, connectivityMap,
-                                        connectedCells,
-                                        connectedCellsPerStructure)
-            synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable = self._compute_summary_tables(
+            # for anatomical_area in anatomical_areas:
+            #     for preCellType in preCellTypes:
+            #         nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
+            #         if not nrOfDensities:
+            #             continue
+            #         #=======================================================================
+            #         # for testing purposes: write 3D synapse density
+            #         #=======================================================================
+            ##          for structure in self.postCell.structures.keys():
+            ##              for i in range(nrOfDensities):
+            ##                  outDensity = cellTypeSynapseDensities[anatomical_area][preCellType][i][structure]
+            ##                  outNamePrefix = postCellName[:-4]
+            ##                  synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,anatomical_area,preCellType,str(i)))
+            ##                  writer.write_scalar_field(synapseDensityName, outDensity)
+
+            #         print '---------------------------'
+            #         print 'Computed %d synapse densities of type %s in anatomical_area %s!' % (nrOfDensities,preCellType,anatomical_area)
+            #         print 'Assigning synapses from cell type %s in anatomical_area %s' % (preCellType, anatomical_area)
+            #         totalNumber = len(self.cells[anatomical_area][preCellType])
+            #         densityIDs = np.random.randint(0, nrOfDensities, totalNumber)
+            #         count = 0
+            #         skipCount = 0
+            #         for i in range(totalNumber):
+            #             preCell = self.cells[anatomical_area][preCellType][i]
+            #             count += 1
+            #             print '    Computing synapses for presynaptic cell %d of %d...\r' %  (count,totalNumber),
+            #             sys.stdout.flush()
+            #             densityID = densityIDs[i]
+            #             synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][densityID]
+            #             if synapseDensity is None:
+            #                 skipCount += 1
+            #                 continue
+            #             self.mapper.synDist = synapseDensity
+            #             synapseType = '_'.join((preCellType,anatomical_area))
+            #             preCell.synapseList = self.mapper.create_synapses(synapseType)
+            #             for newSyn in preCell.synapseList:
+            #                 newSyn.preCell = preCell
+            #         print ''
+            #         print '    Skipped %d empty synapse densities...' % skipCount
+
+            # connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_connectivity_map()
+            connectivityMap, connectedCells, connectedCellsPerStructure = \
+                self._create_anatomical_realization(cellTypeSynapseDensities)
+            self._generate_output_files(
+                postCellName, 
+                connectivityMap,
+                connectedCells,
+                connectedCellsPerStructure)
+            (synapseLocations,  # unused 
+             cellSynapseLocations,  # unused
+             cellTypeSummaryTable, 
+             anatomicalAreaSummaryTable  # unused
+             ) = self._compute_summary_tables(
                 connectedCells, connectedCellsPerStructure)
             cellTypeSpecificPopulation.append(cellTypeSummaryTable)
-            print('---------------------------')
+            logger.info('---------------------------')
 
-#        print '    Writing output files...'
-#        populationDistribution = self._compute_parameter_distribution(cellTypeSpecificPopulation)
-#        outNamePrefix = postCellName[:-4]
-#        summaryName = outNamePrefix + '_synapses_%d_realizations_summary' % nrOfRealizations
-#        writer.write_population_connectivity_summary(summaryName, populationDistribution)
+        # print '    Writing output files...'
+        # populationDistribution = self._compute_parameter_distribution(cellTypeSpecificPopulation)
+        # outNamePrefix = postCellName[:-4]
+        # summaryName = outNamePrefix + '_synapses_%d_realizations_summary' % nrOfRealizations
+        # writer.write_population_connectivity_summary(summaryName, populationDistribution)
 
-    def create_network_embedding_from_synapse_densities(self, postCellName,
-                                                        synapseDensities):
-        '''
-        Public interface:
-        used for creating fixed network connectivity from pre-computed
-        synapse densities. Good for testing...
+    def create_network_embedding_from_synapse_densities(
+        self, 
+        postCellName,
+        synapseDensities):
+        '''Create a single network realization from pre-computed synapse densities.
         
-        Give this network realization a (somewhat) unique name!!!!     
-        then save it at the same location as the anatomical realization
-        IMPORTANT: assumes path names to anatomical realization files
-        work from the working directory! so should be correct relative, or
-        preferably absolute paths.
+        Useful for testing purposes.
+        
+        Warning:
+            Give this network realization a (somewhat) unique name!     
+            Then save it at the same location as the anatomical realization
+        
+        Warning:
+            Assumes path names to anatomical realization files are relative to the working directory. 
+            These paths should be correct relative, or preferably absolute paths.
+        
+        Args:
+            postCellName (str):
+                Path to the postsynaptic .hoc morphology file.
+            synapseDensities (dict):
+                Dictionary of synapse densities, ordered by anatomical area and cell type.
         '''
 
         self._create_presyn_cells()
-        columns = list(self.cells.keys())
-        preCellTypes = self.cells[columns[0]]
+        anatomical_areas = list(self.cells.keys())
+        preCellTypes = self.cells[anatomical_areas[0]]
         cellTypeSynapseDensities = synapseDensities
-        for col in columns:
+        for anatomical_area in anatomical_areas:
             for preCellType in preCellTypes:
-                print('---------------------------')
-                print('Assigning synapses from cell type {:s} in column {:s}'.
-                      format(preCellType, col))
-                nrOfDensities = len(cellTypeSynapseDensities[col][preCellType])
+                logger.info('---------------------------')
+                logger.info('Assigning synapses from cell type {:s} in anatomical_area {:s}'.
+                      format(preCellType, anatomical_area))
+                nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
                 if not nrOfDensities:
                     continue
-                totalNumber = len(self.cells[col][preCellType])
+                totalNumber = len(self.cells[anatomical_area][preCellType])
                 count = 0
-                for preCell in self.cells[col][preCellType]:
+                for preCell in self.cells[anatomical_area][preCellType]:
                     count += 1
-                    print(
+                    logger.info(
                         '    Computing synapses for presynaptic cell {:d} of {:d}...\r'
                         .format(count, totalNumber))  #, end=' ')
                     sys.stdout.flush()
                     densityID = np.random.randint(nrOfDensities)
-                    synapseDensity = cellTypeSynapseDensities[col][preCellType][
+                    synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][
                         densityID]
                     self.mapper.synDist = synapseDensity
-                    synapseType = '_'.join((preCellType, col))
+                    synapseType = '_'.join((preCellType, anatomical_area))
                     preCell.synapseList = self.mapper.create_synapses(
                         synapseType)
                     for newSyn in preCell.synapseList:
                         newSyn.preCell = preCell
-                print('')
+                logger.info('')
 
-        connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_connectivity_map(
-        )
-        self._generate_output_files(postCellName, connectivityMap,
-                                    connectedCells, connectedCellsPerStructure)
-        print('---------------------------')
+        connectivityMap, connectedCells, connectedCellsPerStructure = \
+            self._create_anatomical_connectivity_map()
+        
+        self._generate_output_files(
+            postCellName, 
+            connectivityMap,
+            connectedCells, 
+            connectedCellsPerStructure)
+        logger.info('---------------------------')
 
-    def _precompute_column_celltype_synapse_densities(self, boutonDensities):
-        '''
-        Pre-computes all possible synapse densities that have
-        non-zero overlap with the current postynaptic neuron
-        and sorts them based on presynaptic column and cell type
+    def _precompute_anatomical_area_celltype_synapse_densities(self, boutonDensities):
+        '''Compute synapse densities of all presynaptic cell types in all anatomical_areas
+        
+        Computes all possible synapse densities that have non-zero overlap
+        with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
         '''
         synapseDensities = {}
-        synapseDensityComputation = SynapseDensity(self.postCell, self.postCellType, self.connectionsSpreadsheet,\
-                                                   self.exCellTypes, self.inhCellTypes, self.exPST, self.inhPST)
-        columns = list(boutonDensities.keys())
-        preCellTypes = boutonDensities[columns[0]]
-        for col in columns:
-            synapseDensities[col] = {}
+        synapseDensityComputation = SynapseDensity(
+            self.postCell, 
+            self.postCellType, 
+            self.connectionsSpreadsheet,
+            self.exCellTypes, 
+            self.inhCellTypes, 
+            self.exPST, 
+            self.inhPST)
+        anatomical_areas = list(boutonDensities.keys())
+        preCellTypes = boutonDensities[anatomical_areas[0]]
+        for anatomical_area in anatomical_areas:
+            synapseDensities[anatomical_area] = {}
             for preCellType in preCellTypes:
-                synapseDensities[col][preCellType] = []
-                print('---------------------------')
-                print(
-                    'Computing synapse densities from cell type %s in column {:s}'
-                    .format(preCellType, col))
-                for boutons in boutonDensities[col][preCellType]:
-                    synapseDensities[col][preCellType].append(
+                synapseDensities[anatomical_area][preCellType] = []
+                logger.info('---------------------------')
+                logger.info(
+                    'Computing synapse densities from cell type %s in anatomical_area {:s}'
+                    .format(preCellType, anatomical_area))
+                for boutons in boutonDensities[anatomical_area][preCellType]:
+                    synapseDensities[anatomical_area][preCellType].append(
                         synapseDensityComputation.compute_synapse_density(
                             boutons, preCellType))
-        print('---------------------------')
+        logger.info('---------------------------')
         return synapseDensities
 
     def _create_presyn_cells(self):
-        '''
-        Creates presynaptic cells.
+        '''Creates presynaptic cells.
+
         Should be done before creating anatomical synapses.
+        Fills the :py:attr:`~cells` attribute with a nested dictionary of presynaptic cells,
+        ordered by anatomical area first, and cell type second.
         '''
-        print('---------------------------')
+        logger.info('---------------------------')
         cellIDs = 0
-        columns = list(self.cellTypeNumbersSpreadsheet.keys())
-        for col in columns:
-            cellTypes = list(self.cellTypeNumbersSpreadsheet[col].keys())
-            self.cells[col] = {}
+        anatomical_areas = list(self.cellTypeNumbersSpreadsheet.keys())
+        for anatomical_area in anatomical_areas:
+            cellTypes = list(self.cellTypeNumbersSpreadsheet[anatomical_area].keys())
+            self.cells[anatomical_area] = {}
             for cellType in cellTypes:
-                self.cells[col][cellType] = []
-                nrOfCellsPerType = self.cellTypeNumbersSpreadsheet[col][
+                self.cells[anatomical_area][cellType] = []
+                nrOfCellsPerType = self.cellTypeNumbersSpreadsheet[anatomical_area][
                     cellType]
                 for i in range(nrOfCellsPerType):
-                    newCell = PointCell(col, cellType)
-                    self.cells[col][cellType].append(newCell)
+                    newCell = PointCell(anatomical_area, cellType)
+                    self.cells[anatomical_area][cellType].append(newCell)
                     cellIDs += 1
-                print(
-                    '    Created {:d} presynaptic cells of type {:s} in column {:s}'
-                    .format(nrOfCellsPerType, cellType, col))
-        print('Created {:d} presynaptic cells in total'.format(cellIDs))
-        print('---------------------------')
+                logger.info(
+                    '    Created {:d} presynaptic cells of type {:s} in anatomical_area {:s}'
+                    .format(nrOfCellsPerType, cellType, anatomical_area))
+        logger.info('Created {:d} presynaptic cells in total'.format(cellIDs))
+        logger.info('---------------------------')
 
     def _create_anatomical_realization(self, cellTypeSynapseDensities):
-        '''
-        Main method for computing synapse/connectivity
-        realization from precomputed synapse densities.
+        '''Create a single anatomical realization of synapses.
+
+        This is the main method for computing synapse/connectivity realization.
+        Given one or more pre-computed density fields of synapses (see e.g. 
+        :py:meth:`~_precompute_anatomical_area_celltype_synapse_densities`), this method 
+        creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+        from this synapse density field, and assigns synapses.
+
         Returns anatomical connectivity map.
         '''
-        columns = list(self.cells.keys())
-        preCellTypes = self.cells[columns[0]]
-        for col in columns:
+        anatomical_areas = list(self.cells.keys())
+        preCellTypes = self.cells[anatomical_areas[0]]
+        for anatomical_area in anatomical_areas:
             for preCellType in preCellTypes:
-                nrOfDensities = len(cellTypeSynapseDensities[col][preCellType])
+                nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
                 if not nrOfDensities:
                     continue
                 #=======================================================================
@@ -319,63 +415,70 @@ class NetworkMapper:
                 #=======================================================================
 
 
-#                for structure in self.postCell.structures.keys():
-#                    for i in range(nrOfDensities):
-#                        outDensity = cellTypeSynapseDensities[col][preCellType][i][structure]
-#                        outNamePrefix = postCellName[:-4]
-#                        synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,col,preCellType,str(i)))
-#                        writer.write_scalar_field(synapseDensityName, outDensity)
+                # for structure in self.postCell.structures.keys():
+                #     for i in range(nrOfDensities):
+                #         outDensity = cellTypeSynapseDensities[anatomical_area][preCellType][i][structure]
+                #         outNamePrefix = postCellName[:-4]
+                #         synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,anatomical_area,preCellType,str(i)))
+                #         writer.write_scalar_field(synapseDensityName, outDensity)
 
-                print('---------------------------')
-                print(
-                    'Computed {:d} synapse densities of type {:s} in column {:s}!'
-                    .format(nrOfDensities, preCellType, col))
-                print('Assigning synapses from cell type {:s} in column {:s}'.
-                      format(preCellType, col))
-                totalNumber = len(self.cells[col][preCellType])
+                logger.info('---------------------------')
+                logger.info(
+                    'Computed {:d} synapse densities of type {:s} in anatomical_area {:s}!'
+                    .format(nrOfDensities, preCellType, anatomical_area))
+                logger.info('Assigning synapses from cell type {:s} in anatomical_area {:s}'.
+                      format(preCellType, anatomical_area))
+                totalNumber = len(self.cells[anatomical_area][preCellType])
                 densityIDs = np.random.randint(0, nrOfDensities, totalNumber)
                 count = 0
                 skipCount = 0
                 for i in range(totalNumber):
-                    preCell = self.cells[col][preCellType][i]
+                    preCell = self.cells[anatomical_area][preCellType][i]
                     count += 1
-                    print(
+                    logger.info(
                         '    Computing synapses for presynaptic cell {:d} of {:d}...\r'
                         .format(count, totalNumber))  #, end=' ')
                     sys.stdout.flush()
                     densityID = densityIDs[i]
-                    synapseDensity = cellTypeSynapseDensities[col][preCellType][
-                        densityID]
+                    synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][densityID]
                     if synapseDensity is None:
                         skipCount += 1
                         continue
                     self.mapper.synDist = synapseDensity
-                    synapseType = '_'.join((preCellType, col))
-                    preCell.synapseList = self.mapper.create_synapses(
-                        synapseType)
+                    synapseType = '_'.join((preCellType, anatomical_area))
+                    preCell.synapseList = self.mapper.create_synapses(synapseType)
                     for newSyn in preCell.synapseList:
                         newSyn.preCell = preCell
-                print('')
-                print('    Skipped {:d} empty synapse densities...'.format(
-                    skipCount))
+                logger.info('')
+                logger.info('    Skipped {:d} empty synapse densities...'.format(skipCount))
 
         return self._create_anatomical_connectivity_map()
 
     def _create_anatomical_connectivity_map(self):
-        '''
-        Connects anatomical synapses to PointCells according to
-        anatomical constraints on connectivity
+        '''Connects anatomical synapses to PointCells.
+         
+        Connections have anatomical constraints on connectivity.
         (i.e., convergence of presynaptic cell type).
-        Used to create fixed network embedding.
-        Returns list of connections, where
-        each connection is a tuple
-        (cell type, presynaptic cell index, synapse index).
-        cell type - string used for indexing point cells and synapses
-        presynaptic cell index - index of cell in list self.cells[cell type]
-        synapse index - index of synapse in list self.postCell.synapses[cell type]
+        Creates three return values:
+         
+        1. An anatomical connectivity map:
+            a list of connections between presynaptic cells and postsynaptic cell of the form
+            (cell type, presynaptic cell index, synapse index):
+
+            - cell type (str): string used for indexing point cells and synapses
+            - presynaptic cell index (int): index of cell in list self.cells[cell type]
+            - synapse index (int): index of synapse in list self.postCell.synapses[cell type]
+
+        2. A dictionary of connected cells, ordered by cell type.
+        3. A dictionary of connected cells per structure, ordered by cell type.
+        
+        Used to create anatomical realizations.
+        
+        Returns:
+            tuple: the anatomical map, connected cells, and connected cells per structure
         '''
-        print('---------------------------')
-        print('Creating anatomical connectivity map for output...')
+        logger.info('---------------------------')
+        logger.info('Creating anatomical connectivity map for output...')
         anatomicalMap = []
         connectedCells = {}
         connectedCellsPerStructure = {}
@@ -384,12 +487,12 @@ class NetworkMapper:
             nrOfSynapses = len(self.postCell.synapses[synapseType])
             for i in range(nrOfSynapses):
                 self.postCell.synapses[synapseType][i].synapseID = i
-        columns = list(self.cells.keys())
-        for col in columns:
-            cellTypes = list(self.cells[col].keys())
+        anatomical_areas = list(self.cells.keys())
+        for anatomical_area in anatomical_areas:
+            cellTypes = list(self.cells[anatomical_area].keys())
             for cellType in cellTypes:
                 cellID = 0
-                for cell in self.cells[col][cellType]:
+                for cell in self.cells[anatomical_area][cellType]:
                     if not cell.synapseList:
                         continue
                     connectedStructures = []
@@ -397,41 +500,42 @@ class NetworkMapper:
                         anatomicalConnection = (syn.preCellType, cellID,
                                                 syn.synapseID)
                         anatomicalMap.append(anatomicalConnection)
-                        synapseStructure = self.postCell.sections[
-                            syn.secID].label
+                        synapseStructure = self.postCell.sections[syn.secID].label
                         if synapseStructure not in connectedStructures:
                             connectedStructures.append(synapseStructure)
                     if cell.synapseList[0].preCellType not in connectedCells:
                         connectedCells[syn.preCellType] = 1
                         connectedCellsPerStructure[syn.preCellType] = {}
-                        connectedCellsPerStructure[
-                            syn.preCellType]['ApicalDendrite'] = 0
-                        connectedCellsPerStructure[
-                            syn.preCellType]['Dendrite'] = 0
+                        connectedCellsPerStructure[syn.preCellType]['ApicalDendrite'] = 0
+                        connectedCellsPerStructure[syn.preCellType]['Dendrite'] = 0
                         connectedCellsPerStructure[syn.preCellType]['Soma'] = 0
                     else:
                         connectedCells[cell.synapseList[0].preCellType] += 1
                     for synapseStructure in connectedStructures:
-                        connectedCellsPerStructure[
-                            syn.preCellType][synapseStructure] += 1
+                        connectedCellsPerStructure[syn.preCellType][synapseStructure] += 1
                     cellID += 1
-        print('---------------------------')
+        logger.info('---------------------------')
 
         return anatomicalMap, connectedCells, connectedCellsPerStructure
 
-    def _get_representative_sample(self, realizationPopulation,
-                                   populationDistribution):
-        '''
-        Determine which sample of a population of anatomical realizations
-        is most representative based on the distribution of anatomical
-        parameters across the population.
-        Returns ID of the most representative sample.
-        Most representative: take all samples which have all
-        features within +-2 SD of population mean, then sort
-        by distance to population mean (in SD units) and
-        choose sample with smallest distance.
-        Features used are cell type-specific total number of synapses.
-        Returns: ID of representative sample.
+    def _get_representative_sample(
+        self, 
+        realizationPopulation,
+        populationDistribution):
+        '''Determine which sample of a population of anatomical realizations
+        is the most representative.
+         
+        Given a collection of anatomical parameters, takes all samples
+        which have all features within +-2 SD of population mean, then sorts
+        them by distance to population mean (in SD units) and chooses
+        sample with smallest distance.
+        
+        Features used are:
+
+        - cell type-specific total number of synapses.
+        
+        Returns:
+            ID of the most representative sample.
         '''
         representativeID = None
         tmpID = None
@@ -463,47 +567,48 @@ class NetworkMapper:
                 tmpID = i
 
         if representativeID is None:
-            print(
+            logger.info(
                 'Could not find representative sample with all parameters within +-2 SD'
             )
-            print(
+            logger.info(
                 'Choosing closest sample with minimum distance {:.1f} instead...'
                 .format(np.sqrt(globalMinDist)))
             representativeID = tmpID
         else:
-            print(
+            logger.info(
                 'Found representative sample with all parameters within +-2 SD')
-            print(
+            logger.info(
                 'Closest sample within +-2 SD (ID {:d}) has minimum distance {:.1f} ...'
                 .format(representativeID, np.sqrt(inside2SDMinDist)))
-        print('---------------------------')
+        logger.info('---------------------------')
 
         return representativeID
 
     def _compute_parameter_distribution(self, realizationPopulation):
-        '''
-        Compute mean +- SD of parameters for population of anatomical
-        realizations.
-        Using parameters in cellTypeSummaryTable:
-            Per cell type:
-                0 - nrOfSynapses
-                1 - nrConnectedCells
-                2 - nrPreCells
-                3 - convergence
-                4 - distanceMean
-                5 - distanceSTD
-                6 - cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                7 - cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                8 - cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                9 - cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
-        Returns dictionary organized the same way as cellTypeSummaryTable,
-        but entries are tuples (mean, STD) of each parameter for
-        given population of realizations.
+        '''Compute mean +- SD of parameters for population of anatomical realizations.
+        
+        Using parameters in :py:attr:`cellTypeSummaryTable` on a per cell type basis:
+
+                0.  nrOfSynapses
+                1.  nrConnectedCells
+                2.  nrPreCells
+                3.  convergence
+                4.  distanceMean
+                5.  distanceSTD
+                6.  cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+                7.  cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+                8.  cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+                9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
+
+        Returns:
+            dict: dictionary organized the same way as :py:attr:`cellTypeSummaryTable`,
+            but entries are tuples (mean, STD) of each parameter for
+            given population of realizations.
         '''
         nrOfSamples = len(realizationPopulation)
         if not nrOfSamples:
             return None
-        print(
+        logger.info(
             'Computing parameter distribution for {:d} samples in population...'
             .format(nrOfSamples))
         populationDistribution = {}
@@ -554,18 +659,26 @@ class NetworkMapper:
                         parameterDistributionSTD = populationSTDAvg, populationSTDSTD
                         populationDistribution[cellType][i][
                             structure] = parameterDistributionMean, parameterDistributionSTD
-        print('---------------------------')
+        logger.info('---------------------------')
 
         return populationDistribution
 
-    def _compute_sample_distance(self, realizationSample,
-                                 realizationPopulationDistribution):
-        '''
-        Compute distance of samples to population mean based
-        on estimate of sample distribution.
-        Returns SD-normalized distance vector (i.e. distance
-        for each parameter to the population mean in units
-        of parameter SD).
+    def _compute_sample_distance(
+            self, 
+            realizationSample,
+            realizationPopulationDistribution):
+        '''Compute the distance of network realization samples to the population mean.
+         
+        Given a sample distribution, calculate how far each parameter is from the population mean.
+        Standardizes the distance vector by dividing it by the parameter's population-wide 
+        standard deviation.
+
+        Args:
+            realizationSample (list): List of parameters for a single realization.
+            realizationPopulationDistribution (list): List of parameters for the population of realizations.
+
+        Returns:
+            np.array: SD-normalized distance vector.
         '''
         distanceVec = np.zeros(len(realizationSample))
         for i in range(len(realizationSample)):
@@ -580,20 +693,28 @@ class NetworkMapper:
 
         return distanceVec
 
-    def _test_population_convergence(self, nrOfSamples, sampleConnectivityData,
-                                     postCellName):
-        '''
-        Testing convergence: How many samples do I need to generate to
-        get a reasonable estimate of the variability of connectivity
-        parameters and determine a representative sample?
-        Use cellTypeSummaryTable! (index 2)
+    def _test_population_convergence(
+        self, 
+        nrOfSamples, 
+        sampleConnectivityData,
+        postCellName):
+        '''Test how many samples are needed to get a representative sample.
+
+        Tests how many network realizations need to be sampled in order
+        to get a reasonable estimate of the variability of connectivity
+        parameters.
+
+        Args:
+            nrOfSamples (int): Number of network realizations.
+            sampleConnectivityData (list): List of network realizations.
+            postCellName (str): Name of the postsynaptic cell model.
         '''
         population = [sampleConnectivityData[0][2]]
         sampleNumberSummary = {}
         sampleNumberFeatures = {}
         for i in range(1, nrOfSamples):
             populationSize = i + 1
-            print(
+            logger.info(
                 'Computing parameter distribution for {:d} samples in population...'
                 .format(populationSize))
             population.append(sampleConnectivityData[i][2])
@@ -690,19 +811,32 @@ class NetworkMapper:
                     line += str(populationSTD / maxSTD)
                 line += '\n'
                 outFile.write(line)
-        print('---------------------------')
+        logger.info('---------------------------')
 
-    def _compute_summary_tables(self, connectedCells,
-                                connectedCellsPerStructure):
+    def _compute_summary_tables(
+            self, 
+            connectedCells,
+            connectedCellsPerStructure):
+        '''Computes all summary data.
+
+        Compute the following summary data:
+
+        - numbers of synapses per cell type/anatomical_area,
+        - distance of synapses to soma, convergence etc.
+
+        Used by :py:meth:`~create_network_embedding` and 
+        :py:meth:`~create_network_embedding_for_simulations`.
+
+        Args:
+            connectedCells (dict): Dictionary of connected cells.
+            connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
+        
+        Returns: 
+            tuple: synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
         '''
-        computes all summary data:
-        numbers of synapses per cell type/column,
-        distance of synapses to soma, convergence etc.
-        Returns: synapseLocations, cellTypeSummaryTable, columnSummaryTable
-        '''
-        print('---------------------------')
-        print('Calculating results summary')
-        print('    Computing path length to soma for all synapses...')
+        logger.info('---------------------------')
+        logger.info('Calculating results summary')
+        logger.info('    Computing path length to soma for all synapses...')
         for preCellType in list(self.postCell.synapses.keys()):
             for synapse in self.postCell.synapses[preCellType]:
                 attachedSec = self.postCell.sections[synapse.secID]
@@ -716,17 +850,17 @@ class NetworkMapper:
         synapseLocations = {}
         cellSynapseLocations = {}
         cellTypeSummaryTable = {}
-        columnSummaryTable = {
+        anatomicalAreaSummaryTable = {
         }  # note- this could probably be tidied using I.defaultdict
-        columns = list(self.cells.keys())
-        for col in columns:
-            cellTypes = list(self.cells[col].keys())
+        anatomical_areas = list(self.cells.keys())
+        for anatomical_area in anatomical_areas:
+            cellTypes = list(self.cells[anatomical_area].keys())
             for preType in cellTypes:
-                preCellType = preType + '_' + col
-                if col not in columnSummaryTable:
-                    columnSummaryTable[col] = {}
-                if col not in synapseLocations:
-                    synapseLocations[col] = {}
+                preCellType = preType + '_' + anatomical_area
+                if anatomical_area not in anatomicalAreaSummaryTable:
+                    anatomicalAreaSummaryTable[anatomical_area] = {}
+                if anatomical_area not in synapseLocations:
+                    synapseLocations[anatomical_area] = {}
                 if preType not in cellTypeSummaryTable:
                     #                    [nrOfSynapses,nrConnectedCells,nrPreCells,convergence,distanceMean,distanceSTD]
                     cellTypeSummaryTable[preType] = [0, 0, 0, 0.0, [], -1]
@@ -833,12 +967,12 @@ class NetworkMapper:
                 if nrOfApicalSynapses + nrOfBasalSynapses + nrOfSomaSynapses != nrOfSynapses:
                     errstr = 'Logical error: Number of synapses does not add up'
                     raise RuntimeError(errstr)
-                print('    Created {:d} synapses of type {:s}!'.format(
+                logger.info('    Created {:d} synapses of type {:s}!'.format(
                     nrOfSynapses, preCellType))
                 #===============================================================
-                # column- and cell type-specific data
+                # anatomical_area- and cell type-specific data
                 #===============================================================
-                nrPreCells = len(self.cells[col][preType])
+                nrPreCells = len(self.cells[anatomical_area][preType])
                 synapsesPerStructure = {}
                 synapsesPerStructure['ApicalDendrite'] = nrOfApicalSynapses
                 synapsesPerStructure['BasalDendrite'] = nrOfBasalSynapses
@@ -861,14 +995,14 @@ class NetworkMapper:
                     'ApicalDendrite'] = distanceApicalMean, distanceApicalSTD
                 distancesPerStructure[
                     'BasalDendrite'] = distanceBasalMean, distanceBasalSTD
-                columnSummaryTable[col][preType] = [
+                anatomicalAreaSummaryTable[anatomical_area][preType] = [
                     nrOfSynapses, nrConnectedCells, nrPreCells, convergence,
                     distanceMean, distanceSTD
                 ]
-                columnSummaryTable[col][preType].append(synapsesPerStructure)
-                columnSummaryTable[col][preType].append(connectionsPerStructure)
-                columnSummaryTable[col][preType].append(convergencePerStructure)
-                columnSummaryTable[col][preType].append(distancesPerStructure)
+                anatomicalAreaSummaryTable[anatomical_area][preType].append(synapsesPerStructure)
+                anatomicalAreaSummaryTable[anatomical_area][preType].append(connectionsPerStructure)
+                anatomicalAreaSummaryTable[anatomical_area][preType].append(convergencePerStructure)
+                anatomicalAreaSummaryTable[anatomical_area][preType].append(distancesPerStructure)
                 #                totalLandmarkName = totalDirName + '_'.join((cellName,'total_synapses',preCellType,id1,id2))
                 #                writer.write_landmark_file(totalLandmarkName, allSynapses)
                 #                apicalLandmarkName = apicalDirName + '_'.join((cellName,'apical_synapses',preCellType,id1,id2))
@@ -877,12 +1011,12 @@ class NetworkMapper:
                 #                writer.write_landmark_file(basalLandmarkName, basalSynapses)
                 #                somaLandmarkName = somaDirName + '_'.join((cellName,'soma_synapses',preCellType,id1,id2))
                 #                writer.write_landmark_file(somaLandmarkName, somaSynapses)
-                synapseLocations[col][preType] = {}
-                synapseLocations[col][preType]['Total'] = allSynapses
-                synapseLocations[col][preType][
+                synapseLocations[anatomical_area][preType] = {}
+                synapseLocations[anatomical_area][preType]['Total'] = allSynapses
+                synapseLocations[anatomical_area][preType][
                     'ApicalDendrite'] = apicalSynapses
-                synapseLocations[col][preType]['BasalDendrite'] = basalSynapses
-                synapseLocations[col][preType]['Soma'] = somaSynapses
+                synapseLocations[anatomical_area][preType]['BasalDendrite'] = basalSynapses
+                synapseLocations[anatomical_area][preType]['Soma'] = somaSynapses
                 #===============================================================
                 # cell type-specific data summary
                 #===============================================================
@@ -949,12 +1083,35 @@ class NetworkMapper:
                 cellTypeSummaryTable[preType][9]['BasalDendrite'][0] = -1
                 cellTypeSummaryTable[preType][9]['BasalDendrite'][1] = -1
 
-        return synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable
+        return synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
 
-    def _generate_output_files(self, postCellName, connectivityMap,
-                               connectedCells, connectedCellsPerStructure):
-        '''
-        generates all summary files and writes output files
+    def _generate_output_files(
+            self, 
+            postCellName, 
+            connectivityMap,
+            connectedCells, 
+            connectedCellsPerStructure):
+        '''Generates all summary files and writes output files.
+
+        Generates and writes out summary files using 
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
+
+        Used by :py:meth:`~create_network_embedding_for_simulations` and
+        :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+
+        Args:
+            postCellName (str): Path to the postsynaptic .hoc file.
+            connectivityMap (list): 
+                Connections between presynaptic cells and postsynaptic cell of the form
+                (cell type, presynaptic cell index, synapse index). 
+                Created by :py:meth:`_create_anatomical_connectivity_map`.
+            connectedCells (dict): Dictionary of connected cells.
+            connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
+
+        Returns:
+            None. Writes output files to disk.
         '''
         id1 = time.strftime('%Y%m%d-%H%M')
         id2 = str(os.getpid())
@@ -976,50 +1133,86 @@ class NetworkMapper:
         if not os.path.exists(somaDirName):
             os.makedirs(somaDirName)
 
-        synapseLocations, cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable = self._compute_summary_tables(
-            connectedCells, connectedCellsPerStructure)
+        (
+            synapseLocations, 
+            cellSynapseLocations, 
+            cellTypeSummaryTable, 
+            anatomicalAreaSummaryTable
+        ) = self._compute_summary_tables(
+            connectedCells, 
+            connectedCellsPerStructure
+        )
 
-        print('    Writing output files...')
+        logger.info('    Writing output files...')
 
-        columns = list(self.cells.keys())
-        for col in columns:
-            cellTypes = list(self.cells[col].keys())
+        anatomical_areas = list(self.cells.keys())
+        for anatomical_area in anatomical_areas:
+            cellTypes = list(self.cells[anatomical_area].keys())
             for preType in cellTypes:
-                preCellType = preType + '_' + col
-                allSynapses = synapseLocations[col][preType]['Total']
+                preCellType = preType + '_' + anatomical_area
+                allSynapses = synapseLocations[anatomical_area][preType]['Total']
                 totalLandmarkName = totalDirName + '_'.join(
                     (cellName, 'total_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(totalLandmarkName, allSynapses)
-                apicalSynapses = synapseLocations[col][preType][
+                apicalSynapses = synapseLocations[anatomical_area][preType][
                     'ApicalDendrite']
                 apicalLandmarkName = apicalDirName + '_'.join(
                     (cellName, 'apical_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(apicalLandmarkName, apicalSynapses)
-                basalSynapses = synapseLocations[col][preType]['BasalDendrite']
+                basalSynapses = synapseLocations[anatomical_area][preType]['BasalDendrite']
                 basalLandmarkName = basalDirName + '_'.join(
                     (cellName, 'basal_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(basalLandmarkName, basalSynapses)
-                somaSynapses = synapseLocations[col][preType]['Soma']
+                somaSynapses = synapseLocations[anatomical_area][preType]['Soma']
                 somaLandmarkName = somaDirName + '_'.join(
                     (cellName, 'soma_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(somaLandmarkName, somaSynapses)
 
         synapseName = dirName + '_'.join((cellName, 'synapses', id1, id2))
-        writer.write_cell_synapse_locations(synapseName, cellSynapseLocations,
-                                            self.postCell.id)
+        writer.write_cell_synapse_locations(
+            synapseName, 
+            cellSynapseLocations,
+            self.postCell.id)
         anatomicalID = synapseName.split('/')[-1] + '.syn'
-        writer.write_anatomical_realization_map(synapseName, connectivityMap,
-                                                anatomicalID)
+        writer.write_anatomical_realization_map(
+            synapseName, 
+            connectivityMap,
+            anatomicalID)
         summaryName = dirName + '_'.join((cellName, 'summary', id1, id2))
-        writer.write_sample_connectivity_summary(summaryName,
-                                                 cellTypeSummaryTable,
-                                                 columnSummaryTable)
-        print('---------------------------')
+        writer.write_sample_connectivity_summary(
+            summaryName,
+            cellTypeSummaryTable,
+            anatomicalAreaSummaryTable)
+        logger.info('---------------------------')
 
-    def _write_population_output_files(self, postCellName, populationDistribution, connectivityMap, synapseLocations, \
-                                       cellSynapseLocations, cellTypeSummaryTable, columnSummaryTable):
-        '''
-        writes output files for precomputed summary files
+    def _write_population_output_files(
+        self, 
+        postCellName, 
+        populationDistribution, 
+        connectivityMap, 
+        synapseLocations, 
+        cellSynapseLocations,
+        cellTypeSummaryTable, 
+        anatomicalAreaSummaryTable
+        ):
+        '''Writes output files for precomputed summary files.
+
+        Used by :py:meth:`_create_network_embedding` to write output files to disk.
+
+        Args:
+            postCellName (str): Path to the postsynaptic .hoc file.
+            populationDistribution (dict): Population distribution of anatomical parameters.
+            connectivityMap (list): 
+                Connections between presynaptic cells and postsynaptic cell of the form
+                (cell type, presynaptic cell index, synapse index). 
+                Created by :py:meth:`_create_anatomical_connectivity_map`.
+            synapseLocations (dict): Synapse locations.
+            cellSynapseLocations (dict): Cell synapse locations.
+            cellTypeSummaryTable (dict): Summary table of cell types.
+            anatomicalAreaSummaryTable (dict): Summary table of anatomical areas.
+
+        Returns:
+            None. Writes output files to disk.
         '''
         id1 = time.strftime('%Y%m%d-%H%M')
         id2 = str(os.getpid())
@@ -1041,42 +1234,48 @@ class NetworkMapper:
         if not os.path.exists(somaDirName):
             os.makedirs(somaDirName)
 
-        print('---------------------------')
-        print('Writing output files...')
+        logger.info('---------------------------')
+        logger.info('Writing output files...')
 
-        columns = list(self.cells.keys())
-        for col in columns:
-            cellTypes = list(self.cells[col].keys())
+        anatomical_areas = list(self.cells.keys())
+        for anatomical_area in anatomical_areas:
+            cellTypes = list(self.cells[anatomical_area].keys())
             for preType in cellTypes:
-                preCellType = preType + '_' + col
-                allSynapses = synapseLocations[col][preType]['Total']
+                preCellType = preType + '_' + anatomical_area
+                allSynapses = synapseLocations[anatomical_area][preType]['Total']
                 totalLandmarkName = totalDirName + '_'.join(
                     (cellName, 'total_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(totalLandmarkName, allSynapses)
-                apicalSynapses = synapseLocations[col][preType][
+                apicalSynapses = synapseLocations[anatomical_area][preType][
                     'ApicalDendrite']
                 apicalLandmarkName = apicalDirName + '_'.join(
                     (cellName, 'apical_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(apicalLandmarkName, apicalSynapses)
-                basalSynapses = synapseLocations[col][preType]['BasalDendrite']
+                basalSynapses = synapseLocations[anatomical_area][preType]['BasalDendrite']
                 basalLandmarkName = basalDirName + '_'.join(
                     (cellName, 'basal_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(basalLandmarkName, basalSynapses)
-                somaSynapses = synapseLocations[col][preType]['Soma']
+                somaSynapses = synapseLocations[anatomical_area][preType]['Soma']
                 somaLandmarkName = somaDirName + '_'.join(
                     (cellName, 'soma_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(somaLandmarkName, somaSynapses)
 
         synapseName = dirName + '_'.join((cellName, 'synapses', id1, id2))
-        writer.write_cell_synapse_locations(synapseName, cellSynapseLocations,
-                                            self.postCell.id)
+        writer.write_cell_synapse_locations(
+            synapseName, 
+            cellSynapseLocations,
+            self.postCell.id)
         anatomicalID = synapseName.split('/')[-1] + '.syn'
-        writer.write_anatomical_realization_map(synapseName, connectivityMap,
-                                                anatomicalID)
+        writer.write_anatomical_realization_map(
+            synapseName, 
+            connectivityMap,
+            anatomicalID)
         summaryName = dirName + '_'.join((cellName, 'summary', id1, id2))
         writer.write_population_and_sample_connectivity_summary(
-            summaryName, populationDistribution, cellTypeSummaryTable,
-            columnSummaryTable)
+            summaryName, 
+            populationDistribution, 
+            cellTypeSummaryTable,
+            anatomicalAreaSummaryTable)
         #=======================================================================
         # Begin BB3D-specific information for making results available (keep!!!)
         #=======================================================================

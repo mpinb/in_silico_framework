@@ -11,15 +11,24 @@ from functools import partial
 ####################################
 # selection of sections
 ####################################
-def connected_to_structure_beyond(cell,
-                                  sec,
-                                  beyond_dist,
-                                  beyond_struct=['ApicalDendrite'],
-                                  n_children_required=1):
-    '''computes if a secion sec of a cell is connected to a structure at a soma distance 
-    larger than beyond_dist. n_children_required: at least the specified amound of children
-    needs to have such a connection. This can be helpful to detect the main bifurcation, 
-    which is the bifurcation in which both children are connected to the tuft.'''
+def connected_to_structure_beyond(
+    cell,
+    sec,
+    beyond_dist,
+    beyond_struct=['ApicalDendrite'],
+    n_children_required=1
+    ):
+    '''Checks if a :class:`~single_cell_parser.cell.Cell` section is connected to a structure
+    at a soma distance larger than :paramref:`beyond_dist`. 
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        sec (:class:`~single_cell_parser.section.Section`): The section to check.
+        beyond_dist (float): The distance from the soma to check.
+        beyond_struct (list): The labels of the structures to check.
+        n_children_required (int): The minimum number of children required to have a connection.
+    
+    This can be helpful to detect the main bifurcation of a L5PT, which is the bifurcation in which both children are connected to the tuft.'''
     if cell.distance_to_soma(sec, 1) > beyond_dist and sec.label in beyond_struct:
         return True
     else:
@@ -37,30 +46,65 @@ connected_to_dend_beyond = partial(connected_to_structure_beyond,
                                    beyond_struct=['Dendrite', 'ApicalDendrite'])
 
 
-def get_inner_sec_dist_dict(cell,
-                            beyond_dist=1000,
-                            beyond_struct=['ApicalDendrite'],
-                            n_children_required = 1):
-    '''returns sections, that are connected to compartments with labels in beyond_struct that have a minimum soma distance of
-    beyond_dist. This is useful to get sections of the apical trunk filtering out oblique dendrites.'''
+def get_inner_sec_dist_dict(
+    cell,
+    beyond_dist=1000,
+    beyond_struct=['ApicalDendrite'],
+    n_children_required = 1):
+    '''Get sections that connect to specific structures beyond a minimum distance.
+    
+    Fetches all sections that are connected to compartments with labels in :paramref:`beyond_struct`, and
+    that have a minimum soma distance of :paramref:`beyond_dist`.
+    This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        beyond_dist (float): The minimum distance from the soma (um).
+        beyond_struct (list): The labels of the structures to check.
+        n_children_required (int): The minimum number of children required to have a connection.
+        
+    Returns:
+        dict: A dictionary with the soma distance as key and the section as value.
+        
+    Note:
+        See also: :py:meth:`~get_inner_section_at_distance` that returns the closest section at a specific distance, rather than all sections beyond some distance.
+    '''
     sec_dist_dict = {
         cell.distance_to_soma(sec, 1.0): sec
         for sec in cell.sections
-        if connected_to_structure_beyond(cell, sec, 
-                                         beyond_dist,
-                                         beyond_struct, 
-                                         n_children_required = n_children_required)
+        if connected_to_structure_beyond(
+            cell, sec, 
+            beyond_dist,
+            beyond_struct, 
+            n_children_required = n_children_required)
     }
     return sec_dist_dict
 
 
-def get_inner_section_at_distance(cell,
-                                  dist,
-                                  beyond_dist=1000,
-                                  beyond_struct=['ApicalDendrite']):
-    '''Returns the section and relative position of that section, such that the soma distance (along the dendrite) is dist.
-    Also, it is assured, that the section returned has children that have a soma distance beyond beyond_dist of the label in
-    beyond_struct'''
+def get_inner_section_at_distance(
+    cell,
+    dist,
+    beyond_dist=1000,
+    beyond_struct=['ApicalDendrite']
+    ):
+    '''Get sections that connect to specific structures at a particular distance.
+    
+    Fetches all sections that are connected to compartments with labels in :paramref:`beyond_struct`, and
+    that have a soma distance of :paramref:`beyond_dist`.
+    This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        dist (float): The distance from the soma (um).
+        beyond_dist (float): The minimum distance from the soma (um).
+        beyond_struct (list): The labels of the structures to check.
+        
+    Returns:
+        tuple: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :paramref:`dist`.
+        
+    Note:
+        See also: :py:meth:`~get_inner_sec_dist_dict` that returns all sections beyond some distance, rather than only the closest section at a specific distance.
+    '''
     import six
     sec_dist_dict = get_inner_sec_dist_dict(cell, beyond_dist, beyond_struct)
     dummy = {k - dist: v for k, v in six.iteritems(sec_dist_dict) if k > dist}
@@ -70,7 +114,21 @@ def get_inner_section_at_distance(cell,
 
 
 def get_main_bifurcation_section(cell):
-    '''returns the main bifurcation section of a cell'''
+    '''Get the main bifurcation section of a cell
+    
+    Assumes the cell has a main bifurcation to begin with, such as a L5PT.
+    A main bifuraction section is defined as a section::
+    
+        - with at least two children
+        - whose parent is the soma.
+        - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
+        
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        
+    Returns:
+        :class:`~single_cell_parser.section.Section`: The main bifurcation section.
+    '''
     two_children_connected_list = get_inner_sec_dist_dict(cell, n_children_required = 2)
     two_children_connected_list = list(two_children_connected_list.values())
     sec = two_children_connected_list[0]
@@ -79,10 +137,19 @@ def get_main_bifurcation_section(cell):
     return sec
 
 def augment_cell_with_detailed_labels(cell):
-    '''further discriminates the dendrite into tuft, oblique, trunk and basal sections
-    by assigning these labels to section.label_detailed
+    '''Augment section labels to discriminate the tuft, oblique, trunk and basal dendrites.
     
-    returns: None'''
+    Assigning these labels to section.label_detailed
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+    
+    Returns: 
+        None
+        
+    Note:
+        This method is specific to L5PT neurons.
+    '''
     def helper(secs):
         for sec in secs:
             sec.label_detailed = 'tuft'
@@ -110,20 +177,32 @@ def augment_cell_with_detailed_labels(cell):
 
 
 def tVec(cell):
+    """Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array."""
     return np.array(cell.tVec)
 
 
 def vmSoma(cell):
+    """Convenience method to extract the soma voltage trace from a cell"""
     return np.array(cell.soma.recVList[0])
 
 
 def vmMax(cell):
+    """Calculate the maximum voltage of a cell at any timepoint, at any dendrite."""
     return np.max(
         [np.max(np.array(sec.recVList), axis=0) for sec in cell.sections],
         axis=0)
 
 
 def _get_apical_sec_and_i_at_distance(cell, dist):
+    """Get the apical section at a certain distance from the soma.
+    
+    Args:
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        dist (float): The distance from the soma (um).
+        
+    Returns:
+        tuple: The section, the relative distance from the section to the soma, and the segment index.
+    """
     sec, target_x = get_inner_section_at_distance(cell, dist)
     # roberts code to get closest segment
     mindx = 1
@@ -136,6 +215,18 @@ def _get_apical_sec_and_i_at_distance(cell, dist):
 
 
 def vmApical(cell, dist=None):
+    """Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
+    
+    Assumes that the :class:`~single_cell_parser.cell.Cell` object has an apical dendrite::
+    
+        - It contains at least one section with the label "ApicalDendrite"
+        - Such section exists at :paramref:`~dist` distance from the soma
+        - The section has at least one child
+        
+    See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
+    to define an apical section.
+
+    """
     assert dist is not None
     sec, mindx, minSeg = _get_apical_sec_and_i_at_distance(cell, dist)
     return np.array(sec.recVList[minSeg])
@@ -157,7 +248,7 @@ import cloudpickle
 
 
 class Undemonize(object):
-    '''A hack to resolve AssertionError: daemonic processes are not allowed to have children
+    '''A class used to resolve AssertionError: daemonic processes are not allowed to have children
     
     This might spawn child processes that do not terminate'''
 
@@ -267,8 +358,8 @@ class StreamToLogger(object):
     Wrapper for a stream object that redirects writes to a logger instance.
     Can be used as a context manager::
 
-        with StreamToLogger() as sys.stdout:
-            do_something()
+        >>> with StreamToLogger() as sys.stdout:
+        >>>    do_something()
     
     Used for reading in .hoc files that provide output due to various print statements in the `.hoc` file, or capturing NEURON output.
     """
