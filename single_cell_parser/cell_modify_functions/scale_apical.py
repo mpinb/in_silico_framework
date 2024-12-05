@@ -52,7 +52,7 @@ def scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite'):
     scaleCount = 0
     for sec in cell.sections:
         if sec.label == 'ApicalDendrite':
-            dist = cell.distance_to_soma(sec, 1.0)
+            # dist = cell.distance_to_soma(sec, 1.0)
             scaleCount += 1
             for i in range(sec.nrOfPts):
                 oldDiam = sec.diamList[i]

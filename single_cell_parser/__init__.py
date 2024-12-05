@@ -183,12 +183,12 @@ def create_cell(
     logger.info('Loading cell morphology...')
     parser = CellParser(parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
+    parser.apply_cell_modify_functions(parameters)
     if setUpBiophysics:
         logger.info('Setting up biophysical model...')
         parser.set_up_biophysics(parameters, allPoints)
     logger.info('-------------------------------')
 
-    parser.apply_cell_modify_functions(parameters)
     parser.cell.init_time_recording()
     parser.cell.parameters = parameters
     parser.cell.scaleFunc = scaleFunc

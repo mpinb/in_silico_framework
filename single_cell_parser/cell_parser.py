@@ -253,8 +253,7 @@ class CellParser(object):
                 'single_cell_parser.create_cell')
             for funname in list(parameters.cell_modify_functions.keys()):
                 kwargs = parameters.cell_modify_functions[funname]
-                logger.info('Applying cell_modify_function {} with parameters {}'.
-                         format(funname, str(kwargs)))
+                logger.info('Applying cell_modify_function {} with parameters {}'.format(funname, str(kwargs)))
                 fun = cell_modify_functions.get(funname)
                 self.cell = fun(self.cell, **kwargs)
             self.cell_modify_functions_applied = True
