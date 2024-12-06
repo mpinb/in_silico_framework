@@ -211,7 +211,7 @@ from singlecell_input_mapper.ongoing_network_param_from_template import create_n
            as create_ongoing_network_parameter
 
 if not 'ISF_MINIMIZE_IO' in os.environ:
-    if get_versions()['dirty']: warnings.warn('The source folder has uncommited changes!')
+    if get_versions()['dirty']: logger.attention('The source folder has uncommited changes!')
 
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 
@@ -283,5 +283,5 @@ import barrel_cortex
 from barrel_cortex import excitatory, inhibitory, color_cellTypeColorMap, color_cellTypeColorMap_L6paper, color_cellTypeColorMap_L6paper_with_INH
 
 import compatibility
-# Set logging level back to WARNING to suppress verbosity in regular usage
-logger.setLevel(logging.WARNING)
+
+logger.setLevel(logging.ATTENTION)
