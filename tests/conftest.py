@@ -3,7 +3,7 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import os, logging, socket, dask, six, sys
-from Interface import logger as isf_logger
+from config.isf_logging import logger as isf_logger
 # --- Import fixtures
 from .fixtures import client
 from .fixtures.dataframe_fixtures import pdf, ddf
@@ -105,6 +105,7 @@ def pytest_configure(config):
     matplotlib.use('agg')
     import matplotlib.pyplot as plt
     plt.switch_backend('agg')
+    from config.isf_logging import logger as isf_logger
 
     output_thickness = os.path.join(CURRENT_DIR, 'test_dendrite_thickness',
                                     'test_files', 'output')
