@@ -28,6 +28,7 @@ from .context import TEST_DATA_FOLDER, CURRENT_DIR
 def import_worker_requirements():
     import compatibility
     import mechanisms
+    from config.isf_logging import logger
 
 def ensure_workers_have_imported_requirements(client):
     """
@@ -112,11 +113,9 @@ def pytest_configure(config):
 
     # --------------- Setup logging output -------------------
     # only log warnings or worse
-    isf_logger.setLevel(
-        logging.WARNING)  # set logging level of ISF logger to WARNING
+    isf_logger.setLevel(logging.WARNING)  # set logging level of ISF logger to WARNING
     # Suppress logs from verbose modules so they don't show in stdout
-    isf_logger.addFilter(
-        ModuleFilter(suppress_modules_list))  # suppress logs from this module
+    isf_logger.addFilter(ModuleFilter(suppress_modules_list))  # suppress logs from this module
     # redirect test ouput to log file with more verbose output
     if not os.path.exists(os.path.join(CURRENT_DIR, "logs")):
         os.mkdir(os.path.join(CURRENT_DIR, "logs"))
