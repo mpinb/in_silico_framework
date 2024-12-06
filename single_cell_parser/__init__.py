@@ -183,8 +183,8 @@ def create_cell(
     logger.info('Loading cell morphology...')
     parser = CellParser(parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
+    logger.attention('Applying cell modify functions - these may change segmentation!')
     parser.apply_cell_modify_functions(parameters)
-    
     if setUpBiophysics:
         logger.info('Setting up biophysical model & discretizing cell...')
         parser.set_up_biophysics(parameters, allPoints)
