@@ -147,7 +147,7 @@ class CellParser(object):
         
         Default method for determining the compartment sizes for NEURON simulation, initializing membrane properties, and mechanisms.
         Properties are constants that are defined for an entire structure. Mechanisms have specific densities (not always uniform), and can be transient.
-        Poperties are added to the section by executing the NEURON command ``sec.<property>=<value>``.
+        Poperties are added to the section by executing the NEURON HOC command ``sec.<property>=<value>``.
         
         - Properties:
             - :math:`C_m` (see :py:meth:`insert_membrane_properties`)
@@ -167,8 +167,8 @@ class CellParser(object):
             5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
                 
         Args:
-            parameters (dict): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
-            full (bool): Whether or not to use full spatial discretization.
+            parameters (sumatra.parameters.NTParameterSet | dict): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+            full (bool): Whether or not to use full spatial discretization. If false, :math:`d-\lambda` segmentation is used instead.
         '''
         for label in list(parameters.keys()):
             if label == 'filename':
@@ -323,12 +323,12 @@ class CellParser(object):
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
             NotImplementedError: If the spatial distribution is not implemented.
                 
-        The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+        The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding distribution.
 
-        .. table:: Possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+        .. table:: Possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding distribution.
 
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | Spatial Key            | Additional Keys                                                 | Math Equation                                                                                                                       |
+            | Spatial Key            | Additional Keys                                                 | Distribution                                                                                                                        |
             +========================+=================================================================+=====================================================================================================================================+
             | uniform                | None                                                            | :math:`y = c`                                                                                                                       |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
@@ -932,7 +932,8 @@ class CellParser(object):
 
         Args:
             f (float, optional): frequency used for determining discretization. Default is 100.0 Hz.
-            full (bool, optional): Whether or not to use full spatial discretization (one segment per morphology point). Default is False.
+            full (bool, optional): Whether or not to use full spatial discretization (one segment per morphology point). 
+                Default is False, and :math:`d-\lambda` segmentation is applied.
             max_seg_length (float, optional): Maximum segment length. Default is None.
             
         Note:

@@ -184,8 +184,9 @@ def create_cell(
     parser = CellParser(parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
     parser.apply_cell_modify_functions(parameters)
+    
     if setUpBiophysics:
-        logger.info('Setting up biophysical model...')
+        logger.info('Setting up biophysical model & discretizing cell...')
         parser.set_up_biophysics(parameters, allPoints)
     logger.info('-------------------------------')
 
