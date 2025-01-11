@@ -3,8 +3,6 @@
 Create a network parameter template file.
 """
 
-
-
 import sys
 import single_cell_parser as scp
 from data_base.dbopen import dbopen
@@ -18,7 +16,7 @@ def create_network_parameter(
     outFileName,
     write_all_celltypes=False
     ):
-    """Create a template network parameter file from a template parameter file and a cell number file.
+    """Create a template :ref:`network_params_format` file from a template parameter file and a cell number file.
     
     The parameter file defines the PSTHs for each cell type under some in-vivo condition. For the template, ongoing activity is set as a default value for each cell type.
     The network parameter file converts the PSTHs to firing rates in fixed temporal bins, and adds the following information:

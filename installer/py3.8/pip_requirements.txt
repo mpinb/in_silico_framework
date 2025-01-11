@@ -30,6 +30,7 @@ fasteners==0.16
 scandir==1.10.0
 kazoo==2.8.0
 redis==3.5.3
+zarr==2.15.0
 
 ## single_cell_parser dependencies
 neuron==7.8.2

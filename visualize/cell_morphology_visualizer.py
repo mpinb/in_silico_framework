@@ -17,7 +17,7 @@ from mpl_toolkits.mplot3d.art3d import Line3DCollection
 import numpy as np
 import shutil
 from visualize.vtk import write_vtk_skeleton_file
-import os, dask, time, six, socket, barrel_cortex, warnings
+import os, dask, time, six, socket, warnings
 from .utils import write_video_from_images, write_gif_from_images, display_animation_from_images, draw_arrow
 if six.PY3:
     from scipy.spatial.transform import Rotation
@@ -258,20 +258,19 @@ class CMVDataParser:
         for sec_n, sec in enumerate(cell.sections):
             if sec.label == 'Soma':
                 n_segments = len([seg for seg in sec])
-                for i, pt in enumerate(sec.pts):
-                    seg_n = int(n_segments * i / len(sec.pts))
-                    x, y, z = pt
-                    d = sec.diamList[i]
-                    points.append([x, y, z, d, sec_n, seg_n])
+                # for i, pt in enumerate(sec.pts):
+                #     seg_n = int(n_segments * i / len(sec.pts))
+                #     x, y, z = pt
+                #     d = sec.diamList[i]
+                #     points.append([x, y, z, d, sec_n, seg_n])
                 # print('adding soma')
                 # print(sec_n)
-                # x, y, z = self.soma_center
-                # # soma size
-                # mn, mx = np.min(cell.soma.pts, axis=0), np.max(cell.soma.pts,
-                #                                                axis=0)
-                # d_range = [mx_ - mn_ for mx_, mn_ in zip(mx, mn)]
-                # d = max(d_range)
-                # points.append([x, y, z, d, sec_n, 0])
+                x, y, z = self.soma_center
+                # soma size
+                mn, mx = np.min(cell.soma.pts, axis=0), np.max(cell.soma.pts, axis=0)
+                d_range = [mx_ - mn_ for mx_, mn_ in zip(mx, mn)]
+                d = max(d_range)
+                points.append([x, y, z, d, sec_n, 0])
             elif sec.label in ['AIS', 'Myelin']:
                 continue
             else:
@@ -758,8 +757,8 @@ class CellMorphologyVisualizer(CMVDataParser):
         self.synapse_legend = True
         self.legend = True
         self.highlight_arrow_kwargs = None        
-        self.synapse_group_function = lambda x: x # barrel_cortex.synapse_group_function_HZpaper
-        self.population_to_color_dict = {}  # barrel_cortex.color_cellTypeColorMapHotZone    
+        self.synapse_group_function = lambda x: x
+        self.population_to_color_dict = {} 
 
     def _write_png_timeseries(
         self, 

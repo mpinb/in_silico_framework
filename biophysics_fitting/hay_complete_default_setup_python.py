@@ -105,7 +105,7 @@ def get_Simulator(fixed_params, step=False, vInit=False):
         step (bool): Whether to include step current measurements.
         vInit (bool): Whether to include vInit measurements. (not implemented yet)
         
-    Returns
+    Returns:
         (:py:class:`~biophysics_fitting.simulator.Simulator`): A simulator object.
         
     See also:

@@ -1,3 +1,19 @@
+"""Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
+
+This module provides a function to resimulate a network-embedded neuron simulation from a simrun-initialized database.
+It allows to modify either the cell or the network with modification functions.
+The database is expected to have been initialized with :py:mod:`data_base.isf_data_base.db_initializers.init_simrun_general`. 
+The function :py:func:`rerun_db` takes a database and a directory as input and resimulates the network-embedded neuron simulation for each simulation trial in the database. 
+The results are stored in the specified directory.
+
+See also:
+    :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output.
+
+See also:
+    :py:mod:`~single_cell_parser.cell_modify_functions` and :py:mod:`~single_cell_parser.network_modify_functions` 
+    for example functions to modify the :ref:`cell_params_format` and :ref:`network_params_format`.
+"""
+
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 import os
@@ -14,6 +30,9 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def convertible_to_int(x):
+    """Check if a string can be converted to an integer.
+    
+    :skip-doc:"""
     try:
         int(x)
         return True
@@ -22,6 +41,34 @@ def convertible_to_int(x):
 
 
 def synapse_activation_df_to_roberts_synapse_activation(sa):
+    """Convert a synapse activation dataframe to a dictionary of synapse activations.
+    
+    :skip-doc:
+    
+    Args:
+        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        
+    Returns:
+        dict: A dictionary of synapse activations.
+    
+    Example:
+
+        >>> sa = pd.DataFrame({
+        ...     'synapse_ID': [1, 2, 3],
+        ...     'section_ID': [1, 2, 3],
+        ...     'section_pt_ID': [1, 2, 3],
+        ...     'synapse_type': ['AMPA', 'GABA', 'NMDA'],
+        ...     'soma_distance': [0, 0, 0],
+        ...     '0': [1, 2, 3],
+        ...     '1': [4, 5, 6],
+        ...     '2': [7, 8, 9]
+        ... })
+        >>> synapse_activation_df_to_roberts_synapse_activation(sa)
+        {'AMPA': [(1, 1, 1, [1, 4, 7], 0)],
+         'GABA': [(2, 2, 2, [2, 5, 8], 0)],
+         'NMDA': [(3, 3, 3, [3, 6, 9], 0)]}
+
+    """
     synapses = dict()
     import six
     for index, values in sa.iterrows():
@@ -52,6 +99,32 @@ def _evoked_activity(
     sa=None
     ):
     """
+    :skip-doc:
+    
+    Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
+    
+    This method recreates the network-embedded neuron simulation from the parameter files in the simrun-initialized database.
+    It allows to adapt the cell parameters, network parameters, and the synaptic activation patterns with modification functions.
+    The results are stored in the specified directory, relative to the original unmodified simulation results.
+    
+    This is a private function invoked by :py:func:`rerun_db`.
+    
+    
+    Args:
+        stis (list): List of simulation trial indices to be resimulated.
+        outdir (str): Directory where the simulation results are stored, relative to the original simulation results.
+        tStop (float): Time in ms at which the simulation should stop.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        synapse_activation_modify_functions (list): List of functions which take a :ref:`synapse_activation_format` dataframe and may return it changed.
+        additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
+        parameterfiles (pd.DataFrame): A dataframe containing the parameter files for the simulation trials. Should always be present in a simrun-initialized database under the key ``paremeterfiles``.
+        neuron_folder (str): Path to the folder containing the neuron parameter files.
+        network_folder (str): Path to the folder containing the network parameter files.
+        sa (pd.DataFrame): A dataframe containing the :ref:`synapse_activation_format` dataframe. Should always be present in a simrun-initialized database under the key ``synapse_activation``.
+        
+    See also:
+        :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
     """
     logger.info('saving to ', outdir)
     import neuron
@@ -79,9 +152,7 @@ def _evoked_activity(
     neuron_param = scp.build_parameters(neuron_folder.join(neuron_name))
     network_name = parameterfiles.iloc[0].hash_network
     network_param = scp.build_parameters(network_folder.join(network_name))
-    additional_network_params = [
-        scp.build_parameters(p) for p in additional_network_params
-    ]
+    additional_network_params = [scp.build_parameters(p) for p in additional_network_params]
     for fun in network_param_modify_functions:
         network_param = fun(network_param)
     for fun in neuron_param_modify_functions:
@@ -188,9 +259,12 @@ def _evoked_activity(
     network_param.save(
         os.path.join(outdir_absolute, uniqueID + '_network_model.param'))
 
-
 class Opaque:
-
+    """Wrapper class to make objects opaqye to dask
+    
+    Opaque-wrapped objects are not loaded into memory by dask.
+    This is useful when passing large objects to dask functions that do not need to be loaded necessarily.
+    """
     def __init__(self, content):
         self.content = content
 
@@ -206,20 +280,30 @@ def rerun_db(
     silent=False,
     additional_network_params=[],
     child_process=False):
-    '''
+    """Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
+    
+    This method recreates the network-embedded neuron simulation from the parameter files in the simrun-initialized database.
+    It allows to adapt the cell parameters, network parameters, and the synaptic activation patterns with modification functions.
+    The results are stored in the specified directory, relative to the original unmodified simulation results.
+    
     Args:
-        db: model data base initialized with I.db_init_simrun_general to be resimulated
-        outdir: location where simulation files are supposed to be stored
-        tStop: end of simulation
-        neuron_param_modify_functions: list of functions which take a neuron param file and may return it changed
-        network_param_modify_functions: list of functions which take a network param file and may return it changed
-        synapse_activation_modify_functions: list of function, which take a synapse activation dataframe and may return it changed
-        stis: sim_trial_indices which are to be resimulated. If None, the whole database is going to be resimulated.
-        silent: suppress output to stdout
-        child_process: run simulation in child process. This can help if dask workers time out during the simulation.
-        recreate_cell_every_run: set to True if you use synapse_activation as cell modify function.
+        db (:py:class:`~data_base.DataBase`): A simrun-initialized database to resimulate.
+        stis (list): List of simulation trial indices to be resimulated.
+        outdir (str): Directory where the simulation results are stored, relative to the original simulation results.
+        tStop (float): Time in ms at which the simulation should stop.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        synapse_activation_modify_functions (list): List of functions which take a :ref:`synapse_activation_format` dataframe and may return it changed.
+        additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
+        silent (bool): If True, suppresses output from the simulation.
+        child_process (bool): If True, runs the simulation in a child process.
         
-    '''
+    Returns:
+        list: A list of dask delayed objects. When computed with a dask scheduler, it writes the simulation results to the specified directory.
+        
+    See also:
+        :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
+    """
     parameterfiles = db['parameterfiles']
     neuron_folder = db['parameterfiles_cell_folder']
     network_folder = db['parameterfiles_network_folder']
@@ -243,18 +327,19 @@ def rerun_db(
     myfun = dask.delayed(myfun)
     logger.info('outdir is', outdir)
     for stis in sim_trial_index_array:
-        d = myfun(db,
-                  stis,
-                  outdir,
-                  tStop=tStop,
-                  neuron_param_modify_functions=neuron_param_modify_functions,
-                  network_param_modify_functions=network_param_modify_functions,
-                  synapse_activation_modify_functions=
-                  synapse_activation_modify_functions,
-                  parameterfiles=parameterfiles.loc[stis],
-                  neuron_folder=neuron_folder,
-                  network_folder=network_folder,
-                  sa=sa,
-                  additional_network_params=additional_network_params)
+        d = myfun(
+            db,
+            stis,
+            outdir,
+            tStop=tStop,
+            neuron_param_modify_functions=neuron_param_modify_functions,
+            network_param_modify_functions=network_param_modify_functions,
+            synapse_activation_modify_functions=
+            synapse_activation_modify_functions,
+            parameterfiles=parameterfiles.loc[stis],
+            neuron_folder=neuron_folder,
+            network_folder=network_folder,
+            sa=sa,
+            additional_network_params=additional_network_params)
         delayeds.append(d)
     return delayeds

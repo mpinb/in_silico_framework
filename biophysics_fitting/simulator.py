@@ -119,7 +119,6 @@ class Simulator_Setup:
         self.stim_run_funs = []
         self.stim_response_measure_funs = []
         self.params_modify_funs = []
-        self.params_modify_funs_after_cell_generation = []
         self.check_funs = []
 
     def check(self):
@@ -286,7 +285,6 @@ class Simulator_Setup:
                 logger.error("Could not run the cell modify function {} ({})\n{}".format(name, fun, e))
                 raise
             self._check_not_none(cell, 'cell', name)
-        params = self.get_params_after_cell_generation(params,cell)
         return cell, params
 
 

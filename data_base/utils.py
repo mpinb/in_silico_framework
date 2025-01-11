@@ -13,8 +13,14 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def chunkIt(seq, num):
-    '''splits seq in num lists, which have approximately equal size.
-    https://stackoverflow.com/questions/2130016/splitting-a-list-of-arbitrary-size-into-only-roughly-n-equal-parts
+    '''Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+    
+    Args:
+        seq (array): array to be split
+        num (int): number of chunks
+    
+    See also:
+        https://stackoverflow.com/questions/2130016/splitting-a-list-of-arbitrary-size-into-only-roughly-n-equal-parts
     '''
     avg = len(seq) / float(num)
     out = []
@@ -67,16 +73,32 @@ class mkdtemp():
             shutil.rmtree(self.tempdir)
 
 def convertible_to_int(x):
-        try:
-            int(x)
-            return True
-        except:
-            return False
+    """Returns True if x can be converted to an integer, False otherwise
+    
+    Args:
+        x (any): the object to be tested
+        
+    Returns:
+        bool: True if x can be converted to an integer, False otherwise
+    """
+    try:
+        int(x)
+        return True
+    except:
+        return False
         
 def split_file_to_buffers(f, split_str = '#'):
-    '''reads a file f and splits it, whenever "split_str" is found.
-    Returns a list of StringIO Buffers.
-    adapted from http://stackoverflow.com/a/33346758/5082048'''
+    '''Reads a file f and splits it wherever :paramref:`split_str` is found.
+    
+    Args:
+        f (file): file to be split
+        split_str (str): string to split the file. Default is '#'
+    
+    Returns:
+        list: list of :py:class:`StringIO` Buffers.
+    
+    See also:
+        adapted from http://stackoverflow.com/a/33346758/5082048'''
     stringios = [] 
     stringio = None
     for line in f:
@@ -92,9 +114,18 @@ def split_file_to_buffers(f, split_str = '#'):
     return stringios
 
 def first_line_to_key(stringios):
-    '''takes a list io StringIO objects. Each should contain one table.
+    '''Convert a list of StringIO objects to a dictionary.
+    
+    Takes a list io StringIO objects. Each should contain one table.
     It returns a dictionary conatining the first line as key (assuming it is the name of the table)
-    and the rest of it as value'''
+    and the rest of it as value
+    
+    Args:
+        stringios (list): list of StringIO objects
+        
+    Returns:
+        dict: dictionary with the first line as key and the rest as value
+    '''
     out = {}
     value = None
     for s in stringios:
@@ -113,30 +144,36 @@ from collections import defaultdict
 import pandas as pd
 
 def pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun):
-    '''this can convert a pandas dataframe, in which information
-    is stored linearly to a 2D presentation.
+    '''Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
     
-    Example: you have a dataframe like:
-               'bla'
+    Args:
+        pdf (pd.DataFrame): dataframe to be converted
+        x_component_fun (function): function to extract the x component
+        y_component_fun (function): function to extract the y component
+        value_fun (function): function to extract the value
+        
+    Returns:
+        pd.DataFrame: 2D representation of the data
     
-    x_1_y_1    10
-    x_2_y_1    15
-    x_3_y_1    7
-    x_1_y_2    2
-    x_2_y_2    0
-    x_3_y_2   -1
+    Example:
     
-    Ans it should be converted to:
-           1    2    3
+        >>> df
+                'bla'
+        x_1_y_1    10
+        x_2_y_1    15
+        x_3_y_1     7
+        x_1_y_2     2
+        x_2_y_2     0
+        x_3_y_2    -1
     
-    1      10   15   7
-    2      2    0    -1
-    3
-    
-    You can use:
-    pandas_to_array(pdf, lambda index, values: index.split('_')[1], \
-                         lambda index, values: index.split('_')[-1], \
-                         lambda index, values: values.bla)
+        >>> pandas_to_array(
+        ...    pdf, 
+        ...    lambda index, values: index.split('_')[1],
+        ...    lambda index, values: index.split('_')[-1],
+        ...    lambda index, values: values.bla)
+            1    2    3
+        1    10   15    7
+        2     2    0   -1
     '''
     out_dict = defaultdict(lambda: {})
     if isinstance(pdf, pd.DataFrame):
@@ -155,19 +192,30 @@ def pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun):
     return pd.DataFrame.from_dict(out_dict)
 
 def select(df, **kwargs):
+    """Selects rows from a dataframe based on the values of the columns
+    
+    Args:
+        df (pd.DataFrame): the dataframe
+        **kwargs: the columns and values to be selected
+    
+    Returns:
+        pd.DataFrame: the dataframe with the selected rows
+    """
     for kwarg in kwargs:
         df = df[df[kwarg] == kwargs[kwarg]]
     return df
 
 import numpy as np
 def pooled_std(m, s, n):
-    '''calculates the pooled standard deviation out of samples.
+    '''Calculates the pooled standard deviation out of samples.
     
-    m: means
-    s: unbiased standarddeviation (normalized by N-1)
-    n: number of samples per group
-    
-    returns: pooled mean, pooled std
+    Args:
+        m (array): means
+        s (array): unbiased standard deviation (normalized by N-1)
+        n (array): number of samples per group
+        
+    Returns:
+        tuple: pooled mean and pooled standard deviation
     '''
     assert len(m) == len(s) == len(n) > 0
     M = np.dot(m,n) / float(sum(n))#[mm*nn / float(sum(n)) for mm, nn in zip(m,n)]
@@ -182,8 +230,14 @@ def pooled_std(m, s, n):
     return M,SD
 
 def skit(*funcs, **kwargs):
-    '''splits kwargs up to supply different functions with the right subset
-    adapted from http://stackoverflow.com/a/23430335/5082048
+    '''Splits kwargs up to supply different functions with the right subset.
+    
+    Args:
+        *funcs (function): functions to be supplied with the right subset of kwargs
+        **kwargs: keyword arguments to be split up
+    
+    See also:
+        Adapted from http://stackoverflow.com/a/23430335/5082048
     '''
     out = []
     for fun in funcs:
@@ -195,9 +249,25 @@ def skit(*funcs, **kwargs):
     return tuple(out)
 
 def unique(list_):
+    """Get the unique elements of a list
+    
+    Args:
+        list_ (list): the list
+        
+    Returns:
+        list: the unique elements of the list
+    """
     return list(pd.Series(list_).drop_duplicates())
 
 def cache(function):
+    """Decorator to cache the result of a function
+    
+    Args:
+        function (function): the function to be cached
+        
+    Returns:
+        function: the cached function
+    """
     import hashlib
     memo = {}
     def get_key(*args, **kwargs):
@@ -219,14 +289,14 @@ def cache(function):
     return wrapper
 
 def fancy_dict_compare(dict_1, dict_2, dict_1_name = 'd1', dict_2_name = 'd2', path=""):
-    """Compare two dictionaries recursively to find non mathcing elements
+    """Compare two dictionaries recursively to find non-matching elements
 
     Args:
-        dict_1: dictionary 1
-        dict_2: dictionary 2
+        dict_1 (dict): dictionary 1
+        dict_2 (dict): dictionary 2
 
     Returns:
-
+        str: a string containing the differences
     """
     # https://stackoverflow.com/a/35065035/5082048
     err = ''
@@ -253,6 +323,19 @@ def fancy_dict_compare(dict_1, dict_2, dict_1_name = 'd1', dict_2_name = 'd2', p
     return key_err + value_err + err
 
 def wait_until_key_removed(db, key, delay = 5):
+    """Wait until a key is removed from a database.
+    
+    This function checks every :paramref:`delay` seconds if the key is still in the database.
+    Useful for waiting until a process has finished.
+    
+    Args:
+        db (sqlitedict): the database
+        key (str): the key
+        delay (int): the delay between checks
+        
+    Returns:
+        None
+    """
     already_printed = False
     while True:
         if key in list(db.keys()):
@@ -266,11 +349,29 @@ def wait_until_key_removed(db, key, delay = 5):
             return
         
 def get_file_or_folder_that_startswith(path, startswith):
+    """Get the file or folder in a directory that starts with a certain string
+    
+    Args:
+        path (str): the path
+        startswith (str): the string
+        
+    Returns:
+        str: the file or folder
+    """
     paths = [p for p in os.listdir(path) if p.startswith(startswith)]
     assert len(paths) == 1
     return os.path.join(path,paths[0])
 
 def get_file_or_folder_that_endswith(path, endswith):
+    """Get the file or folder in a directory that ends with a certain string
+    
+    Args:
+        path (str): the path
+        endswith (str): the string
+        
+    Returns:
+        str: the file or folder
+    """
     paths = [p for p in os.listdir(path) if p.endswith(endswith)]
     assert len(paths) == 1
     return os.path.join(path,paths[0])
@@ -280,8 +381,8 @@ import logging
 
 # see https://stackoverflow.com/questions/842557/how-to-prevent-a-block-of-code-from-being-interrupted-by-keyboardinterrupt-in-py
 class DelayedKeyboardInterrupt(object):
-    '''context manager, that allows to delay a KeyboardInterrupt
-    extended, such that it also works in subthreads.'''
+    '''Context manager that allows to delay a KeyboardInterrupt such that it also works in subthreads.
+    '''
     def __enter__(self):
         self.signal_received = False
         self.we_are_in_main_thread = True
@@ -301,7 +402,16 @@ class DelayedKeyboardInterrupt(object):
                 self.old_handler(*self.signal_received)
 
 def flatten(l):
-    '''https://stackoverflow.com/a/2158532/5082048'''
+    '''Flatten a nested list
+    
+    Args:
+        l (list): the list
+        
+    Yields:
+        any: the elements of the list
+    
+    See also:
+        https://stackoverflow.com/a/2158532/5082048'''
     import collections
     for el in l:
         if isinstance(el, collections.Iterable) and not isinstance(el, six.string_types): # not sure about syntax here - rieke
@@ -352,7 +462,19 @@ def flatten(l):
 ################################
 
 @dask.delayed
-def synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None):    
+def synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None):
+    """Concatenate a pickles dask dataframe to a pandas dataframe.
+    
+    Args:
+        ddf_path (str): path to the dask dataframe
+        meta (pd.DataFrame): the metadata for the dask dataframe.
+        N (int): number of chunks
+        n (int): the chunk to be concatenated
+        scheduler (str): the scheduler to be used
+        
+    Returns:
+        pd.DataFrame: the concatenated dataframe
+    """
     with open(ddf_path, 'rb') as f:
         ddf = cloudpickle.load(f)
     delayeds = ddf.to_delayed()
@@ -365,7 +487,15 @@ def synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None):
     return pdf
 
 def myrepartition(ddf, N):
-    '''This repartitions without generating more tasks'''
+    '''Repartition a dask dataframe without generating more tasks.
+    
+    Args:
+        ddf (dask.DataFrame): the dataframe to be repartitioned
+        N (int): the number of partitions
+        
+    Returns:
+        dask.DataFrame: the repartitioned dataframe
+    '''
     folder = tempfile.mkdtemp()
     ddf_path = os.path.join(folder, 'ddf.cloudpickle.dump')
     with open(ddf_path, 'wb') as f:
@@ -389,10 +519,10 @@ def myrepartition(ddf, N):
         return dd.from_delayed(delayeds, meta = meta, divisions = divisions)
     
 def df_colnames_to_str(df):
-    """
-    Converts the column names and index names of a dataframe to string.
+    """Convert the column names and index names of a dataframe to string.
+    
     Useful for dumping using the pandas_to_parquet dumper, or dask_to_parquet dumper.
-    Warning: This overwrites the original object, in favor of the overhead of creating a copy on every write.
+    Warning: This overwrites the original object. This is preferred over the overhead of creating a copy on every write.
 
     Args:
         df (pd.DataFrame | dask.DataFrame): a DataFrame
@@ -410,6 +540,19 @@ def df_colnames_to_str(df):
     return df
 
 def colorize_key(key):
+    """Colorizes a key based on its type.
+    
+    The key is colorized green if it is a database, blue if it is a subdatabase, and black otherwise.
+    
+    Args:
+        key (pathlib.Path): the key
+        
+    Returns:
+        str: the colorized key
+        
+    See also:
+        :py:meth:`data_base.utils.colorize`
+    """
     if is_db(key.absolute()):
         c = bcolors.OKGREEN
     elif any([Path.exists(key/e) for e in ('Loader.json', 'Loader.pickle')]):
@@ -419,6 +562,20 @@ def colorize_key(key):
     return c + key.name + bcolors.ENDC
 
 def colorize(key, bcolor):
+    """Colorize a string with a terminal color.
+    
+    Simply concatenates the string with escape sequences that colroize the text in a terminal.
+    
+    Args:
+        key (str): the string
+        bcolor (str): the color
+        
+    Returns:
+        str: the colorized string
+    
+    See also:
+        :py:class:`data_base.utils.bcolors` For color escape sequences.
+    """
     return bcolor + key + bcolors.ENDC
         
 
@@ -430,8 +587,17 @@ def calc_recursive_filetree(
     Fetches the contents of an db and formats them as a string representing a tree structure
 
     Args:
-        root_dir_path (_type_): _description_
-        depth (_type_): _description_
+        db (data_base.data_base.DataNase): The database to be visualized
+        root_dir_path (str): The path to the root directory
+        max_depth (int): Maximum depth to recurse into the directory tree
+        max_lines (int): Maximum number of lines to print. Default is 30.
+        max_lines_per_key (int): Maximum number of lines per key. Default is 3.
+        lines (list): List of strings to append to during recursion. Default is None.
+        all_files (bool): If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is False.
+        colorize (bool): If True, colorizes the keys. Default is True.
+        
+    Returns:
+        list: The formatted tree structure as a list of strings.
     """
     recursion_kwargs = locals()
     
@@ -492,7 +658,18 @@ def calc_recursive_filetree(
 
 class bcolors:
     """
-    List of colors for terminal output in bash
+    List of colors for terminal output in bash.
+    
+    Attributes:
+        HEADER (str): Header color
+        OKBLUE (str): Blue color
+        OKCYAN (str): Cyan color
+        OKGREEN (str): Green color
+        WARNING (str): Warning color
+        FAIL (str): Fail color
+        ENDC (str): End color (reset)
+        BOLD (str): Bold
+        UNDERLINE (str): Underline
     """
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -505,7 +682,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 def rename_for_deletion(key):
-    """Renames some key to indicate it's in the process of being deleted
+    """Renames some key to indicate it's in the process of being deleted.
 
     Args:
         key (pathlib.Path): The key
@@ -539,7 +716,14 @@ def delete_in_background(key):
     return p
 
 def is_db(dir_to_data):
-    '''returns True, if dir_to_data is a (sub)db, False otherwise'''
+    '''Check if a path is a :py:class:`~data_base.data_base.DataBase`.
+    
+    Args:
+        dir_to_data (pathlib.Path): The path to the directory
+    
+    Returns:
+        bool: ``True`` if :paramref:`dir_to_data` is a (sub)db, ``False`` otherwise.
+    '''
     can_exist = [
         'db_state.json', 
         'db',

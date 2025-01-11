@@ -8,17 +8,13 @@ from data_base.dbopen import dbopen
 __author__ = 'Robert Egger'
 __date__ = '2012-03-08'
 
-class Edge(object):
+class _Edge(object):
     '''Convenience class around NEURON's section objects.
 
-    Used during reading of hoc files.
-    Attributes are set during :py:meth:`read_hoc_file`.
+    The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
 
-    Warning:
-        :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader.Edge` class,
-        more specialized for biophysical properties of segments.
-        A notable difference is that this class is not used to read in axon segments,
-        while the :py:mod:`single_cell_parser` variant is.
+    See also:
+        :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader._Edge` class.
 
     Attributes:
         label (str): The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
@@ -49,10 +45,9 @@ def read_hoc_file(fname=''):
     This list of sections is parsed to a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` object
     using :py:meth:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`.
     
-    Warning:
+    See also:
         The module :py:mod:`single_cell_parser` also conains a :py:meth:`~single_cell_parser.reader.read_hoc_file` 
-        method with subtle differences. A notable difference is that this method does not read in axon sections,
-        while the :py:mod:`single_cell_parser` variant does.
+        method. A notable difference is that this method does **not** read in axon sections.
 
     Args:
         fname (str): The name of the file to be read.
@@ -179,7 +174,7 @@ def read_hoc_file(fname=''):
                                                   thisNrOfEdgePts]
                 ptListIndex += thisNrOfEdgePts
                 # create edge
-                segment = Edge()
+                segment = _Edge()
                 segment.label = thisSegmentID
                 segment.hocLabel = tmpHocLabelList[n]
                 segment.edgePts = thisSegmentPtList
@@ -204,6 +199,17 @@ def read_hoc_file(fname=''):
 
 
 def read_scalar_field(fname=''):
+    """Read AMIRA scalar fields.
+    
+    Args:
+        fname (str): The name of the file to be read.
+
+    Raises:
+        IOError: If the input file does not have a `.am` or `.AM` suffix.
+
+    Returns:
+        :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`: A scalar field object.
+    """
     if not fname.endswith('.am') and not fname.endswith('.AM'):
         raise IOError('Input file is not an Amira Mesh file!')
 

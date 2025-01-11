@@ -88,11 +88,23 @@ def is_port_in_use(port):
 
 
 def pytest_ignore_collect(path, config):
+    """If this evaluates to True, the test is ignored.
+    
+    Args:
+        path (str): path to the test file
+        config (Config): pytest config object
+    """
     if six.PY2:
         return (
-            path.fnmatch("/*test_data_base/data_base/*")  # only run new DataBase tests on Py2
+            path.fnmatch("/*test_data_base/data_base/*")  # only run new DataBase tests on Py3
             or path.fnmatch("/*cell_morphology_visualizer_test*")  # don't run cmv tests on Py2
             )
+    if path.fnmatch("/*test_barrel_cortex/*"):
+        bc_downloaded = os.path.exists(
+            os.path.join(
+                os.path.dirname(CURRENT_DIR),
+                "barrel_cortex"))
+        return not bc_downloaded  # skip if it is not downloaded
 
 
 def pytest_configure(config):

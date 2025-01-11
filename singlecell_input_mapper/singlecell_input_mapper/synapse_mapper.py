@@ -14,7 +14,7 @@ __date__ = '2012-03-30'
 class SynapseMapper(object):
     '''Assign synapses to neuron morphology from density meshes.
 
-    Poisson sample the synapse distribution mesh and assigns them to a random 
+    Poisson sample the synapse distribution mesh and assign them to a random 
     point on the morphology that lies within the same voxel.
     
     Attributes:

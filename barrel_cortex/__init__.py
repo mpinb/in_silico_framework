@@ -55,7 +55,7 @@ def synapse_group_function_L6paper(celltype):
     Groups celltypes in the same fashion as :cite:t:`Egger_Narayanan_Guest_Bast_Udvary_Messore_Das_de_Kock_Oberlaender_2020`
     """
     celltype = celltype.split('_')[0]
-    if celltype in inhibitory:
+    if celltype in INHIBITORY:
         return 'INH'
     else:
         return celltype
@@ -88,7 +88,7 @@ def synapse_group_function_HZpaper(celltype):
     """
     if '_' in celltype:
         celltype = celltype.split('_')[0]
-    if celltype in inhibitory or celltype == 'INH':
+    if celltype in INHIBITORY or celltype == 'INH':
         key = 'INT'
     elif celltype in ('L4ss', 'L4py', 'L4sp'):
         key = 'L4ss'
@@ -108,11 +108,11 @@ def synapse_group_function_HZpaper(celltype):
         raise ValueError(celltype)
     return key
 
-excitatory = [
+EXCITATORY = [
     'L6cc', 'L2', 'VPM', 'L4py', 'L4ss', 'L4sp', 'L5st', 'L6ct', 'L34',
     'L6ccinv', 'L5tt', 'Generic'
 ]
-inhibitory = [
+INHIBITORY = [
     'SymLocal1', 'SymLocal2', 'SymLocal3', 'SymLocal4', 'SymLocal5',
     'SymLocal6', 'L45Sym', 'L1', 'L45Peak', 'L56Trans', 'L23Trans',
     'GenericINH', 'INH'
@@ -315,7 +315,7 @@ def construct_pt3add(values):
     Args:
         values (list): list of values
         
-    Returns
+    Returns:
         str: pt3dadd line
     """
     values = tuple(values)

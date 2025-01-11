@@ -10,7 +10,10 @@ __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
 
 class SynapseMapper(object):
-    '''Assign synapses to a neuron morphology based on a synapse distribution.
+    '''Assign synapses to a neuron morphology based on an existing synapse distribution.
+    
+    For more fine-grained control over the creation of synapse distributions onto a morphology, 
+    please refer to the :py:mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
 
     The synapse distribution can be:
 
@@ -19,6 +22,10 @@ class SynapseMapper(object):
     - a :py:class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities, in which case the synapses are mapped
       in the same way as in :py:meth:`~single_cell_parser.synapse_mapper.SynapseMapper.create_synapses`.
     - a list of synapse distances.
+    
+    See also:
+        :py:mod:`singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` for creating
+        network realizations constrained with empirical data.
     
     Attributes:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
@@ -212,6 +219,7 @@ class SynapseMapper(object):
         '''Fills dictionary :paramref:`voxelEdgeMap` with indices of voxels pts within that voxel
 
         The dictionary is structured as follows:
+        
         - keys: voxel indices
         - values: list of (sectionID, pointID) pairs of points within that voxel
         '''

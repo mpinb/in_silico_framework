@@ -51,7 +51,7 @@ def robust_read_pickle(path):
     Args:
         path (str): path to the pickled dataframe
         
-    Returns
+    Returns:
         pd.DataFrame | pd.Series: the pickled DataFrame if reading was succesful, a pd.Series otherwise. Both contain the key 'init_error', specifying whether or not the read was succesful.
     """
     try:

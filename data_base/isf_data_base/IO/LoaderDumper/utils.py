@@ -1,3 +1,7 @@
+"""
+Convenience methods for data IO.
+"""
+
 import os, json, six, yaml
 import numpy as np
 import pandas as pd
@@ -6,17 +10,19 @@ import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 def get_numpy_dtype_as_str(obj):
-    """
-    Get a string representation of the numpy dtype of an object.
+    """Get a string representation of the numpy dtype of an object.
+    
     If the object is of type string, simply return 'str'.
 
-    Python 2 has two types of strings: str and unicode. If left unspecified, numpy will default to unicode of unknown length, which is set to 0.
-    reading this back in results in the loss of string-type column names. For this reason, we construct our own string representation of the numpy dtype of these columns.
+    Python 2 has two types of strings: str and unicode. 
+    If left unspecified, numpy will default to unicode of unknown length, which is set to 0.
+    Reading this back in results in the loss of string-type column names. 
+    For this reason, we construct our own string representation of the numpy dtype of these columns.
     
     Args:
         obj: The object to get the numpy dtype of.
         
-    Returns
+    Returns:
         str: The numpy dtype of the object.
     """
     if (isinstance(obj, six.text_type) or isinstance(obj, str)):  # Check if obj is a string
@@ -28,8 +34,8 @@ def get_numpy_dtype_as_str(obj):
         return str(np.dtype(type(obj)))
 
 def save_object_meta(obj, savedir):
-    """
-    Construct a meta object to help out dask or parquet later on
+    """Construct a meta object to help out dask or parquet later on.
+    
     The original meta object is an empty dataframe with the correct column names
     We will save this in str format with parquet, as well as the original dtype for each column.
     
@@ -56,11 +62,11 @@ def save_object_meta(obj, savedir):
         json.dump(meta_json, f)
         
 def get_meta_filename(savedir, raise_=True):
-    """
-    Get the filename of the meta file in the savedir.
+    """Get the filename of the meta file in the savedir.
     
     Args:
         savedir (str): The directory to look for the meta file.
+        raise_ (bool, optional): Whether to raise an error if no meta file is found. Defaults to True.
         
     Raises:
         FileNotFoundError: If no meta file is found in the savedir.
@@ -84,8 +90,8 @@ def get_meta_filename(savedir, raise_=True):
         
         
 def read_object_meta(savedir, raise_=True):
-    """
-    Get the metadata associated with a saved object.
+    """Get the metadata associated with a saved object.
+    
     Parquet dumpers convert column names to strings, which changes the dtype upon reading back in.
     Dask dumpers need a meta object to know the dtypes of the columns, including the values.
     
@@ -124,8 +130,8 @@ def read_object_meta(savedir, raise_=True):
     return meta
 
 def set_object_meta(obj, meta):
-    """
-    Reset the dtypes of the columns and index of an object to the original dtypes.
+    """Reset the dtypes of the columns and index of an object to the original dtypes.
+    
     Reads in the object meta from the same savedir and tries to assign the correct dtypes to columns and index.
     
     Args:
@@ -134,6 +140,10 @@ def set_object_meta(obj, meta):
         
     Returns:
         None. Adapts the original object.
+        
+    Raises:
+        AssertionError: If the object is not a pandas DataFrame, pandas Series, or dask DataFrame.
+        AssertionError: If no meta information is provided.
     """
     assert isinstance(obj, (pd.DataFrame, pd.Series, ddf)), "Object must be a pandas DataFrame, pandas Series, or dask DataFrame." 
     assert meta is not None, "No meta information provided. Cannot set the dtypes of the object."

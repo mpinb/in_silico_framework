@@ -1,14 +1,16 @@
 {%- import 'macros.rst' as macros %}
-{%- set parent_module = obj.id.split('.')[:-1] | join('.') | escape %}
+{%- set root_module = obj.id.split('.')[0] | escape %}
+{%- set breadcrumb = obj.id.split('.')[1:] %}
 {%- set shortname = obj.id.split('.')[-1] | escape %}
 
 .. backlink:
+{% if breadcrumb %}
+:mod:`{{ root_module }}`
+{%- for n in range(breadcrumb|length )  %}
+ ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
+{%- endfor %}
+{% endif %}
 
-{%- if parent_module %}
-Back to :mod:`{{ parent_module }}`
-{%- endif %}
-
-.. title:
 
 {{ shortname }}
 {{ "=" * shortname|length }}

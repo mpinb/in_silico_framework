@@ -1,4 +1,4 @@
-'''this module contains base settings of the model data base'''
+'''Base settings of the data base'''
 #from __future__ import absolute_import
 #import dask, dask.multiprocessing
 import os  ##

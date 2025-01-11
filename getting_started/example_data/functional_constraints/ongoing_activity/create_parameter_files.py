@@ -1,3 +1,8 @@
+"""
+:skip-doc:
+
+TODO: adapt this to be more general
+"""
 import sys
 import os.path
 

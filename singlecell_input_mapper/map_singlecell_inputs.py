@@ -1,9 +1,16 @@
 """Map synapses onto a postsynaptic cell.
 
-This module provides a full pipeline for creating anatomical realizations of the connectivity 
-of individual neuron morphologies, based on methods and data presented in 
-:cite:t:`Egger_Dercksen_Udvary_Hege_Oberlaender_2014`.
-An anatomical realization refers to a set of synapses sampled from a probability distribution.
+This module provides a full pipeline for creating dense connectome models
+of the rat barrel cortex, based on methods and data presented in 
+:cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022`.
+
+This runfile assumes you have downloaded and extracted the barrel cortex model data from
+https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+If this is not the case, please consult ``installer/download_bc_model` and extract.
+
+Attention:
+    This file is specific to the barrel cortex model data. If you want to use it for other data,
+    you need to adapt the paths to the data accordingly.
 
 Inputs:
 
@@ -19,20 +26,16 @@ This module then uses :py:class:`~singlecell_input_mapper.singlecell_input_mappe
 to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
 This happens according to the following pipeline:
 
-1. The bouton density field is a scalar field with defined voxel resolution. This voxel resolution
-   can reflect e.g. biological variability from animal to animal 
-   (as is the case for which this package was developed), or measurement error.
-2. Calculate the overlap between these voxels and the dendrites of the postsynaptic neuron morphology 
-   using Liang-Barsky clipping :cite:`liang1984new`.
-3. Calculate a synapse density field by multiplying the bouton density field with the PST density field
+1. The bouton density field and PST density fields are converted to scalar fields with defined voxel resolution.
+2. Calculates the overlap between these voxels and the dendrites of the postsynaptic neuron morphology 
+   using Liang-Barsky clipping :cite:`liang1984new`. Only these voxels are further considered for potential synapses.
+3. Calculates a synapse density field by multiplying the bouton density field with the PST density fields
    at these voxels.
-4. Normalize the synapse density field using cell-type specific PST length/area constraints and the number of 
+4. Normalizes the previous synapse density fields using cell-type specific PST length/area constraints and the number of 
    cells per cell type.
-5. Poisson samples synapses from this density field and randomly assign them to the dendritic branch 
-   that is contained within that voxel. This sample is called an "anatomical realization".
+5. Poisson samples synapses from this normalized synapse density field to realize synapses. 
+   These are randomly placed onto the dendritic branch within that voxel. One such sample is called an "anatomical realization".
 6. (optional) Repeat steps 4 and 5 to create a collection of anatomical realizations. 
-   These collections can be investigated for variability in synapse number and location.
-   Alternatively, the realization that is closest to the average is further used in modules like :py:mod:`simrun`.
 
 Density meshes are accessed using :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
 :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of 

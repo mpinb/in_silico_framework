@@ -1,3 +1,11 @@
+"""
+I think this is used for the somatic summation model?
+I currently leave this undocumented until I (or someone else) can properly document this.
+- Bjorge 2024-11-12
+
+:skip-doc:
+"""
+
 import os
 import single_cell_parser as scp
 from data_base.dbopen import create_db_path, resolve_db_path
@@ -5,6 +13,14 @@ from data_base.isf_data_base.IO.LoaderDumper import pandas_to_parquet
 
 
 def get_confile_form_network_param(n):
+    """Fetch the :ref:`con_file_format` file from a network parameters object.
+    
+    Args:
+        n (:py:class:`~single_cell_parser.network_parameters.NetworkParameters`): The network parameters object.
+        
+    See also:
+        The :ref:`network_parameters_format` format.
+    """
     confile = set(
         [n.network[k].synapses.connectionFile for k in list(n.network.keys())])
     synfile = set([
@@ -17,6 +33,14 @@ def get_confile_form_network_param(n):
 
 
 def get_parameterfiles_df_with_confile_and_neuron_param_path(db):
+    """Parse the parameterfiles database and add the ``confile`` and ``neuron_param_dbpath`` columns.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database object.
+        
+    Returns:
+        :py:class:`pandas.DataFrame`: The parameterfiles dataframe with the additional columns ``confile`` and ``neuron_param_db``
+    """
     parameterfiles = db['parameterfiles']
     f = db['parameterfiles_network_folder']
     map_to_confilepath = {}
@@ -46,30 +70,51 @@ def get_parameterfiles_df_with_confile_and_neuron_param_path(db):
 
 
 def get_PSP_determinants_from_db(db):
-    '''returns the combinations of neuron_parameters and network embeddings for which 
-    PSPs need to be computed for somatic summation model'''
+    '''Get the combinations of :ref:`cell_parameters_format` files and network embeddings for which 
+    PSPs need to be computed
+    
+    For a given somatic summation model, the PSPs are computed for all combinations of
+    network embeddings and neuron models present in the simrun-initialized database.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): 
+            The simrun-initialized database object.
+            
+    Returns:
+        :py:class:`pandas.DataFrame`: The dataframe with the columns ``confile`` and ``neuron_param_dbpath``.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.load_simrun_general.init`
+        for initializing a database with :py:mod:`simrun` data.    
+    '''
     parameterfiles = get_parameterfiles_df_with_confile_and_neuron_param_path(
         db)
-    return parameterfiles[['confile', 'neuron_param_dbpath'
-                          ]].drop_duplicates().reset_index(drop=True)
+    return parameterfiles[['confile', 'neuron_param_dbpath']].drop_duplicates().reset_index(drop=True)
 
 
-def init(db,
-         client=None,
-         description_key=None,
-         PSPClass=None,
-         PSPClass_kwargs={}):
-    '''This calculates PSPs for a data_base, that has been initialized with
-    I.db_init_simrun_general. It determines all network embeddings (confile) and neuron models (neuron_param)
-    present in the database and initializes the PSPs computation accordingly.
+def init(
+    db,
+    client=None,
+    description_key=None,
+    PSPClass=None,
+    PSPClass_kwargs={}):
+    '''Calculate the PSPs for all network embeddings and neuron models present in the simrun-initialized database.
+    
+    The PSPs are calculated using :paramref:`PSPClass`. 
+    This can e.g. be a class defined in :py:mod:`~simrun.PSP_with_modification`.
+    This class will be initialized as follows for all neuron_param and confile::
+    
+        >>> psp_class_instance = PSPClass(neuron_param, confile, **PSPClass_kwargs)
         
-    The PSPs are calculated using PSPClass. This can e.g. be a class defined in simrun.PSP_with_modification.
-    This class will be initialized as follows for all neuron_param and confile:
-    psp_class_instance = PSPClass(neuron_param, confile, **PSPClass_kwargs)
-        
-    PSPClass needs to provide a get method, that returns a PSPs object, as defined in simrun.synaptic_strength_fitting.
-    The PSPs object will be executed and saved to db under the following location:
-    db['PSPs']['description_key', PSPClass.__name__, 'neuron_param_path', 'confile_path']'''
+    :paramref:`PSPClass` needs to provide a ``get`` method that returns a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object, 
+    The :py:class:`~simrun.synaptic_strength_fitting.PSPs` object is executed and saved to :paramref:`db` under the following key::
+    
+        >>> db['PSPs']['description_key', PSPClass.__name__, 'neuron_param_path', 'confile_path']
+    
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.load_simrun_general.init`
+        for initializing a database with :py:mod:`simrun` data.
+    '''
     pdf = get_PSP_determinants_from_db(db)
     pspdb = db.create_sub_db('PSPs', raise_=False)
     pspdb.set(

@@ -2,8 +2,9 @@ import numpy as np
 from data_base.utils import silence_stdout
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
-from data_base.analyze import excitatory, inhibitory
-
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
+from config.cell_types import EXCITATORY, INHIBITORY
 # import Interface as I # moved to bottom becose auf circular import
 
 
@@ -83,12 +84,12 @@ def get_expectancy_value_of_activated_prox_synapses_by_EI(
     EXC = sum([
         dict_[key]
         for key in list(dict_.keys())
-        if key.split('_')[0] in excitatory
+        if key.split('_')[0] in EXCITATORY
     ])
     INH = sum([
         dict_[key]
         for key in list(dict_.keys())
-        if key.split('_')[0] in inhibitory
+        if key.split('_')[0] in INHIBITORY
     ])
     return EXC, INH
 

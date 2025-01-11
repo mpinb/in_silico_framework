@@ -1,7 +1,0 @@
-{
-    "public": {
-        "DEV": 1,
-        "DATA_SERVER_DEV": "http://10.102.3.41:5000/dataServer",
-        "COMPUTE_SERVER_DEV": "http://l:5001/matrixComputeServer"        
-    }
-}

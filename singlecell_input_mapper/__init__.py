@@ -3,40 +3,15 @@
 This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: :ref:`connectivity` and :ref:`activity`.
 
-Attention:
+See also:
     This package should not be confused with :py:mod:`single_cell_parser`. 
     
     This package is specialized to create empirically consistent network models, providing fine-grained control over the
     network realization process, and ability to constrain it with empirical data.
-    :py:mod:`single_cell_parser` provides only basic functionality to generate network realizations and activity,
-    while its purpose is to provide an API to the NEURON simulator, and read in results from network realizations.
-  
-    In any case, beware of the following classes and methods that are duplicates in name, but not in functionality:
     
-    .. list-table:: 
-        :header-rows: 1
-
-        * - :py:mod:`singlecell_input_mapper.singlecell_input_mapper`
-          - :py:mod:`single_cell_parser`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
-          - :py:class:`~single_cell_parser.cell.Cell`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`
-          - :py:class:`~single_cell_parser.cell_parser.CellParser`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.reader.Edge`
-          - :py:class:`~single_cell_parser.reader.Edge`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
-          - :py:class:`~single_cell_parser.synapse_mapper.SynapseMapper`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
-          - :py:class:`~single_cell_parser.scalar_field.ScalarField`
-        * - :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
-          - :py:class:`~single_cell_parser.network.NetworkMapper`
-        * - :meth:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
-          - :meth:`~single_cell_parser.synapse.Synapse`
-        * - :meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`
-          - :meth:`~single_cell_parser.reader.read_hoc_file`
-        * - :meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field`
-          - :meth:`~single_cell_parser.reader.read_scalar_field`
-
+    :py:mod:`single_cell_parser` provides only basic functionality to recreate such network realizations from the results generated here.
+    The purpose of :py:mod:`single_cell_parser` is to provide an API to the NEURON simulator, and read in results from network realizations.
+  
 .. _connectivity:
  
 Connectivity

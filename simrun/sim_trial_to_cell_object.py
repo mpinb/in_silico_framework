@@ -19,6 +19,16 @@ h = neuron.h
 
 
 def convertible_to_int(x):
+    """Check if a value can be converted to an integer.
+    
+    :skip-doc:
+    
+    Args:
+        x: Value to check.
+        
+    Returns:
+        bool: True if the value can be converted to an integer, False otherwise.
+    """
     try:
         int(x)
         return True
@@ -27,6 +37,34 @@ def convertible_to_int(x):
 
 
 def synapse_activation_df_to_roberts_synapse_activation(sa):
+    """Convert a synapse activation dataframe to a dictionary of synapse activations.
+    
+    :skip-doc:
+    
+    Args:
+        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        
+    Returns:
+        dict: A dictionary of synapse activations.
+    
+    Example:
+
+        >>> sa = pd.DataFrame({
+        ...     'synapse_ID': [1, 2, 3],
+        ...     'section_ID': [1, 2, 3],
+        ...     'section_pt_ID': [1, 2, 3],
+        ...     'synapse_type': ['AMPA', 'GABA', 'NMDA'],
+        ...     'soma_distance': [0, 0, 0],
+        ...     '0': [1, 2, 3],
+        ...     '1': [4, 5, 6],
+        ...     '2': [7, 8, 9]
+        ... })
+        >>> synapse_activation_df_to_roberts_synapse_activation(sa)
+        {'AMPA': [(1, 1, 1, [1, 4, 7], 0)],
+         'GABA': [(2, 2, 2, [2, 5, 8], 0)],
+         'NMDA': [(3, 3, 3, [3, 6, 9], 0)]}
+
+    """
     synapses = dict()
     import six
     for index, values in sa.iterrows():
@@ -54,22 +92,41 @@ def simtrial_to_cell_object(
     additional_network_params = [],
     tStop = 345
     ):
-    '''
-    Resimulates simulation trial and returns cell object.
-    Expects Instance of DataBase and sim_trial index.
-    The db has to contain the paths to the parameterfiles at the following location: 
-        ('parameterfiles', 'cellName')
-        ('parameterfiles', 'networkName')
+    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    
+    This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
+    before resimulating the trial. The network and neuron parameter modify functions should take the
+    respective parameter dictionaries as input and return the modified dictionaries.
+    Synapse activation modify functions should take the synapse activation data as input and return the modified data.
+    
+    Args:
+        db (:py:class:`data_base.dataBase`): A simrun-initialized database object.
+        sim_trial_index (int): Index of the simulation trial in the database.
+        range_vars (str | list): Range variables to record.
+        scale_apical (callable, DEPRECATED): Function to scale the apical dendrites.
+        allPoints (bool): If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
+        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
+        tStop (float): Stop time of the simulation.
+        neuron_param_modify_functions (list): List of functions to modify the neuron parameters.
+        network_param_modify_functions (list): List of functions to modify the network parameters.
+        synapse_activation_modify_functions (list): List of functions to modify the synapse activation data.
+        silent (bool): If True, suppress all output.
         
-    Keyword arguments:
-        compute (default: True): If true, a cell object is returned. If false, the respective
-                            delayed object is returned
-        allPoints (default: False): if True, the cell will be simulated at very high resolution.
-                            This mode might be useful for high quality visualizations.
-        scale_apical: function that gets called after the cell is set up. 
-        range_vars: range variables that should be recorded
-        silent: If True, nothing will be written to stdout                    
-    '''
+    .. deprecated:: 0.1.0
+        The `scale_apical` argument is deprecated and will be removed in a future version.
+        Use the `cell_modify_functions` key in the :ref:`cell_parameters_format` file instead.
+        
+    See also:
+        :py:func:`simrun.sim_trial_to_cell_object.trial_to_cell_object` 
+        to recreate a single simulation trial from parameter files instead of a database.
+        
+    See also:
+        :py:mod:`data_base.isf_data_base.db_initializers.init_simrun_general` to initialize a database object
+        from raw `simrun` output, i.e. a "simrun-initialized" database object.
+    
+    Returns:
+        :py:class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
+    """
     stdout_bak = sys.stdout
     if silent == True:
         sys.stdout = open(os.devnull, "w")
@@ -94,7 +151,8 @@ def simtrial_to_cell_object(
             neuron_param_modify_functions = neuron_param_modify_functions,
             network_param_modify_functions = network_param_modify_functions,
             synapse_activation_modify_functions = synapse_activation_modify_functions,
-            additional_network_params = additional_network_params)
+            additional_network_params = additional_network_params  # TODO   unused
+            )
     finally:
         if silent == True:
             sys.stdout = stdout_bak
@@ -102,13 +160,51 @@ def simtrial_to_cell_object(
     return dummy
 
 
-import tempfile
-def trial_to_cell_object(name = None, cellName = None, networkName = None, synapse_activation_file = None, \
-                    range_vars = None, scale_apical = None, allPoints = False, compute = True, tStop = 345,
-                    neuron_param_modify_functions = [],
-                    network_param_modify_functions = [],
-                    synapse_activation_modify_functions = [],
-                    additional_network_params = []):
+def trial_to_cell_object(
+    name = None, 
+    cellName = None, 
+    networkName = None, 
+    synapse_activation_file = None,
+    range_vars = None, 
+    scale_apical = None, 
+    allPoints = False, 
+    compute = True, 
+    tStop = 345,
+    neuron_param_modify_functions = [],
+    network_param_modify_functions = [],
+    synapse_activation_modify_functions = [],
+    additional_network_params = []  # TODO: unused
+    ):
+    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    
+    This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
+    before resimulating the trial. The network and neuron parameter modify functions should take the
+    respective parameter dictionaries as input and return the modified dictionaries.
+    Synapse activation modify functions should take the synapse activation data as input and return the modified data.
+    
+    
+    Args:
+        cellName (str): Name of the :ref:`cell_parameters_format` file.
+        networkName (str): Name of the :ref:`network_parameters_format` file.
+        synapse_activation_file (str | pandas.DataFrame): 
+            Path to the :ref:`synapse_activation_format` file or 
+            a pandas DataFrame containing the synapse activation data.
+        range_vars (str | list): Range variables to record.
+        scale_apical (callable, DEPRECATED): Function to scale the apical dendrites.
+        allPoints (bool): If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
+        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
+        tStop (float): Stop time of the simulation.
+        neuron_param_modify_functions (list): List of functions to modify the neuron parameters.
+        network_param_modify_functions (list): List of functions to modify the network parameters.
+        synapse_activation_modify_functions (list): List of functions to modify the synapse activation data.
+        
+    .. deprecated:: 0.1.0
+        The `scale_apical` argument is deprecated and will be removed in a future version.
+        Use the `cell_modify_functions` key in the :ref:`cell_parameters_format` file instead.
+        
+    Returns:
+        :py:class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
+    """
     tempdir = None
 
     try:
@@ -125,8 +221,9 @@ def trial_to_cell_object(name = None, cellName = None, networkName = None, synap
             synfile = synapse_activation_file
             if len(synapse_activation_modify_functions) > 0:
                 raise NotImplementedError()
-        #set up simulation
-        simName = name
+        
+        # set up simulation
+        # simName = name
         cellName = cellName
         evokedUpParamName = networkName
         neuronParameters = load_param_file_if_path_is_provided(cellName)
@@ -134,7 +231,7 @@ def trial_to_cell_object(name = None, cellName = None, networkName = None, synap
             evokedUpParamName)
         additional_network_params = [
             scp.build_parameters(p) for p in additional_network_params
-        ]
+        ]  # TODO: unused?
         for fun in network_param_modify_functions:
             evokedUpNWParameters = fun(evokedUpNWParameters)
         for fun in neuron_param_modify_functions:
@@ -147,9 +244,10 @@ def trial_to_cell_object(name = None, cellName = None, networkName = None, synap
         tTraces = []
 
         #    cell = scp.create_cell(cellParam, scaleFunc=scale_apical)
-        cell = scp.create_cell(cellParam,
-                               scaleFunc=scale_apical,
-                               allPoints=allPoints)
+        cell = scp.create_cell(
+            cellParam,
+            scaleFunc=scale_apical,
+            allPoints=allPoints)
         cell.re_init_cell()
 
         tOffset = 0.0  # avoid numerical transients
@@ -177,8 +275,9 @@ def trial_to_cell_object(name = None, cellName = None, networkName = None, synap
             tVec = h.Vector()
             tVec.record(h._ref_t)
             startTime = time.time()
-            scp.init_neuron_run(neuronParameters.sim,
-                                vardt=False)  #trigger the actual simulation
+            scp.init_neuron_run(
+                neuronParameters.sim,
+                vardt=False)  # trigger the actual simulation
             stopTime = time.time()
             simdt = stopTime - startTime
             logger.info('NEURON runtime: {:.2f} s'.format(simdt))

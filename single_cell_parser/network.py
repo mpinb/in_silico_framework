@@ -49,6 +49,11 @@ logger = logging.getLogger("ISF").getChild(__name__)
 class NetworkMapper:
     '''Map active presynaptic cells to a multi-compartmental neuron model.
     
+    See also:
+        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`.
+        This class is specialized for synapse activations and simulation control and re-creating already existing network realizations, 
+        not for creating such anatomical network realizations from empirical data.
+    
     Attributes:
         cells (dict): dictionary holding all presynaptic cells ordered by cell type.
         connected_cells (dict): dictionary holding indices of all active presynaptic cells ordered by cell type.

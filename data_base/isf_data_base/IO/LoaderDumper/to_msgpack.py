@@ -1,3 +1,13 @@
+"""Read and write objects to the msgpack format.
+
+.. deprecated:: 0.2.0
+    The msgpack format is deprecated and will be removed in a future version.
+    Please consider using the Apache parquet, ``npz`` or ``npy`` formats.
+    For objects that cannot be saved in these formats, consider using the cloudpickle format.
+    
+:skip-doc:
+"""
+
 import os
 import msgpack
 from . import parent_classes

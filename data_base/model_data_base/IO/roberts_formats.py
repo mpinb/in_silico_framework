@@ -111,6 +111,34 @@ def read_pandas_synapse_activation_from_roberts_format(
 
 
 def synapse_activation_df_to_roberts_synapse_activation(sa):
+    """Convert a synapse activation dataframe to a dictionary of synapse activations.
+    
+    :skip-doc:
+    
+    Args:
+        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        
+    Returns:
+        dict: A dictionary of synapse activations.
+    
+    Example:
+
+        >>> sa = pd.DataFrame({
+        ...     'synapse_ID': [1, 2, 3],
+        ...     'section_ID': [1, 2, 3],
+        ...     'section_pt_ID': [1, 2, 3],
+        ...     'synapse_type': ['AMPA', 'GABA', 'NMDA'],
+        ...     'soma_distance': [0, 0, 0],
+        ...     '0': [1, 2, 3],
+        ...     '1': [4, 5, 6],
+        ...     '2': [7, 8, 9]
+        ... })
+        >>> synapse_activation_df_to_roberts_synapse_activation(sa)
+        {'AMPA': [(1, 1, 1, [1, 4, 7], 0)],
+         'GABA': [(2, 2, 2, [2, 5, 8], 0)],
+         'NMDA': [(3, 3, 3, [3, 6, 9], 0)]}
+
+    """
     synapses = dict()
     import six
     for index, values in sa.iterrows():

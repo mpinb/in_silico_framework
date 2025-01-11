@@ -47,15 +47,45 @@ def prediction_rates(
     test_size=0.4,
     solver='eigen',
     max_tries=2):
+    '''Calculate the prediction rates of a binary classifier.
+    
+    For a given classifier, calclate the prediction rates for a given number of iterations :paramref:`n`.
+    Returns the median of the prediction rates on each class
+    
+    Args:
+        X_in (:py:class:`~numpy.array`): 2D array of features (i.e. test data)
+        y_in (:py:class:`~numpy.array`): 1D array of labels (i.e. test labels)
+        n (int): Number of iterations to use for calculating the prediction rates
+        normalize_group_size (bool): If True, randomly subsample the data so that both classes have the same number of samples
+        verbosity (int): Level of verbosity. Options are ``0`` (default), ``1``, or ``2``
+        test_size (float): Fraction of the data to use as test data. Default is ``0.4``
+        solver (str): Solver to use for LDA. Options are ``("svd", "lsqr", "eigen")``. Default is ``"eigen"``
+        return_ (str): Return type. Options are ``("score", "all")``. Default is ``"score"``.
+            'score' returns the median of the prediction rates for both classes. 
+            'all' returns a dictionary of all scores, inlcuding the keys:
+            
+            - score_all: the prediction accuracy on all the data
+            - score_0: the prediction accuracy on the negative class for :paramref:`n` random subsamples of the data
+            - score_1: the prediction accuracy on the positive class for :paramref:`n` random subsamples of the data
+            - score: the median of the prediction rates on each class
+            - score_rocauc: the ROC-AUC score for :paramref:`n` random subsamples of the data
+            - score_rocauc_full_data: the ROC-AUC score for the full data
+            - classifier_: the classifier used for each iteration
+            - value_counts: the value counts of the training data for each iteration
+            
+    Returns:
+        float or dict: The median of the prediction rates for both classes or a dictionary of all scores
+        
+    See also:
+        https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html
+        for available solvers for LDA.
     '''
-    X: training data
-    y: target values
-    classifier: classifier to use
-    '''
+    # TODO: this supports passing a classifier, but its overridden by an LDA initilization anyways?
     if classifier is None:
         pass
     else:
         raise ValueError("Not supported")
+    
     score_all = []
     score_0 = []
     score_1 = []
@@ -70,24 +100,17 @@ def prediction_rates(
 
     X_train = X_test = y_train = y_test = []
     for x in range(n):
-        #if bad data is selected (e.g. only one group): reselect
         while True:
-            try:
-                if normalize_group_size:
-                    X, y = make_groups_equal_size(X_in, y_in)
-                else:
-                    X, y = X_in, y_in
-                X_train, X_test, y_train, y_test = train_test_split(
-                    X, y, test_size=test_size, random_state=x)
+            try:  # make train-test split, fit classifier
+                X, y = make_groups_equal_size(X_in, y_in) if normalize_group_size else (X_in, y_in)
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=x)
                 #classifier = LDA(n_components=2, shrinkage = 'auto', solver = 'eigen', )
                 classifier = LDA(n_components=1, shrinkage=None, solver=solver)
-
                 classifier.fit(X_train, y_train)
                 break
-            except ValueError:
+            except ValueError:  # Bad data is selected (e.g. contains only one class): reselect
                 if lv >= max_tries:
-                    raise RuntimeError(
-                        "Can't select data, that is accepted by estimator!")
+                    raise RuntimeError("Can't select data, that is accepted by estimator!")
                 lv = lv + 1
                 continue
 

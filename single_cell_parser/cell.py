@@ -24,10 +24,15 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class Cell(object):
-    '''Cell object containing morphological information, hoc interface, and simulation data of single-cell simulations.
+    '''Cell object providing API to the NEURON hoc interface.
     
-    The main purpose is as a dataclass containing this information, but not to create or configure it on its own.
-    its attributes are set by (usually) :py:class:`~single_cell_parser.cell_parser.CellParser`.
+    This class contains info on the cell morphology structure, and simulation data of single-cell simulations.
+    The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
+    Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
+    
+    See also: 
+        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
+        This class concerns itself with providing API to NEURON, not with mapping input to the cell.
     
     Attributes: 
         hoc_path (str): Path to the hoc file containing the cell morphology.
@@ -45,12 +50,7 @@ class Cell(object):
         section_adjacency_map (dict): maps each section (by ID) to its parent sections and children sections.
         evokedNW: The :py:class:`single_cell_parser.network.NetworkMapper` object for evoked network simulations. 
             Set by e.g. :py:meth:`~single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input`.
-
-    WARNING: 
-        While it contains similar methods, this is not the same class as :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
-        See :py:mod:`single_cell_parser` for more info on the difference.
     '''
-
     def __init__(self):
         self.hoc_path = None
         self.id = None

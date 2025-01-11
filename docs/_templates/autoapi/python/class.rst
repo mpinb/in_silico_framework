@@ -1,5 +1,6 @@
 {% import 'macros.rst' as macros %}
-{% set parent_module = obj.id.split('.')[:-1] | join('.') | escape %}
+{% set root_module = obj.id.split('.')[0] | escape %}
+{%- set breadcrumb = obj.id.split('.')[1:] %}
 
 .. Note that class attributes are rendered within the docstring, as taken care of by Napoleon. They do not need a separate section.
 
@@ -8,9 +9,13 @@
 
 .. backlink:
 
-{% if parent_module %}
-Back to :mod:`{{ parent_module }}`
+{% if breadcrumb %}
+:mod:`{{ root_module }}`
+{%- for n in range(breadcrumb|length )  %}
+ ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
+{%- endfor %}
 {% endif %}
+
 
 {{ obj.short_name }}
 {{ "=" * obj.short_name | length }}

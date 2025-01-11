@@ -34,7 +34,7 @@ def normalize(raw, mean, std):
         mean: mean value
         std: standard deviation
         
-    Returns
+    Returns:
         float: normalized value"""
     return np.mean(np.abs(raw - mean)) / std
 
@@ -45,7 +45,7 @@ def nan_if_error(fun):
     Args:
         fun: function to run
         
-    Returns
+    Returns:
         function: wrapped function
     """
     def helper(*args, **kwargs):

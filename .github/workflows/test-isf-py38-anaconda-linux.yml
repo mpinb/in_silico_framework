@@ -1,0 +1,99 @@
+name: Test Anaconda (linux)
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+  pull_request_target:
+    types:
+      - closed
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+  push:
+    branches:
+      - testing
+      - installer
+      - compatibility
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test ISF Anaconda Py3.8 (linux)
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Build ISF (Anaconda py3.8)
+        run: |
+          CONDA_TARGET_DIR="$HOME/anaconda_isf3.8"
+          if [ -d "$CONDA_TARGET_DIR" ]; then
+            echo "Found existing installation in $CONDA_TARGET_DIR. Removing previous Anaconda installation..."
+            rm -r "$CONDA_TARGET_DIR"
+          else
+            echo "No previous Anaconda installation found. Continuing..."
+          fi
+          pushd .
+          cd installer/py3.8
+          ./install.sh -p $CONDA_TARGET_DIR | tee $HOME/build_output_3.8.txt || exit 1
+          exit_status=${PIPESTATUS[0]}
+          popd
+          source $CONDA_TARGET_DIR/bin/activate
+          conda list 
+          exit $exit_status
+      - name: Test
+        run: |
+          echo "------------ Setting up environment -------------"
+          CONDA_TARGET_DIR="$HOME/anaconda_isf3.8"
+          source $CONDA_TARGET_DIR/bin/activate
+          echo "Using Python: $(which python)"
+          export PYTHONPATH=$(pwd):$HOME
+          echo $PYTHONPATH
+
+          echo "------------ Configuring Dask -------------"
+          port_number=38786
+          bokeh_port=38787
+          echo "Launching Dask server on $name"
+          echo "Using port $port_number and bokeh port $bokeh_port"
+
+          export DASK_CONFIG=./config/dask_config.yml
+
+          echo "------------ Running tests -------------"
+          unset DISPLAY
+          if [ ! -d "$HOME/tmp" ]; then
+            mkdir $HOME/tmp
+          fi
+          export TMPDIR=$HOME/tmp
+          mkdir -p ./tests/logs
+          (dask-scheduler --port=$port_number --bokeh-port=$bokeh_port --host=localhost --preload="import mechanisms, compatibility"> ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1) & \
+          (dask-worker localhost:$port_number --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory="." > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1) & \
+          pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port $port_number tests || exit 1;
+
+      - name: Cleanup dask orphan processes
+        if: ${{ always() }}
+        run: |
+          pkill -U $USER dask-scheduler
+          pkill -U $USER dask-worker
+
+      - name: Save test logs as artifacts
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }} 
+        with:
+          name: ${{ github.run_id }}_logs
+          path: |
+            ./tests/logs/
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./tests/logs/report_py38.xml
+          verbose: true # optional (default = false)
+      

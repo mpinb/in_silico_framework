@@ -1,3 +1,12 @@
+"""Read and write numpy arrays to and from shared memory.
+
+Shared memory is a memory space that is shared between multiple processes. 
+
+Note:
+    This module is speicalized for use with SLURM HPC systems.
+    To use with other systems, set the JOB_SHMTMPDIR environment variable to a directory in shared memory.
+"""
+
 import os
 import hashlib
 import numpy as np
@@ -23,11 +32,13 @@ if six.PY3:
 
     class SharedMemory:
         """
-        Modified from multiprocessing/shared_memory.py
-        - is by  created in the shared memory SLURM directory specified in the JOB_SHMTMPDIR environment variable    
+        Modified from multiprocessing.shared_memory to work with SLURM HPC systems:
+        
+        - created in the shared memory SLURM directory specified in the ``JOB_SHMTMPDIR`` environment variable    
         - Adresses bug in https://bugs.python.org/issue39959 by not registering the shared memory object
         - Only supports named shared memory
         - and cleanup is left to slurm
+        
         Only supports POSIX, not windows.
 
         Creates a new shared memory block or attaches to an existing
@@ -43,7 +54,21 @@ if six.PY3:
         no longer needs access to a shared memory block that might still be
         needed by other processes, the close() method should be called.
         When a shared memory block is no longer needed by any process, the
-        unlink() method should be called to ensure proper cleanup."""
+        unlink() method should be called to ensure proper cleanup.
+        
+        Args:
+            name (str): Path to the shared memory block on the disk.
+            create (bool): If True, create a new shared memory block. If False, attach to an existing shared memory block.
+            size (int): Size in bytes of the shared memory block.
+            track_resource (bool): If True, register the shared memory block with the resource tracker. If False, do not register the shared memory block with the resource tracker.
+        
+        Attributes:
+            _buf (memoryview): A memoryview of the contents of the shared memory block.
+            _name (str): Unique name that identifies the shared memory block.
+            _size (int): Size in bytes of the shared memory block.
+            _path (str): Path to the shared memory block on the disk.
+            _fd (int): File descriptor of the shared memory block.
+        """
 
         # Defaults; enables close() and unlink() to run without errors.
         _name = None
@@ -176,7 +201,17 @@ else:
 
 
 def shared_array_from_numpy(arr, name=None):
-    '''takes an array in memory and puts it into shared memory'''
+    '''Takes an array in memory and puts it into shared memory
+    
+    Args:
+        arr (np.ndarray): The array to be put into shared memory.
+        name (str, optional): The name of the shared memory block. Default: None.
+        
+    Returns:
+        tuple: 
+            A tuple containing the :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
+            object and the shared memory array.
+    '''
     shm = SharedMemory(create=True, size=arr.nbytes, name=name)
     shm_arr = np.ndarray(arr.shape, dtype=arr.dtype, buffer=shm.buf)
     np.copyto(shm_arr, arr)
@@ -184,6 +219,19 @@ def shared_array_from_numpy(arr, name=None):
 
 
 def _get_offset_and_size_in_bytes(start_row, end_row, shape, dtype):
+    """Get the offset and size in bytes for a given ``start_row`` and ``end_row``.
+    
+    Rows here refer to the first dimension of a multi-dimensional array.
+    
+    Args:
+        start_row (int): The starting row of the array.
+        end_row (int): The ending row of the array.
+        shape (tuple): The shape of the array. ``shape[0]`` is the number of rows.
+        dtype (str): The data type of the array. Used to infer the size in bytes.
+        
+    Returns:
+        tuple: A tuple containing the ``start_row``, ``end_row``, ``bytes_offset``, ``bytes_size``, and ``final_shape``.
+    """
     if start_row is None:
         start_row = 0
     if end_row is None:
@@ -193,25 +241,50 @@ def _get_offset_and_size_in_bytes(start_row, end_row, shape, dtype):
     assert end_row <= shape[0]
     final_shape = tuple([end_row - start_row] + list(shape[1:]))
     bytes_size = np.prod(final_shape) * np.dtype(dtype).itemsize
-    bytes_offset = np.prod([start_row] +
-                           list(shape[1:])) * np.dtype(dtype).itemsize
+    bytes_offset = np.prod([start_row] + list(shape[1:])) * np.dtype(dtype).itemsize
     return start_row, end_row, bytes_offset, bytes_size, final_shape
 
 
 def _check_filesize_matches_shape(path, shape, dtype):
+    """Check whether the file size matches the expected size based on the shape and dtype.
+    
+    Args:
+        path (str): Path to the file.
+        shape (tuple): Shape of the array.
+        dtype (str): Data type of the array.
+        
+    Raises:
+        ValueError: If the file size does not match the expected size.
+    """
     bytes_file = os.path.getsize(path)
     bytes_expected = np.prod(shape) * np.dtype(dtype).itemsize
     if bytes_file != bytes_expected:
         raise ValueError("File size doesn't match expected size")
 
 
-def shared_array_from_disk(path,
-                           shape=None,
-                           dtype=None,
-                           name=None,
-                           start_row=None,
-                           end_row=None):
-    '''loads an array saved to disk and puts it into shared memory'''
+def shared_array_from_disk(
+    path,
+    shape=None,
+    dtype=None,
+    name=None,
+    start_row=None,
+    end_row=None):
+    '''Loads a numpy array from disk and puts it into shared memory
+    
+    Args:
+        path (str): Path to the file on disk.
+        shape (tuple, optional): Shape of the array.
+        dtype (str, optional): Data type of the array.
+        name (str, optional): 
+            Name of the shared memory block. 
+            To be passed to :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` 
+            Default: None.
+        start_row (int, optional): The starting row of the array. Default: None.
+        end_row (int, optional): The ending row of the array. Default: None.
+        
+    Returns:
+        tuple: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+    '''
     #_check_filesize_matches_shape(path, shape, dtype)
     start_row, end_row, bytes_offset, bytes_size, final_shape = _get_offset_and_size_in_bytes(
         start_row, end_row, shape, dtype)
@@ -234,12 +307,31 @@ def shared_array_from_disk(path,
     return shm, shm_arr
 
 
-def memmap_from_disk(path,
-                     shape=None,
-                     dtype=None,
-                     name=None,
-                     start_row=None,
-                     end_row=None):
+def memmap_from_disk(
+    path,
+    shape=None,
+    dtype=None,
+    name=None,
+    start_row=None,
+    end_row=None):
+    """Memory map a numpy array on disk.
+    
+    Create a numpy memory map from a file on disk. This allows for the array to be accessed without loading the entire array into memory.
+    
+    Args:
+        path (str): Path to the file on disk.
+        shape (tuple, optional): Shape of the array.
+        dtype (str, optional): Data type of the array.
+        name (str, optional): Name of the shared memory block. Default: None.
+        start_row (int, optional): The starting row of the array. Default: None.
+        end_row (int, optional): The ending row of the array. Default: None.
+        
+    Returns:
+        np.memmap: A numpy memory map object.
+        
+    See also:
+        https://numpy.org/doc/stable/reference/generated/numpy.memmap.html
+    """
     _check_filesize_matches_shape(path, shape, dtype)
     start_row, end_row, bytes_offset, bytes_size, final_shape = _get_offset_and_size_in_bytes(
         start_row, end_row, shape, dtype)
@@ -253,14 +345,29 @@ def memmap_from_disk(path,
 
 
 def shared_array_from_shared_mem_name(fname, shape=None, dtype=None):
-    '''loads an already shared array by its name'''
+    '''Loads an existing shared array by its name
+    
+    Args:
+        fname (str): Name of the shared memory block.
+        shape (tuple, optional): Shape of the array. Default: None.
+        dtype (str, optional): Data type of the array. Default: None.
+        
+    Returns:
+        tuple: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+    '''
     shm = SharedMemory(name=fname)
     shm_arr = np.ndarray(shape, dtype, buffer=shm.buf)
     return shm, shm_arr
 
 
 class Uninterruptible:
-
+    """Context manager to create an uninterruptible section of code.
+    
+    This context manager temporarily ignores ``SIGINT`` and ``SIGTERM`` signals.
+    
+    Warning:
+        This context manager should be used with caution, as it can lead to unresponsive code (by design).
+    """
     def __enter__(self):
         self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.original_sigterm_handler = signal.getsignal(signal.SIGTERM)
@@ -281,16 +388,24 @@ sns_list = []
 
 
 class SharedNumpyStore:
-
+    """Store numpy arrays on disk and share them between processes.
+    
+    This class is used to store numpy arrays on disk and share them between processes using shared memory.
+    
+    Warning:
+        This class provides no way to reload data if it has changed on disk.
+        
+    Args:
+        working_dir (str): The path of the working directory to store numpy arrays.
+        
+    Attributes:
+        working_dir (str): The path of the working directory to store numpy arrays.
+        _suffix (str): A unique suffix for the working directory.
+        _shared_memory_buffers (dict): A dictionary containing all already loaded buffers and arrays.
+        _pending_renames (dict): A dictionary containing all pending renames for files.
+        _files (dict): A dictionary mapping array names to filepaths in shared memory.
+    """
     def __init__(self, working_dir):
-        """
-        This class helps storing numpy arrays on disk and sharing them between processes.
-        
-        Warning: this doesn't have ways to reload data if it has changed on disk.
-        
-        Args:
-            working_dir (str): The path of the working directory to store numpy arrays.
-        """
         self.working_dir = working_dir
         if not os.path.exists(working_dir):
             os.makedirs(working_dir)
@@ -313,8 +428,10 @@ class SharedNumpyStore:
 
     @staticmethod
     def _get_metadata_from_fname(fname):
-        """
-        returns name, shape, and dtype from a filename that follows the convention of NumpyStore
+        """Get metadata from a filename that follows the convention of NumpyStore.
+        
+        Returns:
+            tuple: the name, shape, and dtype from a filename that follows the convention of NumpyStore
         """
         name = fname.split('__')[0]
         shape = tuple(map(int, fname.split('__')[1].split('_')))
@@ -322,8 +439,10 @@ class SharedNumpyStore:
         return name, shape, dtype
 
     def _get_metadata_from_name(self, name):
-        """
-        returns fname, shape, and dtype from an array with 'name' saved in this instance of NumpyStore
+        """Get metadata from a name that follows the convention of NumpyStore.
+        
+        Returns:
+        tuple: the filename, shape, and dtype from an array with 'name' saved in this instance of NumpyStore
         """
         if not name in self._files:
             self.update()
@@ -336,8 +455,13 @@ class SharedNumpyStore:
         return self._files[name], shape, dtype
 
     def get_expected_file_length(self, name):
-        """
-        Returns the expected length in bytes of a file given its metadata (shape and dtype).
+        """Get the expected length in bytes of a file given its metadata (shape and dtype).
+        
+        Args:
+            name (str): The name of the array.
+        
+        Returns:
+            int: the expected length in bytes of a file given its metadata (shape and dtype).
         """
         _, shape, dtype = self._get_metadata_from_name(name)
         total_elements = np.prod(shape)
@@ -346,23 +470,51 @@ class SharedNumpyStore:
         return file_length
 
     def _get_fname_from_metadata(self, name, shape, dtype):
-        '''
-        for a given name, shape, and dtype, create a filename that follows the convention of NumpyStore
+        '''Get the filename from metadata.
+        
+        For a given name, shape, and dtype, create a filename that follows the convention of NumpyStore
+        
+        Args:
+            name (str): the name of the array
+            shape (tuple): the shape of the array
+            dtype (str): the data type of the array
+        
+        Returns:
+            str: the filename that follows the convention of NumpyStore
         '''
         fname = name + '__' + '_'.join(map(str, shape)) + '__' + str(dtype)
         return fname
 
     def _get_fname(self, arr, name):
-        '''
-        for a given array and its name, create a filename that follows the convention of NumpyStore
+        '''Get the filename of an array.
+        
+        For a given array and its name, create a filename that follows the convention of NumpyStore
+        
+        Args:
+            arr (np.ndarray): the array
+            name (str): the name of the array
+        
+        Returns:
+            str: the filename that follows the convention of NumpyStore
         '''
         return self._get_fname_from_metadata(name, arr.shape, arr.dtype)
 
     def save(self, arr, name):
-        """
-        Save a numpy array to disk at the working_dir of this instance of NumpyStore.
+        """Save a numpy array to disk at the working_dir of this instance of NumpyStore.
+        
+        Args:
+            arr (np.ndarray): The array to be saved.
+            name (str): The name of the array.
+            
+        Warning:
+            This method does not check if the array already exists in the store. If it does, it will be overwritten.
+            
+        Raises:
+            AssertionError: If the name is reserved for a Database ``Loader``.
+            AssertionError: If the name contains double underscores, which would throw off the NumpyStore convention.
         """
         assert name != 'Loader.pickle'  # reserved to model data base
+        assert name != 'Loader.json'  # reserved to isf data base
         assert not '__' in name
         fname = self._get_fname(arr, name)
         self._files[name] = fname
@@ -371,6 +523,10 @@ class SharedNumpyStore:
         os.rename(full_path + '.saving', full_path)
 
     def flush(self):
+        """Rename all files according to the new names in :paramref:`_pending_renames`.
+        
+        Deletes the old files and updates the :paramref:`_files` dictionary.
+        """
         with Uninterruptible():
             keys = list(self._pending_renames.keys())
             for fname in keys:
@@ -392,7 +548,7 @@ class SharedNumpyStore:
 
     def append_save(self, arr, name, autoflush=True):
         """
-        Appends the given numpy array 'arr' to an existing array with the specified 'name'.
+        Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
         """
         assert name != 'Loader.pickle'  # reserved to model data base
         assert not '__' in name
@@ -447,20 +603,32 @@ class SharedNumpyStore:
              start_row=None,
              end_row=None,
              allow_create_shm=False):
-        '''Load array.
-            mode: memmap: memory map the file and return a numpy memmap object.
-                  memory: load file into (not shared) memory and return a numpy array
-                  shared_memory: access file in shared memory and return numpy array. 
-            allow_create_shm: only relevant in mode shared_memory. 
+        '''Load an array from shared memory.
+        
+        Args:
+            mode (str): 
+                'memmap': memory map the file and return a numpy memmap object.
+                'memory': load file into (not shared) memory and return a numpy array
+                'shared_memory': access file in shared memory and return numpy array. 
+            allow_create_shm (bool): only relevant in mode shared_memory. 
                 If True, if the file on disk is not yet loaded into shared memory, load it.
                 If False, requires that file already exists in shared memory. Use this e.g. in child processes 
                 in which you want to be sure they don't create a new shared memory file. 
-            start_row: first row from the array to load
-            end_row: last row of the array to load
+            start_row (int): first row from the array to load
+            end_row (int): last row of the array to load
             
             Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent 
                 file is created.
-            '''
+        
+        Returns:
+            np.ndarray: the array
+            
+        Raises:
+            ValueError: if mode is not one of 'memmap', 'memory', or 'shared_memory'
+            
+        Raises:
+            AssertionError: if the file is not in shared memory yet and allow_create_shm is False
+        '''
 
         fname, shape, dtype = self._get_metadata_from_name(name)
         start_row, end_row, bytes_offset, bytes_size, final_shape = _get_offset_and_size_in_bytes(
@@ -513,7 +681,7 @@ class SharedNumpyStore:
                         "The array is not in shared memory yet. Set allow_create_shm to True to load the array into shared memory."
                     )
         else:
-            raise ValueError('mode must be')
+            raise ValueError("mode must be one of (memmap, memory, shared_memory)")
 
 
 ###############################
@@ -524,16 +692,40 @@ from . import parent_classes
 
 
 def check(obj):
-    '''checks wherther obj can be saved with this dumper'''
+    """Check whether the object can be saved with this dumper.
+    
+    Args:
+        obj (object): Object to be saved.
+        
+    Returns:
+        bool: Whether the object is None. This dumper requires no object to be saved.
+    """
     return isinstance(obj, None)
 
 
 class Loader(parent_classes.Loader):
-
+    """Loader for :py:class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
+    """
     def get(self, savedir):
+        """Load the shared numpy store from the specified folder."""
         return SharedNumpyStore(savedir)
 
 
 def dump(obj, savedir):
+    """Dump the shared numpy store in the specified directory.
+    
+    Args:
+        obj (None, optional): No object is required. If an object is passed, it is ignored.
+        savedir (str): Directory where the shared numpy store should be stored.
+    
+    Note:
+        This method does not require the numpy arrays themselves.
+        Rather, it saves a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` object,
+        which can further be used to save and load numpy arrays to and from shared memory.
+        
+    See also:
+        :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npy` and :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npz`
+        for directly saving numpy arrays to disk (non-shared memory).
+    """
     compatibility.cloudpickle_fun(Loader(),
                                   os.path.join(savedir, 'Loader.pickle'))

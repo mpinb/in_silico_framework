@@ -1,11 +1,16 @@
-{% set parent_class = obj.id.split('.')[:-1] | join('.') | escape %}
+{% set root_module = obj.id.split('.')[0] | escape %}
+{%- set breadcrumb = obj.id.split('.')[1:] %}
 {% set shortname = obj.id.split('.')[-2:]|join('.')|escape %}
 
 .. backlink:
 
-{% if parent_class %}
-Back to :mod:`{{ parent_class }}`
+{% if breadcrumb %}
+:mod:`{{ root_module }}`
+{%- for n in range(breadcrumb|length )  %}
+ ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
+{%- endfor %}
 {% endif %}
+
 
 {% if obj.display %}
    {% if is_own_page %}

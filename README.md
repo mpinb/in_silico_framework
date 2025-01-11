@@ -21,12 +21,4 @@ Detailed instructions on how to install the repo are given in the [installer dir
 
 ## Usage
 
-The [getting started directory](./getting_started) provides an introduction on how to use ISF, including:
-- [basic usage](./getting_started/Introduction_to_ISF.ipynb)
-- [data analysis](<./getting_started/tutorials/1. data analysis>)
-- [biophysics](<./getting_started/tutorials/2. biophysics>)
-- [synaptic simulations](<./getting_started/tutorials/3. synaptic simulations>)
-- [reduced models](<./getting_started/tutorials/4. reduced models>)
-- [network-level simulations](<./getting_started/tutorials/5. network simulations>)
-- [visualization](<./getting_started/tutorials/6. visualization>)
-- [data management](<./getting_started/tutorials/7. data management>)
+The [getting started directory](./getting_started) provides an introduction on how to use ISF

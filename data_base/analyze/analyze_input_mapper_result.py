@@ -1,5 +1,8 @@
-'''This module contains methods to compare the result of the SingleCellInputMapper to
-the neuronet population.'''
+'''Compare the result of the :py:mod:`singlecell_input_mapper` to
+the neuronet population.
+
+:skip-doc:
+'''
 
 import glob
 import pandas as pd
@@ -7,12 +10,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from data_base.IO.roberts_formats import read_InputMapper_summary
 from ..utils import select
-from ..analyze import excitatory, inhibitory
+from config.cell_types import EXCITATORY
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
-def get_neuronet_data(COLUMN='C2',
-                      POSTSYNAPTIC_CELLTYPE='L5tt',
-                      innervation_table=None):
+def get_neuronet_data(
+        COLUMN='C2',
+        POSTSYNAPTIC_CELLTYPE='L5tt',
+        innervation_table=None):
     if innervation_table is None:
         innervation_table = pd.read_csv(
             '/nas1/Data_regger/AXON_SAGA/Axon2/NeuroNet/cache_Vincent_complete_final/data/synTotal_toC2.csv'
@@ -28,7 +34,7 @@ def get_neuronet_data(COLUMN='C2',
                               inplace=True)
     innervation_EXCINH = innervation_per_type.groupby(
         lambda x: 'EXC'
-        if x in excitatory else 'INH', axis=1).apply(lambda x: x.sum(axis=1))
+        if x in EXCITATORY else 'INH', axis=1).apply(lambda x: x.sum(axis=1))
     return {
         'all': innervation_table,
         'per_type': innervation_per_type,
@@ -44,7 +50,7 @@ def get_input_mapper_data(path_to_summmary):
         ]]
     out['per_type'] = out['per_type'].set_index('Presynaptic cell type')
     out['EXCINH'] = out['per_type'].groupby(
-        lambda x: 'EXC' if x in excitatory else 'INH').apply(sum)
+        lambda x: 'EXC' if x in EXCITATORY else 'INH').apply(sum)
     return out
 
 

@@ -1,3 +1,13 @@
+"""Read and write numpy arrays to msgpack files
+
+.. deprecated:: 0.2.0
+   The msgpack format is deprecated and will be removed in a future version.
+   Please consider using the Apache parquet, ``npz`` or ``npy`` formats.
+   
+:skip-doc:
+"""
+
+
 import os
 # import cloudpickle
 import compatibility

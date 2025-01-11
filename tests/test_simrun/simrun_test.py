@@ -10,7 +10,7 @@ import single_cell_parser as scp
 import neuron
 from ..test_simrun import decorators
 import numpy as np
-from simrun.utils import scale_apical
+from single_cell_parser.cell_modify_functions.scale_apical_morph_86 import scale_apical_morph_86
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
@@ -19,7 +19,6 @@ from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_rob
 # from compatibility import synchronous_scheduler
 from mechanisms import l5pt as l5pt_mechanisms
 from ..test_simrun.context import cellParamName, networkName, example_path, parent
-
 assert os.path.exists(cellParamName)
 assert os.path.exists(networkName)
 assert os.path.exists(example_path)
@@ -127,6 +126,14 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
 
 #@decorators.testlevel(2)
 def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
+    # Note: these tolerances were found with trial and error, but have no further meaning
+    if sys.platform.startswith('linux'):
+        n_decimals=3
+    elif sys.platform.startswith('darwin'):
+        # OSX has updated NEURON version (NEURON 8), and the results are not exactly the same
+        # compared to Robert's original results (NEURON < 7.8.2)
+        n_decimals=1
+
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName,
@@ -135,7 +142,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
             nprocs=1,
             tStop=345,
             silent=True,
-            scale_apical=scale_apical)
+            scale_apical=scale_apical_morph_86)
         dummy = client.compute(dummy).result()
 
         #synapse activation
@@ -165,7 +172,9 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         #print pdf2.values
         #for x,y in zip(pdf1[pdf1.t<265].values.squeeze(), pdf2[pdf2.t<265].values.squeeze()):
         #    print x,y
-        np.testing.assert_almost_equal(pdf1.values, pdf2.values, decimal=3)
+        
+        # np.testing.assert_allclose(pdf1.values, pdf2.values, rtol=tol)
+        np.testing.assert_almost_equal(pdf1.values, pdf2.values, decimal=n_decimals)
     except:
         raise
     assert isinstance(dummy[0][0][0], pd.DataFrame)

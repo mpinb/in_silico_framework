@@ -1,9 +1,19 @@
 import numpy as np
 from pandas.util.testing import assert_frame_equal
 import dask 
-from data_base.IO.LoaderDumper import numpy_to_npy, pandas_to_parquet, dask_to_parquet, \
-                                pandas_to_msgpack, to_pickle, pandas_to_pickle, dask_to_msgpack, \
-                                dask_to_categorized_msgpack, to_cloudpickle, reduced_lda_model
+from data_base.IO.LoaderDumper import (
+    numpy_to_npy, 
+    pandas_to_parquet, 
+    dask_to_parquet,
+    pandas_to_msgpack, 
+    to_pickle, 
+    pandas_to_pickle, 
+    dask_to_msgpack,
+    dask_to_categorized_msgpack, 
+    to_cloudpickle, 
+    reduced_lda_model,
+    numpy_to_zarr
+    )
 from tests.test_simrun.reduced_model.get_kernel_test import get_test_Rm
 from numpy.testing import assert_array_equal
 from data_base.utils import df_colnames_to_str
@@ -22,8 +32,13 @@ def clean_up(db):
     robust_del_fun(db, 'voltage_traces2')
     robust_del_fun(db, 'test')
 
+def small_numpy_dump(x, db, dumper):
+    clean_up(db)
+    db.set('test', x, dumper=dumper)
+    dummy = db['test']
+    assert_array_equal(dummy, x)
 
-def data_frame_generic_small(db, pdf, ddf, dumper, client=None):
+def small_data_frame_test(db, pdf, ddf, dumper, client=None):
     """
     This function provides a generic way to test dumpers for dataframes.
 
@@ -57,48 +72,41 @@ def data_frame_generic_small(db, pdf, ddf, dumper, client=None):
     assert_frame_equal(a, b)
 
 def test_dask_to_msgpack_small(empty_db, pdf, ddf, client):
-    data_frame_generic_small(empty_db, pdf, ddf, dask_to_msgpack,
+    small_data_frame_test(empty_db, pdf, ddf, dask_to_msgpack,
         client=client)
 
 def test_dask_to_categorized_msgpack_small(empty_db, pdf, ddf, client):
-    data_frame_generic_small(empty_db, pdf, ddf, dask_to_categorized_msgpack,
+    small_data_frame_test(empty_db, pdf, ddf, dask_to_categorized_msgpack,
         client=client)
 
 def test_pandas_to_msgpack_small(empty_db, pdf):
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), pandas_to_msgpack)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), pandas_to_msgpack)
 
 @pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_pandas_to_parquet_small(empty_db, pdf):
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), pandas_to_parquet)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), pandas_to_parquet)
 
 @pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_dask_to_parquet_small(empty_db, pdf, ddf, client):
-    data_frame_generic_small(empty_db, pdf, ddf, dask_to_parquet, client=client)
+    small_data_frame_test(empty_db, pdf, ddf, dask_to_parquet, client=client)
 
 def test_pandas_to_pickle_small(empty_db, pdf):
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), pandas_to_pickle)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), pandas_to_pickle)
 
 def test_to_pickle_small(empty_db, pdf):
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), to_pickle)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), to_pickle)
 
 def test_to_cloudpickle_small(empty_db, pdf):
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), to_cloudpickle)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), to_cloudpickle)
 
 def test_default_small(empty_db, pdf):
     # unspecified dumper, should be to_cloudpickle
-    data_frame_generic_small(empty_db, pdf, pdf.copy(), None)
+    small_data_frame_test(empty_db, pdf, pdf.copy(), None)
 
 def test_numpy_to_npy(empty_db, pdf):
-
-    def fun(x):
-        clean_up(empty_db)
-        empty_db.set('test', x, dumper=numpy_to_npy)
-        dummy = empty_db['test']
-        assert_array_equal(dummy, x)
-
-    fun(np.random.randint(5, size=(100, 100)))
-    fun(np.random.randint(5, size=(100,)))
-    fun(np.array([]))
+    small_numpy_dump(np.random.randint(5, size=(100, 100)), empty_db, numpy_to_npy)
+    small_numpy_dump(np.random.randint(5, size=(100,)), empty_db, numpy_to_npy)
+    small_numpy_dump(np.array([]), empty_db, numpy_to_npy)
 
 def test_reduced_lda_model(empty_db):
         Rm = get_test_Rm(empty_db)
@@ -122,3 +130,8 @@ def test_reduced_lda_model(empty_db):
         Rm_reloaded.plot()
         empty_db.set('rm2', Rm_reloaded, dumper=reduced_lda_model)
         Rm_reloaded.get_lookup_series_for_different_refractory_period(10)
+
+def test_numpy_to_zarr(empty_db):
+    small_numpy_dump(np.random.randint(5, size=(100, 100)), empty_db, numpy_to_zarr)
+    small_numpy_dump(np.random.randint(5, size=(100,)), empty_db, numpy_to_zarr)
+    small_numpy_dump(np.array([]), empty_db, numpy_to_zarr)

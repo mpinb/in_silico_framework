@@ -1,0 +1,77 @@
+name: Test pixi (linux)
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+  pull_request_target:
+    types:
+      - closed
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+  push:
+    branches:
+      - testing
+      - installer
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test pixi linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install & setup environment
+        uses: prefix-dev/setup-pixi@v0.8.0
+        with:
+          pixi-version: v0.39.0
+          cache: true
+          auth-host: prefix.dev
+          auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
+          manifest-path: pyproject.toml
+      - name: Test
+        run: |
+          echo "------------ Preliminary setup for tests -------------"
+          echo "Creating tests/logs/ directory..."
+          mkdir -p ./tests/logs/
+
+          echo "------------ Configuring Dask -------------"
+          port_number=38786
+          bokeh_port=38787
+          echo "Launching Dask server"
+          echo "Using port $port_number and bokeh port $bokeh_port"
+          export DASK_CONFIG=./config/dask_config.yml
+
+          echo "------------ Running tests -------------"
+          unset DISPLAY
+          if [ ! -d "$HOME/tmp" ]; then
+            mkdir $HOME/tmp
+          fi
+          export TMPDIR=$HOME/tmp
+          (pixi run dask-scheduler --port=$port_number --bokeh-port=$bokeh_port --host=localhost> ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1) & \
+          (pixi run dask-worker localhost:$port_number --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory="." > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1) & \
+          pixi run pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port $port_number tests || exit 1;
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save test logs
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }} 
+        with:
+          name: ${{ github.run_id }}_logs
+          path: |
+            ./tests/logs/
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./tests/logs/report_py38.xml
+          verbose: true
+
+

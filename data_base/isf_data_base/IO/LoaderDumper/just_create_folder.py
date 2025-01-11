@@ -1,3 +1,5 @@
+"""Create a folder and return it as a ManagedFolder object."""
+
 import os
 # import cloudpickle
 import compatibility
@@ -6,7 +8,14 @@ import json
 
 
 def check(obj):
-    '''checks wherther obj can be saved with this dumper'''
+    """Check whether the object can be saved with this dumper
+    
+    Args:
+        obj (object): Object to be saved
+        
+    Returns:
+        bool: Whether the object is None. This dumper requires no object to be saved.
+    """
     return obj is None  #isinstance(obj, np) #basically everything can be saved with pickle
 
 
@@ -29,15 +38,35 @@ def check(obj):
 
 
 class ManagedFolder(str):
-
+    """Wrapper class for a folder path    
+    """
     def join(self, *args):
+        """Get a subfolder of the current folder
+        
+        Args:
+            *args: Subfolder names
+            
+        Returns:
+            :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: Subfolder
+        """
         return ManagedFolder(os.path.join(self, *args))
 
     def listdir(self):
+        """List the files in the folder"""
         return [f for f in os.listdir(self) if not f == 'Loader.pickle']
 
     def get_file(self, suffix):
-        '''if folder only contains one file of specified suffix, this file is returned'''
+        '''Get the files that end with the specified suffix.
+        
+        Args:
+            suffix (str): Suffix of the file
+            
+        Raises:
+            ValueError: If there are no files with the specified suffix or more than one file with the specified suffix
+        
+        Returns:
+            str: The filepath of the file with :paramref:`suffix` (only if there is exactly one file with this suffix)
+        '''
         l = [f for f in os.listdir(self) if f.endswith(suffix)]
         if len(l) == 0:
             raise ValueError(
@@ -52,13 +81,27 @@ class ManagedFolder(str):
 
 
 class Loader(parent_classes.Loader):
-
+    """Load a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+    """
     def get(self, savedir):
+        """Get a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+        
+        Args:
+            savedir (str): Folder path
+        """
         #return savedir
         return ManagedFolder(savedir)
 
 
 def dump(obj, savedir):
+    """Create a folder
+    
+    Args:
+        obj (None, optional): 
+            This dumper requires no object to be saved. Only here for consistent API with other dumpers.
+            If an object is specified, it is ignored.
+        savedir (str): Folder path
+    """
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:
         json.dump({'Loader': __name__}, f)
 

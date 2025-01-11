@@ -272,15 +272,16 @@ def get_client(client_port=38786, timeout=120):
     logger.info("Making mechanisms visible on client side")
     def update_path(): sys.path.insert(0, os.path.dirname(__file__))
     def import_mechanisms(): import mechanisms
+    def import_Interface(): import Interface
     c.run(update_path)
     c.run(import_mechanisms)
+    c.run(import_Interface)
     return c
 
 print("\n\n")
 print_module_versions()
 
-import barrel_cortex
-from barrel_cortex import excitatory, inhibitory, color_cellTypeColorMap, color_cellTypeColorMap_L6paper, color_cellTypeColorMap_L6paper_with_INH
+from config import EXCITATORY, INHIBITORY
 
 import compatibility
 

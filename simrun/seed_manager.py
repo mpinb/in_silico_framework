@@ -1,3 +1,5 @@
+"""Get a random seed"""
+
 import numpy as np
 #path = '/nas1/Data_arco/used_seeds'
 import os
@@ -6,8 +8,12 @@ path = os.path.join(os.path.dirname(__file__), 'used_seeds')
 
 
 def get_seed(recursion_depth=0):
-    '''makes sure, that every random simulation can be initiated with a new seed'''
-
+    '''Get a random seed.
+    
+    Returns:
+        int: A random seed.
+    '''
+    # TODO: the used_seeds functionality should be either extended or removed.  - Bjorge
     used_seeds = []
     try:
         used_seeds = np.fromfile('/home/abast/used_seeds', dtype='int')
@@ -19,6 +25,7 @@ def get_seed(recursion_depth=0):
 
     seed = np.random.randint(4294967295)  #Seed must be between 0 and 4294967295
     return seed
+    
     if not seed in used_seeds:
         used_seeds.append(seed)
         used_seeds = np.array(used_seeds)

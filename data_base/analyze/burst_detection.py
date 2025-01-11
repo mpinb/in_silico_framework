@@ -1,3 +1,5 @@
+""":skip-doc:"""
+
 ## deprecated 12.02.2021 rieke / arco
 
 # import pandas as pd

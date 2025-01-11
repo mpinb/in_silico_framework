@@ -13,14 +13,12 @@ __date__ = '2012-04-28'
 class Cell(object):
     '''Cell object for mapping synapses onto a morphology.
 
-    This class is specialized for use with :py:mod:`single_cell_input_mapper.single_cell_input_mapper.synapse_mapper`.
+    This is a leightweight dataclass specialized for use with :py:mod:`singlecell_input_mapper.singlecell_input_mapper.synapse_mapper`.
 
-    Warning: 
-        While it contains similar methods, this is not the same class as :py:class:`single_cell_parser.cell.Cell`.
-        This class concerns itself with assigning synapses onto a cell morphology.
-        Contrary to :py:class:`single_cell_parser.cell.Cell`, it does not contain any biophysical details,
-        or methods for setting up a NEURON hoc object. This class has no dependency on the 
-        NEURON simulator :cite:`hines2001neuron`.
+    See also: 
+        This is not the same class as :py:class:`single_cell_parser.cell.Cell`.
+        Contrary to :py:class:`single_cell_parser.cell.Cell`, this class does not provide any biophysical details,
+        simulation parameters or biophysical details.
 
     Attributes:
         id (str): Unique identifier for the cell.
@@ -310,12 +308,18 @@ class PointCell(object):
 
 
 class Synapse(object):
-    '''Synapse base class.
-
-    Synapses are direct attributes of :py:class:`PySection2` objects, which in term
-    are direct attributes of :py:class:`Cell` objects.
-    :py:class:`Cell` objects also contains a dictionary of synapses.
-
+    '''Leightweight dataclass to store basic synapse information.
+    
+    Synapses are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` objects, 
+    which in turn are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` objects.
+    Contains information on: pre- and postsynaptic cell type, branch ID of postsynaptic cell, branch pt ID, 
+    and xyz-coordinates of synapse location
+    
+    See also:
+        This is not the same class as :py:class:`single_cell_parser.synapse.Synapse`.
+        This is a leightweight dataclass specialized for use with :py:mod:`single_cell_input_mapper.synapse_mapper`,
+        and does not contain any methods for NEURON API or synapse activations during simulations.
+    
     Attributes:
         secID (int): Section ID.
         ptID (int): Point ID on that section.
@@ -324,12 +328,7 @@ class Synapse(object):
         preCell (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`): Presynaptic cell.
         postCellType (str): Postsynaptic cell type.
         coordinates (numpy.ndarray): 3D coordinates of the synapse location.
-
-    Contains information on: pre- and postsynaptic cell type,
-    branch ID of postsynaptic cell, branch pt ID,
-    and xyz-coordinates of synapse location
     '''
-
     def __init__(
             self,
             edgeID,
@@ -357,9 +356,10 @@ class Synapse(object):
 class CellParser(object):
     '''Extract cell morphology from an AMIRA hoc file.
 
-    Warning:
-        This class is not the same as :py:class:`~single_cell_parser.cell_parser.CellParser`.
-        This class is specialized for use with :py:mod:`single_cell_parser.synapse_mapper.SynapseMapper`.
+    See also:
+        This is not the same class as :py:class:`single_cell_parser.cell_parser.CellParser`.
+        This is a leightweight dataclass specialized for use with :py:mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
+        and does not contain any biophysical details.
 
     Attributes:
         hoc_fname (str): File name of the hoc file.
@@ -379,12 +379,11 @@ class CellParser(object):
         
         Reads cell morphology from Amira hoc file
         and sets up PySections and Cell object.
-        
-        Info:
-            This method used to accept a method :paramref:`scaleFunc` as argument
-            for scaling dendritic diameters. This has since been deprecated.
-            Scaling diameters is now part of specific pipelines, e.g. the
-            :py:class:`~biophysics_fitting.simulator.Simulator` class.
+            
+        .. deprecated:: 1.0
+            The `scaleFunc` argument is deprecated and will be removed in a future version.
+            To ensure reproducability, scaleFunc should be specified in the cell parameters, as 
+            described in :py:mod:`~single_cell_parser.cell_modify_funs`
         '''
         edgeList = reader.read_hoc_file(self.hoc_fname)
         self.hoc_fname = self.hoc_fname.split('/')[-1]

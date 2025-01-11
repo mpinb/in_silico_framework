@@ -1,3 +1,12 @@
+"""
+.. deprecated:: 0.2.0
+   The pandas-msgpack format is set to be deprecated in the future.
+   Please consider using parquet instead.
+
+:skip-doc:
+"""
+
+
 from . import dask_to_categorized_msgpack
 import os
 

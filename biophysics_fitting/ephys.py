@@ -395,11 +395,12 @@ def BAC_caSpike_height_check_gt2_Na_spikes(t, v, v_dend, thresh=None):
     return spike_count(t, v, thresh) >= 2
 
 
-def BAC_caSpike_height_check_Ca_spikes_after_Na_spike(t,
-                                                      v,
-                                                      v_dend,
-                                                      n=2,
-                                                      thresh=None):
+def BAC_caSpike_height_check_Ca_spikes_after_Na_spike(
+    t,
+    v,
+    v_dend,
+    n=2,
+    thresh=None):
     """Checks if a calcium spike occurs after the nth sodium spike.
 
     Args:
@@ -483,11 +484,12 @@ def BPAPatt_check_relative_height(t, v_soma, v_dend, bAP_thresh=None, stim_onset
         bool: True if the ratio of bAP amplitude at soma and dendrite is greater than 1, False otherwise.
     """
     return BPAPatt(t, v_soma, bAP_thresh, stim_onset) / BPAPatt(t, v_dend, bAP_thresh, stim_onset) > 1
-def BPAPatt_check_relative_height(t,
-                                  v_soma,
-                                  v_dend,
-                                  bAP_thresh=None,
-                                  stim_onset=None):
+def BPAPatt_check_relative_height(
+    t,
+    v_soma,
+    v_dend,
+    bAP_thresh=None,
+    stim_onset=None):
                                   
     return BPAPatt(t, v_soma, bAP_thresh, stim_onset) / BPAPatt(
         t, v_dend, bAP_thresh, stim_onset) > 1

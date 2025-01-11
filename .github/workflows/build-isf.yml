@@ -1,11 +1,11 @@
 # Builds ISF for any Python version (2.7/3.8/3.9), depending on the input
 name: Build ISF
 on:
-  workflow_call:
-    inputs:
-      py_version:
-        required: true
-        type: string
+  # workflow_call:
+  #   inputs:
+  #     py_version:
+  #       required: true
+  #       type: string
 
 jobs:
   build:

@@ -39,8 +39,6 @@ def scale_apical_morph_86(cell):
                 oldDiam = sec.diamList[i]
                 newDiam = dendScale * oldDiam
                 h.pt3dchange(i, newDiam, sec=sec)
-
-
                 # x, y, z = sec.pts[i]
                 # sec.diamList[i] = sec.diamList[i]*dendScale
                 # d = sec.diamList[i]

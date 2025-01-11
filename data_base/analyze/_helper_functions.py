@@ -1,3 +1,5 @@
+""":skip-doc:"""
+
 import pandas as pd
 import numpy as np
 
@@ -20,16 +22,32 @@ def is_int(x):
         return False
 
 
-def time_list_from_pd(syn):
-    '''returns the columns, that can be interpreted as integer:
-    'name1' 'nam2' '3' '1' '2' --> '3' '1' '2' 
-    The underlying assupmtion is, that the dataframe syn consists
-    of columsn like 'name', 'color', 'bla', which describe the data
-    and columns like '1', '2', '3', which are the actual data.'''
-    relevant_columns = [_ for _ in syn if is_int(_)]
+def time_list_from_pd(df):
+    '''Fetch the concatenated values of all dataframe column names that can be converted to an integer.
+    
+    Used to parse out spike times from a :ref:`spike_times_format` dataframe and synapse activations from
+    a :ref:`synapse_activation_format` dataframe.
+    Also filters out NaN values.
+    
+    Example::
+    
+        >>> df = pd.DataFrame({'name1': [1, 2, 3], 'name2': [4, 5, 6], '1': [7, 8, 9], '2': [10, 11, 12], '3': [13, 14, 15]})
+        >>> time_list_from_pd(df)
+        array([ 7,  8,  9, 10, 11, 12, 13, 14, 15])
+        
+    Args:
+        df (:py:class:`~pandas.DataFrame`): 
+            Dataframe to extract values from. Normally a :ref:`spike_times_format` or :ref:`synapse_activation_format` simrun-initialized dataframe.
+            
+    Returns:
+        :py:class:`~numpy.array`: 
+            A 1D array of all values in columns that can be converted to int without NaN.
+    
+    '''
+    relevant_columns = [_ for _ in df if is_int(_)]
     out = []
     for col in relevant_columns:
-        dummy = syn[col]
+        dummy = df[col]
         dummy = dummy.dropna()
         out.append(dummy)
     return pd.concat(out).values

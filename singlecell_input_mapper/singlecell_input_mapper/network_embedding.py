@@ -30,6 +30,11 @@ class NetworkMapper:
     mutiple realizations of synaptic connections between pre-synaptic cells, and the post-synaptic cell
     (see :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`).
     
+    See also:
+        This is not the same class as :py:class:`single_cell_parser.network.NetworkMapper`.
+        This class is specialized for anatomical reconstructions, 
+        not synapse activations or simulation parameters.
+    
     Attributes:
         cells (dict): 
             Presynaptic cells, ordered by anatomical area and cell type. 

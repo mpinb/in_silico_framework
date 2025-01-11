@@ -1,31 +1,64 @@
+"""
+The somatic summation model is - I believe - the "synchronous proximal drive" model as used in the L6 paper.
+The reduced model is a more general extension of this, I believe.
+As of now, i don't see the need (and may lack the capacity) to document this.
+- Bjorge, 2024-11-12
+
+:skip-doc:
+"""
+
 import os
 from functools import partial
 import pandas as pd
 from simrun.somatic_summation_model import ParseVT
-from ..IO.LoaderDumper import dask_to_msgpack
-
-# dask_to_msgpack = data_base.IO.LoaderDumper.dask_to_msgpack
+from ..IO.LoaderDumper import dask_to_parquet
+from config.cell_types import EXCITATORY, INHIBITORY
+# dask_to_parquet = data_base.IO.LoaderDumper.dask_to_parquet
 from collections import defaultdict
 import single_cell_parser as scp
 
 
 class CelltypeSpecificSynapticWeights:
-    '''simrun.somatic_summation_model allows specifying synaptic weights of individual synapses.
-    It therefore takes a dictionarry that maps from (celltype, synapseID) to the weight of that synapse.
+    '''Configure cell type specific synaptic weights for the somatic summation model.
     
-    In the default case, we assign synaptic weights per celltype, not per individual synapse. This class 
-    provides a dictionary like interface, that allows to access an individual synapse
-    with the tuple (celltype, synapseID) and returns the synaptic weight assigned to the celltype.
+    :py:mod:`simrun.somatic_summation_model` allows specifying synaptic weights of individual synapses.
+    For this, it needs a dictionary that maps from (celltype, synapseID) to the weight of that synapse. 
+    This class parses a :ref:`network_parameters_format` file and extracts the synaptic weights of individual synapses.
+    These can then be accessed in a dictionary-like fashion for use in :py:mod:`~simrun.somatic_summation_model`::
     
-    It can be initialized by parsing a netowrk.param file that gets created during simulations.'''
+        >>> n = scp.build_parameters('path/to/network.param')
+        >>> weights = CelltypeSpecificSynapticWeights()
+        >>> weights.init_with_network_param(n)
+        >>> celltype, synapseID = 'L23_PC', 0
+        >>> weights[(celltype, synapseID)]
+    
+    Attributes:
+        _celltype_to_syn_weight (dict): The dictionary that maps from (celltype, synapseID) to the weight of that synapse.
+        
+    versionadded:: 0.1.0
+        Cell type specific synaptic weights are supported, but **not** synapse-specific weights (yet).
+        The synapse ID is ignored.
+    '''
 
     def __init__(self):
         self._celltype_to_syn_weight = {}
 
-    def init_with_network_param(self,
-                                n,
-                                select_celltypes=None,
-                                use_default_weight=None):
+    def init_with_network_param(
+        self,
+        n,
+        select_celltypes=None,
+        use_default_weight=None):
+        """Initialize the synaptic weights with :ref:`network_parameters_format`.
+        
+        Args:
+            n (:py:class:`~sumatra.parameters.NTParameterSet`): The network parameters object.
+            select_celltypes (list): If not None, only the synaptic weights of the celltypes in this list are loaded.
+            use_default_weight (float): If not None, all synaptic weights are set to this value.
+        
+        Raises:
+            NotImplementedError: If the network parameters object contains synapses with more than one receptor.
+            NotImplementedError: If the network parameters object contains synapses with a receptor that is not 'glutamate_syn' or 'gaba_syn'.
+        """
         out = self._celltype_to_syn_weight
         for celltype in n.network:
             if select_celltypes is not None:
@@ -57,33 +90,44 @@ class CelltypeSpecificSynapticWeights:
         print(out)
 
     def __getitem__(self, k):
+        """
+        
+        Attention:
+            This method returns the weight of synapse ID 0 for the given celltype.
+            It thus only supports cell type specific synaptic weights, not synapse-specific weights.
+        """
         return self._celltype_to_syn_weight[k[0]]
 
 
-def sa_to_vt_bypassing_lock(db_loader_dict,
-                            descriptor,
-                            classname,
-                            sa,
-                            individual_weights=False,
-                            select_celltypes=None):
-    '''simulates the somatic summation model for given synapse activation. 
+def sa_to_vt_bypassing_lock(
+    db_loader_dict,
+    descriptor,
+    classname,
+    sa,
+    individual_weights=False,
+    select_celltypes=None):
+    '''
+    
+    
+    simulates the somatic summation model for given synapse activation. 
     The synapse activation dataframe sa may contain several simtrials.
+    
     The PSPs matching the anatomical location are automatically loaded. For this,
     it is necessary that the model data base has been initialized with 
-    data_base.db_initializers.PSPs.init'''
+    data_base.db_initializers.PSPs.init
+    
+    
+    '''
+    # parse parameterfiles from simrun-initialized database
     parameterfiles = db_loader_dict['parameterfiles']()
     out = []
     index = []
     import six
     PSP_identifiers = parameterfiles.loc[sa.index.drop_duplicates()]
-    PSP_identifiers = PSP_identifiers.groupby(
-        ['neuron_param_dbpath', 'confile']).apply(lambda x: list(x.index))
+    PSP_identifiers = PSP_identifiers.groupby(['neuron_param_dbpath', 'confile']).apply(lambda x: list(x.index))
+    
+    # iterate over all PSPs and compute the voltage traces
     for name, row in six.iteritems(PSP_identifiers):
-        #print name
-        #print ''
-        #print row
-        #print '*************'
-
         psp = db_loader_dict[descriptor, classname, name[0], name[1]]()
         pvt = ParseVT(psp, dt=0.1, tStop=350)
         for sti in row:
@@ -105,7 +149,17 @@ def sa_to_vt_bypassing_lock(db_loader_dict,
 
 
 def get_db_loader_dict(db, descriptor=None, PSPClass_name=None):
-    from data_base.IO.LoaderDumper import load
+    """Get the loader functions for the PSPs from the database.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The simrun-initialized database object.
+        descriptor (str): The descriptor of the PSPs.
+        PSPClass_name (str): The name of the PSP class.
+        
+    Returns:
+        dict: A dictionary that maps from the keys of the PSPs to the loader functions.
+    """
+    from data_base.isf_data_base.IO.LoaderDumper import load
     import six
     keys = [
         k for k in list(db['PSPs'].keys())
@@ -120,9 +174,6 @@ def get_db_loader_dict(db, descriptor=None, PSPClass_name=None):
     return db_loader_dict
 
 
-import barrel_cortex
-
-
 class DistributedDDFWithSaveMethod:
 
     def __init__(self, db=None, key=None, ddf=None, dumper=None, scheduler=None):
@@ -133,20 +184,22 @@ class DistributedDDFWithSaveMethod:
         self._get = get
 
     def save(self):
-        self._db.set(self._key,
-                          self.ddf,
-                          dumper=self._dumper,
-                          get=self._get)
+        self._db.set(
+            self._key,
+            self.ddf,
+            dumper=self._dumper,
+            get=self._get)
 
 
-def init(db,
-         description_key=None,
-         PSPClass_name=None,
-         client=None,
-         block_till_saved=False,
-         persistent_df=True,
-         individual_weights=False,
-         select_celltypes=None):
+def init(
+    db,
+    description_key=None,
+    PSPClass_name=None,
+    client=None,
+    block_till_saved=False,
+    persistent_df=True,
+    individual_weights=False,
+    select_celltypes=None):
     db_loader_dict = get_db_loader_dict(db, description_key, PSPClass_name)
     part = partial(sa_to_vt_bypassing_lock,
                    db_loader_dict,
@@ -157,9 +210,9 @@ def init(db,
     if individual_weights:
         description_key = description_key + '_individual_weights'
     if select_celltypes is not None:
-        if select_celltypes == barrel_cortex.excitatory:
+        if sorted(select_celltypes) == sorted(EXCITATORY):
             suffix = 'EXC'
-        elif select_celltypes == barrel_cortex.inhibitory:
+        elif sorted(select_celltypes) == sorted(INHIBITORY):
             suffix = 'INH'
         else:
             suffix = '_'.join(sorted(select_celltypes))
@@ -174,14 +227,15 @@ def init(db,
     db_vt = db.create_sub_db('voltage_traces_somatic_summation_model',
                                 raise_=False)
     if block_till_saved:
-        db_vt.set((description_key, PSPClass_name),
-                       vt_new,
-                       dumper=dask_to_msgpack,
-                       scheduler=client)
+        db_vt.set(
+            (description_key, PSPClass_name),
+            vt_new,
+            dumper=dask_to_parquet,
+            scheduler=client)
     else:
-        return DistributedDDFWithSaveMethod(db=db_vt,
-                                            key=(description_key,
-                                                 PSPClass_name),
-                                            ddf=vt_new,
-                                            dumper=dask_to_msgpack,
-                                            scheduler=client)
+        return DistributedDDFWithSaveMethod(
+            db=db_vt,
+            key=(description_key, PSPClass_name),
+            ddf=vt_new,
+            dumper=dask_to_parquet,
+            scheduler=client)

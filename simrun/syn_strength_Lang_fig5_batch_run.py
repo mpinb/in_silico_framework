@@ -1,5 +1,7 @@
 '''
-create plots corresponding to Lang et al. Fig. 5
+Create plots corresponding to Lang et al. Fig. 5
+
+:skip-doc:
 '''
 
 import sys

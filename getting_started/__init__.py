@@ -3,6 +3,7 @@ import os
 
 getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
 example_data_dir = os.path.join(getting_started_dir, 'example_data')
+tutorial_output_dir = os.path.join(os.environ.get("HOME"), 'ISF_tutorial_output')
 
 
 def generate_param_files_with_valid_references():

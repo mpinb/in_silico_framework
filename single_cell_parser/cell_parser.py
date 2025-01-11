@@ -20,6 +20,10 @@ logger = logging.getLogger("ISF").getChild(__name__)
 class CellParser(object):
     '''Set up a morphology from a NEURON hoc object
     
+    See also:
+        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
+        This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
+    
     Attributes:
         hoc_path (str): Path to hoc file
         membraneParams (dict): Membrane parameters
@@ -57,7 +61,7 @@ class CellParser(object):
             scaleFunc (callable, optional): Optional function object that scales dendritic diameters.
                 **Deprecated**: This argument is deprecated and will be removed in a future version.
         
-        .. deprecated:: 1.0
+        .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
             To ensure reproducability, scaleFunc should be specified in the parameters, as 
             described in :py:mod:`~single_cell_parser.cell_modify_funs`
@@ -1226,9 +1230,9 @@ class CellParser(object):
         """Add spines with morphological features to the neuron.
         
         .. deprecated:: 0.1.0
-            Including specific morphological features of spines provided no substantial physiological differences
-            compared to simply scaling the membrane capacitance and resistance of the dendritic structures (see :py:meth:`_add_spines`).
-            However, computation time substantially increased.
+            Including specific morphological features of spines made it impossible to find a neuron model for as long as we tried this
+            project.
+            Instead we scale the membrane capacitance and resistance of the dendritic structures (see :py:meth:`_add_spines`).
             
         Args:
             parameters (dict): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
@@ -1247,10 +1251,8 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        excitatory = [
-            'L6cc', 'L2', 'VPM', 'L4py', 'L4ss', 'L4sp', 'L5st', 'L6ct', 'L34',
-            'L6ccinv', 'L5tt', 'Generic'
-        ]
+        from config.cell_types import EXCITATORY
+        excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):
             lst = np.asarray(lst)

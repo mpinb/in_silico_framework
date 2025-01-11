@@ -269,7 +269,7 @@ def augment_synapse_activation_df_with_branch_bin(sa_,
     sa_faster['section/branch_bin'] = sa_faster['section_ID'].astype(
         str) + '/' + sa_faster['branch_bin'].astype('str')
     sa_faster['celltype'] = sa_faster.synapse_type.str.split('_').str[0]
-    sa_faster['EI'] = sa_faster['celltype'].isin(I.excitatory).replace(
+    sa_faster['EI'] = sa_faster['celltype'].isin(I.EXCITATORY).replace(
         True, 'EXC').replace(False, 'INH')
     if synaptic_weight_dict:
         sa_faster['syn_weight'] = sa_faster['synapse_type'].map(syn_weights)
@@ -437,7 +437,7 @@ def load_syn_weights(m, client):
         syn_weights = {}
         netp = I.scp.build_parameters(folder_.join(fname))
         for celltype in netp.network:
-            if celltype.split('_')[0] in I.excitatory:
+            if celltype.split('_')[0] in I.EXCITATORY:
                 syn_weights[celltype] = netp.network[
                     celltype].synapses.receptors.glutamate_syn.weight[0]
             else:

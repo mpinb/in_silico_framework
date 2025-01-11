@@ -7,7 +7,6 @@ from data_base.utils import silence_stdout
 import mechanisms.l5pt
 from tests.context import TEST_DATA_FOLDER
 
-
 def setup_current_injection_experiment(
         rangevars=None
         ):

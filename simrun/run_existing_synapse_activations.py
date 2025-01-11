@@ -24,30 +24,40 @@ logger = logging.getLogger("ISF").getChild(__name__)
 __author__ = ['Robert Egger', 'Arco Bast']
 __date__ = '2013-01-28'
 
-def _evoked_activity(cellParamName, evokedUpParamName, synapse_activation_files, \
-                     dirPrefix = '', tStop = 345.0, scale_apical = None, post_hook = {}, \
-                     auto_organize_results_folder = True,
-                     cell_generator = None):
+def _evoked_activity(
+    cellParamName, 
+    evokedUpParamName, 
+    synapse_activation_files,
+    dirPrefix = '', 
+    tStop = 345.0, 
+    scale_apical = None, 
+    post_hook = {}, 
+    auto_organize_results_folder = True,
+    cell_generator = None
+    ):
     '''
-    pre-stimulus ongoing activity
-    and evoked activity
-    (
-    sim name: str, describing the simulation
-    cellParamName: str, Path to cell parameter file, containing information about:
-        - info: autor, date, name
-        - NMODL_mechanisms: path to NEURON mechanisms
-        - neuron: 
-            -path to hoc-file
-            - per subcellular compartment (Soma, AIS, ...):
-                - electrical properties
-                - mechanisms
-    evokedUpParamName: str, Path to network parameter file, containing information about:
-                            - autor, name, date
-                            - for each cell-type: 
-                                synapse: release probability, path to distribution file, receptor and associated parameters
-                                connectionFile: path to connection file
-                                cell number
-                                celltype: pointcell, spiketrain
+    :skip-doc:
+    Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`synapse_activation_format` files.
+    
+    Private function that is called by :func:`run_existing_synapse_activations`.
+    
+    Args:
+        cellParamName (str): Path to a :ref:`cell_params_format` file 
+        evokedUpParamName (str): Path to a :ref:`network_params_format` file
+        synapse_activation_files (list): List of paths to :ref:`synapse_activation_format` files
+        dirPrefix (str): Path to the directory where the simulation results should be stored.
+        tStop (float): Time in ms at which the synaptic input should stop.
+        scale_apical (float, DEPRECATED): Scaling factor for the apical dendrite.
+        post_hook (dict): Dictionary of functions that are called after the simulation.
+        auto_organize_results_folder (bool): If True, the results are stored in a subfolder of the results folder.
+        cell_generator (function): Function that generates a cell object.
+        
+    Returns: 
+        dask.delayed: Delayed object. Can be computed with arbitrary scheduler.
+        
+    .. deprecated:: 0.1
+        The `scale_apical` argument is deprecated and will be removed in a future version.
+        Use the ``cell_modify_functions`` key in the :ref:`cell_params_format` file instead.
     '''
 
     if len(synapse_activation_files) == 0:
@@ -199,33 +209,51 @@ def _evoked_activity(cellParamName, evokedUpParamName, synapse_activation_files,
 
 
 
-def run_existing_synapse_activations(cellParamName, evokedUpParamName, synapseActivation, simName = '', dirPrefix = '', \
-                                 nprocs = 40, tStop = 345, silent = True, \
-                                 scale_apical = None, post_hook = {}, auto_organize_results_folder = True, cell_generator = None):
-    '''Generates nSweeps*nprocs synapse activation files and puts them in
-    the folder dirPrefix/results/simName. Returns delayed object, which can
-    be computed with an arbitrary dask scheduler. For each process, a new
-    seed is generated using the seed generator.
+def run_existing_synapse_activations(
+    cellParamName, 
+    evokedUpParamName, 
+    synapseActivation, 
+    simName = '', 
+    dirPrefix = '', 
+    nprocs = 40, 
+    tStop = 345, 
+    silent = True, 
+    scale_apical = None, 
+    post_hook = {}, 
+    auto_organize_results_folder = True, 
+    cell_generator = None
+    ):
+    '''Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`synapse_activation_format` files.
     
-    Parameters:
-        cellParamName (str): 
-            Path to a cell parameter file (e.g. getting_started/example_data/biophysical_constraints/*.param), 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
-            See :py:meth:`~single_cell_parser.create_cell` for more information on the structure and contents of this filetype
-        evokedUpParamName (str): 
-            Path to network parameter file (e.g. getting_started/example_data/functional_constraints/network.param),
-            containing information on synapse and network parameters per cell type. See :py:meth:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
-            for more information on the structure and contents of this filetype
-        synapseActivationGlob (list): 
-            List of paths to synapse activation files or globstring
-        nSweeps (int): 
-            number of synapse activations per process
-        nprocs (int): 
-            number of independent processes
-        tStop (float): 
-            time in ms at which the synaptic input should stop.
+    Args:
+        cellParamName (str): Path to a :ref:`cell_params_format` file 
+        evokedUpParamName (str): Path to a :ref:`network_params_format` file
+        synapseActivationGlob (list): List of paths to :ref:`synapse_activation_format` files or globstring
+        dirprefix (str): Path to the directory where the simulation results should be stored.
+        nSweeps (int): Number of synapse activations per process.
+        nprocs (int): Number of independent processes
+        tStop (float): Time in ms at which the synaptic input should stop.
+        silent (bool): If True, suppresses all output.
+        scale_apical (float, DEPRECATED): Scaling factor for the apical dendrite.
+        post_hook (dict): Dictionary of functions that are called after the simulation.
+        auto_organize_results_folder (bool): If True, the results are stored in a subfolder of the results folder.
+        cell_generator (function): Function that generates a cell object.
         
-    Returns: Delayed object. Can be computed with arbitrary scheduler.
+    Returns: 
+        dask.delayed: Delayed object. Can be computed with arbitrary scheduler.
+        
+    Raises:
+        NotImplementedError: If nprocs is not equal to 1.
+        RuntimeError: If no files are found on the specified location.
+        AssertionError: If synapseActivation is not a list.
+        
+    .. deprecated:: 0.1
+        The `scale_apical` argument is deprecated and will be removed in a future version.
+        Use the ``cell_modify_functions`` key in the :ref:`cell_params_format` file instead.
+        
+    See also:
+        :py:meth:`simrun,rerun_db.rerun_db` to rerun simulations from a database, instead of a list
+        of synapse activation files.
     '''
 
     if not auto_organize_results_folder:
@@ -241,14 +269,19 @@ def run_existing_synapse_activations(cellParamName, evokedUpParamName, synapseAc
 
     chunks = utils.chunkIt(synapseActivation, nprocs)
 
-    myfun = lambda synapse_activation_files: _evoked_activity(cellParamName, evokedUpParamName, \
-                                         synapse_activation_files, \
-                                         dirPrefix = dirPrefix,
-                                         tStop = tStop, scale_apical = scale_apical, post_hook = post_hook, \
-                                         auto_organize_results_folder = auto_organize_results_folder, cell_generator = cell_generator)
+    myfun = lambda synapse_activation_files: _evoked_activity(
+        cellParamName, 
+        evokedUpParamName,
+        synapse_activation_files,
+        dirPrefix = dirPrefix,
+        tStop = tStop, 
+        scale_apical = scale_apical, 
+        post_hook = post_hook,
+        auto_organize_results_folder = auto_organize_results_folder, 
+        cell_generator = cell_generator
+        )
     if silent:
         myfun = utils.silence_stdout(myfun)
 
     d = [dask.delayed(myfun)(paths) for paths in chunks]
-    return dask.delayed(lambda *args: args)(
-        d)  #return single delayed object, that computes everything
+    return dask.delayed(lambda *args: args)(d)  

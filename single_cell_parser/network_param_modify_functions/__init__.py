@@ -4,8 +4,7 @@
 
 # import Interface as I
 import pandas as pd
-import barrel_cortex
-
+from config.cell_types import EXCITATORY, INHIBITORY
 
 def change_ongoing_interval(n, factor=1, pop=None):
     '''Scales the ongoing frequency with a :paramref:`factor`.
@@ -68,7 +67,7 @@ def set_stim_onset(n, onset=None):
 def change_glutamate_syn_weights(
         param,
         g_optimal=None,
-        pop=barrel_cortex.excitatory):
+        pop=EXCITATORY):
     '''Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
     
     Args:
@@ -85,7 +84,7 @@ def change_glutamate_syn_weights(
     '''
     for key in list(param['network'].keys()):
         celltype = key.split('_')[0]
-        if celltype in pop:  # I.excitatory:
+        if celltype in pop:
             index = [x for x in g_optimal.index if x in celltype]
             assert len(index) == 1
 
@@ -103,7 +102,7 @@ def change_glutamate_syn_weights(
                 print('g_optimal is in an unrecognised dataformat')
 
 
-def change_evoked_INH_scaling(param, factor, pop=barrel_cortex.inhibitory):
+def change_evoked_INH_scaling(param, factor, pop=INHIBITORY):
     """Scales the response probability for inhibitory cells in the :ref:`network_parameters_format`.
     
     Args:
@@ -112,8 +111,6 @@ def change_evoked_INH_scaling(param, factor, pop=barrel_cortex.inhibitory):
         pop (list): The celltypes to apply the scaling to. 
             Default is the inhibitory celltypes in the rat somatosensory cortex vS1.
 
-    See also:
-        :paramref:`barrel_cortex.inhibitory` for the inhibitory celltypes in the rat somatosensory cortex vS1.
 """
     for key in list(param.network.keys()):
         if key.split('_')[0] in pop:

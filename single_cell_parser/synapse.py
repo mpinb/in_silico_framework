@@ -9,12 +9,14 @@ __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
 
 class Synapse(object):
-    '''Synapse base class
+    '''Synapse class for synaptic activations and NEURON API.
 
-    Contains information about pre- and postsynaptic cell type,
-    branch ID of postsynaptic cell, branch pt ID,
-    and xyz-coordinates of synapse location.
-    Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information.
+    Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+    and to activate/deactivate synapses in NEURON.
+    
+    See also:
+        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
+        This class is specialized for the NEURON simulator, and is used to store synapse information and activate/deactivate synapses in NEURON.
 
     Attributes:
         secID (int): ID of attached section in cell.sections

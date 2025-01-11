@@ -1,12 +1,19 @@
+"""Read dask csv from an explicit filelist instead of only globstring."""
+
 import dask.dataframe
 import pandas as pd
 import os
 
 
 def concat_path_elements_to_filelist(*args):
-    '''e.g. 
-    args = ['str', [1,2,3], pd.Series([1,2,3])]
-    > [['str', 'str', 'str'], [1, 2, 3], [1, 2, 3]]
+    '''Concatenate path elements to a filelist.
+    
+    :skip-doc:
+    
+    Example:: 
+        
+        >>> args = ['str', [1,2,3], pd.Series([1,2,3])]
+        [['str', 'str', 'str'], [1, 2, 3], [1, 2, 3]]
     '''
     if not args:
         return []
@@ -27,6 +34,7 @@ def concat_path_elements_to_filelist(*args):
 
 
 def my_reader(fname, fun):
+    """:skip-doc:"""
     df = pd.read_csv(fname)
     if fun is not None:
         df = fun(df)
@@ -34,10 +42,13 @@ def my_reader(fname, fun):
 
 
 def read_csvs(*args, **kwargs):
-    '''The native dask read_csv function only supports globstrings. 
-    Use this function instead, if you want to provide a explicit filelist.'''
+    '''Read dask dataframes from csv files.
+    
+    The native dask read_csv function only supports globstrings. 
+    Use this function instead, if you want to provide a explicit filelist.
+    '''
     filelist = concat_path_elements_to_filelist(
-        *args)  ## 3hr of debugging: *args, not args
+        *args)  ## 3hr of debugging: *args, not args  # we've all been there. I feel you.
     out = []
     fun = kwargs['fun'] if 'fun' in kwargs else None
     for fname in filelist:

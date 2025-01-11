@@ -15,9 +15,11 @@ from collections import defaultdict
 from functools import partial
 import numpy as np
 import dask
-from data_base.analyze import excitatory, inhibitory
 from data_base.analyze.temporal_binning import universal as temporal_binning
-from ..IO.LoaderDumper import numpy_to_msgpack as numpy_to_msgpack
+from ..IO.LoaderDumper import numpy_to_msgpack
+import logging
+from config.cell_types import EXCITATORY
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def prefun(df):
@@ -26,7 +28,7 @@ def prefun(df):
     df['presynaptic_column'] = dummy.str[1]
     df['proximal'] = (df.soma_distance
                       < 500).replace(True, 'prox').replace(False, 'dist')
-    df['EI'] = df['celltype'].isin(excitatory).replace(True, 'EXC').replace(
+    df['EI'] = df['celltype'].isin(EXCITATORY).replace(True, 'EXC').replace(
         False, 'INH')
     bs = 50
     df['binned_somadist'] = df.soma_distance.div(bs).map(np.floor).astype(

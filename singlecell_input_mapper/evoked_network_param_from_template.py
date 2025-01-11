@@ -1,51 +1,14 @@
 #!/usr/bin/python
 """
-Runfile to create a network parameter file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
+Runfile to create a :ref:`network_params_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
 
 Reads in a template parameter file and sets the PSTHs for each celltype to the PSTHs of the evoked activity.
-Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`singlecell_input_mapper.evoked_PSTH_from_spike_times`.
+Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
 
-Note:
+Attention:
     This module is specific to the model of the rat barrel cortex and the experimental conditions of the passive whisker touch experiment.
     It is not intended to be used for other models or experiments.
     However, it may serve as a template for other experimental conditions.
-    
-Example:
-    
-    >>> parsed = json.loads(templateParamName)
-    >>> print(json.dumps(parsed, indent=4))
-    {
-        "info": ...
-        "network": {
-            "cell_type_1": {
-                "celltype": "spiketrain",
-                "interval": 909.1,  # average ongoing spike interval. Changes depending on the experimental condition.
-                "synapses": {
-                    "receptors": {
-                        "glutamate_syn": {
-                            "threshold": 0.0,
-                            "delay": 0.0,
-                            "parameter": {  # parameters for the neuron mechanisms - see mechanisms/l5pt/channels_py3/netglutamate_new.mod
-                                "tau1": 26.0,  # nmda inactivation
-                                "tau2": 2.0,  # nmda activation
-                                "tau3": 2.0,  # ampa inactivation
-                                "tau4": 0.1,  # ampa activation
-                                "decayampa": 1.0,  # ampa decay time
-                                "decaynmda": 1.0,  # nmda decay time
-                                "facilampa": 0.0,
-                                "facilnmda": 0.0,
-                            },
-                            "weight": [1.38, 1.38],  EXC/INH weights
-                        },
-                    }
-                "releaseProb": 0.6,  # probability that a synapse gets activated if the cell spikes
-                }, 
-            "cell_type_2": {...},
-            ...
-            }
-        },
-        "NMODL_mechanisms": {...}
-    }
 """
 import sys, os
 import single_cell_parser as scp
@@ -422,7 +385,7 @@ def create_network_parameter(
     outFileName,
     write_all_celltypes=False,
     ):
-    """Generate and write out a network parameter file defining the evoked activity of a passive whisker touch scenario.
+    """Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
     
     Reads in a template file for a network, where the parameters of each celltype are already defined, but the values are not set.
     Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :paramref:`whisker` was deflected.
@@ -539,12 +502,13 @@ def create_network_parameter(
             if numberOfCells == 0 and not write_all_celltypes:
                 continue
             cellTypeName = cellType + '_' + column
+            
+            # init empty template and fill values
             nwParam.network[cellTypeName] = cellTypeParameters.tree_copy()
             if clusterParameters:
-                nwParamCluster.network[
-                    cellTypeName] = cellTypeParameters.tree_copy()
+                nwParamCluster.network[cellTypeName] = cellTypeParameters.tree_copy()
             
-            # Assign proper PSTH, depending on the column, the deflected whisker and the cell type
+            # calculate PSTH depending on the column, the deflected whisker and the cell type
             PSTH = whisker_evoked_PSTH(column, whisker, cellType)
             
             if PSTH is not None:
@@ -557,27 +521,21 @@ def create_network_parameter(
                 nwParam.network[cellTypeName].celltype['pointcell'] = PSTH
                 nwParam.network[cellTypeName].celltype['pointcell']['offset'] = deflectionOffset
                 if clusterParameters:
-                    interval = nwParamCluster.network[cellTypeName].pop(
-                        'interval')
+                    interval = nwParamCluster.network[cellTypeName].pop('interval')
                     nwParamCluster.network[cellTypeName].celltype = {
                         'spiketrain': {
                             'interval': interval
                         }
                     }
-                    nwParamCluster.network[cellTypeName].celltype[
-                        'pointcell'] = PSTH
-                    nwParamCluster.network[cellTypeName].celltype['pointcell'][
-                        'offset'] = deflectionOffset
+                    nwParamCluster.network[cellTypeName].celltype['pointcell'] = PSTH
+                    nwParamCluster.network[cellTypeName].celltype['pointcell']['offset'] = deflectionOffset
             nwParam.network[cellTypeName].cellNr = numberOfCells
-            nwParam.network[
-                cellTypeName].synapses.distributionFile = synFileName
+            nwParam.network[cellTypeName].synapses.distributionFile = synFileName
             nwParam.network[cellTypeName].synapses.connectionFile = conFileName
             if clusterParameters:
                 nwParamCluster.network[cellTypeName].cellNr = numberOfCells
-                nwParamCluster.network[
-                    cellTypeName].synapses.distributionFile = synFileNameCluster
-                nwParamCluster.network[
-                    cellTypeName].synapses.connectionFile = conFileNameCluster
+                nwParamCluster.network[cellTypeName].synapses.distributionFile = synFileNameCluster
+                nwParamCluster.network[cellTypeName].synapses.connectionFile = conFileNameCluster
 
     nwParam.save(outFileName)
     clusterOutFileName = outFileName[:-6] + '_cluster.param'

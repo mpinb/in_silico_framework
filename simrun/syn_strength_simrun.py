@@ -341,27 +341,6 @@ def write_sim_results(fname, t, v):
             line += '\n'
             outputFile.write(line)
 
-
-def scale_apical(cell):
-    '''
-    scale apical diameters depending on
-    distance to soma; therefore only possible
-    after creating complete cell
-    '''
-    dendScale = 2.5
-    for sec in cell.sections:
-        if sec.label == 'ApicalDendrite':
-            dist = cell.distance_to_soma(sec, 1.0)
-            if dist > 1000.0:
-                continue
-            dummy = h.pt3dclear(sec=sec)
-            for i in range(sec.nrOfPts):
-                x, y, z = sec.pts[i]
-                sec.diamList[i] = sec.diamList[i] * dendScale
-                d = sec.diamList[i]
-                dummy = h.pt3dadd(x, y, z, d, sec=sec)
-
-
 if __name__ == '__main__':
     modelName = sys.argv[1]
     nwName = sys.argv[2]

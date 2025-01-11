@@ -2,11 +2,10 @@ import os
 from functools import partial
 import pandas as pd
 from simrun.somatic_summation_model import ParseVT
-import model_data_base.IO.LoaderDumper.dask_to_msgpack
-
-dask_to_msgpack = model_data_base.IO.LoaderDumper.dask_to_msgpack
+from model_data_base.IO.LoaderDumper import dask_to_parquet
 from collections import defaultdict
 import single_cell_parser as scp
+from config.cell_types import EXCITATORY, INHIBITORY
 
 
 class CelltypeSpecificSynapticWeights:
@@ -120,9 +119,6 @@ def get_mdb_loader_dict(mdb, descriptor=None, PSPClass_name=None):
     return mdb_loader_dict
 
 
-import barrel_cortex
-
-
 class DistributedDDFWithSaveMethod:
 
     def __init__(self, mdb=None, key=None, ddf=None, dumper=None, scheduler=None):
@@ -157,9 +153,9 @@ def init(mdb,
     if individual_weights:
         description_key = description_key + '_individual_weights'
     if select_celltypes is not None:
-        if select_celltypes == barrel_cortex.excitatory:
+        if sorted(select_celltypes) == sorted(EXCITATORY):
             suffix = 'EXC'
-        elif select_celltypes == barrel_cortex.inhibitory:
+        elif sorted(select_celltypes) == sorted(INHIBITORY):
             suffix = 'INH'
         else:
             suffix = '_'.join(sorted(select_celltypes))
@@ -174,14 +170,15 @@ def init(mdb,
     mdb_vt = mdb.create_sub_mdb('voltage_traces_somatic_summation_model',
                                 raise_=False)
     if block_till_saved:
-        mdb_vt.setitem((description_key, PSPClass_name),
-                       vt_new,
-                       dumper=dask_to_msgpack,
-                       scheduler=client)
+        mdb_vt.setitem(
+            (description_key, PSPClass_name),
+            vt_new,
+            dumper=dask_to_parquet,
+            scheduler=client)
     else:
-        return DistributedDDFWithSaveMethod(mdb=mdb_vt,
-                                            key=(description_key,
-                                                 PSPClass_name),
-                                            ddf=vt_new,
-                                            dumper=dask_to_msgpack,
-                                            scheduler=client)
+        return DistributedDDFWithSaveMethod(
+            mdb=mdb_vt,
+            key=(description_key,PSPClass_name),
+            ddf=vt_new,
+            dumper=dask_to_parquet,
+            scheduler=client)

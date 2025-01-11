@@ -6,6 +6,17 @@ import cloudpickle
 from six.moves import cPickle
 
 def cache(function):
+    """Cache the result of a function.
+    
+    Args:
+        function (callable): The function to cache.
+        
+    Returns:
+        callable: The cached function.
+        
+    Example::
+        >>> cache(my_function)(*args, **kwargs)
+    """
     import hashlib
     memo = {}
     def get_key(*args, **kwargs):
@@ -28,12 +39,23 @@ def cache(function):
 
 
 def resolve_db_path(path):
-    # This has the purpose to map projects, that robert has run on the CIN cluster, to local paths
+    """Resolve the path of a database.
+    
+    Resolve a path of the form db://<unique_id>/<managed_folder>/<file> to
+    the absolute path of the file on the current filesystem.
+    
+    Args:
+        path (str): The path to resolve.
+        
+    Returns:
+        str: The resolved path.
+    """
     if '/gpfs01/bethge/home/regger/data/' in path:
         print('found CIN cluster prefix')
         print('old path', path)
-        path = path.replace('/gpfs01/bethge/home/regger/data/',
-                            '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/')
+        path = path.replace(
+            '/gpfs01/bethge/home/regger/data/',
+            '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/')  # TODO: make this more general
         print('new path', path)
     if not path.startswith('mdb://'):
         return path
@@ -56,8 +78,17 @@ def resolve_db_path(path):
 
 @cache
 def create_db_path(path):
-    """
-    Create a database path from a given path.
+    """Create a database path from a given path.
+    
+    Database paths are of the form 'db://<unique_id>/<key>/<subfolder>'.
+    The point of these paths is to be independent of their location on the hard drive,
+    and can thus be transferred to other file systems, and resolved afterwards using the database registry.
+    
+    Args:
+        path (str): The path to be converted to a database path.
+        
+    Returns:
+        str: The database path.
     """
     db_path = path
     if path.startswith('mdb://'):
@@ -92,12 +123,32 @@ def create_db_path(path):
         raise KeyError(
             "Found a Database at {}. However, there is no key pointing to the subfolder {} in it.".format(
                 db._basedir, path_minus_db_basedir.split('/')[0]))
-    return os.path.join('mdb://', db.get_id(), key,
-                        os.path.relpath(path, db[key]))
+    return os.path.join(
+        'db://', 
+        db.get_id(), 
+        key,
+        os.path.relpath(path, db[key]))
 
 
 class dbopen:
-
+    '''Context manager to open files in databases
+    
+    This explicitly calls Python's ``open()`` method on a file.
+    This is generally not recommended, as the content of databases
+    is usually written in a specific format, that is automatically inferred
+    by the database.
+    
+    However, for development and testing purposes, it may be of use to explicitly open these files.
+    
+    Example:
+        >>> with dbopen('db://my_db/my_key') as f:
+        ...     print(f.read())
+        
+    Attributes:
+        path (str): The path to the file.
+        mode (str): The mode in which the file is opened.
+        exit_hooks (list): A list of functions to be called when the context manager is exited. Used to close ``.tar`` files
+    '''
     def __init__(self, path, mode='r'):
         self.path = path
         self.mode = mode
@@ -120,7 +171,18 @@ class dbopen:
 
 
 class taropen:
-    '''context manager to open nested tar hierarchies'''
+    '''Context manager to open nested ``.tar`` hierarchies
+    
+    Args:
+        path (str): The path to the file.
+        mode (str): The mode in which the file is opened. Must be either ``'r'`` or ``'b'``. Default: ``'r'``
+        
+    Attributes:
+        path (str): The path to the ``.tar`` file.
+        mode (str): The mode in which the file is opened.
+        tar_levels (list): A list of indices denoting the ``.tar`` hierarchy.
+        open_files (list): A list of open files.
+    '''
 
     def __init__(self, path, mode='r'):
         if not mode in ['r', 'b']:

@@ -60,7 +60,7 @@ def get_fixed_params_example():
             349,
         'morphology.filename':
             '/nas1/Data_arco/project_src/in_silico_framework/biophysics_fitting/MOEA_EH_minimal/morphology/89_L5_CDK20050712_nr6L5B_dend_PC_neuron_transform_registered_C2.hoc'
-    }
+    }  # TODO: fix fixed params morphology example
     return fixed_params
 
 

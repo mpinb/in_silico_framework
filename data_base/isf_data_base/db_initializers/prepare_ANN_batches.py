@@ -1,35 +1,80 @@
-import Interface as I
-import warnings
+"""Parse a simrun-initialized database for ANN batch preparation.
+
+This module provides various methods to bin synapse actications, morphologies, and voltage traces.
+This binned data can be used as input data for training an artificial neural network (ANN).
+"""
+
+import warnings, os, dask, distributed, cloudpickle
+import numpy as np
+from sumatra.parameters import NTParameterSet
+from single_cell_parser import create_cell, build_parameters
+from single_cell_parser.analyze import synanalysis
+import pandas as pd
+from data_base.utils import silence_stdout, convertible_to_int, chunkIt
+from data_base.analyze.spike_detection import spike_in_interval
+from functools import partial
+from config.cell_types import EXCITATORY, INHIBITORY
 
 
 def get_binsize(length, binsize_goal=50):
-    '''given a length of a branch, returns number of binsize and number of bins that results in binning closest to 
-    the binsize goal'''
+    """Calculate the bin size and number of bins closest to the desired bin size goal.
+
+    Args:
+        length (float): The length of a dendritic branch to bin.
+        binsize_goal (float, optional): The desired bin size. Defaults to 50.
+
+    Returns:
+        tuple: A tuple containing the bin size (float) and the number of bins (int) 
+               that result in binning closest to the binsize goal.
+    """
     n_bins = length / float(binsize_goal)
-    n_bins_lower = I.np.floor(n_bins)
-    n_bins_lower = I.np.max([n_bins_lower, 1])
-    n_bins_upper = I.np.ceil(n_bins)
+    n_bins_lower = np.floor(n_bins)
+    n_bins_lower = np.max([n_bins_lower, 1])
+    n_bins_upper = np.ceil(n_bins)
     binsize_lower = length / n_bins_lower
     binsize_upper = length / n_bins_upper
-    if I.np.abs(binsize_goal - binsize_lower) < I.np.abs(binsize_goal -
-                                                         binsize_upper):
+    if np.abs(binsize_goal - binsize_lower) < np.abs(binsize_goal - binsize_upper):
         return binsize_lower, int(n_bins_lower)
     else:
         return binsize_upper, int(n_bins_upper)
 
 
 def get_bin(value, bin_min, bin_max, n_bins, tolerance=0.1):
+    """Find the bin index of a given value.
+    
+    Args:
+        value (float): The value to find the bin for.
+        bin_min (float): Start of the first bin.
+        bin_max (float): End of the last bin.
+        n_bins (int): The number of bins.
+        tolerance (float, optional): The tolerance for the outer ibn edges (for rounding errors). Defaults to 0.1.
+        
+    Returns:
+        int: The bin the value belongs to.    
+    """
     bin_size = (bin_max - bin_min) / n_bins
     bins = [bin_min + n * bin_size for n in range(n_bins + 1)]
     bins[0] = bins[0] - tolerance
     bins[-1] = bins[-1] + tolerance
-    if (I.np.max(value) >= bins[-1]) or (I.np.min(value) <= bins[0]):
+    if (np.max(value) >= bins[-1]) or (np.min(value) <= bins[0]):
         raise RuntimeError('value outside of bin_min and bin_max!')
-    return I.np.digitize(value, bins)
+    return np.digitize(value, bins)
 
 
-def get_neuron_param_file(m):
-    folder = m['parameterfiles_cell_folder']
+def get_neuron_param_file(db):
+    """Get the path to the :ref:`cell_parameters_format` file from a simrun-initialized database.
+    
+    This method assumes the database has been simrun-initialized with
+    :meth:`~data_base.isf_data_base.db_initializers.load_simrun_general.init` and contains the key ``parameterfiles_cell_folder``.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): 
+            The database object.
+            
+    Returns:
+        str: The path to the neuron parameter file.    
+    """
+    folder = db['parameterfiles_cell_folder']
     f = [f for f in folder.listdir() if not f.endswith('.pickle')]  #+.keys()
     if not len(f) == 1:
         warnings.warn(
@@ -39,36 +84,64 @@ def get_neuron_param_file(m):
 
 
 def get_section_distances_df(neuron_param_file, silent=True):
-    neup = I.scp.NTParameterSet(neuron_param_file)
+    """Bin the morphology of a neuron from a :ref:`cell_parameters_format` file.
+    
+    This method reads the neuron parameter file and bins the morphology of the neuron into spatial bins.
+    The amount of bins is inferred by :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.get_binsize`.
+    
+    Args:
+        neuron_param_file (str): The path to the neuron parameter file.
+        silent (bool, optional): If True, suppresses output. Defaults to True.
+        
+    Returns:
+        pd.DataFrame: A dataframe containing the amount of bins, the bin size, and the min and max distance to the soma for each section.
+    
+    Example::
+    
+        >>> section_distances_df = get_section_distances_df(neuron_param_file)
+            min_         max_       n_bins  binsize
+        0     0.000000     0.000000   Soma     Soma
+        1     0.000000    35.032795      1  35.0328
+        2    35.032795   131.179980      2  48.0736
+        3    35.032795    41.505115      1  6.47232
+        4    41.505115   252.996874      4  52.8729
+        ..         ...          ...    ...      ...
+        165  95.220299   161.215314      1   65.995
+        166  95.220299   158.805975      1  63.5857
+        167   0.000000    20.000000      1       20
+        168  20.000000    50.000000      1       30
+        169  50.000000  1049.999969     20       50
+    """
+    neup = NTParameterSet(neuron_param_file)
     if silent:
-        with I.silence_stdout:
-            cell = I.scp.create_cell(neup.neuron)
+        with silence_stdout:
+            cell = create_cell(neup.neuron)
+    else:
+        cell = create_cell(neup.neuron)
     sections_min_dist = [
-        I.sca.synanalysis.compute_distance_to_soma(sec, 0)
+        synanalysis.compute_distance_to_soma(sec, 0)
         for sec in cell.sections
     ]
     sections_max_dist = [
-        I.sca.synanalysis.compute_distance_to_soma(sec, 1)
+        synanalysis.compute_distance_to_soma(sec, 1)
         for sec in cell.sections
     ]
     binsize = [
         get_binsize(s_ma - s_mi)[0] if
         (cell.sections[lv].label != 'Soma') else 'Soma'
-        for lv, (s_mi,
-                 s_ma) in enumerate(zip(sections_min_dist, sections_max_dist))
+        for lv, (s_mi, s_ma) in enumerate(zip(sections_min_dist, sections_max_dist))
     ]
     n_bins = [
         get_binsize(s_ma - s_mi)[1] if
         (cell.sections[lv].label != 'Soma') else 'Soma'
-        for lv, (s_mi,
-                 s_ma) in enumerate(zip(sections_min_dist, sections_max_dist))
+        for lv, (s_mi,s_ma) in enumerate(zip(sections_min_dist, sections_max_dist))
     ]
     bin_borders = [
-        I.np.linspace(s_mi, s_ma, num=n_bins) if
+        np.linspace(s_mi, s_ma, num=n_bins) if
         not isinstance(n_bins, str) else 'Soma' for s_mi, s_ma, n_bins in zip(
             sections_min_dist, sections_max_dist, n_bins)
     ]
-    section_distances_df = I.pd.DataFrame({
+    section_distances_df = pd.DataFrame({
         'min_': sections_min_dist,
         'max_': sections_max_dist,
         'n_bins': n_bins,
@@ -78,15 +151,22 @@ def get_section_distances_df(neuron_param_file, silent=True):
 
 
 def get_spatial_bin_names(section_distances_df):
-    """Given a dataframe describing the distance to soma of all sections, as provided by :@function get_section_distances_df:,
-    this method returns the names for all the spatial bins of the format section_id/bin_id. E.g.: 5/2 denotes the second bin of section 5.
-
+    """Get the bin names from a dataframe describing the distance to soma of all sections.
+    
+    Given a dataframe describing the distance to soma of all sections, as provided by 
+    :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`,
+    this method returns the names for all the spatial bins of the format ``section_id/bin_id``. 
+    E.g.: ``5/2`` denotes the second bin of section 5.
 
     Args:
-        section_distances_df (pd.DataFrame): the dataframe describing distance to soma for all sections, as provided by :@function get_section_distances_df:
+        section_distances_df (pd.DataFrame): 
+            The dataframe describing distance to soma for all sections.
 
     Returns:
         list: A list containing the bin ids in string format.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
     """
     all_bins = []
     for index, row in section_distances_df.iterrows():
@@ -100,11 +180,11 @@ def get_spatial_bin_names(section_distances_df):
 
 
 def get_bin_soma_distances_in_section(section_id, section_distances_df):
-    """Given a section id, this method returns the distance to soma for all bins in this section
+    """Get the distance to the soma for all bins in this section.
 
     Args:
         section_id (int): Id of the neuron section
-        section_distances_df (pd.DataFrame): the dataframe describing distance to soma for all sections, as provided by :@function get_section_distances_df:
+        section_distances_df (pd.DataFrame): The dataframe describing distance to soma for all sections, as provided by :@function get_section_distances_df:
 
     Returns:
         list: A list containing the distance to soma for each bin in a section.
@@ -119,18 +199,16 @@ def get_bin_soma_distances_in_section(section_id, section_distances_df):
 
 
 def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
-    """
-    Creates an adjacency map with bin-specific resolution for a given section.
+    """Create an adjacency map with bin-specific resolution for a given section.
     
     Consecutive bins in the same section are trivially connected.
     This method also fetches other sections connected to the given section id, and checks at which bins they connect.
     Sections are defined by the neuron simulation, but bins are ad-hoc defined by data preparation for the ANN.
 
-    This method exploits the tree structure of a neuron, i.e. a child section is always connected at the beginning
+    This method exploits the tree structure of a neuron, i.e. a child section is always connected at the beginning.
     This means that all child sections are connected to their parent section at bin number 1
     The goal is then to figure out at which bin in the parent section the child is connected to.
     Eeach section always has one or more bins.
-
     
     Args:
         cell (Cell): the Cell object
@@ -138,7 +216,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
         section_distances_df (pd.DataFrame): the dataframe describing distance to soma for all sections, as provided by :meth:get_section_distances_df
 
     Returns:
-        neighboring_bins_dict (dict): a dictionary with bins as keys and a list of adjacent bins as values.
+        dict: a dictionary with bins as keys and a list of adjacent bins as values.
     """
     neighboring_bins = []
     neighbor_map = cell.get_section_adjacancy_map()
@@ -162,7 +240,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
             abs(parent_bin_d - d_section_begin)
             for parent_bin_d in parent_bin_distances
         ]
-        closest_parent_bin = I.np.argmin(diff) + 1
+        closest_parent_bin = np.argmin(diff) + 1
         # the section is connected (section_id/1) to its parent at this bin (parent_id/closest_bin)
         neighboring_bins.append(
             ("{}/{}".format(section_id,
@@ -193,7 +271,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
             child, section_distances_df)[
                 0]  # the bin of the child connected to the current section
         diff = [abs(d - d_child_section_begin) for d in bin_distances]
-        closest_child_bin = I.np.argmin(diff) + 1
+        closest_child_bin = np.argmin(diff) + 1
         # the section has a child (child_id/1) at this bin (section_id/closest_bin)
         neighboring_bins.append(
             ("{}/{}".format(child, 1), "{}/{}".format(section_id,
@@ -215,12 +293,12 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
 
 
 def get_neighboring_spatial_bins(cell, bin_id, section_distances_df):
-    """Given a bin id, this method returns all the neighboring bins
+    """Get all the neighboring bins from a :paramref:`bin_id`.
 
     Args:
         cell (cell): cell object
-        neup (_type_): neuron parameter file
-        bin_id (_type_): BIn id of format: section_id/bin_id
+        bin_id (_type_): Bin id of format: ``"section_id/bin_id"``
+        section_distances_df (pd.DataFrame): DataFrame representing each section's spatial bins and binsizes.
 
     Returns:
         list: list of all ids of bins that neighbor the given bin
@@ -232,27 +310,41 @@ def get_neighboring_spatial_bins(cell, bin_id, section_distances_df):
     ) <= n_bins, "Bin does not exist. Section {} only has {} bins, but you asked for bin #{}".format(
         section_id_, n_bins, bin_id_)
     # check for adjacent sections
-    bin_adj = get_bin_adjacency_map_in_section(cell, section_id_,
-                                               section_distances_df)
+    bin_adj = get_bin_adjacency_map_in_section(
+        cell, 
+        section_id_,
+        section_distances_df)
     neighbors = bin_adj[bin_id]
     return neighbors
 
 
-def augment_synapse_activation_df_with_branch_bin(sa_,
-                                                  section_distances_df=None,
-                                                  synaptic_weight_dict=None):
-    """Given a DataFrame of synaptic activity, this method adds columns giving information on where on the branch this syaptic activity was present.
+def augment_synapse_activation_df_with_branch_bin(
+    sa_,
+    section_distances_df=None,
+    synaptic_weight_dict=None,
+    excitatory_celltypes=None
+    ):
+    """Augment a :ref:`syn_activation_format` dataframe with bin information.
+    
+    The :ref:`syn_activation_format` dataframe contains info of where along a dendrite some synapse impinged.
+    This method infers to which bin that location belongs and adds it as an additional column.
     This information is represented in a specific format: section_id/bin_within_section.
-    For this, the sections have to be split up in spatial bins, which is represented in :@param section_distances_df:
 
     Args:
-        sa_ (pd.DataFrame): The dataframe of synaptic activity
-        section_distances_df (pd.DataFrame, optional): DataFrame representing each section's spatial bins and binsizes. Defaults to None.
-        synaptic_weight_dict (_type_, optional): _description_. Defaults to None.
+        sa_ (pd.DataFrame): 
+            The dataframe of synaptic activity
+        section_distances_df (pd.DataFrame): 
+            DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+        synaptic_weight_dict (dict, optional): 
+            A dictionary mapping the synapse type to a weight. 
+            Defaults to None, in which case it is not added as an additional column.
 
     Returns:
-        _type_: _description_
+        pd.DataFrame: The augmented dataframe with the additional columns 'section/branch_bin', 'celltype', 'EI', and 'syn_weight' (if synaptic_weight_dict is provided).
     """
+    if excitatory_celltypes is None:
+        excitatory_celltypes = EXCITATORY
+    
     out = []
     for secID, df in sa_.groupby('section_ID'):
         min_ = section_distances_df.loc[secID]['min_']
@@ -264,51 +356,77 @@ def augment_synapse_activation_df_with_branch_bin(sa_,
         else:
             df['branch_bin'] = get_bin(df.soma_distance, min_, max_, n_bins)
         out.append(df)
-    sa_faster = I.pd.concat(out).sort_values(['synapse_type',
-                                              'synapse_ID']).sort_index()
+    sa_faster = pd.concat(out).sort_values(['synapse_type','synapse_ID']).sort_index()
     sa_faster['section/branch_bin'] = sa_faster['section_ID'].astype(
         str) + '/' + sa_faster['branch_bin'].astype('str')
     sa_faster['celltype'] = sa_faster.synapse_type.str.split('_').str[0]
-    sa_faster['EI'] = sa_faster['celltype'].isin(I.excitatory).replace(
-        True, 'EXC').replace(False, 'INH')
+    sa_faster['EI'] = sa_faster['celltype'].isin(excitatory_celltypes).replace(True, 'EXC').replace(False, 'INH')
     if synaptic_weight_dict:
         sa_faster['syn_weight'] = sa_faster['synapse_type'].map(syn_weights)
     return sa_faster
 
 
-@I.dask.delayed
-def save_VT_batch(vt_batch,
-                  batch_id,
-                  outdir=None,
-                  fname_template='batch_{}_VT_ALL.npy'):
+@dask.delayed
+def save_VT_batch(
+    vt_batch,
+    batch_id,
+    outdir=None,
+    fname_template=None):
+    """Save a batch of voltage traces to a file.
+    
+    Convenience method wrapped as a dask delayed object.
+    
+    :skip-doc:
+    """
+    if fname_template is None:
+        fname_template = 'batch_{}_VT_ALL.npy'
     fname = fname_template.format(batch_id)
-    outpath = I.os.path.join(outdir, fname)
-    I.np.save(outpath, vt_batch)
+    outpath = os.path.join(outdir, fname)
+    np.save(outpath, vt_batch)
 
 
-@I.dask.delayed
-def save_st_and_ISI(st,
-                    batch_id,
-                    chunk,
-                    min_time,
-                    max_time,
-                    outdir,
-                    suffix='SOMA'):
+@dask.delayed
+def save_st_and_ISI(
+    st,
+    batch_id,
+    chunk,
+    min_time,
+    max_time,
+    outdir,
+    suffix='SOMA'):
+    """Save spike times and inter-spike intervals to a file.
+    
+    Convenience method wrapped as a dask delayed object.
+    
+    :skip-doc:
+    """
     current_st = st.loc[chunk]
     ISI_array = compute_ISI_array(current_st, min_time, max_time)
     AP_array = compute_AP_array(current_st, min_time, max_time)
-    I.np.save(
+    np.save(
         outdir.join('batch_{}_AP_{}.npy').format(batch_id, suffix), AP_array)
-    I.np.save(
+    np.save(
         outdir.join('batch_{}_ISI_{}.npy').format(batch_id, suffix), ISI_array)
 
 
 def spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1):
-    """This method resembles model_database.analyse.spike_detection.spike_in_interval, but more general.
-    Given an array of spike times, this method one-hot encodes them to a list of size (max_time - min_time)//time_step,
-    where each time step, a boolean represents if a spike was found in this time_step.
+    """One-hot encode spike times to a binned time vector.
+    
+    The time vector is created from :paramref:`min_time`, :paramref:`max_time` and :paramref:`time_step`
+    and is of length ``(max_time - min_time)//time_step``.
+    
+    If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
+    
+    Args:
+        spike_times (array): Array of spike times
+        min_time (int, optional): Min time in ms. Defaults to 0.
+        max_time (int, optional): Max time in ms. Defaults to 505.
+        time_step (int, optional): Timestep in ms. Defaults to 1.
+        
+    Returns:
+        list: A list of booleans, where each element represents a time step and is True if a spike occured in this interval.
     """
-    assert len(I.np.array(spike_times).shape
+    assert len(np.array(spike_times).shape
               ) == 1, "Please provide a 1-dimensional array as spike_times"
     assert all(
         [s >= 0 for s in spike_times]
@@ -318,7 +436,7 @@ def spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1):
             "Spike times found larger than max_time. These will not be included in the one-hot encoding"
         )
     spike_times = [e for e in spike_times if min_time < e < max_time]
-    time_steps = I.np.arange(min_time, max_time, time_step)
+    time_steps = np.arange(min_time, max_time, time_step)
     n_time_steps = len(time_steps)
     one_hot = [False] * n_time_steps
     for st in spike_times:
@@ -327,27 +445,32 @@ def spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1):
 
 
 def compute_ISI_from_st_list(st, min_time=0, max_time=505, time_step=1):
-    """Given an array of spike times, this method returns a list of size (:@param max_time: - :@param_min_time:)//:@param time_step:,
+    """Construct a time-binned list of inter-spike intervals from a list of spike times.
+    
+    Given a list of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
     where each time step gives the amount of time since the last spike in ms.
-    Do not provide a pd.Series or pd.DataFrame here. For that, use :@function model_database.db_initialisers.prepare_ANN_batches.compute_ISI_from_st: instead.
 
     Args:
-        st (array): _description_
+        st (list): List of spike times
         min_time (int, optional): Min time of time window in ms. Defaults to 0.
         max_time (int, optional): Max time of time window in ms. Defaults to 505.
         time_step (int, optional): Timestep in ms. Defaults to 1.
 
     Returns:
-        _type_: _description_
+        list: A list of inter-spike intervals in ms.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
     """
     assert type(st) not in (
-        I.pd.DataFrame, I.pd.Series
+        pd.DataFrame, pd.Series
     ), "This methods is for arrays or lists. When using a pandas Dataframe or Series, use model_database.db_initialisers.prepare_ANN_batches.compute_ISI_from_st instead."
     assert type(st) in (
-        list, I.np.array), "Please provide a list or array as spike times."
+        list, np.array), "Please provide a list or array as spike times."
     st = [e for e in st if min_time <= e <= max_time]
     ISI = []
-    for timepoint in I.np.arange(min_time, max_time, time_step):
+    for timepoint in np.arange(min_time, max_time, time_step):
         st_ = [e for e in st if e < timepoint]
         if st_:
             max_spike_time_before_timepoint = max(st_)
@@ -358,21 +481,27 @@ def compute_ISI_from_st_list(st, min_time=0, max_time=505, time_step=1):
 
 
 def compute_ISI_from_st(st, timepoint, fillna=None):
-    """Given a pandas DataFrame or pandas Series of spike times :@param st: and a timepoint, this method returns
-    the time between :@param timepoint: and the most recent spike in ms.
-
+    """Calculate the time since the last spike in ms for each element in a spike time pd.Series or pd.DataFrame.
+    
+    Given a pandas Series or DataFrame of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
+    where each time step gives the amount of time since the last spike in ms.
+    
     Args:
-        st (pd.DataFrame | pd.Series): array of spike times
-        timepoint (float/int): time point to compute last spike time from
-        fillna (int, optional): Fill with NaN until the array has this length. Defaults to None (no NaN filling).
-
+        st (pd.DataFrame | pd.Series): pandas DataFrame or Series of spike times
+        timepoint (int): Time point in ms
+        fillna (int, optional): Fill with NaN until the array has this length. Defaults to None.
+        
     Returns:
-        float/array: The time between :@param timepoint: and the most recent spike in ms.
+        pd.Series: A pandas Series of inter-spike intervals in ms.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
     """
     '''suggestion: use the temporal window width as fillna'''
     assert fillna is not None
     st = st.copy()
-    st[st > timepoint] = I.np.NaN  # set all spike times beyond timepoint to NaN
+    st[st > timepoint] = np.NaN  # set all spike times beyond timepoint to NaN
     max_spike_time_before_timepoint = st.max(axis=1)
     ISI = timepoint - max_spike_time_before_timepoint
     if fillna is not None:
@@ -381,37 +510,39 @@ def compute_ISI_from_st(st, timepoint, fillna=None):
 
 
 def compute_ISI_array(st, min_time, max_time, fillna=1000, step=1):
-    """For each time point inbetween :@param min_time: and :@param max_time: (in steps of :@param step:),
-    this method calculates where each element is the time since the last spike in ms.
-
+    """Calculate the time since the last spike in ms for each element in a spike time Array.
+    
+    Given an array of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
+    where each time step gives the amount of time since the last spike in ms.
+    
     Args:
-        st (array): array of spike times
-        min_time (float/int): minimum time in ms
-        max_time (float/int): maximum time in ms
-        fillna (int, optional): Fill with NaN until the array has this length. Defaults to 1000.
-        step (int/float, optional): Size of timestep in ms. Defaults to 1.
-
+        st (pd.DataFrame | pd.Series): pandas DataFrame or Series of spike times
+        timepoint (int): Time point in ms
+        fillna (int, optional): Fill with NaN until the array has this length. Defaults to None.
+        
     Returns:
-        array: An array of length (:@param max_time: - :@param min_time:)//:@param step:,
-        where each element has as a value the time since the last spike in ms.
+        pd.Series: A pandas Series of inter-spike intervals in ms.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
     """
     ISI = []
-    for t in I.np.arange(min_time, max_time, step):
+    for t in np.arange(min_time, max_time, step):
         ISI.append(compute_ISI_from_st(st, t, fillna).to_numpy().reshape(-1, 1))
-    return I.np.concatenate(ISI, axis=1)
+    return np.concatenate(ISI, axis=1)
 
 
 def compute_AP_array(st, min_time, max_time, fillna=1000, step=1):
-    """Given a collection of spike times of a single trial, this method returns an array of length (max_time - min_time)//step,
-    where, on each timestep of size :@param step:, a boolean represents if a spike is found in this interval.
-
-    TODO: what is fillna?
+    """One-hot encode spike times to a binned time vector.
+    
+    Given a collection of spike times of a single trial, this method returns an array of length ``(max_time - min_time)//step``,
+    where a boolean represents if a spike is found in this interval.
 
     Args:
         st (array): Array of spike times
         min_time (float/int): Min time in ms
         max_time (float/int): Max time in ms
-        fillna (int, optional, unused): Fill with NaN until the array has this length. Defaults to 1000. Added for congruence to compute_ISI_array?
         step (int, optional): Size of timesteps to consider. Defaults to 1 ms
 
     Returns:
@@ -420,24 +551,43 @@ def compute_AP_array(st, min_time, max_time, fillna=1000, step=1):
     AP = []
     for t in range(min_time, max_time, step):
         AP.append(
-            I.spike_in_interval(st, t, t + step).to_numpy().reshape(-1, 1))
-    return I.np.concatenate(AP, axis=1)
+            spike_in_interval(st, t, t + step).to_numpy().reshape(-1, 1))
+    return np.concatenate(AP, axis=1)
 
 
-def load_syn_weights(m, client):
-    folder_ = m['parameterfiles_network_folder']
-    fnames = m['parameterfiles_network_folder'].listdir()
+def load_syn_weights(db, client, excitatory_celltypes=None):
+    """Load synapse weights from a simrun-initialized database
+    
+    Fetches the :ref:`network_parameters_format` file from the
+    ``parameterfiles_network_folder`` key in the database and extracts the synaptic weights.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+            The database object.
+        client (:py:class:`~dask.distributed.client.Client`):
+            The dask client object.
+            
+    Returns:
+        dict: A dictionary mapping the synapse type to a weight.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.load_simrun_general.init` for the database initialization.
+    """
+    if excitatory_celltypes is None:
+        excitatory_celltypes = EXCITATORY
+    folder_ = db['parameterfiles_network_folder']
+    fnames = db['parameterfiles_network_folder'].listdir()
     fnames.pop(fnames.index('Loader.pickle'))
-    param_df = m['parameterfiles']
+    param_df = db['parameterfiles']
     syn_weights_out = {}
 
-    @I.dask.delayed
+    @dask.delayed
     def _helper(fname, stis):
-        stis = I.cloudpickle.loads(stis)
+        stis = cloudpickle.loads(stis)
         syn_weights = {}
-        netp = I.scp.build_parameters(folder_.join(fname))
+        netp = build_parameters(folder_.join(fname))
         for celltype in netp.network:
-            if celltype.split('_')[0] in I.excitatory:
+            if celltype.split('_')[0] in excitatory_celltypes:
                 syn_weights[celltype] = netp.network[
                     celltype].synapses.receptors.glutamate_syn.weight[0]
             else:
@@ -450,7 +600,7 @@ def load_syn_weights(m, client):
     }
     delayeds = []
     for f in fnames:
-        d = _helper(f, I.cloudpickle.dumps(stis_by_netp[f]))
+        d = _helper(f, cloudpickle.dumps(stis_by_netp[f]))
         delayeds.append(d)
 
     result = client.gather(client.compute(delayeds))
@@ -462,36 +612,80 @@ def load_syn_weights(m, client):
     return syn_weights_out
 
 
-def temporal_binning_augmented_sa(sa_augmented,
-                                  min_time,
-                                  max_time,
-                                  bin_size,
-                                  use_weights=False):
+def temporal_binning_augmented_sa(
+    sa_augmented,
+    min_time,
+    max_time,
+    bin_size,
+    use_weights=False):
+    """Bin synapse activation times into temporal bins.
+    
+    Args:
+        sa_augmented (pd.DataFrame): Augmented synapse activation dataframe
+        min_time (int): Min time in ms
+        max_time (int): Max time in ms
+        bin_size (int): Size of the time bins
+        use_weights (bool, optional): 
+            If True, weigh the synapse activation times with the corresponding synapse weights. 
+            Defaults to False.
+            
+    Returns:
+        tuple: A tuple containing the bin borders and the histogram of synapse activation times.
+        
+    See also:
+        :py:meth:`~data_base.isf_data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
+    """
     activation_times = sa_augmented[[
-        c for c in sa_augmented.columns if I.utils.convertible_to_int(c)
+        c for c in sa_augmented.columns if convertible_to_int(c)
     ]].values
     if use_weights:
         weights = (activation_times * 0 +
                    1) * sa_augmented.syn_weight.values.reshape(-1, 1)
-        weights = weights[~I.np.isnan(activation_times)]
-    activation_times = activation_times[~I.np.isnan(activation_times)]
-    bin_borders = I.np.arange(min_time, max_time + bin_size, bin_size)
+        weights = weights[~np.isnan(activation_times)]
+    activation_times = activation_times[~np.isnan(activation_times)]
+    bin_borders = np.arange(min_time, max_time + bin_size, bin_size)
     if use_weights:
-        return bin_borders, I.np.histogram(activation_times,
-                                           bin_borders,
-                                           weights=weights)[0]
+        return bin_borders, np.histogram(
+            activation_times,
+            bin_borders,
+            weights=weights)[0]
     else:
-        return bin_borders, I.np.histogram(activation_times, bin_borders)[0]
+        return bin_borders, np.histogram(
+            activation_times, 
+            bin_borders)[0]
 
 
-def get_synapse_activation_array_weighted(sa_,
-                                          selected_stis=None,
-                                          spatial_bin_names=None,
-                                          min_time=0,
-                                          max_time=600,
-                                          bin_size=1,
-                                          use_weights=False):
-    fun = I.partial(temporal_binning_augmented_sa,
+def get_synapse_activation_array_weighted(
+    sa_,
+    selected_stis=None,
+    spatial_bin_names=None,
+    min_time=0,
+    max_time=600,
+    bin_size=1,
+    use_weights=False):
+    """Create a 4D array of synapse activation times.
+    
+    Create a 4D array of synaptic activation, where the axes are:
+    
+    - :paramref:`selected_stis`
+    - EXC/INH
+    - spatial bins
+    - time bins
+    
+    The array is of shape ``(len(selected_stis), 2, len(spatial_bin_names), (max_time - min_time)//bin_size)``.
+    
+    Args:
+        sa_ (pd.DataFrame): Augmented synapse activation dataframe
+        selected_stis (list, optional): List of selected spike times. Defaults to None.
+        spatial_bin_names (list, optional): List of spatial bin names. Defaults to None.
+        min_time (int, optional): Min time in ms. Defaults to 0.
+        max_time (int, optional): Max time in ms. Defaults to 600.
+        use_weights (bool, optional): If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
+        
+    Returns:
+        array: A 4D array of synapse activation times.
+    """
+    fun = partial(temporal_binning_augmented_sa,
                     min_time=min_time,
                     max_time=max_time,
                     bin_size=1,
@@ -504,7 +698,7 @@ def get_synapse_activation_array_weighted(sa_,
     level_0_values = selected_stis
     level_1_values = ['EXC', 'INH']
     level_2_values = spatial_bin_names
-    array = I.np.zeros((len(level_0_values), len(level_1_values),
+    array = np.zeros((len(level_0_values), len(level_1_values),
                         len(level_2_values), n_time_bins))
     for i0, l0 in enumerate(level_0_values):
         for i1, l1 in enumerate(level_1_values):
@@ -516,24 +710,41 @@ def get_synapse_activation_array_weighted(sa_,
     return array
 
 
-@I.dask.delayed
-def save_SA_batch(sa_,
-                  selected_stis,
-                  batch_id,
-                  outdir=None,
-                  section_distances_df=None,
-                  spatial_bin_names=None,
-                  min_time=0,
-                  max_time=600,
-                  bin_size=1,
-                  synaptic_weight_dict=None):
+@dask.delayed
+def save_SA_batch(
+    sa_,
+    selected_stis,
+    batch_id,
+    outdir=None,
+    section_distances_df=None,
+    spatial_bin_names=None,
+    min_time=0,
+    max_time=600,
+    bin_size=1,
+    synaptic_weight_dict=None):
+    """Save a batch of synapse activation times to a file.
+    
+    Args:
+        sa_ (pd.DataFrame): Augmented synapse activation dataframe
+        selected_stis (list): List of selected spike times
+        batch_id (int): Batch id
+        outdir (str): Output directory
+        section_distances_df (pd.DataFrame, optional): DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+        spatial_bin_names (list, optional): List of spatial bin names. Defaults to None.
+        min_time (int, optional): Min time in ms. Defaults to 0.
+        max_time (int, optional): Max time in ms. Defaults to 600.
+        bin_size (int, optional): Size of the time bins. Defaults to 1.
+        
+    Returns:
+        dask.delayed: A dask delayed object. When computed, saves the synapse activation times to :paramref:`outdir`/batch_:paramref:`batch_id`_SYNAPSE_ACTIVATION.npy.
+    """
     syn_weights = None
     if syn_weights:
         raise NotImplementedError()
         fname = 'batch_{}_SYNAPSE_ACTIVATION_WEIGHTED.npy'.format(batch_id)
     else:
         fname = 'batch_{}_SYNAPSE_ACTIVATION.npy'.format(batch_id)
-    outpath = I.os.path.join(outdir, fname)
+    outpath = os.path.join(outdir, fname)
     sa_ = augment_synapse_activation_df_with_branch_bin(sa_,
                                                         section_distances_df,
                                                         syn_weights)
@@ -545,47 +756,89 @@ def save_SA_batch(sa_,
         max_time=max_time,
         bin_size=bin_size,
         use_weights=syn_weights is not None)
-    I.np.save(outpath, array)
+    np.save(outpath, array)
 
 
 # code to get the maximum depolarization per ms of a voltage traces dataframe
 def get_time_groups(vt_pandas):
+    """Get the time groups for binning voltage traces.
+    
+    Group the voltage trace in 1 ms bins, assuming a time interval of 0.025 ms.
+    
+    Args:
+        vt_pandas (pd.DataFrame): Voltage traces dataframe.
+        
+    Returns:
+        list: A list of time groups.
+        
+    Attention:
+        This method assumes a time interval of 0.025 ms.
+    """
     time_groups = []
     for lv in range(len(vt_pandas.columns)):
-        time_groups.append(lv // 40)
+        time_groups.append(lv // 40)  # 1 ms / 0.025 ms = 40
     return time_groups
 
 
 def get_max_per_ms_on_pandas_dataframe(vt_pandas):
+    """Subsample a voltage trace pandas dataframe to 1ms bins based on the maximum depolarization.
+    
+    Args:
+        vt_pandas (pd.DataFrame): Voltage traces dataframe
+        
+    Returns:
+        pd.Series: A pandas Series of the maximum depolarization per ms.
+        
+    Attention:
+        This method assumes a voltage trace time interval of 0.025 ms.
+    """
     time_groups = get_time_groups(vt_pandas)
-    vt_max = vt_pandas.groupby(time_groups,
-                               axis=1).apply(lambda x: x.max(axis=1))
+    vt_max = vt_pandas.groupby(time_groups, axis=1).apply(lambda x: x.max(axis=1))
     return vt_max
 
 
 def get_max_depolarization_per_ms(vt_dask):
+    """Subsample a voltage trace dask dataframe to 1ms bins based on the maximum depolarization.
+    
+    Args:
+        vt_dask (dask.dataframe): Voltage traces dask dataframe
+        
+    Returns:
+        dask.dataframe: A dask dataframe of the maximum depolarization per ms.
+        
+    Attention:
+        This method assumes a voltage trace time interval of 0.025 ms.
+    """
     meta_ = {t: 'float64' for t in get_time_groups(vt_dask.head())}
-    vt_max_dask = vt_dask.map_partitions(get_max_per_ms_on_pandas_dataframe,
-                                         meta=meta_)
+    vt_max_dask = vt_dask.map_partitions(get_max_per_ms_on_pandas_dataframe, meta=meta_)
     return vt_max_dask
 
 
 # initializer class
 class Init:
-
-    def __init__(self,
-                 db,
-                 db_target=None,
-                 min_time=None,
-                 max_time=None,
-                 bin_size=1,
-                 batchsize=500,
-                 client=None,
-                 sti_selection=None,
-                 sti_selection_name=None,
-                 persist=False,
-                 synaptic_weight=False,
-                 dend_ap_suffix='_-30.0'):
+    """Initializer class for preparing ANN batches.
+    
+    Parse a simrun-initialized database to binned voltage traces ready for ANN training.
+    
+    Attention:
+        Still in development. See issue #75.
+    
+    :skip-doc:    
+    """
+    def __init__(
+        self,
+        db,
+        db_target=None,
+        min_time=None,
+        max_time=None,
+        bin_size=1,
+        batchsize=500,
+        client=None,
+        sti_selection=None,
+        sti_selection_name=None,
+        persist=False,
+        synaptic_weight=False,
+        dend_ap_suffix='_-30.0'):
 
         if sti_selection is not None:
             assert sti_selection_name is not None
@@ -611,7 +864,7 @@ class Init:
             st = db['spike_times']
             sti_selection = list(st.index)
 
-        self.chunks = I.utils.chunkIt(sti_selection,
+        self.chunks = chunkIt(sti_selection,
                                       len(sti_selection) / batchsize)
 
         # create directory to save batches
@@ -643,15 +896,17 @@ class Init:
         # else:
         #     synaptic_weight_dict = None
 
-    def init_all(self,
-                 init_soma_vt=True,
-                 init_dend_vt=True,
-                 init_soma_AP_ISI=True,
-                 init_dend_AP_ISI=True,
-                 init_max_soma_vt=True,
-                 init_max_dend_vt=True,
-                 init_synapse_activation=True,
-                 init_synapse_activation_weighted=True):
+    def init_all(
+        self,
+        init_soma_vt=True,
+        init_dend_vt=True,
+        init_soma_AP_ISI=True,
+        init_dend_AP_ISI=True,
+        init_max_soma_vt=True,
+        init_max_dend_vt=True,
+        init_synapse_activation=True,
+        init_synapse_activation_weighted=True):
+        """:skip-doc:"""
         pass
 
     def _get_distal_recording_site(self):
@@ -671,9 +926,7 @@ class Init:
         return delayeds
 
     def init_soma_vt(self):
-        vt = self.db['voltage_traces'].iloc[:, ::40].iloc[:,
-                                                           self.min_time:self.
-                                                           max_time]
+        vt = self.db['voltage_traces'].iloc[:, ::40].iloc[:,self.min_time:self.max_time]
         return self._save_vt(vt, fname_template='batch_{}_VT_SOMA.npy')
 
     def init_dend_vt(self):
@@ -686,13 +939,14 @@ class Init:
         delayeds = []
         # st = self.client.scatter(st)
         for batch_id, chunk in enumerate(self.chunks):
-            d = save_st_and_ISI(st,
-                                batch_id,
-                                chunk,
-                                self.min_time,
-                                self.max_time,
-                                self.outdir,
-                                suffix=suffix)
+            d = save_st_and_ISI(
+                st,
+                batch_id,
+                chunk,
+                self.min_time,
+                self.max_time,
+                self.outdir,
+                suffix=suffix)
             delayeds.append(d)
         return delayeds
 
@@ -762,8 +1016,21 @@ def init(
     synaptic_weight=False,
     dend_ap_suffix='_-30.0',
 ):
-    '''persist: whether the synapse activation dataframe should be loaded into memory 
-                on the dask cluster. Speeds up the process if it fits in memory, otherwise leads to crash'''
+    '''Construct delayeds to parse a simrun-initialized database to binned voltage traces ready for ANN training.
+    
+    Args:
+        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+            The simrun-initialized database
+        db_target (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+            The target database. Defaults to None, which initializes the ANN batches in the same database as :paramref:`db`.
+    
+    Attention:
+        Still in development. See issue #75.
+    
+    persist: whether the synapse activation dataframe should be loaded into memory 
+                on the dask cluster. Speeds up the process if it fits in memory, otherwise leads to crash
+    :skip-doc:
+    '''
     if db_target is None:
         db_target = db
 
@@ -777,7 +1044,7 @@ def init(
     else:
         sti_selection = list(st.index)
 
-    chunks = I.utils.chunkIt(sti_selection, len(sti_selection) / batchsize)
+    chunks = chunkIt(sti_selection, len(sti_selection) / batchsize)
 
     neuron_param_file = get_neuron_param_file(db)
     section_distances_df = get_section_distances_df(neuron_param_file)
@@ -794,7 +1061,7 @@ def init(
         sa = client.persist(sa)
 
     if synaptic_weight:
-        synaptic_weight_dict = load_syn_weights(m, client)
+        synaptic_weight_dict = load_syn_weights(db, client)
         synaptic_weight_dict = client.persist(synaptic_weight_dict)
     else:
         synaptic_weight_dict = None
@@ -804,16 +1071,17 @@ def init(
 
     for batch_id, chunk in enumerate(chunks):
         selected_indices = chunk
-        d = save_SA_batch(sa.loc[chunk],
-                          chunk,
-                          batch_id,
-                          outdir=outdir,
-                          section_distances_df=section_distances_df,
-                          spatial_bin_names=spatial_bin_names,
-                          min_time=min_time,
-                          max_time=max_time,
-                          bin_size=bin_size,
-                          synaptic_weight_dict=synaptic_weight_dict)
+        d = save_SA_batch(
+            sa.loc[chunk],
+            chunk,
+            batch_id,
+            outdir=outdir,
+            section_distances_df=section_distances_df,
+            spatial_bin_names=spatial_bin_names,
+            min_time=min_time,
+            max_time=max_time,
+            bin_size=bin_size,
+            synaptic_weight_dict=synaptic_weight_dict)
         delayeds.append(d)
 
     print('Create delayed objects for somatic voltage traces')
@@ -864,10 +1132,14 @@ def init(
 
 
 def run_delayeds_incrementally(client, delayeds):
+    """Convenience method to run a list of dask delayed objects incrementally.
+    
+    Run dask delayed objects incrementally in chunks.
+    """
     import time
     futures = []
     ncores = sum(client.ncores().values())
-    for ds in I.utils.chunkIt(delayeds, len(delayeds) / ncores):
+    for ds in chunkIt(delayeds, len(delayeds) / ncores):
         f = client.compute(ds)
         futures.extend(f)
         while True:
@@ -879,5 +1151,5 @@ def run_delayeds_incrementally(client, delayeds):
                     # raise RuntimeError()
             if len(futures) < ncores * 2:
                 break
-    I.distributed.wait(futures)
+    distributed.wait(futures)
     return futures

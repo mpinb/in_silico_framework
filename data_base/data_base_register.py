@@ -1,3 +1,21 @@
+"""
+Registry of databases.
+
+The data base registry keeps a ledger linking data base IDs to data base paths.
+This is particularly useful to share databases, and moving databases to other file systems.
+
+The registry should ideally be located in an obvious place, e.g. the :py:mod:`data_base` module itself.
+Newly created data_bases are automatically added to the registry.
+Accessing someone elses database is possible if:
+
+    1. Its location is on the same filesystem and you have the absolute path. In this case, you can simply open the path and the db will register itself to your registry.
+    2. You know the unique ID of the database. In this case, you can use :func data_base.get_db_by_unique_id:.
+    3. Someone else has registered the database in a registry that you have access to. In this case, you can use :func data_base_register.assimilate_remote_register:.
+
+See also:
+    :py:meth:`~data_base.isf_data_base.isf_data_base.ISFDataBase.register_this_database`
+"""
+
 from __future__ import absolute_import
 import os, json
 from .utils import cache
@@ -11,15 +29,10 @@ LOCAL_DATA_BASE_REGISTER_LOCATION = os.path.dirname(__file__)
 
 class DataBaseRegister():
     def __init__(self, registry_basedir, search_dbs="on_first_init"):
-        """Class for the data_base registry. This registry keeps track of all data_bases.
-        The registry should ideally be located in an obvious place, e.g. the data_base module itself.
-        Newly created data_bases are automatically added to the registry.
-        Accessing someone elses database is possible if::
+        """Class for the data_base registry. 
 
-            1. Its location is on the same filesystem and you have the absolute path. In this case, you can simply open the path and the db will register itself to your registry.
-            2. You know the unique ID of the database. In this case, you can use :func data_base.get_db_by_unique_id:.
-            3. Someone else has registered the database in a registry that you have access to. In this case, you can use :func data_base_register.assimilate_remote_register:.
-
+        This registry keeps track of all data_bases.
+        
         You can explicitly walk through a directory and add all data_bases to the registry with :func DataBaseRegister.search_dbs:.
 
         Args:

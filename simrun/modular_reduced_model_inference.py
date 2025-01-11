@@ -4,6 +4,9 @@ This module implements a framework to
 What should I do if
  - I run my reduced model but the strategies are not executed remotely?
      --> make sure, the strategy has a Solver registered
+     
+     
+Weba and pillow 2016?
 '''
 
 import Interface as I
@@ -141,6 +144,7 @@ class Rm(object):
 
 
 class Strategy(object):
+    """what you give to the optimizer i think - rieke"""
 
     def __init__(self, name):
         self.name = name
@@ -856,7 +860,8 @@ class Strategy_ISIexponential(Strategy):
                 v = v / np.max(np.abs(v))
             ax.plot(v)
 
-
+# TODO: This is the solver they landed on: filter out recent spikes and fit raised cosines. The other strategies
+# were other ideas that didnt work
 class Strategy_ISIraisedCosine(Strategy):
 
     def __init__(self, name, RaisedCosineBasis_postspike):

@@ -1,9 +1,8 @@
 import numpy as np
-import pytest
+import pytest, six, tempfile, shutil, os, sys
 import signal
 import time
 from multiprocessing import Process
-import six
 from data_base.IO.LoaderDumper.shared_numpy_store import *
 
 
@@ -15,15 +14,16 @@ class TemporaryDirectory:  # just for testing
         self.dir = dir
 
     def __enter__(self):
-        self.name = tempfile.mkdtemp(suffix=self.suffix,
-                                     prefix=self.prefix,
-                                     dir=self.dir)
-        self.shm_fname = tempfile.mktemp(suffix=self.suffix,
-                                         prefix=self.prefix,
-                                         dir='/dev/shm/')[8:]
+        self.name = tempfile.mkdtemp(
+            suffix=self.suffix,
+            prefix=self.prefix,
+            dir=self.dir)
+        self.shm_fname = tempfile.mktemp(
+            suffix=self.suffix,
+            prefix=self.prefix,
+            dir='/dev/shm/')[8:]
         print(1, self.shm_fname)
-        os.environ[
-            'JOB_SHMTMPDIR'] = '/dev/shm'  # Ubuntu does not support shm with subfolders
+        os.environ['JOB_SHMTMPDIR'] = '/dev/shm'  # Ubuntu does not support shm with subfolders
 
         return self  # .name
 
@@ -58,13 +58,17 @@ def uninterruptible_task():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_shared_array_functions():
     with TemporaryDirectory() as tempdir:  # needed to set up JOB_SHMTMPDIR
         arr = np.array([1, 2, 3])
-        buffer, shared_array = shared_array_from_numpy(arr,
-                                                       name=tempdir.shm_fname)
+        buffer, shared_array = shared_array_from_numpy(
+            arr,
+            name=tempdir.shm_fname)
         shm, shared_arr_from_name = shared_array_from_shared_mem_name(
-            buffer.name, dtype=arr.dtype, shape=arr.shape)
+            buffer.name, 
+            dtype=arr.dtype, 
+            shape=arr.shape)
         assert np.array_equal(arr, shared_arr_from_name)
         shm.close()
         shm.unlink()
@@ -75,6 +79,7 @@ def test_shared_array_functions():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_SharedNumpyStore():
     arr = np.array([1, 2, 3])
     with TemporaryDirectory() as tempdir:
@@ -90,6 +95,7 @@ def test_SharedNumpyStore():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_append_save():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -118,6 +124,7 @@ def test_append_save():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_append_save_no_flush_leaves_array_unchanged():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -146,6 +153,7 @@ def test_append_save_no_flush_leaves_array_unchanged():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_robustness():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -187,6 +195,7 @@ def test_robustness():
     six.PY2,
     reason=
     "Unavailable on Py2. Uninterruptable processes are interruptable in Py2.")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
 def test_uninterruptible():
     print("Running interruptible task in a separate process.")
     t0 = time.time()

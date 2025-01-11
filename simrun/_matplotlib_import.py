@@ -1,3 +1,4 @@
+""":skip-doc:"""
 import warnings
 try:
     import matplotlib

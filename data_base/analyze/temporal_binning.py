@@ -1,3 +1,9 @@
+"""Bin :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes by time.
+
+This is used in :py:mod:`data_base.isf_data_base.db_initializers.synapse_activation_binning` to bin
+synapse activations.
+"""
+
 from .spatiotemporal_binning import time_list_from_pd
 import pandas as pd
 import numpy as np
@@ -6,13 +12,34 @@ import dask
 import compatibility
 
 
-def temporal_binning_pd(df,
-                        bin_size=None,
-                        min_time=None,
-                        max_time=None,
-                        normalize=True,
-                        bin_borders=None,
-                        rate=False):
+def temporal_binning_pd(
+    df,
+    bin_size=None,
+    min_time=None,
+    max_time=None,
+    normalize=True,
+    bin_borders=None,
+    rate=False):
+    """Bin timevalues in a pandas DataFrame.
+    
+    Given a dataframe containing time values in columns whose name can be converted to an integer, this function bins the values.
+    It assumes that all columns whose names are integer-convertible contain time values.
+    This is true for :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes.
+    
+    Args:
+        df (:py:class:`pandas.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
+        max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
+        bin_borders (list, optional): List of bin borders. If not specified, :paramref:`bin_size` has to be specified.
+        normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
+        rate (bool, optional): If True, normalize the output to the bin size.
+        
+    Returns:
+        tuple: Tuple containing the bin borders and the binned data.
+    """
+    
+    
     if not isinstance(df, pd.DataFrame):
         raise RuntimeError("Expected pd.DataFrame, got %s" % str(type(df)))
 
@@ -40,13 +67,30 @@ def temporal_binning_pd(df,
     return bin_borders, data
 
 
-def temporal_binning_dask(ddf,
-                          bin_size=1,
-                          min_time=None,
-                          max_time=None,
-                          normalize=True,
-                          client=None):
-
+def temporal_binning_dask(
+    ddf,
+    bin_size=1,
+    min_time=None,
+    max_time=None,
+    normalize=True,
+    client=None):
+    """Bin timevalues in a dask DataFrame.
+    
+    Given a dataframe containing time values in columns whose name can be converted to an integer, this function bins the values.
+    It assumes that all columns whose names are integer-convertible contain time values.
+    This is true for :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes.
+    
+    Args:
+        ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
+        max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
+        normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
+        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation.
+        
+    Returns:
+        tuple: Tuple containing the bin borders and the binned data.
+    """
     if not isinstance(ddf, dd.DataFrame):
         raise RuntimeError("Expected dask.dataframe.Dataframe, got %s" %
                            str(type(ddf)))
@@ -55,11 +99,12 @@ def temporal_binning_dask(ddf,
         raise RuntimeError(
             "min_time and max_time have to be specified for parallel support")
 
-    fun = lambda x: temporal_binning_pd(x,
-                                        bin_size=bin_size,
-                                        min_time=min_time,
-                                        max_time=max_time,
-                                        normalize=False)
+    fun = lambda x: temporal_binning_pd(
+        x,
+        bin_size=bin_size,
+        min_time=min_time,
+        max_time=max_time,
+        normalize=False)
     t_bins, silent = fun(ddf.head())
 
     fun2 = lambda x: pd.Series(dict(A=fun(x)[1]))
@@ -74,15 +119,22 @@ def temporal_binning_dask(ddf,
 
 
 def universal(*args, **kwargs):
-    '''
-    Binning of a pandas Dataframe, that contains timevalues in columns,
-    whose name can be converted to int, like the usual spike_times dataframe.
+    '''Bin spike times for dask or pandas dataframes.
     
-    Parameters:
-        bin_size
-        min_time
-        max_time
-        normalize
+    Infers the dataframe type and calls the appropriate binning function.
+    
+    Args:
+        df | ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
+        max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
+        normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
+        rate (bool, optional): If True, normalize the output to the bin size. Only valid if :paramref:`df` is a pandas DataFrame.
+        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation. Only valid if :paramref:`ddf` is a dask DataFrame.
+    
+    See also:
+        :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
+        :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_dask`
     '''
     if isinstance(args[0], pd.DataFrame):
         return temporal_binning_pd(*args, **kwargs)
