@@ -281,7 +281,7 @@ def get_client(client_port=38786, timeout=120):
 print("\n\n")
 print_module_versions()
 
-from config import EXCITATORY, INHIBITORY
+from config.cell_types import EXCITATORY, INHIBITORY
 
 import compatibility
 
