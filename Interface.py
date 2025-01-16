@@ -242,7 +242,7 @@ def print_module_versions():
     logger.info("Loaded modules with __version__ attribute are:\n" + ', '.join(module_versions))
 
 
-def get_client(client_port=38786, timeout=120):
+def get_client(client_ip=None, client_port=38786, timeout=30):
     """
     Gets the distributed.client object if dask has been setup
     
@@ -256,7 +256,9 @@ def get_client(client_port=38786, timeout=120):
     from socket import gethostbyname, gethostname
     from dask.distributed import Client
     client_port = str(client_port)
-    if "IP_MASTER" in os.environ.keys():
+    if client_ip is not None:
+        ip = client_ip
+    elif "IP_MASTER" in os.environ.keys():
         if "IP_MASTER_INFINIBAND" in os.environ.keys():
             ip = os.environ['IP_MASTER_INFINIBAND']
         else:

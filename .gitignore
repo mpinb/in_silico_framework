@@ -23,6 +23,7 @@ trash_it_now/
 # compiler output
 *.pyc
 mechanisms/*/*/x86_64**
+mechanisms/*/*/arm64**
 
 barrel_cortex/*
 !getting_started/barrel_cortex/*.7z.*
