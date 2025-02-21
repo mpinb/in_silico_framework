@@ -3,12 +3,13 @@ import json, re, os, shutil
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def convert_links_to_sphinx(content, api_extension="autoapi"):
-    """Convert links to files to Sphinx directives in the Python domain
+    """Parse out markdown links of the form `[link text](../module/submodule.py)` and replace them with 
+    external links to the Sphinx documentation web page.
     
     Args:
         content (str): The content to convert. Normally a single line of html
         api_extension (str): The extension used for the API documentation.
-            Used to determine the location of the ref target (i.e. the .rst file, but without the .rst suffix).
+            Used to determine the location of the stub file (i.e. the .rst file, but without the .rst suffix).
             Options: 'autoapi' or 'autosummary'.
         
     """
@@ -40,7 +41,7 @@ def convert_links_to_sphinx(content, api_extension="autoapi"):
             new_link = f'{prefix}_autosummary/{module_doc_name}.html#module-{module_doc_name}'
         else:
             raise NotImplementedError(f"api_extension '{api_extension}' is not supported. Options are: 'autoapi' or 'autosummary'.")
-        return f'[{text}]({new_link})'
+        return f"<a> href=\"{new_link}\" >{text}</a>"
     
     return pattern.sub(replace_link, content)
 
@@ -61,9 +62,17 @@ def copy_and_parse_notebooks_to_docs(
     dest_dir=os.path.join(project_root, 'docs', 'tutorials'),
     api_extension="autoapi",
     ):
+    """Copy notebooks from the source directory to the destination directory and parse the links.
+    
+    Removes the destination directory if it already exists.
+    """
+    
+    def ignore_checkpoints(dir, files):
+        return [f for f in files if f == '.ipynb_checkpoints']
+    
     if os.path.exists(dest_dir):
         shutil.rmtree(dest_dir)
-    shutil.copytree(source_dir, dest_dir)
+    shutil.copytree(source_dir, dest_dir, ignore=ignore_checkpoints)
     
     # Process each notebook in the destination directory
     for root, _, files in os.walk(dest_dir):

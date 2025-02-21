@@ -19,6 +19,9 @@ class ScalarField(object):
     3D coordinates, to get the bounding box of a voxel, and to get
     the center of a voxel.
 
+    This class is used for e.g. assigning sub-cellular synapse distributions
+    modeled after vtkImageData, i.e. a regular mesh.
+    
     Attributes:
         mesh (numpy.ndarray): 
             3D numpy array representing the scalar field.
@@ -35,8 +38,6 @@ class ScalarField(object):
             6-tuple of floats representing the bounding box of the scalar field.
             Format: (xmin, xmax, ymin, ymax, zmin, zmax)
     
-    This class is used for e.g. assigning sub-cellular synapse distributions
-    modeled after vtkImageData, i.e. a regular mesh.
     '''
 
     mesh = None

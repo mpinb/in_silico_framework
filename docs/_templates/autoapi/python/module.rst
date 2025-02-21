@@ -3,7 +3,7 @@
 {%- set breadcrumb = obj.id.split('.')[1:] %}
 {%- set shortname = obj.id.split('.')[-1] | escape %}
 
-.. backlink:
+{% if obj.display %}
 {% if breadcrumb %}
 :mod:`{{ root_module }}`
 {%- for n in range(breadcrumb|length )  %}
@@ -79,4 +79,5 @@
 {{ macros.auto_summary(visible_exceptions, title="Exceptions") }}
 {%- endif %}
 {%- endblock %}
+{% endif %}
 {% endif %}

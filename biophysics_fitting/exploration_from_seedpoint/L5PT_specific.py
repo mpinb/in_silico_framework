@@ -1,5 +1,8 @@
 """
 Hardcoded values for parameter names and objectives for a Layer 5 pyramidal tract neuron in the rat barrel cortex.
+can be used as a template for other cells.
+
+:skip-doc:
 """
 
 PARAM_NAMES = ['ephys.CaDynamics_E2_v2.apic.decay', 'ephys.CaDynamics_E2_v2.apic.gamma', 'ephys.CaDynamics_E2_v2.axon.decay', 'ephys.CaDynamics_E2_v2.axon.gamma', \

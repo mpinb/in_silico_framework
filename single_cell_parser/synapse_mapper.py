@@ -1,5 +1,7 @@
-'''
+'''Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
 
+For more fine-grained control over the creation of synapse distributions onto a morphology, 
+please refer to the :py:mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
 '''
 import numpy as np
 #import reader

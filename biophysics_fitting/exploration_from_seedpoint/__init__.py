@@ -2,11 +2,12 @@
 Explore viable biophysical models from a given seedpoint.
 Given the following empirical constraints:
 
-    - a set of biophysical parameters
-    - a morphology
-    - empirically recorded responses to defined stimulus protocols (see e.g. :py:meth:`biophysics_fitting.hay_specification.get_hay_problem_description`).
+- a set of biophysical parameters
+- a morphology
+- empirically recorded responses to defined stimulus protocols (see e.g. :py:meth:`biophysics_fitting.hay_specification.get_hay_problem_description`).
 
-this package provides methods and full workflows that allow you to make random variations on the input biophysical parameters, run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
+this package provides methods and full workflows that allow you to make random variations on the input biophysical parameters, 
+run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
 Eventually, this random walk through parameter space can explore very diverse biophysical models that are all within the empirical constraints.
 """
 from functools import partial
@@ -37,7 +38,7 @@ def evaluation_function_incremental_helper(
     is above the desired cutoff defined in :paramref:`cutoffs`.
     
     Args:
-        p (dict): dictionary of parameter values used in the simulation. See :py:mod:`~biophysics_fitting.hay_complete_default_setup` for an example.
+        p (dict | :py:class:`pandas.Series`): Parameter values used in the simulation. See :py:mod:`~biophysics_fitting.hay_complete_default_setup` for an example.
         s (Simulator): Simulator object.
         cutoffs (dict): Dictionary with keys that are in :paramref:`stim_order`. Values are floats that define a maximum allowed error for any objective corresponding to that stimulus.
             Note that each stimulus evokes a voltage trace that is parametrized by multiple objectives, each with their own error.

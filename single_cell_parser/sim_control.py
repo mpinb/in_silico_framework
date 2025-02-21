@@ -20,14 +20,6 @@ class SimControl(object):
 
     Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
     Can still be useful for low-level control with NEURON.
-
-    Attributes:
-            cell (:py:class:`neuron.h.Section`): The cell to simulate.
-            simTime (float): Simulation time [ms]. Default: 5 [ms]
-            dt (float): Time step [ms]. Default: 0.001 [ms]
-            T (float): Temperature [C]. Default
-            goAlready (bool): Simulation status
-            h (:py:class:`neuron.h`): NEURON interface
     
     Example:
 
@@ -36,6 +28,14 @@ class SimControl(object):
         >>> sim.go()
         >>> sim.show()
     
+
+    Attributes:
+        cell (:py:class:`neuron.h.Section`): The cell to simulate.
+        simTime (float): Simulation time [ms]. Default: 5 [ms]
+        dt (float): Time step [ms]. Default: 0.001 [ms]
+        T (float): Temperature [C]. Default
+        goAlready (bool): Simulation status
+        h (:py:class:`neuron.h`): NEURON interface
     '''
 
     def __init__(self, cell=None, sim_time=5, dt=0.001, T=37):

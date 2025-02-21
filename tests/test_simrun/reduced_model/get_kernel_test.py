@@ -20,8 +20,11 @@ def get_test_Rm(fresh_mdb):
     fresh_mdb['test_synapse_activation'] = X
     fresh_mdb['spike_times'] = pd.DataFrame(y).astype('f8').replace(
         0, np.NaN).replace(1, 100)
-    Rm = ReducedLdaModel(['test_synapse_activation'], output_window_min = 99, output_window_max = 101, \
-                    synapse_activation_window_width = 50)
+    Rm = ReducedLdaModel(
+        ['test_synapse_activation'], 
+        output_window_min = 99, 
+        output_window_max = 101,
+        synapse_activation_window_width = 50)
     Rm.fit([fresh_mdb])
     return Rm
 
@@ -65,8 +68,9 @@ def test_statistical_ReducedLdaModel_apply(fresh_mdb):
     np.testing.assert_equal(res.lda_values, Rm.lda_values[mn])
 
 
-@pytest.mark.xfail(strict=False,
-                   reason="This test is statistical, and may sometimes fail.")
+@pytest.mark.xfail(
+    strict=False,
+    reason="This test is statistical, and may sometimes fail.")
 def test_statistical_ReducedLdaModel_apply_data_outside_trainingsdata(
         fresh_mdb):
     '''compare model infered from test data to expectancy'''

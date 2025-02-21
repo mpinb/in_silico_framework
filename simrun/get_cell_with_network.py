@@ -1,13 +1,12 @@
-"""Build a cell with realized synapses from a :ref:`cell_params_format` file and a :ref:`network_params_format` file.
+"""Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
 """
-
-import Interface as I
+import single_cell_parser as scp
 
 
 def get_cell_with_network(neuron_param, network_param, cache=True):
-    """Build a cell with realized synapses from a :ref:`cell_params_format` file and a :ref:`network_params_format` file.
+    """Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
     
-    This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_params_format` file.
+    This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
     
     Args:
         neuron_param (str): Path to cell parameter file. 
@@ -20,7 +19,7 @@ def get_cell_with_network(neuron_param, network_param, cache=True):
         :py:mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from 
         an existing network realization (:ref:`syn_file_format` file) it.
     """
-    cell = I.scp.create_cell(neuron_param.neuron)
+    cell = scp.create_cell(neuron_param.neuron)
     nwMapMutable = [False]  # list that stores current network, always of length 1
 
     def fun():
@@ -33,7 +32,7 @@ def get_cell_with_network(neuron_param, network_param, cache=True):
             sec._re_init_range_var_recording()
         
         # initializing network
-        nwMap = I.scp.NetworkMapper(
+        nwMap = scp.NetworkMapper(
             cell, 
             network_param.network,
             neuron_param.sim)
@@ -44,7 +43,7 @@ def get_cell_with_network(neuron_param, network_param, cache=True):
         try:
             cell.evokedNW.re_init_network()
             par = neuron_param['neuron']['cell_modify_functions']['synaptic_input']
-            synaptic_input = I.scp.cell_modify_functions.get('synaptic_input')
+            synaptic_input = scp.cell_modify_functions.get('synaptic_input')
             synaptic_input(cell, **par.as_dict())
         except AttributeError:  # if cell.evokedNW does not exist:
             pass  # do nothing

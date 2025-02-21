@@ -56,11 +56,6 @@ if six.PY3:
         When a shared memory block is no longer needed by any process, the
         unlink() method should be called to ensure proper cleanup.
         
-        Args:
-            name (str): Path to the shared memory block on the disk.
-            create (bool): If True, create a new shared memory block. If False, attach to an existing shared memory block.
-            size (int): Size in bytes of the shared memory block.
-            track_resource (bool): If True, register the shared memory block with the resource tracker. If False, do not register the shared memory block with the resource tracker.
         
         Attributes:
             _buf (memoryview): A memoryview of the contents of the shared memory block.
@@ -79,11 +74,19 @@ if six.PY3:
         _mode = 0o600
         _prepend_leading_slash = True  # if _USE_POSIX else False
 
-        def __init__(self,
-                     name=None,
-                     create=False,
-                     size=0,
-                     track_resource=False):
+        def __init__(
+            self,
+            name=None,
+            create=False,
+            size=0,
+            track_resource=False):
+            """
+            Args:
+                name (str): Path to the shared memory block on the disk.
+                create (bool): If True, create a new shared memory block. If False, attach to an existing shared memory block.
+                size (int): Size in bytes of the shared memory block.
+                track_resource (bool): If True, register the shared memory block with the resource tracker. If False, do not register the shared memory block with the resource tracker.
+            """
             assert name is not None
             if not name[0] == '/':
                 name = '/' + name
@@ -395,8 +398,7 @@ class SharedNumpyStore:
     Warning:
         This class provides no way to reload data if it has changed on disk.
         
-    Args:
-        working_dir (str): The path of the working directory to store numpy arrays.
+
         
     Attributes:
         working_dir (str): The path of the working directory to store numpy arrays.
@@ -406,6 +408,10 @@ class SharedNumpyStore:
         _files (dict): A dictionary mapping array names to filepaths in shared memory.
     """
     def __init__(self, working_dir):
+        """
+        Args:
+            working_dir (str): The path of the working directory to store numpy arrays.
+        """
         self.working_dir = working_dir
         if not os.path.exists(working_dir):
             os.makedirs(working_dir)
@@ -442,7 +448,7 @@ class SharedNumpyStore:
         """Get metadata from a name that follows the convention of NumpyStore.
         
         Returns:
-        tuple: the filename, shape, and dtype from an array with 'name' saved in this instance of NumpyStore
+            tuple: the filename, shape, and dtype from an array with 'name' saved in this instance of NumpyStore
         """
         if not name in self._files:
             self.update()
@@ -590,19 +596,22 @@ class SharedNumpyStore:
         if autoflush:
             self.flush()
 
-    def _update_name_to_account_for_start_row_end_row(self,
-                                                      name,
-                                                      start_row=None,
-                                                      end_row=None):
+    def _update_name_to_account_for_start_row_end_row(
+        self,
+        name,
+        start_row=None,
+        end_row=None):
+        """:skip-doc:"""
         return name
         # return name + '{}_{}'.format(start_row, end_row)
 
-    def load(self,
-             name,
-             mode='shared_memory',
-             start_row=None,
-             end_row=None,
-             allow_create_shm=False):
+    def load(
+        self,
+        name,
+        mode='shared_memory',
+        start_row=None,
+        end_row=None,
+        allow_create_shm=False):
         '''Load an array from shared memory.
         
         Args:

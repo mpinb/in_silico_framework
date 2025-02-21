@@ -37,14 +37,14 @@ def _evoked_activity(
     ):
     '''
     :skip-doc:
-    Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`synapse_activation_format` files.
+    Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`syn_activation_format` files.
     
     Private function that is called by :func:`run_existing_synapse_activations`.
     
     Args:
-        cellParamName (str): Path to a :ref:`cell_params_format` file 
-        evokedUpParamName (str): Path to a :ref:`network_params_format` file
-        synapse_activation_files (list): List of paths to :ref:`synapse_activation_format` files
+        cellParamName (str): Path to a :ref:`cell_parameters_format` file 
+        evokedUpParamName (str): Path to a :ref:`network_parameters_format` file
+        synapse_activation_files (list): List of paths to :ref:`syn_activation_format` files
         dirPrefix (str): Path to the directory where the simulation results should be stored.
         tStop (float): Time in ms at which the synaptic input should stop.
         scale_apical (float, DEPRECATED): Scaling factor for the apical dendrite.
@@ -57,7 +57,7 @@ def _evoked_activity(
         
     .. deprecated:: 0.1
         The `scale_apical` argument is deprecated and will be removed in a future version.
-        Use the ``cell_modify_functions`` key in the :ref:`cell_params_format` file instead.
+        Use the ``cell_modify_functions`` key in the :ref:`cell_parameters_format` file instead.
     '''
 
     if len(synapse_activation_files) == 0:
@@ -223,12 +223,12 @@ def run_existing_synapse_activations(
     auto_organize_results_folder = True, 
     cell_generator = None
     ):
-    '''Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`synapse_activation_format` files.
+    '''Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`syn_activation_format` files.
     
     Args:
-        cellParamName (str): Path to a :ref:`cell_params_format` file 
-        evokedUpParamName (str): Path to a :ref:`network_params_format` file
-        synapseActivationGlob (list): List of paths to :ref:`synapse_activation_format` files or globstring
+        cellParamName (str): Path to a :ref:`cell_parameters_format` file 
+        evokedUpParamName (str): Path to a :ref:`network_parameters_format` file
+        synapseActivationGlob (list): List of paths to :ref:`syn_activation_format` files or globstring
         dirprefix (str): Path to the directory where the simulation results should be stored.
         nSweeps (int): Number of synapse activations per process.
         nprocs (int): Number of independent processes
@@ -249,7 +249,7 @@ def run_existing_synapse_activations(
         
     .. deprecated:: 0.1
         The `scale_apical` argument is deprecated and will be removed in a future version.
-        Use the ``cell_modify_functions`` key in the :ref:`cell_params_format` file instead.
+        Use the ``cell_modify_functions`` key in the :ref:`cell_parameters_format` file instead.
         
     See also:
         :py:meth:`simrun,rerun_db.rerun_db` to rerun simulations from a database, instead of a list

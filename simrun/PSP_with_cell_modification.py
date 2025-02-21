@@ -1,14 +1,20 @@
 '''Calculate PSPs depending on cell modifications.
 
 Such modifications include:
+
 - A current injection into the soma, to ensure a certain resting potential
 - A coincident current injection triggering a burst, to investigate the effect of bursts on somatic integration of consecutive input
 - Synaptic input, to investigate the effect of one more synapse activation on top of such input to the somatic subthreshold potential
 '''
 
-import Interface as I
+import single_cell_parser as scp
+import numpy as np
+from functools import partial
 from biophysics_fitting.setup_stim import setup_soma_step
 from scipy.optimize import minimize, minimize_scalar
+from data_base import utils as db_utils
+import matplotlib.pyplot as plt
+from IPython import display
 from simrun.synaptic_strength_fitting import PSPs
 
 
@@ -17,6 +23,9 @@ class PSP_with_current_injection:
     
     The membrane potential is clamped by injecting a current into the soma.
         
+    See also:
+        :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
+    
     Attributes:
         neuron_param (NTParameterSet): Parameters of the neuron model.
         confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
@@ -34,9 +43,6 @@ class PSP_with_current_injection:
             Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         holding_current (float):
             Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
-            
-    See also:
-        :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
     '''
     def __init__(
         self,
@@ -51,23 +57,23 @@ class PSP_with_current_injection:
         bounds=(0, 0.7)):
         """
         Args:
-        neuron_param (NTParameterSet): Parameters of the neuron model.
-        confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
-        target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
-        delay (float): Delay before the current injection starts (in :math:`ms`).
-        duration (float): Duration of the current injection (in :math:`ms`).
-        optimize_for_timepoint (float): 
-            Timepoint for membrane voltage optimization (in :math:`ms`).
-            This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
-        tEnd (float): End time of the simulation (in :math:`ms`).
-        cell_modify_functions (dict):
-            Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
-            The keys are the names of the functions, the values are the parameters of the functions.
-        bounds (tuple):
-            Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+            neuron_param (NTParameterSet): Parameters of the neuron model.
+            confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
+            target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
+            delay (float): Delay before the current injection starts (in :math:`ms`).
+            duration (float): Duration of the current injection (in :math:`ms`).
+            optimize_for_timepoint (float): 
+                Timepoint for membrane voltage optimization (in :math:`ms`).
+                This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
+            tEnd (float): End time of the simulation (in :math:`ms`).
+            cell_modify_functions (dict):
+                Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
+                The keys are the names of the functions, the values are the parameters of the functions.
+            bounds (tuple):
+                Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         """
         self.confile = confile
-        self.neuron_param = I.scp.NTParameterSet(neuron_param.as_dict())
+        self.neuron_param = scp.NTParameterSet(neuron_param.as_dict())
         self.target_vm = target_vm
         self.delay = delay
         self.duration = duration
@@ -91,14 +97,14 @@ class PSP_with_current_injection:
         print('starting optimization of holding current. target membrane potential is {} mV'.format(self.target_vm))
         bounds = self.bounds
         x = minimize_scalar(
-            I.partial(self._objective_fun),
+            partial(self._objective_fun),
             tol=.01,
             bounds=bounds,
             method='Bounded')
         if x.fun < 0.1:
             print('solution found')
-            print('deviation / mV: {}'.format(I.np.sqrt(x.fun)))
-            print('current / mV: {}'.format(I.np.sqrt(x.x)))
+            print('deviation / mV: {}'.format(np.sqrt(x.fun)))
+            print('current / mV: {}'.format(np.sqrt(x.x)))
             self.holding_current = x.x
         else:
             self.plot_current_injection_voltage_trace()
@@ -114,8 +120,8 @@ class PSP_with_current_injection:
         if max(vm[tVec > self.delay]) > -40:  # there may be no spikes
             print('careful: there are spikes during the PSP experiment!')
             return 10000
-        tNew = I.np.arange(0, self.tEnd, 0.025)
-        vmNew = I.np.interp(tNew, tVec, vm)
+        tNew = np.arange(0, self.tEnd, 0.025)
+        vmNew = np.interp(tNew, tVec, vm)
         out = (vmNew[int(self.optimize_for_timepoint / 0.025)] - self.target_vm)**2
         print(vmNew, out)
         return out
@@ -129,12 +135,12 @@ class PSP_with_current_injection:
         Returns:
             tuple: Time vector and membrane potential vector as numpy arrays.
         '''
-        with I.silence_stdout:
-            cell = I.scp.create_cell(self.neuron_param.neuron)
+        with db_utils.silence_stdout:
+            cell = scp.create_cell(self.neuron_param.neuron)
         setup_soma_step(cell, current, self.delay, self.duration)
         self.neuron_param.sim.tStop = self.tEnd
-        I.scp.init_neuron_run(self.neuron_param.sim, vardt=True)
-        return I.np.array(cell.tVec), I.np.array(cell.soma.recVList[0])
+        scp.init_neuron_run(self.neuron_param.sim, vardt=True)
+        return np.array(cell.tVec), np.array(cell.soma.recVList[0])
 
     def plot_current_injection_voltage_trace(self):
         '''Visualize the voltage trace during the current injection
@@ -143,18 +149,18 @@ class PSP_with_current_injection:
             self.optimize_holding_current()
             #raise RuntimeError("Call optimize_holding_current first!")
         tVec, vt = self._get_current_dependent_vt(self.holding_current)
-        I.plt.plot(tVec, vt)
-        I.display.display(I.plt.gcf())
+        plt.plot(tVec, vt)
+        display.display(plt.gcf())
 
     def get_neuron_param_with_current_injection(self):
-        '''Get a :ref:`cell_params_format` file with a current injection.
+        '''Get a :ref:`cell_parameters_format` file with a current injection.
         
         The current injection is set up such that the potential :paramref:`target_vm` is reached at the timepoint :paramref:`optimize_for_timepoint`
         '''
         if self.holding_current is None:
             self.optimize_holding_current()
             #raise RuntimeError("Call optimize_holding_current first!")
-        neuron_param = I.scp.NTParameterSet(self.neuron_param.as_dict())
+        neuron_param = scp.NTParameterSet(self.neuron_param.as_dict())
         dummy_param = {
             'amplitude': self.holding_current,
             'duration': self.duration,
@@ -164,7 +170,7 @@ class PSP_with_current_injection:
             neuron_param.neuron['cell_modify_functions'] = {}
         neuron_param.neuron['cell_modify_functions'][
             'soma_current_injection'] = dummy_param
-        return I.scp.NTParameterSet(neuron_param)
+        return scp.NTParameterSet(neuron_param)
 
     def get_psp_simulator(self, gExRange=[1.0], exc_inh='exc', mode='synapses'):
         '''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.

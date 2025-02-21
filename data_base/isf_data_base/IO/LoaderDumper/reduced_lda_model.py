@@ -2,7 +2,7 @@
 
 During saving, the data undergoes the following changes:
 
-- Spike times and lda values are kept with an accuracy of $.01$.
+- Spike times and lda values are kept with an accuracy of :math:`.01`.
 - The index of the spike times is reset, i.e. the ``sim_trial_index`` is not kept.
 - The :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` attribute ``db_list``, which normally contains ``DataBase`` instances, 
   is replaced by a list of strings that only contain the unique_id of each database. 
@@ -18,9 +18,9 @@ The output is a database with the following keys:
    * - Key
      - Description
    * - ``st``
-     - Spike times with a precision of $.01$.
+     - Spike times with a precision of :math:`.01`.
    * - ``lda_value_dicts_<index>``
-     - Dictionaries of LDA values with a precision of $.01$.
+     - Dictionaries of LDA values with a precision of :math:`.01`.
    * - ``Rm``
      - The reduced model.
 '''
@@ -84,8 +84,8 @@ def dump(obj, savedir):
     
     The database will contain the following keys:
     
-    - ``st``: Spike times with a precision of $.01$.
-    - ``lda_value_dicts_<index>``: Dictionaries of LDA values with a precision of $.01$.
+    - ``st``: Spike times with a precision of :math:`.01`.
+    - ``lda_value_dicts_<index>``: Dictionaries of LDA values with a precision of :math:`.01`.
     - ``Rm``: The reduced model.    
     
     Args:

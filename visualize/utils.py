@@ -259,24 +259,31 @@ def find_files_and_order_them(files, files_format='.png'):
         list: List of the files contained in the files argument. 
     
     Example:
+        If files is a list of directories [dir_a,  dir_b, dir_c] containing the following files:
 
-        if files is a list of directories [dir_a,  dir_b, dir_c] containing the following files:
+        .. list-table:: Example of directory contents
+           :header-rows: 1
 
-        +---------+-------+-------+
-        | dir_a   | dir_b | dir_c |
-        +=========+=======+=======+
-        | 100     | world | C     |
-        +---------+-------+-------+
-        | 10      | 30    | B     |
-        +---------+-------+-------+
-        | 2       | 5     | A     |
-        +---------+-------+-------+
-        | 1       | hello | 70    |
-        +---------+-------+-------+
-        | file    | 200   | 9     |
-        +---------+-------+-------+
+           * - dir_a
+             - dir_b
+             - dir_c
+           * - 100
+             - world
+             - C
+           * - 10
+             - 30
+             - B
+           * - 2
+             - 5
+             - A
+           * - 1
+             - hello
+             - 70
+           * - file
+             - 200
+             - 9
     
-        the result would be:
+        The result would be:
         1, 2, 10, 100, file, 5, 30, 200, hello, world, 9, 70, A, B, C        
     '''
 

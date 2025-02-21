@@ -3,6 +3,7 @@ Fetch parameters with the dot naming convention.
 '''
 
 import pandas as pd
+from six import iteritems
 
 __author__ = 'Arco Bast'
 __date__ = '2018-11-08'
@@ -76,9 +77,10 @@ def set_fixed_params(params, fixed_params=None):
         fixed_params (dict): The fixed parameters.
         
     Returns:
-        pd.Series: The parameters with the fixed parameters added."""
-    import six
-    for k, v in six.iteritems(fixed_params):
+        pd.Series: The parameters with the fixed parameters added.
+    """
+    assert isinstance(params, pd.Series), 'params should be a pd.Series, but you provided a {}'.format(type(params))
+    for k, v in iteritems(fixed_params):
         if not k in params.index:
             params[k] = v
     return params

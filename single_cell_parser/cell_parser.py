@@ -39,6 +39,7 @@ class CellParser(object):
         Args:
             hocFilename (str): Path to :ref:`hoc_file_format` file.
         '''
+        assert hocFilename, 'No hoc file specified'
         self.hoc_path = hocFilename
         #         self.hoc_fname = self.hoc_path.split('/')[-1]
 
@@ -56,7 +57,7 @@ class CellParser(object):
         Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
         
         Args:
-            parameters (dict): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
             axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
             scaleFunc (callable, optional): Optional function object that scales dendritic diameters.
                 **Deprecated**: This argument is deprecated and will be removed in a future version.
@@ -171,7 +172,7 @@ class CellParser(object):
             5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
                 
         Args:
-            parameters (dict): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
             full (bool): Whether or not to use full spatial discretization.
         '''
         for label in list(parameters.keys()):
@@ -246,7 +247,7 @@ class CellParser(object):
         For a list of possible cell modify functions, refer to :py:mod:`~single_cell_parser.cell_modify_functions`.
         
         Args:
-            parameters (dict): Neuron parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron parameters, read from a :ref:`cell_parameters_format` file.
         """
         if 'cell_modify_functions' in list(parameters.keys()):
             if self.cell_modify_functions_applied == True:
@@ -285,7 +286,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            props (dict): Membrane properties. 
+            props (dict | :py:class:`~sumatra.parameters.NTParameterSet`): Membrane properties. 
                 Keys named ``spines`` or ``ions`` are ignored, 
                 as they are taken care of by :py:meth:`insert_range_mechanisms` and :py:meth:`_insert_ion_properties`.
                 
@@ -322,7 +323,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            mechs (dict): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
+            mechs (:py:class:`~sumatra.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -393,7 +394,13 @@ class CellParser(object):
                         for s in paramStrings:
                             if not '_ion' in mechName:
                                 s = '.'.join(('seg', mechName, s))
-                                exec(s)
+                                try:
+                                    exec(s)
+                                except ValueError as e:
+                                    logger.error(
+                                        "NEURON Could not set range mechanism parameter {} in label {}\n Tried exectuing: {}.".format(mechName, label, s))
+                                    logger.error(traceback.format_exc())
+                                    raise e
                             else:
                                 sec.push()
                                 exec(s)
@@ -715,7 +722,7 @@ class CellParser(object):
         Args:
             label (str): Label of the structure.
             updateMechName (str): Name of the mechanism to update.
-            mechs (dict): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
+            mechs (:py:class:`~sumatra.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -757,7 +764,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            ionParam (dict): Ion properties. See :ref:`cell_parameters_format` for an example.
+            ionParam (:py:class:`~sumatra.parameters.NTParameterSet`): Ion properties. See :ref:`cell_parameters_format` for an example.
         '''
         if self.cell is None:
             raise RuntimeError(
@@ -819,7 +826,7 @@ class CellParser(object):
                 seg.g_pas = seg.g_pas * F
 
     def _add_spines_ar(self, label, spineParam):
-        '''Adds passive spines to anomalously rectifying membrane :cite:`Waters_Helmchen_2006`.
+        r'''Adds passive spines to anomalously rectifying membrane :cite:`Waters_Helmchen_2006`.
         
         Spines are added according to spine parameters for individual (dendritic) structures
         by scaling :math:`C_m` and :math:`R_{N,0}` by :math:`F` and :math:`1/F` respectively, where
@@ -889,17 +896,22 @@ class CellParser(object):
         
         Sets up the cell structure :paramref:`label` with a Hodgkin-Huxley membrane that has the following properties:
         
-        * :math:`\\bar{g}_{L} = 0.0003 \\, S/cm^2`
-        * :math:`E_{L} = -54.3 \\, mV`
+        - :math:`\\bar{g}_{L} = 0.0003 \\, S/cm^2`
+        - :math:`E_{L} = -54.3 \\, mV`
         - Soma:
-            * :math:`\\bar{g}_{Na} = 0.003 \\, S/cm^2`
-            * :math:`\\bar{g}_{K} = 0.01 \\, S/cm^2`
+        
+            - :math:`\\bar{g}_{Na} = 0.003 \\, S/cm^2`
+            - :math:`\\bar{g}_{K} = 0.01 \\, S/cm^2`
+            
         - Axon:
-            * :math:`\\bar{g}_{Na} = 3.0 \\, S/cm^2`
-            * :math:`\\bar{g}_{K} = 0.0 \\, S/cm^2`
+        
+            - :math:`\\bar{g}_{Na} = 3.0 \\, S/cm^2`
+            - :math:`\\bar{g}_{K} = 0.0 \\, S/cm^2`
+            
         - Dendrite:
-            * :math:`\\bar{g}_{Na} = 0.003 \\, S/cm^2`
-            * :math:`\\bar{g}_{K} = 0.01 \\, S/cm^2`
+        
+            - :math:`\\bar{g}_{Na} = 0.003 \\, S/cm^2`
+            - :math:`\\bar{g}_{K} = 0.01 \\, S/cm^2`
         
         """
         if self.cell is None:
@@ -1235,7 +1247,7 @@ class CellParser(object):
             Instead we scale the membrane capacitance and resistance of the dendritic structures (see :py:meth:`_add_spines`).
             
         Args:
-            parameters (dict): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
+            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
         
         :skip-doc:
         """

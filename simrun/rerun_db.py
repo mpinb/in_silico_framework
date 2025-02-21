@@ -11,7 +11,7 @@ See also:
 
 See also:
     :py:mod:`~single_cell_parser.cell_modify_functions` and :py:mod:`~single_cell_parser.network_modify_functions` 
-    for example functions to modify the :ref:`cell_params_format` and :ref:`network_params_format`.
+    for example functions to modify the :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
 """
 
 import single_cell_parser as scp
@@ -46,7 +46,7 @@ def synapse_activation_df_to_roberts_synapse_activation(sa):
     :skip-doc:
     
     Args:
-        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        sa (pd.DataFrame): A :ref:`syn_activation_format` dataframe.
         
     Returns:
         dict: A dictionary of synapse activations.
@@ -116,12 +116,12 @@ def _evoked_activity(
         tStop (float): Time in ms at which the simulation should stop.
         neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
         network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
-        synapse_activation_modify_functions (list): List of functions which take a :ref:`synapse_activation_format` dataframe and may return it changed.
+        synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         parameterfiles (pd.DataFrame): A dataframe containing the parameter files for the simulation trials. Should always be present in a simrun-initialized database under the key ``paremeterfiles``.
         neuron_folder (str): Path to the folder containing the neuron parameter files.
         network_folder (str): Path to the folder containing the network parameter files.
-        sa (pd.DataFrame): A dataframe containing the :ref:`synapse_activation_format` dataframe. Should always be present in a simrun-initialized database under the key ``synapse_activation``.
+        sa (pd.DataFrame): A dataframe containing the :ref:`syn_activation_format` dataframe. Should always be present in a simrun-initialized database under the key ``synapse_activation``.
         
     See also:
         :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
@@ -293,7 +293,7 @@ def rerun_db(
         tStop (float): Time in ms at which the simulation should stop.
         neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
         network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
-        synapse_activation_modify_functions (list): List of functions which take a :ref:`synapse_activation_format` dataframe and may return it changed.
+        synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         silent (bool): If True, suppresses output from the simulation.
         child_process (bool): If True, runs the simulation in a child process.

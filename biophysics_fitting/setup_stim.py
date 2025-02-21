@@ -1,14 +1,14 @@
 """
 This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
 
-Stimulus types included in this module are::
+Stimulus types included in this module are:
 
-    * Step current injection at the soma
-    * EPSP injection on an "ApicalDendrite" section at a given distance from the soma
-    * The stimuli used by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`:
-        - a bAP (backpropagating AP) stimulus.
-        - a BAC (bAP-Activated Ca2+) stimulus.
-        - Three step current stimuli with amplitudes [0.619, 0.793, 1.507] nA.
+- Step current injection at the soma
+- EPSP injection on an "ApicalDendrite" section at a given distance from the soma
+- The stimuli used by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`:
+    - a bAP (backpropagating AP) stimulus.
+    - a BAC (bAP-Activated :math:`Ca^{2+}`) stimulus.
+    - Three step current stimuli with amplitudes :math:`[0.619, 0.793, 1.507]\ nA`.
     
 """
 
@@ -100,10 +100,10 @@ def setup_bAP(cell, delay=295):
     
     Soma:
     
-        - shape = step
-        - amplitude = 1.9 nA
-        - delay = 295 ms
-        - duration = 5 ms
+    - shape = step
+    - amplitude = 1.9 nA
+    - delay = 295 ms
+    - duration = 5 ms
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -120,17 +120,17 @@ def setup_BAC(cell, dist=970, delay=295):
     
     Soma:
 
-        - shape = step    
-        - amplitude = 1.9 nA
-        - delay = 295 ms
-        - duration = 5 ms
+    - shape = step    
+    - amplitude = 1.9 nA
+    - delay = 295 ms
+    - duration = 5 ms
         
     Apical dendrite:
 
-        - shape = epsp
-        - amplitude = 0.5 nA
-        - distance = 970 um (default)
-        - delay = 300 ms
+    - shape = epsp
+    - amplitude = 0.5 nA
+    - distance = 970 um (default)
+    - delay = 300 ms
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.

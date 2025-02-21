@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-Runfile to create a :ref:`network_params_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
+Runfile to create a :ref:`network_parameters_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
 
 Reads in a template parameter file and sets the PSTHs for each celltype to the PSTHs of the evoked activity.
 Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
@@ -555,7 +555,7 @@ def whisker_evoked_PSTH(
     and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.
     
     The data linked in this runfile are for experiments where the C2 whisker was deflected.
-    For situations where other :paramref:`deflectedwhisker`s are requested, activity data of equivalent
+    For situations where other :paramref:`deflectedwhisker` are requested, activity data of equivalent
     columns relative to the C2 is requested.
     
     Example:

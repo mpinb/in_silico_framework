@@ -1,4 +1,4 @@
-"""Bin :ref:`spike_times_format` or :ref:`synapse_activation_format` dataframes by time and space.
+"""Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
 
 See also:
     :py:mod:`data_base.isf_data_base.db_initializers.synapse_activation_binning` for binning synapse activations

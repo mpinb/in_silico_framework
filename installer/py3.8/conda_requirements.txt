@@ -6,3 +6,4 @@
 https://conda.anaconda.org/conda-forge/noarch/asciitree-0.3.3-py_2.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/zarr-2.15.0-pyhd8ed1ab_0.conda
 https://conda.anaconda.org/conda-forge/linux-64/numcodecs-0.12.1-py38h854fd01_1.conda
+https://conda.anaconda.org/conda-forge/noarch/cmasher-1.6.3-pyhd8ed1ab_0.tar.bz2

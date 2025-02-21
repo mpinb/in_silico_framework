@@ -19,11 +19,11 @@ def split_synapse_activation(
     selfcheck=True,
     excitatory=EXCITATORY,
     inhibitory=INHIBITORY):
-    '''Augment a :ref:`synapse_activation_format` dataframe with a boolean column for excitatory/inhibitory.
+    '''Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
     
     Args:
         sa (:py:class:`~pandas.DataFrame`): 
-            A :ref:`synapse_activation_format` dataframe.
+            A :ref:`syn_activation_format` dataframe.
             Must contain the column ``synapse_type``.
         selfcheck (bool): If ``True``, check if all cell types are either excitatory or inhibitory.
         excitatory (list): List of excitatory cell types.

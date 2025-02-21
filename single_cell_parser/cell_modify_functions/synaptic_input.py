@@ -19,7 +19,7 @@ def synaptic_input(
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        network_param (dict): The :ref:`network_parameters_format`.
+        network_param (str | dict | :py:class:`~sumatra.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
         synapse_activation_file (str, optional): 
             The :ref:`syn_activation_format` file with existing synapse activations.
             If None, synapse activations are generated from scratch using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.

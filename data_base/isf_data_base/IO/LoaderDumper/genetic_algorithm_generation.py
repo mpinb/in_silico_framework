@@ -6,6 +6,8 @@
     
 See also:
     :py:meth:`biophysics_fitting.optimizer.save_result`
+    
+:skip-doc:
 """
 
 import os

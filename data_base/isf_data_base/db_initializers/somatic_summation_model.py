@@ -31,13 +31,13 @@ class CelltypeSpecificSynapticWeights:
         >>> weights.init_with_network_param(n)
         >>> celltype, synapseID = 'L23_PC', 0
         >>> weights[(celltype, synapseID)]
-    
-    Attributes:
-        _celltype_to_syn_weight (dict): The dictionary that maps from (celltype, synapseID) to the weight of that synapse.
         
     versionadded:: 0.1.0
         Cell type specific synaptic weights are supported, but **not** synapse-specific weights (yet).
         The synapse ID is ignored.
+    
+    Attributes:
+        _celltype_to_syn_weight (dict): The dictionary that maps from (celltype, synapseID) to the weight of that synapse.
     '''
 
     def __init__(self):

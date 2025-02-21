@@ -22,10 +22,10 @@
 
    {% endif %}
 
-.. py:function:: {{ obj.id }}({{ obj.args }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
+.. py:function:: {{ obj.id }}({{ obj.args | e }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
    {% for (args, return_annotation) in obj.overloads %}
 
-                 {%+ if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}({{ args }}){% if return_annotation is not none %} -> {{ return_annotation }}{% endif %}
+                 {%+ if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}({{ args | e }}){% if return_annotation is not none %} -> {{ return_annotation }}{% endif %}
    {% endfor %}
    {% for property in obj.properties %}
 
@@ -34,6 +34,12 @@
 
    {% if obj.docstring %}
 
-   {{ obj.docstring|indent(3) }}
+   {{ obj.docstring | replace("_", "\_") | indent(3) }}
    {% endif %}
 {% endif %}
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

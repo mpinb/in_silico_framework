@@ -1,10 +1,10 @@
 [project]
 authors = [{name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"}]
 
-description = "Add a short description here"
-name = "in_silico_framework"
+description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
+name = "ISF"
 requires-python = "==3.8.*"
-version = "0.1.0"
+version = "0.4.0-beta"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -17,6 +17,9 @@ requires = ["hatchling"]
 [tool.pixi.system-requirements]
 libc = "2.17"
 linux = "3.10.0"
+
+[tool.pixi.activation]
+env = { "PYTHONPATH" = "$PYTHONPATH:$(pwd)" }
 
 [tool.pixi.dependencies]
 # default conda dependencies
@@ -60,10 +63,10 @@ no-build-isolation = ["pandas-msgpack"]
 
 [tool.pixi.target.osx]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
-dependencies = { numpy = "1.21", pytables = ">=3.7.0,<4" }
+dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
-dependencies = { neuron = "7.8.2.*", numpy = "1.19.2", distributed = "2.30.0"}
+dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 [tool.pixi.environments]
@@ -71,7 +74,7 @@ docs = ["docs"]
 default = ["isf"]
 
 [tool.pixi.feature.isf]
-dependencies = { pyyaml = "5.3.1", flask = "1.1.4"}
+dependencies = { pyyaml = "==5.3.1", flask = "==1.1.4"}
 
 [tool.pixi.feature.docs.dependencies]
 flask = ">=2"
@@ -85,6 +88,7 @@ sphinx = ">=7.1.2,<8"
 pyyaml = ">=6.0.2,<7"
 nbsphinx-link = ">=1.3.0,<2"
 sphinx-inline-tabs = ">=2023.4.21,<2024"
+pandoc = ">=3.6.2,<4"
 
 [dependency-groups]
 # pypi dependencies

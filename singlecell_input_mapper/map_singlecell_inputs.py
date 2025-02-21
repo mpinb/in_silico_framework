@@ -6,7 +6,7 @@ of the rat barrel cortex, based on methods and data presented in
 
 This runfile assumes you have downloaded and extracted the barrel cortex model data from
 https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
-If this is not the case, please consult ``installer/download_bc_model` and extract.
+If this is not the case, please consult ``installer/download_bc_model`` and extract.
 
 Attention:
     This file is specific to the barrel cortex model data. If you want to use it for other data,
@@ -15,12 +15,18 @@ Attention:
 Inputs:
 
 - Morphology of the post-synaptic neuron
-- 3D PST densities for normalization of innervation calculations
+- 3D field of synapse densities or synapse counts.
 - Number of cells per cell type in the brain area of interest.
 - Connections spreadsheet containing PST length/area constants of 
   the post-synaptic cell for normalization.
-- Presynaptic bouton densities of individual axon morphologies,
-  sorted by anatomical area and cell type
+- Bouton locations of individual axon tracings.
+
+Attention:
+    This runfile has default values for the barrel cortex, and so assumes that you have downloaded 
+    and extracted the barrel cortex model data from
+    https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+    If this is not the case, please consult ``installer/download_bc_model`` and extract,
+    or adapt the paths in this file to your data.
 
 This module then uses :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
 to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
@@ -51,30 +57,17 @@ Outputs:
 - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :py:mod:`simrun`.
 """
 from __future__ import absolute_import
-
-#===============================================================================
-# Python standard library imports
-#===============================================================================
 import sys
 import os.path
 import glob
 import time
-
-#===============================================================================
-# required imports
-# numpy: tested with numpy v1.6.2 (not guaranteed to work with lower version)
-# The singlecell_input_mapper module should automatically be loaded if its
-# main folder is located in the same directory as this file. If not, you should
-# add it to the system PYTHONPATH:
-# export PYTHONPATH=/path/to/singlecell_input_mapper:$PYTHONPATH
-#===============================================================================
 import numpy as np
 from . import singlecell_input_mapper as sim
 import getting_started
 
-#===============================================================================
-# Metadata
+
 __author__ = 'Robert Egger'
+
 #===============================================================================
 # This is the only line that needs to be adapted to your system.
 # Change the string 'prefix' to the folder where all anatomical data is

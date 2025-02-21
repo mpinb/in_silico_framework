@@ -8,6 +8,8 @@ This module contains utilities and convenience methods for:
 
 import numpy as np
 from functools import partial
+import multiprocessing.process
+import cloudpickle
 
 __author__ = 'Arco Bast'
 __date__ = '2018-11-01'
@@ -47,8 +49,7 @@ def connected_to_structure_beyond(
             return False
 
 
-connected_to_dend_beyond = partial(connected_to_structure_beyond,
-                                   beyond_struct=['Dendrite', 'ApicalDendrite'])
+connected_to_dend_beyond = partial(connected_to_structure_beyond, beyond_struct=['Dendrite', 'ApicalDendrite'])
 
 
 def get_inner_sec_dist_dict(
@@ -182,31 +183,52 @@ def augment_cell_with_detailed_labels(cell):
 
 
 def tVec(cell):
-    """Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array."""
+    """Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array.
+    
+    Args:
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        
+    Returns:
+        numpy.ndarray: The time vector of the cell.
+    """
     return np.array(cell.tVec)
 
 
 def vmSoma(cell):
-    """Convenience method to extract the soma voltage trace from a cell"""
+    """Convenience method to extract the soma voltage trace from a cell
+    
+    Args:
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        
+    Returns:
+        numpy.ndarray: The soma voltage trace of the cell.
+    """
     return np.array(cell.soma.recVList[0])
 
 
 def vmMax(cell):
-    """Calculate the maximum voltage of a cell at any timepoint, at any dendrite."""
+    """Calculate the maximum voltage of a cell at any timepoint, at any dendrite.
+    
+    Args:
+        cell (:py:class:`~singlejson_cell_parser.cell.Cell`): The cell object.
+        
+    Returns:
+        numpy.ndarray: The maximum voltage of the cell at any timepoint across sections.
+    """
     return np.max(
         [np.max(np.array(sec.recVList), axis=0) for sec in cell.sections],
         axis=0)
 
 
 def _get_apical_sec_and_i_at_distance(cell, dist):
-    """Get the apical section at a certain distance from the soma.
+    """Get the apical section and segment at a certain distance from the soma.
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        dist (float): The distance from the soma (um).
+        dist (float): The distance from the soma (:math:`\mu m`).
         
     Returns:
-        tuple: The section, the relative distance from the section to the soma, and the segment index.
+        tuple: The section, the distance between the target and the calculated distance, and the segment index.
     """
     sec, target_x = get_inner_section_at_distance(cell, dist)
     # roberts code to get closest segment
@@ -222,15 +244,24 @@ def _get_apical_sec_and_i_at_distance(cell, dist):
 def vmApical(cell, dist=None):
     """Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
     
-    Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite::
+    Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
-        - It contains at least one section with the label "ApicalDendrite"
-        - Such section exists at :paramref:`~dist` distance from the soma
-        - The section has at least one child
+    - It contains at least one section with the label "ApicalDendrite"
+    - Such section exists at :paramref:`~dist` distance from the soma
+    - The section has at least one child
         
     See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
     to define an apical section.
-
+    
+    Args:
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        dist (float): The distance from the soma (:math:`\mu m`).
+        
+    Returns:
+        numpy.ndarray: The membrane voltage of the apical dendrite at the specified distance.
+        
+    See also:
+        :py:meth:`vmApical_position` to get the exact location on the apical dendrite at a certain distance.
     """
     assert dist is not None
     sec, mindx, minSeg = _get_apical_sec_and_i_at_distance(cell, dist)
@@ -238,6 +269,24 @@ def vmApical(cell, dist=None):
 
 
 def vmApical_position(cell, dist=None):
+    """Fetch the exact location on the apical dendrite at a certain distance from the soma.
+    
+    Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
+    
+    - It contains at least one section with the label "ApicalDendrite"
+    - Such section exists at :paramref:`~dist` distance from the soma
+    - The section has at least one child
+    
+    See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
+    to define an apical section.
+    
+    Args:
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        dist (float): The distance from the soma (:math:`\mu m`).
+        
+    Returns:
+        numpy.ndarray: The point on the apical dendrite at the specified distance.
+    """
     sec, mindx, i = _get_apical_sec_and_i_at_distance(cell, dist)
     target_x = [seg for seg in sec][i].x
     index = np.argmin(np.abs(np.array(sec.relPts) - target_x))
@@ -248,14 +297,14 @@ def vmApical_position(cell, dist=None):
 # multiprocessing stuff that allows to evaluate code in a separate python / NEURON environment
 #########################################
 
-import multiprocessing.process
-import cloudpickle
 
 
 class Undemonize(object):
     '''A class used to resolve AssertionError: daemonic processes are not allowed to have children
     
-    This might spawn child processes that do not terminate'''
+    Warning:
+        This might spawn child processes that does not terminate
+    '''
 
     def __init__(self):
         self.p = multiprocessing.process.current_process()
@@ -274,24 +323,40 @@ class Undemonize(object):
             self.p._config['daemon'] = self.daemon_status_value
 
 
-import cloudpickle
 
 
 def run_cloudpickled_remotely(queue):
+    """Unserialize a function and its arguments, run it, and serialize the output.
+    
+    Args:
+        queue (multiprocessing.Queue): A queue with the function and its arguments.
+    
+    Returns:
+        None. The output is put back in the queue.
+    """
     fun = cloudpickle.loads(queue.get())
     args = cloudpickle.loads(queue.get())
     queue.put(cloudpickle.dumps(fun(*args)))
 
 
 def execute_in_child_process(fun):
+    """Execute a function in a child process.
+    
+    This function serializes the function and its arguments, and runs it in a separate process
+    using multiprocessing.
+    
+    Args:
+        fun (function): The function to execute.
+    """
     fun_cp = cloudpickle.dumps(fun)
 
     def fun(*args):
         queue = multiprocessing.Queue()
         queue.put(fun_cp)
         queue.put(cloudpickle.dumps(args))
-        p = multiprocessing.Process(target=run_cloudpickled_remotely,
-                                    args=(queue,))
+        p = multiprocessing.Process(
+            target=run_cloudpickled_remotely,
+            args=(queue,))
         with Undemonize():
             p.start()
         p.join()
@@ -329,12 +394,20 @@ from functools import partial
 
 
 def pool_helper(callable_partial):
+    """Unserialize a function and its arguments, run it, and serialize the output."""
     callable_partial = cloudpickle.loads(callable_partial)
     return cloudpickle.dumps(callable_partial())
 
 
 class VariableThatDoesNotGetPickled:
-
+    """A variable that does not get pickled.
+    
+    As soon as the object is pickled, the stored item is set to None.
+    
+    This is used to keep a multiprocessing pool alive in a child process, but 
+    prevent it from being serialized and crossing process boundaries.
+    Using this, the process pool only exists in the child process.
+    """
     def __init__(self, stored_item):
         self.stored_item = stored_item
 
@@ -343,8 +416,15 @@ class VariableThatDoesNotGetPickled:
 
 
 def execute_in_child_process_kept_alive(fun):
-    pool_storage = VariableThatDoesNotGetPickled(
-        None)  # None # multiprocessing.Pool(1)
+    """Execute a function in a child process, keeping the process alive.
+    
+    This function serializes the function and its arguments, and runs it in a separate process
+    using multiprocessing. 
+    
+    Args:
+        fun (function): The function to execute.
+    """
+    pool_storage = VariableThatDoesNotGetPickled(None)  # None # multiprocessing.Pool(1)
 
     def _helper(*args, **kwargs):
         if pool_storage.stored_item is None:
@@ -356,33 +436,3 @@ def execute_in_child_process_kept_alive(fun):
 
     #fun.pool = pool
     return _helper
-
-
-class StreamToLogger(object):
-    """
-    Wrapper for a stream object that redirects writes to a logger instance.
-    Can be used as a context manager::
-
-        >>> with StreamToLogger() as sys.stdout:
-        >>>    do_something()
-    
-    Used for reading in :ref:`hoc_file_format` files that provide output due to various print statements in the `.hoc` file, or capturing NEURON output.
-    """
-
-    def __init__(self, logger, level):
-        self.logger = logger
-        self.level = level
-        self.linebuf = ''
-
-    def write(self, buf):
-        for line in buf.rstrip().splitlines():
-            self.logger.log(self.level, line.rstrip())
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        self.flush()
-
-    def flush(self):
-        pass

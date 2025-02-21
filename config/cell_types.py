@@ -2,7 +2,7 @@
 
 This module keeps track of which cell types are used throughout ISF.
 This should be set on a per-project basis. Adapting this file usually invalidates previously created
-:ref:`syn_file_format` files, :ref:`conf_file_format` files, and :ref:`network_param_file_format` files.
+:ref:`syn_file_format` files, :ref:`con_file_format` files, and :ref:`network_param_file_format` files.
 
 These cell types are used to keep track of presynaptic cells in network modeling, and their
 associated synapse types.

@@ -4,5 +4,6 @@
 # To ignore files from contribution to language statistics
 *.ipynb linguist-vendored
 *.html linguist-vendored
+
 # GitHub syntax highlighting
 pixi.lock linguist-language=YAML linguist-generated=true

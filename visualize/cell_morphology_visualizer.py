@@ -92,7 +92,6 @@ class CMVDataParser:
             None means it has no simulation data. 
             Empty means it has simulation data that has not been initialized yet.
         time_show_syn_activ (float): Time in the simulation during which a synapse activation is shown during the visualization.
-        _has_simulation_data (bool): Test if the cell object has been simulated by checking if it has voltage data.
         """
     def __init__(
         self, 
@@ -381,6 +380,7 @@ class CMVDataParser:
         Returns:
             Nothing. Updates the self.timeseries_voltage attribute
         '''
+        assert self._has_simulation_data(), "Tried to calculate membrane voltage for a cell without simulation data"
         self._update_times_to_show(self.t_start, self.t_stop, self.t_step)
         if len(self.voltage_timeseries) != 0:
             return  # We have already retrieved the voltage timeseries
@@ -411,6 +411,7 @@ class CMVDataParser:
         Returns:
             Nothing. Updates the self.timeseries_voltage attribute
         '''
+        assert self._has_simulation_data(), "Tried to calculate ion dynamics for a cell without simulation data"
         self._update_times_to_show(self.t_start, self.t_stop, self.t_step)
         assert ion_keyword in self.possible_scalars, \
             "Ion keyword \"{}\" not recognised. Possible keywords are: {}".format(ion_keyword, self.possible_scalars)
@@ -476,6 +477,7 @@ class CMVDataParser:
         Returns:
             None. Updates the self.synapses_timeseries attribute.
         '''
+        assert self._has_simulation_data(), "Tried to fetch synapse activity for a cell without simulation data"
         if len(self.synapses_timeseries) != 0:
             return  # We have already retrieved the synapses timeseries
 
@@ -618,7 +620,7 @@ class CMVDataParser:
             raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
         return_data = self._get_color_per_section(data_per_section) if return_as_color else data_per_section
         return return_data
-    
+        
     def _keyword_is_scalar_data(self, keyword):
         """Check if a keyword is a scalar data type.
         
@@ -626,11 +628,11 @@ class CMVDataParser:
             keyword (str): keyword to check. Example: "grey", "vm", "voltage", "dendrites", "dendritic group"
             
         Returns:
-            bool: True if the keyword is a scalar data type, False if it is a keyword like "voltage".
+            bool: True if the keyword refers to scalar data, False if it is a solid color like "grey".
         """
         if isinstance(keyword, str):
             return keyword in ("voltage", "vm", "synapses", "synapse", "dendrites", "dendritic_group") + tuple(self.possible_scalars)
-        return True
+        return False
     
     def _get_color_per_section(
         self, 
@@ -682,7 +684,6 @@ class CMVDataParser:
         self.norm = mpl.colors.Normalize(self.vmin, self.vmax)
         self.cmap = cmap if cmap is not None else self.cmap
         self.scalar_mappable = mpl.cm.ScalarMappable(norm=self.norm, cmap=self.cmap)
-
 
 class CellMorphologyVisualizer(CMVDataParser):
     """Plot a cell morphology using matplotlib.
@@ -873,19 +874,21 @@ class CellMorphologyVisualizer(CMVDataParser):
             fig: matplotlib figure containing the plot.
         '''
         assert not (self._keyword_is_scalar_data(color) and time_point is None), "Please provide a timepoint at which to plot {}".format(color)
-        if time_point is None:
-            logger.info("No timepoint provided. Plotting at earliest timepoint...")
-            time_point = self.times_to_show[0]
-        assert time_point < self.times_to_show[-1], "Time point exceeds simulation time"
-        logger.info("updating_times_to_show")
-        self._update_times_to_show()
+        
+        legend = None
+        if self._keyword_is_scalar_data(color):
+            if time_point is None:
+                logger.info("No timepoint provided. Plotting at earliest timepoint...")
+                time_point = self.times_to_show[0]
+            assert time_point < self.times_to_show[-1], "Time point exceeds simulation time"
+            logger.info("updating_times_to_show")
+            self._update_times_to_show()
+            if show_legend:
+                legend = self.scalar_mappable
         if show_synapses:
             self._calc_synapses_timeseries()
         
         colors = self._calc_scalar_data_from_keyword(color, time_point, return_as_color=True)
-        legend=None
-        if show_legend and self._keyword_is_scalar_data(color):
-            legend = self.scalar_mappable
         
         fig, ax = get_3d_plot_morphology(
             self._morphology_connected,
@@ -943,7 +946,6 @@ class CellMorphologyVisualizer(CMVDataParser):
             overwrite_frames (bool): whether to overwrite previously existing frames in the images_path directory.
             tpf (float): duration of each frame in ms
         '''
-        assert self._has_simulation_data()
         self._update_times_to_show(t_start, t_stop, t_step)
         if not out_name.endswith(".gif"):
             logger.warning(".gif extension not found in out_name. Adding it...")
@@ -1000,7 +1002,6 @@ class CellMorphologyVisualizer(CMVDataParser):
             codec (str): codec to use for the video. Default is mpeg4.
             tpf (float): duration of each frame in ms
         '''
-        assert self._has_simulation_data()
         self._update_times_to_show(t_start, t_stop, t_step)
         images_path = os.path.realpath(images_path)
         self._write_png_timeseries(
@@ -1055,7 +1056,6 @@ class CellMorphologyVisualizer(CMVDataParser):
             display (bool): whether to display the animation in the notebook.
             tpf: time per frame (in ms)
         '''
-        assert self._has_simulation_data()
         self._update_times_to_show(t_start, t_stop, t_step)
         images_path = os.path.realpath(images_path)
         self._write_png_timeseries(
@@ -1094,8 +1094,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         '''
         scalar_data = {}
 
-        if color is not None and self._has_simulation_data():
-            self._update_times_to_show(t_start, t_stop, t_step)
+        self._update_times_to_show(t_start, t_stop, t_step)
         if isinstance(color, str) and color.lower() in ("voltage", "membrane voltage", "vm"):
             self._calc_voltage_timeseries()
             color_all_timepoints = [
@@ -1127,6 +1126,36 @@ class CellMorphologyVisualizer(CMVDataParser):
         client.gather(futures)
         logger.info("VTK files written to {}".format(out_dir))
 
+    def to_vtk(
+        self,
+        out_dir=".",
+        fn=""
+    ):
+        """Write out the cell morphology to a VTK file.
+        
+        Attention:
+            This function does not support time series. It will write out the cell morphology without any scalar data.
+            
+        Args:
+            out_dir (str): path of the directory where the VTK file will be stored.
+            fn (str): name of the VTK file. If empty, the file will be named after the cell's :ref:`hoc_file_format` filename.
+
+        Returns:
+            None: writes the .VTK file.
+            
+        """
+        scalar_data = {}
+
+        # add diameters by default
+        scalar_data['diameter'] = self._morphology_unconnected['diameter'].values
+
+        out_name_ = fn or os.path.basename(self.cell.hoc_path).replace('.hoc', '.vtk')
+        write_vtk_skeleton_file(
+            self._morphology_unconnected,
+            out_name_,
+            out_dir,
+            point_scalar_data=scalar_data)
+        logger.info("VTK files written to {}".format(out_dir))
 
 class CellMorphologyInteractiveVisualizer(CMVDataParser):
     """Plot an interactive 3D render of a cell morphology using Plotly and Dash.
@@ -1486,7 +1515,7 @@ def get_3d_plot_morphology(
     fig = plt.figure(
         figsize=(15, 15), 
         dpi=dpi,
-        num=str(time_point))
+        num=str(time_point) if time_point is not None else None)
     ax = plt.axes(projection='3d', proj_type=proj_type)
     ax.set_xticks([])
     ax.set_yticks([])

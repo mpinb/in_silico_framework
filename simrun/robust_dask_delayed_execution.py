@@ -1,3 +1,13 @@
+"""Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
+
+Robust execution here is taken to mean:
+
+- The delayed objects are only executed once.
+- File locking is used to ensure each delayed object is only handled by a single process
+- The status (``["not_started", "started", "finished"]``) of the delayed objects is saved during execution.
+"""
+
+
 from data_base.distributed_lock import get_lock
 import os
 import warnings
@@ -36,10 +46,22 @@ def _get_keys(managed_folder):
 #        db[k] = db[k] + inc
 
 def _assert_value(db, k, value, behaviour='warning'):
+    """Assert that the value in the database is as expected.
+    
+    Args:
+        db (str): The path to the database.
+        k (tuple): The key in the database value.
+        value: The expected value.
+        behaviour (str): The behaviour if the value is not as expected. Can be ``'warning'`` or ``'error'``.
+        
+    Raises:
+        RuntimeError: If the value is not as expected and the ``behaviour`` is ``'error'``.
+        ValueError: If the ``behaviour`` is not ``'warning'`` or ``'error'``.
+    """
     v = _get_value(db, k)
     if not v == value:
-        errstr = 'db[{}] is {} but expected {}'.format(str(k), str(v),
-                                                        str(value))
+        errstr = 'db[{}] is {} but expected {}'.format(
+            str(k), str(v),str(value))
         if behaviour == 'warning':
             warnings.warn(errstr)
         elif behaviour == 'error':
@@ -50,19 +72,33 @@ def _assert_value(db, k, value, behaviour='warning'):
 
 @dask.delayed
 def _wrapper(db, key_first_item):
+    """Wrapper to robustly compute database values.
+    
+    This wrapper is used to compute delayed objects stored in a database. It ensures that the computation is only done once.
+    It also provides locks on the files wile they are being computed, to mitigate concurrent access issues.
+    Before, during, and after computation, the delayed objects acquire the status ``'not_started'``, ``'started'``, and ``'finished'`` respectively.
+    This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run_db`.
+    
+    Args:
+        db (str): The path to the database.
+        key_first_item (str): The key of the first item in the database.
+    """
     l = get_lock(os.path.join(db, key_first_item))
     l.acquire()
-    _assert_value(db, (key_first_item, 'status'),
-                  'not_started',
-                  behaviour='warning')
+    _assert_value(
+        db, 
+        (key_first_item, 'status'),
+        'not_started',
+        behaviour='warning')
     _set_value(db, (key_first_item, 'status'), 'started')
     l.release()
     d = _get_value(db, (key_first_item, 'obj'))
     d.compute(scheduler="synchronous")
     l.acquire()
-    _assert_value(db, (key_first_item, 'status'),
-                  'started',
-                  behaviour='warning')
+    _assert_value(
+        db, (key_first_item, 'status'),
+        'started',
+        behaviour='warning')
     _set_value(db, (key_first_item, 'status'), 'finished')
     l.release()
 

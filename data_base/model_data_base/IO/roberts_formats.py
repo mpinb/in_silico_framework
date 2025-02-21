@@ -116,7 +116,7 @@ def synapse_activation_df_to_roberts_synapse_activation(sa):
     :skip-doc:
     
     Args:
-        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        sa (pd.DataFrame): A :ref:`syn_activation_format` dataframe.
         
     Returns:
         dict: A dictionary of synapse activations.

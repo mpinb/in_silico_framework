@@ -1,10 +1,17 @@
+"""Utility and convenience functions for the :py:mod:`simrun` package.
+
+Provides functions to parse out specific info from parameter files, silence stdout,
+subdivide arrays for multiprocessing purposes, and more.
+"""
+
+
 from data_base.dbopen import resolve_db_path
 import single_cell_parser as scp
 import pandas as pd
-import logging, os, inspect, six, sys
+import os, inspect, six, sys
 from collections import defaultdict
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
-logger = logging.getLogger("ISF").getChild(__name__)
+from config.isf_logging import logger
 
 def get_cellnumbers_from_confile(confile):
     """Get the amount of cells of each type from a confile.

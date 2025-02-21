@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
+"""Database utility and convenience functions.
+"""
 import sys, os, time, random, string, warnings, six, cloudpickle, \
-    contextlib, io, dask, distributed, logging, tempfile, shutil, \
-         signal, logging, threading, hashlib, collections, inspect, \
-             json, functools
+    contextlib, io, dask, distributed, tempfile, shutil, \
+    signal, logging, threading, hashlib, collections, inspect, \
+    json, functools
 from six.moves.cPickle import PicklingError # this import format has potential issues (see six documentation) -rieke
 from pathlib import Path
 from copy import deepcopy
-from copy import deepcopy
 from six.moves import cPickle
 import dask.dataframe as dd
+import numpy as np
+from collections import defaultdict
+import pandas as pd
 logger = logging.getLogger("ISF").getChild(__name__)
 
 
@@ -33,8 +37,12 @@ def chunkIt(seq, num):
     return [o for o in out if o] #filter out empty lists
 
 class silence_stdout():
-    '''Silences stdout. Can be used as context manager and decorator.
-    https://stackoverflow.com/a/2829036/5082048
+    '''Silence stdout
+    
+    Can be used as context manager and decorator.
+    
+    See also:
+        https://stackoverflow.com/a/2829036/5082048
     '''
     
     def __init__(self, fun = None):
@@ -58,12 +66,20 @@ class silence_stdout():
     
 silence_stdout = silence_stdout()
 
-
-import tempfile
-import shutil
-
 class mkdtemp():
-    '''context manager creating a temporary folder'''
+    '''Context manager for creating temporary directories
+    
+    Example:
+
+        >>> with mkdtemp() as tempdir:
+        ...     print(tempdir)
+        ...     print(os.path.exists(tempdir))
+        /pat/to/tmpdir
+        True
+        >>> os.path.exists(tempdir)
+        False
+
+    '''
     def __enter__(self):
         self.tempdir = tempfile.mkdtemp()
         return self.tempdir
@@ -140,9 +156,6 @@ def first_line_to_key(stringios):
         out[name] = value
     return out
 
-from collections import defaultdict
-import pandas as pd
-
 def pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun):
     '''Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
     
@@ -205,7 +218,6 @@ def select(df, **kwargs):
         df = df[df[kwarg] == kwargs[kwarg]]
     return df
 
-import numpy as np
 def pooled_std(m, s, n):
     '''Calculates the pooled standard deviation out of samples.
     
@@ -376,12 +388,24 @@ def get_file_or_folder_that_endswith(path, endswith):
     assert len(paths) == 1
     return os.path.join(path,paths[0])
 
-import signal
-import logging
 
-# see https://stackoverflow.com/questions/842557/how-to-prevent-a-block-of-code-from-being-interrupted-by-keyboardinterrupt-in-py
 class DelayedKeyboardInterrupt(object):
     '''Context manager that allows to delay a KeyboardInterrupt such that it also works in subthreads.
+    
+    If a KeyboardInterrupt is received while code is still running within this context manager, 
+    the KeyboardInterrupt is intercepted by this class and delayed until the context manager is exited.
+    
+    The usecase is to allow for subthreads to finish their work before the KeyboardInterrupt is raised.
+    
+    Example:
+    
+        >>> with DelayedKeyboardInterrupt():
+        ...     time.sleep(10)   # press Ctrl+C here, after <10s
+        ...     print("I am finished after 10 seconds")
+        I am finished after 10 seconds
+    
+    See also:
+        https://stackoverflow.com/questions/842557/how-to-prevent-a-block-of-code-from-being-interrupted-by-keyboardinterrupt-in-py
     '''
     def __enter__(self):
         self.signal_received = False
@@ -392,6 +416,8 @@ class DelayedKeyboardInterrupt(object):
             self.we_are_in_main_thread = False
 
     def handler(self, sig, frame):
+        """Handle KeyboardInterrupt signals and delay them
+        """
         self.signal_received = (sig, frame)
         logging.debug('SIGINT received. Delaying KeyboardInterrupt.')
 

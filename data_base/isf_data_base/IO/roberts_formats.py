@@ -1,5 +1,6 @@
 """
-Robert had a (seemingly) somewhat chaotic approach to file formats. This module provides functions to read, write and convert files in the format he used.
+Robert had a (seemingly) somewhat chaotic approach to file formats. 
+This module provides functions to read, write and convert files in the format he used.
 :skip-doc:
 """
 
@@ -41,15 +42,13 @@ def _replace_commas(f, n_commas, header, skiprows=1):
 
 
 def read_csv_uneven_length(path, n_commas, header=None, skiprows=0):
-    '''general function to read in a csv file with varying length data.
+    '''read a .csv file whose rows are of varying length
     
-    args:
-        path: path to file
-        n_commas: maximum length of fields
-    kwargs:
-        header: you can provide an alternative header
-        skiprows: skip rows at the beginning of the file (e.g. one to skip the 
-                    header if you specified one manually)
+    Args:
+        path (str): path to file
+        n_commas (int): maximum length of fields
+        header (str): Alternative header for the dataframe
+        skiprows (int): skip rows at the beginning of the file (e.g. one to skip the original header)
     '''
     with dbopen(path) as f:
         bla = _replace_commas(f, n_commas, header, skiprows)
@@ -121,27 +120,27 @@ def synapse_activation_df_to_roberts_synapse_activation(sa):
     :skip-doc:
     
     Args:
-        sa (pd.DataFrame): A :ref:`synapse_activation_format` dataframe.
+        sa (pd.DataFrame): A :ref:`syn_activation_format` dataframe.
         
     Returns:
         dict: A dictionary of synapse activations.
     
     Example:
 
-        >>> sa = pd.DataFrame({
-        ...     'synapse_ID': [1, 2, 3],
-        ...     'section_ID': [1, 2, 3],
-        ...     'section_pt_ID': [1, 2, 3],
-        ...     'synapse_type': ['AMPA', 'GABA', 'NMDA'],
-        ...     'soma_distance': [0, 0, 0],
-        ...     '0': [1, 2, 3],
-        ...     '1': [4, 5, 6],
-        ...     '2': [7, 8, 9]
-        ... })
-        >>> synapse_activation_df_to_roberts_synapse_activation(sa)
+        >>> sa_regular_format
+            synapse_ID  section_ID  section_pt_ID synapse_type  soma_distance  0  1  2
+        0   1           1             1           AMPA           0             1  4  7
+        1   2           2             2           GABA           0             2  5  8
+        2   3           3             3           NMDA           0             3  6  9
+        >>> type(sa_regular_format)
+        <class 'pandas.core.frame.DataFrame'>
+        >>> sa_roberts_format = synapse_activation_df_to_roberts_synapse_activation(sa_regular_format)
+        >>> sa_roberts_format
         {'AMPA': [(1, 1, 1, [1, 4, 7], 0)],
          'GABA': [(2, 2, 2, [2, 5, 8], 0)],
          'NMDA': [(3, 3, 3, [3, 6, 9], 0)]}
+        >>> type(sa_roberts_format)
+        <class 'dict'>
 
     """
     synapses = dict()
@@ -169,7 +168,27 @@ def read_pandas_cell_activation_from_roberts_format(path, sim_trial_index = 'no_
 # write synapse activation file
 ############################################################
 def write_pandas_synapse_activation_to_roberts_format(path, syn_activation):
-    '''save pandas df in a format, which can be understood by the simulator'''
+    '''Save synapse activations in robert's format.
+    
+    Args:
+        path (str): path to save the file
+        syn_activation (pd.DataFrame): A :ref:`syn_activation_format` dataframe.
+    
+    Example:
+    
+        >>> sa_regular_format
+            synapse_ID  section_ID  section_pt_ID synapse_type  soma_distance  0  1  2
+        0   1           1             1           AMPA           0             1  4  7
+        1   2           2             2           GABA           0             2  5  8
+        2   3           3             3           NMDA           0             3  6  9
+        >>> write_pandas_synapse_activation_to_roberts_format('test.csv', sa_regular_format)
+        >>> sa_roberts_format = read_pandas_synapse_activation_from_roberts_format('test.csv')
+        >>> sa_roberts_format
+            synapse_type  synapse_ID  soma_distance  section_ID  section_pt_ID  dendrite_label  activation times
+        0   AMPA          1           0              1           1              0               1,4,7
+        1   GABA          2           0              2           2              0               2,5,8
+        2   NMDA          3           0              3           3              0               3,6,9
+    '''
     with dbopen(path, 'w') as outputFile:
         header = '# synapse type\t'
         header += 'synapse ID\t'

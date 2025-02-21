@@ -2,8 +2,9 @@
 '''
 
 from data_base.dbopen import dbopen
+from matplotlib import cm
+from matplotlib.colors import Normalize
 import os
-from visualize.utils import value_to_color
 
 __author__  = 'Robert Egger'
 __date__    = '2012-03-08'
@@ -1201,9 +1202,6 @@ def write_functional_map(fname, functionalMap):
                     outFile.write(line)
 
 
-##############
-# added by arco
-##############
 template_init = '''
 # Amira Project 640
 # AmiraZIBEdition
@@ -1391,3 +1389,22 @@ def write_landmarks_colorcoded_to_folder(
             f.write(generate_landmark_template(landmark_name, c, lv,
                                                len(l) - 1))
             lv = lv + 1
+
+
+def value_to_color(v, vmin=0, vmax=1):
+    '''Map a value to a color.
+        
+    See: https://stackoverflow.com/questions/15140072/how-to-map-number-to-color-using-matplotlibs-colormap
+    
+    Args:
+        v (float): The value to map to a color.
+        vmin (float): The minimum value of the range. Default is 0.
+        vmax (float): The maximum value of the range. Default is 1.
+        
+    Returns:
+        tuple: The RGBA color tuple.
+    '''
+    norm = Normalize(vmin=vmin, vmax=vmax)
+    cmap = cm.inferno
+    m = cm.ScalarMappable(norm=norm, cmap=cmap)
+    return m.to_rgba(v)[:-1]

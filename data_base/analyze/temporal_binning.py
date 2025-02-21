@@ -1,4 +1,4 @@
-"""Bin :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes by time.
+"""Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
 
 This is used in :py:mod:`data_base.isf_data_base.db_initializers.synapse_activation_binning` to bin
 synapse activations.
@@ -24,7 +24,7 @@ def temporal_binning_pd(
     
     Given a dataframe containing time values in columns whose name can be converted to an integer, this function bins the values.
     It assumes that all columns whose names are integer-convertible contain time values.
-    This is true for :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes.
+    This is true for :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes.
     
     Args:
         df (:py:class:`pandas.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
@@ -78,7 +78,7 @@ def temporal_binning_dask(
     
     Given a dataframe containing time values in columns whose name can be converted to an integer, this function bins the values.
     It assumes that all columns whose names are integer-convertible contain time values.
-    This is true for :ref:`spike_times_format` and :ref:`synapse_activation_format` dataframes.
+    This is true for :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes.
     
     Args:
         ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.

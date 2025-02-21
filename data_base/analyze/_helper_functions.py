@@ -26,7 +26,7 @@ def time_list_from_pd(df):
     '''Fetch the concatenated values of all dataframe column names that can be converted to an integer.
     
     Used to parse out spike times from a :ref:`spike_times_format` dataframe and synapse activations from
-    a :ref:`synapse_activation_format` dataframe.
+    a :ref:`syn_activation_format` dataframe.
     Also filters out NaN values.
     
     Example::
@@ -37,7 +37,7 @@ def time_list_from_pd(df):
         
     Args:
         df (:py:class:`~pandas.DataFrame`): 
-            Dataframe to extract values from. Normally a :ref:`spike_times_format` or :ref:`synapse_activation_format` simrun-initialized dataframe.
+            Dataframe to extract values from. Normally a :ref:`spike_times_format` or :ref:`syn_activation_format` simrun-initialized dataframe.
             
     Returns:
         :py:class:`~numpy.array`: 

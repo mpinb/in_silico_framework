@@ -9,7 +9,8 @@ functions, and the values are the keyword arguments as a dictionary.
 See also:
     The :ref:`cell_parameters_format` file format.
 
-Example:
+Example::
+
     >>> cell_parameters.neuron.cell_modify_functions
     {'scale_apical': {'scale': 1.5}}
     >>> from single_cell_parser.cell_modify_functions import get
@@ -47,6 +48,27 @@ __date__ = "2019-02-16"
 
 
 def get(funname):
+    """Get a cell modification function by their name.
+    
+    Cell modify functions are defined in this module, and can be retrieved by name.
+    Each cell modify function is defined in a module that has the same name as the function itself.
+    For example, the full path to 
+    :py:meth:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical` is
+    :py:meth:`single_cell_parser.cell_modify_functions.scale_apical.scale_apical`.
+    To make it easier to retrieve the function, this function provides API to simply fetch them by name.
+    
+    Example:
+    
+        >>> from single_cell_parser.cell_modify_functions import get
+        >>> fun = get('scale_apical')
+        >>> fun
+        <function scale_apical at 0x7f0c3f2b6e18>
+        >>> print(fun.__file__)
+        single_cell_parser/cell_modify_functions/scale_apical.py
+        
+    Returns:
+        Callable: the cell modification function.
+    """
     module = importlib.import_module(__name__ + '.' + funname)
     fun = getattr(module, funname)
     return fun

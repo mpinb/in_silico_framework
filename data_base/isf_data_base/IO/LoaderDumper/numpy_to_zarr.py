@@ -27,11 +27,21 @@ def check(obj):
 class Loader(parent_classes.Loader):
     """Loader for zarr objects"""
     def get(self, savedir):
+        """Read in an object in ``.zarr`` format.
+        
+        Args:
+            savedir (str): Directory where the ``.zarr`` object is saved.
+        """
         return zarr.load(os.path.join(savedir, 'obj.zarr'))
 
 
 def dump(obj, savedir):
-    """Write out an object in .zarr format."""
+    """Write out an object in .zarr format.
+    
+    Args:
+        obj (object): Object to be saved
+        savedir (str): Directory where the object is saved
+    """
     zarr.save_array(os.path.join(savedir, 'obj.zarr'), obj)
 
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:

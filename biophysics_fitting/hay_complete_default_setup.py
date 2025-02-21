@@ -2,28 +2,25 @@
 This module provides a complete setup for the Hay stimulus protocol on a Layer 5 Pyramidal Tract (L5PT) neuron.
 While :py:mod:`~biophysics_fitting.hay_evaluation` is a direct Python translation of :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`,
 this module has been adapted to allow for more flexibility and integration with ISF.
+
+:skip-doc:
 '''
 from __future__ import absolute_import
-
+import os
 from functools import partial
 from multiprocessing import Pool
 import numpy as np
 import pandas as pd
-
 import single_cell_parser as scp
-
 from . import setup_stim
 from .utils import tVec, vmSoma, vmApical
 from .parameters import set_fixed_params, param_to_kwargs
-
 from .simulator import Simulator, run_fun
-from .L5tt_parameter_setup import get_L5tt_template, set_morphology, set_ephys, set_hot_zone, set_param, set_many_param
+from .L5tt_parameter_setup import get_L5tt_template, get_L5tt_template_v2, set_morphology, set_ephys, set_hot_zone, set_param, set_many_param
 # moved to bottom to resolve circular import
 # from .hay_evaluation import hay_evaluate_BAC, hay_evaluate_bAP, hay_evaluate_StepOne, hay_evaluate_StepTwo, hay_evaluate_StepThree
-
 from .evaluator import Evaluator
 from toolz.dicttoolz import merge
-
 from .combiner import Combiner
 
 __author__ = 'Arco Bast'
@@ -59,7 +56,7 @@ def get_fixed_params_example():
         'BAC.hay_measure.recSite':
             349,
         'morphology.filename':
-            '/nas1/Data_arco/project_src/in_silico_framework/biophysics_fitting/MOEA_EH_minimal/morphology/89_L5_CDK20050712_nr6L5B_dend_PC_neuron_transform_registered_C2.hoc'
+            os.path.abspath(os.path.join(__file__, "..", "..", "getting_started", 'example_data', 'morphology', '89_L5_CDK20050712_nr6L5B_dend_PC_neuron_transform_registered_C2.hoc'))
     }  # TODO: fix fixed params morphology example
     return fixed_params
 
@@ -141,7 +138,7 @@ def record_Step(cell):
 def get_Simulator(fixed_params, step=False):
     """Set up a Simulator object for the Hay stimulus protocol on a Layer 5 Pyramidal Tract (L5PT) neuron.
     
-    This method sets up a simulator object for the Hay :cite;t:`Hay_Hill_Schuermann_Markram_Segev_2011` stimulus protocol.
+    This method sets up a simulator object for the Hay :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` stimulus protocol.
     It sets: 
     
     - The cell-specific :paramref:`fixed_params`
@@ -162,7 +159,7 @@ def get_Simulator(fixed_params, step=False):
         step (bool): Whether to include the step currents in the setup.
         
     Returns:
-        :py:class:`~biophysics_fitting.simulator.Simulator`: The simulator object, set up for the :cite;t:`Hay_Hill_Schuermann_Markram_Segev_2011` stimulus protocol for a specific L5PT.
+        :py:class:`~biophysics_fitting.simulator.Simulator`: The simulator object, set up for the :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` stimulus protocol for a specific L5PT.
         
     
     Note:
@@ -395,7 +392,7 @@ def get_hay_objective_names():
         'bAP_APwidth', 'bAP_APheight', 'bAP_spikecount', 'bAP_att2', 'bAP_att3',
         'BAC_ahpdepth', 'BAC_APheight', 'BAC_ISI', 'BAC_caSpike_height',
         'BAC_caSpike_width', 'BAC_spikecount', 'mf1', 'mf2', 'mf3', 'AI1',
-        'AI2', 'ISIcv1', 'ISIcv2', 'AI3', 'ISIcv3', 'DI1', 'DI2', 'APh1',
+        'AI2', 'ISIcv1', 'ISIcv2', 'AI3', 'ISIcv3', 'DI1', 'DI2', 'DI3', 'APh1',
         'APh2', 'APh3', 'TTFS1', 'TTFS2', 'TTFS3', 'fAHPd1', 'fAHPd2', 'fAHPd3',
         'sAHPd1', 'sAHPd2', 'sAHPd3', 'sAHPt1', 'sAHPt2', 'sAHPt3', 'APw1',
         'APw2', 'APw3'
@@ -513,12 +510,13 @@ def get_hay_problem_description():
             31: 'mean_frequency2',
             32: 'adaptation_index2',
             33: 'ISI_CV',
-            34: 'time_to_first_spike',
-            35: 'AP_height',
-            36: 'AHP_depth_abs_fast',
-            37: 'AHP_depth_abs_slow',
-            38: 'AHP_slow_time',
-            39: 'AP_width'
+            34: 'doublet_ISI',
+            35: 'time_to_first_spike',
+            36: 'AP_height',
+            37: 'AHP_depth_abs_fast',
+            38: 'AHP_depth_abs_slow',
+            39: 'AHP_slow_time',
+            40: 'AP_width'
         },
         'mean': {
             0: 1.0,
@@ -555,12 +553,13 @@ def get_hay_problem_description():
             31: 22.5,
             32: 0.0045999999999999999,
             33: 0.095399999999999999,
-            34: 7.25,
-            35: 16.436800000000002,
-            36: -56.557899999999997,
-            37: -59.9923,
-            38: 0.21310000000000001,
-            39: 1.8647
+            34: 5.38,
+            35: 7.25,
+            36: 16.436800000000002,
+            37: -56.557899999999997,
+            38: -59.9923,
+            39: 0.21310000000000001,
+            40: 1.8647
         },
         'objective': {
             0: 'bAP_spikecount',
@@ -597,12 +596,13 @@ def get_hay_problem_description():
             31: 'mf3',
             32: 'AI3',
             33: 'ISIcv3',
-            34: 'TTFS3',
-            35: 'APh3',
-            36: 'fAHPd3',
-            37: 'sAHPd3',
-            38: 'sAHPt3',
-            39: 'APw3'
+            34: 'DI3',
+            35: 'TTFS3',
+            36: 'APh3',
+            37: 'fAHPd3',
+            38: 'sAHPd3',
+            39: 'sAHPt3',
+            40: 'APw3'
         },
         'std': {
             0: 0.01,
@@ -639,12 +639,13 @@ def get_hay_problem_description():
             31: 2.2222,
             32: 0.0025999999999999999,
             33: 0.014,
-            34: 1.0,
-            35: 6.9321999999999999,
-            36: 3.5834000000000001,
-            37: 3.9247000000000001,
-            38: 0.036799999999999999,
-            39: 0.41189999999999999
+            34: 0.83,
+            35: 1.0,
+            36: 6.9321999999999999,
+            37: 3.5834000000000001,
+            38: 3.9247000000000001,
+            39: 0.036799999999999999,
+            40: 0.41189999999999999
         },
         'stim_name': {
             0: 'bAP',
@@ -686,7 +687,8 @@ def get_hay_problem_description():
             36: 'StepThree',
             37: 'StepThree',
             38: 'StepThree',
-            39: 'StepThree'
+            39: 'StepThree',
+            40: 'StepThree'
         },
         'stim_type': {
             0: 'bAP',
@@ -728,7 +730,8 @@ def get_hay_problem_description():
             36: 'SquarePulse',
             37: 'SquarePulse',
             38: 'SquarePulse',
-            39: 'SquarePulse'
+            39: 'SquarePulse',
+            40: 'SquarePulse'
         }
     }
 

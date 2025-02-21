@@ -1,3 +1,9 @@
+"""Modify network activity by silencing synapses based on soma distance.
+
+These functions can be used in e.g. :py:mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
+silencing synapses based on their postsynaptic location.
+"""
+
 import single_cell_parser.analyze as sca
 
 

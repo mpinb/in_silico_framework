@@ -1,4 +1,28 @@
 '''
+Generate synapse activation files.
+
+This module creates :ref:`syn_activation_format` files based on the parameters in 
+the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files, but does not keep track of what happens
+with the postsynaptic neuron during these activations.
+
+The usecase of generating these synapse activations without actually saving or keeping track of the postsynaptic activity, is solely
+for the purpose of analyzing the synapse activations and presynaptic spike times. It allows for modularity between the steps of creating 
+synapse activations and simulating their effect on the postsynaptic neuron.
+
+These :ref:`syn_activation_format` files can afterwards be used to re-run simulations afterwards with the :py:mod:`simrun.run_existing_synapse_activations` module.
+To generate :ref:`syn_activation_format` files **and** simulate the effect on the postsynaptic neuron model in one go, use the :py:mod:`simrun.run_new_simulations` module instead.
+
+.. hint::
+   If the postsynaptic neuron is not simulated, why does this module need the :ref:`cell_parameters_format`?
+   On the one hand, it needs morphoplogical information in order to connect these synapses. The :ref:`cell_parameters_format` contains 
+   a backlink to the original :ref:`hoc_file_format` file, which contains the morphological information. But then why not start from the :ref:'hoc_file_format' file directly?
+   Because this module does in fact create a biophsyically detailed neuron model to pass to :py:class:`~single_cell_parser.network.NetworkMapper` to create the network,
+   despite the fact that the postsynaptic activity is not saved.
+   
+   
+See also:
+    :py:mod:`simrun.run_new_simulations` for running simulations.
+
 '''
 
 import time
@@ -29,22 +53,19 @@ def _evoked_activity(
     seed=None,
     nSweeps=1000,
     tStop=345):
-    '''Calculate and write synapse activations and presynaptic spike times for:
-    - pre-stimulus ongoing activity
-    - stimulus-evoked activity
+    '''Calculate and write synapse activations and presynaptic spike times.
+    
+    This function calculates the synapse activations and presynaptic spike times for a single cell.
     
     Synapse activation files are generated with :py:meth:`single_cell_parser.analyze.compute_synapse_distances_times`.
     Spike time files are generated with :py:meth:`single_cell_parser.analyze.write_presynaptic_spike_times`.
     
     Args:
         cellParamName (str): 
-            Path to a cell parameter file (e.g. getting_started/example_data/biophysical_constraints/*.param), 
+            Path to a :ref:`cell_parameters_format` file, 
             containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
-            See :py:meth:`~single_cell_parser.create_cell` for more information on the structure and contents of this filetype
         evokedUpParamName (str): 
-            Path to network parameter file (e.g. getting_started/example_data/functional_constraints/network.param),
-            containing information on synapse and network parameters per cell type. See :py:meth:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
-            for more information on the structure and contents of this filetype
+            Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): 
             Prefix for the directory where the results are stored.
         seed (int): 
@@ -156,13 +177,11 @@ def generate_synapse_activations(
     
     Parameters:
         cellParamName (str): 
-            Path to a cell parameter file (e.g. getting_started/example_data/biophysical_constraints/*.param), 
+            Path to a :ref:`cell_parameters_format` file, 
             containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
-            See :py:meth:`~single_cell_parser.create_cell` for more information on the structure and contents of this filetype
         evokedUpParamName (str): 
-            Path to network parameter file (e.g. getting_started/example_data/functional_constraints/network.param),
-            containing information on synapse and network parameters per cell type. See :py:meth:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
-            for more information on the structure and contents of this filetype
+            Path to a :ref:`network_parameters_format` file,
+            containing information on synapse and network parameters per cell type. 
         nSweeps: number of synapse activations per process
         nprocs: number of independent processes
         tStop: time in ms at which the synaptic input should stop.

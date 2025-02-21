@@ -33,7 +33,7 @@ class PSPs:
     
     Attributes:
         neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
-        confile (str): Path to a :ref:`conf_file_format` file.
+        confile (str): Path to a :ref:`con_file_format` file.
         gExRange (list): List of allowed synaptic strength values (in :math:`\mu S`).
         AMPA_component (float): 
         NMDA_component (float):
@@ -74,7 +74,7 @@ class PSPs:
         ''' 
         Args:
             neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
-            confile (str): Path to a :ref:`conf_file_format` file.
+            confile (str): Path to a :ref:`con_file_format` file.
             gExRange (list): 
                 List of synaptic strength values to simulate (in :math:`\mu S`). 
                 The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
@@ -330,7 +330,7 @@ class PSPs:
         Args:
             measured_data (pd.DataFrame): 
                 A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
-                Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]``.
+                Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]`` and the index ``celltype``.
             method (str): ``dynamic_baseline`` or ``constant_baseline``.
             merge_celltype_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
             
@@ -554,7 +554,7 @@ def set_ex_synapse_weight(syn, weight):
     """Set the synaptic strength of an excitatory :py:class:`single_cell_parser.synapse.Synapse`.
     
     Args:
-        syn (single_cell_parser.synapse.Synapse): The excitatory synapse to set the synaptic strength for.
+        syn (:py:class:`single_cell_parser.synapse.Synapse`): The excitatory synapse to set the synaptic strength for.
         weight (list): The synaptic strength values for the AMPA and NMDA components.
         
     Returns:
@@ -797,10 +797,10 @@ def run_ex_synapses(
 
 
 def generate_ex_network_param_from_network_embedding(confile):
-    '''Generate a network parameter file for excitatory synapses from a :ref:`conf_file_format` file.
+    '''Generate a network parameter file for excitatory synapses from a :ref:`con_file_format` file.
     
     Generates a template that defines a glutamate-binding synapse with default parameters, as described in the 
-    :ref:`network_parameters_format`. Together with a :ref:`conf_file_format file`, this template 
+    :ref:`network_parameters_format`. Together with a :ref:`con_file_format` file, this template 
     with default parameters is used to construct a network parameter file, that can in turn be used to 
     activate the presynaptic cells one by one.
     
@@ -846,10 +846,10 @@ def generate_ex_network_param_from_network_embedding(confile):
 
 
 def generate_inh_network_param_from_network_embedding(confile):
-    '''Generate a network parameter file for inhibitory synapses from a :ref:`conf_file_format` file.
+    '''Generate a network parameter file for inhibitory synapses from a :ref:`con_file_format` file.
     
     Generates a template that defines a GABA-binding synapse with default parameters, as described in the 
-    :ref:`network_parameters_format`. Together with a :ref:`conf_file_format file`, this template 
+    :ref:`network_parameters_format`. Together with a :ref:`con_file_format` file, this template 
     with default parameters is used to construct a network parameter file, that can in turn be used to 
     activate the presynaptic cells one by one.
     

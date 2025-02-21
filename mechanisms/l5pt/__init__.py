@@ -4,9 +4,8 @@ In addition, it contains network connectivity parameters that define synaptic co
 
 """
 
-import os, platform, logging, sys
-from biophysics_fitting.utils import StreamToLogger
-logger = logging.getLogger("ISF").getChild(__name__)
+import os, platform
+from config.isf_logging import logger, stream_to_logger
 
 try:
     import tables
@@ -50,9 +49,12 @@ except AssertionError:
         raise
 
 logger.info("Loading mechanisms:")
+
 try:
-    with StreamToLogger(logger=logger, level=10) as sys.stout:
-        neuron.load_mechanisms(os.path.join(parent, channels))
-        neuron.load_mechanisms(os.path.join(parent, netcon))
+    with stream_to_logger(logger=logger):
+        mechanisms_loaded = neuron.load_mechanisms(os.path.join(parent, channels))
+        netcon_loaded = neuron.load_mechanisms(os.path.join(parent, netcon))
+    assert mechanisms_loaded, "Couldn't load mechanisms."
+    assert netcon_loaded, "Couldn't load netcon"
 except Exception as e:
-    raise
+     raise e

@@ -1,4 +1,10 @@
 '''
+.. deprecated:: 0.1
+    This module is deprecated and will be removed in a future release.
+    It is kept around for reference, but all of this functionality is now
+    handled by the :mod:`simrun.syn_strength_fitting` module.
+
+:skip-doc:
 '''
 
 import sys
@@ -9,6 +15,8 @@ import neuron
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 import matplotlib
+from config.isf_logging import logger as isf_logger
+logger = isf_logger.getChild(__name__)
 
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
@@ -18,6 +26,8 @@ h = neuron.h
 
 __author__ = 'Robert Egger'
 __date__ = '2012-08-06'
+
+logger.warning('Deprecation warning: This module is deprecated and will be removed in a future release.')
 
 
 def unitary_connections(modelName,
@@ -79,8 +89,7 @@ def unitary_connections(modelName,
         typeNrCells = len(nwMap.connected_cells[cellType])
         spikeTime = preParam[cellType].spikeT
         recepName = list(preParam[cellType].synapses.receptors.keys())[0]
-        nmdaAmpaRatio = preParam[cellType].synapses.receptors[recepName].weight[
-            1]
+        nmdaAmpaRatio = preParam[cellType].synapses.receptors[recepName].weight[1]
         gExRange = [0.5, 1.0, 1.5, 2.0]  # np.arange(1.6, 2.2, 0.2)
         #    gExRange = [1.0]
 

@@ -1,3 +1,16 @@
+"""Analyze the results of :py:mod:`simrun.reduced_model`
+
+.. deprecated:: 0.4.0
+    Analyzing synapse activations with LDA has been extended into :py:mod:`simrun.modular_reduced_model_inference`,
+    where instead of LDA, we fit a raised cosine basis to the synapse activations.
+    :py:mod:`simrun.modular_reduced_model_inference` is written to be more general, flexible,
+    and performant. The latter was necessary in order to include the spatial resolution of synapse activations.
+
+:skip-doc:
+
+"""
+
+
 #todo: scores based on variable inpupt
 import numpy as np
 
@@ -53,9 +66,10 @@ def prediction_rates(
     Returns the median of the prediction rates on each class
     
     Args:
-        X_in (:py:class:`~numpy.array`): 2D array of features (i.e. test data)
-        y_in (:py:class:`~numpy.array`): 1D array of labels (i.e. test labels)
-        n (int): Number of iterations to use for calculating the prediction rates
+        X_in (:py:class:`~numpy.array`): 2D test data: ``synapses x activations``
+        y_in (:py:class:`~numpy.array`): 1D array of test labels (i.e. test labels)
+        classifier (:py:class:`~sklearn.base.BaseEstimator`): LDA classifier to use.
+        n (int): Amount of iterations for the prediction rates. One iteration is one train-test split.
         normalize_group_size (bool): If True, randomly subsample the data so that both classes have the same number of samples
         verbosity (int): Level of verbosity. Options are ``0`` (default), ``1``, or ``2``
         test_size (float): Fraction of the data to use as test data. Default is ``0.4``
@@ -165,9 +179,15 @@ def prediction_rates(
         print('')
 
     if return_ == 'all':
-        return dict(score_all = score_all, score_0 = score_0, score_1 = score_1, score = score, \
-                    score_rocauc = score_rocauc, score_rocauc_full_data = score_rocauc_full_data, \
-                    classifier_ = classifier_, value_counts = value_counts)
+        return dict(
+            score_all = score_all, 
+            score_0 = score_0, 
+            score_1 = score_1, 
+            score = score,
+            score_rocauc = score_rocauc, 
+            score_rocauc_full_data = score_rocauc_full_data, 
+            classifier_ = classifier_, 
+            value_counts = value_counts)
     elif return_ == 'score':
         return (score)
 

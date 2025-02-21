@@ -1,13 +1,15 @@
 .. _file_formats:
 
-====================
+###################
 File & data formats
-====================
+###################
+
+.. _am_file_format:
 
 .am
-===
+***
 
-The Amira proprietary file format. See `here <https://www.csc.kth.se/~weinkauf/notes/amiramesh.html>`_ for more information.
+The Amira proprietary VTK-like file format. Refer to the `amira documentation <https://www.csc.kth.se/~weinkauf/notes/amiramesh.html>`_ for more information.
 This flexible format can be used to store 3D scalar meshes, 3D neuron morphology reconstructions, slice image data etc.
 
 Readers:
@@ -18,9 +20,9 @@ Readers:
 .. _hoc_file_format:
 
 .hoc
-====
+****
 NEURON :cite:`hines2001neuron` file format for neuron morphologies. 
-Documentation can be found `here <https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html>`_.
+refer to the `NEURON hoc documentation <https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html>`_ for more info.
 The morphology is specified as a tree structure: the different sections of a neuron 
 (pieces separated between branching points or branches endings) are connected in order. 
 Each section is formed by a set of points, defined by their 3D coordinates and the diameter of the 
@@ -54,15 +56,15 @@ Example::
 .. _mod_file_format:
 
 .mod
-====
-NEURON :cite:`hines2001neuron` file format for neuron mechanisms. Documentation can be found `here <https://neuron.yale.edu/neuron/docs/using-nmodl-files>`_.
+****
+NEURON :cite:`hines2001neuron` file format for neuron mechanisms. refer to the `NEURON NMOL documentation <https://neuron.yale.edu/neuron/docs/using-nmodl-files>`_ for more info.
 Used to define channel and synapse dynamics in NEURON simulations.
 See the folder `mechanisms` in the project source.
 
 .. _syn_file_format:
 
 .syn
-====
+****
 ISF custom file format to store synapse locations onto a morphology. 
 This file fully captures an anatomical realization of a network.
 Only valid with an associated morphology :ref:`hoc_file_format` file.
@@ -92,7 +94,7 @@ Example::
 .. _con_file_format:
 
 .con
-====
+****
 ISF custom file format to store connectivity data. 
 To be used in conjunction with an associated :ref:`syn_file_format` file and morphology :ref:`hoc_file_format` file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
@@ -118,7 +120,7 @@ Example::
 .. _param_file_format:
 
 .param
-======
+******
 ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
 Cell parameters can be read and written using :py:mod:`single_cell_parser`.
 Both the :ref:`cell_parameters_format` and the :ref:`network_parameters_format` are used as inputs for multi-scale simulations using :py:mod:`simrun`.
@@ -126,7 +128,7 @@ Both the :ref:`cell_parameters_format` and the :ref:`network_parameters_format` 
 .. _cell_parameters_format:
 
 Cell parameters
----------------
+===============
 
 :ref:`param_file_format` file to store biophysical parameters of a cell.
 Only valied with a corresponding :ref:`hoc_file_format` morphology file.
@@ -184,7 +186,7 @@ Example::
 .. _network_parameters_format:
 
 Network parameters
-------------------
+==================
 The :ref:`param_file_format` format is used to store network parameters, 
 describing the presynaptic cells and their synaptic activations.
 Only valid with an associated :ref:`hoc_file_format` morphology file, :ref:`syn_file_format` file, and :ref:`con_file_format` file.
@@ -203,15 +205,13 @@ For each presynaptic cell type in the network, this following information is pro
    * - ``cellNr``
      - Amount of connected presynaptic cells of this type.
 
-The ``synapse`` key of each presynaptic cell type contains the following information:
+The ``synapses`` key of each presynaptic cell type contains the following information:
 
 .. list-table:: Synapse parameters
    :header-rows: 1
 
    * - Parameter
      - Description
-   * - ``receptors``
-     - Dictionary of synapse properties per receptor type (e.g. ``gaba_syn``): threshold, delay, weight, reversal potential and time dynamics.
    * - ``releaseProb``
      - Release probability of this synapse upon a spike of its associated presynaptic cell. 
        A synapse is either active or not active, never inbetween.
@@ -219,6 +219,29 @@ The ``synapse`` key of each presynaptic cell type contains the following informa
      - Reference to an associated :ref:`con_file_format` file for this cell type's synapses.
    * - ``distributionFile``
      - Reference to an associated :ref:`syn_file_format` file for this cell type's synapses.
+   * - ``receptors``
+     - Dictionary of synapse properties per receptor type (e.g. ``gaba_syn``). Properties are given below.
+
+Each ``synapses.receptors.<receptor type>`` in ``synapses.receptors`` contains the following information:
+
+.. list-table:: Receptor parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Description
+   * - ``delay``
+     - Delay between the presynaptic cell activation and the downstream synapse activation in :math:`ms`. Often defaults to :math:`0`.
+   * - ``threshold``
+     - Threshold of the synapse.
+   * - ``weight``
+     - Weight of the synapse. 
+       Note that excitatory glutamate are :math:`AMPA` and :math:`NMDA` superpositions, and thus require two weights.
+   * - ``parameter``
+     - Receptor-specific parameters for the synapse dynamics. 
+       For example, for an AMPA synapse, this could be the decay time constant, the facilitation, etc.
+
+See also:
+  The receptor parameters are used for NEURON's `NetCon <https://nrn.readthedocs.io/en/latest/hoc/modelspec/programmatic/network/netcon.html>`_.
         
 Example::
 
@@ -268,7 +291,7 @@ Example::
 .. _activity_data_format:
 
 Activity data
--------------
+=============
 :ref:`param_file_format` files are used to store activity data covering spike times and time bins for specific cell types in response to a stimulus, as seen in e.g. getting_started/example_data/functional_constraints/evoked_activity/
 
 Example::
@@ -288,7 +311,7 @@ Example::
     }
 
 Dataframes
-==========
+**********
 
 The output format of various simulation pipelines are usually a dataframe. below, you find common formats used throughout ISF.
 
@@ -301,7 +324,7 @@ These raw output files are usually parsed into single dataframes for further ana
 .. _syn_activation_format:
 
 Synapse activation
-------------------
+==================
 
 The raw output of the :py:mod:`simrun` package contains ``.csv`` files containing the synaptic activations onto a post-synaptic cell 
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:
@@ -316,9 +339,9 @@ These individual files are usually gathered and parsed into a single dataframe c
 An example of the raw and parsed format is shown below:
 
 Raw :py:mod:`simrun` output
-'''''''''''''''''''''''''''
+---------------------------
 
-.. list-table:: Synapse activation
+.. list-table:: Synapse activations (single trial)
     :header-rows: 1
 
     * - synapse type
@@ -359,9 +382,9 @@ Raw :py:mod:`simrun` output
       - 
 
 Parsed dataframe
-'''''''''''''''''
+----------------
 
-.. list-table:: Synapse activation
+.. list-table:: Synapse activations (all trials)
     :header-rows: 1
 
     * - trial index
@@ -415,12 +438,6 @@ Parsed dataframe
       - 138.4
       - 
 
-Writers:
-    
-- :py:meth:`~single_cell_parser.writer.write_synapse_activation_file` is used by :py:mod:`simrun` and :py:mod:`~single_cell_parser.analyze.synanalysis`
-   to write raw output data.
-- :py:meth:`data_base.isf_data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
-
 .. attention::
 
    Not every spike of a presynaptic cell necessarily induces a synapse activation. Each synapse has a specific release
@@ -430,7 +447,7 @@ Writers:
 .. _spike_times_format:
 
 Presynaptic spike times
------------------------
+=======================
 The raw output of the :py:mod:`simrun` package contains ``.csv`` files containing the spike times of presynaptic cells 
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:
 
@@ -442,9 +459,9 @@ These individual files are usually gathered and parsed into a single dataframe c
 An example of the raw and parsed format is shown below:
 
 Raw :py:mod:`simrun` output
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
-.. list-table:: Presynaptic spike times
+.. list-table:: Presynaptic spike times (single trial)
     :header-rows: 1
 
     * - cell type
@@ -470,9 +487,9 @@ Raw :py:mod:`simrun` output
 
 
 Parsed dataframe
-~~~~~~~~~~~~~~~~
+----------------
 
-.. list-table:: Presynaptic spike times
+.. list-table:: Presynaptic spike times (all trials)
     :header-rows: 1
 
     * - trial index
@@ -515,7 +532,7 @@ Writers:
 .. _voltage_traces_format:
 
 Voltage traces
---------------
+==============
 
 The raw output of the :py:mod:`simrun` package contains ``.npz`` or ``.csv`` files containing the voltage traces of the postsynaptic cells.
 Unlike the synapse activations and spike times, it is possible for one such file to contain multiple trials.
@@ -523,7 +540,7 @@ Unlike the synapse activations and spike times, it is possible for one such file
 .. _voltage_traces_csv_format:
 
 Voltage trace ``.csv``
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 .. list-table:: ``vm_all_traces.csv``
     :header-rows: 1
@@ -552,7 +569,7 @@ Voltage trace ``.csv``
 .. _voltage_traces_npz_format:
 
 Voltage trace ``.npz``
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 ``vm_all_traces.npz``::
 
@@ -564,7 +581,7 @@ Voltage trace ``.npz``
 .. _voltage_traces_df_format:
 
 Voltage trace dataframe
-~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------
 
 The parsed dataframe is usually created by the :py:meth:`data_base.isf_data_base.db_initializers.load_simrun_general.init` function.
 

@@ -24,8 +24,7 @@ def get_binsize(length, binsize_goal=50):
         binsize_goal (float, optional): The desired bin size. Defaults to 50.
 
     Returns:
-        tuple: A tuple containing the bin size (float) and the number of bins (int) 
-               that result in binning closest to the binsize goal.
+        tuple: A tuple containing the bin size (float) and the number of bins (int) that result in binning closest to the binsize goal.
     """
     n_bins = length / float(binsize_goal)
     n_bins_lower = np.floor(n_bins)
@@ -821,7 +820,7 @@ class Init:
     Parse a simrun-initialized database to binned voltage traces ready for ANN training.
     
     Attention:
-        Still in development. See issue #75.
+        Still in development. See github issue #75.
     
     :skip-doc:    
     """
@@ -910,11 +909,13 @@ class Init:
         pass
 
     def _get_distal_recording_site(self):
+        ":skip-doc:"
         keys = self.db['dendritic_recordings'].keys()
         dist_rec_site = sorted(keys, key=lambda x: float(x.split('_')[-1]))[1]
         return dist_rec_site
 
     def _save_vt(self, vt, fname_template=None):
+        """:skip-doc:"""
         delayeds = []
         for batch_id, chunk in enumerate(self.chunks):
             selected_indices = chunk
@@ -926,16 +927,19 @@ class Init:
         return delayeds
 
     def init_soma_vt(self):
+        """:skip-doc:"""
         vt = self.db['voltage_traces'].iloc[:, ::40].iloc[:,self.min_time:self.max_time]
         return self._save_vt(vt, fname_template='batch_{}_VT_SOMA.npy')
 
     def init_dend_vt(self):
+        """:skip-doc:"""
         dist_rec_site = self._get_distal_recording_site()
         vt_dend = self.db['dendritic_recordings'][dist_rec_site]
         vt_dend = vt_dend.iloc[:, ::40].iloc[:, self.min_time:self.max_time]
         return self._save_vt(vt_dend, fname_template='batch_{}_VT_DEND.npy')
 
     def _save_AP_ISI(self, st, suffix=None):
+        """:skip-doc:"""
         delayeds = []
         # st = self.client.scatter(st)
         for batch_id, chunk in enumerate(self.chunks):
@@ -951,10 +955,12 @@ class Init:
         return delayeds
 
     def init_soma_AP_ISI(self):
+        """:skip-doc:"""
         st = self.client.scatter(self.db['spike_times'])
         return self._save_AP_ISI(st, suffix='SOMA')
 
     def init_dend_AP_ISI(self):
+        """:skip-doc:"""
         dist_rec_site = self._get_distal_recording_site()
         st = self.client.scatter(
             self.db['dendritic_spike_times'][dist_rec_site +
@@ -962,12 +968,14 @@ class Init:
         return self._save_AP_ISI(st, suffix='DEND')
 
     def init_max_soma_vt(self):
+        """:skip-doc:"""
         vt = self.db['voltage_traces']
         vt = get_max_depolarization_per_ms(vt)
         vt = vt.iloc[:, self.min_time:self.max_time]
         return self._save_vt(vt, fname_template='batch_{}_VT_SOMA_MAX.npy')
 
     def init_max_dend_vt(self):
+        """:skip-doc:"""
         dist_rec_site = self._get_distal_recording_site()
         vt_dend = self.db['dendritic_recordings'][dist_rec_site]
         vt_dend = get_max_depolarization_per_ms(vt_dend)
@@ -975,6 +983,7 @@ class Init:
         return self._save_vt(vt_dend, fname_template='batch_{}_VT_DEND_MAX.npy')
 
     def init_synapse_activation(self, synaptic_weight=False):
+        """:skip-doc:"""
         sa = self.db['synapse_activation']
         if self.persist:
             sa = self.client.persist(sa)
@@ -998,6 +1007,7 @@ class Init:
         return delayeds
 
     def init_synapse_activation_weighted(self):
+        """:skip-doc:"""
         delayeds = []
         return delayeds
 
@@ -1135,6 +1145,14 @@ def run_delayeds_incrementally(client, delayeds):
     """Convenience method to run a list of dask delayed objects incrementally.
     
     Run dask delayed objects incrementally in chunks.
+    
+    Args:
+        client (:py:class:`~dask.distributed.client.Client`):
+            The dask client object.
+        delayeds (list): List of dask delayed objects.
+        
+    Returns:
+        list: List of futures.
     """
     import time
     futures = []

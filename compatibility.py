@@ -6,6 +6,8 @@ The following 3rd party modules are used: pandas, dask, distributed
 import six, yaml, cloudpickle, sys
 import logging
 import pkgutil
+import importlib.util
+from  importlib.util import find_spec, module_from_spec, LazyLoader
 from importlib import import_module
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -107,20 +109,40 @@ def init_simrun_compatibility():
     simrun.sim_trail_to_cell_object.simtrail_to_cell_object = simrun.sim_trial_to_cell_object.simtrial_to_cell_object
 
 
-def register_module_or_pkg_old_name(module, replace_name, replace_with):
-    additional_module_name = module.__name__.replace(replace_name, replace_with)
-    logger.debug("Registering module \"{}\" under the name \"{}\"".format(module.__name__, additional_module_name))
+def register_module_or_pkg_old_name(module_spec, replace_name, replace_with):
+    additional_module_name = module_spec.name.replace(replace_name, replace_with)
+    logger.debug("Registering module \"{}\" under the name \"{}\"".format(module_spec.name, additional_module_name))
+    
+    # Create a lazy loader for the module
+    module = importlib.util.module_from_spec(module_spec)
     sys.modules[additional_module_name] = module
+    
+    module_spec.loader.exec_module(module)
+
+    # Ensure the parent module is aware of its submodule
+    parent_module_name = additional_module_name.rsplit('.', 1)[0]
+    if parent_module_name in sys.modules:
+        parent_module = sys.modules[parent_module_name]
+        submodule_name = additional_module_name.split('.')[-1]
+        setattr(parent_module, submodule_name, module)
 
 
 def register_package_under_additional_name(parent_package_name, replace_name, replace_with):
-    parent_package = import_module(parent_package_name)
-    register_module_or_pkg_old_name(parent_package, replace_name=replace_name, replace_with=replace_with)
+    parent_package_spec = find_spec(parent_package_name)
+    if parent_package_spec is None:
+        raise ImportError(f"Cannot find package {parent_package_name}")
+    
+    register_module_or_pkg_old_name(parent_package_spec, replace_name=replace_name, replace_with=replace_with)
     
     subpackages = []
-    for loader, module_or_pkg_name, is_pkg in pkgutil.iter_modules(parent_package.__path__, parent_package.__name__+'.'):
-        submodule = import_module(module_or_pkg_name)
-        register_module_or_pkg_old_name(submodule, replace_name=replace_name, replace_with=replace_with)
+    for loader, module_or_pkg_name, is_pkg in pkgutil.iter_modules(
+        parent_package_spec.submodule_search_locations, 
+        parent_package_name+'.'
+        ):
+        submodule_spec = find_spec(module_or_pkg_name)
+        if submodule_spec is None:
+            continue
+        register_module_or_pkg_old_name(submodule_spec, replace_name=replace_name, replace_with=replace_with)
         if is_pkg:
             subpackages.append(module_or_pkg_name)
     for pkg in subpackages:

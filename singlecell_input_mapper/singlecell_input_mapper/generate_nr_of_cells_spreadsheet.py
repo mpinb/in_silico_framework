@@ -1,3 +1,6 @@
+"""Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column."""
+
+
 import pandas as pd
 import os
 

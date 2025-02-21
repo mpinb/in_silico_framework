@@ -1,3 +1,12 @@
+"""Convenience methods for visualizastion
+
+this module provides decorator functions that can be used to:
+
+- convert dask dataframes to pandas dataframes
+- iterate over individual rows of a dataframe
+- print the types of some function's arguments (useful for debugging)
+
+"""
 import inspect
 import dask.dataframe as dd
 import pandas as pd
@@ -8,16 +17,20 @@ Axes = plt.Axes
 from data_base.utils import skit
 
 def dask_to_pandas(fun):
-    '''Decorator that checks every passed parameter.
-    If subtype of dask.dataframe is found, it is converted
-    to the corresponding pandas type.
+    '''Decorator that converts function arguments from dask to pandas.
     
-    Usecase: Allows, that plotfunctions are written for pandas
-    only and can stil be used for dask dataframes by outsourcing
-    the logic of converting dask to pandas.
+    If a dask dataframe is enctounered in the methods, it is computed, converting it to a pandas dataframe.
+    
+    Usecase: Allows to write methods for pandas for pandas only,
+    and they can then stil be used for dask dataframes by outsourcing the logic of converting dask to pandas.
+    
+    Args:
+        fun: The function to decorate.
+        
+    Returns:
+        The same function, but whose arguments are now pandas instead of dask dataframes when called.
     '''
-    dask_instances = tuple(
-        x[1] for x in inspect.getmembers(dd, inspect.isclass))
+    dask_instances = tuple(x[1] for x in inspect.getmembers(dd, inspect.isclass))
 
     def retfun(*args, **kwargs):
         args = list(args)
@@ -35,6 +48,13 @@ def dask_to_pandas(fun):
 
 @dask_to_pandas
 def pr(*args, **kwargs):
+    """Prints the types of the passed arguments.
+    
+    Args:
+        *args: The arguments to print.
+        **kwargs: The keyword arguments to print.
+    """
+
     for x in args:
         print((type(x)))
     for name in kwargs:
@@ -42,19 +62,23 @@ def pr(*args, **kwargs):
 
 
 def subsequent_calls_per_line(plotfun):
-    '''decorator, that can be used on plotfunctions,
-    which require pd.Series as input to be used on groups
-    of data.
+    '''Call a function on each row of a dataframe separately.
     
-    For this, the first input argument (i.e. args[0]) is
-    assumed to be an pd.DataFrame instance. If so, the
-    first argument will be replaced by one row of the
-    dataframe. plotfun will be called seperately with each
-    single row in the dataframe.
+    Useful for plotfunctions that are designed to operate on :py:class:`pandas.Series` instances,
+    rather than on :py:class:`pandas.DataFrame` instances.
+    Also useful for parallelizing plotting functions.
     
-    If the first n args are of type pd.DataFrame, each frame
-    will be iterated as described above. In this case, it is
-    assumed, that all n DataFrames have the same indexes.
+    The first input argument (i.e. ``args[0]``) is assumed to be an pd.DataFrame instance. 
+    
+    If the first n args are of type :py:class:`pandas.DataFrame`, each frame
+    will be iterated as described above. 
+    In this case, it is assumed that all n DataFrames have the same indexes.
+    
+    Args:
+        plotfun: The function to decorate.
+        
+    Returns:
+        Callable: a function that calls ``plotfun`` on each row of the DataFrame(s).
     '''
 
     def retfun(*args, **kwargs):

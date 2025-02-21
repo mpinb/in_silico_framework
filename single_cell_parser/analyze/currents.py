@@ -1,5 +1,5 @@
 '''
-
+:skip-doc:
 '''
 
 import numpy as np

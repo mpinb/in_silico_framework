@@ -54,8 +54,11 @@ def _evoked_activity(
     Private function. This is the core method used in :py:meth:`run_new_simulations`.
     
     Args:
-        cellParamName (str): Path of the cell parameter file.
-        evokedUpParamName (str): Path of the network parameter file.
+        cellParamName (str): 
+            Path to a :ref:`cell_parameters_format` file, 
+            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+        evokedUpParamName (str): 
+            Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): Prefix of the output directory. The final directory name will be ":paramref:`dirPrefix`/results/%Y%M%D-%H%M_UID".
         seed (int): Random seed for the simulation.
         nSweps (int): Number of simulations to run with these parameters.

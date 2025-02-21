@@ -1,7 +1,9 @@
 """Set up logging for ISF."""
 import logging, sys, warnings, os
+from contextlib import contextmanager
 
-class StreamToLogger(object):
+@contextmanager
+def stream_to_logger(logger, level=None):
     """
     Wrapper for a stream object that redirects writes to a logger instance.
     Can be used as a context manager::
@@ -11,27 +13,28 @@ class StreamToLogger(object):
     
     Used for reading in :ref:`hoc_file_format` files that provide output due to various print statements in the `.hoc` file, or capturing NEURON output.
     """
+    class StreamToLogger:
+        def __init__(self, logger, level):
+            self.logger = logger
+            self.level = level
+            self.linebuf = ''
 
-    def __init__(self, logger, level):
-        self.logger = logger
-        self.level = level
-        self.linebuf = ''
+        def write(self, buf):
+            for line in buf.rstrip().splitlines():
+                self.logger.log(self.level, line.rstrip())
 
-    def write(self, buf):
-        for line in buf.rstrip().splitlines():
-            self.logger.log(self.level, line.rstrip())
+        def flush(self):
+            pass
 
-    def __enter__(self):
-        self._original_stdout = sys.stdout
-        sys.stdout = self
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        sys.stdout = self._original_stdout
-        self.flush()
-
-    def flush(self):
-        pass
+    stdout = sys.stdout
+    stderr = sys.stderr
+    sys.stdout = StreamToLogger(logger, level if level else logging.INFO)
+    sys.stderr = StreamToLogger(logger, logging.ERROR)
+    try:
+        yield
+    finally:
+        sys.stdout = stdout
+        sys.stderr = stderr
 
 
 class LastPartFilter(logging.Filter):
@@ -51,6 +54,7 @@ class LastPartFilter(logging.Filter):
         record.name_last = record.name.split(split_char)[-1]
         return True
     
+
 class RecordFilter(logging.Filter):
     """
     Logging add-on that filters out logs if they contain a certain string.
@@ -127,7 +131,7 @@ warnings.showwarning = lambda message, category, filename, lineno, f=None, line=
 logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
 logger_stream_handler.name = "ISF_logger_stream_handler"
 logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s"))
-root_logger.handlers = [logger_stream_handler]
+root_logger.addHandler(logger_stream_handler)
 
 # Filters
 logger_stream_handler.addFilter(LastPartFilter())

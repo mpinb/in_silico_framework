@@ -17,10 +17,7 @@ This way:
 1. Future support (or deprecation) for file formats can be easily implemented by creating a new ``IO.LoaderDumper`` submodule.
 2. Backwards compatibility to old data or old formats is guaranteed, as the previous database system is still available.
 
-Available data base systems:
-
-1. :py:mod:`~data_base.isf_data_base`
-2. :py:mod:`~data_base.model_data_base` (deprecated)
+The current default database system is :py:mod:`~data_base.isf_data_base`.
 """
 import compatibility
 compatibility.init_data_base_compatibility()

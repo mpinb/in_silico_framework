@@ -43,18 +43,15 @@ class Evaluator:
             
     The workflow in the Evaluator can be split in two parts:
     
-        1. Apply an `evaluate_fun` on each matching key in :paramref:`voltage_traces_dict` 
-            These extract features from the voltage trace. 
-            These functions are registered under :py:attr:`Evaluator_Setup.evaluate_funs`.
-        2. Perform arbitrary operations on the resulting dictionary 
-            (e.g. merge it from a nested to a flat dictionary or compute more complex features
-            by combineing features from different stimuli)
+    1. Apply an ``evaluate_fun`` on each matching key in :paramref:`voltage_traces_dict` 
+        These extract features from the voltage trace. 
+        These functions are registered under :py:attr:`Evaluator_Setup.evaluate_funs`.
+    2. Perform arbitrary operations on the resulting dictionary 
+        (e.g. merge it from a nested to a flat dictionary or compute more complex features
+        by combineing features from different stimuli)
             
     An example set up can be found in :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Evaluator`.
     
-    Attributes:
-        setup (:py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`): 
-            A Evaluator_Setup object that keeps track of the evaluation functions.
     
     Example: 
         
@@ -76,6 +73,10 @@ class Evaluator:
 
     Note: 
         Combining features to reduce the number of objectives should be done with the :py:class:`~biophysics_fitting.combiner.Combiner` object.        
+    
+    Attributes:
+        setup (:py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`): 
+            A Evaluator_Setup object that keeps track of the evaluation functions.
     '''
     def __init__(self):
         #self.objectives = objectives

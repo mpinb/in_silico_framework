@@ -1,5 +1,6 @@
 .. _tutorials:
 
+
 Tutorials
 =========
 
@@ -7,7 +8,7 @@ Tutorials
    :caption: Introduction
    :glob:
 
-   Introduction_to_ISF.ipynb
+   tutorials/Introduction_to_ISF.ipynb
 
 
 .. nbgallery::

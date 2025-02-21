@@ -1,3 +1,12 @@
+"""Scale a morphology between its current shape and a target morphology.
+
+Attention:
+    This is still in development
+
+:skip-doc:
+"""
+
+
 import numpy as np
 import pandas as pd
 import time

@@ -44,9 +44,6 @@ class Combiner:
     but also a list of names of the features that go into that combination. 
     Each list of features is then combined by calling combinefun with that list.
     
-    Attributes:
-        setup (:py:class:`~biophysics_fitting.combiner.Combiner_Setup`): A Combiner_Setup object that keeps track of the feature combinations.
-    
     Example:
     
         >>> features = {'feature1': 1, 'feature2': 2, 'feature3': 3, 'feature4': 4}
@@ -57,6 +54,9 @@ class Combiner:
         >>> combined_features = c.combine(features)
         >>> combined_features
         {'combination1': 2, 'combination2': 4}
+    
+    Attributes:
+        setup (:py:class:`~biophysics_fitting.combiner.Combiner_Setup`): A Combiner_Setup object that keeps track of the feature combinations.
     '''
 
     def __init__(self):
@@ -64,9 +64,6 @@ class Combiner:
 
     def combine(self, features):
         '''Combines features that are computed by an Evaluator class.
-        
-        Details, how to set up the Combiner are in the docstring of
-        the Combiner class.
         
         Args:
             features (list): A list of features to be combined.

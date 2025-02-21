@@ -94,8 +94,9 @@ def get_expectancy_value_of_activated_prox_synapses_by_EI(
     return EXC, INH
 
 
-def get_poisson_realizations_from_expectancy_values(expectancy_values,
-                                                    nSweeps=1000):
+def get_poisson_realizations_from_expectancy_values(
+    expectancy_values,
+    nSweeps=1000):
     dummy = np.vstack(
         [np.random.poisson(lam=x, size=nSweeps) for x in expectancy_values])
     return np.transpose(dummy)

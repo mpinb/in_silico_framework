@@ -10,4 +10,50 @@ span.summarylabel {
     filter: opacity(40%);
 }
 
-.absolute-paragraph h2 {font-size: medium}
+.class-header {
+    background-color: var(--color-background-secondary);
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    color: var(--color-foreground-primary);
+    font-size: var(--font-size--small);
+    line-height: inherit;
+    border-radius: .25rem;
+    margin: 0;
+}
+
+.py.data.class-header {
+    padding: 0;
+}
+
+/* 
+Overload the class attribute css to allow visually distinguishable "class-header" elements
+that are simultaneously class attributes and show up in the navigation bar, without
+having to inherit the markup of actual class attributes.
+*/
+
+.py.data.class-header .sig-name.descname{
+    box-sizing: border-box;
+    text-transform: uppercase;
+    color: var(--color-foreground-primary);
+    font-size: var(--font-size--normal);
+    font-family: var(--font-stack);
+    padding: 0 0 0 5px;
+}
+
+/* python class attribute signatures that are children of "class-header" */
+.py.data.class-header .sig.sig-object.py{
+    font-size: var(--font-size--normal);
+    font-weight: normal;
+    border-radius: .25rem;
+    height: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.artificially-indented {
+    margin-left: 3em;
+}

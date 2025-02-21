@@ -1,5 +1,12 @@
-'''
+'''Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
+.. deprecated::
+    This module additionally provides readers for :ref:`syn_activation_format` and :ref:`spike_times_format` files.
+    However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
+    They can still be explicitly read using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
+    See also:
+        :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 '''
 
 import numpy as np
@@ -21,6 +28,14 @@ class _Edge(object):
     If :math:`d-\lambda` segmentation is used, these edges are **not** comparable to NEURON segments.
     
     The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
+        
+    See also:
+        :py:meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
+        access to NEURON segments.
+        
+    See also:
+        :py:class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
+        that is used in the :py:mod:`singlecell_input_mapper` module.
 
     Attributes:
         label (str): label and ID of the segment (e.g. "Dendrite_1_0_0").
@@ -30,17 +45,16 @@ class _Edge(object):
         parentID (int): label and ID of the parent segment.
         parentConnect (float): How far along the parent section the connection is (i.e. the `x`-coordinate).
         valid (bool): Flag indicating if the segment is valid.
-        
-    See also:
-        :py:meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
-        access to NEURON segments.
-        
-    See also:
-        :py:class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
-        that is used in the :py:mod:`singlecell_input_mapper` module.
     '''
 
     def is_valid(self):
+        """Check if this edge is valid.
+        
+        Edges are only valid if they have a :paramref:`label`, a :paramref:`hocLabel`, and at least one :paramref:`edgePts`.
+        
+        Returns:
+            bool: True if the edge is valid, False otherwise.
+        """
         if not self.label:
             self.valid = False
             return False

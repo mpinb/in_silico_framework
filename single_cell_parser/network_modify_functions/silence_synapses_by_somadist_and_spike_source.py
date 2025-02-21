@@ -1,3 +1,9 @@
+"""Modify network activity by silencing synapses based on soma distance and spike source.
+
+These functions can be used in e.g. :py:mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
+silencing synapses based on their postsynaptic location, or synapse type (i.e. spike source).
+"""
+
 import single_cell_parser.analyze as sca
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)

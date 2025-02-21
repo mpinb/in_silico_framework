@@ -87,8 +87,6 @@ def compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0):
 
 
 def compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None):
-    if window_start_times is None:
-        window_start_times = [-50.0, 15.0]
     """Compute the standard deviation of the voltage during different time windows.
         
     Args:
@@ -101,6 +99,8 @@ def compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None)
     Returns:
         tuple: A tuple containing the time windows and the average standard deviations.
     """
+    if window_start_times is None:
+        window_start_times = [-50.0, 15.0]
     avgStds = []
     for t in window_start_times:
         begin = int((tStim + t) / dt + 0.5)
@@ -430,21 +430,16 @@ class RecordingSiteManager(object):
 class RecordingSite(object):
     '''Dataclass for a recording site.
 
+    See also:
+        The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
+        class for setting up recording sites and parsing their voltage traces.
+    
     Attributes:
         secID (int): Section ID of the recording site.
         segID (int): Segment ID of the recording site.
         label (str): Identifier label.
         vRecordings (list): List of recorded voltage vectors.
             Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
-
-    Args:
-        secID (int): Section ID of the recording site.
-        segID (int): Segment ID of the recording site.
-        label (str): Identifier label.
-
-    See also:
-        The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
-        class for setting up recording sites and parsing their voltage traces.
     '''
     secID = None
     segID = None
@@ -452,6 +447,12 @@ class RecordingSite(object):
     vRecordings = None
 
     def __init__(self, secID, segID, label):
+        """    
+        Args:
+            secID (int): Section ID of the recording site.
+            segID (int): Segment ID of the recording site.
+            label (str): Identifier label.
+        """
         self.secID = secID
         self.segID = segID
         self.label = label

@@ -4,21 +4,25 @@
 <img src=./docs/_static/_images/isf-logo-black.png#gh-light-mode-only width='350'>
 
 # The In-Silico-Framework (ISF)
-[![In-Silico-Framework (Python 2.7) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py27-local.yml)
-[![In-Silico-Framework (Python 3.8) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml)
-[![In-Silico-Framework (Python 3.9) install and test](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py39-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py39-local.yml)
+[![Linux](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-linux.yml)
+[![OSX](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-local.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
 [![codecov](https://codecov.io/gh/mpinb/in_silico_framework/graph/badge.svg?token=V4P4QMFM12)](https://codecov.io/gh/mpinb/in_silico_framework)
 
 https://github.com/mpinb/in_silico_framework/assets/38312921/adcc0ea7-154e-4713-b81f-4ce2fc4b33c4
 
 </div>
 
-ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
+ISF is a multi-scale simulation environment for generating, simulating and analyzing neuron-network models during *in-vivo* conditions.
 
-## Installation
+## Documentation
 
-Detailed instructions on how to install the repo are given in the [installer directory](./installer/).
+Web-hosted documentation is coming soon. For now, you can self-host using
 
-## Usage
+```bash
+pixi r build_docs
+pixi r host-docs
+```
 
-The [getting started directory](./getting_started) provides an introduction on how to use ISF
+## Tutorials
+
+Please visit the tutorials (either in `getting_started/tutorials` or on the documentation page) for a walkthrough of ISF's most important workflows.

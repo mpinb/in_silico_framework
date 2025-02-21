@@ -7,21 +7,28 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import sys, os, fnmatch, ast
+import toml
+
 project_root = os.path.join(os.path.abspath(os.pardir))
 sys.path.insert(0, project_root)
 from docs.parse_notebooks import copy_and_parse_notebooks_to_docs
 from functools import lru_cache
 from config.isf_logging import logger as isf_logger
-# isf_logger.setLevel("INFO")
+from docs.sphinx_hooks import count_documented_members, log_documented_members, find_first_match, DOCS_STATS
+from docs.skip_doc import skip_member, MODULES_TO_SKIP
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
-
+# Parse pyproject.toml to get the release version
+pyproject_path = os.path.join(project_root, 'pyproject.toml')
+with open(pyproject_path, 'r') as f:
+    pyproject_data = toml.load(f)
+    release = pyproject_data['project']['version']
+    version = release
 project = 'In-Silico Framework (ISF)'
-copyright = '2023, Arco Bast, Amir Najafgholi, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Bjorge Meulemeester, Omar Valerio'
-author = 'Arco Bast, Amir Najafgholi, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Bjorge Meulemeester, Omar Valerio'
-release = '0.2.0-alpha'
-version = '0.2.0-alpha'
-## Make your modules available in sys.path
+copyright = '2023, Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio'
+author = 'Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio'
+
+
 
 # copy over tutorials and convert links to python files to sphinx documentation directives
 copy_and_parse_notebooks_to_docs(
@@ -38,9 +45,9 @@ init_data_base_compatibility()  # make db importable before running autosummary 
 
 extensions = [
     'sphinx.ext.autodoc',      # Core library for html generation from docstrings
-    # 'sphinx.ext.autosummary',  # Create neat summary tables
-    'autoapi.extension',      # improvement over autodoc, but still requires autodoc
-    'sphinx.ext.napoleon',     # Support for NumPy and Google style docstrings
+    # 'sphinx.ext.autosummary',  # Create neat summary tables --> this has now been overridden in templates/macros.rst for more control.
+    'autoapi.extension',        # improvement over autodoc, but still requires autodoc
+    'sphinx.ext.napoleon',     # Preprocess docstrings to convert Google-style docstrings to reST
     'sphinx_paramlinks',       # Parameter links
     'sphinx.ext.todo',         # To-do notes
     'sphinx.ext.viewcode',
@@ -59,191 +66,14 @@ rst_prolog = """
 .. role:: summarylabel
 """
 
-"""Configure modules, functions, methods, classes and attributes so that they are not documented by Sphinx."""
-
-project_root = os.path.join(os.path.abspath(os.pardir))
-
-def skip_member(app, what, name, obj, skip, options):
-    """Skip members if they have the :skip-doc: tag in their docstring.
-    
-    Note that the object attributes tested for in this function are only compatible
-    with the sphinx-autoapi extension. If you are using a different extension, you
-    may need to modify this function to use e.g. obj.__doc__ instead of obj.docstring.
-    
-    Args:
-        obj (autoapidoc._objects.Python*): 
-            autoapi object containing the following attrs:
-            
-            - name: the name of the object
-            - id: the object's id i.e. the fully qualified name (FQN)
-            - short_name: the object's short name (dropping all prefixes before a .)
-            - display: whether the object should be displayed (this is the attribute that is modified by this function)
-            - docstring: the docstring of the object
-            - type: the type of the object ('method', 'function', 'class', 'data', 'module', 'package')
-            - children: the children of the object
-            - summary: the summary of the object (usually the first sentence/line of the docstring)
-            - url_root: the root of the object's rst filepath relative to this directory (default: /autoapi, which points to the autoapi directory within this directory)
-            - inherited: whether the object is inherited
-            - type: the type of the object
-            - imported: whether the object is imported
-            - include_path: full path to the object's .rst stub.
-            - is_private_member: whether the object is a private member
-            - is_special_member: whether the object is a special member
-            - is_top_level_object: whether the object is a top level object
-            - is_undoc_member: whether the object is an undocumented member
-            - options (list): the options of the object (e.g. 'members', 'undoc-members', 'private-members', 'show-module-summary')
-            - member_order: ??
-            - obj: the object itself in dict format
-                - obj.type: the type of the object ('method', 'function', 'class', 'data', 'module', 'package')
-                - obj.name: the name of the object
-                - obj.qual_name: non-fully qualified name of the object (e.g. class.method)
-                - obj.full_name: FQN
-                - obj.args: ??
-                - obj.doc: the docstring of the object
-                - obj.from_line_no: the line number where the object is defined
-                - obj.to_line_no: the line number where the object ends (the full object, not only the docstring)
-                - obj.return_annotation (bool): whether the object has a return annotation
-    """
-    # Debug print to check what is being processed
-    # print(f"Processing {what}: {name}")
-    
-    # skip special members, except __get__ and __set__
-    short_name = name.rsplit('.', 1)[-1]
-    if short_name.startswith('__') and short_name.endswith('__') and name not in ['__get__', '__set__']:
-        skip = True
-    
-    # Skip if it has the :skip-doc: tag
-    if not obj.is_undoc_member and ':skip-doc:' in obj.docstring:
-        # print(f"Docstring for {name}: {obj.__doc__}")
-        logger.info(f"Skipping {what}: {name} due to :skip-doc: tag")
-        skip = True
-    
-    # Skip inherited members
-    if obj.inherited:
-        skip = True
-    
-    if name in modules_to_skip:
-        logger.info(f"Skipping {what}: {name} due to :skip-doc: tag in module {obj.name}")
-        skip = True
-    
-    return skip
-    
-def get_module_docstring(module_path):
-    """Get the docstring of a module without importing it."""
-    try:
-        # Find the module's file path
-        if not os.path.isfile(module_path):
-            raise FileNotFoundError(f"Module file {module_path} not found")
-
-        # Read the module's source code
-        with open(module_path, 'r', encoding='utf-8') as f:
-            source_code = f.read()
-
-        # Parse the source code
-        parsed_ast = ast.parse(source_code)
-
-        # Extract the docstring
-        docstring = ast.get_docstring(parsed_ast)
-        return docstring
-
-    except Exception as e:
-        print(f"Error getting docstring for module {module_path}: {e}")
-        return None
-
-modules_to_skip = [
-    '**tests**', 
-    '**barrel_cortex**', 
-    '**installer**', 
-    '**__pycache__**',
-    "**getting_started**",
-    "**compatibility**",
-    "**.pixi**",
-    "**dendrite_thickness**",
-    "**mechanisms**",
-    "**config**",
-    "**docs**",
-    "**.ipynb_checkpoints**"
-]
-
-@lru_cache(maxsize=None)
-def find_modules_with_tag(source_dir, tag=":skip-doc:"):
-    """Recursively find all modules with a specific tag in their docstring.
-    
-    Returns:
-        List of module path glob patterns with the tag.
-    """
-    modules_with_tag = []
-
-    for root, dirs, files in os.walk(source_dir):
-        for d in dirs.copy():
-            if any([
-                fnmatch.fnmatch(
-                    os.path.join(root, d), skip) 
-                for skip in modules_to_skip
-            ]):
-                dirs.remove(d)
-        for f in files:
-            if f.endswith(".py"):
-                module_path = os.path.join(root, f)
-                docstring = get_module_docstring(module_path)
-                if docstring and tag in docstring:
-                    if "__init__" in module_path:
-                        modules_with_tag.append(module_path.rstrip('__init__.py') + "**")
-                    else:
-                        modules_with_tag.append(module_path + "**")
-    return modules_with_tag
+# -- Settings for omitting members from documentation ----------------------
+autoapi_ignore = MODULES_TO_SKIP
+logger.info("ignoring modules: {}".format(MODULES_TO_SKIP))
 
 
-
-modules_to_skip = modules_to_skip + find_modules_with_tag(project_root)
-# skipping documentation for certain members
-logger.info("ignoring modules: {}".format(modules_to_skip))
-autoapi_ignore = modules_to_skip
-
-N_MEMBERS = 0
-N_DOC_MEMBERS = 0
-LAST_PARENT_TO_SKIP = ""
-
-def count_documented_members(app, what, name, obj, skip, options):
-    """Count the number of documented members.
-    
-    Args:
-        obj (autoapidoc._objects.Python*): 
-            autoapi object containing the attrs as described in :py:meth:`skip_member`
-    """
-    
-    global N_MEMBERS
-    global N_DOC_MEMBERS
-    global LAST_PARENT_TO_SKIP
-    # skip special members, except __get__ and __set__
-    short_name = name.rsplit('.', 1)[-1]
-    if short_name.startswith('__') and short_name.endswith('__') and name not in ['__get__', '__set__']:
-        return
-    # Do not count if it has the :skip-doc: tag
-    elif not obj.is_undoc_member and ':skip-doc:' in obj.docstring:
-        LAST_PARENT_TO_SKIP = obj.id
-        logger.debug("    Ignoring empty docstrings for children of {}".format(obj.id))
-        return
-    elif obj.inherited:
-        return
-    elif name in modules_to_skip:
-        return
-    elif LAST_PARENT_TO_SKIP in obj.id:
-        return
-    
-    elif obj.type in ['method', 'function', 'class', 'module']:
-        N_MEMBERS += 1
-        if obj.docstring:
-            N_DOC_MEMBERS += 1
-        else:
-            logger.warning(f"Undocumented member: {what}: {name}")
-    return
-    
-def log_documented_members(app, env):
-    """Log the number of documented members."""
-    global N_MEMBERS
-    global N_DOC_MEMBERS
-    logger.info(f"Documented members: {N_DOC_MEMBERS}/{N_MEMBERS}")
+def autoapi_prepare_jinja_env(jinja_env):
+    """Add custom filters to the Jinja environment."""
+    jinja_env.filters["find_first_match"] = find_first_match
 
 
 def setup(app):
@@ -253,6 +83,8 @@ def setup(app):
     app.connect('env-updated', log_documented_members)
 
 toc_object_entries_show_parents = 'hide'  # short toc entries
+
+# -- autoapi settings -----------------------------------------------------
 autoapi_dirs = [project_root]
 autoapi_type = "python"
 autoapi_keep_files = True
@@ -266,19 +98,21 @@ autoapi_options = [
     "show-module-summary",
 ]
 autoapi_own_page_level = 'method'
+
+# -- bibtex files ----------------------------------------------------------
 bibtex_bibfiles = ['bibliography.bib']
 
-# Napoleon settings
+# -- Napoleon settings -----------------------------------------------------
 napoleon_google_docstring = True
-napoleon_include_init_with_doc = False
+napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
 napoleon_include_special_with_doc = True
 napoleon_use_admonition_for_examples = False
 napoleon_use_admonition_for_notes = False
 napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
-napoleon_use_param = True
-napoleon_use_rtype = True
+napoleon_use_param = False  # use a single ":parameters:" section instead of ":param arg1: description" for each argument
+napoleon_use_rtype = True  # if True, separate return type from description. otherwise, it's included in the description inline
 napoleon_preprocess_types = False  # otherwise custom argument types will not work
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
@@ -343,7 +177,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "furo"  # sphinx_immaterial is nice, but requires more config
+html_theme = "furo" 
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the

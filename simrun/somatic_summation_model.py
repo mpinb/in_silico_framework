@@ -1,6 +1,18 @@
+"""
+.. deprecated:: 0.1.0
+    This module is deprecated and will be removed in a future version.
+    Functionality has been taken over by the :mod:`simrun.modular_reduced_model_inference` module.
+
+:skip-doc:
+"""
+
 import numpy as np
 from data_base.utils import convertible_to_int
 from collections import defaultdict
+from config.isf_logging import logger as isf_logger
+logger = isf_logger.getChild(__name__)
+
+logger.warning('Deprecation warning: This module is deprecated and will be removed in a future release.')
 
 
 def roll_rows_independently(A, r):

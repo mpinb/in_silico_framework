@@ -1,6 +1,4 @@
 import pytest, distributed
-import socket
-import six
 
 @pytest.fixture(scope="session")
 def client(pytestconfig):
@@ -9,7 +7,7 @@ def client(pytestconfig):
     # If running tests locally, make sure you have a dask scheduler and dask worker running on the ports you want
     c = distributed.Client(
         '{}:{}'.format(
-            socket.gethostbyname("localhost"), 
+            "localhost", 
             pytestconfig.getoption("--dask_server_port"))
         )
     return c

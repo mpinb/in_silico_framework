@@ -1,3 +1,5 @@
+"""Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
+
 import numpy as np
 import pandas as pd
 from data_base.utils import silence_stdout
@@ -87,7 +89,16 @@ def evaluation_function_incremental_helper(
     return True, evaluation
 
 def convert_all_check_columns_bool_to_float(df): 
-    '''returns modified df'''
+    '''Convert all boolean values to float in a pandas dataframe.
+    
+    Only does this for columns that have ``"check"`` in the column name.
+    
+    Args:
+        df (pd.DataFrame): DataFrame
+        
+    Returns:
+        pd.DataFrame: DataFrame with boolean values converted to float.
+    '''
     check_columns = [col for col in df.columns if 'check' in col]
     for col in check_columns: 
         #otherwise the 'True' strings cannot be converted to float and cannot map to bool bc NaN 

@@ -11,28 +11,31 @@ If the path points to a database that has been created with an older database sy
 # - :py:mod:`~data_base.isf_data_base`: The new data base system (default).
 # - :py:mod:`~data_base.model_data_base`: The old data base system.
 
-from .model_data_base.model_data_base import ModelDataBase
-from .isf_data_base.isf_data_base import ISFDataBase
-DEFAULT_DATA_BASE = ISFDataBase
-import os
-from .data_base_register import _get_db_register
 import logging
+import os
+
+from .data_base_register import _get_db_register
+from .isf_data_base.isf_data_base import ISFDataBase
+from .model_data_base.model_data_base import ModelDataBase
+
 logger = logging.getLogger('ISF').getChild(__name__)
+DEFAULT_DATA_BASE = ISFDataBase
 
 class DataBase(object):
     """Wrapper class that initializes the correct data base class
     
     As this is a wrapper class, it has no class attributes itself. Its reponsibility is to return the correct DataBase object.
 
-    Args:
-        basedir (str): The directory where the database is located.
-        readonly (bool): If True, the database is read-only.
-        nocreate (bool): If True, the database is not created if it does not exist.
-
     Returns:
         :py:class:`~data_base.isf_datata_base.ISFDataBase` | :py:class:`~data_base.model_data_base.ModelDataBase`: The correct database object.
     """
     def __new__(cls, basedir, readonly=False, nocreate=False):
+        """
+        Args:
+            basedir (str): The directory where the database is located.
+            readonly (bool): If True, the database is read-only.
+            nocreate (bool): If True, the database is not created if it does not exist.
+        """
         if is_model_data_base(basedir):
             logger.warning('Reading a legacy-format ModelDataBase. nocreate is set to {}'.format(nocreate))
             logger.warning('Overwriting mdb.set and mdb.get to be compatible with ISF syntax...')

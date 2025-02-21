@@ -56,7 +56,7 @@ def create_functional_network(cellParamName, nwParamName):
     
     Args:
         cellParamName (str): Parameter file of postsynaptithe c neuron
-        nwParamName (str): :ref:`network_parameter_format` file.
+        nwParamName (str): :ref:`network_parameters_format` file.
     '''
     preParam = build_parameters(cellParamName)
     neuronParam = preParam.neuron

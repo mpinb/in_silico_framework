@@ -28,10 +28,21 @@ def check(obj):
 class Loader(parent_classes.Loader):
     """Loader for ``npz`` numpy arrays"""
     def get(self, savedir):
+        """Read in an object in ``.npz`` format.
+        
+        Args:
+            savedir (str): Directory where the ``.npz`` object is saved.
+        """
         return np.load(os.path.join(savedir, 'np.npz'))['arr_0']
 
 
 def dump(obj, savedir):
+    """Write an object to a ``.npz`` file.
+    
+    Args:
+        obj (object): Object to be saved.
+        savedir (str): Directory where the object is saved.
+    """
     np.savez_compressed(os.path.join(savedir, 'np.npz'), arr_0=obj)
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:
         json.dump({'Loader': __name__}, f)

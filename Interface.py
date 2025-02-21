@@ -220,15 +220,8 @@ from biophysics_fitting import hay_complete_default_setup as bfit_hay_complete_d
 from biophysics_fitting import L5tt_parameter_setup as bfit_L5tt_parameter_setup
 from biophysics_fitting.parameters import param_to_kwargs as bfit_param_to_kwargs
 from biophysics_fitting.optimizer import start_run as bfit_start_run
-try:
-    import visualize.linked_views
-    from visualize.linked_views.server import LinkedViewsServer
-    from visualize.linked_views import defaults as LinkedViewsDefaults
-except ImportError:
-    logger.warning('Could not load linked views')
 
 from functools import partial
-
 
 from data_base._module_versions import version_cached
 
@@ -242,7 +235,7 @@ def print_module_versions():
     logger.info("Loaded modules with __version__ attribute are:\n" + ', '.join(module_versions))
 
 
-def get_client(client_ip=None, client_port=38786, timeout=30):
+def get_client(ip=None, client_port=38786, timeout=120):
     """
     Gets the distributed.client object if dask has been setup
     
@@ -256,18 +249,19 @@ def get_client(client_ip=None, client_port=38786, timeout=30):
     from socket import gethostbyname, gethostname
     from dask.distributed import Client
     client_port = str(client_port)
-    if client_ip is not None:
-        ip = client_ip
+    if ip is not None:
+        ip = ip
     elif "IP_MASTER" in os.environ.keys():
         if "IP_MASTER_INFINIBAND" in os.environ.keys():
             ip = os.environ['IP_MASTER_INFINIBAND']
         else:
             ip = os.environ["IP_MASTER"]
     else:
+        logger.warning("No IP passed for dask scheduler. Assuming local scheduler. Inferring IP of current machine...")
         hostname = gethostname()
         ip = gethostbyname(
             hostname
-        )  # fetches the ip of the current host, usually "somnalogin01" or "somalogin02"
+        )  # fetches the ip of the current host
     logger.info("Getting client with ip {}".format(ip))
     c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got client {}".format(c))

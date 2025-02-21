@@ -1,3 +1,28 @@
+"""Visulize all transmembrane ionic currents of a cell simulation.
+
+
+This module provides a class to visualize the transmembrane ionic currents of a cell simulation.
+It assumes that these have been recorded during the simulation. If this was not the case,
+consider re-simulating the cell and recording the currents, e.g. with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+
+Example:
+
+    >>> def record_rangevars(cell, params):
+    ...     for rv in record_vars:
+    ...         cell.record_range_var(rv)
+    ...     return cell
+    >>> simulator.setup.cell_modify_funs.append(('BAC.record_range_vars', record_rangevars))
+    >>> cell, _ = simulator.get_simulated_cell(biophysical_parameters, stim="BAC")
+    >>> ca = CurrentAnalysis(cell)
+    >>> ca.plot_areas()
+    
+.. figure:: ../../../_static/_images/current_analysis.png
+
+    Example of a current analysis plot for a :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+
+"""
+
+
 from biophysics_fitting import get_main_bifurcation_section
 from . import np
 from . import plt
@@ -22,7 +47,7 @@ class CurrentAnalysis:
     
     Attributes:
         mode (str): 'cell' or 'dict'.
-        cell (dict): The cell object, or a dictionary containing equivalent simulation data.
+        cell (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent simulation data.
         t (list): The time vector.
         sec (Section): The section of the cell.
         secID (int): The index of the section.
@@ -86,6 +111,14 @@ class CurrentAnalysis:
         self._compute_current_arrays()
 
     def _get_current_by_rv(self, rv):
+        """Get the section current by the range variable name.
+        
+        Args:
+            rv (str): The range variable name.
+              
+        Returns:
+            np.array: The ionic current of the section.
+        """
         try:
             if self.mode == 'dict':
                 return self.cell[rv]
@@ -97,6 +130,20 @@ class CurrentAnalysis:
             return np.array([float('nan')] * len(self.t))
 
     def _compute_current_arrays(self):
+        """Compute the ionic currents of a section.
+
+        Updates the following attributes:
+        
+        - depolarizing_currents (np.array): The depolarizing currents.
+        - hyperpolarizing_currents (np.array): The hyperpolarizing currents.
+        - depolarizing_currents_sum (np.array): The sum of the depolarizing currents.
+        - hyperpolarizing_currents_sum (np.array): The sum of the hyperpolarizing currents.
+        - net_current (np.array): The net current.
+        - depolarizing_currents_normalized (np.array): The normalized depolarizing currents.
+        - hyperpolarizing_currents_normalized (np.array): The normalized hyperpolarizing currents.
+        - voltage_trace (np.array): The voltage trace.
+        
+        """
         out_depolarizing = []
         out_hyperpolarizing = []
         for rv in self.rangeVars:

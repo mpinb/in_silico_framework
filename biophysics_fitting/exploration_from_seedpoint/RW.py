@@ -1,3 +1,12 @@
+"""Perofrm a random walk through parameter space starting from a seed point.
+
+This module provides the :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
+which implements a random walk procedure through parameter space.
+Every random parameter iteration provides new biophsyical parameters, 
+which are evaluated by running a set of stimulus protocols with early stopping criteria.
+"""
+
+
 from functools import partial
 import os
 import pandas as pd
@@ -22,11 +31,17 @@ class RW:
         df_seeds (pd.DataFrame): individual seed points as rows and the parameters as columns
         param_ranges (pd.DataFrame): parameters as rows and has a ``min_`` and ``max_`` column denoting range of values this parameter may take
         params_to_explore (list): list of parameters that should be explored. If None, all parameters are explored.
-        evaluation_function (callable): takes one argument (a new parameter vector), returns inside, evaluation:
+        evaluation_function (Callable): 
+            Function use to evaluate a vector of biphysical parameters.
+            Must take one argument (a parameter vector) and return a tuple of  ``(inside, evaluation)``:
+        
             - inside: boolean that indicates if the parameter vector is within experimental constraits
                 (i.e. results in acceptable physiology) or not.
             - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain
                 ephys features.
+
+            This function is usually :py:meth:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
+        
         MAIN_DIRECTORY (str): output directory in which results are stored.
         min_step_size (float): minimum step size for the random walk
         max_step_size (float): maximum step size for the random walk
@@ -55,15 +70,16 @@ class RW:
             df_seeds (pd.DataFrame): individual seed points as rows and the parameters as columns
             param_ranges (pd.DataFrame): parameters as rows and has a ``min_`` and ``max_`` column denoting range of values this parameter may take
             params_to_explore (list): list of parameters that should be explored. If None, all parameters are explored.
-            evaluation_function (callable): takes one argument (a new parameter vector), returns inside, evaluation:
-                    - inside: boolean that indicates if the parameter vector is within experimental constraits
-                        (i.e. results in acceptable physiology) or not. 
-                    - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain
-                        ephys features.
+            evaluation_function (Callable): 
+                takes one argument (a new parameter vector) and returns:
+
+                - inside: boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not. 
+                - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain ephys features.
+
             checkpoint_every (int): save the results every n iterations
             check_point_by_time (float): time interval in minutes for checkpointing for using time-based checkpointing. If both
                 checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
-            concat_every_n_save (int): number of checkpoints after which the pickle files are concatenated and cleaned
+            concat_every_n_save (int): number of checkpoints after which the intermediate ``.pickle` files are concatenated to a single ``.parquet`` dataframe.
             mode (str): Random walk mode. Options: (None, 'expand'). default: None
                 'expand': only propose new points that move further away from seedpoint
             aim_params (dict): this param will make the exploration algorithm propose only new points such that a set of 
@@ -95,6 +111,14 @@ class RW:
         self.stop_n_inside_with_aim_params = stop_n_inside_with_aim_params
     
     def _normalize_aim_params(self,aim_params):
+        """Normalize aim parameters to be between 0 and 1.
+        
+        Args:
+            aim_params (dict): aim parameters
+            
+        Returns:
+            pd.Series: normalized aim parameters
+        """
         normalized_params = pd.Series(aim_params)
         for key in normalized_params.keys():
             min_ = self.param_ranges['min'][key]
@@ -131,6 +155,15 @@ class RW:
         return p*(max_-min_)+min_
         
     def _concatenate_and_clean(self,seed_folder, particle_id, iteration  = None): 
+        """Concatenate the intermediate ``.pickle`` results and save as one parquet file. 
+        
+        Removes the pickle files.
+        
+        Args:
+            seed_folder (str): folder where the seedpoint is located
+            particle_id (int): id of the particle
+            iteration (int): iteration number. Default: None
+        """
         # check that we are doing this for the latest iteration
         outdir = os.path.join(seed_folder, str(particle_id))
         iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)
@@ -150,7 +183,14 @@ class RW:
         shutil.move(df_parquet_path + '.saving', df_parquet_path) 
         self._clean_the_pickles(outdir, pickle_files, iteration) 
 
-    def _clean_the_pickles(self,outdir, files, iteration): 
+    def _clean_the_pickles(self,outdir, files, iteration):
+        """Remove the pickle files that correspond to the intermediate results of a iteration.
+        
+        Args:
+            outdir (str): directory where the pickle files are located
+            files (list): list of files in the directory
+            iteration (int): iteration number
+        """
         paths = [os.path.join(outdir, file) for file in files]
         logger.info(f'Cleaning the pickle files in {outdir}')
         for path in paths: 
@@ -158,7 +198,18 @@ class RW:
             if not path.endswith(f'{iteration}.pickle'): # do not remove the last rngn
                 os.remove(path + '.rngn')
 
-    def _load_pickle_or_parquet(self,outdir, iteration, mode: ['pickle_load', 'parquet_load']):
+    def _load_pickle_or_parquet(self,outdir, iteration, mode = 'parquet_load'):
+        """Load the results of a iteration from a pickle or parquet file.
+        
+        Args:
+            outdir (str): directory where the pickle or parquet files are located
+            iteration (int): iteration number
+            mode (str): mode to load the results. Default: 'parquet_load'
+            
+        Returns:
+            tuple: dataframe and path to the file
+        """
+        assert mode in ['pickle_load', 'parquet_load'], 'mode must be "pickle_load" or "parquet_load"'
         if mode == 'pickle_load': 
             df_path = os.path.join(outdir, '{}.pickle'.format(iteration))
             df = pd.read_pickle(df_path)   

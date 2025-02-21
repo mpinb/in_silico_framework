@@ -1,6 +1,7 @@
-import Interface as I
 from . import decorators
 from . import context
+import os
+import single_cell_parser as scp
 import simrun.synaptic_strength_fitting, pytest
 try:
     from barrel_cortex import get_EPSP_measurement
@@ -34,15 +35,15 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
         This test is specific to the barrel cortex and assumes that the barrel cortex model is downloaded
     """
     PSPs = simrun.synaptic_strength_fitting.PSPs
-    confile = I.os.path.join(
+    confile = os.path.join(
         context.data_dir,
         '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2_synapses_20150202-1834_4335.con'
     )
-    neuron_param = I.os.path.join(context.data_dir, 'neuron_model.param')
-    neuron_param = I.scp.build_parameters(neuron_param)
-    neuron_param.neuron['cell_modify_functions'] = I.scp.NTParameterSet(
+    neuron_param = os.path.join(context.data_dir, 'neuron_model.param')
+    neuron_param = scp.build_parameters(neuron_param)
+    neuron_param.neuron['cell_modify_functions'] = scp.NTParameterSet(
         {'scale_apical_morph_86': {}})
-    filename = I.os.path.join(
+    filename = os.path.join(
         context.data_dir,
         "86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2.hoc")
     neuron_param.neuron['filename'] = filename

@@ -6,6 +6,8 @@
    
 See also:
     :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet` for saving pandas dataframes to parquet files.
+
+:skip-doc:
 """
 
 
