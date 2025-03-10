@@ -10,7 +10,7 @@ If this is not the case, please consult ``installer/download_bc_model`` and extr
 
 Attention:
     This file is specific to the barrel cortex model data. If you want to use it for other data,
-    you need to adapt the paths to the data accordingly.
+    you need to adapt the paths to the data accordingly. This runfile can serve as a template.
 
 Inputs:
 
@@ -56,91 +56,119 @@ Outputs:
   synapses of each presynaptic type and column
 - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :py:mod:`simrun`.
 """
+
 from __future__ import absolute_import
-import sys
-import os.path
+
 import glob
+import logging
+import os.path
+import sys
 import time
-import numpy as np
-from . import singlecell_input_mapper as sim
+
 import getting_started
 
+from . import singlecell_input_mapper as sim
 
-__author__ = 'Robert Egger'
+logger = logging.getLogger("ISF").getChild(__name__)
 
-#===============================================================================
+__author__ = "Robert Egger"
+
+# ===============================================================================
 # This is the only line that needs to be adapted to your system.
 # Change the string 'prefix' to the folder where all anatomical data is
 # located on your system (assuming you just unpack the data and do not change
 # the directory structure)
-#===============================================================================
-prefix = os.path.join(os.path.dirname(getting_started.parent), 'barrel_cortex')
+# ===============================================================================
+prefix = os.path.join(os.path.dirname(getting_started.parent), "barrel_cortex")
 
-#===============================================================================
+# ===============================================================================
 # If you change the directory structure of the anatomical input data,
 # you need to update the following lines accordingly.
 # Otherwise, you can leave everything from here on as is.
-#===============================================================================
-numberOfCellsSpreadsheetName = os.path.join(prefix, 'nrCells.csv')
-connectionsSpreadsheetName = os.path.join(prefix, 'ConnectionsV8.csv')
-ExPSTDensityName = os.path.join(prefix, 'PST/EXNormalizationPSTs.am')
-InhPSTDensityName = os.path.join(prefix, 'PST/INHNormalizationPSTs.am')
-boutonDensityFolderName = 'singleaxon_boutons_ascii'
+# ===============================================================================
+numberOfCellsSpreadsheetName = os.path.join(prefix, "nrCells.csv")
+connectionsSpreadsheetName = os.path.join(prefix, "ConnectionsV8.csv")
+ExPSTDensityName = os.path.join(prefix, "PST/EXNormalizationPSTs.am")
+InhPSTDensityName = os.path.join(prefix, "PST/INHNormalizationPSTs.am")
+boutonDensityFolderName = os.path.join(prefix, "singleaxon_boutons_ascii")
 
-exTypes = ('VPM', 'L2', 'L34', 'L4py', 'L4sp', 'L4ss', 'L5st', 'L5tt', 'L6cc',
-           'L6ccinv', 'L6ct')
-inhTypes = ('SymLocal1','SymLocal2','SymLocal3','SymLocal4','SymLocal5','SymLocal6',\
-            'L1','L23Trans','L45Sym','L45Peak','L56Trans')
+exTypes = (
+    "VPM",
+    "L2",
+    "L34",
+    "L4py",
+    "L4sp",
+    "L4ss",
+    "L5st",
+    "L5tt",
+    "L6cc",
+    "L6ccinv",
+    "L6ct",
+)
+inhTypes = (
+    "SymLocal1",
+    "SymLocal2",
+    "SymLocal3",
+    "SymLocal4",
+    "SymLocal5",
+    "SymLocal6",
+    "L1",
+    "L23Trans",
+    "L45Sym",
+    "L45Peak",
+    "L56Trans",
+)
 
 
 def map_singlecell_inputs(
-    cellName, 
-    cellTypeName, 
+    cellName,
+    cellTypeName,
     nrOfSamples=50,
     numberOfCellsSpreadsheetName=numberOfCellsSpreadsheetName,
     connectionsSpreadsheetName=connectionsSpreadsheetName,
     ExPSTDensityName=ExPSTDensityName,
     InhPSTDensityName=InhPSTDensityName,
-    boutonDensityFolderName=boutonDensityFolderName):
+    boutonDensityFolderName=boutonDensityFolderName,
+):
     """Map inputs to a single cell morphology.
-    
+
     These inputs need to be organized per anatomical structure. Anatomical structures
     can be arbitrary spatial regions of the brain tissue, or anatomically well-defined
     areas, e.g. barrels in a barrel cortex.
-    
+
     Steps:
-    
+
     1. Loads in the data:
-    
+
         - Cell morphology
         - Number of cells per cell type
         - Connection probabilities between cell types
         - PST densities for normalization of innervation calculations
-        
+
     2. Loads in the bouton densities:
-    
+
         - For each anatomical area
         - For each presynaptic cell type
-        
+
     3. Creates a scalar field (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
        for each bouton density.
     4. Creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
-    5. Creates a network embedding for the cell using 
+    5. Creates a network embedding for the cell using
        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
-    
+
     The naming of each anatomical area needs to be consistent between:
-    
+
     - The number of cells per cell type spreadsheet
     - The bouton folders containing axon traces
-    
+
     Args:
-        cellName (str): 
+        cellName (str):
             path to a :ref:`hoc_file_format` file containing the morphology of the cell.
-        cellTypeName (str): 
+        cellTypeName (str):
             name of the postsynaptic cell type.
-        nrOfSamples (int): 
+        nrOfSamples (int):
             number of samples to use for the network embedding.
-        numberOfCellsSpreadsheetName (str): 
+        numberOfCellsSpreadsheetName (str):
             Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
             Values indicate how much of each celltype was found in each neuropil structure.
         connectionsSpreadsheetName (str):
@@ -149,38 +177,44 @@ def map_singlecell_inputs(
             Path to the PST density file for excitatory synapses.
         InhPSTDensityName (str):
             Path to the PST density file for inhibitory synapses.
-        boutonDensityFolderName: 
+        boutonDensityFolderName:
             A directory containing the following subdirectory structure:
             anatomical_area/presynaptic_cell_type/\*.am
-            
+
     Returns:
         None. Writes the results to disk.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
-        errstr = 'Unknown cell type %s!'
+        errstr = "Unknown cell type %s!"
         raise TypeError(errstr)
 
     startTime = time.time()
 
-    print('Loading cell morphology...')
+    logger.info("Loading cell morphology")
     parser = sim.CellParser(cellName)
     parser.spatialgraph_to_cell()
     singleCell = parser.get_cell()  # This is a sim.Cell, not scp.cell
 
     # --------------------- Read in data ---------------------
-    print('Loading spreadsheets and bouton/PST densities...')
-    print('    Loading numberOfCells spreadsheet {:s}'.format(
-        numberOfCellsSpreadsheetName))
+    logger.info("Loading spreadsheets and bouton/PST densities...")
+    logger.info(
+        "    Loading numberOfCells spreadsheet {:s}".format(
+            numberOfCellsSpreadsheetName
+        )
+    )
     numberOfCellsSpreadsheet = sim.read_celltype_numbers_spreadsheet(
-        numberOfCellsSpreadsheetName)
-    print('    Loading connections spreadsheet {:s}'.format(
-        connectionsSpreadsheetName))
+        numberOfCellsSpreadsheetName
+    )
+    logger.info(
+        "    Loading connections spreadsheet {:s}".format(connectionsSpreadsheetName)
+    )
     connectionsSpreadsheet = sim.read_connections_spreadsheet(
-        connectionsSpreadsheetName)
-    print('    Loading PST density {:s}'.format(ExPSTDensityName))
+        connectionsSpreadsheetName
+    )
+    logger.info("    Loading PST density {:s}".format(ExPSTDensityName))
     ExPSTDensity = sim.read_scalar_field(ExPSTDensityName)
     ExPSTDensity.resize_mesh()
-    print('    Loading PST density {:s}'.format(InhPSTDensityName))
+    logger.info("    Loading PST density {:s}".format(InhPSTDensityName))
     InhPSTDensity = sim.read_scalar_field(InhPSTDensityName)
     InhPSTDensity.resize_mesh()
     boutonDensities = {}
@@ -190,50 +224,51 @@ def map_singlecell_inputs(
     # --------------------- Load bouton densities ---------------------
     for anatomical_area in anatomical_areas:
         # boutonDensities is a dictionary with anatomical areas as keys
-        # and as value another dictionary mapping the presyn celltype to 
+        # and as value another dictionary mapping the presyn celltype to
         # scalar fields of boutons
         boutonDensities[anatomical_area] = {}
         for preCellType in preCellTypes:
             boutonDensities[anatomical_area][preCellType] = []
             boutonDensityFolder = os.path.join(
-                prefix, 
-                boutonDensityFolderName,
-                anatomical_area, 
-                preCellType)
-            boutonDensityNames = glob.glob(
-                os.path.join(boutonDensityFolder, '*'))
-            print('    Loading {:d} bouton densities from {:s}'.format(
-                len(boutonDensityNames), boutonDensityFolder))
+                boutonDensityFolderName, anatomical_area, preCellType
+            )
+            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folders of the barrel cortex model. Did you download and extract the barrel cortex model?"
+            boutonDensityNames = glob.glob(os.path.join(boutonDensityFolder, "*"))
+            logger.debug(
+                "    Loading {:d} bouton densities from {:s}".format(
+                    len(boutonDensityNames), boutonDensityFolder
+                )
+            )
             for densityName in boutonDensityNames:
                 boutonDensity = sim.read_scalar_field(densityName)
                 boutonDensity.resize_mesh()
                 boutonDensities[anatomical_area][preCellType].append(boutonDensity)
 
     inputMapper = sim.NetworkMapper(
-        singleCell, 
-        cellTypeName, 
-        numberOfCellsSpreadsheet, 
+        singleCell,
+        cellTypeName,
+        numberOfCellsSpreadsheet,
         connectionsSpreadsheet,
-        ExPSTDensity, 
-        InhPSTDensity)
+        ExPSTDensity,
+        InhPSTDensity,
+    )
     inputMapper.exCellTypes = exTypes
     inputMapper.inhCellTypes = inhTypes
     inputMapper.create_network_embedding(
-        cellName,
-        boutonDensities,
-        nrOfSamples=nrOfSamples)
+        cellName, boutonDensities, nrOfSamples=nrOfSamples
+    )
 
     endTime = time.time()
     duration = (endTime - startTime) / 60.0
-    print('Runtime: {:.1f} minutes'.format(duration))
+    logger.info("Runtime: {:.1f} minutes".format(duration))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) == 3:
         fname = sys.argv[1]
         cellTypeName = sys.argv[2]
         map_singlecell_inputs(fname, cellTypeName)
     else:
         print(
-            'Usage: python map_singlecell_inputs.py [morphology filename] [postsynaptic cell type name]'
+            "Usage: python map_singlecell_inputs.py [morphology filename] [postsynaptic cell type name]"
         )

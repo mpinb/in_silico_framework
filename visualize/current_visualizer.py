@@ -228,6 +228,7 @@ class CurrentAnalysis:
             x, y = t[select], np.array(self.voltage_trace)[select]
             ax2.plot(x, y, c=CALCIUM_ORANGE)
         ax2.set_ylabel("Membrane potential (mV)")
+        return fig
 
     def plot_lines(self, ax=None, legend=True):
         """Plot the ion currents and the net current of a cell simulation.

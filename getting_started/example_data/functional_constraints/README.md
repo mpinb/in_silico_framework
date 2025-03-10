@@ -1,0 +1,1 @@
+This data has been published in: De Kock, C. P. J., Bruno, R. M., Spors, H., & Sakmann, B. (2007). Layer- and cell-type-specific suprathreshold stimulus representation in rat primary somatosensory cortex. The Journal of Physiology, 581(1), 139–154. https://doi.org/10.1113/jphysiol.2006.124321

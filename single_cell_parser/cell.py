@@ -31,7 +31,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 class Cell(object):
     '''Cell object providing API to the NEURON hoc interface.
     
-    This class contains info on the cell morphology structure, and simulation data of single-cell simulations.
+    This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
     The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
     Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
     

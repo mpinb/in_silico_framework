@@ -1,35 +1,21 @@
-.. In-Silico Framework (ISF) documentation master file, created by
-   sphinx-quickstart on Wed Mar 22 13:27:10 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 The In-Silico Framework (ISF)
-=====================================================
+=============================
 
 ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
-
-.. the interactive overview
-
-.. raw:: html
-   :file: ./overview.html
-
-
-Contents
---------
+It allows for targeted and mechanistically detailed *in-silico* manipulations across multiple scales, from the molecular to the network level, and provides a toolkit for the integration of experimental data and models.
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
-   api_reference
-   tutorials
-   installation
-   file_formats
+   rst_assets/api_reference
+   rst_assets/tutorials
+   rst_assets/installation
+   rst_assets/file_formats
    bibliography
 
 
-Indices and tables
-------------------
+.. include:: rst_assets/isf_overview.rst
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+
+.. include:: rst_assets/cards.rst

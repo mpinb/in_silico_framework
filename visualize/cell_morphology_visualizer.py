@@ -266,9 +266,10 @@ class CMVDataParser:
                 # print(sec_n)
                 x, y, z = self.soma_center
                 # soma size
-                mn, mx = np.min(cell.soma.pts, axis=0), np.max(cell.soma.pts, axis=0)
-                d_range = [mx_ - mn_ for mx_, mn_ in zip(mx, mn)]
-                d = max(d_range)
+                # mn, mx = np.min(cell.soma.pts, axis=0), np.max(cell.soma.pts, axis=0)
+                # d_range = [mx_ - mn_ for mx_, mn_ in zip(mx, mn)]
+                # d = max(d_range)
+                d = np.mean([sec.diamList[i] for i in range(len(sec.pts))])
                 points.append([x, y, z, d, sec_n, 0])
             elif sec.label in ['AIS', 'Myelin']:
                 continue

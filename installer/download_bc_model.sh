@@ -7,11 +7,11 @@ SCRIPT_DIR="$( cd -- "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 ; pwd -P )
 ISF_DIR=$(dirname $SCRIPT_DIR) 
 echo "ISF DIR: $ISF_DIR"
 
-echo -e "\nDownloading the axon tracings raw data as zipfiles. These can be unzipped with 7z or 7za.\n"
-wget https://dataverse.harvard.edu/api/access/datafile/10256305 -O $ISF_DIR/barrel_cortex.7z.001
-wget https://dataverse.harvard.edu/api/access/datafile/10256306 -O $ISF_DIR/barrel_cortex.7z.002 -P
-wget https://dataverse.harvard.edu/api/access/datafile/10256307 -O $ISF_DIR/barrel_cortex.7z.003 -P
+echo -e "Downloading the axon tracings raw data as zipfiles. These can be unzipped with 7z or 7za.\n"
 
+wget https://dataverse.harvard.edu/api/access/datafile/10256305 -O $ISF_DIR/barrel_cortex/barrel_cortex.7z.001
+wget https://dataverse.harvard.edu/api/access/datafile/10256306 -O $ISF_DIR/barrel_cortex/barrel_cortex.7z.002
+wget https://dataverse.harvard.edu/api/access/datafile/10256307 -O $ISF_DIR/barrel_cortex/barrel_cortex.7z.003
 
 echo -e <<EOF
 Downloading ISF-compatible barrel_cortex data:
@@ -34,3 +34,7 @@ wget https://dataverse.harvard.edu/api/access/datafile/10247203?format=original 
 mkdir $ISF_DIR/barrel_cortex/PST
 wget  https://dataverse.harvard.edu/api/access/datafile/10247200 -O $ISF_DIR/barrel_cortex/PST/EXNormalizationPSTs.am -P $ISF_DIR
 wget  https://dataverse.harvard.edu/api/access/datafile/10247201 -O $ISF_DIR/barrel_cortex/PST/INHNormalizationsPSTs.am -P $ISF_DIR
+
+7za x $ISF_DIR/barrel_cortex/barrel_cortex.7z.001 -o$ISF_DIR -y
+
+echo -e "Downloaded and extracted the barrel cortex model data to $ISF_DIR/barrel_cortex/.\n"

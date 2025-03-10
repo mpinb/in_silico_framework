@@ -18,7 +18,11 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
-    '''Set up a morphology from a NEURON hoc object
+    '''Configure a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+    
+    This class is used to read a hoc file and set up a :py:class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :py:class:`~single_cell_parser.cell.Cell` object's 
+    membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
     See also:
         This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.

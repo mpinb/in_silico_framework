@@ -7,6 +7,8 @@ Consult the module :py:mod:`~singlecell_input_mapper.map_singlecell_inputs` for 
 import numpy as np
 from .scalar_field import ScalarField
 import sys
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
@@ -476,10 +478,10 @@ class SynapseDensity(object):
         Returns:
             None. Fills the scalar fields in place.
         '''
-        print('---------------------------')
+        logger.info('---------------------------')
         totalLength = 0.0
         for structure in list(lengthDensity.keys()):
-            print(
+            logger.info(
                 'Computing 3D length/surface area density of structures with label {:s}'
                 .format(structure))
             density1 = lengthDensity[structure]
@@ -530,7 +532,7 @@ class SynapseDensity(object):
             for n in range(len(clipSegments)):
                 segment = clipSegments[n]
                 segmentRadius = clipSegmentsRadius[n]
-                print('{:d} of {:d} done...\r'.format(
+                logger.debug('{:d} of {:d} done...\r'.format(
                     count, nrOfSegments))  #, end=' ')
                 sys.stdout.flush()
                 count += 1
@@ -599,8 +601,8 @@ class SynapseDensity(object):
                             density1.mesh[ijk] += length
                             density2.mesh[ijk] += area
                             totalLength += length
-        print('Total clipped length = {:f}'.format(totalLength))
-        print('---------------------------')
+        logger.info('Total clipped length = {:f}'.format(totalLength))
+        logger.info('---------------------------')
 
     def _clip_u(self, pq, u1u2):
         '''Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.

@@ -257,7 +257,7 @@ def get_client(ip=None, client_port=38786, timeout=120):
         else:
             ip = os.environ["IP_MASTER"]
     else:
-        logger.warning("No IP passed for dask scheduler. Assuming local scheduler. Inferring IP of current machine...")
+        logger.info("No IP passed for dask scheduler. Assuming local scheduler. Inferring IP of current machine...")
         hostname = gethostname()
         ip = gethostbyname(
             hostname
