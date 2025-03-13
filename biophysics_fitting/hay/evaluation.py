@@ -1273,3 +1273,6 @@ def get_evaluate_StepThree(**kwargs):
 
     return fun
 
+hay_evaluate_StepOne = get_evaluate_StepOne
+hay_evaluate_StepTwo = get_evaluate_StepTwo
+hay_evaluate_StepThree = get_evaluate_StepThree
