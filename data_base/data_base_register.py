@@ -178,7 +178,7 @@ def assimilate_remote_register(remote_path, local_path=None):
     whole_registry = {k: dbr_remote.registry[k] for k in dbr_remote.registry.keys()}
     logger.info("Filtering remote registry for non-existent paths...")
     whole_registry_filtered = {
-        k: v for k, v in whole_registry.items() if os.path.exists(v)
+        k: v for k, v in tqdm(whole_registry.items(), desc="Filtering remote registry...") if os.path.exists(v)
     }
     for k in tqdm(whole_registry_filtered.keys(), desc="Assimilating remote register"):
         dbr_local.registry[k] = whole_registry_filtered[k]

@@ -9,9 +9,16 @@ Interface gives API access to all subpackages and submodules in ISF:
 - :py:mod:`spike_analysis`
 - :py:mod:`visualize`
 
-The recommended use is to import it in a jupyter notebook in the following manner::
+The recommended way to use ISF is to import ``Interface`` in a jupyter notebook in the following manner::
 
     import Interface as I
+    
+You then have access to all important builtins and top-level pipelines via Interface::
+
+    I.get_client()              # returns a dask client
+    I.get_db_by_unique_id()     # returns a DataBase object
+    I.simrun_run_new_simulations()  # runs new simulations
+    ...
     
 Take a look at the :ref:`tutorials` for examples on how to use the Interface API.
 '''
@@ -278,7 +285,5 @@ print("\n\n")
 print_module_versions()
 
 from config.cell_types import EXCITATORY, INHIBITORY
-
-import compatibility
 
 logger.setLevel(logging.ATTENTION)

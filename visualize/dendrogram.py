@@ -585,7 +585,7 @@ class _DendrogramSynapseStatistics:
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
         """
-        self._compute_synapse_hist(xlim[1], binsize=binsize)
+        self._compute_synapse_hist(binsize=binsize)
         if self.colormap_synapses is None:
             # Plot all
             self.colormap_synapses = {"total": "r"}

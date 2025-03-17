@@ -187,7 +187,7 @@ class ISFDataBase:
          - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
        * - ``time``
          - Time at which this results was saved.
-       * - ``conda_list``
+       * - ``module_list``
          - A full list of all modules installed in the conda environment that was used to produce this result.
        * - ``module_versions``
          - The versions of all modules in the environment that was used to produce this result. See also: :py:mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
@@ -480,7 +480,7 @@ class ISFDataBase:
 
         out = {'dumper': dumper_string,
                'time': tuple(datetime.datetime.utcnow().timetuple()), 
-               'conda_list': VC.get_conda_list(),
+               'module_list': VC.get_module_list(),
                'module_versions': make_all_str(VC.get_module_versions()),
                'history': VC.get_history(),
                'hostname': VC.get_hostname(),

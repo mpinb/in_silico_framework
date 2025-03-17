@@ -43,7 +43,8 @@ class CellParser(object):
         Args:
             hocFilename (str): Path to :ref:`hoc_file_format` file.
         '''
-        assert hocFilename, 'No hoc file specified'
+        if not hocFilename:
+            warnings.warn('No hoc file specified')
         self.hoc_path = hocFilename
         #         self.hoc_fname = self.hoc_path.split('/')[-1]
 

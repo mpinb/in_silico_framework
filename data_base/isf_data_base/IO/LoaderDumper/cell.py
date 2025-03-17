@@ -3,7 +3,6 @@
 
 import os
 import cloudpickle
-import compatibility
 import numpy as np
 from . import parent_classes
 from single_cell_parser.cell import Cell
@@ -49,4 +48,3 @@ def dump(obj, savedir):
 
     with open(os.path.join(savedir, 'Loader.pickle'), 'wb') as file_:
         cloudpickle.dump(Loader(), file_)
-    #compatibility.cloudpickle_fun(Loader(), file_)

@@ -46,6 +46,11 @@ Example:
             "error": null
         }
 """
-import compatibility
-compatibility.init_data_base_compatibility()
+# Register the database IO and initializers submodules/-packages
+import sys
+from data_base.isf_data_base import IO, db_initializers
+sys.modules['data_base.IO'] = IO
+sys.modules['data_base.db_initializers'] = db_initializers
+
+# Bring wrapper class to the front
 from .data_base import DataBase

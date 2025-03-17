@@ -36,7 +36,7 @@ class DataBase(object):
             readonly (bool): If True, the database is read-only.
             nocreate (bool): If True, the database is not created if it does not exist.
         """
-        if is_model_data_base(basedir):
+        if _is_legacy_model_data_base(basedir):
             logger.warning('Reading a legacy-format ModelDataBase. nocreate is set to {}'.format(nocreate))
             logger.warning('Overwriting mdb.set and mdb.get to be compatible with ISF syntax...')
             
@@ -66,7 +66,7 @@ def get_db_by_unique_id(unique_id):
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
 
-def is_model_data_base(path):
+def _is_legacy_model_data_base(path):
     """
     Checks if a given path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
     

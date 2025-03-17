@@ -11,7 +11,8 @@ These parameters and templates are used to set up the biophysical constraints fo
 import six
 from sumatra.parameters import NTParameterSet
 import pandas as pd
-
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 def hay_param_to_scp_neuron_param(p):
     """Convert a Hay parameter name to a SCP neuron parameter name.
@@ -429,7 +430,8 @@ def set_ephys(cell_param, params=None):
         assert hasattr(cell_param, scp_param), "The provided cell parameters have no field called: {}".format(scp_param)
         cell_param[scp_param] = float(v)
     unset_params = check_unset_range_mechanisms(cell_param)
-    assert len(unset_params) == 0, "The following parameters are not set after set_ephys: {}".format(unset_params)
+    if len(unset_params) != 0:
+        logger.info("The following parameters are not set after set_ephys: {}".format(unset_params))
     return cell_param
 
 
@@ -513,14 +515,24 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
         This method is specific for a L5PT.
         For more information about the hot zone, refer to :cite:t:`Guest_Bast_Narayanan_Oberlaender`
     """
+    hotzone_params = ['ApicalDendrite.Ca_HVA.begin', 'ApicalDendrite.Ca_HVA.end', 
+                      'ApicalDendrite.Ca_LVAst.begin', 'ApicalDendrite.Ca_LVAst.end']
+
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['begin'] = min_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['end'] = max_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA']['begin'] = min_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA']['end'] = max_
+
     if outsidescale_sections is not None:
         assert isinstance(outsidescale_sections, list)
         cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst'][
             'outsidescale_sections'] = outsidescale_sections
         cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA'][
             'outsidescale_sections'] = outsidescale_sections
+        hotzone_params.append('ApicalDendrite.Ca_LVAst.outsidescale_sections')
+        hotzone_params.append('ApicalDendrite.Ca_HVA.outsidescale_sections')
+        
+    unset_params = check_unset_range_mechanisms(cell_param)
+    assert all([False if param in unset_params else True for param in hotzone_params]), f"Not all in {hotzone_params} is set"
+    logger.info('Following hotzone params are set: {}'.format(hotzone_params))
     return cell_param

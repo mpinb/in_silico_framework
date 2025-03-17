@@ -69,27 +69,38 @@ See also:
     :py:meth:`~data_base.isf_data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
 '''
 
-import os, glob, shutil, fnmatch, hashlib, six, dask, compatibility, scandir, warnings
+import fnmatch
+import glob
+import hashlib
+import logging
+import os
+import shutil
+import warnings
+
+import dask
+import dask.dataframe as dd
 import numpy as np
 import pandas as pd
-import dask.dataframe as dd
+import scandir
+import six
+
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
+from data_base.analyze.spike_detection import spike_detection
+from data_base.dbopen import create_db_path
+from data_base.exceptions import DataBaseException
 from data_base.isf_data_base import ISFDataBase
 from data_base.isf_data_base.IO.LoaderDumper import (
-    pandas_to_pickle,
-    to_cloudpickle, 
-    to_pickle, 
-    pandas_to_parquet, 
-    get_dumper_string_by_dumper_module, 
-    dask_to_parquet)
-from data_base.exceptions import DataBaseException
-from data_base.isf_data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format as read_sa
-from data_base.isf_data_base.IO.roberts_formats import read_pandas_cell_activation_from_roberts_format as read_ca
-from data_base.analyze.spike_detection import spike_detection
+    dask_to_parquet, get_dumper_string_by_dumper_module, pandas_to_parquet,
+    pandas_to_pickle, to_cloudpickle, to_pickle)
+from data_base.isf_data_base.IO.roberts_formats import _max_commas
+from data_base.isf_data_base.IO.roberts_formats import \
+    read_pandas_cell_activation_from_roberts_format as read_ca
+from data_base.isf_data_base.IO.roberts_formats import \
+    read_pandas_synapse_activation_from_roberts_format as read_sa
 # from data_base.analyze.burst_detection import burst_detection
-from data_base.utils import mkdtemp, chunkIt, unique, silence_stdout
-import logging
+from data_base.utils import chunkIt, mkdtemp, silence_stdout, unique
+
 logger = logging.getLogger("ISF").getChild(__name__)
 
 DEFAULT_DUMPER = to_cloudpickle
@@ -485,7 +496,6 @@ def create_metadata(db):
 #    a  format that can be read by pandas, and attach sim_trial_index to it
 #-----------------------------------------------------------------------------------------
 
-from data_base.IO.roberts_formats import _max_commas
 
 def get_max_commas(paths):
     """Get the maximum amount of delimiters across many files.
@@ -715,7 +725,7 @@ def generate_param_file_hashes(simresult_path, sim_trial_index):
 #####################################
 # step seven point one: replace paths in param files with relative dbpaths
 #####################################
-from data_base.dbopen import create_db_path
+
 
 def create_db_path_print(path, replace_dict={}):
     """:skip-doc:"""
@@ -1296,7 +1306,8 @@ def _get_dumper(value):
     '''
     if six.PY2:
         # For the legacy py2.7 version, it still uses the msgpack dumper
-        from data_base.isf_data_base.IO.LoaderDumper import pandas_to_msgpack, dask_to_msgpack
+        from data_base.isf_data_base.IO.LoaderDumper import (dask_to_msgpack,
+                                                             pandas_to_msgpack)
         return pandas_to_msgpack if isinstance(value, pd.DataFrame) else dask_to_msgpack
     elif six.PY3:
         return OPTIMIZED_PANDAS_DUMPER if isinstance(value, pd.DataFrame) else OPTIMIZED_DASK_DUMPER
@@ -1413,7 +1424,9 @@ def load_initialized_cell_and_evokedNW_from_db(
     
     """
     import dask
-    from data_base.isf_data_base.IO.roberts_formats import write_pandas_synapse_activation_to_roberts_format
+
+    from data_base.isf_data_base.IO.roberts_formats import \
+        write_pandas_synapse_activation_to_roberts_format
     neup, netp = load_param_files_from_db(db, sti)
     sa = db['synapse_activation']
     sa = sa.loc[sti].compute()

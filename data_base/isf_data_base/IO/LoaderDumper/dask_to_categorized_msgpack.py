@@ -193,7 +193,7 @@ def my_dask_writer(
         path,
         optimize_graph=False,
         categorize=True,
-        client=None):  #get = compatibility.multiprocessing_scheduler,
+        client=None):
     ''' Very simple method to store a dask dataframe to a bunch of files.
     There was a lot of frustration with the respective dask method, which has some weired hard-to-reproduce issues, e.g. it sometimes 
     takes all the ram (512GB!) or takes a very long time to "optimize" / merge the graph.
@@ -210,7 +210,7 @@ def my_dask_writer(
         dask_options = dask.context._globals
         dask.config.set(callbacks=set())  #disable progress bars etc.
         for number in numbers:
-            pdf = ddf.get_partition(number).compute(scheduler="synchronous")  #get = compatibility.synchronous_scheduler
+            pdf = ddf.get_partition(number).compute(scheduler="synchronous")
             fun(pdf, path, number, ndigits)
         dask.context._globals = dask_options
 

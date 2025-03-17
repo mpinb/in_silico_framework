@@ -9,8 +9,8 @@ import pandas as pd
 import dask.dataframe as dd
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
-from model_data_base import ModelDataBase
-from model_data_base.IO.LoaderDumper import (
+from ..model_data_base import ModelDataBase
+from ..IO.LoaderDumper import (
     dask_to_categorized_msgpack, 
     pandas_to_pickle, 
     to_cloudpickle, 
@@ -21,11 +21,12 @@ from model_data_base.IO.LoaderDumper import (
     get_dumper_string_by_dumper_module, 
     dask_to_parquet
     )
-from data_base.model_data_base.IO.LoaderDumper import(
+from ..IO.LoaderDumper import(
     pandas_to_parquet as db_pandas_to_parquet,
     pandas_to_msgpack as db_pandas_to_msgpack,
 )
-from model_data_base.model_data_base import get_progress_bar_function, MdbException
+from ..model_data_base import get_progress_bar_function, MdbException
+from ..IO.roberts_formats import _max_commas
 from ..IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format as read_sa
 from ..IO.roberts_formats import read_pandas_cell_activation_from_roberts_format as read_ca
 from data_base.analyze.spike_detection import spike_detection
@@ -254,7 +255,6 @@ def create_metadata(mdb):
 # Step five: rewrite synapse and cell activation data to
 # a  format, that can be read by pandas and attach sim_trail_index to it
 ###########################################
-from model_data_base.IO.roberts_formats import _max_commas
 
 
 def get_max_commas(paths):

@@ -1,11 +1,18 @@
 """:skip-doc:"""
 
 
-import sys
+import sys, shutil
 import os
 
 from ._version import get_versions
 
+def _get_env_manager():
+    if shutil.which('pixi') is not None:
+        return 'pixi'
+    elif shutil.which('conda') is not None:
+        return 'conda'
+    else:
+        raise ValueError('No environment manager found. Are conda or pixi in your $PATH?')
 
 class Versions_cached:
 
@@ -13,12 +20,12 @@ class Versions_cached:
         if 'ISF_MINIMIZE_IO' in os.environ:
             print('ISF_MINIMIZE_IO mode')
             self._git_version = 'ISF_MINIMIZE_IO_mode'
-            self._conda_list = 'ISF_MINIMIZE_IO_mode'
+            self._module_list = 'ISF_MINIMIZE_IO_mode'
             self._module_version = {}
             self._hostname = 'ISF_MINIMIZE_IO_mode'
         else:
             self._git_version = None
-            self._conda_list = None
+            self._module_list = None
             self._module_version = None
             self._hostname = None
     
@@ -34,9 +41,9 @@ class Versions_cached:
         return out
 
     @staticmethod
-    def _get_conda_list():
+    def _get_module_list():
         '''returns conda list, empty string if conda list is not defined'''
-        return os.popen("conda list").read()
+        return os.popen("{} list".format(_get_env_manager())).read()
 
     @staticmethod
     def _get_git_version():
@@ -47,10 +54,10 @@ class Versions_cached:
             self._module_version = self._get_module_versions()
         return self._module_version
 
-    def get_conda_list(self):
-        if self._conda_list is None:
-            self._conda_list = self._get_conda_list()
-        return self._conda_list
+    def get_module_list(self):
+        if self._module_list is None:
+            self._module_list = self._get_module_list()
+        return self._module_list
 
     def get_git_version(self):
         if self._git_version is None:

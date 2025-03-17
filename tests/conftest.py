@@ -10,6 +10,9 @@ import sys
 import dask
 import six
 
+# To test model-data_base in the way it existed before, we must register it as a top-level module
+import data_base.model_data_base
+sys.modules["model_data_base"] = data_base.model_data_base
 from config.isf_logging import logger as isf_logger
 
 # --- Import fixtures
@@ -36,7 +39,6 @@ elif (
     )
 
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
-
 
 def import_worker_requirements():
     import compatibility

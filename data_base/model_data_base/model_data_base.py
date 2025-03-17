@@ -545,7 +545,7 @@ class ModelDataBase(object):
         out = {'dumper': dumper,
                'time': tuple(datetime.datetime.utcnow().timetuple()), 
                'metadata_creation_time': 'together_with_new_key', 
-               'conda_list': VC.get_conda_list(),
+               'conda_list': VC.get_module_list(),
                'module_versions': VC.get_module_versions(),
                'history': VC.get_history(),
                'hostname': VC.get_hostname()}
@@ -655,7 +655,7 @@ class ModelDataBase(object):
         new_dumper = LoaderDumper.get_dumper_string_by_dumper_module(new_dumper)
         dumper_update = {'dumper': new_dumper,
                'time': tuple(datetime.datetime.utcnow().timetuple()),
-               'conda_list': VC.get_conda_list(),
+               'conda_list': VC.get_module_list(),
                'module_versions': VC.get_module_versions(),
                'history': VC.get_history(),
                'hostname': VC.get_hostname()}
