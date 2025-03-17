@@ -1,5 +1,8 @@
 [project]
-authors = [{name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"}]
+authors = [
+  {name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"},
+  {name = "Arco Bast", email = "basta@janelia.hhmi.org"}
+  ]
 
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
@@ -57,24 +60,24 @@ pyarrow = "==12.0.1"
 blosc = ">=1.11.1,<2" 
 scikit-learn = ">=0.23.2"
 seaborn = ">=0.12.2,<0.13"
-pandas-msgpack = { git = "https://github.com/abast/pandas-msgpack.git"}
 
 [tool.pixi.pypi-options]
 no-build-isolation = ["pandas-msgpack"]
 
-[tool.pixi.target.osx]
+[tool.pixi.environments]
+docs = ["docs"]
+default = ["run", 'release']
+ibs = ["run", "ibs"]
+
+[tool.pixi.feature.release]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
-[tool.pixi.target.linux]
+[tool.pixi.feature.ibs]
 dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
-pypi-dependencies = { tables = ">=3.8.0,<4" }
+pypi-dependencies = { tables = ">=3.8.0,<4", pandas-msgpack = { git = "https://github.com/abast/pandas-msgpack.git"}}
 
-[tool.pixi.environments]
-docs = ["docs"]
-default = ["isf"]
-
-[tool.pixi.feature.isf]
+[tool.pixi.feature.run]
 dependencies = { pyyaml = "==5.3.1", flask = "==1.1.4"}
 
 [tool.pixi.feature.docs.dependencies]
