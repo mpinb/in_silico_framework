@@ -8,7 +8,6 @@ description = "An In Silico Framework for the generation, simulation and analysi
 name = "ISF"
 requires-python = "==3.8.*"
 version = "0.4.0-beta"
-dependencies = ["torch>=2.4.1,<3"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -61,26 +60,28 @@ blosc = ">=1.11.1,<2"
 scikit-learn = ">=0.23.2"
 seaborn = ">=0.12.2,<0.13"
 
-[tool.pixi.pypi-options]
-no-build-isolation = ["pandas-msgpack"]
-
 [tool.pixi.environments]
 docs = ["docs"]
 default = ["run", 'release']
 ibs = ["run", "ibs"]
 
 [tool.pixi.feature.release]
+# Slightly updated NEURON, numpy and distributed for OSX support.
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.feature.ibs]
+platforms = ["linux-64"]
 dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
-pypi-dependencies = { tables = ">=3.8.0,<4", pandas-msgpack = { git = "https://github.com/abast/pandas-msgpack.git"}}
+pypi-dependencies = { tables = ">=3.8.0,<4", pandas-msgpack = { git = "https://github.com/abast/pandas-msgpack.git"}, torch = ">=2.4.1,<3"}
+pypi-options = { no-build-isolation = ["pandas-msgpack"]}
 
 [tool.pixi.feature.run]
+# Downgraded pyyaml and flask compared to docs
 dependencies = { pyyaml = "==5.3.1", flask = "==1.1.4"}
 
 [tool.pixi.feature.docs.dependencies]
+# Upgraded pyyaml and flask compared to run
 flask = ">=2"
 nbsphinx = ">=0.9.6,<0.10"
 jinja2 = ">=3.1.4,<4"
