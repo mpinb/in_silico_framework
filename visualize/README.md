@@ -19,13 +19,13 @@ t_end = 100
 cell = Interface.simrun_simtrial_to_cell_object(db,sim, tStop=t_end)
 
 # create a single cell visualizer object from the cell
-cv = visualize.CellMorphologyVisualizer(cell)
+cv = CellMorphologyVisualizer(cell)
 
-# Show a quick plot of the cell
-cv.show_cell_2d()
-        
+# Show a quick 3D plot of the cell
+cv.plot()
+
 # Show a plot with the membrane voltage
-cv.show_voltage_cell_2d()
+cv.plot(color = 'voltage', time_point = 50)
 
 # make an interactive visualisation (may take some time to load)
 cv.plot_interactive_3d(downsample_time=1)
