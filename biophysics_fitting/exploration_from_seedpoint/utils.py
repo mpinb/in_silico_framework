@@ -3,9 +3,6 @@
 import numpy as np
 import pandas as pd
 from data_base.utils import silence_stdout
-import logging
-logger = logging.getLogger("ISF").getChild(__name__)
-
 
 
 def get_vector_norm(v):
@@ -24,6 +21,7 @@ def evaluation_function_incremental_helper(
         e = None,
         cutoffs = None,
         stim_order = None, 
+        verbose = True,
         additional_evaluation_functions = None,
         objectives_by_stimulus = None):
     '''Evaluate a model shows one stimulus at a time.
@@ -66,7 +64,8 @@ def evaluation_function_incremental_helper(
     evaluation.update(p)
     voltage_traces = {}
     for stim in stim_order:
-        logger.info('evaluating stimulus %s', stim)
+        if verbose:
+            print('evaluating stimulus', stim)
         with silence_stdout:
             voltage_traces_ = s.run(p, stims = stim)
             voltage_traces.update(voltage_traces_)
@@ -80,9 +79,11 @@ def evaluation_function_incremental_helper(
         if stim in cutoffs:
             error = max(pd.Series(evaluation_)[objectives_by_stimulus[stim]])
             if error > cutoffs[stim]:
-                logger.info('stimulus', stim, 'has an error of', error, '- skipping further evaluation')
+                if verbose: 
+                    print('stimulus', stim, 'has an error of', error, '- skipping further evaluation')
                 return False, evaluation
-    logger.info('all stimuli successful!')  
+    if verbose:
+        print('all stimuli successful!')
     for aef in additional_evaluation_functions:
         evaluation.update(aef(voltage_traces))
     return True, evaluation
