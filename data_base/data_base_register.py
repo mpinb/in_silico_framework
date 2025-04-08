@@ -19,12 +19,13 @@ from __future__ import absolute_import
 import os, json
 from .utils import cache
 from .exceptions import DataBaseException
-from .settings import data_base_register_path
+# from .settings import data_base_register_path
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 LOCAL_DATA_BASE_REGISTER_NAME = '.data_base_register.db'
-LOCAL_DATA_BASE_REGISTER_LOCATION = os.path.dirname(__file__)
+# LOCAL_DATA_BASE_REGISTER_LOCATION = "/gpfs/soma_fs/home/meulemeester/IBS_DB" # os.path.dirname(__file__)
+DATA_BASE_REGISTER_PATH = "/gpfs/soma_fs/ibs/current_data"
 
 class DataBaseRegister():
     """Two column registry mapping data bases to their locations.
@@ -131,7 +132,7 @@ def _get_db_register():
     Returns:
         :py:class:`~data_base.data_base_register.DataBaseRegister`: The database register.
     """
-    dbr = DataBaseRegister(data_base_register_path)
+    dbr = DataBaseRegister(DATA_BASE_REGISTER_PATH)
     return dbr
 
 
@@ -143,7 +144,11 @@ def register_db(unique_id, db_basedir):
     Args:
         unique_id (str): The unique ID of the database.
         db_basedir (str): The location of the database.
+
+    .. deprecated:: 0.5.0
+       This function is deprecated. Databases do not need to be registered anymore.
     """
+    raise DataBaseException("This function is deprecated. Databases do not need to be registered anymore.")
     dbr = _get_db_register()
     dbr.add_db(unique_id, db_basedir)
 
@@ -175,8 +180,8 @@ def assimilate_remote_register(remote_path, local_path=None):
     dbr_remote = DataBaseRegister(remote_path)
     dbr_local = DataBaseRegister(local_path)
     # get all remote model ids
-    whole_registry = {k: dbr_remote.registry[k] for k in dbr_remote.registry.keys()}
-    logger.info("Filtering remote registry for non-existent paths...")
+    whole_registry = {k: dbr_remote.registry[k] for k in tqdm(dbr_remote.registry.keys(), desc="Fetching remote registry...")}
+    # logger.info("Filtering remote registry for non-existent paths...")
     whole_registry_filtered = {
         k: v for k, v in tqdm(whole_registry.items(), desc="Filtering remote registry...") if os.path.exists(v)
     }

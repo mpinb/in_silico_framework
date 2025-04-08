@@ -12,4 +12,4 @@ import os  ##
 #npartitions = 80
 
 # data_base_register
-data_base_register_path = os.path.dirname(__file__)
+# data_base_register_path = os.path.dirname(__file__)
