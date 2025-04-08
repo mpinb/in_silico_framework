@@ -207,7 +207,6 @@ class ISFDataBase:
         metadata (dict): A dictionary containing metadata for the database. See also: :py:class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
         parent_db (ISFDataBase): The parent database, if this is a sub-database. Default: None.
         _unique_id (str): A unique identifier for this database.
-        _registered_to_path (str): The path that this database has been registered to on the current filesystem.
         _registeredDumpers (list): A list of all registered dumpers. 
             Dumpers are data-type and file-type specific modules to write out data. See: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
         _suppress_errors (bool): If True, errors will be suppressed and raised as warnings instead. Use with caution.
@@ -216,7 +215,6 @@ class ISFDataBase:
             
             - ``_registeredDumpers``: A list of all registered dumpers.
             - ``_unique_id``: A unique identifier for this database.
-            - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
             
         _forbidden_keys (list): A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
         _basedir (Path): :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
@@ -246,7 +244,6 @@ class ISFDataBase:
         self._db_state_fn = "db_state.json"
         self._unique_id = None
         self._registeredDumpers = []
-        self._registered_to_path = None
         self._is_legacy = False  # if loading in legacy ModelDataBase
 
         self._forbidden_keys = [
@@ -271,9 +268,9 @@ class ISFDataBase:
         if self.readonly == False:
             if self._unique_id is None:
                 self._set_unique_id()
-            if self._registered_to_path is None:
-                self._register_this_database()
-                self.save_db_state()
+            # if self._registered_to_path is None:
+                # self._register_this_database()
+            self.save_db_state()
             self._infer_missing_metadata()  # In case some is missing
 
     def _infer_missing_metadata(self):
@@ -305,22 +302,22 @@ class ISFDataBase:
             # Save metdata, only for the key that does not have any
             json.dump(out, open(str(key/'metadata.json'), 'w'))
             
-    def _register_this_database(self):
-        """Register this database with the database register.
+    # def _register_this_database(self):
+    #     """Register this database with the database register.
         
-        Raises:
-            DataBaseException: If the database could not be registered.
-        """
-        logger.info('Registering database with unique id {} to the absolute path {}'.format(
-            self._unique_id, self._basedir))
-        try:
-            data_base_register.register_db(self._unique_id, self._basedir)
-            self._registered_to_path = self._basedir
-        except db_exceptions.DataBaseException as e:
-            if self._suppress_errors:
-                logger.warning(str(e))
-            else:
-                raise e
+    #     Raises:
+    #         DataBaseException: If the database could not be registered.
+    #     """
+    #     logger.info('Registering database with unique id {} to the absolute path {}'.format(
+    #         self._unique_id, self._basedir))
+    #     try:
+    #         data_base_register.register_db(self._unique_id, self._basedir)
+    #         self._registered_to_path = self._basedir
+    #     except db_exceptions.DataBaseException as e:
+    #         if self._suppress_errors:
+    #             logger.warning(str(e))
+    #         else:
+    #             raise e
   
     def _set_unique_id(self):
         """Sets a unique ID for the DataBase as class attribute. 
@@ -367,7 +364,6 @@ class ISFDataBase:
         
         - _unique_id
         - _registeredDumpers
-        - _registered_to_path
         """
         _check_working_dir_clean_for_build(self._basedir)   
         if not os.path.exists(str(self._basedir)):
@@ -377,11 +373,11 @@ class ISFDataBase:
             pass
         self._set_unique_id()
         self._registeredDumpers.append(DEFAULT_DUMPER)
-        self._register_this_database()
+        # self._register_this_database()
         self.state = {
             '_registeredDumpers': self._registeredDumpers,
             '_unique_id': self._unique_id,
-            '_registered_to_path': self._registered_to_path,
+            # '_registered_to_path': self._registered_to_path,
             }
         self.save_db_state()
            
@@ -571,12 +567,13 @@ class ISFDataBase:
         
         - ``_registeredDumpers``: A list of all registered dumpers.
         - ``_unique_id``: A unique identifier for this database.
-        - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
         '''
+        # - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
         ## things that define the state of this db and should be saved
         out = {'_registeredDumpers': [e.__name__ for e in self._registeredDumpers], \
                '_unique_id': self._unique_id,
-               '_registered_to_path': str(self._registered_to_path)} 
+            #    '_registered_to_path': str(self._registered_to_path)
+               } 
         with open(str(self._basedir/self._db_state_fn), 'w') as f:
             if self._db_state_fn.endswith('.json'):
                 json.dump(out, f)
@@ -591,8 +588,8 @@ class ISFDataBase:
         
         - ``_registeredDumpers``: A list of all registered dumpers.
         - ``_unique_id``: A unique identifier for this database.
-        - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
         ''' 
+        # - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
         if self._db_state_fn.endswith('.json'):
             with open(str(self._basedir/self._db_state_fn), 'r') as f:
                 state = json.load(f)
@@ -1073,17 +1070,10 @@ class ISFDataBase:
             It does not get called during garbage collection, when the object goes out of scope, or when the program terminates.
             It should be explicitly called by the user when the user likes to delete a database.
         '''
-        def delete_and_deregister_once_deleted(dir_to_data, unique_id):
-            shutil.rmtree(dir_to_data)
-            # this will delete in foreground of the thread, 
-            # and thus wait until db is deleted and only then continue
-            register = data_base_register._get_db_register()
-            del register[unique_id]  # remove from the register
-
         # make sure folder is renamed before continuing python process
         dir_to_data_rename = rename_for_deletion(str(self._basedir))
         # start processes on one thread in background
-        return threading.Thread(target = lambda : delete_and_deregister_once_deleted(dir_to_data_rename, self._unique_id)).start()
+        return threading.Thread(target = lambda : shutil.rmtree(dir_to_data_rename)).start()
 
 
 def get_isfdb_by_unique_id(unique_id):
