@@ -50,7 +50,7 @@ class DataBase(object):
         else:
             return DEFAULT_DATA_BASE(basedir, readonly=readonly, nocreate=nocreate)
 
-def get_db_by_unique_id(unique_id):
+def get_db_by_unique_id(unique_id, readonly=False):
     """Get a DataBase by its unique ID, as registered in the data base register.
     
     Data base registers should be located at data_base/.data_base_register.db
@@ -60,9 +60,15 @@ def get_db_by_unique_id(unique_id):
         
     Returns:
         :py:class:`data_base.data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+
+    .. deprecated:: 0.5.0
+       Fetching databases by their unique ID is no longer needed for newly created databases.
+       This functionality was needed for moving databases across filesystems.
+       Contemporary databases are now however fully portable.
+       The functionality is however kept around for backwards compatibility with non-portable databases.
     """
     db_path = _get_db_register().registry[unique_id]
-    db = DataBase(db_path, nocreate=True)
+    db = DataBase(db_path, nocreate=True, readonly=readonly)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
 
