@@ -8,27 +8,27 @@ from __future__ import absolute_import
 import os, random, string, threading, contextlib, shutil, tempfile, datetime, yaml
 import cloudpickle as pickle
 from .IO.LoaderDumper import get_dumper_string_by_savedir
-from data_base import data_base_register
+# from data_base import data_base_register
 from data_base import _module_versions
 VC = _module_versions.version_cached
 from compatibility import YamlLoader
-if 'ISF_MDB_CONFIG' in os.environ:
-    config_path = os.environ['ISF_MDB_CONFIG']
-    with open(os.environ['ISF_MDB_CONFIG'], 'r') as f:
-        config = yaml.load(f, Loader=YamlLoader)
-else:
-    # config = dict(backend = dict(type = 'sqlite_remote', url = 'ip:port')) 
-    config = dict(backend = dict(type = 'sqlite'))
+# if 'ISF_MDB_CONFIG' in os.environ:
+#     config_path = os.environ['ISF_MDB_CONFIG']
+#     with open(os.environ['ISF_MDB_CONFIG'], 'r') as f:
+#         config = yaml.load(f, Loader=YamlLoader)
+# else:
+#     # config = dict(backend = dict(type = 'sqlite_remote', url = 'ip:port')) 
+#     config = dict(backend = dict(type = 'sqlite'))
 
-if config['backend']['type'] == 'sqlite':
-    from data_base.sqlite_backend.sqlite_backend import SQLiteBackend as SQLBackend
-elif config['backend']['type'] == 'sqlite_remote':
-    print("Using remote sqlite backend with config {}".format(config))
-    from data_base.sqlite_backend.sqlite_remote_backend_client import SQLiteBackendRemote as SQLBackend
-else:
-    raise ValueError("backend must be sqlite or sqlite_remote")
+# if config['backend']['type'] == 'sqlite':
+#     from data_base.sqlite_backend.sqlite_backend import SQLiteBackend as SQLBackend
+# elif config['backend']['type'] == 'sqlite_remote':
+#     print("Using remote sqlite backend with config {}".format(config))
+#     from data_base.sqlite_backend.sqlite_remote_backend_client import SQLiteBackendRemote as SQLBackend
+# else:
+#     raise ValueError("backend must be sqlite or sqlite_remote")
 
-from data_base.sqlite_backend.sqlite_backend import InMemoryBackend
+# from data_base.sqlite_backend.sqlite_backend import InMemoryBackend
 from collections import defaultdict
 # import model_data_base_register ## moved to end of file since this is a circular import
 
@@ -247,14 +247,14 @@ class ModelDataBase(object):
                     m.in_memory(recursive = True)
                     self._sql_backend._db[k] = m
 
-    def _register_this_database(self):
-        print('registering database with unique_id {} to the absolute path {}'.format(
-                        self._unique_id, self.basedir))
-        try:
-            data_base_register.register_db(self._unique_id, self.basedir)
-            self._registered_to_path = self.basedir
-        except MdbException as e:
-            warnings.warn(str(e))
+    # def _register_this_database(self):
+    #     print('registering database with unique_id {} to the absolute path {}'.format(
+    #                     self._unique_id, self.basedir))
+    #     try:
+    #         data_base_register.register_db(self._unique_id, self.basedir)
+    #         self._registered_to_path = self.basedir
+    #     except MdbException as e:
+    #         warnings.warn(str(e))
             
     def _set_unique_id(self):
         if self._unique_id is not None:
