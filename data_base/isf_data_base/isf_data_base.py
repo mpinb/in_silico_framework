@@ -6,7 +6,7 @@ The main purpose of this module is to provide the :py:class:`~data_base.isf_data
 
 import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno, six
 from pathlib import Path
-from data_base import _module_versions, data_base_register
+from data_base import _module_versions
 import data_base.exceptions as db_exceptions
 from data_base.utils import colorize_str
 VC = _module_versions.version_cached
@@ -1074,21 +1074,6 @@ class ISFDataBase:
         dir_to_data_rename = rename_for_deletion(str(self._basedir))
         # start processes on one thread in background
         return threading.Thread(target = lambda : shutil.rmtree(dir_to_data_rename)).start()
-
-
-def get_isfdb_by_unique_id(unique_id):
-    """Get an :py:class:`~data_base.isf_data_base.ISFDataBase` object by its unique ID.
-    
-    Args:
-        unique_id (str): The unique ID of the database.
-        
-    Returns:
-        :py:class:`~data_base.isf-data_base.ISFDataBase`: The database with the unique ID.
-    """
-    db_path = data_base_register._get_db_register().registry[unique_id]
-    db = ISFDataBase(db_path, nocreate=True)
-    assert db.get_id() == unique_id
-    return db
 
 
 from .IO import LoaderDumper

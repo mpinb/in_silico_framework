@@ -12,14 +12,18 @@ If the path points to a database that has been created with an older database sy
 # - :py:mod:`~data_base.model_data_base`: The old data base system.
 
 import logging
-import os
+import os, cloudpickle, sqlite3
 
-from .data_base_register import _get_db_register
+# from .data_base_register import _get_db_register
 from .isf_data_base.isf_data_base import ISFDataBase
 from .model_data_base.model_data_base import ModelDataBase
+import threading
 
 logger = logging.getLogger('ISF').getChild(__name__)
 DEFAULT_DATA_BASE = ISFDataBase
+DATA_BASE_REGISTER_DIR = "/gpfs/soma_fs/ibs/current_data"
+DATA_BASE_REGISTER_PATH = os.path.join(DATA_BASE_REGISTER_DIR, '.data_base_register.db')
+_thread_local = threading.local()
 
 class DataBase(object):
     """Wrapper class that initializes the correct data base class
@@ -50,6 +54,19 @@ class DataBase(object):
         else:
             return DEFAULT_DATA_BASE(basedir, readonly=readonly, nocreate=nocreate)
 
+
+def _get_thread_local_dbr_connection():
+    """Get a thread-local connection to the data base register.
+    
+    By making the connection thread-local, there is no unnecessary re-creation of connections,
+    nor do connections cause race conditions.
+    This is important for the data base register, as it may be used by multiple threads.
+    """
+    if not hasattr(_thread_local, "connection"):
+        _thread_local.connection = sqlite3.connect(f"file:{DATA_BASE_REGISTER_PATH}?mode=ro", uri=True)
+    return _thread_local.connection
+
+
 def get_db_by_unique_id(unique_id, readonly=False):
     """Get a DataBase by its unique ID, as registered in the data base register.
     
@@ -67,10 +84,17 @@ def get_db_by_unique_id(unique_id, readonly=False):
        Contemporary databases are now however fully portable.
        The functionality is however kept around for backwards compatibility with non-portable databases.
     """
-    db_path = _get_db_register().registry[unique_id]
+    dbr = _get_thread_local_dbr_connection()
+    db_path = cloudpickle.loads(
+        dbr.execute(
+            'SELECT value FROM unnamed WHERE key = ?', (unique_id,)
+            ).fetchone()[0]
+        )
+    # db_path = _get_db_register().registry[unique_id]
     db = DataBase(db_path, nocreate=True, readonly=readonly)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
+
 
 def _is_legacy_model_data_base(path):
     """
@@ -83,6 +107,7 @@ def _is_legacy_model_data_base(path):
         bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
     """
     return os.path.exists(os.path.join(path, 'sqlitedict.db'))
+
 
 def is_isf_data_base(path):
     """
