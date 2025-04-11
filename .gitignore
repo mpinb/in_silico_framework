@@ -23,6 +23,7 @@ trash_it_now/
 # compiler output
 *.pyc
 mechanisms/*/*/x86_64**
+mechanisms/*/*/arm64/*
 
 barrel_cortex/*
 !getting_started/barrel_cortex/*.7z.*
@@ -35,8 +36,10 @@ SLURM_scripts/user_settings.ini
 #only template should be part of repository
 getting_started/biophysical_constraints/86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param
 getting_started/functional_constraints/network.param
-getting_started/example_simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_network_model.param
-getting_started/example_simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_neuron_model.param
+getting_started/example_data/biophysical_constraints/86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param
+getting_started/example_data/functional_constraints/network.param
+getting_started/example_data/simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_network_model.param
+getting_started/example_data/simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_neuron_model.param
 getting_started/radii/data/neuron1/output**
 getting_started/tutorials/1. data analysis/static**
 getting_started/tutorials/2. biophysics/animation**
