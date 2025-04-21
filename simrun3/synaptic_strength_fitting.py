@@ -6,6 +6,7 @@ Third: functions to analyze PSPs'''
 
 import warnings
 import Interface as I
+import six
 
 activate_functional_synapse = I.network.activate_functional_synapse
 from .utils import get_cellnumbers_from_confile, split_network_param_in_one_elem_dicts
@@ -200,6 +201,7 @@ class PSPs:
                  subplots=True,
                  bins=I.np.arange(lower_bound, upper_bound, 0.01),
                  ax=ax)
+        return fig
 
     def _get_cell_and_nw_map(self, network_param=None):
         neuron_param = self.neuron_param
@@ -304,7 +306,7 @@ class PSPs:
             t, v = I.np.arange(0, self.tEnd, 0.025), I.np.interp(
                 I.np.arange(0, self.tEnd, 0.025), t, v)
             ax.plot(t, v - v_baseline, alpha=opacity, c='k')
-
+        return fig
 
 #############################################
 # Second part: functions to simulate PSPs
