@@ -264,13 +264,14 @@ class Uninterruptible:
     def __enter__(self):
         self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.original_sigterm_handler = signal.getsignal(signal.SIGTERM)
-        signal.signal(signal.SIGINT, signal.SIG_IGN)
-        signal.signal(signal.SIGTERM, signal.SIG_IGN)
+        #signal.signal(signal.SIGINT, signal.SIG_IGN)
+        #signal.signal(signal.SIGTERM, signal.SIG_IGN)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        signal.signal(signal.SIGINT, self.original_sigint_handler)
-        signal.signal(signal.SIGTERM, self.original_sigterm_handler)
+        pass
+        #signal.signal(signal.SIGINT, self.original_sigint_handler)
+        #signal.signal(signal.SIGTERM, self.original_sigterm_handler)
 
 
 ###############################################
