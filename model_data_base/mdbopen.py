@@ -13,6 +13,10 @@ def resolve_mdb_path(path):
         path = path.replace('/gpfs01/bethge/home/regger/data/',
                             '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/')
         print('new path', path)
+    if path.startswith('/nas1/Data_regger/AXON_SAGA/Axon4'):
+        path = path.replace('/nas1/','/gpfs/soma_fs/ibs/archive/nas1/')
+    if path.startswith('/nas1'):
+        path = path.replace('/nas1/','/gpfs/soma_fs/ibs/current_data/')
     if not path.startswith('mdb://'):
         return path
 
