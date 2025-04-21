@@ -17,6 +17,38 @@ The recommended use is to import it in a jupyter notebook in the following manne
     
 '''
 import matplotlib
+def download(self, filename='figure.pdf'):
+    """
+    Allows the user to download the figure as a PDF within a Jupyter Notebook.
+
+    Parameters:
+    filename (str): The default filename for the downloaded PDF.
+    """
+    import base64
+    from IPython.display import HTML, display
+    import io
+
+    # Save the figure to an in-memory buffer
+    buf = io.BytesIO()
+    self.savefig(buf, format='pdf', bbox_inches='tight')
+    buf.seek(0)
+
+    # Encode the buffer to base64
+    b64 = base64.b64encode(buf.read()).decode('utf-8')
+
+    # Create the HTML link
+    html = f'''
+        <a download="{filename}" href="data:application/pdf;base64,{b64}">
+            Download {filename}
+        </a>
+    '''
+
+    # Display the HTML link
+    display(HTML(html))
+    
+import matplotlib.figure
+matplotlib.figure.Figure.download = download
+
 
 matplotlib.use('Agg')
 matplotlib.rcParams['pdf.fonttype'] = 42  # for text editable in illustrator
