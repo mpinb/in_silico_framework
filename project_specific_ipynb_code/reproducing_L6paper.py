@@ -421,6 +421,7 @@ class ModelResponses:
                     ax.set_xlim(*xlim[stim])
                 if stim in ylim:
                     ax.set_ylim(*ylim[stim])
+            fig.suptitle(model)
             I.plt.tight_layout()
             I.sns.despine()
             I.display.display(fig)
@@ -892,8 +893,8 @@ class PWfitting:
         else:
             self.cellid = cellid
         ### get target value
-        #st_CDK = I.ModelDataBase('/nas1/Data_arco/results/20190114_spiketimes_database')['CDK_PassiveTouch'] # rieke
-        st_CDK = I.ModelDataBase(self.mdb_path1)['CDK_PassiveTouch']
+        st_CDK = I.ModelDataBase('/nas1/Data_arco/results/20190114_spiketimes_database')['CDK_PassiveTouch'] # rieke
+        #st_CDK = I.ModelDataBase(self.mdb_path1)['CDK_PassiveTouch']
 
         st_CDK = I.select(st_CDK, stim=self.stim)  #changed by rieke
         self.CDK_target_value_avg_L5tt = I.temporal_binning(st_CDK,
@@ -902,14 +903,14 @@ class PWfitting:
                                                             bin_size=max_time -
                                                             min_time)[1][0]
         self.CDK_target_value_same_cell = I.temporal_binning(
-            I.select(st_CDK, cell=self.cellid),
+            I.select(st_CDK, cell=int(self.cellid)),
             min_time=min_time,
             max_time=max_time,
             bin_size=max_time - min_time)[1][0]
 
-        print('CDK_target_value_avg_L5tt: {:s}'.format(
+        print('CDK_target_value_avg_L5tt: {}'.format(
             self.CDK_target_value_avg_L5tt))
-        print('CDK_target_value_same_cell: {:s}'.format(
+        print('CDK_target_value_same_cell: {}'.format(
             self.CDK_target_value_same_cell))
 
         #st_robert_control = I.ModelDataBase('/nas1/Data_arco/results/mdb_robert_3x3/')['spike_times']
@@ -922,7 +923,7 @@ class PWfitting:
                                                 max_time=245 + max_time,
                                                 bin_size=max_time -
                                                 min_time)[1][0]
-        print('target_robert: {:s}'.format(self.target_robert))
+        print('target_robert: {}'.format(self.target_robert))
 
     def _get_INH_dependent_n_spikes(self, model):
         st = self.l6_config.mdb[str(model)]['PW_fitting_mdb']['spike_times']
