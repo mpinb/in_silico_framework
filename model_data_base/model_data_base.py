@@ -182,6 +182,7 @@ class ModelDataBase(object):
         
         To read out all existing keys, use the keys()-function.
         '''
+        basedir = basedir.replace('/nas1','/gpfs/soma_fs/ibs/current_data/')
         self.basedir = os.path.abspath(basedir)
         self.forceload = forceload
         self.readonly = readonly #possible values: False, True, 'warning'
