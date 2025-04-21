@@ -19,7 +19,8 @@ import sys
 import time
 import configparser
 from SLURM_scripts.setup_locking_server import setup_locking_server, setup_locking_config
-from SLURM_scripts.setup_dask import setup_dask_scheduler, setup_dask_workers
+#from SLURM_scripts.setup_dask import setup_dask_scheduler, setup_dask_workers
+from SLURM_scripts.setup_dask_workers import setup_dask_scheduler, setup_dask_workers
 from SLURM_scripts.setup_jupyter_server import setup_jupyter_server
 from contextlib import contextmanager
 import argparse
@@ -92,6 +93,7 @@ def read_user_config():
     ### setting up user-defined port numbers ###
     config_path = os.path.dirname(os.path.dirname(__file__)) # two levels up
     config_path = os.path.join(config_path, 'config', 'user_settings.ini') # ./config/user_settings.ini
+    print('reading user config.ini from ', config_path)
     config = configparser.ConfigParser()
     config.read(config_path)
     return config 
