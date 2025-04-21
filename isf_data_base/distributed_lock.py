@@ -27,7 +27,7 @@ else:
         dict(type="file"),
     ]
 
-
+config = [dict(type = 'file')]
 def get_client():
     if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
         return None, None
