@@ -810,9 +810,12 @@ class CellParser(object):
                         d = sec.diamList[sec.nrOfPts // 2]
                         _lambda = 100000 * math.sqrt(
                             d / (4 * np.pi * f * sec.Ra * sec.cm))
-                        nrOfSegments = int(((sec.L /
-                                             (0.1 * _lambda) + 0.5) // 2) * 2 +
-                                           1)
+                        try:
+                            nrOfSegments = int(((sec.L /
+                                                 (0.1 * _lambda) + 0.5) // 2) * 2 +
+                                               1)
+                        except ZeroDivisionError: # added by arco for morphology transition
+                            nrOfSegments = 1
                         if max_seg_length is not None:
                             tmpL = sec.L / nrOfSegments
                             if tmpL > max_seg_length:
