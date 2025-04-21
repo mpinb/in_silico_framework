@@ -160,6 +160,7 @@ def pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun):
     return pd.DataFrame.from_dict(out_dict)
 
 def select(df, **kwargs):
+    df.columns = [c if not isinstance(c, unicode) else str(c) for c in df.columns]
     for kwarg in kwargs:
         df = df[df[kwarg] == kwargs[kwarg]]
     return df
