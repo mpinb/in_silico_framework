@@ -25,42 +25,44 @@ else:
         dict(type="file"),
     ]
 
+config = [dict(type = 'file')]
+# def get_client2():
+#     if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
+#         return None, None
+#     for server in config:
+#         server["type"] = 'file'
+#         print("trying to connect to distributed locking server {}".format(
+#             str(server)))
+#         if server["type"] == "redis":
+#             import redis
+# 
+#             try:
+#                 c = redis.StrictRedis(**server["config"])
+#                 c.client_list()
+#                 print("success!")
+#                 return server, c
+#             except (redis.exceptions.TimeoutError,
+#                     redis.exceptions.ConnectionError):
+#                 pass
+#         elif server["type"] == "file":
+#             warnings.warn(
+#                 "Using file based locking."
+#                 "Please be careful on nfs mounts as file based locking has issues in this case."
+#             )
+#             return server, None
+#         elif server["type"] == "zookeeper":
+#             import kazoo.client
+# 
+#             zk = kazoo.client.KazooClient(**server["config"])
+#             zk.start()
+#             print("success!")
+#             return server, zk
+#         else:
+#             raise NotImplementedError()
+#     raise RuntimeError("could not connect to a locking server.")
 
 def get_client():
-    if 'ISF_DISTRIBUTED_LOCK_BLOCK' in os.environ:
-        return None, None
-    for server in config:
-        print("trying to connect to distributed locking server {}".format(
-            str(server)))
-        if server["type"] == "redis":
-            import redis
-
-            try:
-                c = redis.StrictRedis(**server["config"])
-                c.client_list()
-                print("success!")
-                return server, c
-            except (redis.exceptions.TimeoutError,
-                    redis.exceptions.ConnectionError):
-                pass
-        elif server["type"] == "file":
-            warnings.warn(
-                "Using file based locking."
-                "Please be careful on nfs mounts as file based locking has issues in this case."
-            )
-            return server, None
-        elif server["type"] == "zookeeper":
-            import kazoo.client
-
-            zk = kazoo.client.KazooClient(**server["config"])
-            zk.start()
-            print("success!")
-            return server, zk
-        else:
-            raise NotImplementedError()
-    raise RuntimeError("could not connect to a locking server.")
-
-
+    return dict(type = 'file'), None
 server, client = get_client()
 
 
