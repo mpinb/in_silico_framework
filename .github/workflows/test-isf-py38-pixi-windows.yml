@@ -18,7 +18,7 @@ on:
 jobs:
   test:
     name: Test pixi windows
-    runs-on: ['self-hosted', 'windows-cpu01']
+    runs-on: ['self-hosted', 'Windows']
 
     steps:
       - name: Checkout
