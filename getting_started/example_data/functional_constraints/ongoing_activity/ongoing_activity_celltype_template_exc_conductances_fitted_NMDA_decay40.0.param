@@ -1,0 +1,508 @@
+{
+  "info": {
+    "date": "11Feb2015",
+    "name": "ongoing_activity_up_state_anatomical_map_20150211-1430_22780",
+    "author": "regger",
+  },
+  "network": {
+    "L2": {
+      "celltype": "spiketrain",
+      "interval": 2173.9,
+      "synapses": {
+          "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.47, 1.47],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L34": {
+      "celltype": "spiketrain",
+      "interval": 3225.8,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.68, 1.68],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L4py": {
+      "celltype": "spiketrain",
+      "interval": 1562.5,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.14, 1.14],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L4sp": {
+      "celltype": "spiketrain",
+      "interval": 1666.7,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.14, 1.14],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L4ss": {
+      "celltype": "spiketrain",
+      "interval": 1886.8,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.14, 1.14],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L5st": {
+      "celltype": "spiketrain",
+      "interval": 909.1,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.38, 1.38],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L5tt": {
+      "celltype": "spiketrain",
+      "interval": 283.3,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.59, 1.59],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L6cc": {
+      "celltype": "spiketrain",
+      "interval": 1052.6,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.63, 1.63],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L6ccinv": {
+      "celltype": "spiketrain",
+      "interval": 2325.6,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.63, 1.63],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L6ct": {
+      "celltype": "spiketrain",
+      "interval": 12500.0,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.8, 1.8],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "VPM": {
+      "celltype": "spiketrain",
+      "interval": 4761.9,
+      "synapses": {
+        "receptors": {
+          "glutamate_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau1": 40.0,
+              "tau2": 2.0,
+              "tau3": 2.0,
+              "tau4": 0.1,
+              "decayampa": 1.0,
+              "decaynmda": 1.0,
+              "facilampa": 0.0,
+              "facilnmda": 0.0,
+            },
+            "weight": [1.78, 1.78],
+          },
+        },
+        "releaseProb": 0.6,
+      },
+    },
+    "L1": {
+      "celltype": "spiketrain",
+      "interval": 909.1,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "L23Trans": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "L45Peak": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "L45Sym": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "L56Trans": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal1": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal2": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal3": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal4": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal5": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+    "SymLocal6": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "gaba_syn": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "risetime" : 1.0,
+              "decaytime" : 20.0,
+              "decaygaba": 1.0,
+              "facilgaba": 0.0,
+              "e" : -80.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": 0.25,
+      },
+    },
+  },
+  "NMODL_mechanisms": {
+    "synapses": "/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/first_testing/mechanisms",
+    "VecStim": "/home/regger/bin/nrn-7.2/share/examples/nrniv/netcon",
+  },
+}

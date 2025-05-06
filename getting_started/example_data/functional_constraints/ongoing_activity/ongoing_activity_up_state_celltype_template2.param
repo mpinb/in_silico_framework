@@ -1,0 +1,541 @@
+{
+  "info": {
+    "date": "11Feb2015",
+    "name": "ongoing_activity_up_state_anatomical_map_20150211-1430_22780",
+    "author": "regger",
+  },
+  "network": {
+    "L2": {
+      "celltype": "spiketrain",
+      "interval": 2173.9,
+      "synapses": {
+          "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.5,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L34": {
+      "celltype": "spiketrain",
+      "interval": 3225.8,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.5,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L4py": {
+      "celltype": "spiketrain",
+      "interval": 1562.5,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.25,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L4sp": {
+      "celltype": "spiketrain",
+      "interval": 1666.7,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.25,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L4ss": {
+      "celltype": "spiketrain",
+      "interval": 1886.8,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.25,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L5st": {
+      "celltype": "spiketrain",
+      "interval": 909.1,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.5,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L5tt": {
+      "celltype": "spiketrain",
+      "interval": 283.3,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.6,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L6cc": {
+      "celltype": "spiketrain",
+      "interval": 1052.6,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.6,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L6ccinv": {
+      "celltype": "spiketrain",
+      "interval": 2325.6,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.6,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L6ct": {
+      "celltype": "spiketrain",
+      "interval": 12500.0,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.6,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "VPM": {
+      "celltype": "spiketrain",
+      "interval": 4761.9,
+      "synapses": {
+        "receptors": {
+          "ProbAMPANMDA2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r_AMPA": 0.1,
+              "tau_d_AMPA": 2.0,
+              "tau_r_NMDA": 2.0,
+              "tau_d_NMDA": 26.0,
+              "e": 0.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.6,
+              "u0": 0.0,
+            },
+            "weight": 1.9,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L1": {
+      "celltype": "spiketrain",
+      "interval": 909.1,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L23Trans": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L45Peak": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L45Sym": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "L56Trans": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal1": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal2": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal3": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal4": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal5": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+    "SymLocal6": {
+      "celltype": "spiketrain",
+      "interval": 142.9,
+      "synapses": {
+        "receptors": {
+          "ProbUDFsyn2": {
+            "threshold": 0.0,
+            "delay": 0.0,
+            "parameter": {
+              "tau_r" : 1.0,
+              "tau_d" : 20.0,
+              "e" : -80.0,
+              "Dep": 800.0,
+              "Fac": 0.0,
+              "Use": 0.25,
+              "u0": 0.0,
+            },
+            "weight": 1.0,
+          },
+        },
+        "releaseProb": "dynamic",
+      },
+    },
+  },
+  "NMODL_mechanisms": {
+    "synapses": "/home/regger/project_src/NeuroSim/mechanisms/LavzinEtAl2012",
+    "VecStim": "/home/regger/bin/nrn-7.2/share/examples/nrniv/netcon",
+  },
+}
