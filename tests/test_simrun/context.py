@@ -23,5 +23,4 @@ networkName = os.path.join(
     'network.param')
 example_path = os.path.join(
     TEST_SIMULATION_DATA_FOLDER, 
-    '20150815-1530_20240', 
     'simulation_run0000_synapses.csv')

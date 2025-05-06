@@ -30,8 +30,8 @@ def generate_param_files_with_valid_references():
     filelist = [os.path.join(example_data_dir, e) for e in (
                 'biophysical_constraints/86_C2_center.param.TEMPLATE', \
                 'functional_constraints/network.param.TEMPLATE', \
-                'simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_network_model.param.TEMPLATE',\
-                'simulation_data/C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center/20150815-1530_20240/20240_neuron_model.param.TEMPLATE')]
+                'simulation_data/C2_center_example/20240_network_model.param.TEMPLATE',\
+                'simulation_data/C2_center_example/20240_neuron_model.param.TEMPLATE')]
     for path in filelist:
         path = os.path.join(IN_SILICO_FRAMEWORK_DIR, path)
         assert os.path.exists(path)

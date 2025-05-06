@@ -13,7 +13,7 @@ TEST_SIMULATION_DATA_FOLDER = os.path.join(
     getting_started_dir, 
     'example_data',
     'simulation_data',
-    'C2_evoked_UpState_INH_PW_1.0_SuW_0.5_C2center')
+    'C2_center_example')
 assert os.path.exists(TEST_DATA_FOLDER)
 
 sys.path.insert(0, parent)
