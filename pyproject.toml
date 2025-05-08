@@ -20,11 +20,13 @@ requires = ["hatchling"]
 libc = "2.17"
 linux = "3.10.0"
 
-[tool.pixi.activation]
-env = { "PYTHONPATH" = "$(pwd):$PYTHONPATH" }
+[tool.pixi.target.unix.activation]
+# Add ISF (i.e. the $pwd) to PYTHONPATH to import all ISF packages.
+PYTHONPATH = "$(pwd):$PYTHONPATH"
 [tool.pixi.target.win.activation.env]
-# Add the global NEURON installation to the PYTHONPATH
-PYTHONPATH = "%PYTHONPATH%;C:/nrn/lib/python"
+# For windows: same as above
+# Additionally add the global NEURON installation to the PYTHONPATH
+PYTHONPATH = "%cd%;C:/nrn/lib/python;C:/nrn/lib/python/neuron;%PYTHONPATH%"
 
 [tool.pixi.dependencies]
 dask = "2.30.0.*"
