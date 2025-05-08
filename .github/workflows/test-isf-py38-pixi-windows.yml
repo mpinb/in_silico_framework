@@ -34,48 +34,62 @@ jobs:
 
       - name: Preliminary setup
         run: |
-          echo "------------ Preliminary setup for tests -------------"
-          echo "Creating tests/logs/ directory..."
-          mkdir -p ./tests/logs/
+            Write-Host "------------ Preliminary setup for tests -------------"
+            Write-Host "Creating tests/logs/ directory..."
+            New-Item -ItemType Directory -Force -Path ./tests/logs/
 
-          echo "------------ Configuring Dask -------------"
-          export DASK_CONFIG=./config/dask_config.yml
+            Write-Host "------------ Configuring Dask -------------"
+            $env:DASK_CONFIG = "./config/dask_config.yml"
 
-          unset DISPLAY
-          if [ ! -d "$HOME/tmp" ]; then
-            mkdir $HOME/tmp
-          fi
-          export TMPDIR=$HOME/tmp
+            Remove-Item Env:DISPLAY -ErrorAction SilentlyContinue
+            if (-Not (Test-Path "$HOME/tmp")) {
+            New-Item -ItemType Directory -Path "$HOME/tmp"
+            }
+            $env:TMPDIR = "$HOME/tmp"
 
       - name: Launch Dask scheduler and workers
         run: |
-          echo "Launching Dask scheduler..."
-          (pixi r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1) &
+            Write-Host "Launching Dask scheduler..."
+            Start-Process -NoNewWindow -FilePath pixi `
+              -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
+              -RedirectStandardOutput ".\tests\logs\dask_scheduler_${{ github.run_id }}.log" `
+              -RedirectStandardError ".\tests\logs\dask_scheduler_${{ github.run_id }}.log"
 
-          echo "Launching Dask workers..."
-          (pixi r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory="." > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1) &
+            Write-Host "Launching Dask workers..."
+            Start-Process -NoNewWindow -FilePath pixi `
+              -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
+              -RedirectStandardOutput ".\tests\logs\dask_workers_${{ github.run_id }}.log" `
+              -RedirectStandardError ".\tests\logs\dask_workers_${{ github.run_id }}.log"
 
-          echo "Waiting for Dask scheduler to be ready..."
-          for i in {1..30}; do
-            if nc -z localhost 8786; then
-              echo "Dask scheduler is ready!"
+            Write-Host "Waiting for Dask scheduler to be ready..."
+            for ($i = 1; $i -le 30; $i++) {
+            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
+              Write-Host "Dask scheduler is ready!"
               break
-            fi
-            echo "Waiting for Dask scheduler..."
-            sleep 2
-          done
+            }
+            Write-Host "Waiting for Dask scheduler..."
+            Start-Sleep -Seconds 2
+            }
 
       - name: Test ISF
         run: |
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
+          pixi r pytest `
+            -n 5 `
+            -rsx `
+            -vv `
+            --color=yes `
+            --durations=15 `
+            --cov-report xml:tests\logs\report_py38.xml `
+            --cov=. `
+            --dask_server_port 8786 tests || exit 1
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test ModelDataBase backwards compatibility
         run: |
-          export ISF_USE_MDB=1
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests/test_data_base/
-          unset ISF_USE_MDB
+          $env:ISF_USE_MDB = "1"
+          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests\test_data_base\
+          Remove-Item Env:ISF_USE_MDB -ErrorAction SilentlyContinue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
