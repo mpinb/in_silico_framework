@@ -73,7 +73,7 @@ jobs:
 
       - name: Test ISF
         run: |
-          pixi exec Write-Host "PYTHONPATH: %PYTHONPATH%"
+          pixi r echo "PYTHONPATH: $PYTHONPATH"
           pixi r pytest `
             -n 5 `
             -rsx `
