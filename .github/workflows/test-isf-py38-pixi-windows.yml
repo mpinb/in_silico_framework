@@ -81,7 +81,7 @@ jobs:
             --durations=15 `
             --cov-report xml:tests\logs\report_py38.xml `
             --cov=. `
-            --dask_server_port 8786 tests || exit 1
+            --dask_server_port 8786 tests
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
