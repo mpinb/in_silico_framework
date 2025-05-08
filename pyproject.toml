@@ -22,6 +22,9 @@ linux = "3.10.0"
 
 [tool.pixi.activation]
 env = { "PYTHONPATH" = "$(pwd):$PYTHONPATH" }
+[tool.pixi.target.win.activation.env]
+# Add the global NEURON installation to the PYTHONPATH
+PYTHONPATH = "%PYTHONPATH%;C:/nrn/lib/python"
 
 [tool.pixi.dependencies]
 dask = "2.30.0.*"
