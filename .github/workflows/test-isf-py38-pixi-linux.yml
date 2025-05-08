@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - master
+      - windows
   workflow_dispatch:
 
 jobs:
