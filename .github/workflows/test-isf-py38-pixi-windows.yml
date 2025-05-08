@@ -52,14 +52,14 @@ jobs:
             Write-Host "Launching Dask scheduler..."
             Start-Process -NoNewWindow -FilePath pixi `
               -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
-              -RedirectStandardOutput ".\tests\logs\dask_scheduler_${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_scheduler_${{ github.run_id }}.log"
+              -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
+              -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
 
             Write-Host "Launching Dask workers..."
             Start-Process -NoNewWindow -FilePath pixi `
               -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
-              -RedirectStandardOutput ".\tests\logs\dask_workers_${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_workers_${{ github.run_id }}.log"
+              -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
+              -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
 
             Write-Host "Waiting for Dask scheduler to be ready..."
             for ($i = 1; $i -le 30; $i++) {
