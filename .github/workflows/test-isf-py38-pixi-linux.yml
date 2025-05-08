@@ -50,10 +50,24 @@ jobs:
       - name: Launch Dask scheduler and workers
         run: |
           echo "Launching Dask scheduler..."
-          (pixi r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1) &
+          ( \
+            pixi r dask-scheduler \
+            --port=8786 \
+            --bokeh-port=8787 \
+            --host=localhost \
+            > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1\
+          ) &
 
           echo "Launching Dask workers..."
-          (pixi r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory="." > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1) &
+          ( \
+            pixi r dask-worker \
+            localhost:8786 \
+            --nthreads 1 \
+            --nprocs 10 \
+            --memory-limit=100e15 \
+            --local-directory="." \
+            > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1\
+          ) &
 
           echo "Waiting for Dask scheduler to be ready..."
           for i in {1..30}; do
