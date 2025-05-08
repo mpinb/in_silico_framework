@@ -20,7 +20,7 @@ requires = ["hatchling"]
 libc = "2.17"
 linux = "3.10.0"
 
-[tool.pixi.target.unix.activation]
+[tool.pixi.target.unix.activation.env]
 # Add ISF (i.e. the $pwd) to PYTHONPATH to import all ISF packages.
 PYTHONPATH = "$(pwd):$PYTHONPATH"
 [tool.pixi.target.win.activation.env]
