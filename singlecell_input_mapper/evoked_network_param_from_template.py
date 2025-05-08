@@ -477,7 +477,7 @@ def create_network_parameter(
     templateParam = scp.build_parameters(templateParamName)
     cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
 
-    nwParam = scp.NTParameterSet({
+    nwParam = scp.ParameterSet({
         'info': templateParam.info,
         'NMODL_mechanisms': templateParam.NMODL_mechanisms
     })
@@ -487,7 +487,7 @@ def create_network_parameter(
 
     if clusterParameters:
         clusterBasePath = '/gpfs01/bethge/home/regger'
-        nwParamCluster = scp.NTParameterSet({'info': templateParam.info})
+        nwParamCluster = scp.ParameterSet({'info': templateParam.info})
         nwParamCluster.NMODL_mechanisms = templateParam.NMODL_mechanisms.tree_copy(
         )
         nwParamCluster.network = {}
@@ -601,7 +601,7 @@ def whisker_evoked_PSTH(
     evokedTypes = list(evokedTemplates.keys())
     if column not in columns or cellType not in evokedTypes:
         return None
-    # NTParameterset of PSTHs of these cell types
+    # Parameterset of PSTHs of these cell types
     evokedTemplate = evokedTemplates[cellType]
     # Equivalent column relative to C2
     PSTHwhisker = surroundPSTHLookup[surroundColumns[deflectedWhisker][column]]

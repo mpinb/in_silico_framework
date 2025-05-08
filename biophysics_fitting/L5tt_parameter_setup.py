@@ -25,7 +25,7 @@ These parameters and templates are used to set up the biophysical constraints fo
 # naming converters scp <--> hay
 #########################################
 import six
-from sumatra.parameters import NTParameterSet
+from single_cell_parser.parameters import ParameterSet
 import pandas as pd
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -102,7 +102,7 @@ def get_L5tt_template():
         - ``tStop``: stop time
             
     Returns:
-        sumatra.parameters.NTParameterSet: The template cell parameters.       
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: The template cell parameters.       
     
     """
     p = {
@@ -349,8 +349,7 @@ def get_L5tt_template():
             'tStop': 300.0
         }
     }
-    from sumatra.parameters import NTParameterSet
-    return NTParameterSet(p['neuron'])
+    return ParameterSet(p['neuron'])
 
 def get_L5tt_template_v2():
     """Get a template cell parameter dictionary for a L5PT cell.
@@ -361,7 +360,7 @@ def get_L5tt_template_v2():
     - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
         
     Returns:
-        sumatra.NTParameterSet: The template cell parameters.
+        :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet``: The template cell parameters.
     """
     neup = get_L5tt_template()
     for loc in neup:
@@ -389,7 +388,7 @@ def get_L5tt_template_v2():
         },
         'mech_globals': {},
         'neuron': neup}
-    return NTParameterSet(p['neuron'])
+    return ParameterSet(p['neuron'])
 
 
 def set_morphology(cell_param, filename=None):
@@ -398,11 +397,11 @@ def set_morphology(cell_param, filename=None):
     The morphology is simply a path to a :ref:`hoc_file_format` file in string format.
     
     Args:
-        cell_param (sumatra.parameters.NTParameterSet | dict): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The cell parameter dictionary.
         filename (str): The path to the :ref:`hoc_file_format` file.
         
     Returns:
-        sumatra.parameters.NTParameterSet | dict: The updated cell parameter dictionary."""
+        :py:class:`~single_cell_parser.parameters.ParameterSet` | dict: The updated cell parameter dictionary."""
     cell_param.filename = filename
     return cell_param
 
@@ -423,7 +422,7 @@ def set_ephys(cell_param, params=None):
     Parameter names reflect the Hay naming convention.
 
     Args:
-        cell_param (sumatra.parameters.NTParameterSet): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The cell parameter dictionary.
         params (pd.Series): The parameter vector as a pandas Series.
 
     Raises:
@@ -432,7 +431,7 @@ def set_ephys(cell_param, params=None):
         AssertionError: If some parameters are not set after the update.
 
     Returns:
-        sumatra.parameters.NTParameterSet: The updated cell_param, with the biphysical parameters set.  
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: The updated cell_param, with the biphysical parameters set.  
     
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -462,7 +461,7 @@ def set_param(cell_param, params=None):
         # returns {'a': {'b': {'c': 3}}}
         
     Args:
-        cell_param (:py:class`~sumatra.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
+        cell_param (:py:class`~:py:class:`~single_cell_parser.parameters.ParameterSet`` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
     
     Returns:
@@ -491,7 +490,7 @@ def set_many_param(cell_param, params=None):
         # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
         
     Args:
-        cell_param (:py:class:`~sumatra.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
         
     Returns:
@@ -519,13 +518,13 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
     """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
     
     Args:
-        cell_param (:py:class:`sumatra.parameters.NTParameterSet` | dict): The cell parameter dictionary.
+        cell_param (:py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` | dict): The cell parameter dictionary.
         min_ (float): The minimum distance from the soma.
         max_ (float): The maximum distance from the soma.
         outsidescale_sections (list): A list of sections where the channels should be inserted.
         
     Returns:
-        sumatra.parameters.NTParameterSet | dict: The updated cell_param.
+        :py:class:`~single_cell_parser.parameters.ParameterSet` | dict: The updated cell_param.
         
     Note:
         This method is specific for a L5PT.

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-"""Rebuild and re-simulate a network-embedded cell from parameter files.
+"""Rebuild and re-simulate a network-embedded cell from :ref:`param_file_format` files.
 
 This module provides a function to rebuild a network-embedded neuron model from 
 :ref:`cell_parameters_format` and :ref:`network_parameters_format`. 

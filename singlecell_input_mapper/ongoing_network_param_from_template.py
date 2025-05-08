@@ -67,7 +67,7 @@ def create_network_parameter(
     templateParam = scp.build_parameters(templateParamName)
     cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
 
-    nwParam = scp.NTParameterSet({
+    nwParam = scp.ParameterSet({
         'info': templateParam.info,
         'NMODL_mechanisms': templateParam.NMODL_mechanisms
     })

@@ -255,7 +255,7 @@ def resolve_neup_reldb_paths(neup, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~sumatra.parameters.NTParameterSet`: The modified neuron parameter set, with absolute paths.
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: The modified neuron parameter set, with absolute paths.
     """
     neup["neuron"]["filename"] = resolve_reldb_path(
         neup["neuron"]["filename"], db_basedir
@@ -273,7 +273,7 @@ def resolve_netp_reldb_paths(netp, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~sumatra.parameters.NTParameterSet`: The modified network parameter set, with absolute paths.
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: The modified network parameter set, with absolute paths.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:

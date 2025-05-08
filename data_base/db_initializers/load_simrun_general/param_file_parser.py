@@ -110,7 +110,7 @@ def _copy_and_transform_neuron_param(neup_fn, target_fn, hoc_fn_map, recsites_fn
     :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
 
     Args:
-        neuron (:py:class:`~sumatra.parameters.NTParameterSet`): Dictionary containing the neuron model parameters.
+        neuron (:py:class:`~single_cell_parser.parameters.ParameterSet`): Dictionary containing the neuron model parameters.
 
     Attention:
         The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
@@ -129,7 +129,7 @@ def _copy_and_transform_network_param(netp_fn, target_fn, syn_fn_map, con_fn_map
     :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
 
     Args:
-        network (:py:class:`~sumatra.parameters.NTParameterSet`): Dictionary containing the network model parameters.
+        network (:py:class:`~single_cell_parser.parameters.ParameterSet`): Dictionary containing the network model parameters.
 
     Attention:
         The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
@@ -345,7 +345,7 @@ def load_param_files_from_db(db, sti):
             For which simulation trial index to load the parameter files.
 
     Returns:
-        tuple: The :py:class:`~sumatra.parameters.NTParameterSet` objects for the cell and network.
+        tuple: The :py:class:`~single_cell_parser.parameters.ParameterSet` objects for the cell and network.
     """
     import single_cell_parser as scp
 

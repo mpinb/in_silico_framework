@@ -65,7 +65,7 @@ class CelltypeSpecificSynapticWeights:
         """Initialize the synaptic weights with :ref:`network_parameters_format`.
         
         Args:
-            n (:py:class:`~sumatra.parameters.NTParameterSet`): The network parameters object.
+            n (:py:class:`~single_cell_parser.parameters.ParameterSet`): The network parameters object.
             select_celltypes (list): If not None, only the synaptic weights of the celltypes in this list are loaded.
             use_default_weight (float): If not None, all synaptic weights are set to this value.
         

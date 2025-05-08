@@ -26,7 +26,7 @@ from . import writer
 from . import cell_parser
 from .synapse_mapper import SynapseMapper
 from .network import NetworkMapper
-from sumatra.parameters import build_parameters
+from .parameters import build_parameters
 import neuron
 __author__  = 'Robert Egger'
 __date__    = '2013-02-01'

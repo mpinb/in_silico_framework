@@ -12,7 +12,7 @@ zarr==2.15.0
 
 ## single_cell_parser dependencies
 neuron==7.8.2
-sumatra==0.7.4
+# sumatra==0.7.4
 
 ## biophysics fitting dependencies
 deap==1.3.1

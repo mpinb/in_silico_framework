@@ -1208,7 +1208,7 @@ class SynParameterChanger():
     
     Attributes:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~sumatra.NTParameterSet`.
+        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet`.
         tEvent (float): Time at which the synapse parameters should change.
         
     :skip-doc:
@@ -1218,7 +1218,7 @@ class SynParameterChanger():
         """
         Args:
             cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~sumatra.NTParameterSet`.
+            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet`.
             t (float): Time at which the synapse parameters should change.
         """
         self.cell = cell

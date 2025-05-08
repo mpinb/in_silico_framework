@@ -29,7 +29,7 @@ import cloudpickle, logging, six
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from single_cell_parser import NTParameterSet, init_neuron_run
+from single_cell_parser import ParameterSet, init_neuron_run
 from single_cell_parser.network import activate_functional_synapse
 from dask import delayed
 from simrun.get_cell_with_network import get_cell_with_network
@@ -49,7 +49,7 @@ class PSPs:
     '''Calculate PSP amlitudes of single synapses and fit synaptic strength
     
     Attributes:
-        neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
         confile (str): Path to a :ref:`con_file_format` file.
         gExRange (list): List of allowed synaptic strength values (in :math:`\mu S`).
         AMPA_component (float): 
@@ -69,7 +69,7 @@ class PSPs:
         tEnd (float): End time of the simulation.
         futures (list): List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.
         result (list): List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
-        network_param (NTParameterSet): 
+        network_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): 
             The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
             The synapse type is defined by :paramref:`exc_inh`.
         network_params_by_celltype (list):
@@ -90,7 +90,7 @@ class PSPs:
         tEnd=150):
         ''' 
         Args:
-            neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
+            neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
             confile (str): Path to a :ref:`con_file_format` file.
             gExRange (list): 
                 List of synaptic strength values to simulate (in :math:`\mu S`). 
@@ -405,7 +405,7 @@ class PSPs:
         """Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
         
         Args:
-            network_param (NTParameterSet): The :ref:`network_parameters_format` file.
+            network_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`network_parameters_format` file.
             
         Returns:
             tuple: A tuple of the neuron model (:py:class:`single_cell_parser.cell.Cell`) 
@@ -623,8 +623,8 @@ def run_ex_synapse(
     
     Args:
         cell_nw_generator (callable): A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
-        neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
-        network_param (NTParameterSet): The :ref:`network_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`network_parameters_format`.
         celltype (str): The celltype to activate the synapse for. Used to fetch the correct network parameters.
         preSynCellID (int): The presynaptic cell ID to activate the synapse for. Default: ``None``.
         gAMPA (float): The AMPA conductance value. Default: ``None``.
@@ -721,8 +721,8 @@ def run_ex_synapses(
     This function is used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
     
     Args:
-        neuron_param (NTParameterSet): The :ref:`cell_parameters_format`.
-        network_param (NTParameterSet): The :ref:`network_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`network_parameters_format`.
         celltype (str): The celltype to activate the synapse for. Used to fetch the correct network parameters.
         gAMPA (float): The AMPA conductance value. Default: ``None``.
         gNMDA (float): The NMDA conductance value. Default: ``None``.
@@ -744,9 +744,9 @@ def run_ex_synapses(
     
     '''
 
-    neuron_param = NTParameterSet(
+    neuron_param = ParameterSet(
         cloudpickle.loads(neuron_param).as_dict())
-    network_param = NTParameterSet(
+    network_param = ParameterSet(
         cloudpickle.loads(network_param).as_dict())
     # with I.silence_stdout:
     cell_nw_generator = get_cell_with_network(neuron_param, network_param)
@@ -822,7 +822,7 @@ def generate_ex_network_param_from_network_embedding(confile):
     activate the presynaptic cells one by one.
     
     Returns:
-        NTParameterSet: Network parameter file.
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: Network parameter file.
         
     See also:
         :py:meth:`simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding`
@@ -859,7 +859,7 @@ def generate_ex_network_param_from_network_embedding(confile):
         out['network'][k]['synapses']['connectionFile'] = confile
         out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
         out['network'][k]['synapses']['receptors'] = param_template
-    return NTParameterSet(out)
+    return ParameterSet(out)
 
 
 def generate_inh_network_param_from_network_embedding(confile):
@@ -871,7 +871,7 @@ def generate_inh_network_param_from_network_embedding(confile):
     activate the presynaptic cells one by one.
     
     Returns:
-        NTParameterSet: Network parameter file.
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: Network parameter file.
         
     See also:
         :py:meth:`simrun.synaptic_strength_fitting.generate_exc_network_param_from_network_embedding`
@@ -906,7 +906,7 @@ def generate_inh_network_param_from_network_embedding(confile):
         out['network'][k]['synapses']['connectionFile'] = confile
         out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
         out['network'][k]['synapses']['receptors'] = param_template
-    return NTParameterSet(out)
+    return ParameterSet(out)
 
 
 ###############################################

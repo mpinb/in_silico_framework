@@ -98,7 +98,7 @@ def _evoked_activity(
     # Load in and parse parameter files
     neuronParameters = load_param_file_if_path_is_provided(cellParamName)
     evokedUpNWParameters = load_param_file_if_path_is_provided(
-        evokedUpParamName)  ##sumatra function for reading in parameter file
+        evokedUpParamName)
     scp.load_NMODL_parameters(neuronParameters)
     scp.load_NMODL_parameters(evokedUpNWParameters)
     cellParam = neuronParameters.neuron

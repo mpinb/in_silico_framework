@@ -41,17 +41,14 @@ import warnings
 
 # from sim_control import SimControl
 import neuron
-import numpy as np
 import tables  # so florida servers have no problem with neuron
-from sumatra.parameters import NTParameterSet
-from sumatra.parameters import build_parameters as build_parameters_sumatra
 
 from config.cell_types import EXCITATORY
-from data_base.dbopen import dbopen
 
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
 from .cell_parser import CellParser
+from .parameters import ParameterSet, build_parameters, load_NMODL_parameters
 
 # from synapse import activate_functional_synapse
 from .network import NetworkMapper
@@ -82,63 +79,6 @@ from .writer import (
 
 __author__ = "Robert Egger"
 __credits__ = ["Robert Egger", "Arco Bast"]
-
-
-# ------------------------------------------------------------------------------
-# commonly used functions required for running single neuron simulations
-# ------------------------------------------------------------------------------
-def build_parameters(filename, fast_but_security_risk=True):
-    """Read in a parameter file and return a NTParameterSet object.
-
-    Args:
-        filename (str): path to the parameter file
-        fast_but_security_risk (bool): If True, the parameter file is read in using eval. This is faster, but can be a security risk if the file is not trusted.
-
-    Returns:
-        NTParameterSet: The parameter file as a NTParameterSet object.
-    """
-    from data_base.dbopen import resolve_modular_db_path
-
-    filename = resolve_modular_db_path(filename)
-
-    if fast_but_security_risk:
-        # taking advantage of the fact that sumatra NTParameterSet produces
-        # valid python code
-        with dbopen(filename, "r") as f:
-            dummy = eval(f.read())
-        return NTParameterSet(dummy)
-    else:
-        # slow, but does not call the evil 'eval'
-        return build_parameters_sumatra(filename)
-
-
-def load_NMODL_parameters(parameters):
-    """Load NMODL mechanisms from paths in parameter file.
-
-    Parameters are added to the NEURON namespace by executing string Hoc commands.
-
-    See also: https://www.neuron.yale.edu/neuron/static/new_doc/programming/neuronpython.html#important-names-and-sub-packages
-
-    Args:
-        parameters (NTParameterSet | dict):
-            The neuron parameters to load.
-            Must contain the key `NMODL_mechanisms`.
-            May contain the key `mech_globals`.
-
-    Returns:
-        None. Adds parameters to the NEURON namespace.
-    """
-    for mech in list(parameters.NMODL_mechanisms.values()):
-        neuron.load_mechanisms(mech)
-    try:
-        for mech in list(parameters.mech_globals.keys()):
-            for param in parameters.mech_globals[mech]:
-                paramStr = param + "_" + mech + "="
-                paramStr += str(parameters.mech_globals[mech][param])
-                print("Setting global parameter", paramStr)
-                neuron.h(paramStr)
-    except AttributeError:
-        pass
 
 
 def create_cell(

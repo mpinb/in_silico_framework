@@ -22,8 +22,7 @@ This binned data can be used as input data for training an artificial neural net
 
 import warnings, os, dask, distributed, cloudpickle
 import numpy as np
-from sumatra.parameters import NTParameterSet
-from single_cell_parser import create_cell, build_parameters
+from single_cell_parser import create_cell, build_parameters, ParameterSet
 from single_cell_parser.analyze import synanalysis
 import pandas as pd
 from data_base.utils import silence_stdout, convertible_to_int, chunkIt
@@ -127,7 +126,7 @@ def get_section_distances_df(neuron_param_file, silent=True):
         168  20.000000    50.000000      1       30
         169  50.000000  1049.999969     20       50
     """
-    neup = NTParameterSet(neuron_param_file)
+    neup = ParameterSet(neuron_param_file)
     if silent:
         with silence_stdout:
             cell = create_cell(neup.neuron)

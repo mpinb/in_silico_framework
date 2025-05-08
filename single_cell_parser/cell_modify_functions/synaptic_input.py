@@ -36,7 +36,7 @@ def synaptic_input(
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        network_param (str | dict | :py:class:`~sumatra.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
+        network_param (str | dict | :py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`network_parameters_format`.
         synapse_activation_file (str, optional): 
             The :ref:`syn_activation_format` file with existing synapse activations.
             If None, synapse activations are generated from scratch using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
@@ -46,7 +46,7 @@ def synaptic_input(
         :py:class:`~single_cell_parser.cell.Cell`: The cell with the synaptic input set up as the ``evokedNW`` attribute.
     """
     net = scp.build_parameters(network_param)
-    sim = scp.NTParameterSet({'tStop': tStop})
+    sim = scp.ParameterSet({'tStop': tStop})
     evokedNW = scp.NetworkMapper(cell, net.network, sim)
     if synapse_activation_file is None:
         logger.info('Activating synapses')

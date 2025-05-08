@@ -102,7 +102,7 @@ def _evoked_activity(
     # Read parameter files.
     neuronParameters = scp.build_parameters(cellParamName)
     evokedUpNWParameters = scp.build_parameters(
-        evokedUpParamName)  # sumatra function for reading in parameter file
+        evokedUpParamName)
     scp.load_NMODL_parameters(neuronParameters)
     scp.load_NMODL_parameters(evokedUpNWParameters)
     cellParam = neuronParameters.neuron

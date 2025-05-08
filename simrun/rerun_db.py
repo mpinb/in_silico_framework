@@ -130,8 +130,8 @@ def _evoked_activity(
         stis (list): List of simulation trial indices to be resimulated.
         outdir (str): Directory where the simulation results are stored, relative to the original simulation results.
         tStop (float): Time in ms at which the simulation should stop.
-        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
-        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` network parameters and may return it changed.
         synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         parameterfiles (pd.DataFrame): A dataframe containing the parameter files for the simulation trials. Should always be present in a simrun-initialized database under the key ``paremeterfiles``.
@@ -313,8 +313,8 @@ def rerun_db(
         stis (list): List of simulation trial indices to be resimulated.
         outdir (str): Directory where the simulation results are stored, relative to the current working directory. Preferably, use an absolute path.
         tStop (float): Time in ms at which the simulation should stop.
-        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
-        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` network parameters and may return it changed.
         synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         silent (bool): If True, suppresses output from the simulation.
