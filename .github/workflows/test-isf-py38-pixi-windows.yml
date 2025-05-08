@@ -74,7 +74,7 @@ jobs:
       - name: Test ISF
         run: |
           pixi r python -c "import neuron; print(neuron.__file__)"
-          Write-Host "PYTHONPATH: %PYTHONPATH%"
+          pixi r Write-Host "PYTHONPATH: %PYTHONPATH%"
           pixi r pytest `
             -n 5 `
             -rsx `
