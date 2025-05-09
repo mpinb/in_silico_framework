@@ -26,8 +26,8 @@ PYTHONPATH = "$(pwd):$PYTHONPATH"
 # For windows: same as above
 # Additionally add NEURON packages to the PYTHONPATH and DLLs to PATH
 [tool.pixi.target.win.activation.env]
-PYTHONPATH = "%cd%;C:/nrn/lib/python;C:/nrn/lib/python/neuron;%PYTHONPATH%"
-PATH = "%PATH%;C:/nrn/bin;C:/nrn/lib/python;C:/nrn/lib/python/neuron"
+PYTHONPATH = "$(pwd);C:\\nrn\\lib\\python;C:\\nrn\\lib\\python\\neuron;%PYTHONPATH%"
+PATH = "%PATH%;C:\\nrn\\bin;C\\nrn\\lib\\python;C\\nrn\\lib\\python\\neuron"
 
 [tool.pixi.dependencies]
 dask = "2.30.0.*"
