@@ -7,7 +7,6 @@ description = "An In Silico Framework for the generation, simulation and analysi
 name = "ISF"
 requires-python = "==3.8.*"
 version = "0.5.0-beta"
-dependencies = ["blenderspike-py @ https://github.com/ArtemKirsanov/BlenderSpike.git"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -58,6 +57,7 @@ blosc = ">=1.11.1,<2"
 scikit-learn = ">=0.23.2"
 seaborn = ">=0.12.2,<0.13"
 isf-pandas-msgpack = ">=0.4.0"
+blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 [tool.pixi.target.osx]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
