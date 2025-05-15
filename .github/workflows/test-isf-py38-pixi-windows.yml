@@ -73,7 +73,7 @@ jobs:
 
       - name: Test ISF
         run: |
-          pixi r python -c 'import os, sys; print("PYTHONPATH:", os.environ.get("PYTHONPATH", "")); print("PATH:", sys.path)'
+          pixi exec python -c 'import os, sys; print("PYTHONPATH:", os.environ.get("PYTHONPATH", "")); print("PATH:", sys.path)'
           pixi r pytest `
             -n 5 `
             -rsx `
