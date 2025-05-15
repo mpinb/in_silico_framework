@@ -203,14 +203,14 @@ class ModelDataBase(object):
         
         try:
             self.read_mdb()
-        except Exception:
+        except Exception as e:
             errstr = "Did not find a database in {path}. ".format(path = basedir) + \
                     "A new empty database will not be created since "+\
                     "{mode} is set to True."
             if nocreate:
-                raise ModelDataBaseException(errstr.format(mode = 'nocreate'))
+                raise ModelDataBaseException(errstr.format(mode = 'nocreate')) from e
             if readonly:
-                raise ModelDataBaseException(errstr.format(mode = 'readonly'))
+                raise ModelDataBaseException(errstr.format(mode = 'readonly')) from e
             if not forcecreate:
                 _check_working_dir_clean_for_build(basedir)
             self._first_init = True

@@ -97,6 +97,10 @@ from .builders import (
     _build_param_files,
     _build_synapse_activation,
 )
+from .data_parsing import (
+    load_dendritic_voltage_traces,
+    read_voltage_traces_from_file
+)
 from .param_file_parser import load_param_files_from_db
 from .utils import _get_dumper
 from .reoptimize import reoptimize_db

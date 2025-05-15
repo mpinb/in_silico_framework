@@ -18,11 +18,20 @@ def _read_params_to_dict(filename):
 
     # Replace Python-style tuples (x, y) with JSON arrays [x, y]
     content = re.sub(r"\(([^()]+)\)", r"[\1]", content)
+
+    # Replace None with null
+    content = content.replace("None", "null")
     
     try:
         params_dict = json.loads(content)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Error decoding .param file with JSON parsing: {e}")
+        line_no = e.lineno
+        # Show context around the error with line numbers
+        lines = content.split('\n')
+        context = '\n'.join(
+            f"{i + 1}: {line}" for i, line in enumerate(lines[max(0, line_no-3):min(len(lines), line_no+2)], start=max(0, line_no-3))
+        )
+        raise ValueError(f"Error decoding .param file with JSON parsing at line {line_no}, col {e.colno}:\n{context}") from e
     return params_dict
 
 
