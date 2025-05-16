@@ -1,4 +1,4 @@
-import pytest, distributed, socket
+import pytest, distributed
 
 @pytest.fixture(scope="session")
 def client(pytestconfig):

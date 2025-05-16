@@ -35,6 +35,7 @@ channels = 'channels_py2' if six.PY2 else 'channels_py3'
 netcon = 'netcon_py2' if six.PY2 else 'netcon_py3'
 channels_path = os.path.join(parent, channels)
 netcon_path = os.path.join(parent, netcon)
+
 def check_nrnivmodl_is_available():
     """
     Check if nrnivmodl is available in the PATH.
@@ -63,17 +64,6 @@ def check_nrnivmodl_is_available():
         logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
         raise
 
-def check_nrnivmodl_is_available():
-    """
-    Check if nrnivmodl is available in the PATH.
-    """
-    try:
-        os.system('which nrnivmodl')
-        return True
-    except Exception as e:
-        logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
-        raise e
-
 def check_if_mechanisms_are_compiled(path):
     if os.name == 'nt':
         return any(glob.glob(os.path.join(path, '*.dll')))
@@ -90,21 +80,20 @@ def compile_mechanisms(path):
     else: # unix
         os.system('(cd "{}"; nrnivmodl)'.format(path))
 
+def compile_local_mechanisms(force_recompile=False):
+    """
+    Compile the mechanisms in the local directory.
+    This function is only needed if the mechanisms are not already compiled.
+    """
+    for path in (channels_path, netcon_path):
+        if not check_if_mechanisms_are_compiled(path) or force_recompile:
+            compile_mechanisms(path)
+            if not check_if_mechanisms_are_compiled(path):
+                raise UserWarning("Could not compile mechanisms. Please do it manually")
 
 assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 
-if not check_if_mechanisms_are_compiled(channels_path) \
-    or not check_if_mechanisms_are_compiled(netcon_path):
-    logger.warning("Neuron mechanisms are not compiled. Attempting automatic compilation.")
-
-    compile_mechanisms(channels_path)
-    compile_mechanisms(netcon_path)
-
-    try:
-        assert check_if_mechanisms_are_compiled(channels_path)
-        assert check_if_mechanisms_are_compiled(netcon_path)
-    except AssertionError as e:
-        raise UserWarning("Could not compile mechanisms. Please do it manually") from e
+compile_local_mechanisms(force_recompile=False)
 
 try:
     with stream_to_logger(logger=logger):
