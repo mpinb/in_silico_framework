@@ -27,7 +27,7 @@ PYTHONPATH = "$(pwd):$PYTHONPATH"
 # For windows: same as above
 # Additionally add the global NEURON installation to the PYTHONPATH
 PYTHONPATH = "%cd%;C:/nrn/lib/python;C:/nrn/lib/python/neuron;%PYTHONPATH%"
-PATH = "%PATH%;C:/nrn/bin;C/nrn/lib/python;C/nrn/lib/python/neuron"
+PATH = "%PATH%;C:/nrn/bin;C:/nrn/lib/python;C:/nrn/lib/python/neuron"
 HOME = "%USERPROFILE%"
 
 [tool.pixi.dependencies]
