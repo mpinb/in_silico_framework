@@ -47,7 +47,7 @@ jobs:
           fi
           export TMPDIR=$HOME/tmp
 
-      - name: Launch Dask scheduler and workers
+      - name: Test ISF
         run: |
           echo "Launching Dask scheduler..."
           ( \
@@ -79,8 +79,7 @@ jobs:
             sleep 2
           done
 
-      - name: Test ISF
-        run: |
+          echo "Starting test suite..."
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -47,34 +47,34 @@ jobs:
             }
             $env:TMPDIR = "$HOME/tmp"
 
-      - name: Launch Dask scheduler and workers
-        run: |
-            Write-Host "Launching Dask scheduler..."
-            Start-Process -NoNewWindow -FilePath pixi `
-              -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
-              -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
-
-            Write-Host "Launching Dask workers..."
-            Start-Process -NoNewWindow -FilePath pixi `
-              -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
-              -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
-
-            Write-Host "Waiting for Dask scheduler to be ready..."
-            for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
-              Write-Host "Dask scheduler is ready!"
-              break
-            }
-            Write-Host "Waiting for Dask scheduler..."
-            Start-Sleep -Seconds 2
-            }
-
       - name: Test ISF
         id: run_tests
         continue-on-error: true
         run: |
+          Write-Host "------------ Setting up Dask Server -------------"
+          Write-Host "Launching Dask scheduler..."
+          Start-Process -NoNewWindow -FilePath pixi `
+            -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
+            -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
+            -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
+
+          Write-Host "Launching Dask workers..."
+          Start-Process -NoNewWindow -FilePath pixi `
+            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
+            -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
+            -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
+
+          Write-Host "Waiting for Dask scheduler to be ready..."
+          for ($i = 1; $i -le 30; $i++) {
+          if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
+            Write-Host "Dask scheduler is ready!"
+            break
+          }
+          Write-Host "Waiting for Dask scheduler..."
+          Start-Sleep -Seconds 2
+          }
+
+          Write-Host "------------ Running tests -------------"
           pixi r pytest `
             -n 5 `
             -rsx `
