@@ -38,7 +38,8 @@ from .context import CURRENT_DIR, TEST_DATA_FOLDER
 
 def import_worker_requirements():
     import compatibility
-    import mechanisms.l5pt
+    if not os.name == "nt":
+        import mechanisms.l5pt
     from config.isf_logging import logger
 
 
