@@ -76,6 +76,8 @@ jobs:
           pixi r python -c 'import os; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """"))'
           pixi r python -c 'import os; print(""PATH:"", os.environ.get(""PATH"", """"))'
           pixi r python -c 'import os; print(""NEURONHOME:"", os.environ.get(""NEURONHOME"", """"))'
+
+          Get-ChildItem -Path C:\nrn -Recurse | Select-Object FullName, Length, LastWriteTime
           
           Write-Host "Checking if NEURONHOME environment variable is set..."
           if ([string]::IsNullOrEmpty($env:NEURONHOME)) {
