@@ -92,6 +92,8 @@ jobs:
           
           Write-Host "Checking for NEURON bin directory in PATH..."
           pixi r python -c 'import os; print([p for p in os.environ["PATH"].split(os.pathsep) if "neuron" in p.lower()])'
+        env:
+          NEURONHOME: C:\nrn
 
       - name: Test ISF
         run: |
@@ -106,6 +108,7 @@ jobs:
             --dask_server_port 8786 tests
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
 
       - name: Test ModelDataBase backwards compatibility
         run: |
