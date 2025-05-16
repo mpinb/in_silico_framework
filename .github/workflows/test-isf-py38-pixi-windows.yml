@@ -73,9 +73,21 @@ jobs:
 
       - name: Debug - test NEURON installation
         run: |
-          pixi r python -c 'import os, sys; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """")); print(""PATH:"", os.environ.get(""PATH"", """"))'
-          Write-Host "Listing contents of the NEURON installation directory..."
-          Get-ChildItem -Path $env:NEURONHOME -Recurse | Select-Object FullName, Length, LastWriteTime
+          pixi r python -c 'import os; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """"))'
+          pixi r python -c 'import os; print(""PATH:"", os.environ.get(""PATH"", """"))'
+          pixi r python -c 'import os; print(""NEURONHOME:"", os.environ.get(""NEURONHOME"", """"))'
+          
+          Write-Host "Checking if NEURONHOME environment variable is set..."
+          if ([string]::IsNullOrEmpty($env:NEURONHOME)) {
+            Write-Warning "NEURONHOME environment variable is not set!"
+            Exit 1
+          } else {
+            Write-Host "Listing contents of $env:NEURONHOME directory..."
+            Get-ChildItem -Path $env:NEURONHOME -Recurse | Select-Object FullName, Length, LastWriteTime
+          }
+          
+          Write-Host "Checking for NEURON bin directory in PATH..."
+          pixi r python -c 'import os; print([p for p in os.environ["PATH"].split(os.pathsep) if "neuron" in p.lower()])'
 
       - name: Test ISF
         run: |
