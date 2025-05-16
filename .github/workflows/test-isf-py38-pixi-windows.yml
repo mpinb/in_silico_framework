@@ -80,6 +80,8 @@ jobs:
           Write-Host "Checking if NEURONHOME environment variable is set..."
           if ([string]::IsNullOrEmpty($env:NEURONHOME)) {
             Write-Warning "NEURONHOME environment variable is not set!"
+            Write-Host "Available env vars are:"
+            Get-ChildItem Env: | Select-Object Name, Value
             Exit 1
           } else {
             Write-Host "Listing contents of $env:NEURONHOME directory..."
