@@ -21,7 +21,7 @@ In addition, it contains network connectivity parameters that define synaptic co
 
 """
 
-import os, platform, six, neuron, glob
+import os, platform, six, neuron, glob, shutil, subprocess
 from config.isf_logging import logger, stream_to_logger
 
 try:
@@ -35,6 +35,33 @@ channels = 'channels_py2' if six.PY2 else 'channels_py3'
 netcon = 'netcon_py2' if six.PY2 else 'netcon_py3'
 channels_path = os.path.join(parent, channels)
 netcon_path = os.path.join(parent, netcon)
+def check_nrnivmodl_is_available():
+    """
+    Check if nrnivmodl is available in the PATH.
+    Cross-platform implementation that works on both Windows and Unix systems.
+    """
+    where_cmd = "which" if os.name != 'nt' else "where"
+    try:
+        result = subprocess.run(
+            [where_cmd, 'nrnivmodl'], 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE, 
+            text=True, 
+            shell=True)
+        if result.returncode == 0 and result.stdout.strip():
+            logger.info(f"nrnivmodl found at: {result.stdout.strip()}")
+            return True
+        else:
+            path = shutil.which('nrnivmodl')
+            if path:
+                logger.info(f"nrnivmodl found at: {path}")
+                return True
+            logger.error("nrnivmodl not found in PATH")
+            return False
+    except Exception as e:
+        logger.error(f"Error checking nrnivmodl availability: {str(e)}")
+        logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
+        raise
 
 def check_nrnivmodl_is_available():
     """
