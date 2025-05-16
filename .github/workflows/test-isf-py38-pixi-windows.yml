@@ -71,9 +71,14 @@ jobs:
             Start-Sleep -Seconds 2
             }
 
-      - name: Test ISF
+      - name: Debug - test NEURON installation
         run: |
           pixi r python -c 'import os, sys; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """")); print(""PATH:"", os.environ.get(""PATH"", """"))'
+          Write-Host "Listing contents of the NEURON installation directory..."
+          Get-ChildItem -Path $env:NEURONHOME -Recurse | Select-Object FullName, Length, LastWriteTime
+
+      - name: Test ISF
+        run: |
           pixi r pytest `
             -n 5 `
             -rsx `
