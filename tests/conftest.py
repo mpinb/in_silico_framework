@@ -138,12 +138,6 @@ def pytest_configure(config):
     plt.switch_backend("agg")
     from config.isf_logging import logger as isf_logger
 
-    output_thickness = os.path.join(
-        CURRENT_DIR, "test_dendrite_thickness", "test_files", "output"
-    )
-    if not os.path.exists(output_thickness):
-        os.mkdir(output_thickness)
-
     # --------------- Setup logging output -------------------
     # only log warnings or worse
     isf_logger.setLevel(logging.WARNING)  # set logging level of ISF logger to WARNING
