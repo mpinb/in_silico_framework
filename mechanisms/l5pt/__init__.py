@@ -70,7 +70,7 @@ def check_if_mechanisms_are_compiled(path):
     else:
         return any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch])
 
-def compile_mechanisms(path):
+def _compile_mechanisms_at_path(path):
     """
     Compile the mechanisms in the given path using nrnivmodl.
     This function is only needed if the mechanisms are not already compiled.
@@ -80,20 +80,20 @@ def compile_mechanisms(path):
     else: # unix
         os.system('(cd "{}"; nrnivmodl)'.format(path))
 
-def compile_local_mechanisms(force_recompile=False):
+def compile_l5pt_mechanisms(force_recompile=False):
     """
     Compile the mechanisms in the local directory.
     This function is only needed if the mechanisms are not already compiled.
     """
     for path in (channels_path, netcon_path):
         if not check_if_mechanisms_are_compiled(path) or force_recompile:
-            compile_mechanisms(path)
+            _compile_mechanisms_at_path(path)
             if not check_if_mechanisms_are_compiled(path):
                 raise UserWarning("Could not compile mechanisms. Please do it manually")
 
 assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 
-compile_local_mechanisms(force_recompile=False)
+compile_l5pt_mechanisms(force_recompile=False)
 
 try:
     with stream_to_logger(logger=logger):

@@ -3,7 +3,6 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, socket, six
-import getting_started  # trigger creation of template files
 
 # --- Import fixtures
 from .fixtures import client
@@ -24,8 +23,9 @@ elif six.PY2:
         sqlite_db,
     )
 
+import getting_started  # trigger creation of template files
+import mechanisms.l5pt  # trigger compilation if they don't exist yet
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
-from mechanisms.l5pt import compile_l5pt_mechanisms
 
 # compile the mechanisms on whichever machine runs the tests
 compile_l5pt_mechanisms(force_recompile=False)
