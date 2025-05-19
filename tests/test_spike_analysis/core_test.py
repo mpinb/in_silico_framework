@@ -1,5 +1,17 @@
 from .context import *
-from spike_analysis.core import read_smr_file
+from spike_analysis.core import (
+    read_smr_file, 
+    get_peaks_above, 
+    filter_spike_times, 
+    filter_short_ISIs, 
+    stimulus_interval_filter, 
+    get_st_from_spike_times_and_stim_times, 
+    strip_st, 
+    SpikeDetectionCreastTrough,
+    get_period_label_by_time,
+    STAPlugin_ISIn,
+    STAPlugin_bursts,
+)
 import numpy as np
 import pandas as pd
 
@@ -86,15 +98,7 @@ class Tests:
                 0: 2.0
             }
         }
-        assert get_st_from_spike_times_and_stim_times([1, 2],
-                                                      [.5]).to_dict() == {
-                                                          0: {
-                                                              0: .5
-                                                          },
-                                                          1: {
-                                                              0: 1.5
-                                                          }
-                                                      }
+        assert get_st_from_spike_times_and_stim_times([1, 2],[.5]).to_dict() == {0: {0: .5}, 1: {0: 1.5}}
 
     def test_strip_st(self):
         df = pd.DataFrame({
