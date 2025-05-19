@@ -2,32 +2,21 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging
-import os
-import socket
-import sys
-
-import dask
-import six
-
-# To test model-data_base in the way it existed before, we must register it as a top-level module
-import data_base.model_data_base
-sys.modules["model_data_base"] = data_base.model_data_base
-from config.isf_logging import logger as isf_logger
+import logging, os, socket, sys, six
 
 # --- Import fixtures
 from .fixtures import client
 from .fixtures.dataframe_fixtures import ddf, pdf
 
-if six.PY3:  # pytest can be parallellized on py3: use unique ids for dbs
+if six.PY3:  
+    # pytest can be parallellized on py3: use unique ids for dbs
     from .fixtures.data_base_fixtures_py3 import (
         empty_db,
         fresh_db,
         sqlite_db,
     )
-elif (
-    six.PY2
-):  # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
+elif six.PY2:  
+    # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
     from .fixtures.data_base_fixtures_py2 import (
         fresh_db,
         empty_db,
@@ -35,6 +24,10 @@ elif (
     )
 
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
+from mechanisms.l5pt import compile_l5pt_mechanisms
+
+# compile the mechanisms on whichever machine runs the tests
+compile_l5pt_mechanisms(force_recompile=False)
 
 def import_worker_requirements():
     import compatibility
