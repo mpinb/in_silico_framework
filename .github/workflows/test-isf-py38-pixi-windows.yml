@@ -49,7 +49,6 @@ jobs:
 
       - name: Test ISF
         id: run_tests
-        continue-on-error: true
         run: |
           Write-Host "------------ Setting up Dask Server -------------"
           Write-Host "Launching Dask scheduler..."
@@ -86,31 +85,6 @@ jobs:
             --dask_server_port 8786 tests
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-
-      - name: Debug - test NEURON installation
-        if: steps.run_tests.outcome == 'failure'
-        run: |
-          pixi r python -c 'import os; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """"))'
-          pixi r python -c 'import os; print(""PATH:"", os.environ.get(""PATH"", """"))'
-          pixi r python -c 'import os; print(""NEURONHOME:"", os.environ.get(""NEURONHOME"", """"))'
-
-          Get-ChildItem -Path C:\nrn -Recurse | Select-Object FullName, Length, LastWriteTime
-          
-          Write-Host "Checking if NEURONHOME environment variable is set..."
-          if ([string]::IsNullOrEmpty($env:NEURONHOME)) {
-            Write-Warning "NEURONHOME environment variable is not set!"
-            Write-Host "Available env vars are:"
-            Get-ChildItem Env: | Select-Object Name, Value
-            Exit 1
-          } else {
-            Write-Host "Listing contents of $env:NEURONHOME directory..."
-            Get-ChildItem -Path $env:NEURONHOME -Recurse | Select-Object FullName, Length, LastWriteTime
-          }
-          
-          Write-Host "Checking for NEURON bin directory in PATH..."
-          pixi r python -c 'import os; print([p for p in os.environ[""PATH""].split(os.pathsep) if ""neuron"" in p.lower()])'
-        env:
           NEURONHOME: C:\nrn
 
       - name: Fail workflow if tests failed
