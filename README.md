@@ -5,7 +5,8 @@
 
 # The In Silico Framework (ISF)
 [![Linux](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-linux.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-linux.yml)
-[![OSX](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
+[![macOS](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-macos.yml)
+[![Windows](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-windows.yml/badge.svg)](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-windows.yml)
 [![codecov](https://codecov.io/gh/mpinb/in_silico_framework/graph/badge.svg?token=V4P4QMFM12)](https://codecov.io/gh/mpinb/in_silico_framework)
 
 </div>
