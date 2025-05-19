@@ -48,10 +48,8 @@ def _try_delete_folder_until_permission(dest_path, n_attempts=3):
             shutil.rmtree(dest_path)
             break
         except PermissionError:
-            if attempt <= n_attempts:
-                time.sleep(0.1)  # Wait briefly before retrying
-            else:
-                raise 
+            if attempt > n_attempts: raise
+            time.sleep(0.1)  # Wait briefly before retrying
 
 def read_smr_file(path):
     """Reads a Spike2 file and returns its content as a neo.core.block.Block object.
