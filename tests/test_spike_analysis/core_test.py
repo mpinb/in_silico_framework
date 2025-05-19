@@ -11,7 +11,7 @@ from spike_analysis.core import (
     get_period_label_by_time,
     STAPlugin_ISIn,
     STAPlugin_bursts,
-    SpikeTimeAnalysis,
+    SpikeTimesAnalysis,
 )
 import numpy as np
 import pandas as pd
