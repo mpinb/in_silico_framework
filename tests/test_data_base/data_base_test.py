@@ -64,8 +64,7 @@ def test_metadata_update(empty_db):
     msg2 = "{} =/= {}".format(empty_db.metadata['test2']['version'],
                               get_versions()['version'])
     msg_git = "\nDid the commit turn dirty during testing?\n"
-    msg_git += subprocess.check_output(['git status'],
-                                       shell=True).decode('utf-8')
+    msg_git += subprocess.check_output(['git', 'status'], shell=True).decode('utf-8')
     assert empty_db.metadata['test']['version'] == get_versions(
     )['version'], msg1 + msg_git
     assert empty_db.metadata['test2']['version'] == get_versions(
