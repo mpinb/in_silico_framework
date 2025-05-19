@@ -27,9 +27,6 @@ import getting_started  # trigger creation of template files
 import mechanisms.l5pt  # trigger compilation if they don't exist yet
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
 
-# compile the mechanisms on whichever machine runs the tests
-compile_l5pt_mechanisms(force_recompile=False)
-
 def import_worker_requirements():
     import compatibility
     from config.isf_logging import logger
