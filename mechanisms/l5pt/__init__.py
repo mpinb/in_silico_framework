@@ -21,7 +21,7 @@ In addition, it contains network connectivity parameters that define synaptic co
 
 """
 
-import os, platform
+import os, platform, six, neuron, glob, shutil, subprocess
 from config.isf_logging import logger, stream_to_logger
 
 try:
@@ -29,48 +29,77 @@ try:
 except ImportError:
     pass
 
-import neuron
-
 parent = os.path.abspath(os.path.dirname(__file__))
-
 arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
+channels = 'channels_py2' if six.PY2 else 'channels_py3'
+netcon = 'netcon_py2' if six.PY2 else 'netcon_py3'
+channels_path = os.path.join(parent, channels)
+netcon_path = os.path.join(parent, netcon)
 
-import six
-if six.PY2:
-    channels = 'channels_py2'
-    netcon = 'netcon_py2'
-else:
-    channels = 'channels_py3'
-    netcon = 'netcon_py3'
-
-try:
-    assert any(
-        [os.path.exists(os.path.join(parent, channels, a, '.libs')) for a in arch])
-    assert any([os.path.exists(os.path.join(parent, netcon, a, '.libs')) for a in arch])
-
-except AssertionError:
-    logger.warning("Neuron mechanisms are not compiled.")
-    logger.warning("Trying to compile them. Only works, if nrnivmodl is in PATH")
-    os.system(
-        '(cd {path}; nrnivmodl)'.format(path=os.path.join(parent, channels)))
-    os.system(
-        '(cd {path}; nrnivmodl)'.format(path=os.path.join(parent, netcon)))
-
+def check_nrnivmodl_is_available():
+    """
+    Check if nrnivmodl is available in the PATH.
+    Cross-platform implementation that works on both Windows and Unix systems.
+    """
+    where_cmd = "which" if os.name != 'nt' else "where"
     try:
-        assert any(
-            [os.path.exists(os.path.join(parent, channels, a)) for a in arch])
-        assert any(
-            [os.path.exists(os.path.join(parent, netcon, a)) for a in arch])
-    except AssertionError:
-        logger.warning("Could not compile mechanisms. Please do it manually")
+        result = subprocess.run(
+            [where_cmd, 'nrnivmodl'], 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE, 
+            text=True, 
+            shell=True)
+        if result.returncode == 0 and result.stdout.strip():
+            logger.info(f"nrnivmodl found at: {result.stdout.strip()}")
+            return True
+        else:
+            path = shutil.which('nrnivmodl')
+            if path:
+                logger.info(f"nrnivmodl found at: {path}")
+                return True
+            logger.error("nrnivmodl not found in PATH")
+            return False
+    except Exception as e:
+        logger.error(f"Error checking nrnivmodl availability: {str(e)}")
+        logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
         raise
 
-logger.info("Loading mechanisms:")
+def check_if_mechanisms_are_compiled(path):
+    if os.name == 'nt':
+        return any(glob.glob(os.path.join(path, '*.dll')))
+    else:
+        return any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch])
+
+def compile_mechanisms(path):
+    """
+    Compile the mechanisms in the given path using nrnivmodl.
+    This function is only needed if the mechanisms are not already compiled.
+    """
+    if os.name == 'nt': # windows
+        os.system('cd /d "{}" && nrnivmodl'.format(path))
+    else: # unix
+        os.system('(cd "{}"; nrnivmodl)'.format(path))
+
+def compile_local_mechanisms(force_recompile=False):
+    """
+    Compile the mechanisms in the local directory.
+    This function is only needed if the mechanisms are not already compiled.
+    """
+    for path in (channels_path, netcon_path):
+        if not check_if_mechanisms_are_compiled(path) or force_recompile:
+            compile_mechanisms(path)
+            if not check_if_mechanisms_are_compiled(path):
+                raise UserWarning("Could not compile mechanisms. Please do it manually")
+
+assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
+
+compile_local_mechanisms(force_recompile=False)
 
 try:
     with stream_to_logger(logger=logger):
-        mechanisms_loaded = neuron.load_mechanisms(os.path.join(parent, channels))
-        netcon_loaded = neuron.load_mechanisms(os.path.join(parent, netcon))
+        logger.info("Loading mechanisms in NEURON namespace...")
+        mechanisms_loaded = neuron.load_mechanisms(channels_path)
+        netcon_loaded = neuron.load_mechanisms(netcon_path)
     assert mechanisms_loaded, "Couldn't load mechanisms."
     assert netcon_loaded, "Couldn't load netcon"
 except Exception as e:

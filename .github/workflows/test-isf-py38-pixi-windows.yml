@@ -47,33 +47,34 @@ jobs:
             }
             $env:TMPDIR = "$HOME/tmp"
 
-      - name: Launch Dask scheduler and workers
-        run: |
-            Write-Host "Launching Dask scheduler..."
-            Start-Process -NoNewWindow -FilePath pixi `
-              -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
-              -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
-
-            Write-Host "Launching Dask workers..."
-            Start-Process -NoNewWindow -FilePath pixi `
-              -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
-              -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
-              -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
-
-            Write-Host "Waiting for Dask scheduler to be ready..."
-            for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
-              Write-Host "Dask scheduler is ready!"
-              break
-            }
-            Write-Host "Waiting for Dask scheduler..."
-            Start-Sleep -Seconds 2
-            }
-
       - name: Test ISF
+        id: run_tests
+        continue-on-error: true
         run: |
-          pixi r python -c "import os, sys; print('PYTHONPATH:', os.environ.get('PYTHONPATH', '')); print('PATH:', sys.path)"
+          Write-Host "------------ Setting up Dask Server -------------"
+          Write-Host "Launching Dask scheduler..."
+          Start-Process -NoNewWindow -FilePath pixi `
+            -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
+            -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
+            -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
+
+          Write-Host "Launching Dask workers..."
+          Start-Process -NoNewWindow -FilePath pixi `
+            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
+            -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
+            -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
+
+          Write-Host "Waiting for Dask scheduler to be ready..."
+          for ($i = 1; $i -le 30; $i++) {
+          if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
+            Write-Host "Dask scheduler is ready!"
+            break
+          }
+          Write-Host "Waiting for Dask scheduler..."
+          Start-Sleep -Seconds 2
+          }
+
+          Write-Host "------------ Running tests -------------"
           pixi r pytest `
             -n 5 `
             -rsx `
@@ -85,6 +86,38 @@ jobs:
             --dask_server_port 8786 tests
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
+
+      - name: Debug - test NEURON installation
+        if: steps.run_tests.outcome == 'failure'
+        run: |
+          pixi r python -c 'import os; print(""PYTHONPATH:"", os.environ.get(""PYTHONPATH"", """"))'
+          pixi r python -c 'import os; print(""PATH:"", os.environ.get(""PATH"", """"))'
+          pixi r python -c 'import os; print(""NEURONHOME:"", os.environ.get(""NEURONHOME"", """"))'
+
+          Get-ChildItem -Path C:\nrn -Recurse | Select-Object FullName, Length, LastWriteTime
+          
+          Write-Host "Checking if NEURONHOME environment variable is set..."
+          if ([string]::IsNullOrEmpty($env:NEURONHOME)) {
+            Write-Warning "NEURONHOME environment variable is not set!"
+            Write-Host "Available env vars are:"
+            Get-ChildItem Env: | Select-Object Name, Value
+            Exit 1
+          } else {
+            Write-Host "Listing contents of $env:NEURONHOME directory..."
+            Get-ChildItem -Path $env:NEURONHOME -Recurse | Select-Object FullName, Length, LastWriteTime
+          }
+          
+          Write-Host "Checking for NEURON bin directory in PATH..."
+          pixi r python -c 'import os; print([p for p in os.environ[""PATH""].split(os.pathsep) if ""neuron"" in p.lower()])'
+        env:
+          NEURONHOME: C:\nrn
+
+      - name: Fail workflow if tests failed
+        if: steps.run_tests.outcome == 'failure'
+        run: |
+          Write-Host "Tests failed. Debug information has been collected. See above for details."
+          exit 1
 
       - name: Test ModelDataBase backwards compatibility
         run: |
