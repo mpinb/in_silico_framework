@@ -5,11 +5,7 @@ from collections.abc import MutableMapping
 import json, re, neuron
 from data_base.dbopen import dbopen, resolve_modular_db_path
 
-def _read_params_to_dict(filename):
-    filename = resolve_modular_db_path(filename)
-    with dbopen(filename, "r") as f:
-        content = f.read()
-
+def _make_json_compatible(content):
     # Replace single quotes with double quotes
     content = content.replace("'", '"')
 
@@ -21,6 +17,21 @@ def _read_params_to_dict(filename):
 
     # Replace None with null
     content = content.replace("None", "null")
+
+    # Properly escape Windows file paths - handle backslashes in paths 
+    # Look for patterns that appear to be file paths with backslashes
+    content = re.sub(r'(["]\s*[a-zA-Z]:\\[^"\\]*)(\\)([^"\\]*["])', r'\1\\\\\3', content)
+    content = re.sub(r'\\(?![\\"])', r'\\\\', content)
+
+    return content
+    
+
+def _read_params_to_dict(filename):
+    filename = resolve_modular_db_path(filename)
+    with dbopen(filename, "r") as f:
+        content = f.read()
+
+    content = _make_json_compatible(content)
     
     try:
         params_dict = json.loads(content)
