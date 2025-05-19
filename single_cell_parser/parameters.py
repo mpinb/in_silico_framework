@@ -6,6 +6,24 @@ import json, re, neuron
 from data_base.dbopen import dbopen, resolve_modular_db_path
 
 def _make_json_compatible(content):
+    """Make a string compatible with JSON format.
+    
+    This function takes a string and performs the following transformations:
+
+    - Replaces single quotes with double quotes.
+    - Removes trailing commas before closing brackets.
+    - Replaces Python-style tuples (x, y) with JSON arrays [x, y].
+    - Replaces None with null.
+    - Handles Windows-style paths or mixed-delimiter paths by replacing backslashes with forward slashes.
+    
+    This is useful for reading in nested dictionaries in Python syntax with a JSON parser.
+
+    Args:
+        content (str): The input string to be transformed.
+        
+    Returns:
+        str: The transformed string that is compatible with JSON format.
+    """
     # Replace single quotes with double quotes
     content = content.replace("'", '"')
 
@@ -18,10 +36,14 @@ def _make_json_compatible(content):
     # Replace None with null
     content = content.replace("None", "null")
 
-    # Properly escape Windows file paths - handle backslashes in paths 
-    # Look for patterns that appear to be file paths with backslashes
-    content = re.sub(r'(["]\s*[a-zA-Z]:\\[^"\\]*)(\\)([^"\\]*["])', r'\1\\\\\3', content)
-    content = re.sub(r'\\(?![\\"])', r'\\\\', content)
+    def normalize_path(match):
+        # Find patterns that look like Windows paths (starting with drive letter)
+        path = match.group(0)
+        normalized = path.replace('\\', '/')
+        return normalized
+    
+    # Handle file paths with mixed delimiters - normalize to forward slashes first (works in JSON)
+    content = re.sub(r'"[a-zA-Z]:\\[^"]*"', normalize_path, content)
 
     return content
     
