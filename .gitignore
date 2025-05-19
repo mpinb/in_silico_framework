@@ -22,6 +22,7 @@ trash_it_now/
 
 # compiler output
 *.pyc
+**__pycache__**
 mechanisms/*/*/x86_64**
 
 barrel_cortex/*
