@@ -1,5 +1,5 @@
 from .context import *
-from spike_analysis.core import *
+from spike_analysis.core import read_smr_file
 import numpy as np
 import pandas as pd
 

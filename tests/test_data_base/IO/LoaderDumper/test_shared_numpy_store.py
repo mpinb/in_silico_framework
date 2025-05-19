@@ -1,5 +1,5 @@
 import numpy as np
-import pytest, sys, signal, time, six
+import pytest, sys, signal, time, six, os, tempfile
 from multiprocessing import Process
 from data_base.IO.LoaderDumper.shared_numpy_store import *
 
@@ -228,7 +228,3 @@ def test_uninterruptible():
     assert t_i > 2 / 5
     assert t_i < 5 / 5
     assert t_ni > 5 / 5
-
-
-#test_SharedNumpyStore()
-#test_shared_array_functions()
