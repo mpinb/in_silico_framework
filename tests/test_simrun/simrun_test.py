@@ -129,10 +129,12 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     # Note: these tolerances were found with trial and error, but have no further meaning
     if sys.platform.startswith('linux'):
         n_decimals=3
-    elif sys.platform.startswith('darwin'):
+    elif sys.platform.startswith('darwin') or sys.platform.startswith('win32'):
         # OSX has updated NEURON version (NEURON 8), and the results are not exactly the same
         # compared to Robert's original results (NEURON < 7.8.2)
         n_decimals=1
+    else:
+        raise NotImplementedError("Platform not supported: %s" % sys.platform)
 
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
