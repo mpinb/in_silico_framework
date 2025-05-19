@@ -24,8 +24,7 @@ linux = "3.10.0"
 # Add ISF (i.e. the $pwd) to PYTHONPATH to import all ISF packages.
 PYTHONPATH = "$(pwd):$PYTHONPATH"
 [tool.pixi.target.win.activation.env]
-# For windows: same as above
-# But also add NEURON to the PATH
+# For windows: same as above + add NEURON to the PATH
 PYTHONPATH = "%cd%;%PYTHONPATH%"
 PATH = "%PATH%;%NEURONHOME%"
 HOME = "%USERPROFILE%"
@@ -55,12 +54,12 @@ ipywidgets = ">=8.1.5,<9"
 zarr = ">=2.15.0,<3"
 pandas = "1.1.3.*"
 pyarrow = ">=7.0.0,<12"
-blosc = ">=1.21.5,<2"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
 redis = ">=5.2.0,<6"
 isf-pandas-msgpack = ">=0.4.0"
+blosc = ">=1.11.1,<2"
 blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 [tool.pixi.target.osx]
@@ -132,12 +131,14 @@ launch_jupyter_server = {cmd = [
 test = {cmd = [
   "pytest", 
   "-rsx",
+  "-n",
+  "$ISF_NUM_PYTEST_WORKERS",
   "-vv",
   "--color=yes",
   "--durations=15",
   "--dask_server_port",
   "$ISF_DASK_PORT",
-  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "1", ISF_DASK_PORT = "8786"}, cwd="tests"}
+  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
 
 test_mdb = {cmd = [
   "export", "ISF_USE_MDB=1",
