@@ -38,8 +38,6 @@ from .context import CURRENT_DIR, TEST_DATA_FOLDER
 
 def import_worker_requirements():
     import compatibility
-    if not os.name == "nt":
-        import mechanisms.l5pt
     from config.isf_logging import logger
 
 
@@ -120,10 +118,9 @@ def pytest_ignore_collect(path, config):
         ) or path.fnmatch(  # only run new DataBase tests on Py3
             "/*cell_morphology_visualizer_test*"
         )  # don't run cmv tests on Py2
-    if path.fnmatch("/*test_barrel_cortex/*"):
-        bc_downloaded = os.path.exists(
-            os.path.join(os.path.dirname(CURRENT_DIR), "barrel_cortex")
-        )
+    
+    bc_downloaded = os.path.exists(os.path.join(os.path.dirname(CURRENT_DIR), "barrel_cortex"))
+    if path.fnmatch("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
 
