@@ -19,29 +19,39 @@
 Read and analyze electrophysiological data.
 """
 
-import neo, json, tempfile, shutil, os
+import neo, json, tempfile, shutil, os, json, time, tempfile, six, logging, gc
 from PyPDF2 import PdfFileWriter, PdfFileReader
-import json
-from functools import partial
-import neo
 import pandas as pd
 import numpy as np
 from data_base import utils as db_utils
 from collections import defaultdict
-import tempfile
 import matplotlib.pyplot as plt
-import six
 from IPython import display
 import seaborn as sns
 from data_base.analyze.spike_detection import spike_in_interval as db_analyze_spike_in_interval
 from data_base.analyze.temporal_binning import universal as temporal_binning
 from visualize import histogram
-import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 ################################
 # reader
 ################################
+
+def _try_delete_folder_until_permission(dest_path, n_attempts=3):
+    """Try to delete a folder until permission is granted.
+
+    Args:
+        dest_path (str): Path to the folder to be deleted.
+    """
+    for attempt in range(n_attempts):
+        try:
+            shutil.rmtree(dest_path)
+            break
+        except PermissionError:
+            if attempt <= n_attempts:
+                time.sleep(0.1)  # Wait briefly before retrying
+            else:
+                raise 
 
 def read_smr_file(path):
     """Reads a Spike2 file and returns its content as a neo.core.block.Block object.
@@ -57,12 +67,17 @@ def read_smr_file(path):
     """
     # copying file to tmp_folder to avoid modifying it at all cost
     dest_folder = tempfile.mkdtemp()
-    shutil.copy(path, dest_folder)
-    path = os.path.join(dest_folder, os.path.basename(path))
-    reader = neo.io.Spike2IO(filename=path)
-    data = reader.read(lazy=False, signal_group_mode='split-all')[0]
-    shutil.rmtree(dest_folder)
-    return data
+    try:
+        temp_path = os.path.join(dest_folder, os.path.basename(path))
+        shutil.copy(path, temp_path)
+        reader = neo.io.Spike2IO(filename=temp_path)
+        data = reader.read(lazy=False, signal_group_mode='split-all')[0]
+        del reader      # Explicitly delete the reader to release the file handle
+        gc.collect()    # Force garbage collection to ensure file handles are released
+        return data
+    finally:
+        # Retry deleting the temporary directory in case of file locking
+        _try_delete_folder_until_permission(dest_folder)
 
 
 class ReaderSmr:
