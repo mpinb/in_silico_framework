@@ -2,7 +2,8 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, socket, sys, six
+import logging, os, socket, six
+import getting_started  # trigger creation of template files
 
 # --- Import fixtures
 from .fixtures import client
