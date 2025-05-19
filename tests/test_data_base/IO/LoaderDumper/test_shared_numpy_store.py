@@ -58,7 +58,8 @@ def uninterruptible_task():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_shared_array_functions():
     with TemporaryDirectory() as tempdir:  # needed to set up JOB_SHMTMPDIR
         arr = np.array([1, 2, 3])
@@ -79,7 +80,8 @@ def test_shared_array_functions():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_SharedNumpyStore():
     arr = np.array([1, 2, 3])
     with TemporaryDirectory() as tempdir:
@@ -95,7 +97,8 @@ def test_SharedNumpyStore():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_append_save():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -124,7 +127,8 @@ def test_append_save():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_append_save_no_flush_leaves_array_unchanged():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -153,7 +157,8 @@ def test_append_save_no_flush_leaves_array_unchanged():
     reason=
     "Unavailable on Py2. The multiprocessing module got `shared_memory` in Python 3.8"
 )
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_robustness():
     arr1 = np.array([[1, 2, 3], [4, 5, 6]])
     arr2 = np.array([[7, 8, 9], [10, 11, 12]])
@@ -195,7 +200,8 @@ def test_robustness():
     six.PY2,
     reason=
     "Unavailable on Py2. Uninterruptable processes are interruptable in Py2.")
-@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX")
+@pytest.mark.skipif(sys.platform.startswith("darwin"), reason="Shared memory is not available on OSX, only on Linux")
+@pytest.mark.skipif(sys.platform.startswith("win32"), reason="Shared memory is not available on Windows, only on Linux")
 def test_uninterruptible():
     print("Running interruptible task in a separate process.")
     t0 = time.time()
