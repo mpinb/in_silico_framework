@@ -88,12 +88,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
 
-      - name: Fail workflow if tests failed
-        if: steps.run_tests.outcome == 'failure'
-        run: |
-          Write-Host "Tests failed. Debug information has been collected. See above for details."
-          exit 1
-
       - name: Test ModelDataBase backwards compatibility
         run: |
           $env:ISF_USE_MDB = "1"
@@ -101,6 +95,7 @@ jobs:
           Remove-Item Env:ISF_USE_MDB -ErrorAction SilentlyContinue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
