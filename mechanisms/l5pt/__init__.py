@@ -74,10 +74,7 @@ def _compile_mechanisms_at_path(path):
     Compile the mechanisms in the given path using nrnivmodl.
     This function is only needed if the mechanisms are not already compiled.
     """
-    if os.name == 'nt': # windows
-        os.system('cd /d "{}" && nrnivmodl'.format(path))
-    else: # unix
-        os.system('(cd "{}"; nrnivmodl)'.format(path))
+    os.subprocess.run(['nrnivmodl'], cwd=path, check=True)
 
 def compile_l5pt_mechanisms(force_recompile=False):
     """
@@ -102,4 +99,4 @@ try:
     assert mechanisms_loaded, "Couldn't load mechanisms."
     assert netcon_loaded, "Couldn't load netcon"
 except Exception as e:
-     raise e
+    raise e
