@@ -44,22 +44,6 @@ def ensure_workers_have_imported_requirements(client):
 
     client.run(update_path)
 
-    if six.PY3:
-        # Add dask plugin in case workers get killed
-        from distributed.diagnostics.plugin import WorkerPlugin
-
-        class SetupWorker(WorkerPlugin):
-            def __init__(self):
-                import_worker_requirements()
-
-            def setup(self, worker):
-                """
-                This gets called every time a new worker is added to the scheduler
-                """
-                import_worker_requirements()
-
-        client.register_worker_plugin(SetupWorker())
-
     client.run(import_worker_requirements)
     
 logger = logging.getLogger("ISF").getChild(__name__)
