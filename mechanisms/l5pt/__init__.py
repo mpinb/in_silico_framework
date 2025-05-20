@@ -79,16 +79,24 @@ def compile_l5pt_mechanisms(force_recompile=False):
             if not check_if_mechanisms_are_compiled(path):
                 raise UserWarning("Could not compile mechanisms. Please do it manually")
 
+def load_mechanisms():
+    try:
+        with stream_to_logger(logger=logger):
+            logger.info("Loading mechanisms in NEURON namespace...")
+            mechanisms_loaded = neuron.load_mechanisms(channels_path)
+            netcon_loaded = neuron.load_mechanisms(netcon_path)
+        assert mechanisms_loaded, "Couldn't load mechanisms."
+        assert netcon_loaded, "Couldn't load netcon"
+    except Exception as e:
+        raise e
+
 assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 
 compile_l5pt_mechanisms(force_recompile=False)
 
-try:
-    with stream_to_logger(logger=logger):
-        logger.info("Loading mechanisms in NEURON namespace...")
-        mechanisms_loaded = neuron.load_mechanisms(channels_path)
-        netcon_loaded = neuron.load_mechanisms(netcon_path)
-    assert mechanisms_loaded, "Couldn't load mechanisms."
-    assert netcon_loaded, "Couldn't load netcon"
-except Exception as e:
-    raise e
+if os.name == 'nt':
+    logger.warning("Mechanisms are not automatically loaded on Windows, to prevent multithreading issues.")
+    logger.warning("Please load them manually in the process you need with the following command:")
+    logger.warning("from mechanisms.l5pt import load_mechanisms; load_mechanisms()")
+else: 
+    load_mechanisms()

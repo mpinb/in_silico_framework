@@ -61,7 +61,9 @@ def ensure_workers_have_imported_requirements(client):
         client.register_worker_plugin(SetupWorker())
 
     client.run(import_worker_requirements)
-
+    
+    if os.name == "nt":
+        client.run(mechanisms.l5pt.load_mechanisms)
 
 logger = logging.getLogger("ISF").getChild(__name__)
 os.environ["ISF_IS_TESTING"] = "True"
