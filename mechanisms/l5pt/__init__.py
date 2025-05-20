@@ -94,9 +94,4 @@ assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. 
 
 compile_l5pt_mechanisms(force_recompile=False)
 
-if os.name == 'nt':
-    logger.warning("Mechanisms are not automatically loaded on Windows, to prevent multithreading issues.")
-    logger.warning("Please load them manually in the process you need with the following command:")
-    logger.warning("from mechanisms.l5pt import load_mechanisms; load_mechanisms()")
-else: 
-    load_mechanisms()
+load_mechanisms()
