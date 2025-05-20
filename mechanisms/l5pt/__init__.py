@@ -47,8 +47,7 @@ def check_nrnivmodl_is_available():
             [where_cmd, 'nrnivmodl'], 
             stdout=subprocess.PIPE, 
             stderr=subprocess.PIPE, 
-            text=True, 
-            shell=True)
+            text=True)
         if result.returncode == 0 and result.stdout.strip():
             logger.info(f"nrnivmodl found at: {result.stdout.strip()}")
             return True
