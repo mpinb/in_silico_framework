@@ -97,7 +97,7 @@ jobs:
 
           Write-Host "Launching Dask workers..."
           Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8788 --nthreads 1 --nprocs 5 --memory-limit=100e15 --local-directory=." `
+            -ArgumentList "r dask-worker localhost:8788 --nthreads 1 --nprocs 4 --memory-limit=100e15 --local-directory=." `
 
           Write-Host "Waiting for Dask scheduler to be ready..."
           for ($i = 1; $i -le 30; $i++) {
@@ -109,7 +109,7 @@ jobs:
             Start-Sleep -Seconds 2
           }
           $env:ISF_USE_MDB = "1"
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --dask_server_port 8788 tests\test_data_base\
+          pixi r pytest -n 2 -rsx -vv --color=yes --durations=15 --dask_server_port 8788 tests\test_data_base\
           Remove-Item Env:ISF_USE_MDB -ErrorAction SilentlyContinue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
