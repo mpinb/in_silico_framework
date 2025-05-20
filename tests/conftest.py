@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, socket, six
+import logging, os, socket, six, sys, pytest
 
 # --- Import fixtures
 from .fixtures import client
@@ -22,7 +22,7 @@ elif six.PY2:
         empty_db,
         sqlite_db,
     )
-
+from .fixtures.session_fixtures import compile_mechanisms_once
 import getting_started  # trigger creation of template files
 import mechanisms.l5pt  # trigger compilation if they don't exist yet
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
@@ -36,7 +36,7 @@ def ensure_workers_have_imported_requirements(client):
     """
     This function is called in the pytest_configure hook to ensure that all workers have imported the necessary modules
     """
-    import sys
+    client.wait_for_workers(n=client.ncores())  # or just wait_for_workers(1)
 
     def update_path():
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
