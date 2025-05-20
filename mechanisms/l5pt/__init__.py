@@ -43,21 +43,12 @@ def check_nrnivmodl_is_available():
     """
     where_cmd = "which" if os.name != 'nt' else "where"
     try:
-        result = subprocess.run(
-            [where_cmd, 'nrnivmodl'], 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE, 
-            text=True)
-        if result.returncode == 0 and result.stdout.strip():
-            logger.info(f"nrnivmodl found at: {result.stdout.strip()}")
+        path = shutil.which('nrnivmodl')
+        if path:
+            logger.info(f"nrnivmodl found at: {path}")
             return True
-        else:
-            path = shutil.which('nrnivmodl')
-            if path:
-                logger.info(f"nrnivmodl found at: {path}")
-                return True
-            logger.error("nrnivmodl not found in PATH")
-            return False
+        logger.error("nrnivmodl not found in PATH")
+        return False
     except Exception as e:
         logger.error(f"Error checking nrnivmodl availability: {str(e)}")
         logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
