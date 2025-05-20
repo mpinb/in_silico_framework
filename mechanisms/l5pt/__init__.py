@@ -41,7 +41,6 @@ def check_nrnivmodl_is_available():
     Check if nrnivmodl is available in the PATH.
     Cross-platform implementation that works on both Windows and Unix systems.
     """
-    where_cmd = "which" if os.name != 'nt' else "where"
     try:
         path = shutil.which('nrnivmodl')
         if path:
@@ -65,7 +64,9 @@ def _compile_mechanisms_at_path(path):
     Compile the mechanisms in the given path using nrnivmodl.
     This function is only needed if the mechanisms are not already compiled.
     """
-    subprocess.run(['nrnivmodl'], cwd=path, check=True, env=os.environ.copy())
+    assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
+    nrnivmodl_path = shutil.which('nrnivmodl')
+    subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
 
 def compile_l5pt_mechanisms(force_recompile=False):
     """
