@@ -26,7 +26,7 @@ PYTHONPATH = "$(pwd):$PYTHONPATH"
 [tool.pixi.target.win.activation.env]
 # For windows: same as above + add NEURON to the PATH
 PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%"
-PATH = "%PATH%;%NEURONHOME%"
+PATH = "%PATH%;%NEURONHOME%/bin"
 HOME = "%USERPROFILE%"
 
 [tool.pixi.dependencies]
