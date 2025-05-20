@@ -74,7 +74,7 @@ def _compile_mechanisms_at_path(path):
     Compile the mechanisms in the given path using nrnivmodl.
     This function is only needed if the mechanisms are not already compiled.
     """
-    os.subprocess.run(['nrnivmodl'], cwd=path, check=True)
+    subprocess.run(['nrnivmodl'], cwd=path, check=True)
 
 def compile_l5pt_mechanisms(force_recompile=False):
     """
