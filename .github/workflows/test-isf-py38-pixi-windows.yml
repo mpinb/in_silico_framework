@@ -60,7 +60,7 @@ jobs:
 
           Write-Host "Launching Dask workers..."
           Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
+            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 4 --memory-limit=100e15 --local-directory=." `
             -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
             -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
 
@@ -76,6 +76,7 @@ jobs:
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `
+            -n 4 `
             -rsx `
             -vv `
             --color=yes `
