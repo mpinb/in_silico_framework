@@ -23,18 +23,12 @@ In addition, it contains network connectivity parameters that define synaptic co
 
 import os, platform, six, neuron, glob, shutil, subprocess
 from config.isf_logging import logger, stream_to_logger
-
-try:
-    import tables
-except ImportError:
-    pass
+try: import tables
+except ImportError: pass
 
 parent = os.path.abspath(os.path.dirname(__file__))
-arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
-channels = 'channels_py2' if six.PY2 else 'channels_py3'
-netcon = 'netcon_py2' if six.PY2 else 'netcon_py3'
-channels_path = os.path.join(parent, channels)
-netcon_path = os.path.join(parent, netcon)
+channels_path = os.path.join(parent, 'channels_py2' if six.PY2 else 'channels_py3')
+netcon_path = os.path.join(parent, 'netcon_py2' if six.PY2 else 'netcon_py3')
 
 def check_nrnivmodl_is_available():
     """
@@ -57,6 +51,7 @@ def _check_if_mechanisms_are_compiled_at_path(path):
     if os.name == 'nt':
         return any(glob.glob(os.path.join(path, '*.dll')))
     else:
+        arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
         return any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch])
 
 def _compile_mechanisms_at_path(path):
