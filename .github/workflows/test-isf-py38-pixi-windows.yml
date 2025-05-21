@@ -121,12 +121,3 @@ jobs:
           name: ${{ github.run_id }}_logs
           path: |
             ./tests/logs/
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./tests/logs/report_py38.xml
-          verbose: true
-
-
