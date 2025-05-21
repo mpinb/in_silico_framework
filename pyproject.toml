@@ -121,7 +121,7 @@ args = [
   {arg = "port",        default = "8786"},
   {arg = "dashboard_port",  default = "8787"},
   {arg = "num_workers", default = "4"},
-  {arg = "mem_limit",   default = "2GB"}
+  {arg = "mem_limit",   default = "3GB"}
 ]
 cmd = [
   "dask-worker", 
