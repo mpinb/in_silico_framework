@@ -64,6 +64,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Teardown
+        run: |
+          echo "------------ Teardown -------------"
+          echo "Killing Dask server"
+          pkill -f dask-scheduler
+          pkill -f dask-worker
+
       - name: Save test logs
         uses: actions/upload-artifact@v4
         if: ${{ always() }} 
