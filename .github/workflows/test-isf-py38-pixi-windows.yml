@@ -59,7 +59,7 @@ jobs:
 
           Write-Host "Launching Dask workers..."
           Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 4 --memory-limit=5GB --local-directory=." `
+            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 5 --memory-limit=5GB --local-directory=." `
             -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
             -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
 
@@ -96,7 +96,7 @@ jobs:
 
           Write-Host "Launching Dask workers..."
           Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8788 --nthreads 1 --nprocs 4 --memory-limit=5GB --local-directory=." `
+            -ArgumentList "r dask-worker localhost:8788 --nthreads 1 --nprocs 5 --memory-limit=5GB --local-directory=." `
 
           Write-Host "Waiting for Dask scheduler to be ready..."
           for ($i = 1; $i -le 30; $i++) {
