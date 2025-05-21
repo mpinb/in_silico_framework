@@ -115,7 +115,7 @@ cmd = [
   "--host=localhost"
   ]
 description = "Launch a Dask scheduler"
-cwd="/tmp"
+cwd="$T?PDIR"
 
 [tool.pixi.tasks.launch_dask_workers]
 args = [
@@ -133,7 +133,7 @@ cmd = [
   "--dashboard-address={{  dashboard_port }}",
   ]
 description = "Launch Dask workers"
-cwd="/tmp"
+cwd="$TMPDIR"
 
 [tool.pixi.tasks.launch_jupyter_server]
 args = [
