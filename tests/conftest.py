@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, socket, six, sys, pytest
+import logging, os, socket, six, sys, pytest, time
 
 # --- Import fixtures
 from .fixtures import client
@@ -36,8 +36,7 @@ def ensure_workers_have_imported_requirements(client):
     """
     This function is called in the pytest_configure hook to ensure that all workers have imported the necessary modules
     """
-    n_dask_workers = len(client.ncores())
-    client.wait_for_workers(n_workers=n_dask_workers)  # or just wait_for_workers(1)
+    client.wait_for_workers(n_workers=len(client.ncores()))  # or just wait_for_workers(1)
 
     def update_path():
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -144,6 +143,11 @@ def pytest_configure(config):
     )
     isf_logging_file_handler.setLevel(logging.INFO)
     isf_logger.addHandler(isf_logging_file_handler)
+
+    # Wait until mechanisms are compiled
+    while not mechanisms.l5pt.check_if_mechanisms_are_compiled():
+        logger.info("Waiting for mechanisms to be compiled...")
+        time.sleep(1)
 
     c = distributed.Client(
         "{}:{}".format(
