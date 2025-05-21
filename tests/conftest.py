@@ -27,12 +27,20 @@ import getting_started  # trigger creation of template files
 import mechanisms.l5pt  # trigger compilation if they don't exist yet
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
 
-def import_worker_requirements():
+def _import_worker_requirements():
     import compatibility
     from config.isf_logging import logger
 
+def _setup_mpl_non_gui_backend():
+    """
+    Set up matplotlib to use a non-GUI backend.
+    This is necessary for running tests in a headless environment (e.g., CI/CD pipelines).
+    """
+    import matplotlib
+    matplotlib.use("Agg")
 
-def ensure_workers_have_imported_requirements(client):
+
+def setup_dask_worker_context(client):
     """
     This function is called in the pytest_configure hook to ensure that all workers have imported the necessary modules
     """
@@ -49,17 +57,18 @@ def ensure_workers_have_imported_requirements(client):
 
         class SetupWorker(WorkerPlugin):
             def __init__(self):
-                import_worker_requirements()
+                _import_worker_requirements()
 
             def setup(self, worker):
                 """
                 This gets called every time a new worker is added to the scheduler
                 """
-                import_worker_requirements()
+                _import_worker_requirements()
 
         client.register_worker_plugin(SetupWorker())
 
-    client.run(import_worker_requirements)
+    client.run(_import_worker_requirements)
+    client.run(_setup_mpl_non_gui_backend)
     
 logger = logging.getLogger("ISF").getChild(__name__)
 os.environ["ISF_IS_TESTING"] = "True"
@@ -156,4 +165,4 @@ def pytest_configure(config):
         )
     )
 
-    ensure_workers_have_imported_requirements(c)
+    setup_dask_worker_context(c)
