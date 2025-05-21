@@ -1,6 +1,7 @@
 import numpy as np
 from .context import *
 from visualize.histogram import *
+import gc
 import matplotlib.pyplot as plt
 
 from data_base.analyze import temporal_binning
@@ -21,6 +22,7 @@ class TestHistogram:
     def test_histogram_can_be_called_with_tuple(self):
         fig = histogram(self.testhist)
         plt.close(fig)
+        gc.collect()
 
     def test_histogram_can_be_called_with_series(self):
         from matplotlib.figure import Figure
@@ -31,3 +33,4 @@ class TestHistogram:
         assert isinstance(histogram(pds), Figure)
         assert histogram(pds, ax=ax) is fig
         plt.close(fig)
+        gc.collect()

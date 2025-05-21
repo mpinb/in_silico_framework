@@ -8,6 +8,7 @@ from visualize.manylines import plt, manylines
 import pandas as pd
 import dask.dataframe as dd
 from visualize._figure_array_converter import PixelObject, show_pixel_object
+import gc
 
 savefigs = True
 
@@ -42,6 +43,7 @@ class TestManyLines:
             fig.savefig(
                 os.path.join(self.tempdir, 'manylines_no_group_dask.png'))
         plt.close()
+        gc.collect()
 
     def test_manylines_grouped(self):
         df = self.df
@@ -70,6 +72,7 @@ class TestManyLines:
                 self.tempdir,
                 'manylines_grouped_dask.png'))
         plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_no_group_returnPixelObject(self, client):
@@ -86,6 +89,7 @@ class TestManyLines:
             fig.savefig(
                 os.path.join(self.tempdir, 'manylines_no_group_po_pandas.png'))
         plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_grouped_returnPixelObject(self, client):
@@ -117,3 +121,4 @@ class TestManyLines:
             fig.savefig(
                 os.path.join(self.tempdir, 'manylines_grouped_po_dask.png'))
         plt.close()
+        gc.collect()
