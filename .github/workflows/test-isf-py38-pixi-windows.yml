@@ -75,8 +75,8 @@ jobs:
               Write-Host "Waiting for port $port to be released..."
               Start-Sleep -Seconds 2
           }
-          (pixi r launch_dask_server) &
-          (pixi r launch_dask_workers --mem_limit 5GB) &
+          Start-Process pixi -ArgumentList "r launch_dask_server"
+          Start-Process pixi -ArgumentList "r launch_dask_workers --mem_limit 5GB"
 
           $env:ISF_USE_MDB = "1"
           pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8788 tests\test_data_base\

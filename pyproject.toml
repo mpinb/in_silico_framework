@@ -106,12 +106,12 @@ sphinx-immaterial = ">=0.11.14,<0.12"
 [tool.pixi.tasks.launch_dask_server]
 args = [
   {arg = "port", default = "8786"},
-  {arg = "bokeh_port", default = "8787"}
+  {arg = "dashboard_port", default = "8787"}
 ]
 cmd = [
   "dask-scheduler", 
   "--port={{ port }}", 
-  "--bokeh-port={{ bokeh_port }}", 
+  "--dashboard-address={{ dashboard_port }}", 
   "--host=localhost"
   ]
 description = "Launch a Dask scheduler"
@@ -120,7 +120,7 @@ cwd="/tmp"
 [tool.pixi.tasks.launch_dask_workers]
 args = [
   {arg = "port",        default = "8786"},
-  {arg = "bokeh_port",  default = "8787"},
+  {arg = "dashboard_port",  default = "8787"},
   {arg = "num_workers", default = "4"},
   {arg = "mem_limit",   default = "100e15"}
 ]
@@ -130,7 +130,7 @@ cmd = [
   "--nthreads=1", 
   "--nprocs={{  num_workers }}", 
   "--memory-limit={{  mem_limit }}", 
-  "--dashboard-address={{  bokeh_port }}",
+  "--dashboard-address={{  dashboard_port }}",
   ]
 description = "Launch Dask workers"
 cwd="/tmp"

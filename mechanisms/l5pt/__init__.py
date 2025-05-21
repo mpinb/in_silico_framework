@@ -63,7 +63,6 @@ def _compile_mechanisms_at_path(path):
     nrnivmodl_path = shutil.which('nrnivmodl')
     subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
 
-
 def check_if_all_mechanisms_are_compiled():
     """
     Check if all mechanisms are compiled.
