@@ -29,6 +29,7 @@ except ImportError: pass
 parent = os.path.abspath(os.path.dirname(__file__))
 channels_path = os.path.join(parent, 'channels_py2' if six.PY2 else 'channels_py3')
 netcon_path = os.path.join(parent, 'netcon_py2' if six.PY2 else 'netcon_py3')
+arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
 
 def check_nrnivmodl_is_available():
     """
@@ -70,7 +71,10 @@ def check_if_all_mechanisms_are_compiled():
     if os.name == 'nt':
         return all([any(glob.glob(os.path.join(path, '*.dll'))) for path in (channels_path, netcon_path)])
     else:
-        return all([any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch]) for path in (channels_path, netcon_path)])
+        return all([
+            _check_if_mechanisms_are_compiled_at_path(path) 
+            for path in (channels_path, netcon_path)
+            ])
 
 def compile_l5pt_mechanisms(force_recompile=False):
     """
