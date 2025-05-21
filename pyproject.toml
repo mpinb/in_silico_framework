@@ -121,7 +121,7 @@ args = [
   {arg = "port",        default = "8786"},
   {arg = "dashboard_port",  default = "8787"},
   {arg = "num_workers", default = "4"},
-  {arg = "mem_limit",   default = "100e15"}
+  {arg = "mem_limit",   default = "2GB"}
 ]
 cmd = [
   "dask-worker", 
@@ -129,7 +129,7 @@ cmd = [
   "--nthreads=1", 
   "--nprocs={{  num_workers }}", 
   "--memory-limit={{  mem_limit }}", 
-  "--dashboard-address={{  dashboard_port }}",
+  "--dashboard-address={{  dashboard_port }}"
   ]
 description = "Launch Dask workers"
 

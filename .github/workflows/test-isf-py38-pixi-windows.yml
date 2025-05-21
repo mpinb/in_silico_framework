@@ -51,7 +51,7 @@ jobs:
       - name: Test ISF
         run: |
           Start-Process pixi -ArgumentList "r launch_dask_server"
-          Start-Process pixi -ArgumentList "r launch_dask_workers --mem_limit 5GB"
+          Start-Process pixi -ArgumentList "r launch_dask_workers"
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `

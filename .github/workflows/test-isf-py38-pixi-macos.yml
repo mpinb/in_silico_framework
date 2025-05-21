@@ -50,8 +50,8 @@ jobs:
 
       - name: Test ISF
         run: |
-          (pixi r launch_dask_server) &
-          (pixi r launch_dask_workers) &
+          (pixi r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost) &
+          (pixi r dask-worker localhost:8786 --nthreads=1 --nprocs=5 --memory-limit=100e15 --dashboard-address=8787) &
           
           echo "Launching test suite..."
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
