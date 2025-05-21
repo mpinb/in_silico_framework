@@ -115,7 +115,7 @@ cmd = [
   "--host=localhost"
   ]
 description = "Launch a Dask scheduler"
-cwd="$T?PDIR"
+cwd="$TMPDIR"
 
 [tool.pixi.tasks.launch_dask_workers]
 args = [
