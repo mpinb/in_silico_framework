@@ -49,7 +49,6 @@ jobs:
             $env:TMPDIR = "$HOME/tmp"
 
       - name: Test ISF
-        id: run_tests
         run: |
           Write-Host "------------ Setting up Dask Server -------------"
           Write-Host "Launching Dask scheduler..."
@@ -60,7 +59,7 @@ jobs:
 
           Write-Host "Launching Dask workers..."
           Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=100e15 --local-directory=." `
+            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 10 --memory-limit=5GB --local-directory=." `
             -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
             -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
 
@@ -87,12 +86,6 @@ jobs:
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
-
-      - name: Fail workflow if tests failed
-        if: steps.run_tests.outcome == 'failure'
-        run: |
-          Write-Host "Tests failed. Debug information has been collected. See above for details."
-          exit 1
 
       - name: Test ModelDataBase backwards compatibility
         run: |
