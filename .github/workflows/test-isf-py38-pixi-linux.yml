@@ -48,7 +48,8 @@ jobs:
 
       - name: Test ISF
         run: |
-          sh ../scripts/launch_dask.sh --port 8786 --bokeh-port 8787 --nprocs 10
+          (pixi r launch_dask_server) &
+          (pixi r launch_dask_workers) &
 
           echo "Starting test suite..."
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1

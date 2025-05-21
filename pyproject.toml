@@ -103,60 +103,74 @@ catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
 sphinx-autoapi = ">=3.5.0,<4" 
 sphinx-immaterial = ">=0.11.14,<0.12"
 
-[tool.pixi.tasks]
-launch_dask_server = {cmd = [
+[tool.pixi.tasks.launch_dask_server]
+args = [
+  {arg = "port", default = "8786"},
+  {arg = "bokeh_port", default = "8787"}
+]
+cmd = [
   "dask-scheduler", 
-  "--port=$ISF_DASK_PORT", 
-  "--bokeh-port=$ISF_DASK_BOKEH_PORT", 
+  "--port={{ port }}", 
+  "--bokeh-port={{ bokeh_port }}", 
   "--host=localhost"
-  ], description = "Launch a Dask scheduler", env = {ISF_DASK_PORT = "8786", ISF_DASK_BOKEH_PORT = "8787"}, cwd="/tmp"}
+  ]
+description = "Launch a Dask scheduler"
+cwd="/tmp"
 
-launch_dask_workers = {cmd = [
+[tool.pixi.tasks.launch_dask_workers]
+args = [
+  {arg = "port",        default = "8786"},
+  {arg = "bokeh_port",  default = "8787"},
+  {arg = "num_workers", default = "4"},
+  {arg = "mem_limit",   default = "100e15"}
+]
+cmd = [
   "dask-worker", 
-  "localhost:$ISF_DASK_PORT", 
+  "localhost:{{ port }}", 
   "--nthreads=1", 
-  "--nprocs=$ISF_NUM_DASK_WORKERS", 
-  "--memory-limit=100e15", 
-  "--dashboard-address=$ISF_DASK_BOKEH_PORT"
-  ], description = "Launch Dask workers", env = {ISF_DASK_PORT = "8786", ISF_DASK_BOKEH_PORT = "8787", ISF_NUM_DASK_WORKERS = "4"}, cwd = "/tmp"}
+  "--nprocs={{  num_workers }}", 
+  "--memory-limit={{  mem_limit }}", 
+  "--dashboard-address={{  bokeh_port }}",
+  ]
+description = "Launch Dask workers"
+cwd="/tmp"
 
-launch_jupyter_server = {cmd = [
-        'jupyter-lab',
-        "--ip='*'",
-        '--no-browser',
-        '--port=$ISF_LAB_PORT',
-        "--NotebookApp.allow_origin='*'"
-    ], description = "Launching jupyter lab server", env = {ISF_LAB_PORT = "11113"}}
+[tool.pixi.tasks.launch_jupyter_server]
+args = [
+  {arg = "port", default = "11113"},
+]
+cmd = [
+  "jupyter-lab", 
+  "--ip='*'", 
+  "--no-browser", 
+  "--port={{ port }}", 
+  "--NotebookApp.allow_origin='*'"
+  ]
+description = "Launch a Jupyter Lab server"
 
-test = {cmd = [
+[tool.pixi.tasks.test]
+args = [
+  {arg = "n_pytest_workers", default = "4"},
+  {arg = "dask_port",   default = "8786"}
+]
+cmd = [
   "pytest", 
   "-rsx",
   "-n",
-  "$ISF_NUM_PYTEST_WORKERS",
+  "{{ n_pytest_workers }}",
   "-vv",
   "--color=yes",
   "--durations=15",
   "--dask_server_port",
-  "$ISF_DASK_PORT",
-  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
+  "{{ dask_port }}",
+]
+description = "Run test suite"
+cwd="tests"
 
-test_mdb = {cmd = [
-  "export", "ISF_USE_MDB=1",
-  "&&",
-  "pytest", 
-  "-n","$ISF_NUM_PYTEST_WORKERS",
-  "-rsx",
-  "-vv",
-  "--color=yes",
-  "--durations=15",
-  "--dask_server_port",
-  "$ISF_DASK_PORT",
-  "test_data_base/", 
-  ";",
-  "unset", "ISF_USE_MDB"
-  ], description = "Run test suite with MDB", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
-
-download_bc_model = {cmd = ["./download_bc_model.sh"], description = "Download ISF's barrel cortex model from Harvard Datverse", cwd="installer"}
+[tool.pixi.tasks.download_bc_model]
+cmd = ["./download_bc_model.sh"]
+description = "Download ISF's barrel cortex model from Harvard Datverse"
+cwd="installer"
 
 
 [tool.pixi.feature.docs.tasks]
