@@ -50,35 +50,7 @@ jobs:
 
       - name: Test ISF
         run: |
-          echo "Launching Dask scheduler..."
-          ( \
-            pixi r dask-scheduler \
-            --port=8786 \
-            --bokeh-port=8787 \
-            --host=localhost \
-            > ./tests/logs/dask_scheduler_${{ github.run_id }}.log 2>&1\
-          ) &
-
-          echo "Launching Dask workers..."
-          ( \
-            pixi r dask-worker \
-            localhost:8786 \
-            --nthreads 1 \
-            --nprocs 10 \
-            --memory-limit=100e15 \
-            --local-directory="." \
-            > ./tests/logs/dask_workers_${{ github.run_id }}.log 2>&1\
-          ) &
-
-          echo "Waiting for Dask scheduler to be ready..."
-          for i in {1..30}; do
-            if nc -z localhost 8786; then
-              echo "Dask scheduler is ready!"
-              break
-            fi
-            echo "Waiting for Dask scheduler..."
-            sleep 2
-          done
+          sh ../scripts/launch_dask.sh --port 8786 --bokeh-port 8787 --nprocs 10
           
           echo "Launching test suite..."
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
