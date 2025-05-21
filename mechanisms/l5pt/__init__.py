@@ -53,7 +53,7 @@ def check_nrnivmodl_is_available():
         logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
         raise
 
-def check_if_mechanisms_are_compiled(path):
+def _check_if_mechanisms_are_compiled_at_path(path):
     if os.name == 'nt':
         return any(glob.glob(os.path.join(path, '*.dll')))
     else:
@@ -62,21 +62,29 @@ def check_if_mechanisms_are_compiled(path):
 def _compile_mechanisms_at_path(path):
     """
     Compile the mechanisms in the given path using nrnivmodl.
-    This function is only needed if the mechanisms are not already compiled.
     """
     assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
     nrnivmodl_path = shutil.which('nrnivmodl')
     subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
 
+
+def check_if_all_mechanisms_are_compiled():
+    """
+    Check if all mechanisms are compiled.
+    """
+    if os.name == 'nt':
+        return all([any(glob.glob(os.path.join(path, '*.dll'))) for path in (channels_path, netcon_path)])
+    else:
+        return all([any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch]) for path in (channels_path, netcon_path)])
+
 def compile_l5pt_mechanisms(force_recompile=False):
     """
     Compile the mechanisms in the local directory.
-    This function is only needed if the mechanisms are not already compiled.
     """
     for path in (channels_path, netcon_path):
-        if not check_if_mechanisms_are_compiled(path) or force_recompile:
+        if not _check_if_mechanisms_are_compiled_at_path(path) or force_recompile:
             _compile_mechanisms_at_path(path)
-            if not check_if_mechanisms_are_compiled(path):
+            if not _check_if_mechanisms_are_compiled_at_path(path):
                 raise UserWarning("Could not compile mechanisms. Please do it manually")
 
 def load_mechanisms():

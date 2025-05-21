@@ -145,7 +145,7 @@ def pytest_configure(config):
     isf_logger.addHandler(isf_logging_file_handler)
 
     # Wait until mechanisms are compiled
-    while not mechanisms.l5pt.check_if_mechanisms_are_compiled():
+    while not mechanisms.l5pt.check_if_all_mechanisms_are_compiled():
         logger.info("Waiting for mechanisms to be compiled...")
         time.sleep(1)
 
