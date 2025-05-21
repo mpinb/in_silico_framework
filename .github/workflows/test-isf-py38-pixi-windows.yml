@@ -65,7 +65,7 @@ jobs:
 
           Write-Host "Waiting for Dask scheduler to be ready..."
           for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet) {
+            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet 2>$null) {
               Write-Host "Dask scheduler is ready!"
               break
             }
@@ -100,7 +100,7 @@ jobs:
 
           Write-Host "Waiting for Dask scheduler to be ready..."
           for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8788 -InformationLevel Quiet) {
+            if (Test-NetConnection -ComputerName localhost -Port 8788 -InformationLevel Quiet 2>$null) {
               Write-Host "Dask scheduler is ready!"
               break
             }
