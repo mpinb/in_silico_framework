@@ -50,28 +50,7 @@ jobs:
 
       - name: Test ISF
         run: |
-          Write-Host "------------ Setting up Dask Server -------------"
-          Write-Host "Launching Dask scheduler..."
-          Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-scheduler --port=8786 --bokeh-port=8787 --host=localhost" `
-            -RedirectStandardOutput ".\tests\logs\dask_scheduler_out${{ github.run_id }}.log" `
-            -RedirectStandardError ".\tests\logs\dask_scheduler_err${{ github.run_id }}.log"
-
-          Write-Host "Launching Dask workers..."
-          Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8786 --nthreads 1 --nprocs 5 --memory-limit=5GB --local-directory=." `
-            -RedirectStandardOutput ".\tests\logs\dask_workers_out${{ github.run_id }}.log" `
-            -RedirectStandardError ".\tests\logs\dask_workers_err${{ github.run_id }}.log"
-
-          Write-Host "Waiting for Dask scheduler to be ready..."
-          for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8786 -InformationLevel Quiet 2>$null) {
-              Write-Host "Dask scheduler is ready!"
-              break
-            }
-            Write-Host "Waiting for Dask scheduler..."
-            Start-Sleep -Seconds 2
-          }
+          pwsh ../scripts/launch_dask.ps1 -ServerPort 8786 -BokehPort 8787
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `
@@ -89,24 +68,14 @@ jobs:
 
       - name: Test ModelDataBase backwards compatibility
         run: |
-          Write-Host "------------ Setting up Dask Server -------------"
-          Write-Host "Launching Dask scheduler..."
-          Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-scheduler --port=8788 --bokeh-port=8789 --host=localhost" `
-
-          Write-Host "Launching Dask workers..."
-          Start-Process -NoNewWindow -FilePath pixi `
-            -ArgumentList "r dask-worker localhost:8788 --nthreads 1 --nprocs 5 --memory-limit=5GB --local-directory=." `
-
-          Write-Host "Waiting for Dask scheduler to be ready..."
-          for ($i = 1; $i -le 30; $i++) {
-            if (Test-NetConnection -ComputerName localhost -Port 8788 -InformationLevel Quiet 2>$null) {
-              Write-Host "Dask scheduler is ready!"
-              break
-            }
-            Write-Host "Waiting for Dask scheduler..."
-            Start-Sleep -Seconds 2
+          # Wait until port 8786 is free
+          $port = 8786
+          while (netstat -ano | Select-String ":$port") {
+              Write-Host "Waiting for port $port to be released..."
+              Start-Sleep -Seconds 2
           }
+          pwsh ../scripts/launch_dask.ps1 -ServerPort 8786 -BokehPort 8787
+
           $env:ISF_USE_MDB = "1"
           pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8788 tests\test_data_base\
           Remove-Item Env:ISF_USE_MDB -ErrorAction SilentlyContinue
