@@ -4,7 +4,7 @@ from single_cell_parser.serialize_cell import *
 from tests import setup_synapse_activation_experiment
 import six
 import pytest
-import distributed
+import matplotlib.pyplot as plt
 
 
 class TestCellMorphologyVisualizer:
@@ -26,28 +26,32 @@ class TestCellMorphologyVisualizer:
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_morphology(self):
-        self.cmv.plot()
+        fig = self.cmv.plot()
+        plt.close()
         
     def test_highlight_section(self):
-        self.cmv.plot(highlight_section=1)
+        fig = self.cmv.plot(highlight_section=1)
+        plt.close()
 
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_voltage(self):
-        self.cmv.plot(
+        fig = self.cmv.plot(
             color="voltage",
             show_legend=True,
             time_point=0)
+        plt.close()
 
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_synapses(self):
-        self.cmv.plot(
+        fig = self.cmv.plot(
             color="voltage",
             show_synapses=True,
             time_point=0)
+        plt.close() 
 
     @pytest.mark.skipif(
         six.PY2,
@@ -115,13 +119,16 @@ class TestCellMorphologyInteractiveVisualizer:
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_morphology_3d(self):
         fig = self.cmiv.interactive_plot()
+        plt.close()
 
     @pytest.mark.skipif(
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_voltage(self):
         fig = self.cmiv.interactive_plot(color="voltage", time_point=0)
+        plt.close() 
 
     @pytest.mark.skipif(
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_ion_dynamics(self):
         fig = self.cmiv.interactive_plot(color='NaTa_t.ina', time_point=0)
+        plt.close()

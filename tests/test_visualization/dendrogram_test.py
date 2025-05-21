@@ -11,7 +11,9 @@ class TestDendrogram:
         ax = d.plot()
         ax.set_xlabel('Distance from soma ($\mu m$)')
         fig = d.plot()
+        plt.close()
 
     def test_dendrogram_statistics(self):
         ds = DendrogramStatistics(self.cell)
         fig = ds.plot()
+        plt.close()

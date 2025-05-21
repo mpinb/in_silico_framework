@@ -1,11 +1,10 @@
 import matplotlib, pytest
-
 matplotlib.use('agg')
 
 from .context import *
 from . import decorators
 from Interface import tempfile
-from visualize.manylines import *
+from visualize.manylines import plt, manylines
 import pandas as pd
 import dask.dataframe as dd
 from visualize._figure_array_converter import PixelObject, show_pixel_object
