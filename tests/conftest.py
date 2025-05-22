@@ -23,9 +23,7 @@ elif six.PY2:
         empty_db,
         sqlite_db,
     )
-from .fixtures.session_fixtures import compile_mechanisms_once
-import getting_started  # trigger creation of template files
-import mechanisms.l5pt  # trigger compilation if they don't exist yet
+
 from .context import CURRENT_DIR, TEST_DATA_FOLDER
 
 def _import_worker_requirements():
@@ -121,9 +119,11 @@ def pytest_configure(config):
     """
     pytest configuration
     """
-    import distributed
     import matplotlib
     matplotlib.use("agg")
+    import getting_started  # trigger creation of template files
+    import mechanisms.l5pt  # trigger compilation if they don't exist yet
+    import distributed
     import matplotlib.pyplot as plt
     plt.switch_backend("agg")
     from config.isf_logging import logger as isf_logger
