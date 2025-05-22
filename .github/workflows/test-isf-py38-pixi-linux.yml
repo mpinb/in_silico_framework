@@ -53,8 +53,8 @@ jobs:
             --port=8786 \
             --dashboard-address=8787 \
             --host=localhost \
-            > dask_scheduler_out_${{ github.run_id }}.log \
-            2> dask_scheduler_err_${{ github.run_id }}.log & \
+            > tests/logs/dask_scheduler_out_${{ github.run_id }}.log \
+            2> tests/logs/dask_scheduler_err_${{ github.run_id }}.log & \
           ) &
           sleep 5
 
@@ -64,8 +64,8 @@ jobs:
             --nprocs=5 \
             --memory-limit=100e15 \
             --dashboard-address=8787 \
-            > dask_worker_out_${{ github.run_id }}.log \
-            2> dask_worker_err_${{ github.run_id }}.log & \
+            > tests/logs/dask_worker_out_${{ github.run_id }}.log \
+            2> tests/logs/dask_worker_err_${{ github.run_id }}.log & \
           ) &
 
           echo "Starting test suite..."
