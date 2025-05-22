@@ -1,9 +1,9 @@
-from .context import *
-from visualize.rasterplot import *
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.axes import Axes
+from visualize.rasterplot import rasterplot
 import dask.dataframe as dd
 import pandas as pd
-from . import decorators
-from data_base.data_base import DataBase
 
 
 class TestRasterplot:
@@ -29,8 +29,6 @@ class TestRasterplot:
         plt.close()
 
     def test_can_be_called_with_axes(self):
-        from matplotlib.figure import Figure
-        from matplotlib.axes import Axes
         fig = plt.figure(figsize=(15, 3))
         ax = fig.add_subplot(1, 1, 1)
         assert isinstance(rasterplot(self.df, tlim=(0, 350)), Figure)
