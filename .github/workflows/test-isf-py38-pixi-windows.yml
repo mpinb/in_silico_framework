@@ -64,7 +64,6 @@ jobs:
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `
-            -n 2 `
             -rsx `
             -vv `
             --color=yes `
