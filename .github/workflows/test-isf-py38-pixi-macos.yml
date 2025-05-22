@@ -38,8 +38,6 @@ jobs:
           echo "------------ Configuring Dask -------------"
           export DASK_CONFIG=./config/dask_config.yml
           echo "Killing any existing Dask server"
-          pkill -f dask-scheduler
-          pkill -f dask-worker
 
           unset DISPLAY
           if [ ! -d "$HOME/tmp" ]; then
