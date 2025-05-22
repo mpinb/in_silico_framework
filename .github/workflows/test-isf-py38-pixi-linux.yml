@@ -82,6 +82,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Teardown
+        if: ${{ always() }}
         run: |
           echo "------------ Teardown -------------"
           echo "Killing Dask server"
