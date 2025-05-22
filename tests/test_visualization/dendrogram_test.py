@@ -6,6 +6,9 @@ class TestDendrogram:
     def setup_class(self):
         self.cell = setup_synapse_activation_experiment()
     
+    def teardown_class(self):
+        plt.close("all")
+
     def test_dendrogram(self):
         d = Dendrogram(self.cell)
         ax = d.plot()

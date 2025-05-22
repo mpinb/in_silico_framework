@@ -16,6 +16,9 @@ class TestCellMorphologyVisualizer:
             t_start=0, t_stop=1,t_step=0.5
         )  # don't align trunk in py2, scipy in Py2.7 has no Rotation object
 
+    def teardown_class(self):
+        plt.close("all")
+
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")

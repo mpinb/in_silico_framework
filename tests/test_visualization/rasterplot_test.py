@@ -4,7 +4,6 @@ import dask.dataframe as dd
 import pandas as pd
 from . import decorators
 from data_base.data_base import DataBase
-import gc
 
 
 class TestRasterplot:
@@ -16,17 +15,18 @@ class TestRasterplot:
                            'attribute': ['a', 'a', 'a', 'b', 'b']})
 
         self.colormap = dict(a='r', b='b')
-
+    
+    def teardown_class(self):
+        plt.close("all")
+    
     def test_pandas(self):
         fig = rasterplot(self.df, tlim=(0, 350))
         plt.close()
-        gc.collect()
 
     def test_dask(self):
         ddf = dd.from_pandas(self.df, npartitions=2)
         fig = rasterplot(self.df, tlim=(0, 350))
         plt.close()
-        gc.collect()
 
     def test_can_be_called_with_axes(self):
         from matplotlib.figure import Figure
@@ -36,4 +36,3 @@ class TestRasterplot:
         assert isinstance(rasterplot(self.df, tlim=(0, 350)), Figure)
         assert rasterplot(self.df, tlim=(0, 350), ax=ax) is fig
         plt.close()
-        gc.collect()
