@@ -55,7 +55,7 @@ jobs:
             -RedirectStandardError "./tests/logs/dask_scheduler_err${{ github.run_id }}.log" `
             -NoNewWindow
 
-          Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=2 --nprocs=4 --memory-limit=4GB --dashboard-address=8787" `
+          Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=1 --nprocs=4 --memory-limit=4GB --dashboard-address=8787" `
             -RedirectStandardOutput "./tests/logs/dask_worker_out_${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_worker_err_${{ github.run_id }}.log" `
             -NoNewWindow
@@ -64,7 +64,7 @@ jobs:
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `
-            -n 5 `
+            -n 2 `
             -rsx `
             -vv `
             --color=yes `
