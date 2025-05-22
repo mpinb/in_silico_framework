@@ -51,7 +51,7 @@ jobs:
       - name: Test ISF
         run: |
           # Ensure the log file exists
-          New-Item -ItemType File -Force -Path $LogFile | Out-Null
+          New-Item -ItemType File -Force -Path "./tests/logs/resource_usage.log" | Out-Null
 
           # Start monitoring
           Write-Host "Starting resource monitoring..."
