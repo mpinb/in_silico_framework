@@ -50,7 +50,7 @@ jobs:
       - name: Start Resource Monitoring
         run: |
           Write-Host "Starting resource monitoring..."
-          $monitoringProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File ./.github/workflows/monitor_resources.ps1 -LogFile ./tests/logs/resource_usage.log -Interval 5" `
+          $monitoringProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File ./.github/monitor_resources.ps1 -LogFile ./tests/logs/resource_usage.log -Interval 5" `
           -NoNewWindow
           # Save the PID to a file for later use
           $monitoringProcess.Id | Out-File -FilePath "./tests/logs/monitoring_pid.txt"
