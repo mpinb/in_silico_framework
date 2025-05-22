@@ -47,28 +47,15 @@ jobs:
             New-Item -ItemType Directory -Path "$HOME/tmp"
             }
             $env:TMPDIR = "$HOME/tmp"
-
+      - name: Start Resource Monitoring
+        run: |
+          Write-Host "Starting resource monitoring..."
+          $monitoringProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File ./.github/workflows/monitor_resources.ps1 -LogFile ./tests/logs/resource_usage.log -Interval 5" `
+          -NoNewWindow
+          # Save the PID to a file for later use
+          $monitoringProcess.Id | Out-File -FilePath "./tests/logs/monitoring_pid.txt"
       - name: Test ISF
         run: |
-          # Ensure the log file exists
-          New-Item -ItemType File -Force -Path "./tests/logs/resource_usage.log" | Out-Null
-
-          # Start monitoring
-          Write-Host "Starting resource monitoring..."
-          while ($true) {
-              $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-              $cpu = (Get-Counter '\Processor(_Total)\% Processor Time').CounterSamples.CookedValue
-              $ram = (Get-Counter '\Memory\Available MBytes').CounterSamples.CookedValue
-              $totalRam = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1MB
-              $usedRam = $totalRam - $ram
-
-              # Log the data
-              "$timestamp, CPU: $([math]::Round($cpu, 2))%, RAM Used: $([math]::Round($usedRam, 2)) MB, RAM Total: $([math]::Round($totalRam, 2)) MB" | Out-File -Append -FilePath "./tests/logs/resource_usage.log"
-
-              Start-Sleep -Seconds 5
-          }
-
-
           Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
             -RedirectStandardOutput "./tests/logs/dask_scheduler_out${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_scheduler_err${{ github.run_id }}.log" `
@@ -141,6 +128,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
+
+      - name: Stop Resource Monitoring
+        if: ${{ always() }}
+        run: |
+          Write-Host "Stopping resource monitoring..."
+          # Read the PID from the file and stop the process
+          $monitoringPid = Get-Content -Path "./tests/logs/monitoring_pid.txt"
+          Stop-Process -Id $monitoringPid -Force
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
