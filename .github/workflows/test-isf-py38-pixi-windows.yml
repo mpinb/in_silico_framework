@@ -50,11 +50,6 @@ jobs:
 
       - name: Test ISF
         run: |
-          param (
-              [string]$LogFile = "./tests/logs/resource_usage.log",
-              [int]$Interval = 5
-          )
-
           # Ensure the log file exists
           New-Item -ItemType File -Force -Path $LogFile | Out-Null
 
@@ -68,9 +63,9 @@ jobs:
               $usedRam = $totalRam - $ram
 
               # Log the data
-              "$timestamp, CPU: $([math]::Round($cpu, 2))%, RAM Used: $([math]::Round($usedRam, 2)) MB, RAM Total: $([math]::Round($totalRam, 2)) MB" | Out-File -Append -FilePath $LogFile
+              "$timestamp, CPU: $([math]::Round($cpu, 2))%, RAM Used: $([math]::Round($usedRam, 2)) MB, RAM Total: $([math]::Round($totalRam, 2)) MB" | Out-File -Append -FilePath "./tests/logs/resource_usage.log"
 
-              Start-Sleep -Seconds $Interval
+              Start-Sleep -Seconds 5
           }
 
 
