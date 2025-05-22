@@ -33,7 +33,6 @@ class TestManyLines:
         fig = plt.figure()
         manylines(ddf, axis=[1, 10, 1, 10], ax=fig.gca(), scheduler="synchronous")
         plt.close()
-        gc.collect()
 
     def test_manylines_grouped(self):
         df = self.df
