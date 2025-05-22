@@ -36,11 +36,10 @@ jobs:
           mkdir -p ./tests/logs/
 
           echo "------------ Configuring Dask -------------"
-          port_number=38786
-          bokeh_port=38787
-          echo "Launching Dask server"
-          echo "Using port $port_number and bokeh port $bokeh_port"
           export DASK_CONFIG=./config/dask_config.yml
+          echo "Killing any existing Dask server"
+          pkill -f dask-scheduler
+          pkill -f dask-worker
 
           unset DISPLAY
           if [ ! -d "$HOME/tmp" ]; then
