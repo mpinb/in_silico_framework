@@ -49,7 +49,11 @@ jobs:
             $env:TMPDIR = "$HOME/tmp"
 
             Write-Host "------------- Compiling mechanisms -------------"
-            pixi r python -c "import mechanisms.l5pt"
+
+      - name: Compile mechanisms
+        run: pixi r python -c "import mechanisms.l5pt"
+        env: 
+          NEURONHOME: C:\nrn
 
       - name: Start Resource Monitoring
         run: |
