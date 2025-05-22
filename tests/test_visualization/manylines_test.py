@@ -1,4 +1,4 @@
-import matplotlib, pytest
+import matplotlib, pytest, gc
 matplotlib.use('agg')
 
 from .context import *
@@ -33,6 +33,7 @@ class TestManyLines:
         fig = plt.figure()
         manylines(ddf, axis=[1, 10, 1, 10], ax=fig.gca(), scheduler="synchronous")
         plt.close()
+        gc.collect()
 
     def test_manylines_grouped(self):
         df = self.df
@@ -54,6 +55,7 @@ class TestManyLines:
             ax = ax, 
             scheduler="synchronous")
         plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_no_group_returnPixelObject(self, client):
@@ -67,6 +69,7 @@ class TestManyLines:
         fig, ax = plt.subplots()
         show_pixel_object(po, ax=ax)
         plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_grouped_returnPixelObject(self, client):
@@ -93,3 +96,4 @@ class TestManyLines:
         fig, ax = plt.subplots()
         show_pixel_object(po, ax=ax)
         plt.close()
+        gc.collect()

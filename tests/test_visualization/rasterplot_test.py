@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-from matplotlib.axes import Axes
 from visualize.rasterplot import rasterplot
 import dask.dataframe as dd
 import pandas as pd
+import gc
 
 
 class TestRasterplot:
@@ -18,15 +18,18 @@ class TestRasterplot:
     
     def teardown_class(self):
         plt.close("all")
+        gc.collect()
     
     def test_pandas(self):
         fig = rasterplot(self.df, tlim=(0, 350))
         plt.close()
+        gc.collect()
 
     def test_dask(self):
         ddf = dd.from_pandas(self.df, npartitions=2)
         fig = rasterplot(self.df, tlim=(0, 350))
         plt.close()
+        gc.collect()
 
     def test_can_be_called_with_axes(self):
         fig = plt.figure(figsize=(15, 3))
@@ -34,3 +37,4 @@ class TestRasterplot:
         assert isinstance(rasterplot(self.df, tlim=(0, 350)), Figure)
         assert rasterplot(self.df, tlim=(0, 350), ax=ax) is fig
         plt.close()
+        gc.collect()

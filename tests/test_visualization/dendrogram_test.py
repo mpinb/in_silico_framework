@@ -1,6 +1,7 @@
 from visualize.dendrogram import Dendrogram, DendrogramStatistics
 import matplotlib.pyplot as plt
 from tests import setup_synapse_activation_experiment
+import gc
 
 class TestDendrogram:
     def setup_class(self):
@@ -15,8 +16,10 @@ class TestDendrogram:
         ax.set_xlabel('Distance from soma ($\mu m$)')
         fig = d.plot()
         plt.close()
+        gc.collect()
 
     def test_dendrogram_statistics(self):
         ds = DendrogramStatistics(self.cell)
         fig = ds.plot()
         plt.close()
+        gc.collect()
