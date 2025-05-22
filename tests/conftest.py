@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, socket, six, sys, pytest, time
+import logging, os, socket, six, sys, pytest, time, psutil
 from distributed.diagnostics.plugin import WorkerPlugin
 
 # --- Import fixtures
@@ -38,6 +38,11 @@ def _setup_mpl_non_gui_backend():
     import matplotlib
     matplotlib.use("Agg")
 
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_teardown(item, nextitem):
+    mem = psutil.Process(os.getpid()).memory_info().rss / (1024 ** 2)
+    logger.info(f"Memory used after {item.name}: {mem:.2f} MB")
 
 def setup_dask_worker_context(client):
     """
