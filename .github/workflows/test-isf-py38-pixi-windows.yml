@@ -82,7 +82,7 @@ jobs:
             -n 4 `
             -rsx `
             -vv `
-            -k "not test_visualization"
+            -k "not test_visualization" `
             --color=yes `
             --durations=15 `
             --cov-report xml:tests\logs\report_py38.xml `
