@@ -3,6 +3,7 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, socket, six, sys, pytest, time
+from distributed.diagnostics.plugin import WorkerPlugin
 
 # --- Import fixtures
 from .fixtures import client
@@ -52,23 +53,17 @@ def setup_dask_worker_context(client):
     client.run(update_path)
 
     if six.PY3:
-        # Add dask plugin in case workers get killed
-        from distributed.diagnostics.plugin import WorkerPlugin
-
         class SetupWorker(WorkerPlugin):
             def __init__(self):
-                _import_worker_requirements()
+                pass
 
-            def setup(self, worker):
-                """
-                This gets called every time a new worker is added to the scheduler
-                """
+            def restart(self, worker):
                 _import_worker_requirements()
+                _setup_mpl_non_gui_backend()
 
         client.register_worker_plugin(SetupWorker())
-
-    client.run(_import_worker_requirements)
-    client.run(_setup_mpl_non_gui_backend)
+        client.restart()
+    
     
 logger = logging.getLogger("ISF").getChild(__name__)
 os.environ["ISF_IS_TESTING"] = "True"
@@ -129,11 +124,8 @@ def pytest_configure(config):
     """
     import distributed
     import matplotlib
-    import six
-
     matplotlib.use("agg")
     import matplotlib.pyplot as plt
-
     plt.switch_backend("agg")
     from config.isf_logging import logger as isf_logger
 
