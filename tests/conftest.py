@@ -50,7 +50,7 @@ def setup_dask_worker_context(client):
 
     if six.PY3:
         class SetupWorker(WorkerPlugin):
-            def setup(self, scheduler):
+            def setup(self, worker):
                 _import_worker_requirements()
                 _setup_mpl_non_gui_backend()
                 update_path()
