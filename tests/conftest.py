@@ -50,16 +50,15 @@ def setup_dask_worker_context(client):
     def update_path():
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-    client.run(update_path)
-
     if six.PY3:
         class SetupWorker(WorkerPlugin):
             def __init__(self):
                 pass
 
-            def restart(self, worker):
+            def restart(self, scheduler):
                 _import_worker_requirements()
                 _setup_mpl_non_gui_backend()
+                update_path()
 
         client.register_worker_plugin(SetupWorker())
         client.restart()
