@@ -48,8 +48,25 @@ jobs:
 
       - name: Test ISF
         run: |
-          (pixi r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost) &
-          (pixi r dask-worker localhost:8786 --nthreads=1 --nprocs=5 --memory-limit=100e15 --dashboard-address=8787) &
+          (\
+            pixi r dask-scheduler \
+            --port=8786 \
+            --dashboard-address=8787 \
+            --host=localhost \
+            > dask_scheduler_out_${{ github.run_id }}.log \
+            2> dask_scheduler_err_${{ github.run_id }}.log & \
+          ) &
+          sleep 5
+
+          (\
+            pixi r dask-worker localhost:8786 \
+            --nthreads=1 \
+            --nprocs=5 \
+            --memory-limit=100e15 \
+            --dashboard-address=8787 \
+            > dask_worker_out_${{ github.run_id }}.log \
+            2> dask_worker_err_${{ github.run_id }}.log & \
+          ) &
 
           echo "Starting test suite..."
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
