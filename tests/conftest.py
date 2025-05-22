@@ -50,16 +50,12 @@ def setup_dask_worker_context(client):
 
     if six.PY3:
         class SetupWorker(WorkerPlugin):
-            def __init__(self):
-                pass
-
-            def restart(self, scheduler):
+            def setup(self, scheduler):
                 _import_worker_requirements()
                 _setup_mpl_non_gui_backend()
                 update_path()
 
         client.register_worker_plugin(SetupWorker())
-        client.restart()
     
     
 logger = logging.getLogger("ISF").getChild(__name__)
