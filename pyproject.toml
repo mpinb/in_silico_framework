@@ -135,7 +135,7 @@ description = "Launch Dask workers"
 
 [tool.pixi.tasks.launch_jupyter_server]
 args = [
-  {arg = "port", default = "11113"},
+  {arg = "port", default = "11113"}
 ]
 cmd = [
   "jupyter-lab", 
@@ -160,7 +160,7 @@ cmd = [
   "--color=yes",
   "--durations=15",
   "--dask_server_port",
-  "{{ dask_port }}",
+  "{{ dask_port }}"
 ]
 description = "Run test suite"
 cwd="tests"
