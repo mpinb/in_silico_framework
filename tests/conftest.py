@@ -42,7 +42,7 @@ def _setup_mpl_non_gui_backend():
 @pytest.hookimpl(tryfirst=True)
 def pytest_runtest_teardown(item, nextitem):
     mem = psutil.Process(os.getpid()).memory_info().rss / (1024 ** 2)
-    logger.info(f"Memory used after {item.name}: {mem:.2f} MB")
+    logger.attention(f"Memory used after {item.name}: {mem:.2f} MB")
 
 def setup_dask_worker_context(client):
     """
