@@ -47,6 +47,10 @@ jobs:
             New-Item -ItemType Directory -Path "$HOME/tmp"
             }
             $env:TMPDIR = "$HOME/tmp"
+
+            Write-Host "------------- Compiling mechanisms -------------"
+            pixi r python -c "import mechanisms.l5pt"
+
       - name: Start Resource Monitoring
         run: |
           Write-Host "Starting resource monitoring..."
@@ -54,6 +58,7 @@ jobs:
           -NoNewWindow
           # Save the PID to a file for later use
           $monitoringProcess.Id | Out-File -FilePath "./tests/logs/monitoring_pid.txt"
+
       - name: Test ISF
         run: |
           Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
