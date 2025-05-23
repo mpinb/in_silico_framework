@@ -76,7 +76,7 @@ jobs:
             -vv `
             -k "not test_visualization" `
             --color=yes `
-            --durations=15 `
+            --durations=0 `
             --cov-report xml:tests\logs\report_py38.xml `
             --cov=. `
             --dask_server_port 8786 tests
