@@ -1,4 +1,4 @@
-load_file("nrngui.hoc")
+// load_file("nrngui.hoc")
 objectvar save_window_, rvp_
 objectvar scene_vector_[5]
 objectvar ocbox_, ocbox_list_, scene_, scene_list_
