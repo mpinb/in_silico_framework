@@ -16,13 +16,13 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 
 from __future__ import print_function
-import os, logging
+import os, logging, tempfile, shutil
+from filelock import FileLock
 logger = logging.getLogger("ISF").getChild(__name__)
 
 getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
 example_data_dir = os.path.join(getting_started_dir, 'example_data')
 tutorial_output_dir = os.path.join(os.environ.get("HOME"), 'ISF_tutorial_output')
-
 
 def generate_param_files_with_valid_references():
     IN_SILICO_FRAMEWORK_DIR = os.path.abspath(
@@ -39,17 +39,24 @@ def generate_param_files_with_valid_references():
         assert template_path.endswith(suffix)
         target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
         
-        if os.path.exists(target_path):
-            # Ensure thread-safety
-            logger.info("Example .param file already exists. Skipping: %s" % target_path)
-            continue
+        # Thread safety
+        lock_path = target_path + ".lock"
+        with FileLock(lock_path):
+            if os.path.exists(target_path):
+                logger.info(
+                    "Example .param file already exists. Overwriting: %s" % target_path
+                )
 
-        with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
-            out_.write(in_.read().replace('[IN_SILICO_FRAMEWORK_DIR]',
-                                          IN_SILICO_FRAMEWORK_DIR))
-            #for line in in_.readlines():
-            #    line = line
-            #    print(line, file = out_)
+            with tempfile.NamedTemporaryFile("w", delete=False) as temp_file:
+                temp_file.write(
+                    open(template_path, "r")
+                    .read()
+                    .replace("[IN_SILICO_FRAMEWORK_DIR]", IN_SILICO_FRAMEWORK_DIR)
+                )
+                temp_file_path = temp_file.name
+
+            shutil.move(temp_file_path, target_path)
+
 
 
 generate_param_files_with_valid_references()
