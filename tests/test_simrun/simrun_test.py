@@ -1,30 +1,22 @@
 from ..test_simrun.context import *
-import os, sys, glob, shutil, tempfile
+import os, sys, glob, dask, pytest
 import numpy as np
-from numpy.testing import assert_almost_equal
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
-import dask
-import dask.dataframe as dd
 import single_cell_parser as scp
-import neuron
-from ..test_simrun import decorators
-import numpy as np
 from single_cell_parser.cell_modify_functions.scale_apical_morph_86 import scale_apical_morph_86
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
 import simrun.sim_trial_to_cell_object
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format
-# from compatibility import synchronous_scheduler
-from mechanisms import l5pt as l5pt_mechanisms
 from ..test_simrun.context import cellParamName, networkName, example_path, parent
 assert os.path.exists(cellParamName)
 assert os.path.exists(networkName)
 assert os.path.exists(example_path)
 
 
-#@decorators.testlevel(1)
+@pytest.mark.check_dask_health
 def test_generate_synapse_activation_returns_filelist(tmpdir, client):
     try:
         dummy = simrun.generate_synapse_activations.generate_synapse_activations(
@@ -41,7 +33,7 @@ def test_generate_synapse_activation_returns_filelist(tmpdir, client):
     assert isinstance(dummy[0][0][0], str)
 
 
-#@decorators.testlevel(2)
+@pytest.mark.check_dask_health
 def test_run_existing_synapse_activation_returns_identifier_dataframe_and_results_folder(
         tmpdir, client):
     try:
@@ -59,7 +51,7 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
     assert isinstance(dummy[0][0][1], str)
 
 
-#@decorators.testlevel(2)
+@pytest.mark.check_dask_health
 def test_run_new_simulations_returns_dirname(tmpdir):
     try:
         dummy = simrun.run_new_simulations.run_new_simulations(
@@ -77,7 +69,6 @@ def test_run_new_simulations_returns_dirname(tmpdir):
     assert isinstance(result[0][0], str)
 
 
-#@decorators.testlevel(2)
 def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
@@ -124,7 +115,6 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
         raise
 
 
-#@decorators.testlevel(2)
 def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     # Note: these tolerances were found with trial and error, but have no further meaning
     if sys.platform.startswith('linux'):
@@ -181,18 +171,3 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         raise
     assert isinstance(dummy[0][0][0], pd.DataFrame)
     assert isinstance(dummy[0][0][1], str)
-
-
-""" 
-def test_ongoing_frequency_in_new_monte_carlo_simulation_is_like_in_roberts_control():
-    try:
-        pass
-    except:
-        raise
-    finally:
-        pass
-
-        
-def test_different_schedulers_give_same_result():
-    pass
-"""

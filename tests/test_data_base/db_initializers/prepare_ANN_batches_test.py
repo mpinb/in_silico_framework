@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 from data_base.db_initializers.prepare_ANN_batches \
     import spike_times_to_onehot
@@ -10,6 +11,7 @@ from data_base.utils import silence_stdout
 optimize_simrun_general = silence_stdout(optimize_simrun_general)
 
 
+@pytest.mark.check_dask_health
 def test_API(fresh_db, client):
     optimize_simrun_general(fresh_db, client=client)
     init_synapse_activation(fresh_db, groupby='EI')

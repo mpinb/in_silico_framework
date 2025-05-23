@@ -29,7 +29,6 @@ class TestHistogram:
 
     def test_histogram_can_be_called_with_series(self):
         from matplotlib.figure import Figure
-        from matplotlib.axes import Axes
         fig = plt.figure(figsize=(15, 3))
         ax = fig.add_subplot(1, 1, 1)
         pds = pd.Series({'A': self.testhist, 'labelB': self.testhist})

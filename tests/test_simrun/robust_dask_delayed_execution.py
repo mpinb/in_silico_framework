@@ -1,7 +1,5 @@
 from data_base.distributed_lock import get_lock
-import os
-import warnings
-import dask
+import os, warnings, dask, pytest
 
 
 def _set_value(db, k, value):
@@ -74,6 +72,7 @@ class RobustDaskDelayedExecution:
         db[key, 'status'] = 'not_started'
         db[key, 'obj'] = d
 
+    @pytest.mark.check_dask_health
     def run_db(self, error_started=True):
         ''
         import six

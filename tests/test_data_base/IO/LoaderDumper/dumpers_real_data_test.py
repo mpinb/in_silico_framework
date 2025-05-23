@@ -1,4 +1,4 @@
-from data_base.data_base import DataBase
+import pytest
 from pandas.util.testing import assert_frame_equal
 from data_base.IO.LoaderDumper import dask_to_msgpack, dask_to_categorized_msgpack
 import tempfile
@@ -50,11 +50,13 @@ def real_data_generic(db_, dumper_, client_=None):
     assert_frame_equal(a, b)
 
 
+@pytest.mark.check_dask_health
 def test_dask_to_categorized_msgpack_real_data(client, fresh_db):
     real_data_generic(db_=fresh_db,
                       dumper_=dask_to_categorized_msgpack,
                       client_=client)
 
 
+@pytest.mark.check_dask_health
 def test_dask_to_msgpack_real_data(client, fresh_db):
     real_data_generic(db_=fresh_db, dumper_=dask_to_msgpack, client_=client)

@@ -31,6 +31,7 @@ class TestTemporalBinning:
         np.testing.assert_array_equal(
             hist, np.array([4 / 3., 2 / 3., 0 / 3., 1 / 3., 1 / 3.]))
 
+    @pytest.mark.check_dask_health
     def test_temporal_binning_dask(self, client):
         ddf = dd.from_pandas(self.pdf, npartitions=3)
         bins, hist = temporal_binning_dask(ddf,
@@ -42,6 +43,7 @@ class TestTemporalBinning:
         np.testing.assert_array_equal(bins, np.array([0, 10, 20, 30, 40, 50]))
         np.testing.assert_array_equal(hist, np.array([4, 2, 0, 1, 1]))
 
+    @pytest.mark.check_dask_health
     def test_binning_real_data(self, client, fresh_db):
         pdf = fresh_db['spike_times']
         #if dask: convert to pandas
@@ -52,11 +54,8 @@ class TestTemporalBinning:
 
         ddf = dd.from_pandas(pdf, npartitions=npartitions)
         t_bins_pandas, data_pandas = temporal_binning_pd(pdf, 1, 0, 300)
-        t_bins_dask, data_dask = temporal_binning_dask(ddf,
-                                                       1,
-                                                       0,
-                                                       300,
-                                                       client=client)
+        t_bins_dask, data_dask = temporal_binning_dask(
+            ddf, 1, 0, 300, client=client)
 
         #print data_dask
         np.testing.assert_equal(t_bins_pandas, t_bins_dask)

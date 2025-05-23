@@ -1,4 +1,4 @@
-import warnings
+import warnings, pytest
 from data_base.db_initializers.load_simrun_general import optimize
 from data_base.IO.LoaderDumper import dask_to_msgpack, dask_to_categorized_msgpack
 from data_base.utils import silence_stdout
@@ -11,10 +11,12 @@ def test_optimization_works_dumpers_default(fresh_db, client):
     optimize(fresh_db, dumper=None, client=client)
 
 
+@pytest.mark.check_dask_health
 def test_optimization_works_dumpers_msgpack(fresh_db, client):
     optimize(fresh_db, dumper=dask_to_msgpack, client=client)
 
 
+@pytest.mark.check_dask_health
 def test_optimization_works_dumpers_categorized_msgpack(fresh_db, client):
     optimize(fresh_db, dumper=dask_to_categorized_msgpack, client=client)
 

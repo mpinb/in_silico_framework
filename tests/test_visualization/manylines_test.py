@@ -25,6 +25,7 @@ class TestManyLines:
     def teardown_class(self):
         plt.close("all")
 
+    @pytest.mark.check_dask_health
     def test_manylines_no_group(self):
         df = self.df.drop('attribute', axis=1)
         ddf = dd.from_pandas(df, npartitions=3)
@@ -35,6 +36,7 @@ class TestManyLines:
         plt.close()
         gc.collect()
 
+    @pytest.mark.check_dask_health
     def test_manylines_grouped(self):
         df = self.df
         ddf = dd.from_pandas(df, npartitions=3)
@@ -57,6 +59,7 @@ class TestManyLines:
         plt.close()
         gc.collect()
 
+    @pytest.mark.check_dask_health
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_no_group_returnPixelObject(self, client):
         df = self.df.drop('attribute', axis=1)
@@ -71,6 +74,7 @@ class TestManyLines:
         plt.close()
         gc.collect()
 
+    @pytest.mark.check_dask_health
     @pytest.mark.skipif(sys.platform == "darwin", reason="GUI can't be created in a non-main thread on OSX")
     def test_manylines_grouped_returnPixelObject(self, client):
         df = self.df

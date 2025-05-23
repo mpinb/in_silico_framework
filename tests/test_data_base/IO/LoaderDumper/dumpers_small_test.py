@@ -38,6 +38,7 @@ def small_numpy_dump(x, db, dumper):
     dummy = db['test']
     assert_array_equal(dummy, x)
 
+@pytest.mark.check_dask_health
 def small_data_frame_test(db, pdf, ddf, dumper, client=None):
     """
     This function provides a generic way to test dumpers for dataframes.
@@ -71,10 +72,12 @@ def small_data_frame_test(db, pdf, ddf, dumper, client=None):
     b = pdf.set_index(0)
     assert_frame_equal(a, b)
 
+@pytest.mark.check_dask_health
 def test_dask_to_msgpack_small(empty_db, pdf, ddf, client):
     small_data_frame_test(empty_db, pdf, ddf, dask_to_msgpack,
         client=client)
 
+@pytest.mark.check_dask_health
 def test_dask_to_categorized_msgpack_small(empty_db, pdf, ddf, client):
     small_data_frame_test(empty_db, pdf, ddf, dask_to_categorized_msgpack,
         client=client)
@@ -86,6 +89,7 @@ def test_pandas_to_msgpack_small(empty_db, pdf):
 def test_pandas_to_parquet_small(empty_db, pdf):
     small_data_frame_test(empty_db, pdf, pdf.copy(), pandas_to_parquet)
 
+@pytest.mark.check_dask_health
 @pytest.mark.skipif(six.PY2, reason="Pandas DataFrames objects have no attribute `to_parquet` in Python 2.")
 def test_dask_to_parquet_small(empty_db, pdf, ddf, client):
     small_data_frame_test(empty_db, pdf, ddf, dask_to_parquet, client=client)
