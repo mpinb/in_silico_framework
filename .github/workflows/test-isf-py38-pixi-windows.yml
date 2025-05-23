@@ -71,7 +71,7 @@ jobs:
 
           Write-Host "------------ Running tests -------------"
           pixi r pytest `
-            -n 4 `
+            -n 6 `
             -rsx `
             -vv `
             -k "not test_visualization" `
