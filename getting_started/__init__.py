@@ -16,7 +16,8 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 
 from __future__ import print_function
-import os
+import os, logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
 example_data_dir = os.path.join(getting_started_dir, 'example_data')
@@ -32,11 +33,13 @@ def generate_param_files_with_valid_references():
                 'functional_constraints/network.param.TEMPLATE', \
                 'simulation_data/C2_center_example/20240_network_model.param.TEMPLATE',\
                 'simulation_data/C2_center_example/20240_neuron_model.param.TEMPLATE')]
-    for path in filelist:
-        path = os.path.join(IN_SILICO_FRAMEWORK_DIR, path)
-        assert os.path.exists(path)
-        assert path.endswith(suffix)
-        with open(path, 'r') as in_, open(path.rstrip(suffix), 'w') as out_:
+    for template_path in filelist:
+        template_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path)
+        assert os.path.exists(template_path)
+        assert template_path.endswith(suffix)
+        target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
+        if os.path.exists(target_path): logger.info("Example .param file already exists. Overwriting: %s" % target_path)
+        with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
             out_.write(in_.read().replace('[IN_SILICO_FRAMEWORK_DIR]',
                                           IN_SILICO_FRAMEWORK_DIR))
             #for line in in_.readlines():
