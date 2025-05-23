@@ -122,12 +122,35 @@ def _mpl_backend_agg():
 
 def _setup_dask(config):
     if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
-        client, cluster = _launch_dask_cluster(config)
+        client, cluster = _launch_dask_cluster(
+            config, 
+            n_workers=DASK_N_WORKERS, 
+            threads_per_worker=DASK_TPW, 
+            mem_limit=DASK_MEM_LIMIT,
+            dashboard_address=DASK_DASHBOARD_ADDRESS,
+            )
+        client.wait_for_workers(DASK_N_WORKERS)
         client.run(load_mechanisms)
         config.dask_cluster = cluster
         config.dask_client = client
     else:
-        pass
+        # Wait for scheduler to be available
+        ip = config.getoption("dask_server_ip")
+        port = int(config.getoption("dask_server_port"))
+        address = f"{ip}:{port}"
+        max_wait = 30  # seconds
+        interval = 1
+        start = time.time()
+        while True:
+            try:
+                client = Client(address)
+                break
+            except (OSError, TimeoutError):
+                if time.time() - start > max_wait:
+                    raise RuntimeError(
+                        f"Could not connect to Dask scheduler at {address} within {max_wait} seconds"
+                    )
+                time.sleep(interval)
         
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):

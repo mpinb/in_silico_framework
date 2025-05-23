@@ -1,10 +1,7 @@
 import os
 from dask.distributed import LocalCluster, Client
 
-DASK_N_WORKERS = 6
-DASK_TPW = 1
-DASK_MEM_LIMIT = "2GB"
-DASK_DASHBOARD_ADDRESS = None
+
 
 
 def _write_cluster_logs(cluster, log_file):
@@ -17,15 +14,15 @@ def _write_cluster_logs(cluster, log_file):
             f.write(log + "\n\n")
 
 
-def _launch_dask_cluster(config):
+def _launch_dask_cluster(config, n_workers, threads_per_worker, mem_limit, dashboard_address):
     ip = config.getoption("dask_server_ip")
     port = int(config.getoption("dask_server_port"))
     # Start a new Dask cluster
     cluster = LocalCluster(
-        n_workers=DASK_N_WORKERS,
-        threads_per_worker=DASK_TPW,
-        memory_limit=DASK_MEM_LIMIT,
-        dashboard_address=DASK_DASHBOARD_ADDRESS,
+        n_workers=n_workers,
+        threads_per_worker=threads_per_worker,
+        memory_limit=mem_limit,
+        dashboard_address=dashboard_address,
         ip=ip,
         scheduler_port=port,
     )
