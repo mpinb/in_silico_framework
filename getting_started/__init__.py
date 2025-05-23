@@ -38,7 +38,12 @@ def generate_param_files_with_valid_references():
         assert os.path.exists(template_path)
         assert template_path.endswith(suffix)
         target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
-        if os.path.exists(target_path): logger.info("Example .param file already exists. Overwriting: %s" % target_path)
+        
+        if os.path.exists(target_path):
+            # Ensure thread-safety
+            logger.info("Example .param file already exists. Skipping: %s" % target_path)
+            continue
+
         with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
             out_.write(in_.read().replace('[IN_SILICO_FRAMEWORK_DIR]',
                                           IN_SILICO_FRAMEWORK_DIR))
