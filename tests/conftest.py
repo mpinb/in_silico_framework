@@ -39,7 +39,7 @@ def _setup_mpl_non_gui_backend():
     matplotlib.use("Agg")
 
 def pytest_runtest_teardown(item, nextitem):
-    if "test_dask_health" in item.keywords:
+    if "check_dask_health" in item.keywords:
         client = item.funcargs.get("client")
         if client is not None:
             try:
