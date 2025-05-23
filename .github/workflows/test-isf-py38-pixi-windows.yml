@@ -55,25 +55,17 @@ jobs:
         env: 
           NEURONHOME: C:\nrn
 
-      - name: Start Resource Monitoring
-        run: |
-          Write-Host "Starting resource monitoring..."
-          $monitoringProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File ./.github/monitor_resources.ps1 -LogFile ./tests/logs/resource_usage.log -Interval 5" `
-          -NoNewWindow
-          # Save the PID to a file for later use
-          $monitoringProcess.Id | Out-File -FilePath "./tests/logs/monitoring_pid.txt"
-
       - name: Test ISF
         run: |
-          Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
+          $schedulerPID = Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
             -RedirectStandardOutput "./tests/logs/dask_scheduler_out${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_scheduler_err${{ github.run_id }}.log" `
-            -NoNewWindow
+            -NoNewWindow -PassThru
 
-          Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=1 --nprocs=5 --memory-limit=3GB --dashboard-address=8787" `
+          $workersPID = Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=1 --nprocs=5 --memory-limit=3GB --dashboard-address=8787" `
             -RedirectStandardOutput "./tests/logs/dask_worker_out_${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_worker_err_${{ github.run_id }}.log" `
-            -NoNewWindow
+            -NoNewWindow -PassThru
 
           $env:MPLBACKEND = "Agg"
 
@@ -89,20 +81,20 @@ jobs:
             --cov=. `
             --dask_server_port 8786 tests
 
-          Stop-Process -Name "dask-worker" -ErrorAction SilentlyContinue
-          Stop-Process -Name "dask-scheduler" -ErrorAction SilentlyContinue
+          Stop-Process -Id $workersPID.Id -ErrorAction SilentlyContinue
+          Stop-Process -Id $schedulerPID.Id -ErrorAction SilentlyContinue
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
 
       - name: Test visualization
         run: |
-          Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
+          $schedulerPID = Start-Process pixi -ArgumentList "r dask-scheduler --port=8786 --dashboard-address=8787 --host=localhost" `
             -RedirectStandardOutput "./tests/logs/dask_scheduler_out${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_scheduler_err${{ github.run_id }}.log" `
             -NoNewWindow
 
-          Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=1 --nprocs=3 --memory-limit=2GB --dashboard-address=8787" `
+          $workersPID = Start-Process pixi -ArgumentList "r dask-worker localhost:8786 --nthreads=1 --nprocs=3 --memory-limit=2GB --dashboard-address=8787" `
             -RedirectStandardOutput "./tests/logs/dask_worker_out_${{ github.run_id }}.log" `
             -RedirectStandardError "./tests/logs/dask_worker_err_${{ github.run_id }}.log" `
             -NoNewWindow
@@ -120,8 +112,8 @@ jobs:
             --cov=. `
             --dask_server_port 8786 tests/test_visualization
 
-          Stop-Process -Name "dask-worker" -ErrorAction SilentlyContinue
-          Stop-Process -Name "dask-scheduler" -ErrorAction SilentlyContinue
+          Stop-Process -Id $workersPID.Id -ErrorAction SilentlyContinue
+          Stop-Process -Id $schedulerPID.Id -ErrorAction SilentlyContinue
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
@@ -147,14 +139,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
-
-      - name: Stop Resource Monitoring
-        if: ${{ always() }}
-        run: |
-          Write-Host "Stopping resource monitoring..."
-          # Read the PID from the file and stop the process
-          $monitoringPid = Get-Content -Path "./tests/logs/monitoring_pid.txt"
-          Stop-Process -Id $monitoringPid -Force
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
