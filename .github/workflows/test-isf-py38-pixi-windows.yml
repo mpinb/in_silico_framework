@@ -75,6 +75,7 @@ jobs:
             -rsx `
             -vv `
             -k "not test_visualization" `
+            --dist=loadscope `
             --color=yes `
             --durations=0 `
             --cov-report xml:tests\logs\report_py38.xml `
