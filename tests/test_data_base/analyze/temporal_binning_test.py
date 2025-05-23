@@ -1,3 +1,4 @@
+import pytest
 from data_base.analyze.temporal_binning import *
 import pandas as pd
 import numpy as np

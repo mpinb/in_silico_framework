@@ -2,12 +2,16 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, six, sys, pytest, time, psutil
-from distributed.diagnostics.plugin import WorkerPlugin
+import logging, os, six,  pytest, time
+from tests.dask_setup import _launch_dask_cluster, _write_cluster_logs
+from dask.distributed import Client
 
 # --- Import fixtures
-from .fixtures import client
 from .fixtures.dataframe_fixtures import ddf, pdf
+from .fixtures.dask_fixtures import client
+from .context import TESTS_CWD
+from mechanisms.l5pt import load_mechanisms
+from .context import TESTS_CWD
 
 if six.PY3:  
     # pytest can be parallellized on py3: use unique ids for dbs
@@ -23,20 +27,10 @@ elif six.PY2:
         empty_db,
         sqlite_db,
     )
-
-from .context import CURRENT_DIR, TEST_DATA_FOLDER
-
-def _import_worker_requirements():
-    import compatibility
-    from config.isf_logging import logger
-
-def _setup_mpl_non_gui_backend():
-    """
-    Set up matplotlib to use a non-GUI backend.
-    This is necessary for running tests in a headless environment (e.g., CI/CD pipelines).
-    """
-    import matplotlib
-    matplotlib.use("Agg")
+DASK_N_WORKERS = 6
+DASK_TPW = 1
+DASK_MEM_LIMIT = "2GB"
+DASK_DASHBOARD_ADDRESS = None
 
 def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
@@ -49,24 +43,6 @@ def pytest_runtest_teardown(item, nextitem):
             except Exception as e:
                 pytest.fail(f"Dask client check failed: {e}")
 
-def setup_dask_worker_context(client):
-    """
-    This function is called in the pytest_configure hook to ensure that all workers have imported the necessary modules
-    """
-    client.wait_for_workers(n_workers=len(client.ncores()))  # or just wait_for_workers(1)
-
-    def update_path():
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
-    if six.PY3:
-        class SetupWorker(WorkerPlugin):
-            def setup(self, worker):
-                _import_worker_requirements()
-                _setup_mpl_non_gui_backend()
-                update_path()
-
-        client.register_worker_plugin(SetupWorker())
-    
     
 logger = logging.getLogger("ISF").getChild(__name__)
 os.environ["ISF_IS_TESTING"] = "True"
@@ -92,9 +68,7 @@ class ModuleFilter(logging.Filter):
 
 def pytest_addoption(parser):
     parser.addoption("--dask_server_port", action="store", default="8786")
-    parser.addoption(
-        "--dask_server_ip", action="store", default="localhost"
-    )  # default is localhost
+    parser.addoption("--dask_server_ip", action="store", default="localhost")
 
 
 def pytest_ignore_collect(path, config):
@@ -111,22 +85,12 @@ def pytest_ignore_collect(path, config):
             "/*cell_morphology_visualizer_test*"
         )  # don't run cmv tests on Py2
     
-    bc_downloaded = os.path.exists(os.path.join(os.path.dirname(CURRENT_DIR), "barrel_cortex"))
+    bc_downloaded = os.path.exists(os.path.join(os.path.dirname(TESTS_CWD), "barrel_cortex"))
     if path.fnmatch("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
 
-def pytest_configure(config):
-    """
-    pytest configuration
-    """
-    import matplotlib
-    matplotlib.use("agg")
-    import getting_started  # trigger creation of template files
-    import mechanisms.l5pt  # trigger compilation if they don't exist yet
-    import distributed
-    import matplotlib.pyplot as plt
-    plt.switch_backend("agg")
+def _setup_logging():
     from config.isf_logging import logger as isf_logger
 
     # --------------- Setup logging output -------------------
@@ -137,24 +101,54 @@ def pytest_configure(config):
         ModuleFilter(suppress_modules_list)
     )  # suppress logs from this module
     # redirect test ouput to log file with more verbose output
-    if not os.path.exists(os.path.join(CURRENT_DIR, "logs")):
-        os.mkdir(os.path.join(CURRENT_DIR, "logs"))
+    if not os.path.exists(os.path.join(TESTS_CWD, "logs")):
+        os.mkdir(os.path.join(TESTS_CWD, "logs"))
     isf_logging_file_handler = logging.FileHandler(
-        os.path.join(CURRENT_DIR, "logs", "test.log")
+        os.path.join(TESTS_CWD, "logs", "test.log")
     )
     isf_logging_file_handler.setLevel(logging.INFO)
     isf_logger.addHandler(isf_logging_file_handler)
 
-    # Wait until mechanisms are compiled
-    while not mechanisms.l5pt.check_if_all_mechanisms_are_compiled():
-        logger.info("Waiting for mechanisms to be compiled...")
-        time.sleep(1)
+    
+def _mpl_backend_agg():
+    """
+    Set matplotlib to use the agg backend
+    """
+    import matplotlib
+    matplotlib.use("agg")
+    import matplotlib.pyplot as plt
+    plt.switch_backend("agg")
 
-    c = distributed.Client(
-        "{}:{}".format(
-            config.getoption("--dask_server_ip", default="localhost"),
-            config.getoption("--dask_server_port"),
+
+def _setup_dask(config):
+    if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
+        client, cluster = _launch_dask_cluster(config)
+        client.run(load_mechanisms)
+        config.dask_cluster = cluster
+        config.dask_client = client
+    else:
+        pass
+        
+@pytest.hookimpl(tryfirst=True)
+def pytest_configure(config):
+    """
+    pytest configuration
+    """
+    import getting_started  # trigger creation of template files
+
+    _mpl_backend_agg()
+    _setup_logging()
+    _setup_dask(config)
+
+
+@pytest.hookimpl(trylast=True)
+def pytest_unconfigure(config):
+    """Clean up the Dask scheduler after pytest finishes."""
+    if hasattr(config, "dask_client"):
+        config.dask_client.close()
+    if hasattr(config, "dask_cluster"):
+        _write_cluster_logs(
+            config.dask_cluster,
+            os.path.join(TESTS_CWD, "logs", "dask_cluster.log"),
         )
-    )
-
-    setup_dask_worker_context(c)
+        config.dask_cluster.close()
