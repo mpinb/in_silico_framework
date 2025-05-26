@@ -165,6 +165,11 @@ cmd = [
 description = "Run test suite"
 cwd="tests"
 
+[tool.pytest.ini_options]
+markers = [
+  "dask_check_health: Check the health of dask workers after running this test."
+]
+
 [tool.pixi.tasks.download_bc_model]
 cmd = ["./download_bc_model.sh"]
 description = "Download ISF's barrel cortex model from Harvard Datverse"
