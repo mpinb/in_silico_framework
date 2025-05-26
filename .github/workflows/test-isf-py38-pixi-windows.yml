@@ -22,6 +22,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Install & setup environment
         uses: prefix-dev/setup-pixi@v0.8.8
         with:
@@ -34,78 +35,57 @@ jobs:
           pixi-bin-path: ${{ runner.temp }}\Scripts\pixi.exe
 
       - name: Preliminary setup
+        shell: cmd
         run: |
-            Write-Host "------------ Preliminary setup for tests -------------"
-            Write-Host "Creating tests/logs/ directory..."
-            New-Item -ItemType Directory -Force -Path ./tests/logs/
+          echo ------------ Preliminary setup for tests -------------
+          echo Creating tests\logs\ directory...
+          mkdir tests\logs
 
-            Write-Host "------------ Configuring Dask -------------"
-            $env:DASK_CONFIG = "./config/dask_config.yml"
+          echo ------------ Configuring Dask -------------
+          set DASK_CONFIG=.\config\dask_config.yml
 
-            Remove-Item Env:DISPLAY -ErrorAction SilentlyContinue
-            if (-Not (Test-Path "$HOME/tmp")) {
-            New-Item -ItemType Directory -Path "$HOME/tmp"
-            }
-            $env:TMPDIR = "$HOME/tmp"
-
-            Write-Host "------------- Compiling mechanisms -------------"
+          if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"
+          set TMPDIR=%USERPROFILE%\tmp
 
       - name: Compile mechanisms
-        run: pixi r python -c "import mechanisms.l5pt"
-        env: 
-          NEURONHOME: C:\nrn
+        shell: cmd
+        run: |
+          set NEURONHOME=C:\nrn
+          pixi r python -c "import mechanisms.l5pt"
 
       - name: Test ISF
-        run: |
-          $env:MPLBACKEND = "Agg"
-
-          Write-Host "------------ Running tests -------------"
-          pixi r pytest `
-            -n 6 `
-            -rsx `
-            -vv `
-            -k "not test_visualization" `
-            --dist=loadscope `
-            --color=yes `
-            --durations=0 `
-            --cov-report xml:tests\logs\report_py38.xml `
-            --cov=. `
-            --dask_server_port 8786 tests
-        env: 
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-
-      - name: Test visualization
-        run: |
-          $env:MPLBACKEND = "Agg"
-
-          Write-Host "------------ Running tests -------------"
-          pixi r pytest `
-            -n 2 `
-            -rsx `
-            -vv `
-            --color=yes `
-            --durations=15 `
-            --cov-report xml:tests\logs\report_py38.xml `
-            --cov=. `
-            --dask_server_port 8786 tests/test_visualization
-        env: 
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-
-      - name: Test ModelDataBase backwards compatibility
-        run: |
-          $env:ISF_USE_MDB = "1"
-          pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests\test_data_base\
-          Remove-Item Env:ISF_USE_MDB -ErrorAction SilentlyContinue
+        shell: cmd
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
+        run: |
+          set MPLBACKEND=Agg
+          echo ------------ Running tests -------------
+          pixi r pytest -n 6 -rsx -vv -k "not test_visualization" --dist=loadscope --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests
+
+      - name: Test visualization
+        shell: cmd
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
+        run: |
+          set MPLBACKEND=Agg
+          echo ------------ Running tests -------------
+          pixi r pytest -n 2 -rsx -vv --color=yes --durations=15 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests\test_visualization
+
+      - name: Test ModelDataBase backwards compatibility
+        shell: cmd
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
+        run: |
+          set ISF_USE_MDB=1
+          pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests\test_data_base
+          set ISF_USE_MDB=
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
-        if: ${{ always() }} 
+        if: ${{ always() }}
         with:
           name: ${{ github.run_id }}_logs
-          path: |
-            ./tests/logs/
+          path: ./tests/logs/
