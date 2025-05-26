@@ -40,5 +40,3 @@ def client(pytestconfig):
         return _client
 
     yield get_client
-    if _client:
-        client.close()

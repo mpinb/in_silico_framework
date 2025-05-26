@@ -184,6 +184,20 @@ def _setup_dask(config):
                     )
                 time.sleep(interval)
         
+def _teardown_dask(config):
+    """
+    Tear down the dask scheduler
+    
+    At this point, the dask scheduler and client should be part of the pytest config object.
+    """
+    if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
+        _write_cluster_logs(
+            config.dask_cluster,
+            os.path.join(TESTS_CWD, "logs", "dask_cluster.log"),
+        )
+        config.dask_clientshutdown()
+
+
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     """
@@ -201,11 +215,4 @@ def pytest_sessionstart(session):
 @pytest.hookimpl(trylast=True)
 def pytest_unconfigure(config):
     """Clean up the Dask scheduler after pytest finishes."""
-    if hasattr(config, "dask_client"):
-        config.dask_client.close()
-    if hasattr(config, "dask_cluster"):
-        _write_cluster_logs(
-            config.dask_cluster,
-            os.path.join(TESTS_CWD, "logs", "dask_cluster.log"),
-        )
-        config.dask_cluster.close()
+    _teardown_dask(config)
