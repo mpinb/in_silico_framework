@@ -51,7 +51,7 @@ jobs:
         shell: cmd
         run: |
           set NEURONHOME=C:\nrn
-          pixi r python -c "import mechanisms.l5pt"
+          pixi r python -c "import mechanisms.l5pt" && exit 0 || exit 1
 
       - name: Test ISF
         shell: cmd
