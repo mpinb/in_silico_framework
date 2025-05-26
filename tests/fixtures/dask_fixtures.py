@@ -12,8 +12,13 @@ def client(pytestconfig):
     ip = pytestconfig.getoption("dask_server_ip")
     port = int(pytestconfig.getoption("dask_server_port"))
     address = f"{ip}:{port}"
-    max_wait = pytestconfig.getini("DASK_CLIENT_TIMEOUT")
-    client = Client(address, timeout=max_wait)
+    max_server_wait = pytestconfig.getini("DASK_CLIENT_TIMEOUT")
+    max_worker_wait = pytestconfig.getini("DASK_WORKER_TIMEOUT")
+    client = Client(
+        address, 
+        timeout=max_server_wait,
+        connection_args={"timeout": max_worker_wait}
+    )
 
     yield client
     # client.close()
