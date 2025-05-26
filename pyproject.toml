@@ -124,8 +124,6 @@ default = ["isf"]
 markers = [
   "dask_check_health: Check the health of dask workers after running this test."
 ]
-
-[tool.pytest.dask_config]
 DASK_N_WORKERS = 6
 DASK_TPW = 1
 DASK_MEM_LIMIT = "2GB"
@@ -191,10 +189,10 @@ cmd = [
   "--color=yes",
   "--durations=15",
   "--dask_server_port",
-  "{{ dask_port }}"
+  "{{ dask_port }}",
+  "tests"
 ]
 description = "Run test suite"
-cwd="tests"
 
 [tool.pixi.tasks.download_bc_model]
 cmd = ["./download_bc_model.sh"]

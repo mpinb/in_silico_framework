@@ -10,7 +10,6 @@ from dask.distributed import Client
 from .fixtures.dataframe_fixtures import ddf, pdf
 from .fixtures.dask_fixtures import client
 from .context import TESTS_CWD
-from mechanisms.l5pt import load_mechanisms
 from .context import TESTS_CWD
 
 if six.PY3:  
@@ -63,11 +62,19 @@ class ModuleFilter(logging.Filter):
 
 
 def pytest_addoption(parser):
+    """Specify CLI args and pytest.ini options for Dask configuration.
+    
+    These are defined in pyproject.toml, although default values are repeated here.
+    """
     parser.addoption("--dask_server_port", action="store", default="8786")
     parser.addoption("--dask_server_ip", action="store", default="localhost")
+    parser.addini("DASK_N_WORKERS", "Number of Dask workers")
+    parser.addini("DASK_TPW", "Threads per worker")
+    parser.addini("DASK_MEM_LIMIT", "Memory limit per worker")
+    parser.addini("DASK_DASHBOARD_ADDRESS", "Dashboard address")
 
 
-def pytest_ignore_collect(path, config):
+def pytest_ignore_collect(collection_path, config):
     """If this evaluates to True, the test is ignored.
 
     Args:
@@ -75,14 +82,14 @@ def pytest_ignore_collect(path, config):
         config (Config): pytest config object
     """
     if six.PY2:
-        return path.fnmatch(
+        return collection_path.fnmatch(
             "/*test_data_base/data_base/*"
-        ) or path.fnmatch(  # only run new DataBase tests on Py3
+        ) or collection_path.fnmatch(  # only run new DataBase tests on Py3
             "/*cell_morphology_visualizer_test*"
         )  # don't run cmv tests on Py2
     
     bc_downloaded = os.path.exists(os.path.join(os.path.dirname(TESTS_CWD), "barrel_cortex"))
-    if path.fnmatch("*test_barrel_cortex*"):
+    if collection_path.fnmatch("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
 
@@ -157,18 +164,20 @@ def _setup_dask(config):
                     )
                 time.sleep(interval)
         
-
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     """
     pytest configuration
     """
-    import getting_started  # trigger creation of template files
-
-    _mpl_backend_agg()
     _setup_logging()
-    _setup_dask(config)
 
+
+def pytest_sessionstart(session):
+    import getting_started  # trigger creation of template files
+    from mechanisms.l5pt import load_mechanisms
+    _mpl_backend_agg()
+    config = session.config
+    _setup_dask(config)  # Dask starts only when tests are about to run
 
 @pytest.hookimpl(trylast=True)
 def pytest_unconfigure(config):

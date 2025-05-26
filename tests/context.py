@@ -1,6 +1,9 @@
 from __future__ import absolute_import
 import os
-from getting_started import getting_started_dir
+
+
+getting_started_dir = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', 'getting_started'))
 
 TESTS_CWD = os.path.abspath(os.path.dirname(__file__))
 TEST_DATA_FOLDER = os.path.join(
