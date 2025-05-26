@@ -106,6 +106,10 @@ def _setup_logging():
     isf_logging_file_handler = logging.FileHandler(
         os.path.join(TESTS_CWD, "logs", "test.log")
     )
+    # Remove the default console handler to avoid cluttering CI output
+    for handler in isf_logger.handlers:
+        if isinstance(handler, logging.StreamHandler):
+            isf_logger.removeHandler(handler)
     isf_logging_file_handler.setLevel(logging.INFO)
     isf_logger.addHandler(isf_logging_file_handler)
 
