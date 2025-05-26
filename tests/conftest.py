@@ -149,22 +149,7 @@ def _setup_dask(config):
             )
         client.wait_for_workers(DASK_N_WORKERS)
         client.run(lambda: print("All workers connected."))
-        def is_worker_ready():
-            import socket
-            return socket.gethostname()
-        client.run(is_worker_ready)
-        for attempt in range(3):
-            try:
-                client.run(load_mechanisms)
-                break
-            except CommClosedError:
-                if attempt < 2:
-                    time.sleep(2)
-                else:
-                    raise
         client.run(load_mechanisms)
-        config.dask_cluster = cluster
-        config.dask_client = client
     else:
         # Wait for scheduler to be available
         ip = config.getoption("dask_server_ip")
@@ -184,19 +169,13 @@ def _setup_dask(config):
                     )
                 time.sleep(interval)
         
-def _teardown_dask(config):
-    """
-    Tear down the dask scheduler
-    
-    At this point, the dask scheduler and client should be part of the pytest config object.
-    """
-    if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
-        _write_cluster_logs(
-            config.dask_cluster,
-            os.path.join(TESTS_CWD, "logs", "dask_cluster.log"),
-        )
-        config.dask_clientshutdown()
 
+def _teardown_dask(config, client):
+    if os.getenv("PYTEST_XDIST_WORKER") is None:
+        _write_cluster_logs(
+            scheduler = client, 
+            log_files = os.path.join(TESTS_CWD, "logs", "dask_cluster.log"))
+        client.shutdown()
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
@@ -212,7 +191,8 @@ def pytest_sessionstart(session):
     config = session.config
     _setup_dask(config)  # Dask starts only when tests are about to run
 
+
 @pytest.hookimpl(trylast=True)
-def pytest_unconfigure(config):
+def pytest_unconfigure(config, client):
     """Clean up the Dask scheduler after pytest finishes."""
     _teardown_dask(config)

@@ -2,10 +2,8 @@ import os
 from dask.distributed import LocalCluster, Client
 
 
-
-
-def _write_cluster_logs(cluster, log_file):
-    logs = cluster.get_logs()
+def _write_cluster_logs(scheduler, log_file):
+    logs = scheduler.get_logs()
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
     with open(log_file, "w", encoding="utf-8") as f:
