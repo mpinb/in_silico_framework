@@ -121,10 +121,10 @@ def _mpl_backend_agg():
 
 
 def _setup_dask(config):
-    DASK_N_WORKERS = int(config.getini("dask_n_workers"))
-    DASK_TPW = int(config.getini("dask_threads_per_worker"))
-    DASK_MEM_LIMIT = config.getini("dask_memory_limit")
-    DASK_DASHBOARD_ADDRESS = config.getini("dask_dashboard_address")
+    DASK_N_WORKERS = int(config.getini("DASK_N_WORKERS"))
+    DASK_TPW = int(config.getini("DASK_TPW"))
+    DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
+    DASK_DASHBOARD_ADDRESS = config.getini("DASK_DASHBOARD_ADDRESS")
 
     if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
         client, cluster = _launch_dask_cluster(
