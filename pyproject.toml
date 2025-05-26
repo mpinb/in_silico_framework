@@ -122,7 +122,7 @@ default = ["isf"]
 # -------------------------------------------------------------------------
 [tool.pytest.ini_options]
 markers = [
-  "dask_check_health: Check the health of dask workers after running this test.",
+  "check_dask_health: Check the health of dask workers after running this test.",
   "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite."
 ]
 DASK_N_WORKERS = 6
