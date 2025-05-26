@@ -168,7 +168,7 @@ def _setup_dask(config):
             try:
                 client = Client(address, timeout=max_wait)
                 break
-            except (OSError, TimeoutError):
+            except (OSError, TimeoutError, CommClosedError) as e:
                 if time.time() - start > max_wait:
                     raise RuntimeError(
                         f"Could not connect to Dask scheduler at {address} within {max_wait} seconds"
