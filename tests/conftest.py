@@ -82,14 +82,14 @@ def pytest_ignore_collect(collection_path, config):
         config (Config): pytest config object
     """
     if six.PY2:
-        return collection_path.fnmatch(
+        return collection_path.match(
             "/*test_data_base/data_base/*"
-        ) or collection_path.fnmatch(  # only run new DataBase tests on Py3
+        ) or collection_path.match(  # only run new DataBase tests on Py3
             "/*cell_morphology_visualizer_test*"
         )  # don't run cmv tests on Py2
     
     bc_downloaded = os.path.exists(os.path.join(os.path.dirname(TESTS_CWD), "barrel_cortex"))
-    if collection_path.fnmatch("*test_barrel_cortex*"):
+    if collection_path.match("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
 
