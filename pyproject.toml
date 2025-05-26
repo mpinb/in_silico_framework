@@ -129,6 +129,12 @@ DASK_N_WORKERS = 6
 DASK_TPW = 1
 DASK_MEM_LIMIT = "2GB"
 DASK_DASHBOARD_ADDRESS="localhost:8787"
+# How long to wait for a dask client to connect to the scheduler before timing out.
+# This should not be significantly shorter than the duration of a long dask test (~2 minutes)
+# Although the scheduler "should" be able to accept connections while long tasks are running
+DASK_CLIENT_TIMEOUT = 60
+log_cli = true
+log_level = "INFO"
 
 # -------------------------------------------------------------------------
 # Pixi tasks
