@@ -66,6 +66,7 @@ def pytest_addoption(parser):
     parser.addini("DASK_TPW", "Threads per worker")
     parser.addini("DASK_MEM_LIMIT", "Memory limit per worker")
     parser.addini("DASK_DASHBOARD_ADDRESS", "Dashboard address")
+    parser.addini("DASK_CLIENT_TIMEOUT", "Dask client timeout in seconds")
 
 
 def pytest_collection_modifyitems(session, config, items):
