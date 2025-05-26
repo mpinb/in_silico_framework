@@ -174,7 +174,7 @@ def _setup_dask(config):
         start = time.time()
         while True:
             try:
-                client = Client(address)
+                client = Client(address, timeout=max_wait)
                 break
             except (OSError, TimeoutError):
                 if time.time() - start > max_wait:
