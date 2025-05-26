@@ -137,6 +137,7 @@ def _setup_dask(config):
     DASK_TPW = int(config.getini("DASK_TPW"))
     DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
     DASK_DASHBOARD_ADDRESS = config.getini("DASK_DASHBOARD_ADDRESS")
+    max_wait = config.getini("DASK_CLIENT_TIMEOUT")
 
     if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
         client, cluster = _launch_dask_cluster(
@@ -169,7 +170,7 @@ def _setup_dask(config):
         ip = config.getoption("dask_server_ip")
         port = int(config.getoption("dask_server_port"))
         address = f"{ip}:{port}"
-        max_wait = 30  # seconds
+
         interval = 1
         start = time.time()
         while True:
