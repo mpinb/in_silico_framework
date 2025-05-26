@@ -61,7 +61,7 @@ jobs:
         run: |
           set MPLBACKEND=Agg
           echo ------------ Running tests -------------
-          pixi r pytest -n 6 -rsx -vv -k "not test_visualization" --dist=loadscope --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests
+          pixi r pytest -n 6 -rsx -vv -k "not test_visualization" --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests
 
       - name: Test visualization
         shell: cmd
