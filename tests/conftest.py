@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, six,  pytest, time
+import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster, _write_cluster_logs
 from dask.distributed import Client
 
@@ -12,21 +12,12 @@ from .fixtures.dask_fixtures import client
 from .context import TESTS_CWD
 from .context import TESTS_CWD
 
-if six.PY3:  
-    # pytest can be parallellized on py3: use unique ids for dbs
-    from .fixtures.data_base_fixtures_py3 import (
-        empty_db,
-        fresh_db,
-        sqlite_db,
-    )
-elif six.PY2:  
-    # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
-    from .fixtures.data_base_fixtures_py2 import (
-        fresh_db,
-        empty_db,
-        sqlite_db,
-    )
-
+# pytest can be parallellized on py3: use unique ids for dbs
+from .fixtures.data_base_fixtures import (
+    empty_db,
+    fresh_db,
+    sqlite_db,
+)
 def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
         client = item.funcargs.get("client")
@@ -81,12 +72,6 @@ def pytest_ignore_collect(collection_path, config):
         path (str): path to the test file
         config (Config): pytest config object
     """
-    if six.PY2:
-        return collection_path.match(
-            "/*test_data_base/data_base/*"
-        ) or collection_path.match(  # only run new DataBase tests on Py3
-            "/*cell_morphology_visualizer_test*"
-        )  # don't run cmv tests on Py2
     
     bc_downloaded = os.path.exists(os.path.join(os.path.dirname(TESTS_CWD), "barrel_cortex"))
     if collection_path.match("*test_barrel_cortex*"):
