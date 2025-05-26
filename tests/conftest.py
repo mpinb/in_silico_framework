@@ -5,6 +5,7 @@
 import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster, _write_cluster_logs
 from dask.distributed import Client
+from distributed.comm.core import CommClosedError
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -144,6 +145,20 @@ def _setup_dask(config):
             dashboard_address=DASK_DASHBOARD_ADDRESS,
             )
         client.wait_for_workers(DASK_N_WORKERS)
+        client.run(lambda: print("All workers connected."))
+        def is_worker_ready():
+            import socket
+            return socket.gethostname()
+        client.run(is_worker_ready)
+        for attempt in range(3):
+            try:
+                client.run(load_mechanisms)
+                break
+            except CommClosedError:
+                if attempt < 2:
+                    time.sleep(2)
+                else:
+                    raise
         client.run(load_mechanisms)
         config.dask_cluster = cluster
         config.dask_client = client
