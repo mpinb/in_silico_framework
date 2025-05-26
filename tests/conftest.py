@@ -27,10 +27,6 @@ elif six.PY2:
         empty_db,
         sqlite_db,
     )
-DASK_N_WORKERS = 6
-DASK_TPW = 1
-DASK_MEM_LIMIT = "2GB"
-DASK_DASHBOARD_ADDRESS = None
 
 def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
@@ -125,6 +121,11 @@ def _mpl_backend_agg():
 
 
 def _setup_dask(config):
+    DASK_N_WORKERS = int(config.getini("dask_n_workers"))
+    DASK_TPW = int(config.getini("dask_threads_per_worker"))
+    DASK_MEM_LIMIT = config.getini("dask_memory_limit")
+    DASK_DASHBOARD_ADDRESS = config.getini("dask_dashboard_address")
+
     if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
         client, cluster = _launch_dask_cluster(
             config, 

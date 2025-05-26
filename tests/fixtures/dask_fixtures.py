@@ -1,6 +1,8 @@
 import pytest, os, time, socket
 from distributed.comm.core import CommClosedError
 from dask.distributed import Client
+
+
 @pytest.fixture(scope="session")
 def client(pytestconfig):
     """Fixture to create a Dask client for the tests.
