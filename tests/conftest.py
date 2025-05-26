@@ -19,6 +19,8 @@ from .fixtures.data_base_fixtures import (
     fresh_db,
     sqlite_db,
 )
+
+
 def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
         client = item.funcargs.get("client")

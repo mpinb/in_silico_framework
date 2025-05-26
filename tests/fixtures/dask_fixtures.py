@@ -24,7 +24,7 @@ def client(pytestconfig):
 
     while True:
         try:
-            client = Client(address)
+            client = Client(address, timeout=max_wait)
             break
         except (OSError, TimeoutError, CommClosedError, socket.error):
             if time.time() - start > max_wait:
