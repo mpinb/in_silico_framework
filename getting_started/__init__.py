@@ -38,8 +38,9 @@ def generate_param_files_with_valid_references():
         assert os.path.exists(template_path)
         assert template_path.endswith(suffix)
         target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
+        if os.path.exists(target_path):
+            logger.debug(f"File {target_path} already exists, skipping generation.")
         
-        get_write_lock().acquire(target_path)
         with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
             out_.write(in_.read().replace('[IN_SILICO_FRAMEWORK_DIR]',
                                           IN_SILICO_FRAMEWORK_DIR))
@@ -48,6 +49,8 @@ def generate_param_files_with_valid_references():
             #    print(line, file = out_)
 
 
+# TODO: this triggers on importing getting_started, which is often not desired
+# This would work better as a post-install hook, but that is not yet implemented
 generate_param_files_with_valid_references()
 
 hocfile = os.path.join(
