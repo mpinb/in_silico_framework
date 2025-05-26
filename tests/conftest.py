@@ -65,6 +65,20 @@ def pytest_addoption(parser):
     parser.addini("DASK_DASHBOARD_ADDRESS", "Dashboard address")
 
 
+def pytest_collection_modifyitems(session, config, items):
+    """Custom hook to prioritize heavy tests in pytest collection."""
+    heavy = []
+    normal = []
+
+    for item in items:
+        if 'heavy' in item.keywords:
+            heavy.append(item)
+        else:
+            normal.append(item)
+
+    # Place heavy tests at the beginning
+    items[:] = heavy + normal
+
 def pytest_ignore_collect(collection_path, config):
     """If this evaluates to True, the test is ignored.
 

@@ -69,6 +69,8 @@ def test_run_new_simulations_returns_dirname(tmpdir):
     assert isinstance(result[0][0], str)
 
 
+@pytest.mark.heavy
+@pytest.mark.check_dask_health
 def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
