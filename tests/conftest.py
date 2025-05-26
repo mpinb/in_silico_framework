@@ -128,6 +128,9 @@ def _mpl_backend_agg():
 
 
 def _setup_dask(config):
+    """Setup the dask server and initialize dask workers.
+    """
+    from mechanisms.l5pt import load_mechanisms
     DASK_N_WORKERS = int(config.getini("DASK_N_WORKERS"))
     DASK_TPW = int(config.getini("DASK_TPW"))
     DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
@@ -174,7 +177,6 @@ def pytest_configure(config):
 
 def pytest_sessionstart(session):
     import getting_started  # trigger creation of template files
-    from mechanisms.l5pt import load_mechanisms
     _mpl_backend_agg()
     config = session.config
     _setup_dask(config)  # Dask starts only when tests are about to run
