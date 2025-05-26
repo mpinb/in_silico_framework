@@ -70,7 +70,11 @@ def pytest_addoption(parser):
 
 
 def pytest_collection_modifyitems(session, config, items):
-    """Custom hook to prioritize heavy tests in pytest collection."""
+    """Custom hook to schedule heavy tests in pytest collection.
+    
+    Currently, heavy tests are simply scheduled first.
+    This may be extended in the future.
+    """
     heavy = []
     normal = []
 
