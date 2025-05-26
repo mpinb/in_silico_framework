@@ -170,8 +170,12 @@ def _setup_dask(config):
                 time.sleep(interval)
         
 
-def _teardown_dask(config, client):
+def _teardown_dask(config):
     if os.getenv("PYTEST_XDIST_WORKER") is None:
+        ip = config.getoption("dask_server_ip")
+        port = int(config.getoption("dask_server_port"))
+        address = f"{ip}:{port}"
+        client = Client(address)
         _write_cluster_logs(
             scheduler = client, 
             log_files = os.path.join(TESTS_CWD, "logs", "dask_cluster.log"))
@@ -193,6 +197,6 @@ def pytest_sessionstart(session):
 
 
 @pytest.hookimpl(trylast=True)
-def pytest_unconfigure(config, client):
+def pytest_unconfigure(config):
     """Clean up the Dask scheduler after pytest finishes."""
     _teardown_dask(config)
