@@ -1,6 +1,6 @@
 import pytest
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def client(pytestconfig):
     """Fixture to create a Dask client for the tests.
     """
