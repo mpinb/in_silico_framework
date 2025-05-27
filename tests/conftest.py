@@ -6,6 +6,7 @@ import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster 
 from dask.distributed import Client
 from distributed.comm.core import CommClosedError
+import logging
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -104,14 +105,12 @@ def _is_pytest_mother_worker():
     return os.getenv("PYTEST_XDIST_WORKER") is None
 
 def _setup_pytest_logging():
-    import logging
-    isf_logger = logging.getLogger("ISF").getChild(__name__)
 
     # --------------- Setup logging output -------------------
-    isf_logger.setLevel(logging.WARNING)
+    logger.setLevel(logging.WARNING)
 
     # Suppress logs from verbose modules so they don't show in stdout
-    isf_logger.addFilter(ModuleFilter(suppress_modules_list))
+    logger.addFilter(ModuleFilter(suppress_modules_list))
 
     # redirect test ouput to log file with more verbose output
     if not os.path.exists(os.path.join(TESTS_CWD, "logs")):
