@@ -105,7 +105,7 @@ def _is_pytest_mother_worker():
 
 def _setup_pytest_logging():
     import logging
-isf_logger = logging.getLogger("ISF").getChild(__name__)
+    isf_logger = logging.getLogger("ISF").getChild(__name__)
 
     # --------------- Setup logging output -------------------
     isf_logger.setLevel(logging.WARNING)
