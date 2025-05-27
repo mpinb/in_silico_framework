@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, pytest, time
+import logging, os, pytest, time, atexit
 from tests.dask_setup import _launch_dask_cluster, _write_cluster_logs
 from dask.distributed import Client
 from distributed.comm.core import CommClosedError
@@ -32,6 +32,7 @@ def pytest_runtest_teardown(item, nextitem):
             #     assert result == 42
             # except Exception as e:
             #     pytest.fail(f"Dask client check failed: {e}")
+
 
     
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -89,6 +90,7 @@ def pytest_collection_modifyitems(session, config, items):
     # Place heavy tests at the beginning
     items[:] = heavy + normal
 
+
 def pytest_ignore_collect(collection_path, config):
     """If this evaluates to True, the test is ignored.
 
@@ -101,6 +103,8 @@ def pytest_ignore_collect(collection_path, config):
     if collection_path.match("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
+def _is_pytest_mother_worker():
+    return os.getenv("PYTEST_XDIST_WORKER") is None
 
 def _setup_logging():
     from config.isf_logging import logger as isf_logger
@@ -146,7 +150,7 @@ def _setup_dask(config):
     DASK_DASHBOARD_ADDRESS = config.getini("DASK_DASHBOARD_ADDRESS")
     max_wait = config.getini("DASK_CLIENT_TIMEOUT")
 
-    if os.getenv("PYTEST_XDIST_WORKER") is None:  # Only run in the main pytest process
+    if _is_pytest_mother_worker():
         client, cluster = _launch_dask_cluster(
             config, 
             n_workers=DASK_N_WORKERS, 
@@ -178,7 +182,7 @@ def _setup_dask(config):
         
 
 def _teardown_dask(config):
-    if os.getenv("PYTEST_XDIST_WORKER") is None:
+    if _is_pytest_mother_worker():
         ip = config.getoption("dask_server_ip")
         port = int(config.getoption("dask_server_port"))
         address = f"{ip}:{port}"
@@ -194,6 +198,10 @@ def pytest_configure(config):
     pytest configuration
     """
     _setup_logging()
+    atexit.register(
+        lambda: logger.info("pytest session finished, cleaning up Dask client and cluster."),
+        _write_cluster_logs
+    )
 
 
 def pytest_sessionstart(session):
