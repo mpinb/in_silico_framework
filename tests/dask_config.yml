@@ -1,0 +1,25 @@
+logging:
+  version: 1
+  handlers:
+    scheduler:
+      class: logging.handlers.FileHandler
+      filename: dask_scheduler_output.log
+      level: INFO
+    workers:
+      class: logging.handlers.FileHandler
+      filename: dask_worker_output.log
+      level: INFO
+    # console:
+    #   class: logging.StreamHandler
+    #   level: INFO
+  loggers:
+    distributed.worker:
+      level: INFO
+      handlers:
+        - workers
+        # - console
+    distributed.scheduler:
+      level: INFO
+      handlers:
+        - scheduler
+        # - console

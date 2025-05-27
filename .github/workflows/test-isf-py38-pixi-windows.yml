@@ -41,16 +41,15 @@ jobs:
           echo Creating tests\logs\ directory...
           mkdir tests\logs
 
-          echo ------------ Configuring Dask -------------
-          set DASK_CONFIG=.\config\dask_config.yml
-
           if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"
           set TMPDIR=%USERPROFILE%\tmp
 
       - name: Compile mechanisms
         shell: cmd
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
         run: |
-          set NEURONHOME=C:\nrn
           pixi r python -c "import mechanisms.l5pt" && exit 0 || exit 1
 
       - name: Test ISF
@@ -58,8 +57,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
+          MPLBACKEND: Agg
+          DASK_CONFIG: tests/dask_config.yml
         run: |
-          set MPLBACKEND=Agg
           echo ------------ Running tests -------------
           pixi r pytest -n 6 -rsx -vv -k "not test_visualization" --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests
 
@@ -68,8 +68,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
+          MPLBACKEND: Agg
+          DASK_CONFIG: tests/dask_config.yml
         run: |
-          set MPLBACKEND=Agg
           echo ------------ Running tests -------------
           pixi r pytest -n 2 -rsx -vv --color=yes --durations=15 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests\test_visualization
 
@@ -78,10 +79,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEURONHOME: C:\nrn
+          ISF_USE_MDB: 1
+          DASK_CONFIG: tests/dask_config.yml
         run: |
-          set ISF_USE_MDB=1
           pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests\test_data_base
-          set ISF_USE_MDB=
 
       - name: Save test logs
         uses: actions/upload-artifact@v4

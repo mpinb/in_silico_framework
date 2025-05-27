@@ -37,9 +37,6 @@ jobs:
           echo "Creating tests/logs/ directory..."
           mkdir -p ./tests/logs/
 
-          echo "------------ Configuring Dask -------------"
-          export DASK_CONFIG=./config/dask_config.yml
-
           unset DISPLAY
           if [ ! -d "$HOME/tmp" ]; then
             mkdir $HOME/tmp
@@ -52,6 +49,7 @@ jobs:
           pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
         env: 
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DASK_CONFIG: tests/dask_config.yml
 
       - name: Test ModelDataBase backwards compatibility
         run: |
@@ -60,6 +58,7 @@ jobs:
           unset ISF_USE_MDB
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DASK_CONFIG: tests/dask_config.yml
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
