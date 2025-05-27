@@ -21,5 +21,5 @@ def client(pytestconfig):
     )
 
     yield client
-    logger.info(f"Active workers: {list(client.scheduler.workers)}")
+    logger.info(f"Active workers: {list(client.cluster.scheduler.workers)}")
     # client.close()
