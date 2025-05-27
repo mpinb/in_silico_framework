@@ -3,7 +3,7 @@ import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 @pytest.fixture(scope="function")
-def client(pytestconfig):
+def _dask_base_client(pytestconfig):
     """Fixture to create a Dask client for the tests.
     """
     from dask.distributed import Client
@@ -21,5 +21,18 @@ def client(pytestconfig):
     )
 
     yield client
-    logger.info(f"Active workers: {list(client._scheduler_identity.workers)}")
     # client.close()
+
+    
+@pytest.fixture
+def client(request, _dask_base_client):
+    """Request a dask client and check the health after it is used"""
+    def _check():
+        logger.info(f"[CHECK] Active workers: {list(_dask_base_client.scheduler_info()['workers'])}")
+        try:
+            result = _dask_base_client.submit(lambda: 42).result(timeout=5)
+            assert result == 42
+        except Exception as e:
+            pytest.fail(f"[CHECK] Dask client check failed: {e}")
+    request.addfinalizer(_check)
+    return _dask_base_client

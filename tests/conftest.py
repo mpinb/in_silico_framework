@@ -87,8 +87,10 @@ def pytest_ignore_collect(collection_path, config):
     if collection_path.match("*test_barrel_cortex*"):
         return not bc_downloaded  # skip if it is not downloaded
 
+
 def _is_pytest_mother_worker():
     return os.getenv("PYTEST_XDIST_WORKER") is None
+
 
 def _setup_pytest_logging():
 
