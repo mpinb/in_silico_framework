@@ -3,11 +3,11 @@ logging:
   handlers:
     scheduler:
       class: logging.FileHandler
-      filename: dask_scheduler_output.log
+      filename: tests/logs/dask_scheduler_output.log
       level: INFO
     workers:
       class: logging.FileHandler
-      filename: dask_worker_output.log
+      filename: tests/logs/dask_worker_output.log
       level: INFO
     # console:
     #   class: logging.StreamHandler

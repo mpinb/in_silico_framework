@@ -1,5 +1,4 @@
 import numpy as np
-
 from biophysics_fitting.ephys import find_crossing, find_crossing_old
 
 

@@ -205,10 +205,10 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
         try:
             features_dicts = c.gather(futures)
         except (distributed.client.CancelledError, distributed.scheduler.KilledWorker):
-            print('Futures have been canceled. Waiting for 3 Minutes, then reschedule.')
+            logger.error('Futures have been canceled. Waiting for 3 Minutes, then rescheduling...')
             del futures
             time.sleep(3 * 60)
-            print('Rescheduling ...')
+            logger.info('Rescheduling ...')
             return mymap(func, iterable)
         except RuntimeError:
             if reschedule_on_runtime_error >= 0:
