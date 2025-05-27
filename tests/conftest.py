@@ -19,7 +19,8 @@ from .fixtures.data_base_fixtures import (
     fresh_db,
     sqlite_db,
 )
-
+logger = logging.getLogger("ISF").getChild(__name__)
+os.environ["ISF_IS_TESTING"] = "True"
 
 def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
@@ -33,10 +34,6 @@ def pytest_runtest_teardown(item, nextitem):
             # except Exception as e:
             #     pytest.fail(f"Dask client check failed: {e}")
 
-
-    
-logger = logging.getLogger("ISF").getChild(__name__)
-os.environ["ISF_IS_TESTING"] = "True"
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
