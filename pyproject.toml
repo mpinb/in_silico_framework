@@ -200,7 +200,6 @@ cmd = [
   "{{ dask_port }}",
   "tests"
 ]
-env = { "DASK_CONFIG" = "tests/dask_config.yml" }
 description = "Run test suite"
 
 [tool.pixi.tasks.download_bc_model]

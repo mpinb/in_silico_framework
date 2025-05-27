@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, pytest, time, atexit
+import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster 
 
 # --- Import fixtures
@@ -141,6 +141,9 @@ def _setup_dask(config):
     from mechanisms.l5pt import load_mechanisms
     from dask.distributed import Client
     from distributed.comm.core import CommClosedError
+
+    os.environ["DASK_CONFIG"] = os.path.join(TESTS_CWD, "dask_config.yml")
+
     DASK_N_WORKERS = int(config.getini("DASK_N_WORKERS"))
     DASK_TPW = int(config.getini("DASK_TPW"))
     DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
