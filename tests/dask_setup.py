@@ -61,8 +61,6 @@ def _setup_dask_worker_logging(log_file):
 def _launch_dask_cluster(config, n_workers, threads_per_worker, mem_limit, dashboard_address):
     ip = config.getoption("dask_server_ip")
     port = int(config.getoption("dask_server_port"))
-
-
     
     # Start a new Dask cluster
     cluster = LocalCluster(
