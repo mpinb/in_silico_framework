@@ -27,5 +27,4 @@ def client(request, pytestconfig):
         except Exception as e:
             pytest.fail(f"[CHECK] Dask client check failed: {e}")
     request.addfinalizer(_check)
-    yield client
-    client.close()
+    return client
