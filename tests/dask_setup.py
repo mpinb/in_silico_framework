@@ -1,7 +1,15 @@
 from dask.distributed import LocalCluster, Client
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
-def _launch_dask_cluster(config, n_workers, threads_per_worker, mem_limit, dashboard_address):
+def _launch_dask_cluster(
+    config, 
+    n_workers, 
+    threads_per_worker, 
+    mem_limit, 
+    dashboard_address
+    ):
     ip = config.getoption("dask_server_ip")
     port = int(config.getoption("dask_server_port"))
     
@@ -13,8 +21,8 @@ def _launch_dask_cluster(config, n_workers, threads_per_worker, mem_limit, dashb
         dashboard_address=dashboard_address,
         ip=ip,
         scheduler_port=port,
-        processes=False,  # Use threads instead of processes
+        processes=True, 
     )
     client = Client(cluster)
-    print(f"Started new Dask cluster at {ip}:{port}")
+    logger.info(f"Started new Dask cluster at {ip}:{port}")
     return client, cluster
