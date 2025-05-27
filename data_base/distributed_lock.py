@@ -64,7 +64,7 @@ import yaml
 import os
 from compatibility import YamlLoader
 import logging
-logger = logging.getLogger("ISF").getChild(__name__) as isf_logger
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 from config.file_locking import DEFAULT_CONFIG
 
 logger = isf_logger.getChild(__name__)

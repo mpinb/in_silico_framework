@@ -11,7 +11,7 @@ project_root = os.path.join(os.path.abspath(os.pardir))
 sys.path.insert(0, project_root)
 
 import logging
-logger = logging.getLogger("ISF").getChild(__name__) as isf_logger
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 from docs.utils.parse_notebooks import copy_and_parse_notebooks_to_docs
 from docs.utils.skip_doc import MODULES_TO_SKIP, skip_member
 from docs.utils.sphinx_hooks import (

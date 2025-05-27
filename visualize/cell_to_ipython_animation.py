@@ -38,7 +38,7 @@ from base64 import b64encode
 import multiprocessing
 from data_base.utils import chunkIt
 import logging
-logger = logging.getLogger("ISF").getChild(__name__) as isf_logger
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild(__name__)
 
 html_template = 'animation_template.html'

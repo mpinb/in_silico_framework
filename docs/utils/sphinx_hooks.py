@@ -1,5 +1,5 @@
 import logging
-logger = logging.getLogger("ISF").getChild(__name__) as isf_logger
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
 
