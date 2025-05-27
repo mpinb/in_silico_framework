@@ -6,7 +6,7 @@ import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster 
 from dask.distributed import Client
 from distributed.comm.core import CommClosedError
-from config.isf_logging import logger
+from config.isf_logging import logger  # import from config to set handlers properly
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -26,7 +26,7 @@ def pytest_runtest_teardown(item, nextitem):
     if "check_dask_health" in item.keywords:
         client = item.funcargs.get("client")
         if client is not None:
-            logger.info(f"Active workers: {list(client.workers)}")
+            logger.info(f"Active workers: {list(client.scheduler.workers)}")
             # try:
             #     # Run a lightweight task on the cluster to ensure it still works
             #     result = client.submit(lambda: 42).result(timeout=5)
