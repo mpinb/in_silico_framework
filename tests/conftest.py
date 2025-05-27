@@ -120,12 +120,12 @@ def _setup_pytest_logging():
     )
 
     # Remove the default console handler to avoid cluttering CI output
-    for handler in isf_logger.handlers:
+    for handler in logger.handlers:
         if isinstance(handler, logging.StreamHandler):
-            isf_logger.removeHandler(handler)
+            logger.removeHandler(handler)
 
     isf_logging_file_handler.setLevel(logging.INFO)
-    isf_logger.addHandler(isf_logging_file_handler)
+    logger.addHandler(isf_logging_file_handler)
 
     
 def _mpl_backend_agg():
