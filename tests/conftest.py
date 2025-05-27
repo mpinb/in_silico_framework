@@ -185,7 +185,7 @@ def _teardown_dask(config):
         client = Client(address)
         _write_cluster_logs(
             scheduler = client, 
-            log_files = os.path.join(TESTS_CWD, "logs", "dask_cluster.log"))
+            log_file = os.path.join(TESTS_CWD, "logs", "dask_cluster.log"))
         client.shutdown()
 
 @pytest.hookimpl(tryfirst=True)
