@@ -160,6 +160,7 @@ def _setup_dask(config):
         client.wait_for_workers(DASK_N_WORKERS)
         client.run(lambda: print("All workers connected."))
         client.run(load_mechanisms)
+        client.run(_setup_pytest_logging)
     else:
         # Wait for scheduler to be available
         ip = config.getoption("dask_server_ip")
