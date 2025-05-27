@@ -189,7 +189,7 @@ args = [
   {arg = "dask_port",   default = "8786"}
 ]
 cmd = [
-  "rm -rf", "tests/logs", "&&",
+  "rm", "-rf", "tests/logs", "&&",
   "mkdir", "-p", "tests/logs", "&&",
   "pytest", 
   "-rsx",
