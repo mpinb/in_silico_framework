@@ -1,7 +1,6 @@
 import os
 import neuron
 import socket
-import distributed
 import pytest
 import getting_started
 
@@ -87,14 +86,3 @@ def is_port_open(host, port):
         sock.settimeout(1)  # 1 second timeout
         result = sock.connect_ex((host, port))
         return result == 0
-
-
-def client(port):
-    if is_port_open("localhost", port):
-        host = "localhost"
-    else:
-        host = socket.gethostbyname(socket.gethostname())
-
-    c = distributed.Client(f"{host}:{port}")
-    return c
-
