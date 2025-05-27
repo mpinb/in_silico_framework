@@ -117,6 +117,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
         raise
 
 
+@pytest.mark.check_dask_health
 def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     # Note: these tolerances were found with trial and error, but have no further meaning
     if sys.platform.startswith('linux'):
