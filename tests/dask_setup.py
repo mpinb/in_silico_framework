@@ -23,6 +23,7 @@ def _launch_dask_cluster(config, n_workers, threads_per_worker, mem_limit, dashb
         dashboard_address=dashboard_address,
         ip=ip,
         scheduler_port=port,
+        processes=False,  # Use threads instead of processes
     )
     client = Client(cluster)
     print(f"Started new Dask cluster at {ip}:{port}")
