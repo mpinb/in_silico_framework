@@ -17,7 +17,6 @@ def client(pytestconfig):
     client = Client(
         address, 
         timeout=max_server_wait,
-        connection_args={"timeout": max_worker_wait}
     )
 
     yield client
