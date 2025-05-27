@@ -6,7 +6,7 @@ import logging, os, pytest, time
 from tests.dask_setup import _launch_dask_cluster 
 from dask.distributed import Client
 from distributed.comm.core import CommClosedError
-import logging
+from config.isf_logging import logger
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -20,7 +20,6 @@ from .fixtures.data_base_fixtures import (
     fresh_db,
     sqlite_db,
 )
-logger = logging.getLogger("ISF").getChild(__name__)
 os.environ["ISF_IS_TESTING"] = "True"
 
 def pytest_runtest_teardown(item, nextitem):
