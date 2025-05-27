@@ -3,7 +3,7 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest, time, atexit
-from tests.dask_setup import _launch_dask_cluster, _setup_dask_scheduler_logging, _setup_dask_worker_logging
+from tests.dask_setup import _launch_dask_cluster 
 from dask.distributed import Client
 from distributed.comm.core import CommClosedError
 
@@ -126,13 +126,6 @@ def _setup_pytest_logging():
     isf_logging_file_handler.setLevel(logging.INFO)
     isf_logger.addHandler(isf_logging_file_handler)
 
-def _setup_dask_logging(client):
-    worker_log_file = os.path.join(TESTS_CWD, "logs", "dask_worker.log")
-    client.run(_setup_dask_worker_logging, worker_log_file)
-    # Set up logging for the Dask cluster
-    log_file = os.path.join(TESTS_CWD, "logs", "dask_cluster.log")
-    _setup_dask_scheduler_logging(log_file)
-
     
 def _mpl_backend_agg():
     """
@@ -165,7 +158,6 @@ def _setup_dask(config):
         client.wait_for_workers(DASK_N_WORKERS)
         client.run(lambda: print("All workers connected."))
         client.run(load_mechanisms)
-        _setup_dask_logging(client)
     else:
         # Wait for scheduler to be available
         ip = config.getoption("dask_server_ip")
