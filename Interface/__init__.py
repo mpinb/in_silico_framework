@@ -70,8 +70,7 @@ import math
 
 ### logging setup
 import logging
-import logging
-logger = logging.getLogger("ISF").getChild(__name__), logger_stream_handler
+from config.isf_logging import logger, logger_stream_handler
 
 try:
     from IPython import display
