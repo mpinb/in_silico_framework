@@ -4,8 +4,6 @@
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest, time, atexit
 from tests.dask_setup import _launch_dask_cluster 
-from dask.distributed import Client
-from distributed.comm.core import CommClosedError
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -141,6 +139,8 @@ def _setup_dask(config):
     """Setup the dask server and initialize dask workers.
     """
     from mechanisms.l5pt import load_mechanisms
+    from dask.distributed import Client
+    from distributed.comm.core import CommClosedError
     DASK_N_WORKERS = int(config.getini("DASK_N_WORKERS"))
     DASK_TPW = int(config.getini("DASK_TPW"))
     DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
@@ -179,6 +179,7 @@ def _setup_dask(config):
         
 
 def _teardown_dask(config):
+    from dask.distributed import Client
     if _is_pytest_mother_worker():
         ip = config.getoption("dask_server_ip")
         port = int(config.getoption("dask_server_port"))

@@ -1,11 +1,10 @@
 import pytest
-from dask.distributed import Client
-
 
 @pytest.fixture(scope="session")
 def client(pytestconfig):
     """Fixture to create a Dask client for the tests.
     """
+    from dask.distributed import Client
     # Each pytest xdist worker will create its own Dask client
     # and connect to the same Dask cluster.
     # The tests should thus be thread-safe
