@@ -22,7 +22,8 @@ In addition, it contains network connectivity parameters that define synaptic co
 """
 
 import os, platform, six, neuron, glob, shutil, subprocess
-from config.isf_logging import logger, stream_to_logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__), stream_to_logger
 try: import tables
 except ImportError: pass
 

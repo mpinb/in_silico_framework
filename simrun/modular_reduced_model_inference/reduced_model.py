@@ -31,7 +31,8 @@ Both the cost function and the free parameters are defined in the :py:class:`~si
 
 import numpy as np
 import pandas as pd
-from config.isf_logging import logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def get_n_workers_per_ip(workers, n):

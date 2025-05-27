@@ -104,25 +104,27 @@ def _is_pytest_mother_worker():
     return os.getenv("PYTEST_XDIST_WORKER") is None
 
 def _setup_pytest_logging():
-    from config.isf_logging import logger as isf_logger
+    import logging
+logger = logging.getLogger("ISF").getChild(__name__) as isf_logger
 
     # --------------- Setup logging output -------------------
-    # only log warnings or worse
-    isf_logger.setLevel(logging.WARNING)  # set logging level of ISF logger to WARNING
+    isf_logger.setLevel(logging.WARNING)
+
     # Suppress logs from verbose modules so they don't show in stdout
-    isf_logger.addFilter(
-        ModuleFilter(suppress_modules_list)
-    )  # suppress logs from this module
+    isf_logger.addFilter(ModuleFilter(suppress_modules_list))
+
     # redirect test ouput to log file with more verbose output
     if not os.path.exists(os.path.join(TESTS_CWD, "logs")):
         os.mkdir(os.path.join(TESTS_CWD, "logs"))
     isf_logging_file_handler = logging.FileHandler(
         os.path.join(TESTS_CWD, "logs", "test.log")
     )
+
     # Remove the default console handler to avoid cluttering CI output
     for handler in isf_logger.handlers:
         if isinstance(handler, logging.StreamHandler):
             isf_logger.removeHandler(handler)
+
     isf_logging_file_handler.setLevel(logging.INFO)
     isf_logger.addHandler(isf_logging_file_handler)
 
