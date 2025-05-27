@@ -22,7 +22,6 @@ class TestSpatioTemporalBinning:
         b = np.array([[0, 0, 6, 1, 0, 1], [0, 0, 0, 0, 4, 2]])
         np.testing.assert_array_equal(a, b)
 
-    @pytest.mark.check_dask_health
     def test_binning_dask_dataframe(self):
         '''binning dask dataframes has to deliver the same
         results as binning pandas dataframes'''
@@ -41,7 +40,6 @@ class TestSpatioTemporalBinning:
         b = np.array([[0, 0, 6, 1, 0, 1], [0, 0, 0, 0, 4, 2]])
         np.testing.assert_array_equal(a, b)
 
-    @pytest.mark.check_dask_health
     def test_binning_real_data(self, fresh_db, client):
         '''binning dask dataframes has to deliver the same
         results as binning pandas dataframes'''

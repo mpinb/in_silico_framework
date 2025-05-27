@@ -16,7 +16,6 @@ assert os.path.exists(networkName)
 assert os.path.exists(example_path)
 
 
-@pytest.mark.check_dask_health
 def test_generate_synapse_activation_returns_filelist(tmpdir, client):
     try:
         dummy = simrun.generate_synapse_activations.generate_synapse_activations(
@@ -33,7 +32,6 @@ def test_generate_synapse_activation_returns_filelist(tmpdir, client):
     assert isinstance(dummy[0][0][0], str)
 
 
-@pytest.mark.check_dask_health
 def test_run_existing_synapse_activation_returns_identifier_dataframe_and_results_folder(
         tmpdir, client):
     try:
@@ -51,7 +49,6 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
     assert isinstance(dummy[0][0][1], str)
 
 
-@pytest.mark.check_dask_health
 def test_run_new_simulations_returns_dirname(tmpdir):
     try:
         dummy = simrun.run_new_simulations.run_new_simulations(
@@ -70,7 +67,6 @@ def test_run_new_simulations_returns_dirname(tmpdir):
 
 
 @pytest.mark.heavy
-@pytest.mark.check_dask_health
 def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
@@ -117,7 +113,6 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
         raise
 
 
-@pytest.mark.check_dask_health
 def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     # Note: these tolerances were found with trial and error, but have no further meaning
     if sys.platform.startswith('linux'):

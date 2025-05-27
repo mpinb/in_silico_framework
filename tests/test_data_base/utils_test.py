@@ -59,7 +59,6 @@ def test_cache():
     assert len(flag) == 2
 
 
-@pytest.mark.check_dask_health
 def test_myrepartition(client):
     pdf = pd.DataFrame(np.random.randint(100, size=(1000, 3)))
     ddf = dask.dataframe.from_pandas(pdf, npartitions=10)

@@ -1,4 +1,6 @@
 import pytest
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 @pytest.fixture(scope="function")
 def client(pytestconfig):
@@ -19,4 +21,5 @@ def client(pytestconfig):
     )
 
     yield client
+    logger.info(f"Active workers: {list(client.scheduler.workers)}")
     # client.close()

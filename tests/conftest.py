@@ -22,19 +22,6 @@ from .fixtures.data_base_fixtures import (
 )
 os.environ["ISF_IS_TESTING"] = "True"
 
-def pytest_runtest_teardown(item, nextitem):
-    if "check_dask_health" in item.keywords:
-        client = item.funcargs.get("client")
-        if client is not None:
-            logger.info(f"Active workers: {list(client.scheduler.workers)}")
-            # try:
-            #     # Run a lightweight task on the cluster to ensure it still works
-            #     result = client.submit(lambda: 42).result(timeout=5)
-            #     assert result == 42
-            # except Exception as e:
-            #     pytest.fail(f"Dask client check failed: {e}")
-
-
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
 

@@ -72,7 +72,6 @@ class RobustDaskDelayedExecution:
         db[key, 'status'] = 'not_started'
         db[key, 'obj'] = d
 
-    @pytest.mark.check_dask_health
     def run_db(self, error_started=True):
         ''
         import six

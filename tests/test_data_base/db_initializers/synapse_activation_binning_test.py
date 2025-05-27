@@ -9,7 +9,6 @@ from data_base.utils import silence_stdout
 optimize_simrun_general = silence_stdout(optimize_simrun_general)
 
 
-@pytest.mark.check_dask_health
 def test_API(fresh_db, client):
     optimize_simrun_general(fresh_db, client=client)
     init_synapse_activation(fresh_db, groupby='EI')
