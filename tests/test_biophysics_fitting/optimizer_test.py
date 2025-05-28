@@ -213,10 +213,13 @@ def test_get_max_generation():
 
 
 def test_mini_optimization_run(capsys, client):
-    c = client
+    # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
+    import mechanisms  
+
     db = set_up_db(step=False)
+
     try:
-        start_run(db["86"], 1, client=c, offspring_size=2, max_ngen=2)
+        start_run(db["86"], 1, client=client, offspring_size=2, max_ngen=2)
         # accessing simulation results of run
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
@@ -225,14 +228,14 @@ def test_mini_optimization_run(capsys, client):
         # if continue_cp is not set (defaults to False), an Exception is raised if the same
         # optimization is started again
         with pytest.raises(ValueError):
-            start_run(db["86"], 1, client=c, offspring_size=2, max_ngen=4)
+            start_run(db["86"], 1, client=client, offspring_size=2, max_ngen=4)
         # with continue_cp = True, the optimization gets continued
-        start_run(db["86"], 1, client=c, offspring_size=2, max_ngen=4, continue_cp=True)
+        start_run(db["86"], 1, client=client, offspring_size=2, max_ngen=4, continue_cp=True)
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
         ]
         assert max(keys) == 4
-        start_run(db["86"], 2, client=c, offspring_size=2, max_ngen=2)
+        start_run(db["86"], 2, client=client, offspring_size=2, max_ngen=2)
         keys = [
             int(k) for k in list(db["86"]["2"].keys()) if utils.convertible_to_int(k)
         ]
