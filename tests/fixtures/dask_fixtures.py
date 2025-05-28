@@ -43,7 +43,7 @@ def client(pytestconfig):
     )
     client = Client(cluster)
     client.wait_for_workers(n_workers)
-    client.run(init_dask_workers)
+    # client.run(init_dask_workers)
     
     yield client
     client.close()

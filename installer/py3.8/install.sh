@@ -245,6 +245,10 @@ do
     fi
 done
 
+# -------------------- 7. Generating paramfiles -------------------- #
+print_title "7. Generating paramfiles"
+python $SCRIPT_DIR/../activation_hook.py
+
 
 # -------------------- Cleanup -------------------- #
 rm $SCRIPT_DIR/tempfile

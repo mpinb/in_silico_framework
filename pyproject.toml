@@ -106,16 +106,15 @@ sphinx-immaterial = ">=0.11.14,<0.12"
 # Environment config
 # -------------------------------------------------------------------------
 [tool.pixi.target.unix.activation.env]
-PYTHONPATH = "$(pwd):$PYTHONPATH" # Add ISF to PYTHONPATH to import all ISF packages.
+PYTHONPATH = "$(pwd):$PYTHONPATH"
 [tool.pixi.target.win.activation.env]
-PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%" # idem + add NEURON to the PATH
+PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%"
 PATH = "%PATH%;%NEURONHOME%/bin"
 HOME = "%USERPROFILE%"
 
 [tool.pixi.environments]
 docs = ["docs"]
 default = ["isf"]
-
 
 # -------------------------------------------------------------------------
 # Testing config
@@ -133,6 +132,20 @@ log_level = "INFO"
 # -------------------------------------------------------------------------
 # Pixi tasks
 # -------------------------------------------------------------------------
+[tool.pixi.tasks.configure]
+# (re)configure ISF for local filesystem
+args = [
+  {arg = "force_recompile", default = "False" },
+  {arg = "overwrite_param_files", default = "False" }
+] 
+cmd = [
+  "python", 
+  "config/isf_configure.py", 
+  "--force-recompile={{ force_recompile }}",
+  "--overwrite-param-files={{ overwrite_param_files }}",
+]
+
+
 [tool.pixi.tasks.launch_dask_server]
 args = [
   {arg = "port", default = "8786"},
@@ -180,6 +193,7 @@ description = "Launch a Jupyter Lab server"
 args = [
   {arg = "n_pytest_workers", default = "3"},
 ]
+depends-on = ["configure"]
 cmd = [
   "rm", "-rf", "tests/logs", "&&",
   "mkdir", "-p", "tests/logs", "&&",

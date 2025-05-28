@@ -23,7 +23,16 @@ getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
 example_data_dir = os.path.join(getting_started_dir, 'example_data')
 tutorial_output_dir = os.path.join(os.environ.get("HOME"), 'ISF_tutorial_output')
 
-def generate_param_files_with_valid_references():
+def generate_param_files_with_valid_references(overwrite_param_files=False):
+    """Generate parameter files with valid references to the In Silico Framework directory.
+    
+    This function replaces the placeholder [IN_SILICO_FRAMEWORK_DIR] in the template files
+    to resolved paths on the filesystem.
+    This configuration function is run once after installing ISF.
+    
+    See also:
+        :py:mod:`config.isf_configure` for configuring ISF for your local system.
+    """
     IN_SILICO_FRAMEWORK_DIR = os.path.abspath(
         os.path.dirname(os.path.dirname(__file__)))
     suffix = '.TEMPLATE'
@@ -38,8 +47,11 @@ def generate_param_files_with_valid_references():
         assert template_path.endswith(suffix)
         target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
         if os.path.exists(target_path):
-            logger.debug(f"File {target_path} already exists, skipping generation.")
-            continue
+            if overwrite_param_files:
+                logger.info(f"Overwriting {target_path}.")
+            else:
+                logger.debug(f"File {target_path} already exists and 'overwrite_param_files' is False. Skipping.")
+                continue
         
         with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
             out_.write(in_.read().replace(
@@ -49,10 +61,6 @@ def generate_param_files_with_valid_references():
             #    line = line
             #    print(line, file = out_)
 
-
-# TODO: this triggers on importing getting_started, which is often not desired
-# This would work better as a post-install hook, but that is not yet implemented
-generate_param_files_with_valid_references()
 
 hocfile = os.path.join(
     example_data_dir,
