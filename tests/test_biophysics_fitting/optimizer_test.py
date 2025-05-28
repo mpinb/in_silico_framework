@@ -213,9 +213,6 @@ def test_get_max_generation():
 
 
 def test_mini_optimization_run(capsys, client):
-    # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
-    from mechanisms.l5pt import load_mechanisms
-    client.submit(lambda _: load_mechanisms)
 
     db = set_up_db(step=False)
 
