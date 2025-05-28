@@ -2,8 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, pytest, time
-from tests.dask_setup import DASK_CLUSTER_PER_GW_WORKER 
+import logging, os, pytest
 from config.isf_logging import logger  # import from config to set handlers properly
 
 # --- Import fixtures

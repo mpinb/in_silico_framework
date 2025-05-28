@@ -26,6 +26,8 @@ def client(pytestconfig):
         silence_logs = False,
     )
     client = Client(cluster)
+    from mechanisms.l5pt import load_mechanisms
+    client.run(load_mechanisms)
     
     yield client
     client.close()
