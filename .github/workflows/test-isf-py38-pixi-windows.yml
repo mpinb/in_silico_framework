@@ -39,6 +39,7 @@ jobs:
         run: |
           echo ------------ Preliminary setup for tests -------------
           echo Creating tests\logs\ directory...
+          rm -rf tests\logs
           mkdir tests\logs
 
           if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"
@@ -61,18 +62,7 @@ jobs:
           DASK_CONFIG: tests/dask_config.yml
         run: |
           echo ------------ Running tests -------------
-          pixi r pytest -n 6 -rsx -vv -k "not test_visualization" --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests
-
-      - name: Test visualization
-        shell: cmd
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-          MPLBACKEND: Agg
-          DASK_CONFIG: tests/dask_config.yml
-        run: |
-          echo ------------ Running tests -------------
-          pixi r pytest -n 2 -rsx -vv --color=yes --durations=15 --cov-report xml:tests\logs\report_py38.xml --cov=. --dask_server_port 8786 tests\test_visualization
+          pixi r pytest -n 3 -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
 
       - name: Test ModelDataBase backwards compatibility
         shell: cmd
@@ -82,7 +72,7 @@ jobs:
           ISF_USE_MDB: 1
           DASK_CONFIG: tests/dask_config.yml
         run: |
-          pixi r pytest -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests\test_data_base
+          pixi r pytest -rsx -vv --color=yes --durations=0  tests\test_data_base
 
       - name: Save test logs
         uses: actions/upload-artifact@v4

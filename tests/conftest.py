@@ -43,14 +43,7 @@ def pytest_addoption(parser):
     
     These are defined in pyproject.toml, although default values are repeated here.
     """
-    parser.addoption("--dask_server_port", action="store", default="8786")
-    parser.addoption("--dask_server_ip", action="store", default="localhost")
     parser.addini("DASK_N_WORKERS", "Number of Dask workers")
-    parser.addini("DASK_TPW", "Threads per worker")
-    parser.addini("DASK_MEM_LIMIT", "Memory limit per worker")
-    parser.addini("DASK_DASHBOARD_ADDRESS", "Dashboard address")
-    parser.addini("DASK_CLIENT_TIMEOUT", "Dask client-server timeout in seconds")
-    parser.addini("DASK_WORKER_TIMEOUT", "Dask client-worker timeout in seconds")
 
 
 def pytest_collection_modifyitems(session, config, items):

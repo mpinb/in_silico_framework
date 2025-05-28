@@ -44,7 +44,7 @@ jobs:
       - name: Test ISF
         run: |
           echo "Launching test suite..."
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --cov-report xml:tests/logs/report_py38.xml --cov=. --dask_server_port 8786 tests || exit 1
+          pixi r pytest -n 5 -rsx -vv --color=yes --durations=0 --cov-report xml:tests/logs/report_py38.xml --cov=. tests || exit 1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DASK_CONFIG: tests/dask_config.yml
@@ -52,7 +52,7 @@ jobs:
       - name: Test ModelDataBase backwards compatibility
         run: |
           export ISF_USE_MDB=1
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=15 --dask_server_port 8786 tests/test_data_base/
+          pixi r pytest -n 5 -rsx -vv --color=yes --durations=0 tests/test_data_base/
           unset ISF_USE_MDB
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -179,7 +179,6 @@ description = "Launch a Jupyter Lab server"
 [tool.pixi.tasks.test]
 args = [
   {arg = "n_pytest_workers", default = "3"},
-  {arg = "dask_port",   default = "8786"}
 ]
 cmd = [
   "rm", "-rf", "tests/logs", "&&",
@@ -192,8 +191,6 @@ cmd = [
   "-vv",
   "--color=yes",
   "--durations=15",
-  "--dask_server_port",
-  "{{ dask_port }}",
   "tests",
 ]
 env = {"DASK_CONFIG" = "tests/dask_config.yml"}
