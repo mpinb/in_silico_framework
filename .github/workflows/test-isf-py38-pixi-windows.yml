@@ -36,10 +36,12 @@ jobs:
 
       - name: Preliminary setup
         shell: cmd
+        env:
+            NEURONHOME: C:\nrn
         run: |
           echo ------------ Preliminary setup for tests -------------
           echo Creating tests\logs\ directory...
-          rm -rf tests\logs
+          if exist tests\logs rmdir /s /q tests\logs
           mkdir tests\logs
 
           if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"

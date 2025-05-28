@@ -8,15 +8,16 @@ and loads them into NEURON namespace.
 
 Configuring ISF using the pixi installation can be done with::
 
-    pixi r configure <force_recompile: 0/1> <overwrite_param_files: 0/1>
+    pixi r configure <force_recompile> <overwrite_param_files>
 
 This `pixi` command has positional boolean arguments: `force_recompile` and `overwrite_param_files`.
 Make sure their value maps to a Python-interpretable boolean, such as `1`, `True`, `0` and `False`.
 
 Example::
 
-    pixi r configure 1 0         # force recompile, don't overwrite existing parameter files
-    pixi r configure False True  # don't force recompile, overwrite existing parameter files
+    pixi r configure 1 0          # force recompile, don't overwrite existing parameter files
+    pixi r configure False True   # don't force recompile, overwrite existing parameter files
+    pixi r configure  # (default) don't force recompile or overwrite existing parameter files
 
 Alternatively, this script can also be run directly from the command line using::
 
