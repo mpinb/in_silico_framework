@@ -25,7 +25,7 @@ def client(pytestconfig):
         dashboard_address = None,  # Disable dashboard to avoid port clashes
         silence_logs = False,
         mem_limit = pytestconfig.getini("DASK_MEM_LIMIT") or "2GB",
-        threads_per_worker = pytestconfig.getini("DASK_TPW") or 2,
+        threads_per_worker = pytestconfig.getini("DASK_TPW") or 1,
     )
     client = Client(cluster)
     
