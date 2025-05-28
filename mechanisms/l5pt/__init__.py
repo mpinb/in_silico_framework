@@ -19,6 +19,12 @@
 This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
 In addition, it contains network connectivity parameters that define synaptic connections.
 
+Importing this module registers the mechanisms in NEURON namespace. 
+This only works if they are compiled. Mechanisms should be compiled
+when ISF has been configured.
+
+See also:
+    :py:mod:`config.isf_configure`
 """
 
 import os, platform, six, neuron, glob, shutil, subprocess
@@ -82,10 +88,15 @@ def compile_l5pt_mechanisms(force_recompile=False):
     Compile the mechanisms in the local directory.
     """
     for path in (channels_path, netcon_path):
-        if not _check_if_mechanisms_are_compiled_at_path(path) or force_recompile:
+        if not _check_if_mechanisms_are_compiled_at_path(path):
+            _compile_mechanisms_at_path(path)
+        elif force_recompile == True:
+            logger.warning(f"Mechanisms already compiled at {path}. 'force_recompile' is set to True. Recompiling...")
             _compile_mechanisms_at_path(path)
             if not _check_if_mechanisms_are_compiled_at_path(path):
                 raise UserWarning("Could not compile mechanisms. Please do it manually")
+        else:
+            logger.info(f"Mechanisms already compiled at {path} and 'force_recompile' is set to False. Skipping compilation.")
 
 def load_mechanisms():
     try:
@@ -98,8 +109,7 @@ def load_mechanisms():
     except Exception as e:
         raise e
 
-assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
-
-compile_l5pt_mechanisms(force_recompile=False)
+# assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
+# compile_l5pt_mechanisms(force_recompile=False)
 
 load_mechanisms()
