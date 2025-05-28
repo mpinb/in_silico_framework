@@ -136,6 +136,6 @@ def pytest_sessionstart(session):
 @pytest.hookimpl(trylast=True)
 def pytest_sessionfinish(session, exitstatus):
     # Cleanup clusters at end of session
-    for cluster, client in _worker_clusters.values():
+    for cluster, client in DASK_CLUSTER_PER_GW_WORKER.values():
         client.close()
         cluster.close()
