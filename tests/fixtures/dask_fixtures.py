@@ -44,9 +44,7 @@ def client(pytestconfig):
     client = Client(cluster)
     client.wait_for_workers(n_workers)
     # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
-    f = client.submit(init_dask_workers)
-    f.result()  # wait for all workers to report back before moving on
-    # logger.info(f"Using Dask cluster with {n_workers} workers on port {scheduler_port}")
+    client.run(init_dask_workers)
     
     yield client
     client.close()
