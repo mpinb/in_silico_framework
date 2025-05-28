@@ -40,10 +40,12 @@ def generate_param_files_with_valid_references():
         target_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path.rstrip(suffix))
         if os.path.exists(target_path):
             logger.debug(f"File {target_path} already exists, skipping generation.")
+            continue
         
         with open(template_path, 'r') as in_, open(target_path, 'w') as out_:
-            out_.write(in_.read().replace('[IN_SILICO_FRAMEWORK_DIR]',
-                                          IN_SILICO_FRAMEWORK_DIR))
+            out_.write(in_.read().replace(
+                '[IN_SILICO_FRAMEWORK_DIR]',
+                IN_SILICO_FRAMEWORK_DIR))
             #for line in in_.readlines():
             #    line = line
             #    print(line, file = out_)
