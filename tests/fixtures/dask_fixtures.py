@@ -19,7 +19,7 @@ def client(pytestconfig):
     # Dynamically allocate ports for safety
     scheduler_port = get_free_port()
     cluster = LocalCluster(
-        n_workers = pytestconfig.getini("DASK_N_WORKERS") or 2,
+        n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2,
         threads_per_worker = 2,
         scheduler_port = scheduler_port,
         dashboard_address = None,  # Disable dashboard to avoid port clashes
