@@ -10,11 +10,27 @@ def get_free_port():
         return s.getsockname()[1]
 
 
+def init_dask_workers():
+    """Initialize Dask worker with ISF mechanisms loaded.
+    
+    This is wrapped in a function to avoid recursion issues.
+    Recursion issues may arise on windows because:
+
+    - Windows spawns processes using spawn() instead of fork()
+    - importing mechanisms.l5pt triggers load_mechanisms()
+    - Pickling the load_mechanisms function subsequently leads to recursion issues 
+
+    I don't fully understand why this happens, but wrapping it in a function seems to resolve the issue.
+
+    - Bjorge 2025-05-28
+    """
+    from mechanisms.l5pt import load_mechanisms
+    load_mechanisms()
+
 @pytest.fixture(scope="function")
 def client(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
-    # Optional: use xdist worker id to offset port range
-    # worker_id = getattr(request.config, "workerinput", {}).get("workerid", "gw0")
+    # Optional: use xdist worker id to offset port range with the worker_id fixture
     
     # Dynamically allocate ports for safety
     scheduler_port = get_free_port()
@@ -26,8 +42,7 @@ def client(pytestconfig):
         silence_logs = False,
     )
     client = Client(cluster)
-    from mechanisms.l5pt import load_mechanisms
-    client.run(load_mechanisms)
+    client.run(init_dask_workers)
     
     yield client
     client.close()
