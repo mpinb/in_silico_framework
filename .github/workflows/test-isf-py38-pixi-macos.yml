@@ -1,17 +1,17 @@
 name: OSX
 on:
-  # pull_request:
-  #   types: [opened, synchronize]
-  #   paths-ignore:
-  #     - README.md
-  #     - CHANGELOG.md
-  #     - .gitignore
-  #   branches:
-  #     - develop
-  #     - master
-  # push:
-  #   branches:
-  #     - master
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -40,6 +40,8 @@ jobs:
             mkdir $HOME/tmp
           fi
           export TMPDIR=$HOME/tmp
+          
+          pixi r configure
 
       - name: Test ISF
         run: |

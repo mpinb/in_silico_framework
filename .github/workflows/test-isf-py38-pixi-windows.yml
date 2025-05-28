@@ -1,17 +1,17 @@
 name: Windows
 on:
-  # pull_request:
-  #   types: [opened, synchronize]
-  #   paths-ignore:
-  #     - README.md
-  #     - CHANGELOG.md
-  #     - .gitignore
-  #   branches:
-  #     - develop
-  #     - master
-  # push:
-  #   branches:
-  #     - master
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - master
   workflow_dispatch:
 
 jobs:
@@ -44,14 +44,8 @@ jobs:
 
           if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"
           set TMPDIR=%USERPROFILE%\tmp
-
-      - name: Compile mechanisms
-        shell: cmd
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-        run: |
-          pixi r python -c "import mechanisms.l5pt" && exit 0 || exit 1
+          
+          pixi r configure
 
       - name: Test ISF
         shell: cmd
