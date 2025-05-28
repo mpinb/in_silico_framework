@@ -112,4 +112,8 @@ def load_mechanisms():
 # assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 # compile_l5pt_mechanisms(force_recompile=False)
 
-load_mechanisms()
+if check_if_all_mechanisms_are_compiled():
+    # load mechanisms into NEURON namespace upon importing this module
+    load_mechanisms()
+else:
+    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them.")
