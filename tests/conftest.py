@@ -4,6 +4,7 @@
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest
 from config.isf_logging import logger  # import from config to set handlers properly
+import mechanisms   # have each pytest worker load mechanisms to NEURON namespace
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -102,7 +103,7 @@ def _setup_pytest_logging():
     logger.addHandler(isf_logging_file_handler)
 
     
-def _mpl_backend_agg():
+def _set_mpl_backend_non_gui():
     """
     Set matplotlib to use the agg backend
     """
@@ -121,5 +122,4 @@ def pytest_configure(config):
 
 
 def pytest_sessionstart(session):
-    import getting_started  # trigger creation of template files
-    _mpl_backend_agg()
+    _set_mpl_backend_non_gui()
