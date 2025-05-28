@@ -1,0 +1,1 @@
+pixi r python installer\init_hook.py
