@@ -1,28 +1,12 @@
-from dask.distributed import LocalCluster, Client
-import logging
+import logging, socket
 logger = logging.getLogger("ISF").getChild(__name__)
 
+# Registry to store clusters per worker
+DASK_CLUSTER_PER_GW_WORKER = {}
 
-def _launch_dask_cluster(
-    config, 
-    n_workers, 
-    threads_per_worker, 
-    mem_limit, 
-    dashboard_address
-    ):
-    ip = config.getoption("dask_server_ip")
-    port = int(config.getoption("dask_server_port"))
-    
-    # Start a new Dask cluster
-    cluster = LocalCluster(
-        n_workers=n_workers,
-        threads_per_worker=threads_per_worker,
-        memory_limit=mem_limit,
-        dashboard_address=dashboard_address,
-        ip=ip,
-        scheduler_port=port,
-        processes=True, 
-    )
-    client = Client(cluster)
-    logger.info(f"Started new Dask cluster at {ip}:{port}")
-    return client, cluster
+
+def get_free_port():
+    """Grab a free port from the OS for the scheduler."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('', 0))
+        return s.getsockname()[1]

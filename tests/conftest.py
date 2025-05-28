@@ -3,9 +3,7 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest, time
-from tests.dask_setup import _launch_dask_cluster 
-from dask.distributed import Client
-from distributed.comm.core import CommClosedError
+from tests.dask_setup import DASK_CLUSTER_PER_GW_WORKER 
 from config.isf_logging import logger  # import from config to set handlers properly
 
 # --- Import fixtures
@@ -88,10 +86,6 @@ def pytest_ignore_collect(collection_path, config):
         return not bc_downloaded  # skip if it is not downloaded
 
 
-def _is_pytest_mother_worker():
-    return os.getenv("PYTEST_XDIST_WORKER") is None
-
-
 def _setup_pytest_logging():
 
     # --------------- Setup logging output -------------------
@@ -126,57 +120,6 @@ def _mpl_backend_agg():
     plt.switch_backend("agg")
 
 
-def _setup_dask(config):
-    """Setup the dask server and initialize dask workers.
-    """
-    from mechanisms.l5pt import load_mechanisms
-
-    DASK_N_WORKERS = int(config.getini("DASK_N_WORKERS"))
-    DASK_TPW = int(config.getini("DASK_TPW"))
-    DASK_MEM_LIMIT = config.getini("DASK_MEM_LIMIT")
-    DASK_DASHBOARD_ADDRESS = config.getini("DASK_DASHBOARD_ADDRESS")
-    max_wait = config.getini("DASK_CLIENT_TIMEOUT")
-
-    if _is_pytest_mother_worker():
-        client, cluster = _launch_dask_cluster(
-            config, 
-            n_workers=DASK_N_WORKERS, 
-            threads_per_worker=DASK_TPW, 
-            mem_limit=DASK_MEM_LIMIT,
-            dashboard_address=DASK_DASHBOARD_ADDRESS,
-            )
-        client.wait_for_workers(DASK_N_WORKERS)
-        client.run(lambda: print("All workers connected."))
-        client.run(load_mechanisms)
-        client.run(_setup_pytest_logging)
-    else:
-        # Wait for scheduler to be available
-        ip = config.getoption("dask_server_ip")
-        port = int(config.getoption("dask_server_port"))
-        address = f"{ip}:{port}"
-
-        interval = 1
-        start = time.time()
-        while True:
-            try:
-                client = Client(address, timeout=max_wait)
-                break
-            except (OSError, TimeoutError, CommClosedError) as e:
-                if time.time() - start > max_wait:
-                    raise RuntimeError(
-                        f"Could not connect to Dask scheduler at {address} within {max_wait} seconds"
-                    )
-                time.sleep(interval)
-        
-
-def _teardown_dask(config):
-    if _is_pytest_mother_worker():
-        ip = config.getoption("dask_server_ip")
-        port = int(config.getoption("dask_server_port"))
-        address = f"{ip}:{port}"
-        client = Client(address)
-        client.shutdown()
-
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     """
@@ -188,11 +131,11 @@ def pytest_configure(config):
 def pytest_sessionstart(session):
     import getting_started  # trigger creation of template files
     _mpl_backend_agg()
-    config = session.config
-    _setup_dask(config)  # Dask starts only when tests are about to run
 
 
 @pytest.hookimpl(trylast=True)
-def pytest_unconfigure(config):
-    """Clean up the Dask scheduler after pytest finishes."""
-    _teardown_dask(config)
+def pytest_sessionfinish(session, exitstatus):
+    # Cleanup clusters at end of session
+    for cluster, client in _worker_clusters.values():
+        client.close()
+        cluster.close()

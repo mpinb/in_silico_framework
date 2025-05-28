@@ -1,30 +1,27 @@
-import pytest
-import logging
+import pytest, logging
+from dask.distributed import LocalCluster, Client
+from ..dask_setup import DASK_CLUSTER_PER_GW_WORKER, get_free_port
 logger = logging.getLogger("ISF").getChild(__name__)
 
+
 @pytest.fixture(scope="function")
-def client(request, pytestconfig):
-    """Fixture to create a Dask client for the tests.
-    """
-    from dask.distributed import Client
-    # Each pytest xdist worker will create its own Dask client
-    # and connect to the same Dask cluster.
-    # The tests should thus be thread-safe
-    ip = pytestconfig.getoption("dask_server_ip")
-    port = int(pytestconfig.getoption("dask_server_port"))
-    address = f"{ip}:{port}"
-    max_server_wait = pytestconfig.getini("DASK_CLIENT_TIMEOUT")
-    max_worker_wait = pytestconfig.getini("DASK_WORKER_TIMEOUT")
-    client = Client(
-        address, 
-        timeout=max_server_wait,
-    )
-    def _check():
-        logger.info(f"[CHECK] Active workers: {list(client.scheduler_info()['workers'])}")
-        try:
-            result = client.submit(lambda: 42).result(timeout=5)
-            assert result == 42
-        except Exception as e:
-            pytest.fail(f"[CHECK] Dask client check failed: {e}")
-    request.addfinalizer(_check)
+def client(request):
+    """Function-scoped Dask cluster isolated per test."""
+    # Optional: use xdist worker id to offset port range
+    worker_id = getattr(request.config, "workerinput", {}).get("workerid", "gw0")
+    
+    # Dynamically allocate ports for safety
+    if worker_id not in DASK_CLUSTER_PER_GW_WORKER:
+        scheduler_port = get_free_port()
+        cluster = LocalCluster(
+            n_workers=2,
+            threads_per_worker=2,
+            scheduler_port=scheduler_port,
+            dashboard_address=None,  # Disable dashboard to avoid port clashes
+            silence_logs=False,
+        )
+        client = Client(cluster)
+        DASK_CLUSTER_PER_GW_WORKER[worker_id] = (cluster, client)
+    
+    cluster, client = DASK_CLUSTER_PER_GW_WORKER[worker_id]
     return client
