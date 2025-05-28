@@ -124,15 +124,11 @@ default = ["isf"]
 markers = [
   "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite."
 ]
-DASK_N_WORKERS = 6
+# Note: these dask options are per pytest worker.
+# So 6 dask workers means 6 das workers per pytest worker.
+DASK_N_WORKERS = 4
 DASK_TPW = 1
 DASK_MEM_LIMIT = "2GB"
-DASK_DASHBOARD_ADDRESS="localhost:8787"
-# How long to wait for a dask client to connect to the scheduler before timing out.
-DASK_CLIENT_TIMEOUT = 60
-# How long to wait for a dask client to connect to the workers before timing out.
-# This should not be significantly shorter than the duration of a long dask test (~2 minutes)
-DASK_WORKER_TIMEOUT = 60
 log_cli = true
 log_level = "INFO"
 
@@ -184,7 +180,7 @@ description = "Launch a Jupyter Lab server"
 
 [tool.pixi.tasks.test]
 args = [
-  {arg = "n_pytest_workers", default = "4"},
+  {arg = "n_pytest_workers", default = "3"},
   {arg = "dask_port",   default = "8786"}
 ]
 cmd = [
