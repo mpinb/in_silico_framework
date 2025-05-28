@@ -187,7 +187,8 @@ cmd = [
   "rm", "-rf", "tests/logs", "&&",
   "mkdir", "-p", "tests/logs", "&&",
   "pytest", 
-  "-rsx",
+  "-rsx",   # print skipped and expected failures
+  "-x",     # prinearly exit on first failed test
   "-n",
   "{{ n_pytest_workers }}",
   "-vv",
@@ -195,7 +196,7 @@ cmd = [
   "--durations=15",
   "--dask_server_port",
   "{{ dask_port }}",
-  "tests"
+  "tests",
 ]
 env = {"DASK_CONFIG" = "tests/dask_config.yml"}
 description = "Run test suite"
