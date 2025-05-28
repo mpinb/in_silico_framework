@@ -30,18 +30,19 @@ def init_dask_workers():
 @pytest.fixture(scope="function")
 def client(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
-    # Optional: use xdist worker id to offset port range with the worker_id fixture
     
+    n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
     # Dynamically allocate ports for safety
     scheduler_port = get_free_port()
     cluster = LocalCluster(
-        n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2,
+        n_workers = n_workers,
         threads_per_worker = 2,
         scheduler_port = scheduler_port,
         dashboard_address = None,  # Disable dashboard to avoid port clashes
         silence_logs = False,
     )
     client = Client(cluster)
+    client.wait_for_workers(n_workers)
     client.run(init_dask_workers)
     
     yield client
