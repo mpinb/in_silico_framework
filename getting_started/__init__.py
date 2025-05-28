@@ -17,7 +17,6 @@
 
 from __future__ import print_function
 import os, logging
-from data_base.distributed_lock import get_write_lock
 logger = logging.getLogger("ISF").getChild(__name__)
 
 getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
