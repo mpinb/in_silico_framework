@@ -19,18 +19,35 @@
 This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
 In addition, it contains network connectivity parameters that define synaptic connections.
 
-Importing this module registers the mechanisms in NEURON namespace. 
-This only works if they are compiled. Mechanisms should be compiled
-when ISF has been configured.
+Importing this module on UNIX systems registers the mechanisms in NEURON namespace. 
+This only works if they are compiled, which should have happened upon configuring ISF.
+If this is not the case, you can:
+
+```python
+from mechanisms.l5pt import compile_l5pt_mechanisms, load_mechanisms, check_if_all_mechanisms_are_compiled, check_if_all_mechanisms_are_loaded
+compile_l5pt_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+check_if_all_mechanisms_are_compiled()  # check if all mechanisms are compiled
+```
+
+Attention:
+    Importing this module on Windows systems does not automatically register the mechanisms in NEURON namespace.
+    Windows uses `spawn` instead of `fork` to create new processes, which means that the NEURON namespace is not shared between the parent and child processes.
+    This has as a consequence that multiple subprocesses need to reload mechanisms simultaneously, creating race conditions between processes.
+    To load mechanisms on Windows, you need to explicitly call the `load_mechanisms()` function after compiling them::
+    
+    ```python
+    from mechanisms.l5pt import load_mechanisms
+    load_mechanisms()  # load mechanisms into NEURON namespace
 
 See also:
     :py:mod:`config.isf_configure`
 """
 
-import os, platform, six, neuron, glob, shutil, subprocess
+import os, platform, six, neuron, glob, shutil, subprocess, sys
 import logging
 logger = logging.getLogger("ISF").getChild(__name__) 
 from config.isf_logging import stream_to_logger
+from .mech_parse import MechanismParser, _get_mechanism_names
 try: import tables
 except ImportError: pass
 
@@ -83,7 +100,16 @@ def check_if_all_mechanisms_are_compiled():
             for path in (channels_path, netcon_path)
             ])
 
-def compile_l5pt_mechanisms(force_recompile=False):
+def check_if_all_mechanisms_are_loaded():
+    """
+    Check if all mechanisms are loaded into NEURON namespace.
+    """
+    channels = _get_mechanism_names(channels_path)
+    netcons = _get_mechanism_names(netcon_path)
+    all_mechanisms = channels + netcons
+    return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
+
+def compile_mechanisms(force_recompile=False):
     """
     Compile the mechanisms in the local directory.
     """
@@ -101,19 +127,26 @@ def compile_l5pt_mechanisms(force_recompile=False):
 def load_mechanisms():
     try:
         with stream_to_logger(logger=logger):
-            logger.info("Loading mechanisms in NEURON namespace...")
             mechanisms_loaded = neuron.load_mechanisms(channels_path)
             netcon_loaded = neuron.load_mechanisms(netcon_path)
         assert mechanisms_loaded, "Couldn't load mechanisms."
         assert netcon_loaded, "Couldn't load netcon"
+        logger.info("Loaded mechanisms in NEURON namespace.")
     except Exception as e:
         raise e
 
 # assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 # compile_l5pt_mechanisms(force_recompile=False)
 
-if check_if_all_mechanisms_are_compiled():
-    # load mechanisms into NEURON namespace upon importing this module
-    load_mechanisms()
-else:
-    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them.")
+if not check_if_all_mechanisms_are_compiled():
+    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile_mechanisms()` manually.")    
+
+if not check_if_all_mechanisms_are_loaded():
+    if not sys.platform == 'win32':
+        # load mechanisms into NEURON namespace upon importing this module
+        load_mechanisms()
+    else:
+        logger.warning(
+            "Mechanisms are compiled, but not loaded into NEURON namespace yet. "
+            "To use the compiled mechanisms on your Windows system, please call load_mechanisms() manually."
+            )
