@@ -1,4 +1,4 @@
-import pytest, logging, socket
+import pytest, logging, socket, sys, time
 from dask.distributed import LocalCluster, Client
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -24,8 +24,26 @@ def init_dask_workers():
 
     - Bjorge 2025-05-28
     """
-    from mechanisms.l5pt import load_mechanisms
-    load_mechanisms()
+    try:
+        from mechanisms.l5pt import load_mechanisms
+        load_mechanisms()
+    except Exception as e:
+        print("Worker mechanism load error:", e, file=sys.stderr)
+        raise
+
+
+def safe_init_dask_workers(client, n_retries=3):
+    for _ in range(n_retries):
+        try:
+            client.run(init_dask_workers)
+            break
+        except Exception as e:
+            if _ < n_retries:
+                logger.error("Failed to initialize Dask worker: %s", e)
+                time.sleep(5)  # Wait before retrying
+            else:
+                logger.error("Failed to initialize Dask worker after %d retries: %s", n_retries, e)
+                raise e
 
 @pytest.fixture(scope="function")
 def client(pytestconfig):
@@ -44,7 +62,8 @@ def client(pytestconfig):
     client = Client(cluster)
     client.wait_for_workers(n_workers)
     # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
-    client.run(init_dask_workers)
+    # Use client.run to ensure that the function is executed on each worker, not e.g. submit
+    safe_init_dask_workers(client)
     
     yield client
     client.close()
