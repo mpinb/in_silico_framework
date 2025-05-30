@@ -138,15 +138,15 @@ def load_mechanisms():
 # assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
 # compile_l5pt_mechanisms(force_recompile=False)
 
-if not check_if_all_mechanisms_are_compiled():
+if check_if_all_mechanisms_are_compiled():
+    if not check_if_all_mechanisms_are_loaded():
+        if not sys.platform == 'win32':
+            # load mechanisms into NEURON namespace upon importing this module
+            load_mechanisms()
+        else:
+            logger.warning(
+                "Mechanisms are compiled, but not loaded into NEURON namespace yet. "
+                "To use the compiled mechanisms on your Windows system, please call load_mechanisms() manually."
+                )
+else:
     logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile_mechanisms()` manually.")    
-
-if not check_if_all_mechanisms_are_loaded():
-    if not sys.platform == 'win32':
-        # load mechanisms into NEURON namespace upon importing this module
-        load_mechanisms()
-    else:
-        logger.warning(
-            "Mechanisms are compiled, but not loaded into NEURON namespace yet. "
-            "To use the compiled mechanisms on your Windows system, please call load_mechanisms() manually."
-            )
