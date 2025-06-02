@@ -43,6 +43,16 @@ def safe_init_dask_workers(client, n_retries=3):
             logger.error("Failed to initialize Dask worker after %d retries: %s", n_retries, e)
             raise e
 
+            
+class LoadMechanismsPlugin(SchedulerPlugin):
+    def __init__(self):
+      super().__init__()
+
+    def add_worker(self, scheduler=None, worker=None, **kwargs):
+        future = worker.submit(init_dask_workers)
+        future.result()
+
+
 @pytest.fixture(scope="function")
 def client(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
@@ -57,6 +67,7 @@ def client(pytestconfig):
         dashboard_address = None,  # Disable dashboard to avoid port clashes
         silence_logs = False,
     )
+    cluster.add_plugin(LoadMechanismsPlugin())
     client = Client(cluster)
     client.wait_for_workers(n_workers)
     # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
