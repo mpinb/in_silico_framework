@@ -23,3 +23,8 @@ logging:
       handlers:
         - scheduler
         # - console
+
+distributed:
+  worker:
+    preload:
+      - "import mechanisms.l5pt; mechanisms.l5pt.load_mechanisms()"
