@@ -4,7 +4,6 @@
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest
 from config.isf_logging import logger  # import from config to set handlers properly
-import mechanisms   # have each pytest worker load mechanisms to NEURON namespace
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -119,6 +118,8 @@ def pytest_configure(config):
     pytest configuration
     """
     _setup_pytest_logging()
+    import mechanisms.l5pt
+    mechanisms.l5pt.load_mechanisms()   
 
 
 def pytest_sessionstart(session):
