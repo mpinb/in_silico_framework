@@ -43,7 +43,7 @@ See also:
     :py:mod:`config.isf_configure`
 """
 
-import os, platform, six, neuron, glob, shutil, subprocess, sys
+import os, platform, six, neuron, glob, shutil, subprocess, sys, threading
 import logging
 logger = logging.getLogger("ISF").getChild(__name__) 
 from config.isf_logging import stream_to_logger
@@ -55,6 +55,7 @@ parent = os.path.abspath(os.path.dirname(__file__))
 channels_path = os.path.join(parent, 'channels_py2' if six.PY2 else 'channels_py3')
 netcon_path = os.path.join(parent, 'netcon_py2' if six.PY2 else 'netcon_py3')
 arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
+mech_lock = threading.Lock()
 
 def check_nrnivmodl_is_available():
     """
@@ -127,12 +128,13 @@ def compile_mechanisms(force_recompile=False):
 
 def load_mechanisms():
     try:
-        with stream_to_logger(logger=logger):
-            mechanisms_loaded = neuron.load_mechanisms(channels_path)
-            netcon_loaded = neuron.load_mechanisms(netcon_path)
-        assert mechanisms_loaded, "Couldn't load mechanisms."
-        assert netcon_loaded, "Couldn't load netcon"
-        logger.info("Loaded mechanisms in NEURON namespace.")
+        with mech_lock:  # Ensure thread safety when loading mechanisms
+            with stream_to_logger(logger=logger):
+                mechanisms_loaded = neuron.load_mechanisms(channels_path)
+                netcon_loaded = neuron.load_mechanisms(netcon_path)
+            assert mechanisms_loaded, "Couldn't load mechanisms."
+            assert netcon_loaded, "Couldn't load netcon"
+            logger.info("Loaded mechanisms in NEURON namespace.")
     except Exception as e:
         raise e
 
