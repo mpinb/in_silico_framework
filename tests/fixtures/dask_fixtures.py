@@ -33,17 +33,15 @@ def init_dask_workers():
 
 
 def safe_init_dask_workers(client, n_retries=3):
-    for _ in range(n_retries):
+    workers = client.run_on_scheduler(lambda dask_scheduler: list(dask_scheduler.workers.keys()))
+    for worker in workers:
         try:
-            client.run(init_dask_workers)
-            break
+            future = client.submit(init_dask_workers, workers=[worker])
+            future.result()  # Wait for the result
+            break  # Exit retry loop if successful
         except Exception as e:
-            if _ < n_retries:
-                logger.error("Failed to initialize Dask worker: %s", e)
-                time.sleep(5)  # Wait before retrying
-            else:
-                logger.error("Failed to initialize Dask worker after %d retries: %s", n_retries, e)
-                raise e
+            logger.error("Failed to initialize Dask worker after %d retries: %s", n_retries, e)
+            raise e
 
 @pytest.fixture(scope="function")
 def client(pytestconfig):
