@@ -104,10 +104,13 @@ def check_if_all_mechanisms_are_loaded():
     """
     Check if all mechanisms are loaded into NEURON namespace.
     """
-    channels = _get_mechanism_names(channels_path)
-    netcons = _get_mechanism_names(netcon_path)
-    all_mechanisms = channels + netcons
-    return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
+    assert channels_path in neuron.nrn_dll_loaded, "Channels are not loaded into NEURON namespace. Please call load_mechanisms() manually."
+    assert netcon_path in neuron.nrn_dll_loaded, "Netcon is not loaded into NEURON namespace. Please call load_mechanisms() manually."
+    return True
+    # channels = _get_mechanism_names(channels_path)
+    # netcons = _get_mechanism_names(netcon_path)
+    # all_mechanisms = channels + netcons
+    # return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
 
 def compile_mechanisms(force_recompile=False):
     """
