@@ -47,7 +47,6 @@ import os, platform, six, neuron, glob, shutil, subprocess, sys, threading
 import logging
 logger = logging.getLogger("ISF").getChild(__name__) 
 from config.isf_logging import stream_to_logger
-from .mech_parse import MechanismParser, _get_mechanism_names
 try: import tables
 except ImportError: pass
 
