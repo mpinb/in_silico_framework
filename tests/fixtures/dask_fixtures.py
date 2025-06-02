@@ -1,4 +1,5 @@
-import pytest, logging, socket, sys, time
+import pytest, logging, socket, sys
+from distributed.diagnostics.plugin import SchedulerPlugin
 from dask.distributed import LocalCluster, Client
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -70,8 +71,6 @@ def client(pytestconfig):
     cluster.add_plugin(LoadMechanismsPlugin())
     client = Client(cluster)
     client.wait_for_workers(n_workers)
-    # load mechanisms into NEURON namespace on whichever dask worker is assigned this test
-    # Use client.run to ensure that the function is executed on each worker, not e.g. submit
     safe_init_dask_workers(client)
     
     yield client
