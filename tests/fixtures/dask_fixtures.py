@@ -15,7 +15,6 @@ def client(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
     
     n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
-    # Dynamically allocate ports for safety
     scheduler_port = get_free_port()
     cluster = LocalCluster(
         n_workers = n_workers,
