@@ -24,6 +24,7 @@ def client(pytestconfig):
         silence_logs = False,
     )
     client = Client(cluster)
+    client.wait_for_workers(n_workers)
     
     yield client
     client.close()
