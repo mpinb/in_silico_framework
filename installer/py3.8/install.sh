@@ -247,7 +247,7 @@ done
 
 # -------------------- 7. Generating paramfiles -------------------- #
 print_title "7. Generating paramfiles"
-python $SCRIPT_DIR/../activation_hook.py
+python $SCRIPT_DIR/../../config/isf_configure.py
 
 
 # -------------------- Cleanup -------------------- #

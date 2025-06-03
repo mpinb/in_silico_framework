@@ -115,4 +115,4 @@ find_and_compile_mechanisms $SCRIPT_DIR $python_version_glob
 
 # -------------------- 7. Generating paramfiles -------------------- #
 print_title "7. Generating paramfiles"
-python $SCRIPT_DIR/../activation_hook.py
+python $SCRIPT_DIR/../../config/isf_configure.py
