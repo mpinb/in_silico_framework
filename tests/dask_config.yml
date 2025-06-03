@@ -27,7 +27,7 @@ logging:
 distributed:
   worker:
     preload:
-      - "import mechanisms.l5pt; mechanisms.l5pt.load()"
+      - "import mechanisms.l5pt"
     memory:
       target: 0.80  # target fraction to stay below
       spill: 0.95  # fraction at which we spill to disk
