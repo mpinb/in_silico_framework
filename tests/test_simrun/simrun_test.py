@@ -3,7 +3,7 @@ import os, sys, glob, shutil, tempfile
 import numpy as np
 from numpy.testing import assert_almost_equal
 import pandas as pd
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 import dask
 import dask.dataframe as dd
 import single_cell_parser as scp

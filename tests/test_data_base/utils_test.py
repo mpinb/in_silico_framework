@@ -1,7 +1,7 @@
 from tests.test_data_base import *
 from data_base.utils import *
 import numpy as np
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 
 
 def test_pandas_to_array():
@@ -63,7 +63,7 @@ def test_myrepartition(client):
     pdf = pd.DataFrame(np.random.randint(100, size=(1000, 3)))
     ddf = dask.dataframe.from_pandas(pdf, npartitions=10)
     pdf2 = client.compute(myrepartition(ddf, 4)).result()
-    pd.util.testing.assert_frame_equal(pdf, pdf2)
+    assert_frame_equal(pdf, pdf2)
     ddf.divisions = tuple([None] * (ddf.npartitions + 1))
     pdf2 = client.compute(myrepartition(ddf, 4)).result()
-    pd.util.testing.assert_frame_equal(pdf, pdf2)
+    assert_frame_equal(pdf, pdf2)
