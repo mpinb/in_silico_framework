@@ -10,8 +10,8 @@ def get_free_port():
         return s.getsockname()[1]
 
 
-@pytest.fixture(scope="function")
-def client(pytestconfig):
+@pytest.fixture(scope="session")
+def dask_cluster(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
     
     n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
@@ -25,9 +25,17 @@ def client(pytestconfig):
         silence_logs = False,
         memory_limit = mem_limit,
     )
-    client = Client(cluster)
+    yield cluster
+    cluster.close()
+
+
+@pytest.fixture(scope="function")
+def client(dask_cluster, pytestconfig):
+    n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
+    client = Client(dask_cluster)
     client.wait_for_workers(n_workers)
+    client.forward_logging(logger)
     
     yield client
+    # logs = client.get_worker_logs()
     client.close()
-    cluster.close()
