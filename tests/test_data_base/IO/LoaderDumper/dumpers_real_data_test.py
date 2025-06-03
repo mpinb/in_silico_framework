@@ -51,9 +51,11 @@ def real_data_generic(db_, dumper_, client_=None):
 
 
 def test_dask_to_categorized_msgpack_real_data(client, fresh_db):
-    real_data_generic(db_=fresh_db,
-                      dumper_=dask_to_categorized_msgpack,
-                      client_=client)
+    real_data_generic(
+        db_=fresh_db, 
+        dumper_=dask_to_categorized_msgpack, 
+        client_=client
+        )
 
 
 def test_dask_to_msgpack_real_data(client, fresh_db):
