@@ -27,4 +27,4 @@ logging:
 distributed:
   worker:
     preload:
-      - "import mechanisms.l5pt; mechanisms.l5pt.load_mechanisms()"
+      - "import mechanisms.l5pt; mechanisms.l5pt.load()"

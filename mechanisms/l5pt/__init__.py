@@ -24,20 +24,13 @@ This only works if they are compiled, which should have happened upon configurin
 If this is not the case, you can:
 
 ```python
-from mechanisms.l5pt import compile_l5pt_mechanisms, load_mechanisms, check_if_all_mechanisms_are_compiled, check_if_all_mechanisms_are_loaded
-compile_l5pt_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
-check_if_all_mechanisms_are_compiled()  # check if all mechanisms are compiled
+>>> import mechanisms.l5pt
+>>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+False
+>>> mechanisms.l5pt.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+>>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+True
 ```
-
-Attention:
-    Importing this module on Windows systems does not automatically register the mechanisms in NEURON namespace.
-    Windows uses `spawn` instead of `fork` to create new processes, which means that the NEURON namespace is not shared between the parent and child processes.
-    This has as a consequence that multiple subprocesses need to reload mechanisms simultaneously, creating race conditions between processes.
-    To load mechanisms on Windows, you need to explicitly call the `load_mechanisms()` function after compiling them::
-    
-    ```python
-    from mechanisms.l5pt import load_mechanisms
-    load_mechanisms()  # load mechanisms into NEURON namespace
 
 See also:
     :py:mod:`config.isf_configure`
