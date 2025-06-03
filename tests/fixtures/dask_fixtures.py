@@ -34,7 +34,6 @@ def client(dask_cluster, pytestconfig):
     n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
     client = Client(dask_cluster)
     client.wait_for_workers(n_workers)
-    client.forward_logging(logger)
     
     yield client
     # logs = client.get_worker_logs()
