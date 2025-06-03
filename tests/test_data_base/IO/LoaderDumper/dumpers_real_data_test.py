@@ -45,8 +45,8 @@ def real_data_generic(db_, dumper_, client_=None):
             dumper=dumper_,
             client=client_)
     dummy = db_['synapse_activation2']
-    b = db_['synapse_activation'].compute(scheduler=client_).result()
-    a = client_.compute(db_['synapse_activation2']).result()
+    b = client_.compute(db_['synapse_activation'])
+    a = client_.compute(db_['synapse_activation2'])
     assert_frame_equal(a, b)
 
 
