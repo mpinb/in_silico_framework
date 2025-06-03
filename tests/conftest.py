@@ -119,7 +119,7 @@ def pytest_configure(config):
     """
     _setup_pytest_logging()
     import mechanisms.l5pt
-    mechanisms.l5pt.load_mechanisms()   
+    mechanisms.l5pt.load()   
 
 
 def pytest_sessionstart(session):

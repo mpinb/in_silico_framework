@@ -88,7 +88,7 @@ def _compile_mechanisms_at_path(path):
     nrnivmodl_path = shutil.which('nrnivmodl')
     subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
 
-def check_if_all_mechanisms_are_compiled():
+def are_compiled():
     """
     Check if all mechanisms are compiled.
     """
@@ -100,7 +100,7 @@ def check_if_all_mechanisms_are_compiled():
             for path in (channels_path, netcon_path)
             ])
 
-def check_if_all_mechanisms_are_loaded():
+def are_loaded():
     """
     Check if all mechanisms are loaded into NEURON namespace.
     """
@@ -111,8 +111,21 @@ def check_if_all_mechanisms_are_loaded():
     # return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
 
 def compile_mechanisms(force_recompile=False):
-    """
-    Compile the mechanisms in the local directory.
+    """Compile the mechanisms for L5PTs.
+    
+    This function checks if the mechanisms are compiled at the specified paths, and (re)compiles them
+    if necessary using ``nrnivmodl``.
+    
+    See also:
+        :py:func:`check_nrnivmodl_is_available` to check if `nrnivmodl` is available in the ``PATH``, and
+        :py:func:`_compile_mechanisms_at_path` to compile the mechanisms in a given directory.
+        
+    Args:
+        force_recompile (bool): If True, forces recompilation of the mechanisms even if they are already compiled.
+            Defaults to False.
+            
+    Raises:
+        UserWarning: If the mechanisms needed to be compiled, but failed.
     """
     for path in (channels_path, netcon_path):
         if not _check_if_mechanisms_are_compiled_at_path(path):
@@ -125,7 +138,15 @@ def compile_mechanisms(force_recompile=False):
         else:
             logger.info(f"Mechanisms already compiled at {path} and 'force_recompile' is set to False. Skipping compilation.")
 
-def load_mechanisms():
+def load():
+    """Load the mechanisms into NEURON namespace.
+    
+    Also implements a thread lock to avoid concurrent loading of shared objects or dynamically linked libraries.
+    This is especially important on Windows, since DLLs are sensitive to concurrent loading.
+    
+    Raises:
+        AssertionError: If the mechanisms could not be loaded.
+    """
     try:
         with mech_lock:  # Ensure thread safety when loading mechanisms
             with stream_to_logger(logger=logger):
@@ -137,11 +158,12 @@ def load_mechanisms():
     except Exception as e:
         raise e
 
-# assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
-# compile_l5pt_mechanisms(force_recompile=False)
+# import trigger: emit warning if they are not compiled
+# auto-add them to NEURON namespace if they are compiled
+# This is similar to NEURON's autoload function, except that it's compatible with Windows and thread-safe.
 
-if check_if_all_mechanisms_are_compiled():
-    if not check_if_all_mechanisms_are_loaded():
-        load_mechanisms()
+if are_compiled():
+    if not are_loaded():
+        load()
 else:
-    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile_mechanisms()` manually.")    
+    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile()` manually.")    
