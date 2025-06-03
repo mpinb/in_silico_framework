@@ -29,8 +29,8 @@ def real_data_generic(db_, dumper_, client_=None):
             dumper=dumper_,
             client=client_)
     dummy = db_['voltage_traces2']
-    b = db_['voltage_traces'].compute(scheduler="multiprocessing")
-    a = dummy.compute(scheduler="multiprocessing")
+    b = client_.compute(db_['voltage_traces'])
+    a = client_.compute(dummy)
     assert_frame_equal(a, b, check_column_type=False)
 
     if client_ is None:
