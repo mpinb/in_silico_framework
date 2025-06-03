@@ -129,7 +129,7 @@ markers = [
 # Note: these dask options are per pytest worker.
 # So 6 dask workers means 6 das workers per pytest worker.
 DASK_N_WORKERS = 4
-DASK_MEM_LIMIT = "4GB"
+DASK_MEM_LIMIT = "5GB"
 log_cli = true
 log_level = "INFO"
 
