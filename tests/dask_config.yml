@@ -29,7 +29,7 @@ distributed:
     preload:
       - "import mechanisms.l5pt; mechanisms.l5pt.load()"
     memory:
-      target: 0.60  # target fraction to stay below
-      spill: 0.90  # fraction at which we spill to disk
-      pause: 0.95  # fraction at which we pause worker threads
+      target: 0.80  # target fraction to stay below
+      spill: 0.95  # fraction at which we spill to disk
+      pause: False  # fraction at which we pause worker threads
       terminate: False  # fraction at which we terminate the worker
