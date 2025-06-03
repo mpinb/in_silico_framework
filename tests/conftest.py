@@ -44,6 +44,7 @@ def pytest_addoption(parser):
     These are defined in pyproject.toml, although default values are repeated here.
     """
     parser.addini("DASK_N_WORKERS", "Number of Dask workers")
+    parser.addini("DASK_MEM_LIMIT", "Memory limit for each Dask worker (e.g., '2GB')")
 
 
 def pytest_collection_modifyitems(session, config, items):

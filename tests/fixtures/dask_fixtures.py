@@ -15,6 +15,7 @@ def client(pytestconfig):
     """Function-scoped Dask cluster isolated per test."""
     
     n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
+    mem_limit = pytestconfig.getini("DASK_MEM_LIMIT") or "2GB"
     scheduler_port = get_free_port()
     cluster = LocalCluster(
         n_workers = n_workers,
