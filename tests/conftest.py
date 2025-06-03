@@ -7,7 +7,7 @@ from config.isf_logging import logger  # import from config to set handlers prop
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
-from .fixtures.dask_fixtures import client
+from .fixtures.dask_fixtures import client, dask_cluster
 from .context import TESTS_CWD
 from .context import TESTS_CWD
 
