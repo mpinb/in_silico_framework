@@ -23,6 +23,7 @@ def client(pytestconfig):
         scheduler_port = scheduler_port,
         dashboard_address = None,  # Disable dashboard to avoid port clashes
         silence_logs = False,
+        memory_limit = mem_limit,
     )
     client = Client(cluster)
     client.wait_for_workers(n_workers)
