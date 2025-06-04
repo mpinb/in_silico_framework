@@ -3,7 +3,7 @@ from data_base.db_initializers.load_simrun_general import init
 from data_base.utils import silence_stdout
 from data_base.data_base import DataBase
 from data_base.model_data_base import ModelDataBase
-from ..context import TEST_DATA_FOLDER
+from ..context import TEST_SIMULATION_DATA_FOLDER
 
 @pytest.fixture
 def fresh_db(worker_id):
@@ -30,7 +30,7 @@ def fresh_db(worker_id):
     with silence_stdout:
         init(
             db,
-            TEST_DATA_FOLDER,
+            TEST_SIMULATION_DATA_FOLDER,
             rewrite_in_optimized_format=False,
             parameterfiles=False,
             dendritic_voltage_traces=False)
