@@ -138,7 +138,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     else:
         raise NotImplementedError("Platform not supported: %s" % sys.platform)
 
-    syn_act_fn = SYN_ACT_SUBSAMPLED_FN
+    syn_act_fn = SYN_ACT_FN
 
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
@@ -163,16 +163,17 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
                   ['synapse_type', 'soma_distance', 'dendrite_label']]
         assert_frame_equal(df1, df2)
 
-        #voltage traces
-        path1 = glob.glob(os.path.join(dummy[0][0][1], '*_vm_all_traces*.csv'))
-        assert len(path1) == 1
-        path1 = path1[0]
-        path2 = glob.glob(
-            os.path.join(os.path.dirname(syn_act_fn), '*_vm_all_traces.csv'))
-        assert len(path2) == 1
-        path2 = path2[0]
-        pdf1 = pd.read_csv(path2, sep='\t')[['t', 'Vm run 00']]
-        pdf2 = pd.read_csv(path1, sep='\t')
+        # voltage traces
+        vt_rerun_fn = glob.glob(os.path.join(dummy[0][0][1], '*_vm_all_traces*.csv'))
+        assert len(vt_rerun_fn) == 1
+        vt_rerun_fn = vt_rerun_fn[0]
+
+        vt_presaved_fn = glob.glob(os.path.join(os.path.dirname(syn_act_fn), '*_vm_all_traces.csv'))
+        assert len(vt_presaved_fn) == 1
+        vt_presaved_fn = vt_presaved_fn[0]
+        
+        pdf1 = pd.read_csv(vt_presaved_fn, sep='\t')[['t', 'Vm run 00']]
+        pdf2 = pd.read_csv(vt_rerun_fn, sep='\t')
         pdf2 = pdf2[pdf2['t'] >= 100].reset_index(drop=True)
         #print pdf1.values
         #print pdf2.values
