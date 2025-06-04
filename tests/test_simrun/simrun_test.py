@@ -41,7 +41,7 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
-            NETP_FN, [SYN_ACT_FN],
+            NETP_FN, [SYN_ACT_SUBSAMPLED_FN],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=T_STOP_SHORT,
@@ -76,7 +76,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
     subdir1 = tmpdir.mkdir("sub1")
     subdir2 = tmpdir.mkdir("sub2")
     subdir_params = tmpdir.mkdir("params")
-    syn_act_fn = SYN_ACT_FN
+    syn_act_fn = SYN_ACT_SUBSAMPLED_FN
     t_stop = T_STOP_SHORT
     
     
@@ -141,7 +141,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
-            NETP_FN, [SYN_ACT_FN],
+            NETP_FN, [SYN_ACT_SUBSAMPLED_FN],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=345,
@@ -166,7 +166,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         assert len(path1) == 1
         path1 = path1[0]
         path2 = glob.glob(
-            os.path.join(os.path.dirname(SYN_ACT_FN), '*_vm_all_traces.csv'))
+            os.path.join(os.path.dirname(SYN_ACT_SUBSAMPLED_FN), '*_vm_all_traces.csv'))
         assert len(path2) == 1
         path2 = path2[0]
         pdf1 = pd.read_csv(path2, sep='\t')[['t', 'Vm run 00']]

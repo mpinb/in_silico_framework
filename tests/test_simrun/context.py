@@ -28,6 +28,6 @@ NETP_FN = os.path.join(
 SYN_ACT_FN = os.path.join(
     TEST_SIMULATION_DATA_FOLDER, 
     'simulation_run0000_synapses.csv')
-SYN_ACT_SUBSAMPLE_FN = os.path.join(
+SYN_ACT_SUBSAMPLED_FN = os.path.join(
     TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER, 
     'simulation_run0000_synapses.csv')
