@@ -16,4 +16,5 @@ TEST_SIMULATION_DATA_FOLDER = os.path.join(
     'simulation_data',
     'C2_center_example')
 assert os.path.exists(TEST_DATA_FOLDER)
+assert os.path.exists(TEST_SIMULATION_DATA_FOLDER)
 
