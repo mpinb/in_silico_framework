@@ -16,7 +16,7 @@ def test_switch_db_backend(tmpdir):
     """
 
     # Save the original value of the environment variable
-    original_env_value = os.environ.get("ISF_USE_MDB")
+    original_env_value = os.environ.get("ISF_USE_MDB", 0)
     tmp_db_path = os.path.join(tmpdir, "test_db")
     tmp_mdb_path = os.path.join(tmpdir, "test_mdb")
 
