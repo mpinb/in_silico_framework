@@ -138,10 +138,12 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     else:
         raise NotImplementedError("Platform not supported: %s" % sys.platform)
 
+    syn_act_fn = SYN_ACT_SUBSAMPLED_FN
+
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
-            NETP_FN, [SYN_ACT_SUBSAMPLED_FN],
+            NETP_FN, [syn_act_fn],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=345,
@@ -154,7 +156,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
             os.path.join(
                 dummy[0][0][1], 'simulation_run%s_synapses.csv' %
                 dummy[0][0][0].iloc[0].number))
-        df2 = read_pandas_synapse_activation_from_roberts_format(SYN_ACT_FN)
+        df2 = read_pandas_synapse_activation_from_roberts_format(syn_act_fn)
         df1 = df1[[c for c in df1.columns if c.isdigit()] +
                   ['synapse_type', 'soma_distance', 'dendrite_label']]
         df2 = df2[[c for c in df1.columns if c.isdigit()] +
@@ -166,7 +168,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         assert len(path1) == 1
         path1 = path1[0]
         path2 = glob.glob(
-            os.path.join(os.path.dirname(SYN_ACT_SUBSAMPLED_FN), '*_vm_all_traces.csv'))
+            os.path.join(os.path.dirname(syn_act_fn), '*_vm_all_traces.csv'))
         assert len(path2) == 1
         path2 = path2[0]
         pdf1 = pd.read_csv(path2, sep='\t')[['t', 'Vm run 00']]
