@@ -10,21 +10,25 @@ import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
 import simrun.sim_trial_to_cell_object
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format
-from ..test_simrun.context import cellParamName, networkName, EXAMPLE_SYN_ACT_PATH, parent
-assert os.path.exists(cellParamName)
-assert os.path.exists(networkName)
-assert os.path.exists(EXAMPLE_SYN_ACT_PATH)
+from ..test_simrun.context import NEUP_FN, NETP_FN, SYN_ACT_FN, SYN_ACT_SUBSAMPLED_FN, parent
+
+assert os.path.exists(NEUP_FN)
+assert os.path.exists(NETP_FN)
+assert os.path.exists(SYN_ACT_FN)
+
+T_STOP_SHORT = 20
+T_STOP_FULL = 345
 
 
 def test_generate_synapse_activation_returns_filelist(tmpdir, client):
     try:
         dummy = simrun.generate_synapse_activations.generate_synapse_activations(
-            cellParamName,
-            networkName,
+            NEUP_FN,
+            NETP_FN,
             dirPrefix=tmpdir.dirname,
             nSweeps=1,
             nprocs=1,
-            tStop=345,
+            tStop=T_STOP_SHORT,
             silent=True)
         dummy = client.compute(dummy).result()
     except:
@@ -36,11 +40,11 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
         tmpdir, client):
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
-            cellParamName,
-            networkName, [EXAMPLE_SYN_ACT_PATH],
+            NEUP_FN,
+            NETP_FN, [SYN_ACT_FN],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
-            tStop=345,
+            tStop=T_STOP_SHORT,
             silent=True)
         dummy = client.compute(dummy).result()
     except:
@@ -52,12 +56,12 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
 def test_run_new_simulations_returns_dirname(tmpdir):
     try:
         dummy = simrun.run_new_simulations.run_new_simulations(
-            cellParamName,
-            networkName,
+            NEUP_FN,
+            NETP_FN,
             dirPrefix=tmpdir.dirname,
             nSweeps=1,
             nprocs=1,
-            tStop=345,
+            tStop=T_STOP_SHORT,
             silent=True)
         # dummy is a list of delayeds
         result = dask.compute(*dummy)
@@ -66,40 +70,50 @@ def test_run_new_simulations_returns_dirname(tmpdir):
     assert isinstance(result[0][0], str)
 
 
-@pytest.mark.heavy
 def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
     subdir1 = tmpdir.mkdir("sub1")
     subdir2 = tmpdir.mkdir("sub2")
     subdir_params = tmpdir.mkdir("params")
+    syn_act_fn = SYN_ACT_FN
+    t_stop = T_STOP_SHORT
+    
+    
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
-            cellParamName,
-            networkName, [EXAMPLE_SYN_ACT_PATH],
+            NEUP_FN,
+            NETP_FN, 
+            synapseActivation=[syn_act_fn],
             dirPrefix=str(subdir1),
             nprocs=1,
-            tStop=345,
+            tStop=t_stop,
             silent=True)
         dummy = client.compute(dummy).result()
-        cellParam = scp.build_parameters(cellParamName)
+
+        cellParam = scp.build_parameters(NEUP_FN)
         # change location of cell by respecifying param file
         cellParam.neuron.filename = os.path.join(
-        parent, 
-        'test_simrun',
-        'data',
-        '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2_B1border.hoc')
-        cellParamName_other_position = os.path.join(str(subdir_params),
-                                                    'other_position.param')
+            parent, 
+            'test_simrun',
+            'data',
+            '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2_B1border.hoc')
+        cellParamName_other_position = os.path.join(
+            str(subdir_params),
+            'other_position.param')
         cellParam.save(cellParamName_other_position)
+
+
         dummy2 = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName_other_position,
-            networkName, [EXAMPLE_SYN_ACT_PATH],
+            NETP_FN, [syn_act_fn],
             dirPrefix=str(subdir2),
             nprocs=1,
-            tStop=345,
+            tStop=t_stop,
             silent=True)
         dummy2 = dummy2.compute()
+
+        # Check that the two simulation runs have the same synapse activation
         df1 = read_pandas_synapse_activation_from_roberts_format(
             os.path.join(
                 dummy[0][0][1], 'simulation_run%s_synapses.csv' %
@@ -126,8 +140,8 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
 
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
-            cellParamName,
-            networkName, [EXAMPLE_SYN_ACT_PATH],
+            NEUP_FN,
+            NETP_FN, [SYN_ACT_FN],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=345,
@@ -140,7 +154,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
             os.path.join(
                 dummy[0][0][1], 'simulation_run%s_synapses.csv' %
                 dummy[0][0][0].iloc[0].number))
-        df2 = read_pandas_synapse_activation_from_roberts_format(EXAMPLE_SYN_ACT_PATH)
+        df2 = read_pandas_synapse_activation_from_roberts_format(SYN_ACT_FN)
         df1 = df1[[c for c in df1.columns if c.isdigit()] +
                   ['synapse_type', 'soma_distance', 'dendrite_label']]
         df2 = df2[[c for c in df1.columns if c.isdigit()] +
@@ -152,7 +166,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         assert len(path1) == 1
         path1 = path1[0]
         path2 = glob.glob(
-            os.path.join(os.path.dirname(EXAMPLE_SYN_ACT_PATH), '*_vm_all_traces.csv'))
+            os.path.join(os.path.dirname(SYN_ACT_FN), '*_vm_all_traces.csv'))
         assert len(path2) == 1
         path2 = path2[0]
         pdf1 = pd.read_csv(path2, sep='\t')[['t', 'Vm run 00']]
