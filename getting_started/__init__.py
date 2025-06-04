@@ -23,6 +23,18 @@ getting_started_dir = parent = os.path.abspath(os.path.dirname(__file__))
 example_data_dir = os.path.join(getting_started_dir, 'example_data')
 tutorial_output_dir = os.path.join(os.environ.get("HOME"), 'ISF_tutorial_output')
 
+IN_SILICO_FRAMEWORK_DIR = os.path.abspath(
+    os.path.dirname(os.path.dirname(__file__)))
+TEMPLATE_FILES = [
+    os.path.join(example_data_dir, e) for e in (
+        'biophysical_constraints/86_C2_center.param.TEMPLATE',
+        'functional_constraints/network.param.TEMPLATE',
+        'simulation_data/C2_center_example/20240_network_model.param.TEMPLATE',
+        'simulation_data/C2_center_example/20240_neuron_model.param.TEMPLATE',
+        'simulation_data/C2_center_example_subsampled/20240_neuron_model.param.TEMPLATE',
+        'simulation_data/C2_center_example_subsampled/20240_network_model.param.TEMPLATE',
+    )]
+
 def generate_param_files_with_valid_references(overwrite_param_files=False):
     """Generate parameter files with valid references to the In Silico Framework directory.
     
@@ -33,15 +45,8 @@ def generate_param_files_with_valid_references(overwrite_param_files=False):
     See also:
         :py:mod:`config.isf_configure` for configuring ISF for your local system.
     """
-    IN_SILICO_FRAMEWORK_DIR = os.path.abspath(
-        os.path.dirname(os.path.dirname(__file__)))
     suffix = '.TEMPLATE'
-    filelist = [os.path.join(example_data_dir, e) for e in (
-                'biophysical_constraints/86_C2_center.param.TEMPLATE', \
-                'functional_constraints/network.param.TEMPLATE', \
-                'simulation_data/C2_center_example/20240_network_model.param.TEMPLATE',\
-                'simulation_data/C2_center_example/20240_neuron_model.param.TEMPLATE')]
-    for template_path in filelist:
+    for template_path in TEMPLATE_FILES:
         template_path = os.path.join(IN_SILICO_FRAMEWORK_DIR, template_path)
         assert os.path.exists(template_path)
         assert template_path.endswith(suffix)
