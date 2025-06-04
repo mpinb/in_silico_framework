@@ -58,12 +58,12 @@ jobs:
           DASK_CONFIG: tests/dask_config.yml
         run: |
           echo ------------ printing env vars -------------
-          echo $env:ISF_USE_MDB
-          echo $env:NEURONHOME
-          echo $env:MPLBACKEND
+          echo ISF_USE_MDB: %ISF_USE_MDB%
+          echo NEURONHOME: %NEURONHOME%
+          echo MPLBACKEND: %MPLBACKEND%
 
           echo ------------ Running tests -------------
-          pixi r pytest -n 4 --dist worksteal -rsx -vv -x  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
+          pixi r pytest -n 4 --dist worksteal -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
 
       - name: Test ModelDataBase backwards compatibility
         shell: cmd
