@@ -58,7 +58,7 @@ jobs:
           DASK_CONFIG: tests/dask_config.yml
         run: |
           echo ------------ Running tests -------------
-          pixi r pytest -n 2 --dist worksteal -rsx -vv -x  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
+          pixi r pytest -n 3 --dist worksteal -rsx -vv -x  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
 
       - name: Test ModelDataBase backwards compatibility
         shell: cmd
