@@ -4,7 +4,7 @@ import distributed
 import pytest
 from ..context import (
     TEST_DATA_FOLDER, 
-    TEST_SIMULATION_DATA_FOLDER,
+    TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER,
     getting_started_dir,
 )
 

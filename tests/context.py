@@ -10,11 +10,20 @@ TEST_DATA_FOLDER = os.path.join(
     getting_started_dir, 
     'example_data',
     )
-TEST_SIMULATION_DATA_FOLDER = os.path.join(
+
+TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER = os.path.join(
     getting_started_dir, 
     'example_data',
     'simulation_data',
     'C2_center_example_subsampled')
+
+TEST_SIMULATION_DATA_FOLDER = os.path.join(
+    getting_started_dir, 
+    'example_data',
+    'simulation_data',
+    'C2_center_example')
+
 assert os.path.exists(TEST_DATA_FOLDER)
 assert os.path.exists(TEST_SIMULATION_DATA_FOLDER)
+assert os.path.exists(TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER)
 

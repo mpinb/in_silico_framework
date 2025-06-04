@@ -10,10 +10,10 @@ import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
 import simrun.sim_trial_to_cell_object
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format
-from ..test_simrun.context import cellParamName, networkName, example_path, parent
+from ..test_simrun.context import cellParamName, networkName, EXAMPLE_SYN_ACT_PATH, parent
 assert os.path.exists(cellParamName)
 assert os.path.exists(networkName)
-assert os.path.exists(example_path)
+assert os.path.exists(EXAMPLE_SYN_ACT_PATH)
 
 
 def test_generate_synapse_activation_returns_filelist(tmpdir, client):
@@ -37,7 +37,7 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName,
-            networkName, [example_path],
+            networkName, [EXAMPLE_SYN_ACT_PATH],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=345,
@@ -76,7 +76,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName,
-            networkName, [example_path],
+            networkName, [EXAMPLE_SYN_ACT_PATH],
             dirPrefix=str(subdir1),
             nprocs=1,
             tStop=345,
@@ -94,7 +94,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
         cellParam.save(cellParamName_other_position)
         dummy2 = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName_other_position,
-            networkName, [example_path],
+            networkName, [EXAMPLE_SYN_ACT_PATH],
             dirPrefix=str(subdir2),
             nprocs=1,
             tStop=345,
@@ -127,7 +127,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             cellParamName,
-            networkName, [example_path],
+            networkName, [EXAMPLE_SYN_ACT_PATH],
             dirPrefix=tmpdir.dirname,
             nprocs=1,
             tStop=345,
@@ -140,7 +140,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
             os.path.join(
                 dummy[0][0][1], 'simulation_run%s_synapses.csv' %
                 dummy[0][0][0].iloc[0].number))
-        df2 = read_pandas_synapse_activation_from_roberts_format(example_path)
+        df2 = read_pandas_synapse_activation_from_roberts_format(EXAMPLE_SYN_ACT_PATH)
         df1 = df1[[c for c in df1.columns if c.isdigit()] +
                   ['synapse_type', 'soma_distance', 'dendrite_label']]
         df2 = df2[[c for c in df1.columns if c.isdigit()] +
@@ -152,7 +152,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         assert len(path1) == 1
         path1 = path1[0]
         path2 = glob.glob(
-            os.path.join(os.path.dirname(example_path), '*_vm_all_traces.csv'))
+            os.path.join(os.path.dirname(EXAMPLE_SYN_ACT_PATH), '*_vm_all_traces.csv'))
         assert len(path2) == 1
         path2 = path2[0]
         pdf1 = pd.read_csv(path2, sep='\t')[['t', 'Vm run 00']]

@@ -21,6 +21,6 @@ networkName = os.path.join(
     TEST_DATA_FOLDER,
     'functional_constraints', 
     'network.param')
-example_path = os.path.join(
+EXAMPLE_SYN_ACT_PATH = os.path.join(
     TEST_SIMULATION_DATA_FOLDER, 
     'simulation_run0000_synapses.csv')
