@@ -8,7 +8,7 @@ from data_base.db_initializers.synapse_activation_binning \
     import init as init_synapse_activation
 from data_base.utils import silence_stdout
 
-optimize_simrun_general = silence_stdout(optimize_simrun_general)
+# optimize_simrun_general = silence_stdout(optimize_simrun_general)
 
 
 def test_API(fresh_db, client):
