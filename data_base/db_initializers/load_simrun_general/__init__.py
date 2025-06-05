@@ -313,7 +313,13 @@ def add_dendritic_spike_times(db, dendritic_spike_times_threshold=-30.0):
 
 
 def optimize(
-    db, dumper=None, select=None, scheduler=None, repartition=False, categorized=False, client=None
+    db, 
+    dumper=None, 
+    select=None, 
+    scheduler=None, 
+    repartition=False, 
+    categorized=False, 
+    client=None
 ):
     """Rewrite existing data with a new dumper.
 

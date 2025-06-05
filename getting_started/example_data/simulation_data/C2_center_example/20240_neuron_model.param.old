@@ -1,0 +1,256 @@
+{
+  "info": {
+    "date": "15Oct2014",
+    "name": "hay_2011_dend_test",
+    "author": "regger",
+  },
+  "neuron": {
+    "Myelin": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -90.0,
+            "g": 4e-05,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "Ra": 100.0,
+        "cm": 0.02,
+      },
+    },
+    "Soma": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -90,
+            "g": 3.26e-05,
+            "spatial": "uniform",
+          },
+          "Ca_HVA": {
+            "gCa_HVAbar": 0.000642,
+            "spatial": "uniform",
+          },
+          "SKv3_1": {
+            "gSKv3_1bar": 0.983,
+            "spatial": "uniform",
+          },
+          "SK_E2": {
+            "gSK_E2bar": 0.0492,
+            "spatial": "uniform",
+          },
+          "Ca_LVAst": {
+            "gCa_LVAstbar": 0.00462,
+            "spatial": "uniform",
+          },
+          "Nap_Et2": {
+            "gNap_Et2bar": 0.00499,
+            "spatial": "uniform",
+          },
+          "Ih": {
+            "gIhbar": 8e-05,
+            "spatial": "uniform",
+          },
+          "CaDynamics_E2": {
+            "spatial": "uniform",
+            "gamma": 0.000616,
+            "decay": 770.0,
+          },
+          "K_Pst": {
+            "gK_Pstbar": 0.0,
+            "spatial": "uniform",
+          },
+          "K_Tst": {
+            "gK_Tstbar": 0.0471,
+            "spatial": "uniform",
+          },
+          "NaTa_t": {
+            "gNaTa_tbar": 2.43,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "ions": {
+          "ena": 50.0,
+          "ek": -85.0,
+        },
+        "Ra": 100.0,
+        "cm": 1.0,
+      },
+    },
+    "AIS": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -90,
+            "g": 2.56e-05,
+            "spatial": "uniform",
+          },
+          "Ca_HVA": {
+            "gCa_HVAbar": 0.000692,
+            "spatial": "uniform",
+          },
+          "SKv3_1": {
+            "gSKv3_1bar": 0.958,
+            "spatial": "uniform",
+          },
+          "SK_E2": {
+            "gSK_E2bar": 5.77e-05,
+            "spatial": "uniform",
+          },
+          "Ca_LVAst": {
+            "gCa_LVAstbar": 0.00858,
+            "spatial": "uniform",
+          },
+          "Nap_Et2": {
+            "gNap_Et2bar": 0.00146,
+            "spatial": "uniform",
+          },
+          "Ih": {
+            "gIhbar": 8e-05,
+            "spatial": "uniform",
+          },
+          "CaDynamics_E2": {
+            "spatial": "uniform",
+            "gamma": 0.0175,
+            "decay": 507.0,
+          },
+          "K_Pst": {
+            "gK_Pstbar": 0.773,
+            "spatial": "uniform",
+          },
+          "K_Tst": {
+            "gK_Tstbar": 0.0841,
+            "spatial": "uniform",
+          },
+          "NaTa_t": {
+            "gNaTa_tbar": 0.088,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "ions": {
+          "ena": 50.0,
+          "ek": -85.0,
+        },
+        "Ra": 100.0,
+        "cm": 1.0,
+      },
+    },
+    "filename": "/gpfs01/bethge/home/regger/data/L5tt/network_embedding/postsynaptic_location/3x3_C2_sampling/C2center/86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center.hoc",
+    "Dendrite": {
+      "mechanisms": {
+        "range": {
+          "Ih": {
+            "gIhbar": 0.0002,
+            "spatial": "uniform",
+          },
+          "pas": {
+            "e": -90.0,
+            "g": 6.31e-05,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "Ra": 100.0,
+        "cm": 2.0,
+      },
+    },
+    "ApicalDendrite": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -90,
+            "g": 8.82e-05,
+            "spatial": "uniform",
+          },
+          "Ca_HVA": {
+            "outsidescale": 0.1,
+            "begin": 900.0,
+            "end": 1100.0,
+            "gCa_HVAbar": 0.00452,
+            "spatial": "uniform_range",
+          },
+          "SKv3_1": {
+            "gSKv3_1bar": 0.0112,
+            "spatial": "uniform",
+          },
+          "SK_E2": {
+            "gSK_E2bar": 0.0034,
+            "spatial": "uniform",
+          },
+          "NaTa_t": {
+            "gNaTa_tbar": 0.0252,
+            "spatial": "uniform",
+          },
+          "Ih": {
+            "distance": "relative",
+            "spatial": "exponential",
+            "_lambda": 3.6161,
+            "offset": -0.8696,
+            "linScale": 2.087,
+            "gIhbar": 0.0002,
+            "xOffset": 0.0,
+          },
+          "Im": {
+            "gImbar": 0.000179,
+            "spatial": "uniform",
+          },
+          "Ca_LVAst": {
+            "outsidescale": 0.01,
+            "begin": 900.0,
+            "gCa_LVAstbar": 0.104,
+            "end": 1100.0,
+            "spatial": "uniform_range",
+          },
+          "CaDynamics_E2": {
+            "spatial": "uniform",
+            "gamma": 0.0005,
+            "decay": 133.0,
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "ions": {
+          "ena": 50.0,
+          "ek": -85.0,
+        },
+        "Ra": 100.0,
+        "cm": 2.0,
+      },
+    },
+  },
+  "mech_globals": {
+
+  },
+  "sim": {
+    "Vinit": -75.0,
+    "T": 34.0,
+    "tStart": 0.0,
+    "tStop": 345.0,
+    "dt": 0.025,
+    "recordingSites": ['/gpfs01/bethge/home/regger/data/L5tt/network_embedding/postsynaptic_location/3x3_C2_sampling/C2center/apical_proximal_distal_rec_sites.landmarkAscii'],
+  },
+  "NMODL_mechanisms": {
+    "channels": "/gpfs01/bethge/home/regger/data/L5tt/first_testing/mechanisms",
+  },
+}

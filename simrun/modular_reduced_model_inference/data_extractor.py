@@ -29,7 +29,8 @@ import numpy
 import pandas as pd
 from data_base.analyze.spike_detection import spike_in_interval
 from data_base.IO.LoaderDumper import pandas_to_parquet
-from config.isf_logging import logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 class _DataExtractor(object):
     """Simple base class for data extractors.

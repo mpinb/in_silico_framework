@@ -1,7 +1,5 @@
-from data_base.data_base import DataBase
 from pandas.testing import assert_frame_equal
 from data_base.IO.LoaderDumper import dask_to_msgpack, dask_to_categorized_msgpack
-import tempfile
 
 
 def robust_del_fun(db, key):
@@ -29,8 +27,8 @@ def real_data_generic(db_, dumper_, client_=None):
             dumper=dumper_,
             client=client_)
     dummy = db_['voltage_traces2']
-    b = db_['voltage_traces'].compute(scheduler="multiprocessing")
-    a = dummy.compute(scheduler="multiprocessing")
+    b = client_.compute(db_['voltage_traces']).result()
+    a = client_.compute(dummy).result()
     assert_frame_equal(a, b, check_column_type=False)
 
     if client_ is None:
@@ -45,15 +43,17 @@ def real_data_generic(db_, dumper_, client_=None):
             dumper=dumper_,
             client=client_)
     dummy = db_['synapse_activation2']
-    b = db_['synapse_activation'].compute(scheduler="multiprocessing")
-    a = dummy.compute(scheduler="multiprocessing")
+    b = client_.compute(db_['synapse_activation']).result()
+    a = client_.compute(db_['synapse_activation2']).result()
     assert_frame_equal(a, b)
 
 
 def test_dask_to_categorized_msgpack_real_data(client, fresh_db):
-    real_data_generic(db_=fresh_db,
-                      dumper_=dask_to_categorized_msgpack,
-                      client_=client)
+    real_data_generic(
+        db_=fresh_db, 
+        dumper_=dask_to_categorized_msgpack, 
+        client_=client
+        )
 
 
 def test_dask_to_msgpack_real_data(client, fresh_db):

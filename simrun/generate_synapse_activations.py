@@ -226,5 +226,4 @@ def generate_synapse_activations(
         myfun = silence_stdout(myfun)
 
     d = [dask.delayed(myfun)(get_seed()) for i in range(nprocs)]
-    return dask.delayed(lambda *args: args)(
-        d)  #return single delayed object, that computes everything
+    return dask.delayed(lambda *args: args)(d)  #return single delayed object, that computes everything

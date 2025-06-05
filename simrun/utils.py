@@ -33,7 +33,8 @@ import single_cell_parser as scp
 from data_base.dbopen import resolve_db_path, resolve_reldb_path
 
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
-from config.isf_logging import logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def get_cellnumbers_from_confile(confile):

@@ -20,12 +20,6 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
 **Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - ISF version or commit hash.
-
-**Additional context**
-Add any other context about the problem here.
+ - OS: [e.g. Ubuntu 20.04, Windows 10]
+ - ISF version or commit hash [e.g. 0.5.0, a1b2c3d4e5f6g7h8i9j0]

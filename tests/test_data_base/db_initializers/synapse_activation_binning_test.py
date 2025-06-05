@@ -1,3 +1,4 @@
+import pytest
 from data_base.db_initializers.load_simrun_general \
             import optimize as optimize_simrun_general
 from data_base.db_initializers.synapse_activation_binning \

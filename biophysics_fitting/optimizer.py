@@ -205,10 +205,10 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
         try:
             features_dicts = c.gather(futures)
         except (distributed.client.CancelledError, distributed.scheduler.KilledWorker):
-            print('Futures have been canceled. Waiting for 3 Minutes, then reschedule.')
+            logger.error('Futures have been canceled. Waiting for 3 Minutes, then rescheduling...')
             del futures
             time.sleep(3 * 60)
-            print('Rescheduling ...')
+            logger.info('Rescheduling ...')
             return mymap(func, iterable)
         except RuntimeError:
             if reschedule_on_runtime_error >= 0:
@@ -582,7 +582,7 @@ def start_run(
             that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
             updated accordingly.
             
-        n (int): a seedpoint for the optimization randomization.
+        n (int): The run ID. This is used to create a sub-database in db_setup, where the results of the optimization are saved.
         pop (list of deap.Individuals | None): The previous population if the optimization is continued. None if a new optimization is started.
         client (distributed.Client | None): A distributed client. If None, the optimization is run on the local machine.
         continue_cp (bool): If True, the optimization is continued. If False, a new optimization is started.
