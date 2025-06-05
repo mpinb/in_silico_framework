@@ -130,7 +130,7 @@ def get_hay_param_names():
 def get_hay_params_pdf():
     r"""Get the parameter boundaries used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
     
-    Conductance parameters (:math:`\bar{g}` or :math`g_{pas}`) are in units of :math:`S/cm^2`, :math:`\\tau` parameters are in units of :math:`ms`
+    Conductance parameters (:math:`\bar{g}` or :math`g_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
     and :math:`\gamma` parameters are a fraction and unitless.
     
     Returns:
@@ -545,7 +545,7 @@ def get_hay_problem_description():
 
 
 def get_feasible_model_params():
-    """Get a set of feasible model parameters.
+    r"""Get a set of feasible model parameters.
 
     This dataframe contains biophysical parameters that are not only within range,
     but also likely values to find.
@@ -554,7 +554,7 @@ def get_feasible_model_params():
     In general, the response of a cell with these biophysical parameters
     heavily depends on the morphology as well.
 
-    Conductance parameters (:math:`\\bar{g}` or :math:`g_{pas}`) are in units of :math:`S/cm^2`, :math:`\\tau` parameters are in units of :math:`ms`
+    Conductance parameters (:math:`\bar{g}` or :math:`g_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
     and :math:`\gamma` parameters are a fraction and unitless.
 
     Returns:

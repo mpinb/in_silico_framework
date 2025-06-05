@@ -13,7 +13,7 @@ class TestDendrogram:
     def test_dendrogram(self):
         d = Dendrogram(self.cell)
         ax = d.plot()
-        ax.set_xlabel('Distance from soma ($\mu m$)')
+        ax.set_xlabel(r'Distance from soma ($\mu m$)')
         fig = d.plot()
         plt.close()
         gc.collect()

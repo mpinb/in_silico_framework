@@ -32,7 +32,7 @@ from visualize.histogram import histogram
 
 
 def range_overlap(beginning1, end1, beginning2, end2, bool_=True):
-    """Check if two ranges overlap.
+    r"""Check if two ranges overlap.
 
     :skip-doc:
 
@@ -99,7 +99,7 @@ def _get_db_by_sec(dendrogram_db, sec):
 
 
 class _DendrogramSection:
-    """A class to represent a dendrogram section.
+    r"""A class to represent a dendrogram section.
 
     A dendrogram section is a single neuron section, as it is represented in a dendrogram.
     It does not necessarily contain any morphological information.
@@ -125,7 +125,7 @@ class _DendrogramSection:
         main_bifurcation=False,
         sec_id=None,
     ):
-        """
+        r"""
         Args:
             name (str): The name of the section.
             x_dist_start (float): The starting distance of the section in :math:`\mu m`.
@@ -155,7 +155,7 @@ class _DendrogramSection:
 
 
 class Dendrogram:
-    """Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+    r"""Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
 
     Dendrograms are schematic representations of neuron morphologies.
 
@@ -388,7 +388,7 @@ class _DendrogramDendriteStatistics:
         return ax
 
     def _get_amount_of_dendrite_in_bin(self, min_, max_):
-        """Get the amount of dendritic length in a certain bin of soma distance.
+        r"""Get the amount of dendritic length in a certain bin of soma distance.
 
         Args:
             min\_ (float): The minimum soma distance.
@@ -409,7 +409,7 @@ class _DendrogramDendriteStatistics:
         return out
 
     def _plot_dendrite_hist(self, ax, xlim, binsize=50):
-        """Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
+        r"""Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
 
         Args:
             ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object.
@@ -431,7 +431,7 @@ class _DendrogramDendriteStatistics:
         return ax
 
     def _compute_dendrite_hist(self, dist_end=None, binsize=50):
-        """Compute the dendrite density histogram.
+        r"""Compute the dendrite density histogram.
 
         Args:
             dist_end (float): The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
@@ -508,7 +508,7 @@ class _DendrogramSynapseStatistics:
     def get_number_of_synapses_in_bin(
         self, min_, max_, select=["Dendrite", "ApicalDendrite"], label=None
     ):
-        """Get the number of synapses in a certain bin of soma distance.
+        r"""Get the number of synapses in a certain bin of soma distance.
 
         Args:
             min\_ (float): The minimum soma distance.
@@ -530,7 +530,7 @@ class _DendrogramSynapseStatistics:
         return out
 
     def _compute_synapse_hist(self, binsize=50):
-        """Compute the synapse density histogram.
+        r"""Compute the synapse density histogram.
 
         Args:
             dist_end (float): The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
@@ -585,7 +585,7 @@ class _DendrogramSynapseStatistics:
                 self.synapse_statistics[label].extend(dendro_section.synapses[label])
 
     def _plot_synapse_density_hist(self, ax, xlim, binsize=50):
-        """Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
+        r"""Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
 
         If no colormap is provided during initialization, all synapses are plotted in red.
         If a colormap is provided, the synapses are plotted in the respective color.

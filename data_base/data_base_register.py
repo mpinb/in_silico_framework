@@ -40,7 +40,7 @@ import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 LOCAL_DATA_BASE_REGISTER_NAME = '.data_base_register.db'
-LOCAL_DATA_BASE_REGISTER_LOCATION = os.path.dirname(__file__)
+LOCAL_DATA_BASE_REGISTER_LOCATION = data_base_register_path
 
 class DataBaseRegister():
     """Two column registry mapping data bases to their locations.
