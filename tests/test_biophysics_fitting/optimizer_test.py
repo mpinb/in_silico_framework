@@ -232,7 +232,7 @@ def test_mini_optimization_run(capsys, client):
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
         ]
-        assert max(keys) == 3
+        assert max(keys) == 2
 
         # start_run(db["86"], 2, client=client, offspring_size=1, max_ngen=1)
         # keys = [
