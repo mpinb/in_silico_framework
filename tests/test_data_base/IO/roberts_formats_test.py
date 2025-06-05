@@ -1,6 +1,6 @@
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format, write_pandas_synapse_activation_to_roberts_format
 from tests.test_data_base import test_data_folder
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 import os
 from config import isf_is_using_mdb
 if isf_is_using_mdb():
