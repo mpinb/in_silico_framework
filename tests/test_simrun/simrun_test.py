@@ -1,14 +1,14 @@
 from ..test_simrun.context import *
-import os, sys, glob, dask, pytest
+import os, sys, glob, dask
 import numpy as np
 import pandas as pd
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
+import dask
 import single_cell_parser as scp
 from single_cell_parser.cell_modify_functions.scale_apical_morph_86 import scale_apical_morph_86
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
-import simrun.sim_trial_to_cell_object
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format
 from ..test_simrun.context import NEUP_FN, NETP_FN, SYN_ACT_FN, SYN_ACT_SUBSAMPLED_FN, parent
 

@@ -1,5 +1,5 @@
 import numpy as np
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 import dask 
 from config import isf_is_using_mdb
 from data_base.IO.LoaderDumper import (
