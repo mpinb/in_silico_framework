@@ -252,7 +252,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/retrying-1.3.3-pyhd8ed1ab_3.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rpds-py-0.20.0-py38h4005ec7_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/scandir-1.10.0-py38h01eb140_7.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/scikit-learn-0.23.2-py38h5d63f67_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.5.2-py38hb2138dd_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -526,7 +525,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/retrying-1.3.3-pyhd8ed1ab_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/rpds-py-0.20.0-py38h186058e_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scandir-1.10.0-py38hb192615_7.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scikit-learn-0.23.2-py38h397cc00_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.5.2-py38hdf044fb_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -789,7 +787,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/requests-2.32.3-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/retrying-1.3.3-pyhd8ed1ab_3.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/rpds-py-0.20.0-py38h2e0ef18_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/scandir-1.10.0-py38h91455d4_7.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/scikit-learn-0.23.2-py38ha09990b_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/win-64/scipy-1.5.2-py38h5f893b4_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -1098,7 +1095,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3339-validator-0.1.4-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/rpds-py-0.20.0-py38h4005ec7_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/scandir-1.10.0-py38h01eb140_7.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/scikit-learn-0.23.2-py38h5d63f67_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.5.2-py38hb2138dd_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -1455,7 +1451,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3339-validator-0.1.4-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/rpds-py-0.20.0-py38h186058e_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scandir-1.10.0-py38hb192615_7.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scikit-learn-0.23.2-py38h397cc00_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/scipy-1.5.2-py38hdf044fb_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -1798,7 +1793,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3339-validator-0.1.4-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/win-64/rpds-py-0.20.0-py38h2e0ef18_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/scandir-1.10.0-py38h91455d4_7.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/scikit-learn-0.23.2-py38ha09990b_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/win-64/scipy-1.5.2-py38h5f893b4_2.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.12.2-hd8ed1ab_0.conda
@@ -9631,47 +9625,6 @@ packages:
   - pkg:pypi/rpds-py?source=hash-mapping
   size: 208721
   timestamp: 1723040088603
-- conda: https://conda.anaconda.org/conda-forge/linux-64/scandir-1.10.0-py38h01eb140_7.conda
-  sha256: 0ac8cbee0ddd5845cabeb4663ee241acbbc7f2dd111d4be2de972fbb3c050adc
-  md5: 231c78126efab7dc040845a16195024f
-  depends:
-  - libgcc-ng >=12
-  - python >=3.8,<3.9.0a0
-  - python_abi 3.8.* *_cp38
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/scandir?source=hash-mapping
-  size: 30068
-  timestamp: 1695473070690
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/scandir-1.10.0-py38hb192615_7.conda
-  sha256: cae1de1367b310a5fd75e5f813035fc0c813b845936f4c408b9162bf327f1197
-  md5: 9ad094ffe85d95f87e17336dadc9c348
-  depends:
-  - python >=3.8,<3.9.0a0
-  - python >=3.8,<3.9.0a0 *_cpython
-  - python_abi 3.8.* *_cp38
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/scandir?source=hash-mapping
-  size: 29258
-  timestamp: 1695473523682
-- conda: https://conda.anaconda.org/conda-forge/win-64/scandir-1.10.0-py38h91455d4_7.conda
-  sha256: 5f4de2fef7e4d8439f59d69c2c4879b4ff4b48c4a2014d7895568907f154dd43
-  md5: 0ea22e1de0349663c8460b1b8cac5894
-  depends:
-  - python >=3.8,<3.9.0a0
-  - python_abi 3.8.* *_cp38
-  - ucrt >=10.0.20348.0
-  - vc >=14.2,<15
-  - vc14_runtime >=14.29.30139
-  license: BSD-3-Clause
-  license_family: BSD
-  purls:
-  - pkg:pypi/scandir?source=hash-mapping
-  size: 32770
-  timestamp: 1695473358480
 - conda: https://conda.anaconda.org/conda-forge/linux-64/scikit-learn-0.23.2-py38h5d63f67_3.tar.bz2
   sha256: 81f5f82ecca15aa573a6826cfb8e4c819e0c54ce6680138dd7c20eed1975d52e
   md5: b9b5fabe4e49879dc073e076ee2906d2
