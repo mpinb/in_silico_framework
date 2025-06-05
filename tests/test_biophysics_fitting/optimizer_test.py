@@ -103,13 +103,13 @@ def set_up_db(step=False):
     db["86"]["get_fixed_params"] = get_fixed_params
     db["86"].set("params", params, dumper=pandas_to_pickle)
     db["86"].set(
-        "get_Simulator", partial(get_Simulator, step=True), dumper=to_cloudpickle
+        "get_Simulator", partial(get_Simulator, step=step), dumper=to_cloudpickle
     )
     db["86"].set(
-        "get_Evaluator", partial(get_Evaluator, step=True), dumper=to_cloudpickle
+        "get_Evaluator", partial(get_Evaluator, step=step), dumper=to_cloudpickle
     )
     db["86"].set(
-        "get_Combiner", partial(get_Combiner, step=True), dumper=to_cloudpickle
+        "get_Combiner", partial(get_Combiner, step=step), dumper=to_cloudpickle
     )
 
     return db
