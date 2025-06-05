@@ -23,6 +23,12 @@ import six, yaml, cloudpickle, sys
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 from six.moves import cPickle
+from .module_compatibility import (
+    init_mdb_backwards_compatibility,
+    # init_simrun_compatibility,
+    # init_hay_compatibility
+)
+
 if six.PY2:
 
     def pickle_fun(obj, file_path):
@@ -75,3 +81,4 @@ elif six.PY3:
 
     import pandas.core.indexes
     sys.modules['pandas.indexes'] = pandas.core.indexes
+    

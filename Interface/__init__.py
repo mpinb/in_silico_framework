@@ -308,4 +308,7 @@ print_module_versions()
 
 from config.cell_types import EXCITATORY, INHIBITORY
 
+from compatibility import init_mdb_backwards_compatibility
+init_mdb_backwards_compatibility()
+
 logger.setLevel(logging.ATTENTION)
