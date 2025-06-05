@@ -149,6 +149,8 @@ cmd = [
   "--overwrite-param-files={{ overwrite_param_files }}",
 ]
 
+[tool.pixi.tasks.setup]
+depends-on = ["configure"]
 
 [tool.pixi.tasks.launch_dask_server]
 args = [

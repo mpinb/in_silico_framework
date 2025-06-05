@@ -18,7 +18,7 @@ To install ISF with ``pixi``, simply:
 
    git clone https://github.com/mpinb/in_silico_framework.git --depth 1 &&
    cd in_silico_framework &&
-   pixi install
+   pixi run setup
 
 
 Usage
@@ -47,15 +47,6 @@ Test ISF
 --------
 
 To test if all components of ISF are working as intended, you can run the test suite locally.
-To do so, you will need three shells in total: one for launching a dask server, one for launching dask workers, and one for running the test suite itself.
-
-.. code-block:: bash
-
-   pixi run launch_dask_server
-
-.. code-block:: bash
-
-   pixi run launch_dask_workers
 
 .. code-block:: bash
 
