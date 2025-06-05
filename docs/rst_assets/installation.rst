@@ -25,7 +25,7 @@ To install ISF with ``pixi``, simply:
 
    Windows support is still experimental.
    If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
-   In case you encounter any issues, feel free to [open an issue]() and include relevant logs.
+   In case you encounter any issues, feel free to [open an issue](https://github.com/mpinb/in_silico_framework/issues) and include relevant logs.
 
 
 Usage
