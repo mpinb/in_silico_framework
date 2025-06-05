@@ -212,9 +212,10 @@ def test_get_max_generation():
 def test_mini_optimization_run(capsys, client):
 
     db = set_up_db(step=False)
+    run_id = "1"
 
     try:
-        start_run(db["86"], 1, client=client, offspring_size=1, max_ngen=1)
+        start_run(db["86"], run_id, client=client, offspring_size=1, max_ngen=1)
         # accessing simulation results of run
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
@@ -224,10 +225,10 @@ def test_mini_optimization_run(capsys, client):
         # if continue_cp is not set (defaults to False), an Exception is raised if the same
         # optimization is started again
         with pytest.raises(ValueError):
-            start_run(db["86"], 1, client=client, offspring_size=1, max_ngen=1)
+            start_run(db["86"], run_id, client=client, offspring_size=1, max_ngen=1)
 
         # with continue_cp = True, the optimization gets continued
-        start_run(db["86"], 1, client=client, offspring_size=1, max_ngen=1, continue_cp=True)
+        start_run(db["86"], run_id, client=client, offspring_size=1, max_ngen=1, continue_cp=True)
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
         ]
