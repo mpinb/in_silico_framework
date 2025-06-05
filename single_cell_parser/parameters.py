@@ -3,7 +3,8 @@
 
 from collections.abc import MutableMapping
 import json, re, neuron, os
-from data_base.dbopen import dbopen, resolve_modular_db_path
+from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
+from data_base.data_base import is_data_base
 
 def _read_params_to_dict(filename):
     filename = resolve_modular_db_path(filename)
@@ -78,7 +79,7 @@ def load_NMODL_parameters(parameters):
         pass
 
 
-def resolve_parameter_paths(parameters, db):
+def resolve_parameter_paths(parameters):
     """Resolve relative database paths in the parameters.
 
     Args:
@@ -89,18 +90,28 @@ def resolve_parameter_paths(parameters, db):
     Returns:
         :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameters with resolved paths.
     """
+
+    def _find_parent_db_basedir(fn):
+        """Find the parent database directory from the parameters."""
+        fn = os.path.pardir(fn)
+        while not is_data_base(fn):
+            try: fn = os.path.pardir(fn)
+            except FileNotFoundError: return None
+        return fn
+
     if isinstance(parameters, ParameterSet):
         parameters = parameters.to_dict()
     elif not isinstance(parameters, dict):
         raise TypeError("Expected ParameterSet or dict")
-
+    
     for key, value in parameters.items():
-        if isinstance(value, str) and value.startswith("reldb://"):
-            parameters[key] = os.path.join(db.basedir, value[8:])
+        if isinstance(value, str) and (value.startswith("reldb://") or value.startswith("mdb://")):
+            db_basedir = _find_parent_db_basedir(parameters)
+            parameters[key] = resolve_db_path(value, db_basedir)
         elif isinstance(value, dict):
-            parameters[key] = resolve_reldb(value, db)
+            parameters[key] = resolve_parameter_paths(value)
         elif isinstance(value, list):
-            parameters[key] = [resolve_reldb(v, db) if isinstance(v, dict) else v for v in value]
+            parameters[key] = [resolve_parameter_paths(v, db_basedir) if isinstance(v, dict) else v for v in value]
 
     return ParameterSet(parameters) 
 
