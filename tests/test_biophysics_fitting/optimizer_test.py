@@ -16,30 +16,44 @@ from data_base.IO.LoaderDumper import pandas_to_pickle, to_cloudpickle
 
 from .context import DATA_DIR
 
+def get_Simulator(db_setup, step=False):
+    fixed_params = db_setup["get_fixed_params"](db_setup)
+    s = hay_default_setup.get_Simulator(pd.Series(fixed_params), step=step)
+    s.setup.cell_param_generator = get_template
+    s.setup.cell_param_modify_funs.append(("scale_apical", scale_apical))
+    # s.setup.cell_modify_funs.append(('scale_apical', param_to_kwargs(scale_apical)))
+    return s
+
+def get_Evaluator(db_setup, step=False):
+    return hay_default_setup.get_Evaluator(step=step)
+
+def get_Combiner(db_setup, step=False):
+    return hay_default_setup.get_Combiner(step=step)
+
+def get_template():
+    param = L5tt_parameter_setup.get_L5tt_template()
+    param.ApicalDendrite.mechanisms.range.SKv3_1 = scp.ParameterSet(
+        {
+            "slope": None,
+            "distance": "relative",
+            "gSKv3_1bar": None,
+            "offset": None,
+            "spatial": "linear",
+        }
+    )
+    param["cell_modify_functions"] = scp.ParameterSet(
+        {"scale_apical": {"scale": None}}
+    )
+    return param
+
+def scale_apical(cell_param, params):
+    assert len(params) == 1
+    cell_param.cell_modify_functions.scale_apical.scale = params["scale"]
+    return cell_param
+
 
 def set_up_db(step=False):
     """completely sets up a model data base in a temporary folder for opimization"""
-
-    def get_template():
-        param = L5tt_parameter_setup.get_L5tt_template()
-        param.ApicalDendrite.mechanisms.range.SKv3_1 = scp.ParameterSet(
-            {
-                "slope": None,
-                "distance": "relative",
-                "gSKv3_1bar": None,
-                "offset": None,
-                "spatial": "linear",
-            }
-        )
-        param["cell_modify_functions"] = scp.ParameterSet(
-            {"scale_apical": {"scale": None}}
-        )
-        return param
-
-    def scale_apical(cell_param, params):
-        assert len(params) == 1
-        cell_param.cell_modify_functions.scale_apical.scale = params["scale"]
-        return cell_param
 
     params = hay_default_setup.get_feasible_model_params().drop("x", axis=1)
     params.index = "ephys." + params.index
@@ -55,20 +69,6 @@ def set_up_db(step=False):
         pd.DataFrame({"min": 0.333, "max": 3}, index=["scale_apical.scale"])
     )
     params = params.sort_index()
-
-    def get_Simulator(db_setup, step=step):
-        fixed_params = db_setup["get_fixed_params"](db_setup)
-        s = hay_default_setup.get_Simulator(pd.Series(fixed_params), step=step)
-        s.setup.cell_param_generator = get_template
-        s.setup.cell_param_modify_funs.append(("scale_apical", scale_apical))
-        # s.setup.cell_modify_funs.append(('scale_apical', param_to_kwargs(scale_apical)))
-        return s
-
-    def get_Evaluator(db_setup, step=step):
-        return hay_default_setup.get_Evaluator(step=step)
-
-    def get_Combiner(db_setup, step=step):
-        return hay_default_setup.get_Combiner(step=step)
 
     tempdir = tempfile.mkdtemp()
     db = DataBase(tempdir)
