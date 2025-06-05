@@ -103,11 +103,11 @@ def resolve_parameter_paths(parameters, params_fn):
             db_basedir = _find_parent_db_basedir(params_fn)
             if db_basedir is None:
                 raise ValueError(f"Cannot resolve relative path '{value}', could not find the parent database of {parameters}.")
-            params_fn[key] = resolve_db_path(value, db_basedir)
+            parameters[key] = resolve_db_path(value, db_basedir)
         elif isinstance(value, dict):
-            params_fn[key] = resolve_parameter_paths(value, params_fn)
+            parameters[key] = resolve_parameter_paths(value, params_fn)
         elif isinstance(value, list):
-            params_fn[key] = [resolve_parameter_paths(v, params_fn) if isinstance(v, dict) else v for v in value]
+            parameters[key] = [resolve_parameter_paths(v, params_fn) if isinstance(v, dict) else v for v in value]
 
     return parameters
 
