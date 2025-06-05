@@ -39,7 +39,7 @@ def test_switch_db_backend(tmpdir):
             f"Wrong IO package imported. Expected 'data_base.model_data_base.IO', but got '{IO.__name__}'"
 
     finally:
-        _set_isf_use_mdb("0")
+        _set_isf_use_mdb(original_env_value)  # Restore the original environment variable value
        
 
 def _reload_modules():
