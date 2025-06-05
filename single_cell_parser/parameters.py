@@ -46,7 +46,7 @@ def build_parameters(filename):
         :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.ParameterSet` object.
     """
     data = _read_params_to_dict(filename)
-    data = resolve_parameter_paths(data)
+    data = resolve_parameter_paths(data, filename)
     return ParameterSet(data)
 
 
@@ -79,7 +79,7 @@ def load_NMODL_parameters(parameters):
         pass
 
 
-def resolve_parameter_paths(params_fn):
+def resolve_parameter_paths(parameters, params_fn):
     """Resolve relative database paths in the parameters.
 
     Args:
@@ -98,7 +98,6 @@ def resolve_parameter_paths(params_fn):
             except FileNotFoundError: return None
         return fn
 
-    parameters = _read_params_to_dict(params_fn)
     for key, value in parameters.items():
         if isinstance(value, str) and (value.startswith("reldb://") or value.startswith("mdb://")):
             db_basedir = _find_parent_db_basedir(params_fn)
