@@ -147,7 +147,7 @@ def map_singlecell_inputs(
     InhPSTDensityName=InhPSTDensityName,
     boutonDensityFolderName=boutonDensityFolderName,
 ):
-    """Map inputs to a single cell morphology.
+    r"""Map inputs to a single cell morphology.
 
     These inputs need to be organized per anatomical structure. Anatomical structures
     can be arbitrary spatial regions of the brain tissue, or anatomically well-defined

@@ -122,7 +122,7 @@ def simtrial_to_cell_object(
     additional_network_params = [],
     tStop = 345
     ):
-    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    r"""Recreate and resimulate a single simulation trial from parameter files and return the cell object.
     
     This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
     before resimulating the trial. The network and neuron parameter modify functions should take the
@@ -205,7 +205,7 @@ def trial_to_cell_object(
     synapse_activation_modify_functions = [],
     additional_network_params = []  # TODO: unused
     ):
-    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    r"""Recreate and resimulate a single simulation trial from parameter files and return the cell object.
     
     This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
     before resimulating the trial. The network and neuron parameter modify functions should take the

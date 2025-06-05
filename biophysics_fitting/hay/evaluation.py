@@ -117,7 +117,7 @@ def nan_if_error(fun):
 
 
 class BAC:
-    """Evaluate the :math:`BAC` stimulus protocol.
+    r"""Evaluate the :math:`BAC` stimulus protocol.
 
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
@@ -168,7 +168,7 @@ class BAC:
         prefix="",
         definitions=HAY_BAC_DEFINITIONS,
     ):
-        """
+        r"""
         Args:
             hot_zone_thresh (float): The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
             soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
@@ -450,7 +450,7 @@ class BAC:
 
 
 class bAP:
-    """Evaluate the :math:`bAP` stimulus protocol.
+    r"""Evaluate the :math:`bAP` stimulus protocol.
 
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
@@ -491,7 +491,7 @@ class bAP:
         punish_returning_to_rest_tolerance=2.0,
         definitions=HAY_BAP_DEFINITIONS,
     ):
-        """
+        r"""
         Args:
             soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
             stim_onset (float): The onset of the stimulus (:math:`ms`). Defaults to :math:`295\ ms`.
@@ -714,7 +714,7 @@ class bAP:
 
 
 class _Step:
-    """Template class for evaluating step current injections.
+    r"""Template class for evaluating step current injections.
 
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
@@ -750,7 +750,7 @@ class _Step:
         name="StepTemplate",
         step_index=0,
     ):
-        """
+        r"""
         Args:
             soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
             stim_onset (float): The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.

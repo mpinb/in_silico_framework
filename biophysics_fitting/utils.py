@@ -237,7 +237,7 @@ def vmMax(cell):
 
 
 def _get_apical_sec_and_i_at_distance(cell, dist):
-    """Get the apical section and segment at a certain distance from the soma.
+    r"""Get the apical section and segment at a certain distance from the soma.
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -258,7 +258,7 @@ def _get_apical_sec_and_i_at_distance(cell, dist):
 
 
 def vmApical(cell, dist=None):
-    """Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
+    r"""Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
     
     Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
@@ -285,7 +285,7 @@ def vmApical(cell, dist=None):
 
 
 def vmApical_position(cell, dist=None):
-    """Fetch the exact location on the apical dendrite at a certain distance from the soma.
+    r"""Fetch the exact location on the apical dendrite at a certain distance from the soma.
     
     Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     

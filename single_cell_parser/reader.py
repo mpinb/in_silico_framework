@@ -38,7 +38,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class _Edge(object):
-    '''Convenience class for NEURON segments.
+    r'''Convenience class for NEURON segments.
 
     Private class used in :py:meth:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
     These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
