@@ -2,7 +2,7 @@
 """
 
 from collections.abc import MutableMapping
-import json, re, neuron
+import json, re, neuron, os
 from data_base.dbopen import dbopen, resolve_modular_db_path
 
 def _read_params_to_dict(filename):
@@ -45,6 +45,7 @@ def build_parameters(filename):
         :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.ParameterSet` object.
     """
     data = _read_params_to_dict(filename)
+    data = resolve_parameter_paths(data)
     return ParameterSet(data)
 
 
@@ -76,6 +77,32 @@ def load_NMODL_parameters(parameters):
     except AttributeError:
         pass
 
+
+def resolve_parameter_paths(parameters, db):
+    """Resolve relative database paths in the parameters.
+
+    Args:
+        parameters (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict):
+            The parameters to resolve.
+        db (str): The database path to resolve against.
+
+    Returns:
+        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameters with resolved paths.
+    """
+    if isinstance(parameters, ParameterSet):
+        parameters = parameters.to_dict()
+    elif not isinstance(parameters, dict):
+        raise TypeError("Expected ParameterSet or dict")
+
+    for key, value in parameters.items():
+        if isinstance(value, str) and value.startswith("reldb://"):
+            parameters[key] = os.path.join(db.basedir, value[8:])
+        elif isinstance(value, dict):
+            parameters[key] = resolve_reldb(value, db)
+        elif isinstance(value, list):
+            parameters[key] = [resolve_reldb(v, db) if isinstance(v, dict) else v for v in value]
+
+    return ParameterSet(parameters) 
 
 class ParameterSet(MutableMapping):
     def __init__(self, data=None):
