@@ -79,12 +79,11 @@ def load_NMODL_parameters(parameters):
         pass
 
 
-def resolve_parameter_paths(parameters):
+def resolve_parameter_paths(params_fn):
     """Resolve relative database paths in the parameters.
 
     Args:
-        parameters (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict):
-            The parameters to resolve.
+        params_fn (str): The path to the parameters file.
         db (str): The database path to resolve against.
 
     Returns:
@@ -99,21 +98,19 @@ def resolve_parameter_paths(parameters):
             except FileNotFoundError: return None
         return fn
 
-    if isinstance(parameters, ParameterSet):
-        parameters = parameters.to_dict()
-    elif not isinstance(parameters, dict):
-        raise TypeError("Expected ParameterSet or dict")
-    
+    parameters = _read_params_to_dict(params_fn)
     for key, value in parameters.items():
         if isinstance(value, str) and (value.startswith("reldb://") or value.startswith("mdb://")):
-            db_basedir = _find_parent_db_basedir(parameters)
-            parameters[key] = resolve_db_path(value, db_basedir)
+            db_basedir = _find_parent_db_basedir(params_fn)
+            if db_basedir is None:
+                raise ValueError(f"Cannot resolve relative path '{value}', could not find the parent database of {parameters}.")
+            params_fn[key] = resolve_db_path(value, db_basedir)
         elif isinstance(value, dict):
-            parameters[key] = resolve_parameter_paths(value)
+            params_fn[key] = resolve_parameter_paths(value)
         elif isinstance(value, list):
-            parameters[key] = [resolve_parameter_paths(v, db_basedir) if isinstance(v, dict) else v for v in value]
+            params_fn[key] = [resolve_parameter_paths(v, db_basedir) if isinstance(v, dict) else v for v in value]
 
-    return ParameterSet(parameters) 
+    return parameters
 
 class ParameterSet(MutableMapping):
     def __init__(self, data=None):
