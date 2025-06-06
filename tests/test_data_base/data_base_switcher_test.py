@@ -23,7 +23,7 @@ def test_switch_db_backend(tmpdir):
     try:
         _set_isf_use_mdb("0")  # Set to "0" (use ISF Data Base)
         assert config.isf_is_using_mdb() == False, "Expected ISF_USE_MDB to be False"
-        db = data_base.DataBase(tmp_db_path)
+        db = data_base.ISFDataBase(tmp_db_path)
         assert isinstance(db, data_base.isf_data_base.ISFDataBase), "Database is not of type ISFDataBase"
         from data_base import IO
         assert IO.__name__.startswith("data_base.isf_data_base.IO"), \
@@ -32,7 +32,7 @@ def test_switch_db_backend(tmpdir):
         # Test with ISF_USE_MDB set to "1" (use Model Data Base)
         _set_isf_use_mdb("1")
         assert config.isf_is_using_mdb() == True, "Expected ISF_USE_MDB to be True"
-        db = data_base.DataBase(tmp_mdb_path)
+        db = data_base.ISFDataBase(tmp_mdb_path)
         assert isinstance(db, data_base.model_data_base.ModelDataBase), "Database is not of type ModelDataBase"
         from data_base import IO
         assert IO.__name__.startswith("data_base.model_data_base.IO"), \

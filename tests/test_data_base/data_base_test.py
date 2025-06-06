@@ -1,4 +1,4 @@
-from data_base.data_base import DataBase
+from data_base import ISFDataBase
 from data_base.exceptions import DataBaseException, ModelDataBaseException
 from data_base._version import get_versions
 from data_base.IO.LoaderDumper import to_pickle, get_dumper_string_by_dumper_module
@@ -14,7 +14,7 @@ def test_unique_id_is_set_on_initialization(empty_db):
 
 def test_unique_id_stays_the_same_on_reload(empty_db):
     db1 = empty_db
-    db2 = DataBase(empty_db.basedir)
+    db2 = ISFDataBase(empty_db.basedir)
     assert db1._unique_id == db2._unique_id
 
 
@@ -22,7 +22,7 @@ def test_new_unique_id_is_generated_if_it_is_not_set_yet(empty_db):
     empty_db._unique_id = None
     empty_db.save_db_state()
     assert empty_db._unique_id is None
-    db = DataBase(empty_db.basedir)
+    db = ISFDataBase(empty_db.basedir)
     assert db._unique_id is not None
 
 
@@ -91,7 +91,7 @@ def test_metadata_update(empty_db):
     assert empty_db.metadata['test2']['dumper'] == 'unknown'
 
     #after initialization, the metdata is rebuild
-    db = DataBase(empty_db.basedir)
+    db = ISFDataBase(empty_db.basedir)
     assert db.metadata['test']['version'], "unknown"
     assert db.metadata['test2']['version'] == "unknown"
     assert db.metadata['test']['dumper'] == 'to_cloudpickle'
@@ -108,17 +108,17 @@ def test_check_working_dir_clean_for_build_works_correctly():
     with open(os.path.join(testpath, 'somefile'), 'w'):
         pass
     with pytest.raises(DataBaseException):
-        DataBase(testpath)
+        ISFDataBase(testpath)
 
     #can create database if folder can be created but does not exist
     shutil.rmtree(testpath)
-    DataBase(testpath)
+    ISFDataBase(testpath)
 
     #cannot create database if subfolder is in folder
     shutil.rmtree(testpath)
     os.makedirs(os.path.join(testpath, 'somefolder'))
     with pytest.raises(Exception):
-        DataBase(testpath)
+        ISFDataBase(testpath)
 
     #tidy up
     shutil.rmtree(testpath)
@@ -138,8 +138,8 @@ def test_db_does_not_permit_writes_if_readonly(empty_db):
 def test_db_will_not_be_created_if_nocreate(empty_db):
     testpath = tempfile.mkdtemp()
     with pytest.raises(DataBaseException) as exc_info:
-        DataBase(testpath, nocreate=True)
-    DataBase(empty_db.basedir, nocreate=True)
+        ISFDataBase(testpath, nocreate=True)
+    ISFDataBase(empty_db.basedir, nocreate=True)
     shutil.rmtree(testpath)
 
 

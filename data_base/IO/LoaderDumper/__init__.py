@@ -33,12 +33,12 @@ This file contains the specification of a ``Loader`` object,
 which can then be initialized and contains all the mechanisms to load the object back into memory.
 '''
 
-import os, compatibility, json, importlib
+import os, json, importlib
 from .utils import read_object_meta
 from data_base.exceptions import DataBaseException
 
 
-def resolve_loader_path(loader_path):
+def resolve_loader_dumper_path(loader_path):
     """Resolve a loader path to an absolute path.
     
     This is used to import the loader module from the relative path.
@@ -52,7 +52,7 @@ def resolve_loader_path(loader_path):
     dumper = loader_path.split('.')
     relative_path = dumper[-3:]  # e.g. IO.LoaderDumper.dask_to_msgpack
     orig_prefix = dumper[:-3]  # e.g. data_base.isf_data_base, model_data_base etc.
-    remounted_dumper_module_name = ".".join(__name__, relative_path[-1])
+    remounted_dumper_module_name = ".".join([__name__, relative_path[-1]])
     return remounted_dumper_module_name
 
 
@@ -82,7 +82,7 @@ def load(savedir, load_data=True, loader_kwargs={}):
     if os.path.exists(os.path.join(savedir, 'object_meta.json')):
         loader_init_kwargs['meta'] = read_object_meta(savedir)
     
-    loader = resolve_loader_path(loader)
+    loader = resolve_loader_dumper_path(loader)
     myloader = importlib.import_module(loader).Loader(**loader_init_kwargs)
 
     if load_data:
@@ -156,7 +156,6 @@ def get_dumper_string_by_savedir(savedir):
     loader_kwargs = json.load(open(os.path.join(savedir, 'Loader.json')))
     loader_module = loader_kwargs['Loader']
     del loader_kwargs['Loader']
-    dumper_module = importlib.import_module(loader_module)
+    dumper_module = importlib.import_module(resolve_loader_dumper_path(loader_module))
     
     return get_dumper_string_by_dumper_module(dumper_module)
-

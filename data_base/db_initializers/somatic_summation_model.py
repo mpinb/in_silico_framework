@@ -173,7 +173,7 @@ def get_db_loader_dict(db, descriptor=None, PSPClass_name=None):
     Returns:
         dict: A dictionary that maps from the keys of the PSPs to the loader functions.
     """
-    from data_base.isf_data_base.IO.LoaderDumper import load
+    from data_base.IO.LoaderDumper import load
     import six
     keys = [
         k for k in list(db['PSPs'].keys())

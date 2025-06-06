@@ -1,7 +1,7 @@
 import os, shutil, pytest, tempfile
 from data_base.db_initializers.load_simrun_general import init
 from data_base.utils import silence_stdout
-from data_base.data_base import DataBase
+from data_base import ISFDataBase
 from tests.context import TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER
 
 @pytest.fixture
@@ -23,7 +23,7 @@ def fresh_db(worker_id):
     """
     # unique temp path
     path = tempfile.mkdtemp(prefix=worker_id)
-    db = DataBase(path)
+    db = ISFDataBase(path)
     #self.db.settings.show_computation_progress = False
 
     with silence_stdout:
@@ -49,7 +49,7 @@ def empty_db(worker_id):
     """
     # unique temp path
     path = tempfile.mkdtemp(prefix=worker_id)
-    db = DataBase(path)
+    db = ISFDataBase(path)
 
     yield db
     # cleanup

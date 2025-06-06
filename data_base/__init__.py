@@ -56,7 +56,8 @@ Example:
         }
 """
 import os
-from .data_base import DataBase
+from .isf_data_base import ISFDataBase
+from . import data_base_register
 
 
 def _is_legacy_model_data_base(path):
@@ -159,7 +160,7 @@ def get_isfdb_by_unique_id(unique_id):
         :py:class:`~data_base.isf-data_base.ISFDataBase`: The database with the unique ID.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
-    db = DataBase(db_path, nocreate=True)
+    db = ISFDataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id
     return db
 
@@ -175,7 +176,7 @@ def get_db_by_unique_id(unique_id):
     Returns:
         :py:class:`data_base.data_base.DataBase`: The database associated with the :paramref:`unique_id`.
     """
-    db_path = _get_db_register().registry[unique_id]
-    db = DataBase(db_path, nocreate=True)
+    db_path = data_base_register._get_db_register().registry[unique_id]
+    db = ISFDataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db

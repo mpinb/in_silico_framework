@@ -20,10 +20,9 @@ The main purpose of this module is to provide the :py:class:`~data_base.isf_data
 """
 
 
-import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno, six
+import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno
 from pathlib import Path
 from data_base import _module_versions, data_base_register
-from .data_base_register import _get_db_register
 import data_base.exceptions as db_exceptions
 from data_base.utils import colorize_str
 VC = _module_versions.version_cached
@@ -62,6 +61,7 @@ class LoaderWrapper:
     '''
     def __init__(self, relpath):
         self.relpath = relpath
+
 
 class MetadataAccessor:
     """Access the metadata of some database key.
@@ -183,7 +183,8 @@ def get_dumper_from_folder(folder, return_ = 'module'):
     elif return_ == 'module':
         return importlib.import_module("data_base.IO.LoaderDumper.{}".format(dumper_string))
 
-class DataBase:
+
+class ISFDataBase:
     '''Main database class.
     
     Saved elements can be written and accessed using dictionary syntax::
@@ -258,18 +259,17 @@ class DataBase:
         """
         self.basedir = os.path.abspath(str(basedir))  # for public access: str. This is not a Path object for backwards compatibility.
         self._basedir = Path(self.basedir)  # for internal operations
+        self._check_is_legacy_mdb()
+
+        self.parent_db = None
         self.readonly = readonly
         self.nocreate = nocreate
-        self.parent_db = None
-        self._suppress_errors = suppress_errors
 
-        # database state
+        self._suppress_errors = suppress_errors
         self._db_state_fn = "db_state.json"
         self._unique_id = None
         self._registeredDumpers = []
         self._registered_to_path = None
-        self._is_legacy = False  # if loading in legacy ModelDataBase
-
         self._forbidden_keys = [
             "dbcore.pickle", "metadata.db", "sqlitedict.db", "Loader.pickle",  # for backwards compatibility
             "metadata.db.lock", "sqlitedict.db.lock",  # for backwards compatibility
@@ -297,6 +297,12 @@ class DataBase:
                 self.save_db_state()
             self._infer_missing_metadata()  # In case some is missing
 
+    def _check_is_legacy_mdb(self):
+        if Path.exists(self._basedir/'dbcore.pickle'):
+            raise db_exceptions.DataBaseException(
+                "You are reading a legacy ModelDataBase using ISFDataBase. Please use the wrapper class data_base.Database, which automatically returns the correct database class."
+            )
+        
     def _infer_missing_metadata(self):
         '''Checks whether metadata is missing, and tries to estimate it.
         
@@ -367,16 +373,7 @@ class DataBase:
         Returns:
             bool: True if the database is initialized, False otherwise.
         """
-        if Path.exists(self._basedir/'dbcore.pickle'):
-            self._is_legacy = True
         if Path.exists(self._basedir/'db_state.json'):
-            # ISFDataBase (potentially converted legacy ModelDataBase)
-            return True
-        elif Path.exists(self._basedir/'dbcore.pickle'):
-            # Just a legacy. No .json file.
-            logger.error("You are reading a legacy ModelDataBase using ISFDataBase. Please use the wrapper class data_base.Database, which automatically returns the correct database class.")
-            raise
-            self._db_state_fn = 'dbcore.pickle'
             return True
         else:
             return False
@@ -414,12 +411,18 @@ class DataBase:
         
         Returns:
             pathlib.Path: The file path corresponding to the key.    
+
+        Example::
+        
+            >>> key = ('my', 'nested', 'key')
+            >>> db._convert_key_to_path(key)
+            PosixPath('/path/to/database/db/my/db/nested/db/key')
         """
         self._check_key_format(key)
         if isinstance(key, str):
             return self._basedir/key
         elif isinstance(key, tuple):
-            sub_db_path = ['db' if not self._is_legacy else 'mdb'] * (len(key) * 2 - 1)
+            sub_db_path = ['db'] * (len(key) * 2 - 1)
             sub_db_path[0::2] = key
             return Path(self._basedir, *sub_db_path)
         else:
@@ -627,7 +630,7 @@ class DataBase:
                     if dumper_string == 'self':
                         dumper_string = DEFAULT_DUMPER
                     else:
-                        dumper = importlib.import_module(dumper_string)
+                        dumper = importlib.import_module(resolve_loader_dumper_path(dumper_string))
                     self._registeredDumpers.append(dumper)
             else:
                 setattr(self, name, state[name])
@@ -750,9 +753,6 @@ class DataBase:
         Returns:
             object: The object saved under ``db[key]``
         """
-        # this looks into the metadata.json, gets the name of the dumper, and loads this module form IO.LoaderDumper
-        if self._is_legacy:
-            key = self._find_legacy_key(key)
         key = self._convert_key_to_path(key)
         if not Path.exists(key):
             raise KeyError("Key {} not found in keys of db. Keys found: {}".format(key.name, self.keys()))
@@ -1108,7 +1108,7 @@ class DataBase:
 
 
 from .IO import LoaderDumper
-from .IO.LoaderDumper import just_create_folder, just_create_isf_db, shared_numpy_store, get_dumper_string_by_savedir, get_dumper_string_by_dumper_module
+from .IO.LoaderDumper import just_create_folder, just_create_isf_db, shared_numpy_store, get_dumper_string_by_savedir, get_dumper_string_by_dumper_module, resolve_loader_dumper_path
 from data_base.utils import calc_recursive_filetree, rename_for_deletion, delete_in_background, is_db, bcolors
 from compatibility import pandas_unpickle_fun
 from .settings import DEFAULT_DUMPER
