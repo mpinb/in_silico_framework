@@ -57,4 +57,4 @@ def dump(obj, savedir):
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:
         json.dump({'Loader': __name__}, f)
 
-from data_base.isf_data_base.isf_data_base import ISFDataBase
+from data_base.isf_data_base import ISFDataBase

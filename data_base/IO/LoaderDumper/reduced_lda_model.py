@@ -48,7 +48,7 @@ The output is a database with the following keys:
 from . import parent_classes
 import os, cloudpickle
 from simrun.reduced_model.get_kernel import ReducedLdaModel
-from data_base.data_base import DataBase, get_db_by_unique_id
+from data_base import ISFDataBase, get_db_by_unique_id
 from . import pandas_to_parquet
 from . import numpy_to_zarr
 import pandas as pd
@@ -79,7 +79,7 @@ class Loader(parent_classes.Loader):
     """Loader for :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects"""
     def get(self, savedir):
         """Load the reduced model from the specified folder"""
-        db = DataBase(savedir)
+        db = ISFDataBase(savedir)
         Rm = db['Rm']
         Rm.st = db['st']
         lv = 0
@@ -108,7 +108,7 @@ def dump(obj, savedir):
         obj (:py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`): Reduced model to be saved.
         savedir (str): Directory where the reduced model should be stored.
     """
-    db = DataBase(savedir)
+    db = ISFDataBase(savedir)
     Rm = obj
     # keep references of original objects
     try:  # some older versions do not have this attribute

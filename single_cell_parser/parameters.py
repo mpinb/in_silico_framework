@@ -4,7 +4,7 @@
 from collections.abc import MutableMapping
 import json, re, neuron, os
 from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
-from data_base.data_base import is_data_base
+from data_base import is_data_base
 
 def _read_params_to_dict(filename):
     filename = resolve_modular_db_path(filename)

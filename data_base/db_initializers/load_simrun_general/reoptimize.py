@@ -6,9 +6,9 @@ For example, in the past we have switched from `msgpack` to `parquet`, and back 
 So all databases optimized with `parquet` could now in principle be re-optimized with `msgpack`.
 """
 
-from data_base.data_base import is_sub_data_base
+from data_base import is_sub_data_base
 from data_base.exceptions import DataBaseException
-from data_base.data_base import _is_legacy_model_data_base
+from data_base import _is_legacy_model_data_base
 from .utils import _get_dumper
 import importlib
 import shutil, os, random
@@ -146,8 +146,6 @@ def reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warn
                 is_categorizable = key in ("cell_activation", "synapse_activation")
                 new_dumper = _get_dumper(db[key], categorized=is_categorizable)
                 old_dumper_name = db.metadata[key]['dumper']
-                if _is_legacy_model_data_base(db.basedir):
-                    new_dumper = importlib.import_module(new_dumper.__name__.replace("isf_data_base", "model_data_base"))
                 
                 if not _check_needs_reoptimization(key, old_dumper_name, new_dumper.__name__):
                     logger.debug("Skipping `{}` because it does not need re-optimization".format(key))

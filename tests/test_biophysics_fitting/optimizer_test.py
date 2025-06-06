@@ -11,7 +11,7 @@ from biophysics_fitting import L5tt_parameter_setup
 from biophysics_fitting.hay import default_setup as hay_default_setup
 from biophysics_fitting.optimizer import get_max_generation, start_run
 from data_base import utils
-from data_base.data_base import DataBase
+from data_base import ISFDataBase
 from data_base.IO.LoaderDumper import pandas_to_pickle, to_cloudpickle
 
 from .context import DATA_DIR
@@ -71,7 +71,7 @@ def set_up_db(step=False):
         return hay_default_setup.get_Combiner(step=step)
 
     tempdir = tempfile.mkdtemp()
-    db = DataBase(tempdir)
+    db = ISFDataBase(tempdir)
     db.create_sub_db("86")
 
     db["86"].create_managed_folder("morphology")

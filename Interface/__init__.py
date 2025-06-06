@@ -121,9 +121,7 @@ if not 'ISF_MINIMIZE_IO' in os.environ and not _is_running_on_dask_worker():
         logger.info("Current pid: {pid}".format(pid = os.getpid()))
 
 import data_base
-from data_base.data_base import DataBase
-from data_base.model_data_base.model_data_base import ModelDataBase
-#from model_data_base.analyze.burst_detection import burst_detection
+from data_base import ISFDataBase
 from data_base.analyze.LDA import lda_prediction_rates as lda_prediction_rates
 from data_base.analyze.temporal_binning import universal as temporal_binning
 
@@ -175,7 +173,7 @@ from data_base.utils import select, pandas_to_array, pooled_std
 from data_base.utils import skit, chunkIt
 from data_base.utils import cache
 from data_base import utils
-from data_base.data_base import get_db_by_unique_id
+from data_base import get_db_by_unique_id
 from data_base.data_base_register import assimilate_remote_register
 from data_base.dbopen import resolve_db_path, create_modular_db_path
 
