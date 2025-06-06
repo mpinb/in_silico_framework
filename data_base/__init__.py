@@ -55,5 +55,127 @@ Example:
             "error": null
         }
 """
-# Bring wrapper class to the front
+import os
 from .data_base import DataBase
+
+
+def _is_legacy_model_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+    """
+    return os.path.exists(os.path.join(path, 'sqlitedict.db'))
+
+
+def is_isf_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+    """
+    return os.path.exists(os.path.join(path, 'db_state.json'))
+
+
+def is_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.data_base.DataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.data_base.DataBase`.
+    """
+    return _is_legacy_model_data_base(path) or is_isf_data_base(path)
+
+
+def is_sub_isf_data_base(parent_db, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+    """
+    sub_db_key_path = parent_db._convert_key_to_path(key)
+    sub_db_path = os.path.join(sub_db_key_path, "db")
+    return os.path.exists(sub_db_path) and is_data_base(sub_db_path)
+
+    
+def is_sub_model_data_base(parent_mdb, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+    """
+    sub_db_key_path = parent_mdb._get_path(key)
+    sub_mdb_path = os.path.join(sub_db_key_path, "mdb")
+    return os.path.exists(sub_mdb_path) and is_data_base(sub_mdb_path)
+
+
+def is_sub_data_base(parent_db, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+    """
+    if _is_legacy_model_data_base(parent_db.basedir):
+        return is_sub_model_data_base(parent_db, key)
+    elif is_isf_data_base(parent_db.basedir):
+        return is_sub_isf_data_base(parent_db, key)
+    else:
+        raise ValueError("Unknown database type. Cannot determine if the key is a sub-database.")
+
+
+def get_isfdb_by_unique_id(unique_id):
+    """Get an :py:class:`~data_base.isf_data_base.ISFDataBase` object by its unique ID.
+    
+    Args:
+        unique_id (str): The unique ID of the database.
+        
+    Returns:
+        :py:class:`~data_base.isf-data_base.ISFDataBase`: The database with the unique ID.
+    """
+    db_path = data_base_register._get_db_register().registry[unique_id]
+    db = DataBase(db_path, nocreate=True)
+    assert db.get_id() == unique_id
+    return db
+
+
+def get_db_by_unique_id(unique_id):
+    """Get a DataBase by its unique ID, as registered in the data base register.
+    
+    Data base registers should be located at data_base/.data_base_register.db
+    
+    Args:
+        unique_id (str): The data base's unique identifier
+        
+    Returns:
+        :py:class:`data_base.data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+    """
+    db_path = _get_db_register().registry[unique_id]
+    db = DataBase(db_path, nocreate=True)
+    assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
+    return db

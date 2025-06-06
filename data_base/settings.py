@@ -17,7 +17,8 @@
 '''Base settings of the data base'''
 #from __future__ import absolute_import
 #import dask, dask.multiprocessing
-import os  ##
+import os
+from .IO.LoaderDumper import to_cloudpickle
 
 # dask schedulers
 #from .compatibility import synchronous_scheduler
@@ -29,3 +30,4 @@ import os  ##
 
 # data_base_register
 data_base_register_path = os.path.dirname(__file__)
+DEFAULT_DUMPER = to_cloudpickle

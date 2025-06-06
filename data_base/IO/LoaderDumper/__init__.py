@@ -33,15 +33,27 @@ This file contains the specification of a ``Loader`` object,
 which can then be initialized and contains all the mechanisms to load the object back into memory.
 '''
 
-import os
-# import cloudpickle
-import compatibility, json, yaml
+import os, compatibility, json, importlib
 from .utils import read_object_meta
 from data_base.exceptions import DataBaseException
-from inspect import getmodule
-import importlib
-import pandas as pd
-import numpy as np
+
+
+def resolve_loader_path(loader_path):
+    """Resolve a loader path to an absolute path.
+    
+    This is used to import the loader module from the relative path.
+    
+    Args:
+        loader_path (str): The relative path to the loader module.
+        
+    Returns:
+        str: The absolute path to the loader module.
+    """
+    dumper = loader_path.split('.')
+    relative_path = dumper[-3:]  # e.g. IO.LoaderDumper.dask_to_msgpack
+    orig_prefix = dumper[:-3]  # e.g. data_base.isf_data_base, model_data_base etc.
+    remounted_dumper_module_name = ".".join(__name__, relative_path[-1])
+    return remounted_dumper_module_name
 
 
 def load(savedir, load_data=True, loader_kwargs={}):
@@ -59,20 +71,20 @@ def load(savedir, load_data=True, loader_kwargs={}):
         object: The loaded object: either the data, or the ``Loader`` object.
     
     '''
-    #     with open(os.path.join(savedir, 'Loader.pickle'), 'rb') as file_:
-    #         myloader = cloudpickle.load(file_, encoding = 'latin1')
     if os.path.exists(os.path.join(savedir, 'Loader.pickle')):
-        raise DataBaseException("You're loading a .pickle file, which is the format used by data_base.model_data_base. However, I am the load() method from data_base.isf_data_base, not data_base.model_data_base.")
-        myloader = compatibility.pandas_unpickle_fun(
-            os.path.join(savedir, 'Loader.pickle'))
-    else:
-        with open(os.path.join(savedir, 'Loader.json'), 'r') as f:
-            loader_init_kwargs = json.load(f)
-        loader = loader_init_kwargs['Loader']
-        del loader_init_kwargs['Loader']
-        if os.path.exists(os.path.join(savedir, 'object_meta.json')):
-            loader_init_kwargs['meta'] = read_object_meta(savedir)
-        myloader = importlib.import_module(loader).Loader(**loader_init_kwargs)
+        raise DataBaseException("You're loading a .pickle file, which is the format used by model_data_base. However, I am the load() method from data_base, not model_data_base.")
+        # myloader = compatibility.pandas_unpickle_fun(os.path.join(savedir, 'Loader.pickle'))
+
+    with open(os.path.join(savedir, 'Loader.json'), 'r') as f:
+        loader_init_kwargs = json.load(f)
+    loader = loader_init_kwargs['Loader']
+    del loader_init_kwargs['Loader']
+    if os.path.exists(os.path.join(savedir, 'object_meta.json')):
+        loader_init_kwargs['meta'] = read_object_meta(savedir)
+    
+    loader = resolve_loader_path(loader)
+    myloader = importlib.import_module(loader).Loader(**loader_init_kwargs)
+
     if load_data:
         return myloader.get(savedir, **loader_kwargs)
     else:
