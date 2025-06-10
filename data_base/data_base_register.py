@@ -109,7 +109,7 @@ class DataBaseRegister():
                     self.mdb['failed', dir_] = e
             else:
                 logger.warning(
-                    "Could not find a metadata.json or dbcore.pickle file in {}. Are you sure the path points to a directory containing at least one ModelDataBase or ISFDataBase?".format(dir_))
+                    "Could not find a metadata.json or dbcore.pickle file in {}. Are you sure the path points to a directory containing a DataBase?".format(dir_))
             
     def add_db(self, unique_id, db_basedir):
         """Add a database to the registry.
