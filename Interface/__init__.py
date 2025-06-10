@@ -65,7 +65,7 @@ import math
 
 ### logging setup
 import logging
-from config.isf_logging import logger, logger_stream_handler
+from config.isf_logging import logger
 
 try:
     from IPython import display
@@ -291,7 +291,8 @@ def get_client(ip=None, client_port=38786, timeout=120):
     c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got dask client {}".format(c))
     logger.debug("Making mechanisms visible on client side")
-    def update_path(): sys.path.insert(0, os.path.dirname(__file__))
+    local_pythonpath = os.environ.get('PYTHONPATH', '')
+    def update_path(): sys.path += local_pythonpath.split(":")
     def import_mechanisms(): import mechanisms
     def import_Interface(): import Interface
     c.run(update_path)
