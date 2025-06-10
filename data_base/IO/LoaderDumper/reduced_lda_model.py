@@ -46,13 +46,12 @@ The output is a database with the following keys:
 # Filesize: takes 14% of the space, to cloudpickle needs (7 x more space efficient)
 
 from . import parent_classes
-import os, cloudpickle
+import os
 from simrun.reduced_model.get_kernel import ReducedLdaModel
-from data_base import ISFDataBase, get_db_by_unique_id
+from data_base import DataBase
 from . import pandas_to_parquet
 from . import numpy_to_zarr
 import pandas as pd
-import compatibility
 import six
 import json
 
@@ -71,15 +70,14 @@ def check(obj):
     Returns:
         bool: Whether the object is a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
     """
-    return isinstance(
-        obj, ReducedLdaModel)  #basically everything can be saved with pickle
+    return isinstance(obj, ReducedLdaModel)
 
 
 class Loader(parent_classes.Loader):
     """Loader for :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects"""
     def get(self, savedir):
         """Load the reduced model from the specified folder"""
-        db = ISFDataBase(savedir)
+        db = DataBase(savedir)
         Rm = db['Rm']
         Rm.st = db['st']
         lv = 0
@@ -108,7 +106,7 @@ def dump(obj, savedir):
         obj (:py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`): Reduced model to be saved.
         savedir (str): Directory where the reduced model should be stored.
     """
-    db = ISFDataBase(savedir)
+    db = DataBase(savedir)
     Rm = obj
     # keep references of original objects
     try:  # some older versions do not have this attribute

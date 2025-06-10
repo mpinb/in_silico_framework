@@ -116,7 +116,7 @@ if not 'ISF_MINIMIZE_IO' in os.environ and not _is_running_on_dask_worker():
         logger.info("Current pid: {pid}".format(pid = os.getpid()))
 
 import data_base
-from data_base import ISFDataBase as DataBase
+from data_base import DataBase
 from data_base.analyze.LDA import lda_prediction_rates as lda_prediction_rates
 from data_base.analyze.temporal_binning import universal as temporal_binning
 

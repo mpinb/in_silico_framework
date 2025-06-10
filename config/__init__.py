@@ -32,10 +32,10 @@ def _read_db_settings():
     with open(config_path, 'r') as f:
         return json.load(f)
 
-def isf_is_using_mdb():
-    """Check if ISF is configured to use :py:mod:`data_base.model_data_base`
+def isf_is_using_legacy_mdb():
+    """Check if ISF is configured to use :py:mod:`model_data_base`
     
-    The use of :py:mod:`data_base.model_data_base` is strongly discouraged, as the saved data is not robust under API changes.
+    The use of :py:mod:`model_data_base` is strongly discouraged, as the saved data is not robust under API changes.
     
     There are two reasons to use it anyways:
     
@@ -43,17 +43,20 @@ def isf_is_using_mdb():
     - Testing purposes
     
     Returns:
-        bool: whether or not ISF needs to use :py:mod:`data_base.model_data_base` as a database backend.
+        bool: whether or not ISF needs to use :py:mod:`model_data_base` as a database backend.
     """
     return os.getenv("ISF_USE_MDB", 'False').lower() in ('true', '1', 't')
 
     
 def get_default_db():
-    """Get the default database settings.
+    """Get the database class to be used by default throughout ISF.
 
     Returns:
         dict: The default database settings.
     """
+    if isf_is_using_legacy_mdb():
+        from model_data_base import ModelDataBase
+        return ModelDataBase
     db_settings = _read_db_settings()
     db_fqn = db_settings.get('DEFAULT_DATA_BASE')['FQN']
     module = '.'.join(db_fqn.rsplit('.')[:-1])

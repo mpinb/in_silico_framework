@@ -25,7 +25,7 @@ However, for development and testing purposes, it may be of use to explicitly op
 
 from __future__ import absolute_import
 import os
-from data_base import ISFDataBase
+from data_base import DataBase
 from data_base import get_db_by_unique_id, is_data_base
 from data_base.exceptions import DataBaseException
 import cloudpickle
@@ -208,7 +208,7 @@ def create_modular_db_path(path):
                 format(path))
     
     # Instantiate mother database
-    db = ISFDataBase(db_path, nocreate=True, readonly=True)
+    db = DataBase(db_path, nocreate=True, readonly=True)
 
     #print path
     path_minus_db_basedir = os.path.relpath(path, db._basedir)
