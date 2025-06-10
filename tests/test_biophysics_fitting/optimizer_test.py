@@ -215,12 +215,12 @@ def test_mini_optimization_run(capsys, client):
     run_id = "1"
 
     try:
-        start_run(db["86"], run_id, client=client, offspring_size=1, max_ngen=1)
+        start_run(db["86"], run_id, client=client, offspring_size=1, max_ngen=2)
         # accessing simulation results of run
         keys = [
             int(k) for k in list(db["86"]["1"].keys()) if utils.convertible_to_int(k)
         ]
-        assert max(keys) == 1
+        assert max(keys) == 2
 
         # if continue_cp is not set (defaults to False), an Exception is raised if the same
         # optimization is started again

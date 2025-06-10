@@ -166,8 +166,7 @@ def simtrial_to_cell_object(
         cellName = parameter_table.loc[sim_trial_index].hash_neuron
         cellName = os.path.join(db['parameterfiles_cell_folder'], cellName)
         networkName = parameter_table.loc[sim_trial_index].hash_network
-        networkName = os.path.join(db['parameterfiles_network_folder'],
-                                   networkName)
+        networkName = os.path.join(db['parameterfiles_network_folder'], networkName)
         sa = db['synapse_activation'].loc[sim_trial_index].compute()
         dummy =  trial_to_cell_object(
             cellName = cellName, \

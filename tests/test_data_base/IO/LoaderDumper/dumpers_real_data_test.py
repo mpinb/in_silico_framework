@@ -1,7 +1,5 @@
-import pytest
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 from data_base.IO.LoaderDumper import dask_to_msgpack, dask_to_categorized_msgpack
-import tempfile
 
 
 def robust_del_fun(db, key):

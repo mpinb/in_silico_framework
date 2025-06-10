@@ -3,11 +3,7 @@ import logging
 import os
 
 import dask
-try:
-    from scandir import walk
-except ImportError:
-    # Python 3.5+ has os.walk() built in
-    from os import walk
+from os import walk
 
 from data_base.IO.roberts_formats import _max_commas
 from data_base.utils import chunkIt

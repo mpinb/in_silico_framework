@@ -35,7 +35,6 @@ dask = "2.30.0.*"
 scikit-learn = "0.23.2.*"
 pypdf2 = ">=3.0.1,<4"
 mock = ">=5.1.0,<6"
-scandir = ">=1.10.0,<2"
 kazoo = ">=2.10.0,<3"
 scipy = "1.5.2.*"
 matplotlib = ">=3.3.2,<4"
@@ -150,6 +149,8 @@ cmd = [
   "--overwrite-param-files={{ overwrite_param_files }}",
 ]
 
+[tool.pixi.tasks.setup]
+depends-on = ["configure"]
 
 [tool.pixi.tasks.launch_dask_server]
 args = [

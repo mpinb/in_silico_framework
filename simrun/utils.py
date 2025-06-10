@@ -126,7 +126,6 @@ def load_param_file_if_path_is_provided(pathOrParam):
     Returns:
         :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter object.
     """
-    import single_cell_parser as scp
 
     if isinstance(pathOrParam, str):
         logger.debug(
