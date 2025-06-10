@@ -59,17 +59,11 @@ After initialization, you can access the data from the data_base in the followin
     <spike times dataframe>
     
 If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
-If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing relative links to the
-original ``.csv`` files. In essence, the dask dataframes contain the insturctions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis. It is not intended and strongly discouraged for long term storage. 
+If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
+This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
 Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
 :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
 keys.
-
-Attention:
-    Note that the database contains symlinks to the original simulation files. This is useful for fast intermediate analysis, but
-    for long-term storage, it happens that the original files are deleted, moved, or archived in favor of the optimized format. 
-    In this case, the symlinks will point to non-existent files.
 
 See also:
     :py:meth:`simrun.run_new_simulations._evoked_activity` for more information on the raw output format of :py:mod:`simrun`.
