@@ -19,8 +19,7 @@ This module deals with API changes in 3rd party modules, and ensures backwards c
 The following 3rd party modules are used: pandas, dask, distributed
 '''
 
-import six, yaml, cloudpickle, sys
-import logging
+import six, yaml, cloudpickle, sys, logging
 logger = logging.getLogger("ISF").getChild(__name__)
 from six.moves import cPickle
 if six.PY2:
