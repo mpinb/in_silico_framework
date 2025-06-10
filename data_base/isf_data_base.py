@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Database base for storing and retrieving data in a robust and efficient way.
+"""Database for robust and efficient data storage.
 
 The main purpose of this module is to provide the :py:class:`~data_base.isf_data_base.ISFDataBase` class.
 """
@@ -25,11 +25,13 @@ from pathlib import Path
 from data_base import _module_versions, data_base_register
 import data_base.exceptions as db_exceptions
 from data_base.utils import colorize_str
+from config import get_default_db_dumper
+DEFAULT_DUMPER = get_default_db_dumper()
 VC = _module_versions.version_cached
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
-__author__ = ['Arco Bast']
+__author__ = ['Arco Bast', 'Bjorge Meulemeester']
 __date__ = '2023-10-01'
 
 
@@ -1111,4 +1113,3 @@ from .IO import LoaderDumper
 from .IO.LoaderDumper import just_create_folder, just_create_isf_db, shared_numpy_store, get_dumper_string_by_savedir, get_dumper_string_by_dumper_module, resolve_loader_dumper_path
 from data_base.utils import calc_recursive_filetree, rename_for_deletion, delete_in_background, is_db, bcolors
 from compatibility import pandas_unpickle_fun
-from .settings import DEFAULT_DUMPER

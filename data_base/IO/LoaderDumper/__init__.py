@@ -24,8 +24,8 @@ This package provides IO modules that always contain three components:
 
 To save an object, the dump method is called::
 
-    >>> import myDumper
-    >>> myDumper.dump(obj, savedir)
+    >>> import my_dumper
+    >>> my_dumper.dump(obj, savedir)
  
 This saves the object as specified in the respective ``dump()`` method.
 In addition, a ``Loader.json`` is saved alongside the data. 

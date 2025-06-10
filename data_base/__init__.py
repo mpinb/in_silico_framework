@@ -31,7 +31,7 @@ Example:
 
     ``Loader`` contains information on how to load the data. It contains which module to use (assuming it contains a ``Loader`` class)::
     
-        {"Loader": "data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet"}
+        {"Loader": "data_base.IO.LoaderDumper.dask_to_parquet"}
         
     ``metadata`` contains the time, commit hash, module versions, creation date, file format, and whether or not the data was saved with uncommitted code (``dirty``).
     If the data was created within a Jupyter session, it also contains the code history that was used to produce this data::
@@ -56,8 +56,9 @@ Example:
         }
 """
 import os
-from .isf_data_base import ISFDataBase
 from . import data_base_register
+from config import get_default_db
+DataBase = get_default_db()
 
 
 def _is_legacy_model_data_base(path):
@@ -69,11 +70,13 @@ def _is_legacy_model_data_base(path):
         
     Returns:
         bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+
+    :skip-doc:
     """
     return os.path.exists(os.path.join(path, 'sqlitedict.db'))
 
 
-def is_isf_data_base(path):
+def _is_isf_data_base(path):
     """
     Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
     
@@ -82,6 +85,8 @@ def is_isf_data_base(path):
         
     Returns:
         bool: True if the path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+
+    :skip-doc:
     """
     return os.path.exists(os.path.join(path, 'db_state.json'))
 
@@ -96,10 +101,10 @@ def is_data_base(path):
     Returns:
         bool: True if the path contains a :py:class:`~data_base.data_base.DataBase`.
     """
-    return _is_legacy_model_data_base(path) or is_isf_data_base(path)
+    return _is_legacy_model_data_base(path) or _is_isf_data_base(path)
 
 
-def is_sub_isf_data_base(parent_db, key):
+def _is_sub_isf_data_base(parent_db, key):
     """
     Check if a given key is a sub-database of the parent database.
     
@@ -109,13 +114,15 @@ def is_sub_isf_data_base(parent_db, key):
     
     Returns:
         bool: True if the key is a sub-database of the parent database.
+
+    :skip-doc:
     """
     sub_db_key_path = parent_db._convert_key_to_path(key)
     sub_db_path = os.path.join(sub_db_key_path, "db")
     return os.path.exists(sub_db_path) and is_data_base(sub_db_path)
 
     
-def is_sub_model_data_base(parent_mdb, key):
+def _is_sub_model_data_base(parent_mdb, key):
     """
     Check if a given key is a sub-database of the parent database.
     
@@ -125,6 +132,8 @@ def is_sub_model_data_base(parent_mdb, key):
     
     Returns:
         bool: True if the key is a sub-database of the parent database.
+
+    :skip-doc:
     """
     sub_db_key_path = parent_mdb._get_path(key)
     sub_mdb_path = os.path.join(sub_db_key_path, "mdb")
@@ -143,26 +152,11 @@ def is_sub_data_base(parent_db, key):
         bool: True if the key is a sub-database of the parent database.
     """
     if _is_legacy_model_data_base(parent_db.basedir):
-        return is_sub_model_data_base(parent_db, key)
-    elif is_isf_data_base(parent_db.basedir):
-        return is_sub_isf_data_base(parent_db, key)
+        return _is_sub_model_data_base(parent_db, key)
+    elif _is_isf_data_base(parent_db.basedir):
+        return _is_sub_isf_data_base(parent_db, key)
     else:
         raise ValueError("Unknown database type. Cannot determine if the key is a sub-database.")
-
-
-def get_isfdb_by_unique_id(unique_id):
-    """Get an :py:class:`~data_base.isf_data_base.ISFDataBase` object by its unique ID.
-    
-    Args:
-        unique_id (str): The unique ID of the database.
-        
-    Returns:
-        :py:class:`~data_base.isf-data_base.ISFDataBase`: The database with the unique ID.
-    """
-    db_path = data_base_register._get_db_register().registry[unique_id]
-    db = ISFDataBase(db_path, nocreate=True)
-    assert db.get_id() == unique_id
-    return db
 
 
 def get_db_by_unique_id(unique_id):

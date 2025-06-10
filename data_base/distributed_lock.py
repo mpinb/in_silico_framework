@@ -63,8 +63,7 @@ Example::
 import yaml
 import os
 from compatibility import YamlLoader
-import logging
-isf_logger = logging.getLogger("ISF").getChild(__name__)
+from config.isf_logging import logger as isf_logger
 from config.file_locking import DEFAULT_CONFIG
 
 logger = isf_logger.getChild(__name__)
