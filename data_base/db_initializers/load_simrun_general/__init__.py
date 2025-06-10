@@ -66,7 +66,9 @@ Individual keys can afterwards be set to permanent, self-contained and efficient
 keys.
 
 See also:
-    :py:meth:`simrun.run_new_simulations._evoked_activity` for more information on the raw output format of :py:mod:`simrun`.
+    :py:meth:`simrun.run_new_simulations.run_new_simulations` for more information on the raw output format of :py:mod:`simrun`.
+
+See also:
     :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
 """
 
