@@ -394,7 +394,9 @@ def eaAlphaMuPlusLambdaCheckpoint(
     """
     # --- added by arco
     if db_run is not None:
-        assert db_run.__class__.__name__ in ("ModelDataBase", "ISFDataBase")  # db_run
+        from data_base import is_data_base
+        assert is_data_base(db_run.basedir)
+        # assert db_run.__class__.__name__ in ("ModelDataBase", "ISFDataBase")  # db_run
     assert halloffame is None
     # --- end added by arco
 
