@@ -3,7 +3,7 @@
 Installation
 ============
 
-ISF is available for Linux and macOS.
+ISF is available for Linux, macOS and Windows.
 
 For installation and environment management, ISF uses `pixi <https://pixi.sh/latest/>`_. 
 You can install ``pixi`` by running:
@@ -18,7 +18,16 @@ To install ISF with ``pixi``, simply:
 
    git clone https://github.com/mpinb/in_silico_framework.git --depth 1 &&
    cd in_silico_framework &&
-   pixi install
+   pixi run setup
+
+
+.. attention::
+
+   Windows support is still experimental.
+   If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
+   In case you encounter any issues, feel free to [open an issue](https://github.com/mpinb/in_silico_framework/issues) and include relevant logs.
+   Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies the necessity of a (Linux-based) High Performance Computing environment.
+   For such heavier use of ISF, we recommend getting comfortable with Linux, e.g. through the Windows Subsystem for Linux (WSL).
 
 
 Usage
@@ -47,15 +56,6 @@ Test ISF
 --------
 
 To test if all components of ISF are working as intended, you can run the test suite locally.
-To do so, you will need three shells in total: one for launching a dask server, one for launching dask workers, and one for running the test suite itself.
-
-.. code-block:: bash
-
-   pixi run launch_dask_server
-
-.. code-block:: bash
-
-   pixi run launch_dask_workers
 
 .. code-block:: bash
 
@@ -75,5 +75,4 @@ configured in the ``pyproject.toml`` file.
 
    pixi shell
 
-This can be useful for executing shell scripts within the ISF environment, configuring HPC job submissions, or simply interactive
-IPython sessions.
+This can be useful for executing shell scripts within the ISF environment, or configuring HPC job submissions.

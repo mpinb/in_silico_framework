@@ -1,0 +1,83 @@
+name: Windows
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
+      - .gitignore
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test pixi windows
+    runs-on: ['self-hosted', 'Windows']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install & setup environment
+        uses: prefix-dev/setup-pixi@v0.8.8
+        with:
+          pixi-version: v0.47.0
+          cache: true
+          auth-host: prefix.dev
+          auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
+          manifest-path: pyproject.toml
+          post-cleanup: true
+          pixi-bin-path: ${{ runner.temp }}\Scripts\pixi.exe
+
+      - name: Preliminary setup
+        shell: cmd
+        env:
+            NEURONHOME: C:\nrn
+        run: |
+          echo ------------ Preliminary setup for tests -------------
+          echo Creating tests\logs\ directory...
+          if exist tests\logs rmdir /s /q tests\logs
+          mkdir tests\logs
+
+          if not exist "%USERPROFILE%\tmp" mkdir "%USERPROFILE%\tmp"
+          set TMPDIR=%USERPROFILE%\tmp
+          
+          pixi r configure
+
+      - name: Test ISF
+        shell: cmd
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
+          MPLBACKEND: Agg
+          DASK_CONFIG: tests/dask_config.yml
+        run: |
+          echo ------------ printing env vars -------------
+          echo ISF_USE_MDB: %ISF_USE_MDB%
+          echo NEURONHOME: %NEURONHOME%
+          echo MPLBACKEND: %MPLBACKEND%
+
+          echo ------------ Running tests -------------
+          pixi r pytest -n 4 --dist worksteal -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
+
+      - name: Test ModelDataBase backwards compatibility
+        shell: cmd
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEURONHOME: C:\nrn
+          ISF_USE_MDB: 1
+          DASK_CONFIG: tests/dask_config.yml
+        run: |
+          pixi r pytest -n 4 -rsx -vv --color=yes --durations=0  tests\test_data_base
+
+      - name: Save test logs
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: ${{ github.run_id }}_logs
+          path: ./tests/logs/

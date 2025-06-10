@@ -1,5 +1,5 @@
 from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_roberts_format, write_pandas_synapse_activation_to_roberts_format
-from tests.test_data_base import test_data_folder
+from tests.test_data_base import TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER
 from pandas.util.testing import assert_frame_equal
 import os
 from config import isf_is_using_mdb
@@ -10,8 +10,7 @@ else:
 
 def test_saved_and_reloaded_synapse_file_is_identical(tmpdir):
     synapse_file_path = os.path.join(
-        test_data_folder, \
-        '20150815-1530_20240', \
+        TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER,
         'simulation_run0000_synapses.csv')
     assert os.path.exists(synapse_file_path)
     synapse_pdf = read_pandas_synapse_activation_from_roberts_format(\

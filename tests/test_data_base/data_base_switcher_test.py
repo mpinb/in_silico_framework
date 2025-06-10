@@ -16,7 +16,7 @@ def test_switch_db_backend(tmpdir):
     """
 
     # Save the original value of the environment variable
-    original_env_value = os.environ.get("ISF_USE_MDB")
+    original_env_value = os.environ.get("ISF_USE_MDB", "0")
     tmp_db_path = os.path.join(tmpdir, "test_db")
     tmp_mdb_path = os.path.join(tmpdir, "test_mdb")
 
@@ -39,11 +39,8 @@ def test_switch_db_backend(tmpdir):
             f"Wrong IO package imported. Expected 'data_base.model_data_base.IO', but got '{IO.__name__}'"
 
     finally:
-        # Restore the original value of the environment variable
-        if original_env_value is not None:
-            os.environ["ISF_USE_MDB"] = original_env_value
-        else:
-            del os.environ["ISF_USE_MDB"]
+        _set_isf_use_mdb(original_env_value)  # Restore the original environment variable value
+       
 
 def _reload_modules():
     """

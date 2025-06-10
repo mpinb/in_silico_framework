@@ -1,4 +1,4 @@
-load_file("nrngui.hoc")
+// load_file("nrngui.hoc")
 
 begintemplate NRN
   public soma

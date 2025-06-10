@@ -1,5 +1,5 @@
 import numpy as np
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 import dask 
 from config import isf_is_using_mdb
 from data_base.IO.LoaderDumper import (
@@ -16,7 +16,6 @@ from data_base.IO.LoaderDumper import (
     )
 from tests.test_simrun.reduced_model.get_kernel_test import get_test_Rm
 from numpy.testing import assert_array_equal
-from data_base.utils import df_colnames_to_str
 import pytest
 import six
 

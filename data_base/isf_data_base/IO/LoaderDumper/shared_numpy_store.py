@@ -33,14 +33,12 @@ import tempfile
 import shutil
 import compatibility
 import signal
-
-import tempfile
-import shutil
-import compatibility
-import signal
-
 import six
-if six.PY3:
+if not six.PY3:
+    logger.warning("multiprocessing.shared_memory can not be imported in Python 2 (available in >=Py3.8)")
+elif os.name != "posix":
+    logger.warning("multiprocessing.shared_memory can not be imported in non-POSIX systems. you are on %s", os.name)
+else:
     import _posixshmem
     import mmap
     _O_CREX = os.O_CREAT | os.O_EXCL
@@ -212,10 +210,7 @@ if six.PY3:
             #from .resource_tracker import unregister
             _posixshmem.shm_unlink(self._path)
             #unregister(self._name, "shared_memory")
-else:
-    logger.warning(
-        "multiprocessing.shared_memory can not be imported in Python 2 (available in >=Py3.8)"
-    )
+
 #from . import shared_memory_bugfixed as shared_memory
 
 
