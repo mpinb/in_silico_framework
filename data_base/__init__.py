@@ -172,6 +172,6 @@ def get_db_by_unique_id(unique_id):
         :py:class:`data_base.data_base.DataBase`: The database associated with the :paramref:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
-    db = ISFDataBase(db_path, nocreate=True)
+    db = DataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
