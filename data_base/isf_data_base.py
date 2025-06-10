@@ -38,7 +38,7 @@ __date__ = '2023-10-01'
 class LoaderWrapper:
     '''This is a pointer to data, which is stored elsewhere.
     
-    It is used by ModelDataBase, if data is stored in a subfolder of the 
+    It is used by ISFDataBase, if data is stored in a subfolder of the 
     data_base.basedir folder. It is not used, if the data is stored directly
     in the sqlite database.
     
@@ -340,8 +340,7 @@ class ISFDataBase:
         Raises:
             DataBaseException: If the database could not be registered.
         """
-        logger.info('Registering database with unique id {} to the absolute path {}'.format(
-            self._unique_id, self._basedir))
+        logger.info('Registering database with unique id {} to the absolute path {}'.format(self._unique_id, self._basedir))
         try:
             data_base_register.register_db(self._unique_id, self._basedir)
             self._registered_to_path = self._basedir
