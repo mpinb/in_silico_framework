@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser._get_unique_syncons_from_netps`
+
+
+.. title:
+
+_get_unique_syncons_from_netps
+==============================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_unique_syncons_from_netps(netp_fns)
+
+   Get the unique synapse and connection files from a list of network parameter files.
+
+   :Parameters: **netp\_fn** (*str*) -- Path to the network parameter file.
+
+   :returns: Tuple containing the unique synapse and connection files.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

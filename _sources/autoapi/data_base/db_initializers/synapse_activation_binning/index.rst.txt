@@ -1,0 +1,73 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning`
+
+synapse_activation_binning
+==========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   prefun </autoapi/data_base/db_initializers/synapse_activation_binning/prefun>
+   postfun </autoapi/data_base/db_initializers/synapse_activation_binning/postfun>
+   applyfun </autoapi/data_base/db_initializers/synapse_activation_binning/applyfun>
+   synapse_activation_postprocess_pandas </autoapi/data_base/db_initializers/synapse_activation_binning/synapse_activation_postprocess_pandas>
+   merge_results_together </autoapi/data_base/db_initializers/synapse_activation_binning/merge_results_together>
+   tree_reduction </autoapi/data_base/db_initializers/synapse_activation_binning/tree_reduction>
+   synapse_activation_postprocess_dask </autoapi/data_base/db_initializers/synapse_activation_binning/synapse_activation_postprocess_dask>
+   save_groupby </autoapi/data_base/db_initializers/synapse_activation_binning/save_groupby>
+   init </autoapi/data_base/db_initializers/synapse_activation_binning/init>
+
+.. py:module:: data_base.db_initializers.synapse_activation_binning
+
+.. autoapi-nested-parse::
+   Methods for fast binning of :ref:`syn_activation_format` dataframes.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> groupby  = ['EI']  # excitatory or inhibitory
+   >>> values = synapse_activation_postprocess_dask(
+   ...    ddf = db['synapse_activation'],
+   ...    groupby = groupby,
+   ...    prefun = prefun,
+   ...    applyfun = applyfun,
+   ...    postfun = postfun)
+   >>> values = values.compute(scheduler=c.get)
+   >>> save_groupby(db, values, groupby)
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`prefun <data_base.db_initializers.synapse_activation_binning.prefun>`\ (df)
+     - Augment a :ref:`syn_activation_format` dataframe with additional columns.
+   * - :py:obj:`postfun <data_base.db_initializers.synapse_activation_binning.postfun>`\ (s, maxtime)
+     - Postprocess a column of the binned synapse activations.
+   * - :py:obj:`applyfun <data_base.db_initializers.synapse_activation_binning.applyfun>`\ (pdf, maxtime)
+     - Bin the synapse activations using :py:meth:`~data_base.analyze.temporal_binning.universal`.
+   * - :py:obj:`synapse_activation_postprocess_pandas <data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_pandas>`\ (pdf, groupby, prefun, applyfun, postfun)
+     - Calculates bins of synapse activation per trial from a pandas dataframe.
+   * - :py:obj:`merge_results_together <data_base.db_initializers.synapse_activation_binning.merge_results_together>`\ (dicts)
+     - Aggregate many dictionaries with the same keys.
+   * - :py:obj:`tree_reduction <data_base.db_initializers.synapse_activation_binning.tree_reduction>`\ (delayeds, aggregate\_fun, length)
+     - Recursively aggregate the results of a list of delayed objects.
+   * - :py:obj:`synapse_activation_postprocess_dask <data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask>`\ (ddf, \*\*kwargs)
+     - Calculates bins of synapse activation per trial from a dask dataframe.
+   * - :py:obj:`save_groupby <data_base.db_initializers.synapse_activation_binning.save_groupby>`\ (db, result, groupby)
+     - Save the result of synapse_activation_postprocess_dask to a database.
+   * - :py:obj:`init <data_base.db_initializers.synapse_activation_binning.init>`\ (db, groupby, scheduler, prefun, applyfun, postfun, maxtime)
+     - Main pipeline to bin synapse activations from a :ref:`syn_activation_format` dataframe.
+
+

@@ -1,0 +1,44 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spatiotemporal_binning`
+
+spatiotemporal_binning
+======================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   universal_pd </autoapi/data_base/analyze/spatiotemporal_binning/universal_pd>
+   universal </autoapi/data_base/analyze/spatiotemporal_binning/universal>
+
+.. py:module:: data_base.analyze.spatiotemporal_binning
+
+.. autoapi-nested-parse::
+   Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
+
+   .. seealso::
+
+      :py:mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
+      by time, and a variety of other metrics (e.g. space, cell type ...)
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`universal_pd <data_base.analyze.spatiotemporal_binning.universal_pd>`\ (df, distance\_column, spatial\_distance\_bins, min\_time, max\_time, time\_distance\_bins)
+     - Bin a pandas DataFrame by both distance and time.
+   * - :py:obj:`universal <data_base.analyze.spatiotemporal_binning.universal>`\ (df, distance\_column, spatial\_distance\_bins, min\_time, max\_time, time\_distance\_bins)
+     - Bin a pandas or dask DataFrame by both distance and time.
+
+

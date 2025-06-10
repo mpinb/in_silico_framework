@@ -1,0 +1,133 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+RaisedCosineBasis
+=================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   compute <RaisedCosineBasis.compute>
+   get <RaisedCosineBasis.get>
+   get_superposition <RaisedCosineBasis.get_superposition>
+   visualize <RaisedCosineBasis.visualize>
+   visualize_w <RaisedCosineBasis.visualize_w>
+   get_raised_cosine <RaisedCosineBasis.get_raised_cosine>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis(a=2, c=1, phis=None, width=80, reversed_=False, backend=np)
+   
+   Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
+
+   A raised cosine is defined as:
+
+   .. math::
+
+       f_i(x) = \frac{1}{2} cos(a \cdot log(\tau + c) - \phi_i) + \frac{1}{2}
+
+   where :math:`\tau` is the input dimension (space or time e.g.), :math:`a` is the steepness, :math:`c` is the offset, and :math:`\phi` is the phase.
+   These basis functions can be superimposed using learnable weights :math:`x_i` to form a single filter :math:`\mathbf{w}(\tau)` over the domain :math:`\tau`:
+
+   .. math::
+
+       \mathbf{w}(\tau) = \sum_{i} x_i \cdot f_i(\tau)
+
+   And this filter can then be used to weigh the input data :math:`\mathbf{D}`:
+
+   .. math::
+
+       WI(t) = \int_{t-width}^{t}  \mathbf{w}(\tau) \cdot \mathbf{D}(\tau)
+
+   .. note::
+
+      The notation here heavily implies that the cosine functions are defined over the time domain.
+      However, they can equally well be used for spatial or spatiotemporal data.
+
+   :Parameters: * **a** (*int*) -- The steepness of the raised cosine. Default is :math:`2`.
+                * **c** (*int*) -- The offset of the raised cosine. Default is :math:`1`.
+                * **phis** (*array*) -- The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
+                * **width** (*int*) -- The width of the basis functions. Default is :math:`80`.
+                * **reversed_** (*bool*) -- Whether to reverse the basis functions. Default is ``False``.
+                * **backend** (*module*) -- The backend to use (cupy or numpy). Default is ``numpy``.
+
+   :Attributes:
+
+   .. attribute:: a
+
+      The steepness of the raised cosine. Default is :math:`2`.
+
+      :type: int
+
+   .. attribute:: c
+
+      The offset of the raised cosine. Default is :math:`1`.
+
+      :type: int
+
+   .. attribute:: phis
+
+      The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
+
+      :type: array
+
+   .. attribute:: width
+
+      The width of the basis functions. Default is :math:`80`.
+
+      :type: int
+
+   .. attribute:: basis
+
+      The list of basis functions.
+
+      :type: list
+
+   .. attribute:: reversed_
+
+      Whether to reverse the basis functions. Default is ``False``.
+
+      :type: bool
+
+   .. attribute:: backend
+
+      The backend to use (cupy or numpy). Default is ``numpy``.
+
+      :type: module
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`compute <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.compute>`\ (width)
+        - Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
+      * - :py:obj:`get <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get>`\ ()
+        - Get the basis functions :math:`\mathbf{f}`.
+      * - :py:obj:`get_superposition <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition>`\ (x)
+        - Get the weighed sum :math:`\mathbf{w}(\tau)` of the basis functions :math:`f`.
+      * - :py:obj:`visualize <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize>`\ (ax, plot\_kwargs)
+        - Visualize the basis functions :math:`\mathbf{f}`.
+      * - :py:obj:`visualize_w <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w>`\ (x, ax, plot\_kwargs)
+        - Visualize the superposition :math:`\mathbf{w}(\tau)` of the basis functions :math:`\mathbf{f}`.
+      * - :py:obj:`get_raised_cosine <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_raised_cosine>`\ (a, c, phi, t, backend)
+        - :summarylabel:`static` Calculate a single raised cosine basis function :math:`f_i` over the domain :math:`t`.
+

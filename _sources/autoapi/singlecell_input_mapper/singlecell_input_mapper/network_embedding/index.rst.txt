@@ -1,0 +1,38 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding`
+
+network_embedding
+=================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   NetworkMapper </autoapi/singlecell_input_mapper/singlecell_input_mapper/network_embedding/NetworkMapper>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.network_embedding
+
+.. autoapi-nested-parse::
+   Create anatomical realizations of connectivity.
+   In contrast to :py:mod:`single_cell_parser.network_embedding`,
+   this module does not handle the activity of presynaptic populations, but provides functionality to fully investigate the network connectivity.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`NetworkMapper <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper>`
+     - Connect presynaptic cells to a postsynaptic cell model.
+
+
+

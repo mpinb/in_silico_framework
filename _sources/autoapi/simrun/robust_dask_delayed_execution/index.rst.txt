@@ -1,0 +1,44 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution`
+
+robust_dask_delayed_execution
+=============================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   RobustDaskDelayedExecution </autoapi/simrun/robust_dask_delayed_execution/RobustDaskDelayedExecution>
+   _assert_value </autoapi/simrun/robust_dask_delayed_execution/_assert_value>
+   _wrapper </autoapi/simrun/robust_dask_delayed_execution/_wrapper>
+
+.. py:module:: simrun.robust_dask_delayed_execution
+
+.. autoapi-nested-parse::
+   Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
+
+   Robust execution here is taken to mean:
+
+   - The delayed objects are only executed once.
+   - File locking is used to ensure each delayed object is only handled by a single process
+   - The status (``["not_started", "started", "finished"]``) of the delayed objects is saved during execution.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`RobustDaskDelayedExecution <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution>`
+     - Execute dask delayed objects in a robust way.
+
+
+

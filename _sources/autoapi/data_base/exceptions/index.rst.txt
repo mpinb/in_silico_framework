@@ -1,0 +1,39 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.exceptions`
+
+exceptions
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   DataBaseException </autoapi/data_base/exceptions/DataBaseException>
+   ISFDataBaseException </autoapi/data_base/exceptions/ISFDataBaseException>
+
+.. py:module:: data_base.exceptions
+
+.. autoapi-nested-parse::
+   :py:mod:`data_base` specific exceptions.
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Exceptions
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`DataBaseException <data_base.exceptions.DataBaseException>`
+     - Typical data_base errors
+   * - :py:obj:`ISFDataBaseException <data_base.exceptions.ISFDataBaseException>`
+     - Typical isf_data_base errors

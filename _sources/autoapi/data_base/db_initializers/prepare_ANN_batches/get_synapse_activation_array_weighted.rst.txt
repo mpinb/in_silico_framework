@@ -1,0 +1,41 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_synapse_activation_array_weighted`
+
+
+.. title:
+
+get_synapse_activation_array_weighted
+=====================================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_synapse_activation_array_weighted(sa_, selected_stis=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, use_weights=False)
+
+   Create a 4D array of synapse activation times.
+
+   Create a 4D array of synaptic activation, where the axes are:
+
+   - :paramref:`selected\_stis`
+   - EXC/INH
+   - spatial bins
+   - time bins
+
+   The array is of shape ``(len(selected\_stis), 2, len(spatial\_bin\_names), (max\_time - min\_time)//bin\_size)``.
+
+   :Parameters: * **sa\_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
+                * **selected\_stis** (*list, optional*) -- List of selected spike times. Defaults to None.
+                * **spatial\_bin\_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
+                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 600.
+                * **use\_weights** (*bool, optional*) -- If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
+
+   :returns: A 4D array of synapse activation times.
+   :rtype: array
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._re_init_range_var_recording`
+
+PySection._re_init_range_var_recording
+======================================
+
+.. py:method:: single_cell_parser.cell.PySection._re_init_range_var_recording()
+
+   Re-initialize the range mechanism recordings.
+
+   Resizes the :py:class:`nrn.h.Vector` objects to 0 to avoid NEURON segfaults
+

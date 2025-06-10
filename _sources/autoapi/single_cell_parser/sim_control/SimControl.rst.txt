@@ -1,0 +1,106 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SimControl
+==========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   set_IClamp <SimControl.set_IClamp>
+   show <SimControl.show>
+   set_recording <SimControl.set_recording>
+   go <SimControl.go>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.sim_control.SimControl(cell=None, sim_time=5, dt=0.001, T=37)
+   
+   Control a current clamp simulation.
+
+   Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+   Can still be useful for low-level control with NEURON.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cell = CellParser()
+   >>> sim = SimControl(cell=cell.get_cell())
+   >>> sim.go()
+   >>> sim.show()
+
+   :Parameters: * **cell** (:py:class:`neuron.h.Section`) -- The cell to simulate.
+                * **simTime** (*float*) -- Simulation time (ms). Default: 5
+                * **dt** (*float*) -- Time step (ms). Default: 0.001
+                * **T** (*float*) -- Temperature (Celsius). Default: 37
+
+   :Attributes:
+
+   .. attribute:: cell
+
+      The cell to simulate.
+
+      :type: :py:class:`neuron.h.Section`
+
+   .. attribute:: simTime
+
+      Simulation time [ms]. Default: 5 [ms]
+
+      :type: float
+
+   .. attribute:: dt
+
+      Time step [ms]. Default: 0.001 [ms]
+
+      :type: float
+
+   .. attribute:: T
+
+      Temperature [C]. Default
+
+      :type: float
+
+   .. attribute:: goAlready
+
+      Simulation status
+
+      :type: bool
+
+   .. attribute:: h
+
+      NEURON interface
+
+      :type: :py:class:`neuron.h`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`set_IClamp <single_cell_parser.sim_control.SimControl.set_IClamp>`\ (delay, amp, dur)
+        - Initializes values for current clamp.
+      * - :py:obj:`show <single_cell_parser.sim_control.SimControl.show>`\ ()
+        - Plot the voltage trace.
+      * - :py:obj:`set_recording <single_cell_parser.sim_control.SimControl.set_recording>`\ ()
+        - Record the voltage trace.
+      * - :py:obj:`go <single_cell_parser.sim_control.SimControl.go>`\ (simTime)
+        - Run the simulation.
+

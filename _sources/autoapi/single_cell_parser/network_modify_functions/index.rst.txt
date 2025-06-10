@@ -1,0 +1,56 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions`
+
+network_modify_functions
+========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   silence_synapses_by_somadist </autoapi/single_cell_parser/network_modify_functions/silence_synapses_by_somadist/index>  
+   silence_synapses_by_somadist_and_spike_source </autoapi/single_cell_parser/network_modify_functions/silence_synapses_by_somadist_and_spike_source/index>  
+   get </autoapi/single_cell_parser/network_modify_functions/get>
+
+.. py:module:: single_cell_parser.network_modify_functions
+
+.. autoapi-nested-parse::
+   Modify the cell and/or network after both have been initalized.
+
+   Such a function can for example be used to deactivate specific synapses at a soma distance.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get <single_cell_parser.network_modify_functions.get>`\ (funname)
+     - Get the function with the given name.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`silence_synapses_by_somadist <single_cell_parser.network_modify_functions.silence_synapses_by_somadist>`
+     - Modify network activity by silencing synapses based on soma distance.
+   * - :py:obj:`silence_synapses_by_somadist_and_spike_source <single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source>`
+     - Modify network activity by silencing synapses based on soma distance and spike source.
+

@@ -1,0 +1,78 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis`
+
+membrane_potential_analysis
+===========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   RecordingSiteManager </autoapi/single_cell_parser/analyze/membrane_potential_analysis/RecordingSiteManager>
+   RecordingSite </autoapi/single_cell_parser/analyze/membrane_potential_analysis/RecordingSite>
+   SpikeInit </autoapi/single_cell_parser/analyze/membrane_potential_analysis/SpikeInit>
+   vm_mean </autoapi/single_cell_parser/analyze/membrane_potential_analysis/vm_mean>
+   vm_std </autoapi/single_cell_parser/analyze/membrane_potential_analysis/vm_std>
+   compute_mean_psp_amplitude </autoapi/single_cell_parser/analyze/membrane_potential_analysis/compute_mean_psp_amplitude>
+   compute_vm_std_windows </autoapi/single_cell_parser/analyze/membrane_potential_analysis/compute_vm_std_windows>
+   compute_vm_histogram </autoapi/single_cell_parser/analyze/membrane_potential_analysis/compute_vm_histogram>
+   compute_uPSP_amplitude </autoapi/single_cell_parser/analyze/membrane_potential_analysis/compute_uPSP_amplitude>
+   simple_spike_detection </autoapi/single_cell_parser/analyze/membrane_potential_analysis/simple_spike_detection>
+   PSTH_from_spike_times </autoapi/single_cell_parser/analyze/membrane_potential_analysis/PSTH_from_spike_times>
+
+.. py:module:: single_cell_parser.analyze.membrane_potential_analysis
+
+.. autoapi-nested-parse::
+   Analyze the membrane voltage.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`RecordingSiteManager <single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager>`
+     - Parse AMIRA recording sites from a ``.landmarkAscii`` file.
+   * - :py:obj:`RecordingSite <single_cell_parser.analyze.membrane_potential_analysis.RecordingSite>`
+     - Dataclass for a recording site.
+   * - :py:obj:`SpikeInit <single_cell_parser.analyze.membrane_potential_analysis.SpikeInit>`
+     - Analyze spike initiation.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`vm_mean <single_cell_parser.analyze.membrane_potential_analysis.vm_mean>`\ (vVec, tVec, tStim, dtStim)
+     - Computes the mean voltage during a stimulation time window
+   * - :py:obj:`vm_std <single_cell_parser.analyze.membrane_potential_analysis.vm_std>`\ (vVec, tVec, tStim, dtStim)
+     - Computes the standard deviation of the voltage during a stimulation time window
+   * - :py:obj:`compute_mean_psp_amplitude <single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude>`\ (vTraces, tStim, dt, width, t\_delay)
+     - Compute the mean amplitude of all PSPs across multiple voltage traces.
+   * - :py:obj:`compute_vm_std_windows <single_cell_parser.analyze.membrane_potential_analysis.compute_vm_std_windows>`\ (vStd, tStim, dt, width, window\_start\_times)
+     - Compute the standard deviation of the voltage during different time windows.
+   * - :py:obj:`compute_vm_histogram <single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram>`\ (vTraces, bins)
+     - Compute the histogram of membrane voltage traces.
+   * - :py:obj:`compute_uPSP_amplitude <single_cell_parser.analyze.membrane_potential_analysis.compute_uPSP_amplitude>`\ (t, v, tSyn, isEPSP, t\_width\_baseline)
+     - Compute the amplitude of a uPSP.
+   * - :py:obj:`simple_spike_detection <single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection>`\ (t, v, tBegin, tEnd, threshold, mode)
+     - Detect spike times in a voltage trace.
+   * - :py:obj:`PSTH_from_spike_times <single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times>`\ (spikeTimeVectors, binSize, tBegin, tEnd, aligned)
+     - Calculates a PSTH from spike times.
+
+

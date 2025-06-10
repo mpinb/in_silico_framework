@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.dereference`
+
+
+.. title:
+
+dereference
+===========
+
+
+.. py:function:: simrun.modular_reduced_model_inference.strategy.dereference(weakrefobj)
+
+   Dereference a reference and fetch the referent.
+
+   .. attention:: Uses private interface ... check after version update!
+
+   .. seealso:: https://stackoverflow.com/questions/19621036/acquiring-a-regular-reference-from-a-weakref-proxy-in-python
+
+   :Parameters: **weakrefobj** (*wearkef.proxy.object*) -- The weak reference to an object.
+
+   :returns: The underlying referent object referred to by the wear reference.
+   :rtype: obj
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

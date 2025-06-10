@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_tMax_vMax`
+
+
+.. title:
+
+get_tMax_vMax
+=============
+
+
+.. py:function:: simrun.synaptic_strength_fitting.get_tMax_vMax(t, v, tStim=None, tEnd=None)
+
+   Calculate the maximum amplitude of an ePSP.
+
+   :Parameters: * **t** (*np.array*) -- Timepoints of the voltage trace.
+                * **v** (*np.array*) -- Voltage trace.
+                * **tStim** (*float*) -- Timepoint of synapse activation.
+                * **tEnd** (*float*) -- End time of the simulation.
+
+   :returns: Timepoint and amplitude of the maximum voltage deflection of an ePSP.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

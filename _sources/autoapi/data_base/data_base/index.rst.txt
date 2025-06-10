@@ -1,0 +1,74 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base`
+
+data_base
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   DataBase </autoapi/data_base/data_base/DataBase>
+   _make_mdb_forwards_compatible </autoapi/data_base/data_base/_make_mdb_forwards_compatible>
+   get_db_by_unique_id </autoapi/data_base/data_base/get_db_by_unique_id>
+   _is_legacy_model_data_base </autoapi/data_base/data_base/_is_legacy_model_data_base>
+   is_isf_data_base </autoapi/data_base/data_base/is_isf_data_base>
+   is_data_base </autoapi/data_base/data_base/is_data_base>
+   is_sub_isf_data_base </autoapi/data_base/data_base/is_sub_isf_data_base>
+   is_sub_model_data_base </autoapi/data_base/data_base/is_sub_model_data_base>
+   is_sub_data_base </autoapi/data_base/data_base/is_sub_data_base>
+
+.. py:module:: data_base.data_base
+
+.. autoapi-nested-parse::
+   Modular data base system.
+
+   This module infers which data base system should be used based on the content of a given path.
+
+   Newly created databases automatically use the newest data base system.
+   Only existing data bases in older formats are opened with the old data base system.
+   If the path points to a database that has been created with an older database system, this module returns the corresponding database object, with associated writers, readers, and file format readers.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`DataBase <data_base.data_base.DataBase>`
+     - Wrapper database class
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_db_by_unique_id <data_base.data_base.get_db_by_unique_id>`\ (unique\_id)
+     - Get a DataBase by its unique ID, as registered in the data base register.
+   * - :py:obj:`is_isf_data_base <data_base.data_base.is_isf_data_base>`\ (path)
+     - Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+   * - :py:obj:`is_data_base <data_base.data_base.is_data_base>`\ (path)
+     - Checks if a given path contains a :py:class:`~data_base.data_base.DataBase`.
+   * - :py:obj:`is_sub_isf_data_base <data_base.data_base.is_sub_isf_data_base>`\ (parent\_db, key)
+     - Check if a given key is a sub-database of the parent database.
+   * - :py:obj:`is_sub_model_data_base <data_base.data_base.is_sub_model_data_base>`\ (parent\_mdb, key)
+     - Check if a given key is a sub-database of the parent database.
+   * - :py:obj:`is_sub_data_base <data_base.data_base.is_sub_data_base>`\ (parent\_db, key)
+     - Check if a given key is a sub-database of the parent database.
+
+

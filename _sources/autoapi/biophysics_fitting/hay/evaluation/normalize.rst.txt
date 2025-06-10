@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.normalize`
+
+
+.. title:
+
+normalize
+=========
+
+
+.. py:function:: biophysics_fitting.hay.evaluation.normalize(raw, mean, std)
+
+   Normalize a raw value.
+
+   :Parameters: * **raw** -- raw value
+                * **mean** -- mean value
+                * **std** -- standard deviation
+
+   :returns: normalized value
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

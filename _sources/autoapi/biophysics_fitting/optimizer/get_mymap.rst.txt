@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_mymap`
+
+
+.. title:
+
+get_mymap
+=========
+
+
+.. py:function:: biophysics_fitting.optimizer.get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error=3)
+
+   Get a map function for evaluating the parameters.
+
+   This function is a hook into BluePyOpt's optimization.
+   It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start\_run`.
+   Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
+   This is useful for debugging and for analyzing the optimization results.
+
+   :Parameters: * **db\_setup** (:py:class:`~data\_base.data\_base.DataBase`) -- The database containing the setup of the optimization.
+                * **db\_run** (:py:class:`~data\_base.data\_base.DataBase`) -- The database for the optimization run containing sub-databases.
+                * **c** (:py:class:`~dask.distributed.Client`) -- The distributed client.
+                * **satisfactory\_boundary\_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+                * **n\_reschedule\_on\_runtime\_error** (*int*) -- The number of times the optimization is rescheduled if a runtime error occurs.
+
+   :returns: The map function for evaluating the parameters. this function is passed to the :py:class:`bluepyopt.optimisations.DEAPOptimisation` object.
+   :rtype: Callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

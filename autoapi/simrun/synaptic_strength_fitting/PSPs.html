@@ -1,0 +1,2361 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>PSPs - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simrun.synaptic_strength_fitting.PSPs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PSPs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/api_reference.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/tutorials.html" class="md-tabs__link">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/file_formats.html" class="md-tabs__link">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../rst_assets/api_reference.html"><span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span></a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="API reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Interface/index.html" class="md-nav__link">
+        <span title="/autoapi/interface/index.rst (reference label)" class="md-ellipsis">Interface</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biophysics_fitting/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/index.rst (reference label)" class="md-ellipsis">biophysics_<wbr>fitting</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_base/index.html" class="md-nav__link">
+        <span title="/autoapi/data_base/index.rst (reference label)" class="md-ellipsis">data_<wbr>base</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4" type="checkbox" id="__nav_1_4" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../index.html"><span title="/autoapi/simrun/index.rst (reference label)" class="md-ellipsis">simrun</span></a>
+          
+            <label for="__nav_1_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="simrun" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/simrun/index.rst (reference label)" class="md-ellipsis">simrun</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modular_reduced_model_inference/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/modular_reduced_model_inference/index.rst (reference label)" class="md-ellipsis">modular_<wbr>reduced_<wbr>model_<wbr>inference</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PSP_with_cell_modification/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/psp_with_cell_modification/index.rst (reference label)" class="md-ellipsis">PSP_<wbr>with_<wbr>cell_<wbr>modification</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generate_synapse_activations/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/generate_synapse_activations/index.rst (reference label)" class="md-ellipsis">generate_<wbr>synapse_<wbr>activations</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_cell_with_network/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/get_cell_with_network/index.rst (reference label)" class="md-ellipsis">get_<wbr>cell_<wbr>with_<wbr>network</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters_to_cell/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/parameters_to_cell/index.rst (reference label)" class="md-ellipsis">parameters_<wbr>to_<wbr>cell</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rerun_db/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/rerun_db/index.rst (reference label)" class="md-ellipsis">rerun_<wbr>db</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../robust_dask_delayed_execution/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/robust_dask_delayed_execution/index.rst (reference label)" class="md-ellipsis">robust_<wbr>dask_<wbr>delayed_<wbr>execution</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../run_existing_synapse_activations/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/run_existing_synapse_activations/index.rst (reference label)" class="md-ellipsis">run_<wbr>existing_<wbr>synapse_<wbr>activations</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../run_new_simulations/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/run_new_simulations/index.rst (reference label)" class="md-ellipsis">run_<wbr>new_<wbr>simulations</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seed_manager/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/seed_manager/index.rst (reference label)" class="md-ellipsis">seed_<wbr>manager</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sim_trial_to_cell_object/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/sim_trial_to_cell_object/index.rst (reference label)" class="md-ellipsis">sim_<wbr>trial_<wbr>to_<wbr>cell_<wbr>object</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4_12" type="checkbox" id="__nav_1_4_12" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="index.html"><span title="/autoapi/simrun/synaptic_strength_fitting/index.rst (reference label)" class="md-ellipsis">synaptic_<wbr>strength_<wbr>fitting</span></a>
+          
+            <label for="__nav_1_4_12">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="synaptic_strength_fitting" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_4_12">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/simrun/synaptic_strength_fitting/index.rst (reference label)" class="md-ellipsis">synaptic_<wbr>strength_<wbr>fitting</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+    
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4_12_1" type="checkbox" id="__nav_1_4_12_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="#"><span title="/autoapi/simrun/synaptic_strength_fitting/psps.rst (reference label)" class="md-ellipsis">PSPs</span></a>
+          
+            <label for="__nav_1_4_12_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="PSPs" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_4_12_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/simrun/synaptic_strength_fitting/psps.rst (reference label)" class="md-ellipsis">PSPs</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs._setup_computation.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps._setup_computation.rst (reference label)" class="md-ellipsis">_<wbr>setup_<wbr>computation</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.run.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.run.rst (reference label)" class="md-ellipsis">run</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_voltage_traces.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_voltage_traces.rst (reference label)" class="md-ellipsis">get_<wbr>voltage_<wbr>traces</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_voltage_and_timing.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_voltage_and_timing.rst (reference label)" class="md-ellipsis">get_<wbr>voltage_<wbr>and_<wbr>timing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_summary_statistics.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_summary_statistics.rst (reference label)" class="md-ellipsis">get_<wbr>summary_<wbr>statistics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_optimal_g.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_optimal_g.rst (reference label)" class="md-ellipsis">get_<wbr>optimal_<wbr>g</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.visualize_psps.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.visualize_psps.rst (reference label)" class="md-ellipsis">visualize_<wbr>psps</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs._get_cell_and_nw_map.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps._get_cell_and_nw_map.rst (reference label)" class="md-ellipsis">_<wbr>get_<wbr>cell_<wbr>and_<wbr>nw_<wbr>map</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_synapse_coordinates.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_synapse_coordinates.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>coordinates</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_merged_synapse_coordinates.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_merged_synapse_coordinates.rst (reference label)" class="md-ellipsis">get_<wbr>merged_<wbr>synapse_<wbr>coordinates</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.get_synapse_coordinates_with_psp_amplitude.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_synapse_coordinates_with_psp_amplitude.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>coordinates_<wbr>with_<wbr>psp_<wbr>amplitude</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PSPs.plot_vt.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.plot_vt.rst (reference label)" class="md-ellipsis">plot_<wbr>vt</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/autoapi/simrun/synaptic_strength_fitting/psps.rst (reference label)" class="md-ellipsis">PSPs</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/psps.rst (reference label)" class="md-ellipsis">PSPs</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="PSPs._setup_computation.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps._setup_computation.rst (reference label)" class="md-ellipsis">_<wbr>setup_<wbr>computation</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.run.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.run.rst (reference label)" class="md-ellipsis">run</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_voltage_traces.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_voltage_traces.rst (reference label)" class="md-ellipsis">get_<wbr>voltage_<wbr>traces</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_voltage_and_timing.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_voltage_and_timing.rst (reference label)" class="md-ellipsis">get_<wbr>voltage_<wbr>and_<wbr>timing</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_summary_statistics.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_summary_statistics.rst (reference label)" class="md-ellipsis">get_<wbr>summary_<wbr>statistics</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_optimal_g.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_optimal_g.rst (reference label)" class="md-ellipsis">get_<wbr>optimal_<wbr>g</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.visualize_psps.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.visualize_psps.rst (reference label)" class="md-ellipsis">visualize_<wbr>psps</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs._get_cell_and_nw_map.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps._get_cell_and_nw_map.rst (reference label)" class="md-ellipsis">_<wbr>get_<wbr>cell_<wbr>and_<wbr>nw_<wbr>map</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_synapse_coordinates.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_synapse_coordinates.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>coordinates</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_merged_synapse_coordinates.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_merged_synapse_coordinates.rst (reference label)" class="md-ellipsis">get_<wbr>merged_<wbr>synapse_<wbr>coordinates</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.get_synapse_coordinates_with_psp_amplitude.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.get_synapse_coordinates_with_psp_amplitude.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>coordinates_<wbr>with_<wbr>psp_<wbr>amplitude</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="PSPs.plot_vt.html" class="md-nav__link">
+    <span title="/autoapi/simrun/synaptic_strength_fitting/psps.plot_vt.rst (reference label)" class="md-ellipsis">plot_<wbr>vt</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs" class="md-nav__link">
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="simrun.synaptic_strength_fitting.PSPs (Python class) — Calculate PSP amlitudes of single synapses and fit synaptic strength" class="md-ellipsis">simrun.<wbr>synaptic_<wbr>strength_<wbr>fitting.<wbr>PSPs</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="simrun.synaptic_strength_fitting.PSPs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-parameters" class="md-nav__link">
+    <span class="md-ellipsis">Parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-attributes" class="md-nav__link">
+    <span class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.neuron_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.neuron_param (Python attribute) — The cell_parameters_format." class="md-ellipsis">neuron_<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="neuron_param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.neuron_param-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.confile" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.confile (Python attribute) — Path to a con_file_format file." class="md-ellipsis">confile</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="confile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.confile-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.gExRange" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.gExRange (Python attribute) — List of allowed synaptic strength values (in \mu S)." class="md-ellipsis">g<wbr>Ex<wbr>Range</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="gExRange">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.gExRange-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.AMPA_component (Python attribute) — float" class="md-ellipsis">AMPA_<wbr>component</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AMPA_component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.NMDA_component (Python attribute) — float" class="md-ellipsis">NMDA_<wbr>component</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NMDA_component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.vardt" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.vardt (Python attribute) — Whether to use the variable step size solver." class="md-ellipsis">vardt</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="vardt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.vardt-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.mode" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.mode (Python attribute) — Whether to activate each synapse one by one, or each cell one by one. A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the Cell). Options: (&#39;cells&#39;, &#39;synapses&#39;) Default: &#39;cells&#39;" class="md-ellipsis">mode</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.mode-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.exc_inh" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.exc_inh (Python attribute) — Whether to fit excitatory or inhibitory synapses. Used to infer the deflection direction of the PSP (positive or negative). Options: (&#39;exc&#39;, &#39;inh&#39;) Default: &#39;exc&#39;" class="md-ellipsis">exc_<wbr>inh</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exc_inh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.exc_inh-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tStim" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.tStim (Python attribute) — Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize." class="md-ellipsis">t<wbr>Stim</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tStim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tStim-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tEnd" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.tEnd (Python attribute) — End time of the simulation." class="md-ellipsis">t<wbr>End</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tEnd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tEnd-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.futures" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.futures (Python attribute) — List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations." class="md-ellipsis">futures</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="futures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.futures-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.result" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.result (Python attribute) — List of results returned by the dask client, containing the results of the synaptic strength fitting simulations." class="md-ellipsis">result</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.result-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.network_param (Python attribute) — The network_parameters_format for either excitatory or inhibitory synapses to be fitted. The synapse type is defined by exc_inh." class="md-ellipsis">network_<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="network_param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_param-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype (Python attribute) — List of network parameters for each cell type in the network." class="md-ellipsis">network_<wbr>params_<wbr>by_<wbr>celltype</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="network_params_by_celltype">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-methods" class="md-nav__link">
+    <span class="md-ellipsis">Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_ex_synapse_weight.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/set_ex_synapse_weight.rst (reference label)" class="md-ellipsis">set_<wbr>ex_<wbr>synapse_<wbr>weight</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_inh_synapse_weight.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/set_inh_synapse_weight.rst (reference label)" class="md-ellipsis">set_<wbr>inh_<wbr>synapse_<wbr>weight</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="run_ex_synapse.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/run_ex_synapse.rst (reference label)" class="md-ellipsis">run_<wbr>ex_<wbr>synapse</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="run_ex_synapses.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/run_ex_synapses.rst (reference label)" class="md-ellipsis">run_<wbr>ex_<wbr>synapses</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generate_ex_network_param_from_network_embedding.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/generate_ex_network_param_from_network_embedding.rst (reference label)" class="md-ellipsis">generate_<wbr>ex_<wbr>network_<wbr>param_<wbr>from_<wbr>network_<wbr>embedding</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generate_inh_network_param_from_network_embedding.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/generate_inh_network_param_from_network_embedding.rst (reference label)" class="md-ellipsis">generate_<wbr>inh_<wbr>network_<wbr>param_<wbr>from_<wbr>network_<wbr>embedding</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_voltage_and_timing.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/get_voltage_and_timing.rst (reference label)" class="md-ellipsis">get_<wbr>voltage_<wbr>and_<wbr>timing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_summary_statistics.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/get_summary_statistics.rst (reference label)" class="md-ellipsis">get_<wbr>summary_<wbr>statistics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_optimal_g.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/get_optimal_g.rst (reference label)" class="md-ellipsis">get_<wbr>optimal_<wbr>g</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_tMax_vMax_baseline.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/get_tmax_vmax_baseline.rst (reference label)" class="md-ellipsis">get_<wbr>t<wbr>Max_<wbr>v<wbr>Max_<wbr>baseline</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="analyze_voltage_trace.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/analyze_voltage_trace.rst (reference label)" class="md-ellipsis">analyze_<wbr>voltage_<wbr>trace</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_tMax_vMax.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/get_tmax_vmax.rst (reference label)" class="md-ellipsis">get_<wbr>t<wbr>Max_<wbr>v<wbr>Max</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="merge_celltypes.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/merge_celltypes.rst (reference label)" class="md-ellipsis">merge_<wbr>celltypes</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ePSP_summary_statistics.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/epsp_summary_statistics.rst (reference label)" class="md-ellipsis">e<wbr>PSP_<wbr>summary_<wbr>statistics</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="linear_fit.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/linear_fit.rst (reference label)" class="md-ellipsis">linear_<wbr>fit</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="linear_fit_pdf.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/linear_fit_pdf.rst (reference label)" class="md-ellipsis">linear_<wbr>fit_<wbr>pdf</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="calculate_optimal_g.html" class="md-nav__link">
+        <span title="/autoapi/simrun/synaptic_strength_fitting/calculate_optimal_g.rst (reference label)" class="md-ellipsis">calculate_<wbr>optimal_<wbr>g</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/utils/index.rst (reference label)" class="md-ellipsis">utils</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../single_cell_parser/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/index.rst (reference label)" class="md-ellipsis">single_<wbr>cell_<wbr>parser</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../singlecell_input_mapper/index.html" class="md-nav__link">
+        <span title="/autoapi/singlecell_input_mapper/index.rst (reference label)" class="md-ellipsis">singlecell_<wbr>input_<wbr>mapper</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spike_analysis/index.html" class="md-nav__link">
+        <span title="/autoapi/spike_analysis/index.rst (reference label)" class="md-ellipsis">spike_<wbr>analysis</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualize/index.html" class="md-nav__link">
+        <span title="/autoapi/visualize/index.rst (reference label)" class="md-ellipsis">visualize</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/tutorials.html" class="md-nav__link">
+        <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/file_formats.html" class="md-nav__link">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs" class="md-nav__link">
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="simrun.synaptic_strength_fitting.PSPs (Python class) — Calculate PSP amlitudes of single synapses and fit synaptic strength" class="md-ellipsis">simrun.<wbr>synaptic_<wbr>strength_<wbr>fitting.<wbr>PSPs</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="simrun.synaptic_strength_fitting.PSPs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-parameters" class="md-nav__link">
+    <span class="md-ellipsis">Parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-attributes" class="md-nav__link">
+    <span class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.neuron_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.neuron_param (Python attribute) — The cell_parameters_format." class="md-ellipsis">neuron_<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="neuron_param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.neuron_param-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.confile" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.confile (Python attribute) — Path to a con_file_format file." class="md-ellipsis">confile</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="confile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.confile-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.gExRange" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.gExRange (Python attribute) — List of allowed synaptic strength values (in \mu S)." class="md-ellipsis">g<wbr>Ex<wbr>Range</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="gExRange">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.gExRange-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.AMPA_component (Python attribute) — float" class="md-ellipsis">AMPA_<wbr>component</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AMPA_component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.NMDA_component (Python attribute) — float" class="md-ellipsis">NMDA_<wbr>component</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NMDA_component">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.vardt" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.vardt (Python attribute) — Whether to use the variable step size solver." class="md-ellipsis">vardt</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="vardt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.vardt-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.mode" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.mode (Python attribute) — Whether to activate each synapse one by one, or each cell one by one. A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the Cell). Options: (&#39;cells&#39;, &#39;synapses&#39;) Default: &#39;cells&#39;" class="md-ellipsis">mode</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.mode-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.exc_inh" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.exc_inh (Python attribute) — Whether to fit excitatory or inhibitory synapses. Used to infer the deflection direction of the PSP (positive or negative). Options: (&#39;exc&#39;, &#39;inh&#39;) Default: &#39;exc&#39;" class="md-ellipsis">exc_<wbr>inh</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exc_inh">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.exc_inh-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tStim" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.tStim (Python attribute) — Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize." class="md-ellipsis">t<wbr>Stim</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tStim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tStim-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tEnd" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.tEnd (Python attribute) — End time of the simulation." class="md-ellipsis">t<wbr>End</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tEnd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.tEnd-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.futures" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.futures (Python attribute) — List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations." class="md-ellipsis">futures</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="futures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.futures-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.result" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.result (Python attribute) — List of results returned by the dask client, containing the results of the synaptic strength fitting simulations." class="md-ellipsis">result</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="result">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.result-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.network_param (Python attribute) — The network_parameters_format for either excitatory or inhibitory synapses to be fitted. The synapse type is defined by exc_inh." class="md-ellipsis">network_<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="network_param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_param-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype (Python attribute) — List of network parameters for each cell type in the network." class="md-ellipsis">network_<wbr>params_<wbr>by_<wbr>celltype</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="network_params_by_celltype">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.PSPs-methods" class="md-nav__link">
+    <span class="md-ellipsis">Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<p><a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> ❭ <a class="reference internal" href="index.html#module-simrun.synaptic_strength_fitting" title="simrun.synaptic_strength_fitting (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synaptic_strength_fitting</span></code></a> ❭ <a class="reference internal" href="#simrun.synaptic_strength_fitting.PSPs" title="simrun.synaptic_strength_fitting.PSPs (Python class) — Calculate PSP amlitudes of single synapses and fit synaptic strength"><code class="xref py py-mod docutils literal notranslate"><span class="pre">PSPs</span></code></a></p>
+<h1 id="psps">PSPs<a class="headerlink" href="#psps" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="py class objdesc">
+<dt class="sig sig-object highlight sig-wrap py" id="simrun.synaptic_strength_fitting.PSPs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">simrun.synaptic_strength_fitting.</span></span><span class="sig-name descname"><span class="pre">PSPs</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">neuron_param</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">confile</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">gExRange</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">AMPA_component</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">NMDA_component</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">vardt</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;cells&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">exc_inh</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;exc&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tStim</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">110</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tEnd</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">150</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate PSP amlitudes of single synapses and fit synaptic strength</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs-parameters" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>neuron_param</strong> (<a class="reference internal" href="../../single_cell_parser/parameters/ParameterSet.html#single_cell_parser.parameters.ParameterSet" title="single_cell_parser.parameters.ParameterSet (Python class) — _wrap(value)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterSet</span></code></a>) – The <a class="reference internal" href="../../../rst_assets/file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p></li>
+<li><p><strong>confile</strong> (<em>str</em>) – Path to a <a class="reference internal" href="../../../rst_assets/file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p></li>
+<li><p><strong>gExRange</strong> (<em>list</em>) – List of synaptic strength values to simulate (in <span class="math notranslate nohighlight">\(\mu S\)</span>).
+The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.</p></li>
+<li><p><strong>AMPA_component</strong> (<em>float</em>)</p></li>
+<li><p><strong>NMDA_component</strong> (<em>float</em>)</p></li>
+<li><p><strong>vardt</strong> (<em>bool</em>) – Whether to use the variable step size solver.</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – Whether to activate each synapse one by one, or each cell one by one.
+A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
+Options: <code class="docutils literal notranslate"><span class="pre">('cells',</span> <span class="pre">'synapses')</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">'cells'</span></code></p></li>
+<li><p><strong>exc_inh</strong> (<em>str</em>) – Whether to fit excitatory or inhibitory synapses.
+Used to infer the deflection direction of the PSP (positive or negative).
+Options: <code class="docutils literal notranslate"><span class="pre">('exc',</span> <span class="pre">'inh')</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">'exc'</span></code></p></li>
+<li><p><strong>tStim</strong> (<em>float</em>) – Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.</p></li>
+<li><p><strong>tEnd</strong> (<em>float</em>) – End time of the simulation.</p></li>
+</ul>
+</dd>
+<dt class="field-even" id="simrun.synaptic_strength_fitting.PSPs-attributes">Attributes<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs-attributes" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.neuron_param">
+<span class="sig-name descname"><span class="pre">neuron_param</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.neuron_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="../../../rst_assets/file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.neuron_param-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.neuron_param-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/ParameterSet.html#single_cell_parser.parameters.ParameterSet" title="single_cell_parser.parameters.ParameterSet (Python class) — _wrap(value)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterSet</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.confile">
+<span class="sig-name descname"><span class="pre">confile</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.confile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to a <a class="reference internal" href="../../../rst_assets/file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.confile-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.confile-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.gExRange">
+<span class="sig-name descname"><span class="pre">gExRange</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.gExRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of allowed synaptic strength values (in <span class="math notranslate nohighlight">\(\mu S\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.gExRange-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.gExRange-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.AMPA_component">
+<span class="sig-name descname"><span class="pre">AMPA_component</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.AMPA_component-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.AMPA_component-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.NMDA_component">
+<span class="sig-name descname"><span class="pre">NMDA_component</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.NMDA_component-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.NMDA_component-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.vardt">
+<span class="sig-name descname"><span class="pre">vardt</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.vardt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to use the variable step size solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.vardt-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.vardt-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.mode">
+<span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to activate each synapse one by one, or each cell one by one.
+A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
+Options: <code class="docutils literal notranslate"><span class="pre">('cells',</span> <span class="pre">'synapses')</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">'cells'</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.mode-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.mode-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.exc_inh">
+<span class="sig-name descname"><span class="pre">exc_inh</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.exc_inh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether to fit excitatory or inhibitory synapses.
+Used to infer the deflection direction of the PSP (positive or negative).
+Options: <code class="docutils literal notranslate"><span class="pre">('exc',</span> <span class="pre">'inh')</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">'exc'</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.exc_inh-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.exc_inh-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.tStim">
+<span class="sig-name descname"><span class="pre">tStim</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.tStim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.tStim-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.tStim-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.tEnd">
+<span class="sig-name descname"><span class="pre">tEnd</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.tEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>End time of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.tEnd-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.tEnd-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.futures">
+<span class="sig-name descname"><span class="pre">futures</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.futures" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.futures-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.futures-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.result">
+<span class="sig-name descname"><span class="pre">result</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.result-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.result-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.network_param">
+<span class="sig-name descname"><span class="pre">network_param</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.network_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="../../../rst_assets/file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a> for either excitatory or inhibitory synapses to be fitted.
+The synapse type is defined by <code class="xref py py-paramref docutils literal notranslate"><span class="pre">exc_inh</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.network_param-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.network_param-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/ParameterSet.html#single_cell_parser.parameters.ParameterSet" title="single_cell_parser.parameters.ParameterSet (Python class) — _wrap(value)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParameterSet</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype">
+<span class="sig-name descname"><span class="pre">network_params_by_celltype</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of network parameters for each cell type in the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.network_params_by_celltype-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs-methods">Methods<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs-methods" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<table class="summarytable docutils data align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs._setup_computation.html#simrun.synaptic_strength_fitting.PSPs._setup_computation" title="simrun.synaptic_strength_fitting.PSPs._setup_computation (Python method) — Construct delayed functions for running single-synapse simulations."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_setup_computation</span></code></a>(exc_inh)</p></td>
+<td><p>Construct delayed functions for running single-synapse simulations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.run.html#simrun.synaptic_strength_fitting.PSPs.run" title="simrun.synaptic_strength_fitting.PSPs.run (Python method) — Run the single-cell simulations from the _delayeds."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(client, rerun)</p></td>
+<td><p>Run the single-cell simulations from the <code class="xref py py-paramref docutils literal notranslate"><span class="pre">_delayeds</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_voltage_traces.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_traces" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_traces (Python method) — Gather the ePSP voltage traces for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_traces</span></code></a>()</p></td>
+<td><p>Gather the ePSP voltage traces for each synapse.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_voltage_and_timing.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing (Python method) — Calculate a PSP's maximum voltage deflection and timing thereof."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_and_timing</span></code></a>(method, merged, merge_celltype_kwargs)</p></td>
+<td><p>Calculate a PSP’s maximum voltage deflection and timing thereof.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_summary_statistics.html#simrun.synaptic_strength_fitting.PSPs.get_summary_statistics" title="simrun.synaptic_strength_fitting.PSPs.get_summary_statistics (Python method) — Calculate summary statistics of the PSP voltage and timing."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_summary_statistics</span></code></a>(method, merge_celltype_kwargs, ePSP_summary_statistics_kwargs)</p></td>
+<td><p>Calculate summary statistics of the PSP voltage and timing.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_optimal_g.html#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python method) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_optimal_g</span></code></a>(measured_data, method, merge_celltype_kwargs)</p></td>
+<td><p>Calculate the optimal synaptic conductance such that the EPSP matches empirical data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.visualize_psps.html#simrun.synaptic_strength_fitting.PSPs.visualize_psps" title="simrun.synaptic_strength_fitting.PSPs.visualize_psps (Python method) — Plot a histogram of the EPSP max voltage deflections for each celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_psps</span></code></a>(g, method, merge_celltype_kwargs, fig)</p></td>
+<td><p>Plot a histogram of the EPSP max voltage deflections for each celltype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs._get_cell_and_nw_map.html#simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map" title="simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map (Python method) — Get a network-embedded neuron model and its single_cell_parser.network.Networkmapper from parameter files."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_cell_and_nw_map</span></code></a>(network_param)</p></td>
+<td><p>Get a network-embedded neuron model and its <code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.network.Networkmapper</span></code> from parameter files.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates (Python method) — Get the coordinates of all synapses of a particular celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates</span></code></a>(population, flatten, cell_indices)</p></td>
+<td><p>Get the coordinates of all synapses of a particular celltype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_merged_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates (Python method) — Get the coordinates of all synapses that contain a certain string in their name."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_merged_synapse_coordinates</span></code></a>(mergestring, flatten)</p></td>
+<td><p>Get the coordinates of all synapses that contain a certain string in their name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates_with_psp_amplitude.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude (Python method) — Get the synapse coordinates and the PSP amplitude for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates_with_psp_amplitude</span></code></a>(population, g, merged, select_synapses_per_cell)</p></td>
+<td><p>Get the synapse coordinates and the PSP amplitude for each synapse.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.plot_vt.html#simrun.synaptic_strength_fitting.PSPs.plot_vt" title="simrun.synaptic_strength_fitting.PSPs.plot_vt (Python method) — Plot the voltage traces of the PSPs."><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vt</span></code></a>(population, opacity, g, merge, merge_celltype_kwargs, fig)</p></td>
+<td><p>Plot the voltage traces of the PSPs.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: synaptic_strength_fitting" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              synaptic_strength_fitting
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="PSPs._setup_computation.html" class="md-footer__link md-footer__link--next" aria-label="Next: PSPs._setup_computation" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              PSPs._setup_computation
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>

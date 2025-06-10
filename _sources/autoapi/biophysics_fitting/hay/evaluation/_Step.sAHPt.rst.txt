@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.sAHPt`
+
+_Step.sAHPt
+===========
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.sAHPt(voltage_traces)
+
+   Get the slow afterhyperpolarization time in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_2AP"`` to whether there are 2 action potentials in the somatic voltage trace,
+                 and ``".raw"`` to the slow afterhyperpolarization time in the somatic voltage trace.
+   :rtype: dict
+

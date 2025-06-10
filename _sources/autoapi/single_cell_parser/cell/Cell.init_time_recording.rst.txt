@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.init_time_recording`
+
+Cell.init_time_recording
+========================
+
+.. py:method:: single_cell_parser.cell.Cell.init_time_recording()
+
+   Initialize the NEURON time vector for recording.
+
+   Initializes a time recording at the soma.
+

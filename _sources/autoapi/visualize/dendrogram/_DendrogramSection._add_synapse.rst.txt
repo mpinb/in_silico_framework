@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSection` ❭ :mod:`~visualize.dendrogram._DendrogramSection._add_synapse`
+
+_DendrogramSection._add_synapse
+===============================
+
+.. py:method:: visualize.dendrogram._DendrogramSection._add_synapse(label, x)
+
+   Add a synapse to a dendrogram section.
+
+   :Parameters: * **label** (*str*) -- The label of the synapse.
+                * **x** (*float*) -- The coordinate of the synapse.
+

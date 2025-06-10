@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density`
+
+SynapseDensity._compute_length_surface_area_density
+===================================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density(lengthDensity, surfaceAreaDensity, likeAmira=0)
+
+   Fills the scalar fields :paramref:`lengthDensity` and :paramref:`surfaceDensity` to contain length and area per structure per voxel.
+
+   This method is an implementation of line segment clipping using the
+   Liang-barsky algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
+   This makes use of the fact that end points of individual sections are beginning points
+   of connected sections and represented in each section separately.
+   This way, sections can be treated separately from each other.
+
+   The methods runs in two steps:
+
+   1. Compute length between all pairs of points that are located in the same grid cell (vast majority)
+   2. Use Liang-Barsky for clipping line segments between remaining points that are not located within same grid cell
+
+   :Parameters: * **lengthDensity** (*dict*) -- dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
+                  :py:class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+                * **surfaceAreaDensity** (*dict*) -- dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
+                  :py:class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+                * **likeAmira** (*bool*) -- Set to True if the diamlist of each section denotes the radius, rather than the diameter.
+                  Default is ``False``.
+
+   :returns: None. Fills the scalar fields in place.
+

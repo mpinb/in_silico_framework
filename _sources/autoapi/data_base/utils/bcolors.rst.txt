@@ -1,0 +1,80 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.bcolors`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+bcolors
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.utils.bcolors
+   
+   List of colors for terminal output in bash.
+
+   :Attributes:
+
+   .. attribute:: HEADER
+
+      Header color
+
+      :type: str
+
+   .. attribute:: OKBLUE
+
+      Blue color
+
+      :type: str
+
+   .. attribute:: OKCYAN
+
+      Cyan color
+
+      :type: str
+
+   .. attribute:: OKGREEN
+
+      Green color
+
+      :type: str
+
+   .. attribute:: WARNING
+
+      Warning color
+
+      :type: str
+
+   .. attribute:: FAIL
+
+      Fail color
+
+      :type: str
+
+   .. attribute:: ENDC
+
+      End color (reset)
+
+      :type: str
+
+   .. attribute:: BOLD
+
+      Bold
+
+      :type: str
+
+   .. attribute:: UNDERLINE
+
+      Underline
+
+      :type: str
+

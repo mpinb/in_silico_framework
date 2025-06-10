@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.resolve_reldb_path`
+
+
+.. title:
+
+resolve_reldb_path
+==================
+
+
+.. py:function:: data_base.dbopen.resolve_reldb_path(path, db_basedir=None)
+
+   Resolve a relative database path
+
+   Relative database paths are of the form ``reldb://...``.
+   They are used for references to files that are known to be within the same database.
+   Figuring out the absolute file location is then a matter of finding the shared parent database path.
+
+   This method takes a relative path and a database, and returns the absolute path.
+
+   .. attention::
+
+      Relative database paths always refer to the first parent database in the path.
+      If the database is a sub-database, the path will be relative to the sub-database, not
+      the parent database.
+
+   :Parameters: * **path** (*str*) -- The relative path of the form ``reldb://...``.
+                * **db** (:py:class:`~data\_base.data\_base.DataBase`) -- The database.
+
+   :returns: The resolved path.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

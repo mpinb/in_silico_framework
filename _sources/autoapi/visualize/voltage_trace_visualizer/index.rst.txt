@@ -1,0 +1,48 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.voltage_trace_visualizer`
+
+voltage_trace_visualizer
+========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   plot_vt </autoapi/visualize/voltage_trace_visualizer/plot_vt>
+   visualize_vt </autoapi/visualize/voltage_trace_visualizer/visualize_vt>
+
+.. py:module:: visualize.voltage_trace_visualizer
+
+.. autoapi-nested-parse::
+   Visualize voltage traces from the results of a :py:class:`~biophysics_fitting.simulator.Simulator` object.
+
+   this module provides convenience methods to visualize the voltage traces of all stimuli run by a
+   :py:class:`~biophysics_fitting.simulator.Simulator` object.
+
+   .. figure:: ../../../_static/_images/voltage_traces.png
+
+      Example voltage traces from the Hay stimulus protocols (:cite:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+      The top row show the :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` and :py:class:`~biophysics_fitting.hay_evaluation_python.bAP` stimuli.
+      The bottom row show the three step currents.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`plot_vt <visualize.voltage_trace_visualizer.plot_vt>`\ (voltage\_traces, key)
+     - Plot voltage traces from simulation results.
+   * - :py:obj:`visualize_vt <visualize.voltage_trace_visualizer.visualize_vt>`\ (vt, fig, soma\_color, dend\_color, BAC\_select, lw, \*\*kwargs)
+     - Visualize voltage traces from the Hay stimulus protocols.
+
+

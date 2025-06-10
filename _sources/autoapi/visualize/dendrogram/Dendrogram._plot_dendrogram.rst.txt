@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram._plot_dendrogram`
+
+Dendrogram._plot_dendrogram
+===========================
+
+.. py:method:: visualize.dendrogram.Dendrogram._plot_dendrogram(ax, colormap={'Dendrite': 'grey', 'ApicalDendrite': 'r'})
+
+   Plot the dendogram on an axes object.
+
+   This is the main plotting method used to either plot the dendogram alone, or to plot the
+   dendrogram in :py:class:`DendrogramStatistics`.
+
+   :Parameters: **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.axes.Axes`
+

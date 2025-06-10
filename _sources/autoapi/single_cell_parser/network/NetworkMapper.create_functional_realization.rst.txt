@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_functional_realization`
+
+NetworkMapper.create_functional_realization
+===========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper.create_functional_realization()
+
+   Create a new functional connectivity realization from an existing network parameter file based on ``convergence``.
+
+   Network parameterfiles already have backlinks to :ref:`con_file_format` files,
+   which contain the anatomical realization of the network.
+   This method creates its own realizations based on the ``convergence`` parameter in the network parameters,
+   and saves the resulting :ref:`con_file_format` file and adapted network parameter file in the working directory.
+   It does not assign activity to these presynaptic cells.
+
+   .. seealso::
+
+      :py:meth:`_create_functional_connectivity_map` on how the ``convergence`` parameter is used
+      for anatomical realizations.
+
+   .. attention::
+
+      Give this functional realization a (somewhat) unique name!
+      then save it at the same location as the anatomical realization,
+      and create a network parameter file with the anatomical and
+      corresponding functional realizations already in it.
+
+   .. attention::
+
+      Assumes path names to anatomical realization files
+      work from the working directory! So they should be correct relative, or
+      preferably absolute paths.
+
+   :returns: None. Writes the resulting :ref:`con_file_format` files and adapted
+             :ref:`network_parameters_format` file to disk (in contrast to :py:meth:`~create_network`).
+

@@ -1,0 +1,33 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base` ❭ :mod:`~data_base.data_base.DataBase`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DataBase
+========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.data_base.DataBase
+   
+   Wrapper database class
+
+   This class initializes the correct data base class for a given path.
+
+   :returns: The correct database object.
+   :rtype: :py:class:`~data_base.isf_datata_base.ISFDataBase` | :py:class:`~data_base.model_data_base.ModelDataBase`
+
+   :Parameters: * **basedir** (*str*) -- The directory where the database is located.
+                * **readonly** (*bool*) -- If True, the database is read-only.
+                * **nocreate** (*bool*) -- If True, the database is not created if it does not exist.
+

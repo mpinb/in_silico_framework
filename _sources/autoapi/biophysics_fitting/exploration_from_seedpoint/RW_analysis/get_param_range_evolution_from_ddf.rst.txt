@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf`
+
+
+.. title:
+
+get_param_range_evolution_from_ddf
+==================================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf(ddf, params, return_mi_ma=False)
+
+   Compute the range of parameters explored by a RW exploration, as a fraction of the total parameter range.
+
+   :Parameters: * **ddf** (*dask.dataframe*) -- the exploration results
+                * **params** (*pd.DataFrame*) -- the parameter ranges
+                * **return\_mi\_ma** (*bool*) -- whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
+
+   :returns: the range of parameters explored by the RW exploration. If return\_mi\_ma is True, returns the min and max values of the parameter ranges.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

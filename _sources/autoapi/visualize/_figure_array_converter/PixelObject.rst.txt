@@ -1,0 +1,45 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter` ❭ :mod:`~visualize._figure_array_converter.PixelObject`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PixelObject
+===========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize._figure_array_converter.PixelObject(extent, ax=None, array=None)
+   
+   Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
+
+   :Parameters: * **extent** (*list*) -- The extent of the plot.
+                * **ax** (*matplotlib.pyplot.Axes*) -- The axis to convert to a pixel array. Default is ``None``.
+                * **array** (*numpy.ndarray*) -- The pixel array to store. Default is ``None``.
+
+   :Attributes:
+
+   .. attribute:: extent
+
+      The extent of the plot.
+
+      :type: list
+
+   .. attribute:: array
+
+      The pixel array of the plot.
+
+      :type: numpy.ndarray
+
+   :raises ValueError: If neither an ax nor an array is specified.
+   :raises ValueError: If both an ax and an array are specified
+

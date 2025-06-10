@@ -1,0 +1,247 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ISFDataBase
+===========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _infer_missing_metadata <ISFDataBase._infer_missing_metadata>
+   _register_this_database <ISFDataBase._register_this_database>
+   _set_unique_id <ISFDataBase._set_unique_id>
+   _is_initialized <ISFDataBase._is_initialized>
+   _initialize <ISFDataBase._initialize>
+   _convert_key_to_path <ISFDataBase._convert_key_to_path>
+   _check_key_format <ISFDataBase._check_key_format>
+   _detect_dumper_string_of_existing_key <ISFDataBase._detect_dumper_string_of_existing_key>
+   _find_dumper <ISFDataBase._find_dumper>
+   _write_metadata <ISFDataBase._write_metadata>
+   _check_writing_privilege <ISFDataBase._check_writing_privilege>
+   check_if_key_exists <ISFDataBase.check_if_key_exists>
+   get_id <ISFDataBase.get_id>
+   register_dumper <ISFDataBase.register_dumper>
+   save_db_state <ISFDataBase.save_db_state>
+   read_db_state <ISFDataBase.read_db_state>
+   get_mkdtemp <ISFDataBase.get_mkdtemp>
+   create_managed_folder <ISFDataBase.create_managed_folder>
+   create_shared_numpy_store <ISFDataBase.create_shared_numpy_store>
+   create_sub_db <ISFDataBase.create_sub_db>
+   get <ISFDataBase.get>
+   rename <ISFDataBase.rename>
+   set <ISFDataBase.set>
+   maybe_calculate <ISFDataBase.maybe_calculate>
+   keys <ISFDataBase.keys>
+   _subkeys <ISFDataBase._subkeys>
+   ls <ISFDataBase.ls>
+   _get_str <ISFDataBase._get_str>
+   remove <ISFDataBase.remove>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.isf_data_base.ISFDataBase(basedir, readonly=False, nocreate=False, suppress_errors=False)
+   
+   Main database class.
+
+   Saved elements can be written and accessed using dictionary syntax::
+
+       >>> db['my_new_element'] = my_new_element
+       >>> my_reloaded_element = db['my_new_element']
+
+   To read out all existing keys, use the :py:meth:`~data_base.isf_data_base.ISFDataBase.keys` method.
+   Valid keys are str or (nested) tuples of str for a (nested) hierarchy. "@" is not allowed.
+
+   All saved elements are stored in the :paramref:`basedir` along with metadata
+   and a ``Loader.json`` object. The ``Loader.json`` object contains which
+   module should be used to load the data with, along with all the necessary
+   information to initialize the Loader. The following metadata is saved:
+
+   .. list-table:: Metadata Associated with Saved Elements
+      :header-rows: 1
+
+      * - Metadata
+        - Description
+      * - ``dumper``
+        - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
+      * - ``time``
+        - Time at which this results was saved.
+      * - ``module_list``
+        - A full list of all modules installed in the conda environment that was used to produce this result.
+      * - ``module_versions``
+        - The versions of all modules in the environment that was used to produce this result. See also: :py:mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
+      * - ``history``
+        - The history of the code that was used to produce this result. Only supported if the code was run using IPython (e.g. from within a Jupyter Notebook). See also: :py:mod:`~data_base._module_versions.Versions_cached.get_history`.
+      * - ``hostname``
+        - Name of the machine the code was run on.
+
+
+   If the dask backends are used to save the data, it will be saved out-of-memory,
+   allowing larger-than-memory calculations.
+
+   :Parameters: * **basedir** (*str*) -- The directory in which the database will be created, or read from.
+                * **readonly** (*bool, optional*) -- If True, the database will be read only. Defaults to False.
+                * **nocreate** (*bool, optional*) -- If True, a new database will not be created if it does not exist.
+                  Defaults to False.
+                * **suppress_errors** (*bool, optional*) -- If True, errors will be suppressed and raised as warnings instead. Defaults to False. Use with caution.
+
+   :Attributes:
+
+   .. attribute:: basedir
+
+      The directory in which the database will be created, or read from.
+
+      :type: str
+
+   .. attribute:: readonly
+
+      If True, the database will be read-only.
+
+      :type: bool
+
+   .. attribute:: nocreate
+
+      If True, a new database will not be created if it does not exist.
+
+      :type: bool
+
+   .. attribute:: metadata
+
+      A dictionary containing metadata for the database. See also: :py:class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
+
+      :type: dict
+
+   .. attribute:: parent_db
+
+      The parent database, if this is a sub-database. Default: None.
+
+      :type: ISFDataBase
+
+   .. attribute:: _unique_id
+
+      A unique identifier for this database.
+
+      :type: str
+
+   .. attribute:: _registered_to_path
+
+      The path that this database has been registered to on the current filesystem.
+
+      :type: str
+
+   .. attribute:: _registeredDumpers
+
+      A list of all registered dumpers.
+      Dumpers are data-type and file-type specific modules to write out data. See: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+
+      :type: list
+
+   .. attribute:: _suppress_errors
+
+      If True, errors will be suppressed and raised as warnings instead. Use with caution.
+
+      :type: bool
+
+   .. attribute:: _db_state_fn
+
+      The path to the database state file. Contains information on:
+      
+      - ``_registeredDumpers``: A list of all registered dumpers.
+      - ``_unique_id``: A unique identifier for this database.
+      - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
+
+      :type: str
+
+   .. attribute:: _forbidden_keys
+
+      A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
+
+      :type: list
+
+   .. attribute:: _basedir
+
+      :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
+
+      :type: Path
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_infer_missing_metadata <data_base.isf_data_base.isf_data_base.ISFDataBase._infer_missing_metadata>`\ ()
+        - Checks whether metadata is missing, and tries to estimate it.
+      * - :py:obj:`_register_this_database <data_base.isf_data_base.isf_data_base.ISFDataBase._register_this_database>`\ ()
+        - Register this database with the database register.
+      * - :py:obj:`_set_unique_id <data_base.isf_data_base.isf_data_base.ISFDataBase._set_unique_id>`\ ()
+        - Sets a unique ID for the DataBase as class attribute.
+      * - :py:obj:`_is_initialized <data_base.isf_data_base.isf_data_base.ISFDataBase._is_initialized>`\ ()
+        - Check if the current database is initialized.
+      * - :py:obj:`_initialize <data_base.isf_data_base.isf_data_base.ISFDataBase._initialize>`\ ()
+        - Initialize the database.
+      * - :py:obj:`_convert_key_to_path <data_base.isf_data_base.isf_data_base.ISFDataBase._convert_key_to_path>`\ (key)
+        - Infer the file path from a database key.
+      * - :py:obj:`_check_key_format <data_base.isf_data_base.isf_data_base.ISFDataBase._check_key_format>`\ (key\_str\_tuple)
+        - Checks if a key is valid for setting data.
+      * - :py:obj:`_detect_dumper_string_of_existing_key <data_base.isf_data_base.isf_data_base.ISFDataBase._detect_dumper_string_of_existing_key>`\ (key)
+        - Get the dumper of an existing key as a string (not module).
+      * - :py:obj:`_find_dumper <data_base.isf_data_base.isf_data_base.ISFDataBase._find_dumper>`\ (item)
+        - Finds a suitable dumper of a given item.
+      * - :py:obj:`_write_metadata <data_base.isf_data_base.isf_data_base.ISFDataBase._write_metadata>`\ (dumper, dir\_to\_data)
+        - Writes the metadata of this database.
+      * - :py:obj:`_check_writing_privilege <data_base.isf_data_base.isf_data_base.ISFDataBase._check_writing_privilege>`\ (key)
+        - Check if we have permission to write to a key.
+      * - :py:obj:`check_if_key_exists <data_base.isf_data_base.isf_data_base.ISFDataBase.check_if_key_exists>`\ (key)
+        - Check if a key exists in the database.
+      * - :py:obj:`get_id <data_base.isf_data_base.isf_data_base.ISFDataBase.get_id>`\ ()
+        - Get the unique ID of this database.
+      * - :py:obj:`register_dumper <data_base.isf_data_base.isf_data_base.ISFDataBase.register_dumper>`\ (dumper\_module)
+        - Register a dumper with this database, so it can be used to save data.
+      * - :py:obj:`save_db_state <data_base.isf_data_base.isf_data_base.ISFDataBase.save_db_state>`\ ()
+        - Saves the data which defines the state of this database to ``db_state.json``
+      * - :py:obj:`read_db_state <data_base.isf_data_base.isf_data_base.ISFDataBase.read_db_state>`\ ()
+        - Sets the state of the database according to ``db_state.json``
+      * - :py:obj:`get_mkdtemp <data_base.isf_data_base.isf_data_base.ISFDataBase.get_mkdtemp>`\ (prefix, suffix)
+        - Create a temporary directory in the data_base
+      * - :py:obj:`create_managed_folder <data_base.isf_data_base.isf_data_base.ISFDataBase.create_managed_folder>`\ (key, raise\_)
+        - Create a folder in the db directory.
+      * - :py:obj:`create_shared_numpy_store <data_base.isf_data_base.isf_data_base.ISFDataBase.create_shared_numpy_store>`\ (key, raise\_)
+        - Create a shared numpy store in the db directory.
+      * - :py:obj:`create_sub_db <data_base.isf_data_base.isf_data_base.ISFDataBase.create_sub_db>`\ (key, register, \*\*kwargs)
+        - Creates a database within a database.
+      * - :py:obj:`get <data_base.isf_data_base.isf_data_base.ISFDataBase.get>`\ (key, lock, \*\*kwargs)
+        - Get data from the database.
+      * - :py:obj:`rename <data_base.isf_data_base.isf_data_base.ISFDataBase.rename>`\ (old\_key, new\_key)
+        - Rename a key in the database.
+      * - :py:obj:`set <data_base.isf_data_base.isf_data_base.ISFDataBase.set>`\ (key, value, lock, dumper, \*\*kwargs)
+        - Main method to save data in a DataBase.
+      * - :py:obj:`maybe_calculate <data_base.isf_data_base.isf_data_base.ISFDataBase.maybe_calculate>`\ (key, fun, \*\*kwargs)
+        - Get or calculate a value in the database.
+      * - :py:obj:`keys <data_base.isf_data_base.isf_data_base.ISFDataBase.keys>`\ (recurse)
+        - Get the keys of the database.
+      * - :py:obj:`_subkeys <data_base.isf_data_base.isf_data_base.ISFDataBase._subkeys>`\ (keys)
+        - Returns all keys of a database, including their subdatabase keys.
+      * - :py:obj:`ls <data_base.isf_data_base.isf_data_base.ISFDataBase.ls>`\ (depth, max\_depth, max\_lines, all\_files, max\_lines\_per\_key, color)
+        - Prints out the content of the database in a tree structure.
+      * - :py:obj:`_get_str <data_base.isf_data_base.isf_data_base.ISFDataBase._get_str>`\ (depth, max\_depth, max\_lines, all\_files, max\_lines\_per\_key, color)
+        - Fetches a string representation for this db in a tree structure.
+      * - :py:obj:`remove <data_base.isf_data_base.isf_data_base.ISFDataBase.remove>`\ ()
+        - Deletes the database.
+

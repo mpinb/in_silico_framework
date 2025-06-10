@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor.setup`
+
+_DataExtractor.setup
+====================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor.setup(Rm)
+
+   Setup necessary parameters, depending on which RM is passed
+
+   :Parameters: **Rm** (:py:class:`Rm`) -- Reduced model object
+

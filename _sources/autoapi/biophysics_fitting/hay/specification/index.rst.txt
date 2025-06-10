@@ -1,0 +1,51 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification`
+
+specification
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_hay_objective_names </autoapi/biophysics_fitting/hay/specification/get_hay_objective_names>
+   get_hay_param_names </autoapi/biophysics_fitting/hay/specification/get_hay_param_names>
+   get_hay_params_pdf </autoapi/biophysics_fitting/hay/specification/get_hay_params_pdf>
+   get_hay_problem_description </autoapi/biophysics_fitting/hay/specification/get_hay_problem_description>
+   get_feasible_model_params </autoapi/biophysics_fitting/hay/specification/get_feasible_model_params>
+   get_feasible_model_objectives </autoapi/biophysics_fitting/hay/specification/get_feasible_model_objectives>
+
+.. py:module:: biophysics_fitting.hay.specification
+
+.. autoapi-nested-parse::
+   This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_hay_objective_names <biophysics_fitting.hay.specification.get_hay_objective_names>`\ ()
+     - Get the names of the objectives used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   * - :py:obj:`get_hay_param_names <biophysics_fitting.hay.specification.get_hay_param_names>`\ ()
+     - Get the names of the parameters used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   * - :py:obj:`get_hay_params_pdf <biophysics_fitting.hay.specification.get_hay_params_pdf>`\ ()
+     - Get the parameter boundaries used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   * - :py:obj:`get_hay_problem_description <biophysics_fitting.hay.specification.get_hay_problem_description>`\ ()
+     - Get the problem description used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   * - :py:obj:`get_feasible_model_params <biophysics_fitting.hay.specification.get_feasible_model_params>`\ ()
+     - Get a set of feasible model parameters.
+   * - :py:obj:`get_feasible_model_objectives <biophysics_fitting.hay.specification.get_feasible_model_objectives>`\ ()
+     - Get the objectives of a feasible model.
+
+

@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField.is_in_bounds`
+
+ScalarField.is_in_bounds
+========================
+
+.. py:method:: single_cell_parser.scalar_field.ScalarField.is_in_bounds(xyz)
+
+   Check if point is within bounding box of mesh.
+
+   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+
+   :returns: True if point is within bounding box, False otherwise.
+   :rtype: bool
+

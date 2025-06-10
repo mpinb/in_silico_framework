@@ -1,0 +1,53 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.Loader`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Loader
+======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get <Loader.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.Loader(meta=None)
+   
+   Load for parquet files to pandas DataFrames
+
+   :Parameters: **meta** (*dict, optional*) -- Meta information to be saved with the object. Defaults to None.
+
+   :Attributes:
+
+   .. attribute:: meta
+
+      Meta information to be saved with the object.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get <data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.Loader.get>`\ (savedir)
+        - Load the pandas DataFrame from the specified folder
+

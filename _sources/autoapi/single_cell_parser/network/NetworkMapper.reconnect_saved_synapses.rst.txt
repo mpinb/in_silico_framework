@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.reconnect_saved_synapses`
+
+NetworkMapper.reconnect_saved_synapses
+======================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper.reconnect_saved_synapses(synInfoName, synWeightName=None, include_silent_synapses=False)
+
+   Set up a network from a saved :ref:`syn_activation_format` file.
+
+   This method does not only create the synapse locations from previously saved files,
+   but also activates them according to the saved activation times.
+   This is in contrast to e.g. :py:meth:`~create_saved_network2`, which generates
+   the activations from scratch.
+
+   :Parameters: * **synInfoName** (*str*) -- Name of the :ref:`syn_activation_format` file.
+                * **synWeightName** (*str, optional*) -- Name of the file containing the synapse weights. Default: None.
+                * **include_silent_synapses** -- Also create synapses that were not active.
+                  This maintains the synapse id, but maybe slightly slower.
+
+   .. deprecated:: 0.1
+      The ``synWeightName`` argument is deprecated.
+

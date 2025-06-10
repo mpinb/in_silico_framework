@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.silence_synapses_by_somadist_and_spike_source`
+
+
+.. title:
+
+silence_synapses_by_somadist_and_spike_source
+=============================================
+
+
+.. py:function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.silence_synapses_by_somadist_and_spike_source(cell, evokedNW, soma_dist_ranges=None, spike_sources=None)
+
+   Silences synapse activation at a :paramref:`soma\_dist\_ranges`,
+   that are from presynaptic origins **not** listed in :paramref:`spike\_sources`.
+
+   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- The cell to modify.
+                * **soma\_dist\_ranges** (*dict*) -- A dictionary with synapse types as keys and
+                  tuples of minimum and maximum soma distances as values.
+                * **spike\_sources** (*list*) -- A list of spike sources to keep active.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

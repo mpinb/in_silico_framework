@@ -1,0 +1,42 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.trace_check`
+
+
+.. title:
+
+trace_check
+===========
+
+
+.. py:function:: biophysics_fitting.ephys.trace_check(t, v, stim_onset=None, stim_duration=None, minspikenum=None, soma_threshold=None, returning_to_rest=2, max_prestim_dendrite_depo=-50, vmax=None, name=&#39;&#39;)
+
+   Check the properties of a voltage trace:
+
+   1. Check that at least minspikenum are present.
+   2. Check if it properly returns to rest.
+   3. Check that there are no spikes before stimulus onset (in soma or dendrite).
+   4. Check if last spike is before deadline.
+   5. Check that the maximum dendritic depolarization before stimulus onset is not too large.
+
+   :Parameters: * **t** (*array*) -- Time array.
+                * **v** (*array*) -- Voltage array.
+                * **stim\_onset** (*float*) -- Time of stimulus onset.
+                * **stim\_duration** (*float*) -- Duration of stimulus.
+                * **minspikenum** (*int*) -- Minimum number of spikes required.
+                * **soma\_threshold** (*float*) -- Threshold voltage for spike detection.
+                * **returning\_to\_rest** (*float*) -- Voltage difference between last reported voltage and voltage base.
+                * **max\_prestim\_dendrite\_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset.
+                * **vmax** (*float*) -- Maximum voltage.
+                * **name** (*str*) -- Name of the trace.
+
+   :returns: Dictionary containing the results of the checks.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

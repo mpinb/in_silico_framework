@@ -1,0 +1,39 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist`
+
+silence_synapses_by_somadist
+============================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   silence_synapses_by_somadist </autoapi/single_cell_parser/network_modify_functions/silence_synapses_by_somadist/silence_synapses_by_somadist>
+
+.. py:module:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist
+
+.. autoapi-nested-parse::
+   Modify network activity by silencing synapses based on soma distance.
+
+   These functions can be used in e.g. :py:mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
+   silencing synapses based on their postsynaptic location.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`silence_synapses_by_somadist <single_cell_parser.network_modify_functions.silence_synapses_by_somadist.silence_synapses_by_somadist>`\ (cell, evokedNW, soma\_dist\_ranges)
+     - Silence synapses at a certain soma distance.
+
+

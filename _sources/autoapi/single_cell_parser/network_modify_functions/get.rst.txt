@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ :mod:`~single_cell_parser.network_modify_functions.get`
+
+
+.. title:
+
+get
+===
+
+
+.. py:function:: single_cell_parser.network_modify_functions.get(funname)
+
+   Get the function with the given name.
+
+   Network modify functions reside in a module of the same name.
+   This method fetches them from said module.
+
+   :Parameters: **funname** (*str*) -- Name of the function to get.
+
+   :returns: The function with the given name.
+   :rtype: callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

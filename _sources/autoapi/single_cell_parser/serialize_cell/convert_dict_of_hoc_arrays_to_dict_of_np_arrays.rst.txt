@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.serialize_cell` ❭ :mod:`~single_cell_parser.serialize_cell.convert_dict_of_hoc_arrays_to_dict_of_np_arrays`
+
+
+.. title:
+
+convert_dict_of_hoc_arrays_to_dict_of_np_arrays
+===============================================
+
+
+.. py:function:: single_cell_parser.serialize_cell.convert_dict_of_hoc_arrays_to_dict_of_np_arrays(hoc_array_dict)
+
+   Convert dictionary of hoc arrays to dictionary of list of lists
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._apply_network_modify_functions`
+
+NetworkMapper._apply_network_modify_functions
+=============================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._apply_network_modify_functions()
+
+   Apply network modify functions to the network.
+
+   Network modify functions can be found in the module :py:mod:`~single_cell_parser.network_modify_functions`,
+   and always take the arguments :paramref:`postCell` and a :py:class:`~single_cell_parser.network.NetworkMapper` object.
+

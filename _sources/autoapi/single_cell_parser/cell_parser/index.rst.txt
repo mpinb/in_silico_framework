@@ -1,0 +1,36 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser`
+
+cell_parser
+===========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   CellParser </autoapi/single_cell_parser/cell_parser/CellParser>
+
+.. py:module:: single_cell_parser.cell_parser
+
+.. autoapi-nested-parse::
+   Read and parse a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`CellParser <single_cell_parser.cell_parser.CellParser>`
+     - Configure a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+
+
+

@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.MetadataAccessor` ❭ :mod:`~data_base.isf_data_base.isf_data_base.MetadataAccessor.keys`
+
+MetadataAccessor.keys
+=====================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.MetadataAccessor.keys()
+
+   Return the keys of the :paramref:`db`
+

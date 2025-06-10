@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize._decorators` ❭ :mod:`~visualize._decorators.pr`
+
+
+.. title:
+
+pr
+==
+
+
+.. py:function:: visualize._decorators.pr(*args, **kwargs)
+
+   Prints the types of the passed arguments.
+
+   :Parameters: * **\*args** -- The arguments to print.
+                * **\*\*kwargs** -- The keyword arguments to print.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

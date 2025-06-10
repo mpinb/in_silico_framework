@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_feasible_model_params`
+
+
+.. title:
+
+get_feasible_model_params
+=========================
+
+
+.. py:function:: biophysics_fitting.hay.specification.get_feasible_model_params()
+
+   Get a set of feasible model parameters.
+
+   This dataframe contains biophysical parameters that are not only within range,
+   but also likely values to find.
+   They are however not guaranteed to yield realistic responses to a stimulus, when
+   applied to a L5PT.
+   In general, the response of a cell with these biophysical parameters
+   heavily depends on the morphology as well.
+
+   Conductance parameters (:math:`\bar{g}` or :math:`g\_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
+   and :math:`\gamma` parameters are a fraction and unitless.
+
+   :returns: A DataFrame with the parameter names as index, feasible values as column 'x', and the min and max.
+   :rtype: pd.DataFrame
+
+   .. note::
+
+      The parameters are specific to the L5PT and the Hay stimulus protocol.
+      See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

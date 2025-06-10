@@ -1,0 +1,79 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_extract_column_in_filtered_dataframe
+==============================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <STAPlugin_extract_column_in_filtered_dataframe.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe(name=None, column_name=None, source=None, select={})
+   
+   SpikeTimeAnalysis (STA) plugin to extract a column from a filtered dataframe.
+
+   :raises ValueError: If :paramref:`name`, :paramref:`column_name`, or :paramref:`source` are not defined.
+
+   .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
+
+   .. seealso:: :py:meth:`data_base.utils.select` filters out the columns using :paramref:`select`
+
+   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to None.
+                * **column_name** (*str, optional*) -- The name of the column to extract. Defaults to None.
+                * **source** (*str, optional*) -- The :py:class:`~data_base.data_base.DataBase` key containing the dataframe. Defaults to None.
+
+   :Attributes:
+
+   .. attribute:: name
+
+      The name of the plugin.
+
+      :type: str
+
+   .. attribute:: column_name
+
+      The name of the column to extract.
+
+      :type: str
+
+   .. attribute:: source
+
+      The :py:class:`~data_base.data_base.DataBase` key containing the dataframe.
+
+      :type: str
+
+   .. attribute:: select
+
+      The selection criteria for the dataframe.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe.setup>`\ (spike\_times\_analysis)
+        - Sets up the analysis: extracts a column from a filtered dataframe.
+

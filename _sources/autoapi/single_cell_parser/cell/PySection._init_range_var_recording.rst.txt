@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._init_range_var_recording`
+
+PySection._init_range_var_recording
+===================================
+
+.. py:method:: single_cell_parser.cell.PySection._init_range_var_recording(var, mech=None)
+
+   Initialize recording of a range mechanism.
+
+   :Parameters: * **var** (*str*) -- The name of the range mechanism to record.
+                * **mech** (*str, optional*) -- The name of the mechanism. Defaults to None.
+
+   :raises NameError: If the mechanism is not present in the segment.
+   :raises AttributeError: If the mechanism is not present in the segment.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> sec._init_range_var_recording('ica', 'Ca_HVA')
+

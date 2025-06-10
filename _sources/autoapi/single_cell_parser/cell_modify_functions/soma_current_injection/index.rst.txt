@@ -1,0 +1,36 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.soma_current_injection`
+
+soma_current_injection
+======================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   soma_current_injection </autoapi/single_cell_parser/cell_modify_functions/soma_current_injection/soma_current_injection>
+
+.. py:module:: single_cell_parser.cell_modify_functions.soma_current_injection
+
+.. autoapi-nested-parse::
+   Inject a step current at the soma.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`soma_current_injection <single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection>`\ (cell, amplitude, delay, duration)
+     - Inject a step current at the soma.
+
+

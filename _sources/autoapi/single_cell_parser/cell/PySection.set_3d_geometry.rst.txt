@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.set_3d_geometry`
+
+PySection.set_3d_geometry
+=========================
+
+.. py:method:: single_cell_parser.cell.PySection.set_3d_geometry(pts, diams)
+
+   Invokes NEURON 3D geometry setup.
+
+   :Parameters: * **pts** (*list*) -- 3D coordinates of the section
+                * **diams** (*list*) -- diameters at the 3D coordinates.
+
+   :raises RuntimeError: If the list of diameters does not match the list of 3D points in length.
+
+   :returns: ``pts``, ``nrOfPts``, ``diamList``, ``bounds``, and ``relPts``.
+   :rtype: None. Fills the attributes
+

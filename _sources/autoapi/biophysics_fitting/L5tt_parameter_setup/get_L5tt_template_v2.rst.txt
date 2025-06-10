@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2`
+
+
+.. title:
+
+get_L5tt_template_v2
+====================
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2()
+
+   Get a template cell parameter dictionary for a L5PT cell.
+
+   This method is identical to :py:meth:`get\_L5tt\_template`, but adds the following specifications:
+
+   - The CaDynamics\_E2 mechanism is replaced with CaDynamics\_E2\_v2 (see :py:mod:`mechanisms`).
+   - The SKv3\_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer\_Helmstaedter\_Schmitt\_Bar\_Yehuda\_Almog\_Ben\_Porat\_Sakmann\_Korngreen\_2007`).
+
+   :returns: The template cell parameters.
+   :rtype: :py:class:`:py:class:`~single\_cell\_parser.parameters.ParameterSet``
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

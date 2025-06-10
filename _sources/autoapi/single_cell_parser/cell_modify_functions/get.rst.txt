@@ -1,0 +1,42 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.get`
+
+
+.. title:
+
+get
+===
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.get(funname)
+
+   Get a cell modification function by their name.
+
+   Cell modify functions are defined in this module, and can be retrieved by name.
+   Each cell modify function is defined in a module that has the same name as the function itself.
+   For example, the full path to
+   :py:meth:`~single\_cell\_parser.cell\_modify\_functions.scale\_apical.scale\_apical` is
+   :py:meth:`single\_cell\_parser.cell\_modify\_functions.scale\_apical.scale\_apical`.
+   To make it easier to retrieve the function, this function provides API to simply fetch them by name.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> from single\_cell\_parser.cell\_modify\_functions import get
+   >>> fun = get('scale\_apical')
+   >>> fun
+   <function scale\_apical at 0x7f0c3f2b6e18>
+   >>> print(fun.\_\_file\_\_)
+   single\_cell\_parser/cell\_modify\_functions/scale\_apical.py
+
+   :returns: the cell modification function.
+   :rtype: Callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

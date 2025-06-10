@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.eaAlphaMuPlusLambdaCheckpoint`
+
+
+.. title:
+
+eaAlphaMuPlusLambdaCheckpoint
+=============================
+
+
+.. py:function:: biophysics_fitting.optimizer.eaAlphaMuPlusLambdaCheckpoint(population, toolbox, mu, cxpb, mutpb, ngen, stats=None, halloffame=None, cp_frequency=1, db_run=None, continue_cp=False, db=None)
+
+   This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
+
+   :Parameters: * **population** (*list*) -- list of deap Individuals
+                * **toolbox** (*deap Toolbox*)
+                * **mu** (*int*) -- Total parent population size of EA
+                * **cxpb** (*float*) -- Crossover probability
+                * **mutpb** (*float*) -- Mutation probability
+                * **ngen** (*int*) -- Total number of generation to run
+                * **stats** (*deap.tools.Statistics*) -- generation of statistics
+                * **halloffame** (*deap.tools.HallOfFame*) -- hall of fame
+                * **cp\_frequency** (*int*) -- generations between checkpoints
+                * **cp\_filename** (*DataBase or None*) -- db\_run, where the checkpoint is stored in [generation]\_checkpoint. Was: path to checkpoint filename
+                * **continue\_cp** (*bool*) -- whether to continue
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

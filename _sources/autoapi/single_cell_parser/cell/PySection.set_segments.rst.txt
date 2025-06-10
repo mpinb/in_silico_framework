@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.set_segments`
+
+PySection.set_segments
+======================
+
+.. py:method:: single_cell_parser.cell.PySection.set_segments(nrOfSegments)
+
+   Set spatial discretization.
+
+   Spatial discretization bins the section points into segments. Each segment is a NEURON compartment with fixed diameter.
+   The amount of segments in each section is dependent on the biophysical properties of that section.
+   This should thus be used together with biophysical parameters to produce meaningful, yet efficient discretization.
+
+   Workflow:
+
+   1. Determine the number of segments in the section.
+   2. Compute the center points of each segment.
+   3. Compute the diameter of each segment.
+   4. Compute the total area of all NEURON segments in this section.
+   5. Initialize voltage recording.
+
+   See also
+       :py:meth:`single_cell_parser.cell_parser.CellParser.determine_nseg`
+

@@ -1,0 +1,105 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SynapseDensity
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   compute_synapse_density <SynapseDensity.compute_synapse_density>
+   compute_cell_PST <SynapseDensity.compute_cell_PST>
+   _compute_length_surface_area_density <SynapseDensity._compute_length_surface_area_density>
+   _clip_u <SynapseDensity._clip_u>
+   _get_truncated_cone_area <SynapseDensity._get_truncated_cone_area>
+   _interpolate_radius <SynapseDensity._interpolate_radius>
+   _compute_cell_density_grid <SynapseDensity._compute_cell_density_grid>
+   _is_zero <SynapseDensity._is_zero>
+   _intersect_bboxes <SynapseDensity._intersect_bboxes>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity(cell, postCellType, connectionSpreadsheet, exTypes, inhTypes, exPST, inhPST)
+   
+   Compute synapse density mesh from a PST density mesh.
+
+   Given a PST density mesh, create a 3D mesh of synapse densities for a single postsynaptic neuron using :py:meth:`compute_synapse_density`.
+   It is assumed that :py:attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.exPST` and :py:attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.inhPST` have the same bounding box and voxel size.
+   This density mesh is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` to assign synapses to the postsynaptic neuron.
+
+   This class is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   to compute synapse densities per presynaptic cell type for a given postsynaptic cell type and morphology.
+
+   :paramref:`exPST` and :paramref:`inhPST` are density meshes for normalizing post-synaptic targets.
+   Shown below is an example for such density field: the (25000, 50000, 75000, 100000) isosurfaces of the excitatory
+   PST density field for a rat somatosensory cortex (pia and white matter shown in grey at the top and bottom).
+
+   .. figure:: ../../../../_static/_images/exPST_solid_bg.png
+
+   .. note::
+
+      The only cell type specificity that is considered here is whether or not the postsynaptic cell is excitatory or inhibitory.
+      Cell type wiring specificity is only considered in the network realization phase, when the synapse density field is Poisson sampled and normalized.
+      Then the normalization values depend on the exact presynaptic cell type.
+
+   .. seealso:: See: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+
+   :Parameters: * **cell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- the postsynaptic neuron
+                * **postCellType** (*str*) -- cell type of the postsynaptic neuron
+                * **connectionSpreadsheet** (*dict | DataFrame*) -- spreadsheet containing length/surface area PST densities.
+                * **exTypes** (*list*) -- list of strings defining excitatory cell types.
+                * **inhTypes** (*list*) -- list of strings defining inhibitory cell types.
+                * **exPST** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- normalization PST for connections with presynaptic excitatory cell types.
+                * **inhPST** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- normalization PST for connections with presynaptic inhibitory cell types.
+
+   :Attributes:
+
+   .. attribute:: cellPST
+
+      Nested dictionary containing the 3D length/surface area density of the postsynaptic neuron.
+      See :py:meth:`~SynapseDensity.compute_cell_PST` for details.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`compute_synapse_density <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_synapse_density>`\ (boutonDensity, preCellType)
+        - Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
+      * - :py:obj:`compute_cell_PST <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST>`\ ()
+        - Compute 3D length/surface area density of the postsynaptic targets in the mesh.
+      * - :py:obj:`_compute_length_surface_area_density <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density>`\ (lengthDensity, surfaceAreaDensity, likeAmira)
+        - Fills the scalar fields :paramref:`lengthDensity` and :paramref:`surfaceDensity` to contain length and area per structure per voxel.
+      * - :py:obj:`_clip_u <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._clip_u>`\ (pq, u1u2)
+        - Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.
+      * - :py:obj:`_get_truncated_cone_area <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._get_truncated_cone_area>`\ (height, radius1, radius2)
+        - Calculate the are of a truncated cone.
+      * - :py:obj:`_interpolate_radius <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._interpolate_radius>`\ (p0, p1, radius0, radius1, targetPt)
+        - Interpolate the radius of a segment between two points.
+      * - :py:obj:`_compute_cell_density_grid <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid>`\ ()
+        - Create an empty mesh for the postsynaptic neuron to match the mesh of the synapse distribution.
+      * - :py:obj:`_is_zero <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._is_zero>`\ (number)
+        - Check if a number is close to zero (tolerance of 1e-10)
+      * - :py:obj:`_intersect_bboxes <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._intersect_bboxes>`\ (bbox1, bbox2)
+        - Check if two bounding boxes overlap
+

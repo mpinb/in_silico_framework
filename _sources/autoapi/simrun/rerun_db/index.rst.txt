@@ -1,0 +1,64 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.rerun_db`
+
+rerun_db
+========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Opaque </autoapi/simrun/rerun_db/Opaque>
+   rerun_db </autoapi/simrun/rerun_db/rerun_db>
+
+.. py:module:: simrun.rerun_db
+
+.. autoapi-nested-parse::
+   Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
+
+   This module provides a function to resimulate a network-embedded neuron simulation from a simrun-initialized database.
+   It allows to modify either the cell or the network with modification functions.
+   The database is expected to have been initialized with :py:mod:`data_base.db_initializers.load_simrun_general`.
+   The function :py:func:`rerun_db` takes a database and a directory as input and resimulates the network-embedded neuron simulation for each simulation trial in the database.
+   The results are stored in the specified directory.
+
+   .. seealso:: :py:mod:`~data_base.db_initializers.load_simrun_general` for initializing a database from raw :py:mod:`simrun` output.
+
+   .. seealso::
+
+      :py:mod:`~single_cell_parser.cell_modify_functions` and :py:mod:`~single_cell_parser.network_modify_functions`
+      for example functions to modify the :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Opaque <simrun.rerun_db.Opaque>`
+     - Wrapper class to make objects opaqye to dask
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`rerun_db <simrun.rerun_db.rerun_db>`\ (db, outdir, tStop, neuron\_param\_modify\_functions, network\_param\_modify\_functions, synapse\_activation\_modify\_functions, stis, silent, additional\_network\_params, child\_process)
+     - Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
+
+

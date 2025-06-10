@@ -1,0 +1,51 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell`
+
+cell
+====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Cell </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/Cell>
+   PySection2 </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/PySection2>
+   PointCell </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/PointCell>
+   Synapse </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/Synapse>
+   CellParser </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/CellParser>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.cell
+
+.. autoapi-nested-parse::
+   Classes for setting up a cell morphology and mapping synapses onto it.
+
+   Used to create network realizations.
+   For functional network realizations (i.e. known presynaptic origin of each synapse), see :py:mod:`single_cell_parser.network`
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Cell <singlecell_input_mapper.singlecell_input_mapper.cell.Cell>`
+     - Cell object for mapping synapses onto a morphology.
+   * - :py:obj:`PySection2 <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2>`
+     - Convenience class around NEURON's Section class.
+   * - :py:obj:`PointCell <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell>`
+     - Cell object without morphological attributes.
+   * - :py:obj:`Synapse <singlecell_input_mapper.singlecell_input_mapper.cell.Synapse>`
+     - Leightweight dataclass to store basic synapse information.
+   * - :py:obj:`CellParser <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser>`
+     - Extract cell morphology from an AMIRA hoc file.
+
+
+

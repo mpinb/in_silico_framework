@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.create_modular_db_path`
+
+
+.. title:
+
+create_modular_db_path
+======================
+
+
+.. py:function:: data_base.dbopen.create_modular_db_path(path)
+
+   Create a database path from a given path.
+
+   Modular database paths are of the form ``mdb://<unique\_id>/...``.
+   The point of these paths is to be independent of their location on the hard drive,
+   and can thus be transferred to other file systems, and resolved afterwards using the database registry.
+
+   :Parameters: **path** (*str*) -- The path to be converted to a database path.
+
+   :returns: The database path.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

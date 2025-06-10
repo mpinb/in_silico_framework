@@ -1,0 +1,45 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.cell` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.cell.Loader`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Loader
+======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get <Loader.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.cell.Loader
+   
+   Loader for :py:class:`~single_cell_parser.cell.Cell` objects
+
+   .. seealso:: :py:meth:`~single_cell_parser.serialize_cell.load_cell_from_file`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get <data_base.isf_data_base.IO.LoaderDumper.cell.Loader.get>`\ (savedir)
+        - Loads a :py:class:`~single_cell_parser.cell.Cell` object from a directory
+

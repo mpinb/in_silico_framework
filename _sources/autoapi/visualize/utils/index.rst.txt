@@ -1,0 +1,68 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Arrow3D </autoapi/visualize/utils/Arrow3D>
+   write_video_from_images </autoapi/visualize/utils/write_video_from_images>
+   write_gif_from_images </autoapi/visualize/utils/write_gif_from_images>
+   _load_base64 </autoapi/visualize/utils/_load_base64>
+   display_animation_from_images </autoapi/visualize/utils/display_animation_from_images>
+   find_files_and_order_them </autoapi/visualize/utils/find_files_and_order_them>
+   _arrow3D </autoapi/visualize/utils/_arrow3D>
+   draw_arrow </autoapi/visualize/utils/draw_arrow>
+   value_to_color </autoapi/visualize/utils/value_to_color>
+
+.. py:module:: visualize.utils
+
+.. autoapi-nested-parse::
+   Visualization utilities.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Arrow3D <visualize.utils.Arrow3D>`
+     - Draw a 3D annotation arrow on a matplotlib 3D plot
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`write_video_from_images <visualize.utils.write_video_from_images>`\ (images, out\_path, fps, images\_format, quality, codec, auto\_sort\_paths)
+     - Creates a video from a set of images.
+   * - :py:obj:`write_gif_from_images <visualize.utils.write_gif_from_images>`\ (images, out\_path, interval, images\_format, auto\_sort\_paths)
+     - Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+   * - :py:obj:`display_animation_from_images <visualize.utils.display_animation_from_images>`\ (files, interval, style, animID, embedded)
+     - Creates an IPython animation out of files specified in a globstring or a list of paths.
+   * - :py:obj:`find_files_and_order_them <visualize.utils.find_files_and_order_them>`\ (files, files\_format)
+     - Find files in a list of directories or a directory and order them.
+   * - :py:obj:`draw_arrow <visualize.utils.draw_arrow>`\ (morphology, ax, highlight\_section, highlight\_x, highlight\_arrow\_kwargs, arrow\_size)
+     - Highlight a morphology section with an :py:class:`Arrow3D`.
+   * - :py:obj:`value_to_color <visualize.utils.value_to_color>`\ (v, vmin, vmax)
+     - Map a value to a color.
+
+

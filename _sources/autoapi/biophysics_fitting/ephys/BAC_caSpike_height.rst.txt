@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height`
+
+
+.. title:
+
+BAC_caSpike_height
+==================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height(t, v, v_dend, ca_thresh=-55, tstim=295)
+
+   Returns the height of the calcium spike after tstim.
+
+   :Parameters: * **t** (*array-like*) -- Time array.
+                * **v** (*array-like*) -- Voltage array.
+                * **v\_dend** (*array-like*) -- Dendritic voltage array.
+                * **ca\_thresh** (*float, optional*) -- Calcium threshold. Defaults to -55.
+                * **tstim** (*float, optional*) -- Time of stimulation. Defaults to 295.
+
+   :returns: Height of the calcium spike.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

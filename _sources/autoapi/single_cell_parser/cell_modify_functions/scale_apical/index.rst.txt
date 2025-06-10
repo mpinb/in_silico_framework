@@ -1,0 +1,42 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical`
+
+scale_apical
+============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   scale_apical </autoapi/single_cell_parser/cell_modify_functions/scale_apical/scale_apical>
+   scale_apical_dendrite </autoapi/single_cell_parser/cell_modify_functions/scale_apical/scale_apical_dendrite>
+   scale_by_detailed_compartment </autoapi/single_cell_parser/cell_modify_functions/scale_apical/scale_by_detailed_compartment>
+
+.. py:module:: single_cell_parser.cell_modify_functions.scale_apical
+
+.. autoapi-nested-parse::
+   Scale the apical dendrite of a cell.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`scale_apical <single_cell_parser.cell_modify_functions.scale_apical.scale_apical>`\ (cell, scale, compartment)
+     - Scale the apical dendrite of a cell.
+   * - :py:obj:`scale_apical_dendrite <single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite>`\ (cell, scale, compartment)
+     - Scales the apical dendrite of a cell.
+   * - :py:obj:`scale_by_detailed_compartment <single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment>`\ (cell, \*\*kwargs)
+     - Scales subcellular compartments based on ``detailed_labels``.
+
+

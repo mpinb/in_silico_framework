@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_network`
+
+NetworkMapper.create_network
+============================
+
+.. py:method:: single_cell_parser.network.NetworkMapper.create_network(synWeightName=None, change=None)
+
+   Set up a network from network parameters.
+
+   Here, these synapses can then be connected to activity sources and activated.
+
+   Steps:
+
+   1. Assign anatomical synapses to postsynaptic cell using :py:meth:`~_assign_anatomical_synapses`.
+   2. Create presynaptic cells for these synapses using :py:meth:`~_create_presyn_cells` (multiple synapses can originate from the same presynaptic cell).
+   3. Generate activation patters for each presynaptic cell, depending on whether they are a :py:class:`~single_cell_parser.cell.PointCell` or :py:class:`~single_cell_parser.cell.SpikeTrain` using :py:meth:`_activate_presyn_cells`.
+   4. Connect the presynaptic cells to the anatomical synapses using :py:meth:`~_connect_functional_synapses`.
+   5. Connect to spike train sources using :py:meth:`_connect_spike_trains`.
+
+   :Parameters: * **synWeightName** (*str*) -- Name of the file containing the synapse weights. Default: None.
+                * **change** (*float*) -- Change in presynaptic release probability. Default: None.
+
+   :returns: None. Updates the class attributes (in contrast to :py:meth:`~create_functional_realization, which writes to disk`).
+

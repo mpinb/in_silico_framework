@@ -1,0 +1,148 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+bAP
+===
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get <bAP.get>
+   check <bAP.check>
+   bAP_APheight <bAP.bAP_APheight>
+   bAP_APwidth <bAP.bAP_APwidth>
+   bAP_spikecount <bAP.bAP_spikecount>
+   _bAP_att <bAP._bAP_att>
+   bAP_att2 <bAP.bAP_att2>
+   bAP_att3 <bAP.bAP_att3>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.hay.evaluation.bAP(soma_thresh=-30, stim_onset=295, stim_duration=5, bAP_thresh='+2mV', punish=250.0, punish_last_spike_after_deadline=True, punish_minspikenum=1, punish_returning_to_rest_tolerance=2.0, definitions=HAY_BAP_DEFINITIONS)
+   
+   Evaluate the :math:`bAP` stimulus protocol.
+
+   These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
+
+   .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_bAP` for more information on the stimulus protocol.
+
+   :Parameters: * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
+                * **stim_onset** (*float*) -- The onset of the stimulus (:math:`ms`). Defaults to :math:`295\ ms`.
+                * **stim_duration** (*float*) -- The duration of the stimulus (:math:`ms`). Defaults to :math:`5\ ms`.
+                * **bAP_thresh** (*float*) -- The threshold for the backpropagating action potential. Defaults to :math:`+2\ mV`.
+                * **punish** (*float*) -- The punishment value in units of :math:`\sigma`.
+                  Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+                  Defaults to :math:`250 \sigma`.
+                * **punish_last_spike_after_deadline** (*bool*) -- Whether to punish if the last spike is after the deadline. Defaults to ``True``
+                * **punish_minspikenum** (*int*) -- The minimum number of spikes required for this stimulus protocol. Defaults to :math:`1`.
+                * **punish_returning_to_rest_tolerance** (*float*) -- The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+                * **definitions** (*dict*) -- The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+
+   :Attributes:
+
+   .. attribute:: soma_thresh
+
+      The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
+
+      :type: float
+
+   .. attribute:: stim_onset
+
+      The onset of the stimulus (ms). Defaults to :math:`295` ms.
+
+      :type: float
+
+   .. attribute:: stim_duration
+
+      The duration of the stimulus (ms). Defaults to :math:`5` ms.
+
+      :type: float
+
+   .. attribute:: bAP_thresh
+
+      The threshold for the backpropagating action potential. Defaults to :math:`+2` mV.
+
+      :type: float
+
+   .. attribute:: punish
+
+      The punishment value in units of :math:`\sigma`.
+      Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+      Defaults to :math:`250 \sigma`.
+
+      :type: float
+
+   .. attribute:: punish_last_spike_after_deadline
+
+      Whether to punish if the last spike is after the deadline. Defaults to ``True``
+
+      :type: bool
+
+   .. attribute:: punish_minspikenum
+
+      The minimum number of spikes required for this stimulus protocol.
+
+      :type: int
+
+   .. attribute:: punish_returning_to_rest_tolerance
+
+      The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+
+      :type: float
+
+   .. attribute:: definitions
+
+      
+      
+      The empirical means and standard deviations for the evaluation metrics. Defaults to::
+          
+          {
+              'bAP_APheight': ('AP_height', 25.0, 5.0),
+              'bAP_APwidth': ('AP_width', 2.0, 0.5),
+              'bAP_att2': ('BPAPatt2', 45.0, 10.0),
+              'bAP_att3': ('BPAPatt3', 36.0, 9.33),
+              'bAP_spikecount': ('Spikecount', 1.0, 0.01)
+          }
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get <biophysics_fitting.hay.evaluation.bAP.get>`\ (\*\*voltage\_traces)
+        - Get the full evaluation of the voltage traces for bAP firing.
+      * - :py:obj:`check <biophysics_fitting.hay.evaluation.bAP.check>`\ (out, voltage\_traces)
+        - Check for problems in the voltage trace.
+      * - :py:obj:`bAP_APheight <biophysics_fitting.hay.evaluation.bAP.bAP_APheight>`\ (voltage\_traces)
+        - Get the height of the first action potential in the somatic voltage trace.
+      * - :py:obj:`bAP_APwidth <biophysics_fitting.hay.evaluation.bAP.bAP_APwidth>`\ (voltage\_traces)
+        - Get the width of the first action potential in the somatic voltage trace.
+      * - :py:obj:`bAP_spikecount <biophysics_fitting.hay.evaluation.bAP.bAP_spikecount>`\ (voltage\_traces)
+        - Get the number of spikes in the somatic voltage trace.
+      * - :py:obj:`_bAP_att <biophysics_fitting.hay.evaluation.bAP._bAP_att>`\ (voltage\_traces, \_n)
+        - Get the backpropagating action potential attenuation.
+      * - :py:obj:`bAP_att2 <biophysics_fitting.hay.evaluation.bAP.bAP_att2>`\ (voltage\_traces)
+        - Get the backpropagating action potential attenuation between the soma and first dendritic pipette location.
+      * - :py:obj:`bAP_att3 <biophysics_fitting.hay.evaluation.bAP.bAP_att3>`\ (voltage\_traces)
+        - Get the backpropagating action potential attenuation between the soma and second dendritic pipette location.
+

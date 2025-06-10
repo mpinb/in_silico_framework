@@ -1,0 +1,30 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.VariableThatDoesNotGetPickled`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+VariableThatDoesNotGetPickled
+=============================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.utils.VariableThatDoesNotGetPickled(stored_item)
+   
+   A variable that does not get pickled.
+
+   As soon as the object is pickled, the stored item is set to None.
+
+   This is used to keep a multiprocessing pool alive in a child process, but
+   prevent it from being serialized and crossing process boundaries.
+   Using this, the process pool only exists in the child process.
+

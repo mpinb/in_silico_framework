@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk`
+
+CellMorphologyVisualizer.to_vtk
+===============================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk(out_dir='.', fn='')
+
+   Write out the cell morphology to a VTK file.
+
+   .. attention:: This function does not support time series. It will write out the cell morphology without any scalar data.
+
+   :Parameters: * **out_dir** (*str*) -- path of the directory where the VTK file will be stored.
+                * **fn** (*str*) -- name of the VTK file. If empty, the file will be named after the cell's :ref:`hoc_file_format` filename.
+
+   :returns: writes the .VTK file.
+   :rtype: None
+

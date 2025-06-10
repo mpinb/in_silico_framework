@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.voltage_base2`
+
+
+.. title:
+
+voltage_base2
+=============
+
+
+.. py:function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID=&#39;recSiteID&#39;)
+
+   Fetch the voltage at a given time point t0 for a specific recording site ID.
+
+   :Parameters: * **voltage\_traces** (*dict*) -- A dictionary containing voltage traces for different recording sites.
+                * **recSiteID** (*int*) -- The ID of the recording site for which the voltage is to be returned.
+                * **t0** (*float*) -- The time point at which the voltage is to be returned.
+
+   :returns: The voltage at time point t0 for the specified recording site ID.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

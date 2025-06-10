@@ -1,0 +1,52 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ManagedFolder
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   join <ManagedFolder.join>
+   listdir <ManagedFolder.listdir>
+   get_file <ManagedFolder.get_file>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder
+   
+   Wrapper class for a folder path
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`join <data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.join>`\ (\*args)
+        - Get a subfolder of the current folder
+      * - :py:obj:`listdir <data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.listdir>`\ ()
+        - List the files in the folder
+      * - :py:obj:`get_file <data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.get_file>`\ (suffix)
+        - Get the files that end with the specified suffix.
+

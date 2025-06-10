@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_stims`
+
+Simulator_Setup.get_stims
+=========================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stims()
+
+   Get the names of the stimuli.
+

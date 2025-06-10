@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.distance_to_soma`
+
+Cell.distance_to_soma
+=====================
+
+.. py:method:: single_cell_parser.cell.Cell.distance_to_soma(sec, x)
+
+   Computes the path length between the soma and a specified point.
+
+   The point is specified by its location :paramref:`x` in the section :paramref:`sec`, or by the point ID :paramref:`x` and section ID :paramref:`sec`.
+
+   :Parameters: * **sec** (*Section | int*) -- Section or section ID containing the point.
+                * **x** (*float | int*) -- Location or point ID of the point.
+
+   :returns: The computed path length between the soma and the specified point.
+   :rtype: float
+

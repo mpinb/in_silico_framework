@@ -1,0 +1,56 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions`
+
+network_param_modify_functions
+==============================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   change_ongoing_interval </autoapi/single_cell_parser/network_param_modify_functions/change_ongoing_interval>
+   set_stim_onset </autoapi/single_cell_parser/network_param_modify_functions/set_stim_onset>
+   change_glutamate_syn_weights </autoapi/single_cell_parser/network_param_modify_functions/change_glutamate_syn_weights>
+   change_evoked_INH_scaling </autoapi/single_cell_parser/network_param_modify_functions/change_evoked_INH_scaling>
+   _celltype_matches </autoapi/single_cell_parser/network_param_modify_functions/_celltype_matches>
+   _has_evoked </autoapi/single_cell_parser/network_param_modify_functions/_has_evoked>
+   inactivate_evoked_activity_by_celltype_and_column </autoapi/single_cell_parser/network_param_modify_functions/inactivate_evoked_activity_by_celltype_and_column>
+   inactivate_evoked_and_ongoing_activity_by_celltype_and_column </autoapi/single_cell_parser/network_param_modify_functions/inactivate_evoked_and_ongoing_activity_by_celltype_and_column>
+   multi_stimulus_trial </autoapi/single_cell_parser/network_param_modify_functions/multi_stimulus_trial>
+
+.. py:module:: single_cell_parser.network_param_modify_functions
+
+.. autoapi-nested-parse::
+   Modify the :ref:`network_parameters_format`.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`change_ongoing_interval <single_cell_parser.network_param_modify_functions.change_ongoing_interval>`\ (n, factor, pop)
+     - Scales the ongoing frequency with a :paramref:`factor`.
+   * - :py:obj:`set_stim_onset <single_cell_parser.network_param_modify_functions.set_stim_onset>`\ (n, onset)
+     - Changes the offset when pointcells get activated
+   * - :py:obj:`change_glutamate_syn_weights <single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights>`\ (param, g\_optimal, pop)
+     - Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
+   * - :py:obj:`change_evoked_INH_scaling <single_cell_parser.network_param_modify_functions.change_evoked_INH_scaling>`\ (param, factor, pop)
+     - Scales the response probability for inhibitory cells in the :ref:`network_parameters_format`.
+   * - :py:obj:`inactivate_evoked_activity_by_celltype_and_column <single_cell_parser.network_param_modify_functions.inactivate_evoked_activity_by_celltype_and_column>`\ (param, inact\_celltypes, inact\_column)
+     - Inactivates the evoked activity for the celltypes in the :ref:`network_parameters_format`.
+   * - :py:obj:`inactivate_evoked_and_ongoing_activity_by_celltype_and_column <single_cell_parser.network_param_modify_functions.inactivate_evoked_and_ongoing_activity_by_celltype_and_column>`\ (param, inact\_celltypes, inact\_column)
+     - Inactivates both the evoked and ongoing activity for the celltypes in the :ref:`network_parameters_format`.
+   * - :py:obj:`multi_stimulus_trial <single_cell_parser.network_param_modify_functions.multi_stimulus_trial>`\ (netp, inter\_stimulus\_interval, stims, scale\_factors, pop)
+     - Makes a network param file for repeatedly stimulating the same whisker during a single trial.
+
+

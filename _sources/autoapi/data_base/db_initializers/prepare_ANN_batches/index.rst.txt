@@ -1,0 +1,102 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches`
+
+prepare_ANN_batches
+===================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_binsize </autoapi/data_base/db_initializers/prepare_ANN_batches/get_binsize>
+   get_bin </autoapi/data_base/db_initializers/prepare_ANN_batches/get_bin>
+   get_neuron_param_file </autoapi/data_base/db_initializers/prepare_ANN_batches/get_neuron_param_file>
+   get_section_distances_df </autoapi/data_base/db_initializers/prepare_ANN_batches/get_section_distances_df>
+   get_spatial_bin_names </autoapi/data_base/db_initializers/prepare_ANN_batches/get_spatial_bin_names>
+   get_bin_soma_distances_in_section </autoapi/data_base/db_initializers/prepare_ANN_batches/get_bin_soma_distances_in_section>
+   get_bin_adjacency_map_in_section </autoapi/data_base/db_initializers/prepare_ANN_batches/get_bin_adjacency_map_in_section>
+   get_neighboring_spatial_bins </autoapi/data_base/db_initializers/prepare_ANN_batches/get_neighboring_spatial_bins>
+   augment_synapse_activation_df_with_branch_bin </autoapi/data_base/db_initializers/prepare_ANN_batches/augment_synapse_activation_df_with_branch_bin>
+   spike_times_to_onehot </autoapi/data_base/db_initializers/prepare_ANN_batches/spike_times_to_onehot>
+   compute_ISI_from_st_list </autoapi/data_base/db_initializers/prepare_ANN_batches/compute_ISI_from_st_list>
+   compute_ISI_from_st </autoapi/data_base/db_initializers/prepare_ANN_batches/compute_ISI_from_st>
+   compute_ISI_array </autoapi/data_base/db_initializers/prepare_ANN_batches/compute_ISI_array>
+   compute_AP_array </autoapi/data_base/db_initializers/prepare_ANN_batches/compute_AP_array>
+   load_syn_weights </autoapi/data_base/db_initializers/prepare_ANN_batches/load_syn_weights>
+   temporal_binning_augmented_sa </autoapi/data_base/db_initializers/prepare_ANN_batches/temporal_binning_augmented_sa>
+   get_synapse_activation_array_weighted </autoapi/data_base/db_initializers/prepare_ANN_batches/get_synapse_activation_array_weighted>
+   save_SA_batch </autoapi/data_base/db_initializers/prepare_ANN_batches/save_SA_batch>
+   get_time_groups </autoapi/data_base/db_initializers/prepare_ANN_batches/get_time_groups>
+   get_max_per_ms_on_pandas_dataframe </autoapi/data_base/db_initializers/prepare_ANN_batches/get_max_per_ms_on_pandas_dataframe>
+   get_max_depolarization_per_ms </autoapi/data_base/db_initializers/prepare_ANN_batches/get_max_depolarization_per_ms>
+   run_delayeds_incrementally </autoapi/data_base/db_initializers/prepare_ANN_batches/run_delayeds_incrementally>
+
+.. py:module:: data_base.db_initializers.prepare_ANN_batches
+
+.. autoapi-nested-parse::
+   Parse a simrun-initialized database for ANN batch preparation.
+
+   This module provides various methods to bin synapse actications, morphologies, and voltage traces.
+   This binned data can be used as input data for training an artificial neural network (ANN).
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_binsize <data_base.db_initializers.prepare_ANN_batches.get_binsize>`\ (length, binsize\_goal)
+     - Calculate the bin size and number of bins closest to the desired bin size goal.
+   * - :py:obj:`get_bin <data_base.db_initializers.prepare_ANN_batches.get_bin>`\ (value, bin\_min, bin\_max, n\_bins, tolerance)
+     - Find the bin index of a given value.
+   * - :py:obj:`get_neuron_param_file <data_base.db_initializers.prepare_ANN_batches.get_neuron_param_file>`\ (db)
+     - Get the path to the :ref:`cell_parameters_format` file from a simrun-initialized database.
+   * - :py:obj:`get_section_distances_df <data_base.db_initializers.prepare_ANN_batches.get_section_distances_df>`\ (neuron\_param\_file, silent)
+     - Bin the morphology of a neuron from a :ref:`cell_parameters_format` file.
+   * - :py:obj:`get_spatial_bin_names <data_base.db_initializers.prepare_ANN_batches.get_spatial_bin_names>`\ (section\_distances\_df)
+     - Get the bin names from a dataframe describing the distance to soma of all sections.
+   * - :py:obj:`get_bin_soma_distances_in_section <data_base.db_initializers.prepare_ANN_batches.get_bin_soma_distances_in_section>`\ (section\_id, section\_distances\_df)
+     - Get the distance to the soma for all bins in this section.
+   * - :py:obj:`get_bin_adjacency_map_in_section <data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section>`\ (cell, section\_id, section\_distances\_df)
+     - Create an adjacency map with bin-specific resolution for a given section.
+   * - :py:obj:`get_neighboring_spatial_bins <data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins>`\ (cell, bin\_id, section\_distances\_df)
+     - Get all the neighboring bins from a :paramref:`bin_id`.
+   * - :py:obj:`augment_synapse_activation_df_with_branch_bin <data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin>`\ (sa\_, section\_distances\_df, synaptic\_weight\_dict, excitatory\_celltypes)
+     - Augment a :ref:`syn_activation_format` dataframe with bin information.
+   * - :py:obj:`spike_times_to_onehot <data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot>`\ (spike\_times, min\_time, max\_time, time\_step)
+     - One-hot encode spike times to a binned time vector.
+   * - :py:obj:`compute_ISI_from_st_list <data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list>`\ (st, min\_time, max\_time, time\_step)
+     - Construct a time-binned list of inter-spike intervals from a list of spike times.
+   * - :py:obj:`compute_ISI_from_st <data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st>`\ (st, timepoint, fillna)
+     - Calculate the time since the last spike in ms for each element in a spike time pd.Series or pd.DataFrame.
+   * - :py:obj:`compute_ISI_array <data_base.db_initializers.prepare_ANN_batches.compute_ISI_array>`\ (st, min\_time, max\_time, fillna, step)
+     - Calculate the time since the last spike in ms for each element in a spike time Array.
+   * - :py:obj:`compute_AP_array <data_base.db_initializers.prepare_ANN_batches.compute_AP_array>`\ (st, min\_time, max\_time, fillna, step)
+     - One-hot encode spike times to a binned time vector.
+   * - :py:obj:`load_syn_weights <data_base.db_initializers.prepare_ANN_batches.load_syn_weights>`\ (db, client, excitatory\_celltypes)
+     - Load synapse weights from a simrun-initialized database
+   * - :py:obj:`temporal_binning_augmented_sa <data_base.db_initializers.prepare_ANN_batches.temporal_binning_augmented_sa>`\ (sa\_augmented, min\_time, max\_time, bin\_size, use\_weights)
+     - Bin synapse activation times into temporal bins.
+   * - :py:obj:`get_synapse_activation_array_weighted <data_base.db_initializers.prepare_ANN_batches.get_synapse_activation_array_weighted>`\ (sa\_, selected\_stis, spatial\_bin\_names, min\_time, max\_time, bin\_size, use\_weights)
+     - Create a 4D array of synapse activation times.
+   * - :py:obj:`save_SA_batch <data_base.db_initializers.prepare_ANN_batches.save_SA_batch>`\ (sa\_, selected\_stis, batch\_id, outdir, section\_distances\_df, spatial\_bin\_names, min\_time, max\_time, bin\_size, synaptic\_weight\_dict)
+     - Save a batch of synapse activation times to a file.
+   * - :py:obj:`get_time_groups <data_base.db_initializers.prepare_ANN_batches.get_time_groups>`\ (vt\_pandas)
+     - Get the time groups for binning voltage traces.
+   * - :py:obj:`get_max_per_ms_on_pandas_dataframe <data_base.db_initializers.prepare_ANN_batches.get_max_per_ms_on_pandas_dataframe>`\ (vt\_pandas)
+     - Subsample a voltage trace pandas dataframe to 1ms bins based on the maximum depolarization.
+   * - :py:obj:`get_max_depolarization_per_ms <data_base.db_initializers.prepare_ANN_batches.get_max_depolarization_per_ms>`\ (vt\_dask)
+     - Subsample a voltage trace dask dataframe to 1ms bins based on the maximum depolarization.
+   * - :py:obj:`run_delayeds_incrementally <data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally>`\ (client, delayeds)
+     - Convenience method to run a list of dask delayed objects incrementally.
+
+

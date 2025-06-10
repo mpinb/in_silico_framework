@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.compute_syn_distances`
+
+
+.. title:
+
+compute_syn_distances
+=====================
+
+
+.. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distances(cell, synType, label=None, consider_gap_to_soma=False)
+
+   Computes distances (to soma) of all synapses on the dendrite.
+
+   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
+                * **synType** (*str*) -- presynaptic cell type to compute distances for.
+                * **label** (*str, optional*) -- dendrite type (e.g. "ApicalDendrite") to compute distances for.
+                  Default: None (all dendrites)
+
+   :returns: 1D array of distances to soma
+   :rtype: numpy.ndarray
+
+   :raises KeyError: if the cell does not have synapses of type :paramref:`synType`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

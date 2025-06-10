@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions._has_evoked`
+
+
+.. title:
+
+_has_evoked
+===========
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions._has_evoked(param, celltype)
+
+   Check if the celltype has evoked activity.
+
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **celltype** (*str*) -- The celltype to check.
+
+   :returns: True if the celltype has evoked activity, False otherwise.
+   :rtype: bool
+
+   :raises AssertionError: If :paramref:`celltype` is not in the network
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

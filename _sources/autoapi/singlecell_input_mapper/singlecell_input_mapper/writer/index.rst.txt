@@ -1,0 +1,54 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer`
+
+writer
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   write_landmark_file </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_landmark_file>
+   write_cell_synapse_locations </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_cell_synapse_locations>
+   write_anatomical_realization_map </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_anatomical_realization_map>
+   write_sample_connectivity_summary </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_sample_connectivity_summary>
+   write_population_connectivity_summary </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_population_connectivity_summary>
+   write_population_and_sample_connectivity_summary </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_population_and_sample_connectivity_summary>
+   write_scalar_field </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/write_scalar_field>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.writer
+
+.. autoapi-nested-parse::
+   Write out the results of a single connectivity realization or a population of realizations.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`write_landmark_file <singlecell_input_mapper.singlecell_input_mapper.writer.write_landmark_file>`\ (fname, landmarkList)
+     - Write Amira landmark file
+   * - :py:obj:`write_cell_synapse_locations <singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations>`\ (fname, synapses, cellID)
+     - Write a :ref:`syn_file_format` file, containing all synapses and their corresponding cellID, sectionID and x.
+   * - :py:obj:`write_anatomical_realization_map <singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map>`\ (fname, functionalMap, anatomicalID)
+     - Writes a :ref:`con_file_format` file containing a list of all functional connections.
+   * - :py:obj:`write_sample_connectivity_summary <singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary>`\ (fname, cellTypeSummaryData, columnSummaryData)
+     - Write a summary of a single connectivity realization to a file.
+   * - :py:obj:`write_population_connectivity_summary <singlecell_input_mapper.singlecell_input_mapper.writer.write_population_connectivity_summary>`\ (fname, populationDistribution)
+     - Write a summary of populations of connectivity realizations to a file.
+   * - :py:obj:`write_population_and_sample_connectivity_summary <singlecell_input_mapper.singlecell_input_mapper.writer.write_population_and_sample_connectivity_summary>`\ (fname, populationDistribution, cellTypeSummaryData, columnSummaryData)
+     - Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
+   * - :py:obj:`write_scalar_field <singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field>`\ (fname, scalarField)
+     - Write a scalar field to an AmiraMesh file.
+
+

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.check`
+
+_Step.check
+===========
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.check(out, voltage_traces)
+
+   Check for problems in the voltage trace.
+
+   :Parameters: * **out** -- dictionary with the evaluation metrics
+                * **voltage_traces** -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: dictionary with the evaluation metrics, containing the raw values, normalized values, and checks.
+   :rtype: dict
+

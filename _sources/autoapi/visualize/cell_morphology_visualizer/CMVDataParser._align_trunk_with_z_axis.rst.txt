@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis`
+
+CMVDataParser._align_trunk_with_z_axis
+======================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis(cell)
+
+   Calculates the polar angle between the trunk and z-axis (zenith).
+   Anchors the soma to (0, 0, 0) and aligns the trunk to the z-axis.
+
+   :Parameters: **cell** -- Cell object
+
+   :returns: Nothing
+

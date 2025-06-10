@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.get`
+
+_Step.get
+=========
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.get(\*\*voltage_traces)
+
+   Get the full evaluation of the voltage traces for the step current injection.
+
+   :Parameters: **voltage_traces** -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: dictionary with the evaluation metrics, containing the raw values, normalized values, and checks.
+   :rtype: dict
+

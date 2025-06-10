@@ -1,0 +1,67 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model`
+
+reduced_model
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Rm </autoapi/simrun/modular_reduced_model_inference/reduced_model/Rm>
+   DataView </autoapi/simrun/modular_reduced_model_inference/reduced_model/DataView>
+   DataSplitEvaluation </autoapi/simrun/modular_reduced_model_inference/reduced_model/DataSplitEvaluation>
+   get_n_workers_per_ip </autoapi/simrun/modular_reduced_model_inference/reduced_model/get_n_workers_per_ip>
+
+.. py:module:: simrun.modular_reduced_model_inference.reduced_model
+
+.. autoapi-nested-parse::
+   Construct reduced models and run optimization.
+
+   This module provides a top-level class to run reduced model inference.
+   Each reduced model contains:
+   - a :py:class:~`DataView` object to access data
+   - a :py:class:`DataSplitEvaluation` object to split data and evaluate the optimization results
+   - one or more :py:class:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor` objects to preprocess the data
+   - one or more :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` objects to run the optimization.
+
+   The optimization run optimizes a set of free parameters :math:`\mathbf{x}` to minimize a cost function.
+   Both the cost function and the free parameters are defined in the :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Rm <simrun.modular_reduced_model_inference.reduced_model.Rm>`
+     - Reduced model class.
+   * - :py:obj:`DataView <simrun.modular_reduced_model_inference.reduced_model.DataView>`
+     - Convenience wrapper class to access data.
+   * - :py:obj:`DataSplitEvaluation <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation>`
+     - Split data in training-test sets.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_n_workers_per_ip <simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip>`\ (workers, n)
+     - Convenience method to get a certain amount of workers per machine
+
+

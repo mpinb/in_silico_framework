@@ -1,0 +1,77 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy`
+
+strategy
+========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _Strategy </autoapi/simrun/modular_reduced_model_inference/strategy/_Strategy>
+   RaisedCosineBasis </autoapi/simrun/modular_reduced_model_inference/strategy/RaisedCosineBasis>
+   Strategy_spatiotemporalRaisedCosine </autoapi/simrun/modular_reduced_model_inference/strategy/Strategy_spatiotemporalRaisedCosine>
+   make_weakref </autoapi/simrun/modular_reduced_model_inference/strategy/make_weakref>
+   dereference </autoapi/simrun/modular_reduced_model_inference/strategy/dereference>
+   clear_memory </autoapi/simrun/modular_reduced_model_inference/strategy/clear_memory>
+   convert_to_numpy </autoapi/simrun/modular_reduced_model_inference/strategy/convert_to_numpy>
+
+.. py:module:: simrun.modular_reduced_model_inference.strategy
+
+.. autoapi-nested-parse::
+   Strategies for creating reduced models.
+
+   Strategies are pipelines whose sole purpose is to define a cost function.
+   Cost functions are functions :math:`f: D, x \rightarrow c` that take data :math:`D` and parameters :math:`x` as input and return some cost :math:`c`.
+   Solvers then optimize these cost functions to find the best parameters :math:`x` for the given data :math:`D`.
+
+   This approach is purposefully kept very general, so that it can be used for a wide range of purposes.
+
+   One such example is given in :cite:t:`Bast_Fruengel_Kock_Oberlaender_2024`.
+   Here, the strategy contains a set of raised cosine basis functions.
+   These are weighed and superimposed to create spatiotemporal filters.
+   Once multiplied with synaptic activation data, they provided a weighed input of synapse activations.
+   This is then used to predict the spike probability based on the synaptic activation patterns.
+   The parameters that are being optimized are the weights of the raised cosine basis functions.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`RaisedCosineBasis <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis>`
+     - Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
+   * - :py:obj:`Strategy_spatiotemporalRaisedCosine <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine>`
+     - Spatiotemporal raised cosine strategy.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`make_weakref <simrun.modular_reduced_model_inference.strategy.make_weakref>`\ (obj)
+     - Create a weak reference of a Python object.
+   * - :py:obj:`dereference <simrun.modular_reduced_model_inference.strategy.dereference>`\ (weakrefobj)
+     - Dereference a reference and fetch the referent.
+   * - :py:obj:`clear_memory <simrun.modular_reduced_model_inference.strategy.clear_memory>`\ ()
+     - Remove all weak references
+   * - :py:obj:`convert_to_numpy <simrun.modular_reduced_model_inference.strategy.convert_to_numpy>`\ (x)
+     - Convert a numpy to a cupy array
+
+

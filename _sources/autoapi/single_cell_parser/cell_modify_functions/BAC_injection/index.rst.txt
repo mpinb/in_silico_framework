@@ -1,0 +1,36 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.BAC_injection`
+
+BAC_injection
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   BAC_injection </autoapi/single_cell_parser/cell_modify_functions/BAC_injection/BAC_injection>
+
+.. py:module:: single_cell_parser.cell_modify_functions.BAC_injection
+
+.. autoapi-nested-parse::
+   Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`BAC_injection <single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection>`\ (cell, dist)
+     - Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.
+
+

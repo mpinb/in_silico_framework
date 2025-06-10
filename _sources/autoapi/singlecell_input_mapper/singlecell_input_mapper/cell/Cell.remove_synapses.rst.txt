@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses`
+
+Cell.remove_synapses
+====================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses(preType=None)
+
+   Remove all synapses of type :paramref:`preType` from the cell.
+
+   :Parameters: **preType** (*str*) -- Presynaptic cell type. Default: None. Set to 'All' or 'all' to remove all synapses.
+
+   :returns: None
+

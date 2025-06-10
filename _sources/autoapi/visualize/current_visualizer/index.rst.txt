@@ -1,0 +1,57 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.current_visualizer`
+
+current_visualizer
+==================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   CurrentAnalysis </autoapi/visualize/current_visualizer/CurrentAnalysis>
+
+.. py:module:: visualize.current_visualizer
+
+.. autoapi-nested-parse::
+   Visulize all transmembrane ionic currents of a cell simulation.
+
+
+   This module provides a class to visualize the transmembrane ionic currents of a cell simulation.
+   It assumes that these have been recorded during the simulation. If this was not the case,
+   consider re-simulating the cell and recording the currents, e.g. with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> def record_rangevars(cell, params):
+   ...     for rv in record_vars:
+   ...         cell.record_range_var(rv)
+   ...     return cell
+   >>> simulator.setup.cell_modify_funs.append(('BAC.record_range_vars', record_rangevars))
+   >>> cell, _ = simulator.get_simulated_cell(biophysical_parameters, stim="BAC")
+   >>> ca = CurrentAnalysis(cell)
+   >>> ca.plot_areas()
+
+   .. figure:: ../../../_static/_images/current_analysis.png
+
+       Example of a current analysis plot for a :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`CurrentAnalysis <visualize.current_visualizer.CurrentAnalysis>`
+     - Plot the individual ion currents and the net current of a cell simulation.
+
+
+

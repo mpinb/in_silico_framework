@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.get_id`
+
+ISFDataBase.get_id
+==================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.get_id()
+
+   Get the unique ID of this database.
+
+   :returns: The unique ID of this database.
+   :rtype: str
+

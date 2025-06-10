@@ -1,0 +1,1391 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Network activity - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Characterizing-ongoing-activity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network activity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/api_reference.html" class="md-tabs__link">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/tutorials.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/file_formats.html" class="md-tabs__link">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/api_reference.html" class="md-nav__link">
+        <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../rst_assets/tutorials.html"><span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span></a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Introduction_to_ISF.html" class="md-nav__link">
+        <span title="/tutorials/introduction_to_isf.ipynb (reference label)" class="md-ellipsis">Welcome to the In Silico Framework <wbr>(ISF)</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20neuron%20models/1.1%20Simulation.html" class="md-nav__link">
+        <span title="/tutorials/1. neuron models/1.1 simulation.ipynb (reference label)" class="md-ellipsis">Simulating biophysically detailed multi-<wbr>compartmental models using ISF</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20neuron%20models/1.2%20Evaluation.html" class="md-nav__link">
+        <span title="/tutorials/1. neuron models/1.2 evaluation.ipynb (reference label)" class="md-ellipsis">Evaluating biophysically detailed multi-<wbr>compartmental models</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20neuron%20models/1.3%20Generation.html" class="md-nav__link">
+        <span title="/tutorials/1. neuron models/1.3 generation.ipynb (reference label)" class="md-ellipsis">Generating biophysically detailed multi-<wbr>compartmental models</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="2.1%20Anatomical%20embedding.html" class="md-nav__link">
+        <span title="/tutorials/2. network models/2.1 anatomical embedding.ipynb (reference label)" class="md-ellipsis">Embedding a neuron model in a network model</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/tutorials/2. network models/2.2 network activity.ipynb (reference label)" class="md-ellipsis">Network activity</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/tutorials/2. network models/2.2 network activity.ipynb (reference label)" class="md-ellipsis">Network activity</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Characterizing-ongoing-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#characterizing-ongoing-activity (reference label)" class="md-ellipsis">Characterizing ongoing activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Characterizing-evoked-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#characterizing-evoked-activity (reference label)" class="md-ellipsis">Characterizing evoked activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Combining-ongoing-and-evoked-activity-into-a-network-parameter-file" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#combining-ongoing-and-evoked-activity-into-a-network-parameter-file (reference label)" class="md-ellipsis">Combining ongoing and evoked activity into a network parameter file</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Inspecting-the-network-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#inspecting-the-network-activity (reference label)" class="md-ellipsis">Inspecting the network activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Recap" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#recap (reference label)" class="md-ellipsis">Recap</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20multiscale%20models/3.1%20Multiscale%20modeling.html" class="md-nav__link">
+        <span title="/tutorials/3. multiscale models/3.1 multiscale modeling.ipynb (reference label)" class="md-ellipsis">Multi-<wbr>scale modeling</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20reduced%20models/4.1%20Generalized%20Linear%20Models.html" class="md-nav__link">
+        <span title="/tutorials/4. reduced models/4.1 generalized linear models.ipynb (reference label)" class="md-ellipsis">Generalized Linear Models <wbr>(GLM)</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/file_formats.html" class="md-nav__link">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Characterizing-ongoing-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#characterizing-ongoing-activity (reference label)" class="md-ellipsis">Characterizing ongoing activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Characterizing-evoked-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#characterizing-evoked-activity (reference label)" class="md-ellipsis">Characterizing evoked activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Combining-ongoing-and-evoked-activity-into-a-network-parameter-file" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#combining-ongoing-and-evoked-activity-into-a-network-parameter-file (reference label)" class="md-ellipsis">Combining ongoing and evoked activity into a network parameter file</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Inspecting-the-network-activity" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#inspecting-the-network-activity (reference label)" class="md-ellipsis">Inspecting the network activity</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Recap" class="md-nav__link">
+    <span title="/tutorials/2. network models/2.2 network activity.ipynb#recap (reference label)" class="md-ellipsis">Recap</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="Network-activity">Network activity<a class="headerlink" href="#Network-activity" title="Permalink to this heading">¶</a></h1>
+<p><a class="reference internal" href="2.1%20Anatomical%20embedding.html"><span class="doc">The previous notebook</span></a> provided us with an anatomical reconstruction of the barrel cortex, defining locations of presynaptic cells, and post-synaptic targets onto our cell. Given this anatomical data, we can now activate the synapses according to experimental data.</p>
+<p>To do this, we need the following information</p>
+<ol class="arabic simple">
+<li><p>A parameter file specifying characteristics of the synaspses by celltype</p></li>
+<li><p>A parameterfile specifying the ongoing activity by celltype</p></li>
+<li><p>Parameterfiles specifying evoked response by stimulus, celltype and cell location</p></li>
+</ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">tutorial_output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="si">}</span><span class="s2">/isf_tutorial_output&quot;</span>  <span class="c1"># &lt;-- Change this to your desired output directory</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">Interface</span> <span class="k">as</span> <span class="nn">I</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">tutorial_output_dir</span><span class="p">)[</span><span class="s1">&#39;network_modeling&#39;</span><span class="p">]</span>
+
+<span class="n">con_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;.con&#39;</span><span class="p">)</span>
+<span class="n">con_file_path</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">con_file</span><span class="p">)</span>
+<span class="n">syn_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;.syn&#39;</span><span class="p">)</span>
+<span class="n">syn_file_path</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">syn_file</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[INFO] ISF: Current version: heads/data+0.gebc00ec75.dirty
+[INFO] ISF: Current pid: 102453
+[INFO] ISF: Loading mechanisms:
+[ATTENTION] ISF: The source folder has uncommited changes!
+
+
+
+[INFO] ISF: Loaded modules with __version__ attribute are:
+IPython: 8.12.2, Interface: heads/data+0.gebc00ec75.dirty, PIL: 10.4.0, _brotli: 1.0.9, _csv: 1.0, _ctypes: 1.1.0, _curses: b&#39;2.2&#39;, _decimal: 1.70, argparse: 1.1, backcall: 0.2.0, blosc: 1.11.1, bluepyopt: 1.9.126, brotli: 1.0.9, certifi: 2024.08.30, cffi: 1.17.0, charset_normalizer: 3.4.0, click: 7.1.2, cloudpickle: 3.1.0, colorama: 0.4.6, comm: 0.2.2, csv: 1.0, ctypes: 1.1.0, cycler: 0.12.1, cytoolz: 0.12.3, dash: 2.18.2, dask: 2.30.0, dateutil: 2.9.0, deap: 1.4, debugpy: 1.8.5, decimal: 1.70, decorator: 5.1.1, defusedxml: 0.7.1, distributed: 2.30.0, distutils: 3.8.20, django: 1.8.19, entrypoints: 0.4, executing: 2.1.0, fasteners: 0.17.3, flask: 1.1.4, fsspec: 2024.10.0, future: 1.0.0, greenlet: 3.1.1, idna: 3.10, ipaddress: 1.0, ipykernel: 6.29.5, ipywidgets: 8.1.5, isf_pandas_msgpack: 0.2.2, itsdangerous: 1.1.0, jedi: 0.19.1, jinja2: 2.11.3, joblib: 1.4.2, json: 2.0.9, jupyter_client: 7.3.4, jupyter_core: 5.7.2, kiwisolver: 1.4.5, logging: 0.5.1.2, markupsafe: 2.0.1, matplotlib: 3.5.1, msgpack: 1.0.8, neuron: 7.8.2+, numcodecs: 0.12.1, numexpr: 2.8.6, numpy: 1.19.2, packaging: 24.2, pandas: 1.1.3, parameters: 0.2.1, parso: 0.8.4, past: 1.0.0, pexpect: 4.9.0, pickleshare: 0.7.5, platform: 1.0.8, platformdirs: 4.3.6, plotly: 5.24.1, prompt_toolkit: 3.0.48, psutil: 6.0.0, ptyprocess: 0.7.0, pure_eval: 0.2.3, pydevd: 2.9.5, pygments: 2.18.0, pyparsing: 3.1.4, pytz: 2024.2, re: 2.2.1, requests: 2.32.3, scandir: 1.10.0, scipy: 1.5.2, seaborn: 0.12.2, six: 1.16.0, sklearn: 0.23.2, socketserver: 0.4, socks: 1.7.1, sortedcontainers: 2.4.0, stack_data: 0.6.2, statsmodels: 0.13.2, sumatra: 0.7.4, tables: 3.8.0, tblib: 3.0.0, tlz: 0.12.3, toolz: 1.0.0, tqdm: 4.67.1, traitlets: 5.14.3, urllib3: 2.2.3, wcwidth: 0.2.13, werkzeug: 1.0.1, yaml: 5.3.1, zarr: 2.15.0, zlib: 1.0, zmq: 26.2.0, zstandard: 0.19.0
+</pre></div></div>
+</div>
+<h2 id="Characterizing-ongoing-activity">Characterizing ongoing activity<a class="headerlink" href="#Characterizing-ongoing-activity" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">getting_started</span> <span class="kn">import</span> <span class="n">getting_started_dir</span>
+<span class="n">ongoing_template_param_name</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">getting_started_dir</span><span class="p">,</span>
+    <span class="s1">&#39;example_data&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;functional_constraints&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ongoing_activity&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ongoing_activity_celltype_template_exc_conductances_fitted.param&#39;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>In this parameter file, the following keys are defined</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ongoing_template_param</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">build_parameters</span><span class="p">(</span><span class="n">ongoing_template_param_name</span><span class="p">)</span>
+<span class="n">ongoing_template_param</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;info&#39;, &#39;network&#39;, &#39;NMODL_mechanisms&#39;])
+</pre></div></div>
+</div>
+<p>The most relevant information is specified in the network key:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ongoing_template_param</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;L2&#39;, &#39;L34&#39;, &#39;L4py&#39;, &#39;L4sp&#39;, &#39;L4ss&#39;, &#39;L5st&#39;, &#39;L5tt&#39;, &#39;L6cc&#39;, &#39;L6ccinv&#39;, &#39;L6ct&#39;, &#39;VPM&#39;, &#39;L1&#39;, &#39;L23Trans&#39;, &#39;L45Peak&#39;, &#39;L45Sym&#39;, &#39;L56Trans&#39;, &#39;SymLocal1&#39;, &#39;SymLocal2&#39;, &#39;SymLocal3&#39;, &#39;SymLocal4&#39;, &#39;SymLocal5&#39;, &#39;SymLocal6&#39;])
+</pre></div></div>
+</div>
+<p>Here, parameters are defined for each presynaptic celltype:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ongoing_template_param</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">L5tt</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;celltype&#39;: &#39;spiketrain&#39;,
+ &#39;interval&#39;: 283.3,
+ &#39;synapses&#39;: {&#39;receptors&#39;: {&#39;glutamate_syn&#39;: {&#39;threshold&#39;: 0.0,
+    &#39;delay&#39;: 0.0,
+    &#39;parameter&#39;: {&#39;tau1&#39;: 26.0,
+     &#39;tau2&#39;: 2.0,
+     &#39;tau3&#39;: 2.0,
+     &#39;tau4&#39;: 0.1,
+     &#39;decayampa&#39;: 1.0,
+     &#39;decaynmda&#39;: 1.0,
+     &#39;facilampa&#39;: 0.0,
+     &#39;facilnmda&#39;: 0.0},
+    &#39;weight&#39;: [1.59, 1.59]}},
+  &#39;releaseProb&#39;: 0.6}}
+</pre></div></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">interval</span></code>: mean ongoing interspike interval</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">releaseProb</span></code>: chance that synapse gets activated if presynaptic cell gets activated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synapses.receptors.glutamate_syn.parameter</span></code>:</p>
+<ul>
+<li><p>parameters for the NEURON mechanism defined in <a class="reference external" href="../../autoapi/mechanisms/l5pt//index.rst">mechanisms.channels</a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau1</span></code>: NMDA decay time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau2</span></code>: NMDA rise time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau3</span></code>: AMPA decay time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau4</span></code>: AMPA rise time</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synapses.receptors.weight</span></code></p>
+<ul>
+<li><p>maximum conductance of the synapse for AMPA and NMDA, respectively</p></li>
+</ul>
+</li>
+</ul>
+<h2 id="Characterizing-evoked-activity">Characterizing evoked activity<a class="headerlink" href="#Characterizing-evoked-activity" title="Permalink to this heading">¶</a></h2>
+<p>Evoked activity captures the network activity during a specific <em>in vivo</em> condition. The experimental condition we will consider here is a passive whisker touch of the rat. We have files capturing the activity of all celltypes in all locations across the rat barrel cortex. Let’s see what their activity was when we touched the whisker in arc C, row 2.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">evokedPrefix</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">getting_started_dir</span><span class="p">,</span> <span class="s1">&#39;example_data/functional_constraints/evoked_activity/&#39;</span><span class="p">)</span>
+<span class="n">excitatory_PSTHs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fname</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">evokedPrefix</span><span class="p">)</span> <span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;PSTH_UpState.param&#39;</span><span class="p">)]</span>
+<span class="n">inhibitory_PSTHs</span> <span class="o">=</span> <span class="p">[</span><span class="n">fname</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">evokedPrefix</span><span class="p">)</span> <span class="k">if</span> <span class="n">fname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;active_timing_normalized_PW_1.0_SuW_0.5.param&#39;</span><span class="p">)]</span>
+</code></pre></div>
+</div>
+</div>
+<p>Let’s have a look at a specific parameterfile:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">excitatory_PSTHs</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;L2_3x3_PSTH_UpState.param&#39;,
+ &#39;L34_3x3_PSTH_UpState.param&#39;,
+ &#39;L4py_3x3_PSTH_UpState.param&#39;,
+ &#39;L4sp_3x3_PSTH_UpState.param&#39;,
+ &#39;L4ss_3x3_PSTH_UpState.param&#39;,
+ &#39;L5st_3x3_PSTH_UpState.param&#39;,
+ &#39;L5tt_3x3_PSTH_UpState.param&#39;,
+ &#39;L6cc_3x3_PSTH_UpState.param&#39;,
+ &#39;L6ccinv_3x3_PSTH_UpState.param&#39;,
+ &#39;L6ct_3x3_PSTH_UpState.param&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">example_PSTH_L6cc</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">build_parameters</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">evokedPrefix</span><span class="p">,</span> <span class="s1">&#39;L6cc_3x3_PSTH_UpState.param&#39;</span><span class="p">))</span>
+<span class="n">example_PSTH_L6cc</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;L6cc_B1&#39;, &#39;L6cc_B2&#39;, &#39;L6cc_B3&#39;, &#39;L6cc_C1&#39;, &#39;L6cc_C2&#39;, &#39;L6cc_C3&#39;, &#39;L6cc_D1&#39;, &#39;L6cc_D2&#39;, &#39;L6cc_D3&#39;])
+</pre></div></div>
+</div>
+<p>We have entries for each column, each containing the respective evoked PSTH in a C2 stimulus scenario:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">example_PSTH_L6cc</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;L6cc_B1&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(10.0, 11.0),
+   (11.0, 12.0),
+   (20.0, 21.0),
+   (22.0, 23.0),
+   (32.0, 33.0),
+   (33.0, 34.0),
+   (34.0, 35.0),
+   (36.0, 37.0),
+   (37.0, 38.0),
+   (41.0, 42.0),
+   (43.0, 44.0),
+   (45.0, 46.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034]},
+ &#39;L6cc_B2&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(10.0, 11.0),
+   (17.0, 18.0),
+   (20.0, 21.0),
+   (25.0, 26.0),
+   (34.0, 35.0),
+   (36.0, 37.0),
+   (37.0, 38.0),
+   (41.0, 42.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0072]},
+ &#39;L6cc_B3&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(5.0, 6.0),
+   (7.0, 8.0),
+   (16.0, 17.0),
+   (23.0, 24.0),
+   (28.0, 29.0),
+   (38.0, 39.0),
+   (40.0, 41.0),
+   (44.0, 45.0),
+   (46.0, 47.0),
+   (49.0, 50.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034]},
+ &#39;L6cc_C1&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(7.0, 8.0),
+   (8.0, 9.0),
+   (9.0, 10.0),
+   (10.0, 11.0),
+   (11.0, 12.0),
+   (12.0, 13.0),
+   (13.0, 14.0),
+   (16.0, 17.0),
+   (18.0, 19.0),
+   (20.0, 21.0),
+   (27.0, 28.0),
+   (31.0, 32.0),
+   (33.0, 34.0),
+   (34.0, 35.0),
+   (36.0, 37.0),
+   (38.0, 39.0),
+   (40.0, 41.0),
+   (42.0, 43.0),
+   (48.0, 49.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0148,
+   0.0681,
+   0.0377,
+   0.011,
+   0.0034,
+   0.0072,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034]},
+ &#39;L6cc_C2&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(3.0, 4.0),
+   (6.0, 7.0),
+   (9.0, 10.0),
+   (10.0, 11.0),
+   (11.0, 12.0),
+   (12.0, 13.0),
+   (13.0, 14.0),
+   (14.0, 15.0),
+   (15.0, 16.0),
+   (18.0, 19.0),
+   (19.0, 20.0),
+   (33.0, 34.0),
+   (34.0, 35.0),
+   (35.0, 36.0),
+   (36.0, 37.0),
+   (41.0, 42.0),
+   (42.0, 43.0),
+   (43.0, 44.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0186,
+   0.0757,
+   0.0491,
+   0.0186,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0034]},
+ &#39;L6cc_C3&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(4.0, 5.0),
+   (9.0, 10.0),
+   (10.0, 11.0),
+   (14.0, 15.0),
+   (15.0, 16.0),
+   (16.0, 17.0),
+   (17.0, 18.0),
+   (21.0, 22.0),
+   (22.0, 23.0),
+   (26.0, 27.0),
+   (31.0, 32.0),
+   (40.0, 41.0),
+   (47.0, 48.0),
+   (48.0, 49.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.011,
+   0.0072,
+   0.0034,
+   0.011,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034]},
+ &#39;L6cc_D1&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(25.0, 26.0), (27.0, 28.0), (37.0, 38.0), (43.0, 44.0)],
+  &#39;probabilities&#39;: [0.0034, 0.0034, 0.0034, 0.0034]},
+ &#39;L6cc_D2&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(9.0, 10.0),
+   (10.0, 11.0),
+   (30.0, 31.0),
+   (37.0, 38.0),
+   (41.0, 42.0),
+   (42.0, 43.0),
+   (43.0, 44.0),
+   (45.0, 46.0),
+   (48.0, 49.0)],
+  &#39;probabilities&#39;: [0.0034,
+   0.0034,
+   0.0034,
+   0.0072,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0034,
+   0.0072]},
+ &#39;L6cc_D3&#39;: {&#39;distribution&#39;: &#39;PSTH&#39;,
+  &#39;intervals&#39;: [(1.0, 2.0), (11.0, 12.0), (31.0, 32.0), (49.0, 50.0)],
+  &#39;probabilities&#39;: [0.0041, 0.0041, 0.0041, 0.0041]}}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+<span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">cell_type</span><span class="p">,</span> <span class="n">psth</span> <span class="ow">in</span> <span class="n">example_PSTH_L6cc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">p</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">psth</span><span class="p">[</span><span class="s1">&#39;probabilities&#39;</span><span class="p">],</span> <span class="n">psth</span><span class="p">[</span><span class="s1">&#39;intervals&#39;</span><span class="p">]</span>
+    <span class="n">barrel_ind</span><span class="p">,</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">cell_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax_row_ind</span><span class="p">,</span> <span class="n">ax_col_ind</span> <span class="o">=</span> <span class="n">rows</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">layer</span><span class="p">)),</span> <span class="n">cols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">barrel_ind</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">p_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">ax_row_ind</span><span class="p">,</span> <span class="n">ax_col_ind</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">p_</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ax_col_ind</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">axs</span><span class="p">[</span><span class="n">ax_row_ind</span><span class="p">,</span> <span class="n">ax_col_ind</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Arc </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">ax_row_ind</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">ax_row_ind</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">axs</span><span class="p">[</span><span class="n">ax_row_ind</span><span class="p">,</span> <span class="n">ax_col_ind</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Row </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">ax_col_ind</span><span class="p">]))</span>
+
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Response probability of L6cc neurons in barrel C2</span><span class="se">\n</span><span class="s2">to deflecting whiskers arcs [1, 2, 3] x rows [B, C, D]&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_2._network_models_2.2_Network_activity_21_0.png" src="../../_images/tutorials_2._network_models_2.2_Network_activity_21_0.png" />
+</div>
+</div>
+<h2 id="Combining-ongoing-and-evoked-activity-into-a-network-parameter-file">Combining ongoing and evoked activity into a network parameter file<a class="headerlink" href="#Combining-ongoing-and-evoked-activity-into-a-network-parameter-file" title="Permalink to this heading">¶</a></h2>
+<p>Now, let’s reverse-engineer our network parameters from this. Given that we know how a single cell population responds to various input stimuli, we can now generate activity data for all cell populations under a single stimulus. Note the subtle difference here. The previous histogram shows the response probability of the <strong>same cell population</strong> under <strong>different whisker deflections</strong>. Below, we will generate activity data for <strong>different cell populations</strong> for the <strong>same whisker deflection</strong>.</p>
+<p>To so, we use the <a class="reference internal" href="../../autoapi/singlecell_input_mapper/evoked_network_param_from_template/index.html"><span class="doc">create_evoked_network_parameter</span></a> pipeline:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">whisker</span> <span class="o">=</span> <span class="s1">&#39;C2&#39;</span>
+<span class="c1"># cell number spreadsheet generated in anatomical realization step.</span>
+<span class="n">cell_number_file_name</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;anatomical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;NumberOfConnectedCells.csv&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;network_param&#39;</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;network_param&#39;</span><span class="p">)</span>
+<span class="n">out_file_name</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;network_param&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;C2_stim.param&#39;</span><span class="p">)</span>
+
+<span class="n">I</span><span class="o">.</span><span class="n">create_evoked_network_parameter</span><span class="p">(</span>
+    <span class="n">ongoing_template_param_name</span><span class="p">,</span>
+    <span class="n">cell_number_file_name</span><span class="p">,</span>
+    <span class="n">syn_file_path</span><span class="p">,</span>
+    <span class="n">con_file_path</span><span class="p">,</span>
+    <span class="n">whisker</span><span class="p">,</span>
+    <span class="n">out_file_name</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+*************
+creating network parameter file from template /home/bgmeulem/Documents/in_silico_framework/getting_started/example_data/functional_constraints/ongoing_activity/ongoing_activity_celltype_template_exc_conductances_fitted.param
+*************
+</pre></div></div>
+</div>
+<p>Let’s also generate parameterfiles for surround whisker stimuli!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[13]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">I</span><span class="o">.</span><span class="n">silence_stdout</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">whisker</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B1&#39;</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">]:</span>
+        <span class="n">I</span><span class="o">.</span><span class="n">create_evoked_network_parameter</span><span class="p">(</span>
+            <span class="n">ongoing_template_param_name</span><span class="p">,</span>
+            <span class="n">cell_number_file_name</span><span class="p">,</span>
+            <span class="n">syn_file_path</span><span class="p">,</span> <span class="n">con_file_path</span><span class="p">,</span>
+            <span class="n">whisker</span><span class="p">,</span>
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;network_param&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_stim.param&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">whisker</span><span class="p">))</span>
+            <span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>The resulting network parameters describe ongoing and evoked activity for each synapse in a cell type specific manner.</p>
+<h2 id="Inspecting-the-network-activity">Inspecting the network activity<a class="headerlink" href="#Inspecting-the-network-activity" title="Permalink to this heading">¶</a></h2>
+<p>Let’s visualize the response probabilities of each cell type, similar to what we did above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">network_param_C2</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">build_parameters</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;network_param&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;C2_stim.param&#39;</span><span class="p">))</span>
+<span class="n">network_param_C2</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[14]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+dict_keys([&#39;L2_Alpha&#39;, &#39;L2_B1&#39;, &#39;L2_B2&#39;, &#39;L2_B3&#39;, &#39;L2_B4&#39;, &#39;L2_Beta&#39;, &#39;L2_C1&#39;, &#39;L2_C2&#39;, &#39;L2_C3&#39;, &#39;L2_C4&#39;, &#39;L2_D1&#39;, &#39;L2_D2&#39;, &#39;L2_D3&#39;, &#39;L2_D4&#39;, &#39;L2_E1&#39;, &#39;L2_E2&#39;, &#39;L2_Gamma&#39;, &#39;L34_A1&#39;, &#39;L34_A2&#39;, &#39;L34_A3&#39;, &#39;L34_A4&#39;, &#39;L34_Alpha&#39;, &#39;L34_B1&#39;, &#39;L34_B2&#39;, &#39;L34_B3&#39;, &#39;L34_B4&#39;, &#39;L34_Beta&#39;, &#39;L34_C1&#39;, &#39;L34_C2&#39;, &#39;L34_C3&#39;, &#39;L34_C4&#39;, &#39;L34_D1&#39;, &#39;L34_D2&#39;, &#39;L34_D3&#39;, &#39;L34_Delta&#39;, &#39;L34_E1&#39;, &#39;L34_E2&#39;, &#39;L34_E3&#39;, &#39;L34_Gamma&#39;, &#39;L4py_A1&#39;, &#39;L4py_A2&#39;, &#39;L4py_A3&#39;, &#39;L4py_A4&#39;, &#39;L4py_Alpha&#39;, &#39;L4py_B1&#39;, &#39;L4py_B2&#39;, &#39;L4py_B3&#39;, &#39;L4py_B4&#39;, &#39;L4py_C1&#39;, &#39;L4py_C2&#39;, &#39;L4py_C3&#39;, &#39;L4py_C4&#39;, &#39;L4py_D1&#39;, &#39;L4py_D2&#39;, &#39;L4py_D3&#39;, &#39;L4py_Gamma&#39;, &#39;L4sp_B1&#39;, &#39;L4sp_B2&#39;, &#39;L4sp_B3&#39;, &#39;L4sp_Beta&#39;, &#39;L4sp_C1&#39;, &#39;L4sp_C2&#39;, &#39;L4sp_C3&#39;, &#39;L4sp_C4&#39;, &#39;L4sp_D1&#39;, &#39;L4sp_D2&#39;, &#39;L4sp_D3&#39;, &#39;L4sp_Delta&#39;, &#39;L4ss_A1&#39;, &#39;L4ss_B1&#39;, &#39;L4ss_B2&#39;, &#39;L4ss_B3&#39;, &#39;L4ss_C1&#39;, &#39;L4ss_C2&#39;, &#39;L4ss_C3&#39;, &#39;L4ss_D1&#39;, &#39;L4ss_D2&#39;, &#39;L4ss_D3&#39;, &#39;L4ss_E1&#39;, &#39;L5st_A1&#39;, &#39;L5st_A2&#39;, &#39;L5st_A3&#39;, &#39;L5st_Alpha&#39;, &#39;L5st_B1&#39;, &#39;L5st_B2&#39;, &#39;L5st_B3&#39;, &#39;L5st_B4&#39;, &#39;L5st_Beta&#39;, &#39;L5st_C1&#39;, &#39;L5st_C2&#39;, &#39;L5st_C3&#39;, &#39;L5st_C4&#39;, &#39;L5st_D1&#39;, &#39;L5st_D2&#39;, &#39;L5st_D3&#39;, &#39;L5st_Delta&#39;, &#39;L5st_E1&#39;, &#39;L5st_Gamma&#39;, &#39;L5tt_A1&#39;, &#39;L5tt_A3&#39;, &#39;L5tt_A4&#39;, &#39;L5tt_B1&#39;, &#39;L5tt_B2&#39;, &#39;L5tt_B3&#39;, &#39;L5tt_B4&#39;, &#39;L5tt_Beta&#39;, &#39;L5tt_C1&#39;, &#39;L5tt_C2&#39;, &#39;L5tt_C3&#39;, &#39;L5tt_C4&#39;, &#39;L5tt_D2&#39;, &#39;L5tt_D3&#39;, &#39;L6cc_A1&#39;, &#39;L6cc_A2&#39;, &#39;L6cc_A3&#39;, &#39;L6cc_A4&#39;, &#39;L6cc_Alpha&#39;, &#39;L6cc_B1&#39;, &#39;L6cc_B2&#39;, &#39;L6cc_B3&#39;, &#39;L6cc_B4&#39;, &#39;L6cc_Beta&#39;, &#39;L6cc_C1&#39;, &#39;L6cc_C2&#39;, &#39;L6cc_C3&#39;, &#39;L6cc_C4&#39;, &#39;L6cc_D1&#39;, &#39;L6cc_D2&#39;, &#39;L6cc_D3&#39;, &#39;L6cc_D4&#39;, &#39;L6cc_Delta&#39;, &#39;L6cc_E1&#39;, &#39;L6cc_E2&#39;, &#39;L6cc_E3&#39;, &#39;L6cc_E4&#39;, &#39;L6cc_Gamma&#39;, &#39;L6ccinv_A1&#39;, &#39;L6ccinv_A2&#39;, &#39;L6ccinv_A3&#39;, &#39;L6ccinv_A4&#39;, &#39;L6ccinv_Alpha&#39;, &#39;L6ccinv_B1&#39;, &#39;L6ccinv_B2&#39;, &#39;L6ccinv_B3&#39;, &#39;L6ccinv_B4&#39;, &#39;L6ccinv_Beta&#39;, &#39;L6ccinv_C1&#39;, &#39;L6ccinv_C2&#39;, &#39;L6ccinv_C3&#39;, &#39;L6ccinv_C4&#39;, &#39;L6ccinv_D1&#39;, &#39;L6ccinv_D2&#39;, &#39;L6ccinv_D3&#39;, &#39;L6ccinv_D4&#39;, &#39;L6ccinv_E1&#39;, &#39;L6ccinv_E2&#39;, &#39;L6ccinv_E3&#39;, &#39;L6ccinv_E4&#39;, &#39;L6ccinv_Gamma&#39;, &#39;L6ct_Alpha&#39;, &#39;L6ct_B1&#39;, &#39;L6ct_B2&#39;, &#39;L6ct_B3&#39;, &#39;L6ct_B4&#39;, &#39;L6ct_Beta&#39;, &#39;L6ct_C1&#39;, &#39;L6ct_C2&#39;, &#39;L6ct_C3&#39;, &#39;L6ct_D1&#39;, &#39;L6ct_D2&#39;, &#39;L6ct_D3&#39;, &#39;L6ct_E3&#39;, &#39;L6ct_Gamma&#39;, &#39;VPM_A3&#39;, &#39;VPM_B1&#39;, &#39;VPM_B2&#39;, &#39;VPM_C1&#39;, &#39;VPM_C2&#39;, &#39;VPM_C3&#39;, &#39;VPM_D1&#39;, &#39;VPM_D2&#39;, &#39;VPM_E1&#39;, &#39;VPM_Gamma&#39;, &#39;L1_B1&#39;, &#39;L1_B2&#39;, &#39;L1_B3&#39;, &#39;L1_Beta&#39;, &#39;L1_C1&#39;, &#39;L1_C2&#39;, &#39;L1_C3&#39;, &#39;L1_D1&#39;, &#39;L1_D2&#39;, &#39;L1_D3&#39;, &#39;L1_E2&#39;, &#39;L23Trans_B1&#39;, &#39;L23Trans_B2&#39;, &#39;L23Trans_B3&#39;, &#39;L23Trans_C1&#39;, &#39;L23Trans_C2&#39;, &#39;L23Trans_C3&#39;, &#39;L23Trans_D1&#39;, &#39;L23Trans_D2&#39;, &#39;L45Peak_A2&#39;, &#39;L45Peak_A4&#39;, &#39;L45Peak_B1&#39;, &#39;L45Peak_B2&#39;, &#39;L45Peak_B3&#39;, &#39;L45Peak_B4&#39;, &#39;L45Peak_C1&#39;, &#39;L45Peak_C2&#39;, &#39;L45Peak_C3&#39;, &#39;L45Peak_D1&#39;, &#39;L45Peak_D2&#39;, &#39;L45Peak_Delta&#39;, &#39;L45Peak_Gamma&#39;, &#39;L45Sym_A3&#39;, &#39;L45Sym_B1&#39;, &#39;L45Sym_B2&#39;, &#39;L45Sym_B3&#39;, &#39;L45Sym_C1&#39;, &#39;L45Sym_C2&#39;, &#39;L45Sym_C3&#39;, &#39;L45Sym_D1&#39;, &#39;L45Sym_D2&#39;, &#39;L45Sym_E1&#39;, &#39;L56Trans_A2&#39;, &#39;L56Trans_A3&#39;, &#39;L56Trans_A4&#39;, &#39;L56Trans_B1&#39;, &#39;L56Trans_B2&#39;, &#39;L56Trans_B3&#39;, &#39;L56Trans_B4&#39;, &#39;L56Trans_Beta&#39;, &#39;L56Trans_C1&#39;, &#39;L56Trans_C2&#39;, &#39;L56Trans_C3&#39;, &#39;L56Trans_D1&#39;, &#39;L56Trans_D2&#39;, &#39;L56Trans_D3&#39;, &#39;L56Trans_E1&#39;, &#39;L56Trans_Gamma&#39;, &#39;SymLocal1_B1&#39;, &#39;SymLocal1_C1&#39;, &#39;SymLocal1_C2&#39;, &#39;SymLocal1_C3&#39;, &#39;SymLocal1_D2&#39;, &#39;SymLocal2_B1&#39;, &#39;SymLocal2_B2&#39;, &#39;SymLocal2_C2&#39;, &#39;SymLocal2_D2&#39;, &#39;SymLocal3_B2&#39;, &#39;SymLocal3_B3&#39;, &#39;SymLocal3_C1&#39;, &#39;SymLocal3_C2&#39;, &#39;SymLocal3_C3&#39;, &#39;SymLocal3_D1&#39;, &#39;SymLocal3_D2&#39;, &#39;SymLocal4_A1&#39;, &#39;SymLocal4_A3&#39;, &#39;SymLocal4_A4&#39;, &#39;SymLocal4_Alpha&#39;, &#39;SymLocal4_B1&#39;, &#39;SymLocal4_B2&#39;, &#39;SymLocal4_B3&#39;, &#39;SymLocal4_B4&#39;, &#39;SymLocal4_C1&#39;, &#39;SymLocal4_C2&#39;, &#39;SymLocal4_C3&#39;, &#39;SymLocal4_D1&#39;, &#39;SymLocal4_D2&#39;, &#39;SymLocal4_D3&#39;, &#39;SymLocal4_E1&#39;, &#39;SymLocal4_Gamma&#39;, &#39;SymLocal5_B3&#39;, &#39;SymLocal5_C2&#39;, &#39;SymLocal5_D1&#39;, &#39;SymLocal5_D2&#39;, &#39;SymLocal6_B2&#39;])
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[27]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">surround_column_map</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;A4&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;A4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;A4&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>\
+    <span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;A4&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;A3&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;A4&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>\
+    <span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Alpha&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;B3&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>\
+    <span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Beta&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;E4&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;C3&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C4&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;E4&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">},</span>\
+    <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Gamma&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>\
+    <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Delta&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>\
+    <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;D1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;E1&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>\
+    <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;D2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;E2&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;E4&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>\
+    <span class="s1">&#39;E4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;D3&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;D4&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;E3&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;E4&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}}</span>
+
+<span class="k">def</span> <span class="nf">activity_gridplot</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">deflected_whisker</span><span class="o">=</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="n">network_param</span><span class="o">=</span><span class="n">network_param_C2</span><span class="p">):</span>
+    <span class="n">surround_columns</span> <span class="o">=</span> <span class="n">surround_column_map</span><span class="p">[</span><span class="n">deflected_whisker</span><span class="p">]</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">surround_columns</span><span class="p">]))</span>
+    <span class="n">n_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">surround_columns</span><span class="p">]))</span>
+    <span class="n">columns</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">n_columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_columns</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">surround_column</span> <span class="ow">in</span> <span class="n">surround_columns</span><span class="p">:</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">surround_column</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">column</span> <span class="o">=</span> <span class="n">surround_column</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">)]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">)]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">)</span>
+
+        <span class="n">cell_type</span> <span class="o">=</span> <span class="n">ct</span><span class="o">+</span><span class="s2">&quot;_</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cell_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network_param</span><span class="o">.</span><span class="n">network</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;pointcell&#39;</span> <span class="ow">in</span> <span class="n">network_param</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">cell_type</span><span class="p">][</span><span class="s1">&#39;celltype&#39;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">network_param</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">cell_type</span><span class="p">][</span><span class="s1">&#39;celltype&#39;</span><span class="p">][</span><span class="s1">&#39;pointcell&#39;</span><span class="p">][</span><span class="s1">&#39;intervals&#39;</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">column</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+            <span class="c1"># barrel of the whisker deflection</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;C1&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;Grey&quot;</span>
+
+        <span class="n">bar</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">columns</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">column</span><span class="p">)]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span>
+            <span class="n">network_param</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">cell_type</span><span class="p">][</span><span class="s1">&#39;celltype&#39;</span><span class="p">][</span><span class="s1">&#39;pointcell&#39;</span><span class="p">][</span><span class="s1">&#39;probabilities&#39;</span><span class="p">],</span>
+            <span class="n">facecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">edgecolor</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">supylabel</span><span class="p">(</span><span class="s2">&quot;Barrel cortex row&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+        <span class="s2">&quot;Response probability of </span><span class="si">{}</span><span class="s2"> populations</span><span class="se">\n</span><span class="s2">when deflecting whisker </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">ct</span><span class="p">,</span> <span class="n">deflected_whisker</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[28]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ct</span> <span class="o">=</span> <span class="s2">&quot;L6cc&quot;</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">activity_gridplot</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_2._network_models_2.2_Network_activity_31_0.png" src="../../_images/tutorials_2._network_models_2.2_Network_activity_31_0.png" />
+</div>
+</div>
+<p>Note again that this time we are not visualizing the response probability of some neuron population to different inputs (like the first histogram grid). We are instead visualizing the response probabilities of different neuron populations to the same experimental condition: deflecting whisker C2.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[26]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ct</span> <span class="o">=</span> <span class="s2">&quot;L5tt&quot;</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">activity_gridplot</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_2._network_models_2.2_Network_activity_33_0.png" src="../../_images/tutorials_2._network_models_2.2_Network_activity_33_0.png" />
+</div>
+</div>
+<h2 id="Recap">Recap<a class="headerlink" href="#Recap" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference internal" href="2.1%20Anatomical%20embedding.html"><span class="doc">Tutorial 2.1</span></a> covered how to embed a neuron model into a network reconstruction, taking into account the relevant morphological, cellular and network properties. This tutorial covered how to generate synaptic activity. We are now ready to combine our biophysically detailed neuron model with this network model: see <a class="reference internal" href="../3.%20multiscale%20models/3.1%20Multiscale%20modeling.html"><span class="doc">Tutorial 3.1</span></a>.</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="2.1%20Anatomical%20embedding.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Embedding a neuron model in a network model" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Embedding a neuron model in a network model
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../3.%20multiscale%20models/3.1%20Multiscale%20modeling.html" class="md-footer__link md-footer__link--next" aria-label="Next: Multi-scale modeling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Multi-scale modeling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>

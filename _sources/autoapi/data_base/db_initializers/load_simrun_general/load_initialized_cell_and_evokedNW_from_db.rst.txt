@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db`
+
+
+.. title:
+
+load_initialized_cell_and_evokedNW_from_db
+==========================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db(db, sti, allPoints=False, reconnect_synapses=True)
+
+   Load and set up the cell and network from the database.
+
+   The cell and network are set up using the parameter files from the database.
+   These can then be used to inspect the parameters for each, or to re-run simulations.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database containing the parsed simulation results.
+                * **sti** (*str*) -- For which simulation trial index to load the parameter files.
+                * **allPoints** (*bool, optional*) -- If True, all points of the cell are used. Default is ``False``.
+                  See also: :py:meth:`single\_cell\_parser.create\_cell`
+                * **reconnect\_synapses** (*bool, optional*) -- If True, the synapses are reconnected to the cell. Default is ``True``.
+                  See also: :py:meth:`single\_cell\_parser.NetworkMapper.reconnect\_saved\_synapses`
+
+   .. seealso::
+
+      :py:meth:`simrun.rerun\_db.rerun\_db` for the recommended high-level method
+      of re-running simulations from a database.
+
+   :returns: The re-initialized :py:class:`single\_cell\_parser.cell.Cell` and the :py:class:`single\_cell\_parser.NetworkMapper` objects.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike`
+
+
+.. title:
+
+BAC_caSpike_height_check_Ca_spikes_after_Na_spike
+=================================================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike(t, v, v_dend, n=2, thresh=None)
+
+   Checks if a calcium spike occurs after the nth sodium spike.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **v\_dend** (*numpy.ndarray*) -- Array of dendritic voltage values.
+                * **n** (*int, optional*) -- The number of the sodium spike to check for.
+                  Defaults to 2.
+                * **thresh** (*float, optional*) -- The voltage threshold for detecting spikes.
+                  If None, defaults to the maximum value of v divided by 10.
+                  Defaults to None.
+
+   :returns:
+
+             True if a calcium spike occurs after the nth sodium spike,
+                 False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

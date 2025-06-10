@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.create_shared_numpy_store`
+
+ISFDataBase.create_shared_numpy_store
+=====================================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.create_shared_numpy_store(key, raise_=True)
+
+   Create a shared numpy store in the db directory.
+
+   You can also save numpy arrays as a shared umpy store by specifying the dumper in :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+
+   .. seealso:: :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore`
+

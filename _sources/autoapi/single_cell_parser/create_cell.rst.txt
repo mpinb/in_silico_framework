@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.create_cell`
+
+
+.. title:
+
+create_cell
+===========
+
+
+.. py:function:: single_cell_parser.create_cell(parameters, scaleFunc=None, allPoints=False, setUpBiophysics=True, silent=False)
+
+   Creating NEURON cell models from cell parameters.
+
+   Adds spatial discretization and inserts biophysical mechanisms according to parameter file
+
+   :Parameters: * **parameters** (*dict | dict-like*) -- A nested dictionary structure, read from a :ref:`cell\_parameters\_format` file.
+                  Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc\_file\_format` file (e.g. "AIS", "Soma" ...).
+                  Optional keys include: ``cell\_modify\_functions``, ``discretization``
+                * **scaleFunc** (*bool*) -- DEPRECATED,  should be specified in the parameters, as described in :meth:`~single\_cell\_parser.cell\_modify\_funs`
+                * **allPoints** (*bool*) -- Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule).
+                  Will be passed to ``full`` in :meth:`~single\_cell\_parser.cell\_parser.CellParser.determine\_nseg`
+                * **setUpBiophysics** (*bool*) -- Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

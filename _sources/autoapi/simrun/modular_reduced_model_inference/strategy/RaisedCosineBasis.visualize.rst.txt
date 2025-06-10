@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize`
+
+RaisedCosineBasis.visualize
+===========================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize(ax=None, plot_kwargs=None)
+
+   Visualize the basis functions :math:`\mathbf{f}`.
+
+   :Parameters: * **ax** (*plt.axis*) -- The axis to plot on. Default is ``None``.
+                * **plot_kwargs** (*dict*) -- The plot arguments. Default is ``None``.
+
+   :returns: The axis with the plot.
+   :rtype: plt.axis
+

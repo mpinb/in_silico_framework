@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.setup`
+
+DataExtractor_spatiotemporalSynapseActivation.setup
+===================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.setup(Rm)
+
+   Set up the data extractor.
+
+   This method sets up the time window and selected trials for fetching the
+   synaptse input data.
+
+   :Parameters: **Rm** (:py:class:`Rm`) -- Reduced model object. Must have the atttributes ``db``, ``tmin``, ``tmax``, ``width``, and ``selected_indices``.
+

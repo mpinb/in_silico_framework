@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.convert_to_numpy`
+
+
+.. title:
+
+convert_to_numpy
+================
+
+
+.. py:function:: simrun.modular_reduced_model_inference.strategy.convert_to_numpy(x)
+
+   Convert a numpy to a cupy array
+
+   Only performs this conversion if CUPY is available.
+
+   :Parameters: **x** (*cupy.array*) -- the array to convert.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

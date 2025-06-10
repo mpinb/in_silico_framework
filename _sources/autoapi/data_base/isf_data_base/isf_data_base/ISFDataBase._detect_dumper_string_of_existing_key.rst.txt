@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._detect_dumper_string_of_existing_key`
+
+ISFDataBase._detect_dumper_string_of_existing_key
+=================================================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._detect_dumper_string_of_existing_key(key)
+
+   Get the dumper of an existing key as a string (not module).
+
+   :Parameters: **key** (*str|tuple|pathlib.Path*) -- The key to get the dumper of.
+
+   :returns: The dumper of the key as a string.
+   :rtype: str
+

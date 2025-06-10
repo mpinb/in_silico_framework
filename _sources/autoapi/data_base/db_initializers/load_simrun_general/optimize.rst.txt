@@ -1,0 +1,41 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.optimize`
+
+
+.. title:
+
+optimize
+========
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.optimize(db, dumper=None, select=None, scheduler=None, repartition=False, categorized=False, client=None)
+
+   Rewrite existing data with a new dumper.
+
+   It also repartitions dataframes such that they contain 5000 partitions at maximum.
+
+   This method is useful to convert older databases that were created with an older
+   (less efficient) dumper.
+
+   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database to optimize.
+                * **select** (*list, optional*) -- List of keys to optimize. Default is ``None``, and all data is optimized:
+                  ``['synapse\_activation', 'cell\_activation', 'voltage\_traces', 'dendritic\_recordings']``.
+                * **client** (*distributed.Client, optional*) -- Distributed Client object for parallel computation.
+                * **dumper** (*module, deprecated*) -- Dumper to use for re-saving the data in a new format.
+                  Default is ``None``, and the dumper is inferred from the data type.
+                  See also: :py:meth:`~data\_base.db\_initializers.\_get\_dumper`
+
+   .. deprecated:: 0.5.0
+       The :paramref:`dumper` argument is deprecated and will be removed in a future version.
+       Dumpers are configured in the centralized :py:mod:`~data\_base.db\_initializers.load\_simrun\_general.config` module.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

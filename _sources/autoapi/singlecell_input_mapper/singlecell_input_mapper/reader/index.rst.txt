@@ -1,0 +1,46 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader`
+
+reader
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _Edge </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/_Edge>
+   read_hoc_file </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/read_hoc_file>
+   read_scalar_field </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/read_scalar_field>
+   read_connections_spreadsheet </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/read_connections_spreadsheet>
+   read_celltype_numbers_spreadsheet </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/read_celltype_numbers_spreadsheet>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.reader
+
+.. autoapi-nested-parse::
+   Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_hoc_file <singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file>`\ (fname)
+     - Reads a hoc file and returns a list of Edge objects.
+   * - :py:obj:`read_scalar_field <singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field>`\ (fname)
+     - Read AMIRA scalar fields.
+   * - :py:obj:`read_connections_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.reader.read_connections_spreadsheet>`\ (fname)
+     - Reads a spreadsheet with connection probabilities between cell types
+   * - :py:obj:`read_celltype_numbers_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet>`\ (fname)
+     - Reads a spreadsheet with cell type numbers for each anatomical area.
+
+

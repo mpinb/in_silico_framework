@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.merge_celltypes`
+
+
+.. title:
+
+merge_celltypes
+===============
+
+
+.. py:function:: simrun.synaptic_strength_fitting.merge_celltypes(vt, detection_strings=[&#39;L2&#39;, &#39;L34&#39;, &#39;L4&#39;, &#39;L5st&#39;, &#39;L5tt&#39;, &#39;L6cc&#39;, &#39;L6ct&#39;, &#39;VPM_C2&#39;], celltype_must_be_in=None)
+
+   Concatenate the EPSPs of given celltypes.
+
+   This method concatenates the EPSPs of the given celltypes, and returns a dictionary with the concatenated voltage traces.
+   This essentially groups the EPSPs of the given celltypes together, and considers them as one celltype.
+
+   :Parameters: * **vt** (*defaultdict*) -- Voltage traces, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.get\_voltage\_traces`.
+                * **detection\_strings** (*list*) -- List of celltypes to concatenate.
+                * **celltype\_must\_be\_in** (*list*) -- List of celltypes that must be included.
+
+   :returns: A dictionary with concatenated voltage traces.
+   :rtype: defaultdict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

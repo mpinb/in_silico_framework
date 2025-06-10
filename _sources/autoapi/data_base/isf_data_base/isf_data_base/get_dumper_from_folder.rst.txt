@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.get_dumper_from_folder`
+
+
+.. title:
+
+get_dumper_from_folder
+======================
+
+
+.. py:function:: data_base.isf_data_base.isf_data_base.get_dumper_from_folder(folder, return_=&#39;module&#39;)
+
+   Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
+
+   :Parameters: * **folder** (*str*) -- The folder in which the data is stored.
+                * **return\_** (*str, optional*) -- Whether to return the dumper as a string or the actual module. Defaults to 'module'.
+
+   :returns: The dumper that was used to save the data in that folder/key.
+   :rtype: str | module
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

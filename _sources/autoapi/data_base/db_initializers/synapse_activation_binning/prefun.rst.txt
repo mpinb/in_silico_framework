@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.prefun`
+
+
+.. title:
+
+prefun
+======
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.prefun(df)
+
+   Augment a :ref:`syn\_activation\_format` dataframe with additional columns.
+
+   Adds the following columns:
+
+   - ``celltype``: The celltype of the synapse.
+   - ``presynaptic\_column``: The presynaptic column of the synapse.
+   - ``proximal``: Whether the synapse is proximal (soma distance < 500 um).
+   - ``EI``: Whether the synapse is excitatory or inhibitory.
+   - ``binned\_somadist``: The soma distance binned in 50 microns.
+
+   This method is used by default during the binning of synapse activations.
+
+   :Parameters: **df** (:py:class:`pandas.DataFrame`) -- synapse activation dataframe
+
+   :returns: The modified dataframe with additional columns.
+   :rtype: :py:class:`pandas.DataFrame`
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.init`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

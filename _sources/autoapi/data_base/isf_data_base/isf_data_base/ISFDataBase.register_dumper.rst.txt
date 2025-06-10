@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.register_dumper`
+
+ISFDataBase.register_dumper
+===========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.register_dumper(dumper_module)
+
+   Register a dumper with this database, so it can be used to save data.
+
+   Note that a dumper can also be specified when saving data (see :py:meth:`setitem`), so this is not strictly necessary.
+   Make sure to provide the dumper module, not the class or string.
+
+   :Parameters: **dumper_module** (*module*) -- A module from data_base.IO.LoaderDumper. Must contain a ``Loader`` class and a ``dump()`` method.
+
+   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+

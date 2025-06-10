@@ -1,0 +1,48 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.sim_trial_to_cell_object`
+
+sim_trial_to_cell_object
+========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   simtrial_to_cell_object </autoapi/simrun/sim_trial_to_cell_object/simtrial_to_cell_object>
+   trial_to_cell_object </autoapi/simrun/sim_trial_to_cell_object/trial_to_cell_object>
+
+.. py:module:: simrun.sim_trial_to_cell_object
+
+.. autoapi-nested-parse::
+   Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+
+   This module provides a function to rebuild a network-embedded neuron model from
+   a :py:class:`~data_base.data_base.DataBase`. it also allows to change the :ref:`cell_parameters_format`,
+   :ref:`network_parameters_format`, and :ref:`syn_activation_format` data before resimulating the trial.
+
+   .. seealso::
+
+      To rebuild and re-simulate a :py:mod:`simrun` simulation from parameter files instead of a :py:class:`~data_base.data_base.DataBase`,
+      please refer to :py:mod:`~simrun.parameters_to_cell` instead.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`simtrial_to_cell_object <simrun.sim_trial_to_cell_object.simtrial_to_cell_object>`\ (db, sim\_trial\_index, compute, allPoints, scale\_apical, range\_vars, silent, neuron\_param\_modify\_functions, network\_param\_modify\_functions, synapse\_activation\_modify\_functions, additional\_network\_params, tStop)
+     - Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+   * - :py:obj:`trial_to_cell_object <simrun.sim_trial_to_cell_object.trial_to_cell_object>`\ (name, cellName, networkName, synapse\_activation\_file, range\_vars, scale\_apical, allPoints, compute, tStop, neuron\_param\_modify\_functions, network\_param\_modify\_functions, synapse\_activation\_modify\_functions, additional\_network\_params)
+     - Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+
+

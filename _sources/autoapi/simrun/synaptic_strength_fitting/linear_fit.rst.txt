@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.linear_fit`
+
+
+.. title:
+
+linear_fit
+==========
+
+
+.. py:function:: simrun.synaptic_strength_fitting.linear_fit(gAMPANMDA, epsp)
+
+   Calculate a linear fit between the synaptic conductance and the EPSP.
+
+   :Parameters: * **gAMPANMDA** (*np.array*) -- Synaptic conductance.
+                * **epsp** (*np.array*) -- EPSP.
+
+   :returns: The coefficients of the linear fit: offset and slope.
+   :rtype: np.array
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

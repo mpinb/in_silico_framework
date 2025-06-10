@@ -1,0 +1,98 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation`
+
+evaluation
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   BAC </autoapi/biophysics_fitting/hay/evaluation/BAC>
+   bAP </autoapi/biophysics_fitting/hay/evaluation/bAP>
+   _Step </autoapi/biophysics_fitting/hay/evaluation/_Step>
+   StepOne </autoapi/biophysics_fitting/hay/evaluation/StepOne>
+   StepTwo </autoapi/biophysics_fitting/hay/evaluation/StepTwo>
+   StepThree </autoapi/biophysics_fitting/hay/evaluation/StepThree>
+   normalize </autoapi/biophysics_fitting/hay/evaluation/normalize>
+   nan_if_error </autoapi/biophysics_fitting/hay/evaluation/nan_if_error>
+   get_evaluate_bAP </autoapi/biophysics_fitting/hay/evaluation/get_evaluate_bAP>
+   get_evaluate_BAC </autoapi/biophysics_fitting/hay/evaluation/get_evaluate_BAC>
+   get_evaluate_StepOne </autoapi/biophysics_fitting/hay/evaluation/get_evaluate_StepOne>
+   get_evaluate_StepTwo </autoapi/biophysics_fitting/hay/evaluation/get_evaluate_StepTwo>
+   get_evaluate_StepThree </autoapi/biophysics_fitting/hay/evaluation/get_evaluate_StepThree>
+   hay_evaluate_bAP </autoapi/biophysics_fitting/hay/evaluation/hay_evaluate_bAP>
+   hay_evaluate_BAC </autoapi/biophysics_fitting/hay/evaluation/hay_evaluate_BAC>
+   hay_evaluate_StepOne </autoapi/biophysics_fitting/hay/evaluation/hay_evaluate_StepOne>
+   hay_evaluate_StepTwo </autoapi/biophysics_fitting/hay/evaluation/hay_evaluate_StepTwo>
+   hay_evaluate_StepThree </autoapi/biophysics_fitting/hay/evaluation/hay_evaluate_StepThree>
+
+.. py:module:: biophysics_fitting.hay.evaluation
+
+.. autoapi-nested-parse::
+   A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+   This module provides methods to run Hay's stimulus protocols, and evaluate the resulting voltage traces.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`BAC <biophysics_fitting.hay.evaluation.BAC>`
+     - Evaluate the :math:`BAC` stimulus protocol.
+   * - :py:obj:`bAP <biophysics_fitting.hay.evaluation.bAP>`
+     - Evaluate the :math:`bAP` stimulus protocol.
+   * - :py:obj:`StepOne <biophysics_fitting.hay.evaluation.StepOne>`
+     - Evaluate Step current one.
+   * - :py:obj:`StepTwo <biophysics_fitting.hay.evaluation.StepTwo>`
+     - Evaluate Step current two.
+   * - :py:obj:`StepThree <biophysics_fitting.hay.evaluation.StepThree>`
+     - Evaluate Step current three.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`normalize <biophysics_fitting.hay.evaluation.normalize>`\ (raw, mean, std)
+     - Normalize a raw value.
+   * - :py:obj:`nan_if_error <biophysics_fitting.hay.evaluation.nan_if_error>`\ (fun)
+     - Wrapper method that returns nan if an error occurs.
+   * - :py:obj:`get_evaluate_bAP <biophysics_fitting.hay.evaluation.get_evaluate_bAP>`\ (\*\*kwargs)
+     - Get the evaluation function for the :math:`bAP` stimulus protocol.
+   * - :py:obj:`get_evaluate_BAC <biophysics_fitting.hay.evaluation.get_evaluate_BAC>`\ (\*\*kwargs)
+     - Get the evaluation function for the :math:`BAC` stimulus protocol.
+   * - :py:obj:`get_evaluate_StepOne <biophysics_fitting.hay.evaluation.get_evaluate_StepOne>`\ (\*\*kwargs)
+     - Get the evaluation function for the :math:`StepOne` stimulus protocol.
+   * - :py:obj:`get_evaluate_StepTwo <biophysics_fitting.hay.evaluation.get_evaluate_StepTwo>`\ (\*\*kwargs)
+     - Get the evaluation function for the :math:`StepTwo` stimulus protocol.
+   * - :py:obj:`get_evaluate_StepThree <biophysics_fitting.hay.evaluation.get_evaluate_StepThree>`\ (\*\*kwargs)
+     - Get the evaluation function for the :math:`StepTwo` stimulus protocol.
+   * - :py:obj:`hay_evaluate_bAP <biophysics_fitting.hay.evaluation.hay_evaluate_bAP>`\ (\*\*kwargs)
+     - Evaluate the :math:`bAP` stimulus protocol.
+   * - :py:obj:`hay_evaluate_BAC <biophysics_fitting.hay.evaluation.hay_evaluate_BAC>`\ (\*\*kwargs)
+     - Evaluate the :math:`BAC` stimulus protocol.
+   * - :py:obj:`hay_evaluate_StepOne <biophysics_fitting.hay.evaluation.hay_evaluate_StepOne>`\ (\*\*kwargs)
+     - Evaluate the :math:`StepOne` stimulus protocol.
+   * - :py:obj:`hay_evaluate_StepTwo <biophysics_fitting.hay.evaluation.hay_evaluate_StepTwo>`\ (\*\*kwargs)
+     - Evaluate the :math:`StepTwo` stimulus protocol.
+   * - :py:obj:`hay_evaluate_StepThree <biophysics_fitting.hay.evaluation.hay_evaluate_StepThree>`\ (\*\*kwargs)
+     - Evaluate the :math:`StepTwo` stimulus protocol.
+
+

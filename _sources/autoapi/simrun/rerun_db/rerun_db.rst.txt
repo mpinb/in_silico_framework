@@ -1,0 +1,42 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.rerun_db` ❭ :mod:`~simrun.rerun_db.rerun_db`
+
+
+.. title:
+
+rerun_db
+========
+
+
+.. py:function:: simrun.rerun_db.rerun_db(db, outdir, tStop=None, neuron_param_modify_functions=[], network_param_modify_functions=[], synapse_activation_modify_functions=[], stis=None, silent=False, additional_network_params=[], child_process=False)
+
+   Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
+
+   This method recreates the network-embedded neuron simulation from the parameter files in the simrun-initialized database.
+   It allows to adapt the cell parameters, network parameters, and the synaptic activation patterns with modification functions.
+   The results are stored in the specified directory, relative to the original unmodified simulation results.
+
+   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- A simrun-initialized database to resimulate.
+                * **stis** (*list*) -- List of simulation trial indices to be resimulated.
+                * **outdir** (*str*) -- Directory where the simulation results are stored, relative to the current working directory. Preferably, use an absolute path.
+                * **tStop** (*float*) -- Time in ms at which the simulation should stop.
+                * **neuron\_param\_modify\_functions** (*list*) -- List of functions which take :py:class:`:py:class:`~single\_cell\_parser.parameters.ParameterSet`` neuron parameters and may return it changed.
+                * **network\_param\_modify\_functions** (*list*) -- List of functions which take :py:class:`:py:class:`~single\_cell\_parser.parameters.ParameterSet`` network parameters and may return it changed.
+                * **synapse\_activation\_modify\_functions** (*list*) -- List of functions which take a :ref:`syn\_activation\_format` dataframe and may return it changed.
+                * **additional\_network\_params** (*list*) -- List of additional :ref:`network\_parameters\_format` files to be used in the simulation.
+                * **silent** (*bool*) -- If True, suppresses output from the simulation.
+                * **child\_process** (*bool*) -- If True, runs the simulation in a child process.
+
+   :returns: A list of dask delayed objects. When computed with a dask scheduler, it writes the simulation results to the specified directory.
+   :rtype: list
+
+   .. seealso:: :py:mod:`~data\_base.db\_initializers.init\_simrun\_general` for initializing a database from raw :py:mod:`simrun` output and its available keys.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

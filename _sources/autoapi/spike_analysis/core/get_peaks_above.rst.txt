@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.get_peaks_above`
+
+
+.. title:
+
+get_peaks_above
+===============
+
+
+.. py:function:: spike_analysis.core.get_peaks_above(t, v, lim)
+
+   Compute timepoints of maxima above a threshold.
+
+   :Parameters: * **t** (*list*) -- A list containing timepoints.
+                * **v** (*list*) -- A list containing recorded voltage.
+                * **lim** (*float*) -- A threshold above which (>=) maxima are detected.
+
+   :returns: A list containing timepoints of maxima.
+             max\_v (list): A list containing voltage at timepoints of maxima.
+   :rtype: max\_t (list)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

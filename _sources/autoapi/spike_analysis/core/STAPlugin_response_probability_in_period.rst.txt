@@ -1,0 +1,65 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_response_probability_in_period`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_response_probability_in_period
+========================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <STAPlugin_response_probability_in_period.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_response_probability_in_period(name='frequency_in_period', source='st_df', period=None, t_start=None, t_end=None)
+   
+   SpikeTimeAnalysis (STA) plugin to compute the response probability in a period.
+
+   .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
+
+   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'frequency_in_period'.
+                * **source** (*str, optional*) -- The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+                * **period** (*str, optional*) -- The period to analyze. Defaults to None (entire trace).
+                * **t_start** (*float, optional*) -- The start time of the period. Defaults to None.
+                * **t_end** (*float, optional*) -- The end time of the period. Defaults to None.
+
+   :Attributes:
+
+   .. attribute:: name
+
+      The name of the plugin. Defaults to 'frequency_in_period'.
+
+      :type: str
+
+   .. attribute:: _by_trial
+
+      Whether there are any spikes in this trial.
+
+      :type: :py:class:`numpy.ndarray`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_response_probability_in_period.setup>`\ (spike\_times\_analysis)
+        - Sets up the analysis: computes the response probability in a period.
+

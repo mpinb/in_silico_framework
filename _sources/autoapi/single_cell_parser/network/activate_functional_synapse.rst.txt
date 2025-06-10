@@ -1,0 +1,48 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.activate_functional_synapse`
+
+
+.. title:
+
+activate_functional_synapse
+===========================
+
+
+.. py:function:: single_cell_parser.network.activate_functional_synapse(syn, cell, preSynCell, synParameters, tChange=None, synParametersChange=None, forceSynapseActivation=False, releaseTimes=None)
+
+   Activate a single synapse.
+
+   This method simulates the activation of a single synapse onto a biophysically detailed neuron model using NEURON.
+
+   The activation times for the synapse can be passed explicitly, or generated in case :paramref:`releaseTimes` is ``None``.
+   In the latter case, this method generates release times based on the synapse's release probability from :paramref:`synParameters`,
+   and spike times of :paramref:`preSyncell`.
+
+   If they need to be generated (default behavior), the release times are calculated from the ``releaseProb`` keyword in the synapse parameter file.
+   If the ``releaseProb`` is not given, or set to ``'dynamic'``, the synapse is assumed to release each time the presynaptic cell spikes.
+
+   .. attention::
+
+      This implementation expects all presynaptic spike times to be pre-computed.
+      It can thus not be used in recurrent network models at this point.
+
+   :Parameters: * **syn** (:py:class:`~single\_cell\_parser.synapse.Synapse`) -- Synapse object.
+                * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- Postsynaptic cell.
+                * **preSynCell** (:py:class:`~single\_cell\_parser.cell.PointCell`) -- Presynaptic cell.
+                * **synParameters** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- Synapse parameters, see also the ``synapses.rerceptors.<syn\_type>`` key in the :ref:`network\_parameters\_format` file.
+                * **tChange** (*float*) -- Time at which the synapse parameters change (e.g. the release probability due to a spike).
+                * **synParametersChange** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- Synapse parameters after change (including e.g. the release probability).
+                * **forceSynapseActivation** (*bool*) -- If True, the synapse is activated regardless of the release probability.
+                * **releaseTimes** (*list*) -- List of synaptic release times.
+                  If None, the release times are generated from the :paramref:`synapseParameters`'s ``releaseProb`` keyword,
+                  If None and ``releaseprob`` does not appear in :paramref:`synapseParameters`, the release probability is assumed to equal 1,
+                  and synapse release times equal presynaptic spike times without delay.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

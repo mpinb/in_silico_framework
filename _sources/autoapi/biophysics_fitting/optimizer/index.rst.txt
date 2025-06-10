@@ -1,0 +1,94 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer`
+
+optimizer
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   robust_int </autoapi/biophysics_fitting/optimizer/robust_int>
+   get_max_generation </autoapi/biophysics_fitting/optimizer/get_max_generation>
+   save_result </autoapi/biophysics_fitting/optimizer/save_result>
+   setup_db_run </autoapi/biophysics_fitting/optimizer/setup_db_run>
+   get_objective_function </autoapi/biophysics_fitting/optimizer/get_objective_function>
+   get_mymap </autoapi/biophysics_fitting/optimizer/get_mymap>
+   _evaluate_invalid_fitness </autoapi/biophysics_fitting/optimizer/_evaluate_invalid_fitness>
+   _update_history_and_hof </autoapi/biophysics_fitting/optimizer/_update_history_and_hof>
+   _record_stats </autoapi/biophysics_fitting/optimizer/_record_stats>
+   _get_offspring </autoapi/biophysics_fitting/optimizer/_get_offspring>
+   eaAlphaMuPlusLambdaCheckpoint </autoapi/biophysics_fitting/optimizer/eaAlphaMuPlusLambdaCheckpoint>
+   run </autoapi/biophysics_fitting/optimizer/run>
+   get_population_with_different_n_objectives </autoapi/biophysics_fitting/optimizer/get_population_with_different_n_objectives>
+   start_run </autoapi/biophysics_fitting/optimizer/start_run>
+
+.. py:module:: biophysics_fitting.optimizer
+
+.. autoapi-nested-parse::
+   Multi-objective optimization algorithm.
+
+   This code has been adapted from `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+   such that:
+
+   - a start population can be defined.
+   - such that the optimizations can be organized in a data base.
+   - to be executed on a distributed system using dask.
+   - to return all objectives, not only the combined ones.
+
+   The top-level pipeline can be started with :py:meth:`start_run`.
+
+   .. note::
+
+      Part of this module (as marked with comments) is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
+      
+      Copyright (c) 2016, EPFL/Blue Brain Project.
+      Part of this file is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_.
+      This library is free software; you can redistribute it and/or modify it under
+      the terms of the GNU Lesser General Public License version 3.0 as published
+      by the Free Software Foundation.
+      This library is distributed in the hope that it will be useful, but WITHOUT
+      ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+      FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+      details.
+      You should have received a copy of the GNU Lesser General Public License
+      along with this library; if not, write to the Free Software Foundation, Inc.,
+      51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`robust_int <biophysics_fitting.optimizer.robust_int>`\ (x)
+     - Robustly convert something to an integer.
+   * - :py:obj:`get_max_generation <biophysics_fitting.optimizer.get_max_generation>`\ (db\_run)
+     - Returns the index of the next iteration in a database.
+   * - :py:obj:`save_result <biophysics_fitting.optimizer.save_result>`\ (db\_run, features, objectives)
+     - Save the results of an optimization iteration in a database.
+   * - :py:obj:`setup_db_run <biophysics_fitting.optimizer.setup_db_run>`\ (db\_setup, run)
+     - Create a sub-database for each run of the optimization algorithm.
+   * - :py:obj:`get_objective_function <biophysics_fitting.optimizer.get_objective_function>`\ (db\_setup)
+     - Get the objective function for the optimization.
+   * - :py:obj:`get_mymap <biophysics_fitting.optimizer.get_mymap>`\ (db\_setup, db\_run, c, satisfactory\_boundary\_dict, n\_reschedule\_on\_runtime\_error)
+     - Get a map function for evaluating the parameters.
+   * - :py:obj:`eaAlphaMuPlusLambdaCheckpoint <biophysics_fitting.optimizer.eaAlphaMuPlusLambdaCheckpoint>`\ (population, toolbox, mu, cxpb, mutpb, ngen, stats, halloffame, cp\_frequency, db\_run, continue\_cp, db)
+     - This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
+   * - :py:obj:`run <biophysics_fitting.optimizer.run>`\ (self, max\_ngen, offspring\_size, continue\_cp, cp\_filename, cp\_frequency, pop, db)
+     - This method is a class method of the BluePyOpt optimisations.DEAPOptimisation class.
+   * - :py:obj:`get_population_with_different_n_objectives <biophysics_fitting.optimizer.get_population_with_different_n_objectives>`\ (old\_pop, n\_objectives)
+     - Adapt the number of objectives of individuals
+   * - :py:obj:`start_run <biophysics_fitting.optimizer.start_run>`\ (db\_setup, n, pop, client, continue\_cp, offspring\_size, eta, mutpb, cxpb, max\_ngen, satisfactory\_boundary\_dict)
+     - Start an optimization run as specified in db_setup.
+
+

@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.optimize_holding_current`
+
+PSP_with_current_injection.optimize_holding_current
+===================================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.optimize_holding_current()
+
+   Calculate the current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+
+   :paramref:`target_vm` is defined during initialization of the object
+

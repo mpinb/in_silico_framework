@@ -1,0 +1,42 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static`
+
+Strategy_spatiotemporalRaisedCosine._convert_x_static
+=====================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static(groups, len_z, x)
+   :staticmethod:
+
+
+   Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
+
+   Useful for passing the learnable weights to the optimizer as a one-dimensional array,
+   but keeping track of the basis vectors for each group and dimension.
+
+   :Parameters: * **groups** (*list*) -- The list of groups.
+                * **len_z** (*int*) -- The length of the spatial domain.
+                * **x** (*array*) -- The one-dimensional input array.
+
+   :returns: A dictionary of basis vectors for each group.
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> x
+   array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.])
+   >>> groups
+   ['EXC', 'INH']
+   >>> len_z
+   3                               # implies len_t is len(x)/2 - len_z = 2
+   >>> _convert_x_static(groups, len_z, x)
+   {
+       'EXC': (
+           array([0.1, 0.2, 0.3]), # spatial
+           array([0.4, 0.5])),     # temporal
+       'INH': (
+           array([0.6, 0.7, 0.8]), # spatial
+           array([0.9, 1.]))}      # temporal
+

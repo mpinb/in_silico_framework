@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing`
+
+PSPs.get_voltage_and_timing
+===========================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing(method='dynamic_baseline', merged=False, merge_celltype_kwargs=None)
+
+   Calculate a PSP's maximum voltage deflection and timing thereof.
+
+   Note that for inhibitory synapses, the voltage trace is inverted, so the maximum still
+   corresponds to its extremum.
+
+   :Parameters: * **method** (*str*) --
+
+                  ``dynamic_baseline``: a simulation without any synaptic activation is
+                      substracted from a simulation with cell activation. The maximum and
+                      timepoint of maximum is returned
+                  ``constant_baseline``: the voltage at :math:`t = 110ms` (i.e. directly before
+                      synapse activation) is considered as baseline and substracted
+                      from all voltages at all timepoints.
+                      The maximum and timepoint of the maximum after :math:`t = 110ms` is
+                      returned.
+                * **merged** (*bool*) -- Whether to merge the EPSPs of some cell types.
+                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+
+   :returns: A dictionary of voltage traces and activation times.
+   :rtype: defaultdict
+

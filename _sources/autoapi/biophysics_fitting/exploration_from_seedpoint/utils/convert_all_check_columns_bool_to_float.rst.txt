@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float`
+
+
+.. title:
+
+convert_all_check_columns_bool_to_float
+=======================================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float(df)
+
+   Convert all boolean values to float in a pandas dataframe.
+
+   Only does this for columns that have ``"check"`` in the column name.
+
+   :Parameters: **df** (*pd.DataFrame*) -- DataFrame
+
+   :returns: DataFrame with boolean values converted to float.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

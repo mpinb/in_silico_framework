@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_all`
+
+
+.. title:
+
+read_all
+========
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_all(basedir, n_particles_start=0, n_particles_end=1000)
+
+   Read the results of all directories contained within some base directory, independent of which seepdoint or particle.
+
+   :Parameters: * **basedir** (*str*) -- the base directory containing the results of the RW exploration.
+                * **n\_particles\_start** (*int*) -- the first particle to read
+                * **n\_particles\_end** (*int*) -- the last particle to read
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

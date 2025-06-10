@@ -1,0 +1,108 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ScalarField
+===========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   resize_mesh <ScalarField.resize_mesh>
+   get_scalar <ScalarField.get_scalar>
+   is_in_bounds <ScalarField.is_in_bounds>
+   get_mesh_coordinates <ScalarField.get_mesh_coordinates>
+   get_voxel_bounds <ScalarField.get_voxel_bounds>
+   get_voxel_center <ScalarField.get_voxel_center>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField(mesh=None, origin=(), extent=(), spacing=(), bBox=())
+   
+   3D scalar fields based on numpy arrays
+
+   A convenience class around numpy array for 3D scalar fields.
+   The class provides methods to access scalar values at arbitrary
+   3D coordinates, to get the bounding box of a voxel, and to get
+   the center of a voxel.
+
+   This class is used for e.g. assigning sub-cellular synapse distributions
+   modeled after vtkImageData, i.e. a regular mesh.
+
+   :Parameters: * **mesh** (*numpy.ndarray*) -- 3D numpy array representing the scalar field.
+                * **origin** (*tuple*) -- 3-tuple of floats representing the origin of the scalar field.
+                * **extent** (*tuple*) -- 6-tuple of integers representing the extent of the scalar field.
+                * **spacing** (*tuple*) -- 3-tuple of floats representing the spacing of the scalar field.
+                * **bBox** (*tuple*) -- 6-tuple of floats representing the bounding box of the scalar field.
+
+   :Attributes:
+
+   .. attribute:: mesh
+
+      3D numpy array representing the scalar field.
+
+      :type: numpy.ndarray
+
+   .. attribute:: origin
+
+      3-tuple of floats representing the origin of the scalar field.
+
+      :type: tuple
+
+   .. attribute:: extent
+
+      6-tuple of integers representing the extent of the scalar field.
+      Note that the extent always starts at 0:
+      Format: (0, xmax - xmin, 0, ymax - ymin, 0, zmax - zmin)
+
+      :type: tuple
+
+   .. attribute:: spacing
+
+      3-tuple of floats representing the spacing of the scalar field.
+      If all values are equal, the scalar field has cubic voxels.
+
+      :type: tuple
+
+   .. attribute:: boundingBox
+
+      6-tuple of floats representing the bounding box of the scalar field.
+      Format: (xmin, xmax, ymin, ymax, zmin, zmax)
+
+      :type: tuple
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`resize_mesh <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.resize_mesh>`\ ()
+        - Resizes mesh to non-zero scalar data.
+      * - :py:obj:`get_scalar <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar>`\ (xyz)
+        - Fetch the scalar value of the voxel containing the point xyz.
+      * - :py:obj:`is_in_bounds <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds>`\ (xyz)
+        - Check if point is within bounding box of mesh.
+      * - :py:obj:`get_mesh_coordinates <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates>`\ (xyz)
+        - Fetch the mesh index of the voxel containing the point xyz.
+      * - :py:obj:`get_voxel_bounds <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_bounds>`\ (ijk)
+        - Gets the bounding box of voxel given by indices i,j,k.
+      * - :py:obj:`get_voxel_center <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_center>`\ (ijk)
+        - Fetch the center of the voxel given by indices i,j,k.
+

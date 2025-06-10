@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.spike_count`
+
+
+.. title:
+
+spike_count
+===========
+
+
+.. py:function:: biophysics_fitting.ephys.spike_count(t, v, thresh=None)
+
+   Counts the number of spikes in a voltage trace.
+
+   :Parameters: * **t** (*array\_like*) -- Time values of the voltage trace, in seconds.
+                * **v** (*array\_like*) -- Voltage values of the trace, in volts.
+                * **thresh** (*float, optional*) -- Spike detection threshold, in volts. If not specified, the threshold
+                  will be set to the mean of the voltage trace.
+
+   :returns: The number of spikes detected in the trace.
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

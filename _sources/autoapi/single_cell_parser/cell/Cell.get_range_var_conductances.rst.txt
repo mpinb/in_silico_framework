@@ -1,0 +1,43 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.get_range_var_conductances`
+
+Cell.get_range_var_conductances
+===============================
+
+.. py:method:: single_cell_parser.cell.Cell.get_range_var_conductances(density=True)
+
+   Get the conductances of each section, categorized by range variable and segment.
+
+   This method computes the conductance of each range variable in each segment, and categorizes them by: section, segment, range variable.
+
+   :Parameters: **density** (*bool, optional*) -- If True (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                If False, the total amount of conductivity is returned for each segment i.e. the conductance density multiplied by the area of the segment.
+
+   :returns:     A nested list/dictionary structure.
+                 Each element contains all range variables and segments for one section.
+                 Each such element is a dictionary, where the keys are range variables.
+                 Each such key is then a list, containing the value of this range variable for each segment.
+   :rtype: List[List[Dict[List]]]
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cell.get_range_var_conductances()
+   [
+       {               # section 0
+           'Ca_LVAst': [
+               0.0017, # segment 0
+               0.0017, # segment 1
+               0.0017, # segment 2
+               0.0017, # segment 3
+               0.0017  # segment 4
+           ],
+           'Ca_HVA': [0.0017, 0.0017, 0.0017, 0.0017, 0.0017],
+           ...
+       },
+       {...},          # section 1
+       {...},          # section 2
+   ]
+

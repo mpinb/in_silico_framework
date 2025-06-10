@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load`
+
+SharedNumpyStore.load
+=====================
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load(name, mode='shared_memory', start_row=None, end_row=None, allow_create_shm=False)
+
+   Load an array from shared memory.
+
+   :Parameters: * **mode** (*str*) -- 'memmap': memory map the file and return a numpy memmap object.
+                  'memory': load file into (not shared) memory and return a numpy array
+                  'shared_memory': access file in shared memory and return numpy array.
+                * **allow_create_shm** (*bool*) -- only relevant in mode shared_memory.
+                  If True, if the file on disk is not yet loaded into shared memory, load it.
+                  If False, requires that file already exists in shared memory. Use this e.g. in child processes
+                  in which you want to be sure they don't create a new shared memory file.
+                * **start_row** (*int*) -- first row from the array to load
+                * **end_row** (*int*) -- last row of the array to load
+                * **Note** -- in shared_memory mode, for each call with different start_row or end_row parameters, a new independent
+                  file is created.
+
+   :returns: the array
+   :rtype: np.ndarray
+
+   :raises ValueError: if mode is not one of 'memmap', 'memory', or 'shared_memory'
+
+   :raises AssertionError: if the file is not in shared memory yet and allow_create_shm is False
+

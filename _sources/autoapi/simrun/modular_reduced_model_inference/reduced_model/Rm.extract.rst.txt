@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.extract`
+
+Rm.extract
+==========
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.extract(name)
+
+   Extract data using the data extractor.
+
+   :Parameters: **name** (*str*) -- Name of the data extractor
+
+   :returns: Data extracted by the data extractor
+   :rtype: obj
+
+   .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.data_extractor>get` for how a data extractor fetches data.
+

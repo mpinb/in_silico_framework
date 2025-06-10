@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._get_color_per_section`
+
+CMVDataParser._get_color_per_section
+====================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._get_color_per_section(array, nan_color='#f0f0f0')
+
+   Given an array of scalar values of length n_points, bin them per section and assign a color according to :paramref:`scalar_mappable`.
+
+   :Parameters: **array** (*list*) -- list of scalar values. Each element corresponds to a point in the cell morphology.
+
+   :returns: list of colors. Each element corresponds to a point in the cell morphology.
+   :rtype: list
+

@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_landmark_files`
+
+NetworkMapper._write_landmark_files
+===================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_landmark_files(synapseLocations, id1, id2, cellName, dirName)
+
+   Write out landmark files for each synapse location.
+
+   This is used in :py:meth:`_generate_output_files` to write out landmark files for each synapse location.
+
+   :Parameters: * **synapseLocations** (*dict*) -- Dictionary of synapse locations.
+                * **id1** (*str*) -- ID for the current date.
+                * **id2** (*str*) -- ID for the current process.
+                * **cellName** (*str*) -- Name of the postsynaptic cell.
+                * **dirName** (*str*) -- Directory name for the output files.
+

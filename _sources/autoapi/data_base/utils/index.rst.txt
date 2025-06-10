@@ -1,0 +1,129 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   silence_stdout </autoapi/data_base/utils/silence_stdout>
+   mkdtemp </autoapi/data_base/utils/mkdtemp>
+   DelayedKeyboardInterrupt </autoapi/data_base/utils/DelayedKeyboardInterrupt>
+   bcolors </autoapi/data_base/utils/bcolors>
+   chunkIt </autoapi/data_base/utils/chunkIt>
+   convertible_to_int </autoapi/data_base/utils/convertible_to_int>
+   split_file_to_buffers </autoapi/data_base/utils/split_file_to_buffers>
+   first_line_to_key </autoapi/data_base/utils/first_line_to_key>
+   pandas_to_array </autoapi/data_base/utils/pandas_to_array>
+   select </autoapi/data_base/utils/select>
+   pooled_std </autoapi/data_base/utils/pooled_std>
+   skit </autoapi/data_base/utils/skit>
+   unique </autoapi/data_base/utils/unique>
+   cache </autoapi/data_base/utils/cache>
+   fancy_dict_compare </autoapi/data_base/utils/fancy_dict_compare>
+   wait_until_key_removed </autoapi/data_base/utils/wait_until_key_removed>
+   get_file_or_folder_that_startswith </autoapi/data_base/utils/get_file_or_folder_that_startswith>
+   get_file_or_folder_that_endswith </autoapi/data_base/utils/get_file_or_folder_that_endswith>
+   flatten </autoapi/data_base/utils/flatten>
+   synchronous_ddf_concat </autoapi/data_base/utils/synchronous_ddf_concat>
+   myrepartition </autoapi/data_base/utils/myrepartition>
+   df_colnames_to_str </autoapi/data_base/utils/df_colnames_to_str>
+   colorize_key </autoapi/data_base/utils/colorize_key>
+   colorize_str </autoapi/data_base/utils/colorize_str>
+   calc_recursive_filetree </autoapi/data_base/utils/calc_recursive_filetree>
+   rename_for_deletion </autoapi/data_base/utils/rename_for_deletion>
+   delete_in_background </autoapi/data_base/utils/delete_in_background>
+   is_db </autoapi/data_base/utils/is_db>
+
+.. py:module:: data_base.utils
+
+.. autoapi-nested-parse::
+   Database utility and convenience functions.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`silence_stdout <data_base.utils.silence_stdout>`
+     - Silence stdout
+   * - :py:obj:`mkdtemp <data_base.utils.mkdtemp>`
+     - Context manager for creating temporary directories
+   * - :py:obj:`DelayedKeyboardInterrupt <data_base.utils.DelayedKeyboardInterrupt>`
+     - Context manager that allows to delay a KeyboardInterrupt such that it also works in subthreads.
+   * - :py:obj:`bcolors <data_base.utils.bcolors>`
+     - List of colors for terminal output in bash.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`chunkIt <data_base.utils.chunkIt>`\ (seq, num)
+     - Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+   * - :py:obj:`convertible_to_int <data_base.utils.convertible_to_int>`\ (x)
+     - Returns True if x can be converted to an integer, False otherwise
+   * - :py:obj:`split_file_to_buffers <data_base.utils.split_file_to_buffers>`\ (f, split\_str)
+     - Reads a file f and splits it wherever :paramref:`split_str` is found.
+   * - :py:obj:`first_line_to_key <data_base.utils.first_line_to_key>`\ (stringios)
+     - Convert a list of StringIO objects to a dictionary.
+   * - :py:obj:`pandas_to_array <data_base.utils.pandas_to_array>`\ (pdf, x\_component\_fun, y\_component\_fun, value\_fun)
+     - Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
+   * - :py:obj:`select <data_base.utils.select>`\ (df, \*\*kwargs)
+     - Selects rows from a dataframe based on the values of the columns
+   * - :py:obj:`pooled_std <data_base.utils.pooled_std>`\ (m, s, n)
+     - Calculates the pooled standard deviation out of samples.
+   * - :py:obj:`skit <data_base.utils.skit>`\ (\*funcs, \*\*kwargs)
+     - Splits kwargs up to supply different functions with the right subset.
+   * - :py:obj:`unique <data_base.utils.unique>`\ (list\_)
+     - Get the unique elements of a list
+   * - :py:obj:`cache <data_base.utils.cache>`\ (function)
+     - Decorator to cache the result of a function
+   * - :py:obj:`fancy_dict_compare <data_base.utils.fancy_dict_compare>`\ (dict\_1, dict\_2, dict\_1\_name, dict\_2\_name, path)
+     - Compare two dictionaries recursively to find non-matching elements
+   * - :py:obj:`wait_until_key_removed <data_base.utils.wait_until_key_removed>`\ (db, key, delay)
+     - Wait until a key is removed from a database.
+   * - :py:obj:`get_file_or_folder_that_startswith <data_base.utils.get_file_or_folder_that_startswith>`\ (path, startswith)
+     - Get the file or folder in a directory that starts with a certain string
+   * - :py:obj:`get_file_or_folder_that_endswith <data_base.utils.get_file_or_folder_that_endswith>`\ (path, endswith)
+     - Get the file or folder in a directory that ends with a certain string
+   * - :py:obj:`flatten <data_base.utils.flatten>`\ (l)
+     - Flatten a nested list
+   * - :py:obj:`synchronous_ddf_concat <data_base.utils.synchronous_ddf_concat>`\ (ddf\_path, meta, N, n, scheduler)
+     - Concatenate a pickles dask dataframe to a pandas dataframe.
+   * - :py:obj:`myrepartition <data_base.utils.myrepartition>`\ (ddf, N)
+     - Repartition a dask dataframe without generating more tasks.
+   * - :py:obj:`df_colnames_to_str <data_base.utils.df_colnames_to_str>`\ (df)
+     - Convert the column names and index names of a dataframe to string.
+   * - :py:obj:`colorize_key <data_base.utils.colorize_key>`\ (key)
+     - Colorizes a key based on its type.
+   * - :py:obj:`colorize_str <data_base.utils.colorize_str>`\ (key, bcolor)
+     - Colorize a string with a terminal color.
+   * - :py:obj:`calc_recursive_filetree <data_base.utils.calc_recursive_filetree>`\ (db, root\_dir\_path, max\_lines, depth, max\_depth, max\_lines\_per\_key, lines, indent, all\_files, colorize)
+     - Fetches the contents of an db and formats them as a string representing a tree structure
+   * - :py:obj:`rename_for_deletion <data_base.utils.rename_for_deletion>`\ (key)
+     - Renames some key to indicate it's in the process of being deleted.
+   * - :py:obj:`delete_in_background <data_base.utils.delete_in_background>`\ (key)
+     - Starts a background process that deletes a key
+   * - :py:obj:`is_db <data_base.utils.is_db>`\ (dir\_to\_data)
+     - Check if a path is a :py:class:`~data_base.data_base.DataBase`.
+
+

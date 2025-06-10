@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser._insert_ion_properties`
+
+CellParser._insert_ion_properties
+=================================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser._insert_ion_properties(label, ionParam)
+
+   Inserts ion properties into all structures named as :paramref:`label`
+
+   :Parameters: * **label** (*str*) -- Label of the structure.
+                * **ionParam** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Ion properties. See :ref:`cell_parameters_format` for an example.
+

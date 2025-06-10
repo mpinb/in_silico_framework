@@ -1,0 +1,42 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_PSTH`
+
+
+.. title:
+
+write_PSTH
+==========
+
+
+.. py:function:: single_cell_parser.writer.write_PSTH(fname=None, PSTH=None, bins=None)
+
+   Write PSTH and time bins of PSTH,
+
+   Bins contain left and right end of each bin, i.e. ``len(bins) = len(PSTH) + 1``
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **PSTH** (*list*) -- A list of PSTH values.
+                * **bins** (*list*) -- A list of time bins, including begin and end
+
+   :returns: None. Writes out the PSTH file to :paramref:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> PSTH = [1, 1, 2]
+   >>> bins = [0.0, 0.1, 0.2, 0.3]
+   >>> write\_PSTH('PSTH.param', PSTH, bins)
+   >>> PSTH.param
+   # bin begin     bin end APs/trial/bin
+   0.0     0.1     1
+   0.1     0.2     1
+   0.2     0.3     2
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

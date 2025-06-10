@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname`
+
+SharedNumpyStore._get_fname
+===========================
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname(arr, name)
+
+   Get the filename of an array.
+
+   For a given array and its name, create a filename that follows the convention of NumpyStore
+
+   :Parameters: * **arr** (*np.ndarray*) -- the array
+                * **name** (*str*) -- the name of the array
+
+   :returns: the filename that follows the convention of NumpyStore
+   :rtype: str
+

@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.synchronous_ddf_concat`
+
+
+.. title:
+
+synchronous_ddf_concat
+======================
+
+
+.. py:function:: data_base.utils.synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None)
+
+   Concatenate a pickles dask dataframe to a pandas dataframe.
+
+   :Parameters: * **ddf\_path** (*str*) -- path to the dask dataframe
+                * **meta** (*pd.DataFrame*) -- the metadata for the dask dataframe.
+                * **N** (*int*) -- number of chunks
+                * **n** (*int*) -- the chunk to be concatenated
+                * **scheduler** (*str*) -- the scheduler to be used
+
+   :returns: the concatenated dataframe
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

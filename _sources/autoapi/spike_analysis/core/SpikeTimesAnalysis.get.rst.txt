@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis.get`
+
+SpikeTimesAnalysis.get
+======================
+
+.. py:method:: spike_analysis.core.SpikeTimesAnalysis.get(key)
+
+   Get a key from the database.
+
+   If the key refers to a STAPlugin, the result of the analysis is returned.
+   Otherwise, the corresponding value is returned.
+
+   :Parameters: **key** (*str*) -- The name of the event analysis routine.
+

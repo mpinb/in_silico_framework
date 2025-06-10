@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_max_generation`
+
+
+.. title:
+
+get_max_generation
+==================
+
+
+.. py:function:: biophysics_fitting.optimizer.get_max_generation(db_run)
+
+   Returns the index of the next iteration in a database.
+   If the database is empty, it returns -1.
+
+   :Parameters: **db\_run** (*data\_base.DataBase*) -- The database.
+
+   :returns: The index of the next iteration. If the database is empty, it returns -1.
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

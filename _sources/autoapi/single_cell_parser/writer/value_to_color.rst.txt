@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.value_to_color`
+
+
+.. title:
+
+value_to_color
+==============
+
+
+.. py:function:: single_cell_parser.writer.value_to_color(v, vmin=0, vmax=1)
+
+   Map a value to a color.
+
+   See: https://stackoverflow.com/questions/15140072/how-to-map-number-to-color-using-matplotlibs-colormap
+
+   :Parameters: * **v** (*float*) -- The value to map to a color.
+                * **vmin** (*float*) -- The minimum value of the range. Default is 0.
+                * **vmax** (*float*) -- The maximum value of the range. Default is 1.
+
+   :returns: The RGBA color tuple.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock._get_locking_config`
+
+
+.. title:
+
+_get_locking_config
+===================
+
+
+.. py:function:: data_base.distributed_lock._get_locking_config()
+
+   Get the locking configuration from the environment variable ``ISF\_DISTRIBUTED\_LOCK\_CONFIG``.
+
+   This method allows for a lazy evaluation of the locking configuration,
+   and is used to set the global variable ``\_CONFIG``.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts.setup`
+
+STAPlugin_bursts.setup
+======================
+
+.. py:method:: spike_analysis.core.STAPlugin_bursts.setup(spike_times_analysis)
+
+   Sets up the analysis: Detects high frequency events (doublet, triplet, ...) that occur within a timewindow.
+
+   :paramref:`_result` will be a pd.DataFrame containing the annotated dataframe containing the event times, classes and interspike intervals.
+
+   :Parameters: **spike_times_analysis** (:py:class:`~spike_analysis.core.SpikeTimesAnalysis`) -- The spike times analysis object.
+
+   .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+

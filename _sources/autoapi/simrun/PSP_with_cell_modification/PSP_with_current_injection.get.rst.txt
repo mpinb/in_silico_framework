@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.get`
+
+PSP_with_current_injection.get
+==============================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get()
+
+   Get the final :py:class:`~simrun.synaptic_strength_fitting.PSPs` object.
+
+   Shortcut to get the combined excitatory and inhibitory PSP object.
+
+   :returns: PSP object to simulate PSPs
+   :rtype: :py:class:`~simrun.synaptic_strength_fitting.PSPs`
+

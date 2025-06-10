@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs._setup_computation`
+
+PSPs._setup_computation
+=======================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs._setup_computation(exc_inh)
+
+   Construct delayed functions for running single-synapse simulations.
+
+   For each celltype in :paramref:`network_params_by_celltype`, create a delayed
+   function that activates each synapse of that particular celltype one by one.
+   Simulations are reset after each synapse activation.
+   The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the
+   amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is
+   ``len(gExRange) * len(network_params_by_celltype)``.
+
+   :Parameters: **exc_inh** (*str*) -- Whether to fit excitatory or inhibitory synapses.
+
+   :returns: None. updates the :paramref:`_keys` and :paramref:`_delayeds` attributes.
+

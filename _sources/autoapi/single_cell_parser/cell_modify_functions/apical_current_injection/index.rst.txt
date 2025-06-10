@@ -1,0 +1,36 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.apical_current_injection`
+
+apical_current_injection
+========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   apical_current_injection </autoapi/single_cell_parser/cell_modify_functions/apical_current_injection/apical_current_injection>
+
+.. py:module:: single_cell_parser.cell_modify_functions.apical_current_injection
+
+.. autoapi-nested-parse::
+   Inject a current at a given distance from the soma.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`apical_current_injection <single_cell_parser.cell_modify_functions.apical_current_injection.apical_current_injection>`\ (cell, amplitude, delay, duration, dist)
+     - Inject a current at a given distance from the soma.
+
+

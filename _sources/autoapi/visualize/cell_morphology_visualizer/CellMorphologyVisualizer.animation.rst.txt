@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.animation`
+
+CellMorphologyVisualizer.animation
+==================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.animation(images_path, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, display=True, tpf=20)
+
+   Show an animation of the simulated neuron.
+
+   Creates a set of images of a neuron color-coded with voltage together with synapse activations.
+   These images are then put together into a IPython animation using :py:mod:`visualize.utils.display_animation_from_images`
+   The parameters :paramref:t_start, :paramref:t_stop and :paramref:t_step update the :paramref:self.time attribute
+
+   :Parameters: * **images_path** (*str*) -- path where the images for the gif will be generated.
+                * **overwrite_frames** (*bool*) -- whether to overwrite previously existing frames in the images_path directory.
+                * **color** (*str*) -- color of the cell morphology. Can be a fixed color, or a keyword referring to scalar data of the simulation, such as membrane voltage or ion channel dynamics.
+                * **show_synapses** (*bool*) -- whether to show the synapse activation locations onto the morphology.
+                * **show_legend** (*bool*) -- whether to show the color legend in the plot.
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time between the different time points of our visualization_start (): start time point of our time series visualization
+                * **client** (*distrubted.client.Client*) -- dask client for parallelization
+                * **highlight_section** (*int*) -- section number of the section that should be highlighted with an arrow.
+                * **highlight_x** (*float*) -- x coordinate of the section that should be highlighted with an arrow.
+                * **display** (*bool*) -- whether to display the animation in the notebook.
+                * **tpf** -- time per frame (in ms)
+

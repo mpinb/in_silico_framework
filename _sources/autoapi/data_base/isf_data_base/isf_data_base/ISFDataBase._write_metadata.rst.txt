@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._write_metadata`
+
+ISFDataBase._write_metadata
+===========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._write_metadata(dumper, dir_to_data)
+
+   Writes the metadata of this database.
+
+   .. warning:: Do not call this method directly. It is internal API. Invoking this method directly may be destructive.
+
+   :Parameters: * **dumper** (*module*) -- The dumper module that was used to save the data.
+                * **dir_to_data** (*pathlib.Path*) -- The path to the data directory.
+

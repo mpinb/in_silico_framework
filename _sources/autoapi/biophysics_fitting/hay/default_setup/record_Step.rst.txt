@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.record_Step`
+
+
+.. title:
+
+record_Step
+===========
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.record_Step(cell)
+
+   Extract the voltage trace from the soma.
+
+   This is used to quantify the response of the cell to step currents.
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

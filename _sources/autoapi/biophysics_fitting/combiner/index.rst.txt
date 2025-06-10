@@ -1,0 +1,40 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner`
+
+combiner
+========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Combiner_Setup </autoapi/biophysics_fitting/combiner/Combiner_Setup>
+   Combiner </autoapi/biophysics_fitting/combiner/Combiner>
+
+.. py:module:: biophysics_fitting.combiner
+
+.. autoapi-nested-parse::
+   This module provides the :py:class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
+   The :py:class:`~biophysics_fitting.combiner.Combiner` class can be used to combine features computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Combiner_Setup <biophysics_fitting.combiner.Combiner_Setup>`
+     - Setup class for the :py:class:`~biophysics_fitting.combiner.Combiner` class.
+   * - :py:obj:`Combiner <biophysics_fitting.combiner.Combiner>`
+     - This class can be used to combine features (usually) computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+
+
+

@@ -1,0 +1,53 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.ParameterSet`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ParameterSet
+============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _wrap <ParameterSet._wrap>
+   _unwrap <ParameterSet._unwrap>
+   to_dict <ParameterSet.to_dict>
+   save <ParameterSet.save>
+   _resolve_path <ParameterSet._resolve_path>
+   update <ParameterSet.update>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.parameters.ParameterSet(data=None)
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_wrap <single_cell_parser.parameters.ParameterSet._wrap>`\ (value)
+        - \-
+      * - :py:obj:`_unwrap <single_cell_parser.parameters.ParameterSet._unwrap>`\ (value)
+        - \-
+      * - :py:obj:`to_dict <single_cell_parser.parameters.ParameterSet.to_dict>`\ ()
+        - \-
+      * - :py:obj:`save <single_cell_parser.parameters.ParameterSet.save>`\ (filename)
+        - \-
+      * - :py:obj:`_resolve_path <single_cell_parser.parameters.ParameterSet._resolve_path>`\ (dotted)
+        - \-
+      * - :py:obj:`update <single_cell_parser.parameters.ParameterSet.update>`\ (other, \*\*kwargs)
+        - D.update([E, ]**F) -> None.  Update D from mapping/iterable E and F.
+

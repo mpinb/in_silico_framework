@@ -1,0 +1,39 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils`
+
+metadata_utils
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_voltage_traces_divisions_by_metadata </autoapi/data_base/db_initializers/load_simrun_general/metadata_utils/get_voltage_traces_divisions_by_metadata>
+   create_metadata_parallelization_helper </autoapi/data_base/db_initializers/load_simrun_general/metadata_utils/create_metadata_parallelization_helper>
+   create_metadata </autoapi/data_base/db_initializers/load_simrun_general/metadata_utils/create_metadata>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.metadata_utils
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_voltage_traces_divisions_by_metadata <data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata>`\ (metadata, repartition)
+     - Find the division indices based on the metadata.
+   * - :py:obj:`create_metadata_parallelization_helper <data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper>`\ (sim\_trial\_index, simresult\_path)
+     - Parallelize creating metadata across multiple simulation trials.
+   * - :py:obj:`create_metadata <data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata>`\ (db)
+     - Generate metadata out of a pd.Series containing the sim_trial_index.
+
+

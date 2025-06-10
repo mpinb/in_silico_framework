@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.fancy_dict_compare`
+
+
+.. title:
+
+fancy_dict_compare
+==================
+
+
+.. py:function:: data_base.utils.fancy_dict_compare(dict_1, dict_2, dict_1_name=&#39;d1&#39;, dict_2_name=&#39;d2&#39;, path=&#39;&#39;)
+
+   Compare two dictionaries recursively to find non-matching elements
+
+   :Parameters: * **dict\_1** (*dict*) -- dictionary 1
+                * **dict\_2** (*dict*) -- dictionary 2
+
+   :returns: a string containing the differences
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

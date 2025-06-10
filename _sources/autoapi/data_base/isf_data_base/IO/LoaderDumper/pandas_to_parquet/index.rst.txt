@@ -1,0 +1,56 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet`
+
+pandas_to_parquet
+=================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Loader </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_parquet/Loader>
+   check </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_parquet/check>
+   dump </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_parquet/dump>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet
+
+.. autoapi-nested-parse::
+   Read and write a pandas DataFrame to the parquet format.
+
+   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for the correpsonding dask ``LoaderDumper``.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Loader <data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.Loader>`
+     - Load for parquet files to pandas DataFrames
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`check <data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.check>`\ (obj)
+     - Check whether the object can be saved with this dumper
+   * - :py:obj:`dump <data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.dump>`\ (obj, savedir)
+     - Save the pandas DataFrame in the specified directory.
+
+

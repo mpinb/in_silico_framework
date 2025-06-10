@@ -1,0 +1,205 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Simulator_Setup
+===============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   check <Simulator_Setup.check>
+   _check_not_none <Simulator_Setup._check_not_none>
+   _check_first_element_of_name_is_the_same <Simulator_Setup._check_first_element_of_name_is_the_same>
+   get_stims <Simulator_Setup.get_stims>
+   get_stim_setup_fun_by_stim <Simulator_Setup.get_stim_setup_fun_by_stim>
+   get_stim_run_fun_by_stim <Simulator_Setup.get_stim_run_fun_by_stim>
+   get_stim_response_measure_fun <Simulator_Setup.get_stim_response_measure_fun>
+   get_params <Simulator_Setup.get_params>
+   get_cell_params <Simulator_Setup.get_cell_params>
+   get_cell_params_with_default_sim_prams <Simulator_Setup.get_cell_params_with_default_sim_prams>
+   get <Simulator_Setup.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.simulator.Simulator_Setup
+   
+   Class for setting up cells with biophysical details.
+
+   This class is an inherent attribute of the :py:class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
+   This class concerns with setting up a cell with biophysical details.
+
+   Usually, a simulation contains fixed parameters, specific to the cell (e.g. the filename of the morphology)
+   and/or stimulus protocol (e.g. recording sites). Such fixed parameters can be defined by adding
+   :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :paramref:`param_modify_funs`.
+   A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace
+   of the apical dendrite. Make sure that the :py:class:`~biophysics_fitting.simulator.Simulator` :paramref:`stim_run_fun` reads the
+   parameter :paramref:`recSite` and sets up the stimulus accordingly (see :py:class:`~biophysics_fitting.simulator.Simulator`).
+
+   Example::
+
+       >>> def param_modify_function(params):
+       >>>    # alter params
+       >>>    return params
+
+       >>> def cell_params_generator(params, template):
+       >>>    cell_params = template.copy()
+       >>>    # Fill in template with params
+       >>>    return cell_params
+
+       >>> def cell_param_modify_function(cell_params):
+       >>>     # alter cell_params
+       >>>     return cell_params
+
+       >>> def cell_generator(cell_params):
+       >>>     return single_cell_parser.create_cell(cell_params)
+
+       >>> def cell_modify_functions(cell):
+       >>>     # alter cell
+       >>>     return cell
+
+       >>> s = Simulator() # instantiate simulator object
+       >>> fixed_params = {'stim_1.measure_fun.recSite': 835, 'stim_1.stim_setup.dist': 835}
+       >>> s.setup.params_modify_funs.append([
+           'fixed_params',
+           partial(set_fixed_params, fixed_params=fixed_params)
+           ])
+       >>> s.setup.cell_param_generator =  cell_params_generator
+       >>> s.setup.cell_generator = cell_generator
+       >>> s.setup.params_modify_funs.append(['modify_param_1', param_modify_fun])
+       >>> s.setup.cell_param_modify_funs.append(['modify_cell_param_1', cell_param_modify_fun])
+       >>> s.setup.cell_modify_funs.append(['modify_cell_1', cell_modify_fun])
+
+   Notable methods:
+
+       >>> s.setup.get(params)
+       cell, params
+
+   Each function that receives the biophysical parameter vector
+   (i.e. :paramref:`cell_param_modify_funs` and :paramref:`cell_modify_funs`)
+   only sees a subset of the parameter vector that is provided by the user. This subset is determined
+   by the name by which the function is registered.
+
+   Example::
+
+       >>> params = {
+       >>>     'apical_scaling.scale': 2,
+       >>>     'ephys.soma.gKv': 0.001,
+       >>>     'ephys.soma.gNav': 0.01
+       >>>    }
+
+       >>> def scale_apical(params, **kwargs):
+       >>>     params['scale'] = kwargs['scale']
+
+       >>> def ephys(cell, **kwargs):
+       >>>     cell.soma.gKv = kwargs['soma.gKv']
+       >>>     cell.soma.gNav = kwargs['soma.Nav']
+
+       >>> s.setup.params_modify_funs.append([
+           'apical_scaling',  # name must equal the prefix of the parameter, i.e. 'apical_scaling'
+           partial(scale_apical, 'scale' = 2)])
+       >>> s.setup.cell_modify_funs.append([
+           'ephys',  # name must equal the prefix of the parameter, i.e. 'ephys'
+           partial(ephys, 'soma.gKv'=1, 'soma.gNav'=2)])
+
+   :Attributes:
+
+   .. attribute:: cell_param_generator
+
+      A function that generates a :py:class:`~single_cell_parser.parameters.ParameterSet` cell parameter object.
+
+      :type: callable
+
+   .. attribute:: cell_param_modify_funs
+
+      list of functions that modify the cell parameters.
+
+      :type: list
+
+   .. attribute:: cell_generator
+
+      A function that generates a :py:class:`~single_cell_parser.cell.Cell` object.
+
+      :type: callable
+
+   .. attribute:: cell_modify_funs
+
+      List of functions that modify the cell object.
+
+      :type: list
+
+   .. attribute:: stim_setup_funs
+
+      List of functions that set up the stimulus.
+
+      :type: list
+
+   .. attribute:: stim_run_funs
+
+      List of functions that each run a simulation.
+
+      :type: list
+
+   .. attribute:: stim_response_measure_funs
+
+      List of functions that extract voltage traces from the cell.
+
+      :type: list
+
+   .. attribute:: params_modify_funs
+
+      List of functions that modify the biophysical parameter vector.
+
+      :type: list
+
+   .. attribute:: check_funs
+
+      List of functions that check the setup. Useful for debugging.
+
+      :type: list
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`check <biophysics_fitting.simulator.Simulator_Setup.check>`\ ()
+        - Check if the setup is correct.
+      * - :py:obj:`_check_not_none <biophysics_fitting.simulator.Simulator_Setup._check_not_none>`\ (var, varname, procedure\_description)
+        - Convenience method to check if the output of some method is not None.
+      * - :py:obj:`_check_first_element_of_name_is_the_same <biophysics_fitting.simulator.Simulator_Setup._check_first_element_of_name_is_the_same>`\ (list1, list2)
+        - Check if the first element of the names of two lists are the same.
+      * - :py:obj:`get_stims <biophysics_fitting.simulator.Simulator_Setup.get_stims>`\ ()
+        - Get the names of the stimuli.
+      * - :py:obj:`get_stim_setup_fun_by_stim <biophysics_fitting.simulator.Simulator_Setup.get_stim_setup_fun_by_stim>`\ (stim)
+        - Get the stimulus setup function by stimulus name.
+      * - :py:obj:`get_stim_run_fun_by_stim <biophysics_fitting.simulator.Simulator_Setup.get_stim_run_fun_by_stim>`\ (stim)
+        - Get the stimulus run function by stimulus name.
+      * - :py:obj:`get_stim_response_measure_fun <biophysics_fitting.simulator.Simulator_Setup.get_stim_response_measure_fun>`\ (stim)
+        - Get the stimulus response measure function by stimulus name.
+      * - :py:obj:`get_params <biophysics_fitting.simulator.Simulator_Setup.get_params>`\ (params)
+        - Get the modified biophysical parameters.
+      * - :py:obj:`get_cell_params <biophysics_fitting.simulator.Simulator_Setup.get_cell_params>`\ (params)
+        - Get the cell parameters as an :py:class:`~single_cell_parser.parameters.ParameterSet` from the parameter vector.
+      * - :py:obj:`get_cell_params_with_default_sim_prams <biophysics_fitting.simulator.Simulator_Setup.get_cell_params_with_default_sim_prams>`\ (params, recordingSites, tStart, tStop, dt, Vinit, T)
+        - Get a neuron parameter object.
+      * - :py:obj:`get <biophysics_fitting.simulator.Simulator_Setup.get>`\ (params)
+        - Get the cell with set up biophysics and params.
+

@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._get_score`
+
+_Strategy._get_score
+====================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._get_score(x)
+
+   Compute the score for the given parameters x.
+
+   This method needs to be defined for each strategy.
+   This score will be optimized by the solver.
+
+   .. rubric:: Example
+      :class: example
+
+   :py:class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
+   which is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
+

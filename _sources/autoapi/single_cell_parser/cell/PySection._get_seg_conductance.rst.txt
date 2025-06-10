@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._get_seg_conductance`
+
+PySection._get_seg_conductance
+==============================
+
+.. py:method:: single_cell_parser.cell.PySection._get_seg_conductance(seg, var, param_name)
+
+   Get the conductance of a segment.
+
+   Given a segment and a variable name, this function retrieves the conductance of the specified variable in the segment.
+
+   :Parameters: * **seg** (:py:class:`nrn.Segment`) -- The segment to retrieve the conductance from.
+                * **var** (*str*) -- The variable name of the mechanism e.g. ``NaTa_t``.
+                * **param_name** (*str*) -- The parameter name of the mechanism e.g. ``gNaTa_tbar``.
+
+   :returns: The conductance of the specified variable in the segment.
+   :rtype: float
+
+   :raises ValueError: If the segment does not have the specified variable.
+
+   :raises AssertionError: If the segment is not an instance of :py:class:`nrn.Segment`.
+

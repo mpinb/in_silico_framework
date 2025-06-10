@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._find_dumper`
+
+ISFDataBase._find_dumper
+========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._find_dumper(item)
+
+   Finds a suitable dumper of a given item.
+
+   Iterates all registered dumpers and returns the first one that can save the item.
+   Note that any object should in principle always be savable by the default dumper (LoaderDumper.to_cloudpickle).
+   If no viable dumper is found, it is likely simply not registered to this database, rather than not being able to save the item.
+
+   :Parameters: **item** (*object*) -- The item to save
+
+   :returns: The dumper module that can save the item, or None if there are no viable registered dumpers in the db.
+   :rtype: module | None
+

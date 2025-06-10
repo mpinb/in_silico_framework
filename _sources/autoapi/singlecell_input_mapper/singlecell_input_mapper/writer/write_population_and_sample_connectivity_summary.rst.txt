@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_population_and_sample_connectivity_summary`
+
+
+.. title:
+
+write_population_and_sample_connectivity_summary
+================================================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_population_and_sample_connectivity_summary(fname=None, populationDistribution=None, cellTypeSummaryData=None, columnSummaryData=None)
+
+   Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
+
+   Useful for comparing the results of a single realization to the average over multiple realizations.
+   Consult :py:meth:`write\_sample\_connectivity\_summary` and :py:meth:`write\_population\_connectivity\_summary` for details on the input data.
+   :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_compute\_parameter\_distribution`
+   :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_generate\_output\_files`
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **populationDistribution** (*dict*) -- Dictionary containing the summary data for each cell type across network realizations.
+                * **cellTypeSummaryData** (*dict*) -- Dictionary containing the summary data for each cell type
+                * **columnSummaryData** (*dict*) -- Dictionary containing the summary data for each anatomical area
+
+   :returns: None. Writes the results to disk.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

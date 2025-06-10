@@ -1,0 +1,48 @@
+
+:mod:`visualize` ❭ :mod:`~visualize._decorators`
+
+_decorators
+===========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   dask_to_pandas </autoapi/visualize/_decorators/dask_to_pandas>
+   pr </autoapi/visualize/_decorators/pr>
+   subsequent_calls_per_line </autoapi/visualize/_decorators/subsequent_calls_per_line>
+
+.. py:module:: visualize._decorators
+
+.. autoapi-nested-parse::
+   Convenience methods for visualizastion
+
+   this module provides decorator functions that can be used to:
+
+   - convert dask dataframes to pandas dataframes
+   - iterate over individual rows of a dataframe
+   - print the types of some function's arguments (useful for debugging)
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`dask_to_pandas <visualize._decorators.dask_to_pandas>`\ (fun)
+     - Decorator that converts function arguments from dask to pandas.
+   * - :py:obj:`pr <visualize._decorators.pr>`\ (\*args, \*\*kwargs)
+     - Prints the types of the passed arguments.
+   * - :py:obj:`subsequent_calls_per_line <visualize._decorators.subsequent_calls_per_line>`\ (plotfun)
+     - Call a function on each row of a dataframe separately.
+
+

@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.load`
+
+
+.. title:
+
+load
+====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.load(savedir, load_data=True, loader_kwargs={})
+
+   Standard interface to load data.
+
+   Loads the data's respective ``Loader`` in the same directory as the data.
+   Uses this ``Loader`` to load the data
+
+   :Parameters: * **savedir** (*str*) -- Path to the data
+                * **load\_data** (*bool*) -- Whether to load the data (default), or just the ``Loader`` object. Useful for debugging purposes.
+                * **loader\_kwargs** (*dict*) -- Additional keyword arguments for the loader. Note that the ``Loader.json`` file should in principle contain all necessary information.
+
+   :returns: The loaded object: either the data, or the ``Loader`` object.
+   :rtype: object
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

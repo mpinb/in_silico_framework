@@ -1,0 +1,51 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze`
+
+analyze
+=======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   membrane_potential_analysis </autoapi/single_cell_parser/analyze/membrane_potential_analysis/index>  
+   synanalysis </autoapi/single_cell_parser/analyze/synanalysis/index>  
+
+.. py:module:: single_cell_parser.analyze
+
+.. autoapi-nested-parse::
+   Analyze the results of single cell simulations and its network embeddings:
+
+   - :py:mod:`membrane_potential_analysis`
+       - Post-synaptic time histograms (PSTHs)
+       - Spike detection
+       - Simple statistics of membrane voltage
+   - :py:mod:`currents`
+       - Find time and voltage of max depolarisation
+       - Compute currents in the soma
+   - :py:mod:`synapse analysis`
+       - Activation times of synapses
+       - intracellular distances
+       - distances to synapses
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`membrane_potential_analysis <single_cell_parser.analyze.membrane_potential_analysis>`
+     - Analyze the membrane voltage.
+   * - :py:obj:`synanalysis <single_cell_parser.analyze.synanalysis>`
+     - Compute synapse distances and activation times.
+

@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_synapse_weight_file`
+
+
+.. title:
+
+write_synapse_weight_file
+=========================
+
+
+.. py:function:: single_cell_parser.writer.write_synapse_weight_file(fname=None, cell=None)
+
+   Write out a synapse weight file.
+
+   This file contains the following information:
+
+   - synapse type
+   - synapse ID
+   - section ID
+   - section pt ID
+   - receptor type
+   - synapse weights
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- The cell object, containing synapses.
+
+   :returns: None. Writes out the synapse weight file to :paramref:`fname`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

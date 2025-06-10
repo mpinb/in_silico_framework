@@ -1,0 +1,58 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters`
+
+parameters
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   ParameterSet </autoapi/single_cell_parser/parameters/ParameterSet>
+   _read_params_to_dict </autoapi/single_cell_parser/parameters/_read_params_to_dict>
+   build_parameters </autoapi/single_cell_parser/parameters/build_parameters>
+   load_NMODL_parameters </autoapi/single_cell_parser/parameters/load_NMODL_parameters>
+   resolve_parameter_paths </autoapi/single_cell_parser/parameters/resolve_parameter_paths>
+
+.. py:module:: single_cell_parser.parameters
+
+.. autoapi-nested-parse::
+   Handle :ref:`params_file_format` files in ISF.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ParameterSet <single_cell_parser.parameters.ParameterSet>`
+     - \-
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`build_parameters <single_cell_parser.parameters.build_parameters>`\ (filename)
+     - Read in a :ref:`param_file_format` file and return a ParameterSet object.
+   * - :py:obj:`load_NMODL_parameters <single_cell_parser.parameters.load_NMODL_parameters>`\ (parameters)
+     - Load NMODL mechanisms from paths in parameter file.
+   * - :py:obj:`resolve_parameter_paths <single_cell_parser.parameters.resolve_parameter_paths>`\ (parameters, params\_fn)
+     - Resolve relative database paths in the parameters.
+
+

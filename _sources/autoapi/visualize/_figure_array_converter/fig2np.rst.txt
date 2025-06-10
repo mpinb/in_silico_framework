@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter` ❭ :mod:`~visualize._figure_array_converter.fig2np`
+
+
+.. title:
+
+fig2np
+======
+
+
+.. py:function:: visualize._figure_array_converter.fig2np(fig)
+
+   Converts fig-object to pixels as numpy arrays.
+
+   This method converts figure objects to numpy arrays.
+   These numpy arrays are RGB pixel matrices.
+
+   .. seealso:: http://stackoverflow.com/questions/7821518/matplotlib-save-plot-to-numpy-array
+
+   :Parameters: **fig** (*matplotlib.pyplot.Figure*) -- The figure object to convert to a numpy array.
+
+   :returns: The numpy array of the figure.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

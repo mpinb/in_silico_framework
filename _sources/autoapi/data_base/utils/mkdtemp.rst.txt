@@ -1,0 +1,35 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.mkdtemp`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+mkdtemp
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.utils.mkdtemp
+   
+   Context manager for creating temporary directories
+
+   .. rubric:: Example
+      :class: example
+
+   >>> with mkdtemp() as tempdir:
+   ...     print(tempdir)
+   ...     print(os.path.exists(tempdir))
+   /pat/to/tmpdir
+   True
+   >>> os.path.exists(tempdir)
+   False
+

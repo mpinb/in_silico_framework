@@ -1,0 +1,71 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file`
+
+
+.. title:
+
+load_cell_number_file
+=====================
+
+
+.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file(cellNumberFileName)
+
+   Load the cell number file.
+
+   The cell number file must have the following format::
+
+       Anatomical\_area Presynaptic\_cell\_type   n\_cells
+       A1      cell\_type\_1     8
+       A1      cell\_type\_2     14
+       ...
+
+   :Parameters: **cellNumberFileName** (*str*) -- Path to the cell number file.
+
+   :returns: Dictionary of the form {celltype: {column: nr\_of\_cells}}
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> load\_cell\_number\_file(
+   ...    'getting\_started/example\_data/anatomical\_constraints/'
+   ...    'example\_embedding\_86\_C2\_center/'
+   ...    'NumberOfConnectedCells.csv'
+   ...    )
+   {
+       'L4py': {
+           'A1': 8,
+           'A2': 1,
+           'A3': 7,
+           'A4': 3,
+           'Alpha': 9,
+           'B1': 72,
+           'B2': 30,
+           'B3': 97,
+           'B4': 30,
+           'Beta': 0,
+           'C1': 59,
+           'C2': 374,
+           'C3': 88,
+           'C4': 3,
+           'D1': 22,
+           'D2': 89,
+           'D3': 59,
+           'D4': 0,
+           'Delta': 0,
+           'E1': 0,
+           'E2': 0,
+           'E3': 0,
+           'E4': 0,
+           'Gamma': 16},
+           'L6cc': {...},
+           ...
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

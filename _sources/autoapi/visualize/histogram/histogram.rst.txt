@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.histogram` ❭ :mod:`~visualize.histogram.histogram`
+
+
+.. title:
+
+histogram
+=========
+
+
+.. py:function:: visualize.histogram.histogram(hist_bins, colormap=None, ax=None, label=None, groupby_attribute=None)
+
+   Efficiently plot a histogram from bins.
+
+   Uses the decorated function :py:meth:`subsequent\_calls\_per\_line` to speed up plotting bins from pandas or dask dataframes.
+
+   Supports groups: simply pass a Series of the format::
+
+       labelA: (bins,hist)
+       labelB: (bins,hist)
+
+   In this case, the label attribute has no function (to be precise: it is overwritten by the decorator subsequent\_calls\_per\_line)
+
+   :Parameters: * **hist\_bins** (*tuple*) -- tuple of the format (bins,hist) where bins are the bin edges and hist the bin values. Length of bins needs to be one element longer than hist.
+                * **colormap** (*dict*) -- dictionary with labels as keys and colors as values. Default is ``None``.
+                * **ax** (*Axes*) -- The matplotlib axes object. Default is ``None``.
+                * **label** (*str*) -- The label of the histogram. Default is ``None``.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

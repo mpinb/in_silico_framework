@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.apical_epsp_injection` ❭ :mod:`~single_cell_parser.cell_modify_functions.apical_epsp_injection.apical_epsp_injection`
+
+
+.. title:
+
+apical_epsp_injection
+=====================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.apical_epsp_injection.apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
+
+   Injects an epsp-shaped current at a certain distance from the soma.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **dist** (*float*) -- The distance from the soma (um).
+                * **amplitude** (*float*) -- The amplitude of the current (nA).
+                * **delay** (*float*) -- The delay of the current (ms).
+                * **rise** (*float*) -- The rise time of the epsp (ms).
+                * **decay** (*float*) -- The decay time of the epsp (ms).
+
+   :returns: The cell with the current injection set up.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+   .. seealso:: :py:meth:`biophysics\_fitting.setup\_stim.setup\_apical\_epsp\_injection`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

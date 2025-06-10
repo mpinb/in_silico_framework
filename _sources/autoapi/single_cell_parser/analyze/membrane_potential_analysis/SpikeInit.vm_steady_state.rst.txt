@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.vm_steady_state`
+
+SpikeInit.vm_steady_state
+=========================
+
+.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.vm_steady_state(cell, tVec, tStim, dtStim)
+   :staticmethod:
+
+
+   Computes the "steady-state" voltage
+
+   The steady-state voltage is the median voltage during a stimulation time window.
+   This can be used to define a voltage spike threshold at current intensities just below AP initiation.
+
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object.
+                * **tVec** (*list*) -- Time vector.
+                * **tStim** (*float*) -- Start time of stimulation.
+                * **dtStim** (*float*) -- Duration of stimulation.
+
+   :returns: Steady-state voltage during :math:`[tStim, tStim+dtStim]`.
+   :rtype: float
+

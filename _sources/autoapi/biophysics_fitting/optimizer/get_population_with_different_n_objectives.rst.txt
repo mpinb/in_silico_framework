@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_population_with_different_n_objectives`
+
+
+.. title:
+
+get_population_with_different_n_objectives
+==========================================
+
+
+.. py:function:: biophysics_fitting.optimizer.get_population_with_different_n_objectives(old_pop, n_objectives)
+
+   Adapt the number of objectives of individuals
+
+   :Parameters: * **old\_pop** -- list of deap.Individuals
+                * **n\_objectives** (*int*) -- number of objectives
+
+   :returns: population with adapted number of objectives
+   :rtype: list of deap.Individuals
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

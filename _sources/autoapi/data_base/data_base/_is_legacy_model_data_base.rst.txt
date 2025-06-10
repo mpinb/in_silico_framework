@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base` ❭ :mod:`~data_base.data_base._is_legacy_model_data_base`
+
+
+.. title:
+
+_is_legacy_model_data_base
+==========================
+
+
+.. py:function:: data_base.data_base._is_legacy_model_data_base(path)
+
+   Checks if a given path contains a :py:class:`~data\_base.model\_data\_base.ModelDataBase`.
+
+   :Parameters: **path** (*str*) -- The path to check.
+
+   :returns: True if the path contains a :py:class:`~data\_base.model\_data\_base.ModelDataBase`.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

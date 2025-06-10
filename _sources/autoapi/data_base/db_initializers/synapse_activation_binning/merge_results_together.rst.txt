@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.merge_results_together`
+
+
+.. title:
+
+merge_results_together
+======================
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.merge_results_together(dicts)
+
+   Aggregate many dictionaries with the same keys.
+
+   If a key is not present in some dictionary, it is filled with zeros instead.
+   This method is evaluated delayed on the results of the synapse activation binning to merge them in one dictionary.
+
+   :Parameters: **dicts** (*array*) -- list of dictionaries with the same keys.
+
+   :returns: The aggregated dictionary.
+   :rtype: dict
+
+   Example::
+
+       >>> dicts = [
+       ...     {'a': np.array([1, 2]), 'b': np.array([3, 4])},
+       ...     {'a': np.array([5, 6]), 'c': np.array([7, 8])}
+       ...     ]
+       >>> merge\_results\_together(dicts)
+       {'a': array([[1, 2], [5, 6]]), 'b': array([[3, 4], [0, 0]), 'c': array([[0, 0], [7, 8]])}
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

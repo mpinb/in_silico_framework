@@ -1,0 +1,61 @@
+
+
+
+Interface
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _is_running_on_dask_worker </autoapi/Interface/_is_running_on_dask_worker>
+   print_module_versions </autoapi/Interface/print_module_versions>
+   get_client </autoapi/Interface/get_client>
+
+.. py:module:: Interface
+
+.. autoapi-nested-parse::
+   Interface gives API access to all subpackages and submodules in ISF:
+
+   - :py:mod:`biophysics_fitting`
+   - :py:mod:`data_base`
+   - :py:mod:`simrun`
+   - :py:mod:`single_cell_parser`
+   - :py:mod:`singlecell_input_mapper`
+   - :py:mod:`spike_analysis`
+   - :py:mod:`visualize`
+
+   The recommended way to use ISF is to import ``Interface`` in a jupyter notebook in the following manner::
+
+       import Interface as I
+
+   You then have access to all important builtins and top-level pipelines via Interface::
+
+       I.get_client()              # returns a dask client
+       I.get_db_by_unique_id()     # returns a DataBase object
+       I.simrun_run_new_simulations()  # runs new simulations
+       ...
+
+   Take a look at the :ref:`tutorials` for examples on how to use the Interface API.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`print_module_versions <Interface.print_module_versions>`\ ()
+     - Print the version of each module in ISF.
+   * - :py:obj:`get_client <Interface.get_client>`\ (ip, client\_port, timeout)
+     - Gets the distributed.client object if dask has been setup
+
+

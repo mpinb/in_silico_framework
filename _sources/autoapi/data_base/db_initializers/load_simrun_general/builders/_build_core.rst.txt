@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._build_core`
+
+
+.. title:
+
+_build_core
+===========
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack)
+
+   Parse the essential simulation results and add it to :paramref:`db`.
+
+   The following data is parsed and added to the database:
+
+   - filelist
+   - somatic voltage traces
+   - simulation trial index
+   - metadata
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the data should be added.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+                * **metadata\_dumper** (*function*) -- Function to dump the metadata to disk. Default is :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.pandas\_to\_msgpack`.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

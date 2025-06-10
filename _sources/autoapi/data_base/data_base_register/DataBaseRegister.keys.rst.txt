@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister` ❭ :mod:`~data_base.data_base_register.DataBaseRegister.keys`
+
+DataBaseRegister.keys
+=====================
+
+.. py:method:: data_base.data_base_register.DataBaseRegister.keys()
+
+   Get all keys in the registry.
+
+   Each key is a unique ID of a database.
+
+   :returns: All keys in the registry.
+   :rtype: list
+

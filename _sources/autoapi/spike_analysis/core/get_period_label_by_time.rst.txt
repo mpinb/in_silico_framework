@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.get_period_label_by_time`
+
+
+.. title:
+
+get_period_label_by_time
+========================
+
+
+.. py:function:: spike_analysis.core.get_period_label_by_time(periods, t)
+
+   Classifies timepoint based on whether it falls within a period.
+
+   :Parameters: * **periods** (*dict*) -- dictionary containing period label as key and (period\_start, period\_end) as value
+                * **t** (*float*) -- timepoint to classify
+
+   :returns: label of period in which t is in. 'undefined' if t is in no defined period
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

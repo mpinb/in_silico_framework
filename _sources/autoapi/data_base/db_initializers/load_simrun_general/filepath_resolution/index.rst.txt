@@ -1,0 +1,22 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution`
+
+filepath_resolution
+===================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _convert_neup_fns_to_reldb </autoapi/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_neup_fns_to_reldb>
+   _convert_netp_fns_to_reldb </autoapi/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_netp_fns_to_reldb>
+   _convert_syn_fns_to_reldb </autoapi/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_syn_fns_to_reldb>
+   _convert_con_fns_to_reldb </autoapi/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_con_fns_to_reldb>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.filepath_resolution
+
+
+
+

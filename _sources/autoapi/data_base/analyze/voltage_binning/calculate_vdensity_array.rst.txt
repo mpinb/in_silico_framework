@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.calculate_vdensity_array`
+
+
+.. title:
+
+calculate_vdensity_array
+========================
+
+
+.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array(*args, **kwargs)
+
+   Calculate the voltage density array.
+
+   A voltage density is the time-binned voltage across trials.
+   This method infers the type of dataframe passed and calls the appropriate method.
+
+   :Parameters: * **v** (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`) -- A voltage traces dataframe. Column indices float and reflect timepoints
+                * **bin\_size** (*float*) -- the size of the bins
+                * **ymin** (*float*) -- the minimum voltage value
+                * **ymax** (*float*) -- the maximum voltage value
+                * **xmin** (*float*) -- the minimum time value (unused)
+                * **xmax** (*float*) -- the maximum time value (unused)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

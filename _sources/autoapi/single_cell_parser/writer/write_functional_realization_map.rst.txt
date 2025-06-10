@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_functional_realization_map`
+
+
+.. title:
+
+write_functional_realization_map
+================================
+
+
+.. py:function:: single_cell_parser.writer.write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None)
+
+   Write out a :ref:`con\_file\_format` file.
+
+   Writes list of all functional connections coded by tuples (cell type, presynaptic cell index, synapse index).
+   Only valid for anatomical synapse realization given by anatomicalID
+
+   See also:
+
+   - :ref:`con\_file\_format` for more information on the `.con` file format.
+   - :py:meth:`single\_cell\_parser.reader.read\_functional\_realization\_map` for the corresponding reader function.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **functionalMap** (*list*) -- A list of tuples, each containing a cell type, a presynaptic cell ID, and a synapse ID.
+                * **anatomicalID** (*str*) -- The ID of the anatomical synapse realization.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> functionalMap = [('cell\_type\_1', 0, 0), ('cell\_type\_2', 0, 1)]
+   >>> write\_functional\_realization\_map('functional\_realization.con', functionalMap, 'syn\_file.syn')
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

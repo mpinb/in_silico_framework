@@ -1,0 +1,99 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Undemonize </autoapi/biophysics_fitting/utils/Undemonize>
+   VariableThatDoesNotGetPickled </autoapi/biophysics_fitting/utils/VariableThatDoesNotGetPickled>
+   connected_to_structure_beyond </autoapi/biophysics_fitting/utils/connected_to_structure_beyond>
+   get_inner_sec_dist_dict </autoapi/biophysics_fitting/utils/get_inner_sec_dist_dict>
+   get_inner_section_at_distance </autoapi/biophysics_fitting/utils/get_inner_section_at_distance>
+   get_main_bifurcation_section </autoapi/biophysics_fitting/utils/get_main_bifurcation_section>
+   augment_cell_with_detailed_labels </autoapi/biophysics_fitting/utils/augment_cell_with_detailed_labels>
+   tVec </autoapi/biophysics_fitting/utils/tVec>
+   vmSoma </autoapi/biophysics_fitting/utils/vmSoma>
+   vmMax </autoapi/biophysics_fitting/utils/vmMax>
+   _get_apical_sec_and_i_at_distance </autoapi/biophysics_fitting/utils/_get_apical_sec_and_i_at_distance>
+   vmApical </autoapi/biophysics_fitting/utils/vmApical>
+   vmApical_position </autoapi/biophysics_fitting/utils/vmApical_position>
+   run_cloudpickled_remotely </autoapi/biophysics_fitting/utils/run_cloudpickled_remotely>
+   execute_in_child_process </autoapi/biophysics_fitting/utils/execute_in_child_process>
+   pool_helper </autoapi/biophysics_fitting/utils/pool_helper>
+   execute_in_child_process_kept_alive </autoapi/biophysics_fitting/utils/execute_in_child_process_kept_alive>
+
+.. py:module:: biophysics_fitting.utils
+
+.. autoapi-nested-parse::
+   Utility functions for biophysics fitting.
+
+   This module contains utilities and convenience methods for:
+   - Selection sections
+   - Reading out Vm at a section
+   - Multiprocessing
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Undemonize <biophysics_fitting.utils.Undemonize>`
+     - A class used to resolve AssertionError: daemonic processes are not allowed to have children
+   * - :py:obj:`VariableThatDoesNotGetPickled <biophysics_fitting.utils.VariableThatDoesNotGetPickled>`
+     - A variable that does not get pickled.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`connected_to_structure_beyond <biophysics_fitting.utils.connected_to_structure_beyond>`\ (cell, sec, beyond\_dist, beyond\_struct, n\_children\_required)
+     - Checks if a :py:class:`~single_cell_parser.cell.Cell` section is connected to a structure
+   * - :py:obj:`get_inner_sec_dist_dict <biophysics_fitting.utils.get_inner_sec_dist_dict>`\ (cell, beyond\_dist, beyond\_struct, n\_children\_required)
+     - Get sections that connect to specific structures beyond a minimum distance.
+   * - :py:obj:`get_inner_section_at_distance <biophysics_fitting.utils.get_inner_section_at_distance>`\ (cell, dist, beyond\_dist, beyond\_struct)
+     - Get sections that connect to specific structures at a particular distance.
+   * - :py:obj:`get_main_bifurcation_section <biophysics_fitting.utils.get_main_bifurcation_section>`\ (cell)
+     - Get the main bifurcation section of a cell
+   * - :py:obj:`augment_cell_with_detailed_labels <biophysics_fitting.utils.augment_cell_with_detailed_labels>`\ (cell)
+     - Augment section labels to discriminate the tuft, oblique, trunk and basal dendrites.
+   * - :py:obj:`tVec <biophysics_fitting.utils.tVec>`\ (cell)
+     - Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array.
+   * - :py:obj:`vmSoma <biophysics_fitting.utils.vmSoma>`\ (cell)
+     - Convenience method to extract the soma voltage trace from a cell
+   * - :py:obj:`vmMax <biophysics_fitting.utils.vmMax>`\ (cell)
+     - Calculate the maximum voltage of a cell at any timepoint, at any dendrite.
+   * - :py:obj:`vmApical <biophysics_fitting.utils.vmApical>`\ (cell, dist)
+     - Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
+   * - :py:obj:`vmApical_position <biophysics_fitting.utils.vmApical_position>`\ (cell, dist)
+     - Fetch the exact location on the apical dendrite at a certain distance from the soma.
+   * - :py:obj:`run_cloudpickled_remotely <biophysics_fitting.utils.run_cloudpickled_remotely>`\ (queue)
+     - Unserialize a function and its arguments, run it, and serialize the output.
+   * - :py:obj:`execute_in_child_process <biophysics_fitting.utils.execute_in_child_process>`\ (fun)
+     - Execute a function in a child process.
+   * - :py:obj:`pool_helper <biophysics_fitting.utils.pool_helper>`\ (callable\_partial)
+     - Unserialize a function and its arguments, run it, and serialize the output.
+   * - :py:obj:`execute_in_child_process_kept_alive <biophysics_fitting.utils.execute_in_child_process_kept_alive>`\ (fun)
+     - Execute a function in a child process, keeping the process alive.
+
+

@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static`
+
+_Strategy._objective_function_static
+====================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static(get_score, get_y, x)
+   :staticmethod:
+
+
+   Compute the objective value for the given parameters x.
+
+   Calculates the score for the given parameters x and the labels y.
+   Computes the AUROC score between the two.
+
+   .. attention::
+
+      The AUROC score is here given as a negative value, as the optimizer tries to minimize the objective function.
+      So a high AUROC score will result here in a very negative value.
+
+   :returns: The negative AUROC score, between :math:`[-1, 0]`
+   :rtype: float
+

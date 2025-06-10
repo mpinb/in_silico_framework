@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.get_locking_client`
+
+
+.. title:
+
+get_locking_client
+==================
+
+
+.. py:function:: data_base.distributed_lock.get_locking_client()
+
+   Get the locking client
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

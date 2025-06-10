@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.run`
+
+Rm.run
+======
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.run(client=None, n_workers=None, strategy_selection=None)
+
+   Run one or more strategies on the data.
+
+   A strategy is a pipeline that:
+
+   1. Extracts data from the reduced model
+   2. Splits the data into training and test sets
+   3. Constructs a cost function to be optimized.
+   4. Solves the optimization problem using a :py:class:`~simrun.modular_reduced_model_inference.solver._Solver`
+
+   Each strategy implements different cost functions, depending on what to optimize for.
+   However, they all implement a :py:meth:`get_score` method to evaluate the performance of the optimization.
+
+   :Parameters: * **client** (:py:class:`~dask.distributed.Client`) -- Dask client for remote optimization
+                * **n_workers** (*int*) -- Amount of workers to use for remote optimization
+                * **strategy_selection** (*list*) -- List of strategy names to run. If None, run all strategies.
+
+   .. seealso:: :py:mod:`simrun.modular_reduced_model_inference.strategy` for available strategies.
+

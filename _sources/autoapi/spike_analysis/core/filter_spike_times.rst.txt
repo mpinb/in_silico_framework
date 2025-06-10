@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.filter_spike_times`
+
+
+.. title:
+
+filter_spike_times
+==================
+
+
+.. py:function:: spike_analysis.core.filter_spike_times(spike_times, spike_times_trough, creast_trough_interval=2, mode=&#39;latest&#39;, spike_times_amplitude=None, upper_creast_threshold=None, creast_upcross_times=None)
+
+   Filter spike times based on timepoints of detected creasts and troughs.
+
+   A spike is detected by its trough.
+   Then, this method checks if there is a corresponding creast at maximum :paramref:`creast\_trough\_interval` before the trough.
+   All creasts fullfilling this criterion are extracted.
+   The spike time is set to the latest creast (if :paramref:`mode` = ``latest``) or the maximum creast amplitude (if :paramref:`mode` = ``creast\_max``).
+
+   If a through does not have a corresponding creast, no spike is detected.
+
+   :Parameters: * **spike\_times** (*list*) -- list containing spike times defined by the creast of the waveform
+                * **spike\_times\_trough** (*list*) -- list containing spike times defined by the trough of the waveform
+
+   :returns: list, containing spikes fullfilling the definition above.
+   :rtype: filtered\_spike\_times
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

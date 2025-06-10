@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.serialize_cell` ❭ :mod:`~single_cell_parser.serialize_cell.cell_to_serializable_object`
+
+
+.. title:
+
+cell_to_serializable_object
+===========================
+
+
+.. py:function:: single_cell_parser.serialize_cell.cell_to_serializable_object(cell)
+
+   Convert a :py:class:`~single\_cell\_parser.cell.Cell` object to a dict, so that it can be serialized.
+
+   Useful for parallellization using e.g. Dask or Joblib.
+
+   The serialized object contains the following information:
+
+   - tVec: time vector
+   - parameters: dictionary of parameters
+   - allPoints: point coordinates fo the cell
+   - sections: list of dictionaries containing the following information for each section:
+       - recVList: membrane potential
+       - recordVars: dictionary of hoc arrays
+       - label: label of the section
+       - sec\_id: ID of the section
+       - parent\_id: ID of the parent section
+   - synapses: dictionary of synapse populations, each containing a list of synapses with the following information:
+       - preCell: dictionary containing the spike times of the presynaptic cell
+       - coordinates: coordinates of the synapse
+   - hoc: hoc file content
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- cell object
+
+   :returns: serializable cell object
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

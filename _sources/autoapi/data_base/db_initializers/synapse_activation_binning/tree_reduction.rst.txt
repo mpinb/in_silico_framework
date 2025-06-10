@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.tree_reduction`
+
+
+.. title:
+
+tree_reduction
+==============
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.tree_reduction(delayeds, aggregate_fun, length=7)
+
+   Recursively aggregate the results of a list of delayed objects.
+
+   This is used in :py:meth:`~data\_base.db\_initializers.synapse\_activation\_postprocess\_dask`
+   and :py:meth:`~data\_base.db\_initializers.synapse\_activation\_postprocess\_pandas` to aggregate
+   the resulting synapse binning (which is in dictionary format) to a single dictionary.
+
+   :Parameters: * **delayeds** (*array*) -- list of :py:class:`~dask.delayed` objects
+                * **aggregate\_fun** (:py:class:`~dask.delayed`) -- Function to aggregate the results with (e.g. :py:func:`~data\_base.db\_initializers.merge\_results\_together`)
+                * **length** (*int*) -- chunk size for aggregation
+
+   .. note::
+
+      Once the delayed objects are evaluated, :paramref:`aggregate\_fun` is applied to the results of :paramref:`delayeds`,
+      and thus :paramref:`aggregate\_fun` should be able to handle the results of :paramref:`delayeds`.
+
+   :returns: The aggregated result.
+   :rtype: :py:class:`dask.delayed`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

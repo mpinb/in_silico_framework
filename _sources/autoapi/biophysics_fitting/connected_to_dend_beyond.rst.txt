@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.connected_to_dend_beyond`
+
+
+.. title:
+
+connected_to_dend_beyond
+========================
+
+
+.. py:function:: biophysics_fitting.connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2)
+
+   Check if a given section is connected to dendrites that reach beyon :paramref:`beyond\_dist`.
+
+   Given a :py:class:`~single\_cell\_parser.cell.Cell` object and section number,
+   this method returns True if at least :paramref:`n\_children\_required` children
+   of the branchpoint reach beyond :paramref:`dist`.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object
+                * **sec** (*int*) -- Index of Cell section
+                * **beyond\_dist** (*float*) -- Distance threshold
+                * **n\_children\_required** (*int, optional*) -- Least amount of children required. Defaults to 2.
+
+   :returns: Whether or not two of the section's children reach beyond :paramref:`beyond\_dist`
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

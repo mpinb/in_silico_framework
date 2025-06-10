@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.set`
+
+ISFDataBase.set
+===============
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.set(key, value, lock=None, dumper=None, \*\*kwargs)
+
+   Main method to save data in a DataBase.
+
+   The advantage of using this method is that you can specify a dumper and pass additional arguments to the dumper with kwargs.
+   This method is thread safe, if you provide a lock.
+   :py:meth:`__setitem__` calls this method.
+
+   :Parameters: * **key** (*str*) -- The key to save the data under.
+                * **value** (*obj*) -- The data to save.
+                * **lock** (*Lock, optional*) -- If you use file locking, provide the lock that grants access. Defaults to None.
+                * **dumper** (*module | str | None, optional*) -- The dumper module to use when saving data.
+                  If None is passed, it will use the default dumper :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle`.
+                  Defaults to None.
+
+   :raises KeyError: If the key already exists and overwrite is False.
+   :raises DataBaseException: If the key is an existing sub_db.
+

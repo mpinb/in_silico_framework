@@ -1,0 +1,51 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.pandas_to_array`
+
+
+.. title:
+
+pandas_to_array
+===============
+
+
+.. py:function:: data_base.utils.pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun)
+
+   Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
+
+   :Parameters: * **pdf** (*pd.DataFrame*) -- dataframe to be converted
+                * **x\_component\_fun** (*function*) -- function to extract the x component
+                * **y\_component\_fun** (*function*) -- function to extract the y component
+                * **value\_fun** (*function*) -- function to extract the value
+
+   :returns: 2D representation of the data
+   :rtype: pd.DataFrame
+
+   .. rubric:: Example
+      :class: example
+
+   >>> df
+           'bla'
+   x\_1\_y\_1    10
+   x\_2\_y\_1    15
+   x\_3\_y\_1     7
+   x\_1\_y\_2     2
+   x\_2\_y\_2     0
+   x\_3\_y\_2    -1
+
+   >>> pandas\_to\_array(
+   ...    pdf,
+   ...    lambda index, values: index.split('\_')[1],
+   ...    lambda index, values: index.split('\_')[-1],
+   ...    lambda index, values: values.bla)
+       1    2    3
+   1    10   15    7
+   2     2    0   -1
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

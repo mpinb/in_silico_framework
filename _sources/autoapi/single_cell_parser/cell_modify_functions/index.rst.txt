@@ -1,0 +1,102 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions`
+
+cell_modify_functions
+=====================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   BAC_injection </autoapi/single_cell_parser/cell_modify_functions/BAC_injection/index>  
+   apical_current_injection </autoapi/single_cell_parser/cell_modify_functions/apical_current_injection/index>  
+   apical_epsp_injection </autoapi/single_cell_parser/cell_modify_functions/apical_epsp_injection/index>  
+   blender_recorder </autoapi/single_cell_parser/cell_modify_functions/blender_recorder/index>  
+   scale_apical </autoapi/single_cell_parser/cell_modify_functions/scale_apical/index>  
+   soma_current_injection </autoapi/single_cell_parser/cell_modify_functions/soma_current_injection/index>  
+   synaptic_input </autoapi/single_cell_parser/cell_modify_functions/synaptic_input/index>  
+   get </autoapi/single_cell_parser/cell_modify_functions/get>
+
+.. py:module:: single_cell_parser.cell_modify_functions
+
+.. autoapi-nested-parse::
+   Modify the cell after it is initalized.
+
+   Such a function can for example be used to scale the apical dendrite diameter.
+
+   If a cell has been modified this way, the cell parameter file contains the key ``cell_modify_functions``
+   in its neuron section. This is a nested dictionary, where the keys are the names of the cell modification
+   functions, and the values are the keyword arguments as a dictionary.
+
+   .. seealso:: The :ref:`cell_parameters_format` file format.
+
+   Example::
+
+       >>> cell_parameters.neuron.cell_modify_functions
+       {'scale_apical': {'scale': 1.5}}
+       >>> from single_cell_parser.cell_modify_functions import get
+       >>> fun = get('scale_apical')
+       >>> fun
+       <function scale_apical at 0x7f0c3f2b6e18>
+       >>> print(fun.__doc__)
+       Scale the apical dendrite of a cell.
+
+       Args:
+           cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+           scale (float): The scaling factor.
+           compartment (str): The compartment to scale.
+               If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
+               If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+               Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
+
+       Returns:
+           :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+
+       Raises:
+           ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get <single_cell_parser.cell_modify_functions.get>`\ (funname)
+     - Get a cell modification function by their name.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`BAC_injection <single_cell_parser.cell_modify_functions.BAC_injection>`
+     - Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.
+   * - :py:obj:`apical_current_injection <single_cell_parser.cell_modify_functions.apical_current_injection>`
+     - Inject a current at a given distance from the soma.
+   * - :py:obj:`apical_epsp_injection <single_cell_parser.cell_modify_functions.apical_epsp_injection>`
+     - Injects an epsp-shaped current at a certain distance from the soma.
+   * - :py:obj:`blender_recorder <single_cell_parser.cell_modify_functions.blender_recorder>`
+     - \-
+   * - :py:obj:`scale_apical <single_cell_parser.cell_modify_functions.scale_apical>`
+     - Scale the apical dendrite of a cell.
+   * - :py:obj:`soma_current_injection <single_cell_parser.cell_modify_functions.soma_current_injection>`
+     - Inject a step current at the soma.
+   * - :py:obj:`synaptic_input <single_cell_parser.cell_modify_functions.synaptic_input>`
+     - Add synaptic activations to the cell from a network.
+

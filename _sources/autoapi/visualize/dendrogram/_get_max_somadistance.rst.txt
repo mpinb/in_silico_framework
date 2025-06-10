@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._get_max_somadistance`
+
+
+.. title:
+
+_get_max_somadistance
+=====================
+
+
+.. py:function:: visualize.dendrogram._get_max_somadistance(dendrogram_db)
+
+   Get the coordinate of the point that is furthest away from the soma.
+
+   :Parameters: **dendrogram\_db** (*list*) -- A list of :py:class:`\_DendrogramSection` objects.
+
+   :returns: The coordinate of the point that is furthest away from the soma.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

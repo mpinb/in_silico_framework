@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation` ❭ :mod:`~visualize.cell_to_ipython_animation.find_closest_index`
+
+
+.. title:
+
+find_closest_index
+==================
+
+
+.. py:function:: visualize.cell_to_ipython_animation.find_closest_index(list_, value)
+
+   Finds the index of the value which is closest to the value specified in the arguments
+
+   :Parameters: * **list\_** (*list*) -- list of values
+                * **value** (*float*) -- value to find closest index for
+
+   :returns: index of the value in the list
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

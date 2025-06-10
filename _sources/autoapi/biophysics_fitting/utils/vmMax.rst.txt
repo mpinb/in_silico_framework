@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.vmMax`
+
+
+.. title:
+
+vmMax
+=====
+
+
+.. py:function:: biophysics_fitting.utils.vmMax(cell)
+
+   Calculate the maximum voltage of a cell at any timepoint, at any dendrite.
+
+   :Parameters: **cell** (:py:class:`~singlejson\_cell\_parser.cell.Cell`) -- The cell object.
+
+   :returns: The maximum voltage of the cell at any timepoint across sections.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

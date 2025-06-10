@@ -1,0 +1,43 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`
+
+
+.. title:
+
+evaluation_function_incremental_helper
+======================================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper(p, s=None, e=None, cutoffs=None, stim_order=None, verbose=True, additional_evaluation_functions=None, objectives_by_stimulus=None)
+
+   Evaluate a model shows one stimulus at a time.
+
+   This is useful for performace, as it allows to run the fastest simulations first,
+   and provides an early stopping criterion if a model is not able to match these objectives.
+
+   :Parameters: * **s** (:py:class:`~biophysics\_fitting.simulator.Simulator`) -- Simulator object
+                * **e** (:py:class:`~biophysics\_fitting.evaluator.Evaluator`) -- Evaluator object
+                * **stim\_order** (*[str] | [(str)]*) -- Order in which stimuli are simulated.
+                  List consisting of strings and tuples of strings.
+                  Use strings if only one stimulus is to be simulated.
+                  Use tuples of strings to simulate several stimuli in one go.
+                * **cutoffs ({str** -- float}):
+                  Keys (str) must appear in stim\_order.
+                  Values (float)indicate the maximum error allowed for these stimuli
+                * **objectives\_by\_stimulus ({str** -- list}):
+                  Keys (str) must appear in stim\_order.
+                  Values (list) are objective names returned by the evaluator object.
+                * **additional\_evaluation\_functions** (*list*) -- additional functions to be applied onto the final voltage
+                  traces dictionary, which return a dictionary which is appended to the
+                  evaluations.
+
+   :returns: True if all stimuli pass. False if at least one stimulus has an error above its cutoff.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

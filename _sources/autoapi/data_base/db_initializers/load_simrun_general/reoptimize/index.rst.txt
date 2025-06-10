@@ -1,0 +1,43 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize`
+
+reoptimize
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _check_needs_reoptimization </autoapi/data_base/db_initializers/load_simrun_general/reoptimize/_check_needs_reoptimization>
+   _reoptimize_key </autoapi/data_base/db_initializers/load_simrun_general/reoptimize/_reoptimize_key>
+   reoptimize_db </autoapi/data_base/db_initializers/load_simrun_general/reoptimize/reoptimize_db>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.reoptimize
+
+.. autoapi-nested-parse::
+   Re-optimize a database with a new dumper
+
+   Database optimization involves writing out various dataframes in a so-called `"optimized"` format.
+   It is sometimes of interest to re-write an already optimized database with a new (or old) data format.
+   For example, in the past we have switched from `msgpack` to `parquet`, and back to `msgpack` after un-deprecating it.
+   So all databases optimized with `parquet` could now in principle be re-optimized with `msgpack`.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`reoptimize_db <data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db>`\ (db, client, progress, n\_db\_parents, suppress\_warnings)
+     - Re-optimize a database with a new dumper.
+
+

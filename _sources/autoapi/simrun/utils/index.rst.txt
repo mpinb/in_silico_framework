@@ -1,0 +1,69 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_cellnumbers_from_confile </autoapi/simrun/utils/get_cellnumbers_from_confile>
+   split_network_param_in_one_elem_dicts </autoapi/simrun/utils/split_network_param_in_one_elem_dicts>
+   get_default_arguments </autoapi/simrun/utils/get_default_arguments>
+   set_default_arguments_if_not_set </autoapi/simrun/utils/set_default_arguments_if_not_set>
+   load_param_file_if_path_is_provided </autoapi/simrun/utils/load_param_file_if_path_is_provided>
+   tar_folder </autoapi/simrun/utils/tar_folder>
+   chunkIt </autoapi/simrun/utils/chunkIt>
+   silence_stdout </autoapi/simrun/utils/silence_stdout>
+   get_fraction_of_landmarkAscii </autoapi/simrun/utils/get_fraction_of_landmarkAscii>
+   get_fraction_of_landmarkAscii_dir </autoapi/simrun/utils/get_fraction_of_landmarkAscii_dir>
+   select_cells_that_spike_in_interval </autoapi/simrun/utils/select_cells_that_spike_in_interval>
+
+.. py:module:: simrun.utils
+
+.. autoapi-nested-parse::
+   Utility and convenience functions for the :py:mod:`simrun` package.
+
+   Provides functions to parse out specific info from parameter files, silence stdout,
+   subdivide arrays for multiprocessing purposes, and more.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_cellnumbers_from_confile <simrun.utils.get_cellnumbers_from_confile>`\ (confile)
+     - Get the amount of cells of each type from a confile.
+   * - :py:obj:`split_network_param_in_one_elem_dicts <simrun.utils.split_network_param_in_one_elem_dicts>`\ (dict\_)
+     - Split a network parameter dictionary into a list of dictionaries.
+   * - :py:obj:`get_default_arguments <simrun.utils.get_default_arguments>`\ (func)
+     - Gets the keyword arguments with their default value from any function.
+   * - :py:obj:`set_default_arguments_if_not_set <simrun.utils.set_default_arguments_if_not_set>`\ (o, kwargs)
+     - Set default arguments of an object if they are not set.
+   * - :py:obj:`load_param_file_if_path_is_provided <simrun.utils.load_param_file_if_path_is_provided>`\ (pathOrParam)
+     - Convenience function to load a parameter file whether it is a string or a dictionary.
+   * - :py:obj:`tar_folder <simrun.utils.tar_folder>`\ (source\_dir, delete\_folder)
+     - Compress a folder to ``.tar`` format.
+   * - :py:obj:`chunkIt <simrun.utils.chunkIt>`\ (seq, num)
+     - Split a sequence in multiple lists which have approximately equal size.
+   * - :py:obj:`silence_stdout <simrun.utils.silence_stdout>`\ (fun)
+     - Decorator function to silence a function's output.
+   * - :py:obj:`get_fraction_of_landmarkAscii <simrun.utils.get_fraction_of_landmarkAscii>`\ (frac, path)
+     - Sample landmarks (i.e. 3D points) from a landmarkAscii file.
+   * - :py:obj:`get_fraction_of_landmarkAscii_dir <simrun.utils.get_fraction_of_landmarkAscii_dir>`\ (frac, basedir)
+     - Sample landmarks from all landmarkAscii files in a directory.
+   * - :py:obj:`select_cells_that_spike_in_interval <simrun.utils.select_cells_that_spike_in_interval>`\ (sa, tmin, tmax, set\_index)
+     - Select cells whose synapses were active in a given time interval.
+
+

@@ -1,0 +1,60 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_synapse_activation_file`
+
+
+.. title:
+
+write_synapse_activation_file
+=============================
+
+
+.. py:function:: single_cell_parser.writer.write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDistances=None, synTimes=None, activeSyns=None)
+
+   Write out a :ref:`syn\_activation\_format` file.
+
+   Used in :py:meth:`~single\_cell\_parser.analyze.synanalysis.compute\_synapse\_distances\_times`
+   to write out a synapse activation file.
+
+   The following information is saved:
+
+   - synapse type: to which presynaptic cell type this synapse belongs to.
+   - synapse ID: unique identifier for the synapse.
+   - soma distance: distance from the synapse to the soma.
+   - section ID: ID of the section of the postsynaptic cell that contains this synapse.
+   - section pt ID: ID of the point in the section that contains this synapse.
+   - dendrite label: label of the dendrite that contains this synapse.
+   - activation times: times at which the synapse was active (ms).
+
+   :Parameters: * **fname** (*str*) -- The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate\_synapse\_activations.\_evoked\_activity` for the generation of unique syapse activation filenames)
+                * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- Cell object.
+                * **synTypes** (*list*) -- list of synapse types.
+                * **synDistances** (*dict*) -- dictionary of synapse distances per synapse type.
+                * **synTimes** (*dict*) -- dictionary of synapse activation times per synapse type. Values are a list of the activation times for each synapse within that type.
+                * **activeSyns** (*dict*) -- dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
+
+   :returns: None. Writes out the synapse activation file to :paramref:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> synTypes = ['cell\_type\_1']  # 1 synapse type
+   >>> synTimes = {'cell\_type\_1': [[0.1, 0.2, 0.3], [0.15, 0.25, 0.35], [0.2, 0.3, 0.4]]}  # 3 synapses of that type
+   >>> synDistances = {'cell\_type\_1': [150.0, 200.0, 250.0]}
+   >>> activeSyns = {'cell\_type\_1': [True, True, True]}  # all 3 synapses are active
+   >>> write\_synapse\_activation\_file(
+   ...     'synapse\_activation.csv',
+   ...     cell,
+   ...     synTypes,
+   ...     synDistances,
+   ...     synTimes,
+   ...     activeSyns
+   ... )
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

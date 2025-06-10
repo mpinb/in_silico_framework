@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter` ❭ :mod:`~visualize._figure_array_converter.show_pixel_object`
+
+
+.. title:
+
+show_pixel_object
+=================
+
+
+.. py:function:: visualize._figure_array_converter.show_pixel_object(pixelObject, ax=None)
+
+   Displays a PixelObject on an axis
+
+   :Parameters: * **pixelObject** (*PixelObject*) -- the PixelObject to display
+                * **ax** (*matplotlib.pyplot.Axes*) -- the axis to display the PixelObject on
+
+   :returns: the axis with the PixelObject displayed
+   :rtype: ax (matplotlib.pyplot.Axes)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

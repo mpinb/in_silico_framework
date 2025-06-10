@@ -1,0 +1,41 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
+
+CellParser.determine_nseg
+=========================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.determine_nseg(f=100.0, full=False, max_seg_length=None)
+
+   Determine the number of segments for each section according to the d-lambda rule.
+
+   :Parameters: * **f** (*float, optional*) -- frequency used for determining discretization. Default is :math:`100.0 Hz`.
+                * **full** (*bool, optional*) -- Whether or not to use full spatial discretization (one segment per morphology point). Default is ``False``.
+                * **max_seg_length** (*float, optional*) -- Maximum segment length. Default is ``None``.
+
+   .. note::
+
+      The d-lambda rule predicates the spatial grid on the AC length constant :math:`\lambda_f`
+      computed at a frequency :math:`f` that is high enough for transmembrane current to be primarily
+      capacitive, yet still within the range of frequencies relevant to neuronal function.
+      :cite:t:`hines2001neuron` suggested that the distance between adjacent nodes should be no larger than a
+      user-specified fraction ("d-lambda") of :math:`\lambda_{100}`, the length constant at 100 Hz. This
+      frequency is high enough for signal propagation to be insensitive to shunting by ionic
+      conductances, but it is not unreasonably high because the rise time τr of fast EPSPs and
+      spikes is ~ 1 ms, which corresponds to a bandpass of :math:`1/\tau \, 2 \, \pi \, r \approx 400 Hz`.
+      At frequencies where :math:`R_m` can be ignored, the attenuation of signal amplitude is
+      described by
+      
+      .. math::
+      
+          \log \left| \frac{V_0}{V_x} \right| \approx 2 x \sqrt{\frac{\pi f R_a C_m}{d}}
+      
+      So the distance over which an e-fold attenuation occurs is
+      
+      .. math::
+      
+          \lambda_f \approx \frac{1}{2} \sqrt{\frac{d}{\pi f R_a C_m}}
+
+   .. seealso:: :cite:t:`hines2001neuron` (Chapter 5).
+

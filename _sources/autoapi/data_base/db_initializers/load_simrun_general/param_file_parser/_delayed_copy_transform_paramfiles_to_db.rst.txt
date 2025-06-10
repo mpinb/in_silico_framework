@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser._delayed_copy_transform_paramfiles_to_db`
+
+
+.. title:
+
+_delayed_copy_transform_paramfiles_to_db
+========================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._delayed_copy_transform_paramfiles_to_db(paramfile_hashmap_df, db, neup_path_column=&#39;path_neuron&#39;, neup_hash_column=&#39;hash_neuron&#39;, netp_path_column=&#39;path_network&#39;, netp_hash_column=&#39;hash_network&#39;)
+
+   Copy, transform and rename parameterfiles to a db.
+
+   This function copies :ref:`cell\_parameters\_format`, :ref:`network\_parameters\_format`, :ref:`syn\_file\_format` files,
+   and :ref:`con\_file\_format` files to the database.
+   In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
+
+   :Parameters: * **paramfile\_hashmap\_df** (*pd.DataFrame*) -- DataFrame containing the filepaths and hashes.
+                * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the data should be added.
+                * **path\_column** (*str*) -- Name of the column containing the filepaths.
+                * **hash\_column** (*str*) -- Name of the column containing the hashes.
+                * **transform\_fun** (*function*) -- Function to transform the parameter files.
+
+   :returns: List of dask.delayed objects to copy the files.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

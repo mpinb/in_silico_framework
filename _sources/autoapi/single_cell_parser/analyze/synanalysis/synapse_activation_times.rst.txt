@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.synapse_activation_times`
+
+
+.. title:
+
+synapse_activation_times
+========================
+
+
+.. py:function:: single_cell_parser.analyze.synanalysis.synapse_activation_times(tVec, cntVec)
+
+   Parse the spike times from a list of spike counts and corresponding time points.
+
+   :Parameters: * **tVec** (*neuron.h.Vector | array*) -- list of time points
+                * **cntVec** (*neuron.h.Vector | array*) -- list of cummulative spike counts
+
+   :returns: list of spike times
+   :rtype: list
+
+   .. rubric:: Example
+      :class: example
+
+   >>> tVec = [0, 1, 2, 3, 4, 5]
+   >>> cntVec = [0, 0, 0, 1, 1, 2]
+   >>> synapse\_activation\_times(tVec, cntVec)
+   [3, 5]
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

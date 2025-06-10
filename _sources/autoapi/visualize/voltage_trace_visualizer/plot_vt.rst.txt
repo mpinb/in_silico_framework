@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.voltage_trace_visualizer` ❭ :mod:`~visualize.voltage_trace_visualizer.plot_vt`
+
+
+.. title:
+
+plot_vt
+=======
+
+
+.. py:function:: visualize.voltage_trace_visualizer.plot_vt(voltage_traces, key=&#39;BAC.hay_measure&#39;)
+
+   Plot voltage traces from simulation results.
+
+   The results of e.g. :py:class:`biophysics\_fitting.simulator.Simulator` are nested dictionaries,
+   containing various voltage traces. NEURON simulation results are NEURON vectors.
+   This is a helper method to extract that data and plot out specific voltage traces from those results.
+
+   :Parameters: * **voltage\_traces** (*dict*) -- dictionary containing the voltage traces.
+                * **key** (*str*) -- key to access the specific voltage trace to plot.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

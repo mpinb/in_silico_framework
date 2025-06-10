@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`Interface` ❭ :mod:`~Interface.get_client`
+
+
+.. title:
+
+get_client
+==========
+
+
+.. py:function:: Interface.get_client(ip=None, client_port=38786, timeout=120)
+
+   Gets the distributed.client object if dask has been setup
+
+   :Parameters: * **client\_port** (*int*) -- the port to use for the client
+                * **timeout** (*int|float*) -- the timeout for the client (in seconds)
+
+   :returns: the client object
+   :rtype: Client
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,80 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.DendrogramStatistics`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DendrogramStatistics
+====================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   plot <DendrogramStatistics.plot>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.dendrogram.DendrogramStatistics(cell)
+   
+   Plot dendrogram statistics.
+
+   This class creates a composite plot of a dendrogram, as well as dendritic length and synapse count statistics.
+   These statistics include:
+
+   - The total amount of dendritic length in a certain bin of soma distance.
+   - The total amount of synapses in a certain bin of soma distance.
+   - The total amount of synapses per micron dendritic length.
+
+   Example::
+
+       >>> d = DendrogramStatistics(cell)
+       >>> fig = d.plot()
+       >>> plt.show()
+
+   .. figure:: ../../../_static/_images/dendrogram_statistics.png
+
+   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+
+   :Attributes:
+
+   .. attribute:: dendrogram
+
+      The dendrogram object.
+
+      :type: :py:class:`Dendrogram`
+
+   .. attribute:: dend_statistics
+
+      The dendrite statistics object.
+
+      :type: :py:class:`_DendrogramDendriteStatistics`
+
+   .. attribute:: syn_statistics
+
+      The synapse statistics object.
+
+      :type: :py:class:`_DendrogramSynapseStatistics`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`plot <visualize.dendrogram.DendrogramStatistics.plot>`\ (figsize, colormap\_synapses)
+        - Plot the dendrogram statistics.
+

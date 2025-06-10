@@ -1,0 +1,42 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.parameters`
+
+parameters
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   param_to_kwargs </autoapi/biophysics_fitting/parameters/param_to_kwargs>
+   param_selector </autoapi/biophysics_fitting/parameters/param_selector>
+   set_fixed_params </autoapi/biophysics_fitting/parameters/set_fixed_params>
+
+.. py:module:: biophysics_fitting.parameters
+
+.. autoapi-nested-parse::
+   Fetch parameters with the dot naming convention.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`param_to_kwargs <biophysics_fitting.parameters.param_to_kwargs>`\ (fun)
+     - returns a function that can be called with params = [some_Series].
+   * - :py:obj:`param_selector <biophysics_fitting.parameters.param_selector>`\ (params, s)
+     - Select parameters from a Series with an Index like a.b.c, a.b.d.
+   * - :py:obj:`set_fixed_params <biophysics_fitting.parameters.set_fixed_params>`\ (params, fixed\_params)
+     - Add fixed_params to params.
+
+

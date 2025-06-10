@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.APw`
+
+_Step.APw
+=========
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.APw(voltage_traces)
+
+   Get the AP widths of all APs in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_1AP"`` to whether there is at least one action potential in the somatic voltage trace,
+                 and ``".raw"`` to the AP widths in the somatic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~biophysics_fitting.ephys.AP_width`
+

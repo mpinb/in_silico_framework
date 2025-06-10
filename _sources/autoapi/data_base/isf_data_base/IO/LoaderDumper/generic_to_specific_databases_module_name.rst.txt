@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.generic_to_specific_databases_module_name`
+
+
+.. title:
+
+generic_to_specific_databases_module_name
+=========================================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.generic_to_specific_databases_module_name(module_name)
+
+   Convert a relative module path to an absolute one.
+
+   Internally, ISF does not specify which database system to use,
+   and simply tries to fetch any generic ``data\_base.IO.LoaderDumper.my\_dumper``.
+   This function converts that relative module path to an absolute.
+
+   Example::
+
+       >>> dumper = 'data\_base.IO.LoaderDumper.my\_dumper'
+       >>> generic\_to\_specific\_database\_module\_name(dumper)
+       'data\_base.isf\_data\_base.IO.LoaderDumper.my\_dumper
+
+   :Parameters: **module\_path** (*str*) -- The relative module path.
+
+   :returns: The absolute module path.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_time_to_first_spike`
+
+
+.. title:
+
+STEP_time_to_first_spike
+========================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_time_to_first_spike(t, v, stim_onset, thresh=None)
+
+   Computes the time to first spike (TTFS) of a voltage trace for a step stimulus.
+
+   .. note::
+
+      The time to a spike is taken to be the time until the peak of the spike,
+      not e.g. the peak of the second derivative.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+
+   :returns: Time to first spike.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

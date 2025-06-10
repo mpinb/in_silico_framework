@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._get_truncated_cone_area`
+
+SynapseDensity._get_truncated_cone_area
+=======================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._get_truncated_cone_area(height, radius1, radius2)
+
+   Calculate the are of a truncated cone.
+
+   Used in :py:meth:`~SynapseDensity._compute_length_surface_area_density` to calculate the area of clipped neurites.
+

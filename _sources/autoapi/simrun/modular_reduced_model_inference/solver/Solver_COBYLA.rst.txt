@@ -1,0 +1,69 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver.Solver_COBYLA`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Solver_COBYLA
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _setup_optimizer <Solver_COBYLA._setup_optimizer>
+   _optimize <Solver_COBYLA._optimize>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA(name)
+   
+   A :cite:t:`COBYLA` solver strategy for reduced models.
+
+   .. seealso::
+
+      :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their
+      respective objective functions.
+
+   :Parameters: **name** (*str*) -- name of the solver
+
+   :Attributes:
+
+   .. attribute:: name
+
+      name of the solver
+
+      :type: str
+
+   .. attribute:: optimize
+
+      Optimization function: :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
+      Optimization function need an objective function to minimize.
+      These objecetive functions depend on the strategy.
+
+      :type: callable
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_setup_optimizer <simrun.modular_reduced_model_inference.solver.Solver_COBYLA._setup_optimizer>`\ ()
+        - Set up the optimization strategy.
+      * - :py:obj:`_optimize <simrun.modular_reduced_model_inference.solver.Solver_COBYLA._optimize>`\ (\_objective\_function, maxiter, x0)
+        - :summarylabel:`static` Static optimization method.
+

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim` ❭ :mod:`~biophysics_fitting.setup_stim.setup_bAP`
+
+
+.. title:
+
+setup_bAP
+=========
+
+
+.. py:function:: biophysics_fitting.setup_stim.setup_bAP(cell, delay=295)
+
+   Setup a bAP (backpropagating action potential) stimulus for the cell.
+
+   Soma:
+
+   - shape = step
+   - amplitude = 1.9 nA
+   - delay = 295 ms
+   - duration = 5 ms
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **delay** (*float*) -- The delay of the bAP stimulus (ms).
+
+   :returns: None. Adds a bAP stimulus to the cell.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

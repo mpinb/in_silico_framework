@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes`
+
+
+.. title:
+
+_get_offset_and_size_in_bytes
+=============================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes(start_row, end_row, shape, dtype)
+
+   Get the offset and size in bytes for a given ``start\_row`` and ``end\_row``.
+
+   Rows here refer to the first dimension of a multi-dimensional array.
+
+   :Parameters: * **start\_row** (*int*) -- The starting row of the array.
+                * **end\_row** (*int*) -- The ending row of the array.
+                * **shape** (*tuple*) -- The shape of the array. ``shape[0]`` is the number of rows.
+                * **dtype** (*str*) -- The data type of the array. Used to infer the size in bytes.
+
+   :returns: A tuple containing the ``start\_row``, ``end\_row``, ``bytes\_offset``, ``bytes\_size``, and ``final\_shape``.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,65 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze`
+
+analyze
+=======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   spatiotemporal_binning </autoapi/data_base/analyze/spatiotemporal_binning/index>  
+   spike_detection </autoapi/data_base/analyze/spike_detection/index>  
+   temporal_binning </autoapi/data_base/analyze/temporal_binning/index>  
+   voltage_binning </autoapi/data_base/analyze/voltage_binning/index>  
+   split_synapse_activation </autoapi/data_base/analyze/split_synapse_activation>
+
+.. py:module:: data_base.analyze
+
+.. autoapi-nested-parse::
+   Analyze simrun-initialized databases.
+
+   This module provides methods for binning and aggregating synapse activations, spike times, and voltage traces, as well
+   as convenience methods to analyze the results of :py:mod:`simrun.reduced_model`.
+
+   .. seealso:: :py:mod:`data_base.db_initializers.load_simrun_general` for initializing databases from :py:mod:`simrun` results.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`split_synapse_activation <data_base.analyze.split_synapse_activation>`\ (sa, selfcheck, excitatory, inhibitory)
+     - Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`spatiotemporal_binning <data_base.analyze.spatiotemporal_binning>`
+     - Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
+   * - :py:obj:`spike_detection <data_base.analyze.spike_detection>`
+     - Detect spikes from :ref:`voltage_traces_format` dataframes.
+   * - :py:obj:`temporal_binning <data_base.analyze.temporal_binning>`
+     - Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
+   * - :py:obj:`voltage_binning <data_base.analyze.voltage_binning>`
+     - Calculate the voltage as a density array.
+

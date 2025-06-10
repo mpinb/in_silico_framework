@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._get_rec_site_managers`
+
+
+.. title:
+
+_get_rec_site_managers
+======================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._get_rec_site_managers(db)
+
+   Get the recording sites from the cell parameter files.
+
+   Recording sites are locations onto the postsynaptic membrane where the voltage traces are recorded.
+   This is used for recording the membrane voltage at non-somatic locations.
+
+   :Parameters: **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the data should be added.
+
+   :returns: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.
+   :rtype: dict
+
+   :raises NotImplementedError: If the cell parameter files of the simulation specify different recording sites for different trials.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

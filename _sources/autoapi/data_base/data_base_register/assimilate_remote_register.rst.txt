@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.assimilate_remote_register`
+
+
+.. title:
+
+assimilate_remote_register
+==========================
+
+
+.. py:function:: data_base.data_base_register.assimilate_remote_register(remote_path, local_path=None)
+
+   Assimilate a remote register.
+
+   This method adds all databases from a remote register to the local register of the user.
+
+   :Parameters: * **remote\_path** (*str*) -- The path to the remote register.
+                * **local\_path** (*str, optional*) -- The path to the local register. Defaults to None, in which case the default local register is used:
+                  ``.data\_base\_register.db`` in the same directory as this file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

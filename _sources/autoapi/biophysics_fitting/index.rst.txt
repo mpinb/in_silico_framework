@@ -1,0 +1,108 @@
+
+
+
+biophysics_fitting
+==================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   exploration_from_seedpoint </autoapi/biophysics_fitting/exploration_from_seedpoint/index>  
+   hay </autoapi/biophysics_fitting/hay/index>  
+   L5tt_parameter_setup </autoapi/biophysics_fitting/L5tt_parameter_setup/index>  
+   combiner </autoapi/biophysics_fitting/combiner/index>  
+   ephys </autoapi/biophysics_fitting/ephys/index>  
+   evaluator </autoapi/biophysics_fitting/evaluator/index>  
+   model_selection </autoapi/biophysics_fitting/model_selection/index>  
+   optimizer </autoapi/biophysics_fitting/optimizer/index>  
+   parameters </autoapi/biophysics_fitting/parameters/index>  
+   setup_stim </autoapi/biophysics_fitting/setup_stim/index>  
+   simulator </autoapi/biophysics_fitting/simulator/index>  
+   utils </autoapi/biophysics_fitting/utils/index>  
+   connected_to_dend_beyond </autoapi/biophysics_fitting/connected_to_dend_beyond>
+   get_inner_sec_dist_list </autoapi/biophysics_fitting/get_inner_sec_dist_list>
+   get_branching_depth </autoapi/biophysics_fitting/get_branching_depth>
+   get_branching_depth_series </autoapi/biophysics_fitting/get_branching_depth_series>
+   get_main_bifurcation_section </autoapi/biophysics_fitting/get_main_bifurcation_section>
+   get_first_order_bifurcation_sections </autoapi/biophysics_fitting/get_first_order_bifurcation_sections>
+
+.. py:module:: biophysics_fitting
+
+.. autoapi-nested-parse::
+   Generate and analyze biophysically detailed multi-compartmental models (MCM).
+
+   It provides two ways to generate mutli-compartmental models:
+
+       1. BluePyOpt :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`, a Multi-Objective Evolutionary Algorithm (MOEA): :py:mod:`biophysics_fitting.optimizer`.
+       2. An exploration algorithm: :py:mod:`biophysics_fitting.exploration_from_seedpoint`.
+
+   The MOEA does not require any a priori assumptions on biophysical parameters to find a MCM, but fails to explore the full diversity of possible MCMs.
+   On the other hand, the exploration approach can explore the full diversity of possible biophysical models, but also requires a MCM as a seedpoint in order to start.
+   If you need to generate models from scratch, we recommend using the MOEA algorithm to find at least a single model, and then using this as a seedpoint for the exploration algorithm.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`connected_to_dend_beyond <biophysics_fitting.connected_to_dend_beyond>`\ (cell, sec, beyond\_dist, n\_children\_required)
+     - Check if a given section is connected to dendrites that reach beyon :paramref:`beyond_dist`.
+   * - :py:obj:`get_inner_sec_dist_list <biophysics_fitting.get_inner_sec_dist_list>`\ (cell, select, connected\_to\_dend\_beyond\_distance, z\_offset)
+     - Find all sections that are connected to dendrites that reach beyond a certain distance.
+   * - :py:obj:`get_branching_depth <biophysics_fitting.get_branching_depth>`\ (cell, sec, beyond\_dist)
+     - Given a Cell object and a section number, this method returns the branching depth (i.e. branching order) of that section.
+   * - :py:obj:`get_branching_depth_series <biophysics_fitting.get_branching_depth_series>`\ (cell, z\_offset)
+     - Find the branching depth of the inner sections of a :py:class:`~single_cell_parser.cell.Cell`.
+   * - :py:obj:`get_main_bifurcation_section <biophysics_fitting.get_main_bifurcation_section>`\ (cell)
+     - Find the main bifurcation of a cell.
+   * - :py:obj:`get_first_order_bifurcation_sections <biophysics_fitting.get_first_order_bifurcation_sections>`\ (cell)
+     - Find all sections that are both inner sections, and are of branching order 1.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`exploration_from_seedpoint <biophysics_fitting.exploration_from_seedpoint>`
+     - Explore viable biophysical models from a given seedpoint.
+   * - :py:obj:`hay <biophysics_fitting.hay>`
+     - Configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract neurons according to the
+   * - :py:obj:`L5tt_parameter_setup <biophysics_fitting.L5tt_parameter_setup>`
+     - This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
+   * - :py:obj:`combiner <biophysics_fitting.combiner>`
+     - This module provides the :py:class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
+   * - :py:obj:`ephys <biophysics_fitting.ephys>`
+     - The content of this module is mostly a reimplementation of the Hay et.al. 2011 methods used for extracting features.
+   * - :py:obj:`evaluator <biophysics_fitting.evaluator>`
+     - Extract features from voltage traces.
+   * - :py:obj:`model_selection <biophysics_fitting.model_selection>`
+     - Convenience methods to fetch biophysical models from a :py:class:`~data_base.data_base.DataBase`
+   * - :py:obj:`optimizer <biophysics_fitting.optimizer>`
+     - Multi-objective optimization algorithm.
+   * - :py:obj:`parameters <biophysics_fitting.parameters>`
+     - Fetch parameters with the dot naming convention.
+   * - :py:obj:`setup_stim <biophysics_fitting.setup_stim>`
+     - This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
+   * - :py:obj:`simulator <biophysics_fitting.simulator>`
+     - This module concerns itself with setting up a cell with biophysical details and simulation parameters.
+   * - :py:obj:`utils <biophysics_fitting.utils>`
+     - Utility functions for biophysics fitting.
+

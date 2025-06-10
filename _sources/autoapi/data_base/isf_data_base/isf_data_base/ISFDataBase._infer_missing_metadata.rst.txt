@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._infer_missing_metadata`
+
+ISFDataBase._infer_missing_metadata
+===================================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._infer_missing_metadata()
+
+   Checks whether metadata is missing, and tries to estimate it.
+
+   Sets the time based on the timestamp of the files.
+   When metadata is created in that way, the field ``metadata_creation_time`` is set to ``post_hoc``.
+

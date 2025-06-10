@@ -1,0 +1,53 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials`
+
+
+.. title:
+
+load_cluster_trials
+===================
+
+
+.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials(fname)
+
+   Reads in a cluster file and returns a dictionary with the spike times for each trial.
+
+   :Parameters: **fname** (*str*) -- The name of the .cluster file.
+
+   :returns: A dictionary with the spike times for each trial.
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> load\_cluster\_trials('getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84/C1\_040929-129-ctx.cluster1')
+   {
+       0: [87.80000000000001, 138.70000000000002, 151.6, 430.40000000000003, 471.1, 478.90000000000003],
+       1: [],
+       2: [],
+       3: [],
+       4: [129.9, 265.7, 269.7],
+       5: [283.8, 290.1, 459.20000000000005],
+       6: [13.100000000000001, 90.10000000000001, 95.0, 387.90000000000003],
+       7: [],
+       8: [],
+       9: [],
+       10: [],
+       11: [],
+       12: [320.6],
+       13: [34.0],
+       14: [],
+       15: [110.80000000000001, 464.0],
+       16: [317.5, 409.1, 483.90000000000003],
+       17: [65.5],
+       18: [43.6],
+       19: []}
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

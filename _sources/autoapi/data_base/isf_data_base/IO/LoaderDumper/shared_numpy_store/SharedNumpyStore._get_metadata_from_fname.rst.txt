@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_fname`
+
+SharedNumpyStore._get_metadata_from_fname
+=========================================
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_fname(fname)
+   :staticmethod:
+
+
+   Get metadata from a filename that follows the convention of NumpyStore.
+
+   :returns: the name, shape, and dtype from a filename that follows the convention of NumpyStore
+   :rtype: tuple
+

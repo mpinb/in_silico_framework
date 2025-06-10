@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE.setup`
+
+STAPlugin_TEMPLATE.setup
+========================
+
+.. py:method:: spike_analysis.core.STAPlugin_TEMPLATE.setup()
+   :abstractmethod:
+
+
+   Sets up the analysis.
+
+   This method needs to be overwritten by the subclass.
+

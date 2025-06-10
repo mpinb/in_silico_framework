@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.get_Combiner`
+
+
+.. title:
+
+get_Combiner
+============
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.get_Combiner(step=False, include_DI3=True)
+
+   Get a set up :py:class:`~biophysics\_fitting.combiner.Combiner` object for the Hay protocol.
+
+   :Parameters: * **step** (*bool*) -- Whether to include step current measurements.
+                * **include\_DI3** (*bool*) -- Whether to include the doublet ISI for the Step3 protocol in the step current measurements.
+                  Default: ``True``.
+
+   :returns: A combiner object.
+   :rtype: :py:class:`~biophysics\_fitting.combiner.Combiner`
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

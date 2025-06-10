@@ -1,0 +1,39 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control`
+
+sim_control
+===========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   SimControl </autoapi/single_cell_parser/sim_control/SimControl>
+
+.. py:module:: single_cell_parser.sim_control
+
+.. autoapi-nested-parse::
+   Run a NEURON current injection simulation.
+
+   Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+   Can still be useful for low-level control with NEURON.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`SimControl <single_cell_parser.sim_control.SimControl>`
+     - Control a current clamp simulation.
+
+
+

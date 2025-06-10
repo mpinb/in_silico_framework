@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_dumper_module`
+
+
+.. title:
+
+get_dumper_string_by_dumper_module
+==================================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_dumper_module(dumper_module)
+
+   Convert a dumper submodule to a string.
+
+   This is used to write the ``Loader.json`` specification file.
+
+   :Parameters: **dumper\_module** -- The module to check.
+
+   :returns: The dumper string, relative to its parent ``LoaderDumper`` module.
+
+   Example::
+
+       >>> import data\_base.isf\_data\_base.IO.LoaderDumper.my\_dumper as dumper\_module
+       >>> get\_dumper\_string\_by\_dumper\_module(dumper\_module)
+       'my\_dumper'
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

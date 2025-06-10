@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.multi_stimulus_trial`
+
+
+.. title:
+
+multi_stimulus_trial
+====================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.multi_stimulus_trial(netp, inter_stimulus_interval=100, stims=100, scale_factors=None, pop=None)
+
+   Makes a network param file for repeatedly stimulating the same whisker during a single trial.
+
+   Optionally applies a different evoked activity scaling factor to each stimulus.
+
+   :Parameters: * **netp** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **inter\_stimulus\_interval** (*int | float*) -- amount of time to wait (in ms) between each whisker stimulus
+                * **stims** (*int*) -- number of stimuli to simulate
+                * **scale\_factors** (*list, optional*) -- A list of scale factors you want to apply to subsequent stimuli.
+                  Must have the same length as stims.
+                * **pop** (*list, optional*) -- The celltypes you would like the scaling to be applied to.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

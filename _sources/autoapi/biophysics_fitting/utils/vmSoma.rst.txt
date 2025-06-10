@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.vmSoma`
+
+
+.. title:
+
+vmSoma
+======
+
+
+.. py:function:: biophysics_fitting.utils.vmSoma(cell)
+
+   Convenience method to extract the soma voltage trace from a cell
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+
+   :returns: The soma voltage trace of the cell.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

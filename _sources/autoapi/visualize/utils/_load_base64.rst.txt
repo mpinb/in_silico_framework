@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils._load_base64`
+
+
+.. title:
+
+_load_base64
+============
+
+
+.. py:function:: visualize.utils._load_base64(filename, extension=&#39;png&#39;)
+
+   Load a base64 file from a filename.
+
+   Used in :py:meth:`display\_animation\_from\_images` to embed animations.
+
+   See: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html\_writer.py
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,54 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.init`
+
+
+.. title:
+
+init
+====
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.init(db, groupby=&#39;&#39;, scheduler=None, prefun=prefun, applyfun=applyfun, postfun=postfun, maxtime=400)
+
+   Main pipeline to bin synapse activations from a :ref:`syn\_activation\_format` dataframe.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The simrun-initialized database object.
+                  Must contain the key ``synapse\_activation``.
+                * **groupby** (*str*) -- Aggregation key for the synapse activation bins. Available values include:
+
+                  - ``celltype``
+                  - ``presynaptic\_column``
+                  - ``proximal`` (soma distance < 500 um)
+                  - ``EI`` (Lumping the EXC / INH celltypes together)
+                  - ``binned\_somadist``: synapse counts for all 50 microns
+                  - any column in the specified dataframe.
+                  - Can be a list, if "sub-subgroups" should be calculated.
+                * **scheduler** (*dask scheduler*) -- A dask scheduler for the comptation (e.g. :py:func:`dask.distributed.Client.get`)
+                * **prefun** (*callable*) -- A function to preprocess the synapse activation dataframe before binning.
+                  The function should take a pandas dataframe and return a pandas dataframe.
+                  Default: :py:func:`~data\_base.db\_initializers.synapse\_activation\_binning.prefun`
+                * **applyfun** (*callable*) -- A function to bin the synapse activations.
+                  The function should take a pandas dataframe and return a numpy array.
+                  Default: :py:func:`~data\_base.db\_initializers.synapse\_activation\_binning.applyfun`
+                * **postfun** (*callable*) -- A function to postprocess the binned synapse activations.
+                  The function should take a pandas series and return a numpy array.
+                  Default: :py:func:`~data\_base.db\_initializers.synapse\_activation\_binning.postfun`
+
+   :returns: None. The binned synapse activation data will be stored in :paramref:`db`.
+
+   .. seealso::
+
+      :py:meth:`~data\_base.db\_initializers.prefun`,
+      :py:meth:`~data\_base.db\_initializers.applyfun`, and
+      :py:meth:`~data\_base.db\_initializers.postfun` for the default functions that bin the synapse activations.
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.init` for how to simrun-initialize a database.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

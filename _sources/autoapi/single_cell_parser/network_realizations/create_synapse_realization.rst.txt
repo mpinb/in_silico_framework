@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_realizations` ❭ :mod:`~single_cell_parser.network_realizations.create_synapse_realization`
+
+
+.. title:
+
+create_synapse_realization
+==========================
+
+
+.. py:function:: single_cell_parser.network_realizations.create_synapse_realization(pname, write_synapses=False)
+
+   Create a synapse realization from a :ref:`network\_parameters\_format` file.
+
+   :Parameters: * **pname** (*str*) -- :ref:`network\_parameters\_format` file.
+                * **write\_synapses** (*bool*) -- Write synapse locations to a `.landmarkAscii` file for visualization in AMIRA. Default is False.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

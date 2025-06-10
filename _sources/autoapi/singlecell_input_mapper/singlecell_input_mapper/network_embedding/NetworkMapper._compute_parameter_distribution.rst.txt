@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_parameter_distribution`
+
+NetworkMapper._compute_parameter_distribution
+=============================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_parameter_distribution(realizationPopulation)
+
+   Compute mean +- SD of parameters for population of anatomical realizations.
+
+   Using parameters in :py:attr:`cellTypeSummaryTable` on a per cell type basis:
+
+           0.  nrOfSynapses
+           1.  nrConnectedCells
+           2.  nrPreCells
+           3.  convergence
+           4.  distanceMean
+           5.  distanceSTD
+           6.  cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+           7.  cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+           8.  cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+           9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
+
+   :returns: dictionary organized the same way as :py:attr:`cellTypeSummaryTable`,
+             but entries are tuples (mean, STD) of each parameter for
+             given population of realizations.
+   :rtype: dict
+

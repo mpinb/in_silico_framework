@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution` ❭ :mod:`~simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status`
+
+RobustDaskDelayedExecution.reset_status
+=======================================
+
+.. py:method:: simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status(only_started=True)
+
+   Reset the status of the delayed objects to ``'not_started'``.
+
+   :Parameters: **only_started** (*bool*) -- If ``True`` only the status of the delayed objects that are currently running is reset.
+

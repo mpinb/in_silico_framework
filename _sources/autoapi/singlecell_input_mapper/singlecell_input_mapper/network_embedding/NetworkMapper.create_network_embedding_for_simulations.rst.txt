@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_for_simulations`
+
+NetworkMapper.create_network_embedding_for_simulations
+======================================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_for_simulations(postCellName, boutonDensities, nrOfRealizations)
+
+   Create multiple network realizations from a bouton density field.
+
+   Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
+   Same principle as :py:meth:`~create_network_embedding`, but rather than taking
+   the most representative sample, this method saves all :paramref:`nrOfRealizations` network
+   realizations to allow investigating the effects of anatomical variability on neuron responses.
+
+   .. warning::
+
+      Give this network realization a (somewhat) unique name!
+      Then save it at the same location as the anatomical realization
+
+   .. warning::
+
+      Assumes path names to anatomical realization files are relative to the working directory.
+      These paths should be correct relative, or preferably absolute paths.
+
+   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+                * **boutonDensities** (*dict*) -- Dictionary of bouton densities, ordered by anatomical area and cell type.
+                * **nrOfRealizations** (*int*) -- Number of network realizations to create.
+
+   :returns: None. Writes output files to disk.
+

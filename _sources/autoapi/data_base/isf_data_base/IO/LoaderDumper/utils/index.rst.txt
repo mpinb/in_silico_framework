@@ -1,0 +1,48 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_numpy_dtype_as_str </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/get_numpy_dtype_as_str>
+   save_object_meta </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/save_object_meta>
+   get_meta_filename </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/get_meta_filename>
+   read_object_meta </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/read_object_meta>
+   set_object_meta </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/set_object_meta>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.utils
+
+.. autoapi-nested-parse::
+   Convenience methods for data IO.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_numpy_dtype_as_str <data_base.isf_data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str>`\ (obj)
+     - Get a string representation of the numpy dtype of an object.
+   * - :py:obj:`save_object_meta <data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta>`\ (obj, savedir)
+     - Construct a meta object to help out dask or parquet later on.
+   * - :py:obj:`get_meta_filename <data_base.isf_data_base.IO.LoaderDumper.utils.get_meta_filename>`\ (savedir, raise\_)
+     - Get the filename of the meta file in the savedir.
+   * - :py:obj:`read_object_meta <data_base.isf_data_base.IO.LoaderDumper.utils.read_object_meta>`\ (savedir, raise\_)
+     - Get the metadata associated with a saved object.
+   * - :py:obj:`set_object_meta <data_base.isf_data_base.IO.LoaderDumper.utils.set_object_meta>`\ (obj, meta)
+     - Reset the dtypes of the columns and index of an object to the original dtypes.
+
+

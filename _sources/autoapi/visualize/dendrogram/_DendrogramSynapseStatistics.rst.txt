@@ -1,0 +1,123 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_DendrogramSynapseStatistics
+============================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _add_synapses <_DendrogramSynapseStatistics._add_synapses>
+   get_number_of_synapses_in_bin <_DendrogramSynapseStatistics.get_number_of_synapses_in_bin>
+   _compute_synapse_hist <_DendrogramSynapseStatistics._compute_synapse_hist>
+   _compute_synapse_statistics <_DendrogramSynapseStatistics._compute_synapse_statistics>
+   _plot_synapse_density_hist <_DendrogramSynapseStatistics._plot_synapse_density_hist>
+   _plot_synapse_hist <_DendrogramSynapseStatistics._plot_synapse_hist>
+   _plot_synapses_dendrogram_overlay <_DendrogramSynapseStatistics._plot_synapses_dendrogram_overlay>
+   plot <_DendrogramSynapseStatistics.plot>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.dendrogram._DendrogramSynapseStatistics(dendrogram_db, cell, colormap_synapses=None)
+   
+   Compute synapse statistics for a :py:class:`~single_cell_parser.cell.Cell` object.
+
+   Synaptic statistics include the total amount of synapses binned by soma distance, both unnormalized, as well
+   as normalized by total amount of dendritic length.
+
+   :Parameters: * **dendrogram_db** (*list*) -- A list of :py:class:`_DendrogramSection` objects.
+                * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+                * **colormap_synapses** (*dict*) -- A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+                  Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+
+   :Attributes:
+
+   .. attribute:: dendrogram_db
+
+      A list of :py:class:`_DendrogramSection` objects.
+
+      :type: list
+
+   .. attribute:: cell
+
+      The cell object.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell`
+
+   .. attribute:: colormap_synapses
+
+      A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+      Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+
+      :type: dict
+
+   .. attribute:: bins
+
+      The bins of the synapse density histogram.
+
+      :type: np.array
+
+   .. attribute:: synapse_density
+
+      The synapse density histogram, i.e. the amount of synapses within a range of soma distance.
+
+      :type: np.array
+
+   .. attribute:: synapse_density_apical
+
+      The synapse density histogram for apical dendrites.
+
+      :type: np.array
+
+   .. attribute:: synapse_density_basal
+
+      The synapse density histogram for basal dendrites.
+
+      :type: np.array
+
+   .. attribute:: synapse_statistics
+
+      A dictionary of synapse statistics
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_add_synapses <visualize.dendrogram._DendrogramSynapseStatistics._add_synapses>`\ ()
+        - Add synapses to the dendrogram sections.
+      * - :py:obj:`get_number_of_synapses_in_bin <visualize.dendrogram._DendrogramSynapseStatistics.get_number_of_synapses_in_bin>`\ (min\_, max\_, select, label)
+        - Get the number of synapses in a certain bin of soma distance.
+      * - :py:obj:`_compute_synapse_hist <visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_hist>`\ (binsize)
+        - Compute the synapse density histogram.
+      * - :py:obj:`_compute_synapse_statistics <visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_statistics>`\ ()
+        - Compute the synapse statistics.
+      * - :py:obj:`_plot_synapse_density_hist <visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_density_hist>`\ (ax, xlim, binsize)
+        - Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
+      * - :py:obj:`_plot_synapse_hist <visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist>`\ (ax, dendrite\_density)
+        - Plot the synapse histogram on an :py:class:`matplotlib.Axes` object.
+      * - :py:obj:`_plot_synapses_dendrogram_overlay <visualize.dendrogram._DendrogramSynapseStatistics._plot_synapses_dendrogram_overlay>`\ (ax)
+        - Plot the synapses on the dendrogram.
+      * - :py:obj:`plot <visualize.dendrogram._DendrogramSynapseStatistics.plot>`\ (ax)
+        - Plot the synapse statistics
+

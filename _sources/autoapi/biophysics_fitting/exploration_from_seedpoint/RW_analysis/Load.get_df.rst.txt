@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_df`
+
+Load.get_df
+===========
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_df()
+
+   Get the exploration results as a pandas dataframe.
+

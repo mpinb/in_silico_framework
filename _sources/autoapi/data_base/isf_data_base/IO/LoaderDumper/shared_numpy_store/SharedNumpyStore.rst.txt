@@ -1,0 +1,111 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SharedNumpyStore
+================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   update <SharedNumpyStore.update>
+   _get_metadata_from_fname <SharedNumpyStore._get_metadata_from_fname>
+   _get_metadata_from_name <SharedNumpyStore._get_metadata_from_name>
+   get_expected_file_length <SharedNumpyStore.get_expected_file_length>
+   _get_fname_from_metadata <SharedNumpyStore._get_fname_from_metadata>
+   _get_fname <SharedNumpyStore._get_fname>
+   save <SharedNumpyStore.save>
+   flush <SharedNumpyStore.flush>
+   close <SharedNumpyStore.close>
+   append_save <SharedNumpyStore.append_save>
+   load <SharedNumpyStore.load>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore(working_dir)
+   
+   Store numpy arrays on disk and share them between processes.
+
+   This class is used to store numpy arrays on disk and share them between processes using shared memory.
+
+   .. warning:: This class provides no way to reload data if it has changed on disk.
+
+   :Parameters: **working_dir** (*str*) -- The path of the working directory to store numpy arrays.
+
+   :Attributes:
+
+   .. attribute:: working_dir
+
+      The path of the working directory to store numpy arrays.
+
+      :type: str
+
+   .. attribute:: _suffix
+
+      A unique suffix for the working directory.
+
+      :type: str
+
+   .. attribute:: _shared_memory_buffers
+
+      A dictionary containing all already loaded buffers and arrays.
+
+      :type: dict
+
+   .. attribute:: _pending_renames
+
+      A dictionary containing all pending renames for files.
+
+      :type: dict
+
+   .. attribute:: _files
+
+      A dictionary mapping array names to filepaths in shared memory.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`update <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.update>`\ ()
+        - Update the list of files in the working directory.
+      * - :py:obj:`_get_metadata_from_fname <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_fname>`\ (fname)
+        - :summarylabel:`static` Get metadata from a filename that follows the convention of NumpyStore.
+      * - :py:obj:`_get_metadata_from_name <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_name>`\ (name)
+        - Get metadata from a name that follows the convention of NumpyStore.
+      * - :py:obj:`get_expected_file_length <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.get_expected_file_length>`\ (name)
+        - Get the expected length in bytes of a file given its metadata (shape and dtype).
+      * - :py:obj:`_get_fname_from_metadata <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname_from_metadata>`\ (name, shape, dtype)
+        - Get the filename from metadata.
+      * - :py:obj:`_get_fname <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname>`\ (arr, name)
+        - Get the filename of an array.
+      * - :py:obj:`save <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save>`\ (arr, name)
+        - Save a numpy array to disk at the working_dir of this instance of NumpyStore.
+      * - :py:obj:`flush <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.flush>`\ ()
+        - Rename all files according to the new names in :paramref:`_pending_renames`.
+      * - :py:obj:`close <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.close>`\ ()
+        - Close all shared memory objects and remove them from the dictionary.
+      * - :py:obj:`append_save <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.append_save>`\ (arr, name, autoflush)
+        - Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+      * - :py:obj:`load <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load>`\ (name, mode, start\_row, end\_row, allow\_create\_shm)
+        - Load an array from shared memory.
+

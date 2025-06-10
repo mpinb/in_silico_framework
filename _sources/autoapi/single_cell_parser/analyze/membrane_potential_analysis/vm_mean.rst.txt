@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.vm_mean`
+
+
+.. title:
+
+vm_mean
+=======
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.vm_mean(vVec, tVec, tStim, dtStim)
+
+   Computes the mean voltage during a stimulation time window
+
+   :Parameters: * **vVec** (*list*) -- voltage vector
+                * **tVec** (*list*) -- time vector
+                * **tStim** (*float*) -- start time of stimulation
+                * **dtStim** (*float*) -- duration of stimulation
+
+   :returns: mean voltage during stimulation time window
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

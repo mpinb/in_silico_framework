@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell.play`
+
+PointCell.play
+==============
+
+.. py:method:: single_cell_parser.cell.PointCell.play()
+
+   Activate point cell
+

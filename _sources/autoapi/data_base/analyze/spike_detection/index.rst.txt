@@ -1,0 +1,40 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection`
+
+spike_detection
+===============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   spike_in_interval </autoapi/data_base/analyze/spike_detection/spike_in_interval>
+   _helper </autoapi/data_base/analyze/spike_detection/_helper>
+   spike_detection </autoapi/data_base/analyze/spike_detection/spike_detection>
+
+.. py:module:: data_base.analyze.spike_detection
+
+.. autoapi-nested-parse::
+   Detect spikes from :ref:`voltage_traces_format` dataframes.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`spike_in_interval <data_base.analyze.spike_detection.spike_in_interval>`\ (st, tmin, tmax)
+     - Check whether each trial contains at least one spike within the specified interval
+   * - :py:obj:`spike_detection <data_base.analyze.spike_detection.spike_detection>`\ (ddf, scheduler, threshold)
+     - Detect spikes in a dask :ref:`voltage_traces_df_format`.
+
+

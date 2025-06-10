@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer`
+
+PointCell._add_synapse_pointer
+==============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer(synapse)
+
+   Add a synapse to the cell.
+
+   NEURON's :cite:`hines2001neuron` Python hoc interface
+   provides pointers to synapses, rather than the full object.
+
+   :Parameters: **synapse** (*nrn.synapse*) -- Synapse object.
+

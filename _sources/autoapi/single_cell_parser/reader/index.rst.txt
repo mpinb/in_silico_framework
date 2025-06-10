@@ -1,0 +1,72 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader`
+
+reader
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _Edge </autoapi/single_cell_parser/reader/_Edge>
+   read_hoc_file </autoapi/single_cell_parser/reader/read_hoc_file>
+   read_scalar_field </autoapi/single_cell_parser/reader/read_scalar_field>
+   read_synapse_realization </autoapi/single_cell_parser/reader/read_synapse_realization>
+   read_pruned_synapse_realization </autoapi/single_cell_parser/reader/read_pruned_synapse_realization>
+   read_functional_realization_map </autoapi/single_cell_parser/reader/read_functional_realization_map>
+   read_synapse_activation_file </autoapi/single_cell_parser/reader/read_synapse_activation_file>
+   read_complete_synapse_activation_file </autoapi/single_cell_parser/reader/read_complete_synapse_activation_file>
+   read_spike_times_file </autoapi/single_cell_parser/reader/read_spike_times_file>
+   read_synapse_weight_file </autoapi/single_cell_parser/reader/read_synapse_weight_file>
+   read_landmark_file </autoapi/single_cell_parser/reader/read_landmark_file>
+
+.. py:module:: single_cell_parser.reader
+
+.. autoapi-nested-parse::
+   Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
+
+   .. deprecated::
+       This module additionally provides readers for :ref:`syn_activation_format` and :ref:`spike_times_format` files.
+       However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
+       They can still be explicitly read using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+
+       See also:
+           :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_hoc_file <single_cell_parser.reader.read_hoc_file>`\ (fname)
+     - Reads a hoc file and returns a list of Edge objects.
+   * - :py:obj:`read_scalar_field <single_cell_parser.reader.read_scalar_field>`\ (fname)
+     - Read AMIRA scalar fields.
+   * - :py:obj:`read_synapse_realization <single_cell_parser.reader.read_synapse_realization>`\ (fname)
+     - Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
+   * - :py:obj:`read_pruned_synapse_realization <single_cell_parser.reader.read_pruned_synapse_realization>`\ (fname)
+     - Read in a :ref:`syn_file_format` and returns a dictionary of synapse locations and whether they are pruned or not.
+   * - :py:obj:`read_functional_realization_map <single_cell_parser.reader.read_functional_realization_map>`\ (fname)
+     - Read in a :ref:`con_file_format` file and return a dictionary of functional connections.
+   * - :py:obj:`read_synapse_activation_file <single_cell_parser.reader.read_synapse_activation_file>`\ (fname)
+     - Reads list of all functional synapses and their activation times.
+   * - :py:obj:`read_complete_synapse_activation_file <single_cell_parser.reader.read_complete_synapse_activation_file>`\ (fname)
+     - Reads list of all functional synapses and their activation times.
+   * - :py:obj:`read_spike_times_file <single_cell_parser.reader.read_spike_times_file>`\ (fname)
+     - Reads all trials and spike times within these trials.
+   * - :py:obj:`read_synapse_weight_file <single_cell_parser.reader.read_synapse_weight_file>`\ (fname)
+     - Reads list of all anatomical synapses and their maximum conductance values.
+   * - :py:obj:`read_landmark_file <single_cell_parser.reader.read_landmark_file>`\ (landmarkFilename)
+     - Read an AMIRA landmark file
+
+

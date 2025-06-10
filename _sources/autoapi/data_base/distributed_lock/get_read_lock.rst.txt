@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.get_read_lock`
+
+
+.. title:
+
+get_read_lock
+=============
+
+
+.. py:function:: data_base.distributed_lock.get_read_lock(name)
+
+   Fetch the correct read lock, depending on global locking server configuration.
+
+   :Parameters: **name** (*str*) -- The name of the lock.
+
+   :returns:     The lock object.
+   :rtype: :py:class:`~data\_base.distributed\_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.Lock`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

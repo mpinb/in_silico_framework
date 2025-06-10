@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`
+
+SynapseMapper.create_synapses
+=============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses(preType='Generic')
+
+   Creates instantiation of synapses on cell from synapse distribution.
+
+   Iterates the cell structures (e.g. "Soma", "Dendrite", "ApicalDendrite").
+   For each structure, creates a list of synapses per voxel by poisson sampling the synapse distribution mesh.
+   Randomly assignes these synapses to any point on the morphology that lies within the same voxel.
+
+   :Parameters: **preType** (*str*) -- Type of presynaptic cell. Default is 'Generic'.
+
+   :returns: list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
+             Also updates the :paramref:`cell` attribute to contain synapses.
+   :rtype: list
+

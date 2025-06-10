@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_width`
+
+BAC.BAC_caSpike_width
+=====================
+
+.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_width(voltage_traces)
+
+   Get the width of the calcium spike in the dendritic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_1_Ca_AP"`` to whether there is at least one calcium spike in the dendritic voltage trace,
+                 and ``".raw"`` to the width of the calcium spike in the dendritic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:func:`BAC_caSpike_width`
+

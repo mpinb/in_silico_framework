@@ -1,0 +1,51 @@
+
+:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter`
+
+_figure_array_converter
+=======================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   PixelObject </autoapi/visualize/_figure_array_converter/PixelObject>
+   show_pixel_object </autoapi/visualize/_figure_array_converter/show_pixel_object>
+   fig2np </autoapi/visualize/_figure_array_converter/fig2np>
+
+.. py:module:: visualize._figure_array_converter
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`PixelObject <visualize._figure_array_converter.PixelObject>`
+     - Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`show_pixel_object <visualize._figure_array_converter.show_pixel_object>`\ (pixelObject, ax)
+     - Displays a PixelObject on an axis
+   * - :py:obj:`fig2np <visualize._figure_array_converter.fig2np>`\ (fig)
+     - Converts fig-object to pixels as numpy arrays.
+
+

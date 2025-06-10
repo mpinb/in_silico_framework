@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.temporal_binning_augmented_sa`
+
+
+.. title:
+
+temporal_binning_augmented_sa
+=============================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.temporal_binning_augmented_sa(sa_augmented, min_time, max_time, bin_size, use_weights=False)
+
+   Bin synapse activation times into temporal bins.
+
+   :Parameters: * **sa\_augmented** (*pd.DataFrame*) -- Augmented synapse activation dataframe
+                * **min\_time** (*int*) -- Min time in ms
+                * **max\_time** (*int*) -- Max time in ms
+                * **bin\_size** (*int*) -- Size of the time bins
+                * **use\_weights** (*bool, optional*) -- If True, weigh the synapse activation times with the corresponding synapse weights.
+                  Defaults to False.
+
+   :returns: A tuple containing the bin borders and the histogram of synapse activation times.
+   :rtype: tuple
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.augment\_synapse\_activation\_df\_with\_branch\_bin`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.load_NMODL_parameters`
+
+
+.. title:
+
+load_NMODL_parameters
+=====================
+
+
+.. py:function:: single_cell_parser.parameters.load_NMODL_parameters(parameters)
+
+   Load NMODL mechanisms from paths in parameter file.
+
+   Parameters are added to the NEURON namespace by executing string Hoc commands.
+
+   See also: https://www.neuron.yale.edu/neuron/static/new\_doc/programming/neuronpython.html#important-names-and-sub-packages
+
+   :Parameters: **parameters** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The neuron parameters to load.
+                Must contain the key `NMODL\_mechanisms`.
+                May contain the key `mech\_globals`.
+
+   :returns: None. Adds parameters to the NEURON namespace.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

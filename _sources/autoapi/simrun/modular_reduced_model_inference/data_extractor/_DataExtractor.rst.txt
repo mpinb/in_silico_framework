@@ -1,0 +1,45 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_DataExtractor
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <_DataExtractor.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor
+   
+   Simple base class for data extractors.
+
+   Child classes must implement ``get`` and ``setup`` methods.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <simrun.modular_reduced_model_inference.data_extractor._DataExtractor.setup>`\ (Rm)
+        - Setup necessary parameters, depending on which RM is passed
+

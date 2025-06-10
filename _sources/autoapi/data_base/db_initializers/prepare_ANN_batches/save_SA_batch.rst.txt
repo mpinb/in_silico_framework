@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.save_SA_batch`
+
+
+.. title:
+
+save_SA_batch
+=============
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.save_SA_batch(sa_, selected_stis, batch_id, outdir=None, section_distances_df=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, synaptic_weight_dict=None)
+
+   Save a batch of synapse activation times to a file.
+
+   :Parameters: * **sa\_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
+                * **selected\_stis** (*list*) -- List of selected spike times
+                * **batch\_id** (*int*) -- Batch id
+                * **outdir** (*str*) -- Output directory
+                * **section\_distances\_df** (*pd.DataFrame, optional*) -- DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+                * **spatial\_bin\_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
+                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 600.
+                * **bin\_size** (*int, optional*) -- Size of the time bins. Defaults to 1.
+
+   :returns: A dask delayed object. When computed, saves the synapse activation times to :paramref:`outdir`/batch\_:paramref:`batch\_id`\_SYNAPSE\_ACTIVATION.npy.
+   :rtype: dask.delayed
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

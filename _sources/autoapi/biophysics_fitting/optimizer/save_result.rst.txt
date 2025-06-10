@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.save_result`
+
+
+.. title:
+
+save_result
+===========
+
+
+.. py:function:: biophysics_fitting.optimizer.save_result(db_run, features, objectives)
+
+   Save the results of an optimization iteration in a database.
+
+   :Parameters: * **db\_run** (*data\_base.DataBase*) -- The database.
+                * **features** (*pd.DataFrame*) -- The features of the optimization iteration.
+                * **objectives** (*pd.DataFrame*) -- The objectives of the optimization iteration.
+
+   :returns: None. The results are saved in the database.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

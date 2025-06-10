@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.flatten`
+
+
+.. title:
+
+flatten
+=======
+
+
+.. py:function:: data_base.utils.flatten(l)
+
+   Flatten a nested list
+
+   :Parameters: **l** (*list*) -- the list
+
+   :Yields: *any* -- the elements of the list
+
+   .. seealso:: https://stackoverflow.com/a/2158532/5082048
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

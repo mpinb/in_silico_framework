@@ -1,0 +1,146 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+CellMorphologyVisualizer
+========================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _write_png_timeseries <CellMorphologyVisualizer._write_png_timeseries>
+   plot <CellMorphologyVisualizer.plot>
+   write_gif <CellMorphologyVisualizer.write_gif>
+   write_video <CellMorphologyVisualizer.write_video>
+   animation <CellMorphologyVisualizer.animation>
+   write_vtk_frames <CellMorphologyVisualizer.write_vtk_frames>
+   to_vtk <CellMorphologyVisualizer.to_vtk>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer(cell, align_trunk=True, t_start=None, t_stop=None, t_step=None)
+   
+   Plot a cell morphology using matplotlib.
+
+   Plots static images or time series (videos, gif, animation, interactive window) of a biophysically detailed simulation on a cell morphology.
+   Plots out:
+
+   - Morpholgy
+   - Membrane voltage
+   - Ion dynamics
+   - Synapse activations
+   - Dendritic groups
+
+   The relevant cell information can also be exported to .vtk format for further visualization or interaction.
+   No explicit VTK dependency is needed for this; it simply writes it out as an ASCII .vtk file.
+
+   Initializes the CellMorphologyVisualizer object.
+
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object
+                * **align_trunk** (*bool*) -- Whether or not to align the cell trunk with the z-axis.
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time between the different time points of our visualization
+
+   .. note::
+
+      :paramref:`align_trunk` assumes the cell has a trunk, which is defined as the dendrite between the soma
+      and the main bifurcation section.
+
+   .. seealso:: :meth:`~biophysics_fitting.get_main_bifurcation_section`.
+
+   :Attributes:
+
+   .. attribute:: camera_position
+
+      Camera angles and distance for matplotlib 3D visualizations.
+      Possible keys: 'azim', 'dist', 'elev', 'roll'
+      See also: https://matplotlib.org/stable/api/toolkits/mplot3d/view_angles.html
+
+      :type: dict
+
+   .. attribute:: neuron_rotation
+
+      Amount of degrees the azimuth increases per frame in a timeseries visualization.
+
+      :type: float
+
+   .. attribute:: dpi
+
+      Image quality
+      Default: 72
+
+      :type: int
+
+   .. attribute:: show_synapses
+
+      Whether or not to visualize the location of synapses onto the cell.
+
+      :type: bool
+
+   .. attribute:: synapse_legend
+
+      whether the synapse activations legend should appear in the plot
+
+      :type: bool
+
+   .. attribute:: highlight_arrow_kwargs
+
+      Additional arguments for the arrow.
+      See available kwargs on https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow
+
+      :type: dict
+
+   .. attribute:: synapse_group_function
+
+      Method to group synapse types.
+      Must accept a name (str) as argument, and return a group name (str) as output.
+      Default: `lambda x: x`
+
+      :type: callable
+
+   .. attribute:: population_to_color_dict
+
+      Dictionary to map synapse group names (str) to colors
+      Must contain the same keys as self.cell.synapses.keys() after being passed through self.synapse_group_function
+      default: {}
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_write_png_timeseries <visualize.cell_morphology_visualizer.CellMorphologyVisualizer._write_png_timeseries>`\ (path, overwrite\_frames, color, show\_synapses, show\_legend, client, highlight\_section, highlight\_x)
+        - Creates a list of images where a neuron morphology color-coded with voltage together with synapse activations are
+      * - :py:obj:`plot <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot>`\ (color, show\_legend, show\_synapses, time\_point, save, highlight\_section, highlight\_x)
+        - Plot the cell morphology in 3D.
+      * - :py:obj:`write_gif <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_gif>`\ (images\_path, out\_name, color, show\_synapses, show\_legend, client, t\_start, t\_stop, t\_step, highlight\_section, highlight\_x, overwrite\_frames, tpf)
+        - Creates a set of images where a neuron morphology color-coded with voltage together with synapse activations are
+      * - :py:obj:`write_video <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_video>`\ (images\_path, out\_name, overwrite\_frames, color, show\_synapses, show\_legend, client, t\_start, t\_stop, t\_step, highlight\_section, highlight\_x, quality, codec, tpf)
+        - Write the individual frames of a neuron during a simulation and merge them into a video.
+      * - :py:obj:`animation <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.animation>`\ (images\_path, overwrite\_frames, color, show\_synapses, show\_legend, client, t\_start, t\_stop, t\_step, highlight\_section, highlight\_x, display, tpf)
+        - Show an animation of the simulated neuron.
+      * - :py:obj:`write_vtk_frames <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames>`\ (out\_name, out\_dir, t\_start, t\_stop, t\_step, color, n\_decimals, client)
+        - Write the cell morphology to a series of VTK files.
+      * - :py:obj:`to_vtk <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk>`\ (out\_dir, fn)
+        - Write out the cell morphology to a VTK file.
+

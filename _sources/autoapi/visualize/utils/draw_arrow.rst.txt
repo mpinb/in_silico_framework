@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.draw_arrow`
+
+
+.. title:
+
+draw_arrow
+==========
+
+
+.. py:function:: visualize.utils.draw_arrow(morphology, ax, highlight_section=None, highlight_x=None, highlight_arrow_kwargs=None, arrow_size=50)
+
+   Highlight a morphology section with an :py:class:`Arrow3D`.
+
+   This method is used by :py:class:`CellMorphologyVisualizer` to annotate morphology sections.
+
+   :Parameters: * **morphology** (*pd.DataFrame*) -- The morphology dataframe containing the coordinates of the sections.
+                * **ax** (*matplotlib.axes.Axes*) -- The matplotlib axes object to draw the arrow on.
+                * **highlight\_section** (*int, optional*) -- The section index to highlight. If None, no section is highlighted. Default is ``None``.
+                * **highlight\_x** (*float, optional*) -- The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
+                * **highlight\_arrow\_kwargs** (*dict, optional*) -- Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+                * **arrow\_size** (*int, optional*) -- The size of the arrow. Default is 50.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

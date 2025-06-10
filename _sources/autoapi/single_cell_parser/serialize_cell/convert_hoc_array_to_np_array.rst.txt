@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.serialize_cell` ❭ :mod:`~single_cell_parser.serialize_cell.convert_hoc_array_to_np_array`
+
+
+.. title:
+
+convert_hoc_array_to_np_array
+=============================
+
+
+.. py:function:: single_cell_parser.serialize_cell.convert_hoc_array_to_np_array(hoc_array)
+
+   Convert hoc array to list of lists
+
+   :Parameters: **hoc\_array** -- hoc array
+
+   :returns: list of lists
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

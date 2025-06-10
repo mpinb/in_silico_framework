@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins`
+
+
+.. title:
+
+get_neighboring_spatial_bins
+============================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins(cell, bin_id, section_distances_df)
+
+   Get all the neighboring bins from a :paramref:`bin\_id`.
+
+   :Parameters: * **cell** (*cell*) -- cell object
+                * **bin\_id** (*\_type\_*) -- Bin id of format: ``"section\_id/bin\_id"``
+                * **section\_distances\_df** (*pd.DataFrame*) -- DataFrame representing each section's spatial bins and binsizes.
+
+   :returns: list of all ids of bins that neighbor the given bin
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

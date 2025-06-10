@@ -1,0 +1,62 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer`
+
+cell_morphology_visualizer
+==========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   CMVDataParser </autoapi/visualize/cell_morphology_visualizer/CMVDataParser>
+   CellMorphologyVisualizer </autoapi/visualize/cell_morphology_visualizer/CellMorphologyVisualizer>
+   CellMorphologyInteractiveVisualizer </autoapi/visualize/cell_morphology_visualizer/CellMorphologyInteractiveVisualizer>
+   get_3d_plot_morphology </autoapi/visualize/cell_morphology_visualizer/get_3d_plot_morphology>
+
+.. py:module:: visualize.cell_morphology_visualizer
+
+.. autoapi-nested-parse::
+   Plot out the cell morphology and its activity during a simulation.
+
+   Provides functionality to plot out the cell morphology and its simulation data.
+   This includes the cell morphology, membrane voltage, ion dynamics, and synapse activations.
+   The data is parsed from a :py:class:`~single_cell_parser.cell.Cell` object to a format that is easier to work with for visualization purposes.
+   The data is then visualized using matplotlib (:py:class:`CellMorphologyVisualizer`) and plotly (:py:class:`CellMorphologyInteractiveVisualizer`).
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`CMVDataParser <visualize.cell_morphology_visualizer.CMVDataParser>`
+     - Parse data from a :py:class:`~single_cell_parser.cell.Cell` object to a format that is easier to work with for visualization purposes.
+   * - :py:obj:`CellMorphologyVisualizer <visualize.cell_morphology_visualizer.CellMorphologyVisualizer>`
+     - Plot a cell morphology using matplotlib.
+   * - :py:obj:`CellMorphologyInteractiveVisualizer <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer>`
+     - Plot an interactive 3D render of a cell morphology using Plotly and Dash.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_3d_plot_morphology <visualize.cell_morphology_visualizer.get_3d_plot_morphology>`\ (lookup\_table, colors, color\_keyword, synapses, time\_point, highlight\_section\_kwargs, camera\_position, dpi, population\_to\_color\_dict, save, plot, synapse\_legend, legend, return\_figax, proj\_type)
+     - Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
+
+

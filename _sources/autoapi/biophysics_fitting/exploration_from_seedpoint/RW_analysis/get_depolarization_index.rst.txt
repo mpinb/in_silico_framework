@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_depolarization_index`
+
+
+.. title:
+
+get_depolarization_index
+========================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_depolarization_index(dataframe)
+
+   Compute the relative difference in depolarization contribution of Ca\_LVA and Ca\_HVA during the BAC stimulus.
+
+   This index is defined as:
+
+   .. math::
+
+       \frac{Ca\_{LVA} - Ca\_{HVA}}{Ca\_{HVA} + Ca\_{LVA}}
+
+   :Parameters: **dataframe** (*pd.DataFrame*) -- the dataframe containing the biophysical parameters
+
+   :returns: the depolarization index for each model in the dataframe
+   :rtype: pd.Series
+
+   .. note:: This method is specific to L5PT neurons, or any cell with Ca\_LVA and Ca\_HVA channels.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

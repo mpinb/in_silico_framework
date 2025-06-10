@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._get_str`
+
+ISFDataBase._get_str
+====================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._get_str(depth=0, max_depth=2, max_lines=20, all_files=False, max_lines_per_key=3, color=True)
+
+   Fetches a string representation for this db in a tree structure.
+
+   This is internal API and should never be called directly.
+
+   :Parameters: * **max_depth** (*int, optional*) -- How deep you want the filestructure to be. Defaults to 2.
+                * **max_lines** (*int, optional*) -- How long you want your total filelist to be. Defaults to 20.
+                * **max_lines_per_key** (*int, optional*) -- How many lines to print per key. Useful to limit visual output of subdatabases. Defaults to 3.
+                * **all_files** (*bool, optional*) -- Whether to print all files (including e.g. ``Loader.json``), or only keys. Defaults to False.
+
+   :returns: A string representation of this db in a tree structure.
+   :rtype: str
+

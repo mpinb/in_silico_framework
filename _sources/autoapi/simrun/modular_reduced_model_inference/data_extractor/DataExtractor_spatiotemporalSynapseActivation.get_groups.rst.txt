@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_groups`
+
+DataExtractor_spatiotemporalSynapseActivation.get_groups
+========================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_groups()
+
+   Get all groups (other than spatial binning)
+
+   :returns: Set of groups that define how the synapse activations are grouped.
+   :rtype: set
+

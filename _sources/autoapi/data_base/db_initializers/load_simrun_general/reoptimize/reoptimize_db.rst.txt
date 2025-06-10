@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db`
+
+
+.. title:
+
+reoptimize_db
+=============
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warnings=False)
+
+   Re-optimize a database with a new dumper.
+
+   This function will re-optimize all keys in the database that are configured to be re-optimized.
+   This is useful for switching between different data formats, such as from `parquet` to `msgpack`.
+
+   It recurses into subdatabases, and re-optimizes them as well.
+
+   :Parameters: * **db** (:py:mod:`~data\_base.data\_base.isf\_data\_base.ISFDataBase`) -- The database to re-optimize.
+                * **client** (*dask.distributed.Client*) -- The dask client to use for re-optimizing the database.
+                * **progress** (*bool*) -- If True, show a progress bar for the re-optimization.
+                  Subdatabases have nested progress bars.
+                  It is recommended to also suppress warnings when using progress bars, so
+                  the output stays readable.
+                * **suppress\_warnings** (*bool*) -- If True, suppress warnings during re-optimization.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

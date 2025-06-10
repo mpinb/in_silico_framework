@@ -1,0 +1,51 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.run_existing_synapse_activations` ❭ :mod:`~simrun.run_existing_synapse_activations.run_existing_synapse_activations`
+
+
+.. title:
+
+run_existing_synapse_activations
+================================
+
+
+.. py:function:: simrun.run_existing_synapse_activations.run_existing_synapse_activations(cellParamName, evokedUpParamName, synapseActivation, simName=&#39;&#39;, dirPrefix=&#39;&#39;, nprocs=40, tStop=345, silent=True, scale_apical=None, post_hook={}, auto_organize_results_folder=True, cell_generator=None)
+
+   Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`syn\_activation\_format` files.
+
+   :Parameters: * **cellParamName** (*str*) -- Path to a :ref:`cell\_parameters\_format` file
+                * **evokedUpParamName** (*str*) -- Path to a :ref:`network\_parameters\_format` file
+                * **synapseActivationGlob** (*list*) -- List of paths to :ref:`syn\_activation\_format` files or globstring
+                * **dirprefix** (*str*) -- Path to the directory where the simulation results should be stored.
+                * **nSweeps** (*int*) -- Number of synapse activations per process.
+                * **nprocs** (*int*) -- Number of independent processes
+                * **tStop** (*float*) -- Time in ms at which the synaptic input should stop.
+                * **silent** (*bool*) -- If True, suppresses all output.
+                * **scale\_apical** (*float, DEPRECATED*) -- Scaling factor for the apical dendrite.
+                * **post\_hook** (*dict*) -- Dictionary of functions that are called after the simulation.
+                * **auto\_organize\_results\_folder** (*bool*) -- If True, the results are stored in a subfolder of the results folder.
+                * **cell\_generator** (*function*) -- Function that generates a cell object.
+
+   :returns: Delayed object. Can be computed with arbitrary scheduler.
+   :rtype: dask.delayed
+
+   :raises NotImplementedError: If nprocs is not equal to 1.
+   :raises RuntimeError: If no files are found on the specified location.
+   :raises AssertionError: If synapseActivation is not a list.
+
+   .. deprecated:: 0.1
+       The `scale\_apical` argument is deprecated and will be removed in a future version.
+       Use the ``cell\_modify\_functions`` key in the :ref:`cell\_parameters\_format` file instead.
+
+   .. seealso::
+
+      :py:meth:`simrun,rerun\_db.rerun\_db` to rerun simulations from a database, instead of a list
+      of synapse activation files.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

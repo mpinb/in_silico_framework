@@ -1,0 +1,77 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network`
+
+network
+=======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   NetworkMapper </autoapi/single_cell_parser/network/NetworkMapper>
+   activate_functional_synapse </autoapi/single_cell_parser/network/activate_functional_synapse>
+   sample_times_from_rates </autoapi/single_cell_parser/network/sample_times_from_rates>
+
+.. py:module:: single_cell_parser.network
+
+.. autoapi-nested-parse::
+   Connect and activate presynaptic neuron populations.
+
+   This module either creates or reads in an existing network realization, and connects the synapses
+   to presynaptic cells with known cell type and activity patterns. A network realization
+   (or anatomical realization) with known presynaptic origin is referred to as a functional realization.
+   The result of a network activation is a :ref:`syn_activation_format` file.
+
+   Reading existing network realizations
+   -------------------------------------
+   Network realizations that have been created with :py:mod:`~singlecell_input_mapper`'s :py:mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding`
+   can be read in here using the method :py:meth:`create_saved_network2`.
+   This approach allows for the most fine-grained control over the network realization, as it offloads all the network embedding details to the specialized
+   :py:mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` module.
+
+   Creating new network realizations
+   ---------------------------------
+   Creating a new network realization from scratch can be done using the ``convergence`` parameter in the
+   :ref:`network_parameters_format` file.
+   Convergence is the probability of a connection existing between the :py:class:`~single_cell_parser.cell.Cell` and a presynaptic cell.
+   It is specific for each presynaptic cell type, and depends on the postsynaptic cell type.
+   This approach is used by :py:meth:`~single_cell_parser.network_mapper.NetworkMapper.create_functional_realization`
+   and :py:meth:`~single_cell_parser.network_mapper.NetworkMapper.create_network`.
+
+   .. seealso:: :py:mod:`~singlecell_input_mapper.singlecell_input_mapper`.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`NetworkMapper <single_cell_parser.network.NetworkMapper>`
+     - Map active presynaptic cells to a multi-compartmental neuron model.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`activate_functional_synapse <single_cell_parser.network.activate_functional_synapse>`\ (syn, cell, preSynCell, synParameters, tChange, synParametersChange, forceSynapseActivation, releaseTimes)
+     - Activate a single synapse.
+   * - :py:obj:`sample_times_from_rates <single_cell_parser.network.sample_times_from_rates>`\ (bins, rate)
+     - Sample spike times from spike rates.
+
+

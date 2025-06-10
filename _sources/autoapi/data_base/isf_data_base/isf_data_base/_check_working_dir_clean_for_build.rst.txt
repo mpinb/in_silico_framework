@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base._check_working_dir_clean_for_build`
+
+
+.. title:
+
+_check_working_dir_clean_for_build
+==================================
+
+
+.. py:function:: data_base.isf_data_base.isf_data_base._check_working_dir_clean_for_build(working_dir)
+
+   Check if a directory is suitable to build a new database.
+
+   :Parameters: **working\_dir** (*str*) -- The path to the directory to check.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally`
+
+
+.. title:
+
+run_delayeds_incrementally
+==========================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally(client, delayeds)
+
+   Convenience method to run a list of dask delayed objects incrementally.
+
+   Run dask delayed objects incrementally in chunks.
+
+   :Parameters: * **client** (:py:class:`~dask.distributed.client.Client`) -- The dask client object.
+                * **delayeds** (*list*) -- List of dask delayed objects.
+
+   :returns: List of futures.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

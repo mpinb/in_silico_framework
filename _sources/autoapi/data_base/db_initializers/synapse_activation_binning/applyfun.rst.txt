@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+
+
+.. title:
+
+applyfun
+========
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.applyfun(pdf, maxtime=None)
+
+   Bin the synapse activations using :py:meth:`~data\_base.analyze.temporal\_binning.universal`.
+
+   This is used by default during the binning of synapse activations.
+
+   :Parameters: * **pdf** (:py:class:`pandas.DataFrame`) -- synapse activation dataframe
+                * **maxtime** (*int*) -- The maximum time of the synapse activations.
+
+   :returns: The binned synapse activations.
+   :rtype: numpy.array
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.init`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

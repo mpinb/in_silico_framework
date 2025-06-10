@@ -1,0 +1,78 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model`
+
+reduced_lda_model
+=================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Loader </autoapi/data_base/isf_data_base/IO/LoaderDumper/reduced_lda_model/Loader>
+   check </autoapi/data_base/isf_data_base/IO/LoaderDumper/reduced_lda_model/check>
+   dump </autoapi/data_base/isf_data_base/IO/LoaderDumper/reduced_lda_model/dump>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model
+
+.. autoapi-nested-parse::
+   Read and write a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`.
+
+   During saving, the data undergoes the following changes:
+
+   - Spike times and lda values are kept with an accuracy of :math:`.01`.
+   - The index of the spike times is reset, i.e. the ``sim_trial_index`` is not kept.
+   - The :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` attribute ``db_list``, which normally contains ``DataBase`` instances,
+     is replaced by a list of strings that only contain the unique_id of each database.
+     This prevents unpickling errors in case the ``DataBase`` has been removed.
+   - Older versions of reduced models do not have the attribute `st`.
+     They are stored with an empty dataframe (``Rm.st = pd.DataFrame()``) to be compliant with the new version.
+
+   The output is a database with the following keys:
+
+   .. list-table:: Database keys
+      :header-rows: 1
+
+      * - Key
+        - Description
+      * - ``st``
+        - Spike times with a precision of :math:`.01`.
+      * - ``lda_value_dicts_<index>``
+        - Dictionaries of LDA values with a precision of :math:`.01`.
+      * - ``Rm``
+        - The reduced model.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Loader <data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model.Loader>`
+     - Loader for :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`check <data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model.check>`\ (obj)
+     - Check whether the object can be saved with this dumper
+   * - :py:obj:`dump <data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model.dump>`\ (obj, savedir)
+     - Save the reduced model in the specified directory as a DataBase.
+
+

@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.utils` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.utils.read_object_meta`
+
+
+.. title:
+
+read_object_meta
+================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.utils.read_object_meta(savedir, raise_=True)
+
+   Get the metadata associated with a saved object.
+
+   Parquet dumpers convert column names to strings, which changes the dtype upon reading back in.
+   Dask dumpers need a meta object to know the dtypes of the columns, including the values.
+
+   :Parameters: **savedir** (*str*) -- The directory where the meta file is stored.
+
+   :returns: The metadata of the saved object.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

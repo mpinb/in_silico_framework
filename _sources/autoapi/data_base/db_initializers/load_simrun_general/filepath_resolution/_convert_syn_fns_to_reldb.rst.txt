@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb`
+
+
+.. title:
+
+_convert_syn_fns_to_reldb
+=========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb(syn_content, hoc_fn_map)
+
+   Copy, rename and transform a single :ref:`syn\_file\_format` file.
+
+   The :ref:`syn\_file\_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
+
+   :Parameters: * **syn\_fn** (*str*) -- Path to the synapse distribution file.
+                * **new\_hoc** (*str*) -- Path to the new hoc file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

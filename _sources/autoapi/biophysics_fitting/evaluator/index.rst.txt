@@ -1,0 +1,39 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator`
+
+evaluator
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Evaluator_Setup </autoapi/biophysics_fitting/evaluator/Evaluator_Setup>
+   Evaluator </autoapi/biophysics_fitting/evaluator/Evaluator>
+
+.. py:module:: biophysics_fitting.evaluator
+
+.. autoapi-nested-parse::
+   Extract features from voltage traces.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Evaluator_Setup <biophysics_fitting.evaluator.Evaluator_Setup>`
+     - Setup for an :py:class:`~Evaluator` object
+   * - :py:obj:`Evaluator <biophysics_fitting.evaluator.Evaluator>`
+     - Extract features from voltage traces.
+
+
+

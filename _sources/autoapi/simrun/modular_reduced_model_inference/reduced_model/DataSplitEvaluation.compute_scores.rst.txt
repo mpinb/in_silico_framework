@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores`
+
+DataSplitEvaluation.compute_scores
+==================================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores()
+
+   Compute the score of the optimization.
+
+   This method extracts the optimization results and computes the resulting score of the cost function.
+
+   .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.strategy.Strategy._objective_function` for the cost function.
+
+   :returns: DataFrame with the optimization results.
+   :rtype: pd.DataFrame
+

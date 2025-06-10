@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.get_upcross`
+
+
+.. title:
+
+get_upcross
+===========
+
+
+.. py:function:: spike_analysis.core.get_upcross(t, v, lim)
+
+   Finds the times and corresponding voltages of upcrossings of a given threshold.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **lim** (*float*) -- Threshold value.
+
+   :returns: Tuple containing arrays of time and voltage values at upcrossings.
+   :rtype: Tuple[numpy.ndarray, numpy.ndarray]
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

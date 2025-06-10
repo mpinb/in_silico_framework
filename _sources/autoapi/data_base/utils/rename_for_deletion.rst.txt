@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.rename_for_deletion`
+
+
+.. title:
+
+rename_for_deletion
+===================
+
+
+.. py:function:: data_base.utils.rename_for_deletion(key)
+
+   Renames some key to indicate it's in the process of being deleted.
+
+   :Parameters: **key** (*pathlib.Path*) -- The key
+
+   :returns: The renamed key
+   :rtype: pathlib.Path
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

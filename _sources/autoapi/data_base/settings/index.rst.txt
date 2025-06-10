@@ -1,0 +1,21 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.settings`
+
+settings
+========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+
+.. py:module:: data_base.settings
+
+.. autoapi-nested-parse::
+   Base settings of the data base
+
+
+
+

@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings`
+
+RecordingSiteManager.update_recordings
+======================================
+
+.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings()
+
+   Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :paramref:`recordingSites`.
+
+

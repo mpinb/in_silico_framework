@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.find_crossing`
+
+
+.. title:
+
+find_crossing
+=============
+
+
+.. py:function:: biophysics_fitting.ephys.find_crossing(v, thresh)
+
+   Original NEURON doc:
+   Function that giving a threshold returns a list of two vectors
+   The first is the crossing up of that threshold
+   The second is the crossing down of that threshold
+
+   :Parameters: * **v** (*array*) -- Voltage array.
+                * **thresh** (*float*) -- Threshold voltage (mV).
+
+   :returns: List of index vectors. One for upcrossing, one for downcrossing.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

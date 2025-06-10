@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._initialize`
+
+ISFDataBase._initialize
+=======================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._initialize()
+
+   Initialize the database.
+
+   Sets the following attributes:
+
+   - _unique_id
+   - _registeredDumpers
+   - _registered_to_path
+

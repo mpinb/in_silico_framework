@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_voltage_timeseries`
+
+CMVDataParser._calc_voltage_timeseries
+======================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_voltage_timeseries()
+
+   Retrieves voltage data along the whole cell body during a set of time points (specified in :paramref:`self.times_to_show`).
+   Fills the :paramref:`voltage_timeseries` attribute.
+   Only does so when it has not been computed yet.
+
+   :returns: Nothing. Updates the self.timeseries_voltage attribute
+

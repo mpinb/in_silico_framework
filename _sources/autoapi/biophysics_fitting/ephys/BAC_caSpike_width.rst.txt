@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_width`
+
+
+.. title:
+
+BAC_caSpike_width
+=================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_caSpike_width(t, v, v_dend, thresh=None)
+
+   Calculates the width of a calcium spike action potential.
+
+   :Parameters: * **t** (*array-like*) -- The time values of the action potential.
+                * **v** (*array-like*) -- The voltage values of the action potential.
+                * **v\_dend** (*array-like*) -- The voltage values of the dendrite.
+                * **thresh** (*float, optional*) -- The threshold voltage for the action potential.
+
+   :returns: The width of the calcium spike action potential.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

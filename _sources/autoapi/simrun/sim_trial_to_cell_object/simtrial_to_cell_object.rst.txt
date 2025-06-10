@@ -1,0 +1,56 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.sim_trial_to_cell_object` ❭ :mod:`~simrun.sim_trial_to_cell_object.simtrial_to_cell_object`
+
+
+.. title:
+
+simtrial_to_cell_object
+=======================
+
+
+.. py:function:: simrun.sim_trial_to_cell_object.simtrial_to_cell_object(db, sim_trial_index, compute=True, allPoints=False, scale_apical=None, range_vars=None, silent=True, neuron_param_modify_functions=[], network_param_modify_functions=[], synapse_activation_modify_functions=[], additional_network_params=[], tStop=345)
+
+   Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+
+   This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
+   before resimulating the trial. The network and neuron parameter modify functions should take the
+   respective parameter dictionaries as input and return the modified dictionaries.
+   Synapse activation modify functions should take the synapse activation data as input and return the modified data.
+
+   :Parameters: * **db** (:py:class:`data\_base.dataBase`) -- A simrun-initialized database object.
+                * **sim\_trial\_index** (*int*) -- Index of the simulation trial in the database.
+                * **range\_vars** (*str | list*) -- Range variables to record.
+                * **scale\_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrites.
+                * **allPoints** (*bool*) -- If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
+                * **compute** (*bool*) -- If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single\_cell\_parser.cell.Cell` object.
+                * **tStop** (*float*) -- Stop time of the simulation.
+                * **neuron\_param\_modify\_functions** (*list*) -- List of functions to modify the neuron parameters.
+                * **network\_param\_modify\_functions** (*list*) -- List of functions to modify the network parameters.
+                * **synapse\_activation\_modify\_functions** (*list*) -- List of functions to modify the synapse activation data.
+                * **silent** (*bool*) -- If True, suppress all output.
+
+   .. deprecated:: 0.1.0
+       The `scale\_apical` argument is deprecated and will be removed in a future version.
+       Use the `cell\_modify\_functions` key in the :ref:`cell\_parameters\_format` file instead.
+
+   .. seealso::
+
+      :py:func:`simrun.sim\_trial\_to\_cell\_object.trial\_to\_cell\_object`
+      to recreate a single simulation trial from parameter files instead of a database.
+
+   .. seealso::
+
+      :py:mod:`data\_base.db\_initializers.init\_simrun\_general` to initialize a database object
+      from raw `simrun` output, i.e. a "simrun-initialized" database object.
+
+   :returns: The simulation-ready or simulated cell object.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

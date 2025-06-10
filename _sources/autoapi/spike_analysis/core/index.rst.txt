@@ -1,0 +1,127 @@
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core`
+
+core
+====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   ReaderSmr </autoapi/spike_analysis/core/ReaderSmr>
+   ReaderLabView </autoapi/spike_analysis/core/ReaderLabView>
+   SpikeDetectionCreastTrough </autoapi/spike_analysis/core/SpikeDetectionCreastTrough>
+   STAPlugin_TEMPLATE </autoapi/spike_analysis/core/STAPlugin_TEMPLATE>
+   STAPlugin_ISIn </autoapi/spike_analysis/core/STAPlugin_ISIn>
+   STAPlugin_bursts </autoapi/spike_analysis/core/STAPlugin_bursts>
+   STAPlugin_annotate_bursts_in_st </autoapi/spike_analysis/core/STAPlugin_annotate_bursts_in_st>
+   STAPlugin_ongoing </autoapi/spike_analysis/core/STAPlugin_ongoing>
+   STAPlugin_quantification_in_period </autoapi/spike_analysis/core/STAPlugin_quantification_in_period>
+   STAPlugin_extract_column_in_filtered_dataframe </autoapi/spike_analysis/core/STAPlugin_extract_column_in_filtered_dataframe>
+   STAPlugin_spike_times_dataframe </autoapi/spike_analysis/core/STAPlugin_spike_times_dataframe>
+   STAPlugin_response_probability_in_period </autoapi/spike_analysis/core/STAPlugin_response_probability_in_period>
+   STAPlugin_response_latency_in_period </autoapi/spike_analysis/core/STAPlugin_response_latency_in_period>
+   SpikeTimesAnalysis </autoapi/spike_analysis/core/SpikeTimesAnalysis>
+   read_smr_file </autoapi/spike_analysis/core/read_smr_file>
+   read_labview_junk1_dat_files </autoapi/spike_analysis/core/read_labview_junk1_dat_files>
+   highpass_filter </autoapi/spike_analysis/core/highpass_filter>
+   load_reader </autoapi/spike_analysis/core/load_reader>
+   get_peaks_above </autoapi/spike_analysis/core/get_peaks_above>
+   get_upcross </autoapi/spike_analysis/core/get_upcross>
+   filter_spike_times </autoapi/spike_analysis/core/filter_spike_times>
+   filter_short_ISIs </autoapi/spike_analysis/core/filter_short_ISIs>
+   stimulus_interval_filter </autoapi/spike_analysis/core/stimulus_interval_filter>
+   get_st_from_spike_times_and_stim_times </autoapi/spike_analysis/core/get_st_from_spike_times_and_stim_times>
+   strip_st </autoapi/spike_analysis/core/strip_st>
+   get_spike_times_from_row </autoapi/spike_analysis/core/get_spike_times_from_row>
+   get_period_label_by_time </autoapi/spike_analysis/core/get_period_label_by_time>
+   _sta_input_checker </autoapi/spike_analysis/core/_sta_input_checker>
+
+.. py:module:: spike_analysis.core
+
+.. autoapi-nested-parse::
+   Read and analyze electrophysiological data.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ReaderSmr <spike_analysis.core.ReaderSmr>`
+     - A class for reading smr-files and accessing stimulus times and voltage traces.
+   * - :py:obj:`ReaderLabView <spike_analysis.core.ReaderLabView>`
+     - A class for reading LabView binary data files and accessing stimulus times and voltage traces.
+   * - :py:obj:`SpikeDetectionCreastTrough <spike_analysis.core.SpikeDetectionCreastTrough>`
+     - Detects spikes by creast and trough amplitude.
+   * - :py:obj:`STAPlugin_TEMPLATE <spike_analysis.core.STAPlugin_TEMPLATE>`
+     - Base class for spike time analysis plugins.
+   * - :py:obj:`STAPlugin_ISIn <spike_analysis.core.STAPlugin_ISIn>`
+     - SpikeTimeAnalysis (STA) plugin to compute the inter spike interval (ISI) to the next, second next, nth spike.
+   * - :py:obj:`STAPlugin_bursts <spike_analysis.core.STAPlugin_bursts>`
+     - SpikeTimeAnalysis (STA) plugin to detect high frequency events (doublet, triplet, ...) that occur within a timewindow.
+   * - :py:obj:`STAPlugin_annotate_bursts_in_st <spike_analysis.core.STAPlugin_annotate_bursts_in_st>`
+     - SpikeTimeAnalysis (STA) plugin to annotate bursts in a spike times dataframe.
+   * - :py:obj:`STAPlugin_ongoing <spike_analysis.core.STAPlugin_ongoing>`
+     - SpikeTimeAnalysis (STA) plugin to compute the ongoing activity.
+   * - :py:obj:`STAPlugin_quantification_in_period <spike_analysis.core.STAPlugin_quantification_in_period>`
+     - SpikeTimeAnalysis (STA) plugin to quantify the activity in a period.
+   * - :py:obj:`STAPlugin_extract_column_in_filtered_dataframe <spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe>`
+     - SpikeTimeAnalysis (STA) plugin to extract a column from a filtered dataframe.
+   * - :py:obj:`STAPlugin_spike_times_dataframe <spike_analysis.core.STAPlugin_spike_times_dataframe>`
+     - SpikeTimeAnalysis (STA) plugin to create a spike times dataframe.
+   * - :py:obj:`STAPlugin_response_probability_in_period <spike_analysis.core.STAPlugin_response_probability_in_period>`
+     - SpikeTimeAnalysis (STA) plugin to compute the response probability in a period.
+   * - :py:obj:`STAPlugin_response_latency_in_period <spike_analysis.core.STAPlugin_response_latency_in_period>`
+     - SpikeTimeAnalysis (STA) plugin to compute the response latency in a period.
+   * - :py:obj:`SpikeTimesAnalysis <spike_analysis.core.SpikeTimesAnalysis>`
+     - Class for applying event_analysis routines on a spike times dataframe.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_smr_file <spike_analysis.core.read_smr_file>`\ (path)
+     - Reads a Spike2 file and returns its content as a neo.core.block.Block object.
+   * - :py:obj:`read_labview_junk1_dat_files <spike_analysis.core.read_labview_junk1_dat_files>`\ (path, scale, sampling\_rate)
+     - Read in LabView binary data files.
+   * - :py:obj:`highpass_filter <spike_analysis.core.highpass_filter>`\ (y, sr)
+     - Apply a highpass filter to the data.
+   * - :py:obj:`load_reader <spike_analysis.core.load_reader>`\ (dict\_)
+     - Load a reader object from a dictionary.
+   * - :py:obj:`get_peaks_above <spike_analysis.core.get_peaks_above>`\ (t, v, lim)
+     - Compute timepoints of maxima above a threshold.
+   * - :py:obj:`get_upcross <spike_analysis.core.get_upcross>`\ (t, v, lim)
+     - Finds the times and corresponding voltages of upcrossings of a given threshold.
+   * - :py:obj:`filter_spike_times <spike_analysis.core.filter_spike_times>`\ (spike\_times, spike\_times\_trough, creast\_trough\_interval, mode, spike\_times\_amplitude, upper\_creast\_threshold, creast\_upcross\_times)
+     - Filter spike times based on timepoints of detected creasts and troughs.
+   * - :py:obj:`filter_short_ISIs <spike_analysis.core.filter_short_ISIs>`\ (t, tdelta)
+     - Filters out any events that occur in an interval shorter than tdelta.
+   * - :py:obj:`stimulus_interval_filter <spike_analysis.core.stimulus_interval_filter>`\ (stim\_times, period\_length, offset)
+     - Filters periodic stimuli such that only the first stimulus of each period is retained.
+   * - :py:obj:`get_st_from_spike_times_and_stim_times <spike_analysis.core.get_st_from_spike_times_and_stim_times>`\ (spike\_times, stim\_times, offset, mode)
+     - Computes spike times dataframe based on list of spike times and stimulus times.
+   * - :py:obj:`strip_st <spike_analysis.core.strip_st>`\ (st)
+     - Get a DataFrame containing only spike times, without metadata.
+   * - :py:obj:`get_spike_times_from_row <spike_analysis.core.get_spike_times_from_row>`\ (row)
+     - Returns a list containing all non-NaN elements in the given pandas Series.
+   * - :py:obj:`get_period_label_by_time <spike_analysis.core.get_period_label_by_time>`\ (periods, t)
+     - Classifies timepoint based on whether it falls within a period.
+
+

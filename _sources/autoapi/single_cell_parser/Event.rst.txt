@@ -1,0 +1,24 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.Event`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Event
+=====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.Event(func)
+   
+   Class to handle events in NEURON simulations.
+

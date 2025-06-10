@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_time_groups`
+
+
+.. title:
+
+get_time_groups
+===============
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_time_groups(vt_pandas)
+
+   Get the time groups for binning voltage traces.
+
+   Group the voltage trace in 1 ms bins, assuming a time interval of 0.025 ms.
+
+   :Parameters: **vt\_pandas** (*pd.DataFrame*) -- Voltage traces dataframe.
+
+   :returns: A list of time groups.
+   :rtype: list
+
+   .. attention:: This method assumes a time interval of 0.025 ms.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

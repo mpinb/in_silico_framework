@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike`
+
+SpikeInit.analyze_single_spike
+==============================
+
+.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike(cell, tVec, thresh)
+   :staticmethod:
+
+
+   Calculate spike height, width (FWHM) and after hyperpolarization depth (AHP).
+
+   Only does this for a single spike in the voltage trace: the one with the
+   maximum deflection from the threshold.
+
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object.
+                * **tVec** (*list*) -- Time vector.
+                * **thresh** (*float*) -- Spike threshold.
+
+   :returns: Tuple containing the spike height, full width half max (FWHM), and after hyperpolarization (AHP).
+   :rtype: tuple
+

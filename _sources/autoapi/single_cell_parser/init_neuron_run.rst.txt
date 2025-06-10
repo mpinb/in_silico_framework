@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.init_neuron_run`
+
+
+.. title:
+
+init_neuron_run
+===============
+
+
+.. py:function:: single_cell_parser.init_neuron_run(simparam, vardt=False, *events)
+
+   Default NEURON run with inital parameters according to parameter file.
+
+   Used in :py:mod:`~simrun.run\_new\_simulations` to set up and run a simulation.
+
+   :Parameters: * **simparam** (*dict | dict-like*) -- A dictionary containing the simulation parameters.
+                  Must include the keys 'dt', 'tStop', 'Vinit', 'T'.
+                * **vardt** (*bool*) -- Whether or not to use variable time step integration.
+                * **events** (*callable, optional*) -- Optional parameters: callable "events" that are
+                  passed to Event objects holding a FInitializeHandler.
+                  This can be used to implement changes of parameters during
+                  the course of the simulation using ``h.cvode.event(t, "statement")``
+                  in the supplied callable, where "statement" is another
+                  Python callable which may be used to change parameters.
+
+   :returns: None. Runs the NEURON simulation.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

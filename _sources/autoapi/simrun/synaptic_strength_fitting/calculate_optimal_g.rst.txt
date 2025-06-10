@@ -1,0 +1,51 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.calculate_optimal_g`
+
+
+.. title:
+
+calculate_optimal_g
+===================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.calculate_optimal_g(pdf)
+
+   Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data.
+
+   This function calculates the optimal synaptic conductance by matching empirically observed EPSP statistics (mean, median, maximum)
+   to a linear model. Each statistic provides a different estimate of the optimal ``g``.
+   The final optimal ``g`` is then a weighed average of the three statistics, where the weights for ``mean:median:max`` are ``2:2:1`` respectively.
+
+   This function is used in :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` to calculate the optimal synaptic conductance for each celltype.
+
+   :Parameters: **pdf** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum), and linear fits for each statistic.
+
+   :returns: None. Updates the original table inplace. Adds the columns ``optimal g``, ``optimal g mean``, ``optimal g median``, and ``optimal g max``.
+
+   .. seealso:: :py:meth:`~simrun.synaptic\_strength\_fitting.linear\_fit\_pdf` for the linear model that relates the EPSP statistics to the synaptic conductance.
+
+   Example::
+
+       >>> pdf = psp.get\_summary\_statistics(method='dynamic\_baseline')
+       >>> fit = linear\_fit\_pdf(pdf)
+       >>> fit.head()
+           EPSP mean\_offset  EPSP mean\_slope  EPSP med\_offset  EPSP med\_slope  EPSP max\_offset  EPSP max\_slope EPSP\_std\_offset EPSP\_std\_slope
+       ...
+       >>> measured\_data
+                   EPSP\_mean\_measured  EPSP\_med\_measured   EPSP\_max\_measured
+       celltype\_1  ...
+       celltype\_2  ...
+       >>> pdf = pd.concat([fit, measured\_data], axis=1)
+       >>> calculate\_optimal\_g(pdf)
+       >>> pdf[cell\_type 1']['optimal g']
+       1.85
+
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

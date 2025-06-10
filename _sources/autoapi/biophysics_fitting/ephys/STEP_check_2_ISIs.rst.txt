@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_check_2_ISIs`
+
+
+.. title:
+
+STEP_check_2_ISIs
+=================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_check_2_ISIs(t, v, thresh=None)
+
+   Check if there are more than 2 ISIs in the trace.
+
+   calculating the adaptation index, or coefficient of variation requires at least 5 spikes (i.e. 2 ISIs) in the trace.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+
+   :returns: True if there are more than 2 ISIs in the trace, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

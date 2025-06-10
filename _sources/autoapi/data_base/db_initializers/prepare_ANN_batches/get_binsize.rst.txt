@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`
+
+
+.. title:
+
+get_binsize
+===========
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_binsize(length, binsize_goal=50)
+
+   Calculate the bin size and number of bins closest to the desired bin size goal.
+
+   :Parameters: * **length** (*float*) -- The length of a dendritic branch to bin.
+                * **binsize\_goal** (*float, optional*) -- The desired bin size. Defaults to 50.
+
+   :returns: A tuple containing the bin size (float) and the number of bins (int) that result in binning closest to the binsize goal.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

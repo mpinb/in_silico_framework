@@ -1,0 +1,36 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.get_cell_with_network`
+
+get_cell_with_network
+=====================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_cell_with_network </autoapi/simrun/get_cell_with_network/get_cell_with_network>
+
+.. py:module:: simrun.get_cell_with_network
+
+.. autoapi-nested-parse::
+   Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_cell_with_network <simrun.get_cell_with_network.get_cell_with_network>`\ (neuron\_param, network\_param, cache)
+     - Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
+
+

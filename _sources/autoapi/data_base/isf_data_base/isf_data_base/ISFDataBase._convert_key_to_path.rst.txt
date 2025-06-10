@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._convert_key_to_path`
+
+ISFDataBase._convert_key_to_path
+================================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._convert_key_to_path(key)
+
+   Infer the file path from a database key.
+
+   :Parameters: **key** (*str|tuple|pathlib.Path*) -- The key to convert to a file path.
+
+   :returns: The file path corresponding to the key.
+   :rtype: pathlib.Path
+

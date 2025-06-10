@@ -1,0 +1,187 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PSPs
+====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _setup_computation <PSPs._setup_computation>
+   run <PSPs.run>
+   get_voltage_traces <PSPs.get_voltage_traces>
+   get_voltage_and_timing <PSPs.get_voltage_and_timing>
+   get_summary_statistics <PSPs.get_summary_statistics>
+   get_optimal_g <PSPs.get_optimal_g>
+   visualize_psps <PSPs.visualize_psps>
+   _get_cell_and_nw_map <PSPs._get_cell_and_nw_map>
+   get_synapse_coordinates <PSPs.get_synapse_coordinates>
+   get_merged_synapse_coordinates <PSPs.get_merged_synapse_coordinates>
+   get_synapse_coordinates_with_psp_amplitude <PSPs.get_synapse_coordinates_with_psp_amplitude>
+   plot_vt <PSPs.plot_vt>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.synaptic_strength_fitting.PSPs(neuron_param=None, confile=None, gExRange=[0.5, 1.0, 1.5, 2.0], AMPA_component=1, NMDA_component=1, vardt=True, mode='cells', exc_inh='exc', tStim=110, tEnd=150)
+   
+   Calculate PSP amlitudes of single synapses and fit synaptic strength
+
+   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The :ref:`cell_parameters_format`.
+                * **confile** (*str*) -- Path to a :ref:`con_file_format` file.
+                * **gExRange** (*list*) -- List of synaptic strength values to simulate (in :math:`\mu S`).
+                  The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+                * **AMPA_component** (*float*)
+                * **NMDA_component** (*float*)
+                * **vardt** (*bool*) -- Whether to use the variable step size solver.
+                * **mode** (*str*) -- Whether to activate each synapse one by one, or each cell one by one.
+                  A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
+                  Options: ``('cells', 'synapses')``
+                  Default: ``'cells'``
+                * **exc_inh** (*str*) -- Whether to fit excitatory or inhibitory synapses.
+                  Used to infer the deflection direction of the PSP (positive or negative).
+                  Options: ``('exc', 'inh')``
+                  Default: ``'exc'``
+                * **tStim** (*float*) -- Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
+                * **tEnd** (*float*) -- End time of the simulation.
+
+   :Attributes:
+
+   .. attribute:: neuron_param
+
+      The :ref:`cell_parameters_format`.
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   .. attribute:: confile
+
+      Path to a :ref:`con_file_format` file.
+
+      :type: str
+
+   .. attribute:: gExRange
+
+      List of allowed synaptic strength values (in :math:`\mu S`).
+
+      :type: list
+
+   .. attribute:: AMPA_component
+
+      
+
+      :type: float
+
+   .. attribute:: NMDA_component
+
+      
+
+      :type: float
+
+   .. attribute:: vardt
+
+      Whether to use the variable step size solver.
+
+      :type: bool
+
+   .. attribute:: mode
+
+      Whether to activate each synapse one by one, or each cell one by one.
+      A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
+      Options: ``('cells', 'synapses')``
+      Default: ``'cells'``
+
+      :type: str
+
+   .. attribute:: exc_inh
+
+      Whether to fit excitatory or inhibitory synapses.
+      Used to infer the deflection direction of the PSP (positive or negative).
+      Options: ``('exc', 'inh')``
+      Default: ``'exc'``
+
+      :type: str
+
+   .. attribute:: tStim
+
+      Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
+
+      :type: float
+
+   .. attribute:: tEnd
+
+      End time of the simulation.
+
+      :type: float
+
+   .. attribute:: futures
+
+      List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.
+
+      :type: list
+
+   .. attribute:: result
+
+      List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
+
+      :type: list
+
+   .. attribute:: network_param
+
+      The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
+      The synapse type is defined by :paramref:`exc_inh`.
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   .. attribute:: network_params_by_celltype
+
+      List of network parameters for each cell type in the network.
+
+      :type: list
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_setup_computation <simrun.synaptic_strength_fitting.PSPs._setup_computation>`\ (exc\_inh)
+        - Construct delayed functions for running single-synapse simulations.
+      * - :py:obj:`run <simrun.synaptic_strength_fitting.PSPs.run>`\ (client, rerun)
+        - Run the single-cell simulations from the :paramref:`_delayeds`.
+      * - :py:obj:`get_voltage_traces <simrun.synaptic_strength_fitting.PSPs.get_voltage_traces>`\ ()
+        - Gather the ePSP voltage traces for each synapse.
+      * - :py:obj:`get_voltage_and_timing <simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing>`\ (method, merged, merge\_celltype\_kwargs)
+        - Calculate a PSP's maximum voltage deflection and timing thereof.
+      * - :py:obj:`get_summary_statistics <simrun.synaptic_strength_fitting.PSPs.get_summary_statistics>`\ (method, merge\_celltype\_kwargs, ePSP\_summary\_statistics\_kwargs)
+        - Calculate summary statistics of the PSP voltage and timing.
+      * - :py:obj:`get_optimal_g <simrun.synaptic_strength_fitting.PSPs.get_optimal_g>`\ (measured\_data, method, merge\_celltype\_kwargs)
+        - Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+      * - :py:obj:`visualize_psps <simrun.synaptic_strength_fitting.PSPs.visualize_psps>`\ (g, method, merge\_celltype\_kwargs, fig)
+        - Plot a histogram of the EPSP max voltage deflections for each celltype.
+      * - :py:obj:`_get_cell_and_nw_map <simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map>`\ (network\_param)
+        - Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
+      * - :py:obj:`get_synapse_coordinates <simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates>`\ (population, flatten, cell\_indices)
+        - Get the coordinates of all synapses of a particular celltype.
+      * - :py:obj:`get_merged_synapse_coordinates <simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates>`\ (mergestring, flatten)
+        - Get the coordinates of all synapses that contain a certain string in their name.
+      * - :py:obj:`get_synapse_coordinates_with_psp_amplitude <simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude>`\ (population, g, merged, select\_synapses\_per\_cell)
+        - Get the synapse coordinates and the PSP amplitude for each synapse.
+      * - :py:obj:`plot_vt <simrun.synaptic_strength_fitting.PSPs.plot_vt>`\ (population, opacity, g, merge, merge\_celltype\_kwargs, fig)
+        - Plot the voltage traces of the PSPs.
+

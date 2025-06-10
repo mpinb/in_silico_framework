@@ -1,0 +1,55 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.StepThree`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+StepThree
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.hay.evaluation.StepThree
+   
+   Evaluate Step current three.
+
+   This class initializes all the evaluation metrics for the ``StepThree`` stimulus protocol.
+   The empirically observed objectives are in this case::
+
+       {
+           "mf3": ["Mean frequency", 22.5, 2.2222],
+           "AI3": ["Adaptation index", 0.0046, 0.0026],
+           "ISIcv3": ["Interspike interval coefficient of variation", 0.0954, 0.014],
+           "DI3": ["Doublet interspike interval", 5.38, 0.83],
+           "TTFS3": ["Time to first spike", 7.25, 1.0],
+           "APh3": ["AP height", 16.4368, 6.9322],
+           "fAHPd3": ["Fast after-hyperpolarization depth", -56.5579, 3.5834],
+           "sAHPd3": ["Slow after-hyperpolarization depth", -59.9923, 3.9247],
+           "sAHPt3": ["Slow after-hyperpolarization time", 0.2131, 0.0368],
+           "APw3": ["AP width", 1.8647, 0.4119]
+       }
+
+   .. seealso:: :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setp_StepThree` for more information on the stimulus protocol.
+
+   :Parameters: * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
+                * **stim_onset** (*float*) -- The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.
+                * **stim_duration** (*float*) -- The duration of the stimulus (:math:`ms`). Defaults to :math:`2000\ ms`.
+                * **punish** (*float*) -- The punishment value in units of :math:`\sigma`.
+                  Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+                  Defaults to :math:`250 \sigma`.
+                * **punish_last_spike_after_deadline** (*bool*) -- Whether to punish if the last spike is after the deadline. Defaults to ``True``
+                * **punish_minspikenum** (*int*) -- The minimum number of spikes required for this stimulus protocol. Defaults to :math:`5`.
+                * **punish_returning_to_rest_tolerance** (*float*) -- The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+                * **definitions** (*dict*) -- The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+                * **name** (*str*) -- The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
+                * **step_index** (*int*) -- The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+

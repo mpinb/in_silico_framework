@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._pt_in_box`
+
+SynapseMapper._pt_in_box
+========================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._pt_in_box(pt, box)
+
+   Check if a point is inside a bounding box.
+
+   :Parameters: * **pt** (*array*) -- Point to check.
+                * **box** (*array*) -- Bounding box to check against. Box is a length-6 array of format (xmin, xmax, ymin, ymax, zmin, zmax).
+
+   :returns: True if point is inside bounding box, False otherwise.
+   :rtype: bool
+

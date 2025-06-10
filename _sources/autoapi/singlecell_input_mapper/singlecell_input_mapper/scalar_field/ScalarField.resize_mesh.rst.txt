@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.resize_mesh`
+
+ScalarField.resize_mesh
+=======================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.resize_mesh()
+
+   Resizes mesh to non-zero scalar data.
+
+   This method resizes the mesh such that the bounding box
+   wraps around voxels that contain non-zero scalar data.
+   Also updates :py:attr:`extent` and :py:attr:`boundingBox`
+

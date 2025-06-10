@@ -1,0 +1,77 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DataView
+========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <DataView.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.reduced_model.DataView(mapping_dict=None)
+   
+   Convenience wrapper class to access data.
+
+   This wrapper class redirects data extractors based on a key mapping.
+   This API is used by default in :py:class:`~simrun.modular_reduced_model_inference.Rm`
+   If no mapping is provided, or a requested key does not exist in the mapping, the original key is used instead.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> data = {'a': 1, 'b': 2}
+   >>> dv = DataView()
+   >>> dv.setup(Rm)
+   >>> dv['a']
+   1
+   >>> dv.mapping_dict = {'a': 'b'}
+   >>> dv['a']
+   2
+
+   :Parameters: **mapping_dict** (*dict*) -- Mapping between requested keys and target keys.
+                Used to redirect data fetching.
+
+   :Attributes:
+
+   .. attribute:: mapping_dict
+
+      Mapping between requested keys and target keys.
+      Used to redirect data fetching.
+
+      :type: dict
+
+   .. attribute:: Rm
+
+      Reduced model. Set after running :py:meth:`setup`
+
+      :type: :py:class:`Rm`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <simrun.modular_reduced_model_inference.reduced_model.DataView.setup>`\ (Rm)
+        - Initialize from a reduced model.
+

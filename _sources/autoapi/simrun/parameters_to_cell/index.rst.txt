@@ -1,0 +1,45 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.parameters_to_cell`
+
+parameters_to_cell
+==================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   parameters_to_cell </autoapi/simrun/parameters_to_cell/parameters_to_cell>
+
+.. py:module:: simrun.parameters_to_cell
+
+.. autoapi-nested-parse::
+   Rebuild and re-simulate a network-embedded cell from :ref:`param_file_format` files.
+
+   This module provides a function to rebuild a network-embedded neuron model from
+   :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
+   The function also reconnects synapses from a :ref:`syn_file_format` file and simulate the network.
+
+   .. seealso::
+
+      To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.data_base.DataBase` instead of parameter files,
+      please refer to :py:mod:`~simrun.sim_trial_to_cell_object` instead
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`parameters_to_cell <simrun.parameters_to_cell.parameters_to_cell>`\ (neuronParam, networkParam, synfile, dirPrefix, tStop, scale\_apical, range\_vars, allPoints, cell, evokedNW)
+     - Rebuild and simulate a network-embedded cell.
+
+

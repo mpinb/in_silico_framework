@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_neuron_param_file`
+
+
+.. title:
+
+get_neuron_param_file
+=====================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_neuron_param_file(db)
+
+   Get the path to the :ref:`cell\_parameters\_format` file from a simrun-initialized database.
+
+   This method assumes the database has been simrun-initialized with
+   :meth:`~data\_base.db\_initializers.load\_simrun\_general.init` and contains the key ``parameterfiles\_cell\_folder``.
+
+   :Parameters: **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database object.
+
+   :returns: The path to the neuron parameter file.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

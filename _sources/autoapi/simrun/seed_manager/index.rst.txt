@@ -1,0 +1,36 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.seed_manager`
+
+seed_manager
+============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_seed </autoapi/simrun/seed_manager/get_seed>
+
+.. py:module:: simrun.seed_manager
+
+.. autoapi-nested-parse::
+   Get a random seed
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_seed <simrun.seed_manager.get_seed>`\ (recursion\_depth)
+     - Get a random seed.
+
+

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits`
+
+DataSplitEvaluation.get_splits
+==============================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits()
+
+   Get the train-test splits.
+
+   :returns:
+
+             Dictionary of train-test splits, where the keys are the split names.
+                 Each split is a dictionary with keys ``'train'``, ``'test'``, ``'subtest1'``, ``'subtest2'``.
+   :rtype: dict
+

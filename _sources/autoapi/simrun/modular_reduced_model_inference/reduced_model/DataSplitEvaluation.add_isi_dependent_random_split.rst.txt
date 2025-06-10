@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_isi_dependent_random_split`
+
+DataSplitEvaluation.add_isi_dependent_random_split
+==================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_isi_dependent_random_split(name, min_isi=10, percentage_train=0.7)
+
+   Split data based on the inter-spike interval.
+
+   This method filters out trials with an inter-spike interval below a certain threshold.
+   Only then the data is split into a train-test split.
+
+   :Parameters: * **name** (*str*) -- Name of the split
+                * **min_isi** (*float*) -- Minimum inter-spike interval
+                * **percentage_train** (*float*) -- Percentage of trials to use for training
+
+   :raises AssertionError: If the split name already exists.
+

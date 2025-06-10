@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.resolve_netp_reldb_paths`
+
+
+.. title:
+
+resolve_netp_reldb_paths
+========================
+
+
+.. py:function:: data_base.dbopen.resolve_netp_reldb_paths(netp, db_basedir)
+
+   Convert all relative database paths in a :ref:`network\_parameters\_format` file to absolute paths.
+
+   :Parameters: * **netp** (*dict*) -- Dictionary containing the network model parameters.
+                * **db\_basedir** (*str*) -- Path to the database directory.
+
+   :returns: The modified network parameter set, with absolute paths.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

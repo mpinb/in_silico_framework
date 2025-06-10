@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.model_selection` ❭ :mod:`~biophysics_fitting.model_selection.get_model_pdf_from_db`
+
+
+.. title:
+
+get_model_pdf_from_db
+=====================
+
+
+.. py:function:: biophysics_fitting.model_selection.get_model_pdf_from_db(db)
+
+   Get a DataFrame with all models from the database.
+
+   :Parameters: **db** (:py:class:`~data\_base.data\_base.DataBase`) -- The database containing the models.
+
+   :returns: the biophysical models as a dictionary, mapping the model index to a DataFrame, and the models as a single DataFrame.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

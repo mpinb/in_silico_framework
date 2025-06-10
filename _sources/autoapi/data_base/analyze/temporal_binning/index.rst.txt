@@ -1,0 +1,45 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.temporal_binning`
+
+temporal_binning
+================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   temporal_binning_pd </autoapi/data_base/analyze/temporal_binning/temporal_binning_pd>
+   temporal_binning_dask </autoapi/data_base/analyze/temporal_binning/temporal_binning_dask>
+   universal </autoapi/data_base/analyze/temporal_binning/universal>
+
+.. py:module:: data_base.analyze.temporal_binning
+
+.. autoapi-nested-parse::
+   Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
+
+   This is used in :py:mod:`data_base.db_initializers.synapse_activation_binning` to bin
+   synapse activations.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`temporal_binning_pd <data_base.analyze.temporal_binning.temporal_binning_pd>`\ (df, bin\_size, min\_time, max\_time, normalize, bin\_borders, rate)
+     - Bin timevalues in a pandas DataFrame.
+   * - :py:obj:`temporal_binning_dask <data_base.analyze.temporal_binning.temporal_binning_dask>`\ (ddf, bin\_size, min\_time, max\_time, normalize, client)
+     - Bin timevalues in a dask DataFrame.
+   * - :py:obj:`universal <data_base.analyze.temporal_binning.universal>`\ (\*args, \*\*kwargs)
+     - Bin spike times for dask or pandas dataframes.
+
+

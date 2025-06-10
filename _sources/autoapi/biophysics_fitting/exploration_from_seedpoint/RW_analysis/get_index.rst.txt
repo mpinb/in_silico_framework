@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_index`
+
+
+.. title:
+
+get_index
+=========
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_index(dataframe, channel)
+
+   Compute the depolarization or hyperpolarization index.
+
+   This index is how much the given channel contributed to depolarization (or hyperpolarization),
+   relative to the total depolarization (or hyperpolarization) current.
+
+   :Parameters: * **dataframe** (*pd.DataFrame*) -- the dataframe containing the biophysical parameters
+                * **channel** (*str*) -- the channel for which to compute the index
+
+   :returns: the depolarization/hyperpolarization index for the given channel
+   :rtype: pd.Series
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store._check_filesize_matches_shape`
+
+
+.. title:
+
+_check_filesize_matches_shape
+=============================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store._check_filesize_matches_shape(path, shape, dtype)
+
+   Check whether the file size matches the expected size based on the shape and dtype.
+
+   :Parameters: * **path** (*str*) -- Path to the file.
+                * **shape** (*tuple*) -- Shape of the array.
+                * **dtype** (*str*) -- Data type of the array.
+
+   :raises ValueError: If the file size does not match the expected size.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

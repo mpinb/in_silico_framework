@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.setup`
+
+_Strategy.setup
+===============
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.setup(data, DataSplitEvaluation)
+
+   Setup the strategy with the given data.
+
+   This method sets up the strategy with the given data and the DataSplitEvaluation object.
+
+   Strategy-specific setup is performed by :py:meth:`~simrun.modular_reduced_model_inference._Strategy._setup`,
+   which is overloaded by child classes.
+
+   :Parameters: * **data** (*dict*) -- The data to use.
+                * **DataSplitEvaluation** (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`) -- The DataSplitEvaluation object to use.
+

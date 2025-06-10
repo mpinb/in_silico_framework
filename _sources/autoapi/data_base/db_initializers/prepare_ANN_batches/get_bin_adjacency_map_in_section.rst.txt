@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section`
+
+
+.. title:
+
+get_bin_adjacency_map_in_section
+================================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section(cell, section_id, section_distances_df)
+
+   Create an adjacency map with bin-specific resolution for a given section.
+
+   Consecutive bins in the same section are trivially connected.
+   This method also fetches other sections connected to the given section id, and checks at which bins they connect.
+   Sections are defined by the neuron simulation, but bins are ad-hoc defined by data preparation for the ANN.
+
+   This method exploits the tree structure of a neuron, i.e. a child section is always connected at the beginning.
+   This means that all child sections are connected to their parent section at bin number 1
+   The goal is then to figure out at which bin in the parent section the child is connected to.
+   Eeach section always has one or more bins.
+
+   :Parameters: * **cell** (*Cell*) -- the Cell object
+                * **section\_id** (*int*) -- index of the neuron section
+                * **section\_distances\_df** (*pd.DataFrame*) -- the dataframe describing distance to soma for all sections, as provided by :meth:get\_section\_distances\_df
+
+   :returns: a dictionary with bins as keys and a list of adjacent bins as values.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

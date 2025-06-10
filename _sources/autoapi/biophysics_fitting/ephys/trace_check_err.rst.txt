@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.trace_check_err`
+
+
+.. title:
+
+trace_check_err
+===============
+
+
+.. py:function:: biophysics_fitting.ephys.trace_check_err(t, v, stim_onset=None, stim_duration=None, punish=250)
+
+   Returns a basic trace error that penalizes traces with low variance.
+   Useful for an evolutionary algorithm, when the voltage trace is not spiking yet, and
+   spike-related error functions cannot be applied yet. This tells the algorithm to
+   reward variance in a non-spiking voltage trace -- at least something is happening.
+
+   :Parameters: * **t** (*array*) -- Time array.
+                * **v** (*array*) -- Voltage array.
+                * **stim\_onset** (*float*) -- Time of stimulus onset.
+                * **stim\_duration** (*float*) -- Duration of stimulus.
+                * **punish** (*float*) -- Baseline penalty for low variance.
+                  Default: 250 mV^2.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

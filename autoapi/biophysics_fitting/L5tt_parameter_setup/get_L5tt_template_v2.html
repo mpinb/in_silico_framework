@@ -1,0 +1,1229 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>get_L5tt_template_v2 - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              get_L5tt_template_v2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/api_reference.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/tutorials.html" class="md-tabs__link">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/file_formats.html" class="md-tabs__link">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../rst_assets/api_reference.html"><span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span></a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="API reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Interface/index.html" class="md-nav__link">
+        <span title="/autoapi/interface/index.rst (reference label)" class="md-ellipsis">Interface</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../index.html"><span title="/autoapi/biophysics_fitting/index.rst (reference label)" class="md-ellipsis">biophysics_<wbr>fitting</span></a>
+          
+            <label for="__nav_1_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="biophysics_fitting" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/biophysics_fitting/index.rst (reference label)" class="md-ellipsis">biophysics_<wbr>fitting</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exploration_from_seedpoint/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/exploration_from_seedpoint/index.rst (reference label)" class="md-ellipsis">exploration_<wbr>from_<wbr>seedpoint</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hay/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/hay/index.rst (reference label)" class="md-ellipsis">hay</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2_3" type="checkbox" id="__nav_1_2_3" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="index.html"><span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/index.rst (reference label)" class="md-ellipsis">L5tt_<wbr>parameter_<wbr>setup</span></a>
+          
+            <label for="__nav_1_2_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="L5tt_parameter_setup" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/index.rst (reference label)" class="md-ellipsis">L5tt_<wbr>parameter_<wbr>setup</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hay_param_to_scp_neuron_param.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/hay_param_to_scp_neuron_param.rst (reference label)" class="md-ellipsis">hay_<wbr>param_<wbr>to_<wbr>scp_<wbr>neuron_<wbr>param</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hay_params_to_scp_neuron_params.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/hay_params_to_scp_neuron_params.rst (reference label)" class="md-ellipsis">hay_<wbr>params_<wbr>to_<wbr>scp_<wbr>neuron_<wbr>params</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="get_L5tt_template.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/get_l5tt_template.rst (reference label)" class="md-ellipsis">get_<wbr>L5tt_<wbr>template</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/get_l5tt_template_v2.rst (reference label)" class="md-ellipsis">get_<wbr>L5tt_<wbr>template_<wbr>v2</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/get_l5tt_template_v2.rst (reference label)" class="md-ellipsis">get_<wbr>L5tt_<wbr>template_<wbr>v2</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2" class="md-nav__link">
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2 (Python function) — Get a template cell parameter dictionary for a L5PT cell." class="md-ellipsis">biophysics_<wbr>fitting.<wbr>L5tt_<wbr>parameter_<wbr>setup.<wbr>get_<wbr>L5tt_<wbr>template_<wbr>v2</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-returns" class="md-nav__link">
+    <span class="md-ellipsis">Returns</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-return-type" class="md-nav__link">
+    <span class="md-ellipsis">Return type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_morphology.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/set_morphology.rst (reference label)" class="md-ellipsis">set_<wbr>morphology</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="check_unset_range_mechanisms.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/check_unset_range_mechanisms.rst (reference label)" class="md-ellipsis">check_<wbr>unset_<wbr>range_<wbr>mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_ephys.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/set_ephys.rst (reference label)" class="md-ellipsis">set_<wbr>ephys</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_param.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/set_param.rst (reference label)" class="md-ellipsis">set_<wbr>param</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_many_param.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/set_many_param.rst (reference label)" class="md-ellipsis">set_<wbr>many_<wbr>param</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="set_hot_zone.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/l5tt_parameter_setup/set_hot_zone.rst (reference label)" class="md-ellipsis">set_<wbr>hot_<wbr>zone</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../combiner/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/combiner/index.rst (reference label)" class="md-ellipsis">combiner</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ephys/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/ephys/index.rst (reference label)" class="md-ellipsis">ephys</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluator/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/evaluator/index.rst (reference label)" class="md-ellipsis">evaluator</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model_selection/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/model_selection/index.rst (reference label)" class="md-ellipsis">model_<wbr>selection</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../optimizer/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/optimizer/index.rst (reference label)" class="md-ellipsis">optimizer</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/parameters/index.rst (reference label)" class="md-ellipsis">parameters</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup_stim/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/setup_stim/index.rst (reference label)" class="md-ellipsis">setup_<wbr>stim</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simulator/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/simulator/index.rst (reference label)" class="md-ellipsis">simulator</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/utils/index.rst (reference label)" class="md-ellipsis">utils</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connected_to_dend_beyond.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/connected_to_dend_beyond.rst (reference label)" class="md-ellipsis">connected_<wbr>to_<wbr>dend_<wbr>beyond</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_inner_sec_dist_list.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/get_inner_sec_dist_list.rst (reference label)" class="md-ellipsis">get_<wbr>inner_<wbr>sec_<wbr>dist_<wbr>list</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_branching_depth.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/get_branching_depth.rst (reference label)" class="md-ellipsis">get_<wbr>branching_<wbr>depth</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_branching_depth_series.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/get_branching_depth_series.rst (reference label)" class="md-ellipsis">get_<wbr>branching_<wbr>depth_<wbr>series</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_main_bifurcation_section.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/get_main_bifurcation_section.rst (reference label)" class="md-ellipsis">get_<wbr>main_<wbr>bifurcation_<wbr>section</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../get_first_order_bifurcation_sections.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/get_first_order_bifurcation_sections.rst (reference label)" class="md-ellipsis">get_<wbr>first_<wbr>order_<wbr>bifurcation_<wbr>sections</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_base/index.html" class="md-nav__link">
+        <span title="/autoapi/data_base/index.rst (reference label)" class="md-ellipsis">data_<wbr>base</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simrun/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/index.rst (reference label)" class="md-ellipsis">simrun</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../single_cell_parser/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/index.rst (reference label)" class="md-ellipsis">single_<wbr>cell_<wbr>parser</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../singlecell_input_mapper/index.html" class="md-nav__link">
+        <span title="/autoapi/singlecell_input_mapper/index.rst (reference label)" class="md-ellipsis">singlecell_<wbr>input_<wbr>mapper</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spike_analysis/index.html" class="md-nav__link">
+        <span title="/autoapi/spike_analysis/index.rst (reference label)" class="md-ellipsis">spike_<wbr>analysis</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualize/index.html" class="md-nav__link">
+        <span title="/autoapi/visualize/index.rst (reference label)" class="md-ellipsis">visualize</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/tutorials.html" class="md-nav__link">
+        <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/file_formats.html" class="md-nav__link">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2" class="md-nav__link">
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2 (Python function) — Get a template cell parameter dictionary for a L5PT cell." class="md-ellipsis">biophysics_<wbr>fitting.<wbr>L5tt_<wbr>parameter_<wbr>setup.<wbr>get_<wbr>L5tt_<wbr>template_<wbr>v2</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-returns" class="md-nav__link">
+    <span class="md-ellipsis">Returns</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-return-type" class="md-nav__link">
+    <span class="md-ellipsis">Return type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<p><a class="reference internal" href="../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">biophysics_fitting</span></code></a> ❭ <a class="reference internal" href="index.html#module-biophysics_fitting.L5tt_parameter_setup" title="biophysics_fitting.L5tt_parameter_setup (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">L5tt_parameter_setup</span></code></a> ❭ <a class="reference internal" href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2" title="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2 (Python function) — Get a template cell parameter dictionary for a L5PT cell."><code class="xref py py-mod docutils literal notranslate"><span class="pre">get_L5tt_template_v2</span></code></a></p>
+<h1 id="get-l5tt-template-v2">get_L5tt_template_v2<a class="headerlink" href="#get-l5tt-template-v2" title="Permalink to this heading">¶</a></h1>
+<dl class="py function objdesc">
+<dt class="sig sig-object highlight py" id="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2">
+<span class="sig-prename descclassname"><span class="pre">biophysics_fitting.L5tt_parameter_setup.</span></span><span class="sig-name descname"><span class="pre">get_L5tt_template_v2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a template cell parameter dictionary for a L5PT cell.</p>
+<p>This method is identical to <a class="reference internal" href="get_L5tt_template.html#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template" title="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template (Python function) — Get a template cell parameter dictionary for a L5PT cell."><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_L5tt_template()</span></code></a>, but adds the following specifications:</p>
+<ul class="simple">
+<li><p>The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see <code class="xref py py-mod docutils literal notranslate"><span class="pre">mechanisms</span></code>).</p></li>
+<li><p>The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see <span id="id1">Schaefer <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id6" title="Andreas T Schaefer, Moritz Helmstaedter, Arno C Schmitt, Dan Bar-Yehuda, Mara Almog, Hana Ben-Porat, Bert Sakmann, and Alon Korngreen. Dendritic voltage-gated k+ conductance gradient in pyramidal neurones of neocortical layer 5b from rats. The Journal of Physiology, 579(Pt 3):737–752, March 2007. doi:10.1113/jphysiol.2006.122564.">4</a>]</span>).</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd" id="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-returns">Returns<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>The template cell parameters.</p>
+</dd>
+<dt class="field-even" id="biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2-return-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">:py:class:`~single_cell_parser.parameters.ParameterSet`</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="get_L5tt_template.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: get_L5tt_template" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              get_L5tt_template
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="set_morphology.html" class="md-footer__link md-footer__link--next" aria-label="Next: set_morphology" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              set_morphology
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

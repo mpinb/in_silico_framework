@@ -1,0 +1,40 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_msgpack`
+
+dask_to_msgpack
+===============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   dump </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_msgpack/dump>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.dask_to_msgpack
+
+.. autoapi-nested-parse::
+   Save and load dask dataframes to msgpack.
+
+   This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_
+
+   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for saving dask dataframes to parquet files.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`dump <data_base.isf_data_base.IO.LoaderDumper.dask_to_msgpack.dump>`\ (obj, savedir, repartition, scheduler, client)
+     - \-
+
+

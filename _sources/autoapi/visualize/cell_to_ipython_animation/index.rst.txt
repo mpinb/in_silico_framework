@@ -1,0 +1,67 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation`
+
+cell_to_ipython_animation
+=========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _load_base64 </autoapi/visualize/cell_to_ipython_animation/_load_base64>
+   display_animation </autoapi/visualize/cell_to_ipython_animation/display_animation>
+   find_closest_index </autoapi/visualize/cell_to_ipython_animation/find_closest_index>
+   get_lines </autoapi/visualize/cell_to_ipython_animation/get_lines>
+   init_fig </autoapi/visualize/cell_to_ipython_animation/init_fig>
+   plot_lines_fun </autoapi/visualize/cell_to_ipython_animation/plot_lines_fun>
+   _in_parallel_context </autoapi/visualize/cell_to_ipython_animation/_in_parallel_context>
+   parallelMovieMaker </autoapi/visualize/cell_to_ipython_animation/parallelMovieMaker>
+   cell_to_animation </autoapi/visualize/cell_to_ipython_animation/cell_to_animation>
+   cell_to_ipython_animation </autoapi/visualize/cell_to_ipython_animation/cell_to_ipython_animation>
+
+.. py:module:: visualize.cell_to_ipython_animation
+
+.. autoapi-nested-parse::
+   Display animations in IPython sessions.
+
+   This module proivdes functionality to create and render anmations in an IPython session.
+   It is of particular use when using Jupyter notebooks.
+
+   .. note::
+
+      Parts of this module are taken from the JSAnimation package, which is licensed under the BSD 2-Clause License.
+      The individual licensed components are appropriately marked with their corresponding license.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`display_animation <visualize.cell_to_ipython_animation.display_animation>`\ (files, interval, style, animID, embedded)
+     - Creates an IPython animation out of files specified in a globstring or a list of paths.
+   * - :py:obj:`find_closest_index <visualize.cell_to_ipython_animation.find_closest_index>`\ (list\_, value)
+     - Finds the index of the value which is closest to the value specified in the arguments
+   * - :py:obj:`get_lines <visualize.cell_to_ipython_animation.get_lines>`\ (cell, time\_index, range\_vars)
+     - Get list of dictionaries of lines that can be displayed using the :py:meth:`plot_lines` function
+   * - :py:obj:`init_fig <visualize.cell_to_ipython_animation.init_fig>`\ (xlim, ylim)
+     - Initialize figure for :py:meth:`cell_to_animation`
+   * - :py:obj:`plot_lines_fun <visualize.cell_to_ipython_animation.plot_lines_fun>`\ (lines, ax)
+     - Generate plots out of lines
+   * - :py:obj:`parallelMovieMaker <visualize.cell_to_ipython_animation.parallelMovieMaker>`\ (basedir, lines, xlim, ylim)
+     - Creates figures in parallel and returns animation object.
+   * - :py:obj:`cell_to_animation <visualize.cell_to_ipython_animation.cell_to_animation>`\ (cell, xlim, ylim, tstart, tend, tstep, range\_vars, plot\_synaptic\_input, outdir)
+     - Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time.
+   * - :py:obj:`cell_to_ipython_animation <visualize.cell_to_ipython_animation.cell_to_ipython_animation>`\ (\*args, \*\*kwargs)
+     - Wrapper function to display the animation in the IPython notebook
+
+

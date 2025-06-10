@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.get_Simulator`
+
+
+.. title:
+
+get_Simulator
+=============
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.get_Simulator(fixed_params, step=False, vInit=False)
+
+   Get a set up :py:class:`~biophysics\_fitting.simulator.Simulator` object for the Hay protocol.
+
+   Given cell-specific fixed parameters, set up a simulator object for the Hay protocol,
+   including measuring functions for bAP and BAC stimuli (no step currents)
+
+   :Parameters: * **fixed\_params** (*dict*) -- A dictionary of fixed parameters for the cell.
+                * **step** (*bool*) -- Whether to include step current measurements. These take quite long to simulate. Default: ``False``.
+                * **vInit** (*bool*) -- Whether to include vInit measurements. (not implemented yet)
+
+   :returns: A simulator object.
+   :rtype: :py:class:`~biophysics\_fitting.simulator.Simulator`
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

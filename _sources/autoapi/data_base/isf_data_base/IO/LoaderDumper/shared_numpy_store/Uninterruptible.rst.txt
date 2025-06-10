@@ -1,0 +1,28 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.Uninterruptible`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Uninterruptible
+===============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.Uninterruptible
+   
+   Context manager to create an uninterruptible section of code.
+
+   This context manager temporarily ignores ``SIGINT`` and ``SIGTERM`` signals.
+
+   .. warning:: This context manager should be used with caution, as it can lead to unresponsive code (by design).
+

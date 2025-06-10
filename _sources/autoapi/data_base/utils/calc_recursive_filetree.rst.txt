@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.calc_recursive_filetree`
+
+
+.. title:
+
+calc_recursive_filetree
+=======================
+
+
+.. py:function:: data_base.utils.calc_recursive_filetree(db, root_dir_path, max_lines=30, depth=0, max_depth=2, max_lines_per_key=3, lines=None, indent=None, all_files=False, colorize=True)
+
+   Fetches the contents of an db and formats them as a string representing a tree structure
+
+   :Parameters: * **db** (*data\_base.data\_base.DataNase*) -- The database to be visualized
+                * **root\_dir\_path** (*str*) -- The path to the root directory
+                * **max\_depth** (*int*) -- Maximum depth to recurse into the directory tree
+                * **max\_lines** (*int*) -- Maximum number of lines to print. Default is 30.
+                * **max\_lines\_per\_key** (*int*) -- Maximum number of lines per key. Default is 3.
+                * **lines** (*list*) -- List of strings to append to during recursion. Default is ``None``.
+                * **all\_files** (*bool*) -- If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is ``False``.
+                * **colorize** (*bool*) -- If True, colorizes the keys. Default is ``True``.
+
+   :returns: The formatted tree structure as a list of strings.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

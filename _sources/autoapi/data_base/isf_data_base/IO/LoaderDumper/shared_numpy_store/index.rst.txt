@@ -1,0 +1,81 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store`
+
+shared_numpy_store
+==================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Uninterruptible </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/Uninterruptible>
+   SharedNumpyStore </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/SharedNumpyStore>
+   Loader </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/Loader>
+   shared_array_from_numpy </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/shared_array_from_numpy>
+   _get_offset_and_size_in_bytes </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/_get_offset_and_size_in_bytes>
+   _check_filesize_matches_shape </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/_check_filesize_matches_shape>
+   shared_array_from_disk </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/shared_array_from_disk>
+   memmap_from_disk </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/memmap_from_disk>
+   shared_array_from_shared_mem_name </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/shared_array_from_shared_mem_name>
+   check </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/check>
+   dump </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/dump>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store
+
+.. autoapi-nested-parse::
+   Read and write numpy arrays to and from shared memory.
+
+   Shared memory is a memory space that is shared between multiple processes.
+
+   .. note::
+
+      This module is speicalized for use with SLURM HPC systems.
+      To use with other systems, set the JOB_SHMTMPDIR environment variable to a directory in shared memory.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Uninterruptible <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.Uninterruptible>`
+     - Context manager to create an uninterruptible section of code.
+   * - :py:obj:`SharedNumpyStore <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore>`
+     - Store numpy arrays on disk and share them between processes.
+   * - :py:obj:`Loader <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.Loader>`
+     - Loader for :py:class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`shared_array_from_numpy <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_numpy>`\ (arr, name)
+     - Takes an array in memory and puts it into shared memory
+   * - :py:obj:`shared_array_from_disk <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_disk>`\ (path, shape, dtype, name, start\_row, end\_row)
+     - Loads a numpy array from disk and puts it into shared memory
+   * - :py:obj:`memmap_from_disk <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.memmap_from_disk>`\ (path, shape, dtype, name, start\_row, end\_row)
+     - Memory map a numpy array on disk.
+   * - :py:obj:`shared_array_from_shared_mem_name <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_shared_mem_name>`\ (fname, shape, dtype)
+     - Loads an existing shared array by its name
+   * - :py:obj:`check <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.check>`\ (obj)
+     - Check whether the object can be saved with this dumper.
+   * - :py:obj:`dump <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.dump>`\ (obj, savedir)
+     - Dump the shared numpy store in the specified directory.
+
+

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask`
+
+
+.. title:
+
+calculate_vdensity_array_dask
+=============================
+
+
+.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_dask(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
+
+   Bin a :ref:`voltage\_traces\_df\_format` in timebins across trials.
+
+   :Parameters: * **v** (*dask.DataFrame*) -- A voltage traces dataframe. Column indices float and reflect timepoints
+                * **bin\_size** (*float*) -- the size of the bins
+                * **ymin** (*float*) -- the minimum voltage value
+                * **ymax** (*float*) -- the maximum voltage value
+                * **xmin** (*float*) -- the minimum time value (unused)
+                * **xmax** (*float*) -- the maximum time value (unused)
+
+   :returns: the binned voltage traces dataframe
+   :rtype: :py:class:`dask.dataframe.DataFrame`
+
+   .. seealso:: :py:func:`~data\_base.analyze.voltage\_binning.calculate\_vdensity\_array\_pd` for the pandas version.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,63 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference`
+
+modular_reduced_model_inference
+===============================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   data_extractor </autoapi/simrun/modular_reduced_model_inference/data_extractor/index>  
+   reduced_model </autoapi/simrun/modular_reduced_model_inference/reduced_model/index>  
+   solver </autoapi/simrun/modular_reduced_model_inference/solver/index>  
+   strategy </autoapi/simrun/modular_reduced_model_inference/strategy/index>  
+
+.. py:module:: simrun.modular_reduced_model_inference
+
+.. autoapi-nested-parse::
+   Create reduced models from synapse activation data.
+
+   This package implements strategies (see below) to create reduced models from synapse activation data.
+   It is implemented so that it allows for a "modular" inference: fitting can be performed in parallel on different parts of the data.
+   This was a necessary requirement when considering both the spatial and temporal dimension of the input snapse activation data.
+
+   A strategy defines a reduced model containing a set of free parameters :math:`\mathbf{x}` that are optimized to match the input data.
+   It also defines what data needs to be reproduced in the first place, and what constitutes a good match between the reduced model and the input data.
+   For a list of available strategies, see :py:mod:`~simrun.modular_reduced_model_inference.strategy`.
+
+   .. rubric:: Example
+      :class: example
+
+   :cite:t:`Bast_Fruengel_Kock_Oberlaender_2024` describes how to use a raised cosine basis
+   to create a reduced model from synapse activation data.
+   In this case, the input data are synapse activation patterns, and the target data are spike times.
+   The strategy in this case is :py:class:`Strategy_spatiotemporalRaisedCosine`, which defines a linear sum
+   of raised cosine basis functions. These functions are to be multiplied with the input data to predict spike probabilities.
+   The free parameters are then the weights of the linear combination of these basis functions.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`data_extractor <simrun.modular_reduced_model_inference.data_extractor>`
+     - Extract and parse data from databases.
+   * - :py:obj:`reduced_model <simrun.modular_reduced_model_inference.reduced_model>`
+     - Construct reduced models and run optimization.
+   * - :py:obj:`solver <simrun.modular_reduced_model_inference.solver>`
+     - Optimize a cost function.
+   * - :py:obj:`strategy <simrun.modular_reduced_model_inference.strategy>`
+     - Strategies for creating reduced models.
+

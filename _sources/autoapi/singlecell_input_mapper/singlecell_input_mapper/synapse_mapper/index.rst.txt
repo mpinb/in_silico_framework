@@ -1,0 +1,42 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper`
+
+synapse_mapper
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   SynapseMapper </autoapi/singlecell_input_mapper/singlecell_input_mapper/synapse_mapper/SynapseMapper>
+   SynapseDensity </autoapi/singlecell_input_mapper/singlecell_input_mapper/synapse_mapper/SynapseDensity>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper
+
+.. autoapi-nested-parse::
+   This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
+   The :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` class uses these classes to create synapse realizations.
+   While the classes in this module can be used in isolation, there are also full pipelines available that use the classes here to map synapses to a neuron morphology.
+   Consult the module :py:mod:`~singlecell_input_mapper.map_singlecell_inputs` for such a pipeline, or the documentation of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` for more info on how to use these classes in a pipeline.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`SynapseMapper <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper>`
+     - Assign synapses to neuron morphology from density meshes.
+   * - :py:obj:`SynapseDensity <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity>`
+     - Compute synapse density mesh from a PST density mesh.
+
+
+

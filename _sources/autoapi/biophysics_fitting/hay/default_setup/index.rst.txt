@@ -1,0 +1,60 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup`
+
+default_setup
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   record_bAP </autoapi/biophysics_fitting/hay/default_setup/record_bAP>
+   record_BAC </autoapi/biophysics_fitting/hay/default_setup/record_BAC>
+   record_Step </autoapi/biophysics_fitting/hay/default_setup/record_Step>
+   get_Simulator </autoapi/biophysics_fitting/hay/default_setup/get_Simulator>
+   interpolate_vt </autoapi/biophysics_fitting/hay/default_setup/interpolate_vt>
+   map_truefalse_to_str </autoapi/biophysics_fitting/hay/default_setup/map_truefalse_to_str>
+   get_Evaluator </autoapi/biophysics_fitting/hay/default_setup/get_Evaluator>
+   get_Combiner </autoapi/biophysics_fitting/hay/default_setup/get_Combiner>
+   get_fixed_params_example </autoapi/biophysics_fitting/hay/default_setup/get_fixed_params_example>
+
+.. py:module:: biophysics_fitting.hay.default_setup
+
+.. autoapi-nested-parse::
+   A Python translation of the setup for in silico current injection experiments as described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`record_bAP <biophysics_fitting.hay.default_setup.record_bAP>`\ (cell, recSite1, recSite2)
+     - Extract the voltage traces from the soma and two apical dendritic locations.
+   * - :py:obj:`record_BAC <biophysics_fitting.hay.default_setup.record_BAC>`\ (cell, recSite)
+     - Extract the voltage traces from the soma and an apical dendritic location.
+   * - :py:obj:`record_Step <biophysics_fitting.hay.default_setup.record_Step>`\ (cell)
+     - Extract the voltage trace from the soma.
+   * - :py:obj:`get_Simulator <biophysics_fitting.hay.default_setup.get_Simulator>`\ (fixed\_params, step, vInit)
+     - Get a set up :py:class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+   * - :py:obj:`interpolate_vt <biophysics_fitting.hay.default_setup.interpolate_vt>`\ (voltage\_trace\_)
+     - Interpolate a voltage trace so that is has fixed time interval
+   * - :py:obj:`map_truefalse_to_str <biophysics_fitting.hay.default_setup.map_truefalse_to_str>`\ (dict\_)
+     - Convert True/False to 'True'/'False' in a dictionary
+   * - :py:obj:`get_Evaluator <biophysics_fitting.hay.default_setup.get_Evaluator>`\ (step, vInit, bAP\_kwargs, BAC\_kwargs, StepOne\_kwargs, StepTwo\_kwargs, StepThree\_kwargs, interpolate\_voltage\_trace)
+     - Get a :py:class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
+   * - :py:obj:`get_Combiner <biophysics_fitting.hay.default_setup.get_Combiner>`\ (step, include\_DI3)
+     - Get a set up :py:class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
+   * - :py:obj:`get_fixed_params_example <biophysics_fitting.hay.default_setup.get_fixed_params_example>`\ ()
+     - Get an example of cell-specific fixed params.
+
+

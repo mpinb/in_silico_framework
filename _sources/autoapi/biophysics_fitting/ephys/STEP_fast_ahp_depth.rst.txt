@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_fast_ahp_depth`
+
+
+.. title:
+
+STEP_fast_ahp_depth
+===================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_fast_ahp_depth(t, v, thresh=None, time_scale=5, start=1)
+
+   Computes the average depth of the fast afterhyperpolarization (fAHP) of a voltage trace for a step stimulus.
+
+   The fAHP is computed as the deepest point right after (i.e. within :paramref:`timescale`) the spike.
+
+   .. note::
+
+      If two consecutive spikes are less than :paramref:`timescale` apart,
+      the fAHP is computed as simply minimum between the first spike and the next spike,
+      and there is no difference between fast and slow AHP.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+                * **time\_scale** (*float, optional*) -- Time scale in milliseconds. Defaults to 5.
+                * **start** (*int*) -- Index of the first AP to be considered. Defaults to 1: Omit the first AP with index 0.
+
+   :returns: Depth of the fAHP.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

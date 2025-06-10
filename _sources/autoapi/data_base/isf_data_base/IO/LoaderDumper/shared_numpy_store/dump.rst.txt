@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.dump`
+
+
+.. title:
+
+dump
+====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.dump(obj, savedir)
+
+   Dump the shared numpy store in the specified directory.
+
+   :Parameters: * **obj** (*None, optional*) -- No object is required. If an object is passed, it is ignored.
+                * **savedir** (*str*) -- Directory where the shared numpy store should be stored.
+
+   .. note::
+
+      This method does not require the numpy arrays themselves.
+      Rather, it saves a :py:class:`~data\_base.isf\_data\_base.IO.LoaderDumper.shared\_numpy\_store.SharedNumpyStore` object,
+      which can further be used to save and load numpy arrays to and from shared memory.
+
+   .. seealso::
+
+      :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.numpy.npy` and :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.numpy.npz`
+      for directly saving numpy arrays to disk (non-shared memory).
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

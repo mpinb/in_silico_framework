@@ -1,0 +1,144 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PSP_with_current_injection
+==========================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   optimize_holding_current <PSP_with_current_injection.optimize_holding_current>
+   _objective_fun <PSP_with_current_injection._objective_fun>
+   _get_current_dependent_vt <PSP_with_current_injection._get_current_dependent_vt>
+   plot_current_injection_voltage_trace <PSP_with_current_injection.plot_current_injection_voltage_trace>
+   get_neuron_param_with_current_injection <PSP_with_current_injection.get_neuron_param_with_current_injection>
+   get_psp_simulator <PSP_with_current_injection.get_psp_simulator>
+   get_psp_simulator_exc_and_inh_combined <PSP_with_current_injection.get_psp_simulator_exc_and_inh_combined>
+   get <PSP_with_current_injection.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.PSP_with_cell_modification.PSP_with_current_injection(neuron_param, confile, target_vm=-70, delay=100, duration=200, optimize_for_timepoint=150, tEnd=300, cell_modify_functions={}, bounds=(0, 0.7))
+   
+   Simulate EPSPs and IPSPs while the soma is voltage-clamped to a fixed membrane potential.
+
+   The membrane potential is clamped by injecting a current into the soma.
+
+   .. seealso:: :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
+
+   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Parameters of the neuron model.
+                * **confile** (*str*) -- Path to the network connectivity (:ref:`con_file_format`) file.
+                * **target_vm** (*float*) -- Membrane potential to clamp the soma to (in :math:`mV`).
+                * **delay** (*float*) -- Delay before the current injection starts (in :math:`ms`).
+                * **duration** (*float*) -- Duration of the current injection (in :math:`ms`).
+                * **optimize_for_timepoint** (*float*) -- Timepoint for membrane voltage optimization (in :math:`ms`).
+                  This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
+                * **tEnd** (*float*) -- End time of the simulation (in :math:`ms`).
+                * **cell_modify_functions** (*dict*) -- Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
+                  The keys are the names of the functions, the values are the parameters of the functions.
+                * **bounds** (*tuple*) -- Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+
+   :Attributes:
+
+   .. attribute:: neuron_param
+
+      Parameters of the neuron model.
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   .. attribute:: confile
+
+      Path to the network connectivity (:ref:`con_file_format`) file.
+
+      :type: str
+
+   .. attribute:: target_vm
+
+      Membrane potential to clamp the soma to (in :math:`mV`).
+
+      :type: float
+
+   .. attribute:: delay
+
+      Delay before the current injection starts (in :math:`ms`).
+
+      :type: float
+
+   .. attribute:: duration
+
+      Duration of the current injection (in :math:`ms`).
+
+      :type: float
+
+   .. attribute:: optimize_for_timepoint
+
+      Timepoint for membrane voltage optimization (in :math:`ms`).
+      This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
+
+      :type: float
+
+   .. attribute:: tEnd
+
+      End time of the simulation (in :math:`ms`).
+
+      :type: float
+
+   .. attribute:: cell_modify_functions
+
+      Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
+      The keys are the names of the functions, the values are the parameters of the functions.
+
+      :type: dict
+
+   .. attribute:: bounds
+
+      Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+
+      :type: tuple
+
+   .. attribute:: holding_current
+
+      Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`optimize_holding_current <simrun.PSP_with_cell_modification.PSP_with_current_injection.optimize_holding_current>`\ ()
+        - Calculate the current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+      * - :py:obj:`_objective_fun <simrun.PSP_with_cell_modification.PSP_with_current_injection._objective_fun>`\ (current)
+        - Callable to optimize.
+      * - :py:obj:`_get_current_dependent_vt <simrun.PSP_with_cell_modification.PSP_with_current_injection._get_current_dependent_vt>`\ (current)
+        - Run the current injection simulation
+      * - :py:obj:`plot_current_injection_voltage_trace <simrun.PSP_with_cell_modification.PSP_with_current_injection.plot_current_injection_voltage_trace>`\ ()
+        - Visualize the voltage trace during the current injection
+      * - :py:obj:`get_neuron_param_with_current_injection <simrun.PSP_with_cell_modification.PSP_with_current_injection.get_neuron_param_with_current_injection>`\ ()
+        - Get a :ref:`cell_parameters_format` file with a current injection.
+      * - :py:obj:`get_psp_simulator <simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator>`\ (gExRange, exc\_inh, mode)
+        - Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
+      * - :py:obj:`get_psp_simulator_exc_and_inh_combined <simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator_exc_and_inh_combined>`\ (gExRange, mode)
+        - Set up and combine excitatory and inhibitory PSP simulators.
+      * - :py:obj:`get <simrun.PSP_with_cell_modification.PSP_with_current_injection.get>`\ ()
+        - Get the final :py:class:`~simrun.synaptic_strength_fitting.PSPs` object.
+

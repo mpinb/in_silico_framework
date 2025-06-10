@@ -1,0 +1,45 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser`
+
+param_file_parser
+=================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   construct_param_filename_hashmap_df </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/construct_param_filename_hashmap_df>
+   _copy_and_transform_neuron_param </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_neuron_param>
+   _copy_and_transform_network_param </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_network_param>
+   _copy_and_transform_syn </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_syn>
+   _copy_and_transform_con </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_con>
+   _get_unique_syncons_from_netps </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_syncons_from_netps>
+   _get_unique_hoc_fns_from_neups </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_hoc_fns_from_neups>
+   _get_unique_landmark_fns_from_neups </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_landmark_fns_from_neups>
+   _generate_target_filenames </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_generate_target_filenames>
+   _delayed_copy_transform_paramfiles_to_db </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/_delayed_copy_transform_paramfiles_to_db>
+   load_param_files_from_db </autoapi/data_base/db_initializers/load_simrun_general/param_file_parser/load_param_files_from_db>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.param_file_parser
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`construct_param_filename_hashmap_df <data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df>`\ (simresult\_path, sim\_trial\_index)
+     - Generate a hashmap for the paths of :ref:`cell_parameters_format` and :ref:`network_parameters_format` files.
+   * - :py:obj:`load_param_files_from_db <data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db>`\ (db, sti)
+     - Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
+
+

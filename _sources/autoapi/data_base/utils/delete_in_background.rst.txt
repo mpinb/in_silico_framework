@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.delete_in_background`
+
+
+.. title:
+
+delete_in_background
+====================
+
+
+.. py:function:: data_base.utils.delete_in_background(key)
+
+   Starts a background process that deletes a key
+
+   :Parameters: **key** (*pathlib.Path*) -- The key to be deleted
+
+   :returns: The process that takes care of deletion
+   :rtype: threading.Thread
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

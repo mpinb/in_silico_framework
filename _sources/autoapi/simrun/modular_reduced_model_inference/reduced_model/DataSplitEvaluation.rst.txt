@@ -1,0 +1,104 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DataSplitEvaluation
+===================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   add_random_split <DataSplitEvaluation.add_random_split>
+   add_isi_dependent_random_split <DataSplitEvaluation.add_isi_dependent_random_split>
+   get_splits <DataSplitEvaluation.get_splits>
+   add_result <DataSplitEvaluation.add_result>
+   compute_scores <DataSplitEvaluation.compute_scores>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation(Rm)
+   
+   Split data in training-test sets.
+
+   This class provides an interface to split input data in separate train-test sets,
+   and to evaluate the reduced model performance scores corresponding to the splits.
+
+   :Parameters: **Rm** (:py:class:`Rm`) -- Reduced model. Set after running :py:meth:`setup`
+
+   :Attributes:
+
+   .. attribute:: Rm
+
+      Reduced model. Set after running :py:meth:`setup`
+
+      :type: :py:class:`Rm`
+
+   .. attribute:: splits
+
+      Dictionary of splits
+
+      :type: dict
+
+   .. attribute:: solvers
+
+      List of solvers
+
+      :type: list
+
+   .. attribute:: optimizer_results
+
+      List of optimization results
+
+      :type: list
+
+   .. attribute:: optimizer_results_keys
+
+      List of optimization results keys
+
+      :type: list
+
+   .. attribute:: scores
+
+      List of scores
+
+      :type: list
+
+   .. attribute:: scores_keys
+
+      List of scores
+
+      :type: list
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`add_random_split <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_random_split>`\ (name, percentage\_train, l)
+        - Set the train-test split randomly.
+      * - :py:obj:`add_isi_dependent_random_split <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_isi_dependent_random_split>`\ (name, min\_isi, percentage\_train)
+        - Split data based on the inter-spike interval.
+      * - :py:obj:`get_splits <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits>`\ ()
+        - Get the train-test splits.
+      * - :py:obj:`add_result <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result>`\ (solver, x)
+        - Save the optimization result.
+      * - :py:obj:`compute_scores <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores>`\ ()
+        - Compute the score of the optimization.
+

@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_hay_param_names`
+
+
+.. title:
+
+get_hay_param_names
+===================
+
+
+.. py:function:: biophysics_fitting.hay.specification.get_hay_param_names()
+
+   Get the names of the parameters used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+
+   :returns: The names of the parameters.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis.apply_extractor`
+
+SpikeTimesAnalysis.apply_extractor
+==================================
+
+.. py:method:: spike_analysis.core.SpikeTimesAnalysis.apply_extractor(sta_plugin, name=None)
+
+   Applies an event analysis routine.
+
+   :Parameters: **sta_plugin** (*object*) -- The event analysis routine.
+

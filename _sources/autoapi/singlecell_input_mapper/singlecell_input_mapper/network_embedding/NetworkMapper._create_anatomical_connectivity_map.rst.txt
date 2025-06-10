@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map`
+
+NetworkMapper._create_anatomical_connectivity_map
+=================================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map()
+
+   Connects anatomical synapses to PointCells.
+
+   Connections have anatomical constraints on connectivity.
+   (i.e., convergence of presynaptic cell type).
+   Creates three return values:
+
+   1. An anatomical connectivity map:
+       a list of connections between presynaptic cells and postsynaptic cell of the form
+       (cell type, presynaptic cell index, synapse index):
+
+       - cell type (str): string used for indexing point cells and synapses
+       - presynaptic cell index (int): index of cell in list self.cells[cell type]
+       - synapse index (int): index of synapse in list self.postCell.synapses[cell type]
+
+   2. A dictionary of connected cells, ordered by cell type.
+   3. A dictionary of connected cells per structure, ordered by cell type.
+
+   Used to create anatomical realizations.
+
+   :returns: the anatomical map, connected cells, and connected cells per structure
+   :rtype: tuple
+

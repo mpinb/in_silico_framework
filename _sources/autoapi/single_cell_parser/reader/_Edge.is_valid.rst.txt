@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader._Edge` ❭ :mod:`~single_cell_parser.reader._Edge.is_valid`
+
+_Edge.is_valid
+==============
+
+.. py:method:: single_cell_parser.reader._Edge.is_valid()
+
+   Check if this edge is valid.
+
+   Edges are only valid if they have a :paramref:`label`, a :paramref:`hocLabel`, and at least one :paramref:`edgePts`.
+
+   :returns: True if the edge is valid, False otherwise.
+   :rtype: bool
+

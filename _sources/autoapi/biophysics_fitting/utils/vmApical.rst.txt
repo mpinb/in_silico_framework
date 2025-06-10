@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.vmApical`
+
+
+.. title:
+
+vmApical
+========
+
+
+.. py:function:: biophysics_fitting.utils.vmApical(cell, dist=None)
+
+   Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
+
+   Assumes that the :py:class:`~single\_cell\_parser.cell.Cell` object has an apical dendrite:
+
+   - It contains at least one section with the label "ApicalDendrite"
+   - Such section exists at :paramref:`~dist` distance from the soma
+   - The section has at least one child
+
+   See :py:meth:`~get\_inner\_section\_at\_distance` for more information about which arguments can be used
+   to define an apical section.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **dist** (*float*) -- The distance from the soma (:math:`\mu m`).
+
+   :returns: The membrane voltage of the apical dendrite at the specified distance.
+   :rtype: numpy.ndarray
+
+   .. seealso:: :py:meth:`vmApical\_position` to get the exact location on the apical dendrite at a certain distance.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

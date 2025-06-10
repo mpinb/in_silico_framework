@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_cell`
+
+CellMorphologyInteractiveVisualizer._get_interactive_cell
+=========================================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_cell(color=None, time_point=None, diameter=None)
+
+   Setup plotly for rendering in notebooks.
+   Shows an interactive 3D render of the Cell with NO data overlayed.
+
+   :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
+                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
+                * **time_point** (*float | int*) -- time_point at which to plot some scalar data. Ignored when color does not refer to scalar data.
+                * **diameter** -- If the actual diameter is poorly visible, set this value to a fixed diameter.
+
+   :returns: an interactive figure. Usually added to a ipywidgets.VBox object
+   :rtype: plotly.graph_objs._figure.Figure
+

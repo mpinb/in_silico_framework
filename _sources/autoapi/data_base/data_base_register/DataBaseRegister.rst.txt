@@ -1,0 +1,72 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DataBaseRegister
+================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   search_dbs <DataBaseRegister.search_dbs>
+   add_db <DataBaseRegister.add_db>
+   keys <DataBaseRegister.keys>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.data_base_register.DataBaseRegister(registry_basedir, search_dbs='on_first_init')
+   
+   Two column registry mapping data bases to their locations.
+
+   This registry keeps track of all :py:class:`DataBase` ``id`` tags and their locations on disk.
+   This is useful when sharing data with other people, resolving relative database paths, and moving databases to other file systems.
+   This registry implements an SQLite backend to store these locations and corresponding database IDs.
+
+   You can explicitly walk through a directory and add all :py:class:`DataBase` it encounters to the registry with :py:meth:`DataBaseRegister.search_dbs`.
+
+   :Parameters: * **registry_basedir** (*str*) -- The location of the db registry
+                * **search_dbs** (*str|bool, optional*) -- Whether to look for data_bases in all subfolders of the registry's directory. Defaults to "on_first_init", which only does this if the registry is newly created.
+
+   :Attributes:
+
+   .. attribute:: registry_basedir
+
+      The location of the db registry
+
+      :type: str
+
+   .. attribute:: registry
+
+      The registry itself as an SQLite database.
+
+      :type: :py:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`search_dbs <data_base.data_base_register.DataBaseRegister.search_dbs>`\ (directory)
+        - Look for :py:class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
+      * - :py:obj:`add_db <data_base.data_base_register.DataBaseRegister.add_db>`\ (unique\_id, db\_basedir)
+        - Add a database to the registry.
+      * - :py:obj:`keys <data_base.data_base_register.DataBaseRegister.keys>`\ ()
+        - Get all keys in the registry.
+

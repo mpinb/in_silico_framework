@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.cell` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.cell.dump`
+
+
+.. title:
+
+dump
+====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.cell.dump(obj, savedir)
+
+   Dumps a :py:class:`~single\_cell\_parser.cell.Cell` object to a directory
+
+   :Parameters: * **obj** (:py:class:`~single\_cell\_parser.cell.Cell`) -- Object to be saved
+                * **savedir** (*str*) -- Directory to save the object to
+
+   .. seealso:: :py:meth:`~single\_cell\_parser.serialize\_cell.save\_cell\_to\_file`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

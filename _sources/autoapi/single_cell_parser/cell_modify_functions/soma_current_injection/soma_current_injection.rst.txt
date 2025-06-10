@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.soma_current_injection` ❭ :mod:`~single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection`
+
+
+.. title:
+
+soma_current_injection
+======================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection(cell, amplitude=None, delay=None, duration=None)
+
+   Inject a step current at the soma.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **amplitude** (*float*) -- The amplitude of the current (nA).
+                * **delay** (*float*) -- The delay of the current (ms).
+                * **duration** (*float*) -- The duration of the current (ms).
+
+   :returns: The cell with the current injection set up.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+   .. seealso:: :py:meth:`biophysics\_fitting.setup\_stim.setup\_soma\_step`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

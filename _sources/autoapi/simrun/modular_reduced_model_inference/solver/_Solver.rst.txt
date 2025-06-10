@@ -1,0 +1,76 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_Solver
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <_Solver.setup>
+   _setup_optimizer <_Solver._setup_optimizer>
+   optimize_all_splits <_Solver.optimize_all_splits>
+   optimize_one_split <_Solver.optimize_one_split>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.solver._Solver(name)
+   
+   Solver base class
+
+   Each child must implement the :py:meth:`_setup_optimizer` method.
+
+   :Parameters: **name** (*str*) -- name of the solver
+
+   :Attributes:
+
+   .. attribute:: name
+
+      name of the solver
+
+      :type: str
+
+   .. attribute:: optimize
+
+      The solver-specific optimization function.
+
+      :type: callable
+
+   .. attribute:: strategy
+
+      The strategy object. This is set during :py:meth:`setup`.
+
+      :type: :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <simrun.modular_reduced_model_inference.solver._Solver.setup>`\ (strategy)
+        - Setup the solver for a given strategy and optimizer.
+      * - :py:obj:`_setup_optimizer <simrun.modular_reduced_model_inference.solver._Solver._setup_optimizer>`\ ()
+        - Set up the optimization strategy.
+      * - :py:obj:`optimize_all_splits <simrun.modular_reduced_model_inference.solver._Solver.optimize_all_splits>`\ (client, workers)
+        - Optimize the cost function for all splits of the strategy.
+      * - :py:obj:`optimize_one_split <simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split>`\ (client, workers, index)
+        - Optimize the cost function for a single split.
+

@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_synapse_activation_file`
+
+
+.. title:
+
+read_synapse_activation_file
+============================
+
+
+.. py:function:: single_cell_parser.reader.read_synapse_activation_file(fname)
+
+   Reads list of all functional synapses and their activation times.
+
+   In contrast to :py:meth:`~single\_cell\_parser.reader.read\_complete\_synapse\_activation\_file`, this reader does not return the structure label.
+
+   :Parameters: **fname** (*str*) -- Filename of a synapse activation file.
+                Such a file can be generated with :py:meth:`single\_cell\_parser.analyze.synanalysis.comute\_synapse\_distances\_times`.
+
+   :returns: (synapse ID, section ID, section pt ID, [t1, t2, ... , tn])
+   :rtype: dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

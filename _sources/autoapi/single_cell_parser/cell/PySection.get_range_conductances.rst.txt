@@ -1,0 +1,43 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.get_range_conductances`
+
+PySection.get_range_conductances
+================================
+
+.. py:method:: single_cell_parser.cell.PySection.get_range_conductances(range_vars, density=True)
+
+   Get the transmembrane conductance of each range variable separately.
+
+   Given a nested dictionary of range variables, this function computes the conductance of each variable in each segment.
+   The conductance for each segment is not necessarily equal to the :ref:`cell_parameters_format`, but may be spatially distributed
+   according to a non-uniform distribution.
+   This method explicitly fetches the conductance from the NEURON sections after spatial distribution.
+
+   The nested ``range_vars`` keys must match the segment's nested attributes.
+
+   Example::
+
+       >>> range_vars = {"NaTa_t": ["gNaTa_tbar"]}
+       >>> sections[0].NaTa_t.gNaTa_tbar
+       0.00001
+
+   :Parameters: * **range_vars** (*dict*) -- A nested dictionary of range variables.
+                  The keys must match the segment's nested attributes.
+                  It is possible to simply pass subsections of the :ref:`cell_parameters_format` here, e.g. ``neup[sec.label]["mechanisms"]["range"]``
+                * **density** (*bool, optional*) -- If ``True`` (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                  If ``False``, the total amount of conductivity is returned for each segment in units :math:`nS`
+                  i.e. the conductance density multiplied by the area of the segment.
+                  Defaults to True.
+
+   :returns: A dictionary of per-channel conductances for each segment.
+   :rtype: List[Dict]
+
+   :raises AssertionError: If the number of parameters with prefix `g` is not equal to 1 for each range variable.
+
+   .. attention::
+
+      Pay close attention to the units! For numerical stability, the absolute conductance is in units of :math:`nS`, while
+      the conductance density is given in units of :math:`S / cm ^2`.
+

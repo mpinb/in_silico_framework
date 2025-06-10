@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._assign_synapse_weights`
+
+NetworkMapper._assign_synapse_weights
+=====================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._assign_synapse_weights(receptor, recepStr, syn)
+
+   Assign synapse weights according to distribution specified in network parameters.
+
+   :Parameters: * **receptor** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Receptor parameters from network parameter file.
+                * **recepStr** (*str*) -- Receptor name.
+                * **syn** (*Synapse*) -- Synapse object.
+

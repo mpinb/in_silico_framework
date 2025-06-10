@@ -1,0 +1,76 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_annotate_bursts_in_st`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_annotate_bursts_in_st
+===============================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <STAPlugin_annotate_bursts_in_st.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_annotate_bursts_in_st(name='bursts_st', source='st', event_maxtimes=None, event_names=None)
+   
+   SpikeTimeAnalysis (STA) plugin to annotate bursts in a spike times dataframe.
+
+   .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
+
+   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'bursts_st'.
+                * **source** (*str, optional*) -- The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+                * **event_maxtimes** (*dict, optional*) -- Dictionary containing the maximum duration of each event type. Default: ``{0:0, 1:10, 2:30}``
+                * **event_names** (*dict, optional*) -- Dictionary containing the names of the event types. Default: ``{0: "singlet", 1: "doublet", 2: "triplet"}``
+
+   :Attributes:
+
+   .. attribute:: name
+
+      The name of the plugin.
+
+      :type: str
+
+   .. attribute:: source
+
+      The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+
+      :type: str, optional
+
+   .. attribute:: event_maxtimes
+
+      Dictionary containing the maximum duration of each event type.
+
+      :type: dict
+
+   .. attribute:: event_names
+
+      Dictionary containing the names of the event types.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup>`\ (spike\_times\_analysis)
+        - Sets up the analysis: annotates bursts in a spike times dataframe.
+

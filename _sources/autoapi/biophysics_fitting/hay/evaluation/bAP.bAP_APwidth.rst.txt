@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP.bAP_APwidth`
+
+bAP.bAP_APwidth
+===============
+
+.. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_APwidth(voltage_traces)
+
+   Get the width of the first action potential in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: Dictionary mapping ``".check_1AP"`` to whether there is at least one action potential in the somatic voltage trace,
+             and ``".raw"`` to the width of the first action potential in the somatic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~biophysics_fitting.ephys.APwidth`
+

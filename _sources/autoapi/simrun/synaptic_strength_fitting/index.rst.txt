@@ -1,0 +1,106 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting`
+
+synaptic_strength_fitting
+=========================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   PSPs </autoapi/simrun/synaptic_strength_fitting/PSPs>
+   set_ex_synapse_weight </autoapi/simrun/synaptic_strength_fitting/set_ex_synapse_weight>
+   set_inh_synapse_weight </autoapi/simrun/synaptic_strength_fitting/set_inh_synapse_weight>
+   run_ex_synapse </autoapi/simrun/synaptic_strength_fitting/run_ex_synapse>
+   run_ex_synapses </autoapi/simrun/synaptic_strength_fitting/run_ex_synapses>
+   generate_ex_network_param_from_network_embedding </autoapi/simrun/synaptic_strength_fitting/generate_ex_network_param_from_network_embedding>
+   generate_inh_network_param_from_network_embedding </autoapi/simrun/synaptic_strength_fitting/generate_inh_network_param_from_network_embedding>
+   get_voltage_and_timing </autoapi/simrun/synaptic_strength_fitting/get_voltage_and_timing>
+   get_summary_statistics </autoapi/simrun/synaptic_strength_fitting/get_summary_statistics>
+   get_optimal_g </autoapi/simrun/synaptic_strength_fitting/get_optimal_g>
+   get_tMax_vMax_baseline </autoapi/simrun/synaptic_strength_fitting/get_tMax_vMax_baseline>
+   analyze_voltage_trace </autoapi/simrun/synaptic_strength_fitting/analyze_voltage_trace>
+   get_tMax_vMax </autoapi/simrun/synaptic_strength_fitting/get_tMax_vMax>
+   merge_celltypes </autoapi/simrun/synaptic_strength_fitting/merge_celltypes>
+   ePSP_summary_statistics </autoapi/simrun/synaptic_strength_fitting/ePSP_summary_statistics>
+   linear_fit </autoapi/simrun/synaptic_strength_fitting/linear_fit>
+   linear_fit_pdf </autoapi/simrun/synaptic_strength_fitting/linear_fit_pdf>
+   calculate_optimal_g </autoapi/simrun/synaptic_strength_fitting/calculate_optimal_g>
+
+.. py:module:: simrun.synaptic_strength_fitting
+
+.. autoapi-nested-parse::
+   Calculate the cell type specific synaptic strengths of synapses based on the neuron model and network parameters.
+
+   This module provides functionality to simulate each synapse in a network-embedded neuron model,
+   calculate statistics per synapse type (e.g. mean, median and max voltage deflection).
+   It can linearly interpolates the relationship between the synaptic strength and the EPSP statistics, and
+   infers the optimal synaptic strength for each synapse type based on empirical data.
+
+   The main class :py:class:`~simrun.synaptic_strength_fitting.PSPs` is used to manage the synaptic strength fitting process.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`PSPs <simrun.synaptic_strength_fitting.PSPs>`
+     - Calculate PSP amlitudes of single synapses and fit synaptic strength
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`set_ex_synapse_weight <simrun.synaptic_strength_fitting.set_ex_synapse_weight>`\ (syn, weight)
+     - Set the synaptic strength of an excitatory :py:class:`single_cell_parser.synapse.Synapse`.
+   * - :py:obj:`set_inh_synapse_weight <simrun.synaptic_strength_fitting.set_inh_synapse_weight>`\ (syn, weight)
+     - Set the synaptic strength of an inhibitory :py:class:`single_cell_parser.synapse.Synapse`.
+   * - :py:obj:`run_ex_synapse <simrun.synaptic_strength_fitting.run_ex_synapse>`\ (cell\_nw\_generator, neuron\_param, network\_param, celltype, preSynCellID, gAMPA, gNMDA, gGABA, vardt, return\_cell, synapseID, tEnd, tStim)
+     - Simulate a single excitatory or inhibitory synapse
+   * - :py:obj:`run_ex_synapses <simrun.synaptic_strength_fitting.run_ex_synapses>`\ (neuron\_param, network\_param, celltype, gAMPA, gNMDA, gGABA, vardt, tStim, tEnd, mode)
+     - Simulate all EPSPs of a given celltype, one by one.
+   * - :py:obj:`generate_ex_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding>`\ (confile)
+     - Generate a network parameter file for excitatory synapses from a :ref:`con_file_format` file.
+   * - :py:obj:`generate_inh_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding>`\ (confile)
+     - Generate a network parameter file for inhibitory synapses from a :ref:`con_file_format` file.
+   * - :py:obj:`get_voltage_and_timing <simrun.synaptic_strength_fitting.get_voltage_and_timing>`\ (vt, method, tStim, tEnd)
+     - Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.
+   * - :py:obj:`get_summary_statistics <simrun.synaptic_strength_fitting.get_summary_statistics>`\ (self, method, merge\_celltype\_kwargs, ePSP\_summary\_statistics\_kwargs)
+     - Calculate summary statistics of the EPSPs.
+   * - :py:obj:`get_optimal_g <simrun.synaptic_strength_fitting.get_optimal_g>`\ (self, measured\_data, method, threashold)
+     - Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+   * - :py:obj:`get_tMax_vMax_baseline <simrun.synaptic_strength_fitting.get_tMax_vMax_baseline>`\ (t\_baseline, v\_baseline, t, v, tStim, tEnd)
+     - Calculate the ePSP amplitude.
+   * - :py:obj:`analyze_voltage_trace <simrun.synaptic_strength_fitting.analyze_voltage_trace>`\ (vTrace, tTrace)
+     - Calculate a voltage trace's extremum and time point thereof.
+   * - :py:obj:`get_tMax_vMax <simrun.synaptic_strength_fitting.get_tMax_vMax>`\ (t, v, tStim, tEnd)
+     - Calculate the maximum amplitude of an ePSP.
+   * - :py:obj:`merge_celltypes <simrun.synaptic_strength_fitting.merge_celltypes>`\ (vt, detection\_strings, celltype\_must\_be\_in)
+     - Concatenate the EPSPs of given celltypes.
+   * - :py:obj:`ePSP_summary_statistics <simrun.synaptic_strength_fitting.ePSP_summary_statistics>`\ (vt, threashold, tPSPStart)
+     - Calculate summary statistics of the PSP voltage and timing.
+   * - :py:obj:`linear_fit <simrun.synaptic_strength_fitting.linear_fit>`\ (gAMPANMDA, epsp)
+     - Calculate a linear fit between the synaptic conductance and the EPSP.
+   * - :py:obj:`linear_fit_pdf <simrun.synaptic_strength_fitting.linear_fit_pdf>`\ (pdf)
+     - Calculate linear fits between the synaptic conductance and the EPSP.
+   * - :py:obj:`calculate_optimal_g <simrun.synaptic_strength_fitting.calculate_optimal_g>`\ (pdf)
+     - Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data.
+
+

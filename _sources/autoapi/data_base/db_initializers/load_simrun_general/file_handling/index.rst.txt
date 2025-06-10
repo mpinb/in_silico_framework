@@ -1,0 +1,39 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling`
+
+file_handling
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   make_filelist </autoapi/data_base/db_initializers/load_simrun_general/file_handling/make_filelist>
+   get_file </autoapi/data_base/db_initializers/load_simrun_general/file_handling/get_file>
+   get_max_commas </autoapi/data_base/db_initializers/load_simrun_general/file_handling/get_max_commas>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.file_handling
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`make_filelist <data_base.db_initializers.load_simrun_general.file_handling.make_filelist>`\ (directory, suffix)
+     - Generate a list of all files with :paramref:`suffix` in the specified directory.
+   * - :py:obj:`get_file <data_base.db_initializers.load_simrun_general.file_handling.get_file>`\ (self, suffix)
+     - Get the filename of the unique file in the current directory with the specified suffix.
+   * - :py:obj:`get_max_commas <data_base.db_initializers.load_simrun_general.file_handling.get_max_commas>`\ (paths)
+     - Get the maximum amount of delimiters across many files.
+
+

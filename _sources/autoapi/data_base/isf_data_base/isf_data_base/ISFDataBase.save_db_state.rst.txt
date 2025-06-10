@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.save_db_state`
+
+ISFDataBase.save_db_state
+=========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.save_db_state()
+
+   Saves the data which defines the state of this database to ``db_state.json``
+
+   A database state contains the following information:
+
+   - ``_registeredDumpers``: A list of all registered dumpers.
+   - ``_unique_id``: A unique identifier for this database.
+   - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
+

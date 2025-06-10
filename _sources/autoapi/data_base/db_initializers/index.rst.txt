@@ -1,0 +1,50 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers`
+
+db_initializers
+===============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   load_simrun_general </autoapi/data_base/db_initializers/load_simrun_general/index>  
+   prepare_ANN_batches </autoapi/data_base/db_initializers/prepare_ANN_batches/index>  
+   synapse_activation_binning </autoapi/data_base/db_initializers/synapse_activation_binning/index>  
+
+.. py:module:: data_base.db_initializers
+
+.. autoapi-nested-parse::
+   Initialize a database from raw simulation data.
+
+   This package provides modules for initializing databases from simulation results.
+
+   :py:mod:`~data_base.db_initializers.load_simrun_general` provides a general
+   way to parse raw simulation output to intermediate pickle files, or permanent dask and pandas dataframes.
+   A database that has been initialized with this module is herafter called a "simrun-initialized" database.
+
+   Each other submodule provides an ``init`` method, which builds on top of the previously simrun-initialized data.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`load_simrun_general <data_base.db_initializers.load_simrun_general>`
+     - Parse simulation data generated with :py:mod:`simrun` for general purposes.
+   * - :py:obj:`prepare_ANN_batches <data_base.db_initializers.prepare_ANN_batches>`
+     - Parse a simrun-initialized database for ANN batch preparation.
+   * - :py:obj:`synapse_activation_binning <data_base.db_initializers.synapse_activation_binning>`
+     - Methods for fast binning of :ref:`syn_activation_format` dataframes.
+

@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.get_default_arguments`
+
+
+.. title:
+
+get_default_arguments
+=====================
+
+
+.. py:function:: simrun.utils.get_default_arguments(func)
+
+   Gets the keyword arguments with their default value from any function.
+
+   :Parameters: **func** (*callable*) -- The function to get the default arguments from.
+
+   :returns: Dictionary where the function names are keys, and their default values are values
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl` ❭ :mod:`~single_cell_parser.sim_control.SimControl.set_IClamp`
+
+SimControl.set_IClamp
+=====================
+
+.. py:method:: single_cell_parser.sim_control.SimControl.set_IClamp(delay=1, amp=-1, dur=3)
+
+   Initializes values for current clamp.
+
+   Default values:
+
+     delay = 1 ms
+     amp   = -1 nA
+     dur   = 3 ms
+

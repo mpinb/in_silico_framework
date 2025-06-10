@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model.dump`
+
+
+.. title:
+
+dump
+====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model.dump(obj, savedir)
+
+   Save the reduced model in the specified directory as a DataBase.
+
+   The database will contain the following keys:
+
+   - ``st``: Spike times with a precision of :math:`.01`.
+   - ``lda\_value\_dicts\_<index>``: Dictionaries of LDA values with a precision of :math:`.01`.
+   - ``Rm``: The reduced model.
+
+   :Parameters: * **obj** (:py:class:`~simrun.reduced\_model.get\_kernel.ReducedLdaModel`) -- Reduced model to be saved.
+                * **savedir** (*str*) -- Directory where the reduced model should be stored.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.parameters` ❭ :mod:`~biophysics_fitting.parameters.set_fixed_params`
+
+
+.. title:
+
+set_fixed_params
+================
+
+
+.. py:function:: biophysics_fitting.parameters.set_fixed_params(params, fixed_params=None)
+
+   Add fixed\_params to params.
+
+   :Parameters: * **params** (*pd.Series*) -- The parameters.
+                * **fixed\_params** (*dict*) -- The fixed parameters.
+
+   :returns: The parameters with the fixed parameters added.
+   :rtype: pd.Series
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

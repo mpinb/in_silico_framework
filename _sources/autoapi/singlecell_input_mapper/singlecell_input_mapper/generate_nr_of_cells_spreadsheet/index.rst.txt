@@ -1,0 +1,36 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet`
+
+generate_nr_of_cells_spreadsheet
+================================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   con_file_to_NumberOfConnectedCells_sheet </autoapi/singlecell_input_mapper/singlecell_input_mapper/generate_nr_of_cells_spreadsheet/con_file_to_NumberOfConnectedCells_sheet>
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet
+
+.. autoapi-nested-parse::
+   Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`con_file_to_NumberOfConnectedCells_sheet <singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet>`\ (con\_file, write\_output)
+     - Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column.
+
+

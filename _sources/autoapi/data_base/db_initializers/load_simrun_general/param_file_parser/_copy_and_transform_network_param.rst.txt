@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_network_param`
+
+
+.. title:
+
+_copy_and_transform_network_param
+=================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_network_param(netp_fn, target_fn, syn_fn_map, con_fn_map)
+
+   Convert all paths in a :ref:`network\_parameters\_format` file.
+
+   This function is used as a :paramref:`transform\_fun` in
+   :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.write\_param\_files\_to\_folder`.
+
+   :Parameters: **network** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- Dictionary containing the network model parameters.
+
+   .. attention::
+
+      The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
+      This happens during the copying process in :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.write\_param\_files\_to\_folder`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

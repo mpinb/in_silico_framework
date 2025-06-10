@@ -1,0 +1,47 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`
+
+
+.. title:
+
+write_sample_connectivity_summary
+=================================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary(fname=None, cellTypeSummaryData=None, columnSummaryData=None)
+
+   Write a summary of a single connectivity realization to a file.
+
+   The input summary tables can be computed with :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_generate\_output\_files`
+   For each cell type, this method writes a summary on the following attributes of each structure:
+
+   - Presynaptic cell type
+   - Number of synapses
+   - Mean path length to soma
+   - SD path length to soma
+   - Connected presynaptic cells
+   - Total presynaptic cells
+   - Convergence
+   - Number of synapses
+
+   If the brain has been subdivided in separate anatomical areas (and :paramref:`columnSummaryData` is not None),
+   the summary is also written for each area.
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **cellTypeSummaryData** (*dict*) -- Dictionary containing the summary data for each cell type
+                  Must contain at least a key for each presynaptic cell type.
+                  May additionally include a key for each anatomical structure, and as values
+                  another dictionary with the rpesynaptic cell types as keys.
+                  Values contain the information as mentioned above.
+                * **columnSummaryData** (*dict*) -- Dictionary containing the summary data for each column.
+
+   :returns: None. Writes the results to disk.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

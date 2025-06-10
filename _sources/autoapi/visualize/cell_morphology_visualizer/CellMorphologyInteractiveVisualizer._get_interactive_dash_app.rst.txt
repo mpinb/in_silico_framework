@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_dash_app`
+
+CellMorphologyInteractiveVisualizer._get_interactive_dash_app
+=============================================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_dash_app(color, t_start, t_stop, t_step)
+
+   This is the main function to set up an interactive plot with scalar data overlayed.
+   It fetches the scalar data of interest (usually membrane voltage, but others are possible; check with self.possible_scalars).
+   It only fetches data for the time points specified in self.times_to_show, as only these timepoints will be plotted out.
+
+   :Parameters: * **color** (*str, optional*) -- Scalar data to overlay on interactive plot. Defaults to None.
+                * **background_color** (*str, optional*) -- Background color of plot. Defaults to "rgb(180,180,180)".
+                * **renderer** (*str, optional*) -- Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected".
+
+   :returns: an interactive render of the cell.
+   :rtype: ipywidgets.VBox object
+

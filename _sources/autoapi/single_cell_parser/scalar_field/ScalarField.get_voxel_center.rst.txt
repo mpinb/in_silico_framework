@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField.get_voxel_center`
+
+ScalarField.get_voxel_center
+============================
+
+.. py:method:: single_cell_parser.scalar_field.ScalarField.get_voxel_center(ijk)
+
+   Fetch the center of the voxel given by indices i,j,k.
+
+   .. warning:: Does not perform bounds checking. The voxel center may be outside the span of the mesh.
+
+   :Parameters: **ijk** (*tuple*) -- tuple of 3 integers: the indices of voxel in mesh.
+
+   :returns: The 3D coordinates of the center of the voxel.
+   :rtype: tuple
+

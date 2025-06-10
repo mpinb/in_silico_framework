@@ -1,0 +1,39 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper`
+
+synapse_mapper
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   SynapseMapper </autoapi/single_cell_parser/synapse_mapper/SynapseMapper>
+
+.. py:module:: single_cell_parser.synapse_mapper
+
+.. autoapi-nested-parse::
+   Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
+
+   For more fine-grained control over the creation of synapse distributions onto a morphology,
+   please refer to the :py:mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`SynapseMapper <single_cell_parser.synapse_mapper.SynapseMapper>`
+     - Assign synapses to a neuron morphology based on an existing synapse distribution.
+
+
+

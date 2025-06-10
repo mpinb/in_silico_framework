@@ -1,0 +1,42 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.histogram`
+
+histogram
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   histogram </autoapi/visualize/histogram/histogram>
+   histogram2 </autoapi/visualize/histogram/histogram2>
+
+.. py:module:: visualize.histogram
+
+.. autoapi-nested-parse::
+   Plot line histograms
+
+   This module provides convenience methods for plotting line histograms (so no filled surfaces) from precomputed bins.
+   This is used to plot out e.g. activity data for multiple populations.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`histogram <visualize.histogram.histogram>`\ (hist\_bins, colormap, ax, label, groupby\_attribute)
+     - Efficiently plot a histogram from bins.
+   * - :py:obj:`histogram2 <visualize.histogram.histogram2>`\ (hist\_bins, color, ax, label, mode)
+     - Plot a histogram from bins.
+
+

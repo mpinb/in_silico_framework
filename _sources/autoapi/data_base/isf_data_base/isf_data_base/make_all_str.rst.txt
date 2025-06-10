@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.make_all_str`
+
+
+.. title:
+
+make_all_str
+============
+
+
+.. py:function:: data_base.isf_data_base.isf_data_base.make_all_str(dict_)
+
+   Convert all items in a (nested) dictionary to string.
+
+   Used to write out metadata in JSON format.
+
+   :Parameters: **dict\_** (*dict*) -- The dictionary to convert.
+
+   :returns: The converted dictionary.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

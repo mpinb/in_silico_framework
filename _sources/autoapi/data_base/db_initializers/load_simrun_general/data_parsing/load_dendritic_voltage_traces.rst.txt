@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces`
+
+
+.. title:
+
+load_dendritic_voltage_traces
+=============================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces(db, suffix_key_dict, repartition=None)
+
+   Load the voltage traces from dendritic recording sites.
+
+   Dendritic recording sites are defined in the :ref:`cell\_parameters\_format` files (under the key ``sim.recordingSites``).
+   The voltage traces for each recording site are read with
+   :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.load\_dendritic\_voltage\_traces\_helper`.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The target database that should contain the parsed simulation results.
+                * **suffix\_key\_dict** (*dict*) -- Dictionary containing the suffixes of the dendritic voltage trace files.
+                  The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+
+   :returns: Dictionary containing the dask dataframes of the dendritic voltage traces.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

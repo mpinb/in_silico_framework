@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_quantification_in_period` ❭ :mod:`~spike_analysis.core.STAPlugin_quantification_in_period.setup`
+
+STAPlugin_quantification_in_period.setup
+========================================
+
+.. py:method:: spike_analysis.core.STAPlugin_quantification_in_period.setup(spike_times_analysis)
+
+   Sets up the analysis: quantifies the activity in a period.
+
+   :paramref:`_result` will be the quantified activity. This is either:
+
+   - the frequency of the activity in the period (mode='frequency')
+   - the count of the activity per trial (mode='count_per_trial')
+   - the total count of the activity (mode='count_total')
+
+   .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+

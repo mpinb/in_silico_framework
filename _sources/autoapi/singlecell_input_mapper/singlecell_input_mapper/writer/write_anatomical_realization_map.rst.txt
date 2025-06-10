@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`
+
+
+.. title:
+
+write_anatomical_realization_map
+================================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map(fname=None, functionalMap=None, anatomicalID=None)
+
+   Writes a :ref:`con\_file\_format` file containing a list of all functional connections.
+
+   Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
+   Only valid for an anatomical synapse realization with ID :paramref:`anatomicalID`.
+   Uses :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.generate\_nr\_of\_cells\_spreadsheet.con\_file\_to\_NumberOfConnectedCells\_sheet`
+   to generate the number of connected cells spreadsheet.
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **functionalMap** (*list*) -- List of tuples, each containing the cell type, presynaptic cell index and synapse index
+                * **anatomicalID** (*str*) -- ID of the anatomical realization
+
+   .. warning::
+
+      A :ref:`con\_file\_format` file is only valid with a corresponding :ref:`syn\_file\_format` file.
+      See :py:meth:`~write\_cell\_synapse\_locations`
+
+   :returns: None. Writes results to disk.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

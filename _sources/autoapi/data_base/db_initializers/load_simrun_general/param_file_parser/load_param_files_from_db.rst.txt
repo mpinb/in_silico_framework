@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db`
+
+
+.. title:
+
+load_param_files_from_db
+========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db(db, sti)
+
+   Load the :ref:`cell\_parameters\_format` and :ref:`network\_parameters\_format` files from the database.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database containing the parsed simulation results.
+                * **sti** (*str*) -- For which simulation trial index to load the parameter files.
+
+   :returns: The :py:class:`~single\_cell\_parser.parameters.ParameterSet` objects for the cell and network.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

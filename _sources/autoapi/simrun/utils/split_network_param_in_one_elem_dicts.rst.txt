@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.split_network_param_in_one_elem_dicts`
+
+
+.. title:
+
+split_network_param_in_one_elem_dicts
+=====================================
+
+
+.. py:function:: simrun.utils.split_network_param_in_one_elem_dicts(dict_)
+
+   Split a network parameter dictionary into a list of dictionaries.
+
+   This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
+   for each key in the original dictionary.
+
+   :Parameters: **dict\_** (dict | :py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The network parameter dictionary.
+
+   :returns: A list of dictionaries, each containing only one element of the original dictionary.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

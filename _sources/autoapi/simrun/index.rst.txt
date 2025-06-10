@@ -1,0 +1,76 @@
+
+
+
+simrun
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   modular_reduced_model_inference </autoapi/simrun/modular_reduced_model_inference/index>  
+   PSP_with_cell_modification </autoapi/simrun/PSP_with_cell_modification/index>  
+   generate_synapse_activations </autoapi/simrun/generate_synapse_activations/index>  
+   get_cell_with_network </autoapi/simrun/get_cell_with_network/index>  
+   parameters_to_cell </autoapi/simrun/parameters_to_cell/index>  
+   rerun_db </autoapi/simrun/rerun_db/index>  
+   robust_dask_delayed_execution </autoapi/simrun/robust_dask_delayed_execution/index>  
+   run_existing_synapse_activations </autoapi/simrun/run_existing_synapse_activations/index>  
+   run_new_simulations </autoapi/simrun/run_new_simulations/index>  
+   seed_manager </autoapi/simrun/seed_manager/index>  
+   sim_trial_to_cell_object </autoapi/simrun/sim_trial_to_cell_object/index>  
+   synaptic_strength_fitting </autoapi/simrun/synaptic_strength_fitting/index>  
+   utils </autoapi/simrun/utils/index>  
+
+.. py:module:: simrun
+
+.. autoapi-nested-parse::
+   Run simulations of network-embedded neuron models.
+
+   This package provides a framework to run simulations of network-embedded neuron models.
+   They allow to run new simulations from existing parameter files, or to re-run existing simulations with
+   adapted parameters for the cell and/or network.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`modular_reduced_model_inference <simrun.modular_reduced_model_inference>`
+     - Create reduced models from synapse activation data.
+   * - :py:obj:`PSP_with_cell_modification <simrun.PSP_with_cell_modification>`
+     - Calculate PSPs depending on cell modifications.
+   * - :py:obj:`generate_synapse_activations <simrun.generate_synapse_activations>`
+     - Generate synapse activation files.
+   * - :py:obj:`get_cell_with_network <simrun.get_cell_with_network>`
+     - Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
+   * - :py:obj:`parameters_to_cell <simrun.parameters_to_cell>`
+     - Rebuild and re-simulate a network-embedded cell from :ref:`param_file_format` files.
+   * - :py:obj:`rerun_db <simrun.rerun_db>`
+     - Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
+   * - :py:obj:`robust_dask_delayed_execution <simrun.robust_dask_delayed_execution>`
+     - Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
+   * - :py:obj:`run_existing_synapse_activations <simrun.run_existing_synapse_activations>`
+     - ongoing activity L2 neuron model
+   * - :py:obj:`run_new_simulations <simrun.run_new_simulations>`
+     - Create and simulate network-embedded neuron models.
+   * - :py:obj:`seed_manager <simrun.seed_manager>`
+     - Get a random seed
+   * - :py:obj:`sim_trial_to_cell_object <simrun.sim_trial_to_cell_object>`
+     - Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+   * - :py:obj:`synaptic_strength_fitting <simrun.synaptic_strength_fitting>`
+     - Calculate the cell type specific synaptic strengths of synapses based on the neuron model and network parameters.
+   * - :py:obj:`utils <simrun.utils>`
+     - Utility and convenience functions for the :py:mod:`simrun` package.
+

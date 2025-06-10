@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_bounds`
+
+PySection2._compute_bounds
+==========================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_bounds()
+
+   Compute the bounding box of the section.
+
+   :returns: None. Set the bounding box in the format (xMin, xMax, yMin, yMax, zMin, zMax).
+

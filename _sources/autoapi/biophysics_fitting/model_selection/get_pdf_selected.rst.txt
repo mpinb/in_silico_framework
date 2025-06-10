@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.model_selection` ❭ :mod:`~biophysics_fitting.model_selection.get_pdf_selected`
+
+
+.. title:
+
+get_pdf_selected
+================
+
+
+.. py:function:: biophysics_fitting.model_selection.get_pdf_selected(pdf, BAC_limit=3.5, step_limit=4.5, objectives_BAC=objectives_BAC, objectives_step=objectives_step)
+
+   Select models based on cutoffs from a DataFrame.
+
+   Filters the dataframe such that all models are within
+   desired range of the objective, and sorts it by its
+   deviation from the empirical mean.
+   See :py:mod:`~biophysics\_fitting.evaluator.Evaluator` for more information
+   on evaluation voltage traces.
+
+   :Parameters: * **pdf** (*pd.DataFrame*) -- A DataFrame with model evaluations.
+                * **BAC\_limit** (*float*) -- The cutoff for the BAC.
+                * **step\_limit** (*float*) -- The cutoff for the step.
+                * **objectives\_BAC** (*list*) -- The objectives for the BAC.
+                * **objectives\_step** (*list*) -- The objectives for the step.
+
+   :returns: A filtered DataFrame and the model\_id of the best model.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

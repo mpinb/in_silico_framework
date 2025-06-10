@@ -1,0 +1,39 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.ongoing_network_param_from_template`
+
+ongoing_network_param_from_template
+===================================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   create_network_parameter </autoapi/singlecell_input_mapper/ongoing_network_param_from_template/create_network_parameter>
+   load_cell_number_file </autoapi/singlecell_input_mapper/ongoing_network_param_from_template/load_cell_number_file>
+
+.. py:module:: singlecell_input_mapper.ongoing_network_param_from_template
+
+.. autoapi-nested-parse::
+   Create a network parameter template file.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`create_network_parameter <singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter>`\ (templateParamName, cellNumberFileName, synFileName, conFileName, outFileName, write\_all\_celltypes)
+     - Create a template :ref:`network_parameters_format` file from a template parameter file and a cell number file.
+   * - :py:obj:`load_cell_number_file <singlecell_input_mapper.ongoing_network_param_from_template.load_cell_number_file>`\ (cellNumberFileName)
+     - Load the cell number file.
+
+

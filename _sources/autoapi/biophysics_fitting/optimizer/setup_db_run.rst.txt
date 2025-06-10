@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.setup_db_run`
+
+
+.. title:
+
+setup_db_run
+============
+
+
+.. py:function:: biophysics_fitting.optimizer.setup_db_run(db_setup, run)
+
+   Create a sub-database for each run of the optimization algorithm.
+   db\_setup contains a sub db for each run of the full optimization. This sub db is created here.
+
+   :Parameters: * **db\_setup** (*data\_base.DataBase*) -- The database containing the setup of the optimization.
+                * **run** (*int*) -- The index of the optimization run.
+
+   :returns: The database for the optimization run containing sub-databases..
+   :rtype: data\_base.DataBase
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

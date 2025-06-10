@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot2`
+
+
+.. title:
+
+rasterplot2
+===========
+
+
+.. py:function:: visualize.rasterplot.rasterplot2(st, ax=None, x_offset=0, c=None, plot_kwargs=dict(solid_capstyle=&#39;butt&#39;), y_offset=None, y_plot_length=1, marker=&#39;line&#39;)
+
+   Plot a rasterplot from a spike times dataframe.
+
+   :Parameters: * **st** (*pandas.DataFrame*) -- A DataFrame containing the spike times, where each row is a single trial of a single unit.
+                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+                * **x\_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
+                * **c** (*str or array-like, optional*) -- An optional color for the plot. Can be a single color format string, or a sequence of colors.
+                * **plot\_kwargs** (*dict, optional*) -- Additional keyword arguments for the plot function. Default is {'solid\_capstyle': 'butt'}.
+                * **y\_offset** (*int, optional*) -- An optional starting y-value for the plot. If not provided, it is set to the number of rows in the DataFrame.
+                * **y\_plot\_length** (*float, optional*) -- The length of the line to plot for each event. Default is 1.
+                * **marker** (*str, optional*) -- The marker style to use for plotting events. Defaults to 'line'. If 'line', lines of defined length are plotted.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

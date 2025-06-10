@@ -1,0 +1,41 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW`
+
+RW
+==
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   RW </autoapi/biophysics_fitting/exploration_from_seedpoint/RW/RW>
+
+.. py:module:: biophysics_fitting.exploration_from_seedpoint.RW
+
+.. autoapi-nested-parse::
+   Perform a random walk through parameter space starting from a seed point.
+
+   This module provides the :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
+   which implements a random walk procedure through parameter space.
+   Every random parameter iteration provides new biophsyical parameters,
+   which are evaluated by running a set of stimulus protocols with early stopping criteria.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`RW <biophysics_fitting.exploration_from_seedpoint.RW.RW>`
+     - Class to perform RW exploration from a seedpoint.
+
+
+

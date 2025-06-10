@@ -1,0 +1,36 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.dask_wrappers`
+
+dask_wrappers
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   read_csvs </autoapi/data_base/isf_data_base/IO/dask_wrappers/read_csvs>
+
+.. py:module:: data_base.isf_data_base.IO.dask_wrappers
+
+.. autoapi-nested-parse::
+   Read dask csv from an explicit filelist instead of only globstring.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_csvs <data_base.isf_data_base.IO.dask_wrappers.read_csvs>`\ (\*args, \*\*kwargs)
+     - Read dask dataframes from csv files.
+
+

@@ -1,0 +1,72 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_ISIn
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <STAPlugin_ISIn.setup>
+   event_analysis_ISIn <STAPlugin_ISIn.event_analysis_ISIn>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_ISIn(name='ISIn', source='spike_times', max_n=5)
+   
+   SpikeTimeAnalysis (STA) plugin to compute the inter spike interval (ISI) to the next, second next, nth spike.
+
+   .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
+
+   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'ISIn'.
+                * **source** (*str, optional*) -- The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+                * **max_n** (*int, optional*) -- The maximum order of ISIs computed. Defaults to 5.
+
+   :Attributes:
+
+   .. attribute:: name
+
+      The name of the plugin.
+
+      :type: str
+
+   .. attribute:: source
+
+      The :py:class:`~data_base.data_base.DataBase` key containing the spike times.
+
+      :type: str
+
+   .. attribute:: max_n
+
+      The maximum order of ISIs computed.
+
+      :type: int
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_ISIn.setup>`\ (spike\_times\_analysis)
+        - Sets up the analysis: Computes the inter spike interval (ISI) to the next, second next, nth spike.
+      * - :py:obj:`event_analysis_ISIn <spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn>`\ (spike\_times, n)
+        - :summarylabel:`static` Computes for each spike the inter spike interval (ISI) to the next, second next ... nth next spike.
+

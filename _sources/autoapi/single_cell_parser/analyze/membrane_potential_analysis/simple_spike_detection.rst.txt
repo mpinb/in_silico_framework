@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`
+
+
+.. title:
+
+simple_spike_detection
+======================
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode=&#39;regular&#39;)
+
+   Detect spike times in a voltage trace.
+
+   Simple spike detection method. Identifies spike times within optional window ``[tBegin, tEnd]``
+   by determining :paramref:`threshold` crossing times from below.
+
+   :Parameters: * **t** (*array*) -- Time vector
+                * **v** (*array*) -- Membrane potential vector.
+                * **tBegin** (*float, optional*) -- Start time of the detection window. Default is ``None`` (begin of voltage trace).
+                * **tEnd** (*float, optional*) -- End time of the detection window. Default is ``None`` (end of voltage trace).
+                * **threshold** (*float, optional*) -- Threshold for spike detection (mV). Default is :math:`0.0 mV`.
+                * **mode** (*str, optional*) -- Mode for spike detection. Default is ``regular``.
+                  - ``regular``: Checks if the membrane potential crosses an absolute :paramref:`threshold`.
+                  - ``slope``: Checks if :math:`dV/dt` is larger than a :paramref:`threshold`.
+
+   :returns: List of spike times.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

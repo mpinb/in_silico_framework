@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.hay_param_to_scp_neuron_param`
+
+
+.. title:
+
+hay_param_to_scp_neuron_param
+=============================
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.hay_param_to_scp_neuron_param(p)
+
+   Convert a Hay parameter name to a SCP neuron parameter name.
+
+   This function is a simple converter that converts the Hay naming convention to what ISF
+   uses internally in :py:mod:`~single\_cell\_parser.cell.Cell`
+
+   :Parameters: **p** (*str*) -- The Hay parameter name.
+
+   :returns: The SCP neuron parameter name.
+   :rtype: str
+
+   .. rubric:: Example
+      :class: example
+
+   >>> hay\_param\_name = "NaTa\_t.axon.gNaTa\_tbar"
+   >>> hay\_param\_to\_scp\_neuron\_param(hay\_param\_name)
+   "NaTa\_t.AIS.gNaTa\_tbar"  # axon --> AIS
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

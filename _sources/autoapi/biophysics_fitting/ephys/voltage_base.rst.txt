@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.voltage_base`
+
+
+.. title:
+
+voltage_base
+============
+
+
+.. py:function:: biophysics_fitting.ephys.voltage_base(t, v, stim_delay)
+
+   Calculates the mean voltage between 0.5 * stim\_delay and 0.75 * stim\_delay.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **stim\_delay** (*float*) -- Delay time of the stimulus.
+
+   :returns: Mean voltage between 0.5*stim\_delay and 0.75*stim\_delay.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,86 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis`
+
+RW_analysis
+===========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Load </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/Load>
+   read_parameters </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/read_parameters>
+   robust_read_pickle </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/robust_read_pickle>
+   read_pickle </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/read_pickle>
+   read_all </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/read_all>
+   get_inside_fraction </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/get_inside_fraction>
+   normalize </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/normalize>
+   get_param_range_evolution_from_ddf </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/get_param_range_evolution_from_ddf>
+   get_index </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/get_index>
+   get_depolarization_index </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/get_depolarization_index>
+   get_hyperpolarization_index </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/get_hyperpolarization_index>
+   augment_ddf_with_PCA_space </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/augment_ddf_with_PCA_space>
+   pandas_binby </autoapi/biophysics_fitting/exploration_from_seedpoint/RW_analysis/pandas_binby>
+
+.. py:module:: biophysics_fitting.exploration_from_seedpoint.RW_analysis
+
+.. autoapi-nested-parse::
+   This module provides routines to analyze the results of a random walk exploration through biophysical parameter space.
+
+   .. seealso:: :py:mod:`~biophysics_fitting.exploration_from_seedpoint.RW`
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Load <biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load>`
+     - Class for efficiently loading exploration results
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`read_parameters <biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_parameters>`\ (seed\_folder, particle\_id, normalized, only\_in\_space, only\_return\_parameters, param\_names, param\_ranges)
+     - Read the biophysical parameters that were explored during a RW exploration.
+   * - :py:obj:`robust_read_pickle <biophysics_fitting.exploration_from_seedpoint.RW_analysis.robust_read_pickle>`\ (path)
+     - Read a pickled dataframe. If it cannot be read, still return a dataframe, containing an error as content.
+   * - :py:obj:`read_pickle <biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle>`\ (seed\_folder, particle\_id)
+     - Read the results of a single particle of a RW exploration.
+   * - :py:obj:`read_all <biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_all>`\ (basedir, n\_particles\_start, n\_particles\_end)
+     - Read the results of all directories contained within some base directory, independent of which seepdoint or particle.
+   * - :py:obj:`get_inside_fraction <biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_inside_fraction>`\ (l)
+     - Print the fraction of models that are inside the objective space.
+   * - :py:obj:`normalize <biophysics_fitting.exploration_from_seedpoint.RW_analysis.normalize>`\ (df, params)
+     - Normalize a pd.DataFrame according to the values of specified parameters.
+   * - :py:obj:`get_param_range_evolution_from_ddf <biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf>`\ (ddf, params, return\_mi\_ma)
+     - Compute the range of parameters explored by a RW exploration, as a fraction of the total parameter range.
+   * - :py:obj:`get_index <biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_index>`\ (dataframe, channel)
+     - Compute the depolarization or hyperpolarization index.
+   * - :py:obj:`get_depolarization_index <biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_depolarization_index>`\ (dataframe)
+     - Compute the relative difference in depolarization contribution of Ca_LVA and Ca_HVA during the BAC stimulus.
+   * - :py:obj:`get_hyperpolarization_index <biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_hyperpolarization_index>`\ (dataframe)
+     - Compute the relative difference in hyperpolarization contribution of Im and SK during the BAC stimulus.
+   * - :py:obj:`augment_ddf_with_PCA_space <biophysics_fitting.exploration_from_seedpoint.RW_analysis.augment_ddf_with_PCA_space>`\ (ddf)
+     - Augment a dask dataframe with the first two principal components of the hz current space.
+   * - :py:obj:`pandas_binby <biophysics_fitting.exploration_from_seedpoint.RW_analysis.pandas_binby>`\ (df, c1, c2, binsize)
+     - Bin a pandas dataframe by two columns.
+
+

@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._build_dendritic_voltage_traces`
+
+
+.. title:
+
+_build_dendritic_voltage_traces
+===============================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None)
+
+   Load dendritic voltage traces and add them to the database under the key ``dendritic\_recordings``.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the data should be added.
+                * **suffix\_dict** (*dict*) -- Dictionary containing the suffixes of the dendritic voltage trace files.
+                  Default is ``None``, and they are inferred from the cell parameter files.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

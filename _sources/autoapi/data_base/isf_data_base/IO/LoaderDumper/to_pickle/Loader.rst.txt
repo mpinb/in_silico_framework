@@ -1,0 +1,43 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.to_pickle` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.to_pickle.Loader`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Loader
+======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get <Loader.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.IO.LoaderDumper.to_pickle.Loader
+   
+   Loader for pickle objects
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get <data_base.isf_data_base.IO.LoaderDumper.to_pickle.Loader.get>`\ (savedir)
+        - Load the object from the specified folder
+

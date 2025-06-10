@@ -1,0 +1,48 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.vtk`
+
+vtk
+===
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   convert_amira_surf_to_vtk </autoapi/visualize/vtk/convert_amira_surf_to_vtk>
+   write_vtk_pointcloud_file </autoapi/visualize/vtk/write_vtk_pointcloud_file>
+   save_cells_landmark_files_vtk </autoapi/visualize/vtk/save_cells_landmark_files_vtk>
+   write_vtk_skeleton_file </autoapi/visualize/vtk/write_vtk_skeleton_file>
+   convert_amira_lattice_to_vtk </autoapi/visualize/vtk/convert_amira_lattice_to_vtk>
+
+.. py:module:: visualize.vtk
+
+.. autoapi-nested-parse::
+   Save simulation data in vtk compatible formats
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`convert_amira_surf_to_vtk <visualize.vtk.convert_amira_surf_to_vtk>`\ (surf\_file, outname, outdir)
+     - Given the path to an amira .surf file, this method converts it to a .vtk surface file.
+   * - :py:obj:`write_vtk_pointcloud_file <visualize.vtk.write_vtk_pointcloud_file>`\ (out\_name, out\_dir, points, scalar\_data, scalar\_data\_names)
+     - Write out 3D point data as a VTK point cloud.
+   * - :py:obj:`save_cells_landmark_files_vtk <visualize.vtk.save_cells_landmark_files_vtk>`\ (sa, synapse\_location\_pdf, times\_to\_show, outdir, celltypes, tspan, set\_index)
+     - Save synapse activations as vtk point cloud files for each timepoint.
+   * - :py:obj:`write_vtk_skeleton_file <visualize.vtk.write_vtk_skeleton_file>`\ (lookup\_table, out\_name, out\_dir, point\_scalar\_data, n\_decimals)
+     - Write out a .vtk file for a neuron morphology.
+   * - :py:obj:`convert_amira_lattice_to_vtk <visualize.vtk.convert_amira_lattice_to_vtk>`\ (surf\_file, outname, outdir)
+     - Convert an AMIRA lattice file to vtk structured points.
+
+

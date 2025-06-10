@@ -1,0 +1,57 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_voltage_and_timing`
+
+
+.. title:
+
+get_voltage_and_timing
+======================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method=&#39;dynamic_baseline&#39;, tStim=None, tEnd=None)
+
+   Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.
+
+   The maximum amplitude is its extremum, hether that is a mimimum or a maximum.
+   The result is of the form::
+
+       {
+           celltype\_1: {
+               g1\_1: {
+                   g2\_1: [
+                       (tMax\_1, vMax\_1,)  # synapse 1
+                       (tMax\_2, vMax\_2,)  # synapse 2
+                       ...
+                   ],
+                   g2\_2: [...],
+                   ...
+               },
+               g1\_2: {...},
+           celltype\_2: {...},
+       }
+
+   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.get\_voltage\_traces`.
+                * **method** (*str*) --
+
+                  ``dynamic\_baseline``: a simulation without any synaptic activation is
+                      substracted from a simulation with cell activation. The maximum and
+                      timepoint of maximum is returned
+                  ``constant\_baseline``: the voltage at :math:`t = 110ms` (i.e. directly before
+                      synapse activation) is considered as baseline and substracted
+                      from all voltages at all timepoints.
+                      The maximum and timepoint of the maximum after :math:`t = 110ms` is
+                      returned.
+                * **tStim** (*float*) -- Timepoint of synapse activation.
+                * **tEnd** (*float*) -- End time of the simulation.
+
+   :returns: A dictionary where lists of ``(time, max\_v)`` are given for each synapse, categorized under the keys ``(cell\_type, g1, g2)``.
+   :rtype: defaultdict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.is_db`
+
+
+.. title:
+
+is_db
+=====
+
+
+.. py:function:: data_base.utils.is_db(dir_to_data)
+
+   Check if a path is a :py:class:`~data\_base.data\_base.DataBase`.
+
+   :Parameters: **dir\_to\_data** (*pathlib.Path*) -- The path to the directory
+
+   :returns: ``True`` if :paramref:`dir\_to\_data` is a (sub)db, ``False`` otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

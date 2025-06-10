@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._keyword_is_scalar_data`
+
+CMVDataParser._keyword_is_scalar_data
+=====================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._keyword_is_scalar_data(keyword)
+
+   Check if a keyword is a scalar data type.
+
+   :Parameters: **keyword** (*str*) -- keyword to check. Example: "grey", "vm", "voltage", "dendrites", "dendritic group"
+
+   :returns: True if the keyword refers to scalar data, False if it is a solid color like "grey".
+   :rtype: bool
+

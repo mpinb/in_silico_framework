@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.select_cells_that_spike_in_interval`
+
+
+.. title:
+
+select_cells_that_spike_in_interval
+===================================
+
+
+.. py:function:: simrun.utils.select_cells_that_spike_in_interval(sa, tmin, tmax, set_index=[&#39;synapse_ID&#39;, &#39;synapse_type&#39;])
+
+   Select cells whose synapses were active in a given time interval.
+
+   :Parameters: * **sa** (*pd.DataFrame*) -- The :ref:`syn\_activation\_format` DataFrame.
+                * **tmin** (*float*) -- The start time of the interval.
+                * **tmax** (*float*) -- The end time of the interval.
+                * **set\_index** (*list*) -- The index of the DataFrame. Default is ``['synapse\_ID', 'synapse\_type']``.
+
+   :returns: A list of tuples containing the synapse ID and the synapse type of the cells that spike in the interval.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,133 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper`
+
+LoaderDumper
+============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   cell </autoapi/data_base/isf_data_base/IO/LoaderDumper/cell/index>  
+   dask_to_categorized_msgpack </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_categorized_msgpack/index>  
+   dask_to_msgpack </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_msgpack/index>  
+   dask_to_parquet </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/index>  
+   just_create_folder </autoapi/data_base/isf_data_base/IO/LoaderDumper/just_create_folder/index>  
+   just_create_isf_db </autoapi/data_base/isf_data_base/IO/LoaderDumper/just_create_isf_db/index>  
+   numpy_to_msgpack </autoapi/data_base/isf_data_base/IO/LoaderDumper/numpy_to_msgpack/index>  
+   numpy_to_npy </autoapi/data_base/isf_data_base/IO/LoaderDumper/numpy_to_npy/index>  
+   numpy_to_npz </autoapi/data_base/isf_data_base/IO/LoaderDumper/numpy_to_npz/index>  
+   numpy_to_zarr </autoapi/data_base/isf_data_base/IO/LoaderDumper/numpy_to_zarr/index>  
+   pandas_to_msgpack </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_msgpack/index>  
+   pandas_to_parquet </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_parquet/index>  
+   pandas_to_pickle </autoapi/data_base/isf_data_base/IO/LoaderDumper/pandas_to_pickle/index>  
+   parent_classes </autoapi/data_base/isf_data_base/IO/LoaderDumper/parent_classes/index>  
+   reduced_lda_model </autoapi/data_base/isf_data_base/IO/LoaderDumper/reduced_lda_model/index>  
+   shared_numpy_store </autoapi/data_base/isf_data_base/IO/LoaderDumper/shared_numpy_store/index>  
+   to_cloudpickle </autoapi/data_base/isf_data_base/IO/LoaderDumper/to_cloudpickle/index>  
+   to_msgpack </autoapi/data_base/isf_data_base/IO/LoaderDumper/to_msgpack/index>  
+   to_pickle </autoapi/data_base/isf_data_base/IO/LoaderDumper/to_pickle/index>  
+   utils </autoapi/data_base/isf_data_base/IO/LoaderDumper/utils/index>  
+   load </autoapi/data_base/isf_data_base/IO/LoaderDumper/load>
+   get_dumper_string_by_dumper_module </autoapi/data_base/isf_data_base/IO/LoaderDumper/get_dumper_string_by_dumper_module>
+   generic_to_specific_databases_module_name </autoapi/data_base/isf_data_base/IO/LoaderDumper/generic_to_specific_databases_module_name>
+   get_dumper_string_by_savedir </autoapi/data_base/isf_data_base/IO/LoaderDumper/get_dumper_string_by_savedir>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper
+
+.. autoapi-nested-parse::
+   Read and write data in various formats.
+
+   This package provides IO modules that always contain three components:
+
+   1. A ``dump()`` function to write out the data, and its corresponding ``Loader`` object.
+   2. A ``Loader`` class that can load the data back into memory.
+   3. a ``check()`` method that checks whether the object can be saved with this dumper.
+
+   To save an object, the dump method is called::
+
+       >>> import myDumper
+       >>> myDumper.dump(obj, savedir)
+
+   This saves the object as specified in the respective ``dump()`` method.
+   In addition, a ``Loader.json`` is saved alongside the data.
+   This file contains the specification of a ``Loader`` object,
+   which can then be initialized and contains all the mechanisms to load the object back into memory.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`load <data_base.isf_data_base.IO.LoaderDumper.load>`\ (savedir, load\_data, loader\_kwargs)
+     - Standard interface to load data.
+   * - :py:obj:`get_dumper_string_by_dumper_module <data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_dumper_module>`\ (dumper\_module)
+     - Convert a dumper submodule to a string.
+   * - :py:obj:`generic_to_specific_databases_module_name <data_base.isf_data_base.IO.LoaderDumper.generic_to_specific_databases_module_name>`\ (module\_name)
+     - Convert a relative module path to an absolute one.
+   * - :py:obj:`get_dumper_string_by_savedir <data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_savedir>`\ (savedir)
+     - Get the dumper string from a filepath.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell <data_base.isf_data_base.IO.LoaderDumper.cell>`
+     - Save and load :py:class:`~single_cell_parser.cell.Cell` objects to and from ``.pickle`` format.
+   * - :py:obj:`dask_to_categorized_msgpack <data_base.isf_data_base.IO.LoaderDumper.dask_to_categorized_msgpack>`
+     - Save and load dask dataframes to msgpack with categorical columns.
+   * - :py:obj:`dask_to_msgpack <data_base.isf_data_base.IO.LoaderDumper.dask_to_msgpack>`
+     - Save and load dask dataframes to msgpack.
+   * - :py:obj:`dask_to_parquet <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet>`
+     - Save and load dask dataframes to and from Apache parquet format.
+   * - :py:obj:`just_create_folder <data_base.isf_data_base.IO.LoaderDumper.just_create_folder>`
+     - Create a folder and return it as a ManagedFolder object.
+   * - :py:obj:`just_create_isf_db <data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db>`
+     - Create and load :py:class:`~data_base.isf_data_base.isf-data_base.ISFDataBase` objects in a database.
+   * - :py:obj:`numpy_to_msgpack <data_base.isf_data_base.IO.LoaderDumper.numpy_to_msgpack>`
+     - Read and write numpy arrays to msgpack files
+   * - :py:obj:`numpy_to_npy <data_base.isf_data_base.IO.LoaderDumper.numpy_to_npy>`
+     - Read and write a numpy array to ``npy`` format.
+   * - :py:obj:`numpy_to_npz <data_base.isf_data_base.IO.LoaderDumper.numpy_to_npz>`
+     - Read and write a numpy array to the compressed ``.npz`` format.
+   * - :py:obj:`numpy_to_zarr <data_base.isf_data_base.IO.LoaderDumper.numpy_to_zarr>`
+     - Read and write a numpy array to the ``zarr`` format.
+   * - :py:obj:`pandas_to_msgpack <data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack>`
+     - Save and load pandas dataframes to msgpack files.
+   * - :py:obj:`pandas_to_parquet <data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet>`
+     - Read and write a pandas DataFrame to the parquet format.
+   * - :py:obj:`pandas_to_pickle <data_base.isf_data_base.IO.LoaderDumper.pandas_to_pickle>`
+     - Read and write a pandas DataFrame to the pickle format.
+   * - :py:obj:`parent_classes <data_base.isf_data_base.IO.LoaderDumper.parent_classes>`
+     - Base class for child Loader classes
+   * - :py:obj:`reduced_lda_model <data_base.isf_data_base.IO.LoaderDumper.reduced_lda_model>`
+     - Read and write a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`.
+   * - :py:obj:`shared_numpy_store <data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store>`
+     - Read and write numpy arrays to and from shared memory.
+   * - :py:obj:`to_cloudpickle <data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle>`
+     - Read and write an object to the cloudpickle format.
+   * - :py:obj:`to_msgpack <data_base.isf_data_base.IO.LoaderDumper.to_msgpack>`
+     - Read and write objects to the msgpack format.
+   * - :py:obj:`to_pickle <data_base.isf_data_base.IO.LoaderDumper.to_pickle>`
+     - Read and write objects to the pickle format.
+   * - :py:obj:`utils <data_base.isf_data_base.IO.LoaderDumper.utils>`
+     - Convenience methods for data IO.
+

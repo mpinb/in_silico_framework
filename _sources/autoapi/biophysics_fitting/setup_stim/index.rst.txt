@@ -1,0 +1,65 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim`
+
+setup_stim
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _append </autoapi/biophysics_fitting/setup_stim/_append>
+   setup_soma_step </autoapi/biophysics_fitting/setup_stim/setup_soma_step>
+   setup_apical_epsp_injection </autoapi/biophysics_fitting/setup_stim/setup_apical_epsp_injection>
+   setup_bAP </autoapi/biophysics_fitting/setup_stim/setup_bAP>
+   setup_BAC </autoapi/biophysics_fitting/setup_stim/setup_BAC>
+   setup_StepOne </autoapi/biophysics_fitting/setup_stim/setup_StepOne>
+   setup_StepTwo </autoapi/biophysics_fitting/setup_stim/setup_StepTwo>
+   setup_StepThree </autoapi/biophysics_fitting/setup_stim/setup_StepThree>
+
+.. py:module:: biophysics_fitting.setup_stim
+
+.. autoapi-nested-parse::
+   This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
+
+   Stimulus types included in this module are:
+
+   - Step current injection at the soma
+   - EPSP injection on an "ApicalDendrite" section at a given distance from the soma
+   - The stimuli used by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`:
+       - a bAP (backpropagating AP) stimulus.
+       - a BAC (bAP-Activated :math:`Ca^{2+}`) stimulus.
+       - Three step current stimuli with amplitudes :math:`[0.619, 0.793, 1.507]\ nA`.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`setup_soma_step <biophysics_fitting.setup_stim.setup_soma_step>`\ (cell, amplitude, delay, duration, dist)
+     - Setup up a step current at the soma, or a given :paramref:`dist` from the soma.
+   * - :py:obj:`setup_apical_epsp_injection <biophysics_fitting.setup_stim.setup_apical_epsp_injection>`\ (cell, dist, amplitude, delay, rise, decay)
+     - Setup an EPSP injection at a given distance from the soma.
+   * - :py:obj:`setup_bAP <biophysics_fitting.setup_stim.setup_bAP>`\ (cell, delay)
+     - Setup a bAP (backpropagating action potential) stimulus for the cell.
+   * - :py:obj:`setup_BAC <biophysics_fitting.setup_stim.setup_BAC>`\ (cell, dist, delay)
+     - Setup a BAC (bAP-activated Ca2+-spike) stimulus for the cell.
+   * - :py:obj:`setup_StepOne <biophysics_fitting.setup_stim.setup_StepOne>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+   * - :py:obj:`setup_StepTwo <biophysics_fitting.setup_stim.setup_StepTwo>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+   * - :py:obj:`setup_StepThree <biophysics_fitting.setup_stim.setup_StepThree>`\ (cell, delay)
+     - Setup a step current stimulus at the soma:
+
+

@@ -1,0 +1,133 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys`
+
+ephys
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   trace_check </autoapi/biophysics_fitting/ephys/trace_check>
+   trace_check_max_prestim_dendrite_depo </autoapi/biophysics_fitting/ephys/trace_check_max_prestim_dendrite_depo>
+   trace_check_err </autoapi/biophysics_fitting/ephys/trace_check_err>
+   find_crossing_old </autoapi/biophysics_fitting/ephys/find_crossing_old>
+   find_crossing </autoapi/biophysics_fitting/ephys/find_crossing>
+   voltage_base </autoapi/biophysics_fitting/ephys/voltage_base>
+   voltage_base2 </autoapi/biophysics_fitting/ephys/voltage_base2>
+   spike_count </autoapi/biophysics_fitting/ephys/spike_count>
+   AP_height_check_1AP </autoapi/biophysics_fitting/ephys/AP_height_check_1AP>
+   AP_height </autoapi/biophysics_fitting/ephys/AP_height>
+   AP_width </autoapi/biophysics_fitting/ephys/AP_width>
+   AHP_depth_abs_check_2AP </autoapi/biophysics_fitting/ephys/AHP_depth_abs_check_2AP>
+   AHP_depth_abs </autoapi/biophysics_fitting/ephys/AHP_depth_abs>
+   BAC_caSpike_height_check_1_Ca_AP </autoapi/biophysics_fitting/ephys/BAC_caSpike_height_check_1_Ca_AP>
+   BAC_caSpike_height_check_gt2_Na_spikes </autoapi/biophysics_fitting/ephys/BAC_caSpike_height_check_gt2_Na_spikes>
+   BAC_caSpike_height_check_Ca_spikes_after_Na_spike </autoapi/biophysics_fitting/ephys/BAC_caSpike_height_check_Ca_spikes_after_Na_spike>
+   BAC_caSpike_height </autoapi/biophysics_fitting/ephys/BAC_caSpike_height>
+   BAC_caSpike_width </autoapi/biophysics_fitting/ephys/BAC_caSpike_width>
+   BPAPatt_check_relative_height </autoapi/biophysics_fitting/ephys/BPAPatt_check_relative_height>
+   BPAPatt_check_1_AP </autoapi/biophysics_fitting/ephys/BPAPatt_check_1_AP>
+   BPAPatt </autoapi/biophysics_fitting/ephys/BPAPatt>
+   BAC_ISI_check_2_or_3_APs </autoapi/biophysics_fitting/ephys/BAC_ISI_check_2_or_3_APs>
+   BAC_ISI_check_repolarization </autoapi/biophysics_fitting/ephys/BAC_ISI_check_repolarization>
+   BAC_ISI </autoapi/biophysics_fitting/ephys/BAC_ISI>
+   STEP_mean_frequency </autoapi/biophysics_fitting/ephys/STEP_mean_frequency>
+   STEP_check_2_ISIs </autoapi/biophysics_fitting/ephys/STEP_check_2_ISIs>
+   STEP_adaptation_index </autoapi/biophysics_fitting/ephys/STEP_adaptation_index>
+   STEP_coef_var </autoapi/biophysics_fitting/ephys/STEP_coef_var>
+   STEP_initial_ISI </autoapi/biophysics_fitting/ephys/STEP_initial_ISI>
+   STEP_time_to_first_spike </autoapi/biophysics_fitting/ephys/STEP_time_to_first_spike>
+   STEP_fast_ahp_depth </autoapi/biophysics_fitting/ephys/STEP_fast_ahp_depth>
+   STEP_slow_ahp_depth </autoapi/biophysics_fitting/ephys/STEP_slow_ahp_depth>
+   STEP_slow_ahp_time </autoapi/biophysics_fitting/ephys/STEP_slow_ahp_time>
+
+.. py:module:: biophysics_fitting.ephys
+
+.. autoapi-nested-parse::
+   The content of this module is mostly a reimplementation of the Hay et.al. 2011 methods used for extracting features.
+   See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`trace_check <biophysics_fitting.ephys.trace_check>`\ (t, v, stim\_onset, stim\_duration, minspikenum, soma\_threshold, returning\_to\_rest, max\_prestim\_dendrite\_depo, vmax, name)
+     - Check the properties of a voltage trace:
+   * - :py:obj:`trace_check_max_prestim_dendrite_depo <biophysics_fitting.ephys.trace_check_max_prestim_dendrite_depo>`\ (t, vmax, stim\_onset, max\_prestim\_dendrite\_depo)
+     - Check whether anywhere in the dendritic, there is a spike before stimulus onset
+   * - :py:obj:`trace_check_err <biophysics_fitting.ephys.trace_check_err>`\ (t, v, stim\_onset, stim\_duration, punish)
+     - Returns a basic trace error that penalizes traces with low variance.
+   * - :py:obj:`find_crossing_old <biophysics_fitting.ephys.find_crossing_old>`\ (v, thresh)
+     - Original NEURON doc:
+   * - :py:obj:`find_crossing <biophysics_fitting.ephys.find_crossing>`\ (v, thresh)
+     - Original NEURON doc:
+   * - :py:obj:`voltage_base <biophysics_fitting.ephys.voltage_base>`\ (t, v, stim\_delay)
+     - Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.
+   * - :py:obj:`voltage_base2 <biophysics_fitting.ephys.voltage_base2>`\ (voltage\_traces, t0, recSiteID)
+     - Fetch the voltage at a given time point t0 for a specific recording site ID.
+   * - :py:obj:`spike_count <biophysics_fitting.ephys.spike_count>`\ (t, v, thresh)
+     - Counts the number of spikes in a voltage trace.
+   * - :py:obj:`AP_height_check_1AP <biophysics_fitting.ephys.AP_height_check_1AP>`\ (t, v, thresh)
+     - Determines if an action potential (AP) is present in a voltage trace by checking if the voltage crosses a given threshold.
+   * - :py:obj:`AP_height <biophysics_fitting.ephys.AP_height>`\ (t, v, thresh)
+     - Computes the amplitude of each action potential (AP) in a voltage trace.
+   * - :py:obj:`AP_width <biophysics_fitting.ephys.AP_width>`\ (t, v, thresh)
+     - Calculates the action potential (AP) width given the time and voltage arrays and a threshold value.
+   * - :py:obj:`AHP_depth_abs_check_2AP <biophysics_fitting.ephys.AHP_depth_abs_check_2AP>`\ (t, v, thresh)
+     - Determines whether there are at least two action potentials (APs) in the voltage trace `v`
+   * - :py:obj:`AHP_depth_abs <biophysics_fitting.ephys.AHP_depth_abs>`\ (t, v, thresh)
+     - Calculates the absolute afterhyperpolarization (AHP) depth for a given voltage trace.
+   * - :py:obj:`BAC_caSpike_height_check_1_Ca_AP <biophysics_fitting.ephys.BAC_caSpike_height_check_1_Ca_AP>`\ (t, v, v\_dend, thresh)
+     - Checks if there is exactly one calcium spike in the dendritic voltage trace.
+   * - :py:obj:`BAC_caSpike_height_check_gt2_Na_spikes <biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes>`\ (t, v, v\_dend, thresh)
+     - Checks if the number of spikes in the voltage trace is greater than or equal to 2.
+   * - :py:obj:`BAC_caSpike_height_check_Ca_spikes_after_Na_spike <biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike>`\ (t, v, v\_dend, n, thresh)
+     - Checks if a calcium spike occurs after the nth sodium spike.
+   * - :py:obj:`BAC_caSpike_height <biophysics_fitting.ephys.BAC_caSpike_height>`\ (t, v, v\_dend, ca\_thresh, tstim)
+     - Returns the height of the calcium spike after tstim.
+   * - :py:obj:`BAC_caSpike_width <biophysics_fitting.ephys.BAC_caSpike_width>`\ (t, v, v\_dend, thresh)
+     - Calculates the width of a calcium spike action potential.
+   * - :py:obj:`BPAPatt_check_relative_height <biophysics_fitting.ephys.BPAPatt_check_relative_height>`\ (t, v\_soma, v\_dend, bAP\_thresh, stim\_onset)
+     - Computes the ratio of the backpropagating action potential (bAP) amplitude at the soma and dendrite
+   * - :py:obj:`BPAPatt_check_1_AP <biophysics_fitting.ephys.BPAPatt_check_1_AP>`\ (t, v\_soma, thresh, stim\_onset)
+     - Checks if there is exactly one action potential in the somatic voltage trace.
+   * - :py:obj:`BPAPatt <biophysics_fitting.ephys.BPAPatt>`\ (t, v\_dend, thresh, stim\_onset)
+     - Computes the amplitude of the backpropagating action potential (bAP) at the dendrite.
+   * - :py:obj:`BAC_ISI_check_2_or_3_APs <biophysics_fitting.ephys.BAC_ISI_check_2_or_3_APs>`\ (t, v, thresh)
+     - Check if there are 2 or 3 action potentials (APs) in a given voltage trace for a BAC stimulus.
+   * - :py:obj:`BAC_ISI_check_repolarization <biophysics_fitting.ephys.BAC_ISI_check_repolarization>`\ (t, v, stim\_end, repolarization)
+     - Checks if the membrane potential has repolarized to a certain value after a stimulus for a BAC stimulus.
+   * - :py:obj:`BAC_ISI <biophysics_fitting.ephys.BAC_ISI>`\ (t, v, thresh)
+     - Computes the Inter-Spike Interval (ISI) of a voltage trace for a BAC stimulus.
+   * - :py:obj:`STEP_mean_frequency <biophysics_fitting.ephys.STEP_mean_frequency>`\ (t, v, stim\_duration, thresh)
+     - Computes the mean frequency of action potentials in a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_check_2_ISIs <biophysics_fitting.ephys.STEP_check_2_ISIs>`\ (t, v, thresh)
+     - Check if there are more than 2 ISIs in the trace.
+   * - :py:obj:`STEP_adaptation_index <biophysics_fitting.ephys.STEP_adaptation_index>`\ (t, v, stim\_end, thresh)
+     - Calculate the adaptation index for a step current stimulus.
+   * - :py:obj:`STEP_coef_var <biophysics_fitting.ephys.STEP_coef_var>`\ (t, v, stim\_end, thresh)
+     - Computes the coefficient of variation (CV) of the Inter-Spike Interval (ISI) of a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_initial_ISI <biophysics_fitting.ephys.STEP_initial_ISI>`\ (t, v, thresh)
+     - Computes the Inter-Spike Interval (ISI) for the first two spikes of a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_time_to_first_spike <biophysics_fitting.ephys.STEP_time_to_first_spike>`\ (t, v, stim\_onset, thresh)
+     - Computes the time to first spike (TTFS) of a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_fast_ahp_depth <biophysics_fitting.ephys.STEP_fast_ahp_depth>`\ (t, v, thresh, time\_scale, start)
+     - Computes the average depth of the fast afterhyperpolarization (fAHP) of a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_slow_ahp_depth <biophysics_fitting.ephys.STEP_slow_ahp_depth>`\ (t, v, thresh, time\_scale, start)
+     - Computes the average depth of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
+   * - :py:obj:`STEP_slow_ahp_time <biophysics_fitting.ephys.STEP_slow_ahp_time>`\ (t, v, thresh, time\_scale, start)
+     - Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
+
+

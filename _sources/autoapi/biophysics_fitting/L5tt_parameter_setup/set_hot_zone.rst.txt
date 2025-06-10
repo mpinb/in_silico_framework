@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_hot_zone`
+
+
+.. title:
+
+set_hot_zone
+============
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None)
+
+   Insert Ca\_LVAst and Ca\_HVA channels along the apical dendrite between ``min\_`` and ``max\_`` distance from the soma.
+
+   :Parameters: * **cell\_param** (:py:class:`:py:class:`~single\_cell\_parser.parameters.ParameterSet`` | dict) -- The cell parameter dictionary.
+                * **min\_** (*float*) -- The minimum distance from the soma.
+                * **max\_** (*float*) -- The maximum distance from the soma.
+                * **outsidescale\_sections** (*list*) -- A list of sections where the channels should be inserted.
+
+   :returns: The updated cell\_param.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict
+
+   .. note::
+
+      This method is specific for a L5PT.
+      For more information about the hot zone, refer to :cite:t:`Bast\_Guest\_Fruengel\_Narayanan\_de\_Kock\_Oberlaender\_2023`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

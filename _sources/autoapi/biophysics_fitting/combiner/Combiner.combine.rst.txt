@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner.combine`
+
+Combiner.combine
+================
+
+.. py:method:: biophysics_fitting.combiner.Combiner.combine(features)
+
+   Combines features that are computed by an Evaluator class.
+
+   :Parameters: **features** (*list*) -- A list of features to be combined.
+
+   :returns: A dictionary with the combined features.
+   :rtype: dict
+

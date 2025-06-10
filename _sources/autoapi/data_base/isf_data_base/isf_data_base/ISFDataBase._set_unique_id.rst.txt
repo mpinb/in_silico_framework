@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase._set_unique_id`
+
+ISFDataBase._set_unique_id
+==========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase._set_unique_id()
+
+   Sets a unique ID for the DataBase as class attribute.
+
+   Does not save this ID as metadata (this is taken care of by :py:meth:`_initialize`)
+
+   :raises ValueError: If the unique ID is already set.
+

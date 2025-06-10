@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.get_main_bifurcation_section`
+
+
+.. title:
+
+get_main_bifurcation_section
+============================
+
+
+.. py:function:: biophysics_fitting.utils.get_main_bifurcation_section(cell)
+
+   Get the main bifurcation section of a cell
+
+   Assumes the cell has a main bifurcation to begin with, such as a L5PT.
+   A main bifuraction section is defined as a section::
+
+       - with at least two children
+       - whose parent is the soma.
+       - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get\_inner\_sec\_dist\_dict` for more information.
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+
+   :returns: The main bifurcation section.
+   :rtype: :py:class:`~single\_cell\_parser.section.Section`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

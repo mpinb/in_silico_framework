@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.get_mkdtemp`
+
+ISFDataBase.get_mkdtemp
+=======================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.get_mkdtemp(prefix='', suffix='')
+
+   Create a temporary directory in the data_base
+
+   :Parameters: * **prefix** (*str, optional*) -- The prefix of the temporary directory. Defaults to ``''``.
+                * **suffix** (*str, optional*) -- The suffix of the temporary directory. Defaults to ``''``.
+
+   :returns: The path to the temporary directory.
+   :rtype: pathlib.Path
+

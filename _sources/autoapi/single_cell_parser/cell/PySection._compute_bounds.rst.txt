@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._compute_bounds`
+
+PySection._compute_bounds
+=========================
+
+.. py:method:: single_cell_parser.cell.PySection._compute_bounds()
+
+   Computes the bounding box around the 3D coordinates.
+

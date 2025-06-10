@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell`
+
+CellParser.get_cell
+===================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell()
+
+   Returns cell if it is set up
+
+   :raises RuntimeError: If cell is not set up.
+
+   :returns: Cell object.
+   :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+

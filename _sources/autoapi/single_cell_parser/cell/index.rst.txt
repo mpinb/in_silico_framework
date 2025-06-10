@@ -1,0 +1,48 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell`
+
+cell
+====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Cell </autoapi/single_cell_parser/cell/Cell>
+   PySection </autoapi/single_cell_parser/cell/PySection>
+   PointCell </autoapi/single_cell_parser/cell/PointCell>
+
+.. py:module:: single_cell_parser.cell
+
+.. autoapi-nested-parse::
+   Cell objects for neuron models and cell activity.
+
+   This module contains classes for representing cells in NEURON simulations.
+   This includes :py:class:`Cell` and :py:class:`PySection` for neuron models, containing morphological and biophysical properties.
+   It also includes the :py:class:`~single_cell_parser.PointCell` class for handling presynaptic cell activations.
+   The latter does not contain any morphological or biophysical properties, but handles the activation of presynaptic cells in a network.
+   For neuron-network multiscale simulations, you should consult :py:mod:`simrun`.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Cell <single_cell_parser.cell.Cell>`
+     - Cell object providing API to the NEURON hoc interface.
+   * - :py:obj:`PySection <single_cell_parser.cell.PySection>`
+     - Wrapper around :py:class:`nrn.Section` providing additional functionality for geometry and mechanisms.
+   * - :py:obj:`PointCell <single_cell_parser.cell.PointCell>`
+     - Cell without morphological or electrophysiological features.
+
+
+

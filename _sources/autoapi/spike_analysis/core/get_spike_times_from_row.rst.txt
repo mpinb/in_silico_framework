@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.get_spike_times_from_row`
+
+
+.. title:
+
+get_spike_times_from_row
+========================
+
+
+.. py:function:: spike_analysis.core.get_spike_times_from_row(row)
+
+   Returns a list containing all non-NaN elements in the given pandas Series.
+
+   :Parameters: **row** (*pd.Series*) -- A pandas Series containing spike times.
+
+   :returns: A list containing spike times.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

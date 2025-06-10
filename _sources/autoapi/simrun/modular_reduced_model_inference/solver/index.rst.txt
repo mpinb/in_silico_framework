@@ -1,0 +1,43 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver`
+
+solver
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _Solver </autoapi/simrun/modular_reduced_model_inference/solver/_Solver>
+   Solver_COBYLA </autoapi/simrun/modular_reduced_model_inference/solver/Solver_COBYLA>
+
+.. py:module:: simrun.modular_reduced_model_inference.solver
+
+.. autoapi-nested-parse::
+   Optimize a cost function.
+
+   This module implements solvers that can optimize a given cost function by adapting a vector of free parameters :math:`\mathbf{x}`.
+   The cost function is usually defined by a :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+
+   Different solvers can be defined here, to provide different optimization schemes.
+   Currently, we provide a :cite:t:`COBYLA` solver.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Solver_COBYLA <simrun.modular_reduced_model_inference.solver.Solver_COBYLA>`
+     - A :cite:t:`COBYLA` solver strategy for reduced models.
+
+
+

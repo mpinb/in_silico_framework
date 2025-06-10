@@ -1,0 +1,69 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PointCell
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _add_synapse_pointer <PointCell._add_synapse_pointer>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell(column=None, cellType=None)
+   
+   Cell object without morphological attributes.
+
+   When connecting synapses between postsynaptic and
+   presynaptic cells, this class is used for the presynaptic cell.
+
+   :Parameters: * **column** (*str*) -- Column ID. Default: None.
+                * **cellType** (*str*) -- Cell type. Defalut: None.
+
+   :Attributes:
+
+   .. attribute:: synapseList
+
+      List of synapses.
+
+      :type: list
+
+   .. attribute:: column
+
+      Column ID.
+
+      :type: str
+
+   .. attribute:: cellType
+
+      Cell type.
+
+      :type: str
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_add_synapse_pointer <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer>`\ (synapse)
+        - Add a synapse to the cell.
+

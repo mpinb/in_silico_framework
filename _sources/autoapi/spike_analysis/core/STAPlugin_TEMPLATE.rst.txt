@@ -1,0 +1,52 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_TEMPLATE
+==================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_result <STAPlugin_TEMPLATE.get_result>
+   setup <STAPlugin_TEMPLATE.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_TEMPLATE
+   
+   Base class for spike time analysis plugins.
+
+   :Attributes:
+
+   .. attribute:: _result
+
+      The result of the analysis.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_result <spike_analysis.core.STAPlugin_TEMPLATE.get_result>`\ ()
+        - Gets the result of the analysis.
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_TEMPLATE.setup>`\ ()
+        - :summarylabel:`abc` Sets up the analysis.
+

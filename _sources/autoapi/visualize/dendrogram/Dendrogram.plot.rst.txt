@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram.plot`
+
+Dendrogram.plot
+===============
+
+.. py:method:: visualize.dendrogram.Dendrogram.plot(ax=None)
+
+   Plot the dendrogram.
+
+   :Parameters: **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object. Default is ``None`` and a new figure is created.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.axes.Axes`
+

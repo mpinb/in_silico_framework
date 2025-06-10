@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms`
+
+CellParser.insert_range_mechanisms
+==================================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.insert_range_mechanisms(label, mechs)
+
+   Inserts range mechanisms into all structures named as :paramref:`label`.
+
+   Range mechanism specifications can be found in :py:mod:`mechanisms`.
+
+   :Parameters: * **label** (*str*) -- Label of the structure.
+                * **mechs** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
+
+   :raises RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+   :raises NotImplementedError: If the spatial distribution is not implemented.
+
+   The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+
+   .. table:: Possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
+
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | Spatial Key            | Additional Keys                                                 | Math Equation                                                                                                                       |
+       +========================+=================================================================+=====================================================================================================================================+
+       | uniform                | None                                                            | :math:`y = c`                                                                                                                       |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | linear                 | ``slope``, ``offset``                                           | :math:`y = \text{slope} \cdot x + \text{offset}`                                                                                    |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | linear_capped          | ``prox_value``, ``dist_value``, ``dist_value_distance``         | :math:`y = \min(\text{prox_value} + \frac{\text{dist_value} - \text{prox_value}}{\text{dist_value_distance}} x, \text{dist_value})` |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | exponential_by_z_dist  | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{z - \text{xOffset}}{\lambda}}`                                           |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | sigmoid                | ``offset``, ``linScale``, ``xOffset``, ``width``                | :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`                                 |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+       | uniform_range          | ``begin``, ``end``, ``outsidescale``, ``outsidescale_sections`` | :math:`y = c` for :math:`\text{begin} \leq x \leq \text{end}`, :math:`y = c \cdot \text{outsidescale}` otherwise                    |
+       +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
+
+

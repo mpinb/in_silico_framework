@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology`
+
+CMVDataParser._calc_morphology
+==============================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology(cell)
+
+   Retrieve cell morphology from cell object.
+
+   Retrieves all points of the cell morphology from the cell object.
+   In addition, it keeps track of parent sections.
+   Fills the following attributes:
+
+   - self._morphology_unconnected: a pandas DataFrame containing point information, diameter and section ID WITHOUT duplicated points for branchpoints for connections between sections.
+   - self.morphology: a pandas DataFrame containing point information, diameter and section ID WITHOUT duplicated points for branchpoints for connections between sections. Same as above, but publically accessible.
+   - self._morphology_connected: a pandas DataFrame containing point information, diameter and section ID WITH duplicated points for branchpoints for connections between sections. Same as above, but with branchpoints connected to the parent section.
+   - self.sections: an array of unique section indices.
+   - self.n_sections: number of sections in the cell.
+   - self.parents: a dictionary that maps sections to their parents. self.parents[10] returns the parent of section 10.
+
+   :Parameters: **cell** -- Cell object
+
+   :returns: Nothing. Updates the attributes mentioned above.
+

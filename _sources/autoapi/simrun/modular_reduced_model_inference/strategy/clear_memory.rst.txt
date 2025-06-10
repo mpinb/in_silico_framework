@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.clear_memory`
+
+
+.. title:
+
+clear_memory
+============
+
+
+.. py:function:: simrun.modular_reduced_model_inference.strategy.clear_memory()
+
+   Remove all weak references
+
+   Cupy frees GPU memory when all references are deleted
+   As this is difficult to track, use the :py:meth:`simrun.modular\_reduced\_model\_inference.make\_weakref` method, which storesall GPU arrays in the \_WEAKREF\_ARRAY\_LIST and returns a weakref object.
+   This can be used to interact with the data, but is not a reference.
+   Therefore, it is sufficient to empty \_WEAKREF\_ARRAY\_LIST, which frees the GPU memory.
+   All weakref objects pointing to GPU arrays will then be invalidated.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

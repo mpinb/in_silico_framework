@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.build_parameters`
+
+
+.. title:
+
+build_parameters
+================
+
+
+.. py:function:: single_cell_parser.parameters.build_parameters(filename)
+
+   Read in a :ref:`param\_file\_format` file and return a ParameterSet object.
+
+   :Parameters: **filename** (*str*) -- path to the parameter file
+
+   :returns: The parameter file as a :py:class:`~single\_cell\_parser.parameters.ParameterSet` object.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

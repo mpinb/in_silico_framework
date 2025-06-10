@@ -1,0 +1,65 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet`
+
+dask_to_parquet
+===============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Loader </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/Loader>
+   check </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/check>
+   load_helper </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/load_helper>
+   save_helper </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/save_helper>
+   check_df_suitable_for_pq </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/check_df_suitable_for_pq>
+   dump </autoapi/data_base/isf_data_base/IO/LoaderDumper/dask_to_parquet/dump>
+
+.. py:module:: data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet
+
+.. autoapi-nested-parse::
+   Save and load dask dataframes to and from Apache parquet format.
+
+   .. seealso:: https://parquet.apache.org/docs/overview
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Loader <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.Loader>`
+     - Load a dask dataframe from a parquet file
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`check <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.check>`\ (obj)
+     - Check whether the object can be saved with this dumper
+   * - :py:obj:`load_helper <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.load_helper>`\ (savedir, n\_partitions, partition, meta, columns)
+     - Load a single partition of a dask dataframe from a parquet file
+   * - :py:obj:`save_helper <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.save_helper>`\ (savedir, delayed\_df, n\_partitions, partition)
+     - Save a single partition of a dask dataframe to a parquet file
+   * - :py:obj:`check_df_suitable_for_pq <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.check_df_suitable_for_pq>`\ (delayed\_df)
+     - \-
+   * - :py:obj:`dump <data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.dump>`\ (obj, savedir, schema, client, repartition)
+     - Save a dask dataframe to one or more parquet files.
+
+

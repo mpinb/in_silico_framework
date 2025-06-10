@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.get_neuron_param_with_current_injection`
+
+PSP_with_current_injection.get_neuron_param_with_current_injection
+==================================================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get_neuron_param_with_current_injection()
+
+   Get a :ref:`cell_parameters_format` file with a current injection.
+
+   The current injection is set up such that the potential :paramref:`target_vm` is reached at the timepoint :paramref:`optimize_for_timepoint`
+

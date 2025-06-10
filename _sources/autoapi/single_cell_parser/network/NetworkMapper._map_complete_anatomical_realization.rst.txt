@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._map_complete_anatomical_realization`
+
+NetworkMapper._map_complete_anatomical_realization
+==================================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._map_complete_anatomical_realization(weights=None, full_network=False)
+
+   Connect synapses to active presynaptic cells.
+
+   This is step 4 in the creation of a saved network using :py:meth:`create_saved_network2`.
+   The synapses should already be created in :py:meth:`_assign_anatomical_synapses` (step 1),
+   the presynaptic cells have been created in :py:meth:`_create_presyn_cells` (step 2),
+   and their activity should have been generated in :py:meth:`_activate_presyn_cells` (step 3).
+
+   Assigns synapse weights using :py:meth:`~_assign_synapse_weights` and connect synapses to presynaptic cells with defined activity.
+
+   :Parameters: * **weights** (*dict | None, optional*) -- pecific weights for each synapse type.
+                  Default: None, in which case they are read from the :ref:`network_parameters_format`.
+                * **full_network** (*bool*) -- Defines which cell IDS to use.
+                  If True: (non-sequential) cell ids from the network embedding are used.
+                  If False, single_cell network embedding from single_cell_input_mapper is used, in which cell ids are sequential.
+

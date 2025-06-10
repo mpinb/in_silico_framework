@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser._get_unique_hoc_fns_from_neups`
+
+
+.. title:
+
+_get_unique_hoc_fns_from_neups
+==============================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_unique_hoc_fns_from_neups(neup_fns)
+
+   Get the unique hoc files from a list of neuron parameter files.
+
+   :Parameters: **neup\_fns** (*str*) -- Path to the neuron parameter file.
+
+   :returns: List containing the unique hoc files.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

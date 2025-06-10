@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission.acquire`
+
+InterProcessLockNoWritePermission.acquire
+=========================================
+
+.. py:method:: data_base.distributed_lock.InterProcessLockNoWritePermission.acquire()
+
+   Acquire the lock on a path if the user has write permissions.
+
+   If the user has no write permissions, then no lock is set and ``True`` is returned.
+
+   :returns: True if the lock was acquired successfully or if locking is not necessary, False otherwise.
+   :rtype: bool
+

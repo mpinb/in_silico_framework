@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db.Loader` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db.Loader.get`
+
+Loader.get
+==========
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db.Loader.get(savedir, \*\*kwargs)
+
+   Load the database from the specified folder.
+
+   :Parameters: * **savedir** (*str*) -- Directory where the database is stored.
+                * **\*\*kwargs** -- Additional keyword arguments.
+                  These are passed to the :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
+

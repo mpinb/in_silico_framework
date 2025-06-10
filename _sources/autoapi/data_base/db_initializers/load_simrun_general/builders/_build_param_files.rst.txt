@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._build_param_files`
+
+
+.. title:
+
+_build_param_files
+==================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_param_files(db, client)
+
+   Copy, transform and rename parameterfiles to a db.
+
+   This function copies :ref:`cell\_parameters\_format`, :ref:`network\_parameters\_format`, :ref:`syn\_file\_format` files,
+   and :ref:`con\_file\_format` files to the database.
+   In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the parameterfiles should be added.
+                * **client** (:py:class:`~dask.distributed.client.Client`) -- The Dask client to use for parallel computation.
+
+   :returns: None. Sets the keys ``parameterfiles\_cell\_folder`` and ``parameterfiles\_network\_folder`` in the database.
+
+   .. seealso:: The :ref:`cell\_parameters\_format` and :ref:`network\_parameters\_format` formats.
+
+   .. attention::
+
+      This function assumes the database keys ``simresult\_path`` and ``sim\_trial\_index`` already exist, which is likely
+      only true when used in the context of the :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.init` function.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

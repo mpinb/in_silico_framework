@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._intersect_bboxes`
+
+SynapseMapper._intersect_bboxes
+===============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._intersect_bboxes(bbox1, bbox2)
+
+   Check if two bounding boxes overlap
+
+   :Parameters: * **bbox1** (*tuple*) -- Bounding box of format (minx, maxx, miny, maxy, minz, maxz)
+                * **bbox2** (*tuple*) -- Bounding box of format (minx, maxx, miny, maxy, minz, maxz)
+
+   :returns: True if bounding boxes overlap, False otherwise.
+   :rtype: bool
+

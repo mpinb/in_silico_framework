@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length`
+
+SynapseMapper._compute_path_length
+==================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
+
+   Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
+
+   :Parameters: * **sec** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Section`) -- Section to calculate path length on.
+                * **x** (*float*) -- Location on section to calculate path length to.
+
+   :returns: Path length between soma and location :paramref:`x` on section :paramref:`sec`.
+   :rtype: float
+

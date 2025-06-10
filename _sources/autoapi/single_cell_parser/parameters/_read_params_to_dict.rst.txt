@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters._read_params_to_dict`
+
+
+.. title:
+
+_read_params_to_dict
+====================
+
+
+.. py:function:: single_cell_parser.parameters._read_params_to_dict(filename)
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

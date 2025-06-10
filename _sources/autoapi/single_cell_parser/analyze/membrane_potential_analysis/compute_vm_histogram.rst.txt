@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram`
+
+
+.. title:
+
+compute_vm_histogram
+====================
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram(vTraces, bins=None)
+
+   Compute the histogram of membrane voltage traces.
+
+   :Parameters: * **vTraces** (*numpy.ndarray*) -- Array of (one or more) voltage traces. Shape: (``n\_traces``, ``n\_timepoints``).
+                * **bins** (*numpy.ndarray*) -- Bins for the histogram. Default is ``np.arange(-80, -40, 2)``.
+
+   :returns: The histogram and the bins
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

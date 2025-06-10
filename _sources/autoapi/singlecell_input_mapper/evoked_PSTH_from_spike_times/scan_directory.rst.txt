@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory`
+
+
+.. title:
+
+scan_directory
+==============
+
+
+.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory(path, fnames, suffix)
+
+   Recursively scans a directory for files with a specific suffix.
+
+   :Parameters: * **path** (*str*) -- The path of the directory to scan.
+                * **fnames** (*list*) -- A list to store the file names.
+                * **suffix** (*str*) -- The suffix of the files to look for.
+
+   :returns: None. Updates :paramref:`fnames` in place.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

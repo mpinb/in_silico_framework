@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell.get_bounding_box`
+
+Cell.get_bounding_box
+=====================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.get_bounding_box()
+
+   Calculate the bounding box around the cell.
+
+   :returns: 6-tuple bounding box around the cell: (xMin, xMax, yMin, yMax, zMin, zMax).
+   :rtype: tuple
+

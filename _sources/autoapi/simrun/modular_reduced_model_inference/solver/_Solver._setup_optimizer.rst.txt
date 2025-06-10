@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver._setup_optimizer`
+
+_Solver._setup_optimizer
+========================
+
+.. py:method:: simrun.modular_reduced_model_inference.solver._Solver._setup_optimizer()
+
+   Set up the optimization strategy.
+
+   This method is overloaded by child classes to set the optimizer.
+
+   .. rubric:: Example
+      :class: example
+
+   :py:meth:`Solver_COBYLA._setup_optimizer`
+

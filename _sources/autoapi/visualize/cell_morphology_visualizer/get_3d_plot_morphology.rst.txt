@@ -1,0 +1,47 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.get_3d_plot_morphology`
+
+
+.. title:
+
+get_3d_plot_morphology
+======================
+
+
+.. py:function:: visualize.cell_morphology_visualizer.get_3d_plot_morphology(lookup_table=None, colors=&#39;grey&#39;, color_keyword=None, synapses={}, time_point=None, highlight_section_kwargs={&#39;sec_n&#39;: None, &#39;highlight_x&#39;: None, &#39;arrow_args&#39;: {}}, camera_position={&#39;azim&#39;: 0, &#39;dist&#39;: 10, &#39;elev&#39;: 30, &#39;roll&#39;: 0}, dpi=72, population_to_color_dict={}, save=&#39;&#39;, plot=False, synapse_legend=True, legend=None, return_figax=True, proj_type=&#39;ortho&#39;)
+
+   Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
+
+   This is the main method called by :py:class:`~CellMorphologyVisualizer` to generate a 3D plot of the cell morphology.
+   This method Uses LineCollections to plot the morphology, with a round joinstyle.
+   This method is usually not called directly. Rather, :py:class:`~CellMorphologyVisualizer` calls this method to generate a plot,
+   depending on parameters such as parallellization client, scalar data overlay, viewing angles etc...
+   It is recommended to use the high-level method :py:class:`~visualize.cell\_morphology\_visualizer.CellMorphologyVisualizer.plot` instead of trying to use this one directly.
+
+   :Parameters: * **lookup\_table** (*pd.DataFrame*) -- pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section.
+                * **colors** (*str | array*) -- Color for the voltage. Either a single color for all sections, or a list of colors for each section.
+                * **color\_keyword** (*str*) -- Keyword for the scalar data to be saved. Defaults to only diameter.
+                * **synapses** (*dict*) -- Dictionary with synapse activations. Keys are the population names, values are lists of synapse locations.
+                * **time\_point** (*float*) -- Time point at which to plot the scalar data.
+                * **highlight\_section\_kwargs** (*dict*) -- Additional arguments for the arrow. See available kwargs on https://matplotlib.org/3.1.1/api/\_as\_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow
+                * **camera\_position** (*dict*) -- Camera angles and distance for matplotlib 3D visualizations. Possible keys: 'azim', 'dist', 'elev', 'roll'
+                * **dpi** (*int*) -- Image quality. Default: 72
+                * **population\_to\_color\_dict** (*dict*) -- Dictionary to map synapse group names (str) to colors. Must contain the same keys as synapses.keys()
+                * **save** (*str*) -- Path where the plot will be saved. If it's empty it will not be saved (Default)
+                * **plot** (*bool*) -- whether to show the plot. Default: False
+                * **synapse\_legend** (*bool*) -- Whether the synapse activations legend should appear in the plot
+                * **legend** (*bool*) -- Whether the legend for scalar data (e.g. membrane voltage) should appear in the plot
+                * **return\_figax** (*bool*) -- Whether to return the figure and axis objects. Default: True
+                * **proj\_type** (*str*) -- Projection type for the 3D plot. Default: "ortho"
+
+   :returns: fig and ax object if :paramref:`return\_figax` is True. None otherwise.
+   :rtype: tuple | None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

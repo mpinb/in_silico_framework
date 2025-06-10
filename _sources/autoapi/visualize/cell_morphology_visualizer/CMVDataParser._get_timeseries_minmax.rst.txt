@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._get_timeseries_minmax`
+
+CMVDataParser._get_timeseries_minmax
+====================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._get_timeseries_minmax(timeseries)
+
+   Get the min and max values of a timeseries that is nested per section and timepoint.
+   Timeseries have three axes: time, section_id, section_point. Each timeseries[time][section_id] shows values for all points in that section at that time.
+   Getting minmax of nested lists can be annoying, hence this method.
+
+   :Parameters: **timeseries** (*list*) -- List of lists of lists. Each element of the list is a list of data for that section at that time. Shape: (n_times, n_sections, n_points_in_section)
+
+   :returns: min and max for some timeseries across all timepoints and sections.
+   :rtype: tuple
+

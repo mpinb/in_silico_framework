@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db.check`
+
+
+.. title:
+
+check
+=====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.just_create_isf_db.check(obj)
+
+   Check whether the object can be saved with this dumper
+
+   :Parameters: **obj** (*object*) -- Object to be saved
+
+   :returns: Whether the object is None. This dumper requires no object to be saved.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

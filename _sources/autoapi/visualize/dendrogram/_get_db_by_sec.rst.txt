@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._get_db_by_sec`
+
+
+.. title:
+
+_get_db_by_sec
+==============
+
+
+.. py:function:: visualize.dendrogram._get_db_by_sec(dendrogram_db, sec)
+
+   Get the :py:class:`\_DendrogramSection` object by its section ID.
+
+   :Parameters: **sec** (*int*) -- The section ID.
+
+   :returns: The dendrogram section.
+   :rtype: :py:class:`\_DendrogramSection`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

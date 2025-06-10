@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.load_param_file_if_path_is_provided`
+
+
+.. title:
+
+load_param_file_if_path_is_provided
+===================================
+
+
+.. py:function:: simrun.utils.load_param_file_if_path_is_provided(pathOrParam)
+
+   Convenience function to load a parameter file whether it is a string or a dictionary.
+
+   :Parameters: **pathOrParam** (str | dict | :py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The path to the parameter file or the parameter dictionary.
+
+   :returns: The parameter object.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

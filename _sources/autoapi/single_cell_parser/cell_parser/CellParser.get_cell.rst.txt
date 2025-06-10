@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.get_cell`
+
+CellParser.get_cell
+===================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.get_cell()
+
+   Returns cell if it is set up for simulations.
+
+   :raises RuntimeError: If cell is not set up.
+
+   :returns: Cell object.
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
+

@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.spines_update_synapse_distribution_file`
+
+
+.. title:
+
+spines_update_synapse_distribution_file
+=======================================
+
+
+.. py:function:: single_cell_parser.spines_update_synapse_distribution_file(cell, synapse_distribution_file, new_synapse_distribution_file)
+
+   Update the :ref:`syn\_file\_format` file to correctly point to spine heads as excitatory synapse locations.
+
+   Spines must already exist, so call this after :py:meth:`create\_cell`,
+   using the same :ref:`syn\_file\_format` file that was used to create the cell.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **synapse\_distribution\_file** (*str*) -- The path to the original :ref:`syn\_file\_format` file.
+                * **new\_synfile** (*str*) -- The path to the new :ref:`syn\_file\_format` file.
+                  A new\_synfile will be created if it does not already exist.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

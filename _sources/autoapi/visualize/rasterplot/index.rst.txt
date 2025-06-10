@@ -1,0 +1,42 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.rasterplot`
+
+rasterplot
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   rasterplot2 </autoapi/visualize/rasterplot/rasterplot2>
+   rasterplot2_pdf_grouped </autoapi/visualize/rasterplot/rasterplot2_pdf_grouped>
+   rasterplot </autoapi/visualize/rasterplot/rasterplot>
+
+.. py:module:: visualize.rasterplot
+
+.. autoapi-nested-parse::
+   Efficiently create rasterplots from spike time dataframes.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`rasterplot2 <visualize.rasterplot.rasterplot2>`\ (st, ax, x\_offset, c, plot\_kwargs, y\_offset, y\_plot\_length, marker)
+     - Plot a rasterplot from a spike times dataframe.
+   * - :py:obj:`rasterplot2_pdf_grouped <visualize.rasterplot.rasterplot2_pdf_grouped>`\ (pdf, grouplabel, ax, xlim, x\_offset, color)
+     - Plot a rasterplot per group fo a spike times dataframe.
+   * - :py:obj:`rasterplot <visualize.rasterplot.rasterplot>`\ (df, colormap, ax, label, groupby\_attribute, tlim, reset\_index)
+     - Creates a rasterplot from spike times dataframe.
+
+

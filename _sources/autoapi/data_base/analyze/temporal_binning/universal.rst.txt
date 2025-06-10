@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.temporal_binning` ❭ :mod:`~data_base.analyze.temporal_binning.universal`
+
+
+.. title:
+
+universal
+=========
+
+
+.. py:function:: data_base.analyze.temporal_binning.universal(*args, **kwargs)
+
+   Bin spike times for dask or pandas dataframes.
+
+   Infers the dataframe type and calls the appropriate binning function.
+
+   :Parameters: * **df | ddf** (:py:class:`dask.dataframe.DataFrame`) -- DataFrame with containing time values in columns whose name are integer-convertible.
+                * **bin\_size** (*float, optional*) -- Size of the bins. If not specified, :paramref:`bin\_borders` have to be specified.
+                * **min\_time** (*float, optional*) -- Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
+                * **max\_time** (*float, optional*) -- Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
+                * **normalize** (*bool, optional*) -- If True, normalize the output to the total number of elements in the DataFrame.
+                * **rate** (*bool, optional*) -- If True, normalize the output to the bin size. Only valid if :paramref:`df` is a pandas DataFrame.
+                * **client** (:py:class:`dask.distributed.Client`, optional) -- Dask client to use for parallel computation. Only valid if :paramref:`ddf` is a dask DataFrame.
+
+   .. seealso::
+
+      :py:meth:`~data\_base.analyze.temporal\_binning.temporal\_binning\_pd` and
+      :py:meth:`~data\_base.analyze.temporal\_binning.temporal\_binning\_dask`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

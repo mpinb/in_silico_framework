@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP.bAP_att3`
+
+bAP.bAP_att3
+============
+
+.. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_att3(voltage_traces)
+
+   Get the backpropagating action potential attenuation between the soma and second dendritic pipette location.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: Dictionary mapping ``".raw"`` to the backpropagating action potential attenuation.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~biophysics_fitting.ephys.BPAPatt`
+

@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.save`
+
+SpikeDetectionCreastTrough.save
+===============================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.save(path)
+
+   Saves the SpikeDetectionCreastTrough object to a JSON file.
+

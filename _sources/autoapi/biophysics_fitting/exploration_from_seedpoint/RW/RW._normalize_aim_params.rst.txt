@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params`
+
+RW._normalize_aim_params
+========================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params(aim_params)
+
+   Normalize aim parameters to be between 0 and 1.
+
+   :Parameters: **aim_params** (*dict*) -- aim parameters
+
+   :returns: normalized aim parameters
+   :rtype: pd.Series
+

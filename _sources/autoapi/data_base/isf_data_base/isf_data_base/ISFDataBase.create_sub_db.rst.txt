@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.create_sub_db`
+
+ISFDataBase.create_sub_db
+=========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.create_sub_db(key, register='as_parent', \*\*kwargs)
+
+   Creates a database within a database.
+
+   Example::
+       >>> db.create_sub_db('my_sub_database')
+       >>> db['my_sub_database']['some_key'] = ['some_value']
+
+   :Parameters: * **key** (*str|tuple*) -- The key of the sub_db
+                * **register** (*str, optional*) -- ? TODO. Defaults to 'as_parent'.
+                * **raise_** (*bool, optional*) -- Whether to raise an error if the sub_db already exists. Defaults to True.
+                * **\*\*kwargs** (*dict*) -- overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
+                  Additional kwargs are passed to the dumper.
+
+   :returns: The newly created sub_db
+   :rtype: ISFDataBase
+

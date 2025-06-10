@@ -1,0 +1,52 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.start_run`
+
+
+.. title:
+
+start_run
+=========
+
+
+.. py:function:: biophysics_fitting.optimizer.start_run(db_setup, n, pop=None, client=None, continue_cp=False, offspring_size=1000, eta=10, mutpb=0.3, cxpb=0.7, max_ngen=600, satisfactory_boundary_dict=None)
+
+   Start an optimization run as specified in db\_setup.
+
+   :Parameters: * **db\_setup** (*data\_base.DataBase*) -- a DataBase containing the setup of the optimization. It must include:
+
+                  - params ... this is a pandas.DataFrame with the parameternames as index and the columns min\_ and max\_
+                  - get\_Simulator ... function, that returns a biophysics\_fitting.simulator.Simulator object
+                  - get\_Evaluator ... function, that returns a biophysics\_fitting.evaluator.Evaluator object.
+                  - get\_Combiner ... function, that returns a biophysics\_fitting.combiner.Combiner object
+
+                  get\_Simulator, get\_Evaluator, get\_Combiner accept the db\_setup data\_base as argument.
+                  This allows, that e.g. the Simular can depend on the data\_base. Therefore it is e.g. possible,
+                  that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
+                  updated accordingly.
+                * **n** (*int*) -- a seedpoint for the optimization randomization.
+                * **pop** (*list of deap.Individuals | None*) -- The previous population if the optimization is continued. None if a new optimization is started.
+                * **client** (*distributed.Client | None*) -- A distributed client. If None, the optimization is run on the local machine.
+                * **continue\_cp** (*bool*) -- If True, the optimization is continued. If False, a new optimization is started.
+                * **offspring\_size** (*int*) -- The number of individuals in the offspring.
+                * **eta** (*int*) -- The number of parents selected for each offspring.
+                * **mutpb** (*float*) -- The mutation probability.
+                * **cxpb** (*float*) -- The crossover probability.
+                * **max\_ngen** (*int*) -- The maximum number of generations.
+                * **satisfactory\_boundary\_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+
+   For an exemplary setup of a Simulator, Evaluator and Combiner object, see
+   biophysics\_fitting.hay\_complete\_default\_setup.
+
+   For on examplary setup of a complete optimization project see
+   getting\_started/tutorials/1. neuron models/1.3 Generation.ipynb
+
+   You can also have a look at the test case in tests.test\_biophysics\_fitting.optimizer\_test.py
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

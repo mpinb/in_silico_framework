@@ -1,0 +1,84 @@
+
+
+
+visualize
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _decorators </autoapi/visualize/_decorators/index>  
+   _figure_array_converter </autoapi/visualize/_figure_array_converter/index>  
+   cell_morphology_visualizer </autoapi/visualize/cell_morphology_visualizer/index>  
+   cell_to_ipython_animation </autoapi/visualize/cell_to_ipython_animation/index>  
+   current_visualizer </autoapi/visualize/current_visualizer/index>  
+   dendrogram </autoapi/visualize/dendrogram/index>  
+   histogram </autoapi/visualize/histogram/index>  
+   manylines </autoapi/visualize/manylines/index>  
+   rasterplot </autoapi/visualize/rasterplot/index>  
+   utils </autoapi/visualize/utils/index>  
+   voltage_trace_visualizer </autoapi/visualize/voltage_trace_visualizer/index>  
+   vtk </autoapi/visualize/vtk/index>  
+   svg2emf </autoapi/visualize/svg2emf>
+   plot_hoc </autoapi/visualize/plot_hoc>
+
+.. py:module:: visualize
+
+.. autoapi-nested-parse::
+   Visualization toolbox.
+   Provides modules for efficiently visualizing cell morphologies, ion currents, voltage traces, rasterplots, histograms, and PSTHs.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`svg2emf <visualize.svg2emf>`\ (filename, path\_to\_inkscape)
+     - Converts svg to emf, which can be imported in Word using inkscape.
+   * - :py:obj:`plot_hoc <visualize.plot_hoc>`\ (hoc\_file, \*\*kwargs)
+     - Plot a hoc file using matplotlib.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell_morphology_visualizer <visualize.cell_morphology_visualizer>`
+     - Plot out the cell morphology and its activity during a simulation.
+   * - :py:obj:`cell_to_ipython_animation <visualize.cell_to_ipython_animation>`
+     - Display animations in IPython sessions.
+   * - :py:obj:`current_visualizer <visualize.current_visualizer>`
+     - Visulize all transmembrane ionic currents of a cell simulation.
+   * - :py:obj:`dendrogram <visualize.dendrogram>`
+     - Plot a dendrogram of a neuron morphology.
+   * - :py:obj:`histogram <visualize.histogram>`
+     - Plot line histograms
+   * - :py:obj:`manylines <visualize.manylines>`
+     - Make lineplots in parallel
+   * - :py:obj:`rasterplot <visualize.rasterplot>`
+     - Efficiently create rasterplots from spike time dataframes.
+   * - :py:obj:`utils <visualize.utils>`
+     - Visualization utilities.
+   * - :py:obj:`voltage_trace_visualizer <visualize.voltage_trace_visualizer>`
+     - Visualize voltage traces from the results of a :py:class:`~biophysics_fitting.simulator.Simulator` object.
+   * - :py:obj:`vtk <visualize.vtk>`
+     - Save simulation data in vtk compatible formats
+

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.show_events`
+
+SpikeDetectionCreastTrough.show_events
+======================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.show_events(events='auto', savepdf=None, showfig=True, ylim=(-5, 5))
+
+   Shows voltage trace, thresholds and events.
+
+   Events are spike times, spike candidates, and stimulus times.
+   Spike times are shown as pink line, spike candidates as black dotted line, stimulus times as red line.
+
+   :Parameters: * **events** (*str|list*) -- 'auto': uses :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough.get_default_events` to show events.
+                  'only_creast': Does not show trough candidates.
+                  list: explicitly define events to show. Needs to be list containing 4-touples in the following format: ``(timepoint, 'color', 'linestyle', linewidth)``
+                * **savepdf** (*str*) -- If specified, saves the figure to the given path.
+                * **showfig** (*bool*) -- If True, displays the figure.
+                * **ylim** (*tuple*) -- y-axis limits of the plot.
+
+   :raises ValueError: If events is not 'auto', 'only_creast', or a list.
+
+   :returns: None
+
+   .. seealso:: :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough.get_default_events`
+

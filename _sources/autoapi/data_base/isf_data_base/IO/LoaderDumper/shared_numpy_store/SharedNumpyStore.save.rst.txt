@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save`
+
+SharedNumpyStore.save
+=====================
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save(arr, name)
+
+   Save a numpy array to disk at the working_dir of this instance of NumpyStore.
+
+   :Parameters: * **arr** (*np.ndarray*) -- The array to be saved.
+                * **name** (*str*) -- The name of the array.
+
+   .. warning:: This method does not check if the array already exists in the store. If it does, it will be overwritten.
+
+   :raises AssertionError: If the name is reserved for a Database ``Loader``.
+   :raises AssertionError: If the name contains double underscores, which would throw off the NumpyStore convention.
+

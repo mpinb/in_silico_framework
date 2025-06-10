@@ -1,0 +1,44 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO`
+
+IO
+==
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   LoaderDumper </autoapi/data_base/isf_data_base/IO/LoaderDumper/index>  
+   dask_wrappers </autoapi/data_base/isf_data_base/IO/dask_wrappers/index>  
+
+.. py:module:: data_base.isf_data_base.IO
+
+.. autoapi-nested-parse::
+   Read and write data.
+
+   This subpackage provides mainly the :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` subpackage to read and write data
+   in various file formats and data types.
+
+   In additions, it provides some convenience methods for dask.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`LoaderDumper <data_base.isf_data_base.IO.LoaderDumper>`
+     - Read and write data in various formats.
+   * - :py:obj:`dask_wrappers <data_base.isf_data_base.IO.dask_wrappers>`
+     - Read dask csv from an explicit filelist instead of only globstring.
+

@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_length`
+
+PySection2._compute_length
+==========================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_length()
+
+   Calculate the length of the section.
+

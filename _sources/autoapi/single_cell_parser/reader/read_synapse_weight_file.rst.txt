@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_synapse_weight_file`
+
+
+.. title:
+
+read_synapse_weight_file
+========================
+
+
+.. py:function:: single_cell_parser.reader.read_synapse_weight_file(fname)
+
+   Reads list of all anatomical synapses and their maximum conductance values.
+
+   :Parameters: **fname** (*str*) -- Synapse weight filename.
+                See: :py:meth:`~single\_cell\_parser.writer.write\_synapse\_weight\_file`.
+
+   :returns: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
+             1st with section ID and pt ID, 2nd with synaptic weights, coded as dictionaries
+             (keys=receptor strings) containing weights: (gmax\_0, gmax\_1, ... , gmax\_n)
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

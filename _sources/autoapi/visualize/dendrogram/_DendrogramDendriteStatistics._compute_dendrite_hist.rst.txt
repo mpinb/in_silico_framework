@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist`
+
+_DendrogramDendriteStatistics._compute_dendrite_hist
+====================================================
+
+.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist(dist_end=None, binsize=50)
+
+   Compute the dendrite density histogram.
+
+   :Parameters: * **dist_end** (*float*) -- The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
+                * **binsize** (*float*) -- The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
+
+   :returns: Nothing. Updates :paramref:`bins` and :paramref:`dendrite_density`.
+   :rtype: None
+

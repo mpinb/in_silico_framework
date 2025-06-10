@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._get_ion_dynamics_at_timepoint`
+
+CMVDataParser._get_ion_dynamics_at_timepoint
+============================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._get_ion_dynamics_at_timepoint(time_point, ion_keyword)
+
+   Retrieves the ion dynamics along the whole cell morphology from cell object at a particular time point.
+   Note that the array of data per section each time starts with the last point of its parent section.
+
+   :Parameters: **time_point** (*float|int*) -- time point from which we want to gather the voltage.
+
+   :returns: list of ion dynamics points for each morphological point in the cell at :paramref:`time_point`.
+   :rtype: ion_points (list)
+

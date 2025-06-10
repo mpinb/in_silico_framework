@@ -1,0 +1,63 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+MetadataAccessor
+================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   keys <MetadataAccessor.keys>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.isf_data_base.isf_data_base.MetadataAccessor(db)
+   
+   Access the metadata of some database key.
+
+   Used by :py:class:`~data_base.isf_data_base.ISFDataBase` to conveniently acces metadata as such::
+
+       >>> db = ISFDataBase('path')
+       >>> db.metadata
+       <class 'data_base.isf_data_base.MetadataAccessor'>
+       >>> db['somekey']
+       "somevalue"
+       >>> db.metadata['somekey']
+       {
+           'dumper': 'to_cloudpickle',
+           'time': <date-time>,
+           'metadata_creation_time': 'post_hoc',
+           'version': <git commit hash>
+       }
+
+   It does not have a set method, as the metadata is set automatically when a key is set.
+   Upon accidental metadata removal, the DataBase will try to estimate the metadata itself using :py:meth:`~data_base.isf_data_base.ISFDataBase._update_metadata_if_necessary`.
+
+   :Parameters: **db** (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`) -- The database to access the metadata of.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`keys <data_base.isf_data_base.isf_data_base.MetadataAccessor.keys>`\ ()
+        - Return the keys of the :paramref:`db`
+

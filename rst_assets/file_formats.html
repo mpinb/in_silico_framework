@@ -1,0 +1,1655 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>File & data formats - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#syn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              File &amp; data formats
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="api_reference.html" class="md-tabs__link">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="tutorials.html" class="md-tabs__link">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="#" class="md-tabs__link md-tabs__link--active">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference.html" class="md-nav__link">
+        <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syn" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#syn (reference label)" class="md-ellipsis">.<wbr>syn</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#con (reference label)" class="md-ellipsis">.<wbr>con</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#param" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#param (reference label)" class="md-ellipsis">.<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label=".param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-parameters" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#cell-parameters (reference label)" class="md-ellipsis">Cell parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-parameters" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#network-parameters (reference label)" class="md-ellipsis">Network parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-data" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#activity-data (reference label)" class="md-ellipsis">Activity data</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataframes" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#dataframes (reference label)" class="md-ellipsis">Dataframes</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataframes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synapse-activation" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#synapse-activation (reference label)" class="md-ellipsis">Synapse activation</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Synapse activation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#raw-simrun-output" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#raw-simrun-output (reference label)" class="md-ellipsis">Raw simrun output</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parsed-dataframe" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#parsed-dataframe (reference label)" class="md-ellipsis">Parsed dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presynaptic-spike-times" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#presynaptic-spike-times (reference label)" class="md-ellipsis">Presynaptic spike times</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Presynaptic spike times">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id1" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#id1 (reference label)" class="md-ellipsis">Raw simrun output</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id2" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#id2 (reference label)" class="md-ellipsis">Parsed dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-traces" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-traces (reference label)" class="md-ellipsis">Voltage traces</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Voltage traces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-csv" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-csv (reference label)" class="md-ellipsis">Voltage trace .<wbr>csv</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-npz" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-npz (reference label)" class="md-ellipsis">Voltage trace .<wbr>npz</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-dataframe" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-dataframe (reference label)" class="md-ellipsis">Voltage trace dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hoc" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#hoc (reference label)" class="md-ellipsis">.<wbr>hoc</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mod" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#mod (reference label)" class="md-ellipsis">.<wbr>mod</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#am" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#am (reference label)" class="md-ellipsis">.<wbr>am</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syn" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#syn (reference label)" class="md-ellipsis">.<wbr>syn</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#con" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#con (reference label)" class="md-ellipsis">.<wbr>con</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#param" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#param (reference label)" class="md-ellipsis">.<wbr>param</span>
+  </a>
+  
+    <nav class="md-nav" aria-label=".param">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cell-parameters" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#cell-parameters (reference label)" class="md-ellipsis">Cell parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-parameters" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#network-parameters (reference label)" class="md-ellipsis">Network parameters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-data" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#activity-data (reference label)" class="md-ellipsis">Activity data</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataframes" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#dataframes (reference label)" class="md-ellipsis">Dataframes</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dataframes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synapse-activation" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#synapse-activation (reference label)" class="md-ellipsis">Synapse activation</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Synapse activation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#raw-simrun-output" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#raw-simrun-output (reference label)" class="md-ellipsis">Raw simrun output</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parsed-dataframe" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#parsed-dataframe (reference label)" class="md-ellipsis">Parsed dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presynaptic-spike-times" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#presynaptic-spike-times (reference label)" class="md-ellipsis">Presynaptic spike times</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Presynaptic spike times">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#id1" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#id1 (reference label)" class="md-ellipsis">Raw simrun output</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id2" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#id2 (reference label)" class="md-ellipsis">Parsed dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-traces" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-traces (reference label)" class="md-ellipsis">Voltage traces</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Voltage traces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-csv" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-csv (reference label)" class="md-ellipsis">Voltage trace .<wbr>csv</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-npz" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-npz (reference label)" class="md-ellipsis">Voltage trace .<wbr>npz</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voltage-trace-dataframe" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#voltage-trace-dataframe (reference label)" class="md-ellipsis">Voltage trace dataframe</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hoc" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#hoc (reference label)" class="md-ellipsis">.<wbr>hoc</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mod" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#mod (reference label)" class="md-ellipsis">.<wbr>mod</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#am" class="md-nav__link">
+    <span title="/rst_assets/file_formats.rst#am (reference label)" class="md-ellipsis">.<wbr>am</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="file-data-formats"><span id="file-formats"></span>File &amp; data formats<a class="headerlink" href="#file-data-formats" title="Permalink to this heading">¶</a></h1>
+<figure class="align-center" id="id5">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 322.00 404.00" class="graphviz" style="width: 20.125rem;height: 25.25rem;">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 400)">
+<title>sphinx-ext-graphviz</title>
+<g id="clust1" class="cluster">
+<title>cluster_syncon</title>
+<polygon fill="lightgrey" stroke="lightgrey" points="8,-208 8,-260 150,-260 150,-208 8,-208" />
+</g>
+
+<g id="node1" class="node">
+<title>morphology_file</title>
+<g id="a_node1"><a href="#hoc-file-format">
+<polygon fill="white" points="208,-396 160,-396 160,-360 214,-360 214,-390 208,-396" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="208,-396 208,-390" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="214,-390 208,-390" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="176" y="-373.8" font-family="Roboto" font-size="12.00" style="--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">.hoc</text>
+<title>.hoc</title></a>
+</g>
+</g>
+
+<g id="node7" class="node">
+<title>scim</title>
+<g id="a_node7"><a href="../autoapi/singlecell_input_mapper/index.html#module-singlecell_input_mapper">
+<polygon points="186.5,-324 183.5,-328 162.5,-328 159.5,-324 43.5,-324 43.5,-288 186.5,-288 186.5,-324" style="fill: var(--md-graphviz-node-bg-color);stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="51.5" y="-301.8" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">singlecell_input_mapper</text>
+<title>singlecell_input_mapper (Python module)</title></a>
+</g>
+</g>
+
+<g id="edge6" class="edge">
+<title>morphology_file-&gt;scim</title>
+<path fill="none" d="M169.2,-359.7C160.72,-351.45 150.41,-341.43 141.07,-332.35" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="143.54,-329.86 133.93,-325.4 138.66,-334.88 143.54,-329.86" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node11" class="node">
+<title>biophysics_fitting</title>
+<g id="a_node11"><a href="../autoapi/biophysics_fitting/index.html#module-biophysics_fitting">
+<polygon points="313,-324 310,-328 289,-328 286,-324 205,-324 205,-288 313,-288 313,-324" style="fill: var(--md-graphviz-node-bg-color);stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="middle" x="259" y="-301.8" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">biophysics_fitting</text>
+<title>biophysics_fitting (Python module)</title></a>
+</g>
+</g>
+
+<g id="edge1" class="edge">
+<title>morphology_file-&gt;biophysics_fitting</title>
+<path fill="none" d="M204.8,-359.7C213.28,-351.45 223.59,-341.43 232.93,-332.35" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="235.34,-334.88 240.07,-325.4 230.46,-329.86 235.34,-334.88" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node2" class="node">
+<title>syn</title>
+<g id="a_node2"><a href="#syn-file-format">
+<polygon fill="white" points="64,-252 16,-252 16,-216 70,-216 70,-246 64,-252" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="64,-252 64,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="70,-246 64,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="middle" x="43" y="-229.8" font-family="Roboto" font-size="12.00" style="--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">.syn</text>
+<title>.syn</title></a>
+</g>
+</g>
+
+<g id="node3" class="node">
+<title>con</title>
+<g id="a_node3"><a href="#con-file-format">
+<polygon fill="white" points="136,-252 88,-252 88,-216 142,-216 142,-246 136,-252" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="136,-252 136,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="142,-246 136,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="middle" x="115" y="-229.8" font-family="Roboto" font-size="12.00" style="--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">.con</text>
+<title>.con</title></a>
+</g>
+</g>
+
+<g id="node8" class="node">
+<title>scim2</title>
+<g id="a_node8"><a href="../autoapi/singlecell_input_mapper/index.html#module-singlecell_input_mapper">
+<polygon points="185.5,-180 182.5,-184 161.5,-184 158.5,-180 42.5,-180 42.5,-144 185.5,-144 185.5,-180" style="fill: var(--md-graphviz-node-bg-color);stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="50.5" y="-157.8" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">singlecell_input_mapper</text>
+<title>singlecell_input_mapper (Python module)</title></a>
+</g>
+</g>
+
+<g id="edge8" class="edge">
+<title>con-&gt;scim2</title>
+<path fill="none" d="M114.64,-208C114.57,-202.67 114.49,-196.99 114.41,-191.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="117.91,-191.57 114.27,-181.62 110.91,-191.67 117.91,-191.57" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node4" class="node">
+<title>netp</title>
+<g id="a_node4"><a href="#network-parameters-format">
+<polygon fill="white" points="177,-108 59,-108 59,-72 183,-72 183,-102 177,-108" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="177,-108 177,-102" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="183,-102 177,-102" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="67" y="-85.8" font-family="Roboto" font-size="12.00" style="--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">Network parameters</text>
+<title>Network parameters</title></a>
+</g>
+</g>
+
+<g id="node10" class="node">
+<title>simrun</title>
+<g id="a_node10"><a href="../autoapi/simrun/index.html#module-simrun">
+<polygon points="213,-36 210,-40 189,-40 186,-36 159,-36 159,0 213,0 213,-36" style="fill: var(--md-graphviz-node-bg-color);stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="middle" x="186" y="-13.8" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">simrun</text>
+<title>simrun (Python module)</title></a>
+</g>
+</g>
+
+<g id="edge10" class="edge">
+<title>netp-&gt;simrun</title>
+<path fill="none" d="M137.07,-71.7C144.7,-63.47 153.98,-53.48 162.4,-44.42" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="164.85,-46.92 169.09,-37.21 159.72,-42.16 164.85,-46.92" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node5" class="node">
+<title>neup</title>
+<g id="a_node5"><a href="#cell-parameters-format">
+<polygon fill="white" points="298.5,-108 205.5,-108 205.5,-72 304.5,-72 304.5,-102 298.5,-108" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="298.5,-108 298.5,-102" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="304.5,-102 298.5,-102" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="213.5" y="-85.8" font-family="Roboto" font-size="12.00" style="--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">Cell parameters</text>
+<title>Cell parameters</title></a>
+</g>
+</g>
+
+<g id="edge5" class="edge">
+<title>neup-&gt;simrun</title>
+<path fill="none" d="M237.94,-71.7C229.76,-63.39 219.79,-53.28 210.78,-44.14" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="213.44,-41.85 203.92,-37.18 208.45,-46.76 213.44,-41.85" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="node6" class="node">
+<title>biophys_df</title>
+<polygon fill="white" points="288.5,-252 223.5,-252 223.5,-216 294.5,-216 294.5,-246 288.5,-252" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="288.5,-252 288.5,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<polyline fill="none" points="294.5,-246 288.5,-246" style="stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="middle" x="259" y="-229.8" font-family="Roboto" font-size="12.00">biophys.df</text>
+</g>
+
+<g id="node9" class="node">
+<title>scp</title>
+<g id="a_node9"><a href="../autoapi/single_cell_parser/index.html#module-single_cell_parser">
+<polygon points="314,-180 311,-184 290,-184 287,-180 204,-180 204,-144 314,-144 314,-180" style="fill: var(--md-graphviz-node-bg-color);stroke: var(--md-graphviz-node-fg-color);" />
+<text text-anchor="start" x="212" y="-157.8" font-family="Roboto" font-size="12.00" style="fill: var(--md-code-fg-color);--md-graphviz-hover-color: var(--md-graphviz-a-hover-color);">single_cell_parser</text>
+<title>single_cell_parser (Python module)</title></a>
+</g>
+</g>
+
+<g id="edge3" class="edge">
+<title>biophys_df-&gt;scp</title>
+<path fill="none" d="M259,-215.7C259,-208.41 259,-199.73 259,-191.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="262.5,-191.62 259,-181.62 255.5,-191.62 262.5,-191.62" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="edge7" class="edge">
+<title>scim-&gt;con</title>
+<path fill="none" d="M115,-287.7C115,-280.41 115,-271.73 115,-263.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="118.5,-271.51 115,-261.51 111.5,-271.51 118.5,-271.51" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="edge9" class="edge">
+<title>scim2-&gt;netp</title>
+<path fill="none" d="M115.73,-143.7C116.46,-136.41 117.33,-127.73 118.15,-119.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="121.63,-119.91 119.14,-109.61 114.66,-119.21 121.63,-119.91" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="edge4" class="edge">
+<title>scp-&gt;neup</title>
+<path fill="none" d="M258.01,-143.7C257.59,-136.41 257.1,-127.73 256.63,-119.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="260.13,-119.4 256.06,-109.62 253.14,-119.8 260.13,-119.4" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+
+<g id="edge2" class="edge">
+<title>biophysics_fitting-&gt;biophys_df</title>
+<path fill="none" d="M259,-287.7C259,-280.41 259,-271.73 259,-263.54" style="stroke: var(--md-graphviz-edge-color);" />
+<polygon points="262.5,-263.62 259,-253.62 255.5,-263.62 262.5,-263.62" style="fill: var(--md-graphviz-edge-color);stroke: var(--md-graphviz-edge-color);" />
+</g>
+</g>
+</svg><figcaption>
+<p><span class="caption-text"><span class="caption-text">
+Overview of file formats.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></figcaption>
+</figure>
+<h2 id="syn"><span id="syn-file-format"></span>.syn<a class="headerlink" href="#syn" title="Permalink to this heading">¶</a></h2>
+<p>ISF custom file format to store synapse locations onto a morphology.
+Only valid with an associated morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.</p>
+<p>For each synapse, it provides the synapse type and location onto the morphology.
+Each row index corresponds to its synapse ID, providing a link to a corresponding <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.
+The location is encoded as a section ID and x (a normalized distance along the section),
+to be consistent with NEURON syntax.</p>
+<p>To create a functional network (i.e., known presynaptic origin),
+it must be used in conjunction with an associated <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Synapse distribution file</span>
+<span class="c1"># corresponding to cell: morphology.hoc</span>
+<span class="c1"># Type - section - section.x</span>
+
+<span class="n">VPM_E1</span>  <span class="mi">112</span>     <span class="mf">0.138046479525</span>
+<span class="n">VPM_E1</span>  <span class="mi">130</span>     <span class="mf">0.305058053119</span>
+<span class="n">VPM_E1</span>  <span class="mi">130</span>     <span class="mf">0.190509288017</span>
+<span class="n">VPM_E1</span>  <span class="mi">9</span>       <span class="mf">0.368760777084</span>
+<span class="n">VPM_E1</span>  <span class="mi">110</span>     <span class="mf">0.0</span>
+<span class="n">VPM_E1</span>  <span class="mi">11</span>      <span class="mf">0.120662910562</span>
+<span class="o">...</span>
+</code></pre></div>
+</div>
+<h2 id="con"><span id="con-file-format"></span>.con<a class="headerlink" href="#con" title="Permalink to this heading">¶</a></h2>
+<p>ISF custom file format to store connectivity data.
+To be used in conjunction with an associated <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.
+It numbers each synapse, and links it to its associated presynaptic cell type and ID.
+While a <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file provide the anatomical realization of a morphology embedding into a network,
+the addition of a <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file makes possible to construct a functional realization, as it allows linking the synapses to
+presynaptic cells of a dense connectome model, which in turn allows to assign cell type specific activation patterns
+to each synapse. ISF’s workflow is designed to create these files in tandem, so they always co-exist.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Anatomical connectivity realization file; only valid with synapse realization:</span>
+<span class="c1"># synapse_ralization_file.syn</span>
+<span class="c1"># Type - cell ID - synapse ID</span>
+
+<span class="n">L6cc_A3</span> <span class="mi">0</span>       <span class="mi">0</span>
+<span class="n">L6cc_A3</span> <span class="mi">1</span>       <span class="mi">1</span>
+<span class="n">L6cc_A3</span> <span class="mi">2</span>       <span class="mi">2</span>
+<span class="n">L6cc_A3</span> <span class="mi">3</span>       <span class="mi">3</span>
+<span class="n">L6cc_A3</span> <span class="mi">4</span>       <span class="mi">4</span>
+<span class="n">L6cc_A3</span> <span class="mi">4</span>       <span class="mi">5</span>
+<span class="o">...</span>
+</code></pre></div>
+</div>
+<h2 id="param"><span id="param-file-format"></span>.param<a class="headerlink" href="#param" title="Permalink to this heading">¶</a></h2>
+<p>ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
+The <code class="docutils literal notranslate"><span class="pre">.param</span></code> format is valid Python code, but differs from JSON, as it allows trailing comma’s, single quotes, and tuples. JSON does not.
+All <code class="docutils literal notranslate"><span class="pre">.param</span></code> files can be read using <code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser.build_parameters</span></code>. However, specific files that use this format have more
+specialized readers, which provide additional for <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> and <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>.</p>
+<p>Both the <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> and the <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a> are used as inputs for multi-scale simulations using <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p>
+<dl class="simple">
+<dt>See also:</dt><dd><p><a class="reference internal" href="../autoapi/simrun/parameters_to_cell/index.html#module-simrun.parameters_to_cell" title="simrun.parameters_to_cell (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.parameters_to_cell</span></code></a> to rerun a simulation from these parameterfiles.</p>
+</dd>
+</dl>
+<h3 id="cell-parameters"><span id="cell-parameters-format"></span>Cell parameters<a class="headerlink" href="#cell-parameters" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> file to store biophysical parameters of a cell.
+Includes a reference to a <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file,
+biophysical properties of the cell per cellular structure (i.e. soma, dendrite, axon initial segment …),
+and basic simulation parameters. Conductance densities are given in <span class="math notranslate nohighlight">\(S/cm^2\)</span>, spatial coordinates and distances in <span class="math notranslate nohighlight">\(\mu m\)</span>, and time in <span class="math notranslate nohighlight">\(ms\)</span>.
+Simulation parameters are usually overridden by higher level modules, such as <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p>
+<p>To access different structures of a cell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">cell_parameters</span><span class="o">.</span><span class="n">neuron</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="go">[&#39;Myelin&#39;, &#39;Soma&#39;, &#39;AIS&#39;, &#39;filename&#39;, &#39;Dendrite&#39;, &#39;ApicalDendrite&#39;]</span>
+</code></pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="s1">&#39;info&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+    <span class="s1">&#39;neuron&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="s1">&#39;getting_started/example_data/anatomical_constraints/*.hoc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Soma&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;Ra&#39;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span>
+                <span class="s1">&#39;cm&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="s1">&#39;ions&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ek&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">85.0</span><span class="p">,</span> <span class="s1">&#39;ena&#39;</span><span class="p">:</span> <span class="mf">50.0</span><span class="p">}</span>
+                <span class="p">},</span>
+            <span class="s1">&#39;mechanisms&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;global&#39;</span><span class="p">:</span> <span class="p">{},</span>
+                <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;pas&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;spatial&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="mf">3.26e-05</span><span class="p">,</span>
+                        <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">90</span><span class="p">},</span>
+                    <span class="s1">&#39;Ca_LVAst&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;spatial&#39;</span><span class="p">:</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;gCa_LVAstbar&#39;</span><span class="p">:</span> <span class="mf">0.00462</span><span class="p">},</span>
+                    <span class="s1">&#39;Ca_HVA&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+                    <span class="o">...</span><span class="p">,}}},</span>
+        <span class="s1">&#39;Dendrite&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s1">&#39;ApicalDendrite&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s1">&#39;AIS&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s1">&#39;Myelin&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s1">&#39;cell_modify_functions&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;scale_apical&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">2.1</span><span class="p">}</span>
+        <span class="p">},</span>
+    <span class="s1">&#39;sim&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Vinit&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">75.0</span><span class="p">,</span>
+        <span class="s1">&#39;tStart&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;tStop&#39;</span><span class="p">:</span> <span class="mf">250.0</span><span class="p">,</span>
+        <span class="s1">&#39;dt&#39;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span>
+        <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span>
+        <span class="s1">&#39;recordingSites&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;getting_started/example_data/apical_proximal_distal_rec_sites.landmarkAscii&#39;</span><span class="p">]}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h3 id="network-parameters"><span id="network-parameters-format"></span>Network parameters<a class="headerlink" href="#network-parameters" title="Permalink to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> format is used to store network parameters,
+describing the presynaptic cells and their synaptic activations.
+Only valid with an associated <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file, <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file, and <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
+<p>For each presynaptic cell type in the network, this following information is provided:</p>
+<table class="docutils data align-default" id="id6">
+<caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id6" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">celltype</span></code></p></td>
+<td><p>Spiking type of the presynaptic cell (“spiketrain”, or “pointcell”).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">synapses</span></code></p></td>
+<td><p>Additional synapse information (see table below)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cellNr</span></code></p></td>
+<td><p>Amount of connected presynaptic cells of this type.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">synapses</span></code> key of each presynaptic cell type contains the following information:</p>
+<table class="docutils data align-default" id="id7">
+<caption><span class="caption-text">Synapse parameters</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">releaseProb</span></code></p></td>
+<td><p>Release probability of this synapse upon a spike of its associated presynaptic cell.
+A synapse is either active or not active, never inbetween.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">connectionFile</span></code></p></td>
+<td><p>Reference to an associated <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file for this cell type’s synapses.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">distributionFile</span></code></p></td>
+<td><p>Reference to an associated <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file for this cell type’s synapses.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">receptors</span></code></p></td>
+<td><p>Dictionary of synapse properties per receptor type (e.g. <code class="docutils literal notranslate"><span class="pre">gaba_syn</span></code>). Properties are given below.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each <code class="docutils literal notranslate"><span class="pre">synapses.receptors.&lt;receptor</span> <span class="pre">type&gt;</span></code> in <code class="docutils literal notranslate"><span class="pre">synapses.receptors</span></code> contains the following information:</p>
+<table class="docutils data align-default" id="id8">
+<caption><span class="caption-text">Receptor parameters</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">delay</span></code></p></td>
+<td><p>Delay between the presynaptic cell activation and the downstream synapse activation in <span class="math notranslate nohighlight">\(ms\)</span>. Often defaults to <span class="math notranslate nohighlight">\(0\)</span>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">threshold</span></code></p></td>
+<td><p>Threshold of the synapse.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">weight</span></code></p></td>
+<td><p>Weight of the synapse.
+Note that excitatory glutamate are <span class="math notranslate nohighlight">\(AMPA\)</span> and <span class="math notranslate nohighlight">\(NMDA\)</span> superpositions, and thus require two weights.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">parameter</span></code></p></td>
+<td><p>Receptor-specific parameters for the synapse dynamics.
+For example, for an AMPA synapse, this could be the decay time constant, the facilitation, etc.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple">
+<dt>See also:</dt><dd><p>The receptor parameters are used for NEURON’s <a class="reference external" href="https://nrn.readthedocs.io/en/latest/hoc/modelspec/programmatic/network/netcon.html">NetCon</a>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;11Feb2015&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;evoked_activity&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;cell_type_1&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;cellNr&quot;</span><span class="p">:</span> <span class="mi">20</span>
+    <span class="s2">&quot;celltype&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">&#39;pointcell&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;PSTH_poissontrain&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;intervals&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">274.7</span><span class="p">),</span> <span class="p">(</span><span class="mf">274.7</span><span class="p">,</span> <span class="mi">295</span><span class="p">),</span> <span class="p">(</span><span class="mi">295</span><span class="p">,</span> <span class="mi">945</span><span class="p">),</span> <span class="p">(</span><span class="mi">945</span><span class="p">,</span> <span class="mi">1145</span><span class="p">)],</span>
+        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">&#39;rates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.4357770278148136</span><span class="p">,</span> <span class="mf">1.0890981376857083</span><span class="p">,</span> <span class="mf">1.7588271630292192</span><span class="p">,</span> <span class="mf">1.4357770278148136</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;synapses&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;receptors&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;glutamate_syn&#39;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s1">&#39;delay&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+          <span class="s1">&#39;parameter&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;decayampa&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s1">&#39;decaynmda&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s1">&#39;facilampa&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s1">&#39;facilnmda&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="s1">&#39;tau1&#39;</span><span class="p">:</span> <span class="mf">26.0</span><span class="p">,</span>
+            <span class="s1">&#39;tau2&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+            <span class="s1">&#39;tau3&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+            <span class="s1">&#39;tau4&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+          <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+          <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5480934081344324</span><span class="p">,</span> <span class="mf">1.5480934081344324</span><span class="p">]</span>
+          <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;releaseProb&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+      <span class="s2">&quot;connectionFile&quot;</span><span class="p">:</span> <span class="s2">&quot;presyn_cells.con&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;distributionFile&quot;</span><span class="p">:</span> <span class="s2">&quot;syn_locations.syn&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;cell_type_2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+  <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h3 id="activity-data"><span id="activity-data-format"></span>Activity data<a class="headerlink" href="#activity-data" title="Permalink to this heading">¶</a></h3>
+<p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> files are used to store activity data covering spike times and time bins for specific cell types in response to a stimulus, as seen in e.g. getting_started/example_data/functional_constraints/evoked_activity/</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="s2">&quot;L4ss_B1&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;PSTH&quot;</span><span class="p">,</span>
+<span class="s2">&quot;intervals&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),(</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">),(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">),(</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">),(</span><span class="mf">4.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">),(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">),(</span><span class="mf">6.0</span><span class="p">,</span><span class="mf">7.0</span><span class="p">),(</span><span class="mf">7.0</span><span class="p">,</span><span class="mf">8.0</span><span class="p">),(</span><span class="mf">8.0</span><span class="p">,</span><span class="mf">9.0</span><span class="p">),(</span><span class="mf">9.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">),(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">11.0</span><span class="p">),(</span><span class="mf">11.0</span><span class="p">,</span><span class="mf">12.0</span><span class="p">),(</span><span class="mf">12.0</span><span class="p">,</span><span class="mf">13.0</span><span class="p">),(</span><span class="mf">13.0</span><span class="p">,</span><span class="mf">14.0</span><span class="p">),(</span><span class="mf">14.0</span><span class="p">,</span><span class="mf">15.0</span><span class="p">),(</span><span class="mf">15.0</span><span class="p">,</span><span class="mf">16.0</span><span class="p">),(</span><span class="mf">16.0</span><span class="p">,</span><span class="mf">17.0</span><span class="p">),(</span><span class="mf">17.0</span><span class="p">,</span><span class="mf">18.0</span><span class="p">),(</span><span class="mf">18.0</span><span class="p">,</span><span class="mf">19.0</span><span class="p">),(</span><span class="mf">19.0</span><span class="p">,</span><span class="mf">20.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">21.0</span><span class="p">),(</span><span class="mf">21.0</span><span class="p">,</span><span class="mf">22.0</span><span class="p">),(</span><span class="mf">22.0</span><span class="p">,</span><span class="mf">23.0</span><span class="p">),(</span><span class="mf">23.0</span><span class="p">,</span><span class="mf">24.0</span><span class="p">),(</span><span class="mf">24.0</span><span class="p">,</span><span class="mf">25.0</span><span class="p">),(</span><span class="mf">25.0</span><span class="p">,</span><span class="mf">26.0</span><span class="p">),(</span><span class="mf">26.0</span><span class="p">,</span><span class="mf">27.0</span><span class="p">),(</span><span class="mf">27.0</span><span class="p">,</span><span class="mf">28.0</span><span class="p">),(</span><span class="mf">28.0</span><span class="p">,</span><span class="mf">29.0</span><span class="p">),(</span><span class="mf">29.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">),(</span><span class="mf">30.0</span><span class="p">,</span><span class="mf">31.0</span><span class="p">),(</span><span class="mf">31.0</span><span class="p">,</span><span class="mf">32.0</span><span class="p">),(</span><span class="mf">32.0</span><span class="p">,</span><span class="mf">33.0</span><span class="p">),(</span><span class="mf">33.0</span><span class="p">,</span><span class="mf">34.0</span><span class="p">),(</span><span class="mf">34.0</span><span class="p">,</span><span class="mf">35.0</span><span class="p">),(</span><span class="mf">35.0</span><span class="p">,</span><span class="mf">36.0</span><span class="p">),(</span><span class="mf">36.0</span><span class="p">,</span><span class="mf">37.0</span><span class="p">),(</span><span class="mf">37.0</span><span class="p">,</span><span class="mf">38.0</span><span class="p">),(</span><span class="mf">38.0</span><span class="p">,</span><span class="mf">39.0</span><span class="p">),(</span><span class="mf">39.0</span><span class="p">,</span><span class="mf">40.0</span><span class="p">),(</span><span class="mf">40.0</span><span class="p">,</span><span class="mf">41.0</span><span class="p">),(</span><span class="mf">41.0</span><span class="p">,</span><span class="mf">42.0</span><span class="p">),(</span><span class="mf">42.0</span><span class="p">,</span><span class="mf">43.0</span><span class="p">),(</span><span class="mf">43.0</span><span class="p">,</span><span class="mf">44.0</span><span class="p">),(</span><span class="mf">44.0</span><span class="p">,</span><span class="mf">45.0</span><span class="p">),(</span><span class="mf">45.0</span><span class="p">,</span><span class="mf">46.0</span><span class="p">),(</span><span class="mf">46.0</span><span class="p">,</span><span class="mf">47.0</span><span class="p">),(</span><span class="mf">47.0</span><span class="p">,</span><span class="mf">48.0</span><span class="p">),(</span><span class="mf">48.0</span><span class="p">,</span><span class="mf">49.0</span><span class="p">),(</span><span class="mf">49.0</span><span class="p">,</span><span class="mf">50.0</span><span class="p">)],</span>
+<span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0129</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">],</span>
+<span class="p">},</span>
+<span class="s2">&quot;L4ss_B2&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;PSTH&quot;</span><span class="p">,</span>
+<span class="s2">&quot;intervals&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),(</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">),(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">),(</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">),(</span><span class="mf">4.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">),(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">),(</span><span class="mf">6.0</span><span class="p">,</span><span class="mf">7.0</span><span class="p">),(</span><span class="mf">7.0</span><span class="p">,</span><span class="mf">8.0</span><span class="p">),(</span><span class="mf">8.0</span><span class="p">,</span><span class="mf">9.0</span><span class="p">),(</span><span class="mf">9.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">),(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">11.0</span><span class="p">),(</span><span class="mf">11.0</span><span class="p">,</span><span class="mf">12.0</span><span class="p">),(</span><span class="mf">12.0</span><span class="p">,</span><span class="mf">13.0</span><span class="p">),(</span><span class="mf">13.0</span><span class="p">,</span><span class="mf">14.0</span><span class="p">),(</span><span class="mf">14.0</span><span class="p">,</span><span class="mf">15.0</span><span class="p">),(</span><span class="mf">15.0</span><span class="p">,</span><span class="mf">16.0</span><span class="p">),(</span><span class="mf">16.0</span><span class="p">,</span><span class="mf">17.0</span><span class="p">),(</span><span class="mf">17.0</span><span class="p">,</span><span class="mf">18.0</span><span class="p">),(</span><span class="mf">18.0</span><span class="p">,</span><span class="mf">19.0</span><span class="p">),(</span><span class="mf">19.0</span><span class="p">,</span><span class="mf">20.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">21.0</span><span class="p">),(</span><span class="mf">21.0</span><span class="p">,</span><span class="mf">22.0</span><span class="p">),(</span><span class="mf">22.0</span><span class="p">,</span><span class="mf">23.0</span><span class="p">),(</span><span class="mf">23.0</span><span class="p">,</span><span class="mf">24.0</span><span class="p">),(</span><span class="mf">24.0</span><span class="p">,</span><span class="mf">25.0</span><span class="p">),(</span><span class="mf">25.0</span><span class="p">,</span><span class="mf">26.0</span><span class="p">),(</span><span class="mf">26.0</span><span class="p">,</span><span class="mf">27.0</span><span class="p">),(</span><span class="mf">27.0</span><span class="p">,</span><span class="mf">28.0</span><span class="p">),(</span><span class="mf">28.0</span><span class="p">,</span><span class="mf">29.0</span><span class="p">),(</span><span class="mf">29.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">),(</span><span class="mf">30.0</span><span class="p">,</span><span class="mf">31.0</span><span class="p">),(</span><span class="mf">31.0</span><span class="p">,</span><span class="mf">32.0</span><span class="p">),(</span><span class="mf">32.0</span><span class="p">,</span><span class="mf">33.0</span><span class="p">),(</span><span class="mf">33.0</span><span class="p">,</span><span class="mf">34.0</span><span class="p">),(</span><span class="mf">34.0</span><span class="p">,</span><span class="mf">35.0</span><span class="p">),(</span><span class="mf">35.0</span><span class="p">,</span><span class="mf">36.0</span><span class="p">),(</span><span class="mf">36.0</span><span class="p">,</span><span class="mf">37.0</span><span class="p">),(</span><span class="mf">37.0</span><span class="p">,</span><span class="mf">38.0</span><span class="p">),(</span><span class="mf">38.0</span><span class="p">,</span><span class="mf">39.0</span><span class="p">),(</span><span class="mf">39.0</span><span class="p">,</span><span class="mf">40.0</span><span class="p">),(</span><span class="mf">40.0</span><span class="p">,</span><span class="mf">41.0</span><span class="p">),(</span><span class="mf">41.0</span><span class="p">,</span><span class="mf">42.0</span><span class="p">),(</span><span class="mf">42.0</span><span class="p">,</span><span class="mf">43.0</span><span class="p">),(</span><span class="mf">43.0</span><span class="p">,</span><span class="mf">44.0</span><span class="p">),(</span><span class="mf">44.0</span><span class="p">,</span><span class="mf">45.0</span><span class="p">),(</span><span class="mf">45.0</span><span class="p">,</span><span class="mf">46.0</span><span class="p">),(</span><span class="mf">46.0</span><span class="p">,</span><span class="mf">47.0</span><span class="p">),(</span><span class="mf">47.0</span><span class="p">,</span><span class="mf">48.0</span><span class="p">),(</span><span class="mf">48.0</span><span class="p">,</span><span class="mf">49.0</span><span class="p">),(</span><span class="mf">49.0</span><span class="p">,</span><span class="mf">50.0</span><span class="p">)],</span>
+<span class="s2">&quot;probabilities&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0129</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="mf">0.0062</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">],</span>
+<span class="p">},</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<h2 id="dataframes">Dataframes<a class="headerlink" href="#dataframes" title="Permalink to this heading">¶</a></h2>
+<p>The output format of various simulation pipelines are usually a dataframe. below, you find common formats used throughout ISF.</p>
+<p>The <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package produces output files in <code class="docutils literal notranslate"><span class="pre">.csv</span></code> or <code class="docutils literal notranslate"><span class="pre">.npz</span></code> format. many of these files
+need to be created for each individual simulation trial.
+These raw output files are usually parsed into single dataframes for further analysis using a <code class="docutils literal notranslate"><span class="pre">db_initializers</span></code> submodule (see e.g.
+<a class="reference internal" href="../autoapi/data_base/db_initializers/load_simrun_general/index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">load_simrun_general</span></code></a>).</p>
+<h3 id="synapse-activation"><span id="syn-activation-format"></span>Synapse activation<a class="headerlink" href="#synapse-activation" title="Permalink to this heading">¶</a></h3>
+<p>The raw output of the <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the synaptic activations onto a post-synaptic cell
+for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:</p>
+<ul class="simple">
+<li><p>type</p></li>
+<li><p>ID (for identifying the corresponding presynaptic cell)</p></li>
+<li><p>location (section ID, section pt ID, soma distance)</p></li>
+<li><p>dendrite label (e.g. <code class="docutils literal notranslate"><span class="pre">&quot;ApicalDendrite&quot;</span></code>)</p></li>
+<li><p>activation times</p></li>
+</ul>
+<p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis:
+An example of the raw and parsed format is shown below:</p>
+<h4 id="raw-simrun-output">Raw <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#raw-simrun-output" title="Permalink to this heading">¶</a></h4>
+<table class="docutils data align-default" id="id9">
+<caption><span class="caption-text">Synapse activations (single trial)</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>synapse type</p></th>
+<th class="head"><p>synapse ID</p></th>
+<th class="head"><p>soma distance</p></th>
+<th class="head"><p>section ID</p></th>
+<th class="head"><p>section pt ID</p></th>
+<th class="head"><p>dendrite label</p></th>
+<th class="head"><p>activation times</p></th>
+<th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>presyn_cell_type_1</p></td>
+<td><p>0</p></td>
+<td><p>150.0</p></td>
+<td><p>24</p></td>
+<td><p>0</p></td>
+<td><p>‘basal’</p></td>
+<td><p>10.2</p></td>
+<td><p>80.5</p></td>
+<td><p>140.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>presyn_cell_type_1</p></td>
+<td><p>1</p></td>
+<td><p>200.0</p></td>
+<td><p>112</p></td>
+<td><p>0</p></td>
+<td><p>‘apical’</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>presyn_cell_type_2</p></td>
+<td><p>2</p></td>
+<td><p>250.0</p></td>
+<td><p>72</p></td>
+<td><p>0</p></td>
+<td><p>‘apical’</p></td>
+<td><p>300.1</p></td>
+<td><p>553.5</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="parsed-dataframe">Parsed dataframe<a class="headerlink" href="#parsed-dataframe" title="Permalink to this heading">¶</a></h4>
+<table class="docutils data align-default" id="id10">
+<caption><span class="caption-text">Synapse activations (all trials)</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>trial index</p></th>
+<th class="head"><p>synapse type</p></th>
+<th class="head"><p>synapse ID</p></th>
+<th class="head"><p>soma distance</p></th>
+<th class="head"><p>section ID</p></th>
+<th class="head"><p>section pt ID</p></th>
+<th class="head"><p>dendrite label</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>presyn_cell_type_1</p></td>
+<td><p>0</p></td>
+<td><p>150.0</p></td>
+<td><p>24</p></td>
+<td><p>0</p></td>
+<td><p>‘basal’</p></td>
+<td><p>10.2</p></td>
+<td><p>80.5</p></td>
+<td><p>140.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>presyn_cell_type_2</p></td>
+<td><p>1</p></td>
+<td><p>200.0</p></td>
+<td><p>112</p></td>
+<td><p>0</p></td>
+<td><p>‘apical’</p></td>
+<td><p>100.2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>presyn_cell_type_1</p></td>
+<td><p>0</p></td>
+<td><p>150.0</p></td>
+<td><p>24</p></td>
+<td><p>0</p></td>
+<td><p>‘basal’</p></td>
+<td><p>10.2</p></td>
+<td><p>140.8</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>presyn_cell_type_2</p></td>
+<td><p>1</p></td>
+<td><p>200.0</p></td>
+<td><p>112</p></td>
+<td><p>0</p></td>
+<td><p>‘apical’</p></td>
+<td><p>100.2</p></td>
+<td><p>138.4</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="attention admonition">
+<p class="admonition-title">Attention</p>
+<p>Not every spike of a presynaptic cell necessarily induces a synapse activation. Each synapse has a specific release
+probability and delay (see <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>).
+For this reason, the spike times of the presynaptic cells is saved separately (see <a class="reference internal" href="#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a>).</p>
+</div>
+<h3 id="presynaptic-spike-times"><span id="spike-times-format"></span>Presynaptic spike times<a class="headerlink" href="#presynaptic-spike-times" title="Permalink to this heading">¶</a></h3>
+<p>The raw output of the <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the spike times of presynaptic cells
+for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:</p>
+<ul class="simple">
+<li><p>type</p></li>
+<li><p>ID (for identifying the corresponding synapse, and cell location)</p></li>
+<li><p>activation times</p></li>
+</ul>
+<p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis
+An example of the raw and parsed format is shown below:</p>
+<h4 id="id1">Raw <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<table class="docutils data align-default" id="id11">
+<caption><span class="caption-text">Presynaptic spike times (single trial)</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>cell type</p></th>
+<th class="head"><p>cell ID</p></th>
+<th class="head"><p>activation times</p></th>
+<th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>presyn_cell_type_1</p></td>
+<td><p>0</p></td>
+<td><p>10.2</p></td>
+<td><p>80.5</p></td>
+<td><p>140.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>presyn_cell_type_1</p></td>
+<td><p>1</p></td>
+<td><p>300.1</p></td>
+<td><p>553.5</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>presyn_cell_type_2</p></td>
+<td><p>2</p></td>
+<td><p>100.2</p></td>
+<td><p>200.5</p></td>
+<td><p>300.8</p></td>
+</tr>
+</tbody>
+</table>
+<h4 id="id2">Parsed dataframe<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h4>
+<table class="docutils data align-default" id="id12">
+<caption><span class="caption-text">Presynaptic spike times (all trials)</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>trial index</p></th>
+<th class="head"><p>cell type</p></th>
+<th class="head"><p>cell ID</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>presyn_cell_type_1</p></td>
+<td><p>0</p></td>
+<td><p>10.2</p></td>
+<td><p>80.5</p></td>
+<td><p>140.8</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>presyn_cell_type_1</p></td>
+<td><p>1</p></td>
+<td><p>300.1</p></td>
+<td><p>553.5</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>presyn_cell_type_2</p></td>
+<td><p>2</p></td>
+<td><p>100.2</p></td>
+<td><p>200.5</p></td>
+<td><p>300.8</p></td>
+</tr>
+</tbody>
+</table>
+<p>Writers:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_presynaptic_spike_file()</span></code> is used by <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> and <a class="reference internal" href="../autoapi/single_cell_parser/analyze/synanalysis/index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synanalysis</span></code></a></dt><dd><p>to write raw output data.</p>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference internal" href="../autoapi/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> parses these files into a pandas dataframe.</p></li>
+</ul>
+<div class="attention admonition">
+<p class="admonition-title">Attention</p>
+<p>Not every spike of a presynaptic cell necessarily induces a synapse activation. Each synapse has a specific release
+probability and delay (see <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>).
+For this reason, the synapse activations are saved separately (see <a class="reference internal" href="#syn-activation-format"><span class="std std-ref">Synapse activation</span></a>).</p>
+</div>
+<h3 id="voltage-traces"><span id="voltage-traces-format"></span>Voltage traces<a class="headerlink" href="#voltage-traces" title="Permalink to this heading">¶</a></h3>
+<p>The raw output of the <a class="reference internal" href="../autoapi/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.npz</span></code> or <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the voltage traces of the postsynaptic cells.
+Unlike the synapse activations and spike times, it is possible for one such file to contain multiple trials.</p>
+<h4 id="voltage-trace-csv"><span id="voltage-traces-csv-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.csv</span></code><a class="headerlink" href="#voltage-trace-csv" title="Permalink to this heading">¶</a></h4>
+<table class="docutils data align-default" id="id13">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">vm_all_traces.csv</span></code></span><a class="headerlink" href="#id13" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>t</p></th>
+<th class="head"><p>Vm run 00</p></th>
+<th class="head"><p>Vm run 01</p></th>
+<th class="head"><p>Vm run 02</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>100.0</p></td>
+<td><p>-61.4607218758</p></td>
+<td><p>-55.1366909604</p></td>
+<td><p>-67.1747143695</p></td>
+</tr>
+<tr class="row-odd"><td><p>100.025</p></td>
+<td><p>-61.4665809176</p></td>
+<td><p>-55.1294343391</p></td>
+<td><p>-67.1580037786</p></td>
+</tr>
+<tr class="row-even"><td><p>100.05</p></td>
+<td><p>-61.4735021526</p></td>
+<td><p>-55.1223216173</p></td>
+<td><p>-67.1424366078</p></td>
+</tr>
+<tr class="row-odd"><td><p>100.075</p></td>
+<td><p>-61.4814187507</p></td>
+<td><p>-55.1153403448</p></td>
+<td><p>-67.1279980017</p></td>
+</tr>
+</tbody>
+</table>
+<h4 id="voltage-trace-npz"><span id="voltage-traces-npz-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.npz</span></code><a class="headerlink" href="#voltage-trace-npz" title="Permalink to this heading">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">vm_all_traces.npz</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="n">array</span><span class="p">([[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.025</span><span class="p">,</span> <span class="mf">100.05</span><span class="p">,</span> <span class="mf">100.075</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">61.4607218758</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4665809176</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4735021526</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4814187507</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">55.1366909604</span><span class="p">,</span> <span class="o">-</span><span class="mf">55.1294343391</span><span class="p">,</span> <span class="o">-</span><span class="mf">55.1223216173</span><span class="p">,</span> <span class="o">-</span><span class="mf">55.1153403448</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">67.1747143695</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1580037786</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1424366078</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1279980017</span><span class="p">]])</span>
+</code></pre></div>
+</div>
+<h4 id="voltage-trace-dataframe"><span id="voltage-traces-df-format"></span>Voltage trace dataframe<a class="headerlink" href="#voltage-trace-dataframe" title="Permalink to this heading">¶</a></h4>
+<p>The parsed dataframe is usually created by the <a class="reference internal" href="../autoapi/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> function.</p>
+<table class="docutils data align-default" id="id14">
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id14" title="Permalink to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">sim_trial_index</span></code></p></th>
+<th class="head"><p>0.000</p></th>
+<th class="head"><p>0.025</p></th>
+<th class="head"><p>0.050</p></th>
+<th class="head"><p>0.075</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>trial_0</p></td>
+<td><p>-75.0</p></td>
+<td><p>-75.017715</p></td>
+<td><p>-75.033995</p></td>
+<td><p>-75.04979</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>trial_1</p></td>
+<td><p>-75.0</p></td>
+<td><p>-75.017722</p></td>
+<td><p>-75.034002</p></td>
+<td><p>-75.049797</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="hoc"><span id="hoc-file-format"></span>.hoc<a class="headerlink" href="#hoc" title="Permalink to this heading">¶</a></h2>
+<p>NEURON <span id="id3">[<a class="reference internal" href="../bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> file format for neuron morphologies.
+refer to the <a class="reference external" href="https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html">NEURON hoc documentation</a> for more info.
+The morphology is specified as a tree structure: the different sections of a neuron
+(pieces separated between branching points or branches endings) are connected in order.
+Each section is formed by a set of points, defined by their 3D coordinates and the diameter of the
+neuron structure at that point <code class="docutils literal notranslate"><span class="pre">(pt3dadd</span> <span class="pre">-&gt;</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">z,</span> <span class="pre">diameter)</span></code>.</p>
+<p>Readers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../autoapi/single_cell_parser/cell_parser/index.html#module-single_cell_parser.cell_parser" title="single_cell_parser.cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_parser</span></code></a></p></li>
+<li><p><a class="reference internal" href="../autoapi/single_cell_parser/reader/read_hoc_file.html#single_cell_parser.reader.read_hoc_file" title="single_cell_parser.reader.read_hoc_file (Python function) — Reads a hoc file and returns a list of Edge objects."><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_hoc_file()</span></code></a></p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">create</span> <span class="n">soma</span><span class="p">}</span>
+<span class="p">{</span><span class="n">access</span> <span class="n">soma</span><span class="p">}</span>
+<span class="p">{</span><span class="n">nseg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">}</span>
+<span class="p">{</span><span class="n">pt3dclear</span><span class="p">()}</span>
+<span class="p">{</span><span class="n">pt3dadd</span><span class="p">(</span><span class="mf">1.933390</span><span class="p">,</span><span class="mf">221.367004</span><span class="p">,</span><span class="o">-</span><span class="mf">450.045990</span><span class="p">,</span><span class="mf">12.542000</span><span class="p">)}</span>
+<span class="p">{</span><span class="n">pt3dadd</span><span class="p">(</span><span class="mf">2.321820</span><span class="p">,</span><span class="mf">221.046997</span><span class="p">,</span><span class="o">-</span><span class="mf">449.989990</span><span class="p">,</span><span class="mf">13.309400</span><span class="p">)}</span>
+<span class="o">...</span>
+<span class="p">{</span><span class="n">pt3dadd</span><span class="p">(</span><span class="mf">13.961900</span><span class="p">,</span><span class="mf">210.149002</span><span class="p">,</span><span class="o">-</span><span class="mf">447.901001</span><span class="p">,</span><span class="mf">3.599700</span><span class="p">)}</span>
+
+<span class="p">{</span><span class="n">create</span> <span class="n">BasalDendrite_1_0</span><span class="p">}</span>
+<span class="p">{</span><span class="n">connect</span> <span class="n">BasalDendrite_1_0</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">soma</span><span class="p">(</span><span class="mf">0.009696</span><span class="p">)}</span>
+<span class="p">{</span><span class="n">access</span> <span class="n">BasalDendrite_1_0</span><span class="p">}</span>
+<span class="p">{</span><span class="n">nseg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">}</span>
+<span class="p">{</span><span class="n">pt3dclear</span><span class="p">()}</span>
+<span class="p">{</span><span class="n">pt3dadd</span><span class="p">(</span><span class="mf">6.369640</span><span class="p">,</span> <span class="mf">224.735992</span><span class="p">,</span> <span class="o">-</span><span class="mf">452.399994</span><span class="p">,</span> <span class="mf">2.040000</span><span class="p">)}</span>
+<span class="p">{</span><span class="n">pt3dadd</span><span class="p">(</span><span class="mf">6.341550</span><span class="p">,</span> <span class="mf">222.962997</span><span class="p">,</span> <span class="o">-</span><span class="mf">451.906006</span><span class="p">,</span> <span class="mf">2.040000</span><span class="p">)}</span>
+<span class="o">...</span>
+</code></pre></div>
+</div>
+<h2 id="mod"><span id="mod-file-format"></span>.mod<a class="headerlink" href="#mod" title="Permalink to this heading">¶</a></h2>
+<p>NEURON <span id="id4">[<a class="reference internal" href="../bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> file format for neuron mechanisms. refer to the <a class="reference external" href="https://neuron.yale.edu/neuron/docs/using-nmodl-files">NEURON NMODL documentation</a> for more info.
+Used to define channel and synapse dynamics in NEURON simulations.
+See the folder <cite>mechanisms</cite> in the project source.</p>
+<h2 id="am"><span id="am-file-format"></span>.am<a class="headerlink" href="#am" title="Permalink to this heading">¶</a></h2>
+<p>The Amira proprietary VTK-like file format. Refer to the <a class="reference external" href="https://assets.thermofisher.com/TFS-Assets/MSD/Product-Guides/users-guide-amira-software-2019.pdf">amira documentation</a> for more information.
+This flexible format can be used to store 3D scalar meshes, 3D neuron morphology reconstructions, slice image data etc.</p>
+<p>Readers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../autoapi/single_cell_parser/reader/read_scalar_field.html#single_cell_parser.reader.read_scalar_field" title="single_cell_parser.reader.read_scalar_field (Python function) — Read AMIRA scalar fields."><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_scalar_field</span></code></a></p></li>
+<li><p><a class="reference internal" href="../autoapi/single_cell_parser/reader/read_landmark_file.html#single_cell_parser.reader.read_landmark_file" title="single_cell_parser.reader.read_landmark_file (Python function) — Read an AMIRA landmark file"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_landmark_file</span></code></a></p></li>
+</ul>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="installation.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Installation
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../bibliography.html" class="md-footer__link md-footer__link--next" aria-label="Next: Bibliography" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Bibliography
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/tabs.js?v=3ee01567"></script>
+        <script src="../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>

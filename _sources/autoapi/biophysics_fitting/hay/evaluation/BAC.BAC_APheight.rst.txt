@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC.BAC_APheight`
+
+BAC.BAC_APheight
+================
+
+.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_APheight(voltage_traces)
+
+   Get the height of the first action potential in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_1AP"`` to whether there is at least one action potential in the somatic voltage trace,
+                 and ``".raw"`` to the height of the first action potential in the somatic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:func:`AP_height`
+

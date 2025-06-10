@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot`
+
+CellMorphologyInteractiveVisualizer.interactive_plot
+====================================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot(color='grey', renderer='notebook_connected', diameter=None, time_point=None, show=True)
+
+   This method shows a plot with an interactive cell, overlayed with scalar data (if provided with the data argument).
+
+   :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
+                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
+                * **time_point** (*float | int*) -- time_point at which to plot some scalar data. Ignored when color does not refer to scalar data.
+                * **diameter** -- If the actual diameter is poorly visible, set this value to a fixed diameter.
+

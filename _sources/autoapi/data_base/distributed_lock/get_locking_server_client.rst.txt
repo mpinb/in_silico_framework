@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.get_locking_server_client`
+
+
+.. title:
+
+get_locking_server_client
+=========================
+
+
+.. py:function:: data_base.distributed_lock.get_locking_server_client()
+
+   Get the file locking client object, depending on the file locking configuration.
+
+   File locking configuration should be set by the environment variable ``ISF\_DISTRIBUTED\_LOCK\_CONFIG``, pointing to a path to
+   a ``.yml`` file providing file locking configuration.
+
+   .. seealso:: :py:mod:`data\_base.distributed\_lock` for more info on the file locking configuration.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

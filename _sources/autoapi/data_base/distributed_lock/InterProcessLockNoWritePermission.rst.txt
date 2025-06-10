@@ -1,0 +1,62 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+InterProcessLockNoWritePermission
+=================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   acquire <InterProcessLockNoWritePermission.acquire>
+   release <InterProcessLockNoWritePermission.release>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.distributed_lock.InterProcessLockNoWritePermission(path)
+   
+   Check if the target file or directory has write access, and only lock it if so.
+
+   If the user has write permissions to the path, then locking is necessary. Otherwise not, and lock acquire returns True without a lock
+
+   :Parameters: **path** (*str*) -- path to check.
+
+   .. seealso:: `Fasteners InterProcessLock <https://fasteners.readthedocs.io/en/latest/guide/inter_process/>`_
+
+   :Parameters: **path** (*str*) -- path to check.
+
+   :Attributes:
+
+   .. attribute:: lock
+
+      The lock object if the user has write permissions, None otherwise.
+
+      :type: :py:class:`~fasteners.InterProcessLock` or None
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`acquire <data_base.distributed_lock.InterProcessLockNoWritePermission.acquire>`\ ()
+        - Acquire the lock on a path if the user has write permissions.
+      * - :py:obj:`release <data_base.distributed_lock.InterProcessLockNoWritePermission.release>`\ ()
+        - Release the lock on a path if it was acquired.
+

@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.read_labview_junk1_dat_files`
+
+
+.. title:
+
+read_labview_junk1_dat_files
+============================
+
+
+.. py:function:: spike_analysis.core.read_labview_junk1_dat_files(path, scale=100, sampling_rate=32000)
+
+   Read in LabView binary data files.
+
+   :Parameters: * **path** (*str*) -- The path to the binary data file.
+                * **scale** (*int*) -- Scales the data with this value.
+                * **sampling\_rate** (*int*) -- The sampling rate of the data. Used to infer time delta from indices.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

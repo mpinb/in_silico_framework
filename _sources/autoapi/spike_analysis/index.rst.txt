@@ -1,0 +1,36 @@
+
+
+
+spike_analysis
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   core </autoapi/spike_analysis/core/index>  
+
+.. py:module:: spike_analysis
+
+.. autoapi-nested-parse::
+   Read and analyze electrophysiological data.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`core <spike_analysis.core>`
+     - Read and analyze electrophysiological data.
+

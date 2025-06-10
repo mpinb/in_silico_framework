@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.keys`
+
+ISFDataBase.keys
+================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.keys(recurse=False)
+
+   Get the keys of the database.
+
+   If recurse is set to True, all keys of subdatabases will be returned as well.
+
+   :Parameters: **recurse** (*bool, optional*) -- Whether to return all keys, including subdatabase keys. Defaults to False.
+
+   :returns: The keys of the database as tuple or nested tuple of strings.
+   :rtype: tuple
+

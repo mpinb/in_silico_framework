@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_savedir`
+
+
+.. title:
+
+get_dumper_string_by_savedir
+============================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.get_dumper_string_by_savedir(savedir)
+
+   Get the dumper string from a filepath.
+
+   This function reads the ``Loader.json`` file in the savedir and returns the dumper in string format.
+
+   :Parameters: **savedir** (*str*) -- The path to the saved data. Must contain a ``Loader.json`` file.
+
+   :returns: The dumper string.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

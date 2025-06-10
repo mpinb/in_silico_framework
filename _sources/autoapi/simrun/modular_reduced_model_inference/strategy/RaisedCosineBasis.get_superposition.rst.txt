@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition`
+
+RaisedCosineBasis.get_superposition
+===================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition(x)
+
+   Get the weighed sum :math:`\mathbf{w}(\tau)` of the basis functions :math:`f`.
+
+   The superposition of all basis functions, weighed by the input weights,
+   is a single filter of length :paramref:`width` that can be used to weigh the input data: synapse activations.
+
+   .. math::
+
+       \mathbf{w}(\tau) = \sum_{i} x_i\ f_i(\tau) = \mathbf{x} \cdot \mathbf{f}(\tau)
+
+   :Parameters: **x** (*array*) -- The (learnable) input weights :math:`\mathbf{x}`
+
+   :returns: The weighed sum of the basis functions.
+   :rtype: array
+

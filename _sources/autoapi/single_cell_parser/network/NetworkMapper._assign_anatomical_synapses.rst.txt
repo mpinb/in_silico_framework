@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._assign_anatomical_synapses`
+
+NetworkMapper._assign_anatomical_synapses
+=========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._assign_anatomical_synapses()
+
+   Assigns synapses to postsynaptic cell from :ref:`syn_file_format` files.
+
+   Fetches the correct :ref:`syn_file_format` files from the network parameters.
+   Assigns all synapses from these files to the postsynaptic cell.
+
+   This is the first step in creating a functional network.
+

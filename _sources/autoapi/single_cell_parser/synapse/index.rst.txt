@@ -1,0 +1,44 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse`
+
+synapse
+=======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Synapse </autoapi/single_cell_parser/synapse/Synapse>
+   ExSyn </autoapi/single_cell_parser/synapse/ExSyn>
+
+.. py:module:: single_cell_parser.synapse
+
+.. autoapi-nested-parse::
+   Synapse class for synaptic activations and NEURON API.
+
+   Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+   and to activate/deactivate synapses in NEURON.
+
+   .. seealso:: :py:class:`single_cell_parser.cell.Cell`.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Synapse <single_cell_parser.synapse.Synapse>`
+     - Synapse class for synaptic activations and NEURON API.
+   * - :py:obj:`ExSyn <single_cell_parser.synapse.ExSyn>`
+     - Simple excitatory synapse.
+
+
+

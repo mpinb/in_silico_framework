@@ -1,0 +1,53 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`
+
+evoked_PSTH_from_spike_times
+============================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   create_average_celltype_PSTH_from_clusters </autoapi/singlecell_input_mapper/evoked_PSTH_from_spike_times/create_average_celltype_PSTH_from_clusters>
+   create_evoked_PSTH </autoapi/singlecell_input_mapper/evoked_PSTH_from_spike_times/create_evoked_PSTH>
+   load_spike_times </autoapi/singlecell_input_mapper/evoked_PSTH_from_spike_times/load_spike_times>
+   load_cluster_trials </autoapi/singlecell_input_mapper/evoked_PSTH_from_spike_times/load_cluster_trials>
+   scan_directory </autoapi/singlecell_input_mapper/evoked_PSTH_from_spike_times/scan_directory>
+
+.. py:module:: singlecell_input_mapper.evoked_PSTH_from_spike_times
+
+.. autoapi-nested-parse::
+   Create PSTHs from spike times.
+
+   .. attention::
+
+      This module is specific to the data gathering process and file formats used by the `Oberlaender lab in Bonn <https://mpinb.mpg.de/en/research-groups/groups/in silico-brain-sciences/research-focus-ibs.html>`_.
+      If you are in the process of adapting this module to your own data, please focus on the output format of each method, rather than trying to apply these blindly to your files.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`create_average_celltype_PSTH_from_clusters <singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters>`\ (cellTypeFolder, outFileName)
+     - Loads cluster recording files and writes out the average ongoing activity for a given cell type.
+   * - :py:obj:`create_evoked_PSTH <singlecell_input_mapper.evoked_PSTH_from_spike_times.create_evoked_PSTH>`\ (spikeTimesName, cellType, ongoingRate, outFileName)
+     - Reads in spike times and creates a PSTH for evoked activity for each whisker.
+   * - :py:obj:`load_spike_times <singlecell_input_mapper.evoked_PSTH_from_spike_times.load_spike_times>`\ (spikeTimesName)
+     - Reads in .cluster files containing spike time recordings
+   * - :py:obj:`load_cluster_trials <singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials>`\ (fname)
+     - Reads in a cluster file and returns a dictionary with the spike times for each trial.
+   * - :py:obj:`scan_directory <singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory>`\ (path, fnames, suffix)
+     - Recursively scans a directory for files with a specific suffix.
+
+

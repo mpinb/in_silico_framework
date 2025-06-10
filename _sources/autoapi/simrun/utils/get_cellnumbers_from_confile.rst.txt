@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.get_cellnumbers_from_confile`
+
+
+.. title:
+
+get_cellnumbers_from_confile
+============================
+
+
+.. py:function:: simrun.utils.get_cellnumbers_from_confile(confile)
+
+   Get the amount of cells of each type from a confile.
+
+   :py:meth:`get\_cellnumbers\_from\_confile` reads the confile and returns (alongisde the anatomical ID, here unused) a dictionary of the format::
+
+       {cell\_type: [(cellType, cellID, synID), ...]}
+
+   This method fetches the cellID of the last cell each cell type and adds 1 to infer the amount of cells of that type.
+
+   :Parameters: **confile** (*str*) -- The path to the :ref:`con\_file\_format` file.
+
+   :returns: A dictionary of the format ``{"cell\_type": amount\_of\_cells}``
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

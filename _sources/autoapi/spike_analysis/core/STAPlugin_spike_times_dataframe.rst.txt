@@ -1,0 +1,76 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_spike_times_dataframe`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+STAPlugin_spike_times_dataframe
+===============================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <STAPlugin_spike_times_dataframe.setup>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.STAPlugin_spike_times_dataframe(name='spike_times_dataframe', source='spike_times', offset=0, mode='spike_times')
+   
+   SpikeTimeAnalysis (STA) plugin to create a spike times dataframe.
+
+   .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
+
+   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'spike_times_dataframe'.
+                * **source** (*str, optional*) -- The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+                * **offset** (*int, optional*) -- The offset of the spike times. Defaults to 0.
+                * **mode** (*str, optional*) -- The mode of the analysis. Can be 'spike_times' or 'stim_times'. Defaults to 'spike_times'.
+
+   :Attributes:
+
+   .. attribute:: name
+
+      The name of the plugin.
+
+      :type: str
+
+   .. attribute:: source
+
+      The :py:class:`~data_base.data_base.DataBase` key containing the spike times.
+
+      :type: str
+
+   .. attribute:: offset
+
+      The offset of the spike times.
+
+      :type: int
+
+   .. attribute:: mode
+
+      The mode of the analysis. Can be 'spike_times' or 'stim_times'.
+
+      :type: str
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <spike_analysis.core.STAPlugin_spike_times_dataframe.setup>`\ (spike\_times\_analysis)
+        - Sets up the analysis: creates a spike times dataframe.
+

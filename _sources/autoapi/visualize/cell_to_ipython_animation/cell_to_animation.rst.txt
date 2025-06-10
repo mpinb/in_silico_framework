@@ -1,0 +1,50 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation` ❭ :mod:`~visualize.cell_to_ipython_animation.cell_to_animation`
+
+
+.. title:
+
+cell_to_animation
+=================
+
+
+.. py:function:: visualize.cell_to_ipython_animation.cell_to_animation(cell, xlim=None, ylim=None, tstart=245, tend=310, tstep=1, range_vars=&#39;Vm&#39;, plot_synaptic_input=False, outdir=&#39;animation&#39;)
+
+   Takes a cell object and creates a 2d animation plotting the range\_vars vs soma distance over time.
+
+   :Parameters: * **outdir** (*str*) -- folder, where animation should be saved. The result will be .png files.
+                * **xlim** (*tuple*) -- tuple like (0, 1600) that defines the limits of the x axis.
+                  If None, tries to get default values for range var from get\_default\_axis
+                  Default: None.
+                * **ylim** (*tuple*) -- tuple like (-80 0) that defines the limits of the y axis
+                  If None, tries to get default values for range var from get\_default\_axis
+                  Default: None.
+                * **tstart** (*float*) -- time when animation should be started
+                * **tend** (*float*) -- time when animation should be stopped
+                * **tstep** (*float*) -- timestep between frames
+                * **range\_vars** (*str | list*) -- str or list of str: range vars to display, default: 'Vm'
+
+   :returns: list of paths to images
+   :rtype: list
+
+   .. note::
+
+      Copyright (c) 2013, Jake Vanderplas
+      All rights reserved.
+      
+      Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+      
+      1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+      
+      2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+      
+      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

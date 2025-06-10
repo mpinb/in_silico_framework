@@ -1,0 +1,42 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils`
+
+utils
+=====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_vector_norm </autoapi/biophysics_fitting/exploration_from_seedpoint/utils/get_vector_norm>
+   evaluation_function_incremental_helper </autoapi/biophysics_fitting/exploration_from_seedpoint/utils/evaluation_function_incremental_helper>
+   convert_all_check_columns_bool_to_float </autoapi/biophysics_fitting/exploration_from_seedpoint/utils/convert_all_check_columns_bool_to_float>
+
+.. py:module:: biophysics_fitting.exploration_from_seedpoint.utils
+
+.. autoapi-nested-parse::
+   Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_vector_norm <biophysics_fitting.exploration_from_seedpoint.utils.get_vector_norm>`\ (v)
+     - Calculate the norm of a vector v.
+   * - :py:obj:`evaluation_function_incremental_helper <biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper>`\ (p, s, e, cutoffs, stim\_order, verbose, additional\_evaluation\_functions, objectives\_by\_stimulus)
+     - Evaluate a model shows one stimulus at a time.
+   * - :py:obj:`convert_all_check_columns_bool_to_float <biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float>`\ (df)
+     - Convert all boolean values to float in a pandas dataframe.
+
+

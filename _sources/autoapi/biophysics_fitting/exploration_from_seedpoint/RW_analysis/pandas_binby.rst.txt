@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.pandas_binby`
+
+
+.. title:
+
+pandas_binby
+============
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.pandas_binby(df, c1, c2, binsize=0.01)
+
+   Bin a pandas dataframe by two columns.
+
+   :Parameters: * **df** (*pd.DataFrame*) -- the dataframe to bin
+                * **c1** (*str*) -- the first column to bin by
+                * **c2** (*str*) -- the second column to bin by
+                * **binsize** (*float*) -- the size of the bins
+
+   :returns: the binned dataframe
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

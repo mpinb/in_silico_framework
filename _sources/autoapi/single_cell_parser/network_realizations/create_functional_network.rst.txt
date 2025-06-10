@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_realizations` ❭ :mod:`~single_cell_parser.network_realizations.create_functional_network`
+
+
+.. title:
+
+create_functional_network
+=========================
+
+
+.. py:function:: single_cell_parser.network_realizations.create_functional_network(cellParamName, nwParamName)
+
+   Create fixed functional connectivity based on ``convergence``.
+
+   Creates anatomical realizations based on the ``convergence`` parameter (i.e. cell type specific connection probability, see :py:meth:`~single\_cell\_parser.network.NetworkMapper.create\_functional\_realization`).
+   For more fine-grained control over anatomically consistent network realizations, please refer to :py:mod:`singlecell\_input\_mapper.singlecell\_input\_mapper`,
+   The results of the :py:mod:`singlecell\_input\_mapper.map\_single\_cell\_inputs` can be read in with :py:meth:`~single\_cell\_parser.network.NetworkMapper.create\_saved\_network2`.
+
+   :Parameters: * **cellParamName** (*str*) -- Parameter file of postsynaptithe c neuron
+                * **nwParamName** (*str*) -- :ref:`network\_parameters\_format` file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,48 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.parameters` ❭ :mod:`~biophysics_fitting.parameters.param_selector`
+
+
+.. title:
+
+param_selector
+==============
+
+
+.. py:function:: biophysics_fitting.parameters.param_selector(params, s)
+
+   Select parameters from a Series with an Index like a.b.c, a.b.d.
+
+   params is a series with an index that contains strings seperated by "."
+   Therefore, params can reflect a hierarchy.
+
+   Example::
+
+       a.a   1
+       a.b   2
+       c.x   1
+       c.a.b 7
+
+   This method allows to select from that Series using a string.
+
+   Example::
+
+       >>> param\_selector(params, 'a'):
+       a    1
+       b    2
+       >>> param\_selector(params, 'c.a'):
+       b    7
+
+   :Parameters: * **params** (*pd.Series*) -- The parameters.
+                * **s** (*str*) -- The string to select from the parameters.
+
+   :returns: The selected parameters.
+   :rtype: pd.Series
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,81 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer`
+
+writer
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   write_landmark_file </autoapi/single_cell_parser/writer/write_landmark_file>
+   write_sim_results </autoapi/single_cell_parser/writer/write_sim_results>
+   write_all_traces </autoapi/single_cell_parser/writer/write_all_traces>
+   write_cell_synapse_locations </autoapi/single_cell_parser/writer/write_cell_synapse_locations>
+   write_pruned_synapse_locations </autoapi/single_cell_parser/writer/write_pruned_synapse_locations>
+   write_functional_realization_map </autoapi/single_cell_parser/writer/write_functional_realization_map>
+   write_synapse_activation_file </autoapi/single_cell_parser/writer/write_synapse_activation_file>
+   write_synapse_weight_file </autoapi/single_cell_parser/writer/write_synapse_weight_file>
+   write_PSTH </autoapi/single_cell_parser/writer/write_PSTH>
+   write_spike_times_file </autoapi/single_cell_parser/writer/write_spike_times_file>
+   write_presynaptic_spike_times </autoapi/single_cell_parser/writer/write_presynaptic_spike_times>
+   write_cell_simulation </autoapi/single_cell_parser/writer/write_cell_simulation>
+   write_functional_map </autoapi/single_cell_parser/writer/write_functional_map>
+   generate_landmark_template </autoapi/single_cell_parser/writer/generate_landmark_template>
+   write_landmarks_colorcoded_to_folder </autoapi/single_cell_parser/writer/write_landmarks_colorcoded_to_folder>
+   value_to_color </autoapi/single_cell_parser/writer/value_to_color>
+
+.. py:module:: single_cell_parser.writer
+
+.. autoapi-nested-parse::
+   Write out anatomical, morphology or simulation data.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`write_landmark_file <single_cell_parser.writer.write_landmark_file>`\ (fname, landmarkList)
+     - Write an AMIRA landmark file from 3D coordinates
+   * - :py:obj:`write_sim_results <single_cell_parser.writer.write_sim_results>`\ (fname, t, v)
+     - Write out a voltage trace file.
+   * - :py:obj:`write_all_traces <single_cell_parser.writer.write_all_traces>`\ (fname, t, vTraces)
+     - Write out a list of voltage traces.
+   * - :py:obj:`write_cell_synapse_locations <single_cell_parser.writer.write_cell_synapse_locations>`\ (fname, synapses, cellID)
+     - Write a :ref:`syn_file_format` file.
+   * - :py:obj:`write_pruned_synapse_locations <single_cell_parser.writer.write_pruned_synapse_locations>`\ (fname, synapses, cellID)
+     - Write a :ref:`syn_file_format` file with a `pruned` flag.
+   * - :py:obj:`write_functional_realization_map <single_cell_parser.writer.write_functional_realization_map>`\ (fname, functionalMap, anatomicalID)
+     - Write out a :ref:`con_file_format` file.
+   * - :py:obj:`write_synapse_activation_file <single_cell_parser.writer.write_synapse_activation_file>`\ (fname, cell, synTypes, synDistances, synTimes, activeSyns)
+     - Write out a :ref:`syn_activation_format` file.
+   * - :py:obj:`write_synapse_weight_file <single_cell_parser.writer.write_synapse_weight_file>`\ (fname, cell)
+     - Write out a synapse weight file.
+   * - :py:obj:`write_PSTH <single_cell_parser.writer.write_PSTH>`\ (fname, PSTH, bins)
+     - Write PSTH and time bins of PSTH,
+   * - :py:obj:`write_spike_times_file <single_cell_parser.writer.write_spike_times_file>`\ (fname, spikeTimes)
+     - Write trial numbers and all spike times in each trial (may be empty).
+   * - :py:obj:`write_presynaptic_spike_times <single_cell_parser.writer.write_presynaptic_spike_times>`\ (fname, cells)
+     - Write cell type, presynaptic cell ID and spike times of all connected
+   * - :py:obj:`write_cell_simulation <single_cell_parser.writer.write_cell_simulation>`\ (fname, cell, traces, tVec, allPoints, step\_frames, selected\_index)
+     - Write Amira SpatialGraph files corresponding to time steps of entire simulation run.
+   * - :py:obj:`write_functional_map <single_cell_parser.writer.write_functional_map>`\ (fname, functionalMap)
+     - Write a functional map to an AMIRA file.
+   * - :py:obj:`generate_landmark_template <single_cell_parser.writer.generate_landmark_template>`\ (landmark\_name, c, vertexviewid, len)
+     - Generate a template for a landmark file in Amira.
+   * - :py:obj:`write_landmarks_colorcoded_to_folder <single_cell_parser.writer.write_landmarks_colorcoded_to_folder>`\ (basedir, landmarks, values, vmin, vmax, vbinsize)
+     - Write landmarks to a folder, colorcoded by their values.
+   * - :py:obj:`value_to_color <single_cell_parser.writer.value_to_color>`\ (v, vmin, vmax)
+     - Map a value to a color.
+
+

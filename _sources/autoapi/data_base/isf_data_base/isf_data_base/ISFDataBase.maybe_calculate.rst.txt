@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.isf_data_base.ISFDataBase.maybe_calculate`
+
+ISFDataBase.maybe_calculate
+===========================
+
+.. py:method:: data_base.isf_data_base.isf_data_base.ISFDataBase.maybe_calculate(key, fun, \*\*kwargs)
+
+   Get or calculate a value in the database.
+
+   Gets the corresponding value of a key, if it is already in the database.
+   If it is not in the database, it calculates the value by calling fun, adds this value to the
+   database and returns the value.
+
+   :Parameters: * **key** (*str*) -- The key where the item can be accessed.
+                * **fun** (*function*) -- The function that calculates a value if the key does not exist.
+                * **\*\*kwargs** -- Additional arguments that are passed to :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+
+   .. attention:: ``kwargs`` are not passed to the function ``fun``, but to the :py:meth:`set` method.
+
+   Example::
+
+       >>> db['knok_knok']
+       KeyError: 'knok_knok'
+       >>> db.maybe_calculate(key='knok_knok', fun=lambda: 'whos there?', dumper = 'self')
+       'whos there?'  # value has been calculated and set
+       >>> db.maybe_calculate('knok_knok', lambda: 'whos there?', dumper = 'self')
+       'whos there?'  # value has been read, not calculated
+       >>> db['knok_knok']
+       'whos there?'  # key-value exists in the database
+
+   :returns: The value of the key, or the result of the function ``fun`` if the key does not exist.
+   :rtype: object
+

@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm._gather_results`
+
+Rm._gather_results
+==================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm._gather_results(client)
+
+   Fetch the solver results from the dask scheduler.
+
+   :Parameters: **client** (:py:class:`~dask.distributed.Client`) -- Dask client.
+

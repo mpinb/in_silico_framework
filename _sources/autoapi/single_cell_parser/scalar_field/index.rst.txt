@@ -1,0 +1,39 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field`
+
+scalar_field
+============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   ScalarField </autoapi/single_cell_parser/scalar_field/ScalarField>
+
+.. py:module:: single_cell_parser.scalar_field
+
+.. autoapi-nested-parse::
+   Implementation of 3D scalar fields based on numpy arrays.
+
+   Note that this class is identical to :py:class:`singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+   It is duplicated here for package independence.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`ScalarField <single_cell_parser.scalar_field.ScalarField>`
+     - 3D scalar fields based on numpy arrays
+
+
+

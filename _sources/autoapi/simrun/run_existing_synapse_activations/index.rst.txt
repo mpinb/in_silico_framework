@@ -1,0 +1,36 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.run_existing_synapse_activations`
+
+run_existing_synapse_activations
+================================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   run_existing_synapse_activations </autoapi/simrun/run_existing_synapse_activations/run_existing_synapse_activations>
+
+.. py:module:: simrun.run_existing_synapse_activations
+
+.. autoapi-nested-parse::
+   ongoing activity L2 neuron model
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`run_existing_synapse_activations <simrun.run_existing_synapse_activations.run_existing_synapse_activations>`\ (cellParamName, evokedUpParamName, synapseActivation, simName, dirPrefix, nprocs, tStop, silent, scale\_apical, post\_hook, auto\_organize\_results\_folder, cell\_generator)
+     - Recreate and resimulate a network-embedded neuron simulation from a list of :ref:`syn_activation_format` files.
+
+

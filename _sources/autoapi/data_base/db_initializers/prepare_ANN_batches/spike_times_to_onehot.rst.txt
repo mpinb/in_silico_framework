@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot`
+
+
+.. title:
+
+spike_times_to_onehot
+=====================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1)
+
+   One-hot encode spike times to a binned time vector.
+
+   The time vector is created from :paramref:`min\_time`, :paramref:`max\_time` and :paramref:`time\_step`
+   and is of length ``(max\_time - min\_time)//time\_step``.
+
+   If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
+
+   :Parameters: * **spike\_times** (*array*) -- Array of spike times
+                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 505.
+                * **time\_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
+
+   :returns: A list of booleans, where each element represents a time step and is True if a spike occured in this interval.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

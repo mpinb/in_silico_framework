@@ -1,0 +1,62 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator`
+
+simulator
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   Simulator_Setup </autoapi/biophysics_fitting/simulator/Simulator_Setup>
+   Simulator </autoapi/biophysics_fitting/simulator/Simulator>
+   run_fun </autoapi/biophysics_fitting/simulator/run_fun>
+
+.. py:module:: biophysics_fitting.simulator
+
+.. autoapi-nested-parse::
+   This module concerns itself with setting up a cell with biophysical details and simulation parameters.
+
+   The :py:class:`~biophysics_fitting.simulator.Simulator_Setup` class is an inherent attribute of the :py:class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
+   It takes care of equipping a cell with biophysical details, using convenient pd.Series objects as parameter vectors.
+
+   The class :py:class:`~biophysics_fitting.simulator.Simulator` is used to transform a parameter vector into simulated voltage traces.
+   It allows to apply a variety of stimuli to the cell and extract voltage traces.
+
+   The results of this module can be used in conjunction with :py:mod:`~biophysics_fitting.evaluator` to iteratively run and evaluate simulations.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Simulator_Setup <biophysics_fitting.simulator.Simulator_Setup>`
+     - Class for setting up cells with biophysical details.
+   * - :py:obj:`Simulator <biophysics_fitting.simulator.Simulator>`
+     - This class can be used to transform a parameter vector into simulated voltage traces.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`run_fun <biophysics_fitting.simulator.run_fun>`\ (cell, T, Vinit, dt, recordingSites, tStart, tStop, vardt, silent)
+     - Default function to run a simulation.
+
+

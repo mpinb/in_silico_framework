@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.interpolate_vt`
+
+
+.. title:
+
+interpolate_vt
+==============
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.interpolate_vt(voltage_trace_)
+
+   Interpolate a voltage trace so that is has fixed time interval
+
+   The NEURON simulator allows for a variable time step, which can make
+   comparing voltage traces difficult. This function interpolates the voltage
+   traces so that they have a fixed time interval of 0.025 ms.
+
+   :Parameters: **voltage\_trace\_** (*dict*) -- A dictionary of voltage traces.
+
+   :returns: A dictionary of voltage traces with a fixed time interval.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

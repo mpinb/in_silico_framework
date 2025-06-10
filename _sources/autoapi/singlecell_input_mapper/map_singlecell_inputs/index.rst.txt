@@ -1,0 +1,94 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.map_singlecell_inputs`
+
+map_singlecell_inputs
+=====================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   map_singlecell_inputs </autoapi/singlecell_input_mapper/map_singlecell_inputs/map_singlecell_inputs>
+
+.. py:module:: singlecell_input_mapper.map_singlecell_inputs
+
+.. autoapi-nested-parse::
+   Map synapses onto a postsynaptic cell.
+
+   This module provides a full pipeline for creating dense connectome models
+   of the rat barrel cortex, based on methods and data presented in
+   :cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022`.
+
+   This runfile assumes you have downloaded and extracted the barrel cortex model data from
+   https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+   If this is not the case, please consult ``installer/download_bc_model`` and extract.
+
+   .. attention::
+
+      This file is specific to the barrel cortex model data. If you want to use it for other data,
+      you need to adapt the paths to the data accordingly. This runfile can serve as a template.
+
+   Inputs:
+
+   - Morphology of the post-synaptic neuron
+   - 3D field of synapse densities or synapse counts.
+   - Number of cells per cell type in the brain area of interest.
+   - Connections spreadsheet containing PST length/area constants of
+     the post-synaptic cell for normalization.
+   - Bouton locations of individual axon tracings.
+
+   .. attention::
+
+      This runfile has default values for the barrel cortex, and so assumes that you have downloaded
+      and extracted the barrel cortex model data from
+      https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/JZPULNa.
+      If this is not the case, please consult ``installer/download_bc_model`` and extract,
+      or adapt the paths in this file to your data.
+
+   This module then uses :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
+   This happens according to the following pipeline:
+
+   1. The bouton density field and PST density fields are converted to scalar fields with defined voxel resolution.
+   2. Calculates the overlap between these voxels and the dendrites of the postsynaptic neuron morphology
+      using Liang-Barsky clipping :cite:`liang1984new`. Only these voxels are further considered for potential synapses.
+   3. Calculates a synapse density field by multiplying the bouton density field with the PST density fields
+      at these voxels.
+   4. Normalizes the previous synapse density fields using cell-type specific PST length/area constraints and the number of
+      cells per cell type.
+   5. Poisson samples synapses from this normalized synapse density field to realize synapses.
+      These are randomly placed onto the dendritic branch within that voxel. One such sample is called an "anatomical realization".
+   6. (optional) Repeat steps 4 and 5 to create a collection of anatomical realizations.
+
+   Density meshes are accessed using :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+   :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of
+   :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
+   and finalizes step 5 by itself.
+
+   Outputs:
+
+   - summary file containing information about number and presynaptic type
+     and column of anatomical synapses
+   - AmiraMesh landmark file containing 3D synapse locations of anatomical
+     synapses of each presynaptic type and column
+   - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :py:mod:`simrun`.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`map_singlecell_inputs <singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs>`\ (cellName, cellTypeName, nrOfSamples, numberOfCellsSpreadsheetName, connectionsSpreadsheetName, ExPSTDensityName, InhPSTDensityName, boutonDensityFolderName)
+     - Map inputs to a single cell morphology.
+
+

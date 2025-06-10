@@ -1,0 +1,71 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.Arrow3D`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Arrow3D
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   draw <Arrow3D.draw>
+   do_3d_projection <Arrow3D.do_3d_projection>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.utils.Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
+   
+   Draw a 3D annotation arrow on a matplotlib 3D plot
+
+   See: https://gist.github.com/WetHat/1d6cd0f7309535311a539b42cccca89c
+
+   :Parameters: * **x** (*float*) -- x coordinate of the arrow starting point.
+                * **y** (*float*) -- y coordinate of the arrow starting point.
+                * **z** (*float*) -- z coordinate of the arrow starting point.
+                * **dx** (*float*) -- x coordinate difference of the arrow direction.
+                * **dy** (*float*) -- y coordinate difference of the arrow direction.
+                * **dz** (*float*) -- z coordinate difference of the arrow direction.
+                * **\*args** -- Additional positional arguments passed to FancyArrowPatch.
+                * **\*\*kwargs** -- Additional keyword arguments passed to FancyArrowPatch.
+
+   :Attributes:
+
+   .. attribute:: _xyz
+
+      the x, y, z coordinates of the arrow
+
+      :type: tuple
+
+   .. attribute:: _dxdydz
+
+      the dx, dy, dz coordinate difference of the arrow, i.e. where it points to relative to its origin.
+
+      :type: tuple
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`draw <visualize.utils.Arrow3D.draw>`\ (renderer)
+        - Draw the arrow.
+      * - :py:obj:`do_3d_projection <visualize.utils.Arrow3D.do_3d_projection>`\ (renderer)
+        - Project the arrow onto the Axes3D object.
+

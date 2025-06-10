@@ -1,0 +1,51 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning`
+
+voltage_binning
+===============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   calculate_vdensity_array_pd </autoapi/data_base/analyze/voltage_binning/calculate_vdensity_array_pd>
+   get_bins </autoapi/data_base/analyze/voltage_binning/get_bins>
+   calculate_vdensity_array_dask </autoapi/data_base/analyze/voltage_binning/calculate_vdensity_array_dask>
+   calculate_vdensity_array </autoapi/data_base/analyze/voltage_binning/calculate_vdensity_array>
+   calculate_vdensity_array_pixelObject </autoapi/data_base/analyze/voltage_binning/calculate_vdensity_array_pixelObject>
+
+.. py:module:: data_base.analyze.voltage_binning
+
+.. autoapi-nested-parse::
+   Calculate the voltage as a density array.
+
+   This module provides methods to calculate the voltage as a histogram across many trials,
+   and bin them in timebins.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`calculate_vdensity_array_pd <data_base.analyze.voltage_binning.calculate_vdensity_array_pd>`\ (v, bin\_size, ymin, ymax, xmin, xmax)
+     - Bin a :ref:`voltage_traces_df_format` in timebins across trials.
+   * - :py:obj:`get_bins <data_base.analyze.voltage_binning.get_bins>`\ (bin\_size, min\_, max\_)
+     - Construct bin edges from a sice and range.
+   * - :py:obj:`calculate_vdensity_array_dask <data_base.analyze.voltage_binning.calculate_vdensity_array_dask>`\ (v, bin\_size, ymin, ymax, xmin, xmax)
+     - Bin a :ref:`voltage_traces_df_format` in timebins across trials.
+   * - :py:obj:`calculate_vdensity_array <data_base.analyze.voltage_binning.calculate_vdensity_array>`\ (\*args, \*\*kwargs)
+     - Calculate the voltage density array.
+   * - :py:obj:`calculate_vdensity_array_pixelObject <data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject>`\ (\*args, \*\*kwargs)
+     - Calculate the voltage density array as a PixelObject.
+
+

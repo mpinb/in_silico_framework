@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_functional_realization_map`
+
+
+.. title:
+
+read_functional_realization_map
+===============================
+
+
+.. py:function:: single_cell_parser.reader.read_functional_realization_map(fname)
+
+   Read in a :ref:`con\_file\_format` file and return a dictionary of functional connections.
+
+   Only valid for anatomical synapse realization given by anatomicalID.
+
+   See also:
+
+   - :ref:`con\_file\_format` for more information on the `.con` file format.
+   - :py:meth:`~single\_cell\_parser.writer.write\_functional\_realization\_map` for the corresponding writer.
+
+   :Parameters: **fname** (*str*) -- The name of the file to be read.
+
+   :raises IOError: If the input file does not have a `.con` or `.CON` suffix.
+
+   :returns:     A dictionary with cell types as keys and a list of synapse information for each synapse as values.
+                 Synapse information is a 3-tuple with (cell type, cell ID, synapse ID)
+                 The filename of the corresponding :ref:`syn\_file\_format` file.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

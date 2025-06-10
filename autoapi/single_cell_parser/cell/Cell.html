@@ -1,0 +1,2133 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Cell - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#single_cell_parser.cell.Cell" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cell
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/api_reference.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/tutorials.html" class="md-tabs__link">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../rst_assets/file_formats.html" class="md-tabs__link">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../../rst_assets/api_reference.html"><span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span></a>
+          
+            <label for="__nav_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="API reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Interface/index.html" class="md-nav__link">
+        <span title="/autoapi/interface/index.rst (reference label)" class="md-ellipsis">Interface</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../biophysics_fitting/index.html" class="md-nav__link">
+        <span title="/autoapi/biophysics_fitting/index.rst (reference label)" class="md-ellipsis">biophysics_<wbr>fitting</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_base/index.html" class="md-nav__link">
+        <span title="/autoapi/data_base/index.rst (reference label)" class="md-ellipsis">data_<wbr>base</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simrun/index.html" class="md-nav__link">
+        <span title="/autoapi/simrun/index.rst (reference label)" class="md-ellipsis">simrun</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5" type="checkbox" id="__nav_1_5" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../index.html"><span title="/autoapi/single_cell_parser/index.rst (reference label)" class="md-ellipsis">single_<wbr>cell_<wbr>parser</span></a>
+          
+            <label for="__nav_1_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="single_cell_parser" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/single_cell_parser/index.rst (reference label)" class="md-ellipsis">single_<wbr>cell_<wbr>parser</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analyze/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/analyze/index.rst (reference label)" class="md-ellipsis">analyze</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cell_modify_functions/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell_modify_functions/index.rst (reference label)" class="md-ellipsis">cell_<wbr>modify_<wbr>functions</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network_modify_functions/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/network_modify_functions/index.rst (reference label)" class="md-ellipsis">network_<wbr>modify_<wbr>functions</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network_param_modify_functions/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/network_param_modify_functions/index.rst (reference label)" class="md-ellipsis">network_<wbr>param_<wbr>modify_<wbr>functions</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_5" type="checkbox" id="__nav_1_5_5" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="index.html"><span title="/autoapi/single_cell_parser/cell/index.rst (reference label)" class="md-ellipsis">cell</span></a>
+          
+            <label for="__nav_1_5_5">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="cell" data-md-level="3">
+        <label class="md-nav__title" for="__nav_1_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/single_cell_parser/cell/index.rst (reference label)" class="md-ellipsis">cell</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+    
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__current-nested md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_5_5_1" type="checkbox" id="__nav_1_5_5_1" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index md-nav__link--active">
+          <a href="#"><span title="/autoapi/single_cell_parser/cell/cell.rst (reference label)" class="md-ellipsis">Cell</span></a>
+          
+            <label for="__nav_1_5_5_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Cell" data-md-level="4">
+        <label class="md-nav__title" for="__nav_1_5_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/autoapi/single_cell_parser/cell/cell.rst (reference label)" class="md-ellipsis">Cell</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.re_init_cell.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.re_init_cell.rst (reference label)" class="md-ellipsis">re_<wbr>init_<wbr>cell</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.record_range_var.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.record_range_var.rst (reference label)" class="md-ellipsis">record_<wbr>range_<wbr>var</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.get_range_var_conductances.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.get_range_var_conductances.rst (reference label)" class="md-ellipsis">get_<wbr>range_<wbr>var_<wbr>conductances</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.distance_between_pts.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.distance_between_pts.rst (reference label)" class="md-ellipsis">distance_<wbr>between_<wbr>pts</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.distance_to_soma.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.distance_to_soma.rst (reference label)" class="md-ellipsis">distance_<wbr>to_<wbr>soma</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.max_distance.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.max_distance.rst (reference label)" class="md-ellipsis">max_<wbr>distance</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.add_synapse.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.add_synapse.rst (reference label)" class="md-ellipsis">add_<wbr>synapse</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.remove_synapses.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.remove_synapses.rst (reference label)" class="md-ellipsis">remove_<wbr>synapses</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.init_time_recording.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.init_time_recording.rst (reference label)" class="md-ellipsis">init_<wbr>time_<wbr>recording</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.get_synapse_activation_dataframe.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.get_synapse_activation_dataframe.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>activation_<wbr>dataframe</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Cell.get_section_adjacancy_map.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/cell.get_section_adjacancy_map.rst (reference label)" class="md-ellipsis">get_<wbr>section_<wbr>adjacancy_<wbr>map</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+      
+    <li class="md-nav__item md-nav__item--active md-nav__current-toc">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/autoapi/single_cell_parser/cell/cell.rst (reference label)" class="md-ellipsis">Cell</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/autoapi/single_cell_parser/cell/cell.rst (reference label)" class="md-ellipsis">Cell</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="Cell.re_init_cell.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.re_init_cell.rst (reference label)" class="md-ellipsis">re_<wbr>init_<wbr>cell</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.record_range_var.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.record_range_var.rst (reference label)" class="md-ellipsis">record_<wbr>range_<wbr>var</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.get_range_var_conductances.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.get_range_var_conductances.rst (reference label)" class="md-ellipsis">get_<wbr>range_<wbr>var_<wbr>conductances</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.distance_between_pts.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.distance_between_pts.rst (reference label)" class="md-ellipsis">distance_<wbr>between_<wbr>pts</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.distance_to_soma.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.distance_to_soma.rst (reference label)" class="md-ellipsis">distance_<wbr>to_<wbr>soma</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.max_distance.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.max_distance.rst (reference label)" class="md-ellipsis">max_<wbr>distance</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.add_synapse.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.add_synapse.rst (reference label)" class="md-ellipsis">add_<wbr>synapse</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.remove_synapses.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.remove_synapses.rst (reference label)" class="md-ellipsis">remove_<wbr>synapses</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.init_time_recording.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.init_time_recording.rst (reference label)" class="md-ellipsis">init_<wbr>time_<wbr>recording</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.get_synapse_activation_dataframe.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.get_synapse_activation_dataframe.rst (reference label)" class="md-ellipsis">get_<wbr>synapse_<wbr>activation_<wbr>dataframe</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="Cell.get_section_adjacancy_map.html" class="md-nav__link">
+    <span title="/autoapi/single_cell_parser/cell/cell.get_section_adjacancy_map.rst (reference label)" class="md-ellipsis">get_<wbr>section_<wbr>adjacancy_<wbr>map</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell" class="md-nav__link">
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>cell.<wbr>Cell</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="single_cell_parser.cell.Cell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell-attributes" class="md-nav__link">
+    <span class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.hoc_path" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.hoc_path (Python attribute) — Path to the hoc file containing the cell morphology." class="md-ellipsis">hoc_<wbr>path</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="hoc_path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.hoc_path-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.id" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.id (Python attribute) — ID of the cell (often unused)." class="md-ellipsis">id</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="id">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.id-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.soma" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.soma (Python attribute) — The soma section of the cell." class="md-ellipsis">soma</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="soma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.soma-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tree" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.tree (Python attribute) — NEURON SectionList containing all sections of the cell." class="md-ellipsis">tree</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tree-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.branches" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.branches (Python attribute) — maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList)." class="md-ellipsis">branches</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="branches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.branches-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.structures" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.structures (Python attribute) — All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). Keys are labels (str), values are lists of PySection objects." class="md-ellipsis">structures</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.structures-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.sections" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.sections (Python attribute) — List of PySection objects. First element is the soma. Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time." class="md-ellipsis">sections</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.sections-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.synapses" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.synapses (Python attribute) — a dictionary of lists of single_cell_parser.synapse.Synapse objects" class="md-ellipsis">synapses</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="synapses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.synapses-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.E" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.E (Python attribute) — Default resting membrane potential. Defaults to -70.0" class="md-ellipsis">E</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.E-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.changeSynParamDict" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.changeSynParamDict (Python attribute) — dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing." class="md-ellipsis">change<wbr>Syn<wbr>Param<wbr>Dict</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="changeSynParamDict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.changeSynParamDict-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tVec" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.tVec (Python attribute) — a hoc Vector recording time." class="md-ellipsis">t<wbr>Vec</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tVec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tVec-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.neuron_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.neuron_param (Python attribute) — The cell_parameters_format." class="md-ellipsis">neuron_<wbr>param</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.section_adjacency_map" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.section_adjacency_map (Python attribute) — maps each section (by ID) to its parent sections and children sections." class="md-ellipsis">section_<wbr>adjacency_<wbr>map</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="section_adjacency_map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.section_adjacency_map-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell-methods" class="md-nav__link">
+    <span class="md-ellipsis">Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PySection.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/pysection.rst (reference label)" class="md-ellipsis">Py<wbr>Section</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="PointCell.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell/pointcell.rst (reference label)" class="md-ellipsis">Point<wbr>Cell</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cell_parser/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/cell_parser/index.rst (reference label)" class="md-ellipsis">cell_<wbr>parser</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/network/index.rst (reference label)" class="md-ellipsis">network</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network_realizations/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/network_realizations/index.rst (reference label)" class="md-ellipsis">network_<wbr>realizations</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../parameters/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/parameters/index.rst (reference label)" class="md-ellipsis">parameters</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reader/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/reader/index.rst (reference label)" class="md-ellipsis">reader</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scalar_field/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/scalar_field/index.rst (reference label)" class="md-ellipsis">scalar_<wbr>field</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../serialize_cell/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/serialize_cell/index.rst (reference label)" class="md-ellipsis">serialize_<wbr>cell</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sim_control/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/sim_control/index.rst (reference label)" class="md-ellipsis">sim_<wbr>control</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synapse/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/synapse/index.rst (reference label)" class="md-ellipsis">synapse</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synapse_mapper/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/synapse_mapper/index.rst (reference label)" class="md-ellipsis">synapse_<wbr>mapper</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../writer/index.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/writer/index.rst (reference label)" class="md-ellipsis">writer</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Event.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/event.rst (reference label)" class="md-ellipsis">Event</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../create_cell.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/create_cell.rst (reference label)" class="md-ellipsis">create_<wbr>cell</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../init_neuron_run.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/init_neuron_run.rst (reference label)" class="md-ellipsis">init_<wbr>neuron_<wbr>run</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sec_distance_to_soma.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/sec_distance_to_soma.rst (reference label)" class="md-ellipsis">sec_<wbr>distance_<wbr>to_<wbr>soma</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spines_update_synapse_distribution_file.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/spines_update_synapse_distribution_file.rst (reference label)" class="md-ellipsis">spines_<wbr>update_<wbr>synapse_<wbr>distribution_<wbr>file</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spines_update_network_paramfile.html" class="md-nav__link">
+        <span title="/autoapi/single_cell_parser/spines_update_network_paramfile.rst (reference label)" class="md-ellipsis">spines_<wbr>update_<wbr>network_<wbr>paramfile</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../singlecell_input_mapper/index.html" class="md-nav__link">
+        <span title="/autoapi/singlecell_input_mapper/index.rst (reference label)" class="md-ellipsis">singlecell_<wbr>input_<wbr>mapper</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spike_analysis/index.html" class="md-nav__link">
+        <span title="/autoapi/spike_analysis/index.rst (reference label)" class="md-ellipsis">spike_<wbr>analysis</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualize/index.html" class="md-nav__link">
+        <span title="/autoapi/visualize/index.rst (reference label)" class="md-ellipsis">visualize</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/tutorials.html" class="md-nav__link">
+        <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../rst_assets/file_formats.html" class="md-nav__link">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell" class="md-nav__link">
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>cell.<wbr>Cell</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="single_cell_parser.cell.Cell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell-attributes" class="md-nav__link">
+    <span class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.hoc_path" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.hoc_path (Python attribute) — Path to the hoc file containing the cell morphology." class="md-ellipsis">hoc_<wbr>path</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="hoc_path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.hoc_path-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.id" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.id (Python attribute) — ID of the cell (often unused)." class="md-ellipsis">id</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="id">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.id-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.soma" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.soma (Python attribute) — The soma section of the cell." class="md-ellipsis">soma</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="soma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.soma-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tree" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.tree (Python attribute) — NEURON SectionList containing all sections of the cell." class="md-ellipsis">tree</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tree">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tree-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.branches" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.branches (Python attribute) — maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList)." class="md-ellipsis">branches</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="branches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.branches-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.structures" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.structures (Python attribute) — All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). Keys are labels (str), values are lists of PySection objects." class="md-ellipsis">structures</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.structures-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.sections" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.sections (Python attribute) — List of PySection objects. First element is the soma. Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time." class="md-ellipsis">sections</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.sections-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.synapses" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.synapses (Python attribute) — a dictionary of lists of single_cell_parser.synapse.Synapse objects" class="md-ellipsis">synapses</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="synapses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.synapses-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.E" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.E (Python attribute) — Default resting membrane potential. Defaults to -70.0" class="md-ellipsis">E</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="E">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.E-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.changeSynParamDict" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.changeSynParamDict (Python attribute) — dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing." class="md-ellipsis">change<wbr>Syn<wbr>Param<wbr>Dict</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="changeSynParamDict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.changeSynParamDict-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tVec" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.tVec (Python attribute) — a hoc Vector recording time." class="md-ellipsis">t<wbr>Vec</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tVec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.tVec-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.neuron_param" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.neuron_param (Python attribute) — The cell_parameters_format." class="md-ellipsis">neuron_<wbr>param</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.section_adjacency_map" class="md-nav__link">
+    <span aria-label="Python attribute" class="objinfo-icon objinfo-icon__alias" title="Python attribute">A</span><span title="single_cell_parser.cell.Cell.section_adjacency_map (Python attribute) — maps each section (by ID) to its parent sections and children sections." class="md-ellipsis">section_<wbr>adjacency_<wbr>map</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="section_adjacency_map">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell.section_adjacency_map-type" class="md-nav__link">
+    <span class="md-ellipsis">Type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single_cell_parser.cell.Cell-methods" class="md-nav__link">
+    <span class="md-ellipsis">Methods</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<p><a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser</span></code></a> ❭ <a class="reference internal" href="index.html#module-single_cell_parser.cell" title="single_cell_parser.cell (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell</span></code></a> ❭ <a class="reference internal" href="#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">Cell</span></code></a></p>
+<h1 id="cell">Cell<a class="headerlink" href="#cell" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<dl class="py class objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">single_cell_parser.cell.</span></span><span class="sig-name descname"><span class="pre">Cell</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cell object providing API to the NEURON hoc interface.</p>
+<p>This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
+The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
+Its attributes are set by <a class="reference internal" href="../cell_parser/CellParser.html#single_cell_parser.cell_parser.CellParser" title="single_cell_parser.cell_parser.CellParser (Python class) — Configure a Cell object from a NEURON hoc file."><code class="xref py py-class docutils literal notranslate"><span class="pre">CellParser</span></code></a>.</p>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p>This is not the same class as <a class="reference internal" href="../../singlecell_input_mapper/singlecell_input_mapper/cell/Cell.html#singlecell_input_mapper.singlecell_input_mapper.cell.Cell" title="singlecell_input_mapper.singlecell_input_mapper.cell.Cell (Python class) — Cell object for mapping synapses onto a morphology."><code class="xref py py-class docutils literal notranslate"><span class="pre">singlecell_input_mapper.singlecell_input_mapper.cell.Cell</span></code></a>.
+This class concerns itself with providing API to NEURON, not with mapping input to the cell.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell-attributes">Attributes<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell-attributes" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.hoc_path">
+<span class="sig-name descname"><span class="pre">hoc_path</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.hoc_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to the hoc file containing the cell morphology.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.hoc_path-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.hoc_path-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the cell (often unused).</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.id-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.id-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>str | int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.soma">
+<span class="sig-name descname"><span class="pre">soma</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.soma" title="Permalink to this definition">¶</a></dt>
+<dd><p>The soma section of the cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.soma-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.soma-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p><a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.tree">
+<span class="sig-name descname"><span class="pre">tree</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>NEURON SectionList containing all sections of the cell.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.tree-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.tree-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>neuron.h.SectionList</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.branches">
+<span class="sig-name descname"><span class="pre">branches</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.branches" title="Permalink to this definition">¶</a></dt>
+<dd><p>maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList).</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.branches-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.branches-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.structures">
+<span class="sig-name descname"><span class="pre">structures</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.structures" title="Permalink to this definition">¶</a></dt>
+<dd><p>All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin…).
+Keys are labels (str), values are lists of <a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a> objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.structures-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.structures-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>Dict[<a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.sections">
+<span class="sig-name descname"><span class="pre">sections</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of <a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a> objects.
+First element is the soma.
+Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.sections-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.sections-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.synapses">
+<span class="sig-name descname"><span class="pre">synapses</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.synapses" title="Permalink to this definition">¶</a></dt>
+<dd><p>a dictionary of lists of <a class="reference internal" href="../synapse/Synapse.html#single_cell_parser.synapse.Synapse" title="single_cell_parser.synapse.Synapse (Python class) — Synapse class for synaptic activations and NEURON API."><code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.synapse.Synapse</span></code></a> objects</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.synapses-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.synapses-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.E">
+<span class="sig-name descname"><span class="pre">E</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default resting membrane potential. Defaults to -70.0</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.E-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.E-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.changeSynParamDict">
+<span class="sig-name descname"><span class="pre">changeSynParamDict</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.changeSynParamDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.changeSynParamDict-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.changeSynParamDict-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.tVec">
+<span class="sig-name descname"><span class="pre">tVec</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.tVec" title="Permalink to this definition">¶</a></dt>
+<dd><p>a hoc Vector recording time.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.tVec-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.tVec-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>neuron.h.Vector</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.neuron_param">
+<span class="sig-name descname"><span class="pre">neuron_param</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.neuron_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="../../../rst_assets/file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
+</dd></dl>
+
+<dl class="py attribute objdesc">
+<dt class="sig sig-object highlight py" id="single_cell_parser.cell.Cell.section_adjacency_map">
+<span class="sig-name descname"><span class="pre">section_adjacency_map</span></span><a class="headerlink" href="#single_cell_parser.cell.Cell.section_adjacency_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>maps each section (by ID) to its parent sections and children sections.</p>
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell.section_adjacency_map-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell.section_adjacency_map-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd" id="single_cell_parser.cell.Cell-methods">Methods<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.Cell-methods" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<table class="summarytable docutils data align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.re_init_cell.html#single_cell_parser.cell.Cell.re_init_cell" title="single_cell_parser.cell.Cell.re_init_cell (Python method) — Re-initialize for next simulation run."><code class="xref py py-obj docutils literal notranslate"><span class="pre">re_init_cell</span></code></a>(replayMode)</p></td>
+<td><p>Re-initialize for next simulation run.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Cell.record_range_var.html#single_cell_parser.cell.Cell.record_range_var" title="single_cell_parser.cell.Cell.record_range_var (Python method) — Record a range mechanism in all sections."><code class="xref py py-obj docutils literal notranslate"><span class="pre">record_range_var</span></code></a>(var, mech)</p></td>
+<td><p>Record a range mechanism in all sections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.get_range_var_conductances.html#single_cell_parser.cell.Cell.get_range_var_conductances" title="single_cell_parser.cell.Cell.get_range_var_conductances (Python method) — Get the conductances of each section, categorized by range variable and segment."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_range_var_conductances</span></code></a>(density)</p></td>
+<td><p>Get the conductances of each section, categorized by range variable and segment.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Cell.distance_between_pts.html#single_cell_parser.cell.Cell.distance_between_pts" title="single_cell_parser.cell.Cell.distance_between_pts (Python method) — Computes the path length between two points."><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance_between_pts</span></code></a>(sec1, x1, sec2, x2)</p></td>
+<td><p>Computes the path length between two points.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.distance_to_soma.html#single_cell_parser.cell.Cell.distance_to_soma" title="single_cell_parser.cell.Cell.distance_to_soma (Python method) — Computes the path length between the soma and a specified point."><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance_to_soma</span></code></a>(sec, x)</p></td>
+<td><p>Computes the path length between the soma and a specified point.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Cell.max_distance.html#single_cell_parser.cell.Cell.max_distance" title="single_cell_parser.cell.Cell.max_distance (Python method) — Computes maximum path length to soma of all branches with label label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">max_distance</span></code></a>(label)</p></td>
+<td><p>Computes maximum path length to soma of all branches with label <code class="xref py py-paramref docutils literal notranslate"><span class="pre">label</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.add_synapse.html#single_cell_parser.cell.Cell.add_synapse" title="single_cell_parser.cell.Cell.add_synapse (Python method) — Add a Synapse to the cell object."><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_synapse</span></code></a>(secID, ptID, ptx, preType, postType)</p></td>
+<td><p>Add a <a class="reference internal" href="../synapse/Synapse.html#single_cell_parser.synapse.Synapse" title="single_cell_parser.synapse.Synapse (Python class) — Synapse class for synaptic activations and NEURON API."><code class="xref py py-class docutils literal notranslate"><span class="pre">Synapse</span></code></a> to the cell object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Cell.remove_synapses.html#single_cell_parser.cell.Cell.remove_synapses" title="single_cell_parser.cell.Cell.remove_synapses (Python method) — Remove synapses from the cell object of type preType."><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_synapses</span></code></a>(preType)</p></td>
+<td><p>Remove synapses from the cell object of type <code class="xref py py-paramref docutils literal notranslate"><span class="pre">preType</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.init_time_recording.html#single_cell_parser.cell.Cell.init_time_recording" title="single_cell_parser.cell.Cell.init_time_recording (Python method) — Initialize the NEURON time vector for recording."><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_time_recording</span></code></a>()</p></td>
+<td><p>Initialize the NEURON time vector for recording.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="Cell.get_synapse_activation_dataframe.html#single_cell_parser.cell.Cell.get_synapse_activation_dataframe" title="single_cell_parser.cell.Cell.get_synapse_activation_dataframe (Python method) — Get a syn_activation_format dataframe."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_activation_dataframe</span></code></a>(max_spikes, sim_trial_index)</p></td>
+<td><p>Get a <a class="reference internal" href="../../../rst_assets/file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> dataframe.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Cell.get_section_adjacancy_map.html#single_cell_parser.cell.Cell.get_section_adjacancy_map" title="single_cell_parser.cell.Cell.get_section_adjacancy_map (Python method) — Generates a map that shows which sections are connected to which sections."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_section_adjacancy_map</span></code></a>()</p></td>
+<td><p>Generates a map that shows which sections are connected to which sections.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: cell" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              cell
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="Cell.re_init_cell.html" class="md-footer__link md-footer__link--next" aria-label="Next: Cell.re_init_cell" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Cell.re_init_cell
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

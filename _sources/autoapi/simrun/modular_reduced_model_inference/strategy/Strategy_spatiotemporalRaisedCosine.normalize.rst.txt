@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.normalize`
+
+Strategy_spatiotemporalRaisedCosine.normalize
+=============================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.normalize(x, flipkey=None)
+
+   Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
+
+   .. attention::
+
+      These are the same basis functions as in :py:class:`RaisedCosineBasis`.
+      These are thus not multiplied with the synapse activation data, as is the case with :py:meth:`compute_basis`
+
+   :Parameters: **x** (*array*) -- The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a 1D array.
+                These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+
+   :returns: The normalized learnable weights :math:`\mathbf{x}`.
+   :rtype: array
+

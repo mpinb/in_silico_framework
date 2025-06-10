@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl` ❭ :mod:`~single_cell_parser.sim_control.SimControl.show`
+
+SimControl.show
+===============
+
+.. py:method:: single_cell_parser.sim_control.SimControl.show()
+
+   Plot the voltage trace.
+

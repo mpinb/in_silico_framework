@@ -1,0 +1,39 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.manylines`
+
+manylines
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   manylines </autoapi/visualize/manylines/manylines>
+   manylines_helper </autoapi/visualize/manylines/manylines_helper>
+
+.. py:module:: visualize.manylines
+
+.. autoapi-nested-parse::
+   Make lineplots in parallel
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`manylines <visualize.manylines.manylines>`\ (df, ax, axis, colormap, groupby\_attribute, figsize, returnPixelObject, scheduler)
+     - Parallelizes the plot of many lines
+   * - :py:obj:`manylines_helper <visualize.manylines.manylines_helper>`\ (pdf, axis, colormap, groupby\_attribute, ax, figsize)
+     - Helper function which runs on a single core and can be called by map_partitions()
+
+

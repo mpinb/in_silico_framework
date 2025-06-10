@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis._compute_current_arrays`
+
+CurrentAnalysis._compute_current_arrays
+=======================================
+
+.. py:method:: visualize.current_visualizer.CurrentAnalysis._compute_current_arrays()
+
+   Compute the ionic currents of a section.
+
+   Updates the following attributes:
+
+   - depolarizing_currents (np.array): The depolarizing currents.
+   - hyperpolarizing_currents (np.array): The hyperpolarizing currents.
+   - depolarizing_currents_sum (np.array): The sum of the depolarizing currents.
+   - hyperpolarizing_currents_sum (np.array): The sum of the hyperpolarizing currents.
+   - net_current (np.array): The net current.
+   - depolarizing_currents_normalized (np.array): The normalized depolarizing currents.
+   - hyperpolarizing_currents_normalized (np.array): The normalized hyperpolarizing currents.
+   - voltage_trace (np.array): The voltage trace.
+
+

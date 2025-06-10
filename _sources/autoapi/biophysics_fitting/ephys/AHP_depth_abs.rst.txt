@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.AHP_depth_abs`
+
+
+.. title:
+
+AHP_depth_abs
+=============
+
+
+.. py:function:: biophysics_fitting.ephys.AHP_depth_abs(t, v, thresh=None)
+
+   Calculates the absolute afterhyperpolarization (AHP) depth for a given voltage trace.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Threshold voltage for action potential detection. Defaults to None.
+
+   :returns: Array of AHP depths, one for each action potential in the voltage trace.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

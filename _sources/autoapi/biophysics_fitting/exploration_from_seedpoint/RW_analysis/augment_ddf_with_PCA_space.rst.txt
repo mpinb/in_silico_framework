@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.augment_ddf_with_PCA_space`
+
+
+.. title:
+
+augment_ddf_with_PCA_space
+==========================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.augment_ddf_with_PCA_space(ddf)
+
+   Augment a dask dataframe with the first two principal components of the hz current space.
+
+   The hz current space is the space of current utilization during the BAC stimulus.
+   The PCA space is the space spanned by the first two principal components of this space.
+
+   :Parameters: **ddf** (*dask.dataframe*) -- the dataframe to augment
+
+   :returns: the augmented dataframe, containing the additional columns: 'pc0', 'pc1', 'depolarization\_index', 'hyperpolarization\_index'
+   :rtype: dask.dataframe
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

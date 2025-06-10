@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.load_syn_weights`
+
+
+.. title:
+
+load_syn_weights
+================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.load_syn_weights(db, client, excitatory_celltypes=None)
+
+   Load synapse weights from a simrun-initialized database
+
+   Fetches the :ref:`network\_parameters\_format` file from the
+   ``parameterfiles\_network\_folder`` key in the database and extracts the synaptic weights.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database object.
+                * **client** (:py:class:`~dask.distributed.client.Client`) -- The dask client object.
+
+   :returns: A dictionary mapping the synapse type to a weight.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.init` for the database initialization.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

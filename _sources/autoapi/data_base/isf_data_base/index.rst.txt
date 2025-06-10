@@ -1,0 +1,44 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base`
+
+isf_data_base
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   IO </autoapi/data_base/isf_data_base/IO/index>  
+   isf_data_base </autoapi/data_base/isf_data_base/isf_data_base/index>  
+
+.. py:module:: data_base.isf_data_base
+
+.. autoapi-nested-parse::
+   Data base system using JSON format for metadata.
+
+   .. seealso::
+
+      :py:class:`~data_base.isf_data_base.ISFDataBase` for the main data base class, and
+      the module :py:mod:`data_base.isf_data_base.IO` provides readers and writers for various file formats.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`IO <data_base.isf_data_base.IO>`
+     - Read and write data.
+   * - :py:obj:`isf_data_base <data_base.isf_data_base.isf_data_base>`
+     - Database base for storing and retrieving data in a robust and efficient way.
+

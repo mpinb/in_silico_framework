@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds`
+
+ScalarField.is_in_bounds
+========================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds(xyz)
+
+   Check if point is within bounding box of mesh.
+
+   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+
+   :returns: True if point is within bounding box, False otherwise.
+   :rtype: bool
+

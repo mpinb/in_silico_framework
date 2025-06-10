@@ -1,0 +1,110 @@
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock`
+
+distributed_lock
+================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   InterProcessLockNoWritePermission </autoapi/data_base/distributed_lock/InterProcessLockNoWritePermission>
+   _get_locking_config </autoapi/data_base/distributed_lock/_get_locking_config>
+   _get_locking_server_client_from_config </autoapi/data_base/distributed_lock/_get_locking_server_client_from_config>
+   get_locking_server_client </autoapi/data_base/distributed_lock/get_locking_server_client>
+   get_locking_client </autoapi/data_base/distributed_lock/get_locking_client>
+   get_locking_server </autoapi/data_base/distributed_lock/get_locking_server>
+   update_config </autoapi/data_base/distributed_lock/update_config>
+   get_lock </autoapi/data_base/distributed_lock/get_lock>
+   get_read_lock </autoapi/data_base/distributed_lock/get_read_lock>
+   get_write_lock </autoapi/data_base/distributed_lock/get_write_lock>
+
+.. py:module:: data_base.distributed_lock
+
+.. autoapi-nested-parse::
+   Configuration for locking servers
+
+   Checks the environment variable ``ISF_DISTRIBUTED_LOCK_CONFIG`` for a path to a ``.yml`` file providing file locking configuration.
+   The following locking servers/types are supported:
+
+   .. list-table::
+      :header-rows: 1
+
+      * - Locking Server
+        - Description
+        - Documentation
+      * - Redis
+        - In-memory data structure store used as a database, cache, and message broker.
+        - `Redis Documentation <https://redis-py.readthedocs.io/en/stable/>`_
+      * - Zookeeper
+        - Centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
+        - `Zookeeper Documentation <https://kazoo.readthedocs.io/en/latest/index.html>`_
+      * - File
+        - Fasteners file-based locking.
+        - :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` and `Fasteners Documentation <https://fasteners.readthedocs.io/en/latest/>`_
+
+
+   If no such file exists, or the environment variable is not set, a default configuration is used, which uses (in order of decreasing precedence):
+
+   1. A redis server running on ``spock`` at port ``8885``
+   2. A redis server running on ``localhost`` at port ``6379``
+   3. File-based locking.
+
+   Example::
+
+       >>> os.environ["ISF_DISTRIBUTED_LOCK_CONFIG"] = config_path
+       >>> with open(config_path, "r" ) as f:
+       ...     config = yaml.load(f, Loader=YamlLoader)
+       >>> config
+       [{'type': 'zookeeper', 'config': {'hosts':'localhost', 'port': 8885'}}]
+       # or
+       >>> DEFUALT_CONFIG
+       [{'type': 'redis', 'config': {'host': 'spock', 'port': 8885, 'socket_timeout': 1}},
+       {'type': 'redis', 'config': {'host': 'localhost', 'port': 6379, 'socket_timeout': 1}},
+       {'type': 'file'}]
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`InterProcessLockNoWritePermission <data_base.distributed_lock.InterProcessLockNoWritePermission>`
+     - Check if the target file or directory has write access, and only lock it if so.
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_locking_server_client <data_base.distributed_lock.get_locking_server_client>`\ ()
+     - Get the file locking client object, depending on the file locking configuration.
+   * - :py:obj:`get_locking_client <data_base.distributed_lock.get_locking_client>`\ ()
+     - Get the locking client
+   * - :py:obj:`get_locking_server <data_base.distributed_lock.get_locking_server>`\ ()
+     - Get the locking server
+   * - :py:obj:`update_config <data_base.distributed_lock.update_config>`\ (c)
+     - Update the global configuration variables with the provided configuration.
+   * - :py:obj:`get_lock <data_base.distributed_lock.get_lock>`\ (name)
+     - Fetch the correct lock, depending on global locking server configuration.
+   * - :py:obj:`get_read_lock <data_base.distributed_lock.get_read_lock>`\ (name)
+     - Fetch the correct read lock, depending on global locking server configuration.
+   * - :py:obj:`get_write_lock <data_base.distributed_lock.get_write_lock>`\ (name)
+     - Fetch the correct write lock, depending on global locking server configuration.
+
+

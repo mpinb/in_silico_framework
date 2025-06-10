@@ -1,0 +1,142 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Synapse
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   is_active <Synapse.is_active>
+   activate_hoc_syn <Synapse.activate_hoc_syn>
+   disconnect_hoc_synapse <Synapse.disconnect_hoc_synapse>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.synapse.Synapse(edgeID, edgePtID, edgex=None, preCellType='', postCellType='')
+   
+   Synapse class for synaptic activations and NEURON API.
+
+   Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+   and to activate/deactivate synapses in NEURON.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
+      This class is specialized for the NEURON simulator, and is used to store synapse information and activate/deactivate synapses in NEURON.
+
+   :Parameters: * **edgeID** (*int*) -- ID of attached section in cell.sections
+                * **edgePtID** (*int*) -- ID of attached point in cell.sections[edgeID].pts
+                * **preCellType** (*str*) -- reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+                * **postCellType** (*str*) -- reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+
+   :Attributes:
+
+   .. attribute:: secID
+
+      ID of attached section in cell.sections
+
+      :type: int
+
+   .. attribute:: ptID
+
+      ID of attached point in cell.sections[self.secID].pts
+
+      :type: int
+
+   .. attribute:: x
+
+      Relative coordinate along attached section (from 0 to 1)
+
+      :type: float
+
+   .. attribute:: preCellType
+
+      Type of the presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+
+      :type: str
+
+   .. attribute:: preCell
+
+      Reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+
+      :type: :py:class:`~single_cell_parser.cell.PointCell`
+
+   .. attribute:: releaseSite
+
+      Release site of presynaptic cell.
+
+      :type: :py:class:`~single_cell_parser.cell.PointCell`
+
+   .. attribute:: postCellType
+
+      Postsynaptic cell type.
+
+      :type: str
+
+   .. attribute:: coordinates
+
+      3D coordinates of synapse location
+
+      :type: list
+
+   .. attribute:: receptors
+
+      Stores hoc mechanisms
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   .. attribute:: netcons
+
+      Stores NetCons
+
+      :type: list
+
+   .. attribute:: weight
+
+      Synaptic weight
+
+      :type: float
+
+   .. attribute:: _active
+
+      Activation status
+
+      :type: bool
+
+   .. attribute:: pruned
+
+      Pruning status
+
+      :type: bool
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`is_active <single_cell_parser.synapse.Synapse.is_active>`\ ()
+        - Check if the synapse is active.
+      * - :py:obj:`activate_hoc_syn <single_cell_parser.synapse.Synapse.activate_hoc_syn>`\ (source, preCell, targetCell, receptors)
+        - Setup of all necessary hoc connections.
+      * - :py:obj:`disconnect_hoc_synapse <single_cell_parser.synapse.Synapse.disconnect_hoc_synapse>`\ ()
+        - Disconnect the synapse from the neuron model.
+

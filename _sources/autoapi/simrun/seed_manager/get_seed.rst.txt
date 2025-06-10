@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.seed_manager` ❭ :mod:`~simrun.seed_manager.get_seed`
+
+
+.. title:
+
+get_seed
+========
+
+
+.. py:function:: simrun.seed_manager.get_seed(recursion_depth=0)
+
+   Get a random seed.
+
+   :returns: A random seed.
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_synapse_density`
+
+SynapseDensity.compute_synapse_density
+======================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_synapse_density(boutonDensity, preCellType)
+
+   Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
+
+   Calculates the density field of PSTs of a given post-synaptic morphology using :py:meth:`~SynapseDensity.compute_cell_PST`.
+   The density of synapses at each voxel in the density field is computed to be the
+   postsynaptic cell's PST density * presynaptic bouton density / normalization PST density.
+   These synapse density meshes are computed for excitatory and inhibitory cell types separately.
+   Within the excitatory or inhibitory class, there is no further distinction between cell types.
+   There thus exists one synapse density field that captures all excitatory cell types, and idem ditto for inhibitory.
+   Cell type specific varation in synapses are only assigned during the network realization phase.
+   (see :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.create_network_embedding_from_synapse_densities`)
+
+   This method is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`'s
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities`.
+
+   :Parameters: * **boutonDensity** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- Density of presynaptic boutons.
+                * **preCellType** (*str*) -- Presynaptic cell type.
+                  Used to check if it is an exitatory or inhibitory cell, as they have separate density meshes and normalization fields.
+
+   :returns: Dictionary of synapse densities for each structure of the postsynaptic neuron.
+             If bouton density and cell PST don't overlap, or synapse density == 0 everywhere, returns None.
+   :rtype: dict
+

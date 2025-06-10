@@ -1,0 +1,48 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator_Setup`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Evaluator_Setup
+===============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.evaluator.Evaluator_Setup
+   
+   Setup for an :py:class:`~Evaluator` object
+
+   This class is an attribute of the :py:class:`~Evaluator` class, and should only veer be accessed via the :py:class:`~Evaluator` object.
+   It takes care of applying evaluation functions to voltage traces, and finalizing the results.
+
+   :Attributes:
+
+   .. attribute:: pre_funs
+
+      A list of functions to be applied to the input dictionary before the evaluation functions are applied.
+
+      :type: list
+
+   .. attribute:: evaluate_funs
+
+      A list of functions to be applied to the voltage traces. Each element of the list is a list of three elements:
+      the name of the input voltage trace, the function to be applied to the voltage trace, and the name of the output feature.
+
+      :type: list
+
+   .. attribute:: finalize_funs
+
+      A list of functions to be applied to the output of the evaluation functions. The output of the last function in this list is the output of the :meth:`~Evaluator.evaluate` method.
+
+      :type: list
+

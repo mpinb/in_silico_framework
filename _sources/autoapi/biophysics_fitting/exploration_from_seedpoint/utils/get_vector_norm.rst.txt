@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils.get_vector_norm`
+
+
+.. title:
+
+get_vector_norm
+===============
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.get_vector_norm(v)
+
+   Calculate the norm of a vector v.
+
+   :Parameters: **v** (*np.array*) -- Vector
+
+   :returns: Norm of the vector
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

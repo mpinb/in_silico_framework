@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.connected_to_structure_beyond`
+
+
+.. title:
+
+connected_to_structure_beyond
+=============================
+
+
+.. py:function:: biophysics_fitting.utils.connected_to_structure_beyond(cell, sec, beyond_dist, beyond_struct=[&#39;ApicalDendrite&#39;], n_children_required=1)
+
+   Checks if a :py:class:`~single\_cell\_parser.cell.Cell` section is connected to a structure
+   at a soma distance larger than :paramref:`beyond\_dist`.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **sec** (:py:class:`~single\_cell\_parser.section.Section`) -- The section to check.
+                * **beyond\_dist** (*float*) -- The distance from the soma to check.
+                * **beyond\_struct** (*list*) -- The labels of the structures to check.
+                * **n\_children\_required** (*int*) -- The minimum number of children required to have a connection.
+
+   This can be helpful to detect the main bifurcation of a L5PT, which is the bifurcation in which both children are connected to the tuft.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

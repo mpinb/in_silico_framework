@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.update`
+
+SharedNumpyStore.update
+=======================
+
+.. py:method:: data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.update()
+
+   Update the list of files in the working directory.
+

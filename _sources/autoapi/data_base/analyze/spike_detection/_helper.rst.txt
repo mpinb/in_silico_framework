@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection` ❭ :mod:`~data_base.analyze.spike_detection._helper`
+
+
+.. title:
+
+_helper
+=======
+
+
+.. py:function:: data_base.analyze.spike_detection._helper(x, threshold=0)
+
+   Parse a :ref:`voltage\_traces\_df\_format` and return a :py:class:`pandas.Series` containing the spikes,
+
+   Reads out a :ref:`voltage\_traces\_df\_format`, so it can be fed into
+   :py:meth:`~single\_cell\_parser.analyze.membrane\_potential\_analysis.simple\_spike\_detection`.
+   The results are converted back to a :py:class:`pandas.Series`, so it can be concatenated
+   to a dask dataframe
+
+   :Parameters: * **x** (:py:class:`~pandas.DataFrame`) -- A dataframe containing the voltage traces
+                * **threshold** (*float*) -- The threshold for spike detection
+
+   :returns: A series containing the spikes
+   :rtype: :py:class:`~pandas.Series`
+
+   .. seealso:: :py:meth:`~single\_cell\_parser.analyze.membrane\_potential\_analysis.simple\_spike\_detection`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

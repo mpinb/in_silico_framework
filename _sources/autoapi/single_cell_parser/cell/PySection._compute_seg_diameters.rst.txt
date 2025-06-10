@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._compute_seg_diameters`
+
+PySection._compute_seg_diameters
+================================
+
+.. py:method:: single_cell_parser.cell.PySection._compute_seg_diameters()
+
+   Computes the diameter of each segment in this section.
+
+   Diameters are approximated for each segment by taking the diameter at the point closest to the segment center.
+

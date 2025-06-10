@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.Arrow3D` ❭ :mod:`~visualize.utils.Arrow3D.draw`
+
+Arrow3D.draw
+============
+
+.. py:method:: visualize.utils.Arrow3D.draw(renderer)
+
+   Draw the arrow.
+

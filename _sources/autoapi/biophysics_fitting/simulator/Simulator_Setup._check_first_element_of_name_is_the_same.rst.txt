@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup._check_first_element_of_name_is_the_same`
+
+Simulator_Setup._check_first_element_of_name_is_the_same
+========================================================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup._check_first_element_of_name_is_the_same(list1, list2)
+
+   Check if the first element of the names of two lists are the same.
+
+   Note that :paramref:`list1` and :paramref:`list2` are lists of lists, where the first element of each list is
+   the name of the routine, and the second element is the function associated to the routine.
+   The names are thus not the function names necessarily. In general, these routine names
+   are dot-separated strings that start with the stimulus they refer to e.g. ``'stim_1.setup'``.
+
+   :Parameters: * **list1** (*list*) -- A list of function tags.
+                * **list2** (*list*) -- A list of function tags.
+
+   :raises ValueError: If the first element of the names of the two lists are not the same.
+

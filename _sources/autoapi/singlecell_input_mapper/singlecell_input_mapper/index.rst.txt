@@ -1,0 +1,67 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper`
+
+singlecell_input_mapper
+=======================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   cell </autoapi/singlecell_input_mapper/singlecell_input_mapper/cell/index>  
+   generate_nr_of_cells_spreadsheet </autoapi/singlecell_input_mapper/singlecell_input_mapper/generate_nr_of_cells_spreadsheet/index>  
+   network_embedding </autoapi/singlecell_input_mapper/singlecell_input_mapper/network_embedding/index>  
+   reader </autoapi/singlecell_input_mapper/singlecell_input_mapper/reader/index>  
+   scalar_field </autoapi/singlecell_input_mapper/singlecell_input_mapper/scalar_field/index>  
+   synapse_mapper </autoapi/singlecell_input_mapper/singlecell_input_mapper/synapse_mapper/index>  
+   writer </autoapi/singlecell_input_mapper/singlecell_input_mapper/writer/index>  
+
+.. py:module:: singlecell_input_mapper.singlecell_input_mapper
+
+.. autoapi-nested-parse::
+   Calculate the connectivity of individual neuron morphologies.
+   Based on methods and data presented in :cite:t:`Egger_Dercksen_Udvary_Hege_Oberlaender_2014` and :cite:t:`Udvary_Harth_Macke_Hege_De_Kock_Sakmann_Oberlaender_2022`.
+
+   This package contains methods to create anatomical realizations for the connectivity of single neurons.
+   To create anatomical realizations, it is recommended to use the high-level
+   pipeline :py:meth:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`, which call supon various methods and classes presented in this package.
+
+   Inputs:
+
+   - The morphology and location of the postsynaptic neuron
+   - number of cells per cell type, per anatomical area.
+   - The 3D density of post-synaptic targets (PSTs) in the neuropil (cell type unspecific)
+   - The 3D density of boutons in the neuropil (cell type specific)
+   - The 1D and 2D densities of PSTs onto the postsynaptic neuron per length and area (cell type specific)
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell <singlecell_input_mapper.singlecell_input_mapper.cell>`
+     - Classes for setting up a cell morphology and mapping synapses onto it.
+   * - :py:obj:`generate_nr_of_cells_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet>`
+     - Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column.
+   * - :py:obj:`network_embedding <singlecell_input_mapper.singlecell_input_mapper.network_embedding>`
+     - Create anatomical realizations of connectivity.
+   * - :py:obj:`reader <singlecell_input_mapper.singlecell_input_mapper.reader>`
+     - Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
+   * - :py:obj:`scalar_field <singlecell_input_mapper.singlecell_input_mapper.scalar_field>`
+     - Implementation of 3D scalar fields based on numpy arrays.
+   * - :py:obj:`synapse_mapper <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper>`
+     - This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
+   * - :py:obj:`writer <singlecell_input_mapper.singlecell_input_mapper.writer>`
+     - Write out the results of a single connectivity realization or a population of realizations.
+

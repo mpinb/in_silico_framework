@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_by_filenames`
+
+
+.. title:
+
+read_voltage_traces_by_filenames
+================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None)
+
+   Reads a list of **multiple** voltage trace files and parses it to a dask dataframe.
+
+   Also sets the database key ``sim\_trial\_index`` to contain the paths of the simulation trials.
+   This is the default way of constructing a dask dataframe containing the voltage traces.
+
+   :Parameters: * **prefix** (*str*) -- Path to the directory containing the simulation results.
+                * **fnames** (*list*) -- list of filenames pointing to voltage trace files
+                * **divisions** (*list*) -- list of divisions for the dask dataframe. Default is ``None``, letting Dask handle it.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+
+   :returns: A dask dataframe containing the voltage traces.
+   :rtype: dask.DataFrame
+
+   .. seealso::
+
+      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_from\_file`
+      is used to read in each single voltage trace file. Consult this method for more information on how the data format
+      is parsed.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

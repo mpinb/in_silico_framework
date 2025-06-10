@@ -1,0 +1,59 @@
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis`
+
+synanalysis
+===========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   compute_synapse_distances_times </autoapi/single_cell_parser/analyze/synanalysis/compute_synapse_distances_times>
+   synapse_activation_times </autoapi/single_cell_parser/analyze/synanalysis/synapse_activation_times>
+   compute_syn_distances_2Dprojected </autoapi/single_cell_parser/analyze/synanalysis/compute_syn_distances_2Dprojected>
+   get_dist </autoapi/single_cell_parser/analyze/synanalysis/get_dist>
+   compute_distance_to_soma </autoapi/single_cell_parser/analyze/synanalysis/compute_distance_to_soma>
+   compute_syn_distance </autoapi/single_cell_parser/analyze/synanalysis/compute_syn_distance>
+   compute_syn_distances </autoapi/single_cell_parser/analyze/synanalysis/compute_syn_distances>
+
+.. py:module:: single_cell_parser.analyze.synanalysis
+
+.. autoapi-nested-parse::
+   Compute synapse distances and activation times.
+
+   This module provides functions to compute the distances of synapses to the soma
+   and to save the activation times and soma distances of synapses to a ``.csv`` file.
+
+   .. seealso:: The :ref:`syn_activation_format` file format.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`compute_synapse_distances_times <single_cell_parser.analyze.synanalysis.compute_synapse_distances_times>`\ (fname, cell, t, synTypes)
+     - Save a :py:class:`single_cell_parser.cell.Cell` object's synapse distances and activation times to a ``.csv`` file.
+   * - :py:obj:`synapse_activation_times <single_cell_parser.analyze.synanalysis.synapse_activation_times>`\ (tVec, cntVec)
+     - Parse the spike times from a list of spike counts and corresponding time points.
+   * - :py:obj:`compute_syn_distances_2Dprojected <single_cell_parser.analyze.synanalysis.compute_syn_distances_2Dprojected>`\ (cell, synType, label)
+     - Computes the XY-projected distances (to soma) of all synapses on dendrite.
+   * - :py:obj:`get_dist <single_cell_parser.analyze.synanalysis.get_dist>`\ (x1, x2)
+     - Compute the Euclidean distance between two points.
+   * - :py:obj:`compute_distance_to_soma <single_cell_parser.analyze.synanalysis.compute_distance_to_soma>`\ (sec, x, cell, consider\_gap\_to\_soma)
+     - Computes the distance from a point to the soma.
+   * - :py:obj:`compute_syn_distance <single_cell_parser.analyze.synanalysis.compute_syn_distance>`\ (cell, syn, consider\_gap\_to\_soma)
+     - Computes the distance from a single synapse to the soma.
+   * - :py:obj:`compute_syn_distances <single_cell_parser.analyze.synanalysis.compute_syn_distances>`\ (cell, synType, label, consider\_gap\_to\_soma)
+     - Computes distances (to soma) of all synapses on the dendrite.
+
+

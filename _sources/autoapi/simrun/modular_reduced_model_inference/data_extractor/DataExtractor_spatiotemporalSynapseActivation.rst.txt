@@ -1,0 +1,77 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DataExtractor_spatiotemporalSynapseActivation
+=============================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   setup <DataExtractor_spatiotemporalSynapseActivation.setup>
+   _get_spatial_bin_level <DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level>
+   get_spatial_binsize <DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize>
+   get_groups <DataExtractor_spatiotemporalSynapseActivation.get_groups>
+   get_sorted_keys_by_group <DataExtractor_spatiotemporalSynapseActivation.get_sorted_keys_by_group>
+   _get_spatiotemporal_input <DataExtractor_spatiotemporalSynapseActivation._get_spatiotemporal_input>
+   get <DataExtractor_spatiotemporalSynapseActivation.get>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation(key)
+   
+   Extracts matrix of the shape ``(trial, time, space)`` from spatiotemporal synapse activation binning
+
+   :Parameters: **key** (*tuple|str*) -- key to access the data in the :py:class:`DataBase`
+
+   :Attributes:
+
+   .. attribute:: key
+
+      key to access the data in the :py:class:`DataBase`
+
+      :type: tuple|str
+
+   .. attribute:: data
+
+      dictionary with groups as keys and spatiotemporal inputpatterns as keys.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`setup <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.setup>`\ (Rm)
+        - Set up the data extractor.
+      * - :py:obj:`_get_spatial_bin_level <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level>`\ (key)
+        - :summarylabel:`static` Get the string index of the database key that relects the spatial dimension
+      * - :py:obj:`get_spatial_binsize <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize>`\ ()
+        - Get the spatial binsize
+      * - :py:obj:`get_groups <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_groups>`\ ()
+        - Get all groups (other than spatial binning)
+      * - :py:obj:`get_sorted_keys_by_group <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_sorted_keys_by_group>`\ (group, db)
+        - returns keys sorted such that the first key is the closest to the soma
+      * - :py:obj:`_get_spatiotemporal_input <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatiotemporal_input>`\ (group)
+        - returns spatiotemporal input in the following dimensions:
+      * - :py:obj:`get <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get>`\ ()
+        - Get the spatiotemporal input patterns.
+

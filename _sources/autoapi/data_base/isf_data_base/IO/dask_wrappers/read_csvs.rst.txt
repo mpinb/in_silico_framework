@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.dask_wrappers` ❭ :mod:`~data_base.isf_data_base.IO.dask_wrappers.read_csvs`
+
+
+.. title:
+
+read_csvs
+=========
+
+
+.. py:function:: data_base.isf_data_base.IO.dask_wrappers.read_csvs(*args, **kwargs)
+
+   Read dask dataframes from csv files.
+
+   The native dask read\_csv function only supports globstrings.
+   Use this function instead, if you want to provide a explicit filelist.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator_exc_and_inh_combined`
+
+PSP_with_current_injection.get_psp_simulator_exc_and_inh_combined
+=================================================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator_exc_and_inh_combined(gExRange=[1.0], mode='synapses')
+
+   Set up and combine excitatory and inhibitory PSP simulators.
+
+   This method initializes two PSPs objects, one for excitatory and one for inhibitory postsynaptic potentials,
+   and combines them into a single PSPs object.
+
+   :Parameters: * **gExRange** (*list*) -- Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
+                * **mode** (*str*) -- Mode of the simulation. Options:
+                * **- ``'synapses'`` to activate individual synapses** (*default*)
+                * **- ``'cells'`` to activate individual cells**
+
+   :returns: Combined PSPs object with both excitatory and inhibitory components.
+   :rtype: PSPs
+

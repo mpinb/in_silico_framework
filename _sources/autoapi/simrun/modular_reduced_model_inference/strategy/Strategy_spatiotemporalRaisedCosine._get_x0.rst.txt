@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_x0`
+
+Strategy_spatiotemporalRaisedCosine._get_x0
+===========================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_x0()
+
+   Get an initial guess for the learnable weights  :math:`\mathbf{x}` and :math:`\mathbf{y}` of the basis functions :math:`\mathbf{f}(\tau)` and :math:`\mathbf{g}(z)`.
+
+   :returns: An array of random values in the range :math:`[-1, 1)`, with the same length as the basis parameters.
+   :rtype: np.array
+

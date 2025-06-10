@@ -1,0 +1,862 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Cell and NEURON API - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cell and NEURON API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/api_reference.html" class="md-tabs__link">
+      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/tutorials.html" class="md-tabs__link">
+      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/installation.html" class="md-tabs__link">
+      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../rst_assets/file_formats.html" class="md-tabs__link">
+      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/api_reference.html" class="md-nav__link">
+        <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/tutorials.html" class="md-nav__link">
+        <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/installation.html" class="md-nav__link">
+        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rst_assets/file_formats.html" class="md-nav__link">
+        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="Cell-and-NEURON-API"><a class="reference internal" href="../../autoapi/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> and NEURON API<a class="headerlink" href="#Cell-and-NEURON-API" title="Permalink to this heading">¶</a></h1>
+<p>We can run simulations with <a class="reference internal" href="../../autoapi/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> using NEURON’s Python API, as outlined below</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">Interface</span> <span class="k">as</span> <span class="nn">I</span>
+<span class="kn">from</span> <span class="nn">getting_started</span> <span class="kn">import</span> <span class="n">example_data_dir</span>
+
+<span class="n">cell_param_file</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">example_data_dir</span><span class="p">,</span>
+    <span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;86_C2_center.param&#39;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;info&#39;: {&#39;name&#39;: &#39;hay_2011_dend_test&#39;,
+          &#39;author&#39;: &#39;regger&#39;,
+          &#39;date&#39;: &#39;15Oct2014&#39;},
+ &#39;NMODL_mechanisms&#39;: {&#39;channels&#39;: &#39;/&#39;},
+ &#39;mech_globals&#39;: {},
+ &#39;neuron&#39;: {&#39;filename&#39;: &#39;/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc&#39;,
+            &#39;Soma&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0,
+                                    &#39;cm&#39;: 1.0,
+                                    &#39;ions&#39;: {&#39;ek&#39;: -85.0, &#39;ena&#39;: 50.0}},
+                     &#39;mechanisms&#39;: {&#39;global&#39;: {},
+                                    &#39;range&#39;: {&#39;pas&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                      &#39;g&#39;: 3.26e-05,
+                                                      &#39;e&#39;: -90},
+                                              &#39;Ca_LVAst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                           &#39;gCa_LVAstbar&#39;: 0.00462},
+                                              &#39;Ca_HVA&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                         &#39;gCa_HVAbar&#39;: 0.000642},
+                                              &#39;SKv3_1&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                         &#39;gSKv3_1bar&#39;: 0.983},
+                                              &#39;SK_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gSK_E2bar&#39;: 0.0492},
+                                              &#39;K_Tst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gK_Tstbar&#39;: 0.0471},
+                                              &#39;K_Pst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gK_Pstbar&#39;: 0.0},
+                                              &#39;Nap_Et2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                          &#39;gNap_Et2bar&#39;: 0.00499},
+                                              &#39;NaTa_t&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                         &#39;gNaTa_tbar&#39;: 2.43},
+                                              &#39;CaDynamics_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                &#39;decay&#39;: 770.0,
+                                                                &#39;gamma&#39;: 0.000616},
+                                              &#39;Ih&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                     &#39;gIhbar&#39;: 8e-05}}}},
+            &#39;Dendrite&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0, &#39;cm&#39;: 2.0},
+                         &#39;mechanisms&#39;: {&#39;global&#39;: {},
+                                        &#39;range&#39;: {&#39;pas&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                          &#39;g&#39;: 6.31e-05,
+                                                          &#39;e&#39;: -90.0},
+                                                  &#39;Ih&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                         &#39;gIhbar&#39;: 0.0002}}}},
+            &#39;ApicalDendrite&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0,
+                                              &#39;cm&#39;: 2.0,
+                                              &#39;ions&#39;: {&#39;ek&#39;: -85.0,
+                                                       &#39;ena&#39;: 50.0}},
+                               &#39;mechanisms&#39;: {&#39;global&#39;: {},
+                                              &#39;range&#39;: {&#39;pas&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                &#39;g&#39;: 8.82e-05,
+                                                                &#39;e&#39;: -90},
+                                                        &#39;SK_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                  &#39;gSK_E2bar&#39;: 0.0034},
+                                                        &#39;Ca_LVAst&#39;: {&#39;spatial&#39;: &#39;uniform_range&#39;,
+                                                                     &#39;gCa_LVAstbar&#39;: 0.104,
+                                                                     &#39;begin&#39;: 900.0,
+                                                                     &#39;end&#39;: 1100.0,
+                                                                     &#39;outsidescale&#39;: 0.01},
+                                                        &#39;Ca_HVA&#39;: {&#39;spatial&#39;: &#39;uniform_range&#39;,
+                                                                   &#39;gCa_HVAbar&#39;: 0.00452,
+                                                                   &#39;begin&#39;: 900.0,
+                                                                   &#39;end&#39;: 1100.0,
+                                                                   &#39;outsidescale&#39;: 0.1},
+                                                        &#39;CaDynamics_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                          &#39;decay&#39;: 133.0,
+                                                                          &#39;gamma&#39;: 0.0005},
+                                                        &#39;SKv3_1&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                   &#39;gSKv3_1bar&#39;: 0.0112},
+                                                        &#39;NaTa_t&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                                   &#39;gNaTa_tbar&#39;: 0.0252},
+                                                        &#39;Im&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                               &#39;gImbar&#39;: 0.000179},
+                                                        &#39;Ih&#39;: {&#39;spatial&#39;: &#39;exponential&#39;,
+                                                               &#39;distance&#39;: &#39;relative&#39;,
+                                                               &#39;gIhbar&#39;: 0.0002,
+                                                               &#39;offset&#39;: -0.8696,
+                                                               &#39;linScale&#39;: 2.087,
+                                                               &#39;_lambda&#39;: 3.6161,
+                                                               &#39;xOffset&#39;: 0.0}}}},
+            &#39;AIS&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0,
+                                   &#39;cm&#39;: 1.0,
+                                   &#39;ions&#39;: {&#39;ek&#39;: -85.0, &#39;ena&#39;: 50.0}},
+                    &#39;mechanisms&#39;: {&#39;global&#39;: {},
+                                   &#39;range&#39;: {&#39;pas&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                     &#39;g&#39;: 2.56e-05,
+                                                     &#39;e&#39;: -90},
+                                             &#39;Ca_LVAst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                          &#39;gCa_LVAstbar&#39;: 0.00858},
+                                             &#39;Ca_HVA&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gCa_HVAbar&#39;: 0.000692},
+                                             &#39;SKv3_1&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gSKv3_1bar&#39;: 0.958},
+                                             &#39;SK_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                       &#39;gSK_E2bar&#39;: 5.77e-05},
+                                             &#39;K_Tst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                       &#39;gK_Tstbar&#39;: 0.0841},
+                                             &#39;K_Pst&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                       &#39;gK_Pstbar&#39;: 0.773},
+                                             &#39;Nap_Et2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                         &#39;gNap_Et2bar&#39;: 0.00146},
+                                             &#39;NaTa_t&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;gNaTa_tbar&#39;: 0.088},
+                                             &#39;CaDynamics_E2&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                               &#39;decay&#39;: 507.0,
+                                                               &#39;gamma&#39;: 0.0175},
+                                             &#39;Ih&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                    &#39;gIhbar&#39;: 8e-05}}}},
+            &#39;Myelin&#39;: {&#39;properties&#39;: {&#39;Ra&#39;: 100.0, &#39;cm&#39;: 0.02},
+                       &#39;mechanisms&#39;: {&#39;global&#39;: {},
+                                      &#39;range&#39;: {&#39;pas&#39;: {&#39;spatial&#39;: &#39;uniform&#39;,
+                                                        &#39;g&#39;: 4e-05,
+                                                        &#39;e&#39;: -90.0}}}}},
+ &#39;sim&#39;: {&#39;Vinit&#39;: -75.0,
+         &#39;tStart&#39;: 0.0,
+         &#39;tStop&#39;: 250.0,
+         &#39;dt&#39;: 0.025,
+         &#39;T&#39;: 34.0,
+         &#39;recordingSites&#39;: [&#39;/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/apical_proximal_distal_rec_sites.landmarkAscii&#39;]}}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">single_cell_parser.cell_modify_functions.scale_apical_morph_86</span> <span class="kn">import</span> <span class="n">scale_apical_morph_86</span>
+<span class="kn">import</span> <span class="nn">neuron</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">neuron</span><span class="o">.</span><span class="n">h</span>
+<span class="n">I</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+
+<span class="n">cell_param</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">build_parameters</span><span class="p">(</span><span class="n">cell_param_file</span><span class="p">)</span> <span class="c1"># this is the main method to load in parameterfiles</span>
+<span class="n">cell</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">create_cell</span><span class="p">(</span>
+    <span class="n">cell_param</span><span class="o">.</span><span class="n">neuron</span><span class="p">,</span>
+    <span class="n">scaleFunc</span><span class="o">=</span><span class="n">scale_apical_morph_86</span>
+    <span class="p">)</span> <span class="c1"># this is the main method to create a cell</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[WARNING] __init__.py: Keyword scaleFunc is deprecated! New: To ensure reproducability, scaleFunc should be specified in the parameters, as described in single_cell_parser.cell_modify_funs
+[INFO] single_cell_parser: -------------------------------
+[INFO] single_cell_parser: Starting setup of cell model...
+[INFO] single_cell_parser: Loading cell morphology...
+[INFO] reader: Reading hoc file /gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc
+[INFO] cell_parser: Creating AIS:
+[INFO] cell_parser:     axon hillock diameter: 3.00
+[INFO] cell_parser:     initial segment diameter: 1.75
+[INFO] cell_parser:     myelin diameter: 1.00
+[WARNING] cell_parser.py: Keyword scaleFunc is deprecated! New: To ensure reproducability, scaleFunc should be specified in the parameters, as described in single_cell_parser.cell_modify_funs
+[INFO] scale_apical_morph_86: Scaled 33 apical sections...
+[INFO] single_cell_parser: Setting up biophysical model...
+[INFO] cell_parser:     Adding membrane properties to Soma
+[INFO] cell_parser:     Adding membrane properties to Dendrite
+[INFO] cell_parser:     Adding membrane properties to ApicalDendrite
+[INFO] cell_parser:     Adding membrane properties to AIS
+[INFO] cell_parser:     Adding membrane properties to Myelin
+[INFO] cell_parser:     Setting up spatial discretization...
+[INFO] cell_parser:     frequency used for determining discretization: 100.0
+[INFO] cell_parser:     maximum segment length: None
+[INFO] cell_parser:     Total number of compartments in model: 1109
+[INFO] cell_parser:     Total length of model cell: 15290.39
+[INFO] cell_parser:     Average compartment length: 13.79
+[INFO] cell_parser:     Maximum compartment (Dendrite) length: 31.54
+[INFO] cell_parser:     Adding membrane range mechanisms to Soma
+[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism K_Tst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism K_Pst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Nap_Et2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
+[INFO] cell_parser:     Adding membrane range mechanisms to Dendrite
+[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
+[INFO] cell_parser:     Adding membrane range mechanisms to ApicalDendrite
+[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform_range
+[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform_range
+[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Im with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution exponential
+[INFO] cell_parser:     Adding membrane range mechanisms to AIS
+[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ca_LVAst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ca_HVA with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SKv3_1 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism SK_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism K_Tst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism K_Pst with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Nap_Et2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism NaTa_t with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism CaDynamics_E2 with spatial distribution uniform
+[INFO] cell_parser:         Inserting mechanism Ih with spatial distribution uniform
+[INFO] cell_parser:     Adding membrane range mechanisms to Myelin
+[INFO] cell_parser:         Inserting mechanism pas with spatial distribution uniform
+[INFO] single_cell_parser: -------------------------------
+[INFO] cell_parser: No cell_modify_functions to apply
+</pre></div></div>
+</div>
+<h2 id="Current-injection-at-the-soma">Current injection at the soma<a class="headerlink" href="#Current-injection-at-the-soma" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">neuron</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">neuron</span><span class="o">.</span><span class="n">h</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">iclamp</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">IClamp</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sec</span><span class="o">=</span><span class="n">cell</span><span class="o">.</span><span class="n">soma</span><span class="p">)</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mi">150</span> <span class="c1"># [ms] give the cell time to reach steady state</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">dur</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># [ms] rectangular pulse</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">amp</span> <span class="o">=</span> <span class="mf">1.9</span> <span class="c1"># [nA]</span>
+<span class="o">%</span><span class="n">time</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">init_neuron_run</span><span class="p">(</span><span class="n">cell_param</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="n">vardt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># run the simulation</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 741 ms, sys: 8.93 ms, total: 750 ms
+Wall time: 836 ms
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;ticks&#39;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">soma</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">);</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_7_0.png" src="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_7_0.png" />
+</div>
+</div>
+<h2 id="Step-currents-at-the-soma">Step currents at the soma<a class="headerlink" href="#Step-currents-at-the-soma" title="Permalink to this heading">¶</a></h2>
+<p>How does the cell respond to different amplitudes of the step current?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">cell_param</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">tStop</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">dur</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">simresult</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">amp</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.619</span><span class="p">,</span> <span class="mf">0.793</span><span class="p">,</span> <span class="mf">1.507</span><span class="p">]:</span>
+    <span class="n">iclamp</span><span class="o">.</span><span class="n">amp</span> <span class="o">=</span> <span class="n">amp</span>
+    <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">init_neuron_run</span><span class="p">(</span><span class="n">cell_param</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="n">vardt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">simresult</span><span class="p">[</span><span class="n">amp</span><span class="p">]</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">),</span> <span class="n">I</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">soma</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[WARNING] client: Connection dropped: socket connection broken
+[WARNING] client: Transition to CONNECTING
+[WARNING] client: Session has expired
+[WARNING] client: Connection dropped: socket connection broken
+[WARNING] client: Transition to CONNECTING
+[WARNING] client: Session has expired
+[WARNING] client: Connection dropped: socket connection broken
+[WARNING] client: Transition to CONNECTING
+[WARNING] client: Session has expired
+[WARNING] client: Connection dropped: socket connection broken
+[WARNING] client: Transition to CONNECTING
+[WARNING] client: Session has expired
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">lv</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">simresult</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">lv</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">simresult</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">);</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;t / ms&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lv</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Vm / mV&#39;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_11_0.png" src="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_11_0.png" />
+</div>
+</div>
+<h2 id="Pair-injection-at-the-soma-and-apical-dendrite">Pair injection at the soma and apical dendrite<a class="headerlink" href="#Pair-injection-at-the-soma-and-apical-dendrite" title="Permalink to this heading">¶</a></h2>
+<p>Now let’s place a pipette on the apical trunk at a soma distance of 620 microns and inject current synchronously at this position and at the soma. For the current at the soma, we choose a rectangular pulse again. The current at the apical injection site should resemble the shape of a evoked post synaptic potential (epsp). Have a look at the folder mechanisms/synapses to see how epsp is implemented in hoc code.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># map between sections and somadistance</span>
+<span class="n">sec_dist_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">cell</span><span class="o">.</span><span class="n">distance_to_soma</span><span class="p">(</span><span class="n">sec</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">):</span> <span class="n">sec</span> <span class="k">for</span> <span class="n">sec</span> <span class="ow">in</span> <span class="n">cell</span><span class="o">.</span><span class="n">sections</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">get_section_at_distance</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+    <span class="n">dummy</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span> <span class="o">-</span> <span class="n">dist</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">sec_dist_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">}</span>
+    <span class="n">closest_sec</span> <span class="o">=</span> <span class="n">dummy</span><span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">dummy</span><span class="p">)]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist</span> <span class="o">-</span> <span class="n">cell</span><span class="o">.</span><span class="n">distance_to_soma</span><span class="p">(</span><span class="n">closest_sec</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span> <span class="o">/</span> <span class="n">closest_sec</span><span class="o">.</span><span class="n">L</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">closest_sec</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">cell_param</span><span class="o">.</span><span class="n">sim</span><span class="o">.</span><span class="n">tStop</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">sec</span> <span class="o">=</span> <span class="n">get_section_at_distance</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="mi">620</span><span class="p">)</span>
+
+<span class="n">iclamp</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">IClamp</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sec</span><span class="o">=</span><span class="n">cell</span><span class="o">.</span><span class="n">soma</span><span class="p">)</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mi">295</span> <span class="c1"># give the cell time to reach steady state</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">dur</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># 5ms rectangular pulse</span>
+<span class="n">iclamp</span><span class="o">.</span><span class="n">amp</span> <span class="o">=</span> <span class="mf">1.9</span> <span class="c1"># 1.9 ?? todo ampere</span>
+
+<span class="n">iclamp2</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">epsp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sec</span><span class="o">=</span><span class="n">sec</span><span class="p">)</span>
+<span class="n">iclamp2</span><span class="o">.</span><span class="n">onset</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">iclamp2</span><span class="o">.</span><span class="n">imax</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">iclamp2</span><span class="o">.</span><span class="n">tau0</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># rise time constant</span>
+<span class="n">iclamp2</span><span class="o">.</span><span class="n">tau1</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># decay time constant</span>
+<span class="n">cell</span><span class="o">.</span><span class="n">iclamp2</span> <span class="o">=</span> <span class="n">iclamp2</span>
+
+<span class="o">%</span><span class="n">time</span> <span class="n">I</span><span class="o">.</span><span class="n">scp</span><span class="o">.</span><span class="n">init_neuron_run</span><span class="p">(</span><span class="n">cell_param</span><span class="o">.</span><span class="n">sim</span><span class="p">,</span> <span class="n">vardt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># run the simulation</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 1.43 s, sys: 5.9 ms, total: 1.44 s
+Wall time: 1.43 s
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">tVec</span><span class="p">,</span> <span class="n">cell</span><span class="o">.</span><span class="n">soma</span><span class="o">.</span><span class="n">recVList</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">);</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_16_0.png" src="../../_images/tutorials_auxiliary_notebooks_A.2_Neuron_API_16_0.png" />
+</div>
+</div>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.1.2.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../_static/js/video.js?v=a9b6335e"></script>
+        <script src="../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    
+  </body>
+</html>

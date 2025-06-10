@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.dump`
+
+
+.. title:
+
+dump
+====
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet.dump(obj, savedir)
+
+   Save the pandas DataFrame in the specified directory.
+
+   In addition to the pandas DataFrame itself,
+   meta information is also saved in the form of a JSON file.
+
+   .. seealso:: :py:func:`~data\_base.isf\_data\_base.IO.LoaderDumper.utils.save\_object\_meta` for saving meta information
+
+   :Parameters: * **obj** (*pd.DataFrame*) -- Pandas DataFrame to be saved.
+                * **savedir** (*str*) -- Directory where the pandas DataFrame should be stored.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

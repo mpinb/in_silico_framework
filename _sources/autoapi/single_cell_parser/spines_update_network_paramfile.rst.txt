@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.spines_update_network_paramfile`
+
+
+.. title:
+
+spines_update_network_paramfile
+===============================
+
+
+.. py:function:: single_cell_parser.spines_update_network_paramfile(new_synapse_distribution_file, network_paramfile, new_network_paramfile)
+
+   Update a :ref:`network\_parameters\_format` file to point to a new :ref:`syn\_file\_format` file.
+
+   :Parameters: * **new\_synapse\_distribution\_file** (*str*) -- The path to the new :ref:`syn\_file\_format` file.
+                * **network\_paramfile** (*str*) -- The path to the original :ref:`network\_parameters\_format` file.
+                * **new\_network\_paramfile** (*str*) -- The path to the new :ref:`network\_parameters\_format` file.
+                  A new\_network\_paramfile will be created if it does not already exist.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

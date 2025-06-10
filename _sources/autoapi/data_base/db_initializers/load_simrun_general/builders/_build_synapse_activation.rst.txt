@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._build_synapse_activation`
+
+
+.. title:
+
+_build_synapse_activation
+=========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_synapse_activation(db, repartition=False, n_chunks=5000)
+
+   Parse the :ref:`syn\_activation\_format` and :ref:`spike\_times\_format` data.
+
+   The synapse and presynaptic spike times data is added to the database under the keys
+   ``synapse\_activation`` and ``cell\_activation`` respectively.
+
+   :Parameters: * **db** (:py:class:`~data\_base.isf\_data\_base.isf\_data\_base.ISFDataBase`) -- The database to which the data should be added.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+                * **n\_chunks** (*int*) -- Number of chunks to split the data into. Default is 5000.
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

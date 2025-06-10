@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot`
+
+
+.. title:
+
+rasterplot
+==========
+
+
+.. py:function:: visualize.rasterplot.rasterplot(df, colormap=None, ax=None, label=None, groupby_attribute=None, tlim=None, reset_index=True)
+
+   Creates a rasterplot from spike times dataframe.
+
+   If df is a dask.DataFrame: parallel plotting is used (not recommended, causes bad quality)
+   If df is a pandas.DataFrame, serial plotting is used
+
+   :Parameters: * **df** (*pandas.DataFrame*) -- A DataFrame containing the spike times.
+                * **colormap** (*dict, optional*) -- A colormap to use for the plot.
+                  Must map a label from :paramref:`groupby\_attribute` to a color.
+                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+                * **label** (*str, optional*) -- The label for the plot. Default is ``None``.
+                * **groupby\_attribute** (*str, optional*) -- The column name in the DataFrame to group by. Default is ``None``.
+                * **tlim** (*tuple, optional*) -- The x-axis limits for the plot. Default is ``None``.
+                * **reset\_index** (*bool, optional*) -- If True, reset the index of the DataFrame. Default is ``True``.
+
+   :returns: Figure object containing the rasterplot.
+   :rtype: matplotlib.pyplot.Figure
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

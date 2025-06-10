@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.IO` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_categorized_msgpack` ❭ :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_numpy_dtype_as_str`
+
+
+.. title:
+
+get_numpy_dtype_as_str
+======================
+
+
+.. py:function:: data_base.isf_data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_numpy_dtype_as_str(obj)
+
+   Get a string representation of the numpy dtype of an object.
+   If the object is of type string, simply return 'str'.
+
+   Python 2 has two types of strings: str and unicode. If left unspecified, numpy will default to unicode of unknown length, which is set to 0.
+   reading this back in results in the loss of string-type column names. For this reason, we construct our own string representation of the numpy dtype of these columns.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._connect_spike_trains`
+
+NetworkMapper._connect_spike_trains
+===================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._connect_spike_trains(weights=None, change=None)
+
+   Connects synapses with spike generators.
+
+   Spike trains are activity sources with given mean spike rate (SpikeTrains).
+   All synapses are independent.
+
+   Used in :py:meth:`create_network`.
+

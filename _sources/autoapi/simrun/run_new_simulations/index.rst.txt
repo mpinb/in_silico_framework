@@ -1,0 +1,43 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.run_new_simulations`
+
+run_new_simulations
+===================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   run_new_simulations </autoapi/simrun/run_new_simulations/run_new_simulations>
+
+.. py:module:: simrun.run_new_simulations
+
+.. autoapi-nested-parse::
+   Create and simulate network-embedded neuron models.
+
+   This module contains the core method used throughout :py:mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
+   generate synaptic input patterns based on the :ref:`network_parameters_format`, and simulate the resulting network-embedded neuron model.
+
+   See :py:meth:`~simrun.run_new_simulations.run_new_simulations` for more information.
+
+   .. seealso:: :py:mod:`simrun.rerun_db` to rebuild, modify and resimulate existing simulation results.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`run_new_simulations <simrun.run_new_simulations.run_new_simulations>`\ (cellParamName, evokedUpParamName, dirPrefix, nSweeps, nprocs, tStop, silent, scale\_apical, cell\_generator, child\_process, tar)
+     - Create and simulate network-embedded neuron models.
+
+

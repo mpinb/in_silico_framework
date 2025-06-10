@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderSmr` ❭ :mod:`~spike_analysis.core.ReaderSmr.get_voltage_traces`
+
+ReaderSmr.get_voltage_traces
+============================
+
+.. py:method:: spike_analysis.core.ReaderSmr.get_voltage_traces()
+
+   Get the time points and voltage values of the traces.
+
+   :returns: Two tuples containing the time points and voltage values of the traces respectively.
+   :rtype: tuple
+

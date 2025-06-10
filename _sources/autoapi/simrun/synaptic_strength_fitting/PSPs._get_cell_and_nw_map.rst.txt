@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map`
+
+PSPs._get_cell_and_nw_map
+=========================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map(network_param=None)
+
+   Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
+
+   :Parameters: **network_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The :ref:`network_parameters_format` file.
+
+   :returns:
+
+             A tuple of the neuron model (:py:class:`single_cell_parser.cell.Cell`)
+                 and the :py:class:`single_cell_parser.network.NetworkMapper` that assigns synapses onto it.
+   :rtype: tuple
+

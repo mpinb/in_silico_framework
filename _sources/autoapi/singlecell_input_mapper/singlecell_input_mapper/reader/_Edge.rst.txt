@@ -1,0 +1,85 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_Edge
+=====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   is_valid <_Edge.is_valid>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.reader._Edge
+   
+   Convenience class around NEURON's section objects.
+
+   The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
+
+   .. seealso:: :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader._Edge` class.
+
+   :Attributes:
+
+   .. attribute:: label
+
+      The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
+
+      :type: str
+
+   .. attribute:: hocLabel
+
+      The label of the segment as defined in the hoc file.
+
+      :type: str
+
+   .. attribute:: edgePts
+
+      A list of points that define the segment.
+
+      :type: list
+
+   .. attribute:: diameterList
+
+      A list of diameters for each point in edgePts.
+
+      :type: list
+
+   .. attribute:: parentID
+
+      The ID of the parent segment.
+
+      :type: int
+
+   .. attribute:: parentConnect
+
+      The parent segment.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`is_valid <singlecell_input_mapper.singlecell_input_mapper.reader._Edge.is_valid>`\ ()
+        - Check if this edge is valid.
+

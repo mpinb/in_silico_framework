@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.execute_in_child_process`
+
+
+.. title:
+
+execute_in_child_process
+========================
+
+
+.. py:function:: biophysics_fitting.utils.execute_in_child_process(fun)
+
+   Execute a function in a child process.
+
+   This function serializes the function and its arguments, and runs it in a separate process
+   using multiprocessing.
+
+   :Parameters: **fun** (*function*) -- The function to execute.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,98 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Cell
+====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   distance_to_soma <Cell.distance_to_soma>
+   get_bounding_box <Cell.get_bounding_box>
+   add_synapse <Cell.add_synapse>
+   remove_synapses <Cell.remove_synapses>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell
+   
+   Cell object for mapping synapses onto a morphology.
+
+   This is a leightweight dataclass specialized for use with :py:mod:`singlecell_input_mapper.singlecell_input_mapper.synapse_mapper`.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`single_cell_parser.cell.Cell`.
+      Contrary to :py:class:`single_cell_parser.cell.Cell`, this class does not provide any biophysical details,
+      simulation parameters or biophysical details.
+
+   :Attributes:
+
+   .. attribute:: id
+
+      Unique identifier for the cell.
+
+      :type: str
+
+   .. attribute:: soma
+
+      The soma section.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+
+   .. attribute:: structures
+
+      Dictionary mapping section labels (e.g. "Soma", "Dendrite" ...) to a list of corresponding sections.
+
+      :type: dict
+
+   .. attribute:: sections
+
+      List of all sections.
+
+      :type: list
+
+   .. attribute:: boundingBox
+
+      Bounding box around the cell.
+
+      :type: tuple
+
+   .. attribute:: synapses
+
+      Dictionary mapping presynaptic cell types to a list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`distance_to_soma <singlecell_input_mapper.singlecell_input_mapper.cell.Cell.distance_to_soma>`\ (sec, x)
+        - Calculate the path length to soma from location :paramref:`x` on section :paramref:`sec`
+      * - :py:obj:`get_bounding_box <singlecell_input_mapper.singlecell_input_mapper.cell.Cell.get_bounding_box>`\ ()
+        - Calculate the bounding box around the cell.
+      * - :py:obj:`add_synapse <singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse>`\ (secID, ptID, ptx, preType, postType)
+        - Add a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
+      * - :py:obj:`remove_synapses <singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses>`\ (preType)
+        - Remove all synapses of type :paramref:`preType` from the cell.
+

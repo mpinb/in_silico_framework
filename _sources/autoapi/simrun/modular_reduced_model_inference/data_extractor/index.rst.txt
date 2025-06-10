@@ -1,0 +1,43 @@
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor`
+
+data_extractor
+==============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _DataExtractor </autoapi/simrun/modular_reduced_model_inference/data_extractor/_DataExtractor>
+   DataExtractor_spatiotemporalSynapseActivation </autoapi/simrun/modular_reduced_model_inference/data_extractor/DataExtractor_spatiotemporalSynapseActivation>
+
+.. py:module:: simrun.modular_reduced_model_inference.data_extractor
+
+.. autoapi-nested-parse::
+   Extract and parse data from databases.
+
+   Data extractors initialize from ReducedModel objects.
+   Depending on the reduced model object, the data extractors fetch data from the database and return it in a structured way.
+   These data extractors are specific to match a :py:class:`simrun.modular_reduced_model_inference.Strategy` object.
+   For example, the spatiotemporal raised cosine strategy requires to bin the synapse activations spatiotemporally.
+   This is then handled with the :py:class:`DataExtractor_spatiotemporalSynapseActivation` class.
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`DataExtractor_spatiotemporalSynapseActivation <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation>`
+     - Extracts matrix of the shape ``(trial, time, space)`` from spatiotemporal synapse activation binning
+
+
+

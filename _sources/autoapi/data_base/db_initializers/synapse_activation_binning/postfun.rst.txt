@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.postfun`
+
+
+.. title:
+
+postfun
+=======
+
+
+.. py:function:: data_base.db_initializers.synapse_activation_binning.postfun(s, maxtime=None)
+
+   Postprocess a column of the binned synapse activations.
+
+   This method fills ``None`` and ``np.nan`` values with zeroes instead.
+   It is used by default during the binning of synapse activations.
+
+   :Parameters: * **s** (:py:class:`pandas.Series`) -- A column of the binned synapse activations.
+                * **maxtime** (*int*) -- The maximum time of the synapse activations.
+
+   :returns: The processed column of synapse activations.
+   :rtype: numpy.array
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.init`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

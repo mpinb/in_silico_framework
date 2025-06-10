@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.AP_height_check_1AP`
+
+
+.. title:
+
+AP_height_check_1AP
+===================
+
+
+.. py:function:: biophysics_fitting.ephys.AP_height_check_1AP(t, v, thresh=None)
+
+   Determines if an action potential (AP) is present in a voltage trace by checking if the voltage crosses a given threshold.
+
+   :Parameters: * **t** (*array-like*) -- Array of time values corresponding to the voltage trace.
+                * **v** (*array-like*) -- Array of voltage values for the trace.
+                * **thresh** (*float, optional*) -- The voltage threshold to use for detecting the AP. If None, defaults to the maximum voltage
+                  value divided by 2.
+
+   :returns: True if at least one AP is detected in the voltage trace, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

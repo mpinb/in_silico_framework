@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.inactivate_evoked_and_ongoing_activity_by_celltype_and_column`
+
+
+.. title:
+
+inactivate_evoked_and_ongoing_activity_by_celltype_and_column
+=============================================================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, inact_celltypes, inact_column)
+
+   Inactivates both the evoked and ongoing activity for the celltypes in the :ref:`network\_parameters\_format`.
+
+   Does so by completely removing them from the :ref:`network\_parameters\_format`.
+
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **inact\_celltypes** (*list*) -- The celltypes to inactivate.
+                * **inact\_column** (*list*) -- The columns to inactivate.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> inact\_celltypes = ['L6cc\_C2']
+   >>> network\_parameters.network[inact\_celltypes[0]].celltype.pointcell.probabilities
+   [0.1, 0.1]
+   >>> network\_parameters.network[inact\_celltypes[0]].celltype.pointcell.intervals
+   [(0, 1000)]
+   >>> inactivate\_evoked\_and\_ongoing\_activity\_by\_celltype\_and\_column(network\_parameters, inact\_celltypes, ['C2'])
+   >>> network\_parameters.network[inact\_celltypes[0]]
+   KeyError: 'L6cc\_C2'
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

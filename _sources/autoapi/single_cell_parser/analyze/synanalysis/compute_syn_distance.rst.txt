@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.compute_syn_distance`
+
+
+.. title:
+
+compute_syn_distance
+====================
+
+
+.. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distance(cell, syn, consider_gap_to_soma=False)
+
+   Computes the distance from a single synapse to the soma.
+
+   Used in :py:meth:`compute\_syn\_distances`.
+
+   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
+                * **syn** (:py:class:`single\_cell\_parser.synapse.Synapse`) -- synapse object.
+                * **consider\_gap\_to\_soma** (*bool, optional*) -- Account for the fact that dendrites don't actually touch the soma, and add the
+                  distance between the last point of the parent section and the first point of the
+                  current section to the distance.
+                  Default: False
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

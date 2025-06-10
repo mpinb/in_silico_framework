@@ -1,0 +1,43 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.voltage_trace_visualizer` ❭ :mod:`~visualize.voltage_trace_visualizer.visualize_vt`
+
+
+.. title:
+
+visualize_vt
+============
+
+
+.. py:function:: visualize.voltage_trace_visualizer.visualize_vt(vt, fig=None, soma_color=&#39;k&#39;, dend_color=&#39;#f7941d&#39;, BAC_select=295 + 80, lw=2, **kwargs)
+
+   Visualize voltage traces from the Hay stimulus protocols.
+
+   The results of e.g. :py:class:`biophysics\_fitting.simulator.Simulator` are nested dictionaries,
+   containing various voltage traces. NEURON simulation results are NEURON vectors.
+   This is a helper method to extract that data and plot out specific voltage traces from those results.
+
+   :Parameters: * **vt** (*dict*) -- dictionary containing the voltage traces.
+                  Must contain the keys:
+
+                  - 'BAC.hay\_measure'
+                  - 'bAP.hay\_measure'
+                  - 'StepOne.hay\_measure'
+                  - 'StepTwo.hay\_measure'
+                  - 'StepThree.hay\_measure'
+                * **fig** (*matplotlib.figure.Figure*) -- figure to plot the voltage traces on.
+                * **soma\_color** (*str*) -- color to plot the soma voltage traces.
+                * **dend\_color** (*str*) -- color to plot the dendrite voltage traces.
+                * **BAC\_select** (*int*) -- timepoint for the end of the BAC stimulus.
+
+   :returns: None
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more details on the stimulus protocols.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

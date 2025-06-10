@@ -1,0 +1,65 @@
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup`
+
+L5tt_parameter_setup
+====================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   hay_param_to_scp_neuron_param </autoapi/biophysics_fitting/L5tt_parameter_setup/hay_param_to_scp_neuron_param>
+   hay_params_to_scp_neuron_params </autoapi/biophysics_fitting/L5tt_parameter_setup/hay_params_to_scp_neuron_params>
+   get_L5tt_template </autoapi/biophysics_fitting/L5tt_parameter_setup/get_L5tt_template>
+   get_L5tt_template_v2 </autoapi/biophysics_fitting/L5tt_parameter_setup/get_L5tt_template_v2>
+   set_morphology </autoapi/biophysics_fitting/L5tt_parameter_setup/set_morphology>
+   check_unset_range_mechanisms </autoapi/biophysics_fitting/L5tt_parameter_setup/check_unset_range_mechanisms>
+   set_ephys </autoapi/biophysics_fitting/L5tt_parameter_setup/set_ephys>
+   set_param </autoapi/biophysics_fitting/L5tt_parameter_setup/set_param>
+   set_many_param </autoapi/biophysics_fitting/L5tt_parameter_setup/set_many_param>
+   set_hot_zone </autoapi/biophysics_fitting/L5tt_parameter_setup/set_hot_zone>
+
+.. py:module:: biophysics_fitting.L5tt_parameter_setup
+
+.. autoapi-nested-parse::
+   This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
+
+   These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :py:mod:`~biophysics_fitting.simulator`.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`hay_param_to_scp_neuron_param <biophysics_fitting.L5tt_parameter_setup.hay_param_to_scp_neuron_param>`\ (p)
+     - Convert a Hay parameter name to a SCP neuron parameter name.
+   * - :py:obj:`hay_params_to_scp_neuron_params <biophysics_fitting.L5tt_parameter_setup.hay_params_to_scp_neuron_params>`\ (params)
+     - Convert a list of Hay parameter names to a list of SCP neuron parameter names.
+   * - :py:obj:`get_L5tt_template <biophysics_fitting.L5tt_parameter_setup.get_L5tt_template>`\ ()
+     - Get a template cell parameter dictionary for a L5PT cell.
+   * - :py:obj:`get_L5tt_template_v2 <biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2>`\ ()
+     - Get a template cell parameter dictionary for a L5PT cell.
+   * - :py:obj:`set_morphology <biophysics_fitting.L5tt_parameter_setup.set_morphology>`\ (cell\_param, filename)
+     - Add the morphology to a cell parameter object.
+   * - :py:obj:`check_unset_range_mechanisms <biophysics_fitting.L5tt_parameter_setup.check_unset_range_mechanisms>`\ (cell\_param)
+     - \-
+   * - :py:obj:`set_ephys <biophysics_fitting.L5tt_parameter_setup.set_ephys>`\ (cell\_param, params)
+     - Updates cell_param file.
+   * - :py:obj:`set_param <biophysics_fitting.L5tt_parameter_setup.set_param>`\ (cell\_param, params)
+     - Updates cell_param given a dict of params in the dot naming convention.
+   * - :py:obj:`set_many_param <biophysics_fitting.L5tt_parameter_setup.set_many_param>`\ (cell\_param, params)
+     - Updates cell_param given a dict of params in the dot naming convention.
+   * - :py:obj:`set_hot_zone <biophysics_fitting.L5tt_parameter_setup.set_hot_zone>`\ (cell\_param, min\_, max\_, outsidescale\_sections)
+     - Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+
+

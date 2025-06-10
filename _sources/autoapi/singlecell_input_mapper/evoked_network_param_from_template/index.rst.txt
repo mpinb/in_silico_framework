@@ -1,0 +1,51 @@
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template`
+
+evoked_network_param_from_template
+==================================
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   create_network_parameter </autoapi/singlecell_input_mapper/evoked_network_param_from_template/create_network_parameter>
+   whisker_evoked_PSTH </autoapi/singlecell_input_mapper/evoked_network_param_from_template/whisker_evoked_PSTH>
+   load_cell_number_file </autoapi/singlecell_input_mapper/evoked_network_param_from_template/load_cell_number_file>
+
+.. py:module:: singlecell_input_mapper.evoked_network_param_from_template
+
+.. autoapi-nested-parse::
+   Runfile to create a :ref:`network_parameters_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
+
+   Reads in a template parameter file and sets the PSTHs for each celltype to the PSTHs of the evoked activity.
+   Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
+
+   .. attention::
+
+      This module is specific to the model of the rat barrel cortex and the experimental conditions of the passive whisker touch experiment.
+      It is not intended to be used for other models or experiments.
+      However, it may serve as a template for other experimental conditions.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`create_network_parameter <singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter>`\ (templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write\_all\_celltypes)
+     - Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
+   * - :py:obj:`whisker_evoked_PSTH <singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH>`\ (column, deflectedWhisker, cellType)
+     - Fetch the PSTHs of each celltype in a barrel cortex :paramref:`column` for evoked activity reflecting
+   * - :py:obj:`load_cell_number_file <singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file>`\ (cellNumberFileName)
+     - Load the cell number file.
+
+

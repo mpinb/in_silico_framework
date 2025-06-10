@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base` ❭ :mod:`~data_base.data_base.is_sub_isf_data_base`
+
+
+.. title:
+
+is_sub_isf_data_base
+====================
+
+
+.. py:function:: data_base.data_base.is_sub_isf_data_base(parent_db, key)
+
+   Check if a given key is a sub-database of the parent database.
+
+   :Parameters: * **parent\_db** (*DataBase*) -- The parent database.
+                * **key** (*str*) -- The key to check.
+
+   :returns: True if the key is a sub-database of the parent database.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

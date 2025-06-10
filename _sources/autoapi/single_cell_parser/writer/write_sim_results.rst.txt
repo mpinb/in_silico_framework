@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_sim_results`
+
+
+.. title:
+
+write_sim_results
+=================
+
+
+.. py:function:: single_cell_parser.writer.write_sim_results(fname, t, v)
+
+   Write out a voltage trace file.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **t** (*list*) -- The time points of the voltage trace.
+                * **v** (*list*) -- The voltage trace.
+
+   :returns: None. Writes out the voltage trace file to :paramref:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> t = [0.0, 0.1, 0.2]
+   >>> v = [-65.0, -64.9, -64.8]
+   >>> write\_sim\_results('voltage\_trace.dat', t, v)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.AHP_depth_abs_check_2AP`
+
+
+.. title:
+
+AHP_depth_abs_check_2AP
+=======================
+
+
+.. py:function:: biophysics_fitting.ephys.AHP_depth_abs_check_2AP(t, v, thresh=None)
+
+   Determines whether there are at least two action potentials (APs) in the voltage trace `v`
+   within the time range `t` that cross the threshold `thresh`.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- The time range of the voltage trace.
+                * **v** (*numpy.ndarray*) -- The voltage trace.
+                * **thresh** (*float, optional*) -- The threshold voltage for detecting APs. Defaults to None.
+
+   :returns: True if there are at least two APs in the voltage trace `v` within the time range `t`
+             that cross the threshold `thresh`, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

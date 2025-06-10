@@ -1,0 +1,94 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SynapseMapper
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   create_synapses <SynapseMapper.create_synapses>
+   _create_voxel_edge_map <SynapseMapper._create_voxel_edge_map>
+   _intersect_bboxes <SynapseMapper._intersect_bboxes>
+   _pt_in_box <SynapseMapper._pt_in_box>
+   _compute_path_length <SynapseMapper._compute_path_length>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper(cell=None, synDist=None, isDensity=True)
+   
+   Assign synapses to neuron morphology from density meshes.
+
+   Poisson sample the synapse distribution mesh and assign them to a random
+   point on the morphology that lies within the same voxel.
+
+   :Parameters: * **cell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- Neuron morphology to map synapses onto.
+                * **synDist** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- Synapse distribution mesh.
+                * **isDensity** (*bool*) -- If True, synapse distribution is interpreted as an average density.
+                  If False, synapse distribution is interpreted as an actual realization, and values are taken as is.
+
+   :Attributes:
+
+   .. attribute:: cell
+
+      The postsynaptic neuron.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+   .. attribute:: synDist
+
+      Synapse distribution mesh. Can be either a density or a realization
+      (i.e. whole number values per voxel).
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
+
+   .. attribute:: isDensity
+
+      Set to True if synapse distribution is interpreted as an average density.
+      Set to False if synapse distribution is interpreted as an actual realization,
+      and values are whole numbers.
+
+      :type: bool
+
+   .. attribute:: voxelEdgeMap
+
+      Dictionary mapping synapse distribution mesh coordinates on list with
+      pairs of indices that correspond to the edge and edgePt ID of all morphology
+      points inside that voxel.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`create_synapses <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses>`\ (preType)
+        - Creates instantiation of synapses on cell from synapse distribution.
+      * - :py:obj:`_create_voxel_edge_map <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._create_voxel_edge_map>`\ ()
+        - Fills :paramref:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
+      * - :py:obj:`_intersect_bboxes <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._intersect_bboxes>`\ (bbox1, bbox2)
+        - Check if two bounding boxes overlap
+      * - :py:obj:`_pt_in_box <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._pt_in_box>`\ (pt, box)
+        - Check if a point is inside a bounding box.
+      * - :py:obj:`_compute_path_length <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length>`\ (sec, x)
+        - Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
+

@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.deregister_db`
+
+
+.. title:
+
+deregister_db
+=============
+
+
+.. py:function:: data_base.data_base_register.deregister_db(unique_id)
+
+   Deregister a database.
+
+   Removes this :py:class:`DataBase` from the registry.
+
+   :Parameters: **unique\_id** (*str*) -- The unique ID of the database.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

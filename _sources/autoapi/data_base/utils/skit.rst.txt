@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.skit`
+
+
+.. title:
+
+skit
+====
+
+
+.. py:function:: data_base.utils.skit(*funcs, **kwargs)
+
+   Splits kwargs up to supply different functions with the right subset.
+
+   :Parameters: * **\*funcs** (*function*) -- functions to be supplied with the right subset of kwargs
+                * **\*\*kwargs** -- keyword arguments to be split up
+
+   .. seealso:: Adapted from http://stackoverflow.com/a/23430335/5082048
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

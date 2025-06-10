@@ -1,0 +1,26 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.exceptions` ❭ :mod:`~data_base.exceptions.ISFDataBaseException`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ISFDataBaseException
+====================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.exceptions.ISFDataBaseException
+   
+   Typical isf_data_base errors
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
