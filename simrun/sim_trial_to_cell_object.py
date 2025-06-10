@@ -18,11 +18,11 @@
 """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
 This module provides a function to rebuild a network-embedded neuron model from 
-a :py:class:`~data_base.data_base.DataBase`. it also allows to change the :ref:`cell_parameters_format`, 
+a :py:class:`~data_base.DataBase`. it also allows to change the :ref:`cell_parameters_format`, 
 :ref:`network_parameters_format`, and :ref:`syn_activation_format` data before resimulating the trial.
 
 See also:
-    To rebuild and re-simulate a :py:mod:`simrun` simulation from parameter files instead of a :py:class:`~data_base.data_base.DataBase`, 
+    To rebuild and re-simulate a :py:mod:`simrun` simulation from parameter files instead of a :py:class:`~data_base.DataBase`, 
     please refer to :py:mod:`~simrun.parameters_to_cell` instead.
 """
 

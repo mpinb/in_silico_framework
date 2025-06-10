@@ -1,3 +1,6 @@
+from sphinx.addnodes import pending_xref
+from docutils.nodes import Text
+from config import get_default_db
 import logging
 isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild("DOCS")
@@ -8,6 +11,14 @@ DOCS_STATS = {
     for what in ['method', 'function', 'class', 'module', 'package', 'data', 'attribute', 'property', 'exception']
 }
 LAST_PARENT_TO_SKIP = "NO_PARENT"
+DEFAULT_DB = get_default_db()
+DEFAULT_DB_FQN = '.'.join((DEFAULT_DB.__module__, DEFAULT_DB.__name__))  # e.g. 'data_base.isf_data_base.ISFDataBase'
+
+# alias ref is mapped to a pair (real ref, text to render)
+reftarget_aliases = {
+    'data_base.DataBase': (DEFAULT_DB_FQN, 'DataBase'),
+}
+
 
 def count_documented_members(app, what, name, obj, skip, options):
     """Count the number of documented members.
@@ -80,3 +91,16 @@ def find_first_match(lines, substring):
         if substring in line:
             return i
     return -1
+
+def redirect_internal_aliases(app, doctree):
+    pending_xrefs = doctree.traverse(condition=pending_xref)
+    for node in pending_xrefs:
+        alias = node.get('reftarget', None)
+        if alias is not None and alias in reftarget_aliases:
+            redirected_ref, text_to_render = reftarget_aliases[alias]
+            # resolve the ref
+            node['reftarget'] = redirected_ref
+
+            # rewrite the rendered text:
+            text_node = next(iter(node.traverse(lambda n: n.tagname == '#text')))
+            text_node.parent.replace(text_node, Text(text_to_render, ''))

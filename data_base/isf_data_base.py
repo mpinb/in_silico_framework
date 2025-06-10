@@ -14,28 +14,31 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Database base for storing and retrieving data in a robust and efficient way.
+"""Database for robust and efficient data storage.
 
 The main purpose of this module is to provide the :py:class:`~data_base.isf_data_base.ISFDataBase` class.
 """
 
 
-import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno, six
+import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno
 from pathlib import Path
 from data_base import _module_versions, data_base_register
 import data_base.exceptions as db_exceptions
 from data_base.utils import colorize_str
+from config import get_default_db_dumper
+DEFAULT_DUMPER = get_default_db_dumper()
 VC = _module_versions.version_cached
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
-__author__ = ['Arco Bast']
+__author__ = ['Arco Bast', 'Bjorge Meulemeester']
 __date__ = '2023-10-01'
+
 
 class LoaderWrapper:
     '''This is a pointer to data, which is stored elsewhere.
     
-    It is used by ModelDataBase, if data is stored in a subfolder of the 
+    It is used by ISFDataBase, if data is stored in a subfolder of the 
     data_base.basedir folder. It is not used, if the data is stored directly
     in the sqlite database.
     
@@ -60,6 +63,7 @@ class LoaderWrapper:
     '''
     def __init__(self, relpath):
         self.relpath = relpath
+
 
 class MetadataAccessor:
     """Access the metadata of some database key.
@@ -113,6 +117,7 @@ class MetadataAccessor:
         """Return the keys of the :paramref:`db`"""
         return [ k for k in self.db.keys() if Path.exists(self.db._basedir/k/"Loader.[json][pickle]") ]
         
+
 def _check_working_dir_clean_for_build(working_dir):
     '''Check if a directory is suitable to build a new database.
     
@@ -138,6 +143,7 @@ def _check_working_dir_clean_for_build(working_dir):
             raise db_exceptions.DataBaseException(
                 "Can't build database: " \
                 + "Cannot create the directories specified in %s" % working_dir)
+       
             
 def make_all_str(dict_):
     """Convert all items in a (nested) dictionary to string.
@@ -161,6 +167,7 @@ def make_all_str(dict_):
             out[k] = str(v)
     return out
 
+
 def get_dumper_from_folder(folder, return_ = 'module'):
     """Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
 
@@ -177,6 +184,7 @@ def get_dumper_from_folder(folder, return_ = 'module'):
         return dumper_string
     elif return_ == 'module':
         return importlib.import_module("data_base.IO.LoaderDumper.{}".format(dumper_string))
+
 
 class ISFDataBase:
     '''Main database class.
@@ -253,18 +261,17 @@ class ISFDataBase:
         """
         self.basedir = os.path.abspath(str(basedir))  # for public access: str. This is not a Path object for backwards compatibility.
         self._basedir = Path(self.basedir)  # for internal operations
+        self._check_is_legacy_mdb()
+
+        self.parent_db = None
         self.readonly = readonly
         self.nocreate = nocreate
-        self.parent_db = None
-        self._suppress_errors = suppress_errors
 
-        # database state
+        self._suppress_errors = suppress_errors
         self._db_state_fn = "db_state.json"
         self._unique_id = None
         self._registeredDumpers = []
         self._registered_to_path = None
-        self._is_legacy = False  # if loading in legacy ModelDataBase
-
         self._forbidden_keys = [
             "dbcore.pickle", "metadata.db", "sqlitedict.db", "Loader.pickle",  # for backwards compatibility
             "metadata.db.lock", "sqlitedict.db.lock",  # for backwards compatibility
@@ -292,6 +299,12 @@ class ISFDataBase:
                 self.save_db_state()
             self._infer_missing_metadata()  # In case some is missing
 
+    def _check_is_legacy_mdb(self):
+        if Path.exists(self._basedir/'dbcore.pickle'):
+            raise db_exceptions.DataBaseException(
+                "You are reading a legacy ModelDataBase using ISFDataBase. Please use the wrapper class data_base.Database, which automatically returns the correct database class."
+            )
+        
     def _infer_missing_metadata(self):
         '''Checks whether metadata is missing, and tries to estimate it.
         
@@ -327,8 +340,7 @@ class ISFDataBase:
         Raises:
             DataBaseException: If the database could not be registered.
         """
-        logger.info('Registering database with unique id {} to the absolute path {}'.format(
-            self._unique_id, self._basedir))
+        logger.info('Registering database with unique id {} to the absolute path {}'.format(self._unique_id, self._basedir))
         try:
             data_base_register.register_db(self._unique_id, self._basedir)
             self._registered_to_path = self._basedir
@@ -362,16 +374,7 @@ class ISFDataBase:
         Returns:
             bool: True if the database is initialized, False otherwise.
         """
-        if Path.exists(self._basedir/'dbcore.pickle'):
-            self._is_legacy = True
         if Path.exists(self._basedir/'db_state.json'):
-            # ISFDataBase (potentially converted legacy ModelDataBase)
-            return True
-        elif Path.exists(self._basedir/'dbcore.pickle'):
-            # Just a legacy. No .json file.
-            logger.error("You are reading a legacy ModelDataBase using ISFDataBase. Please use the wrapper class data_base.Database, which automatically returns the correct database class.")
-            raise
-            self._db_state_fn = 'dbcore.pickle'
             return True
         else:
             return False
@@ -409,12 +412,18 @@ class ISFDataBase:
         
         Returns:
             pathlib.Path: The file path corresponding to the key.    
+
+        Example::
+        
+            >>> key = ('my', 'nested', 'key')
+            >>> db._convert_key_to_path(key)
+            PosixPath('/path/to/database/db/my/db/nested/db/key')
         """
         self._check_key_format(key)
         if isinstance(key, str):
             return self._basedir/key
         elif isinstance(key, tuple):
-            sub_db_path = ['db' if not self._is_legacy else 'mdb'] * (len(key) * 2 - 1)
+            sub_db_path = ['db'] * (len(key) * 2 - 1)
             sub_db_path[0::2] = key
             return Path(self._basedir, *sub_db_path)
         else:
@@ -622,7 +631,7 @@ class ISFDataBase:
                     if dumper_string == 'self':
                         dumper_string = DEFAULT_DUMPER
                     else:
-                        dumper = importlib.import_module(dumper_string)
+                        dumper = importlib.import_module(resolve_loader_dumper_path(dumper_string))
                     self._registeredDumpers.append(dumper)
             else:
                 setattr(self, name, state[name])
@@ -745,9 +754,6 @@ class ISFDataBase:
         Returns:
             object: The object saved under ``db[key]``
         """
-        # this looks into the metadata.json, gets the name of the dumper, and loads this module form IO.LoaderDumper
-        if self._is_legacy:
-            key = self._find_legacy_key(key)
         key = self._convert_key_to_path(key)
         if not Path.exists(key):
             raise KeyError("Key {} not found in keys of db. Keys found: {}".format(key.name, self.keys()))
@@ -1102,23 +1108,7 @@ class ISFDataBase:
         return threading.Thread(target = lambda : delete_and_deregister_once_deleted(dir_to_data_rename, self._unique_id)).start()
 
 
-def get_isfdb_by_unique_id(unique_id):
-    """Get an :py:class:`~data_base.isf_data_base.ISFDataBase` object by its unique ID.
-    
-    Args:
-        unique_id (str): The unique ID of the database.
-        
-    Returns:
-        :py:class:`~data_base.isf-data_base.ISFDataBase`: The database with the unique ID.
-    """
-    db_path = data_base_register._get_db_register().registry[unique_id]
-    db = ISFDataBase(db_path, nocreate=True)
-    assert db.get_id() == unique_id
-    return db
-
-
 from .IO import LoaderDumper
-from .IO.LoaderDumper import to_cloudpickle, just_create_folder, just_create_isf_db, shared_numpy_store, get_dumper_string_by_savedir, get_dumper_string_by_dumper_module
+from .IO.LoaderDumper import just_create_folder, just_create_isf_db, shared_numpy_store, get_dumper_string_by_savedir, get_dumper_string_by_dumper_module, resolve_loader_dumper_path
 from data_base.utils import calc_recursive_filetree, rename_for_deletion, delete_in_background, is_db, bcolors
 from compatibility import pandas_unpickle_fun
-DEFAULT_DUMPER = to_cloudpickle

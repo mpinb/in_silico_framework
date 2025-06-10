@@ -16,7 +16,7 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 """Read and write an object to the cloudpickle format.
 
-This is the default dumper for :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects,
+This is the default dumper for :py:class:`~data_base.DataBase` objects,
 since they can save basically any Python object.
 """
 

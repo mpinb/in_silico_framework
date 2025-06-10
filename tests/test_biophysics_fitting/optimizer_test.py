@@ -11,7 +11,7 @@ from biophysics_fitting import L5tt_parameter_setup
 from biophysics_fitting.hay import default_setup as hay_default_setup
 from biophysics_fitting.optimizer import get_max_generation, start_run
 from data_base import utils
-from data_base.data_base import DataBase
+from data_base import DataBase
 from data_base.IO.LoaderDumper import pandas_to_pickle, to_cloudpickle
 
 from .context import DATA_DIR

@@ -19,8 +19,8 @@ from docs.utils.sphinx_hooks import (
     count_documented_members,
     find_first_match,
     log_documented_members,
+    redirect_internal_aliases
 )
-import data_base  # trigger db compatibility
 
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
@@ -33,15 +33,6 @@ with open(pyproject_path, "r") as f:
 project = "ISF"
 copyright = "2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
 author = "Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio"
-
-
-
-# copy over tutorials and convert links to python files to sphinx documentation directives
-copy_and_parse_notebooks_to_docs(
-    source_dir=os.path.join(project_root, "getting_started", "tutorials"),
-    dest_dir=os.path.join(project_root, "docs", "tutorials"),
-    api_extension="autoapi",  # change this if using autosummary instead of autoapi, it needs to find target dir of .rst files.
-)
 
 
 # -- General configuration ------------------------------------------------
@@ -88,6 +79,7 @@ def autoapi_prepare_jinja_env(jinja_env):
 
 def setup(app):
     # skip members with :skip-doc: tag in their docstrings
+    app.connect('doctree-read', redirect_internal_aliases)
     app.connect("autoapi-skip-member", skip_member)
     app.connect("autoapi-skip-member", count_documented_members)
     app.connect("env-updated", log_documented_members)
@@ -95,6 +87,13 @@ def setup(app):
     # add custom css and js. fpaths relative to _satic/
     app.add_css_file('css/custom.css')
     app.add_js_file('js/video.js')
+
+    # copy over tutorials and convert links to python files to sphinx documentation directives
+    copy_and_parse_notebooks_to_docs(
+    source_dir=os.path.join(project_root, "getting_started", "tutorials"),
+    dest_dir=os.path.join(project_root, "docs", "tutorials"),
+    api_extension="autoapi",  # change this if using autosummary instead of autoapi, it needs to find target dir of .rst files.
+    )
 
 
 # toc_object_entries_show_parents = "hide"  # short toc entries

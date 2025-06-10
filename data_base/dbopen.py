@@ -25,7 +25,8 @@ However, for development and testing purposes, it may be of use to explicitly op
 
 from __future__ import absolute_import
 import os
-from data_base.data_base import DataBase, get_db_by_unique_id, is_data_base
+from data_base import DataBase
+from data_base import get_db_by_unique_id, is_data_base
 from data_base.exceptions import DataBaseException
 import cloudpickle
 from six.moves import cPickle
@@ -81,7 +82,7 @@ def resolve_reldb_path(path, db_basedir=None):
         the parent database.
     Args:
         path (str): The relative path of the form ``reldb://...``.
-        db (:py:class:`~data_base.data_base.DataBase`): The database.
+        db (:py:class:`~data_base.DataBase`): The database.
         
     Returns:
         str: The resolved path.
@@ -112,7 +113,7 @@ def create_reldb_path(path):
     
     Args:
         path (str): The absolute path.
-        db (:py:class:`~data_base.data_base.DataBase`): The database.
+        db (:py:class:`~data_base.DataBase`): The database.
         
     Returns:
         str: The relative path of the form ``reldb://...``.
