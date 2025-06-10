@@ -29,11 +29,15 @@ Tutorials on ISF's most important workflows are available [online](https://mpinb
 Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/rst_assets/installation.html), but are also repeated below.
 
 ISF is available for Linux, Windows and macOS.
-
-For installation and environment management, ISF uses [pixi](https://pixi.sh/latest/). You can install pixi by running:
+For installation and environment management, ISF uses [pixi](https://pixi.sh/latest/). 
+You can install pixi on Linux and macOS by running:
 
 ```bash
 curl -fsSL https://pixi.sh/latest | sh
+```
+and on Windows:
+```pwsh
+powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
 ```
 
 To install ISF with pixi, simply:
