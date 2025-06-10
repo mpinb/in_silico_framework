@@ -1,6 +1,6 @@
 {
     "DEFAULT_DUMPER": {
-        "FQN": "data_base.IO.LoaderDumper.to_cloudpickle",
+        "base_name": "to_cloudpickle",
         "description": "Default dumper for saving data to disk. This dumper will be used when the `dumper` kwarg is undefined."
     },
     "DEFAULT_DATA_BASE": {

@@ -81,6 +81,10 @@ def get_default_db_dumper():
         str: The default database dumper.
     """
     db_settings = _read_db_settings()
-    dumper_fqn = db_settings.get('DEFAULT_DUMPER')['FQN']
-    dumper = importlib.import_module(dumper_fqn)
+    dumper_basename = db_settings.get('DEFAULT_DUMPER')['base_name']
+    dumper_fqn = "data_base.IO.LoaderDumper." + dumper_basename
+    try:
+        dumper = importlib.import_module(dumper_fqn)
+    except ImportError as e:
+        raise ImportError(f"Could not import dumper '{dumper_fqn}'. Make sure it is installed and available in the Python path.") from e
     return dumper
