@@ -175,8 +175,8 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
     This is useful for debugging and for analyzing the optimization results.
     
     Args:
-        db_setup (:py:class:`~data_base.data_base.DataBase`): The database containing the setup of the optimization.
-        db_run (:py:class:`~data_base.data_base.DataBase`): The database for the optimization run containing sub-databases.
+        db_setup (:py:class:`~data_base.DataBase): Database containing the setup of the optimization.
+        db_run (:py:class:`~data_base.DataBase`): The database for the optimization run containing sub-databases.
         c (:py:class:`~dask.distributed.Client`): The distributed client.
         satisfactory_boundary_dict (dict | None): A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
         n_reschedule_on_runtime_error (int): The number of times the optimization is rescheduled if a runtime error occurs.

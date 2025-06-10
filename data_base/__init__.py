@@ -94,13 +94,13 @@ def _is_isf_data_base(path):
 
 def is_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.data_base.DataBase`.
+    Checks if a given path contains a :py:class:`~data_base.DataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.data_base.DataBase`.
+        bool: True if the path contains a :py:class:`~data_base.DataBase`.
     """
     return _is_legacy_model_data_base(path) or _is_isf_data_base(path)
 
@@ -169,7 +169,7 @@ def get_db_by_unique_id(unique_id):
         unique_id (str): The data base's unique identifier
         
     Returns:
-        :py:class:`data_base.data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+        :py:class:`data_base.DataBase`: The database associated with the :paramref:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
     db = DataBase(db_path, nocreate=True)
