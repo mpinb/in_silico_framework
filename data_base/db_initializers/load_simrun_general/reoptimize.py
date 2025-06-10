@@ -106,7 +106,7 @@ def reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warn
     It recurses into subdatabases, and re-optimizes them as well.
     
     Args:
-        db (:py:mod:`~data_base.data_base.isf_data_base.ISFDataBase`): 
+        db (:py:mod:`~data_base.data_base.DataBase`): 
             The database to re-optimize.
         client (dask.distributed.Client):
             The dask client to use for re-optimizing the database.

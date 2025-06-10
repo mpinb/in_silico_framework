@@ -52,7 +52,7 @@ def get_parameterfiles_df_with_confile_and_neuron_param_path(db):
     """Parse the parameterfiles database and add the ``confile`` and ``neuron_param_dbpath`` columns.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database object.
+        db (:py:class:`~data_base.DataBase`): The database object.
         
     Returns:
         :py:class:`pandas.DataFrame`: The parameterfiles dataframe with the additional columns ``confile`` and ``neuron_param_db``
@@ -93,7 +93,7 @@ def get_PSP_determinants_from_db(db):
     network embeddings and neuron models present in the simrun-initialized database.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): 
+        db (:py:class:`~data_base.DataBase`): 
             The simrun-initialized database object.
             
     Returns:

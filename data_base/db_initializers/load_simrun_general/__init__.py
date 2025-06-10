@@ -392,7 +392,7 @@ def load_initialized_cell_and_evokedNW_from_db(
     These can then be used to inspect the parameters for each, or to re-run simulations.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The database containing the parsed simulation results.
         sti (str):
             For which simulation trial index to load the parameter files.

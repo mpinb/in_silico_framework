@@ -28,7 +28,7 @@ Newly created data_bases are automatically added to the registry. Accessing some
 3. Someone else has registered the database in a registry that you have access to. In this case, you can use :py:meth:`assimilate_remote_register`.
 
 See also:
-    :py:meth:`~data_base.isf_data_base.isf_data_base.ISFDataBase.register_this_database`
+    :py:meth:`~data_base.DataBase.register_this_database`
 """
 
 from __future__ import absolute_import

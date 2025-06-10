@@ -166,7 +166,7 @@ def get_db_loader_dict(db, descriptor=None, PSPClass_name=None):
     """Get the loader functions for the PSPs from the database.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The simrun-initialized database object.
+        db (:py:class:`~data_base.DataBase`): The simrun-initialized database object.
         descriptor (str): The descriptor of the PSPs.
         PSPClass_name (str): The name of the PSP class.
         
