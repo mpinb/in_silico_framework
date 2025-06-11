@@ -53,15 +53,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DASK_CONFIG: tests/dask_config.yml
 
-      - name: Test ModelDataBase backwards compatibility
-        run: |
-          export ISF_USE_MDB=1
-          pixi r pytest -n 5 -rsx -vv --color=yes --durations=0  tests/test_data_base/
-          unset ISF_USE_MDB
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DASK_CONFIG: tests/dask_config.yml
-
       - name: Save test logs
         uses: actions/upload-artifact@v4
         if: ${{ always() }} 

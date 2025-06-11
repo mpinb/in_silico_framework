@@ -65,16 +65,6 @@ jobs:
           echo ------------ Running tests -------------
           pixi r pytest -n 4 --dist worksteal -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
 
-      - name: Test ModelDataBase backwards compatibility
-        shell: cmd
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEURONHOME: C:\nrn
-          ISF_USE_MDB: 1
-          DASK_CONFIG: tests/dask_config.yml
-        run: |
-          pixi r pytest -n 4 -rsx -vv --color=yes --durations=0  tests\test_data_base
-
       - name: Save test logs
         uses: actions/upload-artifact@v4
         if: ${{ always() }}

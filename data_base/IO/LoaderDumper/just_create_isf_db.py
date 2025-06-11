@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Create and load :py:class:`~data_base.isf_data_base.isf-data_base.ISFDataBase` objects in a database.
+"""Create and load :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects in a database.
 """
 
 import os
@@ -57,4 +57,4 @@ def dump(obj, savedir):
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:
         json.dump({'Loader': __name__}, f)
 
-from data_base.isf_data_base.isf_data_base import ISFDataBase
+from data_base.isf_data_base import ISFDataBase

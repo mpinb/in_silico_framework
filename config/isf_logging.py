@@ -134,27 +134,38 @@ def add_logging_level(levelName, levelNum, methodName=None):
     setattr(logging.getLoggerClass(), methodName, logForLevel)
     setattr(logging, methodName, logToRoot)
 
-# All loggers will inherit the root logger's level and handlers
-root_logger = logging.getLogger()
-isf_logger = root_logger.getChild("ISF")
 
-# Redirect warnings to the logging system. This will format them accordingly.
-logging.captureWarnings(True)
-warnings.showwarning = lambda message, category, filename, lineno, f=None, line=None: \
-    isf_logger.getChild(filename).warning(message)
+# Lazy logger setup
+def get_isf_logger():
+    """Lazy initialization of the ISF logger."""
+    if not hasattr(get_isf_logger, "_logger"):
+        # Perform the setup only once
+        root_logger = logging.getLogger()
+        isf_logger = root_logger.getChild("ISF")
 
-# Stream handler: where to redirect the logs to
-logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
-logger_stream_handler.name = "ISF_logger_stream_handler"
-logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s"))
-root_logger.addHandler(logger_stream_handler)
+        # Redirect warnings to the logging system
+        logging.captureWarnings(True)
+        warnings.showwarning = lambda message, category, filename, lineno, f=None, line=None: \
+            isf_logger.getChild(filename).warning(message)
 
-# Filters
-logger_stream_handler.addFilter(LastPartFilter())
+        # Stream handler: where to redirect the logs to
+        logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
+        logger_stream_handler.name = "ISF_logger_stream_handler"
+        logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s"))
+        root_logger.addHandler(logger_stream_handler)
 
-# Add custom logging levels
-add_logging_level("ATTENTION", logging.WARNING - 5)
+        # Filters
+        logger_stream_handler.addFilter(LastPartFilter())
 
-# initialize with INFO level
-isf_logger.setLevel(logging.INFO)
-logger = isf_logger
+        # Add custom logging levels
+        add_logging_level("ATTENTION", logging.WARNING - 5)
+
+        # Initialize with INFO level
+        isf_logger.setLevel(logging.INFO)
+
+        # Store the logger in a function attribute for reuse
+        get_isf_logger._logger = isf_logger
+
+    return get_isf_logger._logger
+
+logger = get_isf_logger()

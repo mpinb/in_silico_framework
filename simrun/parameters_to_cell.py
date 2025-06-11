@@ -22,7 +22,7 @@ This module provides a function to rebuild a network-embedded neuron model from
 The function also reconnects synapses from a :ref:`syn_file_format` file and simulate the network.
 
 See also:
-    To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.data_base.DataBase` instead of parameter files, 
+    To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.DataBase` instead of parameter files, 
     please refer to :py:mod:`~simrun.sim_trial_to_cell_object` instead
 """
 

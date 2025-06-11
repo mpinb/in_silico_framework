@@ -196,7 +196,7 @@ def load_dendritic_voltage_traces_helper(db, suffix, divisions=None, repartition
     using :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The target database that should contain the parsed simulation results.
         suffix (str):
             The suffix of the dendritic voltage trace files.
@@ -289,7 +289,7 @@ def load_dendritic_voltage_traces(db, suffix_key_dict, repartition=None):
     :py:meth:`~data_base.db_initializers.load_simrun_general.load_dendritic_voltage_traces_helper`.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The target database that should contain the parsed simulation results.
         suffix_key_dict (dict):
             Dictionary containing the suffixes of the dendritic voltage trace files.

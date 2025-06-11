@@ -2,8 +2,8 @@ from data_base.IO.roberts_formats import read_pandas_synapse_activation_from_rob
 from tests.test_data_base import TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER
 from pandas.util.testing import assert_frame_equal
 import os
-from config import isf_is_using_mdb
-if isf_is_using_mdb():
+from config import isf_is_using_legacy_mdb
+if isf_is_using_legacy_mdb():
     sim_triail = "sim_trail_index"
 else:
     sim_triail = "sim_trial_index"

@@ -59,20 +59,16 @@ After initialization, you can access the data from the data_base in the followin
     <spike times dataframe>
     
 If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
-If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing relative links to the
-original ``.csv`` files. In essence, the dask dataframes contain the insturctions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis. It is not intended and strongly discouraged for long term storage. 
+If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
+This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
 Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
 :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
 keys.
 
-Attention:
-    Note that the database contains symlinks to the original simulation files. This is useful for fast intermediate analysis, but
-    for long-term storage, it happens that the original files are deleted, moved, or archived in favor of the optimized format. 
-    In this case, the symlinks will point to non-existent files.
+See also:
+    :py:meth:`simrun.run_new_simulations.run_new_simulations` for more information on the raw output format of :py:mod:`simrun`.
 
 See also:
-    :py:meth:`simrun.run_new_simulations._evoked_activity` for more information on the raw output format of :py:mod:`simrun`.
     :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
 """
 
@@ -83,7 +79,7 @@ import dask.dataframe as dd
 
 import single_cell_parser as scp
 from data_base.analyze.spike_detection import spike_detection
-from data_base.data_base import is_data_base
+from data_base import is_data_base
 from data_base.IO.LoaderDumper import get_dumper_string_by_dumper_module
 from data_base.utils import mkdtemp
 from .config import OPTIMIZED_PANDAS_DUMPER
@@ -392,7 +388,7 @@ def load_initialized_cell_and_evokedNW_from_db(
     These can then be used to inspect the parameters for each, or to re-run simulations.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The database containing the parsed simulation results.
         sti (str):
             For which simulation trial index to load the parameter files.
@@ -411,7 +407,7 @@ def load_initialized_cell_and_evokedNW_from_db(
         tuple: The re-initialized :py:class:`single_cell_parser.cell.Cell` and the :py:class:`single_cell_parser.NetworkMapper` objects.
 
     """
-    from data_base.isf_data_base.IO.roberts_formats import (
+    from data_base.IO.roberts_formats import (
         write_pandas_synapse_activation_to_roberts_format,
     )
 
