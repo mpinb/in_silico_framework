@@ -31,7 +31,7 @@ Example:
 
     ``Loader`` contains information on how to load the data. It contains which module to use (assuming it contains a ``Loader`` class)::
     
-        {"Loader": "data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet"}
+        {"Loader": "data_base.IO.LoaderDumper.dask_to_parquet"}
         
     ``metadata`` contains the time, commit hash, module versions, creation date, file format, and whether or not the data was saved with uncommitted code (``dirty``).
     If the data was created within a Jupyter session, it also contains the code history that was used to produce this data::
@@ -55,5 +55,123 @@ Example:
             "error": null
         }
 """
-# Bring wrapper class to the front
-from .data_base import DataBase
+import os
+from . import data_base_register
+from config import get_default_db
+
+DataBase = get_default_db()
+
+
+def _is_legacy_model_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+
+    :skip-doc:
+    """
+    return os.path.exists(os.path.join(path, 'sqlitedict.db'))
+
+
+def _is_isf_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+
+    :skip-doc:
+    """
+    return os.path.exists(os.path.join(path, 'db_state.json'))
+
+
+def is_data_base(path):
+    """
+    Checks if a given path contains a :py:class:`~data_base.DataBase`.
+    
+    Args:
+        path (str): The path to check.
+        
+    Returns:
+        bool: True if the path contains a :py:class:`~data_base.DataBase`.
+    """
+    return _is_legacy_model_data_base(path) or _is_isf_data_base(path)
+
+
+def _is_sub_isf_data_base(parent_db, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+
+    :skip-doc:
+    """
+    sub_db_key_path = parent_db._convert_key_to_path(key)
+    sub_db_path = os.path.join(sub_db_key_path, "db")
+    return os.path.exists(sub_db_path) and is_data_base(sub_db_path)
+
+    
+def _is_sub_model_data_base(parent_mdb, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+
+    :skip-doc:
+    """
+    sub_db_key_path = parent_mdb._get_path(key)
+    sub_mdb_path = os.path.join(sub_db_key_path, "mdb")
+    return os.path.exists(sub_mdb_path) and is_data_base(sub_mdb_path)
+
+
+def is_sub_data_base(parent_db, key):
+    """
+    Check if a given key is a sub-database of the parent database.
+    
+    Args:
+        parent_db (DataBase): The parent database.
+        key (str): The key to check.
+    
+    Returns:
+        bool: True if the key is a sub-database of the parent database.
+    """
+    if _is_legacy_model_data_base(parent_db.basedir):
+        return _is_sub_model_data_base(parent_db, key)
+    elif _is_isf_data_base(parent_db.basedir):
+        return _is_sub_isf_data_base(parent_db, key)
+    else:
+        raise ValueError("Unknown database type. Cannot determine if the key is a sub-database.")
+
+
+def get_db_by_unique_id(unique_id):
+    """Get a DataBase by its unique ID, as registered in the data base register.
+    
+    Data base registers should be located at data_base/.data_base_register.db
+    
+    Args:
+        unique_id (str): The data base's unique identifier
+        
+    Returns:
+        :py:class:`data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+    """
+    db_path = data_base_register._get_db_register().registry[unique_id]
+    db = DataBase(db_path, nocreate=True)
+    assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
+    return db

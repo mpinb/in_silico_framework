@@ -65,7 +65,10 @@ def write_video_from_images(
     Returns:
         None. Writes the video to the specified path.
     '''
-    subprocess.call(["module load", "ffmpeg"], shell=True)
+    try:
+        subprocess.check_output(["module load", "ffmpeg"])
+    except Exception as e:
+        raise EnvironmentError("Could not load ffmpeg") from e
 
     if not out_path.endswith('.mp4'):
         raise ValueError('output path must be the path to an mp4 video!')
@@ -239,8 +242,7 @@ def display_animation_from_images(
         the are resolved in the browser and not by python
     '''
     if animID is None:
-        animID = np.random.randint(
-            10000000000000)  # needs to be unique within one ipynb
+        animID = np.random.randint(1_000_000_000)  # needs to be unique within one ipynb
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
     template = env.get_template('animation_template.html')

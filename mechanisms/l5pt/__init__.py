@@ -19,59 +19,144 @@
 This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
 In addition, it contains network connectivity parameters that define synaptic connections.
 
+Importing this module on UNIX systems registers the mechanisms in NEURON namespace. 
+This only works if they are compiled, which should have happened upon configuring ISF.
+If this is not the case, you can:
+
+```python
+>>> import mechanisms.l5pt
+>>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+False
+>>> mechanisms.l5pt.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+>>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+True
+```
+
+See also:
+    :py:mod:`config.isf_configure`
 """
 
-import os, platform
-from config.isf_logging import logger, stream_to_logger
-
-try:
-    import tables
-except ImportError:
-    pass
-
-import neuron
+import os, platform, six, neuron, glob, shutil, subprocess, sys, threading
+import logging
+logger = logging.getLogger("ISF").getChild(__name__) 
+from config.isf_logging import stream_to_logger
+try: import tables
+except ImportError: pass
 
 parent = os.path.abspath(os.path.dirname(__file__))
-
+channels_path = os.path.join(parent, 'channels_py2' if six.PY2 else 'channels_py3')
+netcon_path = os.path.join(parent, 'netcon_py2' if six.PY2 else 'netcon_py3')
 arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
+mech_lock = threading.Lock()
 
-import six
-if six.PY2:
-    channels = 'channels_py2'
-    netcon = 'netcon_py2'
-else:
-    channels = 'channels_py3'
-    netcon = 'netcon_py3'
-
-try:
-    assert any(
-        [os.path.exists(os.path.join(parent, channels, a, '.libs')) for a in arch])
-    assert any([os.path.exists(os.path.join(parent, netcon, a, '.libs')) for a in arch])
-
-except AssertionError:
-    logger.warning("Neuron mechanisms are not compiled.")
-    logger.warning("Trying to compile them. Only works, if nrnivmodl is in PATH")
-    os.system(
-        '(cd {path}; nrnivmodl)'.format(path=os.path.join(parent, channels)))
-    os.system(
-        '(cd {path}; nrnivmodl)'.format(path=os.path.join(parent, netcon)))
-
+def check_nrnivmodl_is_available():
+    """
+    Check if nrnivmodl is available in the PATH.
+    Cross-platform implementation that works on both Windows and Unix systems.
+    """
     try:
-        assert any(
-            [os.path.exists(os.path.join(parent, channels, a)) for a in arch])
-        assert any(
-            [os.path.exists(os.path.join(parent, netcon, a)) for a in arch])
-    except AssertionError:
-        logger.warning("Could not compile mechanisms. Please do it manually")
+        path = shutil.which('nrnivmodl')
+        if path:
+            logger.info(f"nrnivmodl found at: {path}")
+            return True
+        logger.error("nrnivmodl not found in PATH")
+        return False
+    except Exception as e:
+        logger.error(f"Error checking nrnivmodl availability: {str(e)}")
+        logger.error("nrnivmodl is not available in the PATH. Please add it to your PATH.")
         raise
 
-logger.info("Loading mechanisms:")
+def _check_if_mechanisms_are_compiled_at_path(path):
+    if os.name == 'nt':
+        return any(glob.glob(os.path.join(path, '*.dll')))
+    else:
+        arch = [platform.machine(), 'i686', 'x86_64', 'powerpc', 'umac']
+        return any([os.path.exists(os.path.join(path, a, '.libs')) for a in arch])
 
-try:
-    with stream_to_logger(logger=logger):
-        mechanisms_loaded = neuron.load_mechanisms(os.path.join(parent, channels))
-        netcon_loaded = neuron.load_mechanisms(os.path.join(parent, netcon))
-    assert mechanisms_loaded, "Couldn't load mechanisms."
-    assert netcon_loaded, "Couldn't load netcon"
-except Exception as e:
-     raise e
+def _compile_mechanisms_at_path(path):
+    """
+    Compile the mechanisms in the given path using nrnivmodl.
+    """
+    assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
+    nrnivmodl_path = shutil.which('nrnivmodl')
+    subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
+
+def are_compiled():
+    """
+    Check if all mechanisms are compiled.
+    """
+    if os.name == 'nt':
+        return all([any(glob.glob(os.path.join(path, '*.dll'))) for path in (channels_path, netcon_path)])
+    else:
+        return all([
+            _check_if_mechanisms_are_compiled_at_path(path) 
+            for path in (channels_path, netcon_path)
+            ])
+
+def are_loaded():
+    """
+    Check if all mechanisms are loaded into NEURON namespace.
+    """
+    return channels_path in neuron.nrn_dll_loaded and netcon_path in neuron.nrn_dll_loaded
+    # channels = _get_mechanism_names(channels_path)
+    # netcons = _get_mechanism_names(netcon_path)
+    # all_mechanisms = channels + netcons
+    # return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
+
+def compile_mechanisms(force_recompile=False):
+    """Compile the mechanisms for L5PTs.
+    
+    This function checks if the mechanisms are compiled at the specified paths, and (re)compiles them
+    if necessary using ``nrnivmodl``.
+    
+    See also:
+        :py:func:`check_nrnivmodl_is_available` to check if `nrnivmodl` is available in the ``PATH``, and
+        :py:func:`_compile_mechanisms_at_path` to compile the mechanisms in a given directory.
+        
+    Args:
+        force_recompile (bool): If True, forces recompilation of the mechanisms even if they are already compiled.
+            Defaults to False.
+            
+    Raises:
+        UserWarning: If the mechanisms needed to be compiled, but failed.
+    """
+    for path in (channels_path, netcon_path):
+        if not _check_if_mechanisms_are_compiled_at_path(path):
+            _compile_mechanisms_at_path(path)
+        elif force_recompile == True:
+            logger.warning(f"Mechanisms already compiled at {path}. 'force_recompile' is set to True. Recompiling...")
+            _compile_mechanisms_at_path(path)
+            if not _check_if_mechanisms_are_compiled_at_path(path):
+                raise UserWarning("Could not compile mechanisms. Please do it manually")
+        else:
+            logger.info(f"Mechanisms already compiled at {path} and 'force_recompile' is set to False. Skipping compilation.")
+
+def load():
+    """Load the mechanisms into NEURON namespace.
+    
+    Also implements a thread lock to avoid concurrent loading of shared objects or dynamically linked libraries.
+    This is especially important on Windows, since DLLs are sensitive to concurrent loading.
+    
+    Raises:
+        AssertionError: If the mechanisms could not be loaded.
+    """
+    try:
+        with mech_lock:  # Ensure thread safety when loading mechanisms
+            with stream_to_logger(logger=logger):
+                mechanisms_loaded = neuron.load_mechanisms(channels_path)
+                netcon_loaded = neuron.load_mechanisms(netcon_path)
+            assert mechanisms_loaded, "Couldn't load mechanisms."
+            assert netcon_loaded, "Couldn't load netcon"
+            logger.info("Loaded mechanisms in NEURON namespace.")
+    except Exception as e:
+        raise e
+
+# import trigger: emit warning if they are not compiled
+# auto-add them to NEURON namespace if they are compiled
+# This is similar to NEURON's autoload function, except that it's compatible with Windows and thread-safe.
+
+if are_compiled():
+    if not are_loaded():
+        load()
+else:
+    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile()` manually.")    

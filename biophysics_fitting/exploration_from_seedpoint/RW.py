@@ -36,7 +36,8 @@ import time
 import sys
 import math
 import glob
-from config.isf_logging import logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class RW:

@@ -1,9 +1,9 @@
-from data_base.data_base import DataBase
-from data_base.exceptions import DataBaseException, ModelDataBaseException
+from data_base import DataBase
+from data_base.exceptions import DataBaseException
 from data_base._version import get_versions
 from data_base.IO.LoaderDumper import to_pickle, get_dumper_string_by_dumper_module
 import pytest, os, shutil, tempfile,  subprocess
-from config import isf_is_using_mdb
+from config import isf_is_using_legacy_mdb
 
 parent = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -64,8 +64,7 @@ def test_metadata_update(empty_db):
     msg2 = "{} =/= {}".format(empty_db.metadata['test2']['version'],
                               get_versions()['version'])
     msg_git = "\nDid the commit turn dirty during testing?\n"
-    msg_git += subprocess.check_output(['git status'],
-                                       shell=True).decode('utf-8')
+    msg_git += subprocess.check_output(['git', 'status']).decode('utf-8')
     assert empty_db.metadata['test']['version'] == get_versions(
     )['version'], msg1 + msg_git
     assert empty_db.metadata['test2']['version'] == get_versions(
@@ -82,7 +81,7 @@ def test_metadata_update(empty_db):
         metadata_db_path = os.path.join(path)
         assert os.path.exists(metadata_db_path)
         os.remove(metadata_db_path)
-    if isf_is_using_mdb():
+    if isf_is_using_legacy_mdb():
         _remove_metadata(os.path.join(empty_db.basedir, "metadata.db"))
     else:
         _remove_metadata(os.path.join(empty_db.basedir, 'test', 'metadata.json'))
@@ -275,7 +274,7 @@ def test_check_if_key_exists_can_handle_str_and_tuple_keys(empty_db):
     assert empty_db.check_if_key_exists(('b', 'b'))
     assert not empty_db.check_if_key_exists(('a', 'b'))
 
-@pytest.mark.skipif(isf_is_using_mdb(), reason="ModelDataBase.check_if_key_exists cannot recurse into tuple keys by itself.")
+@pytest.mark.skipif(isf_is_using_legacy_mdb(), reason="ModelDataBase.check_if_key_exists cannot recurse into tuple keys by itself.")
 def test_check_if_nested_key_exists_can_handle_str(empty_db):
     empty_db['a'] = 1
     empty_db['b', 'b'] = 1

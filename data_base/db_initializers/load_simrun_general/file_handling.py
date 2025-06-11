@@ -3,7 +3,7 @@ import logging
 import os
 
 import dask
-import scandir
+from os import walk
 
 from data_base.IO.roberts_formats import _max_commas
 from data_base.utils import chunkIt
@@ -30,7 +30,7 @@ def make_filelist(directory, suffix="vm_all_traces.csv"):
         list: List of all soma voltage trace files in the specified directory.
     """
     matches = []
-    for root, _, filenames in scandir.walk(directory):
+    for root, _, filenames in walk(directory):
         for filename in fnmatch.filter(filenames, "*" + suffix):
             dummy = os.path.join(root, filename)
             if "_running" in dummy:

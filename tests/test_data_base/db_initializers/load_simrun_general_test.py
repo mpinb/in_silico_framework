@@ -1,4 +1,4 @@
-import warnings
+import warnings, pytest
 from data_base.db_initializers.load_simrun_general import optimize
 from data_base.IO.LoaderDumper import dask_to_msgpack, dask_to_categorized_msgpack
 from data_base.utils import silence_stdout

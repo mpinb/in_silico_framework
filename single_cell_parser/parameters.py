@@ -4,13 +4,10 @@
 from collections.abc import MutableMapping
 import json, re, neuron, os
 from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
-from data_base.data_base import is_data_base
+from data_base import is_data_base
 
-def _read_params_to_dict(filename):
-    filename = resolve_modular_db_path(filename)
-    with dbopen(filename, "r") as f:
-        content = f.read()
 
+def _make_json_compatible(content):
     # Replace single quotes with double quotes
     content = content.replace("'", '"')
 
@@ -22,7 +19,27 @@ def _read_params_to_dict(filename):
 
     # Replace None with null
     content = content.replace("None", "null")
+
     
+    def normalize_path(match):
+        # Find patterns that look like Windows paths (starting with drive letter)
+        path = match.group(0)
+        normalized = path.replace('\\', '/')
+        return normalized
+    
+    # Handle file paths with mixed delimiters - normalize to forward slashes first (works in JSON)
+    content = re.sub(r'"[a-zA-Z]:\\[^"]*"', normalize_path, content)
+
+    return content
+
+
+def _read_params_to_dict(filename):
+    filename = resolve_modular_db_path(filename)
+    with dbopen(filename, "r") as f:
+        content = f.read()
+
+    content = _make_json_compatible(content)
+
     try:
         params_dict = json.loads(content)
     except json.JSONDecodeError as e:
