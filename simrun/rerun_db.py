@@ -1,13 +1,30 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
 
 This module provides a function to resimulate a network-embedded neuron simulation from a simrun-initialized database.
 It allows to modify either the cell or the network with modification functions.
-The database is expected to have been initialized with :py:mod:`data_base.isf_data_base.db_initializers.init_simrun_general`. 
+The database is expected to have been initialized with :py:mod:`data_base.db_initializers.load_simrun_general`. 
 The function :py:func:`rerun_db` takes a database and a directory as input and resimulates the network-embedded neuron simulation for each simulation trial in the database. 
 The results are stored in the specified directory.
 
 See also:
-    :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output.
+    :py:mod:`~data_base.db_initializers.load_simrun_general` for initializing a database from raw :py:mod:`simrun` output.
 
 See also:
     :py:mod:`~single_cell_parser.cell_modify_functions` and :py:mod:`~single_cell_parser.network_modify_functions` 
@@ -18,13 +35,12 @@ import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 import os
 import time
-import neuron
 import dask
 import numpy as np
-import pandas as pd
 from biophysics_fitting.utils import execute_in_child_process
 from .utils import *
 import logging
+from data_base.dbopen import resolve_netp_reldb_paths, resolve_neup_reldb_paths
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -114,8 +130,8 @@ def _evoked_activity(
         stis (list): List of simulation trial indices to be resimulated.
         outdir (str): Directory where the simulation results are stored, relative to the original simulation results.
         tStop (float): Time in ms at which the simulation should stop.
-        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
-        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` network parameters and may return it changed.
         synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         parameterfiles (pd.DataFrame): A dataframe containing the parameter files for the simulation trials. Should always be present in a simrun-initialized database under the key ``paremeterfiles``.
@@ -124,7 +140,7 @@ def _evoked_activity(
         sa (pd.DataFrame): A dataframe containing the :ref:`syn_activation_format` dataframe. Should always be present in a simrun-initialized database under the key ``synapse_activation``.
         
     See also:
-        :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
+        :py:mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
     """
     logger.info('saving to ', outdir)
     import neuron
@@ -153,6 +169,12 @@ def _evoked_activity(
     network_name = parameterfiles.iloc[0].hash_network
     network_param = scp.build_parameters(network_folder.join(network_name))
     additional_network_params = [scp.build_parameters(p) for p in additional_network_params]
+
+    # resolve relative db paths if needed;
+    neuron_param = resolve_neup_reldb_paths(neuron_param, db.basedir)
+    network_param = resolve_netp_reldb_paths(network_param, db.basedir)
+    additional_network_params = [resolve_netp_reldb_paths(p, db.basedir) for p in additional_network_params]
+    
     for fun in network_param_modify_functions:
         network_param = fun(network_param)
     for fun in neuron_param_modify_functions:
@@ -289,10 +311,10 @@ def rerun_db(
     Args:
         db (:py:class:`~data_base.DataBase`): A simrun-initialized database to resimulate.
         stis (list): List of simulation trial indices to be resimulated.
-        outdir (str): Directory where the simulation results are stored, relative to the original simulation results.
+        outdir (str): Directory where the simulation results are stored, relative to the current working directory. Preferably, use an absolute path.
         tStop (float): Time in ms at which the simulation should stop.
-        neuron_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` neuron parameters and may return it changed.
-        network_param_modify_functions (list): List of functions which take :py:class:`NTParameterSet` network parameters and may return it changed.
+        neuron_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` neuron parameters and may return it changed.
+        network_param_modify_functions (list): List of functions which take :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` network parameters and may return it changed.
         synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
         additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
         silent (bool): If True, suppresses output from the simulation.
@@ -302,7 +324,7 @@ def rerun_db(
         list: A list of dask delayed objects. When computed with a dask scheduler, it writes the simulation results to the specified directory.
         
     See also:
-        :py:mod:`~data_base.isf_data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
+        :py:mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
     """
     parameterfiles = db['parameterfiles']
     neuron_folder = db['parameterfiles_cell_folder']
@@ -325,7 +347,7 @@ def rerun_db(
         myfun = execute_in_child_process(myfun)
 
     myfun = dask.delayed(myfun)
-    logger.info('outdir is', outdir)
+    logger.info('Outdir is: {}'.format(outdir))
     for stis in sim_trial_index_array:
         d = myfun(
             db,

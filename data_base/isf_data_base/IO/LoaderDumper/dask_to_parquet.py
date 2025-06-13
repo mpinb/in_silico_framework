@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Save and load dask dataframes to and from Apache parquet format.
 
 See also:
@@ -16,6 +32,9 @@ import json
 from .utils import save_object_meta, set_object_meta
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
+
+ENGINE = "pyarrow"
+COMPRESSION = 'snappy'
 
 def check(obj):
     '''Check whether the object can be saved with this dumper
@@ -64,7 +83,16 @@ def save_helper(savedir, delayed_df, n_partitions, partition):
     Returns:
         None
     """
-    # save original columns and index name
+    check_df_suitable_for_pq(delayed_df)
+    return delayed_df.to_parquet(
+        os.path.join(
+            savedir,
+            'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)),
+        engine=ENGINE,
+        compression=COMPRESSION)
+
+@dask.delayed
+def check_df_suitable_for_pq(delayed_df):
     assert all([type(e) == str for e in delayed_df.columns]), \
         "This method requires that all column names of the dataframe are strings, \
         but they are {}".format([type(e) for e in delayed_df.columns])
@@ -72,10 +100,6 @@ def save_helper(savedir, delayed_df, n_partitions, partition):
         assert type(delayed_df.index.name) == str, \
             "This method requires that the index name of the dataframe is a string, \
                 but it is {}".format(type(delayed_df.index.name))
-    return delayed_df.to_parquet(
-        os.path.join(
-            savedir,
-            'pandas_to_parquet.{}.{}.parquet'.format(n_partitions, partition)))
 
 class Loader(parent_classes.Loader):
     """Load a dask dataframe from a parquet file
@@ -116,7 +140,7 @@ class Loader(parent_classes.Loader):
                 if isinstance(divisions, list):
                     divisions = tuple(divisions)  # for py3.9
                 ddf.divisions = divisions
-                print('load dask dataframe with known divisions')
+                logger.info('Load dask dataframe with known divisions')
         
         return ddf
 
@@ -166,7 +190,7 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     # construct delayeds to save the dataframe
     # Note: this converts the column names to string. These are reset to their original dtype at the end
     delayeds = obj.to_delayed()
-    delayeds = [dask.delayed(df_colnames_to_str)(e) for e in delayeds]
+    delayeds = [dask.delayed(df_colnames_to_str)(d) for d in delayeds]
     delayeds = [
         save_helper(savedir, d, len(delayeds), lv)
         for lv, d in enumerate(delayeds)

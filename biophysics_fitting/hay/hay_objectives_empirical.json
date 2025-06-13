@@ -1,0 +1,89 @@
+{
+    "HAY_BAP_DEFINITIONS": {
+        "bAP_spikecount": ["Amount of spikes", 1.0, 0.01],
+        "bAP_APheight": ["AP height", 25.0, 5.0],
+        "bAP_APwidth": ["AP width", 2.0, 0.5],
+        "bAP_att2": ["bAP attenuation between soma and recSite 1", 45.0, 10.0],
+        "bAP_att3": ["bAP attenuation between soma and recSite 2", 36.0, 9.3300000000000001]
+    },
+    "HAY_BAC_DEFINITIONS": {
+        "BAC_APheight": ["AP height", 25.0, 5.0],
+        "BAC_ISI": ["Interspike interval", 9.9009999999999998, 0.85170000000000001],
+        "BAC_caSpike_height": ["height of the Ca2+-spike", 6.7300000000000004, 2.54],
+        "BAC_caSpike_width": ["Width of the Ca2+-spike", 37.43, 1.27],
+        "BAC_spikecount": ["Amount of spikes", 3.0, 0.01],
+        "BAC_ahpdepth": ["After-hyperpolarization depth", -65.0, 4.0]
+    },
+    "HAY_STEP1_DEFINITIONS": {
+        "mf1": ["Mean frequency", 9.0, 0.88],
+        "AI1": ["Adaptation Index", 0.0035999999999999999, 0.0091000000000000004],
+        "ISIcv1": [
+            "Interspike interval coefficient of variation",
+            0.12039999999999999,
+            0.032099999999999997
+        ],
+        "DI1": ["Doublet Interspike Interval", 57.75, 33.479999999999997],
+        "TTFS1": ["Time to first spike", 43.25, 7.3200000000000003],
+        "APh1": ["AP height", 26.227399999999999, 4.9702999999999999],
+        "fAHPd1": [
+            "Fast after-hyperpolarization depth",
+            -51.951099999999997,
+            5.8212999999999999
+        ],
+        "sAHPd1": ["Slow after-hyperpolarization depth", -58.0443, 4.5814000000000004],
+        "sAHPt1": ["Slow after-hyperpolarization time", 0.23760000000000001, 0.0299],
+        "APw1": ["AP width", 1.3077000000000001, 0.16650000000000001]
+    },
+    "HAY_STEP2_DEFINITIONS": {
+        "mf2": ["Mean frequency", 14.5, 0.56000000000000005],
+        "AI2": ["Adaptation Index", 0.0023, 0.0055999999999999999],
+        "ISIcv2": [
+            "Interspike Interval coeffitient of variation",
+            0.10829999999999999,
+            0.036799999999999999
+        ],
+        "DI2": ["Doublet interspike interval", 6.625, 8.6500000000000004],
+        "TTFS2": ["Ti;e to first spike", 19.125, 7.3099999999999996],
+        "APh2": ["Ap height", 16.520900000000001, 6.1127000000000002],
+        "fAHPd2": [
+            "Fast after-hyperpolarization depth",
+            -54.194899999999997,
+            5.5705999999999998
+        ],
+        "sAHPd2": [
+            "Slow after-hyperpolarization depth",
+            -60.512900000000002,
+            4.6717000000000004
+        ],
+        "sAHPt2": ["Slow after-hyperpolarization time", 0.2787, 0.026599999999999999],
+        "APw2": ["AP width", 1.3833, 0.2843]
+    },
+    "HAY_STEP3_DEFINITIONS": {
+        "mf3": ["Mean frequency", 22.5, 2.2222],
+        "AI3": ["Adaptation index", 0.0045999999999999999, 0.0025999999999999999],
+        "ISIcv3": [
+            "Interspike interval coefficient of variation",
+            0.095399999999999999,
+            0.014
+        ],
+        "DI3": ["Doublet interspike interval", 5.38, 0.83],
+        "TTFS3": ["Time to first spike", 7.25, 1.0],
+        "APh3": ["AP height", 16.436800000000002, 6.9321999999999999],
+        "fAHPd3": [
+            "Fast afterhyperpolarization depth",
+            -56.557899999999997,
+            3.5834000000000001
+        ],
+        "sAHPd3": [
+            "Slow after-hyperpolarization depth",
+            -59.99230000000001,
+            3.9247000000000005
+        ],
+        "sAHPt3": [
+            "Slow after-hyperpolarization time",
+            0.21310000000000001,
+            0.036799999999999999
+        ],
+        "APw3": ["AP zidth", 1.8647, 0.41189999999999999]
+        }
+}

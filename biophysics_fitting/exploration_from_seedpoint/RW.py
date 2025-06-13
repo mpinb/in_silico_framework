@@ -1,4 +1,20 @@
-"""Perofrm a random walk through parameter space starting from a seed point.
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+"""Perform a random walk through parameter space starting from a seed point.
 
 This module provides the :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
 which implements a random walk procedure through parameter space.
@@ -59,12 +75,22 @@ class RW:
             to find before stopping exploration
         normalized_aim_params (pd.Series): normalized aim parameters
     """
-    def __init__(self, df_seeds = None, param_ranges = None, 
-                params_to_explore = None, evaluation_function = None, 
-                MAIN_DIRECTORY = None, min_step_size = 0, max_step_size = 0.02, 
-                checkpoint_every = 100, checkpoint_by_time = None, 
-                concat_every_n_save = 60, n_iterations = 60000,
-                mode = None, aim_params=None, stop_n_inside_with_aim_params = -1):
+    def __init__(
+        self, 
+        df_seeds = None, 
+        param_ranges = None, 
+        params_to_explore = None, 
+        evaluation_function = None, 
+        MAIN_DIRECTORY = None, 
+        min_step_size = 0, 
+        max_step_size = 0.02, 
+        checkpoint_every = 100, 
+        checkpoint_by_time = None, 
+        concat_every_n_save = 60, 
+        n_iterations = 60000,
+        mode = None, 
+        aim_params=None, 
+        stop_n_inside_with_aim_params = -1):
         '''
         Args:
             df_seeds (pd.DataFrame): individual seed points as rows and the parameters as columns

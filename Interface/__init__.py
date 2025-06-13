@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''
 Interface gives API access to all subpackages and submodules in ISF:
 
@@ -84,12 +101,21 @@ except ImportError:
 from data_base._version import get_versions
 from data_base._module_versions import version_cached
 
-if not 'ISF_MINIMIZE_IO' in os.environ:
+def _is_running_on_dask_worker():
+    from distributed import get_worker
+    try:
+        get_worker()
+        return True
+    except ValueError:
+        return False
+
+
+if not 'ISF_MINIMIZE_IO' in os.environ and not _is_running_on_dask_worker():
     versions = get_versions()
     __version__ = versions['version']
     __git_revision__ = versions['full-revisionid']
     if __version__ == "0+unknown":
-        raise OSError("Commit not found\nVersion is {}\nRevision_id is {}). Git is not found, or something else went wrong.".format(__version__, __git_revision__))
+        raise OSError("Commit not found\nVersion is {}\nRevision_id is {}. Git is not found, or something else went wrong.".format(__version__, __git_revision__))
     else:
         logger.info("Current version: {version}".format(version = __version__))
         logger.info("Current pid: {pid}".format(pid = os.getpid()))
@@ -130,23 +156,18 @@ from data_base.IO.roberts_formats import read_pandas_cell_activation_from_robert
 from data_base.IO.roberts_formats import read_InputMapper_summary
 from data_base.db_initializers import load_simrun_general as db_init_simrun_general
 from data_base.db_initializers import synapse_activation_binning as db_init_synapse_activation_binning
-
-#--------------- isf db
 load_param_files_from_db = db_init_simrun_general.load_param_files_from_db
 load_initialized_cell_and_evokedNW_from_db = db_init_simrun_general.load_initialized_cell_and_evokedNW_from_db
-#for compatibility, deprecated!
+
+# backwards compatibility
 synapse_activation_binning_dask = db_init_synapse_activation_binning.synapse_activation_postprocess_dask
 db_init_crossing_over = db_init_roberts_simulations = db_init_simrun_general
-
-#-------------- mdb: deprecated. Use db instead.
+mdb_init_simrun_general = db_init_simrun_general
+mdb_init_synapse_activation_binning = db_init_synapse_activation_binning
+load_param_files_from_mdb = load_param_files_from_db
+load_initialized_cell_and_evokedNW_from_mdb = load_initialized_cell_and_evokedNW_from_db
 mdb_init_crossing_over = db_init_crossing_over
-from data_base.model_data_base.mdb_initializers import load_simrun_general as mdb_init_simrun_general
-from data_base.model_data_base.mdb_initializers import synapse_activation_binning as mdb_init_synapse_activation_binning
-load_param_files_from_mdb = mdb_init_simrun_general.load_param_files_from_mdb
-load_initialized_cell_and_evokedNW_from_mdb = mdb_init_simrun_general.load_initialized_cell_and_evokedNW_from_mdb
-#for compatibility, deprecated!
-synapse_activation_binning_dask = db_init_synapse_activation_binning.synapse_activation_postprocess_dask
-mdb_init_crossing_over = mdb_init_roberts_simulations = mdb_init_simrun_general
+
 
 from data_base.analyze import split_synapse_activation  #, color_cellTypeColorMap, excitatory, inhibitory
 from data_base.utils import silence_stdout
@@ -156,7 +177,7 @@ from data_base.utils import cache
 from data_base import utils
 from data_base.data_base import get_db_by_unique_id
 from data_base.data_base_register import assimilate_remote_register
-from data_base.dbopen import resolve_db_path, create_db_path
+from data_base.dbopen import resolve_db_path, create_modular_db_path
 
 try:  ##to avoid import errors in distributed system because of missing matplotlib backend
     import matplotlib
@@ -223,10 +244,11 @@ if not 'ISF_MINIMIZE_IO' in os.environ:
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 
 import biophysics_fitting
-from biophysics_fitting import hay_complete_default_setup as bfit_hay_complete_default_setup
+from biophysics_fitting.hay import default_setup as bfit_hay_complete_default_setup
 from biophysics_fitting import L5tt_parameter_setup as bfit_L5tt_parameter_setup
 from biophysics_fitting.parameters import param_to_kwargs as bfit_param_to_kwargs
 from biophysics_fitting.optimizer import start_run as bfit_start_run
+from biophysics_fitting.exploration_from_seedpoint import RW
 
 from functools import partial
 
@@ -269,10 +291,10 @@ def get_client(ip=None, client_port=38786, timeout=120):
         ip = gethostbyname(
             hostname
         )  # fetches the ip of the current host
-    logger.info("Getting client with ip {}".format(ip))
+    logger.info("Getting dask client with ip {}".format(ip))
     c = Client(ip + ':' + client_port, timeout=timeout)
-    logger.info("Got client {}".format(c))
-    logger.info("Making mechanisms visible on client side")
+    logger.info("Got dask client {}".format(c))
+    logger.debug("Making mechanisms visible on client side")
     def update_path(): sys.path.insert(0, os.path.dirname(__file__))
     def import_mechanisms(): import mechanisms
     def import_Interface(): import Interface
@@ -285,5 +307,8 @@ print("\n\n")
 print_module_versions()
 
 from config.cell_types import EXCITATORY, INHIBITORY
+
+from compatibility import init_mdb_backwards_compatibility
+init_mdb_backwards_compatibility()
 
 logger.setLevel(logging.ATTENTION)

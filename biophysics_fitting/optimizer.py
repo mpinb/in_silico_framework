@@ -1,6 +1,22 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Multi-objective optimization algorithm.
 
-This code has been adapted from [BluePyOpt](https://github.com/BlueBrain/BluePyOpt) :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+This code has been adapted from `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
 such that:
 
 - a start population can be defined.
@@ -8,13 +24,13 @@ such that:
 - to be executed on a distributed system using dask.
 - to return all objectives, not only the combined ones.
 
-The main interface is the function :py:meth:`start_run`.
+The top-level pipeline can be started with :py:meth:`start_run`.
 
 Note: 
-    Part of this module is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
+    Part of this module (as marked with comments) is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
     
     Copyright (c) 2016, EPFL/Blue Brain Project. 
-    Part of this file is part of BluePyOpt <https://github.com/BlueBrain/BluePyOpt>. 
+    Part of this file is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_. 
     This library is free software; you can redistribute it and/or modify it under
     the terms of the GNU Lesser General Public License version 3.0 as published
     by the Free Software Foundation. 
@@ -153,7 +169,7 @@ def get_objective_function(db_setup):
 def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error = 3):
     """Get a map function for evaluating the parameters.
     
-    This function is a hook into bluePyOpt's optimization.
+    This function is a hook into BluePyOpt's optimization.
     It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start_run`.
     Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
     This is useful for debugging and for analyzing the optimization results.
@@ -242,7 +258,6 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
                     i for (i, x) in enumerate(all_err_below_boundary) if x
                     ]
 
-
          # all_err_below_3 = [all(x<3 for x in list(dict_.values())) for dict_ in combined_objectives_dict]
          # if any(all_err_below_3):
          #     db_setup['satisfactory'] = [i for (i,x) in enumerate(all_err_below_3) if x]
@@ -283,26 +298,24 @@ class my_ibea_evaluator(bpop.evaluators.Evaluator):
 
 
 ############################################################
-# the following is taken from bluepyopt.deapext.algorithms.py
-# it is changed such that the checkpoint only saves the population, but not the history
-# and hall of fame, as this can be easily reconstructed from the data saved by
-# mymap
+# The code below is taken from bluepyopt.deapext.algorithms.py
+# it is changed by @abast on 11/11/2018 such that the checkpoint only saves the population, but not the history
+# and hall of fame, as this can be easily reconstructed from the data saved by mymap
+
+# Copyright (c) 2016, EPFL/Blue Brain Project
+#  The code below is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_
+#  This library is free software; you can redistribute it and/or modify it under
+#  the terms of the GNU Lesser General Public License version 3.0 as published
+#  by the Free Software Foundation.
+#  This library is distributed in the hope that it will be useful, but WITHOUT
+#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+#  details.
+#  You should have received a copy of the GNU Lesser General Public License
+#  along with this library; if not, write to the Free Software Foundation, Inc.,
+#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 ############################################################
 """Optimisation class"""
-"""
-Copyright (c) 2016, EPFL/Blue Brain Project
- This file is part of BluePyOpt <https://github.com/BlueBrain/BluePyOpt>
- This library is free software; you can redistribute it and/or modify it under
- the terms of the GNU Lesser General Public License version 3.0 as published
- by the Free Software Foundation.
- This library is distributed in the hope that it will be useful, but WITHOUT
- ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
- details.
- You should have received a copy of the GNU Lesser General Public License
- along with this library; if not, write to the Free Software Foundation, Inc.,
- 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
 
 # pylint: disable=R0914, R0912
 

@@ -35,13 +35,13 @@ class TestDataBaseRegister:
             db._register_this_database()
 
         dbr = DataBaseRegister(self.basetempdir)
-        assert get_db_by_unique_id(db1.get_id())._basedir.as_posix() == p1
-        assert get_db_by_unique_id(db2.get_id())._basedir.as_posix() == p2
-        assert get_db_by_unique_id(db3.get_id())._basedir.as_posix() == p3
+        assert get_db_by_unique_id(db1.get_id()).basedir == p1
+        assert get_db_by_unique_id(db2.get_id()).basedir == p2
+        assert get_db_by_unique_id(db3.get_id()).basedir == p3
 
         db4 = DataBase(os.path.join(self.basetempdir, 'test4'))
         db4._register_this_database()
-        assert get_db_by_unique_id(db4.get_id())._basedir == db4._basedir
+        assert get_db_by_unique_id(db4.get_id()).basedir == db4.basedir
         assert_search_db_did_not_fail(dbr)
 
     def test_unknown_id_raises_KeyError(self):

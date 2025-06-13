@@ -1,10 +1,13 @@
 [project]
-authors = [{name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"}]
-
+authors = [
+  {name = "Arco Bast", email = "basta@janelia.hhmi.org"},
+  {name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"},
+  ]
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
 requires-python = "==3.8.*"
-version = "0.4.0-beta"
+version = "0.5.0-beta"
+dependencies = ["blenderspike-py @ https://github.com/ArtemKirsanov/BlenderSpike.git"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -19,11 +22,9 @@ libc = "2.17"
 linux = "3.10.0"
 
 [tool.pixi.activation]
-env = { "PYTHONPATH" = "$PYTHONPATH:$(pwd)" }
+env = { "PYTHONPATH" = "$(pwd):$PYTHONPATH" }
 
 [tool.pixi.dependencies]
-# default conda dependencies
-pandas = "1.1.3.*"
 dask = "2.30.0.*"
 scikit-learn = "0.23.2.*"
 pypdf2 = ">=3.0.1,<4"
@@ -47,19 +48,16 @@ cmasher = ">=1.6.3,<2"
 ipywidgets = ">=8.1.5,<9"
 simpleitk = ">=2.2.1,<3"
 zarr = ">=2.15.0,<3"
+pandas = "1.1.3.*"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
-sumatra = "==0.7.4"
 redis = ">=5.2.0,<6"
 pyarrow = "==12.0.1" 
 blosc = ">=1.11.1,<2" 
 scikit-learn = ">=0.23.2"
 seaborn = ">=0.12.2,<0.13"
-pandas-msgpack = { git = "https://github.com/abast/pandas-msgpack.git"}
-
-[tool.pixi.pypi-options]
-no-build-isolation = ["pandas-msgpack"]
+isf-pandas-msgpack = ">=0.4.0"
 
 [tool.pixi.target.osx]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
@@ -91,10 +89,13 @@ sphinx-inline-tabs = ">=2023.4.21,<2024"
 pandoc = ">=3.6.2,<4"
 graphviz = ">=7.0.5,<13"
 sphinx-design = ">=0.5.0,<0.6"
+sphinxcontrib-video = ">=0.2.1,<0.3"
 
-[dependency-groups]
-# pypi dependencies
-docs = ["sphinx-paramlinks>=0.6.0,<0.7", "catppuccin[pygments]>=2.2.0,<3", "sphinx-autoapi>=3.5.0,<4", "sphinx-immaterial>=0.11.14,<0.12"]
+[tool.pixi.feature.docs.pypi-dependencies]
+sphinx-paramlinks = ">=0.6.0,<0.7"
+catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
+sphinx-autoapi = ">=3.5.0,<4" 
+sphinx-immaterial = ">=0.11.14,<0.12"
 
 [tool.pixi.tasks]
 launch_dask_server = {cmd = [
@@ -131,10 +132,37 @@ test = {cmd = [
   "--durations=15",
   "--dask_server_port",
   "$ISF_DASK_PORT",
-  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "5", ISF_DASK_PORT = "8786"}, cwd="tests"}
+  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
+
+test_mdb = {cmd = [
+  "export", "ISF_USE_MDB=1",
+  "&&",
+  "pytest", 
+  "-n","$ISF_NUM_PYTEST_WORKERS",
+  "-rsx",
+  "-vv",
+  "--color=yes",
+  "--durations=15",
+  "--dask_server_port",
+  "$ISF_DASK_PORT",
+  "test_data_base/", 
+  ";",
+  "unset", "ISF_USE_MDB"
+  ], description = "Run test suite with MDB", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
 
 download_bc_model = {cmd = ["./download_bc_model.sh"], description = "Download ISF's barrel cortex model from Harvard Datverse", cwd="installer"}
 
+
 [tool.pixi.feature.docs.tasks]
-build_docs = {cmd = ["make", "html"], description = "Build the documentation", cwd="docs"}
+# Removing tutorials from doctrees and build is necessary to avoid slow recursion issues when building repeatedly
+remove_tutorial_content = {cmd = [
+  "rm", 
+  "-rf", 
+  "docs/_build/doctrees/_build",
+  "docs/_build/doctrees/tutorials",
+  "docs/_build/html/_build",
+  "docs/_build/html/tutorials",
+  "docs/_build/doctrees/nbsphinx"
+  ], description = "Remove tutorial content from docs"}
+build_docs = {cmd = ["make", "html"], description = "Build the documentation", cwd="docs", depends-on = ["remove_tutorial_content"]}
 host_docs = {cmd = ["python", "-m", "http.server", "8000"], description = "Host the documentation", cwd="docs/_build/html"}

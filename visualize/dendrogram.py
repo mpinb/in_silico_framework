@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Plot a dendrogram of a neuron morphology.
 
 Dendrograms are schematic representations of neuron morphologies.
@@ -15,7 +32,7 @@ from visualize.histogram import histogram
 
 
 def range_overlap(beginning1, end1, beginning2, end2, bool_=True):
-    """Check if two ranges overlap.
+    r"""Check if two ranges overlap.
 
     :skip-doc:
 
@@ -24,7 +41,7 @@ def range_overlap(beginning1, end1, beginning2, end2, bool_=True):
         end1 (float): The end of the first range.
         beginning2 (float): The beginning of the second range.
         end2 (float): The end of the second range.
-        bool\_ (bool): Whether to return a boolean value. Default is `True`.
+        bool\_ (bool): Whether to return a boolean value. Default is ``True``.
 
     Returns:
         float | bool: The overlap of the two ranges, or a boolean value if `bool_` is set to `True`.
@@ -82,7 +99,7 @@ def _get_db_by_sec(dendrogram_db, sec):
 
 
 class _DendrogramSection:
-    """A class to represent a dendrogram section.
+    r"""A class to represent a dendrogram section.
 
     A dendrogram section is a single neuron section, as it is represented in a dendrogram.
     It does not necessarily contain any morphological information.
@@ -95,7 +112,7 @@ class _DendrogramSection:
         x_dist_end (float): The ending distance of the section in :math:`\mu m`.
         sec (:py:class:`~single_cell_parser.cell.PySection`): The neuron section.
         synapses (dict): A dictionary of synapses in the section.
-        main_bifurcation (bool): Whether the section is the main bifurcation. Default is `False`.
+        main_bifurcation (bool): Whether the section is the main bifurcation. Default is ``False``.
         sec_id (int): The section id of the section.
     """
 
@@ -108,13 +125,13 @@ class _DendrogramSection:
         main_bifurcation=False,
         sec_id=None,
     ):
-        """
+        r"""
         Args:
             name (str): The name of the section.
             x_dist_start (float): The starting distance of the section in :math:`\mu m`.
             x_dist_end (float): The ending distance of the section in :math:`\mu m`.
             sec (:py:class:`~single_cell_parser.cell.PySection`): The neuron section.
-            main_bifurcation (bool): Whether the section is the main bifurcation. Default is `False`.
+            main_bifurcation (bool): Whether the section is the main bifurcation. Default is ``False``.
             sec_id (int): The section id of the section.
         """
         self.name = name
@@ -138,7 +155,7 @@ class _DendrogramSection:
 
 
 class Dendrogram:
-    """Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+    r"""Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
 
     Dendrograms are schematic representations of neuron morphologies.
 
@@ -175,7 +192,7 @@ class Dendrogram:
         """Plot the dendrogram.
 
         Args:
-            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is `None` and a new figure is created.
+            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is ``None`` and a new figure is created.
 
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
@@ -360,7 +377,7 @@ class _DendrogramDendriteStatistics:
         :py:meth:`~DendrogramdendriteStatistics._plot_dendrite_hist` is used to plot the dendrogram statistics.
 
         Args:
-            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is `None` and a new figure is created.
+            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is ``None`` and a new figure is created.
 
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
@@ -371,7 +388,7 @@ class _DendrogramDendriteStatistics:
         return ax
 
     def _get_amount_of_dendrite_in_bin(self, min_, max_):
-        """Get the amount of dendritic length in a certain bin of soma distance.
+        r"""Get the amount of dendritic length in a certain bin of soma distance.
 
         Args:
             min\_ (float): The minimum soma distance.
@@ -392,12 +409,12 @@ class _DendrogramDendriteStatistics:
         return out
 
     def _plot_dendrite_hist(self, ax, xlim, binsize=50):
-        """Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
+        r"""Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
 
         Args:
             ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object.
             xlim (tuple): The x-axis limits.
-            binsize (float): The size of the bins. Default is `50`.
+            binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
@@ -414,11 +431,11 @@ class _DendrogramDendriteStatistics:
         return ax
 
     def _compute_dendrite_hist(self, dist_end=None, binsize=50):
-        """Compute the dendrite density histogram.
+        r"""Compute the dendrite density histogram.
 
         Args:
-            dist_end (float): The maximum soma distance. Default is `None` and the maximum soma distance is calculated.
-            binsize (float): The size of the bins. Default is `50`.
+            dist_end (float): The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
+            binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
             None: Nothing. Updates :paramref:`bins` and :paramref:`dendrite_density`.
@@ -491,13 +508,13 @@ class _DendrogramSynapseStatistics:
     def get_number_of_synapses_in_bin(
         self, min_, max_, select=["Dendrite", "ApicalDendrite"], label=None
     ):
-        """Get the number of synapses in a certain bin of soma distance.
+        r"""Get the number of synapses in a certain bin of soma distance.
 
         Args:
             min\_ (float): The minimum soma distance.
             max\_ (float): The maximum soma distance.
             select (list): A list of labels to select. Default is `["Dendrite", "ApicalDendrite"]`.
-            label (str): The label of the synapse. Default is `None`.
+            label (str): The label of the synapse. Default is ``None``.
 
         Returns:
             int: The number of synapses in the bin.
@@ -513,11 +530,11 @@ class _DendrogramSynapseStatistics:
         return out
 
     def _compute_synapse_hist(self, binsize=50):
-        """Compute the synapse density histogram.
+        r"""Compute the synapse density histogram.
 
         Args:
-            dist_end (float): The maximum soma distance. Default is `None` and the maximum soma distance is calculated.
-            binsize (float): The size of the bins. Default is `50`.
+            dist_end (float): The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
+            binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
             None: Nothing. Updates :paramref:`bins`, :paramref:`synapse_density`, :paramref:`synapse_density_apical`, and :paramref:`synapse_density_basal`.
@@ -568,7 +585,7 @@ class _DendrogramSynapseStatistics:
                 self.synapse_statistics[label].extend(dendro_section.synapses[label])
 
     def _plot_synapse_density_hist(self, ax, xlim, binsize=50):
-        """Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
+        r"""Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
 
         If no colormap is provided during initialization, all synapses are plotted in red.
         If a colormap is provided, the synapses are plotted in the respective color.
@@ -580,7 +597,7 @@ class _DendrogramSynapseStatistics:
         Args:
             ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object.
             xlim (tuple): The x-axis limits.
-            binsize (float): The size of the bins. Default is `50`.
+            binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
@@ -663,7 +680,7 @@ class _DendrogramSynapseStatistics:
         Plots out a histogram of the total amount of synapses per bin of soma distance.
 
         Args:
-            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is `None` and a new figure is created.
+            ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object. Default is ``None`` and a new figure is created.
 
         Returns:
             :py:class:`matplotlib.axes.Axes`: The matplotlib axes object.
@@ -717,7 +734,7 @@ class DendrogramStatistics(Dendrogram):
         """Plot the dendrogram statistics.
 
         Args:
-            figsize (tuple): The figure size. Default is `None`.
+            figsize (tuple): The figure size. Default is ``None``.
             colormap_synapses (dict): A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
                 Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
 

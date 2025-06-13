@@ -10,7 +10,7 @@ You can install ``pixi`` by running:
 
 .. code-block:: bash
 
-   curl -fsSL https://pixi.sh/latest | bash
+   curl -fsSL https://pixi.sh/latest | sh
 
 To install ISF with ``pixi``, simply:
 
@@ -19,6 +19,7 @@ To install ISF with ``pixi``, simply:
    git clone https://github.com/mpinb/in_silico_framework.git --depth 1 &&
    cd in_silico_framework &&
    pixi install
+
 
 Usage
 -----
@@ -40,6 +41,26 @@ We recommend to use ISF within a JupyterLab server for interactive use:
    pixi run launch_jupyter_lab_server
 
 To get started with ISF, feel free to consult the :ref:`tutorials`.
+
+
+Test ISF
+--------
+
+To test if all components of ISF are working as intended, you can run the test suite locally.
+To do so, you will need three shells in total: one for launching a dask server, one for launching dask workers, and one for running the test suite itself.
+
+.. code-block:: bash
+
+   pixi run launch_dask_server
+
+.. code-block:: bash
+
+   pixi run launch_dask_workers
+
+.. code-block:: bash
+
+   pixi run test
+
 
 Configuration
 -------------

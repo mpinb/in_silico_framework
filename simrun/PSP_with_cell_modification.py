@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Calculate PSPs depending on cell modifications.
 
 Such modifications include:
@@ -27,7 +44,7 @@ class PSP_with_current_injection:
         :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
     
     Attributes:
-        neuron_param (NTParameterSet): Parameters of the neuron model.
+        neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): Parameters of the neuron model.
         confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
         target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
         delay (float): Delay before the current injection starts (in :math:`ms`).
@@ -57,7 +74,7 @@ class PSP_with_current_injection:
         bounds=(0, 0.7)):
         """
         Args:
-            neuron_param (NTParameterSet): Parameters of the neuron model.
+            neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): Parameters of the neuron model.
             confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
             target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
             delay (float): Delay before the current injection starts (in :math:`ms`).
@@ -73,7 +90,7 @@ class PSP_with_current_injection:
                 Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         """
         self.confile = confile
-        self.neuron_param = scp.NTParameterSet(neuron_param.as_dict())
+        self.neuron_param = scp.ParameterSet(neuron_param.as_dict())
         self.target_vm = target_vm
         self.delay = delay
         self.duration = duration
@@ -160,7 +177,7 @@ class PSP_with_current_injection:
         if self.holding_current is None:
             self.optimize_holding_current()
             #raise RuntimeError("Call optimize_holding_current first!")
-        neuron_param = scp.NTParameterSet(self.neuron_param.as_dict())
+        neuron_param = scp.ParameterSet(self.neuron_param.as_dict())
         dummy_param = {
             'amplitude': self.holding_current,
             'duration': self.duration,
@@ -170,7 +187,7 @@ class PSP_with_current_injection:
             neuron_param.neuron['cell_modify_functions'] = {}
         neuron_param.neuron['cell_modify_functions'][
             'soma_current_injection'] = dummy_param
-        return scp.NTParameterSet(neuron_param)
+        return scp.ParameterSet(neuron_param)
 
     def get_psp_simulator(self, gExRange=[1.0], exc_inh='exc', mode='synapses'):
         '''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.

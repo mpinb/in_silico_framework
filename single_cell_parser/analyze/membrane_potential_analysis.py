@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''
 Analyze the membrane voltage.
 '''
@@ -71,8 +88,8 @@ def compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0):
         vTraces (list): List of voltage traces.
         tStim (float): Timepoint of stimulation (in ms).
         dt (float): Time step of the voltage traces.
-        width (float): Width of the PSP window. Default is 35.0 ms.
-        t_delay (float): Delay of the PSP window (i.e. time between the stimulus and the PSP onset). Default is 15.0 ms.
+        width (float): Width of the PSP window. Default is :math:`35.0 ms`.
+        t_delay (float): Delay of the PSP window (i.e. time between the stimulus and the PSP onset). Default is :math:`15.0 ms`.
 
     Returns:
         tuple: A tuple containing the delay and the mean amplitude of the PSPs.    
@@ -93,8 +110,8 @@ def compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None)
         vStd (list): List of standard deviations of the voltage
         tStim (float): Time of stimulation
         dt (float): Time step.
-        width (float): Width of each time window. Default is 35.0 ms.
-        window_start_times (list): List of start times for the time windows. Default is [-50.0, 15.0].
+        width (float): Width of each time window. Default is :math:`35.0 ms`.
+        window_start_times (list): List of start times for the time windows. Default is ``[-50.0, 15.0]``.
         
     Returns:
         tuple: A tuple containing the time windows and the average standard deviations.
@@ -140,10 +157,10 @@ def compute_uPSP_amplitude(t, v, tSyn, isEPSP=True, t_width_baseline=10.0):
         isEPSP (bool): 
             If True, the uPSP is an excitatory post-synaptic potential (EPSP).
             If False, the uPSP is an inhibitory post-synaptic potential (IPSP). 
-            Default is True.
+            Default is ``True``.
         t_width_baseline (float): 
             Width of the time window to calculate the baseline membrane voltage. 
-            Default is 10.0 ms.
+            Default is :math:`10.0 ms`.
     
     Returns:
         float: Amplitude of the uPSP.
@@ -187,8 +204,8 @@ def simple_spike_detection(
     Args:
         t (array): Time vector
         v (array): Membrane potential vector.
-        tBegin (float, optional): Start time of the detection window. Default is None (begin of voltage trace).
-        tEnd (float, optional): End time of the detection window. Default is None (end of voltage trace).
+        tBegin (float, optional): Start time of the detection window. Default is ``None`` (begin of voltage trace).
+        tEnd (float, optional): End time of the detection window. Default is ``None`` (end of voltage trace).
         threshold (float, optional): Threshold for spike detection (mV). Default is :math:`0.0 mV`.
         mode (str, optional):
             Mode for spike detection. Default is ``regular``.
@@ -245,10 +262,10 @@ def PSTH_from_spike_times(
 
     Args:
         spikeTimeVectors (list): List of spike time vectors.
-        binSize (float, optional): Bin size for the PSTH. Default is 1.0 ms.
-        tBegin (float, optional): Start time of the PSTH. Default is None (min of :paramref:`spikeTimeVectors`).
-        tEnd (float, optional): End time of the PSTH. Default is None (max of :paramref:`spikeTimeVectors`).
-        aligned (bool, optional): If True, aligns the bins to integer multiples of the bin size. Default is True.
+        binSize (float, optional): Bin size for the PSTH. Default is `1.0 ms`.
+        tBegin (float, optional): Start time of the PSTH. Default is ``None`` (min of :paramref:`spikeTimeVectors`).
+        tEnd (float, optional): End time of the PSTH. Default is ``None`` (max of :paramref:`spikeTimeVectors`).
+        aligned (bool, optional): If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
 
     Returns:
         tuple: Tuple containing the histogram and the bins.

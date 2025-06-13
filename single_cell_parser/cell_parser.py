@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Read and parse a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
 '''
 
@@ -56,21 +73,22 @@ class CellParser(object):
         self.membraneParams = {}
         self.cell_modify_functions_applied = False
 
-    def spatialgraph_to_cell(self, parameters, axon=False, scaleFunc=None):
+    def spatialgraph_to_cell(self, parameters=None, axon=False, scaleFunc=None):
         '''Create a :py:class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
         
         Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
         
         Args:
-            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
             axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
-            scaleFunc (callable, optional): Optional function object that scales dendritic diameters.
-                **Deprecated**: This argument is deprecated and will be removed in a future version.
         
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
-            To ensure reproducability, scaleFunc should be specified in the parameters, as 
+            To ensure simulation reproducability, scaleFunc should be specified in the parameters, as 
             described in :py:mod:`~single_cell_parser.cell_modify_funs`
+
+        .. deprecated:: 0.1.0
+            The ``parameters`` keyword is optional for this method. It was previously used to check for spines.
+            The :ref:`cell_parameters_format` file is however used to apply biophysical mechanisms in :py:meth:`set_up_biophysics`.
         
         '''
         edgeList = reader.read_hoc_file(self.hoc_path)
@@ -102,6 +120,7 @@ class CellParser(object):
         try:
             if 'rieke_spines' in list(
                     parameters.spatialgraph_modify_functions.keys()):
+                logger.warning("DeprecationWarning: The rieke_spines function is deprecated.")
                 self.rieke_spines(parameters)
             else:
                 logger.info("No spines are being added...")
@@ -177,7 +196,7 @@ class CellParser(object):
             5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
                 
         Args:
-            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:py:class:`~single_cell_parser.parameters.ParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
             full (bool): Whether or not to use full spatial discretization.
         '''
         for label in list(parameters.keys()):
@@ -252,7 +271,7 @@ class CellParser(object):
         For a list of possible cell modify functions, refer to :py:mod:`~single_cell_parser.cell_modify_functions`.
         
         Args:
-            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Neuron parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:py:class:`~single_cell_parser.parameters.ParameterSet`): Neuron parameters, read from a :ref:`cell_parameters_format` file.
         """
         if 'cell_modify_functions' in list(parameters.keys()):
             if self.cell_modify_functions_applied == True:
@@ -291,7 +310,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            props (dict | :py:class:`~sumatra.parameters.NTParameterSet`): Membrane properties. 
+            props (dict | :py:class:`~single_cell_parser.parameters.ParameterSet`): Membrane properties. 
                 Keys named ``spines`` or ``ions`` are ignored, 
                 as they are taken care of by :py:meth:`insert_range_mechanisms` and :py:meth:`_insert_ion_properties`.
                 
@@ -328,7 +347,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            mechs (:py:class:`~sumatra.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
+            mechs (:py:class:`~single_cell_parser.parameters.ParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -727,7 +746,7 @@ class CellParser(object):
         Args:
             label (str): Label of the structure.
             updateMechName (str): Name of the mechanism to update.
-            mechs (:py:class:`~sumatra.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
+            mechs (:py:class:`~single_cell_parser.parameters.ParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -769,7 +788,7 @@ class CellParser(object):
         
         Args:
             label (str): Label of the structure.
-            ionParam (:py:class:`~sumatra.parameters.NTParameterSet`): Ion properties. See :ref:`cell_parameters_format` for an example.
+            ionParam (:py:class:`~single_cell_parser.parameters.ParameterSet`): Ion properties. See :ref:`cell_parameters_format` for an example.
         '''
         if self.cell is None:
             raise RuntimeError(
@@ -831,7 +850,7 @@ class CellParser(object):
                 seg.g_pas = seg.g_pas * F
 
     def _add_spines_ar(self, label, spineParam):
-        r'''Adds passive spines to anomalously rectifying membrane :cite:`Waters_Helmchen_2006`.
+        '''Adds passive spines to anomalously rectifying membrane :cite:`Waters_Helmchen_2006`.
         
         Spines are added according to spine parameters for individual (dendritic) structures
         by scaling :math:`C_m` and :math:`R_{N,0}` by :math:`F` and :math:`1/F` respectively, where
@@ -953,9 +972,9 @@ class CellParser(object):
         '''Determine the number of segments for each section according to the d-lambda rule.
 
         Args:
-            f (float, optional): frequency used for determining discretization. Default is 100.0 Hz.
-            full (bool, optional): Whether or not to use full spatial discretization (one segment per morphology point). Default is False.
-            max_seg_length (float, optional): Maximum segment length. Default is None.
+            f (float, optional): frequency used for determining discretization. Default is :math:`100.0 Hz`.
+            full (bool, optional): Whether or not to use full spatial discretization (one segment per morphology point). Default is ``False``.
+            max_seg_length (float, optional): Maximum segment length. Default is ``None``.
             
         Note:
             The d-lambda rule predicates the spatial grid on the AC length constant :math:`\\lambda_f`
@@ -1252,7 +1271,7 @@ class CellParser(object):
             Instead we scale the membrane capacitance and resistance of the dendritic structures (see :py:meth:`_add_spines`).
             
         Args:
-            parameters (:py:class:`~sumatra.parameters.NTParameterSet`): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
+            parameters (:py:class:`~single_cell_parser.parameters.ParameterSetameterSet`): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
         
         :skip-doc:
         """

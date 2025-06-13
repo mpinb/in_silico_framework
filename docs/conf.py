@@ -6,11 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import os
-import sys
-
-import toml
-
+import os, sys, toml
 project_root = os.path.join(os.path.abspath(os.pardir))
 sys.path.insert(0, project_root)
 
@@ -23,6 +19,7 @@ from docs.utils.sphinx_hooks import (
     find_first_match,
     log_documented_members,
 )
+import data_base  # trigger db compatibility
 
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
@@ -33,8 +30,9 @@ with open(pyproject_path, "r") as f:
     release = pyproject_data["project"]["version"]
     version = release
 project = "ISF"
-copyright = "ISF Copyright (C) 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
+copyright = "2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
 author = "Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio"
+
 
 
 # copy over tutorials and convert links to python files to sphinx documentation directives
@@ -43,10 +41,6 @@ copy_and_parse_notebooks_to_docs(
     dest_dir=os.path.join(project_root, "docs", "tutorials"),
     api_extension="autoapi",  # change this if using autosummary instead of autoapi, it needs to find target dir of .rst files.
 )
-
-from compatibility import init_data_base_compatibility
-
-init_data_base_compatibility()  # make db importable before running autosummary or autodoc etc...
 
 
 # -- General configuration ------------------------------------------------
@@ -71,6 +65,7 @@ extensions = [
     "sphinx_immaterial.graphviz",   # Allow internal reflinking and theming for graphviz
     "sphinx_design",            # For nice design elements, such as grids and cards
     # 'sphinxext.opengraph',   # For OpenGraph metadata, only enable when the site is actually hosted. See https://github.com/wpilibsuite/sphinxext-opengraph for config options when that happens.
+    "sphinxcontrib.video"
 ]
 
 graphviz_output_format = "svg"
@@ -95,6 +90,10 @@ def setup(app):
     app.connect("autoapi-skip-member", skip_member)
     app.connect("autoapi-skip-member", count_documented_members)
     app.connect("env-updated", log_documented_members)
+
+    # add custom css and js. fpaths relative to _satic/
+    app.add_css_file('css/custom.css')
+    app.add_js_file('js/video.js')
 
 
 # toc_object_entries_show_parents = "hide"  # short toc entries
@@ -144,6 +143,10 @@ paramlinks_hyperlink_param = "name"
 # Don't run notebooks
 nbsphinx_execute = "never"
 nbsphinx_codecell_lexer = "python"
+nbsphinx_thumbnails = {
+    "tutorials/Introduction_to_ISF": "_static/_images/isf-logo-black-semi-bg.png",
+    "tutorials/3. multiscale models/3.1 Multiscale modeling": "_static/_images/frame.0000.png"
+}
 
 # Add any paths that contain templates here, relative to this directory.
 # We have custom templates that produce toctrees for modules and classes on module pages,
@@ -197,8 +200,15 @@ html_theme = "sphinx_immaterial"
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_logo = "_static/_images/isf-logo-white.png"
+# ATTENTION: We pin the background color of the theme in _static/css/custom.css
+# This is done to ensure the videos match the background color, even after updating the theme.
 html_theme_options = {
     "repo_url": "https://github.com/mpinb/in_silico_framework",
+    # "version_dropdown": True,
+    # "version_info" : [
+    #     {"version": "v0.5.0-beta", "title": "0.5.0-beta", "aliases": ["latest"]},
+    #     {"version": "v0.4.0-beta", "title": "0.4.0-beta", "aliases": []}
+    # ],
     "palette": [
         {
             "media": "(prefers-color-scheme: light)",
@@ -213,8 +223,8 @@ html_theme_options = {
         {
             "media": "(prefers-color-scheme: dark)",
             "scheme": "slate",
-            "primary": "teal",
-            "accent": "orange",
+            "primary": "indigo",
+            "accent": "pink",
             "toggle": {
                 "icon": "material/toggle-switch",
                 "name": "Switch to light mode",
@@ -222,8 +232,11 @@ html_theme_options = {
         },
     ],
     # "sidebar_hide_name": True,
+    "globaltoc_depth": -1,
     'features': [
-        'toc.follow'
+        "navigation.tabs",          # overridden from default immaterial: tab sections on top: broken, unless we upgrade the theme, which requires other upgrades as well.
+        # "navigation.sections",      # overridden from default immaterial: nav sidebar left has expanded sections.
+        # "navigation.tabs.sticky",   # overridden from default behavior: keep tab sections on top visible
         ],
 }
 
@@ -232,7 +245,7 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-# html_title = None
+html_title = "In Silico Framework"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
@@ -253,7 +266,8 @@ html_static_path = ["_static"]
 html_css_files = [
 ]
 
-html_js_files = []
+html_js_files = [
+]
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -287,10 +301,10 @@ html_js_files = []
 html_show_sourcelink = False
 
 
-# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is ``True``.
 # html_show_sphinx = True
 
-# If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
+# If true, "(C) Copyright ..." is shown in the HTML footer. Default is ``True``.
 # html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages will

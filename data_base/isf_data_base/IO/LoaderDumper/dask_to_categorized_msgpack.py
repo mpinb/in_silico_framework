@@ -1,28 +1,38 @@
-'''
-Save and load dask dataframes to msgpack files.
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+r"""Save and load dask dataframes to msgpack with categorical columns.
 
 This dumper is designed for dataframes with the following properties:
 
-- the index is str
+- The index is str
 - The columns have a lot of repetitive values, so they can be grouped.
  
-If the number of partitions is very big (>10000), it will repartition the 
-dataframe to 5000 partitions. Loading such a dataframe is normaly possible
-within 1 second.
+If the number of partitions is very large (>10000), it will repartition the 
+dataframe to 5000 partitions. 
+Loading such a dataframe is normaly possible within 1 second.
 
 Before saving, all str-columns will be converted to ``pd.Categorical``s
 In each respective partition, if the part of unique values in the respective column is <= 20%. The original datatype
 will be restored if the dataframe is loaded. 
-This therefore only serves as optimization to increase loading speed and
-reduce network traffic for suitable dataframes. Suitable dataframes are for example the synapse_activation dataframe.
-Limitations: This is not tested to work well with dataframes that natively contain categoricals
+This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes. 
+Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.
 
-.. deprecated:: 0.2.0
-   The pandas-msgpack format is set to be deprecated in the future.
-   Please consider using parquet instead.
-
-:skip-doc:
-'''
+This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_
+"""
 
 import os, yaml
 import cloudpickle
@@ -35,7 +45,7 @@ import glob
 from data_base.utils import chunkIt, myrepartition, convertible_to_int 
 import six
 import numpy as np
-from pandas_msgpack import to_msgpack, read_msgpack
+from isf_pandas_msgpack import to_msgpack, read_msgpack
 import json
 from .utils import save_object_meta
 
@@ -336,10 +346,6 @@ def dump(
         RuntimeError: _description_
     """
     import os
-    if not "ISF_IS_TESTING" in os.environ:
-        # Module was not called from within the test suite
-        raise RuntimeError(
-            'pandas-msgpack is not supported anymore in the data_base')
     if client is None:
         assert get is not None
         client = get

@@ -1,6 +1,4 @@
-# Mechanisms (TODO: to be revised)
+# Mechanisms
 
-This directory contains the `.mod` files that define the biophysical behaviour of ion channels, such as conductivity, states, derivative states and initial conditions. 
-In addition, it contains network connectivity parameters that define e.g. synaptic connections.
-
-These are used by the NEURON simulator as variable parameters for solving the partial differential equations that describe the biophysics of a neuron.
+This directory contains the NEURON mechanisms that describe the dynamics of ion channels, synapses, and calcium buffers.
+These need to be compiled on your system. Compilation happens automatically upon importing `mechansims` as a package.

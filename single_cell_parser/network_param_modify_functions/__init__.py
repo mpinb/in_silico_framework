@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Modify the :ref:`network_parameters_format`.
 
 """
@@ -12,7 +29,7 @@ def change_ongoing_interval(n, factor=1, pop=None):
     Does so by scaling the time bins of the ongoing activity of the presynaptic :py:class:`~single_cell_parser.celltypes.Spiketrain` celltype.
     
     Args:
-        n (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        n (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         factor (float): The factor to scale the ongoing frequency with.
         pop (list): The celltypes to apply the scaling to.
     
@@ -44,7 +61,7 @@ def set_stim_onset(n, onset=None):
     '''Changes the offset when pointcells get activated
     
     Args:
-        n (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        n (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         onset (float): The onset time in milliseconds.
 
     Example:
@@ -71,7 +88,7 @@ def change_glutamate_syn_weights(
     '''Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
     
     Args:
-        param (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         g_optimal (pandas.core.series.Series | pandas.core.frame.DataFrame): 
             The optimal values for the glutamate synapse weights.
             If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
@@ -106,7 +123,7 @@ def change_evoked_INH_scaling(param, factor, pop=INHIBITORY):
     """Scales the response probability for inhibitory cells in the :ref:`network_parameters_format`.
     
     Args:
-        param (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         factor (float): The scaling factor.
         pop (list): The celltypes to apply the scaling to. 
             Default is the inhibitory celltypes in the rat somatosensory cortex vS1.
@@ -156,7 +173,7 @@ def _has_evoked(param, celltype):
     """Check if the celltype has evoked activity.
     
     Args:
-        param (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         celltype (str): The celltype to check.
     
     Returns:
@@ -181,7 +198,7 @@ def inactivate_evoked_activity_by_celltype_and_column(
     """Inactivates the evoked activity for the celltypes in the :ref:`network_parameters_format`.
     
     Args:
-        param (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         inact_celltypes (list): The celltypes to inactivate.
         inact_column (list): The columns to inactivate.
 
@@ -208,7 +225,7 @@ def inactivate_evoked_and_ongoing_activity_by_celltype_and_column(
     Does so by completely removing them from the :ref:`network_parameters_format`.
 
     Args:
-        param (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         inact_celltypes (list): The celltypes to inactivate.
         inact_column (list): The columns to inactivate.
 
@@ -239,7 +256,7 @@ def multi_stimulus_trial(
     Optionally applies a different evoked activity scaling factor to each stimulus.
     
     Args:
-        netp (sumatra.parameters.NTParameterSet | dict): The :ref:`network_parameters_format`.
+        netp (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The :ref:`network_parameters_format`.
         inter_stimulus_interval (int | float): amount of time to wait (in ms) between each whisker stimulus
         stims (int): number of stimuli to simulate
         scale_factors (list, optional): 

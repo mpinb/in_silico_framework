@@ -11,4 +11,4 @@ sys.path.insert(0, PARENT)
 cellParamName = os.path.join(
     TEST_DATA_FOLDER,
     'biophysical_constraints',
-    '86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param')
+    '86_C2_center.param')

@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Construct reduced models and run optimization.
 
 This module provides a top-level class to run reduced model inference.
@@ -36,7 +53,7 @@ def get_n_workers_per_ip(workers, n):
 
 
 class Rm(object):
-    """Reduced model class.
+    r"""Reduced model class.
     
     This is the top-level class for running reduced model inference.
     It provides an interface to add data extractors and strategies, and to run the optimization.
@@ -47,7 +64,7 @@ class Rm(object):
         tmin (float): Minimum time for the simulation
         tmax (float): Maximum time for the simulation
         width (float): Width of the temporal kernel. 
-            This will be used as the domain e.g. the :math:`\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBases`
+            This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
         n_trials (int): Amount of trials
         data_extractors (dict): Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
         strategies (dict): Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
@@ -70,7 +87,7 @@ class Rm(object):
             db (str): Path to the database
             tmin (float): Minimum time for the simulation
             tmax (float): Maximum time for the simulation
-            width (float): Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :py:class:`simrun.modular_reduced_model_inference.strategy.RaisedCosineBases`
+            width (float): Width of the temporal kernel. This will be used as the :math:`\\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
             selected_indices (list): List/nested list of integer indices for selected simulation trials
         """
         self.name = name

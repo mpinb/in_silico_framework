@@ -1,5 +1,21 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """
-Efficient, reproducable and flexible database with dictionary-like API. 
+Efficient, reproducible and flexible database with dictionary-like API. 
 This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
 Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
 A wide variety of input data and output file formats are supported (see :py:mod:`data_base.IO.LoaderDumper`), including:
@@ -10,13 +26,6 @@ A wide variety of input data and output file formats are supported (see :py:mod:
 - :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
 
 Simulation results from :py:mod:`single_cell_parser` and :py:mod:`simrun` can be imported and converted to a high performance binary format using the :py:mod:`data_base.db_initializers` subpackage.
-
-Database backends can be easily swapped by changing the import statement in :py:mod:`data_base.data_base`.
-
-1. Future support (or deprecation) for file formats and filesystems can be easily implemented by creating a ``new_database`` subpackage containing a ``IO.LoaderDumper`` subpackage.
-2. Backwards compatibility to old data is guaranteed, as the previous database system is still available and automatically inferred by :py:class:`~data_base.data_base.DataBase`
-
-The current database system is :py:mod:`~data_base.isf_data_base`, which uses the ``JSON`` format for metadata and IO information.
 
 Example:
 
@@ -46,11 +55,5 @@ Example:
             "error": null
         }
 """
-# Register the database IO and initializers submodules/-packages
-import sys
-from data_base.isf_data_base import IO, db_initializers
-sys.modules['data_base.IO'] = IO
-sys.modules['data_base.db_initializers'] = db_initializers
-
 # Bring wrapper class to the front
 from .data_base import DataBase

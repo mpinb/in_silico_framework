@@ -1,4 +1,20 @@
 # -*- coding: utf-8 -*-
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Database utility and convenience functions.
 """
 import sys, os, time, random, string, warnings, six, cloudpickle, \
@@ -587,7 +603,7 @@ def colorize_key(key):
         c = ""
     return c + key.name + bcolors.ENDC
 
-def colorize(key, bcolor):
+def colorize_str(key, bcolor):
     """Colorize a string with a terminal color.
     
     Simply concatenates the string with escape sequences that colroize the text in a terminal.
@@ -618,9 +634,9 @@ def calc_recursive_filetree(
         max_depth (int): Maximum depth to recurse into the directory tree
         max_lines (int): Maximum number of lines to print. Default is 30.
         max_lines_per_key (int): Maximum number of lines per key. Default is 3.
-        lines (list): List of strings to append to during recursion. Default is None.
-        all_files (bool): If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is False.
-        colorize (bool): If True, colorizes the keys. Default is True.
+        lines (list): List of strings to append to during recursion. Default is ``None``.
+        all_files (bool): If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is ``False``.
+        colorize (bool): If True, colorizes the keys. Default is ``True``.
         
     Returns:
         list: The formatted tree structure as a list of strings.

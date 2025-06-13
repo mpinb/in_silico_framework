@@ -33,7 +33,7 @@ Anyone who uses ISF and has ideas on how to improve or extend the functionality 
 ### What to consider
 
 Before you start implementing a feature or fixing a bug, please [open an issue](https://github.com/mpinb/in_silico_framework/issues/new/choose) first.
-It is not unlikely that some functionality may already be available, or at least possible with ISF. At the same time, not every possibility needs to be part of ISF's source code. 
+It is not unlikely that some functionality may already be available, or at least possible with ISF. At the same time, not every possibility needs to be part of ISF's source code. These considerations can be discussed in the issue trackers.
 
 In the issues tracker, you can also count on the expertise and advice of the developers who have been using and develping ISF for some time now.
 That being said, we are also welcome new ideas, and are very excited to hear how you are using ISF!
@@ -43,7 +43,9 @@ That being said, we are also welcome new ideas, and are very excited to hear how
 ISF uses [`pixi`](https://pixi.sh/latest) for managing environments. The default environment includes the`run dependencies`: everything you need to run ISF.
 These are often sufficient to implement new ideas. However, if you require additional dependenices, you can simply `pixi add xyz`. Before adding new dependencies to ISF, please consider the following:
 
-- Dependencies are not always maintained forever. `pandas-msgpack` and `sumatra` have been two examples of packages we had to deprecate or work around in ISF.
+> ISF is only useful if it is stable. ISF is only stable if the dependencies, API and reproducibility do not significantly change.
+
+- Dependencies are not always maintained forever. `pandas-msgpack` and `sumatra` have been two examples of packages we had to deprecate, patch, or pin down other dependencies for.
 - Maintenance costs tend to scale exponentially with additional dependencies
 - Can your dependency be reasonably omitted in favor of the standard library, or other core packages such as `numpy` or `scipy`?
 
@@ -202,8 +204,8 @@ The database system in ISF is modular, meaning that new file formats or entirely
 
 Implementing new file formats is easy:
 
-1. Identify the current database system (should be `data_base.isf_data_base` as of 04/03/2025)
-2. Add a new module to ``IO.LoaderDumper`` containing:
+1. Identify the current database system (should be `data_base.isf_data_base`, last updated of 24/04/2025)
+2. Add a new module to ``data_base.<db_backend>.IO.LoaderDumper`` containing:
   a. A writer function under the name ``dump()``
   b. A reader class under the name ``Loader``
 
@@ -218,16 +220,18 @@ The database will automatically use your `dump()` and `Loader` to save and read 
 
 ### Database modularity
 
-This codebase has been a little over 15 years in the making (depending on who you ask). Inevitably, data formats have come and passed. `pandas-msgpack` used to be the crème de la crème with its `blosc` compression, until it stopped being maintained. To balance long term support with cutting-edge file formats, we must be modular in our database system.
+This codebase has been a little over 15 years in the making (depending on who you ask). Inevitably, data formats have come and passed. 
+To balance long term support with cutting-edge file formats, we must be modular in our database system.
 
 What do we meean when we say a "modular data base system"? In the past, we have used `model_data_base` instead of `isf_data_base`. `model_data_base` differed from the current database system in the following aspects:
 - It used the `.pickle` format for saving metadata, and `LoaderDumper` information. This introduced the issue that nothing could be refactored, moved or renamed in the source code of the database, or the pickled Loader object would not work anymore. 
 - It used SQLite to save and fetch metadata. This then required filelocking to prevent concurrent writes to the metadata file.
 
-Both issues introduced significant overhead in usage and maintenance. However, simply changing the way it worked would invalidate all old data. As we didn't want to convert exabytes of data when we could still simply read it in, but also wanted to avoid these issues in the future, we opted for the current "modular" approach, where we can use both `isf_data_base`, and `model_data_base` (if necessary), and even extend it to some mysterious third future option (God help us all if we need to, but we could).
+Both issues introduced significant overhead in usage and maintenance. However, simply overhauling the way it worked would invalidate all old data. As we didn't want to convert exabytes of data when we could very much simply still read it in as is, but also wanted to avoid these issues in the future, we opted for the current "modular" approach, where we can use both `isf_data_base`, and `model_data_base` (if necessary), and even extend it to some mysterious third future option (I will shed a tear if we need to, but we could if we must).
 
-This modular approach is possible because we have one wrapper `data_base` package, and a corresponding `DataBase` wrapper class. Give the wrapper class a path to a database, it will infer which database system was used, and give you the correct source code to read, inspect, and write data.
+This modular approach is possible because we have one wrapper `data_base` package, a `DataBase` wrapper class, and an `IO` wrapper subpackage. 
+Give the wrapper class a path to a database, it will infer which database system was used, and give you the correct source code to read, inspect, and write data. Import `IO` and it will infer which backend to use (i.e. does it need to use JSON or `.pickle` for metadata).
 
-Throughout ISF, all other packages simply rely on the wrapper `data_base`, and do not know which database system will actually take care of saving their precious data. This agnosticism is achieved by dynamically adding the latest `IO` and `db_initializers` subpackages to the Python namespace at runtime, i.e. as soon as `data_base` is imported. Exactly which subpackages are the "latest" can then be configured in the `data_base` package.
+Throughout ISF, all other packages simply rely on the wrapper `data_base`, and do not know which database system will actually take care of saving their precious data. This agnosticism is achieved by dynamically importing the correct `IO` subpackages at runtime, i.e. as soon as `data_base.IO` is imported.
 
 You may have noticed that we do **not** recommend changing the database system. It is tedious, and introduces avoidable technical debt. Generally, 99% of all flexibility you could ever want can be achieved by implementing new `LoaderDumper` modules in the current database system.

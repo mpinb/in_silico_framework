@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Create anatomical realizations of connectivity.
 In contrast to :py:mod:`single_cell_parser.network_embedding`, 
 this module does not handle the activity of presynaptic populations, but provides functionality to fully investigate the network connectivity.
@@ -1092,41 +1109,25 @@ class NetworkMapper:
 
         return synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
 
-    def _generate_output_files(
-            self, 
-            postCellName, 
-            connectivityMap,
-            connectedCells, 
-            connectedCellsPerStructure):
-        '''Generates all summary files and writes output files.
 
-        Generates and writes out summary files using 
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
-
-        Used by :py:meth:`~create_network_embedding_for_simulations` and
-        :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+    def _write_landmark_files(
+        self,
+        synapseLocations, 
+        id1, id2, 
+        cellName, 
+        dirName,
+    ):
+        """Write out landmark files for each synapse location.  
+        
+        This is used in :py:meth:`_generate_output_files` to write out landmark files for each synapse location.
 
         Args:
-            postCellName (str): Path to the postsynaptic :ref:`hoc_file_format` file.
-            connectivityMap (list): 
-                Connections between presynaptic cells and postsynaptic cell of the form
-                (cell type, presynaptic cell index, synapse index). 
-                Created by :py:meth:`_create_anatomical_connectivity_map`.
-            connectedCells (dict): Dictionary of connected cells.
-            connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
-
-        Returns:
-            None. Writes output files to disk.
-        '''
-        id1 = time.strftime('%Y%m%d-%H%M')
-        id2 = str(os.getpid())
-        outNamePrefix = postCellName[:-4]
-        cellName = postCellName[:-4].split('/')[-1]
-        dirName = outNamePrefix + '_synapses_%s_%s/' % (id1, id2)
-        if not os.path.exists(dirName):
-            os.makedirs(dirName)
+            synapseLocations (dict): Dictionary of synapse locations.
+            id1 (str): ID for the current date.
+            id2 (str): ID for the current process.
+            cellName (str): Name of the postsynaptic cell.
+            dirName (str): Directory name for the output files.
+        """
         totalDirName = dirName + 'total_synapses/'
         if not os.path.exists(totalDirName):
             os.makedirs(totalDirName)
@@ -1139,19 +1140,6 @@ class NetworkMapper:
         somaDirName = dirName + 'soma_synapses/'
         if not os.path.exists(somaDirName):
             os.makedirs(somaDirName)
-
-        (
-            synapseLocations, 
-            cellSynapseLocations, 
-            cellTypeSummaryTable, 
-            anatomicalAreaSummaryTable
-        ) = self._compute_summary_tables(
-            connectedCells, 
-            connectedCellsPerStructure
-        )
-
-        logger.info('    Writing output files...')
-
         anatomical_areas = list(self.cells.keys())
         for anatomical_area in anatomical_areas:
             cellTypes = list(self.cells[anatomical_area].keys())
@@ -1174,6 +1162,60 @@ class NetworkMapper:
                 somaLandmarkName = somaDirName + '_'.join(
                     (cellName, 'soma_synapses', preCellType, id1, id2))
                 writer.write_landmark_file(somaLandmarkName, somaSynapses)
+
+    def _generate_output_files(
+            self, 
+            postCellName, 
+            connectivityMap,
+            connectedCells, 
+            connectedCellsPerStructure,
+            writeLandmarkFiles=False):
+        '''Generates all summary files and writes output files.
+
+        Generates and writes out summary files using 
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
+        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
+
+        Used by :py:meth:`~create_network_embedding_for_simulations` and
+        :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+
+        Args:
+            postCellName (str): Path to the postsynaptic :ref:`hoc_file_format` file.
+            connectivityMap (list): 
+                Connections between presynaptic cells and postsynaptic cell of the form
+                (cell type, presynaptic cell index, synapse index). 
+                Created by :py:meth:`_create_anatomical_connectivity_map`.
+            connectedCells (dict): Dictionary of connected cells.
+            connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
+
+        Returns:
+            None. Writes output files to disk.
+        '''
+
+        id1 = time.strftime('%Y%m%d-%H%M')
+        id2 = str(os.getpid())
+        outNamePrefix = postCellName[:-4]
+        cellName = postCellName[:-4].split('/')[-1]
+        dirName = outNamePrefix + '_synapses_%s_%s/' % (id1, id2)
+        if not os.path.exists(dirName):
+            os.makedirs(dirName)
+
+        (
+            synapseLocations, 
+            cellSynapseLocations, 
+            cellTypeSummaryTable, 
+            anatomicalAreaSummaryTable
+        ) = self._compute_summary_tables(
+            connectedCells, 
+            connectedCellsPerStructure
+        )
+
+        logger.info('    Writing output files...')
+
+        if writeLandmarkFiles:
+            self._write_landmark_files(
+                synapseLocations, id1, id2, cellName, dirName)
 
         synapseName = dirName + '_'.join((cellName, 'synapses', id1, id2))
         writer.write_cell_synapse_locations(
@@ -1200,7 +1242,8 @@ class NetworkMapper:
         synapseLocations, 
         cellSynapseLocations,
         cellTypeSummaryTable, 
-        anatomicalAreaSummaryTable
+        anatomicalAreaSummaryTable,
+        writeLandmarkFiles=False
         ):
         '''Writes output files for precomputed summary files.
 
@@ -1228,44 +1271,13 @@ class NetworkMapper:
         dirName = outNamePrefix + '_synapses_%s_%s/' % (id1, id2)
         if not os.path.exists(dirName):
             os.makedirs(dirName)
-        totalDirName = dirName + 'total_synapses/'
-        if not os.path.exists(totalDirName):
-            os.makedirs(totalDirName)
-        apicalDirName = dirName + 'apical_synapses/'
-        if not os.path.exists(apicalDirName):
-            os.makedirs(apicalDirName)
-        basalDirName = dirName + 'basal_synapses/'
-        if not os.path.exists(basalDirName):
-            os.makedirs(basalDirName)
-        somaDirName = dirName + 'soma_synapses/'
-        if not os.path.exists(somaDirName):
-            os.makedirs(somaDirName)
 
         logger.info('---------------------------')
         logger.info('Writing output files...')
 
-        anatomical_areas = list(self.cells.keys())
-        for anatomical_area in anatomical_areas:
-            cellTypes = list(self.cells[anatomical_area].keys())
-            for preType in cellTypes:
-                preCellType = preType + '_' + anatomical_area
-                allSynapses = synapseLocations[anatomical_area][preType]['Total']
-                totalLandmarkName = totalDirName + '_'.join(
-                    (cellName, 'total_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(totalLandmarkName, allSynapses)
-                apicalSynapses = synapseLocations[anatomical_area][preType][
-                    'ApicalDendrite']
-                apicalLandmarkName = apicalDirName + '_'.join(
-                    (cellName, 'apical_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(apicalLandmarkName, apicalSynapses)
-                basalSynapses = synapseLocations[anatomical_area][preType]['BasalDendrite']
-                basalLandmarkName = basalDirName + '_'.join(
-                    (cellName, 'basal_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(basalLandmarkName, basalSynapses)
-                somaSynapses = synapseLocations[anatomical_area][preType]['Soma']
-                somaLandmarkName = somaDirName + '_'.join(
-                    (cellName, 'soma_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(somaLandmarkName, somaSynapses)
+        if writeLandmarkFiles:
+            self._write_landmark_files(
+                synapseLocations, id1, id2, cellName, dirName)
 
         synapseName = dirName + '_'.join((cellName, 'synapses', id1, id2))
         writer.write_cell_synapse_locations(

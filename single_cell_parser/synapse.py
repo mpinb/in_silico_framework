@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''
 Synapse class for synaptic activations and NEURON API.
 
@@ -8,8 +25,7 @@ See also:
     :py:class:`single_cell_parser.cell.Cell`.
 '''
 from neuron import h
-from sumatra.parameters import NTParameterSet
-from parameters import ParameterSet
+from single_cell_parser.parameters import ParameterSet
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
@@ -33,7 +49,7 @@ class Synapse(object):
         releaseSite (:py:class:`~single_cell_parser.cell.PointCell`): Release site of presynaptic cell.
         postCellType (str): Postsynaptic cell type.
         coordinates (list): 3D coordinates of synapse location
-        receptors (:py:class:`~sumatra.parameters.NTParameterSet`): Stores hoc mechanisms
+        receptors (:py:class:`~single_cell_parser.parameters.ParameterSet`): Stores hoc mechanisms
         netcons (list): Stores NetCons
         weight (float): Synaptic weight
         _active (bool): Activation status
@@ -90,11 +106,11 @@ class Synapse(object):
                 Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
             preCell (:py:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
             targetCell (:py:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
-            receptors (dict | Dict[:py:class:`~sumatra.parameters.NTParameterSet`]): 
-                Dictionary or NTParameterSet of receptors. 
-                Each individual receptor in this collection must be of the type :py:class:`~sumatra.parameters.NTParameterSet`.
+            receptors (dict | Dict[:py:class:`~single_cell_parser.parameters.ParameterSet`]): 
+                Dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet` of receptors. 
+                Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.ParameterSet`.
         '''
-        assert isinstance(receptors, ParameterSet) or isinstance(receptors, NTParameterSet), 'receptors must be a sumatra (NT)ParameterSet, but they are of type %s' % type(receptors)
+        assert isinstance(receptors, ParameterSet), 'receptors must be single_cell_parser.parameters.ParameterSet, but they are of type %s' % type(receptors)
         self.releaseSite = source
         self.preCell = preCell
         '''careful: point processes not allowed at nodes between sections

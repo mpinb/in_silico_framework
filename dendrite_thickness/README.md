@@ -1,3 +1,4 @@
 # Dendrite Thickness
 
-This package allows to reconstruct dendrite diameters from morphological reconstructions and image data; a prerequisite for simulations.
+Reconstruct dendrite diameters from image data.
+This is one of many way of reconstructing neuron morphologies.

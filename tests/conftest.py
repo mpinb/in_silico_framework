@@ -22,9 +22,7 @@ from .fixtures.dataframe_fixtures import ddf, pdf
 if six.PY3:  # pytest can be parallellized on py3: use unique ids for dbs
     from .fixtures.data_base_fixtures_py3 import (
         empty_db,
-        empty_mdb,
         fresh_db,
-        fresh_mdb,
         sqlite_db,
     )
 elif (
@@ -32,9 +30,7 @@ elif (
 ):  # old pytest version needs explicit @pytest.yield_fixture markers. has been deprecated since 6.2.0
     from .fixtures.data_base_fixtures_py2 import (
         fresh_db,
-        fresh_mdb,
         empty_db,
-        empty_mdb,
         sqlite_db,
     )
 
@@ -100,6 +96,9 @@ class ModuleFilter(logging.Filter):
 
 def pytest_addoption(parser):
     parser.addoption("--dask_server_port", action="store", default="8786")
+    parser.addoption(
+        "--dask_server_ip", action="store", default="localhost"
+    )  # default is localhost
 
 
 def is_port_in_use(port):
@@ -165,7 +164,7 @@ def pytest_configure(config):
 
     c = distributed.Client(
         "{}:{}".format(
-            "localhost",
+            config.getoption("--dask_server_ip", default="localhost"),
             config.getoption("--dask_server_port"),
         )
     )

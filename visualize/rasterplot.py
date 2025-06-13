@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """ 
 Efficiently create rasterplots from spike time dataframes.
 """
@@ -91,7 +108,7 @@ def rasterplot2_pdf_grouped(
         ax (matplotlib.axes.Axes, optional):
             An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
         xlim (tuple, optional):
-            The x-axis limits for the plot. Default is None.
+            The x-axis limits for the plot. Default is ``None``.
         x_offset (float, optional):
             An offset to apply to the x-values (event times). Default is 0.
         color (str, optional):
@@ -160,13 +177,13 @@ def rasterplot(
         ax (matplotlib.axes.Axes, optional):
             An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
         label (str, optional):
-            The label for the plot. Default is None.
+            The label for the plot. Default is ``None``.
         groupby_attribute (str, optional):
-            The column name in the DataFrame to group by. Default is None.
+            The column name in the DataFrame to group by. Default is ``None``.
         tlim (tuple, optional):
-            The x-axis limits for the plot. Default is None.
+            The x-axis limits for the plot. Default is ``None``.
         reset_index (bool, optional):
-            If True, reset the index of the DataFrame. Default is True.
+            If True, reset the index of the DataFrame. Default is ``True``.
 
     Returns:
         matplotlib.pyplot.Figure: Figure object containing the rasterplot. 

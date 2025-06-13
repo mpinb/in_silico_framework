@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
 This module provides a function to rebuild a network-embedded neuron model from 
@@ -105,7 +122,7 @@ def simtrial_to_cell_object(
     additional_network_params = [],
     tStop = 345
     ):
-    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    r"""Recreate and resimulate a single simulation trial from parameter files and return the cell object.
     
     This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
     before resimulating the trial. The network and neuron parameter modify functions should take the
@@ -134,7 +151,7 @@ def simtrial_to_cell_object(
         to recreate a single simulation trial from parameter files instead of a database.
         
     See also:
-        :py:mod:`data_base.isf_data_base.db_initializers.init_simrun_general` to initialize a database object
+        :py:mod:`data_base.db_initializers.init_simrun_general` to initialize a database object
         from raw `simrun` output, i.e. a "simrun-initialized" database object.
     
     Returns:
@@ -149,8 +166,7 @@ def simtrial_to_cell_object(
         cellName = parameter_table.loc[sim_trial_index].hash_neuron
         cellName = os.path.join(db['parameterfiles_cell_folder'], cellName)
         networkName = parameter_table.loc[sim_trial_index].hash_network
-        networkName = os.path.join(db['parameterfiles_network_folder'],
-                                   networkName)
+        networkName = os.path.join(db['parameterfiles_network_folder'], networkName)
         sa = db['synapse_activation'].loc[sim_trial_index].compute()
         dummy =  trial_to_cell_object(
             cellName = cellName, \
@@ -188,7 +204,7 @@ def trial_to_cell_object(
     synapse_activation_modify_functions = [],
     additional_network_params = []  # TODO: unused
     ):
-    """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
+    r"""Recreate and resimulate a single simulation trial from parameter files and return the cell object.
     
     This method also provides functionality to adapt the parameters of the cell, network, and synapse activation data
     before resimulating the trial. The network and neuron parameter modify functions should take the

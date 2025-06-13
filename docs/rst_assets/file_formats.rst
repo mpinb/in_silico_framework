@@ -10,8 +10,7 @@ File & data formats
 
 .syn
 ****
-ISF custom file format to store synapse locations onto a morphology. 
-This file fully captures an anatomical realization of a network.
+ISF custom file format to store synapse locations onto a morphology.
 Only valid with an associated morphology :ref:`hoc_file_format` file.
 
 For each synapse, it provides the synapse type and location onto the morphology.
@@ -43,7 +42,7 @@ Example::
 ISF custom file format to store connectivity data. 
 To be used in conjunction with an associated :ref:`syn_file_format` file and morphology :ref:`hoc_file_format` file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
-While a :ref:`syn_file_format` file and :ref:`hoc_file_format` file provide the anatomical realization of a network,
+While a :ref:`syn_file_format` file and :ref:`hoc_file_format` file provide the anatomical realization of a morphology embedding into a network,
 the addition of a :ref:`con_file_format` file makes possible to construct a functional realization, as it allows linking the synapses to
 presynaptic cells of a dense connectome model, which in turn allows to assign cell type specific activation patterns 
 to each synapse. ISF's workflow is designed to create these files in tandem, so they always co-exist.
@@ -67,8 +66,14 @@ Example::
 .param
 ******
 ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
-Cell parameters can be read and written using :py:mod:`single_cell_parser`.
+The ``.param`` format is valid Python code, but differs from JSON, as it allows trailing comma's, single quotes, and tuples. JSON does not.
+All ``.param`` files can be read using :py:mod:`single_cell_parser.build_parameters`. However, specific files that use this format have more
+specialized readers, which provide additional for :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
+
 Both the :ref:`cell_parameters_format` and the :ref:`network_parameters_format` are used as inputs for multi-scale simulations using :py:mod:`simrun`.
+
+See also: 
+  :py:mod:`simrun.parameters_to_cell` to rerun a simulation from these parameterfiles.
 
 .. _cell_parameters_format:
 
@@ -76,11 +81,10 @@ Cell parameters
 ===============
 
 :ref:`param_file_format` file to store biophysical parameters of a cell.
-Only valied with a corresponding :ref:`hoc_file_format` morphology file.
 Includes a reference to a :ref:`hoc_file_format` morphology file, 
 biophysical properties of the cell per cellular structure (i.e. soma, dendrite, axon initial segment ...),
-and basic simulation parameters. Simulation parameters are usually overridden by higher level modules, 
-such as :py:mod:`simrun`.
+and basic simulation parameters. Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
+Simulation parameters are usually overridden by higher level modules, such as :py:mod:`simrun`.
 
 To access different structures of a cell::
 
@@ -263,7 +267,7 @@ The output format of various simulation pipelines are usually a dataframe. below
 The :py:mod:`simrun` package produces output files in ``.csv`` or ``.npz`` format. many of these files
 need to be created for each individual simulation trial. 
 These raw output files are usually parsed into single dataframes for further analysis using a ``db_initializers`` submodule (see e.g. 
-:py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general`).
+:py:mod:`~data_base.db_initializers.load_simrun_general`).
 
 
 .. _syn_activation_format:
@@ -466,7 +470,7 @@ Writers:
 
 - :py:meth:`~single_cell_parser.writer.write_presynaptic_spike_file` is used by :py:mod:`simrun` and :py:mod:`~single_cell_parser.analyze.synanalysis`
    to write raw output data.
-- :py:meth:`data_base.isf_data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
+- :py:meth:`data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
 
 .. attention::
 
@@ -528,7 +532,7 @@ Voltage trace ``.npz``
 Voltage trace dataframe
 -----------------------
 
-The parsed dataframe is usually created by the :py:meth:`data_base.isf_data_base.db_initializers.load_simrun_general.init` function.
+The parsed dataframe is usually created by the :py:meth:`data_base.db_initializers.load_simrun_general.init` function.
 
 .. list-table:: ``voltage trace dataframe``
    :header-rows: 1
@@ -593,7 +597,7 @@ Example::
 
 .mod
 ****
-NEURON :cite:`hines2001neuron` file format for neuron mechanisms. refer to the `NEURON NMOL documentation <https://neuron.yale.edu/neuron/docs/using-nmodl-files>`_ for more info.
+NEURON :cite:`hines2001neuron` file format for neuron mechanisms. refer to the `NEURON NMODL documentation <https://neuron.yale.edu/neuron/docs/using-nmodl-files>`_ for more info.
 Used to define channel and synapse dynamics in NEURON simulations.
 See the folder `mechanisms` in the project source.
 
@@ -602,7 +606,7 @@ See the folder `mechanisms` in the project source.
 .am
 ***
 
-The Amira proprietary VTK-like file format. Refer to the `amira documentation <https://www.csc.kth.se/~weinkauf/notes/amiramesh.html>`_ for more information.
+The Amira proprietary VTK-like file format. Refer to the `amira documentation <https://assets.thermofisher.com/TFS-Assets/MSD/Product-Guides/users-guide-amira-software-2019.pdf>`_ for more information.
 This flexible format can be used to store 3D scalar meshes, 3D neuron morphology reconstructions, slice image data etc.
 
 Readers:

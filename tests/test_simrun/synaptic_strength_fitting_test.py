@@ -41,7 +41,7 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     )
     neuron_param = os.path.join(context.data_dir, 'neuron_model.param')
     neuron_param = scp.build_parameters(neuron_param)
-    neuron_param.neuron['cell_modify_functions'] = scp.NTParameterSet(
+    neuron_param.neuron['cell_modify_functions'] = scp.ParameterSet(
         {'scale_apical_morph_86': {}})
     filename = os.path.join(
         context.data_dir,

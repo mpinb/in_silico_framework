@@ -1,4 +1,21 @@
 #!/usr/bin/python
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """
 Runfile to create a :ref:`network_parameters_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
 
@@ -22,8 +39,7 @@ evokedPrefix = os.path.join(
     getting_started.parent,
     'example_data',
     'functional_constraints',
-    'evoked_activity',
-    'PW_SuW_RF_CDK') + '/'
+    'evoked_activity') + '/'
 #L2EvokedName = evokedPrefix + 'L2_3x3_PSTH_template_0-50_10ms.param'
 #L34EvokedName = evokedPrefix + 'L34_3x3_PSTH_template_0-20_1ms_20-50_10ms.param'
 #L4pyEvokedName = evokedPrefix + 'L4py_3x3_PSTH_template_0-50_10ms.param'
@@ -461,7 +477,7 @@ def create_network_parameter(
     templateParam = scp.build_parameters(templateParamName)
     cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
 
-    nwParam = scp.NTParameterSet({
+    nwParam = scp.ParameterSet({
         'info': templateParam.info,
         'NMODL_mechanisms': templateParam.NMODL_mechanisms
     })
@@ -471,7 +487,7 @@ def create_network_parameter(
 
     if clusterParameters:
         clusterBasePath = '/gpfs01/bethge/home/regger'
-        nwParamCluster = scp.NTParameterSet({'info': templateParam.info})
+        nwParamCluster = scp.ParameterSet({'info': templateParam.info})
         nwParamCluster.NMODL_mechanisms = templateParam.NMODL_mechanisms.tree_copy(
         )
         nwParamCluster.network = {}
@@ -585,7 +601,7 @@ def whisker_evoked_PSTH(
     evokedTypes = list(evokedTemplates.keys())
     if column not in columns or cellType not in evokedTypes:
         return None
-    # NTParameterset of PSTHs of these cell types
+    # Parameterset of PSTHs of these cell types
     evokedTemplate = evokedTemplates[cellType]
     # Equivalent column relative to C2
     PSTHwhisker = surroundPSTHLookup[surroundColumns[deflectedWhisker][column]]
@@ -613,8 +629,7 @@ def load_cell_number_file(cellNumberFileName):
     Example:
         >>> load_cell_number_file(
         ...    'getting_started/example_data/anatomical_constraints/'
-        ...    '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center_synapses_20150504-1611_10389/'
-        ...    '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center_synapses_20150504-1611_10389/'
+        ...    'example_embedding_86_C2_center/'
         ...    'NumberOfConnectedCells.csv'
         ...    )
         {

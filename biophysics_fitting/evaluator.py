@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 '''Extract features from voltage traces.
 '''
 __author__ = "Arco Bast"
@@ -83,14 +99,14 @@ class Evaluator:
         self.setup = Evaluator_Setup()
 
     def evaluate(self, features_dict, raise_=True):
-        '''Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
+        r'''Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
         
         Details on how to set up the Evaluator are in the docstring of the Evaluator class.
 
         Args:
             features_dict (dict): 
                 a dictionary of stimulus names as keys, and corresponding voltage traces as values.
-            raise\_ (bool): Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`. 
+            raise_ (bool): Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`. 
                 If False, will not raise an error, and evaluate all features that can be evaluated given the provided `features_dict`. 
 
         Raises:

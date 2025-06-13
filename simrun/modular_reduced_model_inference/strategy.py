@@ -1,7 +1,24 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Strategies for creating reduced models.
 
 Strategies are pipelines whose sole purpose is to define a cost function.
-Cost functions are functions :math:`f: D, x \rightarrow c` that take data :math:`D` and parameters :math:`x` as input and return some cost :math:`c`.
+Cost functions are functions :math:`f: D, x \\rightarrow c` that take data :math:`D` and parameters :math:`x` as input and return some cost :math:`c`.
 Solvers then optimize these cost functions to find the best parameters :math:`x` for the given data :math:`D`.
 
 This approach is purposefully kept very general, so that it can be used for a wide range of purposes.
@@ -201,7 +218,7 @@ class _Strategy(object):
         
         Args:
             split (array): An array of indices to use for the split.
-            setup (bool): Whether to setup the strategy after setting the split. Default is True.
+            setup (bool): Whether to setup the strategy after setting the split. Default is ``True``.
             
         Returns:
             _Strategy: The strategy object with the split set.
@@ -296,7 +313,7 @@ class _Strategy(object):
         
         Args:
             solver (:py:class:`~simrun.modular_reduced_model_inference.solver.Solver`): The solver to add.
-            setup (bool): Whether to setup the solver. Default is True.
+            setup (bool): Whether to setup the solver. Default is ``True``.
             
         Returns:
             None. Adds the solver to the strategy.
@@ -423,39 +440,39 @@ class Strategy_ISIexponential(_Strategy):
 
 
 class RaisedCosineBasis(object):
-    r"""Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
+    """Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
     
     A raised cosine is defined as:
     
     .. math::
     
-        f_i(x) = \frac{1}{2} cos(a \cdot log(\tau + c) - \phi_i) + \frac{1}{2}
+        f_i(x) = \\frac{1}{2} cos(a \cdot log(\\tau + c) - \phi_i) + \\frac{1}{2}
         
-    where :math:`\tau` is the input dimension (space or time e.g.), :math:`a` is the steepness, :math:`c` is the offset, and :math:`\phi` is the phase.
-    These basis functions can be superimposed using learnable weights :math:`x_i` to form a single filter :math:`\mathbf{w}(\tau)` over the domain :math:`\tau`:
+    where :math:`\\tau` is the input dimension (space or time e.g.), :math:`a` is the steepness, :math:`c` is the offset, and :math:`\phi` is the phase.
+    These basis functions can be superimposed using learnable weights :math:`x_i` to form a single filter :math:`\mathbf{w}(\\tau)` over the domain :math:`\\tau`:
     
     .. math::
     
-        \mathbf{w}(\tau) = \sum_{i} x_i \cdot f_i(\tau)
+        \mathbf{w}(\\tau) = \sum_{i} x_i \cdot f_i(\\tau)
         
     And this filter can then be used to weigh the input data :math:`\mathbf{D}`:
     
     .. math::
     
-        WI(t) = \int_{t-width}^{t}  \mathbf{w}(\tau) \cdot \mathbf{D}(\tau)
+        WI(t) = \int_{t-width}^{t}  \mathbf{w}(\\tau) \cdot \mathbf{D}(\\tau)
         
     Note:
         The notation here heavily implies that the cosine functions are defined over the time domain.
         However, they can equally well be used for spatial or spatiotemporal data.
 
     Attributes:
-        a (int): The steepness of the raised cosine. Default is 2.
-        c (int): The offset of the raised cosine. Default is 1.
+        a (int): The steepness of the raised cosine. Default is :math:`2`.
+        c (int): The offset of the raised cosine. Default is :math:`1`.
         phis (array): The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
-        width (int): The width of the basis functions. Default is 80.
+        width (int): The width of the basis functions. Default is :math:`80`.
         basis (list): The list of basis functions.
-        reversed_ (bool): Whether to reverse the basis functions. Default is False.
-        backend (module): The backend to use (cupy or numpy). Default is numpy.
+        reversed_ (bool): Whether to reverse the basis functions. Default is ``False``.
+        backend (module): The backend to use (cupy or numpy). Default is ``numpy``.
     """
 
     def __init__(
@@ -468,12 +485,12 @@ class RaisedCosineBasis(object):
         backend=np):
         """
         Args:
-            a (int): The steepness of the raised cosine. Default is 2.
-            c (int): The offset of the raised cosine. Default is 1.
+            a (int): The steepness of the raised cosine. Default is :math:`2`.
+            c (int): The offset of the raised cosine. Default is :math:`1`.
             phis (array): The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
-            width (int): The width of the basis functions. Default is 80.
-            reversed_ (bool): Whether to reverse the basis functions. Default is False.
-            backend (module): The backend to use (cupy or numpy). Default is numpy.
+            width (int): The width of the basis functions. Default is :math:`80`.
+            reversed_ (bool): Whether to reverse the basis functions. Default is ``False``.
+            backend (module): The backend to use (cupy or numpy). Default is ``numpy``.
         """
         self.a = a
         self.c = c
@@ -486,7 +503,7 @@ class RaisedCosineBasis(object):
 
 
     def compute(self, width=80):
-        r"""Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
+        """Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
         
         Each element :math:`f_i` in the vector :math:`\mathbf{f}` is a raised cosine basis function 
         with a different :math:`\phi_i`. The domain of each :math:`f_i` is :math:`[0, width]`.
@@ -522,14 +539,14 @@ class RaisedCosineBasis(object):
 
 
     def get_superposition(self, x):
-        r"""Get the weighed sum :math:`\mathbf{w}(\tau)` of the basis functions :math:`f`.
+        """Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
         
         The superposition of all basis functions, weighed by the input weights,
         is a single filter of length :paramref:`width` that can be used to weigh the input data: synapse activations.
         
         .. math::
     
-            \mathbf{w}(\tau) = \sum_{i} x_i\ f_i(\tau) = \mathbf{x} \cdot \mathbf{f}(\tau) \\
+            \mathbf{w}(\\tau) = \sum_{i} x_i\ f_i(\\tau) = \mathbf{x} \cdot \mathbf{f}(\\tau)
         
         Args:
             x (array): The (learnable) input weights :math:`\mathbf{x}`
@@ -544,8 +561,8 @@ class RaisedCosineBasis(object):
         """Visualize the basis functions :math:`\mathbf{f}`.
         
         Args:
-            ax (plt.axis): The axis to plot on. Default is None.
-            plot_kwargs (dict): The plot arguments. Default is None.
+            ax (plt.axis): The axis to plot on. Default is ``None``.
+            plot_kwargs (dict): The plot arguments. Default is ``None``.
             
         Returns:
             plt.axis: The axis with the plot.
@@ -563,8 +580,8 @@ class RaisedCosineBasis(object):
         
         Args:
             x (array): The (learnable) input weights for the basis functions.
-            ax (plt.axis): The axis to plot on. Default is None.
-            plot_kwargs (dict): The plot arguments. Default is None.
+            ax (plt.axis): The axis to plot on. Default is ``None``.
+            plot_kwargs (dict): The plot arguments. Default is ``None``.
         """
         if plot_kwargs is None:
             plot_kwargs = {}
@@ -583,11 +600,11 @@ class RaisedCosineBasis(object):
         """Calculate a single raised cosine basis function :math:`f_i` over the domain :math:`t`.
         
         Args:
-            a (float): The steepness of the raised cosine. Default is 1.
-            c (float): The offset of the raised cosine. Default is 1.
-            phi (float): The phase of the raised cosine. Default is 0.
+            a (float): The steepness of the raised cosine. Default is :math:`1`.
+            c (float): The offset of the raised cosine. Default is :math:`1`.
+            phi (float): The phase of the raised cosine. Default is :math:`0`.
             t (array): The domain of the raised cosine. Default is :math:`[0, 80]`.
-            backend (module): The backend to use (cupy or numpy). Default is numpy.
+            backend (module): The backend to use (cupy or numpy). Default is ``numpy``.
             
         Returns:
             tuple: The domain :math:`t` and the raised cosine basis function :math:`f_i` over this domain.
@@ -718,7 +735,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         
         .. math::
 
-            WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\tau}(\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
+            WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\\tau}(\\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
         
         Attention:
             These are not the same basis vectors as in :py:class:`RaisedCosineBasis`.
@@ -727,16 +744,16 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             the weighted net input, but these intermediate basis vectors are different.
             
         Returns:
-            dict: A dictionary of basis vectors for each group. basis vectors are of shape :math:`(n_trials, dim(\mathbf{f}(\tau)), dim(\mathbf{g}(z)))`.
+            dict: A dictionary of basis vectors for each group. basis vectors are of shape :math:`(n_trials, dim(\mathbf{f}(\\tau)), dim(\mathbf{g}(z)))`.
         '''
         
         def _compute_base_vector_array(spatiotemp_SA):
             r"""
             Args:
-                spatiotemp_SA (array): The spatiotemporal synaptic activation patterns of shape :math:`(n_trials, dim(\mathbf{f}(\tau)), dim(\mathbf{g}(z)))`.
+                spatiotemp_SA (array): The spatiotemporal synaptic activation patterns of shape :math:`(n_trials, dim(\mathbf{f}(\\tau)), dim(\mathbf{g}(z)))`.
                 
             Returns:
-                array: The basis vector array of shape :math:`(n_trials, dim(\mathbf{f}(\tau)), dim(\mathbf{g}(z)))`.
+                array: The basis vector array of shape :math:`(n_trials, dim(\mathbf{f}(\\tau)), dim(\mathbf{g}(z)))`.
             """
             _, time_domain, space_domain = spatiotemp_SA.shape
             self.RaisedCosineBasis_spatial.compute(space_domain)
@@ -910,8 +927,8 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             
         Args:
             optimizer_output (List[scipy.optimize.OptimizeResult]): An array of optimizer outputs. usually one element per data split.
-            only_succesful (bool): Whether to only plot the successful optimizer outputs. Default is False.
-            normalize (bool): Whether to normalize the basis functions. Default is True.
+            only_succesful (bool): Whether to only plot the successful optimizer outputs. Default is ``False``.
+            normalize (bool): Whether to normalize the basis functions. Default is ``True``.
             
         Returns:
             None: Nothing. Plots the basis functions.

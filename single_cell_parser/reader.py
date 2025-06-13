@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
 .. deprecated::
@@ -21,7 +38,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class _Edge(object):
-    '''Convenience class for NEURON segments.
+    r'''Convenience class for NEURON segments.
 
     Private class used in :py:meth:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
     These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
@@ -333,7 +350,7 @@ def read_synapse_realization(fname):
 
         >>> synapse_file
         # Synapse distribution file
-        # corresponding to cell: 86_L5_86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center
+        # corresponding to cell: 86_C2_center
         # Type - section - section.x
         VPM_E1  112     0.138046479525
         VPM_E1  130     0.305058053119
@@ -400,7 +417,7 @@ def read_pruned_synapse_realization(fname):
     Example:
         >>> synapse_file
         # Synapse distribution file
-        # corresponding to cell: 86_L5_86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center
+        # corresponding to cell: 86_C2_center
         # Type - section - section.x - pruned
         VPM_E1  112     0.138046479525  0
         VPM_E1  130     0.305058053119  0

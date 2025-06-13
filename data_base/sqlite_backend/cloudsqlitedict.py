@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# This code is distributed under the terms and conditions
-# from the Apache License, Version 2.0
-#
-# http://opensource.org/licenses/apache2.0.php
-#
-# This code was inspired by:
-#  * http://code.activestate.com/recipes/576638-draft-for-an-sqlite3-based-dbm/
-#  * http://code.activestate.com/recipes/526618/
 """
-2016-09-27: Modified by abast: use cloudpickle instead of pickle
-
-
 A lightweight wrapper around Python's sqlite3 database, with a dict-like interface
 and multi-thread access support::
 
@@ -25,6 +13,32 @@ Pickle is used internally to serialize the values. Keys are strings.
 
 If you don't use autocommit (default is no autocommit for performance), then
 don't forget to call `mydict.commit()` when done with a transaction.
+
+Note:
+    This code is distributed under the terms and conditions from the Apache License, Version 2.0:
+
+    Copyright (c) 2011-now `Radim Řehůřek <http://radimrehurek.com>`_ and contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    
+Note:
+    The original code has been modified by @abast (2016-09-27) to use cloudpickle instead of pickle for serialization.
+
+Note:
+    This code was inspired by:
+
+    - http://code.activestate.com/recipes/576638-draft-for-an-sqlite3-based-dbm/
+    - http://code.activestate.com/recipes/526618/
 
 """
 from __future__ import absolute_import

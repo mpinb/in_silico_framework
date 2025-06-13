@@ -1,10 +1,26 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """
 Generate and analyze biophysically detailed multi-compartmental models (MCM).
 
 It provides two ways to generate mutli-compartmental models:
 
-    1. BluePyOpt :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`, a Multi-Objective Evolutionary Algorithm (MOEA): :py:mod:`~biophysics_fitting.MOEA_EH_minimal`.
-    2. An exploration algorithm: :py:mod:`~biophysics_fitting.exploration_from_seedpoint`.
+    1. BluePyOpt :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`, a Multi-Objective Evolutionary Algorithm (MOEA): :py:mod:`biophysics_fitting.optimizer`.
+    2. An exploration algorithm: :py:mod:`biophysics_fitting.exploration_from_seedpoint`.
 
 The MOEA does not require any a priori assumptions on biophysical parameters to find a MCM, but fails to explore the full diversity of possible MCMs. 
 On the other hand, the exploration approach can explore the full diversity of possible biophysical models, but also requires a MCM as a seedpoint in order to start. 

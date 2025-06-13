@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 '''
 This module concerns itself with setting up a cell with biophysical details and simulation parameters.
 
@@ -12,6 +28,7 @@ The results of this module can be used in conjunction with :py:mod:`~biophysics_
 
 import single_cell_parser as scp
 from .parameters import param_selector
+from single_cell_parser.parameters import ParameterSet
 import time
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -100,7 +117,7 @@ class Simulator_Setup:
             partial(ephys, 'soma.gKv'=1, 'soma.gNav'=2)])
     
     Attributes:
-        cell_param_generator (callable): A function that generates a :py:class:`~sumatra.parameters.NTParameterSet` cell parameter object.
+        cell_param_generator (callable): A function that generates a :py:class:`~single_cell_parser.parameters.ParameterSet` cell parameter object.
         cell_param_modify_funs (list): list of functions that modify the cell parameters.
         cell_generator (callable): A function that generates a :py:class:`~single_cell_parser.cell.Cell` object.
         cell_modify_funs (list): List of functions that modify the cell object.
@@ -289,7 +306,7 @@ class Simulator_Setup:
         return params
 
     def get_cell_params(self, params):
-        '''Get the cell parameters as an NTParameterSet from the parameter vector.
+        '''Get the cell parameters as an :py:class:`~single_cell_parser.parameters.ParameterSet` from the parameter vector.
         
         This can be used with :py:meth:`single_cell_parser.create_cell` to
         create a :py:class:`~single_cell_parser.cell.Cell` object.
@@ -299,7 +316,7 @@ class Simulator_Setup:
             params (pd.Series): The parameter vector.
             
         Returns:
-            NTParameterSet: The cell parameters.
+            :py:class:`~single_cell_parser.parameters.ParameterSet`: The cell parameters.
         '''
         params = self.get_params(params)
         cell_param = self.cell_param_generator()
@@ -338,9 +355,8 @@ class Simulator_Setup:
             T (float): The temperature (Celsius).
             
         Returns:
-            NTParameterSet: The neuron parameter object.
+            :py:class:`~single_cell_parser.parameters.ParameterSet`: The neuron parameter object.
         '''
-        NTParameterSet = scp.NTParameterSet
         sim_param = {
             'tStart': tStart,
             'tStop': tStop,
@@ -350,7 +366,7 @@ class Simulator_Setup:
             'recordingSites': recordingSites
         }
         NMODL_mechanisms = {}
-        return NTParameterSet({
+        return ParameterSet({
             'neuron': self.get_cell_params(params),
             'sim': sim_param,
             'NMODL_mechanisms': NMODL_mechanisms
@@ -546,7 +562,6 @@ def run_fun(
     Returns:
         :py:class:`~single_cell_parser.cell.Cell`: The cell object, containing simulation data.
     '''
-    from sumatra.parameters import NTParameterSet
     sim = {
         'T': T,
         'Vinit': Vinit,
@@ -555,5 +570,5 @@ def run_fun(
         'tStart': tStart,
         'tStop': tStop
     }
-    scp.init_neuron_run(NTParameterSet(sim), vardt=vardt)
+    scp.init_neuron_run(ParameterSet(sim), vardt=vardt)
     return cell

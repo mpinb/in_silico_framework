@@ -1,10 +1,24 @@
-'''
-autor: arco
-date: 16.09.2016
-'''
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 import numpy as np
 
-
+__author_ = ["Arco Bast"]
+__date__ = "2016-09-16"
 class PixelObject():
     '''Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
     
@@ -21,8 +35,8 @@ class PixelObject():
         """
         Args:
             extent (list): The extent of the plot.
-            ax (matplotlib.pyplot.Axes): The axis to convert to a pixel array. Default is `None`.
-            array (numpy.ndarray): The pixel array to store. Default is `None`.
+            ax (matplotlib.pyplot.Axes): The axis to convert to a pixel array. Default is ``None``.
+            array (numpy.ndarray): The pixel array to store. Default is ``None``.
         """
         if ax is None and array is None:
             raise ValueError("Please specify an ax or an array (not both)")

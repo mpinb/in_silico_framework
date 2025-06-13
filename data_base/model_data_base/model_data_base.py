@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 '''Database class or storing and retrieving data in a robust and efficient way.
 
 .. deprecated:: 0.2.0
@@ -8,8 +24,8 @@ from __future__ import absolute_import
 import os, random, string, threading, contextlib, shutil, tempfile, datetime, yaml
 import cloudpickle as pickle
 from .IO.LoaderDumper import get_dumper_string_by_savedir
-from data_base import data_base_register
-from data_base import _module_versions
+from data_base.exceptions import ModelDataBaseException
+from data_base import data_base_register, _module_versions
 VC = _module_versions.version_cached
 from compatibility import YamlLoader
 if 'ISF_MDB_CONFIG' in os.environ:
@@ -101,9 +117,6 @@ class FunctionWrapper:
     def __init__(self, fun):
         self.fun = fun
                 
-class MdbException(Exception):
-    '''Typical mdb errors'''
-    pass        
 
 def _check_working_dir_clean_for_build(working_dir):
     '''Backend method that checks, wether working_dir is suitable
@@ -116,7 +129,7 @@ def _check_working_dir_clean_for_build(working_dir):
             else:
                 raise OSError()
         except OSError:
-            raise MdbException("Can't build database: " \
+            raise ModelDataBaseException("Can't build database: " \
                                + "The specified working_dir is either not empty " \
                                + "or write permission is missing. The specified path is %s" % working_dir)
     else:
@@ -124,7 +137,7 @@ def _check_working_dir_clean_for_build(working_dir):
             os.makedirs(working_dir)
             return
         except OSError:
-            raise MdbException("Can't build database: " \
+            raise ModelDataBaseException("Can't build database: " \
                                + "Cannot create the directories specified in %s" % working_dir)
 
 ###methods to hide dask progress bar based on settings:
@@ -190,14 +203,14 @@ class ModelDataBase(object):
         
         try:
             self.read_mdb()
-        except IOError:
+        except Exception as e:
             errstr = "Did not find a database in {path}. ".format(path = basedir) + \
                     "A new empty database will not be created since "+\
                     "{mode} is set to True."
             if nocreate:
-                raise MdbException(errstr.format(mode = 'nocreate'))
+                raise ModelDataBaseException(errstr.format(mode = 'nocreate')) from e
             if readonly:
-                raise MdbException(errstr.format(mode = 'readonly'))
+                raise ModelDataBaseException(errstr.format(mode = 'readonly')) from e
             if not forcecreate:
                 _check_working_dir_clean_for_build(basedir)
             self._first_init = True
@@ -253,7 +266,7 @@ class ModelDataBase(object):
         try:
             data_base_register.register_db(self._unique_id, self.basedir)
             self._registered_to_path = self.basedir
-        except MdbException as e:
+        except ModelDataBaseException as e:
             warnings.warn(str(e))
             
     def _set_unique_id(self):
@@ -309,7 +322,7 @@ class ModelDataBase(object):
         #todo: make sure that existing key will not be overwritten
         if key in list(self.keys()):
             if raise_:
-                raise MdbException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
+                raise ModelDataBaseException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
         else:           
             self.setitem(key, None, dumper = just_create_folder)
         return self[key]
@@ -324,7 +337,7 @@ class ModelDataBase(object):
     def create_shared_numpy_store(self, key, raise_ = True):
         if key in list(self.keys()):
             if raise_:
-                raise MdbException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
+                raise ModelDataBaseException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
         else:
             self.setitem(key, None, dumper = shared_numpy_store)        
         return self[key]
@@ -339,7 +352,7 @@ class ModelDataBase(object):
             pass
         if key in list(self.keys()):
             if raise_:
-                raise MdbException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
+                raise ModelDataBaseException("Key %s is already set. Please use del mdb[%s] first" % (key, key))
         else:
             self.setitem(key, None, dumper = just_create_mdb)
         return self[key]
@@ -400,16 +413,16 @@ class ModelDataBase(object):
             raise    
     
     def _check_writing_privilege(self, key):
-        '''raises MdbException, if we don't have permission to write to key '''
+        '''raises ModelDataBaseException, if we don't have permission to write to key '''
         if self.readonly is True:
-            raise MdbException("DB is in readonly mode. Blocked writing attempt to key %s" % key)
+            raise ModelDataBaseException("DB is in readonly mode. Blocked writing attempt to key %s" % key)
         #this exists, so jupyter notebooks will not crash when they try to write something
         elif self.readonly == 'warning': 
             warnings.warn("DB is in readonly mode. Blocked writing attempt to key %s" % key)
         elif self.readonly == False:
             pass
         else:
-            raise MdbException("Readonly attribute should be True, False or 'warning, but is: %s" % self.readonly)
+            raise ModelDataBaseException("Readonly attribute should be True, False or 'warning, but is: %s" % self.readonly)
     
     def _find_dumper(self, item):
         '''finds the dumper of a given item.'''
@@ -421,7 +434,7 @@ class ModelDataBase(object):
         return dumper
     
     def _check_key_validity(self, key):
-        '''raises an MdbException, if key is invalid'''
+        '''raises an ModelDataBaseException, if key is invalid'''
         if isinstance(key, str): 
             key = tuple([key])
         # make sure hierarchy mimics folder structure:
@@ -433,13 +446,13 @@ class ModelDataBase(object):
         # ('A') is not already set
         for current_key in [key[:lv] for lv in range(len(key))]:
             if current_key in existing_keys:
-                raise MdbException("Cannot set {key1}. Conflicting key is {key2}"\
+                raise ModelDataBaseException("Cannot set {key1}. Conflicting key is {key2}"\
                                    .format(key1 = key, key2 = current_key))
         # do it vice versa
         for current_key in existing_keys:               
             if len(current_key) <= len(key): continue
             if key == current_key[:len(key)]:
-                raise MdbException("Cannot set {key1}. Conflicting key is {key2}"\
+                raise ModelDataBaseException("Cannot set {key1}. Conflicting key is {key2}"\
                                    .format(key1 = key, key2 = current_key))
     
     def _get_savedir(self, key):

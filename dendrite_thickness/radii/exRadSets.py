@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 import os
 import re
 import dendrite_thickness.transformTools as tr
@@ -55,25 +72,25 @@ class RadiusCalculatorForManyFiles:
         """
 
         if (os.path.isdir(path_to_am) and os.path.isdir(path_to_tif)):
-            for spacialGraphFile in os.listdir(path_to_am):
-                if spacialGraphFile.endswith(".am"):
+            for spatialGraphFile in os.listdir(path_to_am):
+                if spatialGraphFile.endswith(".am"):
                     points = self.readPoints(
-                        os.path.join(path_to_am, spacialGraphFile))
+                        os.path.join(path_to_am, spatialGraphFile))
                     if points == "error":
                         continue
-                    spacialGraphIndicator = re.findall(r'[sS]\d+',
-                                                       spacialGraphFile)[0]
+                    spatialGraphIndicator = re.findall(r'[sS]\d+',
+                                                       spatialGraphFile)[0]
                     outputFile = os.path.join(
-                        path_to_output_folder, spacialGraphIndicator + "_with_r.am")
+                        path_to_output_folder, spatialGraphIndicator + "_with_r.am")
                     for imageFile in os.listdir(path_to_tif):
-                        if imageFile.startswith(spacialGraphIndicator):
+                        if imageFile.startswith(spatialGraphIndicator):
                             image = self.readImage(path_to_tif + imageFile)
                             # result = radi.radius.getRadiiHalfMax(image, points)
                             result = self.radiusCalculator.getProfileOfThesePoints(
                                 image, points, postMeasurment)
                             print(imageFile)
                             self.writeResult(
-                                os.path.join(path_to_am, spacialGraphFile,
+                                os.path.join(path_to_am, spatialGraphFile,
                                              outputFile, result))
                             break
         else:
@@ -101,7 +118,7 @@ class RadiusCalculatorForManyFiles:
     def readPoints(self, dataFile):
         ''' return points of a am file, by using the function "getSpatialGraphPoints"'''
         try:
-            points = radi.spacialGraph.getSpatialGraphPoints(dataFile)
+            points = radi.spatialGraph.getSpatialGraphPoints(dataFile)
         except IOError as fnf_error:
             print(" ")
             print(fnf_error)
@@ -138,7 +155,7 @@ class RadiusCalculatorForManyFiles:
         radii = result
         radii = [r * 0.092 for r in radii]
         try:
-            radi.spacialGraph.write_spacial_graph_with_thickness(
+            radi.spatialGraph.write_spatial_graph_with_thickness(
                 inputDataFile, outputDataFile, radii)
         except IOError as fnf_error:
             print(" ")

@@ -18,7 +18,7 @@
 	
 	"neuron":
 	{
-		"filename": "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center.hoc",
+		"filename": "/gpfs/soma_fs/scratch/meulemeester/project_src/in_silico_framework/getting_started/example_data/anatomical_constraints/86_C2_center.hoc",
 		
 		"Soma":
 		{

@@ -7,6 +7,8 @@ SCRIPT_DIR="$( cd -- "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 ; pwd -P )
 ISF_DIR=$(dirname $SCRIPT_DIR) 
 echo "ISF DIR: $ISF_DIR"
 
+mkdir $ISF_DIR/barrel_cortex/
+
 echo -e "Downloading the axon tracings raw data as zipfiles. These can be unzipped with 7z or 7za.\n"
 
 wget https://dataverse.harvard.edu/api/access/datafile/10256305 -O $ISF_DIR/barrel_cortex/barrel_cortex.7z.001
@@ -25,7 +27,6 @@ Downloading ISF-compatible barrel_cortex data:
         - INHNormalizationsPSTs.am
 EOF
 
-mkdir $ISF_DIR/barrel_cortex/
 wget  https://dataverse.harvard.edu/api/access/datafile/10247199 -O $ISF_DIR/barrel_cortex/__init__.py -P $ISF_DIR
 wget  https://dataverse.harvard.edu/api/access/datafile/10247198 -O $ISF_DIR/barrel_cortex/average_barrel_field_L45_border.am -P $ISF_DIR
 wget https://dataverse.harvard.edu/api/access/datafile/10247202?format=original -O $ISF_DIR/barrel_cortex/ConnectionsV8.csv -P $ISF_DIR
