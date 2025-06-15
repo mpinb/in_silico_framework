@@ -74,7 +74,7 @@ installer/py*.*/downloads/**
 **node_modules**
 docs/_build/**
 docs/_autosummary/**
-docs/autoapi/**
+docs/api_reference/**
 docs/tutorials/**
 
 # pixi environments

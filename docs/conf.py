@@ -99,6 +99,7 @@ def setup(app):
 # toc_object_entries_show_parents = "hide"  # short toc entries
 
 # -- autoapi settings -----------------------------------------------------
+autoapi_root = "api_reference"
 autoapi_dirs = [project_root]
 autoapi_type = "python"
 autoapi_keep_files = True
