@@ -360,7 +360,7 @@ def get_L5tt_template_v2():
     - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
         
     Returns:
-        :py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet``: The template cell parameters.
+        :py:class:~single_cell_parser.parameters.ParameterSet`: The template cell parameters.
     """
     neup = get_L5tt_template()
     for loc in neup:
@@ -518,7 +518,7 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
     """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
     
     Args:
-        cell_param (:py:class:`:py:class:`~single_cell_parser.parameters.ParameterSet`` | dict): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict): The cell parameter dictionary.
         min_ (float): The minimum distance from the soma.
         max_ (float): The maximum distance from the soma.
         outsidescale_sections (list): A list of sections where the channels should be inserted.
