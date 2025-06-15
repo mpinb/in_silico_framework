@@ -41,6 +41,7 @@ that should work on most systems.
    pixi run launch_dask_workers
 
 For High-Performance Computing (HPC), you may want to launch the dask server with custom configuration instead of these default scripts.
+The underlying commands for these shortcuts are configured in the ``pyproject.toml`` file.
 
 Usage
 -----
@@ -51,8 +52,14 @@ We recommend to use ISF within a JupyterLab server for interactive use:
 
    pixi run launch_jupyter_lab_server
 
-To get started with ISF, feel free to consult the :ref:`tutorials`.
+``pixi`` also supports a ``conda``-style shell activation:
 
+.. code-block:: bash
+
+   pixi shell
+
+This can be useful for executing shell scripts within the ISF environment, or configuring HPC job submissions.
+To get started with ISF, feel free to consult the :ref:`tutorials`.
 
 Test ISF
 --------
@@ -64,17 +71,5 @@ To test if all components of ISF are working as intended, you can run the test s
    pixi run test
 
 
-Configuration
--------------
 
-The scripts above have been configured for local use. For High Performance Computing (HPC) environments, you may
-want to adapt these to you own needs. The underlying commands for these shortcuts are 
-configured in the ``pyproject.toml`` file.
 
-``pixi`` also supports a ``conda``-style shell activation:
-
-.. code-block:: bash
-
-   pixi shell
-
-This can be useful for executing shell scripts within the ISF environment, or configuring HPC job submissions.
