@@ -17,8 +17,8 @@ To install ISF with ``pixi``, simply:
    pixi run setup
 
 
-.. details:: Windows
-   :class: important
+.. important:: Windows
+   :collapsible:
 
    Windows support is still experimental.
    If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
