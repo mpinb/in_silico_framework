@@ -17,7 +17,8 @@ To install ISF with ``pixi``, simply:
    pixi run setup
 
 
-.. important:: Windows
+.. important::
+   :title: Windows
    :collapsible:
 
    Windows support is still experimental.
