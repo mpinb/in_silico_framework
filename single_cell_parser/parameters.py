@@ -1,4 +1,4 @@
-"""Handle :ref:`params_file_format` files in ISF.
+"""Handle :ref:`param_file_format` files in ISF.
 """
 
 from collections.abc import MutableMapping
