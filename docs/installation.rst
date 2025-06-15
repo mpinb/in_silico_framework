@@ -6,11 +6,7 @@ Installation
 ISF is available for Linux, macOS and Windows.
 
 For installation and environment management, ISF uses `pixi <https://pixi.sh/latest/>`_. 
-You can install ``pixi`` by running:
-
-.. code-block:: bash
-
-   curl -fsSL https://pixi.sh/latest | sh
+Install `pixi` by following the installation instructions on the `pixi documentation <https://pixi.sh/latest/docs/https://pixi.sh/latest/#installation>`_ 
 
 To install ISF with ``pixi``, simply:
 
@@ -26,14 +22,14 @@ To install ISF with ``pixi``, simply:
    Windows support is still experimental.
    If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
    In case you encounter any issues, feel free to [open an issue](https://github.com/mpinb/in_silico_framework/issues) and include relevant logs.
-   Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies the necessity of a (Linux-based) High Performance Computing environment.
-   For such heavier use of ISF, we recommend getting comfortable with Linux, e.g. through the Windows Subsystem for Linux (WSL).
+   Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.
 
 
-Usage
------
+Configuration
+-------------
 
-ISF works best with a dask server for parallel computing:
+ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers
+that should work on most systems. 
 
 .. code-block:: bash
 
@@ -42,6 +38,11 @@ ISF works best with a dask server for parallel computing:
 .. code-block:: bash
 
    pixi run launch_dask_workers
+
+For High-Performance Computing (HPC), you may want to launch the dask server with custom configuration instead of these default scripts.
+
+Usage
+-----
 
 We recommend to use ISF within a JupyterLab server for interactive use:
 
