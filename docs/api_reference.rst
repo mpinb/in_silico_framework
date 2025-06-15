@@ -6,14 +6,14 @@ API reference
 .. toctree::
    :hidden:
 
-   ./autoapi/Interface/index
-   ./autoapi/biophysics_fitting/index
-   ./autoapi/data_base/index
-   ./autoapi/simrun/index
-   ./autoapi/single_cell_parser/index
-   ./autoapi/singlecell_input_mapper/index
-   ./autoapi/spike_analysis/index
-   ./autoapi/visualize/index
+   ./api_reference/Interface/index
+   ./api_reference/biophysics_fitting/index
+   ./api_reference/data_base/index
+   ./api_reference/simrun/index
+   ./api_reference/single_cell_parser/index
+   ./api_reference/singlecell_input_mapper/index
+   ./api_reference/spike_analysis/index
+   ./api_reference/visualize/index
 
 .. autoapisummary::
 
