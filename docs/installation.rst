@@ -6,7 +6,7 @@ Installation
 ISF is available for Linux, macOS and Windows.
 
 For installation and environment management, ISF uses `pixi <https://pixi.sh/latest/>`_. 
-Please follow the installation instructions on the `pixi documentation <https://pixi.sh/latest/docs/https://pixi.sh/latest/#installation>`_ 
+Please follow the installation instructions on the `pixi documentation <https://pixi.sh/latest/#installation>`_ 
 
 To install ISF with ``pixi``, simply:
 
