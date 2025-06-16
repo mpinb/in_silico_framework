@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.combine_PSP_objects`
+
+
+.. title:
+
+combine_PSP_objects
+===================
+
+
+.. py:function:: simrun.PSP_with_cell_modification.combine_PSP_objects(PSPexc, PSPinh)
+
+   Combine two PSPs objects into one.
+
+   :Parameters: * **PSPexc** (:py:class:`~simrun.synaptic\_strength\_fitting.PSPs`) -- :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object for excitatory synapses.
+                * **PSPinh** (:py:class:`~simrun.synaptic\_strength\_fitting.PSPs`) -- :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object for inhibitory synapses.
+
+   :returns: Combined :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object with both excitatory and inhibitory components.
+   :rtype: :py:class:`~simrun.synaptic\_strength\_fitting.PSPs`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

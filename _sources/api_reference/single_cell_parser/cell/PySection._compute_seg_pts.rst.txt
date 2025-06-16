@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._compute_seg_pts`
+
+PySection._compute_seg_pts
+==========================
+
+.. py:method:: single_cell_parser.cell.PySection._compute_seg_pts()
+
+   Computes the 3D center points of each segment in this section.
+
+   Approximates sections as a straight line.
+   This data is only used for visualization purposes, not for simulating.
+

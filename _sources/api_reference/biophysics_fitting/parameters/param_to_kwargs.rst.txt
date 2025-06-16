@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.parameters` ❭ :mod:`~biophysics_fitting.parameters.param_to_kwargs`
+
+
+.. title:
+
+param_to_kwargs
+===============
+
+
+.. py:function:: biophysics_fitting.parameters.param_to_kwargs(fun)
+
+   returns a function that can be called with params = [some\_Series].
+   The content of Series is added to kwargs
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

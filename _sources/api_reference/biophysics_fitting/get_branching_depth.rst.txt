@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.get_branching_depth`
+
+
+.. title:
+
+get_branching_depth
+===================
+
+
+.. py:function:: biophysics_fitting.get_branching_depth(cell, sec, beyond_dist=1000)
+
+   Given a Cell object and a section number, this method returns the branching depth (i.e. branching order) of that section.
+   It counts the amount of sections that have children beyond some distance :paramref:`beyond\_dist` inbetween the soma and the given section :paramref:`sec`.
+
+   If this number is 0, that means that the given section, and all its parent sections up to the soma,
+   have no children (that exceed a distance to soma of :paramref:`beyond\_dist`).
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object
+                * **sec** (*int*) -- The section number
+
+   :returns: Amount of sections between :paramref:`sec` and soma that have at least 2 children that are further from the soma than :paramref:`beyond\_dist`
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

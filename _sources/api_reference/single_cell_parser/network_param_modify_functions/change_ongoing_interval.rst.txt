@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.change_ongoing_interval`
+
+
+.. title:
+
+change_ongoing_interval
+=======================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.change_ongoing_interval(n, factor=1, pop=None)
+
+   Scales the ongoing frequency with a :paramref:`factor`.
+
+   Does so by scaling the time bins of the ongoing activity of the presynaptic :py:class:`~single\_cell\_parser.celltypes.Spiketrain` celltype.
+
+   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **factor** (*float*) -- The factor to scale the ongoing frequency with.
+                * **pop** (*list*) -- The celltypes to apply the scaling to.
+
+   :raises AssertionError: If the presynptic :py:class:`~single\_cell\_parser.celltypes.PointCell` is not of type ``spiketrain``.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> celltype = 'L6cc\_C2'  # layer 6 cortico-cortical cells in column C2
+   >>> n.network[celltype].celltype.pointcell.intervals
+   [(0, 1000)]
+   >>> change\_ongoing\_interval(n, 2, pop=['L6cc'])
+   >>> n.network[celltype].celltype.pointcell.intervals
+   [(0, 2000)]
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

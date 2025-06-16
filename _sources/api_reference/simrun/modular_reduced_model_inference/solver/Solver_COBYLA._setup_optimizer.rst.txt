@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver.Solver_COBYLA` ❭ :mod:`~simrun.modular_reduced_model_inference.solver.Solver_COBYLA._setup_optimizer`
+
+Solver_COBYLA._setup_optimizer
+==============================
+
+.. py:method:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA._setup_optimizer()
+
+   Set up the optimization strategy.
+
+

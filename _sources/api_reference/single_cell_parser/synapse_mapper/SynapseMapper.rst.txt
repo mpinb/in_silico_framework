@@ -1,0 +1,114 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SynapseMapper
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   map_synapse_realization <SynapseMapper.map_synapse_realization>
+   map_pruned_synapse_realization <SynapseMapper.map_pruned_synapse_realization>
+   map_synapse_model_distribution <SynapseMapper.map_synapse_model_distribution>
+   create_synapses <SynapseMapper.create_synapses>
+   _create_voxel_edge_map <SynapseMapper._create_voxel_edge_map>
+   _intersect_bboxes <SynapseMapper._intersect_bboxes>
+   _pt_in_box <SynapseMapper._pt_in_box>
+   _compute_path_length <SynapseMapper._compute_path_length>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.synapse_mapper.SynapseMapper(cell=None, synDist=None, isDensity=True)
+   
+   Assign synapses to a neuron morphology based on an existing synapse distribution.
+
+   For more fine-grained control over the creation of synapse distributions onto a morphology,
+   please refer to the :py:mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
+
+   The synapse distribution can be:
+
+   - a previously created synapse realization in dictionary form
+     (see the :ref:`syn_file_format` file type and :py:meth:`~single_cell_parser.reader.read_synapse_realization` for more info)
+   - a :py:class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities, in which case the synapses are mapped
+     in the same way as in :py:meth:`~single_cell_parser.synapse_mapper.SynapseMapper.create_synapses`.
+   - a list of synapse distances.
+
+   .. seealso::
+
+      :py:mod:`singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` for creating
+      network realizations constrained with empirical data.
+
+   :paramref:`synDist` can be read from a :ref:`syn_file_format` file using :py:meth:`~single_cell_parser.reader.read_synapse_realization`.
+
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to map synapses onto.
+                * **synDist** (dict | :py:class:`single_cell_parser.scalar_field.ScalarField`) -- Either a previously created synapse realization in dictionary form (see the :ref:`syn_file_format` file type and :py:meth:`~single_cell_parser.reader.read_synapse_realization` for more info)
+                  or a :py:class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities.
+                * **isDensity** (*bool*) -- If True, then the synapse distribution is interpreted as an average density, and the actual number of synapses that will be assigned is drawn from a Poisson distribution.
+                  If False, then the synapse distribution :paramref:`synDist` is interpreted as the actual number of synapses per voxel.
+
+   :Attributes:
+
+   .. attribute:: cell
+
+      The cell to map synapses onto.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell`
+
+   .. attribute:: synDist
+
+      The synapse distribution to map onto the cell.
+
+      :type: dict | :py:class:`single_cell_parser.scalar_field.ScalarField` | list
+
+   .. attribute:: isDensity
+
+      Flag for distribution type: (1) density or (0) realization.
+
+      :type: bool
+
+   .. attribute:: voxelEdgeMap
+
+      Dictionary that maps voxel edges to (sectionID, pointID) pairs.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`map_synapse_realization <single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_realization>`\ ()
+        - Maps previously created synapse realization onto neuron morphology.
+      * - :py:obj:`map_pruned_synapse_realization <single_cell_parser.synapse_mapper.SynapseMapper.map_pruned_synapse_realization>`\ ()
+        - Maps previously created synapse realization onto neuron
+      * - :py:obj:`map_synapse_model_distribution <single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution>`\ (synType, structLabel)
+        - Maps modeled synapse distribution (e.g. normal, uniform, ...) onto dendritic tree.
+      * - :py:obj:`create_synapses <single_cell_parser.synapse_mapper.SynapseMapper.create_synapses>`\ (preType)
+        - Map synapses onto a morphology based on a synapse distribution.
+      * - :py:obj:`_create_voxel_edge_map <single_cell_parser.synapse_mapper.SynapseMapper._create_voxel_edge_map>`\ ()
+        - Fills dictionary :paramref:`voxelEdgeMap` with indices of voxels pts within that voxel
+      * - :py:obj:`_intersect_bboxes <single_cell_parser.synapse_mapper.SynapseMapper._intersect_bboxes>`\ (bbox1, bbox2)
+        - Check if two bounding boxes overlap
+      * - :py:obj:`_pt_in_box <single_cell_parser.synapse_mapper.SynapseMapper._pt_in_box>`\ (pt, box)
+        - Check if a point is within a bounding box
+      * - :py:obj:`_compute_path_length <single_cell_parser.synapse_mapper.SynapseMapper._compute_path_length>`\ (sec, x)
+        - Compute the path length to soma from location :paramref:`x` on section :paramref:`sec`
+

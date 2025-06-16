@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.evaluation_function_incremental_helper`
+
+
+.. title:
+
+evaluation_function_incremental_helper
+======================================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.evaluation_function_incremental_helper(p, s=None, cutoffs=None, stim_order=[&#39;bAP&#39;, &#39;BAC&#39;, &#39;StepOne&#39;, &#39;StepTwo&#39;, &#39;StepThree&#39;], verbose=True, evaluators_by_stimulus=None, additional_evaluation_functions=[], objectives_by_stimulus=None)
+
+   Helper function for the evaluation function.
+   As soon as a single stimulus shows that a biophysical model does not match the objectives,
+   it is not necessary to evaluate the other stimuli.
+   This method runs the evaluation functions one by one and exits prematurely as soon as an objective
+   is above the desired cutoff defined in :paramref:`cutoffs`.
+
+   :Parameters: * **p** (dict | :py:class:`pandas.Series`) -- Parameter values used in the simulation. See :py:mod:`~biophysics\_fitting.hay\_complete\_default\_setup` for an example.
+                * **s** (*Simulator*) -- Simulator object.
+                * **cutoffs** (*dict*) -- Dictionary with keys that are in :paramref:`stim\_order`. Values are floats that define a maximum allowed error for any objective corresponding to that stimulus.
+                  Note that each stimulus evokes a voltage trace that is parametrized by multiple objectives, each with their own error.
+                  This method checks if the largest error exceeds some value.
+                  Default: {'bAP':3.2, 'BAC': 3.2, 'StepOne':4.5, 'StepTwo': 4.5, 'StepThree': 4.5}, as used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`
+                * **stim\_order** (*array-like*) -- Order in which stimuli are simulated.
+                  Default: ['bAP', 'BAC', 'StepOne', 'StepTwo', 'StepThree'], which is the order of stimuli used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`
+                * **verbose** (*bool*) -- If True, print intermediate results.
+                * **evaluators\_by\_stimulus** (*dict*) -- Dictionary with keys that are in :paramref:`stim\_order`. Values are evaluators that are used to evaluate the voltage traces.
+                * **additional\_evaluation\_functions** (*list*) -- List of functions that are called after the voltage traces are evaluated. The results are added to the evaluation dict, and returned.
+                * **objectives\_by\_stimulus** (*dict*) -- Dictionary with keys that are in :paramref:`stim\_order`. Values are lists of objectives that are used to evaluate the voltage traces.
+
+   :returns:
+
+             (bool, dict). The first value is True if all stimuli are within the cutoffs, False otherwise.
+                 The second value is a dictionary with the evaluation results.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

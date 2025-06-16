@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.compute_AP_array`
+
+
+.. title:
+
+compute_AP_array
+================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_AP_array(st, min_time, max_time, fillna=1000, step=1)
+
+   One-hot encode spike times to a binned time vector.
+
+   Given a collection of spike times of a single trial, this method returns an array of length ``(max\_time - min\_time)//step``,
+   where a boolean represents if a spike is found in this interval.
+
+   :Parameters: * **st** (*array*) -- Array of spike times
+                * **min\_time** (*float/int*) -- Min time in ms
+                * **max\_time** (*float/int*) -- Max time in ms
+                * **step** (*int, optional*) -- Size of timesteps to consider. Defaults to 1 ms
+
+   :returns: Array where each element is a boolean representing if an AP was present during this timestep.
+   :rtype: array
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

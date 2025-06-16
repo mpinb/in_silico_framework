@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.chunkIt`
+
+
+.. title:
+
+chunkIt
+=======
+
+
+.. py:function:: simrun.utils.chunkIt(seq, num)
+
+   Split a sequence in multiple lists which have approximately equal size.
+
+   :Parameters: * **seq** (*array*) -- The sequence to split.
+                * **num** (*int*) -- The number of chunks.
+
+   :returns: A list of lists containing the chunks.
+   :rtype: list
+
+   .. seealso:: https://stackoverflow.com/questions/2130016/splitting-a-list-of-arbitrary-size-into-only-roughly-n-equal-parts
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

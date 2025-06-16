@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.convertible_to_int`
+
+
+.. title:
+
+convertible_to_int
+==================
+
+
+.. py:function:: data_base.utils.convertible_to_int(x)
+
+   Returns True if x can be converted to an integer, False otherwise
+
+   :Parameters: **x** (*any*) -- the object to be tested
+
+   :returns: True if x can be converted to an integer, False otherwise
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

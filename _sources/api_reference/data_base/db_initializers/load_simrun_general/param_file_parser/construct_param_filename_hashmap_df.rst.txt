@@ -1,0 +1,59 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df`
+
+
+.. title:
+
+construct_param_filename_hashmap_df
+===================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df(simresult_path, sim_trial_index)
+
+   Generate a hashmap for the paths of :ref:`cell\_parameters\_format` and :ref:`network\_parameters\_format` files.
+
+   For each trial, this function fetches the paths of the :ref:`cell\_parameters\_format` and :ref:`network\_parameters\_format` files,
+   and creates a hash of their content. This hashmap is used to copy over the parameter files to the database.
+
+   For any same network embedding, the :ref:`network\_parameters\_format` file is the same, and for any same biophysically detailed neuron model,
+   the :ref:`cell\_parameters\_format` file is the same. Many of the simulation trials will therefore share the same parameter files.
+   This is a convenience function to generate a DataFrame containing the paths and hashes of the original simrun parameter files for a collection of simulation trials.
+   As not all trials necessarilly share the same network embedding or neuron model, the DataFrame will likely (but not necessarily) contain different entries across trials.
+
+   :Parameters: * **simresult\_path** (*str*) -- Path to the simulation results folder.
+                * **sim\_trial\_index** (*array*) -- array of sim\_trial\_indices to generate paramfiles for.
+
+   :returns: list of dask.delayed objects to calculate the pd.DataFrame objects containing the paths to the parameter files and their hashes.
+   :rtype: list
+
+   Example::
+
+       >>> simresult\_path = 'results/date\_seed\_pid'
+       >>> os.listdir(simresult\_path)
+       [
+           'simulation\_run000000\_synapses.csv', 'simulation\_run000000\_presynaptic\_cells.csv'
+           'simulation\_run000001\_synapses.csv', 'simulation\_run000001\_presynaptic\_cells.csv'
+           ...
+           pid\_neuron\_model.param, pid\_network\_model.param
+       ]
+       >>> delayeds = generate\_param\_file\_hashes(simresult\_path, ['path/pid/000000', 'path/pid/000001'])
+       >>> futures = dask.compute(delayeds)
+       >>> result = client.gather(futures)
+       >>> parameterfiles = pd.concat(result)
+       >>> parameterfiles
+                               path\_neuron             path\_network hash\_neuron    hash\_network
+       sim\_trial\_index
+       0 path/pid/000000       pid\_neuron\_model.param pid\_network\_model.param     0b1
+       1 path/pid/000001       pid\_neuron\_model.param pid\_network\_model.param     0b2
+       ...
+
+
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

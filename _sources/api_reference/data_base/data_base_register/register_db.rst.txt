@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.register_db`
+
+
+.. title:
+
+register_db
+===========
+
+
+.. py:function:: data_base.data_base_register.register_db(unique_id, db_basedir)
+
+   Register a database.
+
+   Adds a database to the database register.
+
+   :Parameters: * **unique\_id** (*str*) -- The unique ID of the database.
+                * **db\_basedir** (*str*) -- The location of the database.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

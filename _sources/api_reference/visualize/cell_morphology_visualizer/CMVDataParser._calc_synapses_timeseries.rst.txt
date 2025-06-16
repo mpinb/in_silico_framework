@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_synapses_timeseries`
+
+CMVDataParser._calc_synapses_timeseries
+=======================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_synapses_timeseries()
+
+   Retrieves the active synapses during a set of time points (specified in :paramref:`times_to_show`).
+   Fills the :paramref:`synapses_timeseries` attribute.
+
+   :returns: None. Updates the self.synapses_timeseries attribute.
+

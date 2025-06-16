@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_slow_ahp_time`
+
+
+.. title:
+
+STEP_slow_ahp_time
+==================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_slow_ahp_time(t, v, thresh=None, time_scale=5, start=1)
+
+   Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
+
+   The sAHP is computed as the time of the deepest point between :paramref:`timescale` after the spike and the next spike.
+
+   .. note::
+
+      If two consecutive spikes are less than :paramref:`timescale` apart,
+      the sAHP is computed as the minimum between the first spike and the next spike,
+      and there is no difference between fast and slow AHP.
+
+   .. attention::
+
+      It's important to not return the average deviation from the mean sAHP time, but the full array of sAHP times.
+      sAHP times can deviate both negatively and positively from the mean. Averaging this out will lead to a false
+      sense of accuracy.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+                * **time\_scale** (*float, optional*) -- Time scale in milliseconds. Defaults to 5 ms.
+                * **start** (*int*) -- Index of the first AP to be considered. Defaults to 1: Omit the first AP with index 0.
+
+   :returns: Array of sAHP times.
+   :rtype: np.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

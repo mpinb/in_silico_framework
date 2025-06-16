@@ -8,9 +8,9 @@
         "\n",
         "[Tutorial 1.1: Simulating biophysically detailed multi-compartmental models](./1.1%20Simulation.ipynb) outlined how to run 5 stimulus protocols ($bAP$, $BAC$ and $3$ step currents) in silico.\n",
         "\n",
-        "This tutorial will show how to use ISF in order to compare the cell's in silico response to an empirical distribution of electrophysiological parameters, i.e. the simulation **objectives**. Quantifying how far off the responses are compared to this distribution will be done with the [Evaluator](../../autoapi/biophysics_fitting/evaluator/index.rst) object.\n",
+        "This tutorial will show how to use ISF in order to compare the cell's in silico response to an empirical distribution of electrophysiological parameters, i.e. the simulation **objectives**. Quantifying how far off the responses are compared to this distribution will be done with the [Evaluator](../../api_reference/biophysics_fitting/evaluator/index.rst) object.\n",
         "\n",
-        "In addition to quantifying the response and comparing it to empirical values, this tutorial will also show how to visually inspect simulations using the [visualize](../../autoapi/visualize//index.rst) package.\n",
+        "In addition to quantifying the response and comparing it to empirical values, this tutorial will also show how to visually inspect simulations using the [visualize](../../api_reference/visualize//index.rst) package.\n",
         "\n",
         "To get started, adapt the path below to your desired output directory:"
       ]
@@ -88,9 +88,9 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "## The ISF [Evaluator](../../autoapi/biophysics_fitting/evaluator/index.rst)\n",
+        "## The ISF [Evaluator](../../api_reference/biophysics_fitting/evaluator/index.rst)\n",
         "\n",
-        "ISF implements an [Evaluator](../../autoapi/biophysics_fitting/evaluator/index.rst) object to evaluate voltage traces. It can be configured once with empirical values on voltage traces and re-used afterwards."
+        "ISF implements an [Evaluator](../../api_reference/biophysics_fitting/evaluator/index.rst) object to evaluate voltage traces. It can be configured once with empirical values on voltage traces and re-used afterwards."
       ]
     },
     {
@@ -451,7 +451,7 @@
         "|`sAHPt` |Slow AHP Time|\n",
         "|`APw` |AP half-width|\n",
         "\n",
-        "Exactly how much each objective is allowed to deviate from its empirical mean is defined in each evaluator class, associated with a stimulu protocol. See for example the `BAC` class in [biophysics_fitting.hay.evaluation](../../autoapi/biophysics_fitting/hay/evaluation/index.rst)"
+        "Exactly how much each objective is allowed to deviate from its empirical mean is defined in each evaluator class, associated with a stimulu protocol. See for example the `BAC` class in [biophysics_fitting.hay.evaluation](../../api_reference/biophysics_fitting/hay/evaluation/index.rst)"
       ]
     },
     {

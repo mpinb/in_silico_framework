@@ -1,0 +1,96 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Evaluator
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   evaluate <Evaluator.evaluate>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.evaluator.Evaluator
+   
+   Extract features from voltage traces.
+
+   This  class can be used to extract features from (usually) voltage traces
+   of different stimuli. The voltage traces are (usually) computed with a Simulator
+   object by calling its run method.
+
+   In an optimization the features returned by Evaluator.evaluate are saved together
+   with to corresponding parameter values.
+
+   For a Simulator object s and a Evaluator object e, the typical usecase is::
+
+   >>> voltage_traces_dict = s.run(params)
+   >>> features = e.evaluate(voltage_traces_dict)
+
+   The workflow in the Evaluator can be split in two parts:
+
+   1. Apply an ``evaluate_fun`` on each matching key in :paramref:`voltage_traces_dict`
+       These extract features from the voltage trace.
+       These functions are registered under :py:attr:`Evaluator_Setup.evaluate_funs`.
+   2. Perform arbitrary operations on the resulting dictionary
+       (e.g. merge it from a nested to a flat dictionary or compute more complex features
+       by combineing features from different stimuli)
+
+   An example set up can be found in :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Evaluator`.
+
+
+   .. rubric:: Example
+      :class: example
+
+   >>> def examplary_evaluate_fun(**kwargs):
+   >>>    # kwargs are keys and values of voltage_traces_dict[in_name]
+   >>>    # extract features from kwargs
+   >>>    return out_dict # keys are names of features, values are features
+
+   >>> def finalize_fun(dict_):
+   >>>    # dict_ is a dictionary with out_name of the evaluate_funs as keys.
+   >>>    # and the returned dictionary out_dict as values,
+   >>>    # i.e. out_dict is a nested dictionary.
+   >>>    # dict_ can now be arbitrarily modified, e.g. flattened.
+   >>>    return modified_dict
+
+   >>> e = Evaluator()
+   >>> e.setup.evaluate_funs.append([in_name, evaluate_fun, out_name])  # corresponds to step (1)
+   >>> e.setup.finalize_funs.append(finalize_fun)  # corresponds to step (2)
+
+   .. note:: Combining features to reduce the number of objectives should be done with the :py:class:`~biophysics_fitting.combiner.Combiner` object.
+
+   :Attributes:
+
+   .. attribute:: setup
+
+      A Evaluator_Setup object that keeps track of the evaluation functions.
+
+      :type: :py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`evaluate <biophysics_fitting.evaluator.Evaluator.evaluate>`\ (features\_dict, raise\_)
+        - Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
+

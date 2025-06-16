@@ -1,0 +1,48 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST`
+
+SynapseDensity.compute_cell_PST
+===============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST()
+
+   Compute 3D length/surface area density of the postsynaptic targets in the mesh.
+
+   Called once to compute 3D length/surface area densities and combine them with length/surface area PST densities to yield connection-specific 3D PST density of the postsynaptic neuron.
+   Creates a mesh for each structure of the postsynaptic neuron.
+   Calculates the length and surface area density of each structure with :py:meth:`~SynapseDensity._compute_length_surface_area_density`.
+   Multiplies the length and area with PST densities per length/area according to the connection spreadsheet :py:attr:`~SynapseDensity.connectionSpreadsheet`, and adds them together.
+   This is PST density is normalized in :py:meth:`~SynapseDensity.compute_synapse_density` to obtain synapse densities.
+
+   :returns: None.
+             Fills the scalar fields in place.
+             :py:attr:`~SynapseDensity.cellPST` is a nested dictionary of the form:
+             {'EXC': {'structure_1': :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`, 'structure_2': ..., ...} 'INH': ...}.
+
+   .. todo::
+
+      Currently, structures are hardcoded for L5PTs. This method can be extended to accept a mapping
+      between the connection spreadsheet column names and cell structures.
+
+   Example:
+
+   >>> synapseDensity.compute_cell_PST()
+   >>> synapseDensity.cellPST['EXC']['Soma'].mesh  # spans the entire bounding box
+   array([[[ 0.        ,  0.        ,  0.        ,  0.        ],
+           ...,
+           [ 0.        ,  0.        ,  0.        ,  0.        ]]])
+   >>> synapseDensity.cellPST
+   {
+       'EXC': {
+           'Soma': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3b90>,
+           'ApicalDendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c10>,
+           'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c50>
+           },
+       'INH': {
+           'Soma': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c90>,
+           'ApicalDendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3cd0>,
+           'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3d10>}
+           }
+

@@ -1,0 +1,44 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions._celltype_matches`
+
+
+.. title:
+
+_celltype_matches
+=================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions._celltype_matches(celltype_name, celltypes, columns)
+
+   Check if the celltype name matches the celltypes and columns.
+
+   :Parameters: * **celltype\_name** (*str*) -- The celltype name.
+                * **celltypes** (*list*) -- The celltypes to match.
+                * **columns** (*list*) -- The columns to match.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> celltype\_name = 'L6cc\_C2'
+   >>> celltypes = ['L6cc', 'L5tt']
+   >>> columns = ['C2', "B2']
+   >>> \_celltype\_matches(celltype\_name, celltypes, columns)
+   True
+   >>> celltype\_name = 'L6cc\_C1'
+   >>> \_celltype\_matches(celltype\_name, celltypes, columns)
+   False
+
+   :returns: True if the celltype matches the celltypes and columns, False otherwise.
+   :rtype: bool
+
+   :raises AssertionError: If :paramref:`celltypes` is not a list.
+   :raises AssertionError: If :paramref:`columns` is not a list.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

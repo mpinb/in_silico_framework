@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_bin`
+
+
+.. title:
+
+get_bin
+=======
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin(value, bin_min, bin_max, n_bins, tolerance=0.1)
+
+   Find the bin index of a given value.
+
+   :Parameters: * **value** (*float*) -- The value to find the bin for.
+                * **bin\_min** (*float*) -- Start of the first bin.
+                * **bin\_max** (*float*) -- End of the last bin.
+                * **n\_bins** (*int*) -- The number of bins.
+                * **tolerance** (*float, optional*) -- The tolerance for the outer ibn edges (for rounding errors). Defaults to 0.1.
+
+   :returns: The bin the value belongs to.
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

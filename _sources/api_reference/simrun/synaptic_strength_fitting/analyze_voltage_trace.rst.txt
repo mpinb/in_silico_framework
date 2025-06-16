@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.analyze_voltage_trace`
+
+
+.. title:
+
+analyze_voltage_trace
+=====================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.analyze_voltage_trace(vTrace, tTrace)
+
+   Calculate a voltage trace's extremum and time point thereof.
+
+   :Parameters: * **vTrace** (*np.array*) -- Voltage trace.
+                * **tTrace** (*np.array*) -- Timepoints of the voltage trace.
+
+   :returns: Timepoint and amplitude of the maximum voltage deflection.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

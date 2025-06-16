@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata`
+
+
+.. title:
+
+get_voltage_traces_divisions_by_metadata
+========================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata(metadata, repartition=None)
+
+   Find the division indices based on the metadata.
+
+   The trial numbers always augment, so for each partition, the lowest trial number is
+   the first entry of that partition. This way, the division indices can be inferred
+   by simply finding the lowest trial number in each partition.
+
+   :Parameters: * **metadata** (*pd.DataFrame*) -- Metadata dataframe containing the simulation trial indices.
+                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+
+   :returns: Tuple containing the divisions for the voltage traces dataframe.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

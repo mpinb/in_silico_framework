@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._init_vm_recording`
+
+PySection._init_vm_recording
+============================
+
+.. py:method:: single_cell_parser.cell.PySection._init_vm_recording()
+
+   Record the membrane voltage at every point in this section.
+
+   Sets up a :py:class:`nrn.h.Vector` for recording membrane voltage at every segment in this section.
+

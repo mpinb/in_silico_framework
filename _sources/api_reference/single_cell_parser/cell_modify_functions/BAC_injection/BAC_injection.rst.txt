@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.BAC_injection` ❭ :mod:`~single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection`
+
+
+.. title:
+
+BAC_injection
+=============
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection(cell, dist=None)
+
+   Injects the BAC stimulus :cite:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` at a specified distance.
+
+   :Parameters: * **cell** (:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **dist** (*float*) -- The distance from the soma (um).
+
+   :returns: The cell with the current injection set up.
+   :rtype: :class:`~single\_cell\_parser.cell.Cell`
+
+   .. seealso:: :py:meth:`biophysics\_fitting.setup\_stim.setup\_BAC`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

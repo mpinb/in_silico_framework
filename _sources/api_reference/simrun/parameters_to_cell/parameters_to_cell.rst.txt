@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.parameters_to_cell` ❭ :mod:`~simrun.parameters_to_cell.parameters_to_cell`
+
+
+.. title:
+
+parameters_to_cell
+==================
+
+
+.. py:function:: simrun.parameters_to_cell.parameters_to_cell(neuronParam, networkParam, synfile=None, dirPrefix=&#39;&#39;, tStop=345.0, scale_apical=None, range_vars=None, allPoints=False, cell=None, evokedNW=None)
+
+   Rebuild and simulate a network-embedded cell.
+
+   Rebuild the cell from a :ref:`cell\_parameters\_format` file.
+   If specified, the synapses in the :ref:`syn\_file\_format` file are reconnected and simulated according to the
+   parameters defined in the :ref:`network\_parameters\_format` file. If no :ref:`syn\_file\_format` file is provided,
+   a new network embedding is created based on the :ref:`network\_parameters\_format` file.
+
+   :Parameters: * **neuronParam** (*str*) -- Path to :ref:`cell\_parameters\_format` file.
+                * **networkParam** (*str*) -- Path to :ref:`network\_parameters\_format` file.
+                * **synfile** (*str*) -- Path to the realized synapses in :ref:`syn\_file\_format` format.
+                * **dirPrefix** (*str*) -- Prefix for the directory where the results are stored.
+                * **tStop** (*float*) -- Time in ms at which the simulation should stop.
+                * **scale\_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrite.
+                * **range\_vars** (*str or list*) -- Range variables to record.
+                * **allPoints** (*bool*) -- Record all points in the cell.
+                * **cell** (*Cell*) -- A cell object to use for the simulation.
+                * **evokedNW** (*NetworkMapper*) -- A network object to use for the simulation.
+
+   .. deprecated:: 0.1
+       The `scale\_apical` argument is deprecated.
+       Use the `cell\_modify\_funs` key in the :ref:`cell\_parameters\_format` file instead.
+
+   :returns: A tuple containing the :py:class:`~single\_cell\_parser.cell.Cell` and the evoked network (:py:class:`~single\_cell\_parser.network.Networkmapper`).
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
+
+
+.. title:
+
+augment_synapse_activation_df_with_branch_bin
+=============================================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin(sa_, section_distances_df=None, synaptic_weight_dict=None, excitatory_celltypes=None)
+
+   Augment a :ref:`syn\_activation\_format` dataframe with bin information.
+
+   The :ref:`syn\_activation\_format` dataframe contains info of where along a dendrite some synapse impinged.
+   This method infers to which bin that location belongs and adds it as an additional column.
+   This information is represented in a specific format: section\_id/bin\_within\_section.
+
+   :Parameters: * **sa\_** (*pd.DataFrame*) -- The dataframe of synaptic activity
+                * **section\_distances\_df** (*pd.DataFrame*) -- DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+                * **synaptic\_weight\_dict** (*dict, optional*) -- A dictionary mapping the synapse type to a weight.
+                  Defaults to None, in which case it is not added as an additional column.
+
+   :returns: The augmented dataframe with the additional columns 'section/branch\_bin', 'celltype', 'EI', and 'syn\_weight' (if synaptic\_weight\_dict is provided).
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

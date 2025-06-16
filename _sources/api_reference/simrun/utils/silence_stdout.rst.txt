@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.silence_stdout`
+
+
+.. title:
+
+silence_stdout
+==============
+
+
+.. py:function:: simrun.utils.silence_stdout(fun)
+
+   Decorator function to silence a function's output.
+
+   Redirects the standard output to ``os.devnull`` while the function is called,
+   and restores the original standard output afterwards.
+   To be used as a decorator.
+
+   :Parameters: **fun** (*callable*) -- The function to silence.
+
+   :returns: The silenced function.
+   :rtype: callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

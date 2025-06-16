@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist`
+
+_DendrogramSynapseStatistics._plot_synapse_hist
+===============================================
+
+.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist(ax, dendrite_density)
+
+   Plot the synapse histogram on an :py:class:`matplotlib.Axes` object.
+
+   :Parameters: * **ax** (:py:class:`matplotlib.Axes`) -- The matplotlib axes object.
+                * **dendrite_density** (*np.array*) -- The dendrite density histogram, containing the total amound of dendritic length in a certain bin of soma distance.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.Axes`
+

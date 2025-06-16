@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell.distance_to_soma`
+
+Cell.distance_to_soma
+=====================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.distance_to_soma(sec, x)
+
+   Calculate the path length to soma from location :paramref:`x` on section :paramref:`sec`
+
+   :Parameters: * **sec** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`) -- Section object.
+                * **x** (*float*) -- Relative position along the section (0-1).
+
+   :returns: Path length to soma in micrometer.
+   :rtype: float
+

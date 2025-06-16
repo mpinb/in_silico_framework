@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper.map_pruned_synapse_realization`
+
+SynapseMapper.map_pruned_synapse_realization
+============================================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.map_pruned_synapse_realization()
+
+   Maps previously created synapse realization onto neuron
+   morphology.
+
+   In this case, :paramref:`synDist` has to be dict with synapse types as
+   keywords and list of tuples (sectionID, sectionx, pruned) coding
+   the synapse location on the specific sections and anatomical pruning
+   status of these synapses.
+
+   See also:
+
+   - :py:meth:`~single_cell_parser.reader.read_pruned_synapse_realization`
+   - The :ref:`syn_file_format` file type.
+

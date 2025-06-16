@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection` ❭ :mod:`~data_base.analyze.spike_detection.spike_in_interval`
+
+
+.. title:
+
+spike_in_interval
+=================
+
+
+.. py:function:: data_base.analyze.spike_detection.spike_in_interval(st, tmin, tmax)
+
+   Check whether each trial contains at least one spike within the specified interval
+
+   :Parameters: * **st** (:py:class:`~numpy.array`) -- 2D array of spike times (``n\_trials x n\_spikes``)
+                * **tmin** (*float*) -- Minimum time (inclusive).
+                * **tmax** (*float*) -- Maximum time (exclusive).
+
+   Example::
+
+       >>> st = np.array([[0.1, 0.2, 0.3], [0.2, 0.3, 0.4], [0.3, 0.4, 0.5]])
+       >>> spike\_in\_interval(st, 0.4, 0.3)
+       [False, True, True]
+
+   :returns:  1D array of boolean values, indicating whether each trial contains at least one spike within the specified interval.
+   :rtype: :py:class:``~numpy.array``
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

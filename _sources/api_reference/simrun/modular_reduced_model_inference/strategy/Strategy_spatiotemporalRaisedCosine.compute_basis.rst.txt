@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.compute_basis`
+
+Strategy_spatiotemporalRaisedCosine.compute_basis
+=================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.compute_basis()
+
+   Compute the basis vectors for the dataset.
+
+   These basis vectors are defined as :math:`\mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}`.
+   When these basis vectors are weighed, they form the argument of the integral over the domain.
+   Once integrated over the domain, they yield the weighted net input.
+
+   .. math::
+
+       WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\\tau}(\\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
+
+   .. attention::
+
+      These are not the same basis vectors as in :py:class:`RaisedCosineBasis`.
+      These basis vectors are already multiplied with the data :math:`\mathbf{D}`.
+      Since dot product is commutative, the order of this multiplication does not matter for calculating
+      the weighted net input, but these intermediate basis vectors are different.
+
+   :returns: A dictionary of basis vectors for each group. basis vectors are of shape :math:`(n_trials, dim(\mathbf{f}(\\tau)), dim(\mathbf{g}(z)))`.
+   :rtype: dict
+

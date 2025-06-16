@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.trace_check_max_prestim_dendrite_depo`
+
+
+.. title:
+
+trace_check_max_prestim_dendrite_depo
+=====================================
+
+
+.. py:function:: biophysics_fitting.ephys.trace_check_max_prestim_dendrite_depo(t, vmax, stim_onset, max_prestim_dendrite_depo=None)
+
+   Check whether anywhere in the dendritic, there is a spike before stimulus onset
+
+   :Parameters: * **t** (*array*) -- Time array.
+                * **vmax** (*array*) -- The voltage maximum, taken over all dendrites, at each given timepoint.
+                * **stim\_onset** (*float*) -- Time of stimulus onset (ms).
+                * **max\_prestim\_dendrite\_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset (mV).
+                  If some dendrite section exceeds this value, it is considered a spike.
+
+   :returns: Whether or not a spike is detected before stimulus onset.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_param`
+
+
+.. title:
+
+set_param
+=========
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_param(cell_param, params=None)
+
+   Updates cell\_param given a dict of params in the dot naming convention.
+
+   Example::
+
+       cell\_param = {'a': {'b': {'c': 2}}}
+       params = {'a.b.c': 3}
+       set\_param(cell\_param, params)
+       # returns {'a': {'b': {'c': 3}}}
+
+   :Parameters: * **cell\_param (** -- py:class`~:py:class:`~single\_cell\_parser.parameters.ParameterSet`` | dict): The cell parameter nested dictionary.
+                * **params** (*dict*) -- The parameter flat dictionary.
+
+   :returns: The updated cell\_param.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

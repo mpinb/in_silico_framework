@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_sorted_keys_by_group`
+
+DataExtractor_spatiotemporalSynapseActivation.get_sorted_keys_by_group
+======================================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_sorted_keys_by_group(group, db=None)
+
+   returns keys sorted such that the first key is the closest to the soma
+
+
+

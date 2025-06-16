@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`
+
+PSPs.get_voltage_traces
+=======================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_voltage_traces()
+
+   Gather the ePSP voltage traces for each synapse.
+
+   The result is of the form::
+
+       {
+           celltype_1: {       # from self.network_params_by_celltype
+               g1_1: {         # from self.gExRange
+                   g2_1: [
+                       t_baseline,
+                       v_baseline,
+                       [[t_vec_1], ...],
+                       [[v_soma_synapse_1], [v_soma_synapse_2], ...]],
+                   g2_2: [...],
+                   ...
+               },
+               g1_2: {...},
+           celltype_2: {...},
+       }
+
+   For excitatory synapses, :math:`g_1` is the AMPA component and :math:`g_2` is the NMDA component.
+   For inhibitory synapses, :math:`g_1` and :math:`g_2` are both the GABA component.
+
+   :returns: A dictionary of voltage traces and activation times.
+   :rtype: defaultdict
+

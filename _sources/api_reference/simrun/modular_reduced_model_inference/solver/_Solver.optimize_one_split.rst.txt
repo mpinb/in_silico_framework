@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
+
+_Solver.optimize_one_split
+==========================
+
+.. py:method:: simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split(client=None, workers=None, index=0)
+
+   Optimize the cost function for a single split.
+
+   :Parameters: * **client** (:py:class:`dask.distributed.Client`) -- A dask client object.
+                * **workers** (*list*) -- List of worker names. Passed to :py:meth:`dask.distributed.Client.submit`
+                * **index** (*int*) -- Index of the split to optimize.
+                  Splits are saved as a dictionary in the
+                  :py:attr:`~simrun.modular_reduced_model_inference.strategy.DataSplitEvaluation.splits` attribute.
+                  The index then refers to the index of the names (i.e. keys) of the splits.
+                  Note that dictionaries are in general unordered, so this index is only useful to differentiate between splits,
+                  not to refer to a specific split or order of splits.
+
+   :returns: A dictionary with the optimization results.
+   :rtype: dict
+

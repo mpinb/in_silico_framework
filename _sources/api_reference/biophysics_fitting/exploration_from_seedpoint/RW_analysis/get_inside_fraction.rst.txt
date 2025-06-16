@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_inside_fraction`
+
+
+.. title:
+
+get_inside_fraction
+===================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_inside_fraction(l)
+
+   Print the fraction of models that are inside the objective space.
+
+   The exploration results contain a column "inside" that specifies whether or
+   not a model is inside the objective space, i.e. below all thresholds for the objectives.
+
+   :Parameters: **l** (*Load*) -- the Load object containing the exploration results
+
+   :returns: None. prints out the fraction of models that are inside the objective space.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`
+
+CellMorphologyVisualizer.write_vtk_frames
+=========================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames(out_name='frame', out_dir='.', t_start=None, t_stop=None, t_step=None, color=None, n_decimals=2, client=None)
+
+   Write the cell morphology to a series of VTK files.
+
+   :Parameters: * **out_name** (*str*) -- name of the file (not path, the file will be generated in out_dir)
+                * **out_dir** (*str*) -- path where the images for the gif will be generated
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time between the different time points of our visualization
+                * **color** (*str*) -- color of the cell morphology. Can be a fixed color, or a keyword referring to scalar data of the simulation, such as membrane voltage or ion channel dynamics.
+                * **n_decimals** (*int*) -- number of decimals to round the data to. Default is 2.
+                * **client** (*distributed.client.Client*) -- dask client for parallelization
+

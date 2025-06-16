@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.reconnect_network`
+
+NetworkMapper.reconnect_network
+===============================
+
+.. py:method:: single_cell_parser.network.NetworkMapper.reconnect_network()
+
+   Re-generate activity and connectivity patterns for a network.
+
+   .. deprecated:: 0.1.0
+       This method still uses the deprecated methods :py:meth:`~_connect_functional_synapses`
+       and :py:meth:`~_connect_spike_trains`, instead of :py:meth:`~_map_complete_synapse_realization`.
+

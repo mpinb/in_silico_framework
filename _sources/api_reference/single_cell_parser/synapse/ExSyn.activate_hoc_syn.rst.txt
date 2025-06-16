@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.ExSyn` ❭ :mod:`~single_cell_parser.synapse.ExSyn.activate_hoc_syn`
+
+ExSyn.activate_hoc_syn
+======================
+
+.. py:method:: single_cell_parser.synapse.ExSyn.activate_hoc_syn(source, targetCell, threshold=10.0, delay=0.0, weight=0.0)
+
+   Setup of all necessary hoc connections.
+
+   Stores all mechanisms and NetCons for reference counting.
+
+   :Parameters: * **source** (:py:class:`single_cell_parser.cell.PointCell`) -- Presynaptic cell whose :py:attr:`single_cell_parser.cell.PointCell.spikes` attribute is used as ``source`` in NEURON's NetCon object.
+                  Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
+                * **preCell** (:py:class:`single_cell_parser.cell.PointCell`) -- Presynaptic cell.
+                * **targetCell** (:py:class:`single_cell_parser.cell.Cell`) -- Postsynaptic cell.
+                * **receptors** (dict | Dict[:py:class:`~single_cell_parser.parameters.ParameterSet`]) -- Dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet` of receptors.
+                  Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.ParameterSet`.
+

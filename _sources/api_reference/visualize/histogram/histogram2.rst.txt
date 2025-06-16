@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.histogram` ❭ :mod:`~visualize.histogram.histogram2`
+
+
+.. title:
+
+histogram2
+==========
+
+
+.. py:function:: visualize.histogram.histogram2(hist_bins, color=None, ax=None, label=None, mode=&#39;step&#39;)
+
+   Plot a histogram from bins.
+
+   Does not use the decorated function :py:meth:`subsequent\_calls\_per\_line` like :py:meth:`histogram`.
+
+   :Parameters: * **hist\_bins** (*tuple*) -- tuple of the format (bins,hist) where bins are the bin edges and hist the bin values. Length of bins needs to be one element longer than hist.
+                * **color** (*str*) -- The color of the histogram. Default is ``None``.
+                * **ax** (*Axes*) -- The matplotlib axes object. Default is ``None``.
+                * **label** (*str*) -- The label of the histogram. Default is ``None``.
+                * **mode** (*str*) -- The mode of the histogram. Default is `step`. Options: ('step', 'filled').
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

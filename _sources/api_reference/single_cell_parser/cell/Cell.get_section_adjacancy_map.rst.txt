@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.get_section_adjacancy_map`
+
+Cell.get_section_adjacancy_map
+==============================
+
+.. py:method:: single_cell_parser.cell.Cell.get_section_adjacancy_map()
+
+   Generates a map that shows which sections are connected to which sections.
+
+   Each section is mapped to its parent sections and children sections.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cell.get_section_adjacancy_map()
+   >>> cell.section_adjacency_map[0]["parents"]
+   [None]  # soma has no parent sections
+   >>> cell.section_adjacency_map[0]["children"]
+   [1, 2, 3]
+
+   :returns: a dictionary where each key is the section id, and the value is a list of adjacent section ids
+   :rtype: dict
+

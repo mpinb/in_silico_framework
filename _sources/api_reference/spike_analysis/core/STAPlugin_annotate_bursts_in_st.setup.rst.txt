@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_annotate_bursts_in_st` ❭ :mod:`~spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup`
+
+STAPlugin_annotate_bursts_in_st.setup
+=====================================
+
+.. py:method:: spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup(spike_times_analysis)
+
+   Sets up the analysis: annotates bursts in a spike times dataframe.
+
+   :paramref:`_result` will be a pd.DataFrame containing the annotated spike times dataframe.
+
+   :Parameters: **spike_times_analysis** (:py:class:`~spike_analysis.core.SpikeTimesAnalysis`) -- The spike times analysis object.
+
+   .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+

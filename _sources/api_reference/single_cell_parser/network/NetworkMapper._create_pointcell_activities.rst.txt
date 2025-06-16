@@ -1,0 +1,46 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities`
+
+NetworkMapper._create_pointcell_activities
+==========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._create_pointcell_activities(preCellType, networkParameters)
+
+   Create point cell spike times based on the network parameters ``distribution`` keyword.
+
+   Depending on the ``distribution`` given by :paramref:`networkParameters`, this method creates
+   spike times for each presynaptic cell of type :paramref:`preCellType`.
+
+   The following spike time distributions are supported, and require the following parameters:
+
+   .. list-table:: Spike Time Distributions
+      :header-rows: 1
+
+      * - Distribution Type
+        - Required Parameters
+      * - "normal"
+        - "spikeT", "spikeWidth", "offset"
+      * - "uniform"
+        - "window", "offset"
+      * - "lognormal"
+        - "mu", "sigma", "offset"
+      * - "PSTH"
+        - "intervals", "probabilities", "offset"
+      * - "PSTH_absolute_number"
+        - "intervals", "number_active_synapses", "offset"
+      * - "PSTH_poissontrain" (deprecated)
+        - "intervals", "rates", "offset"
+      * - "PSTH_poissontrain_v2"
+        - "bins", "rates", "offset"
+      * - "poissontrain_modulated"
+        - "rate_before_t_offset", "mean_rate", "max_modulation", "modulation_frequency", "bin_size", "phase_distribution", "offset"
+
+   See :ref:`network_parameters_format` for more information on the network parameter file format.
+
+   :Parameters: * **preCellType** (*str*) -- The presynaptic cell type.
+                * **networkParameters** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The network parameters for the presynaptic cell type.
+
+   :returns: None
+

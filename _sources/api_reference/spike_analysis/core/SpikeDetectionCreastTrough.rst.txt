@@ -1,0 +1,122 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SpikeDetectionCreastTrough
+==========================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   run_analysis <SpikeDetectionCreastTrough.run_analysis>
+   _set_creast_trough <SpikeDetectionCreastTrough._set_creast_trough>
+   _extract_spike_times <SpikeDetectionCreastTrough._extract_spike_times>
+   get_creast_and_trough_ampltidues_by_bins <SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins>
+   get_default_events <SpikeDetectionCreastTrough.get_default_events>
+   show_events <SpikeDetectionCreastTrough.show_events>
+   get_serialize_dict <SpikeDetectionCreastTrough.get_serialize_dict>
+   save <SpikeDetectionCreastTrough.save>
+   load <SpikeDetectionCreastTrough.load>
+   plot_creast_trough_histogram <SpikeDetectionCreastTrough.plot_creast_trough_histogram>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.SpikeDetectionCreastTrough(reader_object, lim_creast='minimum', lim_trough='minimum', max_creast_trough_interval=2.0, tdelta=1.0, stimulus_period=1, stimulus_period_offset=0, upper_creast_threshold=np.inf, cellid='__no_cellid_assigned__', spike_time_mode='latest')
+   
+   Detects spikes by creast and trough amplitude.
+
+   :Parameters: * **reader_object** (:py:class:`~spike_analysis.core.ReaderSmr`|:py:class:`~spike_analysis.core.LabViewReader`) -- Reader object with get_voltage_traces and get_stim_times method, e.g. ReaderSmr
+                * **lim_creast** (*float|str*) -- threshold above which a creast of a spike is detected as such.
+                  Needs to be float, ``"minimum"``, or ``"zero"``.
+                  If "minimum" or "zero" is chosen, the threashold will be set based on the histogram of all creasts.
+                  If "minimum" is chosen, :paramref:`lim_creast` will be set to the first minimum in the histogram above or equal to :math:`0.4mV`.
+                  If "zero" is chosen, :paramref:`lim_creast` will be set to the first empty bin.
+                * **lim_trough** (*float|str*) -- want to use a negative value. lim creast and lim_trough need to be both floats, both
+                  "zero" or both "minimum".
+                * **max_creast_trough_interval** (*float*) -- Maximum interval between creast and trough such that a spike is recognized.
+                * **tdelta** (*float*) -- minimum interval between spikes
+                * **stimulus_period** (*int*) -- number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
+                * **stimulus_period_offse** (*int*) -- Number of stimulus that initiates first trial.
+                * **cellid** (*str*) -- name to be used in spike times dataframe
+
+   :Attributes:
+
+   .. attribute:: lim_creast
+
+      lim_creast used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
+
+      :type: float|str
+
+   .. attribute:: lim_trough
+
+      lim_trough used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
+
+      :type: float|str
+
+   .. attribute:: st
+
+      spike times dataframe, one row per trial
+
+      :type: pd.DataFrame
+
+   .. attribute:: spike_times
+
+      all extracted spike times, fullfilling creast and trough criterion, filtered such thatthe minimal ISI is above tdelta.
+
+      :type: list
+
+   .. attribute:: _spike_times_creast
+
+      spike times fullfilling creast criterion
+
+      :type: list
+
+   .. attribute:: _spike_times_trough
+
+      spike times fullfilling trough criterion
+
+      :type: list
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`run_analysis <spike_analysis.core.SpikeDetectionCreastTrough.run_analysis>`\ ()
+        - Runs the spike detection analysis.
+      * - :py:obj:`_set_creast_trough <spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough>`\ (lim\_creast, lim\_trough)
+        - Sets the creast and trough limits based on the given values.
+      * - :py:obj:`_extract_spike_times <spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times>`\ ()
+        - Extracts spike times from voltage traces.
+      * - :py:obj:`get_creast_and_trough_ampltidues_by_bins <spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins>`\ (mode)
+        - Get the creast and trough amplitudes based on the histogram of the creasts and troughs.
+      * - :py:obj:`get_default_events <spike_analysis.core.SpikeDetectionCreastTrough.get_default_events>`\ (show\_stim\_times, show\_trough\_candidates)
+        - Returns a list of events to be displayed with the :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough.show_events` method.
+      * - :py:obj:`show_events <spike_analysis.core.SpikeDetectionCreastTrough.show_events>`\ (events, savepdf, showfig, ylim)
+        - Shows voltage trace, thresholds and events.
+      * - :py:obj:`get_serialize_dict <spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict>`\ ()
+        - Get a dictionary containing the attributes of the SpikeDetectionCreastTrough object.
+      * - :py:obj:`save <spike_analysis.core.SpikeDetectionCreastTrough.save>`\ (path)
+        - Saves the SpikeDetectionCreastTrough object to a JSON file.
+      * - :py:obj:`load <spike_analysis.core.SpikeDetectionCreastTrough.load>`\ (path, init\_reader)
+        - :summarylabel:`static` Loads a SpikeDetectionCreastTrough object from a JSON file.
+      * - :py:obj:`plot_creast_trough_histogram <spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram>`\ (ax)
+        - skip-doc:
+

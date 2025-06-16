@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_all_splits`
+
+_Solver.optimize_all_splits
+===========================
+
+.. py:method:: simrun.modular_reduced_model_inference.solver._Solver.optimize_all_splits(client=None, workers=None)
+
+   Optimize the cost function for all splits of the strategy.
+
+   :Parameters: * **client** (:py:class:`dask.distributed.Client`) -- A dask client object.
+                * **workers** (*list*) -- List of worker names. Passed to :py:meth:`dask.distributed.Client.submit`
+
+   :returns: A dictionary with the keys being the split names and the values being the optimization results.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
+

@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.mf`
+
+_Step.mf
+========
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.mf(voltage_traces)
+
+   Get the mean frequency of the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_1AP"`` to whether there is at least one action potential in the somatic voltage trace,
+                 and ``".raw"`` to the mean frequency of the somatic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_mean_frequency`
+

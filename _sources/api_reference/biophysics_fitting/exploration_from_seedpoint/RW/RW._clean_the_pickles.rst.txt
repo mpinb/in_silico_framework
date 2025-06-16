@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._clean_the_pickles`
+
+RW._clean_the_pickles
+=====================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._clean_the_pickles(outdir, files, iteration)
+
+   Remove the pickle files that correspond to the intermediate results of a iteration.
+
+   :Parameters: * **outdir** (*str*) -- directory where the pickle files are located
+                * **files** (*list*) -- list of files in the directory
+                * **iteration** (*int*) -- iteration number
+

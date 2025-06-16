@@ -1,0 +1,89 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
+
+
+.. title:
+
+create_network_parameter
+========================
+
+
+.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write_all_celltypes=False)
+
+   Generate and write out a :ref:`network\_parameters\_format` file defining the evoked activity of a passive whisker touch scenario.
+
+   Reads in a template file for a network, where the parameters of each celltype are already defined, but the values are not set.
+   Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :paramref:`whisker` was deflected.
+   Spike probabilities only depend on the celltype, column, and deflected whisker.
+   Spike times are then Poisson sampled from these PSTHs.
+   A spike does not guarantee a synapse relase, but rather the probability of release upon a spike is set for each celltype.
+
+   The template file contains the key "network" with the following info for each celltype:
+
+       - celltype: 'spiketrain' or 'pointcell'
+       - interval: spike interval
+       - synapses: containing receptor information (type, weight and time dynamics) and release probability
+           - receptors
+               - receptor type
+                   - threshold: threshold for activation
+                   - delay: delay for activation
+                   - weight: weight of the synapse
+       - releaseProb: probability that a synapse gets activated if the cell spikes
+
+   :Parameters: * **templateParamName** (*str*) -- Name of the template parameter file.
+                * **cellNumberFileName** (*str*) -- Name of the file containing the number of cells for each celltype and column.
+                * **synFileName** (*str*) -- Name of the `.syn` file, defining the synapse types.
+                * **conFileName** (*str*) -- Name of the `.con` file, defining the connections.
+                * **whisker** (*str*) -- Which whisker is to be deflected.
+                * **outFileName** (*str*) -- Name of the output file.
+                * **write\_all\_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> templateParam = json.loads(templateParamName)
+   >>> templateParam
+   {
+   "info": {
+       "date": "11Feb2015",
+       "name": "evoked\_activity",
+       "author": "name",
+   },
+   "network": {
+       "cell\_type\_1": {
+           "celltype": "spiketrain",
+           "interval": 2173.9,
+           "synapses": {
+               "receptors": {
+                   "glutamate\_syn": {
+                       "threshold": 0.0,
+                       "delay": 0.0,
+                           "parameter": {
+                           "tau1": 26.0,
+                           "tau2": 2.0,
+                           "tau3": 2.0,
+                           "tau4": 0.1,
+                           "decayampa": 1.0,
+                           "decaynmda": 1.0,
+                           "facilampa": 0.0,
+                           "facilnmda": 0.0,
+                           },
+                       "weight": [1.47, 1.47],
+                   },
+               },
+           "releaseProb": 0.6,
+           },
+       },
+       "cell\_type\_2": {...},
+       ...
+
+   }
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,132 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+NetworkMapper
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   create_network_embedding <NetworkMapper.create_network_embedding>
+   create_network_embedding_for_simulations <NetworkMapper.create_network_embedding_for_simulations>
+   create_network_embedding_from_synapse_densities <NetworkMapper.create_network_embedding_from_synapse_densities>
+   _precompute_anatomical_area_celltype_synapse_densities <NetworkMapper._precompute_anatomical_area_celltype_synapse_densities>
+   _create_presyn_cells <NetworkMapper._create_presyn_cells>
+   _create_anatomical_realization <NetworkMapper._create_anatomical_realization>
+   _create_anatomical_connectivity_map <NetworkMapper._create_anatomical_connectivity_map>
+   _get_representative_sample <NetworkMapper._get_representative_sample>
+   _compute_parameter_distribution <NetworkMapper._compute_parameter_distribution>
+   _compute_sample_distance <NetworkMapper._compute_sample_distance>
+   _test_population_convergence <NetworkMapper._test_population_convergence>
+   _compute_summary_tables <NetworkMapper._compute_summary_tables>
+   _write_landmark_files <NetworkMapper._write_landmark_files>
+   _generate_output_files <NetworkMapper._generate_output_files>
+   _write_population_output_files <NetworkMapper._write_population_output_files>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper(postCell, postCellType, cellTypeNumbersSpreadsheet, connectionsSpreadsheet, exPST, inhPST)
+   
+   Connect presynaptic cells to a postsynaptic cell model.
+
+   This class is used to create anatomical realizations of connectivity.
+   Given a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` of boutons,
+   it computes all possible synapse densities that have non-zero overlap with every voxel this bouton field.
+   These synapse density fields depend on the presence of post-synaptic dendrites in the bouton field,
+   which in turn depends on the location and morphology of the post-syanptic neuron.
+   The synapse density fields are further used as probability distributions to Poisson sample
+   mutiple realizations of synaptic connections between pre-synaptic cells, and the post-synaptic cell
+   (see :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`).
+
+   .. seealso::
+
+      This is not the same class as :py:class:`single_cell_parser.network.NetworkMapper`.
+      This class is specialized for anatomical reconstructions,
+      not synapse activations or simulation parameters.
+
+   :Parameters: * **postCell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- The cell object to map synapses onto.
+                * **postCellType** (*str*) -- The type of the postsynaptic cell.
+                * **cellTypeNumbersSpreadsheet** (*dict*) -- Number of presynaptic cells per cell type and anatomical_area.
+
+   :Attributes:
+
+   .. attribute:: cells
+
+      Presynaptic cells, ordered by anatomical area and cell type.
+      This attribute is filled by
+      :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
+
+      :type: dict
+
+   .. attribute:: connected_cells
+
+      Indices of all active presynaptic cells, ordered by cell type.
+
+      :type: dict
+
+   .. attribute:: postCell
+
+      Reference to postsynaptic (multi-compartment) cell model.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+   .. attribute:: postCellType
+
+      Postsynaptic cell type.
+
+      :type: str
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`create_network_embedding <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding>`\ (postCellName, boutonDensities, nrOfSamples)
+        - Create a single network realization from a bouton density field.
+      * - :py:obj:`create_network_embedding_for_simulations <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_for_simulations>`\ (postCellName, boutonDensities, nrOfRealizations)
+        - Create multiple network realizations from a bouton density field.
+      * - :py:obj:`create_network_embedding_from_synapse_densities <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities>`\ (postCellName, synapseDensities)
+        - Create a single network realization from pre-computed synapse densities.
+      * - :py:obj:`_precompute_anatomical_area_celltype_synapse_densities <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities>`\ (boutonDensities)
+        - Compute synapse densities of all presynaptic cell types in all anatomical_areas
+      * - :py:obj:`_create_presyn_cells <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells>`\ ()
+        - Creates presynaptic cells.
+      * - :py:obj:`_create_anatomical_realization <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_realization>`\ (cellTypeSynapseDensities)
+        - Create a single anatomical realization of synapses.
+      * - :py:obj:`_create_anatomical_connectivity_map <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map>`\ ()
+        - Connects anatomical synapses to PointCells.
+      * - :py:obj:`_get_representative_sample <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample>`\ (realizationPopulation, populationDistribution)
+        - Determine which sample of a population of anatomical realizations
+      * - :py:obj:`_compute_parameter_distribution <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_parameter_distribution>`\ (realizationPopulation)
+        - Compute mean +- SD of parameters for population of anatomical realizations.
+      * - :py:obj:`_compute_sample_distance <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_sample_distance>`\ (realizationSample, realizationPopulationDistribution)
+        - Compute the distance of network realization samples to the population mean.
+      * - :py:obj:`_test_population_convergence <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence>`\ (nrOfSamples, sampleConnectivityData, postCellName)
+        - Test how many samples are needed to get a representative sample.
+      * - :py:obj:`_compute_summary_tables <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_summary_tables>`\ (connectedCells, connectedCellsPerStructure)
+        - Computes all summary data.
+      * - :py:obj:`_write_landmark_files <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_landmark_files>`\ (synapseLocations, id1, id2, cellName, dirName)
+        - Write out landmark files for each synapse location.
+      * - :py:obj:`_generate_output_files <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._generate_output_files>`\ (postCellName, connectivityMap, connectedCells, connectedCellsPerStructure, writeLandmarkFiles)
+        - Generates all summary files and writes output files.
+      * - :py:obj:`_write_population_output_files <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_population_output_files>`\ (postCellName, populationDistribution, connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable, writeLandmarkFiles)
+        - Writes output files for precomputed summary files.
+

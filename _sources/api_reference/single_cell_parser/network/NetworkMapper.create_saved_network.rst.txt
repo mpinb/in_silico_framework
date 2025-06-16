@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_saved_network`
+
+NetworkMapper.create_saved_network
+==================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper.create_saved_network(synWeightName=None)
+
+   Recreate a saved network embedding and activate it.
+
+   .. deprecated:: 0.1.0
+       Point cells and spike trains are separate entities in this version.
+       Please use :py:meth:`create_saved_network2` instead, which is
+       the most recent version, where point cells and spike trains can
+       be integrated into the same presynaptic cell.
+
+   Commonly used to assign synapse locations that have been previously generated
+   with :py:mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding`.
+
+   Here, these synapses can then be connected to activity sources and activated.
+
+   Steps:
+
+   1. Assign anatomical synapses to postsynaptic cell using :py:meth:`~_assign_anatomical_synapses`.
+   2. Create presynaptic cells for these synapses using :py:meth:`~_create_presyn_cells` (multiple synapses can originate from the same presynaptic cell).
+   3. Generate activation patters for each presynaptic cell, depending on whether they are a :py:class:`PointCell` or :py:class:`SpikeTrain` using :py:meth:`_activate_presyn_cells`.
+   4. Connect the presynaptic cells to the anatomical synapses using :py:meth:`~_map_functional_realization`.
+   5. Connect to spike train sources using :py:meth:`_connect_spike_trains`.
+
+   :Parameters: * **synWeightName** (*str*) -- Name of the file containing the synapse weights. Default: None.
+                * **full_network** (*bool*) -- If True, all synapses are created, even if they were not active.
+                  If False, only recreates the synapses that were active, and re-assigns their IDs to be sequential.
+                  Default: False.
+

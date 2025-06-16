@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP.get`
+
+bAP.get
+=======
+
+.. py:method:: biophysics_fitting.hay.evaluation.bAP.get(\*\*voltage_traces)
+
+   Get the full evaluation of the voltage traces for bAP firing.
+
+   :Parameters: **voltage_traces** -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: dictionary with the evaluation metrics, containing the raw values, normalized values, and checks.
+   :rtype: dict
+

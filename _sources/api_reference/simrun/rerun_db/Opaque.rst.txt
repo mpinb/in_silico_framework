@@ -1,0 +1,27 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.rerun_db` ❭ :mod:`~simrun.rerun_db.Opaque`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Opaque
+======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.rerun_db.Opaque(content)
+   
+   Wrapper class to make objects opaqye to dask
+
+   Opaque-wrapped objects are not loaded into memory by dask.
+   This is useful when passing large objects to dask functions that do not need to be loaded necessarily.
+

@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._compute_relative_pts`
+
+PySection._compute_relative_pts
+===============================
+
+.. py:method:: single_cell_parser.cell.PySection._compute_relative_pts()
+
+   Computes the relative position of 3D points along the section.
+
+   The relative position is the x-coordinate to the previous point.
+   Ergo, the sum of :paramref:`relPts` should always equal 1.
+

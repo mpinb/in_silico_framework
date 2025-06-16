@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces`
+
+
+.. title:
+
+add_dendritic_voltage_traces
+============================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces(db, rewrite_in_optimized_format=True, dendritic_spike_times=True, repartition=True, dendritic_spike_times_threshold=-30.0, scheduler=None, client=None)
+
+   Add dendritic voltage traces to the database.
+
+   Used in :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.init` to read, parse
+   and write the membrane voltage of recorded sites to the database.
+
+   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database to which the data should be added.
+                * **rewrite\_in\_optimized\_format** (*bool, optional*) -- If True, the data is converted to a high performance format.
+                  Default is ``True``.
+                * **dendritic\_spike\_times** (*bool, optional*) -- If True, the dendritic spike times are added to the database.
+                  Default is ``True``.
+                * **repartition** (*bool, optional*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+                  Default is ``True``.
+                * **dendritic\_spike\_times\_threshold** (*float, optional*) -- Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.add\_dendritic\_spike\_times`
+                * **client** (:py:class:`~dask.distributed.client.Client`, optional) -- Distributed Client object for parallel computation.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

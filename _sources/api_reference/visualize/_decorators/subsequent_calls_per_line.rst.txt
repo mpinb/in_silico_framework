@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize._decorators` ❭ :mod:`~visualize._decorators.subsequent_calls_per_line`
+
+
+.. title:
+
+subsequent_calls_per_line
+=========================
+
+
+.. py:function:: visualize._decorators.subsequent_calls_per_line(plotfun)
+
+   Call a function on each row of a dataframe separately.
+
+   Useful for plotfunctions that are designed to operate on :py:class:`pandas.Series` instances,
+   rather than on :py:class:`pandas.DataFrame` instances.
+   Also useful for parallelizing plotting functions.
+
+   The first input argument (i.e. ``args[0]``) is assumed to be an pd.DataFrame instance.
+
+   If the first n args are of type :py:class:`pandas.DataFrame`, each frame
+   will be iterated as described above.
+   In this case, it is assumed that all n DataFrames have the same indexes.
+
+   :Parameters: **plotfun** -- The function to decorate.
+
+   :returns: a function that calls ``plotfun`` on each row of the DataFrame(s).
+   :rtype: Callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_density_hist`
+
+_DendrogramSynapseStatistics._plot_synapse_density_hist
+=======================================================
+
+.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_density_hist(ax, xlim, binsize=50)
+
+   Plot the synapse density histogram on an :py:class:`matplotlib.axes.Axes` object.
+
+   If no colormap is provided during initialization, all synapses are plotted in red.
+   If a colormap is provided, the synapses are plotted in the respective color.
+
+   .. attention::
+
+      If a colormap is provided, but does not contain all synapse types as they appear in
+      :paramref:`~single_cell_parser.cell.Cell.synapses`, the missing synapse types are omitted from the plot.
+
+   :Parameters: * **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object.
+                * **xlim** (*tuple*) -- The x-axis limits.
+                * **binsize** (*float*) -- The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.axes.Axes`
+

@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.write_vtk_skeleton_file`
+
+
+.. title:
+
+write_vtk_skeleton_file
+=======================
+
+
+.. py:function:: visualize.vtk.write_vtk_skeleton_file(lookup_table, out_name, out_dir, point_scalar_data=None, n_decimals=2)
+
+   Write out a .vtk file for a neuron morphology.
+
+   This method is used by :py:meth:`~visualize.cell\_morphology\_visualizer.CellMorphologyVisualizer.write\_vtk\_frames`.
+
+   :Parameters: * **lookup\_table** (*pd.DataFrame*) -- Lookup table for the neuron morphology.
+                  Can be accessed from :py:class:`visualize.cell\_morphology\_visualizer.CellMorphologyVisualizer`.
+                * **out\_name** (*str*) -- Name of the output file.
+                * **out\_dir** (*str*) -- Directory to save the file to.
+                * **point\_scalar\_data** (*dict, optional*) -- Dictionary containing scalar data for each point. Defaults to None.
+
+   :returns: None. Writes out a .vtk file to the specified directory.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

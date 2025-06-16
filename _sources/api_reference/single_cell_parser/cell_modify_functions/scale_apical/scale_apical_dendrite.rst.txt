@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite`
+
+
+.. title:
+
+scale_apical_dendrite
+=====================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite(cell, scale=None, compartment=&#39;ApicalDendrite&#39;)
+
+   Scales the apical dendrite of a cell.
+
+   Assumes the cell has sections with label "ApicalDendrite".
+   If not, nothing gets scaled.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+                * **scale** (*float*) -- The scaling factor.
+
+   :returns: The scaled cell.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

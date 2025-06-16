@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_presynaptic_spike_times`
+
+
+.. title:
+
+write_presynaptic_spike_times
+=============================
+
+
+.. py:function:: single_cell_parser.writer.write_presynaptic_spike_times(fname=None, cells=None)
+
+   Write cell type, presynaptic cell ID and spike times of all connected
+   presynaptic point cells.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **cells** (*dict*) -- A dictionary with cell types as keys and lists of cells as values.
+
+   :returns: None. Writes out the presynaptic spike times file to :paramref:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cells = {'cell\_type\_1': [cell1, cell2], 'cell\_type\_2': [cell3]}
+   >>> write\_presynaptic\_spike\_times('presynaptic\_spikes.param', cells)
+   >>> presynaptic\_spikes.param
+   # presynaptic cell type cell ID spike times
+   cell\_type\_1     0       100.4,
+   cell\_type\_1     1
+   cell\_type\_2     0       30.6,205.1,500.0,
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

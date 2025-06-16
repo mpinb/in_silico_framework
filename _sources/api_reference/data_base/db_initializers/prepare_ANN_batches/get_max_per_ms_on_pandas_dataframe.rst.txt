@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_max_per_ms_on_pandas_dataframe`
+
+
+.. title:
+
+get_max_per_ms_on_pandas_dataframe
+==================================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_max_per_ms_on_pandas_dataframe(vt_pandas)
+
+   Subsample a voltage trace pandas dataframe to 1ms bins based on the maximum depolarization.
+
+   :Parameters: **vt\_pandas** (*pd.DataFrame*) -- Voltage traces dataframe
+
+   :returns: A pandas Series of the maximum depolarization per ms.
+   :rtype: pd.Series
+
+   .. attention:: This method assumes a voltage trace time interval of 0.025 ms.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

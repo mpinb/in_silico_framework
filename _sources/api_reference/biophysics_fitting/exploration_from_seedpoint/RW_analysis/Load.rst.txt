@@ -1,0 +1,48 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Load
+====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_df <Load.get_df>
+   get_futures <Load.get_futures>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load(client, path, n_particles=1000)
+   
+   Class for efficiently loading exploration results
+
+   Uses dask to parallellize loading in large datasets.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_df <biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_df>`\ ()
+        - Get the exploration results as a pandas dataframe.
+      * - :py:obj:`get_futures <biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_futures>`\ ()
+        - Get the futures of the delayed computations.
+

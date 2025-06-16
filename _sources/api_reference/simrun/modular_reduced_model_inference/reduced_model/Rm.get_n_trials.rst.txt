@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials`
+
+Rm.get_n_trials
+===============
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials()
+
+   Get the amount of trials.
+
+   If the amount of trials is not set, it is set to the length of the data.
+
+   :returns: Amount of trials
+   :rtype: int
+

@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.read_smr_file`
+
+
+.. title:
+
+read_smr_file
+=============
+
+
+.. py:function:: spike_analysis.core.read_smr_file(path)
+
+   Reads a Spike2 file and returns its content as a neo.core.block.Block object.
+
+   To avoid modifying the original Spike2 file, a copy of the file is first created in a temporary folder.
+   The copy is then read and returned as a neo.core.block.Block object. Finally, the temporary folder is deleted.
+
+   :Parameters: **path** (*str*) -- Absolute path to the Spike2 file.
+
+   :returns: A :py:class:`~neo.core.block.Block` object containing the content of the Spike2 file.
+   :rtype: :py:class:`neo.core.block.Block`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

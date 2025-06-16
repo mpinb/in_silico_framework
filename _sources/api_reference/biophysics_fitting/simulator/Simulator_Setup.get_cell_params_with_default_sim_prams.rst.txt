@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_cell_params_with_default_sim_prams`
+
+Simulator_Setup.get_cell_params_with_default_sim_prams
+======================================================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_cell_params_with_default_sim_prams(params, recordingSites=[], tStart=0.0, tStop=295, dt=0.025, Vinit=-75.0, T=34.0)
+
+   Get a neuron parameter object.
+
+   Constructs a complete neuron parameter object that can be used for further simulations with e.g. :py:mod:`simrun`.
+
+   :Parameters: * **params** (*pd.Series*) -- The parameter vector.
+                * **recordingSites** (*[float]*) -- The recording site (um).
+                * **tStart** (*float*) -- The start time of the simulation (ms).
+                * **tStop** (*float*) -- The stop time of the simulation (ms).
+                * **dt** (*float*) -- The time step of the simulation (ms).
+                * **Vinit** (*float*) -- The initial voltage (mV).
+                * **T** (*float*) -- The temperature (Celsius).
+
+   :returns: The neuron parameter object.
+   :rtype: :py:class:`~single_cell_parser.parameters.ParameterSet`
+

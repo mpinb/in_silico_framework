@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell._add_synapse_pointer`
+
+PointCell._add_synapse_pointer
+==============================
+
+.. py:method:: single_cell_parser.cell.PointCell._add_synapse_pointer(synapse)
+
+   Add a reference to a synapse connected to this cell.
+

@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._setup`
+
+Strategy_spatiotemporalRaisedCosine._setup
+==========================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._setup()
+
+   Compute the strategy's basis vectors and set up the objective function.
+
+

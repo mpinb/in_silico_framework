@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_spiketrain_activities`
+
+NetworkMapper._create_spiketrain_activities
+===========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._create_spiketrain_activities(preCellType, networkParameters)
+
+   Create spike train times based on the network parameters spiketrain keywords.
+
+   Uses :py:meth:`~single_cell_parser.cell.PointCell.compute_spike_train_times` to calculate
+   spike times based on the network parameter keys "noise", "start", "interval", "nspikes".
+   See :ref:`network_parameters_format` for more information.
+

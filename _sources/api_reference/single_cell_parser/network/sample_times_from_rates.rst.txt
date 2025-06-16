@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.sample_times_from_rates`
+
+
+.. title:
+
+sample_times_from_rates
+=======================
+
+
+.. py:function:: single_cell_parser.network.sample_times_from_rates(bins, rate)
+
+   Sample spike times from spike rates.
+
+   Used in :py:meth:`~\_create\_presyn\_cells` to generate spike times for a Poisson spike train.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

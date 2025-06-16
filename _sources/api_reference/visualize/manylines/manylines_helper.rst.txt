@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.manylines` ❭ :mod:`~visualize.manylines.manylines_helper`
+
+
+.. title:
+
+manylines_helper
+================
+
+
+.. py:function:: visualize.manylines.manylines_helper(pdf, axis=None, colormap=None, groupby_attribute=None, ax=None, figsize=(15, 3))
+
+   Helper function which runs on a single core and can be called by map\_partitions()
+
+   :Parameters: * **pdf** (*pd.DataFrame*) -- a pandas DataFrame, each row of which will be plotted out.
+                * **axis** (*tuple | list, optional*) -- axis limits, e.g. (1, 10, 1, 10)
+                * **colormap** (*dict*) -- A colormap to use for the plot.
+                  Must map a label from :paramref:groupby\_attribute to a color
+                * **fig** (*matplotlib.pyplot.Figure, optional*) -- A Figure object to plot on.
+                  If specified, will plot on the current active axis.
+                  If not, it will create one.
+                * **figsize** (*tuple*) -- size of the figure.
+
+   :returns: Figure object containing the lines as specified in pdf.
+   :rtype: fig (maptlotlib.pyplot.Figure)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

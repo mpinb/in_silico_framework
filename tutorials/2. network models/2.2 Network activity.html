@@ -197,8 +197,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../rst_assets/api_reference.html" class="md-tabs__link">
-      <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    <a href="../../api_reference.html" class="md-tabs__link">
+      <span title="/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
     </a>
   </li>
 
@@ -211,8 +211,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../rst_assets/tutorials.html" class="md-tabs__link md-tabs__link--active">
-      <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    <a href="../../tutorials.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
     </a>
   </li>
 
@@ -223,8 +223,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../rst_assets/installation.html" class="md-tabs__link">
-      <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    <a href="../../installation.html" class="md-tabs__link">
+      <span title="/installation.rst (reference label)" class="md-ellipsis">Installation</span>
     </a>
   </li>
 
@@ -235,8 +235,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../rst_assets/file_formats.html" class="md-tabs__link">
-      <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    <a href="../../file_formats.html" class="md-tabs__link">
+      <span title="/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
     </a>
   </li>
 
@@ -303,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rst_assets/api_reference.html" class="md-nav__link">
-        <span title="/rst_assets/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+      <a href="../../api_reference.html" class="md-nav__link">
+        <span title="/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
       </a>
     </li>
   
@@ -329,7 +329,7 @@
       
         
         <div class="md-nav__link md-nav__link--index ">
-          <a href="../../rst_assets/tutorials.html"><span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span></a>
+          <a href="../../tutorials.html"><span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span></a>
           
             <label for="__nav_2">
               <span class="md-nav__icon md-icon"></span>
@@ -340,7 +340,7 @@
       <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
-          <span title="/rst_assets/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+          <span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -546,8 +546,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rst_assets/installation.html" class="md-nav__link">
-        <span title="/rst_assets/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      <a href="../../installation.html" class="md-nav__link">
+        <span title="/installation.rst (reference label)" class="md-ellipsis">Installation</span>
       </a>
     </li>
   
@@ -562,8 +562,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../rst_assets/file_formats.html" class="md-nav__link">
-        <span title="/rst_assets/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      <a href="../../file_formats.html" class="md-nav__link">
+        <span title="/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
       </a>
     </li>
   
@@ -793,7 +793,7 @@ dict_keys([&#39;L2&#39;, &#39;L34&#39;, &#39;L4py&#39;, &#39;L4sp&#39;, &#39;L4s
 <li><p><code class="docutils literal notranslate"><span class="pre">releaseProb</span></code>: chance that synapse gets activated if presynaptic cell gets activated</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">synapses.receptors.glutamate_syn.parameter</span></code>:</p>
 <ul>
-<li><p>parameters for the NEURON mechanism defined in <a class="reference external" href="../../autoapi/mechanisms/l5pt//index.rst">mechanisms.channels</a></p>
+<li><p>parameters for the NEURON mechanism defined in <a class="reference external" href="../../api_reference/mechanisms/l5pt//index.rst">mechanisms.channels</a></p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">tau1</span></code>: NMDA decay time</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tau2</span></code>: NMDA rise time</p></li>
@@ -1109,7 +1109,7 @@ dict_keys([&#39;L6cc_B1&#39;, &#39;L6cc_B2&#39;, &#39;L6cc_B3&#39;, &#39;L6cc_C1
 </div>
 <h2 id="Combining-ongoing-and-evoked-activity-into-a-network-parameter-file">Combining ongoing and evoked activity into a network parameter file<a class="headerlink" href="#Combining-ongoing-and-evoked-activity-into-a-network-parameter-file" title="Permalink to this heading">¶</a></h2>
 <p>Now, let’s reverse-engineer our network parameters from this. Given that we know how a single cell population responds to various input stimuli, we can now generate activity data for all cell populations under a single stimulus. Note the subtle difference here. The previous histogram shows the response probability of the <strong>same cell population</strong> under <strong>different whisker deflections</strong>. Below, we will generate activity data for <strong>different cell populations</strong> for the <strong>same whisker deflection</strong>.</p>
-<p>To so, we use the <a class="reference internal" href="../../autoapi/singlecell_input_mapper/evoked_network_param_from_template/index.html"><span class="doc">create_evoked_network_parameter</span></a> pipeline:</p>
+<p>To so, we use the <a class="reference internal" href="../../api_reference/singlecell_input_mapper/evoked_network_param_from_template/index.html"><span class="doc">create_evoked_network_parameter</span></a> pipeline:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
 </code></pre></div>

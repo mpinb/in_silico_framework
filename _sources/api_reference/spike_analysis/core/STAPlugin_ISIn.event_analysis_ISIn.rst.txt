@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn`
+
+STAPlugin_ISIn.event_analysis_ISIn
+==================================
+
+.. py:method:: spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn(spike_times, n=5)
+   :staticmethod:
+
+
+   Computes for each spike the inter spike interval (ISI) to the next, second next ... nth next spike.
+
+   :Parameters: * **spike_times** (*list*) -- list, containing spike times
+                * **n** (*int*) -- Max order of ISIs computed (e.g. if n = 1, only the interval between each spike and the first next spike will be computed)
+
+   :returns:
+
+             dataframe containing the columns ``ISI_1`` to ``ISI_n``, and event_time
+                 The ``ISI_n`` columns contain the time interval between the current spike (@ event time)
+                 and the nth next spike. ``np.NaN`` if there is no nth next spike.
+   :rtype: pd.DataFrame
+

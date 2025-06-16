@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize._decorators` ❭ :mod:`~visualize._decorators.dask_to_pandas`
+
+
+.. title:
+
+dask_to_pandas
+==============
+
+
+.. py:function:: visualize._decorators.dask_to_pandas(fun)
+
+   Decorator that converts function arguments from dask to pandas.
+
+   If a dask dataframe is enctounered in the methods, it is computed, converting it to a pandas dataframe.
+
+   Usecase: Allows to write methods for pandas for pandas only,
+   and they can then stil be used for dask dataframes by outsourcing the logic of converting dask to pandas.
+
+   :Parameters: **fun** -- The function to decorate.
+
+   :returns: The same function, but whose arguments are now pandas instead of dask dataframes when called.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

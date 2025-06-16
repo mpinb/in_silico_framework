@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_height`
+
+BAC.BAC_caSpike_height
+======================
+
+.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_height(voltage_traces)
+
+   Get the height of the calcium spike in the dendritic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_1_Ca_AP"`` to whether there is at least one calcium spike in the dendritic voltage trace,
+                 ``".check_>=2_Na_AP"`` to whether there are at least two action potentials in the somatic voltage trace,
+                 ``".check_ca_max_after_nth_somatic_spike"`` to whether the calcium spike occurs after the nth somatic spike,
+                 and ``".raw"`` to the height of the calcium spike in the dendritic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:func:`BAC_caSpike_height`
+

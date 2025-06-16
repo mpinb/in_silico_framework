@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW.run_RW`
+
+RW.run_RW
+=========
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW.run_RW(selected_seedpoint, particle_id, seed=None)
+
+   Run random walk exploration from a seed point.
+
+   :Parameters: * **selected_seedpoint** (*int*) -- index of the seed point in df_seeds
+                * **particle_id** (*int*) -- id of the particle
+                * **seed** (*int*) -- random seed for the random number generator
+
+   :returns: None. Saves the results to :paramref:`MAIN_DIRECTORY`/:paramref:`selected_seedpoint`/:paramref:`particle_id`
+

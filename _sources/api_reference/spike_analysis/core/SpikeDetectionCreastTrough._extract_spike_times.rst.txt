@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times`
+
+SpikeDetectionCreastTrough._extract_spike_times
+===============================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times()
+
+   Extracts spike times from voltage traces.
+
+   Extracts spike times based on creast and trough amplitude.
+   Only returns spike times that fullfill both the creast and trough criterion and have an ISI above :paramref:`tdelta`.
+   Spikes that only fullfill the creast criterion are stored in :paramref:`_spike_times_creast`, and similarly for the trough criterion.
+
+   :returns: A list containing spike times.
+   :rtype: list
+

@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.load`
+
+SpikeDetectionCreastTrough.load
+===============================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.load(path, init_reader=False)
+   :staticmethod:
+
+
+   Loads a SpikeDetectionCreastTrough object from a JSON file.
+
+   :Parameters: * **path** (*str*) -- The path to the JSON file.
+                * **init_reader** (*bool, optional*) -- If True, initializes the reader object. Defaults to False.
+

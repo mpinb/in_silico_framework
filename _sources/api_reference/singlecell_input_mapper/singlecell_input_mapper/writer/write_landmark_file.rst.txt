@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_landmark_file`
+
+
+.. title:
+
+write_landmark_file
+===================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_landmark_file(fname=None, landmarkList=None)
+
+   Write Amira landmark file
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **landmarkList** (*array*) -- List of tuples, each of which holds 3 float coordinates
+
+   :raises RuntimeError: If no file name is given
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

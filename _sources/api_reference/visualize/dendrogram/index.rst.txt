@@ -1,0 +1,49 @@
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram`
+
+dendrogram
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _DendrogramSection </api_reference/visualize/dendrogram/_DendrogramSection>
+   Dendrogram </api_reference/visualize/dendrogram/Dendrogram>
+   _DendrogramDendriteStatistics </api_reference/visualize/dendrogram/_DendrogramDendriteStatistics>
+   _DendrogramSynapseStatistics </api_reference/visualize/dendrogram/_DendrogramSynapseStatistics>
+   DendrogramStatistics </api_reference/visualize/dendrogram/DendrogramStatistics>
+   _get_max_somadistance </api_reference/visualize/dendrogram/_get_max_somadistance>
+   _get_db_by_sec </api_reference/visualize/dendrogram/_get_db_by_sec>
+
+.. py:module:: visualize.dendrogram
+
+.. autoapi-nested-parse::
+   Plot a dendrogram of a neuron morphology.
+
+   Dendrograms are schematic representations of neuron morphologies.
+   This module provides a class to plot dendrograms, as well as denddritic length and synapse count statistics.
+
+   .. figure:: ../../../_static/_images/dendrogram.png
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Dendrogram <visualize.dendrogram.Dendrogram>`
+     - Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+   * - :py:obj:`DendrogramStatistics <visualize.dendrogram.DendrogramStatistics>`
+     - Plot dendrogram statistics.
+
+
+

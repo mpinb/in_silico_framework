@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderSmr` ❭ :mod:`~spike_analysis.core.ReaderSmr.get_serialize_dict`
+
+ReaderSmr.get_serialize_dict
+============================
+
+.. py:method:: spike_analysis.core.ReaderSmr.get_serialize_dict()
+
+   Get a dictionary containing the attributes of the ReaderSmr object.
+
+   :returns:
+
+             A dictionary containing the attributes of the ReaderSmr object:
+                     - path (str): The path to the smr-file.
+                     - analogsignal_id (int): The ID of the analog signal to read.
+                     - stim_times_channel (str): The name of the channel containing the stimulus times.
+                     - stim_times (list): The times of the stimuli.
+                     - class (str): The class of the object (i.e. ``ReaderSmr``).
+                     - min_rel_time (float): The minimum relative time to include in the voltage traces.
+                     - max_rel_time (float): The maximum relative time to include in the voltage traces.
+   :rtype: dict
+

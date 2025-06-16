@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas`
+
+
+.. title:
+
+read_voltage_traces_from_files_pandas
+=====================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas(prefix, fnames)
+
+   Reads a list of **multiple** voltage trace files and parses it to a single pandas dataframe.
+
+   The delayed version of this method is used to construct a dask dataframe containing the voltage traces
+   in :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_by\_filenames`.
+   Each singular file is read using :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_from\_file`.
+
+   :Parameters: * **prefix** (*str*) -- Path to the directory containing the simulation results.
+                * **fnames** (*list*) -- List of filenames pointing to voltage trace files.
+
+   :returns: A pandas dataframe containing the voltage traces.
+   :rtype: pandas.DataFrame
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_by\_filenames`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.distance_between_pts`
+
+Cell.distance_between_pts
+=========================
+
+.. py:method:: single_cell_parser.cell.Cell.distance_between_pts(sec1, x1, sec2, x2)
+
+   Computes the path length between two points.
+
+   Points are specified by either their locations, or by point IDs and section IDs.
+
+   Currently, this function uses the built-in NEURON method ``distance`` to compute the distances.
+   Note that this approach may be inefficient for large numbers of synapses due to repeated computations.
+   Additionally, the computed distances are approximate since NEURON calculates distances between the centers of segments.
+
+   Future improvements could include implementing a look-up table for pair-wise distances to enhance efficiency.
+
+   :Parameters: * **x1** (*float | int*) -- Location or point ID of the first point.
+                * **x2** (*float | int*) -- Location or point ID of the second point.
+                * **sec1** (*Section | int*) -- Section or section ID containing the first point.
+                * **sec2** (*Section | int*) -- Section or section ID containing the second point.
+
+   :returns: The computed path length between the two points.
+   :rtype: float
+

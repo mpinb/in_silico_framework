@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization`
+
+
+.. title:
+
+_check_needs_reoptimization
+===========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization(key, old_dumper_name, new_dumper_name)
+
+   Check if a key needs re-optimization.
+
+   Dumper formats that need to be re-optimized are saved in :py:mod:`~data\_base.db\_initializers.load\_simrun\_general.config`.
+
+   :Parameters: * **key** (*str*) -- The key to check.
+                * **old\_dumper\_name** (*str*) -- The name of the old dumper.
+                * **new\_dumper\_name** (*str*) -- The name of the new dumper.
+
+   :returns: True if the key needs re-optimization, False otherwise.
+   :rtype: bool
+
+   :raises DataBaseException: If the key is not in the database.
+
+   :raises Warning: If the old and new dumper are configured to be the same (should not be the case).
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

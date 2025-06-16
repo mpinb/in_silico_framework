@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics._plot_dendrite_hist`
+
+_DendrogramDendriteStatistics._plot_dendrite_hist
+=================================================
+
+.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._plot_dendrite_hist(ax, xlim, binsize=50)
+
+   Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
+
+   :Parameters: * **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object.
+                * **xlim** (*tuple*) -- The x-axis limits.
+                * **binsize** (*float*) -- The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.axes.Axes`
+

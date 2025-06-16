@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.run`
+
+PSPs.run
+========
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.run(client, rerun=False)
+
+   Run the single-cell simulations from the :paramref:`_delayeds`.
+
+   The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the
+   amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is
+   ``len(gExRange) * len(network_params_by_celltype)``.
+
+   :Parameters: * **client** (*dask.distributed.Client*) -- The dask client for parallel computation.
+                * **rerun** (*bool*) -- Force rerun the computation.
+                  Otherwise, calling this function has no effect if the computation is already running or finished.
+                  Default: ``False``
+
+   :returns: None. Updates the :paramref:`futures` attribute.
+

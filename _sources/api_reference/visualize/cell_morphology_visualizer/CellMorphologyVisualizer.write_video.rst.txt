@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_video`
+
+CellMorphologyVisualizer.write_video
+====================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_video(images_path, out_name, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, quality=5, codec='mpeg4', tpf=20)
+
+   Write the individual frames of a neuron during a simulation and merge them into a video.
+
+   Creates a set of images of a neuron color-coded with voltage together with synapse activations.
+   The parameters :paramref:`t_start`, :paramref:`t_stop` and :paramref:`t_step` update the :paramref:`times_to_show` attribute.
+
+   :Parameters: * **images_path** (*str*) -- dir where the images for the gif will be generated
+                * **out_name** (*str*) -- path location of the resulting gif.
+                * **overwrite_frames** (*bool*) -- whether to overwrite previously existing frames in the images_path directory.
+                * **color** (*str*) -- color of the cell morphology. Can be a fixed color, or a keyword referring to scalar data of the simulation, such as membrane voltage or ion channel dynamics.
+                * **show_synapses** (*bool*) -- whether to show the synapse activation locations onto the morphology.
+                * **show_legend** (*bool*) -- whether to show the color legend in the plot.
+                * **client** (*distributed.client.Client*) -- dask client for parallelization
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time between the different time points of our visualization
+                * **highlight_section** (*int*) -- section number of the section that should be highlighted with an arrow.
+                * **highlight_x** (*float*) -- x coordinate of the section that should be highlighted with an arrow.
+                * **framerate** (*int*) -- frames per second
+                * **quality** (*int*) -- quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :paramref:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
+                * **codec** (*str*) -- codec to use for the video. Default is mpeg4.
+                * **tpf** (*float*) -- duration of each frame in ms
+

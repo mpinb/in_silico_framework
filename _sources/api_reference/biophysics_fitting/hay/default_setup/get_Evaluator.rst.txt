@@ -1,0 +1,40 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.get_Evaluator`
+
+
+.. title:
+
+get_Evaluator
+=============
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.get_Evaluator(step=False, vInit=False, bAP_kwargs={}, BAC_kwargs={}, StepOne_kwargs={}, StepTwo_kwargs={}, StepThree_kwargs={}, interpolate_voltage_trace=True)
+
+   Get a :py:class:`~biophysics\_fitting.evaluator.Evaluator` object for the Hay protocol.
+
+   Sets up an evaluator object for the Hay protocol, including measuring functions for bAP, BAC and three step current stimuli.
+
+   :Parameters: * **step** (*bool*) -- Whether to include step current measurements (not implemented yet).
+                * **vInit** (*bool*) -- Whether to include vInit measurements. (not implemented yet)
+                * **bAP\_kwargs** (*dict*) -- Keyword arguments for the ``bAP`` measurement function.
+                * **BAC\_kwargs** (*dict*) -- Keyword arguments for the ``BAC`` measurement function.
+                * **StepOne\_kwargs** (*dict*) -- Keyword arguments for the ``StepOne`` measurement function.
+                * **StepTwo\_kwargs** (*dict*) -- Keyword arguments for the ``StepTwo`` measurement function.
+                * **StepThree\_kwargs** (*dict*) -- Keyword arguments for the ``StepThree`` measurement function.
+                * **interpolate\_voltage\_trace** (*bool*) -- Whether to interpolate the voltage trace to a fixed time interval.
+
+   :returns: An evaluator object.
+   :rtype: :py:class:`~biophysics\_fitting.evaluator.Evaluator`
+
+   :raises NotImplementedError: If :paramref:vInit is set to True.
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

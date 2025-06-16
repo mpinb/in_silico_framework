@@ -1,0 +1,116 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderLabView`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ReaderLabView
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_stim_times <ReaderLabView.get_stim_times>
+   get_voltage_traces <ReaderLabView.get_voltage_traces>
+   get_serialize_dict <ReaderLabView.get_serialize_dict>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.ReaderLabView(path, stim_times=None, sampling_rate=32000, scale=100, apply_filter=False)
+   
+   A class for reading LabView binary data files and accessing stimulus times and voltage traces.
+
+   Data is read using :py:meth:`spike_analysis.core.read_labview_junk1_dat_files`.
+   If :paramref:`apply_filter`, a highpass filter is applied to the data using :py:meth:`spike_analysis.core.highpass_filter`.
+
+   .. seealso:: :py:class:`spike_analysis.core.ReaderSmr`
+
+   :Parameters: * **path** (*str*) -- The path to the LabView file.
+                * **stim_times** (*str*) -- list of stimulus times.
+                * **sampling_rate** (*int*) -- The sampling rate of the data.
+                * **scale** (*int*) -- Scales the data with this value.
+                * **apply_filter** (*bool*) -- Whether to apply a highpass filter to the data.
+
+   :Attributes:
+
+   .. attribute:: path
+
+      The path to the smr-file.
+
+      :type: str
+
+   .. attribute:: stim_times
+
+      The times of the stimuli.
+
+      :type: list
+
+   .. attribute:: sampling_rate
+
+      The sampling rate of the data.
+
+      :type: int
+
+   .. attribute:: scale
+
+      Scales the data with this value.
+
+      :type: int
+
+   .. attribute:: apply_filter
+
+      Whether to apply a highpass filter to the data.
+
+      :type: bool
+
+   .. attribute:: t
+
+      The time points of the voltage traces.
+
+      :type: numpy.ndarray
+
+   .. attribute:: v
+
+      The voltage values of the traces.
+
+      :type: numpy.ndarray
+
+   .. attribute:: t_start
+
+      The start time of the voltage traces.
+
+      :type: float
+
+   .. attribute:: t_end
+
+      The end time of the voltage traces.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_stim_times <spike_analysis.core.ReaderLabView.get_stim_times>`\ ()
+        - Get the times of the stimuli.
+      * - :py:obj:`get_voltage_traces <spike_analysis.core.ReaderLabView.get_voltage_traces>`\ ()
+        - Get the time points and voltage values of the traces.
+      * - :py:obj:`get_serialize_dict <spike_analysis.core.ReaderLabView.get_serialize_dict>`\ ()
+        - Get a dictionary containing the attributes of the ReaderLabView object.
+

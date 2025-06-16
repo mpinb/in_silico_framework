@@ -1,0 +1,33 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper`
+
+
+.. title:
+
+create_metadata_parallelization_helper
+======================================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper(sim_trial_index, simresult_path)
+
+   Parallelize creating metadata across multiple simulation trials.
+
+   .. seealso::
+
+      This is used in
+      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.create\_metadata`.
+
+   :Parameters: * **sim\_trial\_index** (*pd.Series*) -- A pandas series containing the sim\_trial\_index.
+                * **simresult\_path** (*str*) -- Path to the simulation results folder.
+
+   :returns: A pandas dataframe containing the metadata.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

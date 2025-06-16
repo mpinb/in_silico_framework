@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`
+
+CellParser.spatialgraph_to_cell
+===============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell()
+
+   Set up a cell object from an AMIRA hoc file.
+
+   Reads cell morphology from Amira hoc file
+   and sets up PySections and Cell object.
+
+   .. deprecated:: 1.0
+       The `scaleFunc` argument is deprecated and will be removed in a future version.
+       To ensure reproducability, scaleFunc should be specified in the cell parameters, as
+       described in :py:mod:`~single_cell_parser.cell_modify_funs`
+

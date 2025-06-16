@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.write_gif_from_images`
+
+
+.. title:
+
+write_gif_from_images
+=====================
+
+
+.. py:function:: visualize.utils.write_gif_from_images(images, out_path, interval=40, images_format=&#39;.png&#39;, auto_sort_paths=True)
+
+   Creates a gif from a set of images, and saves it to :paramref:`out\_path`.
+
+   :Parameters: * **images** (*list | str*) -- list of images, a directory with images or a list of directories with images
+                * **out\_path** (*str*) -- dir where the video will be generated + name of the gif
+                * **interval** (*int | float*) -- time interval between frames (ms)
+                * **images\_format** (*str*) -- .png, .pdf, .jpg ...
+                * **auto\_sort\_paths** (*bool*) -- paths to images sorted
+
+   :returns: None. Writes the gif to the specified path.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

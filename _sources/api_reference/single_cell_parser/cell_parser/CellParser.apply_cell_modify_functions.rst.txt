@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
+
+CellParser.apply_cell_modify_functions
+======================================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions(parameters)
+
+   Apply cell modify functions to the cell object.
+
+   Cell modify functions that appear in the :ref:`cell_parameters_format` file are applied to the cell object.
+   For a list of possible cell modify functions, refer to :py:mod:`~single_cell_parser.cell_modify_functions`.
+
+   :Parameters: **parameters** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Neuron parameters, read from a :ref:`cell_parameters_format` file.
+

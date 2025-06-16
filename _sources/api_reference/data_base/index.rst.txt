@@ -1,0 +1,120 @@
+
+
+
+data_base
+=========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   IO </api_reference/data_base/IO/index>  
+   analyze </api_reference/data_base/analyze/index>  
+   db_initializers </api_reference/data_base/db_initializers/index>  
+   data_base_register </api_reference/data_base/data_base_register/index>  
+   dbopen </api_reference/data_base/dbopen/index>  
+   distributed_lock </api_reference/data_base/distributed_lock/index>  
+   exceptions </api_reference/data_base/exceptions/index>  
+   isf_data_base </api_reference/data_base/isf_data_base/index>  
+   utils </api_reference/data_base/utils/index>  
+   is_data_base </api_reference/data_base/is_data_base>
+   is_sub_data_base </api_reference/data_base/is_sub_data_base>
+   get_db_by_unique_id </api_reference/data_base/get_db_by_unique_id>
+
+.. py:module:: data_base
+
+.. autoapi-nested-parse::
+   Efficient, reproducible and flexible database with dictionary-like API.
+   This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
+   Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
+   A wide variety of input data and output file formats are supported (see :py:mod:`data_base.IO.LoaderDumper`), including:
+
+   - 1D and ND numpy arrays
+   - pandas and dask dataframes
+   - :py:class:`~single_cell_parser.cell.Cell` objects
+   - :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+
+   Simulation results from :py:mod:`single_cell_parser` and :py:mod:`simrun` can be imported and converted to a high performance binary format using the :py:mod:`data_base.db_initializers` subpackage.
+
+   .. rubric:: Example
+      :class: example
+
+   ``Loader`` contains information on how to load the data. It contains which module to use (assuming it contains a ``Loader`` class)::
+
+       {"Loader": "data_base.IO.LoaderDumper.dask_to_parquet"}
+
+   ``metadata`` contains the time, commit hash, module versions, creation date, file format, and whether or not the data was saved with uncommitted code (``dirty``).
+   If the data was created within a Jupyter session, it also contains the code history that was used to produce this data::
+
+       {
+           "dumper": "dask_to_parquet",
+           "time": [2025, 2, 21, 15, 51, 23, 4, 52, -1],
+           "module_list": "...",
+           "module_versions": {
+               "re": "2.2.1",
+               ...
+               "pygments": "2.18.0",
+               "bluepyopt": "1.9.126"
+               },
+           "history": "import Interface as I ...",
+           "hostname": "localhost",
+           "metadata_creation_time": "together_with_new_key",
+           "version": "heads/master",
+           "full-revisionid": "9fd2c2a94cdc36ee806d4625e353cd289cd7ce16",
+           "dirty": false,
+           "error": null
+       }
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`is_data_base <data_base.is_data_base>`\ (path)
+     - Checks if a given path contains a :py:class:`~data_base.DataBase`.
+   * - :py:obj:`is_sub_data_base <data_base.is_sub_data_base>`\ (parent\_db, key)
+     - Check if a given key is a sub-database of the parent database.
+   * - :py:obj:`get_db_by_unique_id <data_base.get_db_by_unique_id>`\ (unique\_id)
+     - Get a DataBase by its unique ID, as registered in the data base register.
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`IO <data_base.IO>`
+     - Read and write data.
+   * - :py:obj:`analyze <data_base.analyze>`
+     - Analyze simrun-initialized databases.
+   * - :py:obj:`db_initializers <data_base.db_initializers>`
+     - Initialize a database from raw simulation data.
+   * - :py:obj:`data_base_register <data_base.data_base_register>`
+     - Registry of databases.
+   * - :py:obj:`dbopen <data_base.dbopen>`
+     - Open files directly in a database.
+   * - :py:obj:`distributed_lock <data_base.distributed_lock>`
+     - Configuration for locking servers
+   * - :py:obj:`exceptions <data_base.exceptions>`
+     - :py:mod:`data_base` specific exceptions.
+   * - :py:obj:`isf_data_base <data_base.isf_data_base>`
+     - Database for robust and efficient data storage.
+   * - :py:obj:`utils <data_base.utils>`
+     - Database utility and convenience functions.
+

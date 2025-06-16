@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_scalar_field`
+
+
+.. title:
+
+read_scalar_field
+=================
+
+
+.. py:function:: single_cell_parser.reader.read_scalar_field(fname=&#39;&#39;)
+
+   Read AMIRA scalar fields.
+
+   :Parameters: **fname** (*str*) -- The name of the file to be read.
+
+   :raises IOError: If the input file does not have a `.am` or `.AM` suffix.
+
+   :returns: A scalar field object.
+   :rtype: :py:class:`~single\_cell\_parser.scalar\_field.ScalarField`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

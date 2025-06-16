@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_bounds`
+
+ScalarField.get_voxel_bounds
+============================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_bounds(ijk)
+
+   Gets the bounding box of voxel given by indices i,j,k.
+
+   :Parameters: **ijk** (*tuple*) -- tuple of 3 integers: the indices of voxel in mesh.
+
+   .. warning:: Does not perform bounds checking. The voxel bounds may be beyond the span of the mesh.
+

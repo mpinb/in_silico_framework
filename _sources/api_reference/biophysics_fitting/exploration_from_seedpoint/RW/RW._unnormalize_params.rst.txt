@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params`
+
+RW._unnormalize_params
+======================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params(p)
+
+   Unnormalize parameters to be between min and max.
+
+   :Parameters: **p** (*pd.Series*) -- normalized parameter vector
+
+   :returns: unnormalized parameter vector
+   :rtype: pd.Series
+

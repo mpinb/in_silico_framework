@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle`
+
+
+.. title:
+
+read_pickle
+===========
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle(seed_folder, particle_id)
+
+   Read the results of a single particle of a RW exploration.
+
+   :Parameters: * **seed\_folder** (*str*) -- the path of the directory corresponding to a seedpoint.
+                * **particle\_id** (*str*) -- the particle id
+
+   :returns: The results of the RW exploration of a single particle.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

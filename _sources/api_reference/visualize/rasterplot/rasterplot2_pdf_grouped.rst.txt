@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot2_pdf_grouped`
+
+
+.. title:
+
+rasterplot2_pdf_grouped
+=======================
+
+
+.. py:function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color=&#39;k&#39;)
+
+   Plot a rasterplot per group fo a spike times dataframe.
+
+   Similar to :py:meth:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
+   but groups them with horizontal lines, based on the grouplabel.
+   Assumes the spike times dataframe has a column :paramref:`grouplabel`
+
+   :Parameters: * **pdf** (*pandas.DataFrame*) -- A DataFrame containing the spike times.
+                  Must contain a column with label :paramref:`grouplabel`.
+                * **grouplabel** (*str*) -- The column name in the DataFrame to group by.
+                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+                * **xlim** (*tuple, optional*) -- The x-axis limits for the plot. Default is ``None``.
+                * **x\_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
+                * **color** (*str, optional*) -- The color to use for the plot. Default is 'k'.
+
+   :returns: None.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

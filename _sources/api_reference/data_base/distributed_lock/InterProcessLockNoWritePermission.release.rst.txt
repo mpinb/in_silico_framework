@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission.release`
+
+InterProcessLockNoWritePermission.release
+=========================================
+
+.. py:method:: data_base.distributed_lock.InterProcessLockNoWritePermission.release()
+
+   Release the lock on a path if it was acquired.
+
+   :returns: None
+

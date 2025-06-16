@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BPAPatt_check_1_AP`
+
+
+.. title:
+
+BPAPatt_check_1_AP
+==================
+
+
+.. py:function:: biophysics_fitting.ephys.BPAPatt_check_1_AP(t, v_soma, thresh=None, stim_onset=None)
+
+   Checks if there is exactly one action potential in the somatic voltage trace.
+
+   Args:
+   - t (array): time array [ms]
+   - v\_soma (array): somatic voltage trace [mV]
+   - thresh (float): spike threshold [mV]
+   - stim\_onset (float): time of stimulus onset [ms]
+
+   Returns:
+   - bool: True if there is exactly one action potential, False otherwise
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

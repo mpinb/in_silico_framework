@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection` ❭ :mod:`~data_base.analyze.spike_detection.spike_detection`
+
+
+.. title:
+
+spike_detection
+===============
+
+
+.. py:function:: data_base.analyze.spike_detection.spike_detection(ddf, scheduler=None, threshold=0)
+
+   Detect spikes in a dask :ref:`voltage\_traces\_df\_format`.
+
+   :Parameters: * **ddf** (:py:class:`~dask.dataframe.DataFrame`) -- A dask dataframe containing the voltage traces
+                * **scheduler** (*str*) -- The scheduler to use for computation
+                * **threshold** (*float*) -- The threshold for spike detection
+
+   :returns: A pandas dataframe containing the spikes
+   :rtype: :py:class:`~pandas.DataFrame`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

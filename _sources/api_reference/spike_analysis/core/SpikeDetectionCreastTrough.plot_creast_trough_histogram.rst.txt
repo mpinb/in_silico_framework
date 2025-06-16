@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram`
+
+SpikeDetectionCreastTrough.plot_creast_trough_histogram
+=======================================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram(ax=None)
+
+   skip-doc:
+

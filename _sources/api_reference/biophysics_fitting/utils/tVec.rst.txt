@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.tVec`
+
+
+.. title:
+
+tVec
+====
+
+
+.. py:function:: biophysics_fitting.utils.tVec(cell)
+
+   Convenience method to convert a py:attr:`~single\_cell\_parser.cell.Cell.tVec` to a numpy array.
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+
+   :returns: The time vector of the cell.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

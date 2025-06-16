@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.write_vtk_pointcloud_file`
+
+
+.. title:
+
+write_vtk_pointcloud_file
+=========================
+
+
+.. py:function:: visualize.vtk.write_vtk_pointcloud_file(out_name=None, out_dir=&#39;.&#39;, points=None, scalar_data=None, scalar_data_names=None)
+
+   Write out 3D point data as a VTK point cloud.
+
+   :Parameters: * **out\_name** (*str*) -- Name of the output file.
+                * **out\_dir** (*str*) -- Directory to save the file to.
+                * **points** (*list*) -- List of 3D points.
+                * **scalar\_data** (*list*) -- List of scalar data arrays. Each array should have the same length as the amount of points.
+                * **scalar\_data\_names** (*list*) -- List of names for the scalar data arrays.
+
+   :returns: None. Writes out a .vtk file to the specified directory.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

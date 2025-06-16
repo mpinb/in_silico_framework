@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataView` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataView.setup`
+
+DataView.setup
+==============
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataView.setup(Rm)
+
+   Initialize from a reduced model.
+
+   Allow access to parent :py:class:`Rm` attributes.
+
+   :Parameters: **Rm** (:py:class:`Rm`) -- The reduced model to initialize from.
+

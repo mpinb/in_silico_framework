@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._get_x0`
+
+_Strategy._get_x0
+=================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._get_x0()
+
+   Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+
+   This method is overloaded specific to the strategy.
+

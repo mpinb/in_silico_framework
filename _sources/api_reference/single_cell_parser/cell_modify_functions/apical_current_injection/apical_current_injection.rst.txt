@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.apical_current_injection` ❭ :mod:`~single_cell_parser.cell_modify_functions.apical_current_injection.apical_current_injection`
+
+
+.. title:
+
+apical_current_injection
+========================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.apical_current_injection.apical_current_injection(cell, amplitude=None, delay=None, duration=None, dist=None)
+
+   Inject a current at a given distance from the soma.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **amplitude** (*float*) -- The amplitude of the current (nA).
+                * **delay** (*float*) -- The delay of the current (ms).
+                * **duration** (*float*) -- The duration of the current (ms).
+                * **dist** (*float*) -- The distance from the soma (um).
+                  For an apical current injection, this should be the distance from the soma to the apical dendrite.
+
+   :returns: The cell with the current injection set up.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+   .. seealso:: :py:meth:`biophysics\_fitting.setup\_stim.setup\_soma\_step`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

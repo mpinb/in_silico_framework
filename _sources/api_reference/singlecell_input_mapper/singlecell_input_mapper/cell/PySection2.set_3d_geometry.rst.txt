@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2.set_3d_geometry`
+
+PySection2.set_3d_geometry
+==========================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2.set_3d_geometry(pts, diams)
+
+   Invokes NEURON :cite:`hines2001neuron` 3D geometry setup
+
+   Fetch the 3D coordinates and diameters of the section.
+   Computes the bounding box, length, and relative position of the 3D points along the section.
+
+   :Parameters: * **pts** (*list*) -- List of 3D coordinates.
+                * **diams** (*list*) -- List of diameters.
+

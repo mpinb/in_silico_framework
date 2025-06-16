@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BPAPatt`
+
+
+.. title:
+
+BPAPatt
+=======
+
+
+.. py:function:: biophysics_fitting.ephys.BPAPatt(t, v_dend, thresh=&#39;+2mV&#39;, stim_onset=None)
+
+   Computes the amplitude of the backpropagating action potential (bAP) at the dendrite.
+
+   :Parameters: * **t** (*array*) -- Time array.
+                * **v\_dend** (*array*) -- Dendritic voltage array.
+                * **thresh** (*str or float*) -- Threshold voltage for detecting the bAP. Default is '+2mV'.
+                * **stim\_onset** (*float*) -- Time of the stimulus onset. Default is ``None``.
+
+   :returns: Amplitude of the bAP at the dendrite.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper._create_voxel_edge_map`
+
+SynapseMapper._create_voxel_edge_map
+====================================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._create_voxel_edge_map()
+
+   Fills dictionary :paramref:`voxelEdgeMap` with indices of voxels pts within that voxel
+
+   The dictionary is structured as follows:
+
+   - keys: voxel indices
+   - values: list of (sectionID, pointID) pairs of points within that voxel
+

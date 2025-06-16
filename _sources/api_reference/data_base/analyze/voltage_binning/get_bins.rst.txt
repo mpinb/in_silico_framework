@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.get_bins`
+
+
+.. title:
+
+get_bins
+========
+
+
+.. py:function:: data_base.analyze.voltage_binning.get_bins(bin_size=None, min_=None, max_=None)
+
+   Construct bin edges from a sice and range.
+
+   :Parameters: * **bin\_size** (*float*) -- the size of the bins
+                * **min\_** (*float*) -- the minimum value
+                * **max\_** (*float*) -- the maximum value
+
+   :returns: the bin edges
+   :rtype: np.array
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

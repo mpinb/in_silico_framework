@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.run_fun`
+
+
+.. title:
+
+run_fun
+=======
+
+
+.. py:function:: biophysics_fitting.simulator.run_fun(cell, T=34.0, Vinit=-75.0, dt=0.025, recordingSites=[], tStart=0.0, tStop=250.0, vardt=True, silent=True)
+
+   Default function to run a simulation.
+
+   :Parameters: * **cell** -- The cell object.
+                * **T** (*float*) -- The temperature (Celsius).
+                * **Vinit** (*float*) -- The initial voltage (mV).
+                * **dt** (*float*) -- The time step (ms).
+                * **recordingSites** (*[float]*) -- The recording sites (um).
+                * **tStart** (*float*) -- The start time of the simulation (ms).
+                * **tStop** (*float*) -- The stop time of the simulation (ms).
+                * **vardt** (*bool*) -- Whether to use variable time step.
+                * **silent** (*bool*) -- Whether to suppress output.
+
+   :returns: The cell object, containing simulation data.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

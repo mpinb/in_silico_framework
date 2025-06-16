@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts.event_analysis_bursts`
+
+STAPlugin_bursts.event_analysis_bursts
+======================================
+
+.. py:method:: spike_analysis.core.STAPlugin_bursts.event_analysis_bursts(row, event_maxtimes=None, event_names=None)
+   :staticmethod:
+
+
+   Detects high frequency events (doublet, triplet, ...) that occur within a timewindow.
+
+   An event is always classified as the one with the highest number of spikes possible,
+   E.g., [1, 5, 9] could be classified as doublet + singlet, but it will be a triplet.
+
+   :Parameters: * **row** (*list-like*) -- Contains spike times.
+                * **event_maxtimes** (*dict*) -- Dictionary where keys indicate event type (0 means singlet, 1 means doublet, 2 means triplet, ...),
+                  and values indicate max duration of such an event.
+                * **event_name** (*dict*) -- Dictionary with names of the events (0: 'singlet', 1: 'doublet', 2: 'triplet').
+
+   :returns:
+
+             One row per event. Columns are:
+                 - event_time: Timepoint of the first spike belonging to the event.
+                 - event_class: Class of event as defined in event_name.
+                 - ISI_{n}: Interval from the first spike of the event to the nth spike of the event.
+   :rtype: pandas.DataFrame
+

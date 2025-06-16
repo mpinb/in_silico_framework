@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.set_split`
+
+_Strategy.set_split
+===================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.set_split(split, setup=True)
+
+   Set the split for this strategy.
+
+   Scoring is usually performed on multiple splits of the data.
+   This method assigns one such split to the strategy, so that
+   all consequent calls to :py:meth:`get_score` and :py:meth:`get_y` will use this split.
+
+   :Parameters: * **split** (*array*) -- An array of indices to use for the split.
+                * **setup** (*bool*) -- Whether to setup the strategy after setting the split. Default is ``True``.
+
+   :returns: The strategy object with the split set.
+   :rtype: _Strategy
+
+   .. rubric:: Example
+      :class: example
+
+   >>> s = Strategy('test')
+   >>> s.get_score()
+   # returns a score for all data
+   >>> s = s.set_split(np.array([0, 1, 2]))
+   >>> s.get_score()
+   # returns a score for the data at indices 0, 1, and 2
+

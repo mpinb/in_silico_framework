@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver.setup`
+
+_Solver.setup
+=============
+
+.. py:method:: simrun.modular_reduced_model_inference.solver._Solver.setup(strategy)
+
+   Setup the solver for a given strategy and optimizer.
+
+   The strategy needs to be passed as an argument, while the optimizer is set by the :py:meth:`_setup_optimizer` method.
+
+   :Parameters: **strategy** (:py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`) -- The strategy object.
+

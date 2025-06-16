@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.get_main_bifurcation_section`
+
+
+.. title:
+
+get_main_bifurcation_section
+============================
+
+
+.. py:function:: biophysics_fitting.get_main_bifurcation_section(cell)
+
+   Find the main bifurcation of a cell.
+   This is the unique inner section whose branching depth is 1.
+   In some morphologies, this section is unique, and no other sections are inner sections with branching depth 1.
+   This is True for e.g. pyramidal cells with an apical dendrite.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
+                * **assert\_unique** (*bool, optional*) -- whether or not to check if this section is unique in the morphology.
+                  Default: True
+
+   :raises AssertionError: If there are multiple sections who are both inner, and have branching depth 1. This means that there is no "main" bifurcation in the morphology.
+
+   :returns: The unique section that contains the main bifurcation.
+   :rtype: :py:class:`~single\_cell\_parser.cell.PySection`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

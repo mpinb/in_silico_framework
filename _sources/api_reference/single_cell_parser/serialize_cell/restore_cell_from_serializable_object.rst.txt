@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.serialize_cell` ❭ :mod:`~single_cell_parser.serialize_cell.restore_cell_from_serializable_object`
+
+
+.. title:
+
+restore_cell_from_serializable_object
+=====================================
+
+
+.. py:function:: single_cell_parser.serialize_cell.restore_cell_from_serializable_object(sc)
+
+   Restore a :py:class:`~single\_cell\_parser.cell.Cell` object from a serializable object.
+
+   :Parameters: **sc** (*dict*) -- serializable object
+
+   :returns: cell object
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

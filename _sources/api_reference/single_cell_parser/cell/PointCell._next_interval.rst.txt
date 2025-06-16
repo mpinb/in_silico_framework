@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell._next_interval`
+
+PointCell._next_interval
+========================
+
+.. py:method:: single_cell_parser.cell.PointCell._next_interval()
+
+   Calculate the next spike interval :math:`t` for a simple spike train.
+
+   Includes both noise (:math:`\sigma_{noise}`) and random variation (:math:`\sigma_{rand}`) on the spike interval (:math:`\Delta_t`):
+
+   .. math::
+
+       t = (1 - \sigma_{noise}) \cdot \Delta_t + \sigma_{noise} \cdot \Delta_t \cdot \sigma_{rand}
+
+   :returns: The next spike interval.
+   :rtype: float
+

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_hay_params_pdf`
+
+
+.. title:
+
+get_hay_params_pdf
+==================
+
+
+.. py:function:: biophysics_fitting.hay.specification.get_hay_params_pdf()
+
+   Get the parameter boundaries used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+
+   Conductance parameters (:math:`\bar{g}` or :math`g\_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
+   and :math:`\gamma` parameters are a fraction and unitless.
+
+   :returns: The parameter boundaries.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.split_synapse_activation`
+
+
+.. title:
+
+split_synapse_activation
+========================
+
+
+.. py:function:: data_base.analyze.split_synapse_activation(sa, selfcheck=True, excitatory=EXCITATORY, inhibitory=INHIBITORY)
+
+   Augment a :ref:`syn\_activation\_format` dataframe with a boolean column for excitatory/inhibitory.
+
+   :Parameters: * **sa** (:py:class:`~pandas.DataFrame`) -- A :ref:`syn\_activation\_format` dataframe.
+                  Must contain the column ``synapse\_type``.
+                * **selfcheck** (*bool*) -- If ``True``, check if all cell types are either excitatory or inhibitory.
+                * **excitatory** (*list*) -- List of excitatory cell types.
+                * **inhibitory** (*list*) -- List of inhibitory cell types.
+
+   :returns: a :py:class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

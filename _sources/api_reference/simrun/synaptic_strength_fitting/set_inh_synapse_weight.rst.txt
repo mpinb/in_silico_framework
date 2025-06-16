@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.set_inh_synapse_weight`
+
+
+.. title:
+
+set_inh_synapse_weight
+======================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.set_inh_synapse_weight(syn, weight)
+
+   Set the synaptic strength of an inhibitory :py:class:`single\_cell\_parser.synapse.Synapse`.
+
+   :Parameters: * **syn** (*single\_cell\_parser.synapse.Synapse*) -- The inhibitory synapse to set the synaptic strength for.
+                * **weight** (*float*) -- The synaptic strength value.
+
+   :returns: None. Updates the synaptic strength of the inhibitory synapse.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

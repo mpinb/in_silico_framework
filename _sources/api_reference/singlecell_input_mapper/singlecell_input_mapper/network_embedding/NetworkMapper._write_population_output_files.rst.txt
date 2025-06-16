@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_population_output_files`
+
+NetworkMapper._write_population_output_files
+============================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_population_output_files(postCellName, populationDistribution, connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable, writeLandmarkFiles=False)
+
+   Writes output files for precomputed summary files.
+
+   Used by :py:meth:`_create_network_embedding` to write output files to disk.
+
+   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` file.
+                * **populationDistribution** (*dict*) -- Population distribution of anatomical parameters.
+                * **connectivityMap** (*list*) -- Connections between presynaptic cells and postsynaptic cell of the form
+                  (cell type, presynaptic cell index, synapse index).
+                  Created by :py:meth:`_create_anatomical_connectivity_map`.
+                * **synapseLocations** (*dict*) -- Synapse locations.
+                * **cellSynapseLocations** (*dict*) -- Cell synapse locations.
+                * **cellTypeSummaryTable** (*dict*) -- Summary table of cell types.
+                * **anatomicalAreaSummaryTable** (*dict*) -- Summary table of anatomical areas.
+
+   :returns: None. Writes output files to disk.
+

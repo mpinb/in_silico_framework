@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.re_init_cell`
+
+Cell.re_init_cell
+=================
+
+.. py:method:: single_cell_parser.cell.Cell.re_init_cell(replayMode=False)
+
+   Re-initialize for next simulation run.
+
+   Cleans up the NEURON vectors and disconnects all synapses.
+
+   :Parameters: **replayMode** (*bool*) -- If True, the cell is re-initialized for replay mode and all synapses are removed.
+                Useful if a new network realization is to be used for the next simulation.
+                Defaults to False.
+

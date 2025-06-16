@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.get_default_events`
+
+SpikeDetectionCreastTrough.get_default_events
+=============================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_default_events(show_stim_times=True, show_trough_candidates=True)
+
+   Returns a list of events to be displayed with the :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough.show_events` method.
+
+   Creates events for deteced spikes (black line) and spike candidates [dotted black line]
+   (i.e. creasts and troughs exceeding the limit but which do not qualify to
+   be a spike)
+
+   :Parameters: * **show_stim_times** -- Show the stimulus times in addition to the detected spikes.
+                * **show_trough_candidates** -- Show trough candidates in addition to the detected spikes.
+
+   :returns:
+
+             list containing 4-tuples of the format (time, color, linestyle, linewidth)
+                 Spike times are pink, spike candidates are black, stimulus times are red.
+   :rtype: events (list)
+

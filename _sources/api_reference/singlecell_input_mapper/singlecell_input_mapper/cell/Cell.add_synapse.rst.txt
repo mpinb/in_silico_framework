@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse`
+
+Cell.add_synapse
+================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
+
+   Add a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
+
+   :Parameters: * **secID** (*int*) -- Section ID.
+                * **ptID** (*int*) -- Point ID on that section.
+                * **ptx** (*float*) -- Relative position along the section (0-1).
+                * **preType** (*str*) -- Presynaptic cell type. Default: "Generic".
+                * **postType** (*str*) -- Postsynaptic cell type. Default: "Generic".
+
+   :returns: The newly created synapse.
+   :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
+

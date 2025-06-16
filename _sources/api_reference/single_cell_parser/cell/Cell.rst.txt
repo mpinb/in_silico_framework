@@ -1,0 +1,163 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Cell
+====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   re_init_cell <Cell.re_init_cell>
+   record_range_var <Cell.record_range_var>
+   get_range_var_conductances <Cell.get_range_var_conductances>
+   distance_between_pts <Cell.distance_between_pts>
+   distance_to_soma <Cell.distance_to_soma>
+   max_distance <Cell.max_distance>
+   add_synapse <Cell.add_synapse>
+   remove_synapses <Cell.remove_synapses>
+   init_time_recording <Cell.init_time_recording>
+   get_synapse_activation_dataframe <Cell.get_synapse_activation_dataframe>
+   get_section_adjacancy_map <Cell.get_section_adjacancy_map>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.cell.Cell
+   
+   Cell object providing API to the NEURON hoc interface.
+
+   This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
+   The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
+   Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
+      This class concerns itself with providing API to NEURON, not with mapping input to the cell.
+
+   :Attributes:
+
+   .. attribute:: hoc_path
+
+      Path to the hoc file containing the cell morphology.
+
+      :type: str
+
+   .. attribute:: id
+
+      ID of the cell (often unused).
+
+      :type: str | int, optional
+
+   .. attribute:: soma
+
+      The soma section of the cell.
+
+      :type: :py:class:`~single_cell_parser.cell.PySection`
+
+   .. attribute:: tree
+
+      NEURON SectionList containing all sections of the cell.
+
+      :type: neuron.h.SectionList
+
+   .. attribute:: branches
+
+      maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList).
+
+      :type: dict
+
+   .. attribute:: structures
+
+      All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...).
+      Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
+
+      :type: Dict[:py:class:`~single_cell_parser.cell.PySection`]
+
+   .. attribute:: sections
+
+      List of :py:class:`~single_cell_parser.cell.PySection` objects.
+      First element is the soma.
+      Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
+
+      :type: List[:py:class:`~single_cell_parser.cell.PySection`]
+
+   .. attribute:: synapses
+
+      a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
+
+      :type: dict
+
+   .. attribute:: E
+
+      Default resting membrane potential. Defaults to -70.0
+
+      :type: float
+
+   .. attribute:: changeSynParamDict
+
+      dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.
+
+      :type: dict
+
+   .. attribute:: tVec
+
+      a hoc Vector recording time.
+
+      :type: neuron.h.Vector
+
+   .. attribute:: neuron_param
+
+      The :ref:`cell_parameters_format`.
+
+   .. attribute:: section_adjacency_map
+
+      maps each section (by ID) to its parent sections and children sections.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`re_init_cell <single_cell_parser.cell.Cell.re_init_cell>`\ (replayMode)
+        - Re-initialize for next simulation run.
+      * - :py:obj:`record_range_var <single_cell_parser.cell.Cell.record_range_var>`\ (var, mech)
+        - Record a range mechanism in all sections.
+      * - :py:obj:`get_range_var_conductances <single_cell_parser.cell.Cell.get_range_var_conductances>`\ (density)
+        - Get the conductances of each section, categorized by range variable and segment.
+      * - :py:obj:`distance_between_pts <single_cell_parser.cell.Cell.distance_between_pts>`\ (sec1, x1, sec2, x2)
+        - Computes the path length between two points.
+      * - :py:obj:`distance_to_soma <single_cell_parser.cell.Cell.distance_to_soma>`\ (sec, x)
+        - Computes the path length between the soma and a specified point.
+      * - :py:obj:`max_distance <single_cell_parser.cell.Cell.max_distance>`\ (label)
+        - Computes maximum path length to soma of all branches with label :paramref:`label`
+      * - :py:obj:`add_synapse <single_cell_parser.cell.Cell.add_synapse>`\ (secID, ptID, ptx, preType, postType)
+        - Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell object.
+      * - :py:obj:`remove_synapses <single_cell_parser.cell.Cell.remove_synapses>`\ (preType)
+        - Remove synapses from the cell object of type :paramref:`preType`.
+      * - :py:obj:`init_time_recording <single_cell_parser.cell.Cell.init_time_recording>`\ ()
+        - Initialize the NEURON time vector for recording.
+      * - :py:obj:`get_synapse_activation_dataframe <single_cell_parser.cell.Cell.get_synapse_activation_dataframe>`\ (max\_spikes, sim\_trial\_index)
+        - Get a :ref:`syn_activation_format` dataframe.
+      * - :py:obj:`get_section_adjacancy_map <single_cell_parser.cell.Cell.get_section_adjacancy_map>`\ ()
+        - Generates a map that shows which sections are connected to which sections.
+

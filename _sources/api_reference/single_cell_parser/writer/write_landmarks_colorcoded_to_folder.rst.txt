@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_landmarks_colorcoded_to_folder`
+
+
+.. title:
+
+write_landmarks_colorcoded_to_folder
+====================================
+
+
+.. py:function:: single_cell_parser.writer.write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin=0, vmax=10, vbinsize=0.1)
+
+   Write landmarks to a folder, colorcoded by their values.
+
+   :Parameters: * **basedir** (*str*) -- The directory to write the landmarks to.
+                * **landmarks** (*numpy.array*) -- The landmarks to write.
+                * **values** (*numpy.array*) -- The values to color the landmarks by.
+                * **vmin** (*float*) -- The minimum value to color by.
+                * **vmax** (*float*) -- The maximum value to color by.
+                * **vbinsize** (*float*) -- The size of the bins to color by.
+
+   :returns: None. Writes out the landmarks to the directory :paramref:`basedir`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app`
+
+CellMorphologyInteractiveVisualizer.interactive_app
+===================================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app(color='grey', t_start=None, t_stop=None, t_step=None)
+
+   :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
+                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time interval
+

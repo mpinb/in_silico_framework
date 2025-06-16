@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached`
+
+RW.assess_aim_params_reached
+============================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached(normalized_params, tolerance=0.0001)
+
+   Check whether the aim parameters have been reached.
+
+   For each parameter in the aim_params dictionary, check whether the parameter has been reached.
+   A parameter is reached if it lies within a certain tolerance of the aim parameter.
+
+   :Parameters: * **normalized_params** (*np.array*) -- normalized parameter vector
+                * **tolerance** (*float*) -- tolerance for the aim parameters to be reached. Default: 1e-4
+
+   :returns: boolean values indicating whether each aim parameter has been reached or not.
+   :rtype: list
+

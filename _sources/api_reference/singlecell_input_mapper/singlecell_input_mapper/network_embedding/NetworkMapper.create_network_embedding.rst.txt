@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`
+
+NetworkMapper.create_network_embedding
+======================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding(postCellName, boutonDensities, nrOfSamples=50)
+
+   Create a single network realization from a bouton density field.
+
+   This is the main method to create anatomical realizations of connectivity.
+   It creates :paramref:`nrOfSamples` network realizations, and saves the most representative
+   realization to disk. The most representative realization is determined by comparing
+   the distribution of anatomical parameters across the population of realizations using
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
+
+   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+                * **boutonDensities** (*dict*) -- Dictionary of bouton densities, ordered by anatomical area and cell type.
+                * **nrOfSamples** (*int*) -- Number of network realizations to create.
+
+   .. warning::
+
+      Give this network realization a (somewhat) unique name!
+      Then save it at the same location as the anatomical realization
+
+   .. warning::
+
+      Assumes path names to anatomical realization files are relative to the working directory.
+      These paths should be correct relative, or preferably absolute paths.
+
+   :returns: None. Writes output files to disk.
+

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper._compute_path_length`
+
+SynapseMapper._compute_path_length
+==================================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
+
+   Compute the path length to soma from location :paramref:`x` on section :paramref:`sec`
+
+   :Parameters: * **sec** (:py:class:`~single_cell_parser.section.Section`) -- The section to compute the path length on.
+                * **x** (*float*) -- The relative coordinate along the section.
+
+   :returns: The path length to the soma.
+   :rtype: float
+

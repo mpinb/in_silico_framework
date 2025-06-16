@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn.setup`
+
+STAPlugin_ISIn.setup
+====================
+
+.. py:method:: spike_analysis.core.STAPlugin_ISIn.setup(spike_times_analysis)
+
+   Sets up the analysis: Computes the inter spike interval (ISI) to the next, second next, nth spike.
+
+   :paramref:`_result` will be a pd.DataFrame containing the columns ``ISI_1`` to ``ISI_n``, and event_time.
+
+   :Parameters: **spike_times_analysis** (:py:class:`~spike_analysis.core.SpikeTimesAnalysis`) -- The spike times analysis object.
+
+   .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+

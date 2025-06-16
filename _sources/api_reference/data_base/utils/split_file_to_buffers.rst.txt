@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.split_file_to_buffers`
+
+
+.. title:
+
+split_file_to_buffers
+=====================
+
+
+.. py:function:: data_base.utils.split_file_to_buffers(f, split_str=&#39;#&#39;)
+
+   Reads a file f and splits it wherever :paramref:`split\_str` is found.
+
+   :Parameters: * **f** (*file*) -- file to be split
+                * **split\_str** (*str*) -- string to split the file. Default is '#'
+
+   :returns: list of :py:class:`StringIO` Buffers.
+   :rtype: list
+
+   .. seealso:: adapted from http://stackoverflow.com/a/33346758/5082048
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

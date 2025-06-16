@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.add_strategy`
+
+Rm.add_strategy
+===============
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_strategy(strategy, setup=True, view=None)
+
+   Add a strategy to the reduced model.
+
+   :Parameters: * **strategy** (:py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy`) -- Strategy object
+                * **setup** (*bool*) -- If True, run the setup method of the strategy
+                * **view** (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`) -- Data view object
+
+   .. seealso::
+
+      :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies.
+      :py:mod:`DataView` for the data view object.
+

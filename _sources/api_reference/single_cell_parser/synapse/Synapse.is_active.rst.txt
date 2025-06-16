@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse.is_active`
+
+Synapse.is_active
+=================
+
+.. py:method:: single_cell_parser.synapse.Synapse.is_active()
+
+   Check if the synapse is active.
+
+   :returns: Activation status of the synapse.
+   :rtype: bool
+
+   .. seealso:: :py:meth:`activate_hoc_syn` and :py:meth:`disconnect_hoc_synapse`
+

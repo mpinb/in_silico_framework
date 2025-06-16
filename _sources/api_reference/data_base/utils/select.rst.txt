@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.select`
+
+
+.. title:
+
+select
+======
+
+
+.. py:function:: data_base.utils.select(df, **kwargs)
+
+   Selects rows from a dataframe based on the values of the columns
+
+   :Parameters: * **df** (*pd.DataFrame*) -- the dataframe
+                * **\*\*kwargs** -- the columns and values to be selected
+
+   :returns: the dataframe with the selected rows
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

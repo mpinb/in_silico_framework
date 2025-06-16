@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.pool_helper`
+
+
+.. title:
+
+pool_helper
+===========
+
+
+.. py:function:: biophysics_fitting.utils.pool_helper(callable_partial)
+
+   Unserialize a function and its arguments, run it, and serialize the output.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,85 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Synapse
+=======
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.Synapse(edgeID, edgePtID, edgex, preCellType='', postCellType='')
+   
+   Leightweight dataclass to store basic synapse information.
+
+   Synapses are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` objects,
+   which in turn are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` objects.
+   Contains information on: pre- and postsynaptic cell type, branch ID of postsynaptic cell, branch pt ID,
+   and xyz-coordinates of synapse location
+
+   .. seealso::
+
+      This is not the same class as :py:class:`single_cell_parser.synapse.Synapse`.
+      This is a leightweight dataclass specialized for use with :py:mod:`single_cell_input_mapper.synapse_mapper`,
+      and does not contain any methods for NEURON API or synapse activations during simulations.
+
+   :Parameters: * **edgeID** (*ind*) -- Section ID.
+                * **edgePtID** (*int*) -- Point ID on that section.
+                * **edgex** (*float*) -- Relative position along the section (0-1).
+                * **preCellType** (*str*) -- Presynaptic cell type. Default: ''.
+                * **postCellType** (*str*) -- Postsynaptic cell type. Default: ''.
+
+   :Attributes:
+
+   .. attribute:: secID
+
+      Section ID.
+
+      :type: int
+
+   .. attribute:: ptID
+
+      Point ID on that section.
+
+      :type: int
+
+   .. attribute:: x
+
+      Relative position along the section (0-1).
+
+      :type: float
+
+   .. attribute:: preCellType
+
+      Presynaptic cell type.
+
+      :type: str
+
+   .. attribute:: preCell
+
+      Presynaptic cell.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
+
+   .. attribute:: postCellType
+
+      Postsynaptic cell type.
+
+      :type: str
+
+   .. attribute:: coordinates
+
+      3D coordinates of the synapse location.
+
+      :type: numpy.ndarray
+

@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.blender_recorder` ❭ :mod:`~single_cell_parser.cell_modify_functions.blender_recorder.blender_recorder`
+
+
+.. title:
+
+blender_recorder
+================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.blender_recorder.blender_recorder(cell)
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

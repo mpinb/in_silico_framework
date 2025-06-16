@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.unique`
+
+
+.. title:
+
+unique
+======
+
+
+.. py:function:: data_base.utils.unique(list_)
+
+   Get the unique elements of a list
+
+   :Parameters: **list\_** (*list*) -- the list
+
+   :returns: the unique elements of the list
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

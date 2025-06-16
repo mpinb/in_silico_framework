@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`
+
+
+.. title:
+
+create_average_celltype_PSTH_from_clusters
+==========================================
+
+
+.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName)
+
+   Loads cluster recording files and writes out the average ongoing activity for a given cell type.
+
+   :Parameters: * **cellTypeFolder** (*str*) -- The folder containing the .cluster recording files of spike times.
+                  Each file in this folder should contain the spike times of a single cell under a specific experimental condition (e.g. deflecting a single whisker).
+                * **outFileName** (*str*) -- The name of the output file.
+
+   :returns: None. Writes the average ongoing activity to the output file.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> create\_average\_celltype\_PSTH\_from\_clusters(
+       'getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84',
+       'L5\_PSTH\_UpState.param')
+   {
+       "getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84\_B1": {
+           "distribution": "PSTH",
+           "intervals": [(6.0,7.0)],
+           "probabilities": [0.0216],
+       },
+       "getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84\_B2": {
+           ...
+       },
+   }
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.find_crossing_old`
+
+
+.. title:
+
+find_crossing_old
+=================
+
+
+.. py:function:: biophysics_fitting.ephys.find_crossing_old(v, thresh)
+
+   Original NEURON doc:
+   Function that giving a threshold returns a list of two vectors
+   The first is the crossing up of that threshold
+   The second is the crossing down of that threshold
+
+   .. note:: Extended by Arco: returns [[],[]] if the number of crossing up vs crossing down is not equal.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

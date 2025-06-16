@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights`
+
+
+.. title:
+
+change_glutamate_syn_weights
+============================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights(param, g_optimal=None, pop=EXCITATORY)
+
+   Changes the glutamate synapse weights in the :ref:`network\_parameters\_format` to the optimal values.
+
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **g\_optimal** (*pandas.core.series.Series | pandas.core.frame.DataFrame*) -- The optimal values for the glutamate synapse weights.
+                  If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
+                  If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
+                * **pop** (*list*) -- The celltypes to apply the scaling to.
+
+   :raises AssertionError: If more than 1 index is found for the celltype in :paramref:`g\_optimal`.
+   :raises AssertionError: If the celltype is not found in :paramref:`g\_optimal`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

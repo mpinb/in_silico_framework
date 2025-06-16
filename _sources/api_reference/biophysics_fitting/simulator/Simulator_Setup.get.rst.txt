@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get`
+
+Simulator_Setup.get
+===================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get(params)
+
+   Get the cell with set up biophysics and params.
+
+   This is the main interfac to set up a cell object with biophysical parameters.
+
+   :Parameters: **params** (*pd.Series*) -- Biophysical parameters
+
+   :returns: The cell object and the parameter vector.
+   :rtype: cell, params
+

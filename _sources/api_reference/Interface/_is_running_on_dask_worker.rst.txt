@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`Interface` ❭ :mod:`~Interface._is_running_on_dask_worker`
+
+
+.. title:
+
+_is_running_on_dask_worker
+==========================
+
+
+.. py:function:: Interface._is_running_on_dask_worker()
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

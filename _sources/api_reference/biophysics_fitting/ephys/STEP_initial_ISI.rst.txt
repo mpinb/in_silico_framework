@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_initial_ISI`
+
+
+.. title:
+
+STEP_initial_ISI
+================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_initial_ISI(t, v, thresh=None)
+
+   Computes the Inter-Spike Interval (ISI) for the first two spikes of a voltage trace for a step stimulus.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+
+   :returns: Burst Averaged Inter-Spike Interval (BAC ISI) value.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

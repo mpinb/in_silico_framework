@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_relative_pts`
+
+PySection2._compute_relative_pts
+================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_relative_pts()
+
+   Compute the relative position of 3D points along the section.
+
+   This methods transforms 3D coordinates to relative positions along the section.
+   The relative position is denoted as `x` in the context of a section, and
+   can take values between 0 (beginning of the section) and 1 (end of the section).
+

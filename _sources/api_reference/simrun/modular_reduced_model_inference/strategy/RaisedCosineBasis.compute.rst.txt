@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.compute`
+
+RaisedCosineBasis.compute
+=========================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.compute(width=80)
+
+   Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
+
+   Each element :math:`f_i` in the vector :math:`\mathbf{f}` is a raised cosine basis function
+   with a different :math:`\phi_i`. The domain of each :math:`f_i` is :math:`[0, width]`.
+
+   :Parameters: **width** (*int*) -- The width of the basis functions.
+
+   :returns: The object itself, with a defined :paramref:`basis` attribute.
+   :rtype: RaisedCosineBasis
+

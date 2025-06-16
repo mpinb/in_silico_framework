@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.AHP_depth_abs`
+
+_Step.AHP_depth_abs
+===================
+
+.. py:method:: biophysics_fitting.hay.evaluation._Step.AHP_depth_abs(voltage_traces)
+
+   Get the afterhyperpolarization depth in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns:
+
+             Dictionary mapping ``".check_2AP"`` to whether there are 2 action potentials in the somatic voltage trace,
+                 and ``".raw"`` to the afterhyperpolarization depth in the somatic voltage trace.
+   :rtype: dict
+
+   .. seealso:: :py:meth:`~biophysics_fitting.ephys.AHP_depth_abs`
+

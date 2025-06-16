@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._generate_output_files`
+
+NetworkMapper._generate_output_files
+====================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._generate_output_files(postCellName, connectivityMap, connectedCells, connectedCellsPerStructure, writeLandmarkFiles=False)
+
+   Generates all summary files and writes output files.
+
+   Generates and writes out summary files using
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
+
+   Used by :py:meth:`~create_network_embedding_for_simulations` and
+   :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+
+   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` file.
+                * **connectivityMap** (*list*) -- Connections between presynaptic cells and postsynaptic cell of the form
+                  (cell type, presynaptic cell index, synapse index).
+                  Created by :py:meth:`_create_anatomical_connectivity_map`.
+                * **connectedCells** (*dict*) -- Dictionary of connected cells.
+                * **connectedCellsPerStructure** (*dict*) -- Dictionary of connected cells per structure.
+
+   :returns: None. Writes output files to disk.
+

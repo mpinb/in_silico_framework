@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.map_truefalse_to_str`
+
+
+.. title:
+
+map_truefalse_to_str
+====================
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.map_truefalse_to_str(dict_)
+
+   Convert True/False to 'True'/'False' in a dictionary
+
+   :Parameters: **dict\_** (*dict*) -- A dictionary with boolean values.
+
+   :returns: A dictionary with boolean values converted to strings.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

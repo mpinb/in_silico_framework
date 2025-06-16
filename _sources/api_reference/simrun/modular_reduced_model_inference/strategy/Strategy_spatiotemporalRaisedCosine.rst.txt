@@ -1,0 +1,137 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Strategy_spatiotemporalRaisedCosine
+===================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _setup <Strategy_spatiotemporalRaisedCosine._setup>
+   compute_basis <Strategy_spatiotemporalRaisedCosine.compute_basis>
+   _get_x0 <Strategy_spatiotemporalRaisedCosine._get_x0>
+   _convert_x_static <Strategy_spatiotemporalRaisedCosine._convert_x_static>
+   _get_score_static <Strategy_spatiotemporalRaisedCosine._get_score_static>
+   normalize <Strategy_spatiotemporalRaisedCosine.normalize>
+   get_color_by_group <Strategy_spatiotemporalRaisedCosine.get_color_by_group>
+   visualize <Strategy_spatiotemporalRaisedCosine.visualize>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine(name, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal)
+   
+   Spatiotemporal raised cosine strategy.
+
+   Uses the :py:class:``RaisedCosineBasis`` to create a set of basis functions.
+
+   .. attention::
+
+      The input data must contain the following keys:
+      - ``spatiotemporalSa``: The spatiotemporal synaptic activation patterns of shape (n_spatial_bins, n_temporal_bins, n_trials).
+      - ``st``: The spike times.
+      - ``y``: The labels.
+      - ``ISI``: The inter-spike intervals.
+
+   :Parameters: * **name** (*str*) -- The name of the strategy.
+                * **RaisedCosineBasis_spatial** (*RaisedCosineBasis*) -- The spatial basis functions :math:`\mathbf{g}(z)`.
+                * **RaisedCosineBasis_temporal** (*RaisedCosineBasis*) -- The temporal basis :math:`\mathbf{f}(t)`.
+
+   :Attributes:
+
+   .. attribute:: RaisedCosineBasis_spatial
+
+      The spatial basis functions :math:`\mathbf{g}(z)`.
+
+      :type: RaisedCosineBasis
+
+   .. attribute:: RaisedCosineBasis_temporal
+
+      The temporal basis functions :math:`\mathbf{f}(t)`.
+
+      :type: RaisedCosineBasis
+
+   .. attribute:: base_vectors_arrays_dict
+
+      The basis vectors for each group. basis vectors are of shape (n_trials, N_{\tau}, N_{z})
+      These basis vectors are used for the optimizer, and are already multiplied with the data.
+      Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
+      as the latter are not multiplied with the synapse activaiton data.
+
+      :type: dict
+
+   .. attribute:: groups
+
+      The list of groups. Usually simply ``['EXC', 'INH']``.
+
+      :type: list
+
+   .. attribute:: len_z
+
+      The length of the spatial domain i.e. the amount of spatial basis vectors.
+
+      :type: int
+
+   .. attribute:: len_t
+
+      The length of the temporal domain i.e. the amount of temporal basis vectors.
+
+      :type: int
+
+   .. attribute:: len_trials
+
+      The number of trials.
+
+      :type: int
+
+   .. attribute:: convert_x
+
+      The conversion function to convert the 1D learnable weight vector :math:`\mathbf{x}` into a structured dictionary.
+
+      :type: callable
+
+   .. attribute:: _get_score
+
+      The cost function to provide to the optimizer.
+
+      :type: callable
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_setup <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._setup>`\ ()
+        - Compute the strategy's basis vectors and set up the objective function.
+      * - :py:obj:`compute_basis <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.compute_basis>`\ ()
+        - Compute the basis vectors for the dataset.
+      * - :py:obj:`_get_x0 <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_x0>`\ ()
+        - Get an initial guess for the learnable weights  :math:`\mathbf{x}` and :math:`\mathbf{y}` of the basis functions :math:`\mathbf{f}(\tau)` and :math:`\mathbf{g}(z)`.
+      * - :py:obj:`_convert_x_static <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static>`\ (groups, len\_z, x)
+        - :summarylabel:`static` Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
+      * - :py:obj:`_get_score_static <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static>`\ (convert\_x, base\_vectors\_arrays\_dict, x)
+        - :summarylabel:`static` Calculate the weighted net input :math:`WNI(t)` for the given weights :math:`\mathbf{x}`.
+      * - :py:obj:`normalize <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.normalize>`\ (x, flipkey)
+        - Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
+      * - :py:obj:`get_color_by_group <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group>`\ (group)
+        - Map groups to a color.
+      * - :py:obj:`visualize <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize>`\ (optimizer\_output, only\_successful, normalize)
+        - Plot the basis functions.
+

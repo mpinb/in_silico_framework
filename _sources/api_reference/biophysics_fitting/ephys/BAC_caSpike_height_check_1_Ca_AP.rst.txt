@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height_check_1_Ca_AP`
+
+
+.. title:
+
+BAC_caSpike_height_check_1_Ca_AP
+================================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_1_Ca_AP(t, v, v_dend, thresh=None)
+
+   Checks if there is exactly one calcium spike in the dendritic voltage trace.
+
+   :Parameters: * **t** (*array*) -- Time array.
+                * **v** (*array*) -- Somatic voltage array.
+                * **v\_dend** (*array*) -- Dendritic voltage array.
+                * **thresh** (*float, optional*) -- Spike detection threshold. Defaults to None.
+
+   :returns: True if there is exactly one calcium spike in the dendritic voltage trace, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

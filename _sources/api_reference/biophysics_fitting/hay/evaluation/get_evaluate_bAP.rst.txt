@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.get_evaluate_bAP`
+
+
+.. title:
+
+get_evaluate_bAP
+================
+
+
+.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_bAP(**kwargs)
+
+   Get the evaluation function for the :math:`bAP` stimulus protocol.
+
+   Initializes a :py:class:`bAP` object with the given keyword arguments,
+   and returns a function that evaluates the voltage traces.
+
+   :Parameters: **\*\*kwargs** -- Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
+
+   :returns: function that evaluates the voltage traces.
+   :rtype: Callable
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

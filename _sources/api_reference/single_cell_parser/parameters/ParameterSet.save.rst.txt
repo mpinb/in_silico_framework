@@ -1,0 +1,9 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.ParameterSet` ❭ :mod:`~single_cell_parser.parameters.ParameterSet.save`
+
+ParameterSet.save
+=================
+
+.. py:method:: single_cell_parser.parameters.ParameterSet.save(filename)

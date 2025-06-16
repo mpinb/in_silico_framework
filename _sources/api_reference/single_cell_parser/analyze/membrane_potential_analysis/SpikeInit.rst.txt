@@ -1,0 +1,50 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SpikeInit
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   vm_steady_state <SpikeInit.vm_steady_state>
+   analyze_single_spike <SpikeInit.analyze_single_spike>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit
+   
+   Analyze spike initiation.
+
+   Can be used to obtain features of spike shape, adaptation etc...
+
+   .. seealso:: :py:class:`biophysics_fitting.evaluator.Evaluator` for a more exhaustive analysis of voltage traces.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`vm_steady_state <single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.vm_steady_state>`\ (cell, tVec, tStim, dtStim)
+        - :summarylabel:`static` Computes the "steady-state" voltage
+      * - :py:obj:`analyze_single_spike <single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike>`\ (cell, tVec, thresh)
+        - :summarylabel:`static` Calculate spike height, width (FWHM) and after hyperpolarization depth (AHP).
+

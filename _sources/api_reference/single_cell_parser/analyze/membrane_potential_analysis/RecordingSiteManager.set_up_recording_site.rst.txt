@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.set_up_recording_site`
+
+RecordingSiteManager.set_up_recording_site
+==========================================
+
+.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.set_up_recording_site(location, ID, filename)
+
+   Set up a :py:class:`RecordingSite` from a location.
+
+   Determines the section and segment on the cell corresponding
+   to the recording site location and creates new :py:class:`RecordingSite`.
+
+   Used during initialization.
+
+   :Parameters: * **location** (*numpy.ndarray*) -- Location of the recording site.
+                * **ID** (*int*) -- ID of the recording site.
+                * **filename** (*str*) -- Path to the AMIRA landmark file containing all recording sites.
+

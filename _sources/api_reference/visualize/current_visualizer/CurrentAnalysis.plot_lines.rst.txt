@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis.plot_lines`
+
+CurrentAnalysis.plot_lines
+==========================
+
+.. py:method:: visualize.current_visualizer.CurrentAnalysis.plot_lines(ax=None, legend=True)
+
+   Plot the ion currents and the net current of a cell simulation.
+
+   :Parameters: * **ax** (*Axes*) -- The matplotlib axes object. Default is ``None``.
+                * **legend** (*bool*) -- Whether to plot the legend. Default is ``True``.
+
+   :returns: None
+

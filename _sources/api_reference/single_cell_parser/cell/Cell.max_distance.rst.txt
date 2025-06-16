@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.max_distance`
+
+Cell.max_distance
+=================
+
+.. py:method:: single_cell_parser.cell.Cell.max_distance(label)
+
+   Computes maximum path length to soma of all branches with label :paramref:`label`
+
+   :Parameters: **label** (*str*) -- The label of the branches to consider.
+
+   :returns: The maximum path length to the soma of all branches with label :paramref:`label`.
+   :rtype: float
+

@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_bin_soma_distances_in_section`
+
+
+.. title:
+
+get_bin_soma_distances_in_section
+=================================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin_soma_distances_in_section(section_id, section_distances_df)
+
+   Get the distance to the soma for all bins in this section.
+
+   :Parameters: * **section\_id** (*int*) -- Id of the neuron section
+                * **section\_distances\_df** (*pd.DataFrame*) -- The dataframe describing distance to soma for all sections, as provided by :@function get\_section\_distances\_df:
+
+   :returns: A list containing the distance to soma for each bin in a section.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

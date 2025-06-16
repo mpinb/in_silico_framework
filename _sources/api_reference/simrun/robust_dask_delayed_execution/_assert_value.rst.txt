@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution._assert_value`
+
+
+.. title:
+
+_assert_value
+=============
+
+
+.. py:function:: simrun.robust_dask_delayed_execution._assert_value(db, k, value, behaviour=&#39;warning&#39;)
+
+   Assert that the value in the database is as expected.
+
+   :Parameters: * **db** (*str*) -- The path to the database.
+                * **k** (*tuple*) -- The key in the database value.
+                * **value** -- The expected value.
+                * **behaviour** (*str*) -- The behaviour if the value is not as expected. Can be ``'warning'`` or ``'error'``.
+
+   :raises RuntimeError: If the value is not as expected and the ``behaviour`` is ``'error'``.
+   :raises ValueError: If the ``behaviour`` is not ``'warning'`` or ``'error'``.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

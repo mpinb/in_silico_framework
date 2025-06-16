@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer._evaluate_invalid_fitness`
+
+
+.. title:
+
+_evaluate_invalid_fitness
+=========================
+
+
+.. py:function:: biophysics_fitting.optimizer._evaluate_invalid_fitness(toolbox, population)
+
+   Evaluate the individuals with an invalid fitness
+   Returns the count of individuals with invalid fitness
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

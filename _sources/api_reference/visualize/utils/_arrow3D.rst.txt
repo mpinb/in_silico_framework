@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils._arrow3D`
+
+
+.. title:
+
+_arrow3D
+========
+
+
+.. py:function:: visualize.utils._arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs)
+
+   Add an 3d arrow to an Axes3D instance.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

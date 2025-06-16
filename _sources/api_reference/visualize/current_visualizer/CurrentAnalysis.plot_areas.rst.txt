@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis.plot_areas`
+
+CurrentAnalysis.plot_areas
+==========================
+
+.. py:method:: visualize.current_visualizer.CurrentAnalysis.plot_areas(ax=None, normalized=False, plot_net=False, plot_voltage=False, t_stim=295, select_window_relative_to_stim=(0, 55))
+
+   Plot the ion currents and the net current of a cell simulation.
+
+   :Parameters: * **ax** (*Axes*) -- The matplotlib axes object. Default is ``None``.
+                * **normalized** (*bool*) -- Whether to plot the normalized currents. Default is ``False``.
+                * **plot_net** (*bool*) -- Whether to plot the net current. Default is ``False``.
+                * **plot_voltage** (*bool*) -- Whether to plot the voltage trace. Default is ``False``.
+                * **t_stim** (*int*) -- The time of the stimulus im :math:`ms`. Default is :math:`295 ms`.
+                * **select_window_relative_to_stim** (*tuple*) -- The time window to select relative to the stimulus time. Default is ``(0, 55)``.
+
+   :returns: None
+

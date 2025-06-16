@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._map_functional_realization`
+
+NetworkMapper._map_functional_realization
+=========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._map_functional_realization(weights=None)
+
+   Connects anatomical synapses to spike generators (PointCells).
+
+   This happens consistent to empirical constraints from a functional realization file.
+
+   .. deprecated: 0.1.0
+      This method is used in the deprecated method :py:meth:`create_saved_network`.
+      Please use :py:meth:`~create_saved_network2` instead, which uses :py:meth:`~_map_complete_anatomical_realization` to connect synapses.
+

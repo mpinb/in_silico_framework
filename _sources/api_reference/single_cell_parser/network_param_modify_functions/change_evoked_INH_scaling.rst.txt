@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.change_evoked_INH_scaling`
+
+
+.. title:
+
+change_evoked_INH_scaling
+=========================
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.change_evoked_INH_scaling(param, factor, pop=INHIBITORY)
+
+   Scales the response probability for inhibitory cells in the :ref:`network\_parameters\_format`.
+
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **factor** (*float*) -- The scaling factor.
+                * **pop** (*list*) -- The celltypes to apply the scaling to.
+                  Default is the inhibitory celltypes in the rat somatosensory cortex vS1.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

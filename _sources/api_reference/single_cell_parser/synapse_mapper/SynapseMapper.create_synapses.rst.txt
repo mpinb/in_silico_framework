@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper.create_synapses`
+
+SynapseMapper.create_synapses
+=============================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.create_synapses(preType='Generic')
+
+   Map synapses onto a morphology based on a synapse distribution.
+
+   In this case, :paramref:`synDist` has to be a :py:class:`~single_cell_parser.scalar_field.ScalarField` of synapse densities.
+
+   This method is nearly identical to :py:mod:`singlecell_inputmapper`'s
+   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`,
+   but with the following differences:
+
+   - the synapse density is not drawn from a Poisson distribution if :paramref:`isDensity` is False.
+   - the synapses are not assigned on a per-structure basis (e.g. separate for soma, dendrite, axon ...)
+
+   It is added here for completeness, in case you need a singular, quick network realization.
+   For a specialized network realization with more fine-grained control, use the :py:mod:`singlecell_inputmapper.singlecell_input_mapper` package instead.
+
+   :Parameters: **preType** (*str*) -- The type of presynaptic cell. Default: 'Generic'.
+

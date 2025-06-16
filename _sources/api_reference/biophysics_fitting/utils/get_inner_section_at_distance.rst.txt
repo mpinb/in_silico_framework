@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.get_inner_section_at_distance`
+
+
+.. title:
+
+get_inner_section_at_distance
+=============================
+
+
+.. py:function:: biophysics_fitting.utils.get_inner_section_at_distance(cell, dist, beyond_dist=1000, beyond_struct=[&#39;ApicalDendrite&#39;])
+
+   Get sections that connect to specific structures at a particular distance.
+
+   Fetches all sections that are connected to compartments with labels in :paramref:`beyond\_struct`, and
+   that have a soma distance of :paramref:`beyond\_dist`.
+   This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **dist** (*float*) -- The distance from the soma (um).
+                * **beyond\_dist** (*float*) -- The minimum distance from the soma (um).
+                * **beyond\_struct** (*list*) -- The labels of the structures to check.
+
+   :returns: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :paramref:`dist`.
+   :rtype: tuple
+
+   .. seealso:: See also: :py:meth:`~get\_inner\_sec\_dist\_dict` that returns all sections beyond some distance, rather than only the closest section at a specific distance.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

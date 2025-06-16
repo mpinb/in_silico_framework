@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderLabView` ❭ :mod:`~spike_analysis.core.ReaderLabView.get_serialize_dict`
+
+ReaderLabView.get_serialize_dict
+================================
+
+.. py:method:: spike_analysis.core.ReaderLabView.get_serialize_dict()
+
+   Get a dictionary containing the attributes of the ReaderLabView object.
+
+   :returns:
+
+             A dictionary containing the attributes of the ReaderLabView object:
+                     - path (str): The path to the LabView file.
+                     - stim_times (list): The times of the stimuli.
+                     - sampling_rate (int): The sampling rate of the data.
+                     - scale (int): Scales the data with this value.
+                     - class (str): The class of the object (i.e. ``ReaderLabView``).
+                     - apply_filter (bool): Whether to apply a highpass filter to the data.
+   :rtype: dict
+

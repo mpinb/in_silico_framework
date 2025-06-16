@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject`
+
+
+.. title:
+
+calculate_vdensity_array_pixelObject
+====================================
+
+
+.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject(*args, **kwargs)
+
+   Calculate the voltage density array as a PixelObject.
+
+   This method is identical to :py:meth:`~data\_base.analyze.voltage\_binning.calculate\_vdensity\_array`,
+   but returns a :py:class:`~visualize.\_figure\_array\_converter.PixelObject` instead.
+
+   :Parameters: * **v** (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`) -- A voltage traces dataframe. Column indices float and reflect timepoints
+                * **bin\_size** (*float*) -- the size of the bins
+                * **xmin** (*float*) -- the minimum time value
+                * **xmax** (*float*) -- the maximum time value
+                * **ymin** (*float*) -- the minimum voltage value
+                * **ymax** (*float*) -- the maximum voltage value
+
+   :returns: a PixelObject with the voltage density array
+   :rtype: :py:class:`~visualize.\_figure\_array\_converter.PixelObject`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

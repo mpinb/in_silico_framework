@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.set_up_biophysics`
+
+CellParser.set_up_biophysics
+============================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.set_up_biophysics(parameters, full=False)
+
+   Initialize membrane properties.
+
+   Default method for determining the compartment sizes for NEURON simulation, initializing membrane properties, and mechanisms.
+   Properties are constants that are defined for an entire structure. Mechanisms have specific densities (not always uniform), and can be transient.
+   Poperties are added to the section by executing the NEURON command ``sec.<property>=<value>``.
+
+   - Properties:
+       - :math:`C_m` (see :py:meth:`insert_membrane_properties`)
+       - :math:`R_a` (see :py:meth:`insert_membrane_properties`)
+       - ion properties (see :py:meth:`_insert_ion_properties`)
+   - Mechanisms:
+       - range mechanisms (see :py:meth:`insert_range_mechanisms`)
+
+   The workflow is as follows:
+
+   1. Add membrane properties to all structures (see :py:meth:`insert_membrane_properties`).
+   2. Determine the number of segments for each structure (see :py:meth:`determine_nseg`).
+   3. Add range mechanisms to all structures (see :py:meth:`insert_range_mechanisms`).
+   4. Add ion properties to all structures (see :py:meth:`_insert_ion_properties`), if the ``ion`` keyword is present in the :ref:`cell_parameters_format` file.
+   5. Add spines, if the ``spines`` keyword is present in the :ref:`cell_parameters_format` file.
+       5.1 Add passive spines if ``pas`` is present in the range mechanisms (see :py:meth:`_add_spines`).
+       5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
+
+   :Parameters: * **parameters** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+                * **full** (*bool*) -- Whether or not to use full spatial discretization.
+

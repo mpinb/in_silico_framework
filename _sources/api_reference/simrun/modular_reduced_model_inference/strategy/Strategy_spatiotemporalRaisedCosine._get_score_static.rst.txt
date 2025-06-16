@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static`
+
+Strategy_spatiotemporalRaisedCosine._get_score_static
+=====================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static(convert_x, base_vectors_arrays_dict, x)
+   :staticmethod:
+
+
+   Calculate the weighted net input :math:`WNI(t)` for the given weights :math:`\mathbf{x}`.
+
+   This is the method that calculates the cost function for the optimizer.
+   It is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine._get_score` during
+   the setup of the strategy.
+
+   This method left-multiplies the basis vectors :math:`\mathbf{f}(\tau) \cdot \mathbf{g}(z) \cdot \mathbf{D}`
+   with the learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}`.
+   It then integrates the results for each group to get the weighted net input :math:`WNI(t)`.
+
+   :Parameters: * **convert_x** (*callable*) -- The conversion function from the learnable weights to the basis vectors.
+                * **base_vectors_arrays_dict** (*dict*) -- The dictionary of basis vectors for each group.
+                * **x** (*array*) -- The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
+                  These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+
+   .. attention::
+
+      These basis vectors are already multiplied with the data, and are thus not the same
+      as the basis vectors in :py:class:`RaisedCosineBasis`.
+      Since dot product is commutative, the order of this multiplication does not matter.
+
+   :returns: The weighted net input :math:`WNI(t)` of length ``n_trials``.
+   :rtype: array
+

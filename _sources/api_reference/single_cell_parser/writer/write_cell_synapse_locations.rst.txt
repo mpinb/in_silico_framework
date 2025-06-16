@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_cell_synapse_locations`
+
+
+.. title:
+
+write_cell_synapse_locations
+============================
+
+
+.. py:function:: single_cell_parser.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
+
+   Write a :ref:`syn\_file\_format` file.
+
+   :ref:`syn\_file\_format` files contain a cell's synapses with the locations
+   coded by section ID and section x of cell with ID "cellID".
+
+   See also:
+
+   - :ref:`syn\_file\_format` for more information on the `.syn` file format.
+   - :py:meth:`single\_cell\_parser.reader.read\_synapse\_realization` for the corresponding reader function.
+   - :py:meth:`write\_pruned\_synapse\_locations` for a similar function that includes a `pruned` flag.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **synapses** (*dict*) -- A dictionary of synapses, with keys as synapse types and values as lists of synapses.
+                * **cellID** (*str*) -- The ID of the cell.
+
+   :returns: None. Writes out the synapse location file to :paramref:`fname`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

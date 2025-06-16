@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._activate_presyn_cells`
+
+NetworkMapper._activate_presyn_cells
+====================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._activate_presyn_cells()
+
+   Create PointCell or SpikeTrain activation patters for each presynaptic cell.
+
+   This is the third step in creating a functional network with :py:meth:`create_saved_network2`.
+   The synapses should already be created in :py:meth:`_assign_anatomical_synapses` (step 1) and
+   the presynaptic cells in :py:meth:`_create_presyn_cells` (step 2).
+
+   Depending on the cell type of a synapse, this method creates activation patterns for each presynaptic cell:
+
+   1. For :py:class:`~single_cell_parser.cell.PointCell`: see :py:meth:`_create_pointcell_activities`
+   2. For :py:class:`~single_cell_parser.cell.SpikeTrain`: see :py:meth:`_create_spiketrain_activities`
+

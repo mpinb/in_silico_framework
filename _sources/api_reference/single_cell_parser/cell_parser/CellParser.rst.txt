@@ -1,0 +1,122 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+CellParser
+==========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   spatialgraph_to_cell <CellParser.spatialgraph_to_cell>
+   set_up_biophysics <CellParser.set_up_biophysics>
+   apply_cell_modify_functions <CellParser.apply_cell_modify_functions>
+   get_cell <CellParser.get_cell>
+   insert_membrane_properties <CellParser.insert_membrane_properties>
+   insert_range_mechanisms <CellParser.insert_range_mechanisms>
+   update_range_mechanisms <CellParser.update_range_mechanisms>
+   _insert_ion_properties <CellParser._insert_ion_properties>
+   _add_spines <CellParser._add_spines>
+   _add_spines_ar <CellParser._add_spines_ar>
+   insert_passive_membrane <CellParser.insert_passive_membrane>
+   insert_hh_membrane <CellParser.insert_hh_membrane>
+   determine_nseg <CellParser.determine_nseg>
+   _create_ais <CellParser._create_ais>
+   _create_ais_Hay2013 <CellParser._create_ais_Hay2013>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.cell_parser.CellParser(hocFilename='')
+   
+   Configure a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+
+   This class is used to read a hoc file and set up a :py:class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+   It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :py:class:`~single_cell_parser.cell.Cell` object's
+   membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
+      This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
+
+   :Parameters: **hocFilename** (*str*) -- Path to :ref:`hoc_file_format` file.
+
+   :Attributes:
+
+   .. attribute:: hoc_path
+
+      Path to hoc file
+
+      :type: str
+
+   .. attribute:: membraneParams
+
+      Membrane parameters
+
+      :type: dict
+
+   .. attribute:: cell_modify_functions_applied
+
+      Whether or not cell modify functions have already been applied. See: :py:meth:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
+
+      :type: bool
+
+   .. attribute:: cell
+
+      Cell object.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`spatialgraph_to_cell <single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell>`\ (parameters, axon, scaleFunc)
+        - Create a :py:class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+      * - :py:obj:`set_up_biophysics <single_cell_parser.cell_parser.CellParser.set_up_biophysics>`\ (parameters, full)
+        - Initialize membrane properties.
+      * - :py:obj:`apply_cell_modify_functions <single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions>`\ (parameters)
+        - Apply cell modify functions to the cell object.
+      * - :py:obj:`get_cell <single_cell_parser.cell_parser.CellParser.get_cell>`\ ()
+        - Returns cell if it is set up for simulations.
+      * - :py:obj:`insert_membrane_properties <single_cell_parser.cell_parser.CellParser.insert_membrane_properties>`\ (label, props)
+        - Inserts membrane properties into all structures named as :paramref:`label`.
+      * - :py:obj:`insert_range_mechanisms <single_cell_parser.cell_parser.CellParser.insert_range_mechanisms>`\ (label, mechs)
+        - Inserts range mechanisms into all structures named as :paramref:`label`.
+      * - :py:obj:`update_range_mechanisms <single_cell_parser.cell_parser.CellParser.update_range_mechanisms>`\ (label, updateMechName, mechs)
+        - Updates range mechanism :paramref:`updateMechName` in all structures named as :paramref:`label`.
+      * - :py:obj:`_insert_ion_properties <single_cell_parser.cell_parser.CellParser._insert_ion_properties>`\ (label, ionParam)
+        - Inserts ion properties into all structures named as :paramref:`label`
+      * - :py:obj:`_add_spines <single_cell_parser.cell_parser.CellParser._add_spines>`\ (label, spineParam)
+        - Adds passive spines to the membrane.
+      * - :py:obj:`_add_spines_ar <single_cell_parser.cell_parser.CellParser._add_spines_ar>`\ (label, spineParam)
+        - Adds passive spines to anomalously rectifying membrane :cite:`Waters_Helmchen_2006`.
+      * - :py:obj:`insert_passive_membrane <single_cell_parser.cell_parser.CellParser.insert_passive_membrane>`\ (label)
+        - Set up a passive membrane with default values.
+      * - :py:obj:`insert_hh_membrane <single_cell_parser.cell_parser.CellParser.insert_hh_membrane>`\ (label)
+        - Set up a Hodgkin-Huxley membrane with default values.
+      * - :py:obj:`determine_nseg <single_cell_parser.cell_parser.CellParser.determine_nseg>`\ (f, full, max\_seg\_length)
+        - Determine the number of segments for each section according to the d-lambda rule.
+      * - :py:obj:`_create_ais <single_cell_parser.cell_parser.CellParser._create_ais>`\ ()
+        - Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
+      * - :py:obj:`_create_ais_Hay2013 <single_cell_parser.cell_parser.CellParser._create_ais_Hay2013>`\ ()
+        - Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+

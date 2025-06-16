@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.generate_landmark_template`
+
+
+.. title:
+
+generate_landmark_template
+==========================
+
+
+.. py:function:: single_cell_parser.writer.generate_landmark_template(landmark_name, c, vertexviewid, len)
+
+   Generate a template for a landmark file in Amira.
+
+   :Parameters: * **landmark\_name** (*str*) -- The name of the landmark file.
+                * **c** (*tuple*) -- The color of the landmark.
+                * **vertexviewid** (*int*) -- The vertex view id.
+                * **len** (*int*) -- The length of the landmark.
+
+   :returns: The template for the landmark file.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

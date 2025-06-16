@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static`
+
+_Strategy.get_y_static
+======================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static(y, numpy_split=None)
+   :staticmethod:
+
+
+   Fetch the labels for the given split.
+
+   :Parameters: * **y** (*array*) -- The labels.
+                * **numpy_split** (*array*) -- The split.
+
+   :returns: The labels for the given split.
+   :rtype: array
+

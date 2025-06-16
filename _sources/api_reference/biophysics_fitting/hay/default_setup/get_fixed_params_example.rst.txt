@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.get_fixed_params_example`
+
+
+.. title:
+
+get_fixed_params_example
+========================
+
+
+.. py:function:: biophysics_fitting.hay.default_setup.get_fixed_params_example()
+
+   Get an example of cell-specific fixed params.
+
+   Fixed parameters are parameters that are required for a stimulus protocol.
+   They are specific to a stimulus protocol, and to the morphology of the cell.
+   This method provides an example of such fixed parameters for a L5PT and the
+   bAP and BAC stimuli.
+
+   :returns: A dictionary with the fixed parameters.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

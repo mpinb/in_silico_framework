@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim` ❭ :mod:`~biophysics_fitting.setup_stim.setup_StepTwo`
+
+
+.. title:
+
+setup_StepTwo
+=============
+
+
+.. py:function:: biophysics_fitting.setup_stim.setup_StepTwo(cell, delay=700)
+
+   Setup a step current stimulus at the soma:
+
+       - amplitude = 0.793 nA
+       - delay = 700 ms
+       - duration = 2000 ms
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+                * **delay** (*float*) -- The delay of the step current stimulus (ms).
+
+   :returns: None. Adds a step current stimulus to the cell.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

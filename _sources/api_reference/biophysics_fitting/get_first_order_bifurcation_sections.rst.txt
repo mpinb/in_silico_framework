@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.get_first_order_bifurcation_sections`
+
+
+.. title:
+
+get_first_order_bifurcation_sections
+====================================
+
+
+.. py:function:: biophysics_fitting.get_first_order_bifurcation_sections(cell)
+
+   Find all sections that are both inner sections, and are of branching order 1.
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
+
+   :returns: A list of :py:class:`~single\_cell\_parser.cell.PySection` sections that are both inner sections, and are of branching order 1.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup._check_not_none`
+
+Simulator_Setup._check_not_none
+===============================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup._check_not_none(var, varname, procedure_description)
+
+   Convenience method to check if the output of some method is not None.
+
+   Used as sanity check throughout this class.
+
+   :Parameters: * **var** -- The variable to check.
+                * **varname** (*str*) -- The name of the variable.
+                * **procedure_description** (*str*) -- A description of the procedure that produced the variable.
+
+   :raises ValueError: If :paramref:`var` is None.
+

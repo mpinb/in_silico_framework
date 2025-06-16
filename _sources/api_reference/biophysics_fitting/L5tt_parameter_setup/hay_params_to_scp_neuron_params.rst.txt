@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.hay_params_to_scp_neuron_params`
+
+
+.. title:
+
+hay_params_to_scp_neuron_params
+===============================
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.hay_params_to_scp_neuron_params(params)
+
+   Convert a list of Hay parameter names to a list of SCP neuron parameter names.
+
+   :Parameters: **params** (*list*) -- The list of Hay parameter names.
+
+   :returns: The list of SCP neuron parameter names.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

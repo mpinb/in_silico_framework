@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_feasible_model_objectives`
+
+
+.. title:
+
+get_feasible_model_objectives
+=============================
+
+
+.. py:function:: biophysics_fitting.hay.specification.get_feasible_model_objectives()
+
+   Get the objectives of a feasible model.
+
+   These are typical values of a working model. Useful for testing purposes.
+
+   :returns: The objectives of a feasible model.
+   :rtype: pd.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

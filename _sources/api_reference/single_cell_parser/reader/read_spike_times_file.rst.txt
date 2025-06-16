@@ -1,0 +1,46 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_spike_times_file`
+
+
+.. title:
+
+read_spike_times_file
+=====================
+
+
+.. py:function:: single_cell_parser.reader.read_spike_times_file(fname)
+
+   Reads all trials and spike times within these trials.
+
+   :Parameters: **fname** (*str*) -- file of format:
+                trial nr.   activation times (comma-separated list or empty)
+
+   :raises RuntimeError: If a trial number is found twice in the file
+
+   :returns: Dictionary with trial numbers as keys (integers), and tuples of spike times in each trial as values
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> spike\_file
+   # Spike times file
+   # trial nr.   activation times (ms)
+   1   100.2,698.1
+   2   100.2,698.1,1000.0
+   ...
+   >>> read\_spike\_times\_file(spike\_file)
+   {
+       1: (100.2, 698.1),
+       2: (100.2, 698.1, 1000.0),
+       ...
+   }
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

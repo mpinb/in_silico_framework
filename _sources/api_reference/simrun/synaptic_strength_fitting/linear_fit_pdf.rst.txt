@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.linear_fit_pdf`
+
+
+.. title:
+
+linear_fit_pdf
+==============
+
+
+.. py:function:: simrun.synaptic_strength_fitting.linear_fit_pdf(pdf)
+
+   Calculate linear fits between the synaptic conductance and the EPSP.
+
+   This method calculates the mean and offset of a linear fit between gAMPA and the following statistics of the EPSP:
+
+   - mean
+   - standard deviation
+   - median
+   - maximum
+
+   Is used to calculate per-celltype conductance values that match empirical data.
+
+   :Parameters: **pdf** (*pd.DataFrame*) -- A table of summary statistics, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.ePSP\_summary\_statistics`,
+                but without an index.
+
+   :returns: A table of linear fits.
+   :rtype: pd.Series
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

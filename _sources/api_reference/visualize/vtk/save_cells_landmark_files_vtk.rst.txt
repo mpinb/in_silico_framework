@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.save_cells_landmark_files_vtk`
+
+
+.. title:
+
+save_cells_landmark_files_vtk
+=============================
+
+
+.. py:function:: visualize.vtk.save_cells_landmark_files_vtk(sa, synapse_location_pdf, times_to_show, outdir, celltypes=None, tspan=1, set_index=[&#39;synapse_ID&#39;, &#39;celltype&#39;])
+
+   Save synapse activations as vtk point cloud files for each timepoint.
+
+   Given a synapse activation dataframe and a synapse location dataframe,
+   this method saves the synapse locations as vtk point cloud files for each timepoint in :paramref:`times\_to\_show`.
+
+   :Parameters: * **sa** (*pd.DataFrame*) -- Synapse activation dataframe.
+                * **synapse\_location\_pdf** (*pd.DataFrame*) -- Synapse location dataframe.
+                * **times\_to\_show** (*list*) -- List of timepoints to save the data for.
+                * **outdir** (*str*) -- Directory to save the files to.
+                * **celltypes** (*list, optional*) -- List of celltypes to save the data for. Defaults to None.
+                * **tspan** (*int, optional*) -- Time span to show. Defaults to 1.
+                * **set\_index** (*list, optional*) -- Index to set in the synapse activation dataframe. Defaults to ['synapse\_ID', 'celltype'].
+
+   :returns: None. Writes out a .vtk file for each timepoint in :paramref:`times\_to\_show`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

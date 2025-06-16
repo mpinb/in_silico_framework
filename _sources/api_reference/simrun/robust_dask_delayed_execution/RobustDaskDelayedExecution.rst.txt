@@ -1,0 +1,70 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+RobustDaskDelayedExecution
+==========================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_status <RobustDaskDelayedExecution.get_status>
+   add_delayed_to_db <RobustDaskDelayedExecution.add_delayed_to_db>
+   reset_status <RobustDaskDelayedExecution.reset_status>
+   run_db <RobustDaskDelayedExecution.run_db>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution(db)
+   
+   Execute dask delayed objects in a robust way.
+
+   This class utilizes :py:class:`data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects to store delayed objects.
+   It offers methods to run them exactly once. The return value is not saved if the dask delayeds objects don't save them.
+
+   This is used for long runing data generating simulations that can get interrupted (e.g. timeout on an HPC cluster, some error ...)
+   and you want to complete the remaining tasks later.
+
+   :Parameters: **db** (:py:class:`data_base.dataBase`) -- The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
+                which in turn contain the dask delayed objects.
+
+   :Attributes:
+
+   .. attribute:: db
+
+      The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
+      which in turn contain the dask delayed objects.
+
+      :type: :py:class:`data_base.dataBase`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_status <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.get_status>`\ ()
+        - Get the status on the computation of the delayed objects.
+      * - :py:obj:`add_delayed_to_db <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.add_delayed_to_db>`\ (d)
+        - Add a delayed object to the database.
+      * - :py:obj:`reset_status <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status>`\ (only\_started)
+        - Reset the status of the delayed objects to ``'not_started'``.
+      * - :py:obj:`run_db <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.run_db>`\ (error\_started)
+        - Run all delayed objects in the database.
+

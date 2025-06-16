@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution._wrapper`
+
+
+.. title:
+
+_wrapper
+========
+
+
+.. py:function:: simrun.robust_dask_delayed_execution._wrapper(db, key_first_item)
+
+   Wrapper to robustly compute database values.
+
+   This wrapper is used to compute delayed objects stored in a database. It ensures that the computation is only done once.
+   It also provides locks on the files wile they are being computed, to mitigate concurrent access issues.
+   Before, during, and after computation, the delayed objects acquire the status ``'not\_started'``, ``'started'``, and ``'finished'`` respectively.
+   This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run\_db`.
+
+   :Parameters: * **db** (*str*) -- The path to the database.
+                * **key\_first\_item** (*str*) -- The key of the first item in the database.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

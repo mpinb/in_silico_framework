@@ -1,0 +1,9 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.ParameterSet` ❭ :mod:`~single_cell_parser.parameters.ParameterSet._wrap`
+
+ParameterSet._wrap
+==================
+
+.. py:method:: single_cell_parser.parameters.ParameterSet._wrap(value)

@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`
+
+NetworkMapper._create_presyn_cells
+==================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells()
+
+   Creates presynaptic cells.
+
+   Should be done before creating anatomical synapses.
+   Fills the :py:attr:`~cells` attribute with a nested dictionary of presynaptic cells,
+   ordered by anatomical area first, and cell type second.
+

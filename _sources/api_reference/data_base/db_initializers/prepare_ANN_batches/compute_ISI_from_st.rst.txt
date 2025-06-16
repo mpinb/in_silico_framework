@@ -1,0 +1,37 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st`
+
+
+.. title:
+
+compute_ISI_from_st
+===================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st(st, timepoint, fillna=None)
+
+   Calculate the time since the last spike in ms for each element in a spike time pd.Series or pd.DataFrame.
+
+   Given a pandas Series or DataFrame of spike times, this method returns a list of size ``(max\_time - min\_time)//time\_step``,
+   where each time step gives the amount of time since the last spike in ms.
+
+   :Parameters: * **st** (*pd.DataFrame | pd.Series*) -- pandas DataFrame or Series of spike times
+                * **timepoint** (*int*) -- Time point in ms
+                * **fillna** (*int, optional*) -- Fill with NaN until the array has this length. Defaults to None.
+
+   :returns: A pandas Series of inter-spike intervals in ms.
+   :rtype: pd.Series
+
+   .. seealso::
+
+      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_from\_st\_list` for the list version.
+      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_array` for the array version.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

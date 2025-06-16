@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics.plot`
+
+_DendrogramSynapseStatistics.plot
+=================================
+
+.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics.plot(ax=None)
+
+   Plot the synapse statistics
+
+   Plots out a histogram of the total amount of synapses per bin of soma distance.
+
+   :Parameters: **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object. Default is ``None`` and a new figure is created.
+
+   :returns: The matplotlib axes object.
+   :rtype: :py:class:`matplotlib.axes.Axes`
+

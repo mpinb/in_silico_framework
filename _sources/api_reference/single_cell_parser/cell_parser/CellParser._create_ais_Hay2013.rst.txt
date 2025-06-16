@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`
+
+CellParser._create_ais_Hay2013
+==============================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser._create_ais_Hay2013()
+
+   Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+
+   .. note:: connectivity is automatically taken care of since this should only be called from :py:meth:`spatialgraph_to_cell`
+

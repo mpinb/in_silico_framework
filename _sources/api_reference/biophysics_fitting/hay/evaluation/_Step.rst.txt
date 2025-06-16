@@ -1,0 +1,166 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_Step
+=====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get <_Step.get>
+   check <_Step.check>
+   mf <_Step.mf>
+   AI <_Step.AI>
+   ISIcv <_Step.ISIcv>
+   DI <_Step.DI>
+   TTFS <_Step.TTFS>
+   AHP_depth_abs <_Step.AHP_depth_abs>
+   APh <_Step.APh>
+   fAHPd <_Step.fAHPd>
+   sAHPd <_Step.sAHPd>
+   sAHPt <_Step.sAHPt>
+   APw <_Step.APw>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.hay.evaluation._Step(soma_thresh=-30, stim_onset=700, stim_duration=2000, punish=250.0, punish_last_spike_after_deadline=True, punish_minspikenum=5, punish_returning_to_rest_tolerance=2.0, definitions=None, name='StepTemplate', step_index=0)
+   
+   Template class for evaluating step current injections.
+
+   These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
+
+   .. seealso:: :py:meth:`biophysics_fitting.setup_stim` for more information on the stimulus protocols.
+
+   :Parameters: * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
+                * **stim_onset** (*float*) -- The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.
+                * **stim_duration** (*float*) -- The duration of the stimulus (:math:`ms`). Defaults to :math:`2000\ ms`.
+                * **punish** (*float*) -- The punishment value in units of :math:`\sigma`.
+                  Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+                  Defaults to :math:`250 \sigma`.
+                * **punish_last_spike_after_deadline** (*bool*) -- Whether to punish if the last spike is after the deadline. Defaults to ``True``
+                * **punish_minspikenum** (*int*) -- The minimum number of spikes required for this stimulus protocol. Defaults to :math:`5`.
+                * **punish_returning_to_rest_tolerance** (*float*) -- The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+                * **definitions** (*dict*) -- The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+                * **name** (*str*) -- The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
+                * **step_index** (*int*) -- The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+
+   :Attributes:
+
+   .. attribute:: soma_thresh
+
+      The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
+
+      :type: float
+
+   .. attribute:: stim_onset
+
+      The onset of the stimulus (ms). Defaults to :math:`700` ms.
+
+      :type: float
+
+   .. attribute:: stim_duration
+
+      The duration of the stimulus (ms). Defaults to :math:`2000` ms.
+
+      :type: float
+
+   .. attribute:: punish
+
+      The punishment value in units of :math:`\sigma`.
+      Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+      Defaults to :math:`250`.
+
+      :type: float
+
+   .. attribute:: punish_last_spike_after_deadline
+
+      Whether to punish if the last spike is after the deadline. Defaults to ``True``
+
+      :type: bool
+
+   .. attribute:: punish_minspikenum
+
+      The minimum number of spikes required for this stimulus protocol.
+
+      :type: int
+
+   .. attribute:: punish_returning_to_rest_tolerance
+
+      The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+
+      :type: float
+
+   .. attribute:: prefix
+
+      The prefix for the evaluation metric checks. Defaults to an empty string.
+
+      :type: str
+
+   .. attribute:: definitions
+
+      The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class.
+
+      :type: dict
+
+   .. attribute:: name
+
+      The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
+
+      :type: str
+
+   .. attribute:: step_index
+
+      The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+
+      :type: int
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get <biophysics_fitting.hay.evaluation._Step.get>`\ (\*\*voltage\_traces)
+        - Get the full evaluation of the voltage traces for the step current injection.
+      * - :py:obj:`check <biophysics_fitting.hay.evaluation._Step.check>`\ (out, voltage\_traces)
+        - Check for problems in the voltage trace.
+      * - :py:obj:`mf <biophysics_fitting.hay.evaluation._Step.mf>`\ (voltage\_traces)
+        - Get the mean frequency of the somatic voltage trace.
+      * - :py:obj:`AI <biophysics_fitting.hay.evaluation._Step.AI>`\ (voltage\_traces)
+        - Get the adaptation index of the somatic voltage trace.
+      * - :py:obj:`ISIcv <biophysics_fitting.hay.evaluation._Step.ISIcv>`\ (voltage\_traces)
+        - Get the coefficient of variation of the interspike interval in the somatic voltage trace.
+      * - :py:obj:`DI <biophysics_fitting.hay.evaluation._Step.DI>`\ (voltage\_traces)
+        - Get the ISI of the first two spikes in the somatic voltage trace.
+      * - :py:obj:`TTFS <biophysics_fitting.hay.evaluation._Step.TTFS>`\ (voltage\_traces)
+        - Get the time to first spike in the somatic voltage trace.
+      * - :py:obj:`AHP_depth_abs <biophysics_fitting.hay.evaluation._Step.AHP_depth_abs>`\ (voltage\_traces)
+        - Get the afterhyperpolarization depth in the somatic voltage trace.
+      * - :py:obj:`APh <biophysics_fitting.hay.evaluation._Step.APh>`\ (voltage\_traces)
+        - Get the AP heights fo all APs in the somatic voltage trace.
+      * - :py:obj:`fAHPd <biophysics_fitting.hay.evaluation._Step.fAHPd>`\ (voltage\_traces)
+        - Get the fast afterhyperpolarization depth in the somatic voltage trace.
+      * - :py:obj:`sAHPd <biophysics_fitting.hay.evaluation._Step.sAHPd>`\ (voltage\_traces)
+        - Get the slow afterhyperpolarization depth in the somatic voltage trace.
+      * - :py:obj:`sAHPt <biophysics_fitting.hay.evaluation._Step.sAHPt>`\ (voltage\_traces)
+        - Get the slow afterhyperpolarization time in the somatic voltage trace.
+      * - :py:obj:`APw <biophysics_fitting.hay.evaluation._Step.APw>`\ (voltage\_traces)
+        - Get the AP widths of all APs in the somatic voltage trace.
+

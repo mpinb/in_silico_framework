@@ -1,0 +1,47 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
+
+
+.. title:
+
+get_section_distances_df
+========================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_section_distances_df(neuron_param_file, silent=True)
+
+   Bin the morphology of a neuron from a :ref:`cell\_parameters\_format` file.
+
+   This method reads the neuron parameter file and bins the morphology of the neuron into spatial bins.
+   The amount of bins is inferred by :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.get\_binsize`.
+
+   :Parameters: * **neuron\_param\_file** (*str*) -- The path to the neuron parameter file.
+                * **silent** (*bool, optional*) -- If True, suppresses output. Defaults to True.
+
+   :returns: A dataframe containing the amount of bins, the bin size, and the min and max distance to the soma for each section.
+   :rtype: pd.DataFrame
+
+   Example::
+
+       >>> section\_distances\_df = get\_section\_distances\_df(neuron\_param\_file)
+           min\_         max\_       n\_bins  binsize
+       0     0.000000     0.000000   Soma     Soma
+       1     0.000000    35.032795      1  35.0328
+       2    35.032795   131.179980      2  48.0736
+       3    35.032795    41.505115      1  6.47232
+       4    41.505115   252.996874      4  52.8729
+       ..         ...          ...    ...      ...
+       165  95.220299   161.215314      1   65.995
+       166  95.220299   158.805975      1  63.5857
+       167   0.000000    20.000000      1       20
+       168  20.000000    50.000000      1       30
+       169  50.000000  1049.999969     20       50
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

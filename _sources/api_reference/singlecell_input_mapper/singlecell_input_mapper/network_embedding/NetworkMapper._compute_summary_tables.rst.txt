@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_summary_tables`
+
+NetworkMapper._compute_summary_tables
+=====================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_summary_tables(connectedCells, connectedCellsPerStructure)
+
+   Computes all summary data.
+
+   Compute the following summary data:
+
+   - numbers of synapses per cell type/anatomical_area,
+   - distance of synapses to soma, convergence etc.
+
+   Used by :py:meth:`~create_network_embedding` and
+   :py:meth:`~create_network_embedding_for_simulations`.
+
+   :Parameters: * **connectedCells** (*dict*) -- Dictionary of connected cells.
+                * **connectedCellsPerStructure** (*dict*) -- Dictionary of connected cells per structure.
+
+   :returns: synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
+   :rtype: tuple
+

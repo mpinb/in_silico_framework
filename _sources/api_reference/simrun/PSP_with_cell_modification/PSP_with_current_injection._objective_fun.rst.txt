@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection._objective_fun`
+
+PSP_with_current_injection._objective_fun
+=========================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection._objective_fun(current)
+
+   Callable to optimize.
+
+   Input must be current in :math:`nA` and output must be squared deviation from :paramref:`target_vm` in :math:`mV^2` at the timepoint :paramref:`optimize_for_timepoint`.
+

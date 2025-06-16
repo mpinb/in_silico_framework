@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.first_line_to_key`
+
+
+.. title:
+
+first_line_to_key
+=================
+
+
+.. py:function:: data_base.utils.first_line_to_key(stringios)
+
+   Convert a list of StringIO objects to a dictionary.
+
+   Takes a list io StringIO objects. Each should contain one table.
+   It returns a dictionary conatining the first line as key (assuming it is the name of the table)
+   and the rest of it as value
+
+   :Parameters: **stringios** (*list*) -- list of StringIO objects
+
+   :returns: dictionary with the first line as key and the rest as value
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

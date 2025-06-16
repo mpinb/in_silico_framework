@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.myrepartition`
+
+
+.. title:
+
+myrepartition
+=============
+
+
+.. py:function:: data_base.utils.myrepartition(ddf, N)
+
+   Repartition a dask dataframe without generating more tasks.
+
+   :Parameters: * **ddf** (*dask.DataFrame*) -- the dataframe to be repartitioned
+                * **N** (*int*) -- the number of partitions
+
+   :returns: the repartitioned dataframe
+   :rtype: dask.DataFrame
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

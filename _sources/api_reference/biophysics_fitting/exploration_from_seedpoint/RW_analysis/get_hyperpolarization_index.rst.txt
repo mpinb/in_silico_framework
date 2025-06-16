@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_hyperpolarization_index`
+
+
+.. title:
+
+get_hyperpolarization_index
+===========================
+
+
+.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_hyperpolarization_index(dataframe)
+
+   Compute the relative difference in hyperpolarization contribution of Im and SK during the BAC stimulus.
+
+   This index is defined as:
+
+   .. math::
+
+       \frac{I\_{SK} - I\_{m}}{I\_{SK} + I\_{m}}
+
+   :returns: the hyperpolarization index for each model in the dataframe
+   :rtype: pd.Series
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

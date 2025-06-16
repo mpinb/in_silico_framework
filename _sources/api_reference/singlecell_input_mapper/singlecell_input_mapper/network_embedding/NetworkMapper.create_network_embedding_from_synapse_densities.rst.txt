@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities`
+
+NetworkMapper.create_network_embedding_from_synapse_densities
+=============================================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities(postCellName, synapseDensities)
+
+   Create a single network realization from pre-computed synapse densities.
+
+   Useful for testing purposes.
+
+   .. warning::
+
+      Give this network realization a (somewhat) unique name!
+      Then save it at the same location as the anatomical realization
+
+   .. warning::
+
+      Assumes path names to anatomical realization files are relative to the working directory.
+      These paths should be correct relative, or preferably absolute paths.
+
+   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+                * **synapseDensities** (*dict*) -- Dictionary of synapse densities, ordered by anatomical area and cell type.
+

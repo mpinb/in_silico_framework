@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude`
+
+PSPs.get_synapse_coordinates_with_psp_amplitude
+===============================================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude(population, g=1.0, merged=True, select_synapses_per_cell=None)
+
+   Get the synapse coordinates and the PSP amplitude for each synapse.
+
+   :Parameters: * **population** (*str*) -- The celltype to get the synapse coordinates for.
+                * **g** (*float*) -- The synaptic strength value to get the PSP amplitude for.
+                * **merged** (*bool*) -- Whether to merge the voltage traces of cell types.
+                * **select_synapses_per_cell** (*int*) -- The amount of synapses per cell to select. Default: ``None`` (all synapses).
+
+   :returns: An array of synapse coordinates and PSP amplitudes.
+   :rtype: np.array
+
+   .. seealso::
+
+      :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes` for merging
+      the voltage traces of certain cell types.
+

@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`Interface` ❭ :mod:`~Interface.print_module_versions`
+
+
+.. title:
+
+print_module_versions
+=====================
+
+
+.. py:function:: Interface.print_module_versions()
+
+   Print the version of each module in ISF.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

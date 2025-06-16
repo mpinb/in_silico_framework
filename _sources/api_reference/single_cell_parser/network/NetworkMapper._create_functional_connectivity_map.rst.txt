@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_functional_connectivity_map`
+
+NetworkMapper._create_functional_connectivity_map
+=================================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._create_functional_connectivity_map()
+
+   Connect functional anatomical synapses based on ``convergence``.
+
+   Synapses are connected here to spike generators (:py:class:`~PointCell` objects) according to physiological
+   and/or anatomical constraints on connectivity (i.e., convergence of presynaptic cell type).
+   Used to create fixed functional realization.
+   Used in :py:meth:`~create_functional_realization`
+
+   :returns:     A dictionary with synapse types as keys.
+                 Values are 3-tuples of (cell type, presynaptic cell index, synapse index).
+                 cell type: string used for indexing point cells and synapses
+                 presynaptic cell index: index of cell in list ``self.cells[cell type]``
+                 synapse index: index of synapse in list ``self.postCell.synapses[cell type]``
+   :rtype: dict
+

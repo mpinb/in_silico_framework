@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.run_analysis`
+
+SpikeDetectionCreastTrough.run_analysis
+=======================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.run_analysis()
+
+   Runs the spike detection analysis.
+
+   Wrapper function to run the spike detection analysis.
+
+   .. seealso:: :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times`
+

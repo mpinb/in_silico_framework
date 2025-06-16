@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.cache`
+
+
+.. title:
+
+cache
+=====
+
+
+.. py:function:: data_base.dbopen.cache(function)
+
+   Cache the result of a function.
+
+   :Parameters: **function** (*callable*) -- The function to cache.
+
+   :returns: The cached function.
+   :rtype: callable
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cache(my\_function)(*args, **kwargs)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

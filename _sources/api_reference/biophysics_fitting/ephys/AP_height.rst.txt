@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.AP_height`
+
+
+.. title:
+
+AP_height
+=========
+
+
+.. py:function:: biophysics_fitting.ephys.AP_height(t, v, thresh=None)
+
+   Computes the amplitude of each action potential (AP) in a voltage trace.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- AP threshold voltage. If None, uses the default threshold of find\_crossing().
+
+   :returns: Array of AP amplitudes.
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

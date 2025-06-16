@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._interpolate_radius`
+
+SynapseDensity._interpolate_radius
+==================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._interpolate_radius(p0, p1, radius0, radius1, targetPt)
+
+   Interpolate the radius of a segment between two points.
+
+   :Parameters: * **p0** (*array*) -- Start point of the segment.
+                * **p1** (*array*) -- End point of the segment.
+                * **radius0** (*float*) -- Radius at the start point.
+                * **radius1** (*float*) -- Radius at the end point.
+                * **targetPt** (*array*) -- Point at which to interpolate the radius.
+
+   :returns: Interpolated radius at :paramref:`targetPt`.
+   :rtype: float
+

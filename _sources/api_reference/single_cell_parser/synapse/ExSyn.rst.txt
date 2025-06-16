@@ -1,0 +1,70 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.ExSyn`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ExSyn
+=====
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   activate_hoc_syn <ExSyn.activate_hoc_syn>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.synapse.ExSyn(edgeID, edgePtID, preCellType='', postCellType='')
+   
+   Simple excitatory synapse.
+
+   Used for testing purposes.
+
+   :Parameters: * **edgeID** (*int*) -- ID of attached section in cell.sections
+                * **edgePtID** (*int*) -- ID of attached point in cell.sections[edgeID].pts
+                * **preCellType** (*str*) -- reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+                * **postCellType** (*str*) -- reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+
+   :Attributes:
+
+   .. attribute:: syn
+
+      hoc ExpSyn object
+
+      :type: h.ExpSyn
+
+   .. attribute:: netcon
+
+      hoc NetCon object
+
+      :type: h.NetCon
+
+   .. attribute:: _active
+
+      activation status
+
+      :type: bool
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`activate_hoc_syn <single_cell_parser.synapse.ExSyn.activate_hoc_syn>`\ (source, targetCell, threshold, delay, weight)
+        - Setup of all necessary hoc connections.
+

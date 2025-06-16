@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict`
+
+SpikeDetectionCreastTrough.get_serialize_dict
+=============================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict()
+
+   Get a dictionary containing the attributes of the SpikeDetectionCreastTrough object.
+
+   :returns:     A dictionary containing the attributes of the SpikeDetectionCreastTrough object:
+
+                 - reader_object (dict): A dictionary containing the attributes of the reader object.
+                 - lim_creast (float): The threshold above which a creast of a spike is detected as such.
+                 - lim_trough (float): The threshold below which a trough of a spike is detected as such.
+                 - max_creast_trough_interval (float): The maximum interval between creast and trough such that a spike is recognized.
+                 - tdelta (float): The minimum interval between spikes.
+                 - stimulus_period (int): The number of stimuli applied per trial.
+                 - stimulus_period_offset (int): The number of the stimulus in each period to be extracted.
+                 - stim_times (list): A list containing stimulus times.
+                 - cellid (str): The name to be used in the spike times dataframe.
+                 - spike_times (list): A list containing spike times.
+                 - _spike_times_creast (list): A list containing spike times fullfilling the creast criterion.
+                 - _spike_times_trough (list): A list containing spike times fullfilling the trough criterion.
+                 - t_start (float): The start time of the voltage traces.
+                 - t_end (float): The end time of the voltage traces.
+   :rtype: dict
+

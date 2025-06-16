@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get`
+
+RaisedCosineBasis.get
+=====================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get()
+
+   Get the basis functions :math:`\mathbf{f}`.
+
+   :returns: The list of basis functions.
+   :rtype: list
+

@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.plot_current_injection_voltage_trace`
+
+PSP_with_current_injection.plot_current_injection_voltage_trace
+===============================================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.plot_current_injection_voltage_trace()
+
+   Visualize the voltage trace during the current injection
+
+

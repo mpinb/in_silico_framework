@@ -1,0 +1,57 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_pruned_synapse_realization`
+
+
+.. title:
+
+read_pruned_synapse_realization
+===============================
+
+
+.. py:function:: single_cell_parser.reader.read_pruned_synapse_realization(fname)
+
+   Read in a :ref:`syn\_file\_format` and returns a dictionary of synapse locations and whether they are pruned or not.
+
+   Pruned synapses are synapses that have been removed from the model.
+   Whether or not they are pruned is indicated by an additional column in the synapse realization file.
+
+   See also:
+
+   - :ref:`syn\_file\_format` for more information on the `.syn` file format.
+   - :py:meth:`~single\_cell\_parser.reader.read\_synapse\_realization`.
+   - :py:meth:`~single\_cell\_parser.writer.write\_pruned\_synapse\_locations` for the corresponding writer.
+
+   :Parameters: **fname** (*str*) -- The name of the file to be read.
+
+   :raises IOError: If the input file does not have a `.syn` or `.SYN` suffix.
+
+   :returns: A dictionary with synapse types as keys and lists of synapse locations as values.
+   :rtype: dict
+
+   .. rubric:: Example
+      :class: example
+
+   >>> synapse\_file
+   # Synapse distribution file
+   # corresponding to cell: 86\_C2\_center
+   # Type - section - section.x - pruned
+   VPM\_E1  112     0.138046479525  0
+   VPM\_E1  130     0.305058053119  0
+   ...
+   >>> read\_pruned\_synapse\_realization(synapse\_file)
+   {
+       'VPM\_E1': [
+           (112, 0.138046479525, 0),
+           (130, 0.305058053119, 0),
+           ...
+           ]
+   }
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

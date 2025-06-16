@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field`
+
+
+.. title:
+
+write_scalar_field
+==================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field(fname=None, scalarField=None)
+
+   Write a scalar field to an AmiraMesh file.
+
+   These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert\_amira\_lattice\_to\_vtk`
+   for visualization in VTK-compatible renderers.
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **scalarField** (:py:class:`~singlecell\_input\_mapper.singlecell\_input\_mapper.scalar\_field.ScalarField`) -- Scalar field to be written to disk
+
+   :returns: None. Writes the results to disk.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

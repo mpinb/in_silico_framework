@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical`
+
+
+.. title:
+
+scale_apical
+============
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment=&#39;ApicalDendrite&#39;)
+
+   Scale the apical dendrite of a cell.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+                * **scale** (*float*) -- The scaling factor.
+                * **compartment** (*str*) -- The compartment to scale.
+                  If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
+                  If "Trunk", the cell is assumed to have ``detailed\_labels`` assigned manually, or by :py:meth:`biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`.
+                  Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
+
+   :returns: The scaled cell.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+   :raises ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

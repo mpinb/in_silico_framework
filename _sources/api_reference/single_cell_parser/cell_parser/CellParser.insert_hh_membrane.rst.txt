@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.insert_hh_membrane`
+
+CellParser.insert_hh_membrane
+=============================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.insert_hh_membrane(label)
+
+   Set up a Hodgkin-Huxley membrane with default values.
+
+   Sets up the cell structure :paramref:`label` with a Hodgkin-Huxley membrane that has the following properties:
+
+   - :math:`\bar{g}_{L} = 0.0003 \, S/cm^2`
+   - :math:`E_{L} = -54.3 \, mV`
+   - Soma:
+
+       - :math:`\bar{g}_{Na} = 0.003 \, S/cm^2`
+       - :math:`\bar{g}_{K} = 0.01 \, S/cm^2`
+
+   - Axon:
+
+       - :math:`\bar{g}_{Na} = 3.0 \, S/cm^2`
+       - :math:`\bar{g}_{K} = 0.0 \, S/cm^2`
+
+   - Dendrite:
+
+       - :math:`\bar{g}_{Na} = 0.003 \, S/cm^2`
+       - :math:`\bar{g}_{K} = 0.01 \, S/cm^2`
+
+

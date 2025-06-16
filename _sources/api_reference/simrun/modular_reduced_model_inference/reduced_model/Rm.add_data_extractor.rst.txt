@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.add_data_extractor`
+
+Rm.add_data_extractor
+=====================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_data_extractor(name, data_extractor, setup=True)
+
+   Add a data extractor to the reduced model.
+
+   Data extractors are used to preprocess the data so that the strategies can use them.
+
+   :Parameters: * **name** (*str*) -- Name of the data extractor
+                * **data_extractor** (:py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor`) -- Data extractor object
+                * **setup** (*bool*) -- If True, run the setup method of the data extractor
+
+   .. seealso:: :py:mod:`~simrun.modular_reduced_model_inference.data_extractor` for available data extractors.
+

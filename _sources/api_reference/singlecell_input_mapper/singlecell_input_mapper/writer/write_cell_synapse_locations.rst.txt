@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`
+
+
+.. title:
+
+write_cell_synapse_locations
+============================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
+
+   Write a :ref:`syn\_file\_format` file, containing all synapses and their corresponding cellID, sectionID and x.
+
+   The locations of each synapse are coded by section ID and section x of cell with ID :paramref:`cellID`.
+
+   :Parameters: * **fname** (*str*) -- Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
+                * **synapses** (*dict*) -- Dictionary containing synapse objects. Keys are synapse types, values are lists of synapse objects
+                * **cellID** (*str*) -- ID of the cell the synapses belong to
+
+   :raises RuntimeError: If any of the input arguments is `None`
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

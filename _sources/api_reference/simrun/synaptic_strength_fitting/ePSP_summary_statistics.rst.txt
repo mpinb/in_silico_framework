@@ -1,0 +1,41 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`
+
+
+.. title:
+
+ePSP_summary_statistics
+=======================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.ePSP_summary_statistics(vt, threashold=0.1, tPSPStart=100.0)
+
+   Calculate summary statistics of the PSP voltage and timing.
+
+   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.get\_voltage\_traces`.
+                * **threashold** (*float*) -- Minimum voltage deflection to be considered as a response.
+                * **tPSPStart** (*float*) -- Timepoint of synapse activation (ms).
+
+   :returns: A table of summary statistics.
+   :rtype: pd.DataFrame
+
+   Example::
+
+       >>> vt = psp.get\_voltage\_and\_timing(method='dynamic\_baseline')
+       >>> ePSP\_summary\_statistics(vt)
+                           epspMean   epspStd   epspMed   epspMin   epspMax      tMean      tStd    tMed
+       celltype gAMPA gNMDA
+       L2      0.5   0.5   0.288331  0.141456  0.262698  0.100779  1.440870  15.509268  2.305882  15.050
+               1.0   1.0    0.538904  0.273115  0.500306  0.129087  2.739804  15.696267  2.420884  15.150
+               1.5   1.5    0.773226  0.395746  0.707955  0.181199  3.927223  15.741435  2.441578  15.175
+               2.0   2.0    0.994781  0.513567  0.891020  0.108587  5.031582  15.881431  2.539182  15.350
+       ...
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

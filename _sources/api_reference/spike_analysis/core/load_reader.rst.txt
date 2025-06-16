@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.load_reader`
+
+
+.. title:
+
+load_reader
+===========
+
+
+.. py:function:: spike_analysis.core.load_reader(dict_)
+
+   Load a reader object from a dictionary.
+
+   :Parameters: **dict\_** (*dict*) -- A dictionary containing the attributes of the reader object.
+
+   :returns: A reader object.
+   :rtype: object
+
+   :raises NotImplementedError: If the class of the reader object is not recognized. Currently, only :py:class:`spike\_analysis.core.ReaderSmr` is supported.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

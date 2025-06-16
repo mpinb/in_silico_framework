@@ -1,0 +1,85 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+_Strategy
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _get_score <_Strategy._get_score>
+   setup <_Strategy.setup>
+   _setup <_Strategy._setup>
+   _get_x0 <_Strategy._get_x0>
+   set_split <_Strategy.set_split>
+   get_score_static <_Strategy.get_score_static>
+   get_y_static <_Strategy.get_y_static>
+   _objective_function_static <_Strategy._objective_function_static>
+   add_solver <_Strategy.add_solver>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.strategy._Strategy(name)
+   
+   Strategy base class.
+
+   This class is used to define a strategy for the optimizer. Each strategy sets up all necessary components
+   to define a single cost function :py:meth:`get_score`.
+   This cost function is used by a :py:mod:`simrun.modular_reduced_model_inference.solver`
+   to optimize the parameters of the strategy.
+
+   Each child class must implement a ``_get_score`` class method.
+   These are used here to construct :py:meth:`~simrun.modular_reduced_model_inference._Strategy.get_score`.
+   It is this `get_score` method that is optimized during optimization.
+
+   As a function of the parameters, compute a value for each trial.
+   The optimizer will optimize for this value (highest AUROC score)
+
+   Needs some repr for input data.
+
+   E.G. A strategy that needs to optimize for AP refractory, then the Strategy needs to incorporate this data
+
+   :Parameters: **name** (*str*) -- The name of the strategy.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_get_score <simrun.modular_reduced_model_inference.strategy._Strategy._get_score>`\ (x)
+        - Compute the score for the given parameters x.
+      * - :py:obj:`setup <simrun.modular_reduced_model_inference.strategy._Strategy.setup>`\ (data, DataSplitEvaluation)
+        - Setup the strategy with the given data.
+      * - :py:obj:`_setup <simrun.modular_reduced_model_inference.strategy._Strategy._setup>`\ ()
+        - Strategy-specific setup.
+      * - :py:obj:`_get_x0 <simrun.modular_reduced_model_inference.strategy._Strategy._get_x0>`\ ()
+        - Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+      * - :py:obj:`set_split <simrun.modular_reduced_model_inference.strategy._Strategy.set_split>`\ (split, setup)
+        - Set the split for this strategy.
+      * - :py:obj:`get_score_static <simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static>`\ (\_get\_score, x, cupy\_split)
+        - :summarylabel:`static` Convert the strategy-specific ``_get_score`` method to a static method.
+      * - :py:obj:`get_y_static <simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static>`\ (y, numpy\_split)
+        - :summarylabel:`static` Fetch the labels for the given split.
+      * - :py:obj:`_objective_function_static <simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static>`\ (get\_score, get\_y, x)
+        - :summarylabel:`static` Compute the objective value for the given parameters x.
+      * - :py:obj:`add_solver <simrun.modular_reduced_model_inference.strategy._Strategy.add_solver>`\ (solver, setup)
+        - Add a solver to the strategy.
+

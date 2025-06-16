@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static`
+
+_Strategy.get_score_static
+==========================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static(_get_score, x, cupy_split=None)
+   :staticmethod:
+
+
+   Convert the strategy-specific ``_get_score`` method to a static method.
+
+   :Parameters: * **_get_score** (*callable*) -- The strategy-specific ``_get_score`` method.
+                * **x** (*array*) -- The input array.
+                * **cupy_split** (*array*) -- The array splits.
+
+   :returns: The score.
+   :rtype: array
+

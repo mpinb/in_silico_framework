@@ -1,0 +1,44 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner_Setup`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Combiner_Setup
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   append <Combiner_Setup.append>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.combiner.Combiner_Setup
+   
+   Setup class for the :py:class:`~biophysics_fitting.combiner.Combiner` class.
+   Keeps track of feature combinations and their names.
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`append <biophysics_fitting.combiner.Combiner_Setup.append>`\ (name, combination)
+        - Appends feature names and combinations to the Combiner_Setup object.
+

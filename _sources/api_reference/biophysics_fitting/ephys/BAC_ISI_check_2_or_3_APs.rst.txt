@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_ISI_check_2_or_3_APs`
+
+
+.. title:
+
+BAC_ISI_check_2_or_3_APs
+========================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_ISI_check_2_or_3_APs(t, v, thresh=None)
+
+   Check if there are 2 or 3 action potentials (APs) in a given voltage trace for a BAC stimulus.
+
+   :Parameters: * **t** (*array*) -- Array of time values.
+                * **v** (*array*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Spike threshold. Defaults to None.
+
+   :returns: True if there are 2 or 3 APs, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,68 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+CellParser
+==========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   spatialgraph_to_cell <CellParser.spatialgraph_to_cell>
+   get_cell <CellParser.get_cell>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser(hocFilename='')
+   
+   Extract cell morphology from an AMIRA hoc file.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`single_cell_parser.cell_parser.CellParser`.
+      This is a leightweight dataclass specialized for use with :py:mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
+      and does not contain any biophysical details.
+
+   :Parameters: **hocFilename** (*str*) -- File name of the hoc file. Default: ''.
+
+   :Attributes:
+
+   .. attribute:: hoc_fname
+
+      File name of the hoc file.
+
+      :type: str
+
+   .. attribute:: cell
+
+      Cell object.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`spatialgraph_to_cell <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell>`\ ()
+        - Set up a cell object from an AMIRA hoc file.
+      * - :py:obj:`get_cell <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell>`\ ()
+        - Returns cell if it is set up
+

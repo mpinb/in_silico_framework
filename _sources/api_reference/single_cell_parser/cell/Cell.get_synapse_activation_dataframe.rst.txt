@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.get_synapse_activation_dataframe`
+
+Cell.get_synapse_activation_dataframe
+=====================================
+
+.. py:method:: single_cell_parser.cell.Cell.get_synapse_activation_dataframe(max_spikes=20, sim_trial_index=0)
+
+   Get a :ref:`syn_activation_format` dataframe.
+
+   The :ref:`syn_activation_format` dataframe contains:
+
+   - Synapse ID
+   - Synapse type (i.e. presynaptic origin)
+   - Synapse location: soma distance, section ID, section point ID, and dendrite label of the synapse
+   - Activation times
+   - The simulation trial index
+
+   :Parameters: * **max_spikes** (*int, optional*) -- The maximum number of spikes (i.e. synaptic activations, not necessarily the same as spikes of the presynaptic cell) to write out. Defaults to 20.
+                * **sim_trial_index** (*int, optional*) -- The index of the simulation trial. Defaults to 0.
+
+   :returns: The synapse activation dataframe.
+   :rtype: pandas.DataFrame
+

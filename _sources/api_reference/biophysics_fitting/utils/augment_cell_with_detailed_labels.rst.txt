@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.augment_cell_with_detailed_labels`
+
+
+.. title:
+
+augment_cell_with_detailed_labels
+=================================
+
+
+.. py:function:: biophysics_fitting.utils.augment_cell_with_detailed_labels(cell)
+
+   Augment section labels to discriminate the tuft, oblique, trunk and basal dendrites.
+
+   Assigning these labels to section.label\_detailed
+
+   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+
+   :returns: None
+
+   .. note:: This method is specific to L5PT neurons.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

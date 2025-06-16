@@ -1,0 +1,41 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_summary_statistics`
+
+PSPs.get_summary_statistics
+===========================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_summary_statistics(method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
+
+   Calculate summary statistics of the PSP voltage and timing.
+
+   :Parameters: * **method** (*str*) --
+
+                  ``dynamic_baseline``: a simulation without any synaptic activation is
+                      substracted from a simulation with cell activation. The maximum and
+                      timepoint of maximum is returned
+                  ``constant_baseline``: the voltage at :math:`t = 110ms` (i.e. directly before
+                      synapse activation) is considered as baseline and substracted
+                      from all voltages at all timepoints.
+                      The maximum and timepoint of the maximum after :math:`t = 110ms` is
+                      returned.
+                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+                * **ePSP_summary_statistics_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
+                  Options: ("threashold", "tPSPStart")
+
+   :returns: A table of summary statistics.
+   :rtype: pd.DataFrame
+
+   Example::
+
+       >>> psp.get_summary_statistics(method='dynamic_baseline')
+                           epspMean   epspStd   epspMed   epspMin   epspMax      tMean      tStd    tMed
+       celltype gAMPA gNMDA
+       L2      0.5   0.5   0.288331  0.141456  0.262698  0.100779  1.440870  15.509268  2.305882  15.050
+               1.0   1.0    0.538904  0.273115  0.500306  0.129087  2.739804  15.696267  2.420884  15.150
+               1.5   1.5    0.773226  0.395746  0.707955  0.181199  3.927223  15.741435  2.441578  15.175
+               2.0   2.0    0.994781  0.513567  0.891020  0.108587  5.031582  15.881431  2.539182  15.350
+       ...
+
+

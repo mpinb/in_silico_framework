@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_realization`
+
+NetworkMapper._create_anatomical_realization
+============================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_realization(cellTypeSynapseDensities)
+
+   Create a single anatomical realization of synapses.
+
+   This is the main method for computing synapse/connectivity realization.
+   Given one or more pre-computed density fields of synapses (see e.g.
+   :py:meth:`~_precompute_anatomical_area_celltype_synapse_densities`), this method
+   creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+   from this synapse density field, and assigns synapses.
+
+   Returns anatomical connectivity map.
+

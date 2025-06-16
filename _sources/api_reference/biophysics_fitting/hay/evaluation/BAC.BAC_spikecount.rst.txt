@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC.BAC_spikecount`
+
+BAC.BAC_spikecount
+==================
+
+.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_spikecount(voltage_traces)
+
+   Get the number of spikes in the somatic voltage trace.
+
+   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: Dictionary mapping ``".raw"`` to the number of spikes in the somatic voltage trace.
+   :rtype: dict
+

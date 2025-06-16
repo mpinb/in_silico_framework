@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.remove_synapses`
+
+Cell.remove_synapses
+====================
+
+.. py:method:: single_cell_parser.cell.Cell.remove_synapses(preType=None)
+
+   Remove synapses from the cell object of type :paramref:`preType`.
+
+   :Parameters: **preType** (*str, optional*) -- The type of synapses to remove.
+                If None, all synapses are removed.
+                If 'All' or 'all', all synapses are removed.
+                Otherwise, only synapses of the specified type are removed.
+                Defaults to None.
+

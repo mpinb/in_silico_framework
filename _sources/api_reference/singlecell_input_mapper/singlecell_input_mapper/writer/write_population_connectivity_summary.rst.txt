@@ -1,0 +1,43 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_population_connectivity_summary`
+
+
+.. title:
+
+write_population_connectivity_summary
+=====================================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_population_connectivity_summary(fname=None, populationDistribution=None)
+
+   Write a summary of populations of connectivity realizations to a file.
+
+   The populationDistribution can be calculated with :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_compute\_parameter\_distribution`
+   For each cell type, this method writes a summary on the same attributes for each cell structure as :py:meth:`write\_sample\_connectivity\_summary`, namely:
+
+   - Presynaptic cell type
+   - Number of synapses
+   - Mean path length to soma
+   - SD path length to soma
+   - Connected presynaptic cells
+   - Total presynaptic cells
+   - Convergence
+   - Number of synapses
+
+   In addition, however, it also writes out the standard deviation of these values, taken across network realizations.
+
+   :Parameters: * **fname** (*str*) -- Name of the output file
+                * **populationDistribution** (*dict*) -- Dictionary containing the summary data for each cell type
+                  Must contain at least a key for each presynaptic cell type.
+                  Values are lists of the form [mean, std] for each of the attributes mentioned above.
+
+   :returns: None. Writes the results to disk.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

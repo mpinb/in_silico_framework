@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result`
+
+DataSplitEvaluation.add_result
+==============================
+
+.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result(solver, x)
+
+   Save the optimization result.
+
+   All relevant info on which solver and strategy was used is then available under the attributes:
+   ``strategy``, ``solver``, and ``run``.
+
+   :Parameters: * **solver** (:py:class:`~simrun.modular_reduced_model_inference.solver._Solver`) -- Solver object
+                * **x** (*dict*) -- Optimization result
+

@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level`
+
+DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level
+====================================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level(key)
+   :staticmethod:
+
+
+   Get the string index of the database key that relects the spatial dimension
+
+   :Parameters: **key** (*tuple*) -- key to access the data in the :py:class:`DataBase`
+
+   :returns: index of the spatial dimension in the key
+   :rtype: int
+
+   .. rubric:: Example
+      :class: example
+
+   >>> key = ('sub_database', 'spatiotemporal_synapse_activation__binned_somadist__100to150__group1')
+   >>> _get_spatial_bin_level(key)
+   1
+

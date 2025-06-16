@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_summary_statistics`
+
+
+.. title:
+
+get_summary_statistics
+======================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.get_summary_statistics(self, method=&#39;dynamic_baseline&#39;, merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
+
+   Calculate summary statistics of the EPSPs.
+
+   :Parameters: * **method** (*str*) -- ``dynamic\_baseline`` or ``constant\_baseline``.
+                * **merge\_celltype\_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic\_strength\_fitting.merge\_celltypes`.
+                * **ePSP\_summary\_statistics\_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic\_strength\_fitting.ePSP\_summary\_statistics`.
+
+   :returns: A table of summary statistics.
+   :rtype: pd.DataFrame
+
+   .. seealso:: :py:meth:`~simrun.synaptic\_strength\_fitting.ePSP\_summary\_statistics` for which statistics are calculated.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

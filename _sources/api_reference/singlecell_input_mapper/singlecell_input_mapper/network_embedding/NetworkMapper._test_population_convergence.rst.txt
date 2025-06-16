@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence`
+
+NetworkMapper._test_population_convergence
+==========================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
+
+   Test how many samples are needed to get a representative sample.
+
+   Tests how many network realizations need to be sampled in order
+   to get a reasonable estimate of the variability of connectivity
+   parameters.
+
+   :Parameters: * **nrOfSamples** (*int*) -- Number of network realizations.
+                * **sampleConnectivityData** (*list*) -- List of network realizations.
+                * **postCellName** (*str*) -- Name of the postsynaptic cell model.
+

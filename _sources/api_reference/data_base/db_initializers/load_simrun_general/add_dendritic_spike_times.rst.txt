@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
+
+
+.. title:
+
+add_dendritic_spike_times
+=========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.add_dendritic_spike_times(db, dendritic_spike_times_threshold=-30.0)
+
+   Add dendritic spike times to the database.
+
+   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database to which the data should be added.
+                * **dendritic\_spike\_times\_threshold** (*float, optional*) -- Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
+                  See also: :py:meth:`~data\_base.analyze.spike\_detection`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

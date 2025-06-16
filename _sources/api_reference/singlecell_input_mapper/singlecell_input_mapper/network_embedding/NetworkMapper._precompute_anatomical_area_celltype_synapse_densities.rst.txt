@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities`
+
+NetworkMapper._precompute_anatomical_area_celltype_synapse_densities
+====================================================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities(boutonDensities)
+
+   Compute synapse densities of all presynaptic cell types in all anatomical_areas
+
+   Computes all possible synapse densities that have non-zero overlap
+   with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
+

@@ -1,0 +1,63 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.find_files_and_order_them`
+
+
+.. title:
+
+find_files_and_order_them
+=========================
+
+
+.. py:function:: visualize.utils.find_files_and_order_them(files, files_format=&#39;.png&#39;)
+
+   Find files in a list of directories or a directory and order them.
+
+   These files are in order, and takes into account
+   if the name of the file is a number (1 would go before 10 even if the number of the file is not 0-padded).
+   If the files param was a list of directories, the files are in order within each directory but the
+   directories order is maintained.
+
+   :Parameters: * **files** (*list | str*) -- list of files, list of directories, or a directory.
+                * **files\_format** (*str*) -- format of the files to get (e.g. '.png', '.jpg')
+
+   :returns: List of the files contained in the files argument.
+   :rtype: list
+
+   .. rubric:: Example
+      :class: example
+
+   If files is a list of directories [dir\_a,  dir\_b, dir\_c] containing the following files:
+
+   .. list-table:: Example of directory contents
+      :header-rows: 1
+
+      * - dir\_a
+        - dir\_b
+        - dir\_c
+      * - 100
+        - world
+        - C
+      * - 10
+        - 30
+        - B
+      * - 2
+        - 5
+        - A
+      * - 1
+        - hello
+        - 70
+      * - file
+        - 200
+        - 9
+
+   The result would be:
+   1, 2, 10, 100, file, 5, 30, 200, hello, world, 9, 70, A, B, C
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

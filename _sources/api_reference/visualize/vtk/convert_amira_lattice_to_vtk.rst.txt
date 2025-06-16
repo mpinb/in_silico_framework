@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.convert_amira_lattice_to_vtk`
+
+
+.. title:
+
+convert_amira_lattice_to_vtk
+============================
+
+
+.. py:function:: visualize.vtk.convert_amira_lattice_to_vtk(surf_file, outname=&#39;lattice&#39;, outdir=&#39;.&#39;)
+
+   Convert an AMIRA lattice file to vtk structured points.
+
+   :Parameters: * **surf\_file** (*str*) -- Path to the AMIRA lattice file.
+                * **outname** (*str, optional*) -- Name of the output file. Defaults to "lattice".
+                * **outdir** (*str, optional*) -- Directory to save the file to. Defaults to ".".
+
+   :returns: None. Writes out a .vtk file to the specified directory.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

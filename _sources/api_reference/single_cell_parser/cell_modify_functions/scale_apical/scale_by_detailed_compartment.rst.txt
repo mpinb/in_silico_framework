@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment`
+
+
+.. title:
+
+scale_by_detailed_compartment
+=============================
+
+
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment(cell, **kwargs)
+
+   Scales subcellular compartments based on ``detailed\_labels``.
+
+   If not yet assigned, detailed labels are assigned by :py:meth:`biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`.
+   and include ``basal``, ``trunk``, ``tuft``, and ``oblique``.
+
+   .. attention::
+
+      For non-L5PT neurons or L5PT neurons from any other brain area than barrel cortex,
+      make sure :py:meth:`~biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`
+      assigns labels as you want them to be.
+      
+      Alternatively, assign them manually with the :py:attr:`biophysics\_fitting.cell.Cell.sections.label\_detailed` attribute.
+
+   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+                * **\*\*kwargs** (*dict*) -- Detailed lables with associated scaling factors.
+
+   :returns: The scaled cell.
+   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

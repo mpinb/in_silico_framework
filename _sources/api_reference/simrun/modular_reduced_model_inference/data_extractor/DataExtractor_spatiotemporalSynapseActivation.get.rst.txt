@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get`
+
+DataExtractor_spatiotemporalSynapseActivation.get
+=================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get()
+
+   Get the spatiotemporal input patterns.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> data = de.get()
+   >>> data.keys()
+   ['group1', 'group2']
+   >>> data['group1'].shape
+   (n_trials, n_time, n_space)
+
+   :returns: dictionary with groups as keys and spatiotemporal inputpatterns as keys.
+   :rtype: dict
+

@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._data_per_section_to_data_per_point`
+
+CMVDataParser._data_per_section_to_data_per_point
+=================================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._data_per_section_to_data_per_point(data_per_section)
+
+   Unravel a list of lists of data per section to a flat list of data per point.
+
+   Rather than having a nested list of data per section, this method flattens the list to a list of data per point.
+
+   :Parameters: **data_per_section** (*list*) -- List of lists of data per section. Each element of the list is a list point data for that section. Shape: (n_sections, n_points_in_section)
+
+   :Parameters: **list** -- List of data per point. Shape: (n_points,)
+

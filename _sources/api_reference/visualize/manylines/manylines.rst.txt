@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.manylines` ❭ :mod:`~visualize.manylines.manylines`
+
+
+.. title:
+
+manylines
+=========
+
+
+.. py:function:: visualize.manylines.manylines(df, ax=None, axis=None, colormap=None, groupby_attribute=None, figsize=(15, 3), returnPixelObject=False, scheduler=None)
+
+   Parallelizes the plot of many lines
+
+   :Parameters: * **df** (*pd.DataFrame*) -- the dataframe containing voltage traces,
+                * **ax** (*matplotlib.pyplot.Axes*) -- an ax instance.
+                * **axis** (*list*) -- the ax limits, e.g. [1, 10, 1, 10]
+                * **colormap** (*dict*) -- a colormap, mapping values for :paramref:groupby\_attribute to colors.
+                * **groupby\_attribute** (*str*) -- column name to group by.
+                * **figsize** (*tupe(int)*) -- the size of the Figure
+                * **returnPixelObject** (*bool*) -- Whether or not to return as a PixelObject
+                * **scheduler** (*distributed.client.Client | str, optional*) -- a distributed scheduler.
+
+   :returns: Figure object containing all lines defined in :paramref:df
+   :rtype: fig (matplotlib.pyplot.Figure)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

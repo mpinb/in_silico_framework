@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes`
+
+
+.. title:
+
+BAC_caSpike_height_check_gt2_Na_spikes
+======================================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes(t, v, v_dend, thresh=None)
+
+   Checks if the number of spikes in the voltage trace is greater than or equal to 2.
+
+   :Parameters: * **t** (*array*) -- Array of time values.
+                * **v** (*array*) -- Array of voltage values.
+                * **v\_dend** (*array*) -- Array of dendritic voltage values.
+                * **thresh** (*float, optional*) -- Spike detection threshold. Defaults to None.
+
+   :returns: True if the number of spikes is greater than or equal to 2, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

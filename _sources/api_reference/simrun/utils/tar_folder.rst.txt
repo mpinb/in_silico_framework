@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.tar_folder`
+
+
+.. title:
+
+tar_folder
+==========
+
+
+.. py:function:: simrun.utils.tar_folder(source_dir, delete_folder=True)
+
+   Compress a folder to ``.tar`` format.
+
+   :Parameters: * **source\_dir** (*str*) -- The path to the folder to compress.
+                * **delete\_folder** (*bool*) -- If ``True``, the original folder will be deleted after compression.
+
+   :returns: Compresses the folder in place.
+   :rtype: None
+
+   :raises RuntimeError: If the compression command fails
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

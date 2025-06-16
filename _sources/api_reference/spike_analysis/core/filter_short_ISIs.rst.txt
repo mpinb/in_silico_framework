@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.filter_short_ISIs`
+
+
+.. title:
+
+filter_short_ISIs
+=================
+
+
+.. py:function:: spike_analysis.core.filter_short_ISIs(t, tdelta=0.0)
+
+   Filters out any events that occur in an interval shorter than tdelta.
+
+   :Parameters: * **t** (*list*) -- A list containing timepoints of events.
+                * **tdelta** (*float, optional*) -- Minimal interval between events. Defaults to 0.
+
+   :returns: A list containing filtered spike times.
+   :rtype: list
+
+   .. rubric:: Example
+      :class: example
+
+   >>> filter\_short\_ISIs([1,2,3,4,5], tdelta=1.5)
+   [1, 3, 5]
+   >>> filter\_short\_ISIs([1,2,3,4,5], tdelta=2)
+   [1, 3, 5]
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

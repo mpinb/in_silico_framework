@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`
+
+
+.. title:
+
+BAC_ISI_check_repolarization
+============================
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_ISI_check_repolarization(t, v, stim_end=None, repolarization=None)
+
+   Checks if the membrane potential has repolarized to a certain value after a stimulus for a BAC stimulus.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of membrane potential values.
+                * **stim\_end** (*float, optional*) -- Time at which the stimulus ends. Defaults to None.
+                * **repolarization** (*float, optional*) -- Value to which the membrane potential should repolarize. Defaults to None.
+
+   :returns: True if the membrane potential has repolarized to the specified value, False otherwise.
+   :rtype: bool
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.display_animation_from_images`
+
+
+.. title:
+
+display_animation_from_images
+=============================
+
+
+.. py:function:: visualize.utils.display_animation_from_images(files, interval=10, style=False, animID=None, embedded=False)
+
+   Creates an IPython animation out of files specified in a globstring or a list of paths.
+
+   :Parameters: * **files** (*list | str*) -- list of images, a directory with images or a list of directories with images
+                * **interval** (*int | float*) -- time interval between frames in ms.
+                * **style** (*bool*) -- whether to use the default style or not.
+                * **animID** (*int*) -- unique integer to identify the animation in the javascript environment of IPython
+                * **embedded** (*bool*) -- whether to embed the images in the html file or not.
+
+   :returns: None. Displays the animation in the notebook.
+
+   .. attention::
+
+      The paths need to be relative to the location of the ipynb / html file, since
+      the are resolved in the browser and not by python
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

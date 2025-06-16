@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution._convert_con_fns_to_reldb`
+
+
+.. title:
+
+_convert_con_fns_to_reldb
+=========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_con_fns_to_reldb(con_content, syn_fn_map, con_fn)
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

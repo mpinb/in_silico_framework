@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField.get_scalar`
+
+ScalarField.get_scalar
+======================
+
+.. py:method:: single_cell_parser.scalar_field.ScalarField.get_scalar(xyz)
+
+   Fetch the scalar value of the voxel containing the point xyz.
+
+   .. warning:: Returns 0 if :paramref:`xyz` is outside the bounding box.
+
+   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+
+   :returns: The scalar value of the voxel containing the point, 0 if outside bounding box.
+   :rtype: float
+

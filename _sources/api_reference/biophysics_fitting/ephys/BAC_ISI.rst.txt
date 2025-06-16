@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_ISI`
+
+
+.. title:
+
+BAC_ISI
+=======
+
+
+.. py:function:: biophysics_fitting.ephys.BAC_ISI(t, v, thresh=None)
+
+   Computes the Inter-Spike Interval (ISI) of a voltage trace for a BAC stimulus.
+
+   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
+                * **v** (*numpy.ndarray*) -- Array of voltage values.
+                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+
+   :returns: Burst Averaged Inter-Spike Interval (BAC ISI) value.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

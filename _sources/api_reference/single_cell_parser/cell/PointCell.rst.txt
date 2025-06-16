@@ -1,0 +1,102 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PointCell
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   is_active <PointCell.is_active>
+   play <PointCell.play>
+   append <PointCell.append>
+   compute_spike_train_times <PointCell.compute_spike_train_times>
+   _next_interval <PointCell._next_interval>
+   _add_synapse_pointer <PointCell._add_synapse_pointer>
+   turn_off <PointCell.turn_off>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.cell.PointCell(spikeTimes=None)
+   
+   Cell without morphological or electrophysiological features.
+
+   Used as a presynaptic spike source for synapses.
+   Stores spike times in :py:class:`neuron.h.Vector` and :py:class:`numpy.array`.
+   Requires :py:class:`nrn.h.VecStim` to trigger spikes at specified times.
+
+   :Parameters: **spikeTimes** (*list*) -- List of precomputed spike times.
+                Used to initialize release sites with precomputed release times from presynaptic spike times (see :py:meth:`single_cell_parser.network.activate_functional_synapse`)
+                Defaults to None.
+
+   :Attributes:
+
+   .. attribute:: spikeTimes
+
+      list of spike times. Default=None.
+
+      :type: list
+
+   .. attribute:: spikeVec
+
+      hoc Vector containing spike times
+
+      :type: :py:class:`neuron.h.Vector`
+
+   .. attribute:: spikes
+
+      VecStim object to use as a spike source in :py:class:`~neuron.h.NetCon` objects (see https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html).
+      These are initialized from :paramref:`spikeTimes`.
+
+      :type: :py:class:`neuron.h.VecStim`
+
+   .. attribute:: playing
+
+      flag indicating whether the :py:class:`~neuron.h.VecStim` spike source is playing
+
+      :type: bool
+
+   .. attribute:: synapseList
+
+      list of synapses connected to this cell.
+
+      :type: list
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`is_active <single_cell_parser.cell.PointCell.is_active>`\ ()
+        - Check if the point cell is active.
+      * - :py:obj:`play <single_cell_parser.cell.PointCell.play>`\ ()
+        - Activate point cell
+      * - :py:obj:`append <single_cell_parser.cell.PointCell.append>`\ (spikeT, spike\_source)
+        - Append an additional spike time to the presynaptic cell.
+      * - :py:obj:`compute_spike_train_times <single_cell_parser.cell.PointCell.compute_spike_train_times>`\ (interval, noise, start, stop, nSpikes, spike\_source)
+        - Compute a simple spike train for the presynaptic cell.
+      * - :py:obj:`_next_interval <single_cell_parser.cell.PointCell._next_interval>`\ ()
+        - Calculate the next spike interval :math:`t` for a simple spike train.
+      * - :py:obj:`_add_synapse_pointer <single_cell_parser.cell.PointCell._add_synapse_pointer>`\ (synapse)
+        - Add a reference to a synapse connected to this cell.
+      * - :py:obj:`turn_off <single_cell_parser.cell.PointCell.turn_off>`\ ()
+        - Turns off the spike source.
+

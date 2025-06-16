@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderSmr` ❭ :mod:`~spike_analysis.core.ReaderSmr.get_stim_times`
+
+ReaderSmr.get_stim_times
+========================
+
+.. py:method:: spike_analysis.core.ReaderSmr.get_stim_times()
+
+   Get the times of the stimuli.
+
+   :returns: A list containing the times of the stimuli.
+   :rtype: list
+

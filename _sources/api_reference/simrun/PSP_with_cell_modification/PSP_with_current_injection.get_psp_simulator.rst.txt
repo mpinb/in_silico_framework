@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator`
+
+PSP_with_current_injection.get_psp_simulator
+============================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator(gExRange=[1.0], exc_inh='exc', mode='synapses')
+
+   Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
+
+   This method initializes a PSPs object with the given parameters to simulate excitatory or inhibitory postsynaptic potentials.
+
+   :Parameters: * **mode** (*str*) -- Mode of the simulation. Options:
+                * **- ``'synapses'`` to activate individual synapses** (*default*)
+                * **- ``'cells'`` to activate individual cells**
+
+   :returns: Object to simulate PSPs
+   :rtype: PSPs
+

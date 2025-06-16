@@ -1,0 +1,73 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+SpikeTimesAnalysis
+==================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   apply_extractor <SpikeTimesAnalysis.apply_extractor>
+   get <SpikeTimesAnalysis.get>
+   get_by_trial <SpikeTimesAnalysis.get_by_trial>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.SpikeTimesAnalysis(spike_times_object, default_event_analysis=[], periods={})
+   
+   Class for applying event_analysis routines on a spike times dataframe.
+
+   :Parameters: * **spike_times_object** (*object*) -- The spike times object.
+                * **default_event_analysis** (*list*) -- A list of event analysis routines.
+                * **periods** (*dict*) -- A dictionary containing period labels as keys and (period_start, period_end) as values.
+
+   :Attributes:
+
+   .. attribute:: spike_times_object
+
+      The spike times object.
+
+      :type: object
+
+   .. attribute:: _db
+
+      The database containing the spike times and the event analysis routines.
+
+      :type: dict
+
+   .. attribute:: periods
+
+      A dictionary containing period labels as keys and (period_start, period_end) as values.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`apply_extractor <spike_analysis.core.SpikeTimesAnalysis.apply_extractor>`\ (sta\_plugin, name)
+        - Applies an event analysis routine.
+      * - :py:obj:`get <spike_analysis.core.SpikeTimesAnalysis.get>`\ (key)
+        - Get a key from the database.
+      * - :py:obj:`get_by_trial <spike_analysis.core.SpikeTimesAnalysis.get_by_trial>`\ (key)
+        - Get spike information by trial.
+

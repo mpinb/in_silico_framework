@@ -1,0 +1,24 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution._convert_netp_fns_to_reldb`
+
+
+.. title:
+
+_convert_netp_fns_to_reldb
+==========================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map)
+
+   Convert all paths in a :ref:`network\_parameters\_format` file to point to a hash filename.
+
+   .. seealso:: :py:meth:`~data\_base.dbopen.resolve\_netp\_reldb\_paths` to resolve the relative database paths in the network parameter file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

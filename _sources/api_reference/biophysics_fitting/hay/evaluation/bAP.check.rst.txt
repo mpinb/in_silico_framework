@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP.check`
+
+bAP.check
+=========
+
+.. py:method:: biophysics_fitting.hay.evaluation.bAP.check(out, voltage_traces)
+
+   Check for problems in the voltage trace.
+
+   This should be called after evaluating the voltage traces.
+   it is e.g. the last step in :py:meth:`get`, where it adds the checks to the output dictionary.
+
+   This method checks if the voltage trace:
+
+   - has at least 1 AP present.
+   - properly returns to rest.
+   - has no spikes before stimulus onset (in soma or dendrite).
+   - has its last spike before the deadline.
+
+   :Parameters: * **out** -- dictionary with the evaluation metrics
+                * **voltage_traces** -- dictionary with the voltage traces of the soma and dendrite.
+
+   :returns: dictionary with the evaluation metrics, containing the raw values, normalized values, and checks.
+   :rtype: dict
+

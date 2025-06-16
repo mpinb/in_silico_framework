@@ -1,0 +1,93 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Dendrogram
+==========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   plot <Dendrogram.plot>
+   get_parent_by_name <Dendrogram.get_parent_by_name>
+   _plot_dendrogram <Dendrogram._plot_dendrogram>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.dendrogram.Dendrogram(cell)
+   
+   Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+
+   Dendrograms are schematic representations of neuron morphologies.
+
+   Example::
+
+       >>> d = Dendrogram(cell)
+       >>> ax = d.plot()
+       >>> ax.set_xlabel('Distance from soma ($\mu m$)')
+
+   .. figure:: ../../../_static/_images/dendrogram.png
+
+   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+
+   :Attributes:
+
+   .. attribute:: cell
+
+      The cell object.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell`
+
+   .. attribute:: dendrogram_db
+
+      A list of :py:class:`_DendrogramSection` objects.
+
+      :type: list
+
+   .. attribute:: dendrogram_db_by_name
+
+      A dictionary of dendrogram sections by name.
+
+      :type: dict
+
+   .. attribute:: dendrogram_db_by_sec_id
+
+      A dictionary of dendrogram sections by section ID.
+
+      :type: dict
+
+   .. attribute:: main_bifur_dist
+
+      The distance to the main bifurcation, in :math:`\mu m`.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`plot <visualize.dendrogram.Dendrogram.plot>`\ (ax)
+        - Plot the dendrogram.
+      * - :py:obj:`get_parent_by_name <visualize.dendrogram.Dendrogram.get_parent_by_name>`\ (name)
+        - Get the parent of a dendrogram section by its name.
+      * - :py:obj:`_plot_dendrogram <visualize.dendrogram.Dendrogram._plot_dendrogram>`\ (ax, colormap)
+        - Plot the dendogram on an axes object.
+

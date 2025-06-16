@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_scalar_data_from_keyword`
+
+CMVDataParser._calc_scalar_data_from_keyword
+============================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_scalar_data_from_keyword(keyword, time_point, return_as_color=False, color_dict={})
+
+   Returns a scalar data array based on some keyword (ion dynamics or membrane voltage).
+
+   If :paramref:`return_as_color` is True (default), the returned array is a map from the input keyword to a color
+   Otherwise, it is the raw data, not mapped to a colorscale. Which data is returned (mapped to colors or not)
+   depends on the keyword (case-insensitive):
+
+   - ("voltage", "vm"): voltage
+   - Some rangeVar: ion dynamics. See self.available_scalars for possibilities.
+   - "dendrites", "dendritic group": dendritic groups. Requires a color_dict to map section labels to colors.
+   - regular string: will try to convert to amatplotlib accepted color string
+
+   :Parameters: * **keyword** (*str*) -- keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+                * **time_point** (*float*) -- time point at which we want to retrieve the data.
+                * **return_as_color** (*bool*) -- whether to return the data as a color. Default is ``False``.
+                * **color_dict** (*dict*) -- dictionary mapping section labels to colors. Only used if keyword is "dendrites" or "dendritic group".
+
+   :returns: list of scalar data. If :paramref:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
+   :rtype: list
+

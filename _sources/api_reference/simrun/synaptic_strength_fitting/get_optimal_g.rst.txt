@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_optimal_g`
+
+
+.. title:
+
+get_optimal_g
+=============
+
+
+.. py:function:: simrun.synaptic_strength_fitting.get_optimal_g(self, measured_data, method=&#39;dynamic_baseline&#39;, threashold=0.1)
+
+   Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
+
+   For each celltype (or merged celltype), the optimal synaptic conductance is calculated
+   by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
+   This linear interpolation is cross-referenced with empirically observed statistics to infer the optimal synaptic conductance.
+
+   :Parameters: * **measured\_data** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
+                  Must contain the keys: ``[EPSP\_mean\_measured, EPSP\_median\_measured, EPSP\_max\_measured]``.
+                * **method** (*str*) -- ``dynamic\_baseline`` or ``constant\_baseline``.
+                * **threashold** (*float*) -- The threashold to consider a celltype as excitatory.
+
+   :returns: A table of the optimal synaptic conductance for each celltype.
+   :rtype: pd.DataFrame
+
+   .. seealso:: :py:meth:`~simrun.synaptic\_strength\_fitting.calculate\_optimal\_g`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

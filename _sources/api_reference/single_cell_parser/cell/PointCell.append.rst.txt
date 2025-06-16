@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell.append`
+
+PointCell.append
+================
+
+.. py:method:: single_cell_parser.cell.PointCell.append(spikeT, spike_source=None)
+
+   Append an additional spike time to the presynaptic cell.
+
+   Used in :py:meth:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities` to create a variety of spike times for presynaptic cells.
+
+   :Parameters: * **spikeT** (*float*) -- Spike time.
+                * **spike_source** (*str*) -- Spike source category (see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
+
+   :raises AssertionError: If the spike source is unknown.
+

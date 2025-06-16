@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField.get_mesh_coordinates`
+
+ScalarField.get_mesh_coordinates
+================================
+
+.. py:method:: single_cell_parser.scalar_field.ScalarField.get_mesh_coordinates(xyz)
+
+   Fetch the mesh index of the voxel containing the point xyz.
+
+   .. warning::
+
+      This method does not perform range checking.
+      If :paramref:`xyz` is outside the bounding box, the index will be out of bounds for the :py:attr:`mesh`.
+
+   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+
+   :returns: The :py:attr:`mesh` index of the voxel containing the point.
+   :rtype: tuple
+

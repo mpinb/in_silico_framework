@@ -1,0 +1,29 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_landmark_file`
+
+
+.. title:
+
+read_landmark_file
+==================
+
+
+.. py:function:: single_cell_parser.reader.read_landmark_file(landmarkFilename)
+
+   Read an AMIRA landmark file
+
+   :Parameters: **landmarkFilename** (*str*) -- Filename of the landmark file to be read.
+
+   :raises RuntimeError: If the input file does not have a `.landmarkAscii` suffix.
+
+   :returns: (x,y,z) points of landmarks.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

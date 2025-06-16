@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper._pt_in_box`
+
+SynapseMapper._pt_in_box
+========================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._pt_in_box(pt, box)
+
+   Check if a point is within a bounding box
+
+   :Parameters: * **pt** (*tuple*) -- The point to check.
+                * **box** (*tuple*) -- The bounding box (minx, maxx, miny, maxy, minz, maxz).
+
+   :returns: True if the point is within the bounding box, False otherwise.
+   :rtype: bool
+

@@ -1,0 +1,119 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderSmr`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+ReaderSmr
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_voltage_traces <ReaderSmr.get_voltage_traces>
+   get_stim_times <ReaderSmr.get_stim_times>
+   get_serialize_dict <ReaderSmr.get_serialize_dict>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: spike_analysis.core.ReaderSmr(path, analogsignal_id=0, stim_times_channel=None, min_rel_time=None, max_rel_time=None)
+   
+   A class for reading smr-files and accessing stimulus times and voltage traces.
+
+   .. seealso:: :py:class:`spike_analysis.core.ReaderLabView`
+
+   :Parameters: * **path** (*str*) -- The path to the smr-file.
+                * **analogsignal_id** (*int*) -- The ID of the analog signal to read.
+                * **stim_times_channel** (*str*) -- The name of the channel containing the stimulus times.
+                * **min_rel_time** (*float*) -- The minimum relative time to include in the voltage traces.
+                * **max_rel_time** (*float*) -- The maximum relative time to include in the voltage traces.
+
+   :Attributes:
+
+   .. attribute:: path
+
+      The path to the smr-file.
+
+      :type: str
+
+   .. attribute:: analogsignal_id
+
+      The ID of the analog signal to read.
+
+      :type: int
+
+   .. attribute:: stim_times_channel
+
+      The name of the channel containing the stimulus times.
+
+      :type: str
+
+   .. attribute:: min_rel_time
+
+      The minimum relative time to include in the voltage traces.
+
+      :type: float
+
+   .. attribute:: max_rel_time
+
+      The maximum relative time to include in the voltage traces.
+
+      :type: float
+
+   .. attribute:: t
+
+      The time points of the voltage traces.
+
+      :type: numpy.ndarray
+
+   .. attribute:: v
+
+      The voltage values of the traces.
+
+      :type: numpy.ndarray
+
+   .. attribute:: stim_times
+
+      The times of the stimuli.
+
+      :type: list
+
+   .. attribute:: t_start
+
+      The start time of the voltage traces.
+
+      :type: float
+
+   .. attribute:: t_end
+
+      The end time of the voltage traces.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_voltage_traces <spike_analysis.core.ReaderSmr.get_voltage_traces>`\ ()
+        - Get the time points and voltage values of the traces.
+      * - :py:obj:`get_stim_times <spike_analysis.core.ReaderSmr.get_stim_times>`\ ()
+        - Get the times of the stimuli.
+      * - :py:obj:`get_serialize_dict <spike_analysis.core.ReaderSmr.get_serialize_dict>`\ ()
+        - Get a dictionary containing the attributes of the ReaderSmr object.
+

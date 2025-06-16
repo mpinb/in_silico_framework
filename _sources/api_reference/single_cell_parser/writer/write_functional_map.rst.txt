@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_functional_map`
+
+
+.. title:
+
+write_functional_map
+====================
+
+
+.. py:function:: single_cell_parser.writer.write_functional_map(fname, functionalMap)
+
+   Write a functional map to an AMIRA file.
+
+   Deprecated. Consider using :py:meth:`visualize.vtk.write\_vtk\_pointcloud\_file`
+   or :py:meth:`visualize.vtk.write\_vtk\_frames` for visualization purposes.
+
+   This method may still serve well if you need an AMIRA mesh file.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **functionalMap** (*dict*) -- A dictionary with cell labels as keys and lists of points as values.
+
+   :returns: None. Writes out the functional map file to :paramref:`fname`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

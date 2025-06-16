@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.get_lock`
+
+
+.. title:
+
+get_lock
+========
+
+
+.. py:function:: data_base.distributed_lock.get_lock(name)
+
+   Fetch the correct lock, depending on global locking server configuration.
+
+   Reads the locking configuration from the global variable ``SERVER`` and infers the correct lock type.
+   The following locks are supported:
+
+   - :py:class:`~data\_base.distributed\_lock.InterProcessLockNoWritePermission`: for file based locking.
+   - :py:class:`redis.lock.Lock`: for redis based locking.
+   - :py:class:`kazoo.client.Lock`: for Apache zookeeper based locking.
+
+   .. seealso::
+
+      `Kazoo documentation <https://kazoo.readthedocs.io/en/latest/index.html>`\_ and
+      `Redis documentation <https://redis-py.readthedocs.io/en/stable/>`\_
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

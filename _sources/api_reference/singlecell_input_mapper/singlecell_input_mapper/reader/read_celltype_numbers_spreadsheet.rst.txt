@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet`
+
+
+.. title:
+
+read_celltype_numbers_spreadsheet
+=================================
+
+
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet(fname)
+
+   Reads a spreadsheet with cell type numbers for each anatomical area.
+
+   :Parameters: **fname** (*str*) -- The name of the file to be read
+
+   :returns: A dictionary with the following structure: {anatomical\_area: {cell\_type: number\_of\_cells, ...}, ...}
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

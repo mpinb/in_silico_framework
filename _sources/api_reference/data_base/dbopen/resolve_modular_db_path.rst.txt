@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.resolve_modular_db_path`
+
+
+.. title:
+
+resolve_modular_db_path
+=======================
+
+
+.. py:function:: data_base.dbopen.resolve_modular_db_path(path)
+
+   Resolve the path of a database.
+
+   Modular database paths are filepaths of the form ``mdb://<unique\_id>/...``.
+   These are used to be independent of the location of the database on the hard drive.
+   This has been useful for migrating data between different file systems.
+   These relative paths are registered to an actual path in the data base registry upon creation.
+   Migrating databases then consists of simply re-registering the database to the new location.
+
+   This method checks the current registry for the absolute path of the database on the current filesystem.
+
+   :Parameters: **path** (*str*) -- The path to resolve.
+
+   :returns: The resolved path.
+   :rtype: str
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

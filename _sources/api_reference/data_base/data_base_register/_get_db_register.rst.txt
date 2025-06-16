@@ -1,0 +1,25 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register._get_db_register`
+
+
+.. title:
+
+_get_db_register
+================
+
+
+.. py:function:: data_base.data_base_register._get_db_register()
+
+   Get the database register.
+
+   :returns: The database register.
+   :rtype: :py:class:`~data\_base.data\_base\_register.DataBaseRegister`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

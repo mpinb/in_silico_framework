@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.visualize_psps`
+
+PSPs.visualize_psps
+===================
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.visualize_psps(g=1.0, method='dynamic_baseline', merge_celltype_kwargs={}, fig=None)
+
+   Plot a histogram of the EPSP max voltage deflections for each celltype.
+
+   :Parameters: * **g** (*float*) -- The simulated synaptic strength value to plot.
+                * **method** (*str*) -- ``dynamic_baseline`` or ``constant_baseline``.
+                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+                * **fig** (*plt.Figure*) -- A matplotlib figure to plot the histograms on.
+
+   :returns: None. Plots the histograms.
+

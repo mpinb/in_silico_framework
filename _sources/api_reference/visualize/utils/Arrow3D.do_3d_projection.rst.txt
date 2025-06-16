@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.Arrow3D` ❭ :mod:`~visualize.utils.Arrow3D.do_3d_projection`
+
+Arrow3D.do_3d_projection
+========================
+
+.. py:method:: visualize.utils.Arrow3D.do_3d_projection(renderer=None)
+
+   Project the arrow onto the Axes3D object.
+
+

@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.check`
+
+Simulator_Setup.check
+=====================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.check()
+
+   Check if the setup is correct.
+
+   This method checks if the :py:class:`Simulator_Setup` object is set up correctly.
+
+   It checks if:
+
+   - :paramref:`cell_param_generator` is set.
+   - :paramref:`cell_generator` is set.
+   - The first element of the names of the :paramref:`stim_setup_funs`, :paramref:`stim_run_funs` and :paramref:`stim_response_measure_funs` are the same.
+     These names are used to group the functions that belong to the same stimulus.
+   - The number of :paramref:`stim_setup_funs`, :paramref:`stim_run_funs` and :paramref:`stim_response_measure_funs` are the same.
+   - Calls each additional check function in :paramref:`check_funs`.
+

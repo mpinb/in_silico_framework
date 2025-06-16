@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_params`
+
+Simulator_Setup.get_params
+==========================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_params(params)
+
+   Get the modified biophysical parameters.
+
+   Applies each method in :paramref:`params_modify_funs` to the parameter vector.
+
+   :Parameters: **params** (*pd.Series*) -- The parameter vector.
+
+   :returns: Modified parameters.
+   :rtype: (pd.Series)
+

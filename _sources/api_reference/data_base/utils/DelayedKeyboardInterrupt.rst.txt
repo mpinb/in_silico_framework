@@ -1,0 +1,58 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.DelayedKeyboardInterrupt`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+DelayedKeyboardInterrupt
+========================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   handler <DelayedKeyboardInterrupt.handler>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.utils.DelayedKeyboardInterrupt
+   
+   Context manager that allows to delay a KeyboardInterrupt such that it also works in subthreads.
+
+   If a KeyboardInterrupt is received while code is still running within this context manager,
+   the KeyboardInterrupt is intercepted by this class and delayed until the context manager is exited.
+
+   The usecase is to allow for subthreads to finish their work before the KeyboardInterrupt is raised.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> with DelayedKeyboardInterrupt():
+   ...     time.sleep(10)   # press Ctrl+C here, after <10s
+   ...     print("I am finished after 10 seconds")
+   I am finished after 10 seconds
+
+   .. seealso:: https://stackoverflow.com/questions/842557/how-to-prevent-a-block-of-code-from-being-interrupted-by-keyboardinterrupt-in-py
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`handler <data_base.utils.DelayedKeyboardInterrupt.handler>`\ (sig, frame)
+        - Handle KeyboardInterrupt signals and delay them
+

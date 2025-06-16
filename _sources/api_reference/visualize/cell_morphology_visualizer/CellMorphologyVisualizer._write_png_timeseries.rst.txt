@@ -1,0 +1,22 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer._write_png_timeseries`
+
+CellMorphologyVisualizer._write_png_timeseries
+==============================================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer._write_png_timeseries(path, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, highlight_section=None, highlight_x=None)
+
+   Creates a list of images where a neuron morphology color-coded with voltage together with synapse activations are
+   shown for a set of time points. These images will then be used for a time-series visualization (video/gif/animation)
+   and in each image the neuron rotates a bit (3 degrees) over its axis.
+
+   The parameters :param self.t_start:, :param self.t_stop: and :param self.t_step: will define the :param self.times_to_show: attribute
+
+   :Parameters: * **- t_start** -- start time point of our time series visualization
+                * **- t_stop** -- last time point of our time series visualization
+                * **- t_step** -- time between the different time points of our visualization
+                * **- path** -- path were the images should be stored
+                * **- client** -- dask client for parallelization
+

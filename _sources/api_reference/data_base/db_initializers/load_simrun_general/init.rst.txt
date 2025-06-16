@@ -1,0 +1,66 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.init`
+
+
+.. title:
+
+init
+====
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.init(db, simresult_path, core=True, voltage_traces=True, synapse_activation=True, dendritic_voltage_traces=True, parameterfiles=True, spike_times=True, burst_times=False, repartition=True, scheduler=None, rewrite_in_optimized_format=True, dendritic_spike_times=True, dendritic_spike_times_threshold=-30.0, client=None, n_chunks=5000, dumper=None)
+
+   Initialize a database with simulation data.
+
+   Use this function to load simulation data generated with the simrun module
+   into a :py:class:`~data\_base.DataBase`.
+
+   :Parameters: * **core** (*bool, optional*) -- Parse and write the core data to the database: voltage traces, metadata, sim\_trial\_index and filelist.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.\_build\_core`
+                * **voltage\_traces** (*bool, optional*) -- Parse and write the somatic voltage traces to the database.
+                * **spike\_times** (*bool, optional*) -- Parse and write the spike times into the database.
+                  See also: :py:meth:`data\_base.analyze.spike\_detection.spike\_detection`
+                * **dendritic\_voltage\_traces** (*bool, optional*) -- Parse and write the dendritic voltage traces to the database.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.\_build\_dendritic\_voltage\_traces`
+                * **dendritic\_spike\_times** (*bool, optional*) -- Parse and write the dendritic spike times to the database.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.add\_dendritic\_spike\_times`
+                * **dendritic\_spike\_times\_threshold** (*float, optional*) -- Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.add\_dendritic\_spike\_times`
+                * **synapse\_activation** (*bool, optional*) -- Parse and write the synapse activation data to the database.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.\_build\_synapse\_activation`
+                * **parameterfiles** (*bool, optional*) -- Parse and write the parameterfiles to the database.
+                  See also: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.\_build\_param\_files`
+                * **rewrite\_in\_optimized\_format** (*bool, optional*) -- If True (default): data is converted to a high performance binary
+                  format and makes unpickling more robust against version changes of third party libraries.
+                  Also, it makes the database self-containing, i.e. you can move it to another machine or
+                  subfolder and everything still works. Deleting the data folder then would (should) not cause
+                  loss of data.
+                  If False: the db only contains links to the actual simulation data folder
+                  and will not work if the data folder is deleted or moved or transferred to another machine
+                  where the same absolute paths are not valid.
+                * **repartition** (*bool, optional*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+                * **n\_chunks** (*int, optional*) -- Number of chunks to split the :ref:`syn\_activation\_format` and :ref:`spike\_times\_format` dataframes into.
+                  Default is 5000.
+                * **client** (*dask.distributed.Client, optional*) -- Distributed Client object for parallel parsing of anything that isn't a dask dataframe.
+                * **scheduler** (*dask.distributed.Client, optional*) -- Scheduler to use for parallellized parsing of dask dataframes.
+                  can e.g. be simply the ``distributed.Client.get`` method.
+                  Default is ``None``.
+                * **dumper** (*module, optional, deprecated*) -- Dumper to use for saving pandas dataframes.
+                  Default is :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.pandas\_to\_msgpack`.
+                  This has been deprecated in favor of a central configuration for the dumpers.
+
+   .. deprecated:: 0.2.0
+       The :paramref:`burst\_times` argument is deprecated and will be removed in a future version.
+
+   .. deprecated:: 0.5.0
+      The :paramref:`dumper` argument is deprecated and will be removed in a future version.
+      Dumpers are configured in the centralized :py:mod:`~data\_base.db\_initializers.load\_simrun\_general.config` module.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

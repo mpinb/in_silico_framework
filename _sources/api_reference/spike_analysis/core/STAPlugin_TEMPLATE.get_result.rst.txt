@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+
+STAPlugin_TEMPLATE.get_result
+=============================
+
+.. py:method:: spike_analysis.core.STAPlugin_TEMPLATE.get_result()
+
+   Gets the result of the analysis.
+
+   The result and data format of the analysis depends on which type of analysis is performed.
+
+   :returns: The result of the analysis.
+   :rtype: Any
+
+   :raises RuntimeError: If the result is requested before :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.setup` is called.
+

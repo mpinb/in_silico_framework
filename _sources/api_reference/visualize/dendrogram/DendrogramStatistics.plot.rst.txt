@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.DendrogramStatistics` ❭ :mod:`~visualize.dendrogram.DendrogramStatistics.plot`
+
+DendrogramStatistics.plot
+=========================
+
+.. py:method:: visualize.dendrogram.DendrogramStatistics.plot(figsize=None, colormap_synapses=None)
+
+   Plot the dendrogram statistics.
+
+   :Parameters: * **figsize** (*tuple*) -- The figure size. Default is ``None``.
+                * **colormap_synapses** (*dict*) -- A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+                  Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+
+   :returns: The matplotlib figure object.
+   :rtype: :py:class:`matplotlib.figure.Figure`
+

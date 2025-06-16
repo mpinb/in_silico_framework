@@ -1,0 +1,91 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_hay_problem_description`
+
+
+.. title:
+
+get_hay_problem_description
+===========================
+
+
+.. py:function:: biophysics_fitting.hay.specification.get_hay_problem_description()
+
+   Get the problem description used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+
+   This method returns a dataframe that contains the objective names,
+   the average value per objective, and the std per objective.
+   Each objective is associated with a specific input stimulus, given in the 'stim\_name' column.
+   This distribution of parametrized responses can be used to quantify a cell's response to a specific stimulus.
+
+   The resulting pd.DataFrame contains the following columns:
+
+   - objective: The name of the objective as an acronym, prefixed with the stimulus.
+   - feature: The full name of the objective.
+   - stim\_name: The name of the stimulus.
+   - stim\_type: The type of the stimulus (bAP, BAC or SquarePulse).
+   - mean: The empirically observed mean value of the feature.
+   - std: The empirically observed standard deviation of the feature.
+
+   The names of the objectives are prefixed with the stimulus name. The suffix
+   acronyms mean the following:
+
+   .. list-table::
+       :header-rows: 1
+
+       * - Objective
+         - Meaning
+       * - spikecount
+         - Amount of spikes
+       * - APheight
+         - AP height
+       * - APwidth
+         - AP width
+       * - att2
+         - Attenuation of the bAP between soma and recSite 1
+       * - att3
+         - Attenuation of the bAP between soma and recSite 2
+       * - ahpdepth
+         - After-hyperpolarization depth
+       * - ISI
+         - Interspike interval
+       * - caSpike\_height
+         - height of the Ca2+-spike
+       * - caSpike\_width
+         - Width of the Ca2+-spike
+       * - mf[123]
+         - Spike frequency
+       * - AI[123]
+         - Adaptation index
+       * - ISIcv[123]
+         - Interspike interval: coefficient of variation
+       * - DI[123]
+         - Initial burst interspike interval (time between first and second AP)
+       * - TTFS[123]
+         - First spike latency
+       * - APh[123]
+         - AP height
+       * - fAHPd[123]
+         - Fast AP depth
+       * - sAHPd[123]
+         - Slow after-hyperpolarization depth
+       * - sAHPt[123]
+         - Slow after-hyperpolarization time
+       * - APw[123]
+         - Ap half-width
+
+   :returns: The problem description, containing the objectives, objective names, stimulus type, mean and std for each objective.
+   :rtype: pd.DataFrame
+
+   .. note::
+
+      The objectives are specific to the L5PT and the Hay stimulus protocol.
+      See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

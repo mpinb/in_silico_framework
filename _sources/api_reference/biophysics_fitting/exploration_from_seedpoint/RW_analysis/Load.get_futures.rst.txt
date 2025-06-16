@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_futures`
+
+Load.get_futures
+================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_futures()
+
+   Get the futures of the delayed computations.
+
+   Useful to check the progress of distributed loading.
+

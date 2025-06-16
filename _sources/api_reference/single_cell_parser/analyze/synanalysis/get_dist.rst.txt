@@ -1,0 +1,28 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.get_dist`
+
+
+.. title:
+
+get_dist
+========
+
+
+.. py:function:: single_cell_parser.analyze.synanalysis.get_dist(x1, x2)
+
+   Compute the Euclidean distance between two points.
+
+   :Parameters: * **x1** (*list*) -- first point
+                * **x2** (*list*) -- second point
+
+   :returns: Euclidean distance between the two points
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

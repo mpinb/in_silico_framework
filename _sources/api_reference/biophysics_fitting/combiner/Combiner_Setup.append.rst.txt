@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner_Setup` ❭ :mod:`~biophysics_fitting.combiner.Combiner_Setup.append`
+
+Combiner_Setup.append
+=====================
+
+.. py:method:: biophysics_fitting.combiner.Combiner_Setup.append(name, combination)
+
+   Appends feature names and combinations to the Combiner_Setup object.
+
+   :Parameters: * **name** (*str*) -- Name of the combination
+                * **combination** (*list*) -- List of feature names that should be combined.
+

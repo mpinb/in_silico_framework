@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet`
+
+RW._load_pickle_or_parquet
+==========================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet(outdir, iteration, mode='parquet_load')
+
+   Load the results of a iteration from a pickle or parquet file.
+
+   :Parameters: * **outdir** (*str*) -- directory where the pickle or parquet files are located
+                * **iteration** (*int*) -- iteration number
+                * **mode** (*str*) -- mode to load the results. Default: 'parquet_load'
+
+   :returns: dataframe and path to the file
+   :rtype: tuple
+

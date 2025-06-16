@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell.turn_off`
+
+PointCell.turn_off
+==================
+
+.. py:method:: single_cell_parser.cell.PointCell.turn_off()
+
+   Turns off the spike source.
+
+   Calls ``play()`` with no arguments to turn off the :py:class:`~neuron.h.VecStim`.
+   This is necessary because ``VecStim`` does not implement reference counting.
+   Resizes the :py:class:`~neuron.h.Vector` to 0.
+
+   .. note::
+
+      M. Hines: Note that one can turn off a VecStim without destroying it by using VecStim.play() with no args.
+      Turn it back on by supplying a Vector arg. Or one could resize the Vector to 0. :cite:t:`hines2001neuron`
+

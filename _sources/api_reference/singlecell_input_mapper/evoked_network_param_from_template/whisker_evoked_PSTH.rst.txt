@@ -1,0 +1,50 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH`
+
+
+.. title:
+
+whisker_evoked_PSTH
+===================
+
+
+.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH(column, deflectedWhisker, cellType)
+
+   Fetch the PSTHs of each celltype in a barrel cortex :paramref:`column` for evoked activity reflecting
+   a passive whisker touch scenario.
+   This method does not generate such data, but reads it in from existing files containing such empirical measurements,
+   and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.
+
+   The data linked in this runfile are for experiments where the C2 whisker was deflected.
+   For situations where other :paramref:`deflectedwhisker` are requested, activity data of equivalent
+   columns relative to the C2 is requested.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> column = 'B2'  # I want activity from B2 column
+   >>> deflectedWhisker = 'C1'  # I want activity reflecting deflection of C1 whisker (not C2)
+   >>> cellType = 'L6ct'
+   >>> params = whisker\_evoked\_PSTH(column=column, deflectedWhisker=deflectedWhisker, cellType=cellType)
+   >>> print(params)  # This is activity data from the C3 column for C2 whisker deflection i.e. equivalent activity
+   {
+       'distribution': 'PSTH',
+       'intervals': [(40.0, 41.0), (43.0, 44.0), (49.0, 50.0)],
+       'probabilities': [0.0057, 0.0057, 0.0057]
+       }
+
+   :Parameters: * **column** (*str*) -- the column in the barrel cortex for which to parse the PSTHs.
+                * **deflectedWhisker** (*str*) -- Which whisker was deflected.
+                * **cellType** (*str*) -- Which cell type you want the PSTH for.
+
+   :returns:     The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.
+   :rtype: parameters.ParameterSet
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

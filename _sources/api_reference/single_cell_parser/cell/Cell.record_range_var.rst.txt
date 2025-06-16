@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.record_range_var`
+
+Cell.record_range_var
+=====================
+
+.. py:method:: single_cell_parser.cell.Cell.record_range_var(var, mech=None)
+
+   Record a range mechanism in all sections.
+
+   :Parameters: **var** (*str*) -- The name of the range mechanism to record.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> cell.record_range_var('Ca_HVA.ica')
+

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling.get_max_commas`
+
+
+.. title:
+
+get_max_commas
+==============
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_max_commas(paths)
+
+   Get the maximum amount of delimiters across many files.
+
+   Some data formats have a varying amount of commas in the synapse and cell
+   activation files, reflecting e.g. different amounts of spikes per cell.
+   This can not be padded during simulation, since it is not known what the maximum
+   amount of e.g. spikes will be.
+   This function determines the maximum amount of delimiters across all files post-hoc,
+   so that the data can be padded out and read in.
+
+   :Parameters: **paths** (*list*) -- List of paths to the synapse and cell activation files.
+
+   :returns: The maximum amount of delimiters across all files.
+   :rtype: int
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

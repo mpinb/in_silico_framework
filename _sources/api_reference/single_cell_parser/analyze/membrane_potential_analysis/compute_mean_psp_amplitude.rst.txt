@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude`
+
+
+.. title:
+
+compute_mean_psp_amplitude
+==========================
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0)
+
+   Compute the mean amplitude of all PSPs across multiple voltage traces.
+
+   The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
+   between :paramref:`tStim` + :paramref:`t\_delay` and :paramref:`tStim` + :paramref:`delay` + :paramref:`width`.
+
+   :Parameters: * **vTraces** (*list*) -- List of voltage traces.
+                * **tStim** (*float*) -- Timepoint of stimulation (in ms).
+                * **dt** (*float*) -- Time step of the voltage traces.
+                * **width** (*float*) -- Width of the PSP window. Default is :math:`35.0 ms`.
+                * **t\_delay** (*float*) -- Delay of the PSP window (i.e. time between the stimulus and the PSP onset). Default is :math:`15.0 ms`.
+
+   :returns: A tuple containing the delay and the mean amplitude of the PSPs.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,23 @@
+
+.. backlink:
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid`
+
+SynapseDensity._compute_cell_density_grid
+=========================================
+
+.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid()
+
+   Create an empty mesh for the postsynaptic neuron to match the mesh of the synapse distribution.
+
+   :returns:
+
+             Tuple containing:
+
+                 - cellMesh (array): Empty mesh for the postsynaptic neuron.
+                 - cellOrigin (tuple): Origin of the mesh.
+                 - cellExtent (tuple): Extent of the mesh.
+                 - cellSpacing (tuple): Spacing of the mesh (dx, dy, dz).
+                 - cellBoundingBox (tuple): Bounding box of the mesh (minx, maxx, miny, maxy, minz, maxz).
+   :rtype: tuple
+

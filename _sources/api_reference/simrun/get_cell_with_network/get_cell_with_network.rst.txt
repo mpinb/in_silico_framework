@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.get_cell_with_network` ❭ :mod:`~simrun.get_cell_with_network.get_cell_with_network`
+
+
+.. title:
+
+get_cell_with_network
+=====================
+
+
+.. py:function:: simrun.get_cell_with_network.get_cell_with_network(neuron_param, network_param, cache=True)
+
+   Build a cell with realized synapses from a :ref:`cell\_parameters\_format` file and a :ref:`network\_parameters\_format` file.
+
+   This method creates a new network embedding for the :py:class:`~single\_cell\_parser.cell.Cell` based on the :ref:`network\_parameters\_format` file.
+
+   :Parameters: * **neuron\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The :ref:`cell\_parameters\_format`.
+                * **network\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The :ref:`network\_parameters\_format`.
+
+   :returns: A callable that returns a :py:class:`~single\_cell\_parser.cell.Cell` and :py:class:`~single\_cell\_parser.network.NetworkMapper` when called.
+   :rtype: callable
+
+   .. seealso::
+
+      :py:mod:`simrun.parameters\_to\_cell` for rebuilding **and** simulating the cell and network from
+      an existing network realization (:ref:`syn\_file\_format` file) it.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

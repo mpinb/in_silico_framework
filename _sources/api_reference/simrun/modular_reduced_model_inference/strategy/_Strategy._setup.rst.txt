@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._setup`
+
+_Strategy._setup
+================
+
+.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._setup()
+
+   Strategy-specific setup.
+
+   This method is overloaded by child classes to provide setup specific for the Strategy.
+

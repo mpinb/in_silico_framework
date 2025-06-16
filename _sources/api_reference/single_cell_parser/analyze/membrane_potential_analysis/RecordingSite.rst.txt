@@ -1,0 +1,60 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSite`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+RecordingSite
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSite(secID, segID, label)
+   
+   Dataclass for a recording site.
+
+   .. seealso::
+
+      The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
+      class for setting up recording sites and parsing their voltage traces.
+
+   :Parameters: * **secID** (*int*) -- Section ID of the recording site.
+                * **segID** (*int*) -- Segment ID of the recording site.
+                * **label** (*str*) -- Identifier label.
+
+   :Attributes:
+
+   .. attribute:: secID
+
+      Section ID of the recording site.
+
+      :type: int
+
+   .. attribute:: segID
+
+      Segment ID of the recording site.
+
+      :type: int
+
+   .. attribute:: label
+
+      Identifier label.
+
+      :type: str
+
+   .. attribute:: vRecordings
+
+      List of recorded voltage vectors.
+      Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
+
+      :type: list
+

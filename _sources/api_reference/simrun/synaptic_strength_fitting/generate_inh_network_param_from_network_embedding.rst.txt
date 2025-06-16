@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding`
+
+
+.. title:
+
+generate_inh_network_param_from_network_embedding
+=================================================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding(confile)
+
+   Generate a network parameter file for inhibitory synapses from a :ref:`con\_file\_format` file.
+
+   Generates a template that defines a GABA-binding synapse with default parameters, as described in the
+   :ref:`network\_parameters\_format`. Together with a :ref:`con\_file\_format` file, this template
+   with default parameters is used to construct a network parameter file, that can in turn be used to
+   activate the presynaptic cells one by one.
+
+   :returns: Network parameter file.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+
+   .. seealso::
+
+      :py:meth:`simrun.synaptic\_strength\_fitting.generate\_exc\_network\_param\_from\_network\_embedding`
+      for the template of excitatory synapses.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

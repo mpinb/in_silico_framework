@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core._sta_input_checker`
+
+
+.. title:
+
+_sta_input_checker
+==================
+
+
+.. py:function:: spike_analysis.core._sta_input_checker(t_start, t_end, period)
+
+   Checks if the input is valid.
+
+   :Parameters: * **t\_start** (*float*) -- Start time.
+                * **t\_end** (*float*) -- End time.
+                * **period** (*dict*) -- Dictionary containing period labels as keys and (period\_start, period\_end) as values.
+
+   :returns: A tuple containing the start time, end time, and period.
+   :rtype: tuple
+
+   :raises ValueError: If both :paramref:`period` and either :paramref:`t\_start` or :paramref:`t\_end` are defined.
+   :raises ValueError: If only one of :paramref:`t\_start` or :paramref:`t\_end` is defined.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

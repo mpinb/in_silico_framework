@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_adaptation_index`
+
+
+.. title:
+
+STEP_adaptation_index
+=====================
+
+
+.. py:function:: biophysics_fitting.ephys.STEP_adaptation_index(t, v, stim_end=2000, thresh=None)
+
+   Calculate the adaptation index for a step current stimulus.
+
+   :Parameters: **end\_time** (*float*) -- End time of the stimulus.
+
+   :returns: Adaptation index.
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

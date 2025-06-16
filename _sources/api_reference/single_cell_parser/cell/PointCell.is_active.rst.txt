@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell.is_active`
+
+PointCell.is_active
+===================
+
+.. py:method:: single_cell_parser.cell.PointCell.is_active()
+
+   Check if the point cell is active.
+

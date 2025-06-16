@@ -1,0 +1,16 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse.disconnect_hoc_synapse`
+
+Synapse.disconnect_hoc_synapse
+==============================
+
+.. py:method:: single_cell_parser.synapse.Synapse.disconnect_hoc_synapse()
+
+   Disconnect the synapse from the neuron model.
+
+   Disconnecting the synapse turns off the release site and removes the :py:class:`~neuron.h.NetCon`
+
+   .. seealso:: :py:meth:`activate_hoc_syn`.
+

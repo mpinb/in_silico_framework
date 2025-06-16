@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.vm_std`
+
+
+.. title:
+
+vm_std
+======
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.vm_std(vVec, tVec, tStim, dtStim)
+
+   Computes the standard deviation of the voltage during a stimulation time window
+
+   :Parameters: * **vVec** (*list*) -- voltage vector
+                * **tVec** (*list*) -- time vector
+                * **tStim** (*float*) -- start time of stimulation
+                * **dtStim** (*float*) -- duration of stimulation
+
+   :returns: standard deviation of the voltage during stimulation time window
+   :rtype: float
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_landmark_file`
+
+
+.. title:
+
+write_landmark_file
+===================
+
+
+.. py:function:: single_cell_parser.writer.write_landmark_file(fname=None, landmarkList=None)
+
+   Write an AMIRA landmark file from 3D coordinates
+
+   :Parameters: * **fname** (*str*) -- string, name of the output file
+                * **landmarkList** (*list*) -- list of tuples, each of which holds 3 float coordinates
+
+   :returns: None. Writes out the landmark file to :paramref:`fname`
+
+   :raises RuntimeError: if no file name is given or if the landmark list is empty
+   :raises RuntimeError: if the landmarks have the wrong format (not 3 coordinates)
+
+   .. rubric:: Example
+      :class: example
+
+   >>> landmarkList = [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]
+   >>> write\_landmark\_file('landmarks.landmarkAscii', landmarkList)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

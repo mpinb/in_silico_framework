@@ -1,0 +1,13 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.DelayedKeyboardInterrupt` ❭ :mod:`~data_base.utils.DelayedKeyboardInterrupt.handler`
+
+DelayedKeyboardInterrupt.handler
+================================
+
+.. py:method:: data_base.utils.DelayedKeyboardInterrupt.handler(sig, frame)
+
+   Handle KeyboardInterrupt signals and delay them
+
+

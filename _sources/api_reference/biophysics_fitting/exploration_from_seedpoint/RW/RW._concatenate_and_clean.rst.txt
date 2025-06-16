@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._concatenate_and_clean`
+
+RW._concatenate_and_clean
+=========================
+
+.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._concatenate_and_clean(seed_folder, particle_id, iteration=None)
+
+   Concatenate the intermediate ``.pickle`` results and save as one parquet file.
+
+   Removes the pickle files.
+
+   :Parameters: * **seed_folder** (*str*) -- folder where the seedpoint is located
+                * **particle_id** (*int*) -- id of the particle
+                * **iteration** (*int*) -- iteration number. Default: None
+

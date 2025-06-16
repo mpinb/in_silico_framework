@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.set_stim_onset`
+
+
+.. title:
+
+set_stim_onset
+==============
+
+
+.. py:function:: single_cell_parser.network_param_modify_functions.set_stim_onset(n, onset=None)
+
+   Changes the offset when pointcells get activated
+
+   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+                * **onset** (*float*) -- The onset time in milliseconds.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> celltype = 'L6cc\_C2'  # layer 6 cortico-cortical cells in column C2
+   >>> n.network[celltype].celltype.pointcell.offset
+   0
+   >>> set\_stim\_onset(n, 100)
+   >>> n.network[celltype].celltype.pointcell.offset
+   100
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

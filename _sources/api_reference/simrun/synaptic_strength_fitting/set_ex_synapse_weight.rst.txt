@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.set_ex_synapse_weight`
+
+
+.. title:
+
+set_ex_synapse_weight
+=====================
+
+
+.. py:function:: simrun.synaptic_strength_fitting.set_ex_synapse_weight(syn, weight)
+
+   Set the synaptic strength of an excitatory :py:class:`single\_cell\_parser.synapse.Synapse`.
+
+   :Parameters: * **syn** (:py:class:`single\_cell\_parser.synapse.Synapse`) -- The excitatory synapse to set the synaptic strength for.
+                * **weight** (*list*) -- The synaptic strength values for the AMPA and NMDA components.
+
+   :returns: None. Updates the synaptic strength of the excitatory synapse.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

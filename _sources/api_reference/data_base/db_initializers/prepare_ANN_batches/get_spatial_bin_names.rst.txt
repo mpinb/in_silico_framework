@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_spatial_bin_names`
+
+
+.. title:
+
+get_spatial_bin_names
+=====================
+
+
+.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_spatial_bin_names(section_distances_df)
+
+   Get the bin names from a dataframe describing the distance to soma of all sections.
+
+   Given a dataframe describing the distance to soma of all sections, as provided by
+   :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.get\_section\_distances\_df`,
+   this method returns the names for all the spatial bins of the format ``section\_id/bin\_id``.
+   E.g.: ``5/2`` denotes the second bin of section 5.
+
+   :Parameters: **section\_distances\_df** (*pd.DataFrame*) -- The dataframe describing distance to soma for all sections.
+
+   :returns: A list containing the bin ids in string format.
+   :rtype: list
+
+   .. seealso:: :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.get\_section\_distances\_df`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip`
+
+
+.. title:
+
+get_n_workers_per_ip
+====================
+
+
+.. py:function:: simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip(workers, n)
+
+   Convenience method to get a certain amount of workers per machine
+
+   Groups all workers by their IP, fetches :paramref:`n` workers per IP,
+   and returns them as a list.
+
+   :Parameters: * **workers** (*List[dask.distributed.worker.Worker]*) -- List or array of dask workers.
+                * **n** (*int*) -- Amount fo workers to fetch per machine.
+
+   :returns: List of :paramref:`n`*``n\_machines`` workers.
+   :rtype: List[dask.distributed.worker.Worker]
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

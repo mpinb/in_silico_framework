@@ -1,0 +1,27 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_con`
+
+
+.. title:
+
+_copy_and_transform_con
+=======================
+
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_con(con_fn, target_fn, syn_fn_map)
+
+   Copy, rename and transform a single :ref:`con\_file\_format` file.
+
+   The :ref:`con\_file\_format` file is copied to the target directory, renamed to its hash, and the synapse distribution file name is replaced.
+
+   :Parameters: * **con\_fn** (*str*) -- Path to the connection file.
+                * **new\_syn** (*str*) -- Path to the new synapse distribution file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,36 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_ephys`
+
+
+.. title:
+
+set_ephys
+=========
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_ephys(cell_param, params=None)
+
+   Updates cell\_param file.
+
+   Parameter names reflect the Hay naming convention.
+
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The cell parameter dictionary.
+                * **params** (*pd.Series*) -- The parameter vector as a pandas Series.
+
+   :raises AssertionError: If the parameter vector is None or not a pandas Series.
+   :raises AssertionError: If the provided cell parameters lack a field that is however defined in the parameter vector.
+   :raises AssertionError: If some parameters are not set after the update.
+
+   :returns: The updated cell\_param, with the biphysical parameters set.
+   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+
+   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

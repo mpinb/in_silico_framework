@@ -1,0 +1,30 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.hay_evaluate_StepTwo`
+
+
+.. title:
+
+hay_evaluate_StepTwo
+====================
+
+
+.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepTwo(**kwargs)
+
+   Evaluate the :math:`StepTwo` stimulus protocol.
+
+   Initializes a :py:class:`StepTwo` object with the default keyword arguments,
+   and calls the evaluation function on the voltage traces.
+
+   :Parameters: **\*\*kwargs** -- Additional or overriding keyword arguments for the :py:class:`StepTwo` object. Defaults to None.
+
+   :returns: Dictionary with evaluation metrics.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

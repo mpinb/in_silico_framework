@@ -1,0 +1,124 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+PySection2
+==========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   set_3d_geometry <PySection2.set_3d_geometry>
+   _compute_bounds <PySection2._compute_bounds>
+   _compute_relative_pts <PySection2._compute_relative_pts>
+   _compute_length <PySection2._compute_length>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2(name=None, cell=None, label=None)
+   
+   Convenience class around NEURON's Section class.
+
+   Provides an interface with existing methods in ISF for cell
+   parsing and mapping synapses without any additional NEURON :cite:`hines2001neuron`
+   dependencies.
+
+   :Parameters: * **name** (*str*) -- Name of the section. Default: None.
+                * **cell** (*str*) -- Name of the cell. Default: None.
+                * **label** (*str*) -- Label of the section. Default: None.
+
+   :Attributes:
+
+   .. attribute:: name
+
+      Name of the section.
+
+      :type: str
+
+   .. attribute:: label
+
+      Label of the section (e.g. "Soma", "Dendrite", "ApicalDendrite" ...).
+
+      :type: str
+
+   .. attribute:: parent
+
+      Parent section.
+
+      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+
+   .. attribute:: parentx
+
+      Relative position along the parent section (0-1).
+      Usually, sections are split up on branch points, making parentx equal to 1.0, but
+      this is not always the case (e.g. when the section has a similar diameter beyond the branch point).
+
+      :type: float
+
+   .. attribute:: bounds
+
+      Bounding box around the section.
+
+      :type: tuple
+
+   .. attribute:: nrOfPts
+
+      Number of traced 3D coordinates.
+
+      :type: int
+
+   .. attribute:: pts
+
+      List of traced 3D coordinates.
+
+      :type: list
+
+   .. attribute:: relPts
+
+      List of relative position of 3D points along the section.
+
+      :type: list
+
+   .. attribute:: diamList
+
+      List of diameters at traced 3D coordinates.
+
+      :type: list
+
+   .. attribute:: L
+
+      Length of the section.
+
+      :type: float
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`set_3d_geometry <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2.set_3d_geometry>`\ (pts, diams)
+        - Invokes NEURON :cite:`hines2001neuron` 3D geometry setup
+      * - :py:obj:`_compute_bounds <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_bounds>`\ ()
+        - Compute the bounding box of the section.
+      * - :py:obj:`_compute_relative_pts <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_relative_pts>`\ ()
+        - Compute the relative position of 3D points along the section.
+      * - :py:obj:`_compute_length <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_length>`\ ()
+        - Calculate the length of the section.
+

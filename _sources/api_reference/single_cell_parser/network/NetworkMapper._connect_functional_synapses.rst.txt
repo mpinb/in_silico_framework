@@ -1,0 +1,20 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._connect_functional_synapses`
+
+NetworkMapper._connect_functional_synapses
+==========================================
+
+.. py:method:: single_cell_parser.network.NetworkMapper._connect_functional_synapses()
+
+   Connects anatomical synapses to spike generators (PointCells).
+
+   This connection is according to physiological and/or anatomical constraints
+   on connectivity (i.e., convergence of presynaptic cell type)
+
+   Used in :py:meth:`~create_network`.
+   To recreate network embeddings that have been created with :py:mod:`singlecell_input_mapper.singlecell_input_mapper`,
+   use :py:meth:`~create_saved_network_2` instead, which connects synapses using :py:meth:`~_map_complete_anatomical_realization` instead
+   of this method
+

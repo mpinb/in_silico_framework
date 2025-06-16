@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_stim_response_measure_fun`
+
+Simulator_Setup.get_stim_response_measure_fun
+=============================================
+
+.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stim_response_measure_fun(stim)
+
+   Get the stimulus response measure function by stimulus name.
+
+   Stimulus response measure functions are functions that extract voltage traces from the cell.
+   They are saved under the name ``stimulus_name.measure``, and accessible
+   under :paramref:`stim_response_measure_funs`.
+
+   :Parameters: **stim** (*str*) -- The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
+
+   :returns: A list of functions that extract the voltage traces from the cell
+   :rtype: list
+

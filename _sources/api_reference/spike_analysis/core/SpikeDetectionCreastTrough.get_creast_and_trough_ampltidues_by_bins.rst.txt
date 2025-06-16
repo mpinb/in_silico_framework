@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins`
+
+SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins
+===================================================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins(mode='zero')
+
+   Get the creast and trough amplitudes based on the histogram of the creasts and troughs.
+
+   :Parameters: **mode** (*str*) -- Mode of computation. Can be 'zero' or 'minimum'. Defaults to 'zero'.
+
+   :returns: A tuple containing the creast and trough amplitudes.
+   :rtype: tuple
+

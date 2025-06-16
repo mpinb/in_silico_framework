@@ -1,0 +1,26 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
+
+CellMorphologyVisualizer.plot
+=============================
+
+.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot(color='grey', show_legend=True, show_synapses=False, time_point=None, save='', highlight_section=None, highlight_x=None)
+
+   Plot the cell morphology in 3D.
+
+   Cam be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.
+
+   :Parameters: * **color** (*str | [[float]]*) -- If you want some other color overlayed on the cell morphology.
+                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
+                * **legend** (*bool*) -- whether the voltage legend should appear in the plot
+                * **show_synapses** (*bool*) -- whether the synapse activations should be shown
+                * **time_point** (*int|float*) -- time point from which we want to gather the voltage/synapses. Defaults to 0
+                * **save** (*bool*) -- path where the plot will be saved. If it's empty it will not be saved (Default)
+                * **highlight_section** (*int*) -- section number of the section that should be highlighted
+                * **highlight_x** (*float*) -- x coordinate of the section that should be highlighted
+
+   :returns: matplotlib figure containing the plot.
+   :rtype: fig
+

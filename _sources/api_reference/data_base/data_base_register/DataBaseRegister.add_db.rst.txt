@@ -1,0 +1,15 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister` ❭ :mod:`~data_base.data_base_register.DataBaseRegister.add_db`
+
+DataBaseRegister.add_db
+=======================
+
+.. py:method:: data_base.data_base_register.DataBaseRegister.add_db(unique_id, db_basedir)
+
+   Add a database to the registry.
+
+   :Parameters: * **unique_id** (*str*) -- The unique ID of the database.
+                * **db_basedir** (*str*) -- The location of the database
+

@@ -1,0 +1,38 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.generate_synapse_activations` ❭ :mod:`~simrun.generate_synapse_activations._evoked_activity`
+
+
+.. title:
+
+_evoked_activity
+================
+
+
+.. py:function:: simrun.generate_synapse_activations._evoked_activity(cellParamName, evokedUpParamName, dirPrefix=&#39;&#39;, seed=None, nSweeps=1000, tStop=345)
+
+   Calculate and write synapse activations and presynaptic spike times.
+
+   This function calculates the synapse activations and presynaptic spike times for a single cell.
+
+   Synapse activation files are generated with :py:meth:`single\_cell\_parser.analyze.compute\_synapse\_distances\_times`.
+   Spike time files are generated with :py:meth:`single\_cell\_parser.analyze.write\_presynaptic\_spike\_times`.
+
+   :Parameters: * **cellParamName** (*str*) -- Path to a :ref:`cell\_parameters\_format` file,
+                  containing information about the neuron morphology (link to a :ref:`hoc\_file\_format` file) and biophysical properties.
+                * **evokedUpParamName** (*str*) -- Path to :ref:`network\_parameters\_format` file, containing information on synapse and network parameters per cell type.
+                * **dirPrefix** (*str*) -- Prefix for the directory where the results are stored.
+                * **seed** (*int*) -- Seed for the random number generator.
+                * **nSweeps** (*int*) -- Amount of times to run the simulation with the same parameter configuration.
+                * **tStop** (*float*) -- Time in ms at which the simulation should stop.
+
+   :returns: List of paths to the synapse activation files.
+   :rtype: list
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

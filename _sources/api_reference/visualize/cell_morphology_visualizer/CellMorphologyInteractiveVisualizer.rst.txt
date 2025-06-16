@@ -1,0 +1,116 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+CellMorphologyInteractiveVisualizer
+===================================
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _get_interactive_cell <CellMorphologyInteractiveVisualizer._get_interactive_cell>
+   _get_interactive_dash_app <CellMorphologyInteractiveVisualizer._get_interactive_dash_app>
+   interactive_plot <CellMorphologyInteractiveVisualizer.interactive_plot>
+   interactive_app <CellMorphologyInteractiveVisualizer.interactive_app>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer(cell, align_trunk=True, dash_ip=None, show=True, renderer='notebook_connected', t_start=None, t_stop=None, t_step=None)
+   
+   Plot an interactive 3D render of a cell morphology using Plotly and Dash.
+
+   Initializes the CellMorphologyInteractiveVisualizer object.
+
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object
+                * **align_trunk** (*bool*) -- Whether or not to align the cell trunk with the z-axis.
+                * **dash_ip** (*str*) -- IP address to run dash server on.
+                * **show** (*bool*) -- set to False for testing
+                * **renderer** (*str*) -- Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected"
+                * **t_start** (*float*) -- start time point of our time series visualization
+                * **t_stop** (*float*) -- last time point of our time series visualization
+                * **t_step** (*float*) -- time between the different time points of our visualization
+
+   :Attributes:
+
+   .. attribute:: dash_ip
+
+      IP address to run dash server on.
+
+      :type: str
+
+   .. attribute:: show
+
+      Whether to show the plot. Set to False for testing purposes. Default: True
+
+      :type: bool
+
+   .. attribute:: background_color
+
+      Background color of the plot. Defaults to "#f0f0f0"
+
+      :type: str
+
+   .. attribute:: renderer
+
+      Type of backend renderer to use for rendering the javascript/HTML VBox.
+      Defaults to "notebook_connected". Available renderers are:
+      
+      - 'plotly_mimetype'
+      - 'jupyterlab'
+      - 'nteract'
+      - 'vscode'
+      - 'notebook'
+      - 'notebook_connected'
+      - 'kaggle'
+      - 'azure'
+      - 'colab'
+      - 'cocalc'
+      - 'databricks'
+      - 'json'
+      - 'png'
+      - 'jpeg'
+      - 'jpg'
+      - 'svg'
+      - 'pdf'
+      - 'browser'
+      - 'firefox'
+      - 'chrome'
+      - 'chromium'
+      - 'iframe'
+      - 'iframe_connected'
+      - 'sphinx_gallery'
+      - 'sphinx_gallery_png'
+
+      :type: str
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_get_interactive_cell <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_cell>`\ (color, time\_point, diameter)
+        - Setup plotly for rendering in notebooks.
+      * - :py:obj:`_get_interactive_dash_app <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_dash_app>`\ (color, t\_start, t\_stop, t\_step)
+        - This is the main function to set up an interactive plot with scalar data overlayed.
+      * - :py:obj:`interactive_plot <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot>`\ (color, renderer, diameter, time\_point, show)
+        - This method shows a plot with an interactive cell, overlayed with scalar data (if provided with the data argument).
+      * - :py:obj:`interactive_app <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app>`\ (color, t\_start, t\_stop, t\_step)
+        - :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
+

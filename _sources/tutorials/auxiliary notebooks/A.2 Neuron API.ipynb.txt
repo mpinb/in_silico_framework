@@ -4,14 +4,14 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "## [Cell](../../autoapi/single_cell_parser/cell/index.rst) and NEURON API"
+        "## [Cell](../../api_reference/single_cell_parser/cell/index.rst) and NEURON API"
       ]
     },
     {
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "We can run simulations with [Cell](../../autoapi/single_cell_parser/cell/index.rst) using NEURON's Python API, as outlined below"
+        "We can run simulations with [Cell](../../api_reference/single_cell_parser/cell/index.rst) using NEURON's Python API, as outlined below"
       ]
     },
     {

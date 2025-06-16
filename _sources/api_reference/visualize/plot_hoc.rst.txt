@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.plot_hoc`
+
+
+.. title:
+
+plot_hoc
+========
+
+
+.. py:function:: visualize.plot_hoc(hoc_file, **kwargs)
+
+   Plot a hoc file using matplotlib.
+
+   Instatiate a :py:class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc\_file\_format` file.
+
+   :Parameters: * **hoc\_file** (*str*) -- The path to the :ref:`hoc\_file\_format` file
+                * **show** (*bool*) -- Whether to show the plot
+                * **\*\*kwargs** -- additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
+
+   :returns: The figure object
+   :rtype: :py:class:`matplotlib.pyplot.Figure`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

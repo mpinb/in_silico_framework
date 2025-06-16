@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.plot_vt`
+
+PSPs.plot_vt
+============
+
+.. py:method:: simrun.synaptic_strength_fitting.PSPs.plot_vt(population, opacity=1, g=1.0, merge=True, merge_celltype_kwargs={}, fig=None)
+
+   Plot the voltage traces of the PSPs.
+
+   :Parameters: * **population** (*str*) -- The celltype to plot the voltage traces for.
+                * **opacity** (*float*) -- The opacity of the voltage traces. Default: ``1``.
+                * **g** (*float*) -- The synaptic strength value to plot the voltage traces for.
+                * **merge** (*bool*) -- Whether to merge the EPSPs of some cell types.
+                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+                * **fig** (*plt.Figure*) -- A matplotlib figure to plot the voltage traces on.
+
+   :returns: None. Plots the voltage traces.
+

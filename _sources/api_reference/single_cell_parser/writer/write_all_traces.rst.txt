@@ -1,0 +1,35 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_all_traces`
+
+
+.. title:
+
+write_all_traces
+================
+
+
+.. py:function:: single_cell_parser.writer.write_all_traces(fname, t, vTraces)
+
+   Write out a list of voltage traces.
+
+   :Parameters: * **fname** (*str*) -- The name of the file to write to.
+                * **t** (*list*) -- The time points of the voltage traces.
+                * **vTraces** (*list*) -- A list of voltage traces.
+
+   :returns: None. Writes out the voltage traces to :paramref:`fname`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> t = [0.0, 0.1, 0.2]
+   >>> vTraces = [[-65.0, -64.9, -64.8], [-70.0, -69.9, -69.8]]
+   >>> write\_all\_traces('voltage\_traces.dat', t, vTraces)
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

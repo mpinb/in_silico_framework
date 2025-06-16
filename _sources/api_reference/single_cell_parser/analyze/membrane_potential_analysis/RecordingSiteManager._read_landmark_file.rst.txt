@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file`
+
+RecordingSiteManager._read_landmark_file
+========================================
+
+.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file(landmarkFilename)
+
+   Read the AMIRA landmark file and return the landmarks.
+
+   :Parameters: **landmarkFilename** (*str*) -- Path to the AMIRA landmark file.
+
+   :returns: List of landmarks coordinates, where each element is of format (x,y,z).
+   :rtype: list
+

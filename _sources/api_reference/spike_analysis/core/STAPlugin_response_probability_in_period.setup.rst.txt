@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_response_probability_in_period` ❭ :mod:`~spike_analysis.core.STAPlugin_response_probability_in_period.setup`
+
+STAPlugin_response_probability_in_period.setup
+==============================================
+
+.. py:method:: spike_analysis.core.STAPlugin_response_probability_in_period.setup(spike_times_analysis)
+
+   Sets up the analysis: computes the response probability in a period.
+
+   :paramref:`_result` will be the response probability.
+
+   :Parameters: **spike_times_analysis** (:py:class:`~spike_analysis.core.SpikeTimesAnalysis`) -- The spike times analysis object.
+
+   .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
+

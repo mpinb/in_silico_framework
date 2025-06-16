@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize`
+
+DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize
+=================================================================
+
+.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize()
+
+   Get the spatial binsize
+
+   Fetches the spatial bin size from a grouped synapse activation dataframe based on the database key.
+
+   :returns: spatial binsize, indicating how much :math:`\mu m` it covers.
+   :rtype: float
+

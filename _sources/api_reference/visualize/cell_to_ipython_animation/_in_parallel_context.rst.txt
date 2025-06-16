@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation` ❭ :mod:`~visualize.cell_to_ipython_animation._in_parallel_context`
+
+
+.. title:
+
+_in_parallel_context
+====================
+
+
+.. py:function:: visualize.cell_to_ipython_animation._in_parallel_context(paths, lines_objects, xlim=(0, 1500), ylim=(-80, 0))
+
+   Helper function to launch generation of images in parallel
+
+   .. note:: Some ideas how to speed up figure drawing are taken from: http://bastibe.de/2013-05-30-speeding-up-matplotlib.html
+
+   :Parameters: * **paths** (*list*) -- list of paths where to save images
+                * **lines\_objects** (*list*) -- list of dictionaries of lines
+                * **xlim** (*tuple*) -- x axis limits
+                * **ylim** (*tuple*) -- y axis limits
+
+   :returns: None
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.make_weakref`
+
+
+.. title:
+
+make_weakref
+============
+
+
+.. py:function:: simrun.modular_reduced_model_inference.strategy.make_weakref(obj)
+
+   Create a weak reference of a Python object.
+
+   Objects saved on VRAM do not get cleared automatically,
+   and memory management needs to be done manually.
+   However, weak references get cleared by the Python garbage collector.
+   This is a convenience method to convert Python objects to weak references,
+   so that memory handling is more robust and practical.
+
+   .. attention::
+
+      A weak reference is not the same as a direct reference.
+      Objects with references to it (i.e; referents) do not get destroyed as long as a direct reference exists.
+      This is not the case for weak references.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

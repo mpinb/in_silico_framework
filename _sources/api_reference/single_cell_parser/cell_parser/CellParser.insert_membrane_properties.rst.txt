@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.insert_membrane_properties`
+
+CellParser.insert_membrane_properties
+=====================================
+
+.. py:method:: single_cell_parser.cell_parser.CellParser.insert_membrane_properties(label, props)
+
+   Inserts membrane properties into all structures named as :paramref:`label`.
+
+   :Parameters: * **label** (*str*) -- Label of the structure.
+                * **props** (dict | :py:class:`~single_cell_parser.parameters.ParameterSet`) -- Membrane properties.
+                  Keys named ``spines`` or ``ions`` are ignored,
+                  as they are taken care of by :py:meth:`insert_range_mechanisms` and :py:meth:`_insert_ion_properties`.
+
+   :raises RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+

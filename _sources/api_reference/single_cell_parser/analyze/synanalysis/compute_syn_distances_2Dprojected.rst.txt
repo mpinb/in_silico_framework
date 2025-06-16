@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.compute_syn_distances_2Dprojected`
+
+
+.. title:
+
+compute_syn_distances_2Dprojected
+=================================
+
+
+.. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distances_2Dprojected(cell, synType, label=None)
+
+   Computes the XY-projected distances (to soma) of all synapses on dendrite.
+
+   Used for computing synapse distances projected on a 2D plane (the XY-plane),
+   as seen during 2-photon spine imaging.
+
+   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
+                * **synType** (*str*) -- presynaptic cell type.
+                * **label** (*str, optional*) -- dendrite type (e.g. "ApicalDendrite") to compute distances for.
+
+   :returns: 1D array of 2D- proejcted distances to soma
+   :rtype: numpy.ndarray
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

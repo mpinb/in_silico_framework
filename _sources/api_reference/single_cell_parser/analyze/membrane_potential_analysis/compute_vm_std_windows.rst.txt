@@ -1,0 +1,31 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.compute_vm_std_windows`
+
+
+.. title:
+
+compute_vm_std_windows
+======================
+
+
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None)
+
+   Compute the standard deviation of the voltage during different time windows.
+
+   :Parameters: * **vStd** (*list*) -- List of standard deviations of the voltage
+                * **tStim** (*float*) -- Time of stimulation
+                * **dt** (*float*) -- Time step.
+                * **width** (*float*) -- Width of each time window. Default is :math:`35.0 ms`.
+                * **window\_start\_times** (*list*) -- List of start times for the time windows. Default is ``[-50.0, 15.0]``.
+
+   :returns: A tuple containing the time windows and the average standard deviations.
+   :rtype: tuple
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,39 @@
+
+.. backlink:
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_many_param`
+
+
+.. title:
+
+set_many_param
+==============
+
+
+.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_many_param(cell_param, params=None)
+
+   Updates cell\_param given a dict of params in the dot naming convention.
+
+   This method is almost identical to :py:meth:`set\_param`, but it has a different behavior when
+   a parameter name appears both as a top-level key and as a nested key in :paramref:`params`. In this case, the top-level
+   key will be used as the master value.
+
+   Example::
+
+       cell\_param = {'a': {'b': {'c': 0}}}
+       params = {'a': True, 'a.b.c': False}
+       set\_many\_param(cell\_param, params)
+       # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
+
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The cell parameter nested dictionary.
+                * **params** (*dict*) -- The parameter flat dictionary.
+
+   :returns: The updated cell\_param.
+   :rtype: dict
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

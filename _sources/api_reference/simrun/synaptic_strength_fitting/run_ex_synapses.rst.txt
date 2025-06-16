@@ -1,0 +1,45 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.run_ex_synapses`
+
+
+.. title:
+
+run_ex_synapses
+===============
+
+
+.. py:function:: simrun.synaptic_strength_fitting.run_ex_synapses(neuron_param, network_param, celltype, gAMPA=None, gNMDA=None, gGABA=None, vardt=False, tStim=None, tEnd=None, mode=&#39;cells&#39;)
+
+   Simulate all EPSPs of a given celltype, one by one.
+
+   This function is used in the :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` class to simulate each synapse.
+
+   :Parameters: * **neuron\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The :ref:`cell\_parameters\_format`.
+                * **network\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The :ref:`network\_parameters\_format`.
+                * **celltype** (*str*) -- The celltype to activate the synapse for. Used to fetch the correct network parameters.
+                * **gAMPA** (*float*) -- The AMPA conductance value. Default: ``None``.
+                * **gNMDA** (*float*) -- The NMDA conductance value. Default: ``None``.
+                * **gGABA** (*float*) -- The GABA conductance value. Default: ``None``.
+                * **vardt** (*bool*) -- Whether to use the variable step size solver. Default: ``False``.
+                * **tStim** (*float*) -- The time of the synaptic activation. Default: ``None``.
+                * **tEnd** (*float*) -- The end time of the simulation. Default: ``None``.
+                * **mode** (*str*) -- Whether to activate each synapse one by one, or each cell one by one.
+                  A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single\_cell\_parser.cell.Cell`).
+                  Options: ``('cells', 'synapses')``
+
+   :returns: A tuple containing the votlage bbaseline, and voltage traces of all synapses. Format: ``(t\_baseline, v\_baseline, [t\_vecs], [v\_vecs])``
+   :rtype: tuple
+
+   .. seealso::
+
+      :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.run\_ex\_synapse` for the core function to
+      simulate a single synapse.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

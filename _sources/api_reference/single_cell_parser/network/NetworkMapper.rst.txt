@@ -1,0 +1,141 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+NetworkMapper
+=============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   create_network <NetworkMapper.create_network>
+   create_saved_network2 <NetworkMapper.create_saved_network2>
+   reconnect_saved_synapses <NetworkMapper.reconnect_saved_synapses>
+   create_functional_realization <NetworkMapper.create_functional_realization>
+   re_init_network <NetworkMapper.re_init_network>
+   _assign_anatomical_synapses <NetworkMapper._assign_anatomical_synapses>
+   _apply_network_modify_functions <NetworkMapper._apply_network_modify_functions>
+   _create_presyn_cells <NetworkMapper._create_presyn_cells>
+   _activate_presyn_cells <NetworkMapper._activate_presyn_cells>
+   _create_spiketrain_activities <NetworkMapper._create_spiketrain_activities>
+   _create_pointcell_activities <NetworkMapper._create_pointcell_activities>
+   _connect_functional_synapses <NetworkMapper._connect_functional_synapses>
+   _create_functional_connectivity_map <NetworkMapper._create_functional_connectivity_map>
+   _map_functional_realization <NetworkMapper._map_functional_realization>
+   _map_complete_anatomical_realization <NetworkMapper._map_complete_anatomical_realization>
+   _assign_synapse_weights <NetworkMapper._assign_synapse_weights>
+   _connect_spike_trains <NetworkMapper._connect_spike_trains>
+   create_saved_network <NetworkMapper.create_saved_network>
+   reconnect_network <NetworkMapper.reconnect_network>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.network.NetworkMapper(postCell, nwParam, simParam=None)
+   
+   Map active presynaptic cells to a multi-compartmental neuron model.
+
+   .. seealso::
+
+      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`.
+      This class is specialized for synapse activations and simulation control and re-creating already existing network realizations,
+      not for creating such anatomical network realizations from empirical data.
+
+   Initialize NetworkMapper.
+
+   :Parameters: * **postCell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to map synapses onto.
+                * **nwParam** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The network parameter set (see :ref:`network_parameters_format` for more info).
+                * **simParam** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The simulation parameter set. Default: None.
+
+   :Attributes:
+
+   .. attribute:: cells
+
+      dictionary holding all presynaptic cells ordered by cell type.
+
+      :type: dict
+
+   .. attribute:: connected_cells
+
+      dictionary holding indices of all active presynaptic cells ordered by cell type.
+
+      :type: dict
+
+   .. attribute:: postCell
+
+      reference to postsynaptic (multi-compartment) cell model.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell`
+
+   .. attribute:: nwParam
+
+      network parameter set (see :ref:`network_parameters_format` for more info).
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   .. attribute:: simParam
+
+      simulation parameter set.
+
+      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`create_network <single_cell_parser.network.NetworkMapper.create_network>`\ (synWeightName, change)
+        - Set up a network from network parameters.
+      * - :py:obj:`create_saved_network2 <single_cell_parser.network.NetworkMapper.create_saved_network2>`\ (synWeightName, full\_network)
+        - Recreate a saved network embedding and activate it.
+      * - :py:obj:`reconnect_saved_synapses <single_cell_parser.network.NetworkMapper.reconnect_saved_synapses>`\ (synInfoName, synWeightName, include\_silent\_synapses)
+        - Set up a network from a saved :ref:`syn_activation_format` file.
+      * - :py:obj:`create_functional_realization <single_cell_parser.network.NetworkMapper.create_functional_realization>`\ ()
+        - Create a new functional connectivity realization from an existing network parameter file based on ``convergence``.
+      * - :py:obj:`re_init_network <single_cell_parser.network.NetworkMapper.re_init_network>`\ (replayMode)
+        - Reinitialize the network for a new simulation run.
+      * - :py:obj:`_assign_anatomical_synapses <single_cell_parser.network.NetworkMapper._assign_anatomical_synapses>`\ ()
+        - Assigns synapses to postsynaptic cell from :ref:`syn_file_format` files.
+      * - :py:obj:`_apply_network_modify_functions <single_cell_parser.network.NetworkMapper._apply_network_modify_functions>`\ ()
+        - Apply network modify functions to the network.
+      * - :py:obj:`_create_presyn_cells <single_cell_parser.network.NetworkMapper._create_presyn_cells>`\ ()
+        - Creates presynaptic cells.
+      * - :py:obj:`_activate_presyn_cells <single_cell_parser.network.NetworkMapper._activate_presyn_cells>`\ ()
+        - Create PointCell or SpikeTrain activation patters for each presynaptic cell.
+      * - :py:obj:`_create_spiketrain_activities <single_cell_parser.network.NetworkMapper._create_spiketrain_activities>`\ (preCellType, networkParameters)
+        - Create spike train times based on the network parameters spiketrain keywords.
+      * - :py:obj:`_create_pointcell_activities <single_cell_parser.network.NetworkMapper._create_pointcell_activities>`\ (preCellType, networkParameters)
+        - Create point cell spike times based on the network parameters ``distribution`` keyword.
+      * - :py:obj:`_connect_functional_synapses <single_cell_parser.network.NetworkMapper._connect_functional_synapses>`\ ()
+        - Connects anatomical synapses to spike generators (PointCells).
+      * - :py:obj:`_create_functional_connectivity_map <single_cell_parser.network.NetworkMapper._create_functional_connectivity_map>`\ ()
+        - Connect functional anatomical synapses based on ``convergence``.
+      * - :py:obj:`_map_functional_realization <single_cell_parser.network.NetworkMapper._map_functional_realization>`\ (weights)
+        - Connects anatomical synapses to spike generators (PointCells).
+      * - :py:obj:`_map_complete_anatomical_realization <single_cell_parser.network.NetworkMapper._map_complete_anatomical_realization>`\ (weights, full\_network)
+        - Connect synapses to active presynaptic cells.
+      * - :py:obj:`_assign_synapse_weights <single_cell_parser.network.NetworkMapper._assign_synapse_weights>`\ (receptor, recepStr, syn)
+        - Assign synapse weights according to distribution specified in network parameters.
+      * - :py:obj:`_connect_spike_trains <single_cell_parser.network.NetworkMapper._connect_spike_trains>`\ (weights, change)
+        - Connects synapses with spike generators.
+      * - :py:obj:`create_saved_network <single_cell_parser.network.NetworkMapper.create_saved_network>`\ (synWeightName)
+        - Recreate a saved network embedding and activate it.
+      * - :py:obj:`reconnect_network <single_cell_parser.network.NetworkMapper.reconnect_network>`\ ()
+        - Re-generate activity and connectivity patterns for a network.
+

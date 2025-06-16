@@ -1,0 +1,32 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.get_fraction_of_landmarkAscii_dir`
+
+
+.. title:
+
+get_fraction_of_landmarkAscii_dir
+=================================
+
+
+.. py:function:: simrun.utils.get_fraction_of_landmarkAscii_dir(frac, basedir=None)
+
+   Sample landmarks from all landmarkAscii files in a directory.
+
+   This method loads all landmarkAscii files in a directory and returns a DataFrame containing the sampled landmarks and the cell type.
+
+   :Parameters: * **frac** (*float*) -- Fraction of landmarks to sample.
+                * **basedir** (*str*) -- The path to the directory containing the landmarkAscii files.
+
+   :returns: A pandas DataFrame containing the sampled landmarks and the cell type.
+   :rtype: pd.DataFrame
+
+   .. seealso:: :py:meth:`~simrun.utils.get\_fraction\_of\_landmarkAscii` to sample landmarks from a single file.
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

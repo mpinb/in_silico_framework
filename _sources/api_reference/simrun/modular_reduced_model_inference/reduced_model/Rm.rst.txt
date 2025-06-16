@@ -1,0 +1,146 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Rm
+==
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   add_data_extractor <Rm.add_data_extractor>
+   add_strategy <Rm.add_strategy>
+   get_n_trials <Rm.get_n_trials>
+   extract <Rm.extract>
+   run <Rm.run>
+   _gather_results <Rm._gather_results>
+   get_results <Rm.get_results>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: simrun.modular_reduced_model_inference.reduced_model.Rm(name, db, tmin=None, tmax=None, width=None, selected_indices=None)
+   
+   Reduced model class.
+
+   This is the top-level class for running reduced model inference.
+   It provides an interface to add data extractors and strategies, and to run the optimization.
+
+   :Parameters: * **name** (*str*) -- Name of the reduced model
+                * **db** (*str*) -- Path to the database
+                * **tmin** (*float*) -- Minimum time for the simulation
+                * **tmax** (*float*) -- Maximum time for the simulation
+                * **width** (*float*) -- Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+                * **selected_indices** (*list*) -- List/nested list of integer indices for selected simulation trials
+
+   :Attributes:
+
+   .. attribute:: name
+
+      Name of the reduced model
+
+      :type: str
+
+   .. attribute:: db
+
+      Path to the database
+
+      :type: str
+
+   .. attribute:: tmin
+
+      Minimum time for the simulation
+
+      :type: float
+
+   .. attribute:: tmax
+
+      Maximum time for the simulation
+
+      :type: float
+
+   .. attribute:: width
+
+      Width of the temporal kernel.
+      This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+
+      :type: float
+
+   .. attribute:: n_trials
+
+      Amount of trials
+
+      :type: int
+
+   .. attribute:: data_extractors
+
+      Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
+
+      :type: dict
+
+   .. attribute:: strategies
+
+      Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
+
+      :type: dict
+
+   .. attribute:: Data
+
+      Data view object
+
+      :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
+
+   .. attribute:: DataSplitEvaluation
+
+      Data split evaluation object
+
+      :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
+
+   .. attribute:: selected_indices
+
+      List/nested list of integer indices for selected simulation trials
+
+      :type: list
+
+   .. attribute:: results_remote
+
+      Flag that keeps track whether results are stored locally or on a remote scheduler.
+
+      :type: bool
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`add_data_extractor <simrun.modular_reduced_model_inference.reduced_model.Rm.add_data_extractor>`\ (name, data\_extractor, setup)
+        - Add a data extractor to the reduced model.
+      * - :py:obj:`add_strategy <simrun.modular_reduced_model_inference.reduced_model.Rm.add_strategy>`\ (strategy, setup, view)
+        - Add a strategy to the reduced model.
+      * - :py:obj:`get_n_trials <simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials>`\ ()
+        - Get the amount of trials.
+      * - :py:obj:`extract <simrun.modular_reduced_model_inference.reduced_model.Rm.extract>`\ (name)
+        - Extract data using the data extractor.
+      * - :py:obj:`run <simrun.modular_reduced_model_inference.reduced_model.Rm.run>`\ (client, n\_workers, strategy\_selection)
+        - Run one or more strategies on the data.
+      * - :py:obj:`_gather_results <simrun.modular_reduced_model_inference.reduced_model.Rm._gather_results>`\ (client)
+        - Fetch the solver results from the dask scheduler.
+      * - :py:obj:`get_results <simrun.modular_reduced_model_inference.reduced_model.Rm.get_results>`\ (client)
+        - Get the results of the optimization.
+

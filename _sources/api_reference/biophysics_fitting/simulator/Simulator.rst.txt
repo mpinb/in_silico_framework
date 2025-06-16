@@ -1,0 +1,131 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+Simulator
+=========
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   get_simulated_cell <Simulator.get_simulated_cell>
+   run <Simulator.run>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: biophysics_fitting.simulator.Simulator
+   
+   This class can be used to transform a parameter vector into simulated voltage traces.
+
+   This is typically done in two steps:
+
+   1. Set up a cell with biophysics from a parameter vector. See :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
+   2. Apply a variety of stimuli to the cell and extract voltage traces.
+
+   An examplary specification of such a program flow can be found in the module :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Simulator`.
+
+   The usual application is to specify biophysical parameters in a parameter vector and simulate
+   current injection responses depending on these parameters.
+
+
+   .. rubric:: Example
+      :class: example
+
+   >>> def stim_setup_fun(cell, params):
+   >>>     # set up some stimulus
+   >>>     return cell
+
+   >>> def stim_run_fun(cell, params):
+   >>>     # run the simulation
+   >>>     return cell
+
+   >>> def stim_response_measure_fun(cell, params)
+   >>>     # extract voltage traces from the cell
+   >>>     # Extract ionic currents from the cell?
+   >>>     return result
+
+   >>> params = pd.Series({"param1": 1, "param2": 2})
+
+   >>> s = Simulator()
+   >>> cell, params = s.setup.get(params)
+   >>> s.setup.stim_setup_funs.append(
+       ['stim_1.setup', stim_setup_fun])
+   >>> s.setup.stim_run_funs.append(
+       ['stim_1.run', stim_run_fun])
+   >>> s.setup.stim_response_measure_funs.append(
+       ['stim_1.measure', stim_response_measure_fun])
+
+   Often, it is easier to write functions that accept keyword arguments instead of full parameter vectors
+   This can be done by using :py:meth:`~biophysics_fitting.parameters.params_to_kwargs`.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> def stim_setup_function(cell, recSite = None):
+   >>>    # I dont need the :paramref:`params` argument, but I ask recSite directly
+   >>>    # set up current injection at soma distance recSite
+   >>>    return cell
+
+   >>> s.setup.stim_setup_funs.append([
+           BAC.stim_setup,
+           params_to_kwargs(stim_setup_function)
+       ])
+
+   Notable methods::
+
+       >>> s.run(params): returns a dictionary with the specified voltage traces for all stimuli
+       {'stim_1': {'tVec': ..., 'vList': [[...], ...]}, 'stim_2': ...}
+
+       >>> s.get_simulated_cell(params, stim)
+       cell, params  # cell has simulation data
+
+       >>> s.setup.get(params):
+       cell  # with bipohysics set up
+
+       >>> s.setup.get_cell_params(params)
+       cell_params
+
+       >>> s.setup.get_cell_params_with_default_sim_prams(params, ...)
+       neuron_parameter_file
+
+   .. note::
+
+      The names for stim_setup_funs, stim_run_funs and stim_response_measure_funs need to start
+          with the name of the simulus followed by a dot. For each stimulus, each of the three
+          functions needs to be defined exactly once.
+
+   :Attributes:
+
+   .. attribute:: setup
+
+      A Simulator_Setup object that keeps track of the simulation setup.
+
+      :type: :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`get_simulated_cell <biophysics_fitting.simulator.Simulator.get_simulated_cell>`\ (params, stim, simulate)
+        - Get the simulated cell.
+      * - :py:obj:`run <biophysics_fitting.simulator.Simulator.run>`\ (params, stims)
+        - Simulates all stimuli for a given parameter vector.
+

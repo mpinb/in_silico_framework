@@ -1,0 +1,167 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+CurrentAnalysis
+===============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _get_current_by_rv <CurrentAnalysis._get_current_by_rv>
+   _compute_current_arrays <CurrentAnalysis._compute_current_arrays>
+   plot_areas <CurrentAnalysis.plot_areas>
+   plot_lines <CurrentAnalysis.plot_lines>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: visualize.current_visualizer.CurrentAnalysis(cell_or_dict=None, secID='bifurcation', segID=-1, rangeVars=None, colormap=None, tVec=None)
+   
+   Plot the individual ion currents and the net current of a cell simulation.
+
+   Inspect the individual ion currents and the net current of a single cell segment.
+
+   Initialize the CurrentAnalysis object.
+
+   :Parameters: * **cell_or_dict** (*dict or Cell*) -- The cell object, or a dictionary containing equivalent simulation data.
+                * **secID** (*int*) -- The index of the section. Default is 'bifurcation'.
+                * **segID** (*int*) -- The index of the segment. Default is -1.
+                * **rangeVars** (*list*) -- The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
+                * **colormap** (*dict*) -- The colormap for the ion currents. Default is ``None``.
+                * **tVec** (*list*) -- The time vector. Default is ``None``. Only necessary if :paramref:`cell_or_dict` is a dictionary.
+
+   :Attributes:
+
+   .. attribute:: mode
+
+      'cell' or 'dict'.
+
+      :type: str
+
+   .. attribute:: cell
+
+      The cell object, or a dictionary containing equivalent simulation data.
+
+      :type: :py:class:`~single_cell_parser.cell.Cell` | dict
+
+   .. attribute:: t
+
+      The time vector.
+
+      :type: list
+
+   .. attribute:: sec
+
+      The section of the cell.
+
+      :type: Section
+
+   .. attribute:: secID
+
+      The index of the section.
+
+      :type: int
+
+   .. attribute:: segID
+
+      The index of the segment.
+
+      :type: int
+
+   .. attribute:: seg
+
+      The segment of the cell.
+
+      :type: Segment
+
+   .. attribute:: rangeVars
+
+      The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
+
+      :type: list
+
+   .. attribute:: colormap
+
+      The colormap for the ion currents.
+
+      :type: dict
+
+   .. attribute:: depolarizing_currents
+
+      The depolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: hyperpolarizing_currents
+
+      The hyperpolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: depolarizing_currents_sum
+
+      The sum of the depolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: hyperpolarizing_currents_sum
+
+      The sum of the hyperpolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: net_current
+
+      The net current.
+
+      :type: np.array
+
+   .. attribute:: depolarizing_currents_normalized
+
+      The normalized depolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: hyperpolarizing_currents_normalized
+
+      The normalized hyperpolarizing currents.
+
+      :type: np.array
+
+   .. attribute:: voltage_trace
+
+      The voltage trace.
+
+      :type: np.array
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_get_current_by_rv <visualize.current_visualizer.CurrentAnalysis._get_current_by_rv>`\ (rv)
+        - Get the section current by the range variable name.
+      * - :py:obj:`_compute_current_arrays <visualize.current_visualizer.CurrentAnalysis._compute_current_arrays>`\ ()
+        - Compute the ionic currents of a section.
+      * - :py:obj:`plot_areas <visualize.current_visualizer.CurrentAnalysis.plot_areas>`\ (ax, normalized, plot\_net, plot\_voltage, t\_stim, select\_window\_relative\_to\_stim)
+        - Plot the ion currents and the net current of a cell simulation.
+      * - :py:obj:`plot_lines <visualize.current_visualizer.CurrentAnalysis.plot_lines>`\ (ax, legend)
+        - Plot the ion currents and the net current of a cell simulation.
+

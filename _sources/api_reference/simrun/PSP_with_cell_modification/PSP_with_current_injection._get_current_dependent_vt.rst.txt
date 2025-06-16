@@ -1,0 +1,17 @@
+
+.. backlink:
+
+:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection._get_current_dependent_vt`
+
+PSP_with_current_injection._get_current_dependent_vt
+====================================================
+
+.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection._get_current_dependent_vt(current)
+
+   Run the current injection simulation
+
+   :Parameters: **current** (*float*) -- Current to inject into the soma (in :math:`nA`).
+
+   :returns: Time vector and membrane potential vector as numpy arrays.
+   :rtype: tuple
+

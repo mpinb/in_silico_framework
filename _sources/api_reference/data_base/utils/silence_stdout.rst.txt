@@ -1,0 +1,28 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.silence_stdout`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+silence_stdout
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: data_base.utils.silence_stdout(fun=None)
+   
+   Silence stdout
+
+   Can be used as context manager and decorator.
+
+   .. seealso:: https://stackoverflow.com/a/2829036/5082048
+

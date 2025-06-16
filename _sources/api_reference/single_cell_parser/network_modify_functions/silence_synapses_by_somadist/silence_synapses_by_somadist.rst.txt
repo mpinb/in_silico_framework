@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist.silence_synapses_by_somadist`
+
+
+.. title:
+
+silence_synapses_by_somadist
+============================
+
+
+.. py:function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist.silence_synapses_by_somadist(cell, evokedNW, soma_dist_ranges=None)
+
+   Silence synapses at a certain soma distance.
+
+   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- The cell to modify.
+                * **soma\_dist\_ranges** (*dict*) -- Dictionary with synapse types as keys (e.g. L5tt\_C2) and the range
+                  in which it should be silenced as value.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> soma\_dist\_ranges = {
+   ... 'VPM\_C2': [0,200],
+   ... 'L5tt\_C2': [1000,1200]
+   ... }
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution`
+
+SynapseMapper.map_synapse_model_distribution
+============================================
+
+.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution(synType, structLabel=None)
+
+   Maps modeled synapse distribution (e.g. normal, uniform, ...) onto dendritic tree.
+
+   For each distance in :paramref:`synDist`, a synapse is placed on a random dendritic branch at that distance from the soma.
+   In this case, :paramref:`synDist` has to be iterable of distances of synapses.
+   Substructure may be indicated by structLabel.
+
+   :Parameters: * **synType** (*str*) -- The type of synapse to be placed.
+                * **structLabel** (*str*) -- The label of the substructure to place synapses on. Default: None (all dendritic sections).
+

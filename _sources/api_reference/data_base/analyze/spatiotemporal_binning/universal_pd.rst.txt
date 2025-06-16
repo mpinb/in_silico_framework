@@ -1,0 +1,34 @@
+
+.. backlink:
+
+:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spatiotemporal_binning` ❭ :mod:`~data_base.analyze.spatiotemporal_binning.universal_pd`
+
+
+.. title:
+
+universal_pd
+============
+
+
+.. py:function:: data_base.analyze.spatiotemporal_binning.universal_pd(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
+
+   Bin a pandas DataFrame by both distance and time.
+
+   This is a speed-optimized binning code for 2d-binning of a :py:class:`pandas.DataFrame`.
+
+   :Parameters: * **df** (:py:class:`pandas.DataFrame`) -- DataFrame to bin. Must contain a column with the name :paramref:`distance\_column` that contains the distance values.
+                * **distance\_column** (*str*) -- Column name of the distance values.
+                * **spatial\_distance\_bins** (*int*) -- Size of the distance bins. Default is :math:`50\mu m`.
+                * **min\_time** (*int*) -- Minimum time value. Default is :math:`0 ms`.
+                * **max\_time** (*int*) -- Maximum time value. Default is :math:`300 ms`.
+                * **time\_distance\_bins** (*int*) -- Size of the time bins. Default is :math:`1 ms`.
+
+   :returns:     A 2D array of the binned values.
+   :rtype: :py:class:`~numpy.array`
+
+
+.. 
+   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
+   However, this may cause issues with code blocks or other literal text, and malform markdown tables
+   Use with caution?
+..

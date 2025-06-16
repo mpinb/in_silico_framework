@@ -1,0 +1,18 @@
+
+.. backlink:
+
+:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_statistics`
+
+_DendrogramSynapseStatistics._compute_synapse_statistics
+========================================================
+
+.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_statistics()
+
+   Compute the synapse statistics.
+
+   This method calculates the total amount of synapses in the dendrogram per synapse type.
+   While plotting per synapse type is supported, the default behavior is to plot all synapses in black.
+
+   :returns: Nothing. Updates :paramref:`synapse_statistics`.
+   :rtype: None
+

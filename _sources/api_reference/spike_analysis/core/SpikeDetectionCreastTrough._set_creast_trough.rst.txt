@@ -1,0 +1,21 @@
+
+.. backlink:
+
+:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough`
+
+SpikeDetectionCreastTrough._set_creast_trough
+=============================================
+
+.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough(lim_creast, lim_trough)
+
+   Sets the creast and trough limits based on the given values.
+
+   :Parameters: * **lim_creast** (*float|str*) -- Threshold above which a creast of a spike is detected as such.
+                * **lim_trough** (*float|str*) -- Threshold below which a trough of a spike is detected as such.
+
+   :raises ValueError: If lim_creast and lim_trough are not both floats or both "minimum" or both "zero".
+
+   .. seealso:: :py:meth:`~spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins`
+
+   :returns: None. Sets the :paramref:`lim_creast` and :paramref:`lim_trough` attributes.
+
