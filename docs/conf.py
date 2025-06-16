@@ -90,9 +90,9 @@ def setup(app):
 
     # copy over tutorials and convert links to python files to sphinx documentation directives
     copy_and_parse_notebooks_to_docs(
-    source_dir=os.path.join(project_root, "getting_started", "tutorials"),
-    dest_dir=os.path.join(project_root, "docs", "tutorials"),
-    api_extension="autoapi",  # change this if using autosummary instead of autoapi, it needs to find target dir of .rst files.
+        source_dir=os.path.join(project_root, "getting_started", "tutorials"),
+        dest_dir=os.path.join(project_root, "docs", "tutorials"),
+        api_output_dir=autoapi_root,  
     )
 
 
