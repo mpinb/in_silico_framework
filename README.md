@@ -23,11 +23,11 @@ An In Silico Framework for multi-scale modeling and analysis of *in vivo* neuron
 Documentation is available at [mpinb.github.io/in_silico_framework](https://mpinb.github.io/in_silico_framework)
 
 ## 📝 Tutorials
-Tutorials on ISF's most important workflows are available [online](https://mpinb.github.io/in_silico_framework/rst_assets/tutorials.html), and under [getting_started/tutorials](https://github.com/mpinb/in_silico_framework/blob/master/getting_started/tutorials)
+Tutorials on ISF's most important workflows are available [online](https://mpinb.github.io/in_silico_framework/tutorials), and under [getting_started/tutorials](https://github.com/mpinb/in_silico_framework/blob/master/getting_started/tutorials)
 
 ## 🔩 Installation
 
-Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/rst_assets/installation.html), but are also repeated below.
+Installation instructions can be found [here](https://mpinb.github.io/in_silico_framework/installation), but are also repeated below.
 
 ISF is available for Linux, Windows and macOS.
 For installation and environment management, ISF uses [pixi](https://pixi.sh/latest/). 
