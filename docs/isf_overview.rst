@@ -31,7 +31,7 @@
             width=2]
         red [
             label="Reduced models",
-            href="tutorials/4. reduced models/4.1 Generalized Linear Models.html",
+            href="tutorials/4. reduced models/4.1 Reduced Models.html",
             style=rounded, 
             color="var(--md-default-fg-color--light, grey)"
             width=2]
