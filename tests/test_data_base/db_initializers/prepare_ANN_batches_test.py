@@ -1,3 +1,4 @@
+import pytest
 import numpy as np
 from data_base.db_initializers.prepare_ANN_batches \
     import spike_times_to_onehot
@@ -7,7 +8,7 @@ from data_base.db_initializers.synapse_activation_binning \
     import init as init_synapse_activation
 from data_base.utils import silence_stdout
 
-optimize_simrun_general = silence_stdout(optimize_simrun_general)
+# optimize_simrun_general = silence_stdout(optimize_simrun_general)
 
 
 def test_API(fresh_db, client):

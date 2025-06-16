@@ -328,7 +328,7 @@ def save_groupby(db, result, groupby):
     A new model data base within :paramref:`db` is created and the numpy arrays are stored there.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The simrun-initialized database object.
+        db (:py:class:`~data_base.DataBase`): The simrun-initialized database object.
         result (dict): The result of the synapse activation binning.
         groupby (str): The groupby key for the synapse activation bins.
         
@@ -362,7 +362,7 @@ def init(
     '''Main pipeline to bin synapse activations from a :ref:`syn_activation_format` dataframe.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The simrun-initialized database object.
             Must contain the key ``synapse_activation``.
         groupby (str):

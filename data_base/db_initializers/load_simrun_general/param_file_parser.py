@@ -258,7 +258,7 @@ def _delayed_copy_transform_paramfiles_to_db(
 
     Args:
         paramfile_hashmap_df (pd.DataFrame): DataFrame containing the filepaths and hashes.
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to which the data should be added.
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
         path_column (str): Name of the column containing the filepaths.
         hash_column (str): Name of the column containing the hashes.
         transform_fun (function): Function to transform the parameter files.
@@ -339,7 +339,7 @@ def load_param_files_from_db(db, sti):
     """Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The database containing the parsed simulation results.
         sti (str):
             For which simulation trial index to load the parameter files.

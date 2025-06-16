@@ -19,29 +19,37 @@
 Read and analyze electrophysiological data.
 """
 
-import neo, json, tempfile, shutil, os
+import neo, json, tempfile, shutil, os, json, time, tempfile, six, logging, gc
 from PyPDF2 import PdfFileWriter, PdfFileReader
-import json
-from functools import partial
-import neo
 import pandas as pd
 import numpy as np
 from data_base import utils as db_utils
 from collections import defaultdict
-import tempfile
 import matplotlib.pyplot as plt
-import six
 from IPython import display
 import seaborn as sns
 from data_base.analyze.spike_detection import spike_in_interval as db_analyze_spike_in_interval
 from data_base.analyze.temporal_binning import universal as temporal_binning
 from visualize import histogram
-import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
 ################################
 # reader
 ################################
+
+def _try_delete_folder_until_permission(dest_path, n_attempts=3):
+    """Try to delete a folder until permission is granted.
+
+    Args:
+        dest_path (str): Path to the folder to be deleted.
+    """
+    for attempt in range(n_attempts):
+        try:
+            shutil.rmtree(dest_path)
+            break
+        except PermissionError:
+            if attempt > n_attempts: raise
+            time.sleep(0.1)  # Wait briefly before retrying
 
 def read_smr_file(path):
     """Reads a Spike2 file and returns its content as a neo.core.block.Block object.
@@ -57,12 +65,17 @@ def read_smr_file(path):
     """
     # copying file to tmp_folder to avoid modifying it at all cost
     dest_folder = tempfile.mkdtemp()
-    shutil.copy(path, dest_folder)
-    path = os.path.join(dest_folder, os.path.basename(path))
-    reader = neo.io.Spike2IO(filename=path)
-    data = reader.read(lazy=False, signal_group_mode='split-all')[0]
-    shutil.rmtree(dest_folder)
-    return data
+    try:
+        temp_path = os.path.join(dest_folder, os.path.basename(path))
+        shutil.copy(path, temp_path)
+        reader = neo.io.Spike2IO(filename=temp_path)
+        data = reader.read(lazy=False, signal_group_mode='split-all')[0]
+        del reader      # Explicitly delete the reader to release the file handle
+        gc.collect()    # Force garbage collection to ensure file handles are released
+        return data
+    finally:
+        # Retry deleting the temporary directory in case of file locking
+        _try_delete_folder_until_permission(dest_folder)
 
 
 class ReaderSmr:
@@ -1158,14 +1171,14 @@ class STAPlugin_ISIn(STAPlugin_TEMPLATE):
         
     Attributes:
         name (str): The name of the plugin.
-        source (str): The :py:class:`~data_base.data_base.DataBase` key containing the spike times.
+        source (str): The :py:class:`~data_base.DataBase` key containing the spike times.
         max_n (int): The maximum order of ISIs computed.
     """
     def __init__(self, name='ISIn', source='spike_times', max_n=5):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'ISIn'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
             max_n (int, optional): The maximum order of ISIs computed. Defaults to 5."""
         self.name = name
         self.source = source
@@ -1223,7 +1236,7 @@ class STAPlugin_bursts(STAPlugin_TEMPLATE):
         
     Attributes:
         name (str): The name of the plugin.
-        source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+        source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
         event_maxtimes (dict): Dictionary containing the maximum duration of each event type.
         event_names (dict): Dictionary containing the names of the event types.
     """
@@ -1237,7 +1250,7 @@ class STAPlugin_bursts(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'bursts'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
             event_maxtimes (dict, optional): Dictionary containing the maximum duration of each event type. Default: ``{0:0, 1:10, 2:30}``
             event_names (dict, optional): Dictionary containing the names of the event types. Default: ``{0: "singlet", 1: "doublet", 2: "triplet"}``"""
         if event_maxtimes is None:
@@ -1326,7 +1339,7 @@ class STAPlugin_annotate_bursts_in_st(STAPlugin_TEMPLATE):
         
     Attributes:
         name (str): The name of the plugin.
-        source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+        source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
         event_maxtimes (dict): Dictionary containing the maximum duration of each event type.
         event_names (dict): Dictionary containing the names of the event types.
     """
@@ -1338,7 +1351,7 @@ class STAPlugin_annotate_bursts_in_st(STAPlugin_TEMPLATE):
         """    
         Args:
             name (str, optional): The name of the plugin. Defaults to 'bursts_st'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
             event_maxtimes (dict, optional): Dictionary containing the maximum duration of each event type. Default: ``{0:0, 1:10, 2:30}``
             event_names (dict, optional): Dictionary containing the names of the event types. Default: ``{0: "singlet", 1: "doublet", 2: "triplet"}``"""
         if event_maxtimes is None:
@@ -1397,7 +1410,7 @@ class STAPlugin_ongoing(STAPlugin_TEMPLATE):
 
     Attributes:
         name (str): The name of the plugin. Defaults to 'ongoing_activity'.
-        source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+        source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
         ongoing_sample_length (int): The length of the ongoing sample in ms. Defaults to 90000.
         mode (str): The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'.
     """
@@ -1409,7 +1422,7 @@ class STAPlugin_ongoing(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'ongoing_activity'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
             ongoing_sample_length (int, optional): The length of the ongoing sample in ms. Defaults to 90000.
             mode (str, optional): The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'. 
         """
@@ -1457,7 +1470,7 @@ class STAPlugin_quantification_in_period(STAPlugin_TEMPLATE):
         
     Attributes:
         name (str): The name of the plugin. Defaults to 'frequency_in_period'.
-        source (str): The :py:class:`~data_base.data_base.DataBase` key containing the spike times.
+        source (str): The :py:class:`~data_base.DataBase` key containing the spike times.
         period (str): The period to analyze.
         t_start (float): The start time of the period.
         t_end (float): The end time of the period.
@@ -1473,7 +1486,7 @@ class STAPlugin_quantification_in_period(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'frequency_in_period'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
             period (str, optional): The period to analyze. Defaults to None (entire trace).
             t_start (float, optional): The start time of the period. Defaults to None.
             t_end (float, optional): The end time of the period. Defaults to None.
@@ -1534,7 +1547,7 @@ class STAPlugin_extract_column_in_filtered_dataframe(STAPlugin_TEMPLATE):
     Attributes:
         name (str): The name of the plugin.
         column_name (str): The name of the column to extract.
-        source (str): The :py:class:`~data_base.data_base.DataBase` key containing the dataframe.
+        source (str): The :py:class:`~data_base.DataBase` key containing the dataframe.
         select (dict): The selection criteria for the dataframe.
     """
 
@@ -1543,7 +1556,7 @@ class STAPlugin_extract_column_in_filtered_dataframe(STAPlugin_TEMPLATE):
         Args:
             name (str, optional): The name of the plugin. Defaults to None.
             column_name (str, optional): The name of the column to extract. Defaults to None.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the dataframe. Defaults to None. 
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the dataframe. Defaults to None. 
         """
         if None in (name, column_name, source):
             raise ValueError("name and column and source must be defined!")
@@ -1574,7 +1587,7 @@ class STAPlugin_spike_times_dataframe(STAPlugin_TEMPLATE):
  
     Attributes:
         name (str): The name of the plugin.
-        source (str): The :py:class:`~data_base.data_base.DataBase` key containing the spike times.
+        source (str): The :py:class:`~data_base.DataBase` key containing the spike times.
         offset (int): The offset of the spike times.
         mode (str): The mode of the analysis. Can be 'spike_times' or 'stim_times'.
     """
@@ -1586,7 +1599,7 @@ class STAPlugin_spike_times_dataframe(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'spike_times_dataframe'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
             offset (int, optional): The offset of the spike times. Defaults to 0.
             mode (str, optional): The mode of the analysis. Can be 'spike_times' or 'stim_times'. Defaults to 'spike_times'.
         """
@@ -1632,7 +1645,7 @@ class STAPlugin_response_probability_in_period(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'frequency_in_period'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
             period (str, optional): The period to analyze. Defaults to None (entire trace).
             t_start (float, optional): The start time of the period. Defaults to None.
             t_end (float, optional): The end time of the period. Defaults to None.
@@ -1682,7 +1695,7 @@ class STAPlugin_response_latency_in_period(STAPlugin_TEMPLATE):
         """
         Args:
             name (str, optional): The name of the plugin. Defaults to 'frequency_in_period'.
-            source (str, optional): The :py:class:`~data_base.data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+            source (str, optional): The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
             period (str, optional): The period to analyze. Defaults to None (entire trace).
             t_start (float, optional): The start time of the period. Defaults to None.
             t_end (float, optional): The end time of the period. Defaults to None.

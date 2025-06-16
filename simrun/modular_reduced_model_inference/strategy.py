@@ -39,7 +39,8 @@ import sklearn.metrics
 import matplotlib.pyplot as plt
 import weakref
 import sys
-from config.isf_logging import logger
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 CUPY_ENABLED = 'cupy' in sys.modules
 if CUPY_ENABLED:
     import cupy

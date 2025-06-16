@@ -1,4 +1,4 @@
-from data_base.data_base import DataBase, get_db_by_unique_id
+from data_base import DataBase, get_db_by_unique_id
 import tempfile, os, shutil
 from data_base.data_base_register import DataBaseRegister
 import pytest

@@ -1,0 +1,14 @@
+{
+    "DEFAULT_DUMPER": {
+        "base_name": "to_cloudpickle",
+        "description": "Default dumper for saving data to disk. This dumper will be used when the `dumper` kwarg is undefined."
+    },
+    "DEFAULT_DATA_BASE": {
+        "FQN": "data_base.isf_data_base.ISFDataBase",
+        "description": "The main class for managing the data base. It provides methods to load, save, and manage data."
+    },
+    "DATA_BASE_REGISTER_PATH": {
+        "filepath": "data_base/.data_base_register.db",
+        "description": "Path to the data base register file, relative to the project source. This file is used to keep track of registered data bases."
+    }
+}

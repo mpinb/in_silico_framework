@@ -1,7 +1,6 @@
 import pytest
 import pandas as pd
 import dask.dataframe as dd
-import six
 
 @pytest.fixture
 def pdf():

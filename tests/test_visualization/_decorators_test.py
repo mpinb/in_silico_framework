@@ -1,7 +1,6 @@
 from .context import *
 from visualize._decorators import *
 import pandas as pd
-import pandas.util.testing as pdt
 import dask.dataframe as dd
 from mock import MagicMock, call
 

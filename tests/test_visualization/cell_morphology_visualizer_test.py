@@ -2,9 +2,8 @@ from visualize.cell_morphology_visualizer import CellMorphologyVisualizer, CellM
 from .context import *
 from single_cell_parser.serialize_cell import *
 from tests import setup_synapse_activation_experiment
-import six
-import pytest
-import distributed
+import six, pytest, gc
+import matplotlib.pyplot as plt
 
 
 class TestCellMorphologyVisualizer:
@@ -16,6 +15,9 @@ class TestCellMorphologyVisualizer:
             t_start=0, t_stop=1,t_step=0.5
         )  # don't align trunk in py2, scipy in Py2.7 has no Rotation object
 
+    def teardown_class(self):
+        plt.close("all")
+
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
@@ -26,28 +28,36 @@ class TestCellMorphologyVisualizer:
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_morphology(self):
-        self.cmv.plot()
+        fig = self.cmv.plot()
+        plt.close()
+        gc.collect()
         
     def test_highlight_section(self):
-        self.cmv.plot(highlight_section=1)
+        fig = self.cmv.plot(highlight_section=1)
+        plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_voltage(self):
-        self.cmv.plot(
+        fig = self.cmv.plot(
             color="voltage",
             show_legend=True,
             time_point=0)
+        plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2,
         reason="The cell_morphology_visualizer methods are not available on Py2")
     def test_plot_synapses(self):
-        self.cmv.plot(
+        fig = self.cmv.plot(
             color="voltage",
             show_synapses=True,
             time_point=0)
+        plt.close() 
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2,
@@ -60,6 +70,7 @@ class TestCellMorphologyVisualizer:
             show_synapses=True,
             out_name=os.path.join(outdir, "test_gif.gif"),
             client=client)
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2,
@@ -73,6 +84,7 @@ class TestCellMorphologyVisualizer:
             images_path=outdir,
             out_path=os.path.join(outdir, "test_video.mp4"),
             client=client)
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2,
@@ -86,6 +98,7 @@ class TestCellMorphologyVisualizer:
             show_legend=True,
             images_path=outdir, 
             client=client)
+        gc.collect()
 
 
 class TestCellMorphologyInteractiveVisualizer:
@@ -110,18 +123,25 @@ class TestCellMorphologyInteractiveVisualizer:
         # n_lines = n_points + n_section_connections = n_points + n_sections - 1
         assert len(self.cmiv.ion_dynamics_timeseries[self.ion_keyword][0]
             ) == self.cmiv.n_sections
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_morphology_3d(self):
         fig = self.cmiv.interactive_plot()
+        plt.close()
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_voltage(self):
         fig = self.cmiv.interactive_plot(color="voltage", time_point=0)
+        plt.close() 
+        gc.collect()
 
     @pytest.mark.skipif(
         six.PY2, reason="Interactive visualizations are not available on Py2")
     def test_display_interactive_ion_dynamics(self):
         fig = self.cmiv.interactive_plot(color='NaTa_t.ina', time_point=0)
+        plt.close()
+        gc.collect()

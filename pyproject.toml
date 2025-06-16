@@ -1,3 +1,6 @@
+# -------------------------------------------------------------------------
+# Project metadata
+# -------------------------------------------------------------------------
 [project]
 authors = [
   {name = "Arco Bast", email = "basta@janelia.hhmi.org"},
@@ -7,29 +10,31 @@ description = "An In Silico Framework for the generation, simulation and analysi
 name = "ISF"
 requires-python = "==3.8.*"
 version = "0.5.0-beta"
-dependencies = ["blenderspike-py @ https://github.com/ArtemKirsanov/BlenderSpike.git"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["linux-64", "osx-arm64"]
-
-[build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling"]
+platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [tool.pixi.system-requirements]
 libc = "2.17"
 linux = "3.10.0"
 
-[tool.pixi.activation]
-env = { "PYTHONPATH" = "$(pwd):$PYTHONPATH" }
+# -------------------------------------------------------------------------
+# Build config
+# -------------------------------------------------------------------------
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
+
+# -------------------------------------------------------------------------
+# Dependencies
+# -------------------------------------------------------------------------
 [tool.pixi.dependencies]
 dask = "2.30.0.*"
 scikit-learn = "0.23.2.*"
 pypdf2 = ">=3.0.1,<4"
 mock = ">=5.1.0,<6"
-scandir = ">=1.10.0,<2"
 kazoo = ">=2.10.0,<3"
 scipy = "1.5.2.*"
 matplotlib = ">=3.3.2,<4"
@@ -46,19 +51,18 @@ jupyterlab = ">=3.5.3,<4"
 jupyter-scatter = ">=0.19.1,<0.20"
 cmasher = ">=1.6.3,<2"
 ipywidgets = ">=8.1.5,<9"
-simpleitk = ">=2.2.1,<3"
 zarr = ">=2.15.0,<3"
 pandas = "1.1.3.*"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
 redis = ">=5.2.0,<6"
-pyarrow = "==12.0.1" 
-blosc = ">=1.11.1,<2" 
-scikit-learn = ">=0.23.2"
-seaborn = ">=0.12.2,<0.13"
 isf-pandas-msgpack = ">=0.4.0"
+blosc = ">=1.11.1,<2"
+pyarrow = ">=7.0.0,<12"
+blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
+# OS specific dependencies
 [tool.pixi.target.osx]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
@@ -67,12 +71,13 @@ dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
-[tool.pixi.environments]
-docs = ["docs"]
-default = ["isf"]
+[tool.pixi.target.win]
+dependencies = { numpy = "==1.19.2", distributed = "==2.30.0"}
+pypi-dependencies = { tables = ">=3.8.0,<4" }
 
+# Feature specific dependencies
 [tool.pixi.feature.isf]
-dependencies = { pyyaml = "==5.3.1", flask = "==1.1.4"}
+dependencies = { flask = "==1.1.4"}
 
 [tool.pixi.feature.docs.dependencies]
 flask = ">=2"
@@ -83,7 +88,6 @@ furo = ">=2024.8.6,<2025"
 sphinxext-opengraph = ">=0.9.1,<0.10"
 sphinx-copybutton = ">=0.5.2,<0.6"
 sphinx = ">=7.1.2,<8"
-pyyaml = ">=6.0.2,<7"
 nbsphinx-link = ">=1.3.0,<2"
 sphinx-inline-tabs = ">=2023.4.21,<2024"
 pandoc = ">=3.6.2,<4"
@@ -97,61 +101,125 @@ catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
 sphinx-autoapi = ">=3.5.0,<4" 
 sphinx-immaterial = ">=0.11.14,<0.12"
 
-[tool.pixi.tasks]
-launch_dask_server = {cmd = [
+# -------------------------------------------------------------------------
+# Environment config
+# -------------------------------------------------------------------------
+[tool.pixi.target.unix.activation.env]
+PYTHONPATH = "$(pwd):$PYTHONPATH"
+ISF_HOME="$(pwd)"
+[tool.pixi.target.win.activation.env]
+PYTHONPATH = "%cd%;%NEURONHOME%/lib/python;%PYTHONPATH%"
+PATH = "%PATH%;%NEURONHOME%/bin"
+HOME = "%USERPROFILE%"
+ISF_HOME="%cd%"
+
+
+[tool.pixi.environments]
+docs = ["docs"]
+default = ["isf"]
+
+# -------------------------------------------------------------------------
+# Testing config
+# -------------------------------------------------------------------------
+[tool.pytest.ini_options]
+markers = [
+  "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite."
+]
+# Note: these dask options are per pytest worker.
+# So 6 dask workers means 6 das workers per pytest worker.
+timeout = 180
+DASK_N_WORKERS = 4
+DASK_MEM_LIMIT = "5GB"
+log_cli = true
+log_level = "INFO"
+
+# -------------------------------------------------------------------------
+# Pixi tasks
+# -------------------------------------------------------------------------
+[tool.pixi.tasks.configure]
+# (re)configure ISF for local filesystem
+args = [
+  {arg = "force_recompile", default = "False" },
+  {arg = "overwrite_param_files", default = "False" }
+] 
+cmd = [
+  "python", 
+  "config/isf_configure.py", 
+  "--force-recompile={{ force_recompile }}",
+  "--overwrite-param-files={{ overwrite_param_files }}",
+]
+
+[tool.pixi.tasks.setup]
+depends-on = ["configure"]
+
+[tool.pixi.tasks.launch_dask_server]
+args = [
+  {arg = "port", default = "8786"},
+  {arg = "dashboard_port", default = "8787"}
+]
+cmd = [
   "dask-scheduler", 
-  "--port=$ISF_DASK_PORT", 
-  "--bokeh-port=$ISF_DASK_BOKEH_PORT", 
+  "--port={{ port }}", 
+  "--dashboard-address={{ dashboard_port }}", 
   "--host=localhost"
-  ], description = "Launch a Dask scheduler", env = {ISF_DASK_PORT = "8786", ISF_DASK_BOKEH_PORT = "8787"}, cwd="/tmp"}
+  ]
+description = "Launch a Dask scheduler"
 
-launch_dask_workers = {cmd = [
+[tool.pixi.tasks.launch_dask_workers]
+args = [
+  {arg = "port",        default = "8786"},
+  {arg = "dashboard_port",  default = "8787"},
+  {arg = "num_workers", default = "4"},
+  {arg = "mem_limit",   default = "3GB"}
+]
+cmd = [
   "dask-worker", 
-  "localhost:$ISF_DASK_PORT", 
+  "localhost:{{ port }}", 
   "--nthreads=1", 
-  "--nprocs=$ISF_NUM_DASK_WORKERS", 
-  "--memory-limit=100e15", 
-  "--dashboard-address=$ISF_DASK_BOKEH_PORT"
-  ], description = "Launch Dask workers", env = {ISF_DASK_PORT = "8786", ISF_DASK_BOKEH_PORT = "8787", ISF_NUM_DASK_WORKERS = "4"}, cwd = "/tmp"}
+  "--nprocs={{  num_workers }}", 
+  "--memory-limit={{  mem_limit }}", 
+  "--dashboard-address={{  dashboard_port }}"
+  ]
+description = "Launch Dask workers"
 
-launch_jupyter_server = {cmd = [
-        'jupyter-lab',
-        "--ip='*'",
-        '--no-browser',
-        '--port=$ISF_LAB_PORT',
-        "--NotebookApp.allow_origin='*'"
-    ], description = "Launching jupyter lab server", env = {ISF_LAB_PORT = "11113"}}
+[tool.pixi.tasks.launch_jupyter_server]
+args = [
+  {arg = "port", default = "11113"}
+]
+cmd = [
+  "jupyter-lab", 
+  "--ip='*'", 
+  "--no-browser", 
+  "--port={{ port }}", 
+  "--NotebookApp.allow_origin='*'"
+  ]
+description = "Launch a Jupyter Lab server"
 
-test = {cmd = [
+[tool.pixi.tasks.test]
+args = [
+  {arg = "n_pytest_workers", default = "3"},
+]
+depends-on = ["configure"]
+cmd = [
+  "rm", "-rf", "tests/logs", "&&",
+  "mkdir", "-p", "tests/logs", "&&",
   "pytest", 
+  "-rsx",   # print skipped and expected failures
+  "-x",     # prinearly exit on first failed test
   "-n",
-  "$ISF_NUM_PYTEST_WORKERS",
-  "-rsx",
+  "{{ n_pytest_workers }}",
   "-vv",
   "--color=yes",
   "--durations=15",
-  "--dask_server_port",
-  "$ISF_DASK_PORT",
-  ], description = "Run test suite", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
+  "tests",
+]
+env = {"DASK_CONFIG" = "tests/dask_config.yml"}
+description = "Run test suite"
 
-test_mdb = {cmd = [
-  "export", "ISF_USE_MDB=1",
-  "&&",
-  "pytest", 
-  "-n","$ISF_NUM_PYTEST_WORKERS",
-  "-rsx",
-  "-vv",
-  "--color=yes",
-  "--durations=15",
-  "--dask_server_port",
-  "$ISF_DASK_PORT",
-  "test_data_base/", 
-  ";",
-  "unset", "ISF_USE_MDB"
-  ], description = "Run test suite with MDB", env = {ISF_NUM_PYTEST_WORKERS = "4", ISF_DASK_PORT = "8786"}, cwd="tests"}
-
-download_bc_model = {cmd = ["./download_bc_model.sh"], description = "Download ISF's barrel cortex model from Harvard Datverse", cwd="installer"}
-
+[tool.pixi.tasks.download_bc_model]
+cmd = ["./download_bc_model.sh"]
+description = "Download ISF's barrel cortex model from Harvard Datverse"
+cwd="installer"
 
 [tool.pixi.feature.docs.tasks]
 # Removing tutorials from doctrees and build is necessary to avoid slow recursion issues when building repeatedly
