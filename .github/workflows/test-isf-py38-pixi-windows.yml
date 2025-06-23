@@ -75,7 +75,7 @@ jobs:
           echo MPLBACKEND: %MPLBACKEND%
 
           echo ------------ Running tests -------------
-          pixi r pytest -n 4 --dist worksteal -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
+          pixi r pytest -n 3 --dist worksteal -rsx -vv  --color=yes --durations=0 --cov-report xml:tests\logs\report_py38.xml --cov=. tests
 
       - name: Save test logs
         uses: actions/upload-artifact@v4
