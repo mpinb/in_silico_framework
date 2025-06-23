@@ -177,22 +177,22 @@ def get_Simulator(fixed_params, step=False, vInit=False):
     s.setup.stim_run_funs.append(["bAP.run", param_to_kwargs(run_fun_bAP_BAC)])
     s.setup.stim_run_funs.append(["BAC.run", param_to_kwargs(run_fun_bAP_BAC)])
 
-    ## Step currents
-    run_fun_Step = partial(
-        run_fun,
-        T=34.0,
-        Vinit=-75.0,
-        dt=0.025,
-        recordingSites=[],
-        tStart=0.0,
-        tStop=3000.0,
-        vardt=True,
-    )
-
     if step:
+        ## Step currents
+        run_fun_Step = partial(
+            run_fun,
+            T=34.0,
+            Vinit=-75.0,
+            dt=0.025,
+            recordingSites=[],
+            tStart=0.0,
+            tStop=3000.0,
+            vardt=True,
+        )
         s.setup.stim_run_funs.append(["StepOne.run", param_to_kwargs(run_fun_Step)])
         s.setup.stim_run_funs.append(["StepTwo.run", param_to_kwargs(run_fun_Step)])
         s.setup.stim_run_funs.append(["StepThree.run", param_to_kwargs(run_fun_Step)])
+
     s.setup.stim_response_measure_funs.append(
         ["bAP.hay_measure", param_to_kwargs(record_bAP)]
     )

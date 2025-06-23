@@ -52,7 +52,7 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
     - metadata
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to which the data should be added.
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
         metadata_dumper (function): Function to dump the metadata to disk. Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
 
@@ -100,7 +100,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
     ``synapse_activation`` and ``cell_activation`` respectively.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to which the data should be added.
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
         n_chunks (int): Number of chunks to split the data into. Default is 5000.
 
@@ -163,7 +163,7 @@ def _build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None):
     """Load dendritic voltage traces and add them to the database under the key ``dendritic_recordings``.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to which the data should be added.
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
         suffix_dict (dict): Dictionary containing the suffixes of the dendritic voltage trace files.
             Default is ``None``, and they are inferred from the cell parameter files.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
@@ -196,7 +196,7 @@ def _build_param_files(db, client):
     In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The database to which the parameterfiles should be added.
         client (:py:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
 
@@ -249,7 +249,7 @@ def _get_rec_site_managers(db):
     This is used for recording the membrane voltage at non-somatic locations.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to which the data should be added.
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
 
     Returns:
         dict: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.

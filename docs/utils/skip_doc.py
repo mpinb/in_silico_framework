@@ -1,6 +1,7 @@
 import os, ast, fnmatch
 from functools import lru_cache
-from config.isf_logging import logger as isf_logger
+import logging
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
 project_root = os.path.join(os.path.abspath(os.pardir))

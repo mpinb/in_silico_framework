@@ -26,7 +26,8 @@
 import numpy as np
 from data_base.utils import convertible_to_int
 from collections import defaultdict
-from config.isf_logging import logger as isf_logger
+import logging
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild(__name__)
 
 def roll_rows_independently(A, r):

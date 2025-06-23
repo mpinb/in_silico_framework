@@ -82,7 +82,7 @@ def get_neuron_param_file(db):
     :meth:`~data_base.db_initializers.load_simrun_general.init` and contains the key ``parameterfiles_cell_folder``.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): 
+        db (:py:class:`~data_base.DataBase`): 
             The database object.
             
     Returns:
@@ -576,7 +576,7 @@ def load_syn_weights(db, client, excitatory_celltypes=None):
     ``parameterfiles_network_folder`` key in the database and extracts the synaptic weights.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The database object.
         client (:py:class:`~dask.distributed.client.Client`):
             The dask client object.
@@ -1044,9 +1044,9 @@ def init(
     '''Construct delayeds to parse a simrun-initialized database to binned voltage traces ready for ANN training.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The simrun-initialized database
-        db_target (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db_target (:py:class:`~data_base.DataBase`):
             The target database. Defaults to None, which initializes the ANN batches in the same database as :paramref:`db`.
     
     Attention:

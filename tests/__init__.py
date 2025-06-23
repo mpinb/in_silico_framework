@@ -1,14 +1,10 @@
 import os
 import neuron
 import socket
-import distributed
-import pytest
-import getting_started
 
 h = neuron.h
 import single_cell_parser as scp
 from data_base.utils import silence_stdout
-import mechanisms.l5pt
 from tests.context import TEST_DATA_FOLDER
 
 def setup_current_injection_experiment(
@@ -57,6 +53,7 @@ def setup_synapse_activation_experiment(
     Returns:
         cell: a cell object that contains the simulation.
     """
+    import getting_started
 
     rangevars = rangevars or []
     
@@ -87,14 +84,3 @@ def is_port_open(host, port):
         sock.settimeout(1)  # 1 second timeout
         result = sock.connect_ex((host, port))
         return result == 0
-
-
-def client(port):
-    if is_port_open("localhost", port):
-        host = "localhost"
-    else:
-        host = socket.gethostbyname(socket.gethostname())
-
-    c = distributed.Client(f"{host}:{port}")
-    return c
-

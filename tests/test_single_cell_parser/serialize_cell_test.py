@@ -6,10 +6,8 @@ import neuron
 h = neuron.h
 import single_cell_parser as scp
 import pickle
-from getting_started import getting_started_dir  # path to getting started folder
 from single_cell_parser.serialize_cell import *
 from data_base.utils import silence_stdout
-import mechanisms.l5pt
 from tests.context import TEST_DATA_FOLDER
 
 

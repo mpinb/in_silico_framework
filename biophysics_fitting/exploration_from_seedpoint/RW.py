@@ -34,11 +34,11 @@ import time
 import sys
 import math
 import glob
-from config.isf_logging import logger
 from typing import Literal
-
 from .utils import get_vector_norm, convert_all_check_columns_bool_to_float
 from .RW_analysis import read_pickle
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class RW:

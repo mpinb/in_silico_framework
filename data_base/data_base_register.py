@@ -28,19 +28,18 @@ Newly created data_bases are automatically added to the registry. Accessing some
 3. Someone else has registered the database in a registry that you have access to. In this case, you can use :py:meth:`assimilate_remote_register`.
 
 See also:
-    :py:meth:`~data_base.isf_data_base.isf_data_base.ISFDataBase.register_this_database`
+    :py:meth:`~data_base.DataBase.register_this_database`
 """
 
 from __future__ import absolute_import
 import os, json
 from .utils import cache
 from .exceptions import DataBaseException
-from .settings import data_base_register_path
+from config import get_db_register_path
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
-LOCAL_DATA_BASE_REGISTER_NAME = '.data_base_register.db'
-LOCAL_DATA_BASE_REGISTER_LOCATION = data_base_register_path
+LOCAL_DATA_BASE_REGISTER_NAME = get_db_register_path()
 
 class DataBaseRegister():
     """Two column registry mapping data bases to their locations.
@@ -110,7 +109,7 @@ class DataBaseRegister():
                     self.mdb['failed', dir_] = e
             else:
                 logger.warning(
-                    "Could not find a metadata.json or dbcore.pickle file in {}. Are you sure the path points to a directory containing at least one ModelDataBase or ISFDataBase?".format(dir_))
+                    "Could not find a metadata.json or dbcore.pickle file in {}. Are you sure the path points to a directory containing a DataBase?".format(dir_))
             
     def add_db(self, unique_id, db_basedir):
         """Add a database to the registry.
@@ -147,7 +146,7 @@ def _get_db_register():
     Returns:
         :py:class:`~data_base.data_base_register.DataBaseRegister`: The database register.
     """
-    dbr = DataBaseRegister(data_base_register_path)
+    dbr = DataBaseRegister(LOCAL_DATA_BASE_REGISTER_NAME)
     return dbr
 
 
@@ -186,7 +185,7 @@ def assimilate_remote_register(remote_path, local_path=None):
             ``.data_base_register.db`` in the same directory as this file.
     """
     if local_path is None:
-        local_path = os.path.join(LOCAL_DATA_BASE_REGISTER_LOCATION, LOCAL_DATA_BASE_REGISTER_NAME)
+        local_path = LOCAL_DATA_BASE_REGISTER_NAME
     from tqdm import tqdm
     dbr_remote = DataBaseRegister(remote_path)
     dbr_local = DataBaseRegister(local_path)

@@ -758,7 +758,7 @@ def delete_in_background(key):
     return p
 
 def is_db(dir_to_data):
-    '''Check if a path is a :py:class:`~data_base.data_base.DataBase`.
+    '''Check if a path is a :py:class:`~data_base.DataBase`.
     
     Args:
         dir_to_data (pathlib.Path): The path to the directory

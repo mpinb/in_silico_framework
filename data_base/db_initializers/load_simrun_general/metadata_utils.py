@@ -165,7 +165,7 @@ def create_metadata(db):
     - ``simresult_path`` Path to the simulation results folder.
 
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`):
+        db (:py:class:`~data_base.DataBase`):
             The target database that should contain the parsed simulation results.
 
     Returns:

@@ -1,0 +1,2 @@
+# The subsampled dataset
+This dataset is very crudely subsampled. All timepoints after index 200, and all synapse or cells with an ID over 200 are simply cut out. THis makes these simulations very non-reproducible. This dataset is solely used for testing purposes, as to not strain the test suite too much. This has been essential for testing on Windows, as it gave hard to reproduce and hard to control for memory issues.

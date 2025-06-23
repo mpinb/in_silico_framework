@@ -16,25 +16,20 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 
 '''
-Interface gives API access to all subpackages and submodules in ISF:
-
-- :py:mod:`biophysics_fitting`
-- :py:mod:`data_base`
-- :py:mod:`simrun`
-- :py:mod:`single_cell_parser`
-- :py:mod:`singlecell_input_mapper`
-- :py:mod:`spike_analysis`
-- :py:mod:`visualize`
+Interface provides top-level API access to the In Silico Framework (ISF).
+It is the main entry point for users to interact with ISF, providing access to various pacakges, modules and workflows.
+It is designed to be used in a jupyter notebook, but can also be used in scripts.
 
 The recommended way to use ISF is to import ``Interface`` in a jupyter notebook in the following manner::
 
-    import Interface as I
-    
+    >>> import Interface as I
+
+
 You then have access to all important builtins and top-level pipelines via Interface::
 
-    I.get_client()              # returns a dask client
-    I.get_db_by_unique_id()     # returns a DataBase object
-    I.simrun_run_new_simulations()  # runs new simulations
+    >>> I.simrun_run_new_simulations()  # runs new simulations
+    >>> I.db_init_simrun_general()      # initialize a database with simrun results
+    >>> I.scp                           # access the single_cell_parser package
     ...
     
 Take a look at the :ref:`tutorials` for examples on how to use the Interface API.
@@ -70,7 +65,7 @@ import math
 
 ### logging setup
 import logging
-from config.isf_logging import logger, logger_stream_handler
+from config.isf_logging import logger
 
 try:
     from IPython import display
@@ -121,9 +116,7 @@ if not 'ISF_MINIMIZE_IO' in os.environ and not _is_running_on_dask_worker():
         logger.info("Current pid: {pid}".format(pid = os.getpid()))
 
 import data_base
-from data_base.data_base import DataBase
-from data_base.model_data_base.model_data_base import ModelDataBase
-#from model_data_base.analyze.burst_detection import burst_detection
+from data_base import DataBase
 from data_base.analyze.LDA import lda_prediction_rates as lda_prediction_rates
 from data_base.analyze.temporal_binning import universal as temporal_binning
 
@@ -158,15 +151,8 @@ from data_base.db_initializers import load_simrun_general as db_init_simrun_gene
 from data_base.db_initializers import synapse_activation_binning as db_init_synapse_activation_binning
 load_param_files_from_db = db_init_simrun_general.load_param_files_from_db
 load_initialized_cell_and_evokedNW_from_db = db_init_simrun_general.load_initialized_cell_and_evokedNW_from_db
-
-# backwards compatibility
 synapse_activation_binning_dask = db_init_synapse_activation_binning.synapse_activation_postprocess_dask
 db_init_crossing_over = db_init_roberts_simulations = db_init_simrun_general
-mdb_init_simrun_general = db_init_simrun_general
-mdb_init_synapse_activation_binning = db_init_synapse_activation_binning
-load_param_files_from_mdb = load_param_files_from_db
-load_initialized_cell_and_evokedNW_from_mdb = load_initialized_cell_and_evokedNW_from_db
-mdb_init_crossing_over = db_init_crossing_over
 
 
 from data_base.analyze import split_synapse_activation  #, color_cellTypeColorMap, excitatory, inhibitory
@@ -175,7 +161,7 @@ from data_base.utils import select, pandas_to_array, pooled_std
 from data_base.utils import skit, chunkIt
 from data_base.utils import cache
 from data_base import utils
-from data_base.data_base import get_db_by_unique_id
+from data_base import get_db_by_unique_id
 from data_base.data_base_register import assimilate_remote_register
 from data_base.dbopen import resolve_db_path, create_modular_db_path
 
@@ -194,22 +180,27 @@ except ImportError:
     logger.warning("Could not import matplotlib!")
 
 try:
-    from simrun.run_existing_synapse_activations import run_existing_synapse_activations \
+    from simrun.run_existing_synapse_activations \
+        import run_existing_synapse_activations \
         as simrun_run_existing_synapse_activations
-    from simrun.generate_synapse_activations import generate_synapse_activations \
+    from simrun.generate_synapse_activations \
+        import generate_synapse_activations \
         as simrun_generate_synapse_activations
-    from simrun.run_new_simulations import run_new_simulations \
+    from simrun.run_new_simulations \
+        import run_new_simulations \
         as simrun_run_new_simulations
-    from simrun.sim_trial_to_cell_object import simtrial_to_cell_object \
+    from simrun.sim_trial_to_cell_object \
+        import simtrial_to_cell_object \
         as simrun_simtrial_to_cell_object
-    from simrun.sim_trial_to_cell_object import trial_to_cell_object \
+    from simrun.sim_trial_to_cell_object \
+        import trial_to_cell_object \
         as simrun_trial_to_cell_object
-    from simrun.parameters_to_cell import parameters_to_cell as simrun_parameters_to_cell
-    from simrun.rerun_db import rerun_db as simrun_rerun_db
-    # compatibility
-    simrun_rerun_mdb = simrun_rerun_db
-    simrun_simtrail_to_cell_object = simrun_simtrial_to_cell_object
-    simrun_trial_to_cell_object = simrun_trial_to_cell_object
+    from simrun.parameters_to_cell \
+        import parameters_to_cell \
+        as simrun_parameters_to_cell
+    from simrun.rerun_db \
+        import rerun_db \
+        as simrun_rerun_db
 
 except ImportError:
     logger.warning("Could not import full-compartmental-model simulator")
@@ -217,26 +208,31 @@ except ImportError:
 import single_cell_parser.analyze as sca
 import single_cell_parser as scp
 from single_cell_parser import network  # simrun.synaptic_strength_fitting relies on this
+
 try:
     from visualize.cell_morphology_visualizer import CellMorphologyVisualizer
 except ImportError:
     logger.warning("Could not import visualize.cell_morphology_visualizer!")
 from visualize.utils import write_video_from_images, write_gif_from_images, display_animation_from_images
 
-from simrun.reduced_model import synapse_activation \
+from simrun.reduced_model \
+    import synapse_activation \
     as rm_synapse_activations
-#from simrun.reduced_model import spiking_output \
-#    as simrun_reduced_model_spiking_output
-from simrun.reduced_model import get_kernel \
+# from simrun.reduced_model import spiking_output \
+#     as simrun_reduced_model_spiking_output
+from simrun.reduced_model \
+    import get_kernel \
     as rm_get_kernel
 
 import simrun.synaptic_strength_fitting
 
 from singlecell_input_mapper.map_singlecell_inputs import map_singlecell_inputs
-from singlecell_input_mapper.evoked_network_param_from_template import create_network_parameter \
-           as create_evoked_network_parameter
-from singlecell_input_mapper.ongoing_network_param_from_template import create_network_parameter \
-           as create_ongoing_network_parameter
+from singlecell_input_mapper.evoked_network_param_from_template \
+    import create_network_parameter \
+    as create_evoked_network_parameter
+from singlecell_input_mapper.ongoing_network_param_from_template \
+    import create_network_parameter \
+    as create_ongoing_network_parameter
 
 if not 'ISF_MINIMIZE_IO' in os.environ:
     if get_versions()['dirty']: logger.attention('The source folder has uncommited changes!')
@@ -295,7 +291,8 @@ def get_client(ip=None, client_port=38786, timeout=120):
     c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got dask client {}".format(c))
     logger.debug("Making mechanisms visible on client side")
-    def update_path(): sys.path.insert(0, os.path.dirname(__file__))
+    local_pythonpath = os.environ.get('PYTHONPATH', '')
+    def update_path(): sys.path += local_pythonpath.split(":")
     def import_mechanisms(): import mechanisms
     def import_Interface(): import Interface
     c.run(update_path)
@@ -307,8 +304,5 @@ print("\n\n")
 print_module_versions()
 
 from config.cell_types import EXCITATORY, INHIBITORY
-
-from compatibility import init_mdb_backwards_compatibility
-init_mdb_backwards_compatibility()
 
 logger.setLevel(logging.ATTENTION)

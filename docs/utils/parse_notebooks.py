@@ -2,7 +2,7 @@ import json, re, os, shutil
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-def convert_links_to_sphinx(content, api_extension="autoapi"):
+def convert_links_to_sphinx(content, api_output_dir="autoapi"):
     """Parse out markdown links of the form `[link text](../module/submodule.py)` and replace them with 
     external links to the Sphinx documentation web page.
     
@@ -34,13 +34,13 @@ def convert_links_to_sphinx(content, api_extension="autoapi"):
         text = text.replace('`', '')  # module/submodule.py
         
         # Construct the new link
-        new_link = f'{dirup}..{os.sep}{api_extension}{os.sep}' + link.lstrip('../').replace('__init__', '').replace('.py', f'{os.sep}index.rst')
+        new_link = f'{dirup}..{os.sep}{api_output_dir}{os.sep}' + link.lstrip('../').replace('__init__', '').replace('.py', f'{os.sep}index.rst')
         return f"[{text}]({new_link})"
     return pattern.sub(replace_link, content)    
     
 
 
-def process_notebook(file_path, api_extension="autoapi"):
+def process_notebook(file_path, api_output_dir="autoapi"):
     with open(file_path, 'r', encoding='utf-8') as f:
         try:
             notebook_content = json.load(f)
@@ -50,7 +50,7 @@ def process_notebook(file_path, api_extension="autoapi"):
     # Process each cell in the notebook
     for cell in notebook_content['cells']:
         if cell['cell_type'] == 'markdown':
-            cell['source'] = [convert_links_to_sphinx(line, api_extension=api_extension) for line in cell['source']]
+            cell['source'] = [convert_links_to_sphinx(line, api_output_dir=api_output_dir) for line in cell['source']]
     
     with open(file_path, 'w', encoding='utf-8') as f:
         json.dump(notebook_content, f, indent=2)
@@ -58,7 +58,7 @@ def process_notebook(file_path, api_extension="autoapi"):
 def copy_and_parse_notebooks_to_docs(
     source_dir=os.path.join(project_root, 'getting_started', 'tutorials'),
     dest_dir=os.path.join(project_root, 'docs', 'tutorials'),
-    api_extension="autoapi",
+    api_output_dir="autoapi",
     ):
     """Copy notebooks from the source directory to the destination directory and parse the links.
     
@@ -76,4 +76,4 @@ def copy_and_parse_notebooks_to_docs(
     for root, _, files in os.walk(dest_dir):
         for f in files:
             if f.endswith('.ipynb'):
-                process_notebook(os.path.join(root, f), api_extension=api_extension)
+                process_notebook(os.path.join(root, f), api_output_dir=api_output_dir)

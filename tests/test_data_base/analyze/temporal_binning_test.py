@@ -1,10 +1,10 @@
+import pytest
 from data_base.analyze.temporal_binning import *
 import pandas as pd
 import numpy as np
 import dask.dataframe as dd
 
-npartitions = 80
-
+npartitions=3
 
 class TestTemporalBinning:
 
@@ -32,7 +32,7 @@ class TestTemporalBinning:
             hist, np.array([4 / 3., 2 / 3., 0 / 3., 1 / 3., 1 / 3.]))
 
     def test_temporal_binning_dask(self, client):
-        ddf = dd.from_pandas(self.pdf, npartitions=3)
+        ddf = dd.from_pandas(self.pdf, npartitions=npartitions)
         bins, hist = temporal_binning_dask(ddf,
                                            bin_size=10,
                                            min_time=0,
@@ -52,11 +52,8 @@ class TestTemporalBinning:
 
         ddf = dd.from_pandas(pdf, npartitions=npartitions)
         t_bins_pandas, data_pandas = temporal_binning_pd(pdf, 1, 0, 300)
-        t_bins_dask, data_dask = temporal_binning_dask(ddf,
-                                                       1,
-                                                       0,
-                                                       300,
-                                                       client=client)
+        t_bins_dask, data_dask = temporal_binning_dask(
+            ddf, 1, 0, 300, client=client)
 
         #print data_dask
         np.testing.assert_equal(t_bins_pandas, t_bins_dask)

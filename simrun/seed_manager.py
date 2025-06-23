@@ -40,7 +40,11 @@ def get_seed(recursion_depth=0):
 
     used_seeds.extend(list(range(10000)))
 
-    seed = np.random.randint(4294967295)  #Seed must be between 0 and 4294967295
+    if os.name == "nt":
+        # Poor windows is limited to int32 :(
+        seed = np.random.randint(0, 1_000_000)
+    else:
+        seed = np.random.randint(4294967295)  #Seed must be between 0 and 4294967295
     return seed
     
     if not seed in used_seeds:
