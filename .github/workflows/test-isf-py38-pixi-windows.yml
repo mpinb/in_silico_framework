@@ -31,7 +31,7 @@ jobs:
       - name: Install NEURON
         run: |
           echo ------------ Installing NEURON -------------
-          start \b \wait nrn_installer_8.0.exe /S /D=C:\nrn
+          start \b \wait .\nrn_installer_8.0.exe /S /D=C:\nrn
 
       - name: Install & setup environment
         uses: prefix-dev/setup-pixi@v0.8.8
