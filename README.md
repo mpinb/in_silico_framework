@@ -3,7 +3,7 @@
 <img src=./docs/_static/_images/isf-logo-white.png#gh-dark-mode-only width='350'>
 <img src=./docs/_static/_images/isf-logo-black.png#gh-light-mode-only width='350'>
 
-In Silico Framework
+# In Silico Framework
 
 Multi-scale modeling and analysis of *in vivo* neuron-network mechanisms
 
