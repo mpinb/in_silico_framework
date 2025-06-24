@@ -3,9 +3,9 @@
 <img src=./docs/_static/_images/isf-logo-white.png#gh-dark-mode-only width='350'>
 <img src=./docs/_static/_images/isf-logo-black.png#gh-light-mode-only width='350'>
 
-# The In Silico Framework (ISF)
+In Silico Framework
 
-An In Silico Framework for multi-scale modeling and analysis of *in vivo* neuron-network mechanisms
+Multi-scale modeling and analysis of *in vivo* neuron-network mechanisms
 
 [![Linux](https://img.shields.io/github/actions/workflow/status/mpinb/in_silico_framework/test-isf-py38-pixi-linux.yml?style=flat-square&logo=linux&logoColor=white&label=Linux
 )](https://github.com/mpinb/in_silico_framework/actions/workflows/test-isf-py38-pixi-linux.yml)
