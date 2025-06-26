@@ -71,8 +71,12 @@ def get_db_register_path():
         str: The path to the database register.
     """
     db_settings = _read_db_settings()
+    project_src_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     dbr_path = db_settings['DATA_BASE_REGISTER_PATH']['filepath']
-    return os.path.abspath(dbr_path)
+    dbr_path = os.path.join(project_src_dir, dbr_path)
+    assert os.path.exists(os.path.dirname(dbr_path)), f"Database register directory {dbr_path} does not exist. Please check your configuration."
+    assert os.path.exists(dbr_path), f"No database found at {dbr_path}. Please check your configuration."
+    return dbr_path
 
 def get_default_db_dumper():
     """Get the default database dumper.
