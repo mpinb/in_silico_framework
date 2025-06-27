@@ -45,8 +45,7 @@ powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | i
 To install ISF with pixi, simply:
 
 ```bash
-git clone https://github.com/mpinb/in_silico_framework.git --depth 1 &&
-cd in_silico_framework &&
-pixi install &&
-pixi configure
+git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+cd in_silico_framework
+pixi run install
 ```
