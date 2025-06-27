@@ -12,8 +12,8 @@ To install ISF with ``pixi``, simply:
 
 .. code-block:: bash
 
-   git clone https://github.com/mpinb/in_silico_framework.git --depth 1 &&
-   cd in_silico_framework &&
+   git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+   cd in_silico_framework
    pixi run setup
 
 
