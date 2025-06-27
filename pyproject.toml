@@ -149,8 +149,12 @@ cmd = [
   "--overwrite-param-files={{ overwrite_param_files }}",
 ]
 
-[tool.pixi.tasks.setup]
+[tool.pixi.tasks.install]
 depends-on = ["configure"]
+cmd = [
+  "echo",
+  "\nSuccessfully installed ISF.\n\n",
+]
 
 [tool.pixi.tasks.launch_dask_server]
 args = [
