@@ -79,6 +79,7 @@ def _compile_mechanisms_at_path(path):
     """
     assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
     nrnivmodl_path = shutil.which('nrnivmodl')
+    logger.info(f"Compiling mechanisms at {path} using {nrnivmodl_path}")
     subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
 
 def are_compiled():
@@ -159,4 +160,4 @@ if are_compiled():
     if not are_loaded():
         load()
 else:
-    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile()` manually.")    
+    logger.warning("Mechanisms are not compiled yet.")    
