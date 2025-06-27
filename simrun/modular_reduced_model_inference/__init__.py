@@ -50,7 +50,6 @@ from .solver import (
 )
 
 from .reduced_model import (
-    RaisedCosineBasis,
     Rm,
     DataView,
     DataSplitEvaluation,
@@ -58,6 +57,7 @@ from .reduced_model import (
 )
 
 from .strategy import (
+    RaisedCosineBasis,
     Strategy_categorizedTemporalRaisedCosine,
     Strategy_spatiotemporalRaisedCosine,
     Strategy_ISIcutoff,
