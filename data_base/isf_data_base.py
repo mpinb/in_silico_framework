@@ -15,62 +15,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 """The :py:class:`~data_base.isf_data_base.ISFDataBase` class for robust and efficient data storage.
-
-Elements saved with :py:class:`~data_base.isf_data_base.ISFDataBase` 
-can be written and accessed using dictionary syntax.
-Valid keys are str or (nested) tuples of str for a (nested) hierarchy. "@" is not allowed::
-
-    >>> db = ISFDataBase('path/to/database')
-    >>> db['my_new_element'] = my_new_element
-    >>> my_reloaded_element = db['my_new_element']
-
-Specific dumpers can be used to save data in a tailored format::
-
-    >>> from data_base.IO.LoaderDumper import pandas_to_msgpack
-    >>> db.set("dataframe", dataframe, dumper="pandas_to_msgpack")
-
-.. attention::
-    If left unspecified, the default dumper is used, which is set in the database configuration file in the `config` module.
-    Keep in mind that the default dumper is usually optimized for flexibility (e.g. `cloudpickle`),
-    not for speed, size, or long-term storage.
-
-To read out all existing keys, use the :py:meth:`~data_base.isf_data_base.ISFDataBase.keys` method,
-or simply print out the database object::
-
-    >>> db.keys()
-    ['my_new_element', 'dataframe', ...]
-    >>> print(db)
-    <data_base.isf_data_base.ISFDataBase object at 0x29af38e6130>
-    Located at path/to/database
-    database
-    ├── my_new_element
-    └── dataframe
-
-All saved elements are stored in the :paramref:`basedir` along with a ``Loader.json`` object. 
-The ``Loader.json`` object defines which :py:mod:`~data_base.IO.LoaderDumper` module should be used to load the data with, 
-along with all the necessary information to initialize this :py:mod:`~data_base.IO.LoaderDumper`.
-In addition, the following metadata is saved:
-
-.. list-table:: Metadata Associated with Saved Elements
-    :header-rows: 1
-
-    * - Metadata
-        - Description
-    * - ``dumper``
-        - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
-    * - ``time``
-        - Time at which this results was saved.
-    * - ``module_list``
-        - A full list of all modules installed in the conda environment that was used to produce this result.
-    * - ``module_versions``
-        - The versions of all modules in the environment that was used to produce this result. See also: :py:mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
-    * - ``history``
-        - The history of the code that was used to produce this result. Only supported if the code was run using IPython (e.g. from within a Jupyter Notebook). See also: :py:mod:`~data_base._module_versions.Versions_cached.get_history`.
-    * - ``hostname``
-        - Name of the machine the code was run on.
-
-If the dask backends are used to save the data, it will be saved out-of-memory, 
-allowing larger-than-memory calculations.
 """
 
 import os, tempfile, string, json, threading, random, shutil, inspect, datetime, importlib, logging, errno
@@ -242,12 +186,60 @@ def get_dumper_from_folder(folder, return_ = 'module'):
 class ISFDataBase:
     '''Main database class.
 
-    Example:
+    Elements saved with this class can be written and accessed using dictionary syntax.
+    Valid keys are str or (nested) tuples of str for a (nested) hierarchy. "@" is not allowed::
 
-        >>> import Interface as I
-        >>> db = I.DataBase('path/to/database')
+        >>> db = ISFDataBase('path/to/database')
         >>> db['my_new_element'] = my_new_element
         >>> my_reloaded_element = db['my_new_element']
+
+    Specific dumpers can be used to save data in a tailored format::
+
+        >>> from data_base.IO.LoaderDumper import pandas_to_msgpack
+        >>> db.set("dataframe", dataframe, dumper="pandas_to_msgpack")
+
+    .. attention::
+        If left unspecified, the default dumper is used, which is set in the database configuration file in the `config` module.
+        Keep in mind that the default dumper is usually optimized for flexibility (e.g. `cloudpickle`),
+        not for speed, size, or long-term storage.
+
+    To read out all existing keys, use the :py:meth:`~data_base.isf_data_base.ISFDataBase.keys` method,
+    or simply print out the database object::
+
+        >>> db.keys()
+        ['my_new_element', 'dataframe', ...]
+        >>> print(db)
+        <data_base.isf_data_base.ISFDataBase object at 0x29af38e6130>
+        Located at path/to/database
+        database
+        ├── my_new_element
+        └── dataframe
+
+    All saved elements are stored in the :paramref:`basedir` along with a ``Loader.json`` object. 
+    The ``Loader.json`` object defines which :py:mod:`~data_base.IO.LoaderDumper` module should be used to load the data with, 
+    along with all the necessary information to initialize this :py:mod:`~data_base.IO.LoaderDumper`.
+    In addition, the following metadata is saved:
+
+    .. list-table:: Metadata Associated with Saved Elements
+        :header-rows: 1
+
+        * - Metadata
+            - Description
+        * - ``dumper``
+            - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
+        * - ``time``
+            - Time at which this results was saved.
+        * - ``module_list``
+            - A full list of all modules installed in the conda environment that was used to produce this result.
+        * - ``module_versions``
+            - The versions of all modules in the environment that was used to produce this result. See also: :py:mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
+        * - ``history``
+            - The history of the code that was used to produce this result. Only supported if the code was run using IPython (e.g. from within a Jupyter Notebook). See also: :py:mod:`~data_base._module_versions.Versions_cached.get_history`.
+        * - ``hostname``
+            - Name of the machine the code was run on.
+
+    If the dask backends are used to save the data, it will be saved out-of-memory, 
+    allowing larger-than-memory calculations.
     
     Attributes:
         basedir (str): The directory in which the database will be created, or read from.
