@@ -130,6 +130,7 @@ markers = [
 # Don't schedule new tests if the previous exceeded this time
 # Previous tests are gracefully finished until the timeout.
 session_timeout = 600
+timeout = 180
 # Dask workers per pytest worker.
 DASK_N_WORKERS = 4
 DASK_MEM_LIMIT = "5GB"
