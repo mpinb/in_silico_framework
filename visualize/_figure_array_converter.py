@@ -97,7 +97,7 @@ def fig2np(fig):
 
     # Get the RGBA buffer from the figure #http://blogs.candoerz.com/question/169767/pylab-use-plot-result-as-image-directly.aspx
     w, h = fig.canvas.get_width_height()
-    buf = np.fromstring(fig.canvas.tostring_argb(), dtype=np.uint8)
+    buf = np.frombuffer(fig.canvas.tostring_argb(), dtype=np.uint8)
     buf.shape = (h, w, 4)
 
     # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode

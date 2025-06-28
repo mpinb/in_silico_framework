@@ -23,7 +23,7 @@ import pandas as pd
 from data_base.utils import silence_stdout
 from data_base.dbopen import dbopen
 from .cell_parser import CellParser
-from . import ParameterSet
+from . import NTParameterSet
 
 __author__  = 'Arco Bast'
 __date__    = '2016/2017'
@@ -145,7 +145,7 @@ def restore_cell_from_serializable_object(sc):
             # we do not scale! maybe trigger a warning?
             # or better deprecate the scale apical function?
             parser.spatialgraph_to_cell(
-                ParameterSet(sc['parameters']),
+                NTParameterSet(sc['parameters']),
                 axon,
                 scaleFunc=None
                 )
@@ -153,7 +153,7 @@ def restore_cell_from_serializable_object(sc):
             # the following is needed to assure that the reconstructed cell
             # has an equal amount of segments compared to the original cell
             parser.set_up_biophysics(
-                ParameterSet(sc['parameters']),
+                NTParameterSet(sc['parameters']),
                 full = sc.get('allPoints', False)
                 )
 

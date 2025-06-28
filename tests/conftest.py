@@ -118,6 +118,12 @@ def pytest_configure(config):
     """
     pytest configuration
     """
+    # Register the custom statistical marker
+    config.addinivalue_line(
+        "markers", 
+        "statistical(max_failure_rate=0.05, n_runs=20): run test multiple times and allow statistical failures"
+    )
+    
     # Set shorter temp directory on Windows to avoid long path issues
     if sys.platform.startswith('win'):
         # Create base temp directory if it doesn't exist
@@ -139,3 +145,46 @@ def pytest_configure(config):
 
 def pytest_sessionstart(session):
     _set_mpl_backend_non_gui()
+
+
+def _run_statistical_test(marker, item):
+    """
+    Run the original test function multiple times and check failure rate.
+    
+    Args:
+        pyfuncitem: pytest item for the test function
+        original_test: the original test function to run
+        fixture_values: dictionary of fixture values to pass to the test
+        n_runs: number of times to run the test
+        max_failure_rate: maximum allowed failure rate for the test
+    """
+    max_failure_rate = marker.kwargs.get('max_failure_rate', 0.05)
+    n_runs = marker.kwargs.get('n_runs', 20)
+    max_failures = int(n_runs * max_failure_rate)
+
+    failures = 0
+    last_exception = None
+    for _ in range(n_runs):
+        try:
+            item._request._fillfixtures()
+            item.runtest()  # Will call the test with fixtures
+        except Exception as e:
+            failures += 1
+            last_exception = e
+            if failures > max_failures:
+                break
+
+    if failures/n_runs > max_failure_rate:
+        raise AssertionError(
+            f"Statistical test failed {failures}/{n_runs} times (allowed: {100*max_failure_rate:.2f} %)"
+        ) from last_exception
+
+
+def pytest_runtest_call(item):
+    """Custom test runner for statistical tests"""
+    statistical_mark = item.get_closest_marker("statistical")
+    if statistical_mark:
+        _run_statistical_test(
+            statistical_mark, 
+            item, 
+        )

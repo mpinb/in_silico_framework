@@ -101,7 +101,7 @@ def test_passive_props():
             currentStr = 'I=%.2f nA' % iAmpRange[i]
             plt.plot(tList[i], vList[i], label=currentStr)
         plt.legend()
-        plt.show()
+        # plt.show()
 
 
 def compute_tau_effective(t, v):
