@@ -695,7 +695,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         RaisedCosineBasis_spatial (RaisedCosineBasis): The spatial basis functions :math:`\mathbf{g}(z)`.
         RaisedCosineBasis_temporal (RaisedCosineBasis): The temporal basis functions :math:`\mathbf{f}(t)`.
         base_vectors_arrays_dict (dict): 
-            The basis vectors for each group. basis vectors are of shape (n_trials, N_{\tau}, N_{z})
+            The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
             These basis vectors are used for the optimizer, and are already multiplied with the data.
             Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
             as the latter are not multiplied with the synapse activaiton data.
