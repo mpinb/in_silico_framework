@@ -499,6 +499,14 @@ If you are using ISF with Dask parallellization on Windows, please monitor your 
 In case you encounter any issues, feel free to <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues">open an issue</a> and include relevant logs.
 Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.</p>
 </details>
+<details class="important admonition">
+<summary class="admonition-title">Developer installation</summary><p>If you are planning to contribute to ISF and you have read the <a class="reference external" href="https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md">contributor guidelines</a>,
+you should also clone the <cite>develop</cite> branch of the repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-branches<span class="w"> </span>origin<span class="w"> </span><span class="s1">&#39;develop&#39;</span>
+git<span class="w"> </span>fetch<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>origin<span class="w"> </span>develop
+</code></pre></div>
+</div>
+</details>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">¶</a></h2>
 <p>ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers
 that should work on most systems.</p>
