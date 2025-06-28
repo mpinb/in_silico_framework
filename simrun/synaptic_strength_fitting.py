@@ -46,7 +46,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 # First part: class to manage synaptic strength fitting
 ###############################
 class PSPs:
-    '''Calculate PSP amlitudes of single synapses and fit synaptic strength
+    r'''Calculate PSP amlitudes of single synapses and fit synaptic strength
     
     Attributes:
         neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
@@ -88,7 +88,7 @@ class PSPs:
         exc_inh='exc',
         tStim=110,
         tEnd=150):
-        ''' 
+        r''' 
         Args:
             neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): The :ref:`cell_parameters_format`.
             confile (str): Path to a :ref:`con_file_format` file.
