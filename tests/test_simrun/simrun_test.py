@@ -74,9 +74,13 @@ def test_run_new_simulations_returns_dirname(tmp_path):
 def test_position_of_morphology_does_not_matter_after_network_mapping(tmp_path, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
-    subdir1 = tmp_path.mkdir("sub1")
-    subdir2 = tmp_path.mkdir("sub2")
-    subdir_params = tmp_path.mkdir("params")
+    subdir1 = tmp_path / "sub1"
+    subdir2 = tmp_path / "sub2"
+    subdir_params = tmp_path / "params"
+    subdir1.mkdir()
+    subdir2.mkdir()
+    subdir_params.mkdir()
+
     syn_act_fn = SYN_ACT_SUBSAMPLED_FN
     t_stop = T_STOP_SHORT
     
@@ -145,7 +149,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmp_path, client)
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
             NETP_FN, [syn_act_fn],
-            dirPrefix=tmp_path,
+            dirPrefix=str(tmp_path),
             nprocs=1,
             tStop=345,
             silent=True,
