@@ -43,6 +43,12 @@ jobs:
           post-cleanup: true
           pixi-bin-path: ${{ runner.temp }}\Scripts\pixi.exe
 
+      - name: Download barrel cortex model
+        shell: cmd
+        run: |
+          echo ------------ Downloading barrel cortex model -------------
+          pixi r download_bc_model
+
       - name: Preliminary setup
         shell: cmd
         env:
