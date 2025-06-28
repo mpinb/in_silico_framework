@@ -64,7 +64,7 @@ def split_network_param_in_one_elem_dicts(dict_):
     for each key in the original dictionary.
 
     Args:
-        dict_ (dict | :py:class:`~single_cell_parser.parameters.ParameterSet`): The network parameter dictionary.
+        dict_ (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
 
     Returns:
         list: A list of dictionaries, each containing only one element of the original dictionary.
@@ -121,10 +121,10 @@ def load_param_file_if_path_is_provided(pathOrParam):
     """Convenience function to load a parameter file whether it is a string or a dictionary.
 
     Args:
-        pathOrParam (str | dict | :py:class:`~single_cell_parser.parameters.ParameterSet`): The path to the parameter file or the parameter dictionary.
+        pathOrParam (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The path to the parameter file or the parameter dictionary.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter object.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter object.
     """
 
     if isinstance(pathOrParam, str):
@@ -134,7 +134,7 @@ def load_param_file_if_path_is_provided(pathOrParam):
         pathOrParam = resolve_db_path(pathOrParam)
         return scp.build_parameters(pathOrParam)
     elif isinstance(pathOrParam, dict):
-        logger.debug("Building ParameterSet from dictionary")
+        logger.debug("Building NTParameterSet from dictionary")
         return scp.NTParameterSet(pathOrParam)
     else:
         logger.warning(

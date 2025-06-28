@@ -44,7 +44,7 @@ class PSP_with_current_injection:
         :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
     
     Attributes:
-        neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): Parameters of the neuron model.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
         confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
         target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
         delay (float): Delay before the current injection starts (in :math:`ms`).
@@ -74,7 +74,7 @@ class PSP_with_current_injection:
         bounds=(0, 0.7)):
         """
         Args:
-            neuron_param (:py:class:`~single_cell_parser.parameters.ParameterSet`): Parameters of the neuron model.
+            neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Parameters of the neuron model.
             confile (str): Path to the network connectivity (:ref:`con_file_format`) file.
             target_vm (float): Membrane potential to clamp the soma to (in :math:`mV`).
             delay (float): Delay before the current injection starts (in :math:`ms`).

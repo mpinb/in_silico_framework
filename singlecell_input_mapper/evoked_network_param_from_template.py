@@ -592,7 +592,7 @@ def whisker_evoked_PSTH(
         cellType (str): Which cell type you want the PSTH for.
 
     Returns:
-        parameters.ParameterSet: 
+        parameters.NTParameterSet: 
             The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.
     """
     # The columns that surround the column of deflected whisker, plus the column of the deflected whisker itself
@@ -601,7 +601,7 @@ def whisker_evoked_PSTH(
     evokedTypes = list(evokedTemplates.keys())
     if column not in columns or cellType not in evokedTypes:
         return None
-    # Parameterset of PSTHs of these cell types
+    # NTParameterSet of PSTHs of these cell types
     evokedTemplate = evokedTemplates[cellType]
     # Equivalent column relative to C2
     PSTHwhisker = surroundPSTHLookup[surroundColumns[deflectedWhisker][column]]

@@ -54,13 +54,13 @@ def _read_params_to_dict(filename):
 
 
 def build_parameters(filename):
-    """Read in a :ref:`param_file_format` file and return a ParameterSet object.
+    """Read in a :ref:`param_file_format` file and return a NTParameterSet object.
 
     Args:
         filename (str): path to the parameter file
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.ParameterSet` object.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.NTParameterSet` object.
     """
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
@@ -75,7 +75,7 @@ def load_NMODL_parameters(parameters):
     See also: https://www.neuron.yale.edu/neuron/static/new_doc/programming/neuronpython.html#important-names-and-sub-packages
 
     Args:
-        parameters (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict):
+        parameters (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict):
             The neuron parameters to load.
             Must contain the key `NMODL_mechanisms`.
             May contain the key `mech_globals`.
@@ -104,7 +104,7 @@ def resolve_parameter_paths(parameters, params_fn):
         db (str): The database path to resolve against.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameters with resolved paths.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameters with resolved paths.
     """
 
     def _find_parent_db_basedir(fn):
@@ -171,7 +171,7 @@ class NTParameterSet(MutableMapping):
         return value
 
     def to_dict(self):
-        """Convert the ParameterSet to a regular dictionary.
+        """Convert the NTParameterSet to a regular dictionary.
 
         Returns:
             dict: The underlying dictionary representation of the parameters.
@@ -179,7 +179,7 @@ class NTParameterSet(MutableMapping):
         return self._unwrap(self._data)
 
     def save(self, filename):
-        """Save the ParameterSet to a file in JSON format.
+        """Save the NTParameterSet to a file in JSON format.
 
         Args:
             filename (str): The path to the file where the parameters will be saved.
@@ -235,7 +235,7 @@ class NTParameterSet(MutableMapping):
         return self._wrap(current) if isinstance(current, dict) else current
 
     def __repr__(self):
-        return f"ParameterSet({self._data})"
+        return f"NTParameterSet({self._data})"
 
     def __getstate__(self):
         return self.to_dict()
@@ -244,10 +244,10 @@ class NTParameterSet(MutableMapping):
         self._data = self._wrap(state)
 
     def update(self, other=None, **kwargs):
-        """Update the ParameterSet with another dictionary or keyword arguments.
+        """Update the NTParameterSet with another dictionary or keyword arguments.
         Args:
-            other (dict, optional): Another dictionary to merge into this ParameterSet.
-            **kwargs: Additional keyword arguments to merge into this ParameterSet.
+            other (dict, optional): Another dictionary to merge into this NTParameterSet.
+            **kwargs: Additional keyword arguments to merge into this NTParameterSet.
         """
         def deep_merge(d, u):
             for k, v in u.items():
