@@ -2,7 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, pytest
+import logging, os, pytest, sys
 from config.isf_logging import logger  # import from config to set handlers properly
 
 # --- Import fixtures
@@ -118,6 +118,20 @@ def pytest_configure(config):
     """
     pytest configuration
     """
+    # Set shorter temp directory on Windows to avoid long path issues
+    if sys.platform.startswith('win'):
+        # Create base temp directory if it doesn't exist
+        # This overrides the default temp directory for pytest
+        # to a shorter path to avoid long path issues on Windows
+        win_basetemp = "C:\\tmp\\pytest"
+        worker_id = os.environ.get("PYTEST_XDIST_WORKER", None)
+        if worker_id:
+            win_basetemp = os.path.join(win_basetemp, worker_id)
+        if not os.path.exists(win_basetemp):
+            os.makedirs(win_basetemp, exist_ok=True)
+        # Override pytest's basetemp option
+        config.option.basetemp = win_basetemp
+    
     _setup_pytest_logging()
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
