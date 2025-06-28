@@ -123,7 +123,8 @@ default = ["isf"]
 # -------------------------------------------------------------------------
 [tool.pytest.ini_options]
 markers = [
-  "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite."
+  "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite.",
+  "statistical(n_runs, max_failure_rate): Mark tests to rerun multiple times to determine statistical significance."
 ]
 # Note: these dask options are per pytest worker.
 # So 6 dask workers means 6 das workers per pytest worker.
