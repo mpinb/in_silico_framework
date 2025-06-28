@@ -5,7 +5,7 @@ from data_base import DataBase
 from tests.context import TEST_SIMULATION_DATA_SUBSAMPLED_FOLDER
 
 @pytest.fixture
-def fresh_db(worker_id):
+def fresh_db(tmp_path, worker_id):
     """Pytest fixture for an data_base.DataBase object with a unique temp path.
     Initializes data with data_base.db_initializers.load_simrun_general.init
     Contains 8 keys with data:
@@ -22,9 +22,9 @@ def fresh_db(worker_id):
         data_base.DataBase: A db with data
     """
     # unique temp path
-    path = tempfile.mkdtemp(prefix=worker_id)
+    path = tmp_path / worker_id
+    path.mkdir(parents=True)
     db = DataBase(path)
-    #self.db.settings.show_computation_progress = False
 
     with silence_stdout:
         init(
@@ -40,7 +40,7 @@ def fresh_db(worker_id):
     # del db
 
 @pytest.fixture
-def empty_db(worker_id):
+def empty_db(tmp_path, worker_id):
     """Pytest fixture for a DataBase object with a unique temp path.
     Does not initialize data, in contrast to fresh_db
 
@@ -48,7 +48,8 @@ def empty_db(worker_id):
         data_base.DataBase: An empty db
     """
     # unique temp path
-    path = tempfile.mkdtemp(prefix=worker_id)
+    path = tmp_path / worker_id
+    path.mkdir(parents=True)
     db = DataBase(path)
 
     yield db

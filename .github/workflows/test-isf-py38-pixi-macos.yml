@@ -29,6 +29,12 @@ jobs:
           auth-host: prefix.dev
           auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
           manifest-path: pyproject.toml
+
+      - name: Download barrel cortex model
+        run: |
+          echo ------------ Downloading barrel cortex model -------------
+          pixi r download_bc_model
+      
       - name: Preliminary setup
         run: |
           echo "------------ Preliminary setup for tests -------------"

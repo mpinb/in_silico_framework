@@ -526,7 +526,7 @@ class ISFDataBase:
             
         '''        
         if VC.get_git_version()['dirty']:
-            logger.warning('The database source folder has uncommitted changes!')
+            logger.warning('ISF has uncommitted changes - reproducing results may not be possible.')
         dumper_string = get_dumper_string_by_dumper_module(dumper)
 
         out = {'dumper': dumper_string,
