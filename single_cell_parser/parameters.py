@@ -163,14 +163,14 @@ class NTParameterSet(MutableMapping):
 
     def _unwrap(self, value):
         if isinstance(value, NTParameterSet):
-            return value.to_dict()
+            return value.as_dict()
         elif isinstance(value, dict):
             return {k: self._unwrap(v) for k, v in value.items()}
         elif isinstance(value, list):
             return [self._unwrap(v) for v in value]
         return value
 
-    def to_dict(self):
+    def as_dict(self):
         """Convert the NTParameterSet to a regular dictionary.
 
         Returns:
@@ -185,7 +185,7 @@ class NTParameterSet(MutableMapping):
             filename (str): The path to the file where the parameters will be saved.
         """
         with open(filename, 'w') as f:
-            json.dump(self.to_dict(), f, indent=4)
+            json.dump(self.as_dict(), f, indent=4)
 
     # --- MutableMapping interface ---
     def __getitem__(self, key):
@@ -238,7 +238,7 @@ class NTParameterSet(MutableMapping):
         return f"NTParameterSet({self._data})"
 
     def __getstate__(self):
-        return self.to_dict()
+        return self.as_dict()
 
     def __setstate__(self, state):
         self._data = self._wrap(state)
