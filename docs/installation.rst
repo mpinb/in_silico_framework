@@ -30,7 +30,7 @@ To install ISF with ``pixi``, simply:
    :title: Developer installation
    :collapsible:
 
-   If you are planning to contribute to ISF and you have read the `contributor guidelines https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md`_, 
+   If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
    you should also clone the `develop` branch of the repository:
 
    .. code-block:: bash
