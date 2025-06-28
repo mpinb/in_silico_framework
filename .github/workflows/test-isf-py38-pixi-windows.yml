@@ -23,15 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download NEURON installer
+      - name: Install NEURON
         shell: cmd
         run: |
           echo ------------ Downloading NEURON installer -------------
           curl https://neuron.yale.edu/ftp/neuron/versions/v8.0/nrn-8.0.w64-mingwsetup.exe -o nrn_installer_8.0.exe
 
-      - name: Install NEURON
-        shell: cmd
-        run: |
           echo ------------ Installing NEURON -------------
           start /b /wait .\nrn_installer_8.0.exe /S /D=C:\nrn
 
@@ -71,7 +68,6 @@ jobs:
           DASK_CONFIG: tests/dask_config.yml
         run: |
           echo --------------- env vars ----------------
-          echo ISF_USE_MDB: %ISF_USE_MDB%
           echo NEURONHOME: %NEURONHOME%
           echo MPLBACKEND: %MPLBACKEND%
 
