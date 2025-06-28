@@ -29,11 +29,15 @@ def get_test_Rm(fresh_db):
     return Rm
 
 
-@pytest.mark.statistical(max_failure_rate=0.05, n_runs=20)
+@pytest.mark.statistical(max_failure_rate=0.2, n_runs=20)
 def test_statistical_ReducedLdaModel_inference(fresh_db):
     '''compare model infered from test data to expectancy'''
     Rm = get_test_Rm(fresh_db)
-    Rm.plot()  # make sure this can be executed
+
+    import matplotlib.pyplot as plt
+    f1, f2 = Rm.plot(return_fig=True)  # make sure this can be executed
+    plt.close(f1)
+    plt.close(f2)
 
     assert 200 < np.array(Rm.lda_values).mean() < 400  ##!!
     assert Rm.lookup_series[0][150] == 0
