@@ -26,6 +26,18 @@ To install ISF with ``pixi``, simply:
    In case you encounter any issues, feel free to `open an issue <https://github.com/mpinb/in_silico_framework/issues>`_ and include relevant logs.
    Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.
 
+.. important::
+   :title: Developer installation
+   :collapsible:
+
+   If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
+   you should also clone the `develop` branch of the repository:
+
+   .. code-block:: bash
+
+      git remote set-branches origin 'develop'
+      git fetch --depth 1 origin develop
+
 
 Configuration
 -------------
