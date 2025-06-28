@@ -608,16 +608,23 @@ class NetworkMapper:
         start = 0.0
         stop = -1.0
         nSpikes = None
-        try:
+
+        # Set params from networkParameters, if available
+        try: 
             noise = networkParameters.noise
+        except AttributeError:
+            logger.debug('\"noise\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to noise = 1.0.')
+        try: 
             start = networkParameters.start
         except AttributeError:
-            logger.error('Could not find attributes \"noise\" or \"start\" for \"spiketrain\" of cell type {:s}.'.format(preCellType))
-            logger.error('         Support of \"spiketrains\" without these attributes is deprecated.')
-        try:
+            logger.debug('\"start\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to start = 0.0.')
+        try: 
             nSpikes = networkParameters.nspikes
         except AttributeError:
             pass
+
         if self.simParam is not None:
             stop = self.simParam.tStop
         logger.info('initializing spike trains with mean rate {:.2f} Hz for cell type {:s}'.format(1000.0 / interval, preCellType))
