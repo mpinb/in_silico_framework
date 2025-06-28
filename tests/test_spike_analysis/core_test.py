@@ -52,12 +52,12 @@ def test_get_peaks_above():
 
 def test_filter_spike_times():
     sta = np.array([1])
-    assert not any(filter_spike_times([], [], spike_times_amplitude=sta))
-    assert not any(filter_spike_times([], [10], spike_times_amplitude=sta))
+    assert len(filter_spike_times([], [], spike_times_amplitude=sta)) == 0
+    assert len(filter_spike_times([], [10], spike_times_amplitude=sta)) == 0
     assert filter_spike_times([8], [10],
                                 spike_times_amplitude=sta) == (np.array([8]),
                                                                 np.array([1]))
-    assert not any(filter_spike_times([8], [], spike_times_amplitude=sta))
+    assert len(filter_spike_times([8], [], spike_times_amplitude=sta)) == 0
 
     sta = np.array([1, 1, 1])
     for spike_times_trough in [[10], [10, 10.1], [10, 10.1, 10.2]]:
