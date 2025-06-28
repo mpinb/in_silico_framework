@@ -46,7 +46,7 @@ def synaptic_input(
         :py:class:`~single_cell_parser.cell.Cell`: The cell with the synaptic input set up as the ``evokedNW`` attribute.
     """
     net = scp.build_parameters(network_param)
-    sim = scp.ParameterSet({'tStop': tStop})
+    sim = scp.NTParameterSet({'tStop': tStop})
     evokedNW = scp.NetworkMapper(cell, net.network, sim)
     if synapse_activation_file is None:
         logger.info('Activating synapses')

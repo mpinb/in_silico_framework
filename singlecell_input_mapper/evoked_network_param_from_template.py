@@ -477,7 +477,7 @@ def create_network_parameter(
     templateParam = scp.build_parameters(templateParamName)
     cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
 
-    nwParam = scp.ParameterSet({
+    nwParam = scp.NTParameterSet({
         'info': templateParam.info,
         'NMODL_mechanisms': templateParam.NMODL_mechanisms
     })
@@ -487,7 +487,7 @@ def create_network_parameter(
 
     if clusterParameters:
         clusterBasePath = '/gpfs01/bethge/home/regger'
-        nwParamCluster = scp.ParameterSet({'info': templateParam.info})
+        nwParamCluster = scp.NTParameterSet({'info': templateParam.info})
         nwParamCluster.NMODL_mechanisms = templateParam.NMODL_mechanisms.tree_copy(
         )
         nwParamCluster.network = {}

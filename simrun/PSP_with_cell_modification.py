@@ -90,7 +90,7 @@ class PSP_with_current_injection:
                 Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         """
         self.confile = confile
-        self.neuron_param = scp.ParameterSet(neuron_param.as_dict())
+        self.neuron_param = scp.NTParameterSet(neuron_param.as_dict())
         self.target_vm = target_vm
         self.delay = delay
         self.duration = duration
@@ -177,7 +177,7 @@ class PSP_with_current_injection:
         if self.holding_current is None:
             self.optimize_holding_current()
             #raise RuntimeError("Call optimize_holding_current first!")
-        neuron_param = scp.ParameterSet(self.neuron_param.as_dict())
+        neuron_param = scp.NTParameterSet(self.neuron_param.as_dict())
         dummy_param = {
             'amplitude': self.holding_current,
             'duration': self.duration,
@@ -187,7 +187,7 @@ class PSP_with_current_injection:
             neuron_param.neuron['cell_modify_functions'] = {}
         neuron_param.neuron['cell_modify_functions'][
             'soma_current_injection'] = dummy_param
-        return scp.ParameterSet(neuron_param)
+        return scp.NTParameterSet(neuron_param)
 
     def get_psp_simulator(self, gExRange=[1.0], exc_inh='exc', mode='synapses'):
         '''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.

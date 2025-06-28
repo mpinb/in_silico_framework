@@ -25,7 +25,7 @@ These parameters and templates are used to set up the biophysical constraints fo
 # naming converters scp <--> hay
 #########################################
 import six
-from single_cell_parser.parameters import ParameterSet
+from single_cell_parser.parameters import NTParameterSet
 import pandas as pd
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -349,7 +349,7 @@ def get_L5tt_template():
             'tStop': 300.0
         }
     }
-    return ParameterSet(p['neuron'])
+    return NTParameterSet(p['neuron'])
 
 def get_L5tt_template_v2():
     """Get a template cell parameter dictionary for a L5PT cell.
@@ -388,7 +388,7 @@ def get_L5tt_template_v2():
         },
         'mech_globals': {},
         'neuron': neup}
-    return ParameterSet(p['neuron'])
+    return NTParameterSet(p['neuron'])
 
 
 def set_morphology(cell_param, filename=None):

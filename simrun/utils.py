@@ -74,7 +74,7 @@ def split_network_param_in_one_elem_dicts(dict_):
     for k in list(dict_["network"].keys()):
         d = defaultdict_defaultdict()
         d["network"][k] = dict_["network"][k]
-        out.append(scp.ParameterSet(d))
+        out.append(scp.NTParameterSet(d))
     return out
 
 
@@ -135,7 +135,7 @@ def load_param_file_if_path_is_provided(pathOrParam):
         return scp.build_parameters(pathOrParam)
     elif isinstance(pathOrParam, dict):
         logger.debug("Building ParameterSet from dictionary")
-        return scp.ParameterSet(pathOrParam)
+        return scp.NTParameterSet(pathOrParam)
     else:
         logger.warning(
             "Returning parameter object as is (type: {})".format(type(pathOrParam))

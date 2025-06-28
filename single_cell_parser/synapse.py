@@ -25,7 +25,7 @@ See also:
     :py:class:`single_cell_parser.cell.Cell`.
 '''
 from neuron import h
-from single_cell_parser.parameters import ParameterSet
+from single_cell_parser.parameters import NTParameterSet
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
@@ -110,7 +110,7 @@ class Synapse(object):
                 Dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet` of receptors. 
                 Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.ParameterSet`.
         '''
-        assert isinstance(receptors, ParameterSet), 'receptors must be single_cell_parser.parameters.ParameterSet, but they are of type %s' % type(receptors)
+        assert isinstance(receptors, NTParameterSet), 'receptors must be single_cell_parser.parameters.ParameterSet, but they are of type %s' % type(receptors)
         self.releaseSite = source
         self.preCell = preCell
         '''careful: point processes not allowed at nodes between sections

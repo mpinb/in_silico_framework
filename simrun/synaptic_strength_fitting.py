@@ -29,7 +29,7 @@ import cloudpickle, logging, six
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from single_cell_parser import ParameterSet, init_neuron_run
+from single_cell_parser import NTParameterSet, init_neuron_run
 from single_cell_parser.network import activate_functional_synapse
 from dask import delayed
 from simrun.get_cell_with_network import get_cell_with_network
@@ -744,9 +744,9 @@ def run_ex_synapses(
     
     '''
 
-    neuron_param = ParameterSet(
+    neuron_param = NTParameterSet(
         cloudpickle.loads(neuron_param).as_dict())
-    network_param = ParameterSet(
+    network_param = NTParameterSet(
         cloudpickle.loads(network_param).as_dict())
     # with I.silence_stdout:
     cell_nw_generator = get_cell_with_network(neuron_param, network_param)
@@ -859,7 +859,7 @@ def generate_ex_network_param_from_network_embedding(confile):
         out['network'][k]['synapses']['connectionFile'] = confile
         out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
         out['network'][k]['synapses']['receptors'] = param_template
-    return ParameterSet(out)
+    return NTParameterSet(out)
 
 
 def generate_inh_network_param_from_network_embedding(confile):
@@ -906,7 +906,7 @@ def generate_inh_network_param_from_network_embedding(confile):
         out['network'][k]['synapses']['connectionFile'] = confile
         out['network'][k]['synapses']['distributionFile'] = confile[:-3] + 'syn'
         out['network'][k]['synapses']['receptors'] = param_template
-    return ParameterSet(out)
+    return NTParameterSet(out)
 
 
 ###############################################

@@ -64,7 +64,7 @@ def build_parameters(filename):
     """
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
-    return ParameterSet(data)
+    return NTParameterSet(data)
 
 
 def load_NMODL_parameters(parameters):
@@ -128,25 +128,41 @@ def resolve_parameter_paths(parameters, params_fn):
 
     return parameters
 
-class ParameterSet(MutableMapping):
+class NTParameterSet(MutableMapping):
+    """NeuroTools Parameter Set format.
+
+    Parameters as nested dictionaries, with support for attribute access.
+
+    Example::
+
+        >>> from single_cell_parser.parameters import NTParameterSet
+        >>> params = NTParameterSet({'param1': 42, 'nested': {'param2': 3.14}})
+        >>> print(params.param1)  # Access via attribute
+        42
+        >>> print(params['nested.param2'])  # Access via dotted path
+        3.14
+
+    Attributes:
+        _data (dict): The underlying dictionary storing parameters.
+    """
     def __init__(self, data=None):
         if data is None:
             data = {}
         elif isinstance(data, str):
             data = _read_params_to_dict(data)
-        elif not isinstance(data, (dict, ParameterSet)):
+        elif not isinstance(data, (dict, NTParameterSet)):
             raise TypeError(f"Expected dict or filepath, got {type(data)}")
         self._data = {key: self._wrap(value) for key, value in data.items()}
 
     def _wrap(self, value):
         if isinstance(value, dict):
-            return ParameterSet({k: self._wrap(v) for k, v in value.items()})
+            return NTParameterSet({k: self._wrap(v) for k, v in value.items()})
         elif isinstance(value, list):
             return [self._wrap(v) for v in value]
         return value
 
     def _unwrap(self, value):
-        if isinstance(value, ParameterSet):
+        if isinstance(value, NTParameterSet):
             return value.to_dict()
         elif isinstance(value, dict):
             return {k: self._unwrap(v) for k, v in value.items()}
@@ -155,9 +171,19 @@ class ParameterSet(MutableMapping):
         return value
 
     def to_dict(self):
+        """Convert the ParameterSet to a regular dictionary.
+
+        Returns:
+            dict: The underlying dictionary representation of the parameters.
+        """
         return self._unwrap(self._data)
 
     def save(self, filename):
+        """Save the ParameterSet to a file in JSON format.
+
+        Args:
+            filename (str): The path to the file where the parameters will be saved.
+        """
         with open(filename, 'w') as f:
             json.dump(self.to_dict(), f, indent=4)
 
@@ -218,6 +244,11 @@ class ParameterSet(MutableMapping):
         self._data = self._wrap(state)
 
     def update(self, other=None, **kwargs):
+        """Update the ParameterSet with another dictionary or keyword arguments.
+        Args:
+            other (dict, optional): Another dictionary to merge into this ParameterSet.
+            **kwargs: Additional keyword arguments to merge into this ParameterSet.
+        """
         def deep_merge(d, u):
             for k, v in u.items():
                 if isinstance(v, dict) and isinstance(d.get(k), dict):

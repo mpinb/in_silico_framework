@@ -28,7 +28,7 @@ The results of this module can be used in conjunction with :py:mod:`~biophysics_
 
 import single_cell_parser as scp
 from .parameters import param_selector
-from single_cell_parser.parameters import ParameterSet
+from single_cell_parser.parameters import NTParameterSet
 import time
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -366,7 +366,7 @@ class Simulator_Setup:
             'recordingSites': recordingSites
         }
         NMODL_mechanisms = {}
-        return ParameterSet({
+        return NTParameterSet({
             'neuron': self.get_cell_params(params),
             'sim': sim_param,
             'NMODL_mechanisms': NMODL_mechanisms
@@ -570,5 +570,5 @@ def run_fun(
         'tStart': tStart,
         'tStop': tStop
     }
-    scp.init_neuron_run(ParameterSet(sim), vardt=vardt)
+    scp.init_neuron_run(NTParameterSet(sim), vardt=vardt)
     return cell
