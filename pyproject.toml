@@ -127,9 +127,10 @@ markers = [
   "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite.",
   "statistical(n_runs, max_failure_rate): Mark tests to rerun multiple times to determine statistical significance."
 ]
-# Note: these dask options are per pytest worker.
-# So 6 dask workers means 6 das workers per pytest worker.
-timeout = 180
+# Don't schedule new tests if the previous exceeded this time
+# Previous tests are gracefully finished until the timeout.
+session_timeout = 600
+# Dask workers per pytest worker.
 DASK_N_WORKERS = 4
 DASK_MEM_LIMIT = "5GB"
 log_cli = true
