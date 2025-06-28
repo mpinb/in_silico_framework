@@ -221,8 +221,13 @@ cmd = [
 env = {"DASK_CONFIG" = "tests/dask_config.yml"}
 description = "Run test suite"
 
-[tool.pixi.tasks.download_bc_model]
+[tool.pixi.target.unix.tasks.download_bc_model]
 cmd = ["./download_bc_model.sh"]
+description = "Download ISF's barrel cortex model from Harvard Datverse"
+cwd="installer"
+
+[tool.pixi.target.win.tasks.download_bc_model]
+cmd = ["./download_bc_model.bat"]
 description = "Download ISF's barrel cortex model from Harvard Datverse"
 cwd="installer"
 
