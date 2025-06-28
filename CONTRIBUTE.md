@@ -41,19 +41,20 @@ That being said, we are also welcome new ideas, and are very excited to hear how
 ### Setting up the development environment
 
 ISF uses [`pixi`](https://pixi.sh/latest) for managing environments. The default environment includes the`run dependencies`: everything you need to run ISF.
-These are often sufficient to implement new ideas. However, if you require additional dependenices, you can simply `pixi add xyz`. Before adding new dependencies to ISF, please consider the following:
+These are often sufficient to implement new ideas. However, if you require additional dependenices, you can simply `pixi add xyz`. 
+Before adding new dependencies to ISF, please consider the following:
 
-> ISF is only useful if it is stable. ISF is only stable if the dependencies, API and reproducibility do not significantly change.
-
-- Dependencies are not always maintained forever. `pandas-msgpack` and `sumatra` have been two examples of packages we had to deprecate, patch, or pin down other dependencies for.
+- Dependencies are not always maintained forever. In the past, we have had to undeprecate `pandas-msgpack` ourselves, and drop `sumatra`. Ideally, we should not take on the maintenance burden of a dependency that is not actively maintained.
 - Maintenance costs tend to scale exponentially with additional dependencies
 - Can your dependency be reasonably omitted in favor of the standard library, or other core packages such as `numpy` or `scipy`?
+
+> ISF is only useful if it is stable. ISF is only stable if the dependencies, API and reproducibility do not significantly change. Be mindful when adding dependencies
 
 ### Coding Standards and Guidelines
 
 Please follow these coding standards and guidelines:
 
-- **Code Style**: Follow PEP 8 for Python code.
+- **Code Style**: Preferably follow PEP 8 for Python code style. Autoformatting tools like `black` can help.
 - **Naming Conventions**: Use descriptive names for variables, functions, and classes.
 - **Documentation**: Write docstrings for *all* public functions, classes, and methods.
 - **Comments**: Use comments to explain complex logic and important decisions.
@@ -94,16 +95,16 @@ Write clear and descriptive commit messages. Follow these guidelines:
 
 To submit a pull request:
 
-1. **Fork the repository** and create your branch from your version of `develop`.
-2. **Commit your changes** with clear commit messages.
-3. **Push your branch** to your forked repository.
-4. **Open a pull request** against ISF's `develop` branch.
-
-In your pull request description, include:
-
-- A summary of the changes.
-- Any related issues or pull requests.
-- Steps to test the changes.
+1. **Fork the repository** 
+2. **Create a branch** for your contribution from your version of `develop`.
+3. **Commit your changes** with clear commit messages. Do not commit to `master` or `develop` directly.
+   - If your changes are related to a specific issue, include the issue number in the commit message (e.g., `Fixes #123`).
+   - Use `git commit --amend` to update the last commit message if needed.
+4. **Push your branch** to your forked repository.
+5. **Open a pull request** against the `develop` branch of the main repository.
+   - Ensure your pull request is based on the latest `develop` branch.
+   - Provide a clear title and description for your pull request.
+   - If your changes are related to an issue, link to the issue in the pull request description.
 
 ## Issue Tracking
 
@@ -130,9 +131,9 @@ We use the Google-style documentation format. The Google documentation guideline
 - Attribute blocks, argument blocks and other blocks are indented. Note that indentation also impacts rst (see example below)
 - Arguments and attributes are listed with their type in brackets: `attr_arg (type): descr`
 
-In addition to these guidelines, ISF imposes one additional rule for docstrings:
+In addition to these guidelines, ISF adds one additional rule for docstrings:
 
-- Class docstrings always end with a list of their attributes. This is in contrast to the [PEP-257 convention](https://peps.python.org/pep-0257/) where attribute docstrings come after each attribute. We use Jinja templating to parse out the attributes from the Attribute block rather than the PEP-257 convention, because the PEP-257 convention is just honestly quite a bit of work. That being said, you are of course also allowed to use the PEP-257 convention. Just don't mix the two.
+- Class docstrings that end with a list of their attributes are equivalent to the [PEP-257 convention](https://peps.python.org/pep-0257/). In PEP-257, each class attribute definition is followed by a one-line docstring. Howver, ISF uses Jinja templating to parse out attribute documentation from an `Attribute` block in the class definition, rather than the PEP-257 convention. You are of course allowed to follow PEP-257 convention. Just don't mix the two within a single class.
 
 Classes tend to be the most documentation work, so we've opted to give you an example class to showcase what you can do with documentation. `rst` directives in the docstring are allowed. most HTML themes also support example blocks, attention blocks, "see also" blocks etc.
 
@@ -164,6 +165,8 @@ class DocumentMePlease():
       esc (bool): Another test attribute
       attribute_not_arg (int): An attribute that is not in the init docstring.
   """
+  # The above "Attributes" block will be parsed by Jinja, and the attributes will be documented in the class documentation.
+  # This should not be mixed with PEP-257 (see below). Choose one convention.
   def __init__(self, test_arg, escape_me_):
     """
     Args:
@@ -173,6 +176,7 @@ class DocumentMePlease():
     self.test_attribute = test
     self.esc = escape_me_
     """esc (bool): This is a PEP-257 docstring example. Because I'm now mixing conventions, this will appear twice"""
+    # The above should not be mixed with the "Attributes" block in the class docstring.
     self.attribute_not_arg = self.test_attribute + self.esc
 ```
 
