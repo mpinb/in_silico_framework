@@ -16,11 +16,11 @@ set_morphology
 
    The morphology is simply a path to a :ref:`hoc\_file\_format` file in string format.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The cell parameter dictionary.
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
                 * **filename** (*str*) -- The path to the :ref:`hoc\_file\_format` file.
 
    :returns: The updated cell parameter dictionary.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict
 
 
 .. 

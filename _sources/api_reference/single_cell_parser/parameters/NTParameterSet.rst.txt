@@ -1,0 +1,77 @@
+
+
+.. breadcrumb trail -----------------------------------------------------------------------
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet`
+
+.. main page title: MUST be BEFORE toctree trigger -------------------------------
+
+NTParameterSet
+==============
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. Trigger the toctree structure in the sidebar for this page
+
+.. toctree::
+   :hidden:
+
+   _wrap <NTParameterSet._wrap>
+   _unwrap <NTParameterSet._unwrap>
+   as_dict <NTParameterSet.as_dict>
+   save <NTParameterSet.save>
+   _resolve_path <NTParameterSet._resolve_path>
+   update <NTParameterSet.update>
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+
+.. class signature --------------------------------------------------------------
+
+.. py:class:: single_cell_parser.parameters.NTParameterSet(data=None)
+   
+   NeuroTools Parameter Set format.
+
+   Parameters as nested dictionaries, with support for attribute access.
+
+   Example::
+
+       >>> from single_cell_parser.parameters import NTParameterSet
+       >>> params = NTParameterSet({'param1': 42, 'nested': {'param2': 3.14}})
+       >>> print(params.param1)  # Access via attribute
+       42
+       >>> print(params['nested.param2'])  # Access via dotted path
+       3.14
+
+   :Attributes:
+
+   .. attribute:: _data
+
+      The underlying dictionary storing parameters.
+
+      :type: dict
+
+   :Methods:
+
+   
+   .. list-table:: 
+      :header-rows: 0
+      :widths: auto
+      :class: summarytable
+      
+      * - :py:obj:`_wrap <single_cell_parser.parameters.NTParameterSet._wrap>`\ (value)
+        - \-
+      * - :py:obj:`_unwrap <single_cell_parser.parameters.NTParameterSet._unwrap>`\ (value)
+        - \-
+      * - :py:obj:`as_dict <single_cell_parser.parameters.NTParameterSet.as_dict>`\ ()
+        - Convert the NTParameterSet to a regular dictionary.
+      * - :py:obj:`save <single_cell_parser.parameters.NTParameterSet.save>`\ (filename)
+        - Save the NTParameterSet to a file in JSON format.
+      * - :py:obj:`_resolve_path <single_cell_parser.parameters.NTParameterSet._resolve_path>`\ (dotted)
+        - \-
+      * - :py:obj:`update <single_cell_parser.parameters.NTParameterSet.update>`\ (other, \*\*kwargs)
+        - Update the NTParameterSet with another dictionary or keyword arguments.
+

@@ -41,7 +41,7 @@ PSPs
    
    Calculate PSP amlitudes of single synapses and fit synaptic strength
 
-   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The :ref:`cell_parameters_format`.
+   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
                 * **confile** (*str*) -- Path to a :ref:`con_file_format` file.
                 * **gExRange** (*list*) -- List of synaptic strength values to simulate (in :math:`\mu S`).
                   The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
@@ -65,7 +65,7 @@ PSPs
 
       The :ref:`cell_parameters_format`.
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. attribute:: confile
 
@@ -144,7 +144,7 @@ PSPs
       The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
       The synapse type is defined by :paramref:`exc_inh`.
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. attribute:: network_params_by_celltype
 

@@ -16,7 +16,7 @@ inactivate_evoked_and_ongoing_activity_by_celltype_and_column
 
    Does so by completely removing them from the :ref:`network\_parameters\_format`.
 
-   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **inact\_celltypes** (*list*) -- The celltypes to inactivate.
                 * **inact\_column** (*list*) -- The columns to inactivate.
 

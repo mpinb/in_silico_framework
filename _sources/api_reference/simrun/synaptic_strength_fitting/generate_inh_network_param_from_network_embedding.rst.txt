@@ -20,7 +20,7 @@ generate_inh_network_param_from_network_embedding
    activate the presynaptic cells one by one.
 
    :returns: Network parameter file.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
 
    .. seealso::
 

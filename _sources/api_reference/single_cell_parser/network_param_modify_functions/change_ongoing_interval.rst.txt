@@ -16,7 +16,7 @@ change_ongoing_interval
 
    Does so by scaling the time bins of the ongoing activity of the presynaptic :py:class:`~single\_cell\_parser.celltypes.Spiketrain` celltype.
 
-   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **factor** (*float*) -- The factor to scale the ongoing frequency with.
                 * **pop** (*list*) -- The celltypes to apply the scaling to.
 

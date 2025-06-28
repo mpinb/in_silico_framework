@@ -25,7 +25,7 @@ set_many_param
        set\_many\_param(cell\_param, params)
        # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The cell parameter nested dictionary.
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The cell parameter nested dictionary.
                 * **params** (*dict*) -- The parameter flat dictionary.
 
    :returns: The updated cell\_param.

@@ -11,7 +11,7 @@ CellParser.insert_membrane_properties
    Inserts membrane properties into all structures named as :paramref:`label`.
 
    :Parameters: * **label** (*str*) -- Label of the structure.
-                * **props** (dict | :py:class:`~single_cell_parser.parameters.ParameterSet`) -- Membrane properties.
+                * **props** (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Membrane properties.
                   Keys named ``spines`` or ``ions`` are ignored,
                   as they are taken care of by :py:meth:`insert_range_mechanisms` and :py:meth:`_insert_ion_properties`.
 

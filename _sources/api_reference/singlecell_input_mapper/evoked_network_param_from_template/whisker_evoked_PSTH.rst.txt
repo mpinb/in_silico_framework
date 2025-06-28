@@ -40,7 +40,7 @@ whisker_evoked_PSTH
                 * **cellType** (*str*) -- Which cell type you want the PSTH for.
 
    :returns:     The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.
-   :rtype: parameters.ParameterSet
+   :rtype: parameters.NTParameterSet
 
 
 .. 

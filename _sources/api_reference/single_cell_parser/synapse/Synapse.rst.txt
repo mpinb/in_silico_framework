@@ -99,7 +99,7 @@ Synapse
 
       Stores hoc mechanisms
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. attribute:: netcons
 

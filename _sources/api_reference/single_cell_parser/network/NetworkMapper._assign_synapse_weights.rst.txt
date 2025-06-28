@@ -10,7 +10,7 @@ NetworkMapper._assign_synapse_weights
 
    Assign synapse weights according to distribution specified in network parameters.
 
-   :Parameters: * **receptor** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Receptor parameters from network parameter file.
+   :Parameters: * **receptor** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Receptor parameters from network parameter file.
                 * **recepStr** (*str*) -- Receptor name.
                 * **syn** (*Synapse*) -- Synapse object.
 

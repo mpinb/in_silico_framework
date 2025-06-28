@@ -16,7 +16,7 @@ multi_stimulus_trial
 
    Optionally applies a different evoked activity scaling factor to each stimulus.
 
-   :Parameters: * **netp** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **netp** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **inter\_stimulus\_interval** (*int | float*) -- amount of time to wait (in ms) between each whisker stimulus
                 * **stims** (*int*) -- number of stimuli to simulate
                 * **scale\_factors** (*list, optional*) -- A list of scale factors you want to apply to subsequent stimuli.

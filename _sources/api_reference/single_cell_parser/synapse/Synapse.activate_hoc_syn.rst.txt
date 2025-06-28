@@ -16,6 +16,6 @@ Synapse.activate_hoc_syn
                   Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
                 * **preCell** (:py:class:`single_cell_parser.cell.PointCell`) -- Presynaptic cell.
                 * **targetCell** (:py:class:`single_cell_parser.cell.Cell`) -- Postsynaptic cell.
-                * **receptors** (dict | Dict[:py:class:`~single_cell_parser.parameters.ParameterSet`]) -- Dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet` of receptors.
-                  Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.ParameterSet`.
+                * **receptors** (dict | Dict[:py:class:`~single_cell_parser.parameters.NTParameterSet`]) -- Dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet` of receptors.
+                  Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.NTParameterSet`.
 

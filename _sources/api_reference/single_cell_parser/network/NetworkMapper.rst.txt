@@ -57,8 +57,8 @@ NetworkMapper
    Initialize NetworkMapper.
 
    :Parameters: * **postCell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to map synapses onto.
-                * **nwParam** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The network parameter set (see :ref:`network_parameters_format` for more info).
-                * **simParam** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The simulation parameter set. Default: None.
+                * **nwParam** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The network parameter set (see :ref:`network_parameters_format` for more info).
+                * **simParam** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The simulation parameter set. Default: None.
 
    :Attributes:
 
@@ -84,13 +84,13 @@ NetworkMapper
 
       network parameter set (see :ref:`network_parameters_format` for more info).
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. attribute:: simParam
 
       simulation parameter set.
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    :Methods:
 

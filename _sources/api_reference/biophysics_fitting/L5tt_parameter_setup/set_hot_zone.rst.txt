@@ -14,13 +14,13 @@ set_hot_zone
 
    Insert Ca\_LVAst and Ca\_HVA channels along the apical dendrite between ``min\_`` and ``max\_`` distance from the soma.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The cell parameter dictionary.
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
                 * **min\_** (*float*) -- The minimum distance from the soma.
                 * **max\_** (*float*) -- The maximum distance from the soma.
                 * **outsidescale\_sections** (*list*) -- A list of sections where the channels should be inserted.
 
    :returns: The updated cell\_param.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict
 
    .. note::
 

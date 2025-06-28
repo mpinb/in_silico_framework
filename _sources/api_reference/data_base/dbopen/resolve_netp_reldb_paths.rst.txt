@@ -18,7 +18,7 @@ resolve_netp_reldb_paths
                 * **db\_basedir** (*str*) -- Path to the database directory.
 
    :returns: The modified network parameter set, with absolute paths.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
 
 
 .. 

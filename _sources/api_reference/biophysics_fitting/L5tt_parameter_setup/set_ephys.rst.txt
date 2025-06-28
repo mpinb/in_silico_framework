@@ -16,7 +16,7 @@ set_ephys
 
    Parameter names reflect the Hay naming convention.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- The cell parameter dictionary.
+   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The cell parameter dictionary.
                 * **params** (*pd.Series*) -- The parameter vector as a pandas Series.
 
    :raises AssertionError: If the parameter vector is None or not a pandas Series.
@@ -24,7 +24,7 @@ set_ephys
    :raises AssertionError: If some parameters are not set after the update.
 
    :returns: The updated cell\_param, with the biphysical parameters set.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
 
    .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
 

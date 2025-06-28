@@ -17,7 +17,7 @@ load_param_files_from_db
    :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database containing the parsed simulation results.
                 * **sti** (*str*) -- For which simulation trial index to load the parameter files.
 
-   :returns: The :py:class:`~single\_cell\_parser.parameters.ParameterSet` objects for the cell and network.
+   :returns: The :py:class:`~single\_cell\_parser.parameters.NTParameterSet` objects for the cell and network.
    :rtype: tuple
 
 

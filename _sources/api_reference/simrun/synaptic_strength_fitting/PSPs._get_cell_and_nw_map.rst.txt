@@ -10,7 +10,7 @@ PSPs._get_cell_and_nw_map
 
    Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
 
-   :Parameters: **network_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- The :ref:`network_parameters_format` file.
+   :Parameters: **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format` file.
 
    :returns:
 

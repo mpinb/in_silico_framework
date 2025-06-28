@@ -41,7 +41,7 @@ PSP_with_current_injection
 
    .. seealso:: :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
 
-   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Parameters of the neuron model.
+   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Parameters of the neuron model.
                 * **confile** (*str*) -- Path to the network connectivity (:ref:`con_file_format`) file.
                 * **target_vm** (*float*) -- Membrane potential to clamp the soma to (in :math:`mV`).
                 * **delay** (*float*) -- Delay before the current injection starts (in :math:`ms`).
@@ -59,7 +59,7 @@ PSP_with_current_injection
 
       Parameters of the neuron model.
 
-      :type: :py:class:`~single_cell_parser.parameters.ParameterSet`
+      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. attribute:: confile
 

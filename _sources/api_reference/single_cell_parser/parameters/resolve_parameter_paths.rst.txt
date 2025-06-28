@@ -18,7 +18,7 @@ resolve_parameter_paths
                 * **db** (*str*) -- The database path to resolve against.
 
    :returns: The parameters with resolved paths.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
 
 
 .. 

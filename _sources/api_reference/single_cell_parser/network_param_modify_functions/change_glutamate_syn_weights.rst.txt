@@ -14,7 +14,7 @@ change_glutamate_syn_weights
 
    Changes the glutamate synapse weights in the :ref:`network\_parameters\_format` to the optimal values.
 
-   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **g\_optimal** (*pandas.core.series.Series | pandas.core.frame.DataFrame*) -- The optimal values for the glutamate synapse weights.
                   If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
                   If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.

@@ -14,7 +14,7 @@ change_evoked_INH_scaling
 
    Scales the response probability for inhibitory cells in the :ref:`network\_parameters\_format`.
 
-   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **factor** (*float*) -- The scaling factor.
                 * **pop** (*list*) -- The celltypes to apply the scaling to.
                   Default is the inhibitory celltypes in the rat somatosensory cortex vS1.

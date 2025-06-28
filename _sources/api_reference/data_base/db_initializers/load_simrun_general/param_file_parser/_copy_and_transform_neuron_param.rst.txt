@@ -17,7 +17,7 @@ _copy_and_transform_neuron_param
    This function is used as a :paramref:`transform\_fun` in
    :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.write\_param\_files\_to\_folder`.
 
-   :Parameters: **neuron** (:py:class:`~single\_cell\_parser.parameters.ParameterSet`) -- Dictionary containing the neuron model parameters.
+   :Parameters: **neuron** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- Dictionary containing the neuron model parameters.
 
    .. attention::
 

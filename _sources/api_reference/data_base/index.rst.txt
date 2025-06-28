@@ -114,7 +114,7 @@ Modules
    * - :py:obj:`exceptions <data_base.exceptions>`
      - :py:mod:`data_base` specific exceptions.
    * - :py:obj:`isf_data_base <data_base.isf_data_base>`
-     - Database for robust and efficient data storage.
+     - The :py:class:`~data_base.isf_data_base.ISFDataBase` class for robust and efficient data storage.
    * - :py:obj:`utils <data_base.utils>`
      - Database utility and convenience functions.
 

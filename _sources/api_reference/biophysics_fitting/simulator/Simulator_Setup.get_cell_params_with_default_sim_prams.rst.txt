@@ -21,5 +21,5 @@ Simulator_Setup.get_cell_params_with_default_sim_prams
                 * **T** (*float*) -- The temperature (Celsius).
 
    :returns: The neuron parameter object.
-   :rtype: :py:class:`~single_cell_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 

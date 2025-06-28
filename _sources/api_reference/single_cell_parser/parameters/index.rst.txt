@@ -10,7 +10,7 @@ parameters
 .. toctree::
    :hidden:
 
-   ParameterSet </api_reference/single_cell_parser/parameters/ParameterSet>
+   NTParameterSet </api_reference/single_cell_parser/parameters/NTParameterSet>
    _make_json_compatible </api_reference/single_cell_parser/parameters/_make_json_compatible>
    _read_params_to_dict </api_reference/single_cell_parser/parameters/_read_params_to_dict>
    build_parameters </api_reference/single_cell_parser/parameters/build_parameters>
@@ -34,8 +34,8 @@ Classes
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`ParameterSet <single_cell_parser.parameters.ParameterSet>`
-     - \-
+   * - :py:obj:`NTParameterSet <single_cell_parser.parameters.NTParameterSet>`
+     - NeuroTools Parameter Set format.
 
 
 .. rst-class:: absolute-paragraph
@@ -50,7 +50,7 @@ Functions
    :class: summarytable
    
    * - :py:obj:`build_parameters <single_cell_parser.parameters.build_parameters>`\ (filename)
-     - Read in a :ref:`param_file_format` file and return a ParameterSet object.
+     - Read in a :ref:`param_file_format` file and return a NTParameterSet object.
    * - :py:obj:`load_NMODL_parameters <single_cell_parser.parameters.load_NMODL_parameters>`\ (parameters)
      - Load NMODL mechanisms from paths in parameter file.
    * - :py:obj:`resolve_parameter_paths <single_cell_parser.parameters.resolve_parameter_paths>`\ (parameters, params\_fn)

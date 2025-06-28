@@ -1,0 +1,14 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet.update`
+
+NTParameterSet.update
+=====================
+
+.. py:method:: single_cell_parser.parameters.NTParameterSet.update(other=None, \*\*kwargs)
+
+   Update the NTParameterSet with another dictionary or keyword arguments.
+   :Parameters: * **other** (*dict, optional*) -- Another dictionary to merge into this NTParameterSet.
+                * **\*\*kwargs** -- Additional keyword arguments to merge into this NTParameterSet.
+

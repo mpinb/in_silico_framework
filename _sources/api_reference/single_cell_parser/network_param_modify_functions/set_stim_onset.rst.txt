@@ -14,7 +14,7 @@ set_stim_onset
 
    Changes the offset when pointcells get activated
 
-   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **onset** (*float*) -- The onset time in milliseconds.
 
    .. rubric:: Example

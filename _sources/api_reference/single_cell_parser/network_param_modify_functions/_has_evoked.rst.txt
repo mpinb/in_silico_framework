@@ -14,7 +14,7 @@ _has_evoked
 
    Check if the celltype has evoked activity.
 
-   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.ParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
                 * **celltype** (*str*) -- The celltype to check.
 
    :returns: True if the celltype has evoked activity, False otherwise.

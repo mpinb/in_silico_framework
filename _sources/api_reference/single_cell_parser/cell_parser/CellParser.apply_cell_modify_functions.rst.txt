@@ -13,5 +13,5 @@ CellParser.apply_cell_modify_functions
    Cell modify functions that appear in the :ref:`cell_parameters_format` file are applied to the cell object.
    For a list of possible cell modify functions, refer to :py:mod:`~single_cell_parser.cell_modify_functions`.
 
-   :Parameters: **parameters** (:py:class:`~single_cell_parser.parameters.ParameterSet`) -- Neuron parameters, read from a :ref:`cell_parameters_format` file.
+   :Parameters: **parameters** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Neuron parameters, read from a :ref:`cell_parameters_format` file.
 

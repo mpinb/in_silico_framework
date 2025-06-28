@@ -20,9 +20,7 @@ isf_data_base
 .. py:module:: data_base.isf_data_base
 
 .. autoapi-nested-parse::
-   Database for robust and efficient data storage.
-
-   The main purpose of this module is to provide the :py:class:`~data_base.isf_data_base.ISFDataBase` class.
+   The :py:class:`~data_base.isf_data_base.ISFDataBase` class for robust and efficient data storage.
 
 
 .. rst-class:: absolute-paragraph

@@ -21,7 +21,7 @@ set_param
        set\_param(cell\_param, params)
        # returns {'a': {'b': {'c': 3}}}
 
-   :Parameters: * **cell\_param (** -- py:class`~:py:class:`~single\_cell\_parser.parameters.ParameterSet`` | dict): The cell parameter nested dictionary.
+   :Parameters: * **cell\_param (** -- py:class`~:py:class:`~single\_cell\_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
                 * **params** (*dict*) -- The parameter flat dictionary.
 
    :returns: The updated cell\_param.

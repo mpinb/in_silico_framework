@@ -31,7 +31,7 @@ get_L5tt_template
        - ``tStop``: stop time
 
    :returns: The template cell parameters.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.ParameterSet`
+   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
 
 
 .. 

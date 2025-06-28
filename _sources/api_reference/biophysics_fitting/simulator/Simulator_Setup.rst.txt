@@ -120,7 +120,7 @@ Simulator_Setup
 
    .. attribute:: cell_param_generator
 
-      A function that generates a :py:class:`~single_cell_parser.parameters.ParameterSet` cell parameter object.
+      A function that generates a :py:class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
 
       :type: callable
 
@@ -197,7 +197,7 @@ Simulator_Setup
       * - :py:obj:`get_params <biophysics_fitting.simulator.Simulator_Setup.get_params>`\ (params)
         - Get the modified biophysical parameters.
       * - :py:obj:`get_cell_params <biophysics_fitting.simulator.Simulator_Setup.get_cell_params>`\ (params)
-        - Get the cell parameters as an :py:class:`~single_cell_parser.parameters.ParameterSet` from the parameter vector.
+        - Get the cell parameters as an :py:class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
       * - :py:obj:`get_cell_params_with_default_sim_prams <biophysics_fitting.simulator.Simulator_Setup.get_cell_params_with_default_sim_prams>`\ (params, recordingSites, tStart, tStop, dt, Vinit, T)
         - Get a neuron parameter object.
       * - :py:obj:`get <biophysics_fitting.simulator.Simulator_Setup.get>`\ (params)
