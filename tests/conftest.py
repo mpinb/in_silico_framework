@@ -164,7 +164,6 @@ def _run_statistical_test(marker, item):
 
     failures = 0
     last_exception = None
-
     for _ in range(n_runs):
         try:
             item._request._fillfixtures()
@@ -175,9 +174,9 @@ def _run_statistical_test(marker, item):
             if failures > max_failures:
                 break
 
-    if failures > max_failures:
+    if failures/n_runs > max_failure_rate:
         raise AssertionError(
-            f"Statistical test failed {failures}/{n_runs} times (allowed: {max_failures})"
+            f"Statistical test failed {failures}/{n_runs} times (allowed: {100*max_failure_rate:.2f} %)"
         ) from last_exception
 
 
