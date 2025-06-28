@@ -209,7 +209,6 @@ cmd = [
   "mkdir", "-p", "tests/logs", "&&",
   "pytest", 
   "-rsx",   # print skipped and expected failures
-  "-x",     # prinearly exit on first failed test
   "-n",
   "{{ n_pytest_workers }}",
   "-vv",
