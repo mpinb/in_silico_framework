@@ -31,6 +31,8 @@ trash_it_now/
 **__pycache__**
 mechanisms/*/*/x86_64**
 mechanisms/*/*/*.dll
+mechanisms/*/*/*.c
+mechanisms/*/*/*.o
 
 # Barrel cortex model
 barrel_cortex/*

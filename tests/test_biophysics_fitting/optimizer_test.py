@@ -22,7 +22,7 @@ def set_up_db(step=False):
 
     def get_template():
         param = L5tt_parameter_setup.get_L5tt_template()
-        param.ApicalDendrite.mechanisms.range.SKv3_1 = scp.ParameterSet(
+        param.ApicalDendrite.mechanisms.range.SKv3_1 = scp.NTParameterSet(
             {
                 "slope": None,
                 "distance": "relative",
@@ -31,7 +31,7 @@ def set_up_db(step=False):
                 "spatial": "linear",
             }
         )
-        param["cell_modify_functions"] = scp.ParameterSet(
+        param["cell_modify_functions"] = scp.NTParameterSet(
             {"scale_apical": {"scale": None}}
         )
         return param
