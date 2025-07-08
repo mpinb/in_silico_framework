@@ -48,7 +48,7 @@ from config.cell_types import EXCITATORY
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
 from .cell_parser import CellParser
-from .parameters import ParameterSet, build_parameters, load_NMODL_parameters
+from .parameters import NTParameterSet, build_parameters, load_NMODL_parameters
 
 # from synapse import activate_functional_synapse
 from .network import NetworkMapper

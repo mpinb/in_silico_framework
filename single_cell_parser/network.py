@@ -75,8 +75,8 @@ class NetworkMapper:
         cells (dict): dictionary holding all presynaptic cells ordered by cell type.
         connected_cells (dict): dictionary holding indices of all active presynaptic cells ordered by cell type.
         postCell (:py:class:`~single_cell_parser.cell.Cell`): reference to postsynaptic (multi-compartment) cell model.
-        nwParam (:py:class:`~single_cell_parser.parameters.ParameterSet`): network parameter set (see :ref:`network_parameters_format` for more info).
-        simParam (:py:class:`~single_cell_parser.parameters.ParameterSet`): simulation parameter set.
+        nwParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): network parameter set (see :ref:`network_parameters_format` for more info).
+        simParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): simulation parameter set.
     '''
 
     def __init__(self, postCell, nwParam, simParam=None):
@@ -84,8 +84,8 @@ class NetworkMapper:
 
         Args:
             postCell (:py:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
-            nwParam (:py:class:`~single_cell_parser.parameters.ParameterSet`): The network parameter set (see :ref:`network_parameters_format` for more info).
-            simParam (:py:class:`~single_cell_parser.parameters.ParameterSet`): The simulation parameter set. Default: None.
+            nwParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter set (see :ref:`network_parameters_format` for more info).
+            simParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The simulation parameter set. Default: None.
         '''
         self.cells = {}
         self.connected_cells = {}
@@ -608,16 +608,23 @@ class NetworkMapper:
         start = 0.0
         stop = -1.0
         nSpikes = None
-        try:
+
+        # Set params from networkParameters, if available
+        try: 
             noise = networkParameters.noise
+        except AttributeError:
+            logger.debug('\"noise\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to noise = 1.0.')
+        try: 
             start = networkParameters.start
         except AttributeError:
-            logger.error('Could not find attributes \"noise\" or \"start\" for \"spiketrain\" of cell type {:s}.'.format(preCellType))
-            logger.error('         Support of \"spiketrains\" without these attributes is deprecated.')
-        try:
+            logger.debug('\"start\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to start = 0.0.')
+        try: 
             nSpikes = networkParameters.nspikes
         except AttributeError:
             pass
+
         if self.simParam is not None:
             stop = self.simParam.tStop
         logger.info('initializing spike trains with mean rate {:.2f} Hz for cell type {:s}'.format(1000.0 / interval, preCellType))
@@ -664,7 +671,7 @@ class NetworkMapper:
 
         Args:
             preCellType (str): The presynaptic cell type.
-            networkParameters (:py:class:`~single_cell_parser.parameters.ParameterSet`): The network parameters for the presynaptic cell type.
+            networkParameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameters for the presynaptic cell type.
 
         Returns:
             None
@@ -1192,7 +1199,7 @@ class NetworkMapper:
         """Assign synapse weights according to distribution specified in network parameters.
         
         Args:
-            receptor (:py:class:`~single_cell_parser.parameters.ParameterSet`): Receptor parameters from network parameter file.
+            receptor (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Receptor parameters from network parameter file.
             recepStr (str): Receptor name.
             syn (Synapse): Synapse object.
         """
@@ -1361,9 +1368,9 @@ def activate_functional_synapse(
         syn (:py:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         cell (:py:class:`~single_cell_parser.cell.Cell`): Postsynaptic cell.
         preSynCell (:py:class:`~single_cell_parser.cell.PointCell`): Presynaptic cell.
-        synParameters (:py:class:`~single_cell_parser.parameters.ParameterSet`): Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
+        synParameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
         tChange (float): Time at which the synapse parameters change (e.g. the release probability due to a spike).
-        synParametersChange (:py:class:`~single_cell_parser.parameters.ParameterSet`): Synapse parameters after change (including e.g. the release probability).
+        synParametersChange (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters after change (including e.g. the release probability).
         forceSynapseActivation (bool): If True, the synapse is activated regardless of the release probability.
         releaseTimes (list):
             List of synaptic release times.
