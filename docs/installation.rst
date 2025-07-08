@@ -3,40 +3,130 @@
 Installation
 ============
 
-ISF is available for Linux, macOS and Windows.
+.. md-tab-set::
 
-For installation and environment management, ISF uses `pixi <https://pixi.sh/latest/>`_. 
-Please follow the installation instructions on the `pixi documentation <https://pixi.sh/latest/#installation>`_ 
+   .. md-tab-item:: Linux
 
-To install ISF with ``pixi``, simply:
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download", ""
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`_, Likely already installed
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+   .. md-tab-item:: macOS
+
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download"
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`_
+
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+   .. md-tab-item:: Windows
+
+      .. important::
+
+         Windows support is still experimental.
+         If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
+         In case you encounter any issues, feel free to `open an issue <https://github.com/mpinb/in_silico_framework/issues>`_ and include relevant logs.
+         Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.
+
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download", ""
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/win>`_
+         `NEURON <https://www.neuron.yale.edu/neuron/>`_ ,  `Download <https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows>`_, 7.8 ≤ version ≤ 8.2
+
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+            which neuron
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+
+
+Developer installation
+-----------------------
+
+
+If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
+you should also clone the ``develop`` branch of the repository:
 
 .. code-block:: bash
 
-   git clone https://github.com/mpinb/in_silico_framework.git --depth 1
-   cd in_silico_framework
-   pixi run install
-
-
-.. important::
-   :title: Windows
-   :collapsible:
-
-   Windows support is still experimental.
-   If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
-   In case you encounter any issues, feel free to `open an issue <https://github.com/mpinb/in_silico_framework/issues>`_ and include relevant logs.
-   Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.
-
-.. important::
-   :title: Developer installation
-   :collapsible:
-
-   If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
-   you should also clone the `develop` branch of the repository:
-
-   .. code-block:: bash
-
-      git remote set-branches origin 'develop'
-      git fetch --depth 1 origin develop
+   git remote set-branches origin 'develop'
+   git fetch --depth 1 origin develop
 
 
 Configuration
