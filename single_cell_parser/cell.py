@@ -944,7 +944,7 @@ class PySection(nrn.Section):
 
 
 class PointCell(object):
-    '''Cell without morphological or electrophysiological features.
+    '''Cell without morphological or biophysical attributes.
 
     Used as a presynaptic spike source for synapses. 
     Stores spike times in :py:class:`neuron:Vector` and :py:class:`numpy.array`.

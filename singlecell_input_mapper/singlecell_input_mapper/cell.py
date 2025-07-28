@@ -289,7 +289,7 @@ class PySection2(object):
 
 
 class PointCell(object):
-    '''Cell object without morphological attributes.
+    '''Cell object without morphological or biophysical attributes.
 
     When connecting synapses between postsynaptic and
     presynaptic cells, this class is used for the presynaptic cell.
