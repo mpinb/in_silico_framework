@@ -34,7 +34,7 @@
 
    {% if obj.docstring %}
 
-   {{ obj.docstring | replace("_", "\_") | indent(3) }}
+   {{ obj.docstring | indent(3) }}
    {% endif %}
 {% endif %}
 
