@@ -55,7 +55,7 @@ def plot_hoc(hoc_file, **kwargs):
         **kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
 
     Returns:
-        :py:class:`matplotlib.pyplot.Figure`: The figure object
+        :py:class:`~matplotlib.figure.Figure`: The figure object
     """
     cp = CellParser(hoc_file)
     cp.spatialgraph_to_cell()

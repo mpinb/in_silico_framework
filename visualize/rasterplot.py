@@ -58,8 +58,6 @@ def rasterplot2(
         marker (str, optional): 
             The marker style to use for plotting events. Defaults to 'line'. If 'line', lines of defined length are plotted.
     
-    Returns:
-        None
     """
     if ax is None:
         ax = plt.figure().add_subplot(111)
@@ -114,8 +112,6 @@ def rasterplot2_pdf_grouped(
         color (str, optional):
             The color to use for the plot. Default is 'k'.
 
-    Returns:
-        None.
     """
     if ax is None:
         fig = plt.figure(figsize=(7, 4), dpi=600)
@@ -186,7 +182,7 @@ def rasterplot(
             If True, reset the index of the DataFrame. Default is ``True``.
 
     Returns:
-        matplotlib.pyplot.Figure: Figure object containing the rasterplot. 
+        :py:class:`~matplotlib.figure.Figure`: Figure object containing the rasterplot. 
     '''
 
     if ax is None:
