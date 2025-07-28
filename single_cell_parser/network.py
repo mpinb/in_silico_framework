@@ -349,7 +349,7 @@ class NetworkMapper:
         Sets all the presynaptic cells to ``off``.
 
         See also:
-            :py:meth:`~single_cell_parser.cell.Cell.turn_off` for more information on turning cells off.
+            :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
         
         Args:
             replayMode (bool): 

@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-r"""Save and load dask dataframes to msgpack with categorical columns.
+"""Save and load dask dataframes to msgpack with categorical columns.
 
 This dumper is designed for dataframes with the following properties:
 
@@ -26,7 +26,7 @@ dataframe to 5000 partitions.
 Loading such a dataframe is normaly possible within 1 second.
 
 Before saving, all str-columns will be converted to ``pd.Categorical``s
-In each respective partition, if the part of unique values in the respective column is <= 20%. The original datatype
+In each respective partition, if the part of unique values in the respective column is :math:`<= 20\%`. The original datatype
 will be restored if the dataframe is loaded. 
 This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes. 
 Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.

@@ -175,7 +175,7 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
     This is useful for debugging and for analyzing the optimization results.
     
     Args:
-        db_setup (:py:class:`~data_base.DataBase): Database containing the setup of the optimization.
+        db_setup (:py:class:`~data_base.DataBase`): Database containing the setup of the optimization.
         db_run (:py:class:`~data_base.DataBase`): The database for the optimization run containing sub-databases.
         c (:py:class:`~dask.distributed.Client`): The distributed client.
         satisfactory_boundary_dict (dict | None): A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
@@ -574,7 +574,7 @@ def start_run(
     Args:
         db_setup (data_base.DataBase): a DataBase containing the setup of the optimization. It must include:
         
-            - params ... this is a pandas.DataFrame with the parameternames as index and the columns min_ and max_
+            - params ... this is a pandas.DataFrame with the parameternames as index and the columns ``min_`` and ``max_``
             - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
             - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
             - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object

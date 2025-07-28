@@ -245,6 +245,7 @@ class NTParameterSet(MutableMapping):
 
     def update(self, other=None, **kwargs):
         """Update the NTParameterSet with another dictionary or keyword arguments.
+
         Args:
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
             **kwargs: Additional keyword arguments to merge into this NTParameterSet.
