@@ -707,7 +707,7 @@ class PySection(nrn.Section):
         Given a segment and a variable name, this function retrieves the conductance of the specified variable in the segment.
         
         Args:
-            seg (:py:class:`neuron:Segment`): The segment to retrieve the conductance from.
+            seg (:py:class:`neuron.nrn.Segment`): The segment to retrieve the conductance from.
             var (str): The variable name of the mechanism e.g. ``NaTa_t``.
             param_name (str): The parameter name of the mechanism e.g. ``gNaTa_tbar``.
             
@@ -718,7 +718,7 @@ class PySection(nrn.Section):
             ValueError: If the segment does not have the specified variable.
             
         Raises:
-            AssertionError: If the segment is not an instance of :py:class:`neuron:Segment`.
+            AssertionError: If the segment is not an instance of :py:class:`neuron.nrn.Segment`.
         """
         assert isinstance(seg, nrn.Segment)
         if not hasattr(seg, var): raise ValueError(f"Segment {seg} does not have variable {var}")
