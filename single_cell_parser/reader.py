@@ -17,13 +17,8 @@
 
 '''Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
-.. deprecated::
-    This module additionally provides readers for :ref:`syn_activation_format` and :ref:`spike_times_format` files.
-    However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
-    They can still be explicitly read using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
-    
-    See also:
-        :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+See also:
+    :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 '''
 
 import numpy as np
@@ -329,6 +324,7 @@ def read_scalar_field(fname=''):
 
 def read_synapse_realization(fname):
     """Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
+
     
     See also:
 
@@ -505,6 +501,12 @@ def read_functional_realization_map(fname):
 
 def read_synapse_activation_file(fname):
     '''Reads list of all functional synapses and their activation times.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     In contrast to :py:meth:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
     
@@ -566,6 +568,12 @@ def read_complete_synapse_activation_file(fname):
     '''Reads list of all functional synapses and their activation times.
     
     This reader also returns "structure label" in addition to the columns of :py:func:`read_synapse_activation_file`.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     Args: 
         fname (str): 
@@ -607,6 +615,12 @@ def read_complete_synapse_activation_file(fname):
 
 def read_spike_times_file(fname):
     '''Reads all trials and spike times within these trials.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     Args:
         fname (str): 
