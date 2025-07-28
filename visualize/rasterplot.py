@@ -38,7 +38,7 @@ def rasterplot2(
     y_offset=None,
     y_plot_length=1,
     marker='line'):
-    """Plot a rasterplot from a spike times dataframe.
+    """Plot a rasterplot from :ref:`spike_times_format`.
 
     Args:
         st (pandas.DataFrame): 
@@ -93,7 +93,7 @@ def rasterplot2_pdf_grouped(
     xlim=None,
     x_offset=0,
     color='k'):
-    """Plot a rasterplot per group fo a spike times dataframe.
+    """Plot a rasterplot per group of :ref:`spike_times_format`.
     
     Similar to :py:meth:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
     but groups them with horizontal lines, based on the grouplabel.
@@ -163,7 +163,7 @@ def rasterplot(
     groupby_attribute=None,
     tlim=None,
     reset_index=True):
-    '''Creates a rasterplot from spike times dataframe.
+    '''Creates a rasterplot from :ref:`spike_times_format`.
     
     If df is a dask.DataFrame: parallel plotting is used (not recommended, causes bad quality)
     If df is a pandas.DataFrame, serial plotting is used
