@@ -53,7 +53,7 @@ def manylines(
         scheduler (distributed.client.Client | str, optional): a distributed scheduler.
 
     Returns:
-        :py:class:`~matplotlib.figure.Figure`: Figure object containing all lines defined in :paramref:df
+        :py:class:`~matplotlib.figure.Figure`: Figure object containing all lines defined in :paramref:`df`
     '''
 
     if returnPixelObject:
