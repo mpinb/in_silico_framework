@@ -145,7 +145,7 @@ class Synapse(object):
     def disconnect_hoc_synapse(self):
         """Disconnect the synapse from the neuron model.
         
-        Disconnecting the synapse turns off the release site and removes the :py:class:`~neuron.h.NetCon`
+        Disconnecting the synapse turns off the release site and removes the :py:class:`neuron:NetCon`
         
         See also:
             :py:meth:`activate_hoc_syn`.
