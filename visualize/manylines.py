@@ -53,7 +53,7 @@ def manylines(
         scheduler (distributed.client.Client | str, optional): a distributed scheduler.
 
     Returns:
-        fig (matplotlib.pyplot.Figure): Figure object containing all lines defined in :paramref:df
+        matplotlib.pyplot.Figure: Figure object containing all lines defined in :paramref:df
     '''
 
     if returnPixelObject:
@@ -140,7 +140,7 @@ def manylines_helper(
             size of the figure.
 
     Returns:
-        fig (maptlotlib.pyplot.Figure): Figure object containing the lines as specified in pdf.
+        maptlotlib.pyplot.Figure: Figure object containing the lines as specified in pdf.
     '''
     if not isinstance(pdf, pd.DataFrame):
         raise RuntimeError(
