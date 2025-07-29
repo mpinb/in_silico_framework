@@ -15,11 +15,11 @@ read_synapse_weight_file
    Reads list of all anatomical synapses and their maximum conductance values.
 
    :Parameters: **fname** (*str*) -- Synapse weight filename.
-                See: :py:meth:`~single\_cell\_parser.writer.write\_synapse\_weight\_file`.
+                See: :py:meth:`~single_cell_parser.writer.write_synapse_weight_file`.
 
    :returns: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
              1st with section ID and pt ID, 2nd with synaptic weights, coded as dictionaries
-             (keys=receptor strings) containing weights: (gmax\_0, gmax\_1, ... , gmax\_n)
+             (keys=receptor strings) containing weights: (gmax_0, gmax_1, ... , gmax_n)
    :rtype: tuple
 
 

@@ -23,9 +23,9 @@ filter_short_ISIs
    .. rubric:: Example
       :class: example
 
-   >>> filter\_short\_ISIs([1,2,3,4,5], tdelta=1.5)
+   >>> filter_short_ISIs([1,2,3,4,5], tdelta=1.5)
    [1, 3, 5]
-   >>> filter\_short\_ISIs([1,2,3,4,5], tdelta=2)
+   >>> filter_short_ISIs([1,2,3,4,5], tdelta=2)
    [1, 3, 5]
 
 

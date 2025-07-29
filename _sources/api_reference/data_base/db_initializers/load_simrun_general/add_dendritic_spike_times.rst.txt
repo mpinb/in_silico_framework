@@ -14,9 +14,9 @@ add_dendritic_spike_times
 
    Add dendritic spike times to the database.
 
-   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database to which the data should be added.
-                * **dendritic\_spike\_times\_threshold** (*float, optional*) -- Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
-                  See also: :py:meth:`~data\_base.analyze.spike\_detection`
+   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The database to which the data should be added.
+                * **dendritic_spike_times_threshold** (*float, optional*) -- Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
+                  See also: :py:meth:`~data_base.analyze.spike_detection`
 
 
 .. 

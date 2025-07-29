@@ -10,7 +10,7 @@ write_video_from_images
 =======================
 
 
-.. py:function:: visualize.utils.write_video_from_images(images, out_path, fps=24, images_format=&#39;.png&#39;, quality=5, codec=&#39;mpeg4&#39;, auto_sort_paths=True)
+.. py:function:: visualize.utils.write_video_from_images(images, out_path, fps=24, images_format='.png', quality=5, codec='mpeg4', auto_sort_paths=True)
 
    Creates a video from a set of images.
 
@@ -23,12 +23,12 @@ write_video_from_images
       If running this command on windows, please set the :paramref:`glob` argument to False and specify a non-glob type match pattern.
 
    :Parameters: * **images** (*list | str*) -- list of images, a directory with images or a list of directories with images
-                * **out\_path** (*str*) -- dir where the video will be generated + name of the video
+                * **out_path** (*str*) -- dir where the video will be generated + name of the video
                 * **fps** (*int*) -- frames per second
-                * **images\_format** (*str*) -- .png, .pdf, .jpg ...
+                * **images_format** (*str*) -- .png, .pdf, .jpg ...
                 * **quality** (*int*) -- quality of the video. Only used with the mpeg4 codec
                 * **codec** (*str*) -- codec to use. Default is mpeg4.
-                * **auto\_sort\_paths** (*bool*) -- paths to images sorted
+                * **auto_sort_paths** (*bool*) -- paths to images sorted
 
    :returns: None. Writes the video to the specified path.
 

@@ -14,7 +14,7 @@ df_colnames_to_str
 
    Convert the column names and index names of a dataframe to string.
 
-   Useful for dumping using the pandas\_to\_parquet dumper, or dask\_to\_parquet dumper.
+   Useful for dumping using the pandas_to_parquet dumper, or dask_to_parquet dumper.
    Warning: This overwrites the original object. This is preferred over the overhead of creating a copy on every write.
 
    :Parameters: **df** (*pd.DataFrame | dask.DataFrame*) -- a DataFrame

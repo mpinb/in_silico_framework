@@ -10,26 +10,26 @@ scale_by_detailed_compartment
 =============================
 
 
-.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment(cell, **kwargs)
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment(cell, \*\*kwargs)
 
-   Scales subcellular compartments based on ``detailed\_labels``.
+   Scales subcellular compartments based on ``detailed_labels``.
 
-   If not yet assigned, detailed labels are assigned by :py:meth:`biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`.
+   If not yet assigned, detailed labels are assigned by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
    and include ``basal``, ``trunk``, ``tuft``, and ``oblique``.
 
    .. attention::
 
       For non-L5PT neurons or L5PT neurons from any other brain area than barrel cortex,
-      make sure :py:meth:`~biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`
+      make sure :py:meth:`~biophysics_fitting.utils.augment_cell_with_detailed_labels`
       assigns labels as you want them to be.
       
-      Alternatively, assign them manually with the :py:attr:`biophysics\_fitting.cell.Cell.sections.label\_detailed` attribute.
+      Alternatively, assign them manually with the :py:attr:`biophysics_fitting.cell.Cell.sections.label_detailed` attribute.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to scale.
                 * **\*\*kwargs** (*dict*) -- Detailed lables with associated scaling factors.
 
    :returns: The scaled cell.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
 .. 

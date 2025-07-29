@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1057,7 +1057,7 @@
 </div>
 <span class="target" id="module-single_cell_parser.cell"></span><p>Cell objects for neuron models and cell activity.</p>
 <p>This module contains classes for representing cells in NEURON simulations.
-This includes <a class="reference internal" href="Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> and <a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a> for neuron models, containing morphological and biophysical properties.
+This includes <a class="reference internal" href="Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> and <a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around neuron:Section providing additional functionality for geometry and mechanisms."><code class="xref py py-class docutils literal notranslate"><span class="pre">PySection</span></code></a> for neuron models, containing morphological and biophysical properties.
 It also includes the <code class="xref py py-class docutils literal notranslate"><span class="pre">PointCell</span></code> class for handling presynaptic cell activations.
 The latter does not contain any morphological or biophysical properties, but handles the activation of presynaptic cells in a network.
 For neuron-network multiscale simulations, you should consult <a class="reference internal" href="../../simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p>
@@ -1067,11 +1067,11 @@ For neuron-network multiscale simulations, you should consult <a class="referenc
 <tr class="row-odd"><td><p><a class="reference internal" href="Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cell</span></code></a></p></td>
 <td><p>Cell object providing API to the NEURON hoc interface.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around nrn.Section providing additional functionality for geometry and mechanisms."><code class="xref py py-obj docutils literal notranslate"><span class="pre">PySection</span></code></a></p></td>
-<td><p>Wrapper around <code class="xref py py-class docutils literal notranslate"><span class="pre">nrn.Section</span></code> providing additional functionality for geometry and mechanisms.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PySection.html#single_cell_parser.cell.PySection" title="single_cell_parser.cell.PySection (Python class) — Wrapper around neuron:Section providing additional functionality for geometry and mechanisms."><code class="xref py py-obj docutils literal notranslate"><span class="pre">PySection</span></code></a></p></td>
+<td><p>Wrapper around <a class="reference external" href="https://nrn.readthedocs.io/en/latest/python/modelspec/programmatic/topology.html#Section" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">Section</span></code></a> providing additional functionality for geometry and mechanisms.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.html#single_cell_parser.cell.PointCell" title="single_cell_parser.cell.PointCell (Python class) — Cell without morphological or electrophysiological features."><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointCell</span></code></a></p></td>
-<td><p>Cell without morphological or electrophysiological features.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.html#single_cell_parser.cell.PointCell" title="single_cell_parser.cell.PointCell (Python class) — Cell without morphological or biophysical attributes."><code class="xref py py-obj docutils literal notranslate"><span class="pre">PointCell</span></code></a></p></td>
+<td><p>Cell without morphological or biophysical attributes.</p></td>
 </tr>
 </tbody>
 </table>

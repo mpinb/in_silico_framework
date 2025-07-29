@@ -10,7 +10,7 @@ make_filelist
 =============
 
 
-.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.make_filelist(directory, suffix=&#39;vm_all_traces.csv&#39;)
+.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.make_filelist(directory, suffix='vm_all_traces.csv')
 
    Generate a list of all files with :paramref:`suffix` in the specified directory.
 
@@ -21,7 +21,7 @@ make_filelist
    :Parameters: * **directory** (*str*) -- Path to the directory containing the simulation results.
                   In general, this directory will contain a nested subdirectory structure.
                 * **suffix** (*str*) -- The suffix of the data files.
-                  Default is ``'vm\_all\_traces.csv'`` for somatic voltage traces.
+                  Default is ``'vm_all_traces.csv'`` for somatic voltage traces.
 
    :returns: List of all soma voltage trace files in the specified directory.
    :rtype: list

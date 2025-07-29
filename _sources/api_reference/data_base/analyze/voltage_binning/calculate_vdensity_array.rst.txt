@@ -10,7 +10,7 @@ calculate_vdensity_array
 ========================
 
 
-.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array(*args, **kwargs)
+.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array(\*args, \*\*kwargs)
 
    Calculate the voltage density array.
 
@@ -18,7 +18,7 @@ calculate_vdensity_array
    This method infers the type of dataframe passed and calls the appropriate method.
 
    :Parameters: * **v** (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`) -- A voltage traces dataframe. Column indices float and reflect timepoints
-                * **bin\_size** (*float*) -- the size of the bins
+                * **bin_size** (*float*) -- the size of the bins
                 * **ymin** (*float*) -- the minimum voltage value
                 * **ymax** (*float*) -- the maximum voltage value
                 * **xmin** (*float*) -- the minimum time value (unused)

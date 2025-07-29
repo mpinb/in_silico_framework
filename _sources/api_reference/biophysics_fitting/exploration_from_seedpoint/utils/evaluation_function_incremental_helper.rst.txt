@@ -17,19 +17,19 @@ evaluation_function_incremental_helper
    This is useful for performace, as it allows to run the fastest simulations first,
    and provides an early stopping criterion if a model is not able to match these objectives.
 
-   :Parameters: * **s** (:py:class:`~biophysics\_fitting.simulator.Simulator`) -- Simulator object
-                * **e** (:py:class:`~biophysics\_fitting.evaluator.Evaluator`) -- Evaluator object
-                * **stim\_order** (*[str] | [(str)]*) -- Order in which stimuli are simulated.
+   :Parameters: * **s** (:py:class:`~biophysics_fitting.simulator.Simulator`) -- Simulator object
+                * **e** (:py:class:`~biophysics_fitting.evaluator.Evaluator`) -- Evaluator object
+                * **stim_order** (*[str] | [(str)]*) -- Order in which stimuli are simulated.
                   List consisting of strings and tuples of strings.
                   Use strings if only one stimulus is to be simulated.
                   Use tuples of strings to simulate several stimuli in one go.
                 * **cutoffs ({str** -- float}):
-                  Keys (str) must appear in stim\_order.
+                  Keys (str) must appear in stim_order.
                   Values (float)indicate the maximum error allowed for these stimuli
-                * **objectives\_by\_stimulus ({str** -- list}):
-                  Keys (str) must appear in stim\_order.
+                * **objectives_by_stimulus ({str** -- list}):
+                  Keys (str) must appear in stim_order.
                   Values (list) are objective names returned by the evaluator object.
-                * **additional\_evaluation\_functions** (*list*) -- additional functions to be applied onto the final voltage
+                * **additional_evaluation_functions** (*list*) -- additional functions to be applied onto the final voltage
                   traces dictionary, which return a dictionary which is appended to the
                   evaluations.
 

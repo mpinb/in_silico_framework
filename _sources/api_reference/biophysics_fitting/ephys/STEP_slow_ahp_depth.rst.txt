@@ -25,7 +25,7 @@ STEP_slow_ahp_depth
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
                 * **v** (*numpy.ndarray*) -- Array of voltage values.
                 * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
-                * **time\_scale** (*float, optional*) -- Time scale in milliseconds. Defaults to 5 ms.
+                * **time_scale** (*float, optional*) -- Time scale in milliseconds. Defaults to 5 ms.
                 * **start** (*int*) -- Index of the first AP to be considered. Defaults to 1: Omit the first AP with index 0.
 
    :returns: Depth of the sAHP.

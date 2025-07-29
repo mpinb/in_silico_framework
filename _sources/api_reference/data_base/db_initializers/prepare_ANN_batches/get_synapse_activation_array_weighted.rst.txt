@@ -16,19 +16,19 @@ get_synapse_activation_array_weighted
 
    Create a 4D array of synaptic activation, where the axes are:
 
-   - :paramref:`selected\_stis`
+   - :paramref:`selected_stis`
    - EXC/INH
    - spatial bins
    - time bins
 
-   The array is of shape ``(len(selected\_stis), 2, len(spatial\_bin\_names), (max\_time - min\_time)//bin\_size)``.
+   The array is of shape ``(len(selected_stis), 2, len(spatial_bin_names), (max_time - min_time)//bin_size)``.
 
-   :Parameters: * **sa\_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
-                * **selected\_stis** (*list, optional*) -- List of selected spike times. Defaults to None.
-                * **spatial\_bin\_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
-                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 600.
-                * **use\_weights** (*bool, optional*) -- If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
+   :Parameters: * **sa_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
+                * **selected_stis** (*list, optional*) -- List of selected spike times. Defaults to None.
+                * **spatial_bin_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
+                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 600.
+                * **use_weights** (*bool, optional*) -- If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
 
    :returns: A 4D array of synapse activation times.
    :rtype: array

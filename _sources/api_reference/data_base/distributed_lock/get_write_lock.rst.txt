@@ -17,7 +17,7 @@ get_write_lock
    :Parameters: **name** (*str*) -- The name of the lock.
 
    :returns:     The lock object.
-   :rtype: :py:class:`~data\_base.distributed\_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.WriteLock`
+   :rtype: :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.WriteLock`
 
 
 .. 

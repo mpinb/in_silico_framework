@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1329,18 +1329,18 @@
 <p class="example rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
 <span class="go">        &#39;bla&#39;</span>
-<span class="go">x\_1\_y\_1    10</span>
-<span class="go">x\_2\_y\_1    15</span>
-<span class="go">x\_3\_y\_1     7</span>
-<span class="go">x\_1\_y\_2     2</span>
-<span class="go">x\_2\_y\_2     0</span>
-<span class="go">x\_3\_y\_2    -1</span>
+<span class="go">x_1_y_1    10</span>
+<span class="go">x_2_y_1    15</span>
+<span class="go">x_3_y_1     7</span>
+<span class="go">x_1_y_2     2</span>
+<span class="go">x_2_y_2     0</span>
+<span class="go">x_3_y_2    -1</span>
 </code></pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">pandas</span>\<span class="n">_to</span>\<span class="n">_array</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">pandas_to_array</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">pdf</span><span class="p">,</span>
-<span class="gp">... </span>   <span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>   <span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;\_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>   <span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>   <span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
 <span class="gp">... </span>   <span class="k">lambda</span> <span class="n">index</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">bla</span><span class="p">)</span>
 <span class="go">    1    2    3</span>
 <span class="go">1    10   15    7</span>

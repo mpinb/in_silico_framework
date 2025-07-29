@@ -10,7 +10,7 @@ get_optimal_g
 =============
 
 
-.. py:function:: simrun.synaptic_strength_fitting.get_optimal_g(self, measured_data, method=&#39;dynamic_baseline&#39;, threashold=0.1)
+.. py:function:: simrun.synaptic_strength_fitting.get_optimal_g(self, measured_data, method='dynamic_baseline', threashold=0.1)
 
    Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
 
@@ -18,15 +18,15 @@ get_optimal_g
    by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
    This linear interpolation is cross-referenced with empirically observed statistics to infer the optimal synaptic conductance.
 
-   :Parameters: * **measured\_data** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
-                  Must contain the keys: ``[EPSP\_mean\_measured, EPSP\_median\_measured, EPSP\_max\_measured]``.
-                * **method** (*str*) -- ``dynamic\_baseline`` or ``constant\_baseline``.
+   :Parameters: * **measured_data** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
+                  Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]``.
+                * **method** (*str*) -- ``dynamic_baseline`` or ``constant_baseline``.
                 * **threashold** (*float*) -- The threashold to consider a celltype as excitatory.
 
    :returns: A table of the optimal synaptic conductance for each celltype.
    :rtype: pd.DataFrame
 
-   .. seealso:: :py:meth:`~simrun.synaptic\_strength\_fitting.calculate\_optimal\_g`.
+   .. seealso:: :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
 
 
 .. 

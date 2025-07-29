@@ -14,11 +14,11 @@ run
 
    This method is a class method of the BluePyOpt optimisations.DEAPOptimisation class.
    It is extended here such that a start population can be defined.
-   Running actual optimization is done with the :meth:`~biophysics\_fitting.optimizer.start\_run`, which further extends this method.
+   Running actual optimization is done with the :meth:`~biophysics_fitting.optimizer.start_run`, which further extends this method.
 
    .. note::
 
-      the population needs to be in a special format. Use methods in biophysics\_fitting.population
+      the population needs to be in a special format. Use methods in biophysics_fitting.population
       to create a population.
 
 

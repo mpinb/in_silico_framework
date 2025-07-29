@@ -23,8 +23,8 @@ write_spike_times_file
       :class: example
 
    >>> spikeTimes = {0: [0.1, 0.2, 0.3], 1: [], 2: [0.2, 0.3]}
-   >>> write\_spike\_times\_file('spike\_times.param', spikeTimes)
-   >>> spike\_times.param
+   >>> write_spike_times_file('spike_times.param', spikeTimes)
+   >>> spike_times.param
    # trial spike times
    0       0.1,0.2,0.3,
    1

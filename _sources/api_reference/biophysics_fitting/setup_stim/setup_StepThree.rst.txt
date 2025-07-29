@@ -14,11 +14,11 @@ setup_StepThree
 
    Setup a step current stimulus at the soma:
 
-       - amplitude = 1.507 nA
-       - delay = 700 ms
-       - duration = 2000 ms
+   - amplitude = 1.507 nA
+   - delay = 700 ms
+   - duration = 2000 ms
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **delay** (*float*) -- The delay of the step current stimulus (ms).
 
    :returns: None. Adds a step current stimulus to the cell.

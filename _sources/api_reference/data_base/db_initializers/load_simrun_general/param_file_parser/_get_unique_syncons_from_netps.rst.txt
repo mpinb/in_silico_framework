@@ -14,7 +14,7 @@ _get_unique_syncons_from_netps
 
    Get the unique synapse and connection files from a list of network parameter files.
 
-   :Parameters: **netp\_fn** (*str*) -- Path to the network parameter file.
+   :Parameters: **netp_fn** (*str*) -- Path to the network parameter file.
 
    :returns: Tuple containing the unique synapse and connection files.
    :rtype: tuple

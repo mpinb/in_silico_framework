@@ -20,8 +20,8 @@ memmap_from_disk
                 * **shape** (*tuple, optional*) -- Shape of the array.
                 * **dtype** (*str, optional*) -- Data type of the array.
                 * **name** (*str, optional*) -- Name of the shared memory block. Default: None.
-                * **start\_row** (*int, optional*) -- The starting row of the array. Default: None.
-                * **end\_row** (*int, optional*) -- The ending row of the array. Default: None.
+                * **start_row** (*int, optional*) -- The starting row of the array. Default: None.
+                * **end_row** (*int, optional*) -- The ending row of the array. Default: None.
 
    :returns: A numpy memory map object.
    :rtype: np.memmap

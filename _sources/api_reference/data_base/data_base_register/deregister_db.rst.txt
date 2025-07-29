@@ -16,7 +16,7 @@ deregister_db
 
    Removes this :py:class:`DataBase` from the registry.
 
-   :Parameters: **unique\_id** (*str*) -- The unique ID of the database.
+   :Parameters: **unique_id** (*str*) -- The unique ID of the database.
 
 
 .. 

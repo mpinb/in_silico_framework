@@ -18,7 +18,7 @@ interpolate_vt
    comparing voltage traces difficult. This function interpolates the voltage
    traces so that they have a fixed time interval of 0.025 ms.
 
-   :Parameters: **voltage\_trace\_** (*dict*) -- A dictionary of voltage traces.
+   :Parameters: **voltage_trace_** (*dict*) -- A dictionary of voltage traces.
 
    :returns: A dictionary of voltage traces with a fixed time interval.
    :rtype: dict

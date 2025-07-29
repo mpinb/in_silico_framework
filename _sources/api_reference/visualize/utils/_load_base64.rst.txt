@@ -10,13 +10,13 @@ _load_base64
 ============
 
 
-.. py:function:: visualize.utils._load_base64(filename, extension=&#39;png&#39;)
+.. py:function:: visualize.utils._load_base64(filename, extension='png')
 
    Load a base64 file from a filename.
 
-   Used in :py:meth:`display\_animation\_from\_images` to embed animations.
+   Used in :py:meth:`display_animation_from_images` to embed animations.
 
-   See: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html\_writer.py
+   See: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html_writer.py
 
 
 .. 

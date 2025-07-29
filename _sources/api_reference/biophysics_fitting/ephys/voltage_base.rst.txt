@@ -12,13 +12,13 @@ voltage_base
 
 .. py:function:: biophysics_fitting.ephys.voltage_base(t, v, stim_delay)
 
-   Calculates the mean voltage between 0.5 * stim\_delay and 0.75 * stim\_delay.
+   Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.
 
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
                 * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **stim\_delay** (*float*) -- Delay time of the stimulus.
+                * **stim_delay** (*float*) -- Delay time of the stimulus.
 
-   :returns: Mean voltage between 0.5*stim\_delay and 0.75*stim\_delay.
+   :returns: Mean voltage between 0.5*stim_delay and 0.75*stim_delay.
    :rtype: float
 
 

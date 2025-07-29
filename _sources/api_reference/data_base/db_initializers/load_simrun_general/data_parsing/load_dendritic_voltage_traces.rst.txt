@@ -14,12 +14,12 @@ load_dendritic_voltage_traces
 
    Load the voltage traces from dendritic recording sites.
 
-   Dendritic recording sites are defined in the :ref:`cell\_parameters\_format` files (under the key ``sim.recordingSites``).
+   Dendritic recording sites are defined in the :ref:`cell_parameters_format` files (under the key ``sim.recordingSites``).
    The voltage traces for each recording site are read with
-   :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.load\_dendritic\_voltage\_traces\_helper`.
+   :py:meth:`~data_base.db_initializers.load_simrun_general.load_dendritic_voltage_traces_helper`.
 
-   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The target database that should contain the parsed simulation results.
-                * **suffix\_key\_dict** (*dict*) -- Dictionary containing the suffixes of the dendritic voltage trace files.
+   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The target database that should contain the parsed simulation results.
+                * **suffix_key_dict** (*dict*) -- Dictionary containing the suffixes of the dendritic voltage trace files.
                   The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
                 * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 

@@ -21,7 +21,7 @@ get_feasible_model_params
    In general, the response of a cell with these biophysical parameters
    heavily depends on the morphology as well.
 
-   Conductance parameters (:math:`\bar{g}` or :math:`g\_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
+   Conductance parameters (:math:`\bar{g}` or :math:`g_{pas}`) are in units of :math:`S/cm^2`, :math:`\tau` parameters are in units of :math:`ms`
    and :math:`\gamma` parameters are a fraction and unitless.
 
    :returns: A DataFrame with the parameter names as index, feasible values as column 'x', and the min and max.
@@ -30,7 +30,7 @@ get_feasible_model_params
    .. note::
 
       The parameters are specific to the L5PT and the Hay stimulus protocol.
-      See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+      See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 
 
 .. 

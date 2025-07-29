@@ -16,7 +16,7 @@ BAC_caSpike_height_check_Ca_spikes_after_Na_spike
 
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
                 * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **v\_dend** (*numpy.ndarray*) -- Array of dendritic voltage values.
+                * **v_dend** (*numpy.ndarray*) -- Array of dendritic voltage values.
                 * **n** (*int, optional*) -- The number of the sodium spike to check for.
                   Defaults to 2.
                 * **thresh** (*float, optional*) -- The voltage threshold for detecting spikes.

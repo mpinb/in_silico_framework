@@ -12,21 +12,21 @@ set_ephys
 
 .. py:function:: biophysics_fitting.L5tt_parameter_setup.set_ephys(cell_param, params=None)
 
-   Updates cell\_param file.
+   Updates cell_param file.
 
    Parameter names reflect the Hay naming convention.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The cell parameter dictionary.
+   :Parameters: * **cell_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The cell parameter dictionary.
                 * **params** (*pd.Series*) -- The parameter vector as a pandas Series.
 
    :raises AssertionError: If the parameter vector is None or not a pandas Series.
    :raises AssertionError: If the provided cell parameters lack a field that is however defined in the parameter vector.
    :raises AssertionError: If some parameters are not set after the update.
 
-   :returns: The updated cell\_param, with the biphysical parameters set.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
+   :returns: The updated cell_param, with the biphysical parameters set.
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+   .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 
 
 .. 

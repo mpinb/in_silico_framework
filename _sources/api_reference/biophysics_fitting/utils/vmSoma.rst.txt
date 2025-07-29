@@ -14,7 +14,7 @@ vmSoma
 
    Convenience method to extract the soma voltage trace from a cell
 
-   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
 
    :returns: The soma voltage trace of the cell.
    :rtype: numpy.ndarray

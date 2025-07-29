@@ -38,7 +38,9 @@ StepOne
            "APw1": ["AP width", 1.3077, 0.1665]
        }
 
-   .. seealso:: :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setp_StepOne` for more information on the stimulus protocol.
+   Here, the format of each line is: ``acronym: [full name, mean, std]``
+
+   .. seealso:: :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
 
    :Parameters: * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
                 * **stim_onset** (*float*) -- The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.

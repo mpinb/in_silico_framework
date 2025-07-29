@@ -14,15 +14,15 @@ spike_times_to_onehot
 
    One-hot encode spike times to a binned time vector.
 
-   The time vector is created from :paramref:`min\_time`, :paramref:`max\_time` and :paramref:`time\_step`
-   and is of length ``(max\_time - min\_time)//time\_step``.
+   The time vector is created from :paramref:`min_time`, :paramref:`max_time` and :paramref:`time_step`
+   and is of length ``(max_time - min_time)//time_step``.
 
    If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
 
-   :Parameters: * **spike\_times** (*array*) -- Array of spike times
-                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 505.
-                * **time\_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
+   :Parameters: * **spike_times** (*array*) -- Array of spike times
+                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 505.
+                * **time_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
 
    :returns: A list of booleans, where each element represents a time step and is True if a spike occured in this interval.
    :rtype: list

@@ -10,7 +10,7 @@ hay_evaluate_StepOne
 ====================
 
 
-.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepOne(**kwargs)
+.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepOne(\*\*kwargs)
 
    Evaluate the :math:`StepOne` stimulus protocol.
 

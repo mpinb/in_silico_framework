@@ -73,11 +73,11 @@ Cell
 
       NEURON SectionList containing all sections of the cell.
 
-      :type: neuron.h.SectionList
+      :type: :py:class:`neuron:SectionList`
 
    .. attribute:: branches
 
-      maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList).
+      maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
 
       :type: dict
 
@@ -116,9 +116,9 @@ Cell
 
    .. attribute:: tVec
 
-      a hoc Vector recording time.
+      a NEURON Vector recording time.
 
-      :type: neuron.h.Vector
+      :type: :py:class:`neuron:Vector`
 
    .. attribute:: neuron_param
 

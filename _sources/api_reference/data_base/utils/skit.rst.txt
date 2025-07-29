@@ -10,7 +10,7 @@ skit
 ====
 
 
-.. py:function:: data_base.utils.skit(*funcs, **kwargs)
+.. py:function:: data_base.utils.skit(\*funcs, \*\*kwargs)
 
    Splits kwargs up to supply different functions with the right subset.
 

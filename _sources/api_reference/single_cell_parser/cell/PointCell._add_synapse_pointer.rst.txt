@@ -8,5 +8,10 @@ PointCell._add_synapse_pointer
 
 .. py:method:: single_cell_parser.cell.PointCell._add_synapse_pointer(synapse)
 
-   Add a reference to a synapse connected to this cell.
+   Add a :py:class:`Synapse` to the cell.
+
+   The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects
+   to a postsynaptic :py:class:`Cell` object.
+
+   :Parameters: **synapse** (:py:class:`Synapse`) -- Synapse object.
 

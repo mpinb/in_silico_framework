@@ -14,7 +14,7 @@ compute_vm_histogram
 
    Compute the histogram of membrane voltage traces.
 
-   :Parameters: * **vTraces** (*numpy.ndarray*) -- Array of (one or more) voltage traces. Shape: (``n\_traces``, ``n\_timepoints``).
+   :Parameters: * **vTraces** (*numpy.ndarray*) -- Array of (one or more) voltage traces. Shape: (``n_traces``, ``n_timepoints``).
                 * **bins** (*numpy.ndarray*) -- Bins for the histogram. Default is ``np.arange(-80, -40, 2)``.
 
    :returns: The histogram and the bins

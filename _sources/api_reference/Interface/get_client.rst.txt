@@ -14,7 +14,7 @@ get_client
 
    Gets the distributed.client object if dask has been setup
 
-   :Parameters: * **client\_port** (*int*) -- the port to use for the client
+   :Parameters: * **client_port** (*int*) -- the port to use for the client
                 * **timeout** (*int|float*) -- the timeout for the client (in seconds)
 
    :returns: the client object

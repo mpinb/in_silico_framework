@@ -10,22 +10,22 @@ calculate_vdensity_array_pixelObject
 ====================================
 
 
-.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject(*args, **kwargs)
+.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject(\*args, \*\*kwargs)
 
    Calculate the voltage density array as a PixelObject.
 
-   This method is identical to :py:meth:`~data\_base.analyze.voltage\_binning.calculate\_vdensity\_array`,
-   but returns a :py:class:`~visualize.\_figure\_array\_converter.PixelObject` instead.
+   This method is identical to :py:meth:`~data_base.analyze.voltage_binning.calculate_vdensity_array`,
+   but returns a :py:class:`~visualize._figure_array_converter.PixelObject` instead.
 
    :Parameters: * **v** (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`) -- A voltage traces dataframe. Column indices float and reflect timepoints
-                * **bin\_size** (*float*) -- the size of the bins
+                * **bin_size** (*float*) -- the size of the bins
                 * **xmin** (*float*) -- the minimum time value
                 * **xmax** (*float*) -- the maximum time value
                 * **ymin** (*float*) -- the minimum voltage value
                 * **ymax** (*float*) -- the maximum voltage value
 
    :returns: a PixelObject with the voltage density array
-   :rtype: :py:class:`~visualize.\_figure\_array\_converter.PixelObject`
+   :rtype: :py:class:`~visualize._figure_array_converter.PixelObject`
 
 
 .. 

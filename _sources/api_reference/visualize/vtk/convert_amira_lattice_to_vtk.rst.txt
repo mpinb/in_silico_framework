@@ -10,11 +10,11 @@ convert_amira_lattice_to_vtk
 ============================
 
 
-.. py:function:: visualize.vtk.convert_amira_lattice_to_vtk(surf_file, outname=&#39;lattice&#39;, outdir=&#39;.&#39;)
+.. py:function:: visualize.vtk.convert_amira_lattice_to_vtk(surf_file, outname='lattice', outdir='.')
 
    Convert an AMIRA lattice file to vtk structured points.
 
-   :Parameters: * **surf\_file** (*str*) -- Path to the AMIRA lattice file.
+   :Parameters: * **surf_file** (*str*) -- Path to the AMIRA lattice file.
                 * **outname** (*str, optional*) -- Name of the output file. Defaults to "lattice".
                 * **outdir** (*str, optional*) -- Directory to save the file to. Defaults to ".".
 

@@ -14,11 +14,11 @@ write_scalar_field
 
    Write a scalar field to an AmiraMesh file.
 
-   These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert\_amira\_lattice\_to\_vtk`
+   These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert_amira_lattice_to_vtk`
    for visualization in VTK-compatible renderers.
 
    :Parameters: * **fname** (*str*) -- Name of the output file
-                * **scalarField** (:py:class:`~singlecell\_input\_mapper.singlecell\_input\_mapper.scalar\_field.ScalarField`) -- Scalar field to be written to disk
+                * **scalarField** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- Scalar field to be written to disk
 
    :returns: None. Writes the results to disk.
 

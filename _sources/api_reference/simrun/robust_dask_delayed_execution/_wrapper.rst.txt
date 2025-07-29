@@ -16,11 +16,11 @@ _wrapper
 
    This wrapper is used to compute delayed objects stored in a database. It ensures that the computation is only done once.
    It also provides locks on the files wile they are being computed, to mitigate concurrent access issues.
-   Before, during, and after computation, the delayed objects acquire the status ``'not\_started'``, ``'started'``, and ``'finished'`` respectively.
-   This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run\_db`.
+   Before, during, and after computation, the delayed objects acquire the status ``'not_started'``, ``'started'``, and ``'finished'`` respectively.
+   This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run_db`.
 
    :Parameters: * **db** (*str*) -- The path to the database.
-                * **key\_first\_item** (*str*) -- The key of the first item in the database.
+                * **key_first_item** (*str*) -- The key of the first item in the database.
 
 
 .. 

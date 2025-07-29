@@ -14,11 +14,11 @@ compute_syn_distance
 
    Computes the distance from a single synapse to the soma.
 
-   Used in :py:meth:`compute\_syn\_distances`.
+   Used in :py:meth:`compute_syn_distances`.
 
-   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
-                * **syn** (:py:class:`single\_cell\_parser.synapse.Synapse`) -- synapse object.
-                * **consider\_gap\_to\_soma** (*bool, optional*) -- Account for the fact that dendrites don't actually touch the soma, and add the
+   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- cell object with attached synapses.
+                * **syn** (:py:class:`single_cell_parser.synapse.Synapse`) -- synapse object.
+                * **consider_gap_to_soma** (*bool, optional*) -- Account for the fact that dendrites don't actually touch the soma, and add the
                   distance between the last point of the parent section and the first point of the
                   current section to the distance.
                   Default: False

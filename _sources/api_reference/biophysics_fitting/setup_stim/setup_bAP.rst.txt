@@ -21,7 +21,7 @@ setup_bAP
    - delay = 295 ms
    - duration = 5 ms
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **delay** (*float*) -- The delay of the bAP stimulus (ms).
 
    :returns: None. Adds a bAP stimulus to the cell.

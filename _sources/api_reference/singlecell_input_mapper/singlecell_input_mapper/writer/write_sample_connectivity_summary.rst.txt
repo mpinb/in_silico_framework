@@ -14,7 +14,7 @@ write_sample_connectivity_summary
 
    Write a summary of a single connectivity realization to a file.
 
-   The input summary tables can be computed with :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_generate\_output\_files`
+   The input summary tables can be computed with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
    For each cell type, this method writes a summary on the following attributes of each structure:
 
    - Presynaptic cell type

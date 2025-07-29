@@ -10,9 +10,9 @@ rasterplot2_pdf_grouped
 =======================
 
 
-.. py:function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color=&#39;k&#39;)
+.. py:function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color='k')
 
-   Plot a rasterplot per group fo a spike times dataframe.
+   Plot a rasterplot per group of :ref:`spike_times_format`.
 
    Similar to :py:meth:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
    but groups them with horizontal lines, based on the grouplabel.
@@ -23,10 +23,8 @@ rasterplot2_pdf_grouped
                 * **grouplabel** (*str*) -- The column name in the DataFrame to group by.
                 * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
                 * **xlim** (*tuple, optional*) -- The x-axis limits for the plot. Default is ``None``.
-                * **x\_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
+                * **x_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
                 * **color** (*str, optional*) -- The color to use for the plot. Default is 'k'.
-
-   :returns: None.
 
 
 .. 

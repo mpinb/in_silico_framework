@@ -17,7 +17,7 @@ split_network_param_in_one_elem_dicts
    This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
    for each key in the original dictionary.
 
-   :Parameters: **dict\_** (dict | :py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The network parameter dictionary.
+   :Parameters: **dict_** (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The network parameter dictionary.
 
    :returns: A list of dictionaries, each containing only one element of the original dictionary.
    :rtype: list

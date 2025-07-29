@@ -21,7 +21,7 @@ colorize_key
    :returns: the colorized key
    :rtype: str
 
-   .. seealso:: :py:meth:`data\_base.utils.colorize`
+   .. seealso:: :py:meth:`data_base.utils.colorize`
 
 
 .. 

@@ -14,17 +14,17 @@ save_SA_batch
 
    Save a batch of synapse activation times to a file.
 
-   :Parameters: * **sa\_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
-                * **selected\_stis** (*list*) -- List of selected spike times
-                * **batch\_id** (*int*) -- Batch id
+   :Parameters: * **sa_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
+                * **selected_stis** (*list*) -- List of selected spike times
+                * **batch_id** (*int*) -- Batch id
                 * **outdir** (*str*) -- Output directory
-                * **section\_distances\_df** (*pd.DataFrame, optional*) -- DataFrame representing each section's spatial bins and binsizes. Defaults to None.
-                * **spatial\_bin\_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
-                * **min\_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max\_time** (*int, optional*) -- Max time in ms. Defaults to 600.
-                * **bin\_size** (*int, optional*) -- Size of the time bins. Defaults to 1.
+                * **section_distances_df** (*pd.DataFrame, optional*) -- DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+                * **spatial_bin_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
+                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
+                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 600.
+                * **bin_size** (*int, optional*) -- Size of the time bins. Defaults to 1.
 
-   :returns: A dask delayed object. When computed, saves the synapse activation times to :paramref:`outdir`/batch\_:paramref:`batch\_id`\_SYNAPSE\_ACTIVATION.npy.
+   :returns: A dask delayed object. When computed, saves the synapse activation times to ``outdir/batch_<batch_id>_SYNAPSE_ACTIVATION.npy``.
    :rtype: dask.delayed
 
 

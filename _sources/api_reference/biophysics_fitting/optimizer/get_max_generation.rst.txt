@@ -15,7 +15,7 @@ get_max_generation
    Returns the index of the next iteration in a database.
    If the database is empty, it returns -1.
 
-   :Parameters: **db\_run** (*data\_base.DataBase*) -- The database.
+   :Parameters: **db_run** (*data_base.DataBase*) -- The database.
 
    :returns: The index of the next iteration. If the database is empty, it returns -1.
    :rtype: int

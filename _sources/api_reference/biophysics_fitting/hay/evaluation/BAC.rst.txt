@@ -144,6 +144,8 @@ BAC
               'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
               'BAC_spikecount': ('Spikecount', 3.0, 0.01)
           }
+          
+          Here, the format of each line is: ``acronym: [full name, mean, std]``
 
       :type: dict
 

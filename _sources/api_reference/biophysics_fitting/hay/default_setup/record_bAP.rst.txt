@@ -18,11 +18,11 @@ record_bAP
    stimulus in a pyramidal neuron. The two apical recording sites are used
    to calculate e.g. backpropagating attenuation.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **recSite1** (*float*) -- The distance (um) from the soma to the first recording site.
                 * **recSite2** (*float*) -- The distance (um) from the soma to the second recording site.
 
-   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+   .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 
 
 .. 

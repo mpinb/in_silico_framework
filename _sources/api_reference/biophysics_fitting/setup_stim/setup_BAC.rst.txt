@@ -28,7 +28,7 @@ setup_BAC
    - distance = 970 um (default)
    - delay = 300 ms
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **dist** (*float*) -- The distance from the soma to the recording site (um).
                 * **delay** (*float*) -- The delay of the BAC stimulus (ms).
 

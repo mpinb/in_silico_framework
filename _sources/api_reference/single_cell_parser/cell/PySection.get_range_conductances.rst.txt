@@ -20,18 +20,18 @@ PySection.get_range_conductances
    Example::
 
        >>> range_vars = {"NaTa_t": ["gNaTa_tbar"]}
-       >>> sections[0].NaTa_t.gNaTa_tbar
-       0.00001
+       >>> cell.sections[1].get_range_conductances(range_vars)
+       {"NaTa_t": [0.00001, 0.00002]}  # 2 segments in section 1
 
    :Parameters: * **range_vars** (*dict*) -- A nested dictionary of range variables.
                   The keys must match the segment's nested attributes.
                   It is possible to simply pass subsections of the :ref:`cell_parameters_format` here, e.g. ``neup[sec.label]["mechanisms"]["range"]``
                 * **density** (*bool, optional*) -- If ``True`` (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
-                  If ``False``, the total amount of conductivity is returned for each segment in units :math:`nS`
+                  If ``False``, the total amount of conductance is returned for each segment in units :math:`nS`
                   i.e. the conductance density multiplied by the area of the segment.
                   Defaults to True.
 
-   :returns: A dictionary of per-channel conductances for each segment.
+   :returns: A list of per-channel conductances for each segment.
    :rtype: List[Dict]
 
    :raises AssertionError: If the number of parameters with prefix `g` is not equal to 1 for each range variable.

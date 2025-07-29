@@ -16,7 +16,7 @@ check
 
    :Parameters: **obj** (*object*) -- Object to be saved
 
-   :returns: Whether the object is a :py:class:`~simrun.reduced\_model.get\_kernel.ReducedLdaModel`
+   :returns: Whether the object is a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
    :rtype: bool
 
 

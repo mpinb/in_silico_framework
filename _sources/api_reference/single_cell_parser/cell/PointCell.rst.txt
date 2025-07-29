@@ -34,11 +34,11 @@ PointCell
 
 .. py:class:: single_cell_parser.cell.PointCell(spikeTimes=None)
    
-   Cell without morphological or electrophysiological features.
+   Cell without morphological or biophysical attributes.
 
    Used as a presynaptic spike source for synapses.
-   Stores spike times in :py:class:`neuron.h.Vector` and :py:class:`numpy.array`.
-   Requires :py:class:`nrn.h.VecStim` to trigger spikes at specified times.
+   Stores spike times in :py:class:`neuron:Vector` and :py:class:`numpy.array`.
+   Requires :py:class:`neuron:VecStim` to trigger spikes at specified times.
 
    :Parameters: **spikeTimes** (*list*) -- List of precomputed spike times.
                 Used to initialize release sites with precomputed release times from presynaptic spike times (see :py:meth:`single_cell_parser.network.activate_functional_synapse`)
@@ -56,18 +56,18 @@ PointCell
 
       hoc Vector containing spike times
 
-      :type: :py:class:`neuron.h.Vector`
+      :type: :py:class:`neuron:Vector`
 
    .. attribute:: spikes
 
-      VecStim object to use as a spike source in :py:class:`~neuron.h.NetCon` objects (see https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html).
+      VecStim object to use as a spike source in :py:class:`neuron:NetCon` objects.
       These are initialized from :paramref:`spikeTimes`.
 
-      :type: :py:class:`neuron.h.VecStim`
+      :type: :py:class:`neuron:VecStim`
 
    .. attribute:: playing
 
-      flag indicating whether the :py:class:`~neuron.h.VecStim` spike source is playing
+      flag indicating whether the :py:class:`neuron:VecStim` spike source is playing
 
       :type: bool
 
@@ -96,7 +96,7 @@ PointCell
       * - :py:obj:`_next_interval <single_cell_parser.cell.PointCell._next_interval>`\ ()
         - Calculate the next spike interval :math:`t` for a simple spike train.
       * - :py:obj:`_add_synapse_pointer <single_cell_parser.cell.PointCell._add_synapse_pointer>`\ (synapse)
-        - Add a reference to a synapse connected to this cell.
+        - Add a :py:class:`Synapse` to the cell.
       * - :py:obj:`turn_off <single_cell_parser.cell.PointCell.turn_off>`\ ()
         - Turns off the spike source.
 

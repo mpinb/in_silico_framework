@@ -12,20 +12,20 @@ get_cell_with_network
 
 .. py:function:: simrun.get_cell_with_network.get_cell_with_network(neuron_param, network_param, cache=True)
 
-   Build a cell with realized synapses from a :ref:`cell\_parameters\_format` file and a :ref:`network\_parameters\_format` file.
+   Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
 
-   This method creates a new network embedding for the :py:class:`~single\_cell\_parser.cell.Cell` based on the :ref:`network\_parameters\_format` file.
+   This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
 
-   :Parameters: * **neuron\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The :ref:`cell\_parameters\_format`.
-                * **network\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
+                * **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
 
-   :returns: A callable that returns a :py:class:`~single\_cell\_parser.cell.Cell` and :py:class:`~single\_cell\_parser.network.NetworkMapper` when called.
+   :returns: A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
    :rtype: callable
 
    .. seealso::
 
-      :py:mod:`simrun.parameters\_to\_cell` for rebuilding **and** simulating the cell and network from
-      an existing network realization (:ref:`syn\_file\_format` file) it.
+      :py:mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from
+      an existing network realization (:ref:`syn_file_format` file) it.
 
 
 .. 

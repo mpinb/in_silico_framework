@@ -28,12 +28,12 @@ activate_functional_synapse
       This implementation expects all presynaptic spike times to be pre-computed.
       It can thus not be used in recurrent network models at this point.
 
-   :Parameters: * **syn** (:py:class:`~single\_cell\_parser.synapse.Synapse`) -- Synapse object.
-                * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- Postsynaptic cell.
-                * **preSynCell** (:py:class:`~single\_cell\_parser.cell.PointCell`) -- Presynaptic cell.
-                * **synParameters** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- Synapse parameters, see also the ``synapses.rerceptors.<syn\_type>`` key in the :ref:`network\_parameters\_format` file.
+   :Parameters: * **syn** (:py:class:`~single_cell_parser.synapse.Synapse`) -- Synapse object.
+                * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Postsynaptic cell.
+                * **preSynCell** (:py:class:`~single_cell_parser.cell.PointCell`) -- Presynaptic cell.
+                * **synParameters** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
                 * **tChange** (*float*) -- Time at which the synapse parameters change (e.g. the release probability due to a spike).
-                * **synParametersChange** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- Synapse parameters after change (including e.g. the release probability).
+                * **synParametersChange** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Synapse parameters after change (including e.g. the release probability).
                 * **forceSynapseActivation** (*bool*) -- If True, the synapse is activated regardless of the release probability.
                 * **releaseTimes** (*list*) -- List of synaptic release times.
                   If None, the release times are generated from the :paramref:`synapseParameters`'s ``releaseProb`` keyword,

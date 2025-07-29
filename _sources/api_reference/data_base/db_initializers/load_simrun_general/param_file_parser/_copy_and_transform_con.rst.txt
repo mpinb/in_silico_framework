@@ -12,12 +12,12 @@ _copy_and_transform_con
 
 .. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_con(con_fn, target_fn, syn_fn_map)
 
-   Copy, rename and transform a single :ref:`con\_file\_format` file.
+   Copy, rename and transform a single :ref:`con_file_format` file.
 
-   The :ref:`con\_file\_format` file is copied to the target directory, renamed to its hash, and the synapse distribution file name is replaced.
+   The :ref:`con_file_format` file is copied to the target directory, renamed to its hash, and the synapse distribution file name is replaced.
 
-   :Parameters: * **con\_fn** (*str*) -- Path to the connection file.
-                * **new\_syn** (*str*) -- Path to the new synapse distribution file.
+   :Parameters: * **con_fn** (*str*) -- Path to the connection file.
+                * **new_syn** (*str*) -- Path to the new synapse distribution file.
 
 
 .. 

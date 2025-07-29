@@ -14,7 +14,7 @@ find_closest_index
 
    Finds the index of the value which is closest to the value specified in the arguments
 
-   :Parameters: * **list\_** (*list*) -- list of values
+   :Parameters: * **list_** (*list*) -- list of values
                 * **value** (*float*) -- value to find closest index for
 
    :returns: index of the value in the list

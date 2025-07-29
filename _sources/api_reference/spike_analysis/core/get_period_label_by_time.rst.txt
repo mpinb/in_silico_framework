@@ -14,7 +14,7 @@ get_period_label_by_time
 
    Classifies timepoint based on whether it falls within a period.
 
-   :Parameters: * **periods** (*dict*) -- dictionary containing period label as key and (period\_start, period\_end) as value
+   :Parameters: * **periods** (*dict*) -- dictionary containing period label as key and (period_start, period_end) as value
                 * **t** (*float*) -- timepoint to classify
 
    :returns: label of period in which t is in. 'undefined' if t is in no defined period

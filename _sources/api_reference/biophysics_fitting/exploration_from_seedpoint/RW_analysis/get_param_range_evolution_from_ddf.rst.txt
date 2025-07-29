@@ -16,9 +16,9 @@ get_param_range_evolution_from_ddf
 
    :Parameters: * **ddf** (*dask.dataframe*) -- the exploration results
                 * **params** (*pd.DataFrame*) -- the parameter ranges
-                * **return\_mi\_ma** (*bool*) -- whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
+                * **return_mi_ma** (*bool*) -- whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
 
-   :returns: the range of parameters explored by the RW exploration. If return\_mi\_ma is True, returns the min and max values of the parameter ranges.
+   :returns: the range of parameters explored by the RW exploration. If return_mi_ma is True, returns the min and max values of the parameter ranges.
    :rtype: pd.DataFrame
 
 

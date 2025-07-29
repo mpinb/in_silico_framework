@@ -14,8 +14,8 @@ write_functional_map
 
    Write a functional map to an AMIRA file.
 
-   Deprecated. Consider using :py:meth:`visualize.vtk.write\_vtk\_pointcloud\_file`
-   or :py:meth:`visualize.vtk.write\_vtk\_frames` for visualization purposes.
+   Deprecated. Consider using :py:meth:`visualize.vtk.write_vtk_pointcloud_file`
+   or :py:meth:`visualize.vtk.write_vtk_frames` for visualization purposes.
 
    This method may still serve well if you need an AMIRA mesh file.
 

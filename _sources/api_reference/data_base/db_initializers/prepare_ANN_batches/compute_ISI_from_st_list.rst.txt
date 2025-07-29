@@ -14,21 +14,21 @@ compute_ISI_from_st_list
 
    Construct a time-binned list of inter-spike intervals from a list of spike times.
 
-   Given a list of spike times, this method returns a list of size ``(max\_time - min\_time)//time\_step``,
+   Given a list of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
    where each time step gives the amount of time since the last spike in ms.
 
    :Parameters: * **st** (*list*) -- List of spike times
-                * **min\_time** (*int, optional*) -- Min time of time window in ms. Defaults to 0.
-                * **max\_time** (*int, optional*) -- Max time of time window in ms. Defaults to 505.
-                * **time\_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
+                * **min_time** (*int, optional*) -- Min time of time window in ms. Defaults to 0.
+                * **max_time** (*int, optional*) -- Max time of time window in ms. Defaults to 505.
+                * **time_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
 
    :returns: A list of inter-spike intervals in ms.
    :rtype: list
 
    .. seealso::
 
-      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_from\_st` for the pandas version.
-      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_array` for the array version.
+      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
+      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
 
 
 .. 

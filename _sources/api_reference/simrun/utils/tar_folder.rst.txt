@@ -14,8 +14,8 @@ tar_folder
 
    Compress a folder to ``.tar`` format.
 
-   :Parameters: * **source\_dir** (*str*) -- The path to the folder to compress.
-                * **delete\_folder** (*bool*) -- If ``True``, the original folder will be deleted after compression.
+   :Parameters: * **source_dir** (*str*) -- The path to the folder to compress.
+                * **delete_folder** (*bool*) -- If ``True``, the original folder will be deleted after compression.
 
    :returns: Compresses the folder in place.
    :rtype: None

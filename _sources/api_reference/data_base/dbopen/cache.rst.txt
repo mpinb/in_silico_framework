@@ -22,7 +22,7 @@ cache
    .. rubric:: Example
       :class: example
 
-   >>> cache(my\_function)(*args, **kwargs)
+   >>> cache(my_function)(*args, **kwargs)
 
 
 .. 

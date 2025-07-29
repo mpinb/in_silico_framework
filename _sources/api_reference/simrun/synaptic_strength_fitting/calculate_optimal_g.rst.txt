@@ -18,28 +18,28 @@ calculate_optimal_g
    to a linear model. Each statistic provides a different estimate of the optimal ``g``.
    The final optimal ``g`` is then a weighed average of the three statistics, where the weights for ``mean:median:max`` are ``2:2:1`` respectively.
 
-   This function is used in :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` to calculate the optimal synaptic conductance for each celltype.
+   This function is used in :py:class:`~simrun.synaptic_strength_fitting.PSPs` to calculate the optimal synaptic conductance for each celltype.
 
    :Parameters: **pdf** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum), and linear fits for each statistic.
 
    :returns: None. Updates the original table inplace. Adds the columns ``optimal g``, ``optimal g mean``, ``optimal g median``, and ``optimal g max``.
 
-   .. seealso:: :py:meth:`~simrun.synaptic\_strength\_fitting.linear\_fit\_pdf` for the linear model that relates the EPSP statistics to the synaptic conductance.
+   .. seealso:: :py:meth:`~simrun.synaptic_strength_fitting.linear_fit_pdf` for the linear model that relates the EPSP statistics to the synaptic conductance.
 
    Example::
 
-       >>> pdf = psp.get\_summary\_statistics(method='dynamic\_baseline')
-       >>> fit = linear\_fit\_pdf(pdf)
+       >>> pdf = psp.get_summary_statistics(method='dynamic_baseline')
+       >>> fit = linear_fit_pdf(pdf)
        >>> fit.head()
-           EPSP mean\_offset  EPSP mean\_slope  EPSP med\_offset  EPSP med\_slope  EPSP max\_offset  EPSP max\_slope EPSP\_std\_offset EPSP\_std\_slope
+           EPSP mean_offset  EPSP mean_slope  EPSP med_offset  EPSP med_slope  EPSP max_offset  EPSP max_slope EPSP_std_offset EPSP_std_slope
        ...
-       >>> measured\_data
-                   EPSP\_mean\_measured  EPSP\_med\_measured   EPSP\_max\_measured
-       celltype\_1  ...
-       celltype\_2  ...
-       >>> pdf = pd.concat([fit, measured\_data], axis=1)
-       >>> calculate\_optimal\_g(pdf)
-       >>> pdf[cell\_type 1']['optimal g']
+       >>> measured_data
+                   EPSP_mean_measured  EPSP_med_measured   EPSP_max_measured
+       celltype_1  ...
+       celltype_2  ...
+       >>> pdf = pd.concat([fit, measured_data], axis=1)
+       >>> calculate_optimal_g(pdf)
+       >>> pdf[cell_type 1']['optimal g']
        1.85
 
 

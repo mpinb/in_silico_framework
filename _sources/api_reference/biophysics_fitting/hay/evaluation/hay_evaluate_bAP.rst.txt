@@ -10,7 +10,7 @@ hay_evaluate_bAP
 ================
 
 
-.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_bAP(**kwargs)
+.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_bAP(\*\*kwargs)
 
    Evaluate the :math:`bAP` stimulus protocol.
 

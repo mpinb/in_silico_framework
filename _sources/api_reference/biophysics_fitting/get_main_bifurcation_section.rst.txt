@@ -17,14 +17,14 @@ get_main_bifurcation_section
    In some morphologies, this section is unique, and no other sections are inner sections with branching depth 1.
    This is True for e.g. pyramidal cells with an apical dendrite.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
-                * **assert\_unique** (*bool, optional*) -- whether or not to check if this section is unique in the morphology.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
+                * **assert_unique** (*bool, optional*) -- whether or not to check if this section is unique in the morphology.
                   Default: True
 
    :raises AssertionError: If there are multiple sections who are both inner, and have branching depth 1. This means that there is no "main" bifurcation in the morphology.
 
    :returns: The unique section that contains the main bifurcation.
-   :rtype: :py:class:`~single\_cell\_parser.cell.PySection`
+   :rtype: :py:class:`~single_cell_parser.cell.PySection`
 
 
 .. 

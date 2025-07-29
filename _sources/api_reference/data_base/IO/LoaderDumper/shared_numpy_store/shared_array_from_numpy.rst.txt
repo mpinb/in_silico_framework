@@ -17,7 +17,7 @@ shared_array_from_numpy
    :Parameters: * **arr** (*np.ndarray*) -- The array to be put into shared memory.
                 * **name** (*str, optional*) -- The name of the shared memory block. Default: None.
 
-   :returns:     A tuple containing the :py:class:`~data\_base.isf\_data\_base.IO.LoaderDumper.shared\_numpy\_store.SharedMemory`
+   :returns:     A tuple containing the :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
                  object and the shared memory array.
    :rtype: tuple
 

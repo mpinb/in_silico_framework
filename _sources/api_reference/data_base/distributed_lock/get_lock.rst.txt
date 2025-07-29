@@ -17,14 +17,14 @@ get_lock
    Reads the locking configuration from the global variable ``SERVER`` and infers the correct lock type.
    The following locks are supported:
 
-   - :py:class:`~data\_base.distributed\_lock.InterProcessLockNoWritePermission`: for file based locking.
+   - :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission`: for file based locking.
    - :py:class:`redis.lock.Lock`: for redis based locking.
    - :py:class:`kazoo.client.Lock`: for Apache zookeeper based locking.
 
    .. seealso::
 
-      `Kazoo documentation <https://kazoo.readthedocs.io/en/latest/index.html>`\_ and
-      `Redis documentation <https://redis-py.readthedocs.io/en/stable/>`\_
+      `Kazoo documentation <https://kazoo.readthedocs.io/en/latest/index.html>`_ and
+      `Redis documentation <https://redis-py.readthedocs.io/en/stable/>`_
 
 
 .. 

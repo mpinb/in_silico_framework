@@ -15,8 +15,8 @@ save_helper
    Save a single partition of a dask dataframe to a parquet file
 
    :Parameters: * **savedir** (*str*) -- Directory where the parquet files are stored
-                * **delayed\_df** (*dask.dataframe*) -- Dask dataframe
-                * **n\_partitions** (*int*) -- Number of partitions
+                * **delayed_df** (*dask.dataframe*) -- Dask dataframe
+                * **n_partitions** (*int*) -- Number of partitions
                 * **partition** (*int*) -- Partition number
 
    :returns: None

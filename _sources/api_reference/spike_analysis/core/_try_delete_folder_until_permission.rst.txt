@@ -14,7 +14,7 @@ _try_delete_folder_until_permission
 
    Try to delete a folder until permission is granted.
 
-   :Parameters: **dest\_path** (*str*) -- Path to the folder to be deleted.
+   :Parameters: **dest_path** (*str*) -- Path to the folder to be deleted.
 
 
 .. 

@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1045,12 +1045,10 @@
 </div>
 <span class="target" id="module-biophysics_fitting"></span><p>Generate and analyze biophysically detailed multi-compartmental models (MCM).</p>
 <p>It provides two ways to generate mutli-compartmental models:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>BluePyOpt <span id="id1">[<a class="reference internal" href="../../bibliography.html#id5" title="Werner Van Geit, Michael Gevaert, Giuseppe Chindemi, Christian Roessert, Jean-Denis Courcol, Eilif B. Muller, Felix Schuermann, Idan Segev, and Henry Markram. Bluepyopt: leveraging open source software and cloud infrastructure to optimise model parameters in neuroscience. Frontiers in Neuroinformatics, 10:17, June 2016. doi:10.3389/fninf.2016.00017.">1</a>]</span>, a Multi-Objective Evolutionary Algorithm (MOEA): <a class="reference internal" href="optimizer/index.html#module-biophysics_fitting.optimizer" title="biophysics_fitting.optimizer (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">biophysics_fitting.optimizer</span></code></a>.</p></li>
 <li><p>An exploration algorithm: <a class="reference internal" href="exploration_from_seedpoint/index.html#module-biophysics_fitting.exploration_from_seedpoint" title="biophysics_fitting.exploration_from_seedpoint (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">biophysics_fitting.exploration_from_seedpoint</span></code></a>.</p></li>
 </ol>
-</div></blockquote>
 <p>The MOEA does not require any a priori assumptions on biophysical parameters to find a MCM, but fails to explore the full diversity of possible MCMs.
 On the other hand, the exploration approach can explore the full diversity of possible biophysical models, but also requires a MCM as a seedpoint in order to start.
 If you need to generate models from scratch, we recommend using the MOEA algorithm to find at least a single model, and then using this as a seedpoint for the exploration algorithm.</p>

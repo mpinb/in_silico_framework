@@ -12,7 +12,7 @@ spike_detection
 
 .. py:function:: data_base.analyze.spike_detection.spike_detection(ddf, scheduler=None, threshold=0)
 
-   Detect spikes in a dask :ref:`voltage\_traces\_df\_format`.
+   Detect spikes in a dask :ref:`voltage_traces_df_format`.
 
    :Parameters: * **ddf** (:py:class:`~dask.dataframe.DataFrame`) -- A dask dataframe containing the voltage traces
                 * **scheduler** (*str*) -- The scheduler to use for computation

@@ -20,7 +20,7 @@ get_n_workers_per_ip
    :Parameters: * **workers** (*List[dask.distributed.worker.Worker]*) -- List or array of dask workers.
                 * **n** (*int*) -- Amount fo workers to fetch per machine.
 
-   :returns: List of :paramref:`n`*``n\_machines`` workers.
+   :returns: List of :paramref:`n`*``n_machines`` workers.
    :rtype: List[dask.distributed.worker.Worker]
 
 

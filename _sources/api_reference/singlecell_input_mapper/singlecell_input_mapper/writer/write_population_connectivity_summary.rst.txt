@@ -14,8 +14,8 @@ write_population_connectivity_summary
 
    Write a summary of populations of connectivity realizations to a file.
 
-   The populationDistribution can be calculated with :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_compute\_parameter\_distribution`
-   For each cell type, this method writes a summary on the same attributes for each cell structure as :py:meth:`write\_sample\_connectivity\_summary`, namely:
+   The populationDistribution can be calculated with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+   For each cell type, this method writes a summary on the same attributes for each cell structure as :py:meth:`write_sample_connectivity_summary`, namely:
 
    - Presynaptic cell type
    - Number of synapses

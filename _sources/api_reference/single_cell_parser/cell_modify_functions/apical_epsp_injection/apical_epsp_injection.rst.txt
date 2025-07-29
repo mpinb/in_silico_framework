@@ -14,7 +14,7 @@ apical_epsp_injection
 
    Injects an epsp-shaped current at a certain distance from the soma.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **dist** (*float*) -- The distance from the soma (um).
                 * **amplitude** (*float*) -- The amplitude of the current (nA).
                 * **delay** (*float*) -- The delay of the current (ms).
@@ -22,9 +22,9 @@ apical_epsp_injection
                 * **decay** (*float*) -- The decay time of the epsp (ms).
 
    :returns: The cell with the current injection set up.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
-   .. seealso:: :py:meth:`biophysics\_fitting.setup\_stim.setup\_apical\_epsp\_injection`
+   .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_apical_epsp_injection`
 
 
 .. 

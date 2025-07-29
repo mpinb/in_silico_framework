@@ -12,7 +12,7 @@ create_network_parameter
 
 .. py:function:: singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write_all_celltypes=False)
 
-   Generate and write out a :ref:`network\_parameters\_format` file defining the evoked activity of a passive whisker touch scenario.
+   Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
 
    Reads in a template file for a network, where the parameters of each celltype are already defined, but the values are not set.
    Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :paramref:`whisker` was deflected.
@@ -38,7 +38,7 @@ create_network_parameter
                 * **conFileName** (*str*) -- Name of the `.con` file, defining the connections.
                 * **whisker** (*str*) -- Which whisker is to be deflected.
                 * **outFileName** (*str*) -- Name of the output file.
-                * **write\_all\_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+                * **write_all_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
 
    .. rubric:: Example
       :class: example
@@ -48,16 +48,16 @@ create_network_parameter
    {
    "info": {
        "date": "11Feb2015",
-       "name": "evoked\_activity",
+       "name": "evoked_activity",
        "author": "name",
    },
    "network": {
-       "cell\_type\_1": {
+       "cell_type_1": {
            "celltype": "spiketrain",
            "interval": 2173.9,
            "synapses": {
                "receptors": {
-                   "glutamate\_syn": {
+                   "glutamate_syn": {
                        "threshold": 0.0,
                        "delay": 0.0,
                            "parameter": {
@@ -76,7 +76,7 @@ create_network_parameter
            "releaseProb": 0.6,
            },
        },
-       "cell\_type\_2": {...},
+       "cell_type_2": {...},
        ...
 
    }

@@ -16,15 +16,15 @@ get_dumper_string_by_dumper_module
 
    This is used to write the ``Loader.json`` specification file.
 
-   :Parameters: **dumper\_module** -- The module to check.
+   :Parameters: **dumper_module** -- The module to check.
 
    :returns: The dumper string, relative to its parent ``LoaderDumper`` module.
 
    Example::
 
-       >>> import data\_base.isf\_data\_base.IO.LoaderDumper.my\_dumper as dumper\_module
-       >>> get\_dumper\_string\_by\_dumper\_module(dumper\_module)
-       'my\_dumper'
+       >>> import data_base.isf_data_base.IO.LoaderDumper.my_dumper as dumper_module
+       >>> get_dumper_string_by_dumper_module(dumper_module)
+       'my_dumper'
 
 
 .. 

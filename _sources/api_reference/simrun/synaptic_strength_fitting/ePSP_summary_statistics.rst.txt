@@ -14,7 +14,7 @@ ePSP_summary_statistics
 
    Calculate summary statistics of the PSP voltage and timing.
 
-   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.get\_voltage\_traces`.
+   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
                 * **threashold** (*float*) -- Minimum voltage deflection to be considered as a response.
                 * **tPSPStart** (*float*) -- Timepoint of synapse activation (ms).
 
@@ -23,8 +23,8 @@ ePSP_summary_statistics
 
    Example::
 
-       >>> vt = psp.get\_voltage\_and\_timing(method='dynamic\_baseline')
-       >>> ePSP\_summary\_statistics(vt)
+       >>> vt = psp.get_voltage_and_timing(method='dynamic_baseline')
+       >>> ePSP_summary_statistics(vt)
                            epspMean   epspStd   epspMed   epspMin   epspMax      tMean      tStd    tMed
        celltype gAMPA gNMDA
        L2      0.5   0.5   0.288331  0.141456  0.262698  0.100779  1.440870  15.509268  2.305882  15.050

@@ -14,8 +14,8 @@ spike_count
 
    Counts the number of spikes in a voltage trace.
 
-   :Parameters: * **t** (*array\_like*) -- Time values of the voltage trace, in seconds.
-                * **v** (*array\_like*) -- Voltage values of the trace, in volts.
+   :Parameters: * **t** (*array_like*) -- Time values of the voltage trace, in seconds.
+                * **v** (*array_like*) -- Voltage values of the trace, in volts.
                 * **thresh** (*float, optional*) -- Spike detection threshold, in volts. If not specified, the threshold
                   will be set to the mean of the voltage trace.
 

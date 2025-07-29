@@ -17,7 +17,7 @@ compute_syn_distances_2Dprojected
    Used for computing synapse distances projected on a 2D plane (the XY-plane),
    as seen during 2-photon spine imaging.
 
-   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
+   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- cell object with attached synapses.
                 * **synType** (*str*) -- presynaptic cell type.
                 * **label** (*str, optional*) -- dendrite type (e.g. "ApicalDendrite") to compute distances for.
 

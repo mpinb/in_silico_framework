@@ -10,7 +10,7 @@ get_evaluate_StepOne
 ====================
 
 
-.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_StepOne(**kwargs)
+.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_StepOne(\*\*kwargs)
 
    Get the evaluation function for the :math:`StepOne` stimulus protocol.
 

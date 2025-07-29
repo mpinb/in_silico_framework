@@ -12,12 +12,12 @@ dump
 
 .. py:function:: data_base.IO.LoaderDumper.cell.dump(obj, savedir)
 
-   Dumps a :py:class:`~single\_cell\_parser.cell.Cell` object to a directory
+   Dumps a :py:class:`~single_cell_parser.cell.Cell` object to a directory
 
-   :Parameters: * **obj** (:py:class:`~single\_cell\_parser.cell.Cell`) -- Object to be saved
+   :Parameters: * **obj** (:py:class:`~single_cell_parser.cell.Cell`) -- Object to be saved
                 * **savedir** (*str*) -- Directory to save the object to
 
-   .. seealso:: :py:meth:`~single\_cell\_parser.serialize\_cell.save\_cell\_to\_file`
+   .. seealso:: :py:meth:`~single_cell_parser.serialize_cell.save_cell_to_file`
 
 
 .. 

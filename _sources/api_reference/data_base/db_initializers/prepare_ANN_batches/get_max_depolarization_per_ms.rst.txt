@@ -14,7 +14,7 @@ get_max_depolarization_per_ms
 
    Subsample a voltage trace dask dataframe to 1ms bins based on the maximum depolarization.
 
-   :Parameters: **vt\_dask** (*dask.dataframe*) -- Voltage traces dask dataframe
+   :Parameters: **vt_dask** (*dask.dataframe*) -- Voltage traces dask dataframe
 
    :returns: A dask dataframe of the maximum depolarization per ms.
    :rtype: dask.dataframe

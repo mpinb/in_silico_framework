@@ -25,7 +25,7 @@ run_fun
                 * **silent** (*bool*) -- Whether to suppress output.
 
    :returns: The cell object, containing simulation data.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
 .. 

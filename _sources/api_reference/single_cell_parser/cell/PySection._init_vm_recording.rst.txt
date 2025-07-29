@@ -10,5 +10,5 @@ PySection._init_vm_recording
 
    Record the membrane voltage at every point in this section.
 
-   Sets up a :py:class:`nrn.h.Vector` for recording membrane voltage at every segment in this section.
+   Sets up a :py:class:`neuron:Vector` for recording membrane voltage at every segment in this section.
 

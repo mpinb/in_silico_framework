@@ -14,7 +14,7 @@ map_truefalse_to_str
 
    Convert True/False to 'True'/'False' in a dictionary
 
-   :Parameters: **dict\_** (*dict*) -- A dictionary with boolean values.
+   :Parameters: **dict_** (*dict*) -- A dictionary with boolean values.
 
    :returns: A dictionary with boolean values converted to strings.
    :rtype: dict

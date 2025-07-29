@@ -19,7 +19,7 @@ PySection
 
    set_3d_geometry <PySection.set_3d_geometry>
    set_segments <PySection.set_segments>
-   _get_seg_conductance <PySection._get_seg_conductance>
+   get_seg_conductance <PySection.get_seg_conductance>
    get_range_conductances <PySection.get_range_conductances>
    _compute_seg_diameters <PySection._compute_seg_diameters>
    _compute_total_area <PySection._compute_total_area>
@@ -40,7 +40,7 @@ PySection
 
 .. py:class:: single_cell_parser.cell.PySection(name=None, cell=None, label=None)
    
-   Wrapper around :py:class:`nrn.Section` providing additional functionality for geometry and mechanisms.
+   Wrapper around :py:class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
    NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
@@ -166,7 +166,7 @@ PySection
         - Invokes NEURON 3D geometry setup.
       * - :py:obj:`set_segments <single_cell_parser.cell.PySection.set_segments>`\ (nrOfSegments)
         - Set spatial discretization.
-      * - :py:obj:`_get_seg_conductance <single_cell_parser.cell.PySection._get_seg_conductance>`\ (seg, var, param\_name)
+      * - :py:obj:`get_seg_conductance <single_cell_parser.cell.PySection.get_seg_conductance>`\ (seg, var, param\_name)
         - Get the conductance of a segment.
       * - :py:obj:`get_range_conductances <single_cell_parser.cell.PySection.get_range_conductances>`\ (range\_vars, density)
         - Get the transmembrane conductance of each range variable separately.

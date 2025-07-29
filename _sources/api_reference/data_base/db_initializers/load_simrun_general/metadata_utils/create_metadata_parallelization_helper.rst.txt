@@ -17,10 +17,10 @@ create_metadata_parallelization_helper
    .. seealso::
 
       This is used in
-      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.create\_metadata`.
+      :py:meth:`~data_base.db_initializers.load_simrun_general.create_metadata`.
 
-   :Parameters: * **sim\_trial\_index** (*pd.Series*) -- A pandas series containing the sim\_trial\_index.
-                * **simresult\_path** (*str*) -- Path to the simulation results folder.
+   :Parameters: * **sim_trial_index** (*pd.Series*) -- A pandas series containing the sim_trial_index.
+                * **simresult_path** (*str*) -- Path to the simulation results folder.
 
    :returns: A pandas dataframe containing the metadata.
    :rtype: pd.DataFrame

@@ -14,7 +14,7 @@ get_max_per_ms_on_pandas_dataframe
 
    Subsample a voltage trace pandas dataframe to 1ms bins based on the maximum depolarization.
 
-   :Parameters: **vt\_pandas** (*pd.DataFrame*) -- Voltage traces dataframe
+   :Parameters: **vt_pandas** (*pd.DataFrame*) -- Voltage traces dataframe
 
    :returns: A pandas Series of the maximum depolarization per ms.
    :rtype: pd.Series

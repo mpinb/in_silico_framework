@@ -10,7 +10,7 @@ get_voltage_and_timing
 ======================
 
 
-.. py:function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method=&#39;dynamic_baseline&#39;, tStim=None, tEnd=None)
+.. py:function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method='dynamic_baseline', tStim=None, tEnd=None)
 
    Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.
 
@@ -18,27 +18,27 @@ get_voltage_and_timing
    The result is of the form::
 
        {
-           celltype\_1: {
-               g1\_1: {
-                   g2\_1: [
-                       (tMax\_1, vMax\_1,)  # synapse 1
-                       (tMax\_2, vMax\_2,)  # synapse 2
+           celltype_1: {
+               g1_1: {
+                   g2_1: [
+                       (tMax_1, vMax_1,)  # synapse 1
+                       (tMax_2, vMax_2,)  # synapse 2
                        ...
                    ],
-                   g2\_2: [...],
+                   g2_2: [...],
                    ...
                },
-               g1\_2: {...},
-           celltype\_2: {...},
+               g1_2: {...},
+           celltype_2: {...},
        }
 
-   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.PSPs.get\_voltage\_traces`.
+   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
                 * **method** (*str*) --
 
-                  ``dynamic\_baseline``: a simulation without any synaptic activation is
+                  ``dynamic_baseline``: a simulation without any synaptic activation is
                       substracted from a simulation with cell activation. The maximum and
                       timepoint of maximum is returned
-                  ``constant\_baseline``: the voltage at :math:`t = 110ms` (i.e. directly before
+                  ``constant_baseline``: the voltage at :math:`t = 110ms` (i.e. directly before
                       synapse activation) is considered as baseline and substracted
                       from all voltages at all timepoints.
                       The maximum and timepoint of the maximum after :math:`t = 110ms` is
@@ -46,7 +46,7 @@ get_voltage_and_timing
                 * **tStim** (*float*) -- Timepoint of synapse activation.
                 * **tEnd** (*float*) -- End time of the simulation.
 
-   :returns: A dictionary where lists of ``(time, max\_v)`` are given for each synapse, categorized under the keys ``(cell\_type, g1, g2)``.
+   :returns: A dictionary where lists of ``(time, max_v)`` are given for each synapse, categorized under the keys ``(cell_type, g1, g2)``.
    :rtype: defaultdict
 
 

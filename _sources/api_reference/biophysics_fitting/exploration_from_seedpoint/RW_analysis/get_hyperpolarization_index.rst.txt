@@ -18,7 +18,7 @@ get_hyperpolarization_index
 
    .. math::
 
-       \frac{I\_{SK} - I\_{m}}{I\_{SK} + I\_{m}}
+       \frac{I_{SK} - I_{m}}{I_{SK} + I_{m}}
 
    :returns: the hyperpolarization index for each model in the dataframe
    :rtype: pd.Series

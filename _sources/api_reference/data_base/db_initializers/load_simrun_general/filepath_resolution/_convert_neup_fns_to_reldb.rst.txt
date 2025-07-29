@@ -12,9 +12,9 @@ _convert_neup_fns_to_reldb
 
 .. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map)
 
-   Convert all paths in a :ref:`cell\_parameters\_format` file to point to a hash filename.
+   Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
 
-   .. seealso:: :py:meth:`~data\_base.dbopen.resolve\_neup\_reldb\_paths` to resolve the relative database paths in the neuron parameter file.
+   .. seealso:: :py:meth:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
 
 
 .. 

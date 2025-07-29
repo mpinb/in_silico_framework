@@ -19,7 +19,7 @@ augment_ddf_with_PCA_space
 
    :Parameters: **ddf** (*dask.dataframe*) -- the dataframe to augment
 
-   :returns: the augmented dataframe, containing the additional columns: 'pc0', 'pc1', 'depolarization\_index', 'hyperpolarization\_index'
+   :returns: the augmented dataframe, containing the additional columns: 'pc0', 'pc1', 'depolarization_index', 'hyperpolarization_index'
    :rtype: dask.dataframe
 
 

@@ -12,12 +12,12 @@ load_param_files_from_db
 
 .. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db(db, sti)
 
-   Load the :ref:`cell\_parameters\_format` and :ref:`network\_parameters\_format` files from the database.
+   Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
 
-   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database containing the parsed simulation results.
+   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The database containing the parsed simulation results.
                 * **sti** (*str*) -- For which simulation trial index to load the parameter files.
 
-   :returns: The :py:class:`~single\_cell\_parser.parameters.NTParameterSet` objects for the cell and network.
+   :returns: The :py:class:`~single_cell_parser.parameters.NTParameterSet` objects for the cell and network.
    :rtype: tuple
 
 

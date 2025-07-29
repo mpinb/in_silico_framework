@@ -10,7 +10,7 @@ simple_spike_detection
 ======================
 
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode=&#39;regular&#39;)
+.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode='regular')
 
    Detect spike times in a voltage trace.
 

@@ -10,7 +10,7 @@ _arrow3D
 ========
 
 
-.. py:function:: visualize.utils._arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs)
+.. py:function:: visualize.utils._arrow3D(ax, x, y, z, dx, dy, dz, \*args, \*\*kwargs)
 
    Add an 3d arrow to an Axes3D instance.
 

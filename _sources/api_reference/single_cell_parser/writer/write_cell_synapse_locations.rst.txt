@@ -12,16 +12,16 @@ write_cell_synapse_locations
 
 .. py:function:: single_cell_parser.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
 
-   Write a :ref:`syn\_file\_format` file.
+   Write a :ref:`syn_file_format` file.
 
-   :ref:`syn\_file\_format` files contain a cell's synapses with the locations
+   :ref:`syn_file_format` files contain a cell's synapses with the locations
    coded by section ID and section x of cell with ID "cellID".
 
    See also:
 
-   - :ref:`syn\_file\_format` for more information on the `.syn` file format.
-   - :py:meth:`single\_cell\_parser.reader.read\_synapse\_realization` for the corresponding reader function.
-   - :py:meth:`write\_pruned\_synapse\_locations` for a similar function that includes a `pruned` flag.
+   - :ref:`syn_file_format` for more information on the `.syn` file format.
+   - :py:meth:`single_cell_parser.reader.read_synapse_realization` for the corresponding reader function.
+   - :py:meth:`write_pruned_synapse_locations` for a similar function that includes a `pruned` flag.
 
    :Parameters: * **fname** (*str*) -- The name of the file to write to.
                 * **synapses** (*dict*) -- A dictionary of synapses, with keys as synapse types and values as lists of synapses.

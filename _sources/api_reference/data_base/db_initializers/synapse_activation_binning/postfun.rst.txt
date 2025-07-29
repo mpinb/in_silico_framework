@@ -23,7 +23,7 @@ postfun
    :returns: The processed column of synapse activations.
    :rtype: numpy.array
 
-   .. seealso:: :py:meth:`~data\_base.db\_initializers.init`
+   .. seealso:: :py:meth:`~data_base.db_initializers.init`
 
 
 .. 

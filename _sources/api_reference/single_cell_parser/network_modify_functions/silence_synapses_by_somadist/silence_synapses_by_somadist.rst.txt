@@ -14,16 +14,16 @@ silence_synapses_by_somadist
 
    Silence synapses at a certain soma distance.
 
-   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- The cell to modify.
-                * **soma\_dist\_ranges** (*dict*) -- Dictionary with synapse types as keys (e.g. L5tt\_C2) and the range
+   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- The cell to modify.
+                * **soma_dist_ranges** (*dict*) -- Dictionary with synapse types as keys (e.g. L5tt_C2) and the range
                   in which it should be silenced as value.
 
    .. rubric:: Example
       :class: example
 
-   >>> soma\_dist\_ranges = {
-   ... 'VPM\_C2': [0,200],
-   ... 'L5tt\_C2': [1000,1200]
+   >>> soma_dist_ranges = {
+   ... 'VPM_C2': [0,200],
+   ... 'L5tt_C2': [1000,1200]
    ... }
 
 

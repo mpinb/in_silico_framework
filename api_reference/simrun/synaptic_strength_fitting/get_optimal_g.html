@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1173,7 +1173,7 @@
 <h1 id="get-optimal-g">get_optimal_g<a class="headerlink" href="#get-optimal-g" title="Permalink to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.synaptic_strength_fitting.get_optimal_g">
-<span class="sig-prename descclassname"><span class="pre">simrun.synaptic_strength_fitting.</span></span><span class="sig-name descname"><span class="pre">get_optimal_g</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">measured_data</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">method=&amp;#39;dynamic_baseline&amp;#39;</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">threashold=0.1</span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">simrun.synaptic_strength_fitting.</span></span><span class="sig-name descname"><span class="pre">get_optimal_g</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">measured_data</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;dynamic_baseline&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">threashold</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">0.1</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the optimal synaptic conductance such that the EPSP matches empirical data.</p>
 <p>For each celltype (or merged celltype), the optimal synaptic conductance is calculated
 by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
@@ -1182,8 +1182,8 @@ This linear interpolation is cross-referenced with empirically observed statisti
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.get_optimal_g-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>measured_data</strong> (<em>pd.DataFrame</em>) – A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
-Must contain the keys: <code class="docutils literal notranslate"><span class="pre">[EPSP\_mean\_measured,</span> <span class="pre">EPSP\_median\_measured,</span> <span class="pre">EPSP\_max\_measured]</span></code>.</p></li>
-<li><p><strong>method</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">dynamic\_baseline</span></code> or <code class="docutils literal notranslate"><span class="pre">constant\_baseline</span></code>.</p></li>
+Must contain the keys: <code class="docutils literal notranslate"><span class="pre">[EPSP_mean_measured,</span> <span class="pre">EPSP_median_measured,</span> <span class="pre">EPSP_max_measured]</span></code>.</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">dynamic_baseline</span></code> or <code class="docutils literal notranslate"><span class="pre">constant_baseline</span></code>.</p></li>
 <li><p><strong>threashold</strong> (<em>float</em>) – The threashold to consider a celltype as excitatory.</p></li>
 </ul>
 </dd>

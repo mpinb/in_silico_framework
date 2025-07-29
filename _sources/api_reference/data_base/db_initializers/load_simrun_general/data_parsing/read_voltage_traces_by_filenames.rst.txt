@@ -14,7 +14,7 @@ read_voltage_traces_by_filenames
 
    Reads a list of **multiple** voltage trace files and parses it to a dask dataframe.
 
-   Also sets the database key ``sim\_trial\_index`` to contain the paths of the simulation trials.
+   Also sets the database key ``sim_trial_index`` to contain the paths of the simulation trials.
    This is the default way of constructing a dask dataframe containing the voltage traces.
 
    :Parameters: * **prefix** (*str*) -- Path to the directory containing the simulation results.
@@ -27,7 +27,7 @@ read_voltage_traces_by_filenames
 
    .. seealso::
 
-      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_from\_file`
+      :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_file`
       is used to read in each single voltage trace file. Consult this method for more information on how the data format
       is parsed.
 

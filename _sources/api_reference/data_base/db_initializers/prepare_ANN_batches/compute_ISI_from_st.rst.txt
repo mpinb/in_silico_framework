@@ -14,7 +14,7 @@ compute_ISI_from_st
 
    Calculate the time since the last spike in ms for each element in a spike time pd.Series or pd.DataFrame.
 
-   Given a pandas Series or DataFrame of spike times, this method returns a list of size ``(max\_time - min\_time)//time\_step``,
+   Given a pandas Series or DataFrame of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
    where each time step gives the amount of time since the last spike in ms.
 
    :Parameters: * **st** (*pd.DataFrame | pd.Series*) -- pandas DataFrame or Series of spike times
@@ -26,8 +26,8 @@ compute_ISI_from_st
 
    .. seealso::
 
-      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_from\_st\_list` for the list version.
-      :py:meth:`~data\_base.db\_initializers.prepare\_ANN\_batches.compute\_ISI\_array` for the array version.
+      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
 
 
 .. 

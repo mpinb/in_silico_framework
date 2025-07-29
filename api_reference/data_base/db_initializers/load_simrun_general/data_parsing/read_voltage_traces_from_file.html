@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1288,18 +1288,18 @@
 <p>Infers the data format of the voltage traces file from the file extension (either <code class="docutils literal notranslate"><span class="pre">.csv</span></code> or <code class="docutils literal notranslate"><span class="pre">.npz</span></code>).
 Reads them in and parses it to a pandas datafram, containing the original path and simulation trial as an index.</p>
 <p class="example rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">simrun</span>\<span class="n">_result</span>\<span class="n">_fn</span> <span class="o">=</span> <span class="s1">&#39;path/to/sim\_result/vm\_all\_traces.csv&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">simrun</span>\<span class="n">_result</span>\<span class="n">_fn</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">simrun_result_fn</span> <span class="o">=</span> <span class="s1">&#39;path/to/sim_result/vm_all_traces.csv&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">simrun_result_fn</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 <span class="go"># This is an example for a .csv file (so not .npz)</span>
 <span class="go">t       Vm run 00       Vm run 01</span>
 <span class="go">100.0   -61.4607218758  -55.1366909604</span>
 <span class="go">100.025 -61.4665809176  -55.1294343391</span>
 <span class="go">100.05  -61.4735021526  -55.1223216173</span>
 <span class="go">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">read</span>\<span class="n">_voltage</span>\<span class="n">_traces</span>\<span class="n">_from</span>\<span class="n">_file</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;path/to/sim\_result&quot;</span><span class="p">,</span> <span class="n">v</span>\<span class="n">_fn</span><span class="p">)</span>
-<span class="go">sim\_trial\_index                         100.0         100.025          ...</span>
-<span class="go">path/to/sim\_result/000000    -61.4607218758 -61.4665809176   ...</span>
-<span class="go">path/to/sim\_result/000001    -55.1366909604 -55.1294343391   ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_voltage_traces_from_file</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;path/to/sim_result&quot;</span><span class="p">,</span> <span class="n">v_fn</span><span class="p">)</span>
+<span class="go">sim_trial_index                         100.0         100.025          ...</span>
+<span class="go">path/to/sim_result/000000    -61.4607218758 -61.4665809176   ...</span>
+<span class="go">path/to/sim_result/000001    -55.1366909604 -55.1294343391   ...</span>
 <span class="go">...</span>
 </code></pre></div>
 </div>

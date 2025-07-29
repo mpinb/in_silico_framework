@@ -16,7 +16,7 @@ get_time_groups
 
    Group the voltage trace in 1 ms bins, assuming a time interval of 0.025 ms.
 
-   :Parameters: **vt\_pandas** (*pd.DataFrame*) -- Voltage traces dataframe.
+   :Parameters: **vt_pandas** (*pd.DataFrame*) -- Voltage traces dataframe.
 
    :returns: A list of time groups.
    :rtype: list

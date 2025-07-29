@@ -16,7 +16,7 @@ BAC_ISI_check_repolarization
 
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
                 * **v** (*numpy.ndarray*) -- Array of membrane potential values.
-                * **stim\_end** (*float, optional*) -- Time at which the stimulus ends. Defaults to None.
+                * **stim_end** (*float, optional*) -- Time at which the stimulus ends. Defaults to None.
                 * **repolarization** (*float, optional*) -- Value to which the membrane potential should repolarize. Defaults to None.
 
    :returns: True if the membrane potential has repolarized to the specified value, False otherwise.

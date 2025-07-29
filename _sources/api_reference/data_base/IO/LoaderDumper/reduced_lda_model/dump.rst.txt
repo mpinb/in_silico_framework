@@ -17,10 +17,10 @@ dump
    The database will contain the following keys:
 
    - ``st``: Spike times with a precision of :math:`.01`.
-   - ``lda\_value\_dicts\_<index>``: Dictionaries of LDA values with a precision of :math:`.01`.
+   - ``lda_value_dicts_<index>``: Dictionaries of LDA values with a precision of :math:`.01`.
    - ``Rm``: The reduced model.
 
-   :Parameters: * **obj** (:py:class:`~simrun.reduced\_model.get\_kernel.ReducedLdaModel`) -- Reduced model to be saved.
+   :Parameters: * **obj** (:py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`) -- Reduced model to be saved.
                 * **savedir** (*str*) -- Directory where the reduced model should be stored.
 
 

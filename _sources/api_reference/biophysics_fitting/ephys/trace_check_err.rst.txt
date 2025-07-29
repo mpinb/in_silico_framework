@@ -19,8 +19,8 @@ trace_check_err
 
    :Parameters: * **t** (*array*) -- Time array.
                 * **v** (*array*) -- Voltage array.
-                * **stim\_onset** (*float*) -- Time of stimulus onset.
-                * **stim\_duration** (*float*) -- Duration of stimulus.
+                * **stim_onset** (*float*) -- Time of stimulus onset.
+                * **stim_duration** (*float*) -- Duration of stimulus.
                 * **punish** (*float*) -- Baseline penalty for low variance.
                   Default: 250 mV^2.
 

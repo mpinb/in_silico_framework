@@ -14,7 +14,7 @@ _check_working_dir_clean_for_build
 
    Check if a directory is suitable to build a new database.
 
-   :Parameters: **working\_dir** (*str*) -- The path to the directory to check.
+   :Parameters: **working_dir** (*str*) -- The path to the directory to check.
 
 
 .. 

@@ -19,8 +19,8 @@ get_peaks_above
                 * **lim** (*float*) -- A threshold above which (>=) maxima are detected.
 
    :returns: A list containing timepoints of maxima.
-             max\_v (list): A list containing voltage at timepoints of maxima.
-   :rtype: max\_t (list)
+             max_v (list): A list containing voltage at timepoints of maxima.
+   :rtype: max_t (list)
 
 
 .. 

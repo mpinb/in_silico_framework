@@ -14,16 +14,16 @@ load_syn_weights
 
    Load synapse weights from a simrun-initialized database
 
-   Fetches the :ref:`network\_parameters\_format` file from the
-   ``parameterfiles\_network\_folder`` key in the database and extracts the synaptic weights.
+   Fetches the :ref:`network_parameters_format` file from the
+   ``parameterfiles_network_folder`` key in the database and extracts the synaptic weights.
 
-   :Parameters: * **db** (:py:class:`~data\_base.DataBase`) -- The database object.
+   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The database object.
                 * **client** (:py:class:`~dask.distributed.client.Client`) -- The dask client object.
 
    :returns: A dictionary mapping the synapse type to a weight.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.init` for the database initialization.
+   .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the database initialization.
 
 
 .. 

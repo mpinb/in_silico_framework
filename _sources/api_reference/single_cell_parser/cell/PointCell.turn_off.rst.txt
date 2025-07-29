@@ -10,9 +10,9 @@ PointCell.turn_off
 
    Turns off the spike source.
 
-   Calls ``play()`` with no arguments to turn off the :py:class:`~neuron.h.VecStim`.
+   Calls ``play()`` with no arguments to turn off the :py:class:`neuron:VecStim`.
    This is necessary because ``VecStim`` does not implement reference counting.
-   Resizes the :py:class:`~neuron.h.Vector` to 0.
+   Resizes the :py:class:`neuron:Vector` to 0.
 
    .. note::
 

@@ -16,8 +16,8 @@ register_db
 
    Adds a database to the database register.
 
-   :Parameters: * **unique\_id** (*str*) -- The unique ID of the database.
-                * **db\_basedir** (*str*) -- The location of the database.
+   :Parameters: * **unique_id** (*str*) -- The unique ID of the database.
+                * **db_basedir** (*str*) -- The location of the database.
 
 
 .. 

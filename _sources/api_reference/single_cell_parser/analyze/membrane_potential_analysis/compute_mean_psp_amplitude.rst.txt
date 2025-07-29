@@ -15,13 +15,13 @@ compute_mean_psp_amplitude
    Compute the mean amplitude of all PSPs across multiple voltage traces.
 
    The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
-   between :paramref:`tStim` + :paramref:`t\_delay` and :paramref:`tStim` + :paramref:`delay` + :paramref:`width`.
+   between :paramref:`tStim` + :paramref:`t_delay` and :paramref:`tStim` + :paramref:`delay` + :paramref:`width`.
 
    :Parameters: * **vTraces** (*list*) -- List of voltage traces.
                 * **tStim** (*float*) -- Timepoint of stimulation (in ms).
                 * **dt** (*float*) -- Time step of the voltage traces.
                 * **width** (*float*) -- Width of the PSP window. Default is :math:`35.0 ms`.
-                * **t\_delay** (*float*) -- Delay of the PSP window (i.e. time between the stimulus and the PSP onset). Default is :math:`15.0 ms`.
+                * **t_delay** (*float*) -- Delay of the PSP window (i.e. time between the stimulus and the PSP onset). Default is :math:`15.0 ms`.
 
    :returns: A tuple containing the delay and the mean amplitude of the PSPs.
    :rtype: tuple

@@ -10,7 +10,7 @@ pr
 ==
 
 
-.. py:function:: visualize._decorators.pr(*args, **kwargs)
+.. py:function:: visualize._decorators.pr(\*args, \*\*kwargs)
 
    Prints the types of the passed arguments.
 

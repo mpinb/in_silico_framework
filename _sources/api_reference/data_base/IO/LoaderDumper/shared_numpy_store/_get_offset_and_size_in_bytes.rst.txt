@@ -12,16 +12,16 @@ _get_offset_and_size_in_bytes
 
 .. py:function:: data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes(start_row, end_row, shape, dtype)
 
-   Get the offset and size in bytes for a given ``start\_row`` and ``end\_row``.
+   Get the offset and size in bytes for a given ``start_row`` and ``end_row``.
 
    Rows here refer to the first dimension of a multi-dimensional array.
 
-   :Parameters: * **start\_row** (*int*) -- The starting row of the array.
-                * **end\_row** (*int*) -- The ending row of the array.
+   :Parameters: * **start_row** (*int*) -- The starting row of the array.
+                * **end_row** (*int*) -- The ending row of the array.
                 * **shape** (*tuple*) -- The shape of the array. ``shape[0]`` is the number of rows.
                 * **dtype** (*str*) -- The data type of the array. Used to infer the size in bytes.
 
-   :returns: A tuple containing the ``start\_row``, ``end\_row``, ``bytes\_offset``, ``bytes\_size``, and ``final\_shape``.
+   :returns: A tuple containing the ``start_row``, ``end_row``, ``bytes_offset``, ``bytes_size``, and ``final_shape``.
    :rtype: tuple
 
 

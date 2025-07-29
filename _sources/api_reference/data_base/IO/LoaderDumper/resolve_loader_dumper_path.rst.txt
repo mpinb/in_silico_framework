@@ -16,7 +16,7 @@ resolve_loader_dumper_path
 
    This is used to import the loader module from the relative path.
 
-   :Parameters: **loader\_path** (*str*) -- The relative path to the loader module.
+   :Parameters: **loader_path** (*str*) -- The relative path to the loader module.
 
    :returns: The absolute path to the loader module.
    :rtype: str

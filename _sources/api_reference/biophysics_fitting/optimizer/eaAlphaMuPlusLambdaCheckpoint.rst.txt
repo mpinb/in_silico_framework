@@ -22,9 +22,9 @@ eaAlphaMuPlusLambdaCheckpoint
                 * **ngen** (*int*) -- Total number of generation to run
                 * **stats** (*deap.tools.Statistics*) -- generation of statistics
                 * **halloffame** (*deap.tools.HallOfFame*) -- hall of fame
-                * **cp\_frequency** (*int*) -- generations between checkpoints
-                * **cp\_filename** (*DataBase or None*) -- db\_run, where the checkpoint is stored in [generation]\_checkpoint. Was: path to checkpoint filename
-                * **continue\_cp** (*bool*) -- whether to continue
+                * **cp_frequency** (*int*) -- generations between checkpoints
+                * **cp_filename** (*DataBase or None*) -- db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+                * **continue_cp** (*bool*) -- whether to continue
 
 
 .. 

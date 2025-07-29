@@ -27,7 +27,7 @@ resolve_reldb_path
       the parent database.
 
    :Parameters: * **path** (*str*) -- The relative path of the form ``reldb://...``.
-                * **db** (:py:class:`~data\_base.DataBase`) -- The database.
+                * **db** (:py:class:`~data_base.DataBase`) -- The database.
 
    :returns: The resolved path.
    :rtype: str

@@ -25,7 +25,7 @@ write_sim_results
 
    >>> t = [0.0, 0.1, 0.2]
    >>> v = [-65.0, -64.9, -64.8]
-   >>> write\_sim\_results('voltage\_trace.dat', t, v)
+   >>> write_sim_results('voltage_trace.dat', t, v)
 
 
 .. 

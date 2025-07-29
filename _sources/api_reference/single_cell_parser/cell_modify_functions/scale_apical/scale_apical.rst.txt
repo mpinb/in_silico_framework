@@ -10,19 +10,19 @@ scale_apical
 ============
 
 
-.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment=&#39;ApicalDendrite&#39;)
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment='ApicalDendrite')
 
    Scale the apical dendrite of a cell.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to scale.
                 * **scale** (*float*) -- The scaling factor.
                 * **compartment** (*str*) -- The compartment to scale.
                   If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
-                  If "Trunk", the cell is assumed to have ``detailed\_labels`` assigned manually, or by :py:meth:`biophysics\_fitting.utils.augment\_cell\_with\_detailed\_labels`.
+                  If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
                   Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
 
    :returns: The scaled cell.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
    :raises ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
 

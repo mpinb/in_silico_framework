@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1093,7 +1093,7 @@
 <h1 id="synapse-activation-postprocess-dask">synapse_activation_postprocess_dask<a class="headerlink" href="#synapse-activation-postprocess-dask" title="Permalink to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask">
-<span class="sig-prename descclassname"><span class="pre">data_base.db_initializers.synapse_activation_binning.</span></span><span class="sig-name descname"><span class="pre">synapse_activation_postprocess_dask</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">ddf</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">data_base.db_initializers.synapse_activation_binning.</span></span><span class="sig-name descname"><span class="pre">synapse_activation_postprocess_dask</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">ddf</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">\*\*kwargs</span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates bins of synapse activation per trial from a dask dataframe.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask-parameters" title="Permalink to this headline">¶</a></dt>
@@ -1101,10 +1101,10 @@
 <li><p><strong>ddf</strong> (<em>dask.dataframe</em>) – synapse activation dask dataframe</p></li>
 <li><p><strong>groupby</strong> (<em>str</em>) – species for which subgroups the bins should be calculated. Available values include:
 - <code class="docutils literal notranslate"><span class="pre">celltype</span></code>
-- <code class="docutils literal notranslate"><span class="pre">presynaptic\_column</span></code>
+- <code class="docutils literal notranslate"><span class="pre">presynaptic_column</span></code>
 - <code class="docutils literal notranslate"><span class="pre">proximal</span></code> (soma distance &lt; 500 um)
 - <code class="docutils literal notranslate"><span class="pre">EI</span></code> (Lumping the EXC / INH celltypes together)
-- <code class="docutils literal notranslate"><span class="pre">binned\_somadist</span></code>: synapse counts for all 50 microns
+- <code class="docutils literal notranslate"><span class="pre">binned_somadist</span></code>: synapse counts for all 50 microns
 - any column in the specified dataframe.</p></li>
 <li><p><strong>db</strong> (<em>DataBase</em>) – if specified, the result will be computed immediately and saved in the database immediately.</p></li>
 <li><p><strong>get</strong> (<em>dask scheduler</em>) – only has an effect if ‘db’ kwarg is provided. In this case, it allows to specify a dask scheduler for the computation.</p></li>

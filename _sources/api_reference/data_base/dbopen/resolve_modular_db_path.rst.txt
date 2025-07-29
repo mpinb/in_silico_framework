@@ -14,7 +14,7 @@ resolve_modular_db_path
 
    Resolve the path of a database.
 
-   Modular database paths are filepaths of the form ``mdb://<unique\_id>/...``.
+   Modular database paths are filepaths of the form ``mdb://<unique_id>/...``.
    These are used to be independent of the location of the database on the hard drive.
    This has been useful for migrating data between different file systems.
    These relative paths are registered to an actual path in the data base registry upon creation.

@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1279,8 +1279,8 @@
 </dl>
 <p class="example rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">spikeTimes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">write</span>\<span class="n">_spike</span>\<span class="n">_times</span>\<span class="n">_file</span><span class="p">(</span><span class="s1">&#39;spike\_times.param&#39;</span><span class="p">,</span> <span class="n">spikeTimes</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">spike</span>\<span class="n">_times</span><span class="o">.</span><span class="n">param</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_spike_times_file</span><span class="p">(</span><span class="s1">&#39;spike_times.param&#39;</span><span class="p">,</span> <span class="n">spikeTimes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spike_times</span><span class="o">.</span><span class="n">param</span>
 <span class="go"># trial spike times</span>
 <span class="go">0       0.1,0.2,0.3,</span>
 <span class="go">1</span>

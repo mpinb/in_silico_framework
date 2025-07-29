@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1038,7 +1038,7 @@
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.analyze.spike_detection.spike_in_interval-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.analyze.spike_detection.spike_in_interval-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>st</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – 2D array of spike times (<code class="docutils literal notranslate"><span class="pre">n\_trials</span> <span class="pre">x</span> <span class="pre">n\_spikes</span></code>)</p></li>
+<li><p><strong>st</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – 2D array of spike times (<code class="docutils literal notranslate"><span class="pre">n_trials</span> <span class="pre">x</span> <span class="pre">n_spikes</span></code>)</p></li>
 <li><p><strong>tmin</strong> (<em>float</em>) – Minimum time (inclusive).</p></li>
 <li><p><strong>tmax</strong> (<em>float</em>) – Maximum time (exclusive).</p></li>
 </ul>
@@ -1046,7 +1046,7 @@
 </dl>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">st</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">spike</span>\<span class="n">_in</span>\<span class="n">_interval</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spike_in_interval</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
 <span class="go">[False, True, True]</span>
 </code></pre></div>
 </div>

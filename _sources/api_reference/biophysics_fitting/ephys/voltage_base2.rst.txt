@@ -10,11 +10,11 @@ voltage_base2
 =============
 
 
-.. py:function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID=&#39;recSiteID&#39;)
+.. py:function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID='recSiteID')
 
    Fetch the voltage at a given time point t0 for a specific recording site ID.
 
-   :Parameters: * **voltage\_traces** (*dict*) -- A dictionary containing voltage traces for different recording sites.
+   :Parameters: * **voltage_traces** (*dict*) -- A dictionary containing voltage traces for different recording sites.
                 * **recSiteID** (*int*) -- The ID of the recording site for which the voltage is to be returned.
                 * **t0** (*float*) -- The time point at which the voltage is to be returned.
 

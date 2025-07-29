@@ -16,7 +16,7 @@ AP_height
 
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
                 * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **thresh** (*float, optional*) -- AP threshold voltage. If None, uses the default threshold of find\_crossing().
+                * **thresh** (*float, optional*) -- AP threshold voltage. If None, uses the default threshold of find_crossing().
 
    :returns: Array of AP amplitudes.
    :rtype: numpy.ndarray

@@ -14,7 +14,7 @@ vmMax
 
    Calculate the maximum voltage of a cell at any timepoint, at any dendrite.
 
-   :Parameters: **cell** (:py:class:`~singlejson\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: **cell** (:py:class:`~singlejson_cell_parser.cell.Cell`) -- The cell object.
 
    :returns: The maximum voltage of the cell at any timepoint across sections.
    :rtype: numpy.ndarray

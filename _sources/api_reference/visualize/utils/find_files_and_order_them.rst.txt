@@ -10,7 +10,7 @@ find_files_and_order_them
 =========================
 
 
-.. py:function:: visualize.utils.find_files_and_order_them(files, files_format=&#39;.png&#39;)
+.. py:function:: visualize.utils.find_files_and_order_them(files, files_format='.png')
 
    Find files in a list of directories or a directory and order them.
 
@@ -20,7 +20,7 @@ find_files_and_order_them
    directories order is maintained.
 
    :Parameters: * **files** (*list | str*) -- list of files, list of directories, or a directory.
-                * **files\_format** (*str*) -- format of the files to get (e.g. '.png', '.jpg')
+                * **files_format** (*str*) -- format of the files to get (e.g. '.png', '.jpg')
 
    :returns: List of the files contained in the files argument.
    :rtype: list
@@ -28,14 +28,14 @@ find_files_and_order_them
    .. rubric:: Example
       :class: example
 
-   If files is a list of directories [dir\_a,  dir\_b, dir\_c] containing the following files:
+   If files is a list of directories [dir_a,  dir_b, dir_c] containing the following files:
 
    .. list-table:: Example of directory contents
       :header-rows: 1
 
-      * - dir\_a
-        - dir\_b
-        - dir\_c
+      * - dir_a
+        - dir_b
+        - dir_c
       * - 100
         - world
         - C

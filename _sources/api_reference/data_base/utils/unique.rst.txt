@@ -14,7 +14,7 @@ unique
 
    Get the unique elements of a list
 
-   :Parameters: **list\_** (*list*) -- the list
+   :Parameters: **list_** (*list*) -- the list
 
    :returns: the unique elements of the list
    :rtype: list

@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1232,14 +1232,9 @@
 <div class="toctree-wrapper compound">
 </div>
 <span class="target" id="module-single_cell_parser.reader"></span><p>Read and parse <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a>, <a class="reference internal" href="../../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a>, <a class="reference internal" href="../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a>, and <a class="reference internal" href="../../../file_formats.html#am-file-format"><span class="std std-ref">.am</span></a> files.</p>
-<div class="admonition deprecated">
-<p class="admonition-title"><span class="versionmodified deprecated">Deprecated since version This: </span>module additionally provides readers for <a class="reference internal" href="../../../file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> and <a class="reference internal" href="../../../file_formats.html#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a> files.
-However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
-They can still be explicitly read using Python’s <code class="docutils literal notranslate"><span class="pre">open()</span></code> and <code class="docutils literal notranslate"><span class="pre">read()</span></code> capabilities, but this is not recommended, or efficient.</p>
-<dl class="simple">
-<dt>See also:</dt><dd><p><a class="reference internal" href="../../data_base/IO/LoaderDumper/index.html#module-data_base.IO.LoaderDumper" title="data_base.IO.LoaderDumper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data_base.IO.LoaderDumper</span></code></a> for dask and pandas related IO.</p>
-</dd>
-</dl>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../../data_base/IO/LoaderDumper/index.html#module-data_base.IO.LoaderDumper" title="data_base.IO.LoaderDumper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data_base.IO.LoaderDumper</span></code></a> for dask and pandas related IO.</p>
 </div>
 <h2 id="functions">Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">

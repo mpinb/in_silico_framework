@@ -10,18 +10,18 @@ scale_apical_dendrite
 =====================
 
 
-.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite(cell, scale=None, compartment=&#39;ApicalDendrite&#39;)
+.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite')
 
    Scales the apical dendrite of a cell.
 
    Assumes the cell has sections with label "ApicalDendrite".
    If not, nothing gets scaled.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell to scale.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to scale.
                 * **scale** (*float*) -- The scaling factor.
 
    :returns: The scaled cell.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
 .. 

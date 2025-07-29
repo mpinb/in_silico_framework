@@ -10,11 +10,11 @@ init_neuron_run
 ===============
 
 
-.. py:function:: single_cell_parser.init_neuron_run(simparam, vardt=False, *events)
+.. py:function:: single_cell_parser.init_neuron_run(simparam, vardt=False, \*events)
 
    Default NEURON run with inital parameters according to parameter file.
 
-   Used in :py:mod:`~simrun.run\_new\_simulations` to set up and run a simulation.
+   Used in :py:mod:`~simrun.run_new_simulations` to set up and run a simulation.
 
    :Parameters: * **simparam** (*dict | dict-like*) -- A dictionary containing the simulation parameters.
                   Must include the keys 'dt', 'tStop', 'Vinit', 'T'.

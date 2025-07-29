@@ -12,16 +12,16 @@ create_metadata
 
 .. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata(db)
 
-   Generate metadata out of a pd.Series containing the sim\_trial\_index.
+   Generate metadata out of a pd.Series containing the sim_trial_index.
 
-   Expands the sim\_trial\_index to a pandas Series containing the path, trial number,
+   Expands the sim_trial_index to a pandas Series containing the path, trial number,
    and filename of the voltage traces file. After running this method, the database
    contains:
 
-   - ``sim\_trial\_index`` A pandas series containing the sim\_trial\_index.
-   - ``simresult\_path`` Path to the simulation results folder.
+   - ``sim_trial_index`` A pandas series containing the sim_trial_index.
+   - ``simresult_path`` Path to the simulation results folder.
 
-   :Parameters: **db** (:py:class:`~data\_base.DataBase`) -- The target database that should contain the parsed simulation results.
+   :Parameters: **db** (:py:class:`~data_base.DataBase`) -- The target database that should contain the parsed simulation results.
 
    :returns: A pandas dataframe containing the metadata.
    :rtype: pd.DataFrame

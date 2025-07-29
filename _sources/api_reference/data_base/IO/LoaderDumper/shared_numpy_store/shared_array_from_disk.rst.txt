@@ -18,12 +18,12 @@ shared_array_from_disk
                 * **shape** (*tuple, optional*) -- Shape of the array.
                 * **dtype** (*str, optional*) -- Data type of the array.
                 * **name** (*str, optional*) -- Name of the shared memory block.
-                  To be passed to :py:class:`~data\_base.isf\_data\_base.IO.LoaderDumper.shared\_numpy\_store.SharedMemory`
+                  To be passed to :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
                   Default: None.
-                * **start\_row** (*int, optional*) -- The starting row of the array. Default: None.
-                * **end\_row** (*int, optional*) -- The ending row of the array. Default: None.
+                * **start_row** (*int, optional*) -- The starting row of the array. Default: None.
+                * **end_row** (*int, optional*) -- The ending row of the array. Default: None.
 
-   :returns: The :py:class:`~data\_base.isf\_data\_base.IO.LoaderDumper.shared\_numpy\_store.SharedMemory` object and the shared memory array.
+   :returns: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
    :rtype: tuple
 
 

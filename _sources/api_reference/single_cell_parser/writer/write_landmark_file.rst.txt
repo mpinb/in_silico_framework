@@ -26,7 +26,7 @@ write_landmark_file
       :class: example
 
    >>> landmarkList = [(0.0, 0.0, 0.0), (1.0, 1.0, 1.0)]
-   >>> write\_landmark\_file('landmarks.landmarkAscii', landmarkList)
+   >>> write_landmark_file('landmarks.landmarkAscii', landmarkList)
 
 
 .. 

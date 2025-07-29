@@ -14,7 +14,7 @@ get_model_pdf_from_db
 
    Get a DataFrame with all models from the database.
 
-   :Parameters: **db** (:py:class:`~data\_base.DataBase`) -- The database containing the models.
+   :Parameters: **db** (:py:class:`~data_base.DataBase`) -- The database containing the models.
 
    :returns: the biophysical models as a dictionary, mapping the model index to a DataFrame, and the models as a single DataFrame.
    :rtype: tuple

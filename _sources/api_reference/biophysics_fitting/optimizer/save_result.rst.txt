@@ -14,7 +14,7 @@ save_result
 
    Save the results of an optimization iteration in a database.
 
-   :Parameters: * **db\_run** (*data\_base.DataBase*) -- The database.
+   :Parameters: * **db_run** (*data_base.DataBase*) -- The database.
                 * **features** (*pd.DataFrame*) -- The features of the optimization iteration.
                 * **objectives** (*pd.DataFrame*) -- The objectives of the optimization iteration.
 

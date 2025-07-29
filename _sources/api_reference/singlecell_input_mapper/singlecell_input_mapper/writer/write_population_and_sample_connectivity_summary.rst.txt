@@ -15,9 +15,9 @@ write_population_and_sample_connectivity_summary
    Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
 
    Useful for comparing the results of a single realization to the average over multiple realizations.
-   Consult :py:meth:`write\_sample\_connectivity\_summary` and :py:meth:`write\_population\_connectivity\_summary` for details on the input data.
-   :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_compute\_parameter\_distribution`
-   :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.NetworkMapper.\_generate\_output\_files`
+   Consult :py:meth:`write_sample_connectivity_summary` and :py:meth:`write_population_connectivity_summary` for details on the input data.
+   :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+   :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
 
    :Parameters: * **fname** (*str*) -- Name of the output file
                 * **populationDistribution** (*dict*) -- Dictionary containing the summary data for each cell type across network realizations.

@@ -10,12 +10,12 @@ split_file_to_buffers
 =====================
 
 
-.. py:function:: data_base.utils.split_file_to_buffers(f, split_str=&#39;#&#39;)
+.. py:function:: data_base.utils.split_file_to_buffers(f, split_str='#')
 
-   Reads a file f and splits it wherever :paramref:`split\_str` is found.
+   Reads a file f and splits it wherever :paramref:`split_str` is found.
 
    :Parameters: * **f** (*file*) -- file to be split
-                * **split\_str** (*str*) -- string to split the file. Default is '#'
+                * **split_str** (*str*) -- string to split the file. Default is '#'
 
    :returns: list of :py:class:`StringIO` Buffers.
    :rtype: list

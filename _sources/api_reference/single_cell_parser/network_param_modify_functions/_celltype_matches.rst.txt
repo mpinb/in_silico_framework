@@ -14,20 +14,20 @@ _celltype_matches
 
    Check if the celltype name matches the celltypes and columns.
 
-   :Parameters: * **celltype\_name** (*str*) -- The celltype name.
+   :Parameters: * **celltype_name** (*str*) -- The celltype name.
                 * **celltypes** (*list*) -- The celltypes to match.
                 * **columns** (*list*) -- The columns to match.
 
    .. rubric:: Example
       :class: example
 
-   >>> celltype\_name = 'L6cc\_C2'
+   >>> celltype_name = 'L6cc_C2'
    >>> celltypes = ['L6cc', 'L5tt']
    >>> columns = ['C2', "B2']
-   >>> \_celltype\_matches(celltype\_name, celltypes, columns)
+   >>> _celltype_matches(celltype_name, celltypes, columns)
    True
-   >>> celltype\_name = 'L6cc\_C1'
-   >>> \_celltype\_matches(celltype\_name, celltypes, columns)
+   >>> celltype_name = 'L6cc_C1'
+   >>> _celltype_matches(celltype_name, celltypes, columns)
    False
 
    :returns: True if the celltype matches the celltypes and columns, False otherwise.

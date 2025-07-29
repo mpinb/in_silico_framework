@@ -16,7 +16,7 @@ display_animation
 
    :Parameters: * **files** (*str | list*) -- globstring or list of paths
                 * **interval** (*int*) -- time interval between frames
-                * **style** (*bool*) -- whether to use the style specified in the system default html\_template.
+                * **style** (*bool*) -- whether to use the style specified in the system default html_template.
                 * **animID** -- unique integer to identify the animation in the javascript environment of IPython
                 * **embedde** (*bool*) -- whether to embed the images as base64 in the html file.
 

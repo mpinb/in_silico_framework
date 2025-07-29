@@ -20,12 +20,12 @@ dump
    .. note::
 
       This method does not require the numpy arrays themselves.
-      Rather, it saves a :py:class:`~data\_base.isf\_data\_base.IO.LoaderDumper.shared\_numpy\_store.SharedNumpyStore` object,
+      Rather, it saves a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` object,
       which can further be used to save and load numpy arrays to and from shared memory.
 
    .. seealso::
 
-      :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.numpy.npy` and :py:mod:`~data\_base.isf\_data\_base.IO.LoaderDumper.numpy.npz`
+      :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npy` and :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npz`
       for directly saving numpy arrays to disk (non-shared memory).
 
 

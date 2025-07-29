@@ -12,17 +12,17 @@ _copy_and_transform_network_param
 
 .. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._copy_and_transform_network_param(netp_fn, target_fn, syn_fn_map, con_fn_map)
 
-   Convert all paths in a :ref:`network\_parameters\_format` file.
+   Convert all paths in a :ref:`network_parameters_format` file.
 
-   This function is used as a :paramref:`transform\_fun` in
-   :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.write\_param\_files\_to\_folder`.
+   This function is used as a :paramref:`transform_fun` in
+   :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
 
-   :Parameters: **network** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- Dictionary containing the network model parameters.
+   :Parameters: **network** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Dictionary containing the network model parameters.
 
    .. attention::
 
       The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
-      This happens during the copying process in :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.write\_param\_files\_to\_folder`.
+      This happens during the copying process in :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
 
 
 .. 

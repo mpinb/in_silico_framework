@@ -15,7 +15,7 @@ get_binsize
    Calculate the bin size and number of bins closest to the desired bin size goal.
 
    :Parameters: * **length** (*float*) -- The length of a dendritic branch to bin.
-                * **binsize\_goal** (*float, optional*) -- The desired bin size. Defaults to 50.
+                * **binsize_goal** (*float, optional*) -- The desired bin size. Defaults to 50.
 
    :returns: A tuple containing the bin size (float) and the number of bins (int) that result in binning closest to the binsize goal.
    :rtype: tuple

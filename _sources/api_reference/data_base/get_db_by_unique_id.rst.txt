@@ -14,12 +14,12 @@ get_db_by_unique_id
 
    Get a DataBase by its unique ID, as registered in the data base register.
 
-   Data base registers should be located at data\_base/.data\_base\_register.db
+   Data base registers should be located at data_base/.data_base_register.db
 
-   :Parameters: **unique\_id** (*str*) -- The data base's unique identifier
+   :Parameters: **unique_id** (*str*) -- The data base's unique identifier
 
-   :returns: The database associated with the :paramref:`unique\_id`.
-   :rtype: :py:class:`data\_base.DataBase`
+   :returns: The database associated with the :paramref:`unique_id`.
+   :rtype: :py:class:`data_base.DataBase`
 
 
 .. 

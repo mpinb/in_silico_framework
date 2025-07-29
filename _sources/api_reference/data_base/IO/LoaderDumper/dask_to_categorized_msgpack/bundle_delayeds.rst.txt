@@ -10,7 +10,7 @@ bundle_delayeds
 ===============
 
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.bundle_delayeds(*args)
+.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.bundle_delayeds(\*args)
 
    bundeling delayeds provided a huge speedup.
    this issue was adressed here:

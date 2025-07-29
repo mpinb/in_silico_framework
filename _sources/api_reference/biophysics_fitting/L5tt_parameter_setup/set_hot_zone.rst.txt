@@ -12,20 +12,20 @@ set_hot_zone
 
 .. py:function:: biophysics_fitting.L5tt_parameter_setup.set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None)
 
-   Insert Ca\_LVAst and Ca\_HVA channels along the apical dendrite between ``min\_`` and ``max\_`` distance from the soma.
+   Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
-                * **min\_** (*float*) -- The minimum distance from the soma.
-                * **max\_** (*float*) -- The maximum distance from the soma.
-                * **outsidescale\_sections** (*list*) -- A list of sections where the channels should be inserted.
+   :Parameters: * **cell_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
+                * **min_** (*float*) -- The minimum distance from the soma.
+                * **max_** (*float*) -- The maximum distance from the soma.
+                * **outsidescale_sections** (*list*) -- A list of sections where the channels should be inserted.
 
-   :returns: The updated cell\_param.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict
+   :returns: The updated cell_param.
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict
 
    .. note::
 
       This method is specific for a L5PT.
-      For more information about the hot zone, refer to :cite:t:`Bast\_Guest\_Fruengel\_Narayanan\_de\_Kock\_Oberlaender\_2023`
+      For more information about the hot zone, refer to :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`
 
 
 .. 

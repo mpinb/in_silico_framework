@@ -14,14 +14,14 @@ spike_in_interval
 
    Check whether each trial contains at least one spike within the specified interval
 
-   :Parameters: * **st** (:py:class:`~numpy.array`) -- 2D array of spike times (``n\_trials x n\_spikes``)
+   :Parameters: * **st** (:py:class:`~numpy.array`) -- 2D array of spike times (``n_trials x n_spikes``)
                 * **tmin** (*float*) -- Minimum time (inclusive).
                 * **tmax** (*float*) -- Maximum time (exclusive).
 
    Example::
 
        >>> st = np.array([[0.1, 0.2, 0.3], [0.2, 0.3, 0.4], [0.3, 0.4, 0.5]])
-       >>> spike\_in\_interval(st, 0.4, 0.3)
+       >>> spike_in_interval(st, 0.4, 0.3)
        [False, True, True]
 
    :returns:  1D array of boolean values, indicating whether each trial contains at least one spike within the specified interval.

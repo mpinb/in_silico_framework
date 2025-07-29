@@ -83,7 +83,7 @@ Functions
    * - :py:obj:`get_evaluate_StepTwo <biophysics_fitting.hay.evaluation.get_evaluate_StepTwo>`\ (\*\*kwargs)
      - Get the evaluation function for the :math:`StepTwo` stimulus protocol.
    * - :py:obj:`get_evaluate_StepThree <biophysics_fitting.hay.evaluation.get_evaluate_StepThree>`\ (\*\*kwargs)
-     - Get the evaluation function for the :math:`StepTwo` stimulus protocol.
+     - Get the evaluation function for the :math:`StepThree` stimulus protocol.
    * - :py:obj:`hay_evaluate_bAP <biophysics_fitting.hay.evaluation.hay_evaluate_bAP>`\ (\*\*kwargs)
      - Evaluate the :math:`bAP` stimulus protocol.
    * - :py:obj:`hay_evaluate_BAC <biophysics_fitting.hay.evaluation.hay_evaluate_BAC>`\ (\*\*kwargs)

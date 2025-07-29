@@ -20,7 +20,7 @@ get_fraction_of_landmarkAscii
    :returns: A pandas DataFrame containing the sampled landmarks and the cell type.
    :rtype: pd.DataFrame
 
-   .. seealso:: :py:meth:`~simrun.utils.get\_fraction\_of\_landmarkAscii\_dir` to sample landmarks from all landmarkAscii files in a directory.
+   .. seealso:: :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
 
 
 .. 

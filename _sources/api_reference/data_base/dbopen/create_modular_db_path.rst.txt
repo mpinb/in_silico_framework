@@ -14,7 +14,7 @@ create_modular_db_path
 
    Create a database path from a given path.
 
-   Modular database paths are of the form ``mdb://<unique\_id>/...``.
+   Modular database paths are of the form ``mdb://<unique_id>/...``.
    The point of these paths is to be independent of their location on the hard drive,
    and can thus be transferred to other file systems, and resolved afterwards using the database registry.
 

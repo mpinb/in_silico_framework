@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1068,7 +1068,7 @@
 <h1 id="select-cells-that-spike-in-interval">select_cells_that_spike_in_interval<a class="headerlink" href="#select-cells-that-spike-in-interval" title="Permalink to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.utils.select_cells_that_spike_in_interval">
-<span class="sig-prename descclassname"><span class="pre">simrun.utils.</span></span><span class="sig-name descname"><span class="pre">select_cells_that_spike_in_interval</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="pre">sa,</span> <span class="pre">tmin,</span> <span class="pre">tmax,</span> <span class="pre">set_index=[&amp;#39;synapse_ID&amp;#39;,</span> <span class="pre">&amp;#39;synapse_type&amp;#39;]</span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.utils.select_cells_that_spike_in_interval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">simrun.utils.</span></span><span class="sig-name descname"><span class="pre">select_cells_that_spike_in_interval</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">sa</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tmin</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tmax</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">set_index</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">[</span><span class="s1">&#39;synapse_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;synapse_type&#39;</span><span class="p">]</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.utils.select_cells_that_spike_in_interval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Select cells whose synapses were active in a given time interval.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.utils.select_cells_that_spike_in_interval-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.utils.select_cells_that_spike_in_interval-parameters" title="Permalink to this headline">¶</a></dt>
@@ -1076,7 +1076,7 @@
 <li><p><strong>sa</strong> (<em>pd.DataFrame</em>) – The <a class="reference internal" href="../../../file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> DataFrame.</p></li>
 <li><p><strong>tmin</strong> (<em>float</em>) – The start time of the interval.</p></li>
 <li><p><strong>tmax</strong> (<em>float</em>) – The end time of the interval.</p></li>
-<li><p><strong>set_index</strong> (<em>list</em>) – The index of the DataFrame. Default is <code class="docutils literal notranslate"><span class="pre">['synapse\_ID',</span> <span class="pre">'synapse\_type']</span></code>.</p></li>
+<li><p><strong>set_index</strong> (<em>list</em>) – The index of the DataFrame. Default is <code class="docutils literal notranslate"><span class="pre">['synapse_ID',</span> <span class="pre">'synapse_type']</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even" id="simrun.utils.select_cells_that_spike_in_interval-returns">Returns<span class="colon">:</span><a class="headerlink" href="#simrun.utils.select_cells_that_spike_in_interval-returns" title="Permalink to this headline">¶</a></dt>

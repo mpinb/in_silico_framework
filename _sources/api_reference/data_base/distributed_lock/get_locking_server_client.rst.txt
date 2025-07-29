@@ -14,10 +14,10 @@ get_locking_server_client
 
    Get the file locking client object, depending on the file locking configuration.
 
-   File locking configuration should be set by the environment variable ``ISF\_DISTRIBUTED\_LOCK\_CONFIG``, pointing to a path to
+   File locking configuration should be set by the environment variable ``ISF_DISTRIBUTED_LOCK_CONFIG``, pointing to a path to
    a ``.yml`` file providing file locking configuration.
 
-   .. seealso:: :py:mod:`data\_base.distributed\_lock` for more info on the file locking configuration.
+   .. seealso:: :py:mod:`data_base.distributed_lock` for more info on the file locking configuration.
 
 
 .. 

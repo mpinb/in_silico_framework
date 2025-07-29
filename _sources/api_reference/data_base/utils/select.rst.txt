@@ -10,7 +10,7 @@ select
 ======
 
 
-.. py:function:: data_base.utils.select(df, **kwargs)
+.. py:function:: data_base.utils.select(df, \*\*kwargs)
 
    Selects rows from a dataframe based on the values of the columns
 

@@ -15,15 +15,15 @@ get_mymap
    Get a map function for evaluating the parameters.
 
    This function is a hook into BluePyOpt's optimization.
-   It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start\_run`.
+   It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start_run`.
    Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
    This is useful for debugging and for analyzing the optimization results.
 
-   :Parameters: * **db\_setup (** -- py:class:`~data\_base.DataBase): Database containing the setup of the optimization.
-                * **db\_run** (:py:class:`~data\_base.DataBase`) -- The database for the optimization run containing sub-databases.
+   :Parameters: * **db_setup** (:py:class:`~data_base.DataBase`) -- Database containing the setup of the optimization.
+                * **db_run** (:py:class:`~data_base.DataBase`) -- The database for the optimization run containing sub-databases.
                 * **c** (:py:class:`~dask.distributed.Client`) -- The distributed client.
-                * **satisfactory\_boundary\_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
-                * **n\_reschedule\_on\_runtime\_error** (*int*) -- The number of times the optimization is rescheduled if a runtime error occurs.
+                * **satisfactory_boundary_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+                * **n_reschedule_on_runtime_error** (*int*) -- The number of times the optimization is rescheduled if a runtime error occurs.
 
    :returns: The map function for evaluating the parameters. this function is passed to the :py:class:`bluepyopt.optimisations.DEAPOptimisation` object.
    :rtype: Callable

@@ -14,10 +14,10 @@ load_param_file_if_path_is_provided
 
    Convenience function to load a parameter file whether it is a string or a dictionary.
 
-   :Parameters: **pathOrParam** (str | dict | :py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The path to the parameter file or the parameter dictionary.
+   :Parameters: **pathOrParam** (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The path to the parameter file or the parameter dictionary.
 
    :returns: The parameter object.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 .. 

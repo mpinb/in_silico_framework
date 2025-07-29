@@ -15,7 +15,7 @@ get_meta_filename
    Get the filename of the meta file in the savedir.
 
    :Parameters: * **savedir** (*str*) -- The directory to look for the meta file.
-                * **raise\_** (*bool, optional*) -- Whether to raise an error if no meta file is found. Defaults to True.
+                * **raise_** (*bool, optional*) -- Whether to raise an error if no meta file is found. Defaults to True.
 
    :raises FileNotFoundError: If no meta file is found in the savedir.
 

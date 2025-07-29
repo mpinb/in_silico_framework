@@ -12,10 +12,10 @@ _helper
 
 .. py:function:: data_base.analyze.spike_detection._helper(x, threshold=0)
 
-   Parse a :ref:`voltage\_traces\_df\_format` and return a :py:class:`pandas.Series` containing the spikes,
+   Parse a :ref:`voltage_traces_df_format` and return a :py:class:`pandas.Series` containing the spikes,
 
-   Reads out a :ref:`voltage\_traces\_df\_format`, so it can be fed into
-   :py:meth:`~single\_cell\_parser.analyze.membrane\_potential\_analysis.simple\_spike\_detection`.
+   Reads out a :ref:`voltage_traces_df_format`, so it can be fed into
+   :py:meth:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`.
    The results are converted back to a :py:class:`pandas.Series`, so it can be concatenated
    to a dask dataframe
 
@@ -25,7 +25,7 @@ _helper
    :returns: A series containing the spikes
    :rtype: :py:class:`~pandas.Series`
 
-   .. seealso:: :py:meth:`~single\_cell\_parser.analyze.membrane\_potential\_analysis.simple\_spike\_detection`
+   .. seealso:: :py:meth:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`
 
 
 .. 

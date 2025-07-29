@@ -27,7 +27,7 @@ whisker_evoked_PSTH
    >>> column = 'B2'  # I want activity from B2 column
    >>> deflectedWhisker = 'C1'  # I want activity reflecting deflection of C1 whisker (not C2)
    >>> cellType = 'L6ct'
-   >>> params = whisker\_evoked\_PSTH(column=column, deflectedWhisker=deflectedWhisker, cellType=cellType)
+   >>> params = whisker_evoked_PSTH(column=column, deflectedWhisker=deflectedWhisker, cellType=cellType)
    >>> print(params)  # This is activity data from the C3 column for C2 whisker deflection i.e. equivalent activity
    {
        'distribution': 'PSTH',

@@ -19,7 +19,7 @@ fig2np
 
    .. seealso:: http://stackoverflow.com/questions/7821518/matplotlib-save-plot-to-numpy-array
 
-   :Parameters: **fig** (*matplotlib.pyplot.Figure*) -- The figure object to convert to a numpy array.
+   :Parameters: **fig** (:py:class:`~matplotlib.figure.Figure`) -- The figure object to convert to a numpy array.
 
    :returns: The numpy array of the figure.
    :rtype: numpy.ndarray

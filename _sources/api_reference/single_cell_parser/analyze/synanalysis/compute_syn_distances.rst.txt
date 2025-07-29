@@ -14,7 +14,7 @@ compute_syn_distances
 
    Computes distances (to soma) of all synapses on the dendrite.
 
-   :Parameters: * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- cell object with attached synapses.
+   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- cell object with attached synapses.
                 * **synType** (*str*) -- presynaptic cell type to compute distances for.
                 * **label** (*str, optional*) -- dendrite type (e.g. "ApicalDendrite") to compute distances for.
                   Default: None (all dendrites)

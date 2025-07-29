@@ -12,7 +12,7 @@ dump
 
 .. py:function:: data_base.IO.LoaderDumper.pandas_to_msgpack.dump(obj, savedir, rows_per_file=None)
 
-   rows\_per\_file: automatically splits dataframe, such that rows\_per\_file rows of the df are
+   rows_per_file: automatically splits dataframe, such that rows_per_file rows of the df are
    saved in each file. This helps with large dataframes which otherwise would hit the 1GB limit of msgpack.
 
 

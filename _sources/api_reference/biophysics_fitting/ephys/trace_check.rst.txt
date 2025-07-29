@@ -10,7 +10,7 @@ trace_check
 ===========
 
 
-.. py:function:: biophysics_fitting.ephys.trace_check(t, v, stim_onset=None, stim_duration=None, minspikenum=None, soma_threshold=None, returning_to_rest=2, max_prestim_dendrite_depo=-50, vmax=None, name=&#39;&#39;)
+.. py:function:: biophysics_fitting.ephys.trace_check(t, v, stim_onset=None, stim_duration=None, minspikenum=None, soma_threshold=None, returning_to_rest=2, max_prestim_dendrite_depo=-50, vmax=None, name='')
 
    Check the properties of a voltage trace:
 
@@ -22,12 +22,12 @@ trace_check
 
    :Parameters: * **t** (*array*) -- Time array.
                 * **v** (*array*) -- Voltage array.
-                * **stim\_onset** (*float*) -- Time of stimulus onset.
-                * **stim\_duration** (*float*) -- Duration of stimulus.
+                * **stim_onset** (*float*) -- Time of stimulus onset.
+                * **stim_duration** (*float*) -- Duration of stimulus.
                 * **minspikenum** (*int*) -- Minimum number of spikes required.
-                * **soma\_threshold** (*float*) -- Threshold voltage for spike detection.
-                * **returning\_to\_rest** (*float*) -- Voltage difference between last reported voltage and voltage base.
-                * **max\_prestim\_dendrite\_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset.
+                * **soma_threshold** (*float*) -- Threshold voltage for spike detection.
+                * **returning_to_rest** (*float*) -- Voltage difference between last reported voltage and voltage base.
+                * **max_prestim_dendrite_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset.
                 * **vmax** (*float*) -- Maximum voltage.
                 * **name** (*str*) -- Name of the trace.
 

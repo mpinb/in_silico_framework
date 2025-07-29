@@ -14,8 +14,8 @@ get_bin_soma_distances_in_section
 
    Get the distance to the soma for all bins in this section.
 
-   :Parameters: * **section\_id** (*int*) -- Id of the neuron section
-                * **section\_distances\_df** (*pd.DataFrame*) -- The dataframe describing distance to soma for all sections, as provided by :@function get\_section\_distances\_df:
+   :Parameters: * **section_id** (*int*) -- Id of the neuron section
+                * **section_distances_df** (*pd.DataFrame*) -- The dataframe describing distance to soma for all sections, as provided by :@function get_section_distances_df:
 
    :returns: A list containing the distance to soma for each bin in a section.
    :rtype: list

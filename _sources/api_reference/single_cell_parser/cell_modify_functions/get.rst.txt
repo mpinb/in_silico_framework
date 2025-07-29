@@ -17,19 +17,19 @@ get
    Cell modify functions are defined in this module, and can be retrieved by name.
    Each cell modify function is defined in a module that has the same name as the function itself.
    For example, the full path to
-   :py:meth:`~single\_cell\_parser.cell\_modify\_functions.scale\_apical.scale\_apical` is
-   :py:meth:`single\_cell\_parser.cell\_modify\_functions.scale\_apical.scale\_apical`.
+   :py:meth:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical` is
+   :py:meth:`single_cell_parser.cell_modify_functions.scale_apical.scale_apical`.
    To make it easier to retrieve the function, this function provides API to simply fetch them by name.
 
    .. rubric:: Example
       :class: example
 
-   >>> from single\_cell\_parser.cell\_modify\_functions import get
-   >>> fun = get('scale\_apical')
+   >>> from single_cell_parser.cell_modify_functions import get
+   >>> fun = get('scale_apical')
    >>> fun
-   <function scale\_apical at 0x7f0c3f2b6e18>
-   >>> print(fun.\_\_file\_\_)
-   single\_cell\_parser/cell\_modify\_functions/scale\_apical.py
+   <function scale_apical at 0x7f0c3f2b6e18>
+   >>> print(fun.__file__)
+   single_cell_parser/cell_modify_functions/scale_apical.py
 
    :returns: the cell modification function.
    :rtype: Callable

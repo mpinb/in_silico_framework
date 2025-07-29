@@ -14,8 +14,8 @@ get_population_with_different_n_objectives
 
    Adapt the number of objectives of individuals
 
-   :Parameters: * **old\_pop** -- list of deap.Individuals
-                * **n\_objectives** (*int*) -- number of objectives
+   :Parameters: * **old_pop** -- list of deap.Individuals
+                * **n_objectives** (*int*) -- number of objectives
 
    :returns: population with adapted number of objectives
    :rtype: list of deap.Individuals

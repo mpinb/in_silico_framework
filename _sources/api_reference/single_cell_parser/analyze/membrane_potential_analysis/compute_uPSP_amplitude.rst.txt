@@ -22,7 +22,7 @@ compute_uPSP_amplitude
                 * **isEPSP** (*bool*) -- If True, the uPSP is an excitatory post-synaptic potential (EPSP).
                   If False, the uPSP is an inhibitory post-synaptic potential (IPSP).
                   Default is ``True``.
-                * **t\_width\_baseline** (*float*) -- Width of the time window to calculate the baseline membrane voltage.
+                * **t_width_baseline** (*float*) -- Width of the time window to calculate the baseline membrane voltage.
                   Default is :math:`10.0 ms`.
 
    :returns: Amplitude of the uPSP.

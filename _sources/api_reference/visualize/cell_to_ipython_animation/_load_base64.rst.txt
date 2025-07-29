@@ -10,7 +10,7 @@ _load_base64
 ============
 
 
-.. py:function:: visualize.cell_to_ipython_animation._load_base64(filename, extension=&#39;png&#39;)
+.. py:function:: visualize.cell_to_ipython_animation._load_base64(filename, extension='png')
 
    Load a file and encode it in base64.
 
@@ -22,7 +22,7 @@ _load_base64
    :returns: base64 encoded string
    :rtype: str
 
-   .. seealso:: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html\_writer.py
+   .. seealso:: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html_writer.py
 
    .. note::
 

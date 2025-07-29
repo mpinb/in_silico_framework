@@ -22,7 +22,7 @@ colorize_str
    :returns: the colorized string
    :rtype: str
 
-   .. seealso:: :py:class:`data\_base.utils.bcolors` For color escape sequences.
+   .. seealso:: :py:class:`data_base.utils.bcolors` For color escape sequences.
 
 
 .. 

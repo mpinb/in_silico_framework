@@ -12,16 +12,16 @@ change_glutamate_syn_weights
 
 .. py:function:: single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights(param, g_optimal=None, pop=EXCITATORY)
 
-   Changes the glutamate synapse weights in the :ref:`network\_parameters\_format` to the optimal values.
+   Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
 
-   :Parameters: * **param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
-                * **g\_optimal** (*pandas.core.series.Series | pandas.core.frame.DataFrame*) -- The optimal values for the glutamate synapse weights.
+   :Parameters: * **param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The :ref:`network_parameters_format`.
+                * **g_optimal** (*pandas.core.series.Series | pandas.core.frame.DataFrame*) -- The optimal values for the glutamate synapse weights.
                   If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
                   If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
                 * **pop** (*list*) -- The celltypes to apply the scaling to.
 
-   :raises AssertionError: If more than 1 index is found for the celltype in :paramref:`g\_optimal`.
-   :raises AssertionError: If the celltype is not found in :paramref:`g\_optimal`.
+   :raises AssertionError: If more than 1 index is found for the celltype in :paramref:`g_optimal`.
+   :raises AssertionError: If the celltype is not found in :paramref:`g_optimal`.
 
 
 .. 

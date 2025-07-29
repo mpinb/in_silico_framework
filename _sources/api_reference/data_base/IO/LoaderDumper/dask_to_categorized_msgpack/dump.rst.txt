@@ -16,15 +16,15 @@ dump
    Has been deprecated since 2023-09-01. Please use another dumper.
    This is only still available for testing purposes in support of backwards compatibility.
 
-   :Parameters: * **obj** (*\_type\_*) -- The object to be saved
+   :Parameters: * **obj** (*_type_*) -- The object to be saved
                 * **savedir** (*str or Path*) -- Output directory to save the file in.
                 * **repartition** (*bool, optional*) -- Whether or not to repartition.. Defaults to False.
-                * **get** (*\_type\_, optional*) -- A getter method, e.g. dask.get. Defaults to None.
+                * **get** (*_type_, optional*) -- A getter method, e.g. dask.get. Defaults to None.
                 * **categorize** (*bool, optional*) -- Defaults to True.
                 * **client** (*distributed.Client, optional*) -- distributed.Client for parallellization. Defaults to None.
                 * **test** (*bool, optional*) -- Whether or not the dumper is called from within a test method. Defaults to False.
 
-   :raises RuntimeError: \_description\_
+   :raises RuntimeError: _description_
 
 
 .. 

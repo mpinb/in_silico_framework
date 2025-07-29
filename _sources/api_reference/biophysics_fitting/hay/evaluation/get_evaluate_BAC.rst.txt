@@ -10,7 +10,7 @@ get_evaluate_BAC
 ================
 
 
-.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_BAC(**kwargs)
+.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_BAC(\*\*kwargs)
 
    Get the evaluation function for the :math:`BAC` stimulus protocol.
 

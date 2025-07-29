@@ -33,10 +33,10 @@ Functions
    :class: summarytable
    
    * - :py:obj:`rasterplot2 <visualize.rasterplot.rasterplot2>`\ (st, ax, x\_offset, c, plot\_kwargs, y\_offset, y\_plot\_length, marker)
-     - Plot a rasterplot from a spike times dataframe.
+     - Plot a rasterplot from :ref:`spike_times_format`.
    * - :py:obj:`rasterplot2_pdf_grouped <visualize.rasterplot.rasterplot2_pdf_grouped>`\ (pdf, grouplabel, ax, xlim, x\_offset, color)
-     - Plot a rasterplot per group fo a spike times dataframe.
+     - Plot a rasterplot per group of :ref:`spike_times_format`.
    * - :py:obj:`rasterplot <visualize.rasterplot.rasterplot>`\ (df, colormap, ax, label, groupby\_attribute, tlim, reset\_index)
-     - Creates a rasterplot from spike times dataframe.
+     - Creates a rasterplot from :ref:`spike_times_format`.
 
 

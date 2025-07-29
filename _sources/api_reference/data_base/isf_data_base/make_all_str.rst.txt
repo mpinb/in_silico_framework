@@ -16,7 +16,7 @@ make_all_str
 
    Used to write out metadata in JSON format.
 
-   :Parameters: **dict\_** (*dict*) -- The dictionary to convert.
+   :Parameters: **dict_** (*dict*) -- The dictionary to convert.
 
    :returns: The converted dictionary.
    :rtype: dict

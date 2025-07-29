@@ -27,13 +27,7 @@ reader
 .. autoapi-nested-parse::
    Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
-   .. deprecated::
-       This module additionally provides readers for :ref:`syn_activation_format` and :ref:`spike_times_format` files.
-       However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
-       They can still be explicitly read using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
-
-       See also:
-           :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+   .. seealso:: :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 
 
 

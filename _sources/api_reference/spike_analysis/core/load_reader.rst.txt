@@ -14,12 +14,12 @@ load_reader
 
    Load a reader object from a dictionary.
 
-   :Parameters: **dict\_** (*dict*) -- A dictionary containing the attributes of the reader object.
+   :Parameters: **dict_** (*dict*) -- A dictionary containing the attributes of the reader object.
 
    :returns: A reader object.
    :rtype: object
 
-   :raises NotImplementedError: If the class of the reader object is not recognized. Currently, only :py:class:`spike\_analysis.core.ReaderSmr` is supported.
+   :raises NotImplementedError: If the class of the reader object is not recognized. Currently, only :py:class:`spike_analysis.core.ReaderSmr` is supported.
 
 
 .. 

@@ -12,7 +12,7 @@ create_network_parameter
 
 .. py:function:: singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, outFileName, write_all_celltypes=False)
 
-   Create a template :ref:`network\_parameters\_format` file from a template parameter file and a cell number file.
+   Create a template :ref:`network_parameters_format` file from a template parameter file and a cell number file.
 
    The parameter file defines the PSTHs for each cell type under some in vivo condition. For the template, ongoing activity is set as a default value for each cell type.
    The network parameter file converts the PSTHs to firing rates in fixed temporal bins, and adds the following information:
@@ -23,12 +23,12 @@ create_network_parameter
    - release probabilities
 
    :Parameters: * **templateParamName** (*str*) -- Name of the template param containing the PSTHs for each cell type.
-                  These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell\_input\_mapper.evoked\_PSTH\_from\_spike\_times.create\_average\_celltype\_PSTH\_from\_clusters`.
+                  These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
                 * **cellNumberFileName** (*str*) -- Name of the file containing the amount of cells per column in the barrel cortex.
                 * **synFileName** (*str*) -- Name of the `.syn` file, defining the synapse types.
                 * **conFileName** (*str*) -- Name of the `.con` file, defining the connections.
                 * **outFileName** (*str*) -- Name of the output file.
-                * **write\_all\_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+                * **write_all_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
 
 
 .. 

@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -859,16 +859,16 @@ Each file in this folder should contain the spike times of a single cell under a
 </dd>
 </dl>
 <p class="example rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">create</span>\<span class="n">_average</span>\<span class="n">_celltype</span>\<span class="n">_PSTH</span>\<span class="n">_from</span>\<span class="n">_clusters</span><span class="p">(</span>
-<span class="go">    &#39;getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84&#39;,</span>
-<span class="go">    &#39;L5\_PSTH\_UpState.param&#39;)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">create_average_celltype_PSTH_from_clusters</span><span class="p">(</span>
+<span class="go">    &#39;getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84&#39;,</span>
+<span class="go">    &#39;L5_PSTH_UpState.param&#39;)</span>
 <span class="go">{</span>
-<span class="go">    &quot;getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84\_B1&quot;: {</span>
+<span class="go">    &quot;getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84_B1&quot;: {</span>
 <span class="go">        &quot;distribution&quot;: &quot;PSTH&quot;,</span>
 <span class="go">        &quot;intervals&quot;: [(6.0,7.0)],</span>
 <span class="go">        &quot;probabilities&quot;: [0.0216],</span>
 <span class="go">    },</span>
-<span class="go">    &quot;getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84\_B2&quot;: {</span>
+<span class="go">    &quot;getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84_B2&quot;: {</span>
 <span class="go">        ...</span>
 <span class="go">    },</span>
 <span class="go">}</span>

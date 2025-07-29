@@ -15,21 +15,21 @@ run_ex_synapse
    Simulate a single excitatory or inhibitory synapse
 
    This is the core function to activate a single synapse and run the simulation.
-   Used in the :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` class to simulate each synapse.
+   Used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
 
    For excitatory synapses, :paramref:`gAMPA` and :paramref:`gNMDA` must be specified, and not :paramref:`gGABA`.
    For inhibitory synapses, only :paramref:`gGABA` may be specified.
 
-   :Parameters: * **cell\_nw\_generator** (*callable*) -- A callable that returns a :py:class:`~single\_cell\_parser.cell.Cell` and :py:class:`~single\_cell\_parser.network.NetworkMapper` when called.
-                * **neuron\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The :ref:`cell\_parameters\_format`.
-                * **network\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **cell_nw_generator** (*callable*) -- A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
+                * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
+                * **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
                 * **celltype** (*str*) -- The celltype to activate the synapse for. Used to fetch the correct network parameters.
                 * **preSynCellID** (*int*) -- The presynaptic cell ID to activate the synapse for. Default: ``None``.
                 * **gAMPA** (*float*) -- The AMPA conductance value. Default: ``None``.
                 * **gNMDA** (*float*) -- The NMDA conductance value. Default: ``None``.
                 * **gGABA** (*float*) -- The GABA conductance value. Default: ``None``.
                 * **vardt** (*bool*) -- Whether to use the variable step size solver. Default: ``False``.
-                * **return\_cell** (*bool*) -- Whether to return the :py:class:`~single\_cell\_parser.cell.Cell` object. Default: ``False``.
+                * **return_cell** (*bool*) -- Whether to return the :py:class:`~single_cell_parser.cell.Cell` object. Default: ``False``.
                 * **synapseID** (*int*) -- The synapse ID to activate.
                   If ``None``, all synapses assigned to the presynaptic cell get activated synchronously during the simulation.
                   Default: ``None``.

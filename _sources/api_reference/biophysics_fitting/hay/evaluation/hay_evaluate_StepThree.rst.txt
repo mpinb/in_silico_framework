@@ -10,7 +10,7 @@ hay_evaluate_StepThree
 ======================
 
 
-.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepThree(**kwargs)
+.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepThree(\*\*kwargs)
 
    Evaluate the :math:`StepTwo` stimulus protocol.
 

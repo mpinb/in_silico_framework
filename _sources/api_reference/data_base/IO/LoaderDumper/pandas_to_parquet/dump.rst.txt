@@ -17,7 +17,7 @@ dump
    In addition to the pandas DataFrame itself,
    meta information is also saved in the form of a JSON file.
 
-   .. seealso:: :py:func:`~data\_base.isf\_data\_base.IO.LoaderDumper.utils.save\_object\_meta` for saving meta information
+   .. seealso:: :py:func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
 
    :Parameters: * **obj** (*pd.DataFrame*) -- Pandas DataFrame to be saved.
                 * **savedir** (*str*) -- Directory where the pandas DataFrame should be stored.

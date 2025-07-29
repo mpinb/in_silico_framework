@@ -28,10 +28,10 @@ param_selector
 
    Example::
 
-       >>> param\_selector(params, 'a'):
+       >>> param_selector(params, 'a'):
        a    1
        b    2
-       >>> param\_selector(params, 'c.a'):
+       >>> param_selector(params, 'c.a'):
        b    7
 
    :Parameters: * **params** (*pd.Series*) -- The parameters.

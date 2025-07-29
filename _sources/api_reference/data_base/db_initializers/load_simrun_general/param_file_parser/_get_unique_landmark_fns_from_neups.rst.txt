@@ -14,7 +14,7 @@ _get_unique_landmark_fns_from_neups
 
    Get the unique landmark files from a list of neuron parameter files.
 
-   :Parameters: **neup\_fns** (*str*) -- Path to the neuron parameter file.
+   :Parameters: **neup_fns** (*str*) -- Path to the neuron parameter file.
 
    :returns: List containing the unique landmark files.
    :rtype: list

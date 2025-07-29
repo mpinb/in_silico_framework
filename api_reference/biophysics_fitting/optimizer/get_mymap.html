@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1197,7 +1197,7 @@ This is useful for debugging and for analyzing the optimization results.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.optimizer.get_mymap-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.optimizer.get_mymap-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>db_setup (</strong> – py:class:<a href="#id1"><span class="problematic" id="id2">`</span></a>~data_base.DataBase): Database containing the setup of the optimization.</p></li>
+<li><p><strong>db_setup</strong> (<a class="reference internal" href="../../data_base/isf_data_base/ISFDataBase.html#data_base.isf_data_base.ISFDataBase" title="data_base.isf_data_base.ISFDataBase (Python class) — Main database class."><code class="xref py py-class docutils literal notranslate"><span class="pre">DataBase</span></code></a>) – Database containing the setup of the optimization.</p></li>
 <li><p><strong>db_run</strong> (<a class="reference internal" href="../../data_base/isf_data_base/ISFDataBase.html#data_base.isf_data_base.ISFDataBase" title="data_base.isf_data_base.ISFDataBase (Python class) — Main database class."><code class="xref py py-class docutils literal notranslate"><span class="pre">DataBase</span></code></a>) – The database for the optimization run containing sub-databases.</p></li>
 <li><p><strong>c</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code>) – The distributed client.</p></li>
 <li><p><strong>satisfactory_boundary_dict</strong> (<em>dict | None</em>) – A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.</p></li>

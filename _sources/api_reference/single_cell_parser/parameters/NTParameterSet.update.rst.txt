@@ -9,6 +9,7 @@ NTParameterSet.update
 .. py:method:: single_cell_parser.parameters.NTParameterSet.update(other=None, \*\*kwargs)
 
    Update the NTParameterSet with another dictionary or keyword arguments.
+
    :Parameters: * **other** (*dict, optional*) -- Another dictionary to merge into this NTParameterSet.
                 * **\*\*kwargs** -- Additional keyword arguments to merge into this NTParameterSet.
 

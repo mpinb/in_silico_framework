@@ -12,7 +12,7 @@ NetworkMapper.re_init_network
 
    Sets all the presynaptic cells to ``off``.
 
-   .. seealso:: :py:meth:`~single_cell_parser.cell.Cell.turn_off` for more information on turning cells off.
+   .. seealso:: :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
 
    :Parameters: **replayMode** (*bool*) -- Whether or not to destroy the presynaptic cells as well. Default: False.
                 Set to False if you want to keep the presynaptic cells for a new simulation run.

@@ -16,17 +16,17 @@ universal
 
    Infers the type of the input DataFrame and calls the appropriate binning function.
 
-   :Parameters: * **df** (:py:class:`~pandas.DataFrame` or :py:class:`~dask.dataframe.DataFrame`) -- DataFrame to bin. Must contain a column with the name :paramref:`distance\_column` that contains the distance values.
-                * **distance\_column** (*str*) -- Column name of the distance values.
-                * **spatial\_distance\_bins** (*int*) -- Size of the spatial bins. Default is :math:`50\mu m`.
-                * **min\_time** (*int*) -- Minimum time value. Default is :math:`0 ms`.
-                * **max\_time** (*int*) -- Maximum time value. Default is :math:`300ms`.
-                * **time\_distance\_bins** (*int*) -- Size of the time bins. Default is :math:`1ms`.
+   :Parameters: * **df** (:py:class:`~pandas.DataFrame` or :py:class:`~dask.dataframe.DataFrame`) -- DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+                * **distance_column** (*str*) -- Column name of the distance values.
+                * **spatial_distance_bins** (*int*) -- Size of the spatial bins. Default is :math:`50\mu m`.
+                * **min_time** (*int*) -- Minimum time value. Default is :math:`0 ms`.
+                * **max_time** (*int*) -- Maximum time value. Default is :math:`300ms`.
+                * **time_distance_bins** (*int*) -- Size of the time bins. Default is :math:`1ms`.
 
    :returns:     A 2D array of the binned values.
    :rtype: :py:class:`~numpy.array`
 
-   .. seealso:: :py:meth:`~data\_base.analyze.spatial\_binning.universal\_pd`
+   .. seealso:: :py:meth:`~data_base.analyze.spatial_binning.universal_pd`
 
 
 .. 

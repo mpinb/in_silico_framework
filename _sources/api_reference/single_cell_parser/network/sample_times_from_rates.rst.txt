@@ -14,7 +14,7 @@ sample_times_from_rates
 
    Sample spike times from spike rates.
 
-   Used in :py:meth:`~\_create\_presyn\_cells` to generate spike times for a Poisson spike train.
+   Used in :py:meth:`~_create_presyn_cells` to generate spike times for a Poisson spike train.
 
 
 .. 

@@ -22,13 +22,13 @@ read_connections_spreadsheet
    .. rubric:: Example
       :class: example
 
-   >>> connectionsSpreadsheet = read\_connections\_spreadsheet('connections.csv')
+   >>> connectionsSpreadsheet = read_connections_spreadsheet('connections.csv')
    >>> connectionsSpreadsheet
    {'EXC': {
-       celltype\_1: {
-           'SOMA\_LENGTH': 0.1, 'SOMA\_AREA': 0.2, ...
+       celltype_1: {
+           'SOMA_LENGTH': 0.1, 'SOMA_AREA': 0.2, ...
            },
-       celltype\_2: {...},
+       celltype_2: {...},
        },
    'INH': {...}
    }

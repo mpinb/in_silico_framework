@@ -41,7 +41,7 @@ Classes
    * - :py:obj:`PySection2 <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2>`
      - Convenience class around NEURON's Section class.
    * - :py:obj:`PointCell <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell>`
-     - Cell object without morphological attributes.
+     - Cell object without morphological or biophysical attributes.
    * - :py:obj:`Synapse <singlecell_input_mapper.singlecell_input_mapper.cell.Synapse>`
      - Leightweight dataclass to store basic synapse information.
    * - :py:obj:`CellParser <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser>`

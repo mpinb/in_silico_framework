@@ -24,7 +24,7 @@ write_synapse_weight_file
    - synapse weights
 
    :Parameters: * **fname** (*str*) -- The name of the file to write to.
-                * **cell** (:py:class:`single\_cell\_parser.cell.Cell`) -- The cell object, containing synapses.
+                * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- The cell object, containing synapses.
 
    :returns: None. Writes out the synapse weight file to :paramref:`fname`.
 

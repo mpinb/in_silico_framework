@@ -14,7 +14,7 @@ synchronous_ddf_concat
 
    Concatenate a pickles dask dataframe to a pandas dataframe.
 
-   :Parameters: * **ddf\_path** (*str*) -- path to the dask dataframe
+   :Parameters: * **ddf_path** (*str*) -- path to the dask dataframe
                 * **meta** (*pd.DataFrame*) -- the metadata for the dask dataframe.
                 * **N** (*int*) -- number of chunks
                 * **n** (*int*) -- the chunk to be concatenated

@@ -14,7 +14,7 @@ STEP_adaptation_index
 
    Calculate the adaptation index for a step current stimulus.
 
-   :Parameters: **end\_time** (*float*) -- End time of the stimulus.
+   :Parameters: **end_time** (*float*) -- End time of the stimulus.
 
    :returns: Adaptation index.
    :rtype: float

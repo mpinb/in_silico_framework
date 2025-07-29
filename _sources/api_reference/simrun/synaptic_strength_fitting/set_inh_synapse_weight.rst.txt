@@ -12,9 +12,9 @@ set_inh_synapse_weight
 
 .. py:function:: simrun.synaptic_strength_fitting.set_inh_synapse_weight(syn, weight)
 
-   Set the synaptic strength of an inhibitory :py:class:`single\_cell\_parser.synapse.Synapse`.
+   Set the synaptic strength of an inhibitory :py:class:`single_cell_parser.synapse.Synapse`.
 
-   :Parameters: * **syn** (*single\_cell\_parser.synapse.Synapse*) -- The inhibitory synapse to set the synaptic strength for.
+   :Parameters: * **syn** (*single_cell_parser.synapse.Synapse*) -- The inhibitory synapse to set the synaptic strength for.
                 * **weight** (*float*) -- The synaptic strength value.
 
    :returns: None. Updates the synaptic strength of the inhibitory synapse.

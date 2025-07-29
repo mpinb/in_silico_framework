@@ -12,7 +12,7 @@ get_hay_objective_names
 
 .. py:function:: biophysics_fitting.hay.specification.get_hay_objective_names()
 
-   Get the names of the objectives used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+   Get the names of the objectives used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 
    :returns: The names of the objectives.
    :rtype: list

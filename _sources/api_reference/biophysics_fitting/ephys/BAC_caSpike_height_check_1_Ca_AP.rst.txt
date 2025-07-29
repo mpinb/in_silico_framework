@@ -16,7 +16,7 @@ BAC_caSpike_height_check_1_Ca_AP
 
    :Parameters: * **t** (*array*) -- Time array.
                 * **v** (*array*) -- Somatic voltage array.
-                * **v\_dend** (*array*) -- Dendritic voltage array.
+                * **v_dend** (*array*) -- Dendritic voltage array.
                 * **thresh** (*float, optional*) -- Spike detection threshold. Defaults to None.
 
    :returns: True if there is exactly one calcium spike in the dendritic voltage trace, False otherwise.

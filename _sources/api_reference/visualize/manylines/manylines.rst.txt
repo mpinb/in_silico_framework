@@ -17,14 +17,14 @@ manylines
    :Parameters: * **df** (*pd.DataFrame*) -- the dataframe containing voltage traces,
                 * **ax** (*matplotlib.pyplot.Axes*) -- an ax instance.
                 * **axis** (*list*) -- the ax limits, e.g. [1, 10, 1, 10]
-                * **colormap** (*dict*) -- a colormap, mapping values for :paramref:groupby\_attribute to colors.
-                * **groupby\_attribute** (*str*) -- column name to group by.
+                * **colormap** (*dict*) -- a colormap, mapping values for :paramref:groupby_attribute to colors.
+                * **groupby_attribute** (*str*) -- column name to group by.
                 * **figsize** (*tupe(int)*) -- the size of the Figure
                 * **returnPixelObject** (*bool*) -- Whether or not to return as a PixelObject
                 * **scheduler** (*distributed.client.Client | str, optional*) -- a distributed scheduler.
 
-   :returns: Figure object containing all lines defined in :paramref:df
-   :rtype: fig (matplotlib.pyplot.Figure)
+   :returns: Figure object containing all lines defined in :paramref:`df`
+   :rtype: :py:class:`~matplotlib.figure.Figure`
 
 
 .. 

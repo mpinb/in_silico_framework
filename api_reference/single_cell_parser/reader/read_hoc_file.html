@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1217,7 +1217,7 @@
 <h1 id="read-hoc-file">read_hoc_file<a class="headerlink" href="#read-hoc-file" title="Permalink to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight py" id="single_cell_parser.reader.read_hoc_file">
-<span class="sig-prename descclassname"><span class="pre">single_cell_parser.reader.</span></span><span class="sig-name descname"><span class="pre">read_hoc_file</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">fname=&amp;#39;&amp;#39;</span></span></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.reader.read_hoc_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">single_cell_parser.reader.</span></span><span class="sig-name descname"><span class="pre">read_hoc_file</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.reader.read_hoc_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a hoc file and returns a list of Edge objects.</p>
 <p>This list of sections is parsed to a <a class="reference internal" href="../cell_parser/CellParser.html#single_cell_parser.cell_parser.CellParser" title="single_cell_parser.cell_parser.CellParser (Python class) — Configure a Cell object from a NEURON hoc file."><code class="xref py py-class docutils literal notranslate"><span class="pre">CellParser</span></code></a> object
 using <a class="reference internal" href="../cell_parser/CellParser.spatialgraph_to_cell.html#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python method) — Create a Cell object from an AMIRA spatial graph in hoc_file_format format."><code class="xref py py-meth docutils literal notranslate"><span class="pre">spatialgraph_to_cell()</span></code></a>.</p>
@@ -1244,16 +1244,16 @@ while the <a class="reference internal" href="../../singlecell_input_mapper/inde
 </dd>
 </dl>
 <p class="example rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">read</span>\<span class="n">_hoc</span>\<span class="n">_file</span><span class="p">(</span><span class="n">hoc</span>\<span class="n">_file</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">read_hoc_file</span><span class="p">(</span><span class="n">hoc_file</span><span class="p">)</span>
 <span class="go">[</span>
-<span class="go">    \_Edge(</span>
+<span class="go">    _Edge(</span>
 <span class="go">        label=&#39;Soma&#39;,</span>
 <span class="go">        hocLabel=&#39;soma&#39;,</span>
 <span class="go">        edgePts=[(1.93339, 221.367004, -450.04599), ... , (13.9619, 210.149002, -447.901001)],</span>
 <span class="go">        diameterList=[12.542, 13.3094, ... , 3.5997), parentID=None, parentConnect=None),</span>
-<span class="go">    \_Edge(</span>
-<span class="go">        label=&#39;BasalDendrite\_1\_0&#39;,</span>
-<span class="go">        hocLabel=&#39;BasalDendrite\_1\_0&#39;,</span>
+<span class="go">    _Edge(</span>
+<span class="go">        label=&#39;BasalDendrite_1_0&#39;,</span>
+<span class="go">        hocLabel=&#39;BasalDendrite_1_0&#39;,</span>
 <span class="go">        edgePts=[(6.36964, 224.735992, -452.399994), (6.34155, 222.962997, -451.906006), ...],</span>
 <span class="go">        diameterList=[2.04, 2.04, ... , 2.04), parentID=0, parentConnect=0.009696),</span>
 <span class="go">    ...</span>

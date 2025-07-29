@@ -32,18 +32,18 @@ map_singlecell_inputs
        - For each anatomical area
        - For each presynaptic cell type
 
-   3. Creates a scalar field (:py:class:`~singlecell\_input\_mapper.singlecell\_input\_mapper.scalar\_field.ScalarField`)
+   3. Creates a scalar field (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
       for each bouton density.
-   4. Creates a :py:class:`~singlecell\_input\_mapper.singlecell\_input\_mapper.network\_embedding.NetworkMapper` object.
+   4. Creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
    5. Creates a network embedding for the cell using
-      :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.network\_embedding.NetworkMapper.create\_network\_embedding`.
+      :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
 
    The naming of each anatomical area needs to be consistent between:
 
    - The number of cells per cell type spreadsheet
    - The bouton folders containing axon traces
 
-   :Parameters: * **cellName** (*str*) -- path to a :ref:`hoc\_file\_format` file containing the morphology of the cell.
+   :Parameters: * **cellName** (*str*) -- path to a :ref:`hoc_file_format` file containing the morphology of the cell.
                 * **cellTypeName** (*str*) -- name of the postsynaptic cell type.
                 * **nrOfSamples** (*int*) -- number of samples to use for the network embedding.
                 * **numberOfCellsSpreadsheetName** (*str*) -- Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
@@ -52,7 +52,7 @@ map_singlecell_inputs
                 * **ExPSTDensityName** (*str*) -- Path to the PST density file for excitatory synapses.
                 * **InhPSTDensityName** (*str*) -- Path to the PST density file for inhibitory synapses.
                 * **boutonDensityFolderName** -- A directory containing the following subdirectory structure:
-                  anatomical\_area/presynaptic\_cell\_type/\*.am
+                  anatomical_area/presynaptic_cell_type/\*.am
 
    :returns: None. Writes the results to disk.
 

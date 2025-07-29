@@ -14,11 +14,11 @@ resolve_parameter_paths
 
    Resolve relative database paths in the parameters.
 
-   :Parameters: * **params\_fn** (*str*) -- The path to the parameters file.
+   :Parameters: * **params_fn** (*str*) -- The path to the parameters file.
                 * **db** (*str*) -- The database path to resolve against.
 
    :returns: The parameters with resolved paths.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 .. 

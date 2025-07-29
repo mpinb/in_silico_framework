@@ -20,18 +20,18 @@ read_voltage_traces_from_file
    .. rubric:: Example
       :class: example
 
-   >>> simrun\_result\_fn = 'path/to/sim\_result/vm\_all\_traces.csv'
-   >>> with open(simrun\_result\_fn, 'r') as file: print(file.read())
+   >>> simrun_result_fn = 'path/to/sim_result/vm_all_traces.csv'
+   >>> with open(simrun_result_fn, 'r') as file: print(file.read())
    # This is an example for a .csv file (so not .npz)
    t       Vm run 00       Vm run 01
    100.0   -61.4607218758  -55.1366909604
    100.025 -61.4665809176  -55.1294343391
    100.05  -61.4735021526  -55.1223216173
    ...
-   >>> read\_voltage\_traces\_from\_file(prefix="path/to/sim\_result", v\_fn)
-   sim\_trial\_index                         100.0         100.025          ...
-   path/to/sim\_result/000000    -61.4607218758 -61.4665809176   ...
-   path/to/sim\_result/000001    -55.1366909604 -55.1294343391   ...
+   >>> read_voltage_traces_from_file(prefix="path/to/sim_result", v_fn)
+   sim_trial_index                         100.0         100.025          ...
+   path/to/sim_result/000000    -61.4607218758 -61.4665809176   ...
+   path/to/sim_result/000001    -55.1366909604 -55.1294343391   ...
    ...
 
    .. important::
@@ -48,8 +48,8 @@ read_voltage_traces_from_file
 
    .. seealso::
 
-      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_from\_csv` and
-      :py:meth:`~data\_base.db\_initializers.load\_simrun\_general.read\_voltage\_traces\_from\_npz`
+      :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_csv` and
+      :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_npz`
 
 
 .. 

@@ -16,9 +16,9 @@ BPAPatt_check_1_AP
 
    Args:
    - t (array): time array [ms]
-   - v\_soma (array): somatic voltage trace [mV]
+   - v_soma (array): somatic voltage trace [mV]
    - thresh (float): spike threshold [mV]
-   - stim\_onset (float): time of stimulus onset [ms]
+   - stim_onset (float): time of stimulus onset [ms]
 
    Returns:
    - bool: True if there is exactly one action potential, False otherwise

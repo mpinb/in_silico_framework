@@ -14,9 +14,9 @@ get_first_order_bifurcation_sections
 
    Find all sections that are both inner sections, and are of branching order 1.
 
-   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
+   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The Cell object for which to find the main bifurcation section.
 
-   :returns: A list of :py:class:`~single\_cell\_parser.cell.PySection` sections that are both inner sections, and are of branching order 1.
+   :returns: A list of :py:class:`~single_cell_parser.cell.PySection` sections that are both inner sections, and are of branching order 1.
    :rtype: list
 
 

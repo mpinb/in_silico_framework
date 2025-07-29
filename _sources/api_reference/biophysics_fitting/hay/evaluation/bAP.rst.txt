@@ -118,6 +118,8 @@ bAP
               'bAP_att3': ('BPAPatt3', 36.0, 9.33),
               'bAP_spikecount': ('Spikecount', 1.0, 0.01)
           }
+          
+          Here, the format of each line is: ``acronym: [full name, mean, std]``
 
       :type: dict
 

@@ -28,7 +28,7 @@ PointCell
 
 .. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell(column=None, cellType=None)
    
-   Cell object without morphological attributes.
+   Cell object without morphological or biophysical attributes.
 
    When connecting synapses between postsynaptic and
    presynaptic cells, this class is used for the presynaptic cell.
@@ -65,5 +65,5 @@ PointCell
       :class: summarytable
       
       * - :py:obj:`_add_synapse_pointer <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer>`\ (synapse)
-        - Add a synapse to the cell.
+        - Add a :py:class:`Synapse` to the cell.
 

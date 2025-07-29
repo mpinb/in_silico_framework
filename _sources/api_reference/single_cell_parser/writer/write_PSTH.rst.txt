@@ -27,7 +27,7 @@ write_PSTH
 
    >>> PSTH = [1, 1, 2]
    >>> bins = [0.0, 0.1, 0.2, 0.3]
-   >>> write\_PSTH('PSTH.param', PSTH, bins)
+   >>> write_PSTH('PSTH.param', PSTH, bins)
    >>> PSTH.param
    # bin begin     bin end APs/trial/bin
    0.0     0.1     1

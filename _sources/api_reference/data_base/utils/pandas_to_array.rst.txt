@@ -15,9 +15,9 @@ pandas_to_array
    Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
 
    :Parameters: * **pdf** (*pd.DataFrame*) -- dataframe to be converted
-                * **x\_component\_fun** (*function*) -- function to extract the x component
-                * **y\_component\_fun** (*function*) -- function to extract the y component
-                * **value\_fun** (*function*) -- function to extract the value
+                * **x_component_fun** (*function*) -- function to extract the x component
+                * **y_component_fun** (*function*) -- function to extract the y component
+                * **value_fun** (*function*) -- function to extract the value
 
    :returns: 2D representation of the data
    :rtype: pd.DataFrame
@@ -27,17 +27,17 @@ pandas_to_array
 
    >>> df
            'bla'
-   x\_1\_y\_1    10
-   x\_2\_y\_1    15
-   x\_3\_y\_1     7
-   x\_1\_y\_2     2
-   x\_2\_y\_2     0
-   x\_3\_y\_2    -1
+   x_1_y_1    10
+   x_2_y_1    15
+   x_3_y_1     7
+   x_1_y_2     2
+   x_2_y_2     0
+   x_3_y_2    -1
 
-   >>> pandas\_to\_array(
+   >>> pandas_to_array(
    ...    pdf,
-   ...    lambda index, values: index.split('\_')[1],
-   ...    lambda index, values: index.split('\_')[-1],
+   ...    lambda index, values: index.split('_')[1],
+   ...    lambda index, values: index.split('_')[-1],
    ...    lambda index, values: values.bla)
        1    2    3
    1    10   15    7

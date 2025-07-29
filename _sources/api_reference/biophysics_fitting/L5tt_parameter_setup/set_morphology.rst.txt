@@ -14,13 +14,13 @@ set_morphology
 
    Add the morphology to a cell parameter object.
 
-   The morphology is simply a path to a :ref:`hoc\_file\_format` file in string format.
+   The morphology is simply a path to a :ref:`hoc_file_format` file in string format.
 
-   :Parameters: * **cell\_param** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
-                * **filename** (*str*) -- The path to the :ref:`hoc\_file\_format` file.
+   :Parameters: * **cell_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
+                * **filename** (*str*) -- The path to the :ref:`hoc_file_format` file.
 
    :returns: The updated cell parameter dictionary.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict
 
 
 .. 

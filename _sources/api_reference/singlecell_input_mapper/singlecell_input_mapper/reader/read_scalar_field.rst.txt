@@ -10,7 +10,7 @@ read_scalar_field
 =================
 
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field(fname=&#39;&#39;)
+.. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field(fname='')
 
    Read AMIRA scalar fields.
 
@@ -19,7 +19,7 @@ read_scalar_field
    :raises IOError: If the input file does not have a `.am` or `.AM` suffix.
 
    :returns: A scalar field object.
-   :rtype: :py:class:`~singlecell\_input\_mapper.singlecell\_input\_mapper.scalar\_field.ScalarField`
+   :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
 
 
 .. 

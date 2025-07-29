@@ -23,13 +23,13 @@ write_presynaptic_spike_times
    .. rubric:: Example
       :class: example
 
-   >>> cells = {'cell\_type\_1': [cell1, cell2], 'cell\_type\_2': [cell3]}
-   >>> write\_presynaptic\_spike\_times('presynaptic\_spikes.param', cells)
-   >>> presynaptic\_spikes.param
+   >>> cells = {'cell_type_1': [cell1, cell2], 'cell_type_2': [cell3]}
+   >>> write_presynaptic_spike_times('presynaptic_spikes.param', cells)
+   >>> presynaptic_spikes.param
    # presynaptic cell type cell ID spike times
-   cell\_type\_1     0       100.4,
-   cell\_type\_1     1
-   cell\_type\_2     0       30.6,205.1,500.0,
+   cell_type_1     0       100.4,
+   cell_type_1     1
+   cell_type_2     0       30.6,205.1,500.0,
 
 
 .. 

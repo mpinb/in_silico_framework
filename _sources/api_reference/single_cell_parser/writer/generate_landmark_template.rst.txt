@@ -14,7 +14,7 @@ generate_landmark_template
 
    Generate a template for a landmark file in Amira.
 
-   :Parameters: * **landmark\_name** (*str*) -- The name of the landmark file.
+   :Parameters: * **landmark_name** (*str*) -- The name of the landmark file.
                 * **c** (*tuple*) -- The color of the landmark.
                 * **vertexviewid** (*int*) -- The vertex view id.
                 * **len** (*int*) -- The length of the landmark.

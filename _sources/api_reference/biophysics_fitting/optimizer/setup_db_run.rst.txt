@@ -13,13 +13,13 @@ setup_db_run
 .. py:function:: biophysics_fitting.optimizer.setup_db_run(db_setup, run)
 
    Create a sub-database for each run of the optimization algorithm.
-   db\_setup contains a sub db for each run of the full optimization. This sub db is created here.
+   db_setup contains a sub db for each run of the full optimization. This sub db is created here.
 
-   :Parameters: * **db\_setup** (*data\_base.DataBase*) -- The database containing the setup of the optimization.
+   :Parameters: * **db_setup** (*data_base.DataBase*) -- The database containing the setup of the optimization.
                 * **run** (*int*) -- The index of the optimization run.
 
    :returns: The database for the optimization run containing sub-databases..
-   :rtype: data\_base.DataBase
+   :rtype: data_base.DataBase
 
 
 .. 

@@ -40,9 +40,9 @@ Classes
    * - :py:obj:`Cell <single_cell_parser.cell.Cell>`
      - Cell object providing API to the NEURON hoc interface.
    * - :py:obj:`PySection <single_cell_parser.cell.PySection>`
-     - Wrapper around :py:class:`nrn.Section` providing additional functionality for geometry and mechanisms.
+     - Wrapper around :py:class:`neuron:Section` providing additional functionality for geometry and mechanisms.
    * - :py:obj:`PointCell <single_cell_parser.cell.PointCell>`
-     - Cell without morphological or electrophysiological features.
+     - Cell without morphological or biophysical attributes.
 
 
 

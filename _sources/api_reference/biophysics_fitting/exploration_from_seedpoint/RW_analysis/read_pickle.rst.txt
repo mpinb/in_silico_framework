@@ -14,8 +14,8 @@ read_pickle
 
    Read the results of a single particle of a RW exploration.
 
-   :Parameters: * **seed\_folder** (*str*) -- the path of the directory corresponding to a seedpoint.
-                * **particle\_id** (*str*) -- the particle id
+   :Parameters: * **seed_folder** (*str*) -- the path of the directory corresponding to a seedpoint.
+                * **particle_id** (*str*) -- the particle id
 
    :returns: The results of the RW exploration of a single particle.
    :rtype: pd.DataFrame

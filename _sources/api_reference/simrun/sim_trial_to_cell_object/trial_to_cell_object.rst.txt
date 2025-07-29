@@ -20,25 +20,25 @@ trial_to_cell_object
    Synapse activation modify functions should take the synapse activation data as input and return the modified data.
 
 
-   :Parameters: * **cellName** (*str*) -- Name of the :ref:`cell\_parameters\_format` file.
-                * **networkName** (*str*) -- Name of the :ref:`network\_parameters\_format` file.
-                * **synapse\_activation\_file** (*str | pandas.DataFrame*) -- Path to the :ref:`syn\_activation\_format` file or
+   :Parameters: * **cellName** (*str*) -- Name of the :ref:`cell_parameters_format` file.
+                * **networkName** (*str*) -- Name of the :ref:`network_parameters_format` file.
+                * **synapse_activation_file** (*str | pandas.DataFrame*) -- Path to the :ref:`syn_activation_format` file or
                   a pandas DataFrame containing the synapse activation data.
-                * **range\_vars** (*str | list*) -- Range variables to record.
-                * **scale\_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrites.
+                * **range_vars** (*str | list*) -- Range variables to record.
+                * **scale_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrites.
                 * **allPoints** (*bool*) -- If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
-                * **compute** (*bool*) -- If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single\_cell\_parser.cell.Cell` object.
+                * **compute** (*bool*) -- If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
                 * **tStop** (*float*) -- Stop time of the simulation.
-                * **neuron\_param\_modify\_functions** (*list*) -- List of functions to modify the neuron parameters.
-                * **network\_param\_modify\_functions** (*list*) -- List of functions to modify the network parameters.
-                * **synapse\_activation\_modify\_functions** (*list*) -- List of functions to modify the synapse activation data.
+                * **neuron_param_modify_functions** (*list*) -- List of functions to modify the neuron parameters.
+                * **network_param_modify_functions** (*list*) -- List of functions to modify the network parameters.
+                * **synapse_activation_modify_functions** (*list*) -- List of functions to modify the synapse activation data.
 
    .. deprecated:: 0.1.0
-       The `scale\_apical` argument is deprecated and will be removed in a future version.
-       Use the `cell\_modify\_functions` key in the :ref:`cell\_parameters\_format` file instead.
+       The `scale_apical` argument is deprecated and will be removed in a future version.
+       Use the `cell_modify_functions` key in the :ref:`cell_parameters_format` file instead.
 
    :returns: The simulation-ready or simulated cell object.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
 .. 

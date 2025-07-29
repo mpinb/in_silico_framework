@@ -16,8 +16,8 @@ trace_check_max_prestim_dendrite_depo
 
    :Parameters: * **t** (*array*) -- Time array.
                 * **vmax** (*array*) -- The voltage maximum, taken over all dendrites, at each given timepoint.
-                * **stim\_onset** (*float*) -- Time of stimulus onset (ms).
-                * **max\_prestim\_dendrite\_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset (mV).
+                * **stim_onset** (*float*) -- Time of stimulus onset (ms).
+                * **max_prestim_dendrite_depo** (*float*) -- Maximum dendritic depolarization before stimulus onset (mV).
                   If some dendrite section exceeds this value, it is considered a spike.
 
    :returns: Whether or not a spike is detected before stimulus onset.

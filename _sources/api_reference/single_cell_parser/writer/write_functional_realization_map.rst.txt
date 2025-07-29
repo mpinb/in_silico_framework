@@ -12,15 +12,15 @@ write_functional_realization_map
 
 .. py:function:: single_cell_parser.writer.write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None)
 
-   Write out a :ref:`con\_file\_format` file.
+   Write out a :ref:`con_file_format` file.
 
    Writes list of all functional connections coded by tuples (cell type, presynaptic cell index, synapse index).
    Only valid for anatomical synapse realization given by anatomicalID
 
    See also:
 
-   - :ref:`con\_file\_format` for more information on the `.con` file format.
-   - :py:meth:`single\_cell\_parser.reader.read\_functional\_realization\_map` for the corresponding reader function.
+   - :ref:`con_file_format` for more information on the `.con` file format.
+   - :py:meth:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
 
    :Parameters: * **fname** (*str*) -- The name of the file to write to.
                 * **functionalMap** (*list*) -- A list of tuples, each containing a cell type, a presynaptic cell ID, and a synapse ID.
@@ -29,8 +29,8 @@ write_functional_realization_map
    .. rubric:: Example
       :class: example
 
-   >>> functionalMap = [('cell\_type\_1', 0, 0), ('cell\_type\_2', 0, 1)]
-   >>> write\_functional\_realization\_map('functional\_realization.con', functionalMap, 'syn\_file.syn')
+   >>> functionalMap = [('cell_type_1', 0, 0), ('cell_type_2', 0, 1)]
+   >>> write_functional_realization_map('functional_realization.con', functionalMap, 'syn_file.syn')
 
 
 .. 

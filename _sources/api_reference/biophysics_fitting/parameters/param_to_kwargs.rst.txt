@@ -12,7 +12,7 @@ param_to_kwargs
 
 .. py:function:: biophysics_fitting.parameters.param_to_kwargs(fun)
 
-   returns a function that can be called with params = [some\_Series].
+   returns a function that can be called with params = [some_Series].
    The content of Series is added to kwargs
 
 

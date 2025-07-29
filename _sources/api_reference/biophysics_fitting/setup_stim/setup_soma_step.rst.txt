@@ -14,7 +14,7 @@ setup_soma_step
 
    Setup up a step current at the soma, or a given :paramref:`dist` from the soma.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **amplitude** (*float*) -- The amplitude of the step current.
                 * **delay** (*float*) -- The delay of the step current.
                 * **duration** (*float*) -- The duration of the step current.

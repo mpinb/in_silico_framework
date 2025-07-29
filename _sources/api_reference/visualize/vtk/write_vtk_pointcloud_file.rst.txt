@@ -10,15 +10,15 @@ write_vtk_pointcloud_file
 =========================
 
 
-.. py:function:: visualize.vtk.write_vtk_pointcloud_file(out_name=None, out_dir=&#39;.&#39;, points=None, scalar_data=None, scalar_data_names=None)
+.. py:function:: visualize.vtk.write_vtk_pointcloud_file(out_name=None, out_dir='.', points=None, scalar_data=None, scalar_data_names=None)
 
    Write out 3D point data as a VTK point cloud.
 
-   :Parameters: * **out\_name** (*str*) -- Name of the output file.
-                * **out\_dir** (*str*) -- Directory to save the file to.
+   :Parameters: * **out_name** (*str*) -- Name of the output file.
+                * **out_dir** (*str*) -- Directory to save the file to.
                 * **points** (*list*) -- List of 3D points.
-                * **scalar\_data** (*list*) -- List of scalar data arrays. Each array should have the same length as the amount of points.
-                * **scalar\_data\_names** (*list*) -- List of names for the scalar data arrays.
+                * **scalar_data** (*list*) -- List of scalar data arrays. Each array should have the same length as the amount of points.
+                * **scalar_data_names** (*list*) -- List of names for the scalar data arrays.
 
    :returns: None. Writes out a .vtk file to the specified directory.
 

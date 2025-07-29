@@ -15,8 +15,8 @@ read_all
    Read the results of all directories contained within some base directory, independent of which seepdoint or particle.
 
    :Parameters: * **basedir** (*str*) -- the base directory containing the results of the RW exploration.
-                * **n\_particles\_start** (*int*) -- the first particle to read
-                * **n\_particles\_end** (*int*) -- the last particle to read
+                * **n_particles_start** (*int*) -- the first particle to read
+                * **n_particles_end** (*int*) -- the last particle to read
 
 
 .. 

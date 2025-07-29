@@ -10,20 +10,20 @@ get_st_from_spike_times_and_stim_times
 ======================================
 
 
-.. py:function:: spike_analysis.core.get_st_from_spike_times_and_stim_times(spike_times, stim_times, offset=0, mode=&#39;spike_times&#39;)
+.. py:function:: spike_analysis.core.get_st_from_spike_times_and_stim_times(spike_times, stim_times, offset=0, mode='spike_times')
 
    Computes spike times dataframe based on list of spike times and stimulus times.
 
-   :Parameters: * **spike\_times** (*list*) -- List of spike times.
-                * **stim\_times** (*list*) -- List of stimulus times.
+   :Parameters: * **spike_times** (*list*) -- List of spike times.
+                * **stim_times** (*list*) -- List of stimulus times.
                 * **offset** (*float, optional*) -- Offset value. Defaults to 0.
-                * **mode** (*str, optional*) -- Mode of computation. Can be 'spike\_times' or 'ISIs'. Defaults to 'spike\_times'.
+                * **mode** (*str, optional*) -- Mode of computation. Can be 'spike_times' or 'ISIs'. Defaults to 'spike_times'.
 
    :returns: Pandas dataframe. Its format is as follows: One row is one trial. The columns contain the spike times
              and are named in ascending order (0,1,2, ...).
    :rtype: pd.DataFrame
 
-   :raises ValueError: If mode is not 'spike\_times' or 'ISIs'.
+   :raises ValueError: If mode is not 'spike_times' or 'ISIs'.
    :raises ValueError: If offset is not negative.
 
 

@@ -17,7 +17,7 @@ robust_read_pickle
 
    :Parameters: **path** (*str*) -- path to the pickled dataframe
 
-   :returns: the pickled DataFrame if reading was succesful, a pd.Series otherwise. Both contain the key 'init\_error', specifying whether or not the read was succesful.
+   :returns: the pickled DataFrame if reading was succesful, a pd.Series otherwise. Both contain the key 'init_error', specifying whether or not the read was succesful.
    :rtype: pd.DataFrame | pd.Series
 
 

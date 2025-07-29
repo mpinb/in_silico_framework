@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -840,7 +840,7 @@ columns relative to the C2 is requested.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;B2&#39;</span>  <span class="c1"># I want activity from B2 column</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">deflectedWhisker</span> <span class="o">=</span> <span class="s1">&#39;C1&#39;</span>  <span class="c1"># I want activity reflecting deflection of C1 whisker (not C2)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cellType</span> <span class="o">=</span> <span class="s1">&#39;L6ct&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">whisker</span>\<span class="n">_evoked</span>\<span class="n">_PSTH</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">deflectedWhisker</span><span class="o">=</span><span class="n">deflectedWhisker</span><span class="p">,</span> <span class="n">cellType</span><span class="o">=</span><span class="n">cellType</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">whisker_evoked_PSTH</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">deflectedWhisker</span><span class="o">=</span><span class="n">deflectedWhisker</span><span class="p">,</span> <span class="n">cellType</span><span class="o">=</span><span class="n">cellType</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># This is activity data from the C3 column for C2 whisker deflection i.e. equivalent activity</span>
 <span class="go">{</span>
 <span class="go">    &#39;distribution&#39;: &#39;PSTH&#39;,</span>

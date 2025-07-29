@@ -14,11 +14,11 @@ _check_needs_reoptimization
 
    Check if a key needs re-optimization.
 
-   Dumper formats that need to be re-optimized are saved in :py:mod:`~data\_base.db\_initializers.load\_simrun\_general.config`.
+   Dumper formats that need to be re-optimized are saved in :py:mod:`~data_base.db_initializers.load_simrun_general.config`.
 
    :Parameters: * **key** (*str*) -- The key to check.
-                * **old\_dumper\_name** (*str*) -- The name of the old dumper.
-                * **new\_dumper\_name** (*str*) -- The name of the new dumper.
+                * **old_dumper_name** (*str*) -- The name of the old dumper.
+                * **new_dumper_name** (*str*) -- The name of the new dumper.
 
    :returns: True if the key needs re-optimization, False otherwise.
    :rtype: bool

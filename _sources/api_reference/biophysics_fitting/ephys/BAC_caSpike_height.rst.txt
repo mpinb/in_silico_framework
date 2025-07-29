@@ -16,8 +16,8 @@ BAC_caSpike_height
 
    :Parameters: * **t** (*array-like*) -- Time array.
                 * **v** (*array-like*) -- Voltage array.
-                * **v\_dend** (*array-like*) -- Dendritic voltage array.
-                * **ca\_thresh** (*float, optional*) -- Calcium threshold. Defaults to -55.
+                * **v_dend** (*array-like*) -- Dendritic voltage array.
+                * **ca_thresh** (*float, optional*) -- Calcium threshold. Defaults to -55.
                 * **tstim** (*float, optional*) -- Time of stimulation. Defaults to 295.
 
    :returns: Height of the calcium spike.

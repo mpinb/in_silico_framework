@@ -18,7 +18,7 @@ compute_vm_std_windows
                 * **tStim** (*float*) -- Time of stimulation
                 * **dt** (*float*) -- Time step.
                 * **width** (*float*) -- Width of each time window. Default is :math:`35.0 ms`.
-                * **window\_start\_times** (*list*) -- List of start times for the time windows. Default is ``[-50.0, 15.0]``.
+                * **window_start_times** (*list*) -- List of start times for the time windows. Default is ``[-50.0, 15.0]``.
 
    :returns: A tuple containing the time windows and the average standard deviations.
    :rtype: tuple

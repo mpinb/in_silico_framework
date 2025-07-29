@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1366,23 +1366,23 @@ As not all trials necessarilly share the same network embedding or neuron model,
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">simresult</span>\<span class="n">_path</span> <span class="o">=</span> <span class="s1">&#39;results/date\_seed\_pid&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">simresult</span>\<span class="n">_path</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">simresult_path</span> <span class="o">=</span> <span class="s1">&#39;results/date_seed_pid&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">simresult_path</span><span class="p">)</span>
 <span class="go">[</span>
-<span class="go">    &#39;simulation\_run000000\_synapses.csv&#39;, &#39;simulation\_run000000\_presynaptic\_cells.csv&#39;</span>
-<span class="go">    &#39;simulation\_run000001\_synapses.csv&#39;, &#39;simulation\_run000001\_presynaptic\_cells.csv&#39;</span>
+<span class="go">    &#39;simulation_run000000_synapses.csv&#39;, &#39;simulation_run000000_presynaptic_cells.csv&#39;</span>
+<span class="go">    &#39;simulation_run000001_synapses.csv&#39;, &#39;simulation_run000001_presynaptic_cells.csv&#39;</span>
 <span class="go">    ...</span>
-<span class="go">    pid\_neuron\_model.param, pid\_network\_model.param</span>
+<span class="go">    pid_neuron_model.param, pid_network_model.param</span>
 <span class="go">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">delayeds</span> <span class="o">=</span> <span class="n">generate</span>\<span class="n">_param</span>\<span class="n">_file</span>\<span class="n">_hashes</span><span class="p">(</span><span class="n">simresult</span>\<span class="n">_path</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;path/pid/000000&#39;</span><span class="p">,</span> <span class="s1">&#39;path/pid/000001&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delayeds</span> <span class="o">=</span> <span class="n">generate_param_file_hashes</span><span class="p">(</span><span class="n">simresult_path</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;path/pid/000000&#39;</span><span class="p">,</span> <span class="s1">&#39;path/pid/000001&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">futures</span> <span class="o">=</span> <span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">delayeds</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">futures</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parameterfiles</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">parameterfiles</span>
-<span class="go">                        path\_neuron             path\_network hash\_neuron    hash\_network</span>
-<span class="go">sim\_trial\_index</span>
-<span class="go">0 path/pid/000000       pid\_neuron\_model.param pid\_network\_model.param     0b1</span>
-<span class="go">1 path/pid/000001       pid\_neuron\_model.param pid\_network\_model.param     0b2</span>
+<span class="go">                        path_neuron             path_network hash_neuron    hash_network</span>
+<span class="go">sim_trial_index</span>
+<span class="go">0 path/pid/000000       pid_neuron_model.param pid_network_model.param     0b1</span>
+<span class="go">1 path/pid/000001       pid_neuron_model.param pid_network_model.param     0b2</span>
 <span class="go">...</span>
 </code></pre></div>
 </div>

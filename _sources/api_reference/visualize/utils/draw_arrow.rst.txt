@@ -18,10 +18,10 @@ draw_arrow
 
    :Parameters: * **morphology** (*pd.DataFrame*) -- The morphology dataframe containing the coordinates of the sections.
                 * **ax** (*matplotlib.axes.Axes*) -- The matplotlib axes object to draw the arrow on.
-                * **highlight\_section** (*int, optional*) -- The section index to highlight. If None, no section is highlighted. Default is ``None``.
-                * **highlight\_x** (*float, optional*) -- The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
-                * **highlight\_arrow\_kwargs** (*dict, optional*) -- Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
-                * **arrow\_size** (*int, optional*) -- The size of the arrow. Default is 50.
+                * **highlight_section** (*int, optional*) -- The section index to highlight. If None, no section is highlighted. Default is ``None``.
+                * **highlight_x** (*float, optional*) -- The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
+                * **highlight_arrow_kwargs** (*dict, optional*) -- Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+                * **arrow_size** (*int, optional*) -- The size of the arrow. Default is 50.
 
    :returns: None
 

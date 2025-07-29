@@ -14,14 +14,14 @@ synaptic_input
 
    Add synaptic activations to the cell from a network.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
-                * **network\_param** (str | dict | :py:class:`~single\_cell\_parser.parameters.NTParameterSet`) -- The :ref:`network\_parameters\_format`.
-                * **synapse\_activation\_file** (*str, optional*) -- The :ref:`syn\_activation\_format` file with existing synapse activations.
-                  If None, synapse activations are generated from scratch using :py:meth:`~single\_cell\_parser.network.NetworkMapper.create\_saved\_network2`.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+                * **network_param** (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
+                * **synapse_activation_file** (*str, optional*) -- The :ref:`syn_activation_format` file with existing synapse activations.
+                  If None, synapse activations are generated from scratch using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
                 * **tStop** (*float*) -- The simulation stop time.
 
    :returns: The cell with the synaptic input set up as the ``evokedNW`` attribute.
-   :rtype: :py:class:`~single\_cell\_parser.cell.Cell`
+   :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
 .. 

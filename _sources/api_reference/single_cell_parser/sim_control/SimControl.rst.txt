@@ -44,7 +44,7 @@ SimControl
    >>> sim.go()
    >>> sim.show()
 
-   :Parameters: * **cell** (:py:class:`neuron.h.Section`) -- The cell to simulate.
+   :Parameters: * **cell** (:py:class:`neuron:Section`) -- The cell to simulate.
                 * **simTime** (*float*) -- Simulation time (ms). Default: 5
                 * **dt** (*float*) -- Time step (ms). Default: 0.001
                 * **T** (*float*) -- Temperature (Celsius). Default: 37
@@ -55,7 +55,7 @@ SimControl
 
       The cell to simulate.
 
-      :type: :py:class:`neuron.h.Section`
+      :type: :py:class:`neuron:Section`
 
    .. attribute:: simTime
 

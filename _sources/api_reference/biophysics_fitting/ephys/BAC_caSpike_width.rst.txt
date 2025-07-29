@@ -16,7 +16,7 @@ BAC_caSpike_width
 
    :Parameters: * **t** (*array-like*) -- The time values of the action potential.
                 * **v** (*array-like*) -- The voltage values of the action potential.
-                * **v\_dend** (*array-like*) -- The voltage values of the dendrite.
+                * **v_dend** (*array-like*) -- The voltage values of the dendrite.
                 * **thresh** (*float, optional*) -- The threshold voltage for the action potential.
 
    :returns: The width of the calcium spike action potential.

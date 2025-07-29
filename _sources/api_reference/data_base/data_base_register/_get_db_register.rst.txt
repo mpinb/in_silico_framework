@@ -15,7 +15,7 @@ _get_db_register
    Get the database register.
 
    :returns: The database register.
-   :rtype: :py:class:`~data\_base.data\_base\_register.DataBaseRegister`
+   :rtype: :py:class:`~data_base.data_base_register.DataBaseRegister`
 
 
 .. 

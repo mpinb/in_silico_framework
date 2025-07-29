@@ -19,12 +19,12 @@ get_main_bifurcation_section
 
        - with at least two children
        - whose parent is the soma.
-       - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get\_inner\_sec\_dist\_dict` for more information.
+       - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
 
-   :Parameters: **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
 
    :returns: The main bifurcation section.
-   :rtype: :py:class:`~single\_cell\_parser.section.Section`
+   :rtype: :py:class:`~single_cell_parser.section.Section`
 
 
 .. 

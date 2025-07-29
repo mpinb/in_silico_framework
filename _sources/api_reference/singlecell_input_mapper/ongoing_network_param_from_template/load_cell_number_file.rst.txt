@@ -16,22 +16,22 @@ load_cell_number_file
 
    The cell number file must have the following format::
 
-       Anatomical\_area Presynaptic\_cell\_type   n\_cells
-       A1      cell\_type\_1     8
-       A1      cell\_type\_2     14
+       Anatomical_area Presynaptic_cell_type   n_cells
+       A1      cell_type_1     8
+       A1      cell_type_2     14
        ...
 
    :Parameters: **cellNumberFileName** (*str*) -- Path to the cell number file.
 
-   :returns: Dictionary of the form {celltype: {column: nr\_of\_cells}}
+   :returns: Dictionary of the form {celltype: {column: nr_of_cells}}
    :rtype: dict
 
    .. rubric:: Example
       :class: example
 
-   >>> load\_cell\_number\_file(
-   ...    'getting\_started/example\_data/anatomical\_constraints/'
-   ...    'example\_embedding\_86\_C2\_center/'
+   >>> load_cell_number_file(
+   ...    'getting_started/example_data/anatomical_constraints/'
+   ...    'example_embedding_86_C2_center/'
    ...    'NumberOfConnectedCells.csv'
    ...    )
    {

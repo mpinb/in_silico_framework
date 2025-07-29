@@ -28,7 +28,7 @@ merge_results_together
        ...     {'a': np.array([1, 2]), 'b': np.array([3, 4])},
        ...     {'a': np.array([5, 6]), 'c': np.array([7, 8])}
        ...     ]
-       >>> merge\_results\_together(dicts)
+       >>> merge_results_together(dicts)
        {'a': array([[1, 2], [5, 6]]), 'b': array([[3, 4], [0, 0]), 'c': array([[0, 0], [7, 8]])}
 
 

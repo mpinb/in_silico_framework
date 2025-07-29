@@ -15,7 +15,7 @@ hay_param_to_scp_neuron_param
    Convert a Hay parameter name to a SCP neuron parameter name.
 
    This function is a simple converter that converts the Hay naming convention to what ISF
-   uses internally in :py:mod:`~single\_cell\_parser.cell.Cell`
+   uses internally in :py:mod:`~single_cell_parser.cell.Cell`
 
    :Parameters: **p** (*str*) -- The Hay parameter name.
 
@@ -25,11 +25,11 @@ hay_param_to_scp_neuron_param
    .. rubric:: Example
       :class: example
 
-   >>> hay\_param\_name = "NaTa\_t.axon.gNaTa\_tbar"
-   >>> hay\_param\_to\_scp\_neuron\_param(hay\_param\_name)
-   "NaTa\_t.AIS.gNaTa\_tbar"  # axon --> AIS
+   >>> hay_param_name = "NaTa_t.axon.gNaTa_tbar"
+   >>> hay_param_to_scp_neuron_param(hay_param_name)
+   "NaTa_t.AIS.gNaTa_tbar"  # axon --> AIS
 
-   .. seealso:: See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011` for more information.
+   .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 
 
 .. 

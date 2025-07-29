@@ -23,7 +23,7 @@ linear_fit_pdf
 
    Is used to calculate per-celltype conductance values that match empirical data.
 
-   :Parameters: **pdf** (*pd.DataFrame*) -- A table of summary statistics, as returned by :py:meth:`~simrun.synaptic\_strength\_fitting.ePSP\_summary\_statistics`,
+   :Parameters: **pdf** (*pd.DataFrame*) -- A table of summary statistics, as returned by :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`,
                 but without an index.
 
    :returns: A table of linear fits.

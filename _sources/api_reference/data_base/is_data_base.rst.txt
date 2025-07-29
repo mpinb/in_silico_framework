@@ -12,11 +12,11 @@ is_data_base
 
 .. py:function:: data_base.is_data_base(path)
 
-   Checks if a given path contains a :py:class:`~data\_base.DataBase`.
+   Checks if a given path contains a :py:class:`~data_base.DataBase`.
 
    :Parameters: **path** (*str*) -- The path to check.
 
-   :returns: True if the path contains a :py:class:`~data\_base.DataBase`.
+   :returns: True if the path contains a :py:class:`~data_base.DataBase`.
    :rtype: bool
 
 

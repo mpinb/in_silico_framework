@@ -17,7 +17,7 @@ _in_parallel_context
    .. note:: Some ideas how to speed up figure drawing are taken from: http://bastibe.de/2013-05-30-speeding-up-matplotlib.html
 
    :Parameters: * **paths** (*list*) -- list of paths where to save images
-                * **lines\_objects** (*list*) -- list of dictionaries of lines
+                * **lines_objects** (*list*) -- list of dictionaries of lines
                 * **xlim** (*tuple*) -- x axis limits
                 * **ylim** (*tuple*) -- y axis limits
 

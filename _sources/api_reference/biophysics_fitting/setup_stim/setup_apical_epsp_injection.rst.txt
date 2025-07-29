@@ -16,9 +16,9 @@ setup_apical_epsp_injection
 
    This method assumes the :paramref:`cell` has a soma and an apical dendrite.
    It checks so by means of section label: it must contain a section
-   labeled "ApicalDendrite". See :py:meth:`~biophysics\_fitting.utils.get\_inner\_section\_at\_distance` for more information.
+   labeled "ApicalDendrite". See :py:meth:`~biophysics_fitting.utils.get_inner_section_at_distance` for more information.
 
-   :Parameters: * **cell** (:py:class:`~single\_cell\_parser.cell.Cell`) -- The cell object.
+   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
                 * **dist** (*float*) -- The distance from the soma to the injection site (um).
                 * **amplitude** (*float*) -- The amplitude of the EPSP (nA).
                 * **delay** (*float*) -- The delay of the EPSP (ms).

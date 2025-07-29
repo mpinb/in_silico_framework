@@ -15,9 +15,9 @@ get_bin
    Find the bin index of a given value.
 
    :Parameters: * **value** (*float*) -- The value to find the bin for.
-                * **bin\_min** (*float*) -- Start of the first bin.
-                * **bin\_max** (*float*) -- End of the last bin.
-                * **n\_bins** (*int*) -- The number of bins.
+                * **bin_min** (*float*) -- Start of the first bin.
+                * **bin_max** (*float*) -- End of the last bin.
+                * **n_bins** (*int*) -- The number of bins.
                 * **tolerance** (*float, optional*) -- The tolerance for the outer ibn edges (for rounding errors). Defaults to 0.1.
 
    :returns: The bin the value belongs to.

@@ -16,11 +16,11 @@ load_NMODL_parameters
 
    Parameters are added to the NEURON namespace by executing string Hoc commands.
 
-   See also: https://www.neuron.yale.edu/neuron/static/new\_doc/programming/neuronpython.html#important-names-and-sub-packages
+   See also: https://www.neuron.yale.edu/neuron/static/new_doc/programming/neuronpython.html#important-names-and-sub-packages
 
-   :Parameters: **parameters** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The neuron parameters to load.
-                Must contain the key `NMODL\_mechanisms`.
-                May contain the key `mech\_globals`.
+   :Parameters: **parameters** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The neuron parameters to load.
+                Must contain the key `NMODL_mechanisms`.
+                May contain the key `mech_globals`.
 
    :returns: None. Adds parameters to the NEURON namespace.
 

@@ -12,11 +12,11 @@ write_anatomical_realization_map
 
 .. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map(fname=None, functionalMap=None, anatomicalID=None)
 
-   Writes a :ref:`con\_file\_format` file containing a list of all functional connections.
+   Writes a :ref:`con_file_format` file containing a list of all functional connections.
 
    Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
    Only valid for an anatomical synapse realization with ID :paramref:`anatomicalID`.
-   Uses :py:meth:`~singlecell\_input\_mapper.singlecell\_input\_mapper.generate\_nr\_of\_cells\_spreadsheet.con\_file\_to\_NumberOfConnectedCells\_sheet`
+   Uses :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet`
    to generate the number of connected cells spreadsheet.
 
    :Parameters: * **fname** (*str*) -- Name of the output file
@@ -25,8 +25,8 @@ write_anatomical_realization_map
 
    .. warning::
 
-      A :ref:`con\_file\_format` file is only valid with a corresponding :ref:`syn\_file\_format` file.
-      See :py:meth:`~write\_cell\_synapse\_locations`
+      A :ref:`con_file_format` file is only valid with a corresponding :ref:`syn_file_format` file.
+      See :py:meth:`~write_cell_synapse_locations`
 
    :returns: None. Writes results to disk.
 

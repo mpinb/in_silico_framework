@@ -35,7 +35,7 @@
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=68b46a2d" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
@@ -1158,14 +1158,14 @@
 </dd>
 </dl>
 <p class="example rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">inact</span>\<span class="n">_celltypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;L6cc\_C2&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span>\<span class="n">_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact</span>\<span class="n">_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">celltype</span><span class="o">.</span><span class="n">pointcell</span><span class="o">.</span><span class="n">probabilities</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">inact_celltypes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;L6cc_C2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">celltype</span><span class="o">.</span><span class="n">pointcell</span><span class="o">.</span><span class="n">probabilities</span>
 <span class="go">[0.1, 0.1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span>\<span class="n">_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact</span>\<span class="n">_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">celltype</span><span class="o">.</span><span class="n">pointcell</span><span class="o">.</span><span class="n">intervals</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">celltype</span><span class="o">.</span><span class="n">pointcell</span><span class="o">.</span><span class="n">intervals</span>
 <span class="go">[(0, 1000)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">inactivate</span>\<span class="n">_evoked</span>\<span class="n">_and</span>\<span class="n">_ongoing</span>\<span class="n">_activity</span>\<span class="n">_by</span>\<span class="n">_celltype</span>\<span class="n">_and</span>\<span class="n">_column</span><span class="p">(</span><span class="n">network</span>\<span class="n">_parameters</span><span class="p">,</span> <span class="n">inact</span>\<span class="n">_celltypes</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;C2&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span>\<span class="n">_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact</span>\<span class="n">_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="go">KeyError: &#39;L6cc\_C2&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inactivate_evoked_and_ongoing_activity_by_celltype_and_column</span><span class="p">(</span><span class="n">network_parameters</span><span class="p">,</span> <span class="n">inact_celltypes</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;C2&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network_parameters</span><span class="o">.</span><span class="n">network</span><span class="p">[</span><span class="n">inact_celltypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="go">KeyError: &#39;L6cc_C2&#39;</span>
 </code></pre></div>
 </div>
 </dd></dl>

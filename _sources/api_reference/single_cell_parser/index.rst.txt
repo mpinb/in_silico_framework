@@ -86,7 +86,7 @@ Functions
    * - :py:obj:`init_neuron_run <single_cell_parser.init_neuron_run>`\ (simparam, vardt, \*events)
      - Default NEURON run with inital parameters according to parameter file.
    * - :py:obj:`sec_distance_to_soma <single_cell_parser.sec_distance_to_soma>`\ (currentSec)
-     - Compute the path length from :``sec(x=0)`` to soma
+     - Compute the path length from ``sec(x=0)`` to :paramref:`currentSec`.
    * - :py:obj:`spines_update_synapse_distribution_file <single_cell_parser.spines_update_synapse_distribution_file>`\ (cell, synapse\_distribution\_file, new\_synapse\_distribution\_file)
      - Update the :ref:`syn_file_format` file to correctly point to spine heads as excitatory synapse locations.
    * - :py:obj:`spines_update_network_paramfile <single_cell_parser.spines_update_network_paramfile>`\ (new\_synapse\_distribution\_file, network\_paramfile, new\_network\_paramfile)

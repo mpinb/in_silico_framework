@@ -12,10 +12,10 @@ set_fixed_params
 
 .. py:function:: biophysics_fitting.parameters.set_fixed_params(params, fixed_params=None)
 
-   Add fixed\_params to params.
+   Add fixed_params to params.
 
    :Parameters: * **params** (*pd.Series*) -- The parameters.
-                * **fixed\_params** (*dict*) -- The fixed parameters.
+                * **fixed_params** (*dict*) -- The fixed parameters.
 
    :returns: The parameters with the fixed parameters added.
    :rtype: pd.Series

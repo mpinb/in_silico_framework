@@ -14,12 +14,12 @@ compute_AP_array
 
    One-hot encode spike times to a binned time vector.
 
-   Given a collection of spike times of a single trial, this method returns an array of length ``(max\_time - min\_time)//step``,
+   Given a collection of spike times of a single trial, this method returns an array of length ``(max_time - min_time)//step``,
    where a boolean represents if a spike is found in this interval.
 
    :Parameters: * **st** (*array*) -- Array of spike times
-                * **min\_time** (*float/int*) -- Min time in ms
-                * **max\_time** (*float/int*) -- Max time in ms
+                * **min_time** (*float/int*) -- Min time in ms
+                * **max_time** (*float/int*) -- Max time in ms
                 * **step** (*int, optional*) -- Size of timesteps to consider. Defaults to 1 ms
 
    :returns: Array where each element is a boolean representing if an AP was present during this timestep.

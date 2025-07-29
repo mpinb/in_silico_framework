@@ -16,10 +16,10 @@ BPAPatt_check_relative_height
    and returns True if the ratio is greater than 1, False otherwise.
 
    :Parameters: * **t** (*numpy.ndarray*) -- Array of time points.
-                * **v\_soma** (*numpy.ndarray*) -- Array of voltage values at the soma.
-                * **v\_dend** (*numpy.ndarray*) -- Array of voltage values at the dendrite.
-                * **bAP\_thresh** (*float, optional*) -- Threshold for detecting bAPs. Defaults to None.
-                * **stim\_onset** (*float, optional*) -- Time point of the stimulus onset. Defaults to None.
+                * **v_soma** (*numpy.ndarray*) -- Array of voltage values at the soma.
+                * **v_dend** (*numpy.ndarray*) -- Array of voltage values at the dendrite.
+                * **bAP_thresh** (*float, optional*) -- Threshold for detecting bAPs. Defaults to None.
+                * **stim_onset** (*float, optional*) -- Time point of the stimulus onset. Defaults to None.
 
    :returns: True if the ratio of bAP amplitude at soma and dendrite is greater than 1, False otherwise.
    :rtype: bool

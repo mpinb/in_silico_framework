@@ -16,7 +16,7 @@ get_objective_function
 
    This objective function takes parameters values, runs a simulation, and evaluates the simulation.
 
-   :Parameters: **db\_setup** (*data\_base.DataBase*) -- The database containing the setup of the optimization.
+   :Parameters: **db_setup** (*data_base.DataBase*) -- The database containing the setup of the optimization.
 
    :returns: The objective function for the optimization.
    :rtype: function

@@ -14,16 +14,16 @@ set_stim_onset
 
    Changes the offset when pointcells get activated
 
-   :Parameters: * **n** (:py:class:`~single\_cell\_parser.parameters.NTParameterSet` | dict) -- The :ref:`network\_parameters\_format`.
+   :Parameters: * **n** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The :ref:`network_parameters_format`.
                 * **onset** (*float*) -- The onset time in milliseconds.
 
    .. rubric:: Example
       :class: example
 
-   >>> celltype = 'L6cc\_C2'  # layer 6 cortico-cortical cells in column C2
+   >>> celltype = 'L6cc_C2'  # layer 6 cortico-cortical cells in column C2
    >>> n.network[celltype].celltype.pointcell.offset
    0
-   >>> set\_stim\_onset(n, 100)
+   >>> set_stim_onset(n, 100)
    >>> n.network[celltype].celltype.pointcell.offset
    100
 

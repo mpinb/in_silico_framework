@@ -14,9 +14,9 @@ get_bins
 
    Construct bin edges from a sice and range.
 
-   :Parameters: * **bin\_size** (*float*) -- the size of the bins
-                * **min\_** (*float*) -- the minimum value
-                * **max\_** (*float*) -- the maximum value
+   :Parameters: * **bin_size** (*float*) -- the size of the bins
+                * **min_** (*float*) -- the minimum value
+                * **max_** (*float*) -- the maximum value
 
    :returns: the bin edges
    :rtype: np.array

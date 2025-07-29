@@ -18,8 +18,8 @@ load
    Uses this ``Loader`` to load the data
 
    :Parameters: * **savedir** (*str*) -- Path to the data
-                * **load\_data** (*bool*) -- Whether to load the data (default), or just the ``Loader`` object. Useful for debugging purposes.
-                * **loader\_kwargs** (*dict*) -- Additional keyword arguments for the loader. Note that the ``Loader.json`` file should in principle contain all necessary information.
+                * **load_data** (*bool*) -- Whether to load the data (default), or just the ``Loader`` object. Useful for debugging purposes.
+                * **loader_kwargs** (*dict*) -- Additional keyword arguments for the loader. Note that the ``Loader.json`` file should in principle contain all necessary information.
 
    :returns: The loaded object: either the data, or the ``Loader`` object.
    :rtype: object

@@ -15,7 +15,7 @@ load_helper
    Load a single partition of a dask dataframe from a parquet file
 
    :Parameters: * **savedir** (*str*) -- Directory where the parquet files are stored
-                * **n\_partitions** (*int*) -- Number of partitions
+                * **n_partitions** (*int*) -- Number of partitions
                 * **partition** (*int*) -- Partition number
                 * **meta** (*pandas.DataFrame*) -- Meta information for the dask dataframe
                 * **columns** (*list*) -- Columns to load

@@ -15,12 +15,12 @@ dump
    Save a dask dataframe to one or more parquet files.
 
    One parquet file per partition is created.
-   Each partition is written to a file named 'pandas\_to\_parquet.<n\_partitions>.<partition>.parquet'.
+   Each partition is written to a file named 'pandas_to_parquet.<n_partitions>.<partition>.parquet'.
    The writing of these files is parallelized using the dask client if one is provided.
 
    In addition to the dask dataframe itself, meta information is saved in the form of a JSON file.
 
-   .. seealso:: :py:func:`~data\_base.isf\_data\_base.IO.LoaderDumper.utils.save\_object\_meta` for saving meta information
+   .. seealso:: :py:func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
 
    :Parameters: * **obj** (*dask.dataframe*) -- Dask dataframe to save
                 * **savedir** (*str*) -- Directory where the parquet files will be stored
@@ -30,7 +30,7 @@ dump
 
    :returns: None
 
-   .. seealso:: Each individual partitoin is saved using :py:meth:`~data\_base.isf\_data\_base.IO.LoaderDumper.dask\_to\_parquet.save\_helper`.
+   .. seealso:: Each individual partitoin is saved using :py:meth:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.save_helper`.
 
 
 .. 

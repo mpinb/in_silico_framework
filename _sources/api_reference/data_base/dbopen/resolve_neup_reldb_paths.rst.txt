@@ -12,13 +12,13 @@ resolve_neup_reldb_paths
 
 .. py:function:: data_base.dbopen.resolve_neup_reldb_paths(neup, db_basedir)
 
-   Convert all relative database paths in a :ref:`cell\_parameters\_format` file to absolute paths.
+   Convert all relative database paths in a :ref:`cell_parameters_format` file to absolute paths.
 
    :Parameters: * **neup** (*dict*) -- Dictionary containing the neuron model parameters.
-                * **db\_basedir** (*str*) -- Path to the database directory.
+                * **db_basedir** (*str*) -- Path to the database directory.
 
    :returns: The modified neuron parameter set, with absolute paths.
-   :rtype: :py:class:`~single\_cell\_parser.parameters.NTParameterSet`
+   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 .. 

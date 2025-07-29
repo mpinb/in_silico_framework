@@ -12,11 +12,11 @@ is_db
 
 .. py:function:: data_base.utils.is_db(dir_to_data)
 
-   Check if a path is a :py:class:`~data\_base.DataBase`.
+   Check if a path is a :py:class:`~data_base.DataBase`.
 
-   :Parameters: **dir\_to\_data** (*pathlib.Path*) -- The path to the directory
+   :Parameters: **dir_to_data** (*pathlib.Path*) -- The path to the directory
 
-   :returns: ``True`` if :paramref:`dir\_to\_data` is a (sub)db, ``False`` otherwise.
+   :returns: ``True`` if :paramref:`dir_to_data` is a (sub)db, ``False`` otherwise.
    :rtype: bool
 
 

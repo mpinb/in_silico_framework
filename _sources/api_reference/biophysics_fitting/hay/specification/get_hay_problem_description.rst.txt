@@ -12,19 +12,19 @@ get_hay_problem_description
 
 .. py:function:: biophysics_fitting.hay.specification.get_hay_problem_description()
 
-   Get the problem description used in :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+   Get the problem description used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 
    This method returns a dataframe that contains the objective names,
    the average value per objective, and the std per objective.
-   Each objective is associated with a specific input stimulus, given in the 'stim\_name' column.
+   Each objective is associated with a specific input stimulus, given in the 'stim_name' column.
    This distribution of parametrized responses can be used to quantify a cell's response to a specific stimulus.
 
    The resulting pd.DataFrame contains the following columns:
 
    - objective: The name of the objective as an acronym, prefixed with the stimulus.
    - feature: The full name of the objective.
-   - stim\_name: The name of the stimulus.
-   - stim\_type: The type of the stimulus (bAP, BAC or SquarePulse).
+   - stim_name: The name of the stimulus.
+   - stim_type: The type of the stimulus (bAP, BAC or SquarePulse).
    - mean: The empirically observed mean value of the feature.
    - std: The empirically observed standard deviation of the feature.
 
@@ -50,9 +50,9 @@ get_hay_problem_description
          - After-hyperpolarization depth
        * - ISI
          - Interspike interval
-       * - caSpike\_height
+       * - caSpike_height
          - height of the Ca2+-spike
-       * - caSpike\_width
+       * - caSpike_width
          - Width of the Ca2+-spike
        * - mf[123]
          - Spike frequency
@@ -81,7 +81,7 @@ get_hay_problem_description
    .. note::
 
       The objectives are specific to the L5PT and the Hay stimulus protocol.
-      See :cite:t:`Hay\_Hill\_Schuermann\_Markram\_Segev\_2011`.
+      See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 
 
 .. 

@@ -10,14 +10,14 @@ select_cells_that_spike_in_interval
 ===================================
 
 
-.. py:function:: simrun.utils.select_cells_that_spike_in_interval(sa, tmin, tmax, set_index=[&#39;synapse_ID&#39;, &#39;synapse_type&#39;])
+.. py:function:: simrun.utils.select_cells_that_spike_in_interval(sa, tmin, tmax, set_index=['synapse_ID', 'synapse_type'])
 
    Select cells whose synapses were active in a given time interval.
 
-   :Parameters: * **sa** (*pd.DataFrame*) -- The :ref:`syn\_activation\_format` DataFrame.
+   :Parameters: * **sa** (*pd.DataFrame*) -- The :ref:`syn_activation_format` DataFrame.
                 * **tmin** (*float*) -- The start time of the interval.
                 * **tmax** (*float*) -- The end time of the interval.
-                * **set\_index** (*list*) -- The index of the DataFrame. Default is ``['synapse\_ID', 'synapse\_type']``.
+                * **set_index** (*list*) -- The index of the DataFrame. Default is ``['synapse_ID', 'synapse_type']``.
 
    :returns: A list of tuples containing the synapse ID and the synapse type of the cells that spike in the interval.
    :rtype: list

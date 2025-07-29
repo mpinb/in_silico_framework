@@ -14,7 +14,7 @@ convert_hoc_array_to_np_array
 
    Convert hoc array to list of lists
 
-   :Parameters: **hoc\_array** -- hoc array
+   :Parameters: **hoc_array** -- hoc array
 
    :returns: list of lists
    :rtype: list

@@ -22,7 +22,7 @@ load_cluster_trials
    .. rubric:: Example
       :class: example
 
-   >>> load\_cluster\_trials('getting\_started/example\_data/functional\_constraints/evoked\_activity/L5tt/L5tt\_84/C1\_040929-129-ctx.cluster1')
+   >>> load_cluster_trials('getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84/C1_040929-129-ctx.cluster1')
    {
        0: [87.80000000000001, 138.70000000000002, 151.6, 430.40000000000003, 471.1, 478.90000000000003],
        1: [],

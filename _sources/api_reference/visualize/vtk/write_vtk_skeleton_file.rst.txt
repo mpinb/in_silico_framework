@@ -14,13 +14,13 @@ write_vtk_skeleton_file
 
    Write out a .vtk file for a neuron morphology.
 
-   This method is used by :py:meth:`~visualize.cell\_morphology\_visualizer.CellMorphologyVisualizer.write\_vtk\_frames`.
+   This method is used by :py:meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
 
-   :Parameters: * **lookup\_table** (*pd.DataFrame*) -- Lookup table for the neuron morphology.
-                  Can be accessed from :py:class:`visualize.cell\_morphology\_visualizer.CellMorphologyVisualizer`.
-                * **out\_name** (*str*) -- Name of the output file.
-                * **out\_dir** (*str*) -- Directory to save the file to.
-                * **point\_scalar\_data** (*dict, optional*) -- Dictionary containing scalar data for each point. Defaults to None.
+   :Parameters: * **lookup_table** (*pd.DataFrame*) -- Lookup table for the neuron morphology.
+                  Can be accessed from :py:class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
+                * **out_name** (*str*) -- Name of the output file.
+                * **out_dir** (*str*) -- Directory to save the file to.
+                * **point_scalar_data** (*dict, optional*) -- Dictionary containing scalar data for each point. Defaults to None.
 
    :returns: None. Writes out a .vtk file to the specified directory.
 

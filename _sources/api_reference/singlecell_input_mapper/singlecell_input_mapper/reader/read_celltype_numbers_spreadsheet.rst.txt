@@ -16,7 +16,7 @@ read_celltype_numbers_spreadsheet
 
    :Parameters: **fname** (*str*) -- The name of the file to be read
 
-   :returns: A dictionary with the following structure: {anatomical\_area: {cell\_type: number\_of\_cells, ...}, ...}
+   :returns: A dictionary with the following structure: {anatomical_area: {cell_type: number_of_cells, ...}, ...}
    :rtype: dict
 
 

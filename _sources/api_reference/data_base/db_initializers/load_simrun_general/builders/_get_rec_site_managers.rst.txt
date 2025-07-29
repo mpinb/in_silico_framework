@@ -17,7 +17,7 @@ _get_rec_site_managers
    Recording sites are locations onto the postsynaptic membrane where the voltage traces are recorded.
    This is used for recording the membrane voltage at non-somatic locations.
 
-   :Parameters: **db** (:py:class:`~data\_base.DataBase`) -- The database to which the data should be added.
+   :Parameters: **db** (:py:class:`~data_base.DataBase`) -- The database to which the data should be added.
 
    :returns: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.
    :rtype: dict

@@ -12,13 +12,14 @@ read_synapse_realization
 
 .. py:function:: single_cell_parser.reader.read_synapse_realization(fname)
 
-   Read a :ref:`syn\_file\_format` file and returns a dictionary of synapse locations.
+   Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
+
 
    See also:
 
-   - :ref:`syn\_file\_format` for more information on the `.syn` file format.
-   - :py:meth:`~single\_cell\_parser.reader.read\_pruned\_synapse\_realization`.
-   - :py:meth:`~single\_cell\_parser.writer.write\_cell\_synapse\_locations` for the corresponding writer.
+   - :ref:`syn_file_format` for more information on the `.syn` file format.
+   - :py:meth:`~single_cell_parser.reader.read_pruned_synapse_realization`.
+   - :py:meth:`~single_cell_parser.writer.write_cell_synapse_locations` for the corresponding writer.
 
    :Parameters: **fname** (*str*) -- The name of the file to be read.
 
@@ -31,20 +32,20 @@ read_synapse_realization
    .. rubric:: Example
       :class: example
 
-   >>> synapse\_file
+   >>> synapse_file
    # Synapse distribution file
-   # corresponding to cell: 86\_C2\_center
+   # corresponding to cell: 86_C2_center
    # Type - section - section.x
-   VPM\_E1  112     0.138046479525
-   VPM\_E1  130     0.305058053119
-   VPM\_E1  130     0.190509288017
-   VPM\_E1  9       0.368760777084
-   VPM\_E1  110     0.0
-   VPM\_E1  11      0.120662910562
+   VPM_E1  112     0.138046479525
+   VPM_E1  130     0.305058053119
+   VPM_E1  130     0.190509288017
+   VPM_E1  9       0.368760777084
+   VPM_E1  110     0.0
+   VPM_E1  11      0.120662910562
    ...
-   >>> read\_synapse\_realization(synapse\_file)
+   >>> read_synapse_realization(synapse_file)
    {
-       'VPM\_E1': [
+       'VPM_E1': [
            (112, 0.138046479525),
            (130, 0.305058053119),
            (130, 0.190509288017),

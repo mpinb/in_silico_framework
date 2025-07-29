@@ -14,11 +14,11 @@ combine_PSP_objects
 
    Combine two PSPs objects into one.
 
-   :Parameters: * **PSPexc** (:py:class:`~simrun.synaptic\_strength\_fitting.PSPs`) -- :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object for excitatory synapses.
-                * **PSPinh** (:py:class:`~simrun.synaptic\_strength\_fitting.PSPs`) -- :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object for inhibitory synapses.
+   :Parameters: * **PSPexc** (:py:class:`~simrun.synaptic_strength_fitting.PSPs`) -- :py:class:`~simrun.synaptic_strength_fitting.PSPs` object for excitatory synapses.
+                * **PSPinh** (:py:class:`~simrun.synaptic_strength_fitting.PSPs`) -- :py:class:`~simrun.synaptic_strength_fitting.PSPs` object for inhibitory synapses.
 
-   :returns: Combined :py:class:`~simrun.synaptic\_strength\_fitting.PSPs` object with both excitatory and inhibitory components.
-   :rtype: :py:class:`~simrun.synaptic\_strength\_fitting.PSPs`
+   :returns: Combined :py:class:`~simrun.synaptic_strength_fitting.PSPs` object with both excitatory and inhibitory components.
+   :rtype: :py:class:`~simrun.synaptic_strength_fitting.PSPs`
 
 
 .. 

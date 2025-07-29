@@ -10,11 +10,11 @@ read_csvs
 =========
 
 
-.. py:function:: data_base.IO.dask_wrappers.read_csvs(*args, **kwargs)
+.. py:function:: data_base.IO.dask_wrappers.read_csvs(\*args, \*\*kwargs)
 
    Read dask dataframes from csv files.
 
-   The native dask read\_csv function only supports globstrings.
+   The native dask read_csv function only supports globstrings.
    Use this function instead, if you want to provide a explicit filelist.
 
 

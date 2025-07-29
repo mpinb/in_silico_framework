@@ -16,7 +16,7 @@ BAC_caSpike_height_check_gt2_Na_spikes
 
    :Parameters: * **t** (*array*) -- Array of time values.
                 * **v** (*array*) -- Array of voltage values.
-                * **v\_dend** (*array*) -- Array of dendritic voltage values.
+                * **v_dend** (*array*) -- Array of dendritic voltage values.
                 * **thresh** (*float, optional*) -- Spike detection threshold. Defaults to None.
 
    :returns: True if the number of spikes is greater than or equal to 2, False otherwise.
