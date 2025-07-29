@@ -88,7 +88,7 @@ class CellParser(object):
 
         .. deprecated:: 0.1.0
             The ``parameters`` keyword is optional for this method. It was previously used to check for spines.
-            The :ref:`cell_parameters_format` file is however used to apply biophysical mechanisms in :py:meth:`set_up_biophysics`.
+            Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :py:meth:`set_up_biophysics`.
         
         '''
         edgeList = reader.read_hoc_file(self.hoc_path)

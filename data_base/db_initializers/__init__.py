@@ -22,5 +22,5 @@ This package provides modules for initializing databases from simulation results
 way to parse raw simulation output to intermediate pickle files, or permanent dask and pandas dataframes.
 A database that has been initialized with this module is herafter called a "simrun-initialized" database.
 
-Each other submodule provides an ``init`` method, which builds on top of the previously simrun-initialized data.
+Each other submodule provides an ``init`` method, which builds on top of raw simrun data.
 """

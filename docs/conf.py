@@ -117,6 +117,7 @@ autoapi_own_page_level = "method"
 bibtex_bibfiles = ["bibliography.bib"]
 
 # -- Napoleon settings -----------------------------------------------------
+# Napoleon is an 
 napoleon_google_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
@@ -140,6 +141,12 @@ napoleon_attr_annotations = True
 # autosummary_generate = True
 # autosummary_imported_members = False  # do not show all imported modules per module, this is too bloated
 paramlinks_hyperlink_param = "name"
+
+# Domains for cross-referencing other documentation
+intersphinx_mapping = {
+    'matplotlib': ('http://matplotlib.org/stable', None),
+    "neuron": ("https://nrn.readthedocs.io/en/latest", None)
+    }
 
 # Don't run notebooks
 nbsphinx_execute = "never"
