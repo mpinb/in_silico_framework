@@ -555,9 +555,7 @@ class SynapseDensity(object):
         logger.info('---------------------------')
         totalLength = 0.0
         for structure in list(lengthDensity.keys()):
-            logger.info(
-                'Computing 3D length/surface area density of structures with label {:s}'
-                .format(structure))
+            logger.debug('Computing 3D length/surface area density of structures with label {:s}'.format(structure))
             density1 = lengthDensity[structure]
             density2 = surfaceAreaDensity[structure]
             #===================================================================
@@ -675,8 +673,7 @@ class SynapseDensity(object):
                             density1.mesh[ijk] += length
                             density2.mesh[ijk] += area
                             totalLength += length
-        logger.info('Total clipped length = {:f}'.format(totalLength))
-        logger.info('---------------------------')
+        logger.debug('Total clipped length = {:f}'.format(totalLength))
 
     def _clip_u(self, pq, u1u2):
         '''Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.
