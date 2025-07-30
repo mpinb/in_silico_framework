@@ -125,28 +125,29 @@ class NetworkMapper:
         self._create_presyn_cells()
         anatomical_areas = list(self.cells.keys())
         preCellTypes = self.cells[anatomical_areas[0]]
-        cellTypeSynapseDensities = self._precompute_anatomical_area_celltype_synapse_densities(
-            boutonDensities)
+        logger.info("Computing synapse densities")
+        cellTypeSynapseDensities = self._precompute_anatomical_area_celltype_synapse_densities_vectorized(boutonDensities)
         sampleConnectivityData = []
         cellTypeSpecificPopulation = []
         for i in range(nrOfSamples):
-            logger.info('Generating network embedding sample {:d}'.format(i))
+
+            logger.info('Generating network embedding sample {:d} of {:d}'.format(i, nrOfSamples))
             self.postCell.remove_synapses('All')
             for anatomical_area in anatomical_areas:
                 for preCellType in preCellTypes:
                     for preCell in self.cells[anatomical_area][preCellType]:
                         preCell.synapseList = None
+            
+            logger.debug("    Sample {:d} of {:d}: Creating anatomical realization...".format(i + 1, nrOfSamples))
             connectivityMap, connectedCells, connectedCellsPerStructure = \
                 self._create_anatomical_realization(cellTypeSynapseDensities)
-            (
-                synapseLocations,
-                cellSynapseLocations, 
-                cellTypeSummaryTable, 
-                anatomicalAreaSummaryTable
-            ) = self._compute_summary_tables(
-                connectedCells, 
-                connectedCellsPerStructure
-            )
+            logger.debug("    Sample {:d} of {:d}: Anatomical realization done.".format(i + 1, nrOfSamples))
+            
+            logger.debug("    Sample {:d} of {:d}: Computing summary tables...".format(i + 1, nrOfSamples))
+            synapseLocations, cellSynapseLocations,cellTypeSummaryTable, anatomicalAreaSummaryTable = \
+                self._compute_summary_tables(connectedCells, connectedCellsPerStructure)
+            logger.debug("    Sample {:d} of {:d}: Computing summary tables done".format(i + 1, nrOfSamples))
+
             connectivityData = connectivityMap, synapseLocations, \
                                 cellSynapseLocations, cellTypeSummaryTable,\
                                 anatomicalAreaSummaryTable
@@ -158,6 +159,7 @@ class NetworkMapper:
             cellTypeSpecificPopulation)
         representativeIndex = self._get_representative_sample(
             cellTypeSpecificPopulation, populationDistribution)
+        logger.info("Writing output files for representative sample (id={})".format(representativeIndex))
         (connectivityMap, 
          synapseLocations, 
          cellSynapseLocations, 
@@ -223,8 +225,7 @@ class NetworkMapper:
 
         cellTypeSpecificPopulation = []
         for i in range(nrOfRealizations):
-            logger.info('Creating realization {:d} of {:d}'.format(
-                i + 1, nrOfRealizations))
+            logger.info('Creating realization {:d} of {:d}'.format(i + 1, nrOfRealizations))
             self.postCell.remove_synapses('All')
             for anatomical_area in anatomical_areas:
                 for preCellType in preCellTypes:
@@ -322,8 +323,8 @@ class NetworkMapper:
         cellTypeSynapseDensities = synapseDensities
         for anatomical_area in anatomical_areas:
             for preCellType in preCellTypes:
-                logger.info('---------------------------')
-                logger.info('Assigning synapses from cell type {:s} in anatomical_area {:s}'.
+                logger.debug('---------------------------')
+                logger.debug('    Assigning synapses from cell type {:s} in anatomical_area {:s}'.
                       format(preCellType, anatomical_area))
                 nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
                 if not nrOfDensities:
@@ -332,9 +333,7 @@ class NetworkMapper:
                 count = 0
                 for preCell in self.cells[anatomical_area][preCellType]:
                     count += 1
-                    logger.info(
-                        '    Computing synapses for presynaptic cell {:d} of {:d}...\r'
-                        .format(count, totalNumber))  #, end=' ')
+                    logger.debug('    Computing synapses for presynaptic cell {:d} of {:d}...\r'.format(count, totalNumber))  #, end=' ')
                     sys.stdout.flush()
                     densityID = np.random.randint(nrOfDensities)
                     synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][
@@ -345,7 +344,7 @@ class NetworkMapper:
                         synapseType)
                     for newSyn in preCell.synapseList:
                         newSyn.preCell = preCell
-                logger.info('')
+                logger.debug('')
 
         connectivityMap, connectedCells, connectedCellsPerStructure = \
             self._create_anatomical_connectivity_map()
@@ -358,6 +357,39 @@ class NetworkMapper:
         logger.info('---------------------------')
 
     def _precompute_anatomical_area_celltype_synapse_densities(self, boutonDensities):
+        '''Compute synapse densities of all presynaptic cell types in all anatomical_areas
+        
+        Computes all possible synapse densities that have non-zero overlap
+        with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
+
+        .. deprecated:: 0.5.0
+           This has been deprecated in favor of :py:meth:`_precompute_anatomical_area_celltype_synapse_densities_vectorized`
+
+        :skip-doc:
+        '''
+        synapseDensities = {}
+        synapseDensityComputation = SynapseDensity(
+            self.postCell, 
+            self.postCellType, 
+            self.connectionsSpreadsheet,
+            self.exCellTypes, 
+            self.inhCellTypes, 
+            self.exPST, 
+            self.inhPST)
+        anatomical_areas = list(boutonDensities.keys())
+        preCellTypes = boutonDensities[anatomical_areas[0]]
+        for anatomical_area in anatomical_areas:
+            synapseDensities[anatomical_area] = {}
+            for preCellType in preCellTypes:
+                synapseDensities[anatomical_area][preCellType] = []
+                logger.debug('Computing synapse densities from cell type {:s} in {:s}'.format(preCellType, anatomical_area))
+                for boutons in boutonDensities[anatomical_area][preCellType]:
+                    synapseDensities[anatomical_area][preCellType].append(
+                        synapseDensityComputation.compute_synapse_density(
+                            boutons, preCellType))
+        return synapseDensities
+
+    def _precompute_anatomical_area_celltype_synapse_densities_vectorized(self, boutonDensities):
         '''Compute synapse densities of all presynaptic cell types in all anatomical_areas
         
         Computes all possible synapse densities that have non-zero overlap
@@ -378,15 +410,11 @@ class NetworkMapper:
             synapseDensities[anatomical_area] = {}
             for preCellType in preCellTypes:
                 synapseDensities[anatomical_area][preCellType] = []
-                logger.info('---------------------------')
-                logger.info(
-                    'Computing synapse densities from cell type %s in anatomical_area {:s}'
-                    .format(preCellType, anatomical_area))
+                logger.debug('Computing synapse densities from cell type {:s} in {:s}'.format(preCellType, anatomical_area))
                 for boutons in boutonDensities[anatomical_area][preCellType]:
                     synapseDensities[anatomical_area][preCellType].append(
-                        synapseDensityComputation.compute_synapse_density(
+                        synapseDensityComputation.compute_synapse_density_vectorized(
                             boutons, preCellType))
-        logger.info('---------------------------')
         return synapseDensities
 
     def _create_presyn_cells(self):
@@ -410,9 +438,7 @@ class NetworkMapper:
                     newCell = PointCell(anatomical_area, cellType)
                     self.cells[anatomical_area][cellType].append(newCell)
                     cellIDs += 1
-                logger.info(
-                    '    Created {:d} presynaptic cells of type {:s} in anatomical_area {:s}'
-                    .format(nrOfCellsPerType, cellType, anatomical_area))
+                logger.debug('    Created {:d} presynaptic cells of type {:s} in anatomical_area {:s}'.format(nrOfCellsPerType, cellType, anatomical_area))
         logger.info('Created {:d} presynaptic cells in total'.format(cellIDs))
         logger.info('---------------------------')
 
@@ -421,7 +447,7 @@ class NetworkMapper:
 
         This is the main method for computing synapse/connectivity realization.
         Given one or more pre-computed density fields of synapses (see e.g. 
-        :py:meth:`~_precompute_anatomical_area_celltype_synapse_densities`), this method 
+        :py:meth:`~_precompute_anatomical_area_celltype_synapse_densities_vectorized`), this method 
         creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
         from this synapse density field, and assigns synapses.
 
@@ -446,11 +472,9 @@ class NetworkMapper:
                 #         synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,anatomical_area,preCellType,str(i)))
                 #         writer.write_scalar_field(synapseDensityName, outDensity)
 
-                logger.info('---------------------------')
-                logger.info(
-                    'Computed {:d} synapse densities of type {:s} in anatomical_area {:s}!'
-                    .format(nrOfDensities, preCellType, anatomical_area))
-                logger.info('Assigning synapses from cell type {:s} in anatomical_area {:s}'.
+                logger.debug('---------------------------')
+                logger.debug('Computed {:d} synapse densities of type {:s} in anatomical_area {:s}'.format(nrOfDensities, preCellType, anatomical_area))
+                logger.debug('Assigning synapses from cell type {:s} in anatomical_area {:s}'.
                       format(preCellType, anatomical_area))
                 totalNumber = len(self.cells[anatomical_area][preCellType])
                 densityIDs = np.random.randint(0, nrOfDensities, totalNumber)
@@ -459,10 +483,8 @@ class NetworkMapper:
                 for i in range(totalNumber):
                     preCell = self.cells[anatomical_area][preCellType][i]
                     count += 1
-                    logger.info(
-                        '    Computing synapses for presynaptic cell {:d} of {:d}...\r'
-                        .format(count, totalNumber))  #, end=' ')
-                    sys.stdout.flush()
+                    logger.debug('    Computing synapses for presynaptic cell {:d} of {:d}...\r'.format(count, totalNumber))  #, end=' ')
+                    # sys.stdout.flush()
                     densityID = densityIDs[i]
                     synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][densityID]
                     if synapseDensity is None:
@@ -473,8 +495,8 @@ class NetworkMapper:
                     preCell.synapseList = self.mapper.create_synapses(synapseType)
                     for newSyn in preCell.synapseList:
                         newSyn.preCell = preCell
-                logger.info('')
-                logger.info('    Skipped {:d} empty synapse densities...'.format(skipCount))
+                logger.debug('')
+                logger.debug('    Skipped {:d} empty synapse densities...'.format(skipCount))
 
         return self._create_anatomical_connectivity_map()
 
