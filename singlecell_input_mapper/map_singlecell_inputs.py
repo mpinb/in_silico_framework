@@ -199,7 +199,7 @@ def map_singlecell_inputs(
             anatomical_area/presynaptic_cell_type/\*.am
 
     Returns:
-        None. Writes the results to disk.
+        None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
         errstr = "Unknown cell type %s!"
@@ -211,10 +211,11 @@ def map_singlecell_inputs(
     parser = sim.CellParser(cellName)
     parser.spatialgraph_to_cell()
     singleCell = parser.get_cell()  # This is a sim.Cell, not scp.cell
+    logger.debug("Cell morphology loaded")
 
     # --------------------- Read in data ---------------------
     logger.info("Loading spreadsheets and bouton/PST densities...")
-    logger.info(
+    logger.debug(
         "    Loading numberOfCells spreadsheet {:s}".format(
             numberOfCellsSpreadsheetName
         )
@@ -222,18 +223,22 @@ def map_singlecell_inputs(
     numberOfCellsSpreadsheet = sim.read_celltype_numbers_spreadsheet(
         numberOfCellsSpreadsheetName
     )
-    logger.info(
+    logger.debug("{:s} loaded".format(numberOfCellsSpreadsheetName))
+    logger.debug(
         "    Loading connections spreadsheet {:s}".format(connectionsSpreadsheetName)
     )
     connectionsSpreadsheet = sim.read_connections_spreadsheet(
         connectionsSpreadsheetName
     )
-    logger.info("    Loading PST density {:s}".format(ExPSTDensityName))
+    logger.debug("connections spreadsheet loaded")
+    logger.debug("    Loading PST density {:s}".format(ExPSTDensityName))
     ExPSTDensity = sim.read_scalar_field(ExPSTDensityName)
     ExPSTDensity.resize_mesh()
-    logger.info("    Loading PST density {:s}".format(InhPSTDensityName))
+    logger.debug("    PST density {:s} loaded".format(ExPSTDensityName))
+    logger.debug("    Loading PST density {:s}".format(InhPSTDensityName))
     InhPSTDensity = sim.read_scalar_field(InhPSTDensityName)
     InhPSTDensity.resize_mesh()
+    logger.debug("    PST density {:s} loaded".format(InhPSTDensityName))
     boutonDensities = {}
     anatomical_areas = list(numberOfCellsSpreadsheet.keys())
     preCellTypes = numberOfCellsSpreadsheet[anatomical_areas[0]]
