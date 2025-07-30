@@ -19,6 +19,7 @@
 '''
 
 import numpy as np
+from config.isf_logging import logger
 from . import scalar_field
 from data_base.dbopen import dbopen
 
@@ -84,7 +85,7 @@ def read_hoc_file(fname=''):
         raise IOError('Input file is not a .hoc file!')
 
     with dbopen(fname, 'r') as neuronFile:
-        print("Reading hoc file", fname)
+        logger.info("Reading hoc file", fname)
         # cell = co.Cell()
         # simply store list of edges
         # cell is parsed in CellParser
@@ -222,7 +223,68 @@ def read_hoc_file(fname=''):
         return cell
 
 
-def read_scalar_field(fname=''):
+
+def read_scalar_field(fname='', dtype=np.float64):
+    """Read ASCII AMIRA scalar field mesh files with high speed.
+    
+    This function reads in AMIRA scalar fields. Particular attention is given to speeding up reading of 
+    the actual data.
+    
+    Args:
+        fname (str): Filename of the Amira Mesh file to be read.
+        dtype (numpy.dtype): Data type of the scalar field, default is `np.float64`.
+
+    Raises:
+        IOError: If the input file does not have a `.am` or `.AM` suffix.
+        
+    Returns:
+        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
+    """
+    if not fname.endswith(('.am', '.AM')):
+        raise IOError('Input file is not an Amira Mesh file!')
+
+    with dbopen(fname, 'r') as meshFile:
+        mesh = None
+        extent, dims, bounds, origin, spacing = [], [], [], [], []
+        header_lines = []
+
+        # Read until we reach the data section
+        for line in meshFile:
+            header_lines.append(line)
+            if line.strip().startswith('@1'):
+                break
+
+        # Parse header info
+        for line in header_lines:
+            line = line.strip()
+            if not line:
+                continue
+            if 'define' in line and 'Lattice' in line:
+                dims = list(map(int, line.split()[-3:]))
+                extent = [v for dim in dims for v in (0, dim - 1)]
+            elif 'BoundingBox' in line:
+                bounds = list(map(float, line.strip(' \t\n,').split()[-6:]))
+                origin = [bounds[2 * i] for i in range(3)]
+            elif 'Spacing' in line:
+                spacing = list(map(float, line.strip(' \t\n,').split()[-3:]))
+
+        # Adjust bounds/origin before reading the data section
+        for i in range(3):
+            bounds[2 * i + 1] += 0.5 * spacing[i]
+            bounds[2 * i] -= 0.5 * spacing[i]
+            origin[i] -= 0.5 * spacing[i]
+
+        # Read the remainder of the file as one string and convert to float64
+        data_str = meshFile.read()
+        data = np.fromstring(data_str, sep=' ', dtype=dtype)
+
+        # Reshape into a 3D array in Fortran order
+        mesh = data.reshape(dims, order='F')
+
+        return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
+
+
+def read_scalar_field_legacy(fname=''):
     """Read AMIRA scalar fields.
     
     Args:
@@ -233,6 +295,11 @@ def read_scalar_field(fname=''):
 
     Returns:
         :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`: A scalar field object.
+
+    .. deprecated:: 0.5.0
+       This has been deprecated in favor of the faster :py:meth:`read_scalar_field`
+
+    :skip-doc:
     """
     if not fname.endswith('.am') and not fname.endswith('.AM'):
         raise IOError('Input file is not an Amira Mesh file!')
