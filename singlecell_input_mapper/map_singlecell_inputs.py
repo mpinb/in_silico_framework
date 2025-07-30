@@ -222,13 +222,15 @@ def map_singlecell_inputs(
     numberOfCellsSpreadsheet = sim.read_celltype_numbers_spreadsheet(
         numberOfCellsSpreadsheetName
     )
-    logger.info(
+    logger.debug("    numberOfCells spreadsheet loaded".format(numberOfCellsSpreadsheetName))
+    logger.debug(
         "    Loading connections spreadsheet {:s}".format(connectionsSpreadsheetName)
     )
     connectionsSpreadsheet = sim.read_connections_spreadsheet(
         connectionsSpreadsheetName
     )
-    logger.info("    Loading PST density {:s}".format(ExPSTDensityName))
+    logger.debug("    Connections spreadsheet loaded")
+    logger.debug("    Loading PST density {:s}".format(ExPSTDensityName))
     ExPSTDensity = sim.read_scalar_field(ExPSTDensityName)
     ExPSTDensity.resize_mesh()
     logger.info("    Loading PST density {:s}".format(InhPSTDensityName))
@@ -249,7 +251,7 @@ def map_singlecell_inputs(
             boutonDensityFolder = os.path.join(
                 boutonDensityFolderName, anatomical_area, preCellType
             )
-            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folders of the barrel cortex model. Did you download and extract the barrel cortex model?"
+            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folder: {}".format(boutonDensityFolder)
             boutonDensityNames = glob.glob(os.path.join(boutonDensityFolder, "*"))
             logger.debug(
                 "    Loading {:d} bouton densities from {:s}".format(
@@ -271,6 +273,7 @@ def map_singlecell_inputs(
     )
     inputMapper.exCellTypes = exTypes
     inputMapper.inhCellTypes = inhTypes
+    logger.info("Creating network embedding for  {:s}".format(cellName))
     inputMapper.create_network_embedding(
         cellName, boutonDensities, nrOfSamples=nrOfSamples
     )
