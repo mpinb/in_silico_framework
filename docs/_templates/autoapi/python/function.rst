@@ -22,7 +22,7 @@
 
    {% endif %}
 
-.. py:function:: {{ obj.id }}({{ obj.args | replace("*", "\*") }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
+.. py:function:: {{ obj.id }}({{ obj.args }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
    {% for (args, return_annotation) in obj.overloads %}
 
                  {%+ if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}({{ args }}){% if return_annotation is not none %} -> {{ return_annotation }}{% endif %}
