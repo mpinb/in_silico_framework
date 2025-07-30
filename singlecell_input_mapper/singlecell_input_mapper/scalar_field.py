@@ -89,38 +89,64 @@ class ScalarField(object):
         # if self.mesh is not None:
         #     self.resize_mesh()
 
-    def resize_mesh(self):
-        '''Resizes mesh to non-zero scalar data.
+    # def resize_mesh(self):
+    #     '''Resizes mesh to non-zero scalar data.
          
-        This method resizes the mesh such that the bounding box 
-        wraps around voxels that contain non-zero scalar data.
-        Also updates :py:attr:`extent` and :py:attr:`boundingBox`
-        '''
-        roi = np.nonzero(self.mesh)
-        iMin = np.min(roi[0])
-        iMax = np.max(roi[0])
-        jMin = np.min(roi[1])
-        jMax = np.max(roi[1])
-        kMin = np.min(roi[2])
-        kMax = np.max(roi[2])
-        self.extent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
-        newDims = self.extent[1] + 1, self.extent[3] + 1, self.extent[5] + 1
-        dx = self.spacing[0]
-        dy = self.spacing[1]
-        dz = self.spacing[2]
-        xMin = self.origin[0] + iMin * dx
-        yMin = self.origin[1] + jMin * dy
-        zMin = self.origin[2] + kMin * dz
-        xMax = self.origin[0] + (iMax + 1) * dx
-        yMax = self.origin[1] + (jMax + 1) * dy
-        zMax = self.origin[2] + (kMax + 1) * dz
-        self.origin = xMin, yMin, zMin
-        self.boundingBox = xMin, xMax, yMin, yMax, zMin, zMax
-        newMesh = np.empty(shape=newDims)
-        newMesh[:, :, :] = self.mesh[iMin:iMax + 1, jMin:jMax + 1,
-                                     kMin:kMax + 1]
-        self.mesh = np.copy(newMesh)
-        del newMesh
+    #     This method resizes the mesh such that the bounding box 
+    #     wraps around voxels that contain non-zero scalar data.
+    #     Also updates :py:attr:`extent` and :py:attr:`boundingBox`
+    #     '''
+    #     roi = np.nonzero(self.mesh)
+    #     iMin = np.min(roi[0])
+    #     iMax = np.max(roi[0])
+    #     jMin = np.min(roi[1])
+    #     jMax = np.max(roi[1])
+    #     kMin = np.min(roi[2])
+    #     kMax = np.max(roi[2])
+    #     self.extent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
+    #     newDims = self.extent[1] + 1, self.extent[3] + 1, self.extent[5] + 1
+    #     dx = self.spacing[0]
+    #     dy = self.spacing[1]
+    #     dz = self.spacing[2]
+    #     xMin = self.origin[0] + iMin * dx
+    #     yMin = self.origin[1] + jMin * dy
+    #     zMin = self.origin[2] + kMin * dz
+    #     xMax = self.origin[0] + (iMax + 1) * dx
+    #     yMax = self.origin[1] + (jMax + 1) * dy
+    #     zMax = self.origin[2] + (kMax + 1) * dz
+    #     self.origin = xMin, yMin, zMin
+    #     self.boundingBox = xMin, xMax, yMin, yMax, zMin, zMax
+    #     newMesh = np.empty(shape=newDims)
+    #     newMesh[:, :, :] = self.mesh[iMin:iMax + 1, jMin:jMax + 1,
+    #                                  kMin:kMax + 1]
+    #     self.mesh = np.copy(newMesh)
+    #     del newMesh
+
+    def resize_mesh(self):
+        """Resizes mesh to non-zero scalar data using slicing views (no copy)."""
+        roi = np.where(self.mesh)
+        if roi[0].size == 0:
+            return  # no non-zero voxels
+
+        iMin, iMax = roi[0].min(), roi[0].max()
+        jMin, jMax = roi[1].min(), roi[1].max()
+        kMin, kMax = roi[2].min(), roi[2].max()
+
+        self.extent = (0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin)
+
+        dx, dy, dz = self.spacing
+        xMin, yMin, zMin = (self.origin[0] + iMin * dx,
+                            self.origin[1] + jMin * dy,
+                            self.origin[2] + kMin * dz)
+        xMax, yMax, zMax = (self.origin[0] + (iMax + 1) * dx,
+                            self.origin[1] + (jMax + 1) * dy,
+                            self.origin[2] + (kMax + 1) * dz)
+
+        self.origin = (xMin, yMin, zMin)
+        self.boundingBox = (xMin, xMax, yMin, yMax, zMin, zMax)
+
+        # Slice view instead of copying
+        self.mesh = self.mesh[iMin:iMax + 1, jMin:jMax + 1, kMin:kMax + 1]
 
     def get_scalar(self, xyz):
         '''Fetch the scalar value of the voxel containing the point xyz.
@@ -195,6 +221,31 @@ class ScalarField(object):
         j = int((y - self.origin[1]) // self.spacing[1])
         k = int((z - self.origin[2]) // self.spacing[2])
         return i, j, k
+
+    def get_mesh_coordinates_vectorized(self, coords):
+        """
+        Vectorized sampling of scalar values at multiple coordinates.
+        coords: ndarray (..., 3) of (x,y,z)
+        Returns: ndarray of scalar values (same shape as coords[..., 0])
+        """
+        # Convert world coordinates (x,y,z) into voxel indices (i,j,k)
+        x_idx = ((coords[..., 0] - self.origin[0]) // self.spacing[0]).astype(int)
+        y_idx = ((coords[..., 1] - self.origin[1]) // self.spacing[1]).astype(int)
+        z_idx = ((coords[..., 2] - self.origin[2]) // self.spacing[2]).astype(int)
+
+        # Check which points are inside the mesh bounds
+        valid = (
+            (x_idx >= 0) & (x_idx < self.mesh.shape[0]) &
+            (y_idx >= 0) & (y_idx < self.mesh.shape[1]) &
+            (z_idx >= 0) & (z_idx < self.mesh.shape[2])
+        )
+
+        # Initialize result array with zeros
+        result = np.zeros(coords.shape[:-1], dtype=self.mesh.dtype)
+
+        # Only sample valid points
+        result[valid] = self.mesh[x_idx[valid], y_idx[valid], z_idx[valid]]
+        return result
 
     def get_voxel_bounds(self, ijk):
         '''Gets the bounding box of voxel given by indices i,j,k. 
