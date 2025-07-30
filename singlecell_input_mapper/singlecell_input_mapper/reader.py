@@ -85,7 +85,7 @@ def read_hoc_file(fname=''):
         raise IOError('Input file is not a .hoc file!')
 
     with dbopen(fname, 'r') as neuronFile:
-        logger.info("Reading hoc file", fname)
+        logger.info("Reading hoc file: {}".format(fname))
         # cell = co.Cell()
         # simply store list of edges
         # cell is parsed in CellParser

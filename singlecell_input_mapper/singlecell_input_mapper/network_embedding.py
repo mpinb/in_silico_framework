@@ -21,6 +21,7 @@ this module does not handle the activity of presynaptic populations, but provide
 
 '''
 from __future__ import absolute_import
+from typing import Dict
 import os
 import sys
 import time
@@ -144,7 +145,7 @@ class NetworkMapper:
             logger.debug("    Sample {:d} of {:d}: Anatomical realization done.".format(i + 1, nrOfSamples))
             
             logger.debug("    Sample {:d} of {:d}: Computing summary tables...".format(i + 1, nrOfSamples))
-            synapseLocations, cellSynapseLocations,cellTypeSummaryTable, anatomicalAreaSummaryTable = \
+            synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable = \
                 self._compute_summary_tables(connectedCells, connectedCellsPerStructure)
             logger.debug("    Sample {:d} of {:d}: Computing summary tables done".format(i + 1, nrOfSamples))
 
@@ -362,6 +363,10 @@ class NetworkMapper:
         Computes all possible synapse densities that have non-zero overlap
         with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
 
+        Args:
+            boutonDensities (Dict[str, Dict[str, List[:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]]):
+                Dictionary of bouton densities, ordered by anatomical area and cell type.
+
         .. deprecated:: 0.5.0
            This has been deprecated in favor of :py:meth:`_precompute_anatomical_area_celltype_synapse_densities_vectorized`
 
@@ -394,6 +399,10 @@ class NetworkMapper:
         
         Computes all possible synapse densities that have non-zero overlap
         with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
+
+        Args:
+            boutonDensities (Dict[str, Dict[str, :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]):
+                Dictionary of bouton densities, ordered by anatomical area and cell type.
         '''
         synapseDensities = {}
         synapseDensityComputation = SynapseDensity(
@@ -413,8 +422,7 @@ class NetworkMapper:
                 logger.debug('Computing synapse densities from cell type {:s} in {:s}'.format(preCellType, anatomical_area))
                 for boutons in boutonDensities[anatomical_area][preCellType]:
                     synapseDensities[anatomical_area][preCellType].append(
-                        synapseDensityComputation.compute_synapse_density_vectorized(
-                            boutons, preCellType))
+                        synapseDensityComputation.compute_synapse_density_vectorized(boutons, preCellType))
         return synapseDensities
 
     def _create_presyn_cells(self):
@@ -432,8 +440,7 @@ class NetworkMapper:
             self.cells[anatomical_area] = {}
             for cellType in cellTypes:
                 self.cells[anatomical_area][cellType] = []
-                nrOfCellsPerType = self.cellTypeNumbersSpreadsheet[anatomical_area][
-                    cellType]
+                nrOfCellsPerType = self.cellTypeNumbersSpreadsheet[anatomical_area][cellType]
                 for i in range(nrOfCellsPerType):
                     newCell = PointCell(anatomical_area, cellType)
                     self.cells[anatomical_area][cellType].append(newCell)
@@ -1013,7 +1020,7 @@ class NetworkMapper:
                 if nrOfApicalSynapses + nrOfBasalSynapses + nrOfSomaSynapses != nrOfSynapses:
                     errstr = 'Logical error: Number of synapses does not add up'
                     raise RuntimeError(errstr)
-                logger.info('    Created {:d} synapses of type {:s}!'.format(
+                logger.debug('    Created {:d} synapses of type {:s}!'.format(
                     nrOfSynapses, preCellType))
                 #===============================================================
                 # anatomical_area- and cell type-specific data
