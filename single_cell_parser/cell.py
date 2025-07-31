@@ -118,6 +118,32 @@ class Cell(object):
                 ## check, if the range var is existent in the respective segment or not
                 pass
 
+    def record_synapse_range_var(self, var, point_process=None):
+        """Record a range variable of a point process (e.g., synapse) in all sections.
+        
+        Args:
+            var (str): The name of the range variable to record.
+            point_process (str): The name of the point process to which var belongs. Defaults to None.
+            
+        Example:
+        
+            >>> cell.record_synapse_range_var('glutamate_syn_plastic.gampamax')
+        """
+        
+        #allow specifying mech and var in var. this is closer to the neuron syntax
+        if '.' in var:
+            point_process, var = var.split('.')
+
+        for sec in self.sections:
+            try:
+                sec._init_synapse_range_var_recording(var, point_process)
+            except (NameError, AttributeError):
+                ## if mechanism not in segment: continue
+                ## this leaves the duty to take care of missing range vars to
+                ## all further functions relying on that values. I.e. they should
+                ## check, if the range var is existent in the respective segment or not
+                pass
+
     def distance_between_pts(self, sec1, x1, sec2, x2):
         """
         Computes the path length between two points.
@@ -785,6 +811,31 @@ class PySection(nrn.Section):
                     vec.record(hRef, sec=self)
                     self.recordVars[key].append(vec)
 
+    def _init_synapse_range_var_recording(self, var, point_process):
+        """Initialize recording of a range variable of a point process (e.g., a synapse).
+        
+        Args:
+            var (str): The name of the range mechanism to record.
+            point_process (str): The name of the point process to which var belongs. 
+            
+        Raises:
+            NameError: If the mechanism is not present in the segment.
+            AttributeError: If the mechanism is not present in the segment.
+            
+        Example:
+        
+            >>> sec._init_synapse_range_var_recording('gampamax', 'glutamate_syn_plastic')
+        
+        """
+        key = point_process + '.' + var
+        # if not key in list(self.recordVars.keys()):
+        self.recordVars[key] = []
+        if point_process in self.psection()['point_processes']:
+            for syn in self.psection()['point_processes'][point_process]:
+                vec = h.Vector()
+                hRef = eval('syn' + '._ref_' + var)
+                vec.record(hRef, sec=self)
+                self.recordVars[key].append(vec)
 
 class PointCell(object):
     '''Cell without morphological or electrophysiological features.
