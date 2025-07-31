@@ -214,53 +214,43 @@ def map_singlecell_inputs(
 
     # --------------------- Read in data ---------------------
     logger.info("Loading spreadsheets and bouton/PST densities...")
-    logger.info(
-        "    Loading numberOfCells spreadsheet {:s}".format(
-            numberOfCellsSpreadsheetName
-        )
-    )
-    numberOfCellsSpreadsheet = sim.read_celltype_numbers_spreadsheet(
-        numberOfCellsSpreadsheetName
-    )
-    logger.info(
-        "    Loading connections spreadsheet {:s}".format(connectionsSpreadsheetName)
-    )
-    connectionsSpreadsheet = sim.read_connections_spreadsheet(
-        connectionsSpreadsheetName
-    )
-    logger.info("    Loading PST density {:s}".format(ExPSTDensityName))
+
+    logger.info("    Loading numberOfCells spreadsheet {:s}".format(numberOfCellsSpreadsheetName))
+    numberOfCellsSpreadsheet = sim.read_celltype_numbers_spreadsheet(numberOfCellsSpreadsheetName)
+    logger.debug("    numberOfCells spreadsheet loaded".format(numberOfCellsSpreadsheetName))
+
+    logger.debug("    Loading connections spreadsheet {:s}".format(connectionsSpreadsheetName))
+    connectionsSpreadsheet = sim.read_connections_spreadsheet(connectionsSpreadsheetName)
+    logger.debug("    Connections spreadsheet loaded")
+
+    logger.debug("    Loading PST density {:s}".format(ExPSTDensityName))
     ExPSTDensity = sim.read_scalar_field(ExPSTDensityName)
     ExPSTDensity.resize_mesh()
     logger.info("    Loading PST density {:s}".format(InhPSTDensityName))
     InhPSTDensity = sim.read_scalar_field(InhPSTDensityName)
     InhPSTDensity.resize_mesh()
+
+
     boutonDensities = {}
     anatomical_areas = list(numberOfCellsSpreadsheet.keys())
     preCellTypes = numberOfCellsSpreadsheet[anatomical_areas[0]]
 
     # --------------------- Load bouton densities ---------------------
+    logger.info("Loading bouton densities from folder {:s} (may take a while)".format(boutonDensityFolderName))
     for anatomical_area in anatomical_areas:
-        # boutonDensities is a dictionary with anatomical areas as keys
-        # and as value another dictionary mapping the presyn celltype to
-        # scalar fields of boutons
-        boutonDensities[anatomical_area] = {}
+        boutonDensities[anatomical_area] = {}  # type is Dict[str, Dict[str, List[scim.ScalarField]]]
         for preCellType in preCellTypes:
-            boutonDensities[anatomical_area][preCellType] = []
-            boutonDensityFolder = os.path.join(
-                boutonDensityFolderName, anatomical_area, preCellType
-            )
-            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folders of the barrel cortex model. Did you download and extract the barrel cortex model?"
+            boutonDensities[anatomical_area][preCellType] = [] # type is List[scim.ScalarField]
+            boutonDensityFolder = os.path.join(boutonDensityFolderName, anatomical_area, preCellType)
+            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folder: {}".format(boutonDensityFolder)
             boutonDensityNames = glob.glob(os.path.join(boutonDensityFolder, "*"))
-            logger.debug(
-                "    Loading {:d} bouton densities from {:s}".format(
-                    len(boutonDensityNames), boutonDensityFolder
-                )
-            )
+            logger.debug("    Loading {:d} bouton densities from {:s}".format(len(boutonDensityNames), boutonDensityFolder))
             for densityName in boutonDensityNames:
                 boutonDensity = sim.read_scalar_field(densityName)
                 boutonDensity.resize_mesh()
                 boutonDensities[anatomical_area][preCellType].append(boutonDensity)
 
+    # Actually create the network embedding
     inputMapper = sim.NetworkMapper(
         singleCell,
         cellTypeName,
@@ -271,10 +261,11 @@ def map_singlecell_inputs(
     )
     inputMapper.exCellTypes = exTypes
     inputMapper.inhCellTypes = inhTypes
-    inputMapper.create_network_embedding(
-        cellName, boutonDensities, nrOfSamples=nrOfSamples
-    )
 
+    logger.info("Creating network embedding for  {:s}".format(cellName))
+    inputMapper.create_network_embedding(cellName, boutonDensities, nrOfSamples=nrOfSamples)
+
+    # Record time and write summary
     endTime = time.time()
     duration = (endTime - startTime) / 60.0
     logger.info("Runtime: {:.1f} minutes".format(duration))
