@@ -17,7 +17,6 @@ from .fixtures.data_base_fixtures import (
     fresh_db,
     sqlite_db,
 )
-os.environ["ISF_IS_TESTING"] = "True"
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
@@ -118,6 +117,9 @@ def pytest_configure(config):
     """
     pytest configuration
     """
+    
+    os.environ["ISF_IS_TESTING"] = "True"
+    
     # Register the custom statistical marker
     config.addinivalue_line(
         "markers", 
