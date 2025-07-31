@@ -3,7 +3,6 @@
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
 import logging, os, pytest, sys
-from config.isf_logging import logger  # import from config to set handlers properly
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -79,6 +78,9 @@ def pytest_ignore_collect(collection_path, config):
 
 
 def _setup_pytest_logging():
+    # Import here, so the env variable ISF_IS_TESTING is set before importing logging
+    # THis impacts the log verbosity
+    from config.isf_logging import logger  # import from config to set handlers properly
 
     # --------------- Setup logging output -------------------
     logger.setLevel(logging.WARNING)
