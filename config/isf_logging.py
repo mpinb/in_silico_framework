@@ -135,10 +135,36 @@ def add_logging_level(levelName, levelNum, methodName=None):
     setattr(logging, methodName, logToRoot)
 
 
+def _get_log_formatter():
+    """Get the appropriate log formatter.
+    
+    Regular usage has a concise format, while testing uses a verbose format with timestamps.
+    This is determined by the environment variable `ISF_IS_TESTING`.
+    """
+    if os.environ.get("ISF_IS_TESTING", "0") == "1":
+        # Verbose format with timestamp and full module path
+        formatter = logging.Formatter(
+            "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
+    else:
+        # Concise format for regular usage
+        formatter = logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s")
+
+    return formatter
+
+
 # Lazy logger setup
-def get_isf_logger():
-    """Lazy initialization of the ISF logger."""
-    if not hasattr(get_isf_logger, "_logger"):
+def get_isf_logger(force_reconfigure=False):
+    """Lazy initialization of the ISF logger.
+    
+    Args:
+        force_reconfigure (bool): If True, reconfigure the logger even if it has already been set up.
+        
+    Returns:
+        logging.Logger: The configured ISF logger instance.
+    """
+    if not hasattr(get_isf_logger, "_logger") or force_reconfigure:
         # Perform the setup only once
         root_logger = logging.getLogger()
         isf_logger = root_logger.getChild("ISF")
@@ -151,7 +177,7 @@ def get_isf_logger():
         # Stream handler: where to redirect the logs to
         logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
         logger_stream_handler.name = "ISF_logger_stream_handler"
-        logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s"))
+        logger_stream_handler.setFormatter(_get_log_formatter())
         root_logger.addHandler(logger_stream_handler)
 
         # Filters
