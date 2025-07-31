@@ -106,3 +106,10 @@ docs/tutorials/**
 # pixi environments
 .pixi
 *.egg-info
+
+# Personal
+ibs_projects
+robinweiler/results
+robinweiler/old
+robinweiler/20250220_robin_mdb
+robinweiler/WR64
