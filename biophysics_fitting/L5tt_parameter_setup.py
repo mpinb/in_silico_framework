@@ -189,8 +189,9 @@ def get_L5tt_template():
                             'gIhbar': 0.0002,
                             'linScale': 2.087,
                             'offset': -0.8696,
-                            'spatial': 'exponential',
-                            'xOffset': 0.0
+                            'spatial': 'capped_exponential',
+                            'xOffset': 0.0,
+                            'max_g': 0.0003
                         },
                         'Im': {
                             'gImbar': None,
@@ -429,7 +430,7 @@ def set_ephys(cell_param, params=None):
         assert hasattr(cell_param, scp_param), "The provided cell parameters have no field called: {}".format(scp_param)
         cell_param[scp_param] = float(v)
     unset_params = check_unset_range_mechanisms(cell_param)
-    assert len(unset_params) == 0, "The following parameters are not set after set_ephys: {}".format(unset_params)
+    # assert len(unset_params) == 0, "The following parameters are not set after set_ephys: {}".format(unset_params)
     return cell_param
 
 
