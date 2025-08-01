@@ -124,7 +124,7 @@ default = ["isf"]
 # -------------------------------------------------------------------------
 [tool.pytest.ini_options]
 markers = [
-  "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite.",
+  "early: Mark a test as early, ensuring it is scheduled early in the test suite.",
   "statistical(n_runs, max_failure_rate): Mark tests to rerun multiple times to determine statistical significance."
 ]
 # Don't schedule new tests if the previous exceeded this time
