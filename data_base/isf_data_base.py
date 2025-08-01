@@ -944,14 +944,15 @@ class ISFDataBase:
         Returns:
             tuple: The keys of the database as tuple or nested tuple of strings.
         '''
-        all_keys = self._basedir.iterdir()
+        _top_level_contents = self._basedir.iterdir()
+        _not_keys = [
+            "db_state.json", "metadata.json", "Loader.json",
+            "dbcore.pickle", "metadata.db", "sqlitedict.db", "sqlitedict.db.lock", "metadata.db.lock",  # dbv1 compatibility
+            ".DS_Store"  # macOS compatibility
+        ]
         keys_ =  tuple(
-            e.name for e in all_keys 
-            if e.name not in ("db_state.json", "metadata.json", "Loader.json")
-            and e.name not in [
-                "dbcore.pickle", "metadata.db", 
-                "sqlitedict.db", "sqlitedict.db.lock",
-                "metadata.db.lock"] # dbv1 compatibility
+            e.name for e in _top_level_contents 
+            if e.name not in _not_keys
             and ".deleting." not in e.name
             )
         
