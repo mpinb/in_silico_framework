@@ -14,6 +14,11 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def make_filelist(directory, suffix="vm_all_traces.csv"):
     """Generate a list of all files with :paramref:`suffix` in the specified directory.
 
+    This method recursively searches through the directory and its subdirectories
+    for files that match the specified suffix. It returns a list of relative paths to
+    these files, excluding any files that are still being written to (identified by
+    the presence of "_running" in the filename).
+
     Simulation results from :py:mod:`simrun` are stored in a nested folder structure, and spread
     across multiple files. The first step towards parsing them is to generate a list of all files
     containing the data we are interested in.

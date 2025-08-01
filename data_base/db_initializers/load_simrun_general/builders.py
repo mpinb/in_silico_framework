@@ -45,10 +45,10 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
 
     The following data is parsed and added to the database:
 
-    - filelist
-    - somatic voltage traces
-    - simulation trial index
-    - metadata
+    - filelist: A dask dataframe containing the paths to all soma voltage trace files.
+    - voltage_traces: A dask dataframe containing the soma voltage traces.
+    - sim_trial_index: A dask series containing the indices of the simulation trials.
+    - metadata: A dask dataframe containing metadata about the simulation trials. See :py:meth:`~data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata` for more information.
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
