@@ -69,14 +69,19 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
     db["filelist"] = filelist
     
     # 2. Generate dask dataframe containing the voltagetraces
-    logger.info("Building voltage traces dataframe...")
+    logger.info("Collecting voltage trace locations...")
     # vt = read_voltage_traces_by_filenames(db['simresult_path'], db['file_list'])
-    vt = read_voltage_traces_by_filenames(db["simresult_path"], filelist, repartition=repartition)
-    logger.info("Writing voltage traces dataframe to database ...")
+    vt = read_voltage_traces_by_filenames(
+        prefix=db["simresult_path"], 
+        fnames=filelist, 
+        repartition=repartition,
+    )
+    
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
     
     # 3. Read out the sim_trial_index from the soma voltage traces dask dataframe
-    logger.info("Building sim_trial_index ...")
+    logger.info("Building voltage traces and sim_trial_index ...")
+    # Only now is the VT df actually being read in
     db["sim_trial_index"] = db["voltage_traces"].index.compute()
 
     # 4. Generate metadata dataframe out of sim_trial_indices
