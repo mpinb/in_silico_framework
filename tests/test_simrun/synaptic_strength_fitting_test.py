@@ -23,8 +23,8 @@ PSPs = simrun.synaptic_strength_fitting.PSPs
 
 
 #@decorators.testlevel(2)
-@pytest.mark.early
 @pytest.mark.skipif(not BC_MODEL_AVAILABLE, reason="Barrel cortex model not available, but synaptic strength values are BC-specific")
+@pytest.mark.parametrize("n_workers", [6])  # increase number of workers to speed up the test
 def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     """
     Limits are educated guesses, but it should never deviate by a lot.
