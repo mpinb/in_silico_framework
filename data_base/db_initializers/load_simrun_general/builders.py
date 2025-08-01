@@ -235,6 +235,7 @@ def _build_param_files(db, client):
         neup_hash_column="hash_neuron",
         netp_path_column="path_network",
         netp_hash_column="hash_network",
+        client=client,
     )
     futures = client.compute(ds)
     result = client.gather(futures)
