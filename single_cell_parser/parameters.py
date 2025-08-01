@@ -2,6 +2,7 @@
 """
 
 from collections.abc import MutableMapping
+from pathlib import Path
 import json, re, neuron, os
 from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
 from data_base import is_data_base
@@ -109,15 +110,19 @@ def resolve_parameter_paths(parameters, params_fn):
 
     def _find_parent_db_basedir(fn):
         """Find the parent database directory from the parameters."""
-        fn = os.path.pardir(fn)
-        while not is_data_base(fn):
-            try: fn = os.path.pardir(fn)
-            except FileNotFoundError: return None
-        return fn
+        fn = Path(fn)
+        parent = fn.parent
+        while not is_data_base(parent):
+            if parent == parent.parent:  
+                # Reached the root directory
+                return None
+            parent = parent.parent
+        return parent
 
+    db_basedir = _find_parent_db_basedir(params_fn)
+    
     for key, value in parameters.items():
         if isinstance(value, str) and (value.startswith("reldb://") or value.startswith("mdb://")):
-            db_basedir = _find_parent_db_basedir(params_fn)
             if db_basedir is None:
                 raise ValueError(f"Cannot resolve relative path '{value}', could not find the parent database of {parameters}.")
             parameters[key] = resolve_db_path(value, db_basedir)
