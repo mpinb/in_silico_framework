@@ -138,11 +138,10 @@ def create_metadata_parallelization_helper(sim_trial_index, simresult_path):
     try:
         synaptic_files = path_trialnr.apply(synaptic_file_list, axis=1)
         sim_trial_index_complete = pd.concat(
-            (sim_trial_index_complete, synaptic_files), axis=1
+            (sim_trial_index_complete, synaptic_files), 
+            axis=1
         )
-    except (
-        IndexError
-    ):  # special case if synapse activation data is not in the simulation folder
+    except IndexError:  # special case if synapse activation data is not in the simulation folder
         warnings.warn("Could not find synapse activation files")
     try:
         cell_files = path_trialnr.apply(cells_file_list, axis=1)
@@ -174,7 +173,12 @@ def create_metadata(db):
     simresult_path = db["simresult_path"]
     sim_trial_index = list(db["sim_trial_index"])
     sim_trial_index = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
-    sim_trial_index_delayed = dask.dataframe.from_pandas(sim_trial_index, npartitions=5000).to_delayed()
+
+    target_chunk_size = 1000  # Define a reasonable target chunk size
+    num_partitions = max(1, len(sim_trial_index) // target_chunk_size)
+    num_partitions = min(num_partitions, 5000)  # Limit to a maximum of 5000 partitions
+    
+    sim_trial_index_delayed = dask.dataframe.from_pandas(sim_trial_index, npartitions=num_partitions).to_delayed()
     sim_trial_index_complete = [
         create_metadata_parallelization_helper(d, simresult_path)
         for d in sim_trial_index_delayed
