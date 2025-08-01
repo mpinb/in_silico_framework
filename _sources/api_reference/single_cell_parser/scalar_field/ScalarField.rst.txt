@@ -94,7 +94,7 @@ ScalarField
       :class: summarytable
       
       * - :py:obj:`resize_mesh <single_cell_parser.scalar_field.ScalarField.resize_mesh>`\ ()
-        - Resizes mesh to non-zero scalar data.
+        - Resizes mesh to non-zero scalar data using slicing views (no copy).
       * - :py:obj:`get_scalar <single_cell_parser.scalar_field.ScalarField.get_scalar>`\ (xyz)
         - Fetch the scalar value of the voxel containing the point xyz.
       * - :py:obj:`is_in_bounds <single_cell_parser.scalar_field.ScalarField.is_in_bounds>`\ (xyz)

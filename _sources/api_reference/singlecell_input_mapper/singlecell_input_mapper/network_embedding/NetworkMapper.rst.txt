@@ -20,7 +20,7 @@ NetworkMapper
    create_network_embedding <NetworkMapper.create_network_embedding>
    create_network_embedding_for_simulations <NetworkMapper.create_network_embedding_for_simulations>
    create_network_embedding_from_synapse_densities <NetworkMapper.create_network_embedding_from_synapse_densities>
-   _precompute_anatomical_area_celltype_synapse_densities <NetworkMapper._precompute_anatomical_area_celltype_synapse_densities>
+   _precompute_anatomical_area_celltype_synapse_densities_vectorized <NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized>
    _create_presyn_cells <NetworkMapper._create_presyn_cells>
    _create_anatomical_realization <NetworkMapper._create_anatomical_realization>
    _create_anatomical_connectivity_map <NetworkMapper._create_anatomical_connectivity_map>
@@ -105,7 +105,7 @@ NetworkMapper
         - Create multiple network realizations from a bouton density field.
       * - :py:obj:`create_network_embedding_from_synapse_densities <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities>`\ (postCellName, synapseDensities)
         - Create a single network realization from pre-computed synapse densities.
-      * - :py:obj:`_precompute_anatomical_area_celltype_synapse_densities <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities>`\ (boutonDensities)
+      * - :py:obj:`_precompute_anatomical_area_celltype_synapse_densities_vectorized <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized>`\ (boutonDensities)
         - Compute synapse densities of all presynaptic cell types in all anatomical_areas
       * - :py:obj:`_create_presyn_cells <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells>`\ ()
         - Creates presynaptic cells.

@@ -655,7 +655,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.reader.read_scalar_field" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.reader.read_scalar_field (Python function) — Read AMIRA scalar fields." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>reader.<wbr>read_<wbr>scalar_<wbr>field</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.reader.read_scalar_field (Python function) — Read ASCII AMIRA scalar field mesh files with high speed." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>reader.<wbr>read_<wbr>scalar_<wbr>field</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parser.reader.read_scalar_field">
@@ -1160,7 +1160,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.reader.read_scalar_field" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.reader.read_scalar_field (Python function) — Read AMIRA scalar fields." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>reader.<wbr>read_<wbr>scalar_<wbr>field</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="single_cell_parser.reader.read_scalar_field (Python function) — Read ASCII AMIRA scalar field mesh files with high speed." class="md-ellipsis">single_<wbr>cell_<wbr>parser.<wbr>reader.<wbr>read_<wbr>scalar_<wbr>field</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parser.reader.read_scalar_field">
@@ -1213,21 +1213,26 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser</span></code></a> ❭ <a class="reference internal" href="index.html#module-single_cell_parser.reader" title="single_cell_parser.reader (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reader</span></code></a> ❭ <a class="reference internal" href="#single_cell_parser.reader.read_scalar_field" title="single_cell_parser.reader.read_scalar_field (Python function) — Read AMIRA scalar fields."><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_scalar_field</span></code></a></p>
+<p><a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser</span></code></a> ❭ <a class="reference internal" href="index.html#module-single_cell_parser.reader" title="single_cell_parser.reader (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reader</span></code></a> ❭ <a class="reference internal" href="#single_cell_parser.reader.read_scalar_field" title="single_cell_parser.reader.read_scalar_field (Python function) — Read ASCII AMIRA scalar field mesh files with high speed."><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_scalar_field</span></code></a></p>
 <h1 id="read-scalar-field">read_scalar_field<a class="headerlink" href="#read-scalar-field" title="Permalink to this heading">¶</a></h1>
 <dl class="py function objdesc">
-<dt class="sig sig-object highlight py" id="single_cell_parser.reader.read_scalar_field">
-<span class="sig-prename descclassname"><span class="pre">single_cell_parser.reader.</span></span><span class="sig-name descname"><span class="pre">read_scalar_field</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read AMIRA scalar fields.</p>
+<dt class="sig sig-object highlight sig-wrap py" id="single_cell_parser.reader.read_scalar_field">
+<span class="sig-prename descclassname"><span class="pre">single_cell_parser.reader.</span></span><span class="sig-name descname"><span class="pre">read_scalar_field</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">fname</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="n">np</span><span class="o">.</span><span class="n">float64</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read ASCII AMIRA scalar field mesh files with high speed.</p>
+<p>This function reads in AMIRA scalar fields. Particular attention is given to speeding up reading of
+the actual data.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.reader.read_scalar_field-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><strong>fname</strong> (<em>str</em>) – The name of the file to be read.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fname</strong> (<em>str</em>) – Filename of the Amira Mesh file to be read.</p></li>
+<li><p><strong>dtype</strong> (<em>numpy.dtype</em>) – Data type of the scalar field, default is <cite>np.float64</cite>.</p></li>
+</ul>
 </dd>
 <dt class="field-even" id="single_cell_parser.reader.read_scalar_field-raises">Raises<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field-raises" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p><strong>IOError</strong> – If the input file does not have a <cite>.am</cite> or <cite>.AM</cite> suffix.</p>
 </dd>
 <dt class="field-odd" id="single_cell_parser.reader.read_scalar_field-returns">Returns<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field-returns" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p>A scalar field object.</p>
+<dd class="field-odd"><p>A scalar field object containing the mesh data, origin, extent, spacing, and bounds.</p>
 </dd>
 <dt class="field-even" id="single_cell_parser.reader.read_scalar_field-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.reader.read_scalar_field-return-type" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p><a class="reference internal" href="../scalar_field/ScalarField.html#single_cell_parser.scalar_field.ScalarField" title="single_cell_parser.scalar_field.ScalarField (Python class) — 3D scalar fields based on numpy arrays"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScalarField</span></code></a></p>

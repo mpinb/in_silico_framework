@@ -14,6 +14,9 @@ run_ex_synapses
 
    Simulate all EPSPs of a given celltype, one by one.
 
+   This function reads the network parameter file, selects one celltype, and activates each synapse of that celltype,
+   as defined by their corresponding :ref:`syn_file_format` file. The simulation is reset after each synapse activation run.
+
    This function is used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
 
    :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.

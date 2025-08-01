@@ -21,6 +21,8 @@ NTParameterSet
    _unwrap <NTParameterSet._unwrap>
    as_dict <NTParameterSet.as_dict>
    save <NTParameterSet.save>
+   keys <NTParameterSet.keys>
+   tree_copy <NTParameterSet.tree_copy>
    _resolve_path <NTParameterSet._resolve_path>
    update <NTParameterSet.update>
 
@@ -70,6 +72,10 @@ NTParameterSet
         - Convert the NTParameterSet to a regular dictionary.
       * - :py:obj:`save <single_cell_parser.parameters.NTParameterSet.save>`\ (filename)
         - Save the NTParameterSet to a file in JSON format.
+      * - :py:obj:`keys <single_cell_parser.parameters.NTParameterSet.keys>`\ ()
+        - D.keys() -> a set-like object providing a view on D's keys
+      * - :py:obj:`tree_copy <single_cell_parser.parameters.NTParameterSet.tree_copy>`\ ()
+        - Return a copy of the ParameterSet tree structure.
       * - :py:obj:`_resolve_path <single_cell_parser.parameters.NTParameterSet._resolve_path>`\ (dotted)
         - \-
       * - :py:obj:`update <single_cell_parser.parameters.NTParameterSet.update>`\ (other, \*\*kwargs)

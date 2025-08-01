@@ -17,6 +17,7 @@ SynapseDensity
 .. toctree::
    :hidden:
 
+   compute_synapse_density_vectorized <SynapseDensity.compute_synapse_density_vectorized>
    compute_synapse_density <SynapseDensity.compute_synapse_density>
    compute_cell_PST <SynapseDensity.compute_cell_PST>
    _compute_length_surface_area_density <SynapseDensity._compute_length_surface_area_density>
@@ -84,6 +85,8 @@ SynapseDensity
       :widths: auto
       :class: summarytable
       
+      * - :py:obj:`compute_synapse_density_vectorized <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_synapse_density_vectorized>`\ (boutonDensity, preCellType)
+        - Vectorized version of synapse density computation.
       * - :py:obj:`compute_synapse_density <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_synapse_density>`\ (boutonDensity, preCellType)
         - Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
       * - :py:obj:`compute_cell_PST <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST>`\ ()

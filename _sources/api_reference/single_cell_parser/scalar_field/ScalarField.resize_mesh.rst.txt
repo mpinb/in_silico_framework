@@ -8,9 +8,5 @@ ScalarField.resize_mesh
 
 .. py:method:: single_cell_parser.scalar_field.ScalarField.resize_mesh()
 
-   Resizes mesh to non-zero scalar data.
-
-   This method resizes the mesh such that the bounding box
-   wraps around voxels that contain non-zero scalar data.
-   Also updates :py:attr:`extent` and :py:attr:`boundingBox`
+   Resizes mesh to non-zero scalar data using slicing views (no copy).
 

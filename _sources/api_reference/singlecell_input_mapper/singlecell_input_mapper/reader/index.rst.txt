@@ -36,8 +36,8 @@ Functions
    
    * - :py:obj:`read_hoc_file <singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file>`\ (fname)
      - Reads a hoc file and returns a list of Edge objects.
-   * - :py:obj:`read_scalar_field <singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field>`\ (fname)
-     - Read AMIRA scalar fields.
+   * - :py:obj:`read_scalar_field <singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field>`\ (fname, dtype)
+     - Read ASCII AMIRA scalar field mesh files with high speed.
    * - :py:obj:`read_connections_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.reader.read_connections_spreadsheet>`\ (fname)
      - Reads a spreadsheet with connection probabilities between cell types
    * - :py:obj:`read_celltype_numbers_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet>`\ (fname)

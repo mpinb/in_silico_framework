@@ -1,0 +1,12 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet.keys`
+
+NTParameterSet.keys
+===================
+
+.. py:method:: single_cell_parser.parameters.NTParameterSet.keys()
+
+   D.keys() -> a set-like object providing a view on D's keys
+

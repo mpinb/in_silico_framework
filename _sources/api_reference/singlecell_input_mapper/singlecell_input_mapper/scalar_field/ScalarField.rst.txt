@@ -21,6 +21,7 @@ ScalarField
    get_scalar <ScalarField.get_scalar>
    is_in_bounds <ScalarField.is_in_bounds>
    get_mesh_coordinates <ScalarField.get_mesh_coordinates>
+   get_mesh_coordinates_vectorized <ScalarField.get_mesh_coordinates_vectorized>
    get_voxel_bounds <ScalarField.get_voxel_bounds>
    get_voxel_center <ScalarField.get_voxel_center>
 
@@ -94,13 +95,15 @@ ScalarField
       :class: summarytable
       
       * - :py:obj:`resize_mesh <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.resize_mesh>`\ ()
-        - Resizes mesh to non-zero scalar data.
+        - Resizes mesh to non-zero scalar data using slicing views (no copy).
       * - :py:obj:`get_scalar <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar>`\ (xyz)
         - Fetch the scalar value of the voxel containing the point xyz.
       * - :py:obj:`is_in_bounds <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds>`\ (xyz)
         - Check if point is within bounding box of mesh.
       * - :py:obj:`get_mesh_coordinates <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates>`\ (xyz)
         - Fetch the mesh index of the voxel containing the point xyz.
+      * - :py:obj:`get_mesh_coordinates_vectorized <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates_vectorized>`\ (coords)
+        - Vectorized sampling of scalar values at multiple coordinates.
       * - :py:obj:`get_voxel_bounds <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_bounds>`\ (ijk)
         - Gets the bounding box of voxel given by indices i,j,k.
       * - :py:obj:`get_voxel_center <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_center>`\ (ijk)

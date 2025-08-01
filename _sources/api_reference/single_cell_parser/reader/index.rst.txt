@@ -44,8 +44,8 @@ Functions
    
    * - :py:obj:`read_hoc_file <single_cell_parser.reader.read_hoc_file>`\ (fname)
      - Reads a hoc file and returns a list of Edge objects.
-   * - :py:obj:`read_scalar_field <single_cell_parser.reader.read_scalar_field>`\ (fname)
-     - Read AMIRA scalar fields.
+   * - :py:obj:`read_scalar_field <single_cell_parser.reader.read_scalar_field>`\ (fname, dtype)
+     - Read ASCII AMIRA scalar field mesh files with high speed.
    * - :py:obj:`read_synapse_realization <single_cell_parser.reader.read_synapse_realization>`\ (fname)
      - Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
    * - :py:obj:`read_pruned_synapse_realization <single_cell_parser.reader.read_pruned_synapse_realization>`\ (fname)

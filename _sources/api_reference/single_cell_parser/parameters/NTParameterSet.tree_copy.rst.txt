@@ -1,0 +1,19 @@
+
+.. backlink:
+
+:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet.tree_copy`
+
+NTParameterSet.tree_copy
+========================
+
+.. py:method:: single_cell_parser.parameters.NTParameterSet.tree_copy()
+
+   Return a copy of the ParameterSet tree structure.
+
+   Nodes are not copied, but re-referenced. This creates a shallow copy
+   of the tree structure where the hierarchy is duplicated but the
+   leaf values are shared between original and copy.
+
+   :returns: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
+   :rtype: :py:class:`NTParameterSet`
+

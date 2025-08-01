@@ -73,7 +73,7 @@ Functions
    * - :py:obj:`set_inh_synapse_weight <simrun.synaptic_strength_fitting.set_inh_synapse_weight>`\ (syn, weight)
      - Set the synaptic strength of an inhibitory :py:class:`single_cell_parser.synapse.Synapse`.
    * - :py:obj:`run_ex_synapse <simrun.synaptic_strength_fitting.run_ex_synapse>`\ (cell\_nw\_generator, neuron\_param, network\_param, celltype, preSynCellID, gAMPA, gNMDA, gGABA, vardt, return\_cell, synapseID, tEnd, tStim)
-     - Simulate a single excitatory or inhibitory synapse
+     - Simulate a single excitatory or inhibitory synapse.
    * - :py:obj:`run_ex_synapses <simrun.synaptic_strength_fitting.run_ex_synapses>`\ (neuron\_param, network\_param, celltype, gAMPA, gNMDA, gGABA, vardt, tStim, tEnd, mode)
      - Simulate all EPSPs of a given celltype, one by one.
    * - :py:obj:`generate_ex_network_param_from_network_embedding <simrun.synaptic_strength_fitting.generate_ex_network_param_from_network_embedding>`\ (confile)
