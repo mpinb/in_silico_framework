@@ -39,7 +39,6 @@ from .config import (
 )
 from config.isf_logging import logger
 
-
 def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
     """Parse the essential simulation results and add it to :paramref:`db`.
 
@@ -83,12 +82,15 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
     logger.info("Building voltage traces and sim_trial_index ...")
     # Only now is the VT df actually being read in
     db["sim_trial_index"] = db["voltage_traces"].index.compute()
+    
+    if db['sim_trial_index'].size == 0:
+        raise ValueError("No valid sim trials found in the specified directory ({}). Check if the logs report invalid results.".format(db['simresult_path']))
 
     # 4. Generate metadata dataframe out of sim_trial_indices
     logger.info("Building metadata ...")
     db.set("metadata", create_metadata(db), dumper=metadata_dumper)
 
-    logger.info("Adding divisions to voltage traces dataframe")
+    logger.info("Adding divisions to voltage traces dataframe and writing to disk")
     vt.divisions = get_voltage_traces_divisions_by_metadata(db["metadata"], repartition=repartition)
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
 
@@ -258,6 +260,9 @@ def _get_rec_site_managers(db):
     Raises:
         NotImplementedError: If the cell parameter files of the simulation specify different recording sites for different trials.
     """
+    # TODO: this assumes you have copied over the paramfiles, but this is an optional flag...
+    # TODO: canyou build dendritic voltage traces (assuming you have the recsites) without copying over the paramfiles?
+    # TODO: If not, these flags should be dependent
     param_files = glob.glob(os.path.join(db[NEUP_DIR], "*"))
     param_files = [
         p
