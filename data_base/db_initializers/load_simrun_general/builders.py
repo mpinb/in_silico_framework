@@ -37,8 +37,7 @@ from .config import (
     RECSITES_DIR,
     DEFAULT_DUMPER
 )
-
-logger = logging.getLogger("ISF").getChild(__name__)
+from config.isf_logging import logger
 
 
 def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
