@@ -48,6 +48,7 @@ import numpy as np
 from isf_pandas_msgpack import to_msgpack, read_msgpack
 import json
 from .utils import save_object_meta
+from config.isf_logging import logger
 
 ####
 # if you want to use this as template to implement another dask dumper:
@@ -262,28 +263,30 @@ def get_numpy_dtype_as_str(obj):
     else:
         return str(np.dtype(type(obj)))
 
-def read_object_meta(savedir):
-    if os.path.exists(os.path.join(savedir, 'dask_meta.json')):
-        # Construct meta dataframe for dask
-        with open(os.path.join(savedir, 'dask_meta.json'), 'r') as f:
-            # use yaml instead of json to ensure loaded data is string (and not unicode) in Python 2
-            # yaml is a subset of json, so this should always work, although it assumes the json is ASCII encoded, which should cover all our usecases.
-            # See also: https://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-from-json
-            meta_json = yaml.safe_load(f)  
-        meta = pd.DataFrame({
-            c: pd.Series([], dtype=t)
-            for c, t in zip(meta_json['columns'], meta_json['dtypes'])
-            }, 
-            columns=meta_json['columns']  # ensure the order of the columns is fixed.
-            )
-        column_dtype_mapping = [
-            (c, t)
-            if not t.startswith('<U') else (c, '<U' + str(len(c)))  # PY3: assure numpy has enough chars for string, given that the dtype is just 'str'
-            for c, t in zip(meta.columns.values, meta_json['column_name_dtypes'])
-            ]
-        meta.columns = tuple(np.array([tuple(meta.columns.values)], dtype=column_dtype_mapping)[0])
-        return meta
-    return None
+
+# moved to IO.LoaderUDmper.__init__ to be both dask and parquet compatible
+# def read_object_meta(savedir):
+#     if os.path.exists(os.path.join(savedir, 'dask_meta.json')):
+#         # Construct meta dataframe for dask
+#         with open(os.path.join(savedir, 'dask_meta.json'), 'r') as f:
+#             # use yaml instead of json to ensure loaded data is string (and not unicode) in Python 2
+#             # yaml is a subset of json, so this should always work, although it assumes the json is ASCII encoded, which should cover all our usecases.
+#             # See also: https://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-from-json
+#             meta_json = yaml.safe_load(f)  
+#         meta = pd.DataFrame({
+#             c: pd.Series([], dtype=t)
+#             for c, t in zip(meta_json['columns'], meta_json['dtypes'])
+#             }, 
+#             columns=meta_json['columns']  # ensure the order of the columns is fixed.
+#             )
+#         column_dtype_mapping = [
+#             (c, t)
+#             if not t.startswith('<U') else (c, '<U' + str(len(c)))  # PY3: assure numpy has enough chars for string, given that the dtype is just 'str'
+#             for c, t in zip(meta.columns.values, meta_json['column_name_dtypes'])
+#             ]
+#         meta.columns = tuple(np.array([tuple(meta.columns.values)], dtype=column_dtype_mapping)[0])
+#         return meta
+#     return None
     
 
 class Loader(parent_classes.Loader):
@@ -305,15 +308,17 @@ class Loader(parent_classes.Loader):
 
         if self.divisions:
             if verbose:
-                print('loaded dask dataframe with known divisions')
+                logger.info('Loading dask dataframe with known divisions')
             #it does not seem to be a good idea to pass the long index list through the delayed interface
             #therefore the list is contained in this function enclosure
-            ddf = [dask.delayed(my_reader, traverse = False)(fname) \
-                   for fname in sorted(glob.glob(os.path.join(savedir, fileglob)))]
+            ddf = [
+                dask.delayed(my_reader, traverse = False)(fname)
+                for fname in sorted(glob.glob(os.path.join(savedir, fileglob)))
+                ]
             ddf = dd.from_delayed(ddf, divisions=self.divisions, meta=self.meta)
         else:
             if verbose:
-                print('loaded dask dataframe without known divisions')
+                logger.info('Loading dask dataframe without known divisions')
             ddf = [dask.delayed(my_reader, traverse = False)(fname) \
                    for fname in sorted(glob.glob(os.path.join(savedir, fileglob)))]
             ddf = dd.from_delayed(ddf, meta=self.meta)
@@ -322,12 +327,12 @@ class Loader(parent_classes.Loader):
 
 
 def dump(
-        obj,
-        savedir,
-        repartition=False,
-        scheduler=None,
-        categorize=True,
-        client=None):
+    obj,
+    savedir,
+    repartition=False,
+    scheduler=None,
+    categorize=True,
+    client=None):
     """
     Save an object to a file in a DataBase in the pandas-msgpack format.
     Has been deprecated since 2023-09-01. Please use another dumper.
