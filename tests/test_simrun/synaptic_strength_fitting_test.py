@@ -23,6 +23,7 @@ PSPs = simrun.synaptic_strength_fitting.PSPs
 
 
 #@decorators.testlevel(2)
+@pytest.mark.early
 @pytest.mark.skipif(not BC_MODEL_AVAILABLE, reason="Barrel cortex model not available, but synaptic strength values are BC-specific")
 def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     """

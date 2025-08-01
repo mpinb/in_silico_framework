@@ -246,7 +246,7 @@ class PSPs:
             out[cell_type][g1][g2] = self.result[n]
             # calculate maximum voltage in the respective simulation
             # list comprehension used to flatten the list
-            max = np.max([x for x in self.result[n][3] for x in x])
+            # max = np.max([x for x in self.result[n][3] for x in x])
             #if  max > -45:
             #    errstr = "Result Nr {} has a maximum membrane potential of {} mV. ".format(lv, max) +\
             #             "Make sure, the cell does not depolarize during initialization "+\
