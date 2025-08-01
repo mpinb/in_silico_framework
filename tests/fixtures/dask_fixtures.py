@@ -30,11 +30,12 @@ def dask_cluster(pytestconfig):
 
 
 @pytest.fixture(scope="function")
-def client(dask_cluster, pytestconfig):
-    n_workers = int(pytestconfig.getini("DASK_N_WORKERS")) or 2
+def client(dask_cluster, pytestconfig, n_workers=None):
+    """Function-scoped Dask client for executing tasks."""
+    default_n_workers = int(pytestconfig.getini("DASK_N_WORKERS"))
+    n_workers = n_workers or default_n_workers
     client = Client(dask_cluster)
     client.wait_for_workers(n_workers)
     
     yield client
-    # logs = client.get_worker_logs()
     client.close()
