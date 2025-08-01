@@ -51,17 +51,17 @@ def pytest_collection_modifyitems(session, config, items):
     Currently, heavy tests are simply scheduled first.
     This may be extended in the future.
     """
-    heavy = []
+    early = []
     normal = []
 
     for item in items:
-        if 'heavy' in item.keywords:
-            heavy.append(item)
+        if 'early' in item.keywords:
+            early.append(item)
         else:
             normal.append(item)
 
     # Place heavy tests at the beginning
-    items[:] = heavy + normal
+    items[:] = early + normal
 
 
 def pytest_ignore_collect(collection_path, config):

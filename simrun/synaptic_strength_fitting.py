@@ -246,7 +246,7 @@ class PSPs:
             out[cell_type][g1][g2] = self.result[n]
             # calculate maximum voltage in the respective simulation
             # list comprehension used to flatten the list
-            max = np.max([x for x in self.result[n][3] for x in x])
+            # max = np.max([x for x in self.result[n][3] for x in x])
             #if  max > -45:
             #    errstr = "Result Nr {} has a maximum membrane potential of {} mV. ".format(lv, max) +\
             #             "Make sure, the cell does not depolarize during initialization "+\
@@ -613,7 +613,7 @@ def run_ex_synapse(
     synapseID=None,
     tEnd=None,
     tStim=None):
-    '''Simulate a single excitatory or inhibitory synapse
+    '''Simulate a single excitatory or inhibitory synapse.
     
     This is the core function to activate a single synapse and run the simulation.
     Used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
@@ -717,6 +717,9 @@ def run_ex_synapses(
     tEnd=None,
     mode='cells'):
     '''Simulate all EPSPs of a given celltype, one by one.
+
+    This function reads the network parameter file, selects one celltype, and activates each synapse of that celltype,
+    as defined by their corresponding :ref:`syn_file_format` file. The simulation is reset after each synapse activation run.
     
     This function is used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
     
