@@ -187,6 +187,37 @@ class NTParameterSet(MutableMapping):
         with open(filename, 'w') as f:
             json.dump(self.as_dict(), f, indent=4)
 
+    def keys(self):
+        return self._data.keys()
+
+    
+    def tree_copy(self):
+        """Return a copy of the ParameterSet tree structure.
+        
+        Nodes are not copied, but re-referenced. This creates a shallow copy
+        of the tree structure where the hierarchy is duplicated but the
+        leaf values are shared between original and copy.
+        
+        Returns:
+            :py:class:`NTParameterSet`: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
+        """
+        def _copy_tree_structure(node):
+            if isinstance(node, NTParameterSet):
+                # Create new NTParameterSet with copied structure
+                return NTParameterSet({k: _copy_tree_structure(v) 
+                                     for k, v in node._data.items()})
+            elif isinstance(node, dict):
+                # Create new dict with copied structure
+                return {k: _copy_tree_structure(v) for k, v in node.items()}
+            elif isinstance(node, list):
+                # Create new list with copied structure
+                return [_copy_tree_structure(item) for item in node]
+            else:
+                # Leaf node - return reference (no copying)
+                return node
+        
+        return _copy_tree_structure(self)
+
     # --- MutableMapping interface ---
     def __getitem__(self, key):
         return self._resolve_path(key)
