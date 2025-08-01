@@ -91,7 +91,7 @@ def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
                 return list(hoc_fn_soft_matches.values())[0]
             elif len(hoc_fn_soft_matches) > 1:
                 raise ValueError(
-                    "The .hoc file referenced in the .syn file can refer to multiple .hoc files \n.hoc reference in .syn: {}\n Potential .hoc ifle candidates: {}".format(
+                    "The .hoc file referenced in the .syn file can refer to multiple .hoc files \n.hoc reference in .syn: {}\n Potential .hoc file candidates: {}".format(
                         match, hoc_fn_map.keys()
                     )
                 )

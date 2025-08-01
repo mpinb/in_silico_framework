@@ -59,36 +59,32 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
         None
     """
     assert repartition is not None
-    logging.info("---building data base core---")
-    logging.info("generate filelist ...")
+    logger.info("--- Building data base core ---")
+    logger.info("Core consists of: voltage_traces, metadata, filelist, sim_trial_index")
 
     # 1. Generate filelist containing paths to all soma voltage trace files
-    try:
-        filelist = make_filelist(db["simresult_path"], "vm_all_traces.csv")
-    except ValueError:
-        filelist = make_filelist(db["simresult_path"], "vm_all_traces.npz")
+    logger.info("Building filelist ...")
+    try: filelist = make_filelist(db["simresult_path"], "vm_all_traces.csv")
+    except ValueError: filelist = make_filelist(db["simresult_path"], "vm_all_traces.npz")
     db["filelist"] = filelist
-
+    
     # 2. Generate dask dataframe containing the voltagetraces
-    logging.info("generate voltage traces dataframe...")
+    logger.info("Building voltage traces dataframe...")
     # vt = read_voltage_traces_by_filenames(db['simresult_path'], db['file_list'])
-    vt = read_voltage_traces_by_filenames(
-        db["simresult_path"], filelist, repartition=repartition
-    )
+    vt = read_voltage_traces_by_filenames(db["simresult_path"], filelist, repartition=repartition)
+    logger.info("Writing voltage traces dataframe to database ...")
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
-
+    
     # 3. Read out the sim_trial_index from the soma voltage traces dask dataframe
-    logging.info("generate index ...")
+    logger.info("Building sim_trial_index ...")
     db["sim_trial_index"] = db["voltage_traces"].index.compute()
 
     # 4. Generate metadata dataframe out of sim_trial_indices
-    logging.info("generate metadata ...")
+    logger.info("Building metadata ...")
     db.set("metadata", create_metadata(db), dumper=metadata_dumper)
 
-    logging.info("add divisions to voltage traces dataframe")
-    vt.divisions = get_voltage_traces_divisions_by_metadata(
-        db["metadata"], repartition=repartition
-    )
+    logger.info("Adding divisions to voltage traces dataframe")
+    vt.divisions = get_voltage_traces_divisions_by_metadata(db["metadata"], repartition=repartition)
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
 
 

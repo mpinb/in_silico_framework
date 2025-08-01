@@ -1,8 +1,5 @@
 import os
-import warnings
-
 import dask
-import dask.dataframe as dd
 import numpy as np
 import pandas as pd
 
@@ -69,10 +66,16 @@ def read_voltage_traces_from_file(prefix, fname):
         :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_csv` and
         :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_npz`
     """
-    if fname.endswith(".csv"):
-        return read_voltage_traces_from_csv(prefix, fname)
-    if fname.endswith(".npz"):
-        return read_voltage_traces_from_npz(prefix, fname)
+    logger.info(f"Reading voltage trace file: {fname}")
+    try:
+        if fname.endswith(".csv"): return read_voltage_traces_from_csv(prefix, fname)
+        if fname.endswith(".npz"): return read_voltage_traces_from_npz(prefix, fname)
+    except Exception as e:
+        logger.error(e)
+        # Return empty DataFrame with same structure as meta
+        # These will simply be ignored by upstream dd.from_delayed()
+        empty_df = pd.DataFrame(columns=meta.columns).astype(meta.dtypes)
+        return empty_df
 
 
 read_voltage_traces_from_file_delayed = dask.delayed(read_voltage_traces_from_file)

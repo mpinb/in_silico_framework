@@ -39,7 +39,7 @@ def make_filelist(directory, suffix="vm_all_traces.csv"):
         for filename in fnmatch.filter(filenames, "*" + suffix):
             dummy = os.path.join(root, filename)
             if "_running" in dummy:
-                logging.info("skip incomplete simulation: {}".format(dummy))
+                logger.warning("Skipping incomplete simulation: {}".format(dummy))
             else:
                 matches.append(os.path.relpath(dummy, directory))
 
