@@ -140,19 +140,8 @@ log_level = "INFO"
 # -------------------------------------------------------------------------
 # Pixi tasks
 # -------------------------------------------------------------------------
-[tool.pixi.tasks.check_gcc]
-cmd = [
-  "which", "gcc", "&&",
-  "gcc", "--version", "&&",
-  "which", "g++", "&&",
-  "g++", "--version", "&&",
-  "which", "cc", "&&",
-  "cc", "--version"
-]
-
 [tool.pixi.tasks.configure]
 # (re)configure ISF for local filesystem
-depends-on = ["check_gcc"]
 args = [
   {arg = "force_recompile", default = "False" },
   {arg = "overwrite_param_files", default = "False" }
