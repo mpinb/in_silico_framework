@@ -90,39 +90,38 @@ def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
             if len(hoc_fn_soft_matches) == 1:
                 return list(hoc_fn_soft_matches.values())[0]
             elif len(hoc_fn_soft_matches) > 1:
-                raise ValueError(
-                    "The .hoc file referenced in the .syn file can refer to multiple .hoc files \n.hoc reference in .syn: {}\n Potential .hoc file candidates: {}".format(
-                        match, hoc_fn_map.keys()
+                logger.warning(
+                    "The .hoc file referenced in the .syn file can refer to multiple .hoc files, so I will leave the reference unchanged.\n.hoc reference in .syn: {}\n Potential .hoc file candidates: {}".format(
+                        match, hoc_fn_soft_matches.keys()
                     )
                 )
+                return match
             else:
-                raise ValueError(
-                    "The .hoc file referenced in the .syn file was not found in the .hoc filepath mapping\n.hoc reference in .syn: {}\n filepath mapping: {}".format(
+                logger.warning(
+                    "The .hoc file referenced in the .syn file was not found in the .hoc filepath mapping, so I will leave the reference unchanged\n.hoc reference in .syn: {}\n filepath mapping: {}".format(
                         match, hoc_fn_map
                     )
                 )
+                return match
 
     syn_content = syn_content.split("\n")
     # Use a regular expression to replace the .hoc file name
     matches = re.findall(r"\b\S+\.hoc\b", syn_content[1])
     if len(matches) == 0:
         logger.warning("No .hoc file reference in syn file")
-        assert (
-            len(hoc_fn_map) == 1
-        ), "Found no .hoc file reference in the .syn file, but there are {} .hoc files in the original results directory. I don't know which .hoc file this .syn file i ssupposed to refer to.".format(
-            len(hoc_fn_map)
-        )
+        assert (len(hoc_fn_map) == 1), "Found no .hoc file reference in the .syn file, but there are {} .hoc files in the original results directory. I don't know which .hoc file this .syn file is supposed to refer to.".format(len(hoc_fn_map))
         # simply take the first and only hoc file
-        target_hoc_file = list(hoc_fn_map.values())[0]
+        original_hoc_file = list(hoc_fn_map.values())[0]
     elif len(matches) > 1:
         raise ValueError(
             "Found multiple .hoc references in the .syn file. This is not supported."
         )
     else:
-        target_hoc_file = matches[0]
-        if not os.path.isabs(target_hoc_file):
-            target_hoc_file = find_hoc_file(target_hoc_file)
-    relative_hoc_file = create_reldb_path(target_hoc_file)
+        original_hoc_file = matches[0]
+        if not os.path.isabs(original_hoc_file):
+            original_hoc_file = find_hoc_file(original_hoc_file)
+    if not os.path.isabs(original_hoc_file): relative_hoc_file = original_hoc_file
+    else: relative_hoc_file = create_reldb_path(original_hoc_file)
     syn_content[1] = "# {}\n".format(relative_hoc_file)
     return "\n".join(syn_content)
 

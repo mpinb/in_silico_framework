@@ -4,12 +4,13 @@ import os
 
 import dask
 from os import walk
+from itertools import compress
 
 from data_base.IO.roberts_formats import _max_commas
 from data_base.utils import chunkIt
+from data_base.db_initializers.load_simrun_general.health import get_filter_healthy_simresult_dirs
 
 logger = logging.getLogger("ISF").getChild(__name__)
-
 
 def make_filelist(directory, suffix="vm_all_traces.csv"):
     """Generate a list of all files with :paramref:`suffix` in the specified directory.
@@ -117,3 +118,26 @@ def get_max_commas(paths):
     max_commas = [max_commas_in_chunk(chunk) for chunk in filepath_chunks]
     max_commas = dask.delayed(max_commas).compute()
     return max(max_commas)
+
+
+def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
+    simresult_dirs, fns = zip(*[
+        (
+            os.path.basename(os.path.dirname(e)), 
+            os.path.basename(e)
+        ) 
+        for e in filelist])
+    #    old naming convention: subdirectory/20250101-1553_0001
+    #  newer naming convention: subdirectory/20250101-1553_seed0001
+    # newest naming convention: subdirectoy/20250101-1553_seed123456_pid0001
+    prefixes_no_date = ["_".join(e.split("_")[1:]) for e in simresult_dirs]
+    
+    # example file:
+    # seed2622647967_pid162918_pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6_vm_dend_traces.csv
+    # ------- prefix -------- _----------------- recsite label ------------------ _------ suffix ----
+
+    recsite_labels = [
+        e[len(prefix)+1:-len(full_suffix)-1] 
+        for e, prefix in zip(fns, prefixes_no_date)
+        ]
+    return recsite_labels

@@ -82,7 +82,7 @@ from data_base.analyze.spike_detection import spike_detection
 from data_base import is_data_base
 from data_base.IO.LoaderDumper import get_dumper_string_by_dumper_module
 from data_base.utils import mkdtemp
-from .config import OPTIMIZED_PANDAS_DUMPER
+from .config import OPTIMIZED_PANDAS_DUMPER, DEND_VT_SPLIT_PER_RECSITE_ID
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -120,6 +120,7 @@ def init(
     client=None,
     n_chunks=5000,
     dumper=None,
+    check_health=False
 ):
     """Initialize a database with simulation data.
 
@@ -194,7 +195,13 @@ def init(
     db["simresult_path"] = simresult_path
 
     if core:
-        _build_core(db, repartition=repartition, metadata_dumper=OPTIMIZED_PANDAS_DUMPER)
+        _build_core(
+            db, 
+            repartition=repartition, 
+            metadata_dumper=OPTIMIZED_PANDAS_DUMPER,
+            client=client,
+            check_health=check_health
+            )
         if rewrite_in_optimized_format:
             optimize(
                 db,
@@ -275,10 +282,11 @@ def add_dendritic_voltage_traces(
     _build_dendritic_voltage_traces(db, repartition=repartition)
     
     if rewrite_in_optimized_format:
+        subselection = list(db["dendritic_recordings"].keys()) if DEND_VT_SPLIT_PER_RECSITE_ID else "dendritic_recordings"
         # Actually load and parse the data to a format: this is not a symlink anymore
         optimize(
             db["dendritic_recordings"],
-            select=list(db["dendritic_recordings"].keys()),
+            select=subselection,       
             repartition=False,
             scheduler=scheduler,
             client=client,

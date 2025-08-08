@@ -68,6 +68,41 @@ def build_parameters(filename):
     return NTParameterSet(data)
 
 
+def fast_extract_values_from_param_file_key(param_file, keys, val_is_array=False):
+    """Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+    
+    In contrast to building the parameters using :py:meth:`~build_parameters`, this method uses regex
+    to quickly parse out the parameter values. 
+    """
+    assert not isinstance(keys, str), "You must provide the keys as an array that is not a string"
+    
+    with open(param_file, 'r') as f:
+        content = f.read()
+    
+    # Create a single regex that captures all keys at once
+    if val_is_array:
+        key_group = '|'.join(re.escape(key) for key in keys)
+        pattern = re.compile(rf"['\"]?({key_group})['\"]?\s*:\s*\[([^\]]*)\],*")
+    else:
+        key_group = '|'.join(re.escape(key) for key in keys)
+        pattern = re.compile(rf"['\"]?({key_group})['\"]?\s*:\s*['\"]([^'\"]*)['\"],*")
+    
+    # Single pass through the content
+    matches = pattern.findall(content)
+    
+    # Group results by key
+    results_dict = {key: [] for key in keys}
+    for key_match, value_match in matches:
+        if val_is_array:
+            items = [item.strip().strip('\'"') for item in value_match.split(',')]
+            results_dict[key_match].append(items)
+        else:
+            results_dict[key_match].append(value_match)
+    
+    # Return in the same order as input keys
+    return [results_dict[key] for key in keys]
+
+    
 def load_NMODL_parameters(parameters):
     """Load NMODL mechanisms from paths in parameter file.
 

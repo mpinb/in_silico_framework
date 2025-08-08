@@ -1,13 +1,12 @@
-import glob
-import logging
-import os
-
+import glob, logging, os
 import dask
 import dask.dataframe as dd
 import pandas as pd
+import numpy as np
 
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
+from itertools import compress
 from data_base.dbopen import resolve_neup_reldb_paths
 from data_base.IO.LoaderDumper import pandas_to_msgpack
 from data_base.IO.roberts_formats import (
@@ -22,12 +21,13 @@ from .data_parsing import (
     load_dendritic_voltage_traces,
     read_voltage_traces_by_filenames,
 )
-from .file_handling import get_max_commas, make_filelist
+from .file_handling import get_max_commas, make_filelist, get_recsite_labels_from_dend_vt_filelist
 from .metadata_utils import create_metadata, get_voltage_traces_divisions_by_metadata
 from .param_file_parser import (
-    _delayed_copy_transform_paramfiles_to_db,
+    parallel_resolve_and_copy_paramfiles_to_db,
     construct_param_filename_hashmap_df,
 )
+from .health import get_filter_healthy_simresult_dirs
 from .config import (
     NETP_DIR,
     NEUP_DIR,
@@ -35,11 +35,52 @@ from .config import (
     SYN_DIR,
     CON_DIR,
     RECSITES_DIR,
-    DEFAULT_DUMPER
+    DEFAULT_DUMPER,
+    DEND_VT_SPLIT_PER_RECSITE_ID
 )
 from config.isf_logging import logger
 
-def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
+
+def _filter_filelist_by_health(filelist, simresult_path, client):
+    """Filter out simulation results if they can't be reproduced due to missing files.
+    
+    Missing parameterfiles can happen when data is recovered incompletely. If a simualtion
+    directory is missing synapse activation files, cell activation files, parameter files,
+    or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
+    :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
+    
+    This function checks if this is the case, and filters out such results from :paramref:`filelist`
+    
+    Args:
+        filelist (List): 
+            List of voltage trace results, relative to :paramref:`simresult_path`. 
+        simresult_path (str): Single path where all simulation results are stored.
+        client (:py:class:`distributed.client.Client`): A parallellization client.
+
+    Returns:
+        List: A filelist of reproducible simulation results.
+        
+    Raises:
+        ValueError: if no simulations in :paramref:`filelist` can be reproduced.
+    """
+    logger.info("Checking if simulation directories contain parameterfiles incomplete results")
+    sim_dirs = [os.path.join(simresult_path, os.path.dirname(f)) for f in filelist]
+    is_healthy_mask = get_filter_healthy_simresult_dirs(sim_dirs, client=client)
+    for broken_sim in list(compress(sim_dirs, ~is_healthy_mask)):
+        logger.debug(f"Incomplete result: {broken_sim}. Check logger output (potentially on a dask worker) for more info")
+    # Filter the filelist based on boolean is_healthy_mask
+    filelist = list(compress(filelist, is_healthy_mask))
+    if len(filelist) == 0: raise ValueError("Filelist empty. Abort initialization.")
+    return filelist
+
+
+def _build_core(
+    db, 
+    repartition=None, 
+    metadata_dumper=pandas_to_msgpack,
+    check_health=False,
+    client=None
+    ):
     """Parse the essential simulation results and add it to :paramref:`db`.
 
     The following data is parsed and added to the database:
@@ -61,12 +102,20 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
     logger.info("--- Building data base core ---")
     logger.info("Core consists of: voltage_traces, metadata, filelist, sim_trial_index")
 
-    # 1. Generate filelist containing paths to all soma voltage trace files
+    # 1. Generate filelist and sim_trial_index
+    # filelist contains the paths to all soma voltage trace files
+    # sim_trial_index contains the parent directory of these, plus the run IDs per sim result folder
     logger.info("Building filelist ...")
-    try: filelist = make_filelist(db["simresult_path"], "vm_all_traces.csv")
-    except ValueError: filelist = make_filelist(db["simresult_path"], "vm_all_traces.npz")
+    try: 
+        filelist = make_filelist(db["simresult_path"], "vm_all_traces.csv")
+    except ValueError: 
+        filelist = make_filelist(db["simresult_path"], "vm_all_traces.npz")
+    if check_health:
+        logger.info("Checking if simulation directories contain parameterfiles incomplete results")
+        filelist = _filter_filelist_by_health(filelist, db["simresult_path"], client)
+
     db["filelist"] = filelist
-    
+
     # 2. Generate dask dataframe containing the voltagetraces
     logger.info("Collecting voltage trace locations...")
     # vt = read_voltage_traces_by_filenames(db['simresult_path'], db['file_list'])
@@ -176,17 +225,34 @@ def _build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None):
     assert repartition is not None
     logging.info("---building dendritic voltage traces dataframes---")
 
-    if suffix_dict is None:
-        suffix_dict = _get_rec_site_managers(db)
+    try: 
+        suffix = "vm_dend_traces.csv"
+        filelist = make_filelist(db["simresult_path"], suffix=suffix)
+    except ValueError: 
+        suffix = "vm_dend_traces.npz"
+        filelist = make_filelist(db["simresult_path"], sufix=suffix)
 
-    dend_vt = load_dendritic_voltage_traces(db, suffix_dict, repartition=repartition)
-    if not "dendritic_recordings" in list(db.keys()):
-        db.create_sub_db("dendritic_recordings")
+    recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
 
-    sub_db = db["dendritic_recordings"]
+    logger.info("Loading dendritic voltage traces")
 
-    for recSiteLabel in list(suffix_dict.keys()):
-        sub_db.set(recSiteLabel, dend_vt[recSiteLabel], dumper=DEFAULT_DUMPER)
+    if DEND_VT_SPLIT_PER_RECSITE_ID == True:
+        dend_vt = load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=repartition)
+        if not "dendritic_recordings" in list(db.keys()): db.create_sub_db("dendritic_recordings")
+        sub_db = db["dendritic_recordings"]
+        for recSiteLabel in list(suffix_dict.keys()):
+            sub_db.set(recSiteLabel, dend_vt[recSiteLabel], dumper=DEFAULT_DUMPER)
+    elif DEND_VT_SPLIT_PER_RECSITE_ID == False:
+        if not len(filelist) == len(db["sim_trial_index"]):
+            raise ValueError(
+                "If DEND_VT_SPLIT_PER_RECSITE_ID is False, the amount of dendritic voltage traces should equal"
+                "the sim_trial_index, but there are {} dendritic voltage traces and {} sim trial indices".format(
+                    len(filelist), len(db["sim_trial_index"]))
+                )
+        dend_vt = load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=False)
+        merged_df = dd.concat([*dend_vt.values()])
+        db["dendritic_recordings"] = merged_df
+        
     # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
 
 
@@ -228,24 +294,25 @@ def _build_param_files(db, client):
     result = client.gather(futures)
     param_file_hash_df = pd.concat(result)
     param_file_hash_df.set_index("sim_trial_index", inplace=True)
-
-    # Copy and parameterfiles and adapt internal references
-    ds = _delayed_copy_transform_paramfiles_to_db(
-        paramfile_hashmap_df=param_file_hash_df,
-        db=db,
-        neup_path_column="path_neuron",
-        neup_hash_column="hash_neuron",
-        netp_path_column="path_network",
-        netp_hash_column="hash_network",
-        client=client,
-    )
-    futures = client.compute(ds)
-    result = client.gather(futures)
-
     db.set("parameterfiles", param_file_hash_df, dumper=pandas_to_msgpack)
 
+    # Copy and parameterfiles and adapt internal references
+    parallel_resolve_and_copy_paramfiles_to_db(
+        paramfile_hashmap_df=param_file_hash_df,
+        db=db,
+        client=client,
+    )
 
-def _get_rec_site_managers(db):
+
+def _get_recsite_labels_from_neup(neup):
+    neuronParameters = scp.build_parameters(neup)
+    rec_sites = neuronParameters.sim.recordingSites # absolute path to original .landmarkAscii file
+    cell = scp.create_cell(neuronParameters.neuron, setUpBiophysics=True)
+    recSiteManagers = [sca.RecordingSiteManager(recFile, cell) for recFile in rec_sites]
+    return [recSite.label for RSManager in recSiteManagers for recSite in RSManager.recordingSites]
+
+
+def _get_rec_site_label_fn_map(db, filelist):
     """Get the recording sites from the cell parameter files.
 
     Recording sites are locations onto the postsynaptic membrane where the voltage traces are recorded.
@@ -260,41 +327,7 @@ def _get_rec_site_managers(db):
     Raises:
         NotImplementedError: If the cell parameter files of the simulation specify different recording sites for different trials.
     """
-    # TODO: this assumes you have copied over the paramfiles, but this is an optional flag...
-    # TODO: canyou build dendritic voltage traces (assuming you have the recsites) without copying over the paramfiles?
-    # TODO: If not, these flags should be dependent
-    param_files = glob.glob(os.path.join(db[NEUP_DIR], "*"))
-    param_files = [
-        p
-        for p in param_files
-        if not p.endswith(("Loader.pickle", "Loader.json", "metadata.json"))
-    ]
-    logging.info(len(param_files))
-    rec_sites = []
-    for param_file in param_files:
-        neuronParameters = scp.build_parameters(param_file)
-        rec_site = neuronParameters.sim.recordingSites
-        rec_sites.append(tuple(rec_site))
+    rec_site_labels = get_recsite_labels_from_dend_vt_filelist(filelist)
     rec_sites = set(rec_sites)
-    # print param_files
-    if len(rec_sites) > 1:
-        raise NotImplementedError(
-            "Cannot initialize database with dendritic recordings if"
-            + " the cell parameter files differ in the landmarks they specify for the recording sites."
-        )
-    #############
-    # the following code is adapted from simrun
-    #############
-    neuronParameters = scp.build_parameters(param_files[0])
-    neuronParameters = resolve_neup_reldb_paths(neuronParameters, db.basedir)
-    rec_sites = neuronParameters.sim.recordingSites
-    cellParam = neuronParameters.neuron
-    with silence_stdout:
-        cell = scp.create_cell(cellParam, setUpBiophysics=True)
-    recSiteManagers = [sca.RecordingSiteManager(recFile, cell) for recFile in rec_sites]
-    recsite_dend_vt_dict = {
-        recSite.label: recSite.label + "_vm_dend_traces.csv"
-        for RSManager in recSiteManagers
-        for recSite in RSManager.recordingSites
-    }
+    recsite_dend_vt_dict = {rslabel: rslabel + "_dend_vt_dict" for rslabel in rec_site_labels}
     return recsite_dend_vt_dict

@@ -66,7 +66,7 @@ def read_voltage_traces_from_file(prefix, fname, meta=None):
         :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_csv` and
         :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_npz`
     """
-    logger.info(f"Reading voltage trace file: {fname}")
+    logger.debug(f"Reading voltage trace file: {fname}")
     try:
         if fname.endswith(".csv"): return read_voltage_traces_from_csv(prefix, fname)
         if fname.endswith(".npz"): return read_voltage_traces_from_npz(prefix, fname)
@@ -252,13 +252,15 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
             read_voltage_traces_from_file_delayed(prefix, fname, meta=meta) for fname in fnames
         ]
     if divisions is not None:
-        assert len(divisions) - 1 == len(delayeds)
+        assert len(divisions) - 1 == len(delayeds), "Expected one less filename than divisions, but I have {} divisions and {} filenames".format(
+            len(divisions), len(fnames)
+        )
 
     ddf = dd.from_delayed(delayeds, meta=meta, divisions=divisions)
     return ddf
 
 
-def load_dendritic_voltage_traces_helper(db, suffix, divisions=None, repartition=None):
+def load_dendritic_voltage_traces_helper(db, filelist, divisions=None, repartition=None):
     """Read the dendritic voltage traces of a single recording site across multiple simulation trials.
 
     This method constructs a list of all filenames corresponding to a single recording site and reads them in
@@ -280,82 +282,30 @@ def load_dendritic_voltage_traces_helper(db, suffix, divisions=None, repartition
         dask.DataFrame: A dask dataframe containing the dendritic voltage traces.
     """
     assert repartition is not None
-    metadata = db["metadata"]
-    if not suffix.endswith(".csv"):
-        suffix = suffix + ".csv"
-    if not suffix.startswith("_"):
-        suffix = "_" + suffix
-    # print os.path.join(db['simresult_path'], m.iloc[0].path, m.iloc[0].path.split('_')[-1] + suffix)
-    absolute_simresult_path = db['simresult_path']
-    relative_simresult_path = metadata.iloc[0].path                 # e.g. results/20250101-1553_seed123456_pid0001
-    example_pid = relative_simresult_path.split("_")[-1]            # e.g. pid7896
-    example_random_seed = relative_simresult_path.split("_")[-2]    # e.g. seed74895461
     
-    # old naming convention: used PID as a suffix
-    # e.g.: subdirectory/20250101-1553_0001
-    example_old_path = os.path.join(
-        absolute_simresult_path,
-        relative_simresult_path,
-        example_pid + suffix,
-    )
-    # new-ish naming convention: used PID as a seed
-    # e.g.: subdirectory/20250101-1553_seed0001
-    example_new_path = os.path.join(
-        absolute_simresult_path,
-        relative_simresult_path,
-        "seed_" + example_pid + suffix,
-    )
-    # brand new naming convention: Use both PID and random seed
-    # e.g.: subdirectoy/20250101-1553_seed123456_pid0001
-    example_brand_new_path = os.path.join(
-        absolute_simresult_path,
-        relative_simresult_path,
-        example_random_seed
-        + "_"
-        + example_pid
-        + suffix,
-    )
-
-    if os.path.exists(example_old_path):
-        fnames = [
-            os.path.join(x.path, x.path.split("_")[-1] + suffix)
-            for index, x in metadata.iterrows()
-        ]
-
-    elif os.path.exists(example_new_path):
-        fnames = [
-            os.path.join(x.path, "seed_" + x.path.split("_")[-1] + suffix)
-            for index, x in metadata.iterrows()
-        ]
-
-    elif os.path.exists(example_brand_new_path):
-        fnames = [
-            os.path.join(
-                x.path, x.path.split("_")[-2] + "_" + x.path.split("_")[-1] + suffix
-            )
-            for index, x in metadata.iterrows()
-        ]
-    else:
-        raise FileNotFoundError(
-            "Could not find any files with the suffix {} in the directory {}".format(
-                suffix, db["simresult_path"]
-            )
-        )
-
-    # print(suffix)
-    fnames = unique(fnames)
+    filelist = unique(filelist)
     ddf = read_voltage_traces_by_filenames(
-        db["simresult_path"], fnames, divisions=divisions, repartition=repartition
+        db["simresult_path"], filelist, divisions=divisions, repartition=repartition
     )
     return ddf
 
 
-def load_dendritic_voltage_traces(db, suffix_key_dict, repartition=None):
+def load_dendritic_voltage_traces(
+    db, 
+    filelist,
+    recsite_labels, 
+    repartition=None
+    ):
     """Load the voltage traces from dendritic recording sites.
 
-    Dendritic recording sites are defined in the :ref:`cell_parameters_format` files (under the key ``sim.recordingSites``).
-    The voltage traces for each recording site are read with
-    :py:meth:`~data_base.db_initializers.load_simrun_general.load_dendritic_voltage_traces_helper`.
+    This functions reads in all dendritic voltage trace files corresponding
+    to each recsite label in :paramref:`suffix_key_dict`.
+    Dendritic voltage traces recorded with recsites of the same label are aggregated in a single file.
+
+    Attention:
+        While voltage traces are combined depending on their recsite label, this does not mean
+        that these voltage traces belong to the same simulation. Only the ``sim_trial_index`` is
+        a reliable readout to check which simulation runs used the same parameters.
 
     Args:
         db (:py:class:`~data_base.DataBase`):
@@ -367,14 +317,21 @@ def load_dendritic_voltage_traces(db, suffix_key_dict, repartition=None):
             If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 
     Returns:
-        dict: Dictionary containing the dask dataframes of the dendritic voltage traces.
+        Dict[str, :py:class:`dask.dataframe.DataFrame`]: 
+            Dictionary mapping each recsite label to a dask dataframe containing the associated voltage traces.
 
     """
+    df = pd.DataFrame({'filepath': filelist, 'label': recsite_labels})
+    recsite_label_filelist_dict = df.groupby('label')['filepath'].apply(list).to_dict()
+    if not len(filelist) // len(recsite_label_filelist_dict.keys()) == len(db["voltage_traces"]):
+        raise ValueError(
+            "Amount of dendritic voltage traces per recsite does not match the amount of total somatic voltage traces."
+            "Divisions between the two are not transferable. Consider adapting DEND_VT_SPLIT_PER_RECSITE_ID in config")
     recsite_dendvt_dict = {}
     divisions = db["voltage_traces"].divisions
     # suffix_key_dict is of form: {recSite.label:  recSite.label + '_vm_dend_traces.csv'}
-    for recsite, dend_vt_fn in suffix_key_dict.items():
-        recsite_dendvt_dict[recsite] = load_dendritic_voltage_traces_helper(
-            db, dend_vt_fn, divisions=divisions, repartition=repartition
+    for recsite_label, filelist in recsite_label_filelist_dict.items():
+        recsite_dendvt_dict[recsite_label] = load_dendritic_voltage_traces_helper(
+            db, filelist, divisions=divisions, repartition=repartition
         )
     return recsite_dendvt_dict
