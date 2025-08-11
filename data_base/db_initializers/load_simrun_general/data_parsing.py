@@ -4,6 +4,7 @@ import pandas as pd
 import dask.dataframe as dd
 from config.isf_logging import logger
 from data_base.utils import chunkIt, unique
+from .config import DASK_TARGET_PARTITION_SIZE
 
 
 @dask.delayed
@@ -162,27 +163,27 @@ def read_voltage_traces_from_csv(prefix, fname):
 #     # TODO: ideally, these should not require checking synapse activation files. We had issues where corrupted data (with less syn act files than voltage trace columns)
 #     # TODO: caused weird failures, as the index lenght did not match vt length.
 #     # TODO: Changing this incurs a significant refactor though.
-    # indices = sorted(
-    #     [
-    #         int(f.split("_")[1][3:])
-    #         for f in os.listdir(os.path.dirname(full_fname))
-    #         if "synapses" in f
-    #     ]
-    # )
-    # index = [
-    #     str(os.path.join(os.path.dirname(fname), str(index).zfill(6)))
-    #     for index in indices
-    # ]  ##this will be the sim_trail_indexndex = [
-    # # print index
-    # df = pd.dataframe(data, columns=t)
-    # if not data.shape[0] == len(index):
-    #     raise valueerror(
-    #         "found {} voltage traces in the voltage trace .csv: {}\n found a different amount of synapse activation .csvs: {}\ndata location: {}\n".format(
-    #             data.shape[0], full_fname, len(index), os.path.dirname(full_fname))
-    #         )
-    # df["sim_trial_index"] = index
-    # df.set_index("sim_trial_index", inplace=true)
-    # return df
+#     indices = sorted(
+#         [
+#             int(f.split("_")[1][3:])
+#             for f in os.listdir(os.path.dirname(full_fname))
+#             if "synapses" in f
+#         ]
+#     )
+#     index = [
+#         str(os.path.join(os.path.dirname(fname), str(index).zfill(6)))
+#         for index in indices
+#     ]  ##this will be the sim_trail_indexndex = [
+#     # print index
+#     df = pd.dataframe(data, columns=t)
+#     if not data.shape[0] == len(index):
+#         raise ValueError(
+#             "found {} voltage traces in the voltage trace .csv: {}\n found a different amount of synapse activation .csvs: {}\ndata location: {}\n".format(
+#                 data.shape[0], full_fname, len(index), os.path.dirname(full_fname))
+#             )
+#     df["sim_trial_index"] = index
+#     df.set_index("sim_trial_index", inplace=True)
+#     return df
 
 
 def read_voltage_traces_from_npz(prefix, fname):
@@ -226,7 +227,7 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     Args:
         prefix (str): Path to the directory containing the simulation results.
         fnames (list): list of filenames pointing to voltage trace files
-        divisions (list): list of divisions for the dask dataframe. Default is ``None``, letting Dask handle it.
+        divisions (list, optional): list of divisions for the dask dataframe. Default is ``None``, letting Dask handle it.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 
     Returns:
@@ -247,6 +248,7 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
             read_voltage_traces_from_files_pandas(prefix, fnames_chunk)
             for fnames_chunk in fnames_chunks
         ]
+        # TODO: regenerate divisions?
     else:
         delayeds = [
             read_voltage_traces_from_file_delayed(prefix, fname, meta=meta) for fname in fnames
@@ -259,42 +261,38 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     ddf = dd.from_delayed(delayeds, meta=meta, divisions=divisions)
     return ddf
 
-
-def load_dendritic_voltage_traces_helper(db, filelist, divisions=None, repartition=None):
-    """Read the dendritic voltage traces of a single recording site across multiple simulation trials.
-
-    This method constructs a list of all filenames corresponding to a single recording site and reads them in
-    using :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
-
-    Args:
-        db (:py:class:`~data_base.DataBase`):
-            The target database that should contain the parsed simulation results.
-        suffix (str):
-            The suffix of the dendritic voltage trace files.
-            This suffix is used to construct the filenames of the dendritic voltage trace files.
-        divisions (list):
-            List of divisions for the dask dataframe.
-            Default is ``None``, letting Dask handle it.
-        repartition (bool):
-            If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
-
-    Returns:
-        dask.DataFrame: A dask dataframe containing the dendritic voltage traces.
-    """
-    assert repartition is not None
     
-    filelist = unique(filelist)
-    ddf = read_voltage_traces_by_filenames(
-        db["simresult_path"], filelist, divisions=divisions, repartition=repartition
-    )
-    return ddf
+def _read_n_vtraces(fname):
+    if fname.endswith('.npz'):
+        raise NotImplementedError("Don't know how to count the amount of traces for the .npz format: {}".format(fname))
+    cols = pd.read_csv(
+            fname, 
+            nrows=0, 
+            sep=r'\t', 
+            engine="python", # use python engine to handle whitespace
+            dtype=np.float64 # ensure all data is read as float64
+        ).columns
+    return len(cols) - 1  # one column is time, not voltage
 
 
+def _estimate_average_vt_length(fnames, sample_size=10):
+    vt_lengths = [_read_n_vtraces(f) for f in np.random.choice(fnames, size=sample_size)]
+    return int(np.mean(vt_lengths))
+
+    
+def _estimate_chunksize(filelist, index, estimate_sample_size=10):
+    """Estimate how much files a single delayed read function should read in order to hit the target partition size"""
+    est_vt_length = _estimate_average_vt_length(filelist, sample_size=estimate_sample_size)
+    n_files = DASK_TARGET_PARTITION_SIZE // est_vt_length
+    return n_files
+
+    
 def load_dendritic_voltage_traces(
     db, 
     filelist,
     recsite_labels, 
-    repartition=None
+    repartition=None,
+    divisions=None
     ):
     """Load the voltage traces from dendritic recording sites.
 
@@ -321,17 +319,14 @@ def load_dendritic_voltage_traces(
             Dictionary mapping each recsite label to a dask dataframe containing the associated voltage traces.
 
     """
+    assert repartition is not None
+    filelist = unique(filelist)
     df = pd.DataFrame({'filepath': filelist, 'label': recsite_labels})
     recsite_label_filelist_dict = df.groupby('label')['filepath'].apply(list).to_dict()
-    if not len(filelist) // len(recsite_label_filelist_dict.keys()) == len(db["voltage_traces"]):
-        raise ValueError(
-            "Amount of dendritic voltage traces per recsite does not match the amount of total somatic voltage traces."
-            "Divisions between the two are not transferable. Consider adapting DEND_VT_SPLIT_PER_RECSITE_ID in config")
     recsite_dendvt_dict = {}
-    divisions = db["voltage_traces"].divisions
-    # suffix_key_dict is of form: {recSite.label:  recSite.label + '_vm_dend_traces.csv'}
     for recsite_label, filelist in recsite_label_filelist_dict.items():
-        recsite_dendvt_dict[recsite_label] = load_dendritic_voltage_traces_helper(
-            db, filelist, divisions=divisions, repartition=repartition
+        ddf = read_voltage_traces_by_filenames(
+            db["simresult_path"], filelist, divisions=divisions, repartition=repartition
         )
+        recsite_dendvt_dict[recsite_label] = ddf
     return recsite_dendvt_dict

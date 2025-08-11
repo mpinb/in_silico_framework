@@ -82,10 +82,7 @@ from data_base.analyze.spike_detection import spike_detection
 from data_base import is_data_base
 from data_base.IO.LoaderDumper import get_dumper_string_by_dumper_module
 from data_base.utils import mkdtemp
-from .config import OPTIMIZED_PANDAS_DUMPER, DEND_VT_SPLIT_PER_RECSITE_ID
-
-logger = logging.getLogger("ISF").getChild(__name__)
-
+from .config import OPTIMIZED_PANDAS_DUMPER
 
 from .builders import (
     _build_core,
@@ -101,6 +98,7 @@ from .param_file_parser import load_param_files_from_db
 from .utils import _get_dumper
 from .reoptimize import reoptimize_db
 
+logger = logging.getLogger("ISF").getChild(__name__)
 
 def init(
     db,
@@ -282,7 +280,7 @@ def add_dendritic_voltage_traces(
     _build_dendritic_voltage_traces(db, repartition=repartition)
     
     if rewrite_in_optimized_format:
-        subselection = list(db["dendritic_recordings"].keys()) if DEND_VT_SPLIT_PER_RECSITE_ID else "dendritic_recordings"
+        subselection = list(db["dendritic_recordings"].keys())
         # Actually load and parse the data to a format: this is not a symlink anymore
         optimize(
             db["dendritic_recordings"],

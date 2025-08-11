@@ -7,26 +7,21 @@ import numpy as np
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 from itertools import compress
-from data_base.dbopen import resolve_neup_reldb_paths
+from data_base.utils import chunkIt
 from data_base.IO.LoaderDumper import pandas_to_msgpack
 from data_base.IO.roberts_formats import (
     read_pandas_cell_activation_from_roberts_format as read_ca,
+    read_pandas_synapse_activation_from_roberts_format as read_sa
 )
-from data_base.IO.roberts_formats import (
-    read_pandas_synapse_activation_from_roberts_format as read_sa,
+from .data_parsing import load_dendritic_voltage_traces, read_voltage_traces_by_filenames
+from .file_handling import (
+    get_max_commas, 
+    make_filelist, 
+    get_recsite_labels_from_dend_vt_filelist,
+    _get_recsite_ids_from_recsite_labels
 )
-from data_base.utils import chunkIt, silence_stdout
-
-from .data_parsing import (
-    load_dendritic_voltage_traces,
-    read_voltage_traces_by_filenames,
-)
-from .file_handling import get_max_commas, make_filelist, get_recsite_labels_from_dend_vt_filelist
 from .metadata_utils import create_metadata, get_voltage_traces_divisions_by_metadata
-from .param_file_parser import (
-    parallel_resolve_and_copy_paramfiles_to_db,
-    construct_param_filename_hashmap_df,
-)
+from .param_file_parser import parallel_resolve_and_copy_paramfiles_to_db, construct_param_filename_hashmap_df
 from .health import get_filter_healthy_simresult_dirs
 from .config import (
     NETP_DIR,
@@ -36,7 +31,7 @@ from .config import (
     CON_DIR,
     RECSITES_DIR,
     DEFAULT_DUMPER,
-    DEND_VT_SPLIT_PER_RECSITE_ID
+    USE_RECSITE_SHORT_NAME
 )
 from config.isf_logging import logger
 
@@ -63,7 +58,6 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
     Raises:
         ValueError: if no simulations in :paramref:`filelist` can be reproduced.
     """
-    logger.info("Checking if simulation directories contain parameterfiles incomplete results")
     sim_dirs = [os.path.join(simresult_path, os.path.dirname(f)) for f in filelist]
     is_healthy_mask = get_filter_healthy_simresult_dirs(sim_dirs, client=client)
     for broken_sim in list(compress(sim_dirs, ~is_healthy_mask)):
@@ -111,7 +105,7 @@ def _build_core(
     except ValueError: 
         filelist = make_filelist(db["simresult_path"], "vm_all_traces.npz")
     if check_health:
-        logger.info("Checking if simulation directories contain parameterfiles incomplete results")
+        logger.info("Checking if simulation directories have incomplete results or missing parameterfiles")
         filelist = _filter_filelist_by_health(filelist, db["simresult_path"], client)
 
     db["filelist"] = filelist
@@ -132,8 +126,8 @@ def _build_core(
     # Only now is the VT df actually being read in
     db["sim_trial_index"] = db["voltage_traces"].index.compute()
     
-    if db['sim_trial_index'].size == 0:
-        raise ValueError("No valid sim trials found in the specified directory ({}). Check if the logs report invalid results.".format(db['simresult_path']))
+    if db['sim_trial_index'].size == 0: raise ValueError(
+        "No valid sim trials found in the specified directory ({}). Check if the logs report invalid results.".format(db['simresult_path']))
 
     # 4. Generate metadata dataframe out of sim_trial_indices
     logger.info("Building metadata ...")
@@ -210,7 +204,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
         )
 
 
-def _build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None):
+def _build_dendritic_voltage_traces(db, repartition=None):
     """Load dendritic voltage traces and add them to the database under the key ``dendritic_recordings``.
 
     Args:
@@ -225,33 +219,40 @@ def _build_dendritic_voltage_traces(db, suffix_dict=None, repartition=None):
     assert repartition is not None
     logging.info("---building dendritic voltage traces dataframes---")
 
-    try: 
-        suffix = "vm_dend_traces.csv"
-        filelist = make_filelist(db["simresult_path"], suffix=suffix)
-    except ValueError: 
-        suffix = "vm_dend_traces.npz"
-        filelist = make_filelist(db["simresult_path"], sufix=suffix)
+    # Construct dendritic filelist from existing filelist, as built by _build_core
+    # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
+    suffix = "*vm_dend_traces*"
+    path_globs = [
+        os.path.join(
+            db['simresult_path'],
+            os.path.dirname(e),
+            suffix)
+        for e in db['filelist']
+    ]
+    filelist = [
+        path_glob_match 
+        for path_glob in path_globs 
+        for path_glob_match in glob.glob(path_glob)
+    ]
 
     recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
-
+    if USE_RECSITE_SHORT_NAME: recsite_labels = _get_recsite_ids_from_recsite_labels(recsite_labels)
+    
     logger.info("Loading dendritic voltage traces")
-
-    if DEND_VT_SPLIT_PER_RECSITE_ID == True:
-        dend_vt = load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=repartition)
-        if not "dendritic_recordings" in list(db.keys()): db.create_sub_db("dendritic_recordings")
-        sub_db = db["dendritic_recordings"]
-        for recSiteLabel in list(suffix_dict.keys()):
-            sub_db.set(recSiteLabel, dend_vt[recSiteLabel], dumper=DEFAULT_DUMPER)
-    elif DEND_VT_SPLIT_PER_RECSITE_ID == False:
-        if not len(filelist) == len(db["sim_trial_index"]):
-            raise ValueError(
-                "If DEND_VT_SPLIT_PER_RECSITE_ID is False, the amount of dendritic voltage traces should equal"
-                "the sim_trial_index, but there are {} dendritic voltage traces and {} sim trial indices".format(
-                    len(filelist), len(db["sim_trial_index"]))
-                )
-        dend_vt = load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=False)
-        merged_df = dd.concat([*dend_vt.values()])
-        db["dendritic_recordings"] = merged_df
+    divisions = db["voltage_traces"].divisions 
+    dend_vt_per_recsite_label = load_dendritic_voltage_traces(
+        db, 
+        filelist, 
+        recsite_labels, 
+        repartition=repartition, 
+        divisions=divisions)
+    if not "dendritic_recordings" in list(db.keys()): 
+        db.create_sub_db("dendritic_recordings")
+    for recSiteLabel in dend_vt_per_recsite_label:
+        db["dendritic_recordings"].set(
+            recSiteLabel, 
+            dend_vt_per_recsite_label[recSiteLabel], 
+            dumper=DEFAULT_DUMPER)
         
     # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
 
