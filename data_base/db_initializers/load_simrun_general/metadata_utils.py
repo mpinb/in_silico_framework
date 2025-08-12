@@ -6,27 +6,32 @@ import dask
 import pandas as pd
 
 from data_base.utils import chunkIt
+from .data_parsing import _estimate_n_chunks
 
 
-def get_voltage_traces_divisions_by_metadata(metadata, repartition=None):
+def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     """Find the division indices based on the metadata.
 
-    The trial numbers always augment, so for each partition, the lowest trial number is
-    the first entry of that partition. This way, the division indices can be inferred
-    by simply finding the lowest trial number in each partition.
+    The trial numbers always augment, so for each simulation result directory, the lowest trial number is
+    the first entry of that simulation trial. 
+    If one wants to have one simulation directory per partition, this is a convenient way to infer partitions.
 
     Args:
         metadata (pd.DataFrame): Metadata dataframe containing the simulation trial indices.
-        repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+        repartition (bool): If True, the dask dataframe is repartitioned to match 
+            :py:attr:`~data_base.db_initializers.load_simrun_general.config.DASK_TARGET_PARTITION_SIZE`
 
     Returns:
         tuple: Tuple containing the divisions for the voltage traces dataframe.
     """
     assert repartition is not None
+    metadata = db['metadata']
     divisions = metadata[metadata.trialnr == min(metadata.trialnr)]
     divisions = list(divisions.sim_trial_index)
-    if len(divisions) > 10000 and repartition:
-        divisions = [d[0] for d in chunkIt(divisions, 5000)]
+    if repartition:
+        filelist = [os.path.join(db['simresult_path'], e) for e in db['filelist']]
+        n_chunks = _estimate_n_chunks(filelist)
+        divisions = [d[0] for d in chunkIt(divisions, n_chunks)]
     return tuple(divisions + [metadata.iloc[-1].sim_trial_index])
 
 
