@@ -47,7 +47,7 @@ import six
 import numpy as np
 from isf_pandas_msgpack import to_msgpack, read_msgpack
 import json
-from .utils import save_object_meta
+from .meta import save_object_meta
 from config.isf_logging import logger
 
 ####
