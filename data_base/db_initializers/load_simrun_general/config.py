@@ -10,8 +10,6 @@ from data_base.IO.LoaderDumper import (
 )
 
 # Optimization config
-DASK_TARGET_PARTITION_SIZE = 400
-"""(int): Target size of dask partitions. ONly used if the keyword argument ``repartition`` is True and the dumpers are dask-based."""
 DEFAULT_DUMPER = to_cloudpickle
 """The dumper to use when no specific dumper is configured for a data type."""
 OPTIMIZED_PANDAS_DUMPER = pandas_to_msgpack

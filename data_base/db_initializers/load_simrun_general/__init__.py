@@ -117,6 +117,7 @@ def init(
     dendritic_spike_times_threshold=-30.0,
     client=None,
     n_chunks=5000,
+    vt_partition_size=500,
     dumper=None,
     check_health=False
 ):
@@ -129,8 +130,6 @@ def init(
         core (bool, optional):
             Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.
             See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_core`
-        voltage_traces (bool, optional):
-            Parse and write the somatic voltage traces to the database.
         spike_times (bool, optional):
             Parse and write the spike times into the database.
             See also: :py:meth:`data_base.analyze.spike_detection.spike_detection`
@@ -163,6 +162,9 @@ def init(
         n_chunks (int, optional):
             Number of chunks to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
             Default is 5000.
+        vt_partition_size (int):
+            Estimated target size of voltage trace partitions.
+            Default is 500.
         client (dask.distributed.Client, optional):
             Distributed Client object for parallel parsing of anything that isn't a dask dataframe.
         scheduler (dask.distributed.Client, optional)
@@ -180,6 +182,7 @@ def init(
     .. deprecated:: 0.5.0
        The :paramref:`dumper` argument is deprecated and will be removed in a future version.
        Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
+
     """
     if burst_times:
         raise ValueError("deprecated!")
@@ -198,7 +201,8 @@ def init(
             repartition=repartition, 
             metadata_dumper=OPTIMIZED_PANDAS_DUMPER,
             client=client,
-            check_health=check_health
+            check_health=check_health,
+            vt_partition_size=vt_partition_size
             )
         if rewrite_in_optimized_format:
             optimize(

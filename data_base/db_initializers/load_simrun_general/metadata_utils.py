@@ -9,7 +9,7 @@ from data_base.utils import chunkIt
 from .data_parsing import _estimate_n_chunks
 
 
-def get_voltage_traces_divisions_by_metadata(db, repartition=None):
+def get_voltage_traces_divisions_by_metadata(db, repartition=None, vt_partition_size=None):
     """Find the division indices based on the metadata.
 
     The trial numbers always augment, so for each simulation result directory, the lowest trial number is
@@ -30,7 +30,7 @@ def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     divisions = list(divisions.sim_trial_index)
     if repartition:
         filelist = [os.path.join(db['simresult_path'], e) for e in db['filelist']]
-        n_chunks = _estimate_n_chunks(filelist)
+        n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
         divisions = [d[0] for d in chunkIt(divisions, n_chunks)]
     return tuple(divisions + [metadata.iloc[-1].sim_trial_index])
 

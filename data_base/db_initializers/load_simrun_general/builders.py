@@ -31,7 +31,7 @@ from .config import (
     CON_DIR,
     RECSITES_DIR,
     DEFAULT_DUMPER,
-    USE_RECSITE_SHORT_NAME
+    USE_RECSITE_SHORT_NAME,
 )
 from config.isf_logging import logger
 
@@ -73,7 +73,8 @@ def _build_core(
     repartition=None, 
     metadata_dumper=pandas_to_msgpack,
     check_health=False,
-    client=None
+    client=None,
+    vt_partition_size=500
     ):
     """Parse the essential simulation results and add it to :paramref:`db`.
 
@@ -117,6 +118,7 @@ def _build_core(
         prefix=db["simresult_path"], 
         fnames=filelist, 
         repartition=repartition,
+        vt_partition_size=vt_partition_size
     )
     
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
@@ -135,7 +137,7 @@ def _build_core(
 
     logger.info("Adding divisions to voltage traces dataframe and writing to disk")
     # vt.divisions = get_voltage_traces_divisions_by_metadata(db["metadata"], repartition=repartition)
-    vt.divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
+    vt.divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition, partition_size=vt_partition_size)
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
 
 
@@ -157,10 +159,10 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
     def template(key, paths, file_reader_fun, dumper):
         logging.info("counting commas")
         max_commas = get_max_commas(paths) + 1
-        # print max_commas
         logging.info("generate dataframe")
         path_sti_tuples = list(zip(paths, list(db["sim_trial_index"])))
-        if repartition and len(paths) > 10000:
+
+        if repartition and len(paths) > n_chunks * 2:
             path_sti_tuples = chunkIt(path_sti_tuples, n_chunks)
             delayeds = [
                 file_reader_fun(list(zip(*x))[0], list(zip(*x))[1], max_commas)
@@ -181,13 +183,14 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
         db.set(key, ddf, dumper=dumper)
 
     simresult_path = db["simresult_path"]
-    if simresult_path[-1] == "/" and len(simresult_path) > 1:
+    if simresult_path[-1] == os.sep and len(simresult_path) > 1:
         simresult_path = simresult_path[:-1]
 
     m = db["metadata"].reset_index()
     if "synapses_file_name" in m.columns:
         logging.info("---building synapse activation dataframe---")
-        paths = list(simresult_path + "/" + m.path + "/" + m.synapses_file_name)
+        paths = [os.path.join(simresult_path, sim_dir, syn_fn) for sim_dir, syn_fn in zip(m.path, m.synapses_file_name)]
+        # paths = list(simresult_path + os.sep + m.path + os.sep + m.synapses_file_name)
         template(
             "synapse_activation",
             paths,
@@ -196,7 +199,8 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
         )
     if "cells_file_name" in m.columns:
         logging.info("---building cell activation dataframe---")
-        paths = list(simresult_path + "/" + m.path + "/" + m.cells_file_name)
+        paths = [os.path.join(simresult_path, sim_dir, cells_fn) for sim_dir, cells_fn in zip(m.path, m.cells_file_name)]
+        # paths = list(simresult_path + "/" + m.path + "/" + m.cells_file_name)
         template(
             "cell_activation",
             paths,

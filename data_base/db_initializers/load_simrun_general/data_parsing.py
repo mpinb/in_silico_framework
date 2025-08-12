@@ -4,7 +4,6 @@ import pandas as pd
 import dask.dataframe as dd
 from config.isf_logging import logger
 from data_base.utils import chunkIt, unique
-from .config import DASK_TARGET_PARTITION_SIZE
 
 
 @dask.delayed
@@ -223,7 +222,7 @@ def read_voltage_traces_from_npz(prefix, fname):
     return df
 
 
-def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None):
+def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None, vt_partition_size=None):
     """Reads a list of **multiple** voltage trace files and parses it to a dask dataframe.
 
     Also sets the database key ``sim_trial_index`` to contain the paths of the simulation trials.
@@ -248,20 +247,27 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     meta = read_voltage_traces_from_file(prefix, fnames[0]).head(0)
 
     if repartition:
-        filelist = [os.path.join(prefix, fn) for fn in fnames]
-        n_chunks = _estimate_n_chunks(filelist)
+        if divisions is not None:
+            n_chunks = len(divisions) - 1
+        elif vt_partition_size is not None:
+            filelist = [os.path.join(prefix, fn) for fn in fnames]
+            n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
+        else:
+            raise ValueError("If repartition is True, yu must pass either a target partition size, or the divisions.")
+
         chunked_fnames = chunkIt(fnames, n_chunks)
         delayeds = [
             read_voltage_traces_from_files_pandas(prefix, fnames_chunk)
             for fnames_chunk in chunked_fnames
         ]
     else:
+        # One file read per worker
         delayeds = [
             read_voltage_traces_from_file_delayed(prefix, fname, meta=meta) for fname in fnames
         ]
     
     if divisions is not None:
-        assert len(divisions) - 1 == len(delayeds), "Expected n_delayeds divisions, but I have {} divisions and {} filenames".format(
+        assert len(divisions) - 1 == len(delayeds), "Expected n_delayeds = n_divisions + 1, but I have {} divisions and {} delayeds".format(
             len(divisions), len(delayeds)
         )
 
@@ -275,7 +281,7 @@ def load_dendritic_voltage_traces(
     filelist,
     recsite_labels, 
     repartition=None,
-    divisions=None
+    divisions=None,
     ):
     """Load the voltage traces from dendritic recording sites.
 
@@ -357,7 +363,7 @@ def _estimate_average_vt_length(fnames, sample_size=1):
     return int(np.mean(vt_lengths))
 
     
-def _estimate_n_chunks(filelist, estimate_sample_size=1):
+def _estimate_n_chunks(filelist, estimate_sample_size=1, partition_size=None):
     """Estimate how to divide filenames in chunks so that each chunk is approximately the target dask partition size.
     
     This function relies on the global config variable 
@@ -373,7 +379,8 @@ def _estimate_n_chunks(filelist, estimate_sample_size=1):
             The amount of chunks to divide the filelist in such that each chunk will yield a dataframe of approximate size 
             :py:attr:`~data_base.db_initializers.load_simrun_general.config.DASK_TARGET_PARTITION_SIZE`
     """
+    assert partition_size is not None, "Please pass a target partition size."
     est_vt_length = _estimate_average_vt_length(filelist, sample_size=estimate_sample_size)
-    n_files_per_chunk = DASK_TARGET_PARTITION_SIZE // est_vt_length
+    n_files_per_chunk = partition_size // est_vt_length
     n_chunks = len(filelist) // n_files_per_chunk
     return n_chunks
