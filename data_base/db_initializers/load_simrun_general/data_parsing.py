@@ -5,6 +5,8 @@ import dask.dataframe as dd
 from config.isf_logging import logger
 from data_base.utils import chunkIt, unique
 
+DEFAULT_VT_PARTITION_SIZE = 500
+"Partition size to use for voltage trace dataframes if repartition is simply set to ``True``, without specifying a length."
 
 @dask.delayed
 def read_voltage_traces_from_files_pandas(prefix, fnames, meta=None):
@@ -222,7 +224,7 @@ def read_voltage_traces_from_npz(prefix, fname):
     return df
 
 
-def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None, vt_partition_size=None):
+def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None):
     """Reads a list of **multiple** voltage trace files and parses it to a dask dataframe.
 
     Also sets the database key ``sim_trial_index`` to contain the paths of the simulation trials.
@@ -232,7 +234,10 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
         prefix (str): Path to the directory containing the simulation results.
         fnames (list): list of filenames pointing to voltage trace files
         divisions (list, optional): list of divisions for the dask dataframe. Default is ``None``, letting Dask handle it.
-        repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+        repartition (bool|int): 
+            If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
+            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
+            If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
 
     Returns:
         dask.DataFrame: A dask dataframe containing the voltage traces.
@@ -246,14 +251,14 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     fnames = sorted(fnames)
     meta = read_voltage_traces_from_file(prefix, fnames[0]).head(0)
 
-    if repartition:
+    if repartition is not False:
         if divisions is not None:
             n_chunks = len(divisions) - 1
-        elif vt_partition_size is not None:
+        else:
+            if repartition == True: vt_partition_size = DEFAULT_VT_PARTITION_SIZE
+            elif isinstance(repartition, int): vt_partition_size = repartition
             filelist = [os.path.join(prefix, fn) for fn in fnames]
             n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
-        else:
-            raise ValueError("If repartition is True, yu must pass either a target partition size, or the divisions.")
 
         chunked_fnames = chunkIt(fnames, n_chunks)
         delayeds = [

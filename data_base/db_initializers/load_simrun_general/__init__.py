@@ -100,81 +100,77 @@ from .reoptimize import reoptimize_db
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
+
+
 def init(
     db,
     simresult_path,
     core=True,
-    voltage_traces=True,
     synapse_activation=True,
     dendritic_voltage_traces=True,
     parameterfiles=True,
     spike_times=True,
-    burst_times=False,
     repartition=True,
     scheduler=None,
     rewrite_in_optimized_format=True,
     dendritic_spike_times=True,
     dendritic_spike_times_threshold=-30.0,
     client=None,
+    check_health=False,
     n_chunks=5000,
-    vt_partition_size=500,
+    # deprecated args;
+    voltage_traces=None,
+    burst_times=None,
     dumper=None,
-    check_health=False
 ):
     """Initialize a database with simulation data.
 
     Use this function to load simulation data generated with the simrun module
-    into a :py:class:`~data_base.DataBase`.
+    into a :py:class:`~data_base.DataBase`. 
 
     Args:
         core (bool, optional):
             Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_core`
         spike_times (bool, optional):
             Parse and write the spike times into the database.
             See also: :py:meth:`data_base.analyze.spike_detection.spike_detection`
         dendritic_voltage_traces (bool, optional):
             Parse and write the dendritic voltage traces to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_dendritic_voltage_traces`
         dendritic_spike_times (bool, optional):
             Parse and write the dendritic spike times to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
         dendritic_spike_times_threshold (float, optional):
             Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
         synapse_activation (bool, optional):
             Parse and write the synapse activation data to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_synapse_activation`
         parameterfiles (bool, optional):
-            Parse and write the parameterfiles to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_param_files`
+            Resolve and copy the parameterfiles used in each simulation to the database.
+            Since this copies all parameterfiels required to rerun simulations, this makes the database self-containing and portable.
+            You could then remove the original raw simulation data, provided you have selected all desired results in the keyword arguments here.
         rewrite_in_optimized_format (bool, optional):
-            If True (default): data is converted to a high performance binary
-            format and makes unpickling more robust against version changes of third party libraries.
-            Also, it makes the database self-containing, i.e. you can move it to another machine or
-            subfolder and everything still works. Deleting the data folder then would (should) not cause
-            loss of data.
-            If False: the db only contains links to the actual simulation data folder
-            and will not work if the data folder is deleted or moved or transferred to another machine
-            where the same absolute paths are not valid.
-        repartition (bool, optional):
-            If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+            If True (default): data is converted to a high performance binary format
+            If False: the db only contains links (pickled objects) to the actual simulation data folder
+            and will not work if the data folder is deleted or moved or transferred to another machine.
+        repartition (bool|int): 
+            If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
+            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.data_parsing.DEFAULT_VT_PARTITION_SIZE`
+            If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
         n_chunks (int, optional):
-            Number of chunks to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
-            Default is 5000.
-        vt_partition_size (int):
-            Estimated target size of voltage trace partitions.
-            Default is 500.
-        client (dask.distributed.Client, optional):
+            Amount of partitions to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
+            Default is :math:`5000`.
+        client (:py:class:`distributed.Client`, optional):
             Distributed Client object for parallel parsing of anything that isn't a dask dataframe.
-        scheduler (dask.distributed.Client, optional)
+        scheduler (:py:class:`distributed.Client`, optional)
             Scheduler to use for parallellized parsing of dask dataframes.
             can e.g. be simply the ``distributed.Client.get`` method.
             Default is ``None``.
-        dumper (module, optional, deprecated):
-            Dumper to use for saving pandas dataframes.
-            Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
-            This has been deprecated in favor of a central configuration for the dumpers.
+            
+    Note:
+        Note the difference between *amount* of partitions (:paramref:`n_chunks`) and target partition *size* (:paramref:`repartition`)
+
+    .. versionadded:: 0.5.0
+       The keyword argument :paramref:`repartition` now accepts integers in addition to booleans.
+       Integers reflect the target size of each voltage trace dataframe partition. Booleans reflect either
+       ``True`` for a default lenght, or ``False`` for no repartitioning (i.e. one ``.csv`` file per partition)
 
     .. deprecated:: 0.2.0
         The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
@@ -182,10 +178,18 @@ def init(
     .. deprecated:: 0.5.0
        The :paramref:`dumper` argument is deprecated and will be removed in a future version.
        Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
+    
+    .. deprecated:: 0.5.0
+       The :paramref:`voltage_traces` is deprecated and will be removed in a future version.
+       Voltage traces are always built when :paramref:`core` is ``True``. 
 
     """
-    if burst_times:
-        raise ValueError("deprecated!")
+    if burst_times is not None:
+        logger.warning("The burst_times argument is deprecated and will be removed in a future version. Ignoring and continuing...")
+    if voltage_traces is not None:
+        logger.warning("The voltage_trace argument is deprecated and will be removed in a future version. Voltage traces are always built when core=True, and don't need a duplicate kwarg. Ignoring and continuing...")
+    if dumper is not None:
+        logger.warning("The dumper argument is deprecated and will be removed in a future version. Dumpers for specific keys are configured in the data_base.db_initializers.load_simrun_general.config. Ignoring and continuing...")
     if rewrite_in_optimized_format:
         assert client is not None
         scheduler = client
@@ -202,7 +206,6 @@ def init(
             metadata_dumper=OPTIMIZED_PANDAS_DUMPER,
             client=client,
             check_health=check_health,
-            vt_partition_size=vt_partition_size
             )
         if rewrite_in_optimized_format:
             optimize(

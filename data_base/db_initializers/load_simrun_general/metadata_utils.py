@@ -6,10 +6,10 @@ import dask
 import pandas as pd
 
 from data_base.utils import chunkIt
-from .data_parsing import _estimate_n_chunks
+from .data_parsing import _estimate_n_chunks, DEFAULT_VT_PARTITION_SIZE
 
 
-def get_voltage_traces_divisions_by_metadata(db, repartition=None, vt_partition_size=None):
+def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     """Find the division indices based on the metadata.
 
     The trial numbers always augment, so for each simulation result directory, the lowest trial number is
@@ -18,17 +18,21 @@ def get_voltage_traces_divisions_by_metadata(db, repartition=None, vt_partition_
 
     Args:
         metadata (pd.DataFrame): Metadata dataframe containing the simulation trial indices.
-        repartition (bool): If True, the dask dataframe is repartitioned to match 
-            :py:attr:`~data_base.db_initializers.load_simrun_general.config.DASK_TARGET_PARTITION_SIZE`
+        repartition (bool|int): 
+            If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
+            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
+            If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
 
     Returns:
         tuple: Tuple containing the divisions for the voltage traces dataframe.
     """
     assert repartition is not None
+    if repartition == True: vt_partition_size = DEFAULT_VT_PARTITION_SIZE
+    elif isinstance(repartition, int): vt_partition_size = repartition
     metadata = db['metadata']
     divisions = metadata[metadata.trialnr == min(metadata.trialnr)]
     divisions = list(divisions.sim_trial_index)
-    if repartition:
+    if repartition is not False:
         filelist = [os.path.join(db['simresult_path'], e) for e in db['filelist']]
         n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
         divisions = [d[0] for d in chunkIt(divisions, n_chunks)]

@@ -74,7 +74,6 @@ def _build_core(
     metadata_dumper=pandas_to_msgpack,
     check_health=False,
     client=None,
-    vt_partition_size=500
     ):
     """Parse the essential simulation results and add it to :paramref:`db`.
 
@@ -118,7 +117,6 @@ def _build_core(
         prefix=db["simresult_path"], 
         fnames=filelist, 
         repartition=repartition,
-        vt_partition_size=vt_partition_size
     )
     
     db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
@@ -137,8 +135,7 @@ def _build_core(
 
     logger.info("Adding divisions to voltage traces dataframe and writing to disk")
     # vt.divisions = get_voltage_traces_divisions_by_metadata(db["metadata"], repartition=repartition)
-    vt.divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition, partition_size=vt_partition_size)
-    db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
+    vt.divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
 
 
 def _build_synapse_activation(db, repartition=False, n_chunks=5000):
