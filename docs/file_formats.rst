@@ -259,6 +259,58 @@ Example::
     ...
     }
 
+
+.. _simresult_dir_format:
+
+Raw simulation results
+**********************
+
+Simulations run by :py:mod:`simrun` have a fixed folder structure. They contain a single file of somatic :ref:`voltage_traces_format`,
+one file of dendritic :ref:`voltage_traces_format` per ``recSite`` found in the :ref:`cell_parameters_format`, and a collection of :ref:`syn_activation_format` and
+:ref:`spike_times_format` files. 
+
+The voltage traces are written to a single ``.csv`` file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
+but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
+of spikes and synapse activations is not known in advance).
+
+The amount of simulation runs per parameter configuration (i.e. the :paramref:`nSweeps` keyword argument in any simrun function) corresponds
+to:
+
+- The amount of voltage columns in the :ref:`voltage_traces_format` files
+- The amount of :ref:`syn_activation_format` files
+- The amount of :ref:`spike_times_format` files
+
+Example::
+
+  $ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
+  hostname_somacpu042
+  seed379159821_pid209402_network_model.param
+  seed379159821_pid209402_neuron_model.param
+  seed379159821_pid209402_pos_3_ID_000_sec_073_seg_000_x_0.056_somaDist_607.8_vm_dend_traces.csv
+  seed379159821_pid209402_pos_3_ID_001_sec_073_seg_008_x_0.944_somaDist_805.7_vm_dend_traces.csv
+  seed379159821_pid209402_vm_all_traces.csv
+  simulation_run0000_presynaptic_cells.csv
+  simulation_run0000_synapses.csv
+  simulation_run0001_presynaptic_cells.csv
+  simulation_run0001_synapses.csv
+  simulation_run0002_presynaptic_cells.csv
+  simulation_run0002_synapses.csv
+  simulation_run0003_presynaptic_cells.csv
+  simulation_run0003_synapses.csv
+  simulation_run0004_presynaptic_cells.csv
+  simulation_run0004_synapses.csv
+
+
+See also:
+  The :py:mod:`simrun` functions used to prouce these simulation results (and their `nSweeps` keyword argument, as mentioned above):
+
+  - :py:mod:`simrun.run_new_simulations`
+  - :py:mod:`simrun.rerun_db`
+
+See also:
+  To get a :py:class:`~single_cell_parser.cell.Cell` object from such a simulation, refer to :py:mod:`simrun.sim_trial_to_cell_object`
+
+
 Dataframes
 **********
 
@@ -266,7 +318,7 @@ The output format of various simulation pipelines are usually a dataframe. below
 
 The :py:mod:`simrun` package produces output files in ``.csv`` or ``.npz`` format. many of these files
 need to be created for each individual simulation trial. 
-These raw output files are usually parsed into single dataframes for further analysis using a ``db_initializers`` submodule (see e.g. 
+These :ref:`simresult_dir_format` are usually parsed into single dataframes for further analysis using a ``db_initializers`` submodule (see e.g. 
 :py:mod:`~data_base.db_initializers.load_simrun_general`).
 
 
@@ -556,56 +608,6 @@ The parsed dataframe is usually created by the :py:meth:`data_base.db_initialize
      - -75.049797
      - ...
 
-
-.. _simresult_dir_format:
-
-Raw simulation results
-----------------------
-
-Simulations run by :py:mod:`simrun` have a fixed folder structure. They contain a single file of somatic :ref:`voltage_traces_format`,
-one file of dendritic :ref:`voltage_traces_format` per ``recSite`` found in the :ref:`cell_parameters_format`, a collection of :ref:`syn_activation_format` and
-:ref:`spike_times_format` files. 
-
-The voltage traces are written to a single ``.csv`` file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
-but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
-of spikes and synapse activations is not known in advance).
-
-The amount of simulation runs per parameter configuration (i.e. the :paramref:`nSweeps` keyword argument in any simrun function) corresponds
-to:
-
-- The amount of voltage columns in the :ref:`voltage_traces_format` files
-- The amount of :ref:`syn_activation_format` files
-- The amount of :ref:`spike_times_format` files
-
-Example::
-
-  $ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
-  hostname_somacpu042
-  seed379159821_pid209402_network_model.param
-  seed379159821_pid209402_neuron_model.param
-  seed379159821_pid209402_pos_3_ID_000_sec_073_seg_000_x_0.056_somaDist_607.8_vm_dend_traces.csv
-  seed379159821_pid209402_pos_3_ID_001_sec_073_seg_008_x_0.944_somaDist_805.7_vm_dend_traces.csv
-  seed379159821_pid209402_vm_all_traces.csv
-  simulation_run0000_presynaptic_cells.csv
-  simulation_run0000_synapses.csv
-  simulation_run0001_presynaptic_cells.csv
-  simulation_run0001_synapses.csv
-  simulation_run0002_presynaptic_cells.csv
-  simulation_run0002_synapses.csv
-  simulation_run0003_presynaptic_cells.csv
-  simulation_run0003_synapses.csv
-  simulation_run0004_presynaptic_cells.csv
-  simulation_run0004_synapses.csv
-
-
-See also:
-  The :py:mod:`simrun` functions used to prouce these simulation results (and their `nSweeps` keyword argument, as mentioned above):
-
-  - :py:mod:`simrun.run_new_simulations`
-  - :py:mod:`simrun.rerun_db`
-
-See also:
-  To get a :py:class:`~single_cell_parser.cell.Cell` object from such a simulation, refer to :py:mod:`simrun.sim_trial_to_cell_object`
 
 
 .. _hoc_file_format:
