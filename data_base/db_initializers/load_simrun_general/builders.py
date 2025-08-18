@@ -136,6 +136,7 @@ def _build_core(
     logger.info("Adding divisions to voltage traces dataframe and writing to disk")
     # vt.divisions = get_voltage_traces_divisions_by_metadata(db["metadata"], repartition=repartition)
     vt.divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
+    db.set("voltage_traces", vt, dumper=DEFAULT_DUMPER)
 
 
 def _build_synapse_activation(db, repartition=False, n_chunks=5000):
