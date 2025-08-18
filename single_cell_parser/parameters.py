@@ -35,7 +35,7 @@ def _make_json_compatible(content):
 
 
 def _read_params_to_dict(filename):
-    filename = resolve_modular_db_path(filename)
+    filename = resolve_db_path(filename)
     with dbopen(filename, "r") as f:
         content = f.read()
 
