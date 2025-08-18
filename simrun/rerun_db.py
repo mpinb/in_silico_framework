@@ -40,7 +40,7 @@ import numpy as np
 from biophysics_fitting.utils import execute_in_child_process
 from .utils import *
 import logging
-from data_base.dbopen import resolve_netp_reldb_paths, resolve_neup_reldb_paths
+from data_base.dbopen import resolve_netp_reldb_paths, resolve_neup_reldb_paths, find_common_db_path
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -142,7 +142,7 @@ def _evoked_activity(
     See also:
         :py:mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
     """
-    logger.info('saving to ', outdir)
+    logger.info('Saving simulation results to ', outdir)
     import neuron
     h = neuron.h
     sti_bases = [s[:s.rfind('/')] for s in stis]
@@ -164,10 +164,10 @@ def _evoked_activity(
     if not len(parameterfiles) == 1:
         raise NotImplementedError()
 
-    neuron_name = parameterfiles.iloc[0].hash_neuron
-    neuron_param = scp.build_parameters(neuron_folder.join(neuron_name))
-    network_name = parameterfiles.iloc[0].hash_network
-    network_param = scp.build_parameters(network_folder.join(network_name))
+    neuron_name = parameterfiles.iloc[0].path_neuron
+    neuron_param = scp.build_parameters(os.path.join(neuron_folder, neuron_name))
+    network_name = parameterfiles.iloc[0].path_network
+    network_param = scp.build_parameters(os.path.join(network_folder, network_name))
     additional_network_params = [scp.build_parameters(p) for p in additional_network_params]
 
     # resolve relative db paths if needed;
@@ -327,27 +327,27 @@ def rerun_db(
         :py:mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys. 
     """
     parameterfiles = db['parameterfiles']
-    neuron_folder = db['parameterfiles_cell_folder']
-    network_folder = db['parameterfiles_network_folder']
+    # resolve relative paths in the parameterfiles hashmap
+    parameterfiles['path_neuron']  = parameterfiles['path_neuron'].apply(resolve_db_path, db_basedir=db.basedir)
+    parameterfiles['path_network'] = parameterfiles['path_network'].apply(resolve_db_path, db_basedir=db.basedir)
+    neuron_folder = os.path.commonpath(parameterfiles['path_neuron'].to_list())
+    network_folder = os.path.commonpath(parameterfiles['path_network'].to_list())
+    
     sa = db['synapse_activation']
-    # without the opaque object, dask tries to load in the entire dataframe before passing it to _evoked_activity
-    sa = Opaque(sa)
+    sa = Opaque(sa)  # without Opaque(), dask tries to load in the entire dataframe before passing it to _evoked_activity
+
     if stis is not None:
         parameterfiles = parameterfiles.loc[stis]
-    sim_trial_index_array = parameterfiles.groupby('path_neuron').apply(
-        lambda x: list(x.index)).values
-    delayeds = []
+    # nested list, each element again list of sim_trial_indices belonging to the same runs
+    sim_trial_index_array = parameterfiles.groupby('path_neuron').apply(lambda x: list(x.index)).values 
 
     myfun = _evoked_activity
-
-    if silent:
-        myfun = silence_stdout(myfun)
-
-    if child_process:
-        myfun = execute_in_child_process(myfun)
-
+    if silent: myfun = silence_stdout(myfun)
+    if child_process: myfun = execute_in_child_process(myfun)
     myfun = dask.delayed(myfun)
+
     logger.info('Outdir is: {}'.format(outdir))
+    delayeds = []
     for stis in sim_trial_index_array:
         d = myfun(
             db,
@@ -356,12 +356,13 @@ def rerun_db(
             tStop=tStop,
             neuron_param_modify_functions=neuron_param_modify_functions,
             network_param_modify_functions=network_param_modify_functions,
-            synapse_activation_modify_functions=
-            synapse_activation_modify_functions,
+            synapse_activation_modify_functions=synapse_activation_modify_functions,
             parameterfiles=parameterfiles.loc[stis],
             neuron_folder=neuron_folder,
             network_folder=network_folder,
             sa=sa,
-            additional_network_params=additional_network_params)
+            additional_network_params=additional_network_params
+        )
         delayeds.append(d)
+
     return delayeds
