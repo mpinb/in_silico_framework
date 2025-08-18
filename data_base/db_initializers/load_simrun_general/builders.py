@@ -301,11 +301,20 @@ def _build_param_files(db, client):
     db.set("parameterfiles", param_file_hash_df, dumper=pandas_to_msgpack)
 
     # Copy and parameterfiles and adapt internal references
-    parallel_resolve_and_copy_paramfiles_to_db(
+    fn_map = parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_hashmap_df=param_file_hash_df,
         db=db,
         client=client,
     )
+
+    logger.info("Updating parameter file locations under `parameterfiles` key")
+    # Dev note: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
+    # Dev note: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
+    neup_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['neup'].items()}
+    netp_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['netp'].items()}
+    param_file_hash_df['path_neuron'] = param_file_hash_df['hash_neuron'].apply(neup_hash_map.get).apply(create_reldb_path)
+    param_file_hash_df['path_network'] = param_file_hash_df['hash_network'].apply(netp_hash_map.get).apply(create_reldb_path)
+    db.set("parameterfiles", param_file_hash_df)
 
 
 def _get_recsite_labels_from_neup(neup):

@@ -440,7 +440,6 @@ def _create_filename_maps(source_files_dict, db):
     return fn_maps
 
 
-# Scatter the result (this is now created on cluster, not sent from client)
 def parallel_resolve_and_copy_paramfiles_to_db(
     paramfile_hashmap_df,
     db,
@@ -450,11 +449,24 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     
     This function:
     
-    1. Fetches all :ref:`network_parameters_format` and :ref:`neuron-parameters_format`, fetches
-        all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and
-        recsite (.landmarkAscii) files.
-    2. Creates ``source -> target`` filename mappings for all files of each type and scatters this map to a distributed cluster.
-    3. Resolves and copies each file in parallel, based on the previous map.
+    1. Fetches all :ref:`network_parameters_format` and :ref:`neuron_parameters_format`
+    2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files from these parameter files
+    3. Creates a mapping for each file from original location to target location, depending on the config.
+    4. Scatters this filename mapping dict to a distsributed cluster
+    5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
+    6. Copies over all resolved files from source to target.
+    
+    The resolution and copying is done in a single pass for efficiency.
+
+    Args:
+        paramfile_hashmap_df (pd.DataFrame): 
+            A dataframe containing all :ref:`network_parameters_format` and :ref:`neuron_parameters_format` files, as well as their hash.
+            This is used in :py:func:`_extract_unique_references_from_neup_and_netp`
+        db (:py:class:`data_base.data_base.DataBase`): The database that is being initialized
+        client (distributed.Client): A distributed client for parallel computation.
+    
+    Returns:
+        dict: The filename map for each file type.
     """
     
     # Phase 1: Extract all unique files
@@ -507,6 +519,8 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     logger.info("Neuron parameter files (.param) resolved and copied to {}".format(NEUP_DIR))
     client.gather(fut_netp)
     logger.info("Network parameter files (.param) resolved and copied to {}".format(NETP_DIR))
+
+    return fn_maps
     
 
 def load_param_files_from_db(db, sti):
