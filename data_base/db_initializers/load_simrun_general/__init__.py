@@ -1,10 +1,6 @@
-"""Parse simulation data generated with :py:mod:`simrun` for general purposes.
+"""Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
 
-The output format of :py:mod:`simrun` is a nested folder structure with ``.csv`` and/or ``.npz`` files.
-The voltage traces are written to a single ``.csv`` file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
-but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
-of spikes and synapse activations is not known in advance).
-
+The output format of :py:mod:`simrun` are :ref:`simresult_dir_format`: a nested folder structure with ``.csv`` and/or ``.npz`` files.
 This module provides functions to gather and parse this data to pandas and dask dataframes. It merges all trials in a single dataframe.
 This saves IO time, disk space, and is strongly recommended for HPC systems and other shared filesystems in general, as it reduces the amount of inodes required. 
 
@@ -66,7 +62,7 @@ Individual keys can afterwards be set to permanent, self-contained and efficient
 keys.
 
 See also:
-    :py:meth:`simrun.run_new_simulations.run_new_simulations` for more information on the raw output format of :py:mod:`simrun`.
+    :ref:`simresult_dir_format` for more information on the raw output format of :py:mod:`simrun`.
 
 See also:
     :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.

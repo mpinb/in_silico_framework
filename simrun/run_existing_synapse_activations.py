@@ -17,6 +17,8 @@
 
 '''
 ongoing activity L2 neuron model
+
+:skip-doc:
 '''
 from __future__ import absolute_import
 from ._matplotlib_import import *
