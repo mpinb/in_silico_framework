@@ -20,8 +20,11 @@ OPTIMIZED_CATEGORIZED_DASK_DUMPER = dask_to_categorized_msgpack
 """The dumper to use for categorized dask dataframes. 
 Categorized dask dataframes are dask dataframes whose columns have many repeated values.
 This is used for e.g. synapse and cell activations, where the cell types are often duplicated in a column."""
+
+# Re-optimization config
 DUMPERS_TO_REOPTIMIZE = ["pandas_to_parquet", "dask_to_parquet"]
-"""List[str]: List of dumper names that will be re-optimized to the optimized dumpers."""
+"""List[str]: List of dumper names that will be re-optimized to the current optimized dumpers 
+during :py:mod:`data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db`."""
 
 # Parameterfiles config
 PARAM_FILE_COPY_METHOD = "remount"

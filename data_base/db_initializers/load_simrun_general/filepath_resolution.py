@@ -29,11 +29,7 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
     neup["neuron"]["filename"] = rel_hoc_fn
 
     for i, recsite_fn in enumerate(original_recsite_fns):
-        assert (
-            recsite_fn in recsites_fn_map
-        ), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(
-            recsite_fn
-        )
+        assert (recsite_fn in recsites_fn_map), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(recsite_fn)
         new_recsite_fn = recsites_fn_map[recsite_fn]
         rel_recsite_fn = create_reldb_path(new_recsite_fn)
         neup["sim"]["recordingSites"][i] = rel_recsite_fn

@@ -2,17 +2,18 @@ import glob, logging, os
 import dask
 import dask.dataframe as dd
 import pandas as pd
-import numpy as np
 
 import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 from itertools import compress
 from data_base.utils import chunkIt
+from data_base.dbopen import create_reldb_path
 from data_base.IO.LoaderDumper import pandas_to_msgpack
 from data_base.IO.roberts_formats import (
     read_pandas_cell_activation_from_roberts_format as read_ca,
     read_pandas_synapse_activation_from_roberts_format as read_sa
 )
+from .utils import _hash_file_content
 from .data_parsing import load_dendritic_voltage_traces, read_voltage_traces_by_filenames
 from .file_handling import (
     get_max_commas, 
@@ -325,7 +326,7 @@ def _get_recsite_labels_from_neup(neup):
     return [recSite.label for RSManager in recSiteManagers for recSite in RSManager.recordingSites]
 
 
-def _get_rec_site_label_fn_map(db, filelist):
+def _get_rec_site_label_fn_map(filelist):
     """Get the recording sites from the cell parameter files.
 
     Recording sites are locations onto the postsynaptic membrane where the voltage traces are recorded.

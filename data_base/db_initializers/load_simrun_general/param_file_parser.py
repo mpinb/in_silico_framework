@@ -4,9 +4,7 @@ import shutil
 
 import dask
 import dask.dataframe as dd
-from dask.distributed import as_completed
 import pandas as pd
-import itertools
 
 import single_cell_parser as scp
 
