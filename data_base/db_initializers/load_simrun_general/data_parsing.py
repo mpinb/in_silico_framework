@@ -388,4 +388,4 @@ def _estimate_n_chunks(filelist, estimate_sample_size=1, partition_size=None):
     est_vt_length = _estimate_average_vt_length(filelist, sample_size=estimate_sample_size)
     n_files_per_chunk = partition_size // est_vt_length
     n_chunks = len(filelist) // n_files_per_chunk
-    return n_chunks
+    return max(1, n_chunks)
