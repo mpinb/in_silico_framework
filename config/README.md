@@ -32,6 +32,3 @@ The workflow files in [.github/workflows](.github/workflows) define automatic wo
   If the answer is yes to all these, it will skip the build process, otherwise it will (re)build the codebase
 3. Run the test suite
 
-
-### Cluster configuration
-Configuring cluster settings is outlined in a separate repository: https://github.com/mpinb/cluster_control

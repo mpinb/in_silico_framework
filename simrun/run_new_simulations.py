@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Create and simulate network-embedded neuron models.
 
 This module contains the core method used throughout :py:mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
@@ -81,7 +98,7 @@ def _evoked_activity(
     # Load in and parse parameter files
     neuronParameters = load_param_file_if_path_is_provided(cellParamName)
     evokedUpNWParameters = load_param_file_if_path_is_provided(
-        evokedUpParamName)  ##sumatra function for reading in parameter file
+        evokedUpParamName)
     scp.load_NMODL_parameters(neuronParameters)
     scp.load_NMODL_parameters(evokedUpNWParameters)
     cellParam = neuronParameters.neuron
@@ -267,7 +284,7 @@ def run_new_simulations(
             Trial-to-trial variability is introduced by the random seed in terms of
             different network activity and connectivity realizations (see :py:meth:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
         tStop (float): Duration of each simulation in ms.
-        tStim (float): Time in ms at which the in-vivo evoked synaptic input should start.
+        tStim (float): Time in ms at which the in vivo evoked synaptic input should start.
         scale_apical (callable, DEPRECATED): Function to scale the apical dendrite. Assumes the cell has an apical dendrite - see below.
         cell_generator (callable): Function to generate the cell. If provided, :paramref:`cellParamName` is ignored.
         tar (bool): If True, the output directory is compressed to a tarball after the simulation is finished.

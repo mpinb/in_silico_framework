@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''
 Implementation of 3D scalar fields based on numpy arrays.
 
@@ -73,38 +90,64 @@ class ScalarField(object):
         if self.mesh is not None:
             self.resize_mesh()
 
-    def resize_mesh(self):
-        '''Resizes mesh to non-zero scalar data.
+    # def resize_mesh(self):
+    #     '''Resizes mesh to non-zero scalar data.
          
-        This method resizes the mesh such that the bounding box 
-        wraps around voxels that contain non-zero scalar data.
-        Also updates :py:attr:`extent` and :py:attr:`boundingBox`
-        '''
-        roi = np.nonzero(self.mesh)
-        iMin = np.min(roi[0])
-        iMax = np.max(roi[0])
-        jMin = np.min(roi[1])
-        jMax = np.max(roi[1])
-        kMin = np.min(roi[2])
-        kMax = np.max(roi[2])
-        self.extent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
-        newDims = self.extent[1] + 1, self.extent[3] + 1, self.extent[5] + 1
-        dx = self.spacing[0]
-        dy = self.spacing[1]
-        dz = self.spacing[2]
-        xMin = self.origin[0] + iMin * dx
-        yMin = self.origin[1] + jMin * dy
-        zMin = self.origin[2] + kMin * dz
-        xMax = self.origin[0] + iMax * dx
-        yMax = self.origin[1] + jMax * dy
-        zMax = self.origin[2] + kMax * dz
-        self.origin = xMin, yMin, zMin
-        self.boundingBox = xMin, xMax, yMin, yMax, zMin, zMax
-        newMesh = np.empty(shape=newDims)
-        newMesh[:, :, :] = self.mesh[iMin:iMax + 1, jMin:jMax + 1,
-                                     kMin:kMax + 1]
-        self.mesh = np.copy(newMesh)
-        del newMesh
+    #     This method resizes the mesh such that the bounding box 
+    #     wraps around voxels that contain non-zero scalar data.
+    #     Also updates :py:attr:`extent` and :py:attr:`boundingBox`
+    #     '''
+    #     roi = np.nonzero(self.mesh)
+    #     iMin = np.min(roi[0])
+    #     iMax = np.max(roi[0])
+    #     jMin = np.min(roi[1])
+    #     jMax = np.max(roi[1])
+    #     kMin = np.min(roi[2])
+    #     kMax = np.max(roi[2])
+    #     self.extent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
+    #     newDims = self.extent[1] + 1, self.extent[3] + 1, self.extent[5] + 1
+    #     dx = self.spacing[0]
+    #     dy = self.spacing[1]
+    #     dz = self.spacing[2]
+    #     xMin = self.origin[0] + iMin * dx
+    #     yMin = self.origin[1] + jMin * dy
+    #     zMin = self.origin[2] + kMin * dz
+    #     xMax = self.origin[0] + iMax * dx
+    #     yMax = self.origin[1] + jMax * dy
+    #     zMax = self.origin[2] + kMax * dz
+    #     self.origin = xMin, yMin, zMin
+    #     self.boundingBox = xMin, xMax, yMin, yMax, zMin, zMax
+    #     newMesh = np.empty(shape=newDims)
+    #     newMesh[:, :, :] = self.mesh[iMin:iMax + 1, jMin:jMax + 1,
+    #                                  kMin:kMax + 1]
+    #     self.mesh = np.copy(newMesh)
+    #     del newMesh
+
+    def resize_mesh(self):
+        """Resizes mesh to non-zero scalar data using slicing views (no copy)."""
+        roi = np.where(self.mesh)
+        if roi[0].size == 0:
+            return  # no non-zero voxels
+
+        iMin, iMax = roi[0].min(), roi[0].max()
+        jMin, jMax = roi[1].min(), roi[1].max()
+        kMin, kMax = roi[2].min(), roi[2].max()
+
+        self.extent = (0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin)
+
+        dx, dy, dz = self.spacing
+        xMin, yMin, zMin = (self.origin[0] + iMin * dx,
+                            self.origin[1] + jMin * dy,
+                            self.origin[2] + kMin * dz)
+        xMax, yMax, zMax = (self.origin[0] + (iMax + 1) * dx,
+                            self.origin[1] + (jMax + 1) * dy,
+                            self.origin[2] + (kMax + 1) * dz)
+
+        self.origin = (xMin, yMin, zMin)
+        self.boundingBox = (xMin, xMax, yMin, yMax, zMin, zMax)
+
+        # Slice view instead of copying
+        self.mesh = self.mesh[iMin:iMax + 1, jMin:jMax + 1, kMin:kMax + 1]
 
     def get_scalar(self, xyz):
         '''Fetch the scalar value of the voxel containing the point xyz.

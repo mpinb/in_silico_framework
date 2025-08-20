@@ -1,0 +1,44 @@
+logging:
+  version: 1
+  handlers:
+    scheduler:
+      class: logging.FileHandler
+      filename: tests/logs/dask_scheduler_output.log
+      level: INFO
+    workers:
+      class: logging.FileHandler
+      filename: tests/logs/dask_worker_output.log
+      level: INFO
+    # console:
+    #   class: logging.StreamHandler
+    #   level: INFO
+  loggers:
+    distributed.worker:
+      level: INFO
+      handlers:
+        - workers
+        # - console
+    distributed.scheduler:
+      level: INFO
+      handlers:
+        - scheduler
+        # - console
+
+distributed:
+  worker:
+    preload:
+      - "import mechanisms.l5pt"
+  #   memory:
+  #     target: 0.80  # target fraction to stay below
+  #     spill: 0.95  # fraction at which we spill to disk
+  #     pause: False  # fraction at which we pause worker threads
+  #     terminate: False  # fraction at which we terminate the worker
+  #   lifetime:
+  #     duration: null
+  #     stagger: null
+  # comm:
+  #   timeouts:
+  #     connect: 10s
+  #     tcp: 300s   # Maximum time to wait for a TCP communication
+  scheduler:
+    allowed-failures: 0

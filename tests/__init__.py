@@ -1,10 +1,10 @@
 import os
 import neuron
+import socket
 
 h = neuron.h
 import single_cell_parser as scp
 from data_base.utils import silence_stdout
-import mechanisms.l5pt
 from tests.context import TEST_DATA_FOLDER
 
 def setup_current_injection_experiment(
@@ -21,14 +21,14 @@ def setup_current_injection_experiment(
     cell_param = os.path.join(
         TEST_DATA_FOLDER,
         'biophysical_constraints', 
-        '86_CDK_20041214_BAC_run5_soma_Hay2013_C2center_apic_rec.param')
+        '86_C2_center.param')
     cell_param = scp.build_parameters(
         cell_param)  # this is the main method to load in parameterfiles
     # load scaled hoc morphology
     cell_param.neuron.filename = os.path.join(
         TEST_DATA_FOLDER,
         'anatomical_constraints', 
-        '86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2center_scaled_diameters.hoc')
+        '86_C2_center_scaled_diameters.hoc')
     with silence_stdout:
         cell = scp.create_cell(cell_param.neuron)
 
@@ -53,9 +53,7 @@ def setup_synapse_activation_experiment(
     Returns:
         cell: a cell object that contains the simulation.
     """
-    
     import getting_started
-    import single_cell_parser as scp
 
     rangevars = rangevars or []
     
@@ -76,3 +74,13 @@ def setup_synapse_activation_experiment(
     evokedNW.re_init_network()
 
     return cell
+
+def is_port_open(host, port):
+    try:
+        port = int(port)
+    except ValueError as e:
+        raise ValueError("Port must be an integer or integer-convertible") from e
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(1)  # 1 second timeout
+        result = sock.connect_ex((host, port))
+        return result == 0

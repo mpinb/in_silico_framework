@@ -1,9 +1,27 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Optimize a cost function.
 
 This module implements solvers that can optimize a given cost function by adapting a vector of free parameters :math:`\mathbf{x}`.
 The cost function is usually defined by a :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
 
 Different solvers can be defined here, to provide different optimization schemes.
+Currently, we provide a :cite:t:`COBYLA` solver.
 """
 
 
@@ -113,7 +131,7 @@ class _Solver(object):
 
 
 class Solver_COBYLA(_Solver):
-    """COBYLA solver strategy for reduced models.
+    """A :cite:t:`COBYLA` solver strategy for reduced models.
     
     See also:
         :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their

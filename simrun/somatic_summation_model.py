@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """
 .. deprecated:: 0.1.0
     This module is deprecated and will be removed in a future version.
@@ -9,11 +26,9 @@
 import numpy as np
 from data_base.utils import convertible_to_int
 from collections import defaultdict
-from config.isf_logging import logger as isf_logger
+import logging
+isf_logger = logging.getLogger("ISF").getChild(__name__)
 logger = isf_logger.getChild(__name__)
-
-logger.warning('Deprecation warning: This module is deprecated and will be removed in a future release.')
-
 
 def roll_rows_independently(A, r):
     '''https://stackoverflow.com/questions/20360675/roll-rows-of-a-matrix-independently%5D'''

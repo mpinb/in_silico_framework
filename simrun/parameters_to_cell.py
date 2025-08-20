@@ -1,31 +1,40 @@
-"""Rebuild and re-simulate a network-embedded cell from parameter files.
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
+"""Rebuild and re-simulate a network-embedded cell from :ref:`param_file_format` files.
 
 This module provides a function to rebuild a network-embedded neuron model from 
 :ref:`cell_parameters_format` and :ref:`network_parameters_format`. 
 The function also reconnects synapses from a :ref:`syn_file_format` file and simulate the network.
 
 See also:
-    To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.data_base.DataBase` instead of parameter files, 
+    To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.DataBase` instead of parameter files, 
     please refer to :py:mod:`~simrun.sim_trial_to_cell_object` instead
 """
 
 
 from __future__ import absolute_import
 from ._matplotlib_import import *
-import sys
-import time
-import os, os.path
-import glob
 #for some reason, the neuron import works on the florida servers only works if tables was imported first
 import tables
 import neuron
 import single_cell_parser as scp
-import single_cell_parser.analyze as sca
-import numpy as np
 
 h = neuron.h
-import dask
-from .seed_manager import get_seed
 from .utils import *
 
 def parameters_to_cell(
@@ -76,7 +85,7 @@ def parameters_to_cell(
             allPoints=allPoints)
 
     neuronParam.sim.tStop = tStop
-    dt = neuronParam.sim.dt
+    # dt = neuronParam.sim.dt
 
     if evokedNW is None:
         evokedNW = scp.NetworkMapper(

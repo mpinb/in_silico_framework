@@ -1,3 +1,0 @@
-# Tests
-
-This directory simply provides all the tests for ISF. Tests are run for both the Python 2 and Python 3 environment. THe repository is set up by default such that only the master branch is tested on push and pull automatically, but this can change over the course of development. Check the [workflow yml files](/.github/workflows/) for more information on how these tests are set up and which branches get tested.

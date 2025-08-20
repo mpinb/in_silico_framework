@@ -1,0 +1,58 @@
+name: Build Sphinx Docs
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install & setup environment
+      uses: prefix-dev/setup-pixi@v0.8.8
+      with:
+        pixi-version: v0.47.0
+        cache: true
+        auth-host: prefix.dev
+        auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}
+        manifest-path: pyproject.toml
+
+    - name: Build Sphinx HTML documentation
+      run: |
+        cd docs
+        pixi r build_docs
+
+    - name: Upload documentation artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: sphinx-html
+        path: docs/_build/html
+
+    # Publish built docs to gh-pages branch
+    - name: Commit documentation changes
+      run: |
+        git clone https://${{ secrets.GH_TOKEN }}@github.com/mpinb/in_silico_framework.git --branch gh-pages --single-branch gh-pages
+        cd gh-pages
+        git clean -fdx  # Remove old untracked files and directories
+        cp -r ../docs/_build/html/* .  # Copy new HTML files to gh-pages
+        touch .nojekyll
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        # that.
+      env:
+        GH_PAT: ${{ secrets.GH_TOKEN }}
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        branch: gh-pages
+        directory: gh-pages
+        GH_PAT: ${{ secrets.GH_TOKEN }}

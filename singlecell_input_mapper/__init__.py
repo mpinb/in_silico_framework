@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Create an empirically constrained dense connectome model with presynaptic activity.
 
 This package provides classes and methods to create a dense connectome model with defined activity patterns.
@@ -32,7 +49,7 @@ Other ways of network realization are also possible, depending on the empirical 
 If you want to use other methods, please familiarize yourself with the data formats such that you can either:
 
 1. Convert the input data to the required input format for ISF and run the same network realization pipeline. Input file formats are described in more detail in :py:mod:`singlecell_input_mapper.map_singlecell_inputs`.
-2. Create your own network realization, and convert the output to the format used in ISF. These are `.syn` and `.con` files, and described in more detail in the [tutorials](../getting_started/tutorials/2. network models/2.1 Anatomical embedding.ipynb).
+2. Create your own network realization, and convert the output to the format used in ISF. These are :ref:`syn_file_format` and :ref:`con_file_format` files. For more info on how to generate and use these, refer to the network modeling section of the :ref:`tutorials`
 
 .. _activity:
 
@@ -42,8 +59,8 @@ Activity
 This section is responsible for generating activity patterns for the assigned synapses based in empirically observed PSTHs of the presynaptic neurons.
 ISF distinguishes two kinds of activity:
 
-1. Ongoing activity: the baseline synaptic activity patterns in the absence of the in-vivo condition of interest. The ongoing activity is defined in tandem with the network parameters in a :ref:`network_parameters_format` file.
-2. Evoked activity: the activity patterns in response to a specific in-vivo condition. Its file format is described in :ref:`activity_data_format`. 
+1. Ongoing activity: the baseline synaptic activity patterns in the absence of the in vivo condition of interest. The ongoing activity is defined in tandem with the network parameters in a :ref:`network_parameters_format` file.
+2. Evoked activity: the activity patterns in response to a specific in vivo condition. Its file format is described in :ref:`activity_data_format`. 
 
 The general workflow is as follows:
 

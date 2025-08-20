@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Analyze the results of :py:mod:`simrun.reduced_model`
 
 .. deprecated:: 0.4.0
@@ -72,7 +88,7 @@ def prediction_rates(
         n (int): Amount of iterations for the prediction rates. One iteration is one train-test split.
         normalize_group_size (bool): If True, randomly subsample the data so that both classes have the same number of samples
         verbosity (int): Level of verbosity. Options are ``0`` (default), ``1``, or ``2``
-        test_size (float): Fraction of the data to use as test data. Default is ``0.4``
+        test_size (float): Fraction of the data to use as test data. Default is :math:`0.4`
         solver (str): Solver to use for LDA. Options are ``("svd", "lsqr", "eigen")``. Default is ``"eigen"``
         return_ (str): Return type. Options are ``("score", "all")``. Default is ``"score"``.
             'score' returns the median of the prediction rates for both classes. 

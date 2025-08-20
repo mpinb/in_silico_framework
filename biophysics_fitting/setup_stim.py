@@ -1,4 +1,20 @@
-"""
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+r"""
 This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
 
 Stimulus types included in this module are:
@@ -159,9 +175,9 @@ def setup_BAC(cell, dist=970, delay=295):
 def setup_StepOne(cell, delay=700):
     """Setup a step current stimulus at the soma:
          
-        - amplitude = 0.619 nA
-        - delay = 700 ms
-        - duration = 2000 ms   
+    - amplitude = 0.619 nA
+    - delay = 700 ms
+    - duration = 2000 ms   
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -176,9 +192,9 @@ def setup_StepOne(cell, delay=700):
 def setup_StepTwo(cell, delay=700):
     """Setup a step current stimulus at the soma:
           
-        - amplitude = 0.793 nA
-        - delay = 700 ms
-        - duration = 2000 ms      
+    - amplitude = 0.793 nA
+    - delay = 700 ms
+    - duration = 2000 ms      
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -193,9 +209,9 @@ def setup_StepTwo(cell, delay=700):
 def setup_StepThree(cell, delay=700):
     """Setup a step current stimulus at the soma:
           
-        - amplitude = 1.507 nA
-        - delay = 700 ms
-        - duration = 2000 ms   
+    - amplitude = 1.507 nA
+    - delay = 700 ms
+    - duration = 2000 ms   
            
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.

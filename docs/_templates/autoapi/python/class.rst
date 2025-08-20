@@ -99,22 +99,15 @@
    {%- endif %}
    {%- if attribute_lines %}
 
-   .. rst-class:: class-header
+   :Attributes:
 
-   .. py:data:: Attributes
-
-   
    {{ attribute_lines | join('\n') | indent(3) }}
-   
 
    {%- endif %}
 
    {%- if visible_methods %}
 
-   
-   .. rst-class:: class-header
-
-   .. py:data:: Methods
+   :Methods:
 
    {{ macros.auto_summary(visible_methods) | indent(3) }}
 

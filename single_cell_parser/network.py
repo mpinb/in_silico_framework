@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Connect and activate presynaptic neuron populations.
 
 This module either creates or reads in an existing network realization, and connects the synapses
@@ -58,8 +75,8 @@ class NetworkMapper:
         cells (dict): dictionary holding all presynaptic cells ordered by cell type.
         connected_cells (dict): dictionary holding indices of all active presynaptic cells ordered by cell type.
         postCell (:py:class:`~single_cell_parser.cell.Cell`): reference to postsynaptic (multi-compartment) cell model.
-        nwParam (:py:class:`~sumatra.parameters.NTParameterSet`): network parameter set (see :ref:`network_parameters_format` for more info).
-        simParam (:py:class:`~sumatra.parameters.NTParameterSet`): simulation parameter set.
+        nwParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): network parameter set (see :ref:`network_parameters_format` for more info).
+        simParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): simulation parameter set.
     '''
 
     def __init__(self, postCell, nwParam, simParam=None):
@@ -67,8 +84,8 @@ class NetworkMapper:
 
         Args:
             postCell (:py:class:`~single_cell_parser.cell.Cell`): The cell to map synapses onto.
-            nwParam (:py:class:`~sumatra.parameters.NTParameterSet`): The network parameter set (see :ref:`network_parameters_format` for more info).
-            simParam (:py:class:`~sumatra.parameters.NTParameterSet`): The simulation parameter set. Default: None.
+            nwParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter set (see :ref:`network_parameters_format` for more info).
+            simParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The simulation parameter set. Default: None.
         '''
         self.cells = {}
         self.connected_cells = {}
@@ -332,7 +349,7 @@ class NetworkMapper:
         Sets all the presynaptic cells to ``off``.
 
         See also:
-            :py:meth:`~single_cell_parser.cell.Cell.turn_off` for more information on turning cells off.
+            :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
         
         Args:
             replayMode (bool): 
@@ -591,16 +608,23 @@ class NetworkMapper:
         start = 0.0
         stop = -1.0
         nSpikes = None
-        try:
+
+        # Set params from networkParameters, if available
+        try: 
             noise = networkParameters.noise
+        except AttributeError:
+            logger.debug('\"noise\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to noise = 1.0.')
+        try: 
             start = networkParameters.start
         except AttributeError:
-            logger.error('Could not find attributes \"noise\" or \"start\" for \"spiketrain\" of cell type {:s}.'.format(preCellType))
-            logger.error('         Support of \"spiketrains\" without these attributes is deprecated.')
-        try:
+            logger.debug('\"start\" is unset for \"spiketrain\" of cell type {:s}.'.format(preCellType))
+            logger.debug('Defaulting to start = 0.0.')
+        try: 
             nSpikes = networkParameters.nspikes
         except AttributeError:
             pass
+
         if self.simParam is not None:
             stop = self.simParam.tStop
         logger.info('initializing spike trains with mean rate {:.2f} Hz for cell type {:s}'.format(1000.0 / interval, preCellType))
@@ -647,7 +671,7 @@ class NetworkMapper:
 
         Args:
             preCellType (str): The presynaptic cell type.
-            networkParameters (:py:class:`~sumatra.parameters.NTParameterSet`): The network parameters for the presynaptic cell type.
+            networkParameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameters for the presynaptic cell type.
 
         Returns:
             None
@@ -656,8 +680,8 @@ class NetworkMapper:
         try:
             dist = networkParameters.distribution
         except AttributeError:
-            logger.warning('Could not find attribute \"distribution\" for \"pointcell\" of cell type {:s}.'.format(preCellType))
-            logger.warning('         Support of \"pointcell\" without this attribute is deprecated.')
+            logger.debug("\"distribution\" is unset for \"pointcell\" of cell type {:s}.".format(preCellType))
+            logger.debug('Defaulting to distribution = \"normal\".')
             dist = 'normal'
         if dist == 'normal':
             active, = np.where(np.random.uniform(size=nrOfCells) < networkParameters.activeFrac)
@@ -666,8 +690,8 @@ class NetworkMapper:
             try:
                 offset = networkParameters.offset
             except AttributeError:
-                logger.warning('Could not find attribute \"offset\" for \"pointcell\" of cell type {:s}.'.format(preCellType))
-                logger.warning('         Support of \"pointcell\" without this attribute is deprecated.')
+                logger.debug("\"offset\" is unset for \"pointcell\" of cell type {:s}.".format(preCellType))
+                logger.debug('Defaulting to offset = 10.0.')
                 offset = 10.0
             spikeTimes = offset + mean + sigma * np.random.randn(len(active))
             for i in range(len(active)):
@@ -1175,7 +1199,7 @@ class NetworkMapper:
         """Assign synapse weights according to distribution specified in network parameters.
         
         Args:
-            receptor (:py:class:`~sumatra.parameters.NTParameterSet`): Receptor parameters from network parameter file.
+            receptor (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Receptor parameters from network parameter file.
             recepStr (str): Receptor name.
             syn (Synapse): Synapse object.
         """
@@ -1344,9 +1368,9 @@ def activate_functional_synapse(
         syn (:py:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         cell (:py:class:`~single_cell_parser.cell.Cell`): Postsynaptic cell.
         preSynCell (:py:class:`~single_cell_parser.cell.PointCell`): Presynaptic cell.
-        synParameters (:py:class:`~sumatra.parameters.NTParameterSet`): Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
+        synParameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
         tChange (float): Time at which the synapse parameters change (e.g. the release probability due to a spike).
-        synParametersChange (:py:class:`~sumatra.parameters.NTParameterSet`): Synapse parameters after change (including e.g. the release probability).
+        synParametersChange (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters after change (including e.g. the release probability).
         forceSynapseActivation (bool): If True, the synapse is activated regardless of the release probability.
         releaseTimes (list):
             List of synaptic release times.

@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """
 Visualization utilities.
 """
@@ -48,7 +65,10 @@ def write_video_from_images(
     Returns:
         None. Writes the video to the specified path.
     '''
-    subprocess.call(["module load", "ffmpeg"], shell=True)
+    try:
+        subprocess.check_output(["module load", "ffmpeg"])
+    except Exception as e:
+        raise EnvironmentError("Could not load ffmpeg") from e
 
     if not out_path.endswith('.mp4'):
         raise ValueError('output path must be the path to an mp4 video!')
@@ -222,8 +242,7 @@ def display_animation_from_images(
         the are resolved in the browser and not by python
     '''
     if animID is None:
-        animID = np.random.randint(
-            10000000000000)  # needs to be unique within one ipynb
+        animID = np.random.randint(1_000_000_000)  # needs to be unique within one ipynb
     env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
     template = env.get_template('animation_template.html')
@@ -386,9 +405,9 @@ def draw_arrow(
     Args:
         morphology (pd.DataFrame): The morphology dataframe containing the coordinates of the sections.
         ax (matplotlib.axes.Axes): The matplotlib axes object to draw the arrow on.
-        highlight_section (int, optional): The section index to highlight. If None, no section is highlighted. Default is None.
-        highlight_x (float, optional): The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is None.
-        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is None.
+        highlight_section (int, optional): The section index to highlight. If None, no section is highlighted. Default is ``None``.
+        highlight_x (float, optional): The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
+        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
         arrow_size (int, optional): The size of the arrow. Default is 50.
     
     Returns:

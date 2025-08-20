@@ -1,7 +1,23 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
 
 See also:
-    :py:mod:`data_base.isf_data_base.db_initializers.synapse_activation_binning` for binning synapse activations
+    :py:mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
     by time, and a variety of other metrics (e.g. space, cell type ...)
 """
 
@@ -17,7 +33,7 @@ from ._helper_functions import time_list_from_pd, pd_to_array, map_return_to_ser
 def universal_pd(
     df, 
     distance_column, 
-    spacial_distance_bins = 50, 
+    spatial_distance_bins = 50, 
     min_time = 0,
     max_time = 300, 
     time_distance_bins = 1):
@@ -30,14 +46,14 @@ def universal_pd(
             DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
-        spacial_distance_bins (int): 
-            Size of the distance bins. Default is ``50``.
+        spatial_distance_bins (int): 
+            Size of the distance bins. Default is :math:`50\mu m`.
         min_time (int): 
-            Minimum time value. Default is ``0``.
+            Minimum time value. Default is :math:`0 ms`.
         max_time (int): 
-            Maximum time value. Default is ``300``.
+            Maximum time value. Default is :math:`300 ms`.
         time_distance_bins (int): 
-            Size of the time bins. Default is ``1``.
+            Size of the time bins. Default is :math:`1 ms`.
     
     Returns:
         :py:class:`~numpy.array`:
@@ -46,7 +62,7 @@ def universal_pd(
     if not isinstance(df, pd.DataFrame):
         raise RuntimeError("expected pandas.DataFrame, got %s" % str(type(df)))
 
-    df = df.assign(zbins = lambda x: np.floor(x[distance_column] / spacial_distance_bins).astype(int))
+    df = df.assign(zbins = lambda x: np.floor(x[distance_column] / spatial_distance_bins).astype(int))
     t_bins = np.arange(min_time, max_time + time_distance_bins, time_distance_bins)
 
     fun = lambda row: np.histogram(row, t_bins)[0]
@@ -64,7 +80,7 @@ def universal_pd(
 def universal(
     df, 
     distance_column, 
-    spacial_distance_bins = 50, 
+    spatial_distance_bins = 50, 
     min_time = 0, 
     max_time = 300, 
     time_distance_bins = 1):
@@ -77,14 +93,14 @@ def universal(
             DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
-        spacial_distance_bins (int): 
-            Size of the spatial bins. Default is ``50``.
+        spatial_distance_bins (int): 
+            Size of the spatial bins. Default is :math:`50\mu m`.
         min_time (int): 
-            Minimum time value. Default is ``0``.
+            Minimum time value. Default is :math:`0 ms`.
         max_time (int): 
-            Maximum time value. Default is ``300``.
+            Maximum time value. Default is :math:`300ms`.
         time_distance_bins (int): 
-            Size of the time bins. Default is ``1``.
+            Size of the time bins. Default is :math:`1ms`.
             
     Returns:
         :py:class:`~numpy.array`:
@@ -94,8 +110,8 @@ def universal(
         :py:meth:`~data_base.analyze.spatial_binning.universal_pd`
     '''
 
-    fun = lambda x: universal_pd(x, distance_column, spacial_distance_bins =  \
-                                 spacial_distance_bins, min_time = min_time, \
+    fun = lambda x: universal_pd(x, distance_column, spatial_distance_bins =  \
+                                 spatial_distance_bins, min_time = min_time, \
               max_time = max_time, time_distance_bins = time_distance_bins)
 
     if isinstance(df, pd.DataFrame):

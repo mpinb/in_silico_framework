@@ -1,23 +1,8 @@
-.. In-Silico Framework (ISF) documentation master file, created by
-   sphinx-quickstart on Wed Mar 22 13:27:10 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-The In-Silico Framework (ISF)
-=====================================================
-
-ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
-
-.. the interactive overview
-
-.. raw:: html
-   :file: ./overview.html
-
-
-Contents
---------
+The In Silico Framework (ISF)
+=============================
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
 
    api_reference
@@ -27,9 +12,24 @@ Contents
    bibliography
 
 
-Indices and tables
-------------------
+ISF is a multi-scale simulation environment for the generation, simulation, and analysis of neurobiologically tractable single cell and network-level simulations.
+It allows for targeted and mechanistically detailed *in silico* manipulations across multiple scales, from the molecular to the network level, and provides a toolkit for the integration of experimental data and models.
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. raw:: html
+
+   <div id="video-player">
+       <video muted autoplay controls width="100%" height="100%" alt="ISF Overview">
+           <source id="video-source" src="_static/_videos/sequence.mp4" type="video/mp4">
+           Your browser does not support the video tag.
+       </video>
+   </div>
+
+ISF can generally be categorized in three main workflows, each constrained with empirical data. Each workflow links to an associated tutorial. At the end, ISF provides 
+a diverse collection of empirically constrained, yet biologically diverse multi-scale models, that provide concrete and testable predictions, and are intended to guide further experiments
+
+.. include:: isf_overview.rst
+
+
+To get started, you can check out the following links:
+
+.. include:: cards.rst

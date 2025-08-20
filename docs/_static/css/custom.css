@@ -10,50 +10,36 @@ span.summarylabel {
     filter: opacity(40%);
 }
 
-.class-header {
-    background-color: var(--color-background-secondary);
-    padding: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    color: var(--color-foreground-primary);
-    font-size: var(--font-size--small);
-    line-height: inherit;
-    border-radius: .25rem;
-    margin: 0;
+/* Off-white background in light mode to match figures and easier on eyes */
+@media screen {
+  [data-md-color-scheme="slate"] {
+    --md-default-bg-color: #1e2129;
+  }
+  [data-md-color-scheme="default"] {
+    --md-default-bg-color: #f0f0f0;
+  }
 }
 
-.py.data.class-header {
-    padding: 0;
+/* Dark mode - darker red background for stderr jupyter output in tutorials for better readability */
+[data-md-color-scheme="slate"] div.nboutput.container div.output_area.stderr {
+  background: #d76c6c; /* Darker red */
+}
+
+/* force-scroll output longer than 600px in notebooks - see also: https://github.com/spatialaudio/nbsphinx/pull/831 */
+div.nboutput.container div.output_area:has(pre) {
+    max-height: 600px;
+    scrollbar-width: thin;
+}
+
+/* Override the nbsphinx-gallery class to have wider columns */
+div.nbsphinx-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
 
 /* 
-Overload the class attribute css to allow visually distinguishable "class-header" elements
-that are simultaneously class attributes and show up in the navigation bar, without
-having to inherit the markup of actual class attributes.
+sphinx-immaterial: hide integreated toc, since it is redundant with any nested items. 
+this is a quick and dirty patch of the issue, but it works for now.
 */
-
-.py.data.class-header .sig-name.descname{
-    box-sizing: border-box;
-    text-transform: uppercase;
-    color: var(--color-foreground-primary);
-    font-size: var(--font-size--normal);
-    font-family: var(--font-stack);
-    padding: 0 0 0 5px;
-}
-
-/* python class attribute signatures that are children of "class-header" */
-.py.data.class-header .sig.sig-object.py{
-    font-size: var(--font-size--normal);
-    font-weight: normal;
-    border-radius: .25rem;
-    height: 100%;
-}
-
-.hidden {
+.md-nav__item--active.md-nav__current-nested + .md-nav__item--active.md-nav__current-toc {
     display: none;
-}
-
-.artificially-indented {
-    margin-left: 3em;
 }

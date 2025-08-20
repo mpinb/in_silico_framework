@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Cell objects for neuron models and cell activity.
 
 This module contains classes for representing cells in NEURON simulations.
@@ -31,7 +48,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 class Cell(object):
     '''Cell object providing API to the NEURON hoc interface.
     
-    This class contains info on the cell morphology structure, and simulation data of single-cell simulations.
+    This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
     The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
     Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
     
@@ -43,18 +60,21 @@ class Cell(object):
         hoc_path (str): Path to the hoc file containing the cell morphology.
         id (str | int, optional): ID of the cell (often unused).
         soma (:py:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
-        tree (neuron.h.SectionList): NEURON SectionList containing all sections of the cell.
-        branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (neuron.h.SectionList).
-        structures (dict): All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
-        sections (list): List of all :py:class:`~single_cell_parser.cell.PySection` objects. sections[0] is the soma. Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
+        tree (:py:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
+        branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
+        structures (Dict[:py:class:`~single_cell_parser.cell.PySection`]): 
+            All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). 
+            Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
+        sections (List[:py:class:`~single_cell_parser.cell.PySection`]): 
+            List of :py:class:`~single_cell_parser.cell.PySection` objects. 
+            First element is the soma. 
+            Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
         synapses (dict): a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
         E (float): Default resting membrane potential. Defaults to -70.0
         changeSynParamDict (dict): dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.
-        tVec (neuron.h.Vector): a hoc Vector recording time.
+        tVec (:py:class:`neuron:Vector`): a NEURON Vector recording time.
         neuron_param: The :ref:`cell_parameters_format`.
         section_adjacency_map (dict): maps each section (by ID) to its parent sections and children sections.
-        evokedNW: The :py:class:`single_cell_parser.network.NetworkMapper` object for evoked network simulations. 
-            Set by e.g. :py:meth:`~single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input`.
     '''
     def __init__(self):
         self.hoc_path = None
@@ -143,6 +163,51 @@ class Cell(object):
                 ## all further functions relying on that values. I.e. they should
                 ## check, if the range var is existent in the respective segment or not
                 pass
+
+    def get_range_var_conductances(self, density=True):
+        """Get the conductances of each section, categorized by range variable and segment.
+        
+        This method computes the conductance of each range variable in each segment, and categorizes them by: section, segment, range variable.
+        
+        Args:
+            density (bool, optional): 
+                If True (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                If False, the total amount of conductivity is returned for each segment i.e. the conductance density multiplied by the area of the segment.
+                
+        Returns:
+            List[List[Dict[List]]]: 
+                A nested list/dictionary structure. 
+                Each element contains all range variables and segments for one section.
+                Each such element is a dictionary, where the keys are range variables.
+                Each such key is then a list, containing the value of this range variable for each segment.
+                
+        Example:
+        
+            >>> cell.get_range_var_conductances()
+            [                   
+                {               # section 0
+                    'Ca_LVAst': [  
+                        0.0017, # segment 0
+                        0.0017, # segment 1
+                        0.0017, # segment 2
+                        0.0017, # segment 3
+                        0.0017  # segment 4
+                    ],
+                    'Ca_HVA': [0.0017, 0.0017, 0.0017, 0.0017, 0.0017],
+                    ...
+                },
+                {...},          # section 1
+                {...},          # section 2
+            ]
+        """
+        conds = [
+            sec.get_range_conductances(
+                range_vars = self.parameters[sec.label]['mechanisms']['range'],
+                density=density
+                ) 
+            for sec in self.sections
+        ]
+        return conds
 
     def distance_between_pts(self, sec1, x1, sec2, x2):
         """
@@ -536,7 +601,21 @@ class Cell(object):
 
 
 class PySection(nrn.Section):
-    '''Wrapper around :py:class:`nrn.Section` providing additional functionality for geometry and mechanisms.
+    '''Wrapper around :py:class:`neuron:Section` providing additional functionality for geometry and mechanisms.
+
+    NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
+    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
+    which looks similar to the section representation, but has an additional ``(x)``: a relative coordinate representing the
+    center point of the segment.
+    
+    Iterating the section will provide the individual segments. Each segment consists of one or more points.
+    Accessing a segment's biophysical properties can be done as ``seg.<param>.<param_name>``.
+    
+    Example::
+    
+        >>> sec = cell.soma
+        >>> for seg in sec:
+        ...    print(seg.NaTa_t.gNaTa_tbar)
     
     Attributes:
         label (str): label of the section (e.g. "Soma", "Dendrite", "Myelin").
@@ -648,6 +727,84 @@ class PySection(nrn.Section):
         #        i.e. allocate memory before running simulation
         self._init_vm_recording()
 
+    def get_seg_conductance(self, seg, var, param_name):
+        """Get the conductance of a segment.
+        
+        Given a segment and a variable name, this function retrieves the conductance of the specified variable in the segment.
+        
+        Args:
+            seg (:py:class:`neuron.nrn.Segment`): The segment to retrieve the conductance from.
+            var (str): The variable name of the mechanism e.g. ``NaTa_t``.
+            param_name (str): The parameter name of the mechanism e.g. ``gNaTa_tbar``.
+            
+        Returns:
+            float: The conductance of the specified variable in the segment.
+            
+        Raises:
+            ValueError: If the segment does not have the specified variable.
+            
+        Raises:
+            AssertionError: If the segment is not an instance of :py:class:`neuron.nrn.Segment`.
+        """
+        assert isinstance(seg, nrn.Segment)
+        if not hasattr(seg, var): raise ValueError(f"Segment {seg} does not have variable {var}")
+        else:
+            param = getattr(getattr(seg, var), param_name)
+            return param
+   
+    def get_range_conductances(self, range_vars, density=True):
+        """Get the transmembrane conductance of each range variable separately.
+        
+        Given a nested dictionary of range variables, this function computes the conductance of each variable in each segment.
+        The conductance for each segment is not necessarily equal to the :ref:`cell_parameters_format`, but may be spatially distributed
+        according to a non-uniform distribution. 
+        This method explicitly fetches the conductance from the NEURON sections after spatial distribution.
+        
+        The nested ``range_vars`` keys must match the segment's nested attributes.
+        
+        Example::
+        
+            >>> range_vars = {"NaTa_t": ["gNaTa_tbar"]}
+            >>> cell.sections[1].get_range_conductances(range_vars)
+            {"NaTa_t": [0.00001, 0.00002]}  # 2 segments in section 1
+            
+        Args:
+            range_vars (dict): 
+                A nested dictionary of range variables.
+                The keys must match the segment's nested attributes.
+                It is possible to simply pass subsections of the :ref:`cell_parameters_format` here, e.g. ``neup[sec.label]["mechanisms"]["range"]``
+            density (bool, optional): 
+                If ``True`` (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                If ``False``, the total amount of conductance is returned for each segment in units :math:`nS`
+                i.e. the conductance density multiplied by the area of the segment.
+                Defaults to True.
+
+        Returns:
+            List[Dict]: A list of per-channel conductances for each segment.
+            
+        Raises:
+            AssertionError: If the number of parameters with prefix `g` is not equal to 1 for each range variable.
+            
+        Attention:
+            Pay close attention to the units! For numerical stability, the absolute conductance is in units of :math:`nS`, while
+            the conductance density is given in units of :math:`S / cm ^2`.
+        """
+        rvs_per_seg = {}
+        for var in range_vars:
+            param_names = [e for e in range_vars[var] if e.startswith('g')]
+            assert len(param_names) == 1, f"Expected one parameter with prefix `g` for range variable {var}, found {len(param_names)}: {param_names}"
+            param_name = param_names[0]
+            rvs_per_seg[var] = []
+            for seg in self:
+                seg_cond_S_per_cm2 = self.get_seg_conductance(seg, var, param_name) # in units S / cm^2
+                if not density:
+                    area_mum2 = np.pi * seg.diam * self.L / self.nseg
+                    seg_cond_nS = 10 * seg_cond_S_per_cm2 * area_mum2 # from S / cm^2 to nS
+                    rvs_per_seg[var].append(seg_cond_nS)
+                else:
+                    rvs_per_seg[var].append(seg_cond_S_per_cm2)
+        return rvs_per_seg
+
     def _compute_seg_diameters(self):
         '''Computes the diameter of each segment in this section.
         
@@ -741,7 +898,7 @@ class PySection(nrn.Section):
     def _init_vm_recording(self):
         '''Record the membrane voltage at every point in this section.
         
-        Sets up a :py:class:`nrn.h.Vector` for recording membrane voltage at every segment in this section.
+        Sets up a :py:class:`neuron:Vector` for recording membrane voltage at every segment in this section.
         '''
         # TODO: recVList[0] should store voltage recorded at
         # intermediate node between this and parent segment?
@@ -761,7 +918,7 @@ class PySection(nrn.Section):
     def _re_init_vm_recording(self):
         '''Reinitialize votage recordings
         
-        Resizes the :py:class:`nrn.h.Vector` objects to 0 to avoid NEURON segfaults
+        Resizes the :py:class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
         '''
         for vec in self.recVList:
             vec.resize(0)
@@ -769,7 +926,7 @@ class PySection(nrn.Section):
     def _re_init_range_var_recording(self):
         '''Re-initialize the range mechanism recordings.
         
-        Resizes the :py:class:`nrn.h.Vector` objects to 0 to avoid NEURON segfaults
+        Resizes the :py:class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
         '''
         for key in list(self.recordVars.keys()):
             for vec in self.recordVars[key]:
@@ -838,19 +995,19 @@ class PySection(nrn.Section):
                 self.recordVars[key].append(vec)
 
 class PointCell(object):
-    '''Cell without morphological or electrophysiological features.
+    '''Cell without morphological or biophysical attributes.
 
     Used as a presynaptic spike source for synapses. 
-    Stores spike times in :py:class:`neuron.h.Vector` and :py:class:`numpy.array`.
-    Requires :py:class:`nrn.h.VecStim` to trigger spikes at specified times.
+    Stores spike times in :py:class:`neuron:Vector` and :py:class:`numpy.array`.
+    Requires :py:class:`neuron:VecStim` to trigger spikes at specified times.
         
     Attributes:
         spikeTimes (list): list of spike times. Default=None.
-        spikeVec (:py:class:`neuron.h.Vector`): hoc Vector containing spike times
-        spikes (:py:class:`neuron.h.VecStim`): 
-            VecStim object to use as a spike source in :py:class:`~neuron.h.NetCon` objects (see https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html).
+        spikeVec (:py:class:`neuron:Vector`): hoc Vector containing spike times
+        spikes (:py:class:`neuron:VecStim`): 
+            VecStim object to use as a spike source in :py:class:`neuron:NetCon` objects.
             These are initialized from :paramref:`spikeTimes`.
-        playing (bool): flag indicating whether the :py:class:`~neuron.h.VecStim` spike source is playing
+        playing (bool): flag indicating whether the :py:class:`neuron:VecStim` spike source is playing
         synapseList (list): list of synapses connected to this cell. 
     '''
 
@@ -985,7 +1142,14 @@ class PointCell(object):
             return (1 - self.noiseParam) * self.spikeInterval + self.noiseParam * self.spikeInterval * self.rand.exponential()
 
     def _add_synapse_pointer(self, synapse):
-        """Add a reference to a synapse connected to this cell."""
+        """Add a :py:class:`Synapse` to the cell.
+        
+        The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
+        to a postsynaptic :py:class:`Cell` object.
+        
+        Args:
+            synapse (:py:class:`Synapse`): Synapse object.
+        """
         if self.synapseList is None:
             self.synapseList = [synapse]
         else:
@@ -994,9 +1158,9 @@ class PointCell(object):
     def turn_off(self):
         '''Turns off the spike source.
         
-        Calls ``play()`` with no arguments to turn off the :py:class:`~neuron.h.VecStim`.
+        Calls ``play()`` with no arguments to turn off the :py:class:`neuron:VecStim`.
         This is necessary because ``VecStim`` does not implement reference counting.
-        Resizes the :py:class:`~neuron.h.Vector` to 0.
+        Resizes the :py:class:`neuron:Vector` to 0.
         
         Note:
             M. Hines: Note that one can turn off a VecStim without destroying it by using VecStim.play() with no args. 
@@ -1101,7 +1265,7 @@ class SynParameterChanger():
     
     Attributes:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~sumatra.NTParameterSet`.
+        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet`.
         tEvent (float): Time at which the synapse parameters should change.
         
     :skip-doc:
@@ -1111,7 +1275,7 @@ class SynParameterChanger():
         """
         Args:
             cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~sumatra.NTParameterSet`.
+            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet`.
             t (float): Time at which the synapse parameters should change.
         """
         self.cell = cell

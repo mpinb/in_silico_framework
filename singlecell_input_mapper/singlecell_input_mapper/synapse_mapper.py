@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''
 This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
 The :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` class uses these classes to create synapse realizations.
@@ -7,6 +24,8 @@ Consult the module :py:mod:`~singlecell_input_mapper.map_singlecell_inputs` for 
 import numpy as np
 from .scalar_field import ScalarField
 import sys
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
@@ -260,6 +279,63 @@ class SynapseDensity(object):
         self.inhPST = inhPST
         self.cellPST = {}
 
+    def compute_synapse_density_vectorized(self, boutonDensity, preCellType):
+        """Vectorized version of synapse density computation."""
+        if not self.cellPST:
+            self.compute_cell_PST()
+
+        if preCellType in self.exTypes:
+            normPSTDensity = self.exPST
+            cellPSTDensity = self.cellPST['EXC']
+        elif preCellType in self.inhTypes:
+            normPSTDensity = self.inhPST
+            cellPSTDensity = self.cellPST['INH']
+        else:
+            raise RuntimeError(f"Invalid presynaptic cell type: {preCellType}")
+
+        synapseDensity = {}
+        for anatomical_area, pstField in cellPSTDensity.items():
+            # Check bounding box overlap
+            if not self._intersect_bboxes(boutonDensity.boundingBox, pstField.boundingBox):
+                return None
+
+            # Pre-allocate synapse field
+            synapseField = ScalarField(
+                np.zeros_like(pstField.mesh),
+                pstField.origin,
+                pstField.extent,
+                pstField.spacing,
+                pstField.boundingBox
+            )
+            synapseDensity[anatomical_area] = synapseField
+
+            # Precompute voxel centers in a vectorized way
+            shape = pstField.mesh.shape
+            dx, dy, dz = pstField.spacing
+            x = pstField.origin[0] + (np.arange(shape[0]) + 0.5) * dx
+            y = pstField.origin[1] + (np.arange(shape[1]) + 0.5) * dy
+            z = pstField.origin[2] + (np.arange(shape[2]) + 0.5) * dz
+
+            X, Y, Z = np.meshgrid(x, y, z, indexing='ij')
+            coords = np.stack([X, Y, Z], axis=-1)
+
+            # Vectorized bouton and normPST sampling
+            boutons = boutonDensity.get_mesh_coordinates_vectorized(coords)
+            normPST = normPSTDensity.get_mesh_coordinates_vectorized(coords)
+
+            # Vectorized computation: mask out invalid values
+            valid_mask = (boutons > 0) & (normPST > 0)
+            synapseField.mesh[valid_mask] = (
+                boutons[valid_mask] * pstField.mesh[valid_mask] / normPST[valid_mask]
+            )
+
+        # Remove empty density fields
+        synapseDensity = {
+            area: field for area, field in synapseDensity.items()
+            # if np.any(field.mesh > 0)  # keep key, even if mesh is empty (for backwards compatibility)
+        }
+        return synapseDensity if synapseDensity else None
+
     def compute_synapse_density(self, boutonDensity, preCellType):
         '''Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
         
@@ -471,17 +547,15 @@ class SynapseDensity(object):
                 :py:class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
             likeAmira (bool):
                 Set to True if the diamlist of each section denotes the radius, rather than the diameter.
-                Default is False.
+                Default is ``False``.
                 
         Returns:
             None. Fills the scalar fields in place.
         '''
-        print('---------------------------')
+        logger.info('---------------------------')
         totalLength = 0.0
         for structure in list(lengthDensity.keys()):
-            print(
-                'Computing 3D length/surface area density of structures with label {:s}'
-                .format(structure))
+            logger.debug('Computing 3D length/surface area density of structures with label {:s}'.format(structure))
             density1 = lengthDensity[structure]
             density2 = surfaceAreaDensity[structure]
             #===================================================================
@@ -530,7 +604,7 @@ class SynapseDensity(object):
             for n in range(len(clipSegments)):
                 segment = clipSegments[n]
                 segmentRadius = clipSegmentsRadius[n]
-                print('{:d} of {:d} done...\r'.format(
+                logger.debug('{:d} of {:d} done...\r'.format(
                     count, nrOfSegments))  #, end=' ')
                 sys.stdout.flush()
                 count += 1
@@ -599,8 +673,7 @@ class SynapseDensity(object):
                             density1.mesh[ijk] += length
                             density2.mesh[ijk] += area
                             totalLength += length
-        print('Total clipped length = {:f}'.format(totalLength))
-        print('---------------------------')
+        logger.debug('Total clipped length = {:f}'.format(totalLength))
 
     def _clip_u(self, pq, u1u2):
         '''Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.

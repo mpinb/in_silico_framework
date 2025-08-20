@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """Set up logging for ISF."""
 import logging, sys, warnings, os
 from contextlib import contextmanager
@@ -118,28 +134,64 @@ def add_logging_level(levelName, levelNum, methodName=None):
     setattr(logging.getLoggerClass(), methodName, logForLevel)
     setattr(logging, methodName, logToRoot)
 
-# All loggers will inherit the root logger's level and handlers
-root_logger = logging.getLogger()
-isf_logger = root_logger.getChild("ISF")
 
-# Redirect warnings to the logging system. This will format them accordingly.
-logging.captureWarnings(True)
-warnings.showwarning = lambda message, category, filename, lineno, f=None, line=None: \
-    isf_logger.getChild(filename).warning(message)
+def _get_log_formatter():
+    """Get the appropriate log formatter.
+    
+    Regular usage has a concise format, while testing uses a verbose format with timestamps.
+    This is determined by the environment variable `ISF_IS_TESTING`.
+    """
+    if os.environ.get("ISF_IS_TESTING", "0") == "1":
+        # Verbose format with timestamp and full module path
+        formatter = logging.Formatter(
+            "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S"
+        )
+    else:
+        # Concise format for regular usage
+        formatter = logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s")
 
-# Stream handler: where to redirect the logs to
-logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
-logger_stream_handler.name = "ISF_logger_stream_handler"
-logger_stream_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s"))
-root_logger.addHandler(logger_stream_handler)
+    return formatter
 
-# Filters
-logger_stream_handler.addFilter(LastPartFilter())
-logger_stream_handler.addFilter(RecordFilter('pandas_msgpack'))  # filter out warnings from pandas-msgpack
 
-# Add custom logging levels
-add_logging_level("ATTENTION", logging.WARNING - 5)
+# Lazy logger setup
+def get_isf_logger(force_reconfigure=False):
+    """Lazy initialization of the ISF logger.
+    
+    Args:
+        force_reconfigure (bool): If True, reconfigure the logger even if it has already been set up.
+        
+    Returns:
+        logging.Logger: The configured ISF logger instance.
+    """
+    if not hasattr(get_isf_logger, "_logger") or force_reconfigure:
+        # Perform the setup only once
+        root_logger = logging.getLogger()
+        isf_logger = root_logger.getChild("ISF")
 
-# initialize with INFO level
-isf_logger.setLevel(logging.INFO)
-logger = isf_logger
+        # Redirect warnings to the logging system
+        logging.captureWarnings(True)
+        warnings.showwarning = lambda message, category, filename, lineno, f=None, line=None: \
+            isf_logger.getChild(filename).warning(message)
+
+        # Stream handler: where to redirect the logs to
+        logger_stream_handler = logging.StreamHandler(stream=sys.stdout)
+        logger_stream_handler.name = "ISF_logger_stream_handler"
+        logger_stream_handler.setFormatter(_get_log_formatter())
+        root_logger.addHandler(logger_stream_handler)
+
+        # Filters
+        logger_stream_handler.addFilter(LastPartFilter())
+
+        # Add custom logging levels
+        add_logging_level("ATTENTION", logging.WARNING - 5)
+
+        # Initialize with INFO level
+        isf_logger.setLevel(logging.INFO)
+
+        # Store the logger in a function attribute for reuse
+        get_isf_logger._logger = isf_logger
+
+    return get_isf_logger._logger
+
+logger = get_isf_logger()

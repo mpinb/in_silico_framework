@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """Visualize voltage traces from the results of a :py:class:`~biophysics_fitting.simulator.Simulator` object.
 
 this module provides convenience methods to visualize the voltage traces of all stimuli run by a
@@ -44,7 +61,7 @@ def plot_vt(voltage_traces, key='BAC.hay_measure'):
     display.display(plt.gcf())
     plt.close()
 
-def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select = 295+80):
+def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select = 295+80, lw=2, **kwargs):
     """Visualize voltage traces from the Hay stimulus protocols.
 
     The results of e.g. :py:class:`biophysics_fitting.simulator.Simulator` are nested dictionaries,
@@ -72,15 +89,17 @@ def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more details on the stimulus protocols.
     """
+    if lw not in kwargs:
+        kwargs['lw'] = lw
     if fig is None:
         fig = plt.figure(dpi=200, figsize=(8, 6))
     ax = fig.add_subplot(2, 2, 1)
     t = vt['BAC.hay_measure']['tVec']
     vs = vt['BAC.hay_measure']['vList']
     select = (t >= 295 - 10) & (t < BAC_select)
-    ax.plot(t[select] - 295, vs[0][select], soma_color)
+    ax.plot(t[select] - 295, vs[0][select], soma_color, **kwargs)
     # ax.plot(t[select]-295,vs[2][select], '#f7941d')
-    ax.plot(t[select] - 295, vs[1][select], dend_color)
+    ax.plot(t[select] - 295, vs[1][select], dend_color, **kwargs)
     ax.plot([20, 40], [30, 30])
     ax.plot([50, 50], [30, 10])
 
@@ -88,8 +107,8 @@ def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select 
     t = vt['bAP.hay_measure']['tVec']
     vs = vt['bAP.hay_measure']['vList']
     select = (t >= 295 - 10) & (t < 295 + 80)
-    ax.plot(t[select] - 295, vs[0][select], soma_color)
-    ax.plot(t[select] - 295, vs[2][select], dend_color)
+    ax.plot(t[select] - 295, vs[0][select], soma_color, **kwargs)
+    ax.plot(t[select] - 295, vs[2][select], dend_color, **kwargs)
     ax.plot([20, 40], [30, 30])
     ax.plot([50, 50], [30, 10])
 
@@ -97,7 +116,7 @@ def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select 
     t = vt['StepOne.hay_measure']['tVec']
     vs = vt['StepOne.hay_measure']['vList']
     select = (t >= 600) & (t < 2800)
-    ax.plot(t[select] - 700, vs[0][select], soma_color)
+    ax.plot(t[select] - 700, vs[0][select], soma_color, **kwargs)
     ax.plot([500, 1500], [30, 30])
     ax.plot([2050, 2050], [30, 10])
 
@@ -105,7 +124,7 @@ def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select 
     t = vt['StepTwo.hay_measure']['tVec']
     vs = vt['StepTwo.hay_measure']['vList']
     select = (t >= 600) & (t < 2800)
-    ax.plot(t[select] - 700, vs[0][select], soma_color)
+    ax.plot(t[select] - 700, vs[0][select], soma_color, **kwargs)
     ax.plot([500, 1500], [30, 30])
     ax.plot([2050, 2050], [30, 10])
 
@@ -113,7 +132,7 @@ def visualize_vt(vt, fig=None, soma_color='k', dend_color='#f7941d', BAC_select 
     t = vt['StepThree.hay_measure']['tVec']
     vs = vt['StepThree.hay_measure']['vList']
     select = (t >= 600) & (t < 2800)
-    ax.plot(t[select] - 700, vs[0][select], soma_color)
+    ax.plot(t[select] - 700, vs[0][select], soma_color, **kwargs)
     ax.plot([500, 1500], [30, 30])
     ax.plot([2050, 2050], [30, 10])
 

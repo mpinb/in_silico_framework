@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 '''Classes for setting up a cell morphology and mapping synapses onto it.
 
 Used to create network realizations. 
@@ -272,7 +289,7 @@ class PySection2(object):
 
 
 class PointCell(object):
-    '''Cell object without morphological attributes.
+    '''Cell object without morphological or biophysical attributes.
 
     When connecting synapses between postsynaptic and
     presynaptic cells, this class is used for the presynaptic cell.
@@ -294,13 +311,14 @@ class PointCell(object):
         self.cellType = cellType
 
     def _add_synapse_pointer(self, synapse):
-        """Add a synapse to the cell.
+        """Add a :py:class:`Synapse` to the cell.
         
-        NEURON's :cite:`hines2001neuron` Python hoc interface
-        provides pointers to synapses, rather than the full object.
+        The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
+        to a postsynaptic :py:class:`~single_cell_parser.cell.Cell` object.
         
         Args:
-            synapse (nrn.synapse): Synapse object."""
+            synapse (:py:class:`Synapse`): Synapse object.
+        """
         if self.synapseList is None:
             self.synapseList = [synapse]
         else:

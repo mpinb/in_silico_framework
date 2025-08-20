@@ -7,13 +7,13 @@ def test_has_evoked():
     param = scp.build_parameters(getting_started.networkParam)
 
     assert _has_evoked(param, 'L5tt_C2')
-    assert ~_has_evoked(param, 'L1_Beta')
+    assert not _has_evoked(param, 'L1_Beta')
 
 
 def test_celltype_matches():
     assert _celltype_matches('L5tt_C2', ['L5tt'], ['S1'])
     assert _celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['S1'])
-    assert ~_celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['D2'])
+    assert not _celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['D2'])
     assert _celltype_matches('L5tt_C2', ['L5tt', 'L4ss'], ['D2', 'C2'])
 
 

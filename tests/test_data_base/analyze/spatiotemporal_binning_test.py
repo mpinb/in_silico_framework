@@ -1,3 +1,4 @@
+import pytest
 from data_base.analyze.spatiotemporal_binning import *
 import numpy as np
 import pandas as pd

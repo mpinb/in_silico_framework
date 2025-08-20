@@ -1,3 +1,19 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
 """
 This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
 
@@ -9,9 +25,10 @@ These parameters and templates are used to set up the biophysical constraints fo
 # naming converters scp <--> hay
 #########################################
 import six
-from sumatra.parameters import NTParameterSet
+from single_cell_parser.parameters import NTParameterSet
 import pandas as pd
-
+import logging
+logger = logging.getLogger("ISF").getChild(__name__)
 
 def hay_param_to_scp_neuron_param(p):
     """Convert a Hay parameter name to a SCP neuron parameter name.
@@ -85,7 +102,7 @@ def get_L5tt_template():
         - ``tStop``: stop time
             
     Returns:
-        sumatra.parameters.NTParameterSet: The template cell parameters.       
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.       
     
     """
     p = {
@@ -333,7 +350,6 @@ def get_L5tt_template():
             'tStop': 300.0
         }
     }
-    from sumatra.parameters import NTParameterSet
     return NTParameterSet(p['neuron'])
 
 def get_L5tt_template_v2():
@@ -345,7 +361,7 @@ def get_L5tt_template_v2():
     - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
         
     Returns:
-        sumatra.NTParameterSet: The template cell parameters.
+        :py:class:~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.
     """
     neup = get_L5tt_template()
     for loc in neup:
@@ -382,11 +398,11 @@ def set_morphology(cell_param, filename=None):
     The morphology is simply a path to a :ref:`hoc_file_format` file in string format.
     
     Args:
-        cell_param (sumatra.parameters.NTParameterSet | dict): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
         filename (str): The path to the :ref:`hoc_file_format` file.
         
     Returns:
-        sumatra.parameters.NTParameterSet | dict: The updated cell parameter dictionary."""
+        :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell parameter dictionary."""
     cell_param.filename = filename
     return cell_param
 
@@ -407,7 +423,7 @@ def set_ephys(cell_param, params=None):
     Parameter names reflect the Hay naming convention.
 
     Args:
-        cell_param (sumatra.parameters.NTParameterSet): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The cell parameter dictionary.
         params (pd.Series): The parameter vector as a pandas Series.
 
     Raises:
@@ -416,7 +432,7 @@ def set_ephys(cell_param, params=None):
         AssertionError: If some parameters are not set after the update.
 
     Returns:
-        sumatra.parameters.NTParameterSet: The updated cell_param, with the biphysical parameters set.  
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The updated cell_param, with the biphysical parameters set.  
     
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -431,6 +447,8 @@ def set_ephys(cell_param, params=None):
         cell_param[scp_param] = float(v)
     unset_params = check_unset_range_mechanisms(cell_param)
     # assert len(unset_params) == 0, "The following parameters are not set after set_ephys: {}".format(unset_params)
+    if len(unset_params) != 0:
+        logger.info("The following parameters are not set after set_ephys: {}".format(unset_params))
     return cell_param
 
 
@@ -445,7 +463,7 @@ def set_param(cell_param, params=None):
         # returns {'a': {'b': {'c': 3}}}
         
     Args:
-        cell_param (:py:class`~sumatra.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
+        cell_param (:py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
     
     Returns:
@@ -474,7 +492,7 @@ def set_many_param(cell_param, params=None):
         # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
         
     Args:
-        cell_param (:py:class:`~sumatra.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
         
     Returns:
@@ -502,26 +520,36 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
     """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
     
     Args:
-        cell_param (:py:class:`sumatra.parameters.NTParameterSet` | dict): The cell parameter dictionary.
+        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
         min_ (float): The minimum distance from the soma.
         max_ (float): The maximum distance from the soma.
         outsidescale_sections (list): A list of sections where the channels should be inserted.
         
     Returns:
-        sumatra.parameters.NTParameterSet | dict: The updated cell_param.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell_param.
         
     Note:
         This method is specific for a L5PT.
-        For more information about the hot zone, refer to :cite:t:`Guest_Bast_Narayanan_Oberlaender`
+        For more information about the hot zone, refer to :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`
     """
+    hotzone_params = ['ApicalDendrite.Ca_HVA.begin', 'ApicalDendrite.Ca_HVA.end', 
+                      'ApicalDendrite.Ca_LVAst.begin', 'ApicalDendrite.Ca_LVAst.end']
+
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['begin'] = min_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst']['end'] = max_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA']['begin'] = min_
     cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA']['end'] = max_
+
     if outsidescale_sections is not None:
         assert isinstance(outsidescale_sections, list)
         cell_param['ApicalDendrite'].mechanisms.range['Ca_LVAst'][
             'outsidescale_sections'] = outsidescale_sections
         cell_param['ApicalDendrite'].mechanisms.range['Ca_HVA'][
             'outsidescale_sections'] = outsidescale_sections
+        hotzone_params.append('ApicalDendrite.Ca_LVAst.outsidescale_sections')
+        hotzone_params.append('ApicalDendrite.Ca_HVA.outsidescale_sections')
+        
+    unset_params = check_unset_range_mechanisms(cell_param)
+    assert all([False if param in unset_params else True for param in hotzone_params]), f"Not all in {hotzone_params} is set"
+    logger.info('Following hotzone params are set: {}'.format(hotzone_params))
     return cell_param

@@ -1,9 +1,26 @@
 #!/usr/bin/python
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# The full license text is also available in the LICENSE file in the root of this repository.
+
 """
 Create PSTHs from spike times.
 
 Attention:
-    This module is specific to the data gathering process and file formats used by the `Oberlaender lab in Bonn <https://mpinb.mpg.de/en/research-groups/groups/in-silico-brain-sciences/research-focus-ibs.html>`_.
+    This module is specific to the data gathering process and file formats used by the `Oberlaender lab in Bonn <https://mpinb.mpg.de/en/research-groups/groups/in silico-brain-sciences/research-focus-ibs.html>`_.
     If you are in the process of adapting this module to your own data, please focus on the output format of each method, rather than trying to apply these blindly to your files.
 """
 import sys
@@ -59,15 +76,15 @@ def create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName):
     
     Example:
         >>> create_average_celltype_PSTH_from_clusters(
-            'getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84', 
+            'getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84', 
             'L5_PSTH_UpState.param')
         {
-            "getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84_B1": {
+            "getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84_B1": {
                 "distribution": "PSTH",
                 "intervals": [(6.0,7.0)],
                 "probabilities": [0.0216],
             },
-            "getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84_B2": {
+            "getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84_B2": {
                 ...
             },
         }
@@ -247,7 +264,7 @@ def create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName):
     
     Example:
         >>> create_evoked_PSTH(
-            'getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84/C1_040929-129-ctx.cluster1', 
+            'getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84/C1_040929-129-ctx.cluster1', 
             cellType='L5tt', 
             ongoingrate=2.64, 
             outFileName='PSTH.param')
@@ -381,7 +398,7 @@ def load_cluster_trials(fname):
         dict: A dictionary with the spike times for each trial.
         
     Example:
-        >>> load_cluster_trials('getting_started/example_data/functional_constraints/evoked_activity/PW_SuW_RF_CDK/L5tt/L5tt_84/C1_040929-129-ctx.cluster1')
+        >>> load_cluster_trials('getting_started/example_data/functional_constraints/evoked_activity/L5tt/L5tt_84/C1_040929-129-ctx.cluster1')
         {
             0: [87.80000000000001, 138.70000000000002, 151.6, 430.40000000000003, 471.1, 478.90000000000003], 
             1: [], 

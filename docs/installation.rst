@@ -1,19 +1,178 @@
+.. _installation:
+
 Installation
 ============
 
-ISF is available for Linux and OSX. It requires ``gcc`` and ``git`` to be installed.
+.. md-tab-set::
 
-For installation and environment management, ISF uses [`pixi`](https://pixi.sh/latest/). To install ISF with `pixi`, simply:
+   .. md-tab-item:: Linux
+
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download", ""
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__ 
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__, Likely already installed
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+   .. md-tab-item:: macOS
+
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download"
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`__
+
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+   .. md-tab-item:: Windows
+
+      .. important::
+
+         Windows support is still experimental.
+         If you are using ISF with Dask parallellization on Windows, please monitor your dask dashboard closely.
+         In case you encounter any issues, feel free to `open an issue <https://github.com/mpinb/in_silico_framework/issues>`_ and include relevant logs.
+         Note that many of the core ISF workflows (network mapping, neuron model generation etc.) require extensive resources, which often implies a (Linux-based) High Performance Computing environment.
+
+      Before installing ISF, make sure you have the following requirements installed:
+
+      .. csv-table::
+         :header: "Requirement", "Download", ""
+
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/win>`__
+         `NEURON <https://www.neuron.yale.edu/neuron/>`_ ,  `Download <https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows>`__, 7.8 ≤ version ≤ 8.2
+
+
+      .. success::
+         :title: Check requirements
+         :collapsible:
+
+         You can check if the requirements are installed correctly by running the following commands in your terminal:
+
+         .. code-block:: bash
+
+            which pixi
+            which git
+            which neuron
+
+         Each command should return a path to the program.
+         If it doesn't, you may need to restart your shell, or something went wrong during the installation of the requirements.
+
+
+      You can then install ISF:
+
+      .. code-block:: bash
+
+         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         cd in_silico_framework
+         pixi run install
+
+
+
+Developer installation
+-----------------------
+
+
+If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
+you should also clone the ``develop`` branch of the repository:
 
 .. code-block:: bash
 
-   git clone https://github.com/mpinb/in_silico_framework.git && cd in_silico_framework
-   pixi install
+   git remote set-branches origin 'develop'
+   git fetch --depth 1 origin develop
 
-The installation will:
-1. Download a Python 3.8 distribution
-2. Download and install conda dependencies
-3. Download and install PyPI dependencies
-4. Install and patch [`pandas-msgpack`](https://github.com/abast/pandas-msgpack)
-5. Install a corresponding ipykernel for notebooks
-6. Compile all mechanisms in the ``mechanisms`` directory using ``nrnivmodl``.
+
+Configuration
+-------------
+
+ISF works best with a dask server for parallel computing. We provide default scripts to launch a dask server and workers
+that should work on most systems. 
+
+.. code-block:: bash
+
+   pixi run launch_dask_server
+
+.. code-block:: bash
+
+   pixi run launch_dask_workers
+
+For High-Performance Computing (HPC), you may want to launch the dask server with custom configuration instead of these default scripts.
+The underlying commands for these shortcuts are configured in the ``pyproject.toml`` file.
+
+Usage
+-----
+
+We recommend to use ISF within a JupyterLab server for interactive use:
+
+.. code-block:: bash
+
+   pixi run launch_jupyter_lab_server
+
+``pixi`` also supports a ``conda``-style shell activation:
+
+.. code-block:: bash
+
+   pixi shell
+
+This can be useful for executing shell scripts within the ISF environment, or configuring HPC job submissions.
+To get started with ISF, feel free to consult the :ref:`tutorials`.
+
+Test ISF
+--------
+
+To test if all components of ISF are working as intended, you can run the test suite locally.
+
+.. code-block:: bash
+
+   pixi run test
+
+
+
+
