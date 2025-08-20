@@ -614,3 +614,8 @@ Readers:
 
 - :py:mod:`~single_cell_parser.reader.read_scalar_field`
 - :py:mod:`~single_cell_parser.reader.read_landmark_file`
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_
