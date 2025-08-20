@@ -16,8 +16,8 @@ on:
 
 jobs:
   test:
-    name: Test pixi linux
-    runs-on: ['ibs3005', 'self-hosted']
+    name: Test linux
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
