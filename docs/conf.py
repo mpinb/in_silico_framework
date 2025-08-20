@@ -84,10 +84,6 @@ def setup(app):
     app.connect("autoapi-skip-member", count_documented_members)
     app.connect("env-updated", log_documented_members)
 
-    # add custom css and js. fpaths relative to _satic/
-    app.add_css_file('css/custom.css')
-    app.add_js_file('js/video.js')
-
     # copy over tutorials and convert links to python files to sphinx documentation directives
     copy_and_parse_notebooks_to_docs(
         source_dir=os.path.join(project_root, "getting_started", "tutorials"),
@@ -272,9 +268,12 @@ html_title = "In Silico Framework"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = [
+    "css/custom.css",
+    "css/doc-feedback.css"
 ]
 
 html_js_files = [
+    "js/video.js"
 ]
 
 # Add any extra paths that contain custom files (such as robots.txt or
