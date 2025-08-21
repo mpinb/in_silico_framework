@@ -272,7 +272,7 @@ html_title = "In Silico Framework"
 html_static_path = ["_static"]
 html_css_files = [
     "css/custom.css",
-    "css/doc-feedback.css"
+    "css/doc_feedback.css",
     "css/signature_links.css"
 ]
 
