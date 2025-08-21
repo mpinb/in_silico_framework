@@ -4,12 +4,12 @@
 {%- set shortname = obj.id.split('.')[-1] | escape %}
 
 {% if obj.display %}
-{% if breadcrumb %}
-:mod:`{{ root_module }}`
-{%- for n in range(breadcrumb|length )  %}
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~{{ root_module }}`
+   {%- for n in range(breadcrumb|length - 1 )  %}
  ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
-{%- endfor %}
-{% endif %}
+   {%- endfor %}
+ ❭ 
 
 
 {{ shortname }}
