@@ -70,7 +70,6 @@ extensions = [
 
 graphviz_output_format = "svg"
 
-# Currently unused, but may be neat in the future
 rst_prolog = """
 .. role:: summarylabel
 .. include:: /_static/icons.rst
@@ -245,7 +244,6 @@ html_theme_options = {
         },
     ],
     # "sidebar_hide_name": True,
-    "globaltoc_depth": -1,
     'features': [
         "navigation.tabs",          # overridden from default immaterial: tab sections on top: broken, unless we upgrade the theme, which requires other upgrades as well.
         # "navigation.sections",      # overridden from default immaterial: nav sidebar left has expanded sections.
