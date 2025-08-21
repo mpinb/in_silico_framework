@@ -72,6 +72,7 @@ graphviz_output_format = "svg"
 # Currently unused, but may be neat in the future
 rst_prolog = """
 .. role:: summarylabel
+.. include:: /_static/icons.rst
 """
 
 # -- Settings for omitting members from documentation ----------------------
