@@ -91,7 +91,7 @@
 
    :Attributes:
 
-   {{ attribute_lines | join('\n') | indent(3) }}
+      {{ attribute_lines | join('\n') | indent(6) }}
 
    {%- endif %}
 
