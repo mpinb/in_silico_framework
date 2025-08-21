@@ -57,7 +57,10 @@ extensions = [
     "sphinx_immaterial.graphviz",   # Allow internal reflinking and theming for graphviz
     "sphinx_design",            # For nice design elements, such as grids and cards
     # 'sphinxext.opengraph',   # For OpenGraph metadata, only enable when the site is actually hosted. See https://github.com/wpilibsuite/sphinxext-opengraph for config options when that happens.
-    "sphinxcontrib.video"
+    "sphinxcontrib.video",
+    # Custom extensions
+    # "docs.custom_extensions.short_signatures",  # Strip the prefix from signatures
+    "docs.custom_extensions.linked_handle_signatures",
 ]
 
 graphviz_output_format = "svg"
@@ -270,6 +273,7 @@ html_static_path = ["_static"]
 html_css_files = [
     "css/custom.css",
     "css/doc-feedback.css"
+    "css/signature_links.css"
 ]
 
 html_js_files = [
