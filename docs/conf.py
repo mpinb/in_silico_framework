@@ -54,6 +54,7 @@ extensions = [
     "sphinx_inline_tabs",       # For inline tabs
     "sphinx.ext.graphviz",      # Making graphs
     "sphinx_immaterial",        # html theme
+    # "sphinx_immaterial.apidoc.format_signatures",  # formatting for signatures
     "sphinx_immaterial.graphviz",   # Allow internal reflinking and theming for graphviz
     "sphinx_design",            # For nice design elements, such as grids and cards
     # 'sphinxext.opengraph',   # For OpenGraph metadata, only enable when the site is actually hosted. See https://github.com/wpilibsuite/sphinxext-opengraph for config options when that happens.
@@ -62,6 +63,9 @@ extensions = [
     # "docs.custom_extensions.short_signatures",  # Strip the prefix from signatures
     "docs.custom_extensions.linked_handle_signatures",
 ]
+# object_description_options = [
+#     ("py:.*", dict(black_format_style={"line_length": 60})),
+# ]
 
 graphviz_output_format = "svg"
 
