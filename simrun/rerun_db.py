@@ -133,7 +133,7 @@ def _evoked_activity(
         neuron_param_modify_functions (list): List of functions which take :py:class:`~single_cell_parser.parameters.NTParameterSet` neuron parameters and may return it changed.
         network_param_modify_functions (list): List of functions which take :py:class:`~single_cell_parser.parameters.NTParameterSet` network parameters and may return it changed.
         synapse_activation_modify_functions (list): List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
-        additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation.
+        additional_network_params (list): List of additional :ref:`network_parameters_format` files to be used in the simulation. 
         parameterfiles (pd.DataFrame): A dataframe containing the parameter files for the simulation trials. Should always be present in a simrun-initialized database under the key ``paremeterfiles``.
         neuron_folder (str): Path to the folder containing the neuron parameter files.
         network_folder (str): Path to the folder containing the network parameter files.
@@ -307,6 +307,11 @@ def rerun_db(
     This method recreates the network-embedded neuron simulation from the parameter files in the simrun-initialized database.
     It allows to adapt the cell parameters, network parameters, and the synaptic activation patterns with modification functions.
     The results are stored in the specified directory, relative to the original unmodified simulation results.
+
+    Attention:
+        This function uses the *exact* same synapse activations as already present in the database, except if :paramref:`synapse_activation_modify_functions` is given.
+        In other words, adapting release probabilities of synapses with :paramref:`network_param_modify_functions` will have no effect, as the synapse activations are not
+        regenerated.
     
     Args:
         db (:py:class:`~data_base.DataBase`): A simrun-initialized database to resimulate.
