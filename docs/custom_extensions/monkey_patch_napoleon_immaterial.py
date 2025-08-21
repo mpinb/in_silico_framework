@@ -16,29 +16,32 @@ Otherwise, Napoleon uses a single :Parameters: block, which renders as a simple 
 from sphinx.ext.napoleon.docstring import GoogleDocstring
 import re
 
-
-def _fixed_parse_parameters_section(self, section):
-    """Override to preserve full class names in types."""
+def _format_docutils_params(
+    self, 
+    fields: list[tuple[str, str, list[str]]],
+    field_role: str = 'param', 
+    type_role: str = 'type'
+) -> list[str]:
+    
     lines = []
-    for _name, _type, _desc in self._consume_fields():
-        desc_lines = " ".join([e for e in _desc if e])
-        if _type: # The type is defined in the docstring (very good)
-            # Check if it is a directive
-            pattern = re.compile(":(.+:)+`[~]?(?P<plain_type>.+)`")
-            match = re.search(pattern, _type)
-            # Fetch only the plain type from the directive
-            plain_type = match.group("plain_type") if match else _type
-            lines.extend([
-                f':param {_name}: {desc_lines}',
-                f':type {_name}: {plain_type}',  # Plain text type
-                ''
-            ])
+    for _name, _type, _desc in fields:
+        _desc = self._strip_empty(_desc)
+        if any(_desc):
+            _desc = self._fix_field_desc(_desc)
+            field = f':{field_role} {_name}: '
+            lines.extend(self._format_block(field, _desc))
         else:
-            lines.extend([
-                f':param {_name}: {desc_lines}',
-                ''
-            ])
-    return lines
+            lines.append(f':{field_role} {_name}:')
+
+        if _type:
+            # ------------------ start patch
+            pattern = re.compile(":(.+:)+`[~]?(?P<plain_type>.+)`") # Check if it is a directive
+            match = re.search(pattern, _type)
+            _type = match.group("plain_type") if match else _type
+            # -------------------- end patch
+            lines.append(f':{type_role} {_name}: {_type}')
+            
+    return lines + ['']
 
 # Apply the fix
-GoogleDocstring._parse_parameters_section = _fixed_parse_parameters_section
+GoogleDocstring._format_docutils_params = _format_docutils_params
