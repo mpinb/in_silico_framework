@@ -25,7 +25,7 @@ See also:
     :py:class:`single_cell_parser.cell.Cell`.
 '''
 from neuron import h
-from single_cell_parser.parameters import ParameterSet
+from single_cell_parser.parameters import NTParameterSet
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-30'
@@ -49,7 +49,7 @@ class Synapse(object):
         releaseSite (:py:class:`~single_cell_parser.cell.PointCell`): Release site of presynaptic cell.
         postCellType (str): Postsynaptic cell type.
         coordinates (list): 3D coordinates of synapse location
-        receptors (:py:class:`~single_cell_parser.parameters.ParameterSet`): Stores hoc mechanisms
+        receptors (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Stores hoc mechanisms
         netcons (list): Stores NetCons
         weight (float): Synaptic weight
         _active (bool): Activation status
@@ -106,11 +106,11 @@ class Synapse(object):
                 Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
             preCell (:py:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
             targetCell (:py:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
-            receptors (dict | Dict[:py:class:`~single_cell_parser.parameters.ParameterSet`]): 
-                Dictionary or :py:class:`~single_cell_parser.parameters.ParameterSet` of receptors. 
-                Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.ParameterSet`.
+            receptors (dict | Dict[:py:class:`~single_cell_parser.parameters.NTParameterSet`]): 
+                Dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet` of receptors. 
+                Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.NTParameterSet`.
         '''
-        assert isinstance(receptors, ParameterSet), 'receptors must be single_cell_parser.parameters.ParameterSet, but they are of type %s' % type(receptors)
+        assert isinstance(receptors, NTParameterSet), 'receptors must be single_cell_parser.parameters.NTParameterSet, but they are of type %s' % type(receptors)
         self.releaseSite = source
         self.preCell = preCell
         '''careful: point processes not allowed at nodes between sections
@@ -145,7 +145,7 @@ class Synapse(object):
     def disconnect_hoc_synapse(self):
         """Disconnect the synapse from the neuron model.
         
-        Disconnecting the synapse turns off the release site and removes the :py:class:`~neuron.h.NetCon`
+        Disconnecting the synapse turns off the release site and removes the :py:class:`neuron:NetCon`
         
         See also:
             :py:meth:`activate_hoc_syn`.

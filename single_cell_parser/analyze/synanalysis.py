@@ -86,8 +86,8 @@ def synapse_activation_times(tVec, cntVec):
     """Parse the spike times from a list of spike counts and corresponding time points.
     
     Args:
-        tVec (neuron.h.Vector | array): list of time points
-        cntVec (neuron.h.Vector | array): list of cummulative spike counts
+        tVec (:py:class:`neuron:Vector` | array): list of time points
+        cntVec (:py:class:`neuron:Vector` | array): list of cummulative spike counts
 
     Returns:
         list: list of spike times

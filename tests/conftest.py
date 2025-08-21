@@ -2,8 +2,7 @@
 # this code will be run on each pytest worker before any other pytest code
 # useful to setup whatever needs to be done before the actual testing or test discovery
 # for setting environment variables, use pytest.ini or .env instead
-import logging, os, pytest
-from config.isf_logging import logger  # import from config to set handlers properly
+import logging, os, pytest, sys
 
 # --- Import fixtures
 from .fixtures.dataframe_fixtures import ddf, pdf
@@ -17,7 +16,6 @@ from .fixtures.data_base_fixtures import (
     fresh_db,
     sqlite_db,
 )
-os.environ["ISF_IS_TESTING"] = "True"
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
@@ -53,17 +51,17 @@ def pytest_collection_modifyitems(session, config, items):
     Currently, heavy tests are simply scheduled first.
     This may be extended in the future.
     """
-    heavy = []
+    early = []
     normal = []
 
     for item in items:
-        if 'heavy' in item.keywords:
-            heavy.append(item)
+        if 'early' in item.keywords:
+            early.append(item)
         else:
             normal.append(item)
 
     # Place heavy tests at the beginning
-    items[:] = heavy + normal
+    items[:] = early + normal
 
 
 def pytest_ignore_collect(collection_path, config):
@@ -80,6 +78,9 @@ def pytest_ignore_collect(collection_path, config):
 
 
 def _setup_pytest_logging():
+    # Import here, so the env variable ISF_IS_TESTING is set before importing logging
+    # THis impacts the log verbosity
+    from config.isf_logging import logger  # import from config to set handlers properly
 
     # --------------- Setup logging output -------------------
     logger.setLevel(logging.WARNING)
@@ -118,6 +119,29 @@ def pytest_configure(config):
     """
     pytest configuration
     """
+    
+    os.environ["ISF_IS_TESTING"] = "True"
+    
+    # Register the custom statistical marker
+    config.addinivalue_line(
+        "markers", 
+        "statistical(max_failure_rate=0.05, n_runs=20): run test multiple times and allow statistical failures"
+    )
+    
+    # Set shorter temp directory on Windows to avoid long path issues
+    if sys.platform.startswith('win'):
+        # Create base temp directory if it doesn't exist
+        # This overrides the default temp directory for pytest
+        # to a shorter path to avoid long path issues on Windows
+        win_basetemp = "C:\\tmp\\pytest"
+        worker_id = os.environ.get("PYTEST_XDIST_WORKER", None)
+        if worker_id:
+            win_basetemp = os.path.join(win_basetemp, worker_id)
+        if not os.path.exists(win_basetemp):
+            os.makedirs(win_basetemp, exist_ok=True)
+        # Override pytest's basetemp option
+        config.option.basetemp = win_basetemp
+    
     _setup_pytest_logging()
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
@@ -125,3 +149,46 @@ def pytest_configure(config):
 
 def pytest_sessionstart(session):
     _set_mpl_backend_non_gui()
+
+
+def _run_statistical_test(marker, item):
+    """
+    Run the original test function multiple times and check failure rate.
+    
+    Args:
+        pyfuncitem: pytest item for the test function
+        original_test: the original test function to run
+        fixture_values: dictionary of fixture values to pass to the test
+        n_runs: number of times to run the test
+        max_failure_rate: maximum allowed failure rate for the test
+    """
+    max_failure_rate = marker.kwargs.get('max_failure_rate', 0.05)
+    n_runs = marker.kwargs.get('n_runs', 20)
+    max_failures = int(n_runs * max_failure_rate)
+
+    failures = 0
+    last_exception = None
+    for _ in range(n_runs):
+        try:
+            item._request._fillfixtures()
+            item.runtest()  # Will call the test with fixtures
+        except Exception as e:
+            failures += 1
+            last_exception = e
+            if failures > max_failures:
+                break
+
+    if failures/n_runs > max_failure_rate:
+        raise AssertionError(
+            f"Statistical test failed {failures}/{n_runs} times (allowed: {100*max_failure_rate:.2f} %)"
+        ) from last_exception
+
+
+def pytest_runtest_call(item):
+    """Custom test runner for statistical tests"""
+    statistical_mark = item.get_closest_marker("statistical")
+    if statistical_mark:
+        _run_statistical_test(
+            statistical_mark, 
+            item, 
+        )

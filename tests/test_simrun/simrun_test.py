@@ -20,12 +20,12 @@ T_STOP_SHORT = 20
 T_STOP_FULL = 345
 
 
-def test_generate_synapse_activation_returns_filelist(tmpdir, client):
+def test_generate_synapse_activation_returns_filelist(tmp_path, client):
     try:
         dummy = simrun.generate_synapse_activations.generate_synapse_activations(
             NEUP_FN,
             NETP_FN,
-            dirPrefix=tmpdir.dirname,
+            dirPrefix=str(tmp_path),
             nSweeps=1,
             nprocs=1,
             tStop=T_STOP_SHORT,
@@ -37,12 +37,13 @@ def test_generate_synapse_activation_returns_filelist(tmpdir, client):
 
 
 def test_run_existing_synapse_activation_returns_identifier_dataframe_and_results_folder(
-        tmpdir, client):
+        tmp_path, client):
     try:
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
-            NETP_FN, [SYN_ACT_SUBSAMPLED_FN],
-            dirPrefix=tmpdir.dirname,
+            NETP_FN, 
+            synapseActivation=[SYN_ACT_SUBSAMPLED_FN],
+            dirPrefix=str(tmp_path),
             nprocs=1,
             tStop=T_STOP_SHORT,
             silent=True)
@@ -53,12 +54,12 @@ def test_run_existing_synapse_activation_returns_identifier_dataframe_and_result
     assert isinstance(dummy[0][0][1], str)
 
 
-def test_run_new_simulations_returns_dirname(tmpdir):
+def test_run_new_simulations_returns_dirname(tmp_path):
     try:
         dummy = simrun.run_new_simulations.run_new_simulations(
             NEUP_FN,
             NETP_FN,
-            dirPrefix=tmpdir.dirname,
+            dirPrefix=str(tmp_path),
             nSweeps=1,
             nprocs=1,
             tStop=T_STOP_SHORT,
@@ -70,12 +71,16 @@ def test_run_new_simulations_returns_dirname(tmpdir):
     assert isinstance(result[0][0], str)
 
 
-def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, client):
+def test_position_of_morphology_does_not_matter_after_network_mapping(tmp_path, client):
     # simrun renames a dir once it finishes running
     # so create single-purpose subdirectories for simulation output
-    subdir1 = tmpdir.mkdir("sub1")
-    subdir2 = tmpdir.mkdir("sub2")
-    subdir_params = tmpdir.mkdir("params")
+    subdir1 = tmp_path / "sub1"
+    subdir2 = tmp_path / "sub2"
+    subdir_params = tmp_path / "params"
+    subdir1.mkdir()
+    subdir2.mkdir()
+    subdir_params.mkdir()
+
     syn_act_fn = SYN_ACT_SUBSAMPLED_FN
     t_stop = T_STOP_SHORT
     
@@ -127,7 +132,7 @@ def test_position_of_morphology_does_not_matter_after_network_mapping(tmpdir, cl
         raise
 
 
-def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
+def test_reproduce_simulation_trial_from_roberts_model_control(tmp_path, client):
     # Note: these tolerances were found with trial and error, but have no further meaning
     if sys.platform.startswith('linux'):
         n_decimals=3
@@ -144,7 +149,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmpdir, client):
         dummy = simrun.run_existing_synapse_activations.run_existing_synapse_activations(
             NEUP_FN,
             NETP_FN, [syn_act_fn],
-            dirPrefix=tmpdir.dirname,
+            dirPrefix=str(tmp_path),
             nprocs=1,
             tStop=345,
             silent=True,

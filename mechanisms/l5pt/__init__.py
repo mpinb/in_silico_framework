@@ -79,7 +79,14 @@ def _compile_mechanisms_at_path(path):
     """
     assert check_nrnivmodl_is_available(), "nrnivmodl is not available in the PATH. Please add it to your PATH."
     nrnivmodl_path = shutil.which('nrnivmodl')
-    subprocess.run([nrnivmodl_path], cwd=path, check=True, env=os.environ.copy())
+    logger.info(f"Compiling mechanisms at {path} using {nrnivmodl_path}")
+    user_inc_flags = os.environ.get("NRN_USER_INC_FLAGS", None)
+    nrn_cmd = [nrnivmodl_path]
+    if user_inc_flags is not None:
+        nrn_cmd.append('-incflags')
+        nrn_cmd.append(user_inc_flags)
+    logger.info(f"nrnivmodl command: {nrn_cmd}")
+    subprocess.run(nrn_cmd, cwd=path, check=True, env=os.environ.copy())
 
 def are_compiled():
     """
@@ -120,6 +127,9 @@ def compile_mechanisms(force_recompile=False):
     Raises:
         UserWarning: If the mechanisms needed to be compiled, but failed.
     """
+    logger.info("Compiling mechanisms using the FLAGS flags: {}".format(
+        ["{}: {}".format(e, os.environ.get(e)) for e in os.environ.keys() if "FLAGS" in e]))
+    
     for path in (channels_path, netcon_path):
         if not _check_if_mechanisms_are_compiled_at_path(path):
             _compile_mechanisms_at_path(path)
@@ -159,4 +169,4 @@ if are_compiled():
     if not are_loaded():
         load()
 else:
-    logger.warning("Mechanisms are not compiled. Please configure ISF to compile them, or run `compile()` manually.")    
+    logger.warning("Mechanisms are not compiled yet.")    

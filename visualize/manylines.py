@@ -53,7 +53,7 @@ def manylines(
         scheduler (distributed.client.Client | str, optional): a distributed scheduler.
 
     Returns:
-        fig (matplotlib.pyplot.Figure): Figure object containing all lines defined in :paramref:df
+        :py:class:`~matplotlib.figure.Figure`: Figure object containing all lines defined in :paramref:`df`
     '''
 
     if returnPixelObject:
@@ -132,7 +132,7 @@ def manylines_helper(
         colormap (dict): 
             A colormap to use for the plot. 
             Must map a label from :paramref:groupby_attribute to a color
-        fig (matplotlib.pyplot.Figure, optional): 
+        fig (:py:class:`~matplotlib.figure.Figure`, optional): 
             A Figure object to plot on. 
             If specified, will plot on the current active axis. 
             If not, it will create one.
@@ -140,7 +140,7 @@ def manylines_helper(
             size of the figure.
 
     Returns:
-        fig (maptlotlib.pyplot.Figure): Figure object containing the lines as specified in pdf.
+        maptlotlib.pyplot.Figure: Figure object containing the lines as specified in pdf.
     '''
     if not isinstance(pdf, pd.DataFrame):
         raise RuntimeError(

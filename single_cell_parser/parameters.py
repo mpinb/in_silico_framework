@@ -54,17 +54,17 @@ def _read_params_to_dict(filename):
 
 
 def build_parameters(filename):
-    """Read in a :ref:`param_file_format` file and return a ParameterSet object.
+    """Read in a :ref:`param_file_format` file and return a NTParameterSet object.
 
     Args:
         filename (str): path to the parameter file
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.ParameterSet` object.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.NTParameterSet` object.
     """
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
-    return ParameterSet(data)
+    return NTParameterSet(data)
 
 
 def load_NMODL_parameters(parameters):
@@ -75,7 +75,7 @@ def load_NMODL_parameters(parameters):
     See also: https://www.neuron.yale.edu/neuron/static/new_doc/programming/neuronpython.html#important-names-and-sub-packages
 
     Args:
-        parameters (:py:class:`~single_cell_parser.parameters.ParameterSet` | dict):
+        parameters (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict):
             The neuron parameters to load.
             Must contain the key `NMODL_mechanisms`.
             May contain the key `mech_globals`.
@@ -104,7 +104,7 @@ def resolve_parameter_paths(parameters, params_fn):
         db (str): The database path to resolve against.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.ParameterSet`: The parameters with resolved paths.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameters with resolved paths.
     """
 
     def _find_parent_db_basedir(fn):
@@ -128,38 +128,95 @@ def resolve_parameter_paths(parameters, params_fn):
 
     return parameters
 
-class ParameterSet(MutableMapping):
+class NTParameterSet(MutableMapping):
+    """NeuroTools Parameter Set format.
+
+    Parameters as nested dictionaries, with support for attribute access.
+
+    Example::
+
+        >>> from single_cell_parser.parameters import NTParameterSet
+        >>> params = NTParameterSet({'param1': 42, 'nested': {'param2': 3.14}})
+        >>> print(params.param1)  # Access via attribute
+        42
+        >>> print(params['nested.param2'])  # Access via dotted path
+        3.14
+
+    Attributes:
+        _data (dict): The underlying dictionary storing parameters.
+    """
     def __init__(self, data=None):
         if data is None:
             data = {}
         elif isinstance(data, str):
             data = _read_params_to_dict(data)
-        elif not isinstance(data, (dict, ParameterSet)):
+        elif not isinstance(data, (dict, NTParameterSet)):
             raise TypeError(f"Expected dict or filepath, got {type(data)}")
         self._data = {key: self._wrap(value) for key, value in data.items()}
 
     def _wrap(self, value):
         if isinstance(value, dict):
-            return ParameterSet({k: self._wrap(v) for k, v in value.items()})
+            return NTParameterSet({k: self._wrap(v) for k, v in value.items()})
         elif isinstance(value, list):
             return [self._wrap(v) for v in value]
         return value
 
     def _unwrap(self, value):
-        if isinstance(value, ParameterSet):
-            return value.to_dict()
+        if isinstance(value, NTParameterSet):
+            return value.as_dict()
         elif isinstance(value, dict):
             return {k: self._unwrap(v) for k, v in value.items()}
         elif isinstance(value, list):
             return [self._unwrap(v) for v in value]
         return value
 
-    def to_dict(self):
+    def as_dict(self):
+        """Convert the NTParameterSet to a regular dictionary.
+
+        Returns:
+            dict: The underlying dictionary representation of the parameters.
+        """
         return self._unwrap(self._data)
 
     def save(self, filename):
+        """Save the NTParameterSet to a file in JSON format.
+
+        Args:
+            filename (str): The path to the file where the parameters will be saved.
+        """
         with open(filename, 'w') as f:
-            json.dump(self.to_dict(), f, indent=4)
+            json.dump(self.as_dict(), f, indent=4)
+
+    def keys(self):
+        return self._data.keys()
+
+    
+    def tree_copy(self):
+        """Return a copy of the ParameterSet tree structure.
+        
+        Nodes are not copied, but re-referenced. This creates a shallow copy
+        of the tree structure where the hierarchy is duplicated but the
+        leaf values are shared between original and copy.
+        
+        Returns:
+            :py:class:`NTParameterSet`: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
+        """
+        def _copy_tree_structure(node):
+            if isinstance(node, NTParameterSet):
+                # Create new NTParameterSet with copied structure
+                return NTParameterSet({k: _copy_tree_structure(v) 
+                                     for k, v in node._data.items()})
+            elif isinstance(node, dict):
+                # Create new dict with copied structure
+                return {k: _copy_tree_structure(v) for k, v in node.items()}
+            elif isinstance(node, list):
+                # Create new list with copied structure
+                return [_copy_tree_structure(item) for item in node]
+            else:
+                # Leaf node - return reference (no copying)
+                return node
+        
+        return _copy_tree_structure(self)
 
     # --- MutableMapping interface ---
     def __getitem__(self, key):
@@ -209,15 +266,21 @@ class ParameterSet(MutableMapping):
         return self._wrap(current) if isinstance(current, dict) else current
 
     def __repr__(self):
-        return f"ParameterSet({self._data})"
+        return f"NTParameterSet({self._data})"
 
     def __getstate__(self):
-        return self.to_dict()
+        return self.as_dict()
 
     def __setstate__(self, state):
         self._data = self._wrap(state)
 
     def update(self, other=None, **kwargs):
+        """Update the NTParameterSet with another dictionary or keyword arguments.
+
+        Args:
+            other (dict, optional): Another dictionary to merge into this NTParameterSet.
+            **kwargs: Additional keyword arguments to merge into this NTParameterSet.
+        """
         def deep_merge(d, u):
             for k, v in u.items():
                 if isinstance(v, dict) and isinstance(d.get(k), dict):

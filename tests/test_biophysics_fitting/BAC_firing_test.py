@@ -211,7 +211,7 @@ def test_BAC_firing():
         #        plt.ylabel('Vm [mV]')
         #        plt.title('apical current injection amp=%.2f nA' % (iAmpApical2))
         #        plt.legend()
-        plt.show()
+        # plt.show()
 
 
 def soma_injection(cell,

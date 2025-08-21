@@ -38,7 +38,7 @@ def rasterplot2(
     y_offset=None,
     y_plot_length=1,
     marker='line'):
-    """Plot a rasterplot from a spike times dataframe.
+    """Plot a rasterplot from :ref:`spike_times_format`.
 
     Args:
         st (pandas.DataFrame): 
@@ -58,8 +58,6 @@ def rasterplot2(
         marker (str, optional): 
             The marker style to use for plotting events. Defaults to 'line'. If 'line', lines of defined length are plotted.
     
-    Returns:
-        None
     """
     if ax is None:
         ax = plt.figure().add_subplot(111)
@@ -93,7 +91,7 @@ def rasterplot2_pdf_grouped(
     xlim=None,
     x_offset=0,
     color='k'):
-    """Plot a rasterplot per group fo a spike times dataframe.
+    """Plot a rasterplot per group of :ref:`spike_times_format`.
     
     Similar to :py:meth:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
     but groups them with horizontal lines, based on the grouplabel.
@@ -114,8 +112,6 @@ def rasterplot2_pdf_grouped(
         color (str, optional):
             The color to use for the plot. Default is 'k'.
 
-    Returns:
-        None.
     """
     if ax is None:
         fig = plt.figure(figsize=(7, 4), dpi=600)
@@ -163,7 +159,7 @@ def rasterplot(
     groupby_attribute=None,
     tlim=None,
     reset_index=True):
-    '''Creates a rasterplot from spike times dataframe.
+    '''Creates a rasterplot from :ref:`spike_times_format`.
     
     If df is a dask.DataFrame: parallel plotting is used (not recommended, causes bad quality)
     If df is a pandas.DataFrame, serial plotting is used
@@ -186,7 +182,7 @@ def rasterplot(
             If True, reset the index of the DataFrame. Default is ``True``.
 
     Returns:
-        matplotlib.pyplot.Figure: Figure object containing the rasterplot. 
+        :py:class:`~matplotlib.figure.Figure`: Figure object containing the rasterplot. 
     '''
 
     if ax is None:

@@ -289,7 +289,7 @@ class PySection2(object):
 
 
 class PointCell(object):
-    '''Cell object without morphological attributes.
+    '''Cell object without morphological or biophysical attributes.
 
     When connecting synapses between postsynaptic and
     presynaptic cells, this class is used for the presynaptic cell.
@@ -311,13 +311,14 @@ class PointCell(object):
         self.cellType = cellType
 
     def _add_synapse_pointer(self, synapse):
-        """Add a synapse to the cell.
+        """Add a :py:class:`Synapse` to the cell.
         
-        NEURON's :cite:`hines2001neuron` Python hoc interface
-        provides pointers to synapses, rather than the full object.
+        The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
+        to a postsynaptic :py:class:`~single_cell_parser.cell.Cell` object.
         
         Args:
-            synapse (nrn.synapse): Synapse object."""
+            synapse (:py:class:`Synapse`): Synapse object.
+        """
         if self.synapseList is None:
             self.synapseList = [synapse]
         else:

@@ -48,7 +48,7 @@ from config.cell_types import EXCITATORY
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
 from .cell_parser import CellParser
-from .parameters import ParameterSet, build_parameters, load_NMODL_parameters
+from .parameters import NTParameterSet, build_parameters, load_NMODL_parameters
 
 # from synapse import activate_functional_synapse
 from .network import NetworkMapper
@@ -192,10 +192,10 @@ def init_neuron_run(simparam, vardt=False, *events):
 
 
 def sec_distance_to_soma(currentSec):
-    """Compute the path length from :``sec(x=0)`` to soma
+    """Compute the path length from ``sec(x=0)`` to :paramref:`currentSec`.
 
     Args:
-        currentSec (:py:class:`neuron.h.Section`): The section for which to compute the distance.
+        currentSec (:py:class:`neuron:Section`): The section for which to compute the distance.
     """
     parentSec = currentSec.parent
     dist = 0.0
