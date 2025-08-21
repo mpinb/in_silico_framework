@@ -62,6 +62,7 @@ extensions = [
     # Custom extensions
     # "docs.custom_extensions.short_signatures",  # Strip the prefix from signatures
     "docs.custom_extensions.linked_handle_signatures",
+    "docs.custom_extensions.monkey_patch_napoleon_immaterial"
 ]
 # object_description_options = [
 #     ("py:.*", dict(black_format_style={"line_length": 60})),
@@ -130,7 +131,7 @@ napoleon_use_admonition_for_examples = False
 napoleon_use_admonition_for_notes = False
 napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
-napoleon_use_param = False  # use a single ":parameters:" section instead of ":param arg1: description" for each argument
+napoleon_use_param = True  # use dedicated ":param arg1: description" role for each argument
 napoleon_use_rtype = True  # if True, separate return type from description. otherwise, it's included in the description inline
 napoleon_preprocess_types = False  # otherwise custom argument types will not work
 napoleon_type_aliases = None
