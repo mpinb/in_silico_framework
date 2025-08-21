@@ -459,8 +459,12 @@ class CellParser(object):
                             dist = self.cell.distance_to_soma(sec, seg.x)
                             if relDistance:
                                 dist = dist / maxDist
-                            #rangeVarVal = mech[param]*(dist*slope + offset)
-                            rangeVarVal = max(mech[param] * (dist * slope + 1),
+                            #rangeVarVal = mech[param]*(dist*slope + offset) 
+                            if slope > 0: 
+                                rangeVarVal = min(mech[param] * (dist * slope + 1),
+                                              mech[param] * offset)
+                            else: 
+                                rangeVarVal = max(mech[param] * (dist * slope + 1),
                                               mech[param] * offset)
                             s = param + '=' + str(rangeVarVal)
                             paramStrings.append(s)
