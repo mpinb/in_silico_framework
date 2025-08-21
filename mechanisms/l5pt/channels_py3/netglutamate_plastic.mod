@@ -14,7 +14,9 @@ TITLE NMDA synapse with depression
 
 NEURON {
 	POINT_PROCESS glutamate_syn_plastic
+
 	NONSPECIFIC_CURRENT inmda,iampa
+
 	RANGE gampamax,gnmdamax,inmda,iampa
 	RANGE decayampa,dampa,taudampa
     RANGE decaynmda,dnmda,taudnmda
@@ -22,17 +24,19 @@ NEURON {
     RANGE facilnmda,fnmda,taufnmda
 	RANGE gnmda,gampa
 	RANGE e,tau1,tau2,tau3,tau4
-	RANGE plasticity_trace, plasticity_tau
-	RANGE dend_ca_trace, syn_ca_trace, ca_trace, last_ca_trace, ca_is_increasing
-	RANGE calcium_tau, rmp
-	RANGE abs_dend_ca_current, last_abs_dend_ca_current
-	RANGE abs_syn_ca_current, last_abs_syn_ca_current
-	RANGE happy_trace, neutral_trace, sad_trace
-	RANGE potentiation_trace, potentiation_trace_bar, potentiation_trace_lp, depression_trace, depression_trace_bar, depression_trace_lp
+
+	RANGE plasticity_trace
+	RANGE ca_trace, calcium_tau
+	RANGE total_ca_current, last_total_ca_current
+	RANGE dend_ca_current, syn_ca_current
+
 	RANGE depression_threshold, sad
 	RANGE potentiation_threshold, happy
 	RANGE nml_threshold, neutral
-	:RANGE depression_rate, potentiation_rate
+
+	RANGE depression_rate, potentiation_rate
+	RANGE lr
+
 	POINTER ica_HVA, ica_LVA
 }
 
@@ -69,9 +73,7 @@ PARAMETER {
     taufnmda=200    (ms)
     facilnmda=0.0
 
-	plasticity_tau = 70 (s)
 	calcium_tau = 10 (ms)
-
 	depression_threshold = 0.005
 	depression_rate = 0.0001
 	potentiation_threshold = 0.02
@@ -87,19 +89,16 @@ ASSIGNED {
 	factor1		: NMDA normalization factor
 	factor2		: AMPA normalization factor
 
-	ca_trace
-	last_ca_trace
-	ca_is_increasing
-	abs_dend_ca_current
-	last_abs_dend_ca_current
-	abs_syn_ca_current
-	last_abs_syn_ca_current
-	happy_trace
-	neutral_trace
-	sad_trace
+	total_ca_current
+	last_total_ca_current
+	dend_ca_current
+	syn_ca_current
+
+	lr
 	sad
 	happy
 	neutral
+
 	ica_HVA
 	ica_LVA
 
@@ -124,15 +123,8 @@ STATE {
     fampa
     fnmda
 
-	dend_ca_trace
-	syn_ca_trace
 	plasticity_trace
-	potentiation_trace
-	potentiation_trace_bar
-	potentiation_trace_lp
-	depression_trace
-	depression_trace_bar
-	depression_trace_lp
+	ca_trace
 }
 
 
@@ -157,37 +149,30 @@ INITIAL {
 	factor2 = -exp(-tp2/tau4) + exp(-tp2/tau3)
 	factor2 = 1/factor2
 
-	dend_ca_trace = 0
-	syn_ca_trace = 0
+	plasticity_trace = 1
 	ca_trace = 0
-	last_ca_trace = ca_trace
-	ca_is_increasing = 0
-	plasticity_trace = 0.5
-	abs_dend_ca_current = 0
-	last_abs_dend_ca_current = abs_dend_ca_current
-	abs_syn_ca_current = 0
-	last_abs_syn_ca_current = abs_syn_ca_current
-	happy_trace = 0
-	neutral_trace = 0
-	sad_trace = 0
-	potentiation_trace = 0
-	potentiation_trace_bar = 0
-	potentiation_trace_lp = 0
-	depression_trace = 0
-	depression_trace_bar = 0
-	depression_trace_lp = 0
+	total_ca_current = 0
+	last_total_ca_current = 0
+	dend_ca_current = 0
+	syn_ca_current = 0
+
+	lr = 0
 	sad = 0
 	happy = 0
 	neutral = 0
 
+	: Register thresholds
 	net_send(0, 1)
 }    
 
 BREAKPOINT {
 	LOCAL count
 
-	abs_dend_ca_current = fabs(ica_HVA + ica_LVA)
-	abs_syn_ca_current = fabs(inmda)
+	lr = learning_rate(ca_trace)
+
+	dend_ca_current = fabs(ica_HVA + ica_LVA)
+	syn_ca_current = fabs(inmda)
+	total_ca_current = dend_ca_current + syn_ca_current
 
 	SOLVE state METHOD cnexp
 
@@ -195,10 +180,6 @@ BREAKPOINT {
 	gampa=(C-D)
 	inmda =(1e-3)*gnmda*(v-e)
 	iampa= (1e-3)*gampa*(v- e)
-
-	:ca_trace = abs_syn_ca_current + abs_dend_ca_current
-	ca_trace = syn_ca_trace + dend_ca_trace
-	: dend_ca_trace = dend_ca_trace + (rmp - dend_ca_trace) / calcium_tau * dt
 }
 
 NET_RECEIVE(weight_ampa, weight_nmda) {
@@ -259,9 +240,6 @@ NET_RECEIVE(weight_ampa, weight_nmda) {
 }
 
 DERIVATIVE state {
-	LOCAL lr, potentiation_trace_smooth
-	lr = learning_rate(ca_trace)
-
 	A' = -A / tau1
     B' = -B / tau2
     C' = -C / tau3
@@ -271,105 +249,27 @@ DERIVATIVE state {
     fampa' = (1 - fampa) / taufampa
     fnmda' = (1 - fnmda) / taufnmda
 
-	if (ca_trace - last_ca_trace > (1e-5)) {
-		ca_is_increasing = 1
-
-		potentiation_trace = 0
-		depression_trace = 0
-	}
-	else {
-		if (ca_is_increasing == 1) {
-			: Peak occured
-			if (sad == 1) {
-				depression_trace = -lr
-				potentiation_trace = 0
-			}
-			else if (happy == 1) {
-				potentiation_trace = lr
-				depression_trace = 0
-			}
-			else {
-				potentiation_trace = 0
-				depression_trace = 0
-			}
-		}
-		else {
-			potentiation_trace = 0
-			depression_trace = 0
-		}
-		ca_is_increasing = 0
-	}
-	last_ca_trace = ca_trace
-
-	if (potentiation_trace > potentiation_trace_lp) {
-		potentiation_trace_lp' = (potentiation_trace - potentiation_trace_lp) / 1  : rise quickly
-	} else {
-		potentiation_trace_lp' = (potentiation_trace - potentiation_trace_lp) / 500  : decay slowly
-	}
-	:potentiation_trace_bar' = (potentiation_trace - potentiation_trace_bar) / 10
-	:potentiation_trace_smooth = sigmoid_sat(1.7, (potentiation_trace_bar * 1000))
-	:potentiation_trace_lp' = (potentiation_trace_smooth - potentiation_trace_lp) / 500
-
 	if (sad == 1) {
-		plasticity_trace' = -lr * plasticity_trace
+		plasticity_trace' = -lr * (plasticity_trace - 0.5)
 	}
 	else if (happy == 1) {
-		plasticity_trace' = lr * (1 - plasticity_trace)
+		plasticity_trace' = lr * (3 - plasticity_trace)
 	}
 	else if (neutral == 1) {
 		plasticity_trace' = 0
 	}
 	else {
-		if (plasticity_trace > 0.6) {
-			plasticity_trace' = 0.00001 * (1 - plasticity_trace)
-		}
-		else if (plasticity_trace < 0.6 && plasticity_trace > 0.5) {
-			plasticity_trace' = 0.00001 * (0.5 - plasticity_trace)
-		}
-		else if (plasticity_trace > 0.4 && plasticity_trace < 0.5) {
-			plasticity_trace' = 0.00001 * (0.5 - plasticity_trace)
-		}
-		else if (plasticity_trace < 0.4) {
-			plasticity_trace' = -0.00001 * plasticity_trace
-		}
-		else if (plasticity_trace == 0.5) {
-			plasticity_trace' = 0
-		}
+		plasticity_trace' = 0
 	}
-
 	plasticity_trace' = plasticity_trace' * dt
 
-	if (abs_dend_ca_current - last_abs_dend_ca_current > (1e-5)) {
-        dend_ca_trace' = (abs_dend_ca_current - last_abs_dend_ca_current) / dt  : add increase instantly
+	if (total_ca_current - last_total_ca_current > (1e-5)) {
+        ca_trace' = (total_ca_current - last_total_ca_current) / dt  : add increase instantly
     } else {
-        dend_ca_trace' = -dend_ca_trace / calcium_tau          : decay otherwise
+        ca_trace' = -ca_trace / calcium_tau          : decay otherwise
     }
-	:dend_ca_trace' = (dend_ca_trace - dend_ca_trace) / 2  : low-pass filter
 
-	if (abs_syn_ca_current - last_abs_syn_ca_current > (1e-5)) {
-		syn_ca_trace' = (abs_syn_ca_current - last_abs_syn_ca_current) / dt  : add increase instantly
-    } else {
-        syn_ca_trace' = -syn_ca_trace / calcium_tau          : decay otherwise
-
-		happy_trace = 0
-		neutral_trace = 0
-		sad_trace = 0
-    }
-	:syn_ca_trace' = (syn_ca_trace - syn_ca_trace) / 2  : low-pass filter
-
-	:potentiation_trace_bar' = (happy_trace - potentiation_trace_bar) / 10
-	:potentiation_trace_lp = sigmoid_sat(1.7, (potentiation_trace_bar * 1000))
-	:potentiation_trace' = (potentiation_trace_lp - potentiation_trace) / 500
-	:depression_trace_bar' = (sad_trace - depression_trace_bar) / 10
-	:depression_trace_lp = sigmoid_sat(1.7, (depression_trace_bar * 200))
-	:depression_trace' = (depression_trace_lp - depression_trace) / 500
-
-	last_abs_dend_ca_current = abs_dend_ca_current
-	last_abs_syn_ca_current = abs_syn_ca_current
-}
-
-FUNCTION sigmoid_sat(slope, value) {	: sigmoidal saturation
-	sigmoid_sat = 2.0 / (1.0 + pow(slope, -value)) - 1.0
+	last_total_ca_current = total_ca_current
 }
 
 FUNCTION learning_rate(x) {
@@ -378,12 +278,12 @@ FUNCTION learning_rate(x) {
     : --- Transition 1: from baseline to max depression rate ---
     x_start = depression_threshold
     x_end = depression_threshold + ((nml_threshold - depression_threshold) / 2)
-    y_start = 0.00001
-    y_end   = 0.0001
+    y_start = 0.0
+    y_end   = depression_rate
     k       = 2000
 
 	: --- Baseline value ---
-	learning_rate = 0.00001
+	learning_rate = 0.0
 
     if (x >= x_start && x <= x_end) {
         x0 = (x_start + x_end) / 2
@@ -399,8 +299,8 @@ FUNCTION learning_rate(x) {
     : --- Transition 2: from max depression rate to baseline ---
     x_start = depression_threshold + ((nml_threshold - depression_threshold) / 2)
     x_end = nml_threshold
-    y_start = 0.0001
-    y_end   = 0.00001
+    y_start = depression_rate
+    y_end   = 0.0
     k       = 2000
 
     if (x >= x_start && x <= x_end) {
@@ -417,8 +317,8 @@ FUNCTION learning_rate(x) {
     : --- Transition 3: from baseline to max potentiation rate ---
     x_start = potentiation_threshold
     x_end = 0.03
-    y_start = 0.00001
-    y_end   = 0.0005
+    y_start = 0.0
+    y_end   = potentiation_rate
     k       = 2000
 
 	if (x >= x_start) {
