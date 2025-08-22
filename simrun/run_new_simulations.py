@@ -58,7 +58,7 @@ def _evoked_activity(
         seed = None, 
         nSweeps = 1000, 
         tStop = 345.0,
-        tStim = 245.0, 
+        tStim = None,  # Previous value: 245.0
         scale_apical = None,
         cell_generator = None, 
         tar = False
@@ -89,6 +89,8 @@ def _evoked_activity(
     Returns:
         str: Path to the output directory containing the simulation results.
     '''
+    if tStim is not None:
+        raise ValueError("Passing tStim as an argument is deprecated. It should be specified as an offset in the network parameters.")
     # 1: Initialize the simulation ------------------------------
     # 1.1 Set seed
     assert seed is not None
