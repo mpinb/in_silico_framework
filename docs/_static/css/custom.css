@@ -35,11 +35,3 @@ div.nboutput.container div.output_area:has(pre) {
 div.nbsphinx-gallery {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 }
-
-/* 
-sphinx-immaterial: hide integreated toc, since it is redundant with any nested items. 
-this is a quick and dirty patch of the issue, but it works for now.
-*/
-.md-nav__item--active.md-nav__current-nested + .md-nav__item--active.md-nav__current-toc {
-    display: none;
-}
