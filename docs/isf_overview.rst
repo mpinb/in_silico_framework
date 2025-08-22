@@ -65,9 +65,9 @@
         input -> neuron     [tailport=e, headport=w]
         input -> msm        [tailport=e, headport=w]
         input -> analysis   [tailport=e, headport=w]
-        neuron -> output    [headport=w, tailport=e]
+        neuron -> output    [headport=w, tailport=e, arrowhead=none]
         msm -> output       [headport=w, tailport=e]
-        analysis -> output  [headport=w, tailport=e]
+        analysis -> output  [headport=w, tailport=e, arrowhead=none]
         output -> input [
             headport=s
             tailport=s
