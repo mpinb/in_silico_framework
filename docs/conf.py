@@ -61,7 +61,7 @@ extensions = [
     "sphinxcontrib.video",
     # Custom extensions
     # "docs.custom_extensions.short_signatures",  # Strip the prefix from signatures
-    "docs.custom_extensions.linked_handle_signatures",
+    "docs.custom_extensions.xrefs_in_signature_handle",
     "docs.custom_extensions.monkey_patch_napoleon_immaterial"
 ]
 # object_description_options = [
@@ -93,11 +93,11 @@ def setup(app):
     app.connect("env-updated", log_documented_members)
 
     # copy over tutorials and convert links to python files to sphinx documentation directives
-    copy_and_parse_notebooks_to_docs(
-        source_dir=os.path.join(project_root, "getting_started", "tutorials"),
-        dest_dir=os.path.join(project_root, "docs", "tutorials"),
-        api_output_dir=autoapi_root,  
-    )
+    # copy_and_parse_notebooks_to_docs(
+    #     source_dir=os.path.join(project_root, "getting_started", "tutorials"),
+    #     dest_dir=os.path.join(project_root, "docs", "tutorials"),
+    #     api_output_dir=autoapi_root,  
+    # )
 
 
 # toc_object_entries_show_parents = "hide"  # short toc entries
