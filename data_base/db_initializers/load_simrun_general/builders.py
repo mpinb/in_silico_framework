@@ -1,3 +1,15 @@
+"""Pipelines for building database keys containing results from :py:mod:`simrun`.
+
+Note that all pipelines assume that the database ``core`` is built. This adds the essential
+information to the database that other builders need:
+
+- ``sim_trial_index``
+- ``simresult_path``: top-level directory from where all simulation results were fetched
+- ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
+
+In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+always desirable.
+"""
 import glob
 import logging
 import os
@@ -46,10 +58,25 @@ def _build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack):
 
     The following data is parsed and added to the database:
 
-    - filelist
-    - somatic voltage traces
-    - simulation trial index
-    - metadata
+    .. list-table::
+        :header-rows: 1
+
+        * - Objective
+          - Meaning
+        * - spikecount
+          - Amount of spikes
+        * - APheight
+          - AP height
+    * - ``voltage traces``
+      - Somatic voltage traces
+    * - ``metadata``
+      - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
+    * - ``sim_trial_index``
+      - Simulation trial indices containing unique identifiers, and run numbers
+    * - ``simresult_path``
+      - top-level directory from where all simulation results were fetched
+    * - ``filelist``
+      - a list of voltage trace files, relative to the ``simresult_path``
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
