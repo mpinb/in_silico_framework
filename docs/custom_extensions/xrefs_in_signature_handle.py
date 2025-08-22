@@ -2,7 +2,7 @@
 from sphinx.domains import python
 from sphinx import addnodes
 
-def linked_handle_signature(self, sig, signode):
+def signature_handle_xrefs(self, sig, signode):
     fullname, prefix = self._orig_handle_signature(sig, signode)
 
     new_children = []
@@ -44,7 +44,7 @@ def linked_handle_signature(self, sig, signode):
 def setup(app):
     if not hasattr(python.PyObject, "_orig_handle_signature"):
         python.PyObject._orig_handle_signature = python.PyObject.handle_signature
-        python.PyObject.handle_signature = linked_handle_signature
+        python.PyObject.handle_signature = signature_handle_xrefs
 
     return {
         "version": "1.0",
