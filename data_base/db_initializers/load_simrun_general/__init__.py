@@ -171,7 +171,7 @@ def init(
             - ``copy_method`` (str): Which copy strategy to use. 
               Must be either ``"hash_rename"`` or ``"remount"``. 
               ``"hash_rename"`` will rename all parameterfiles to a hash of their content. Useful when you want all parameter files in one folder and avoid fielname clashes.
-              ``"remount"`` will preserve the relative directory structure of the parameterfiles. Useful when parameterfiles are already organized.
+              ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
             - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
