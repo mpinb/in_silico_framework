@@ -14,7 +14,6 @@ from .filepath_resolution import (
     _convert_syn_fns_to_reldb, 
     _convert_con_fns_to_reldb
 )
-from .config import CON_DIR, HOC_DIR, NETP_DIR, NEUP_DIR, SYN_DIR, RECSITES_DIR, PARAM_FILE_COPY_METHOD
 from .file_handling import get_file
 from .utils import _hash_file_content
 
@@ -269,7 +268,7 @@ def _resolve_and_copy_con(con_fn, scattered_fn_map):
     return con_fn
 
 
-def _generate_target_filenames(db, db_target_dir, filelist, client=None):
+def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount", client=None):
     """Generate target filenames within a database directory for an array of source files.
     
     The target filenames can be configured in :py:mod:`~data_base.db_initializers.load_simrun_general.config`
@@ -287,11 +286,11 @@ def _generate_target_filenames(db, db_target_dir, filelist, client=None):
     Returns:
         str: The target filename in the database.
     """
-    if PARAM_FILE_COPY_METHOD == "hash_rename":
+    if copy_method == "hash_rename":
         assert client is not None, "Parallellization client needed for hash-renaming parameter files, but None passed."
         # New param file name will be the content hash
         new_base_fns = client.gather(client.map(_hash_file_content, filelist))
-    elif PARAM_FILE_COPY_METHOD == "remount":
+    elif copy_method == "remount":
         # paramfiles are copied over in the same folder structure.
         base_fn = os.path.commonpath(filelist)
         new_base_fns = [os.path.relpath(e, start=base_fn) for e in filelist]    
@@ -397,7 +396,7 @@ def _safe_copy(source, target):
         shutil.copy(source, target)
 
 
-def _create_filename_maps(source_files_dict, db):
+def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount"):
     """Create filename ``source -> target`` maps for all file types.
     
     Each key in the resulting map refers to a filetype present in :paramref:`filetype_target_dir_map`.
@@ -408,31 +407,38 @@ def _create_filename_maps(source_files_dict, db):
             A dictionary mapping file types (str) to their source filepaths.
         db (:py:class:`~data_base.isf_data_base.DataBase`):
             The target database where files should be copied to.
+        paramfile_copy_config (dict, optional): 
+            Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
+    
+            - ``copy_method`` (str): Which copy strategy to use. 
+              Must be either ``"hash_rename"`` or ``"remount"``. 
+              ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
+              ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
             
     Returns:
         Dict[str, Dict[str, str]]:
             A dictionary mapping file types (str) to their ``source -> target`` filename maps.
     """
-    filetype_target_dir_map = {
-        'hoc': HOC_DIR,
-        'recsites': RECSITES_DIR,
-        'syn': SYN_DIR,
-        'con': CON_DIR,
-        'neup': NEUP_DIR,
-        'netp': NETP_DIR
-    }
     # Generate all target filenames on cluster
+    # paramfile_copy_config now only consists of file types and their target dir location
     target_files = {}
-    for file_type, dir_path in filetype_target_dir_map.items():
+    for file_type, dir_path in paramfile_target_dirs.items():
         target_files[file_type] = _generate_target_filenames(
             db=db,
             db_target_dir=dir_path,
-            filelist=source_files_dict[file_type]
+            filelist=source_files_dict[file_type],
+            copy_method=copy_method
         )
     
     # Create maps on cluster
     fn_maps = {}
-    for file_type in filetype_target_dir_map.keys():
+    for file_type in paramfile_target_dirs.keys():
         fn_maps[file_type] = dict(zip(source_files_dict[file_type], target_files[file_type]))
     
     return fn_maps
@@ -441,6 +447,8 @@ def _create_filename_maps(source_files_dict, db):
 def parallel_resolve_and_copy_paramfiles_to_db(
     paramfile_hashmap_df,
     db,
+    paramfile_target_dirs=None,
+    copy_method="remount",
     client=None,
 ):
     """Resolve and copy all relevant parameter files to a database.
@@ -462,6 +470,18 @@ def parallel_resolve_and_copy_paramfiles_to_db(
             This is used in :py:func:`_extract_unique_references_from_neup_and_netp`
         db (:py:class:`data_base.data_base.DataBase`): The database that is being initialized
         client (distributed.Client): A distributed client for parallel computation.
+        copy_method (str): Which copy strategy to use. Must be either ``"hash_rename"`` or ``"remount"``. 
+            ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
+            ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+        paramfile_target_dirs (dict, optional): 
+            Dictionary mapping parameter file types to their desired target directory in the database. Keys include:
+
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
     
     Returns:
         dict: The filename map for each file type.
@@ -477,7 +497,9 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     fn_maps = client.submit(
         _create_filename_maps,
         source_file_list,
-        db
+        db,
+        paramfile_target_dirs,
+        copy_method
     ).result()
     scattered_maps = client.scatter(fn_maps, broadcast=True)
     
@@ -506,17 +528,17 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     )
 
     client.gather(fut_hoc)
-    logger.info("Morphology files (.hoc) copied to {}".format(HOC_DIR))
+    logger.info("Morphology files (.hoc) copied to {}".format(paramfile_target_dirs['hoc']))
     client.gather(fut_recsites)
-    logger.info("Recordings site files (.landmarkAscii) copied to {}".format(RECSITES_DIR))
+    logger.info("Recordings site files (.landmarkAscii) copied to {}".format(paramfile_target_dirs['recsites']))
     client.gather(fut_con)
-    logger.info("Synapse connectivity files (.con) resolved and copied to {}".format(CON_DIR))
+    logger.info("Synapse connectivity files (.con) resolved and copied to {}".format(paramfile_target_dirs['con']))
     client.gather(fut_syn)
-    logger.info("Synapse distribution files (.syn) resolved and copied to {}".format(SYN_DIR))
+    logger.info("Synapse distribution files (.syn) resolved and copied to {}".format(paramfile_target_dirs['syn']))
     client.gather(fut_neup)
-    logger.info("Neuron parameter files (.param) resolved and copied to {}".format(NEUP_DIR))
+    logger.info("Neuron parameter files (.param) resolved and copied to {}".format(paramfile_target_dirs['neup']))
     client.gather(fut_netp)
-    logger.info("Network parameter files (.param) resolved and copied to {}".format(NETP_DIR))
+    logger.info("Network parameter files (.param) resolved and copied to {}".format(paramfile_target_dirs['netp']))
 
     return fn_maps
     
@@ -536,7 +558,5 @@ def load_param_files_from_db(db, sti):
     import single_cell_parser as scp
 
     x = db["parameterfiles"].loc[sti]
-    x_neu, x_net = x["hash_neuron"], x["hash_network"]
-    neuf = db[NEUP_DIR].join(x_neu)
-    netf = db[NETP_DIR].join(x_net)
-    return scp.build_parameters(neuf), scp.build_parameters(netf)
+    neup_fn, netp_fn = x["path_neuron"], x["path_network"]
+    return scp.build_parameters(neup_fn), scp.build_parameters(netp_fn)

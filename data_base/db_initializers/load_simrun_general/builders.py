@@ -25,12 +25,6 @@ from .metadata_utils import create_metadata, get_voltage_traces_divisions_by_met
 from .param_file_parser import parallel_resolve_and_copy_paramfiles_to_db, construct_param_filename_hashmap_df
 from .health import get_filter_healthy_simresult_dirs
 from .config import (
-    NETP_DIR,
-    NEUP_DIR,
-    HOC_DIR,
-    SYN_DIR,
-    CON_DIR,
-    RECSITES_DIR,
     DEFAULT_DUMPER,
     USE_RECSITE_SHORT_NAME,
 )
@@ -261,7 +255,7 @@ def _build_dendritic_voltage_traces(db, repartition=None):
     # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
 
 
-def _build_param_files(db, client):
+def _build_param_files(db, paramfile_copy_config=None, client=None):
     """Copy, transform and rename parameterfiles to a db.
 
     This function copies :ref:`cell_parameters_format`, :ref:`network_parameters_format`, :ref:`syn_file_format` files,
@@ -283,10 +277,13 @@ def _build_param_files(db, client):
         This function assumes the database keys ``simresult_path`` and ``sim_trial_index`` already exist, which is likely
         only true when used in the context of the :py:meth:`~data_base.db_initializers.load_simrun_general.init` function.
     """
+    assert paramfile_copy_config is not None
     logging.info("Moving parameter files")
+    copy_method = paramfile_copy_config.pop("copy_method")
+    paramfile_target_dirs = paramfile_copy_config  # copy_method has been popped
 
     # Create target dir
-    for target_d in [NEUP_DIR, NETP_DIR, SYN_DIR, CON_DIR, HOC_DIR, RECSITES_DIR]:
+    for target_d in paramfile_target_dirs.values():
         if target_d in db.keys():
             del db[target_d]
         db.create_managed_folder(target_d)
@@ -305,6 +302,8 @@ def _build_param_files(db, client):
     fn_map = parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_hashmap_df=param_file_hash_df,
         db=db,
+        paramfile_target_dirs=paramfile_target_dirs,
+        copy_method=copy_method,
         client=client,
     )
 

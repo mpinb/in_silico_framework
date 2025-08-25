@@ -96,7 +96,15 @@ from .reoptimize import reoptimize_db
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
-
+DEFAULT_PARAMFILE_KWARGS = {
+    "copy_method": "remount",
+    "neup" : "parameterfiles_folder",
+    "netp" : "parameterfiles_folder",
+    "hoc" : "anatomy_folder",
+    "syn" : "anatomy_folder",
+    "con" : "anatomy_folder",
+    "recsites" : "anatomy_folder"
+}
 
 def init(
     db,
@@ -118,11 +126,15 @@ def init(
     voltage_traces=None,
     burst_times=None,
     dumper=None,
+    paramfile_copy_config=None
 ):
     """Initialize a database with simulation data.
 
     Use this function to load simulation data generated with the simrun module
     into a :py:class:`~data_base.DataBase`. 
+
+    Most configuration options you would want to change on a init-by-init basis are given here as keyword arguments.
+    Additional options can be configured in :py:mod:`data_base.db_initializers.load_simrun_general.config`
 
     Args:
         core (bool, optional):
@@ -148,11 +160,25 @@ def init(
             and will not work if the data folder is deleted or moved or transferred to another machine.
         repartition (bool|int): 
             If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
-            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.data_parsing.DEFAULT_VT_PARTITION_SIZE`
+            If ``True``, the voltage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.data_parsing.DEFAULT_VT_PARTITION_SIZE`
             If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
         n_chunks (int, optional):
             Amount of partitions to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
             Default is :math:`5000`.
+        paramfile_copy_config (dict, optional): 
+            Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
+    
+            - ``copy_method`` (str): Which copy strategy to use. 
+              Must be either ``"hash_rename"`` or ``"remount"``. 
+              ``"hash_rename"`` will rename all parameterfiles to a hash of their content. Useful when you want all parameter files in one folder and avoid fielname clashes.
+              ``"remount"`` will preserve the relative directory structure of the parameterfiles. Useful when parameterfiles are already organized.
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
+
         client (:py:class:`distributed.Client`, optional):
             Distributed Client object for parallel parsing of anything that isn't a dask dataframe.
         scheduler (:py:class:`distributed.Client`, optional)
@@ -190,6 +216,15 @@ def init(
         assert client is not None
         scheduler = client
 
+    # Update unspecified paramfile config settings to default
+    if paramfile_copy_config is not None: 
+        # Check that all config values exist and are ok
+        assert all([k in DEFAULT_PARAMFILE_KWARGS for k in paramfile_copy_config]), "Please pass a recognized config option for parameterfiles: {}".format(DEFAULT_PARAMFILE_KWARGS.keys())
+    if "copy_method" in paramfile_copy_config:
+        assert paramfile_copy_config['copy_method'] in ("hash_rename", "remount"), "Please provide a recognized copy method option: hash_rename or remount"
+    for k, v in DEFAULT_PARAMFILE_KWARGS.items(): 
+        paramfile_copy_config.setdefault(k, v)
+
     # get = compatibility.multiprocessing_scheduler if get is None else get
     # with dask.set_options(scheduler=scheduler):
     # with get_progress_bar_function()():
@@ -213,7 +248,7 @@ def init(
             )
 
     if parameterfiles:
-        _build_param_files(db, client=client)
+        _build_param_files(db, paramfile_copy_config=paramfile_copy_config, client=client)
 
     if synapse_activation:
         _build_synapse_activation(db, repartition=repartition, n_chunks=n_chunks)
