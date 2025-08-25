@@ -266,6 +266,9 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
         db (:py:class:`~data_base.DataBase`):
             The database to which the parameterfiles should be added.
         client (:py:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
+        paramfile_copy_config (dict, optional): 
+            Dictionary containing configuration on how to organise parameterfiles in the database. 
+            See :py:func:`data_base.db_initializers.load_simrun_general.init` for more info.
 
     Returns:
         None. Sets the keys ``parameterfiles_cell_folder`` and ``parameterfiles_network_folder`` in the database.
