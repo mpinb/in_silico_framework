@@ -287,12 +287,13 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
         str: The target filename in the database.
     """
     if copy_method == "hash_rename":
-        assert client is not None, "Parallellization client needed for hash-renaming parameter files, but None passed."
+        assert client is not None, "Please pass a parallellization client for hash renaming the files"
         # New param file name will be the content hash
         new_base_fns = client.gather(client.map(_hash_file_content, filelist))
     elif copy_method == "remount":
         # paramfiles are copied over in the same folder structure.
         base_fn = os.path.commonpath(filelist)
+        # Not worth parallellizing for now, it's fast enough. Overhead of sending to client may be slower than this
         new_base_fns = [os.path.relpath(e, start=base_fn) for e in filelist]    
     else:
         raise ValueError("Config value PARAM_FILE_COPY_METHOD={} is not supported. SUpported values are hash_rename or remount.")
@@ -396,7 +397,7 @@ def _safe_copy(source, target):
         shutil.copy(source, target)
 
 
-def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount"):
+def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount", client=None):
     """Create filename ``source -> target`` maps for all file types.
     
     Each key in the resulting map refers to a filetype present in :paramref:`filetype_target_dir_map`.
@@ -406,14 +407,14 @@ def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_met
         source_file_list (Dict[str, List[str]]):
             A dictionary mapping file types (str) to their source filepaths.
         db (:py:class:`~data_base.isf_data_base.DataBase`):
-            The target database where files should be copied to.
-        paramfile_copy_config (dict, optional): 
+            The target database where files should be copied to. 
+        copy_method (str): Which copy strategy to use. 
+            Must be either ``"hash_rename"`` or ``"remount"``. 
+            ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
+            ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+        paramfile_target_dirs (dict): 
             Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
-    
-            - ``copy_method`` (str): Which copy strategy to use. 
-              Must be either ``"hash_rename"`` or ``"remount"``. 
-              ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
-              ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+
             - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
@@ -425,15 +426,15 @@ def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_met
         Dict[str, Dict[str, str]]:
             A dictionary mapping file types (str) to their ``source -> target`` filename maps.
     """
-    # Generate all target filenames on cluster
-    # paramfile_copy_config now only consists of file types and their target dir location
+    assert client is not None
     target_files = {}
     for file_type, dir_path in paramfile_target_dirs.items():
         target_files[file_type] = _generate_target_filenames(
             db=db,
             db_target_dir=dir_path,
             filelist=source_files_dict[file_type],
-            copy_method=copy_method
+            copy_method=copy_method,
+            client=client
         )
     
     # Create maps on cluster
@@ -494,13 +495,13 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     )
 
     # Create filename map and scatter to cluster
-    fn_maps = client.submit(
-        _create_filename_maps,
-        source_file_list,
-        db,
-        paramfile_target_dirs,
-        copy_method
-    ).result()
+    fn_maps = _create_filename_maps(
+        source_files_dict=source_file_list,
+        db=db,
+        paramfile_target_dirs=paramfile_target_dirs,
+        copy_method=copy_method,
+        client=client
+    )
     scattered_maps = client.scatter(fn_maps, broadcast=True)
     
     # copy and transform param files to target location
