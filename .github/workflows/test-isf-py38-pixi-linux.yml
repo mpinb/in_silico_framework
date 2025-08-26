@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - master
+      - docs-test-env
   workflow_dispatch:
 
 jobs:
