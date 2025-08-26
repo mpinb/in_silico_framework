@@ -23,7 +23,6 @@ linux = "3.10.0"
 # Build config
 # -------------------------------------------------------------------------
 [build-system]
-      -d docs-test-env
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
