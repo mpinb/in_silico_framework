@@ -70,7 +70,7 @@ pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
-dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
+dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15" }
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 [tool.pixi.target.win]
@@ -131,7 +131,7 @@ default = ["run"]
 # -------------------------------------------------------------------------
 [tool.pytest.ini_options]
 markers = [
-  "heavy: Mark a test as heavy. This ensures it is scheduled early in the test suite.",
+  "early: Mark a test as early, ensuring it is scheduled early in the test suite.",
   "statistical(n_runs, max_failure_rate): Mark tests to rerun multiple times to determine statistical significance."
 ]
 # Don't schedule new tests if the previous exceeded this time

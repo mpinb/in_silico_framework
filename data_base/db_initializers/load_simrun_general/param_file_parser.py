@@ -14,7 +14,6 @@ from .filepath_resolution import (
     _convert_syn_fns_to_reldb, 
     _convert_con_fns_to_reldb
 )
-from .config import CON_DIR, HOC_DIR, NETP_DIR, NEUP_DIR, SYN_DIR, RECSITES_DIR
 from .file_handling import get_file
 from .utils import _hash_file_content
 
@@ -76,15 +75,15 @@ def construct_param_filename_hashmap_df(simresult_path, sim_trial_index):
             os.path.join(simresult_path, sim_result_dir), "_network_model.param"
         )
 
-    def get_original_neup_fn_from_trial(x):
-        sim_result_dir, pid = get_simrun_dir_and_pid(x)
+    def get_original_neup_fn_from_trial(row):
+        sim_result_dir, pid = get_simrun_dir_and_pid(row)
         # return os.path.join(simresult_path, sim_trial_folder, identifier + '_neuron_model.param')
         return get_file(
             os.path.join(simresult_path, sim_result_dir), "_neuron_model.param"
         )
 
     @dask.delayed
-    def _helper(df):
+    def _delayed_construct_paramfile_df(df):
         ## todo: crashes if specified folder directly contains the param files
         ## and not a subfolder containing the param files
         df["path_neuron"] = df.apply(
@@ -99,85 +98,11 @@ def construct_param_filename_hashmap_df(simresult_path, sim_trial_index):
 
     df = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
     ddf = dd.from_pandas(df, npartitions=3000).to_delayed()
-    delayeds = [_helper(df) for df in ddf]
+    delayeds = [_delayed_construct_paramfile_df(df) for df in ddf]
     return delayeds
 
 
-def _copy_and_transform_neuron_param(neup_fn, target_fn, hoc_fn_map, recsites_fn_map):
-    """Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
-
-    This function is used as a :paramref:`transform_fun` in
-    :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
-
-    Args:
-        neuron (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Dictionary containing the neuron model parameters.
-
-    Attention:
-        The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
-        This happens during the copying process in :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
-    """
-    neup = scp.build_parameters(neup_fn)
-    neup = _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map)
-    neup.save(target_fn)
-    return True
-
-
-def _copy_and_transform_network_param(netp_fn, target_fn, syn_fn_map, con_fn_map):
-    """Convert all paths in a :ref:`network_parameters_format` file.
-
-    This function is used as a :paramref:`transform_fun` in
-    :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
-
-    Args:
-        network (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Dictionary containing the network model parameters.
-
-    Attention:
-        The new filepaths only exist once the relevant parameterfiles are also copied and renamed.
-        This happens during the copying process in :py:meth:`~data_base.db_initializers.load_simrun_general.write_param_files_to_folder`.
-    """
-    netp = scp.build_parameters(netp_fn)
-    netp = _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map)
-    netp.save(target_fn)
-    return True
-
-
-def _copy_and_transform_syn(syn_fn, target_fn, hoc_fn_map):
-    """Copy, rename and transform a single :ref:`syn_file_format` file.
-
-    The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
-
-    Args:
-        syn_fn (str): Path to the synapse distribution file.
-        new_hoc (str): Path to the new hoc file.
-    """
-    with open(syn_fn, "r") as f:
-        content = f.read()
-
-    content = _convert_syn_fns_to_reldb(content, hoc_fn_map)
-    with open(target_fn, "w") as f:
-        f.write("".join(content))
-    return syn_fn
-
-
-def _copy_and_transform_con(con_fn, target_fn, syn_fn_map):
-    """Copy, rename and transform a single :ref:`con_file_format` file.
-
-    The :ref:`con_file_format` file is copied to the target directory, renamed to its hash, and the synapse distribution file name is replaced.
-
-    Args:
-        con_fn (str): Path to the connection file.
-        new_syn (str): Path to the new synapse distribution file.
-    """
-    with open(con_fn, "r") as f:
-        content = f.read()
-
-    content = _convert_con_fns_to_reldb(content, syn_fn_map, con_fn)
-    with open(target_fn, "w") as f:
-        f.write("".join(content))
-    return con_fn
-
-
-def _get_unique_syncons_from_netps(netp_fns):
+def _get_syn_con_fns_from_netp(netp_fn):
     """Get the unique synapse and connection files from a list of network parameter files.
 
     Args:
@@ -186,19 +111,19 @@ def _get_unique_syncons_from_netps(netp_fns):
     Returns:
         tuple: Tuple containing the unique synapse and connection files.
     """
-    syn_files = []
-    con_files = []
-    for netp_fn in netp_fns:
-        netp = scp.build_parameters(netp_fn)
-        for cell_type in list(netp["network"].keys()):
-            if not "synapses" in netp["network"][cell_type]:
-                continue  # key does not refer to a celltype
-            con_files.append(netp["network"][cell_type]["synapses"]["connectionFile"])
-            syn_files.append(netp["network"][cell_type]["synapses"]["distributionFile"])
-    return list(set(syn_files)), list(set(con_files))
+    syn_files, con_files = scp.parameters.fast_extract_values_from_param_file_key(netp_fn, ["distributionFile", "connectionFile"])
+    # syn_files = []
+    # con_files = []
+    # netp = scp.build_parameters(netp_fn)
+    # for cell_type in list(netp["network"].keys()):
+    #     if not "synapses" in netp["network"][cell_type]:
+    #         continue  # key does not refer to a celltype
+    #     con_files.append(netp["network"][cell_type]["synapses"]["connectionFile"])
+    #     syn_files.append(netp["network"][cell_type]["synapses"]["distributionFile"])
+    return syn_files, con_files
 
 
-def _get_unique_hoc_fns_from_neups(neup_fns):
+def _get_hoc_fns_from_neup(neup_fn):
     """Get the unique hoc files from a list of neuron parameter files.
 
     Args:
@@ -207,133 +132,417 @@ def _get_unique_hoc_fns_from_neups(neup_fns):
     Returns:
         list: List containing the unique hoc files.
     """
-    hoc_files = []
-    for neup_fn in neup_fns:
-        neup = scp.build_parameters(neup_fn)
-        hoc_files.append(neup["neuron"]["filename"])
-    return list(set(hoc_files))
+    hoc_files, = scp.parameters.fast_extract_values_from_param_file_key(neup_fn, ["filename"])
+    # hoc_files = []
+    # neup = scp.build_parameters(neup_fn)
+    # hoc_files.append(neup["neuron"]["filename"])
+    return hoc_files
 
-    
-def _get_unique_landmark_fns_from_neups(neup_fns):
-    """Get the unique landmark files from a list of neuron parameter files.
+
+def _get_recsite_fns_from_neup(neup_fn):
+    """Get the unique recsite files from a list of neuron parameter files.
 
     Args:
         neup_fns (str): Path to the neuron parameter file.
 
     Returns:
-        list: List containing the unique landmark files.
+        list: List containing the unique recsite files.
     """
-    landmark_files = []
-    for neup_fn in neup_fns:
-        neup = scp.build_parameters(neup_fn)
-        for landmark_file in neup["sim"]["recordingSites"]:
-            landmark_files.append(landmark_file)
-    return list(set(landmark_files))
+    # Don't use fast_extract_values_from_param_file_key here, since recordingsites are usually arrays.
+    recsite_files = []
+    neup = scp.build_parameters(neup_fn)
+    for recsite_file in neup["sim"]["recordingSites"]:
+        recsite_files.append(recsite_file)
+    return recsite_files
 
 
-def _generate_target_filenames(db, dir_name, file_list, hash_rename=True):
-    if hash_rename:
-        new_fns = [_hash_file_content(fn) for fn in file_list]
-    else:
-        new_fns = [os.path.basename(fn) for fn in file_list]
-    return [
-        os.path.join(db.basedir, dir_name, base_fn)
-        for base_fn in new_fns
-    ]
-
-
-def _delayed_copy_transform_paramfiles_to_db(
-    paramfile_hashmap_df,
-    db,
-    neup_path_column="path_neuron",
-    neup_hash_column="hash_neuron",
-    netp_path_column="path_network",
-    netp_hash_column="hash_network",
-):
-    """Copy, transform and rename parameterfiles to a db.
-
-    This function copies :ref:`cell_parameters_format`, :ref:`network_parameters_format`, :ref:`syn_file_format` files,
-    and :ref:`con_file_format` files to the database.
-    In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
+def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
+    """Convert all references to  :ref:`.hoc` and recsite .landmarkAscii files 
+    in a :ref:`network_parameters_format` file and copy to a new location.
 
     Args:
-        paramfile_hashmap_df (pd.DataFrame): DataFrame containing the filepaths and hashes.
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
-        path_column (str): Name of the column containing the filepaths.
-        hash_column (str): Name of the column containing the hashes.
-        transform_fun (function): Function to transform the parameter files.
+        netp_fn (str): Path to a :ref:`neuron_parameters_format` file.
+        scattered_fn_map (:py:class:`distributed.Future`): 
+            A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
+
+    Attention:
+        The resolved paths do not necessarily exist yet.
+    """
+    hoc_fn_map = scattered_fn_map['hoc']
+    recsites_fn_map = scattered_fn_map['recsites']
+    target_fn = scattered_fn_map['neup'][neup_fn] 
+    
+    neup = scp.build_parameters(neup_fn)
+    neup = _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map)
+    try:
+        neup.save(target_fn)
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target_fn))
+        neup.save(target_fn)
+
+
+def _resolve_and_copy_network_param(netp_fn, scattered_fn_map):
+    """Convert all references to  :ref:`syn_file_format` and :ref:`con_file_format` files 
+    in a :ref:`network_parameters_format` file and copy to a new location.
+
+    Args:
+        netp_fn (str): Path to a :ref:`network_parameters_format` file.
+        scattered_fn_map (:py:class:`distributed.Future`): 
+            A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
+
+    Attention:
+        The resolved paths do not necessarily exist yet.
+    """
+    syn_fn_map = scattered_fn_map['syn']
+    con_fn_map = scattered_fn_map['con']
+    target_fn = scattered_fn_map['netp'][netp_fn]
+    
+    # TODO: this can be faster by using regex replace instead of 
+    # building the entire .param file, similar to fast_extract_values_from_param_file
+    # but eh, its robust this way and acceptably fast for now (takes like 3mins for 10k files on 40 workers)
+    netp = scp.build_parameters(netp_fn)  
+    netp = _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map)
+    try:
+        netp.save(target_fn)
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target_fn))
+        netp.save(target_fn)
+
+
+def _resolve_and_copy_syn(syn_fn, scattered_fn_map):
+    """Resolve the reference to a :ref:`hoc_file_format` file and 
+    copy a single :ref:`syn_file_format` file to a new location.
+
+    Args:
+        syn_fn (str): Path to the synapse distribution file.
+        scattered_fn_map (:py:class:`distributed.Future`): 
+            A future dictionary with filename mappings. Must contain the keys "syn" and "hoc".
 
     Returns:
-        list: List of dask.delayed objects to copy the files.
+        str: The new :ref:`syn_file_format` filename.
     """
+    hoc_fn_map = scattered_fn_map['hoc']
+    target_fn = scattered_fn_map['syn'][syn_fn]
+    
+    with open(syn_fn, "r") as f:
+        content = f.read()
 
-    cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[
-        neup_path_column
-    ]
-    netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[
-        netp_path_column
-    ]
-    syn_fns, con_fns = _get_unique_syncons_from_netps(netp_param_fns)
-    hoc_fns = _get_unique_hoc_fns_from_neups(cell_param_fns)
-    landmark_fns = _get_unique_landmark_fns_from_neups(cell_param_fns)
-    logger.info("{} unique network parameter files".format(len(netp_param_fns)))
-    logger.info("{} unique neuron parameter files".format(len(cell_param_fns)))
-    logger.info("{} unique .hoc files".format(len(hoc_fns)))
-    logger.info("{} unique .landmark files".format(len(landmark_fns)))
-    logger.info("{} unique .syn files".format(len(syn_fns)))
-    logger.info("{} unique .con files".format(len(con_fns)))
+    logger.debug("Converting .hoc filenames in {}".format(syn_fn))
+    content = _convert_syn_fns_to_reldb(content, hoc_fn_map)
+    try:
+        with open(target_fn, "w") as f:
+            f.write("".join(content))
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
+        with open(target_fn, "w") as f:
+            f.write("".join(content))
+    return syn_fn
 
-    # Target filenames in the database for each parameter file
-    hoc_files_target_fns = _generate_target_filenames(db, HOC_DIR, hoc_fns, hash_rename=False)
-    landmark_files_target_fns = _generate_target_filenames(db, RECSITES_DIR, landmark_fns, hash_rename=False)
-    syn_files_target_fns = _generate_target_filenames(db, SYN_DIR, syn_fns, hash_rename=True)
-    con_files_target_fns = _generate_target_filenames(db, CON_DIR, con_fns, hash_rename=True)
-    cell_params_target_fns = _generate_target_filenames(db, NEUP_DIR, cell_param_fns, hash_rename=True)
-    netp_params_target_fns = _generate_target_filenames(db, NETP_DIR, netp_param_fns, hash_rename=True)
 
-    # create maps so we can transform file references in the parameter files, syn, and con files.
-    syn_fn_map = dict(zip(syn_fns, syn_files_target_fns))
-    con_fn_map = dict(zip(con_fns, con_files_target_fns))
-    hoc_fn_map = dict(zip(hoc_fns, hoc_files_target_fns))
-    recsites_fn_map = dict(zip(landmark_fns, landmark_files_target_fns))
+def _resolve_and_copy_con(con_fn, scattered_fn_map):
+    """Resolve the reference to a :ref:`syn_file_format` file and 
+    copy a single :ref:`con_file_format` file to a new location.
 
-        
-    delayed_copy_hocs = [
-        dask.delayed(shutil.copy)(fn, target_fn)
-        for fn, target_fn in zip(hoc_fns, hoc_files_target_fns)
-    ]
-    delayed_copy_landmarks = [
-        dask.delayed(shutil.copy)(fn, target_fn)
-        for fn, target_fn in zip(landmark_fns, landmark_files_target_fns)
-    ]
-    delayed_copy_syns = [
-        dask.delayed(_copy_and_transform_syn)(fn, target_fn, hoc_fn_map)
-        for fn, target_fn in zip(syn_fns, syn_files_target_fns)
-    ]
-    delayed_copy_cons = [
-        dask.delayed(_copy_and_transform_con)(fn, target_fn, syn_fn_map)
-        for fn, target_fn in zip(con_fns, con_files_target_fns)
-    ]
-    delayed_copy_neups = [
-        dask.delayed(_copy_and_transform_neuron_param)(fn, target_fn, hoc_fn_map, recsites_fn_map)
-        for fn, target_fn in zip(cell_param_fns, cell_params_target_fns)
-    ]
-    delayed_copy_netps = [
-        dask.delayed(_copy_and_transform_network_param)(
-            fn, target_fn, syn_fn_map, con_fn_map
+    Args:
+        syn_fn (str): Path to the synapse distribution file.
+        scattered_fn_map (:py:class:`distributed.Future`): 
+            A future dictionary with filename mappings. Must contain the keys "syn" and "con".
+
+    Returns:
+        str: The new :ref:`con_file_format` filename.
+    """
+    syn_fn_map = scattered_fn_map['syn']
+    target_fn = scattered_fn_map['con'][con_fn]
+    
+    with open(con_fn, "r") as f:
+        content = f.read()
+
+    content = _convert_con_fns_to_reldb(content, syn_fn_map, con_fn)
+    try:
+        with open(target_fn, "w") as f:
+            f.write("".join(content))
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
+        with open(target_fn, "w") as f:
+            f.write("".join(content))
+    return con_fn
+
+
+def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount", client=None):
+    """Generate target filenames within a database directory for an array of source files.
+    
+    The target filenames can be configured in :py:mod:`~data_base.db_initializers.load_simrun_general.config`
+    by changing :py:attr:`PARAM_FILE_COPY_METHOD` and the target directory names of each file type.
+
+    Args:
+        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        dir_name (str): 
+            The directory relative to the database where the files of one type should be copied.
+            These directories will be a :py:class:`data_base.isf_data_base.ManagedFolder`
+        filelist (List[str]): The original file names.
+        client (:py:class:`distributed.client.Client`):
+            A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``
+
+    Returns:
+        str: The target filename in the database.
+    """
+    if copy_method == "hash_rename":
+        assert client is not None, "Please pass a parallellization client for hash renaming the files"
+        # New param file name will be the content hash
+        new_base_fns = client.gather(client.map(_hash_file_content, filelist))
+    elif copy_method == "remount":
+        # paramfiles are copied over in the same folder structure.
+        base_fn = os.path.commonpath(filelist)
+        # Not worth parallellizing for now, it's fast enough. Overhead of sending to client may be slower than this
+        new_base_fns = [os.path.relpath(e, start=base_fn) for e in filelist]    
+    else:
+        raise ValueError("Config value PARAM_FILE_COPY_METHOD={} is not supported. SUpported values are hash_rename or remount.")
+    new_fns = [
+        os.path.join(db.basedir, db_target_dir, e) 
+        for e in new_base_fns
+        ]
+    return new_fns
+
+
+def _extract_unique_references_from_neup_and_netp(
+    paramfile_hashmap_df,
+    client=None,
+):
+    """
+    Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
+    and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`neuron_parameters_format`.
+    
+    Args:
+        paramfile_hashmap_df (:py:class:`pandas.DataFrame`):
+            A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
+            as well as a hash of their content.
+            Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
+        client (:py:class:`distributed.client.Client`):
+            A parallellization client. 
+   
+    Returns:
+        Dict[str, List]: A dictionary mapping each filetype (str) to a list of unique references of that filetype. 
+    """
+    
+    neup_path_column="path_neuron"
+    neup_hash_column="hash_neuron" 
+    netp_path_column="path_network"
+    netp_hash_column="hash_network"
+
+    # Get unique parameter files
+    cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[neup_path_column].tolist()
+    netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[netp_path_column].tolist()
+    
+    logger.info(f"{len(netp_param_fns)} unique network parameter files")
+    logger.info(f"{len(cell_param_fns)} unique neuron parameter files")
+    
+    # Extract unique files in parallel
+    logger.info("Extracting unique .syn, .con, .hoc, and recsite references from neuron and network parameters")
+    
+    # Submit all extraction jobs
+    syn_con_futures = client.map(_get_syn_con_fns_from_netp, netp_param_fns)
+    hoc_futures = client.map(_get_hoc_fns_from_neup,  cell_param_fns)
+    recsites_futures = client.map(_get_recsite_fns_from_neup,  cell_param_fns)
+    
+    # Collect and deduplicate results
+    syn_fns_unique = []
+    con_fns_unique = []
+    for worker_result in client.gather(syn_con_futures):
+        syn_fns_unique.extend(worker_result[0])
+        con_fns_unique.extend(worker_result[1])
+    syn_fns_unique = list(set(syn_fns_unique))
+    con_fns_unique = list(set(con_fns_unique))
+
+    hoc_fns_unique = []
+    for worker_result in client.gather(hoc_futures):
+        hoc_fns_unique.extend(worker_result)
+    hoc_fns_unique = list(set(hoc_fns_unique))
+    
+    recsites_fns_unique = []
+    for worker_result in client.gather(recsites_futures):
+        recsites_fns_unique.extend(worker_result)
+    recsites_fns_unique = list(set(recsites_fns_unique))
+    
+    # Convert to sorted lists for reproducible results
+    file_lists = {
+        'syn': syn_fns_unique,
+        'con': con_fns_unique, 
+        'hoc': hoc_fns_unique,
+        'recsites': recsites_fns_unique,
+        'neup': cell_param_fns,
+        'netp': netp_param_fns,
+    }
+    
+    logger.info(f"{len(file_lists['hoc'])} unique .hoc files")
+    logger.info(f"{len(file_lists['recsites'])} unique recsite files") 
+    logger.info(f"{len(file_lists['syn'])} unique .syn files")
+    logger.info(f"{len(file_lists['con'])} unique .con files")
+    
+    return file_lists
+
+
+def _safe_copy(source, target):
+    """Copy a file from :paramref:`source` to :paramref:`target`.
+    
+    Creates the parent directories if they do not exist yet.
+
+    Args:
+        source (str): Original filename
+        target (str): Desired target location to copy :paramref:`source` to.
+    """
+    try:
+        shutil.copy(source, target)
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        shutil.copy(source, target)
+
+
+def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount", client=None):
+    """Create filename ``source -> target`` maps for all file types.
+    
+    Each key in the resulting map refers to a filetype present in :paramref:`filetype_target_dir_map`.
+    The filetype keys have `source -> target` mappings for all files of that filetype.
+
+    Args:
+        source_file_list (Dict[str, List[str]]):
+            A dictionary mapping file types (str) to their source filepaths.
+        db (:py:class:`~data_base.isf_data_base.DataBase`):
+            The target database where files should be copied to. 
+        copy_method (str): Which copy strategy to use. 
+            Must be either ``"hash_rename"`` or ``"remount"``. 
+            ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
+            ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+        paramfile_target_dirs (dict): 
+            Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
+
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
+            
+    Returns:
+        Dict[str, Dict[str, str]]:
+            A dictionary mapping file types (str) to their ``source -> target`` filename maps.
+    """
+    assert client is not None
+    target_files = {}
+    for file_type, dir_path in paramfile_target_dirs.items():
+        target_files[file_type] = _generate_target_filenames(
+            db=db,
+            db_target_dir=dir_path,
+            filelist=source_files_dict[file_type],
+            copy_method=copy_method,
+            client=client
         )
-        for fn, target_fn in zip(netp_param_fns, netp_params_target_fns)
-    ]
+    
+    # Create maps on cluster
+    fn_maps = {}
+    for file_type in paramfile_target_dirs.keys():
+        fn_maps[file_type] = dict(zip(source_files_dict[file_type], target_files[file_type]))
+    
+    return fn_maps
 
-    return (
-        delayed_copy_hocs
-        + delayed_copy_landmarks
-        + delayed_copy_syns
-        + delayed_copy_cons
-        + delayed_copy_neups
-        + delayed_copy_netps
+
+def parallel_resolve_and_copy_paramfiles_to_db(
+    paramfile_hashmap_df,
+    db,
+    paramfile_target_dirs=None,
+    copy_method="remount",
+    client=None,
+):
+    """Resolve and copy all relevant parameter files to a database.
+    
+    This function:
+    
+    1. Fetches all :ref:`network_parameters_format` and :ref:`neuron_parameters_format`
+    2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files from these parameter files
+    3. Creates a mapping for each file from original location to target location, depending on the config.
+    4. Scatters this filename mapping dict to a distsributed cluster
+    5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
+    6. Copies over all resolved files from source to target.
+    
+    The resolution and copying is done in a single pass for efficiency.
+
+    Args:
+        paramfile_hashmap_df (pd.DataFrame): 
+            A dataframe containing all :ref:`network_parameters_format` and :ref:`neuron_parameters_format` files, as well as their hash.
+            This is used in :py:func:`_extract_unique_references_from_neup_and_netp`
+        db (:py:class:`data_base.data_base.DataBase`): The database that is being initialized
+        client (distributed.Client): A distributed client for parallel computation.
+        copy_method (str): Which copy strategy to use. Must be either ``"hash_rename"`` or ``"remount"``. 
+            ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
+            ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+        paramfile_target_dirs (dict, optional): 
+            Dictionary mapping parameter file types to their desired target directory in the database. Keys include:
+
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
+    
+    Returns:
+        dict: The filename map for each file type.
+    """
+    
+    # Phase 1: Extract all unique files
+    source_file_list = _extract_unique_references_from_neup_and_netp(
+        paramfile_hashmap_df=paramfile_hashmap_df,
+        client=client,
     )
 
+    # Create filename map and scatter to cluster
+    fn_maps = _create_filename_maps(
+        source_files_dict=source_file_list,
+        db=db,
+        paramfile_target_dirs=paramfile_target_dirs,
+        copy_method=copy_method,
+        client=client
+    )
+    scattered_maps = client.scatter(fn_maps, broadcast=True)
+    
+    # copy and transform param files to target location
+    fut_hoc = client.map(_safe_copy, *zip(*fn_maps['hoc'].items()))
+    fut_recsites = client.map(_safe_copy, *zip(*fn_maps['recsites'].items()))
+    fut_con = client.map(
+        _resolve_and_copy_con,
+        source_file_list['con'],
+        [scattered_maps]*len(source_file_list['con'])
+    )
+    fut_syn = client.map(
+        _resolve_and_copy_syn,
+        source_file_list['syn'],
+        [scattered_maps]*len(source_file_list['syn'])
+    )
+    fut_neup = client.map(
+        _resolve_and_copy_neuron_param,
+        source_file_list['neup'],
+        [scattered_maps]*len(source_file_list['neup'])
+    )
+    fut_netp = client.map(
+        _resolve_and_copy_network_param,
+        source_file_list['netp'],
+        [scattered_maps]*len(source_file_list['netp'])
+    )
+
+    client.gather(fut_hoc)
+    logger.info("Morphology files (.hoc) copied to {}".format(paramfile_target_dirs['hoc']))
+    client.gather(fut_recsites)
+    logger.info("Recordings site files (.landmarkAscii) copied to {}".format(paramfile_target_dirs['recsites']))
+    client.gather(fut_con)
+    logger.info("Synapse connectivity files (.con) resolved and copied to {}".format(paramfile_target_dirs['con']))
+    client.gather(fut_syn)
+    logger.info("Synapse distribution files (.syn) resolved and copied to {}".format(paramfile_target_dirs['syn']))
+    client.gather(fut_neup)
+    logger.info("Neuron parameter files (.param) resolved and copied to {}".format(paramfile_target_dirs['neup']))
+    client.gather(fut_netp)
+    logger.info("Network parameter files (.param) resolved and copied to {}".format(paramfile_target_dirs['netp']))
+
+    return fn_maps
+    
 
 def load_param_files_from_db(db, sti):
     """Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
@@ -350,7 +559,5 @@ def load_param_files_from_db(db, sti):
     import single_cell_parser as scp
 
     x = db["parameterfiles"].loc[sti]
-    x_neu, x_net = x["hash_neuron"], x["hash_network"]
-    neuf = db[NEUP_DIR].join(x_neu)
-    netf = db[NETP_DIR].join(x_net)
-    return scp.build_parameters(neuf), scp.build_parameters(netf)
+    neup_fn, netp_fn = x["path_neuron"], x["path_network"]
+    return scp.build_parameters(neup_fn), scp.build_parameters(netp_fn)
