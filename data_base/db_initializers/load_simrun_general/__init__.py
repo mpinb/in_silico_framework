@@ -220,8 +220,8 @@ def init(
     if paramfile_copy_config is not None: 
         # Check that all config values exist and are ok
         assert all([k in DEFAULT_PARAMFILE_COPY_CONFIG for k in paramfile_copy_config]), "Please pass a recognized config option for parameterfiles: {}".format(DEFAULT_PARAMFILE_COPY_CONFIG.keys())
-    if "copy_method" in paramfile_copy_config:
-        assert paramfile_copy_config['copy_method'] in ("hash_rename", "remount"), "Please provide a recognized copy method option: hash_rename or remount"
+        if "copy_method" in paramfile_copy_config:
+            assert paramfile_copy_config['copy_method'] in ("hash_rename", "remount"), "Please provide a recognized copy method option: hash_rename or remount"
     for k, v in DEFAULT_PARAMFILE_COPY_CONFIG.items(): 
         paramfile_copy_config.setdefault(k, v)
 
