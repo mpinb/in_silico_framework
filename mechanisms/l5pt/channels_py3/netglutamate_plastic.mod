@@ -101,16 +101,6 @@ ASSIGNED {
 
 	ica_HVA
 	ica_LVA
-
-	x0
-	val_start
-	val_end
-	norm
-    x_start
-	x_end
-	y_start
-	y_end
-	k
 }
 
 STATE {
@@ -166,9 +156,7 @@ INITIAL {
 }    
 
 BREAKPOINT {
-	LOCAL count
-
-	lr = learning_rate(ca_trace)
+	:lr = learning_rate(ca_trace)
 
 	dend_ca_current = fabs(ica_HVA + ica_LVA)
 	syn_ca_current = fabs(inmda)
@@ -250,15 +238,19 @@ DERIVATIVE state {
     fnmda' = (1 - fnmda) / taufnmda
 
 	if (sad == 1) {
+		lr = depression_rate
 		plasticity_trace' = -lr * (plasticity_trace - 0.5)
 	}
 	else if (happy == 1) {
+		lr = potentiation_rate
 		plasticity_trace' = lr * (3 - plasticity_trace)
 	}
 	else if (neutral == 1) {
+		lr = 0
 		plasticity_trace' = 0
 	}
 	else {
+		lr = 0
 		plasticity_trace' = 0
 	}
 	plasticity_trace' = plasticity_trace' * dt
@@ -273,6 +265,8 @@ DERIVATIVE state {
 }
 
 FUNCTION learning_rate(x) {
+	LOCAL x0, val_start, val_end, norm, x_start, x_end, y_start, y_end, k
+
     UNITSOFF
 
     : --- Transition 1: from baseline to max depression rate ---
