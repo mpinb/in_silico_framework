@@ -90,7 +90,8 @@ def _evoked_activity(
         str: Path to the output directory containing the simulation results.
     '''
     if tStim is not None:
-        raise ValueError("Passing tStim as an argument is deprecated. It should be specified as an offset in the network parameters.")
+        import warnings
+        warnings.warn("Passing tStim as an argument is deprecated. It should be specified as an offset in the network parameters.", category=DeprecationWarning)
     # 1: Initialize the simulation ------------------------------
     # 1.1 Set seed
     assert seed is not None
