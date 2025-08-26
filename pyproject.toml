@@ -23,6 +23,7 @@ linux = "3.10.0"
 # Build config
 # -------------------------------------------------------------------------
 [build-system]
+      -d docs-test-env
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
@@ -80,7 +81,7 @@ pypi-dependencies = { tables = ">=3.8.0,<4" }
 # Feature specific dependencies
 [tool.pixi.feature.run]
 # Pin down flask
-dependencies = { python = "3.8.*", flask = "==1.1.4" }
+dependencies = { flask = "==1.1.4" }
 pypi-dependencies = { blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" } }
 
 [tool.pixi.feature.docs.dependencies]
