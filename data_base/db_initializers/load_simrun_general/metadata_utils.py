@@ -165,7 +165,7 @@ def create_metadata_parallelization_helper(sim_trial_index, simresult_path):
 def create_metadata(db):
     """Generate metadata out of a pd.Series containing the sim_trial_index.
 
-    Expands the sim_trial_index to a pandas Series containing the path, trial number,
+    Maps the ``sim_trial_index`` to a pandas Series containing the path, trial number,
     and filename of the voltage traces file. After running this method, the database
     contains:
 

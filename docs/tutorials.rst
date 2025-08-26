@@ -4,34 +4,43 @@
 Tutorials
 =========
 
+.. _intro_tutorial:
+
+Introduction
+------------
+
 .. nbgallery::
-   :caption: Introduction
    :glob:
 
    ../tutorials/Introduction_to_ISF.ipynb
 
+.. _neuron_model_tutorials:
+
+Neuron models
+-------------
 
 .. nbgallery::
-   :caption: 1. Neuron models
    :glob:
 
    ../tutorials/1. neuron models/*
 
+.. _msm_tutorials:
+
+Network-embedded neuron models
+------------------------------
+
 .. nbgallery::
-   :caption: 2. Network models
    :glob:
 
    ../tutorials/2. network models/*
-
-.. nbgallery::
-   :caption: 3. Multiscale models
-   :glob:
-
    ../tutorials/3. multiscale models/*
 
+.. _analsysis_tutorials:
+
+Manipulations & reduced models
+------------------------------
 
 .. nbgallery::
-   :caption: 4. Analytically tractable reduced models
    :glob:
 
-   ../tutorials/4. reduced models/*
+   ../tutorials/4. analysis/*

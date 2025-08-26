@@ -1,0 +1,30 @@
+.doc-feedback {
+    margin-top: 2.5rem;
+    padding-top: 0.5rem;
+    /* border-top: 1px solid #e1e4e8; */
+}
+
+.doc-feedback p {
+    font-size: 0.6rem;
+    color: #87919e;
+    margin: 0;
+    font-style: italic;
+}
+
+
+.doc-feedback a:hover {
+    text-decoration: underline;
+}
+
+/* 
+For dark themes, add appropriate overrides 
+The current theme (sphinx-immaterial) explicitly checks the colorscheme name to infer light/dark theme
+rather than the usual @media (prefers-color-scheme: dark)
+*/
+@media screen {
+    [data-md-color-scheme="slate"] {
+        .doc-feedback {
+            border-top-color: #30363d;
+        }
+    }
+}

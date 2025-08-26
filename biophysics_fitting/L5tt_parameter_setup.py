@@ -442,7 +442,7 @@ def set_ephys(cell_param, params=None):
     assert type(params) == pd.Series, "params must be a pandas Series"
     for k, v in six.iteritems(params):
         scp_param = hay_param_to_scp_neuron_param(k)
-        assert hasattr(cell_param, scp_param), "The provided cell parameters have no field called: {}".format(scp_param)
+        assert hasattr(cell_param, scp_param), "The cell parameters have no field called {}, but it is present in the biophysical parameters you have passed.".format(scp_param)
         cell_param[scp_param] = float(v)
     unset_params = check_unset_range_mechanisms(cell_param)
     if len(unset_params) != 0:

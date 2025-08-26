@@ -199,7 +199,7 @@ def map_singlecell_inputs(
             anatomical_area/presynaptic_cell_type/\*.am
 
     Returns:
-        None. Writes the results to disk.
+        None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
         errstr = "Unknown cell type %s!"
@@ -211,6 +211,7 @@ def map_singlecell_inputs(
     parser = sim.CellParser(cellName)
     parser.spatialgraph_to_cell()
     singleCell = parser.get_cell()  # This is a sim.Cell, not scp.cell
+    logger.debug("Cell morphology loaded")
 
     # --------------------- Read in data ---------------------
     logger.info("Loading spreadsheets and bouton/PST densities...")
@@ -226,7 +227,8 @@ def map_singlecell_inputs(
     logger.debug("    Loading PST density {:s}".format(ExPSTDensityName))
     ExPSTDensity = sim.read_scalar_field(ExPSTDensityName)
     ExPSTDensity.resize_mesh()
-    logger.info("    Loading PST density {:s}".format(InhPSTDensityName))
+    logger.debug("    PST density {:s} loaded".format(ExPSTDensityName))
+    logger.debug("    Loading PST density {:s}".format(InhPSTDensityName))
     InhPSTDensity = sim.read_scalar_field(InhPSTDensityName)
     InhPSTDensity.resize_mesh()
 

@@ -1,3 +1,5 @@
+.. _home:
+
 The In Silico Framework (ISF)
 =============================
 

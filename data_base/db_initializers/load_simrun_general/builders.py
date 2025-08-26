@@ -1,4 +1,19 @@
-import glob, logging, os
+"""Pipelines for building database keys containing results from :py:mod:`simrun`.
+
+Note that all pipelines assume that the database ``core`` is built. This adds the essential
+information to the database that other builders need:
+
+- ``sim_trial_index``
+- ``simresult_path``: top-level directory from where all simulation results were fetched
+- ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
+
+In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+always desirable.
+"""
+import glob
+import logging
+import os
+
 import dask
 import dask.dataframe as dd
 import pandas as pd
@@ -74,10 +89,25 @@ def _build_core(
 
     The following data is parsed and added to the database:
 
-    - filelist: A dask dataframe containing the paths to all soma voltage trace files.
-    - voltage_traces: A dask dataframe containing the soma voltage traces.
-    - sim_trial_index: A dask series containing the indices of the simulation trials.
-    - metadata: A dask dataframe containing metadata about the simulation trials. See :py:meth:`~data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata` for more information.
+    .. list-table::
+        :header-rows: 1
+
+        * - Objective
+          - Meaning
+        * - spikecount
+          - Amount of spikes
+        * - APheight
+          - AP height
+    * - ``voltage traces``
+      - Somatic voltage traces
+    * - ``metadata``
+      - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
+    * - ``sim_trial_index``
+      - Simulation trial indices containing unique identifiers, and run numbers
+    * - ``simresult_path``
+      - top-level directory from where all simulation results were fetched
+    * - ``filelist``
+      - a list of voltage trace files, relative to the ``simresult_path``
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.

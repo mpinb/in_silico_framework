@@ -1,0 +1,16 @@
+/* Base rule: any reference inside a signature should look like sig-prename */
+.sig.sig-object a.reference.internal,
+.sig.sig-object a.reference.internal .sig-name.descname,
+.sig.sig-object a.n.reference.internal .n {
+  color: var(--sig-prename-color);
+  text-decoration: none;
+  font: inherit;
+}
+
+/* On hover/focus: fall back to normal link styling */
+.sig.sig-object a.reference.internal:hover,
+.sig.sig-object a.reference.internal:hover .sig-name.descname,
+.sig.sig-object a.reference.internal:focus-visible,
+.sig.sig-object a.reference.internal:focus-visible .sig-name.descname {
+  color: var(--md-accent-fg-color);
+}
