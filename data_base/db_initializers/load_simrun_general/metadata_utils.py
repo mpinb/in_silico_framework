@@ -6,27 +6,36 @@ import dask
 import pandas as pd
 
 from data_base.utils import chunkIt
+from .data_parsing import _estimate_n_chunks, DEFAULT_VT_PARTITION_SIZE
 
 
-def get_voltage_traces_divisions_by_metadata(metadata, repartition=None):
+def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     """Find the division indices based on the metadata.
 
-    The trial numbers always augment, so for each partition, the lowest trial number is
-    the first entry of that partition. This way, the division indices can be inferred
-    by simply finding the lowest trial number in each partition.
+    The trial numbers always augment, so for each simulation result directory, the lowest trial number is
+    the first entry of that simulation trial. 
+    If one wants to have one simulation directory per partition, this is a convenient way to infer partitions.
 
     Args:
         metadata (pd.DataFrame): Metadata dataframe containing the simulation trial indices.
-        repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+        repartition (bool|int): 
+            If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
+            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
+            If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
 
     Returns:
         tuple: Tuple containing the divisions for the voltage traces dataframe.
     """
     assert repartition is not None
+    if repartition == True: vt_partition_size = DEFAULT_VT_PARTITION_SIZE
+    elif isinstance(repartition, int): vt_partition_size = repartition
+    metadata = db['metadata']
     divisions = metadata[metadata.trialnr == min(metadata.trialnr)]
     divisions = list(divisions.sim_trial_index)
-    if len(divisions) > 10000 and repartition:
-        divisions = [d[0] for d in chunkIt(divisions, 5000)]
+    if repartition is not False:
+        filelist = [os.path.join(db['simresult_path'], e) for e in db['filelist']]
+        n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
+        divisions = [d[0] for d in chunkIt(divisions, n_chunks)]
     return tuple(divisions + [metadata.iloc[-1].sim_trial_index])
 
 
@@ -138,11 +147,10 @@ def create_metadata_parallelization_helper(sim_trial_index, simresult_path):
     try:
         synaptic_files = path_trialnr.apply(synaptic_file_list, axis=1)
         sim_trial_index_complete = pd.concat(
-            (sim_trial_index_complete, synaptic_files), axis=1
+            (sim_trial_index_complete, synaptic_files), 
+            axis=1
         )
-    except (
-        IndexError
-    ):  # special case if synapse activation data is not in the simulation folder
+    except IndexError:  # special case if synapse activation data is not in the simulation folder
         warnings.warn("Could not find synapse activation files")
     try:
         cell_files = path_trialnr.apply(cells_file_list, axis=1)
@@ -174,7 +182,12 @@ def create_metadata(db):
     simresult_path = db["simresult_path"]
     sim_trial_index = list(db["sim_trial_index"])
     sim_trial_index = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
-    sim_trial_index_delayed = dask.dataframe.from_pandas(sim_trial_index, npartitions=5000).to_delayed()
+
+    target_chunk_size = 1000  # Define a reasonable target chunk size
+    num_partitions = max(1, len(sim_trial_index) // target_chunk_size)
+    num_partitions = min(num_partitions, 5000)  # Limit to a maximum of 5000 partitions
+    
+    sim_trial_index_delayed = dask.dataframe.from_pandas(sim_trial_index, npartitions=num_partitions).to_delayed()
     sim_trial_index_complete = [
         create_metadata_parallelization_helper(d, simresult_path)
         for d in sim_trial_index_delayed

@@ -42,6 +42,7 @@ def chunkIt(seq, num):
     See also:
         https://stackoverflow.com/questions/2130016/splitting-a-list-of-arbitrary-size-into-only-roughly-n-equal-parts
     '''
+    assert num != 0, "Can't chunk a sequence in zero chunks."
     avg = len(seq) / float(num)
     out = []
     last = 0.0
