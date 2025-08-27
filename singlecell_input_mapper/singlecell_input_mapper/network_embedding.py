@@ -132,7 +132,7 @@ class NetworkMapper:
         cellTypeSpecificPopulation = []
         for i in range(nrOfSamples):
 
-            logger.info('Generating network embedding sample {:d} of {:d}'.format(i, nrOfSamples))
+            logger.info('Generating network embedding sample {:d} of {:d}'.format(i+1, nrOfSamples))
             self.postCell.remove_synapses('All')
             for anatomical_area in anatomical_areas:
                 for preCellType in preCellTypes:

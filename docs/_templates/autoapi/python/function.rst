@@ -2,27 +2,18 @@
 {%- set breadcrumb = obj.id.split('.')[1:] %}
 {% set shortname = obj.name.split('.')[-1] | escape %}
 
-.. backlink:
-
-{% if breadcrumb %}
-:mod:`{{ root_module }}`
-{%- for n in range(breadcrumb|length )  %}
- ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
-{%- endfor %}
-{% endif %}
-
-
 {% if obj.display %}
-   {% if is_own_page %}
-
-.. title:
+{% if is_own_page %}
 
 {{ shortname }}
-{{ "=" * shortname|length }}
+{{ "=" * shortname | length }}
 
-   {% endif %}
+{% endif %}
 
-.. py:function:: {{ obj.id }}({{ obj.args | replace("*", "\*") }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
+.. Signature -------------------------------
+
+.. py:function:: {{ obj.id }}({{ obj.args }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
+
    {% for (args, return_annotation) in obj.overloads %}
 
                  {%+ if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}({{ args }}){% if return_annotation is not none %} -> {{ return_annotation }}{% endif %}
@@ -38,8 +29,7 @@
    {% endif %}
 {% endif %}
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

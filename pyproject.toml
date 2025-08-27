@@ -8,7 +8,7 @@ authors = [
   ]
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
-requires-python = "==3.8.*"
+requires-python = ">=3.8"
 version = "0.5.0-beta"
 
 [tool.pixi.project]
@@ -30,6 +30,8 @@ requires = ["hatchling"]
 # -------------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------------
+
+# Dependencies shared across features (i.e. docs and run dependencies)
 [tool.pixi.dependencies]
 cmasher = ">=1.6.3,<2"
 cython = ">=3.0.11,<4"
@@ -61,15 +63,14 @@ redis = ">=5.2.0,<6"
 isf-pandas-msgpack = ">=0.4.0"
 blosc = ">=1.11.1,<2"
 pyarrow = ">=7.0.0,<12"
-blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
-# OS specific dependencies
+# OS specific dependencies shared across features
 [tool.pixi.target.osx]
 pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
-dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0"}
+dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15" }
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 [tool.pixi.target.win]
@@ -77,10 +78,13 @@ dependencies = { numpy = "==1.19.2", distributed = "==2.30.0"}
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 # Feature specific dependencies
-[tool.pixi.feature.isf]
-dependencies = { flask = "==1.1.4"}
+[tool.pixi.feature.run]
+# Pin down flask
+dependencies = { flask = "==1.1.4" }
+pypi-dependencies = { blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" } }
 
 [tool.pixi.feature.docs.dependencies]
+# Docs needs newer flask than run
 flask = ">=2"
 nbsphinx = ">=0.9.6,<0.10"
 jinja2 = ">=3.1.4,<4"
@@ -95,12 +99,15 @@ pandoc = ">=3.6.2,<4"
 graphviz = ">=7.0.5,<13"
 sphinx-design = ">=0.5.0,<0.6"
 sphinxcontrib-video = ">=0.2.1,<0.3"
+python = ">=3.9"
+sphinx-immaterial = ">=0.12.5,<0.13"
+black = ">=21.12b0,<22"
+sphinx-autoapi = ">=3.5.0,<4"
 
 [tool.pixi.feature.docs.pypi-dependencies]
 sphinx-paramlinks = ">=0.6.0,<0.7"
 catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
 sphinx-autoapi = ">=3.5.0,<4" 
-sphinx-immaterial = ">=0.11.14,<0.12"
 
 # -------------------------------------------------------------------------
 # Environment config
@@ -117,7 +124,7 @@ ISF_HOME="%cd%"
 
 [tool.pixi.environments]
 docs = ["docs"]
-default = ["isf"]
+default = ["run"]
 
 # -------------------------------------------------------------------------
 # Testing config

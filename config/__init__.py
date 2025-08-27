@@ -91,3 +91,11 @@ def get_default_db_dumper():
     except ImportError as e:
         raise ImportError(f"Could not import dumper '{dumper_fqn}'. Make sure it is installed and available in the Python path.") from e
     return dumper
+
+
+def get_meta_file_format():
+    allowed_formats = ("msgpack", "json")
+    db_settings = _read_db_settings()
+    meta_file_format = db_settings.get("OBJECT_META_FORMAT")['file_format']
+    assert meta_file_format in allowed_formats, "Format for saving meta must be one of {}".format(allowed_formats)
+    return meta_file_format

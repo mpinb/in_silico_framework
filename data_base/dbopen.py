@@ -90,7 +90,7 @@ def resolve_reldb_path(path, db_basedir=None):
     if not path.startswith('reldb://'):
         return path
     
-    assert db_basedir is not None, "If the path is in reldb:// format, a database object must be provided in order to resolve it."
+    assert db_basedir is not None, "If the path is in reldb:// format, the database basedir must be provided in order to resolve it."
 
     abs_path = os.path.join(db_basedir, *path.split('/')[2:])
     assert os.path.exists(abs_path), "The resolved path {} does not exist.".format(abs_path)
@@ -246,6 +246,24 @@ def resolve_db_path(path, db_basedir=None):
         return resolve_modular_db_path(path)
     else:
         return path
+
+
+def find_common_db_path(paths):
+    """Find the common path of a list of db paths.
+    
+    Similar to :py:meth:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
+    
+    
+    """
+    if all([e.startswith("reldb://") for e in paths]):
+        prefix = "reldb://"
+    elif all([e.startswith("mdb://") for e in paths]):
+        prefix = "mdb://"
+    else:
+        prefix = ""
+    paths = [e.lstrip(prefix) for e in paths]
+    commonpath = prefix + os.path.commonpath(paths)
+    return commonpath
 
 
 def resolve_neup_reldb_paths(neup, db_basedir):

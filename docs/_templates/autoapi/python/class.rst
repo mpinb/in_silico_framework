@@ -3,23 +3,13 @@
 {%- set breadcrumb = obj.id.split('.')[1:] %}
 
 {% if obj.display %}
-   {% if is_own_page %}
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-      {% if breadcrumb %}
-:mod:`{{ root_module }}`
-         {%- for n in range(breadcrumb|length )  %}
- ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
-         {%- endfor %}
-
-      {% endif %}
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
+{% if is_own_page %}
 
 {{ obj.short_name }}
 {{ "=" * obj.short_name | length }}
-   {% endif %}
+
+{% endif %}
 
 .. setup: which children to show -------------------------------------------------
 
@@ -76,7 +66,7 @@
 .. class signature --------------------------------------------------------------
 
 .. py:class:: {{ obj.id }}{% if obj.args %}({{ obj.args }}){% endif %}
-   
+
    {%- for (args, return_annotation) in obj.overloads %}
       {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
    {%- endfor %}
@@ -101,7 +91,7 @@
 
    :Attributes:
 
-   {{ attribute_lines | join('\n') | indent(3) }}
+      {{ attribute_lines | join('\n') | indent(6) }}
 
    {%- endif %}
 
@@ -114,3 +104,7 @@
 {%- endif %}
 
 {% endif %}
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_
