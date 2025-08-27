@@ -5,6 +5,11 @@
 authors = [
   {name = "Arco Bast", email = "basta@janelia.hhmi.org"},
   {name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"},
+  {name = "Robert Egger"},
+  {name = "Rieke Fruengel"},
+  {name = "Maria Royo Cano" },
+  {name = "Omar Valerio" },
+  {name = "Shantanu Durgvanshi"}
   ]
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
