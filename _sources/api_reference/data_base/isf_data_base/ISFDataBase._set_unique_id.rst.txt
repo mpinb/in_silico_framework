@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.ISFDataBase` ❭ :mod:`~data_base.isf_data_base.ISFDataBase._set_unique_id`
+
+
 
 ISFDataBase._set_unique_id
 ==========================
 
+
 .. py:method:: data_base.isf_data_base.ISFDataBase._set_unique_id()
+
 
    Sets a unique ID for the DataBase as class attribute.
 
@@ -14,3 +16,8 @@ ISFDataBase._set_unique_id
 
    :raises ValueError: If the unique ID is already set.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

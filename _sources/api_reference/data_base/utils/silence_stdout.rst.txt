@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.silence_stdout`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 silence_stdout
 ==============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -26,3 +22,7 @@ silence_stdout
 
    .. seealso:: https://stackoverflow.com/a/2829036/5082048
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

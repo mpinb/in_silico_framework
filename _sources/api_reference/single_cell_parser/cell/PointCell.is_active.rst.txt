@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell.is_active`
+
+
 
 PointCell.is_active
 ===================
 
+
 .. py:method:: single_cell_parser.cell.PointCell.is_active()
+
 
    Check if the point cell is active.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 NetworkMapper
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -59,37 +55,40 @@ NetworkMapper
       This class is specialized for anatomical reconstructions,
       not synapse activations or simulation parameters.
 
-   :Parameters: * **postCell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- The cell object to map synapses onto.
-                * **postCellType** (*str*) -- The type of the postsynaptic cell.
-                * **cellTypeNumbersSpreadsheet** (*dict*) -- Number of presynaptic cells per cell type and anatomical_area.
+   :param postCell: The cell object to map synapses onto.
+   :type postCell: ~singlecell_input_mapper.singlecell_input_mapper.cell.Cell
+   :param postCellType: The type of the postsynaptic cell.
+   :type postCellType: str
+   :param cellTypeNumbersSpreadsheet: Number of presynaptic cells per cell type and anatomical_area.
+   :type cellTypeNumbersSpreadsheet: dict
 
    :Attributes:
 
-   .. attribute:: cells
+      .. attribute:: cells
 
-      Presynaptic cells, ordered by anatomical area and cell type.
-      This attribute is filled by
-      :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
+         Presynaptic cells, ordered by anatomical area and cell type.
+         This attribute is filled by
+         :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: connected_cells
+      .. attribute:: connected_cells
 
-      Indices of all active presynaptic cells, ordered by cell type.
+         Indices of all active presynaptic cells, ordered by cell type.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: postCell
+      .. attribute:: postCell
 
-      Reference to postsynaptic (multi-compartment) cell model.
+         Reference to postsynaptic (multi-compartment) cell model.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
-   .. attribute:: postCellType
+      .. attribute:: postCellType
 
-      Postsynaptic cell type.
+         Postsynaptic cell type.
 
-      :type: str
+         :type: str
 
    :Methods:
 
@@ -130,3 +129,7 @@ NetworkMapper
       * - :py:obj:`_write_population_output_files <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_population_output_files>`\ (postCellName, populationDistribution, connectivityMap, synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable, writeLandmarkFiles)
         - Writes output files for precomputed summary files.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

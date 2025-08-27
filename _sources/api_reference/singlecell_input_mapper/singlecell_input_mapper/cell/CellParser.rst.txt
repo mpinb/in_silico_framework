@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CellParser
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,21 +33,22 @@ CellParser
       This is a leightweight dataclass specialized for use with :py:mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
       and does not contain any biophysical details.
 
-   :Parameters: **hocFilename** (*str*) -- File name of the hoc file. Default: ''.
+   :param hocFilename: File name of the hoc file. Default: ''.
+   :type hocFilename: str
 
    :Attributes:
 
-   .. attribute:: hoc_fname
+      .. attribute:: hoc_fname
 
-      File name of the hoc file.
+         File name of the hoc file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      Cell object.
+         Cell object.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
    :Methods:
 
@@ -66,3 +63,7 @@ CellParser
       * - :py:obj:`get_cell <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell>`\ ()
         - Returns cell if it is set up
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.get_fraction_of_landmarkAscii`
-
-
-.. title:
 
 get_fraction_of_landmarkAscii
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.get_fraction_of_landmarkAscii(frac, path)
+
 
    Sample landmarks (i.e. 3D points) from a landmarkAscii file.
 
-   :Parameters: * **frac** (*float*) -- Fraction of landmarks to sample.
-                * **path** (*str*) -- The path to the landmarkAscii file.
+   :param frac: Fraction of landmarks to sample.
+   :type frac: float
+   :param path: The path to the landmarkAscii file.
+   :type path: str
 
    :returns: A pandas DataFrame containing the sampled landmarks and the cell type.
    :rtype: pd.DataFrame
@@ -23,8 +22,7 @@ get_fraction_of_landmarkAscii
    .. seealso:: :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

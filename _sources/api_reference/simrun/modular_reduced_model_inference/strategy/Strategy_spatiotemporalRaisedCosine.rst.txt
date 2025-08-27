@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Strategy_spatiotemporalRaisedCosine
 ===================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -47,68 +43,71 @@ Strategy_spatiotemporalRaisedCosine
       - ``y``: The labels.
       - ``ISI``: The inter-spike intervals.
 
-   :Parameters: * **name** (*str*) -- The name of the strategy.
-                * **RaisedCosineBasis_spatial** (*RaisedCosineBasis*) -- The spatial basis functions :math:`\mathbf{g}(z)`.
-                * **RaisedCosineBasis_temporal** (*RaisedCosineBasis*) -- The temporal basis :math:`\mathbf{f}(t)`.
+   :param name: The name of the strategy.
+   :type name: str
+   :param RaisedCosineBasis_spatial: The spatial basis functions :math:`\mathbf{g}(z)`.
+   :type RaisedCosineBasis_spatial: RaisedCosineBasis
+   :param RaisedCosineBasis_temporal: The temporal basis :math:`\mathbf{f}(t)`.
+   :type RaisedCosineBasis_temporal: RaisedCosineBasis
 
    :Attributes:
 
-   .. attribute:: RaisedCosineBasis_spatial
+      .. attribute:: RaisedCosineBasis_spatial
 
-      The spatial basis functions :math:`\mathbf{g}(z)`.
+         The spatial basis functions :math:`\mathbf{g}(z)`.
 
-      :type: RaisedCosineBasis
+         :type: RaisedCosineBasis
 
-   .. attribute:: RaisedCosineBasis_temporal
+      .. attribute:: RaisedCosineBasis_temporal
 
-      The temporal basis functions :math:`\mathbf{f}(t)`.
+         The temporal basis functions :math:`\mathbf{f}(t)`.
 
-      :type: RaisedCosineBasis
+         :type: RaisedCosineBasis
 
-   .. attribute:: base_vectors_arrays_dict
+      .. attribute:: base_vectors_arrays_dict
 
-      The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
-      These basis vectors are used for the optimizer, and are already multiplied with the data.
-      Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
-      as the latter are not multiplied with the synapse activaiton data.
+         The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
+         These basis vectors are used for the optimizer, and are already multiplied with the data.
+         Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
+         as the latter are not multiplied with the synapse activaiton data.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: groups
+      .. attribute:: groups
 
-      The list of groups. Usually simply ``['EXC', 'INH']``.
+         The list of groups. Usually simply ``['EXC', 'INH']``.
 
-      :type: list
+         :type: list
 
-   .. attribute:: len_z
+      .. attribute:: len_z
 
-      The length of the spatial domain i.e. the amount of spatial basis vectors.
+         The length of the spatial domain i.e. the amount of spatial basis vectors.
 
-      :type: int
+         :type: int
 
-   .. attribute:: len_t
+      .. attribute:: len_t
 
-      The length of the temporal domain i.e. the amount of temporal basis vectors.
+         The length of the temporal domain i.e. the amount of temporal basis vectors.
 
-      :type: int
+         :type: int
 
-   .. attribute:: len_trials
+      .. attribute:: len_trials
 
-      The number of trials.
+         The number of trials.
 
-      :type: int
+         :type: int
 
-   .. attribute:: convert_x
+      .. attribute:: convert_x
 
-      The conversion function to convert the 1D learnable weight vector :math:`\mathbf{x}` into a structured dictionary.
+         The conversion function to convert the 1D learnable weight vector :math:`\mathbf{x}` into a structured dictionary.
 
-      :type: callable
+         :type: callable
 
-   .. attribute:: _get_score
+      .. attribute:: _get_score
 
-      The cost function to provide to the optimizer.
+         The cost function to provide to the optimizer.
 
-      :type: callable
+         :type: callable
 
    :Methods:
 
@@ -135,3 +134,7 @@ Strategy_spatiotemporalRaisedCosine
       * - :py:obj:`visualize <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize>`\ (optimizer\_output, only\_successful, normalize)
         - Plot the basis functions.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

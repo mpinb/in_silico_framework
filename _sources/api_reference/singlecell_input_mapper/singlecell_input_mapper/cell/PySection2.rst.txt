@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 PySection2
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,73 +33,76 @@ PySection2
    parsing and mapping synapses without any additional NEURON :cite:`hines2001neuron`
    dependencies.
 
-   :Parameters: * **name** (*str*) -- Name of the section. Default: None.
-                * **cell** (*str*) -- Name of the cell. Default: None.
-                * **label** (*str*) -- Label of the section. Default: None.
+   :param name: Name of the section. Default: None.
+   :type name: str
+   :param cell: Name of the cell. Default: None.
+   :type cell: str
+   :param label: Label of the section. Default: None.
+   :type label: str
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      Name of the section.
+         Name of the section.
 
-      :type: str
+         :type: str
 
-   .. attribute:: label
+      .. attribute:: label
 
-      Label of the section (e.g. "Soma", "Dendrite", "ApicalDendrite" ...).
+         Label of the section (e.g. "Soma", "Dendrite", "ApicalDendrite" ...).
 
-      :type: str
+         :type: str
 
-   .. attribute:: parent
+      .. attribute:: parent
 
-      Parent section.
+         Parent section.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
 
-   .. attribute:: parentx
+      .. attribute:: parentx
 
-      Relative position along the parent section (0-1).
-      Usually, sections are split up on branch points, making parentx equal to 1.0, but
-      this is not always the case (e.g. when the section has a similar diameter beyond the branch point).
+         Relative position along the parent section (0-1).
+         Usually, sections are split up on branch points, making parentx equal to 1.0, but
+         this is not always the case (e.g. when the section has a similar diameter beyond the branch point).
 
-      :type: float
+         :type: float
 
-   .. attribute:: bounds
+      .. attribute:: bounds
 
-      Bounding box around the section.
+         Bounding box around the section.
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: nrOfPts
+      .. attribute:: nrOfPts
 
-      Number of traced 3D coordinates.
+         Number of traced 3D coordinates.
 
-      :type: int
+         :type: int
 
-   .. attribute:: pts
+      .. attribute:: pts
 
-      List of traced 3D coordinates.
+         List of traced 3D coordinates.
 
-      :type: list
+         :type: list
 
-   .. attribute:: relPts
+      .. attribute:: relPts
 
-      List of relative position of 3D points along the section.
+         List of relative position of 3D points along the section.
 
-      :type: list
+         :type: list
 
-   .. attribute:: diamList
+      .. attribute:: diamList
 
-      List of diameters at traced 3D coordinates.
+         List of diameters at traced 3D coordinates.
 
-      :type: list
+         :type: list
 
-   .. attribute:: L
+      .. attribute:: L
 
-      Length of the section.
+         Length of the section.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -122,3 +121,7 @@ PySection2
       * - :py:obj:`_compute_length <singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_length>`\ ()
         - Calculate the length of the section.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

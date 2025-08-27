@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Simulator
 =========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -110,11 +106,11 @@ Simulator
 
    :Attributes:
 
-   .. attribute:: setup
+      .. attribute:: setup
 
-      A Simulator_Setup object that keeps track of the simulation setup.
+         A Simulator_Setup object that keeps track of the simulation setup.
 
-      :type: :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
+         :type: :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
 
    :Methods:
 
@@ -129,3 +125,7 @@ Simulator
       * - :py:obj:`run <biophysics_fitting.simulator.Simulator.run>`\ (params, stims)
         - Simulates all stimuli for a given parameter vector.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

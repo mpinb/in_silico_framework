@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.sim_trial_to_cell_object`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 sim_trial_to_cell_object
 ========================
@@ -46,3 +48,7 @@ Functions
      - Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

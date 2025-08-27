@@ -1,25 +1,28 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask`
-
-
-.. title:
 
 calculate_vdensity_array_dask
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_dask(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
+
 
    Bin a :ref:`voltage_traces_df_format` in timebins across trials.
 
-   :Parameters: * **v** (*dask.DataFrame*) -- A voltage traces dataframe. Column indices float and reflect timepoints
-                * **bin_size** (*float*) -- the size of the bins
-                * **ymin** (*float*) -- the minimum voltage value
-                * **ymax** (*float*) -- the maximum voltage value
-                * **xmin** (*float*) -- the minimum time value (unused)
-                * **xmax** (*float*) -- the maximum time value (unused)
+   :param v: A voltage traces dataframe. Column indices float and reflect timepoints
+   :type v: dask.DataFrame
+   :param bin_size: the size of the bins
+   :type bin_size: float
+   :param ymin: the minimum voltage value
+   :type ymin: float
+   :param ymax: the maximum voltage value
+   :type ymax: float
+   :param xmin: the minimum time value (unused)
+   :type xmin: float
+   :param xmax: the maximum time value (unused)
+   :type xmax: float
 
    :returns: the binned voltage traces dataframe
    :rtype: :py:class:`dask.dataframe.DataFrame`
@@ -27,8 +30,7 @@ calculate_vdensity_array_dask
    .. seealso:: :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd` for the pandas version.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,21 +1,33 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.add_synapse`
+
+
 
 Cell.add_synapse
 ================
 
+
 .. py:method:: single_cell_parser.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
+
 
    Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell object.
 
-   :Parameters: * **secID** (*int*) -- The section ID of the synapse location.
-                * **ptID** (*int*) -- The point ID of the synapse location.
-                * **ptx** (*float*) -- The relative coordinate along the section.
-                * **preType** (*str, optional*) -- The presynaptic cell type. Defaults to 'Generic'.
-                * **postType** (*str, optional*) -- The postsynaptic cell type. Defaults to 'Generic'.
+   :param secID: The section ID of the synapse location.
+   :type secID: int
+   :param ptID: The point ID of the synapse location.
+   :type ptID: int
+   :param ptx: The relative coordinate along the section.
+   :type ptx: float
+   :param preType: The presynaptic cell type. Defaults to 'Generic'.
+   :type preType: str, optional
+   :param postType: The postsynaptic cell type. Defaults to 'Generic'.
+   :type postType: str, optional
 
    :returns: The newly created synapse.
    :rtype: :py:class:`~single_cell_parser.synapse.Synapse`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse.disconnect_hoc_synapse`
+
+
 
 Synapse.disconnect_hoc_synapse
 ==============================
 
+
 .. py:method:: single_cell_parser.synapse.Synapse.disconnect_hoc_synapse()
+
 
    Disconnect the synapse from the neuron model.
 
@@ -14,3 +16,8 @@ Synapse.disconnect_hoc_synapse
 
    .. seealso:: :py:meth:`activate_hoc_syn`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

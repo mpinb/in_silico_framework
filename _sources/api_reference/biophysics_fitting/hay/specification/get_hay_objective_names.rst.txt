@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.specification` ❭ :mod:`~biophysics_fitting.hay.specification.get_hay_objective_names`
-
-
-.. title:
 
 get_hay_objective_names
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.hay.specification.get_hay_objective_names()
+
 
    Get the names of the objectives used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
 
@@ -18,8 +15,7 @@ get_hay_objective_names
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

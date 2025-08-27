@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_cell_simulation`
-
-
-.. title:
 
 write_cell_simulation
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoints=False, step_frames=10, selected_index=None)
+
 
    Write Amira SpatialGraph files corresponding to time steps of entire simulation run.
 
@@ -21,13 +18,20 @@ write_cell_simulation
 
    .. attention:: Performs interpolation if ``nseg != nrOfPts`` for a Section
 
-   :Parameters: * **fname** (*str*) -- The name of the file to write to.
-                * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- The cell object.
-                * **traces** (*list*) -- A list of strings, each representing a recorded quantity.
-                * **tVec** (*list*) -- A list of time points.
-                * **allPoints** (*bool*) -- If True, all points of the cell are written to the file.
-                * **step_frames** (*int*) -- The number of frames to write.
-                * **selected_index** (*list*) -- A list of indices of the sections to write.
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param cell: The cell object.
+   :type cell: single_cell_parser.cell.Cell
+   :param traces: A list of strings, each representing a recorded quantity.
+   :type traces: list
+   :param tVec: A list of time points.
+   :type tVec: list
+   :param allPoints: If True, all points of the cell are written to the file.
+   :type allPoints: bool
+   :param step_frames: The number of frames to write.
+   :type step_frames: int
+   :param selected_index: A list of indices of the sections to write.
+   :type selected_index: list
 
    Example:
 
@@ -42,8 +46,7 @@ write_cell_simulation
 
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

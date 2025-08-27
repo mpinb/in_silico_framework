@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`
-
-
-.. title:
 
 read_hoc_file
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file(fname='')
+
 
    Reads a hoc file and returns a list of Edge objects.
 
@@ -22,14 +19,14 @@ read_hoc_file
       The module :py:mod:`single_cell_parser` also conains a :py:meth:`~single_cell_parser.reader.read_hoc_file`
       method. A notable difference is that this method does **not** read in axon sections.
 
-   :Parameters: **fname** (*str*) -- The name of the file to be read.
+   :param fname: The name of the file to be read.
+   :type fname: str
 
    :returns: A list of :py:class:`Edge` objects.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.rerun_db`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 rerun_db
 ========
@@ -62,3 +64,7 @@ Functions
      - Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

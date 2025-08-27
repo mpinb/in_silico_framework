@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static`
+
+
 
 Strategy_spatiotemporalRaisedCosine._convert_x_static
 =====================================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static(groups, len_z, x)
+
    :staticmethod:
 
 
@@ -15,9 +17,12 @@ Strategy_spatiotemporalRaisedCosine._convert_x_static
    Useful for passing the learnable weights to the optimizer as a one-dimensional array,
    but keeping track of the basis vectors for each group and dimension.
 
-   :Parameters: * **groups** (*list*) -- The list of groups.
-                * **len_z** (*int*) -- The length of the spatial domain.
-                * **x** (*array*) -- The one-dimensional input array.
+   :param groups: The list of groups.
+   :type groups: list
+   :param len_z: The length of the spatial domain.
+   :type len_z: int
+   :param x: The one-dimensional input array.
+   :type x: array
 
    :returns: A dictionary of basis vectors for each group.
    :rtype: dict
@@ -40,3 +45,8 @@ Strategy_spatiotemporalRaisedCosine._convert_x_static
            array([0.6, 0.7, 0.8]), # spatial
            array([0.9, 1.]))}      # temporal
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

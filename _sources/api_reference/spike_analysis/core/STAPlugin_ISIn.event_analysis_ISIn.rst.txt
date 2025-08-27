@@ -1,19 +1,23 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn`
+
+
 
 STAPlugin_ISIn.event_analysis_ISIn
 ==================================
 
+
 .. py:method:: spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn(spike_times, n=5)
+
    :staticmethod:
 
 
    Computes for each spike the inter spike interval (ISI) to the next, second next ... nth next spike.
 
-   :Parameters: * **spike_times** (*list*) -- list, containing spike times
-                * **n** (*int*) -- Max order of ISIs computed (e.g. if n = 1, only the interval between each spike and the first next spike will be computed)
+   :param spike_times: list, containing spike times
+   :type spike_times: list
+   :param n: Max order of ISIs computed (e.g. if n = 1, only the interval between each spike and the first next spike will be computed)
+   :type n: int
 
    :returns:
 
@@ -22,3 +26,8 @@ STAPlugin_ISIn.event_analysis_ISIn
                  and the nth next spike. ``np.NaN`` if there is no nth next spike.
    :rtype: pd.DataFrame
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

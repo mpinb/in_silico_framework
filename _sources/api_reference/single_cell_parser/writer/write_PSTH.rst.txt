@@ -1,24 +1,24 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_PSTH`
-
-
-.. title:
 
 write_PSTH
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_PSTH(fname=None, PSTH=None, bins=None)
+
 
    Write PSTH and time bins of PSTH,
 
    Bins contain left and right end of each bin, i.e. ``len(bins) = len(PSTH) + 1``
 
-   :Parameters: * **fname** (*str*) -- The name of the file to write to.
-                * **PSTH** (*list*) -- A list of PSTH values.
-                * **bins** (*list*) -- A list of time bins, including begin and end
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param PSTH: A list of PSTH values.
+   :type PSTH: list
+   :param bins: A list of time bins, including begin and end
+   :type bins: list
 
    :returns: None. Writes out the PSTH file to :paramref:`fname`.
 
@@ -35,8 +35,7 @@ write_PSTH
    0.2     0.3     2
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

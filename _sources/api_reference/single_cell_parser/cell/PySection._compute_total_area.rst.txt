@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection._compute_total_area`
+
+
 
 PySection._compute_total_area
 =============================
 
+
 .. py:method:: single_cell_parser.cell.PySection._compute_total_area()
+
 
    Computes total area of all NEURON segments in this section
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

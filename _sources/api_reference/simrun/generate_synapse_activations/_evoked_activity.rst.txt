@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.generate_synapse_activations` ❭ :mod:`~simrun.generate_synapse_activations._evoked_activity`
-
-
-.. title:
 
 _evoked_activity
 ================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.generate_synapse_activations._evoked_activity(cellParamName, evokedUpParamName, dirPrefix='', seed=None, nSweeps=1000, tStop=345)
+
 
    Calculate and write synapse activations and presynaptic spike times.
 
@@ -19,20 +16,25 @@ _evoked_activity
    Synapse activation files are generated with :py:meth:`single_cell_parser.analyze.compute_synapse_distances_times`.
    Spike time files are generated with :py:meth:`single_cell_parser.analyze.write_presynaptic_spike_times`.
 
-   :Parameters: * **cellParamName** (*str*) -- Path to a :ref:`cell_parameters_format` file,
-                  containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
-                * **evokedUpParamName** (*str*) -- Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
-                * **dirPrefix** (*str*) -- Prefix for the directory where the results are stored.
-                * **seed** (*int*) -- Seed for the random number generator.
-                * **nSweeps** (*int*) -- Amount of times to run the simulation with the same parameter configuration.
-                * **tStop** (*float*) -- Time in ms at which the simulation should stop.
+   :param cellParamName: Path to a :ref:`cell_parameters_format` file,
+                         containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+   :type cellParamName: str
+   :param evokedUpParamName: Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
+   :type evokedUpParamName: str
+   :param dirPrefix: Prefix for the directory where the results are stored.
+   :type dirPrefix: str
+   :param seed: Seed for the random number generator.
+   :type seed: int
+   :param nSweeps: Amount of times to run the simulation with the same parameter configuration.
+   :type nSweeps: int
+   :param tStop: Time in ms at which the simulation should stop.
+   :type tStop: float
 
    :returns: List of paths to the synapse activation files.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

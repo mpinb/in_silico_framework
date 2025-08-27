@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ISIn`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_ISIn
 ==============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,29 +29,32 @@ STAPlugin_ISIn
 
    .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'ISIn'.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
-                * **max_n** (*int, optional*) -- The maximum order of ISIs computed. Defaults to 5.
+   :param name: The name of the plugin. Defaults to 'ISIn'.
+   :type name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+   :type source: str, optional
+   :param max_n: The maximum order of ISIs computed. Defaults to 5.
+   :type max_n: int, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin.
+         The name of the plugin.
 
-      :type: str
+         :type: str
 
-   .. attribute:: source
+      .. attribute:: source
 
-      The :py:class:`~data_base.DataBase` key containing the spike times.
+         The :py:class:`~data_base.DataBase` key containing the spike times.
 
-      :type: str
+         :type: str
 
-   .. attribute:: max_n
+      .. attribute:: max_n
 
-      The maximum order of ISIs computed.
+         The maximum order of ISIs computed.
 
-      :type: int
+         :type: int
 
    :Methods:
 
@@ -70,3 +69,7 @@ STAPlugin_ISIn
       * - :py:obj:`event_analysis_ISIn <spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn>`\ (spike\_times, n)
         - :summarylabel:`static` Computes for each spike the inter spike interval (ISI) to the next, second next ... nth next spike.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

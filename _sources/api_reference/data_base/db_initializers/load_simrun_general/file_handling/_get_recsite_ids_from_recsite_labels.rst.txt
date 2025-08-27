@@ -1,0 +1,34 @@
+
+
+_get_recsite_ids_from_recsite_labels
+====================================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.file_handling._get_recsite_ids_from_recsite_labels(recsite_labels)
+
+
+   Fetch the recsite ID number from the entrie recsite ID string.
+
+   This function assumes all recsite ids in :paramref:`recsite_ids` have a substring containing "ID_[digit]",
+   where digit is any numeric combination.
+
+   :param recsite_labels: List of recording site labels.
+   :type recsite_labels: List[str]
+
+   .. rubric:: Example
+      :class: example
+
+   >>> recsite_label = "pos_54_ID_000_sec_073_seg_003_x_0.318_somaDist_759.1"
+   >>> _get_recsite_id_from_labels([recsite_label, recsite_label])
+   ["000", "000"]
+
+   :returns: List of recsite IDs in the same order as the input recsite labels
+   :rtype: List[str]
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

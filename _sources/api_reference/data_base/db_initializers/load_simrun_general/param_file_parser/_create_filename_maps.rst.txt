@@ -1,0 +1,43 @@
+
+
+_create_filename_maps
+=====================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method='remount', client=None)
+
+
+   Create filename ``source -> target`` maps for all file types.
+
+   Each key in the resulting map refers to a filetype present in :paramref:`filetype_target_dir_map`.
+   The filetype keys have `source -> target` mappings for all files of that filetype.
+
+   :param source_file_list: A dictionary mapping file types (str) to their source filepaths.
+   :type source_file_list: Dict[str, List[str]]
+   :param db: The target database where files should be copied to.
+   :type db: ~data_base.isf_data_base.DataBase
+   :param copy_method: Which copy strategy to use.
+                       Must be either ``"hash_rename"`` or ``"remount"``.
+                       ``"hash_rename"`` will rename all parameterfiles to a hash of their content.
+                       ``"remount"`` will preserve the relative directory structure of the parameterfiles.
+   :type copy_method: str
+   :param paramfile_target_dirs: Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
+
+                                 - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+                                 - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+                                 - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+                                 - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
+                                 - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
+                                 - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
+   :type paramfile_target_dirs: dict
+
+   :returns:     A dictionary mapping file types (str) to their ``source -> target`` filename maps.
+   :rtype: Dict[str, Dict[str, str]]
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

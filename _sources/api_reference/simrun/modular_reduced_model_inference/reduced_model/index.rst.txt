@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ 
+
 
 reduced_model
 =============
@@ -65,3 +67,7 @@ Functions
      - Convenience method to get a certain amount of workers per machine
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

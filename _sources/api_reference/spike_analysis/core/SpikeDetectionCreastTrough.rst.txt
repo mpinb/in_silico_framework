@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SpikeDetectionCreastTrough
 ==========================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -39,57 +35,65 @@ SpikeDetectionCreastTrough
    
    Detects spikes by creast and trough amplitude.
 
-   :Parameters: * **reader_object** (:py:class:`~spike_analysis.core.ReaderSmr`|:py:class:`~spike_analysis.core.LabViewReader`) -- Reader object with get_voltage_traces and get_stim_times method, e.g. ReaderSmr
-                * **lim_creast** (*float|str*) -- threshold above which a creast of a spike is detected as such.
-                  Needs to be float, ``"minimum"``, or ``"zero"``.
-                  If "minimum" or "zero" is chosen, the threashold will be set based on the histogram of all creasts.
-                  If "minimum" is chosen, :paramref:`lim_creast` will be set to the first minimum in the histogram above or equal to :math:`0.4mV`.
-                  If "zero" is chosen, :paramref:`lim_creast` will be set to the first empty bin.
-                * **lim_trough** (*float|str*) -- want to use a negative value. lim creast and lim_trough need to be both floats, both
-                  "zero" or both "minimum".
-                * **max_creast_trough_interval** (*float*) -- Maximum interval between creast and trough such that a spike is recognized.
-                * **tdelta** (*float*) -- minimum interval between spikes
-                * **stimulus_period** (*int*) -- number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
-                * **stimulus_period_offse** (*int*) -- Number of stimulus that initiates first trial.
-                * **cellid** (*str*) -- name to be used in spike times dataframe
+   :param reader_object: Reader object with get_voltage_traces and get_stim_times method, e.g. ReaderSmr
+   :type reader_object: ~spike_analysis.core.LabViewReader
+   :param lim_creast: threshold above which a creast of a spike is detected as such.
+                      Needs to be float, ``"minimum"``, or ``"zero"``.
+                      If "minimum" or "zero" is chosen, the threashold will be set based on the histogram of all creasts.
+                      If "minimum" is chosen, :paramref:`lim_creast` will be set to the first minimum in the histogram above or equal to :math:`0.4mV`.
+                      If "zero" is chosen, :paramref:`lim_creast` will be set to the first empty bin.
+   :type lim_creast: float|str
+   :param lim_trough: want to use a negative value. lim creast and lim_trough need to be both floats, both
+                      "zero" or both "minimum".
+   :type lim_trough: float|str
+   :param max_creast_trough_interval: Maximum interval between creast and trough such that a spike is recognized.
+   :type max_creast_trough_interval: float
+   :param tdelta: minimum interval between spikes
+   :type tdelta: float
+   :param stimulus_period: number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
+   :type stimulus_period: int
+   :param stimulus_period_offse: Number of stimulus that initiates first trial.
+   :type stimulus_period_offse: int
+   :param cellid: name to be used in spike times dataframe
+   :type cellid: str
 
    :Attributes:
 
-   .. attribute:: lim_creast
+      .. attribute:: lim_creast
 
-      lim_creast used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
+         lim_creast used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
 
-      :type: float|str
+         :type: float|str
 
-   .. attribute:: lim_trough
+      .. attribute:: lim_trough
 
-      lim_trough used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
+         lim_trough used for spike detection (if "minimum" or "zero" was defined, this will be the numeric value used)
 
-      :type: float|str
+         :type: float|str
 
-   .. attribute:: st
+      .. attribute:: st
 
-      spike times dataframe, one row per trial
+         spike times dataframe, one row per trial
 
-      :type: pd.DataFrame
+         :type: pd.DataFrame
 
-   .. attribute:: spike_times
+      .. attribute:: spike_times
 
-      all extracted spike times, fullfilling creast and trough criterion, filtered such thatthe minimal ISI is above tdelta.
+         all extracted spike times, fullfilling creast and trough criterion, filtered such thatthe minimal ISI is above tdelta.
 
-      :type: list
+         :type: list
 
-   .. attribute:: _spike_times_creast
+      .. attribute:: _spike_times_creast
 
-      spike times fullfilling creast criterion
+         spike times fullfilling creast criterion
 
-      :type: list
+         :type: list
 
-   .. attribute:: _spike_times_trough
+      .. attribute:: _spike_times_trough
 
-      spike times fullfilling trough criterion
+         spike times fullfilling trough criterion
 
-      :type: list
+         :type: list
 
    :Methods:
 
@@ -120,3 +124,7 @@ SpikeDetectionCreastTrough
       * - :py:obj:`plot_creast_trough_histogram <spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram>`\ (ax)
         - skip-doc:
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

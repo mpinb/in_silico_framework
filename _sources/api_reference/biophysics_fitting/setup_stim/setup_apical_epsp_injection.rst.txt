@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim` ❭ :mod:`~biophysics_fitting.setup_stim.setup_apical_epsp_injection`
-
-
-.. title:
 
 setup_apical_epsp_injection
 ===========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.setup_stim.setup_apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
+
 
    Setup an EPSP injection at a given distance from the soma.
 
@@ -18,18 +15,23 @@ setup_apical_epsp_injection
    It checks so by means of section label: it must contain a section
    labeled "ApicalDendrite". See :py:meth:`~biophysics_fitting.utils.get_inner_section_at_distance` for more information.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **dist** (*float*) -- The distance from the soma to the injection site (um).
-                * **amplitude** (*float*) -- The amplitude of the EPSP (nA).
-                * **delay** (*float*) -- The delay of the EPSP (ms).
-                * **rise** (*float*) -- The rise time constant of the EPSP (ms).
-                * **decay** (*float*) -- The decay time constant of the EPSP (ms).
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param dist: The distance from the soma to the injection site (um).
+   :type dist: float
+   :param amplitude: The amplitude of the EPSP (nA).
+   :type amplitude: float
+   :param delay: The delay of the EPSP (ms).
+   :type delay: float
+   :param rise: The rise time constant of the EPSP (ms).
+   :type rise: float
+   :param decay: The decay time constant of the EPSP (ms).
+   :type decay: float
 
    :returns: None. Adds an EPSP injection pipette to the cell under the name 'epsp'.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

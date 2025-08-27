@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._generate_output_files`
+
+
 
 NetworkMapper._generate_output_files
 ====================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._generate_output_files(postCellName, connectivityMap, connectedCells, connectedCellsPerStructure, writeLandmarkFiles=False)
+
 
    Generates all summary files and writes output files.
 
@@ -18,12 +20,21 @@ NetworkMapper._generate_output_files
    Used by :py:meth:`~create_network_embedding_for_simulations` and
    :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
 
-   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` file.
-                * **connectivityMap** (*list*) -- Connections between presynaptic cells and postsynaptic cell of the form
-                  (cell type, presynaptic cell index, synapse index).
-                  Created by :py:meth:`_create_anatomical_connectivity_map`.
-                * **connectedCells** (*dict*) -- Dictionary of connected cells.
-                * **connectedCellsPerStructure** (*dict*) -- Dictionary of connected cells per structure.
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` file.
+   :type postCellName: str
+   :param connectivityMap: Connections between presynaptic cells and postsynaptic cell of the form
+                           (cell type, presynaptic cell index, synapse index).
+                           Created by :py:meth:`_create_anatomical_connectivity_map`.
+   :type connectivityMap: list
+   :param connectedCells: Dictionary of connected cells.
+   :type connectedCells: dict
+   :param connectedCellsPerStructure: Dictionary of connected cells per structure.
+   :type connectedCellsPerStructure: dict
 
    :returns: None. Writes output files to disk.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

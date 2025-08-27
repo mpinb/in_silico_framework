@@ -1,5 +1,7 @@
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
+
 
 L5tt_parameter_setup
 ====================
@@ -63,3 +65,7 @@ Functions
      - Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

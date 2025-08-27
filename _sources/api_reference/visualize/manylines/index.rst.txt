@@ -1,5 +1,7 @@
 
-:mod:`visualize` ❭ :mod:`~visualize.manylines`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
+
 
 manylines
 =========
@@ -37,3 +39,7 @@ Functions
      - Helper function which runs on a single core and can be called by map_partitions()
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

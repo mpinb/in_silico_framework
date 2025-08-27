@@ -1,0 +1,15 @@
+
+
+_read_n_traces
+==============
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.health._read_n_traces(vt_csv_file, sep='\t')
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

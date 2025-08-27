@@ -1,0 +1,4215 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="">
+    
+    
+      
+        <title>Reduced models - In Silico Framework</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
+        <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+        <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
+        <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/signature_links.css?v=3f2e413b" />
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#Load-multi-scale-model-simulation-data" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="In Silico Framework" class="md-header__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            In Silico Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Reduced models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../api_reference.html" class="md-tabs__link">
+      <span title="/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../tutorials.html" class="md-tabs__link md-tabs__link--active">
+      <span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../installation.html" class="md-tabs__link">
+      <span title="/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../file_formats.html" class="md-tabs__link">
+      <span title="/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../bibliography.html" class="md-tabs__link">
+      <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="In Silico Framework" class="md-nav__button md-logo" aria-label="In Silico Framework" data-md-component="logo">
+      <img src="../../_static/isf-logo-white.png" alt="logo">
+    </a>
+    In Silico Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mpinb/in_silico_framework" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    in_silico_framework
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api_reference.html" class="md-nav__link">
+        <span title="/api_reference.rst (reference label)" class="md-ellipsis">API reference</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../tutorials.html"><span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span></a>
+          
+            <label for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/tutorials.rst (reference label)" class="md-ellipsis">Tutorials</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials.html#introduction" class="md-nav__link">
+        <span title="/tutorials.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials.html#neuron-models" class="md-nav__link">
+        <span title="/tutorials.rst#neuron-models (reference label)" class="md-ellipsis">Neuron models</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials.html#network-embedded-neuron-models" class="md-nav__link">
+        <span title="/tutorials.rst#network-embedded-neuron-models (reference label)" class="md-ellipsis">Network-<wbr>embedded neuron models</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../tutorials.html#manipulations-reduced-models"><span title="/tutorials.rst#manipulations-reduced-models (reference label)" class="md-ellipsis">Manipulations &amp; reduced models</span></a>
+          
+            <label for="__nav_2_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Manipulations &amp; reduced models" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/tutorials.rst#manipulations-reduced-models (reference label)" class="md-ellipsis">Manipulations &amp; reduced models</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4.1%20Manipulations.html" class="md-nav__link">
+        <span title="/tutorials/4. analysis/4.1 manipulations.ipynb (reference label)" class="md-ellipsis">Manipulations to multiscale simulations</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/tutorials/4. analysis/4.2 reduced models.ipynb (reference label)" class="md-ellipsis">Reduced models</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/tutorials/4. analysis/4.2 reduced models.ipynb (reference label)" class="md-ellipsis">Reduced models</span>
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Load-multi-scale-model-simulation-data" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#load-multi-scale-model-simulation-data (reference label)" class="md-ellipsis">Load multi-<wbr>scale model simulation data</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load multi-scale model simulation data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Load-pre-binned-synapse-activations" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#load-pre-binned-synapse-activations (reference label)" class="md-ellipsis">Load pre-<wbr>binned synapse activations</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Visualise-MCM-responses" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#visualise-mcm-responses (reference label)" class="md-ellipsis">Visualise MCM responses</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Reduced-model-inference" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#reduced-model-inference (reference label)" class="md-ellipsis">Reduced model inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reduced model inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#RaisedCosine-basis-functions" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#raisedcosine-basis-functions (reference label)" class="md-ellipsis">Raised<wbr>Cosine basis functions</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Spatiotemporal-filter-inference" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#spatiotemporal-filter-inference (reference label)" class="md-ellipsis">Spatiotemporal filter inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatiotemporal filter inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Visualize-spatiotemporal-filters" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#visualize-spatiotemporal-filters (reference label)" class="md-ellipsis">Visualize spatiotemporal filters</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Calculate-WNI-values-with-spatiotemporal-filters" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#calculate-wni-values-with-spatiotemporal-filters (reference label)" class="md-ellipsis">Calculate WNI values with spatiotemporal filters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Nonlinearity" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#nonlinearity (reference label)" class="md-ellipsis">Nonlinearity</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ISI-dependent-penalty" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#isi-dependent-penalty (reference label)" class="md-ellipsis">ISI-<wbr>dependent penalty</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Reduced-model-simulations" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#reduced-model-simulations (reference label)" class="md-ellipsis">Reduced model simulations</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation.html" class="md-nav__link">
+        <span title="/installation.rst (reference label)" class="md-ellipsis">Installation</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../file_formats.html" class="md-nav__link">
+        <span title="/file_formats.rst (reference label)" class="md-ellipsis">File &amp; data formats</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bibliography.html" class="md-nav__link">
+        <span title="/bibliography.rst (reference label)" class="md-ellipsis">Bibliography</span>
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#Load-multi-scale-model-simulation-data" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#load-multi-scale-model-simulation-data (reference label)" class="md-ellipsis">Load multi-<wbr>scale model simulation data</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Load multi-scale model simulation data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Load-pre-binned-synapse-activations" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#load-pre-binned-synapse-activations (reference label)" class="md-ellipsis">Load pre-<wbr>binned synapse activations</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Visualise-MCM-responses" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#visualise-mcm-responses (reference label)" class="md-ellipsis">Visualise MCM responses</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Reduced-model-inference" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#reduced-model-inference (reference label)" class="md-ellipsis">Reduced model inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reduced model inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#RaisedCosine-basis-functions" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#raisedcosine-basis-functions (reference label)" class="md-ellipsis">Raised<wbr>Cosine basis functions</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Spatiotemporal-filter-inference" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#spatiotemporal-filter-inference (reference label)" class="md-ellipsis">Spatiotemporal filter inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Spatiotemporal filter inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#Visualize-spatiotemporal-filters" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#visualize-spatiotemporal-filters (reference label)" class="md-ellipsis">Visualize spatiotemporal filters</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Calculate-WNI-values-with-spatiotemporal-filters" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#calculate-wni-values-with-spatiotemporal-filters (reference label)" class="md-ellipsis">Calculate WNI values with spatiotemporal filters</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#Nonlinearity" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#nonlinearity (reference label)" class="md-ellipsis">Nonlinearity</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ISI-dependent-penalty" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#isi-dependent-penalty (reference label)" class="md-ellipsis">ISI-<wbr>dependent penalty</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#Reduced-model-simulations" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.2 reduced models.ipynb#reduced-model-simulations (reference label)" class="md-ellipsis">Reduced model simulations</span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+<h1 id="Reduced-models">Reduced models<a class="headerlink" href="#Reduced-models" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>The enormous complexity of biophysically detailed multi-compartmental models at network-level generally prevents the derivation of interpretable descriptions that explain how neurons transform synaptic input into action potential output, and how these input-output computations depend on synaptic, cellular and network properties. Here we introduce an approach to reveal input-output computations that neurons in the cerebral cortex perform upon sensory stimulation. A realistic multi-scale cortex
+model is reduced to the minimal description that accounts for in vivo observed responses.</p>
+<p><a class="reference external" href="https://doi.org/10.1371/journal.pcbi.1011468">Bast, Fruengel et al. (2024)</a></p>
+</div></blockquote>
+<p>This tutorial will show how these complex multiscale models can be reduced to the minimum set of parameters that are required to explain the receptive field and latency of responses of L5PTs under the <em>in vivo</em> conditions covered in the previous examples.</p>
+<p>Adapt the path below to where you saved the data folder from <a class="reference external" href="https://doi.org/10.7910/DVN/QV7JIF">https://doi.org/10.7910/DVN/QV7JIF</a> (download from Harvard Dataverse)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>BASEDIR = &#39;/path/where/you/saved/data/&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># append code repository to pythonpath
+import sys
+sys.path.append(BASEDIR + &#39;code&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># import from python ecosystem
+import numpy as np
+import pandas as pd
+import os
+import matplotlib.pyplot as plt
+from functools import partial
+import dask
+from collections import defaultdict
+from functools import partial
+import distributed
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>%matplotlib inline
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>from data_base import DataBase
+from visualize.histogram import histogram
+from visualize.rasterplot import rasterplot
+from data_base.analyze.temporal_binning import temporal_binning_pd
+
+import Interface as I
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># set up a dask cluster as described here: https://distributed.dask.org/en/stable/quickstart.html
+client = I.get_client()
+client
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table style="border: 2px solid white;">
+<tr>
+<td style="vertical-align: top; border: 0px solid white">
+<h3>Client</h3>
+<ul>
+  <li><b>Scheduler: </b>tcp://130.183.178.97:28786
+  <li><b>Dashboard: </b><a href='http://130.183.178.97:28787/status' target='_blank'>http://130.183.178.97:28787/status</a>
+</ul>
+</td>
+<td style="vertical-align: top; border: 0px solid white">
+<h3>Cluster</h3>
+<ul>
+  <li><b>Workers: </b>20</li>
+  <li><b>Cores: </b>20</li>
+  <li><b>Memory: </b>2.00 TB</li>
+</ul>
+</td>
+</tr>
+</table></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>whiskers = [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;C1&#39;, &#39;C2&#39;, &#39;C3&#39;, &#39;D1&#39;, &#39;D2&#39;, &#39;D3&#39;, &#39;E2&#39;]
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>models = range(1,8)
+</code></pre></div>
+</div>
+</div>
+<h2 id="Load-multi-scale-model-simulation-data">Load multi-scale model simulation data<a class="headerlink" href="#Load-multi-scale-model-simulation-data" title="Link to this heading">¶</a></h2>
+<h3 id="Load-pre-binned-synapse-activations">Load pre-binned synapse activations<a class="headerlink" href="#Load-pre-binned-synapse-activations" title="Link to this heading">¶</a></h3>
+<p>This is the synaptic input received by the multi-compartmental model (MCM) in principal whisker simulations. Another visualisation of this input can be seen in Fig. 1F, where the spatial distribution is also shown.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[15]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>model = 1
+whisker = &#39;C2&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># each compressed numpy archive contains a single numpy array
+sa = np.load(BASEDIR + &quot;model_{}__binned_synapse_activations_spatiotemporal_EI__{}.npz&quot;.format(model, whisker))
+sa = sa[&#39;arr_0&#39;]
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>sa.shape # (excitatory/inhibitory, spatial bins, trials, temporal bins)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(2, 30, 81000, 400)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>saexc = sa[0, :, :, :]
+sainh = sa[1, :, :, :]
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[19]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># get mean count of active synapses onto the whole neuron in each timebin
+saexc_mean = saexc.sum(axis = 0).mean(axis = 0)
+sainh_mean = sainh.sum(axis = 0).mean(axis = 0)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>fig = plt.figure(figsize = (8, 3))
+ax = fig.add_subplot(1,1,1)
+histogram((list(range(401)), saexc_mean), fig = ax, label = &#39;excitatory&#39;, colormap = {&#39;excitatory&#39;:&#39;red&#39;})
+histogram((list(range(401)), sainh_mean * -1), fig = ax, label = &#39;inhibitory&#39;, colormap = {&#39;inhibitory&#39;:&#39;navy&#39;})
+plt.xlim(0, 345)
+plt.ylabel(&#39;number of active synapses&#39;)
+plt.legend(bbox_to_anchor = (1.3,1))
+plt.xlabel(&#39;time (ms)&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.text.Text at 0x2b97bd46b910&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_19_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_19_1.png" />
+</div>
+</div>
+<h3 id="Visualise-MCM-responses">Visualise MCM responses<a class="headerlink" href="#Visualise-MCM-responses" title="Link to this heading">¶</a></h3>
+<p>These are the responses of the MCM to the above synaptic input (also shown in Fig. 1I).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>model = 1
+whisker = &#39;C2&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[22]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># load spike times for a principal whisker stimulus
+st = pd.read_csv(BASEDIR + &quot;model_{}__spike_times_MCM__{}.csv&quot;.format(model, whisker))
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[45]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the sensory stimulus was always applied at 245 ms, because
+# the multi-compartmental model needs some time from initialisation to reach a steady state
+# therefore the first 150 ms of each simulation should be discarded - spikes in this period are initialisation artefacts
+ax = plt.gca()
+histogram(temporal_binning_pd(st, min_time = 0, max_time = 345, bin_size = 1), fig = ax)
+plt.ylabel(&#39;AP probability&#39;)
+plt.xlabel(&#39;time (ms)&#39;)
+plt.title(&#39;average whisker stimulus response (MCM)&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[45]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.text.Text at 0x2b448b48f050&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_24_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_24_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[48]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>ax = plt.gca()
+rasterplot(st[4000:6000], fig = ax)
+plt.xlabel(&#39;time (ms)&#39;)
+plt.ylabel(&#39;trial index&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[48]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.text.Text at 0x2b448b557b90&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_25_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_25_1.png" />
+</div>
+</div>
+<h2 id="Reduced-model-inference">Reduced model inference<a class="headerlink" href="#Reduced-model-inference" title="Link to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[16]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># we will store all the parameters of the reduced models in a dictionary
+# here we show how to make a reduced model from one exemplary multi-compartmental model
+# the procedure was repeated for all 7 MCMs
+rm_dict = {}
+rm_dict[model] = {}
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>import modular_reduced_model_inference
+from modular_reduced_model_inference import RaisedCosineBasis
+</code></pre></div>
+</div>
+</div>
+<h3 id="RaisedCosine-basis-functions">RaisedCosine basis functions<a class="headerlink" href="#RaisedCosine-basis-functions" title="Link to this heading">¶</a></h3>
+<p>The spatial and temporal filters are composed of a set of basis functions:</p>
+<p><span class="math notranslate nohighlight">\(w_\tau = \sum_i x_i f_i(\tau) = \mathbf{x} \cdot \mathbf{f}(\tau)\)</span></p>
+<p><span class="math notranslate nohighlight">\(w_z = \sum_i y_i g_i(z) = \mathbf{y} \cdot \mathbf{g}(z)\)</span></p>
+<p>Here, <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are learnable parameters, and <span class="math notranslate nohighlight">\(\mathbf{f}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{g}\)</span> are vectors of basis functions. These basis functions are raised cosines, which have the following form:</p>
+<p><span class="math notranslate nohighlight">\(f(x) = \frac{1}{2}cos(a \cdot log[x+c] - \phi_i) + \frac{1}{2}\)</span></p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(a\)</span>, <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> are set depending on the required resolution. note that <span class="math notranslate nohighlight">\(\phi_i\)</span> has a different value depending on the basis vector index.</div>
+<div class="line">The spatial filters need resolution close to the soma, so <span class="math notranslate nohighlight">\(a=3\)</span>, <span class="math notranslate nohighlight">\(c=5\)</span> (see visualizations below), and we only require <span class="math notranslate nohighlight">\(6\)</span> basis vectors.</div>
+<div class="line">Temporal filters need resolution close to the AP onset, so <span class="math notranslate nohighlight">\(a=2\)</span>, <span class="math notranslate nohighlight">\(c=1\)</span> (see visualizations below), and as we need more resolution, we have <span class="math notranslate nohighlight">\(20\)</span> basis vectors.</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[18]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>RaisedCosineBasis_spatial = modular_reduced_model_inference.RaisedCosineBasis(a = 3, c = 5, phis = np.arange(3,12, 1.5), width = 30, reversed_ = False)
+RaisedCosineBasis_temporal = modular_reduced_model_inference.RaisedCosineBasis(a = 2, c = 1, phis = np.arange(1,11, 0.5), width = 80, reversed_ = True)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[19]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the basis functions for the spatial filters
+# the weight applied to each of these functions is the target of the optimiser
+RaisedCosineBasis_spatial.visualize(plot_kwargs={&#39;c&#39;: &#39;k&#39;, &#39;alpha&#39;: 1})
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_31_0.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_31_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[20]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the basis functions for the temporal filters
+RaisedCosineBasis_temporal.visualize(plot_kwargs={&#39;c&#39;: &#39;k&#39;, &#39;alpha&#39;: 1})
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_32_0.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_32_0.png" />
+</div>
+</div>
+<h3 id="Spatiotemporal-filter-inference">Spatiotemporal filter inference<a class="headerlink" href="#Spatiotemporal-filter-inference" title="Link to this heading">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># we also provide precomputed spatiotemporal filters for all models used in our paper
+# which are visualized in the next section
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[22]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>model = 1
+whiskers = [&#39;C2&#39;] # it is also possible to infer reduced models from only a subset of the data. We use this here as an example,
+# with only the principal (C2) whisker. To run inference on the full dataset, uncomment the line below:
+# whiskers = [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;C1&#39;, &#39;C2&#39;, &#39;C3&#39;, &#39;D1&#39;, &#39;D2&#39;, &#39;D3&#39;, &#39;E2&#39;]
+# be aware that a large amount of RAM is necessary to handle the full dataset
+
+mdb_list = []
+for whisker in whiskers:
+    mdb_list.append({&#39;spike_times&#39;: BASEDIR + &quot;model_{}__spike_times_MCM__{}.csv&quot;.format(model, whisker),
+           &#39;binned_synapse_activation&#39;:BASEDIR + &quot;model_{}__binned_synapse_activations_spatiotemporal_EI__{}.npz&quot;.format(model, whisker)})
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[24]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># this cell takes a few minutes to run as it loads and uncompresses all the MCM simulation data
+# uncompression takes a long time so you may want to save the uncompressed array in case you want to use it again
+name = &#39;test&#39;
+rm = modular_reduced_model_inference.Rm(name,
+    mdb = mdb_list,
+    tmin = 260, #timepoint_of_max_response
+    tmax = 261, #timepoint_of_max_response+1
+    width = 80)
+
+# make simulation data available to the reduced model
+D = modular_reduced_model_inference.DataExtractor_spatiotemporalSynapseActivation
+rm.add_data_extractor(&#39;spatiotemporalSa&#39;, D())
+rm.add_data_extractor(&#39;st&#39;, modular_reduced_model_inference.DataExtractor_spiketimes())
+rm.add_data_extractor(&#39;y&#39;, modular_reduced_model_inference.DataExtractor_spikeInInterval())
+rm.add_data_extractor(&#39;ISI&#39;, modular_reduced_model_inference.DataExtractor_ISI())
+</code></pre></div>
+</div>
+</div>
+<p>The code above made the data available to the reduced model object, and cropped out data w.r.t. the selected timepoints</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[25]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>st = rm.data_extractors[&#39;st&#39;].get() # spike times
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[26]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the reduced model considers spike times up to tmax
+ax = plt.gca()
+histogram(temporal_binning_pd(st), fig = ax)
+plt.ylabel(&#39;AP probability&#39;)
+plt.xlabel(&#39;time (ms)&#39;)
+plt.title(&#39;average whisker stimulus response (MCM)&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[26]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.text.Text at 0x2b3c506b9e10&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_39_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_39_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[27]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># define a strategy which evaluates simulation trials based on spatiotemporal filters
+RaisedCosineBasis_spatial = RaisedCosineBasis(a = 3, c = 5, phis = np.arange(3,12, 1.5), width = 30, reversed_ = False)
+RaisedCosineBasis_temporal = RaisedCosineBasis(a = 2, c = 1, phis = np.arange(1,11, 0.5), width = 80, reversed_ = True)
+len_z = len(RaisedCosineBasis_spatial.phis) # number of parameters of the spatial filter
+len_t = len(RaisedCosineBasis_temporal.phis)  # number of parameters of the temporal filter
+strategy = modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine(&#39;SAspatiotemporalRaisedCosine&#39;, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal)
+
+rm.add_strategy(strategy)
+
+# add solver
+solver = modular_reduced_model_inference.Solver_COBYLA(&#39;cobyla&#39;)
+strategy.add_solver(solver)
+
+for lv in range(3): # make 3 random train/test splits
+    # rm.DataSplitEvaluation.add_random_split(&#39;.7_{}&#39;.format(lv), percentage_train=.7)
+    rm.DataSplitEvaluation.add_isi_dependent_random_split(&#39;ISI50_.7_{}&#39;.format(lv),min_isi = 50, percentage_train=.7)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[28]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>for lv in range(3):
+    rm.run(client)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+starting remote optimization SAspatiotemporalRaisedCosine cobyla
+starting remote optimization SAspatiotemporalRaisedCosine cobyla
+starting remote optimization SAspatiotemporalRaisedCosine cobyla
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[30]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>result_df = rm.get_results(client)
+# If you get ValueError: Only one class present in y_true. ROC AUC score is not defined in that case, it means that the
+# reduced model failed (this happens for example due to a lack of spikes in the interval used for inference)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[31]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>result_df
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[31]:
+</code></pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>score</th>
+      <th>success</th>
+      <th>x</th>
+    </tr>
+    <tr>
+      <th>strategy</th>
+      <th>solver</th>
+      <th>split</th>
+      <th>subsplit</th>
+      <th>run</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="36" valign="top">SAspatiotemporalRaisedCosine</th>
+      <th rowspan="36" valign="top">cobyla</th>
+      <th rowspan="12" valign="top">ISI50_.7_0</th>
+      <th rowspan="3" valign="top">subtest1</th>
+      <th>0</th>
+      <td>-0.992066</td>
+      <td>False</td>
+      <td>[0.959447821583, 0.127607023899, 1.0997403028,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.993329</td>
+      <td>False</td>
+      <td>[4.94194310094, 4.53524909301, 2.72658190132, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.992040</td>
+      <td>False</td>
+      <td>[3.21385300474, 0.511869924346, 1.29909420539,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">subtest2</th>
+      <th>0</th>
+      <td>-0.989921</td>
+      <td>False</td>
+      <td>[0.959447821583, 0.127607023899, 1.0997403028,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.990491</td>
+      <td>False</td>
+      <td>[4.94194310094, 4.53524909301, 2.72658190132, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.989427</td>
+      <td>False</td>
+      <td>[3.21385300474, 0.511869924346, 1.29909420539,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">test</th>
+      <th>0</th>
+      <td>-0.991523</td>
+      <td>False</td>
+      <td>[0.959447821583, 0.127607023899, 1.0997403028,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.992149</td>
+      <td>False</td>
+      <td>[4.94194310094, 4.53524909301, 2.72658190132, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.991154</td>
+      <td>False</td>
+      <td>[3.21385300474, 0.511869924346, 1.29909420539,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">train</th>
+      <th>0</th>
+      <td>-0.984188</td>
+      <td>False</td>
+      <td>[0.959447821583, 0.127607023899, 1.0997403028,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.985860</td>
+      <td>False</td>
+      <td>[4.94194310094, 4.53524909301, 2.72658190132, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.983728</td>
+      <td>False</td>
+      <td>[3.21385300474, 0.511869924346, 1.29909420539,...</td>
+    </tr>
+    <tr>
+      <th rowspan="12" valign="top">ISI50_.7_1</th>
+      <th rowspan="3" valign="top">subtest1</th>
+      <th>0</th>
+      <td>-0.992268</td>
+      <td>False</td>
+      <td>[0.617738981647, 4.44972179139, -0.15160990483...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.991068</td>
+      <td>False</td>
+      <td>[-0.917824891731, 1.87739540229, 0.20091202048...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.990466</td>
+      <td>False</td>
+      <td>[2.37342377281, 1.06038573381, 0.254391539931,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">subtest2</th>
+      <th>0</th>
+      <td>-0.990166</td>
+      <td>False</td>
+      <td>[0.617738981647, 4.44972179139, -0.15160990483...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.989424</td>
+      <td>False</td>
+      <td>[-0.917824891731, 1.87739540229, 0.20091202048...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.987997</td>
+      <td>False</td>
+      <td>[2.37342377281, 1.06038573381, 0.254391539931,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">test</th>
+      <th>0</th>
+      <td>-0.991684</td>
+      <td>False</td>
+      <td>[0.617738981647, 4.44972179139, -0.15160990483...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.990862</td>
+      <td>False</td>
+      <td>[-0.917824891731, 1.87739540229, 0.20091202048...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.989854</td>
+      <td>False</td>
+      <td>[2.37342377281, 1.06038573381, 0.254391539931,...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">train</th>
+      <th>0</th>
+      <td>-0.985018</td>
+      <td>False</td>
+      <td>[0.617738981647, 4.44972179139, -0.15160990483...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.982940</td>
+      <td>False</td>
+      <td>[-0.917824891731, 1.87739540229, 0.20091202048...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.981275</td>
+      <td>False</td>
+      <td>[2.37342377281, 1.06038573381, 0.254391539931,...</td>
+    </tr>
+    <tr>
+      <th rowspan="12" valign="top">ISI50_.7_2</th>
+      <th rowspan="3" valign="top">subtest1</th>
+      <th>0</th>
+      <td>-0.992971</td>
+      <td>True</td>
+      <td>[-1.17808668604, -2.90042159759, -0.4544114625...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.992882</td>
+      <td>True</td>
+      <td>[-0.397515253276, -1.95891392491, -0.561910247...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.992944</td>
+      <td>False</td>
+      <td>[1.67019871925, 2.8916096642, 2.52633336423, -...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">subtest2</th>
+      <th>0</th>
+      <td>-0.990368</td>
+      <td>True</td>
+      <td>[-1.17808668604, -2.90042159759, -0.4544114625...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.990534</td>
+      <td>True</td>
+      <td>[-0.397515253276, -1.95891392491, -0.561910247...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.990600</td>
+      <td>False</td>
+      <td>[1.67019871925, 2.8916096642, 2.52633336423, -...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">test</th>
+      <th>0</th>
+      <td>-0.991989</td>
+      <td>True</td>
+      <td>[-1.17808668604, -2.90042159759, -0.4544114625...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.992090</td>
+      <td>True</td>
+      <td>[-0.397515253276, -1.95891392491, -0.561910247...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.992083</td>
+      <td>False</td>
+      <td>[1.67019871925, 2.8916096642, 2.52633336423, -...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">train</th>
+      <th>0</th>
+      <td>-0.985961</td>
+      <td>True</td>
+      <td>[-1.17808668604, -2.90042159759, -0.4544114625...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.985813</td>
+      <td>True</td>
+      <td>[-0.397515253276, -1.95891392491, -0.561910247...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.985702</td>
+      <td>False</td>
+      <td>[1.67019871925, 2.8916096642, 2.52633336423, -...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<h4 id="Visualize-spatiotemporal-filters">Visualize spatiotemporal filters<a class="headerlink" href="#Visualize-spatiotemporal-filters" title="Link to this heading">¶</a></h4>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[33]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>RaisedCosineBasis_spatial = RaisedCosineBasis(a = 3, c = 5, phis = np.arange(3,12, 1.5), width = 30, reversed_ = False)
+RaisedCosineBasis_temporal = RaisedCosineBasis(a = 2, c = 1, phis = np.arange(1,11, 0.5), width = 80, reversed_ = True)
+strategy = modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine(
+    &#39;SAspatiotemporalRaisedCosine&#39;,
+    RaisedCosineBasis_spatial,
+    RaisedCosineBasis_temporal)
+# manually do what happens in rm.add_strategy(strategy) in order to get the shape of the basis functions
+# this avoids having to load in the dataset
+strategy.len_z = len(RaisedCosineBasis_spatial.phis) # number of parameters of the spatial filter
+strategy.len_t = len(RaisedCosineBasis_temporal.phis)  # number of parameters of the temporal filter
+strategy.groups = [(&#39;EXC&#39;,), (&#39;INH&#39;,)] # excitatory and inhibitory
+strategy.convert_x = partial(strategy._convert_x_static, strategy.groups, strategy.len_z)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[34]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the reduced model filters have one unconstrained parameter: they can be multiplied by a scalar
+# normalize such that excitatory weight in the spatial filter at soma distance 0 is 1
+strategy.visualize(result_df, normalize = True)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_46_0.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_46_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[35]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># visualize models before normalization
+strategy.visualize(result_df, normalize = False)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_47_0.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_47_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[36]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># get numerical values of kernels visualized above
+index_best_model = result_df.score.argmin()
+spatiotemporal_filters = strategy.get_kernel_dict(result_df.loc[index_best_model].x, normalize = True)
+spatiotemporal_filters
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[36]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;s_exc&#39;: array([ 0.99999994,  0.83999312,  0.67933828,  0.54754567,  0.42797816,
+         0.32122907,  0.23403572,  0.16860136,  0.12514773,  0.09235044,
+         0.06582323,  0.04554006,  0.03117438,  0.02222843,  0.01811939,
+         0.01823592,  0.02197397,  0.0273118 ,  0.03221476,  0.03664161,
+         0.04057404,  0.04400725,  0.04694676,  0.04940576,  0.05140304,
+         0.05296133,  0.05410602,  0.05486407,  0.05526331,  0.05533172], dtype=float32),
+ &#39;s_inh&#39;: array([  7.93388784e-01,   6.80935025e-01,   5.25943398e-01,
+          3.73791099e-01,   2.47634768e-01,   1.55127957e-01,
+          9.60600004e-02,   6.68410510e-02,   6.18851073e-02,
+          6.21100441e-02,   6.06311373e-02,   5.78291751e-02,
+          5.40423021e-02,   4.95610572e-02,   4.46290970e-02,
+          3.94468531e-02,   3.41763236e-02,   2.90312413e-02,
+          2.42002122e-02,   1.97337605e-02,   1.56642124e-02,
+          1.20097343e-02,   8.77735205e-03,   5.96547779e-03,
+          3.56593728e-03,   1.56562449e-03,  -5.21633774e-05,
+         -1.30666094e-03,  -2.21877987e-03,  -2.81043258e-03], dtype=float32),
+ &#39;t_exc&#39;: array([-0.02400237, -0.02032194, -0.01662141, -0.01290308, -0.00916938,
+        -0.00542588, -0.00174317,  0.00184482,  0.0053307 ,  0.00870685,
+         0.01196511,  0.01509703,  0.01809369,  0.02094587,  0.02364372,
+         0.02617702,  0.02853503,  0.0307065 ,  0.03267968,  0.0344422 ,
+         0.03598117,  0.03728301,  0.03837968,  0.03944859,  0.04050721,
+         0.04155323,  0.04258426,  0.04359765,  0.04459048,  0.04555977,
+         0.04650225,  0.04741433,  0.04829218,  0.04913172,  0.04992854,
+         0.05067915,  0.05138324,  0.05203624,  0.05263265,  0.05316664,
+         0.05363193,  0.05403322,  0.05440999,  0.05476375,  0.0550912 ,
+         0.05543467,  0.05603194,  0.05693725,  0.05817533,  0.05977213,
+         0.06172585,  0.06401034,  0.06664608,  0.06978153,  0.07385685,
+         0.07898357,  0.085251  ,  0.09283666,  0.10192585,  0.11262625,
+         0.12500095,  0.13914779,  0.15533496,  0.17417821,  0.19665515,
+         0.22482018,  0.25910693,  0.29907584,  0.34764871,  0.40801415,
+         0.48474893,  0.58128369,  0.69691992,  0.82134211,  0.9336347 ,
+         1.        ,  0.97017372,  0.79743534,  0.46252084, -0.02363155], dtype=float32),
+ &#39;t_inh&#39;: array([-0.04599673, -0.04736574, -0.04880098, -0.05030387, -0.05187581,
+        -0.05352015, -0.05528356, -0.05718811, -0.05923788, -0.06143703,
+        -0.06378973, -0.06630028, -0.06897295, -0.07181212, -0.07482215,
+        -0.07800741, -0.08137235, -0.08492143, -0.08865899, -0.09258938,
+        -0.09671696, -0.10104594, -0.10560232, -0.11048119, -0.11570197,
+        -0.12127499, -0.12721042, -0.13351859, -0.14020956, -0.14729342,
+        -0.15477996, -0.16267864, -0.17099871, -0.17974874, -0.18893673,
+        -0.19859833, -0.20884515, -0.21970053, -0.23117824, -0.24329092,
+        -0.2560496 , -0.269458  , -0.28349999, -0.29817542, -0.31348261,
+        -0.3294391 , -0.34615639, -0.3636474 , -0.38190308, -0.40090674,
+        -0.42065942, -0.44117498, -0.46241164, -0.48448306, -0.50787866,
+        -0.53262049, -0.55867487, -0.58596104, -0.61436367, -0.64381152,
+        -0.6744687 , -0.70618039, -0.73851043, -0.77058583, -0.80224133,
+        -0.83385348, -0.8649801 , -0.89593261, -0.92658406, -0.956218  ,
+        -0.98191792, -0.9982118 , -1.00000012, -0.98073751, -0.92507899,
+        -0.81327784, -0.63900936, -0.38829231, -0.06644553,  0.14063495], dtype=float32)}
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[37]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>rm_dict[model][&#39;spatiotemporal_filters&#39;] = spatiotemporal_filters
+</code></pre></div>
+</div>
+</div>
+<h3 id="Calculate-WNI-values-with-spatiotemporal-filters">Calculate WNI values with spatiotemporal filters<a class="headerlink" href="#Calculate-WNI-values-with-spatiotemporal-filters" title="Link to this heading">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[86]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># calculate all the WNI values at relevant timepoints - we will need them again to estimate the ISI-dependent penalty
+@dask.delayed
+def calculate_WNI_values(sa_file, kernel_dict, model, whisker, outdir):
+
+    timebins = len(range(220, 271))
+
+    sa = np.load(sa_file)
+    sa = sa[&#39;arr_0&#39;]
+    n_cells = sa.shape[2]
+    WNI_df = pd.DataFrame(index = range(n_cells), columns = range(220, 271))
+    SAexc = sa[0,:,:,:]
+    SAinh = sa[1,:,:,:]
+
+
+    SAexc = np.asarray(SAexc)
+    SAinh = np.asarray(SAinh)
+
+    s_exc = kernel_dict[&#39;s_exc&#39;]
+    s_inh = kernel_dict[&#39;s_inh&#39;]
+    t_exc = kernel_dict[&#39;t_exc&#39;]
+    t_inh = kernel_dict[&#39;t_inh&#39;]
+
+
+
+    SAinh_cumulative = np.ndarray((n_cells, 400))
+    SAexc_cumulative = np.ndarray((n_cells, 400))
+
+    for t, timebin in enumerate(range(220-80, 271)): # for all timebins relevant to period of interest
+        ## get excitatory and inhibitory input, spatially binned for the CURRENT timebin
+        SAexc_timebin = SAexc[:, :, timebin]
+        SAinh_timebin = SAinh[:, :, timebin]
+
+        ## apply spatial kernel to the current timebin
+        SAexc_timebin = sum([o*s for o, s in zip(SAexc_timebin, s_exc)])
+        SAinh_timebin = sum([o*s for o, s in zip(SAinh_timebin, s_inh)])
+
+
+
+        for cell in range(n_cells):
+            SAinh_cumulative[cell][timebin] = SAinh_timebin[cell]
+            SAexc_cumulative[cell][timebin] = SAexc_timebin[cell]
+
+
+
+    ## apply temporal kernel to timebins of interest
+    for t, timebin in enumerate(range(220, 271)):
+#         print timebin
+        for cell in range(n_cells):
+
+            SAexc_window = SAexc_cumulative[cell][timebin-79:timebin+1]
+            SAinh_window = SAinh_cumulative[cell][timebin-79:timebin+1]
+
+
+
+            SAexc_window = sum([o*s for o, s in zip(SAexc_window, t_exc)])
+            SAinh_window = sum([o*s for o, s in zip(SAinh_window, t_inh)])
+
+            ## get weighted net input for each cell
+            WNI = SAexc_window + SAinh_window
+            WNI_df.iloc[cell, t] = WNI
+    name = &#39;model_{}__{}.csv&#39;.format(model, whisker)
+    WNI_df.to_csv(outdir + name)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># we provide WNI values for the exemplary spatiotemporal filters generated in this notebook under the following key:
+outdir = BASEDIR + &#39;precalculated_WNI_values__model_1__C2&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[72]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># to calculate them yourself, make a folder to store them in:
+outdir = BASEDIR + &#39;precalculated_WNI_values/&#39;
+os.mkdir(outdir)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[87]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># takes about 20 mins per whisker on a single core
+delayeds = []
+index = []
+
+for whisker in whiskers:
+    sa_file = BASEDIR + &quot;model_{}__binned_synapse_activations_spatiotemporal_EI__{}.npz&quot;.format(model, whisker)
+    d = calculate_WNI_values(sa_file, spatiotemporal_filters, model, whisker, outdir)
+    delayeds.append(d)
+    index.append((model, whisker))
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[88]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># to prevent memory issues - each worker will load around 25GB of data
+# adjust the number of cores working per node according to your memory limits
+workers_per_node = 5
+from itertools import groupby
+workers = client.scheduler_info()[&#39;workers&#39;].keys()
+workers = sorted(workers, key = lambda x: x.split(&#39;:&#39;)[1])
+w = [list(w)[:workers_per_node] for group, w in groupby(workers, lambda x: x.split(&#39;:&#39;)[1])]
+w = [w for w in w for w in w]
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[89]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>futures = client.compute(delayeds, workers=w)
+</code></pre></div>
+</div>
+</div>
+<h3 id="Nonlinearity">Nonlinearity<a class="headerlink" href="#Nonlinearity" title="Link to this heading">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[91]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>def group_bins(helper_df, min_items = 10):
+    # https://codereview.stackexchange.com/questions/12753/taking-the-first-few-items-of-a-list-until-a-target-sum-is-exceeded/12759
+
+    total_items = 0
+    rows_to_group = []
+    groupings = []
+
+    for row in range(len(helper_df.index)):
+
+        items = helper_df.iloc[row, 3]
+        total_items += items # keep a running total of number of datapoints
+        rows_to_group.append(row)
+
+        if total_items &gt;= min_items: # once we have enough datapoints, save the grouping and continue
+            total_items = 0
+            groupings.append(rows_to_group)
+            rows_to_group = []
+
+        elif row == range(len(helper_df.index))[-1]: # or if it&#39;s the last bin, which might get skipped otherwise
+            groupings.append([row])
+
+    # check if the last bin is too small, merge with second to last if it is
+    last_binsize = 0
+    for row in groupings[-1]:
+        last_binsize += helper_df.iloc[row, 3]
+
+    if last_binsize &lt; min_items:
+        new_grouping = groupings[:-2]
+        last_bins = groupings[-2:]
+        new_grouping.append([i for sublist in last_bins for i in sublist])
+        groupings = new_grouping
+
+    return groupings
+
+def signchange(x,y):
+    if x / abs(x) == y / abs(y):
+        return False
+    else:
+        return True
+
+def linear_interpolation_between_pairs(X,Y, x, top = &#39;inf&#39;, bottom = &#39;min&#39;):
+    if x &gt; max(X):
+        if top == &#39;inf&#39;:
+            result = np.inf
+        elif top == &#39;max&#39;:
+            result = max(Y)
+    elif x &lt; min(X):
+        if bottom == &#39;inf&#39;:
+            result = -np.inf
+        elif bottom == &#39;min&#39;:
+            result = min(Y)
+    elif float(x) in X: # don&#39;t need to interpolate, causes assertion error
+        result = Y[X.index(x)]
+    else:
+        pair = [lv for lv in range(len(X)-1) if signchange(X[lv]-x, X[lv+1]-x)]
+#         X[lv] &lt;= x &lt; X[lv + 1]]
+        assert(len(pair) == 1)
+        pair = pair[0]
+        m = (Y[pair+1]-Y[pair]) / (X[pair+1]-X[pair])
+        c = Y[pair]-X[pair]*m
+
+        result = m*x+c
+    return result
+
+def variable_stepsize_nonlinearity(wni_values, spike_times, spike_before = None, lookup_series_stepsize = 3, min_items = 10):
+    pdf2 = pd.DataFrame(dict(wni_values = wni_values, spike = spike_times))
+    if spike_before is not None:
+        pdf = pdf2[~spike_before]
+    else:
+        pdf = pdf2
+
+    bins = range(int(np.floor(pdf[&#39;wni_values&#39;].min())), int(np.floor(pdf[&#39;wni_values&#39;].max())) + lookup_series_stepsize + 1, lookup_series_stepsize)
+    pdf[&#39;bin&#39;] = pd.cut(pdf[&#39;wni_values&#39;], bins, include_lowest=True)
+
+    helper_df = pd.DataFrame()
+
+    edges = []
+    spike_prob = []
+    n_items = []
+    spikes = []
+    for b in set(pdf[&#39;bin&#39;]):
+        b_pdf = pdf[pdf[&#39;bin&#39;] == b]
+        n_items.append(len(b_pdf))
+        edges.append(int(b.split(&#39;,&#39;)[0][1:]))
+        spike_prob.append(np.mean(b_pdf[&#39;spike&#39;]))
+        spikes.append(list(b_pdf[&#39;spike&#39;]))
+
+    helper_df[&#39;bin_start&#39;] = edges
+    helper_df[&#39;spike_prob&#39;] = spike_prob
+    helper_df[&#39;spikes&#39;] = spikes
+    helper_df[&#39;n_items&#39;] = n_items
+    helper_df.sort_values(&#39;bin_start&#39;, inplace = True)
+
+    bin_groupings = group_bins(helper_df, min_items = min_items)
+    new_df = pd.DataFrame(columns = [&#39;bin_start&#39;, &#39;spike_prob&#39;], index = range(len(bin_groupings)))
+
+    bin_starts = []
+    spike_probs = []
+    for g in bin_groupings:
+        if len(g) == 1:
+            bin_starts.append(helper_df.iloc[g[0], 0])
+            spike_probs.append(helper_df.iloc[g[0], 1])
+        else:
+            bin_starts.append(helper_df.iloc[g[0], 0])
+            spikes = []
+            for row in g:
+                spikes.append(helper_df.iloc[row, 2])
+
+            spikes = [i for sublist in spikes for i in sublist]
+            assert len(spikes) &gt;= min_items
+            spike_probs.append(np.mean(spikes))
+
+
+    points = []
+    for n, b in enumerate(bin_starts):
+        midpoint = b + (lookup_series_stepsize * len(bin_groupings[n]))/2.
+        points.append((midpoint, spike_probs[n]))
+
+    points = sorted(points)
+    x_points = [p[0] for p in points]
+    y_points = [p[1] for p in points]
+
+    diff = max(x_points) - min(x_points)
+    index = np.arange(int(min(x_points) - 0.3 * diff), int(max(x_points) + 0.3 * diff))
+
+    LUT = pd.Series(index = index)
+    for i in index:
+        LUT[i] = linear_interpolation_between_pairs(x_points,y_points, i, top = &#39;max&#39;)
+
+    return LUT
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[92]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>from model_data_base.analyze.spike_detection import spike_in_interval
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>outdir = BASEDIR + &#39;precalculated_WNI_values/&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[95]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>rm_inference_timepoint = 260
+WNI_df = []
+spike_times_df = []
+for whisker in whiskers:
+    spike_times_df.append(pd.read_csv(BASEDIR + &quot;/{}/spike_times_MCM/{}.csv&quot;.format(model, whisker)))
+
+     # adapt according to where you saved (this loads the provided precalculated WNI values for C2 whisker)
+    WNI_df.append(pd.read_csv(&#39;precalculated_WNI_values__model_1__{}&#39;.format(whisker)))
+
+#     key = &#39;{}__{}.csv&#39;.format(model, whisker)
+#     WNI_df.append(pd.read_csv(outdir + key))
+
+WNI_df = pd.concat(WNI_df)
+spike_times_df = pd.concat(spike_times_df)
+
+
+tdf = WNI_df.loc[:, str(rm_inference_timepoint)]
+wni_values = np.asarray(tdf)
+spike_times = np.asarray(spike_in_interval(spike_times_df, rm_inference_timepoint, rm_inference_timepoint + 1))
+assert len(wni_values) == len(spike_times)
+
+rp = 15 # filter out trials with a spike in the last X ms
+spike_before =  np.asarray(spike_in_interval(spike_times_df, rm_inference_timepoint - rp, rm_inference_timepoint))
+
+nonlinearity = variable_stepsize_nonlinearity(wni_values, spike_times, spike_before = spike_before)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/axon/scratch/rfruengel/anaconda2_isf/lib/python2.7/site-packages/ipykernel/__main__.py:73: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[96]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>plt.plot(nonlinearity)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[96]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x2b3c4fe4ce90&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_62_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_62_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[97]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>rm_dict[model][&#39;nonlinearity&#39;] = nonlinearity
+</code></pre></div>
+</div>
+</div>
+<h3 id="ISI-dependent-penalty">ISI-dependent penalty<a class="headerlink" href="#ISI-dependent-penalty" title="Link to this heading">¶</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>outdir = BASEDIR + &#39;precalculated_WNI_values/&#39;
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[104]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>def fetch_ISI_WNI_data(model, rm_inference_timepoint):
+    st = pd.concat([pd.read_csv(BASEDIR + &quot;model_{}__spike_times_MCM__{}.csv&quot;.format(model, whisker)) for whisker in whiskers])
+    # is there a spike in the estimation period?
+    st[&#39;spike_in_interval&#39;] = spike_in_interval(st, rm_inference_timepoint, rm_inference_timepoint + 1)
+    # how long ago was the most recent spike?
+    st[st&gt;rm_inference_timepoint] = np.NaN
+    st[&#39;ISI&#39;] = st.max(axis=1) - rm_inference_timepoint
+
+    # collect WNI values and add them to the dataframe
+    wni = pd.DataFrame()
+    for whisker in whiskers:
+        # adapt according to where you saved (this loads the provided precalculated WNI values for C2 whisker)
+        wni_path = &#39;precalculated_WNI_values__model_1__{}&#39;.format(whisker)
+#         wni_path = outdir + &#39;{}__{}.csv&#39;.format(model, whisker)
+        wni = pd.concat([wni, pd.read_csv(wni_path)])
+
+    st[&#39;wni_value&#39;] = np.asarray(wni.loc[:, str(rm_inference_timepoint)])
+
+
+    spike_df = st[st.spike_in_interval &amp; (st.ISI &gt; -80) &amp; (st.ISI &lt; 0)]
+    no_spike_df = st[~st.spike_in_interval &amp; (st.ISI &gt; -80) &amp; (st.ISI &lt; 0)]
+
+    spike_isi = spike_df[&#39;ISI&#39;]
+    spike_wni = spike_df[&#39;wni_value&#39;]
+
+    no_spike_isi = no_spike_df[&#39;ISI&#39;]
+    no_spike_wni = no_spike_df[&#39;wni_value&#39;]
+
+    return spike_isi, spike_wni, no_spike_isi, no_spike_wni, st
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[131]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>def get_isi_boundary_95(spike_isi, spike_wni):
+    def signchange(x,y):
+        if x / abs(x) == y / abs(y):
+            return False
+        else:
+            return True
+
+    def linear_interpolation_between_pairs(X,Y, x):
+        if x &gt; max(X):
+            result = np.inf
+        elif x &lt; min(X):
+            result = min(Y)
+        elif float(x) in X: # don&#39;t need to interpolate, causes assertion error
+            result = Y[X.index(x)]
+        else:
+            pair = [lv for lv in range(len(X)-1) if signchange(X[lv]-x, X[lv+1]-x)]
+    #         X[lv] &lt;= x &lt; X[lv + 1]]
+            assert(len(pair) == 1)
+            pair = pair[0]
+            m = (Y[pair+1]-Y[pair]) / (X[pair+1]-X[pair])
+            c = Y[pair]-X[pair]*m
+
+            result = m*x+c
+        return result
+
+    l = zip(spike_isi, spike_wni)
+    if len(l) &lt; 2:
+        return I.np.nan
+    l = sorted(l, key = lambda x: x[1]) # sort by WNI values
+    to_drop = len(spike_wni) / 20 # drop lowest 5%
+    l = l[to_drop:]
+
+    l = sorted(l, key = lambda x: x[0], reverse = True) # sort by ISI again
+
+    points = []
+    points.append([l[0][0], l[0][1]])
+    y_min = l[0][1]
+    for x, y in l:
+        if y &lt; y_min:
+            points.append([x, y])
+            y_min = y
+
+    x_points = [p[0] for p in points]
+    y_points = [p[1] for p in points]
+
+    ISI_boundary = pd.Series(index = range(-80, 0))
+
+    for ISI in ISI_boundary.index:
+        ISI_boundary[ISI] = linear_interpolation_between_pairs(x_points, y_points, ISI)
+
+    return ISI_boundary
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[132]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>spike_isi, spike_wni, no_spike_isi, no_spike_wni, st = fetch_ISI_WNI_data(1, rm_inference_timepoint)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[133]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>ISI_penalty = get_isi_boundary_95(spike_isi, spike_wni)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[134]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>def plot_ISI_cloud(ax, spike_isi, spike_wni, no_spike_isi, no_spike_wni, s = 2):
+    ax.scatter(no_spike_isi, no_spike_wni, c = &#39;k&#39;, s = s, rasterized = True)
+    ax.scatter(spike_isi, spike_wni, c = &#39;r&#39;, s = s, rasterized = True)
+    ax.legend([&#39;no spike&#39;, &#39;spike&#39;])
+    ax.set_xlim(-85, 5)
+    ax.set_ylim(-30, 120)
+    ax.set_xlabel(&#39;inter spike interval (ms)&#39;)
+    ax.set_ylabel(&#39;weighted net input&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[135]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>fig = plt.figure(figsize = (8,8))
+ax = plt.gca()
+plot_ISI_cloud(ax, spike_isi, spike_wni, no_spike_isi, no_spike_wni)
+plt.plot(ISI_penalty, linewidth = 3)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[135]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x2b3c5e309690&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_71_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_71_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[136]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># when using the ISI-dependent penalty for simulations, you should subtract the baseline value, i.e.
+ISI_penalty_simulations = ISI_penalty - min(ISI_penalty)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[137]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>plt.plot(ISI_penalty_simulations)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[137]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x2b3c5da9d3d0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_73_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_73_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[142]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>rm_dict[model][&#39;ISI_penalty&#39;] = ISI_penalty
+</code></pre></div>
+</div>
+</div>
+<h2 id="Reduced-model-simulations">Reduced model simulations<a class="headerlink" href="#Reduced-model-simulations" title="Link to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[17]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>import json
+import seaborn as sns
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[157]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># load reduced models which we provide, or use ones that you generated above
+rm_dict = {}
+for model in range(1,8):
+    with open(BASEDIR + &quot;model_{}__reduced_model_parameters.txt&quot;.format(model), &quot;r&quot;) as fp:
+        rm = json.load(fp)
+    rm_dict[model] = rm
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[21]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>for model in range(1, 8):
+    fig = plt.figure()
+    plt.suptitle(&#39;model {}&#39;.format(model), y = 1.05)
+
+    ax1 = fig.add_subplot(2,2,1)
+    ax2 = fig.add_subplot(2,2,3)
+    filters = rm_dict[model][&#39;spatiotemporal_filters&#39;]
+    s_exc = filters[&#39;s_exc&#39;]
+    s_inh = filters[&#39;s_inh&#39;]
+    t_exc = filters[&#39;t_exc&#39;]
+    t_inh = filters[&#39;t_inh&#39;]
+
+    ax1.plot(s_exc, c = &#39;r&#39;)
+    ax1.plot(s_inh, c = &#39;grey&#39;)
+    ax1.set_xticks([0,10,20, 30])
+    ax1.set_xticklabels([0, 500, 1000, 1500])
+    ax1.set_xlabel(&#39;somadistance (um)&#39;)
+
+    ax2.plot(t_exc, c = &#39;r&#39;)
+    ax2.plot(t_inh, c = &#39;grey&#39;)
+    ax2.set_xticks(range(0, 85, 10))
+    ax2.set_xticklabels(range(-80, 5, 10))
+    ax2.set_xlabel(&#39;time (ms)&#39;)
+
+    ax1.set_ylim(-0.4, 1.2)
+    ax2.set_ylim(-1.2, 1.2)
+    ax1.set_ylabel(&#39;contribution to spiking&#39;)
+    ax2.set_ylabel(&#39;contribution to spiking&#39;)
+    ax2.set_xlim(-5, 80)
+
+    nonlinearity = pd.Series(rm_dict[model][&#39;nonlinearity&#39;])
+    nonlinearity.index = nonlinearity.index.astype(int)
+    nonlinearity = nonlinearity.sort_index()
+    ax3 = fig.add_subplot(2,2,2)
+    ax3.plot(nonlinearity)
+    ax3.set_ylabel(&#39;AP probability&#39;)
+    ax3.set_xlabel(&#39;WNI&#39;)
+
+    penalty = pd.Series(rm_dict[model][&#39;ISI_penalty&#39;])
+    penalty.index = penalty.index.astype(int)
+    penalty = penalty.sort_index()
+    ax4 = fig.add_subplot(2,2,4)
+    ax4.plot(penalty)
+    ax4.set_ylabel(&#39;WNI penalty&#39;)
+    ax4.set_xlabel(&#39;time since last spike (ms)&#39;)
+
+    plt.tight_layout()
+    sns.despine()
+    plt.show()
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_0.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_2.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_3.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_4.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_5.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_5.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_6.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_78_6.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[140]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>class ReducedModel:
+    def __init__(self, kernel_dict, LUT, ISI_penalty, spatial_bin_size = 50):
+        self.kernel_dict = kernel_dict
+        self.LUT = LUT
+        self.ISI_penalty = ISI_penalty
+        self.spatial_bin_size = spatial_bin_size
+
+    def run(self, SAexc, SAinh, return_WNI = False):
+        &#39;&#39;&#39;Apply the reduced model to synaptic input to get a list containing output spike times.
+        SAexc, SAinh: numpy arrays containing spatiotemporally binned synaptic inputs, shape (spatial bins, trials, temporal bins)
+        return_WNI: bool
+            full_trace returns a dataframe containing WNI values at all timepoints along with spike times.
+            False returns spike times dataframe only.&#39;&#39;&#39;
+        s_exc = self.kernel_dict[&#39;s_exc&#39;]
+        s_inh = self.kernel_dict[&#39;s_inh&#39;]
+        t_exc = self.kernel_dict[&#39;t_exc&#39;]
+        t_inh = self.kernel_dict[&#39;t_inh&#39;]
+
+        assert SAexc.shape == SAinh.shape
+
+        LUT = self.LUT
+
+        WNI_boundary = self.ISI_penalty
+
+        spatial_bins = SAexc.shape[0]
+        n_trials = SAexc.shape[1]
+        timebins = SAexc.shape[2]
+
+        WNI_df = pd.DataFrame(index = range(n_trials), columns = range(timebins))
+
+        SAinh_cumulative = np.zeros((n_trials, timebins))
+        SAexc_cumulative = np.zeros((n_trials, timebins))
+
+        spike_times_df = pd.DataFrame(index = range(n_trials))
+
+        for timebin in range(timebins):
+            ## get excitatory and inhibitory input, spatially binned for the CURRENT timebin
+            SAexc_timebin = np.ndarray((spatial_bins, n_trials, 1))
+            for dist in range(spatial_bins):
+                for cell in range(n_trials):
+                    SAexc_timebin[dist][cell] = SAexc[dist][cell][timebin]
+
+            SAinh_timebin = np.ndarray((spatial_bins, n_trials, 1))
+            for dist in range(spatial_bins):
+                for cell in range(n_trials):
+                    SAinh_timebin[dist][cell] = SAinh[dist][cell][timebin]
+
+            ## apply spatial kernel to the current timebin
+            SAexc_timebin = sum([o*s for o, s in zip(SAexc_timebin, s_exc)])
+            SAinh_timebin = sum([o*s for o, s in zip(SAinh_timebin, s_inh)])
+
+
+
+            for cell in range(n_trials):
+                SAinh_cumulative[cell][timebin] = SAinh_timebin[cell]
+                SAexc_cumulative[cell][timebin] = SAexc_timebin[cell]
+
+
+
+            ## apply temporal kernel
+            spikes = []
+            for cell in range(n_trials):
+                if timebin - 80 &gt;= 0:
+                    SAexc_window = SAexc_cumulative[cell][timebin-79:timebin+1]
+                    SAinh_window = SAinh_cumulative[cell][timebin-79:timebin+1]
+                else:
+                    SAexc_window = SAexc_cumulative[cell][0:timebin+1]
+                    SAinh_window = SAinh_cumulative[cell][0:timebin+1]
+
+
+                SAexc_window = sum([o*s for o, s in zip(SAexc_window, t_exc[-len(SAexc_window):])])
+                SAinh_window = sum([o*s for o, s in zip(SAinh_window, t_inh[-len(SAinh_window):])])
+
+                ## get weighted net input for each cell
+                WNI = SAexc_window + SAinh_window
+                WNI_df.iloc[cell, timebin] = WNI
+
+                # check the last 80 bins for a spike, apply WNI penalty if there was
+                min_index = 0 if timebin &lt; 80 else timebin-80
+                if sum(spike_times_df.iloc[cell, min_index:timebin]) &gt; 0: #if there was a spike in the last 80 ms
+                    last_spike_interval = 80 - np.where(spike_times_df.iloc[cell, min_index:timebin] == 1)[0][-1]
+                    penalty = WNI_boundary[-last_spike_interval]
+                    WNI -= penalty
+
+
+                ## get spike probability from WNI
+                if WNI &gt; LUT.index.max():
+                    spiking_probability = LUT[LUT.index.max()]
+                elif WNI &lt; LUT.index.min():
+                    spiking_probability = LUT[LUT.index.min()]
+                else:
+                    spiking_probability = LUT[np.round(WNI)]
+
+                ## spike or not?
+                if spiking_probability &gt; np.random.uniform():
+                    spikes.append(1)
+                else:
+                    spikes.append(0)
+
+            spike_times_df[str(timebin)] = spikes
+
+        if return_WNI:
+            return spike_times_df, WNI_df
+        else:
+            return spike_times_df
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>model = 1
+filters = rm_dict[model][&#39;spatiotemporal_filters&#39;]
+nonlinearity = pd.Series(rm_dict[model][&#39;nonlinearity&#39;])
+nonlinearity.index = nonlinearity.index.astype(int)
+nonlinearity = nonlinearity.sort_index()
+
+penalty = pd.Series(rm_dict[model][&#39;ISI_penalty&#39;])
+penalty.index = penalty.index.astype(int)
+penalty = penalty.sort_index()
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[144]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>rm = ReducedModel(filters, nonlinearity, penalty)
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[145]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>sa = np.load(BASEDIR + &quot;model_{}__binned_synapse_activations_spatiotemporal_EI__{}.npz&quot;.format(model, whisker))
+sa = sa[&#39;arr_0&#39;]
+SAexc = sa[0,:,:,:]
+SAinh = sa[1,:,:,:]
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[146]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>SAexc.shape, SAinh.shape # (spatial bins, trials ,temporal bins)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[146]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+((30, 81000, 400), (30, 81000, 400))
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[147]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>spike_times = rm.run(SAexc[:, 4000:6000, :], SAinh[:, 4000:6000, :]) # select the same trials as we visualised for the MCM
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[148]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>spike_times
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[148]:
+</code></pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>390</th>
+      <th>391</th>
+      <th>392</th>
+      <th>393</th>
+      <th>394</th>
+      <th>395</th>
+      <th>396</th>
+      <th>397</th>
+      <th>398</th>
+      <th>399</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1970</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1971</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1972</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1973</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1974</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1975</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1976</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1977</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1978</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1979</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1980</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1981</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1982</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1983</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1984</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1985</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1986</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1987</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1988</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1989</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1990</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1991</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1992</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1993</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1994</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1995</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1996</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1997</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1998</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1999</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>2000 rows × 400 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[152]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># reformat the spike times so that instead of 1 or 0 for each timebin per cell, each cell has a list of its spike times
+st_reformat = pd.DataFrame(index = range(len(spike_times.index)), columns = range(max(spike_times.sum(axis = 1))))
+for cell in spike_times.index:
+    nspikes = 0
+    for timebin in spike_times.columns:
+        if spike_times.iloc[cell, int(timebin)] == 1:
+            st_reformat.iloc[cell, nspikes] = int(timebin)
+            nspikes += 1
+</code></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[150]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code># the sensory stimulus was always applied at 245 ms
+ax = plt.gca()
+histogram(temporal_binning_pd(st_reformat), fig = ax)
+plt.ylabel(&#39;AP probability&#39;)
+plt.xlabel(&#39;time (ms)&#39;)
+plt.xlim(0, 300)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[150]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0, 300)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_87_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_87_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[151]:
+</code></pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><code>ax = plt.gca()
+rasterplot(st_reformat, fig = ax)
+plt.xlabel(&#39;time (ms)&#39;)
+plt.ylabel(&#39;trial index&#39;)
+</code></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[151]:
+</code></pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.text.Text at 0x2b3c9ed9c510&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_4._analysis_4.2_Reduced_Models_88_1.png" src="../../_images/tutorials_4._analysis_4.2_Reduced_Models_88_1.png" />
+</div>
+</div>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="4.1%20Manipulations.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Manipulations to multiscale simulations" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Manipulations to multiscale simulations
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../installation.html" class="md-footer__link md-footer__link--next" aria-label="Next: Installation" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Installation
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2025 Max Planck Institute for Neurobiology of Behavior - CAESAR.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=f281be69"></script>
+        <script src="../../_static/tabs.js?v=3ee01567"></script>
+        <script src="../../_static/design-tabs.js?v=36754332"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script id="MathJax-script" src="../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../../_static/js/video.js?v=a9b6335e"></script>
+    
+  </body>
+</html>

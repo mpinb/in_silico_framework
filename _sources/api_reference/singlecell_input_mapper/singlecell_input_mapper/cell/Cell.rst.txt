@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Cell
 ====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -43,41 +39,41 @@ Cell
 
    :Attributes:
 
-   .. attribute:: id
+      .. attribute:: id
 
-      Unique identifier for the cell.
+         Unique identifier for the cell.
 
-      :type: str
+         :type: str
 
-   .. attribute:: soma
+      .. attribute:: soma
 
-      The soma section.
+         The soma section.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
 
-   .. attribute:: structures
+      .. attribute:: structures
 
-      Dictionary mapping section labels (e.g. "Soma", "Dendrite" ...) to a list of corresponding sections.
+         Dictionary mapping section labels (e.g. "Soma", "Dendrite" ...) to a list of corresponding sections.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: sections
+      .. attribute:: sections
 
-      List of all sections.
+         List of all sections.
 
-      :type: list
+         :type: list
 
-   .. attribute:: boundingBox
+      .. attribute:: boundingBox
 
-      Bounding box around the cell.
+         Bounding box around the cell.
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: synapses
+      .. attribute:: synapses
 
-      Dictionary mapping presynaptic cell types to a list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
+         Dictionary mapping presynaptic cell types to a list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -96,3 +92,7 @@ Cell
       * - :py:obj:`remove_synapses <singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses>`\ (preType)
         - Remove all synapses of type :paramref:`preType` from the cell.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

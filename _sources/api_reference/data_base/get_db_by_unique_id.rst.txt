@@ -1,29 +1,26 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.get_db_by_unique_id`
-
-
-.. title:
 
 get_db_by_unique_id
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.get_db_by_unique_id(unique_id)
+
 
    Get a DataBase by its unique ID, as registered in the data base register.
 
    Data base registers should be located at data_base/.data_base_register.db
 
-   :Parameters: **unique_id** (*str*) -- The data base's unique identifier
+   :param unique_id: The data base's unique identifier
+   :type unique_id: str
 
    :returns: The database associated with the :paramref:`unique_id`.
    :rtype: :py:class:`data_base.DataBase`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

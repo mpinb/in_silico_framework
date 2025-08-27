@@ -1,28 +1,27 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.save_result`
-
-
-.. title:
 
 save_result
 ===========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.optimizer.save_result(db_run, features, objectives)
+
 
    Save the results of an optimization iteration in a database.
 
-   :Parameters: * **db_run** (*data_base.DataBase*) -- The database.
-                * **features** (*pd.DataFrame*) -- The features of the optimization iteration.
-                * **objectives** (*pd.DataFrame*) -- The objectives of the optimization iteration.
+   :param db_run: The database.
+   :type db_run: data_base.DataBase
+   :param features: The features of the optimization iteration.
+   :type features: pd.DataFrame
+   :param objectives: The objectives of the optimization iteration.
+   :type objectives: pd.DataFrame
 
    :returns: None. The results are saved in the database.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,29 +1,28 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.voltage_base`
-
-
-.. title:
 
 voltage_base
 ============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.voltage_base(t, v, stim_delay)
+
 
    Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.
 
-   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
-                * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **stim_delay** (*float*) -- Delay time of the stimulus.
+   :param t: Array of time values.
+   :type t: numpy.ndarray
+   :param v: Array of voltage values.
+   :type v: numpy.ndarray
+   :param stim_delay: Delay time of the stimulus.
+   :type stim_delay: float
 
    :returns: Mean voltage between 0.5*stim_delay and 0.75*stim_delay.
    :rtype: float
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

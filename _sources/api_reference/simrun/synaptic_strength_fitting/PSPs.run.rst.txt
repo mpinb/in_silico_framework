@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.run`
+
+
 
 PSPs.run
 ========
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.run(client, rerun=False)
+
 
    Run the single-cell simulations from the :paramref:`_delayeds`.
 
@@ -14,10 +16,17 @@ PSPs.run
    amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is
    ``len(gExRange) * len(network_params_by_celltype)``.
 
-   :Parameters: * **client** (*dask.distributed.Client*) -- The dask client for parallel computation.
-                * **rerun** (*bool*) -- Force rerun the computation.
-                  Otherwise, calling this function has no effect if the computation is already running or finished.
-                  Default: ``False``
+   :param client: The dask client for parallel computation.
+   :type client: dask.distributed.Client
+   :param rerun: Force rerun the computation.
+                 Otherwise, calling this function has no effect if the computation is already running or finished.
+                 Default: ``False``
+   :type rerun: bool
 
    :returns: None. Updates the :paramref:`futures` attribute.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,48 @@
+
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
+
+
+health
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   get_filter_healthy_simresult_dirs </api_reference/data_base/db_initializers/load_simrun_general/health/get_filter_healthy_simresult_dirs>
+   check_is_simresult_dir_healthy </api_reference/data_base/db_initializers/load_simrun_general/health/check_is_simresult_dir_healthy>
+   _check_params_exist </api_reference/data_base/db_initializers/load_simrun_general/health/_check_params_exist>
+   _read_n_traces </api_reference/data_base/db_initializers/load_simrun_general/health/_read_n_traces>
+   _check_n_vts_match </api_reference/data_base/db_initializers/load_simrun_general/health/_check_n_vts_match>
+   _check_netp_has_working_refs </api_reference/data_base/db_initializers/load_simrun_general/health/_check_netp_has_working_refs>
+   _check_neup_has_working_refs </api_reference/data_base/db_initializers/load_simrun_general/health/_check_neup_has_working_refs>
+   _check_param_files_have_working_refs </api_reference/data_base/db_initializers/load_simrun_general/health/_check_param_files_have_working_refs>
+
+.. py:module:: data_base.db_initializers.load_simrun_general.health
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`get_filter_healthy_simresult_dirs <data_base.db_initializers.load_simrun_general.health.get_filter_healthy_simresult_dirs>`\ (sim\_result\_dirs, client)
+     - \-
+   * - :py:obj:`check_is_simresult_dir_healthy <data_base.db_initializers.load_simrun_general.health.check_is_simresult_dir_healthy>`\ (sim\_result\_dir)
+     - \-
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

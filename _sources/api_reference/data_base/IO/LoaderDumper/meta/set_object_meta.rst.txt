@@ -1,0 +1,29 @@
+
+
+set_object_meta
+===============
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.IO.LoaderDumper.meta.set_object_meta(obj, meta)
+
+
+   Set/reset the meta of a dataframe.
+
+   Reads in the object meta from the same savedir and tries to assign the correct dtypes to columns and index, as well as the index name.
+
+   :param obj: The object to reset the dtypes of.
+   :param meta: metadata for the object, containing only column names and the index with correct dtypes.
+   :type meta: pd.DataFrame
+
+   :returns: None. Adapts the original object.
+
+   :raises AssertionError: If the object is not a pandas DataFrame, pandas Series, or dask DataFrame.
+   :raises AssertionError: If no meta information is provided.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,31 +1,29 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.plot_hoc`
-
-
-.. title:
 
 plot_hoc
 ========
 
 
-.. py:function:: visualize.plot_hoc(hoc_file, \*\*kwargs)
+.. Signature -------------------------------
+
+.. py:function:: visualize.plot_hoc(hoc_file, **kwargs)
+
 
    Plot a hoc file using matplotlib.
 
    Instatiate a :py:class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
 
-   :Parameters: * **hoc_file** (*str*) -- The path to the :ref:`hoc_file_format` file
-                * **show** (*bool*) -- Whether to show the plot
-                * **\*\*kwargs** -- additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
+   :param hoc_file: The path to the :ref:`hoc_file_format` file
+   :type hoc_file: str
+   :param show: Whether to show the plot
+   :type show: bool
+   :param \*\*kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
 
    :returns: The figure object
    :rtype: :py:class:`~matplotlib.figure.Figure`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

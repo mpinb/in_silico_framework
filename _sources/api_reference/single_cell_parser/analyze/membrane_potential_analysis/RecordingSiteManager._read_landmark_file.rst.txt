@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file`
+
+
 
 RecordingSiteManager._read_landmark_file
 ========================================
 
+
 .. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file(landmarkFilename)
+
 
    Read the AMIRA landmark file and return the landmarks.
 
-   :Parameters: **landmarkFilename** (*str*) -- Path to the AMIRA landmark file.
+   :param landmarkFilename: Path to the AMIRA landmark file.
+   :type landmarkFilename: str
 
    :returns: List of landmarks coordinates, where each element is of format (x,y,z).
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

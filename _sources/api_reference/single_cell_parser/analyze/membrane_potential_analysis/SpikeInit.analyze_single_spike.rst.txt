@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike`
+
+
 
 SpikeInit.analyze_single_spike
 ==============================
 
+
 .. py:method:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike(cell, tVec, thresh)
+
    :staticmethod:
 
 
@@ -15,10 +17,18 @@ SpikeInit.analyze_single_spike
    Only does this for a single spike in the voltage trace: the one with the
    maximum deflection from the threshold.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object.
-                * **tVec** (*list*) -- Time vector.
-                * **thresh** (*float*) -- Spike threshold.
+   :param cell: Cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param tVec: Time vector.
+   :type tVec: list
+   :param thresh: Spike threshold.
+   :type thresh: float
 
    :returns: Tuple containing the spike height, full width half max (FWHM), and after hyperpolarization (AHP).
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

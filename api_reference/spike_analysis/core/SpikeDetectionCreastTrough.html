@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -800,16 +802,71 @@
       
         <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="spike_analysis.core.SpikeDetectionCreastTrough (Python class) — Detects spikes by creast and trough amplitude." class="md-ellipsis">spike_<wbr>analysis.<wbr>core.<wbr>Spike<wbr>Detection<wbr>Creast<wbr>Trough</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="spike_analysis.core.SpikeDetectionCreastTrough (Python class) — Detects spikes by creast and trough amplitude." class="md-ellipsis">spike_<wbr>analysiscore<wbr>Spike<wbr>Detection<wbr>Creast<wbr>Trough</span>
   </a>
   
-    <nav class="md-nav" aria-label="spike_analysis.core.SpikeDetectionCreastTrough">
+    <nav class="md-nav" aria-label="spike_analysiscoreSpikeDetectionCreastTrough">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object (Python parameter) — Reader object with get_voltage_traces and get_stim_times method, e.g." class="md-ellipsis">reader_<wbr>object</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast (Python parameter) — threshold above which a creast of a spike is detected as such. Needs to be float, &#34;minimum&#34;, or &#34;zero&#34;. If &#34;minimum&#34; or &#34;zero&#34; is chosen, the threashold will be set based on the histogram of all creasts. If &#34;minimum&#34; is chosen, lim_creast will be set to the first minimum in the histogram above or equal to 0.4mV. If &#34;zero&#34; is chosen, lim_creast will be set to the first empty bin." class="md-ellipsis">lim_<wbr>creast</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough (Python parameter) — want to use a negative value." class="md-ellipsis">lim_<wbr>trough</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval (Python parameter) — Maximum interval between creast and trough such that a spike is recognized." class="md-ellipsis">max_<wbr>creast_<wbr>trough_<wbr>interval</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta (Python parameter) — minimum interval between spikes" class="md-ellipsis">tdelta</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period (Python parameter) — number of stimuli applied per trial." class="md-ellipsis">stimulus_<wbr>period</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid (Python parameter) — name to be used in spike times dataframe" class="md-ellipsis">cellid</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -818,7 +875,8 @@
     <span class="md-ellipsis">Attributes</span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_creast" class="md-nav__link">
@@ -932,6 +990,11 @@
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough-type" class="md-nav__link">
     <span class="md-ellipsis">Type</span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1478,16 +1541,71 @@
       
         <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="spike_analysis.core.SpikeDetectionCreastTrough (Python class) — Detects spikes by creast and trough amplitude." class="md-ellipsis">spike_<wbr>analysis.<wbr>core.<wbr>Spike<wbr>Detection<wbr>Creast<wbr>Trough</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="spike_analysis.core.SpikeDetectionCreastTrough (Python class) — Detects spikes by creast and trough amplitude." class="md-ellipsis">spike_<wbr>analysiscore<wbr>Spike<wbr>Detection<wbr>Creast<wbr>Trough</span>
   </a>
   
-    <nav class="md-nav" aria-label="spike_analysis.core.SpikeDetectionCreastTrough">
+    <nav class="md-nav" aria-label="spike_analysiscoreSpikeDetectionCreastTrough">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object (Python parameter) — Reader object with get_voltage_traces and get_stim_times method, e.g." class="md-ellipsis">reader_<wbr>object</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast (Python parameter) — threshold above which a creast of a spike is detected as such. Needs to be float, &#34;minimum&#34;, or &#34;zero&#34;. If &#34;minimum&#34; or &#34;zero&#34; is chosen, the threashold will be set based on the histogram of all creasts. If &#34;minimum&#34; is chosen, lim_creast will be set to the first minimum in the histogram above or equal to 0.4mV. If &#34;zero&#34; is chosen, lim_creast will be set to the first empty bin." class="md-ellipsis">lim_<wbr>creast</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough (Python parameter) — want to use a negative value." class="md-ellipsis">lim_<wbr>trough</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval (Python parameter) — Maximum interval between creast and trough such that a spike is recognized." class="md-ellipsis">max_<wbr>creast_<wbr>trough_<wbr>interval</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta (Python parameter) — minimum interval between spikes" class="md-ellipsis">tdelta</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period (Python parameter) — number of stimuli applied per trial." class="md-ellipsis">stimulus_<wbr>period</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid (Python parameter) — name to be used in spike times dataframe" class="md-ellipsis">cellid</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1496,7 +1614,8 @@
     <span class="md-ellipsis">Attributes</span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_creast" class="md-nav__link">
@@ -1618,6 +1737,11 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#spike_analysis.core.SpikeDetectionCreastTrough-methods" class="md-nav__link">
     <span class="md-ellipsis">Methods</span>
@@ -1644,38 +1768,43 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-spike_analysis" title="spike_analysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spike_analysis</span></code></a> ❭ <a class="reference internal" href="index.html#module-spike_analysis.core" title="spike_analysis.core (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">core</span></code></a> ❭ <a class="reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="spike_analysis.core.SpikeDetectionCreastTrough (Python class) — Detects spikes by creast and trough amplitude."><code class="xref py py-mod docutils literal notranslate"><span class="pre">SpikeDetectionCreastTrough</span></code></a></p>
-<h1 id="spikedetectioncreasttrough">SpikeDetectionCreastTrough<a class="headerlink" href="#spikedetectioncreasttrough" title="Permalink to this heading">¶</a></h1>
+<h1 id="spikedetectioncreasttrough">SpikeDetectionCreastTrough<a class="headerlink" href="#spikedetectioncreasttrough" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="spike_analysis.core.SpikeDetectionCreastTrough">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spike_analysis.core.</span></span><span class="sig-name descname"><span class="pre">SpikeDetectionCreastTrough</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">reader_object</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">lim_creast</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;minimum&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">lim_trough</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;minimum&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">max_creast_trough_interval</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tdelta</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">1.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">stimulus_period</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">stimulus_period_offset</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">upper_creast_threshold</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="n">np</span><span class="o">.</span><span class="n">inf</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">cellid</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;__no_cellid_assigned__&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">spike_time_mode</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;latest&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../index.html#module-spike_analysis" title="spike_analysis (Python module)"><span class="sig-name descname"><span class="pre">spike_analysis</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-spike_analysis.core" title="spike_analysis.core (Python module)"><span class="sig-name descname"><span class="pre">core</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">SpikeDetectionCreastTrough</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object (Python parameter) — Reader object with get_voltage_traces and get_stim_times method, e.g."><span class="n"><span class="pre">reader_object</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast (Python parameter) — threshold above which a creast of a spike is detected as such. Needs to be float, &quot;minimum&quot;, or &quot;zero&quot;. If &quot;minimum&quot; or &quot;zero&quot; is chosen, the threashold will be set based on the histogram of all creasts. If &quot;minimum&quot; is chosen, lim_creast will be set to the first minimum in the histogram above or equal to 0.4mV. If &quot;zero&quot; is chosen, lim_creast will be set to the first empty bin."><span class="n"><span class="pre">lim_creast</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;minimum&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough (Python parameter) — want to use a negative value."><span class="n"><span class="pre">lim_trough</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;minimum&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval (Python parameter) — Maximum interval between creast and trough such that a spike is recognized."><span class="n"><span class="pre">max_creast_trough_interval</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta (Python parameter) — minimum interval between spikes"><span class="n"><span class="pre">tdelta</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">1.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period (Python parameter) — number of stimuli applied per trial."><span class="n"><span class="pre">stimulus_period</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period_offset (Python parameter)"><span class="n"><span class="pre">stimulus_period_offset</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.upper_creast_threshold (Python parameter)"><span class="n"><span class="pre">upper_creast_threshold</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="n">np</span><span class="o">.</span><span class="n">inf</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid (Python parameter) — name to be used in spike times dataframe"><span class="n"><span class="pre">cellid</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;__no_cellid_assigned__&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="spike_analysis.core.SpikeDetectionCreastTrough.__init__.spike_time_mode (Python parameter)"><span class="n"><span class="pre">spike_time_mode</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;latest&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough" title="Link to this definition">¶</a></dt>
 <dd><p>Detects spikes by creast and trough amplitude.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>reader_object</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">LabViewReader</span></code>) – Reader object with get_voltage_traces and get_stim_times method, e.g. ReaderSmr</p></li>
-<li><p><strong>lim_creast</strong> (<em>float|str</em>) – threshold above which a creast of a spike is detected as such.
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object"><span class="sig-name descname">reader_object</span><span class="p"> : </span><span class="desctype"><span class="desctype">LabViewReader</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.reader_object" title="Permalink to this definition">¶</a></dt><dd><p>Reader object with get_voltage_traces and get_stim_times method, e.g. ReaderSmr</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast"><span class="sig-name descname">lim_creast</span><span class="p"> : </span><span class="desctype"><span class="desctype">float|str</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_creast" title="Permalink to this definition">¶</a></dt><dd><p>threshold above which a creast of a spike is detected as such.
 Needs to be float, <code class="docutils literal notranslate"><span class="pre">&quot;minimum&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;zero&quot;</span></code>.
 If “minimum” or “zero” is chosen, the threashold will be set based on the histogram of all creasts.
 If “minimum” is chosen, <code class="xref py py-paramref docutils literal notranslate"><span class="pre">lim_creast</span></code> will be set to the first minimum in the histogram above or equal to <span class="math notranslate nohighlight">\(0.4mV\)</span>.
-If “zero” is chosen, <code class="xref py py-paramref docutils literal notranslate"><span class="pre">lim_creast</span></code> will be set to the first empty bin.</p></li>
-<li><p><strong>lim_trough</strong> (<em>float|str</em>) – want to use a negative value. lim creast and lim_trough need to be both floats, both
-“zero” or both “minimum”.</p></li>
-<li><p><strong>max_creast_trough_interval</strong> (<em>float</em>) – Maximum interval between creast and trough such that a spike is recognized.</p></li>
-<li><p><strong>tdelta</strong> (<em>float</em>) – minimum interval between spikes</p></li>
-<li><p><strong>stimulus_period</strong> (<em>int</em>) – number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.</p></li>
-<li><p><strong>stimulus_period_offse</strong> (<em>int</em>) – Number of stimulus that initiates first trial.</p></li>
-<li><p><strong>cellid</strong> (<em>str</em>) – name to be used in spike times dataframe</p></li>
-</ul>
+If “zero” is chosen, <code class="xref py py-paramref docutils literal notranslate"><span class="pre">lim_creast</span></code> will be set to the first empty bin.</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough"><span class="sig-name descname">lim_trough</span><span class="p"> : </span><span class="desctype"><span class="desctype">float|str</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.lim_trough" title="Permalink to this definition">¶</a></dt><dd><p>want to use a negative value. lim creast and lim_trough need to be both floats, both
+“zero” or both “minimum”.</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval"><span class="sig-name descname">max_creast_trough_interval</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.max_creast_trough_interval" title="Permalink to this definition">¶</a></dt><dd><p>Maximum interval between creast and trough such that a spike is recognized.</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta"><span class="sig-name descname">tdelta</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.tdelta" title="Permalink to this definition">¶</a></dt><dd><p>minimum interval between spikes</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period"><span class="sig-name descname">stimulus_period</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.stimulus_period" title="Permalink to this definition">¶</a></dt><dd><p>number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.</p>
+</dd>
+<dt><span class="sig-name descname">stimulus_period_offse</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span></dt><dd><p>Number of stimulus that initiates first trial.</p>
+</dd>
+<dt id="spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid"><span class="sig-name descname">cellid</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.__init__.cellid" title="Permalink to this definition">¶</a></dt><dd><p>name to be used in spike times dataframe</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="spike_analysis.core.SpikeDetectionCreastTrough-attributes">Attributes<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough-attributes" title="Permalink to this headline">¶</a></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<dl class="py attribute objdesc">
+<dd class="field-even"><dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough.lim_creast">
-<span class="sig-name descname"><span class="pre">lim_creast</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_creast" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lim_creast</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_creast" title="Link to this definition">¶</a></dt>
 <dd><p>lim_creast used for spike detection (if “minimum” or “zero” was defined, this will be the numeric value used)</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough.lim_creast-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_creast-type" title="Permalink to this headline">¶</a></dt>
@@ -1686,7 +1815,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough.lim_trough">
-<span class="sig-name descname"><span class="pre">lim_trough</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_trough" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">lim_trough</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_trough" title="Link to this definition">¶</a></dt>
 <dd><p>lim_trough used for spike detection (if “minimum” or “zero” was defined, this will be the numeric value used)</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough.lim_trough-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.lim_trough-type" title="Permalink to this headline">¶</a></dt>
@@ -1697,7 +1826,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough.st">
-<span class="sig-name descname"><span class="pre">st</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.st" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">st</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.st" title="Link to this definition">¶</a></dt>
 <dd><p>spike times dataframe, one row per trial</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough.st-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.st-type" title="Permalink to this headline">¶</a></dt>
@@ -1708,7 +1837,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough.spike_times">
-<span class="sig-name descname"><span class="pre">spike_times</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.spike_times" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">spike_times</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.spike_times" title="Link to this definition">¶</a></dt>
 <dd><p>all extracted spike times, fullfilling creast and trough criterion, filtered such thatthe minimal ISI is above tdelta.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough.spike_times-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough.spike_times-type" title="Permalink to this headline">¶</a></dt>
@@ -1719,7 +1848,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough._spike_times_creast">
-<span class="sig-name descname"><span class="pre">_spike_times_creast</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_creast" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_spike_times_creast</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_creast" title="Link to this definition">¶</a></dt>
 <dd><p>spike times fullfilling creast criterion</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough._spike_times_creast-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_creast-type" title="Permalink to this headline">¶</a></dt>
@@ -1730,7 +1859,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough">
-<span class="sig-name descname"><span class="pre">_spike_times_trough</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_spike_times_trough</span></span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough" title="Link to this definition">¶</a></dt>
 <dd><p>spike times fullfilling trough criterion</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough-type">Type<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough._spike_times_trough-type" title="Permalink to this headline">¶</a></dt>
@@ -1739,7 +1868,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 </dl>
 </dd></dl>
 
-<dl class="field-list simple">
+</dd>
 <dt class="field-odd" id="spike_analysis.core.SpikeDetectionCreastTrough-methods">Methods<span class="colon">:</span><a class="headerlink" href="#spike_analysis.core.SpikeDetectionCreastTrough-methods" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
@@ -1779,6 +1908,9 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
 </table>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1846,7 +1978,7 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1869,11 +2001,11 @@ If “zero” is chosen, <code class="xref py py-paramref docutils literal notra
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="../../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

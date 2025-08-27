@@ -1,0 +1,31 @@
+
+
+_save_object_meta_json
+======================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.IO.LoaderDumper.meta._save_object_meta_json(obj, savedir)
+
+
+   Save the meta of an object in JSON format.
+
+   JSON is human-readable, with the downside of being slow for dataframes with many columns.
+   The dtypes of the columns and index are saved as string in numpy format.
+
+   .. seealso:: :py:meth:`~data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str`
+
+   :param obj: The object to save the meta of.
+   :type obj: dask.DataFrame | parquet.DataFrame
+   :param savedir: The directory to save the meta file in.
+   :type savedir: str
+
+   :returns: Saves the meta object.
+   :rtype: None
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

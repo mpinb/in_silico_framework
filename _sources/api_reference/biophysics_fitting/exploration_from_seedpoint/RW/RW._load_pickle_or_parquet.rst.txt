@@ -1,19 +1,29 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet`
+
+
 
 RW._load_pickle_or_parquet
 ==========================
 
+
 .. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet(outdir, iteration, mode='parquet_load')
+
 
    Load the results of a iteration from a pickle or parquet file.
 
-   :Parameters: * **outdir** (*str*) -- directory where the pickle or parquet files are located
-                * **iteration** (*int*) -- iteration number
-                * **mode** (*str*) -- mode to load the results. Default: 'parquet_load'
+   :param outdir: directory where the pickle or parquet files are located
+   :type outdir: str
+   :param iteration: iteration number
+   :type iteration: int
+   :param mode: mode to load the results. Default: 'parquet_load'
+   :type mode: str
 
    :returns: dataframe and path to the file
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

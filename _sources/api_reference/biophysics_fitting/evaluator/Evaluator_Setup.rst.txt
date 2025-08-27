@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator_Setup`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Evaluator_Setup
 ===============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -27,22 +23,26 @@ Evaluator_Setup
 
    :Attributes:
 
-   .. attribute:: pre_funs
+      .. attribute:: pre_funs
 
-      A list of functions to be applied to the input dictionary before the evaluation functions are applied.
+         A list of functions to be applied to the input dictionary before the evaluation functions are applied.
 
-      :type: list
+         :type: list
 
-   .. attribute:: evaluate_funs
+      .. attribute:: evaluate_funs
 
-      A list of functions to be applied to the voltage traces. Each element of the list is a list of three elements:
-      the name of the input voltage trace, the function to be applied to the voltage trace, and the name of the output feature.
+         A list of functions to be applied to the voltage traces. Each element of the list is a list of three elements:
+         the name of the input voltage trace, the function to be applied to the voltage trace, and the name of the output feature.
 
-      :type: list
+         :type: list
 
-   .. attribute:: finalize_funs
+      .. attribute:: finalize_funs
 
-      A list of functions to be applied to the output of the evaluation functions. The output of the last function in this list is the output of the :meth:`~Evaluator.evaluate` method.
+         A list of functions to be applied to the output of the evaluation functions. The output of the last function in this list is the output of the :meth:`~Evaluator.evaluate` method.
 
-      :type: list
+         :type: list
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

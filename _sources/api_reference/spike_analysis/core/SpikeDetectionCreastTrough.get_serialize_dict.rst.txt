@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict`
+
+
 
 SpikeDetectionCreastTrough.get_serialize_dict
 =============================================
 
+
 .. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict()
+
 
    Get a dictionary containing the attributes of the SpikeDetectionCreastTrough object.
 
@@ -28,3 +30,8 @@ SpikeDetectionCreastTrough.get_serialize_dict
                  - t_end (float): The end time of the voltage traces.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

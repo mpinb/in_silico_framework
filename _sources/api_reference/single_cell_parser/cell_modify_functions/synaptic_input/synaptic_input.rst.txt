@@ -1,31 +1,31 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.synaptic_input` ❭ :mod:`~single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input`
-
-
-.. title:
 
 synaptic_input
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input(cell, network_param=None, synapse_activation_file=None, tStop=None)
+
 
    Add synaptic activations to the cell from a network.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **network_param** (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
-                * **synapse_activation_file** (*str, optional*) -- The :ref:`syn_activation_format` file with existing synapse activations.
-                  If None, synapse activations are generated from scratch using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
-                * **tStop** (*float*) -- The simulation stop time.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param network_param: The :ref:`network_parameters_format`.
+   :type network_param: ~single_cell_parser.parameters.NTParameterSet
+   :param synapse_activation_file: The :ref:`syn_activation_format` file with existing synapse activations.
+                                   If None, synapse activations are generated from scratch using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
+   :type synapse_activation_file: str, optional
+   :param tStop: The simulation stop time.
+   :type tStop: float
 
    :returns: The cell with the synaptic input set up as the ``evokedNW`` attribute.
    :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

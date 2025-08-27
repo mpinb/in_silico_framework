@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.Arrow3D`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Arrow3D
 =======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,28 +29,34 @@ Arrow3D
 
    See: https://gist.github.com/WetHat/1d6cd0f7309535311a539b42cccca89c
 
-   :Parameters: * **x** (*float*) -- x coordinate of the arrow starting point.
-                * **y** (*float*) -- y coordinate of the arrow starting point.
-                * **z** (*float*) -- z coordinate of the arrow starting point.
-                * **dx** (*float*) -- x coordinate difference of the arrow direction.
-                * **dy** (*float*) -- y coordinate difference of the arrow direction.
-                * **dz** (*float*) -- z coordinate difference of the arrow direction.
-                * **\*args** -- Additional positional arguments passed to FancyArrowPatch.
-                * **\*\*kwargs** -- Additional keyword arguments passed to FancyArrowPatch.
+   :param x: x coordinate of the arrow starting point.
+   :type x: float
+   :param y: y coordinate of the arrow starting point.
+   :type y: float
+   :param z: z coordinate of the arrow starting point.
+   :type z: float
+   :param dx: x coordinate difference of the arrow direction.
+   :type dx: float
+   :param dy: y coordinate difference of the arrow direction.
+   :type dy: float
+   :param dz: z coordinate difference of the arrow direction.
+   :type dz: float
+   :param \*args: Additional positional arguments passed to FancyArrowPatch.
+   :param \*\*kwargs: Additional keyword arguments passed to FancyArrowPatch.
 
    :Attributes:
 
-   .. attribute:: _xyz
+      .. attribute:: _xyz
 
-      the x, y, z coordinates of the arrow
+         the x, y, z coordinates of the arrow
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: _dxdydz
+      .. attribute:: _dxdydz
 
-      the dx, dy, dz coordinate difference of the arrow, i.e. where it points to relative to its origin.
+         the dx, dy, dz coordinate difference of the arrow, i.e. where it points to relative to its origin.
 
-      :type: tuple
+         :type: tuple
 
    :Methods:
 
@@ -69,3 +71,7 @@ Arrow3D
       * - :py:obj:`do_3d_projection <visualize.utils.Arrow3D.do_3d_projection>`\ (renderer)
         - Project the arrow onto the Axes3D object.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

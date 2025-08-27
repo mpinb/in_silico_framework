@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.analyze` ❭ 
+
 
 spike_detection
 ===============
@@ -38,3 +40,7 @@ Functions
      - Detect spikes in a dask :ref:`voltage_traces_df_format`.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

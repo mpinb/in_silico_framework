@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`
+
+
 
 NetworkMapper._get_representative_sample
 ========================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample(realizationPopulation, populationDistribution)
+
 
    Determine which sample of a population of anatomical realizations
    is the most representative.
@@ -22,3 +24,8 @@ NetworkMapper._get_representative_sample
 
    :returns: ID of the most representative sample.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

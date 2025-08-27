@@ -1,5 +1,7 @@
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.synaptic_input`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ 
+
 
 synaptic_input
 ==============
@@ -34,3 +36,7 @@ Functions
      - Add synaptic activations to the cell from a network.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

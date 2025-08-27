@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence`
+
+
 
 NetworkMapper._test_population_convergence
 ==========================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
+
 
    Test how many samples are needed to get a representative sample.
 
@@ -14,7 +16,15 @@ NetworkMapper._test_population_convergence
    to get a reasonable estimate of the variability of connectivity
    parameters.
 
-   :Parameters: * **nrOfSamples** (*int*) -- Number of network realizations.
-                * **sampleConnectivityData** (*list*) -- List of network realizations.
-                * **postCellName** (*str*) -- Name of the postsynaptic cell model.
+   :param nrOfSamples: Number of network realizations.
+   :type nrOfSamples: int
+   :param sampleConnectivityData: List of network realizations.
+   :type sampleConnectivityData: list
+   :param postCellName: Name of the postsynaptic cell model.
+   :type postCellName: str
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

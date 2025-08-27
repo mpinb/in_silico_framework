@@ -1,31 +1,30 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation` ❭ :mod:`~visualize.cell_to_ipython_animation.get_lines`
-
-
-.. title:
 
 get_lines
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.cell_to_ipython_animation.get_lines(cell, time_index, range_vars='Vm')
+
 
    Get list of dictionaries of lines that can be displayed using the :py:meth:`plot_lines` function
 
    This is used to generate videos of membrane voltage vs soma distance.
 
-   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- cell object
-                * **time_index** (*int*) -- index of the time vector
-                * **range_vars** (*str*) -- range variable to plot
+   :param cell: cell object
+   :type cell: single_cell_parser.cell.Cell
+   :param time_index: index of the time vector
+   :type time_index: int
+   :param range_vars: range variable to plot
+   :type range_vars: str
 
    :returns: list of dictionaries of lines
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

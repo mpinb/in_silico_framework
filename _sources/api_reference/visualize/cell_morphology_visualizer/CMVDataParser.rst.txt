@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CMVDataParser
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -47,187 +43,192 @@ CMVDataParser
    
    Parse data from a :py:class:`~single_cell_parser.cell.Cell` object to a format that is easier to work with for visualization purposes.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object
-                * **align_trunk** (*bool*) -- Whether or not to align the cell trunk with the z-axis.
-                * **t_start** (*float*) -- Time point where we want to start visualizing. By default, this gets initialized to the start of the simulation.
-                * **t_stop** (*float*) -- Time point where the visualization of the simulation stops. By default, this gets initialized to the end of the simulation.
-                * **t_step** (*float*) -- Time interval for visualization. By default, the simulation is chopped to the specified t_begin and t_stop, and evenly divided in 10 timesteps.
+   :param cell: Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param align_trunk: Whether or not to align the cell trunk with the z-axis.
+   :type align_trunk: bool
+   :param t_start: Time point where we want to start visualizing. By default, this gets initialized to the start of the simulation.
+   :type t_start: float
+   :param t_stop: Time point where the visualization of the simulation stops. By default, this gets initialized to the end of the simulation.
+   :type t_stop: float
+   :param t_step: Time interval for visualization. By default, the simulation is chopped to the specified t_begin and t_stop, and evenly divided in 10 timesteps.
+   :type t_step: float
 
    :Attributes:
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      Cell object
+         Cell object
 
-      :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :py:class:`~single_cell_parser.cell.Cell`
 
-   .. attribute:: line_pairs
+      .. attribute:: line_pairs
 
-      Pairs of point indices that define a line, i.e. some cell segment.
+         Pairs of point indices that define a line, i.e. some cell segment.
 
-      :type: list
+         :type: list
 
-   .. attribute:: soma
+      .. attribute:: soma
 
-      Soma of the cell.
+         Soma of the cell.
 
-      :type: :py:class:`~single_cell_parser.cell.Section`
+         :type: :py:class:`~single_cell_parser.cell.Section`
 
-   .. attribute:: soma_center
+      .. attribute:: soma_center
 
-      Center of the soma of the original cell object, unaligned with z-axis.
+         Center of the soma of the original cell object, unaligned with z-axis.
 
-      :type: np.ndarray
+         :type: np.ndarray
 
-   .. attribute:: parents
+      .. attribute:: parents
 
-      Maps sections to their parents. self.parents[10] returns the parent of section 10.
+         Maps sections to their parents. self.parents[10] returns the parent of section 10.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: morphology
+      .. attribute:: morphology
 
-      A pd.DataFrame containing point information, diameter and section ID without duplicated points for branchpoints for connections between sections.
+         A pd.DataFrame containing point information, diameter and section ID without duplicated points for branchpoints for connections between sections.
 
-      :type: pd.DataFrame
+         :type: pd.DataFrame
 
-   .. attribute:: sections
+      .. attribute:: sections
 
-      An array of unique section indices.
+         An array of unique section indices.
 
-      :type: np.ndarray
+         :type: np.ndarray
 
-   .. attribute:: n_sections
+      .. attribute:: n_sections
 
-      Number of sections in the cell.
+         Number of sections in the cell.
 
-      :type: int
+         :type: int
 
-   .. attribute:: rotation_with_zaxis
+      .. attribute:: rotation_with_zaxis
 
-      Rotation object that defines the transformation between the cell trunk and the z-axis.
+         Rotation object that defines the transformation between the cell trunk and the z-axis.
 
-      :type: scipy.spatial.transform.Rotation
+         :type: scipy.spatial.transform.Rotation
 
-   .. attribute:: background_color
+      .. attribute:: background_color
 
-      Background color of the visualization. Default is white.
+         Background color of the visualization. Default is white.
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: vmin
+      .. attribute:: vmin
 
-      Minimum value of the color scale.
+         Minimum value of the color scale.
 
-      :type: float
+         :type: float
 
-   .. attribute:: vmax
+      .. attribute:: vmax
 
-      Maximum value of the color scale.
+         Maximum value of the color scale.
 
-      :type: float
+         :type: float
 
-   .. attribute:: norm
+      .. attribute:: norm
 
-      Normalization object for the color scale.
+         Normalization object for the color scale.
 
-      :type: matplotlib.colors.Normalize
+         :type: matplotlib.colors.Normalize
 
-   .. attribute:: cmap
+      .. attribute:: cmap
 
-      Colormap for the color scale.
+         Colormap for the color scale.
 
-      :type: matplotlib.colors.Colormap
+         :type: matplotlib.colors.Colormap
 
-   .. attribute:: scalar_mappable
+      .. attribute:: scalar_mappable
 
-      Scalar mappable object for the color scale.
+         Scalar mappable object for the color scale.
 
-      :type: matplotlib.cm.ScalarMappable
+         :type: matplotlib.cm.ScalarMappable
 
-   .. attribute:: simulation_times
+      .. attribute:: simulation_times
 
-      Time points of the simulation.
+         Time points of the simulation.
 
-      :type: np.ndarray
+         :type: np.ndarray
 
-   .. attribute:: time_offset
+      .. attribute:: time_offset
 
-      Time offset w.r.t. simulation start. Useful if '0 ms' is supposed to refer to stimulus time.
+         Time offset w.r.t. simulation start. Useful if '0 ms' is supposed to refer to stimulus time.
 
-      :type: float
+         :type: float
 
-   .. attribute:: t_start
+      .. attribute:: t_start
 
-      Time point where we want to start visualizing. By default, this gets initialized to the start of the simulation.
+         Time point where we want to start visualizing. By default, this gets initialized to the start of the simulation.
 
-      :type: float
+         :type: float
 
-   .. attribute:: t_stop
+      .. attribute:: t_stop
 
-      Time point where the visualization of the simulation stops. By default, this gets initialized to the end of the simulation.
+         Time point where the visualization of the simulation stops. By default, this gets initialized to the end of the simulation.
 
-      :type: float
+         :type: float
 
-   .. attribute:: dt
+      .. attribute:: dt
 
-      Time interval of the simulation. Note that this is note the same as t_step, as not every time point is visualized by default.
+         Time interval of the simulation. Note that this is note the same as t_step, as not every time point is visualized by default.
 
-      :type: float
+         :type: float
 
-   .. attribute:: t_step
+      .. attribute:: t_step
 
-      Time interval for visualization.
-      Does not have to equal the simulation time interval.
-      By default, the simulation is chopped to the specified t_begin and t_stop, and evenly divided in 10 timesteps.
+         Time interval for visualization.
+         Does not have to equal the simulation time interval.
+         By default, the simulation is chopped to the specified t_begin and t_stop, and evenly divided in 10 timesteps.
 
-      :type: float
+         :type: float
 
-   .. attribute:: times_to_show
+      .. attribute:: times_to_show
 
-      An array of time points to visualize. Gets calculated from :paramref:`self.t_start`, :paramref:`self.t_stop` and :paramref:`self.t_step`.
+         An array of time points to visualize. Gets calculated from :paramref:`self.t_start`, :paramref:`self.t_stop` and :paramref:`self.t_step`.
 
-      :type: np.ndarray
+         :type: np.ndarray
 
-   .. attribute:: possible_scalars
+      .. attribute:: possible_scalars
 
-      Accepted keywords for scalar data other than membrane voltage.
+         Accepted keywords for scalar data other than membrane voltage.
 
-      :type: set
+         :type: set
 
-   .. attribute:: voltage_timeseries
+      .. attribute:: voltage_timeseries
 
-      List containing the voltage of the cell during a timeseries.
-      Each element corresponds to a time point. Each element of the list contains n elements, being n the number of points of the cell morphology.
-      Hence, the value of each element is the voltage at each point of the cell morphology. None means it has no simulation data.
-      Empty list means it has simulation data that has not been initialized yet.
+         List containing the voltage of the cell during a timeseries.
+         Each element corresponds to a time point. Each element of the list contains n elements, being n the number of points of the cell morphology.
+         Hence, the value of each element is the voltage at each point of the cell morphology. None means it has no simulation data.
+         Empty list means it has simulation data that has not been initialized yet.
 
-      :type: list
+         :type: list
 
-   .. attribute:: synapses_timeseries
+      .. attribute:: synapses_timeseries
 
-      List containing the synapse activations during a timeseries (Similarly to :paramref:`voltage_timeseries`).
-      Each element corresponds to a time point.
-      Each element is a dictionary where each key is the type of input population and the value is the list of active synapses for that type of population at that time point.
-      The list contains the 3d coordinates where each active synapse is located. None means it has no simulation data.
-      Empty list means it has simulation data that has not been initialized yet.
+         List containing the synapse activations during a timeseries (Similarly to :paramref:`voltage_timeseries`).
+         Each element corresponds to a time point.
+         Each element is a dictionary where each key is the type of input population and the value is the list of active synapses for that type of population at that time point.
+         The list contains the 3d coordinates where each active synapse is located. None means it has no simulation data.
+         Empty list means it has simulation data that has not been initialized yet.
 
-      :type: list
+         :type: list
 
-   .. attribute:: ion_dynamics_timeseries
+      .. attribute:: ion_dynamics_timeseries
 
-      Dictionary containing the ion dynamics during a timeseries (Similarly to :paramref:`voltage_timeseries`).
-      Each value is a list corresponding where each element corresponds 1 timepoint, containing per-point info on the ion channel state or ion concentration.
-      None means it has no simulation data.
-      Empty means it has simulation data that has not been initialized yet.
+         Dictionary containing the ion dynamics during a timeseries (Similarly to :paramref:`voltage_timeseries`).
+         Each value is a list corresponding where each element corresponds 1 timepoint, containing per-point info on the ion channel state or ion concentration.
+         None means it has no simulation data.
+         Empty means it has simulation data that has not been initialized yet.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: time_show_syn_activ
+      .. attribute:: time_show_syn_activ
 
-      Time in the simulation during which a synapse activation is shown during the visualization.
+         Time in the simulation during which a synapse activation is shown during the visualization.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -274,3 +275,7 @@ CMVDataParser
       * - :py:obj:`set_cmap <visualize.cell_morphology_visualizer.CMVDataParser.set_cmap>`\ (cmap, vmin, vmax)
         - Update the colormap, vmin, and vmax of the visualization.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

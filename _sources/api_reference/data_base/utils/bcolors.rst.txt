@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.bcolors`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 bcolors
 =======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -24,57 +20,61 @@ bcolors
 
    :Attributes:
 
-   .. attribute:: HEADER
+      .. attribute:: HEADER
 
-      Header color
+         Header color
 
-      :type: str
+         :type: str
 
-   .. attribute:: OKBLUE
+      .. attribute:: OKBLUE
 
-      Blue color
+         Blue color
 
-      :type: str
+         :type: str
 
-   .. attribute:: OKCYAN
+      .. attribute:: OKCYAN
 
-      Cyan color
+         Cyan color
 
-      :type: str
+         :type: str
 
-   .. attribute:: OKGREEN
+      .. attribute:: OKGREEN
 
-      Green color
+         Green color
 
-      :type: str
+         :type: str
 
-   .. attribute:: WARNING
+      .. attribute:: WARNING
 
-      Warning color
+         Warning color
 
-      :type: str
+         :type: str
 
-   .. attribute:: FAIL
+      .. attribute:: FAIL
 
-      Fail color
+         Fail color
 
-      :type: str
+         :type: str
 
-   .. attribute:: ENDC
+      .. attribute:: ENDC
 
-      End color (reset)
+         End color (reset)
 
-      :type: str
+         :type: str
 
-   .. attribute:: BOLD
+      .. attribute:: BOLD
 
-      Bold
+         Bold
 
-      :type: str
+         :type: str
 
-   .. attribute:: UNDERLINE
+      .. attribute:: UNDERLINE
 
-      Underline
+         Underline
 
-      :type: str
+         :type: str
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

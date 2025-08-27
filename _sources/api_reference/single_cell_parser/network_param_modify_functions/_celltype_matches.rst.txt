@@ -1,22 +1,22 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions._celltype_matches`
-
-
-.. title:
 
 _celltype_matches
 =================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.network_param_modify_functions._celltype_matches(celltype_name, celltypes, columns)
+
 
    Check if the celltype name matches the celltypes and columns.
 
-   :Parameters: * **celltype_name** (*str*) -- The celltype name.
-                * **celltypes** (*list*) -- The celltypes to match.
-                * **columns** (*list*) -- The columns to match.
+   :param celltype_name: The celltype name.
+   :type celltype_name: str
+   :param celltypes: The celltypes to match.
+   :type celltypes: list
+   :param columns: The columns to match.
+   :type columns: list
 
    .. rubric:: Example
       :class: example
@@ -37,8 +37,7 @@ _celltype_matches
    :raises AssertionError: If :paramref:`columns` is not a list.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

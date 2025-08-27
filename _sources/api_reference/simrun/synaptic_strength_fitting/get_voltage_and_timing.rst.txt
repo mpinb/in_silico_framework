@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_voltage_and_timing`
-
-
-.. title:
 
 get_voltage_and_timing
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method='dynamic_baseline', tStim=None, tEnd=None)
+
 
    Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.
 
@@ -32,9 +29,9 @@ get_voltage_and_timing
            celltype_2: {...},
        }
 
-   :Parameters: * **vt** (*defaultdict*) -- Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
-                * **method** (*str*) --
-
+   :param vt: Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
+   :type vt: defaultdict
+   :param method:
                   ``dynamic_baseline``: a simulation without any synaptic activation is
                       substracted from a simulation with cell activation. The maximum and
                       timepoint of maximum is returned
@@ -43,15 +40,17 @@ get_voltage_and_timing
                       from all voltages at all timepoints.
                       The maximum and timepoint of the maximum after :math:`t = 110ms` is
                       returned.
-                * **tStim** (*float*) -- Timepoint of synapse activation.
-                * **tEnd** (*float*) -- End time of the simulation.
+   :type method: str
+   :param tStim: Timepoint of synapse activation.
+   :type tStim: float
+   :param tEnd: End time of the simulation.
+   :type tEnd: float
 
    :returns: A dictionary where lists of ``(time, max_v)`` are given for each synapse, categorized under the keys ``(cell_type, g1, g2)``.
    :rtype: defaultdict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

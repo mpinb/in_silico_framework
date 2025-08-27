@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Synapse
 =======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,53 +29,62 @@ Synapse
       This is a leightweight dataclass specialized for use with :py:mod:`single_cell_input_mapper.synapse_mapper`,
       and does not contain any methods for NEURON API or synapse activations during simulations.
 
-   :Parameters: * **edgeID** (*ind*) -- Section ID.
-                * **edgePtID** (*int*) -- Point ID on that section.
-                * **edgex** (*float*) -- Relative position along the section (0-1).
-                * **preCellType** (*str*) -- Presynaptic cell type. Default: ''.
-                * **postCellType** (*str*) -- Postsynaptic cell type. Default: ''.
+   :param edgeID: Section ID.
+   :type edgeID: ind
+   :param edgePtID: Point ID on that section.
+   :type edgePtID: int
+   :param edgex: Relative position along the section (0-1).
+   :type edgex: float
+   :param preCellType: Presynaptic cell type. Default: ''.
+   :type preCellType: str
+   :param postCellType: Postsynaptic cell type. Default: ''.
+   :type postCellType: str
 
    :Attributes:
 
-   .. attribute:: secID
+      .. attribute:: secID
 
-      Section ID.
+         Section ID.
 
-      :type: int
+         :type: int
 
-   .. attribute:: ptID
+      .. attribute:: ptID
 
-      Point ID on that section.
+         Point ID on that section.
 
-      :type: int
+         :type: int
 
-   .. attribute:: x
+      .. attribute:: x
 
-      Relative position along the section (0-1).
+         Relative position along the section (0-1).
 
-      :type: float
+         :type: float
 
-   .. attribute:: preCellType
+      .. attribute:: preCellType
 
-      Presynaptic cell type.
+         Presynaptic cell type.
 
-      :type: str
+         :type: str
 
-   .. attribute:: preCell
+      .. attribute:: preCell
 
-      Presynaptic cell.
+         Presynaptic cell.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
 
-   .. attribute:: postCellType
+      .. attribute:: postCellType
 
-      Postsynaptic cell type.
+         Postsynaptic cell type.
 
-      :type: str
+         :type: str
 
-   .. attribute:: coordinates
+      .. attribute:: coordinates
 
-      3D coordinates of the synapse location.
+         3D coordinates of the synapse location.
 
-      :type: numpy.ndarray
+         :type: numpy.ndarray
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

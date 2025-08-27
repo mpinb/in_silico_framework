@@ -1,24 +1,24 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize` ❭ :mod:`~data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization`
-
-
-.. title:
 
 _check_needs_reoptimization
 ===========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization(key, old_dumper_name, new_dumper_name)
+
 
    Check if a key needs re-optimization.
 
    Dumper formats that need to be re-optimized are saved in :py:mod:`~data_base.db_initializers.load_simrun_general.config`.
 
-   :Parameters: * **key** (*str*) -- The key to check.
-                * **old_dumper_name** (*str*) -- The name of the old dumper.
-                * **new_dumper_name** (*str*) -- The name of the new dumper.
+   :param key: The key to check.
+   :type key: str
+   :param old_dumper_name: The name of the old dumper.
+   :type old_dumper_name: str
+   :param new_dumper_name: The name of the new dumper.
+   :type new_dumper_name: str
 
    :returns: True if the key needs re-optimization, False otherwise.
    :rtype: bool
@@ -28,8 +28,7 @@ _check_needs_reoptimization
    :raises Warning: If the old and new dumper are configured to be the same (should not be the case).
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

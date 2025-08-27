@@ -1,31 +1,31 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.split_synapse_activation`
-
-
-.. title:
 
 split_synapse_activation
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.split_synapse_activation(sa, selfcheck=True, excitatory=EXCITATORY, inhibitory=INHIBITORY)
+
 
    Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
 
-   :Parameters: * **sa** (:py:class:`~pandas.DataFrame`) -- A :ref:`syn_activation_format` dataframe.
-                  Must contain the column ``synapse_type``.
-                * **selfcheck** (*bool*) -- If ``True``, check if all cell types are either excitatory or inhibitory.
-                * **excitatory** (*list*) -- List of excitatory cell types.
-                * **inhibitory** (*list*) -- List of inhibitory cell types.
+   :param sa: A :ref:`syn_activation_format` dataframe.
+              Must contain the column ``synapse_type``.
+   :type sa: ~pandas.DataFrame
+   :param selfcheck: If ``True``, check if all cell types are either excitatory or inhibitory.
+   :type selfcheck: bool
+   :param excitatory: List of excitatory cell types.
+   :type excitatory: list
+   :param inhibitory: List of inhibitory cell types.
+   :type inhibitory: list
 
    :returns: a :py:class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

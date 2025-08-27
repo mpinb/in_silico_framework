@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse.is_active`
+
+
 
 Synapse.is_active
 =================
 
+
 .. py:method:: single_cell_parser.synapse.Synapse.is_active()
+
 
    Check if the synapse is active.
 
@@ -15,3 +17,8 @@ Synapse.is_active
 
    .. seealso:: :py:meth:`activate_hoc_syn` and :py:meth:`disconnect_hoc_synapse`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

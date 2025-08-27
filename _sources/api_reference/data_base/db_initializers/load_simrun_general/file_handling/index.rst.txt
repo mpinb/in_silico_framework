@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
+
 
 file_handling
 =============
@@ -13,6 +15,8 @@ file_handling
    make_filelist </api_reference/data_base/db_initializers/load_simrun_general/file_handling/make_filelist>
    get_file </api_reference/data_base/db_initializers/load_simrun_general/file_handling/get_file>
    get_max_commas </api_reference/data_base/db_initializers/load_simrun_general/file_handling/get_max_commas>
+   get_recsite_labels_from_dend_vt_filelist </api_reference/data_base/db_initializers/load_simrun_general/file_handling/get_recsite_labels_from_dend_vt_filelist>
+   _get_recsite_ids_from_recsite_labels </api_reference/data_base/db_initializers/load_simrun_general/file_handling/_get_recsite_ids_from_recsite_labels>
 
 .. py:module:: data_base.db_initializers.load_simrun_general.file_handling
 
@@ -35,5 +39,11 @@ Functions
      - Get the filename of the unique file in the current directory with the specified suffix.
    * - :py:obj:`get_max_commas <data_base.db_initializers.load_simrun_general.file_handling.get_max_commas>`\ (paths)
      - Get the maximum amount of delimiters across many files.
+   * - :py:obj:`get_recsite_labels_from_dend_vt_filelist <data_base.db_initializers.load_simrun_general.file_handling.get_recsite_labels_from_dend_vt_filelist>`\ (filelist, full\_suffix)
+     - Get the recording site labels from a list of dendritic voltage trace files.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

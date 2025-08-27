@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize`
+
+
 
 Strategy_spatiotemporalRaisedCosine.visualize
 =============================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize(optimizer_output, only_successful=False, normalize=True)
+
 
    Plot the basis functions.
 
@@ -15,10 +17,18 @@ Strategy_spatiotemporalRaisedCosine.visualize
       These are the same basis functions as in :py:class:`RaisedCosineBasis`.
       These are thus not multiplied with the synapse activation data, as is the case with :paramref:`basis`.
 
-   :Parameters: * **optimizer_output** (*List[scipy.optimize.OptimizeResult]*) -- An array of optimizer outputs. usually one element per data split.
-                * **only_succesful** (*bool*) -- Whether to only plot the successful optimizer outputs. Default is ``False``.
-                * **normalize** (*bool*) -- Whether to normalize the basis functions. Default is ``True``.
+   :param optimizer_output: An array of optimizer outputs. usually one element per data split.
+   :type optimizer_output: List[scipy.optimize.OptimizeResult]
+   :param only_succesful: Whether to only plot the successful optimizer outputs. Default is ``False``.
+   :type only_succesful: bool
+   :param normalize: Whether to normalize the basis functions. Default is ``True``.
+   :type normalize: bool
 
    :returns: Nothing. Plots the basis functions.
    :rtype: None
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

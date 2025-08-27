@@ -1,18 +1,26 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_response_probability_in_period` ❭ :mod:`~spike_analysis.core.STAPlugin_response_probability_in_period.setup`
+
+
 
 STAPlugin_response_probability_in_period.setup
 ==============================================
 
+
 .. py:method:: spike_analysis.core.STAPlugin_response_probability_in_period.setup(spike_times_analysis)
+
 
    Sets up the analysis: computes the response probability in a period.
 
    :paramref:`_result` will be the response probability.
 
-   :Parameters: **spike_times_analysis** (:py:class:`~spike_analysis.core.SpikeTimesAnalysis`) -- The spike times analysis object.
+   :param spike_times_analysis: The spike times analysis object.
+   :type spike_times_analysis: ~spike_analysis.core.SpikeTimesAnalysis
 
    .. seealso:: :py:meth:`~spike_analysis.core.STAPlugin_TEMPLATE.get_result`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

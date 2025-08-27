@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.SpikeInit`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SpikeInit
 =========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -48,3 +44,7 @@ SpikeInit
       * - :py:obj:`analyze_single_spike <single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike>`\ (cell, tVec, thresh)
         - :summarylabel:`static` Calculate spike height, width (FWHM) and after hyperpolarization depth (AHP).
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

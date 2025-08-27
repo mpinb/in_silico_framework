@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spatiotemporal_binning`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.analyze` ❭ 
+
 
 spatiotemporal_binning
 ======================
@@ -42,3 +44,7 @@ Functions
      - Bin a pandas or dask DataFrame by both distance and time.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

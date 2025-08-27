@@ -1,17 +1,21 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough`
+
+
 
 SpikeDetectionCreastTrough._set_creast_trough
 =============================================
 
+
 .. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough(lim_creast, lim_trough)
+
 
    Sets the creast and trough limits based on the given values.
 
-   :Parameters: * **lim_creast** (*float|str*) -- Threshold above which a creast of a spike is detected as such.
-                * **lim_trough** (*float|str*) -- Threshold below which a trough of a spike is detected as such.
+   :param lim_creast: Threshold above which a creast of a spike is detected as such.
+   :type lim_creast: float|str
+   :param lim_trough: Threshold below which a trough of a spike is detected as such.
+   :type lim_trough: float|str
 
    :raises ValueError: If lim_creast and lim_trough are not both floats or both "minimum" or both "zero".
 
@@ -19,3 +23,8 @@ SpikeDetectionCreastTrough._set_creast_trough
 
    :returns: None. Sets the :paramref:`lim_creast` and :paramref:`lim_trough` attributes.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

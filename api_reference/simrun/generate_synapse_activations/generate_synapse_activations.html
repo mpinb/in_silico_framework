@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -520,10 +522,10 @@
       
         <li class="md-nav__item">
   <a href="#simrun.generate_synapse_activations.generate_synapse_activations" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.generate_synapse_activations.generate_synapse_activations (Python function) — Generates nSweeps * nprocs synapse activation files and writes them to the folder dirPrefix/results/simName." class="md-ellipsis">simrun.<wbr>generate_<wbr>synapse_<wbr>activations.<wbr>generate_<wbr>synapse_<wbr>activations</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.generate_synapse_activations.generate_synapse_activations (Python function) — Generates nSweeps * nprocs synapse activation files and writes them to the folder dirPrefix/results/simName." class="md-ellipsis">simrungenerate_<wbr>synapse_<wbr>activationsgenerate_<wbr>synapse_<wbr>activations</span>
   </a>
   
-    <nav class="md-nav" aria-label="simrun.generate_synapse_activations.generate_synapse_activations">
+    <nav class="md-nav" aria-label="simrungenerate_synapse_activationsgenerate_synapse_activations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -531,12 +533,53 @@
     <span class="md-ellipsis">Parameters</span>
   </a>
   
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName (Python parameter) — Path to cell parameter file." class="md-ellipsis">cell<wbr>Param<wbr>Name</span>
+  </a>
+  
 </li>
         
           <li class="md-nav__item">
-  <a href="#simrun.generate_synapse_activations.generate_synapse_activations-parameters" class="md-nav__link">
-    <span class="md-ellipsis">Parameters</span>
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName (Python parameter) — Path to a network_parameters_format file, containing information on synapse and network parameters per cell type." class="md-ellipsis">evoked<wbr>Up<wbr>Param<wbr>Name</span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.nSweeps" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.nSweeps (Python parameter) — number of synapse activations per process" class="md-ellipsis">n<wbr>Sweeps</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.nprocs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.nprocs (Python parameter) — number of independent processes" class="md-ellipsis">nprocs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.tStop" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.tStop (Python parameter) — time in ms at which the synaptic input should stop." class="md-ellipsis">t<wbr>Stop</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName (Python parameter) — Path to cell parameter file." class="md-ellipsis">cell<wbr>Param<wbr>Name</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -630,21 +673,6 @@
     <li class="md-nav__item">
       <a href="../robust_dask_delayed_execution/index.html" class="md-nav__link">
         <span title="/api_reference/simrun/robust_dask_delayed_execution/index.rst (reference label)" class="md-ellipsis">robust_<wbr>dask_<wbr>delayed_<wbr>execution</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../run_existing_synapse_activations/index.html" class="md-nav__link">
-        <span title="/api_reference/simrun/run_existing_synapse_activations/index.rst (reference label)" class="md-ellipsis">run_<wbr>existing_<wbr>synapse_<wbr>activations</span>
       </a>
     </li>
   
@@ -890,10 +918,10 @@
       
         <li class="md-nav__item">
   <a href="#simrun.generate_synapse_activations.generate_synapse_activations" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.generate_synapse_activations.generate_synapse_activations (Python function) — Generates nSweeps * nprocs synapse activation files and writes them to the folder dirPrefix/results/simName." class="md-ellipsis">simrun.<wbr>generate_<wbr>synapse_<wbr>activations.<wbr>generate_<wbr>synapse_<wbr>activations</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.generate_synapse_activations.generate_synapse_activations (Python function) — Generates nSweeps * nprocs synapse activation files and writes them to the folder dirPrefix/results/simName." class="md-ellipsis">simrungenerate_<wbr>synapse_<wbr>activationsgenerate_<wbr>synapse_<wbr>activations</span>
   </a>
   
-    <nav class="md-nav" aria-label="simrun.generate_synapse_activations.generate_synapse_activations">
+    <nav class="md-nav" aria-label="simrungenerate_synapse_activationsgenerate_synapse_activations">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -901,12 +929,53 @@
     <span class="md-ellipsis">Parameters</span>
   </a>
   
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName (Python parameter) — Path to cell parameter file." class="md-ellipsis">cell<wbr>Param<wbr>Name</span>
+  </a>
+  
 </li>
         
           <li class="md-nav__item">
-  <a href="#simrun.generate_synapse_activations.generate_synapse_activations-parameters" class="md-nav__link">
-    <span class="md-ellipsis">Parameters</span>
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName (Python parameter) — Path to a network_parameters_format file, containing information on synapse and network parameters per cell type." class="md-ellipsis">evoked<wbr>Up<wbr>Param<wbr>Name</span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.nSweeps" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.nSweeps (Python parameter) — number of synapse activations per process" class="md-ellipsis">n<wbr>Sweeps</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.nprocs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.nprocs (Python parameter) — number of independent processes" class="md-ellipsis">nprocs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.tStop" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.tStop (Python parameter) — time in ms at which the synaptic input should stop." class="md-ellipsis">t<wbr>Stop</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName (Python parameter) — Path to cell parameter file." class="md-ellipsis">cell<wbr>Param<wbr>Name</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -943,36 +1012,39 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> ❭ <a class="reference internal" href="index.html#module-simrun.generate_synapse_activations" title="simrun.generate_synapse_activations (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">generate_synapse_activations</span></code></a> ❭ <a class="reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations" title="simrun.generate_synapse_activations.generate_synapse_activations (Python function) — Generates nSweeps * nprocs synapse activation files and writes them to the folder dirPrefix/results/simName."><code class="xref py py-mod docutils literal notranslate"><span class="pre">generate_synapse_activations</span></code></a></p>
-<h1 id="generate-synapse-activations">generate_synapse_activations<a class="headerlink" href="#generate-synapse-activations" title="Permalink to this heading">¶</a></h1>
+<h1 id="generate-synapse-activations">generate_synapse_activations<a class="headerlink" href="#generate-synapse-activations" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.generate_synapse_activations.generate_synapse_activations">
-<span class="sig-prename descclassname"><span class="pre">simrun.generate_synapse_activations.</span></span><span class="sig-name descname"><span class="pre">generate_synapse_activations</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">cellParamName</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">evokedUpParamName</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">dirPrefix</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">nSweeps</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1000</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">nprocs</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">40</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tStop</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">345</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">silent</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><span class="sig-name descname"><span class="pre">simrun</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-simrun.generate_synapse_activations" title="simrun.generate_synapse_activations (Python module)"><span class="sig-name descname"><span class="pre">generate_synapse_activations</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">generate_synapse_activations</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" title="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName (Python parameter) — Path to cell parameter file."><span class="n"><span class="pre">cellParamName</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName" title="simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName (Python parameter) — Path to a network_parameters_format file, containing information on synapse and network parameters per cell type."><span class="n"><span class="pre">evokedUpParamName</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations" title="simrun.generate_synapse_activations.generate_synapse_activations.dirPrefix (Python parameter)"><span class="n"><span class="pre">dirPrefix</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations.nSweeps" title="simrun.generate_synapse_activations.generate_synapse_activations.nSweeps (Python parameter) — number of synapse activations per process"><span class="n"><span class="pre">nSweeps</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1000</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations.nprocs" title="simrun.generate_synapse_activations.generate_synapse_activations.nprocs (Python parameter) — number of independent processes"><span class="n"><span class="pre">nprocs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">40</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations.tStop" title="simrun.generate_synapse_activations.generate_synapse_activations.tStop (Python parameter) — time in ms at which the synaptic input should stop."><span class="n"><span class="pre">tStop</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">345</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.generate_synapse_activations.generate_synapse_activations" title="simrun.generate_synapse_activations.generate_synapse_activations.silent (Python parameter)"><span class="n"><span class="pre">silent</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations" title="Link to this definition">¶</a></dt>
 <dd><p>Generates <code class="xref py py-paramref docutils literal notranslate"><span class="pre">nSweeps</span></code> * <code class="xref py py-paramref docutils literal notranslate"><span class="pre">nprocs</span></code> synapse activation files and writes them to
 the folder <code class="docutils literal notranslate"><span class="pre">dirPrefix/results/simName</span></code>.</p>
 <p>For each process, a new seed is generated using the seed generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.generate_synapse_activations.generate_synapse_activations-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cellParamName</strong> (<em>str</em>) – Path to a <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> file,
-containing information about the neuron morphology (link to a <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> file) and biophysical properties.</p></li>
-<li><p><strong>evokedUpParamName</strong> (<em>str</em>) – Path to a <a class="reference internal" href="../../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a> file,
-containing information on synapse and network parameters per cell type.</p></li>
-<li><p><strong>nSweeps</strong> – number of synapse activations per process</p></li>
-<li><p><strong>nprocs</strong> – number of independent processes</p></li>
-<li><p><strong>tStop</strong> – time in ms at which the synaptic input should stop.</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName"><span class="sig-name descname">cellParamName</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" title="Permalink to this definition">¶</a></dt><dd><p>Path to a <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> file,
+containing information about the neuron morphology (link to a <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> file) and biophysical properties.</p>
 </dd>
-<dt class="field-even" id="simrun.generate_synapse_activations.generate_synapse_activations-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-even"><p><strong>cellParamName</strong> (<em>str</em>) – Path to cell parameter file.</p>
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName"><span class="sig-name descname">evokedUpParamName</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.evokedUpParamName" title="Permalink to this definition">¶</a></dt><dd><p>Path to a <a class="reference internal" href="../../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a> file,
+containing information on synapse and network parameters per cell type.</p>
 </dd>
-<dt class="field-odd" id="simrun.generate_synapse_activations.generate_synapse_activations-returns">Returns<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-returns" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p>Can be computed with arbitrary scheduler.
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.nSweeps"><span class="n sig-name">nSweeps</span><span class="o">=</span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1000</span></code><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.nSweeps" title="Permalink to this definition">¶</a></dt><dd><p>number of synapse activations per process</p>
+</dd>
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.nprocs"><span class="n sig-name">nprocs</span><span class="o">=</span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">40</span></code><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.nprocs" title="Permalink to this definition">¶</a></dt><dd><p>number of independent processes</p>
+</dd>
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.tStop"><span class="n sig-name">tStop</span><span class="o">=</span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">345</span></code><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.tStop" title="Permalink to this definition">¶</a></dt><dd><p>time in ms at which the synaptic input should stop.</p>
+</dd>
+<dt id="simrun.generate_synapse_activations.generate_synapse_activations.cellParamName"><span class="n sig-name">cellParamName</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations.cellParamName" title="Permalink to this definition">¶</a></dt><dd><p>Path to cell parameter file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even" id="simrun.generate_synapse_activations.generate_synapse_activations-returns">Returns<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-returns" title="Permalink to this headline">¶</a></dt>
+<dd class="field-even"><p>Can be computed with arbitrary scheduler.
 Computing delayed object returns List of lists. Each child list contains the paths
 of the synapse activation files generated by one worker</p>
 </dd>
-<dt class="field-even" id="simrun.generate_synapse_activations.generate_synapse_activations-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-return-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-even"><p>dask.delayed</p>
+<dt class="field-odd" id="simrun.generate_synapse_activations.generate_synapse_activations-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#simrun.generate_synapse_activations.generate_synapse_activations-return-type" title="Permalink to this headline">¶</a></dt>
+<dd class="field-odd"><p>dask.delayed</p>
 </dd>
 </dl>
 <div class="seealso admonition">
@@ -981,6 +1053,9 @@ of the synapse activation files generated by one worker</p>
 </div>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1048,7 +1123,7 @@ of the synapse activation files generated by one worker</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1071,9 +1146,9 @@ of the synapse activation files generated by one worker</p>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

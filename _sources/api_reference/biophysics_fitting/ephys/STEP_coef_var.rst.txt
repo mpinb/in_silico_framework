@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.STEP_coef_var`
-
-
-.. title:
 
 STEP_coef_var
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.STEP_coef_var(t, v, stim_end, thresh=None)
+
 
    Computes the coefficient of variation (CV) of the Inter-Spike Interval (ISI) of a voltage trace for a step stimulus.
 
@@ -25,16 +22,18 @@ STEP_coef_var
       We are considering a population sample, not a distribution variance. We must Bessel-correct the standard deviation.
       In this case, the standard deviation is calculated with 1 degree of freedom i.e. a denominator of :math:`N-1` instead of :math:`N`.
 
-   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
-                * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **thresh** (*float, optional*) -- Voltage threshold for spike detection. Defaults to None.
+   :param t: Array of time values.
+   :type t: numpy.ndarray
+   :param v: Array of voltage values.
+   :type v: numpy.ndarray
+   :param thresh: Voltage threshold for spike detection. Defaults to None.
+   :type thresh: float, optional
 
    :returns: Coefficient of variation of the ISI.
    :rtype: float
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

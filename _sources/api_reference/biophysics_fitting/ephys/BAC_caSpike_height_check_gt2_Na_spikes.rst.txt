@@ -1,30 +1,30 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes`
-
-
-.. title:
 
 BAC_caSpike_height_check_gt2_Na_spikes
 ======================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes(t, v, v_dend, thresh=None)
+
 
    Checks if the number of spikes in the voltage trace is greater than or equal to 2.
 
-   :Parameters: * **t** (*array*) -- Array of time values.
-                * **v** (*array*) -- Array of voltage values.
-                * **v_dend** (*array*) -- Array of dendritic voltage values.
-                * **thresh** (*float, optional*) -- Spike detection threshold. Defaults to None.
+   :param t: Array of time values.
+   :type t: array
+   :param v: Array of voltage values.
+   :type v: array
+   :param v_dend: Array of dendritic voltage values.
+   :type v_dend: array
+   :param thresh: Spike detection threshold. Defaults to None.
+   :type thresh: float, optional
 
    :returns: True if the number of spikes is greater than or equal to 2, False otherwise.
    :rtype: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.set_stim_onset`
-
-
-.. title:
 
 set_stim_onset
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.network_param_modify_functions.set_stim_onset(n, onset=None)
+
 
    Changes the offset when pointcells get activated
 
-   :Parameters: * **n** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The :ref:`network_parameters_format`.
-                * **onset** (*float*) -- The onset time in milliseconds.
+   :param n: The :ref:`network_parameters_format`.
+   :type n: ~single_cell_parser.parameters.NTParameterSet
+   :param onset: The onset time in milliseconds.
+   :type onset: float
 
    .. rubric:: Example
       :class: example
@@ -28,8 +27,7 @@ set_stim_onset
    100
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

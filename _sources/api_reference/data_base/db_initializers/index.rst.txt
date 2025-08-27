@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
+
 
 db_initializers
 ===============
@@ -42,9 +44,13 @@ Modules
    :class: summarytable
    
    * - :py:obj:`load_simrun_general <data_base.db_initializers.load_simrun_general>`
-     - Parse simulation data generated with :py:mod:`simrun` for general purposes.
+     - Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
    * - :py:obj:`prepare_ANN_batches <data_base.db_initializers.prepare_ANN_batches>`
      - Parse a simrun-initialized database for ANN batch preparation.
    * - :py:obj:`synapse_activation_binning <data_base.db_initializers.synapse_activation_binning>`
      - Methods for fast binning of :ref:`syn_activation_format` dataframes.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

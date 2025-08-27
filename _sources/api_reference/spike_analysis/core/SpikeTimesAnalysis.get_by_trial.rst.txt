@@ -1,18 +1,21 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis.get_by_trial`
+
+
 
 SpikeTimesAnalysis.get_by_trial
 ===============================
 
+
 .. py:method:: spike_analysis.core.SpikeTimesAnalysis.get_by_trial(key)
+
 
    Get spike information by trial.
 
    Assumes the key refers to an STAPlugin that contains the attribute ``_by_trial``.
 
-   :Parameters: **key** (*str*) -- The name of the event analysis routine, referring to an STAPlugin.
+   :param key: The name of the event analysis routine, referring to an STAPlugin.
+   :type key: str
 
    .. rubric:: Example
       :class: example
@@ -20,3 +23,8 @@ SpikeTimesAnalysis.get_by_trial
    :py:class:`~spike_analysis.core.STAPlugin_response_probability_in_period` and
    :py:class:`~spike_analysis.core.STAPlugin_response_latency_in_period` have this attribute.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

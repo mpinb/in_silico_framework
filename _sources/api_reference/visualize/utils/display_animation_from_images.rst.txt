@@ -1,24 +1,26 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.display_animation_from_images`
-
-
-.. title:
 
 display_animation_from_images
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.utils.display_animation_from_images(files, interval=10, style=False, animID=None, embedded=False)
+
 
    Creates an IPython animation out of files specified in a globstring or a list of paths.
 
-   :Parameters: * **files** (*list | str*) -- list of images, a directory with images or a list of directories with images
-                * **interval** (*int | float*) -- time interval between frames in ms.
-                * **style** (*bool*) -- whether to use the default style or not.
-                * **animID** (*int*) -- unique integer to identify the animation in the javascript environment of IPython
-                * **embedded** (*bool*) -- whether to embed the images in the html file or not.
+   :param files: list of images, a directory with images or a list of directories with images
+   :type files: list | str
+   :param interval: time interval between frames in ms.
+   :type interval: int | float
+   :param style: whether to use the default style or not.
+   :type style: bool
+   :param animID: unique integer to identify the animation in the javascript environment of IPython
+   :type animID: int
+   :param embedded: whether to embed the images in the html file or not.
+   :type embedded: bool
 
    :returns: None. Displays the animation in the notebook.
 
@@ -28,8 +30,7 @@ display_animation_from_images
       the are resolved in the browser and not by python
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

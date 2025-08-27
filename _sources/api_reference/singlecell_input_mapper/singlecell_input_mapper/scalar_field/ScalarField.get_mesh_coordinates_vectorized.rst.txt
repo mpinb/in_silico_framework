@@ -1,14 +1,21 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates_vectorized`
+
+
 
 ScalarField.get_mesh_coordinates_vectorized
 ===========================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates_vectorized(coords)
+
 
    Vectorized sampling of scalar values at multiple coordinates.
    coords: ndarray (..., 3) of (x,y,z)
    Returns: ndarray of scalar values (same shape as coords[..., 0])
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

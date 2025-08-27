@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.mkdtemp`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 mkdtemp
 =======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,3 +29,7 @@ mkdtemp
    >>> os.path.exists(tempdir)
    False
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

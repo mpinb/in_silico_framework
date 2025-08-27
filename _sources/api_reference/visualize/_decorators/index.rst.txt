@@ -1,5 +1,7 @@
 
-:mod:`visualize` ❭ :mod:`~visualize._decorators`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
+
 
 _decorators
 ===========
@@ -46,3 +48,7 @@ Functions
      - Call a function on each row of a dataframe separately.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

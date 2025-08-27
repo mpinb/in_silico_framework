@@ -1,34 +1,38 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.manylines` ❭ :mod:`~visualize.manylines.manylines`
-
-
-.. title:
 
 manylines
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.manylines.manylines(df, ax=None, axis=None, colormap=None, groupby_attribute=None, figsize=(15, 3), returnPixelObject=False, scheduler=None)
+
 
    Parallelizes the plot of many lines
 
-   :Parameters: * **df** (*pd.DataFrame*) -- the dataframe containing voltage traces,
-                * **ax** (*matplotlib.pyplot.Axes*) -- an ax instance.
-                * **axis** (*list*) -- the ax limits, e.g. [1, 10, 1, 10]
-                * **colormap** (*dict*) -- a colormap, mapping values for :paramref:groupby_attribute to colors.
-                * **groupby_attribute** (*str*) -- column name to group by.
-                * **figsize** (*tupe(int)*) -- the size of the Figure
-                * **returnPixelObject** (*bool*) -- Whether or not to return as a PixelObject
-                * **scheduler** (*distributed.client.Client | str, optional*) -- a distributed scheduler.
+   :param df: the dataframe containing voltage traces,
+   :type df: pd.DataFrame
+   :param ax: an ax instance.
+   :type ax: matplotlib.pyplot.Axes
+   :param axis: the ax limits, e.g. [1, 10, 1, 10]
+   :type axis: list
+   :param colormap: a colormap, mapping values for :paramref:groupby_attribute to colors.
+   :type colormap: dict
+   :param groupby_attribute: column name to group by.
+   :type groupby_attribute: str
+   :param figsize: the size of the Figure
+   :type figsize: tupe(int)
+   :param returnPixelObject: Whether or not to return as a PixelObject
+   :type returnPixelObject: bool
+   :param scheduler: a distributed scheduler.
+   :type scheduler: distributed.client.Client | str, optional
 
    :returns: Figure object containing all lines defined in :paramref:`df`
    :rtype: :py:class:`~matplotlib.figure.Figure`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

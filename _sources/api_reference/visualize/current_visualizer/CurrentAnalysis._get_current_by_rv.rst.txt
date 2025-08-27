@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis._get_current_by_rv`
+
+
 
 CurrentAnalysis._get_current_by_rv
 ==================================
 
+
 .. py:method:: visualize.current_visualizer.CurrentAnalysis._get_current_by_rv(rv)
+
 
    Get the section current by the range variable name.
 
-   :Parameters: **rv** (*str*) -- The range variable name.
+   :param rv: The range variable name.
+   :type rv: str
 
    :returns: The ionic current of the section.
    :rtype: np.array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

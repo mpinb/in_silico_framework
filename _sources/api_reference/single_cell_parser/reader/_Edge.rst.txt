@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader._Edge`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _Edge
 =====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -48,47 +44,47 @@ _Edge
 
    :Attributes:
 
-   .. attribute:: label
+      .. attribute:: label
 
-      label and ID of the segment (e.g. "Dendrite_1_0_0").
+         label and ID of the segment (e.g. "Dendrite_1_0_0").
 
-      :type: str
+         :type: str
 
-   .. attribute:: hocLabel
+      .. attribute:: hocLabel
 
-      Hoc label of the segment (e.g. "Soma", "Axon" ...).
+         Hoc label of the segment (e.g. "Soma", "Axon" ...).
 
-      :type: str
+         :type: str
 
-   .. attribute:: edgePts
+      .. attribute:: edgePts
 
-      List of points in the segment.
+         List of points in the segment.
 
-      :type: list
+         :type: list
 
-   .. attribute:: diameterList
+      .. attribute:: diameterList
 
-      List of diameters at each point.
+         List of diameters at each point.
 
-      :type: list
+         :type: list
 
-   .. attribute:: parentID
+      .. attribute:: parentID
 
-      label and ID of the parent segment.
+         label and ID of the parent segment.
 
-      :type: int
+         :type: int
 
-   .. attribute:: parentConnect
+      .. attribute:: parentConnect
 
-      How far along the parent section the connection is (i.e. the `x`-coordinate).
+         How far along the parent section the connection is (i.e. the `x`-coordinate).
 
-      :type: float
+         :type: float
 
-   .. attribute:: valid
+      .. attribute:: valid
 
-      Flag indicating if the segment is valid.
+         Flag indicating if the segment is valid.
 
-      :type: bool
+         :type: bool
 
    :Methods:
 
@@ -101,3 +97,7 @@ _Edge
       * - :py:obj:`is_valid <single_cell_parser.reader._Edge.is_valid>`\ ()
         - Check if this edge is valid.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,0 +1,30 @@
+
+
+_estimate_n_chunks
+==================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing._estimate_n_chunks(filelist, estimate_sample_size=1, partition_size=None)
+
+
+   Estimate how to divide filenames in chunks so that each chunk is approximately the target dask partition size.
+
+   This function relies on the global config variable
+   :py:attr:`~data_base.db_initializers.load_simrun_general.config.DASK_TARGET_PARTITION_SIZE`
+
+   :param filelist: List of voltage trace filenames
+   :type filelist: List[str]
+   :param estimate_sample_size: Amount of files to sample in order to estimate their length. Set to ``1`` if you expect all files to be of equal length.
+   :type estimate_sample_size: int, optional
+
+   :returns:     The amount of chunks to divide the filelist in such that each chunk will yield a dataframe of approximate size
+                 :py:attr:`~data_base.db_initializers.load_simrun_general.config.DASK_TARGET_PARTITION_SIZE`
+   :rtype: int
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,22 +1,22 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_sim_results`
-
-
-.. title:
 
 write_sim_results
 =================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_sim_results(fname, t, v)
+
 
    Write out a voltage trace file.
 
-   :Parameters: * **fname** (*str*) -- The name of the file to write to.
-                * **t** (*list*) -- The time points of the voltage trace.
-                * **v** (*list*) -- The voltage trace.
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param t: The time points of the voltage trace.
+   :type t: list
+   :param v: The voltage trace.
+   :type v: list
 
    :returns: None. Writes out the voltage trace file to :paramref:`fname`.
 
@@ -28,8 +28,7 @@ write_sim_results
    >>> write_sim_results('voltage_trace.dat', t, v)
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

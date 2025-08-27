@@ -1,16 +1,19 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step.AHP_depth_abs`
+
+
 
 _Step.AHP_depth_abs
 ===================
 
+
 .. py:method:: biophysics_fitting.hay.evaluation._Step.AHP_depth_abs(voltage_traces)
+
 
    Get the afterhyperpolarization depth in the somatic voltage trace.
 
-   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+   :param voltage_traces: dictionary with the voltage traces of the soma and dendrite.
+   :type voltage_traces: dict
 
    :returns:
 
@@ -20,3 +23,8 @@ _Step.AHP_depth_abs
 
    .. seealso:: :py:meth:`~biophysics_fitting.ephys.AHP_depth_abs`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

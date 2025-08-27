@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 NTParameterSet
 ==============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -50,11 +46,11 @@ NTParameterSet
 
    :Attributes:
 
-   .. attribute:: _data
+      .. attribute:: _data
 
-      The underlying dictionary storing parameters.
+         The underlying dictionary storing parameters.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -81,3 +77,7 @@ NTParameterSet
       * - :py:obj:`update <single_cell_parser.parameters.NTParameterSet.update>`\ (other, \*\*kwargs)
         - Update the NTParameterSet with another dictionary or keyword arguments.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

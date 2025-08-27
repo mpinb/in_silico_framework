@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_statistics`
+
+
 
 _DendrogramSynapseStatistics._compute_synapse_statistics
 ========================================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_statistics()
+
 
    Compute the synapse statistics.
 
@@ -16,3 +18,8 @@ _DendrogramSynapseStatistics._compute_synapse_statistics
    :returns: Nothing. Updates :paramref:`synapse_statistics`.
    :rtype: None
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

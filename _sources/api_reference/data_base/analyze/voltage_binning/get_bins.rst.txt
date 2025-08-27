@@ -1,29 +1,28 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.get_bins`
-
-
-.. title:
 
 get_bins
 ========
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.voltage_binning.get_bins(bin_size=None, min_=None, max_=None)
+
 
    Construct bin edges from a sice and range.
 
-   :Parameters: * **bin_size** (*float*) -- the size of the bins
-                * **min_** (*float*) -- the minimum value
-                * **max_** (*float*) -- the maximum value
+   :param bin_size: the size of the bins
+   :type bin_size: float
+   :param min_: the minimum value
+   :type min_: float
+   :param max_: the maximum value
+   :type max_: float
 
    :returns: the bin edges
    :rtype: np.array
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

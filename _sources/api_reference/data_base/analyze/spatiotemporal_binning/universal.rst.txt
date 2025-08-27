@@ -1,27 +1,30 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spatiotemporal_binning` ❭ :mod:`~data_base.analyze.spatiotemporal_binning.universal`
-
-
-.. title:
 
 universal
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.spatiotemporal_binning.universal(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
+
 
    Bin a pandas or dask DataFrame by both distance and time.
 
    Infers the type of the input DataFrame and calls the appropriate binning function.
 
-   :Parameters: * **df** (:py:class:`~pandas.DataFrame` or :py:class:`~dask.dataframe.DataFrame`) -- DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
-                * **distance_column** (*str*) -- Column name of the distance values.
-                * **spatial_distance_bins** (*int*) -- Size of the spatial bins. Default is :math:`50\mu m`.
-                * **min_time** (*int*) -- Minimum time value. Default is :math:`0 ms`.
-                * **max_time** (*int*) -- Maximum time value. Default is :math:`300ms`.
-                * **time_distance_bins** (*int*) -- Size of the time bins. Default is :math:`1ms`.
+   :param df: DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+   :type df: ~dask.dataframe.DataFrame
+   :param distance_column: Column name of the distance values.
+   :type distance_column: str
+   :param spatial_distance_bins: Size of the spatial bins. Default is :math:`50\mu m`.
+   :type spatial_distance_bins: int
+   :param min_time: Minimum time value. Default is :math:`0 ms`.
+   :type min_time: int
+   :param max_time: Maximum time value. Default is :math:`300ms`.
+   :type max_time: int
+   :param time_distance_bins: Size of the time bins. Default is :math:`1ms`.
+   :type time_distance_bins: int
 
    :returns:     A 2D array of the binned values.
    :rtype: :py:class:`~numpy.array`
@@ -29,8 +32,7 @@ universal
    .. seealso:: :py:meth:`~data_base.analyze.spatial_binning.universal_pd`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

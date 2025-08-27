@@ -1,16 +1,26 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._assign_synapse_weights`
+
+
 
 NetworkMapper._assign_synapse_weights
 =====================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._assign_synapse_weights(receptor, recepStr, syn)
+
 
    Assign synapse weights according to distribution specified in network parameters.
 
-   :Parameters: * **receptor** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Receptor parameters from network parameter file.
-                * **recepStr** (*str*) -- Receptor name.
-                * **syn** (*Synapse*) -- Synapse object.
+   :param receptor: Receptor parameters from network parameter file.
+   :type receptor: ~single_cell_parser.parameters.NTParameterSet
+   :param recepStr: Receptor name.
+   :type recepStr: str
+   :param syn: Synapse object.
+   :type syn: Synapse
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

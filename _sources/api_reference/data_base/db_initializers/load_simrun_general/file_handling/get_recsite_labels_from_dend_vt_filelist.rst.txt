@@ -1,0 +1,35 @@
+
+
+get_recsite_labels_from_dend_vt_filelist
+========================================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix)
+
+
+   Get the recording site labels from a list of dendritic voltage trace files.
+
+   .. rubric:: Example
+      :class: example
+
+   >>> fn = "path/to/YYYYMMDD-HHMM_seed001_pid001/seed001_pid001_pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6_vm_dend_traces.csv"
+   >>> suffix = "_vm_dend_traces.csv"  # needs leading underscore and .csv extension
+   >>> get_recsite_labels_from_dend_vt_filelist([fn], full_suffix=suffix)
+   ["pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6"]
+
+   :param filelist: List of filenames to dendritic voltage trace results.
+   :type filelist: List[str]
+   :param full_suffix: Shared suffix of the filenames that is mutually exclusive from the recsite label.
+                       This is normally fetched by the higher-level :py:func:`load_dendritic_voltage_traces`
+   :type full_suffix: str
+
+   :returns: List of recording site labels.
+   :rtype: List[str]
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

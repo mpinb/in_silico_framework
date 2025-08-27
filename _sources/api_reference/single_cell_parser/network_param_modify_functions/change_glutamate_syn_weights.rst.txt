@@ -1,31 +1,30 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights`
-
-
-.. title:
 
 change_glutamate_syn_weights
 ============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights(param, g_optimal=None, pop=EXCITATORY)
+
 
    Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
 
-   :Parameters: * **param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The :ref:`network_parameters_format`.
-                * **g_optimal** (*pandas.core.series.Series | pandas.core.frame.DataFrame*) -- The optimal values for the glutamate synapse weights.
-                  If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
-                  If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
-                * **pop** (*list*) -- The celltypes to apply the scaling to.
+   :param param: The :ref:`network_parameters_format`.
+   :type param: ~single_cell_parser.parameters.NTParameterSet
+   :param g_optimal: The optimal values for the glutamate synapse weights.
+                     If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
+                     If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
+   :type g_optimal: pandas.core.series.Series | pandas.core.frame.DataFrame
+   :param pop: The celltypes to apply the scaling to.
+   :type pop: list
 
    :raises AssertionError: If more than 1 index is found for the celltype in :paramref:`g_optimal`.
    :raises AssertionError: If the celltype is not found in :paramref:`g_optimal`.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

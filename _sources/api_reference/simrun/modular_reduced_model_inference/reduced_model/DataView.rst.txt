@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DataView
 ========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -46,23 +42,24 @@ DataView
    >>> dv['a']
    2
 
-   :Parameters: **mapping_dict** (*dict*) -- Mapping between requested keys and target keys.
-                Used to redirect data fetching.
+   :param mapping_dict: Mapping between requested keys and target keys.
+                        Used to redirect data fetching.
+   :type mapping_dict: dict
 
    :Attributes:
 
-   .. attribute:: mapping_dict
+      .. attribute:: mapping_dict
 
-      Mapping between requested keys and target keys.
-      Used to redirect data fetching.
+         Mapping between requested keys and target keys.
+         Used to redirect data fetching.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: Rm
+      .. attribute:: Rm
 
-      Reduced model. Set after running :py:meth:`setup`
+         Reduced model. Set after running :py:meth:`setup`
 
-      :type: :py:class:`Rm`
+         :type: :py:class:`Rm`
 
    :Methods:
 
@@ -75,3 +72,7 @@ DataView
       * - :py:obj:`setup <simrun.modular_reduced_model_inference.reduced_model.DataView.setup>`\ (Rm)
         - Initialize from a reduced model.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.set_up_biophysics`
+
+
 
 CellParser.set_up_biophysics
 ============================
 
+
 .. py:method:: single_cell_parser.cell_parser.CellParser.set_up_biophysics(parameters, full=False)
+
 
    Initialize membrane properties.
 
@@ -31,6 +33,13 @@ CellParser.set_up_biophysics
        5.1 Add passive spines if ``pas`` is present in the range mechanisms (see :py:meth:`_add_spines`).
        5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
 
-   :Parameters: * **parameters** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
-                * **full** (*bool*) -- Whether or not to use full spatial discretization.
+   :param parameters: Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+   :type parameters: ~single_cell_parser.parameters.NTParameterSet
+   :param full: Whether or not to use full spatial discretization.
+   :type full: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

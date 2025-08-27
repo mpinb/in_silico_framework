@@ -1,5 +1,7 @@
 
 
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
+
 
 single_cell_parser
 ==================
@@ -137,3 +139,7 @@ Modules
    * - :py:obj:`writer <single_cell_parser.writer>`
      - Write out anatomical, morphology or simulation data.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

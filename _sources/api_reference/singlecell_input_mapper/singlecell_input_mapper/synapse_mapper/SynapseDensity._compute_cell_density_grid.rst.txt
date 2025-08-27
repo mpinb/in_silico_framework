@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid`
+
+
 
 SynapseDensity._compute_cell_density_grid
 =========================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid()
+
 
    Create an empty mesh for the postsynaptic neuron to match the mesh of the synapse distribution.
 
@@ -21,3 +23,8 @@ SynapseDensity._compute_cell_density_grid
                  - cellBoundingBox (tuple): Bounding box of the mesh (minx, maxx, miny, maxy, minz, maxz).
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

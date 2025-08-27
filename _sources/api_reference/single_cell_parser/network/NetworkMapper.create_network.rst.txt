@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_network`
+
+
 
 NetworkMapper.create_network
 ============================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper.create_network(synWeightName=None, change=None)
+
 
    Set up a network from network parameters.
 
@@ -20,8 +22,15 @@ NetworkMapper.create_network
    4. Connect the presynaptic cells to the anatomical synapses using :py:meth:`~_connect_functional_synapses`.
    5. Connect to spike train sources using :py:meth:`_connect_spike_trains`.
 
-   :Parameters: * **synWeightName** (*str*) -- Name of the file containing the synapse weights. Default: None.
-                * **change** (*float*) -- Change in presynaptic release probability. Default: None.
+   :param synWeightName: Name of the file containing the synapse weights. Default: None.
+   :type synWeightName: str
+   :param change: Change in presynaptic release probability. Default: None.
+   :type change: float
 
    :returns: None. Updates the class attributes (in contrast to :py:meth:`~create_functional_realization, which writes to disk`).
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

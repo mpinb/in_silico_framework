@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.re_init_network`
+
+
 
 NetworkMapper.re_init_network
 =============================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper.re_init_network(replayMode=False)
+
 
    Reinitialize the network for a new simulation run.
 
@@ -14,7 +16,13 @@ NetworkMapper.re_init_network
 
    .. seealso:: :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
 
-   :Parameters: **replayMode** (*bool*) -- Whether or not to destroy the presynaptic cells as well. Default: False.
-                Set to False if you want to keep the presynaptic cells for a new simulation run.
-                Set to True if you want to recreate a new network realization (not taken care of in this function).
+   :param replayMode: Whether or not to destroy the presynaptic cells as well. Default: False.
+                      Set to False if you want to keep the presynaptic cells for a new simulation run.
+                      Set to True if you want to recreate a new network realization (not taken care of in this function).
+   :type replayMode: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

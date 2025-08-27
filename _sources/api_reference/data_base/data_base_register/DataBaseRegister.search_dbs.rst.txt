@@ -1,14 +1,22 @@
 
-.. backlink:
 
-:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister` ❭ :mod:`~data_base.data_base_register.DataBaseRegister.search_dbs`
+
+
 
 DataBaseRegister.search_dbs
 ===========================
 
+
 .. py:method:: data_base.data_base_register.DataBaseRegister.search_dbs(directory=None)
+
 
    Look for :py:class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
 
-   :Parameters: **directory** (*str, optional*) -- The directory to search in. Defaults to None, in which case the directory of the registry is searched.
+   :param directory: The directory to search in. Defaults to None, in which case the directory of the registry is searched.
+   :type directory: str, optional
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

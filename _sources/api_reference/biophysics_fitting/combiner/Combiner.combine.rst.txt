@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner.combine`
+
+
 
 Combiner.combine
 ================
 
+
 .. py:method:: biophysics_fitting.combiner.Combiner.combine(features)
+
 
    Combines features that are computed by an Evaluator class.
 
-   :Parameters: **features** (*list*) -- A list of features to be combined.
+   :param features: A list of features to be combined.
+   :type features: list
 
    :returns: A dictionary with the combined features.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

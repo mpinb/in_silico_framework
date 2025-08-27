@@ -1,23 +1,24 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.pandas_to_array`
-
-
-.. title:
 
 pandas_to_array
 ===============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.pandas_to_array(pdf, x_component_fun, y_component_fun, value_fun)
+
 
    Convert a pandas dataframe, in which information is stored linearly to a 2D presentation.
 
-   :Parameters: * **pdf** (*pd.DataFrame*) -- dataframe to be converted
-                * **x_component_fun** (*function*) -- function to extract the x component
-                * **y_component_fun** (*function*) -- function to extract the y component
-                * **value_fun** (*function*) -- function to extract the value
+   :param pdf: dataframe to be converted
+   :type pdf: pd.DataFrame
+   :param x_component_fun: function to extract the x component
+   :type x_component_fun: function
+   :param y_component_fun: function to extract the y component
+   :type y_component_fun: function
+   :param value_fun: function to extract the value
+   :type value_fun: function
 
    :returns: 2D representation of the data
    :rtype: pd.DataFrame
@@ -44,8 +45,7 @@ pandas_to_array
    2     2    0   -1
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

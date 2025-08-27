@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts` ❭ :mod:`~spike_analysis.core.STAPlugin_bursts.event_analysis_bursts`
+
+
 
 STAPlugin_bursts.event_analysis_bursts
 ======================================
 
+
 .. py:method:: spike_analysis.core.STAPlugin_bursts.event_analysis_bursts(row, event_maxtimes=None, event_names=None)
+
    :staticmethod:
 
 
@@ -15,10 +17,13 @@ STAPlugin_bursts.event_analysis_bursts
    An event is always classified as the one with the highest number of spikes possible,
    E.g., [1, 5, 9] could be classified as doublet + singlet, but it will be a triplet.
 
-   :Parameters: * **row** (*list-like*) -- Contains spike times.
-                * **event_maxtimes** (*dict*) -- Dictionary where keys indicate event type (0 means singlet, 1 means doublet, 2 means triplet, ...),
-                  and values indicate max duration of such an event.
-                * **event_name** (*dict*) -- Dictionary with names of the events (0: 'singlet', 1: 'doublet', 2: 'triplet').
+   :param row: Contains spike times.
+   :type row: list-like
+   :param event_maxtimes: Dictionary where keys indicate event type (0 means singlet, 1 means doublet, 2 means triplet, ...),
+                          and values indicate max duration of such an event.
+   :type event_maxtimes: dict
+   :param event_name: Dictionary with names of the events (0: 'singlet', 1: 'doublet', 2: 'triplet').
+   :type event_name: dict
 
    :returns:
 
@@ -28,3 +33,8 @@ STAPlugin_bursts.event_analysis_bursts
                  - ISI_{n}: Interval from the first spike of the event to the nth spike of the event.
    :rtype: pandas.DataFrame
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

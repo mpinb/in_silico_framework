@@ -1,23 +1,24 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.voltage_binning` ❭ :mod:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd`
-
-
-.. title:
 
 calculate_vdensity_array_pd
 ===========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pd(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
+
 
    Bin a :ref:`voltage_traces_df_format` in timebins across trials.
 
-   :Parameters: * **v** (:py:class:`~pandas.DataFrame`) -- A voltage traces dataframe. Column indices float and reflect timepoints.
-                * **bin_size** (*float*) -- The size of the bins.
-                * **ymin** (*float*) -- The minimum voltage value.
-                * **ymax** (*float*) -- The maximum voltage value.
+   :param v: A voltage traces dataframe. Column indices float and reflect timepoints.
+   :type v: ~pandas.DataFrame
+   :param bin_size: The size of the bins.
+   :type bin_size: float
+   :param ymin: The minimum voltage value.
+   :type ymin: float
+   :param ymax: The maximum voltage value.
+   :type ymax: float
 
    .. warning::
 
@@ -27,8 +28,7 @@ calculate_vdensity_array_pd
    .. seealso:: :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask` for the dask version.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

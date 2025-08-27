@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ 
+
 
 load_simrun_general
 ===================
@@ -14,6 +16,7 @@ load_simrun_general
    data_parsing </api_reference/data_base/db_initializers/load_simrun_general/data_parsing/index>  
    file_handling </api_reference/data_base/db_initializers/load_simrun_general/file_handling/index>  
    filepath_resolution </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/index>  
+   health </api_reference/data_base/db_initializers/load_simrun_general/health/index>  
    metadata_utils </api_reference/data_base/db_initializers/load_simrun_general/metadata_utils/index>  
    param_file_parser </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/index>  
    reoptimize </api_reference/data_base/db_initializers/load_simrun_general/reoptimize/index>  
@@ -27,13 +30,9 @@ load_simrun_general
 .. py:module:: data_base.db_initializers.load_simrun_general
 
 .. autoapi-nested-parse::
-   Parse simulation data generated with :py:mod:`simrun` for general purposes.
+   Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
 
-   The output format of :py:mod:`simrun` is a nested folder structure with ``.csv`` and/or ``.npz`` files.
-   The voltage traces are written to a single ``.csv`` file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
-   but the synapse and cell activation data is written to a separate file for each simulation trial (the amount
-   of spikes and synapse activations is not known in advance).
-
+   The output format of :py:mod:`simrun` are :ref:`simresult_dir_format`: a nested folder structure with ``.csv`` and/or ``.npz`` files.
    This module provides functions to gather and parse this data to pandas and dask dataframes. It merges all trials in a single dataframe.
    This saves IO time, disk space, and is strongly recommended for HPC systems and other shared filesystems in general, as it reduces the amount of inodes required.
 
@@ -94,7 +93,7 @@ load_simrun_general
    :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
    keys.
 
-   .. seealso:: :py:meth:`simrun.run_new_simulations.run_new_simulations` for more information on the raw output format of :py:mod:`simrun`.
+   .. seealso:: :ref:`simresult_dir_format` for more information on the raw output format of :py:mod:`simrun`.
 
    .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
 
@@ -111,7 +110,7 @@ Functions
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`init <data_base.db_initializers.load_simrun_general.init>`\ (db, simresult\_path, core, voltage\_traces, synapse\_activation, dendritic\_voltage\_traces, parameterfiles, spike\_times, burst\_times, repartition, scheduler, rewrite\_in\_optimized\_format, dendritic\_spike\_times, dendritic\_spike\_times\_threshold, client, n\_chunks, dumper)
+   * - :py:obj:`init <data_base.db_initializers.load_simrun_general.init>`\ (db, simresult\_path, core, synapse\_activation, dendritic\_voltage\_traces, parameterfiles, spike\_times, repartition, scheduler, rewrite\_in\_optimized\_format, dendritic\_spike\_times, dendritic\_spike\_times\_threshold, client, check\_health, n\_chunks, voltage\_traces, burst\_times, dumper, paramfile\_copy\_config)
      - Initialize a database with simulation data.
    * - :py:obj:`add_dendritic_voltage_traces <data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces>`\ (db, rewrite\_in\_optimized\_format, dendritic\_spike\_times, repartition, dendritic\_spike\_times\_threshold, scheduler, client)
      - Add dendritic voltage traces to the database.
@@ -135,12 +134,14 @@ Modules
    :class: summarytable
    
    * - :py:obj:`builders <data_base.db_initializers.load_simrun_general.builders>`
-     - \-
+     - Pipelines for building database keys containing results from :py:mod:`simrun`.
    * - :py:obj:`data_parsing <data_base.db_initializers.load_simrun_general.data_parsing>`
      - \-
    * - :py:obj:`file_handling <data_base.db_initializers.load_simrun_general.file_handling>`
      - \-
    * - :py:obj:`filepath_resolution <data_base.db_initializers.load_simrun_general.filepath_resolution>`
+     - \-
+   * - :py:obj:`health <data_base.db_initializers.load_simrun_general.health>`
      - \-
    * - :py:obj:`metadata_utils <data_base.db_initializers.load_simrun_general.metadata_utils>`
      - \-
@@ -151,3 +152,7 @@ Modules
    * - :py:obj:`utils <data_base.db_initializers.load_simrun_general.utils>`
      - \-
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

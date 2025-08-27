@@ -1,39 +1,43 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_pandas`
-
-
-.. title:
 
 synapse_activation_postprocess_pandas
 =====================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_pandas(pdf, groupby='', prefun=None, applyfun=None, postfun=None)
+
 
    Calculates bins of synapse activation per trial from a pandas dataframe.
 
-   :Parameters: * **pdf** (:py:class:`pandas.DataFrame`) -- synapse activation dask dataframe
-                * **groupby** (*str*) -- species for which subgroups the bins should be calculated. Available values include:
+   :param pdf: synapse activation dask dataframe
+   :type pdf: pandas.DataFrame
+   :param groupby: species for which subgroups the bins should be calculated. Available values include:
 
-                  - ``celltype``
-                  - ``presynaptic_column``
-                  - ``proximal`` (soma distance < 500 um)
-                  - ``EI`` (Lumping the EXC / INH celltypes together)
-                  - ``binned_somadist``: synapse counts for all 50 microns
-                  - any column in the specified dataframe.
-                * **db** (*DataBase*) -- if specified, the result will be computed immediately and saved in the database immediately.
-                * **get** (*dask scheduler*) -- Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
-                * **prefun** (*callable*) -- A function to preprocess the synapse activation dataframe before binning.
+                   - ``celltype``
+                   - ``presynaptic_column``
+                   - ``proximal`` (soma distance < 500 um)
+                   - ``EI`` (Lumping the EXC / INH celltypes together)
+                   - ``binned_somadist``: synapse counts for all 50 microns
+                   - any column in the specified dataframe.
+   :type groupby: str
+   :param db: if specified, the result will be computed immediately and saved in the database immediately.
+   :type db: DataBase
+   :param get: Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
+   :type get: dask scheduler
+   :param prefun: A function to preprocess the synapse activation dataframe before binning.
                   The function should take a pandas dataframe and return a pandas dataframe.
                   Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
-                * **applyfun** (*callable*) -- A function to bin the synapse activations.
-                  The function should take a pandas dataframe and return a numpy array.
-                  Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
-                * **postfun** (*callable*) -- A function to postprocess the binned synapse activations.
-                  The function should take a pandas series and return a numpy array.
-                  Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+   :type prefun: callable
+   :param applyfun: A function to bin the synapse activations.
+                    The function should take a pandas dataframe and return a numpy array.
+                    Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+   :type applyfun: callable
+   :param postfun: A function to postprocess the binned synapse activations.
+                   The function should take a pandas series and return a numpy array.
+                   Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+   :type postfun: callable
 
    :returns: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :paramref:`groupby`.
    :rtype: dict
@@ -41,8 +45,7 @@ synapse_activation_postprocess_pandas
    .. seealso:: :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

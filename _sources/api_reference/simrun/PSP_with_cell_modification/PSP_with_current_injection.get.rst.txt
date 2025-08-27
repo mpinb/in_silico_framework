@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection.get`
+
+
 
 PSP_with_current_injection.get
 ==============================
 
+
 .. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get()
+
 
    Get the final :py:class:`~simrun.synaptic_strength_fitting.PSPs` object.
 
@@ -15,3 +17,8 @@ PSP_with_current_injection.get
    :returns: PSP object to simulate PSPs
    :rtype: :py:class:`~simrun.synaptic_strength_fitting.PSPs`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

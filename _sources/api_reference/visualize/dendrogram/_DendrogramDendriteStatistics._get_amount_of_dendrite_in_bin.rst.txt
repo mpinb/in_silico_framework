@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin`
+
+
 
 _DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin
 ============================================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin(min_, max_)
+
 
    Get the amount of dendritic length in a certain bin of soma distance.
 
-   :Parameters: * **min\_** (*float*) -- The minimum soma distance.
-                * **max\_** (*float*) -- The maximum soma distance.
+   :param min\_: The minimum soma distance.
+   :type min\_: float
+   :param max\_: The maximum soma distance.
+   :type max\_: float
 
    :returns: The amount of dendritic length in the bin.
    :rtype: float
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

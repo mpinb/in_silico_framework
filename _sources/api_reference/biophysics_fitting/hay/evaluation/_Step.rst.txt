@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation._Step`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _Step
 =====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -46,88 +42,98 @@ _Step
 
    .. seealso:: :py:meth:`biophysics_fitting.setup_stim` for more information on the stimulus protocols.
 
-   :Parameters: * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
-                * **stim_onset** (*float*) -- The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.
-                * **stim_duration** (*float*) -- The duration of the stimulus (:math:`ms`). Defaults to :math:`2000\ ms`.
-                * **punish** (*float*) -- The punishment value in units of :math:`\sigma`.
+   :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
+   :type soma_thresh: float
+   :param stim_onset: The onset of the stimulus (:math:`ms`). Defaults to :math:`700\ ms`.
+   :type stim_onset: float
+   :param stim_duration: The duration of the stimulus (:math:`ms`). Defaults to :math:`2000\ ms`.
+   :type stim_duration: float
+   :param punish: The punishment value in units of :math:`\sigma`.
                   Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
                   Defaults to :math:`250 \sigma`.
-                * **punish_last_spike_after_deadline** (*bool*) -- Whether to punish if the last spike is after the deadline. Defaults to ``True``
-                * **punish_minspikenum** (*int*) -- The minimum number of spikes required for this stimulus protocol. Defaults to :math:`5`.
-                * **punish_returning_to_rest_tolerance** (*float*) -- The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
-                * **definitions** (*dict*) -- The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
-                * **name** (*str*) -- The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
-                * **step_index** (*int*) -- The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+   :type punish: float
+   :param punish_last_spike_after_deadline: Whether to punish if the last spike is after the deadline. Defaults to ``True``
+   :type punish_last_spike_after_deadline: bool
+   :param punish_minspikenum: The minimum number of spikes required for this stimulus protocol. Defaults to :math:`5`.
+   :type punish_minspikenum: int
+   :param punish_returning_to_rest_tolerance: The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+   :type punish_returning_to_rest_tolerance: float
+   :param definitions: The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :type definitions: dict
+   :param name: The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
+   :type name: str
+   :param step_index: The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+   :type step_index: int
 
    :Attributes:
 
-   .. attribute:: soma_thresh
+      .. attribute:: soma_thresh
 
-      The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
+         The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
 
-      :type: float
+         :type: float
 
-   .. attribute:: stim_onset
+      .. attribute:: stim_onset
 
-      The onset of the stimulus (ms). Defaults to :math:`700` ms.
+         The onset of the stimulus (ms). Defaults to :math:`700` ms.
 
-      :type: float
+         :type: float
 
-   .. attribute:: stim_duration
+      .. attribute:: stim_duration
 
-      The duration of the stimulus (ms). Defaults to :math:`2000` ms.
+         The duration of the stimulus (ms). Defaults to :math:`2000` ms.
 
-      :type: float
+         :type: float
 
-   .. attribute:: punish
+      .. attribute:: punish
 
-      The punishment value in units of :math:`\sigma`.
-      Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
-      Defaults to :math:`250`.
+         The punishment value in units of :math:`\sigma`.
+         Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+         Defaults to :math:`250`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: punish_last_spike_after_deadline
+      .. attribute:: punish_last_spike_after_deadline
 
-      Whether to punish if the last spike is after the deadline. Defaults to ``True``
+         Whether to punish if the last spike is after the deadline. Defaults to ``True``
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: punish_minspikenum
+      .. attribute:: punish_minspikenum
 
-      The minimum number of spikes required for this stimulus protocol.
+         The minimum number of spikes required for this stimulus protocol.
 
-      :type: int
+         :type: int
 
-   .. attribute:: punish_returning_to_rest_tolerance
+      .. attribute:: punish_returning_to_rest_tolerance
 
-      The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+         The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: prefix
+      .. attribute:: prefix
 
-      The prefix for the evaluation metric checks. Defaults to an empty string.
+         The prefix for the evaluation metric checks. Defaults to an empty string.
 
-      :type: str
+         :type: str
 
-   .. attribute:: definitions
+      .. attribute:: definitions
 
-      The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class.
+         The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
+         The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
 
-      :type: str
+         :type: str
 
-   .. attribute:: step_index
+      .. attribute:: step_index
 
-      The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
+         The index of the step stimulus protocol. Defaults to :math:`0`. Options are: ``[1, 2, 3]``.
 
-      :type: int
+         :type: int
 
    :Methods:
 
@@ -164,3 +170,7 @@ _Step
       * - :py:obj:`APw <biophysics_fitting.hay.evaluation._Step.APw>`\ (voltage\_traces)
         - Get the AP widths of all APs in the somatic voltage trace.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

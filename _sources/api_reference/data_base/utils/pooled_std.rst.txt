@@ -1,29 +1,28 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.pooled_std`
-
-
-.. title:
 
 pooled_std
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.pooled_std(m, s, n)
+
 
    Calculates the pooled standard deviation out of samples.
 
-   :Parameters: * **m** (*array*) -- means
-                * **s** (*array*) -- unbiased standard deviation (normalized by N-1)
-                * **n** (*array*) -- number of samples per group
+   :param m: means
+   :type m: array
+   :param s: unbiased standard deviation (normalized by N-1)
+   :type s: array
+   :param n: number of samples per group
+   :type n: array
 
    :returns: pooled mean and pooled standard deviation
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

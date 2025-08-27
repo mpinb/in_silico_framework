@@ -1,19 +1,29 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._update_times_to_show`
+
+
 
 CMVDataParser._update_times_to_show
 ===================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._update_times_to_show(t_start=None, t_stop=None, t_step=None)
+
 
    Checks if the specified time range equals the previously defined one. If not, updates the time range.
    If all arguments are None, does nothing. Useful for defining default time range
 
-   :Parameters: * **t_start** (*float*) -- start time
-                * **t_stop** (*float*) -- end time
-                * **t_step** (*float*) -- time interval
+   :param t_start: start time
+   :type t_start: float
+   :param t_stop: end time
+   :type t_stop: float
+   :param t_step: time interval
+   :type t_step: float
 
    :returns: None. Updates :paramref:`times_to_show`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

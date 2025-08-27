@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.combiner` ❭ :mod:`~biophysics_fitting.combiner.Combiner_Setup`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Combiner_Setup
 ==============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -42,3 +38,7 @@ Combiner_Setup
       * - :py:obj:`append <biophysics_fitting.combiner.Combiner_Setup.append>`\ (name, combination)
         - Appends feature names and combinations to the Combiner_Setup object.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

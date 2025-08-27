@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.model_selection` ❭ :mod:`~biophysics_fitting.model_selection.get_pdf_selected`
-
-
-.. title:
 
 get_pdf_selected
 ================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.model_selection.get_pdf_selected(pdf, BAC_limit=3.5, step_limit=4.5, objectives_BAC=objectives_BAC, objectives_step=objectives_step)
+
 
    Select models based on cutoffs from a DataFrame.
 
@@ -20,17 +17,21 @@ get_pdf_selected
    See :py:mod:`~biophysics_fitting.evaluator.Evaluator` for more information
    on evaluation voltage traces.
 
-   :Parameters: * **pdf** (*pd.DataFrame*) -- A DataFrame with model evaluations.
-                * **BAC_limit** (*float*) -- The cutoff for the BAC.
-                * **step_limit** (*float*) -- The cutoff for the step.
-                * **objectives_BAC** (*list*) -- The objectives for the BAC.
-                * **objectives_step** (*list*) -- The objectives for the step.
+   :param pdf: A DataFrame with model evaluations.
+   :type pdf: pd.DataFrame
+   :param BAC_limit: The cutoff for the BAC.
+   :type BAC_limit: float
+   :param step_limit: The cutoff for the step.
+   :type step_limit: float
+   :param objectives_BAC: The objectives for the BAC.
+   :type objectives_BAC: list
+   :param objectives_step: The objectives for the step.
+   :type objectives_step: list
 
    :returns: A filtered DataFrame and the model_id of the best model.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.spike_detection` ❭ :mod:`~data_base.analyze.spike_detection._helper`
-
-
-.. title:
 
 _helper
 =======
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.spike_detection._helper(x, threshold=0)
+
 
    Parse a :ref:`voltage_traces_df_format` and return a :py:class:`pandas.Series` containing the spikes,
 
@@ -19,8 +16,10 @@ _helper
    The results are converted back to a :py:class:`pandas.Series`, so it can be concatenated
    to a dask dataframe
 
-   :Parameters: * **x** (:py:class:`~pandas.DataFrame`) -- A dataframe containing the voltage traces
-                * **threshold** (*float*) -- The threshold for spike detection
+   :param x: A dataframe containing the voltage traces
+   :type x: ~pandas.DataFrame
+   :param threshold: The threshold for spike detection
+   :type threshold: float
 
    :returns: A series containing the spikes
    :rtype: :py:class:`~pandas.Series`
@@ -28,8 +27,7 @@ _helper
    .. seealso:: :py:meth:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

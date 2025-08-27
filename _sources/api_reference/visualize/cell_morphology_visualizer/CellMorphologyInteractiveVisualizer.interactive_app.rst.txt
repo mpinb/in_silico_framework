@@ -1,16 +1,27 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app`
+
+
 
 CellMorphologyInteractiveVisualizer.interactive_app
 ===================================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app(color='grey', t_start=None, t_stop=None, t_step=None)
 
-   :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
-                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
-                * **t_start** (*float*) -- start time point of our time series visualization
-                * **t_stop** (*float*) -- last time point of our time series visualization
-                * **t_step** (*float*) -- time interval
 
+   :param color: If you want some other color overlayed on the cell morphology.
+                 Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
+   :type color: str | list
+   :param t_start: start time point of our time series visualization
+   :type t_start: float
+   :param t_stop: last time point of our time series visualization
+   :type t_stop: float
+   :param t_step: time interval
+   :type t_step: float
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

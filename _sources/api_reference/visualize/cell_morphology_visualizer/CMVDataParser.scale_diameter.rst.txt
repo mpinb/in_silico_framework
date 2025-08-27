@@ -1,19 +1,26 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser.scale_diameter`
+
+
 
 CMVDataParser.scale_diameter
 ============================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser.scale_diameter(scale_func)
+
 
    Scale the diameter of the visualization with a scaling function.
    :paramref:`scale_func` should transform an array to an array of equal length.
    To set a fixed diameter rather than scaling, pass `lambda x: fixed_d`
 
-   :Parameters: **scale_func** -- method to scale the diameters with. Must accept an array and return an array. This will be passed to `pd.DataFrame.apply()`
+   :param scale_func: method to scale the diameters with. Must accept an array and return an array. This will be passed to `pd.DataFrame.apply()`
 
    :returns: Nothing.
    :rtype: None
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

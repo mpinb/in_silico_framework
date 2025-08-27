@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.dbopen`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 dbopen
 ======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -36,26 +32,32 @@ dbopen
    ...     print(f.read())
    # dumps the raw file content - not recommended for e.g. binary formats
 
-   :Parameters: * **path** (*str*) -- The path to the file.
-                * **mode** (*str*) -- The mode in which the file is opened. Default: 'r'
+   :param path: The path to the file.
+   :type path: str
+   :param mode: The mode in which the file is opened. Default: 'r'
+   :type mode: str
 
    :Attributes:
 
-   .. attribute:: path
+      .. attribute:: path
 
-      The path to the file.
+         The path to the file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: mode
+      .. attribute:: mode
 
-      The mode in which the file is opened.
+         The mode in which the file is opened.
 
-      :type: str
+         :type: str
 
-   .. attribute:: exit_hooks
+      .. attribute:: exit_hooks
 
-      A list of functions to be called when the context manager is exited. Used to close ``.tar`` files
+         A list of functions to be called when the context manager is exited. Used to close ``.tar`` files
 
-      :type: list
+         :type: list
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -516,21 +518,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../run_existing_synapse_activations/index.html" class="md-nav__link">
-        <span title="/api_reference/simrun/run_existing_synapse_activations/index.rst (reference label)" class="md-ellipsis">run_<wbr>existing_<wbr>synapse_<wbr>activations</span>
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../run_new_simulations/index.html" class="md-nav__link">
         <span title="/api_reference/simrun/run_new_simulations/index.rst (reference label)" class="md-ellipsis">run_<wbr>new_<wbr>simulations</span>
       </a>
@@ -580,7 +567,7 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4_12" type="checkbox" id="__nav_1_4_12" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_4_11" type="checkbox" id="__nav_1_4_11" checked>
       
       
       
@@ -588,14 +575,14 @@
         <div class="md-nav__link md-nav__link--index ">
           <a href="index.html"><span title="/api_reference/simrun/synaptic_strength_fitting/index.rst (reference label)" class="md-ellipsis">synaptic_<wbr>strength_<wbr>fitting</span></a>
           
-            <label for="__nav_1_4_12">
+            <label for="__nav_1_4_11">
               <span class="md-nav__icon md-icon"></span>
             </label>
           
         </div>
       
       <nav class="md-nav" aria-label="synaptic_strength_fitting" data-md-level="3">
-        <label class="md-nav__title" for="__nav_1_4_12">
+        <label class="md-nav__title" for="__nav_1_4_11">
           <span class="md-nav__icon md-icon"></span>
           <span title="/api_reference/simrun/synaptic_strength_fitting/index.rst (reference label)" class="md-ellipsis">synaptic_<wbr>strength_<wbr>fitting</span>
         </label>
@@ -775,16 +762,43 @@
       
         <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.get_optimal_g" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrun.<wbr>synaptic_<wbr>strength_<wbr>fitting.<wbr>get_<wbr>optimal_<wbr>g</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fittingget_<wbr>optimal_<wbr>g</span>
   </a>
   
-    <nav class="md-nav" aria-label="simrun.synaptic_strength_fitting.get_optimal_g">
+    <nav class="md-nav" aria-label="simrunsynaptic_strength_fittingget_optimal_g">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.get_optimal_g-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.measured_data" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.measured_data (Python parameter) — A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype. Must contain the keys: [EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]." class="md-ellipsis">measured_<wbr>data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.method" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.method (Python parameter) — dynamic_baseline or constant_baseline." class="md-ellipsis">method</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.threashold" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.threashold (Python parameter) — The threashold to consider a celltype as excitatory." class="md-ellipsis">threashold</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1123,16 +1137,43 @@
       
         <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.get_optimal_g" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrun.<wbr>synaptic_<wbr>strength_<wbr>fitting.<wbr>get_<wbr>optimal_<wbr>g</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="simrun.synaptic_strength_fitting.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data." class="md-ellipsis">simrunsynaptic_<wbr>strength_<wbr>fittingget_<wbr>optimal_<wbr>g</span>
   </a>
   
-    <nav class="md-nav" aria-label="simrun.synaptic_strength_fitting.get_optimal_g">
+    <nav class="md-nav" aria-label="simrunsynaptic_strength_fittingget_optimal_g">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#simrun.synaptic_strength_fitting.get_optimal_g-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.measured_data" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.measured_data (Python parameter) — A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype. Must contain the keys: [EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]." class="md-ellipsis">measured_<wbr>data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.method" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.method (Python parameter) — dynamic_baseline or constant_baseline." class="md-ellipsis">method</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simrun.synaptic_strength_fitting.get_optimal_g.threashold" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="simrun.synaptic_strength_fitting.get_optimal_g.threashold (Python parameter) — The threashold to consider a celltype as excitatory." class="md-ellipsis">threashold</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1169,23 +1210,25 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> ❭ <a class="reference internal" href="index.html#module-simrun.synaptic_strength_fitting" title="simrun.synaptic_strength_fitting (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synaptic_strength_fitting</span></code></a> ❭ <a class="reference internal" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="simrun.synaptic_strength_fitting.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">get_optimal_g</span></code></a></p>
-<h1 id="get-optimal-g">get_optimal_g<a class="headerlink" href="#get-optimal-g" title="Permalink to this heading">¶</a></h1>
+<h1 id="get-optimal-g">get_optimal_g<a class="headerlink" href="#get-optimal-g" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.synaptic_strength_fitting.get_optimal_g">
-<span class="sig-prename descclassname"><span class="pre">simrun.synaptic_strength_fitting.</span></span><span class="sig-name descname"><span class="pre">get_optimal_g</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">measured_data</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;dynamic_baseline&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">threashold</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">0.1</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><span class="sig-name descname"><span class="pre">simrun</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-simrun.synaptic_strength_fitting" title="simrun.synaptic_strength_fitting (Python module)"><span class="sig-name descname"><span class="pre">synaptic_strength_fitting</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">get_optimal_g</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="simrun.synaptic_strength_fitting.get_optimal_g.self (Python parameter)"><span class="n"><span class="pre">self</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.get_optimal_g.measured_data" title="simrun.synaptic_strength_fitting.get_optimal_g.measured_data (Python parameter) — A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype. Must contain the keys: [EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]."><span class="n"><span class="pre">measured_data</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.get_optimal_g.method" title="simrun.synaptic_strength_fitting.get_optimal_g.method (Python parameter) — dynamic_baseline or constant_baseline."><span class="n"><span class="pre">method</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;dynamic_baseline&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.synaptic_strength_fitting.get_optimal_g.threashold" title="simrun.synaptic_strength_fitting.get_optimal_g.threashold (Python parameter) — The threashold to consider a celltype as excitatory."><span class="n"><span class="pre">threashold</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">0.1</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g" title="Link to this definition">¶</a></dt>
 <dd><p>Calculate the optimal synaptic conductance such that the EPSP matches empirical data.</p>
 <p>For each celltype (or merged celltype), the optimal synaptic conductance is calculated
 by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
 This linear interpolation is cross-referenced with empirically observed statistics to infer the optimal synaptic conductance.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.get_optimal_g-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>measured_data</strong> (<em>pd.DataFrame</em>) – A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
-Must contain the keys: <code class="docutils literal notranslate"><span class="pre">[EPSP_mean_measured,</span> <span class="pre">EPSP_median_measured,</span> <span class="pre">EPSP_max_measured]</span></code>.</p></li>
-<li><p><strong>method</strong> (<em>str</em>) – <code class="docutils literal notranslate"><span class="pre">dynamic_baseline</span></code> or <code class="docutils literal notranslate"><span class="pre">constant_baseline</span></code>.</p></li>
-<li><p><strong>threashold</strong> (<em>float</em>) – The threashold to consider a celltype as excitatory.</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="simrun.synaptic_strength_fitting.get_optimal_g.measured_data"><span class="sig-name descname">measured_data</span><span class="p"> : </span><span class="desctype"><span class="desctype">pd.DataFrame</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g.measured_data" title="Permalink to this definition">¶</a></dt><dd><p>A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
+Must contain the keys: <code class="docutils literal notranslate"><span class="pre">[EPSP_mean_measured,</span> <span class="pre">EPSP_median_measured,</span> <span class="pre">EPSP_max_measured]</span></code>.</p>
+</dd>
+<dt id="simrun.synaptic_strength_fitting.get_optimal_g.method"><span class="sig-name descname">method</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g.method" title="Permalink to this definition">¶</a></dt><dd><p><code class="docutils literal notranslate"><span class="pre">dynamic_baseline</span></code> or <code class="docutils literal notranslate"><span class="pre">constant_baseline</span></code>.</p>
+</dd>
+<dt id="simrun.synaptic_strength_fitting.get_optimal_g.threashold"><span class="sig-name descname">threashold</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g.threashold" title="Permalink to this definition">¶</a></dt><dd><p>The threashold to consider a celltype as excitatory.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="simrun.synaptic_strength_fitting.get_optimal_g-returns">Returns<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.get_optimal_g-returns" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>A table of the optimal synaptic conductance for each celltype.</p>
@@ -1200,6 +1243,9 @@ Must contain the keys: <code class="docutils literal notranslate"><span class="p
 </div>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1267,7 +1313,7 @@ Must contain the keys: <code class="docutils literal notranslate"><span class="p
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1290,9 +1336,9 @@ Must contain the keys: <code class="docutils literal notranslate"><span class="p
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

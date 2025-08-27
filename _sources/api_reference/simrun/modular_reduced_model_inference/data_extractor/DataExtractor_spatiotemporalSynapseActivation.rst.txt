@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DataExtractor_spatiotemporalSynapseActivation
 =============================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -36,21 +32,22 @@ DataExtractor_spatiotemporalSynapseActivation
    
    Extracts matrix of the shape ``(trial, time, space)`` from spatiotemporal synapse activation binning
 
-   :Parameters: **key** (*tuple|str*) -- key to access the data in the :py:class:`DataBase`
+   :param key: key to access the data in the :py:class:`DataBase`
+   :type key: tuple|str
 
    :Attributes:
 
-   .. attribute:: key
+      .. attribute:: key
 
-      key to access the data in the :py:class:`DataBase`
+         key to access the data in the :py:class:`DataBase`
 
-      :type: tuple|str
+         :type: tuple|str
 
-   .. attribute:: data
+      .. attribute:: data
 
-      dictionary with groups as keys and spatiotemporal inputpatterns as keys.
+         dictionary with groups as keys and spatiotemporal inputpatterns as keys.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -75,3 +72,7 @@ DataExtractor_spatiotemporalSynapseActivation
       * - :py:obj:`get <simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get>`\ ()
         - Get the spatiotemporal input patterns.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

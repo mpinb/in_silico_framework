@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.map_singlecell_inputs` ❭ :mod:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`
-
-
-.. title:
 
 map_singlecell_inputs
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs(cellName, cellTypeName, nrOfSamples=50, numberOfCellsSpreadsheetName=numberOfCellsSpreadsheetName, connectionsSpreadsheetName=connectionsSpreadsheetName, ExPSTDensityName=ExPSTDensityName, InhPSTDensityName=InhPSTDensityName, boutonDensityFolderName=boutonDensityFolderName)
+
 
    Map inputs to a single cell morphology.
 
@@ -43,22 +40,28 @@ map_singlecell_inputs
    - The number of cells per cell type spreadsheet
    - The bouton folders containing axon traces
 
-   :Parameters: * **cellName** (*str*) -- path to a :ref:`hoc_file_format` file containing the morphology of the cell.
-                * **cellTypeName** (*str*) -- name of the postsynaptic cell type.
-                * **nrOfSamples** (*int*) -- number of samples to use for the network embedding.
-                * **numberOfCellsSpreadsheetName** (*str*) -- Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
-                  Values indicate how much of each celltype was found in each neuropil structure.
-                * **connectionsSpreadsheetName** (*str*) -- Path to a spreadsheet, containing the connection probabilities between each presynaptic and postsynaptic cell type.
-                * **ExPSTDensityName** (*str*) -- Path to the PST density file for excitatory synapses.
-                * **InhPSTDensityName** (*str*) -- Path to the PST density file for inhibitory synapses.
-                * **boutonDensityFolderName** -- A directory containing the following subdirectory structure:
-                  anatomical_area/presynaptic_cell_type/\*.am
+   :param cellName: path to a :ref:`hoc_file_format` file containing the morphology of the cell.
+   :type cellName: str
+   :param cellTypeName: name of the postsynaptic cell type.
+   :type cellTypeName: str
+   :param nrOfSamples: number of samples to use for the network embedding.
+   :type nrOfSamples: int
+   :param numberOfCellsSpreadsheetName: Path to the a spreadsheet, containing each neuropil structures as columns, and celltypes row indices.
+                                        Values indicate how much of each celltype was found in each neuropil structure.
+   :type numberOfCellsSpreadsheetName: str
+   :param connectionsSpreadsheetName: Path to a spreadsheet, containing the connection probabilities between each presynaptic and postsynaptic cell type.
+   :type connectionsSpreadsheetName: str
+   :param ExPSTDensityName: Path to the PST density file for excitatory synapses.
+   :type ExPSTDensityName: str
+   :param InhPSTDensityName: Path to the PST density file for inhibitory synapses.
+   :type InhPSTDensityName: str
+   :param boutonDensityFolderName: A directory containing the following subdirectory structure:
+                                   anatomical_area/presynaptic_cell_type/\*.am
 
-   :returns: None. Writes the results to disk.
+   :returns: None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

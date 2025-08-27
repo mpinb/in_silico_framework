@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.get_main_bifurcation_section`
-
-
-.. title:
 
 get_main_bifurcation_section
 ============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.utils.get_main_bifurcation_section(cell)
+
 
    Get the main bifurcation section of a cell
 
@@ -21,14 +18,14 @@ get_main_bifurcation_section
        - whose parent is the soma.
        - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
 
-   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
 
    :returns: The main bifurcation section.
    :rtype: :py:class:`~single_cell_parser.section.Section`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

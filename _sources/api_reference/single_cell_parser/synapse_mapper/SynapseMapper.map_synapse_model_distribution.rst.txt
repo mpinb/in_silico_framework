@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution`
+
+
 
 SynapseMapper.map_synapse_model_distribution
 ============================================
 
+
 .. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution(synType, structLabel=None)
+
 
    Maps modeled synapse distribution (e.g. normal, uniform, ...) onto dendritic tree.
 
@@ -14,6 +16,13 @@ SynapseMapper.map_synapse_model_distribution
    In this case, :paramref:`synDist` has to be iterable of distances of synapses.
    Substructure may be indicated by structLabel.
 
-   :Parameters: * **synType** (*str*) -- The type of synapse to be placed.
-                * **structLabel** (*str*) -- The label of the substructure to place synapses on. Default: None (all dendritic sections).
+   :param synType: The type of synapse to be placed.
+   :type synType: str
+   :param structLabel: The label of the substructure to place synapses on. Default: None (all dendritic sections).
+   :type structLabel: str
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

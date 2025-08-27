@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static`
+
+
 
 Strategy_spatiotemporalRaisedCosine._get_score_static
 =====================================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static(convert_x, base_vectors_arrays_dict, x)
+
    :staticmethod:
 
 
@@ -20,10 +22,13 @@ Strategy_spatiotemporalRaisedCosine._get_score_static
    with the learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}`.
    It then integrates the results for each group to get the weighted net input :math:`WNI(t)`.
 
-   :Parameters: * **convert_x** (*callable*) -- The conversion function from the learnable weights to the basis vectors.
-                * **base_vectors_arrays_dict** (*dict*) -- The dictionary of basis vectors for each group.
-                * **x** (*array*) -- The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
-                  These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+   :param convert_x: The conversion function from the learnable weights to the basis vectors.
+   :type convert_x: callable
+   :param base_vectors_arrays_dict: The dictionary of basis vectors for each group.
+   :type base_vectors_arrays_dict: dict
+   :param x: The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
+             These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+   :type x: array
 
    .. attention::
 
@@ -34,3 +39,8 @@ Strategy_spatiotemporalRaisedCosine._get_score_static
    :returns: The weighted net input :math:`WNI(t)` of length ``n_trials``.
    :rtype: array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,34 +1,37 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling.make_filelist`
-
-
-.. title:
 
 make_filelist
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.file_handling.make_filelist(directory, suffix='vm_all_traces.csv')
 
+
    Generate a list of all files with :paramref:`suffix` in the specified directory.
+
+   This method recursively searches through the directory and its subdirectories
+   for files that match the specified suffix. It returns a list of relative paths to
+   these files, excluding any files that are still being written to (identified by
+   the presence of "_running" in the filename).
 
    Simulation results from :py:mod:`simrun` are stored in a nested folder structure, and spread
    across multiple files. The first step towards parsing them is to generate a list of all files
    containing the data we are interested in.
 
-   :Parameters: * **directory** (*str*) -- Path to the directory containing the simulation results.
-                  In general, this directory will contain a nested subdirectory structure.
-                * **suffix** (*str*) -- The suffix of the data files.
+   :param directory: Path to the directory containing the simulation results.
+                     In general, this directory will contain a nested subdirectory structure.
+   :type directory: str
+   :param suffix: The suffix of the data files.
                   Default is ``'vm_all_traces.csv'`` for somatic voltage traces.
+   :type suffix: str
 
    :returns: List of all soma voltage trace files in the specified directory.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

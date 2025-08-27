@@ -1,25 +1,25 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical`
-
-
-.. title:
 
 scale_apical
 ============
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment='ApicalDendrite')
+
 
    Scale the apical dendrite of a cell.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to scale.
-                * **scale** (*float*) -- The scaling factor.
-                * **compartment** (*str*) -- The compartment to scale.
-                  If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
-                  If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
-                  Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
+   :param cell: The cell to scale.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param scale: The scaling factor.
+   :type scale: float
+   :param compartment: The compartment to scale.
+                       If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
+                       If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+                       Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
+   :type compartment: str
 
    :returns: The scaled cell.
    :rtype: :py:class:`~single_cell_parser.cell.Cell`
@@ -27,8 +27,7 @@ scale_apical
    :raises ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

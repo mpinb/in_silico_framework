@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_functional_connectivity_map`
+
+
 
 NetworkMapper._create_functional_connectivity_map
 =================================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._create_functional_connectivity_map()
+
 
    Connect functional anatomical synapses based on ``convergence``.
 
@@ -22,3 +24,8 @@ NetworkMapper._create_functional_connectivity_map
                  synapse index: index of synapse in list ``self.postCell.synapses[cell type]``
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

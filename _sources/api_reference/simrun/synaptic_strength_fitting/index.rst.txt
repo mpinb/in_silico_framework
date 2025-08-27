@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 synaptic_strength_fitting
 =========================
@@ -104,3 +106,7 @@ Functions
      - Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

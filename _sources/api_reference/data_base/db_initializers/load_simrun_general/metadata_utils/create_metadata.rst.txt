@@ -1,34 +1,31 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata`
-
-
-.. title:
 
 create_metadata
 ===============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata(db)
+
 
    Generate metadata out of a pd.Series containing the sim_trial_index.
 
-   Expands the sim_trial_index to a pandas Series containing the path, trial number,
+   Maps the ``sim_trial_index`` to a pandas Series containing the path, trial number,
    and filename of the voltage traces file. After running this method, the database
    contains:
 
    - ``sim_trial_index`` A pandas series containing the sim_trial_index.
    - ``simresult_path`` Path to the simulation results folder.
 
-   :Parameters: **db** (:py:class:`~data_base.DataBase`) -- The target database that should contain the parsed simulation results.
+   :param db: The target database that should contain the parsed simulation results.
+   :type db: ~data_base.DataBase
 
    :returns: A pandas dataframe containing the metadata.
    :rtype: pd.DataFrame
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

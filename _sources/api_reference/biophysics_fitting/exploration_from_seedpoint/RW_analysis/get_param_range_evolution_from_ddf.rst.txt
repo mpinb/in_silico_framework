@@ -1,29 +1,28 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf`
-
-
-.. title:
 
 get_param_range_evolution_from_ddf
 ==================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf(ddf, params, return_mi_ma=False)
+
 
    Compute the range of parameters explored by a RW exploration, as a fraction of the total parameter range.
 
-   :Parameters: * **ddf** (*dask.dataframe*) -- the exploration results
-                * **params** (*pd.DataFrame*) -- the parameter ranges
-                * **return_mi_ma** (*bool*) -- whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
+   :param ddf: the exploration results
+   :type ddf: dask.dataframe
+   :param params: the parameter ranges
+   :type params: pd.DataFrame
+   :param return_mi_ma: whether or not to return the min and max values of the parameter ranges separately, rather than a fraction.
+   :type return_mi_ma: bool
 
    :returns: the range of parameters explored by the RW exploration. If return_mi_ma is True, returns the min and max values of the parameter ranges.
    :rtype: pd.DataFrame
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

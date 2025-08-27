@@ -1,21 +1,33 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse`
+
+
 
 Cell.add_synapse
 ================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
+
 
    Add a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
 
-   :Parameters: * **secID** (*int*) -- Section ID.
-                * **ptID** (*int*) -- Point ID on that section.
-                * **ptx** (*float*) -- Relative position along the section (0-1).
-                * **preType** (*str*) -- Presynaptic cell type. Default: "Generic".
-                * **postType** (*str*) -- Postsynaptic cell type. Default: "Generic".
+   :param secID: Section ID.
+   :type secID: int
+   :param ptID: Point ID on that section.
+   :type ptID: int
+   :param ptx: Relative position along the section (0-1).
+   :type ptx: float
+   :param preType: Presynaptic cell type. Default: "Generic".
+   :type preType: str
+   :param postType: Postsynaptic cell type. Default: "Generic".
+   :type postType: str
 
    :returns: The newly created synapse.
    :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

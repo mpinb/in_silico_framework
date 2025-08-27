@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._add_synapses`
+
+
 
 _DendrogramSynapseStatistics._add_synapses
 ==========================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._add_synapses()
+
 
    Add synapses to the dendrogram sections.
 
@@ -14,3 +16,8 @@ _DendrogramSynapseStatistics._add_synapses
    information, and adds it to the corresponding :py:class:`_DendrogramSection` objects.
    It is called upon initialization.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Rm
 ==
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -39,87 +35,93 @@ Rm
    This is the top-level class for running reduced model inference.
    It provides an interface to add data extractors and strategies, and to run the optimization.
 
-   :Parameters: * **name** (*str*) -- Name of the reduced model
-                * **db** (*str*) -- Path to the database
-                * **tmin** (*float*) -- Minimum time for the simulation
-                * **tmax** (*float*) -- Maximum time for the simulation
-                * **width** (*float*) -- Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
-                * **selected_indices** (*list*) -- List/nested list of integer indices for selected simulation trials
+   :param name: Name of the reduced model
+   :type name: str
+   :param db: Path to the database
+   :type db: str
+   :param tmin: Minimum time for the simulation
+   :type tmin: float
+   :param tmax: Maximum time for the simulation
+   :type tmax: float
+   :param width: Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+   :type width: float
+   :param selected_indices: List/nested list of integer indices for selected simulation trials
+   :type selected_indices: list
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      Name of the reduced model
+         Name of the reduced model
 
-      :type: str
+         :type: str
 
-   .. attribute:: db
+      .. attribute:: db
 
-      Path to the database
+         Path to the database
 
-      :type: str
+         :type: str
 
-   .. attribute:: tmin
+      .. attribute:: tmin
 
-      Minimum time for the simulation
+         Minimum time for the simulation
 
-      :type: float
+         :type: float
 
-   .. attribute:: tmax
+      .. attribute:: tmax
 
-      Maximum time for the simulation
+         Maximum time for the simulation
 
-      :type: float
+         :type: float
 
-   .. attribute:: width
+      .. attribute:: width
 
-      Width of the temporal kernel.
-      This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+         Width of the temporal kernel.
+         This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
 
-      :type: float
+         :type: float
 
-   .. attribute:: n_trials
+      .. attribute:: n_trials
 
-      Amount of trials
+         Amount of trials
 
-      :type: int
+         :type: int
 
-   .. attribute:: data_extractors
+      .. attribute:: data_extractors
 
-      Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
+         Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: strategies
+      .. attribute:: strategies
 
-      Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
+         Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: Data
+      .. attribute:: Data
 
-      Data view object
+         Data view object
 
-      :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
+         :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
 
-   .. attribute:: DataSplitEvaluation
+      .. attribute:: DataSplitEvaluation
 
-      Data split evaluation object
+         Data split evaluation object
 
-      :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
+         :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
 
-   .. attribute:: selected_indices
+      .. attribute:: selected_indices
 
-      List/nested list of integer indices for selected simulation trials
+         List/nested list of integer indices for selected simulation trials
 
-      :type: list
+         :type: list
 
-   .. attribute:: results_remote
+      .. attribute:: results_remote
 
-      Flag that keeps track whether results are stored locally or on a remote scheduler.
+         Flag that keeps track whether results are stored locally or on a remote scheduler.
 
-      :type: bool
+         :type: bool
 
    :Methods:
 
@@ -144,3 +146,7 @@ Rm
       * - :py:obj:`get_results <simrun.modular_reduced_model_inference.reduced_model.Rm.get_results>`\ (client)
         - Get the results of the optimization.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

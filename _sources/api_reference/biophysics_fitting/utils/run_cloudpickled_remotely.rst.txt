@@ -1,26 +1,23 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.run_cloudpickled_remotely`
-
-
-.. title:
 
 run_cloudpickled_remotely
 =========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.utils.run_cloudpickled_remotely(queue)
+
 
    Unserialize a function and its arguments, run it, and serialize the output.
 
-   :Parameters: **queue** (*multiprocessing.Queue*) -- A queue with the function and its arguments.
+   :param queue: A queue with the function and its arguments.
+   :type queue: multiprocessing.Queue
 
    :returns: None. The output is put back in the queue.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

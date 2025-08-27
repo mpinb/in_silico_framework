@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.default_setup` ❭ :mod:`~biophysics_fitting.hay.default_setup.record_bAP`
-
-
-.. title:
 
 record_bAP
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.hay.default_setup.record_bAP(cell, recSite1=None, recSite2=None)
+
 
    Extract the voltage traces from the soma and two apical dendritic locations.
 
@@ -18,15 +15,17 @@ record_bAP
    stimulus in a pyramidal neuron. The two apical recording sites are used
    to calculate e.g. backpropagating attenuation.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **recSite1** (*float*) -- The distance (um) from the soma to the first recording site.
-                * **recSite2** (*float*) -- The distance (um) from the soma to the second recording site.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param recSite1: The distance (um) from the soma to the first recording site.
+   :type recSite1: float
+   :param recSite2: The distance (um) from the soma to the second recording site.
+   :type recSite2: float
 
    .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

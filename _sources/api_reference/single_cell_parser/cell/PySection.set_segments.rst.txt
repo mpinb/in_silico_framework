@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.set_segments`
+
+
 
 PySection.set_segments
 ======================
 
+
 .. py:method:: single_cell_parser.cell.PySection.set_segments(nrOfSegments)
+
 
    Set spatial discretization.
 
@@ -25,3 +27,8 @@ PySection.set_segments
    See also
        :py:meth:`single_cell_parser.cell_parser.CellParser.determine_nseg`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

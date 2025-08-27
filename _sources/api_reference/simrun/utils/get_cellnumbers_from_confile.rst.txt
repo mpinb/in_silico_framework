@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.get_cellnumbers_from_confile`
-
-
-.. title:
 
 get_cellnumbers_from_confile
 ============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.get_cellnumbers_from_confile(confile)
+
 
    Get the amount of cells of each type from a confile.
 
@@ -20,14 +17,14 @@ get_cellnumbers_from_confile
 
    This method fetches the cellID of the last cell each cell type and adds 1 to infer the amount of cells of that type.
 
-   :Parameters: **confile** (*str*) -- The path to the :ref:`con_file_format` file.
+   :param confile: The path to the :ref:`con_file_format` file.
+   :type confile: str
 
    :returns: A dictionary of the format ``{"cell_type": amount_of_cells}``
    :rtype: dict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

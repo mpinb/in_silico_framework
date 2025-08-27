@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file`
-
-
-.. title:
 
 load_cell_number_file
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file(cellNumberFileName)
+
 
    Load the cell number file.
 
@@ -21,7 +18,8 @@ load_cell_number_file
        A1      cell_type_2     14
        ...
 
-   :Parameters: **cellNumberFileName** (*str*) -- Path to the cell number file.
+   :param cellNumberFileName: Path to the cell number file.
+   :type cellNumberFileName: str
 
    :returns: Dictionary of the form {celltype: {column: nr_of_cells}}
    :rtype: dict
@@ -64,8 +62,7 @@ load_cell_number_file
            ...
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

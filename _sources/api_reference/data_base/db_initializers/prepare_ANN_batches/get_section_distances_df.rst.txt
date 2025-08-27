@@ -1,24 +1,23 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
-
-
-.. title:
 
 get_section_distances_df
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.get_section_distances_df(neuron_param_file, silent=True)
+
 
    Bin the morphology of a neuron from a :ref:`cell_parameters_format` file.
 
    This method reads the neuron parameter file and bins the morphology of the neuron into spatial bins.
    The amount of bins is inferred by :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`.
 
-   :Parameters: * **neuron_param_file** (*str*) -- The path to the neuron parameter file.
-                * **silent** (*bool, optional*) -- If True, suppresses output. Defaults to True.
+   :param neuron_param_file: The path to the neuron parameter file.
+   :type neuron_param_file: str
+   :param silent: If True, suppresses output. Defaults to True.
+   :type silent: bool, optional
 
    :returns: A dataframe containing the amount of bins, the bin size, and the min and max distance to the soma for each section.
    :rtype: pd.DataFrame
@@ -40,8 +39,7 @@ get_section_distances_df
        169  50.000000  1049.999969     20       50
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

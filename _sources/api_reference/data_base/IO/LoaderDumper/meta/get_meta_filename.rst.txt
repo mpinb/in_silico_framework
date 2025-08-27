@@ -1,0 +1,28 @@
+
+
+get_meta_filename
+=================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.IO.LoaderDumper.meta.get_meta_filename(savedir, raise_=True)
+
+
+   Get the filename of the meta file in the savedir.
+
+   :param savedir: The directory to look for the meta file.
+   :type savedir: str
+   :param raise_: Whether to raise an error if no meta file is found. Defaults to True.
+   :type raise_: bool, optional
+
+   :raises FileNotFoundError: If no meta file is found in the savedir.
+
+   :returns: the name of the meta file.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

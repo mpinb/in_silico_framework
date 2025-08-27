@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils._get_apical_sec_and_i_at_distance`
-
-
-.. title:
 
 _get_apical_sec_and_i_at_distance
 =================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.utils._get_apical_sec_and_i_at_distance(cell, dist)
+
 
    Get the apical section and segment at a certain distance from the soma.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **dist** (*float*) -- The distance from the soma (:math:`\mu m`).
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param dist: The distance from the soma (:math:`\mu m`).
+   :type dist: float
 
    :returns: The section, the distance between the target and the calculated distance, and the segment index.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

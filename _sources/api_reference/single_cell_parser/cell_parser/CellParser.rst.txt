@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CellParser
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -53,33 +49,34 @@ CellParser
       This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
       This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
 
-   :Parameters: **hocFilename** (*str*) -- Path to :ref:`hoc_file_format` file.
+   :param hocFilename: Path to :ref:`hoc_file_format` file.
+   :type hocFilename: str
 
    :Attributes:
 
-   .. attribute:: hoc_path
+      .. attribute:: hoc_path
 
-      Path to hoc file
+         Path to hoc file
 
-      :type: str
+         :type: str
 
-   .. attribute:: membraneParams
+      .. attribute:: membraneParams
 
-      Membrane parameters
+         Membrane parameters
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: cell_modify_functions_applied
+      .. attribute:: cell_modify_functions_applied
 
-      Whether or not cell modify functions have already been applied. See: :py:meth:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
+         Whether or not cell modify functions have already been applied. See: :py:meth:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      Cell object.
+         Cell object.
 
-      :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :py:class:`~single_cell_parser.cell.Cell`
 
    :Methods:
 
@@ -120,3 +117,7 @@ CellParser
       * - :py:obj:`_create_ais_Hay2013 <single_cell_parser.cell_parser.CellParser._create_ais_Hay2013>`\ ()
         - Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,32 +1,32 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ :mod:`~data_base.IO.LoaderDumper.shared_numpy_store` ❭ :mod:`~data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes`
-
-
-.. title:
 
 _get_offset_and_size_in_bytes
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes(start_row, end_row, shape, dtype)
+
 
    Get the offset and size in bytes for a given ``start_row`` and ``end_row``.
 
    Rows here refer to the first dimension of a multi-dimensional array.
 
-   :Parameters: * **start_row** (*int*) -- The starting row of the array.
-                * **end_row** (*int*) -- The ending row of the array.
-                * **shape** (*tuple*) -- The shape of the array. ``shape[0]`` is the number of rows.
-                * **dtype** (*str*) -- The data type of the array. Used to infer the size in bytes.
+   :param start_row: The starting row of the array.
+   :type start_row: int
+   :param end_row: The ending row of the array.
+   :type end_row: int
+   :param shape: The shape of the array. ``shape[0]`` is the number of rows.
+   :type shape: tuple
+   :param dtype: The data type of the array. Used to infer the size in bytes.
+   :type dtype: str
 
    :returns: A tuple containing the ``start_row``, ``end_row``, ``bytes_offset``, ``bytes_size``, and ``final_shape``.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`
+
+
 
 PSPs.get_voltage_traces
 =======================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.get_voltage_traces()
+
 
    Gather the ePSP voltage traces for each synapse.
 
@@ -33,3 +35,8 @@ PSPs.get_voltage_traces
    :returns: A dictionary of voltage traces and activation times.
    :rtype: defaultdict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

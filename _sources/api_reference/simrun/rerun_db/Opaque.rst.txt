@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.rerun_db` ❭ :mod:`~simrun.rerun_db.Opaque`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Opaque
 ======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -25,3 +21,7 @@ Opaque
    Opaque-wrapped objects are not loaded into memory by dask.
    This is useful when passing large objects to dask functions that do not need to be loaded necessarily.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

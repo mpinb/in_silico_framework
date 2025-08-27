@@ -1,5 +1,7 @@
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~spike_analysis` ❭ 
+
 
 core
 ====
@@ -126,3 +128,7 @@ Functions
      - Classifies timepoint based on whether it falls within a period.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

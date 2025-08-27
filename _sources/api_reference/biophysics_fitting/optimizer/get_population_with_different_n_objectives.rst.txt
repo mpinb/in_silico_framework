@@ -1,28 +1,25 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_population_with_different_n_objectives`
-
-
-.. title:
 
 get_population_with_different_n_objectives
 ==========================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.optimizer.get_population_with_different_n_objectives(old_pop, n_objectives)
+
 
    Adapt the number of objectives of individuals
 
-   :Parameters: * **old_pop** -- list of deap.Individuals
-                * **n_objectives** (*int*) -- number of objectives
+   :param old_pop: list of deap.Individuals
+   :param n_objectives: number of objectives
+   :type n_objectives: int
 
    :returns: population with adapted number of objectives
    :rtype: list of deap.Individuals
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

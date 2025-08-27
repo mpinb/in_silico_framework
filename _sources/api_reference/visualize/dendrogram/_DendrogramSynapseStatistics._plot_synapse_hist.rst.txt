@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist`
+
+
 
 _DendrogramSynapseStatistics._plot_synapse_hist
 ===============================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist(ax, dendrite_density)
+
 
    Plot the synapse histogram on an :py:class:`matplotlib.Axes` object.
 
-   :Parameters: * **ax** (:py:class:`matplotlib.Axes`) -- The matplotlib axes object.
-                * **dendrite_density** (*np.array*) -- The dendrite density histogram, containing the total amound of dendritic length in a certain bin of soma distance.
+   :param ax: The matplotlib axes object.
+   :type ax: matplotlib.Axes
+   :param dendrite_density: The dendrite density histogram, containing the total amound of dendritic length in a certain bin of soma distance.
+   :type dendrite_density: np.array
 
    :returns: The matplotlib axes object.
    :rtype: :py:class:`matplotlib.Axes`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

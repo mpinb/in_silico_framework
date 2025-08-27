@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.Event`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Event
 =====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -22,3 +18,7 @@ Event
    
    Class to handle events in NEURON simulations.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

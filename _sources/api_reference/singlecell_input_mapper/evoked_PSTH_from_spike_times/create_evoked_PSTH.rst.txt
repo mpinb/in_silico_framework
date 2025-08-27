@@ -1,23 +1,24 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_evoked_PSTH`
-
-
-.. title:
 
 create_evoked_PSTH
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName)
+
 
    Reads in spike times and creates a PSTH for evoked activity for each whisker.
 
-   :Parameters: * **spikeTimesName** (*str*) -- Filepath of the .cluster file containing spike time recordings.
-                * **cellType** (*str*) -- Cell type.
-                * **ongoingRate** (*float*) -- The ongoing firing rate for this cell type.
-                * **outFileName** (*str*) -- Filename to write to.
+   :param spikeTimesName: Filepath of the .cluster file containing spike time recordings.
+   :type spikeTimesName: str
+   :param cellType: Cell type.
+   :type cellType: str
+   :param ongoingRate: The ongoing firing rate for this cell type.
+   :type ongoingRate: float
+   :param outFileName: Filename to write to.
+   :type outFileName: str
 
    .. rubric:: Example
       :class: example
@@ -46,8 +47,7 @@ create_evoked_PSTH
    }
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

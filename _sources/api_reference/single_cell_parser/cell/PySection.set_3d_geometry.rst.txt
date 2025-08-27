@@ -1,20 +1,29 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.set_3d_geometry`
+
+
 
 PySection.set_3d_geometry
 =========================
 
+
 .. py:method:: single_cell_parser.cell.PySection.set_3d_geometry(pts, diams)
+
 
    Invokes NEURON 3D geometry setup.
 
-   :Parameters: * **pts** (*list*) -- 3D coordinates of the section
-                * **diams** (*list*) -- diameters at the 3D coordinates.
+   :param pts: 3D coordinates of the section
+   :type pts: list
+   :param diams: diameters at the 3D coordinates.
+   :type diams: list
 
    :raises RuntimeError: If the list of diameters does not match the list of 3D points in length.
 
    :returns: ``pts``, ``nrOfPts``, ``diamList``, ``bounds``, and ``relPts``.
    :rtype: None. Fills the attributes
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -887,16 +889,20 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">visualize</span></code></a> ❭ <a class="reference internal" href="#module-visualize.current_visualizer" title="visualize.current_visualizer (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">current_visualizer</span></code></a></p>
-<h1 id="current-visualizer">current_visualizer<a class="headerlink" href="#current-visualizer" title="Permalink to this heading">¶</a></h1>
+<p><a href="/" class="nav-link" aria-label="Home">
+     <svg class="home-icon" viewBox="0 0 576 512" width="16" height="16">
+         <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+     </svg>
+ </a> ❭ <a class="reference internal" href="../../../api_reference.html#api-reference"><span class="std std-ref">API reference</span></a> ❭ <a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">visualize</span></code></a> ❭</p>
+<h1 id="current-visualizer">current_visualizer<a class="headerlink" href="#current-visualizer" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-visualize.current_visualizer"></span><p>Visulize all transmembrane ionic currents of a cell simulation.</p>
+<p id="module-visualize.current_visualizer">Visulize all transmembrane ionic currents of a cell simulation.</p>
 <p>This module provides a class to visualize the transmembrane ionic currents of a cell simulation.
 It assumes that these have been recorded during the simulation. If this was not the case,
 consider re-simulating the cell and recording the currents, e.g. with a <a class="reference internal" href="../../biophysics_fitting/simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a>.</p>
 <p class="example rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">record_rangevars</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">record_rangevars</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">for</span> <span class="n">rv</span> <span class="ow">in</span> <span class="n">record_vars</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="n">cell</span><span class="o">.</span><span class="n">record_range_var</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">cell</span>
@@ -912,7 +918,7 @@ consider re-simulating the cell and recording the currents, e.g. with a <a class
 <p><span class="caption-text"><span class="caption-text">
 Example of a current analysis plot for a <code class="xref py py-class docutils literal notranslate"><span class="pre">BAC</span></code> stimulus, simulated with a <a class="reference internal" href="../../biophysics_fitting/simulator/Simulator.html#biophysics_fitting.simulator.Simulator" title="biophysics_fitting.simulator.Simulator (Python class) — This class can be used to transform a parameter vector into simulated voltage traces."><code class="xref py py-class docutils literal notranslate"><span class="pre">Simulator</span></code></a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></figcaption>
 </figure>
-<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h2>
+<h2 id="classes">Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="CurrentAnalysis.html#visualize.current_visualizer.CurrentAnalysis" title="visualize.current_visualizer.CurrentAnalysis (Python class) — Plot the individual ion currents and the net current of a cell simulation."><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurrentAnalysis</span></code></a></p></td>
@@ -920,6 +926,9 @@ Example of a current analysis plot for a <code class="xref py py-class docutils 
 </tr>
 </tbody>
 </table>
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -987,7 +996,7 @@ Example of a current analysis plot for a <code class="xref py py-class docutils 
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1010,9 +1019,9 @@ Example of a current analysis plot for a <code class="xref py py-class docutils 
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

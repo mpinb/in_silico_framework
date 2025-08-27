@@ -1,23 +1,22 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.get_cell_with_network` ❭ :mod:`~simrun.get_cell_with_network.get_cell_with_network`
-
-
-.. title:
 
 get_cell_with_network
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.get_cell_with_network.get_cell_with_network(neuron_param, network_param, cache=True)
+
 
    Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
 
    This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
 
-   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
-                * **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
+   :param neuron_param: The :ref:`cell_parameters_format`.
+   :type neuron_param: ~single_cell_parser.parameters.NTParameterSet
+   :param network_param: The :ref:`network_parameters_format`.
+   :type network_param: ~single_cell_parser.parameters.NTParameterSet
 
    :returns: A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
    :rtype: callable
@@ -28,8 +27,7 @@ get_cell_with_network
       an existing network realization (:ref:`syn_file_format` file) it.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

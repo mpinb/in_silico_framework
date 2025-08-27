@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis._compute_current_arrays`
+
+
 
 CurrentAnalysis._compute_current_arrays
 =======================================
 
+
 .. py:method:: visualize.current_visualizer.CurrentAnalysis._compute_current_arrays()
+
 
    Compute the ionic currents of a section.
 
@@ -22,3 +24,8 @@ CurrentAnalysis._compute_current_arrays
    - voltage_trace (np.array): The voltage trace.
 
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

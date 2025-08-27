@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.analyze`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
+
 
 analyze
 =======
@@ -63,3 +65,7 @@ Modules
    * - :py:obj:`voltage_binning <data_base.analyze.voltage_binning>`
      - Calculate the voltage as a density array.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

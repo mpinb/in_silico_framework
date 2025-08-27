@@ -1,5 +1,7 @@
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
+
 
 cell_to_ipython_animation
 =========================
@@ -65,3 +67,7 @@ Functions
      - Wrapper function to display the animation in the IPython notebook
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

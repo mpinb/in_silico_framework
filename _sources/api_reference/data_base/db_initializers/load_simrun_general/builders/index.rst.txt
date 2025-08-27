@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
+
 
 builders
 ========
@@ -10,14 +12,33 @@ builders
 .. toctree::
    :hidden:
 
+   _filter_filelist_by_health </api_reference/data_base/db_initializers/load_simrun_general/builders/_filter_filelist_by_health>
    _build_core </api_reference/data_base/db_initializers/load_simrun_general/builders/_build_core>
    _build_synapse_activation </api_reference/data_base/db_initializers/load_simrun_general/builders/_build_synapse_activation>
    _build_dendritic_voltage_traces </api_reference/data_base/db_initializers/load_simrun_general/builders/_build_dendritic_voltage_traces>
    _build_param_files </api_reference/data_base/db_initializers/load_simrun_general/builders/_build_param_files>
-   _get_rec_site_managers </api_reference/data_base/db_initializers/load_simrun_general/builders/_get_rec_site_managers>
+   _get_recsite_labels_from_neup </api_reference/data_base/db_initializers/load_simrun_general/builders/_get_recsite_labels_from_neup>
+   _get_rec_site_label_fn_map </api_reference/data_base/db_initializers/load_simrun_general/builders/_get_rec_site_label_fn_map>
 
 .. py:module:: data_base.db_initializers.load_simrun_general.builders
 
+.. autoapi-nested-parse::
+   Pipelines for building database keys containing results from :py:mod:`simrun`.
+
+   Note that all pipelines assume that the database ``core`` is built. This adds the essential
+   information to the database that other builders need:
+
+   - ``sim_trial_index``
+   - ``simresult_path``: top-level directory from where all simulation results were fetched
+   - ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
+
+   In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+   always desirable.
 
 
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

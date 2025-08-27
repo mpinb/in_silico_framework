@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._map_functional_realization`
+
+
 
 NetworkMapper._map_functional_realization
 =========================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._map_functional_realization(weights=None)
+
 
    Connects anatomical synapses to spike generators (PointCells).
 
@@ -16,3 +18,8 @@ NetworkMapper._map_functional_realization
       This method is used in the deprecated method :py:meth:`create_saved_network`.
       Please use :py:meth:`~create_saved_network2` instead, which uses :py:meth:`~_map_complete_anatomical_realization` to connect synapses.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

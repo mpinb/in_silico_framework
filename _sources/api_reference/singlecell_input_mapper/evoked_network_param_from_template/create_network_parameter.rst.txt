@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter`
-
-
-.. title:
 
 create_network_parameter
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write_all_celltypes=False)
+
 
    Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
 
@@ -32,13 +29,20 @@ create_network_parameter
                    - weight: weight of the synapse
        - releaseProb: probability that a synapse gets activated if the cell spikes
 
-   :Parameters: * **templateParamName** (*str*) -- Name of the template parameter file.
-                * **cellNumberFileName** (*str*) -- Name of the file containing the number of cells for each celltype and column.
-                * **synFileName** (*str*) -- Name of the `.syn` file, defining the synapse types.
-                * **conFileName** (*str*) -- Name of the `.con` file, defining the connections.
-                * **whisker** (*str*) -- Which whisker is to be deflected.
-                * **outFileName** (*str*) -- Name of the output file.
-                * **write_all_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+   :param templateParamName: Name of the template parameter file.
+   :type templateParamName: str
+   :param cellNumberFileName: Name of the file containing the number of cells for each celltype and column.
+   :type cellNumberFileName: str
+   :param synFileName: Name of the `.syn` file, defining the synapse types.
+   :type synFileName: str
+   :param conFileName: Name of the `.con` file, defining the connections.
+   :type conFileName: str
+   :param whisker: Which whisker is to be deflected.
+   :type whisker: str
+   :param outFileName: Name of the output file.
+   :type outFileName: str
+   :param write_all_celltypes: Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+   :type write_all_celltypes: bool
 
    .. rubric:: Example
       :class: example
@@ -82,8 +86,7 @@ create_network_parameter
    }
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

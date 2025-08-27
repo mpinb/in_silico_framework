@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification` ❭ :mod:`~simrun.PSP_with_cell_modification.PSP_with_current_injection`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 PSP_with_current_injection
 ==========================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -41,81 +37,90 @@ PSP_with_current_injection
 
    .. seealso:: :py:mod:`single_cell_parser.cell_modify_functions` for available cell modification functions.
 
-   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Parameters of the neuron model.
-                * **confile** (*str*) -- Path to the network connectivity (:ref:`con_file_format`) file.
-                * **target_vm** (*float*) -- Membrane potential to clamp the soma to (in :math:`mV`).
-                * **delay** (*float*) -- Delay before the current injection starts (in :math:`ms`).
-                * **duration** (*float*) -- Duration of the current injection (in :math:`ms`).
-                * **optimize_for_timepoint** (*float*) -- Timepoint for membrane voltage optimization (in :math:`ms`).
-                  This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
-                * **tEnd** (*float*) -- End time of the simulation (in :math:`ms`).
-                * **cell_modify_functions** (*dict*) -- Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
-                  The keys are the names of the functions, the values are the parameters of the functions.
-                * **bounds** (*tuple*) -- Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+   :param neuron_param: Parameters of the neuron model.
+   :type neuron_param: ~single_cell_parser.parameters.NTParameterSet
+   :param confile: Path to the network connectivity (:ref:`con_file_format`) file.
+   :type confile: str
+   :param target_vm: Membrane potential to clamp the soma to (in :math:`mV`).
+   :type target_vm: float
+   :param delay: Delay before the current injection starts (in :math:`ms`).
+   :type delay: float
+   :param duration: Duration of the current injection (in :math:`ms`).
+   :type duration: float
+   :param optimize_for_timepoint: Timepoint for membrane voltage optimization (in :math:`ms`).
+                                  This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
+   :type optimize_for_timepoint: float
+   :param tEnd: End time of the simulation (in :math:`ms`).
+   :type tEnd: float
+   :param cell_modify_functions: Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
+                                 The keys are the names of the functions, the values are the parameters of the functions.
+   :type cell_modify_functions: dict
+   :param bounds: Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+   :type bounds: tuple
 
    :Attributes:
 
-   .. attribute:: neuron_param
+      .. attribute:: neuron_param
 
-      Parameters of the neuron model.
+         Parameters of the neuron model.
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. attribute:: confile
+      .. attribute:: confile
 
-      Path to the network connectivity (:ref:`con_file_format`) file.
+         Path to the network connectivity (:ref:`con_file_format`) file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: target_vm
+      .. attribute:: target_vm
 
-      Membrane potential to clamp the soma to (in :math:`mV`).
+         Membrane potential to clamp the soma to (in :math:`mV`).
 
-      :type: float
+         :type: float
 
-   .. attribute:: delay
+      .. attribute:: delay
 
-      Delay before the current injection starts (in :math:`ms`).
+         Delay before the current injection starts (in :math:`ms`).
 
-      :type: float
+         :type: float
 
-   .. attribute:: duration
+      .. attribute:: duration
 
-      Duration of the current injection (in :math:`ms`).
+         Duration of the current injection (in :math:`ms`).
 
-      :type: float
+         :type: float
 
-   .. attribute:: optimize_for_timepoint
+      .. attribute:: optimize_for_timepoint
 
-      Timepoint for membrane voltage optimization (in :math:`ms`).
-      This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
+         Timepoint for membrane voltage optimization (in :math:`ms`).
+         This usually coincides with the timepoint of a single synapse activation, after the membrane voltage has stabilized.
 
-      :type: float
+         :type: float
 
-   .. attribute:: tEnd
+      .. attribute:: tEnd
 
-      End time of the simulation (in :math:`ms`).
+         End time of the simulation (in :math:`ms`).
 
-      :type: float
+         :type: float
 
-   .. attribute:: cell_modify_functions
+      .. attribute:: cell_modify_functions
 
-      Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
-      The keys are the names of the functions, the values are the parameters of the functions.
+         Dictionary of cell modification functions (see :py:mod:`~single_cell_parser.cell_modify_functions`).
+         The keys are the names of the functions, the values are the parameters of the functions.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: bounds
+      .. attribute:: bounds
 
-      Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
+         Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: holding_current
+      .. attribute:: holding_current
 
-      Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+         Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -142,3 +147,7 @@ PSP_with_current_injection
       * - :py:obj:`get <simrun.PSP_with_cell_modification.PSP_with_current_injection.get>`\ ()
         - Get the final :py:class:`~simrun.synaptic_strength_fitting.PSPs` object.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

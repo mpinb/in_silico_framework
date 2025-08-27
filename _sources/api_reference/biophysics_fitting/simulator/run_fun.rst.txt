@@ -1,35 +1,39 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.run_fun`
-
-
-.. title:
 
 run_fun
 =======
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.simulator.run_fun(cell, T=34.0, Vinit=-75.0, dt=0.025, recordingSites=[], tStart=0.0, tStop=250.0, vardt=True, silent=True)
+
 
    Default function to run a simulation.
 
-   :Parameters: * **cell** -- The cell object.
-                * **T** (*float*) -- The temperature (Celsius).
-                * **Vinit** (*float*) -- The initial voltage (mV).
-                * **dt** (*float*) -- The time step (ms).
-                * **recordingSites** (*[float]*) -- The recording sites (um).
-                * **tStart** (*float*) -- The start time of the simulation (ms).
-                * **tStop** (*float*) -- The stop time of the simulation (ms).
-                * **vardt** (*bool*) -- Whether to use variable time step.
-                * **silent** (*bool*) -- Whether to suppress output.
+   :param cell: The cell object.
+   :param T: The temperature (Celsius).
+   :type T: float
+   :param Vinit: The initial voltage (mV).
+   :type Vinit: float
+   :param dt: The time step (ms).
+   :type dt: float
+   :param recordingSites: The recording sites (um).
+   :type recordingSites: [float]
+   :param tStart: The start time of the simulation (ms).
+   :type tStart: float
+   :param tStop: The stop time of the simulation (ms).
+   :type tStop: float
+   :param vardt: Whether to use variable time step.
+   :type vardt: bool
+   :param silent: Whether to suppress output.
+   :type silent: bool
 
    :returns: The cell object, containing simulation data.
    :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

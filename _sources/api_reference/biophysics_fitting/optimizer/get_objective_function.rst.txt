@@ -1,29 +1,26 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_objective_function`
-
-
-.. title:
 
 get_objective_function
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.optimizer.get_objective_function(db_setup)
+
 
    Get the objective function for the optimization.
 
    This objective function takes parameters values, runs a simulation, and evaluates the simulation.
 
-   :Parameters: **db_setup** (*data_base.DataBase*) -- The database containing the setup of the optimization.
+   :param db_setup: The database containing the setup of the optimization.
+   :type db_setup: data_base.DataBase
 
    :returns: The objective function for the optimization.
    :rtype: function
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

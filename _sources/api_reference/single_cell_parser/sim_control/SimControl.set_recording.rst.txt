@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl` ❭ :mod:`~single_cell_parser.sim_control.SimControl.set_recording`
+
+
 
 SimControl.set_recording
 ========================
 
+
 .. py:method:: single_cell_parser.sim_control.SimControl.set_recording()
+
 
    Record the voltage trace.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

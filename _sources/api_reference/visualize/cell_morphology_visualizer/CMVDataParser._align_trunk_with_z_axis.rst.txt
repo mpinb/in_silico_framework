@@ -1,17 +1,24 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis`
+
+
 
 CMVDataParser._align_trunk_with_z_axis
 ======================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis(cell)
+
 
    Calculates the polar angle between the trunk and z-axis (zenith).
    Anchors the soma to (0, 0, 0) and aligns the trunk to the z-axis.
 
-   :Parameters: **cell** -- Cell object
+   :param cell: Cell object
 
    :returns: Nothing
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

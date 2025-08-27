@@ -1,23 +1,22 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling.get_file`
-
-
-.. title:
 
 get_file
 ========
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_file(self, suffix)
+
 
    Get the filename of the unique file in the current directory with the specified suffix.
 
    This method does not recurse into subdirectories.
 
-   :Parameters: * **self** (*str*) -- Path to the directory.
-                * **suffix** (*str*) -- Suffix of the files to be found.
+   :param self: Path to the directory.
+   :type self: str
+   :param suffix: Suffix of the files to be found.
+   :type suffix: str
 
    :returns: Path to the file with the specified suffix.
    :rtype: str
@@ -26,8 +25,7 @@ get_file
    :raises ValueError: If multiple files with the specified suffix are found.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

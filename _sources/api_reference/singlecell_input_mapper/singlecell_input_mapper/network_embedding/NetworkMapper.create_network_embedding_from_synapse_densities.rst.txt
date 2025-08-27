@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities`
+
+
 
 NetworkMapper.create_network_embedding_from_synapse_densities
 =============================================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities(postCellName, synapseDensities)
+
 
    Create a single network realization from pre-computed synapse densities.
 
@@ -22,6 +24,13 @@ NetworkMapper.create_network_embedding_from_synapse_densities
       Assumes path names to anatomical realization files are relative to the working directory.
       These paths should be correct relative, or preferably absolute paths.
 
-   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` morphology file.
-                * **synapseDensities** (*dict*) -- Dictionary of synapse densities, ordered by anatomical area and cell type.
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+   :type postCellName: str
+   :param synapseDensities: Dictionary of synapse densities, ordered by anatomical area and cell type.
+   :type synapseDensities: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

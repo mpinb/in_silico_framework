@@ -1,15 +1,22 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get`
+
+
 
 RaisedCosineBasis.get
 =====================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get()
+
 
    Get the basis functions :math:`\mathbf{f}`.
 
    :returns: The list of basis functions.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

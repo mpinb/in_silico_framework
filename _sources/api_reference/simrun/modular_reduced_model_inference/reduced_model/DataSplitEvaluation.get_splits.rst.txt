@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits`
+
+
 
 DataSplitEvaluation.get_splits
 ==============================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits()
+
 
    Get the train-test splits.
 
@@ -16,3 +18,8 @@ DataSplitEvaluation.get_splits
                  Each split is a dictionary with keys ``'train'``, ``'test'``, ``'subtest1'``, ``'subtest2'``.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

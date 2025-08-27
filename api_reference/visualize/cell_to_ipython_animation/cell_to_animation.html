@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -700,16 +702,71 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_to_ipython_animation.cell_to_animation" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_to_ipython_animation.cell_to_animation (Python function) — Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time." class="md-ellipsis">visualize.<wbr>cell_<wbr>to_<wbr>ipython_<wbr>animation.<wbr>cell_<wbr>to_<wbr>animation</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_to_ipython_animation.cell_to_animation (Python function) — Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time." class="md-ellipsis">visualizecell_<wbr>to_<wbr>ipython_<wbr>animationcell_<wbr>to_<wbr>animation</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_to_ipython_animation.cell_to_animation">
+    <nav class="md-nav" aria-label="visualizecell_to_ipython_animationcell_to_animation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_to_ipython_animation.cell_to_animation-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.outdir" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.outdir (Python parameter) — folder, where animation should be saved." class="md-ellipsis">outdir</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.xlim" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.xlim (Python parameter) — tuple like (0, 1600) that defines the limits of the x axis. If None, tries to get default values for range var from get_default_axis Default: None." class="md-ellipsis">xlim</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.ylim" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.ylim (Python parameter) — tuple like (-80 0) that defines the limits of the y axis If None, tries to get default values for range var from get_default_axis Default: None." class="md-ellipsis">ylim</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tstart" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tstart (Python parameter) — time when animation should be started" class="md-ellipsis">tstart</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tend (Python parameter) — time when animation should be stopped" class="md-ellipsis">tend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tstep" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tstep (Python parameter) — timestep between frames" class="md-ellipsis">tstep</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.range_vars" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.range_vars (Python parameter) — str or list of str: range vars to display, default: &#39;Vm&#39;" class="md-ellipsis">range_<wbr>vars</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1018,16 +1075,71 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_to_ipython_animation.cell_to_animation" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_to_ipython_animation.cell_to_animation (Python function) — Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time." class="md-ellipsis">visualize.<wbr>cell_<wbr>to_<wbr>ipython_<wbr>animation.<wbr>cell_<wbr>to_<wbr>animation</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_to_ipython_animation.cell_to_animation (Python function) — Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time." class="md-ellipsis">visualizecell_<wbr>to_<wbr>ipython_<wbr>animationcell_<wbr>to_<wbr>animation</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_to_ipython_animation.cell_to_animation">
+    <nav class="md-nav" aria-label="visualizecell_to_ipython_animationcell_to_animation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_to_ipython_animation.cell_to_animation-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.outdir" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.outdir (Python parameter) — folder, where animation should be saved." class="md-ellipsis">outdir</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.xlim" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.xlim (Python parameter) — tuple like (0, 1600) that defines the limits of the x axis. If None, tries to get default values for range var from get_default_axis Default: None." class="md-ellipsis">xlim</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.ylim" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.ylim (Python parameter) — tuple like (-80 0) that defines the limits of the y axis If None, tries to get default values for range var from get_default_axis Default: None." class="md-ellipsis">ylim</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tstart" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tstart (Python parameter) — time when animation should be started" class="md-ellipsis">tstart</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tend (Python parameter) — time when animation should be stopped" class="md-ellipsis">tend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.tstep" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.tstep (Python parameter) — timestep between frames" class="md-ellipsis">tstep</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_to_ipython_animation.cell_to_animation.range_vars" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_to_ipython_animation.cell_to_animation.range_vars (Python parameter) — str or list of str: range vars to display, default: &#39;Vm&#39;" class="md-ellipsis">range_<wbr>vars</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1064,27 +1176,33 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">visualize</span></code></a> ❭ <a class="reference internal" href="index.html#module-visualize.cell_to_ipython_animation" title="visualize.cell_to_ipython_animation (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_to_ipython_animation</span></code></a> ❭ <a class="reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation" title="visualize.cell_to_ipython_animation.cell_to_animation (Python function) — Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time."><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_to_animation</span></code></a></p>
-<h1 id="cell-to-animation">cell_to_animation<a class="headerlink" href="#cell-to-animation" title="Permalink to this heading">¶</a></h1>
+<h1 id="cell-to-animation">cell_to_animation<a class="headerlink" href="#cell-to-animation" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="visualize.cell_to_ipython_animation.cell_to_animation">
-<span class="sig-prename descclassname"><span class="pre">visualize.cell_to_ipython_animation.</span></span><span class="sig-name descname"><span class="pre">cell_to_animation</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">xlim</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">ylim</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tstart</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">245</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tend</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">310</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">tstep</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">range_vars</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;Vm&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">plot_synaptic_input</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;animation&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><span class="sig-name descname"><span class="pre">visualize</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-visualize.cell_to_ipython_animation" title="visualize.cell_to_ipython_animation (Python module)"><span class="sig-name descname"><span class="pre">cell_to_ipython_animation</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">cell_to_animation</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation" title="visualize.cell_to_ipython_animation.cell_to_animation.cell (Python parameter)"><span class="n"><span class="pre">cell</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.xlim" title="visualize.cell_to_ipython_animation.cell_to_animation.xlim (Python parameter) — tuple like (0, 1600) that defines the limits of the x axis. If None, tries to get default values for range var from get_default_axis Default: None."><span class="n"><span class="pre">xlim</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.ylim" title="visualize.cell_to_ipython_animation.cell_to_animation.ylim (Python parameter) — tuple like (-80 0) that defines the limits of the y axis If None, tries to get default values for range var from get_default_axis Default: None."><span class="n"><span class="pre">ylim</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.tstart" title="visualize.cell_to_ipython_animation.cell_to_animation.tstart (Python parameter) — time when animation should be started"><span class="n"><span class="pre">tstart</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">245</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.tend" title="visualize.cell_to_ipython_animation.cell_to_animation.tend (Python parameter) — time when animation should be stopped"><span class="n"><span class="pre">tend</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">310</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.tstep" title="visualize.cell_to_ipython_animation.cell_to_animation.tstep (Python parameter) — timestep between frames"><span class="n"><span class="pre">tstep</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.range_vars" title="visualize.cell_to_ipython_animation.cell_to_animation.range_vars (Python parameter) — str or list of str: range vars to display, default: 'Vm'"><span class="n"><span class="pre">range_vars</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;Vm&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation" title="visualize.cell_to_ipython_animation.cell_to_animation.plot_synaptic_input (Python parameter)"><span class="n"><span class="pre">plot_synaptic_input</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_to_ipython_animation.cell_to_animation.outdir" title="visualize.cell_to_ipython_animation.cell_to_animation.outdir (Python parameter) — folder, where animation should be saved."><span class="n"><span class="pre">outdir</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;animation&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation" title="Link to this definition">¶</a></dt>
 <dd><p>Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="visualize.cell_to_ipython_animation.cell_to_animation-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>outdir</strong> (<em>str</em>) – folder, where animation should be saved. The result will be .png files.</p></li>
-<li><p><strong>xlim</strong> (<em>tuple</em>) – tuple like (0, 1600) that defines the limits of the x axis.
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.outdir"><span class="sig-name descname">outdir</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.outdir" title="Permalink to this definition">¶</a></dt><dd><p>folder, where animation should be saved. The result will be .png files.</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.xlim"><span class="sig-name descname">xlim</span><span class="p"> : </span><span class="desctype"><span class="desctype">tuple</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.xlim" title="Permalink to this definition">¶</a></dt><dd><p>tuple like (0, 1600) that defines the limits of the x axis.
 If None, tries to get default values for range var from get_default_axis
-Default: None.</p></li>
-<li><p><strong>ylim</strong> (<em>tuple</em>) – tuple like (-80 0) that defines the limits of the y axis
+Default: None.</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.ylim"><span class="sig-name descname">ylim</span><span class="p"> : </span><span class="desctype"><span class="desctype">tuple</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.ylim" title="Permalink to this definition">¶</a></dt><dd><p>tuple like (-80 0) that defines the limits of the y axis
 If None, tries to get default values for range var from get_default_axis
-Default: None.</p></li>
-<li><p><strong>tstart</strong> (<em>float</em>) – time when animation should be started</p></li>
-<li><p><strong>tend</strong> (<em>float</em>) – time when animation should be stopped</p></li>
-<li><p><strong>tstep</strong> (<em>float</em>) – timestep between frames</p></li>
-<li><p><strong>range_vars</strong> (<em>str | list</em>) – str or list of str: range vars to display, default: ‘Vm’</p></li>
-</ul>
+Default: None.</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.tstart"><span class="sig-name descname">tstart</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.tstart" title="Permalink to this definition">¶</a></dt><dd><p>time when animation should be started</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.tend"><span class="sig-name descname">tend</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.tend" title="Permalink to this definition">¶</a></dt><dd><p>time when animation should be stopped</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.tstep"><span class="sig-name descname">tstep</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.tstep" title="Permalink to this definition">¶</a></dt><dd><p>timestep between frames</p>
+</dd>
+<dt id="visualize.cell_to_ipython_animation.cell_to_animation.range_vars"><span class="sig-name descname">range_vars</span><span class="p"> : </span><span class="desctype"><span class="desctype">str | list</span></span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation.range_vars" title="Permalink to this definition">¶</a></dt><dd><p>str or list of str: range vars to display, default: ‘Vm’</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="visualize.cell_to_ipython_animation.cell_to_animation-returns">Returns<span class="colon">:</span><a class="headerlink" href="#visualize.cell_to_ipython_animation.cell_to_animation-returns" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>list of paths to images</p>
@@ -1106,6 +1224,9 @@ All rights reserved.</p>
 </div>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1173,7 +1294,7 @@ All rights reserved.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1196,9 +1317,9 @@ All rights reserved.</p>
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

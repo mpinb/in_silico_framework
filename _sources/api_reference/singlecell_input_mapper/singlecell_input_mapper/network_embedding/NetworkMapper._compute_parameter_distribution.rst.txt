@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_parameter_distribution`
+
+
 
 NetworkMapper._compute_parameter_distribution
 =============================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_parameter_distribution(realizationPopulation)
+
 
    Compute mean +- SD of parameters for population of anatomical realizations.
 
@@ -28,3 +30,8 @@ NetworkMapper._compute_parameter_distribution
              given population of realizations.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

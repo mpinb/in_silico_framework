@@ -1,19 +1,29 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser.set_cmap`
+
+
 
 CMVDataParser.set_cmap
 ======================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser.set_cmap(cmap=None, vmin=None, vmax=None)
+
 
    Update the colormap, vmin, and vmax of the visualization.
 
-   :Parameters: * **cmap** (*str*) -- colormap to use. Default is "jet". For available colormaps, see https://matplotlib.org/stable/gallery/color/colormap_reference.html
-                * **vmin** (*float*) -- minimum value of the colormap. Default is ``None``.
-                * **vmax** (*float*) -- maximum value of the colormap. Default is ``None``.
+   :param cmap: colormap to use. Default is "jet". For available colormaps, see https://matplotlib.org/stable/gallery/color/colormap_reference.html
+   :type cmap: str
+   :param vmin: minimum value of the colormap. Default is ``None``.
+   :type vmin: float
+   :param vmax: maximum value of the colormap. Default is ``None``.
+   :type vmax: float
 
    :returns: Nothing.
    :rtype: None
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

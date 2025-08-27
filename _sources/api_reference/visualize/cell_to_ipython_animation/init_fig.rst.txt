@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.cell_to_ipython_animation` ❭ :mod:`~visualize.cell_to_ipython_animation.init_fig`
-
-
-.. title:
 
 init_fig
 ========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.cell_to_ipython_animation.init_fig(xlim=(0, 1500), ylim=(-80, 0))
+
 
    Initialize figure for :py:meth:`cell_to_animation`
 
-   :Parameters: * **xlim** (*tuple*) -- x axis limits
-                * **ylim** (*tuple*) -- y axis limits
+   :param xlim: x axis limits
+   :type xlim: tuple
+   :param ylim: y axis limits
+   :type ylim: tuple
 
    :returns: figure and axis object
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

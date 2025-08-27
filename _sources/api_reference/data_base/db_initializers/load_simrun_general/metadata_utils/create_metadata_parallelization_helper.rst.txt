@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper`
-
-
-.. title:
 
 create_metadata_parallelization_helper
 ======================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper(sim_trial_index, simresult_path)
+
 
    Parallelize creating metadata across multiple simulation trials.
 
@@ -19,15 +16,16 @@ create_metadata_parallelization_helper
       This is used in
       :py:meth:`~data_base.db_initializers.load_simrun_general.create_metadata`.
 
-   :Parameters: * **sim_trial_index** (*pd.Series*) -- A pandas series containing the sim_trial_index.
-                * **simresult_path** (*str*) -- Path to the simulation results folder.
+   :param sim_trial_index: A pandas series containing the sim_trial_index.
+   :type sim_trial_index: pd.Series
+   :param simresult_path: Path to the simulation results folder.
+   :type simresult_path: str
 
    :returns: A pandas dataframe containing the metadata.
    :rtype: pd.DataFrame
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

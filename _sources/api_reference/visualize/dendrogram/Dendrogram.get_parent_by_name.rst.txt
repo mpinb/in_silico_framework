@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram.get_parent_by_name`
+
+
 
 Dendrogram.get_parent_by_name
 =============================
 
+
 .. py:method:: visualize.dendrogram.Dendrogram.get_parent_by_name(name)
+
 
    Get the parent of a dendrogram section by its name.
 
-   :Parameters: **name** (*str*) -- The name of the section.
+   :param name: The name of the section.
+   :type name: str
 
    :returns: The parent dendrogram section. None if the section is the soma.
    :rtype: :py:class:`_DendrogramSection`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

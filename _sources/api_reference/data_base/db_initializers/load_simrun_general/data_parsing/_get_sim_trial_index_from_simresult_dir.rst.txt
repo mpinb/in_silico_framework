@@ -1,0 +1,15 @@
+
+
+_get_sim_trial_index_from_simresult_dir
+=======================================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing._get_sim_trial_index_from_simresult_dir(prefix, dir_path, check_n_traces=None)
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

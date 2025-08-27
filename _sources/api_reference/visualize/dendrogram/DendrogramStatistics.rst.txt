@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.DendrogramStatistics`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DendrogramStatistics
 ====================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -45,27 +41,28 @@ DendrogramStatistics
 
    .. figure:: ../../../_static/_images/dendrogram_statistics.png
 
-   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
 
    :Attributes:
 
-   .. attribute:: dendrogram
+      .. attribute:: dendrogram
 
-      The dendrogram object.
+         The dendrogram object.
 
-      :type: :py:class:`Dendrogram`
+         :type: :py:class:`Dendrogram`
 
-   .. attribute:: dend_statistics
+      .. attribute:: dend_statistics
 
-      The dendrite statistics object.
+         The dendrite statistics object.
 
-      :type: :py:class:`_DendrogramDendriteStatistics`
+         :type: :py:class:`_DendrogramDendriteStatistics`
 
-   .. attribute:: syn_statistics
+      .. attribute:: syn_statistics
 
-      The synapse statistics object.
+         The synapse statistics object.
 
-      :type: :py:class:`_DendrogramSynapseStatistics`
+         :type: :py:class:`_DendrogramSynapseStatistics`
 
    :Methods:
 
@@ -78,3 +75,7 @@ DendrogramStatistics
       * - :py:obj:`plot <visualize.dendrogram.DendrogramStatistics.plot>`\ (figsize, colormap\_synapses)
         - Plot the dendrogram statistics.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

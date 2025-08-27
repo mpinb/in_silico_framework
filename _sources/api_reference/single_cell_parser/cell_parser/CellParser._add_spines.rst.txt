@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser._add_spines`
+
+
 
 CellParser._add_spines
 ======================
 
+
 .. py:method:: single_cell_parser.cell_parser.CellParser._add_spines(label, spineParam)
+
 
    Adds passive spines to the membrane.
 
@@ -21,3 +23,8 @@ CellParser._add_spines
 
    .. seealso:: :cite:t:`Koch_Segev_1998`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

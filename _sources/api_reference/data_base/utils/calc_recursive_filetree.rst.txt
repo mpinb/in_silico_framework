@@ -1,34 +1,38 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.calc_recursive_filetree`
-
-
-.. title:
 
 calc_recursive_filetree
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.calc_recursive_filetree(db, root_dir_path, max_lines=30, depth=0, max_depth=2, max_lines_per_key=3, lines=None, indent=None, all_files=False, colorize=True)
+
 
    Fetches the contents of an db and formats them as a string representing a tree structure
 
-   :Parameters: * **db** (*data_base.data_base.DataNase*) -- The database to be visualized
-                * **root_dir_path** (*str*) -- The path to the root directory
-                * **max_depth** (*int*) -- Maximum depth to recurse into the directory tree
-                * **max_lines** (*int*) -- Maximum number of lines to print. Default is 30.
-                * **max_lines_per_key** (*int*) -- Maximum number of lines per key. Default is 3.
-                * **lines** (*list*) -- List of strings to append to during recursion. Default is ``None``.
-                * **all_files** (*bool*) -- If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is ``False``.
-                * **colorize** (*bool*) -- If True, colorizes the keys. Default is ``True``.
+   :param db: The database to be visualized
+   :type db: data_base.data_base.DataNase
+   :param root_dir_path: The path to the root directory
+   :type root_dir_path: str
+   :param max_depth: Maximum depth to recurse into the directory tree
+   :type max_depth: int
+   :param max_lines: Maximum number of lines to print. Default is 30.
+   :type max_lines: int
+   :param max_lines_per_key: Maximum number of lines per key. Default is 3.
+   :type max_lines_per_key: int
+   :param lines: List of strings to append to during recursion. Default is ``None``.
+   :type lines: list
+   :param all_files: If True, all files are shown (including e.g. /db subfolders). If False, only files that are keys in the database are shown. Default is ``False``.
+   :type all_files: bool
+   :param colorize: If True, colorizes the keys. Default is ``True``.
+   :type colorize: bool
 
    :returns: The formatted tree structure as a list of strings.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

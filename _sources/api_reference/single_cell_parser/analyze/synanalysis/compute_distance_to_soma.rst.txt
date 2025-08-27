@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.compute_distance_to_soma`
-
-
-.. title:
 
 compute_distance_to_soma
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.analyze.synanalysis.compute_distance_to_soma(sec, x, cell=None, consider_gap_to_soma=False)
+
 
    Computes the distance from a point to the soma.
 
@@ -19,21 +16,24 @@ compute_distance_to_soma
 
    Used in :py:meth:`compute_syn_distance` and :py:meth:`compute_syn_distances`.
 
-   :Parameters: * **sec** (:py:class:`single_cell_parser.cell.PySection` | int) -- Section or section ID of the cell.
-                  If the section ID is given, :paramref:`cell` must be provided.
-                * **x** (*float*) -- Relative point on section, from 0 to 1.
-                * **cell** (:py:class:`single_cell_parser.cell.Cell`, optional) -- Only required if :paramref:`sec` is the section ID.
-                * **consider_gap_to_soma** (*bool, optional*) -- Accounts for the fact that dendrites don't actually touch the soma, and adds the
-                  distance between the last point of the parent section and the first point of the
-                  current section to the distance.
-                  Default: False
+   :param sec: Section or section ID of the cell.
+               If the section ID is given, :paramref:`cell` must be provided.
+   :type sec: single_cell_parser.cell.PySection
+   :param x: Relative point on section, from 0 to 1.
+   :type x: float
+   :param cell: Only required if :paramref:`sec` is the section ID.
+   :type cell: single_cell_parser.cell.Cell
+   :param consider_gap_to_soma: Accounts for the fact that dendrites don't actually touch the soma, and adds the
+                                distance between the last point of the parent section and the first point of the
+                                current section to the distance.
+                                Default: False
+   :type consider_gap_to_soma: bool, optional
 
    :returns: distance to the soma
    :rtype: float
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

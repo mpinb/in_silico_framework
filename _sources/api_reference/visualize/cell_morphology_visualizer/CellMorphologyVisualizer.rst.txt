@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CellMorphologyVisualizer
 ========================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -50,11 +46,16 @@ CellMorphologyVisualizer
 
    Initializes the CellMorphologyVisualizer object.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object
-                * **align_trunk** (*bool*) -- Whether or not to align the cell trunk with the z-axis.
-                * **t_start** (*float*) -- start time point of our time series visualization
-                * **t_stop** (*float*) -- last time point of our time series visualization
-                * **t_step** (*float*) -- time between the different time points of our visualization
+   :param cell: Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param align_trunk: Whether or not to align the cell trunk with the z-axis.
+   :type align_trunk: bool
+   :param t_start: start time point of our time series visualization
+   :type t_start: float
+   :param t_stop: last time point of our time series visualization
+   :type t_stop: float
+   :param t_step: time between the different time points of our visualization
+   :type t_step: float
 
    .. note::
 
@@ -65,61 +66,61 @@ CellMorphologyVisualizer
 
    :Attributes:
 
-   .. attribute:: camera_position
+      .. attribute:: camera_position
 
-      Camera angles and distance for matplotlib 3D visualizations.
-      Possible keys: 'azim', 'dist', 'elev', 'roll'
-      See also: https://matplotlib.org/stable/api/toolkits/mplot3d/view_angles.html
+         Camera angles and distance for matplotlib 3D visualizations.
+         Possible keys: 'azim', 'dist', 'elev', 'roll'
+         See also: https://matplotlib.org/stable/api/toolkits/mplot3d/view_angles.html
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: neuron_rotation
+      .. attribute:: neuron_rotation
 
-      Amount of degrees the azimuth increases per frame in a timeseries visualization.
+         Amount of degrees the azimuth increases per frame in a timeseries visualization.
 
-      :type: float
+         :type: float
 
-   .. attribute:: dpi
+      .. attribute:: dpi
 
-      Image quality
-      Default: 72
+         Image quality
+         Default: 72
 
-      :type: int
+         :type: int
 
-   .. attribute:: show_synapses
+      .. attribute:: show_synapses
 
-      Whether or not to visualize the location of synapses onto the cell.
+         Whether or not to visualize the location of synapses onto the cell.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: synapse_legend
+      .. attribute:: synapse_legend
 
-      whether the synapse activations legend should appear in the plot
+         whether the synapse activations legend should appear in the plot
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: highlight_arrow_kwargs
+      .. attribute:: highlight_arrow_kwargs
 
-      Additional arguments for the arrow.
-      See available kwargs on https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow
+         Additional arguments for the arrow.
+         See available kwargs on https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: synapse_group_function
+      .. attribute:: synapse_group_function
 
-      Method to group synapse types.
-      Must accept a name (str) as argument, and return a group name (str) as output.
-      Default: `lambda x: x`
+         Method to group synapse types.
+         Must accept a name (str) as argument, and return a group name (str) as output.
+         Default: `lambda x: x`
 
-      :type: callable
+         :type: callable
 
-   .. attribute:: population_to_color_dict
+      .. attribute:: population_to_color_dict
 
-      Dictionary to map synapse group names (str) to colors
-      Must contain the same keys as self.cell.synapses.keys() after being passed through self.synapse_group_function
-      default: {}
+         Dictionary to map synapse group names (str) to colors
+         Must contain the same keys as self.cell.synapses.keys() after being passed through self.synapse_group_function
+         default: {}
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -144,3 +145,7 @@ CellMorphologyVisualizer
       * - :py:obj:`to_vtk <visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk>`\ (out\_dir, fn)
         - Write out the cell morphology to a VTK file.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,22 +1,22 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.stimulus_interval_filter`
-
-
-.. title:
 
 stimulus_interval_filter
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.stimulus_interval_filter(stim_times, period_length=1, offset=0)
+
 
    Filters periodic stimuli such that only the first stimulus of each period is retained.
 
-   :Parameters: * **stim_times** (*list*) -- A list containing stimulus times.
-                * **period_length** (*int, optional*) -- The number of stimuli forming one period. Defaults to 1.
-                * **offset** (*int, optional*) -- The number of the stimulus in each period to be extracted. Defaults to 0.
+   :param stim_times: A list containing stimulus times.
+   :type stim_times: list
+   :param period_length: The number of stimuli forming one period. Defaults to 1.
+   :type period_length: int, optional
+   :param offset: The number of the stimulus in each period to be extracted. Defaults to 0.
+   :type offset: int, optional
 
    :returns: A list containing filtered stimulus times.
    :rtype: list
@@ -32,8 +32,7 @@ stimulus_interval_filter
    [2, 4]
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

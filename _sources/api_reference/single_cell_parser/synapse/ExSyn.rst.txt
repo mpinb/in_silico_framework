@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.ExSyn`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 ExSyn
 =====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -32,30 +28,34 @@ ExSyn
 
    Used for testing purposes.
 
-   :Parameters: * **edgeID** (*int*) -- ID of attached section in cell.sections
-                * **edgePtID** (*int*) -- ID of attached point in cell.sections[edgeID].pts
-                * **preCellType** (*str*) -- reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
-                * **postCellType** (*str*) -- reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param edgeID: ID of attached section in cell.sections
+   :type edgeID: int
+   :param edgePtID: ID of attached point in cell.sections[edgeID].pts
+   :type edgePtID: int
+   :param preCellType: reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :type preCellType: str
+   :param postCellType: reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :type postCellType: str
 
    :Attributes:
 
-   .. attribute:: syn
+      .. attribute:: syn
 
-      hoc ExpSyn object
+         hoc ExpSyn object
 
-      :type: h.ExpSyn
+         :type: h.ExpSyn
 
-   .. attribute:: netcon
+      .. attribute:: netcon
 
-      hoc NetCon object
+         hoc NetCon object
 
-      :type: h.NetCon
+         :type: h.NetCon
 
-   .. attribute:: _active
+      .. attribute:: _active
 
-      activation status
+         activation status
 
-      :type: bool
+         :type: bool
 
    :Methods:
 
@@ -68,3 +68,7 @@ ExSyn
       * - :py:obj:`activate_hoc_syn <single_cell_parser.synapse.ExSyn.activate_hoc_syn>`\ (source, targetCell, threshold, delay, weight)
         - Setup of all necessary hoc connections.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

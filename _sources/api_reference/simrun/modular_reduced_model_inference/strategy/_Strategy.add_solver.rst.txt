@@ -1,17 +1,26 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.add_solver`
+
+
 
 _Strategy.add_solver
 ====================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.add_solver(solver, setup=True)
+
 
    Add a solver to the strategy.
 
-   :Parameters: * **solver** (:py:class:`~simrun.modular_reduced_model_inference.solver.Solver`) -- The solver to add.
-                * **setup** (*bool*) -- Whether to setup the solver. Default is ``True``.
+   :param solver: The solver to add.
+   :type solver: ~simrun.modular_reduced_model_inference.solver.Solver
+   :param setup: Whether to setup the solver. Default is ``True``.
+   :type setup: bool
 
    :returns: None. Adds the solver to the strategy.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.MetadataAccessor` ❭ :mod:`~data_base.isf_data_base.MetadataAccessor.keys`
+
+
 
 MetadataAccessor.keys
 =====================
 
+
 .. py:method:: data_base.isf_data_base.MetadataAccessor.keys()
+
 
    Return the keys of the :paramref:`db`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

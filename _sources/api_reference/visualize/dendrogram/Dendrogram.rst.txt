@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Dendrogram
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -42,39 +38,40 @@ Dendrogram
 
    .. figure:: ../../../_static/_images/dendrogram.png
 
-   :Parameters: **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
 
    :Attributes:
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      The cell object.
+         The cell object.
 
-      :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :py:class:`~single_cell_parser.cell.Cell`
 
-   .. attribute:: dendrogram_db
+      .. attribute:: dendrogram_db
 
-      A list of :py:class:`_DendrogramSection` objects.
+         A list of :py:class:`_DendrogramSection` objects.
 
-      :type: list
+         :type: list
 
-   .. attribute:: dendrogram_db_by_name
+      .. attribute:: dendrogram_db_by_name
 
-      A dictionary of dendrogram sections by name.
+         A dictionary of dendrogram sections by name.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: dendrogram_db_by_sec_id
+      .. attribute:: dendrogram_db_by_sec_id
 
-      A dictionary of dendrogram sections by section ID.
+         A dictionary of dendrogram sections by section ID.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: main_bifur_dist
+      .. attribute:: main_bifur_dist
 
-      The distance to the main bifurcation, in :math:`\mu m`.
+         The distance to the main bifurcation, in :math:`\mu m`.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -91,3 +88,7 @@ Dendrogram
       * - :py:obj:`_plot_dendrogram <visualize.dendrogram.Dendrogram._plot_dendrogram>`\ (ax, colormap)
         - Plot the dendogram on an axes object.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

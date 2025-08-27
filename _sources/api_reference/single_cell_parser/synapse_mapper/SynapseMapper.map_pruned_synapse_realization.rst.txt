@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper.map_pruned_synapse_realization`
+
+
 
 SynapseMapper.map_pruned_synapse_realization
 ============================================
 
+
 .. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.map_pruned_synapse_realization()
+
 
    Maps previously created synapse realization onto neuron
    morphology.
@@ -21,3 +23,8 @@ SynapseMapper.map_pruned_synapse_realization
    - :py:meth:`~single_cell_parser.reader.read_pruned_synapse_realization`
    - The :ref:`syn_file_format` file type.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

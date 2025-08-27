@@ -1,22 +1,22 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_summary_statistics`
-
-
-.. title:
 
 get_summary_statistics
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.synaptic_strength_fitting.get_summary_statistics(self, method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
+
 
    Calculate summary statistics of the EPSPs.
 
-   :Parameters: * **method** (*str*) -- ``dynamic_baseline`` or ``constant_baseline``.
-                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
-                * **ePSP_summary_statistics_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
+   :param method: ``dynamic_baseline`` or ``constant_baseline``.
+   :type method: str
+   :param merge_celltype_kwargs: Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+   :type merge_celltype_kwargs: dict
+   :param ePSP_summary_statistics_kwargs: Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
+   :type ePSP_summary_statistics_kwargs: dict
 
    :returns: A table of summary statistics.
    :rtype: pd.DataFrame
@@ -24,8 +24,7 @@ get_summary_statistics
    .. seealso:: :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics` for which statistics are calculated.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

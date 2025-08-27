@@ -1,20 +1,31 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics.get_number_of_synapses_in_bin`
+
+
 
 _DendrogramSynapseStatistics.get_number_of_synapses_in_bin
 ==========================================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramSynapseStatistics.get_number_of_synapses_in_bin(min_, max_, select=['Dendrite', 'ApicalDendrite'], label=None)
+
 
    Get the number of synapses in a certain bin of soma distance.
 
-   :Parameters: * **min\_** (*float*) -- The minimum soma distance.
-                * **max\_** (*float*) -- The maximum soma distance.
-                * **select** (*list*) -- A list of labels to select. Default is `["Dendrite", "ApicalDendrite"]`.
-                * **label** (*str*) -- The label of the synapse. Default is ``None``.
+   :param min\_: The minimum soma distance.
+   :type min\_: float
+   :param max\_: The maximum soma distance.
+   :type max\_: float
+   :param select: A list of labels to select. Default is `["Dendrite", "ApicalDendrite"]`.
+   :type select: list
+   :param label: The label of the synapse. Default is ``None``.
+   :type label: str
 
    :returns: The number of synapses in the bin.
    :rtype: int
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SynapseMapper
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,41 +33,44 @@ SynapseMapper
    Poisson sample the synapse distribution mesh and assign them to a random
    point on the morphology that lies within the same voxel.
 
-   :Parameters: * **cell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- Neuron morphology to map synapses onto.
-                * **synDist** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- Synapse distribution mesh.
-                * **isDensity** (*bool*) -- If True, synapse distribution is interpreted as an average density.
-                  If False, synapse distribution is interpreted as an actual realization, and values are taken as is.
+   :param cell: Neuron morphology to map synapses onto.
+   :type cell: ~singlecell_input_mapper.singlecell_input_mapper.cell.Cell
+   :param synDist: Synapse distribution mesh.
+   :type synDist: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
+   :param isDensity: If True, synapse distribution is interpreted as an average density.
+                     If False, synapse distribution is interpreted as an actual realization, and values are taken as is.
+   :type isDensity: bool
 
    :Attributes:
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      The postsynaptic neuron.
+         The postsynaptic neuron.
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
-   .. attribute:: synDist
+      .. attribute:: synDist
 
-      Synapse distribution mesh. Can be either a density or a realization
-      (i.e. whole number values per voxel).
+         Synapse distribution mesh. Can be either a density or a realization
+         (i.e. whole number values per voxel).
 
-      :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
+         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
 
-   .. attribute:: isDensity
+      .. attribute:: isDensity
 
-      Set to True if synapse distribution is interpreted as an average density.
-      Set to False if synapse distribution is interpreted as an actual realization,
-      and values are whole numbers.
+         Set to True if synapse distribution is interpreted as an average density.
+         Set to False if synapse distribution is interpreted as an actual realization,
+         and values are whole numbers.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: voxelEdgeMap
+      .. attribute:: voxelEdgeMap
 
-      Dictionary mapping synapse distribution mesh coordinates on list with
-      pairs of indices that correspond to the edge and edgePt ID of all morphology
-      points inside that voxel.
+         Dictionary mapping synapse distribution mesh coordinates on list with
+         pairs of indices that correspond to the edge and edgePt ID of all morphology
+         points inside that voxel.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -92,3 +91,7 @@ SynapseMapper
       * - :py:obj:`_compute_path_length <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length>`\ (sec, x)
         - Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

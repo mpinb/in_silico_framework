@@ -1,5 +1,7 @@
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
+
 
 analyze
 =======
@@ -49,3 +51,7 @@ Modules
    * - :py:obj:`synanalysis <single_cell_parser.analyze.synanalysis>`
      - Compute synapse distances and activation times.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

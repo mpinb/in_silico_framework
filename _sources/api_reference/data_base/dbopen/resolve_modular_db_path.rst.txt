@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.resolve_modular_db_path`
-
-
-.. title:
 
 resolve_modular_db_path
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.dbopen.resolve_modular_db_path(path)
+
 
    Resolve the path of a database.
 
@@ -22,14 +19,14 @@ resolve_modular_db_path
 
    This method checks the current registry for the absolute path of the database on the current filesystem.
 
-   :Parameters: **path** (*str*) -- The path to resolve.
+   :param path: The path to resolve.
+   :type path: str
 
    :returns: The resolved path.
    :rtype: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

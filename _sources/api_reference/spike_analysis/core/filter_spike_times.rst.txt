@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.filter_spike_times`
-
-
-.. title:
 
 filter_spike_times
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.filter_spike_times(spike_times, spike_times_trough, creast_trough_interval=2, mode='latest', spike_times_amplitude=None, upper_creast_threshold=None, creast_upcross_times=None)
+
 
    Filter spike times based on timepoints of detected creasts and troughs.
 
@@ -21,15 +18,16 @@ filter_spike_times
 
    If a through does not have a corresponding creast, no spike is detected.
 
-   :Parameters: * **spike_times** (*list*) -- list containing spike times defined by the creast of the waveform
-                * **spike_times_trough** (*list*) -- list containing spike times defined by the trough of the waveform
+   :param spike_times: list containing spike times defined by the creast of the waveform
+   :type spike_times: list
+   :param spike_times_trough: list containing spike times defined by the trough of the waveform
+   :type spike_times_trough: list
 
    :returns: list, containing spikes fullfilling the definition above.
    :rtype: filtered_spike_times
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

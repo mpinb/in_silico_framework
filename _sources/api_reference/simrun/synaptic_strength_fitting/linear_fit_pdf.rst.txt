@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.linear_fit_pdf`
-
-
-.. title:
 
 linear_fit_pdf
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.synaptic_strength_fitting.linear_fit_pdf(pdf)
+
 
    Calculate linear fits between the synaptic conductance and the EPSP.
 
@@ -23,15 +20,15 @@ linear_fit_pdf
 
    Is used to calculate per-celltype conductance values that match empirical data.
 
-   :Parameters: **pdf** (*pd.DataFrame*) -- A table of summary statistics, as returned by :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`,
-                but without an index.
+   :param pdf: A table of summary statistics, as returned by :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`,
+               but without an index.
+   :type pdf: pd.DataFrame
 
    :returns: A table of linear fits.
    :rtype: pd.Series
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

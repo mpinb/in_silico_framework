@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.run_ex_synapse`
-
-
-.. title:
 
 run_ex_synapse
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.synaptic_strength_fitting.run_ex_synapse(cell_nw_generator, neuron_param, network_param, celltype, preSynCellID, gAMPA=None, gNMDA=None, gGABA=None, vardt=False, return_cell=False, synapseID=None, tEnd=None, tStim=None)
+
 
    Simulate a single excitatory or inhibitory synapse.
 
@@ -20,28 +17,40 @@ run_ex_synapse
    For excitatory synapses, :paramref:`gAMPA` and :paramref:`gNMDA` must be specified, and not :paramref:`gGABA`.
    For inhibitory synapses, only :paramref:`gGABA` may be specified.
 
-   :Parameters: * **cell_nw_generator** (*callable*) -- A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
-                * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
-                * **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format`.
-                * **celltype** (*str*) -- The celltype to activate the synapse for. Used to fetch the correct network parameters.
-                * **preSynCellID** (*int*) -- The presynaptic cell ID to activate the synapse for. Default: ``None``.
-                * **gAMPA** (*float*) -- The AMPA conductance value. Default: ``None``.
-                * **gNMDA** (*float*) -- The NMDA conductance value. Default: ``None``.
-                * **gGABA** (*float*) -- The GABA conductance value. Default: ``None``.
-                * **vardt** (*bool*) -- Whether to use the variable step size solver. Default: ``False``.
-                * **return_cell** (*bool*) -- Whether to return the :py:class:`~single_cell_parser.cell.Cell` object. Default: ``False``.
-                * **synapseID** (*int*) -- The synapse ID to activate.
-                  If ``None``, all synapses assigned to the presynaptic cell get activated synchronously during the simulation.
-                  Default: ``None``.
-                * **tEnd** (*float*) -- The end time of the simulation. Default: ``None``.
-                * **tStim** (*float*) -- The time of the synaptic activation. Default: ``None``.
+   :param cell_nw_generator: A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
+   :type cell_nw_generator: callable
+   :param neuron_param: The :ref:`cell_parameters_format`.
+   :type neuron_param: ~single_cell_parser.parameters.NTParameterSet
+   :param network_param: The :ref:`network_parameters_format`.
+   :type network_param: ~single_cell_parser.parameters.NTParameterSet
+   :param celltype: The celltype to activate the synapse for. Used to fetch the correct network parameters.
+   :type celltype: str
+   :param preSynCellID: The presynaptic cell ID to activate the synapse for. Default: ``None``.
+   :type preSynCellID: int
+   :param gAMPA: The AMPA conductance value. Default: ``None``.
+   :type gAMPA: float
+   :param gNMDA: The NMDA conductance value. Default: ``None``.
+   :type gNMDA: float
+   :param gGABA: The GABA conductance value. Default: ``None``.
+   :type gGABA: float
+   :param vardt: Whether to use the variable step size solver. Default: ``False``.
+   :type vardt: bool
+   :param return_cell: Whether to return the :py:class:`~single_cell_parser.cell.Cell` object. Default: ``False``.
+   :type return_cell: bool
+   :param synapseID: The synapse ID to activate.
+                     If ``None``, all synapses assigned to the presynaptic cell get activated synchronously during the simulation.
+                     Default: ``None``.
+   :type synapseID: int
+   :param tEnd: The end time of the simulation. Default: ``None``.
+   :type tEnd: float
+   :param tStim: The time of the synaptic activation. Default: ``None``.
+   :type tStim: float
 
    :returns: A tuple of the time vector and the voltage trace at the soma.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

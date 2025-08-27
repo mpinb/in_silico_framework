@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map`
+
+
 
 NetworkMapper._create_anatomical_connectivity_map
 =================================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map()
+
 
    Connects anatomical synapses to PointCells.
 
@@ -30,3 +32,8 @@ NetworkMapper._create_anatomical_connectivity_map
    :returns: the anatomical map, connected cells, and connected cells per structure
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

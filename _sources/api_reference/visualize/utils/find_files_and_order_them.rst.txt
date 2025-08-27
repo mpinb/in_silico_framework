@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.find_files_and_order_them`
-
-
-.. title:
 
 find_files_and_order_them
 =========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.utils.find_files_and_order_them(files, files_format='.png')
+
 
    Find files in a list of directories or a directory and order them.
 
@@ -19,8 +16,10 @@ find_files_and_order_them
    If the files param was a list of directories, the files are in order within each directory but the
    directories order is maintained.
 
-   :Parameters: * **files** (*list | str*) -- list of files, list of directories, or a directory.
-                * **files_format** (*str*) -- format of the files to get (e.g. '.png', '.jpg')
+   :param files: list of files, list of directories, or a directory.
+   :type files: list | str
+   :param files_format: format of the files to get (e.g. '.png', '.jpg')
+   :type files_format: str
 
    :returns: List of the files contained in the files argument.
    :rtype: list
@@ -56,8 +55,7 @@ find_files_and_order_them
    1, 2, 10, 100, file, 5, 30, 200, hello, world, 9, 70, A, B, C
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

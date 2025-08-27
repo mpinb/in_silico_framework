@@ -1,5 +1,7 @@
 
 
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
 
 singlecell_input_mapper
 =======================
@@ -98,3 +100,7 @@ Modules
    * - :py:obj:`ongoing_network_param_from_template <singlecell_input_mapper.ongoing_network_param_from_template>`
      - Create a network parameter template file.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

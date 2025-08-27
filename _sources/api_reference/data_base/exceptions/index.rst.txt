@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.exceptions`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
+
 
 exceptions
 ==========
@@ -37,3 +39,7 @@ Exceptions
      - Typical data_base errors
    * - :py:obj:`ISFDataBaseException <data_base.exceptions.ISFDataBaseException>`
      - Typical isf_data_base errors
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

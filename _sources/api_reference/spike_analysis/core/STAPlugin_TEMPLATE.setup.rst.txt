@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE.setup`
+
+
 
 STAPlugin_TEMPLATE.setup
 ========================
 
+
 .. py:method:: spike_analysis.core.STAPlugin_TEMPLATE.setup()
+
    :abstractmethod:
 
 
@@ -14,3 +16,8 @@ STAPlugin_TEMPLATE.setup
 
    This method needs to be overwritten by the subclass.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

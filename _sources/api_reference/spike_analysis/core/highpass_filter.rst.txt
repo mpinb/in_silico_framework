@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.highpass_filter`
-
-
-.. title:
 
 highpass_filter
 ===============
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.highpass_filter(y, sr)
+
 
    Apply a highpass filter to the data.
 
-   :Parameters: * **y** (*numpy.ndarray*) -- The data to filter.
-                * **sr** (*int*) -- The sampling rate of the data.
+   :param y: The data to filter.
+   :type y: numpy.ndarray
+   :param sr: The sampling rate of the data.
+   :type sr: int
 
    :returns: The filtered data.
    :rtype: numpy.ndarray
@@ -23,8 +22,7 @@ highpass_filter
    .. seealso:: https://dsp.stackexchange.com/questions/41184/high-pass-filter-in-python-scipy
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

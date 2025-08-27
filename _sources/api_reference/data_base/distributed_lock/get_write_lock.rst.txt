@@ -1,27 +1,24 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.get_write_lock`
-
-
-.. title:
 
 get_write_lock
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.distributed_lock.get_write_lock(name)
+
 
    Fetch the correct write lock, depending on global locking server configuration.
 
-   :Parameters: **name** (*str*) -- The name of the lock.
+   :param name: The name of the lock.
+   :type name: str
 
    :returns:     The lock object.
    :rtype: :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.WriteLock`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

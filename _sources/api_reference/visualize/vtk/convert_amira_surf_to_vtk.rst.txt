@@ -1,28 +1,27 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.convert_amira_surf_to_vtk`
-
-
-.. title:
 
 convert_amira_surf_to_vtk
 =========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.vtk.convert_amira_surf_to_vtk(surf_file, outname='surface', outdir='.')
+
 
    Given the path to an amira .surf file, this method converts it to a .vtk surface file.
 
-   :Parameters: * **surf_file** (*str*) -- path to amira .surf file
-                * **outname** (*str, optional*) -- Name of the output vtk surface file. Defaults to 'surface'.
-                * **outdir** (*str, optional*) -- Directory to save the file to. Defaults to '.'.
+   :param surf_file: path to amira .surf file
+   :type surf_file: str
+   :param outname: Name of the output vtk surface file. Defaults to 'surface'.
+   :type outname: str, optional
+   :param outdir: Directory to save the file to. Defaults to '.'.
+   :type outdir: str, optional
 
    :returns: None. Writes out a .vtk file to the specified directory.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ :mod:`~data_base.IO.LoaderDumper.pandas_to_parquet` ❭ :mod:`~data_base.IO.LoaderDumper.pandas_to_parquet.Loader`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Loader
 ======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -30,15 +26,16 @@ Loader
    
    Load for parquet files to pandas DataFrames
 
-   :Parameters: **meta** (*dict, optional*) -- Meta information to be saved with the object. Defaults to None.
+   :param meta: Meta information to be saved with the object. Defaults to None.
+   :type meta: dict, optional
 
    :Attributes:
 
-   .. attribute:: meta
+      .. attribute:: meta
 
-      Meta information to be saved with the object.
+         Meta information to be saved with the object.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -51,3 +48,7 @@ Loader
       * - :py:obj:`get <data_base.IO.LoaderDumper.pandas_to_parquet.Loader.get>`\ (savedir)
         - Load the pandas DataFrame from the specified folder
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

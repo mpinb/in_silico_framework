@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver.Solver_COBYLA` ❭ :mod:`~simrun.modular_reduced_model_inference.solver.Solver_COBYLA._optimize`
+
+
 
 Solver_COBYLA._optimize
 =======================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA._optimize(_objective_function, maxiter=5000, x0=None)
+
    :staticmethod:
 
 
@@ -15,5 +17,11 @@ Solver_COBYLA._optimize
    This method is the core optimizer. It minimizes :paramref:`_objective_function` using
    :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
 
-   :Parameters: **_objective_function** (*callable*) -- A strategy-specific objective function.
+   :param _objective_function: A strategy-specific objective function.
+   :type _objective_function: callable
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

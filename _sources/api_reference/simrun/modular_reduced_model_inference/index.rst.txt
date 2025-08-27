@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 modular_reduced_model_inference
 ===============================
@@ -61,3 +63,7 @@ Modules
    * - :py:obj:`strategy <simrun.modular_reduced_model_inference.strategy>`
      - Strategies for creating reduced models.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

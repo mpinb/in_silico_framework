@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SynapseDensity
 ==============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -60,22 +56,29 @@ SynapseDensity
 
    .. seealso:: See: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
 
-   :Parameters: * **cell** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`) -- the postsynaptic neuron
-                * **postCellType** (*str*) -- cell type of the postsynaptic neuron
-                * **connectionSpreadsheet** (*dict | DataFrame*) -- spreadsheet containing length/surface area PST densities.
-                * **exTypes** (*list*) -- list of strings defining excitatory cell types.
-                * **inhTypes** (*list*) -- list of strings defining inhibitory cell types.
-                * **exPST** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- normalization PST for connections with presynaptic excitatory cell types.
-                * **inhPST** (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`) -- normalization PST for connections with presynaptic inhibitory cell types.
+   :param cell: the postsynaptic neuron
+   :type cell: ~singlecell_input_mapper.singlecell_input_mapper.cell.Cell
+   :param postCellType: cell type of the postsynaptic neuron
+   :type postCellType: str
+   :param connectionSpreadsheet: spreadsheet containing length/surface area PST densities.
+   :type connectionSpreadsheet: dict | DataFrame
+   :param exTypes: list of strings defining excitatory cell types.
+   :type exTypes: list
+   :param inhTypes: list of strings defining inhibitory cell types.
+   :type inhTypes: list
+   :param exPST: normalization PST for connections with presynaptic excitatory cell types.
+   :type exPST: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
+   :param inhPST: normalization PST for connections with presynaptic inhibitory cell types.
+   :type inhPST: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
 
    :Attributes:
 
-   .. attribute:: cellPST
+      .. attribute:: cellPST
 
-      Nested dictionary containing the 3D length/surface area density of the postsynaptic neuron.
-      See :py:meth:`~SynapseDensity.compute_cell_PST` for details.
+         Nested dictionary containing the 3D length/surface area density of the postsynaptic neuron.
+         See :py:meth:`~SynapseDensity.compute_cell_PST` for details.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -106,3 +109,7 @@ SynapseDensity
       * - :py:obj:`_intersect_bboxes <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._intersect_bboxes>`\ (bbox1, bbox2)
         - Check if two bounding boxes overlap
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

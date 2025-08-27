@@ -1,13 +1,20 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings`
+
+
 
 RecordingSiteManager.update_recordings
 ======================================
 
+
 .. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings()
+
 
    Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :paramref:`recordingSites`.
 
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

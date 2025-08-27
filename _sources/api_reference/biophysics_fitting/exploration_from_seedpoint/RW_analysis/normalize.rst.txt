@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.normalize`
-
-
-.. title:
 
 normalize
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.normalize(df, params)
+
 
    Normalize a pd.DataFrame according to the values of specified parameters.
 
-   :Parameters: * **df** (*pd.DataFrame*) -- the dataframe to normalize
-                * **params** (*pd.DataFrame*) -- a dataframe containing the min and max values for each parameter
+   :param df: the dataframe to normalize
+   :type df: pd.DataFrame
+   :param params: a dataframe containing the min and max values for each parameter
+   :type params: pd.DataFrame
 
    :returns: the normalized dataframe
    :rtype: pd.DataFrame
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

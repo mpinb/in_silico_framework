@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -627,16 +629,64 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D." class="md-ellipsis">visualize.<wbr>cell_<wbr>morphology_<wbr>visualizer.<wbr>Cell<wbr>Morphology<wbr>Visualizer.<wbr>plot</span>
+    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D." class="md-ellipsis">visualizecell_<wbr>morphology_<wbr>visualizer<wbr>Cell<wbr>Morphology<wbr>Visualizerplot</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot">
+    <nav class="md-nav" aria-label="visualizecell_morphology_visualizerCellMorphologyVisualizerplot">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color (Python parameter) — If you want some other color overlayed on the cell morphology. Options: &#34;voltage&#34;, &#34;vm&#34;, &#34;synapses&#34;, &#34;synapse&#34;, or a color string, or a nested list of colors for each section" class="md-ellipsis">color</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses (Python parameter) — whether the synapse activations should be shown" class="md-ellipsis">show_<wbr>synapses</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point (Python parameter) — time point from which we want to gather the voltage/synapses." class="md-ellipsis">time_<wbr>point</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save (Python parameter) — path where the plot will be saved." class="md-ellipsis">save</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section (Python parameter) — section number of the section that should be highlighted" class="md-ellipsis">highlight_<wbr>section</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x (Python parameter) — x coordinate of the section that should be highlighted" class="md-ellipsis">highlight_<wbr>x</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1058,16 +1108,64 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" class="md-nav__link">
-    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D." class="md-ellipsis">visualize.<wbr>cell_<wbr>morphology_<wbr>visualizer.<wbr>Cell<wbr>Morphology<wbr>Visualizer.<wbr>plot</span>
+    <span aria-label="Python method" class="objinfo-icon objinfo-icon__procedure" title="Python method">M</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D." class="md-ellipsis">visualizecell_<wbr>morphology_<wbr>visualizer<wbr>Cell<wbr>Morphology<wbr>Visualizerplot</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot">
+    <nav class="md-nav" aria-label="visualizecell_morphology_visualizerCellMorphologyVisualizerplot">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color (Python parameter) — If you want some other color overlayed on the cell morphology. Options: &#34;voltage&#34;, &#34;vm&#34;, &#34;synapses&#34;, &#34;synapse&#34;, or a color string, or a nested list of colors for each section" class="md-ellipsis">color</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses (Python parameter) — whether the synapse activations should be shown" class="md-ellipsis">show_<wbr>synapses</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point (Python parameter) — time point from which we want to gather the voltage/synapses." class="md-ellipsis">time_<wbr>point</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save (Python parameter) — path where the plot will be saved." class="md-ellipsis">save</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section (Python parameter) — section number of the section that should be highlighted" class="md-ellipsis">highlight_<wbr>section</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x (Python parameter) — x coordinate of the section that should be highlighted" class="md-ellipsis">highlight_<wbr>x</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1104,25 +1202,31 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">visualize</span></code></a> ❭ <a class="reference internal" href="index.html#module-visualize.cell_morphology_visualizer" title="visualize.cell_morphology_visualizer (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_morphology_visualizer</span></code></a> ❭ <a class="reference internal" href="CellMorphologyVisualizer.html#visualize.cell_morphology_visualizer.CellMorphologyVisualizer" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer (Python class) — Plot a cell morphology using matplotlib."><code class="xref py py-mod docutils literal notranslate"><span class="pre">CellMorphologyVisualizer</span></code></a> ❭ <a class="reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D."><code class="xref py py-mod docutils literal notranslate"><span class="pre">plot</span></code></a></p>
-<h1 id="cellmorphologyvisualizer-plot">CellMorphologyVisualizer.plot<a class="headerlink" href="#cellmorphologyvisualizer-plot" title="Permalink to this heading">¶</a></h1>
+<h1 id="cellmorphologyvisualizer-plot">CellMorphologyVisualizer.plot<a class="headerlink" href="#cellmorphologyvisualizer-plot" title="Link to this heading">¶</a></h1>
 <dl class="py method objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot">
-<span class="sig-prename descclassname"><span class="pre">visualize.cell_morphology_visualizer.CellMorphologyVisualizer.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;grey&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">show_legend</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">show_synapses</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">time_point</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">highlight_section</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">highlight_x</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><span class="sig-name descname"><span class="pre">visualize</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-visualize.cell_morphology_visualizer" title="visualize.cell_morphology_visualizer (Python module)"><span class="sig-name descname"><span class="pre">cell_morphology_visualizer</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">CellMorphologyVisualizer</span></span><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color (Python parameter) — If you want some other color overlayed on the cell morphology. Options: &quot;voltage&quot;, &quot;vm&quot;, &quot;synapses&quot;, &quot;synapse&quot;, or a color string, or a nested list of colors for each section"><span class="n"><span class="pre">color</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;grey&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_legend (Python parameter)"><span class="n"><span class="pre">show_legend</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses (Python parameter) — whether the synapse activations should be shown"><span class="n"><span class="pre">show_synapses</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point (Python parameter) — time point from which we want to gather the voltage/synapses."><span class="n"><span class="pre">time_point</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save (Python parameter) — path where the plot will be saved."><span class="n"><span class="pre">save</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section (Python parameter) — section number of the section that should be highlighted"><span class="n"><span class="pre">highlight_section</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x (Python parameter) — x coordinate of the section that should be highlighted"><span class="n"><span class="pre">highlight_x</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the cell morphology in 3D.</p>
 <p>Cam be used to create a static plot of the cell morphology, which may be color-coded with voltage, ion dynamics, or synapse activations.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>color</strong> (<em>str | [[float]]</em>) – If you want some other color overlayed on the cell morphology.
-Options: “voltage”, “vm”, “synapses”, “synapse”, or a color string, or a nested list of colors for each section</p></li>
-<li><p><strong>legend</strong> (<em>bool</em>) – whether the voltage legend should appear in the plot</p></li>
-<li><p><strong>show_synapses</strong> (<em>bool</em>) – whether the synapse activations should be shown</p></li>
-<li><p><strong>time_point</strong> (<em>int|float</em>) – time point from which we want to gather the voltage/synapses. Defaults to 0</p></li>
-<li><p><strong>save</strong> (<em>bool</em>) – path where the plot will be saved. If it’s empty it will not be saved (Default)</p></li>
-<li><p><strong>highlight_section</strong> (<em>int</em>) – section number of the section that should be highlighted</p></li>
-<li><p><strong>highlight_x</strong> (<em>float</em>) – x coordinate of the section that should be highlighted</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color"><span class="sig-name descname">color</span><span class="p"> : </span><span class="desctype"><span class="desctype">str | [[float]]</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.color" title="Permalink to this definition">¶</a></dt><dd><p>If you want some other color overlayed on the cell morphology.
+Options: “voltage”, “vm”, “synapses”, “synapse”, or a color string, or a nested list of colors for each section</p>
+</dd>
+<dt><span class="sig-name descname">legend</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span></dt><dd><p>whether the voltage legend should appear in the plot</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses"><span class="sig-name descname">show_synapses</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.show_synapses" title="Permalink to this definition">¶</a></dt><dd><p>whether the synapse activations should be shown</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point"><span class="sig-name descname">time_point</span><span class="p"> : </span><span class="desctype"><span class="desctype">int|float</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.time_point" title="Permalink to this definition">¶</a></dt><dd><p>time point from which we want to gather the voltage/synapses. Defaults to 0</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save"><span class="sig-name descname">save</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.save" title="Permalink to this definition">¶</a></dt><dd><p>path where the plot will be saved. If it’s empty it will not be saved (Default)</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section"><span class="sig-name descname">highlight_section</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_section" title="Permalink to this definition">¶</a></dt><dd><p>section number of the section that should be highlighted</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x"><span class="sig-name descname">highlight_x</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot.highlight_x" title="Permalink to this definition">¶</a></dt><dd><p>x coordinate of the section that should be highlighted</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-returns">Returns<span class="colon">:</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot-returns" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>matplotlib figure containing the plot.</p>
@@ -1133,6 +1237,9 @@ Options: “voltage”, “vm”, “synapses”, “synapse”, or a color stri
 </dl>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1200,7 +1307,7 @@ Options: “voltage”, “vm”, “synapses”, “synapse”, or a color stri
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1223,9 +1330,9 @@ Options: “voltage”, “vm”, “synapses”, “synapse”, or a color stri
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

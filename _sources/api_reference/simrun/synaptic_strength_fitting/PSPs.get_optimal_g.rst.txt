@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_optimal_g`
+
+
 
 PSPs.get_optimal_g
 ==================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.get_optimal_g(measured_data, method='dynamic_baseline', merge_celltype_kwargs=None)
+
 
    Calculate the optimal synaptic conductance such that the EPSP matches empirical data.
 
@@ -14,13 +16,21 @@ PSPs.get_optimal_g
    by linearly interpolating the relationship between the synaptic strength and each of the EPSP statistics (mean, median and maximum).
    This linear interpolation is cross-referenced with empirically observed statistics to infer the optimal synaptic conductance.
 
-   :Parameters: * **measured_data** (*pd.DataFrame*) -- A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
-                  Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]`` and the index ``celltype``.
-                * **method** (*str*) -- ``dynamic_baseline`` or ``constant_baseline``.
-                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+   :param measured_data: A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
+                         Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]`` and the index ``celltype``.
+   :type measured_data: pd.DataFrame
+   :param method: ``dynamic_baseline`` or ``constant_baseline``.
+   :type method: str
+   :param merge_celltype_kwargs: Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+   :type merge_celltype_kwargs: dict
 
    :returns: A table of the optimal synaptic conductance for each celltype.
    :rtype: pd.DataFrame
 
    .. seealso:: :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,30 +1,27 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.split_network_param_in_one_elem_dicts`
-
-
-.. title:
 
 split_network_param_in_one_elem_dicts
 =====================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.split_network_param_in_one_elem_dicts(dict_)
+
 
    Split a network parameter dictionary into a list of dictionaries.
 
    This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
    for each key in the original dictionary.
 
-   :Parameters: **dict_** (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The network parameter dictionary.
+   :param dict_: The network parameter dictionary.
+   :type dict_: ~single_cell_parser.parameters.NTParameterSet
 
    :returns: A list of dictionaries, each containing only one element of the original dictionary.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

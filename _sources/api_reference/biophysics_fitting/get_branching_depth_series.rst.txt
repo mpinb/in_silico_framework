@@ -1,22 +1,21 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.get_branching_depth_series`
-
-
-.. title:
 
 get_branching_depth_series
 ==========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.get_branching_depth_series(cell, z_offset=706)
+
 
    Find the branching depth of the inner sections of a :py:class:`~single_cell_parser.cell.Cell`.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The Cell object
-                * **z_offset** (*int | float, optional*) -- Z coordinate offset for :py:meth:`get_inner_sec_dist_list`.
-                  Defaults to 706 um.
+   :param cell: The Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param z_offset: Z coordinate offset for :py:meth:`get_inner_sec_dist_list`.
+                    Defaults to 706 um.
+   :type z_offset: int | float, optional
 
    :returns: contains the distance to :paramref:z_offset as index and a tuple (branching depth, section) as value
    :rtype: pd.Series
@@ -24,8 +23,7 @@ get_branching_depth_series
    .. note:: Careful: z-depth only accurate for D2-registered cells!
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

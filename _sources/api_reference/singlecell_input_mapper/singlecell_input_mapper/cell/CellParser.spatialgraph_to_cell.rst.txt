@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`
+
+
 
 CellParser.spatialgraph_to_cell
 ===============================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell()
+
 
    Set up a cell object from an AMIRA hoc file.
 
@@ -18,3 +20,8 @@ CellParser.spatialgraph_to_cell
        To ensure reproducability, scaleFunc should be specified in the cell parameters, as
        described in :py:mod:`~single_cell_parser.cell_modify_funs`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

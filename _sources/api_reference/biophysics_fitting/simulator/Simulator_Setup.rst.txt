@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Simulator_Setup
 ===============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -118,59 +114,59 @@ Simulator_Setup
 
    :Attributes:
 
-   .. attribute:: cell_param_generator
+      .. attribute:: cell_param_generator
 
-      A function that generates a :py:class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
+         A function that generates a :py:class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
 
-      :type: callable
+         :type: callable
 
-   .. attribute:: cell_param_modify_funs
+      .. attribute:: cell_param_modify_funs
 
-      list of functions that modify the cell parameters.
+         list of functions that modify the cell parameters.
 
-      :type: list
+         :type: list
 
-   .. attribute:: cell_generator
+      .. attribute:: cell_generator
 
-      A function that generates a :py:class:`~single_cell_parser.cell.Cell` object.
+         A function that generates a :py:class:`~single_cell_parser.cell.Cell` object.
 
-      :type: callable
+         :type: callable
 
-   .. attribute:: cell_modify_funs
+      .. attribute:: cell_modify_funs
 
-      List of functions that modify the cell object.
+         List of functions that modify the cell object.
 
-      :type: list
+         :type: list
 
-   .. attribute:: stim_setup_funs
+      .. attribute:: stim_setup_funs
 
-      List of functions that set up the stimulus.
+         List of functions that set up the stimulus.
 
-      :type: list
+         :type: list
 
-   .. attribute:: stim_run_funs
+      .. attribute:: stim_run_funs
 
-      List of functions that each run a simulation.
+         List of functions that each run a simulation.
 
-      :type: list
+         :type: list
 
-   .. attribute:: stim_response_measure_funs
+      .. attribute:: stim_response_measure_funs
 
-      List of functions that extract voltage traces from the cell.
+         List of functions that extract voltage traces from the cell.
 
-      :type: list
+         :type: list
 
-   .. attribute:: params_modify_funs
+      .. attribute:: params_modify_funs
 
-      List of functions that modify the biophysical parameter vector.
+         List of functions that modify the biophysical parameter vector.
 
-      :type: list
+         :type: list
 
-   .. attribute:: check_funs
+      .. attribute:: check_funs
 
-      List of functions that check the setup. Useful for debugging.
+         List of functions that check the setup. Useful for debugging.
 
-      :type: list
+         :type: list
 
    :Methods:
 
@@ -203,3 +199,7 @@ Simulator_Setup
       * - :py:obj:`get <biophysics_fitting.simulator.Simulator_Setup.get>`\ (params)
         - Get the cell with set up biophysics and params.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

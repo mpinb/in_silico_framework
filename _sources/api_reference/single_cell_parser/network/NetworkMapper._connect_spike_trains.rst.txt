@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._connect_spike_trains`
+
+
 
 NetworkMapper._connect_spike_trains
 ===================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._connect_spike_trains(weights=None, change=None)
+
 
    Connects synapses with spike generators.
 
@@ -15,3 +17,8 @@ NetworkMapper._connect_spike_trains
 
    Used in :py:meth:`create_network`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

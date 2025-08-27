@@ -1,23 +1,35 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_raised_cosine`
+
+
 
 RaisedCosineBasis.get_raised_cosine
 ===================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_raised_cosine(a=1, c=1, phi=0, t=None, backend=np)
+
    :staticmethod:
 
 
    Calculate a single raised cosine basis function :math:`f_i` over the domain :math:`t`.
 
-   :Parameters: * **a** (*float*) -- The steepness of the raised cosine. Default is :math:`1`.
-                * **c** (*float*) -- The offset of the raised cosine. Default is :math:`1`.
-                * **phi** (*float*) -- The phase of the raised cosine. Default is :math:`0`.
-                * **t** (*array*) -- The domain of the raised cosine. Default is :math:`[0, 80]`.
-                * **backend** (*module*) -- The backend to use (cupy or numpy). Default is ``numpy``.
+   :param a: The steepness of the raised cosine. Default is :math:`1`.
+   :type a: float
+   :param c: The offset of the raised cosine. Default is :math:`1`.
+   :type c: float
+   :param phi: The phase of the raised cosine. Default is :math:`0`.
+   :type phi: float
+   :param t: The domain of the raised cosine. Default is :math:`[0, 80]`.
+   :type t: array
+   :param backend: The backend to use (cupy or numpy). Default is ``numpy``.
+   :type backend: module
 
    :returns: The domain :math:`t` and the raised cosine basis function :math:`f_i` over this domain.
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

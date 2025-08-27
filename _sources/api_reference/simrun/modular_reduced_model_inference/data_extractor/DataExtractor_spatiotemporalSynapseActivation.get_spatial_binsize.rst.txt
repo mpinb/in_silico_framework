@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize`
+
+
 
 DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize
 =================================================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize()
+
 
    Get the spatial binsize
 
@@ -15,3 +17,8 @@ DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize
    :returns: spatial binsize, indicating how much :math:`\mu m` it covers.
    :rtype: float
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

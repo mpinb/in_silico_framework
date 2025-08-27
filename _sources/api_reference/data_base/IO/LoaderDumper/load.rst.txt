@@ -1,32 +1,31 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ :mod:`~data_base.IO.LoaderDumper.load`
-
-
-.. title:
 
 load
 ====
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.IO.LoaderDumper.load(savedir, load_data=True, loader_kwargs={})
+
 
    Standard interface to load data.
 
    Loads the data's respective ``Loader`` in the same directory as the data.
    Uses this ``Loader`` to load the data
 
-   :Parameters: * **savedir** (*str*) -- Path to the data
-                * **load_data** (*bool*) -- Whether to load the data (default), or just the ``Loader`` object. Useful for debugging purposes.
-                * **loader_kwargs** (*dict*) -- Additional keyword arguments for the loader. Note that the ``Loader.json`` file should in principle contain all necessary information.
+   :param savedir: Path to the data
+   :type savedir: str
+   :param load_data: Whether to load the data (default), or just the ``Loader`` object. Useful for debugging purposes.
+   :type load_data: bool
+   :param loader_kwargs: Additional keyword arguments for the loader. Note that the ``Loader.json`` file should in principle contain all necessary information.
+   :type loader_kwargs: dict
 
    :returns: The loaded object: either the data, or the ``Loader`` object.
    :rtype: object
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

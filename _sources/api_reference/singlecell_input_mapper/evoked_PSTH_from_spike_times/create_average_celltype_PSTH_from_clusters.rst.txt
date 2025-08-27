@@ -1,22 +1,21 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`
-
-
-.. title:
 
 create_average_celltype_PSTH_from_clusters
 ==========================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName)
+
 
    Loads cluster recording files and writes out the average ongoing activity for a given cell type.
 
-   :Parameters: * **cellTypeFolder** (*str*) -- The folder containing the .cluster recording files of spike times.
-                  Each file in this folder should contain the spike times of a single cell under a specific experimental condition (e.g. deflecting a single whisker).
-                * **outFileName** (*str*) -- The name of the output file.
+   :param cellTypeFolder: The folder containing the .cluster recording files of spike times.
+                          Each file in this folder should contain the spike times of a single cell under a specific experimental condition (e.g. deflecting a single whisker).
+   :type cellTypeFolder: str
+   :param outFileName: The name of the output file.
+   :type outFileName: str
 
    :returns: None. Writes the average ongoing activity to the output file.
 
@@ -38,8 +37,7 @@ create_average_celltype_PSTH_from_clusters
    }
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

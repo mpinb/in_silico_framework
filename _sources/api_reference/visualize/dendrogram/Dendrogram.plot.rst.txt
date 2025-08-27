@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram` ❭ :mod:`~visualize.dendrogram.Dendrogram.plot`
+
+
 
 Dendrogram.plot
 ===============
 
+
 .. py:method:: visualize.dendrogram.Dendrogram.plot(ax=None)
+
 
    Plot the dendrogram.
 
-   :Parameters: **ax** (:py:class:`matplotlib.axes.Axes`) -- The matplotlib axes object. Default is ``None`` and a new figure is created.
+   :param ax: The matplotlib axes object. Default is ``None`` and a new figure is created.
+   :type ax: matplotlib.axes.Axes
 
    :returns: The matplotlib axes object.
    :rtype: :py:class:`matplotlib.axes.Axes`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

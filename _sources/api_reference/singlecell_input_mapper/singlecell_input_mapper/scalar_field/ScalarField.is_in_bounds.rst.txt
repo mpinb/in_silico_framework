@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds`
+
+
 
 ScalarField.is_in_bounds
 ========================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds(xyz)
+
 
    Check if point is within bounding box of mesh.
 
-   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+   :param xyz: The 3D coordinates of the point.
+   :type xyz: tuple
 
    :returns: True if point is within bounding box, False otherwise.
    :rtype: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

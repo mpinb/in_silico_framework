@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.data_base_register`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
+
 
 data_base_register
 ==================
@@ -68,3 +70,7 @@ Functions
      - Assimilate a remote register.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

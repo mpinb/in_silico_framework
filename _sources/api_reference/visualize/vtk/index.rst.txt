@@ -1,5 +1,7 @@
 
-:mod:`visualize` ❭ :mod:`~visualize.vtk`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
+
 
 vtk
 ===
@@ -46,3 +48,7 @@ Functions
      - Convert an AMIRA lattice file to vtk structured points.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

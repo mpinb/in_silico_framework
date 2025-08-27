@@ -1,31 +1,31 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.get_inner_sec_dist_list`
-
-
-.. title:
 
 get_inner_sec_dist_list
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.get_inner_sec_dist_list(cell, select=['ApicalDendrite', 'Dendrite'], connected_to_dend_beyond_distance=1000, z_offset=706)
+
 
    Find all sections that are connected to dendrites that reach beyond a certain distance.
    Useful for filtering out outer terminating dendrites.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The Cell object
-                * **select** (*list, optional*) -- Selection of sections to consider, based on their label. Defaults to ['ApicalDendrite', 'Dendrite'].
-                * **connected_to_dend_beyond_distance** (*int, optional*) -- Distance threshold (in um). Defaults to 1000 um.
-                * **z_offset** (*int|float, optional*) -- Offset for z-value. Defaults to 706 um (the average pia distance of a rat barrel cortex).
+   :param cell: The Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param select: Selection of sections to consider, based on their label. Defaults to ['ApicalDendrite', 'Dendrite'].
+   :type select: list, optional
+   :param connected_to_dend_beyond_distance: Distance threshold (in um). Defaults to 1000 um.
+   :type connected_to_dend_beyond_distance: int, optional
+   :param z_offset: Offset for z-value. Defaults to 706 um (the average pia distance of a rat barrel cortex).
+   :type z_offset: int|float, optional
 
    :returns: Dictionary mapping the z-coordinate (float) of each section point to the section (:py:class:`~single_cell_parser.cell.PySection`) object, including only sections that pass the filter.
    :rtype: dict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

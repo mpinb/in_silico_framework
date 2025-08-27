@@ -1,32 +1,31 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.save_groupby`
-
-
-.. title:
 
 save_groupby
 ============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.synapse_activation_binning.save_groupby(db, result, groupby)
+
 
    Save the result of synapse_activation_postprocess_dask to a database.
 
    A new model data base within :paramref:`db` is created and the numpy arrays are stored there.
 
-   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The simrun-initialized database object.
-                * **result** (*dict*) -- The result of the synapse activation binning.
-                * **groupby** (*str*) -- The groupby key for the synapse activation bins.
+   :param db: The simrun-initialized database object.
+   :type db: ~data_base.DataBase
+   :param result: The result of the synapse activation binning.
+   :type result: dict
+   :param groupby: The groupby key for the synapse activation bins.
+   :type groupby: str
 
    :returns: None.
 
    .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

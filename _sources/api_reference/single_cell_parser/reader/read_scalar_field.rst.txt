@@ -1,24 +1,23 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_scalar_field`
-
-
-.. title:
 
 read_scalar_field
 =================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.reader.read_scalar_field(fname='', dtype=np.float64)
+
 
    Read ASCII AMIRA scalar field mesh files with high speed.
 
    This function reads in AMIRA scalar fields. Particular attention is given to speeding up reading of
    the actual data.
 
-   :Parameters: * **fname** (*str*) -- Filename of the Amira Mesh file to be read.
-                * **dtype** (*numpy.dtype*) -- Data type of the scalar field, default is `np.float64`.
+   :param fname: Filename of the Amira Mesh file to be read.
+   :type fname: str
+   :param dtype: Data type of the scalar field, default is `np.float64`.
+   :type dtype: numpy.dtype
 
    :raises IOError: If the input file does not have a `.am` or `.AM` suffix.
 
@@ -26,8 +25,7 @@ read_scalar_field
    :rtype: :py:class:`~single_cell_parser.scalar_field.ScalarField`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

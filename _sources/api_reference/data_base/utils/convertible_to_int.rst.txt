@@ -1,27 +1,24 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.convertible_to_int`
-
-
-.. title:
 
 convertible_to_int
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.convertible_to_int(x)
+
 
    Returns True if x can be converted to an integer, False otherwise
 
-   :Parameters: **x** (*any*) -- the object to be tested
+   :param x: the object to be tested
+   :type x: any
 
    :returns: True if x can be converted to an integer, False otherwise
    :rtype: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

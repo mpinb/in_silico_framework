@@ -1,0 +1,24 @@
+
+
+_read_object_meta_json
+======================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.IO.LoaderDumper.meta._read_object_meta_json(meta_fn)
+
+
+   Get the meta of a saved database key in JSON.
+
+   :param savedir: The directory where the meta file is stored.
+   :type savedir: str
+
+   :returns: The metadata of the saved object.
+   :rtype: pd.DataFrame
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

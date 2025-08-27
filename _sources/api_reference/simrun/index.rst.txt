@@ -1,5 +1,7 @@
 
 
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 simrun
 ======
@@ -17,7 +19,6 @@ simrun
    parameters_to_cell </api_reference/simrun/parameters_to_cell/index>  
    rerun_db </api_reference/simrun/rerun_db/index>  
    robust_dask_delayed_execution </api_reference/simrun/robust_dask_delayed_execution/index>  
-   run_existing_synapse_activations </api_reference/simrun/run_existing_synapse_activations/index>  
    run_new_simulations </api_reference/simrun/run_new_simulations/index>  
    seed_manager </api_reference/simrun/seed_manager/index>  
    sim_trial_to_cell_object </api_reference/simrun/sim_trial_to_cell_object/index>  
@@ -61,8 +62,6 @@ Modules
      - Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
    * - :py:obj:`robust_dask_delayed_execution <simrun.robust_dask_delayed_execution>`
      - Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
-   * - :py:obj:`run_existing_synapse_activations <simrun.run_existing_synapse_activations>`
-     - ongoing activity L2 neuron model
    * - :py:obj:`run_new_simulations <simrun.run_new_simulations>`
      - Create and simulate network-embedded neuron models.
    * - :py:obj:`seed_manager <simrun.seed_manager>`
@@ -74,3 +73,7 @@ Modules
    * - :py:obj:`utils <simrun.utils>`
      - Utility and convenience functions for the :py:mod:`simrun` package.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

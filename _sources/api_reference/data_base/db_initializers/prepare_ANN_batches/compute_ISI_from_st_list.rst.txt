@@ -1,26 +1,27 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list`
-
-
-.. title:
 
 compute_ISI_from_st_list
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list(st, min_time=0, max_time=505, time_step=1)
+
 
    Construct a time-binned list of inter-spike intervals from a list of spike times.
 
    Given a list of spike times, this method returns a list of size ``(max_time - min_time)//time_step``,
    where each time step gives the amount of time since the last spike in ms.
 
-   :Parameters: * **st** (*list*) -- List of spike times
-                * **min_time** (*int, optional*) -- Min time of time window in ms. Defaults to 0.
-                * **max_time** (*int, optional*) -- Max time of time window in ms. Defaults to 505.
-                * **time_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
+   :param st: List of spike times
+   :type st: list
+   :param min_time: Min time of time window in ms. Defaults to 0.
+   :type min_time: int, optional
+   :param max_time: Max time of time window in ms. Defaults to 505.
+   :type max_time: int, optional
+   :param time_step: Timestep in ms. Defaults to 1.
+   :type time_step: int, optional
 
    :returns: A list of inter-spike intervals in ms.
    :rtype: list
@@ -31,8 +32,7 @@ compute_ISI_from_st_list
       :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,26 +1,25 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_all`
-
-
-.. title:
 
 read_all
 ========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_all(basedir, n_particles_start=0, n_particles_end=1000)
+
 
    Read the results of all directories contained within some base directory, independent of which seepdoint or particle.
 
-   :Parameters: * **basedir** (*str*) -- the base directory containing the results of the RW exploration.
-                * **n_particles_start** (*int*) -- the first particle to read
-                * **n_particles_end** (*int*) -- the last particle to read
+   :param basedir: the base directory containing the results of the RW exploration.
+   :type basedir: str
+   :param n_particles_start: the first particle to read
+   :type n_particles_start: int
+   :param n_particles_end: the last particle to read
+   :type n_particles_end: int
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

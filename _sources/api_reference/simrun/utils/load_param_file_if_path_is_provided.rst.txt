@@ -1,27 +1,24 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.load_param_file_if_path_is_provided`
-
-
-.. title:
 
 load_param_file_if_path_is_provided
 ===================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.load_param_file_if_path_is_provided(pathOrParam)
+
 
    Convenience function to load a parameter file whether it is a string or a dictionary.
 
-   :Parameters: **pathOrParam** (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The path to the parameter file or the parameter dictionary.
+   :param pathOrParam: The path to the parameter file or the parameter dictionary.
+   :type pathOrParam: ~single_cell_parser.parameters.NTParameterSet
 
    :returns: The parameter object.
    :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

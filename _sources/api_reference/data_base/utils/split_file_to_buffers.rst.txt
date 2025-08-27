@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.split_file_to_buffers`
-
-
-.. title:
 
 split_file_to_buffers
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.split_file_to_buffers(f, split_str='#')
+
 
    Reads a file f and splits it wherever :paramref:`split_str` is found.
 
-   :Parameters: * **f** (*file*) -- file to be split
-                * **split_str** (*str*) -- string to split the file. Default is '#'
+   :param f: file to be split
+   :type f: file
+   :param split_str: string to split the file. Default is '#'
+   :type split_str: str
 
    :returns: list of :py:class:`StringIO` Buffers.
    :rtype: list
@@ -23,8 +22,7 @@ split_file_to_buffers
    .. seealso:: adapted from http://stackoverflow.com/a/33346758/5082048
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

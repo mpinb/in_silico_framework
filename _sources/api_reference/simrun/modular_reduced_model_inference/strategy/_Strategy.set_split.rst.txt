@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.set_split`
+
+
 
 _Strategy.set_split
 ===================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.set_split(split, setup=True)
+
 
    Set the split for this strategy.
 
@@ -14,8 +16,10 @@ _Strategy.set_split
    This method assigns one such split to the strategy, so that
    all consequent calls to :py:meth:`get_score` and :py:meth:`get_y` will use this split.
 
-   :Parameters: * **split** (*array*) -- An array of indices to use for the split.
-                * **setup** (*bool*) -- Whether to setup the strategy after setting the split. Default is ``True``.
+   :param split: An array of indices to use for the split.
+   :type split: array
+   :param setup: Whether to setup the strategy after setting the split. Default is ``True``.
+   :type setup: bool
 
    :returns: The strategy object with the split set.
    :rtype: _Strategy
@@ -30,3 +34,8 @@ _Strategy.set_split
    >>> s.get_score()
    # returns a score for the data at indices 0, 1, and 2
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

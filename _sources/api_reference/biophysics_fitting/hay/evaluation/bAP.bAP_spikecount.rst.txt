@@ -1,19 +1,27 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP` ❭ :mod:`~biophysics_fitting.hay.evaluation.bAP.bAP_spikecount`
+
+
 
 bAP.bAP_spikecount
 ==================
 
+
 .. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_spikecount(voltage_traces)
+
 
    Get the number of spikes in the somatic voltage trace.
 
-   :Parameters: **voltage_traces** (*dict*) -- dictionary with the voltage traces of the soma and dendrite.
+   :param voltage_traces: dictionary with the voltage traces of the soma and dendrite.
+   :type voltage_traces: dict
 
    :returns: Dictionary mapping ``".raw"`` to the number of spikes in the somatic voltage trace.
    :rtype: dict
 
    .. seealso:: :py:meth:`~biophysics_fitting.ephys.spike_count`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

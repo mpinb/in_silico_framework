@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning` ❭ :mod:`~data_base.db_initializers.synapse_activation_binning.tree_reduction`
-
-
-.. title:
 
 tree_reduction
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.synapse_activation_binning.tree_reduction(delayeds, aggregate_fun, length=7)
+
 
    Recursively aggregate the results of a list of delayed objects.
 
@@ -18,9 +15,12 @@ tree_reduction
    and :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` to aggregate
    the resulting synapse binning (which is in dictionary format) to a single dictionary.
 
-   :Parameters: * **delayeds** (*array*) -- list of :py:class:`~dask.delayed` objects
-                * **aggregate_fun** (:py:class:`~dask.delayed`) -- Function to aggregate the results with (e.g. :py:func:`~data_base.db_initializers.merge_results_together`)
-                * **length** (*int*) -- chunk size for aggregation
+   :param delayeds: list of :py:class:`~dask.delayed` objects
+   :type delayeds: array
+   :param aggregate_fun: Function to aggregate the results with (e.g. :py:func:`~data_base.db_initializers.merge_results_together`)
+   :type aggregate_fun: ~dask.delayed
+   :param length: chunk size for aggregation
+   :type length: int
 
    .. note::
 
@@ -31,8 +31,7 @@ tree_reduction
    :rtype: :py:class:`dask.delayed`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

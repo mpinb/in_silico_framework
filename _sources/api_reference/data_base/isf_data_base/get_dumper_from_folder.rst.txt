@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.get_dumper_from_folder`
-
-
-.. title:
 
 get_dumper_from_folder
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.isf_data_base.get_dumper_from_folder(folder, return_='module')
+
 
    Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
 
-   :Parameters: * **folder** (*str*) -- The folder in which the data is stored.
-                * **return_** (*str, optional*) -- Whether to return the dumper as a string or the actual module. Defaults to 'module'.
+   :param folder: The folder in which the data is stored.
+   :type folder: str
+   :param return_: Whether to return the dumper as a string or the actual module. Defaults to 'module'.
+   :type return_: str, optional
 
    :returns: The dumper that was used to save the data in that folder/key.
    :rtype: str | module
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

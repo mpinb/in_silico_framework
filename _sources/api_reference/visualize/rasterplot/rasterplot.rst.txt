@@ -1,37 +1,40 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot`
-
-
-.. title:
 
 rasterplot
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.rasterplot.rasterplot(df, colormap=None, ax=None, label=None, groupby_attribute=None, tlim=None, reset_index=True)
+
 
    Creates a rasterplot from :ref:`spike_times_format`.
 
    If df is a dask.DataFrame: parallel plotting is used (not recommended, causes bad quality)
    If df is a pandas.DataFrame, serial plotting is used
 
-   :Parameters: * **df** (*pandas.DataFrame*) -- A DataFrame containing the spike times.
-                * **colormap** (*dict, optional*) -- A colormap to use for the plot.
-                  Must map a label from :paramref:`groupby_attribute` to a color.
-                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
-                * **label** (*str, optional*) -- The label for the plot. Default is ``None``.
-                * **groupby_attribute** (*str, optional*) -- The column name in the DataFrame to group by. Default is ``None``.
-                * **tlim** (*tuple, optional*) -- The x-axis limits for the plot. Default is ``None``.
-                * **reset_index** (*bool, optional*) -- If True, reset the index of the DataFrame. Default is ``True``.
+   :param df: A DataFrame containing the spike times.
+   :type df: pandas.DataFrame
+   :param colormap: A colormap to use for the plot.
+                    Must map a label from :paramref:`groupby_attribute` to a color.
+   :type colormap: dict, optional
+   :param ax: An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+   :type ax: matplotlib.axes.Axes, optional
+   :param label: The label for the plot. Default is ``None``.
+   :type label: str, optional
+   :param groupby_attribute: The column name in the DataFrame to group by. Default is ``None``.
+   :type groupby_attribute: str, optional
+   :param tlim: The x-axis limits for the plot. Default is ``None``.
+   :type tlim: tuple, optional
+   :param reset_index: If True, reset the index of the DataFrame. Default is ``True``.
+   :type reset_index: bool, optional
 
    :returns: Figure object containing the rasterplot.
    :rtype: :py:class:`~matplotlib.figure.Figure`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

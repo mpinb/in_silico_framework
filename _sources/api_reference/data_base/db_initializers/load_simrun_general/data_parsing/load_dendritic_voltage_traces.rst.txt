@@ -1,34 +1,39 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces`
-
-
-.. title:
 
 load_dendritic_voltage_traces
 =============================
 
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces(db, suffix_key_dict, repartition=None)
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=None, divisions=None)
+
 
    Load the voltage traces from dendritic recording sites.
 
-   Dendritic recording sites are defined in the :ref:`cell_parameters_format` files (under the key ``sim.recordingSites``).
-   The voltage traces for each recording site are read with
-   :py:meth:`~data_base.db_initializers.load_simrun_general.load_dendritic_voltage_traces_helper`.
+   This functions reads in all dendritic voltage trace files corresponding
+   to each recsite label in :paramref:`suffix_key_dict`.
+   Dendritic voltage traces recorded with recsites of the same label are aggregated in a single file.
 
-   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The target database that should contain the parsed simulation results.
-                * **suffix_key_dict** (*dict*) -- Dictionary containing the suffixes of the dendritic voltage trace files.
-                  The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
-                * **repartition** (*bool*) -- If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+   .. attention::
 
-   :returns: Dictionary containing the dask dataframes of the dendritic voltage traces.
-   :rtype: dict
+      While voltage traces are combined depending on their recsite label, this does not mean
+      that these voltage traces belong to the same simulation. Only the ``sim_trial_index`` is
+      a reliable readout to check which simulation runs used the same parameters.
+
+   :param db: The target database that should contain the parsed simulation results.
+   :type db: ~data_base.DataBase
+   :param suffix_key_dict: Dictionary containing the suffixes of the dendritic voltage trace files.
+                           The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
+   :type suffix_key_dict: dict
+   :param repartition: If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+   :type repartition: bool
+
+   :returns:     Dictionary mapping each recsite label to a dask dataframe containing the associated voltage traces.
+   :rtype: Dict[str, :py:class:`dask.dataframe.DataFrame`]
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

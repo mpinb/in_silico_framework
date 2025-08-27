@@ -1,22 +1,20 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.utils` ❭ :mod:`~data_base.db_initializers.load_simrun_general.utils._get_dumper`
-
-
-.. title:
 
 _get_dumper
 ===========
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.utils._get_dumper(value, categorized=False)
+
 
    Infer the best dumper for a dataframe.
 
    Infers the correct parquet dumper for either a pandas or dask dataframe.
 
-   :Parameters: **value** (*pd.DataFrame or dd.DataFrame*) -- Dataframe to infer the dumper for.
+   :param value: Dataframe to infer the dumper for.
+   :type value: pd.DataFrame or dd.DataFrame
 
    :returns: Dumper module to use for the dataframe.
    :rtype: module
@@ -24,8 +22,7 @@ _get_dumper
    :raises NotImplementedError: If the dataframe is not a pandas or dask dataframe.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,22 +1,22 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_all_traces`
-
-
-.. title:
 
 write_all_traces
 ================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_all_traces(fname, t, vTraces)
+
 
    Write out a list of voltage traces.
 
-   :Parameters: * **fname** (*str*) -- The name of the file to write to.
-                * **t** (*list*) -- The time points of the voltage traces.
-                * **vTraces** (*list*) -- A list of voltage traces.
+   :param fname: The name of the file to write to.
+   :type fname: str
+   :param t: The time points of the voltage traces.
+   :type t: list
+   :param vTraces: A list of voltage traces.
+   :type vTraces: list
 
    :returns: None. Writes out the voltage traces to :paramref:`fname`.
 
@@ -28,8 +28,7 @@ write_all_traces
    >>> write_all_traces('voltage_traces.dat', t, vTraces)
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

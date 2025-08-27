@@ -1,31 +1,32 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times`
-
-
-.. title:
 
 PSTH_from_spike_times
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times(spikeTimeVectors, binSize=1.0, tBegin=None, tEnd=None, aligned=True)
+
 
    Calculates a PSTH from spike times.
 
-   :Parameters: * **spikeTimeVectors** (*list*) -- List of spike time vectors.
-                * **binSize** (*float, optional*) -- Bin size for the PSTH. Default is `1.0 ms`.
-                * **tBegin** (*float, optional*) -- Start time of the PSTH. Default is ``None`` (min of :paramref:`spikeTimeVectors`).
-                * **tEnd** (*float, optional*) -- End time of the PSTH. Default is ``None`` (max of :paramref:`spikeTimeVectors`).
-                * **aligned** (*bool, optional*) -- If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
+   :param spikeTimeVectors: List of spike time vectors.
+   :type spikeTimeVectors: list
+   :param binSize: Bin size for the PSTH. Default is `1.0 ms`.
+   :type binSize: float, optional
+   :param tBegin: Start time of the PSTH. Default is ``None`` (min of :paramref:`spikeTimeVectors`).
+   :type tBegin: float, optional
+   :param tEnd: End time of the PSTH. Default is ``None`` (max of :paramref:`spikeTimeVectors`).
+   :type tEnd: float, optional
+   :param aligned: If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
+   :type aligned: bool, optional
 
    :returns: Tuple containing the histogram and the bins.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

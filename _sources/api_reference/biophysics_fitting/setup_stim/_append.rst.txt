@@ -1,30 +1,29 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim` ❭ :mod:`~biophysics_fitting.setup_stim._append`
-
-
-.. title:
 
 _append
 =======
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.setup_stim._append(cell, name, item)
+
 
    Append an item to a :py:class:`~single_cell_parser.Cell.cell` object.
 
    This is used to add e.g. injection/recording pipettes to the cell.
 
-   :Parameters: * **cell** (*object*) -- The cell object.
-                * **name** (*str*) -- The name of the attribute to append to.
-                * **item** (*object*) -- The item to append.
+   :param cell: The cell object.
+   :type cell: object
+   :param name: The name of the attribute to append to.
+   :type name: str
+   :param item: The item to append.
+   :type item: object
 
    :returns: None. Adds :paramref:`item` to the :paramref:`cell` under the name :paramref:`name`.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

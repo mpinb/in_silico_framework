@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_population_connectivity_summary`
-
-
-.. title:
 
 write_population_connectivity_summary
 =====================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_population_connectivity_summary(fname=None, populationDistribution=None)
+
 
    Write a summary of populations of connectivity realizations to a file.
 
@@ -28,16 +25,17 @@ write_population_connectivity_summary
 
    In addition, however, it also writes out the standard deviation of these values, taken across network realizations.
 
-   :Parameters: * **fname** (*str*) -- Name of the output file
-                * **populationDistribution** (*dict*) -- Dictionary containing the summary data for each cell type
-                  Must contain at least a key for each presynaptic cell type.
-                  Values are lists of the form [mean, std] for each of the attributes mentioned above.
+   :param fname: Name of the output file
+   :type fname: str
+   :param populationDistribution: Dictionary containing the summary data for each cell type
+                                  Must contain at least a key for each presynaptic cell type.
+                                  Values are lists of the form [mean, std] for each of the attributes mentioned above.
+   :type populationDistribution: dict
 
    :returns: None. Writes the results to disk.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

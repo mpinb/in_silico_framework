@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution._wrapper`
-
-
-.. title:
 
 _wrapper
 ========
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.robust_dask_delayed_execution._wrapper(db, key_first_item)
+
 
    Wrapper to robustly compute database values.
 
@@ -19,12 +16,13 @@ _wrapper
    Before, during, and after computation, the delayed objects acquire the status ``'not_started'``, ``'started'``, and ``'finished'`` respectively.
    This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run_db`.
 
-   :Parameters: * **db** (*str*) -- The path to the database.
-                * **key_first_item** (*str*) -- The key of the first item in the database.
+   :param db: The path to the database.
+   :type db: str
+   :param key_first_item: The key of the first item in the database.
+   :type key_first_item: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

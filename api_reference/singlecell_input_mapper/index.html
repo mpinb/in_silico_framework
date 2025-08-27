@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -768,10 +770,15 @@
                   
 
 
-<h1 id="singlecell-input-mapper">singlecell_input_mapper<a class="headerlink" href="#singlecell-input-mapper" title="Permalink to this heading">¶</a></h1>
+<p><a href="/" class="nav-link" aria-label="Home">
+     <svg class="home-icon" viewBox="0 0 576 512" width="16" height="16">
+         <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+     </svg>
+ </a> ❭ <a class="reference internal" href="../../api_reference.html#api-reference"><span class="std std-ref">API reference</span></a> ❭ <a class="reference internal" href="#module-singlecell_input_mapper" title="singlecell_input_mapper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper</span></code></a> ❭</p>
+<h1 id="singlecell-input-mapper">singlecell_input_mapper<a class="headerlink" href="#singlecell-input-mapper" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-singlecell_input_mapper"></span><p>Create an empirically constrained dense connectome model with presynaptic activity.</p>
+<p id="module-singlecell_input_mapper">Create an empirically constrained dense connectome model with presynaptic activity.</p>
 <p>This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: <a class="reference internal" href="#connectivity"><span class="std std-ref">Connectivity</span></a> and <a class="reference internal" href="#activity"><span class="std std-ref">Activity</span></a>.</p>
 <div class="seealso admonition">
@@ -782,7 +789,7 @@ network realization process, and ability to constrain it with empirical data.</p
 <p><a class="reference internal" href="../single_cell_parser/index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser</span></code></a> provides only basic functionality to recreate such network realizations from the results generated here.
 The purpose of <a class="reference internal" href="../single_cell_parser/index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser</span></code></a> is to provide an API to the NEURON simulator, and read in results from network realizations.</p>
 </div>
-<h2 id="connectivity"><span id="id1"></span>Connectivity<a class="headerlink" href="#connectivity" title="Permalink to this heading">¶</a></h2>
+<h2 id="connectivity"><span id="id1"></span>Connectivity<a class="headerlink" href="#connectivity" title="Link to this heading">¶</a></h2>
 <p><a class="reference internal" href="singlecell_input_mapper/index.html#module-singlecell_input_mapper.singlecell_input_mapper" title="singlecell_input_mapper.singlecell_input_mapper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper.singlecell_input_mapper</span></code></a> is responsible for assigning synapses to the morphology of a postsynaptic neuron,
 and keeping track of the synapse type and associated presynaptic cell type. Based on this presynaptic cell type, different spike times can be generated (see section Activity below).
 Assigning synapses onto the postsynaptic morphology is referred to as a ‘network realization’. The network realization in ISF is based on the following inputs:</p>
@@ -799,7 +806,7 @@ If you want to use other methods, please familiarize yourself with the data form
 <li><p>Convert the input data to the required input format for ISF and run the same network realization pipeline. Input file formats are described in more detail in <a class="reference internal" href="map_singlecell_inputs/index.html#module-singlecell_input_mapper.map_singlecell_inputs" title="singlecell_input_mapper.map_singlecell_inputs (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper.map_singlecell_inputs</span></code></a>.</p></li>
 <li><p>Create your own network realization, and convert the output to the format used in ISF. These are <a class="reference internal" href="../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> and <a class="reference internal" href="../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> files. For more info on how to generate and use these, refer to the network modeling section of the <a class="reference internal" href="../../tutorials.html#tutorials"><span class="std std-ref">Tutorials</span></a></p></li>
 </ol>
-<h2 id="activity"><span id="id2"></span>Activity<a class="headerlink" href="#activity" title="Permalink to this heading">¶</a></h2>
+<h2 id="activity"><span id="id2"></span>Activity<a class="headerlink" href="#activity" title="Link to this heading">¶</a></h2>
 <p>This section is responsible for generating activity patterns for the assigned synapses based in empirically observed PSTHs of the presynaptic neurons.
 ISF distinguishes two kinds of activity:</p>
 <ol class="arabic simple">
@@ -812,7 +819,7 @@ ISF distinguishes two kinds of activity:</p>
 <li><p>Create PSTHs for each cell type for the ongoing and evoked activity. Such files are present in getting_started/example_data/functional_constraints</p></li>
 <li><p>Create a network parameter file from the PSTHs.</p></li>
 </ol>
-<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permalink to this heading">¶</a></h2>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="singlecell_input_mapper/index.html#module-singlecell_input_mapper.singlecell_input_mapper" title="singlecell_input_mapper.singlecell_input_mapper (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">singlecell_input_mapper</span></code></a></p></td>
@@ -832,6 +839,9 @@ ISF distinguishes two kinds of activity:</p>
 </tr>
 </tbody>
 </table>
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -899,7 +909,7 @@ ISF distinguishes two kinds of activity:</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -922,9 +932,9 @@ ISF distinguishes two kinds of activity:</p>
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

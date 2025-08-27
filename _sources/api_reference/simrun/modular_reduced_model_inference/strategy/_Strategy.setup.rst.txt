@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.setup`
+
+
 
 _Strategy.setup
 ===============
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.setup(data, DataSplitEvaluation)
+
 
    Setup the strategy with the given data.
 
@@ -15,6 +17,13 @@ _Strategy.setup
    Strategy-specific setup is performed by :py:meth:`~simrun.modular_reduced_model_inference._Strategy._setup`,
    which is overloaded by child classes.
 
-   :Parameters: * **data** (*dict*) -- The data to use.
-                * **DataSplitEvaluation** (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`) -- The DataSplitEvaluation object to use.
+   :param data: The data to use.
+   :type data: dict
+   :param DataSplitEvaluation: The DataSplitEvaluation object to use.
+   :type DataSplitEvaluation: ~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

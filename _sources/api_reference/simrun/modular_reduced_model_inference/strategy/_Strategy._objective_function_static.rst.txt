@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static`
+
+
 
 _Strategy._objective_function_static
 ====================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static(get_score, get_y, x)
+
    :staticmethod:
 
 
@@ -23,3 +25,8 @@ _Strategy._objective_function_static
    :returns: The negative AUROC score, between :math:`[-1, 0]`
    :rtype: float
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

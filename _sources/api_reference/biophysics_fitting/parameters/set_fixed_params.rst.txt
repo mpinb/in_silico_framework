@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.parameters` ❭ :mod:`~biophysics_fitting.parameters.set_fixed_params`
-
-
-.. title:
 
 set_fixed_params
 ================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.parameters.set_fixed_params(params, fixed_params=None)
+
 
    Add fixed_params to params.
 
-   :Parameters: * **params** (*pd.Series*) -- The parameters.
-                * **fixed_params** (*dict*) -- The fixed parameters.
+   :param params: The parameters.
+   :type params: pd.Series
+   :param fixed_params: The fixed parameters.
+   :type fixed_params: dict
 
    :returns: The parameters with the fixed parameters added.
    :rtype: pd.Series
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

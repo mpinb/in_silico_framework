@@ -1,5 +1,7 @@
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
 
 evoked_PSTH_from_spike_times
 ============================
@@ -51,3 +53,7 @@ Functions
      - Recursively scans a directory for files with a specific suffix.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

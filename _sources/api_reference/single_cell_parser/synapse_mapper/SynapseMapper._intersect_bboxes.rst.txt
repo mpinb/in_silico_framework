@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse_mapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper` ❭ :mod:`~single_cell_parser.synapse_mapper.SynapseMapper._intersect_bboxes`
+
+
 
 SynapseMapper._intersect_bboxes
 ===============================
 
+
 .. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._intersect_bboxes(bbox1, bbox2)
+
 
    Check if two bounding boxes overlap
 
-   :Parameters: * **bbox1** (*tuple*) -- Bounding box of the first object (minx, maxx, miny, maxy, minz, maxz).
-                * **bbox2** (*tuple*) -- Bounding box of the second object (minx, maxx, miny, maxy, minz, maxz).
+   :param bbox1: Bounding box of the first object (minx, maxx, miny, maxy, minz, maxz).
+   :type bbox1: tuple
+   :param bbox2: Bounding box of the second object (minx, maxx, miny, maxy, minz, maxz).
+   :type bbox2: tuple
 
    :returns: True if the bounding boxes overlap, False otherwise.
    :rtype: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

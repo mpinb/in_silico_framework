@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df`
-
-
-.. title:
 
 construct_param_filename_hashmap_df
 ===================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df(simresult_path, sim_trial_index)
+
 
    Generate a hashmap for the paths of :ref:`cell_parameters_format` and :ref:`network_parameters_format` files.
 
@@ -22,8 +19,10 @@ construct_param_filename_hashmap_df
    This is a convenience function to generate a DataFrame containing the paths and hashes of the original simrun parameter files for a collection of simulation trials.
    As not all trials necessarilly share the same network embedding or neuron model, the DataFrame will likely (but not necessarily) contain different entries across trials.
 
-   :Parameters: * **simresult_path** (*str*) -- Path to the simulation results folder.
-                * **sim_trial_index** (*array*) -- array of sim_trial_indices to generate paramfiles for.
+   :param simresult_path: Path to the simulation results folder.
+   :type simresult_path: str
+   :param sim_trial_index: array of sim_trial_indices to generate paramfiles for.
+   :type sim_trial_index: array
 
    :returns: list of dask.delayed objects to calculate the pd.DataFrame objects containing the paths to the parameter files and their hashes.
    :rtype: list
@@ -52,8 +51,7 @@ construct_param_filename_hashmap_df
 
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

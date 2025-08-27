@@ -1,0 +1,27 @@
+
+
+_resolve_and_copy_syn
+=====================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_syn(syn_fn, scattered_fn_map)
+
+
+   Resolve the reference to a :ref:`hoc_file_format` file and
+   copy a single :ref:`syn_file_format` file to a new location.
+
+   :param syn_fn: Path to the synapse distribution file.
+   :type syn_fn: str
+   :param scattered_fn_map: A future dictionary with filename mappings. Must contain the keys "syn" and "hoc".
+   :type scattered_fn_map: distributed.Future
+
+   :returns: The new :ref:`syn_file_format` filename.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,31 +1,30 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.synanalysis` ❭ :mod:`~single_cell_parser.analyze.synanalysis.compute_syn_distance`
-
-
-.. title:
 
 compute_syn_distance
 ====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distance(cell, syn, consider_gap_to_soma=False)
+
 
    Computes the distance from a single synapse to the soma.
 
    Used in :py:meth:`compute_syn_distances`.
 
-   :Parameters: * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- cell object with attached synapses.
-                * **syn** (:py:class:`single_cell_parser.synapse.Synapse`) -- synapse object.
-                * **consider_gap_to_soma** (*bool, optional*) -- Account for the fact that dendrites don't actually touch the soma, and add the
-                  distance between the last point of the parent section and the first point of the
-                  current section to the distance.
-                  Default: False
+   :param cell: cell object with attached synapses.
+   :type cell: single_cell_parser.cell.Cell
+   :param syn: synapse object.
+   :type syn: single_cell_parser.synapse.Synapse
+   :param consider_gap_to_soma: Account for the fact that dendrites don't actually touch the soma, and add the
+                                distance between the last point of the parent section and the first point of the
+                                current section to the distance.
+                                Default: False
+   :type consider_gap_to_soma: bool, optional
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.isf_data_base` ❭ :mod:`~data_base.isf_data_base.ISFDataBase`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 ISFDataBase
 ===========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -114,90 +110,94 @@ ISFDataBase
    If the dask backends are used to save the data, it will be saved out-of-memory,
    allowing larger-than-memory calculations.
 
-   :Parameters: * **basedir** (*str*) -- The directory in which the database will be created, or read from.
-                * **readonly** (*bool, optional*) -- If True, the database will be read only. Defaults to False.
-                * **nocreate** (*bool, optional*) -- If True, a new database will not be created if it does not exist.
-                  Defaults to False.
-                * **suppress_errors** (*bool, optional*) -- If True, errors will be suppressed and raised as warnings instead. Defaults to False. Use with caution.
+   :param basedir: The directory in which the database will be created, or read from.
+   :type basedir: str
+   :param readonly: If True, the database will be read only. Defaults to False.
+   :type readonly: bool, optional
+   :param nocreate: If True, a new database will not be created if it does not exist.
+                    Defaults to False.
+   :type nocreate: bool, optional
+   :param suppress_errors: If True, errors will be suppressed and raised as warnings instead. Defaults to False. Use with caution.
+   :type suppress_errors: bool, optional
 
    :Attributes:
 
-   .. attribute:: basedir
+      .. attribute:: basedir
 
-      The directory in which the database will be created, or read from.
+         The directory in which the database will be created, or read from.
 
-      :type: str
+         :type: str
 
-   .. attribute:: readonly
+      .. attribute:: readonly
 
-      If True, the database will be read-only.
+         If True, the database will be read-only.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: nocreate
+      .. attribute:: nocreate
 
-      If True, a new database will not be created if it does not exist.
+         If True, a new database will not be created if it does not exist.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: metadata
+      .. attribute:: metadata
 
-      A dictionary containing metadata for the database. See also: :py:class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
+         A dictionary containing metadata for the database. See also: :py:class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: parent_db
+      .. attribute:: parent_db
 
-      The parent database, if this is a sub-database. Default: None.
+         The parent database, if this is a sub-database. Default: None.
 
-      :type: ISFDataBase
+         :type: ISFDataBase
 
-   .. attribute:: _unique_id
+      .. attribute:: _unique_id
 
-      A unique identifier for this database.
+         A unique identifier for this database.
 
-      :type: str
+         :type: str
 
-   .. attribute:: _registered_to_path
+      .. attribute:: _registered_to_path
 
-      The path that this database has been registered to on the current filesystem.
+         The path that this database has been registered to on the current filesystem.
 
-      :type: str
+         :type: str
 
-   .. attribute:: _registeredDumpers
+      .. attribute:: _registeredDumpers
 
-      A list of all registered dumpers.
-      Dumpers are data-type and file-type specific modules to write out data. See: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+         A list of all registered dumpers.
+         Dumpers are data-type and file-type specific modules to write out data. See: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
 
-      :type: list
+         :type: list
 
-   .. attribute:: _suppress_errors
+      .. attribute:: _suppress_errors
 
-      If True, errors will be suppressed and raised as warnings instead. Use with caution.
+         If True, errors will be suppressed and raised as warnings instead. Use with caution.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: _db_state_fn
+      .. attribute:: _db_state_fn
 
-      The path to the database state file. Contains information on:
-      
-      - ``_registeredDumpers``: A list of all registered dumpers.
-      - ``_unique_id``: A unique identifier for this database.
-      - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
+         The path to the database state file. Contains information on:
+         
+         - ``_registeredDumpers``: A list of all registered dumpers.
+         - ``_unique_id``: A unique identifier for this database.
+         - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
 
-      :type: str
+         :type: str
 
-   .. attribute:: _forbidden_keys
+      .. attribute:: _forbidden_keys
 
-      A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
+         A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
 
-      :type: list
+         :type: list
 
-   .. attribute:: _basedir
+      .. attribute:: _basedir
 
-      :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
+         :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
 
-      :type: Path
+         :type: Path
 
    :Methods:
 
@@ -268,3 +268,7 @@ ISFDataBase
       * - :py:obj:`remove <data_base.isf_data_base.ISFDataBase.remove>`\ ()
         - Deletes the database.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

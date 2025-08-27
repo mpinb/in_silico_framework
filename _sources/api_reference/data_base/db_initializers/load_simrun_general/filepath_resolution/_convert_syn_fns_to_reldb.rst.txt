@@ -1,27 +1,25 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution` ❭ :mod:`~data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb`
-
-
-.. title:
 
 _convert_syn_fns_to_reldb
 =========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_syn_fns_to_reldb(syn_content, hoc_fn_map)
+
 
    Copy, rename and transform a single :ref:`syn_file_format` file.
 
    The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
 
-   :Parameters: * **syn_fn** (*str*) -- Path to the synapse distribution file.
-                * **new_hoc** (*str*) -- Path to the new hoc file.
+   :param syn_fn: Path to the synapse distribution file.
+   :type syn_fn: str
+   :param new_hoc: Path to the new hoc file.
+   :type new_hoc: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

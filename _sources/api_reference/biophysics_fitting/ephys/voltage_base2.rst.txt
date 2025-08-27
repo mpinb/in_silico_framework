@@ -1,28 +1,27 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.voltage_base2`
-
-
-.. title:
 
 voltage_base2
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID='recSiteID')
+
 
    Fetch the voltage at a given time point t0 for a specific recording site ID.
 
-   :Parameters: * **voltage_traces** (*dict*) -- A dictionary containing voltage traces for different recording sites.
-                * **recSiteID** (*int*) -- The ID of the recording site for which the voltage is to be returned.
-                * **t0** (*float*) -- The time point at which the voltage is to be returned.
+   :param voltage_traces: A dictionary containing voltage traces for different recording sites.
+   :type voltage_traces: dict
+   :param recSiteID: The ID of the recording site for which the voltage is to be returned.
+   :type recSiteID: int
+   :param t0: The time point at which the voltage is to be returned.
+   :type t0: float
 
    :returns: The voltage at time point t0 for the specified recording site ID.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

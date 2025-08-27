@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.current_visualizer` ❭ :mod:`~visualize.current_visualizer.CurrentAnalysis`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CurrentAnalysis
 ===============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,116 +33,122 @@ CurrentAnalysis
 
    Initialize the CurrentAnalysis object.
 
-   :Parameters: * **cell_or_dict** (*dict or Cell*) -- The cell object, or a dictionary containing equivalent simulation data.
-                * **secID** (*int*) -- The index of the section. Default is 'bifurcation'.
-                * **segID** (*int*) -- The index of the segment. Default is -1.
-                * **rangeVars** (*list*) -- The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
-                * **colormap** (*dict*) -- The colormap for the ion currents. Default is ``None``.
-                * **tVec** (*list*) -- The time vector. Default is ``None``. Only necessary if :paramref:`cell_or_dict` is a dictionary.
+   :param cell_or_dict: The cell object, or a dictionary containing equivalent simulation data.
+   :type cell_or_dict: dict or Cell
+   :param secID: The index of the section. Default is 'bifurcation'.
+   :type secID: int
+   :param segID: The index of the segment. Default is -1.
+   :type segID: int
+   :param rangeVars: The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
+   :type rangeVars: list
+   :param colormap: The colormap for the ion currents. Default is ``None``.
+   :type colormap: dict
+   :param tVec: The time vector. Default is ``None``. Only necessary if :paramref:`cell_or_dict` is a dictionary.
+   :type tVec: list
 
    :Attributes:
 
-   .. attribute:: mode
+      .. attribute:: mode
 
-      'cell' or 'dict'.
+         'cell' or 'dict'.
 
-      :type: str
+         :type: str
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      The cell object, or a dictionary containing equivalent simulation data.
+         The cell object, or a dictionary containing equivalent simulation data.
 
-      :type: :py:class:`~single_cell_parser.cell.Cell` | dict
+         :type: :py:class:`~single_cell_parser.cell.Cell` | dict
 
-   .. attribute:: t
+      .. attribute:: t
 
-      The time vector.
+         The time vector.
 
-      :type: list
+         :type: list
 
-   .. attribute:: sec
+      .. attribute:: sec
 
-      The section of the cell.
+         The section of the cell.
 
-      :type: Section
+         :type: Section
 
-   .. attribute:: secID
+      .. attribute:: secID
 
-      The index of the section.
+         The index of the section.
 
-      :type: int
+         :type: int
 
-   .. attribute:: segID
+      .. attribute:: segID
 
-      The index of the segment.
+         The index of the segment.
 
-      :type: int
+         :type: int
 
-   .. attribute:: seg
+      .. attribute:: seg
 
-      The segment of the cell.
+         The segment of the cell.
 
-      :type: Segment
+         :type: Segment
 
-   .. attribute:: rangeVars
+      .. attribute:: rangeVars
 
-      The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
+         The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
 
-      :type: list
+         :type: list
 
-   .. attribute:: colormap
+      .. attribute:: colormap
 
-      The colormap for the ion currents.
+         The colormap for the ion currents.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: depolarizing_currents
+      .. attribute:: depolarizing_currents
 
-      The depolarizing currents.
+         The depolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: hyperpolarizing_currents
+      .. attribute:: hyperpolarizing_currents
 
-      The hyperpolarizing currents.
+         The hyperpolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: depolarizing_currents_sum
+      .. attribute:: depolarizing_currents_sum
 
-      The sum of the depolarizing currents.
+         The sum of the depolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: hyperpolarizing_currents_sum
+      .. attribute:: hyperpolarizing_currents_sum
 
-      The sum of the hyperpolarizing currents.
+         The sum of the hyperpolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: net_current
+      .. attribute:: net_current
 
-      The net current.
+         The net current.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: depolarizing_currents_normalized
+      .. attribute:: depolarizing_currents_normalized
 
-      The normalized depolarizing currents.
+         The normalized depolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: hyperpolarizing_currents_normalized
+      .. attribute:: hyperpolarizing_currents_normalized
 
-      The normalized hyperpolarizing currents.
+         The normalized hyperpolarizing currents.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: voltage_trace
+      .. attribute:: voltage_trace
 
-      The voltage trace.
+         The voltage trace.
 
-      :type: np.array
+         :type: np.array
 
    :Methods:
 
@@ -165,3 +167,7 @@ CurrentAnalysis
       * - :py:obj:`plot_lines <visualize.current_visualizer.CurrentAnalysis.plot_lines>`\ (ax, legend)
         - Plot the ion currents and the net current of a cell simulation.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

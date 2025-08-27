@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DataBaseRegister
 ================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -38,22 +34,24 @@ DataBaseRegister
 
    You can explicitly walk through a directory and add all :py:class:`DataBase` it encounters to the registry with :py:meth:`DataBaseRegister.search_dbs`.
 
-   :Parameters: * **registry_basedir** (*str*) -- The location of the db registry
-                * **search_dbs** (*str|bool, optional*) -- Whether to look for data_bases in all subfolders of the registry's directory. Defaults to "on_first_init", which only does this if the registry is newly created.
+   :param registry_basedir: The location of the db registry
+   :type registry_basedir: str
+   :param search_dbs: Whether to look for data_bases in all subfolders of the registry's directory. Defaults to "on_first_init", which only does this if the registry is newly created.
+   :type search_dbs: str|bool, optional
 
    :Attributes:
 
-   .. attribute:: registry_basedir
+      .. attribute:: registry_basedir
 
-      The location of the db registry
+         The location of the db registry
 
-      :type: str
+         :type: str
 
-   .. attribute:: registry
+      .. attribute:: registry
 
-      The registry itself as an SQLite database.
+         The registry itself as an SQLite database.
 
-      :type: :py:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`
+         :type: :py:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`
 
    :Methods:
 
@@ -70,3 +68,7 @@ DataBaseRegister
       * - :py:obj:`keys <data_base.data_base_register.DataBaseRegister.keys>`\ ()
         - Get all keys in the registry.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

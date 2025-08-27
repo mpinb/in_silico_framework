@@ -1,18 +1,21 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation` ❭ :mod:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level`
+
+
 
 DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level
 ====================================================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level(key)
+
    :staticmethod:
 
 
    Get the string index of the database key that relects the spatial dimension
 
-   :Parameters: **key** (*tuple*) -- key to access the data in the :py:class:`DataBase`
+   :param key: key to access the data in the :py:class:`DataBase`
+   :type key: tuple
 
    :returns: index of the spatial dimension in the key
    :rtype: int
@@ -24,3 +27,8 @@ DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level
    >>> _get_spatial_bin_level(key)
    1
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

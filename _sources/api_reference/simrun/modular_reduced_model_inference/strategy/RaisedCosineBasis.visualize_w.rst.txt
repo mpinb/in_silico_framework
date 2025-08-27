@@ -1,16 +1,26 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w`
+
+
 
 RaisedCosineBasis.visualize_w
 =============================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w(x, ax=None, plot_kwargs=None)
+
 
    Visualize the superposition :math:`\mathbf{w}(\tau)` of the basis functions :math:`\mathbf{f}`.
 
-   :Parameters: * **x** (*array*) -- The (learnable) input weights for the basis functions.
-                * **ax** (*plt.axis*) -- The axis to plot on. Default is ``None``.
-                * **plot_kwargs** (*dict*) -- The plot arguments. Default is ``None``.
+   :param x: The (learnable) input weights for the basis functions.
+   :type x: array
+   :param ax: The axis to plot on. Default is ``None``.
+   :type ax: plt.axis
+   :param plot_kwargs: The plot arguments. Default is ``None``.
+   :type plot_kwargs: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

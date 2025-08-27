@@ -1,32 +1,32 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.write_vtk_skeleton_file`
-
-
-.. title:
 
 write_vtk_skeleton_file
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.vtk.write_vtk_skeleton_file(lookup_table, out_name, out_dir, point_scalar_data=None, n_decimals=2)
+
 
    Write out a .vtk file for a neuron morphology.
 
    This method is used by :py:meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
 
-   :Parameters: * **lookup_table** (*pd.DataFrame*) -- Lookup table for the neuron morphology.
-                  Can be accessed from :py:class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
-                * **out_name** (*str*) -- Name of the output file.
-                * **out_dir** (*str*) -- Directory to save the file to.
-                * **point_scalar_data** (*dict, optional*) -- Dictionary containing scalar data for each point. Defaults to None.
+   :param lookup_table: Lookup table for the neuron morphology.
+                        Can be accessed from :py:class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
+   :type lookup_table: pd.DataFrame
+   :param out_name: Name of the output file.
+   :type out_name: str
+   :param out_dir: Directory to save the file to.
+   :type out_dir: str
+   :param point_scalar_data: Dictionary containing scalar data for each point. Defaults to None.
+   :type point_scalar_data: dict, optional
 
    :returns: None. Writes out a .vtk file to the specified directory.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

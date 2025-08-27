@@ -1,32 +1,33 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BPAPatt_check_relative_height`
-
-
-.. title:
 
 BPAPatt_check_relative_height
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.BPAPatt_check_relative_height(t, v_soma, v_dend, bAP_thresh=None, stim_onset=None)
+
 
    Computes the ratio of the backpropagating action potential (bAP) amplitude at the soma and dendrite
    and returns True if the ratio is greater than 1, False otherwise.
 
-   :Parameters: * **t** (*numpy.ndarray*) -- Array of time points.
-                * **v_soma** (*numpy.ndarray*) -- Array of voltage values at the soma.
-                * **v_dend** (*numpy.ndarray*) -- Array of voltage values at the dendrite.
-                * **bAP_thresh** (*float, optional*) -- Threshold for detecting bAPs. Defaults to None.
-                * **stim_onset** (*float, optional*) -- Time point of the stimulus onset. Defaults to None.
+   :param t: Array of time points.
+   :type t: numpy.ndarray
+   :param v_soma: Array of voltage values at the soma.
+   :type v_soma: numpy.ndarray
+   :param v_dend: Array of voltage values at the dendrite.
+   :type v_dend: numpy.ndarray
+   :param bAP_thresh: Threshold for detecting bAPs. Defaults to None.
+   :type bAP_thresh: float, optional
+   :param stim_onset: Time point of the stimulus onset. Defaults to None.
+   :type stim_onset: float, optional
 
    :returns: True if the ratio of bAP amplitude at soma and dendrite is greater than 1, False otherwise.
    :rtype: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

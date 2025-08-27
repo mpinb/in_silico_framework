@@ -1,30 +1,27 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.df_colnames_to_str`
-
-
-.. title:
 
 df_colnames_to_str
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.df_colnames_to_str(df)
+
 
    Convert the column names and index names of a dataframe to string.
 
    Useful for dumping using the pandas_to_parquet dumper, or dask_to_parquet dumper.
    Warning: This overwrites the original object. This is preferred over the overhead of creating a copy on every write.
 
-   :Parameters: **df** (*pd.DataFrame | dask.DataFrame*) -- a DataFrame
+   :param df: a DataFrame
+   :type df: pd.DataFrame | dask.DataFrame
 
    :returns: the same dataframe, but with string type column and index names.
    :rtype: df (pd.DataFrame | dask.DataFrame)
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

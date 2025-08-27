@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -395,16 +397,16 @@
                   
 
 
-<h1 id="Barrel-Cortex">Barrel Cortex<a class="headerlink" href="#Barrel-Cortex" title="Permalink to this heading">¶</a></h1>
+<h1 id="Barrel-Cortex">Barrel Cortex<a class="headerlink" href="#Barrel-Cortex" title="Link to this heading">¶</a></h1>
 <p>Many of the tutorials will use the L5PT in the rat barrel cortex as an example.</p>
 <p>The Barrel Cortex (BC) of the rat is a roughly <span class="math notranslate nohighlight">\(4\)</span> x <span class="math notranslate nohighlight">\(4\)</span> x <span class="math notranslate nohighlight">\(2\)</span> <span class="math notranslate nohighlight">\(mm\)</span> cortical area, containing about half a million of neurons, and half a billion of synapses. It is canonically thought of the primary processig unit of somatosensation of the whiskers. The rat whisker system is organized in arcs and columns, just like the barrel cortex; the barrel cortex is somatotopically alligned with the whisker system. Each whisker can be somatotopically linked to a barrel in the barrel
 cortex. A single barrel is a columnar structure that spans the depth of the neocortex. Since “column” would induce confusion with the somatotopical structure, “barrel” is used to denote these cortical units.</p>
 <p>One can also identify layers across the barrel cortex, which are defined by soma sizes. Canonically, there are <span class="math notranslate nohighlight">\(6\)</span> layers in the BC, defined by the soma sizes of their containing neurons.</p>
-<h1 id="The-L5PT">The L5PT<a class="headerlink" href="#The-L5PT" title="Permalink to this heading">¶</a></h1>
+<h1 id="The-L5PT">The L5PT<a class="headerlink" href="#The-L5PT" title="Link to this heading">¶</a></h1>
 <p>In the barrel cortex, we find (among others) the Layer 5 Pyramidal Tract (L5PT) neuron. An example morphology of L5PTs can be seen below.</p>
 <p><img alt="l5pt_morphology" class="no-scaled-link" src="../../_images/morphology_names%40300x.png" style="width: 30%;" /></p>
 <p>“Apical dendrite” refers to the fact that the dendrite originates from the apex of the soma, or the “upper point” of the pyramidal shape.</p>
-<h1 id="Scaling-the-apical-dendrite">Scaling the apical dendrite<a class="headerlink" href="#Scaling-the-apical-dendrite" title="Permalink to this heading">¶</a></h1>
+<h1 id="Scaling-the-apical-dendrite">Scaling the apical dendrite<a class="headerlink" href="#Scaling-the-apical-dendrite" title="Link to this heading">¶</a></h1>
 <p>The diameter of the L5PT’s apical dendrite has an important influence on the biophysical properties of the neuron. Biophysical parameters are expressed in units of conductance per area. This area scales with the square of the radius of the dendrite, making the diameter of the dendrites a very influential morphological property. For this reason, the width of the apical dendrite is added as a free parameter in our examples on biophysical expression under the name <code class="docutils literal notranslate"><span class="pre">scale_apical</span></code>.</p>
 
 
@@ -437,7 +439,7 @@ cortex. A single barrel is a columnar structure that spans the depth of the neoc
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -460,11 +462,11 @@ cortex. A single barrel is a columnar structure that spans the depth of the neoc
         <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

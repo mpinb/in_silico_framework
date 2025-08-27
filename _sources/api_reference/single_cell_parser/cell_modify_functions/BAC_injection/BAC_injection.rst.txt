@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.BAC_injection` ❭ :mod:`~single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection`
-
-
-.. title:
 
 BAC_injection
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection(cell, dist=None)
+
 
    Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.
 
-   :Parameters: * **cell** (:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **dist** (*float*) -- The distance from the soma (um).
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param dist: The distance from the soma (um).
+   :type dist: float
 
    :returns: The cell with the current injection set up.
    :rtype: :class:`~single_cell_parser.cell.Cell`
@@ -23,8 +22,7 @@ BAC_injection
    .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_BAC`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

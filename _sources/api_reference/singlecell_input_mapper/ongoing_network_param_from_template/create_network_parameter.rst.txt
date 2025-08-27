@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.ongoing_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter`
-
-
-.. title:
 
 create_network_parameter
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, outFileName, write_all_celltypes=False)
+
 
    Create a template :ref:`network_parameters_format` file from a template parameter file and a cell number file.
 
@@ -22,17 +19,22 @@ create_network_parameter
    - dynamics
    - release probabilities
 
-   :Parameters: * **templateParamName** (*str*) -- Name of the template param containing the PSTHs for each cell type.
-                  These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
-                * **cellNumberFileName** (*str*) -- Name of the file containing the amount of cells per column in the barrel cortex.
-                * **synFileName** (*str*) -- Name of the `.syn` file, defining the synapse types.
-                * **conFileName** (*str*) -- Name of the `.con` file, defining the connections.
-                * **outFileName** (*str*) -- Name of the output file.
-                * **write_all_celltypes** (*bool*) -- Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+   :param templateParamName: Name of the template param containing the PSTHs for each cell type.
+                             These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
+   :type templateParamName: str
+   :param cellNumberFileName: Name of the file containing the amount of cells per column in the barrel cortex.
+   :type cellNumberFileName: str
+   :param synFileName: Name of the `.syn` file, defining the synapse types.
+   :type synFileName: str
+   :param conFileName: Name of the `.con` file, defining the connections.
+   :type conFileName: str
+   :param outFileName: Name of the output file.
+   :type outFileName: str
+   :param write_all_celltypes: Whether to write out parameter information for all cell types, even if they do not spike during the configured experimental condition.
+   :type write_all_celltypes: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

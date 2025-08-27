@@ -1,0 +1,24 @@
+
+
+_get_hoc_fns_from_neup
+======================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_hoc_fns_from_neup(neup_fn)
+
+
+   Get the unique hoc files from a list of neuron parameter files.
+
+   :param neup_fns: Path to the neuron parameter file.
+   :type neup_fns: str
+
+   :returns: List containing the unique hoc files.
+   :rtype: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

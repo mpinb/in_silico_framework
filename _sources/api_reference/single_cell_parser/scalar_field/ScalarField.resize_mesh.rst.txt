@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField.resize_mesh`
+
+
 
 ScalarField.resize_mesh
 =======================
 
+
 .. py:method:: single_cell_parser.scalar_field.ScalarField.resize_mesh()
+
 
    Resizes mesh to non-zero scalar data using slicing views (no copy).
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

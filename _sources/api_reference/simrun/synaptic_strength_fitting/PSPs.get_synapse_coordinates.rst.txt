@@ -1,19 +1,29 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates`
+
+
 
 PSPs.get_synapse_coordinates
 ============================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates(population, flatten=False, cell_indices=None)
+
 
    Get the coordinates of all synapses of a particular celltype.
 
-   :Parameters: * **population** (*str*) -- The celltype to get the synapse coordinates from.
-                * **flatten** (*bool*) -- Whether to flatten the list of synapse coordinates. Default: ``False``.
-                * **cell_indices** (*list*) -- A list of cell indices to get the synapse coordinates from. Default: ``None`` (all synapses).
+   :param population: The celltype to get the synapse coordinates from.
+   :type population: str
+   :param flatten: Whether to flatten the list of synapse coordinates. Default: ``False``.
+   :type flatten: bool
+   :param cell_indices: A list of cell indices to get the synapse coordinates from. Default: ``None`` (all synapses).
+   :type cell_indices: list
 
    :returns: A list of synapse coordinates.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

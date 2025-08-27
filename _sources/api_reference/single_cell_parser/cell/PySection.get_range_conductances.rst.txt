@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.get_range_conductances`
+
+
 
 PySection.get_range_conductances
 ================================
 
+
 .. py:method:: single_cell_parser.cell.PySection.get_range_conductances(range_vars, density=True)
+
 
    Get the transmembrane conductance of each range variable separately.
 
@@ -23,13 +25,15 @@ PySection.get_range_conductances
        >>> cell.sections[1].get_range_conductances(range_vars)
        {"NaTa_t": [0.00001, 0.00002]}  # 2 segments in section 1
 
-   :Parameters: * **range_vars** (*dict*) -- A nested dictionary of range variables.
-                  The keys must match the segment's nested attributes.
-                  It is possible to simply pass subsections of the :ref:`cell_parameters_format` here, e.g. ``neup[sec.label]["mechanisms"]["range"]``
-                * **density** (*bool, optional*) -- If ``True`` (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
-                  If ``False``, the total amount of conductance is returned for each segment in units :math:`nS`
-                  i.e. the conductance density multiplied by the area of the segment.
-                  Defaults to True.
+   :param range_vars: A nested dictionary of range variables.
+                      The keys must match the segment's nested attributes.
+                      It is possible to simply pass subsections of the :ref:`cell_parameters_format` here, e.g. ``neup[sec.label]["mechanisms"]["range"]``
+   :type range_vars: dict
+   :param density: If ``True`` (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                   If ``False``, the total amount of conductance is returned for each segment in units :math:`nS`
+                   i.e. the conductance density multiplied by the area of the segment.
+                   Defaults to True.
+   :type density: bool, optional
 
    :returns: A list of per-channel conductances for each segment.
    :rtype: List[Dict]
@@ -41,3 +45,8 @@ PySection.get_range_conductances
       Pay close attention to the units! For numerical stability, the absolute conductance is in units of :math:`nS`, while
       the conductance density is given in units of :math:`S / cm ^2`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,20 +1,28 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics._plot_synapses_dendrogram_overlay`
+
+
 
 _DendrogramSynapseStatistics._plot_synapses_dendrogram_overlay
 ==============================================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapses_dendrogram_overlay(ax)
+
 
    Plot the synapses on the dendrogram.
 
    Given an :py:class:`~matplotlib.axes.Axes` object containing a dendrogram plot,
    this method plots the synapses on the dendrogram as an overlay.
 
-   :Parameters: **ax** (:py:class:`matplotlib.Axes`) -- The matplotlib axes object.
+   :param ax: The matplotlib axes object.
+   :type ax: matplotlib.Axes
 
    :returns: The matplotlib axes object.
    :rtype: :py:class:`matplotlib.Axes`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

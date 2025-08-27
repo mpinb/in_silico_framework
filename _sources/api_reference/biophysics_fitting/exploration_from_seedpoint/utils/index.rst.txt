@@ -1,5 +1,7 @@
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.utils`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ 
+
 
 utils
 =====
@@ -40,3 +42,7 @@ Functions
      - Convert all boolean values to float in a pandas dataframe.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

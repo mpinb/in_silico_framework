@@ -1,35 +1,37 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.get_tMax_vMax_baseline`
-
-
-.. title:
 
 get_tMax_vMax_baseline
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.synaptic_strength_fitting.get_tMax_vMax_baseline(t_baseline, v_baseline, t, v, tStim=None, tEnd=None)
+
 
    Calculate the ePSP amplitude.
 
    This method subtracts a voltage trace without any synapse activation from a voltage trace with synapse activation,
    and then calculates the maximum voltage deflection and the timepoint thereof.
 
-   :Parameters: * **t_baseline** (*np.array*) -- Timepoints of the baseline voltage trace.
-                * **v_baseline** (*np.array*) -- Voltage trace without synapse activation.
-                * **t** (*np.array*) -- Timepoints of the voltage trace with synapse activation.
-                * **v** (*np.array*) -- Voltage trace with synapse activation.
-                * **tStim** (*float*) -- Timepoint of synapse activation.
-                * **tEnd** (*float*) -- End time of the simulation.
+   :param t_baseline: Timepoints of the baseline voltage trace.
+   :type t_baseline: np.array
+   :param v_baseline: Voltage trace without synapse activation.
+   :type v_baseline: np.array
+   :param t: Timepoints of the voltage trace with synapse activation.
+   :type t: np.array
+   :param v: Voltage trace with synapse activation.
+   :type v: np.array
+   :param tStim: Timepoint of synapse activation.
+   :type tStim: float
+   :param tEnd: End time of the simulation.
+   :type tEnd: float
 
    :returns: Timepoint and amplitude of the maximum voltage deflection.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

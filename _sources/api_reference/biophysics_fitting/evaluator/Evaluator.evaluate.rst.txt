@@ -1,20 +1,24 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator.evaluate`
+
+
 
 Evaluator.evaluate
 ==================
 
+
 .. py:method:: biophysics_fitting.evaluator.Evaluator.evaluate(features_dict, raise_=True)
+
 
    Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
 
    Details on how to set up the Evaluator are in the docstring of the Evaluator class.
 
-   :Parameters: * **features_dict** (*dict*) -- a dictionary of stimulus names as keys, and corresponding voltage traces as values.
-                * **raise_** (*bool*) -- Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`.
+   :param features_dict: a dictionary of stimulus names as keys, and corresponding voltage traces as values.
+   :type features_dict: dict
+   :param raise_: Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`.
                   If False, will not raise an error, and evaluate all features that can be evaluated given the provided `features_dict`.
+   :type raise_: bool
 
    :raises KeyError: if the Evaluator tries to evaluate a trace with a name that is not present in `features_dict.keys()` and :paramref:`raise_` is set to ``True``.
 
@@ -22,3 +26,8 @@ Evaluator.evaluate
              Usually, this is the output of :meth:`~biophysics_fitting.hay_evaluation_default_complete_setup_python.get_Evaluator`,
    :rtype: obj
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

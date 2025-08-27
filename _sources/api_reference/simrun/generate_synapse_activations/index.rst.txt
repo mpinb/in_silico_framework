@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.generate_synapse_activations`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 generate_synapse_activations
 ============================
@@ -56,3 +58,7 @@ Functions
      - Generates :paramref:`nSweeps` * :paramref:`nprocs` synapse activation files and writes them to
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

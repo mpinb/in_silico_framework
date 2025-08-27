@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver` ❭ :mod:`~simrun.modular_reduced_model_inference.solver._Solver._setup_optimizer`
+
+
 
 _Solver._setup_optimizer
 ========================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.solver._Solver._setup_optimizer()
+
 
    Set up the optimization strategy.
 
@@ -17,3 +19,8 @@ _Solver._setup_optimizer
 
    :py:meth:`Solver_COBYLA._setup_optimizer`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

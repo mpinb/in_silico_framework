@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params`
+
+
 
 RW._unnormalize_params
 ======================
 
+
 .. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params(p)
+
 
    Unnormalize parameters to be between min and max.
 
-   :Parameters: **p** (*pd.Series*) -- normalized parameter vector
+   :param p: normalized parameter vector
+   :type p: pd.Series
 
    :returns: unnormalized parameter vector
    :rtype: pd.Series
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

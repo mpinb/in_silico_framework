@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl` ❭ :mod:`~single_cell_parser.sim_control.SimControl.go`
+
+
 
 SimControl.go
 =============
 
+
 .. py:method:: single_cell_parser.sim_control.SimControl.go(simTime=None)
+
 
    Run the simulation.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

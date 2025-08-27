@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result`
+
+
 
 DataSplitEvaluation.add_result
 ==============================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result(solver, x)
+
 
    Save the optimization result.
 
    All relevant info on which solver and strategy was used is then available under the attributes:
    ``strategy``, ``solver``, and ``run``.
 
-   :Parameters: * **solver** (:py:class:`~simrun.modular_reduced_model_inference.solver._Solver`) -- Solver object
-                * **x** (*dict*) -- Optimization result
+   :param solver: Solver object
+   :type solver: ~simrun.modular_reduced_model_inference.solver._Solver
+   :param x: Optimization result
+   :type x: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_TEMPLATE`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_TEMPLATE
 ==================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,9 +29,9 @@ STAPlugin_TEMPLATE
 
    :Attributes:
 
-   .. attribute:: _result
+      .. attribute:: _result
 
-      The result of the analysis.
+         The result of the analysis.
 
    :Methods:
 
@@ -50,3 +46,7 @@ STAPlugin_TEMPLATE
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_TEMPLATE.setup>`\ ()
         - :summarylabel:`abc` Sets up the analysis.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

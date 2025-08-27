@@ -1,5 +1,7 @@
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
 
 singlecell_input_mapper
 =======================
@@ -65,3 +67,7 @@ Modules
    * - :py:obj:`writer <singlecell_input_mapper.singlecell_input_mapper.writer>`
      - Write out the results of a single connectivity realization or a population of realizations.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

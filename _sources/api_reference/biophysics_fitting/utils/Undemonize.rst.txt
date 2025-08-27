@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.Undemonize`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Undemonize
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -24,3 +20,7 @@ Undemonize
 
    .. warning:: This might spawn child processes that does not terminate
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

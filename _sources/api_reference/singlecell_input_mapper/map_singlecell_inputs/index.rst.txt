@@ -1,5 +1,7 @@
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.map_singlecell_inputs`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
+
 
 map_singlecell_inputs
 =====================
@@ -92,3 +94,7 @@ Functions
      - Map inputs to a single cell morphology.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

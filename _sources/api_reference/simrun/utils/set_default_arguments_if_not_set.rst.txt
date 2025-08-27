@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.set_default_arguments_if_not_set`
-
-
-.. title:
 
 set_default_arguments_if_not_set
 ================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.set_default_arguments_if_not_set(o, kwargs)
+
 
    Set default arguments of an object if they are not set.
 
@@ -19,15 +16,16 @@ set_default_arguments_if_not_set
    If an object has been pickled and the keyword arguments have been extended post hoc,
    the new keyword arguments are missing. This can be used to update the object accordingly.
 
-   :Parameters: * **o** (*object*) -- The object to update.
-                * **kwargs** (*dict*) -- The dictionary containing the keyword arguments.
+   :param o: The object to update.
+   :type o: object
+   :param kwargs: The dictionary containing the keyword arguments.
+   :type kwargs: dict
 
    :returns: Updates the object in place.
    :rtype: None
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

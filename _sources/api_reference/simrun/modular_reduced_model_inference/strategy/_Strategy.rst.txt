@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _Strategy
 =========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -54,7 +50,8 @@ _Strategy
 
    E.G. A strategy that needs to optimize for AP refractory, then the Strategy needs to incorporate this data
 
-   :Parameters: **name** (*str*) -- The name of the strategy.
+   :param name: The name of the strategy.
+   :type name: str
 
    :Methods:
 
@@ -83,3 +80,7 @@ _Strategy
       * - :py:obj:`add_solver <simrun.modular_reduced_model_inference.strategy._Strategy.add_solver>`\ (solver, setup)
         - Add a solver to the strategy.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

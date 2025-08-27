@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot`
-
-
-.. title:
 
 spike_times_to_onehot
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1)
+
 
    One-hot encode spike times to a binned time vector.
 
@@ -19,17 +16,20 @@ spike_times_to_onehot
 
    If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
 
-   :Parameters: * **spike_times** (*array*) -- Array of spike times
-                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 505.
-                * **time_step** (*int, optional*) -- Timestep in ms. Defaults to 1.
+   :param spike_times: Array of spike times
+   :type spike_times: array
+   :param min_time: Min time in ms. Defaults to 0.
+   :type min_time: int, optional
+   :param max_time: Max time in ms. Defaults to 505.
+   :type max_time: int, optional
+   :param time_step: Timestep in ms. Defaults to 1.
+   :type time_step: int, optional
 
    :returns: A list of booleans, where each element represents a time step and is True if a spike occured in this interval.
    :rtype: list
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_params`
+
+
 
 RW._normalize_params
 ====================
 
+
 .. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_params(p)
+
 
    Normalize parameters to be between 0 and 1.
 
-   :Parameters: **p** (*pd.Series*) -- parameter vector
+   :param p: parameter vector
+   :type p: pd.Series
 
    :returns: normalized parameter vector
    :rtype: pd.Series
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

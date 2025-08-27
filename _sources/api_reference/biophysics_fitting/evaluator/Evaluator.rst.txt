@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.evaluator` ❭ :mod:`~biophysics_fitting.evaluator.Evaluator`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Evaluator
 =========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -77,11 +73,11 @@ Evaluator
 
    :Attributes:
 
-   .. attribute:: setup
+      .. attribute:: setup
 
-      A Evaluator_Setup object that keeps track of the evaluation functions.
+         A Evaluator_Setup object that keeps track of the evaluation functions.
 
-      :type: :py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`
+         :type: :py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`
 
    :Methods:
 
@@ -94,3 +90,7 @@ Evaluator
       * - :py:obj:`evaluate <biophysics_fitting.evaluator.Evaluator.evaluate>`\ (features\_dict, raise\_)
         - Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

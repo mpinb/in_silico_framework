@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_functional_realization`
+
+
 
 NetworkMapper.create_functional_realization
 ===========================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper.create_functional_realization()
+
 
    Create a new functional connectivity realization from an existing network parameter file based on ``convergence``.
 
@@ -37,3 +39,8 @@ NetworkMapper.create_functional_realization
    :returns: None. Writes the resulting :ref:`con_file_format` files and adapted
              :ref:`network_parameters_format` file to disk (in contrast to :py:meth:`~create_network`).
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

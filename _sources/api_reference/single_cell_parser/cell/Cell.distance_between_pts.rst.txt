@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.distance_between_pts`
+
+
 
 Cell.distance_between_pts
 =========================
 
+
 .. py:method:: single_cell_parser.cell.Cell.distance_between_pts(sec1, x1, sec2, x2)
+
 
    Computes the path length between two points.
 
@@ -18,11 +20,20 @@ Cell.distance_between_pts
 
    Future improvements could include implementing a look-up table for pair-wise distances to enhance efficiency.
 
-   :Parameters: * **x1** (*float | int*) -- Location or point ID of the first point.
-                * **x2** (*float | int*) -- Location or point ID of the second point.
-                * **sec1** (*Section | int*) -- Section or section ID containing the first point.
-                * **sec2** (*Section | int*) -- Section or section ID containing the second point.
+   :param x1: Location or point ID of the first point.
+   :type x1: float | int
+   :param x2: Location or point ID of the second point.
+   :type x2: float | int
+   :param sec1: Section or section ID containing the first point.
+   :type sec1: Section | int
+   :param sec2: Section or section ID containing the second point.
+   :type sec2: Section | int
 
    :returns: The computed path length between the two points.
    :rtype: float
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

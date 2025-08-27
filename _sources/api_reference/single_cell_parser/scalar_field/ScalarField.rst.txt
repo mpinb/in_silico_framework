@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.scalar_field` ❭ :mod:`~single_cell_parser.scalar_field.ScalarField`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 ScalarField
 ===========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -43,47 +39,52 @@ ScalarField
    This class is used for e.g. assigning sub-cellular synapse distributions
    modeled after vtkImageData, i.e. a regular mesh.
 
-   :Parameters: * **mesh** (*numpy.ndarray*) -- 3D numpy array representing the scalar field.
-                * **origin** (*tuple*) -- 3-tuple of floats representing the origin of the scalar field.
-                * **extent** (*tuple*) -- 6-tuple of integers representing the extent of the scalar field.
-                * **spacing** (*tuple*) -- 3-tuple of floats representing the spacing of the scalar field.
-                * **bBox** (*tuple*) -- 6-tuple of floats representing the bounding box of the scalar field.
+   :param mesh: 3D numpy array representing the scalar field.
+   :type mesh: numpy.ndarray
+   :param origin: 3-tuple of floats representing the origin of the scalar field.
+   :type origin: tuple
+   :param extent: 6-tuple of integers representing the extent of the scalar field.
+   :type extent: tuple
+   :param spacing: 3-tuple of floats representing the spacing of the scalar field.
+   :type spacing: tuple
+   :param bBox: 6-tuple of floats representing the bounding box of the scalar field.
+   :type bBox: tuple
 
    :Attributes:
 
-   .. attribute:: mesh
+      .. attribute:: mesh
 
-      3D numpy array representing the scalar field.
+         3D numpy array representing the scalar field.
 
-      :type: numpy.ndarray
+         :type: numpy.ndarray
 
-   .. attribute:: origin
+      .. attribute:: origin
 
-      3-tuple of floats representing the origin of the scalar field.
+         3-tuple of floats representing the origin of the scalar field.
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: extent
+      .. attribute:: extent
 
-      6-tuple of integers representing the extent of the scalar field.
-      Note that the extent always starts at 0:
-      Format: (0, xmax - xmin, 0, ymax - ymin, 0, zmax - zmin)
+         6-tuple of integers representing the extent of the scalar field.
+         Note that the extent always starts at 0:
+         Format: (0, xmax - xmin, 0, ymax - ymin, 0, zmax - zmin)
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: spacing
+      .. attribute:: spacing
 
-      3-tuple of floats representing the spacing of the scalar field.
-      If all values are equal, the scalar field has cubic voxels.
+         3-tuple of floats representing the spacing of the scalar field.
+         If all values are equal, the scalar field has cubic voxels.
 
-      :type: tuple
+         :type: tuple
 
-   .. attribute:: boundingBox
+      .. attribute:: boundingBox
 
-      6-tuple of floats representing the bounding box of the scalar field.
-      Format: (xmin, xmax, ymin, ymax, zmin, zmax)
+         6-tuple of floats representing the bounding box of the scalar field.
+         Format: (xmin, xmax, ymin, ymax, zmin, zmax)
 
-      :type: tuple
+         :type: tuple
 
    :Methods:
 
@@ -106,3 +107,7 @@ ScalarField
       * - :py:obj:`get_voxel_center <single_cell_parser.scalar_field.ScalarField.get_voxel_center>`\ (ijk)
         - Fetch the center of the voxel given by indices i,j,k.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

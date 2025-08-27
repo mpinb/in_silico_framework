@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter` ❭ :mod:`~visualize._figure_array_converter.show_pixel_object`
-
-
-.. title:
 
 show_pixel_object
 =================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize._figure_array_converter.show_pixel_object(pixelObject, ax=None)
+
 
    Displays a PixelObject on an axis
 
-   :Parameters: * **pixelObject** (*PixelObject*) -- the PixelObject to display
-                * **ax** (*matplotlib.pyplot.Axes*) -- the axis to display the PixelObject on
+   :param pixelObject: the PixelObject to display
+   :type pixelObject: PixelObject
+   :param ax: the axis to display the PixelObject on
+   :type ax: matplotlib.pyplot.Axes
 
    :returns: the axis with the PixelObject displayed
    :rtype: ax (matplotlib.pyplot.Axes)
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

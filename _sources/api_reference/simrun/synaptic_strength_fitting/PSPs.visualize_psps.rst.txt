@@ -1,19 +1,30 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.visualize_psps`
+
+
 
 PSPs.visualize_psps
 ===================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.visualize_psps(g=1.0, method='dynamic_baseline', merge_celltype_kwargs={}, fig=None)
+
 
    Plot a histogram of the EPSP max voltage deflections for each celltype.
 
-   :Parameters: * **g** (*float*) -- The simulated synaptic strength value to plot.
-                * **method** (*str*) -- ``dynamic_baseline`` or ``constant_baseline``.
-                * **merge_celltype_kwargs** (*dict*) -- Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
-                * **fig** (*plt.Figure*) -- A matplotlib figure to plot the histograms on.
+   :param g: The simulated synaptic strength value to plot.
+   :type g: float
+   :param method: ``dynamic_baseline`` or ``constant_baseline``.
+   :type method: str
+   :param merge_celltype_kwargs: Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+   :type merge_celltype_kwargs: dict
+   :param fig: A matplotlib figure to plot the histograms on.
+   :type fig: plt.Figure
 
    :returns: None. Plots the histograms.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

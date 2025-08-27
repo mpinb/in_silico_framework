@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`data_base` ❭ :mod:`~data_base.data_base_register` ❭ :mod:`~data_base.data_base_register.DataBaseRegister` ❭ :mod:`~data_base.data_base_register.DataBaseRegister.keys`
+
+
 
 DataBaseRegister.keys
 =====================
 
+
 .. py:method:: data_base.data_base_register.DataBaseRegister.keys()
+
 
    Get all keys in the registry.
 
@@ -15,3 +17,8 @@ DataBaseRegister.keys
    :returns: All keys in the registry.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.metadata_utils`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
+
 
 metadata_utils
 ==============
@@ -29,7 +31,7 @@ Functions
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`get_voltage_traces_divisions_by_metadata <data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata>`\ (metadata, repartition)
+   * - :py:obj:`get_voltage_traces_divisions_by_metadata <data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata>`\ (db, repartition)
      - Find the division indices based on the metadata.
    * - :py:obj:`create_metadata_parallelization_helper <data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata_parallelization_helper>`\ (sim\_trial\_index, simresult\_path)
      - Parallelize creating metadata across multiple simulation trials.
@@ -37,3 +39,7 @@ Functions
      - Generate metadata out of a pd.Series containing the sim_trial_index.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

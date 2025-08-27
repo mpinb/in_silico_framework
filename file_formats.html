@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -429,6 +431,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#raw-simulation-results" class="md-nav__link">
+    <span title="/file_formats.rst#raw-simulation-results (reference label)" class="md-ellipsis">Raw simulation results</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dataframes" class="md-nav__link">
     <span title="/file_formats.rst#dataframes (reference label)" class="md-ellipsis">Dataframes</span>
   </a>
@@ -646,6 +655,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#raw-simulation-results" class="md-nav__link">
+    <span title="/file_formats.rst#raw-simulation-results (reference label)" class="md-ellipsis">Raw simulation results</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#dataframes" class="md-nav__link">
     <span title="/file_formats.rst#dataframes (reference label)" class="md-ellipsis">Dataframes</span>
   </a>
@@ -781,7 +797,7 @@
                   
 
 
-<h1 id="file-data-formats"><span id="file-formats"></span>File &amp; data formats<a class="headerlink" href="#file-data-formats" title="Permalink to this heading">¶</a></h1>
+<h1 id="file-data-formats"><span id="file-formats"></span>File &amp; data formats<a class="headerlink" href="#file-data-formats" title="Link to this heading">¶</a></h1>
 <figure class="align-center" id="id6">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 322.00 404.00" class="graphviz" style="width: 20.125rem;height: 25.25rem;">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 400)">
@@ -963,7 +979,7 @@
 <p><span class="caption-text"><span class="caption-text">
 Overview of file formats.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></figcaption>
 </figure>
-<h2 id="syn"><span id="syn-file-format"></span>.syn<a class="headerlink" href="#syn" title="Permalink to this heading">¶</a></h2>
+<h2 id="syn"><span id="syn-file-format"></span>.syn<a class="headerlink" href="#syn" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to store synapse locations onto a morphology.
 Only valid with an associated morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.</p>
 <p>For each synapse, it provides the synapse type and location onto the morphology.
@@ -986,7 +1002,7 @@ it must be used in conjunction with an associated <a class="reference internal" 
 <span class="o">...</span>
 </code></pre></div>
 </div>
-<h2 id="con"><span id="con-file-format"></span>.con<a class="headerlink" href="#con" title="Permalink to this heading">¶</a></h2>
+<h2 id="con"><span id="con-file-format"></span>.con<a class="headerlink" href="#con" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to store connectivity data.
 To be used in conjunction with an associated <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file and morphology <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> file.
 It numbers each synapse, and links it to its associated presynaptic cell type and ID.
@@ -1008,7 +1024,7 @@ to each synapse. ISF’s workflow is designed to create these files in tandem, s
 <span class="o">...</span>
 </code></pre></div>
 </div>
-<h2 id="param"><span id="param-file-format"></span>.param<a class="headerlink" href="#param" title="Permalink to this heading">¶</a></h2>
+<h2 id="param"><span id="param-file-format"></span>.param<a class="headerlink" href="#param" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
 The <code class="docutils literal notranslate"><span class="pre">.param</span></code> format is valid Python code, but differs from JSON, as it allows trailing comma’s, single quotes, and tuples. JSON does not.
 All <code class="docutils literal notranslate"><span class="pre">.param</span></code> files can be read using <code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser.build_parameters</span></code>. However, specific files that use this format have more
@@ -1018,7 +1034,7 @@ specialized readers, which provide additional for <a class="reference internal" 
 <dt>See also:</dt><dd><p><a class="reference internal" href="api_reference/simrun/parameters_to_cell/index.html#module-simrun.parameters_to_cell" title="simrun.parameters_to_cell (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.parameters_to_cell</span></code></a> to rerun a simulation from these parameterfiles.</p>
 </dd>
 </dl>
-<h3 id="cell-parameters"><span id="cell-parameters-format"></span>Cell parameters<a class="headerlink" href="#cell-parameters" title="Permalink to this heading">¶</a></h3>
+<h3 id="cell-parameters"><span id="cell-parameters-format"></span>Cell parameters<a class="headerlink" href="#cell-parameters" title="Link to this heading">¶</a></h3>
 <p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> file to store biophysical parameters of a cell.
 Includes a reference to a <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file,
 biophysical properties of the cell per cellular structure (i.e. soma, dendrite, axon initial segment …),
@@ -1069,13 +1085,13 @@ Simulation parameters are usually overridden by higher level modules, such as <a
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<h3 id="network-parameters"><span id="network-parameters-format"></span>Network parameters<a class="headerlink" href="#network-parameters" title="Permalink to this heading">¶</a></h3>
+<h3 id="network-parameters"><span id="network-parameters-format"></span>Network parameters<a class="headerlink" href="#network-parameters" title="Link to this heading">¶</a></h3>
 <p>The <a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> format is used to store network parameters,
 describing the presynaptic cells and their synaptic activations.
 Only valid with an associated <a class="reference internal" href="#hoc-file-format"><span class="std std-ref">.hoc</span></a> morphology file, <a class="reference internal" href="#syn-file-format"><span class="std std-ref">.syn</span></a> file, and <a class="reference internal" href="#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
 <p>For each presynaptic cell type in the network, this following information is provided:</p>
 <table class="docutils data align-default" id="id7">
-<caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id7" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Network Parameters</span><a class="headerlink" href="#id7" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1095,7 +1111,7 @@ Only valid with an associated <a class="reference internal" href="#hoc-file-form
 </table>
 <p>The <code class="docutils literal notranslate"><span class="pre">synapses</span></code> key of each presynaptic cell type contains the following information:</p>
 <table class="docutils data align-default" id="id8">
-<caption><span class="caption-text">Synapse parameters</span><a class="headerlink" href="#id8" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Synapse parameters</span><a class="headerlink" href="#id8" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1119,7 +1135,7 @@ A synapse is either active or not active, never inbetween.</p></td>
 </table>
 <p>Each <code class="docutils literal notranslate"><span class="pre">synapses.receptors.&lt;receptor</span> <span class="pre">type&gt;</span></code> in <code class="docutils literal notranslate"><span class="pre">synapses.receptors</span></code> contains the following information:</p>
 <table class="docutils data align-default" id="id9">
-<caption><span class="caption-text">Receptor parameters</span><a class="headerlink" href="#id9" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Receptor parameters</span><a class="headerlink" href="#id9" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
 <th class="head"><p>Description</p></th>
@@ -1191,7 +1207,7 @@ For example, for an AMPA synapse, this could be the decay time constant, the fac
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<h3 id="activity-data"><span id="activity-data-format"></span>Activity data<a class="headerlink" href="#activity-data" title="Permalink to this heading">¶</a></h3>
+<h3 id="activity-data"><span id="activity-data-format"></span>Activity data<a class="headerlink" href="#activity-data" title="Link to this heading">¶</a></h3>
 <p><a class="reference internal" href="#param-file-format"><span class="std std-ref">.param</span></a> files are used to store activity data covering spike times and time bins for specific cell types in response to a stimulus, as seen in e.g. getting_started/example_data/functional_constraints/evoked_activity/</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -1209,13 +1225,57 @@ For example, for an AMPA synapse, this could be the decay time constant, the fac
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<h2 id="dataframes">Dataframes<a class="headerlink" href="#dataframes" title="Permalink to this heading">¶</a></h2>
+<h2 id="raw-simulation-results"><span id="simresult-dir-format"></span>Raw simulation results<a class="headerlink" href="#raw-simulation-results" title="Link to this heading">¶</a></h2>
+<p>Simulations run by <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> have a fixed folder structure. They contain a single file of somatic <a class="reference internal" href="#voltage-traces-format"><span class="std std-ref">Voltage traces</span></a>,
+one file of dendritic <a class="reference internal" href="#voltage-traces-format"><span class="std std-ref">Voltage traces</span></a> per <code class="docutils literal notranslate"><span class="pre">recSite</span></code> found in the <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>, and a collection of <a class="reference internal" href="#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> and
+<a class="reference internal" href="#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a> files.</p>
+<p>The voltage traces are written to a single <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
+but the synapse and cell activation data is written to a separate file for each simulation trial (the amount
+of spikes and synapse activations is not known in advance).</p>
+<p>The amount of simulation runs per parameter configuration (i.e. the <code class="xref py py-paramref docutils literal notranslate"><span class="pre">nSweeps</span></code> keyword argument in any simrun function) corresponds
+to:</p>
+<ul class="simple">
+<li><p>The amount of voltage columns in the <a class="reference internal" href="#voltage-traces-format"><span class="std std-ref">Voltage traces</span></a> files</p></li>
+<li><p>The amount of <a class="reference internal" href="#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> files</p></li>
+<li><p>The amount of <a class="reference internal" href="#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a> files</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code>$ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
+hostname_somacpu042
+seed379159821_pid209402_network_model.param
+seed379159821_pid209402_neuron_model.param
+seed379159821_pid209402_pos_3_ID_000_sec_073_seg_000_x_0.056_somaDist_607.8_vm_dend_traces.csv
+seed379159821_pid209402_pos_3_ID_001_sec_073_seg_008_x_0.944_somaDist_805.7_vm_dend_traces.csv
+seed379159821_pid209402_vm_all_traces.csv
+simulation_run0000_presynaptic_cells.csv
+simulation_run0000_synapses.csv
+simulation_run0001_presynaptic_cells.csv
+simulation_run0001_synapses.csv
+simulation_run0002_presynaptic_cells.csv
+simulation_run0002_synapses.csv
+simulation_run0003_presynaptic_cells.csv
+simulation_run0003_synapses.csv
+simulation_run0004_presynaptic_cells.csv
+simulation_run0004_synapses.csv
+</code></pre></div>
+</div>
+<dl class="simple">
+<dt>See also:</dt><dd><p>The <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> functions used to prouce these simulation results (and their <cite>nSweeps</cite> keyword argument, as mentioned above):</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="api_reference/simrun/run_new_simulations/index.html#module-simrun.run_new_simulations" title="simrun.run_new_simulations (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.run_new_simulations</span></code></a></p></li>
+<li><p><a class="reference internal" href="api_reference/simrun/rerun_db/index.html#module-simrun.rerun_db" title="simrun.rerun_db (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.rerun_db</span></code></a></p></li>
+</ul>
+</dd>
+<dt>See also:</dt><dd><p>To get a <a class="reference internal" href="api_reference/single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from such a simulation, refer to <a class="reference internal" href="api_reference/simrun/sim_trial_to_cell_object/index.html#module-simrun.sim_trial_to_cell_object" title="simrun.sim_trial_to_cell_object (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.sim_trial_to_cell_object</span></code></a></p>
+</dd>
+</dl>
+<h2 id="dataframes">Dataframes<a class="headerlink" href="#dataframes" title="Link to this heading">¶</a></h2>
 <p>The output format of various simulation pipelines are usually a dataframe. below, you find common formats used throughout ISF.</p>
 <p>The <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package produces output files in <code class="docutils literal notranslate"><span class="pre">.csv</span></code> or <code class="docutils literal notranslate"><span class="pre">.npz</span></code> format. many of these files
 need to be created for each individual simulation trial.
-These raw output files are usually parsed into single dataframes for further analysis using a <code class="docutils literal notranslate"><span class="pre">db_initializers</span></code> submodule (see e.g.
+These <a class="reference internal" href="#simresult-dir-format"><span class="std std-ref">Raw simulation results</span></a> are usually parsed into single dataframes for further analysis using a <code class="docutils literal notranslate"><span class="pre">db_initializers</span></code> submodule (see e.g.
 <a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">load_simrun_general</span></code></a>).</p>
-<h3 id="synapse-activation"><span id="syn-activation-format"></span>Synapse activation<a class="headerlink" href="#synapse-activation" title="Permalink to this heading">¶</a></h3>
+<h3 id="synapse-activation"><span id="syn-activation-format"></span>Synapse activation<a class="headerlink" href="#synapse-activation" title="Link to this heading">¶</a></h3>
 <p>The raw output of the <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the synaptic activations onto a post-synaptic cell
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:</p>
 <ul class="simple">
@@ -1227,9 +1287,9 @@ for each individual simulation trial. Each file contains the following informati
 </ul>
 <p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis:
 An example of the raw and parsed format is shown below:</p>
-<h4 id="raw-simrun-output">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#raw-simrun-output" title="Permalink to this heading">¶</a></h4>
+<h4 id="raw-simrun-output">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#raw-simrun-output" title="Link to this heading">¶</a></h4>
 <table class="docutils data align-default" id="id10">
-<caption><span class="caption-text">Synapse activations (single trial)</span><a class="headerlink" href="#id10" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Synapse activations (single trial)</span><a class="headerlink" href="#id10" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>synapse type</p></th>
 <th class="head"><p>synapse ID</p></th>
@@ -1275,9 +1335,9 @@ An example of the raw and parsed format is shown below:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="parsed-dataframe">Parsed dataframe<a class="headerlink" href="#parsed-dataframe" title="Permalink to this heading">¶</a></h4>
+<h4 id="parsed-dataframe">Parsed dataframe<a class="headerlink" href="#parsed-dataframe" title="Link to this heading">¶</a></h4>
 <table class="docutils data align-default" id="id11">
-<caption><span class="caption-text">Synapse activations (all trials)</span><a class="headerlink" href="#id11" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Synapse activations (all trials)</span><a class="headerlink" href="#id11" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>trial index</p></th>
 <th class="head"><p>synapse type</p></th>
@@ -1344,7 +1404,7 @@ An example of the raw and parsed format is shown below:</p>
 probability and delay (see <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>).
 For this reason, the spike times of the presynaptic cells is saved separately (see <a class="reference internal" href="#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a>).</p>
 </div>
-<h3 id="presynaptic-spike-times"><span id="spike-times-format"></span>Presynaptic spike times<a class="headerlink" href="#presynaptic-spike-times" title="Permalink to this heading">¶</a></h3>
+<h3 id="presynaptic-spike-times"><span id="spike-times-format"></span>Presynaptic spike times<a class="headerlink" href="#presynaptic-spike-times" title="Link to this heading">¶</a></h3>
 <p>The raw output of the <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the spike times of presynaptic cells
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:</p>
 <ul class="simple">
@@ -1354,9 +1414,9 @@ for each individual simulation trial. Each file contains the following informati
 </ul>
 <p>These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis
 An example of the raw and parsed format is shown below:</p>
-<h4 id="id1">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h4>
+<h4 id="id1">Raw <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> output<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
 <table class="docutils data align-default" id="id12">
-<caption><span class="caption-text">Presynaptic spike times (single trial)</span><a class="headerlink" href="#id12" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Presynaptic spike times (single trial)</span><a class="headerlink" href="#id12" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>cell type</p></th>
 <th class="head"><p>cell ID</p></th>
@@ -1386,9 +1446,9 @@ An example of the raw and parsed format is shown below:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="id2">Parsed dataframe<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h4>
+<h4 id="id2">Parsed dataframe<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <table class="docutils data align-default" id="id13">
-<caption><span class="caption-text">Presynaptic spike times (all trials)</span><a class="headerlink" href="#id13" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text">Presynaptic spike times (all trials)</span><a class="headerlink" href="#id13" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>trial index</p></th>
 <th class="head"><p>cell type</p></th>
@@ -1437,12 +1497,12 @@ An example of the raw and parsed format is shown below:</p>
 probability and delay (see <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>).
 For this reason, the synapse activations are saved separately (see <a class="reference internal" href="#syn-activation-format"><span class="std std-ref">Synapse activation</span></a>).</p>
 </div>
-<h3 id="voltage-traces"><span id="voltage-traces-format"></span>Voltage traces<a class="headerlink" href="#voltage-traces" title="Permalink to this heading">¶</a></h3>
+<h3 id="voltage-traces"><span id="voltage-traces-format"></span>Voltage traces<a class="headerlink" href="#voltage-traces" title="Link to this heading">¶</a></h3>
 <p>The raw output of the <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> package contains <code class="docutils literal notranslate"><span class="pre">.npz</span></code> or <code class="docutils literal notranslate"><span class="pre">.csv</span></code> files containing the voltage traces of the postsynaptic cells.
 Unlike the synapse activations and spike times, it is possible for one such file to contain multiple trials.</p>
-<h4 id="voltage-trace-csv"><span id="voltage-traces-csv-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.csv</span></code><a class="headerlink" href="#voltage-trace-csv" title="Permalink to this heading">¶</a></h4>
+<h4 id="voltage-trace-csv"><span id="voltage-traces-csv-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.csv</span></code><a class="headerlink" href="#voltage-trace-csv" title="Link to this heading">¶</a></h4>
 <table class="docutils data align-default" id="id14">
-<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">vm_all_traces.csv</span></code></span><a class="headerlink" href="#id14" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">vm_all_traces.csv</span></code></span><a class="headerlink" href="#id14" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>t</p></th>
 <th class="head"><p>Vm run 00</p></th>
@@ -1473,7 +1533,7 @@ Unlike the synapse activations and spike times, it is possible for one such file
 </tr>
 </tbody>
 </table>
-<h4 id="voltage-trace-npz"><span id="voltage-traces-npz-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.npz</span></code><a class="headerlink" href="#voltage-trace-npz" title="Permalink to this heading">¶</a></h4>
+<h4 id="voltage-trace-npz"><span id="voltage-traces-npz-format"></span>Voltage trace <code class="docutils literal notranslate"><span class="pre">.npz</span></code><a class="headerlink" href="#voltage-trace-npz" title="Link to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">vm_all_traces.npz</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="n">array</span><span class="p">([[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">100.025</span><span class="p">,</span> <span class="mf">100.05</span><span class="p">,</span> <span class="mf">100.075</span><span class="p">],</span>
        <span class="p">[</span><span class="o">-</span><span class="mf">61.4607218758</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4665809176</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4735021526</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.4814187507</span><span class="p">],</span>
@@ -1481,10 +1541,10 @@ Unlike the synapse activations and spike times, it is possible for one such file
        <span class="p">[</span><span class="o">-</span><span class="mf">67.1747143695</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1580037786</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1424366078</span><span class="p">,</span> <span class="o">-</span><span class="mf">67.1279980017</span><span class="p">]])</span>
 </code></pre></div>
 </div>
-<h4 id="voltage-trace-dataframe"><span id="voltage-traces-df-format"></span>Voltage trace dataframe<a class="headerlink" href="#voltage-trace-dataframe" title="Permalink to this heading">¶</a></h4>
+<h4 id="voltage-trace-dataframe"><span id="voltage-traces-df-format"></span>Voltage trace dataframe<a class="headerlink" href="#voltage-trace-dataframe" title="Link to this heading">¶</a></h4>
 <p>The parsed dataframe is usually created by the <a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> function.</p>
 <table class="docutils data align-default" id="id15">
-<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id15" title="Permalink to this table">¶</a></caption>
+<caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">sim_trial_index</span></code></p></th>
 <th class="head"><p>0.000</p></th>
@@ -1511,7 +1571,7 @@ Unlike the synapse activations and spike times, it is possible for one such file
 </tr>
 </tbody>
 </table>
-<h2 id="hoc"><span id="hoc-file-format"></span>.hoc<a class="headerlink" href="#hoc" title="Permalink to this heading">¶</a></h2>
+<h2 id="hoc"><span id="hoc-file-format"></span>.hoc<a class="headerlink" href="#hoc" title="Link to this heading">¶</a></h2>
 <p>NEURON <span id="id3">[<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> file format for neuron morphologies.
 refer to the <a class="reference external" href="https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html">NEURON hoc documentation</a> for more info.
 The morphology is specified as a tree structure: the different sections of a neuron
@@ -1543,12 +1603,12 @@ neuron structure at that point <code class="docutils literal notranslate"><span 
 <span class="o">...</span>
 </code></pre></div>
 </div>
-<h2 id="mod"><span id="mod-file-format"></span>.mod<a class="headerlink" href="#mod" title="Permalink to this heading">¶</a></h2>
+<h2 id="mod"><span id="mod-file-format"></span>.mod<a class="headerlink" href="#mod" title="Link to this heading">¶</a></h2>
 <p>NEURON <span id="id4">[<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> file format for neuron mechanisms. Refer to the <a class="reference external" href="https://neuronline.github.io/compneuro/software/neuron/nmodl/">NEURON NMODL documentation</a>
 or <span id="id5"></span> (chapters 9 and 10) for more info.
 Used to define channel and synapse dynamics in NEURON simulations.
 See the folder <cite>mechanisms</cite> in the project source.</p>
-<h2 id="am"><span id="am-file-format"></span>.am<a class="headerlink" href="#am" title="Permalink to this heading">¶</a></h2>
+<h2 id="am"><span id="am-file-format"></span>.am<a class="headerlink" href="#am" title="Link to this heading">¶</a></h2>
 <p>The Amira proprietary VTK-like file format. Refer to the <a class="reference external" href="https://assets.thermofisher.com/TFS-Assets/MSD/Product-Guides/users-guide-amira-software-2019.pdf">amira documentation</a> for more information.
 This flexible format can be used to store 3D scalar meshes, 3D neuron morphology reconstructions, slice image data etc.</p>
 <p>Readers:</p>
@@ -1556,6 +1616,9 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
 <li><p><a class="reference internal" href="api_reference/single_cell_parser/reader/read_scalar_field.html#single_cell_parser.reader.read_scalar_field" title="single_cell_parser.reader.read_scalar_field (Python function) — Read ASCII AMIRA scalar field mesh files with high speed."><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_scalar_field</span></code></a></p></li>
 <li><p><a class="reference internal" href="api_reference/single_cell_parser/reader/read_landmark_file.html#single_cell_parser.reader.read_landmark_file" title="single_cell_parser.reader.read_landmark_file (Python function) — Read an AMIRA landmark file"><code class="xref py py-mod docutils literal notranslate"><span class="pre">read_landmark_file</span></code></a></p></li>
 </ul>
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1623,7 +1686,7 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1646,11 +1709,11 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=f281be69"></script>
         <script src="_static/tabs.js?v=3ee01567"></script>
-        <script src="_static/js/video.js?v=a9b6335e"></script>
         <script src="_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

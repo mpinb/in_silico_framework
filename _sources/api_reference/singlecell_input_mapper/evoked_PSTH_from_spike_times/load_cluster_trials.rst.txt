@@ -1,20 +1,18 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials`
-
-
-.. title:
 
 load_cluster_trials
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials(fname)
+
 
    Reads in a cluster file and returns a dictionary with the spike times for each trial.
 
-   :Parameters: **fname** (*str*) -- The name of the .cluster file.
+   :param fname: The name of the .cluster file.
+   :type fname: str
 
    :returns: A dictionary with the spike times for each trial.
    :rtype: dict
@@ -46,8 +44,7 @@ load_cluster_trials
        19: []}
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

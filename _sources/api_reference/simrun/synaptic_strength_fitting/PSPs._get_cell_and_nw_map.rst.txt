@@ -1,16 +1,19 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map`
+
+
 
 PSPs._get_cell_and_nw_map
 =========================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map(network_param=None)
+
 
    Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
 
-   :Parameters: **network_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`network_parameters_format` file.
+   :param network_param: The :ref:`network_parameters_format` file.
+   :type network_param: ~single_cell_parser.parameters.NTParameterSet
 
    :returns:
 
@@ -18,3 +21,8 @@ PSPs._get_cell_and_nw_map
                  and the :py:class:`single_cell_parser.network.NetworkMapper` that assigns synapses onto it.
    :rtype: tuple
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

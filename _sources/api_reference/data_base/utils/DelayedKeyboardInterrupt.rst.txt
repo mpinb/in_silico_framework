@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.DelayedKeyboardInterrupt`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DelayedKeyboardInterrupt
 ========================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -56,3 +52,7 @@ DelayedKeyboardInterrupt
       * - :py:obj:`handler <data_base.utils.DelayedKeyboardInterrupt.handler>`\ (sig, frame)
         - Handle KeyboardInterrupt signals and delay them
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

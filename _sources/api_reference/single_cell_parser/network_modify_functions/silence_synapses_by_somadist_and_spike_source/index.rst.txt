@@ -1,5 +1,7 @@
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ :mod:`~single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ 
+
 
 silence_synapses_by_somadist_and_spike_source
 =============================================
@@ -37,3 +39,7 @@ Functions
      - Silences synapse activation at a :paramref:`soma_dist_ranges`,
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

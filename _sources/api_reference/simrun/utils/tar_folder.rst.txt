@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.tar_folder`
-
-
-.. title:
 
 tar_folder
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.tar_folder(source_dir, delete_folder=True)
+
 
    Compress a folder to ``.tar`` format.
 
-   :Parameters: * **source_dir** (*str*) -- The path to the folder to compress.
-                * **delete_folder** (*bool*) -- If ``True``, the original folder will be deleted after compression.
+   :param source_dir: The path to the folder to compress.
+   :type source_dir: str
+   :param delete_folder: If ``True``, the original folder will be deleted after compression.
+   :type delete_folder: bool
 
    :returns: Compresses the folder in place.
    :rtype: None
@@ -23,8 +22,7 @@ tar_folder
    :raises RuntimeError: If the compression command fails
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

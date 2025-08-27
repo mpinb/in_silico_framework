@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.run`
+
+
 
 Rm.run
 ======
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.run(client=None, n_workers=None, strategy_selection=None)
+
 
    Run one or more strategies on the data.
 
@@ -20,9 +22,17 @@ Rm.run
    Each strategy implements different cost functions, depending on what to optimize for.
    However, they all implement a :py:meth:`get_score` method to evaluate the performance of the optimization.
 
-   :Parameters: * **client** (:py:class:`~dask.distributed.Client`) -- Dask client for remote optimization
-                * **n_workers** (*int*) -- Amount of workers to use for remote optimization
-                * **strategy_selection** (*list*) -- List of strategy names to run. If None, run all strategies.
+   :param client: Dask client for remote optimization
+   :type client: ~dask.distributed.Client
+   :param n_workers: Amount of workers to use for remote optimization
+   :type n_workers: int
+   :param strategy_selection: List of strategy names to run. If None, run all strategies.
+   :type strategy_selection: list
 
    .. seealso:: :py:mod:`simrun.modular_reduced_model_inference.strategy` for available strategies.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,20 +1,25 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PySection` ❭ :mod:`~single_cell_parser.cell.PySection.get_seg_conductance`
+
+
 
 PySection.get_seg_conductance
 =============================
 
+
 .. py:method:: single_cell_parser.cell.PySection.get_seg_conductance(seg, var, param_name)
+
 
    Get the conductance of a segment.
 
    Given a segment and a variable name, this function retrieves the conductance of the specified variable in the segment.
 
-   :Parameters: * **seg** (:py:class:`neuron.nrn.Segment`) -- The segment to retrieve the conductance from.
-                * **var** (*str*) -- The variable name of the mechanism e.g. ``NaTa_t``.
-                * **param_name** (*str*) -- The parameter name of the mechanism e.g. ``gNaTa_tbar``.
+   :param seg: The segment to retrieve the conductance from.
+   :type seg: neuron.nrn.Segment
+   :param var: The variable name of the mechanism e.g. ``NaTa_t``.
+   :type var: str
+   :param param_name: The parameter name of the mechanism e.g. ``gNaTa_tbar``.
+   :type param_name: str
 
    :returns: The conductance of the specified variable in the segment.
    :rtype: float
@@ -23,3 +28,8 @@ PySection.get_seg_conductance
 
    :raises AssertionError: If the segment is not an instance of :py:class:`neuron.nrn.Segment`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

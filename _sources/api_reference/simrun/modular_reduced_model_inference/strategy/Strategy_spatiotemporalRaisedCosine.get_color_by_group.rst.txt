@@ -1,19 +1,27 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group`
+
+
 
 Strategy_spatiotemporalRaisedCosine.get_color_by_group
 ======================================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group(group)
+
 
    Map groups to a color.
 
    Currently, only 'EXC' and 'INH' are mapped to red and grey, respectively.
 
-   :Parameters: **group** (*str*) -- The group to map to a color.
+   :param group: The group to map to a color.
+   :type group: str
 
    :returns: The color of the group.
    :rtype: str
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

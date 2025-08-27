@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.connected_to_dend_beyond`
-
-
-.. title:
 
 connected_to_dend_beyond
 ========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2)
+
 
    Check if a given section is connected to dendrites that reach beyon :paramref:`beyond_dist`.
 
@@ -18,17 +15,20 @@ connected_to_dend_beyond
    this method returns True if at least :paramref:`n_children_required` children
    of the branchpoint reach beyond :paramref:`dist`.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The Cell object
-                * **sec** (*int*) -- Index of Cell section
-                * **beyond_dist** (*float*) -- Distance threshold
-                * **n_children_required** (*int, optional*) -- Least amount of children required. Defaults to 2.
+   :param cell: The Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param sec: Index of Cell section
+   :type sec: int
+   :param beyond_dist: Distance threshold
+   :type beyond_dist: float
+   :param n_children_required: Least amount of children required. Defaults to 2.
+   :type n_children_required: int, optional
 
    :returns: Whether or not two of the section's children reach beyond :paramref:`beyond_dist`
    :rtype: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

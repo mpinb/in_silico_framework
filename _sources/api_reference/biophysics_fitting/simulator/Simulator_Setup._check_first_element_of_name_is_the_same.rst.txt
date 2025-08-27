@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup._check_first_element_of_name_is_the_same`
+
+
 
 Simulator_Setup._check_first_element_of_name_is_the_same
 ========================================================
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator_Setup._check_first_element_of_name_is_the_same(list1, list2)
+
 
    Check if the first element of the names of two lists are the same.
 
@@ -15,8 +17,15 @@ Simulator_Setup._check_first_element_of_name_is_the_same
    The names are thus not the function names necessarily. In general, these routine names
    are dot-separated strings that start with the stimulus they refer to e.g. ``'stim_1.setup'``.
 
-   :Parameters: * **list1** (*list*) -- A list of function tags.
-                * **list2** (*list*) -- A list of function tags.
+   :param list1: A list of function tags.
+   :type list1: list
+   :param list2: A list of function tags.
+   :type list2: list
 
    :raises ValueError: If the first element of the names of the two lists are not the same.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

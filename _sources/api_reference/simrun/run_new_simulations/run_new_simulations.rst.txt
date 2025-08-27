@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.run_new_simulations` ❭ :mod:`~simrun.run_new_simulations.run_new_simulations`
-
-
-.. title:
 
 run_new_simulations
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.run_new_simulations.run_new_simulations(cellParamName, evokedUpParamName, dirPrefix='', nSweeps=1000, nprocs=40, tStop=345, silent=True, scale_apical=None, cell_generator=None, child_process=False, tar=False)
+
 
    Create and simulate network-embedded neuron models.
 
@@ -32,18 +29,28 @@ run_new_simulations
    and additional recording sites defined in the neuron parameters.
    4. Finalize the simulation by removing the "_running" suffix from the dirname ``dirPrefix/results/YYYYMMDD-HHMM_UID_running``.
 
-   :Parameters: * **cellParamName** (*str*) -- Path to a :ref:`cell_parameters_format` file.
-                * **evokedUpParamName** (*str*) -- Path to a :ref:`network_parameters_format` file.
-                * **dirPrefix** (*str*) -- Prefix of the output directory. The final directory name will be ``dirPrefix/results/YYYYMMDD-HHMM_UID.``
-                * **seed** (*int*) -- Random seed for the simulation.
-                * **nSweps** (*int*) -- Number of simulations to run with these parameters.
+   :param cellParamName: Path to a :ref:`cell_parameters_format` file.
+   :type cellParamName: str
+   :param evokedUpParamName: Path to a :ref:`network_parameters_format` file.
+   :type evokedUpParamName: str
+   :param dirPrefix: Prefix of the output directory. The final directory name will be ``dirPrefix/results/YYYYMMDD-HHMM_UID.``
+   :type dirPrefix: str
+   :param seed: Random seed for the simulation.
+   :type seed: int
+   :param nSweps: Number of simulations to run with these parameters.
                   Trial-to-trial variability is introduced by the random seed in terms of
                   different network activity and connectivity realizations (see :py:meth:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
-                * **tStop** (*float*) -- Duration of each simulation in ms.
-                * **tStim** (*float*) -- Time in ms at which the in vivo evoked synaptic input should start.
-                * **scale_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrite. Assumes the cell has an apical dendrite - see below.
-                * **cell_generator** (*callable*) -- Function to generate the cell. If provided, :paramref:`cellParamName` is ignored.
-                * **tar** (*bool*) -- If True, the output directory is compressed to a tarball after the simulation is finished.
+   :type nSweps: int
+   :param tStop: Duration of each simulation in ms.
+   :type tStop: float
+   :param tStim: Time in ms at which the in vivo evoked synaptic input should start.
+   :type tStim: float
+   :param scale_apical: Function to scale the apical dendrite. Assumes the cell has an apical dendrite - see below.
+   :type scale_apical: callable, DEPRECATED
+   :param cell_generator: Function to generate the cell. If provided, :paramref:`cellParamName` is ignored.
+   :type cell_generator: callable
+   :param tar: If True, the output directory is compressed to a tarball after the simulation is finished.
+   :type tar: bool
 
    .. attention::
 
@@ -62,8 +69,7 @@ run_new_simulations
    :rtype: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

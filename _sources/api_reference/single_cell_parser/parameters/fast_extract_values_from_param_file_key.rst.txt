@@ -1,0 +1,21 @@
+
+
+fast_extract_values_from_param_file_key
+=======================================
+
+
+.. Signature -------------------------------
+
+.. py:function:: single_cell_parser.parameters.fast_extract_values_from_param_file_key(param_file, keys, val_is_array=False)
+
+
+   Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+
+   In contrast to building the parameters using :py:meth:`~build_parameters`, this method uses regex
+   to quickly parse out the parameter values.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

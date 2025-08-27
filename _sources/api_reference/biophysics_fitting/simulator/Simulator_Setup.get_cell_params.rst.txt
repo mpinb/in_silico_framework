@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_cell_params`
+
+
 
 Simulator_Setup.get_cell_params
 ===============================
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_cell_params(params)
+
 
    Get the cell parameters as an :py:class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
 
@@ -14,8 +16,14 @@ Simulator_Setup.get_cell_params
    create a :py:class:`~single_cell_parser.cell.Cell` object.
    This is helpful for inspecting what parameters have effectively been used for the simulation.
 
-   :Parameters: **params** (*pd.Series*) -- The parameter vector.
+   :param params: The parameter vector.
+   :type params: pd.Series
 
    :returns: The cell parameters.
    :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

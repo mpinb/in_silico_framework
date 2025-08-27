@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`
+
+
 
 NetworkMapper.create_network_embedding
 ======================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding(postCellName, boutonDensities, nrOfSamples=50)
+
 
    Create a single network realization from a bouton density field.
 
@@ -16,9 +18,12 @@ NetworkMapper.create_network_embedding
    the distribution of anatomical parameters across the population of realizations using
    :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
 
-   :Parameters: * **postCellName** (*str*) -- Path to the postsynaptic :ref:`hoc_file_format` morphology file.
-                * **boutonDensities** (*dict*) -- Dictionary of bouton densities, ordered by anatomical area and cell type.
-                * **nrOfSamples** (*int*) -- Number of network realizations to create.
+   :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` morphology file.
+   :type postCellName: str
+   :param boutonDensities: Dictionary of bouton densities, ordered by anatomical area and cell type.
+   :type boutonDensities: dict
+   :param nrOfSamples: Number of network realizations to create.
+   :type nrOfSamples: int
 
    .. warning::
 
@@ -32,3 +37,8 @@ NetworkMapper.create_network_embedding
 
    :returns: None. Writes output files to disk.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

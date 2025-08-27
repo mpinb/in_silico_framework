@@ -1,5 +1,7 @@
 
-:mod:`simrun` ❭ :mod:`~simrun.PSP_with_cell_modification`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
+
 
 PSP_with_cell_modification
 ==========================
@@ -55,3 +57,7 @@ Functions
      - Combine two PSPs objects into one.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

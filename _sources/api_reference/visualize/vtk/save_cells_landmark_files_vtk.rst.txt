@@ -1,35 +1,38 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.vtk` ❭ :mod:`~visualize.vtk.save_cells_landmark_files_vtk`
-
-
-.. title:
 
 save_cells_landmark_files_vtk
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.vtk.save_cells_landmark_files_vtk(sa, synapse_location_pdf, times_to_show, outdir, celltypes=None, tspan=1, set_index=['synapse_ID', 'celltype'])
+
 
    Save synapse activations as vtk point cloud files for each timepoint.
 
    Given a synapse activation dataframe and a synapse location dataframe,
    this method saves the synapse locations as vtk point cloud files for each timepoint in :paramref:`times_to_show`.
 
-   :Parameters: * **sa** (*pd.DataFrame*) -- Synapse activation dataframe.
-                * **synapse_location_pdf** (*pd.DataFrame*) -- Synapse location dataframe.
-                * **times_to_show** (*list*) -- List of timepoints to save the data for.
-                * **outdir** (*str*) -- Directory to save the files to.
-                * **celltypes** (*list, optional*) -- List of celltypes to save the data for. Defaults to None.
-                * **tspan** (*int, optional*) -- Time span to show. Defaults to 1.
-                * **set_index** (*list, optional*) -- Index to set in the synapse activation dataframe. Defaults to ['synapse_ID', 'celltype'].
+   :param sa: Synapse activation dataframe.
+   :type sa: pd.DataFrame
+   :param synapse_location_pdf: Synapse location dataframe.
+   :type synapse_location_pdf: pd.DataFrame
+   :param times_to_show: List of timepoints to save the data for.
+   :type times_to_show: list
+   :param outdir: Directory to save the files to.
+   :type outdir: str
+   :param celltypes: List of celltypes to save the data for. Defaults to None.
+   :type celltypes: list, optional
+   :param tspan: Time span to show. Defaults to 1.
+   :type tspan: int, optional
+   :param set_index: Index to set in the synapse activation dataframe. Defaults to ['synapse_ID', 'celltype'].
+   :type set_index: list, optional
 
    :returns: None. Writes out a .vtk file for each timepoint in :paramref:`times_to_show`.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

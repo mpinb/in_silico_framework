@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.analyze` ❭ :mod:`~data_base.analyze.temporal_binning` ❭ :mod:`~data_base.analyze.temporal_binning.temporal_binning_pd`
-
-
-.. title:
 
 temporal_binning_pd
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.analyze.temporal_binning.temporal_binning_pd(df, bin_size=None, min_time=None, max_time=None, normalize=True, bin_borders=None, rate=False)
+
 
    Bin timevalues in a pandas DataFrame.
 
@@ -18,20 +15,26 @@ temporal_binning_pd
    It assumes that all columns whose names are integer-convertible contain time values.
    This is true for :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes.
 
-   :Parameters: * **df** (:py:class:`pandas.DataFrame`) -- DataFrame with containing time values in columns whose name are integer-convertible.
-                * **bin_size** (*float, optional*) -- Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
-                * **min_time** (*float, optional*) -- Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
-                * **max_time** (*float, optional*) -- Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
-                * **bin_borders** (*list, optional*) -- List of bin borders. If not specified, :paramref:`bin_size` has to be specified.
-                * **normalize** (*bool, optional*) -- If True, normalize the output to the total number of elements in the DataFrame.
-                * **rate** (*bool, optional*) -- If True, normalize the output to the bin size.
+   :param df: DataFrame with containing time values in columns whose name are integer-convertible.
+   :type df: pandas.DataFrame
+   :param bin_size: Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+   :type bin_size: float, optional
+   :param min_time: Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
+   :type min_time: float, optional
+   :param max_time: Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
+   :type max_time: float, optional
+   :param bin_borders: List of bin borders. If not specified, :paramref:`bin_size` has to be specified.
+   :type bin_borders: list, optional
+   :param normalize: If True, normalize the output to the total number of elements in the DataFrame.
+   :type normalize: bool, optional
+   :param rate: If True, normalize the output to the bin size.
+   :type rate: bool, optional
 
    :returns: Tuple containing the bin borders and the binned data.
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

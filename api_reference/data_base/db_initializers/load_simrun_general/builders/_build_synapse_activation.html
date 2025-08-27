@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -522,6 +524,21 @@
   
   
     <li class="md-nav__item">
+      <a href="_filter_filelist_by_health.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/_filter_filelist_by_health.rst (reference label)" class="md-ellipsis">_<wbr>filter_<wbr>filelist_<wbr>by_<wbr>health</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="_build_core.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/_build_core.rst (reference label)" class="md-ellipsis">_<wbr>build_<wbr>core</span>
       </a>
@@ -569,16 +586,43 @@
       
         <li class="md-nav__item">
   <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation (Python function) — Parse the syn_activation_format and spike_times_format data." class="md-ellipsis">data_<wbr>base.<wbr>db_<wbr>initializers.<wbr>load_<wbr>simrun_<wbr>general.<wbr>builders._<wbr>build_<wbr>synapse_<wbr>activation</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation (Python function) — Parse the syn_activation_format and spike_times_format data." class="md-ellipsis">data_<wbr>basedb_<wbr>initializersload_<wbr>simrun_<wbr>generalbuilders_<wbr>build_<wbr>synapse_<wbr>activation</span>
   </a>
   
-    <nav class="md-nav" aria-label="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation">
+    <nav class="md-nav" aria-label="data_basedb_initializersload_simrun_generalbuilders_build_synapse_activation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db (Python parameter) — The database to which the data should be added." class="md-ellipsis">db</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition (Python parameter) — If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over 10000 entries)." class="md-ellipsis">repartition</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks (Python parameter) — Number of chunks to split the data into." class="md-ellipsis">n_<wbr>chunks</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -640,8 +684,23 @@
   
   
     <li class="md-nav__item">
-      <a href="_get_rec_site_managers.html" class="md-nav__link">
-        <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/_get_rec_site_managers.rst (reference label)" class="md-ellipsis">_<wbr>get_<wbr>rec_<wbr>site_<wbr>managers</span>
+      <a href="_get_recsite_labels_from_neup.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/_get_recsite_labels_from_neup.rst (reference label)" class="md-ellipsis">_<wbr>get_<wbr>recsite_<wbr>labels_<wbr>from_<wbr>neup</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="_get_rec_site_label_fn_map.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/_get_rec_site_label_fn_map.rst (reference label)" class="md-ellipsis">_<wbr>get_<wbr>rec_<wbr>site_<wbr>label_<wbr>fn_<wbr>map</span>
       </a>
     </li>
   
@@ -695,6 +754,21 @@
     <li class="md-nav__item">
       <a href="../filepath_resolution/index.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/index.rst (reference label)" class="md-ellipsis">filepath_<wbr>resolution</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../health/index.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/health/index.rst (reference label)" class="md-ellipsis">health</span>
       </a>
     </li>
   
@@ -1196,16 +1270,43 @@
       
         <li class="md-nav__item">
   <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation (Python function) — Parse the syn_activation_format and spike_times_format data." class="md-ellipsis">data_<wbr>base.<wbr>db_<wbr>initializers.<wbr>load_<wbr>simrun_<wbr>general.<wbr>builders._<wbr>build_<wbr>synapse_<wbr>activation</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation (Python function) — Parse the syn_activation_format and spike_times_format data." class="md-ellipsis">data_<wbr>basedb_<wbr>initializersload_<wbr>simrun_<wbr>generalbuilders_<wbr>build_<wbr>synapse_<wbr>activation</span>
   </a>
   
-    <nav class="md-nav" aria-label="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation">
+    <nav class="md-nav" aria-label="data_basedb_initializersload_simrun_generalbuilders_build_synapse_activation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db (Python parameter) — The database to which the data should be added." class="md-ellipsis">db</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition (Python parameter) — If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over 10000 entries)." class="md-ellipsis">repartition</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks (Python parameter) — Number of chunks to split the data into." class="md-ellipsis">n_<wbr>chunks</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1235,21 +1336,23 @@
                   
 
 
-<p><a class="reference internal" href="../../../index.html#module-data_base" title="data_base (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">data_base</span></code></a> ❭ <a class="reference internal" href="../../index.html#module-data_base.db_initializers" title="data_base.db_initializers (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">db_initializers</span></code></a> ❭ <a class="reference internal" href="../index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">load_simrun_general</span></code></a> ❭ <a class="reference internal" href="index.html#module-data_base.db_initializers.load_simrun_general.builders" title="data_base.db_initializers.load_simrun_general.builders (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">builders</span></code></a> ❭ <a class="reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation" title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation (Python function) — Parse the syn_activation_format and spike_times_format data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">_build_synapse_activation</span></code></a></p>
-<h1 id="build-synapse-activation">_build_synapse_activation<a class="headerlink" href="#build-synapse-activation" title="Permalink to this heading">¶</a></h1>
+<h1 id="build-synapse-activation">_build_synapse_activation<a class="headerlink" href="#build-synapse-activation" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation">
-<span class="sig-prename descclassname"><span class="pre">data_base.db_initializers.load_simrun_general.builders.</span></span><span class="sig-name descname"><span class="pre">_build_synapse_activation</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">db</span></span></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">repartition</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">n_chunks</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5000</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../../../index.html#module-data_base" title="data_base (Python module)"><span class="sig-name descname"><span class="pre">data_base</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../../index.html#module-data_base.db_initializers" title="data_base.db_initializers (Python module)"><span class="sig-name descname"><span class="pre">db_initializers</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><span class="sig-name descname"><span class="pre">load_simrun_general</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-data_base.db_initializers.load_simrun_general.builders" title="data_base.db_initializers.load_simrun_general.builders (Python module)"><span class="sig-name descname"><span class="pre">builders</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">_build_synapse_activation</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db" title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db (Python parameter) — The database to which the data should be added."><span class="n"><span class="pre">db</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition" title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition (Python parameter) — If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over 10000 entries)."><span class="n"><span class="pre">repartition</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks" title="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks (Python parameter) — Number of chunks to split the data into."><span class="n"><span class="pre">n_chunks</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5000</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation" title="Link to this definition">¶</a></dt>
 <dd><p>Parse the <a class="reference internal" href="../../../../../file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> and <a class="reference internal" href="../../../../../file_formats.html#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a> data.</p>
 <p>The synapse and presynaptic spike times data is added to the database under the keys
 <code class="docutils literal notranslate"><span class="pre">synapse_activation</span></code> and <code class="docutils literal notranslate"><span class="pre">cell_activation</span></code> respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>db</strong> (<a class="reference internal" href="../../../isf_data_base/ISFDataBase.html#data_base.isf_data_base.ISFDataBase" title="data_base.isf_data_base.ISFDataBase (Python class) — Main database class."><code class="xref py py-class docutils literal notranslate"><span class="pre">DataBase</span></code></a>) – The database to which the data should be added.</p></li>
-<li><p><strong>repartition</strong> (<em>bool</em>) – If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over <span class="math notranslate nohighlight">\(10000\)</span> entries).</p></li>
-<li><p><strong>n_chunks</strong> (<em>int</em>) – Number of chunks to split the data into. Default is 5000.</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../../isf_data_base/ISFDataBase.html#data_base.isf_data_base.ISFDataBase" title="data_base.isf_data_base.ISFDataBase (Python class) — Main database class.">DataBase</a></span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.db" title="Permalink to this definition">¶</a></dt><dd><p>The database to which the data should be added.</p>
+</dd>
+<dt id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition"><span class="sig-name descname">repartition</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.repartition" title="Permalink to this definition">¶</a></dt><dd><p>If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over <span class="math notranslate nohighlight">\(10000\)</span> entries).</p>
+</dd>
+<dt id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks"><span class="sig-name descname">n_chunks</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation.n_chunks" title="Permalink to this definition">¶</a></dt><dd><p>Number of chunks to split the data into. Default is 5000.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-returns">Returns<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_synapse_activation-returns" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>None</p>
@@ -1257,6 +1360,9 @@
 </dl>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1324,7 +1430,7 @@
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1347,11 +1453,11 @@
         <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="../../../../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../../../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

@@ -1,20 +1,18 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.load_reader`
-
-
-.. title:
 
 load_reader
 ===========
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.load_reader(dict_)
+
 
    Load a reader object from a dictionary.
 
-   :Parameters: **dict_** (*dict*) -- A dictionary containing the attributes of the reader object.
+   :param dict_: A dictionary containing the attributes of the reader object.
+   :type dict_: dict
 
    :returns: A reader object.
    :rtype: object
@@ -22,8 +20,7 @@ load_reader
    :raises NotImplementedError: If the class of the reader object is not recognized. Currently, only :py:class:`spike_analysis.core.ReaderSmr` is supported.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

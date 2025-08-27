@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.sim_control` ❭ :mod:`~single_cell_parser.sim_control.SimControl`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SimControl
 ==========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -44,48 +40,52 @@ SimControl
    >>> sim.go()
    >>> sim.show()
 
-   :Parameters: * **cell** (:py:class:`neuron:Section`) -- The cell to simulate.
-                * **simTime** (*float*) -- Simulation time (ms). Default: 5
-                * **dt** (*float*) -- Time step (ms). Default: 0.001
-                * **T** (*float*) -- Temperature (Celsius). Default: 37
+   :param cell: The cell to simulate.
+   :type cell: neuron:Section
+   :param simTime: Simulation time (ms). Default: 5
+   :type simTime: float
+   :param dt: Time step (ms). Default: 0.001
+   :type dt: float
+   :param T: Temperature (Celsius). Default: 37
+   :type T: float
 
    :Attributes:
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      The cell to simulate.
+         The cell to simulate.
 
-      :type: :py:class:`neuron:Section`
+         :type: :py:class:`neuron:Section`
 
-   .. attribute:: simTime
+      .. attribute:: simTime
 
-      Simulation time [ms]. Default: 5 [ms]
+         Simulation time [ms]. Default: 5 [ms]
 
-      :type: float
+         :type: float
 
-   .. attribute:: dt
+      .. attribute:: dt
 
-      Time step [ms]. Default: 0.001 [ms]
+         Time step [ms]. Default: 0.001 [ms]
 
-      :type: float
+         :type: float
 
-   .. attribute:: T
+      .. attribute:: T
 
-      Temperature [C]. Default
+         Temperature [C]. Default
 
-      :type: float
+         :type: float
 
-   .. attribute:: goAlready
+      .. attribute:: goAlready
 
-      Simulation status
+         Simulation status
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: h
+      .. attribute:: h
 
-      NEURON interface
+         NEURON interface
 
-      :type: :py:class:`neuron.h`
+         :type: :py:class:`neuron.h`
 
    :Methods:
 
@@ -104,3 +104,7 @@ SimControl
       * - :py:obj:`go <single_cell_parser.sim_control.SimControl.go>`\ (simTime)
         - Run the simulation.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

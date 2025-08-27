@@ -1,5 +1,7 @@
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.serialize_cell`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
+
 
 serialize_cell
 ==============
@@ -49,3 +51,7 @@ Functions
      - Load a :py:class:`~single_cell_parser.cell.Cell` object from a file in .pickle format.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

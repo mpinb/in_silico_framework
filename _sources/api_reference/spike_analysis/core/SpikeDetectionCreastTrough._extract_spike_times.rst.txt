@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough` ❭ :mod:`~spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times`
+
+
 
 SpikeDetectionCreastTrough._extract_spike_times
 ===============================================
 
+
 .. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times()
+
 
    Extracts spike times from voltage traces.
 
@@ -17,3 +19,8 @@ SpikeDetectionCreastTrough._extract_spike_times
    :returns: A list containing spike times.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

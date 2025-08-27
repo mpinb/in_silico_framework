@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 DataSplitEvaluation
 ===================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,51 +33,52 @@ DataSplitEvaluation
    This class provides an interface to split input data in separate train-test sets,
    and to evaluate the reduced model performance scores corresponding to the splits.
 
-   :Parameters: **Rm** (:py:class:`Rm`) -- Reduced model. Set after running :py:meth:`setup`
+   :param Rm: Reduced model. Set after running :py:meth:`setup`
+   :type Rm: Rm
 
    :Attributes:
 
-   .. attribute:: Rm
+      .. attribute:: Rm
 
-      Reduced model. Set after running :py:meth:`setup`
+         Reduced model. Set after running :py:meth:`setup`
 
-      :type: :py:class:`Rm`
+         :type: :py:class:`Rm`
 
-   .. attribute:: splits
+      .. attribute:: splits
 
-      Dictionary of splits
+         Dictionary of splits
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: solvers
+      .. attribute:: solvers
 
-      List of solvers
+         List of solvers
 
-      :type: list
+         :type: list
 
-   .. attribute:: optimizer_results
+      .. attribute:: optimizer_results
 
-      List of optimization results
+         List of optimization results
 
-      :type: list
+         :type: list
 
-   .. attribute:: optimizer_results_keys
+      .. attribute:: optimizer_results_keys
 
-      List of optimization results keys
+         List of optimization results keys
 
-      :type: list
+         :type: list
 
-   .. attribute:: scores
+      .. attribute:: scores
 
-      List of scores
+         List of scores
 
-      :type: list
+         :type: list
 
-   .. attribute:: scores_keys
+      .. attribute:: scores_keys
 
-      List of scores
+         List of scores
 
-      :type: list
+         :type: list
 
    :Methods:
 
@@ -102,3 +99,7 @@ DataSplitEvaluation
       * - :py:obj:`compute_scores <simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores>`\ ()
         - Compute the score of the optimization.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

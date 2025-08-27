@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.utils` ❭ :mod:`~data_base.utils.get_file_or_folder_that_endswith`
-
-
-.. title:
 
 get_file_or_folder_that_endswith
 ================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.utils.get_file_or_folder_that_endswith(path, endswith)
+
 
    Get the file or folder in a directory that ends with a certain string
 
-   :Parameters: * **path** (*str*) -- the path
-                * **endswith** (*str*) -- the string
+   :param path: the path
+   :type path: str
+   :param endswith: the string
+   :type endswith: str
 
    :returns: the file or folder
    :rtype: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

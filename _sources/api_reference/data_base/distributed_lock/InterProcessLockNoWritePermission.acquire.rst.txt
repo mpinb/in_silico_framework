@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`data_base` ❭ :mod:`~data_base.distributed_lock` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission` ❭ :mod:`~data_base.distributed_lock.InterProcessLockNoWritePermission.acquire`
+
+
 
 InterProcessLockNoWritePermission.acquire
 =========================================
 
+
 .. py:method:: data_base.distributed_lock.InterProcessLockNoWritePermission.acquire()
+
 
    Acquire the lock on a path if the user has write permissions.
 
@@ -15,3 +17,8 @@ InterProcessLockNoWritePermission.acquire
    :returns: True if the lock was acquired successfully or if locking is not necessary, False otherwise.
    :rtype: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

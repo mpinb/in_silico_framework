@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition`
+
+
 
 RaisedCosineBasis.get_superposition
 ===================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_superposition(x)
+
 
    Get the weighed sum :math:`\mathbf{w}(\tau)` of the basis functions :math:`f`.
 
@@ -17,8 +19,14 @@ RaisedCosineBasis.get_superposition
 
        \mathbf{w}(\tau) = \sum_{i} x_i\ f_i(\tau) = \mathbf{x} \cdot \mathbf{f}(\tau)
 
-   :Parameters: **x** (*array*) -- The (learnable) input weights :math:`\mathbf{x}`
+   :param x: The (learnable) input weights :math:`\mathbf{x}`
+   :type x: array
 
    :returns: The weighed sum of the basis functions.
    :rtype: array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

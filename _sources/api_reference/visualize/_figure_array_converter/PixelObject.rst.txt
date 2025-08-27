@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize._figure_array_converter` ❭ :mod:`~visualize._figure_array_converter.PixelObject`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 PixelObject
 ===========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -22,24 +18,31 @@ PixelObject
    
    Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
 
-   :Parameters: * **extent** (*list*) -- The extent of the plot.
-                * **ax** (*matplotlib.pyplot.Axes*) -- The axis to convert to a pixel array. Default is ``None``.
-                * **array** (*numpy.ndarray*) -- The pixel array to store. Default is ``None``.
+   :param extent: The extent of the plot.
+   :type extent: list
+   :param ax: The axis to convert to a pixel array. Default is ``None``.
+   :type ax: matplotlib.pyplot.Axes
+   :param array: The pixel array to store. Default is ``None``.
+   :type array: numpy.ndarray
 
    :Attributes:
 
-   .. attribute:: extent
+      .. attribute:: extent
 
-      The extent of the plot.
+         The extent of the plot.
 
-      :type: list
+         :type: list
 
-   .. attribute:: array
+      .. attribute:: array
 
-      The pixel array of the plot.
+         The pixel array of the plot.
 
-      :type: numpy.ndarray
+         :type: numpy.ndarray
 
-   :raises ValueError: If neither an ax nor an array is specified.
-   :raises ValueError: If both an ax and an array are specified
+      :raises ValueError: If neither an ax nor an array is specified.
+      :raises ValueError: If both an ax and an array are specified
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

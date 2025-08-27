@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_param_modify_functions` ❭ :mod:`~single_cell_parser.network_param_modify_functions._has_evoked`
-
-
-.. title:
 
 _has_evoked
 ===========
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.network_param_modify_functions._has_evoked(param, celltype)
+
 
    Check if the celltype has evoked activity.
 
-   :Parameters: * **param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The :ref:`network_parameters_format`.
-                * **celltype** (*str*) -- The celltype to check.
+   :param param: The :ref:`network_parameters_format`.
+   :type param: ~single_cell_parser.parameters.NTParameterSet
+   :param celltype: The celltype to check.
+   :type celltype: str
 
    :returns: True if the celltype has evoked activity, False otherwise.
    :rtype: bool
@@ -23,8 +22,7 @@ _has_evoked
    :raises AssertionError: If :paramref:`celltype` is not in the network
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

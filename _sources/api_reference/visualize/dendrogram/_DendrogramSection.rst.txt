@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSection`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _DendrogramSection
 ==================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -35,56 +31,62 @@ _DendrogramSection
    The usecase of this class is to be a leightweight dataclass, used in the :py:class:`Dendrogram` and :py:class:`DendrogramStatistics` classes.
 
 
-   :Parameters: * **name** (*str*) -- The name of the section.
-                * **x_dist_start** (*float*) -- The starting distance of the section in :math:`\mu m`.
-                * **x_dist_end** (*float*) -- The ending distance of the section in :math:`\mu m`.
-                * **sec** (:py:class:`~single_cell_parser.cell.PySection`) -- The neuron section.
-                * **main_bifurcation** (*bool*) -- Whether the section is the main bifurcation. Default is ``False``.
-                * **sec_id** (*int*) -- The section id of the section.
+   :param name: The name of the section.
+   :type name: str
+   :param x_dist_start: The starting distance of the section in :math:`\mu m`.
+   :type x_dist_start: float
+   :param x_dist_end: The ending distance of the section in :math:`\mu m`.
+   :type x_dist_end: float
+   :param sec: The neuron section.
+   :type sec: ~single_cell_parser.cell.PySection
+   :param main_bifurcation: Whether the section is the main bifurcation. Default is ``False``.
+   :type main_bifurcation: bool
+   :param sec_id: The section id of the section.
+   :type sec_id: int
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the section.
+         The name of the section.
 
-      :type: str
+         :type: str
 
-   .. attribute:: x_dist_start
+      .. attribute:: x_dist_start
 
-      The starting distance of the section in :math:`\mu m`.
+         The starting distance of the section in :math:`\mu m`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: x_dist_end
+      .. attribute:: x_dist_end
 
-      The ending distance of the section in :math:`\mu m`.
+         The ending distance of the section in :math:`\mu m`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: sec
+      .. attribute:: sec
 
-      The neuron section.
+         The neuron section.
 
-      :type: :py:class:`~single_cell_parser.cell.PySection`
+         :type: :py:class:`~single_cell_parser.cell.PySection`
 
-   .. attribute:: synapses
+      .. attribute:: synapses
 
-      A dictionary of synapses in the section.
+         A dictionary of synapses in the section.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: main_bifurcation
+      .. attribute:: main_bifurcation
 
-      Whether the section is the main bifurcation. Default is ``False``.
+         Whether the section is the main bifurcation. Default is ``False``.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: sec_id
+      .. attribute:: sec_id
 
-      The section id of the section.
+         The section id of the section.
 
-      :type: int
+         :type: int
 
    :Methods:
 
@@ -97,3 +99,7 @@ _DendrogramSection
       * - :py:obj:`_add_synapse <visualize.dendrogram._DendrogramSection._add_synapse>`\ (label, x)
         - Add a synapse to a dendrogram section.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

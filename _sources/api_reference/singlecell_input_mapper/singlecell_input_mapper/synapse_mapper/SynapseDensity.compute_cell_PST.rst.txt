@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST`
+
+
 
 SynapseDensity.compute_cell_PST
 ===============================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST()
+
 
    Compute 3D length/surface area density of the postsynaptic targets in the mesh.
 
@@ -46,3 +48,8 @@ SynapseDensity.compute_cell_PST
            'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3d10>}
            }
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`
-
-
-.. title:
 
 write_anatomical_realization_map
 ================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map(fname=None, functionalMap=None, anatomicalID=None)
+
 
    Writes a :ref:`con_file_format` file containing a list of all functional connections.
 
@@ -19,9 +16,12 @@ write_anatomical_realization_map
    Uses :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet`
    to generate the number of connected cells spreadsheet.
 
-   :Parameters: * **fname** (*str*) -- Name of the output file
-                * **functionalMap** (*list*) -- List of tuples, each containing the cell type, presynaptic cell index and synapse index
-                * **anatomicalID** (*str*) -- ID of the anatomical realization
+   :param fname: Name of the output file
+   :type fname: str
+   :param functionalMap: List of tuples, each containing the cell type, presynaptic cell index and synapse index
+   :type functionalMap: list
+   :param anatomicalID: ID of the anatomical realization
+   :type anatomicalID: str
 
    .. warning::
 
@@ -31,8 +31,7 @@ write_anatomical_realization_map
    :returns: None. Writes results to disk.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

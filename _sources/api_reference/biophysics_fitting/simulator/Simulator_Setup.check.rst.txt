@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.check`
+
+
 
 Simulator_Setup.check
 =====================
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator_Setup.check()
+
 
    Check if the setup is correct.
 
@@ -21,3 +23,8 @@ Simulator_Setup.check
    - The number of :paramref:`stim_setup_funs`, :paramref:`stim_run_funs` and :paramref:`stim_response_measure_funs` are the same.
    - Calls each additional check function in :paramref:`check_funs`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

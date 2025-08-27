@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.PointCell` ❭ :mod:`~single_cell_parser.cell.PointCell._add_synapse_pointer`
+
+
 
 PointCell._add_synapse_pointer
 ==============================
 
+
 .. py:method:: single_cell_parser.cell.PointCell._add_synapse_pointer(synapse)
+
 
    Add a :py:class:`Synapse` to the cell.
 
    The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects
    to a postsynaptic :py:class:`Cell` object.
 
-   :Parameters: **synapse** (:py:class:`Synapse`) -- Synapse object.
+   :param synapse: Synapse object.
+   :type synapse: Synapse
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.get_mymap`
-
-
-.. title:
 
 get_mymap
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.optimizer.get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error=3)
+
 
    Get a map function for evaluating the parameters.
 
@@ -19,18 +16,22 @@ get_mymap
    Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
    This is useful for debugging and for analyzing the optimization results.
 
-   :Parameters: * **db_setup** (:py:class:`~data_base.DataBase`) -- Database containing the setup of the optimization.
-                * **db_run** (:py:class:`~data_base.DataBase`) -- The database for the optimization run containing sub-databases.
-                * **c** (:py:class:`~dask.distributed.Client`) -- The distributed client.
-                * **satisfactory_boundary_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
-                * **n_reschedule_on_runtime_error** (*int*) -- The number of times the optimization is rescheduled if a runtime error occurs.
+   :param db_setup: Database containing the setup of the optimization.
+   :type db_setup: ~data_base.DataBase
+   :param db_run: The database for the optimization run containing sub-databases.
+   :type db_run: ~data_base.DataBase
+   :param c: The distributed client.
+   :type c: ~dask.distributed.Client
+   :param satisfactory_boundary_dict: A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+   :type satisfactory_boundary_dict: dict | None
+   :param n_reschedule_on_runtime_error: The number of times the optimization is rescheduled if a runtime error occurs.
+   :type n_reschedule_on_runtime_error: int
 
    :returns: The map function for evaluating the parameters. this function is passed to the :py:class:`bluepyopt.optimisations.DEAPOptimisation` object.
    :rtype: Callable
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

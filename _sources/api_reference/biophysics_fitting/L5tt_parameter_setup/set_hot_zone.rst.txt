@@ -1,23 +1,24 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_hot_zone`
-
-
-.. title:
 
 set_hot_zone
 ============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.L5tt_parameter_setup.set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None)
+
 
    Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
 
-   :Parameters: * **cell_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict) -- The cell parameter dictionary.
-                * **min_** (*float*) -- The minimum distance from the soma.
-                * **max_** (*float*) -- The maximum distance from the soma.
-                * **outsidescale_sections** (*list*) -- A list of sections where the channels should be inserted.
+   :param cell_param: The cell parameter dictionary.
+   :type cell_param: ~single_cell_parser.parameters.NTParameterSet
+   :param min_: The minimum distance from the soma.
+   :type min_: float
+   :param max_: The maximum distance from the soma.
+   :type max_: float
+   :param outsidescale_sections: A list of sections where the channels should be inserted.
+   :type outsidescale_sections: list
 
    :returns: The updated cell_param.
    :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict
@@ -28,8 +29,7 @@ set_hot_zone
       For more information about the hot zone, refer to :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

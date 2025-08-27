@@ -1,21 +1,31 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static`
+
+
 
 _Strategy.get_score_static
 ==========================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static(_get_score, x, cupy_split=None)
+
    :staticmethod:
 
 
    Convert the strategy-specific ``_get_score`` method to a static method.
 
-   :Parameters: * **_get_score** (*callable*) -- The strategy-specific ``_get_score`` method.
-                * **x** (*array*) -- The input array.
-                * **cupy_split** (*array*) -- The array splits.
+   :param _get_score: The strategy-specific ``_get_score`` method.
+   :type _get_score: callable
+   :param x: The input array.
+   :type x: array
+   :param cupy_split: The array splits.
+   :type cupy_split: array
 
    :returns: The score.
    :rtype: array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

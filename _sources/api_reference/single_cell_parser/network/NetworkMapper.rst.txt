@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 NetworkMapper
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -56,41 +52,44 @@ NetworkMapper
 
    Initialize NetworkMapper.
 
-   :Parameters: * **postCell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to map synapses onto.
-                * **nwParam** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The network parameter set (see :ref:`network_parameters_format` for more info).
-                * **simParam** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The simulation parameter set. Default: None.
+   :param postCell: The cell to map synapses onto.
+   :type postCell: ~single_cell_parser.cell.Cell
+   :param nwParam: The network parameter set (see :ref:`network_parameters_format` for more info).
+   :type nwParam: ~single_cell_parser.parameters.NTParameterSet
+   :param simParam: The simulation parameter set. Default: None.
+   :type simParam: ~single_cell_parser.parameters.NTParameterSet
 
    :Attributes:
 
-   .. attribute:: cells
+      .. attribute:: cells
 
-      dictionary holding all presynaptic cells ordered by cell type.
+         dictionary holding all presynaptic cells ordered by cell type.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: connected_cells
+      .. attribute:: connected_cells
 
-      dictionary holding indices of all active presynaptic cells ordered by cell type.
+         dictionary holding indices of all active presynaptic cells ordered by cell type.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: postCell
+      .. attribute:: postCell
 
-      reference to postsynaptic (multi-compartment) cell model.
+         reference to postsynaptic (multi-compartment) cell model.
 
-      :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :py:class:`~single_cell_parser.cell.Cell`
 
-   .. attribute:: nwParam
+      .. attribute:: nwParam
 
-      network parameter set (see :ref:`network_parameters_format` for more info).
+         network parameter set (see :ref:`network_parameters_format` for more info).
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. attribute:: simParam
+      .. attribute:: simParam
 
-      simulation parameter set.
+         simulation parameter set.
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
    :Methods:
 
@@ -139,3 +138,7 @@ NetworkMapper
       * - :py:obj:`reconnect_network <single_cell_parser.network.NetworkMapper.reconnect_network>`\ ()
         - Re-generate activity and connectivity patterns for a network.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

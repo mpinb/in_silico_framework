@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_spiketrain_activities`
+
+
 
 NetworkMapper._create_spiketrain_activities
 ===========================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._create_spiketrain_activities(preCellType, networkParameters)
+
 
    Create spike train times based on the network parameters spiketrain keywords.
 
@@ -14,3 +16,8 @@ NetworkMapper._create_spiketrain_activities
    spike times based on the network parameter keys "noise", "start", "interval", "nspikes".
    See :ref:`network_parameters_format` for more information.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

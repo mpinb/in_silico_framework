@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 PSPs
 ====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -41,116 +37,126 @@ PSPs
    
    Calculate PSP amlitudes of single synapses and fit synaptic strength
 
-   :Parameters: * **neuron_param** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- The :ref:`cell_parameters_format`.
-                * **confile** (*str*) -- Path to a :ref:`con_file_format` file.
-                * **gExRange** (*list*) -- List of synaptic strength values to simulate (in :math:`\mu S`).
-                  The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
-                * **AMPA_component** (*float*)
-                * **NMDA_component** (*float*)
-                * **vardt** (*bool*) -- Whether to use the variable step size solver.
-                * **mode** (*str*) -- Whether to activate each synapse one by one, or each cell one by one.
-                  A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
-                  Options: ``('cells', 'synapses')``
-                  Default: ``'cells'``
-                * **exc_inh** (*str*) -- Whether to fit excitatory or inhibitory synapses.
-                  Used to infer the deflection direction of the PSP (positive or negative).
-                  Options: ``('exc', 'inh')``
-                  Default: ``'exc'``
-                * **tStim** (*float*) -- Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
-                * **tEnd** (*float*) -- End time of the simulation.
+   :param neuron_param: The :ref:`cell_parameters_format`.
+   :type neuron_param: ~single_cell_parser.parameters.NTParameterSet
+   :param confile: Path to a :ref:`con_file_format` file.
+   :type confile: str
+   :param gExRange: List of synaptic strength values to simulate (in :math:`\mu S`).
+                    The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
+   :type gExRange: list
+   :param AMPA_component:
+   :type AMPA_component: float
+   :param NMDA_component:
+   :type NMDA_component: float
+   :param vardt: Whether to use the variable step size solver.
+   :type vardt: bool
+   :param mode: Whether to activate each synapse one by one, or each cell one by one.
+                A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
+                Options: ``('cells', 'synapses')``
+                Default: ``'cells'``
+   :type mode: str
+   :param exc_inh: Whether to fit excitatory or inhibitory synapses.
+                   Used to infer the deflection direction of the PSP (positive or negative).
+                   Options: ``('exc', 'inh')``
+                   Default: ``'exc'``
+   :type exc_inh: str
+   :param tStim: Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
+   :type tStim: float
+   :param tEnd: End time of the simulation.
+   :type tEnd: float
 
    :Attributes:
 
-   .. attribute:: neuron_param
+      .. attribute:: neuron_param
 
-      The :ref:`cell_parameters_format`.
+         The :ref:`cell_parameters_format`.
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. attribute:: confile
+      .. attribute:: confile
 
-      Path to a :ref:`con_file_format` file.
+         Path to a :ref:`con_file_format` file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: gExRange
+      .. attribute:: gExRange
 
-      List of allowed synaptic strength values (in :math:`\mu S`).
+         List of allowed synaptic strength values (in :math:`\mu S`).
 
-      :type: list
+         :type: list
 
-   .. attribute:: AMPA_component
+      .. attribute:: AMPA_component
 
-      
+         
 
-      :type: float
+         :type: float
 
-   .. attribute:: NMDA_component
+      .. attribute:: NMDA_component
 
-      
+         
 
-      :type: float
+         :type: float
 
-   .. attribute:: vardt
+      .. attribute:: vardt
 
-      Whether to use the variable step size solver.
+         Whether to use the variable step size solver.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: mode
+      .. attribute:: mode
 
-      Whether to activate each synapse one by one, or each cell one by one.
-      A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
-      Options: ``('cells', 'synapses')``
-      Default: ``'cells'``
+         Whether to activate each synapse one by one, or each cell one by one.
+         A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
+         Options: ``('cells', 'synapses')``
+         Default: ``'cells'``
 
-      :type: str
+         :type: str
 
-   .. attribute:: exc_inh
+      .. attribute:: exc_inh
 
-      Whether to fit excitatory or inhibitory synapses.
-      Used to infer the deflection direction of the PSP (positive or negative).
-      Options: ``('exc', 'inh')``
-      Default: ``'exc'``
+         Whether to fit excitatory or inhibitory synapses.
+         Used to infer the deflection direction of the PSP (positive or negative).
+         Options: ``('exc', 'inh')``
+         Default: ``'exc'``
 
-      :type: str
+         :type: str
 
-   .. attribute:: tStim
+      .. attribute:: tStim
 
-      Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
+         Time of the synaptic activation. Should be large enough such that the membrane voltage has time to stabilize.
 
-      :type: float
+         :type: float
 
-   .. attribute:: tEnd
+      .. attribute:: tEnd
 
-      End time of the simulation.
+         End time of the simulation.
 
-      :type: float
+         :type: float
 
-   .. attribute:: futures
+      .. attribute:: futures
 
-      List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.
+         List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.
 
-      :type: list
+         :type: list
 
-   .. attribute:: result
+      .. attribute:: result
 
-      List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
+         List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
 
-      :type: list
+         :type: list
 
-   .. attribute:: network_param
+      .. attribute:: network_param
 
-      The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
-      The synapse type is defined by :paramref:`exc_inh`.
+         The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
+         The synapse type is defined by :paramref:`exc_inh`.
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. attribute:: network_params_by_celltype
+      .. attribute:: network_params_by_celltype
 
-      List of network parameters for each cell type in the network.
+         List of network parameters for each cell type in the network.
 
-      :type: list
+         :type: list
 
    :Methods:
 
@@ -185,3 +191,7 @@ PSPs
       * - :py:obj:`plot_vt <simrun.synaptic_strength_fitting.PSPs.plot_vt>`\ (population, opacity, g, merge, merge\_celltype\_kwargs, fig)
         - Plot the voltage traces of the PSPs.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

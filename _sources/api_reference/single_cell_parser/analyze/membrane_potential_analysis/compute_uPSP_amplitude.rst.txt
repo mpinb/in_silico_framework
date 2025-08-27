@@ -1,36 +1,37 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.compute_uPSP_amplitude`
-
-
-.. title:
 
 compute_uPSP_amplitude
 ======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_uPSP_amplitude(t, v, tSyn, isEPSP=True, t_width_baseline=10.0)
+
 
    Compute the amplitude of a uPSP.
 
    Simple method for determining amplitude of a unitary post-synaptic potential (uPSP)
 
-   :Parameters: * **t** (*list*) -- Time vector
-                * **v** (*list*) -- Membrane potential vector
-                * **tSyn** (*float*) -- Timepoint of synaptic activation.
-                * **isEPSP** (*bool*) -- If True, the uPSP is an excitatory post-synaptic potential (EPSP).
+   :param t: Time vector
+   :type t: list
+   :param v: Membrane potential vector
+   :type v: list
+   :param tSyn: Timepoint of synaptic activation.
+   :type tSyn: float
+   :param isEPSP: If True, the uPSP is an excitatory post-synaptic potential (EPSP).
                   If False, the uPSP is an inhibitory post-synaptic potential (IPSP).
                   Default is ``True``.
-                * **t_width_baseline** (*float*) -- Width of the time window to calculate the baseline membrane voltage.
-                  Default is :math:`10.0 ms`.
+   :type isEPSP: bool
+   :param t_width_baseline: Width of the time window to calculate the baseline membrane voltage.
+                            Default is :math:`10.0 ms`.
+   :type t_width_baseline: float
 
    :returns: Amplitude of the uPSP.
    :rtype: float
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

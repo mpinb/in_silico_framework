@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_annotate_bursts_in_st`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_annotate_bursts_in_st
 ===============================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -32,36 +28,40 @@ STAPlugin_annotate_bursts_in_st
 
    .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'bursts_st'.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
-                * **event_maxtimes** (*dict, optional*) -- Dictionary containing the maximum duration of each event type. Default: ``{0:0, 1:10, 2:30}``
-                * **event_names** (*dict, optional*) -- Dictionary containing the names of the event types. Default: ``{0: "singlet", 1: "doublet", 2: "triplet"}``
+   :param name: The name of the plugin. Defaults to 'bursts_st'.
+   :type name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+   :type source: str, optional
+   :param event_maxtimes: Dictionary containing the maximum duration of each event type. Default: ``{0:0, 1:10, 2:30}``
+   :type event_maxtimes: dict, optional
+   :param event_names: Dictionary containing the names of the event types. Default: ``{0: "singlet", 1: "doublet", 2: "triplet"}``
+   :type event_names: dict, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin.
+         The name of the plugin.
 
-      :type: str
+         :type: str
 
-   .. attribute:: source
+      .. attribute:: source
 
-      The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+         The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
 
-      :type: str, optional
+         :type: str, optional
 
-   .. attribute:: event_maxtimes
+      .. attribute:: event_maxtimes
 
-      Dictionary containing the maximum duration of each event type.
+         Dictionary containing the maximum duration of each event type.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: event_names
+      .. attribute:: event_names
 
-      Dictionary containing the names of the event types.
+         Dictionary containing the names of the event types.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -74,3 +74,7 @@ STAPlugin_annotate_bursts_in_st
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup>`\ (spike\_times\_analysis)
         - Sets up the analysis: annotates bursts in a spike times dataframe.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

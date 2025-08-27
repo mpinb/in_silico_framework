@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times` ❭ :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.load_spike_times`
-
-
-.. title:
 
 load_spike_times
 ================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.load_spike_times(spikeTimesName)
+
 
    Reads in .cluster files containing spike time recordings
 
@@ -23,8 +20,7 @@ load_spike_times
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

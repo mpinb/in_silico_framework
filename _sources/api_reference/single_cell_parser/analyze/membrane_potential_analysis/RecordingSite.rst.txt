@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSite`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 RecordingSite
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -27,34 +23,41 @@ RecordingSite
       The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
       class for setting up recording sites and parsing their voltage traces.
 
-   :Parameters: * **secID** (*int*) -- Section ID of the recording site.
-                * **segID** (*int*) -- Segment ID of the recording site.
-                * **label** (*str*) -- Identifier label.
+   :param secID: Section ID of the recording site.
+   :type secID: int
+   :param segID: Segment ID of the recording site.
+   :type segID: int
+   :param label: Identifier label.
+   :type label: str
 
    :Attributes:
 
-   .. attribute:: secID
+      .. attribute:: secID
 
-      Section ID of the recording site.
+         Section ID of the recording site.
 
-      :type: int
+         :type: int
 
-   .. attribute:: segID
+      .. attribute:: segID
 
-      Segment ID of the recording site.
+         Segment ID of the recording site.
 
-      :type: int
+         :type: int
 
-   .. attribute:: label
+      .. attribute:: label
 
-      Identifier label.
+         Identifier label.
 
-      :type: str
+         :type: str
 
-   .. attribute:: vRecordings
+      .. attribute:: vRecordings
 
-      List of recorded voltage vectors.
-      Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
+         List of recorded voltage vectors.
+         Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
 
-      :type: list
+         :type: list
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders` ❭ :mod:`~data_base.db_initializers.load_simrun_general.builders._build_param_files`
-
-
-.. title:
 
 _build_param_files
 ==================
 
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_param_files(db, client)
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_param_files(db, paramfile_copy_config=None, client=None)
+
 
    Copy, transform and rename parameterfiles to a db.
 
@@ -18,8 +15,13 @@ _build_param_files
    and :ref:`con_file_format` files to the database.
    In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
 
-   :Parameters: * **db** (:py:class:`~data_base.DataBase`) -- The database to which the parameterfiles should be added.
-                * **client** (:py:class:`~dask.distributed.client.Client`) -- The Dask client to use for parallel computation.
+   :param db: The database to which the parameterfiles should be added.
+   :type db: ~data_base.DataBase
+   :param client: The Dask client to use for parallel computation.
+   :type client: ~dask.distributed.client.Client
+   :param paramfile_copy_config: Dictionary containing configuration on how to organise parameterfiles in the database.
+                                 See :py:func:`data_base.db_initializers.load_simrun_general.init` for more info.
+   :type paramfile_copy_config: dict, optional
 
    :returns: None. Sets the keys ``parameterfiles_cell_folder`` and ``parameterfiles_network_folder`` in the database.
 
@@ -31,8 +33,7 @@ _build_param_files
       only true when used in the context of the :py:meth:`~data_base.db_initializers.load_simrun_general.init` function.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

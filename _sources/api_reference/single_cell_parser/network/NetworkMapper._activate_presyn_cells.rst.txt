@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._activate_presyn_cells`
+
+
 
 NetworkMapper._activate_presyn_cells
 ====================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._activate_presyn_cells()
+
 
    Create PointCell or SpikeTrain activation patters for each presynaptic cell.
 
@@ -19,3 +21,8 @@ NetworkMapper._activate_presyn_cells
    1. For :py:class:`~single_cell_parser.cell.PointCell`: see :py:meth:`_create_pointcell_activities`
    2. For :py:class:`~single_cell_parser.cell.SpikeTrain`: see :py:meth:`_create_spiketrain_activities`
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

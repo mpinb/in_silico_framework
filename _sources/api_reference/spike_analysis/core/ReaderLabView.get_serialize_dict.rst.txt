@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderLabView` ❭ :mod:`~spike_analysis.core.ReaderLabView.get_serialize_dict`
+
+
 
 ReaderLabView.get_serialize_dict
 ================================
 
+
 .. py:method:: spike_analysis.core.ReaderLabView.get_serialize_dict()
+
 
    Get a dictionary containing the attributes of the ReaderLabView object.
 
@@ -21,3 +23,8 @@ ReaderLabView.get_serialize_dict
                      - apply_filter (bool): Whether to apply a highpass filter to the data.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

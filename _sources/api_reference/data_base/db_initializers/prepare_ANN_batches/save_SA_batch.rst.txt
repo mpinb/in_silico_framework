@@ -1,35 +1,40 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.save_SA_batch`
-
-
-.. title:
 
 save_SA_batch
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.save_SA_batch(sa_, selected_stis, batch_id, outdir=None, section_distances_df=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, synaptic_weight_dict=None)
+
 
    Save a batch of synapse activation times to a file.
 
-   :Parameters: * **sa_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
-                * **selected_stis** (*list*) -- List of selected spike times
-                * **batch_id** (*int*) -- Batch id
-                * **outdir** (*str*) -- Output directory
-                * **section_distances_df** (*pd.DataFrame, optional*) -- DataFrame representing each section's spatial bins and binsizes. Defaults to None.
-                * **spatial_bin_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
-                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 600.
-                * **bin_size** (*int, optional*) -- Size of the time bins. Defaults to 1.
+   :param sa_: Augmented synapse activation dataframe
+   :type sa_: pd.DataFrame
+   :param selected_stis: List of selected spike times
+   :type selected_stis: list
+   :param batch_id: Batch id
+   :type batch_id: int
+   :param outdir: Output directory
+   :type outdir: str
+   :param section_distances_df: DataFrame representing each section's spatial bins and binsizes. Defaults to None.
+   :type section_distances_df: pd.DataFrame, optional
+   :param spatial_bin_names: List of spatial bin names. Defaults to None.
+   :type spatial_bin_names: list, optional
+   :param min_time: Min time in ms. Defaults to 0.
+   :type min_time: int, optional
+   :param max_time: Max time in ms. Defaults to 600.
+   :type max_time: int, optional
+   :param bin_size: Size of the time bins. Defaults to 1.
+   :type bin_size: int, optional
 
    :returns: A dask delayed object. When computed, saves the synapse activation times to ``outdir/batch_<batch_id>_SYNAPSE_ACTIVATION.npy``.
    :rtype: dask.delayed
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

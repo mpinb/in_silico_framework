@@ -1,27 +1,23 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.nan_if_error`
-
-
-.. title:
 
 nan_if_error
 ============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.hay.evaluation.nan_if_error(fun)
+
 
    Wrapper method that returns nan if an error occurs.
 
-   :Parameters: **fun** -- function to run
+   :param fun: function to run
 
    :returns: wrapped function
    :rtype: function
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

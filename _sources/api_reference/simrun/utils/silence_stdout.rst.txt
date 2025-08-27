@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.utils` ❭ :mod:`~simrun.utils.silence_stdout`
-
-
-.. title:
 
 silence_stdout
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.utils.silence_stdout(fun)
+
 
    Decorator function to silence a function's output.
 
@@ -18,14 +15,14 @@ silence_stdout
    and restores the original standard output afterwards.
    To be used as a decorator.
 
-   :Parameters: **fun** (*callable*) -- The function to silence.
+   :param fun: The function to silence.
+   :type fun: callable
 
    :returns: The silenced function.
    :rtype: callable
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

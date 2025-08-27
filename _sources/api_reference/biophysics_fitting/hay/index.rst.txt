@@ -1,5 +1,7 @@
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
+
 
 hay
 ===
@@ -41,3 +43,7 @@ Modules
    * - :py:obj:`specification <biophysics_fitting.hay.specification>`
      - This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

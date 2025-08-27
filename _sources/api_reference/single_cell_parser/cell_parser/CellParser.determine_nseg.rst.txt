@@ -1,18 +1,23 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
+
+
 
 CellParser.determine_nseg
 =========================
 
+
 .. py:method:: single_cell_parser.cell_parser.CellParser.determine_nseg(f=100.0, full=False, max_seg_length=None)
+
 
    Determine the number of segments for each section according to the d-lambda rule.
 
-   :Parameters: * **f** (*float, optional*) -- frequency used for determining discretization. Default is :math:`100.0 Hz`.
-                * **full** (*bool, optional*) -- Whether or not to use full spatial discretization (one segment per morphology point). Default is ``False``.
-                * **max_seg_length** (*float, optional*) -- Maximum segment length. Default is ``None``.
+   :param f: frequency used for determining discretization. Default is :math:`100.0 Hz`.
+   :type f: float, optional
+   :param full: Whether or not to use full spatial discretization (one segment per morphology point). Default is ``False``.
+   :type full: bool, optional
+   :param max_seg_length: Maximum segment length. Default is ``None``.
+   :type max_seg_length: float, optional
 
    .. note::
 
@@ -39,3 +44,8 @@ CellParser.determine_nseg
 
    .. seealso:: :cite:t:`hines2001neuron` (Chapter 5).
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,31 +1,31 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.generate_synapse_activations` ❭ :mod:`~simrun.generate_synapse_activations.generate_synapse_activations`
-
-
-.. title:
 
 generate_synapse_activations
 ============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.generate_synapse_activations.generate_synapse_activations(cellParamName, evokedUpParamName, dirPrefix='', nSweeps=1000, nprocs=40, tStop=345, silent=True)
+
 
    Generates :paramref:`nSweeps` * :paramref:`nprocs` synapse activation files and writes them to
    the folder ``dirPrefix/results/simName``.
 
    For each process, a new seed is generated using the seed generator.
 
-   :Parameters: * **cellParamName** (*str*) -- Path to a :ref:`cell_parameters_format` file,
-                  containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
-                * **evokedUpParamName** (*str*) -- Path to a :ref:`network_parameters_format` file,
-                  containing information on synapse and network parameters per cell type.
-                * **nSweeps** -- number of synapse activations per process
-                * **nprocs** -- number of independent processes
-                * **tStop** -- time in ms at which the synaptic input should stop.
+   :param cellParamName: Path to a :ref:`cell_parameters_format` file,
+                         containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+   :type cellParamName: str
+   :param evokedUpParamName: Path to a :ref:`network_parameters_format` file,
+                             containing information on synapse and network parameters per cell type.
+   :type evokedUpParamName: str
+   :param nSweeps: number of synapse activations per process
+   :param nprocs: number of independent processes
+   :param tStop: time in ms at which the synaptic input should stop.
 
-   :Parameters: **cellParamName** (*str*) -- Path to cell parameter file.
+   :param cellParamName: Path to cell parameter file.
+   :type cellParamName: str
 
    :returns: Can be computed with arbitrary scheduler.
              Computing delayed object returns List of lists. Each child list contains the paths
@@ -35,8 +35,7 @@ generate_synapse_activations
    .. seealso:: :py:mod:`simrun.seed_manager` for seed generation.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

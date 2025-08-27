@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge.is_valid`
+
+
 
 _Edge.is_valid
 ==============
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.reader._Edge.is_valid()
+
 
    Check if this edge is valid.
 
@@ -15,3 +17,8 @@ _Edge.is_valid
    :returns: True if the edge is valid, False otherwise.
    :rtype: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

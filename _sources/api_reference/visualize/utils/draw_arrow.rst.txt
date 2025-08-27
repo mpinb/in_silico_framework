@@ -1,33 +1,35 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.draw_arrow`
-
-
-.. title:
 
 draw_arrow
 ==========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.utils.draw_arrow(morphology, ax, highlight_section=None, highlight_x=None, highlight_arrow_kwargs=None, arrow_size=50)
+
 
    Highlight a morphology section with an :py:class:`Arrow3D`.
 
    This method is used by :py:class:`CellMorphologyVisualizer` to annotate morphology sections.
 
-   :Parameters: * **morphology** (*pd.DataFrame*) -- The morphology dataframe containing the coordinates of the sections.
-                * **ax** (*matplotlib.axes.Axes*) -- The matplotlib axes object to draw the arrow on.
-                * **highlight_section** (*int, optional*) -- The section index to highlight. If None, no section is highlighted. Default is ``None``.
-                * **highlight_x** (*float, optional*) -- The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
-                * **highlight_arrow_kwargs** (*dict, optional*) -- Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
-                * **arrow_size** (*int, optional*) -- The size of the arrow. Default is 50.
+   :param morphology: The morphology dataframe containing the coordinates of the sections.
+   :type morphology: pd.DataFrame
+   :param ax: The matplotlib axes object to draw the arrow on.
+   :type ax: matplotlib.axes.Axes
+   :param highlight_section: The section index to highlight. If None, no section is highlighted. Default is ``None``.
+   :type highlight_section: int, optional
+   :param highlight_x: The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
+   :type highlight_x: float, optional
+   :param highlight_arrow_kwargs: Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+   :type highlight_arrow_kwargs: dict, optional
+   :param arrow_size: The size of the arrow. Default is 50.
+   :type arrow_size: int, optional
 
    :returns: None
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

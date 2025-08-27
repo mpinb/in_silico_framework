@@ -1,20 +1,29 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static`
+
+
 
 _Strategy.get_y_static
 ======================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static(y, numpy_split=None)
+
    :staticmethod:
 
 
    Fetch the labels for the given split.
 
-   :Parameters: * **y** (*array*) -- The labels.
-                * **numpy_split** (*array*) -- The split.
+   :param y: The labels.
+   :type y: array
+   :param numpy_split: The split.
+   :type numpy_split: array
 
    :returns: The labels for the given split.
    :rtype: array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

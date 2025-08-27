@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_synapse_activation_array_weighted`
-
-
-.. title:
 
 get_synapse_activation_array_weighted
 =====================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.get_synapse_activation_array_weighted(sa_, selected_stis=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, use_weights=False)
+
 
    Create a 4D array of synapse activation times.
 
@@ -23,19 +20,24 @@ get_synapse_activation_array_weighted
 
    The array is of shape ``(len(selected_stis), 2, len(spatial_bin_names), (max_time - min_time)//bin_size)``.
 
-   :Parameters: * **sa_** (*pd.DataFrame*) -- Augmented synapse activation dataframe
-                * **selected_stis** (*list, optional*) -- List of selected spike times. Defaults to None.
-                * **spatial_bin_names** (*list, optional*) -- List of spatial bin names. Defaults to None.
-                * **min_time** (*int, optional*) -- Min time in ms. Defaults to 0.
-                * **max_time** (*int, optional*) -- Max time in ms. Defaults to 600.
-                * **use_weights** (*bool, optional*) -- If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
+   :param sa_: Augmented synapse activation dataframe
+   :type sa_: pd.DataFrame
+   :param selected_stis: List of selected spike times. Defaults to None.
+   :type selected_stis: list, optional
+   :param spatial_bin_names: List of spatial bin names. Defaults to None.
+   :type spatial_bin_names: list, optional
+   :param min_time: Min time in ms. Defaults to 0.
+   :type min_time: int, optional
+   :param max_time: Max time in ms. Defaults to 600.
+   :type max_time: int, optional
+   :param use_weights: If True, weigh the synapse activation times with the corresponding synapse weights. Defaults to False.
+   :type use_weights: bool, optional
 
    :returns: A 4D array of synapse activation times.
    :rtype: array
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

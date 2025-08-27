@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling` ❭ :mod:`~data_base.db_initializers.load_simrun_general.file_handling.get_max_commas`
-
-
-.. title:
 
 get_max_commas
 ==============
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_max_commas(paths)
+
 
    Get the maximum amount of delimiters across many files.
 
@@ -21,14 +18,14 @@ get_max_commas
    This function determines the maximum amount of delimiters across all files post-hoc,
    so that the data can be padded out and read in.
 
-   :Parameters: **paths** (*list*) -- List of paths to the synapse and cell activation files.
+   :param paths: List of paths to the synapse and cell activation files.
+   :type paths: list
 
    :returns: The maximum amount of delimiters across all files.
    :rtype: int
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

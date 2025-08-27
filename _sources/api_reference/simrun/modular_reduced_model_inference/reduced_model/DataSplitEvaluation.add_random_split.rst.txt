@@ -1,18 +1,28 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_random_split`
+
+
 
 DataSplitEvaluation.add_random_split
 ====================================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_random_split(name, percentage_train=0.7, l=None)
+
 
    Set the train-test split randomly.
 
-   :Parameters: * **name** (*str*) -- Name of the split
-                * **percentage_train** (*float*) -- Percentage of trials to use for training
-                * **l** (*list*) -- List of indices to use for the split. If None, use all trials.
+   :param name: Name of the split
+   :type name: str
+   :param percentage_train: Percentage of trials to use for training
+   :type percentage_train: float
+   :param l: List of indices to use for the split. If None, use all trials.
+   :type l: list
 
    :raises AssertionError: If the split name already exists.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,5 +1,7 @@
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
+
 
 cell_morphology_visualizer
 ==========================
@@ -60,3 +62,7 @@ Functions
      - Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

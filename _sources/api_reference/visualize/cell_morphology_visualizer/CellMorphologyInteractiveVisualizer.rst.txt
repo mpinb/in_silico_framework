@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 CellMorphologyInteractiveVisualizer
 ===================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -35,67 +31,75 @@ CellMorphologyInteractiveVisualizer
 
    Initializes the CellMorphologyInteractiveVisualizer object.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- Cell object
-                * **align_trunk** (*bool*) -- Whether or not to align the cell trunk with the z-axis.
-                * **dash_ip** (*str*) -- IP address to run dash server on.
-                * **show** (*bool*) -- set to False for testing
-                * **renderer** (*str*) -- Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected"
-                * **t_start** (*float*) -- start time point of our time series visualization
-                * **t_stop** (*float*) -- last time point of our time series visualization
-                * **t_step** (*float*) -- time between the different time points of our visualization
+   :param cell: Cell object
+   :type cell: ~single_cell_parser.cell.Cell
+   :param align_trunk: Whether or not to align the cell trunk with the z-axis.
+   :type align_trunk: bool
+   :param dash_ip: IP address to run dash server on.
+   :type dash_ip: str
+   :param show: set to False for testing
+   :type show: bool
+   :param renderer: Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected"
+   :type renderer: str
+   :param t_start: start time point of our time series visualization
+   :type t_start: float
+   :param t_stop: last time point of our time series visualization
+   :type t_stop: float
+   :param t_step: time between the different time points of our visualization
+   :type t_step: float
 
    :Attributes:
 
-   .. attribute:: dash_ip
+      .. attribute:: dash_ip
 
-      IP address to run dash server on.
+         IP address to run dash server on.
 
-      :type: str
+         :type: str
 
-   .. attribute:: show
+      .. attribute:: show
 
-      Whether to show the plot. Set to False for testing purposes. Default: True
+         Whether to show the plot. Set to False for testing purposes. Default: True
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: background_color
+      .. attribute:: background_color
 
-      Background color of the plot. Defaults to "#f0f0f0"
+         Background color of the plot. Defaults to "#f0f0f0"
 
-      :type: str
+         :type: str
 
-   .. attribute:: renderer
+      .. attribute:: renderer
 
-      Type of backend renderer to use for rendering the javascript/HTML VBox.
-      Defaults to "notebook_connected". Available renderers are:
-      
-      - 'plotly_mimetype'
-      - 'jupyterlab'
-      - 'nteract'
-      - 'vscode'
-      - 'notebook'
-      - 'notebook_connected'
-      - 'kaggle'
-      - 'azure'
-      - 'colab'
-      - 'cocalc'
-      - 'databricks'
-      - 'json'
-      - 'png'
-      - 'jpeg'
-      - 'jpg'
-      - 'svg'
-      - 'pdf'
-      - 'browser'
-      - 'firefox'
-      - 'chrome'
-      - 'chromium'
-      - 'iframe'
-      - 'iframe_connected'
-      - 'sphinx_gallery'
-      - 'sphinx_gallery_png'
+         Type of backend renderer to use for rendering the javascript/HTML VBox.
+         Defaults to "notebook_connected". Available renderers are:
+         
+         - 'plotly_mimetype'
+         - 'jupyterlab'
+         - 'nteract'
+         - 'vscode'
+         - 'notebook'
+         - 'notebook_connected'
+         - 'kaggle'
+         - 'azure'
+         - 'colab'
+         - 'cocalc'
+         - 'databricks'
+         - 'json'
+         - 'png'
+         - 'jpeg'
+         - 'jpg'
+         - 'svg'
+         - 'pdf'
+         - 'browser'
+         - 'firefox'
+         - 'chrome'
+         - 'chromium'
+         - 'iframe'
+         - 'iframe_connected'
+         - 'sphinx_gallery'
+         - 'sphinx_gallery_png'
 
-      :type: str
+         :type: str
 
    :Methods:
 
@@ -112,5 +116,9 @@ CellMorphologyInteractiveVisualizer
       * - :py:obj:`interactive_plot <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot>`\ (color, renderer, diameter, time\_point, show)
         - This method shows a plot with an interactive cell, overlayed with scalar data (if provided with the data argument).
       * - :py:obj:`interactive_app <visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app>`\ (color, t\_start, t\_stop, t\_step)
-        - :Parameters: * **color** (*str | list*) -- If you want some other color overlayed on the cell morphology.
+        - :param color: If you want some other color overlayed on the cell morphology.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

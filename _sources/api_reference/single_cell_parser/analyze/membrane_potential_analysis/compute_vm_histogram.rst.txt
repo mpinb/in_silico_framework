@@ -1,28 +1,26 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis` ❭ :mod:`~single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram`
-
-
-.. title:
 
 compute_vm_histogram
 ====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram(vTraces, bins=None)
+
 
    Compute the histogram of membrane voltage traces.
 
-   :Parameters: * **vTraces** (*numpy.ndarray*) -- Array of (one or more) voltage traces. Shape: (``n_traces``, ``n_timepoints``).
-                * **bins** (*numpy.ndarray*) -- Bins for the histogram. Default is ``np.arange(-80, -40, 2)``.
+   :param vTraces: Array of (one or more) voltage traces. Shape: (``n_traces``, ``n_timepoints``).
+   :type vTraces: numpy.ndarray
+   :param bins: Bins for the histogram. Default is ``np.arange(-80, -40, 2)``.
+   :type bins: numpy.ndarray
 
    :returns: The histogram and the bins
    :rtype: tuple
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,31 +1,35 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot2`
-
-
-.. title:
 
 rasterplot2
 ===========
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.rasterplot.rasterplot2(st, ax=None, x_offset=0, c=None, plot_kwargs=dict(solid_capstyle='butt'), y_offset=None, y_plot_length=1, marker='line')
+
 
    Plot a rasterplot from :ref:`spike_times_format`.
 
-   :Parameters: * **st** (*pandas.DataFrame*) -- A DataFrame containing the spike times, where each row is a single trial of a single unit.
-                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
-                * **x_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
-                * **c** (*str or array-like, optional*) -- An optional color for the plot. Can be a single color format string, or a sequence of colors.
-                * **plot_kwargs** (*dict, optional*) -- Additional keyword arguments for the plot function. Default is {'solid_capstyle': 'butt'}.
-                * **y_offset** (*int, optional*) -- An optional starting y-value for the plot. If not provided, it is set to the number of rows in the DataFrame.
-                * **y_plot_length** (*float, optional*) -- The length of the line to plot for each event. Default is 1.
-                * **marker** (*str, optional*) -- The marker style to use for plotting events. Defaults to 'line'. If 'line', lines of defined length are plotted.
+   :param st: A DataFrame containing the spike times, where each row is a single trial of a single unit.
+   :type st: pandas.DataFrame
+   :param ax: An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+   :type ax: matplotlib.axes.Axes, optional
+   :param x_offset: An offset to apply to the x-values (event times). Default is 0.
+   :type x_offset: float, optional
+   :param c: An optional color for the plot. Can be a single color format string, or a sequence of colors.
+   :type c: str or array-like, optional
+   :param plot_kwargs: Additional keyword arguments for the plot function. Default is {'solid_capstyle': 'butt'}.
+   :type plot_kwargs: dict, optional
+   :param y_offset: An optional starting y-value for the plot. If not provided, it is set to the number of rows in the DataFrame.
+   :type y_offset: int, optional
+   :param y_plot_length: The length of the line to plot for each event. Default is 1.
+   :type y_plot_length: float, optional
+   :param marker: The marker style to use for plotting events. Defaults to 'line'. If 'line', lines of defined length are plotted.
+   :type marker: str, optional
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

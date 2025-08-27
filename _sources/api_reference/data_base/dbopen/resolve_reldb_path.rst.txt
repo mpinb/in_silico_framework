@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.dbopen` ❭ :mod:`~data_base.dbopen.resolve_reldb_path`
-
-
-.. title:
 
 resolve_reldb_path
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.dbopen.resolve_reldb_path(path, db_basedir=None)
+
 
    Resolve a relative database path
 
@@ -26,15 +23,16 @@ resolve_reldb_path
       If the database is a sub-database, the path will be relative to the sub-database, not
       the parent database.
 
-   :Parameters: * **path** (*str*) -- The relative path of the form ``reldb://...``.
-                * **db** (:py:class:`~data_base.DataBase`) -- The database.
+   :param path: The relative path of the form ``reldb://...``.
+   :type path: str
+   :param db: The database.
+   :type db: ~data_base.DataBase
 
    :returns: The resolved path.
    :rtype: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

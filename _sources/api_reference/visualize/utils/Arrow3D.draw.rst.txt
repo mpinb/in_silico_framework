@@ -1,12 +1,19 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.utils` ❭ :mod:`~visualize.utils.Arrow3D` ❭ :mod:`~visualize.utils.Arrow3D.draw`
+
+
 
 Arrow3D.draw
 ============
 
+
 .. py:method:: visualize.utils.Arrow3D.draw(renderer)
+
 
    Draw the arrow.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.rasterplot` ❭ :mod:`~visualize.rasterplot.rasterplot2_pdf_grouped`
-
-
-.. title:
 
 rasterplot2_pdf_grouped
 =======================
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color='k')
+
 
    Plot a rasterplot per group of :ref:`spike_times_format`.
 
@@ -18,17 +15,22 @@ rasterplot2_pdf_grouped
    but groups them with horizontal lines, based on the grouplabel.
    Assumes the spike times dataframe has a column :paramref:`grouplabel`
 
-   :Parameters: * **pdf** (*pandas.DataFrame*) -- A DataFrame containing the spike times.
-                  Must contain a column with label :paramref:`grouplabel`.
-                * **grouplabel** (*str*) -- The column name in the DataFrame to group by.
-                * **ax** (*matplotlib.axes.Axes, optional*) -- An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
-                * **xlim** (*tuple, optional*) -- The x-axis limits for the plot. Default is ``None``.
-                * **x_offset** (*float, optional*) -- An offset to apply to the x-values (event times). Default is 0.
-                * **color** (*str, optional*) -- The color to use for the plot. Default is 'k'.
+   :param pdf: A DataFrame containing the spike times.
+               Must contain a column with label :paramref:`grouplabel`.
+   :type pdf: pandas.DataFrame
+   :param grouplabel: The column name in the DataFrame to group by.
+   :type grouplabel: str
+   :param ax: An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
+   :type ax: matplotlib.axes.Axes, optional
+   :param xlim: The x-axis limits for the plot. Default is ``None``.
+   :type xlim: tuple, optional
+   :param x_offset: An offset to apply to the x-values (event times). Default is 0.
+   :type x_offset: float, optional
+   :param color: The color to use for the plot. Default is 'k'.
+   :type color: str, optional
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

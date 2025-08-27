@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderSmr` ❭ :mod:`~spike_analysis.core.ReaderSmr.get_serialize_dict`
+
+
 
 ReaderSmr.get_serialize_dict
 ============================
 
+
 .. py:method:: spike_analysis.core.ReaderSmr.get_serialize_dict()
+
 
    Get a dictionary containing the attributes of the ReaderSmr object.
 
@@ -22,3 +24,8 @@ ReaderSmr.get_serialize_dict
                      - max_rel_time (float): The maximum relative time to include in the voltage traces.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

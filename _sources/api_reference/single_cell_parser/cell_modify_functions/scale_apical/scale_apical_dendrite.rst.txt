@@ -1,31 +1,29 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical` ❭ :mod:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite`
-
-
-.. title:
 
 scale_apical_dendrite
 =====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite')
+
 
    Scales the apical dendrite of a cell.
 
    Assumes the cell has sections with label "ApicalDendrite".
    If not, nothing gets scaled.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell to scale.
-                * **scale** (*float*) -- The scaling factor.
+   :param cell: The cell to scale.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param scale: The scaling factor.
+   :type scale: float
 
    :returns: The scaled cell.
    :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

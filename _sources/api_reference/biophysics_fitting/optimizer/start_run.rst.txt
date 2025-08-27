@@ -1,40 +1,48 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.optimizer` ❭ :mod:`~biophysics_fitting.optimizer.start_run`
-
-
-.. title:
 
 start_run
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.optimizer.start_run(db_setup, n, pop=None, client=None, continue_cp=False, offspring_size=1000, eta=10, mutpb=0.3, cxpb=0.7, max_ngen=600, satisfactory_boundary_dict=None)
+
 
    Start an optimization run as specified in db_setup.
 
-   :Parameters: * **db_setup** (*data_base.DataBase*) -- a DataBase containing the setup of the optimization. It must include:
+   :param db_setup: a DataBase containing the setup of the optimization. It must include:
 
-                  - params ... this is a pandas.DataFrame with the parameternames as index and the columns ``min_`` and ``max_``
-                  - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
-                  - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
-                  - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object
+                    - params ... this is a pandas.DataFrame with the parameternames as index and the columns ``min_`` and ``max_``
+                    - get_Simulator ... function, that returns a biophysics_fitting.simulator.Simulator object
+                    - get_Evaluator ... function, that returns a biophysics_fitting.evaluator.Evaluator object.
+                    - get_Combiner ... function, that returns a biophysics_fitting.combiner.Combiner object
 
-                  get_Simulator, get_Evaluator, get_Combiner accept the db_setup data_base as argument.
-                  This allows, that e.g. the Simular can depend on the data_base. Therefore it is e.g. possible,
-                  that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
-                  updated accordingly.
-                * **n** (*int*) -- The run ID. This is used to create a sub-database in db_setup, where the results of the optimization are saved.
-                * **pop** (*list of deap.Individuals | None*) -- The previous population if the optimization is continued. None if a new optimization is started.
-                * **client** (*distributed.Client | None*) -- A distributed client. If None, the optimization is run on the local machine.
-                * **continue_cp** (*bool*) -- If True, the optimization is continued. If False, a new optimization is started.
-                * **offspring_size** (*int*) -- The number of individuals in the offspring.
-                * **eta** (*int*) -- The number of parents selected for each offspring.
-                * **mutpb** (*float*) -- The mutation probability.
-                * **cxpb** (*float*) -- The crossover probability.
-                * **max_ngen** (*int*) -- The maximum number of generations.
-                * **satisfactory_boundary_dict** (*dict | None*) -- A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+                    get_Simulator, get_Evaluator, get_Combiner accept the db_setup data_base as argument.
+                    This allows, that e.g. the Simular can depend on the data_base. Therefore it is e.g. possible,
+                    that the path to the morphology is not saved as absolute path. Instead, fixed parameters can be
+                    updated accordingly.
+   :type db_setup: data_base.DataBase
+   :param n: The run ID. This is used to create a sub-database in db_setup, where the results of the optimization are saved.
+   :type n: int
+   :param pop: The previous population if the optimization is continued. None if a new optimization is started.
+   :type pop: list of deap.Individuals | None
+   :param client: A distributed client. If None, the optimization is run on the local machine.
+   :type client: distributed.Client | None
+   :param continue_cp: If True, the optimization is continued. If False, a new optimization is started.
+   :type continue_cp: bool
+   :param offspring_size: The number of individuals in the offspring.
+   :type offspring_size: int
+   :param eta: The number of parents selected for each offspring.
+   :type eta: int
+   :param mutpb: The mutation probability.
+   :type mutpb: float
+   :param cxpb: The crossover probability.
+   :type cxpb: float
+   :param max_ngen: The maximum number of generations.
+   :type max_ngen: int
+   :param satisfactory_boundary_dict: A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
+   :type satisfactory_boundary_dict: dict | None
 
    For an exemplary setup of a Simulator, Evaluator and Combiner object, see
    biophysics_fitting.hay_complete_default_setup.
@@ -45,8 +53,7 @@ start_run
    You can also have a look at the test case in tests.test_biophysics_fitting.optimizer_test.py
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

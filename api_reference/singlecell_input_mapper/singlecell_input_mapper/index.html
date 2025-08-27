@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -884,11 +886,15 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-singlecell_input_mapper" title="singlecell_input_mapper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper</span></code></a> ❭ <a class="reference internal" href="#module-singlecell_input_mapper.singlecell_input_mapper" title="singlecell_input_mapper.singlecell_input_mapper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper</span></code></a></p>
-<h1 id="singlecell-input-mapper">singlecell_input_mapper<a class="headerlink" href="#singlecell-input-mapper" title="Permalink to this heading">¶</a></h1>
+<p><a href="/" class="nav-link" aria-label="Home">
+     <svg class="home-icon" viewBox="0 0 576 512" width="16" height="16">
+         <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+     </svg>
+ </a> ❭ <a class="reference internal" href="../../../api_reference.html#api-reference"><span class="std std-ref">API reference</span></a> ❭ <a class="reference internal" href="../index.html#module-singlecell_input_mapper" title="singlecell_input_mapper (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">singlecell_input_mapper</span></code></a> ❭</p>
+<h1 id="singlecell-input-mapper">singlecell_input_mapper<a class="headerlink" href="#singlecell-input-mapper" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<span class="target" id="module-singlecell_input_mapper.singlecell_input_mapper"></span><p>Calculate the connectivity of individual neuron morphologies.
+<p id="module-singlecell_input_mapper.singlecell_input_mapper">Calculate the connectivity of individual neuron morphologies.
 Based on methods and data presented in <span id="id1">Egger <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id8" title="Robert Egger, Vincent J. Dercksen, Daniel Udvary, Hans-Christian Hege, and Marcel Oberlaender. Generation of dense statistical connectomes from sparse morphological data. Frontiers in Neuroanatomy, 2014. Citation Key: 10.3389/fnana.2014.00129. URL: https://www.frontiersin.org/articles/10.3389/fnana.2014.00129, doi:10.3389/fnana.2014.00129.">12</a>]</span> and <span id="id2">Udvary <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id11" title="Daniel Udvary, Philipp Harth, Jakob H. Macke, Hans-Christian Hege, Christiaan P.J. De Kock, Bert Sakmann, and Marcel Oberlaender. The impact of neuron morphology on cortical network architecture. Cell Reports, 39(2):110677, April 2022. doi:10.1016/j.celrep.2022.110677.">13</a>]</span>.</p>
 <p>This package contains methods to create anatomical realizations for the connectivity of single neurons.
 To create anatomical realizations, it is recommended to use the high-level
@@ -901,7 +907,7 @@ pipeline <a class="reference internal" href="../map_singlecell_inputs/map_single
 <li><p>The 3D density of boutons in the neuropil (cell type specific)</p></li>
 <li><p>The 1D and 2D densities of PSTs onto the postsynaptic neuron per length and area (cell type specific)</p></li>
 </ul>
-<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permalink to this heading">¶</a></h2>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h2>
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="cell/index.html#module-singlecell_input_mapper.singlecell_input_mapper.cell" title="singlecell_input_mapper.singlecell_input_mapper.cell (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cell</span></code></a></p></td>
@@ -927,6 +933,9 @@ pipeline <a class="reference internal" href="../map_singlecell_inputs/map_single
 </tr>
 </tbody>
 </table>
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -994,7 +1003,7 @@ pipeline <a class="reference internal" href="../map_singlecell_inputs/map_single
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1017,9 +1026,9 @@ pipeline <a class="reference internal" href="../map_singlecell_inputs/map_single
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

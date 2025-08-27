@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist`
+
+
 
 _DendrogramDendriteStatistics._compute_dendrite_hist
 ====================================================
 
+
 .. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist(dist_end=None, binsize=50)
+
 
    Compute the dendrite density histogram.
 
-   :Parameters: * **dist_end** (*float*) -- The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
-                * **binsize** (*float*) -- The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
+   :param dist_end: The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
+   :type dist_end: float
+   :param binsize: The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
+   :type binsize: float
 
    :returns: Nothing. Updates :paramref:`bins` and :paramref:`dendrite_density`.
    :rtype: None
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

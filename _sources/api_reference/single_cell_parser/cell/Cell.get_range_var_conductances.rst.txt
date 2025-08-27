@@ -1,19 +1,22 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell` ❭ :mod:`~single_cell_parser.cell.Cell.get_range_var_conductances`
+
+
 
 Cell.get_range_var_conductances
 ===============================
 
+
 .. py:method:: single_cell_parser.cell.Cell.get_range_var_conductances(density=True)
+
 
    Get the conductances of each section, categorized by range variable and segment.
 
    This method computes the conductance of each range variable in each segment, and categorizes them by: section, segment, range variable.
 
-   :Parameters: **density** (*bool, optional*) -- If True (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
-                If False, the total amount of conductivity is returned for each segment i.e. the conductance density multiplied by the area of the segment.
+   :param density: If True (default), the conductance is returned in units of conductance density: :math:`S / cm ^2`.
+                   If False, the total amount of conductivity is returned for each segment i.e. the conductance density multiplied by the area of the segment.
+   :type density: bool, optional
 
    :returns:     A nested list/dictionary structure.
                  Each element contains all range variables and segments for one section.
@@ -41,3 +44,8 @@ Cell.get_range_var_conductances
        {...},          # section 2
    ]
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,28 +1,25 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.robust_read_pickle`
-
-
-.. title:
 
 robust_read_pickle
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.robust_read_pickle(path)
+
 
    Read a pickled dataframe. If it cannot be read, still return a dataframe, containing an error as content.
    Useful for when you don't want your code to error during some large-scale analysis.
 
-   :Parameters: **path** (*str*) -- path to the pickled dataframe
+   :param path: path to the pickled dataframe
+   :type path: str
 
    :returns: the pickled DataFrame if reading was succesful, a pd.Series otherwise. Both contain the key 'init_error', specifying whether or not the read was succesful.
    :rtype: pd.DataFrame | pd.Series
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

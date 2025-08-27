@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing` ❭ :mod:`~data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas`
-
-
-.. title:
 
 read_voltage_traces_from_files_pandas
 =====================================
 
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas(prefix, fnames)
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas(prefix, fnames, meta=None)
+
 
    Reads a list of **multiple** voltage trace files and parses it to a single pandas dataframe.
 
@@ -18,8 +15,10 @@ read_voltage_traces_from_files_pandas
    in :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
    Each singular file is read using :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_file`.
 
-   :Parameters: * **prefix** (*str*) -- Path to the directory containing the simulation results.
-                * **fnames** (*list*) -- List of filenames pointing to voltage trace files.
+   :param prefix: Path to the directory containing the simulation results.
+   :type prefix: str
+   :param fnames: List of filenames pointing to voltage trace files.
+   :type fnames: list
 
    :returns: A pandas dataframe containing the voltage traces.
    :rtype: pandas.DataFrame
@@ -27,8 +26,7 @@ read_voltage_traces_from_files_pandas
    .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

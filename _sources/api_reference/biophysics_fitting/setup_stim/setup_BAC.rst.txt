@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.setup_stim` ❭ :mod:`~biophysics_fitting.setup_stim.setup_BAC`
-
-
-.. title:
 
 setup_BAC
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.setup_stim.setup_BAC(cell, dist=970, delay=295)
+
 
    Setup a BAC (bAP-activated Ca2+-spike) stimulus for the cell.
 
@@ -28,15 +25,17 @@ setup_BAC
    - distance = 970 um (default)
    - delay = 300 ms
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **dist** (*float*) -- The distance from the soma to the recording site (um).
-                * **delay** (*float*) -- The delay of the BAC stimulus (ms).
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param dist: The distance from the soma to the recording site (um).
+   :type dist: float
+   :param delay: The delay of the BAC stimulus (ms).
+   :type delay: float
 
    :returns: None. Adds a BAC stimulus to the cell.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

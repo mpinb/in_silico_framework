@@ -1,17 +1,25 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized`
+
+
 
 NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized
 ===============================================================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized(boutonDensities)
+
 
    Compute synapse densities of all presynaptic cell types in all anatomical_areas
 
    Computes all possible synapse densities that have non-zero overlap
    with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
 
-   :Parameters: **boutonDensities** (Dict[str, Dict[str, :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]) -- Dictionary of bouton densities, ordered by anatomical area and cell type.
+   :param boutonDensities: Dictionary of bouton densities, ordered by anatomical area and cell type.
+   :type boutonDensities: ~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

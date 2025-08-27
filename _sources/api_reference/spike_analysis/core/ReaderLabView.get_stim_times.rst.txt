@@ -1,15 +1,22 @@
 
-.. backlink:
 
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderLabView` ❭ :mod:`~spike_analysis.core.ReaderLabView.get_stim_times`
+
+
 
 ReaderLabView.get_stim_times
 ============================
 
+
 .. py:method:: spike_analysis.core.ReaderLabView.get_stim_times()
+
 
    Get the times of the stimuli.
 
    :returns: A list containing the times of the stimuli.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

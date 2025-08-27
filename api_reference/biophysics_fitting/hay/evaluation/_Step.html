@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -853,16 +855,92 @@
       
         <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="biophysics_fitting.hay.evaluation._Step (Python class) — Template class for evaluating step current injections." class="md-ellipsis">biophysics_<wbr>fitting.<wbr>hay.<wbr>evaluation._<wbr>Step</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="biophysics_fitting.hay.evaluation._Step (Python class) — Template class for evaluating step current injections." class="md-ellipsis">biophysics_<wbr>fittinghayevaluation_<wbr>Step</span>
   </a>
   
-    <nav class="md-nav" aria-label="biophysics_fitting.hay.evaluation._Step">
+    <nav class="md-nav" aria-label="biophysics_fittinghayevaluation_Step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh (Python parameter) — The threshold for APs in the somatic voltage trace." class="md-ellipsis">soma_<wbr>thresh</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_onset" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.stim_onset (Python parameter) — The onset of the stimulus (ms)." class="md-ellipsis">stim_<wbr>onset</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_duration" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.stim_duration (Python parameter) — The duration of the stimulus (ms)." class="md-ellipsis">stim_<wbr>duration</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish (Python parameter) — The punishment value in units of \sigma. Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g." class="md-ellipsis">punish</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline (Python parameter) — Whether to punish if the last spike is after the deadline." class="md-ellipsis">punish_<wbr>last_<wbr>spike_<wbr>after_<wbr>deadline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum (Python parameter) — The minimum number of spikes required for this stimulus protocol." class="md-ellipsis">punish_<wbr>minspikenum</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance (Python parameter) — The tolerance for returning to rest (mV)." class="md-ellipsis">punish_<wbr>returning_<wbr>to_<wbr>rest_<wbr>tolerance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.definitions" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.definitions (Python parameter) — The definitions for the evaluation metrics." class="md-ellipsis">definitions</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.name" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.name (Python parameter) — The name of the stimulus protocol." class="md-ellipsis">name</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.step_index" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.step_index (Python parameter) — The index of the step stimulus protocol." class="md-ellipsis">step_<wbr>index</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -871,7 +949,8 @@
     <span class="md-ellipsis">Attributes</span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step.soma_thresh" class="md-nav__link">
@@ -1085,6 +1164,11 @@
   <a href="#biophysics_fitting.hay.evaluation._Step.step_index-type" class="md-nav__link">
     <span class="md-ellipsis">Type</span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1804,16 +1888,92 @@
       
         <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="biophysics_fitting.hay.evaluation._Step (Python class) — Template class for evaluating step current injections." class="md-ellipsis">biophysics_<wbr>fitting.<wbr>hay.<wbr>evaluation._<wbr>Step</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="biophysics_fitting.hay.evaluation._Step (Python class) — Template class for evaluating step current injections." class="md-ellipsis">biophysics_<wbr>fittinghayevaluation_<wbr>Step</span>
   </a>
   
-    <nav class="md-nav" aria-label="biophysics_fitting.hay.evaluation._Step">
+    <nav class="md-nav" aria-label="biophysics_fittinghayevaluation_Step">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh (Python parameter) — The threshold for APs in the somatic voltage trace." class="md-ellipsis">soma_<wbr>thresh</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_onset" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.stim_onset (Python parameter) — The onset of the stimulus (ms)." class="md-ellipsis">stim_<wbr>onset</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_duration" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.stim_duration (Python parameter) — The duration of the stimulus (ms)." class="md-ellipsis">stim_<wbr>duration</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish (Python parameter) — The punishment value in units of \sigma. Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g." class="md-ellipsis">punish</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline (Python parameter) — Whether to punish if the last spike is after the deadline." class="md-ellipsis">punish_<wbr>last_<wbr>spike_<wbr>after_<wbr>deadline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum (Python parameter) — The minimum number of spikes required for this stimulus protocol." class="md-ellipsis">punish_<wbr>minspikenum</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance (Python parameter) — The tolerance for returning to rest (mV)." class="md-ellipsis">punish_<wbr>returning_<wbr>to_<wbr>rest_<wbr>tolerance</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.definitions" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.definitions (Python parameter) — The definitions for the evaluation metrics." class="md-ellipsis">definitions</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.name" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.name (Python parameter) — The name of the stimulus protocol." class="md-ellipsis">name</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.hay.evaluation._Step.__init__.step_index" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.hay.evaluation._Step.__init__.step_index (Python parameter) — The index of the step stimulus protocol." class="md-ellipsis">step_<wbr>index</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1822,7 +1982,8 @@
     <span class="md-ellipsis">Attributes</span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step.soma_thresh" class="md-nav__link">
@@ -2044,6 +2205,11 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#biophysics_fitting.hay.evaluation._Step-methods" class="md-nav__link">
     <span class="md-ellipsis">Methods</span>
@@ -2070,42 +2236,49 @@
                   
 
 
-<p><a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">biophysics_fitting</span></code></a> ❭ <a class="reference internal" href="../index.html#module-biophysics_fitting.hay" title="biophysics_fitting.hay (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hay</span></code></a> ❭ <a class="reference internal" href="index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">evaluation</span></code></a> ❭ <a class="reference internal" href="#biophysics_fitting.hay.evaluation._Step" title="biophysics_fitting.hay.evaluation._Step (Python class) — Template class for evaluating step current injections."><code class="xref py py-mod docutils literal notranslate"><span class="pre">_Step</span></code></a></p>
-<h1 id="step">_Step<a class="headerlink" href="#step" title="Permalink to this heading">¶</a></h1>
+<h1 id="step">_Step<a class="headerlink" href="#step" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="biophysics_fitting.hay.evaluation._Step">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biophysics_fitting.hay.evaluation.</span></span><span class="sig-name descname"><span class="pre">_Step</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">soma_thresh</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="o">-</span><span class="mi">30</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">stim_onset</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">700</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">stim_duration</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">2000</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">punish</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">250.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">punish_last_spike_after_deadline</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">punish_minspikenum</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">punish_returning_to_rest_tolerance</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">definitions</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;StepTemplate&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">step_index</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><span class="sig-name descname"><span class="pre">biophysics_fitting</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-biophysics_fitting.hay" title="biophysics_fitting.hay (Python module)"><span class="sig-name descname"><span class="pre">hay</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><span class="sig-name descname"><span class="pre">evaluation</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">_Step</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh" title="biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh (Python parameter) — The threshold for APs in the somatic voltage trace."><span class="n"><span class="pre">soma_thresh</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="o">-</span><span class="mi">30</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_onset" title="biophysics_fitting.hay.evaluation._Step.__init__.stim_onset (Python parameter) — The onset of the stimulus (ms)."><span class="n"><span class="pre">stim_onset</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">700</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_duration" title="biophysics_fitting.hay.evaluation._Step.__init__.stim_duration (Python parameter) — The duration of the stimulus (ms)."><span class="n"><span class="pre">stim_duration</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">2000</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish" title="biophysics_fitting.hay.evaluation._Step.__init__.punish (Python parameter) — The punishment value in units of \sigma. Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g."><span class="n"><span class="pre">punish</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">250.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline (Python parameter) — Whether to punish if the last spike is after the deadline."><span class="n"><span class="pre">punish_last_spike_after_deadline</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum (Python parameter) — The minimum number of spikes required for this stimulus protocol."><span class="n"><span class="pre">punish_minspikenum</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance (Python parameter) — The tolerance for returning to rest (mV)."><span class="n"><span class="pre">punish_returning_to_rest_tolerance</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.definitions" title="biophysics_fitting.hay.evaluation._Step.__init__.definitions (Python parameter) — The definitions for the evaluation metrics."><span class="n"><span class="pre">definitions</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.name" title="biophysics_fitting.hay.evaluation._Step.__init__.name (Python parameter) — The name of the stimulus protocol."><span class="n"><span class="pre">name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;StepTemplate&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.step_index" title="biophysics_fitting.hay.evaluation._Step.__init__.step_index (Python parameter) — The index of the step stimulus protocol."><span class="n"><span class="pre">step_index</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step" title="Link to this definition">¶</a></dt>
 <dd><p>Template class for evaluating step current injections.</p>
 <p>These metrics were introduced by <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, and illustrated in <span id="id2">Bast <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id7" title="Arco Bast, Jason M. Guest, Rieke Fruengel, Rajeevan T. Narayanan, Christiaan P.J. de Kock, and Marcel Oberlaender. Thalamus drives active dendritic computations in cortex. bioRxiv : the preprint server for biology, 2023. Citation Key: Bast2021.10.21.465325 tex.elocation-id: 2021.10.21.465325 tex.eprint: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325.full.pdf. URL: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325, doi:10.1101/2021.10.21.465325.">3</a>]</span>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="../../setup_stim/index.html#module-biophysics_fitting.setup_stim" title="biophysics_fitting.setup_stim (Python module)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">biophysics_fitting.setup_stim()</span></code></a> for more information on the stimulus protocols.</p>
 </div>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>soma_thresh</strong> (<em>float</em>) – The threshold for APs in the somatic voltage trace. Defaults to <span class="math notranslate nohighlight">\(-30\ mV\)</span>.</p></li>
-<li><p><strong>stim_onset</strong> (<em>float</em>) – The onset of the stimulus (<span class="math notranslate nohighlight">\(ms\)</span>). Defaults to <span class="math notranslate nohighlight">\(700\ ms\)</span>.</p></li>
-<li><p><strong>stim_duration</strong> (<em>float</em>) – The duration of the stimulus (<span class="math notranslate nohighlight">\(ms\)</span>). Defaults to <span class="math notranslate nohighlight">\(2000\ ms\)</span>.</p></li>
-<li><p><strong>punish</strong> (<em>float</em>) – The punishment value in units of <span class="math notranslate nohighlight">\(\sigma\)</span>.
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh"><span class="sig-name descname">soma_thresh</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh" title="Permalink to this definition">¶</a></dt><dd><p>The threshold for APs in the somatic voltage trace. Defaults to <span class="math notranslate nohighlight">\(-30\ mV\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.stim_onset"><span class="sig-name descname">stim_onset</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_onset" title="Permalink to this definition">¶</a></dt><dd><p>The onset of the stimulus (<span class="math notranslate nohighlight">\(ms\)</span>). Defaults to <span class="math notranslate nohighlight">\(700\ ms\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.stim_duration"><span class="sig-name descname">stim_duration</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_duration" title="Permalink to this definition">¶</a></dt><dd><p>The duration of the stimulus (<span class="math notranslate nohighlight">\(ms\)</span>). Defaults to <span class="math notranslate nohighlight">\(2000\ ms\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.punish"><span class="sig-name descname">punish</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish" title="Permalink to this definition">¶</a></dt><dd><p>The punishment value in units of <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
-Defaults to <span class="math notranslate nohighlight">\(250 \sigma\)</span>.</p></li>
-<li><p><strong>punish_last_spike_after_deadline</strong> (<em>bool</em>) – Whether to punish if the last spike is after the deadline. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code></p></li>
-<li><p><strong>punish_minspikenum</strong> (<em>int</em>) – The minimum number of spikes required for this stimulus protocol. Defaults to <span class="math notranslate nohighlight">\(5\)</span>.</p></li>
-<li><p><strong>punish_returning_to_rest_tolerance</strong> (<em>float</em>) – The tolerance for returning to rest (<span class="math notranslate nohighlight">\(mV\)</span>). Defaults to <span class="math notranslate nohighlight">\(2 mV\)</span>.</p></li>
-<li><p><strong>definitions</strong> (<em>dict</em>) – The definitions for the evaluation metrics. See also: <a class="reference internal" href="#biophysics_fitting.hay.evaluation._Step.definitions" title="biophysics_fitting.hay.evaluation._Step.definitions (Python attribute) — The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class."><code class="xref py py-attr docutils literal notranslate"><span class="pre">definitions</span></code></a>.</p></li>
-<li><p><strong>name</strong> (<em>str</em>) – The name of the stimulus protocol. Defaults to <code class="docutils literal notranslate"><span class="pre">'StepTemplate'</span></code>.</p></li>
-<li><p><strong>step_index</strong> (<em>int</em>) – The index of the step stimulus protocol. Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Options are: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.</p></li>
-</ul>
+Defaults to <span class="math notranslate nohighlight">\(250 \sigma\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline"><span class="sig-name descname">punish_last_spike_after_deadline</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline" title="Permalink to this definition">¶</a></dt><dd><p>Whether to punish if the last spike is after the deadline. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum"><span class="sig-name descname">punish_minspikenum</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum" title="Permalink to this definition">¶</a></dt><dd><p>The minimum number of spikes required for this stimulus protocol. Defaults to <span class="math notranslate nohighlight">\(5\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance"><span class="sig-name descname">punish_returning_to_rest_tolerance</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance" title="Permalink to this definition">¶</a></dt><dd><p>The tolerance for returning to rest (<span class="math notranslate nohighlight">\(mV\)</span>). Defaults to <span class="math notranslate nohighlight">\(2 mV\)</span>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.definitions"><span class="sig-name descname">definitions</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.definitions" title="Permalink to this definition">¶</a></dt><dd><p>The definitions for the evaluation metrics. See also: <a class="reference internal" href="#biophysics_fitting.hay.evaluation._Step.definitions" title="biophysics_fitting.hay.evaluation._Step.definitions (Python attribute) — The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class."><code class="xref py py-attr docutils literal notranslate"><span class="pre">definitions</span></code></a>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.name"><span class="sig-name descname">name</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.name" title="Permalink to this definition">¶</a></dt><dd><p>The name of the stimulus protocol. Defaults to <code class="docutils literal notranslate"><span class="pre">'StepTemplate'</span></code>.</p>
+</dd>
+<dt id="biophysics_fitting.hay.evaluation._Step.__init__.step_index"><span class="sig-name descname">step_index</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.__init__.step_index" title="Permalink to this definition">¶</a></dt><dd><p>The index of the step stimulus protocol. Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Options are: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="biophysics_fitting.hay.evaluation._Step-attributes">Attributes<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step-attributes" title="Permalink to this headline">¶</a></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<dl class="py attribute objdesc">
+<dd class="field-even"><dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.soma_thresh">
-<span class="sig-name descname"><span class="pre">soma_thresh</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.soma_thresh" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">soma_thresh</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.soma_thresh" title="Link to this definition">¶</a></dt>
 <dd><p>The threshold for APs in the somatic voltage trace. Defaults to <span class="math notranslate nohighlight">\(-30\)</span> mV.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.soma_thresh-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.soma_thresh-type" title="Permalink to this headline">¶</a></dt>
@@ -2116,7 +2289,7 @@ Defaults to <span class="math notranslate nohighlight">\(250 \sigma\)</span>.</p
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.stim_onset">
-<span class="sig-name descname"><span class="pre">stim_onset</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_onset" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stim_onset</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_onset" title="Link to this definition">¶</a></dt>
 <dd><p>The onset of the stimulus (ms). Defaults to <span class="math notranslate nohighlight">\(700\)</span> ms.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.stim_onset-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_onset-type" title="Permalink to this headline">¶</a></dt>
@@ -2127,7 +2300,7 @@ Defaults to <span class="math notranslate nohighlight">\(250 \sigma\)</span>.</p
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.stim_duration">
-<span class="sig-name descname"><span class="pre">stim_duration</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_duration" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stim_duration</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_duration" title="Link to this definition">¶</a></dt>
 <dd><p>The duration of the stimulus (ms). Defaults to <span class="math notranslate nohighlight">\(2000\)</span> ms.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.stim_duration-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.stim_duration-type" title="Permalink to this headline">¶</a></dt>
@@ -2138,7 +2311,7 @@ Defaults to <span class="math notranslate nohighlight">\(250 \sigma\)</span>.</p
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.punish">
-<span class="sig-name descname"><span class="pre">punish</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">punish</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish" title="Link to this definition">¶</a></dt>
 <dd><p>The punishment value in units of <span class="math notranslate nohighlight">\(\sigma\)</span>.
 Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
 Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
@@ -2151,7 +2324,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.punish_last_spike_after_deadline">
-<span class="sig-name descname"><span class="pre">punish_last_spike_after_deadline</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_last_spike_after_deadline" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">punish_last_spike_after_deadline</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_last_spike_after_deadline" title="Link to this definition">¶</a></dt>
 <dd><p>Whether to punish if the last spike is after the deadline. Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.punish_last_spike_after_deadline-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_last_spike_after_deadline-type" title="Permalink to this headline">¶</a></dt>
@@ -2162,7 +2335,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.punish_minspikenum">
-<span class="sig-name descname"><span class="pre">punish_minspikenum</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_minspikenum" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">punish_minspikenum</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_minspikenum" title="Link to this definition">¶</a></dt>
 <dd><p>The minimum number of spikes required for this stimulus protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.punish_minspikenum-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_minspikenum-type" title="Permalink to this headline">¶</a></dt>
@@ -2173,7 +2346,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.punish_returning_to_rest_tolerance">
-<span class="sig-name descname"><span class="pre">punish_returning_to_rest_tolerance</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_returning_to_rest_tolerance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">punish_returning_to_rest_tolerance</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_returning_to_rest_tolerance" title="Link to this definition">¶</a></dt>
 <dd><p>The tolerance for returning to rest (<span class="math notranslate nohighlight">\(mV\)</span>). Defaults to <span class="math notranslate nohighlight">\(2 mV\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.punish_returning_to_rest_tolerance-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.punish_returning_to_rest_tolerance-type" title="Permalink to this headline">¶</a></dt>
@@ -2184,7 +2357,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.prefix">
-<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.prefix" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">prefix</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.prefix" title="Link to this definition">¶</a></dt>
 <dd><p>The prefix for the evaluation metric checks. Defaults to an empty string.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.prefix-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.prefix-type" title="Permalink to this headline">¶</a></dt>
@@ -2195,7 +2368,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.definitions">
-<span class="sig-name descname"><span class="pre">definitions</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.definitions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">definitions</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.definitions" title="Link to this definition">¶</a></dt>
 <dd><p>The empirical means and standard deviations for the evaluation metrics. These are overridden by each child class.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.definitions-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.definitions-type" title="Permalink to this headline">¶</a></dt>
@@ -2206,7 +2379,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.name" title="Link to this definition">¶</a></dt>
 <dd><p>The name of the stimulus protocol. Defaults to <code class="docutils literal notranslate"><span class="pre">'StepTemplate'</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.name-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.name-type" title="Permalink to this headline">¶</a></dt>
@@ -2217,7 +2390,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="biophysics_fitting.hay.evaluation._Step.step_index">
-<span class="sig-name descname"><span class="pre">step_index</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.step_index" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">step_index</span></span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.step_index" title="Link to this definition">¶</a></dt>
 <dd><p>The index of the step stimulus protocol. Defaults to <span class="math notranslate nohighlight">\(0\)</span>. Options are: <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step.step_index-type">Type<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step.step_index-type" title="Permalink to this headline">¶</a></dt>
@@ -2226,7 +2399,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 </dl>
 </dd></dl>
 
-<dl class="field-list simple">
+</dd>
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step-methods">Methods<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step-methods" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
@@ -2275,6 +2448,9 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 </table>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -2342,7 +2518,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -2365,11 +2541,11 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
         <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script id="MathJax-script" src="../../../../_static/mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+        <script src="../../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

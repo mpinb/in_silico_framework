@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_sample_distance`
+
+
 
 NetworkMapper._compute_sample_distance
 ======================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_sample_distance(realizationSample, realizationPopulationDistribution)
+
 
    Compute the distance of network realization samples to the population mean.
 
@@ -14,9 +16,16 @@ NetworkMapper._compute_sample_distance
    Standardizes the distance vector by dividing it by the parameter's population-wide
    standard deviation.
 
-   :Parameters: * **realizationSample** (*list*) -- List of parameters for a single realization.
-                * **realizationPopulationDistribution** (*list*) -- List of parameters for the population of realizations.
+   :param realizationSample: List of parameters for a single realization.
+   :type realizationSample: list
+   :param realizationPopulationDistribution: List of parameters for the population of realizations.
+   :type realizationPopulationDistribution: list
 
    :returns: SD-normalized distance vector.
    :rtype: np.array
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

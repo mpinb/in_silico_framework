@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_voltage_timeseries`
+
+
 
 CMVDataParser._calc_voltage_timeseries
 ======================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_voltage_timeseries()
+
 
    Retrieves voltage data along the whole cell body during a set of time points (specified in :paramref:`self.times_to_show`).
    Fills the :paramref:`voltage_timeseries` attribute.
@@ -14,3 +16,8 @@ CMVDataParser._calc_voltage_timeseries
 
    :returns: Nothing. Updates the self.timeseries_voltage attribute
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell` ❭ :mod:`~single_cell_parser.cell.Cell`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Cell
 ====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -51,84 +47,84 @@ Cell
 
    :Attributes:
 
-   .. attribute:: hoc_path
+      .. attribute:: hoc_path
 
-      Path to the hoc file containing the cell morphology.
+         Path to the hoc file containing the cell morphology.
 
-      :type: str
+         :type: str
 
-   .. attribute:: id
+      .. attribute:: id
 
-      ID of the cell (often unused).
+         ID of the cell (often unused).
 
-      :type: str | int, optional
+         :type: str | int, optional
 
-   .. attribute:: soma
+      .. attribute:: soma
 
-      The soma section of the cell.
+         The soma section of the cell.
 
-      :type: :py:class:`~single_cell_parser.cell.PySection`
+         :type: :py:class:`~single_cell_parser.cell.PySection`
 
-   .. attribute:: tree
+      .. attribute:: tree
 
-      NEURON SectionList containing all sections of the cell.
+         NEURON SectionList containing all sections of the cell.
 
-      :type: :py:class:`neuron:SectionList`
+         :type: :py:class:`neuron:SectionList`
 
-   .. attribute:: branches
+      .. attribute:: branches
 
-      maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
+         maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: structures
+      .. attribute:: structures
 
-      All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...).
-      Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
+         All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...).
+         Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
 
-      :type: Dict[:py:class:`~single_cell_parser.cell.PySection`]
+         :type: Dict[:py:class:`~single_cell_parser.cell.PySection`]
 
-   .. attribute:: sections
+      .. attribute:: sections
 
-      List of :py:class:`~single_cell_parser.cell.PySection` objects.
-      First element is the soma.
-      Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
+         List of :py:class:`~single_cell_parser.cell.PySection` objects.
+         First element is the soma.
+         Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
 
-      :type: List[:py:class:`~single_cell_parser.cell.PySection`]
+         :type: List[:py:class:`~single_cell_parser.cell.PySection`]
 
-   .. attribute:: synapses
+      .. attribute:: synapses
 
-      a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
+         a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: E
+      .. attribute:: E
 
-      Default resting membrane potential. Defaults to -70.0
+         Default resting membrane potential. Defaults to -70.0
 
-      :type: float
+         :type: float
 
-   .. attribute:: changeSynParamDict
+      .. attribute:: changeSynParamDict
 
-      dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.
+         dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: tVec
+      .. attribute:: tVec
 
-      a NEURON Vector recording time.
+         a NEURON Vector recording time.
 
-      :type: :py:class:`neuron:Vector`
+         :type: :py:class:`neuron:Vector`
 
-   .. attribute:: neuron_param
+      .. attribute:: neuron_param
 
-      The :ref:`cell_parameters_format`.
+         The :ref:`cell_parameters_format`.
 
-   .. attribute:: section_adjacency_map
+      .. attribute:: section_adjacency_map
 
-      maps each section (by ID) to its parent sections and children sections.
+         maps each section (by ID) to its parent sections and children sections.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -161,3 +157,7 @@ Cell
       * - :py:obj:`get_section_adjacancy_map <single_cell_parser.cell.Cell.get_section_adjacancy_map>`\ ()
         - Generates a map that shows which sections are connected to which sections.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

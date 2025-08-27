@@ -1,5 +1,7 @@
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
+
 
 ephys
 =====
@@ -131,3 +133,7 @@ Functions
      - Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

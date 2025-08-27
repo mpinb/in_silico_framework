@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.reader` ❭ :mod:`~single_cell_parser.reader.read_complete_synapse_activation_file`
-
-
-.. title:
 
 read_complete_synapse_activation_file
 =====================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.reader.read_complete_synapse_activation_file(fname)
+
 
    Reads list of all functional synapses and their activation times.
 
@@ -22,15 +19,15 @@ read_complete_synapse_activation_file
        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
 
 
-   :Parameters: **fname** (*str*) -- Filename of a synapse activation file.
-                Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+   :param fname: Filename of a synapse activation file.
+                 Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+   :type fname: str
 
    :returns: A dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples: (synapse ID, soma distance, section ID, point ID, structure label, [t1, t2, ... , tn])
    :rtype: dict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

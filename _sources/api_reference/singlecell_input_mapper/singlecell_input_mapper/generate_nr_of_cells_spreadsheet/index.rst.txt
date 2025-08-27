@@ -1,5 +1,7 @@
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
+
 
 generate_nr_of_cells_spreadsheet
 ================================
@@ -34,3 +36,7 @@ Functions
      - Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

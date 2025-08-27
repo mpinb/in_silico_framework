@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser.update_range_mechanisms`
+
+
 
 CellParser.update_range_mechanisms
 ==================================
 
+
 .. py:method:: single_cell_parser.cell_parser.CellParser.update_range_mechanisms(label, updateMechName, mechs)
+
 
    Updates range mechanism :paramref:`updateMechName` in all structures named as :paramref:`label`.
 
@@ -15,10 +17,18 @@ CellParser.update_range_mechanisms
 
    Used during parameter variations; e.g. for optimization and exploration of neuron models (see :py:mod:`biophysics_fitting`).
 
-   :Parameters: * **label** (*str*) -- Label of the structure.
-                * **updateMechName** (*str*) -- Name of the mechanism to update.
-                * **mechs** (:py:class:`~single_cell_parser.parameters.NTParameterSet`) -- Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
+   :param label: Label of the structure.
+   :type label: str
+   :param updateMechName: Name of the mechanism to update.
+   :type updateMechName: str
+   :param mechs: Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
+   :type mechs: ~single_cell_parser.parameters.NTParameterSet
 
    :raises RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
    :raises NotImplementedError: If the spatial distribution is not implemented.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

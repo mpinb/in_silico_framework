@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_response_latency_in_period`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_response_latency_in_period
 ====================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -32,25 +28,30 @@ STAPlugin_response_latency_in_period
 
    .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'frequency_in_period'.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
-                * **period** (*str, optional*) -- The period to analyze. Defaults to None (entire trace).
-                * **t_start** (*float, optional*) -- The start time of the period. Defaults to None.
-                * **t_end** (*float, optional*) -- The end time of the period. Defaults to None.
+   :param name: The name of the plugin. Defaults to 'frequency_in_period'.
+   :type name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+   :type source: str, optional
+   :param period: The period to analyze. Defaults to None (entire trace).
+   :type period: str, optional
+   :param t_start: The start time of the period. Defaults to None.
+   :type t_start: float, optional
+   :param t_end: The end time of the period. Defaults to None.
+   :type t_end: float, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin. Defaults to 'frequency_in_period'.
+         The name of the plugin. Defaults to 'frequency_in_period'.
 
-      :type: str
+         :type: str
 
-   .. attribute:: _by_trial
+      .. attribute:: _by_trial
 
-      The median response latency by trial.
+         The median response latency by trial.
 
-      :type: :py:class:`numpy.ndarray`
+         :type: :py:class:`numpy.ndarray`
 
    :Methods:
 
@@ -63,3 +64,7 @@ STAPlugin_response_latency_in_period
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_response_latency_in_period.setup>`\ (spike\_times\_analysis)
         - Sets up the analysis: computes the response latency in a period.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

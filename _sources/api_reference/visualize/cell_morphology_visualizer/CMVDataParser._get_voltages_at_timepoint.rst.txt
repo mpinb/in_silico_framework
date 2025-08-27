@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._get_voltages_at_timepoint`
+
+
 
 CMVDataParser._get_voltages_at_timepoint
 ========================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._get_voltages_at_timepoint(time_point)
+
 
    Retrieves the coltage along the whole cell morphology from cell object at a particular time point.
    Each voltage is defined per section in the morphology.
@@ -14,8 +16,14 @@ CMVDataParser._get_voltages_at_timepoint
 
    Fetches this voltage from the original cell object.
 
-   :Parameters: **time_point** (*float|int*) -- time point from which we want to gather the voltage
+   :param time_point: time point from which we want to gather the voltage
+   :type time_point: float|int
 
    :returns: list of voltage points for each morphological point in the cell at :paramref:`time_point`.
    :rtype: voltage_point (list)
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

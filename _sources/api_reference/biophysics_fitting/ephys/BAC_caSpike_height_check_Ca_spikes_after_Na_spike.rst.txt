@@ -1,27 +1,29 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike`
-
-
-.. title:
 
 BAC_caSpike_height_check_Ca_spikes_after_Na_spike
 =================================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike(t, v, v_dend, n=2, thresh=None)
+
 
    Checks if a calcium spike occurs after the nth sodium spike.
 
-   :Parameters: * **t** (*numpy.ndarray*) -- Array of time values.
-                * **v** (*numpy.ndarray*) -- Array of voltage values.
-                * **v_dend** (*numpy.ndarray*) -- Array of dendritic voltage values.
-                * **n** (*int, optional*) -- The number of the sodium spike to check for.
-                  Defaults to 2.
-                * **thresh** (*float, optional*) -- The voltage threshold for detecting spikes.
+   :param t: Array of time values.
+   :type t: numpy.ndarray
+   :param v: Array of voltage values.
+   :type v: numpy.ndarray
+   :param v_dend: Array of dendritic voltage values.
+   :type v_dend: numpy.ndarray
+   :param n: The number of the sodium spike to check for.
+             Defaults to 2.
+   :type n: int, optional
+   :param thresh: The voltage threshold for detecting spikes.
                   If None, defaults to the maximum value of v divided by 10.
                   Defaults to None.
+   :type thresh: float, optional
 
    :returns:
 
@@ -30,8 +32,7 @@ BAC_caSpike_height_check_Ca_spikes_after_Na_spike
    :rtype: bool
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,21 +1,20 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_landmark_file`
-
-
-.. title:
 
 write_landmark_file
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_landmark_file(fname=None, landmarkList=None)
+
 
    Write an AMIRA landmark file from 3D coordinates
 
-   :Parameters: * **fname** (*str*) -- string, name of the output file
-                * **landmarkList** (*list*) -- list of tuples, each of which holds 3 float coordinates
+   :param fname: string, name of the output file
+   :type fname: str
+   :param landmarkList: list of tuples, each of which holds 3 float coordinates
+   :type landmarkList: list
 
    :returns: None. Writes out the landmark file to :paramref:`fname`
 
@@ -29,8 +28,7 @@ write_landmark_file
    >>> write_landmark_file('landmarks.landmarkAscii', landmarkList)
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

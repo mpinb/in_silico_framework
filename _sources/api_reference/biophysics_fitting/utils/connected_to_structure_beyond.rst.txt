@@ -1,31 +1,32 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.utils` ❭ :mod:`~biophysics_fitting.utils.connected_to_structure_beyond`
-
-
-.. title:
 
 connected_to_structure_beyond
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.utils.connected_to_structure_beyond(cell, sec, beyond_dist, beyond_struct=['ApicalDendrite'], n_children_required=1)
+
 
    Checks if a :py:class:`~single_cell_parser.cell.Cell` section is connected to a structure
    at a soma distance larger than :paramref:`beyond_dist`.
 
-   :Parameters: * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **sec** (:py:class:`~single_cell_parser.section.Section`) -- The section to check.
-                * **beyond_dist** (*float*) -- The distance from the soma to check.
-                * **beyond_struct** (*list*) -- The labels of the structures to check.
-                * **n_children_required** (*int*) -- The minimum number of children required to have a connection.
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param sec: The section to check.
+   :type sec: ~single_cell_parser.section.Section
+   :param beyond_dist: The distance from the soma to check.
+   :type beyond_dist: float
+   :param beyond_struct: The labels of the structures to check.
+   :type beyond_struct: list
+   :param n_children_required: The minimum number of children required to have a connection.
+   :type n_children_required: int
 
    This can be helpful to detect the main bifurcation of a L5PT, which is the bifurcation in which both children are connected to the tuft.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

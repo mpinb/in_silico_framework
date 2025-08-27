@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.synapse` ❭ :mod:`~single_cell_parser.synapse.Synapse`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 Synapse
 =======
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -40,90 +36,94 @@ Synapse
       This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
       This class is specialized for the NEURON simulator, and is used to store synapse information and activate/deactivate synapses in NEURON.
 
-   :Parameters: * **edgeID** (*int*) -- ID of attached section in cell.sections
-                * **edgePtID** (*int*) -- ID of attached point in cell.sections[edgeID].pts
-                * **preCellType** (*str*) -- reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
-                * **postCellType** (*str*) -- reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param edgeID: ID of attached section in cell.sections
+   :type edgeID: int
+   :param edgePtID: ID of attached point in cell.sections[edgeID].pts
+   :type edgePtID: int
+   :param preCellType: reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :type preCellType: str
+   :param postCellType: reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :type postCellType: str
 
    :Attributes:
 
-   .. attribute:: secID
+      .. attribute:: secID
 
-      ID of attached section in cell.sections
+         ID of attached section in cell.sections
 
-      :type: int
+         :type: int
 
-   .. attribute:: ptID
+      .. attribute:: ptID
 
-      ID of attached point in cell.sections[self.secID].pts
+         ID of attached point in cell.sections[self.secID].pts
 
-      :type: int
+         :type: int
 
-   .. attribute:: x
+      .. attribute:: x
 
-      Relative coordinate along attached section (from 0 to 1)
+         Relative coordinate along attached section (from 0 to 1)
 
-      :type: float
+         :type: float
 
-   .. attribute:: preCellType
+      .. attribute:: preCellType
 
-      Type of the presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+         Type of the presynaptic :py:class:`~single_cell_parser.cell.PointCell`
 
-      :type: str
+         :type: str
 
-   .. attribute:: preCell
+      .. attribute:: preCell
 
-      Reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+         Reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
 
-      :type: :py:class:`~single_cell_parser.cell.PointCell`
+         :type: :py:class:`~single_cell_parser.cell.PointCell`
 
-   .. attribute:: releaseSite
+      .. attribute:: releaseSite
 
-      Release site of presynaptic cell.
+         Release site of presynaptic cell.
 
-      :type: :py:class:`~single_cell_parser.cell.PointCell`
+         :type: :py:class:`~single_cell_parser.cell.PointCell`
 
-   .. attribute:: postCellType
+      .. attribute:: postCellType
 
-      Postsynaptic cell type.
+         Postsynaptic cell type.
 
-      :type: str
+         :type: str
 
-   .. attribute:: coordinates
+      .. attribute:: coordinates
 
-      3D coordinates of synapse location
+         3D coordinates of synapse location
 
-      :type: list
+         :type: list
 
-   .. attribute:: receptors
+      .. attribute:: receptors
 
-      Stores hoc mechanisms
+         Stores hoc mechanisms
 
-      :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
 
-   .. attribute:: netcons
+      .. attribute:: netcons
 
-      Stores NetCons
+         Stores NetCons
 
-      :type: list
+         :type: list
 
-   .. attribute:: weight
+      .. attribute:: weight
 
-      Synaptic weight
+         Synaptic weight
 
-      :type: float
+         :type: float
 
-   .. attribute:: _active
+      .. attribute:: _active
 
-      Activation status
+         Activation status
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: pruned
+      .. attribute:: pruned
 
-      Pruning status
+         Pruning status
 
-      :type: bool
+         :type: bool
 
    :Methods:
 
@@ -140,3 +140,7 @@ Synapse
       * - :py:obj:`disconnect_hoc_synapse <single_cell_parser.synapse.Synapse.disconnect_hoc_synapse>`\ ()
         - Disconnect the synapse from the neuron model.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

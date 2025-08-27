@@ -1,30 +1,29 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.robust_dask_delayed_execution` ❭ :mod:`~simrun.robust_dask_delayed_execution._assert_value`
-
-
-.. title:
 
 _assert_value
 =============
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.robust_dask_delayed_execution._assert_value(db, k, value, behaviour='warning')
+
 
    Assert that the value in the database is as expected.
 
-   :Parameters: * **db** (*str*) -- The path to the database.
-                * **k** (*tuple*) -- The key in the database value.
-                * **value** -- The expected value.
-                * **behaviour** (*str*) -- The behaviour if the value is not as expected. Can be ``'warning'`` or ``'error'``.
+   :param db: The path to the database.
+   :type db: str
+   :param k: The key in the database value.
+   :type k: tuple
+   :param value: The expected value.
+   :param behaviour: The behaviour if the value is not as expected. Can be ``'warning'`` or ``'error'``.
+   :type behaviour: str
 
    :raises RuntimeError: If the value is not as expected and the ``behaviour`` is ``'error'``.
    :raises ValueError: If the ``behaviour`` is not ``'warning'`` or ``'error'``.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

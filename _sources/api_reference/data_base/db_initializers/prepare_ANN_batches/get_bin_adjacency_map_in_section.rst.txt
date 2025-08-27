@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches` ❭ :mod:`~data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section`
-
-
-.. title:
 
 get_bin_adjacency_map_in_section
 ================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section(cell, section_id, section_distances_df)
+
 
    Create an adjacency map with bin-specific resolution for a given section.
 
@@ -23,16 +20,18 @@ get_bin_adjacency_map_in_section
    The goal is then to figure out at which bin in the parent section the child is connected to.
    Eeach section always has one or more bins.
 
-   :Parameters: * **cell** (*Cell*) -- the Cell object
-                * **section_id** (*int*) -- index of the neuron section
-                * **section_distances_df** (*pd.DataFrame*) -- the dataframe describing distance to soma for all sections, as provided by :meth:get_section_distances_df
+   :param cell: the Cell object
+   :type cell: Cell
+   :param section_id: index of the neuron section
+   :type section_id: int
+   :param section_distances_df: the dataframe describing distance to soma for all sections, as provided by :meth:get_section_distances_df
+   :type section_distances_df: pd.DataFrame
 
    :returns: a dictionary with bins as keys and a list of adjacent bins as values.
    :rtype: dict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

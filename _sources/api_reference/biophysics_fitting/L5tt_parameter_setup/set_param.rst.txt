@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup` ❭ :mod:`~biophysics_fitting.L5tt_parameter_setup.set_param`
-
-
-.. title:
 
 set_param
 =========
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.L5tt_parameter_setup.set_param(cell_param, params=None)
+
 
    Updates cell_param given a dict of params in the dot naming convention.
 
@@ -21,15 +18,15 @@ set_param
        set_param(cell_param, params)
        # returns {'a': {'b': {'c': 3}}}
 
-   :Parameters: * **cell_param (** -- py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
-                * **params** (*dict*) -- The parameter flat dictionary.
+   :param cell_param (: py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
+   :param params: The parameter flat dictionary.
+   :type params: dict
 
    :returns: The updated cell_param.
    :rtype: dict
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

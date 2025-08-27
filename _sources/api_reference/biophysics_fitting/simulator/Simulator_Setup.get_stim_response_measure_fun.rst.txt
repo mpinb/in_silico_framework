@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup` ❭ :mod:`~biophysics_fitting.simulator.Simulator_Setup.get_stim_response_measure_fun`
+
+
 
 Simulator_Setup.get_stim_response_measure_fun
 =============================================
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stim_response_measure_fun(stim)
+
 
    Get the stimulus response measure function by stimulus name.
 
@@ -14,8 +16,14 @@ Simulator_Setup.get_stim_response_measure_fun
    They are saved under the name ``stimulus_name.measure``, and accessible
    under :paramref:`stim_response_measure_funs`.
 
-   :Parameters: **stim** (*str*) -- The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
+   :param stim: The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
+   :type stim: str
 
    :returns: A list of functions that extract the voltage traces from the cell
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,19 +1,27 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.get_results`
+
+
 
 Rm.get_results
 ==============
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.get_results(client=None)
+
 
    Get the results of the optimization.
 
-   :Parameters: **client** (:py:class:`~dask.distributed.Client`) -- Dask client.
+   :param client: Dask client.
+   :type client: ~dask.distributed.Client
 
    :returns: DataFrame with the optimization results.
    :rtype: pd.DataFrame
 
    .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores` for how the scores are computed and their output format.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

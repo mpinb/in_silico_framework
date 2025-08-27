@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_quantification_in_period`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_quantification_in_period
 ==================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -30,49 +26,54 @@ STAPlugin_quantification_in_period
    
    SpikeTimeAnalysis (STA) plugin to quantify the activity in a period.
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'frequency_in_period'.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
-                * **period** (*str, optional*) -- The period to analyze. Defaults to None (entire trace).
-                * **t_start** (*float, optional*) -- The start time of the period. Defaults to None.
-                * **t_end** (*float, optional*) -- The end time of the period. Defaults to None.
+   :param name: The name of the plugin. Defaults to 'frequency_in_period'.
+   :type name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'st_df'.
+   :type source: str, optional
+   :param period: The period to analyze. Defaults to None (entire trace).
+   :type period: str, optional
+   :param t_start: The start time of the period. Defaults to None.
+   :type t_start: float, optional
+   :param t_end: The end time of the period. Defaults to None.
+   :type t_end: float, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin. Defaults to 'frequency_in_period'.
+         The name of the plugin. Defaults to 'frequency_in_period'.
 
-      :type: str
+         :type: str
 
-   .. attribute:: source
+      .. attribute:: source
 
-      The :py:class:`~data_base.DataBase` key containing the spike times.
+         The :py:class:`~data_base.DataBase` key containing the spike times.
 
-      :type: str
+         :type: str
 
-   .. attribute:: period
+      .. attribute:: period
 
-      The period to analyze.
+         The period to analyze.
 
-      :type: str
+         :type: str
 
-   .. attribute:: t_start
+      .. attribute:: t_start
 
-      The start time of the period.
+         The start time of the period.
 
-      :type: float
+         :type: float
 
-   .. attribute:: t_end
+      .. attribute:: t_end
 
-      The end time of the period.
+         The end time of the period.
 
-      :type: float
+         :type: float
 
-   .. attribute:: mode
+      .. attribute:: mode
 
-      The mode of the analysis. Can be 'frequency', 'count_per_trial', or 'count_total'.
+         The mode of the analysis. Can be 'frequency', 'count_per_trial', or 'count_total'.
 
-      :type: str
+         :type: str
 
    :Methods:
 
@@ -85,3 +86,7 @@ STAPlugin_quantification_in_period
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_quantification_in_period.setup>`\ (spike\_times\_analysis)
         - Sets up the analysis: quantifies the activity in a period.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

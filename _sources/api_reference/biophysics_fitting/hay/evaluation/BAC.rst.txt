@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ :mod:`~biophysics_fitting.hay.evaluation` ❭ :mod:`~biophysics_fitting.hay.evaluation.BAC`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 BAC
 ===
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -41,113 +37,125 @@ BAC
 
    .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_BAC` for more information on the stimulus protocol.
 
-   :Parameters: * **hot_zone_thresh** (*float*) -- The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
-                * **soma_thresh** (*float*) -- The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
-                * **ca_max_after_nth_somatic_spike** (*int*) -- The number of somatic spikes after which the calcium spike maximum should occur. Defaults to :math:`2`.
-                * **stim_onset** (*float*) -- The onset of the stimulus (ms). Defaults to :math:`295` ms.
-                * **stim_duration** (*float*) -- The duration of the stimulus (ms). Defaults to :math:`45` ms.
-                * **repolarization** (*float*) -- The target repolarization voltage after the stimulus.
-                  See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
-                  Defaults to :math:`-55` mV.
-                * **punish** (*float*) -- The punishment value in units of :math:`\sigma`.
+   :param hot_zone_thresh: The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
+   :type hot_zone_thresh: float
+   :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
+   :type soma_thresh: float
+   :param ca_max_after_nth_somatic_spike: The number of somatic spikes after which the calcium spike maximum should occur. Defaults to :math:`2`.
+   :type ca_max_after_nth_somatic_spike: int
+   :param stim_onset: The onset of the stimulus (ms). Defaults to :math:`295` ms.
+   :type stim_onset: float
+   :param stim_duration: The duration of the stimulus (ms). Defaults to :math:`45` ms.
+   :type stim_duration: float
+   :param repolarization: The target repolarization voltage after the stimulus.
+                          See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
+                          Defaults to :math:`-55` mV.
+   :type repolarization: float
+   :param punish: The punishment value in units of :math:`\sigma`.
                   Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
                   Defaults to :math:`250`.
-                * **punish_last_spike_after_deadline** (*bool*) -- Whether to punish if the last spike is after the deadline. Defaults to ``True``
-                * **punish_minspikenum** (*int*) -- The minimum number of spikes required for this stimulus protocol.
-                * **punish_returning_to_rest_tolerance** (*float*) -- The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
-                * **prefix** (*str*) -- The prefix for the evaluation metric checks. Defaults to an empty string.
-                * **definitions** (*dict*) -- The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :type punish: float
+   :param punish_last_spike_after_deadline: Whether to punish if the last spike is after the deadline. Defaults to ``True``
+   :type punish_last_spike_after_deadline: bool
+   :param punish_minspikenum: The minimum number of spikes required for this stimulus protocol.
+   :type punish_minspikenum: int
+   :param punish_returning_to_rest_tolerance: The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+   :type punish_returning_to_rest_tolerance: float
+   :param prefix: The prefix for the evaluation metric checks. Defaults to an empty string.
+   :type prefix: str
+   :param definitions: The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :type definitions: dict
 
    :Attributes:
 
-   .. attribute:: hot_zone_thresh
+      .. attribute:: hot_zone_thresh
 
-      The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
+         The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
 
-      :type: float
+         :type: float
 
-   .. attribute:: soma_thresh
+      .. attribute:: soma_thresh
 
-      The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
+         The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
 
-      :type: float
+         :type: float
 
-   .. attribute:: ca_max_after_nth_somatic_spike
+      .. attribute:: ca_max_after_nth_somatic_spike
 
-      The number of somatic spikes after which the calcium spike maximum should occur. Defaults to :math:`2`.
+         The number of somatic spikes after which the calcium spike maximum should occur. Defaults to :math:`2`.
 
-      :type: int
+         :type: int
 
-   .. attribute:: stim_onset
+      .. attribute:: stim_onset
 
-      The onset of the stimulus (ms). Defaults to :math:`295` ms.
+         The onset of the stimulus (ms). Defaults to :math:`295` ms.
 
-      :type: float
+         :type: float
 
-   .. attribute:: stim_duration
+      .. attribute:: stim_duration
 
-      The duration of the stimulus (ms). Defaults to :math:`45` ms.
+         The duration of the stimulus (ms). Defaults to :math:`45` ms.
 
-      :type: float
+         :type: float
 
-   .. attribute:: repolarization
+      .. attribute:: repolarization
 
-      The target repolarization voltage after the stimulus.
-      See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
-      Defaults to :math:`-55` mV.
+         The target repolarization voltage after the stimulus.
+         See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
+         Defaults to :math:`-55` mV.
 
-      :type: float
+         :type: float
 
-   .. attribute:: punish
+      .. attribute:: punish
 
-      The punishment value in units of :math:`\sigma`.
-      Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
-      Defaults to :math:`250`.
+         The punishment value in units of :math:`\sigma`.
+         Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g. if it does not contain an AP).
+         Defaults to :math:`250`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: punish_last_spike_after_deadline
+      .. attribute:: punish_last_spike_after_deadline
 
-      Whether to punish if the last spike is after the deadline. Defaults to ``True``
+         Whether to punish if the last spike is after the deadline. Defaults to ``True``
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: punish_minspikenum
+      .. attribute:: punish_minspikenum
 
-      The minimum number of spikes required for this stimulus protocol.
+         The minimum number of spikes required for this stimulus protocol.
 
-      :type: int
+         :type: int
 
-   .. attribute:: punish_returning_to_rest_tolerance
+      .. attribute:: punish_returning_to_rest_tolerance
 
-      The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
+         The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
 
-      :type: float
+         :type: float
 
-   .. attribute:: prefix
+      .. attribute:: prefix
 
-      The prefix for the evaluation metric checks. Defaults to an empty string.
+         The prefix for the evaluation metric checks. Defaults to an empty string.
 
-      :type: str
+         :type: str
 
-   .. attribute:: definitions
+      .. attribute:: definitions
 
-      
-      
-      The empirical means and standard deviations for the evaluation metrics. Defaults to::
-          
-          {
-              'BAC_APheight': ('AP_height', 25.0, 5.0),
-              'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
-              'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
-              'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
-              'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
-              'BAC_spikecount': ('Spikecount', 3.0, 0.01)
-          }
-          
-          Here, the format of each line is: ``acronym: [full name, mean, std]``
+         
+         
+         The empirical means and standard deviations for the evaluation metrics. Defaults to::
+             
+             {
+                 'BAC_APheight': ('AP_height', 25.0, 5.0),
+                 'BAC_ISI': ('BAC_ISI', 9.901, 0.8517),
+                 'BAC_ahpdepth': ('AHP_depth_abs', -65.0, 4.0),
+                 'BAC_caSpike_height': ('BAC_caSpike_height', 6.73, 2.54),
+                 'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
+                 'BAC_spikecount': ('Spikecount', 3.0, 0.01)
+             }
+             
+             Here, the format of each line is: ``acronym: [full name, mean, std]``
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -174,3 +182,7 @@ BAC
       * - :py:obj:`BAC_caSpike_width <biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_width>`\ (voltage\_traces)
         - Get the width of the calcium spike in the dendritic voltage trace.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

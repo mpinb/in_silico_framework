@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.cell_parser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser` ❭ :mod:`~single_cell_parser.cell_parser.CellParser._create_ais`
+
+
 
 CellParser._create_ais
 ======================
 
+
 .. py:method:: single_cell_parser.cell_parser.CellParser._create_ais()
+
 
    Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
 
@@ -15,3 +17,8 @@ CellParser._create_ais
 
    .. note:: Connectivity is automatically taken care of, since this should only be called from :py:meth:`spatialgraph_to_cell`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

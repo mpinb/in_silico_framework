@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._map_complete_anatomical_realization`
+
+
 
 NetworkMapper._map_complete_anatomical_realization
 ==================================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._map_complete_anatomical_realization(weights=None, full_network=False)
+
 
    Connect synapses to active presynaptic cells.
 
@@ -17,9 +19,16 @@ NetworkMapper._map_complete_anatomical_realization
 
    Assigns synapse weights using :py:meth:`~_assign_synapse_weights` and connect synapses to presynaptic cells with defined activity.
 
-   :Parameters: * **weights** (*dict | None, optional*) -- pecific weights for each synapse type.
-                  Default: None, in which case they are read from the :ref:`network_parameters_format`.
-                * **full_network** (*bool*) -- Defines which cell IDS to use.
-                  If True: (non-sequential) cell ids from the network embedding are used.
-                  If False, single_cell network embedding from single_cell_input_mapper is used, in which cell ids are sequential.
+   :param weights: pecific weights for each synapse type.
+                   Default: None, in which case they are read from the :ref:`network_parameters_format`.
+   :type weights: dict | None, optional
+   :param full_network: Defines which cell IDS to use.
+                        If True: (non-sequential) cell ids from the network embedding are used.
+                        If False, single_cell network embedding from single_cell_input_mapper is used, in which cell ids are sequential.
+   :type full_network: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

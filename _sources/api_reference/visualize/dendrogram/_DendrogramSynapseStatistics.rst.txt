@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramSynapseStatistics`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _DendrogramSynapseStatistics
 ============================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -40,61 +36,64 @@ _DendrogramSynapseStatistics
    Synaptic statistics include the total amount of synapses binned by soma distance, both unnormalized, as well
    as normalized by total amount of dendritic length.
 
-   :Parameters: * **dendrogram_db** (*list*) -- A list of :py:class:`_DendrogramSection` objects.
-                * **cell** (:py:class:`~single_cell_parser.cell.Cell`) -- The cell object.
-                * **colormap_synapses** (*dict*) -- A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
-                  Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+   :param dendrogram_db: A list of :py:class:`_DendrogramSection` objects.
+   :type dendrogram_db: list
+   :param cell: The cell object.
+   :type cell: ~single_cell_parser.cell.Cell
+   :param colormap_synapses: A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+                             Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+   :type colormap_synapses: dict
 
    :Attributes:
 
-   .. attribute:: dendrogram_db
+      .. attribute:: dendrogram_db
 
-      A list of :py:class:`_DendrogramSection` objects.
+         A list of :py:class:`_DendrogramSection` objects.
 
-      :type: list
+         :type: list
 
-   .. attribute:: cell
+      .. attribute:: cell
 
-      The cell object.
+         The cell object.
 
-      :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :py:class:`~single_cell_parser.cell.Cell`
 
-   .. attribute:: colormap_synapses
+      .. attribute:: colormap_synapses
 
-      A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
-      Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+         A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+         Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: bins
+      .. attribute:: bins
 
-      The bins of the synapse density histogram.
+         The bins of the synapse density histogram.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: synapse_density
+      .. attribute:: synapse_density
 
-      The synapse density histogram, i.e. the amount of synapses within a range of soma distance.
+         The synapse density histogram, i.e. the amount of synapses within a range of soma distance.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: synapse_density_apical
+      .. attribute:: synapse_density_apical
 
-      The synapse density histogram for apical dendrites.
+         The synapse density histogram for apical dendrites.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: synapse_density_basal
+      .. attribute:: synapse_density_basal
 
-      The synapse density histogram for basal dendrites.
+         The synapse density histogram for basal dendrites.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: synapse_statistics
+      .. attribute:: synapse_statistics
 
-      A dictionary of synapse statistics
+         A dictionary of synapse statistics
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -121,3 +120,7 @@ _DendrogramSynapseStatistics
       * - :py:obj:`plot <visualize.dendrogram._DendrogramSynapseStatistics.plot>`\ (ax)
         - Plot the synapse statistics
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

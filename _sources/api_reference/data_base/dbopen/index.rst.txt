@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.dbopen`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
+
 
 dbopen
 ======
@@ -17,6 +19,7 @@ dbopen
    resolve_modular_db_path </api_reference/data_base/dbopen/resolve_modular_db_path>
    create_modular_db_path </api_reference/data_base/dbopen/create_modular_db_path>
    resolve_db_path </api_reference/data_base/dbopen/resolve_db_path>
+   find_common_db_path </api_reference/data_base/dbopen/find_common_db_path>
    resolve_neup_reldb_paths </api_reference/data_base/dbopen/resolve_neup_reldb_paths>
    resolve_netp_reldb_paths </api_reference/data_base/dbopen/resolve_netp_reldb_paths>
 
@@ -70,9 +73,15 @@ Functions
      - Create a database path from a given path.
    * - :py:obj:`resolve_db_path <data_base.dbopen.resolve_db_path>`\ (path, db\_basedir)
      - Resolve modular or relative database paths
+   * - :py:obj:`find_common_db_path <data_base.dbopen.find_common_db_path>`\ (paths)
+     - Find the common path of a list of db paths.
    * - :py:obj:`resolve_neup_reldb_paths <data_base.dbopen.resolve_neup_reldb_paths>`\ (neup, db\_basedir)
      - Convert all relative database paths in a :ref:`cell_parameters_format` file to absolute paths.
    * - :py:obj:`resolve_netp_reldb_paths <data_base.dbopen.resolve_netp_reldb_paths>`\ (netp, db\_basedir)
      - Convert all relative database paths in a :ref:`network_parameters_format` file to absolute paths.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

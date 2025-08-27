@@ -1,26 +1,25 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.read_labview_junk1_dat_files`
-
-
-.. title:
 
 read_labview_junk1_dat_files
 ============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.read_labview_junk1_dat_files(path, scale=100, sampling_rate=32000)
+
 
    Read in LabView binary data files.
 
-   :Parameters: * **path** (*str*) -- The path to the binary data file.
-                * **scale** (*int*) -- Scales the data with this value.
-                * **sampling_rate** (*int*) -- The sampling rate of the data. Used to infer time delta from indices.
+   :param path: The path to the binary data file.
+   :type path: str
+   :param scale: Scales the data with this value.
+   :type scale: int
+   :param sampling_rate: The sampling rate of the data. Used to infer time delta from indices.
+   :type sampling_rate: int
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

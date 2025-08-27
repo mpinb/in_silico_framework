@@ -1,0 +1,29 @@
+
+
+_save_object_meta_msgpack
+=========================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.IO.LoaderDumper.meta._save_object_meta_msgpack(obj, savedir)
+
+
+   Save the meta of an object in msgpack format.
+
+   Msgpack is fast, with the downside of not being human-readable.
+   The dtypes of columns and indices are preserved automatically in msgpack.
+
+   :param obj: The dataframe to save the meta of.
+   :type obj: dask.DataFrame | parquet.DataFrame
+   :param savedir: The directory to save the meta file in.
+   :type savedir: str
+
+   :returns: Writes result to disk.
+   :rtype: None
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

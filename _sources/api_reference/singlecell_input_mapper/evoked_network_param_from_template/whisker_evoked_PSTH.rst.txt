@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template` ❭ :mod:`~singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH`
-
-
-.. title:
 
 whisker_evoked_PSTH
 ===================
 
 
+.. Signature -------------------------------
+
 .. py:function:: singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH(column, deflectedWhisker, cellType)
+
 
    Fetch the PSTHs of each celltype in a barrel cortex :paramref:`column` for evoked activity reflecting
    a passive whisker touch scenario.
@@ -35,16 +32,18 @@ whisker_evoked_PSTH
        'probabilities': [0.0057, 0.0057, 0.0057]
        }
 
-   :Parameters: * **column** (*str*) -- the column in the barrel cortex for which to parse the PSTHs.
-                * **deflectedWhisker** (*str*) -- Which whisker was deflected.
-                * **cellType** (*str*) -- Which cell type you want the PSTH for.
+   :param column: the column in the barrel cortex for which to parse the PSTHs.
+   :type column: str
+   :param deflectedWhisker: Which whisker was deflected.
+   :type deflectedWhisker: str
+   :param cellType: Which cell type you want the PSTH for.
+   :type cellType: str
 
    :returns:     The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.
    :rtype: parameters.NTParameterSet
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network_realizations` ❭ :mod:`~single_cell_parser.network_realizations.create_functional_network`
-
-
-.. title:
 
 create_functional_network
 =========================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.network_realizations.create_functional_network(cellParamName, nwParamName)
+
 
    Create fixed functional connectivity based on ``convergence``.
 
@@ -18,12 +15,13 @@ create_functional_network
    For more fine-grained control over anatomically consistent network realizations, please refer to :py:mod:`singlecell_input_mapper.singlecell_input_mapper`,
    The results of the :py:mod:`singlecell_input_mapper.map_single_cell_inputs` can be read in with :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
 
-   :Parameters: * **cellParamName** (*str*) -- Parameter file of postsynaptithe c neuron
-                * **nwParamName** (*str*) -- :ref:`network_parameters_format` file.
+   :param cellParamName: Parameter file of postsynaptithe c neuron
+   :type cellParamName: str
+   :param nwParamName: :ref:`network_parameters_format` file.
+   :type nwParamName: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

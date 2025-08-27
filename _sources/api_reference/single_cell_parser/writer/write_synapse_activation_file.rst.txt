@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.writer` ❭ :mod:`~single_cell_parser.writer.write_synapse_activation_file`
-
-
-.. title:
 
 write_synapse_activation_file
 =============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.writer.write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDistances=None, synTimes=None, activeSyns=None)
+
 
    Write out a :ref:`syn_activation_format` file.
 
@@ -27,12 +24,18 @@ write_synapse_activation_file
    - dendrite label: label of the dendrite that contains this synapse.
    - activation times: times at which the synapse was active (ms).
 
-   :Parameters: * **fname** (*str*) -- The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
-                * **cell** (:py:class:`single_cell_parser.cell.Cell`) -- Cell object.
-                * **synTypes** (*list*) -- list of synapse types.
-                * **synDistances** (*dict*) -- dictionary of synapse distances per synapse type.
-                * **synTimes** (*dict*) -- dictionary of synapse activation times per synapse type. Values are a list of the activation times for each synapse within that type.
-                * **activeSyns** (*dict*) -- dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
+   :param fname: The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
+   :type fname: str
+   :param cell: Cell object.
+   :type cell: single_cell_parser.cell.Cell
+   :param synTypes: list of synapse types.
+   :type synTypes: list
+   :param synDistances: dictionary of synapse distances per synapse type.
+   :type synDistances: dict
+   :param synTimes: dictionary of synapse activation times per synapse type. Values are a list of the activation times for each synapse within that type.
+   :type synTimes: dict
+   :param activeSyns: dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
+   :type activeSyns: dict
 
    :returns: None. Writes out the synapse activation file to :paramref:`fname`.
 
@@ -53,8 +56,7 @@ write_synapse_activation_file
    ... )
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

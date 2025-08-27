@@ -1,27 +1,25 @@
 
-.. backlink:
-
-:mod:`visualize` ❭ :mod:`~visualize.svg2emf`
-
-
-.. title:
 
 svg2emf
 =======
 
 
+.. Signature -------------------------------
+
 .. py:function:: visualize.svg2emf(filename, path_to_inkscape='/usr/bin/inkscape')
+
 
    Converts svg to emf, which can be imported in Word using inkscape.
 
-   :Parameters: * **filename** (*str*) -- the filename of the svg file
-                * **path_to_inkscape** (*str*) -- the path to the inkscape binary
+   :param filename: the filename of the svg file
+   :type filename: str
+   :param path_to_inkscape: the path to the inkscape binary
+   :type path_to_inkscape: str
 
    :returns: None
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

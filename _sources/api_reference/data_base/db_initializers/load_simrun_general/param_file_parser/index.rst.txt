@@ -1,5 +1,7 @@
 
-:mod:`data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ :mod:`~data_base.db_initializers.load_simrun_general.param_file_parser`
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
+
 
 param_file_parser
 =================
@@ -11,15 +13,18 @@ param_file_parser
    :hidden:
 
    construct_param_filename_hashmap_df </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/construct_param_filename_hashmap_df>
-   _copy_and_transform_neuron_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_neuron_param>
-   _copy_and_transform_network_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_network_param>
-   _copy_and_transform_syn </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_syn>
-   _copy_and_transform_con </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_copy_and_transform_con>
-   _get_unique_syncons_from_netps </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_syncons_from_netps>
-   _get_unique_hoc_fns_from_neups </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_hoc_fns_from_neups>
-   _get_unique_landmark_fns_from_neups </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_unique_landmark_fns_from_neups>
+   _get_syn_con_fns_from_netp </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_syn_con_fns_from_netp>
+   _get_hoc_fns_from_neup </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_hoc_fns_from_neup>
+   _get_recsite_fns_from_neup </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_get_recsite_fns_from_neup>
+   _resolve_and_copy_neuron_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_neuron_param>
+   _resolve_and_copy_network_param </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_network_param>
+   _resolve_and_copy_syn </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_syn>
+   _resolve_and_copy_con </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_resolve_and_copy_con>
    _generate_target_filenames </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_generate_target_filenames>
-   _delayed_copy_transform_paramfiles_to_db </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_delayed_copy_transform_paramfiles_to_db>
+   _extract_unique_references_from_neup_and_netp </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_extract_unique_references_from_neup_and_netp>
+   _safe_copy </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_safe_copy>
+   _create_filename_maps </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/_create_filename_maps>
+   parallel_resolve_and_copy_paramfiles_to_db </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/parallel_resolve_and_copy_paramfiles_to_db>
    load_param_files_from_db </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/load_param_files_from_db>
 
 .. py:module:: data_base.db_initializers.load_simrun_general.param_file_parser
@@ -39,7 +44,13 @@ Functions
    
    * - :py:obj:`construct_param_filename_hashmap_df <data_base.db_initializers.load_simrun_general.param_file_parser.construct_param_filename_hashmap_df>`\ (simresult\_path, sim\_trial\_index)
      - Generate a hashmap for the paths of :ref:`cell_parameters_format` and :ref:`network_parameters_format` files.
+   * - :py:obj:`parallel_resolve_and_copy_paramfiles_to_db <data_base.db_initializers.load_simrun_general.param_file_parser.parallel_resolve_and_copy_paramfiles_to_db>`\ (paramfile\_hashmap\_df, db, paramfile\_target\_dirs, copy\_method, client)
+     - Resolve and copy all relevant parameter files to a database.
    * - :py:obj:`load_param_files_from_db <data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db>`\ (db, sti)
      - Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

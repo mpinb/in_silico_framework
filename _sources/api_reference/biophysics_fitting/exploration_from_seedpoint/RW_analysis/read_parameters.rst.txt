@@ -1,29 +1,26 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_parameters`
-
-
-.. title:
 
 read_parameters
 ===============
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_parameters(seed_folder, particle_id, normalized=False, only_in_space=False, only_return_parameters=True, param_names=None, param_ranges=None)
+
 
    Read the biophysical parameters that were explored during a RW exploration.
    To read the full results, use :py:meth:`~biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle` instead.
    See: :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW.RW` for more info.
 
-   :Parameters: **seed_folder** (*str*) -- path to the folder that contains the RW exploration result for a particular seed.
+   :param seed_folder: path to the folder that contains the RW exploration result for a particular seed.
+   :type seed_folder: str
 
    :returns: a dataframe containing all biophysical parameters explored by a single particle.
    :rtype: pd.DataFrame
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

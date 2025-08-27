@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper._create_presyn_cells`
+
+
 
 NetworkMapper._create_presyn_cells
 ==================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper._create_presyn_cells()
+
 
    Creates presynaptic cells.
 
@@ -17,3 +19,8 @@ NetworkMapper._create_presyn_cells
    This method simply creates these cells as :py:class:`~single_cell_parser.cell.PointCell`s, but provides no further configuration
    to these :py:class:`~single_cell_parser.cell.PointCell` objects.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

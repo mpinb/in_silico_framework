@@ -1,14 +1,21 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._create_voxel_edge_map`
+
+
 
 SynapseMapper._create_voxel_edge_map
 ====================================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._create_voxel_edge_map()
+
 
    Fills :paramref:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
 
    Only needs to be called once at the beginning.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.ephys` ❭ :mod:`~biophysics_fitting.ephys.BPAPatt_check_1_AP`
-
-
-.. title:
 
 BPAPatt_check_1_AP
 ==================
 
 
+.. Signature -------------------------------
+
 .. py:function:: biophysics_fitting.ephys.BPAPatt_check_1_AP(t, v_soma, thresh=None, stim_onset=None)
+
 
    Checks if there is exactly one action potential in the somatic voltage trace.
 
@@ -24,8 +21,7 @@ BPAPatt_check_1_AP
    - bool: True if there is exactly one action potential, False otherwise
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

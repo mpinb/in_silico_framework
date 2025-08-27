@@ -1,19 +1,27 @@
 
-.. backlink:
 
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar`
+
+
 
 ScalarField.get_scalar
 ======================
 
+
 .. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar(xyz)
+
 
    Fetch the scalar value of the voxel containing the point xyz.
 
    .. warning:: Returns 0 if :paramref:`xyz` is outside the bounding box.
 
-   :Parameters: **xyz** (*tuple*) -- The 3D coordinates of the point.
+   :param xyz: The 3D coordinates of the point.
+   :type xyz: tuple
 
    :returns: The scalar value of the voxel containing the point, 0 if outside bounding box.
    :rtype: float
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

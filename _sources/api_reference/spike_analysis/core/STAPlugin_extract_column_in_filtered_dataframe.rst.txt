@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_extract_column_in_filtered_dataframe
 ==============================================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -36,35 +32,38 @@ STAPlugin_extract_column_in_filtered_dataframe
 
    .. seealso:: :py:meth:`data_base.utils.select` filters out the columns using :paramref:`select`
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to None.
-                * **column_name** (*str, optional*) -- The name of the column to extract. Defaults to None.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the dataframe. Defaults to None.
+   :param name: The name of the plugin. Defaults to None.
+   :type name: str, optional
+   :param column_name: The name of the column to extract. Defaults to None.
+   :type column_name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the dataframe. Defaults to None.
+   :type source: str, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin.
+         The name of the plugin.
 
-      :type: str
+         :type: str
 
-   .. attribute:: column_name
+      .. attribute:: column_name
 
-      The name of the column to extract.
+         The name of the column to extract.
 
-      :type: str
+         :type: str
 
-   .. attribute:: source
+      .. attribute:: source
 
-      The :py:class:`~data_base.DataBase` key containing the dataframe.
+         The :py:class:`~data_base.DataBase` key containing the dataframe.
 
-      :type: str
+         :type: str
 
-   .. attribute:: select
+      .. attribute:: select
 
-      The selection criteria for the dataframe.
+         The selection criteria for the dataframe.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -77,3 +76,7 @@ STAPlugin_extract_column_in_filtered_dataframe
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe.setup>`\ (spike\_times\_analysis)
         - Sets up the analysis: extracts a column from a filtered dataframe.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

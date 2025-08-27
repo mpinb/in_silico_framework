@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy` ❭ :mod:`~simrun.modular_reduced_model_inference.strategy._Strategy._get_score`
+
+
 
 _Strategy._get_score
 ====================
 
+
 .. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._get_score(x)
+
 
    Compute the score for the given parameters x.
 
@@ -19,3 +21,8 @@ _Strategy._get_score
    :py:class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
    which is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

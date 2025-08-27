@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.ReaderLabView`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 ReaderLabView
 =============
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -37,67 +33,72 @@ ReaderLabView
 
    .. seealso:: :py:class:`spike_analysis.core.ReaderSmr`
 
-   :Parameters: * **path** (*str*) -- The path to the LabView file.
-                * **stim_times** (*str*) -- list of stimulus times.
-                * **sampling_rate** (*int*) -- The sampling rate of the data.
-                * **scale** (*int*) -- Scales the data with this value.
-                * **apply_filter** (*bool*) -- Whether to apply a highpass filter to the data.
+   :param path: The path to the LabView file.
+   :type path: str
+   :param stim_times: list of stimulus times.
+   :type stim_times: str
+   :param sampling_rate: The sampling rate of the data.
+   :type sampling_rate: int
+   :param scale: Scales the data with this value.
+   :type scale: int
+   :param apply_filter: Whether to apply a highpass filter to the data.
+   :type apply_filter: bool
 
    :Attributes:
 
-   .. attribute:: path
+      .. attribute:: path
 
-      The path to the smr-file.
+         The path to the smr-file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: stim_times
+      .. attribute:: stim_times
 
-      The times of the stimuli.
+         The times of the stimuli.
 
-      :type: list
+         :type: list
 
-   .. attribute:: sampling_rate
+      .. attribute:: sampling_rate
 
-      The sampling rate of the data.
+         The sampling rate of the data.
 
-      :type: int
+         :type: int
 
-   .. attribute:: scale
+      .. attribute:: scale
 
-      Scales the data with this value.
+         Scales the data with this value.
 
-      :type: int
+         :type: int
 
-   .. attribute:: apply_filter
+      .. attribute:: apply_filter
 
-      Whether to apply a highpass filter to the data.
+         Whether to apply a highpass filter to the data.
 
-      :type: bool
+         :type: bool
 
-   .. attribute:: t
+      .. attribute:: t
 
-      The time points of the voltage traces.
+         The time points of the voltage traces.
 
-      :type: numpy.ndarray
+         :type: numpy.ndarray
 
-   .. attribute:: v
+      .. attribute:: v
 
-      The voltage values of the traces.
+         The voltage values of the traces.
 
-      :type: numpy.ndarray
+         :type: numpy.ndarray
 
-   .. attribute:: t_start
+      .. attribute:: t_start
 
-      The start time of the voltage traces.
+         The start time of the voltage traces.
 
-      :type: float
+         :type: float
 
-   .. attribute:: t_end
+      .. attribute:: t_end
 
-      The end time of the voltage traces.
+         The end time of the voltage traces.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -114,3 +115,7 @@ ReaderLabView
       * - :py:obj:`get_serialize_dict <spike_analysis.core.ReaderLabView.get_serialize_dict>`\ ()
         - Get a dictionary containing the attributes of the ReaderLabView object.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

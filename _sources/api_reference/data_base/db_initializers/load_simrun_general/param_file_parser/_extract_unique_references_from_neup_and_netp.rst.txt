@@ -1,0 +1,29 @@
+
+
+_extract_unique_references_from_neup_and_netp
+=============================================
+
+
+.. Signature -------------------------------
+
+.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._extract_unique_references_from_neup_and_netp(paramfile_hashmap_df, client=None)
+
+
+   Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
+   and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`neuron_parameters_format`.
+
+   :param paramfile_hashmap_df: A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
+                                as well as a hash of their content.
+                                Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
+   :type paramfile_hashmap_df: pandas.DataFrame
+   :param client: A parallellization client.
+   :type client: distributed.client.Client
+
+   :returns: A dictionary mapping each filetype (str) to a list of unique references of that filetype.
+   :rtype: Dict[str, List]
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

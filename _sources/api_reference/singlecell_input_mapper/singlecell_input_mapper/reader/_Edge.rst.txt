@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _Edge
 =====
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -36,41 +32,41 @@ _Edge
 
    :Attributes:
 
-   .. attribute:: label
+      .. attribute:: label
 
-      The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
+         The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
 
-      :type: str
+         :type: str
 
-   .. attribute:: hocLabel
+      .. attribute:: hocLabel
 
-      The label of the segment as defined in the hoc file.
+         The label of the segment as defined in the hoc file.
 
-      :type: str
+         :type: str
 
-   .. attribute:: edgePts
+      .. attribute:: edgePts
 
-      A list of points that define the segment.
+         A list of points that define the segment.
 
-      :type: list
+         :type: list
 
-   .. attribute:: diameterList
+      .. attribute:: diameterList
 
-      A list of diameters for each point in edgePts.
+         A list of diameters for each point in edgePts.
 
-      :type: list
+         :type: list
 
-   .. attribute:: parentID
+      .. attribute:: parentID
 
-      The ID of the parent segment.
+         The ID of the parent segment.
 
-      :type: int
+         :type: int
 
-   .. attribute:: parentConnect
+      .. attribute:: parentConnect
 
-      The parent segment.
+         The parent segment.
 
-      :type: float
+         :type: float
 
    :Methods:
 
@@ -83,3 +79,7 @@ _Edge
       * - :py:obj:`is_valid <singlecell_input_mapper.singlecell_input_mapper.reader._Edge.is_valid>`\ ()
         - Check if this edge is valid.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

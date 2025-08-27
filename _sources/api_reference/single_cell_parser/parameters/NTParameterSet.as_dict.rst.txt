@@ -1,15 +1,22 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.parameters` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet` ❭ :mod:`~single_cell_parser.parameters.NTParameterSet.as_dict`
+
+
 
 NTParameterSet.as_dict
 ======================
 
+
 .. py:method:: single_cell_parser.parameters.NTParameterSet.as_dict()
+
 
    Convert the NTParameterSet to a regular dictionary.
 
    :returns: The underlying dictionary representation of the parameters.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

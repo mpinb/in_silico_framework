@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.SpikeTimesAnalysis`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 SpikeTimesAnalysis
 ==================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -32,29 +28,32 @@ SpikeTimesAnalysis
    
    Class for applying event_analysis routines on a spike times dataframe.
 
-   :Parameters: * **spike_times_object** (*object*) -- The spike times object.
-                * **default_event_analysis** (*list*) -- A list of event analysis routines.
-                * **periods** (*dict*) -- A dictionary containing period labels as keys and (period_start, period_end) as values.
+   :param spike_times_object: The spike times object.
+   :type spike_times_object: object
+   :param default_event_analysis: A list of event analysis routines.
+   :type default_event_analysis: list
+   :param periods: A dictionary containing period labels as keys and (period_start, period_end) as values.
+   :type periods: dict
 
    :Attributes:
 
-   .. attribute:: spike_times_object
+      .. attribute:: spike_times_object
 
-      The spike times object.
+         The spike times object.
 
-      :type: object
+         :type: object
 
-   .. attribute:: _db
+      .. attribute:: _db
 
-      The database containing the spike times and the event analysis routines.
+         The database containing the spike times and the event analysis routines.
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: periods
+      .. attribute:: periods
 
-      A dictionary containing period labels as keys and (period_start, period_end) as values.
+         A dictionary containing period labels as keys and (period_start, period_end) as values.
 
-      :type: dict
+         :type: dict
 
    :Methods:
 
@@ -71,3 +70,7 @@ SpikeTimesAnalysis
       * - :py:obj:`get_by_trial <spike_analysis.core.SpikeTimesAnalysis.get_by_trial>`\ (key)
         - Get spike information by trial.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

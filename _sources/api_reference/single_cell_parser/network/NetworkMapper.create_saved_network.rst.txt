@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.network` ❭ :mod:`~single_cell_parser.network.NetworkMapper` ❭ :mod:`~single_cell_parser.network.NetworkMapper.create_saved_network`
+
+
 
 NetworkMapper.create_saved_network
 ==================================
 
+
 .. py:method:: single_cell_parser.network.NetworkMapper.create_saved_network(synWeightName=None)
+
 
    Recreate a saved network embedding and activate it.
 
@@ -29,8 +31,15 @@ NetworkMapper.create_saved_network
    4. Connect the presynaptic cells to the anatomical synapses using :py:meth:`~_map_functional_realization`.
    5. Connect to spike train sources using :py:meth:`_connect_spike_trains`.
 
-   :Parameters: * **synWeightName** (*str*) -- Name of the file containing the synapse weights. Default: None.
-                * **full_network** (*bool*) -- If True, all synapses are created, even if they were not active.
-                  If False, only recreates the synapses that were active, and re-assigns their IDs to be sequential.
-                  Default: False.
+   :param synWeightName: Name of the file containing the synapse weights. Default: None.
+   :type synWeightName: str
+   :param full_network: If True, all synapses are created, even if they were not active.
+                        If False, only recreates the synapses that were active, and re-assigns their IDs to be sequential.
+                        Default: False.
+   :type full_network: bool
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

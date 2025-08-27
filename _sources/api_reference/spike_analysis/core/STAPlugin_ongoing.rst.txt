@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.STAPlugin_ongoing`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 STAPlugin_ongoing
 =================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -32,36 +28,40 @@ STAPlugin_ongoing
 
    .. seealso:: :py:class:`spike_analysis.core.SpikeTimesAnalysis` reads in :paramref:`source`.
 
-   :Parameters: * **name** (*str, optional*) -- The name of the plugin. Defaults to 'ongoing_activity'.
-                * **source** (*str, optional*) -- The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
-                * **ongoing_sample_length** (*int, optional*) -- The length of the ongoing sample in ms. Defaults to 90000.
-                * **mode** (*str, optional*) -- The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'.
+   :param name: The name of the plugin. Defaults to 'ongoing_activity'.
+   :type name: str, optional
+   :param source: The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+   :type source: str, optional
+   :param ongoing_sample_length: The length of the ongoing sample in ms. Defaults to 90000.
+   :type ongoing_sample_length: int, optional
+   :param mode: The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'.
+   :type mode: str, optional
 
    :Attributes:
 
-   .. attribute:: name
+      .. attribute:: name
 
-      The name of the plugin. Defaults to 'ongoing_activity'.
+         The name of the plugin. Defaults to 'ongoing_activity'.
 
-      :type: str
+         :type: str
 
-   .. attribute:: source
+      .. attribute:: source
 
-      The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
+         The :py:class:`~data_base.DataBase` key containing the spike times. Defaults to 'spike_times'.
 
-      :type: str, optional
+         :type: str, optional
 
-   .. attribute:: ongoing_sample_length
+      .. attribute:: ongoing_sample_length
 
-      The length of the ongoing sample in ms. Defaults to 90000.
+         The length of the ongoing sample in ms. Defaults to 90000.
 
-      :type: int
+         :type: int
 
-   .. attribute:: mode
+      .. attribute:: mode
 
-      The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'.
+         The mode of the analysis. Can be 'frequency' or 'count'. Defaults to 'frequency'.
 
-      :type: str
+         :type: str
 
    :Methods:
 
@@ -74,3 +74,7 @@ STAPlugin_ongoing
       * - :py:obj:`setup <spike_analysis.core.STAPlugin_ongoing.setup>`\ (spike\_times\_analysis)
         - Sets up the analysis: calculates the ongoing activity.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

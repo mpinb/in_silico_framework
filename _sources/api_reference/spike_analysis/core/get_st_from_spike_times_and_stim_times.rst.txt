@@ -1,23 +1,24 @@
 
-.. backlink:
-
-:mod:`spike_analysis` ❭ :mod:`~spike_analysis.core` ❭ :mod:`~spike_analysis.core.get_st_from_spike_times_and_stim_times`
-
-
-.. title:
 
 get_st_from_spike_times_and_stim_times
 ======================================
 
 
+.. Signature -------------------------------
+
 .. py:function:: spike_analysis.core.get_st_from_spike_times_and_stim_times(spike_times, stim_times, offset=0, mode='spike_times')
+
 
    Computes spike times dataframe based on list of spike times and stimulus times.
 
-   :Parameters: * **spike_times** (*list*) -- List of spike times.
-                * **stim_times** (*list*) -- List of stimulus times.
-                * **offset** (*float, optional*) -- Offset value. Defaults to 0.
-                * **mode** (*str, optional*) -- Mode of computation. Can be 'spike_times' or 'ISIs'. Defaults to 'spike_times'.
+   :param spike_times: List of spike times.
+   :type spike_times: list
+   :param stim_times: List of stimulus times.
+   :type stim_times: list
+   :param offset: Offset value. Defaults to 0.
+   :type offset: float, optional
+   :param mode: Mode of computation. Can be 'spike_times' or 'ISIs'. Defaults to 'spike_times'.
+   :type mode: str, optional
 
    :returns: Pandas dataframe. Its format is as follows: One row is one trial. The columns contain the spike times
              and are named in ascending order (0,1,2, ...).
@@ -27,8 +28,7 @@ get_st_from_spike_times_and_stim_times
    :raises ValueError: If offset is not negative.
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`visualize` ❭ :mod:`~visualize.dendrogram` ❭ :mod:`~visualize.dendrogram._DendrogramDendriteStatistics`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 _DendrogramDendriteStatistics
 =============================
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -36,36 +32,38 @@ _DendrogramDendriteStatistics
    Dendrite statistics includes the total amount of dendritic length in a certain bin of soma distance.
    This is useful for calculating synapse statistics as well.
 
-   :Parameters: * **dendrogram_db** (*list*) -- A list of :py:class:`_DendrogramSection` objects.
-                * **colormap_synapses** (*dict*) -- A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
-                  Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+   :param dendrogram_db: A list of :py:class:`_DendrogramSection` objects.
+   :type dendrogram_db: list
+   :param colormap_synapses: A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+                             Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+   :type colormap_synapses: dict
 
    :Attributes:
 
-   .. attribute:: dendrogram_db
+      .. attribute:: dendrogram_db
 
-      A list of :py:class:`_DendrogramSection` objects.
+         A list of :py:class:`_DendrogramSection` objects.
 
-      :type: list
+         :type: list
 
-   .. attribute:: colormap_synapses
+      .. attribute:: colormap_synapses
 
-      A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
-      Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
+         A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
+         Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
 
-      :type: dict
+         :type: dict
 
-   .. attribute:: bins
+      .. attribute:: bins
 
-      The bins of the dendrite density histogram.
+         The bins of the dendrite density histogram.
 
-      :type: np.array
+         :type: np.array
 
-   .. attribute:: dendrite_density
+      .. attribute:: dendrite_density
 
-      The dendrite density histogram, i.e. the amount of dendritic length within a range of soma distance.
+         The dendrite density histogram, i.e. the amount of dendritic length within a range of soma distance.
 
-      :type: np.array
+         :type: np.array
 
    :Methods:
 
@@ -84,3 +82,7 @@ _DendrogramDendriteStatistics
       * - :py:obj:`_compute_dendrite_hist <visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist>`\ (dist\_end, binsize)
         - Compute the dendrite density histogram.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ :mod:`~data_base.IO.LoaderDumper.reduced_lda_model` ❭ :mod:`~data_base.IO.LoaderDumper.reduced_lda_model.dump`
-
-
-.. title:
 
 dump
 ====
 
 
+.. Signature -------------------------------
+
 .. py:function:: data_base.IO.LoaderDumper.reduced_lda_model.dump(obj, savedir)
+
 
    Save the reduced model in the specified directory as a DataBase.
 
@@ -20,12 +17,13 @@ dump
    - ``lda_value_dicts_<index>``: Dictionaries of LDA values with a precision of :math:`.01`.
    - ``Rm``: The reduced model.
 
-   :Parameters: * **obj** (:py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`) -- Reduced model to be saved.
-                * **savedir** (*str*) -- Directory where the reduced model should be stored.
+   :param obj: Reduced model to be saved.
+   :type obj: ~simrun.reduced_model.get_kernel.ReducedLdaModel
+   :param savedir: Directory where the reduced model should be stored.
+   :type savedir: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

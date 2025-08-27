@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm` ❭ :mod:`~simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials`
+
+
 
 Rm.get_n_trials
 ===============
 
+
 .. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials()
+
 
    Get the amount of trials.
 
@@ -15,3 +17,8 @@ Rm.get_n_trials
    :returns: Amount of trials
    :rtype: int
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

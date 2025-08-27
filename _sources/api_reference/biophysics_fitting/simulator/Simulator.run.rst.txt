@@ -1,19 +1,27 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator.run`
+
+
 
 Simulator.run
 =============
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator.run(params, stims=None)
+
 
    Simulates all stimuli for a given parameter vector.
 
-   :Parameters: * **params** -- The parameter vector.
-                * **stims** (*str | [str]*) -- which sitmuli to run. Either a str (for one stimulus) or a list of str.
+   :param params: The parameter vector.
+   :param stims: which sitmuli to run. Either a str (for one stimulus) or a list of str.
+   :type stims: str | [str]
 
    :returns: Dictionary where stim_response_measure_funs names are keys,
              return values of the stim_response_measure_funs (usually voltage traces) are values.
    :rtype: dict
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

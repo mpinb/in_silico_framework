@@ -1,18 +1,27 @@
 
-.. backlink:
 
-:mod:`simrun` ❭ :mod:`~simrun.synaptic_strength_fitting` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs` ❭ :mod:`~simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates`
+
+
 
 PSPs.get_merged_synapse_coordinates
 ===================================
 
+
 .. py:method:: simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates(mergestring, flatten=False)
+
 
    Get the coordinates of all synapses that contain a certain string in their name.
 
-   :Parameters: * **mergestring** (*str*) -- The string to search for in the synapse names.
-                * **flatten** (*bool*) -- Whether to flatten the list of synapse coordinates. Default: ``False``.
+   :param mergestring: The string to search for in the synapse names.
+   :type mergestring: str
+   :param flatten: Whether to flatten the list of synapse coordinates. Default: ``False``.
+   :type flatten: bool
 
    :returns: A list of synapse coordinates.
    :rtype: list
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

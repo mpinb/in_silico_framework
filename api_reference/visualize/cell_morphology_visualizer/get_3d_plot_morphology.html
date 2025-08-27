@@ -32,12 +32,14 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.2d7f013d36e4da932.min.css?v=cc46594a" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.0074f731f8a211b06.min.css?v=a5c09059" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
-        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=f9c3c789" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
         <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=02cdb650" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/doc_feedback.css?v=0c6f93d1" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/css/signature_links.css?v=3f2e413b" />
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -610,16 +612,127 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology (Python function) — Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data." class="md-ellipsis">visualize.<wbr>cell_<wbr>morphology_<wbr>visualizer.<wbr>get_<wbr>3d_<wbr>plot_<wbr>morphology</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology (Python function) — Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data." class="md-ellipsis">visualizecell_<wbr>morphology_<wbr>visualizerget_<wbr>3d_<wbr>plot_<wbr>morphology</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_morphology_visualizer.get_3d_plot_morphology">
+    <nav class="md-nav" aria-label="visualizecell_morphology_visualizerget_3d_plot_morphology">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table (Python parameter) — pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section." class="md-ellipsis">lookup_<wbr>table</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors (Python parameter) — Color for the voltage." class="md-ellipsis">colors</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword (Python parameter) — Keyword for the scalar data to be saved." class="md-ellipsis">color_<wbr>keyword</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses (Python parameter) — Dictionary with synapse activations." class="md-ellipsis">synapses</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point (Python parameter) — Time point at which to plot the scalar data." class="md-ellipsis">time_<wbr>point</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs (Python parameter) — Additional arguments for the arrow." class="md-ellipsis">highlight_<wbr>section_<wbr>kwargs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position (Python parameter) — Camera angles and distance for matplotlib 3D visualizations." class="md-ellipsis">camera_<wbr>position</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi (Python parameter) — Image quality." class="md-ellipsis">dpi</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict (Python parameter) — Dictionary to map synapse group names (str) to colors." class="md-ellipsis">population_<wbr>to_<wbr>color_<wbr>dict</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.save" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.save (Python parameter) — Path where the plot will be saved." class="md-ellipsis">save</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot (Python parameter) — whether to show the plot." class="md-ellipsis">plot</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend (Python parameter) — Whether the synapse activations legend should appear in the plot" class="md-ellipsis">synapse_<wbr>legend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend (Python parameter) — Whether the legend for scalar data (e.g." class="md-ellipsis">legend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax (Python parameter) — Whether to return the figure and axis objects." class="md-ellipsis">return_<wbr>figax</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type (Python parameter) — Projection type for the 3D plot." class="md-ellipsis">proj_<wbr>type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -928,16 +1041,127 @@
       
         <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology" class="md-nav__link">
-    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology (Python function) — Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data." class="md-ellipsis">visualize.<wbr>cell_<wbr>morphology_<wbr>visualizer.<wbr>get_<wbr>3d_<wbr>plot_<wbr>morphology</span>
+    <span aria-label="Python function" class="objinfo-icon objinfo-icon__procedure" title="Python function">F</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology (Python function) — Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data." class="md-ellipsis">visualizecell_<wbr>morphology_<wbr>visualizerget_<wbr>3d_<wbr>plot_<wbr>morphology</span>
   </a>
   
-    <nav class="md-nav" aria-label="visualize.cell_morphology_visualizer.get_3d_plot_morphology">
+    <nav class="md-nav" aria-label="visualizecell_morphology_visualizerget_3d_plot_morphology">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology-parameters" class="md-nav__link">
     <span class="md-ellipsis">Parameters</span>
   </a>
+  
+    <nav class="md-nav" aria-label="Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table (Python parameter) — pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section." class="md-ellipsis">lookup_<wbr>table</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors (Python parameter) — Color for the voltage." class="md-ellipsis">colors</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword (Python parameter) — Keyword for the scalar data to be saved." class="md-ellipsis">color_<wbr>keyword</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses (Python parameter) — Dictionary with synapse activations." class="md-ellipsis">synapses</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point (Python parameter) — Time point at which to plot the scalar data." class="md-ellipsis">time_<wbr>point</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs (Python parameter) — Additional arguments for the arrow." class="md-ellipsis">highlight_<wbr>section_<wbr>kwargs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position (Python parameter) — Camera angles and distance for matplotlib 3D visualizations." class="md-ellipsis">camera_<wbr>position</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi (Python parameter) — Image quality." class="md-ellipsis">dpi</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict (Python parameter) — Dictionary to map synapse group names (str) to colors." class="md-ellipsis">population_<wbr>to_<wbr>color_<wbr>dict</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.save" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.save (Python parameter) — Path where the plot will be saved." class="md-ellipsis">save</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot (Python parameter) — whether to show the plot." class="md-ellipsis">plot</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend (Python parameter) — Whether the synapse activations legend should appear in the plot" class="md-ellipsis">synapse_<wbr>legend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend (Python parameter) — Whether the legend for scalar data (e.g." class="md-ellipsis">legend</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax (Python parameter) — Whether to return the figure and axis objects." class="md-ellipsis">return_<wbr>figax</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type (Python parameter) — Projection type for the 3D plot." class="md-ellipsis">proj_<wbr>type</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -974,11 +1198,10 @@
                   
 
 
-<p><a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">visualize</span></code></a> ❭ <a class="reference internal" href="index.html#module-visualize.cell_morphology_visualizer" title="visualize.cell_morphology_visualizer (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_morphology_visualizer</span></code></a> ❭ <a class="reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology (Python function) — Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">get_3d_plot_morphology</span></code></a></p>
-<h1 id="get-3d-plot-morphology">get_3d_plot_morphology<a class="headerlink" href="#get-3d-plot-morphology" title="Permalink to this heading">¶</a></h1>
+<h1 id="get-3d-plot-morphology">get_3d_plot_morphology<a class="headerlink" href="#get-3d-plot-morphology" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="visualize.cell_morphology_visualizer.get_3d_plot_morphology">
-<span class="sig-prename descclassname"><span class="pre">visualize.cell_morphology_visualizer.</span></span><span class="sig-name descname"><span class="pre">get_3d_plot_morphology</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">lookup_table</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;grey&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">color_keyword</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">synapses</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">time_point</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">highlight_section_kwargs</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{</span><span class="s1">&#39;sec_n&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;highlight_x&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;arrow_args&#39;</span><span class="p">:</span> <span class="p">{}}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">camera_position</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{</span><span class="s1">&#39;azim&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;elev&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">72</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">population_to_color_dict</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">synapse_legend</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">return_figax</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><span class="n"><span class="pre">proj_type</span></span><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;ortho&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology" title="Permalink to this definition">¶</a></dt>
+<a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><span class="sig-name descname"><span class="pre">visualize</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-visualize.cell_morphology_visualizer" title="visualize.cell_morphology_visualizer (Python module)"><span class="sig-name descname"><span class="pre">cell_morphology_visualizer</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">get_3d_plot_morphology</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table (Python parameter) — pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section."><span class="n"><span class="pre">lookup_table</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors (Python parameter) — Color for the voltage."><span class="n"><span class="pre">colors</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;grey&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword (Python parameter) — Keyword for the scalar data to be saved."><span class="n"><span class="pre">color_keyword</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses (Python parameter) — Dictionary with synapse activations."><span class="n"><span class="pre">synapses</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point (Python parameter) — Time point at which to plot the scalar data."><span class="n"><span class="pre">time_point</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs (Python parameter) — Additional arguments for the arrow."><span class="n"><span class="pre">highlight_section_kwargs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{</span><span class="s1">&#39;sec_n&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;highlight_x&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;arrow_args&#39;</span><span class="p">:</span> <span class="p">{}}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position (Python parameter) — Camera angles and distance for matplotlib 3D visualizations."><span class="n"><span class="pre">camera_position</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{</span><span class="s1">&#39;azim&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;dist&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;elev&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi (Python parameter) — Image quality."><span class="n"><span class="pre">dpi</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">72</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict (Python parameter) — Dictionary to map synapse group names (str) to colors."><span class="n"><span class="pre">population_to_color_dict</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="p">{}</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.save" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.save (Python parameter) — Path where the plot will be saved."><span class="n"><span class="pre">save</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot (Python parameter) — whether to show the plot."><span class="n"><span class="pre">plot</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend (Python parameter) — Whether the synapse activations legend should appear in the plot"><span class="n"><span class="pre">synapse_legend</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend (Python parameter) — Whether the legend for scalar data (e.g."><span class="n"><span class="pre">legend</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax (Python parameter) — Whether to return the figure and axis objects."><span class="n"><span class="pre">return_figax</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type" title="visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type (Python parameter) — Projection type for the 3D plot."><span class="n"><span class="pre">proj_type</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;ortho&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology" title="Link to this definition">¶</a></dt>
 <dd><p>Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.</p>
 <p>This is the main method called by <a class="reference internal" href="CellMorphologyVisualizer.html#visualize.cell_morphology_visualizer.CellMorphologyVisualizer" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer (Python class) — Plot a cell morphology using matplotlib."><code class="xref py py-class docutils literal notranslate"><span class="pre">CellMorphologyVisualizer</span></code></a> to generate a 3D plot of the cell morphology.
 This method Uses LineCollections to plot the morphology, with a round joinstyle.
@@ -987,23 +1210,38 @@ depending on parameters such as parallellization client, scalar data overlay, vi
 It is recommended to use the high-level method <a class="reference internal" href="CellMorphologyVisualizer.plot.html#visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot" title="visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot (Python method) — Plot the cell morphology in 3D."><code class="xref py py-class docutils literal notranslate"><span class="pre">plot</span></code></a> instead of trying to use this one directly.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="visualize.cell_morphology_visualizer.get_3d_plot_morphology-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lookup_table</strong> (<em>pd.DataFrame</em>) – pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section.</p></li>
-<li><p><strong>colors</strong> (<em>str | array</em>) – Color for the voltage. Either a single color for all sections, or a list of colors for each section.</p></li>
-<li><p><strong>color_keyword</strong> (<em>str</em>) – Keyword for the scalar data to be saved. Defaults to only diameter.</p></li>
-<li><p><strong>synapses</strong> (<em>dict</em>) – Dictionary with synapse activations. Keys are the population names, values are lists of synapse locations.</p></li>
-<li><p><strong>time_point</strong> (<em>float</em>) – Time point at which to plot the scalar data.</p></li>
-<li><p><strong>highlight_section_kwargs</strong> (<em>dict</em>) – Additional arguments for the arrow. See available kwargs on <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow">https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow</a></p></li>
-<li><p><strong>camera_position</strong> (<em>dict</em>) – Camera angles and distance for matplotlib 3D visualizations. Possible keys: ‘azim’, ‘dist’, ‘elev’, ‘roll’</p></li>
-<li><p><strong>dpi</strong> (<em>int</em>) – Image quality. Default: 72</p></li>
-<li><p><strong>population_to_color_dict</strong> (<em>dict</em>) – Dictionary to map synapse group names (str) to colors. Must contain the same keys as synapses.keys()</p></li>
-<li><p><strong>save</strong> (<em>str</em>) – Path where the plot will be saved. If it’s empty it will not be saved (Default)</p></li>
-<li><p><strong>plot</strong> (<em>bool</em>) – whether to show the plot. Default: False</p></li>
-<li><p><strong>synapse_legend</strong> (<em>bool</em>) – Whether the synapse activations legend should appear in the plot</p></li>
-<li><p><strong>legend</strong> (<em>bool</em>) – Whether the legend for scalar data (e.g. membrane voltage) should appear in the plot</p></li>
-<li><p><strong>return_figax</strong> (<em>bool</em>) – Whether to return the figure and axis objects. Default: True</p></li>
-<li><p><strong>proj_type</strong> (<em>str</em>) – Projection type for the 3D plot. Default: “ortho”</p></li>
-</ul>
+<dd class="field-odd"><dl class="simple api-field highlight">
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table"><span class="sig-name descname">lookup_table</span><span class="p"> : </span><span class="desctype"><span class="desctype">pd.DataFrame</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.lookup_table" title="Permalink to this definition">¶</a></dt><dd><p>pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section.</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors"><span class="sig-name descname">colors</span><span class="p"> : </span><span class="desctype"><span class="desctype">str | array</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.colors" title="Permalink to this definition">¶</a></dt><dd><p>Color for the voltage. Either a single color for all sections, or a list of colors for each section.</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword"><span class="sig-name descname">color_keyword</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.color_keyword" title="Permalink to this definition">¶</a></dt><dd><p>Keyword for the scalar data to be saved. Defaults to only diameter.</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses"><span class="sig-name descname">synapses</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapses" title="Permalink to this definition">¶</a></dt><dd><p>Dictionary with synapse activations. Keys are the population names, values are lists of synapse locations.</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point"><span class="sig-name descname">time_point</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.time_point" title="Permalink to this definition">¶</a></dt><dd><p>Time point at which to plot the scalar data.</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs"><span class="sig-name descname">highlight_section_kwargs</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.highlight_section_kwargs" title="Permalink to this definition">¶</a></dt><dd><p>Additional arguments for the arrow. See available kwargs on <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow">https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.patches.Arrow.html#matplotlib.patches.Arrow</a></p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position"><span class="sig-name descname">camera_position</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.camera_position" title="Permalink to this definition">¶</a></dt><dd><p>Camera angles and distance for matplotlib 3D visualizations. Possible keys: ‘azim’, ‘dist’, ‘elev’, ‘roll’</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi"><span class="sig-name descname">dpi</span><span class="p"> : </span><span class="desctype"><span class="desctype">int</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.dpi" title="Permalink to this definition">¶</a></dt><dd><p>Image quality. Default: 72</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict"><span class="sig-name descname">population_to_color_dict</span><span class="p"> : </span><span class="desctype"><span class="desctype">dict</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.population_to_color_dict" title="Permalink to this definition">¶</a></dt><dd><p>Dictionary to map synapse group names (str) to colors. Must contain the same keys as synapses.keys()</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.save"><span class="sig-name descname">save</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.save" title="Permalink to this definition">¶</a></dt><dd><p>Path where the plot will be saved. If it’s empty it will not be saved (Default)</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot"><span class="sig-name descname">plot</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.plot" title="Permalink to this definition">¶</a></dt><dd><p>whether to show the plot. Default: False</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend"><span class="sig-name descname">synapse_legend</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.synapse_legend" title="Permalink to this definition">¶</a></dt><dd><p>Whether the synapse activations legend should appear in the plot</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend"><span class="sig-name descname">legend</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.legend" title="Permalink to this definition">¶</a></dt><dd><p>Whether the legend for scalar data (e.g. membrane voltage) should appear in the plot</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax"><span class="sig-name descname">return_figax</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.return_figax" title="Permalink to this definition">¶</a></dt><dd><p>Whether to return the figure and axis objects. Default: True</p>
+</dd>
+<dt id="visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type"><span class="sig-name descname">proj_type</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology.proj_type" title="Permalink to this definition">¶</a></dt><dd><p>Projection type for the 3D plot. Default: “ortho”</p>
+</dd>
+</dl>
 </dd>
 <dt class="field-even" id="visualize.cell_morphology_visualizer.get_3d_plot_morphology-returns">Returns<span class="colon">:</span><a class="headerlink" href="#visualize.cell_morphology_visualizer.get_3d_plot_morphology-returns" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>fig and ax object if <code class="xref py py-paramref docutils literal notranslate"><span class="pre">return_figax</span></code> is True. None otherwise.</p>
@@ -1014,6 +1252,9 @@ It is recommended to use the high-level method <a class="reference internal" hre
 </dl>
 </dd></dl>
 
+<div class="doc-feedback docutils container">
+<p>Documentation unclear, incomplete, broken or wrong? <a class="reference external" href="https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&amp;labels=docs">Let us know</a></p>
+</div>
 
 
 
@@ -1081,7 +1322,7 @@ It is recommended to use the high-level method <a class="reference internal" hre
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.1.2.
+    7.2.6.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1104,9 +1345,9 @@ It is recommended to use the high-level method <a class="reference internal" hre
         <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../../../_static/copybutton.js?v=f281be69"></script>
         <script src="../../../_static/tabs.js?v=3ee01567"></script>
-        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
         <script src="../../../_static/design-tabs.js?v=36754332"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="../../../_static/js/video.js?v=a9b6335e"></script>
     
   </body>
 </html>

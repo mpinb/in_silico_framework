@@ -1,12 +1,14 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology`
+
+
 
 CMVDataParser._calc_morphology
 ==============================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology(cell)
+
 
    Retrieve cell morphology from cell object.
 
@@ -21,7 +23,12 @@ CMVDataParser._calc_morphology
    - self.n_sections: number of sections in the cell.
    - self.parents: a dictionary that maps sections to their parents. self.parents[10] returns the parent of section 10.
 
-   :Parameters: **cell** -- Cell object
+   :param cell: Cell object
 
    :returns: Nothing. Updates the attributes mentioned above.
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

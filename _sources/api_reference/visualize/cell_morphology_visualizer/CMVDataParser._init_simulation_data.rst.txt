@@ -1,13 +1,20 @@
 
-.. backlink:
 
-:mod:`visualize` ❭ :mod:`~visualize.cell_morphology_visualizer` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser` ❭ :mod:`~visualize.cell_morphology_visualizer.CMVDataParser._init_simulation_data`
+
+
 
 CMVDataParser._init_simulation_data
 ===================================
 
+
 .. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._init_simulation_data()
+
 
    Initializes the variables associated with simulation data. Does not fill these variables until they actually need to be calculated.
 
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,16 +1,13 @@
 
-.. backlink:
-
-:mod:`simrun` ❭ :mod:`~simrun.sim_trial_to_cell_object` ❭ :mod:`~simrun.sim_trial_to_cell_object.trial_to_cell_object`
-
-
-.. title:
 
 trial_to_cell_object
 ====================
 
 
+.. Signature -------------------------------
+
 .. py:function:: simrun.sim_trial_to_cell_object.trial_to_cell_object(name=None, cellName=None, networkName=None, synapse_activation_file=None, range_vars=None, scale_apical=None, allPoints=False, compute=True, tStop=345, neuron_param_modify_functions=[], network_param_modify_functions=[], synapse_activation_modify_functions=[], additional_network_params=[])
+
 
    Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
@@ -20,18 +17,29 @@ trial_to_cell_object
    Synapse activation modify functions should take the synapse activation data as input and return the modified data.
 
 
-   :Parameters: * **cellName** (*str*) -- Name of the :ref:`cell_parameters_format` file.
-                * **networkName** (*str*) -- Name of the :ref:`network_parameters_format` file.
-                * **synapse_activation_file** (*str | pandas.DataFrame*) -- Path to the :ref:`syn_activation_format` file or
-                  a pandas DataFrame containing the synapse activation data.
-                * **range_vars** (*str | list*) -- Range variables to record.
-                * **scale_apical** (*callable, DEPRECATED*) -- Function to scale the apical dendrites.
-                * **allPoints** (*bool*) -- If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
-                * **compute** (*bool*) -- If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
-                * **tStop** (*float*) -- Stop time of the simulation.
-                * **neuron_param_modify_functions** (*list*) -- List of functions to modify the neuron parameters.
-                * **network_param_modify_functions** (*list*) -- List of functions to modify the network parameters.
-                * **synapse_activation_modify_functions** (*list*) -- List of functions to modify the synapse activation data.
+   :param cellName: Name of the :ref:`cell_parameters_format` file.
+   :type cellName: str
+   :param networkName: Name of the :ref:`network_parameters_format` file.
+   :type networkName: str
+   :param synapse_activation_file: Path to the :ref:`syn_activation_format` file or
+                                   a pandas DataFrame containing the synapse activation data.
+   :type synapse_activation_file: str | pandas.DataFrame
+   :param range_vars: Range variables to record.
+   :type range_vars: str | list
+   :param scale_apical: Function to scale the apical dendrites.
+   :type scale_apical: callable, DEPRECATED
+   :param allPoints: If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
+   :type allPoints: bool
+   :param compute: If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
+   :type compute: bool
+   :param tStop: Stop time of the simulation.
+   :type tStop: float
+   :param neuron_param_modify_functions: List of functions to modify the neuron parameters.
+   :type neuron_param_modify_functions: list
+   :param network_param_modify_functions: List of functions to modify the network parameters.
+   :type network_param_modify_functions: list
+   :param synapse_activation_modify_functions: List of functions to modify the synapse activation data.
+   :type synapse_activation_modify_functions: list
 
    .. deprecated:: 0.1.0
        The `scale_apical` argument is deprecated and will be removed in a future version.
@@ -41,8 +49,7 @@ trial_to_cell_object
    :rtype: :py:class:`~single_cell_parser.cell.Cell`
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

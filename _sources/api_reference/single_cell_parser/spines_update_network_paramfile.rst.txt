@@ -1,27 +1,26 @@
 
-.. backlink:
-
-:mod:`single_cell_parser` ❭ :mod:`~single_cell_parser.spines_update_network_paramfile`
-
-
-.. title:
 
 spines_update_network_paramfile
 ===============================
 
 
+.. Signature -------------------------------
+
 .. py:function:: single_cell_parser.spines_update_network_paramfile(new_synapse_distribution_file, network_paramfile, new_network_paramfile)
+
 
    Update a :ref:`network_parameters_format` file to point to a new :ref:`syn_file_format` file.
 
-   :Parameters: * **new_synapse_distribution_file** (*str*) -- The path to the new :ref:`syn_file_format` file.
-                * **network_paramfile** (*str*) -- The path to the original :ref:`network_parameters_format` file.
-                * **new_network_paramfile** (*str*) -- The path to the new :ref:`network_parameters_format` file.
-                  A new_network_paramfile will be created if it does not already exist.
+   :param new_synapse_distribution_file: The path to the new :ref:`syn_file_format` file.
+   :type new_synapse_distribution_file: str
+   :param network_paramfile: The path to the original :ref:`network_parameters_format` file.
+   :type network_paramfile: str
+   :param new_network_paramfile: The path to the new :ref:`network_parameters_format` file.
+                                 A new_network_paramfile will be created if it does not already exist.
+   :type new_network_paramfile: str
 
 
-.. 
-   Warning: we replace underscores with an escape backslash about 4 lines above to avoid having Sphinx interpret arguments as links.
-   However, this may cause issues with code blocks or other literal text, and malform markdown tables
-   Use with caution?
-..
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

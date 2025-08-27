@@ -1,19 +1,29 @@
 
-.. backlink:
 
-:mod:`biophysics_fitting` ❭ :mod:`~biophysics_fitting.simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator` ❭ :mod:`~biophysics_fitting.simulator.Simulator.get_simulated_cell`
+
+
 
 Simulator.get_simulated_cell
 ============================
 
+
 .. py:method:: biophysics_fitting.simulator.Simulator.get_simulated_cell(params, stim, simulate=True)
+
 
    Get the simulated cell.
 
-   :Parameters: * **params** (*pd.Series*) -- The parameter vector of biophysical parameters.
-                * **stim** (*str*) -- The stimulus to apply.
-                * **simulate** (*bool*) -- Whether to run the simulation (True), or only set up the simulation (False).
+   :param params: The parameter vector of biophysical parameters.
+   :type params: pd.Series
+   :param stim: The stimulus to apply.
+   :type stim: str
+   :param simulate: Whether to run the simulation (True), or only set up the simulation (False).
+   :type simulate: bool
 
    :returns: The cell object and the parameter vector.
    :rtype: cell, params
 
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

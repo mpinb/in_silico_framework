@@ -1,13 +1,9 @@
 
 
-.. breadcrumb trail -----------------------------------------------------------------------
-
-:mod:`singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
-
-.. main page title: MUST be BEFORE toctree trigger -------------------------------
 
 PointCell
 =========
+
 
 .. setup: which children to show -------------------------------------------------
 
@@ -33,28 +29,30 @@ PointCell
    When connecting synapses between postsynaptic and
    presynaptic cells, this class is used for the presynaptic cell.
 
-   :Parameters: * **column** (*str*) -- Column ID. Default: None.
-                * **cellType** (*str*) -- Cell type. Defalut: None.
+   :param column: Column ID. Default: None.
+   :type column: str
+   :param cellType: Cell type. Defalut: None.
+   :type cellType: str
 
    :Attributes:
 
-   .. attribute:: synapseList
+      .. attribute:: synapseList
 
-      List of synapses.
+         List of synapses.
 
-      :type: list
+         :type: list
 
-   .. attribute:: column
+      .. attribute:: column
 
-      Column ID.
+         Column ID.
 
-      :type: str
+         :type: str
 
-   .. attribute:: cellType
+      .. attribute:: cellType
 
-      Cell type.
+         Cell type.
 
-      :type: str
+         :type: str
 
    :Methods:
 
@@ -67,3 +65,7 @@ PointCell
       * - :py:obj:`_add_synapse_pointer <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer>`\ (synapse)
         - Add a :py:class:`Synapse` to the cell.
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_
