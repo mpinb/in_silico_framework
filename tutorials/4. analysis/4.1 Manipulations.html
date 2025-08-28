@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6cc" class="md-skip">
+        <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6CC" class="md-skip">
           Skip to content
         </a>
       
@@ -461,8 +461,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6cc" class="md-nav__link">
-    <span title="/tutorials/4. analysis/4.1 manipulations.ipynb#broad-receptive-fields-of-l5pts-and-input-from-l6cc (reference label)" class="md-ellipsis">Broad receptive fields of L5PTs and input from L6cc</span>
+  <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6CC" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.1 manipulations.ipynb#broad-receptive-fields-of-l5pts-and-input-from-l6cc (reference label)" class="md-ellipsis">Broad receptive fields of L5PTs and input from L6CC</span>
   </a>
   
 </li>
@@ -613,8 +613,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6cc" class="md-nav__link">
-    <span title="/tutorials/4. analysis/4.1 manipulations.ipynb#broad-receptive-fields-of-l5pts-and-input-from-l6cc (reference label)" class="md-ellipsis">Broad receptive fields of L5PTs and input from L6cc</span>
+  <a href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6CC" class="md-nav__link">
+    <span title="/tutorials/4. analysis/4.1 manipulations.ipynb#broad-receptive-fields-of-l5pts-and-input-from-l6cc (reference label)" class="md-ellipsis">Broad receptive fields of L5PTs and input from L6CC</span>
   </a>
   
 </li>
@@ -681,13 +681,13 @@ tutorial</span></a>.</p>
 </ul>
 <p>ISF thereby enables the investigation of the exact effect of each component mechanism across a broad diversity of multi-scale simulations. The effect of these manipulations, and to which degree these manipulations are robust under trial-to-trial, cell-to-cell and network variability provides mechanistic insight into the neuron and network properties and interactions underlying in vivo responses. The purpose of these manipulations is to generate concrete predictions about underlying mechanisms
 and thereby inform experiment design to verify these predictions empirically.</p>
-<h2 id="Broad-receptive-fields-of-L5PTs-and-input-from-L6cc">Broad receptive fields of L5PTs and input from L6cc<a class="headerlink" href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6cc" title="Link to this heading">¶</a></h2>
+<h2 id="Broad-receptive-fields-of-L5PTs-and-input-from-L6CC">Broad receptive fields of L5PTs and input from L6CC<a class="headerlink" href="#Broad-receptive-fields-of-L5PTs-and-input-from-L6CC" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al. (2020)</a> Showed how L5PT neurons are unable to respond to <span class="math notranslate nohighlight">\(2^{nd}\)</span> surround whisker stimuli in the absence of input from Layer 6 cortico-cortical (L6CC) input.</p>
 <p>We will repeat the manipulations performed in <a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al. (2020)</a> on a single neuron for a single trial, using the same parameter files we generated in <a class="reference internal" href="../3.%20multiscale%20models/3.1%20Multiscale%20modeling.html"><span class="doc">the previous tutorial</span></a>.</p>
 <p>Stimuli that are second surround to the <span class="math notranslate nohighlight">\(C2\)</span> column are the rows <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(E\)</span>, and arcs <span class="math notranslate nohighlight">\(4\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span> (here: <span class="math notranslate nohighlight">\(G\)</span>)</p>
 <p><img alt="Wistar rat whisker grid" src="../../_images/whisker_grid.png" /></p>
 <h2 id="Simulating-2nd-surround-whisker-responses">Simulating <span class="math notranslate nohighlight">\(2nd\)</span> surround whisker responses<a class="headerlink" href="#Simulating-2nd-surround-whisker-responses" title="Link to this heading">¶</a></h2>
-<p>Let’s consider a morphology that has been anchored to the center of the <span class="math notranslate nohighlight">\(C2\)</span> column. We have examples of such morphology in the example data folder. let’s copy it over to a dedicated database:</p>
+<p>Let’s consider a morphology that has been placed in the center of the <span class="math notranslate nohighlight">\(C2\)</span> column. We have examples of such morphology in the example data folder. Let’s copy it over to a dedicated database:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
@@ -758,7 +758,7 @@ IPython: 8.12.2, Interface: heads/docs+0.g1456ee0eb.dirty, PIL: 9.4.0, _brotli: 
 </code></pre></div>
 </div>
 </div>
-<p>In <a class="reference internal" href="../2.%20network%20models/2.1%20Anatomical%20embedding.html"><span class="doc">Tutorial 2.1</span></a>, we have already generated synapse locations for this <span class="math notranslate nohighlight">\(C2\)</span>-anchored neuron, which gave us <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> files. In <a class="reference internal" href="../2.%20network%20models/2.2%20Network%20activity.html"><span class="doc">Tutorial 2.2</span></a>, we additionally generate activation patterns for these synapses that reflect a variety
+<p>In <a class="reference internal" href="../2.%20network%20models/2.1%20Anatomical%20embedding.html"><span class="doc">Tutorial 2.1</span></a>, we have already generated synapse locations for this <span class="math notranslate nohighlight">\(C2\)</span>-embedded neuron, which gave us <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#syn">.syn</a> and <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats#con">.con</a> files. In <a class="reference internal" href="../2.%20network%20models/2.2%20Network%20activity.html"><span class="doc">Tutorial 2.2</span></a>, we additionally generate activation patterns for these synapses that reflect a variety
 of stimuli, including those that come from <span class="math notranslate nohighlight">\(2nd\)</span> surround whiskers. Let us take a look at those again:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
@@ -950,7 +950,23 @@ I.plt.show()
 </div>
 </div>
 <h2 id="Manipulations">Manipulations<a class="headerlink" href="#Manipulations" title="Link to this heading">¶</a></h2>
-<p>Let us investigate how we can silence the input from <span class="math notranslate nohighlight">\(L6\)</span> neurons, similar to <a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al. (2020)</a>. Let’s start by investigating the <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#parsed-dataframe">synapse activation dataframe</a></p>
+<p>ISF allows you to rerun simulations with adaptations. Adaptations can be made for:</p>
+<ol class="arabic simple">
+<li><p>The <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#network-parameters">Network parameters</a> or <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#cell-parameters">Neuron parameters</a></p></li>
+<li><p>The exact <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#synapse-activation">synapse activations</a> or <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#presynaptic-spike-times">presynaptic cell activations</a></p></li>
+</ol>
+<p>The most convenient way is to initialize the results in a database (as done above) and using <a class="reference internal" href="../../api_reference/simrun/rerun_db/index.html"><span class="doc">rerun_db</span></a>. You can then use the following keyword arguments for manipulations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">neuron_param_modify_functions</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">network_param_modify_functions</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">synapse_activation_modify_functions</span></code></p></li>
+</ul>
+<p>These arguments take a list of functions that accept, adapt and return <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#cell-parameters">Neuron parameters</a>, <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#network-parameters">Network parameters</a>, or <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#synapse-activation">synapse activations</a> respectively. Finally, the keyword argument <code class="docutils literal notranslate"><span class="pre">additional_network_params</span></code> accepts a list of extra network
+parameters, allowing you to define new presynaptic cell populations in addition to the existing ones.</p>
+<blockquote>
+<div><p>Note: other methods that allow manipulations is to simply generate new embeddings and/or parameterfiles and run new simulations using <a class="reference internal" href="../../api_reference/simrun/run_new_simulations/index.html"><span class="doc">run_new_simulations</span></a>, or the function <a class="reference internal" href="../../api_reference/simrun/sim_trial_to_cell_object/index.html"><span class="doc">sim_trial_to_cell_object</span></a> for single trials.</p>
+</div></blockquote>
+<p>For this tutorial, we will silence individual synapse activations from <span class="math notranslate nohighlight">\(L6CC\)</span> to recreate the manipulations performed in <a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al. (2020)</a> Let’s start by investigating the <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#parsed-dataframe">synapse activation dataframe</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[76]:
 </code></pre></div>
@@ -1198,10 +1214,7 @@ sa[sa[&#39;synapse_type&#39;].str.contains(&quot;L6cc&quot;)].compute()
 <p>6354 rows × 13 columns</p>
 </div></div>
 </div>
-<p>Using ISF, you can rerun the <em>exact</em> same simulation with the <em>exact</em> same synapses, or manipulate <em>exact</em> synapse activations. This is the approach we will go for in this tutorial. Let us resimulate these simulation runs, but this time without input from the <span class="math notranslate nohighlight">\(L6cc\)</span> population.</p>
-<blockquote>
-<div><p>Note: you could e.g. also adapt values in the <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#network-parameters">Network parameters</a> and run new simulations from these adapted parameter files using <a class="reference internal" href="../../api_reference/simrun/run_new_simulations/index.html"><span class="doc">simrun.run_new_simulations</span></a>.</p>
-</div></blockquote>
+<p>Manipulating these synapse activations is now as simple as defining a function that accepts this dataframe, adapts it, and returns the changed dataframe. We will silence all <span class="math notranslate nohighlight">\(L6CC\)</span> populations that reside in the stimulated column. That way, our <span class="math notranslate nohighlight">\(C2\)</span>-embedded <span class="math notranslate nohighlight">\(L5PT\)</span> neuron will not receive input from this particular <span class="math notranslate nohighlight">\(2nd\)</span> surround column:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
@@ -1213,7 +1226,7 @@ sa[sa[&#39;synapse_type&#39;].str.contains(&quot;L6cc&quot;)].compute()
 </code></pre></div>
 </div>
 </div>
-<p>In theory, we can also add synapse activations to the synapse activation dataframe, e.g. to achieve the aforemention upregulation. For the sake of keeping this tutorial brief, we will omit this idea, and keep the manipulation simple, albeit drastic.</p>
+<p>And then we can re-run the same simulation trials, but including these manipulations:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[79]:
 </code></pre></div>
@@ -1258,6 +1271,7 @@ wait(futures) # block computation util results are in
 DoneAndNotDoneFutures(done={&lt;Future: finished, type: builtins.NoneType, key: _evoked_activity-a1c8eb78-a98b-4891-8363-a871d78415e2&gt;, &lt;Future: finished, type: builtins.NoneType, key: _evoked_activity-863c6be0-6a2e-47b6-9fff-3df02a59e8b3&gt;, &lt;Future: finished, type: builtins.NoneType, key: _evoked_activity-d062abdf-b628-4399-90f6-56be0592bd60&gt;, &lt;Future: finished, type: builtins.NoneType, key: _evoked_activity-f746b3f9-d299-4b3e-bf0e-bf1aa54d8c61&gt;}, not_done=set())
 </pre></div></div>
 </div>
+<p>Let’s inspect them again:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
@@ -1310,7 +1324,7 @@ ax.set_xlim((converge_t, 300))
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_35_1.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_35_1.png" />
+<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_36_1.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_36_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1329,7 +1343,7 @@ I.plt.show()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_36_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_36_0.png" />
+<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_37_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_37_0.png" />
 </div>
 </div>
 <h2 id="Comparing-the-results">Comparing the results<a class="headerlink" href="#Comparing-the-results" title="Link to this heading">¶</a></h2>
@@ -1356,7 +1370,7 @@ I.plt.show()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_38_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_38_0.png" />
+<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_39_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_39_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1385,13 +1399,14 @@ I.plt.show()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_39_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_39_0.png" />
+<img alt="../../_images/tutorials_4._analysis_4.1_Manipulations_40_0.png" src="../../_images/tutorials_4._analysis_4.1_Manipulations_40_0.png" />
 </div>
 </div>
 <h2 id="Interpreting-the-result">Interpreting the result<a class="headerlink" href="#Interpreting-the-result" title="Link to this heading">¶</a></h2>
-<p>We have now simulated a <span class="math notranslate nohighlight">\(L5tt\)</span> neuron in the <span class="math notranslate nohighlight">\(C2\)</span> column of the barrel cortex. We showed how to use ISF to re-run these existing simulations, while providing targeted manipulations at the single synapse level. In this case, the manipulation consisted of silencing all synapses that originate from any <span class="math notranslate nohighlight">\(L6cc\)</span> population. This completely eradicated the responses of these neurons to whisker stimuli that are <span class="math notranslate nohighlight">\(2nd\)</span> surround to the <span class="math notranslate nohighlight">\(C2\)</span> column. It also eradicated
-spontaneous ongoing activity before the stimulus.</p>
-<p>Of course, completely silencing an input neuron population naturally reduces response probability, especially if the lost synaptic input is not compensated for. The purpose of this tutorial is not to provide a full-fledged investigation on the effect of <span class="math notranslate nohighlight">\(L6cc\)</span> input to <span class="math notranslate nohighlight">\(L5tt\)</span> neurons. For that, you can refer to <a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al. (2020)</a>. The purpose of this tutorial is to show how to use ISF API to perform such manipulations.</p>
+<p>We have now simulated a <span class="math notranslate nohighlight">\(L5PT\)</span> neuron in the <span class="math notranslate nohighlight">\(C2\)</span> column of the barrel cortex. We showed how to use ISF to re-run these existing simulations, while providing targeted manipulations at the single synapse level.</p>
+<p>In this case, the manipulation consisted of silencing all synapses that originate from the <span class="math notranslate nohighlight">\(L6CC\)</span> population in the column of the stimulated <span class="math notranslate nohighlight">\(2nd\)</span> surround whisker. This almost completely eradicated the responses of these neurons to whisker stimuli that are <span class="math notranslate nohighlight">\(2nd\)</span> surround to the <span class="math notranslate nohighlight">\(C2\)</span> column.</p>
+<p>Of course, the low sample size in this tutorial prevents us from making conclusive statements on the effect of this manipulation. To fully investigate this impact, we would not only need larger sample sizes, but also repeat these manipulations for different embedding locations, neuron models, and network parameters. The purpose of this tutorial is not to provide a full-fledged investigation on the effect of <span class="math notranslate nohighlight">\(L6CC\)</span> input to <span class="math notranslate nohighlight">\(L5PT\)</span> neurons. For that, you can refer to <a class="reference external" href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30884-0">Egger et al.
+(2020)</a>. The purpose of this tutorial is to show how to use ISF API to perform such manipulations.</p>
 
 
 
