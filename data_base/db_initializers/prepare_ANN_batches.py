@@ -750,7 +750,7 @@ def save_SA_batch(
         bin_size (int, optional): Size of the time bins. Defaults to 1.
         
     Returns:
-        dask.delayed: A dask delayed object. When computed, saves the synapse activation times to :paramref:`outdir`/batch_:paramref:`batch_id`_SYNAPSE_ACTIVATION.npy.
+        dask.delayed: A dask delayed object. When computed, saves the synapse activation times to ``outdir/batch_<batch_id>_SYNAPSE_ACTIVATION.npy``.
     """
     syn_weights = None
     if syn_weights:

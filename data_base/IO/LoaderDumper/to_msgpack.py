@@ -35,8 +35,8 @@ class Loader(parent_classes.Loader):
             return msgpack.load(file_)
 
 
-def dump(obj, path):
-    with open(os.path.join(path, 'to_pickle_dump'), 'wb') as file_:
+def dump(obj, savedir):
+    with open(os.path.join(savedir, 'to_pickle_dump'), 'wb') as file_:
         msgpack.dump(obj, file_)
 
     with open(os.path.join(savedir, 'Loader.json'), 'w') as f:

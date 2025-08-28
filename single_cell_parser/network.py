@@ -349,7 +349,7 @@ class NetworkMapper:
         Sets all the presynaptic cells to ``off``.
 
         See also:
-            :py:meth:`~single_cell_parser.cell.Cell.turn_off` for more information on turning cells off.
+            :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
         
         Args:
             replayMode (bool): 
@@ -680,8 +680,8 @@ class NetworkMapper:
         try:
             dist = networkParameters.distribution
         except AttributeError:
-            logger.warning('Could not find attribute \"distribution\" for \"pointcell\" of cell type {:s}.'.format(preCellType))
-            logger.warning('         Support of \"pointcell\" without this attribute is deprecated.')
+            logger.debug("\"distribution\" is unset for \"pointcell\" of cell type {:s}.".format(preCellType))
+            logger.debug('Defaulting to distribution = \"normal\".')
             dist = 'normal'
         if dist == 'normal':
             active, = np.where(np.random.uniform(size=nrOfCells) < networkParameters.activeFrac)
@@ -690,8 +690,8 @@ class NetworkMapper:
             try:
                 offset = networkParameters.offset
             except AttributeError:
-                logger.warning('Could not find attribute \"offset\" for \"pointcell\" of cell type {:s}.'.format(preCellType))
-                logger.warning('         Support of \"pointcell\" without this attribute is deprecated.')
+                logger.debug("\"offset\" is unset for \"pointcell\" of cell type {:s}.".format(preCellType))
+                logger.debug('Defaulting to offset = 10.0.')
                 offset = 10.0
             spikeTimes = offset + mean + sigma * np.random.randn(len(active))
             for i in range(len(active)):

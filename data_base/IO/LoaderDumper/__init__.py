@@ -33,8 +33,8 @@ This file contains the specification of a ``Loader`` object,
 which can then be initialized and contains all the mechanisms to load the object back into memory.
 '''
 
-import os, json, importlib
-from .utils import read_object_meta
+import os, json, importlib, glob
+from .meta import read_object_meta
 from data_base.exceptions import DataBaseException
 
 
@@ -79,7 +79,11 @@ def load(savedir, load_data=True, loader_kwargs={}):
         loader_init_kwargs = json.load(f)
     loader = loader_init_kwargs['Loader']
     del loader_init_kwargs['Loader']
-    if os.path.exists(os.path.join(savedir, 'object_meta.json')):
+    if any([
+        obj_meta_match 
+        for file_ext in ("msgpack", "json") 
+        for obj_meta_match in glob.glob(os.path.join(savedir, f'object_meta.{file_ext}'))
+        ]):
         loader_init_kwargs['meta'] = read_object_meta(savedir)
     
     loader = resolve_loader_dumper_path(loader)

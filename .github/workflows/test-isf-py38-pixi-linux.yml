@@ -12,12 +12,13 @@ on:
   push:
     branches:
       - master
+      - docs-test-env
   workflow_dispatch:
 
 jobs:
   test:
-    name: Test pixi linux
-    runs-on: ['ibs3005', 'self-hosted']
+    name: Test linux
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -25,7 +26,7 @@ jobs:
       - name: Install & setup environment
         uses: prefix-dev/setup-pixi@v0.8.8
         with:
-          pixi-version: v0.47.0
+          pixi-version: v0.53.0
           cache: true
           auth-host: prefix.dev
           auth-token: ${{ secrets.PREFIX_DEV_TOKEN }}

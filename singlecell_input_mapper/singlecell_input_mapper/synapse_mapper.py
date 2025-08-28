@@ -279,6 +279,63 @@ class SynapseDensity(object):
         self.inhPST = inhPST
         self.cellPST = {}
 
+    def compute_synapse_density_vectorized(self, boutonDensity, preCellType):
+        """Vectorized version of synapse density computation."""
+        if not self.cellPST:
+            self.compute_cell_PST()
+
+        if preCellType in self.exTypes:
+            normPSTDensity = self.exPST
+            cellPSTDensity = self.cellPST['EXC']
+        elif preCellType in self.inhTypes:
+            normPSTDensity = self.inhPST
+            cellPSTDensity = self.cellPST['INH']
+        else:
+            raise RuntimeError(f"Invalid presynaptic cell type: {preCellType}")
+
+        synapseDensity = {}
+        for anatomical_area, pstField in cellPSTDensity.items():
+            # Check bounding box overlap
+            if not self._intersect_bboxes(boutonDensity.boundingBox, pstField.boundingBox):
+                return None
+
+            # Pre-allocate synapse field
+            synapseField = ScalarField(
+                np.zeros_like(pstField.mesh),
+                pstField.origin,
+                pstField.extent,
+                pstField.spacing,
+                pstField.boundingBox
+            )
+            synapseDensity[anatomical_area] = synapseField
+
+            # Precompute voxel centers in a vectorized way
+            shape = pstField.mesh.shape
+            dx, dy, dz = pstField.spacing
+            x = pstField.origin[0] + (np.arange(shape[0]) + 0.5) * dx
+            y = pstField.origin[1] + (np.arange(shape[1]) + 0.5) * dy
+            z = pstField.origin[2] + (np.arange(shape[2]) + 0.5) * dz
+
+            X, Y, Z = np.meshgrid(x, y, z, indexing='ij')
+            coords = np.stack([X, Y, Z], axis=-1)
+
+            # Vectorized bouton and normPST sampling
+            boutons = boutonDensity.get_mesh_coordinates_vectorized(coords)
+            normPST = normPSTDensity.get_mesh_coordinates_vectorized(coords)
+
+            # Vectorized computation: mask out invalid values
+            valid_mask = (boutons > 0) & (normPST > 0)
+            synapseField.mesh[valid_mask] = (
+                boutons[valid_mask] * pstField.mesh[valid_mask] / normPST[valid_mask]
+            )
+
+        # Remove empty density fields
+        synapseDensity = {
+            area: field for area, field in synapseDensity.items()
+            # if np.any(field.mesh > 0)  # keep key, even if mesh is empty (for backwards compatibility)
+        }
+        return synapseDensity if synapseDensity else None
+
     def compute_synapse_density(self, boutonDensity, preCellType):
         '''Compute the density of synapses of a given presynaptic celltype onto the postsynaptic neuron.
         
@@ -498,9 +555,7 @@ class SynapseDensity(object):
         logger.info('---------------------------')
         totalLength = 0.0
         for structure in list(lengthDensity.keys()):
-            logger.info(
-                'Computing 3D length/surface area density of structures with label {:s}'
-                .format(structure))
+            logger.debug('Computing 3D length/surface area density of structures with label {:s}'.format(structure))
             density1 = lengthDensity[structure]
             density2 = surfaceAreaDensity[structure]
             #===================================================================
@@ -618,8 +673,7 @@ class SynapseDensity(object):
                             density1.mesh[ijk] += length
                             density2.mesh[ijk] += area
                             totalLength += length
-        logger.info('Total clipped length = {:f}'.format(totalLength))
-        logger.info('---------------------------')
+        logger.debug('Total clipped length = {:f}'.format(totalLength))
 
     def _clip_u(self, pq, u1u2):
         '''Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.

@@ -12,8 +12,8 @@ Installation
       .. csv-table::
          :header: "Requirement", "Download", ""
 
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`_, Likely already installed
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__ 
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/linux>`__, Likely already installed
 
       .. success::
          :title: Check requirements
@@ -44,8 +44,8 @@ Installation
       .. csv-table::
          :header: "Requirement", "Download"
 
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`_
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/mac>`__
 
 
       .. success::
@@ -85,9 +85,9 @@ Installation
       .. csv-table::
          :header: "Requirement", "Download", ""
 
-         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`_ 
-         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/win>`_
-         `NEURON <https://www.neuron.yale.edu/neuron/>`_ ,  `Download <https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows>`_, 7.8 ≤ version ≤ 8.2
+         `pixi <https://pixi.sh/latest/>`_,  `Download <https://pixi.sh/latest/#installation>`__
+         `git <https://git-scm.com/>`_,   `Download <https://git-scm.com/downloads/win>`__
+         `NEURON <https://www.neuron.yale.edu/neuron/>`_ ,  `Download <https://nrn.readthedocs.io/en/latest/install/install_instructions.html#windows>`__, 7.8 ≤ version ≤ 8.2
 
 
       .. success::
@@ -176,3 +176,7 @@ To test if all components of ISF are working as intended, you can run the test s
 
 
 
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

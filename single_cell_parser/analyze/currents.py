@@ -113,8 +113,8 @@ def analyze_voltage_trace(vTrace, tTrace):
     """Find time and amplitude of max depolarization.
 
     Args:
-        vTrace (neuron.h.Vector | array): membrane potential trace
-        tTrace (neuron.h.Vector | array): time trace
+        vTrace (:py:class:`neuron:Vector` | array): membrane potential trace
+        tTrace (:py:class:`neuron:Vector` | array): time trace
 
     Returns:
         tuple: time and amplitude of max depolarization

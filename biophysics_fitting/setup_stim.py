@@ -175,9 +175,9 @@ def setup_BAC(cell, dist=970, delay=295):
 def setup_StepOne(cell, delay=700):
     """Setup a step current stimulus at the soma:
          
-        - amplitude = 0.619 nA
-        - delay = 700 ms
-        - duration = 2000 ms   
+    - amplitude = 0.619 nA
+    - delay = 700 ms
+    - duration = 2000 ms   
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -192,9 +192,9 @@ def setup_StepOne(cell, delay=700):
 def setup_StepTwo(cell, delay=700):
     """Setup a step current stimulus at the soma:
           
-        - amplitude = 0.793 nA
-        - delay = 700 ms
-        - duration = 2000 ms      
+    - amplitude = 0.793 nA
+    - delay = 700 ms
+    - duration = 2000 ms      
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -209,9 +209,9 @@ def setup_StepTwo(cell, delay=700):
 def setup_StepThree(cell, delay=700):
     """Setup a step current stimulus at the soma:
           
-        - amplitude = 1.507 nA
-        - delay = 700 ms
-        - duration = 2000 ms   
+    - amplitude = 1.507 nA
+    - delay = 700 ms
+    - duration = 2000 ms   
            
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.

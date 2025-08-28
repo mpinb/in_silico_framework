@@ -150,6 +150,8 @@ class BAC:
                 'BAC_caSpike_width': ('BAC_caSpike_width', 37.43, 1.27),
                 'BAC_spikecount': ('Spikecount', 3.0, 0.01)
             }
+        
+            Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     """
 
     def __init__(
@@ -477,6 +479,8 @@ class bAP:
                 'bAP_att3': ('BPAPatt3', 36.0, 9.33),
                 'bAP_spikecount': ('Spikecount', 1.0, 0.01)
             }
+        
+            Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     """
 
     def __init__(
@@ -1121,9 +1125,11 @@ class StepOne(_Step):
             "sAHPt1": ["Slow after-hyperpolarization time", 0.2376, 0.0299],
             "APw1": ["AP width", 1.3077, 0.1665]
         }
+        
+    Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     
     See also:
-        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setp_StepOne` for more information on the stimulus protocol.
+        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
     """
 
     def __init__(self):
@@ -1150,9 +1156,11 @@ class StepTwo(_Step):
             "sAHPt2": ["Slow after-hyperpolarization time", 0.2787, 0.0266],
             "APw2": ["AP width", 1.3833, 0.2843]
         }
+        
+    Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setp_StepTwo` for more information on the stimulus protocol.
+        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
     """
 
     def __init__(self):
@@ -1179,9 +1187,11 @@ class StepThree(_Step):
             "sAHPt3": ["Slow after-hyperpolarization time", 0.2131, 0.0368],
             "APw3": ["AP width", 1.8647, 0.4119]
         }
+        
+    Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setp_StepThree` for more information on the stimulus protocol.
+        :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepThree` for more information on the stimulus protocol.
     """
 
     def __init__(self):
@@ -1271,9 +1281,9 @@ def get_evaluate_StepTwo(**kwargs):
 
 
 def get_evaluate_StepThree(**kwargs):
-    """Get the evaluation function for the :math:`StepTwo` stimulus protocol.
+    """Get the evaluation function for the :math:`StepThree` stimulus protocol.
 
-    Initializes a :py:class:`StepTwo` object with the given keyword arguments,
+    Initializes a :py:class:`StepThree` object with the given keyword arguments,
     and returns a function that evaluates the voltage traces.
 
     Args:

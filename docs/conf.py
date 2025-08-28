@@ -54,17 +54,25 @@ extensions = [
     "sphinx_inline_tabs",       # For inline tabs
     "sphinx.ext.graphviz",      # Making graphs
     "sphinx_immaterial",        # html theme
+    # "sphinx_immaterial.apidoc.format_signatures",  # formatting for signatures
     "sphinx_immaterial.graphviz",   # Allow internal reflinking and theming for graphviz
     "sphinx_design",            # For nice design elements, such as grids and cards
     # 'sphinxext.opengraph',   # For OpenGraph metadata, only enable when the site is actually hosted. See https://github.com/wpilibsuite/sphinxext-opengraph for config options when that happens.
-    "sphinxcontrib.video"
+    "sphinxcontrib.video",
+    # Custom extensions
+    # "docs.custom_extensions.short_signatures",  # Strip the prefix from signature handles
+    "docs.custom_extensions.xrefs_in_signature_handle",
+    "docs.custom_extensions.monkey_patch_napoleon_immaterial"
 ]
+# object_description_options = [
+#     ("py:.*", dict(black_format_style={"line_length": 60})),
+# ]
 
 graphviz_output_format = "svg"
 
-# Currently unused, but may be neat in the future
 rst_prolog = """
 .. role:: summarylabel
+.. include:: /_static/icons.rst
 """
 
 # -- Settings for omitting members from documentation ----------------------
@@ -83,10 +91,6 @@ def setup(app):
     app.connect("autoapi-skip-member", skip_member)
     app.connect("autoapi-skip-member", count_documented_members)
     app.connect("env-updated", log_documented_members)
-
-    # add custom css and js. fpaths relative to _satic/
-    app.add_css_file('css/custom.css')
-    app.add_js_file('js/video.js')
 
     # copy over tutorials and convert links to python files to sphinx documentation directives
     copy_and_parse_notebooks_to_docs(
@@ -117,6 +121,7 @@ autoapi_own_page_level = "method"
 bibtex_bibfiles = ["bibliography.bib"]
 
 # -- Napoleon settings -----------------------------------------------------
+# Napoleon is an 
 napoleon_google_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
@@ -125,7 +130,7 @@ napoleon_use_admonition_for_examples = False
 napoleon_use_admonition_for_notes = False
 napoleon_use_admonition_for_references = False
 napoleon_use_ivar = False
-napoleon_use_param = False  # use a single ":parameters:" section instead of ":param arg1: description" for each argument
+napoleon_use_param = True  # use dedicated ":param arg1: description" role for each argument
 napoleon_use_rtype = True  # if True, separate return type from description. otherwise, it's included in the description inline
 napoleon_preprocess_types = False  # otherwise custom argument types will not work
 napoleon_type_aliases = None
@@ -140,6 +145,12 @@ napoleon_attr_annotations = True
 # autosummary_generate = True
 # autosummary_imported_members = False  # do not show all imported modules per module, this is too bloated
 paramlinks_hyperlink_param = "name"
+
+# Domains for cross-referencing other documentation
+intersphinx_mapping = {
+    'matplotlib': ('http://matplotlib.org/stable', None),
+    "neuron": ("https://nrn.readthedocs.io/en/latest", None)
+    }
 
 # Don't run notebooks
 nbsphinx_execute = "never"
@@ -232,12 +243,9 @@ html_theme_options = {
             }
         },
     ],
-    # "sidebar_hide_name": True,
-    "globaltoc_depth": -1,
     'features': [
-        "navigation.tabs",          # overridden from default immaterial: tab sections on top: broken, unless we upgrade the theme, which requires other upgrades as well.
-        # "navigation.sections",      # overridden from default immaterial: nav sidebar left has expanded sections.
-        # "navigation.tabs.sticky",   # overridden from default behavior: keep tab sections on top visible
+        "navigation.tabs",          
+        # "navigation.tabs.sticky",   # keep tab sections on top visible
         ],
 }
 
@@ -265,9 +273,13 @@ html_title = "In Silico Framework"
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = [
+    "css/custom.css",
+    "css/doc_feedback.css",
+    "css/signature_links.css"
 ]
 
 html_js_files = [
+    "js/video.js"
 ]
 
 # Add any extra paths that contain custom files (such as robots.txt or

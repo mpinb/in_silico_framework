@@ -2,6 +2,7 @@
 """
 
 from collections.abc import MutableMapping
+from pathlib import Path
 import json, re, neuron, os
 from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
 from data_base import is_data_base
@@ -34,7 +35,7 @@ def _make_json_compatible(content):
 
 
 def _read_params_to_dict(filename):
-    filename = resolve_modular_db_path(filename)
+    filename = resolve_db_path(filename)
     with dbopen(filename, "r") as f:
         content = f.read()
 
@@ -67,6 +68,41 @@ def build_parameters(filename):
     return NTParameterSet(data)
 
 
+def fast_extract_values_from_param_file_key(param_file, keys, val_is_array=False):
+    """Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+    
+    In contrast to building the parameters using :py:meth:`~build_parameters`, this method uses regex
+    to quickly parse out the parameter values. 
+    """
+    assert not isinstance(keys, str), "You must provide the keys as an array that is not a string"
+    
+    with open(param_file, 'r') as f:
+        content = f.read()
+    
+    # Create a single regex that captures all keys at once
+    if val_is_array:
+        key_group = '|'.join(re.escape(key) for key in keys)
+        pattern = re.compile(rf"['\"]?({key_group})['\"]?\s*:\s*\[([^\]]*)\],*")
+    else:
+        key_group = '|'.join(re.escape(key) for key in keys)
+        pattern = re.compile(rf"['\"]?({key_group})['\"]?\s*:\s*['\"]([^'\"]*)['\"],*")
+    
+    # Single pass through the content
+    matches = pattern.findall(content)
+    
+    # Group results by key
+    results_dict = {key: [] for key in keys}
+    for key_match, value_match in matches:
+        if val_is_array:
+            items = [item.strip().strip('\'"') for item in value_match.split(',')]
+            results_dict[key_match].append(items)
+        else:
+            results_dict[key_match].append(value_match)
+    
+    # Return in the same order as input keys
+    return [results_dict[key] for key in keys]
+
+    
 def load_NMODL_parameters(parameters):
     """Load NMODL mechanisms from paths in parameter file.
 
@@ -109,15 +145,19 @@ def resolve_parameter_paths(parameters, params_fn):
 
     def _find_parent_db_basedir(fn):
         """Find the parent database directory from the parameters."""
-        fn = os.path.pardir(fn)
-        while not is_data_base(fn):
-            try: fn = os.path.pardir(fn)
-            except FileNotFoundError: return None
-        return fn
+        fn = Path(fn)
+        parent = fn.parent
+        while not is_data_base(parent):
+            if parent == parent.parent:  
+                # Reached the root directory
+                return None
+            parent = parent.parent
+        return parent
 
+    db_basedir = _find_parent_db_basedir(params_fn)
+    
     for key, value in parameters.items():
         if isinstance(value, str) and (value.startswith("reldb://") or value.startswith("mdb://")):
-            db_basedir = _find_parent_db_basedir(params_fn)
             if db_basedir is None:
                 raise ValueError(f"Cannot resolve relative path '{value}', could not find the parent database of {parameters}.")
             parameters[key] = resolve_db_path(value, db_basedir)
@@ -187,6 +227,37 @@ class NTParameterSet(MutableMapping):
         with open(filename, 'w') as f:
             json.dump(self.as_dict(), f, indent=4)
 
+    def keys(self):
+        return self._data.keys()
+
+    
+    def tree_copy(self):
+        """Return a copy of the ParameterSet tree structure.
+        
+        Nodes are not copied, but re-referenced. This creates a shallow copy
+        of the tree structure where the hierarchy is duplicated but the
+        leaf values are shared between original and copy.
+        
+        Returns:
+            :py:class:`NTParameterSet`: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
+        """
+        def _copy_tree_structure(node):
+            if isinstance(node, NTParameterSet):
+                # Create new NTParameterSet with copied structure
+                return NTParameterSet({k: _copy_tree_structure(v) 
+                                     for k, v in node._data.items()})
+            elif isinstance(node, dict):
+                # Create new dict with copied structure
+                return {k: _copy_tree_structure(v) for k, v in node.items()}
+            elif isinstance(node, list):
+                # Create new list with copied structure
+                return [_copy_tree_structure(item) for item in node]
+            else:
+                # Leaf node - return reference (no copying)
+                return node
+        
+        return _copy_tree_structure(self)
+
     # --- MutableMapping interface ---
     def __getitem__(self, key):
         return self._resolve_path(key)
@@ -245,6 +316,7 @@ class NTParameterSet(MutableMapping):
 
     def update(self, other=None, **kwargs):
         """Update the NTParameterSet with another dictionary or keyword arguments.
+
         Args:
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
             **kwargs: Additional keyword arguments to merge into this NTParameterSet.

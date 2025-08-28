@@ -17,16 +17,12 @@
 
 '''Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
-.. deprecated::
-    This module additionally provides readers for :ref:`syn_activation_format` and :ref:`spike_times_format` files.
-    However, as these formats are now dataframes, they are saved with a pandas or dask dumpers in databases.
-    They can still be explicitly read using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
-    
-    See also:
-        :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+See also:
+    :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 '''
 
 import numpy as np
+import re
 from . import scalar_field
 from data_base.dbopen import dbopen
 import logging
@@ -129,7 +125,7 @@ def read_hoc_file(fname=''):
 
 
     with dbopen(fname, 'r') as neuronFile:
-        logger.info("Reading hoc file %s" % fname)
+        logger.info("Reading hoc file: {}".format(fname))
         #        cell = co.Cell()
         #        simply store list of edges
         #        cell is parsed in CellParser
@@ -263,72 +259,70 @@ def read_hoc_file(fname=''):
         return cell
 
 
-def read_scalar_field(fname=''):
-    """Read AMIRA scalar fields.
+def read_scalar_field(fname='', dtype=np.float64):
+    """Read ASCII AMIRA scalar field mesh files with high speed.
+    
+    This function reads in AMIRA scalar fields. Particular attention is given to speeding up reading of 
+    the actual data.
     
     Args:
-        fname (str): The name of the file to be read.
+        fname (str): Filename of the Amira Mesh file to be read.
+        dtype (numpy.dtype): Data type of the scalar field, default is `np.float64`.
 
     Raises:
         IOError: If the input file does not have a `.am` or `.AM` suffix.
-
+        
     Returns:
-        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object.
+        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
     """
-    if not fname.endswith('.am') and not fname.endswith('.AM'):
+    if not fname.endswith(('.am', '.AM')):
         raise IOError('Input file is not an Amira Mesh file!')
 
     with dbopen(fname, 'r') as meshFile:
-        # logger.info "Reading Amira Mesh file", fname
         mesh = None
-        extent, dims, bounds, origin, spacing = [], [], [], [], [0., 0., 0.]
-        dataSection, hasExtent, hasBounds = False, False, False
-        index = 0
+        extent, dims, bounds, origin, spacing = [], [], [], [], []
+        header_lines = []
+
+        # Read until we reach the data section
         for line in meshFile:
-            if line.strip():
-                # set up lattice
-                if not dataSection:
-                    if 'define' in line and 'Lattice' in line:
-                        dimStr = line.strip().split()[-3:]
-                        for dim in dimStr:
-                            dims.append(int(dim))
-                        for dim in dims:
-                            extent.append(0)
-                            extent.append(dim - 1)
-                        hasExtent = True
-                    if 'BoundingBox' in line:
-                        bBoxStr = line.strip(' \t\n,').split()[-6:]
-                        for val in bBoxStr:
-                            bounds.append(float(val))
-                        for i in range(3):
-                            origin.append(bounds[2 * i])
-                        hasBounds = True
-                    if hasExtent and hasBounds and mesh is None:
-                        for i in range(3):
-                            spacing[i] = (bounds[2 * i + 1] - bounds[2 * i]) / (
-                                extent[2 * i + 1] - extent[2 * i])
-                            bounds[2 * i + 1] += 0.5 * spacing[i]
-                            bounds[2 * i] -= 0.5 * spacing[i]
-                            origin[i] -= 0.5 * spacing[i]
-                        mesh = np.empty(shape=dims)
-                    if '@1' in line and line[:2] == '@1':
-                        dataSection = True
-                        continue
-                # main data loop
-                else:
-                    data = float(line.strip())
-                    k = index // (dims[0] * dims[1])
-                    j = index // dims[0] - dims[1] * k
-                    i = index - dims[0] * (j + dims[1] * k)
-                    mesh[i, j, k] = data
-                    index += 1
-                    # logger.info 'i,j,k = %s,%s,%s' % (i, j, k)
+            header_lines.append(line)
+            if line.strip().startswith('@1'):
+                break
+
+        # Parse header info
+        for line in header_lines:
+            line = line.strip()
+            if not line:
+                continue
+            if 'define' in line and 'Lattice' in line:
+                dims = list(map(int, line.split()[-3:]))
+                extent = [v for dim in dims for v in (0, dim - 1)]
+            elif 'BoundingBox' in line:
+                bounds = list(map(float, line.strip(' \t\n,').split()[-6:]))
+                origin = [bounds[2 * i] for i in range(3)]
+            elif 'Spacing' in line:
+                spacing = list(map(float, line.strip(' \t\n,').split()[-3:]))
+
+        # Adjust bounds/origin before reading the data section
+        for i in range(3):
+            bounds[2 * i + 1] += 0.5 * spacing[i]
+            bounds[2 * i] -= 0.5 * spacing[i]
+            origin[i] -= 0.5 * spacing[i]
+
+        # Read the remainder of the file as one string and convert to float64
+        data_str = meshFile.read()
+        data = np.fromstring(data_str, sep=' ', dtype=dtype)
+
+        # Reshape into a 3D array in Fortran order
+        mesh = data.reshape(dims, order='F')
 
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
+
 def read_synapse_realization(fname):
     """Read a :ref:`syn_file_format` file and returns a dictionary of synapse locations.
+
     
     See also:
 
@@ -505,6 +499,12 @@ def read_functional_realization_map(fname):
 
 def read_synapse_activation_file(fname):
     '''Reads list of all functional synapses and their activation times.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     In contrast to :py:meth:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
     
@@ -566,6 +566,12 @@ def read_complete_synapse_activation_file(fname):
     '''Reads list of all functional synapses and their activation times.
     
     This reader also returns "structure label" in addition to the columns of :py:func:`read_synapse_activation_file`.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     Args: 
         fname (str): 
@@ -607,6 +613,12 @@ def read_complete_synapse_activation_file(fname):
 
 def read_spike_times_file(fname):
     '''Reads all trials and spike times within these trials.
+
+    .. deprecated::
+        This format is now commonly a pandas or dask dataframe.
+        They can still be explicitly read with this function
+        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
+    
     
     Args:
         fname (str): 
@@ -742,6 +754,77 @@ def read_landmark_file(landmarkFilename):
                 landmarks.append((x, y, z))
 
     return landmarks
+
+
+# Old versions ---------------------------------------------------
+
+def read_scalar_field_legacy(fname=''):
+    """Read AMIRA scalar fields.
+    
+    Args:
+        fname (str): The name of the file to be read.
+
+    Raises:
+        IOError: If the input file does not have a `.am` or `.AM` suffix.
+
+    Returns:
+        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object.
+
+    .. deprecated:: 0.5.0
+       This has been deprecated in favor of the faster :py:meth:`read_scalar_field`
+
+    :skip-doc:
+    """
+    if not fname.endswith('.am') and not fname.endswith('.AM'):
+        raise IOError('Input file is not an Amira Mesh file!')
+
+    with dbopen(fname, 'r') as meshFile:
+        # logger.info "Reading Amira Mesh file", fname
+        mesh = None
+        extent, dims, bounds, origin, spacing = [], [], [], [], [0., 0., 0.]
+        dataSection, hasExtent, hasBounds = False, False, False
+        index = 0
+        for line in meshFile:
+            if line.strip():
+                # set up lattice
+                if not dataSection:
+                    if 'define' in line and 'Lattice' in line:
+                        dimStr = line.strip().split()[-3:]
+                        for dim in dimStr:
+                            dims.append(int(dim))
+                        for dim in dims:
+                            extent.append(0)
+                            extent.append(dim - 1)
+                        hasExtent = True
+                    if 'BoundingBox' in line:
+                        bBoxStr = line.strip(' \t\n,').split()[-6:]
+                        for val in bBoxStr:
+                            bounds.append(float(val))
+                        for i in range(3):
+                            origin.append(bounds[2 * i])
+                        hasBounds = True
+                    if hasExtent and hasBounds and mesh is None:
+                        for i in range(3):
+                            spacing[i] = (bounds[2 * i + 1] - bounds[2 * i]) / (
+                                extent[2 * i + 1] - extent[2 * i])
+                            bounds[2 * i + 1] += 0.5 * spacing[i]
+                            bounds[2 * i] -= 0.5 * spacing[i]
+                            origin[i] -= 0.5 * spacing[i]
+                        mesh = np.empty(shape=dims)
+                    if '@1' in line and line[:2] == '@1':
+                        dataSection = True
+                        continue
+                # main data loop
+                else:
+                    data = float(line.strip())
+                    k = index // (dims[0] * dims[1])
+                    j = index // dims[0] - dims[1] * k
+                    i = index - dims[0] * (j + dims[1] * k)
+                    mesh[i, j, k] = data
+                    index += 1
+                    # logger.info 'i,j,k = %s,%s,%s' % (i, j, k)
+
+        return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
 if __name__ == '__main__':
