@@ -105,6 +105,7 @@ dask = ">=2024.8.0,<2025"
 cloudpickle = ">=3.1.1,<4"
 toml = ">=0.10.2,<0.11"
 matplotlib = ">=3.9.4,<4"
+ipython = ">=8.18.1,<9"
 [tool.pixi.feature.docs.pypi-dependencies]
 sphinx-paramlinks = ">=0.6.0,<0.7"
 catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
