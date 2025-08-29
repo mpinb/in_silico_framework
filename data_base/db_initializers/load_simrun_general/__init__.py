@@ -137,6 +137,8 @@ def init(
     Additional options can be configured in :py:mod:`data_base.db_initializers.load_simrun_general.config`
 
     Args:
+        db (:class:`~data_base.DataBase`):
+            The database to store the simulation results in.
         core (bool, optional):
             Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.
         spike_times (bool, optional):
