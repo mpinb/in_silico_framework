@@ -190,7 +190,7 @@ Each ``synapses.receptors.<receptor type>`` in ``synapses.receptors`` contains t
        For example, for an AMPA synapse, this could be the decay time constant, the facilitation, etc.
 
 See also:
-  The receptor parameters are used for NEURON's `NetCon <https://nrn.readthedocs.io/en/latest/hoc/modelspec/programmatic/network/netcon.html>`_.
+  The receptor parameters are used for NEURON's `NetCon <https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html#NetCon.threshold>`_.
         
 Example::
 
