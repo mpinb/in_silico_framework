@@ -4,7 +4,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "# Manipulations to multiscale simulations\n",
+        "# Manipulations of multiscale simulations\n",
         "\n",
         "ISF provides two strategies for identifying common mechanisms and quantifying the impact of individual mechanisms across multi-scale models. The first strategy is to manipulate specific properties of multi-scale models and investigate their effect on the neuronal responses, which will be covered in this tutorial. The second strategy is to reduce the multi-scale models to a minimal set of parameters that are sufficient to account for an in vivo observation, which will be covered in [the next tutorial](./4.2%20Reduced%20Models.ipynb)."
       ]

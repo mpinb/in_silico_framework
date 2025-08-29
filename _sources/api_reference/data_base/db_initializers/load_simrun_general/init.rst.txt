@@ -17,6 +17,8 @@ init
    Most configuration options you would want to change on a init-by-init basis are given here as keyword arguments.
    Additional options can be configured in :py:mod:`data_base.db_initializers.load_simrun_general.config`
 
+   :param db: The database to store the simulation results in.
+   :type db: ~data_base.DataBase
    :param core: Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.
    :type core: bool, optional
    :param spike_times: Parse and write the spike times into the database.
