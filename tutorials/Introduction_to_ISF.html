@@ -764,7 +764,7 @@ this timepoint. Simulation results from the single_cell_parser module can be imp
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[1]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>import Interface as I
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">Interface</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">I</span>
 </code></pre></div>
 </div>
 </div>
@@ -804,25 +804,25 @@ IPython: 8.12.2, Interface: heads/develop, PIL: 10.4.0, _brotli: 1.0.9, _csv: 1.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.scp # single_cell_parser package
-I.sca # single_cell_analyzer package
-I.DataBase # main class of isf_data_base
-I.map_singlecell_inputs # compute anatomical model for a given cell morphology in barrel cortex
-I.simrun_run_new_simulations # default function for running single cell simulations with well constrained synaptic input
-I.db_init_simrun_general.init # default method to initialize a model data base with existing simulation results
-I.db_init_simrun_general.optimize # converts the data to speed optimized compressed binary format
-I.synapse_activation_binning_dask # parallelized binning of synapse activation data
-I.rm_get_kernel # create reduced lda model from simulation data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">scp</span> <span class="c1"># single_cell_parser package</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sca</span> <span class="c1"># single_cell_analyzer package</span>
+<span class="n">I</span><span class="o">.</span><span class="n">DataBase</span> <span class="c1"># main class of isf_data_base</span>
+<span class="n">I</span><span class="o">.</span><span class="n">map_singlecell_inputs</span> <span class="c1"># compute anatomical model for a given cell morphology in barrel cortex</span>
+<span class="n">I</span><span class="o">.</span><span class="n">simrun_run_new_simulations</span> <span class="c1"># default function for running single cell simulations with well constrained synaptic input</span>
+<span class="n">I</span><span class="o">.</span><span class="n">db_init_simrun_general</span><span class="o">.</span><span class="n">init</span> <span class="c1"># default method to initialize a model data base with existing simulation results</span>
+<span class="n">I</span><span class="o">.</span><span class="n">db_init_simrun_general</span><span class="o">.</span><span class="n">optimize</span> <span class="c1"># converts the data to speed optimized compressed binary format</span>
+<span class="n">I</span><span class="o">.</span><span class="n">synapse_activation_binning_dask</span> <span class="c1"># parallelized binning of synapse activation data</span>
+<span class="n">I</span><span class="o">.</span><span class="n">rm_get_kernel</span> <span class="c1"># create reduced lda model from simulation data</span>
 
-I.silence_stdout # context manager and decorator to silence functions
-I.cache # decorator to cache functions
+<span class="n">I</span><span class="o">.</span><span class="n">silence_stdout</span> <span class="c1"># context manager and decorator to silence functions</span>
+<span class="n">I</span><span class="o">.</span><span class="n">cache</span> <span class="c1"># decorator to cache functions</span>
 
-I.np # numpy
-I.pd # pandas
-I.dask # dask
-I.distributed # distributed
-I.sns # seaborn
-# ...
+<span class="n">I</span><span class="o">.</span><span class="n">np</span> <span class="c1"># numpy</span>
+<span class="n">I</span><span class="o">.</span><span class="n">pd</span> <span class="c1"># pandas</span>
+<span class="n">I</span><span class="o">.</span><span class="n">dask</span> <span class="c1"># dask</span>
+<span class="n">I</span><span class="o">.</span><span class="n">distributed</span> <span class="c1"># distributed</span>
+<span class="n">I</span><span class="o">.</span><span class="n">sns</span> <span class="c1"># seaborn</span>
+<span class="c1"># ...</span>
 </code></pre></div>
 </div>
 </div>
@@ -840,7 +840,7 @@ I.sns # seaborn
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.db_init_simrun_general.init?
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.db_init_simrun_general.init<span class="o">?</span>
 </code></pre></div>
 </div>
 </div>
@@ -954,8 +954,8 @@ Args:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>dask_client = I.get_client()
-dask_client
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">dask_client</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+<span class="n">dask_client</span>
 </code></pre></div>
 </div>
 </div>
@@ -991,10 +991,10 @@ dask_client
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from pathlib import Path
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-tutorial_output_dir = f&quot;{Path.home()}/isf_tutorial_output&quot;  # &lt;-- Change this to your desired output directory
-db = I.DataBase(tutorial_output_dir).create_sub_db(&quot;intro_to_isf&quot;)
+<span class="n">tutorial_output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="si">}</span><span class="s2">/isf_tutorial_output&quot;</span>  <span class="c1"># &lt;-- Change this to your desired output directory</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">tutorial_output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">create_sub_db</span><span class="p">(</span><span class="s2">&quot;intro_to_isf&quot;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1003,26 +1003,26 @@ db = I.DataBase(tutorial_output_dir).create_sub_db(&quot;intro_to_isf&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[6]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from getting_started import getting_started_dir
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">getting_started_dir</span>
 
-example_cell_parameter_file = I.os.path.join(
-    getting_started_dir,
-    &#39;example_data&#39;,
-    &#39;biophysical_constraints&#39;,
-    &#39;86_C2_center.param&#39;)
-example_network_parameter_file = I.os.path.join(
-    getting_started_dir,
-    &#39;example_data&#39;,
-    &#39;functional_constraints&#39;,
-    &#39;network.param&#39;)
+<span class="n">example_cell_parameter_file</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">getting_started_dir</span><span class="p">,</span>
+    <span class="s1">&#39;example_data&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;86_C2_center.param&#39;</span><span class="p">)</span>
+<span class="n">example_network_parameter_file</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">getting_started_dir</span><span class="p">,</span>
+    <span class="s1">&#39;example_data&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;functional_constraints&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;network.param&#39;</span><span class="p">)</span>
 
-# Create new database entries
-# If they already exist, they will NOT be overwritten, but also not raise an error
-I.shutil.copy(example_cell_parameter_file, db.create_managed_folder(&#39;biophysical_constraints&#39;, raise_ = False))
-I.shutil.copy(example_network_parameter_file, db.create_managed_folder(&#39;functional_constraints&#39;, raise_ = False))
+<span class="c1"># Create new database entries</span>
+<span class="c1"># If they already exist, they will NOT be overwritten, but also not raise an error</span>
+<span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">example_cell_parameter_file</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">,</span> <span class="n">raise_</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">example_network_parameter_file</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;functional_constraints&#39;</span><span class="p">,</span> <span class="n">raise_</span> <span class="o">=</span> <span class="kc">False</span><span class="p">))</span>
 
-example_cell_parameter_file = db[&#39;biophysical_constraints&#39;].join(&#39;86_C2_center.param&#39;)
-example_network_parameter_file = db[&#39;functional_constraints&#39;].join(&#39;network.param&#39;)
+<span class="n">example_cell_parameter_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;86_C2_center.param&#39;</span><span class="p">)</span>
+<span class="n">example_network_parameter_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;functional_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;network.param&#39;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1030,22 +1030,22 @@ example_network_parameter_file = db[&#39;functional_constraints&#39;].join(&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[7]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code># Create new folder for results
-db.create_managed_folder(&#39;simrun&#39;, raise_ = False)
-dir_prefix = db[&#39;simrun&#39;].join(&#39;stim_C2&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Create new folder for results</span>
+<span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;simrun&#39;</span><span class="p">,</span> <span class="n">raise_</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">dir_prefix</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;stim_C2&#39;</span><span class="p">)</span>
 
-nSweeps = 1     # number of consecutive simulation trials per process
-nprocs = 1      # number of processes simulating that task in parallel
-tStop = 300     # stop the simulation at 300ms
+<span class="n">nSweeps</span> <span class="o">=</span> <span class="mi">1</span>     <span class="c1"># number of consecutive simulation trials per process</span>
+<span class="n">nprocs</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># number of processes simulating that task in parallel</span>
+<span class="n">tStop</span> <span class="o">=</span> <span class="mi">300</span>     <span class="c1"># stop the simulation at 300ms</span>
 
-d = I.simrun_run_new_simulations(
-    example_cell_parameter_file,
-    example_network_parameter_file,
-    dirPrefix = dir_prefix,
-    nSweeps = nSweeps,
-    nprocs = nprocs,
-    tStop = tStop,
-    silent = False)
+<span class="n">d</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">simrun_run_new_simulations</span><span class="p">(</span>
+    <span class="n">example_cell_parameter_file</span><span class="p">,</span>
+    <span class="n">example_network_parameter_file</span><span class="p">,</span>
+    <span class="n">dirPrefix</span> <span class="o">=</span> <span class="n">dir_prefix</span><span class="p">,</span>
+    <span class="n">nSweeps</span> <span class="o">=</span> <span class="n">nSweeps</span><span class="p">,</span>
+    <span class="n">nprocs</span> <span class="o">=</span> <span class="n">nprocs</span><span class="p">,</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="n">tStop</span><span class="p">,</span>
+    <span class="n">silent</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1053,7 +1053,7 @@ d = I.simrun_run_new_simulations(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>futures = dask_client.compute([d])
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">futures</span> <span class="o">=</span> <span class="n">dask_client</span><span class="o">.</span><span class="n">compute</span><span class="p">([</span><span class="n">d</span><span class="p">])</span>
 </code></pre></div>
 </div>
 </div>
@@ -1062,7 +1062,7 @@ d = I.simrun_run_new_simulations(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[9]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>dask_client
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">dask_client</span>
 </code></pre></div>
 </div>
 </div>
@@ -1097,11 +1097,11 @@ d = I.simrun_run_new_simulations(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[10]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.db_init_simrun_general.init(
-    db,
-    db[&#39;simrun&#39;],
-    client=dask_client
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">db_init_simrun_general</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+    <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">],</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">dask_client</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1121,10 +1121,10 @@ d = I.simrun_run_new_simulations(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>cell = I.simrun_simtrail_to_cell_object(
-    db,
-    sim_trial_index = db[&#39;sim_trial_index&#39;][0]
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">cell</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">simrun_simtrail_to_cell_object</span><span class="p">(</span>
+    <span class="n">db</span><span class="p">,</span>
+    <span class="n">sim_trial_index</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;sim_trial_index&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1132,33 +1132,33 @@ d = I.simrun_run_new_simulations(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[12]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>sa = db[&quot;synapse_activation&quot;]
-unique_syn_types = I.np.unique(sa[&quot;synapse_type&quot;])
-population_to_color_dict = {&#39;L1&#39;: &#39;cyan&#39;, &#39;L2&#39;: &#39;dodgerblue&#39;, &#39;L34&#39;: &#39;blue&#39;, &#39;L4py&#39;: &#39;palegreen&#39;,
-                    &#39;L4sp&#39;: &#39;green&#39;, &#39;L4ss&#39;: &#39;lime&#39;, &#39;L5st&#39;: &#39;yellow&#39;, &#39;L5tt&#39;: &#39;orange&#39;,
-                    &#39;L6cc&#39;: &#39;indigo&#39;, &#39;L6ccinv&#39;: &#39;violet&#39;, &#39;L6ct&#39;: &#39;magenta&#39;, &#39;VPM&#39;: &#39;black&#39;,
-                    &#39;INH&#39;: &#39;grey&#39;, &#39;EXC&#39;: &#39;red&#39;, &#39;all&#39;: &#39;black&#39;, &#39;PSTH&#39;: &#39;blue&#39;}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">sa</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;synapse_activation&quot;</span><span class="p">]</span>
+<span class="n">unique_syn_types</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">sa</span><span class="p">[</span><span class="s2">&quot;synapse_type&quot;</span><span class="p">])</span>
+<span class="n">population_to_color_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;L1&#39;</span><span class="p">:</span> <span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;L2&#39;</span><span class="p">:</span> <span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="s1">&#39;L34&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;L4py&#39;</span><span class="p">:</span> <span class="s1">&#39;palegreen&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;L4sp&#39;</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;L4ss&#39;</span><span class="p">:</span> <span class="s1">&#39;lime&#39;</span><span class="p">,</span> <span class="s1">&#39;L5st&#39;</span><span class="p">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;L5tt&#39;</span><span class="p">:</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;L6cc&#39;</span><span class="p">:</span> <span class="s1">&#39;indigo&#39;</span><span class="p">,</span> <span class="s1">&#39;L6ccinv&#39;</span><span class="p">:</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;L6ct&#39;</span><span class="p">:</span> <span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="s1">&#39;VPM&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;INH&#39;</span><span class="p">:</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="s1">&#39;EXC&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;PSTH&#39;</span><span class="p">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">}</span>
 
-cmv = I.CellMorphologyVisualizer(
-    cell,
-    t_start=245-25,
-    t_stop=245+25,
-    t_step=0.2
-    )
+<span class="n">cmv</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">CellMorphologyVisualizer</span><span class="p">(</span>
+    <span class="n">cell</span><span class="p">,</span>
+    <span class="n">t_start</span><span class="o">=</span><span class="mi">245</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">t_stop</span><span class="o">=</span><span class="mi">245</span><span class="o">+</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">t_step</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="p">)</span>
 
-for synapse_type in unique_syn_types:
-    celltype = synapse_type.split(&#39;_&#39;)[0]
-    if celltype not in population_to_color_dict: cmv.population_to_color_dict[synapse_type] = &#39;white&#39;
-    else: cmv.population_to_color_dict[synapse_type] = population_to_color_dict[synapse_type.split(&#39;_&#39;)[0]]
-cmv.population_to_color_dict[&quot;inactive&quot;] = &quot;#f0f0f0&quot;
+<span class="k">for</span> <span class="n">synapse_type</span> <span class="ow">in</span> <span class="n">unique_syn_types</span><span class="p">:</span>
+    <span class="n">celltype</span> <span class="o">=</span> <span class="n">synapse_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">celltype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">population_to_color_dict</span><span class="p">:</span> <span class="n">cmv</span><span class="o">.</span><span class="n">population_to_color_dict</span><span class="p">[</span><span class="n">synapse_type</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span>
+    <span class="k">else</span><span class="p">:</span> <span class="n">cmv</span><span class="o">.</span><span class="n">population_to_color_dict</span><span class="p">[</span><span class="n">synapse_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">population_to_color_dict</span><span class="p">[</span><span class="n">synapse_type</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">cmv</span><span class="o">.</span><span class="n">population_to_color_dict</span><span class="p">[</span><span class="s2">&quot;inactive&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#f0f0f0&quot;</span>
 
-images_path = str(db._basedir/&#39;C2_stim_animation_3d&#39;)
-cmv.animation(
-    images_path=images_path,
-    color=&quot;voltage&quot;,
-    show_synapses=True,
-    client=dask_client,
-)
+<span class="n">images_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">_basedir</span><span class="o">/</span><span class="s1">&#39;C2_stim_animation_3d&#39;</span><span class="p">)</span>
+<span class="n">cmv</span><span class="o">.</span><span class="n">animation</span><span class="p">(</span>
+    <span class="n">images_path</span><span class="o">=</span><span class="n">images_path</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;voltage&quot;</span><span class="p">,</span>
+    <span class="n">show_synapses</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">dask_client</span><span class="p">,</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>

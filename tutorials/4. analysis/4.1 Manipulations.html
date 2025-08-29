@@ -692,8 +692,8 @@ and thereby inform experiment design to verify these predictions empirically.</p
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from pathlib import Path
-tutorial_output_dir = f&quot;{Path.home()}/isf_tutorial_output&quot;  # &lt;-- Change this to your desired output directory
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">tutorial_output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span><span class="si">}</span><span class="s2">/isf_tutorial_output&quot;</span>  <span class="c1"># &lt;-- Change this to your desired output directory</span>
 </code></pre></div>
 </div>
 </div>
@@ -701,20 +701,20 @@ tutorial_output_dir = f&quot;{Path.home()}/isf_tutorial_output&quot;  # &lt;-- C
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[2]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>import Interface as I
-from getting_started import getting_started_dir
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">Interface</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">I</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="n">getting_started_dir</span>
 
-network_db = I.DataBase(tutorial_output_dir)[&#39;network_modeling&#39;]
-db = I.DataBase(tutorial_output_dir).create_sub_db(&#39;multiscale_manipulations&#39;)
+<span class="n">network_db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">tutorial_output_dir</span><span class="p">)[</span><span class="s1">&#39;network_modeling&#39;</span><span class="p">]</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">DataBase</span><span class="p">(</span><span class="n">tutorial_output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">create_sub_db</span><span class="p">(</span><span class="s1">&#39;multiscale_manipulations&#39;</span><span class="p">)</span>
 
-if not &#39;biophysical_constraints&#39; in db.keys():
-    cell_parameter_file = I.os.path.join(
-        getting_started_dir,
-        &#39;example_data&#39;,
-        &#39;biophysical_constraints&#39;,
-        &#39;86_C2_center.param&#39;)
-    I.shutil.copy(cell_parameter_file, db.create_managed_folder(&#39;biophysical_constraints&#39;))
-cell_parameter_file = db[&#39;biophysical_constraints&#39;].join(&#39;86_C2_center.param&#39;)
+<span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;biophysical_constraints&#39;</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">cell_parameter_file</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">getting_started_dir</span><span class="p">,</span>
+        <span class="s1">&#39;example_data&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;86_C2_center.param&#39;</span><span class="p">)</span>
+    <span class="n">I</span><span class="o">.</span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">cell_parameter_file</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">))</span>
+<span class="n">cell_parameter_file</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;biophysical_constraints&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;86_C2_center.param&#39;</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -754,7 +754,7 @@ IPython: 8.12.2, Interface: heads/docs+0.g1456ee0eb.dirty, PIL: 9.4.0, _brotli: 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[64]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>second_surround_whisker = &quot;C4&quot;  # Some whisker that is second surround to C2
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">second_surround_whisker</span> <span class="o">=</span> <span class="s2">&quot;C4&quot;</span>  <span class="c1"># Some whisker that is second surround to C2</span>
 </code></pre></div>
 </div>
 </div>
@@ -764,8 +764,8 @@ of stimuli, including those that come from <span class="math notranslate nohighl
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>network_file = network_db[&#39;network_param&#39;].join(&#39;{}_stim.param&#39;.format(second_surround_whisker))
-assert I.os.path.exists(network_file), &quot;Please run tutorials 2.1 and 2.2 first&quot;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">network_file</span> <span class="o">=</span> <span class="n">network_db</span><span class="p">[</span><span class="s1">&#39;network_param&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_stim.param&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">second_surround_whisker</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">I</span><span class="o">.</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">network_file</span><span class="p">),</span> <span class="s2">&quot;Please run tutorials 2.1 and 2.2 first&quot;</span>
 </code></pre></div>
 </div>
 </div>
@@ -773,32 +773,32 @@ assert I.os.path.exists(network_file), &quot;Please run tutorials 2.1 and 2.2 fi
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[65]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>delayeds = []
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">delayeds</span> <span class="o">=</span> <span class="p">[]</span>
 
-# Delete previous results, if they exist
-if &#39;simrun&#39; in db.keys():
-    del db[&#39;simrun&#39;]
+<span class="c1"># Delete previous results, if they exist</span>
+<span class="k">if</span> <span class="s1">&#39;simrun&#39;</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">del</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">]</span>
 
-# Create new folder for results
-db.create_managed_folder(&#39;simrun&#39;)
+<span class="c1"># Create new folder for results</span>
+<span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;simrun&#39;</span><span class="p">)</span>
 
-network_file = network_db[&#39;network_param&#39;].join(&#39;{}_stim.param&#39;.format(second_surround_whisker))
-dir_prefix = db[&#39;simrun&#39;].join(&#39;stim_{}&#39;.format(second_surround_whisker))
+<span class="n">network_file</span> <span class="o">=</span> <span class="n">network_db</span><span class="p">[</span><span class="s1">&#39;network_param&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">_stim.param&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">second_surround_whisker</span><span class="p">))</span>
+<span class="n">dir_prefix</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;stim_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">second_surround_whisker</span><span class="p">))</span>
 
-nSweeps = 4 # number of consecutive simulations per process
-nprocs = 4 # number of processes simulating that task in parallel
-tStop = 300 # stop the simulation at 300ms
+<span class="n">nSweeps</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># number of consecutive simulations per process</span>
+<span class="n">nprocs</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># number of processes simulating that task in parallel</span>
+<span class="n">tStop</span> <span class="o">=</span> <span class="mi">300</span> <span class="c1"># stop the simulation at 300ms</span>
 
-d = I.simrun_run_new_simulations(
-    cell_parameter_file, # defined in the above cell
-    network_file,
-    dirPrefix = dir_prefix,
-    nSweeps = nSweeps,
-    nprocs = nprocs,
-    tStop = tStop,
-    silent = False
-)
-delayeds.append(d)
+<span class="n">d</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">simrun_run_new_simulations</span><span class="p">(</span>
+    <span class="n">cell_parameter_file</span><span class="p">,</span> <span class="c1"># defined in the above cell</span>
+    <span class="n">network_file</span><span class="p">,</span>
+    <span class="n">dirPrefix</span> <span class="o">=</span> <span class="n">dir_prefix</span><span class="p">,</span>
+    <span class="n">nSweeps</span> <span class="o">=</span> <span class="n">nSweeps</span><span class="p">,</span>
+    <span class="n">nprocs</span> <span class="o">=</span> <span class="n">nprocs</span><span class="p">,</span>
+    <span class="n">tStop</span> <span class="o">=</span> <span class="n">tStop</span><span class="p">,</span>
+    <span class="n">silent</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">delayeds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -814,8 +814,8 @@ delayeds.append(d)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[66]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>client = I.get_client()
-client
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">get_client</span><span class="p">()</span>
+<span class="n">client</span>
 </code></pre></div>
 </div>
 </div>
@@ -848,9 +848,9 @@ client
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from dask.distributed import wait
-futures = client.compute(delayeds)
-wait(futures)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">wait</span>
+<span class="n">futures</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">delayeds</span><span class="p">)</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">futures</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -859,7 +859,7 @@ wait(futures)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[69]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>db[&#39;simrun&#39;].join(&#39;stim_{}&#39;.format(second_surround_whisker))
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;stim_</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">second_surround_whisker</span><span class="p">))</span>
 </code></pre></div>
 </div>
 </div>
@@ -877,11 +877,11 @@ wait(futures)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.db_init_simrun_general.init(
-    db.create_sub_db(&quot;stim_{}&quot;.format(second_surround_whisker)),
-    db[&#39;simrun&#39;],
-    client=client
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">db_init_simrun_general</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_sub_db</span><span class="p">(</span><span class="s2">&quot;stim_</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">second_surround_whisker</span><span class="p">)),</span>
+    <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun&#39;</span><span class="p">],</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -890,12 +890,12 @@ wait(futures)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[71]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>vt = db[f&#39;stim_{second_surround_whisker}&#39;][&#39;voltage_traces&#39;]
-vt = client.compute(vt).result()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">vt</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;voltage_traces&#39;</span><span class="p">]</span>
+<span class="n">vt</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">vt</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
-sa = db[f&quot;stim_{second_surround_whisker}&quot;][&quot;synapse_activation&quot;]
+<span class="n">sa</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s2">&quot;synapse_activation&quot;</span><span class="p">]</span>
 
-st = db[f&quot;stim_{second_surround_whisker}&quot;][&#39;spike_times&#39;]
+<span class="n">st</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s1">&#39;spike_times&#39;</span><span class="p">]</span>
 </code></pre></div>
 </div>
 </div>
@@ -903,8 +903,8 @@ st = db[f&quot;stim_{second_surround_whisker}&quot;][&#39;spike_times&#39;]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[82]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>stim_onset = 245  # Check tutorial 2.2 or 3.1 for why this is 245 ms
-converge_t = 150  # rough estimate of how long neuron models take to
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">stim_onset</span> <span class="o">=</span> <span class="mi">245</span>  <span class="c1"># Check tutorial 2.2 or 3.1 for why this is 245 ms</span>
+<span class="n">converge_t</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># rough estimate of how long neuron models take to</span>
 </code></pre></div>
 </div>
 </div>
@@ -912,13 +912,13 @@ converge_t = 150  # rough estimate of how long neuron models take to
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[126]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>%matplotlib inline
-I.plt.style.use(&quot;fivethirtyeight&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
 
-ax = vt.T.plot(legend=False, lw=1, c=&#39;k&#39;, xlabel=&quot;Time ($ms$)&quot;, ylabel=&quot;$V_m (mV)$&quot;)
-ax.axvline(stim_onset, label=f&quot;Stimulus onset = {stim_onset}&quot;)
-ax.set_xlim((converge_t, 300))
-I.plt.show()
+<span class="n">ax</span> <span class="o">=</span> <span class="n">vt</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time ($ms$)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$V_m (mV)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Stimulus onset = </span><span class="si">{</span><span class="n">stim_onset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -933,12 +933,12 @@ I.plt.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[127]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from visualize.rasterplot import rasterplot2
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">visualize.rasterplot</span><span class="w"> </span><span class="kn">import</span> <span class="n">rasterplot2</span>
 
-rasterplot2(st, c=&#39;k&#39;, y_plot_length=.8)
-I.plt.axvline(stim_onset, label=f&quot;Stimulus onset = {stim_onset}&quot;)
-I.plt.xlim((converge_t, 300))
-I.plt.show()
+<span class="n">rasterplot2</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">y_plot_length</span><span class="o">=</span><span class="mf">.8</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Stimulus onset = </span><span class="si">{</span><span class="n">stim_onset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -971,10 +971,10 @@ parameters, allowing you to define new presynaptic cell populations in addition 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[76]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>sa = db[f&quot;stim_{second_surround_whisker}&quot;][&quot;synapse_activation&quot;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">sa</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">][</span><span class="s2">&quot;synapse_activation&quot;</span><span class="p">]</span>
 
-# All synapses activations of cell type L6cc for all simulation runs (see index)
-sa[sa[&#39;synapse_type&#39;].str.contains(&quot;L6cc&quot;)].compute()
+<span class="c1"># All synapses activations of cell type L6cc for all simulation runs (see index)</span>
+<span class="n">sa</span><span class="p">[</span><span class="n">sa</span><span class="p">[</span><span class="s1">&#39;synapse_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;L6cc&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -1219,10 +1219,10 @@ sa[sa[&#39;synapse_type&#39;].str.contains(&quot;L6cc&quot;)].compute()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>def silence_l6cc_subpopulation(sa, cell_type=&quot;L6cc&quot;, column=second_surround_whisker):
-    &quot;&quot;&quot;Remove all synapse activations from a SA dataframe if they are from L6cc neurons in
-    the barrel of the simulated whisker&quot;&quot;&quot;
-    return sa[~sa[&#39;synapse_type&#39;].str.contains(f&quot;{cell_type}_{column}&quot;)]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">silence_l6cc_subpopulation</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">cell_type</span><span class="o">=</span><span class="s2">&quot;L6cc&quot;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">second_surround_whisker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove all synapse activations from a SA dataframe if they are from L6cc neurons in</span>
+<span class="sd">    the barrel of the simulated whisker&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sa</span><span class="p">[</span><span class="o">~</span><span class="n">sa</span><span class="p">[</span><span class="s1">&#39;synapse_type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell_type</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)]</span>
 </code></pre></div>
 </div>
 </div>
@@ -1231,16 +1231,16 @@ sa[sa[&#39;synapse_type&#39;].str.contains(&quot;L6cc&quot;)].compute()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[79]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>if &#39;simrun_manipulations&#39; in db.keys():
-    del db[&#39;simrun_manipulations&#39;]
-# Create new folder for results
-db.create_managed_folder(&#39;simrun_manipulations&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="s1">&#39;simrun_manipulations&#39;</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">del</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun_manipulations&#39;</span><span class="p">]</span>
+<span class="c1"># Create new folder for results</span>
+<span class="n">db</span><span class="o">.</span><span class="n">create_managed_folder</span><span class="p">(</span><span class="s1">&#39;simrun_manipulations&#39;</span><span class="p">)</span>
 
-ds = I.simrun_rerun_db(
-    db = db[f&#39;stim_{second_surround_whisker}&#39;],
-    outdir = db[&#39;simrun_manipulations&#39;],
-    synapse_activation_modify_functions = [silence_l6cc_subpopulation]  # &lt;-------------- this is the crux of this manipulation
-)
+<span class="n">ds</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">simrun_rerun_db</span><span class="p">(</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">],</span>
+    <span class="n">outdir</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun_manipulations&#39;</span><span class="p">],</span>
+    <span class="n">synapse_activation_modify_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">silence_l6cc_subpopulation</span><span class="p">]</span>  <span class="c1"># &lt;-------------- this is the crux of this manipulation</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1256,9 +1256,9 @@ ds = I.simrun_rerun_db(
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[80]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>from dask.distributed import wait
-futures = client.compute(ds)
-wait(futures) # block computation util results are in
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">wait</span>
+<span class="n">futures</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">wait</span><span class="p">(</span><span class="n">futures</span><span class="p">)</span> <span class="c1"># block computation util results are in</span>
 </code></pre></div>
 </div>
 </div>
@@ -1276,11 +1276,11 @@ DoneAndNotDoneFutures(done={&lt;Future: finished, type: builtins.NoneType, key: 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>I.db_init_simrun_general.init(
-    db.create_sub_db(f&quot;stim_{second_surround_whisker}_manipulations&quot;),
-    db[&#39;simrun_manipulations&#39;],
-    client=client
-)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">I</span><span class="o">.</span><span class="n">db_init_simrun_general</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_sub_db</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s2">_manipulations&quot;</span><span class="p">),</span>
+    <span class="n">db</span><span class="p">[</span><span class="s1">&#39;simrun_manipulations&#39;</span><span class="p">],</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">client</span>
+<span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
@@ -1288,8 +1288,8 @@ DoneAndNotDoneFutures(done={&lt;Future: finished, type: builtins.NoneType, key: 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[90]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>vt_manipulations = db[f&#39;stim_{second_surround_whisker}_manipulations&#39;][&#39;voltage_traces&#39;]
-vt_manipulations = client.compute(vt_manipulations).result()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">vt_manipulations</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s1">_manipulations&#39;</span><span class="p">][</span><span class="s1">&#39;voltage_traces&#39;</span><span class="p">]</span>
+<span class="n">vt_manipulations</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">vt_manipulations</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -1297,7 +1297,7 @@ vt_manipulations = client.compute(vt_manipulations).result()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[91]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>st_manipulations = db[f&quot;stim_{second_surround_whisker}_manipulations&quot;][&#39;spike_times&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">st_manipulations</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;stim_</span><span class="si">{</span><span class="n">second_surround_whisker</span><span class="si">}</span><span class="s2">_manipulations&quot;</span><span class="p">][</span><span class="s1">&#39;spike_times&#39;</span><span class="p">]</span>
 </code></pre></div>
 </div>
 </div>
@@ -1305,9 +1305,9 @@ vt_manipulations = client.compute(vt_manipulations).result()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[92]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>ax = vt_manipulations.T.plot(legend=False, lw=1, c=&#39;k&#39;, xlabel=&quot;Time ($ms$)&quot;, ylabel=&quot;$V_m (mV)$&quot;)
-ax.axvline(stim_onset, label=f&quot;Stimulus onset = {stim_onset}&quot;)
-ax.set_xlim((converge_t, 300))
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">ax</span> <span class="o">=</span> <span class="n">vt_manipulations</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time ($ms$)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;$V_m (mV)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Stimulus onset = </span><span class="si">{</span><span class="n">stim_onset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 </code></pre></div>
 </div>
 </div>
@@ -1331,11 +1331,11 @@ ax.set_xlim((converge_t, 300))
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[125]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>rasterplot2(st_manipulations, c=&#39;k&#39;, y_plot_length=.8)
-I.plt.axvline(stim_onset, label=f&quot;Stimulus onset = ${stim_onset}ms$&quot;)
-I.plt.xlim((converge_t, 300))
-I.plt.legend()
-I.plt.show()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">rasterplot2</span><span class="p">(</span><span class="n">st_manipulations</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">y_plot_length</span><span class="o">=</span><span class="mf">.8</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Stimulus onset = $</span><span class="si">{</span><span class="n">stim_onset</span><span class="si">}</span><span class="s2">ms$&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -1351,18 +1351,18 @@ I.plt.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[122]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>import matplotlib.patches as mpatches
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpatches</span>
 
-ax = vt.T.plot(legend=False, label=&quot;Control&quot;, lw=1, c=&#39;k&#39;)
-ax = vt_manipulations.T.plot(legend=False, label=&quot;Manipulation&quot;, ax=ax, lw=1, c=&#39;red&#39;)
-patch_manip = mpatches.Patch(color=&#39;red&#39;, label=&#39;Manipulation&#39;)
-patch_control = mpatches.Patch(color=&#39;k&#39;, label=&#39;Control&#39;)
-I.plt.legend(handles=[patch_manip, patch_control])
-I.plt.xlabel(&quot;Time (ms)&quot;)
-I.plt.ylabel(&quot;$V_m (mV)$&quot;)
-I.plt.xlim((converge_t, 300))
-I.plt.axvline(stim_onset)
-I.plt.show()
+<span class="n">ax</span> <span class="o">=</span> <span class="n">vt</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">vt_manipulations</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Manipulation&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">patch_manip</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Manipulation&#39;</span><span class="p">)</span>
+<span class="n">patch_control</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Control&#39;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">patch_manip</span><span class="p">,</span> <span class="n">patch_control</span><span class="p">])</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (ms)&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$V_m (mV)$&quot;</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -1377,21 +1377,21 @@ I.plt.show()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[121]:
 </code></pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code>fig = I.plt.figure()
-ax = fig.gca()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="n">fig</span> <span class="o">=</span> <span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 
-rasterplot2(st, c=&#39;k&#39;, y_plot_length=.8, ax=ax, y_offset=.2)
-rasterplot2(st_manipulations, c=&#39;red&#39;, y_plot_length=.8, ax=ax, y_offset=-.2)
-I.plt.axvline(stim_onset, label=&quot;Simulus onset&quot;)
+<span class="n">rasterplot2</span><span class="p">(</span><span class="n">st</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">y_plot_length</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">y_offset</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+<span class="n">rasterplot2</span><span class="p">(</span><span class="n">st_manipulations</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">y_plot_length</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">y_offset</span><span class="o">=-</span><span class="mf">.2</span><span class="p">)</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Simulus onset&quot;</span><span class="p">)</span>
 
-patch_manip = mpatches.Patch(color=&#39;red&#39;, label=&#39;Manipulation&#39;)
-patch_control = mpatches.Patch(color=&#39;k&#39;, label=&#39;Control&#39;)
-patch_onset = mpatches.Patch(
-    color=I.plt.rcParams[&#39;axes.prop_cycle&#39;].by_key()[&#39;color&#39;][0],
-    label=&#39;Stimulus onset = ${}ms$&#39;.format(stim_onset))
-I.plt.xlim((converge_t, 300))
-I.plt.legend(handles=[patch_manip, patch_control, patch_onset])
-I.plt.show()
+<span class="n">patch_manip</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Manipulation&#39;</span><span class="p">)</span>
+<span class="n">patch_control</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Control&#39;</span><span class="p">)</span>
+<span class="n">patch_onset</span> <span class="o">=</span> <span class="n">mpatches</span><span class="o">.</span><span class="n">Patch</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">by_key</span><span class="p">()[</span><span class="s1">&#39;color&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Stimulus onset = $</span><span class="si">{}</span><span class="s1">ms$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stim_onset</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="n">converge_t</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">patch_manip</span><span class="p">,</span> <span class="n">patch_control</span><span class="p">,</span> <span class="n">patch_onset</span><span class="p">])</span>
+<span class="n">I</span><span class="o">.</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
