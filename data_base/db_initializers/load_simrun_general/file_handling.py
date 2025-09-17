@@ -8,7 +8,7 @@ from data_base.utils import chunkIt
 logger = logging.getLogger("ISF").getChild(__name__)
 
 def make_filelist(directory, suffix="vm_all_traces.csv"):
-    """Generate a list of all files with :paramref:`suffix` in the specified directory.
+    """Generate a list of all files with :py:param:`suffix` in the specified directory.
 
     This method recursively searches through the directory and its subdirectories
     for files that match the specified suffix. It returns a list of relative paths to
@@ -158,7 +158,7 @@ def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
 def _get_recsite_ids_from_recsite_labels(recsite_labels):
     """Fetch the recsite ID number from the entrie recsite ID string.
     
-    This function assumes all recsite ids in :paramref:`recsite_ids` have a substring containing "ID_[digit]",
+    This function assumes all recsite ids in :py:param:`recsite_ids` have a substring containing "ID_[digit]",
     where digit is any numeric combination.
 
     Args:

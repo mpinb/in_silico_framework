@@ -309,8 +309,8 @@ def rerun_db(
     The results are stored in the specified directory, relative to the original unmodified simulation results.
 
     Attention:
-        This function uses the *exact* same synapse activations as already present in the database, except if :paramref:`synapse_activation_modify_functions` is given.
-        In other words, adapting release probabilities of synapses with :paramref:`network_param_modify_functions` will have no effect, as the synapse activations are not
+        This function uses the *exact* same synapse activations as already present in the database, except if :py:param:`synapse_activation_modify_functions` is given.
+        In other words, adapting release probabilities of synapses with :py:param:`network_param_modify_functions` will have no effect, as the synapse activations are not
         regenerated.
     
     Args:

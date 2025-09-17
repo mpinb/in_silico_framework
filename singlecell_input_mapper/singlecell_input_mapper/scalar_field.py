@@ -152,7 +152,7 @@ class ScalarField(object):
         '''Fetch the scalar value of the voxel containing the point xyz.
 
         Warning:
-            Returns 0 if :paramref:`xyz` is outside the bounding box.
+            Returns 0 if :py:param:`xyz` is outside the bounding box.
 
         Args:
             xyz (tuple): The 3D coordinates of the point.
@@ -208,7 +208,7 @@ class ScalarField(object):
 
         Warning:
             This method does not perform range checking.
-            If :paramref:`xyz` is outside the bounding box, the index will be out of bounds for the :py:attr:`mesh`.
+            If :py:param:`xyz` is outside the bounding box, the index will be out of bounds for the :py:attr:`mesh`.
 
         Args:
             xyz (tuple): The 3D coordinates of the point.

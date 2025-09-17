@@ -42,7 +42,7 @@ def connected_to_structure_beyond(
     n_children_required=1
     ):
     '''Checks if a :py:class:`~single_cell_parser.cell.Cell` section is connected to a structure
-    at a soma distance larger than :paramref:`beyond_dist`. 
+    at a soma distance larger than :py:param:`beyond_dist`. 
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -75,8 +75,8 @@ def get_inner_sec_dist_dict(
     n_children_required = 1):
     '''Get sections that connect to specific structures beyond a minimum distance.
     
-    Fetches all sections that are connected to compartments with labels in :paramref:`beyond_struct`, and
-    that have a minimum soma distance of :paramref:`beyond_dist`.
+    Fetches all sections that are connected to compartments with labels in :py:param:`beyond_struct`, and
+    that have a minimum soma distance of :py:param:`beyond_dist`.
     This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
     
     Args:
@@ -111,8 +111,8 @@ def get_inner_section_at_distance(
     ):
     '''Get sections that connect to specific structures at a particular distance.
     
-    Fetches all sections that are connected to compartments with labels in :paramref:`beyond_struct`, and
-    that have a soma distance of :paramref:`beyond_dist`.
+    Fetches all sections that are connected to compartments with labels in :py:param:`beyond_struct`, and
+    that have a soma distance of :py:param:`beyond_dist`.
     This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
     
     Args:
@@ -122,7 +122,7 @@ def get_inner_section_at_distance(
         beyond_struct (list): The labels of the structures to check.
         
     Returns:
-        tuple: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :paramref:`dist`.
+        tuple: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :py:param:`dist`.
         
     See also:
         See also: :py:meth:`~get_inner_sec_dist_dict` that returns all sections beyond some distance, rather than only the closest section at a specific distance.
@@ -263,7 +263,7 @@ def vmApical(cell, dist=None):
     Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
     - It contains at least one section with the label "ApicalDendrite"
-    - Such section exists at :paramref:`~dist` distance from the soma
+    - Such section exists at :py:param:`dist` distance from the soma
     - The section has at least one child
         
     See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
@@ -290,7 +290,7 @@ def vmApical_position(cell, dist=None):
     Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
     - It contains at least one section with the label "ApicalDendrite"
-    - Such section exists at :paramref:`~dist` distance from the soma
+    - Such section exists at :py:param:`~dist` distance from the soma
     - The section has at least one child
     
     See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used

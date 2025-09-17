@@ -306,7 +306,7 @@ class CellParser(object):
         return self.cell
 
     def insert_membrane_properties(self, label, props):
-        '''Inserts membrane properties into all structures named as :paramref:`label`.
+        '''Inserts membrane properties into all structures named as :py:param:`label`.
         
         Args:
             label (str): Label of the structure.
@@ -341,7 +341,7 @@ class CellParser(object):
                 exec('sec.' + s)
 
     def insert_range_mechanisms(self, label, mechs):
-        r'''Inserts range mechanisms into all structures named as :paramref:`label`.
+        r'''Inserts range mechanisms into all structures named as :py:param:`label`.
         
         Range mechanism specifications can be found in :py:mod:`mechanisms`.
         
@@ -736,7 +736,7 @@ class CellParser(object):
                 raise NotImplementedError(errstr)
 
     def update_range_mechanisms(self, label, updateMechName, mechs):
-        '''Updates range mechanism :paramref:`updateMechName` in all structures named as :paramref:`label`.
+        '''Updates range mechanism :py:param:`updateMechName` in all structures named as :py:param:`label`.
         
         This method is essentially the same as insert_range_mechanisms, but does not
         insert mechanisms. Instead assumes they're already present.
@@ -784,7 +784,7 @@ class CellParser(object):
             raise NotImplementedError(errstr)
 
     def _insert_ion_properties(self, label, ionParam):
-        '''Inserts ion properties into all structures named as :paramref:`label`
+        '''Inserts ion properties into all structures named as :py:param:`label`
         
         Args:
             label (str): Label of the structure.
@@ -888,7 +888,7 @@ class CellParser(object):
     def insert_passive_membrane(self, label):
         """Set up a passive membrane with default values.
         
-        Sets up the cell structure :paramref:`label` with a passive membrane that has the following properties:
+        Sets up the cell structure :py:param:`label` with a passive membrane that has the following properties:
         
         * :math:`R_a = 200 \\Omega \\cdot cm`
         * :math:`C_m = 0.75 \\mu F/cm^2`
@@ -918,7 +918,7 @@ class CellParser(object):
     def insert_hh_membrane(self, label):
         """Set up a Hodgkin-Huxley membrane with default values.
         
-        Sets up the cell structure :paramref:`label` with a Hodgkin-Huxley membrane that has the following properties:
+        Sets up the cell structure :py:param:`label` with a Hodgkin-Huxley membrane that has the following properties:
         
         - :math:`\\bar{g}_{L} = 0.0003 \\, S/cm^2`
         - :math:`E_{L} = -54.3 \\, mV`

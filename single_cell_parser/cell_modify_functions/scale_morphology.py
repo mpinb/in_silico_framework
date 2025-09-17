@@ -42,10 +42,10 @@ def scale_morphology(cell, scale, target_morphology):
     """Scale a morphology between its current shape and a target morphology.
 
     Given a target morphology :ref:`hoc_file_format` file, this method scales the current
-    :paramref:`cell` to be closer to the target morphology. The scaling is done by linearly
+    :py:param:`cell` to be closer to the target morphology. The scaling is done by linearly
     interpolating each point between the current and target morphology.
 
-    A :paramref:`scale` factor of 0.0 will result in the current morphology, while a factor of 1.0
+    A :py:param:`scale` factor of 0.0 will result in the current morphology, while a factor of 1.0
     will result in the target morphology. Anything in between will be a linear interpolation.
 
     The target morphology must contain the same amount of points as the current morphology, 

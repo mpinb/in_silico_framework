@@ -513,7 +513,7 @@ class RaisedCosineBasis(object):
             width (int): The width of the basis functions.
             
         Returns:
-            RaisedCosineBasis: The object itself, with a defined :paramref:`basis` attribute.
+            RaisedCosineBasis: The object itself, with a defined :py:param:`basis` attribute.
         """
         self.width = width
         self.t = np.arange(width)
@@ -543,7 +543,7 @@ class RaisedCosineBasis(object):
         """Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
         
         The superposition of all basis functions, weighed by the input weights,
-        is a single filter of length :paramref:`width` that can be used to weigh the input data: synapse activations.
+        is a single filter of length :py:param:`width` that can be used to weigh the input data: synapse activations.
         
         .. math::
     
@@ -697,7 +697,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         base_vectors_arrays_dict (dict): 
             The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
             These basis vectors are used for the optimizer, and are already multiplied with the data.
-            Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
+            Do not confuse them with the basis vectors of :py:param:`RaisedCosineBasis_spatial` and :py:param:`RaisedCosineBasis_temporal`,
             as the latter are not multiplied with the synapse activaiton data.
         groups (list): The list of groups. Usually simply ``['EXC', 'INH']``.
         len_z (int): The length of the spatial domain i.e. the amount of spatial basis vectors.
@@ -842,7 +842,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             base_vectors_arrays_dict (dict): The dictionary of basis vectors for each group.
             x (array): 
                 The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
-                These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+                These are converted to spatial and temporal weights per group with :py:param:`convert_x`.
             
         Attention:
             These basis vectors are already multiplied with the data, and are thus not the same
@@ -870,7 +870,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             
         Args:
             x (array): The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a 1D array.
-                These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+                These are converted to spatial and temporal weights per group with :py:param:`convert_x`.
             
         Returns:
             array: The normalized learnable weights :math:`\mathbf{x}`.
@@ -924,7 +924,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         
         Attention:
             These are the same basis functions as in :py:class:`RaisedCosineBasis`.
-            These are thus not multiplied with the synapse activation data, as is the case with :paramref:`basis`.
+            These are thus not multiplied with the synapse activation data, as is the case with :py:param:`basis`.
             
         Args:
             optimizer_output (List[scipy.optimize.OptimizeResult]): An array of optimizer outputs. usually one element per data split.

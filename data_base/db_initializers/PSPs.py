@@ -116,14 +116,14 @@ def init(
     PSPClass_kwargs={}):
     '''Calculate the PSPs for all network embeddings and neuron models present in the simrun-initialized database.
     
-    The PSPs are calculated using :paramref:`PSPClass`. 
+    The PSPs are calculated using :py:param:`PSPClass`. 
     This can e.g. be a class defined in :py:mod:`~simrun.PSP_with_modification`.
     This class will be initialized as follows for all neuron_param and confile::
     
         >>> psp_class_instance = PSPClass(neuron_param, confile, **PSPClass_kwargs)
         
-    :paramref:`PSPClass` needs to provide a ``get`` method that returns a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object, 
-    The :py:class:`~simrun.synaptic_strength_fitting.PSPs` object is executed and saved to :paramref:`db` under the following key::
+    :py:param:`PSPClass` needs to provide a ``get`` method that returns a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object, 
+    The :py:class:`~simrun.synaptic_strength_fitting.PSPs` object is executed and saved to :py:param:`db` under the following key::
     
         >>> db['PSPs']['description_key', PSPClass.__name__, 'neuron_param_path', 'confile_path']
     

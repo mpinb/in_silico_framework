@@ -307,7 +307,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
 
 
 def get_neighboring_spatial_bins(cell, bin_id, section_distances_df):
-    """Get all the neighboring bins from a :paramref:`bin_id`.
+    """Get all the neighboring bins from a :py:param:`bin_id`.
 
     Args:
         cell (cell): cell object
@@ -426,7 +426,7 @@ def save_st_and_ISI(
 def spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1):
     """One-hot encode spike times to a binned time vector.
     
-    The time vector is created from :paramref:`min_time`, :paramref:`max_time` and :paramref:`time_step`
+    The time vector is created from :py:param:`min_time`, :py:param:`max_time` and :py:param:`time_step`
     and is of length ``(max_time - min_time)//time_step``.
     
     If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
@@ -681,7 +681,7 @@ def get_synapse_activation_array_weighted(
     
     Create a 4D array of synaptic activation, where the axes are:
     
-    - :paramref:`selected_stis`
+    - :py:param:`selected_stis`
     - EXC/INH
     - spatial bins
     - time bins
@@ -1047,7 +1047,7 @@ def init(
         db (:py:class:`~data_base.DataBase`):
             The simrun-initialized database
         db_target (:py:class:`~data_base.DataBase`):
-            The target database. Defaults to None, which initializes the ANN batches in the same database as :paramref:`db`.
+            The target database. Defaults to None, which initializes the ANN batches in the same database as :py:param:`db`.
     
     Attention:
         Still in development. See issue #75.

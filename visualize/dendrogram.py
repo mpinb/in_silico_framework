@@ -438,7 +438,7 @@ class _DendrogramDendriteStatistics:
             binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
-            None: Nothing. Updates :paramref:`bins` and :paramref:`dendrite_density`.
+            None: Nothing. Updates :py:param:`bins` and :py:param:`dendrite_density`.
         """
         if dist_end is None:
             dist_end = _get_max_somadistance(self.dendrogram_db)
@@ -537,7 +537,7 @@ class _DendrogramSynapseStatistics:
             binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
-            None: Nothing. Updates :paramref:`bins`, :paramref:`synapse_density`, :paramref:`synapse_density_apical`, and :paramref:`synapse_density_basal`.
+            None: Nothing. Updates :py:param:`bins`, :py:param:`synapse_density`, :py:param:`synapse_density_apical`, and :py:param:`synapse_density_basal`.
         """
         dist_end = _get_max_somadistance(self.dendrogram_db)
         bins = np.arange(0, dist_end + binsize, binsize)
@@ -575,7 +575,7 @@ class _DendrogramSynapseStatistics:
         While plotting per synapse type is supported, the default behavior is to plot all synapses in black.
 
         Returns:
-            None: Nothing. Updates :paramref:`synapse_statistics`.
+            None: Nothing. Updates :py:param:`synapse_statistics`.
         """
         self.synapse_statistics = {}
         for dendro_section in self.dendrogram_db:
@@ -592,7 +592,7 @@ class _DendrogramSynapseStatistics:
 
         Attention:
             If a colormap is provided, but does not contain all synapse types as they appear in
-            :paramref:`~single_cell_parser.cell.Cell.synapses`, the missing synapse types are omitted from the plot.
+            :py:param:`~single_cell_parser.cell.Cell.synapses`, the missing synapse types are omitted from the plot.
 
         Args:
             ax (:py:class:`matplotlib.axes.Axes`): The matplotlib axes object.

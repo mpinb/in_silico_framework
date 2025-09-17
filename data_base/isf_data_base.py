@@ -111,7 +111,7 @@ class MetadataAccessor:
             return json.load(f)
 
     def keys(self):
-        """Return the keys of the :paramref:`db`"""
+        """Return the keys of the Database"""
         return [ k for k in self.db.keys() if Path.exists(self.db._basedir/k/"Loader.[json][pickle]") ]
         
 
@@ -215,7 +215,7 @@ class ISFDataBase:
         ├── my_new_element
         └── dataframe
 
-    All saved elements are stored in the :paramref:`basedir` along with a ``Loader.json`` object. 
+    All saved elements are stored in the :attr:`basedir` along with a ``Loader.json`` object. 
     The ``Loader.json`` object defines which :py:mod:`~data_base.IO.LoaderDumper` module should be used to load the data with, 
     along with all the necessary information to initialize this :py:mod:`~data_base.IO.LoaderDumper`.
     In addition, the following metadata is saved:
@@ -260,7 +260,7 @@ class ISFDataBase:
             - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
             
         _forbidden_keys (list): A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
-        _basedir (Path): :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
+        _basedir (Path): :py:class:`pathlib.Path` object of :attr:`basedir`, to use internally.
         
     '''
     def __init__(self, basedir, readonly = False, nocreate = False, suppress_errors=False):

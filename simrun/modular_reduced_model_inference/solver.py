@@ -168,7 +168,7 @@ class Solver_COBYLA(_Solver):
     def _optimize(_objective_function, maxiter=5000, x0=None):
         """Static optimization method.
         
-        This method is the core optimizer. It minimizes :paramref:`_objective_function` using
+        This method is the core optimizer. It minimizes :py:param:`_objective_function` using
         :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
         
         Args:

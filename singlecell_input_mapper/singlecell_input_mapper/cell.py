@@ -56,7 +56,7 @@ class Cell(object):
         self.synapses = {}
 
     def distance_to_soma(self, sec, x):
-        '''Calculate the path length to soma from location :paramref:`x` on section :paramref:`sec`
+        '''Calculate the path length to soma from location :py:param:`x` on section :py:param:`sec`
 
         Args:
             sec (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`): Section object.
@@ -129,7 +129,7 @@ class Cell(object):
         return self.synapses[preType][-1]
 
     def remove_synapses(self, preType=None):
-        """Remove all synapses of type :paramref:`preType` from the cell.
+        """Remove all synapses of type :py:param:`preType` from the cell.
         
         Args:
             preType (str): Presynaptic cell type. Default: None. Set to 'All' or 'all' to remove all synapses.

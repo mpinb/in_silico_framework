@@ -446,7 +446,7 @@ def scan_directory(path, fnames, suffix):
         suffix (str): The suffix of the files to look for.
     
     Returns:
-        None. Updates :paramref:`fnames` in place.
+        None. Updates :py:param:`fnames` in place.
     """
     for fname in glob.glob(os.path.join(path, '*')):
         if os.path.isdir(fname):

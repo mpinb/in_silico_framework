@@ -409,7 +409,7 @@ class NetworkMapper:
         """Apply network modify functions to the network.
         
         Network modify functions can be found in the module :py:mod:`~single_cell_parser.network_modify_functions`,
-        and always take the arguments :paramref:`postCell` and a :py:class:`~single_cell_parser.network.NetworkMapper` object.
+        and always take the arguments :py:param:`postCell` and a :py:class:`~single_cell_parser.network.NetworkMapper` object.
         """
         if 'network_modify_functions' in list(self.nwParam.keys()):
             logger.info('***************************')
@@ -640,8 +640,8 @@ class NetworkMapper:
     def _create_pointcell_activities(self, preCellType, networkParameters):
         '''Create point cell spike times based on the network parameters ``distribution`` keyword.
 
-        Depending on the ``distribution`` given by :paramref:`networkParameters`, this method creates
-        spike times for each presynaptic cell of type :paramref:`preCellType`.
+        Depending on the ``distribution`` given by :py:param:`networkParameters`, this method creates
+        spike times for each presynaptic cell of type :py:param:`preCellType`.
 
         The following spike time distributions are supported, and require the following parameters:
         
@@ -1353,9 +1353,9 @@ def activate_functional_synapse(
 
     This method simulates the activation of a single synapse onto a biophysically detailed neuron model using NEURON.
 
-    The activation times for the synapse can be passed explicitly, or generated in case :paramref:`releaseTimes` is ``None``.
-    In the latter case, this method generates release times based on the synapse's release probability from :paramref:`synParameters`,
-    and spike times of :paramref:`preSyncell`.
+    The activation times for the synapse can be passed explicitly, or generated in case :py:param:`releaseTimes` is ``None``.
+    In the latter case, this method generates release times based on the synapse's release probability from :py:param:`synParameters`,
+    and spike times of :py:param:`preSyncell`.
     
     If they need to be generated (default behavior), the release times are calculated from the ``releaseProb`` keyword in the synapse parameter file.
     If the ``releaseProb`` is not given, or set to ``'dynamic'``, the synapse is assumed to release each time the presynaptic cell spikes.
@@ -1374,8 +1374,8 @@ def activate_functional_synapse(
         forceSynapseActivation (bool): If True, the synapse is activated regardless of the release probability.
         releaseTimes (list):
             List of synaptic release times.
-            If None, the release times are generated from the :paramref:`synapseParameters`'s ``releaseProb`` keyword,
-            If None and ``releaseprob`` does not appear in :paramref:`synapseParameters`, the release probability is assumed to equal 1,
+            If None, the release times are generated from the :py:param:`synapseParameters`'s ``releaseProb`` keyword,
+            If None and ``releaseprob`` does not appear in :py:param:`synapseParameters`, the release probability is assumed to equal 1,
             and synapse release times equal presynaptic spike times without delay.
     '''
     #     try:

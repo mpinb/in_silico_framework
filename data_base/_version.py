@@ -61,8 +61,8 @@ def register_vcs_handler(vcs, method):  # decorator
     """Decorator to mark a method as the handler for a particular VCS.
     
     Tries to keep the metadata of the original method by using functools.wraps().
-    This breaks in Py2 if :paramref:method does not have a __module__ atrribute,
-    Which is the case if :paramref:method is e.g. a lambda function or string (see :py:meth:`git_get_keywords`).
+    This breaks in Py2 if :py:param:method does not have a __module__ atrribute,
+    Which is the case if :py:param:method is e.g. a lambda function or string (see :py:meth:`git_get_keywords`).
     
     Example:
     

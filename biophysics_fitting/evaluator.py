@@ -59,7 +59,7 @@ class Evaluator:
             
     The workflow in the Evaluator can be split in two parts:
     
-    1. Apply an ``evaluate_fun`` on each matching key in :paramref:`voltage_traces_dict` 
+    1. Apply an ``evaluate_fun`` on each matching key in ``voltage_traces_dict``
         These extract features from the voltage trace. 
         These functions are registered under :py:attr:`Evaluator_Setup.evaluate_funs`.
     2. Perform arbitrary operations on the resulting dictionary 
@@ -110,7 +110,7 @@ class Evaluator:
                 If False, will not raise an error, and evaluate all features that can be evaluated given the provided `features_dict`. 
 
         Raises:
-            KeyError: if the Evaluator tries to evaluate a trace with a name that is not present in `features_dict.keys()` and :paramref:`raise_` is set to ``True``.
+            KeyError: if the Evaluator tries to evaluate a trace with a name that is not present in `features_dict.keys()` and :py:param:`raise_` is set to ``True``.
 
         Returns:
             obj: Whatever the return value is of :py:attr:`Evaluator.setup.finalize_funs`. 

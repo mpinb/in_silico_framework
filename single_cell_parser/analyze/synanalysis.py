@@ -51,7 +51,7 @@ def compute_synapse_distances_times(fname, cell, t=None, synTypes=None):
         synTypes (list): list of synapse types. Default: the keys of the `cell.synapses` dictionary
         
     Returns:
-        None. Writes out the synapse .csv file to :paramref:`fname`.
+        None. Writes out the synapse .csv file to :py:param:`fname`.
 
     See also:
         The :ref:`syn_activation_format` file format.
@@ -285,11 +285,11 @@ def compute_distance_to_soma(sec, x, cell=None, consider_gap_to_soma=False):
     Args:
         sec (:py:class:`single_cell_parser.cell.PySection` | int): 
             Section or section ID of the cell.
-            If the section ID is given, :paramref:`cell` must be provided.
+            If the section ID is given, :py:param:`cell` must be provided.
         x (float): 
             Relative point on section, from 0 to 1.
         cell (:py:class:`single_cell_parser.cell.Cell`, optional): 
-            Only required if :paramref:`sec` is the section ID.
+            Only required if :py:param:`sec` is the section ID.
         consider_gap_to_soma (bool, optional): 
             Accounts for the fact that dendrites don't actually touch the soma, and adds the
             distance between the last point of the parent section and the first point of the
@@ -369,7 +369,7 @@ def compute_syn_distances(
         numpy.ndarray: 1D array of distances to soma
 
     Raises:
-        KeyError: if the cell does not have synapses of type :paramref:`synType`.
+        KeyError: if the cell does not have synapses of type :py:param:`synType`.
     '''
     ## updated to use new method for getting somadistance of one synapse at a time
     if synType not in cell.synapses:

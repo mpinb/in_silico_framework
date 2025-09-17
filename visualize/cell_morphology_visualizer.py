@@ -90,7 +90,7 @@ class CMVDataParser:
             Time interval for visualization. 
             Does not have to equal the simulation time interval. 
             By default, the simulation is chopped to the specified t_begin and t_stop, and evenly divided in 10 timesteps.
-        times_to_show (np.ndarray): An array of time points to visualize. Gets calculated from :paramref:`self.t_start`, :paramref:`self.t_stop` and :paramref:`self.t_step`.
+        times_to_show (np.ndarray): An array of time points to visualize. Gets calculated from :py:param:`self.t_start`, :py:param:`self.t_stop` and :py:param:`self.t_step`.
         possible_scalars (set): Accepted keywords for scalar data other than membrane voltage.
         voltage_timeseries (list): 
             List containing the voltage of the cell during a timeseries. 
@@ -98,13 +98,13 @@ class CMVDataParser:
             Hence, the value of each element is the voltage at each point of the cell morphology. None means it has no simulation data. 
             Empty list means it has simulation data that has not been initialized yet.
         synapses_timeseries (list): 
-            List containing the synapse activations during a timeseries (Similarly to :paramref:`voltage_timeseries`). 
+            List containing the synapse activations during a timeseries (Similarly to :py:param:`voltage_timeseries`). 
             Each element corresponds to a time point. 
             Each element is a dictionary where each key is the type of input population and the value is the list of active synapses for that type of population at that time point. 
             The list contains the 3d coordinates where each active synapse is located. None means it has no simulation data. 
             Empty list means it has simulation data that has not been initialized yet.
         ion_dynamics_timeseries (dict): 
-            Dictionary containing the ion dynamics during a timeseries (Similarly to :paramref:`voltage_timeseries`). 
+            Dictionary containing the ion dynamics during a timeseries (Similarly to :py:param:`voltage_timeseries`). 
             Each value is a list corresponding where each element corresponds 1 timepoint, containing per-point info on the ion channel state or ion concentration. 
             None means it has no simulation data. 
             Empty means it has simulation data that has not been initialized yet.
@@ -335,7 +335,7 @@ class CMVDataParser:
             time_point (float|int): time point from which we want to gather the voltage
             
         Returns:
-            voltage_point (list): list of voltage points for each morphological point in the cell at :paramref:`time_point`.
+            voltage_point (list): list of voltage points for each morphological point in the cell at :py:param:`time_point`.
         '''
         n_sim_point = np.argmin(np.abs(self.simulation_times - time_point))
         voltage_points = [[self.soma.recVList[0][n_sim_point]] * len(self.morphology[self.morphology['sec_n'] == 0])]
@@ -374,7 +374,7 @@ class CMVDataParser:
             time_point (float|int): time point from which we want to gather the voltage.
             
         Returns:
-            ion_points (list): list of ion dynamics points for each morphological point in the cell at :paramref:`time_point`.
+            ion_points (list): list of ion dynamics points for each morphological point in the cell at :py:param:`time_point`.
         '''
         n_sim_point = np.argmin(np.abs(self.simulation_times - time_point))
         ion_points = [[self.soma.recordVars[ion_keyword][0][n_sim_point] or np.nan]]
@@ -393,8 +393,8 @@ class CMVDataParser:
         return ion_points
     
     def _calc_voltage_timeseries(self):
-        '''Retrieves voltage data along the whole cell body during a set of time points (specified in :paramref:`self.times_to_show`).
-        Fills the :paramref:`voltage_timeseries` attribute.
+        '''Retrieves voltage data along the whole cell body during a set of time points (specified in :py:param:`self.times_to_show`).
+        Fills the :py:param:`voltage_timeseries` attribute.
         Only does so when it has not been computed yet.
 
         Returns:
@@ -426,7 +426,7 @@ class CMVDataParser:
         Only does so when it has not been computed yet.
         
         Args:
-            ion_keyword (str): keyword for the ion dynamics we want to retrieve. Must be one of the keys in the recordVars of the sections. Use :paramref:`possible_scalars` to see the available options.
+            ion_keyword (str): keyword for the ion dynamics we want to retrieve. Must be one of the keys in the recordVars of the sections. Use :py:param:`possible_scalars` to see the available options.
 
         Returns:
             Nothing. Updates the self.timeseries_voltage attribute
@@ -467,8 +467,8 @@ class CMVDataParser:
             
         Returns:
             dict: 
-                dictionary where each key is the type of the input population and the value is a list of active synapse coordinates for that type of population at :paramref:`time_point`. 
-                If :paramref:`rotation_with_zaxis` is not None, the synapse coordinates are rotated to align with the z-axis.
+                dictionary where each key is the type of the input population and the value is a list of active synapse coordinates for that type of population at :py:param:`time_point`. 
+                If :py:param:`rotation_with_zaxis` is not None, the synapse coordinates are rotated to align with the z-axis.
         '''
 
         synapses = {}
@@ -491,8 +491,8 @@ class CMVDataParser:
         return synapses
 
     def _calc_synapses_timeseries(self):
-        '''Retrieves the active synapses during a set of time points (specified in :paramref:`times_to_show`).
-        Fills the :paramref:`synapses_timeseries` attribute.
+        '''Retrieves the active synapses during a set of time points (specified in :py:param:`times_to_show`).
+        Fills the :py:param:`synapses_timeseries` attribute.
         
         Returns:
             None. Updates the self.synapses_timeseries attribute.
@@ -540,7 +540,7 @@ class CMVDataParser:
             t_step (float): time interval
             
         Returns:
-            None. Updates :paramref:`times_to_show`.
+            None. Updates :py:param:`times_to_show`.
         """
         if not all([e is None for e in (t_start, t_stop, t_step)]):
             # At least one of the time range parameters needs to be updated
@@ -585,7 +585,7 @@ class CMVDataParser:
         color_dict={}):
         """Returns a scalar data array based on some keyword (ion dynamics or membrane voltage).
         
-        If :paramref:`return_as_color` is True (default), the returned array is a map from the input keyword to a color
+        If :py:param:`return_as_color` is True (default), the returned array is a map from the input keyword to a color
         Otherwise, it is the raw data, not mapped to a colorscale. Which data is returned (mapped to colors or not)
         depends on the keyword (case-insensitive):
         
@@ -601,7 +601,7 @@ class CMVDataParser:
             color_dict (dict): dictionary mapping section labels to colors. Only used if keyword is "dendrites" or "dendritic group".
             
         Returns:
-            list: list of scalar data. If :paramref:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
+            list: list of scalar data. If :py:param:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
         """
 
         # -------------- Fixed colors
@@ -658,7 +658,7 @@ class CMVDataParser:
         self, 
         array, 
         nan_color="#f0f0f0"):
-        """Given an array of scalar values of length n_points, bin them per section and assign a color according to :paramref:`scalar_mappable`.
+        """Given an array of scalar values of length n_points, bin them per section and assign a color according to :py:param:`scalar_mappable`.
         
         Args:
             array (list): list of scalar values. Each element corresponds to a point in the cell morphology.
@@ -672,7 +672,7 @@ class CMVDataParser:
     def scale_diameter(self, scale_func):
         """
         Scale the diameter of the visualization with a scaling function.
-        :paramref:`scale_func` should transform an array to an array of equal length.
+        :py:param:`scale_func` should transform an array to an array of equal length.
         To set a fixed diameter rather than scaling, pass `lambda x: fixed_d`
 
         Args:
@@ -762,7 +762,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             t_step (float): time between the different time points of our visualization
             
         Note:
-            :paramref:`align_trunk` assumes the cell has a trunk, which is defined as the dendrite between the soma
+            :py:param:`align_trunk` assumes the cell has a trunk, which is defined as the dendrite between the soma
             and the main bifurcation section.
             
         See also:
@@ -951,7 +951,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         Creates a set of images where a neuron morphology color-coded with voltage together with synapse activations are
         shown for a set of time points. In each image the neuron rotates a bit (3 degrees) over its axis.
         These images are then put together into a gif.
-        The parameters :paramref:`t_start`, :paramref:`t_stop` and :paramref:`t_step` will define the :paramref:`times_to_show` attribute
+        The parameters :py:param:`t_start`, :py:param:`t_stop` and :py:param:`t_step` will define the :py:param:`times_to_show` attribute
 
         Args:
             images_path (str): dir where the images for the gif will be generated
@@ -1004,7 +1004,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         '''Write the individual frames of a neuron during a simulation and merge them into a video.
         
         Creates a set of images of a neuron color-coded with voltage together with synapse activations.
-        The parameters :paramref:`t_start`, :paramref:`t_stop` and :paramref:`t_step` update the :paramref:`times_to_show` attribute.
+        The parameters :py:param:`t_start`, :py:param:`t_stop` and :py:param:`t_step` update the :py:param:`times_to_show` attribute.
 
         Args:
             images_path (str): dir where the images for the gif will be generated
@@ -1020,7 +1020,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             highlight_section (int): section number of the section that should be highlighted with an arrow.
             highlight_x (float): x coordinate of the section that should be highlighted with an arrow.
             framerate (int): frames per second
-            quality (int): quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :paramref:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
+            quality (int): quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :py:param:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
             codec (str): codec to use for the video. Default is mpeg4.
             tpf (float): duration of each frame in ms
         '''
@@ -1061,7 +1061,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         
         Creates a set of images of a neuron color-coded with voltage together with synapse activations. 
         These images are then put together into a IPython animation using :py:mod:`visualize.utils.display_animation_from_images`
-        The parameters :paramref:t_start, :paramref:t_stop and :paramref:t_step update the :paramref:self.time attribute
+        The parameters :py:param:t_start, :py:param:t_stop and :py:param:t_step update the :py:param:self.time attribute
 
         Args:
             images_path (str): path where the images for the gif will be generated.
@@ -1531,7 +1531,7 @@ def get_3d_plot_morphology(
         proj_type (str): Projection type for the 3D plot. Default: "ortho"
     
     Returns:
-        tuple | None: fig and ax object if :paramref:`return_figax` is True. None otherwise.
+        tuple | None: fig and ax object if :py:param:`return_figax` is True. None otherwise.
     """
     #----------------- Generic axes setup
     fig = plt.figure(

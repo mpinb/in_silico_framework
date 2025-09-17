@@ -54,11 +54,11 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
     or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
     :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
     
-    This function checks if this is the case, and filters out such results from :paramref:`filelist`
+    This function checks if this is the case, and filters out such results from :py:param:`filelist`
     
     Args:
         filelist (List): 
-            List of voltage trace results, relative to :paramref:`simresult_path`. 
+            List of voltage trace results, relative to :py:param:`simresult_path`. 
         simresult_path (str): Single path where all simulation results are stored.
         client (:py:class:`distributed.client.Client`): A parallellization client.
 
@@ -66,7 +66,7 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
         List: A filelist of reproducible simulation results.
         
     Raises:
-        ValueError: if no simulations in :paramref:`filelist` can be reproduced.
+        ValueError: if no simulations in :py:param:`filelist` can be reproduced.
     """
     sim_dirs = [os.path.join(simresult_path, os.path.dirname(f)) for f in filelist]
     is_healthy_mask = get_filter_healthy_simresult_dirs(sim_dirs, client=client)
@@ -85,7 +85,7 @@ def _build_core(
     check_health=False,
     client=None,
     ):
-    """Parse the essential simulation results and add it to :paramref:`db`.
+    """Parse the essential simulation results and add it to :py:param:`db`.
 
     The following data is parsed and added to the database:
 

@@ -154,7 +154,7 @@ def _read_object_meta_json(meta_fn):
 def read_object_meta(savedir, raise_=True):
     """Read the meta of a dask/parquet object.
     
-    Assumes there is a meta file present in :paramref:`savedir` 
+    Assumes there is a meta file present in :py:param:`savedir` 
     (see :py:meth:`get_meta_filename` for allowed formats).
     
     Args:

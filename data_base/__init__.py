@@ -169,7 +169,7 @@ def get_db_by_unique_id(unique_id):
         unique_id (str): The data base's unique identifier
         
     Returns:
-        :py:class:`data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+        :py:class:`data_base.DataBase`: The database associated with the :py:param:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
     db = DataBase(db_path, nocreate=True)

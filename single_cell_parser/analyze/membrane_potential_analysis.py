@@ -82,7 +82,7 @@ def compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0):
     """Compute the mean amplitude of all PSPs across multiple voltage traces.
     
     The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
-    between :paramref:`tStim` + :paramref:`t_delay` and :paramref:`tStim` + :paramref:`delay` + :paramref:`width`.
+    between :py:param:`tStim` + :py:param:`t_delay` and :py:param:`tStim` + :py:param:`t_delay` + :py:param:`width`.
 
     Args:
         vTraces (list): List of voltage traces.
@@ -199,7 +199,7 @@ def simple_spike_detection(
     '''Detect spike times in a voltage trace.
 
     Simple spike detection method. Identifies spike times within optional window ``[tBegin, tEnd]``
-    by determining :paramref:`threshold` crossing times from below.
+    by determining :py:param:`threshold` crossing times from below.
 
     Args:
         t (array): Time vector
@@ -209,8 +209,8 @@ def simple_spike_detection(
         threshold (float, optional): Threshold for spike detection (mV). Default is :math:`0.0 mV`.
         mode (str, optional):
             Mode for spike detection. Default is ``regular``.
-            - ``regular``: Checks if the membrane potential crosses an absolute :paramref:`threshold`.
-            - ``slope``: Checks if :math:`dV/dt` is larger than a :paramref:`threshold`.
+            - ``regular``: Checks if the membrane potential crosses an absolute :py:param:`threshold`.
+            - ``slope``: Checks if :math:`dV/dt` is larger than a :py:param:`threshold`.
 
     Returns:
         list: List of spike times.
@@ -263,8 +263,8 @@ def PSTH_from_spike_times(
     Args:
         spikeTimeVectors (list): List of spike time vectors.
         binSize (float, optional): Bin size for the PSTH. Default is `1.0 ms`.
-        tBegin (float, optional): Start time of the PSTH. Default is ``None`` (min of :paramref:`spikeTimeVectors`).
-        tEnd (float, optional): End time of the PSTH. Default is ``None`` (max of :paramref:`spikeTimeVectors`).
+        tBegin (float, optional): Start time of the PSTH. Default is ``None`` (min of :py:param:`spikeTimeVectors`).
+        tEnd (float, optional): End time of the PSTH. Default is ``None`` (max of :py:param:`spikeTimeVectors`).
         aligned (bool, optional): If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
 
     Returns:
@@ -402,7 +402,7 @@ class RecordingSiteManager(object):
         return newRecSite
 
     def update_recordings(self):
-        '''Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :paramref:`recordingSites`.
+        '''Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :py:param:`recordingSites`.
         '''
         for recordingSite in self.recordingSites:
             secID = recordingSite.secID

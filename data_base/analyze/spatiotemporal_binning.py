@@ -43,7 +43,7 @@ def universal_pd(
     
     Args:
         df (:py:class:`pandas.DataFrame`): 
-            DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+            DataFrame to bin. Must contain a column with the name :py:param:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
         spatial_distance_bins (int): 
@@ -90,7 +90,7 @@ def universal(
     
     Args:
         df (:py:class:`~pandas.DataFrame` or :py:class:`~dask.dataframe.DataFrame`): 
-            DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+            DataFrame to bin. Must contain a column with the name :py:param:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
         spatial_distance_bins (int): 

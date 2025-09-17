@@ -98,7 +98,7 @@ class CurrentAnalysis:
             segID (int): The index of the segment. Default is -1.
             rangeVars (list): The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
             colormap (dict): The colormap for the ion currents. Default is ``None``.
-            tVec (list): The time vector. Default is ``None``. Only necessary if :paramref:`cell_or_dict` is a dictionary.
+            tVec (list): The time vector. Default is ``None``. Only necessary if :py:param:`cell_or_dict` is a dictionary.
         """
         # set attributes
         if not isinstance(cell_or_dict, dict):

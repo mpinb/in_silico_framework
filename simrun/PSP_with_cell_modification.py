@@ -59,7 +59,7 @@ class PSP_with_current_injection:
         bounds (tuple):
             Limits for the current injection optimization to clamp the membrane potential (in :math:`nA`).
         holding_current (float):
-            Current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+            Current that needs to be injected to hold the somatic potential at :py:attr:`target_vm`.
     '''
     def __init__(
         self,
@@ -107,9 +107,9 @@ class PSP_with_current_injection:
                 cell_modify_functions)
 
     def optimize_holding_current(self):
-        '''Calculate the current that needs to be injected to hold the somatic potential at :paramref:`target_vm`.
+        '''Calculate the current that needs to be injected to hold the somatic potential at :py:attr:`target_vm`.
         
-        :paramref:`target_vm` is defined during initialization of the object
+        :py:attr:`target_vm` is defined during initialization of the object
         '''
         print('starting optimization of holding current. target membrane potential is {} mV'.format(self.target_vm))
         bounds = self.bounds
@@ -131,7 +131,7 @@ class PSP_with_current_injection:
     def _objective_fun(self, current):
         '''Callable to optimize. 
         
-        Input must be current in :math:`nA` and output must be squared deviation from :paramref:`target_vm` in :math:`mV^2` at the timepoint :paramref:`optimize_for_timepoint`.
+        Input must be current in :math:`nA` and output must be squared deviation from :py:attr:`target_vm` in :math:`mV^2` at the timepoint :py:attr:`optimize_for_timepoint`.
         '''
         tVec, vm = self._get_current_dependent_vt(current)
         if max(vm[tVec > self.delay]) > -40:  # there may be no spikes
@@ -172,7 +172,7 @@ class PSP_with_current_injection:
     def get_neuron_param_with_current_injection(self):
         '''Get a :ref:`cell_parameters_format` file with a current injection.
         
-        The current injection is set up such that the potential :paramref:`target_vm` is reached at the timepoint :paramref:`optimize_for_timepoint`
+        The current injection is set up such that the potential :py:attr:`target_vm` is reached at the timepoint :py:attr:`optimize_for_timepoint`
         '''
         if self.holding_current is None:
             self.optimize_holding_current()

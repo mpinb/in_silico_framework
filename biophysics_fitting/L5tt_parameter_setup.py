@@ -479,7 +479,7 @@ def set_many_param(cell_param, params=None):
     """Updates cell_param given a dict of params in the dot naming convention.
     
     This method is almost identical to :py:meth:`set_param`, but it has a different behavior when
-    a parameter name appears both as a top-level key and as a nested key in :paramref:`params`. In this case, the top-level
+    a parameter name appears both as a top-level key and as a nested key in :py:param:`params`. In this case, the top-level
     key will be used as the master value.
     
     Example::

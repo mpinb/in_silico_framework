@@ -45,10 +45,10 @@ class Simulator_Setup:
     
     Usually, a simulation contains fixed parameters, specific to the cell (e.g. the filename of the morphology)
     and/or stimulus protocol (e.g. recording sites). Such fixed parameters can be defined by adding
-    :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :paramref:`param_modify_funs`. 
+    :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :py:param:`param_modify_funs`. 
     A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace 
-    of the apical dendrite. Make sure that the :py:class:`~biophysics_fitting.simulator.Simulator` :paramref:`stim_run_fun` reads the 
-    parameter :paramref:`recSite` and sets up the stimulus accordingly (see :py:class:`~biophysics_fitting.simulator.Simulator`).
+    of the apical dendrite. Make sure that the :py:atrr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the 
+    parameter :py:param:`recSite` and sets up the stimulus accordingly (see :py:class:`~biophysics_fitting.simulator.Simulator`).
     
     Example::
 
@@ -90,7 +90,7 @@ class Simulator_Setup:
         cell, params
     
     Each function that receives the biophysical parameter vector 
-    (i.e. :paramref:`cell_param_modify_funs` and :paramref:`cell_modify_funs`)
+    (i.e. :py:param:`cell_param_modify_funs` and :py:param:`cell_modify_funs`)
     only sees a subset of the parameter vector that is provided by the user. This subset is determined 
     by the name by which the function is registered.
     
@@ -146,12 +146,12 @@ class Simulator_Setup:
         
         It checks if:
         
-        - :paramref:`cell_param_generator` is set.
-        - :paramref:`cell_generator` is set.
-        - The first element of the names of the :paramref:`stim_setup_funs`, :paramref:`stim_run_funs` and :paramref:`stim_response_measure_funs` are the same.
+        - :py:attr:`cell_param_generator` is set.
+        - :py:attr:`cell_generator` is set.
+        - The first element of the names of the :py:attr:`stim_setup_funs`, :py:attr:`stim_run_funs` and :py:attr:`stim_response_measure_funs` are the same.
           These names are used to group the functions that belong to the same stimulus.
-        - The number of :paramref:`stim_setup_funs`, :paramref:`stim_run_funs` and :paramref:`stim_response_measure_funs` are the same.
-        - Calls each additional check function in :paramref:`check_funs`.
+        - The number of :py:attr:`stim_setup_funs`, :py:attr:`stim_run_funs` and :py:attr:`stim_response_measure_funs` are the same.
+        - Calls each additional check function in :py:paattrram:`check_funs`.
         """
         if self.cell_param_generator is None:
             raise ValueError('cell_param_generator must be set')
@@ -179,7 +179,7 @@ class Simulator_Setup:
             procedure_description (str): A description of the procedure that produced the variable.
             
         Raises:
-            ValueError: If :paramref:`var` is None.
+            ValueError: If :py:param:`var` is None.
         """
         if var is None:
             raise ValueError('{} is None after execution of {}. '.format(
@@ -189,7 +189,7 @@ class Simulator_Setup:
     def _check_first_element_of_name_is_the_same(self, list1, list2):
         """Check if the first element of the names of two lists are the same.
         
-        Note that :paramref:`list1` and :paramref:`list2` are lists of lists, where the first element of each list is
+        Note that :py:param:`list1` and :py:param:`list2` are lists of lists, where the first element of each list is
         the name of the routine, and the second element is the function associated to the routine.
         The names are thus not the function names necessarily. In general, these routine names
         are dot-separated strings that start with the stimulus they refer to e.g. ``'stim_1.setup'``.
@@ -222,7 +222,7 @@ class Simulator_Setup:
         
         Stimulus setup functions are functions that set up the stimulus.
         They are saved under the name ``stimulus_name.setup``, and accessible
-        under :paramref:`stim_setup_funs`.
+        under :py:param:`stim_setup_funs`.
         
         Args:
             stim (str): The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
@@ -239,7 +239,7 @@ class Simulator_Setup:
         
         Stimulus run functions are functions that run the simulation.
         They are saved under the name ``stimulus_name.run``, and accessible
-        under :paramref:`stim_run_funs`.
+        under :py:param:`stim_run_funs`.
         
         Args:
             stim (str): The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
@@ -257,7 +257,7 @@ class Simulator_Setup:
         
         Stimulus response measure functions are functions that extract voltage traces from the cell.
         They are saved under the name ``stimulus_name.measure``, and accessible
-        under :paramref:`stim_response_measure_funs`.
+        under :py:param:`stim_response_measure_funs`.
         
         Args:
             stim (str): The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.       
@@ -274,7 +274,7 @@ class Simulator_Setup:
     def get_params(self, params):
         '''Get the modified biophysical parameters.
         
-        Applies each method in :paramref:`params_modify_funs` to the parameter vector.
+        Applies each method in :py:param:`params_modify_funs` to the parameter vector.
         
         Args:
             params (pd.Series): The parameter vector.
@@ -288,7 +288,7 @@ class Simulator_Setup:
         return params
 
     def get_params_after_cell_generation(self, params, cell):
-        '''Get the cell parameters that have been modified by :paramref:`params_modify_funs_after_cell_generation`.
+        '''Get the cell parameters that have been modified by :py:param:`params_modify_funs_after_cell_generation`.
         
         Args:
             params (pd.Series): The parameter vector.
@@ -443,7 +443,7 @@ class Simulator:
     Example:
     
         >>> def stim_setup_function(cell, recSite = None):
-        >>>    # I dont need the :paramref:`params` argument, but I ask recSite directly
+        >>>    # I dont need the :py:param:`params` argument, but I ask recSite directly
         >>>    # set up current injection at soma distance recSite
         >>>    return cell
             

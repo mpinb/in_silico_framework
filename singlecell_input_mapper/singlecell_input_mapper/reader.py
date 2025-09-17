@@ -46,7 +46,7 @@ class _Edge(object):
     def is_valid(self):
         """Check if this edge is valid.
         
-        Edges are only valid if they have a :paramref:`label`, a :paramref:`hocLabel`, and at least one :paramref:`edgePts`.
+        Edges are only valid if they have a :py:param:`label`, a :py:param:`hocLabel`, and at least one :py:param:`edgePts`.
         
         Returns:
             bool: True if the edge is valid, False otherwise.

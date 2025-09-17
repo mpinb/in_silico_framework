@@ -128,7 +128,7 @@ def write_landmark_file(fname=None, landmarkList=None):
 def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     '''Write a :ref:`syn_file_format` file, containing all synapses and their corresponding cellID, sectionID and x.
     
-    The locations of each synapse are coded by section ID and section x of cell with ID :paramref:`cellID`.
+    The locations of each synapse are coded by section ID and section x of cell with ID :py:param:`cellID`.
 
     Args:
         fname (str): Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
@@ -197,7 +197,7 @@ def write_anatomical_realization_map(
     '''Writes a :ref:`con_file_format` file containing a list of all functional connections.
      
     Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
-    Only valid for an anatomical synapse realization with ID :paramref:`anatomicalID`.
+    Only valid for an anatomical synapse realization with ID :py:param:`anatomicalID`.
     Uses :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet` 
     to generate the number of connected cells spreadsheet.
 
@@ -259,7 +259,7 @@ def write_sample_connectivity_summary(
     - Convergence
     - Number of synapses
 
-    If the brain has been subdivided in separate anatomical areas (and :paramref:`columnSummaryData` is not None), 
+    If the brain has been subdivided in separate anatomical areas (and :py:param:`columnSummaryData` is not None), 
     the summary is also written for each area.
 
     Args:
@@ -668,8 +668,8 @@ def write_population_and_sample_connectivity_summary(
 
     Useful for comparing the results of a single realization to the average over multiple realizations.
     Consult :py:meth:`write_sample_connectivity_summary` and :py:meth:`write_population_connectivity_summary` for details on the input data.
-    :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
-    :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+    :py:param:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+    :py:param:`cellTypeSummaryData` and :py:param:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
 
     Args:
         fname (str): Name of the output file

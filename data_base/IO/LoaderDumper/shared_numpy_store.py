@@ -540,9 +540,9 @@ class SharedNumpyStore:
         os.rename(full_path + '.saving', full_path)
 
     def flush(self):
-        """Rename all files according to the new names in :paramref:`_pending_renames`.
+        """Rename all files according to the new names in :py:param:`_pending_renames`.
         
-        Deletes the old files and updates the :paramref:`_files` dictionary.
+        Deletes the old files and updates the :py:param:`_files` dictionary.
         """
         with Uninterruptible():
             keys = list(self._pending_renames.keys())
@@ -565,7 +565,7 @@ class SharedNumpyStore:
 
     def append_save(self, arr, name, autoflush=True):
         """
-        Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+        Appends the given numpy array :py:param:`arr` to an existing array with the specified :py:param:`name`.
         """
         assert name != 'Loader.pickle'  # reserved to model data base
         assert not '__' in name

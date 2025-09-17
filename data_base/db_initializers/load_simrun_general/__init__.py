@@ -189,23 +189,23 @@ def init(
             Default is ``None``.
             
     Note:
-        Note the difference between *amount* of partitions (:paramref:`n_chunks`) and target partition *size* (:paramref:`repartition`)
+        Note the difference between *amount* of partitions (:py:param:`n_chunks`) and target partition *size* (:py:param:`repartition`)
 
     .. versionadded:: 0.5.0
-       The keyword argument :paramref:`repartition` now accepts integers in addition to booleans.
+       The keyword argument :py:param:`repartition` now accepts integers in addition to booleans.
        Integers reflect the target size of each voltage trace dataframe partition. Booleans reflect either
        ``True`` for a default lenght, or ``False`` for no repartitioning (i.e. one ``.csv`` file per partition)
 
     .. deprecated:: 0.2.0
-        The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
+        The :py:param:`burst_times` argument is deprecated and will be removed in a future version.
         
     .. deprecated:: 0.5.0
-       The :paramref:`dumper` argument is deprecated and will be removed in a future version.
+       The :py:param:`dumper` argument is deprecated and will be removed in a future version.
        Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
     
     .. deprecated:: 0.5.0
-       The :paramref:`voltage_traces` is deprecated and will be removed in a future version.
-       Voltage traces are always built when :paramref:`core` is ``True``. 
+       The :py:param:`voltage_traces` is deprecated and will be removed in a future version.
+       Voltage traces are always built when :py:param:`core` is ``True``. 
 
     """
     if burst_times is not None:
@@ -383,7 +383,7 @@ def optimize(
             See also: :py:meth:`~data_base.db_initializers._get_dumper`
             
     .. deprecated:: 0.5.0
-        The :paramref:`dumper` argument is deprecated and will be removed in a future version.
+        The :py:param:`dumper` argument is deprecated and will be removed in a future version.
         Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
 
     Returns:

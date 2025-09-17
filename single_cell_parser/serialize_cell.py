@@ -177,7 +177,7 @@ def save_cell_to_file(path, cell):
         cell (:py:class:`~single_cell_parser.cell.Cell`): cell object
         
     Returns:
-        None. Writes out the cell object to :paramref:`path` in .pickle format.
+        None. Writes out the cell object to :py:param:`path` in .pickle format.
     """
     sc = cell_to_serializable_object(cell)
     pd.Series([sc]).to_pickle(path)

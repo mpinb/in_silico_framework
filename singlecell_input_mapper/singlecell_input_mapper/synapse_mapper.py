@@ -84,7 +84,7 @@ class SynapseMapper(object):
         
         Returns:
             list: list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
-            Also updates the :paramref:`cell` attribute to contain synapses.
+            Also updates the :py:param:`cell` attribute to contain synapses.
         '''
         newSynapses = []
         if not self.voxelEdgeMap:
@@ -129,7 +129,7 @@ class SynapseMapper(object):
         return newSynapses
 
     def _create_voxel_edge_map(self):
-        '''Fills :paramref:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
+        '''Fills :py:param:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
         
         Only needs to be called once at the beginning.
         '''
@@ -200,14 +200,14 @@ class SynapseMapper(object):
         return box[0] <= pt[0] <= box[1] and box[2] <= pt[1] <= box[3] and box[4] <= pt[2] <= box[5]
 
     def _compute_path_length(self, sec, x):
-        '''Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
+        '''Calculate the path length betwen the soma and location :py:param:`x` on section :py:param:`sec`
         
         Args:
             sec (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Section`): Section to calculate path length on.
             x (float): Location on section to calculate path length to.
             
         Returns:
-            float: Path length between soma and location :paramref:`x` on section :paramref:`sec`.
+            float: Path length between soma and location :py:param:`x` on section :py:param:`sec`.
         '''
         currentSec = sec
         parentSec = currentSec.parent
@@ -231,7 +231,7 @@ class SynapseDensity(object):
     This class is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
     to compute synapse densities per presynaptic cell type for a given postsynaptic cell type and morphology.
     
-    :paramref:`exPST` and :paramref:`inhPST` are density meshes for normalizing post-synaptic targets.
+    :py:param:`exPST` and :py:param:`inhPST` are density meshes for normalizing post-synaptic targets.
     Shown below is an example for such density field: the (25000, 50000, 75000, 100000) isosurfaces of the excitatory 
     PST density field for a rat somatosensory cortex (pia and white matter shown in grey at the top and bottom).
     
@@ -525,7 +525,7 @@ class SynapseDensity(object):
         lengthDensity,
         surfaceAreaDensity,
         likeAmira=0):
-        '''Fills the scalar fields :paramref:`lengthDensity` and :paramref:`surfaceDensity` to contain length and area per structure per voxel.
+        '''Fills the scalar fields :py:param:`lengthDensity` and :py:param:`surfaceDensity` to contain length and area per structure per voxel.
         
         This method is an implementation of line segment clipping using the 
         Liang-barsky algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
@@ -721,7 +721,7 @@ class SynapseDensity(object):
             targetPt (array): Point at which to interpolate the radius.
             
         Returns:
-            float: Interpolated radius at :paramref:`targetPt`."""
+            float: Interpolated radius at :py:param:`targetPt`."""
         totalLength = np.sqrt(np.dot(p1 - p0, p1 - p0))
         if -1e-4 < totalLength < 1e-4:
             return 0.5 * (radius0 + radius1)

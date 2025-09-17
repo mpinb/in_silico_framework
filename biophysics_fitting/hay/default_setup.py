@@ -290,7 +290,7 @@ def get_Evaluator(
         :py:class:`~biophysics_fitting.evaluator.Evaluator`: An evaluator object.
 
     Raises:
-        NotImplementedError: If :paramref:vInit is set to True.
+        NotImplementedError: If :py:param:vInit is set to True.
 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.

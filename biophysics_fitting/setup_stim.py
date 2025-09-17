@@ -45,7 +45,7 @@ def _append(cell, name, item):
         item (object): The item to append.
         
     Returns:
-        None. Adds :paramref:`item` to the :paramref:`cell` under the name :paramref:`name`."""
+        None. Adds :py:param:`item` to the :py:param:`cell` under the name :py:param:`name`."""
     try:
         getattr(cell, name)
     except AttributeError:
@@ -54,7 +54,7 @@ def _append(cell, name, item):
 
 
 def setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0):
-    """Setup up a step current at the soma, or a given :paramref:`dist` from the soma.
+    """Setup up a step current at the soma, or a given :py:param:`dist` from the soma.
 
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
@@ -88,7 +88,7 @@ def setup_apical_epsp_injection(
     ):
     """Setup an EPSP injection at a given distance from the soma.
     
-    This method assumes the :paramref:`cell` has a soma and an apical dendrite.
+    This method assumes the :py:param:`cell` has a soma and an apical dendrite.
     It checks so by means of section label: it must contain a section 
     labeled "ApicalDendrite". See :py:meth:`~biophysics_fitting.utils.get_inner_section_at_distance` for more information.
     

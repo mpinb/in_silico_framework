@@ -24,7 +24,7 @@ import pandas as pd
 from config.cell_types import EXCITATORY, INHIBITORY
 
 def change_ongoing_interval(n, factor=1, pop=None):
-    '''Scales the ongoing frequency with a :paramref:`factor`.
+    '''Scales the ongoing frequency with a :py:param:`factor`.
 
     Does so by scaling the time bins of the ongoing activity of the presynaptic :py:class:`~single_cell_parser.celltypes.Spiketrain` celltype.
     
@@ -96,8 +96,8 @@ def change_glutamate_syn_weights(
         pop (list): The celltypes to apply the scaling to.
         
     Raises:
-        AssertionError: If more than 1 index is found for the celltype in :paramref:`g_optimal`.
-        AssertionError: If the celltype is not found in :paramref:`g_optimal`.
+        AssertionError: If more than 1 index is found for the celltype in :py:param:`g_optimal`.
+        AssertionError: If the celltype is not found in :py:param:`g_optimal`.
     '''
     for key in list(param['network'].keys()):
         celltype = key.split('_')[0]
@@ -160,8 +160,8 @@ def _celltype_matches(celltype_name, celltypes, columns):
         bool: True if the celltype matches the celltypes and columns, False otherwise.
         
     Raises:
-        AssertionError: If :paramref:`celltypes` is not a list.
-        AssertionError: If :paramref:`columns` is not a list.
+        AssertionError: If :py:param:`celltypes` is not a list.
+        AssertionError: If :py:param:`columns` is not a list.
     """
     assert isinstance(celltypes, list)
     assert isinstance(columns, list)
@@ -180,7 +180,7 @@ def _has_evoked(param, celltype):
         bool: True if the celltype has evoked activity, False otherwise.
 
     Raises:
-        AssertionError: If :paramref:`celltype` is not in the network
+        AssertionError: If :py:param:`celltype` is not in the network
     """
     assert celltype in list(param.network.keys())
     x = param.network[celltype]

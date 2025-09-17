@@ -37,7 +37,7 @@ import pandas as pd
 
 
 def make_groups_equal_size(X, y):
-    """Equally balance samples from :paramref:`X` based on the labels in :paramref:`y`.
+    """Equally balance samples from :py:param:`X` based on the labels in :py:param:`y`.
     
     Randomly subsample a data matrix so that both classes have the same number of samples.
     The sample size will thus be twice the size of the smaller class.
@@ -78,7 +78,7 @@ def prediction_rates(
     max_tries=2):
     '''Calculate the prediction rates of a binary classifier.
     
-    For a given classifier, calclate the prediction rates for a given number of iterations :paramref:`n`.
+    For a given classifier, calclate the prediction rates for a given number of iterations :py:param:`n`.
     Returns the median of the prediction rates on each class
     
     Args:
@@ -95,10 +95,10 @@ def prediction_rates(
             'all' returns a dictionary of all scores, inlcuding the keys:
             
             - score_all: the prediction accuracy on all the data
-            - score_0: the prediction accuracy on the negative class for :paramref:`n` random subsamples of the data
-            - score_1: the prediction accuracy on the positive class for :paramref:`n` random subsamples of the data
+            - score_0: the prediction accuracy on the negative class for :py:param:`n` random subsamples of the data
+            - score_1: the prediction accuracy on the positive class for :py:param:`n` random subsamples of the data
             - score: the median of the prediction rates on each class
-            - score_rocauc: the ROC-AUC score for :paramref:`n` random subsamples of the data
+            - score_rocauc: the ROC-AUC score for :py:param:`n` random subsamples of the data
             - score_rocauc_full_data: the ROC-AUC score for the full data
             - classifier_: the classifier used for each iteration
             - value_counts: the value counts of the training data for each iteration

@@ -90,7 +90,7 @@ def write_landmark_file(fname=None, landmarkList=None):
         landmarkList (list): list of tuples, each of which holds 3 float coordinates
 
     Returns:
-        None. Writes out the landmark file to :paramref:`fname`
+        None. Writes out the landmark file to :py:param:`fname`
 
     Raises:
         RuntimeError: if no file name is given or if the landmark list is empty
@@ -142,7 +142,7 @@ def write_sim_results(fname, t, v):
         v (list): The voltage trace.
         
     Returns:
-        None. Writes out the voltage trace file to :paramref:`fname`.
+        None. Writes out the voltage trace file to :py:param:`fname`.
         
     Example:
         
@@ -171,7 +171,7 @@ def write_all_traces(fname, t, vTraces):
         vTraces (list): A list of voltage traces.
 
     Returns:
-        None. Writes out the voltage traces to :paramref:`fname`.
+        None. Writes out the voltage traces to :py:param:`fname`.
     
     Example:
 
@@ -212,7 +212,7 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
         cellID (str): The ID of the cell.
 
     Returns:
-        None. Writes out the synapse location file to :paramref:`fname`.
+        None. Writes out the synapse location file to :py:param:`fname`.
     '''
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
@@ -258,7 +258,7 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
         cellID (str): The ID of the cell.
 
     Returns:
-        None. Writes out the synapse location file to :paramref:`fname`.
+        None. Writes out the synapse location file to :py:param:`fname`.
     '''
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
@@ -367,7 +367,7 @@ def write_synapse_activation_file(
         activeSyns (dict): dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
 
     Returns:
-        None. Writes out the synapse activation file to :paramref:`fname`.
+        None. Writes out the synapse activation file to :py:param:`fname`.
 
     Example:
         
@@ -441,7 +441,7 @@ def write_synapse_weight_file(fname=None, cell=None):
         cell (:py:class:`single_cell_parser.cell.Cell`): The cell object, containing synapses.
     
     Returns:
-        None. Writes out the synapse weight file to :paramref:`fname`.
+        None. Writes out the synapse weight file to :py:param:`fname`.
         
     """
     if fname is None or cell is None:
@@ -489,7 +489,7 @@ def write_PSTH(fname=None, PSTH=None, bins=None):
         bins (list): A list of time bins, including begin and end
         
     Returns:
-        None. Writes out the PSTH file to :paramref:`fname`.
+        None. Writes out the PSTH file to :py:param:`fname`.
 
     Example:
 
@@ -529,7 +529,7 @@ def write_spike_times_file(fname=None, spikeTimes=None):
         spikeTimes (dict): A dictionary with trial numbers as keys (int) and tuples of spike times in each trial as values.
     
     Returns:
-        None. Writes out the spike times file to :paramref:`fname`.
+        None. Writes out the spike times file to :py:param:`fname`.
 
     Example:
 
@@ -569,7 +569,7 @@ def write_presynaptic_spike_times(fname=None, cells=None):
         cells (dict): A dictionary with cell types as keys and lists of cells as values.
 
     Returns:
-        None. Writes out the presynaptic spike times file to :paramref:`fname`.
+        None. Writes out the presynaptic spike times file to :py:param:`fname`.
 
     Example:
 
@@ -996,7 +996,7 @@ def write_functional_map(fname, functionalMap):
         functionalMap (dict): A dictionary with cell labels as keys and lists of points as values.
 
     Returns:
-        None. Writes out the functional map file to :paramref:`fname`.
+        None. Writes out the functional map file to :py:param:`fname`.
     """
     totalNrPts = 0
     for key in list(functionalMap.keys()):
@@ -1381,7 +1381,7 @@ def write_landmarks_colorcoded_to_folder(
         vbinsize (float): The size of the bins to color by.
         
     Returns:
-        None. Writes out the landmarks to the directory :paramref:`basedir`.
+        None. Writes out the landmarks to the directory :py:param:`basedir`.
     """
     import os
     from itertools import groupby

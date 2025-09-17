@@ -38,7 +38,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def get_n_workers_per_ip(workers, n):
     '''Convenience method to get a certain amount of workers per machine
 
-    Groups all workers by their IP, fetches :paramref:`n` workers per IP,
+    Groups all workers by their IP, fetches :py:param:`n` workers per IP,
     and returns them as a list.
 
     Args:
@@ -47,7 +47,7 @@ def get_n_workers_per_ip(workers, n):
         n (int): Amount fo workers to fetch per machine.
 
     Returns:
-        List[dask.distributed.worker.Worker]: List of :paramref:`n`*``n_machines`` workers.
+        List[dask.distributed.worker.Worker]: List of :py:param:`n`*``n_machines`` workers.
     '''
     s = pd.Series(workers)
     return s.groupby(s.str.split(':').str[1]).apply(lambda x: x[:n]).tolist()
@@ -291,7 +291,7 @@ class DataView(object):
     def __getitem__(self, key):
         """Fetch data from key.
 
-        If the key exists in :paramref:`mapping_dict`, return the data
+        If the key exists in :py:param:`mapping_dict`, return the data
         associated to the key redirect instead.
 
         Args:

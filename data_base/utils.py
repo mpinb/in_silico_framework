@@ -33,7 +33,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def chunkIt(seq, num):
-    '''Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+    '''Splits :py:param:`seq` in :py:param:`num` lists, with approximately equal size.
     
     Args:
         seq (array): array to be split
@@ -121,7 +121,7 @@ def convertible_to_int(x):
         return False
         
 def split_file_to_buffers(f, split_str = '#'):
-    '''Reads a file f and splits it wherever :paramref:`split_str` is found.
+    '''Reads a file f and splits it wherever :py:param:`split_str` is found.
     
     Args:
         f (file): file to be split
@@ -354,7 +354,7 @@ def fancy_dict_compare(dict_1, dict_2, dict_1_name = 'd1', dict_2_name = 'd2', p
 def wait_until_key_removed(db, key, delay = 5):
     """Wait until a key is removed from a database.
     
-    This function checks every :paramref:`delay` seconds if the key is still in the database.
+    This function checks every :py:param:`delay` seconds if the key is still in the database.
     Useful for waiting until a process has finished.
     
     Args:
@@ -765,7 +765,7 @@ def is_db(dir_to_data):
         dir_to_data (pathlib.Path): The path to the directory
     
     Returns:
-        bool: ``True`` if :paramref:`dir_to_data` is a (sub)db, ``False`` otherwise.
+        bool: ``True`` if :py:param:`dir_to_data` is a (sub)db, ``False`` otherwise.
     '''
     can_exist = [
         'db_state.json', 

@@ -92,7 +92,7 @@ def con_file_to_NumberOfConnectedCells_sheet(con_file, write_output=True):
         This method is specific to the barrel cortex, as it assumes the presence of columns.
 
     Returns:
-        pandas.DataFrame | str: The dataframe, or the path to the .csv file if :paramref:`write_output` is True.
+        pandas.DataFrame | str: The dataframe, or the path to the .csv file if :py:param:`write_output` is True.
 
     """
     # read in .con_file

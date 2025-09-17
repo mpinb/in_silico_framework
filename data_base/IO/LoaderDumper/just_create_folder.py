@@ -81,7 +81,7 @@ class ManagedFolder(str):
             ValueError: If there are no files with the specified suffix or more than one file with the specified suffix
         
         Returns:
-            str: The filepath of the file with :paramref:`suffix` (only if there is exactly one file with this suffix)
+            str: The filepath of the file with :py:param:`suffix` (only if there is exactly one file with this suffix)
         '''
         l = [f for f in os.listdir(self) if f.endswith(suffix)]
         if len(l) == 0:

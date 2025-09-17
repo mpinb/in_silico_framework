@@ -382,13 +382,13 @@ def _extract_unique_references_from_neup_and_netp(
 
 
 def _safe_copy(source, target):
-    """Copy a file from :paramref:`source` to :paramref:`target`.
+    """Copy a file from :py:param:`source` to :py:param:`target`.
     
     Creates the parent directories if they do not exist yet.
 
     Args:
         source (str): Original filename
-        target (str): Desired target location to copy :paramref:`source` to.
+        target (str): Desired target location to copy :py:param:`source` to.
     """
     try:
         shutil.copy(source, target)
@@ -400,7 +400,7 @@ def _safe_copy(source, target):
 def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount", client=None):
     """Create filename ``source -> target`` maps for all file types.
     
-    Each key in the resulting map refers to a filetype present in :paramref:`filetype_target_dir_map`.
+    Each key in the resulting map refers to a filetype present in :py:param:`filetype_target_dir_map`.
     The filetype keys have `source -> target` mappings for all files of that filetype.
 
     Args:

@@ -51,7 +51,7 @@ def write_video_from_images(
 
     Note:
         Globbing is not enabled by default on Windows machines.
-        If running this command on windows, please set the :paramref:`glob` argument to False and specify a non-glob type match pattern.
+        If running this command on windows, please set the :py:param:`glob` argument to False and specify a non-glob type match pattern.
     
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images
@@ -133,7 +133,7 @@ def write_gif_from_images(
         interval=40,
         images_format='.png',
         auto_sort_paths=True):
-    '''Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+    '''Creates a gif from a set of images, and saves it to :py:param:`out_path`.
 
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images

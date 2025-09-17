@@ -166,7 +166,7 @@ def save_cells_landmark_files_vtk(
     """Save synapse activations as vtk point cloud files for each timepoint.
     
     Given a synapse activation dataframe and a synapse location dataframe, 
-    this method saves the synapse locations as vtk point cloud files for each timepoint in :paramref:`times_to_show`.
+    this method saves the synapse locations as vtk point cloud files for each timepoint in :py:param:`times_to_show`.
 
     Args:
         sa (pd.DataFrame): Synapse activation dataframe.
@@ -178,7 +178,7 @@ def save_cells_landmark_files_vtk(
         set_index (list, optional): Index to set in the synapse activation dataframe. Defaults to ['synapse_ID', 'celltype'].
 
     Returns:
-        None. Writes out a .vtk file for each timepoint in :paramref:`times_to_show`.
+        None. Writes out a .vtk file for each timepoint in :py:param:`times_to_show`.
     """
 
     assert "celltype" in sa.columns, "Please add a column 'celltype' to the synapse activation dataframe."

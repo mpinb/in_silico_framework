@@ -44,10 +44,10 @@ def temporal_binning_pd(
     
     Args:
         df (:py:class:`pandas.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
-        bin_borders (list, optional): List of bin borders. If not specified, :paramref:`bin_size` has to be specified.
+        bin_borders (list, optional): List of bin borders. If not specified, :py:param:`bin_size` has to be specified.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
         rate (bool, optional): If True, normalize the output to the bin size.
         
@@ -98,7 +98,7 @@ def temporal_binning_dask(
     
     Args:
         ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
@@ -141,12 +141,12 @@ def universal(*args, **kwargs):
     
     Args:
         df | ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
-        rate (bool, optional): If True, normalize the output to the bin size. Only valid if :paramref:`df` is a pandas DataFrame.
-        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation. Only valid if :paramref:`ddf` is a dask DataFrame.
+        rate (bool, optional): If True, normalize the output to the bin size. Only valid if :py:param:`df` is a pandas DataFrame.
+        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation. Only valid if :py:param:`ddf` is a dask DataFrame.
     
     See also:
         :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and

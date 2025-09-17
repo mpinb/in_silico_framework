@@ -99,7 +99,7 @@ class NetworkMapper:
         '''Create a single network realization from a bouton density field.
 
         This is the main method to create anatomical realizations of connectivity.
-        It creates :paramref:`nrOfSamples` network realizations, and saves the most representative
+        It creates :py:param:`nrOfSamples` network realizations, and saves the most representative
         realization to disk. The most representative realization is determined by comparing
         the distribution of anatomical parameters across the population of realizations using
         :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
@@ -195,7 +195,7 @@ class NetworkMapper:
         
         Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
         Same principle as :py:meth:`~create_network_embedding`, but rather than taking
-        the most representative sample, this method saves all :paramref:`nrOfRealizations` network 
+        the most representative sample, this method saves all :py:param:`nrOfRealizations` network 
         realizations to allow investigating the effects of anatomical variability on neuron responses.
 
         Warning:

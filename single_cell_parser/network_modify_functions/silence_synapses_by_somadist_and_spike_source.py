@@ -31,8 +31,8 @@ def silence_synapses_by_somadist_and_spike_source(
         evokedNW,
         soma_dist_ranges=None,
         spike_sources=None):
-    '''Silences synapse activation at a :paramref:`soma_dist_ranges`,
-    that are from presynaptic origins **not** listed in :paramref:`spike_sources`.
+    '''Silences synapse activation at a :py:param:`soma_dist_ranges`,
+    that are from presynaptic origins **not** listed in :py:param:`spike_sources`.
 
     Args:
         cell (:py:class:`single_cell_parser.cell.Cell`): The cell to modify.

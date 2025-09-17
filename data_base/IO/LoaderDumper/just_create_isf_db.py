@@ -48,7 +48,7 @@ class Loader(parent_classes.Loader):
 
 
 def dump(obj, savedir):
-    """Create a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :paramref:`savedir`
+    """Create a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :py:param:`savedir`
     
     Args:
         obj (None, optional): No object is required. If an object is passed, it is ignored.

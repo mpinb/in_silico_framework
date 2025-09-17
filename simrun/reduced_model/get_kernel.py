@@ -378,16 +378,16 @@ class ReducedLdaModel():
     def fit(self, db_list, clfs=None):
         """Fit an LDA model to synapse activations and save the prediction rates.
         
-        This method iterates over all databases in :paramref:`db_list` and extracts the synapse activation data
-        using the keys provided in :paramref:`keys_to_synapse_activation_data`. The data is then used to fit an LDA model.
-        The predictions of the LDA model are saved in :paramref:`clfs`.
+        This method iterates over all databases in :py:param:`db_list` and extracts the synapse activation data
+        using the keys provided in :py:param:`keys_to_synapse_activation_data`. The data is then used to fit an LDA model.
+        The predictions of the LDA model are saved in :py:param:`clfs`.
         
         Args:
             db_list (list): List of data_base instances
             clfs (dict): Dictionary describing a fitted LDA model. If None, a new fit is performed.
             
         See also:
-            :py:meth:`data_base.analyze.LDA.prediction_rates` for the output format of :paramref:`clfs`,
+            :py:meth:`data_base.analyze.LDA.prediction_rates` for the output format of :py:param:`clfs`,
             i.e. an LDA and its predictions.
         """
         self.db_list = db_list

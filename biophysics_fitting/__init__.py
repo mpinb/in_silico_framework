@@ -42,11 +42,11 @@ RANGE_VARS_ALL_CHANNELS = RANGE_VARS_APICAL + [
 
 
 def connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2):
-    """Check if a given section is connected to dendrites that reach beyon :paramref:`beyond_dist`.
+    """Check if a given section is connected to dendrites that reach beyon :py:param:`beyond_dist`.
     
     Given a :py:class:`~single_cell_parser.cell.Cell` object and section number, 
-    this method returns True if at least :paramref:`n_children_required` children 
-    of the branchpoint reach beyond :paramref:`dist`.
+    this method returns True if at least :py:param:`n_children_required` children 
+    of the branchpoint reach beyond :py:param:`beyond_dist`.
 
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The Cell object
@@ -55,7 +55,7 @@ def connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2):
         n_children_required (int, optional): Least amount of children required. Defaults to 2.
 
     Returns:
-        bool: Whether or not two of the section's children reach beyond :paramref:`beyond_dist`
+        bool: Whether or not two of the section's children reach beyond :py:param:`beyond_dist`
     """
     if cell.distance_to_soma(sec, 1) > beyond_dist:  # and sec.label in ('ApicalDendrite', 'Dendrite'):
         return True
@@ -106,17 +106,17 @@ def get_inner_sec_dist_list(
 def get_branching_depth(cell, sec, beyond_dist=1000):
     """
     Given a Cell object and a section number, this method returns the branching depth (i.e. branching order) of that section.
-    It counts the amount of sections that have children beyond some distance :paramref:`beyond_dist` inbetween the soma and the given section :paramref:`sec`.
+    It counts the amount of sections that have children beyond some distance :py:param:`beyond_dist` inbetween the soma and the given section :py:param:`sec`.
 
     If this number is 0, that means that the given section, and all its parent sections up to the soma,
-    have no children (that exceed a distance to soma of :paramref:`beyond_dist`).
+    have no children (that exceed a distance to soma of :py:param:`beyond_dist`).
 
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The Cell object
         sec (int): The section number
 
     Returns:
-        int: Amount of sections between :paramref:`sec` and soma that have at least 2 children that are further from the soma than :paramref:`beyond_dist`
+        int: Amount of sections between :py:param:`sec` and soma that have at least 2 children that are further from the soma than :py:param:`beyond_dist`
     """
     depth = connected_to_dend_beyond(cell, sec, beyond_dist)
     if sec.parent.label.lower() == 'soma':
@@ -138,7 +138,7 @@ def get_branching_depth_series(
             Defaults to 706 um.
 
     Returns:
-        pd.Series: contains the distance to :paramref:z_offset as index and a tuple (branching depth, section) as value
+        pd.Series: contains the distance to :py:param:`z_offset` as index and a tuple (branching depth, section) as value
         
     Note:
         Careful: z-depth only accurate for D2-registered cells!

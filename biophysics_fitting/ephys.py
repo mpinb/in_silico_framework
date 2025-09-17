@@ -731,10 +731,10 @@ def STEP_fast_ahp_depth(t, v, thresh=None, time_scale=5, start=1):
     """
     Computes the average depth of the fast afterhyperpolarization (fAHP) of a voltage trace for a step stimulus.
 
-    The fAHP is computed as the deepest point right after (i.e. within :paramref:`timescale`) the spike.
+    The fAHP is computed as the deepest point right after (i.e. within :py:param:`time_scale`) the spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :py:param:`time_scale` apart,
         the fAHP is computed as simply minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 
@@ -774,10 +774,10 @@ def STEP_slow_ahp_depth(t, v, thresh=None, time_scale=5, start=1):
     """
     Computes the average depth of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
 
-    The sAHP is computed as the deepest point between :paramref:`timescale` after the spike and the next spike.
+    The sAHP is computed as the deepest point between :py:param:`time_scale` after the spike and the next spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :py:param:`time_scale` apart,
         the sAHP is computed as the minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 
@@ -815,10 +815,10 @@ def STEP_slow_ahp_time(t, v, thresh=None, time_scale=5, start=1):
     """
     Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
 
-    The sAHP is computed as the time of the deepest point between :paramref:`timescale` after the spike and the next spike.
+    The sAHP is computed as the time of the deepest point between :py:param:`time_scale` after the spike and the next spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :py:param:`time_scale` apart,
         the sAHP is computed as the minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 

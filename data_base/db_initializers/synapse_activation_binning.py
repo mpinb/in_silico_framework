@@ -160,7 +160,7 @@ def synapse_activation_postprocess_pandas(
             Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
     
     Returns: 
-        dict: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :paramref:`groupby`.
+        dict: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :py:param:`groupby`.
         
     See also:
         :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
@@ -230,8 +230,8 @@ def tree_reduction(delayeds, aggregate_fun, length=7):
         length (int): chunk size for aggregation
         
     Note:
-        Once the delayed objects are evaluated, :paramref:`aggregate_fun` is applied to the results of :paramref:`delayeds`, 
-        and thus :paramref:`aggregate_fun` should be able to handle the results of :paramref:`delayeds`.
+        Once the delayed objects are evaluated, :py:param:`aggregate_fun` is applied to the results of :py:param:`delayeds`, 
+        and thus :py:param:`aggregate_fun` should be able to handle the results of :py:param:`delayeds`.
         
     Returns:
         :py:class:`dask.delayed`: The aggregated result.
@@ -281,7 +281,7 @@ def synapse_activation_postprocess_dask(
     Returns: 
         :py:class:`dask.delayed`: 
             If computed, this will return a dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins.
-            The dictionary keys are defined by :paramref:`groupby`.
+            The dictionary keys are defined by :py:param:`groupby`.
             
     See also:
         :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
@@ -325,7 +325,7 @@ def synapse_activation_postprocess_dask(
 def save_groupby(db, result, groupby):
     '''Save the result of synapse_activation_postprocess_dask to a database.
     
-    A new model data base within :paramref:`db` is created and the numpy arrays are stored there.
+    A new model data base within :py:param:`db` is created and the numpy arrays are stored there.
     
     Args:
         db (:py:class:`~data_base.DataBase`): The simrun-initialized database object.
@@ -392,7 +392,7 @@ def init(
             Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
         
     Returns: 
-        None. The binned synapse activation data will be stored in :paramref:`db`.
+        None. The binned synapse activation data will be stored in :py:param:`db`.
         
     See also:
         :py:meth:`~data_base.db_initializers.prefun`, 

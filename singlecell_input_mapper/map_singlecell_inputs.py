@@ -199,7 +199,7 @@ def map_singlecell_inputs(
             anatomical_area/presynaptic_cell_type/\*.am
 
     Returns:
-        None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
+        None. Writes the results to disk, at the same location as the input :py:param:`cellName`.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
         errstr = "Unknown cell type %s!"

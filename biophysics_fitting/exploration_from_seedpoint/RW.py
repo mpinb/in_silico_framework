@@ -274,7 +274,7 @@ class RW:
             seed (int): random seed for the random number generator
             
         Returns:
-            None. Saves the results to :paramref:`MAIN_DIRECTORY`/:paramref:`selected_seedpoint`/:paramref:`particle_id`
+            None. Saves the results to :py:attr:`MAIN_DIRECTORY`/:py:param:`selected_seedpoint`/:py:param:`particle_id`
         """
         try: # to not cause an error in pickles created before mode was added
             self.mode

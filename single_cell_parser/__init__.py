@@ -192,7 +192,7 @@ def init_neuron_run(simparam, vardt=False, *events):
 
 
 def sec_distance_to_soma(currentSec):
-    """Compute the path length from ``sec(x=0)`` to :paramref:`currentSec`.
+    """Compute the path length from ``sec(x=0)`` to :py:param:`currentSec`.
 
     Args:
         currentSec (:py:class:`neuron:Section`): The section for which to compute the distance.

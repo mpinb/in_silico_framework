@@ -71,7 +71,7 @@ class PSPs:
         result (list): List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
         network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): 
             The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
-            The synapse type is defined by :paramref:`exc_inh`.
+            The synapse type is defined by :py:param:`exc_inh`.
         network_params_by_celltype (list):
             List of network parameters for each cell type in the network.
     '''
@@ -138,18 +138,18 @@ class PSPs:
     def _setup_computation(self, exc_inh):
         """Construct delayed functions for running single-synapse simulations.
         
-        For each celltype in :paramref:`network_params_by_celltype`, create a delayed
+        For each celltype in :py:param:`network_params_by_celltype`, create a delayed
         function that activates each synapse of that particular celltype one by one.
         Simulations are reset after each synapse activation.
-        The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the 
-        amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is 
+        The simulations are parallelized across the synaptic strength values in :py:param:`gExRange` and the 
+        amount of celltypes in :py:param:`network_params_by_celltype`, so the amount of delayed simulations is 
         ``len(gExRange) * len(network_params_by_celltype)``.
         
         Args:
             exc_inh (str): Whether to fit excitatory or inhibitory synapses.
             
         Returns:
-            None. updates the :paramref:`_keys` and :paramref:`_delayeds` attributes.
+            None. updates the :py:param:`_keys` and :py:param:`_delayeds` attributes.
         """
         if exc_inh == 'exc':
             logger.info('setting up computation for exc cells')
@@ -190,10 +190,10 @@ class PSPs:
                     self._delayeds.append(d)
 
     def run(self, client, rerun=False):
-        '''Run the single-cell simulations from the :paramref:`_delayeds`.
+        '''Run the single-cell simulations from the :py:param:`_delayeds`.
         
-        The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the 
-        amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is 
+        The simulations are parallelized across the synaptic strength values in :py:param:`gExRange` and the 
+        amount of celltypes in :py:param:`network_params_by_celltype`, so the amount of delayed simulations is 
         ``len(gExRange) * len(network_params_by_celltype)``.
         
         Args:
@@ -204,7 +204,7 @@ class PSPs:
                 Default: ``False``
                 
         Returns:
-            None. Updates the :paramref:`futures` attribute.
+            None. Updates the :py:param:`futures` attribute.
         '''
         if (self.futures is None) or rerun:
             self.result = None
@@ -618,8 +618,8 @@ def run_ex_synapse(
     This is the core function to activate a single synapse and run the simulation.
     Used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
     
-    For excitatory synapses, :paramref:`gAMPA` and :paramref:`gNMDA` must be specified, and not :paramref:`gGABA`.
-    For inhibitory synapses, only :paramref:`gGABA` may be specified.
+    For excitatory synapses, :py:param:`gAMPA` and :py:param:`gNMDA` must be specified, and not :py:param:`gGABA`.
+    For inhibitory synapses, only :py:param:`gGABA` may be specified.
     
     Args:
         cell_nw_generator (callable): A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.

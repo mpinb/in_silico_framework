@@ -19,7 +19,7 @@
 
 This module contains classes for representing cells in NEURON simulations.
 This includes :py:class:`Cell` and :py:class:`PySection` for neuron models, containing morphological and biophysical properties.
-It also includes the :py:class:`~single_cell_parser.PointCell` class for handling presynaptic cell activations.
+It also includes the :py:class:`PointCell` class for handling presynaptic cell activations.
 The latter does not contain any morphological or biophysical properties, but handles the activation of presynaptic cells in a network.
 For neuron-network multiscale simulations, you should consult :py:mod:`simrun`.
 '''
