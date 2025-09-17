@@ -305,7 +305,7 @@ Example:
 
 
 See also:
-  The :py:mod:`simrun` functions used to prouce these simulation results (and their `nSweeps` keyword argument, as mentioned above):
+  The :py:mod:`simrun` functions used to produce these simulation results:
 
   - :py:mod:`simrun.run_new_simulations`
   - :py:mod:`simrun.rerun_db`
