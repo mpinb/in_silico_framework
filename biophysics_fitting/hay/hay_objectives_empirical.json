@@ -9,20 +9,20 @@
     "HAY_BAC_DEFINITIONS": {
         "BAC_APheight": ["AP height", 25.0, 5.0],
         "BAC_ISI": ["Interspike interval", 9.9009999999999998, 0.85170000000000001],
-        "BAC_caSpike_height": ["height of the Ca2+-spike", 6.7300000000000004, 2.54],
+        "BAC_caSpike_height": ["Height of the Ca2+-spike", 6.7300000000000004, 2.54],
         "BAC_caSpike_width": ["Width of the Ca2+-spike", 37.43, 1.27],
         "BAC_spikecount": ["Amount of spikes", 3.0, 0.01],
         "BAC_ahpdepth": ["After-hyperpolarization depth", -65.0, 4.0]
     },
     "HAY_STEP1_DEFINITIONS": {
         "mf1": ["Mean frequency", 9.0, 0.88],
-        "AI1": ["Adaptation Index", 0.0035999999999999999, 0.0091000000000000004],
+        "AI1": ["Adaptation index", 0.0035999999999999999, 0.0091000000000000004],
         "ISIcv1": [
             "Interspike interval coefficient of variation",
             0.12039999999999999,
             0.032099999999999997
         ],
-        "DI1": ["Doublet Interspike Interval", 57.75, 33.479999999999997],
+        "DI1": ["Doublet interspike interval", 57.75, 33.479999999999997],
         "TTFS1": ["Time to first spike", 43.25, 7.3200000000000003],
         "APh1": ["AP height", 26.227399999999999, 4.9702999999999999],
         "fAHPd1": [
@@ -36,14 +36,14 @@
     },
     "HAY_STEP2_DEFINITIONS": {
         "mf2": ["Mean frequency", 14.5, 0.56000000000000005],
-        "AI2": ["Adaptation Index", 0.0023, 0.0055999999999999999],
+        "AI2": ["Adaptation index", 0.0023, 0.0055999999999999999],
         "ISIcv2": [
-            "Interspike Interval coeffitient of variation",
+            "Interspike interval coefficient of variation",
             0.10829999999999999,
             0.036799999999999999
         ],
         "DI2": ["Doublet interspike interval", 6.625, 8.6500000000000004],
-        "TTFS2": ["Ti;e to first spike", 19.125, 7.3099999999999996],
+        "TTFS2": ["Time to first spike", 19.125, 7.3099999999999996],
         "APh2": ["Ap height", 16.520900000000001, 6.1127000000000002],
         "fAHPd2": [
             "Fast after-hyperpolarization depth",
@@ -70,7 +70,7 @@
         "TTFS3": ["Time to first spike", 7.25, 1.0],
         "APh3": ["AP height", 16.436800000000002, 6.9321999999999999],
         "fAHPd3": [
-            "Fast afterhyperpolarization depth",
+            "Fast after-hyperpolarization depth",
             -56.557899999999997,
             3.5834000000000001
         ],
@@ -84,6 +84,6 @@
             0.21310000000000001,
             0.036799999999999999
         ],
-        "APw3": ["AP zidth", 1.8647, 0.41189999999999999]
+        "APw3": ["AP width", 1.8647, 0.41189999999999999]
         }
 }
