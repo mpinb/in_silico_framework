@@ -274,7 +274,8 @@ The voltage traces are written to a single ``.csv`` file (since the amount of ti
 but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
 of spikes and synapse activations is not known in advance).
 
-The amount of simulation runs per parameter configuration (i.e. the :paramref:`nSweeps` keyword argument in any simrun function) corresponds
+The amount of simulation runs per parameter configuration (i.e. the product of :py:param:`~simrun.run_new_simulations.run_new_simulations.nSweeps` 
+and :py:param:`~simrun.run_new_simulations.run_new_simulations.nprocs` keyword arguments in any simrun function) corresponds
 to:
 
 - The amount of voltage columns in the :ref:`voltage_traces_format` files
