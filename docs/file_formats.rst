@@ -281,7 +281,9 @@ to:
 - The amount of :ref:`syn_activation_format` files
 - The amount of :ref:`spike_times_format` files
 
-Example::
+Example:
+
+.. code-block:: shell
 
   $ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
   hostname_somacpu042
