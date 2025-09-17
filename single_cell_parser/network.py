@@ -1201,7 +1201,7 @@ class NetworkMapper:
         Args:
             receptor (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Receptor parameters from network parameter file.
             recepStr (str): Receptor name.
-            syn (Synapse): Synapse object.
+            syn (:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         """
         if syn.weight is None:
             syn.weight = {}

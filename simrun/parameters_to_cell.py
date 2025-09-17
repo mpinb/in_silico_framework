@@ -64,8 +64,8 @@ def parameters_to_cell(
         scale_apical (callable, DEPRECATED): Function to scale the apical dendrite.
         range_vars (str or list): Range variables to record.
         allPoints (bool): Record all points in the cell.
-        cell (Cell): A cell object to use for the simulation.
-        evokedNW (NetworkMapper): A network object to use for the simulation.
+        cell (:class:`~single_cell_parser.cell.Cell`): A cell object to use for the simulation.
+        evokedNW (:class:`~single_cell_parser.network.NetworkMapper`): A network object to use for the simulation.
         
     .. deprecated:: 0.1
         The `scale_apical` argument is deprecated. 

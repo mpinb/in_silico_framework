@@ -616,7 +616,7 @@ class PySection(nrn.Section):
         '''
         Args:
             name (str, optional): name of the section
-            cell (Cell, optional): reference to the cell object
+            cell (:class:`~single_cell_parser.cell.Cell`, optional): reference to the cell object
             label (str, optional): label of the section
         '''
         if name is None:
@@ -1091,13 +1091,13 @@ class PointCell(object):
             return (1 - self.noiseParam) * self.spikeInterval + self.noiseParam * self.spikeInterval * self.rand.exponential()
 
     def _add_synapse_pointer(self, synapse):
-        """Add a :py:class:`Synapse` to the cell.
+        """Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell.
         
         The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
         to a postsynaptic :py:class:`Cell` object.
         
         Args:
-            synapse (:py:class:`Synapse`): Synapse object.
+            synapse (:py:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         """
         if self.synapseList is None:
             self.synapseList = [synapse]

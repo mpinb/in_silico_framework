@@ -3,8 +3,8 @@
 
 from collections.abc import MutableMapping
 from pathlib import Path
-import json, re, neuron, os
-from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
+import json, re, neuron
+from data_base.dbopen import dbopen, resolve_db_path
 from data_base import is_data_base
 
 
@@ -69,7 +69,7 @@ def build_parameters(filename):
 
 
 def fast_extract_values_from_param_file_key(param_file, keys, val_is_array=False):
-    """Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+    """Extract parameter values from :ref:`cell_parameters_format` or :ref:`network_parameters_format`.
     
     In contrast to building the parameters using :py:meth:`~build_parameters`, this method uses regex
     to quickly parse out the parameter values. 

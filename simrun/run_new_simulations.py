@@ -78,7 +78,7 @@ def _evoked_activity(
             Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): Prefix of the output directory. The final directory name will be ":paramref:`dirPrefix`/results/%Y%M%D-%H%M_UID".
         seed (int): Random seed for the simulation.
-        nSweps (int): Number of simulations to run with these parameters.
+        nSweeps (int): Number of simulations to run with these parameters.
         tStop (float): Duration of each simulation in ms.
         scale_apical (function): Function to scale the apical dendrite.
             Assumes the cell has an apical dendrite - see below.

@@ -64,7 +64,7 @@ class CurrentAnalysis:
     
     Attributes:
         mode (str): 'cell' or 'dict'.
-        cell (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent simulation data.
+        cell (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
         t (list): The time vector.
         sec (Section): The section of the cell.
         secID (int): The index of the section.
@@ -93,7 +93,7 @@ class CurrentAnalysis:
         """Initialize the CurrentAnalysis object.
         
         Args:
-            cell_or_dict (dict or Cell): The cell object, or a dictionary containing equivalent simulation data.
+            cell_or_dict (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
             secID (int): The index of the section. Default is 'bifurcation'.
             segID (int): The index of the segment. Default is -1.
             rangeVars (list): The names of the ion currents to plot. Default is ``None``, which plots all ion currents.

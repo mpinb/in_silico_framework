@@ -225,7 +225,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
     Eeach section always has one or more bins.
     
     Args:
-        cell (Cell): the Cell object
+        cell (:class:`~single_cell_parser.cell.Cell`): the Cell object
         section_id (int): index of the neuron section
         section_distances_df (pd.DataFrame): the dataframe describing distance to soma for all sections, as provided by :meth:get_section_distances_df
 

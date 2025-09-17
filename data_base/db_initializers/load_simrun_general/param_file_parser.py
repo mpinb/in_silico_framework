@@ -157,11 +157,11 @@ def _get_recsite_fns_from_neup(neup_fn):
 
 
 def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
-    """Convert all references to  :ref:`.hoc` and recsite .landmarkAscii files 
+    """Convert all references to  :ref:`hoc_file_format` and recsite .landmarkAscii files 
     in a :ref:`network_parameters_format` file and copy to a new location.
 
     Args:
-        netp_fn (str): Path to a :ref:`neuron_parameters_format` file.
+        netp_fn (str): Path to a :ref:`cell_parameters_format` file.
         scattered_fn_map (:py:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
 
@@ -310,11 +310,11 @@ def _extract_unique_references_from_neup_and_netp(
 ):
     """
     Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
-    and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`neuron_parameters_format`.
+    and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`cell_parameters_format`.
     
     Args:
         paramfile_hashmap_df (:py:class:`pandas.DataFrame`):
-            A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
+            A pandas dataframe containing all :ref:`cell_parameters_format` and :ref:`network_parameters_format`,
             as well as a hash of their content.
             Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
         client (:py:class:`distributed.client.Client`):
@@ -415,8 +415,8 @@ def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_met
         paramfile_target_dirs (dict): 
             Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
 
-            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
-            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
@@ -456,7 +456,7 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     
     This function:
     
-    1. Fetches all :ref:`network_parameters_format` and :ref:`neuron_parameters_format`
+    1. Fetches all :ref:`network_parameters_format` and :ref:`cell_parameters_format`
     2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files from these parameter files
     3. Creates a mapping for each file from original location to target location, depending on the config.
     4. Scatters this filename mapping dict to a distsributed cluster
@@ -467,7 +467,7 @@ def parallel_resolve_and_copy_paramfiles_to_db(
 
     Args:
         paramfile_hashmap_df (pd.DataFrame): 
-            A dataframe containing all :ref:`network_parameters_format` and :ref:`neuron_parameters_format` files, as well as their hash.
+            A dataframe containing all :ref:`network_parameters_format` and :ref:`cell_parameters_format` files, as well as their hash.
             This is used in :py:func:`_extract_unique_references_from_neup_and_netp`
         db (:py:class:`data_base.data_base.DataBase`): The database that is being initialized
         client (distributed.Client): A distributed client for parallel computation.
@@ -477,8 +477,8 @@ def parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_target_dirs (dict, optional): 
             Dictionary mapping parameter file types to their desired target directory in the database. Keys include:
 
-            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
-            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``

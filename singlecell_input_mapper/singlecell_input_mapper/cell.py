@@ -311,7 +311,7 @@ class PointCell(object):
         self.cellType = cellType
 
     def _add_synapse_pointer(self, synapse):
-        """Add a :py:class:`Synapse` to the cell.
+        """Add a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
         
         The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
         to a postsynaptic :py:class:`~single_cell_parser.cell.Cell` object.

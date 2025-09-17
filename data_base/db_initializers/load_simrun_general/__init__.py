@@ -174,8 +174,8 @@ def init(
               Must be either ``"hash_rename"`` or ``"remount"``. 
               ``"hash_rename"`` will rename all parameterfiles to a hash of their content. Useful when you want all parameter files in one folder and avoid fielname clashes.
               ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
-            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
-            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"parameterfiles_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"parameterfiles_folder"``
