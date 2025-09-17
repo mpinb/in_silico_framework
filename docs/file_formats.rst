@@ -286,7 +286,7 @@ Example:
 
 .. code-block:: shell
 
-  $ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
+  user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
   hostname_somacpu042
   seed379159821_pid209402_network_model.param
   seed379159821_pid209402_neuron_model.param
