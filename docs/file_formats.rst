@@ -67,13 +67,14 @@ Example::
 ******
 ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
 The ``.param`` format is valid Python code, but differs from JSON, as it allows trailing comma's, single quotes, and tuples. JSON does not.
-All ``.param`` files can be read using :py:mod:`single_cell_parser.build_parameters`. However, specific files that use this format have more
-specialized readers, which provide additional for :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
-
-Both the :ref:`cell_parameters_format` and the :ref:`network_parameters_format` are used as inputs for multi-scale simulations using :py:mod:`simrun`.
+All ``.param`` files can be read using :py:mod:`~single_cell_parser.parameters.build_parameters`. The :ref:`cell_parameters_format` and the 
+:ref:`network_parameters_format` are used as inputs for multi-scale simulations using :py:mod:`simrun`.
 
 See also: 
   :py:mod:`simrun.parameters_to_cell` to rerun a simulation from these parameterfiles.
+
+See also:
+  :py:mod:`~single_cell_parser.parameters.build_parameters` to read these parameterfiles.
 
 .. _cell_parameters_format:
 
