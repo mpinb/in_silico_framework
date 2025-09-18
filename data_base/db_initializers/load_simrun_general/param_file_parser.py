@@ -61,7 +61,7 @@ def construct_param_filename_hashmap_df(simresult_path, sim_trial_index):
 
 
     """
-    logging.info("find unique parameterfiles")
+    logging.info("Mapping sim_trial_index to parameter files...")
 
     def get_simrun_dir_and_pid(row):
         sim_result_dir = os.path.dirname(row.sim_trial_index)
@@ -307,6 +307,7 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
 def _extract_unique_references_from_neup_and_netp(
     paramfile_hashmap_df,
     client=None,
+    filter_param_files_by_content=False,
 ):
     """
     Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
@@ -317,21 +318,26 @@ def _extract_unique_references_from_neup_and_netp(
             A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
             as well as a hash of their content.
             Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
+        filter_param_files_by_content (bool): Whether to filter out parameter files with identical content
         client (:py:class:`distributed.client.Client`):
             A parallellization client. 
    
     Returns:
         Dict[str, List]: A dictionary mapping each filetype (str) to a list of unique references of that filetype. 
     """
-    
     neup_path_column="path_neuron"
     neup_hash_column="hash_neuron" 
     netp_path_column="path_network"
     netp_hash_column="hash_network"
 
-    # Get unique parameter files
-    cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[neup_path_column].tolist()
-    netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[netp_path_column].tolist()
+    # Get unique parameter files, unique meaning unique content
+    if filter_param_files_by_content == True:
+        cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[neup_path_column].tolist()
+        netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[netp_path_column].tolist()
+    # Get unique parameter files, unique meaning unique filepath
+    else:
+        cell_param_fns = paramfile_hashmap_df[neup_path_column].tolist()
+        netp_param_fns = paramfile_hashmap_df[netp_path_column].tolist()
     
     logger.info(f"{len(netp_param_fns)} unique network parameter files")
     logger.info(f"{len(cell_param_fns)} unique neuron parameter files")
@@ -488,10 +494,11 @@ def parallel_resolve_and_copy_paramfiles_to_db(
         dict: The filename map for each file type.
     """
     
-    # Phase 1: Extract all unique files
+    # Phase 1: Extract all unique files from parameter files
     source_file_list = _extract_unique_references_from_neup_and_netp(
         paramfile_hashmap_df=paramfile_hashmap_df,
         client=client,
+        filter_param_files_by_content=True if copy_method == "hash_rename" else False
     )
 
     # Create filename map and scatter to cluster
