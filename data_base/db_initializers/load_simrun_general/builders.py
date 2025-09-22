@@ -249,12 +249,12 @@ def _build_dendritic_voltage_traces(db, repartition=None):
 
     # Construct dendritic filelist from existing filelist, as built by _build_core
     # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
-    suffix = "*vm_dend_traces*"
+    suffix = "vm_dend_traces"
     path_globs = [
         os.path.join(
             db['simresult_path'],
             os.path.dirname(e),
-            suffix)
+            "*"+suffix+"*")
         for e in db['filelist']
     ]
     filelist = [
