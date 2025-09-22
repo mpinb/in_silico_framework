@@ -258,9 +258,13 @@ def _build_dendritic_voltage_traces(db, repartition=None):
         for e in db['filelist']
     ]
     filelist = [
-        path_glob_match 
+        path_glob_match
         for path_glob in path_globs 
         for path_glob_match in glob.glob(path_glob)
+    ]
+    relative_filelist = [
+        os.path.relpath(f, db['simresult_path'])
+        for f in filelist
     ]
 
     recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
@@ -270,7 +274,7 @@ def _build_dendritic_voltage_traces(db, repartition=None):
     divisions = db["voltage_traces"].divisions 
     dend_vt_per_recsite_label = load_dendritic_voltage_traces(
         db, 
-        filelist, 
+        relative_filelist, 
         recsite_labels, 
         repartition=repartition, 
         divisions=divisions)
