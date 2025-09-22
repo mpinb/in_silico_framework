@@ -61,7 +61,7 @@ def construct_param_filename_hashmap_df(simresult_path, sim_trial_index):
 
 
     """
-    logging.info("find unique parameterfiles")
+    logging.info("Mapping sim_trial_index to parameter files...")
 
     def get_simrun_dir_and_pid(row):
         sim_result_dir = os.path.dirname(row.sim_trial_index)
@@ -177,7 +177,7 @@ def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
     try:
         neup.save(target_fn)
     except FileNotFoundError:
-        os.makedirs(os.path.dirname(target_fn))
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
         neup.save(target_fn)
 
 
@@ -205,7 +205,7 @@ def _resolve_and_copy_network_param(netp_fn, scattered_fn_map):
     try:
         netp.save(target_fn)
     except FileNotFoundError:
-        os.makedirs(os.path.dirname(target_fn))
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
         netp.save(target_fn)
 
 
@@ -281,7 +281,11 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
             These directories will be a :py:class:`data_base.isf_data_base.ManagedFolder`
         filelist (List[str]): The original file names.
         client (:py:class:`distributed.client.Client`):
-            A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``
+            A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``relative_filelist = [
+        os.path.relpath(path_glob_match, db['simresult_path'])
+        for path_glob in path_globs 
+        for path_glob_match in glob.glob(path_glob)
+    ]
 
     Returns:
         str: The target filename in the database.
@@ -291,10 +295,11 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
         # New param file name will be the content hash
         new_base_fns = client.gather(client.map(_hash_file_content, filelist))
     elif copy_method == "remount":
+        assert len(filelist) > 1, "Can't calculate the relative directory structure from a single file, so copy_method='remount' can't be used here. Consider using copy_method='hash_rename' instead. Filelist: {}".format(filelist)
         # paramfiles are copied over in the same folder structure.
         base_fn = os.path.commonpath(filelist)
         # Not worth parallellizing for now, it's fast enough. Overhead of sending to client may be slower than this
-        new_base_fns = [os.path.relpath(e, start=base_fn) for e in filelist]    
+        new_base_fns = [os.path.relpath(e, start=base_fn) for e in filelist]
     else:
         raise ValueError("Config value PARAM_FILE_COPY_METHOD={} is not supported. SUpported values are hash_rename or remount.")
     new_fns = [
@@ -307,6 +312,7 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
 def _extract_unique_references_from_neup_and_netp(
     paramfile_hashmap_df,
     client=None,
+    filter_param_files_by_content=False,
 ):
     """
     Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
@@ -317,21 +323,26 @@ def _extract_unique_references_from_neup_and_netp(
             A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
             as well as a hash of their content.
             Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
+        filter_param_files_by_content (bool): Whether to filter out parameter files with identical content
         client (:py:class:`distributed.client.Client`):
             A parallellization client. 
    
     Returns:
         Dict[str, List]: A dictionary mapping each filetype (str) to a list of unique references of that filetype. 
     """
-    
     neup_path_column="path_neuron"
     neup_hash_column="hash_neuron" 
     netp_path_column="path_network"
     netp_hash_column="hash_network"
 
-    # Get unique parameter files
-    cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[neup_path_column].tolist()
-    netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[netp_path_column].tolist()
+    # Get unique parameter files, unique meaning unique content
+    if filter_param_files_by_content == True:
+        cell_param_fns = paramfile_hashmap_df.drop_duplicates(subset=neup_hash_column)[neup_path_column].tolist()
+        netp_param_fns = paramfile_hashmap_df.drop_duplicates(subset=netp_hash_column)[netp_path_column].tolist()
+    # Get unique parameter files, unique meaning unique filepath
+    else:
+        cell_param_fns = paramfile_hashmap_df[neup_path_column].tolist()
+        netp_param_fns = paramfile_hashmap_df[netp_path_column].tolist()
     
     logger.info(f"{len(netp_param_fns)} unique network parameter files")
     logger.info(f"{len(cell_param_fns)} unique neuron parameter files")
@@ -488,10 +499,11 @@ def parallel_resolve_and_copy_paramfiles_to_db(
         dict: The filename map for each file type.
     """
     
-    # Phase 1: Extract all unique files
+    # Phase 1: Extract all unique files from parameter files
     source_file_list = _extract_unique_references_from_neup_and_netp(
         paramfile_hashmap_df=paramfile_hashmap_df,
         client=client,
+        filter_param_files_by_content=True if copy_method == "hash_rename" else False
     )
 
     # Create filename map and scatter to cluster

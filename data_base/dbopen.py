@@ -67,6 +67,17 @@ def cache(function):
     return wrapper
 
 
+def _find_parent_db(path):
+    parent_db_path = path
+    while not is_data_base(parent_db_path):
+        new_parent_db_path = os.path.dirname(parent_db_path)
+        if new_parent_db_path == parent_db_path:
+            raise DataBaseException(
+                "The path {} does not seem to be within a DataBase!".format(path))
+        parent_db_path = new_parent_db_path
+    return parent_db_path
+
+
 def resolve_reldb_path(path, db_basedir=None):
     """Resolve a relative database path
     
@@ -90,6 +101,8 @@ def resolve_reldb_path(path, db_basedir=None):
     if not path.startswith('reldb://'):
         return path
     
+    # Could use _find_parent_db here, but that may yeild bad performance if used nilly-willy
+    # it should be the responsibility of the caller to handle this function correctly - Bjorge.
     assert db_basedir is not None, "If the path is in reldb:// format, the database basedir must be provided in order to resolve it."
 
     abs_path = os.path.join(db_basedir, *path.split('/')[2:])
@@ -122,12 +135,7 @@ def create_reldb_path(path):
         logger.debug('Path {} already in reldb:// format'.format(path))
         return path
     
-    parent_db_path = path
-    while not is_data_base(parent_db_path):
-        parent_db_path = os.path.dirname(parent_db_path)
-        if parent_db_path == '/':
-            raise DataBaseException(
-                "The path {} does not seem to be within a DataBase!".format(path))
+    parent_db_path = _find_parent_db(path)
 
     relpath = os.path.relpath(path, parent_db_path)
     return os.path.join('reldb://', relpath)
@@ -190,22 +198,12 @@ def create_modular_db_path(path):
     Returns:
         str: The database path.
     """
-    db_path = path
     if path.startswith('mdb://'):
         logger.debug('Path {} already in mdb:// format'.format(path))
         return path
     
     # Find mother database
-    while True:
-        if (os.path.isdir(db_path)) and (
-            'dbcore.pickle' in os.listdir(db_path) or 'db_state.json' in os.listdir(db_path) or 'dbcore.pickle' in os.listdir(db_path)):
-            break
-        else:
-            db_path = os.path.dirname(db_path)
-        if db_path == '/':
-            raise DataBaseException(
-                "The path {} does not seem to be within a DataBase!".
-                format(path))
+    db_path = _find_parent_db(path)
     
     # Instantiate mother database
     db = DataBase(db_path, nocreate=True, readonly=True)

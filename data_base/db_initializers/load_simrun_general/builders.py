@@ -249,18 +249,22 @@ def _build_dendritic_voltage_traces(db, repartition=None):
 
     # Construct dendritic filelist from existing filelist, as built by _build_core
     # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
-    suffix = "*vm_dend_traces*"
+    suffix = "vm_dend_traces"
     path_globs = [
         os.path.join(
             db['simresult_path'],
             os.path.dirname(e),
-            suffix)
+            "*"+suffix+"*")
         for e in db['filelist']
     ]
     filelist = [
-        path_glob_match 
+        path_glob_match
         for path_glob in path_globs 
         for path_glob_match in glob.glob(path_glob)
+    ]
+    relative_filelist = [
+        os.path.relpath(f, db['simresult_path'])
+        for f in filelist
     ]
 
     recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
@@ -270,7 +274,7 @@ def _build_dendritic_voltage_traces(db, repartition=None):
     divisions = db["voltage_traces"].divisions 
     dend_vt_per_recsite_label = load_dendritic_voltage_traces(
         db, 
-        filelist, 
+        relative_filelist, 
         recsite_labels, 
         repartition=repartition, 
         divisions=divisions)
@@ -332,7 +336,7 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     db.set("parameterfiles", param_file_hash_df, dumper=pandas_to_msgpack)
 
     # Copy and parameterfiles and adapt internal references
-    fn_map = parallel_resolve_and_copy_paramfiles_to_db(
+    source_to_target_fn_maps = parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_hashmap_df=param_file_hash_df,
         db=db,
         paramfile_target_dirs=paramfile_target_dirs,
@@ -341,12 +345,10 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     )
 
     logger.info("Updating parameter file locations under `parameterfiles` key")
-    # Dev note: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
-    # Dev note: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
-    neup_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['neup'].items()}
-    netp_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['netp'].items()}
-    param_file_hash_df['path_neuron'] = param_file_hash_df['hash_neuron'].apply(neup_hash_map.get).apply(create_reldb_path)
-    param_file_hash_df['path_network'] = param_file_hash_df['hash_network'].apply(netp_hash_map.get).apply(create_reldb_path)
+    # Bjorge: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
+    # Bjorge: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
+    param_file_hash_df['path_neuron'] = param_file_hash_df['path_neuron'].apply(source_to_target_fn_maps['neup'].get).apply(create_reldb_path)
+    param_file_hash_df['path_network'] = param_file_hash_df['path_network'].apply(source_to_target_fn_maps['netp'].get).apply(create_reldb_path)
     db.set("parameterfiles", param_file_hash_df)
 
 

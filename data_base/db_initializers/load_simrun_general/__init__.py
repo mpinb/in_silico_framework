@@ -43,6 +43,45 @@ the following keys:
     * - ``spike_times``
       - Dask dataframe containing the spike times of the postsynaptic cell for all trials.
 
+      
+If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
+If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
+This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
+Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
+:py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
+keys.
+
+Example::
+
+    >>> paramfile_copy_config = {
+    ...     "copy_method": "remount",
+    ...     "neup" : "parameterfiles_folder",
+    ...     "netp" : "parameterfiles_folder",
+    ...     "hoc" : "morphology_folder",
+    ...     "syn" : "parameterfiles_folder",
+    ...     "con" : "parameterfiles_folder",
+    ...     "recsites" : "parameterfiles_folder"
+    ... }
+    >>> simresult_path = '/path/to/raw/simrun/output/folder'
+    >>> db = I.DataBase("db_parsed_data")
+    >>> client = distributed.Client("localhost:8786")
+    >>> I.db_init_simrun_general.init(
+    ... db = db,
+    ... simresult_path = p,
+    ... core = True, 
+    ... repartition = 500,
+    ... parameterfiles = True,
+    ... synapse_activation = True, 
+    ... n_chunks = 5000,
+    ... dendritic_voltage_traces = True,
+    ... spike_times = True, 
+    ... dendritic_spike_times = False,
+    ... rewrite_in_optimized_format = True,
+    ... client = client,
+    ... check_health = True,
+    ... paramfile_copy_config = paramfile_copy_config
+    ... )
+
 After initialization, you can access the data from the data_base in the following manner::
 
     >>> db['synapse_activation']
@@ -53,13 +92,6 @@ After initialization, you can access the data from the data_base in the followin
     <voltage traces dataframe>
     >>> db['spike_times']
     <spike times dataframe>
-    
-If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
-If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
-This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
-Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
-:py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
-keys.
 
 See also:
     :ref:`simresult_dir_format` for more information on the raw output format of :py:mod:`simrun`.
@@ -122,11 +154,11 @@ def init(
     client=None,
     check_health=False,
     n_chunks=5000,
+    paramfile_copy_config=None,
     # deprecated args;
     voltage_traces=None,
     burst_times=None,
     dumper=None,
-    paramfile_copy_config=None
 ):
     """Initialize a database with simulation data.
 
@@ -172,8 +204,8 @@ def init(
     
             - ``copy_method`` (str): Which copy strategy to use. 
               Must be either ``"hash_rename"`` or ``"remount"``. 
-              ``"hash_rename"`` will rename all parameterfiles to a hash of their content. Useful when you want all parameter files in one folder and avoid fielname clashes.
-              ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
+              ``"hash_rename"`` renames all parameterfiles to a hash of their content, filtering out files with identical content.
+              ``"remount"`` preserves the relative directory structure of the parameterfiles per file category.
             - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
             - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
@@ -187,18 +219,19 @@ def init(
             Scheduler to use for parallellized parsing of dask dataframes.
             can e.g. be simply the ``distributed.Client.get`` method.
             Default is ``None``.
+
             
     Note:
         Note the difference between *amount* of partitions (:paramref:`n_chunks`) and target partition *size* (:paramref:`repartition`)
 
+    .. deprecated:: 0.2.0
+        The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
+        
     .. versionadded:: 0.5.0
        The keyword argument :paramref:`repartition` now accepts integers in addition to booleans.
        Integers reflect the target size of each voltage trace dataframe partition. Booleans reflect either
        ``True`` for a default lenght, or ``False`` for no repartitioning (i.e. one ``.csv`` file per partition)
 
-    .. deprecated:: 0.2.0
-        The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
-        
     .. deprecated:: 0.5.0
        The :paramref:`dumper` argument is deprecated and will be removed in a future version.
        Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.

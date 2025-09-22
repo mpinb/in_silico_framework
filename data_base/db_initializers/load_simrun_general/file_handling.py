@@ -133,25 +133,28 @@ def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
     Returns:
         List[str]: List of recording site labels.
     """
-    simresult_dirs, fns = zip(*[
-        (
-            os.path.basename(os.path.dirname(e)), 
-            os.path.basename(e)
-        ) 
-        for e in filelist])
-    #    old naming convention: subdirectory/20250101-1553_0001
-    #  newer naming convention: subdirectory/20250101-1553_seed0001
-    # newest naming convention: subdirectoy/20250101-1553_seed123456_pid0001
-    prefixes_no_date = ["_".join(e.split("_")[1:]) for e in simresult_dirs]
+    # simresult_dirs, fns = zip(*[
+    #     (
+    #         os.path.basename(os.path.dirname(e)), 
+    #         os.path.basename(e)
+    #     ) 
+    #     for e in filelist])
+    #    old naming convention: subdirectory/20250101-1553_0001/*
+    #  newer naming convention: subdirectory/20250101-1553_seed0001/*
+    # newest naming convention: subdirectoy/20250101-1553_seed123456_pid0001/*
+    # prefixes_no_date = ["_".join(e.split("_")[1:]) for e in simresult_dirs]
     
     # example file:
     # seed2622647967_pid162918_pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6_vm_dend_traces.csv
     # ------- prefix -------- _----------------- recsite label ------------------ _------ suffix ----
+    # recsite_labels = [
+    #         e[len(prefix)+1:-len(full_suffix)-1] 
+    #         for e, prefix in zip(fns, prefixes_no_date)
+    #         ]
 
-    recsite_labels = [
-        e[len(prefix)+1:-len(full_suffix)-1] 
-        for e, prefix in zip(fns, prefixes_no_date)
-        ]
+    basenames = [os.path.basename(e) for e in filelist]
+    pattern = re.compile(r"(seed\d+)?_?(pid\d+)?_?(?P<recsite_label>[a-zA-Z0-9\._]+)(?=_).*" + re.escape(full_suffix))
+    recsite_labels = [re.match(pattern, e).group("recsite_label") for e in basenames]
     return recsite_labels
 
     
@@ -176,5 +179,5 @@ def _get_recsite_ids_from_recsite_labels(recsite_labels):
     try:
         ids = [pattern.search(e).group("number") for e in recsite_labels]
     except AttributeError as e:
-        raise ValueError("Found recsite IDs that don't contain the substring ID_[digits]") from e
+        raise ValueError("Found recsite IDs that don't contain the substring ID_[digits]: {}".format(recsite_labels)) from e
     return ids
