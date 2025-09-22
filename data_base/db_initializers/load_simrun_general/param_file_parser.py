@@ -291,6 +291,7 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
         # New param file name will be the content hash
         new_base_fns = client.gather(client.map(_hash_file_content, filelist))
     elif copy_method == "remount":
+        assert len(filelist) > 1, "Can't preserve folder structure with only a single file. If you want to do this, please use copy_method='hash_rename'. Filelist: {}".format(filelist)
         # paramfiles are copied over in the same folder structure.
         base_fn = os.path.commonpath(filelist)
         # Not worth parallellizing for now, it's fast enough. Overhead of sending to client may be slower than this
