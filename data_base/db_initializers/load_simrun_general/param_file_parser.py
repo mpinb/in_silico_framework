@@ -177,7 +177,7 @@ def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
     try:
         neup.save(target_fn)
     except FileNotFoundError:
-        os.makedirs(os.path.dirname(target_fn))
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
         neup.save(target_fn)
 
 
@@ -205,7 +205,7 @@ def _resolve_and_copy_network_param(netp_fn, scattered_fn_map):
     try:
         netp.save(target_fn)
     except FileNotFoundError:
-        os.makedirs(os.path.dirname(target_fn))
+        os.makedirs(os.path.dirname(target_fn), exist_ok=True)
         netp.save(target_fn)
 
 
@@ -281,7 +281,11 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
             These directories will be a :py:class:`data_base.isf_data_base.ManagedFolder`
         filelist (List[str]): The original file names.
         client (:py:class:`distributed.client.Client`):
-            A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``
+            A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``relative_filelist = [
+        os.path.relpath(path_glob_match, db['simresult_path'])
+        for path_glob in path_globs 
+        for path_glob_match in glob.glob(path_glob)
+    ]
 
     Returns:
         str: The target filename in the database.
