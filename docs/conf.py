@@ -121,7 +121,6 @@ autoapi_own_page_level = "method"
 bibtex_bibfiles = ["bibliography.bib"]
 
 # -- Napoleon settings -----------------------------------------------------
-# Napoleon is an 
 napoleon_google_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True
