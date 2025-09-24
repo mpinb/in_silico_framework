@@ -148,7 +148,7 @@ def make_all_str(dict_):
     Used to write out metadata in JSON format.
     
     Args:
-        dict_ (dict): The dictionary to convert.
+        dict\_ (dict): The dictionary to convert.
     
     Returns:
         dict: The converted dictionary.    
@@ -676,7 +676,7 @@ class ISFDataBase:
         
         Args:
             key (str|tuple|pathlib.Path): The key of the folder to create.
-            raise_ (bool, optional): Whether to raise an error if the folder already exists. Defaults to True.
+            raise\_ (bool, optional): Whether to raise an error if the folder already exists. Defaults to True.
             
         Returns:
             :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: The created folder.
@@ -714,7 +714,7 @@ class ISFDataBase:
         Args:
             key (str|tuple): The key of the sub_db
             register (str, optional): ? TODO. Defaults to 'as_parent'.
-            raise_ (bool, optional): Whether to raise an error if the sub_db already exists. Defaults to True.
+            raise\_ (bool, optional): Whether to raise an error if the sub_db already exists. Defaults to True.
             **kwargs (dict): 
                 overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
                 Additional kwargs are passed to the dumper.

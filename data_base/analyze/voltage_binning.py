@@ -70,8 +70,8 @@ def get_bins(bin_size=None, min_=None, max_=None):
     
     Args:
         bin_size (float): the size of the bins
-        min_ (float): the minimum value
-        max_ (float): the maximum value
+        min\_ (float): the minimum value
+        max\_ (float): the maximum value
         
     Return:
         np.array: the bin edges

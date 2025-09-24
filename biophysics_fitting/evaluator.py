@@ -106,7 +106,7 @@ class Evaluator:
         Args:
             features_dict (dict): 
                 a dictionary of stimulus names as keys, and corresponding voltage traces as values.
-            raise_ (bool): Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`. 
+            raise\_ (bool): Whether or not to raise an error if the required voltage trace is not in `features_dict.keys()`. 
                 If False, will not raise an error, and evaluate all features that can be evaluated given the provided `features_dict`. 
 
         Raises:

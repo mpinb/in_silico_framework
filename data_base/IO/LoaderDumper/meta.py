@@ -90,7 +90,7 @@ def get_meta_filename(savedir, raise_=True):
     
     Args:
         savedir (str): The directory to look for the meta file.
-        raise_ (bool, optional): Whether to raise an error if no meta file is found. Defaults to True.
+        raise\_ (bool, optional): Whether to raise an error if no meta file is found. Defaults to True.
         
     Raises:
         FileNotFoundError: If no meta file is found in the savedir.
@@ -160,7 +160,7 @@ def read_object_meta(savedir, raise_=True):
     Args:
         savedir (str): directory where the file partitions and object meta are saved. 
             This corresponds to the database key filepath.
-        raise_ (bool, optional): Whether to raise an errror if the meta object is not found on disk.
+        raise\_ (bool, optional): Whether to raise an errror if the meta object is not found on disk.
 
     Returns:
         pd.DataFrame: A pandas dataframe representing the object meta: column names, column dtypes, index name and index dtype.

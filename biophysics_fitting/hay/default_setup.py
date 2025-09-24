@@ -245,7 +245,7 @@ def map_truefalse_to_str(dict_):
     """Convert True/False to 'True'/'False' in a dictionary
 
     Args:
-        dict_ (dict): A dictionary with boolean values.
+        dict\_ (dict): A dictionary with boolean values.
 
     Returns:
         dict: A dictionary with boolean values converted to strings.

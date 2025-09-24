@@ -519,8 +519,8 @@ def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
     
     Args:
         cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
-        min_ (float): The minimum distance from the soma.
-        max_ (float): The maximum distance from the soma.
+        min\_ (float): The minimum distance from the soma.
+        max\_ (float): The maximum distance from the soma.
         outsidescale_sections (list): A list of sections where the channels should be inserted.
         
     Returns:

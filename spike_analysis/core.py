@@ -346,7 +346,7 @@ def load_reader(dict_):
     """Load a reader object from a dictionary.
     
     Args:
-        dict_ (dict): A dictionary containing the attributes of the reader object.
+        dict\_ (dict): A dictionary containing the attributes of the reader object.
         
     Returns:
         object: A reader object.
