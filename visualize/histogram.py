@@ -44,7 +44,7 @@ def histogram(
     Args:
         hist_bins (tuple): tuple of the format (bins,hist) where bins are the bin edges and hist the bin values. Length of bins needs to be one element longer than hist.
         colormap (dict): dictionary with labels as keys and colors as values. Default is ``None``.
-        ax (Axes): The matplotlib axes object. Default is ``None``.
+        ax (:py:class:`~matplotlib.axes.Axes`): The matplotlib axes object. Default is ``None``.
         label (str): The label of the histogram. Default is ``None``.
         
     Returns:
@@ -86,7 +86,7 @@ def histogram2(hist_bins, color=None, ax=None, label=None, mode='step'):
     Args:
         hist_bins (tuple): tuple of the format (bins,hist) where bins are the bin edges and hist the bin values. Length of bins needs to be one element longer than hist.
         color (str): The color of the histogram. Default is ``None``.
-        ax (Axes): The matplotlib axes object. Default is ``None``.
+        ax (:py:class:`~matplotlib.axes.Axes`): The matplotlib axes object. Default is ``None``.
         label (str): The label of the histogram. Default is ``None``.
         mode (str): The mode of the histogram. Default is `step`. Options: ('step', 'filled').
         

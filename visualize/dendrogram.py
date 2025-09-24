@@ -533,7 +533,6 @@ class _DendrogramSynapseStatistics:
         r"""Compute the synapse density histogram.
 
         Args:
-            dist_end (float): The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
             binsize (float): The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
 
         Returns:
@@ -575,7 +574,7 @@ class _DendrogramSynapseStatistics:
         While plotting per synapse type is supported, the default behavior is to plot all synapses in black.
 
         Returns:
-            None: Nothing. Updates :py:param:`synapse_statistics`.
+            None: Nothing. Updates :py:attr:`synapse_statistics`.
         """
         self.synapse_statistics = {}
         for dendro_section in self.dendrogram_db:

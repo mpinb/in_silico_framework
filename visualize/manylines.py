@@ -132,15 +132,15 @@ def manylines_helper(
         colormap (dict): 
             A colormap to use for the plot. 
             Must map a label from :py:param:groupby_attribute to a color
-        fig (:py:class:`~matplotlib.figure.Figure`, optional): 
-            A Figure object to plot on. 
+        ax (:py:class:`~matplotlib.axes.Axes`, optional): 
+            An axes object to plot on. 
             If specified, will plot on the current active axis. 
             If not, it will create one.
         figsize (tuple): 
             size of the figure.
 
     Returns:
-        maptlotlib.pyplot.Figure: Figure object containing the lines as specified in pdf.
+        Tuple[:py:class:`~maptlotlib.figure.Figure`,:py:class:`~matplotlib.axes.Axes`]: Figure and Axes object containing the lines as specified in pdf.
     '''
     if not isinstance(pdf, pd.DataFrame):
         raise RuntimeError(
