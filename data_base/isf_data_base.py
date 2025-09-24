@@ -715,7 +715,7 @@ class ISFDataBase:
             key (str|tuple): The key of the sub_db
             register (str, optional): ? TODO. Defaults to 'as_parent'.
             raise\_ (bool, optional): Whether to raise an error if the sub_db already exists. Defaults to True.
-            **kwargs (dict): 
+            kwargs (dict): 
                 overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
                 Additional kwargs are passed to the dumper.
 
