@@ -51,8 +51,7 @@ def plot_hoc(hoc_file, **kwargs):
     
     Args:
         hoc_file (str): The path to the :ref:`hoc_file_format` file
-        show (bool): Whether to show the plot
-        **kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
+        kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
 
     Returns:
         :py:class:`~matplotlib.figure.Figure`: The figure object

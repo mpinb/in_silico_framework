@@ -354,8 +354,8 @@ class Arrow3D(FancyArrowPatch):
             dx (float): x coordinate difference of the arrow direction.
             dy (float): y coordinate difference of the arrow direction.
             dz (float): z coordinate difference of the arrow direction.
-            *args: Additional positional arguments passed to FancyArrowPatch.
-            **kwargs: Additional keyword arguments passed to FancyArrowPatch.
+            args: Additional positional arguments passed to FancyArrowPatch.
+            kwargs: Additional keyword arguments passed to FancyArrowPatch.
         """
         super().__init__((0, 0), (0, 0), *args, **kwargs)
         self._xyz = (x, y, z)
