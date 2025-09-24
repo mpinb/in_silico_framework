@@ -461,7 +461,7 @@ def set_param(cell_param, params=None):
         # returns {'a': {'b': {'c': 3}}}
         
     Args:
-        cell_param (:py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
+        cell_param (~:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
     
     Returns:
