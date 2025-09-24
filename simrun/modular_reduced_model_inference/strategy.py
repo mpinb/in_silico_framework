@@ -862,7 +862,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         return wni  # shape: (n_trials,)
 
     def normalize(self, x, flipkey=None):
-        '''Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
+        r'''Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
         
         Attention:
             These are the same basis functions as in :py:class:`RaisedCosineBasis`.

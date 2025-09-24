@@ -37,7 +37,7 @@ def universal_pd(
     min_time = 0,
     max_time = 300, 
     time_distance_bins = 1):
-    '''Bin a pandas DataFrame by both distance and time.
+    r'''Bin a pandas DataFrame by both distance and time.
     
     This is a speed-optimized binning code for 2d-binning of a :py:class:`pandas.DataFrame`.
     
@@ -84,7 +84,7 @@ def universal(
     min_time = 0, 
     max_time = 300, 
     time_distance_bins = 1):
-    '''Bin a pandas or dask DataFrame by both distance and time.
+    r'''Bin a pandas or dask DataFrame by both distance and time.
     
     Infers the type of the input DataFrame and calls the appropriate binning function.
     
