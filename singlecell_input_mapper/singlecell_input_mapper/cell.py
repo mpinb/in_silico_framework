@@ -317,7 +317,7 @@ class PointCell(object):
         to a postsynaptic :py:class:`~single_cell_parser.cell.Cell` object.
         
         Args:
-            synapse (:py:class:`Synapse`): Synapse object.
+            synapse (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse.Synapse`): Synapse object.
         """
         if self.synapseList is None:
             self.synapseList = [synapse]
