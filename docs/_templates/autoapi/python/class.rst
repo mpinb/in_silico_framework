@@ -48,30 +48,44 @@
 
 .. fetch arguments from __init__ or __new__ docstring
 
-      {%- set init_docstring = obj.children | selectattr("name", "equalto", "__init__") | map(attribute="docstring") | list  %}
-      {%- set new_docstring = obj.children | selectattr("name", "equalto", "__new__") | map(attribute="docstring") | list %}
+      {%- set init = obj.children | selectattr("name", "equalto", "__init__") | list | first | default(none) %}
+      {%- set new = obj.children | selectattr("name", "equalto", "__new__") | list | first | default(none) %}
+
+      {%- set init_docstring = [] %}
+      {%- set new_docstring = [] %}
+
+      {%- if init and init.docstring %}
+         {%- set init_docstring = [init.docstring] %}
+      {%- endif %}
+
+      {%- if new and new.docstring %}
+         {%- set new_docstring = [new.docstring] %}
+      {%- endif %}
+
       {%- set argument_lines = [] %}
       {%- if init_docstring %}
          {%- set argument_lines = init_docstring %}
       {%- elif new_docstring %}
          {%- set argument_lines = new_docstring %}
       {%- endif %}
+
       {%- set argument_lines = argument_lines | reject("==", '') | reject("==", "\n") | list %}
       {%- if argument_lines == [''] %}
          {%- set argument_lines = [] %}
       {%- endif %}
 
-   {% endif %}
+   {%- endif %}
 
 .. class signature --------------------------------------------------------------
 
-.. py:class:: {{ obj.id }}{% if obj.args %}({{ obj.args }}){% endif %}
+.. py:class:: {{ obj.id }}{% if init and init.args %}({{ init.args }}){% elif new and new.args %}({{ new.args }}){% endif %}
 
    {%- for (args, return_annotation) in obj.overloads %}
       {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
    {%- endfor %}
    {%- if obj.bases %}
       {% if "show-inheritance" in autoapi_options %}
+
 
    Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
       {% endif %}

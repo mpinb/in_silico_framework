@@ -114,6 +114,8 @@ autoapi_options = [
     "undoc-members",
     "private-members",
     "show-module-summary",
+    "show-inheritance",
+    "inherited-members",
 ]
 autoapi_own_page_level = "method"
 
