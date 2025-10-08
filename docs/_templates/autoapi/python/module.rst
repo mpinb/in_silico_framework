@@ -49,10 +49,7 @@
 {%- if "show-module-summary" in autoapi_options %}
 {% block classes scoped %}
 {%- if visible_classes %}
-{%- set public_classes = visible_classes|rejectattr('is_private_member')|list %}
-{%- if public_classes %}
-{{ macros.auto_summary(public_classes, title="Classes") }}
-{%- endif %}
+{{ macros.auto_summary(visible_classes, title="Classes") }}
 {%- endif %}
 {%- endblock %}
 
