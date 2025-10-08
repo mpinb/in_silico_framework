@@ -41,8 +41,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class RW:
-    """
-    Class to perform RW exploration from a seedpoint.
+    """Class to perform RW exploration from a seedpoint.
     
     Attributes:
         df_seeds (pd.DataFrame): individual seed points as rows and the parameters as columns
@@ -104,7 +103,7 @@ class RW:
                 - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain ephys features.
 
             checkpoint_every (int): save the results every n iterations
-            check_point_by_time (float): time interval in minutes for checkpointing for using time-based checkpointing. If both
+            checkpoint_by_time (float): time interval in minutes for checkpointing for using time-based checkpointing. If both
                 checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
             concat_every_n_save (int): number of checkpoints after which the intermediate ``.pickle` files are concatenated to a single ``.parquet`` dataframe.
             mode (str): Random walk mode. Options: (None, 'expand'). default: None

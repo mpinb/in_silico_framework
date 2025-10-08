@@ -165,8 +165,6 @@ def get_main_bifurcation_section(
     
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The Cell object for which to find the main bifurcation section.
-        assert_unique (bool, optional): whether or not to check if this section is unique in the morphology.
-            Default: True
             
     Raises:
         AssertionError: If there are multiple sections who are both inner, and have branching depth 1. This means that there is no "main" bifurcation in the morphology.

@@ -53,10 +53,10 @@ def evaluation_function_incremental_helper(
             List consisting of strings and tuples of strings. 
             Use strings if only one stimulus is to be simulated.
             Use tuples of strings to simulate several stimuli in one go. 
-        cutoffs ({str: float}): 
+        cutoffs (Dict[str,float]): 
             Keys (str) must appear in stim_order. 
             Values (float)indicate the maximum error allowed for these stimuli
-        objectives_by_stimulus ({str: list}): 
+        objectives_by_stimulus (Dict[str,list]): 
             Keys (str) must appear in stim_order. 
             Values (list) are objective names returned by the evaluator object.
         additional_evaluation_functions (list): additional functions to be applied onto the final voltage 

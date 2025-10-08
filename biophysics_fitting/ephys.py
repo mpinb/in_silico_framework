@@ -623,7 +623,10 @@ def STEP_adaptation_index(t, v, stim_end=2000, thresh=None):
 
     Args:
 
-        end_time (float): End time of the stimulus.
+        t (:py:class:`np.array`): Time vector
+        v (:py:class:`np.array`): Voltage vector
+        stim_end (float): End time of the stimulus.
+        thresh (float): Voltage threshold for finding APs with :py:func:`find_crossing`
 
     Returns:
         float: Adaptation index.

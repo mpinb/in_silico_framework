@@ -215,14 +215,14 @@ def get_Simulator(fixed_params, step=False, vInit=False):
 
 
 def interpolate_vt(voltage_trace_):
-    """Interpolate a voltage trace so that is has fixed time interval
+    r"""Interpolate a voltage trace so that is has fixed time interval
 
     The NEURON simulator allows for a variable time step, which can make
     comparing voltage traces difficult. This function interpolates the voltage
     traces so that they have a fixed time interval of 0.025 ms.
 
     Args:
-        voltage_trace_ (dict): A dictionary of voltage traces.
+        voltage_trace\_ (dict): A dictionary of voltage traces.
 
     Returns:
         dict: A dictionary of voltage traces with a fixed time interval.
