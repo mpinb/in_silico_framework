@@ -305,15 +305,16 @@ def load_dendritic_voltage_traces(
 
     """
     assert repartition is not None
-    filelist = unique(filelist)
     df = pd.DataFrame({'filepath': filelist, 'label': recsite_labels})
     recsite_label_filelist_dict = df.groupby('label')['filepath'].apply(list).to_dict()
     recsite_dendvt_dict = {}
     for recsite_label, filelist in recsite_label_filelist_dict.items():
         ddf = read_voltage_traces_by_filenames(
-            db["simresult_path"], filelist, repartition=repartition
+            db["simresult_path"], 
+            filelist, 
+            repartition=repartition
         )
-        ddf = ddf.repartition(divisons=divisions)
+        ddf.divisions = db['voltage_traces'].divisions
         recsite_dendvt_dict[recsite_label] = ddf
     return recsite_dendvt_dict
 
