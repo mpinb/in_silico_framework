@@ -224,7 +224,7 @@ def read_voltage_traces_from_npz(prefix, fname):
     return df
 
 
-def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition=None):
+def read_voltage_traces_by_filenames(prefix, fnames, repartition=None):
     """Reads a list of **multiple** voltage trace files and parses it to a dask dataframe.
 
     Also sets the database key ``sim_trial_index`` to contain the paths of the simulation trials.
@@ -233,7 +233,6 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     Args:
         prefix (str): Path to the directory containing the simulation results.
         fnames (list): list of filenames pointing to voltage trace files
-        divisions (list, optional): list of divisions for the dask dataframe. Default is ``None``, letting Dask handle it.
         repartition (bool|int): 
             If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
             If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
@@ -252,13 +251,10 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
     meta = read_voltage_traces_from_file(prefix, fnames[0]).head(0)
 
     if repartition is not False:
-        if divisions is not None:
-            n_chunks = len(divisions) - 1
-        else:
-            if repartition == True: vt_partition_size = DEFAULT_VT_PARTITION_SIZE
-            elif isinstance(repartition, int): vt_partition_size = repartition
-            filelist = [os.path.join(prefix, fn) for fn in fnames]
-            n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
+        if repartition == True: vt_partition_size = DEFAULT_VT_PARTITION_SIZE
+        elif isinstance(repartition, int): vt_partition_size = repartition
+        filelist = [os.path.join(prefix, fn) for fn in fnames]
+        n_chunks = _estimate_n_chunks(filelist, partition_size=vt_partition_size)
 
         chunked_fnames = chunkIt(fnames, n_chunks)
         delayeds = [
@@ -271,12 +267,7 @@ def read_voltage_traces_by_filenames(prefix, fnames, divisions=None, repartition
             read_voltage_traces_from_file_delayed(prefix, fname, meta=meta) for fname in fnames
         ]
     
-    if divisions is not None:
-        assert len(divisions) - 1 == len(delayeds), "Expected n_delayeds = n_divisions + 1, but I have {} divisions and {} delayeds".format(
-            len(divisions), len(delayeds)
-        )
-
-    ddf = dd.from_delayed(delayeds, meta=meta, divisions=divisions)
+    ddf = dd.from_delayed(delayeds, meta=meta)
     return ddf
 
     
@@ -320,8 +311,9 @@ def load_dendritic_voltage_traces(
     recsite_dendvt_dict = {}
     for recsite_label, filelist in recsite_label_filelist_dict.items():
         ddf = read_voltage_traces_by_filenames(
-            db["simresult_path"], filelist, divisions=divisions, repartition=repartition
+            db["simresult_path"], filelist, repartition=repartition
         )
+        ddf = ddf.repartition(divisons=divisions)
         recsite_dendvt_dict[recsite_label] = ddf
     return recsite_dendvt_dict
 
