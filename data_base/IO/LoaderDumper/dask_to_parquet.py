@@ -29,7 +29,7 @@ import json
 from . import parent_classes
 from data_base.utils import df_colnames_to_str, chunkIt, convertible_to_int
 import json
-from .utils import save_object_meta, set_object_meta
+from .meta import save_object_meta, set_object_meta
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 

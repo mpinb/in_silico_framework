@@ -5,10 +5,15 @@
 authors = [
   {name = "Arco Bast", email = "basta@janelia.hhmi.org"},
   {name = "Bjorge Meulemeester", email = "bjorge.meulemeester@mpinb.mpg.de"},
+  {name = "Robert Egger"},
+  {name = "Rieke Fruengel"},
+  {name = "Maria Royo Cano" },
+  {name = "Omar Valerio" },
+  {name = "Shantanu Durgvanshi"}
   ]
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
-requires-python = "==3.8.*"
+requires-python = ">=3.8"
 version = "0.5.0-beta"
 
 [tool.pixi.project]
@@ -26,7 +31,6 @@ linux = "3.10.0"
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
-
 # -------------------------------------------------------------------------
 # Dependencies
 # -------------------------------------------------------------------------
@@ -34,8 +38,9 @@ requires = ["hatchling"]
 cmasher = ">=1.6.3,<2"
 cython = ">=3.0.11,<4"
 dash = ">=2.18.1,<3"
-dask = "2.30.0.*"
+dask = ">=2022.6"
 fasteners = ">=0.17.3,<0.18"
+flask = ">=2.3"
 ipywidgets = ">=8.1.5,<9"
 jupyterlab = ">=3.5.3,<4"
 jupyter-scatter = ">=0.19.1,<0.20"
@@ -54,6 +59,8 @@ seaborn = ">=0.12.2,<0.13"
 scipy = "1.5.2.*"
 wheel = ">=0.45.1,<0.46"
 zarr = ">=2.15.0,<3"
+dask-gateway = ">=2023.1.1,<2024"
+async-timeout = ">=4.0.3,<5"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
@@ -65,42 +72,45 @@ blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 # OS specific dependencies
 [tool.pixi.target.osx]
-pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
+pypi-dependencies = { neuron = ">=8.2", distributed = ">=2022.6"}
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
-dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15" }
+dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = ">=2022.6", gcc = "<15" }
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 [tool.pixi.target.win]
-dependencies = { numpy = "==1.19.2", distributed = "==2.30.0"}
+dependencies = { numpy = "==1.19.2", distributed = ">=2022.6"}
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
-# Feature specific dependencies
-[tool.pixi.feature.isf]
-dependencies = { flask = "==1.1.4"}
-
+# Docs does not inherit the default dependencies
 [tool.pixi.feature.docs.dependencies]
+black = ">=21.12b0,<22"
+cloudpickle = ">=3.1.1,<4"
+dask = ">=2024.8.0,<2025"
 flask = ">=2"
-nbsphinx = ">=0.9.6,<0.10"
+graphviz = ">=7.0.5,<13"
+ipython = ">=8.18.1,<9"
 jinja2 = ">=3.1.4,<4"
+matplotlib = ">=3.9.4,<4"
+nbsphinx = ">=0.9.6,<0.10"
+nbsphinx-link = ">=1.3.0,<2"
+pandoc = ">=3.6.2,<4"
+python = ">=3.9"
 sphinxcontrib-bibtex = ">=2.6.3,<3"
-furo = ">=2024.8.6,<2025"
 sphinxext-opengraph = ">=0.9.1,<0.10"
 sphinx-copybutton = ">=0.5.2,<0.6"
-sphinx = ">=7.1.2,<8"
-nbsphinx-link = ">=1.3.0,<2"
+sphinx = "<7.3.5"
 sphinx-inline-tabs = ">=2023.4.21,<2024"
-pandoc = ">=3.6.2,<4"
-graphviz = ">=7.0.5,<13"
 sphinx-design = ">=0.5.0,<0.6"
 sphinxcontrib-video = ">=0.2.1,<0.3"
-
+sphinx-immaterial = ">=0.12.5,<0.13"
+sphinx-autoapi = ">=3.5.0,<4"
+toml = ">=0.10.2,<0.11"
 [tool.pixi.feature.docs.pypi-dependencies]
-sphinx-paramlinks = ">=0.6.0,<0.7"
 catppuccin = { version = ">=2.2.0,<3", extras = ["pygments"] }
-sphinx-autoapi = ">=3.5.0,<4" 
-sphinx-immaterial = ">=0.11.14,<0.12"
+isf-pandas-msgpack = ">=0.4.0,<0.5"
+sphinx-paramlinks = ">=0.6.0,<0.7"
 
 # -------------------------------------------------------------------------
 # Environment config
@@ -116,8 +126,7 @@ ISF_HOME="%cd%"
 
 
 [tool.pixi.environments]
-docs = ["docs"]
-default = ["isf"]
+docs = { features = ["docs"], no-default-feature = true }
 
 # -------------------------------------------------------------------------
 # Testing config

@@ -1,8 +1,5 @@
-import fnmatch
-import logging
-import os
+import fnmatch, logging, os, re, dask
 
-import dask
 from os import walk
 
 from data_base.IO.roberts_formats import _max_commas
@@ -10,9 +7,13 @@ from data_base.utils import chunkIt
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
-
 def make_filelist(directory, suffix="vm_all_traces.csv"):
     """Generate a list of all files with :paramref:`suffix` in the specified directory.
+
+    This method recursively searches through the directory and its subdirectories
+    for files that match the specified suffix. It returns a list of relative paths to
+    these files, excluding any files that are still being written to (identified by
+    the presence of "_running" in the filename).
 
     Simulation results from :py:mod:`simrun` are stored in a nested folder structure, and spread
     across multiple files. The first step towards parsing them is to generate a list of all files
@@ -34,7 +35,7 @@ def make_filelist(directory, suffix="vm_all_traces.csv"):
         for filename in fnmatch.filter(filenames, "*" + suffix):
             dummy = os.path.join(root, filename)
             if "_running" in dummy:
-                logging.info("skip incomplete simulation: {}".format(dummy))
+                logger.warning("Skipping incomplete simulation: {}".format(dummy))
             else:
                 matches.append(os.path.relpath(dummy, directory))
 
@@ -112,3 +113,68 @@ def get_max_commas(paths):
     max_commas = [max_commas_in_chunk(chunk) for chunk in filepath_chunks]
     max_commas = dask.delayed(max_commas).compute()
     return max(max_commas)
+
+
+def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
+    """Get the recording site labels from a list of dendritic voltage trace files.
+    
+    Example:
+        >>> fn = "path/to/YYYYMMDD-HHMM_seed001_pid001/seed001_pid001_pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6_vm_dend_traces.csv"
+        >>> suffix = "_vm_dend_traces.csv"  # needs leading underscore and .csv extension
+        >>> get_recsite_labels_from_dend_vt_filelist([fn], full_suffix=suffix)
+        ["pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6"]
+
+    Args:
+        filelist (List[str]): List of filenames to dendritic voltage trace results.
+        full_suffix (str): 
+            Shared suffix of the filenames that is mutually exclusive from the recsite label. 
+            This is normally fetched by the higher-level :py:func:`load_dendritic_voltage_traces`
+
+    Returns:
+        List[str]: List of recording site labels.
+    """
+    simresult_dirs, fns = zip(*[
+        (
+            os.path.basename(os.path.dirname(e)), 
+            os.path.basename(e)
+        ) 
+        for e in filelist])
+    #    old naming convention: subdirectory/20250101-1553_0001
+    #  newer naming convention: subdirectory/20250101-1553_seed0001
+    # newest naming convention: subdirectoy/20250101-1553_seed123456_pid0001
+    prefixes_no_date = ["_".join(e.split("_")[1:]) for e in simresult_dirs]
+    
+    # example file:
+    # seed2622647967_pid162918_pos_1_ID_000_sec_073_seg_000_x_0.056_somaDist_581.6_vm_dend_traces.csv
+    # ------- prefix -------- _----------------- recsite label ------------------ _------ suffix ----
+
+    recsite_labels = [
+        e[len(prefix)+1:-len(full_suffix)-1] 
+        for e, prefix in zip(fns, prefixes_no_date)
+        ]
+    return recsite_labels
+
+    
+def _get_recsite_ids_from_recsite_labels(recsite_labels):
+    """Fetch the recsite ID number from the entrie recsite ID string.
+    
+    This function assumes all recsite ids in :paramref:`recsite_ids` have a substring containing "ID_[digit]",
+    where digit is any numeric combination.
+
+    Args:
+        recsite_labels (List[str]): List of recording site labels.
+    
+    Example:
+        >>> recsite_label = "pos_54_ID_000_sec_073_seg_003_x_0.318_somaDist_759.1"
+        >>> _get_recsite_id_from_labels([recsite_label, recsite_label])
+        ["000", "000"]
+
+    Returns:
+        List[str]: List of recsite IDs in the same order as the input recsite labels
+    """
+    pattern = re.compile(r"ID_(?P<number>\d+)")
+    try:
+        ids = [pattern.search(e).group("number") for e in recsite_labels]
+    except AttributeError as e:
+        raise ValueError("Found recsite IDs that don't contain the substring ID_[digits]") from e
+    return ids
