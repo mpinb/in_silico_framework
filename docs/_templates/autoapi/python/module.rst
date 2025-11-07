@@ -38,7 +38,7 @@
    {{ child.short_name }} <{{ child.include_path }}>
    {% endfor %}
 
-.. py:module:: {{ obj.name }}
+.. module:: {{ obj.name }}
 
 {% if obj.docstring %}
 .. autoapi-nested-parse::
@@ -59,6 +59,12 @@
 {%- if public_functions %}
 {{ macros.auto_summary(public_functions, title="Functions") }}
 {%- endif %}
+{%- endif %}
+{%- endblock %}
+
+{% block attributes %}
+{%- if visible_attributes %}
+{{ macros.auto_summary(visible_attributes, title="Attributes") }}
 {%- endif %}
 {%- endblock %}
 

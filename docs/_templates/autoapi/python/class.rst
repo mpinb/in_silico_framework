@@ -78,7 +78,7 @@
 
 .. class signature --------------------------------------------------------------
 
-.. py:class:: {{ obj.id }}{% if init and init.args %}({{ init.args }}){% elif new and new.args %}({{ new.args }}){% endif %}
+.. class:: {{ obj.id }}{% if init and init.args %}({{ init.args }}){% elif new and new.args %}({{ new.args }}){% endif %}
 
    {%- for (args, return_annotation) in obj.overloads %}
       {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
