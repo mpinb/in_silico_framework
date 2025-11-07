@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-'''Create reduced models from synapse activation data.
+r'''Create reduced models from synapse activation data.
 
 This package implements strategies (see below) to create reduced models from synapse activation data.
 It is implemented so that it allows for a "modular" inference: fitting can be performed in parallel on different parts of the data.

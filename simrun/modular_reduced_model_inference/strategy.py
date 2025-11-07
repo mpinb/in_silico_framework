@@ -204,7 +204,7 @@ class _Strategy(object):
         pass
 
     def _get_x0(self):
-        """Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+        r"""Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
         
         This method is overloaded specific to the strategy.
         """
@@ -441,7 +441,7 @@ class Strategy_ISIexponential(_Strategy):
 
 
 class RaisedCosineBasis(object):
-    """Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
+    r"""Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
     
     A raised cosine is defined as:
     
@@ -504,7 +504,7 @@ class RaisedCosineBasis(object):
 
 
     def compute(self, width=80):
-        """Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
+        r"""Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
         
         Each element :math:`f_i` in the vector :math:`\mathbf{f}` is a raised cosine basis function 
         with a different :math:`\phi_i`. The domain of each :math:`f_i` is :math:`[0, width]`.
@@ -532,7 +532,7 @@ class RaisedCosineBasis(object):
 
 
     def get(self):
-        """Get the basis functions :math:`\mathbf{f}`.
+        r"""Get the basis functions :math:`\mathbf{f}`.
         
         Returns:
             list: The list of basis functions."""
@@ -540,7 +540,7 @@ class RaisedCosineBasis(object):
 
 
     def get_superposition(self, x):
-        """Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
+        r"""Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
         
         The superposition of all basis functions, weighed by the input weights,
         is a single filter of length :py:param:`width` that can be used to weigh the input data: synapse activations.
@@ -559,7 +559,7 @@ class RaisedCosineBasis(object):
 
 
     def visualize(self, ax=None, plot_kwargs=None):
-        """Visualize the basis functions :math:`\mathbf{f}`.
+        r"""Visualize the basis functions :math:`\mathbf{f}`.
         
         Args:
             ax (plt.axis): The axis to plot on. Default is ``None``.
@@ -638,7 +638,7 @@ class Strategy_ISIraisedCosine(_Strategy):
         self._get_score = partial(self._get_score_static, self.RaisedCosineBasis_postspike, self.ISI)
 
     def _get_x0(self):
-        """Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+        r"""Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
         
         These weights are optimized by the solver.
         

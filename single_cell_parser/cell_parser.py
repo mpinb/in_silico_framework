@@ -886,12 +886,12 @@ class CellParser(object):
                # seg.c_ar = seg.c_ar*F*F  # quadratic term
 
     def insert_passive_membrane(self, label):
-        """Set up a passive membrane with default values.
+        r"""Set up a passive membrane with default values.
         
         Sets up the cell structure :py:param:`label` with a passive membrane that has the following properties:
         
-        * :math:`R_a = 200 \\Omega \\cdot cm`
-        * :math:`C_m = 0.75 \\mu F/cm^2`
+        * :math:`R_a = 200 \Omega \cdot cm`
+        * :math:`C_m = 0.75 \mu F/cm^2`
         * :math:`g_{pas} = 0.00025 S/cm^2`
         * :math:`E_{pas} = -60 mV`
         """

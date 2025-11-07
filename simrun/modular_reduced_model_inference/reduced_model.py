@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-"""Construct reduced models and run optimization.
+r"""Construct reduced models and run optimization.
 
 This module provides a top-level class to run reduced model inference.
 Each reduced model contains:

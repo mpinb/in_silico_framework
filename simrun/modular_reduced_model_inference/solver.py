@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-"""Optimize a cost function.
+r"""Optimize a cost function.
 
 This module implements solvers that can optimize a given cost function by adapting a vector of free parameters :math:`\mathbf{x}`.
 The cost function is usually defined by a :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
