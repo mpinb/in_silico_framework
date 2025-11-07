@@ -319,7 +319,7 @@ class NTParameterSet(MutableMapping):
 
         Args:
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
-            **kwargs: Additional keyword arguments to merge into this NTParameterSet.
+            kwargs: Additional keyword arguments to merge into this NTParameterSet.
         """
         def deep_merge(d, u):
             for k, v in u.items():

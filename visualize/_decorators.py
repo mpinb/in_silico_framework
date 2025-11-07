@@ -68,8 +68,8 @@ def pr(*args, **kwargs):
     """Prints the types of the passed arguments.
     
     Args:
-        *args: The arguments to print.
-        **kwargs: The keyword arguments to print.
+        args: The arguments to print.
+        kwargs: The keyword arguments to print.
     """
 
     for x in args:

@@ -474,8 +474,8 @@ def cell_to_ipython_animation(*args, **kwargs):
     
     
     Args:
-        *args: arguments for :py:meth:`cell_to_animation`
-        **kwargs: keyword arguments for :py:meth:`cell_to_animation`
+        args: arguments for :py:meth:`cell_to_animation`
+        kwargs: keyword arguments for :py:meth:`cell_to_animation`
         
     Returns:
         IPython.display.HTML: the animation object

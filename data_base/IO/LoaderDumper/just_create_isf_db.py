@@ -41,7 +41,7 @@ class Loader(parent_classes.Loader):
         
         Args:
             savedir (str): Directory where the database is stored.
-            **kwargs: Additional keyword arguments. 
+            kwargs: Additional keyword arguments. 
                 These are passed to the :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
         """
         return ISFDataBase(os.path.join(savedir, 'db'), **kwargs)

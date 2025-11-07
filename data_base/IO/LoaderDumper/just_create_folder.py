@@ -60,7 +60,7 @@ class ManagedFolder(str):
         """Get a subfolder of the current folder
         
         Args:
-            *args: Subfolder names
+            args: Subfolder names
             
         Returns:
             :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: Subfolder

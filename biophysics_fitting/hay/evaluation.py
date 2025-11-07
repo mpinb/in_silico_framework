@@ -1207,7 +1207,7 @@ def get_evaluate_bAP(**kwargs):
     and returns a function that evaluates the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
 
     Returns:
         Callable: function that evaluates the voltage traces.
@@ -1227,7 +1227,7 @@ def get_evaluate_BAC(**kwargs):
     and returns a function that evaluates the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`BAC` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`BAC` object. Defaults to None.
 
     Returns:
         Callable: function that evaluates the voltage traces.
@@ -1247,7 +1247,7 @@ def get_evaluate_StepOne(**kwargs):
     and returns a function that evaluates the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepOne` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepOne` object. Defaults to None.
 
     Returns:
         Callable: function that evaluates the voltage traces.
@@ -1267,7 +1267,7 @@ def get_evaluate_StepTwo(**kwargs):
     and returns a function that evaluates the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepTwo` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepTwo` object. Defaults to None.
 
     Returns:
         Callable: function that evaluates the voltage traces.
@@ -1287,7 +1287,7 @@ def get_evaluate_StepThree(**kwargs):
     and returns a function that evaluates the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepThree` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepThree` object. Defaults to None.
 
     Returns:
         Callable: function that evaluates the voltage traces.
@@ -1307,7 +1307,7 @@ def hay_evaluate_bAP(**kwargs):
     and calls the evaluation on the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
 
     Returns:
         dict: Dictionary with evaluation metrics.
@@ -1323,7 +1323,7 @@ def hay_evaluate_BAC(**kwargs):
     and calls the evaluation on the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`BAC` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`BAC` object. Defaults to None.
 
     Returns:
         dict: Dictionary with evaluation metrics.
@@ -1339,7 +1339,7 @@ def hay_evaluate_StepOne(**kwargs):
     and calls the evaluation function on the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepOne` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepOne` object. Defaults to None.
 
     Returns:
         dict: Dictionary with evaluation metrics.
@@ -1355,7 +1355,7 @@ def hay_evaluate_StepTwo(**kwargs):
     and calls the evaluation function on the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepTwo` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepTwo` object. Defaults to None.
 
     Returns:
         dict: Dictionary with evaluation metrics.
@@ -1371,7 +1371,7 @@ def hay_evaluate_StepThree(**kwargs):
     and calls the evaluation function on the voltage traces.
 
     Args:
-        **kwargs: Additional or overriding keyword arguments for the :py:class:`StepThree` object. Defaults to None.
+        kwargs: Additional or overriding keyword arguments for the :py:class:`StepThree` object. Defaults to None.
 
     Returns:
         dict: Dictionary with evaluation metrics.

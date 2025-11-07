@@ -767,7 +767,7 @@ class ISFDataBase:
         Args:
             key (str): The key to get from the database.
             lock (Lock, optional): If you use file locking, provide the lock that grants access. Defaults to None.
-            **kwargs: Additional arguments to pass to the Loader.
+            kwargs: Additional arguments to pass to the Loader.
 
         Returns:
             object: The object saved under ``db[key]``
@@ -900,7 +900,7 @@ class ISFDataBase:
         Args:
             key (str): The key where the item can be accessed.
             fun (function): The function that calculates a value if the key does not exist.
-            **kwargs: Additional arguments that are passed to :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+            kwargs: Additional arguments that are passed to :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
             
         Attention:
             ``kwargs`` are not passed to the function ``fun``, but to the :py:meth:`set` method.

@@ -226,7 +226,7 @@ def select(df, **kwargs):
     
     Args:
         df (pd.DataFrame): the dataframe
-        **kwargs: the columns and values to be selected
+        kwargs: the columns and values to be selected
     
     Returns:
         pd.DataFrame: the dataframe with the selected rows
@@ -263,7 +263,7 @@ def skit(*funcs, **kwargs):
     
     Args:
         *funcs (function): functions to be supplied with the right subset of kwargs
-        **kwargs: keyword arguments to be split up
+        kwargs: keyword arguments to be split up
     
     See also:
         Adapted from http://stackoverflow.com/a/23430335/5082048
