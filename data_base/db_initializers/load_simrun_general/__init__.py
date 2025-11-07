@@ -43,6 +43,45 @@ the following keys:
     * - ``spike_times``
       - Dask dataframe containing the spike times of the postsynaptic cell for all trials.
 
+      
+If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
+If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
+This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
+Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling 
+:py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
+keys.
+
+Example::
+
+    >>> paramfile_copy_config = {
+    ...     "copy_method": "remount",
+    ...     "neup" : "parameterfiles_folder",
+    ...     "netp" : "parameterfiles_folder",
+    ...     "hoc" : "morphology_folder",
+    ...     "syn" : "parameterfiles_folder",
+    ...     "con" : "parameterfiles_folder",
+    ...     "recsites" : "parameterfiles_folder"
+    ... }
+    >>> simresult_path = '/path/to/raw/simrun/output/folder'
+    >>> db = I.DataBase("db_parsed_data")
+    >>> client = distributed.Client("localhost:8786")
+    >>> I.db_init_simrun_general.init(
+    ... db = db,
+    ... simresult_path = p,
+    ... core = True, 
+    ... repartition = 500,
+    ... parameterfiles = True,
+    ... synapse_activation = True, 
+    ... n_chunks = 5000,
+    ... dendritic_voltage_traces = True,
+    ... spike_times = True, 
+    ... dendritic_spike_times = False,
+    ... rewrite_in_optimized_format = True,
+    ... client = client,
+    ... check_health = True,
+    ... paramfile_copy_config = paramfile_copy_config
+    ... )
+
 After initialization, you can access the data from the data_base in the following manner::
 
     >>> db['synapse_activation']
@@ -122,11 +161,11 @@ def init(
     client=None,
     check_health=False,
     n_chunks=5000,
+    paramfile_copy_config=None,
     # deprecated args;
     voltage_traces=None,
     burst_times=None,
     dumper=None,
-    paramfile_copy_config=None
 ):
     """Initialize a database with simulation data.
 
@@ -187,10 +226,14 @@ def init(
             Scheduler to use for parallellized parsing of dask dataframes.
             can e.g. be simply the ``distributed.Client.get`` method.
             Default is ``None``.
+
             
     Note:
         Note the difference between *amount* of partitions (:param:`n_chunks`) and target partition *size* (:param:`repartition`)
 
+    .. deprecated:: 0.2.0
+        The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
+        
     .. versionadded:: 0.5.0
        The keyword argument :param:`repartition` now accepts integers in addition to booleans.
        Integers reflect the target size of each voltage trace dataframe partition. Booleans reflect either

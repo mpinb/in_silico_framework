@@ -16,7 +16,7 @@ on:
 
 jobs:
   test:
-    name: Test pixi MacOS
+    name: Test MacOS
     runs-on: macos-latest
     steps:
       - name: Checkout

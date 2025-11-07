@@ -247,40 +247,39 @@ def _build_dendritic_voltage_traces(db, repartition=None):
 
     # Construct dendritic filelist from existing filelist, as built by _build_core
     # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
-    suffix = "*vm_dend_traces*"
-    path_globs = [
-        os.path.join(
-            db['simresult_path'],
-            os.path.dirname(e),
-            suffix)
-        for e in db['filelist']
-    ]
-    filelist = [
-        path_glob_match 
-        for path_glob in path_globs 
-        for path_glob_match in glob.glob(path_glob)
+    # Careful: keep the file order in sync with divisions - bjorge
+    filelist = []
+    suffix = "vm_dend_traces"
+    for vt_file in db['filelist']:
+        folder = os.path.dirname(vt_file)
+        matches = glob.glob(os.path.join(db['simresult_path'], folder, f"*{suffix}*"))
+        matches = sorted(matches)
+        filelist.extend(matches)
+
+    relative_filelist = [
+        os.path.relpath(p, db['simresult_path'])
+        for p in filelist
     ]
 
     recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
     if USE_RECSITE_SHORT_NAME: recsite_labels = _get_recsite_ids_from_recsite_labels(recsite_labels)
-    
+
     logger.info("Loading dendritic voltage traces")
-    divisions = db["voltage_traces"].divisions 
+    divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
     dend_vt_per_recsite_label = load_dendritic_voltage_traces(
         db, 
-        filelist, 
+        relative_filelist, 
         recsite_labels, 
         repartition=repartition, 
         divisions=divisions)
     if not "dendritic_recordings" in list(db.keys()): 
         db.create_sub_db("dendritic_recordings")
+    # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
     for recSiteLabel in dend_vt_per_recsite_label:
         db["dendritic_recordings"].set(
             recSiteLabel, 
             dend_vt_per_recsite_label[recSiteLabel], 
             dumper=DEFAULT_DUMPER)
-        
-    # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
 
 
 def _build_param_files(db, paramfile_copy_config=None, client=None):
@@ -330,7 +329,7 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     db.set("parameterfiles", param_file_hash_df, dumper=pandas_to_msgpack)
 
     # Copy and parameterfiles and adapt internal references
-    fn_map = parallel_resolve_and_copy_paramfiles_to_db(
+    source_to_target_fn_maps = parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_hashmap_df=param_file_hash_df,
         db=db,
         paramfile_target_dirs=paramfile_target_dirs,
@@ -339,12 +338,10 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     )
 
     logger.info("Updating parameter file locations under `parameterfiles` key")
-    # Dev note: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
-    # Dev note: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
-    neup_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['neup'].items()}
-    netp_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['netp'].items()}
-    param_file_hash_df['path_neuron'] = param_file_hash_df['hash_neuron'].apply(neup_hash_map.get).apply(create_reldb_path)
-    param_file_hash_df['path_network'] = param_file_hash_df['hash_network'].apply(netp_hash_map.get).apply(create_reldb_path)
+    # Bjorge: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
+    # Bjorge: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
+    param_file_hash_df['path_neuron'] = param_file_hash_df['path_neuron'].apply(source_to_target_fn_maps['neup'].get).apply(create_reldb_path)
+    param_file_hash_df['path_network'] = param_file_hash_df['path_network'].apply(source_to_target_fn_maps['netp'].get).apply(create_reldb_path)
     db.set("parameterfiles", param_file_hash_df)
 
 
