@@ -142,7 +142,15 @@ def calculate_vdensity_array(
         return calculate_vdensity_array_dask(v=v, bin_size=bin_size, ymin=ymin, ymax=ymax, **kwargs)
 
 
-def calculate_vdensity_array_pixelObject(*args, **kwargs):
+def calculate_vdensity_array_pixelObject(
+    v,
+    bin_size=0.05,
+    ymin=-100,
+    ymax=50,
+    xmin=None,
+    xmax=None,
+    **kwargs
+):
     '''Calculate the voltage density array as a PixelObject.
     
     This method is identical to :py:meth:`~data_base.analyze.voltage_binning.calculate_vdensity_array`,
@@ -160,6 +168,6 @@ def calculate_vdensity_array_pixelObject(*args, **kwargs):
     Returns:
         :py:class:`~visualize._figure_array_converter.PixelObject`: a PixelObject with the voltage density array
     '''
-    array = calculate_vdensity_array(*args, **kwargs)
-    extent = (kwargs['xmin'], kwargs['xmax'], kwargs['ymin'], kwargs['ymax'])
+    array = calculate_vdensity_array(v=v, bin_size=bin_size, ymin=ymin, ymax=ymax, **kwargs)
+    extent = (xmin, xmax, ymin, ymax)
     return PixelObject(extent, array=array)
