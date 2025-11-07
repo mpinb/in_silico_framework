@@ -281,13 +281,11 @@ def run_new_simulations(
         cellParamName (str): Path to a :ref:`cell_parameters_format` file.
         evokedUpParamName (str): Path to a :ref:`network_parameters_format` file.
         dirPrefix (str): Prefix of the output directory. The final directory name will be ``dirPrefix/results/YYYYMMDD-HHMM_UID.``
-        seed (int): Random seed for the simulation.
         nSweeps (int): Number of simulations to run per process with these parameters.
             Trial-to-trial variability is introduced by the random seed in terms of
             different network activity and connectivity realizations (see :meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`).
         nprocs (int): Number of parallel processes to run. Each process runs :attr:`nSweeps` simulations.
         tStop (float): Duration of each simulation in ms.
-        tStim (float): Time in ms at which the in vivo evoked synaptic input should start.
         cell_generator (callable, optional): Function to generate the cell. If provided, :attr:`cellParamName` is ignored.
         tar (bool): If True, the output directory is compressed to a tarball after the simulation is finished.
 
