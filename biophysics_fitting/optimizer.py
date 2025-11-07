@@ -389,8 +389,11 @@ def eaAlphaMuPlusLambdaCheckpoint(
         stats (deap.tools.Statistics): generation of statistics
         halloffame (deap.tools.HallOfFame): hall of fame
         cp_frequency (int): generations between checkpoints
-        cp_filename (DataBase or None): db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+        db_run (DataBase or None): db where the checkpoint is stored in [generation]_checkpoint.
         continue_cp (bool): whether to continue
+
+    .. deprecated 0.5.0::
+       The argument ``cp_filename`` is deprecated. It has now been changed to ``db_run`` and ``continue_cp``.
     """
     # --- added by arco
     if db_run is not None:
