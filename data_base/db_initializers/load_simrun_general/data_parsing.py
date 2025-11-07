@@ -108,7 +108,7 @@ def read_voltage_traces_from_csv(prefix, fname):
     Attention:
         This function assumes that the data in :py:param:prefix: is complete, e.g. no missing files.
         It infers the simulation trial index from the filename of the synapse activation files.
-        :py:fun:`_check_if_results_are_corrupted` checks if this is the case.
+        :py:meth:`_check_if_results_are_corrupted` checks if this is the case.
         This is automatically done in the :py:mod:`data_base.db_initializers.load_simrun_general` module.
         
     Args:
@@ -302,9 +302,10 @@ def load_dendritic_voltage_traces(
     Args:
         db (:py:class:`~data_base.DataBase`):
             The target database that should contain the parsed simulation results.
-        suffix_key_dict (dict):
-            Dictionary containing the suffixes of the dendritic voltage trace files.
-            The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
+        filelist (List[str]):
+            List of paths to dendritic :ref:`voltage_traces_format` files, relative to the simulation results directory
+        recsite_labels (List[str]):
+            List of recording site labels, ordered the same way as :py:attr:`filelist`. Used to merge voltage traces fromt he same recording site together.
         repartition (bool):
             If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 

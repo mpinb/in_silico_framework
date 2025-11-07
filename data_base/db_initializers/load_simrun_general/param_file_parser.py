@@ -106,7 +106,7 @@ def _get_syn_con_fns_from_netp(netp_fn):
     """Get the unique synapse and connection files from a list of network parameter files.
 
     Args:
-        netp_fn (str): Path to the network parameter file.
+        netp_fn (str): Path to the :ref:`network_params_format` file.
 
     Returns:
         tuple: Tuple containing the unique synapse and connection files.
@@ -127,7 +127,7 @@ def _get_hoc_fns_from_neup(neup_fn):
     """Get the unique hoc files from a list of neuron parameter files.
 
     Args:
-        neup_fns (str): Path to the neuron parameter file.
+        neup_fn (str): Path to the neuron parameter file.
 
     Returns:
         list: List containing the unique hoc files.
@@ -143,7 +143,7 @@ def _get_recsite_fns_from_neup(neup_fn):
     """Get the unique recsite files from a list of neuron parameter files.
 
     Args:
-        neup_fns (str): Path to the neuron parameter file.
+        neup_fn (str): Path to the neuron parameter file.
 
     Returns:
         list: List containing the unique recsite files.
@@ -161,7 +161,7 @@ def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
     in a :ref:`network_parameters_format` file and copy to a new location.
 
     Args:
-        netp_fn (str): Path to a :ref:`cell_parameters_format` file.
+        neup_fn (str): Path to a :ref:`cell_parameters_format` file.
         scattered_fn_map (:py:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
 
@@ -244,7 +244,7 @@ def _resolve_and_copy_con(con_fn, scattered_fn_map):
     copy a single :ref:`con_file_format` file to a new location.
 
     Args:
-        syn_fn (str): Path to the synapse distribution file.
+        con_fn (str): Path to the synapse distribution file.
         scattered_fn_map (:py:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn" and "con".
 
@@ -276,10 +276,11 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
-        dir_name (str): 
+        db_target_dir (str): 
             The directory relative to the database where the files of one type should be copied.
             These directories will be a :py:class:`data_base.isf_data_base.ManagedFolder`
         filelist (List[str]): The original file names.
+        copy_method (str): ``"remount"`` to preserve relative directory structure or ``"hash_rename"`` to rename to a hash and copy to the same location.
         client (:py:class:`distributed.client.Client`):
             A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``
 
@@ -404,7 +405,7 @@ def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_met
     The filetype keys have `source -> target` mappings for all files of that filetype.
 
     Args:
-        source_file_list (Dict[str, List[str]]):
+        source_files_dict (Dict[str, List[str]]):
             A dictionary mapping file types (str) to their source filepaths.
         db (:py:class:`~data_base.isf_data_base.DataBase`):
             The target database where files should be copied to. 

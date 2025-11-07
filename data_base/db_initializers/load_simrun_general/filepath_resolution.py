@@ -76,8 +76,8 @@ def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
     The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
 
     Args:
-        syn_fn (str): Path to the synapse distribution file.
-        new_hoc (str): Path to the new hoc file.
+        syn_content (List[str]): Content of the :ref:`syn_file_format` file as a list of strings, each element representing a line.
+        hoc_fn_map (str): Mapping from old to new :ref:`hoc_file_format` files.
     """
 
     def find_hoc_file(match):

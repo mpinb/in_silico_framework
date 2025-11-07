@@ -363,7 +363,7 @@ def _get_rec_site_label_fn_map(filelist):
     This is used for recording the membrane voltage at non-somatic locations.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        filelist (List[str]): List of dendritic :ref:`voltage_traces_format` files. May be relative to the simulation results directory or abslute paths.
 
     Returns:
         dict: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.

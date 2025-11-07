@@ -17,7 +17,7 @@ def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     If one wants to have one simulation directory per partition, this is a convenient way to infer partitions.
 
     Args:
-        metadata (pd.DataFrame): Metadata dataframe containing the simulation trial indices.
+        db (:class:`data_base.DataBase`): A :class:`data_base.DataBase` containing the ``"metadata"`` key.
         repartition (bool|int): 
             If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
             If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
