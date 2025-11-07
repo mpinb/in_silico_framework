@@ -1301,10 +1301,6 @@ class NetworkMapper:
 
         Args:
             synWeightName (str): Name of the file containing the synapse weights. Default: None.
-            full_network (bool): 
-                If True, all synapses are created, even if they were not active. 
-                If False, only recreates the synapses that were active, and re-assigns their IDs to be sequential.
-                Default: False.
         '''
         logger.info('***************************')
         logger.info('creating saved network')
