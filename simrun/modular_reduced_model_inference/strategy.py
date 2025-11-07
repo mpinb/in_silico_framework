@@ -490,7 +490,7 @@ class RaisedCosineBasis(object):
             c (int): The offset of the raised cosine. Default is :math:`1`.
             phis (array): The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
             width (int): The width of the basis functions. Default is :math:`80`.
-            reversed_ (bool): Whether to reverse the basis functions. Default is ``False``.
+            reversed\_ (bool): Whether to reverse the basis functions. Default is ``False``.
             backend (module): The backend to use (cupy or numpy). Default is ``numpy``.
         """
         self.a = a
@@ -708,7 +708,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
     '''
 
     def __init__(self, name, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal):
-        """
+        r"""
         Args:
             name (str): The name of the strategy.
             RaisedCosineBasis_spatial (RaisedCosineBasis): The spatial basis functions :math:`\mathbf{g}(z)`.
@@ -785,7 +785,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
 
     @staticmethod
     def _convert_x_static(groups, len_z, x):
-        """Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
+        r"""Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
         
         Useful for passing the learnable weights to the optimizer as a one-dimensional array,
         but keeping track of the basis vectors for each group and dimension.

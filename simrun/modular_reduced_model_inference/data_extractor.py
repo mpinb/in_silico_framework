@@ -104,7 +104,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         return key[-1].split('__').index('binned_somadist')
 
     def get_spatial_binsize(self):
-        '''Get the spatial binsize
+        r'''Get the spatial binsize
         
         Fetches the spatial bin size from a grouped synapse activation dataframe based on the database key.
         
