@@ -47,7 +47,7 @@ class Simulator_Setup:
     and/or stimulus protocol (e.g. recording sites). Such fixed parameters can be defined by adding
     :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :py:param:`param_modify_funs`. 
     A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace 
-    of the apical dendrite. Make sure that the :py:atrr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the 
+    of the apical dendrite. Make sure that the :py:attr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the 
     parameter :py:param:`recSite` and sets up the stimulus accordingly (see :py:class:`~biophysics_fitting.simulator.Simulator`).
     
     Example::
@@ -151,7 +151,7 @@ class Simulator_Setup:
         - The first element of the names of the :py:attr:`stim_setup_funs`, :py:attr:`stim_run_funs` and :py:attr:`stim_response_measure_funs` are the same.
           These names are used to group the functions that belong to the same stimulus.
         - The number of :py:attr:`stim_setup_funs`, :py:attr:`stim_run_funs` and :py:attr:`stim_response_measure_funs` are the same.
-        - Calls each additional check function in :py:paattrram:`check_funs`.
+        - Calls each additional check function in :py:attr:`check_funs`.
         """
         if self.cell_param_generator is None:
             raise ValueError('cell_param_generator must be set')
