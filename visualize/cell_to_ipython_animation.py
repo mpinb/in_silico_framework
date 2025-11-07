@@ -120,7 +120,7 @@ def display_animation(
         interval (int): time interval between frames
         style (bool): whether to use the style specified in the system default html_template.
         animID: unique integer to identify the animation in the javascript environment of IPython
-        embedde  (bool): whether to embed the images as base64 in the html file.
+        embedded (bool): whether to embed the images as base64 in the html file.
     
     Attention: 
         The paths need to be relative to the location of the ipynb / html file, since
@@ -164,10 +164,10 @@ def display_animation(
 
 
 def find_closest_index(list_, value):
-    '''Finds the index of the value which is closest to the value specified in the arguments
+    r'''Finds the index of the value which is closest to the value specified in the arguments
     
     Args:
-        list_ (list): list of values
+        list\_ (list): list of values
         value (float): value to find closest index for
         
     Returns:
