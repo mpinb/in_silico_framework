@@ -92,8 +92,9 @@ class PSPs:
         Args:
             neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
             confile (str): Path to a :ref:`con_file_format` file.
-            gExRange (list): 
-                List of synaptic strength values to simulate (in :math:`\mu S`). 
+            gExRange (List[float]): 
+                List of synaptic strength scaling factors to simulate. 
+                These will be multiplied with the synaptic strengths in the :ref:`network_params_format`.
                 The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
             AMPA_component (float): 
             NMDA_component (float):

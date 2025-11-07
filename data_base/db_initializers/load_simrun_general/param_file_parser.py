@@ -106,7 +106,7 @@ def _get_syn_con_fns_from_netp(netp_fn):
     """Get the unique synapse and connection files from a list of network parameter files.
 
     Args:
-        netp_fn (str): Path to the :ref:`network_params_format` file.
+        netp_fn (str): Path to the :ref:`network_parameters_format` file.
 
     Returns:
         tuple: Tuple containing the unique synapse and connection files.

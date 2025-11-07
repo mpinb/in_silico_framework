@@ -119,7 +119,7 @@ def _read_object_meta_json(meta_fn):
     """Get the meta of a saved database key in JSON.
     
     Args:
-        savedir (str): The directory where the meta file is stored.
+        meta_fn (str): The path of the meta file
         
     Returns:
         pd.DataFrame: The metadata of the saved object.

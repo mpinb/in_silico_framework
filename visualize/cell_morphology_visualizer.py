@@ -884,7 +884,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         Args:
             color (str | [[float]]): If you want some other color overlayed on the cell morphology. 
               Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
-            legend (bool): whether the voltage legend should appear in the plot
+            show_legend (bool): whether the voltage legend should appear in the plot
             show_synapses (bool): whether the synapse activations should be shown
             time_point (int|float): time point from which we want to gather the voltage/synapses. Defaults to 0
             save (bool): path where the plot will be saved. If it's empty it will not be saved (Default)

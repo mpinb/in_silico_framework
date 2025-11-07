@@ -339,18 +339,14 @@ def dump(
     This is only still available for testing purposes in support of backwards compatibility.
 
     Args:
-        obj (_type_): The object to be saved
+        obj (any): The object to be saved
         savedir (str or Path): Output directory to save the file in.
         repartition (bool, optional): Whether or not to repartition.. Defaults to False.
-        get (_type_, optional): A getter method, e.g. dask.get. Defaults to None.
         categorize (bool, optional): Defaults to True.
         client (distributed.Client, optional): distributed.Client for parallellization. Defaults to None.
 
-    Raises:
-        RuntimeError: _description_
-
     .. deprecated 0.5.0::
-       the ``get`` argument is deprecated. ``dump()`` now expects a ``client`` instead.
+       the ``get`` and ``scheduler`` arguments are deprecated. ``dump()`` now expects a ``client`` instead.
     """
     import os
     if client is None:
