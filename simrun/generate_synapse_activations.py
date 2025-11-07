@@ -192,7 +192,7 @@ def generate_synapse_activations(
     
     For each process, a new seed is generated using the seed generator.
     
-    Parameters:
+    Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
             containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
@@ -204,9 +204,6 @@ def generate_synapse_activations(
             different network activity and connectivity realizations (see :py:meth:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
         nprocs (int): Number of parallel processes to run. Each process runs :py:param:`nSweeps` simulations.
         tStop: time in ms at which the synaptic input should stop.
-        
-    Args:
-        cellParamName (str): Path to cell parameter file. 
         
     Returns: 
         dask.delayed: Can be computed with arbitrary scheduler. 
