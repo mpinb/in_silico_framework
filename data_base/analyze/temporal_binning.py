@@ -30,7 +30,7 @@ import compatibility
 
 def temporal_binning_pd(
     df,
-    bin_size=None,
+    bin_size=1,
     min_time=None,
     max_time=None,
     normalize=True,
@@ -66,8 +66,6 @@ def temporal_binning_pd(
             min_time = min(timelist)
         if max_time is None:
             max_time = max(timelist)
-        if bin_size is None:
-            bin_size = 1
         bin_borders = np.arange(min_time, max_time + bin_size, bin_size)
     else:
         assert bin_size is None
@@ -134,19 +132,25 @@ def temporal_binning_dask(
     return t_bins, out
 
 
-def universal(*args, **kwargs):
+def universal(
+        df, 
+        bin_size=1, 
+        min_time=None, 
+        max_time=None, 
+        normalize=False, 
+        **kwargs
+):
     '''Bin spike times for dask or pandas dataframes.
     
     Infers the dataframe type and calls the appropriate binning function.
     
     Args:
-        df | ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        df (:class:`pd.dataframe.DataFrame` | :class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
         bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
-        rate (bool, optional): If True, normalize the output to the bin size. Only valid if :py:param:`df` is a pandas DataFrame.
-        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation. Only valid if :py:param:`ddf` is a dask DataFrame.
+        kwargs (dict): Additional keyword arguments for pandas or dask, depending on the dataframe type. Refer to the corresponding methods below to check which additional keyword arguments these functions expect
     
     See also:
         :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
@@ -155,10 +159,10 @@ def universal(*args, **kwargs):
     Returns:
         tuple: Bin borders and bin frequencies.
     '''
-    if isinstance(args[0], pd.DataFrame):
-        return temporal_binning_pd(*args, **kwargs)
-    elif isinstance(args[0], dd.DataFrame):
-        return temporal_binning_dask(*args, **kwargs)
+    if isinstance(df, pd.DataFrame):
+        return temporal_binning_pd(df=df, bin_size=bin_size, min_time=min_time, max_time=max_time, normalize=normalize, **kwargs)
+    elif isinstance(df, dd.DataFrame):
+        return temporal_binning_dask(ddf=df, bin_size=bin_size, min_time=min_time, max_time=max_time, normalize=normalize, **kwargs)
     else:
         raise ValueError(
             "Expected pd.DataFrame or dask.dataframe.DataFrame, got %s" %
