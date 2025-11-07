@@ -358,8 +358,6 @@ class CMVDataParser:
         Args:
             data_per_section (list): List of lists of data per section. Each element of the list is a list point data for that section. Shape: (n_sections, n_points_in_section)
             
-        Args:
-            list: List of data per point. Shape: (n_points,)
         """
         d_per_point = data_per_section[0]
         for data in data_per_section[1:]:
@@ -800,11 +798,14 @@ class CellMorphologyVisualizer(CMVDataParser):
         The parameters :param self.t_start:, :param self.t_stop: and :param self.t_step: will define the :param self.times_to_show: attribute
 
         Args:
-            - t_start: start time point of our time series visualization
-            - t_stop: last time point of our time series visualization
-            - t_step: time between the different time points of our visualization
-            - path: path were the images should be stored
-            - client: dask client for parallelization
+            path (str): path were the images should be stored
+            overwrite_frames (bool): Whether to overwrite previously generated frames. Default is ``False``.
+            color (str): Color of the morphology.
+            show_synapses (bool): whether to visualize synaptic activations. Default is ``False``.
+            show_legend (bool): Whether to show a legend containing voltage color and synapses. defaultis ``False``.
+            client (:class:`dask.distributed.Client`): dask client for parallelization
+            highlight_section (int): Index of a section to highlight. Default is ``None``.
+            highlight_x (float): Relative position along a section to highlight. Default is ``None``.
         '''
         if os.path.exists(path):
             if os.listdir(path) and not overwrite_frames:
@@ -1019,7 +1020,6 @@ class CellMorphologyVisualizer(CMVDataParser):
             t_step (float): time between the different time points of our visualization
             highlight_section (int): section number of the section that should be highlighted with an arrow.
             highlight_x (float): x coordinate of the section that should be highlighted with an arrow.
-            framerate (int): frames per second
             quality (int): quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :py:param:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
             codec (str): codec to use for the video. Default is mpeg4.
             tpf (float): duration of each frame in ms
@@ -1323,8 +1323,6 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
 
         Args:
             color (str, optional): Scalar data to overlay on interactive plot. Defaults to None.
-            background_color (str, optional): Background color of plot. Defaults to "rgb(180,180,180)".
-            renderer (str, optional): Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected".
 
         Returns:
             ipywidgets.VBox object: an interactive render of the cell.
