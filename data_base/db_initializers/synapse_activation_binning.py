@@ -144,8 +144,6 @@ def synapse_activation_postprocess_pandas(
           - ``binned_somadist``: synapse counts for all 50 microns
           - any column in the specified dataframe.
         
-        db (DataBase): if specified, the result will be computed immediately and saved in the database immediately.
-        get (dask scheduler): Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
         prefun (callable):
             A function to preprocess the synapse activation dataframe before binning.
             The function should take a pandas dataframe and return a pandas dataframe.

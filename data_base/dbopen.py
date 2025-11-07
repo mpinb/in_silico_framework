@@ -82,7 +82,7 @@ def resolve_reldb_path(path, db_basedir=None):
         the parent database.
     Args:
         path (str): The relative path of the form ``reldb://...``.
-        db (:py:class:`~data_base.DataBase`): The database.
+        db_basedir (:py:class:`~data_base.DataBase`): The directory containing the database.
         
     Returns:
         str: The resolved path.

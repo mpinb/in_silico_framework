@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Save and load dask dataframes to msgpack with categorical columns.
+r"""Save and load dask dataframes to msgpack with categorical columns.
 
 This dumper is designed for dataframes with the following properties:
 
