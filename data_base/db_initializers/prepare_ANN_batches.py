@@ -338,14 +338,14 @@ def augment_synapse_activation_df_with_branch_bin(
     synaptic_weight_dict=None,
     excitatory_celltypes=None
     ):
-    """Augment a :ref:`syn_activation_format` dataframe with bin information.
+    r"""Augment a :ref:`syn_activation_format` dataframe with bin information.
     
     The :ref:`syn_activation_format` dataframe contains info of where along a dendrite some synapse impinged.
     This method infers to which bin that location belongs and adds it as an additional column.
     This information is represented in a specific format: section_id/bin_within_section.
 
     Args:
-        sa_ (pd.DataFrame): 
+        sa\_ (pd.DataFrame): 
             The dataframe of synaptic activity
         section_distances_df (pd.DataFrame): 
             DataFrame representing each section's spatial bins and binsizes. Defaults to None.
