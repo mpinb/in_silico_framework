@@ -71,6 +71,7 @@ extensions = [
 graphviz_output_format = "svg"
 
 rst_prolog = """
+.. role:: summarylabel
 .. |home-icon-link| raw:: html
 
    <a href="https://mpinb.github.io/in_silico_framework" class="nav-link" aria-label="Home">
