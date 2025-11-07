@@ -200,9 +200,6 @@ class InterProcessLockNoWritePermission:
 
     If the user has write permissions to the path, then locking is necessary. Otherwise not, and lock acquire returns True without a lock
 
-    Args:
-        path (str): path to check.
-
     See also:
     
         `Fasteners InterProcessLock <https://fasteners.readthedocs.io/en/latest/guide/inter_process/>`_
