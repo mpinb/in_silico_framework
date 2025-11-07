@@ -35,7 +35,8 @@ def calculate_vdensity_array_pd(
     ymin=-100,
     ymax=50,
     xmin=None,
-    xmax=None):
+    xmax=None
+):
     '''Bin a :ref:`voltage_traces_df_format` in timebins across trials.
     
     Args:
@@ -86,7 +87,8 @@ def calculate_vdensity_array_dask(
     ymin=-100,
     ymax=50,
     xmin=None,
-    xmax=None):
+    xmax=None
+):
     '''Bin a :ref:`voltage_traces_df_format` in timebins across trials.
     
     Args:
@@ -94,8 +96,6 @@ def calculate_vdensity_array_dask(
         bin_size (float): the size of the bins
         ymin (float): the minimum voltage value
         ymax (float): the maximum voltage value
-        xmin (float): the minimum time value (unused)
-        xmax (float): the maximum time value (unused)
     
     Returns:
         :py:class:`dask.dataframe.DataFrame`: the binned voltage traces dataframe
@@ -117,7 +117,13 @@ def calculate_vdensity_array_dask(
     return out
 
 
-def calculate_vdensity_array(*args, **kwargs):
+def calculate_vdensity_array(
+    v,
+    bin_size=0.05,
+    ymin=-100,
+    ymax=50,
+    **kwargs
+):
     """Calculate the voltage density array.
     
     A voltage density is the time-binned voltage across trials.
@@ -129,13 +135,11 @@ def calculate_vdensity_array(*args, **kwargs):
         bin_size (float): the size of the bins
         ymin (float): the minimum voltage value
         ymax (float): the maximum voltage value
-        xmin (float): the minimum time value (unused)
-        xmax (float): the maximum time value (unused)
     """
     if isinstance(args[0], pd.DataFrame):
-        return calculate_vdensity_array_pd(*args, **kwargs)
+        return calculate_vdensity_array_pd(v=v, bin_size=bin_size, ymin=ymin, ymax=ymax, **kwargs)
     elif isinstance(args[0], dd.DataFrame):
-        return calculate_vdensity_array_dask(*args, **kwargs)
+        return calculate_vdensity_array_dask(v=v, bin_size=bin_size, ymin=ymin, ymax=ymax, **kwargs)
 
 
 def calculate_vdensity_array_pixelObject(*args, **kwargs):
