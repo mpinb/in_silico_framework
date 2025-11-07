@@ -195,10 +195,17 @@ class PSP_with_current_injection:
         This method initializes a PSPs object with the given parameters to simulate excitatory or inhibitory postsynaptic potentials.
         
         Args:
-            mode (str): Mode of the simulation. Options:
+            mode (str): 
+                Mode of the simulation. Options:
             
-            - ``'synapses'`` to activate individual synapses (default)
-            - ``'cells'`` to activate individual cells
+                - ``'synapses'`` to activate individual synapses (default)
+                - ``'cells'`` to activate individual cells
+
+            exc_inh (str): ``"exc"`` for excitatory, ``"inh"`` for inhibitory.
+            gExRange (List[float]): 
+                List of synaptic strength scaling factors to simulate. 
+                These will be multiplied with the synaptic strengths in the :ref:`network_params_format`.
+                The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
             
         Returns:
             PSPs: Object to simulate PSPs
@@ -216,18 +223,24 @@ class PSP_with_current_injection:
     def get_psp_simulator_exc_and_inh_combined(
         self,
         gExRange=[1.0],
-        mode='synapses'):
+        mode='synapses'
+    ):
         '''Set up and combine excitatory and inhibitory PSP simulators.
         
         This method initializes two PSPs objects, one for excitatory and one for inhibitory postsynaptic potentials, 
         and combines them into a single PSPs object.
 
         Args:
-            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
-            mode (str): Mode of the simulation. Options:
+            mode (str): 
+                Mode of the simulation. Options:
             
-            - ``'synapses'`` to activate individual synapses (default)
-            - ``'cells'`` to activate individual cells
+                - ``'synapses'`` to activate individual synapses (default)
+                - ``'cells'`` to activate individual cells
+
+            gExRange (List[float]): 
+                List of synaptic strength scaling factors to simulate. 
+                These will be multiplied with the synaptic strengths in the :ref:`network_params_format`.
+                The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
             
         Returns:
             PSPs: Combined PSPs object with both excitatory and inhibitory components.
