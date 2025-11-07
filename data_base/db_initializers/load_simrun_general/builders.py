@@ -98,16 +98,16 @@ def _build_core(
           - Amount of spikes
         * - APheight
           - AP height
-    * - ``voltage traces``
-      - Somatic voltage traces
-    * - ``metadata``
-      - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
-    * - ``sim_trial_index``
-      - Simulation trial indices containing unique identifiers, and run numbers
-    * - ``simresult_path``
-      - top-level directory from where all simulation results were fetched
-    * - ``filelist``
-      - a list of voltage trace files, relative to the ``simresult_path``
+        * - ``voltage traces``
+          - Somatic voltage traces
+        * - ``metadata``
+          - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
+        * - ``sim_trial_index``
+          - Simulation trial indices containing unique identifiers, and run numbers
+        * - ``simresult_path``
+          - top-level directory from where all simulation results were fetched
+        * - ``filelist``
+          - a list of voltage trace files, relative to the ``simresult_path``
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
