@@ -94,7 +94,7 @@ class PSPs:
             confile (str): Path to a :ref:`con_file_format` file.
             gExRange (List[float]): 
                 List of synaptic strength scaling factors to simulate. 
-                These will be multiplied with the synaptic strengths in the :ref:`network_params_format`.
+                These will be multiplied with the synaptic strengths in the :ref:`network_parameters_format`.
                 The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
             AMPA_component (float): 
             NMDA_component (float):
