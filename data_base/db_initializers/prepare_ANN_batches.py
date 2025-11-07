@@ -531,7 +531,9 @@ def compute_ISI_array(st, min_time, max_time, fillna=1000, step=1):
     
     Args:
         st (pd.DataFrame | pd.Series): pandas DataFrame or Series of spike times
-        timepoint (int): Time point in ms
+        min_time (int | float): Start time
+        max_time (int | float): End time
+        step (int | float): Temporal resolution of ISI calculation.
         fillna (int, optional): Fill with NaN until the array has this length. Defaults to None.
         
     Returns:
@@ -676,8 +678,9 @@ def get_synapse_activation_array_weighted(
     min_time=0,
     max_time=600,
     bin_size=1,
-    use_weights=False):
-    """Create a 4D array of synapse activation times.
+    use_weights=False
+):
+    r"""Create a 4D array of synapse activation times.
     
     Create a 4D array of synaptic activation, where the axes are:
     
@@ -689,7 +692,7 @@ def get_synapse_activation_array_weighted(
     The array is of shape ``(len(selected_stis), 2, len(spatial_bin_names), (max_time - min_time)//bin_size)``.
     
     Args:
-        sa_ (pd.DataFrame): Augmented synapse activation dataframe
+        sa\_ (pd.DataFrame): Augmented synapse activation dataframe
         selected_stis (list, optional): List of selected spike times. Defaults to None.
         spatial_bin_names (list, optional): List of spatial bin names. Defaults to None.
         min_time (int, optional): Min time in ms. Defaults to 0.
@@ -736,10 +739,10 @@ def save_SA_batch(
     max_time=600,
     bin_size=1,
     synaptic_weight_dict=None):
-    """Save a batch of synapse activation times to a file.
+    r"""Save a batch of synapse activation times to a file.
     
     Args:
-        sa_ (pd.DataFrame): Augmented synapse activation dataframe
+        sa\_ (pd.DataFrame): Augmented synapse activation dataframe
         selected_stis (list): List of selected spike times
         batch_id (int): Batch id
         outdir (str): Output directory
