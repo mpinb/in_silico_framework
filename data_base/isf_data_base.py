@@ -166,11 +166,11 @@ def make_all_str(dict_):
 
 
 def get_dumper_from_folder(folder, return_ = 'module'):
-    """Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
+    r"""Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
 
     Args:
         folder (str): The folder in which the data is stored.
-        return_ (str, optional): Whether to return the dumper as a string or the actual module. Defaults to 'module'.
+        return\_ (str, optional): Whether to return the dumper as a string or the actual module. Defaults to 'module'.
 
     Returns:
         str | module: The dumper that was used to save the data in that folder/key.
@@ -455,7 +455,7 @@ class ISFDataBase:
         For this reason, ``key`` is not a pathlib.Path object in this method, but a string or tuple.
 
         Args:
-            key (str|tuple): The key
+            key_str_tuple (str|tuple): The key, either as a string or a tuple
 
         Raises:
             ValueError: If the key is over 100 characters long.
@@ -713,8 +713,6 @@ class ISFDataBase:
         
         Args:
             key (str|tuple): The key of the sub_db
-            register (str, optional): ? TODO. Defaults to 'as_parent'.
-            raise\_ (bool, optional): Whether to raise an error if the sub_db already exists. Defaults to True.
             kwargs (dict): 
                 overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
                 Additional kwargs are passed to the dumper.
@@ -722,6 +720,7 @@ class ISFDataBase:
         Returns:
             ISFDataBase: The newly created sub_db
         '''
+        # TODO: What does "register = as_parent" do?
         self._check_key_format(key)
         if isinstance(key, str):
             key = key,  # convert to tuple

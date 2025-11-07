@@ -262,7 +262,7 @@ def skit(*funcs, **kwargs):
     '''Splits kwargs up to supply different functions with the right subset.
     
     Args:
-        *funcs (function): functions to be supplied with the right subset of kwargs
+        funcs (List[callable]): functions to be supplied with the right subset of kwargs
         kwargs: keyword arguments to be split up
     
     See also:
@@ -278,10 +278,10 @@ def skit(*funcs, **kwargs):
     return tuple(out)
 
 def unique(list_):
-    """Get the unique elements of a list
+    r"""Get the unique elements of a list
     
     Args:
-        list_ (list): the list
+        list\_ (list): the list
         
     Returns:
         list: the unique elements of the list
