@@ -29,7 +29,7 @@ this module provides convenience methods to visualize the voltage traces of all 
 
 
 from IPython import display
-from . import plt
+import matploblib.pyplot as plt
 
 
 def plot_vt(voltage_traces, key='BAC.hay_measure'):
