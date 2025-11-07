@@ -113,7 +113,6 @@ def create_reldb_path(path):
     
     Args:
         path (str): The absolute path.
-        db (:py:class:`~data_base.DataBase`): The database.
         
     Returns:
         str: The relative path of the form ``reldb://...``.
@@ -236,6 +235,9 @@ def resolve_db_path(path, db_basedir=None):
     
     Args:
         path (str): The path to resolve.
+        db_basedir (str, optional): 
+            Directory of a :class:`data_base.DataBase`. 
+            Only needed if the path is a relative database path (``reldb://``), not for modular database paths (``mdb://``).
         
     Returns:
         str: The resolved path.
