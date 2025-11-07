@@ -1,4 +1,4 @@
-# In Silico Framework
+# It Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
 
 # This program is free software: you can redistribute it and/or modify
@@ -345,10 +345,12 @@ def dump(
         get (_type_, optional): A getter method, e.g. dask.get. Defaults to None.
         categorize (bool, optional): Defaults to True.
         client (distributed.Client, optional): distributed.Client for parallellization. Defaults to None.
-        test (bool, optional): Whether or not the dumper is called from within a test method. Defaults to False.
 
     Raises:
         RuntimeError: _description_
+
+    .. deprecated 0.5.0::
+       the ``get`` argument is deprecated. ``dump()`` now expects a ``client`` instead.
     """
     import os
     if client is None:
