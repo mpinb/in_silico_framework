@@ -343,7 +343,7 @@ class ReaderLabView:
 
 
 def load_reader(dict_):
-    """Load a reader object from a dictionary.
+    r"""Load a reader object from a dictionary.
     
     Args:
         dict\_ (dict): A dictionary containing the attributes of the reader object.

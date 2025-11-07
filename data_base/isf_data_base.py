@@ -143,7 +143,7 @@ def _check_working_dir_clean_for_build(working_dir):
        
             
 def make_all_str(dict_):
-    """Convert all items in a (nested) dictionary to string.
+    r"""Convert all items in a (nested) dictionary to string.
     
     Used to write out metadata in JSON format.
     
@@ -670,7 +670,7 @@ class ISFDataBase:
         return absolute_path, relative_path
 
     def create_managed_folder(self, key, raise_ = True):
-        '''Create a folder in the db directory.
+        r'''Create a folder in the db directory.
         
         You can delete the folder using del db[key]
         
@@ -705,7 +705,7 @@ class ISFDataBase:
         return self[key]
     
     def create_sub_db(self, key, register = 'as_parent', **kwargs):
-        '''Creates a database within a database. 
+        r'''Creates a database within a database. 
         
         Example::
             >>> db.create_sub_db('my_sub_database')

@@ -66,7 +66,7 @@ def calculate_vdensity_array_pd(
 
 
 def get_bins(bin_size=None, min_=None, max_=None):
-    """Construct bin edges from a sice and range.
+    r"""Construct bin edges from a sice and range.
     
     Args:
         bin_size (float): the size of the bins

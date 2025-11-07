@@ -242,7 +242,7 @@ def interpolate_vt(voltage_trace_):
 
 
 def map_truefalse_to_str(dict_):
-    """Convert True/False to 'True'/'False' in a dictionary
+    r"""Convert True/False to 'True'/'False' in a dictionary
 
     Args:
         dict\_ (dict): A dictionary with boolean values.

@@ -86,7 +86,7 @@ def save_object_meta(obj, savedir):
         
 
 def get_meta_filename(savedir, raise_=True):
-    """Get the filename of the meta file in the savedir.
+    r"""Get the filename of the meta file in the savedir.
     
     Args:
         savedir (str): The directory to look for the meta file.
@@ -152,7 +152,7 @@ def _read_object_meta_json(meta_fn):
 
 
 def read_object_meta(savedir, raise_=True):
-    """Read the meta of a dask/parquet object.
+    r"""Read the meta of a dask/parquet object.
     
     Assumes there is a meta file present in :py:param:`savedir` 
     (see :py:meth:`get_meta_filename` for allowed formats).

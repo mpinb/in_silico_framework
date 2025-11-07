@@ -515,7 +515,7 @@ def set_many_param(cell_param, params=None):
 
 
 def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
-    """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+    r"""Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
     
     Args:
         cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
