@@ -637,8 +637,8 @@ class SharedNumpyStore:
             start_row (int): first row from the array to load
             end_row (int): last row of the array to load
             
-            Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent 
-                file is created.
+        Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent 
+            file is created.
         
         Returns:
             np.ndarray: the array
