@@ -16,7 +16,7 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 """Read and write data.
 
-This subpackage provides the :py:mod:`~data_base.IO.LoaderDumper` subpackage to read and write data
+This subpackage provides the :mod:`~data_base.IO.LoaderDumper` subpackage to read and write data
 in various file formats and data types.
 """
 

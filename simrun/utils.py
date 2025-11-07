@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-"""Utility and convenience functions for the :py:mod:`simrun` package.
+"""Utility and convenience functions for the :mod:`simrun` package.
 
 Provides functions to parse out specific info from parameter files, silence stdout,
 subdivide arrays for multiprocessing purposes, and more.
@@ -40,7 +40,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def get_cellnumbers_from_confile(confile):
     """Get the amount of cells of each type from a confile.
 
-    :py:meth:`get_cellnumbers_from_confile` reads the confile and returns (alongisde the anatomical ID, here unused) a dictionary of the format::
+    :func:`get_cellnumbers_from_confile` reads the confile and returns (alongisde the anatomical ID, here unused) a dictionary of the format::
 
         {cell_type: [(cellType, cellID, synID), ...]}
 
@@ -64,7 +64,7 @@ def split_network_param_in_one_elem_dicts(dict_):
     for each key in the original dictionary.
 
     Args:
-        dict\_ (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
+        dict\_ (dict | :class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
 
     Returns:
         list: A list of dictionaries, each containing only one element of the original dictionary.
@@ -121,10 +121,10 @@ def load_param_file_if_path_is_provided(pathOrParam):
     """Convenience function to load a parameter file whether it is a string or a dictionary.
 
     Args:
-        pathOrParam (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The path to the parameter file or the parameter dictionary.
+        pathOrParam (str | dict | :class:`~single_cell_parser.parameters.NTParameterSet`): The path to the parameter file or the parameter dictionary.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter object.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The parameter object.
     """
 
     if isinstance(pathOrParam, str):
@@ -244,7 +244,7 @@ def get_fraction_of_landmarkAscii(frac, path):
         pd.DataFrame: A pandas DataFrame containing the sampled landmarks and the cell type.
 
     See also:
-        :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
+        :func:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
     """
     f = os.path.basename(path)
     celltype = f.split(".")[-2]
@@ -271,7 +271,7 @@ def get_fraction_of_landmarkAscii_dir(frac, basedir=None):
         pd.DataFrame: A pandas DataFrame containing the sampled landmarks and the cell type.
 
     See also:
-        :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii` to sample landmarks from a single file.
+        :func:`~simrun.utils.get_fraction_of_landmarkAscii` to sample landmarks from a single file.
     """
     out = []
     for f in os.listdir(basedir):

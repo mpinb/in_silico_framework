@@ -65,7 +65,7 @@ def record_bAP(cell, recSite1=None, recSite2=None):
     to calculate e.g. backpropagating attenuation.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         recSite1 (float): The distance (um) from the soma to the first recording site.
         recSite2 (float): The distance (um) from the soma to the second recording site.
 
@@ -87,7 +87,7 @@ def record_BAC(cell, recSite=None):
     This is used to quantify the voltage trace of a bAP-Activated Ca2+ (BAC) stimulus
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         recSite (float): The distance (um) from the soma to the apical recording site.
 
     See also:
@@ -106,7 +106,7 @@ def record_Step(cell):
     This is used to quantify the response of the cell to step currents.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -115,7 +115,7 @@ def record_Step(cell):
 
 
 def get_Simulator(fixed_params, step=False, vInit=False):
-    """Get a set up :py:class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+    """Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
 
     Given cell-specific fixed parameters, set up a simulator object for the Hay protocol,
     including measuring functions for bAP and BAC stimuli (no step currents)
@@ -126,7 +126,7 @@ def get_Simulator(fixed_params, step=False, vInit=False):
         vInit (bool): Whether to include vInit measurements. (not implemented yet)
 
     Returns:
-        :py:class:`~biophysics_fitting.simulator.Simulator`: A simulator object.
+        :class:`~biophysics_fitting.simulator.Simulator`: A simulator object.
 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -272,7 +272,7 @@ def get_Evaluator(
     StepThree_kwargs={},
     interpolate_voltage_trace=True,
 ):
-    """Get a :py:class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
+    """Get a :class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
 
     Sets up an evaluator object for the Hay protocol, including measuring functions for bAP, BAC and three step current stimuli.
 
@@ -287,10 +287,10 @@ def get_Evaluator(
         interpolate_voltage_trace (bool): Whether to interpolate the voltage trace to a fixed time interval.
 
     Returns:
-        :py:class:`~biophysics_fitting.evaluator.Evaluator`: An evaluator object.
+        :class:`~biophysics_fitting.evaluator.Evaluator`: An evaluator object.
 
     Raises:
-        NotImplementedError: If :py:param:vInit is set to True.
+        NotImplementedError: If :paramvInit is set to True.
 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -328,7 +328,7 @@ def get_Evaluator(
 
 
 def get_Combiner(step=False, include_DI3=True):
-    """Get a set up :py:class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
+    """Get a set up :class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
 
     Args:
         step (bool): Whether to include step current measurements.
@@ -337,7 +337,7 @@ def get_Combiner(step=False, include_DI3=True):
             Default: ``True``.
 
     Returns:
-        :py:class:`~biophysics_fitting.combiner.Combiner`: A combiner object.
+        :class:`~biophysics_fitting.combiner.Combiner`: A combiner object.
 
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.

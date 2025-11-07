@@ -33,7 +33,7 @@ __date__ = "2012-04-02"
 
 
 def compute_synapse_distances_times(fname, cell, t=None, synTypes=None):
-    """Save a :py:class:`single_cell_parser.cell.Cell` object's synapse distances and activation times to a ``.csv`` file.
+    """Save a :class:`single_cell_parser.cell.Cell` object's synapse distances and activation times to a ``.csv`` file.
     
     The following information is saved:
     
@@ -46,12 +46,12 @@ def compute_synapse_distances_times(fname, cell, t=None, synTypes=None):
     - activation times: times at which the synapse was active (ms).
         
     Args:
-        fname (str): The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
-        cell (:py:class:`single_cell_parser.cell.Cell`): Cell object
+        fname (str): The output file name as a ful path, including the file extension. Preferably unique (see e.g. :func:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
+        cell (:class:`single_cell_parser.cell.Cell`): Cell object
         synTypes (list): list of synapse types. Default: the keys of the `cell.synapses` dictionary
         
     Returns:
-        None. Writes out the synapse .csv file to :py:param:`fname`.
+        None. Writes out the synapse .csv file to :param:`fname`.
 
     See also:
         The :ref:`syn_activation_format` file format.
@@ -86,8 +86,8 @@ def synapse_activation_times(tVec, cntVec):
     """Parse the spike times from a list of spike counts and corresponding time points.
     
     Args:
-        tVec (:py:class:`neuron:Vector` | array): list of time points
-        cntVec (:py:class:`neuron:Vector` | array): list of cummulative spike counts
+        tVec (:class:`neuron:Vector` | array): list of time points
+        cntVec (:class:`neuron:Vector` | array): list of cummulative spike counts
 
     Returns:
         list: list of spike times
@@ -236,7 +236,7 @@ def compute_syn_distances_2Dprojected(cell, synType, label=None):
     as seen during 2-photon spine imaging.
 
     Args: 
-        cell (:py:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
+        cell (:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
         synType (str): presynaptic cell type.
         label (str, optional): dendrite type (e.g. "ApicalDendrite") to compute distances for.
     
@@ -280,16 +280,16 @@ def compute_distance_to_soma(sec, x, cell=None, consider_gap_to_soma=False):
     The point for which to compute the distance is defined by a section
     and a relative point on that section (the x coordinate between 0 and 1).
 
-    Used in :py:meth:`compute_syn_distance` and :py:meth:`compute_syn_distances`.
+    Used in :func:`compute_syn_distance` and :func:`compute_syn_distances`.
 
     Args:
-        sec (:py:class:`single_cell_parser.cell.PySection` | int): 
+        sec (:class:`single_cell_parser.cell.PySection` | int): 
             Section or section ID of the cell.
-            If the section ID is given, :py:param:`cell` must be provided.
+            If the section ID is given, :param:`cell` must be provided.
         x (float): 
             Relative point on section, from 0 to 1.
-        cell (:py:class:`single_cell_parser.cell.Cell`, optional): 
-            Only required if :py:param:`sec` is the section ID.
+        cell (:class:`single_cell_parser.cell.Cell`, optional): 
+            Only required if :param:`sec` is the section ID.
         consider_gap_to_soma (bool, optional): 
             Accounts for the fact that dendrites don't actually touch the soma, and adds the
             distance between the last point of the parent section and the first point of the
@@ -331,11 +331,11 @@ def compute_syn_distance(
     ):
     """Computes the distance from a single synapse to the soma.
 
-    Used in :py:meth:`compute_syn_distances`.
+    Used in :func:`compute_syn_distances`.
     
     Args:
-        cell (:py:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
-        syn (:py:class:`single_cell_parser.synapse.Synapse`): synapse object.
+        cell (:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
+        syn (:class:`single_cell_parser.synapse.Synapse`): synapse object.
         consider_gap_to_soma (bool, optional): 
             Account for the fact that dendrites don't actually touch the soma, and add the 
             distance between the last point of the parent section and the first point of the 
@@ -359,7 +359,7 @@ def compute_syn_distances(
     '''Computes distances (to soma) of all synapses on the dendrite.
     
     Args:
-        cell (:py:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
+        cell (:class:`single_cell_parser.cell.Cell`): cell object with attached synapses.
         synType (str): presynaptic cell type to compute distances for.
         label (str, optional): 
             dendrite type (e.g. "ApicalDendrite") to compute distances for.
@@ -369,7 +369,7 @@ def compute_syn_distances(
         numpy.ndarray: 1D array of distances to soma
 
     Raises:
-        KeyError: if the cell does not have synapses of type :py:param:`synType`.
+        KeyError: if the cell does not have synapses of type :param:`synType`.
     '''
     ## updated to use new method for getting somadistance of one synapse at a time
     if synType not in cell.synapses:

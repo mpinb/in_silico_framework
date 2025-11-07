@@ -17,7 +17,7 @@
 
 '''Create anatomical and functional network realizations.
 
-For more fine-grained control over the creation of anatomical network realizations, please refer to :py:mod:`singlecell_input_mapper.singlecell_input_mapper`.
+For more fine-grained control over the creation of anatomical network realizations, please refer to :mod:`singlecell_input_mapper.singlecell_input_mapper`.
 '''
 
 import os, time
@@ -74,9 +74,9 @@ def create_synapse_realization(pname, write_synapses=False):
 def create_functional_network(cellParamName, nwParamName):
     '''Create fixed functional connectivity based on ``convergence``.
     
-    Creates anatomical realizations based on the ``convergence`` parameter (i.e. cell type specific connection probability, see :py:meth:`~single_cell_parser.network.NetworkMapper.create_functional_realization`).
-    For more fine-grained control over anatomically consistent network realizations, please refer to :py:mod:`singlecell_input_mapper.singlecell_input_mapper`,
-    The results of the :py:mod:`singlecell_input_mapper.map_single_cell_inputs` can be read in with :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
+    Creates anatomical realizations based on the ``convergence`` parameter (i.e. cell type specific connection probability, see :func:`~single_cell_parser.network.NetworkMapper.create_functional_realization`).
+    For more fine-grained control over anatomically consistent network realizations, please refer to :mod:`singlecell_input_mapper.singlecell_input_mapper`,
+    The results of the :mod:`singlecell_input_mapper.map_single_cell_inputs` can be read in with :func:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
     
     Args:
         cellParamName (str): Parameter file of postsynaptithe c neuron

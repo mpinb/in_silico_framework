@@ -18,14 +18,14 @@
 Efficient, reproducible and flexible database with dictionary-like API. 
 This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
 Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
-A wide variety of input data and output file formats are supported (see :py:mod:`data_base.IO.LoaderDumper`), including:
+A wide variety of input data and output file formats are supported (see :mod:`data_base.IO.LoaderDumper`), including:
 
 - 1D and ND numpy arrays
 - pandas and dask dataframes
-- :py:class:`~single_cell_parser.cell.Cell` objects
-- :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+- :class:`~single_cell_parser.cell.Cell` objects
+- :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
 
-Simulation results from :py:mod:`single_cell_parser` and :py:mod:`simrun` can be imported and converted to a high performance binary format using the :py:mod:`data_base.db_initializers` subpackage.
+Simulation results from :mod:`single_cell_parser` and :mod:`simrun` can be imported and converted to a high performance binary format using the :mod:`data_base.db_initializers` subpackage.
 
 Example:
 
@@ -64,13 +64,13 @@ DataBase = get_default_db()
 
 def _is_legacy_model_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+    Checks if a given path contains a :class:`~data_base.model_data_base.ModelDataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+        bool: True if the path contains a :class:`~data_base.model_data_base.ModelDataBase`.
 
     :skip-doc:
     """
@@ -79,13 +79,13 @@ def _is_legacy_model_data_base(path):
 
 def _is_isf_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+    Checks if a given path contains a :class:`~data_base.isf_data_base.ISFDataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+        bool: True if the path contains a :class:`~data_base.isf_data_base.ISFDataBase`.
 
     :skip-doc:
     """
@@ -94,13 +94,13 @@ def _is_isf_data_base(path):
 
 def is_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.DataBase`.
+    Checks if a given path contains a :class:`~data_base.DataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.DataBase`.
+        bool: True if the path contains a :class:`~data_base.DataBase`.
     """
     return _is_legacy_model_data_base(path) or _is_isf_data_base(path)
 
@@ -169,7 +169,7 @@ def get_db_by_unique_id(unique_id):
         unique_id (str): The data base's unique identifier
         
     Returns:
-        :py:class:`data_base.DataBase`: The database associated with the :py:param:`unique_id`.
+        :class:`data_base.DataBase`: The database associated with the :param:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
     db = DataBase(db_path, nocreate=True)

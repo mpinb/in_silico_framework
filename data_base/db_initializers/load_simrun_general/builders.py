@@ -1,4 +1,4 @@
-"""Pipelines for building database keys containing results from :py:mod:`simrun`.
+"""Pipelines for building database keys containing results from :mod:`simrun`.
 
 Note that all pipelines assume that the database ``core`` is built. This adds the essential
 information to the database that other builders need:
@@ -7,7 +7,7 @@ information to the database that other builders need:
 - ``simresult_path``: top-level directory from where all simulation results were fetched
 - ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
 
-In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+In addition, :func:`_build_core` also builds the somatic voltage traces, assuming this data is
 always desirable.
 """
 import glob
@@ -54,19 +54,19 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
     or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
     :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
     
-    This function checks if this is the case, and filters out such results from :py:param:`filelist`
+    This function checks if this is the case, and filters out such results from :param:`filelist`
     
     Args:
         filelist (List): 
-            List of voltage trace results, relative to :py:param:`simresult_path`. 
+            List of voltage trace results, relative to :param:`simresult_path`. 
         simresult_path (str): Single path where all simulation results are stored.
-        client (:py:class:`distributed.client.Client`): A parallellization client.
+        client (:class:`distributed.client.Client`): A parallellization client.
 
     Returns:
         List: A filelist of reproducible simulation results.
         
     Raises:
-        ValueError: if no simulations in :py:param:`filelist` can be reproduced.
+        ValueError: if no simulations in :param:`filelist` can be reproduced.
     """
     sim_dirs = [os.path.join(simresult_path, os.path.dirname(f)) for f in filelist]
     is_healthy_mask = get_filter_healthy_simresult_dirs(sim_dirs, client=client)
@@ -85,7 +85,7 @@ def _build_core(
     check_health=False,
     client=None,
     ):
-    """Parse the essential simulation results and add it to :py:param:`db`.
+    """Parse the essential simulation results and add it to :param:`db`.
 
     The following data is parsed and added to the database:
 
@@ -110,9 +110,9 @@ def _build_core(
           - a list of voltage trace files, relative to the ``simresult_path``
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
-        metadata_dumper (function): Function to dump the metadata to disk. Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
+        metadata_dumper (function): Function to dump the metadata to disk. Default is :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
 
     Returns:
         None
@@ -171,7 +171,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
     ``synapse_activation`` and ``cell_activation`` respectively.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
         n_chunks (int): Number of chunks to split the data into. Default is 5000.
 
@@ -236,7 +236,7 @@ def _build_dendritic_voltage_traces(db, repartition=None):
     """Load dendritic voltage traces and add them to the database under the key ``dendritic_recordings``.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 
     Returns:
@@ -291,12 +291,12 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
 
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The database to which the parameterfiles should be added.
-        client (:py:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
+        client (:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
         paramfile_copy_config (dict, optional): 
             Dictionary containing configuration on how to organise parameterfiles in the database. 
-            See :py:func:`data_base.db_initializers.load_simrun_general.init` for more info.
+            See :func:`data_base.db_initializers.load_simrun_general.init` for more info.
 
     Returns:
         None. Sets the keys ``parameterfiles_cell_folder`` and ``parameterfiles_network_folder`` in the database.
@@ -306,7 +306,7 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
 
     Attention:
         This function assumes the database keys ``simresult_path`` and ``sim_trial_index`` already exist, which is likely
-        only true when used in the context of the :py:meth:`~data_base.db_initializers.load_simrun_general.init` function.
+        only true when used in the context of the :func:`~data_base.db_initializers.load_simrun_general.init` function.
     """
     assert paramfile_copy_config is not None
     logging.info("Moving parameter files")

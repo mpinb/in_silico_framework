@@ -20,7 +20,7 @@
 
 This module provides a class to visualize the transmembrane ionic currents of a cell simulation.
 It assumes that these have been recorded during the simulation. If this was not the case,
-consider re-simulating the cell and recording the currents, e.g. with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+consider re-simulating the cell and recording the currents, e.g. with a :class:`~biophysics_fitting.simulator.Simulator`.
 
 Example:
 
@@ -35,7 +35,7 @@ Example:
     
 .. figure:: ../../../_static/_images/current_analysis.png
 
-    Example of a current analysis plot for a :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+    Example of a current analysis plot for a :class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :class:`~biophysics_fitting.simulator.Simulator`.
 
 """
 
@@ -64,7 +64,7 @@ class CurrentAnalysis:
     
     Attributes:
         mode (str): 'cell' or 'dict'.
-        cell (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
+        cell (:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
         t (list): The time vector.
         sec (Section): The section of the cell.
         secID (int): The index of the section.
@@ -93,12 +93,12 @@ class CurrentAnalysis:
         """Initialize the CurrentAnalysis object.
         
         Args:
-            cell_or_dict (:py:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
+            cell_or_dict (:class:`~single_cell_parser.cell.Cell` | dict): The cell object, or a dictionary containing equivalent data.
             secID (int): The index of the section. Default is 'bifurcation'.
             segID (int): The index of the segment. Default is -1.
             rangeVars (list): The names of the ion currents to plot. Default is ``None``, which plots all ion currents.
             colormap (dict): The colormap for the ion currents. Default is ``None``.
-            tVec (list): The time vector. Default is ``None``. Only necessary if :py:param:`cell_or_dict` is a dictionary.
+            tVec (list): The time vector. Default is ``None``. Only necessary if :param:`cell_or_dict` is a dictionary.
         """
         # set attributes
         if not isinstance(cell_or_dict, dict):

@@ -15,7 +15,7 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
     """Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
+        :func:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
     """
     orig_hoc = neup["neuron"]["filename"]
     original_recsite_fns = neup["sim"]["recordingSites"]
@@ -42,7 +42,7 @@ def _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map):
     """Convert all paths in a :ref:`network_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
+        :func:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:

@@ -26,19 +26,19 @@ The usecase of generating these synapse activations without actually saving or k
 for the purpose of analyzing the synapse activations and presynaptic spike times. It allows for modularity between the steps of creating 
 synapse activations and simulating their effect on the postsynaptic neuron.
 
-These :ref:`syn_activation_format` files can afterwards be used to re-run simulations afterwards with the :py:mod:`simrun.run_existing_synapse_activations` module.
-To generate :ref:`syn_activation_format` files **and** simulate the effect on the postsynaptic neuron model in one go, use the :py:mod:`simrun.run_new_simulations` module instead.
+These :ref:`syn_activation_format` files can afterwards be used to re-run simulations afterwards with the :mod:`simrun.run_existing_synapse_activations` module.
+To generate :ref:`syn_activation_format` files **and** simulate the effect on the postsynaptic neuron model in one go, use the :mod:`simrun.run_new_simulations` module instead.
 
 .. hint::
    If the postsynaptic neuron is not simulated, why does this module need the :ref:`cell_parameters_format`?
    On the one hand, it needs morphoplogical information in order to connect these synapses. The :ref:`cell_parameters_format` contains 
    a backlink to the original :ref:`hoc_file_format` file, which contains the morphological information. But then why not start from the :ref:'hoc_file_format' file directly?
-   Because this module does in fact create a biophsyically detailed neuron model to pass to :py:class:`~single_cell_parser.network.NetworkMapper` to create the network,
+   Because this module does in fact create a biophsyically detailed neuron model to pass to :class:`~single_cell_parser.network.NetworkMapper` to create the network,
    despite the fact that the postsynaptic activity is not saved.
    
    
 See also:
-    :py:mod:`simrun.run_new_simulations` for running simulations.
+    :mod:`simrun.run_new_simulations` for running simulations.
 
 '''
 
@@ -74,8 +74,8 @@ def _evoked_activity(
     
     This function calculates the synapse activations and presynaptic spike times for a single cell.
     
-    Synapse activation files are generated with :py:meth:`single_cell_parser.analyze.compute_synapse_distances_times`.
-    Spike time files are generated with :py:meth:`single_cell_parser.analyze.write_presynaptic_spike_times`.
+    Synapse activation files are generated with :func:`single_cell_parser.analyze.compute_synapse_distances_times`.
+    Spike time files are generated with :func:`single_cell_parser.analyze.write_presynaptic_spike_times`.
     
     Args:
         cellParamName (str): 
@@ -187,7 +187,7 @@ def generate_synapse_activations(
     nprocs = 40, 
     tStop = 345, 
     silent = True):
-    '''Generates :py:param:`nSweeps` * :py:param:`nprocs` synapse activation files and writes them to
+    '''Generates :param:`nSweeps` * :param:`nprocs` synapse activation files and writes them to
     the folder ``dirPrefix/results/simName``. 
     
     For each process, a new seed is generated using the seed generator.
@@ -201,8 +201,8 @@ def generate_synapse_activations(
             containing information on synapse and network parameters per cell type. 
         nSweeps (int): Number of simulations to run per process with these parameters.
             Trial-to-trial variability is introduced by the random seed in terms of
-            different network activity and connectivity realizations (see :py:meth:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
-        nprocs (int): Number of parallel processes to run. Each process runs :py:param:`nSweeps` simulations.
+            different network activity and connectivity realizations (see :func:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
+        nprocs (int): Number of parallel processes to run. Each process runs :param:`nSweeps` simulations.
         tStop: time in ms at which the synaptic input should stop.
         
     Returns: 

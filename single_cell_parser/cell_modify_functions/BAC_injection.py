@@ -30,7 +30,7 @@ def BAC_injection(cell, dist=None):
         :class:`~single_cell_parser.cell.Cell`: The cell with the current injection set up.
 
     See also:
-        :py:meth:`biophysics_fitting.setup_stim.setup_BAC`
+        :func:`biophysics_fitting.setup_stim.setup_BAC`
     '''
     setup_BAC(cell, dist=dist)
     return cell

@@ -82,7 +82,7 @@ def get_neuron_param_file(db):
     :meth:`~data_base.db_initializers.load_simrun_general.init` and contains the key ``parameterfiles_cell_folder``.
     
     Args:
-        db (:py:class:`~data_base.DataBase`): 
+        db (:class:`~data_base.DataBase`): 
             The database object.
             
     Returns:
@@ -101,7 +101,7 @@ def get_section_distances_df(neuron_param_file, silent=True):
     """Bin the morphology of a neuron from a :ref:`cell_parameters_format` file.
     
     This method reads the neuron parameter file and bins the morphology of the neuron into spatial bins.
-    The amount of bins is inferred by :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`.
+    The amount of bins is inferred by :func:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`.
     
     Args:
         neuron_param_file (str): The path to the neuron parameter file.
@@ -168,7 +168,7 @@ def get_spatial_bin_names(section_distances_df):
     """Get the bin names from a dataframe describing the distance to soma of all sections.
     
     Given a dataframe describing the distance to soma of all sections, as provided by 
-    :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`,
+    :func:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`,
     this method returns the names for all the spatial bins of the format ``section_id/bin_id``. 
     E.g.: ``5/2`` denotes the second bin of section 5.
 
@@ -180,7 +180,7 @@ def get_spatial_bin_names(section_distances_df):
         list: A list containing the bin ids in string format.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
+        :func:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
     """
     all_bins = []
     for index, row in section_distances_df.iterrows():
@@ -307,7 +307,7 @@ def get_bin_adjacency_map_in_section(cell, section_id, section_distances_df):
 
 
 def get_neighboring_spatial_bins(cell, bin_id, section_distances_df):
-    """Get all the neighboring bins from a :py:param:`bin_id`.
+    """Get all the neighboring bins from a :param:`bin_id`.
 
     Args:
         cell (cell): cell object
@@ -426,7 +426,7 @@ def save_st_and_ISI(
 def spike_times_to_onehot(spike_times, min_time=0, max_time=505, time_step=1):
     """One-hot encode spike times to a binned time vector.
     
-    The time vector is created from :py:param:`min_time`, :py:param:`max_time` and :py:param:`time_step`
+    The time vector is created from :param:`min_time`, :param:`max_time` and :param:`time_step`
     and is of length ``(max_time - min_time)//time_step``.
     
     If a spike occured in a certain time interval, the corresponding entry in the one-hot vector is set to ``True``.
@@ -474,8 +474,8 @@ def compute_ISI_from_st_list(st, min_time=0, max_time=505, time_step=1):
         list: A list of inter-spike intervals in ms.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
     """
     assert type(st) not in (
         pd.DataFrame, pd.Series
@@ -509,8 +509,8 @@ def compute_ISI_from_st(st, timepoint, fillna=None):
         pd.Series: A pandas Series of inter-spike intervals in ms.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
     """
     '''suggestion: use the temporal window width as fillna'''
     assert fillna is not None
@@ -540,8 +540,8 @@ def compute_ISI_array(st, min_time, max_time, fillna=1000, step=1):
         pd.Series: A pandas Series of inter-spike intervals in ms.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+        :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
     """
     ISI = []
     for t in np.arange(min_time, max_time, step):
@@ -578,16 +578,16 @@ def load_syn_weights(db, client, excitatory_celltypes=None):
     ``parameterfiles_network_folder`` key in the database and extracts the synaptic weights.
     
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The database object.
-        client (:py:class:`~dask.distributed.client.Client`):
+        client (:class:`~dask.distributed.client.Client`):
             The dask client object.
             
     Returns:
         dict: A dictionary mapping the synapse type to a weight.
         
     See also:
-        :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the database initialization.
+        :func:`~data_base.db_initializers.load_simrun_general.init` for the database initialization.
     """
     if excitatory_celltypes is None:
         excitatory_celltypes = EXCITATORY
@@ -649,7 +649,7 @@ def temporal_binning_augmented_sa(
         tuple: A tuple containing the bin borders and the histogram of synapse activation times.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
+        :func:`~data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
     """
     activation_times = sa_augmented[[
         c for c in sa_augmented.columns if convertible_to_int(c)
@@ -684,7 +684,7 @@ def get_synapse_activation_array_weighted(
     
     Create a 4D array of synaptic activation, where the axes are:
     
-    - :py:param:`selected_stis`
+    - :param:`selected_stis`
     - EXC/INH
     - spatial bins
     - time bins
@@ -1047,10 +1047,10 @@ def init(
     '''Construct delayeds to parse a simrun-initialized database to binned voltage traces ready for ANN training.
     
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The simrun-initialized database
-        db_target (:py:class:`~data_base.DataBase`):
-            The target database. Defaults to None, which initializes the ANN batches in the same database as :py:param:`db`.
+        db_target (:class:`~data_base.DataBase`):
+            The target database. Defaults to None, which initializes the ANN batches in the same database as :param:`db`.
     
     Attention:
         Still in development. See issue #75.
@@ -1165,7 +1165,7 @@ def run_delayeds_incrementally(client, delayeds):
     Run dask delayed objects incrementally in chunks.
     
     Args:
-        client (:py:class:`~dask.distributed.client.Client`):
+        client (:class:`~dask.distributed.client.Client`):
             The dask client object.
         delayeds (list): List of dask delayed objects.
         

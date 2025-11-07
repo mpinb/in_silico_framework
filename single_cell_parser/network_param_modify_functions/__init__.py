@@ -24,17 +24,17 @@ import pandas as pd
 from config.cell_types import EXCITATORY, INHIBITORY
 
 def change_ongoing_interval(n, factor=1, pop=None):
-    '''Scales the ongoing frequency with a :py:param:`factor`.
+    '''Scales the ongoing frequency with a :param:`factor`.
 
-    Does so by scaling the time bins of the ongoing activity of the presynaptic :py:class:`~single_cell_parser.celltypes.Spiketrain` celltype.
+    Does so by scaling the time bins of the ongoing activity of the presynaptic :class:`~single_cell_parser.celltypes.Spiketrain` celltype.
     
     Args:
-        n (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        n (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         factor (float): The factor to scale the ongoing frequency with.
         pop (list): The celltypes to apply the scaling to.
     
     Raises:
-        AssertionError: If the presynptic :py:class:`~single_cell_parser.celltypes.PointCell` is not of type ``spiketrain``.
+        AssertionError: If the presynptic :class:`~single_cell_parser.celltypes.PointCell` is not of type ``spiketrain``.
 
     Example:
         >>> celltype = 'L6cc_C2'  # layer 6 cortico-cortical cells in column C2
@@ -61,7 +61,7 @@ def set_stim_onset(n, onset=None):
     '''Changes the offset when pointcells get activated
     
     Args:
-        n (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        n (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         onset (float): The onset time in milliseconds.
 
     Example:
@@ -88,16 +88,16 @@ def change_glutamate_syn_weights(
     '''Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.
     
     Args:
-        param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         g_optimal (pandas.core.series.Series | pandas.core.frame.DataFrame): 
             The optimal values for the glutamate synapse weights.
-            If a :py:class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
-            If a :py:class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
+            If a :class:`~pandas.core.series.Series` is given, the same value is applied to both the AMPA and NMDA receptors.
+            If a :class:`~pandas.core.frame.DataFrame` is given, the AMPA and NMDA receptors are set to the values in the 'AMPA' and 'NMDA' columns, respectively.
         pop (list): The celltypes to apply the scaling to.
         
     Raises:
-        AssertionError: If more than 1 index is found for the celltype in :py:param:`g_optimal`.
-        AssertionError: If the celltype is not found in :py:param:`g_optimal`.
+        AssertionError: If more than 1 index is found for the celltype in :param:`g_optimal`.
+        AssertionError: If the celltype is not found in :param:`g_optimal`.
     '''
     for key in list(param['network'].keys()):
         celltype = key.split('_')[0]
@@ -123,7 +123,7 @@ def change_evoked_INH_scaling(param, factor, pop=INHIBITORY):
     """Scales the response probability for inhibitory cells in the :ref:`network_parameters_format`.
     
     Args:
-        param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         factor (float): The scaling factor.
         pop (list): The celltypes to apply the scaling to. 
             Default is the inhibitory celltypes in the rat somatosensory cortex vS1.
@@ -160,8 +160,8 @@ def _celltype_matches(celltype_name, celltypes, columns):
         bool: True if the celltype matches the celltypes and columns, False otherwise.
         
     Raises:
-        AssertionError: If :py:param:`celltypes` is not a list.
-        AssertionError: If :py:param:`columns` is not a list.
+        AssertionError: If :param:`celltypes` is not a list.
+        AssertionError: If :param:`columns` is not a list.
     """
     assert isinstance(celltypes, list)
     assert isinstance(columns, list)
@@ -173,14 +173,14 @@ def _has_evoked(param, celltype):
     """Check if the celltype has evoked activity.
     
     Args:
-        param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         celltype (str): The celltype to check.
     
     Returns:
         bool: True if the celltype has evoked activity, False otherwise.
 
     Raises:
-        AssertionError: If :py:param:`celltype` is not in the network
+        AssertionError: If :param:`celltype` is not in the network
     """
     assert celltype in list(param.network.keys())
     x = param.network[celltype]
@@ -198,7 +198,7 @@ def inactivate_evoked_activity_by_celltype_and_column(
     """Inactivates the evoked activity for the celltypes in the :ref:`network_parameters_format`.
     
     Args:
-        param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         inact_celltypes (list): The celltypes to inactivate.
         inact_column (list): The columns to inactivate.
 
@@ -225,7 +225,7 @@ def inactivate_evoked_and_ongoing_activity_by_celltype_and_column(
     Does so by completely removing them from the :ref:`network_parameters_format`.
 
     Args:
-        param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         inact_celltypes (list): The celltypes to inactivate.
         inact_column (list): The columns to inactivate.
 
@@ -256,7 +256,7 @@ def multi_stimulus_trial(
     Optionally applies a different evoked activity scaling factor to each stimulus.
     
     Args:
-        netp (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
+        netp (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The :ref:`network_parameters_format`.
         inter_stimulus_interval (int | float): amount of time to wait (in ms) between each whisker stimulus
         stims (int): number of stimuli to simulate
         scale_factors (list, optional): 

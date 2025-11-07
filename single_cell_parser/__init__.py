@@ -17,18 +17,18 @@
 
 """Cell API for single cell simulations.
 
-This package provides functionality to parse :py:class:`~single_cell_parser.cell.Cell` objects
+This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
 from NEURON :ref:`hoc_file_format` files, map synapses onto these cells, and run biophysically 
 detailed NEURON simulations with the resulting neuron-network models.
 
 See also:
-    This package should not be confused with :py:mod:`singlecell_input_mapper`. 
+    This package should not be confused with :mod:`singlecell_input_mapper`. 
     
     This package is specialized to handle biophysical properties of neurons and simulation runs, and
     provides API access to the NEURON simulator :cite:`hines2001neuron`.
     It handles (among other things) synaptic activations onto a biophysically detailed neuron model.
     
-    :py:mod:`singlecell_input_mapper` provides extensive functionality to generate network realizations,
+    :mod:`singlecell_input_mapper` provides extensive functionality to generate network realizations,
     constrained by empirical data. 
     The results of such pipelines can be read in with this package.
 
@@ -138,7 +138,7 @@ def create_cell(
 def init_neuron_run(simparam, vardt=False, *events):
     """Default NEURON run with inital parameters according to parameter file.
 
-    Used in :py:mod:`~simrun.run_new_simulations` to set up and run a simulation.
+    Used in :mod:`~simrun.run_new_simulations` to set up and run a simulation.
 
     Args:
         simparam (dict | dict-like):
@@ -192,10 +192,10 @@ def init_neuron_run(simparam, vardt=False, *events):
 
 
 def sec_distance_to_soma(currentSec):
-    """Compute the path length from ``sec(x=0)`` to :py:param:`currentSec`.
+    """Compute the path length from ``sec(x=0)`` to :param:`currentSec`.
 
     Args:
-        currentSec (:py:class:`neuron:Section`): The section for which to compute the distance.
+        currentSec (:class:`neuron:Section`): The section for which to compute the distance.
     """
     parentSec = currentSec.parent
     dist = 0.0
@@ -221,11 +221,11 @@ def spines_update_synapse_distribution_file(
 ):
     """Update the :ref:`syn_file_format` file to correctly point to spine heads as excitatory synapse locations.
 
-    Spines must already exist, so call this after :py:meth:`create_cell`,
+    Spines must already exist, so call this after :func:`create_cell`,
     using the same :ref:`syn_file_format` file that was used to create the cell.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         synapse_distribution_file (str): The path to the original :ref:`syn_file_format` file.
         new_synapse_distribution_file (str): The path to the new :ref:`syn_file_format` file.
             A new_synfile will be created if it does not already exist.

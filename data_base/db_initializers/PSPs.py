@@ -32,7 +32,7 @@ def get_confile_form_network_param(n):
     """Fetch the :ref:`con_file_format` file from a network parameters object.
     
     Args:
-        n (:py:class:`~single_cell_parser.network_parameters.NetworkParameters`): The network parameters object.
+        n (:class:`~single_cell_parser.network_parameters.NetworkParameters`): The network parameters object.
         
     See also:
         The :ref:`network_parameters_format` format.
@@ -52,10 +52,10 @@ def get_parameterfiles_df_with_confile_and_neuron_param_path(db):
     """Parse the parameterfiles database and add the ``confile`` and ``neuron_param_dbpath`` columns.
     
     Args:
-        db (:py:class:`~data_base.DataBase`): The database object.
+        db (:class:`~data_base.DataBase`): The database object.
         
     Returns:
-        :py:class:`pandas.DataFrame`: The parameterfiles dataframe with the additional columns ``confile`` and ``neuron_param_db``
+        :class:`pandas.DataFrame`: The parameterfiles dataframe with the additional columns ``confile`` and ``neuron_param_db``
     """
     parameterfiles = db['parameterfiles']
     f = db['parameterfiles_network_folder']
@@ -93,15 +93,15 @@ def get_PSP_determinants_from_db(db):
     network embeddings and neuron models present in the simrun-initialized database.
     
     Args:
-        db (:py:class:`~data_base.DataBase`): 
+        db (:class:`~data_base.DataBase`): 
             The simrun-initialized database object.
             
     Returns:
-        :py:class:`pandas.DataFrame`: The dataframe with the columns ``confile`` and ``neuron_param_dbpath``.
+        :class:`pandas.DataFrame`: The dataframe with the columns ``confile`` and ``neuron_param_dbpath``.
         
     See also:
-        :py:meth:`~data_base.db_initializers.load_simrun_general.init`
-        for initializing a database with :py:mod:`simrun` data.    
+        :func:`~data_base.db_initializers.load_simrun_general.init`
+        for initializing a database with :mod:`simrun` data.    
     '''
     parameterfiles = get_parameterfiles_df_with_confile_and_neuron_param_path(
         db)
@@ -116,20 +116,20 @@ def init(
     PSPClass_kwargs={}):
     '''Calculate the PSPs for all network embeddings and neuron models present in the simrun-initialized database.
     
-    The PSPs are calculated using :py:param:`PSPClass`. 
-    This can e.g. be a class defined in :py:mod:`~simrun.PSP_with_modification`.
+    The PSPs are calculated using :param:`PSPClass`. 
+    This can e.g. be a class defined in :mod:`~simrun.PSP_with_modification`.
     This class will be initialized as follows for all neuron_param and confile::
     
         >>> psp_class_instance = PSPClass(neuron_param, confile, **PSPClass_kwargs)
         
-    :py:param:`PSPClass` needs to provide a ``get`` method that returns a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object, 
-    The :py:class:`~simrun.synaptic_strength_fitting.PSPs` object is executed and saved to :py:param:`db` under the following key::
+    :param:`PSPClass` needs to provide a ``get`` method that returns a :class:`~simrun.synaptic_strength_fitting.PSPs` object, 
+    The :class:`~simrun.synaptic_strength_fitting.PSPs` object is executed and saved to :param:`db` under the following key::
     
         >>> db['PSPs']['description_key', PSPClass.__name__, 'neuron_param_path', 'confile_path']
     
     See also:
-        :py:meth:`~data_base.db_initializers.load_simrun_general.init`
-        for initializing a database with :py:mod:`simrun` data.
+        :func:`~data_base.db_initializers.load_simrun_general.init`
+        for initializing a database with :mod:`simrun` data.
     '''
     pdf = get_PSP_determinants_from_db(db)
     pspdb = db.create_sub_db('PSPs', raise_=False)

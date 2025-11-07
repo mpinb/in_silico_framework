@@ -21,9 +21,9 @@ __date__ = "2018-11-08"
 
 
 class Evaluator_Setup:
-    '''Setup for an :py:class:`~Evaluator` object
+    '''Setup for an :class:`~Evaluator` object
     
-    This class is an attribute of the :py:class:`~Evaluator` class, and should only veer be accessed via the :py:class:`~Evaluator` object.
+    This class is an attribute of the :class:`~Evaluator` class, and should only veer be accessed via the :class:`~Evaluator` object.
     It takes care of applying evaluation functions to voltage traces, and finalizing the results.
     
     Attributes:
@@ -61,12 +61,12 @@ class Evaluator:
     
     1. Apply an ``evaluate_fun`` on each matching key in ``voltage_traces_dict``
         These extract features from the voltage trace. 
-        These functions are registered under :py:attr:`Evaluator_Setup.evaluate_funs`.
+        These functions are registered under :attr:`Evaluator_Setup.evaluate_funs`.
     2. Perform arbitrary operations on the resulting dictionary 
         (e.g. merge it from a nested to a flat dictionary or compute more complex features
         by combineing features from different stimuli)
             
-    An example set up can be found in :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Evaluator`.
+    An example set up can be found in :func:`~biophysics_fitting.hay_complete_default_setup.get_Evaluator`.
     
     
     Example: 
@@ -88,10 +88,10 @@ class Evaluator:
         >>> e.setup.finalize_funs.append(finalize_fun)  # corresponds to step (2)
 
     Note: 
-        Combining features to reduce the number of objectives should be done with the :py:class:`~biophysics_fitting.combiner.Combiner` object.        
+        Combining features to reduce the number of objectives should be done with the :class:`~biophysics_fitting.combiner.Combiner` object.        
     
     Attributes:
-        setup (:py:class:`~biophysics_fitting.evaluator.Evaluator_Setup`): 
+        setup (:class:`~biophysics_fitting.evaluator.Evaluator_Setup`): 
             A Evaluator_Setup object that keeps track of the evaluation functions.
     '''
     def __init__(self):
@@ -99,7 +99,7 @@ class Evaluator:
         self.setup = Evaluator_Setup()
 
     def evaluate(self, features_dict, raise_=True):
-        r'''Extracts features from a simulation result computed by :py:meth:`biophysics_fitting.simulator.Simulator.run`
+        r'''Extracts features from a simulation result computed by :func:`biophysics_fitting.simulator.Simulator.run`
         
         Details on how to set up the Evaluator are in the docstring of the Evaluator class.
 
@@ -110,10 +110,10 @@ class Evaluator:
                 If False, will not raise an error, and evaluate all features that can be evaluated given the provided `features_dict`. 
 
         Raises:
-            KeyError: if the Evaluator tries to evaluate a trace with a name that is not present in `features_dict.keys()` and :py:param:`raise_` is set to ``True``.
+            KeyError: if the Evaluator tries to evaluate a trace with a name that is not present in `features_dict.keys()` and :param:`raise_` is set to ``True``.
 
         Returns:
-            obj: Whatever the return value is of :py:attr:`Evaluator.setup.finalize_funs`. 
+            obj: Whatever the return value is of :attr:`Evaluator.setup.finalize_funs`. 
             Usually, this is the output of :meth:`~biophysics_fitting.hay_evaluation_default_complete_setup_python.get_Evaluator`,        
         '''
         ret = {}

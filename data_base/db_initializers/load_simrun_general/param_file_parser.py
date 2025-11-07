@@ -162,7 +162,7 @@ def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
 
     Args:
         neup_fn (str): Path to a :ref:`cell_parameters_format` file.
-        scattered_fn_map (:py:class:`distributed.Future`): 
+        scattered_fn_map (:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
 
     Attention:
@@ -187,7 +187,7 @@ def _resolve_and_copy_network_param(netp_fn, scattered_fn_map):
 
     Args:
         netp_fn (str): Path to a :ref:`network_parameters_format` file.
-        scattered_fn_map (:py:class:`distributed.Future`): 
+        scattered_fn_map (:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
 
     Attention:
@@ -215,7 +215,7 @@ def _resolve_and_copy_syn(syn_fn, scattered_fn_map):
 
     Args:
         syn_fn (str): Path to the synapse distribution file.
-        scattered_fn_map (:py:class:`distributed.Future`): 
+        scattered_fn_map (:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn" and "hoc".
 
     Returns:
@@ -245,7 +245,7 @@ def _resolve_and_copy_con(con_fn, scattered_fn_map):
 
     Args:
         con_fn (str): Path to the synapse distribution file.
-        scattered_fn_map (:py:class:`distributed.Future`): 
+        scattered_fn_map (:class:`distributed.Future`): 
             A future dictionary with filename mappings. Must contain the keys "syn" and "con".
 
     Returns:
@@ -271,17 +271,17 @@ def _resolve_and_copy_con(con_fn, scattered_fn_map):
 def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount", client=None):
     """Generate target filenames within a database directory for an array of source files.
     
-    The target filenames can be configured in :py:mod:`~data_base.db_initializers.load_simrun_general.config`
-    by changing :py:attr:`PARAM_FILE_COPY_METHOD` and the target directory names of each file type.
+    The target filenames can be configured in :mod:`~data_base.db_initializers.load_simrun_general.config`
+    by changing :attr:`PARAM_FILE_COPY_METHOD` and the target directory names of each file type.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         db_target_dir (str): 
             The directory relative to the database where the files of one type should be copied.
-            These directories will be a :py:class:`data_base.isf_data_base.ManagedFolder`
+            These directories will be a :class:`data_base.isf_data_base.ManagedFolder`
         filelist (List[str]): The original file names.
         copy_method (str): ``"remount"`` to preserve relative directory structure or ``"hash_rename"`` to rename to a hash and copy to the same location.
-        client (:py:class:`distributed.client.Client`):
+        client (:class:`distributed.client.Client`):
             A parallellization client. Only needed if ``"PARAMFILE_COPY_METHOD"`` is configured to ``"hash_rename"``
 
     Returns:
@@ -314,11 +314,11 @@ def _extract_unique_references_from_neup_and_netp(
     and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`cell_parameters_format`.
     
     Args:
-        paramfile_hashmap_df (:py:class:`pandas.DataFrame`):
+        paramfile_hashmap_df (:class:`pandas.DataFrame`):
             A pandas dataframe containing all :ref:`cell_parameters_format` and :ref:`network_parameters_format`,
             as well as a hash of their content.
-            Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
-        client (:py:class:`distributed.client.Client`):
+            Should normally be created by :func:`construct_param_filename_hashmap_df`
+        client (:class:`distributed.client.Client`):
             A parallellization client. 
    
     Returns:
@@ -383,13 +383,13 @@ def _extract_unique_references_from_neup_and_netp(
 
 
 def _safe_copy(source, target):
-    """Copy a file from :py:param:`source` to :py:param:`target`.
+    """Copy a file from :param:`source` to :param:`target`.
     
     Creates the parent directories if they do not exist yet.
 
     Args:
         source (str): Original filename
-        target (str): Desired target location to copy :py:param:`source` to.
+        target (str): Desired target location to copy :param:`source` to.
     """
     try:
         shutil.copy(source, target)
@@ -401,13 +401,13 @@ def _safe_copy(source, target):
 def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_method="remount", client=None):
     """Create filename ``source -> target`` maps for all file types.
     
-    Each key in the resulting map refers to a filetype present in :py:param:`filetype_target_dir_map`.
+    Each key in the resulting map refers to a filetype present in :param:`filetype_target_dir_map`.
     The filetype keys have `source -> target` mappings for all files of that filetype.
 
     Args:
         source_files_dict (Dict[str, List[str]]):
             A dictionary mapping file types (str) to their source filepaths.
-        db (:py:class:`~data_base.isf_data_base.DataBase`):
+        db (:class:`~data_base.isf_data_base.DataBase`):
             The target database where files should be copied to. 
         copy_method (str): Which copy strategy to use. 
             Must be either ``"hash_rename"`` or ``"remount"``. 
@@ -469,8 +469,8 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     Args:
         paramfile_hashmap_df (pd.DataFrame): 
             A dataframe containing all :ref:`network_parameters_format` and :ref:`cell_parameters_format` files, as well as their hash.
-            This is used in :py:func:`_extract_unique_references_from_neup_and_netp`
-        db (:py:class:`data_base.data_base.DataBase`): The database that is being initialized
+            This is used in :func:`_extract_unique_references_from_neup_and_netp`
+        db (:class:`data_base.data_base.DataBase`): The database that is being initialized
         client (distributed.Client): A distributed client for parallel computation.
         copy_method (str): Which copy strategy to use. Must be either ``"hash_rename"`` or ``"remount"``. 
             ``"hash_rename"`` will rename all parameterfiles to a hash of their content. 
@@ -549,13 +549,13 @@ def load_param_files_from_db(db, sti):
     """Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
 
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The database containing the parsed simulation results.
         sti (str):
             For which simulation trial index to load the parameter files.
 
     Returns:
-        tuple: The :py:class:`~single_cell_parser.parameters.NTParameterSet` objects for the cell and network.
+        tuple: The :class:`~single_cell_parser.parameters.NTParameterSet` objects for the cell and network.
     """
     import single_cell_parser as scp
 

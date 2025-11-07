@@ -82,7 +82,7 @@ def compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0):
     """Compute the mean amplitude of all PSPs across multiple voltage traces.
     
     The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
-    between :py:param:`tStim` + :py:param:`t_delay` and :py:param:`tStim` + :py:param:`t_delay` + :py:param:`width`.
+    between :param:`tStim` + :param:`t_delay` and :param:`tStim` + :param:`t_delay` + :param:`width`.
 
     Args:
         vTraces (list): List of voltage traces.
@@ -199,7 +199,7 @@ def simple_spike_detection(
     '''Detect spike times in a voltage trace.
 
     Simple spike detection method. Identifies spike times within optional window ``[tBegin, tEnd]``
-    by determining :py:param:`threshold` crossing times from below.
+    by determining :param:`threshold` crossing times from below.
 
     Args:
         t (array): Time vector
@@ -209,8 +209,8 @@ def simple_spike_detection(
         threshold (float, optional): Threshold for spike detection (mV). Default is :math:`0.0 mV`.
         mode (str, optional):
             Mode for spike detection. Default is ``regular``.
-            - ``regular``: Checks if the membrane potential crosses an absolute :py:param:`threshold`.
-            - ``slope``: Checks if :math:`dV/dt` is larger than a :py:param:`threshold`.
+            - ``regular``: Checks if the membrane potential crosses an absolute :param:`threshold`.
+            - ``slope``: Checks if :math:`dV/dt` is larger than a :param:`threshold`.
 
     Returns:
         list: List of spike times.
@@ -263,8 +263,8 @@ def PSTH_from_spike_times(
     Args:
         spikeTimeVectors (list): List of spike time vectors.
         binSize (float, optional): Bin size for the PSTH. Default is `1.0 ms`.
-        tBegin (float, optional): Start time of the PSTH. Default is ``None`` (min of :py:param:`spikeTimeVectors`).
-        tEnd (float, optional): End time of the PSTH. Default is ``None`` (max of :py:param:`spikeTimeVectors`).
+        tBegin (float, optional): Start time of the PSTH. Default is ``None`` (min of :param:`spikeTimeVectors`).
+        tEnd (float, optional): End time of the PSTH. Default is ``None`` (max of :param:`spikeTimeVectors`).
         aligned (bool, optional): If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
 
     Returns:
@@ -305,11 +305,11 @@ class RecordingSiteManager(object):
 
     Args:
         landmarkFilename (str): Path to the landmark file.
-        cell (:py:class:`single_cell_parser.cell.Cell`): Cell object associated with the landmarks.
+        cell (:class:`single_cell_parser.cell.Cell`): Cell object associated with the landmarks.
 
     Attributes:
         recordingSites (list): List of recording sites.
-        cell (:py:class:`single_cell_parser.cell.Cell`): Cell object.
+        cell (:class:`single_cell_parser.cell.Cell`): Cell object.
     '''
     recordingSites = None
     cell = None
@@ -327,10 +327,10 @@ class RecordingSiteManager(object):
             self.recordingSites.append(newRecSite)
 
     def set_up_recording_site(self, location, ID, filename):
-        '''Set up a :py:class:`RecordingSite` from a location.
+        '''Set up a :class:`RecordingSite` from a location.
         
         Determines the section and segment on the cell corresponding
-        to the recording site location and creates new :py:class:`RecordingSite`.
+        to the recording site location and creates new :class:`RecordingSite`.
 
         Used during initialization.
 
@@ -402,7 +402,7 @@ class RecordingSiteManager(object):
         return newRecSite
 
     def update_recordings(self):
-        '''Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :py:param:`recordingSites`.
+        '''Add the :class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :param:`recordingSites`.
         '''
         for recordingSite in self.recordingSites:
             secID = recordingSite.secID
@@ -448,7 +448,7 @@ class RecordingSite(object):
     '''Dataclass for a recording site.
 
     See also:
-        The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
+        The :class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
         class for setting up recording sites and parsing their voltage traces.
     
     Attributes:
@@ -456,7 +456,7 @@ class RecordingSite(object):
         segID (int): Segment ID of the recording site.
         label (str): Identifier label.
         vRecordings (list): List of recorded voltage vectors.
-            Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
+            Parsed from the :class:`~single_cell_parser.cell.Cell`.
     '''
     secID = None
     segID = None
@@ -482,7 +482,7 @@ class SpikeInit:
     Can be used to obtain features of spike shape, adaptation etc...
 
     See also:
-        :py:class:`biophysics_fitting.evaluator.Evaluator` for a more exhaustive analysis of voltage traces.
+        :class:`biophysics_fitting.evaluator.Evaluator` for a more exhaustive analysis of voltage traces.
     '''
 
     def __init__(self):
@@ -497,7 +497,7 @@ class SpikeInit:
         This can be used to define a voltage spike threshold at current intensities just below AP initiation.
 
         Args:
-            cell (:py:class:`~single_cell_parser.cell.Cell`): Cell object.
+            cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
             tVec (list): Time vector.
             tStim (float): Start time of stimulation.
             dtStim (float): Duration of stimulation.
@@ -529,7 +529,7 @@ class SpikeInit:
         maximum deflection from the threshold.
 
         Args:
-            cell (:py:class:`~single_cell_parser.cell.Cell`): Cell object.
+            cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
             tVec (list): Time vector.
             thresh (float): Spike threshold.
 

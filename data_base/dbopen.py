@@ -82,7 +82,7 @@ def resolve_reldb_path(path, db_basedir=None):
         the parent database.
     Args:
         path (str): The relative path of the form ``reldb://...``.
-        db_basedir (:py:class:`~data_base.DataBase`): The directory containing the database.
+        db_basedir (:class:`~data_base.DataBase`): The directory containing the database.
         
     Returns:
         str: The resolved path.
@@ -253,7 +253,7 @@ def resolve_db_path(path, db_basedir=None):
 def find_common_db_path(paths):
     """Find the common path of a list of db paths.
     
-    Similar to :py:meth:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
+    Similar to :func:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
     
     
     """
@@ -276,7 +276,7 @@ def resolve_neup_reldb_paths(neup, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The modified neuron parameter set, with absolute paths.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The modified neuron parameter set, with absolute paths.
     """
     neup["neuron"]["filename"] = resolve_reldb_path(
         neup["neuron"]["filename"], db_basedir
@@ -294,7 +294,7 @@ def resolve_netp_reldb_paths(netp, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The modified network parameter set, with absolute paths.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The modified network parameter set, with absolute paths.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:

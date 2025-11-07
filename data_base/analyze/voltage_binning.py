@@ -40,7 +40,7 @@ def calculate_vdensity_array_pd(
     '''Bin a :ref:`voltage_traces_df_format` in timebins across trials.
     
     Args:
-        v (:py:class:`~pandas.DataFrame`): 
+        v (:class:`~pandas.DataFrame`): 
             A voltage traces dataframe. Column indices float and reflect timepoints.
         bin_size (float): 
             The size of the bins.
@@ -54,7 +54,7 @@ def calculate_vdensity_array_pd(
         For large-scale simulations, this is likely not what you want.
         
     See also:
-        :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask` for the dask version.
+        :func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask` for the dask version.
         
     '''
     bins = np.arange(ymin, ymax + bin_size, bin_size)
@@ -98,10 +98,10 @@ def calculate_vdensity_array_dask(
         ymax (float): the maximum voltage value
     
     Returns:
-        :py:class:`dask.dataframe.DataFrame`: the binned voltage traces dataframe
+        :class:`dask.dataframe.DataFrame`: the binned voltage traces dataframe
         
     See also:
-        :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd` for the pandas version.
+        :func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd` for the pandas version.
     '''
 
     def fun(x):
@@ -130,7 +130,7 @@ def calculate_vdensity_array(
     This method infers the type of dataframe passed and calls the appropriate method.
     
     Args:
-        v (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`): 
+        v (:class:`~pandas.DataFrame` | :class:`~dask.dataframe.DataFrame`): 
             A voltage traces dataframe. Column indices float and reflect timepoints
         bin_size (float): the size of the bins
         ymin (float): the minimum voltage value
@@ -153,11 +153,11 @@ def calculate_vdensity_array_pixelObject(
 ):
     '''Calculate the voltage density array as a PixelObject.
     
-    This method is identical to :py:meth:`~data_base.analyze.voltage_binning.calculate_vdensity_array`,
-    but returns a :py:class:`~visualize._figure_array_converter.PixelObject` instead.
+    This method is identical to :func:`~data_base.analyze.voltage_binning.calculate_vdensity_array`,
+    but returns a :class:`~visualize._figure_array_converter.PixelObject` instead.
     
     Args:
-        v (:py:class:`~pandas.DataFrame` | :py:class:`~dask.dataframe.DataFrame`): 
+        v (:class:`~pandas.DataFrame` | :class:`~dask.dataframe.DataFrame`): 
             A voltage traces dataframe. Column indices float and reflect timepoints
         bin_size (float): the size of the bins
         xmin (float): the minimum time value
@@ -166,7 +166,7 @@ def calculate_vdensity_array_pixelObject(
         ymax (float): the maximum voltage value
         
     Returns:
-        :py:class:`~visualize._figure_array_converter.PixelObject`: a PixelObject with the voltage density array
+        :class:`~visualize._figure_array_converter.PixelObject`: a PixelObject with the voltage density array
     '''
     array = calculate_vdensity_array(v=v, bin_size=bin_size, ymin=ymin, ymax=ymax, **kwargs)
     extent = (xmin, xmax, ymin, ymax)

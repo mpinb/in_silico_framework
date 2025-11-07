@@ -16,7 +16,7 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 """Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
 
-This is used in :py:mod:`data_base.db_initializers.synapse_activation_binning` to bin
+This is used in :mod:`data_base.db_initializers.synapse_activation_binning` to bin
 synapse activations.
 """
 
@@ -43,11 +43,11 @@ def temporal_binning_pd(
     This is true for :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes.
     
     Args:
-        df (:py:class:`pandas.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
+        df (:class:`pandas.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        bin_size (float, optional): Size of the bins. If not specified, :param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
-        bin_borders (list, optional): List of bin borders. If not specified, :py:param:`bin_size` has to be specified.
+        bin_borders (list, optional): List of bin borders. If not specified, :param:`bin_size` has to be specified.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
         rate (bool, optional): If True, normalize the output to the bin size.
         
@@ -95,12 +95,12 @@ def temporal_binning_dask(
     This is true for :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes.
     
     Args:
-        ddf (:py:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
+        ddf (:class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
+        bin_size (float, optional): Size of the bins. If not specified, :param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
-        client (:py:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation.
+        client (:class:`dask.distributed.Client`, optional): Dask client to use for parallel computation.
         
     Returns:
         tuple: Tuple containing the bin borders and the binned data.
@@ -146,15 +146,15 @@ def universal(
     
     Args:
         df (:class:`pd.dataframe.DataFrame` | :class:`dask.dataframe.DataFrame`): DataFrame with containing time values in columns whose name are integer-convertible.
-        bin_size (float, optional): Size of the bins. If not specified, :py:param:`bin_borders` have to be specified.
+        bin_size (float, optional): Size of the bins. If not specified, :param:`bin_borders` have to be specified.
         min_time (float, optional): Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
         max_time (float, optional): Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
         normalize (bool, optional): If True, normalize the output to the total number of elements in the DataFrame.
         kwargs (dict): Additional keyword arguments for pandas or dask, depending on the dataframe type. Refer to the corresponding methods below to check which additional keyword arguments these functions expect
     
     See also:
-        :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
-        :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_dask`
+        :func:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
+        :func:`~data_base.analyze.temporal_binning.temporal_binning_dask`
 
     Returns:
         tuple: Bin borders and bin frequencies.

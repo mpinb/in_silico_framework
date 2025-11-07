@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-""":py:mod:`data_base` specific exceptions.
+""":mod:`data_base` specific exceptions.
 """
 
 class DataBaseException(Exception):

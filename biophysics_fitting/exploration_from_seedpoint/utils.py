@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
+"""Convenience functions for the :mod:`~biophysics_fitting.exploration_from_seedpoint` module."""
 
 import numpy as np
 import pandas as pd
@@ -46,8 +46,8 @@ def evaluation_function_incremental_helper(
     and provides an early stopping criterion if a model is not able to match these objectives.
 
     Args:
-        s (:py:class:`~biophysics_fitting.simulator.Simulator`): Simulator object
-        e (:py:class:`~biophysics_fitting.evaluator.Evaluator`): Evaluator object
+        s (:class:`~biophysics_fitting.simulator.Simulator`): Simulator object
+        e (:class:`~biophysics_fitting.evaluator.Evaluator`): Evaluator object
         stim_order ([str] | [(str)]):
             Order in which stimuli are simulated. 
             List consisting of strings and tuples of strings. 

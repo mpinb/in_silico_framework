@@ -20,7 +20,7 @@ import numpy as np
 __author_ = ["Arco Bast"]
 __date__ = "2016-09-16"
 class PixelObject():
-    '''Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
+    '''Dataclass to hold pixel information from either a :class:`matplotlib.pyplot.Axes` or a numpy array.
     
     Attributes:
         extent (list): The extent of the plot.
@@ -84,7 +84,7 @@ def fig2np(fig):
         http://stackoverflow.com/questions/7821518/matplotlib-save-plot-to-numpy-array
     
     Args:
-        fig (:py:class:`~matplotlib.figure.Figure`): The figure object to convert to a numpy array.
+        fig (:class:`~matplotlib.figure.Figure`): The figure object to convert to a numpy array.
         
     Returns:
         numpy.ndarray: The numpy array of the figure.    

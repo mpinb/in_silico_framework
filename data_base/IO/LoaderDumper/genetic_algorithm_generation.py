@@ -18,10 +18,10 @@
 
 .. deprecated:: 0.2.0
     This module is deprecated and will be removed in a future version.
-    The results of the genetic algorithm are saved in a parquet file using :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet`.
+    The results of the genetic algorithm are saved in a parquet file using :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_parquet`.
     
 See also:
-    :py:meth:`biophysics_fitting.optimizer.save_result`
+    :func:`biophysics_fitting.optimizer.save_result`
     
 :skip-doc:
 """

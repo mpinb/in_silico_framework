@@ -41,12 +41,12 @@ def connected_to_structure_beyond(
     beyond_struct=['ApicalDendrite'],
     n_children_required=1
     ):
-    '''Checks if a :py:class:`~single_cell_parser.cell.Cell` section is connected to a structure
-    at a soma distance larger than :py:param:`beyond_dist`. 
+    '''Checks if a :class:`~single_cell_parser.cell.Cell` section is connected to a structure
+    at a soma distance larger than :param:`beyond_dist`. 
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        sec (:py:class:`~single_cell_parser.section.Section`): The section to check.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        sec (:class:`~single_cell_parser.section.Section`): The section to check.
         beyond_dist (float): The distance from the soma to check.
         beyond_struct (list): The labels of the structures to check.
         n_children_required (int): The minimum number of children required to have a connection.
@@ -75,12 +75,12 @@ def get_inner_sec_dist_dict(
     n_children_required = 1):
     '''Get sections that connect to specific structures beyond a minimum distance.
     
-    Fetches all sections that are connected to compartments with labels in :py:param:`beyond_struct`, and
-    that have a minimum soma distance of :py:param:`beyond_dist`.
+    Fetches all sections that are connected to compartments with labels in :param:`beyond_struct`, and
+    that have a minimum soma distance of :param:`beyond_dist`.
     This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         beyond_dist (float): The minimum distance from the soma (um).
         beyond_struct (list): The labels of the structures to check.
         n_children_required (int): The minimum number of children required to have a connection.
@@ -89,7 +89,7 @@ def get_inner_sec_dist_dict(
         dict: A dictionary with the soma distance as key and the section as value.
         
     See also:
-        See also: :py:meth:`~get_inner_section_at_distance` that returns the closest section at a specific distance, rather than all sections beyond some distance.
+        See also: :func:`~get_inner_section_at_distance` that returns the closest section at a specific distance, rather than all sections beyond some distance.
     '''
     sec_dist_dict = {
         cell.distance_to_soma(sec, 1.0): sec
@@ -111,21 +111,21 @@ def get_inner_section_at_distance(
     ):
     '''Get sections that connect to specific structures at a particular distance.
     
-    Fetches all sections that are connected to compartments with labels in :py:param:`beyond_struct`, and
-    that have a soma distance of :py:param:`beyond_dist`.
+    Fetches all sections that are connected to compartments with labels in :param:`beyond_struct`, and
+    that have a soma distance of :param:`beyond_dist`.
     This is useful to get sections of the apical trunk of an L5PT, filtering out oblique dendrites.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma (um).
         beyond_dist (float): The minimum distance from the soma (um).
         beyond_struct (list): The labels of the structures to check.
         
     Returns:
-        tuple: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :py:param:`dist`.
+        tuple: The section and the relative distance from the section to the soma. Only returns the section that's closest to the provided :param:`dist`.
         
     See also:
-        See also: :py:meth:`~get_inner_sec_dist_dict` that returns all sections beyond some distance, rather than only the closest section at a specific distance.
+        See also: :func:`~get_inner_sec_dist_dict` that returns all sections beyond some distance, rather than only the closest section at a specific distance.
     '''
     import six
     sec_dist_dict = get_inner_sec_dist_dict(cell, beyond_dist, beyond_struct)
@@ -143,13 +143,13 @@ def get_main_bifurcation_section(cell):
     
         - with at least two children
         - whose parent is the soma.
-        - (optional) whose children are beyond a certain distance (default: 1000 um). See :py:meth:`~get_inner_sec_dist_dict` for more information.
+        - (optional) whose children are beyond a certain distance (default: 1000 um). See :func:`~get_inner_sec_dist_dict` for more information.
         
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         
     Returns:
-        :py:class:`~single_cell_parser.section.Section`: The main bifurcation section.
+        :class:`~single_cell_parser.section.Section`: The main bifurcation section.
     '''
     two_children_connected_list = get_inner_sec_dist_dict(cell, n_children_required = 2)
     two_children_connected_list = list(two_children_connected_list.values())
@@ -164,7 +164,7 @@ def augment_cell_with_detailed_labels(cell):
     Assigning these labels to section.label_detailed
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
     
     Returns: 
         None
@@ -202,7 +202,7 @@ def tVec(cell):
     """Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         
     Returns:
         numpy.ndarray: The time vector of the cell.
@@ -214,7 +214,7 @@ def vmSoma(cell):
     """Convenience method to extract the soma voltage trace from a cell
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         
     Returns:
         numpy.ndarray: The soma voltage trace of the cell.
@@ -226,7 +226,7 @@ def vmMax(cell):
     """Calculate the maximum voltage of a cell at any timepoint, at any dendrite.
     
     Args:
-        cell (:py:class:`~singlejson_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~singlejson_cell_parser.cell.Cell`): The cell object.
         
     Returns:
         numpy.ndarray: The maximum voltage of the cell at any timepoint across sections.
@@ -240,7 +240,7 @@ def _get_apical_sec_and_i_at_distance(cell, dist):
     r"""Get the apical section and segment at a certain distance from the soma.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma (:math:`\mu m`).
         
     Returns:
@@ -260,24 +260,24 @@ def _get_apical_sec_and_i_at_distance(cell, dist):
 def vmApical(cell, dist=None):
     r"""Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.
     
-    Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
+    Assumes that the :class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
     - It contains at least one section with the label "ApicalDendrite"
-    - Such section exists at :py:param:`dist` distance from the soma
+    - Such section exists at :param:`dist` distance from the soma
     - The section has at least one child
         
-    See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
+    See :func:`~get_inner_section_at_distance` for more information about which arguments can be used
     to define an apical section.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma (:math:`\mu m`).
         
     Returns:
         numpy.ndarray: The membrane voltage of the apical dendrite at the specified distance.
         
     See also:
-        :py:meth:`vmApical_position` to get the exact location on the apical dendrite at a certain distance.
+        :func:`vmApical_position` to get the exact location on the apical dendrite at a certain distance.
     """
     assert dist is not None
     sec, mindx, minSeg = _get_apical_sec_and_i_at_distance(cell, dist)
@@ -287,17 +287,17 @@ def vmApical(cell, dist=None):
 def vmApical_position(cell, dist=None):
     r"""Fetch the exact location on the apical dendrite at a certain distance from the soma.
     
-    Assumes that the :py:class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
+    Assumes that the :class:`~single_cell_parser.cell.Cell` object has an apical dendrite:
     
     - It contains at least one section with the label "ApicalDendrite"
-    - Such section exists at :py:param:`~dist` distance from the soma
+    - Such section exists at :param:`~dist` distance from the soma
     - The section has at least one child
     
-    See :py:meth:`~get_inner_section_at_distance` for more information about which arguments can be used
+    See :func:`~get_inner_section_at_distance` for more information about which arguments can be used
     to define an apical section.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma (:math:`\mu m`).
         
     Returns:

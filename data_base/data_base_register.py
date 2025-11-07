@@ -20,15 +20,15 @@ Registry of databases.
 The data base registry keeps a ledger linking data base IDs to data base paths.
 This is particularly useful to share databases, and moving databases to other file systems.
 
-The registry should ideally be located in an obvious place. The default registry is ``.data_base_register.db`` in the :py:mod:`data_base` module itself.
+The registry should ideally be located in an obvious place. The default registry is ``.data_base_register.db`` in the :mod:`data_base` module itself.
 Newly created data_bases are automatically added to the registry. Accessing someone elses database is possible if:
 
 1. Its location is on the same filesystem and you have the absolute path. In this case, you can simply open the path and the db will register itself to your registry.
-2. You know the unique ID of the database. In this case, you can use :py:meth:`data_base.get_db_by_unique_id`.
-3. Someone else has registered the database in a registry that you have access to. In this case, you can use :py:meth:`assimilate_remote_register`.
+2. You know the unique ID of the database. In this case, you can use :func:`data_base.get_db_by_unique_id`.
+3. Someone else has registered the database in a registry that you have access to. In this case, you can use :func:`assimilate_remote_register`.
 
 See also:
-    :py:meth:`~data_base.DataBase.register_this_database`
+    :func:`~data_base.DataBase.register_this_database`
 """
 
 from __future__ import absolute_import
@@ -44,15 +44,15 @@ LOCAL_DATA_BASE_REGISTER_NAME = get_db_register_path()
 class DataBaseRegister():
     """Two column registry mapping data bases to their locations.
 
-    This registry keeps track of all :py:class:`DataBase` ``id`` tags and their locations on disk.
+    This registry keeps track of all :class:`DataBase` ``id`` tags and their locations on disk.
     This is useful when sharing data with other people, resolving relative database paths, and moving databases to other file systems.
     This registry implements an SQLite backend to store these locations and corresponding database IDs.
         
-    You can explicitly walk through a directory and add all :py:class:`DataBase` it encounters to the registry with :py:meth:`DataBaseRegister.search_dbs`.
+    You can explicitly walk through a directory and add all :class:`DataBase` it encounters to the registry with :func:`DataBaseRegister.search_dbs`.
     
     Attributes:
         registry_basedir (str): The location of the db registry
-        registry (:py:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`): The registry itself as an SQLite database.
+        registry (:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`): The registry itself as an SQLite database.
     """
     def __init__(self, registry_basedir, search_dbs="on_first_init"):
         """        
@@ -76,7 +76,7 @@ class DataBaseRegister():
             self.search_dbs(os.path.dirname(self.registry_basedir))
 
     def search_dbs(self, directory=None):
-        """Look for :py:class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
+        """Look for :class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
         
         Args:
             directory (str, optional): The directory to search in. Defaults to None, in which case the directory of the registry is searched.
@@ -144,7 +144,7 @@ def _get_db_register():
     """Get the database register.
     
     Returns:
-        :py:class:`~data_base.data_base_register.DataBaseRegister`: The database register.
+        :class:`~data_base.data_base_register.DataBaseRegister`: The database register.
     """
     dbr = DataBaseRegister(LOCAL_DATA_BASE_REGISTER_NAME)
     return dbr
@@ -165,7 +165,7 @@ def register_db(unique_id, db_basedir):
 def deregister_db(unique_id):
     """Deregister a database.
     
-    Removes this :py:class:`DataBase` from the registry.
+    Removes this :class:`DataBase` from the registry.
     
     Args:
         unique_id (str): The unique ID of the database.

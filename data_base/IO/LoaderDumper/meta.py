@@ -24,7 +24,7 @@ def _save_object_meta_json(obj, savedir):
     The dtypes of the columns and index are saved as string in numpy format.
     
     See also:
-        :py:meth:`~data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str`
+        :func:`~data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str`
     
     Args:
         obj (dask.DataFrame | parquet.DataFrame): The object to save the meta of.
@@ -154,8 +154,8 @@ def _read_object_meta_json(meta_fn):
 def read_object_meta(savedir, raise_=True):
     r"""Read the meta of a dask/parquet object.
     
-    Assumes there is a meta file present in :py:param:`savedir` 
-    (see :py:meth:`get_meta_filename` for allowed formats).
+    Assumes there is a meta file present in :param:`savedir` 
+    (see :func:`get_meta_filename` for allowed formats).
     
     Args:
         savedir (str): directory where the file partitions and object meta are saved. 

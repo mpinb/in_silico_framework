@@ -17,7 +17,7 @@
 """Read and write a pandas DataFrame to the parquet format.
 
 See also:
-    :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for the correpsonding dask ``LoaderDumper``.
+    :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for the correpsonding dask ``LoaderDumper``.
 """
 
 import os
@@ -85,7 +85,7 @@ def dump(obj, savedir):
     meta information is also saved in the form of a JSON file.
     
     See also:
-        :py:func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
+        :func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
     
     Args:
         obj (pd.DataFrame): Pandas DataFrame to be saved.

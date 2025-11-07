@@ -42,22 +42,22 @@ def scale_morphology(cell, scale, target_morphology):
     """Scale a morphology between its current shape and a target morphology.
 
     Given a target morphology :ref:`hoc_file_format` file, this method scales the current
-    :py:param:`cell` to be closer to the target morphology. The scaling is done by linearly
+    :param:`cell` to be closer to the target morphology. The scaling is done by linearly
     interpolating each point between the current and target morphology.
 
-    A :py:param:`scale` factor of 0.0 will result in the current morphology, while a factor of 1.0
+    A :param:`scale` factor of 0.0 will result in the current morphology, while a factor of 1.0
     will result in the target morphology. Anything in between will be a linear interpolation.
 
     The target morphology must contain the same amount of points as the current morphology, 
     (ignoring AIS and Myelin), and the points must be in the same order.
     
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
         target_morphology (str): The path to the target morphology file.
         
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
     """
     import re
     pattern = r"[-+]?(?:\d*\.*\d+)"  # matches floats

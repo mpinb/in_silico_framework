@@ -20,7 +20,7 @@
 Runfile to create a :ref:`network_parameters_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
 
 Reads in a template parameter file and sets the PSTHs for each celltype to the PSTHs of the evoked activity.
-Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
+Such PSTHs can be computed from spike time recordings using e.g. :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
 
 Attention:
     This module is specific to the model of the rat barrel cortex and the experimental conditions of the passive whisker touch experiment.
@@ -404,7 +404,7 @@ def create_network_parameter(
     """Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
     
     Reads in a template file for a network, where the parameters of each celltype are already defined, but the values are not set.
-    Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :py:param:`whisker` was deflected.
+    Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :param:`whisker` was deflected.
     Spike probabilities only depend on the celltype, column, and deflected whisker.
     Spike times are then Poisson sampled from these PSTHs.
     A spike does not guarantee a synapse relase, but rather the probability of release upon a spike is set for each celltype.
@@ -565,13 +565,13 @@ def whisker_evoked_PSTH(
         cellType
     ):
     """
-    Fetch the PSTHs of each celltype in a barrel cortex :py:param:`column` for evoked activity reflecting 
+    Fetch the PSTHs of each celltype in a barrel cortex :param:`column` for evoked activity reflecting 
     a passive whisker touch scenario.
     This method does not generate such data, but reads it in from existing files containing such empirical measurements, 
     and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.
     
     The data linked in this runfile are for experiments where the C2 whisker was deflected.
-    For situations where other :py:param:`deflectedwhisker` are requested, activity data of equivalent
+    For situations where other :param:`deflectedwhisker` are requested, activity data of equivalent
     columns relative to the C2 is requested.
     
     Example:

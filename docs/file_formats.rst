@@ -67,13 +67,13 @@ Example::
 ******
 ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
 The ``.param`` format is valid Python code, but differs from JSON, as it allows trailing comma's, single quotes, and tuples. JSON does not.
-``.param`` files can be read using :py:mod:`~single_cell_parser.parameters.build_parameters`.
+``.param`` files can be read using :mod:`~single_cell_parser.parameters.build_parameters`.
 
 See also: 
-  :py:mod:`simrun.parameters_to_cell` to rerun a simulation from these parameterfiles.
+  :mod:`simrun.parameters_to_cell` to rerun a simulation from these parameterfiles.
 
 See also:
-  :py:mod:`~single_cell_parser.parameters.build_parameters` to read these parameterfiles.
+  :mod:`~single_cell_parser.parameters.build_parameters` to read these parameterfiles.
 
 .. _cell_parameters_format:
 
@@ -84,7 +84,7 @@ Cell parameters
 Includes a reference to a :ref:`hoc_file_format` morphology file, 
 biophysical properties of the cell per cellular structure (i.e. soma, dendrite, axon initial segment ...),
 and basic simulation parameters. Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
-Simulation parameters are usually overridden by higher level modules, such as :py:mod:`simrun`.
+Simulation parameters are usually overridden by higher level modules, such as :mod:`simrun`.
 
 To access different structures of a cell::
 
@@ -265,7 +265,7 @@ Example::
 Raw simulation results
 **********************
 
-Simulations run by :py:mod:`simrun` have a fixed folder structure. They contain a single file of somatic :ref:`voltage_traces_format`,
+Simulations run by :mod:`simrun` have a fixed folder structure. They contain a single file of somatic :ref:`voltage_traces_format`,
 one file of dendritic :ref:`voltage_traces_format` per ``recSite`` found in the :ref:`cell_parameters_format`, and a collection of :ref:`syn_activation_format` and
 :ref:`spike_times_format` files. 
 
@@ -273,8 +273,8 @@ The voltage traces are written to a single ``.csv`` file (since the amount of ti
 but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
 of spikes and synapse activations is not known in advance).
 
-The amount of simulation runs per parameter configuration (i.e. the product of :py:param:`~simrun.run_new_simulations.run_new_simulations.nSweeps` 
-and :py:param:`~simrun.run_new_simulations.run_new_simulations.nprocs` keyword arguments in any simrun function) corresponds
+The amount of simulation runs per parameter configuration (i.e. the product of :param:`~simrun.run_new_simulations.run_new_simulations.nSweeps` 
+and :param:`~simrun.run_new_simulations.run_new_simulations.nprocs` keyword arguments in any simrun function) corresponds
 to:
 
 - The amount of voltage columns in the :ref:`voltage_traces_format` files
@@ -305,13 +305,13 @@ Example:
 
 
 See also:
-  The :py:mod:`simrun` functions used to produce these simulation results:
+  The :mod:`simrun` functions used to produce these simulation results:
 
-  - :py:mod:`simrun.run_new_simulations`
-  - :py:mod:`simrun.rerun_db`
+  - :mod:`simrun.run_new_simulations`
+  - :mod:`simrun.rerun_db`
 
 See also:
-  To get a :py:class:`~single_cell_parser.cell.Cell` object from such a simulation, refer to :py:mod:`simrun.sim_trial_to_cell_object`
+  To get a :class:`~single_cell_parser.cell.Cell` object from such a simulation, refer to :mod:`simrun.sim_trial_to_cell_object`
 
 
 Dataframes
@@ -319,10 +319,10 @@ Dataframes
 
 The output format of various simulation pipelines are usually a dataframe. below, you find common formats used throughout ISF.
 
-The :py:mod:`simrun` package produces output files in ``.csv`` or ``.npz`` format. many of these files
+The :mod:`simrun` package produces output files in ``.csv`` or ``.npz`` format. many of these files
 need to be created for each individual simulation trial. 
 These :ref:`simresult_dir_format` are usually parsed into single dataframes for further analysis using a ``db_initializers`` submodule (see e.g. 
-:py:mod:`~data_base.db_initializers.load_simrun_general`).
+:mod:`~data_base.db_initializers.load_simrun_general`).
 
 
 .. _syn_activation_format:
@@ -330,7 +330,7 @@ These :ref:`simresult_dir_format` are usually parsed into single dataframes for 
 Synapse activation
 ==================
 
-The raw output of the :py:mod:`simrun` package contains ``.csv`` files containing the synaptic activations onto a post-synaptic cell 
+The raw output of the :mod:`simrun` package contains ``.csv`` files containing the synaptic activations onto a post-synaptic cell 
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:
 
 - type
@@ -342,7 +342,7 @@ for each individual simulation trial. Each file contains the following informati
 These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis:
 An example of the raw and parsed format is shown below:
 
-Raw :py:mod:`simrun` output
+Raw :mod:`simrun` output
 ---------------------------
 
 .. list-table:: Synapse activations (single trial)
@@ -452,7 +452,7 @@ Parsed dataframe
 
 Presynaptic spike times
 =======================
-The raw output of the :py:mod:`simrun` package contains ``.csv`` files containing the spike times of presynaptic cells 
+The raw output of the :mod:`simrun` package contains ``.csv`` files containing the spike times of presynaptic cells 
 for each individual simulation trial. Each file contains the following information for each synapse during a particular simulation trial:
 
 - type
@@ -462,7 +462,7 @@ for each individual simulation trial. Each file contains the following informati
 These individual files are usually gathered and parsed into a single dataframe containing all trials for further analysis
 An example of the raw and parsed format is shown below:
 
-Raw :py:mod:`simrun` output
+Raw :mod:`simrun` output
 ---------------------------
 
 .. list-table:: Presynaptic spike times (single trial)
@@ -523,9 +523,9 @@ Parsed dataframe
 
 Writers:
 
-- :py:meth:`~single_cell_parser.writer.write_presynaptic_spike_file` is used by :py:mod:`simrun` and :py:mod:`~single_cell_parser.analyze.synanalysis`
+- :func:`~single_cell_parser.writer.write_presynaptic_spike_file` is used by :mod:`simrun` and :mod:`~single_cell_parser.analyze.synanalysis`
    to write raw output data.
-- :py:meth:`data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
+- :func:`data_base.db_initializers.load_simrun_general.init` parses these files into a pandas dataframe.
 
 .. attention::
 
@@ -538,7 +538,7 @@ Writers:
 Voltage traces
 ==============
 
-The raw output of the :py:mod:`simrun` package contains ``.npz`` or ``.csv`` files containing the voltage traces of the postsynaptic cells.
+The raw output of the :mod:`simrun` package contains ``.npz`` or ``.csv`` files containing the voltage traces of the postsynaptic cells.
 Unlike the synapse activations and spike times, it is possible for one such file to contain multiple trials.
 
 .. _voltage_traces_csv_format:
@@ -587,7 +587,7 @@ Voltage trace ``.npz``
 Voltage trace dataframe
 -----------------------
 
-The parsed dataframe is usually created by the :py:meth:`data_base.db_initializers.load_simrun_general.init` function.
+The parsed dataframe is usually created by the :func:`data_base.db_initializers.load_simrun_general.init` function.
 
 .. list-table:: ``voltage trace dataframe``
    :header-rows: 1
@@ -626,8 +626,8 @@ neuron structure at that point ``(pt3dadd -> x, y, z, diameter)``.
 
 Readers:
 
-- :py:mod:`~single_cell_parser.cell_parser`
-- :py:meth:`~single_cell_parser.reader.read_hoc_file`
+- :mod:`~single_cell_parser.cell_parser`
+- :func:`~single_cell_parser.reader.read_hoc_file`
 
 Example::
 
@@ -668,8 +668,8 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
 
 Readers:
 
-- :py:mod:`~single_cell_parser.reader.read_scalar_field`
-- :py:mod:`~single_cell_parser.reader.read_landmark_file`
+- :mod:`~single_cell_parser.reader.read_scalar_field`
+- :mod:`~single_cell_parser.reader.read_landmark_file`
 
 
 .. container:: doc-feedback

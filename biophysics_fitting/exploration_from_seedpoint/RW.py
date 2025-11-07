@@ -16,7 +16,7 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 """Perform a random walk through parameter space starting from a seed point.
 
-This module provides the :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
+This module provides the :class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
 which implements a random walk procedure through parameter space.
 Every random parameter iteration provides new biophsyical parameters, 
 which are evaluated by running a set of stimulus protocols with early stopping criteria.
@@ -56,7 +56,7 @@ class RW:
             - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain
                 ephys features.
 
-            This function is usually :py:meth:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
+            This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
         
         MAIN_DIRECTORY (str): output directory in which results are stored.
         min_step_size (float): minimum step size for the random walk
@@ -273,7 +273,7 @@ class RW:
             seed (int): random seed for the random number generator
             
         Returns:
-            None. Saves the results to :py:attr:`MAIN_DIRECTORY`/:py:param:`selected_seedpoint`/:py:param:`particle_id`
+            None. Saves the results to :attr:`MAIN_DIRECTORY`/:param:`selected_seedpoint`/:param:`particle_id`
         """
         try: # to not cause an error in pickles created before mode was added
             self.mode

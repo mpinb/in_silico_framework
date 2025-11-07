@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Create and load :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects in a database.
+"""Create and load :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects in a database.
 """
 
 import os
@@ -35,20 +35,20 @@ def check(obj):
 
 
 class Loader(parent_classes.Loader):
-    """Loader for :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects"""
+    """Loader for :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects"""
     def get(self, savedir, **kwargs):
         """Load the database from the specified folder.
         
         Args:
             savedir (str): Directory where the database is stored.
             kwargs: Additional keyword arguments. 
-                These are passed to the :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
+                These are passed to the :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
         """
         return ISFDataBase(os.path.join(savedir, 'db'), **kwargs)
 
 
 def dump(obj, savedir):
-    """Create a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :py:param:`savedir`
+    """Create a :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :param:`savedir`
     
     Args:
         obj (None, optional): No object is required. If an object is passed, it is ignored.

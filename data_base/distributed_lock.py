@@ -34,7 +34,7 @@ The following locking servers/types are supported:
      - `Zookeeper Documentation <https://kazoo.readthedocs.io/en/latest/index.html>`_
    * - File
      - Fasteners file-based locking.
-     - :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` and `Fasteners Documentation <https://fasteners.readthedocs.io/en/latest/>`_
+     - :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` and `Fasteners Documentation <https://fasteners.readthedocs.io/en/latest/>`_
 
 
 If no such file exists, or the environment variable is not set, a default configuration is used, which uses (in order of decreasing precedence):
@@ -149,7 +149,7 @@ def get_locking_server_client():
     a ``.yml`` file providing file locking configuration.
 
     See also:
-        :py:mod:`data_base.distributed_lock` for more info on the file locking configuration.
+        :mod:`data_base.distributed_lock` for more info on the file locking configuration.
     """
     global _SERVER
     global _CLIENT
@@ -205,7 +205,7 @@ class InterProcessLockNoWritePermission:
         `Fasteners InterProcessLock <https://fasteners.readthedocs.io/en/latest/guide/inter_process/>`_
 
     Attributes:
-        lock (:py:class:`~fasteners.InterProcessLock` or None): The lock object if the user has write permissions, None otherwise.
+        lock (:class:`~fasteners.InterProcessLock` or None): The lock object if the user has write permissions, None otherwise.
     """
 
     def __init__(self, path):
@@ -248,9 +248,9 @@ def get_lock(name):
     Reads the locking configuration from the global variable ``SERVER`` and infers the correct lock type.
     The following locks are supported:
 
-    - :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission`: for file based locking.
-    - :py:class:`redis.lock.Lock`: for redis based locking.
-    - :py:class:`kazoo.client.Lock`: for Apache zookeeper based locking.
+    - :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission`: for file based locking.
+    - :class:`redis.lock.Lock`: for redis based locking.
+    - :class:`kazoo.client.Lock`: for Apache zookeeper based locking.
 
     See also:
         `Kazoo documentation <https://kazoo.readthedocs.io/en/latest/index.html>`_ and
@@ -284,7 +284,7 @@ def get_read_lock(name):
         name (str): The name of the lock.
 
     Returns:
-        :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.Lock`:
+        :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :class:`redis.lock` | :class:`kazoo.client.Lock`:
             The lock object.
     """
     if "ISF_DISTRIBUTED_LOCK_BLOCK" in os.environ:
@@ -313,7 +313,7 @@ def get_write_lock(name):
         name (str): The name of the lock.
 
     Returns:
-        :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.WriteLock`:
+        :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :class:`redis.lock` | :class:`kazoo.client.WriteLock`:
             The lock object.
     """
     if "ISF_DISTRIBUTED_LOCK_BLOCK" in os.environ:

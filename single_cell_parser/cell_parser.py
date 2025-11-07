@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-'''Read and parse a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+'''Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
 '''
 
 import warnings, traceback
@@ -35,22 +35,22 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
-    '''Configure a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+    '''Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
     
-    This class is used to read a hoc file and set up a :py:class:`~single_cell_parser.cell.Cell` object for single cell simulations.
-    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :py:class:`~single_cell_parser.cell.Cell` object's 
+    This class is used to read a hoc file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
     membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
     See also:
-        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
+        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
         This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
     
     Attributes:
         hoc_path (str): Path to hoc file
         membraneParams (dict): Membrane parameters
         cell_modify_functions_applied (bool): 
-            Whether or not cell modify functions have already been applied. See: :py:meth:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
-        cell (:py:class:`~single_cell_parser.cell.Cell`): Cell object.
+            Whether or not cell modify functions have already been applied. See: :func:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
+        cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
     '''
     #    h = neuron.h
     cell = None
@@ -74,7 +74,7 @@ class CellParser(object):
         self.cell_modify_functions_applied = False
 
     def spatialgraph_to_cell(self, parameters=None, axon=False, scaleFunc=None):
-        '''Create a :py:class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+        '''Create a :class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
         
         Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
         
@@ -84,11 +84,11 @@ class CellParser(object):
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
             To ensure simulation reproducability, scaleFunc should be specified in the parameters, as 
-            described in :py:mod:`~single_cell_parser.cell_modify_funs`
+            described in :mod:`~single_cell_parser.cell_modify_funs`
 
         .. deprecated:: 0.1.0
             The ``parameters`` keyword is optional for this method. It was previously used to check for spines.
-            Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :py:meth:`set_up_biophysics`.
+            Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
         
         '''
         edgeList = reader.read_hoc_file(self.hoc_path)
@@ -179,24 +179,24 @@ class CellParser(object):
         Poperties are added to the section by executing the NEURON command ``sec.<property>=<value>``.
         
         - Properties:
-            - :math:`C_m` (see :py:meth:`insert_membrane_properties`)
-            - :math:`R_a` (see :py:meth:`insert_membrane_properties`)
-            - ion properties (see :py:meth:`_insert_ion_properties`)
+            - :math:`C_m` (see :func:`insert_membrane_properties`)
+            - :math:`R_a` (see :func:`insert_membrane_properties`)
+            - ion properties (see :func:`_insert_ion_properties`)
         - Mechanisms:
-            - range mechanisms (see :py:meth:`insert_range_mechanisms`)
+            - range mechanisms (see :func:`insert_range_mechanisms`)
             
         The workflow is as follows:
         
-        1. Add membrane properties to all structures (see :py:meth:`insert_membrane_properties`).
-        2. Determine the number of segments for each structure (see :py:meth:`determine_nseg`).
-        3. Add range mechanisms to all structures (see :py:meth:`insert_range_mechanisms`).
-        4. Add ion properties to all structures (see :py:meth:`_insert_ion_properties`), if the ``ion`` keyword is present in the :ref:`cell_parameters_format` file.
+        1. Add membrane properties to all structures (see :func:`insert_membrane_properties`).
+        2. Determine the number of segments for each structure (see :func:`determine_nseg`).
+        3. Add range mechanisms to all structures (see :func:`insert_range_mechanisms`).
+        4. Add ion properties to all structures (see :func:`_insert_ion_properties`), if the ``ion`` keyword is present in the :ref:`cell_parameters_format` file.
         5. Add spines, if the ``spines`` keyword is present in the :ref:`cell_parameters_format` file.
-            5.1 Add passive spines if ``pas`` is present in the range mechanisms (see :py:meth:`_add_spines`).
-            5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :py:meth:`_add_spines_ar`).
+            5.1 Add passive spines if ``pas`` is present in the range mechanisms (see :func:`_add_spines`).
+            5.2 Add passive spines to anomalously rectifying membrane if ``ar`` is present in the range mechanisms (see :func:`_add_spines_ar`).
                 
         Args:
-            parameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:class:`~single_cell_parser.parameters.NTParameterSet`): Neuron biophysical parameters, read from a :ref:`cell_parameters_format` file.
             full (bool): Whether or not to use full spatial discretization.
         '''
         for label in list(parameters.keys()):
@@ -268,10 +268,10 @@ class CellParser(object):
         """Apply cell modify functions to the cell object.
         
         Cell modify functions that appear in the :ref:`cell_parameters_format` file are applied to the cell object.
-        For a list of possible cell modify functions, refer to :py:mod:`~single_cell_parser.cell_modify_functions`.
+        For a list of possible cell modify functions, refer to :mod:`~single_cell_parser.cell_modify_functions`.
         
         Args:
-            parameters (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Neuron parameters, read from a :ref:`cell_parameters_format` file.
+            parameters (:class:`~single_cell_parser.parameters.NTParameterSet`): Neuron parameters, read from a :ref:`cell_parameters_format` file.
         """
         if 'cell_modify_functions' in list(parameters.keys()):
             if self.cell_modify_functions_applied == True:
@@ -299,20 +299,20 @@ class CellParser(object):
             RuntimeError: If cell is not set up.
             
         Returns:
-            :py:class:`~single_cell_parser.cell.Cell`: Cell object.
+            :class:`~single_cell_parser.cell.Cell`: Cell object.
         '''
         if self.cell is None:
             raise RuntimeError('Trying to start simulation with empty morphology')
         return self.cell
 
     def insert_membrane_properties(self, label, props):
-        '''Inserts membrane properties into all structures named as :py:param:`label`.
+        '''Inserts membrane properties into all structures named as :param:`label`.
         
         Args:
             label (str): Label of the structure.
-            props (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): Membrane properties. 
+            props (dict | :class:`~single_cell_parser.parameters.NTParameterSet`): Membrane properties. 
                 Keys named ``spines`` or ``ions`` are ignored, 
-                as they are taken care of by :py:meth:`insert_range_mechanisms` and :py:meth:`_insert_ion_properties`.
+                as they are taken care of by :func:`insert_range_mechanisms` and :func:`_insert_ion_properties`.
                 
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -341,13 +341,13 @@ class CellParser(object):
                 exec('sec.' + s)
 
     def insert_range_mechanisms(self, label, mechs):
-        r'''Inserts range mechanisms into all structures named as :py:param:`label`.
+        r'''Inserts range mechanisms into all structures named as :param:`label`.
         
-        Range mechanism specifications can be found in :py:mod:`mechanisms`.
+        Range mechanism specifications can be found in :mod:`mechanisms`.
         
         Args:
             label (str): Label of the structure.
-            mechs (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
+            mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -736,17 +736,17 @@ class CellParser(object):
                 raise NotImplementedError(errstr)
 
     def update_range_mechanisms(self, label, updateMechName, mechs):
-        '''Updates range mechanism :py:param:`updateMechName` in all structures named as :py:param:`label`.
+        '''Updates range mechanism :param:`updateMechName` in all structures named as :param:`label`.
         
         This method is essentially the same as insert_range_mechanisms, but does not
         insert mechanisms. Instead assumes they're already present.
         
-        Used during parameter variations; e.g. for optimization and exploration of neuron models (see :py:mod:`biophysics_fitting`).
+        Used during parameter variations; e.g. for optimization and exploration of neuron models (see :mod:`biophysics_fitting`).
         
         Args:
             label (str): Label of the structure.
             updateMechName (str): Name of the mechanism to update.
-            mechs (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :py:meth:`insert_range_mechanisms`.
+            mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :func:`insert_range_mechanisms`.
             
         Raises:
             RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
@@ -784,11 +784,11 @@ class CellParser(object):
             raise NotImplementedError(errstr)
 
     def _insert_ion_properties(self, label, ionParam):
-        '''Inserts ion properties into all structures named as :py:param:`label`
+        '''Inserts ion properties into all structures named as :param:`label`
         
         Args:
             label (str): Label of the structure.
-            ionParam (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Ion properties. See :ref:`cell_parameters_format` for an example.
+            ionParam (:class:`~single_cell_parser.parameters.NTParameterSet`): Ion properties. See :ref:`cell_parameters_format` for an example.
         '''
         if self.cell is None:
             raise RuntimeError(
@@ -888,7 +888,7 @@ class CellParser(object):
     def insert_passive_membrane(self, label):
         r"""Set up a passive membrane with default values.
         
-        Sets up the cell structure :py:param:`label` with a passive membrane that has the following properties:
+        Sets up the cell structure :param:`label` with a passive membrane that has the following properties:
         
         * :math:`R_a = 200 \Omega \cdot cm`
         * :math:`C_m = 0.75 \mu F/cm^2`
@@ -918,7 +918,7 @@ class CellParser(object):
     def insert_hh_membrane(self, label):
         """Set up a Hodgkin-Huxley membrane with default values.
         
-        Sets up the cell structure :py:param:`label` with a Hodgkin-Huxley membrane that has the following properties:
+        Sets up the cell structure :param:`label` with a Hodgkin-Huxley membrane that has the following properties:
         
         - :math:`\\bar{g}_{L} = 0.0003 \\, S/cm^2`
         - :math:`E_{L} = -54.3 \\, mV`
@@ -1061,10 +1061,10 @@ class CellParser(object):
         '''Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
         
         .. deprecated:: 0.1.0
-            This method is deprecated in favor of the more recent :py:meth:`_create_ais_Hay2013`.
+            This method is deprecated in favor of the more recent :func:`_create_ais_Hay2013`.
        
         Note:
-            Connectivity is automatically taken care of, since this should only be called from :py:meth:`spatialgraph_to_cell`.
+            Connectivity is automatically taken care of, since this should only be called from :func:`spatialgraph_to_cell`.
         
         '''
         nseg = 11  # nr of segments for hillock/ais
@@ -1175,7 +1175,7 @@ class CellParser(object):
         '''Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
         
         Note:
-            connectivity is automatically taken care of since this should only be called from :py:meth:`spatialgraph_to_cell`
+            connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
             
         '''
         
@@ -1268,10 +1268,10 @@ class CellParser(object):
         .. deprecated:: 0.1.0
             Including specific morphological features of spines made it impossible to find a neuron model for as long as we tried this
             project.
-            Instead we scale the membrane capacitance and resistance of the dendritic structures (see :py:meth:`_add_spines`).
+            Instead we scale the membrane capacitance and resistance of the dendritic structures (see :func:`_add_spines`).
             
         Args:
-            parameters (:py:class:`~single_cell_parser.parameters.NTParameterSetameterSet`): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
+            parameters (:class:`~single_cell_parser.parameters.NTParameterSetameterSet`): Parameters for spine morphology. See :ref:`cell_parameters_format` for an example.
         
         :skip-doc:
         """

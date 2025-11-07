@@ -23,17 +23,17 @@ import single_cell_parser as scp
 def get_cell_with_network(neuron_param, network_param, cache=True):
     """Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
     
-    This method creates a new network embedding for the :py:class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
+    This method creates a new network embedding for the :class:`~single_cell_parser.cell.Cell` based on the :ref:`network_parameters_format` file.
     
     Args:
-        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
-        network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
+        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
     
     Returns:
-        callable: A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
+        callable: A callable that returns a :class:`~single_cell_parser.cell.Cell` and :class:`~single_cell_parser.network.NetworkMapper` when called.
     
     See also:
-        :py:mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from 
+        :mod:`simrun.parameters_to_cell` for rebuilding **and** simulating the cell and network from 
         an existing network realization (:ref:`syn_file_format` file) it.
     """
     cell = scp.create_cell(neuron_param.neuron)

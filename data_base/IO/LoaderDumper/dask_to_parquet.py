@@ -124,7 +124,7 @@ class Loader(parent_classes.Loader):
             dask.dataframe: The loaded dask dataframe
             
         See also:
-            Each individual partitoin is loaded using :py:meth:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.load_helper`.
+            Each individual partitoin is loaded using :func:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.load_helper`.
         """
         fnames = os.listdir(savedir)
         fnames = [f for f in fnames if 'pandas_to_parquet' in f]
@@ -155,7 +155,7 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
     In addition to the dask dataframe itself, meta information is saved in the form of a JSON file.
     
     See also:
-        :py:func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
+        :func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
     
     Args:
         obj (dask.dataframe): Dask dataframe to save
@@ -169,7 +169,7 @@ def dump(obj, savedir, schema=None, client=None, repartition = 10000):
         None
         
     See also:
-        Each individual partitoin is saved using :py:meth:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.save_helper`.
+        Each individual partitoin is saved using :func:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.save_helper`.
     """
     # Save object meta information, e.g. dtypes of the columns and column names.
     save_object_meta(obj, savedir)
