@@ -248,6 +248,12 @@ def tree_reduction(delayeds, aggregate_fun, length=7):
 
 def synapse_activation_postprocess_dask(
     ddf, 
+    db=None,
+    groupby=None,
+    prefun=None,
+    applyfun=None,
+    postfun=None,
+    scheduler=None,
     **kwargs
     ):
     '''Calculates bins of synapse activation per trial from a dask dataframe.
@@ -261,19 +267,18 @@ def synapse_activation_postprocess_dask(
           - ``EI`` (Lumping the EXC / INH celltypes together)
           - ``binned_somadist``: synapse counts for all 50 microns
           - any column in the specified dataframe.
-        db (DataBase): if specified, the result will be computed immediately and saved in the database immediately.
-        get (dask scheduler): only has an effect if 'db' kwarg is provided. In this case, it allows to specify a dask scheduler for the computation.
-        scheduler (dask scheduler): 
+        db (:class:`data_base.DataBase`, optional): if specified, the result will be computed immediately and saved in the database immediately.
+        scheduler (dask scheduler, optional): 
             Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
-        prefun (callable):
+        prefun (callable, optional):
             A function to preprocess the synapse activation dataframe before binning.
             The function should take a pandas dataframe and return a pandas dataframe.
             Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
-        applyfun (callable):
+        applyfun (callable, optional):
             A function to bin the synapse activations.
             The function should take a pandas dataframe and return a numpy array.
             Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
-        postfun (callable):
+        postfun (callable, optional):
             A function to postprocess the binned synapse activations.
             The function should take a pandas series and return a numpy array.
             Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
@@ -286,34 +291,23 @@ def synapse_activation_postprocess_dask(
     See also:
         :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
         version of this method.
+
+    .. deprecated:: 0.5.0
+       The ``"get"`` keyword is deprecated. Please us ``'scheduler'`` instead.
     '''
     # TODO: make this method out of core
+    assert "groupby" is not None, "Please specify what to groupby on: celltype, presynaptic_column, proximal, EI, binned_somadist, or a column name from the dataframe"
+    if "get" in kwargs: raise DeprecationWarning("The get keyword is deprecated. Please specify a scheduler instead.")
+
     fun = dask.delayed(synapse_activation_postprocess_pandas)
     ds = ddf.to_delayed()
 
-    # special case: if db is defined: isolate that keyword for later use
-    if 'db' in kwargs:
-        db = kwargs['db']
-        del kwargs['db']
-    else:
-        db = None
-    if 'get' in kwargs:
-        get = kwargs['get']
-        del kwargs['get']
-    if "scheduler" in kwargs:
-        scheduler = kwargs["scheduler"]
-        del kwargs["scheduler"]
-    else:
-        get = None
-        scheduler=None
-
-    ds = [fun(d, **kwargs) for d in ds]
+    ds = [fun(d, groupby=groupby, prefun=prefun, applyfun=applyfun, postfun=postfun) for d in ds]
     ret = tree_reduction(ds, merge_results_together)
 
     if db is not None:
-        assert 'groupby' in kwargs
         save_groupby_delayed = dask.delayed(save_groupby)
-        ret_saved = save_groupby_delayed(db, ret, kwargs['groupby'])
+        ret_saved = save_groupby_delayed(db, ret, groupby)
         ret_saved.compute(scheduler=scheduler)
         # data = ret.compute(scheduler=get)
         # save_groupby(db, data, kwargs['groupby'])
