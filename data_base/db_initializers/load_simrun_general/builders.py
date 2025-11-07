@@ -237,8 +237,6 @@ def _build_dendritic_voltage_traces(db, repartition=None):
 
     Args:
         db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
-        suffix_dict (dict): Dictionary containing the suffixes of the dendritic voltage trace files.
-            Default is ``None``, and they are inferred from the cell parameter files.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 
     Returns:
