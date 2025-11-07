@@ -136,8 +136,9 @@ def resolve_parameter_paths(parameters, params_fn):
     """Resolve relative database paths in the parameters.
 
     Args:
+        parameters (:class:`single_cell_parser.parameters.Parameters`):
+            The parameters whose internal paths need to be resolved to the new database location.
         params_fn (str): The path to the parameters file.
-        db (str): The database path to resolve against.
 
     Returns:
         :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameters with resolved paths.
