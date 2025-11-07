@@ -1107,6 +1107,7 @@ class _Step:
         """
         self.__dict__.update(state)
 
+
 class StepOne(_Step):
     """Evaluate Step current one.
 
@@ -1132,9 +1133,30 @@ class StepOne(_Step):
         :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        soma_thresh=-30,
+        stim_onset=700,
+        stim_duration=2000,
+        punish=250.0,
+        punish_last_spike_after_deadline=True,
+        punish_minspikenum=5,
+        punish_returning_to_rest_tolerance=2.0,
+        definitions=HAY_STEP1_DEFINITIONS,
+        name="StepOne",
+        step_index=1,
+    ):
         super().__init__(
-            definitions=HAY_STEP1_DEFINITIONS, name="StepOne", step_index="1"
+            soma_thresh=soma_thresh,
+            stim_onset=stim_onset,
+            stim_duration=stim_duration,
+            punish=punish,
+            punish_last_spike_after_deadline=punish_last_spike_after_deadline,
+            punish_minspikenum=punish_minspikenum,
+            punish_returning_to_rest_tolerance=punish_returning_to_rest_tolerance,
+            definitions=definitions, 
+            name=name, 
+            step_index=step_index,
         )
 
 
@@ -1163,9 +1185,30 @@ class StepTwo(_Step):
         :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        soma_thresh=-30,
+        stim_onset=700,
+        stim_duration=2000,
+        punish=250.0,
+        punish_last_spike_after_deadline=True,
+        punish_minspikenum=5,
+        punish_returning_to_rest_tolerance=2.0,
+        definitions=HAY_STEP2_DEFINITIONS,
+        name="StepTwo",
+        step_index=2,
+    ):
         super().__init__(
-            definitions=HAY_STEP2_DEFINITIONS, name="StepTwo", step_index="2"
+            soma_thresh=soma_thresh,
+            stim_onset=stim_onset,
+            stim_duration=stim_duration,
+            punish=punish,
+            punish_last_spike_after_deadline=punish_last_spike_after_deadline,
+            punish_minspikenum=punish_minspikenum,
+            punish_returning_to_rest_tolerance=punish_returning_to_rest_tolerance,
+            definitions=definitions, 
+            name=name, 
+            step_index=step_index,
         )
 
 
@@ -1194,9 +1237,30 @@ class StepThree(_Step):
         :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepThree` for more information on the stimulus protocol.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        soma_thresh=-30,
+        stim_onset=700,
+        stim_duration=2000,
+        punish=250.0,
+        punish_last_spike_after_deadline=True,
+        punish_minspikenum=5,
+        punish_returning_to_rest_tolerance=2.0,
+        definitions=HAY_STEP3_DEFINITIONS,
+        name="StepThree",
+        step_index=3,
+    ):
         super().__init__(
-            definitions=HAY_STEP3_DEFINITIONS, name="StepThree", step_index="3"
+            soma_thresh=soma_thresh,
+            stim_onset=stim_onset,
+            stim_duration=stim_duration,
+            punish=punish,
+            punish_last_spike_after_deadline=punish_last_spike_after_deadline,
+            punish_minspikenum=punish_minspikenum,
+            punish_returning_to_rest_tolerance=punish_returning_to_rest_tolerance,
+            definitions=definitions, 
+            name=name, 
+            step_index=step_index,
         )
 
 
