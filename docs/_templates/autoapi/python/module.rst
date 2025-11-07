@@ -3,8 +3,6 @@
 {%- set breadcrumb = obj.id.split('.')[1:] %}
 {%- set shortname = obj.id.split('.')[-1] | escape %}
 
-{% if obj.display %}
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~{{ root_module }}`
    {%- for n in range(breadcrumb|length - 1 )  %}
  ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
@@ -47,6 +45,7 @@
 
 
 {%- if "show-module-summary" in autoapi_options %}
+
 {% block classes scoped %}
 {%- if visible_classes %}
 {{ macros.auto_summary(visible_classes, title="Classes") }}
@@ -82,7 +81,7 @@
 {{ macros.auto_summary(visible_exceptions, title="Exceptions") }}
 {%- endif %}
 {%- endblock %}
-{% endif %}
+
 {% endif %}
 
 .. container:: doc-feedback
