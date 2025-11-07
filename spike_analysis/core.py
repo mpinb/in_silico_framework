@@ -655,17 +655,18 @@ class SpikeDetectionCreastTrough(object):
         _spike_times_trough (list): spike times fullfilling trough criterion
     '''
 
-    def __init__(self,
-                 reader_object,
-                 lim_creast='minimum',
-                 lim_trough='minimum',
-                 max_creast_trough_interval=2.,
-                 tdelta=1.,
-                 stimulus_period=1,
-                 stimulus_period_offset=0,
-                 upper_creast_threshold=np.inf,
-                 cellid='__no_cellid_assigned__',
-                 spike_time_mode='latest'):
+    def __init__(
+        self,
+        reader_object,
+        lim_creast='minimum',
+        lim_trough='minimum',
+        max_creast_trough_interval=2.,
+        tdelta=1.,
+        stimulus_period=1,
+        stimulus_period_offset=0,
+        upper_creast_threshold=np.inf,
+        cellid='__no_cellid_assigned__',
+        spike_time_mode='latest'):
         """
         Args:
             reader_object (:py:class:`~spike_analysis.core.ReaderSmr`|:py:class:`~spike_analysis.core.LabViewReader`): 
@@ -682,7 +683,7 @@ class SpikeDetectionCreastTrough(object):
             max_creast_trough_interval (float): Maximum interval between creast and trough such that a spike is recognized.
             tdelta (float): minimum interval between spikes
             stimulus_period (int): number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
-            stimulus_period_offse (int): Number of stimulus that initiates first trial.
+            stimulus_period_offset (int): Number of stimulus that initiates first trial.
             cellid (str): name to be used in spike times dataframe
         """
         self.reader = reader_object
@@ -1288,7 +1289,7 @@ class STAPlugin_bursts(STAPlugin_TEMPLATE):
             row (list-like): Contains spike times.
             event_maxtimes (dict): Dictionary where keys indicate event type (0 means singlet, 1 means doublet, 2 means triplet, ...),
                 and values indicate max duration of such an event.
-            event_name (dict): Dictionary with names of the events (0: 'singlet', 1: 'doublet', 2: 'triplet').
+            event_names (dict): Dictionary with names of the events (0: 'singlet', 1: 'doublet', 2: 'triplet').
         
         Returns:
             pandas.DataFrame: One row per event. Columns are:
