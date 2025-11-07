@@ -184,7 +184,22 @@ class ExSyn(Synapse):
             targetCell,
             threshold=10.0,
             delay=0.0,
-            weight=0.0):
+            weight=0.0
+    ):
+
+        '''Setup of all necessary hoc connections.
+        
+        Stores all mechanisms and NetCons for reference counting.
+        
+        Args:
+            source (:py:class:`single_cell_parser.cell.PointCell`): 
+                Presynaptic cell whose :py:attr:`single_cell_parser.cell.PointCell.spikes` attribute is used as ``source`` in NEURON's NetCon object.
+                Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
+            targetCell (:py:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
+            threshold (float): Activation threshold. default is :math:`10mV`
+            delay (float): Delay between the activation of the presynaptic cell and the synapse. Default is :math:`0ms`
+            weight (float): Weight of the synapse.
+        '''
         x = targetCell.sections[self.secID].relPts[self.ptID]
         hocSec = targetCell.sections[self.secID]
         self.syn = h.ExpSyn(x, hocSec)

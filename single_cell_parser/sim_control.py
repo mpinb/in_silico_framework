@@ -59,7 +59,7 @@ class SimControl(object):
         '''
         Args:
             cell (:py:class:`neuron:Section`): The cell to simulate.
-            simTime (float): Simulation time (ms). Default: 5
+            sim_time (float): Simulation time (ms). Default: 5
             dt (float): Time step (ms). Default: 0.001
             T (float): Temperature (Celsius). Default: 37
         '''

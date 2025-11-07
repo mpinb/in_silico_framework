@@ -227,7 +227,7 @@ def spines_update_synapse_distribution_file(
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         synapse_distribution_file (str): The path to the original :ref:`syn_file_format` file.
-        new_synfile (str): The path to the new :ref:`syn_file_format` file.
+        new_synapse_distribution_file (str): The path to the new :ref:`syn_file_format` file.
             A new_synfile will be created if it does not already exist.
     """
     ## update the .syn file
