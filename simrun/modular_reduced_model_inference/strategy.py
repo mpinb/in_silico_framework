@@ -484,7 +484,7 @@ class RaisedCosineBasis(object):
         width=80,
         reversed_=False,
         backend=np):
-        """
+        r"""
         Args:
             a (int): The steepness of the raised cosine. Default is :math:`2`.
             c (int): The offset of the raised cosine. Default is :math:`1`.
@@ -659,11 +659,11 @@ class Strategy_ISIraisedCosine(_Strategy):
         kernel = RaisedCosineBasis_postspike.get_superposition(x)
         return kernel[dereference(ISI)]
 
-    def visualize(self, optimizer_output, normalize=True, only_succesful=True):
+    def visualize(self, optimizer_output, normalize=True, only_successful=True):
         fig = plt.figure()
         ax = fig.add_subplot(111)
         for x in optimizer_output:
-            if only_succesful:
+            if only_successful:
                 if not x.success:
                     continue
             if normalize:
@@ -928,7 +928,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             
         Args:
             optimizer_output (List[scipy.optimize.OptimizeResult]): An array of optimizer outputs. usually one element per data split.
-            only_succesful (bool): Whether to only plot the successful optimizer outputs. Default is ``False``.
+            only_successful (bool): Whether to only plot the successful optimizer outputs. Default is ``False``.
             normalize (bool): Whether to normalize the basis functions. Default is ``True``.
             
         Returns:
