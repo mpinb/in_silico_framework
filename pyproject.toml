@@ -70,7 +70,8 @@ blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 # OS specific dependencies
 [tool.pixi.target.osx]
-pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
+# >=9 compiles to c++, not c, breaking our .mod files
+pypi-dependencies = { neuron = ">=8.2,<9",   "distributed"= ">=2.30.0" }
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
