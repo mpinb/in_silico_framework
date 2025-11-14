@@ -572,16 +572,14 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/f7/c0/93885c4106d2626bf51fdec377d6aef740dfa5c4877461889a7cf8e565cc/greenlet-3.2.4-cp39-cp39-macosx_11_0_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/fe/60/03bcb17e62fefbdb5d0db8c4bfe6a00c5124a739eb8833d5d885f0c4c38e/ipyparallel-9.0.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/07/10/852b0d5ef90443503be1cdb9a29002cb96e6c0e33084ce69cb26278a152e/isf_pandas_msgpack-0.4.0.tar.gz
-      - pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/96/78/3e62ce6bb858d308b69d8c76dd800491dccc15443fdc7e21c9b95b09e430/neo-0.13.3-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/99/02/e18015bdf8c87c553830001dfa14b3d8e8ed5ac69c3ea71ff8a54ffe6810/neuron-9.0.0-cp39-cp39-macosx_11_0_arm64.whl
+      - pypi: https://files.pythonhosted.org/packages/e0/0a/4e8cd03f56ee4cdef379b9a110064fe3ec2c3149cf6eb9d1735d7432524d/neuron-8.2.7-cp39-cp39-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/42/42/218f3d1490af0c5f781f1e54fc1e4a2ca163643807d57890d2a246bd626d/Pebble-5.1.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/48/ed94e31a54359a5c6ce9cb2e1db03ac8255576dcb8692ffb048323e10f1a/pyarrow-11.0.0-cp39-cp39-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/61/ad/689f02752eeec26aed679477e80e632ef1b682313be70793d798c1d5fc8f/PyJWT-2.10.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3a/aa/2d37dc5a180585b8b10aac671529625b72c8a6908b6b8b8bf0b1f8e35101/quantities-0.15.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/26/5c5fa0e83c3621db835cfc1f1d789b37e7fa99ed54423b5f519beb931aa7/redis-5.3.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/cb/76/55d6cb5b4a4e221d0f4054420258045dea917f20f051d469a5b344535970/scoop-0.7.2.0.tar.gz
-      - pypi: https://files.pythonhosted.org/packages/99/ff/c87e0622b1dadea79d2fb0b25ade9ed98954c9033722eb707053d310d4f3/sympy-1.13.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/anyio-3.7.1-pyhd8ed1ab_0.conda
@@ -10173,19 +10171,6 @@ packages:
   purls: []
   size: 491140
   timestamp: 1730581373280
-- pypi: https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl
-  name: mpmath
-  version: 1.3.0
-  sha256: a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c
-  requires_dist:
-  - pytest>=4.6 ; extra == 'develop'
-  - pycodestyle ; extra == 'develop'
-  - pytest-cov ; extra == 'develop'
-  - codecov ; extra == 'develop'
-  - wheel ; extra == 'develop'
-  - sphinx ; extra == 'docs'
-  - gmpy2>=2.1.0a4 ; platform_python_implementation != 'PyPy' and extra == 'gmpy'
-  - pytest>=4.6 ; extra == 'tests'
 - conda: https://conda.anaconda.org/conda-forge/linux-64/msgpack-python-1.1.1-py39h74842e3_0.conda
   sha256: 2f1264171548af74d271f40ba61658d64a573cbe895930a96f38ef29906e1f3d
   md5: fce378a7c73ea47b7e79ef27a8c798a2
@@ -10628,17 +10613,16 @@ packages:
   - pkg:pypi/nest-asyncio?source=hash-mapping
   size: 11543
   timestamp: 1733325673691
-- pypi: https://files.pythonhosted.org/packages/99/02/e18015bdf8c87c553830001dfa14b3d8e8ed5ac69c3ea71ff8a54ffe6810/neuron-9.0.0-cp39-cp39-macosx_11_0_arm64.whl
+- pypi: https://files.pythonhosted.org/packages/e0/0a/4e8cd03f56ee4cdef379b9a110064fe3ec2c3149cf6eb9d1735d7432524d/neuron-8.2.7-cp39-cp39-macosx_11_0_arm64.whl
   name: neuron
-  version: 9.0.0
-  sha256: 7ee35ee880c3d9ded4a268d27006379833f0d2e7de9a5d6a511bb7bc43085ced
+  version: 8.2.7
+  sha256: 21acd91764f3e02dc61df309c80b88bf3ebb9c0a85fda804d13f32ccc8a014b6
   requires_dist:
-  - find-libpython<=0.4
-  - numpy>=1.9.3,<=2.2.3
-  - packaging>=22.0,<=25.0
-  - setuptools<=80.8.0
-  - sympy>=1.3,<=1.13.3
-  requires_python: '>=3.9'
+  - numpy>=1.9.3
+  - packaging
+  - find-libpython
+  - setuptools
+  - pyreadline3<=3.5.4 ; sys_platform == 'win32'
 - conda: https://conda.anaconda.org/conda-forge/linux-64/neuron-7.8.2-nompi_py39ha451bec_102.tar.bz2
   sha256: 38e4211f3c93184107ae43256013b8959163c35b11658f3d29fcd16ca0e3f0c2
   md5: 2f829c533d95335dd0e5671801fca6e8
@@ -14305,15 +14289,6 @@ packages:
   - pkg:pypi/stdlib-list?source=hash-mapping
   size: 27202
   timestamp: 1761343475105
-- pypi: https://files.pythonhosted.org/packages/99/ff/c87e0622b1dadea79d2fb0b25ade9ed98954c9033722eb707053d310d4f3/sympy-1.13.3-py3-none-any.whl
-  name: sympy
-  version: 1.13.3
-  sha256: 54612cf55a62755ee71824ce692986f23c88ffa77207b30c1368eda4a7060f73
-  requires_dist:
-  - mpmath>=1.1.0,<1.4
-  - pytest>=7.1.0 ; extra == 'dev'
-  - hypothesis>=6.70.0 ; extra == 'dev'
-  requires_python: '>=3.8'
 - conda: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.17-h0157908_18.conda
   sha256: 69ab5804bdd2e8e493d5709eebff382a72fab3e9af6adf93a237ccf8f7dbd624
   md5: 460eba7851277ec1fd80a1a24080787a
