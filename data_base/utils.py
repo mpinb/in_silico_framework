@@ -33,7 +33,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 def chunkIt(seq, num):
-    '''Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+    '''Splits :param:`seq` in :param:`num` lists, with approximately equal size.
     
     Args:
         seq (array): array to be split
@@ -121,14 +121,14 @@ def convertible_to_int(x):
         return False
         
 def split_file_to_buffers(f, split_str = '#'):
-    '''Reads a file f and splits it wherever :paramref:`split_str` is found.
+    '''Reads a file f and splits it wherever :param:`split_str` is found.
     
     Args:
         f (file): file to be split
         split_str (str): string to split the file. Default is '#'
     
     Returns:
-        list: list of :py:class:`StringIO` Buffers.
+        list: list of :class:`StringIO` Buffers.
     
     See also:
         adapted from http://stackoverflow.com/a/33346758/5082048'''
@@ -226,7 +226,7 @@ def select(df, **kwargs):
     
     Args:
         df (pd.DataFrame): the dataframe
-        **kwargs: the columns and values to be selected
+        kwargs: the columns and values to be selected
     
     Returns:
         pd.DataFrame: the dataframe with the selected rows
@@ -262,8 +262,8 @@ def skit(*funcs, **kwargs):
     '''Splits kwargs up to supply different functions with the right subset.
     
     Args:
-        *funcs (function): functions to be supplied with the right subset of kwargs
-        **kwargs: keyword arguments to be split up
+        funcs (List[callable]): functions to be supplied with the right subset of kwargs
+        kwargs: keyword arguments to be split up
     
     See also:
         Adapted from http://stackoverflow.com/a/23430335/5082048
@@ -278,10 +278,10 @@ def skit(*funcs, **kwargs):
     return tuple(out)
 
 def unique(list_):
-    """Get the unique elements of a list
+    r"""Get the unique elements of a list
     
     Args:
-        list_ (list): the list
+        list\_ (list): the list
         
     Returns:
         list: the unique elements of the list
@@ -354,7 +354,7 @@ def fancy_dict_compare(dict_1, dict_2, dict_1_name = 'd1', dict_2_name = 'd2', p
 def wait_until_key_removed(db, key, delay = 5):
     """Wait until a key is removed from a database.
     
-    This function checks every :paramref:`delay` seconds if the key is still in the database.
+    This function checks every :param:`delay` seconds if the key is still in the database.
     Useful for waiting until a process has finished.
     
     Args:
@@ -594,7 +594,7 @@ def colorize_key(key):
         str: the colorized key
         
     See also:
-        :py:meth:`data_base.utils.colorize`
+        :func:`data_base.utils.colorize`
     """
     if is_db(key.absolute()):
         c = bcolors.OKGREEN
@@ -617,7 +617,7 @@ def colorize_str(key, bcolor):
         str: the colorized string
     
     See also:
-        :py:class:`data_base.utils.bcolors` For color escape sequences.
+        :class:`data_base.utils.bcolors` For color escape sequences.
     """
     return bcolor + key + bcolors.ENDC
         
@@ -759,13 +759,13 @@ def delete_in_background(key):
     return p
 
 def is_db(dir_to_data):
-    '''Check if a path is a :py:class:`~data_base.DataBase`.
+    '''Check if a path is a :class:`~data_base.DataBase`.
     
     Args:
         dir_to_data (pathlib.Path): The path to the directory
     
     Returns:
-        bool: ``True`` if :paramref:`dir_to_data` is a (sub)db, ``False`` otherwise.
+        bool: ``True`` if :param:`dir_to_data` is a (sub)db, ``False`` otherwise.
     '''
     can_exist = [
         'db_state.json', 

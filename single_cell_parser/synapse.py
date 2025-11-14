@@ -18,11 +18,11 @@
 '''
 Synapse class for synaptic activations and NEURON API.
 
-Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+Used in :class:`single_cell_parser.cell.Cell` to store synapse information,
 and to activate/deactivate synapses in NEURON.
 
 See also:
-    :py:class:`single_cell_parser.cell.Cell`.
+    :class:`single_cell_parser.cell.Cell`.
 '''
 from neuron import h
 from single_cell_parser.parameters import NTParameterSet
@@ -33,23 +33,23 @@ __date__ = '2012-03-30'
 class Synapse(object):
     '''Synapse class for synaptic activations and NEURON API.
 
-    Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+    Used in :class:`single_cell_parser.cell.Cell` to store synapse information,
     and to activate/deactivate synapses in NEURON.
     
     See also:
-        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
+        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
         This class is specialized for the NEURON simulator, and is used to store synapse information and activate/deactivate synapses in NEURON.
 
     Attributes:
         secID (int): ID of attached section in cell.sections
         ptID (int): ID of attached point in cell.sections[self.secID].pts
         x (float): Relative coordinate along attached section (from 0 to 1)
-        preCellType (str): Type of the presynaptic :py:class:`~single_cell_parser.cell.PointCell`
-        preCell (:py:class:`~single_cell_parser.cell.PointCell`): Reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
-        releaseSite (:py:class:`~single_cell_parser.cell.PointCell`): Release site of presynaptic cell.
+        preCellType (str): Type of the presynaptic :class:`~single_cell_parser.cell.PointCell`
+        preCell (:class:`~single_cell_parser.cell.PointCell`): Reference to presynaptic :class:`~single_cell_parser.cell.PointCell`
+        releaseSite (:class:`~single_cell_parser.cell.PointCell`): Release site of presynaptic cell.
         postCellType (str): Postsynaptic cell type.
         coordinates (list): 3D coordinates of synapse location
-        receptors (:py:class:`~single_cell_parser.parameters.NTParameterSet`): Stores hoc mechanisms
+        receptors (:class:`~single_cell_parser.parameters.NTParameterSet`): Stores hoc mechanisms
         netcons (list): Stores NetCons
         weight (float): Synaptic weight
         _active (bool): Activation status
@@ -67,8 +67,8 @@ class Synapse(object):
         Args:
             edgeID (int): ID of attached section in cell.sections
             edgePtID (int): ID of attached point in cell.sections[edgeID].pts
-            preCellType (str): reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
-            postCellType (str): reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+            preCellType (str): reference to presynaptic :class:`~single_cell_parser.cell.PointCell`
+            postCellType (str): reference to postsynaptic :class:`~single_cell_parser.cell.PointCell`
         '''
         self.secID = edgeID
         self.ptID = edgePtID
@@ -91,7 +91,7 @@ class Synapse(object):
             bool: Activation status of the synapse.
             
         See also:
-            :py:meth:`activate_hoc_syn` and :py:meth:`disconnect_hoc_synapse`
+            :func:`activate_hoc_syn` and :func:`disconnect_hoc_synapse`
         """
         return self._active
 
@@ -101,14 +101,14 @@ class Synapse(object):
         Stores all mechanisms and NetCons for reference counting.
         
         Args:
-            source (:py:class:`single_cell_parser.cell.PointCell`): 
-                Presynaptic cell whose :py:attr:`single_cell_parser.cell.PointCell.spikes` attribute is used as ``source`` in NEURON's NetCon object.
+            source (:class:`single_cell_parser.cell.PointCell`): 
+                Presynaptic cell whose :attr:`single_cell_parser.cell.PointCell.spikes` attribute is used as ``source`` in NEURON's NetCon object.
                 Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
-            preCell (:py:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
-            targetCell (:py:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
-            receptors (dict | Dict[:py:class:`~single_cell_parser.parameters.NTParameterSet`]): 
-                Dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet` of receptors. 
-                Each individual receptor in this collection must be of the type :py:class:`~single_cell_parser.parameters.NTParameterSet`.
+            preCell (:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
+            targetCell (:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
+            receptors (dict | Dict[:class:`~single_cell_parser.parameters.NTParameterSet`]): 
+                Dictionary or :class:`~single_cell_parser.parameters.NTParameterSet` of receptors. 
+                Each individual receptor in this collection must be of the type :class:`~single_cell_parser.parameters.NTParameterSet`.
         '''
         assert isinstance(receptors, NTParameterSet), 'receptors must be single_cell_parser.parameters.NTParameterSet, but they are of type %s' % type(receptors)
         self.releaseSite = source
@@ -145,10 +145,10 @@ class Synapse(object):
     def disconnect_hoc_synapse(self):
         """Disconnect the synapse from the neuron model.
         
-        Disconnecting the synapse turns off the release site and removes the :py:class:`neuron:NetCon`
+        Disconnecting the synapse turns off the release site and removes the :class:`neuron:NetCon`
         
         See also:
-            :py:meth:`activate_hoc_syn`.
+            :func:`activate_hoc_syn`.
         """
         if self.releaseSite:
             self.releaseSite.turn_off()
@@ -184,7 +184,22 @@ class ExSyn(Synapse):
             targetCell,
             threshold=10.0,
             delay=0.0,
-            weight=0.0):
+            weight=0.0
+    ):
+
+        '''Setup of all necessary hoc connections.
+        
+        Stores all mechanisms and NetCons for reference counting.
+        
+        Args:
+            source (:class:`single_cell_parser.cell.PointCell`): 
+                Presynaptic cell whose :attr:`single_cell_parser.cell.PointCell.spikes` attribute is used as ``source`` in NEURON's NetCon object.
+                Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
+            targetCell (:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
+            threshold (float): Activation threshold. default is :math:`10mV`
+            delay (float): Delay between the activation of the presynaptic cell and the synapse. Default is :math:`0ms`
+            weight (float): Weight of the synapse.
+        '''
         x = targetCell.sections[self.secID].relPts[self.ptID]
         hocSec = targetCell.sections[self.secID]
         self.syn = h.ExpSyn(x, hocSec)

@@ -46,14 +46,14 @@ def manylines(
         df (pd.DataFrame): the dataframe containing voltage traces,
         ax (matplotlib.pyplot.Axes): an ax instance.
         axis (list): the ax limits, e.g. [1, 10, 1, 10]
-        colormap (dict): a colormap, mapping values for :paramref:groupby_attribute to colors.
+        colormap (dict): a colormap, mapping values for :paramgroupby_attribute to colors.
         groupby_attribute (str): column name to group by.
         figsize (tupe(int)): the size of the Figure
         returnPixelObject (bool): Whether or not to return as a PixelObject
         scheduler (distributed.client.Client | str, optional): a distributed scheduler.
 
     Returns:
-        :py:class:`~matplotlib.figure.Figure`: Figure object containing all lines defined in :paramref:`df`
+        :class:`~matplotlib.figure.Figure`: Figure object containing all lines defined in :param:`df`
     '''
 
     if returnPixelObject:
@@ -131,16 +131,16 @@ def manylines_helper(
             axis limits, e.g. (1, 10, 1, 10)
         colormap (dict): 
             A colormap to use for the plot. 
-            Must map a label from :paramref:groupby_attribute to a color
-        fig (:py:class:`~matplotlib.figure.Figure`, optional): 
-            A Figure object to plot on. 
+            Must map a label from :paramgroupby_attribute to a color
+        ax (:class:`~matplotlib.axes.Axes`, optional): 
+            An axes object to plot on. 
             If specified, will plot on the current active axis. 
             If not, it will create one.
         figsize (tuple): 
             size of the figure.
 
     Returns:
-        maptlotlib.pyplot.Figure: Figure object containing the lines as specified in pdf.
+        Tuple[:class:`~maptlotlib.figure.Figure`,:class:`~matplotlib.axes.Axes`]: Figure and Axes object containing the lines as specified in pdf.
     '''
     if not isinstance(pdf, pd.DataFrame):
         raise RuntimeError(

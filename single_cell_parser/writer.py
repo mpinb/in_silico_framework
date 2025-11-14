@@ -90,7 +90,7 @@ def write_landmark_file(fname=None, landmarkList=None):
         landmarkList (list): list of tuples, each of which holds 3 float coordinates
 
     Returns:
-        None. Writes out the landmark file to :paramref:`fname`
+        None. Writes out the landmark file to :param:`fname`
 
     Raises:
         RuntimeError: if no file name is given or if the landmark list is empty
@@ -142,7 +142,7 @@ def write_sim_results(fname, t, v):
         v (list): The voltage trace.
         
     Returns:
-        None. Writes out the voltage trace file to :paramref:`fname`.
+        None. Writes out the voltage trace file to :param:`fname`.
         
     Example:
         
@@ -171,7 +171,7 @@ def write_all_traces(fname, t, vTraces):
         vTraces (list): A list of voltage traces.
 
     Returns:
-        None. Writes out the voltage traces to :paramref:`fname`.
+        None. Writes out the voltage traces to :param:`fname`.
     
     Example:
 
@@ -203,8 +203,8 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :py:meth:`single_cell_parser.reader.read_synapse_realization` for the corresponding reader function.
-    - :py:meth:`write_pruned_synapse_locations` for a similar function that includes a `pruned` flag.
+    - :func:`single_cell_parser.reader.read_synapse_realization` for the corresponding reader function.
+    - :func:`write_pruned_synapse_locations` for a similar function that includes a `pruned` flag.
 
     Args:
         fname (str): The name of the file to write to.
@@ -212,7 +212,7 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
         cellID (str): The ID of the cell.
 
     Returns:
-        None. Writes out the synapse location file to :paramref:`fname`.
+        None. Writes out the synapse location file to :param:`fname`.
     '''
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
@@ -249,16 +249,16 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :py:meth:`single_cell_parser.reader.read_pruned_synapse_realization` for the corresponding reader function.
-    - :py:meth:`write_cell_synapse_locations` for a similar function that does not include a `pruned` flag.
+    - :func:`single_cell_parser.reader.read_pruned_synapse_realization` for the corresponding reader function.
+    - :func:`write_cell_synapse_locations` for a similar function that does not include a `pruned` flag.
 
     Args:
         fname (str): The name of the file to write to.
-        synapses (dict): A dictionary of synapses (see :py:meth:`~single_cell_parser.reader.read_pruned_synapse_locations`).
+        synapses (dict): A dictionary of synapses (see :func:`~single_cell_parser.reader.read_pruned_synapse_locations`).
         cellID (str): The ID of the cell.
 
     Returns:
-        None. Writes out the synapse location file to :paramref:`fname`.
+        None. Writes out the synapse location file to :param:`fname`.
     '''
     if fname is None or synapses is None or cellID is None:
         err_str = 'Incomplete data! Cannot write synapse location file'
@@ -300,7 +300,7 @@ def write_functional_realization_map(
     See also:
 
     - :ref:`con_file_format` for more information on the `.con` file format.
-    - :py:meth:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
+    - :func:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
 
     Args:
         fname (str): The name of the file to write to.
@@ -345,7 +345,7 @@ def write_synapse_activation_file(
     activeSyns=None):
     """Write out a :ref:`syn_activation_format` file.
 
-    Used in :py:meth:`~single_cell_parser.analyze.synanalysis.compute_synapse_distances_times` 
+    Used in :func:`~single_cell_parser.analyze.synanalysis.compute_synapse_distances_times` 
     to write out a synapse activation file.
 
     The following information is saved:
@@ -359,15 +359,15 @@ def write_synapse_activation_file(
     - activation times: times at which the synapse was active (ms).
 
     Args:
-        fname (str): The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
-        cell (:py:class:`single_cell_parser.cell.Cell`): Cell object.
+        fname (str): The output file name as a ful path, including the file extension. Preferably unique (see e.g. :func:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
+        cell (:class:`single_cell_parser.cell.Cell`): Cell object.
         synTypes (list): list of synapse types.
         synDistances (dict): dictionary of synapse distances per synapse type.
         synTimes (dict): dictionary of synapse activation times per synapse type. Values are a list of the activation times for each synapse within that type.
         activeSyns (dict): dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
 
     Returns:
-        None. Writes out the synapse activation file to :paramref:`fname`.
+        None. Writes out the synapse activation file to :param:`fname`.
 
     Example:
         
@@ -438,10 +438,10 @@ def write_synapse_weight_file(fname=None, cell=None):
     
     Args:
         fname (str): The name of the file to write to.
-        cell (:py:class:`single_cell_parser.cell.Cell`): The cell object, containing synapses.
+        cell (:class:`single_cell_parser.cell.Cell`): The cell object, containing synapses.
     
     Returns:
-        None. Writes out the synapse weight file to :paramref:`fname`.
+        None. Writes out the synapse weight file to :param:`fname`.
         
     """
     if fname is None or cell is None:
@@ -489,7 +489,7 @@ def write_PSTH(fname=None, PSTH=None, bins=None):
         bins (list): A list of time bins, including begin and end
         
     Returns:
-        None. Writes out the PSTH file to :paramref:`fname`.
+        None. Writes out the PSTH file to :param:`fname`.
 
     Example:
 
@@ -529,7 +529,7 @@ def write_spike_times_file(fname=None, spikeTimes=None):
         spikeTimes (dict): A dictionary with trial numbers as keys (int) and tuples of spike times in each trial as values.
     
     Returns:
-        None. Writes out the spike times file to :paramref:`fname`.
+        None. Writes out the spike times file to :param:`fname`.
 
     Example:
 
@@ -569,7 +569,7 @@ def write_presynaptic_spike_times(fname=None, cells=None):
         cells (dict): A dictionary with cell types as keys and lists of cells as values.
 
     Returns:
-        None. Writes out the presynaptic spike times file to :paramref:`fname`.
+        None. Writes out the presynaptic spike times file to :param:`fname`.
 
     Example:
 
@@ -629,7 +629,7 @@ def write_cell_simulation(
 
     Args:
         fname (str): The name of the file to write to.
-        cell (:py:class:`single_cell_parser.cell.Cell`): The cell object.
+        cell (:class:`single_cell_parser.cell.Cell`): The cell object.
         traces (list): A list of strings, each representing a recorded quantity.
         tVec (list): A list of time points.
         allPoints (bool): If True, all points of the cell are written to the file.
@@ -986,8 +986,8 @@ def write_cell_simulation(
 def write_functional_map(fname, functionalMap):
     """Write a functional map to an AMIRA file.
     
-    Deprecated. Consider using :py:meth:`visualize.vtk.write_vtk_pointcloud_file` 
-    or :py:meth:`visualize.vtk.write_vtk_frames` for visualization purposes.
+    Deprecated. Consider using :func:`visualize.vtk.write_vtk_pointcloud_file` 
+    or :func:`visualize.vtk.write_vtk_frames` for visualization purposes.
 
     This method may still serve well if you need an AMIRA mesh file.
     
@@ -996,7 +996,7 @@ def write_functional_map(fname, functionalMap):
         functionalMap (dict): A dictionary with cell labels as keys and lists of points as values.
 
     Returns:
-        None. Writes out the functional map file to :paramref:`fname`.
+        None. Writes out the functional map file to :param:`fname`.
     """
     totalNrPts = 0
     for key in list(functionalMap.keys()):
@@ -1381,7 +1381,7 @@ def write_landmarks_colorcoded_to_folder(
         vbinsize (float): The size of the bins to color by.
         
     Returns:
-        None. Writes out the landmarks to the directory :paramref:`basedir`.
+        None. Writes out the landmarks to the directory :param:`basedir`.
     """
     import os
     from itertools import groupby

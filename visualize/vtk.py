@@ -166,7 +166,7 @@ def save_cells_landmark_files_vtk(
     """Save synapse activations as vtk point cloud files for each timepoint.
     
     Given a synapse activation dataframe and a synapse location dataframe, 
-    this method saves the synapse locations as vtk point cloud files for each timepoint in :paramref:`times_to_show`.
+    this method saves the synapse locations as vtk point cloud files for each timepoint in :param:`times_to_show`.
 
     Args:
         sa (pd.DataFrame): Synapse activation dataframe.
@@ -178,7 +178,7 @@ def save_cells_landmark_files_vtk(
         set_index (list, optional): Index to set in the synapse activation dataframe. Defaults to ['synapse_ID', 'celltype'].
 
     Returns:
-        None. Writes out a .vtk file for each timepoint in :paramref:`times_to_show`.
+        None. Writes out a .vtk file for each timepoint in :param:`times_to_show`.
     """
 
     assert "celltype" in sa.columns, "Please add a column 'celltype' to the synapse activation dataframe."
@@ -240,12 +240,12 @@ def write_vtk_skeleton_file(
     n_decimals=2):
     """Write out a .vtk file for a neuron morphology.
 
-    This method is used by :py:meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
+    This method is used by :func:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
 
     Args:
         lookup_table (pd.DataFrame): 
             Lookup table for the neuron morphology.
-            Can be accessed from :py:class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
+            Can be accessed from :class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
         out_name (str): Name of the output file.
         out_dir (str): Directory to save the file to.
         point_scalar_data (dict, optional): Dictionary containing scalar data for each point. Defaults to None.

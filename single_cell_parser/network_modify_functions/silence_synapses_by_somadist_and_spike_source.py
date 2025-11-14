@@ -17,7 +17,7 @@
 
 """Modify network activity by silencing synapses based on soma distance and spike source.
 
-These functions can be used in e.g. :py:mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
+These functions can be used in e.g. :mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
 silencing synapses based on their postsynaptic location, or synapse type (i.e. spike source).
 """
 
@@ -31,11 +31,11 @@ def silence_synapses_by_somadist_and_spike_source(
         evokedNW,
         soma_dist_ranges=None,
         spike_sources=None):
-    '''Silences synapse activation at a :paramref:`soma_dist_ranges`,
-    that are from presynaptic origins **not** listed in :paramref:`spike_sources`.
+    '''Silences synapse activation at a :param:`soma_dist_ranges`,
+    that are from presynaptic origins **not** listed in :param:`spike_sources`.
 
     Args:
-        cell (:py:class:`single_cell_parser.cell.Cell`): The cell to modify.
+        cell (:class:`single_cell_parser.cell.Cell`): The cell to modify.
         soma_dist_ranges (dict): A dictionary with synapse types as keys and
             tuples of minimum and maximum soma distances as values.
         spike_sources (list): A list of spike sources to keep active.

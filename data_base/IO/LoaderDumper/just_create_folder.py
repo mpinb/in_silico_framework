@@ -60,10 +60,10 @@ class ManagedFolder(str):
         """Get a subfolder of the current folder
         
         Args:
-            *args: Subfolder names
+            args: Subfolder names
             
         Returns:
-            :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: Subfolder
+            :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: Subfolder
         """
         return ManagedFolder(os.path.join(self, *args))
 
@@ -81,7 +81,7 @@ class ManagedFolder(str):
             ValueError: If there are no files with the specified suffix or more than one file with the specified suffix
         
         Returns:
-            str: The filepath of the file with :paramref:`suffix` (only if there is exactly one file with this suffix)
+            str: The filepath of the file with :param:`suffix` (only if there is exactly one file with this suffix)
         '''
         l = [f for f in os.listdir(self) if f.endswith(suffix)]
         if len(l) == 0:
@@ -97,10 +97,10 @@ class ManagedFolder(str):
 
 
 class Loader(parent_classes.Loader):
-    """Load a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+    """Load a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
     """
     def get(self, savedir):
-        """Get a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+        """Get a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
         
         Args:
             savedir (str): Folder path

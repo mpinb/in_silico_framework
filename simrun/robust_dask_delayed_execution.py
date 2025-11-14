@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-"""Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
+"""Robustly execute all :class:`dask.delayed` objects in a :class:`ManagedFolder`
 
 Robust execution here is taken to mean:
 
@@ -94,7 +94,7 @@ def _wrapper(db, key_first_item):
     This wrapper is used to compute delayed objects stored in a database. It ensures that the computation is only done once.
     It also provides locks on the files wile they are being computed, to mitigate concurrent access issues.
     Before, during, and after computation, the delayed objects acquire the status ``'not_started'``, ``'started'``, and ``'finished'`` respectively.
-    This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run_db`.
+    This wrapper is being used in :func:`RobustDaskDelayedExecution.run_db`.
     
     Args:
         db (str): The path to the database.
@@ -123,23 +123,23 @@ def _wrapper(db, key_first_item):
 class RobustDaskDelayedExecution:
     '''Execute dask delayed objects in a robust way.
     
-    This class utilizes :py:class:`data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects to store delayed objects. 
+    This class utilizes :class:`data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects to store delayed objects. 
     It offers methods to run them exactly once. The return value is not saved if the dask delayeds objects don't save them. 
     
     This is used for long runing data generating simulations that can get interrupted (e.g. timeout on an HPC cluster, some error ...) 
     and you want to complete the remaining tasks later.
     
     Attributes:
-        db (:py:class:`data_base.dataBase`): 
-            The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects, 
+        db (:class:`data_base.dataBase`): 
+            The database containing the :class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects, 
             which in turn contain the dask delayed objects.
     '''
 
     def __init__(self, db):
         """
         Args:
-            db (:py:class:`data_base.dataBase`): 
-                The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
+            db (:class:`data_base.dataBase`): 
+                The database containing the :class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
                 which in turn contain the dask delayed objects.
         """
         self.db = db

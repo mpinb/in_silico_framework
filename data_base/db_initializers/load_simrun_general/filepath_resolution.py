@@ -16,7 +16,7 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
     """Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
+        :func:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
     """
     orig_hoc = neup["neuron"]["filename"]
     original_recsite_fns = neup["sim"]["recordingSites"]
@@ -43,7 +43,7 @@ def _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map):
     """Convert all paths in a :ref:`network_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
+        :func:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:
@@ -77,8 +77,8 @@ def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
     The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
 
     Args:
-        syn_fn (str): Path to the synapse distribution file.
-        new_hoc (str): Path to the new hoc file.
+        syn_content (List[str]): Content of the :ref:`syn_file_format` file as a list of strings, each element representing a line.
+        hoc_fn_map (str): Mapping from old to new :ref:`hoc_file_format` files.
     """
 
     def find_hoc_file(match):

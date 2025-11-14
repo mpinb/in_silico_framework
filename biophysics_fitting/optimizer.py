@@ -24,7 +24,7 @@ such that:
 - to be executed on a distributed system using dask.
 - to return all objectives, not only the combined ones.
 
-The top-level pipeline can be started with :py:meth:`start_run`.
+The top-level pipeline can be started with :func:`start_run`.
 
 Note: 
     Part of this module (as marked with comments) is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
@@ -170,19 +170,19 @@ def get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule
     """Get a map function for evaluating the parameters.
     
     This function is a hook into BluePyOpt's optimization.
-    It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start_run`.
+    It is used as a mapping function in :class:`bluepyopt.optimisations.DEAPOptimisation` during :func:`start_run`.
     Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
     This is useful for debugging and for analyzing the optimization results.
     
     Args:
-        db_setup (:py:class:`~data_base.DataBase`): Database containing the setup of the optimization.
-        db_run (:py:class:`~data_base.DataBase`): The database for the optimization run containing sub-databases.
-        c (:py:class:`~dask.distributed.Client`): The distributed client.
+        db_setup (:class:`~data_base.DataBase`): Database containing the setup of the optimization.
+        db_run (:class:`~data_base.DataBase`): The database for the optimization run containing sub-databases.
+        c (:class:`~dask.distributed.Client`): The distributed client.
         satisfactory_boundary_dict (dict | None): A dictionary with the boundaries for the objectives. If a model is found, that has all objectives below the boundary, the optimization is stopped.
         n_reschedule_on_runtime_error (int): The number of times the optimization is rescheduled if a runtime error occurs.
         
     Returns:
-        Callable: The map function for evaluating the parameters. this function is passed to the :py:class:`bluepyopt.optimisations.DEAPOptimisation` object.    
+        Callable: The map function for evaluating the parameters. this function is passed to the :class:`bluepyopt.optimisations.DEAPOptimisation` object.    
     """
     # CAVE! get_mymap is doing more than just returning a map function.
     # - the map function ignores the first argument.
@@ -272,7 +272,7 @@ class my_ibea_evaluator(bpop.evaluators.Evaluator):
     Graupner-Brunel Evaluator
     
     .. deprecated:: 0.4.0
-        Evaluation is done with :py:meth:`mymap`.
+        Evaluation is done with :func:`mymap`.
     
     :skip-doc:
     """
@@ -389,8 +389,11 @@ def eaAlphaMuPlusLambdaCheckpoint(
         stats (deap.tools.Statistics): generation of statistics
         halloffame (deap.tools.HallOfFame): hall of fame
         cp_frequency (int): generations between checkpoints
-        cp_filename (DataBase or None): db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+        db_run (DataBase or None): db where the checkpoint is stored in [generation]_checkpoint.
         continue_cp (bool): whether to continue
+
+    .. deprecated 0.5.0::
+       The argument ``cp_filename`` is deprecated. It has now been changed to ``db_run`` and ``continue_cp``.
     """
     # --- added by arco
     if db_run is not None:

@@ -43,7 +43,7 @@ def generate_param_files_with_valid_references(overwrite_param_files=False):
     This configuration function is run once after installing ISF.
     
     See also:
-        :py:mod:`config.isf_configure` for configuring ISF for your local system.
+        :mod:`config.isf_configure` for configuring ISF for your local system.
     """
     suffix = '.TEMPLATE'
     for template_path in TEMPLATE_FILES:

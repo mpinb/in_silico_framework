@@ -16,7 +16,7 @@
 # The full license text is also available in the LICENSE file in the root of this repository.
 
 '''Create anatomical realizations of connectivity.
-In contrast to :py:mod:`single_cell_parser.network_embedding`, 
+In contrast to :mod:`single_cell_parser.network_embedding`, 
 this module does not handle the activity of presynaptic populations, but provides functionality to fully investigate the network connectivity.
 
 '''
@@ -40,16 +40,16 @@ class NetworkMapper:
     '''Connect presynaptic cells to a postsynaptic cell model.
 
     This class is used to create anatomical realizations of connectivity.
-    Given a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` of boutons, 
+    Given a :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` of boutons, 
     it computes all possible synapse densities that have non-zero overlap with every voxel this bouton field.
     These synapse density fields depend on the presence of post-synaptic dendrites in the bouton field,
     which in turn depends on the location and morphology of the post-syanptic neuron.
     The synapse density fields are further used as probability distributions to Poisson sample 
     mutiple realizations of synaptic connections between pre-synaptic cells, and the post-synaptic cell
-    (see :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`).
+    (see :func:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses`).
     
     See also:
-        This is not the same class as :py:class:`single_cell_parser.network.NetworkMapper`.
+        This is not the same class as :class:`single_cell_parser.network.NetworkMapper`.
         This class is specialized for anatomical reconstructions, 
         not synapse activations or simulation parameters.
     
@@ -57,9 +57,9 @@ class NetworkMapper:
         cells (dict): 
             Presynaptic cells, ordered by anatomical area and cell type. 
             This attribute is filled by 
-            :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
+            :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
         connected_cells (dict): Indices of all active presynaptic cells, ordered by cell type.
-        postCell (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): Reference to postsynaptic (multi-compartment) cell model.
+        postCell (:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): Reference to postsynaptic (multi-compartment) cell model.
         postCellType (str): Postsynaptic cell type.
     '''
 
@@ -73,7 +73,7 @@ class NetworkMapper:
         inhPST):
         '''        
         Args:
-            postCell (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): The cell object to map synapses onto.
+            postCell (:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): The cell object to map synapses onto.
             postCellType (str): The type of the postsynaptic cell.
             cellTypeNumbersSpreadsheet (dict): Number of presynaptic cells per cell type and anatomical_area.
         '''
@@ -99,10 +99,10 @@ class NetworkMapper:
         '''Create a single network realization from a bouton density field.
 
         This is the main method to create anatomical realizations of connectivity.
-        It creates :paramref:`nrOfSamples` network realizations, and saves the most representative
+        It creates :param:`nrOfSamples` network realizations, and saves the most representative
         realization to disk. The most representative realization is determined by comparing
         the distribution of anatomical parameters across the population of realizations using
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
+        :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
 
         Args:
             postCellName (str):
@@ -194,8 +194,8 @@ class NetworkMapper:
         '''Create multiple network realizations from a bouton density field.
         
         Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
-        Same principle as :py:meth:`~create_network_embedding`, but rather than taking
-        the most representative sample, this method saves all :paramref:`nrOfRealizations` network 
+        Same principle as :func:`~create_network_embedding`, but rather than taking
+        the most representative sample, this method saves all :param:`nrOfRealizations` network 
         realizations to allow investigating the effects of anatomical variability on neuron responses.
 
         Warning:
@@ -364,11 +364,11 @@ class NetworkMapper:
         with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
 
         Args:
-            boutonDensities (Dict[str, Dict[str, List[:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]]):
+            boutonDensities (Dict[str, Dict[str, List[:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]]):
                 Dictionary of bouton densities, ordered by anatomical area and cell type.
 
         .. deprecated:: 0.5.0
-           This has been deprecated in favor of :py:meth:`_precompute_anatomical_area_celltype_synapse_densities_vectorized`
+           This has been deprecated in favor of :func:`_precompute_anatomical_area_celltype_synapse_densities_vectorized`
 
         :skip-doc:
         '''
@@ -401,7 +401,7 @@ class NetworkMapper:
         with the current postynaptic neuron, and sorts them based on presynaptic anatomical_area and cell type
 
         Args:
-            boutonDensities (Dict[str, Dict[str, :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]):
+            boutonDensities (Dict[str, Dict[str, :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`]]):
                 Dictionary of bouton densities, ordered by anatomical area and cell type.
         '''
         synapseDensities = {}
@@ -429,7 +429,7 @@ class NetworkMapper:
         '''Creates presynaptic cells.
 
         Should be done before creating anatomical synapses.
-        Fills the :py:attr:`~cells` attribute with a nested dictionary of presynaptic cells,
+        Fills the :attr:`~cells` attribute with a nested dictionary of presynaptic cells,
         ordered by anatomical area first, and cell type second.
         '''
         logger.info('---------------------------')
@@ -454,8 +454,8 @@ class NetworkMapper:
 
         This is the main method for computing synapse/connectivity realization.
         Given one or more pre-computed density fields of synapses (see e.g. 
-        :py:meth:`~_precompute_anatomical_area_celltype_synapse_densities_vectorized`), this method 
-        creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
+        :func:`~_precompute_anatomical_area_celltype_synapse_densities_vectorized`), this method 
+        creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper`
         from this synapse density field, and assigns synapses.
 
         Returns anatomical connectivity map.
@@ -640,7 +640,7 @@ class NetworkMapper:
     def _compute_parameter_distribution(self, realizationPopulation):
         '''Compute mean +- SD of parameters for population of anatomical realizations.
         
-        Using parameters in :py:attr:`cellTypeSummaryTable` on a per cell type basis:
+        Using parameters in :attr:`cellTypeSummaryTable` on a per cell type basis:
 
                 0.  nrOfSynapses
                 1.  nrConnectedCells
@@ -654,7 +654,7 @@ class NetworkMapper:
                 9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
 
         Returns:
-            dict: dictionary organized the same way as :py:attr:`cellTypeSummaryTable`,
+            dict: dictionary organized the same way as :attr:`cellTypeSummaryTable`,
             but entries are tuples (mean, STD) of each parameter for
             given population of realizations.
         '''
@@ -877,8 +877,8 @@ class NetworkMapper:
         - numbers of synapses per cell type/anatomical_area,
         - distance of synapses to soma, convergence etc.
 
-        Used by :py:meth:`~create_network_embedding` and 
-        :py:meth:`~create_network_embedding_for_simulations`.
+        Used by :func:`~create_network_embedding` and 
+        :func:`~create_network_embedding_for_simulations`.
 
         Args:
             connectedCells (dict): Dictionary of connected cells.
@@ -1148,7 +1148,7 @@ class NetworkMapper:
     ):
         """Write out landmark files for each synapse location.  
         
-        This is used in :py:meth:`_generate_output_files` to write out landmark files for each synapse location.
+        This is used in :func:`_generate_output_files` to write out landmark files for each synapse location.
 
         Args:
             synapseLocations (dict): Dictionary of synapse locations.
@@ -1202,19 +1202,19 @@ class NetworkMapper:
         '''Generates all summary files and writes output files.
 
         Generates and writes out summary files using 
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
+        :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations`,
+        :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map`, and
+        :func:`~singlecell_input_mapper.singlecell_input_mapper.writer.write_sample_connectivity_summary`.
 
-        Used by :py:meth:`~create_network_embedding_for_simulations` and
-        :py:meth:`~create_network_embedding_from_synapse_densities` to write output files to disk.
+        Used by :func:`~create_network_embedding_for_simulations` and
+        :func:`~create_network_embedding_from_synapse_densities` to write output files to disk.
 
         Args:
             postCellName (str): Path to the postsynaptic :ref:`hoc_file_format` file.
             connectivityMap (list): 
                 Connections between presynaptic cells and postsynaptic cell of the form
                 (cell type, presynaptic cell index, synapse index). 
-                Created by :py:meth:`_create_anatomical_connectivity_map`.
+                Created by :func:`_create_anatomical_connectivity_map`.
             connectedCells (dict): Dictionary of connected cells.
             connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
 
@@ -1276,7 +1276,7 @@ class NetworkMapper:
         ):
         '''Writes output files for precomputed summary files.
 
-        Used by :py:meth:`_create_network_embedding` to write output files to disk.
+        Used by :func:`_create_network_embedding` to write output files to disk.
 
         Args:
             postCellName (str): Path to the postsynaptic :ref:`hoc_file_format` file.
@@ -1284,7 +1284,7 @@ class NetworkMapper:
             connectivityMap (list): 
                 Connections between presynaptic cells and postsynaptic cell of the form
                 (cell type, presynaptic cell index, synapse index). 
-                Created by :py:meth:`_create_anatomical_connectivity_map`.
+                Created by :func:`_create_anatomical_connectivity_map`.
             synapseLocations (dict): Synapse locations.
             cellSynapseLocations (dict): Cell synapse locations.
             cellTypeSummaryTable (dict): Summary table of cell types.

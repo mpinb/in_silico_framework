@@ -17,13 +17,13 @@
 
 '''Create and simulate network-embedded neuron models.
 
-This module contains the core method used throughout :py:mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
+This module contains the core method used throughout :mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
 generate synaptic input patterns based on the :ref:`network_parameters_format`, and simulate the resulting network-embedded neuron model.
 
-See :py:meth:`~simrun.run_new_simulations.run_new_simulations` for more information.
+See :func:`~simrun.run_new_simulations.run_new_simulations` for more information.
 
 See also:
-    :py:mod:`simrun.rerun_db` to rebuild, modify and resimulate existing simulation results.
+    :mod:`simrun.rerun_db` to rebuild, modify and resimulate existing simulation results.
 '''
 from __future__ import absolute_import
 from ._matplotlib_import import *
@@ -68,7 +68,7 @@ def _evoked_activity(
     
     Run simulations of synaptic input patterns onto a biophysically detailed cell.
 
-    Private function. This is the core method used in :py:meth:`run_new_simulations`.
+    Private function. This is the core method used in :func:`run_new_simulations`.
     
     Args:
         cellParamName (str): 
@@ -76,14 +76,14 @@ def _evoked_activity(
             containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
-        dirPrefix (str): Prefix of the output directory. The final directory name will be ":paramref:`dirPrefix`/results/%Y%M%D-%H%M_UID".
+        dirPrefix (str): Prefix of the output directory. The final directory name will be ":param:`dirPrefix`/results/%Y%M%D-%H%M_UID".
         seed (int): Random seed for the simulation.
-        nSweps (int): Number of simulations to run with these parameters.
+        nSweeps (int): Number of simulations to run with these parameters.
         tStop (float): Duration of each simulation in ms.
         scale_apical (function): Function to scale the apical dendrite.
             Assumes the cell has an apical dendrite - see below.
         cell_generator (function): Function to generate the cell. If provided, the cell parameters
-            provided by :paramref:`cellParamName` are ignored.
+            provided by :param:`cellParamName` are ignored.
         tar (bool): If True, the output directory is compressed to a tarball after the simulation is finished.
 
     Returns:
@@ -260,20 +260,19 @@ def run_new_simulations(
         ):
     '''Create and simulate network-embedded neuron models.
 
-    This is the core method used throughout :py:mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
+    This is the core method used throughout :mod:`simrun` to read and build neuron models from :ref:`cell_parameters_format` files,
     generate synaptic input patterns based on the :ref:`network_parameters_format`, and simulate the resulting network-embedded neuron model.
     
     The workflow of this method is as follows:
 
     1. Initialize the simulation
     
-        1.1 Set a random seed. Used in the output directory name, and for generating network realizations 
-        with :py:class:`~single_cell_parser.network.NetworkMapper`.
-        1.2 Build the cell with biophysical properties.
-        1.3 Set up the simulation with recording sites from the neuron parameters
+        1. Set a random seed. Used in the output directory name and for generating network realizations with :class:`~single_cell_parser.network.NetworkMapper`.
+        2. Build the cell with biophysical properties.
+        3. Set up the simulation with recording sites from the neuron parameters
     
-    2. Run :paramref:`nSweeps` simulations using :py:meth:`~single_cell_parser.init_neuron_run`, 
-    each time creating a new network embedding and sampling new activity using :py:meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
+    2. Run :param:`nSweeps` simulations using :func:`~single_cell_parser.init_neuron_run`, 
+    each time creating a new network embedding and sampling new activity using :func:`~single_cell_parser.network.NetworkMapper.create_saved_network2`.
     3. Parse and write out simulation data, including voltage traces from the soma 
     and additional recording sites defined in the neuron parameters.
     4. Finalize the simulation by removing the "_running" suffix from the dirname ``dirPrefix/results/YYYYMMDD-HHMM_UID_running``.
@@ -282,21 +281,19 @@ def run_new_simulations(
         cellParamName (str): Path to a :ref:`cell_parameters_format` file.
         evokedUpParamName (str): Path to a :ref:`network_parameters_format` file.
         dirPrefix (str): Prefix of the output directory. The final directory name will be ``dirPrefix/results/YYYYMMDD-HHMM_UID.``
-        seed (int): Random seed for the simulation.
-        nSweps (int): Number of simulations to run with these parameters.
+        nSweeps (int): Number of simulations to run per process with these parameters.
             Trial-to-trial variability is introduced by the random seed in terms of
-            different network activity and connectivity realizations (see :py:meth:`~single_cell_parser.network.NetworkMapper.created_saved_network2`).
+            different network activity and connectivity realizations (see :meth:`~single_cell_parser.network.NetworkMapper.create_saved_network2`).
+        nprocs (int): Number of parallel processes to run. Each process runs :attr:`nSweeps` simulations.
         tStop (float): Duration of each simulation in ms.
-        tStim (float): Time in ms at which the in vivo evoked synaptic input should start.
-        scale_apical (callable, DEPRECATED): Function to scale the apical dendrite. Assumes the cell has an apical dendrite - see below.
-        cell_generator (callable): Function to generate the cell. If provided, :paramref:`cellParamName` is ignored.
+        cell_generator (callable, optional): Function to generate the cell. If provided, :attr:`cellParamName` is ignored.
         tar (bool): If True, the output directory is compressed to a tarball after the simulation is finished.
 
     Attention:
         While the random state is set for the network embedding, capturing animal-to-animal and cell-to-cell
         anatomical variability, the random state is not used for the synaptic input patterns.
         Stochasticity in activity is introduced each time the activity generation method is called 
-        (see e.g. :py:meth:`~single_cell_parser.cell.PointCell.compute_spike_train_times`).
+        (see e.g. :func:`~single_cell_parser.cell.PointCell.compute_spike_train_times`).
         This means that the same seed will produce the same network embedding, but different synaptic input patterns.
         For this reason, the exact synaptic activations for each simulation run are saved as output data.
 
@@ -325,5 +322,5 @@ def run_new_simulations(
     if child_process:
         myfun = execute_in_child_process(myfun)
 
-    d = [dask.delayed(myfun)(get_seed()) for i in range(nprocs)]
+    d = [dask.delayed(myfun)(get_seed()) for _ in range(nprocs)]
     return d  # dask.delayed(lambda *args: args)(d) #return single delayed object, that computes everything

@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-'''Compare the result of the :py:mod:`singlecell_input_mapper` to
+'''Compare the result of the :mod:`singlecell_input_mapper` to
 the neuronet population.
 
 :skip-doc:

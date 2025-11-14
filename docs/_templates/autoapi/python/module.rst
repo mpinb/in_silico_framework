@@ -3,8 +3,6 @@
 {%- set breadcrumb = obj.id.split('.')[1:] %}
 {%- set shortname = obj.id.split('.')[-1] | escape %}
 
-{% if obj.display %}
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~{{ root_module }}`
    {%- for n in range(breadcrumb|length - 1 )  %}
  ❭ :mod:`~{{ root_module }}.{{ breadcrumb[:n+1] | join('.') }}`
@@ -38,7 +36,7 @@
    {{ child.short_name }} <{{ child.include_path }}>
    {% endfor %}
 
-.. py:module:: {{ obj.name }}
+.. module:: {{ obj.name }}
 
 {% if obj.docstring %}
 .. autoapi-nested-parse::
@@ -47,12 +45,10 @@
 
 
 {%- if "show-module-summary" in autoapi_options %}
+
 {% block classes scoped %}
 {%- if visible_classes %}
-{%- set public_classes = visible_classes|rejectattr('is_private_member')|list %}
-{%- if public_classes %}
-{{ macros.auto_summary(public_classes, title="Classes") }}
-{%- endif %}
+{{ macros.auto_summary(visible_classes, title="Classes") }}
 {%- endif %}
 {%- endblock %}
 
@@ -62,6 +58,12 @@
 {%- if public_functions %}
 {{ macros.auto_summary(public_functions, title="Functions") }}
 {%- endif %}
+{%- endif %}
+{%- endblock %}
+
+{% block attributes %}
+{%- if visible_attributes %}
+{{ macros.auto_summary(visible_attributes, title="Attributes") }}
 {%- endif %}
 {%- endblock %}
 
@@ -79,7 +81,7 @@
 {{ macros.auto_summary(visible_exceptions, title="Exceptions") }}
 {%- endif %}
 {%- endblock %}
-{% endif %}
+
 {% endif %}
 
 .. container:: doc-feedback

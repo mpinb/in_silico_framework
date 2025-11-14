@@ -128,7 +128,7 @@ def write_landmark_file(fname=None, landmarkList=None):
 def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     '''Write a :ref:`syn_file_format` file, containing all synapses and their corresponding cellID, sectionID and x.
     
-    The locations of each synapse are coded by section ID and section x of cell with ID :paramref:`cellID`.
+    The locations of each synapse are coded by section ID and section x of cell with ID :param:`cellID`.
 
     Args:
         fname (str): Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
@@ -197,8 +197,8 @@ def write_anatomical_realization_map(
     '''Writes a :ref:`con_file_format` file containing a list of all functional connections.
      
     Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
-    Only valid for an anatomical synapse realization with ID :paramref:`anatomicalID`.
-    Uses :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet` 
+    Only valid for an anatomical synapse realization with ID :param:`anatomicalID`.
+    Uses :func:`~singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet` 
     to generate the number of connected cells spreadsheet.
 
     Args:
@@ -208,7 +208,7 @@ def write_anatomical_realization_map(
 
     Warning:
         A :ref:`con_file_format` file is only valid with a corresponding :ref:`syn_file_format` file.
-        See :py:meth:`~write_cell_synapse_locations`
+        See :func:`~write_cell_synapse_locations`
 
     Returns:
         None. Writes results to disk.
@@ -247,7 +247,7 @@ def write_sample_connectivity_summary(
         columnSummaryData=None):
     """Write a summary of a single connectivity realization to a file.
 
-    The input summary tables can be computed with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+    The input summary tables can be computed with :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
     For each cell type, this method writes a summary on the following attributes of each structure:
     
     - Presynaptic cell type
@@ -259,7 +259,7 @@ def write_sample_connectivity_summary(
     - Convergence
     - Number of synapses
 
-    If the brain has been subdivided in separate anatomical areas (and :paramref:`columnSummaryData` is not None), 
+    If the brain has been subdivided in separate anatomical areas (and :param:`columnSummaryData` is not None), 
     the summary is also written for each area.
 
     Args:
@@ -500,8 +500,8 @@ def write_population_connectivity_summary(
         ):
     """Write a summary of populations of connectivity realizations to a file.
 
-    The populationDistribution can be calculated with :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
-    For each cell type, this method writes a summary on the same attributes for each cell structure as :py:meth:`write_sample_connectivity_summary`, namely:
+    The populationDistribution can be calculated with :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+    For each cell type, this method writes a summary on the same attributes for each cell structure as :func:`write_sample_connectivity_summary`, namely:
     
     - Presynaptic cell type
     - Number of synapses
@@ -667,9 +667,9 @@ def write_population_and_sample_connectivity_summary(
     Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
 
     Useful for comparing the results of a single realization to the average over multiple realizations.
-    Consult :py:meth:`write_sample_connectivity_summary` and :py:meth:`write_population_connectivity_summary` for details on the input data.
-    :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
-    :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+    Consult :func:`write_sample_connectivity_summary` and :func:`write_population_connectivity_summary` for details on the input data.
+    :param:`populationDistribution` can be computes using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+    :param:`cellTypeSummaryData` and :param:`columnSummaryData` can be computed using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
 
     Args:
         fname (str): Name of the output file
@@ -1015,12 +1015,12 @@ def write_population_and_sample_connectivity_summary(
 def write_scalar_field(fname=None, scalarField=None):
     """Write a scalar field to an AmiraMesh file.
 
-    These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert_amira_lattice_to_vtk`
+    These can be visualized in AMIRA, or converted to VTK using :func:`~visualize.vtk.convert_amira_lattice_to_vtk`
     for visualization in VTK-compatible renderers.
     
     Args:
         fname (str): Name of the output file
-        scalarField (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`): 
+        scalarField (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`): 
             Scalar field to be written to disk
         
     Returns:

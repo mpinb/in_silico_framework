@@ -25,15 +25,15 @@ def scale_apical(cell, scale=None, compartment='ApicalDendrite'):
     '''Scale the apical dendrite of a cell.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
         compartment (str): The compartment to scale.
             If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
-            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :func:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
             Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
     
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
 
     Raises:
         ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
@@ -52,11 +52,11 @@ def scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite'):
     If not, nothing gets scaled.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
 
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
     '''
 
     # This is the function used to scale the apical dendrite in the following
@@ -81,22 +81,22 @@ def scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite'):
 def scale_by_detailed_compartment(cell, **kwargs):
     '''Scales subcellular compartments based on ``detailed_labels``.
 
-    If not yet assigned, detailed labels are assigned by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+    If not yet assigned, detailed labels are assigned by :func:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
     and include ``basal``, ``trunk``, ``tuft``, and ``oblique``.
     
     Attention:
         For non-L5PT neurons or L5PT neurons from any other brain area than barrel cortex, 
-        make sure :py:meth:`~biophysics_fitting.utils.augment_cell_with_detailed_labels` 
+        make sure :func:`~biophysics_fitting.utils.augment_cell_with_detailed_labels` 
         assigns labels as you want them to be.
         
-        Alternatively, assign them manually with the :py:attr:`biophysics_fitting.cell.Cell.sections.label_detailed` attribute.
+        Alternatively, assign them manually with the :attr:`biophysics_fitting.cell.Cell.sections.label_detailed` attribute.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
-        **kwargs (dict): Detailed lables with associated scaling factors.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        kwargs (dict): Detailed lables with associated scaling factors.
 
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
     '''
     # check if detailed labels are available
     try:

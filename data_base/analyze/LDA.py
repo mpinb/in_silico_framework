@@ -14,12 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
-"""Analyze the results of :py:mod:`simrun.reduced_model`
+"""Analyze the results of :mod:`simrun.reduced_model`
 
 .. deprecated:: 0.4.0
-    Analyzing synapse activations with LDA has been extended into :py:mod:`simrun.modular_reduced_model_inference`,
+    Analyzing synapse activations with LDA has been extended into :mod:`simrun.modular_reduced_model_inference`,
     where instead of LDA, we fit a raised cosine basis to the synapse activations.
-    :py:mod:`simrun.modular_reduced_model_inference` is written to be more general, flexible,
+    :mod:`simrun.modular_reduced_model_inference` is written to be more general, flexible,
     and performant. The latter was necessary in order to include the spatial resolution of synapse activations.
 
 :skip-doc:
@@ -37,15 +37,15 @@ import pandas as pd
 
 
 def make_groups_equal_size(X, y):
-    """Equally balance samples from :paramref:`X` based on the labels in :paramref:`y`.
+    """Equally balance samples from :param:`X` based on the labels in :param:`y`.
     
     Randomly subsample a data matrix so that both classes have the same number of samples.
     The sample size will thus be twice the size of the smaller class.
     Only supports binary classification.
     
     Args:
-        X (:py:class:`~numpy.array`): 2D array of features
-        y (:py:class:`~numpy.array`): 1D array of labels
+        X (:class:`~numpy.array`): 2D array of features
+        y (:class:`~numpy.array`): 1D array of labels
     
     Returns:
         tuple: subsampled 2D array of features and 1D array of labels
@@ -78,13 +78,13 @@ def prediction_rates(
     max_tries=2):
     '''Calculate the prediction rates of a binary classifier.
     
-    For a given classifier, calclate the prediction rates for a given number of iterations :paramref:`n`.
+    For a given classifier, calclate the prediction rates for a given number of iterations :param:`n`.
     Returns the median of the prediction rates on each class
     
     Args:
-        X_in (:py:class:`~numpy.array`): 2D test data: ``synapses x activations``
-        y_in (:py:class:`~numpy.array`): 1D array of test labels (i.e. test labels)
-        classifier (:py:class:`~sklearn.base.BaseEstimator`): LDA classifier to use.
+        X_in (:class:`~numpy.array`): 2D test data: ``synapses x activations``
+        y_in (:class:`~numpy.array`): 1D array of test labels (i.e. test labels)
+        classifier (:class:`~sklearn.base.BaseEstimator`): LDA classifier to use.
         n (int): Amount of iterations for the prediction rates. One iteration is one train-test split.
         normalize_group_size (bool): If True, randomly subsample the data so that both classes have the same number of samples
         verbosity (int): Level of verbosity. Options are ``0`` (default), ``1``, or ``2``
@@ -95,10 +95,10 @@ def prediction_rates(
             'all' returns a dictionary of all scores, inlcuding the keys:
             
             - score_all: the prediction accuracy on all the data
-            - score_0: the prediction accuracy on the negative class for :paramref:`n` random subsamples of the data
-            - score_1: the prediction accuracy on the positive class for :paramref:`n` random subsamples of the data
+            - score_0: the prediction accuracy on the negative class for :param:`n` random subsamples of the data
+            - score_1: the prediction accuracy on the positive class for :param:`n` random subsamples of the data
             - score: the median of the prediction rates on each class
-            - score_rocauc: the ROC-AUC score for :paramref:`n` random subsamples of the data
+            - score_rocauc: the ROC-AUC score for :param:`n` random subsamples of the data
             - score_rocauc_full_data: the ROC-AUC score for the full data
             - classifier_: the classifier used for each iteration
             - value_counts: the value counts of the training data for each iteration

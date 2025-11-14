@@ -38,15 +38,15 @@ Example::
     Scale the apical dendrite of a cell.
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
         compartment (str): The compartment to scale.
             If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
-            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :func:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
             Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
     
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
 
     Raises:
         ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
@@ -70,8 +70,8 @@ def get(funname):
     Cell modify functions are defined in this module, and can be retrieved by name.
     Each cell modify function is defined in a module that has the same name as the function itself.
     For example, the full path to 
-    :py:meth:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical` is
-    :py:meth:`single_cell_parser.cell_modify_functions.scale_apical.scale_apical`.
+    :func:`~single_cell_parser.cell_modify_functions.scale_apical.scale_apical` is
+    :func:`single_cell_parser.cell_modify_functions.scale_apical.scale_apical`.
     To make it easier to retrieve the function, this function provides API to simply fetch them by name.
     
     Example:

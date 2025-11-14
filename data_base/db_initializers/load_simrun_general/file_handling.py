@@ -8,14 +8,14 @@ from data_base.utils import chunkIt
 logger = logging.getLogger("ISF").getChild(__name__)
 
 def make_filelist(directory, suffix="vm_all_traces.csv"):
-    """Generate a list of all files with :paramref:`suffix` in the specified directory.
+    """Generate a list of all files with :param:`suffix` in the specified directory.
 
     This method recursively searches through the directory and its subdirectories
     for files that match the specified suffix. It returns a list of relative paths to
     these files, excluding any files that are still being written to (identified by
     the presence of "_running" in the filename).
 
-    Simulation results from :py:mod:`simrun` are stored in a nested folder structure, and spread
+    Simulation results from :mod:`simrun` are stored in a nested folder structure, and spread
     across multiple files. The first step towards parsing them is to generate a list of all files
     containing the data we are interested in.
 
@@ -128,7 +128,7 @@ def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
         filelist (List[str]): List of filenames to dendritic voltage trace results.
         full_suffix (str): 
             Shared suffix of the filenames that is mutually exclusive from the recsite label. 
-            This is normally fetched by the higher-level :py:func:`load_dendritic_voltage_traces`
+            This is normally fetched by the higher-level :func:`load_dendritic_voltage_traces`
 
     Returns:
         List[str]: List of recording site labels.
@@ -161,7 +161,7 @@ def get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix):
 def _get_recsite_ids_from_recsite_labels(recsite_labels):
     """Fetch the recsite ID number from the entrie recsite ID string.
     
-    This function assumes all recsite ids in :paramref:`recsite_ids` have a substring containing "ID_[digit]",
+    This function assumes all recsite ids in :param:`recsite_ids` have a substring containing "ID_[digit]",
     where digit is any numeric combination.
 
     Args:

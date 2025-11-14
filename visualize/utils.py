@@ -51,7 +51,7 @@ def write_video_from_images(
 
     Note:
         Globbing is not enabled by default on Windows machines.
-        If running this command on windows, please set the :paramref:`glob` argument to False and specify a non-glob type match pattern.
+        If running this command on windows, please set the :param:`glob` argument to False and specify a non-glob type match pattern.
     
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images
@@ -133,7 +133,7 @@ def write_gif_from_images(
         interval=40,
         images_format='.png',
         auto_sort_paths=True):
-    '''Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+    '''Creates a gif from a set of images, and saves it to :param:`out_path`.
 
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images
@@ -208,7 +208,7 @@ def write_gif_from_images(
 def _load_base64(filename, extension='png'):
     """Load a base64 file from a filename.
 
-    Used in :py:meth:`display_animation_from_images` to embed animations.
+    Used in :func:`display_animation_from_images` to embed animations.
     
     See: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html_writer.py
     """
@@ -354,8 +354,8 @@ class Arrow3D(FancyArrowPatch):
             dx (float): x coordinate difference of the arrow direction.
             dy (float): y coordinate difference of the arrow direction.
             dz (float): z coordinate difference of the arrow direction.
-            *args: Additional positional arguments passed to FancyArrowPatch.
-            **kwargs: Additional keyword arguments passed to FancyArrowPatch.
+            args: Additional positional arguments passed to FancyArrowPatch.
+            kwargs: Additional keyword arguments passed to FancyArrowPatch.
         """
         super().__init__((0, 0), (0, 0), *args, **kwargs)
         self._xyz = (x, y, z)
@@ -398,16 +398,16 @@ def draw_arrow(
         highlight_x=None,
         highlight_arrow_kwargs=None,
         arrow_size=50):
-    """Highlight a morphology section with an :py:class:`Arrow3D`.
+    """Highlight a morphology section with an :class:`Arrow3D`.
 
-    This method is used by :py:class:`CellMorphologyVisualizer` to annotate morphology sections.
+    This method is used by :class:`CellMorphologyVisualizer` to annotate morphology sections.
     
     Args:
         morphology (pd.DataFrame): The morphology dataframe containing the coordinates of the sections.
         ax (matplotlib.axes.Axes): The matplotlib axes object to draw the arrow on.
         highlight_section (int, optional): The section index to highlight. If None, no section is highlighted. Default is ``None``.
         highlight_x (float, optional): The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
-        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :class:`Arrow3D` constructor. Default is ``None``.
         arrow_size (int, optional): The size of the arrow. Default is 50.
     
     Returns:

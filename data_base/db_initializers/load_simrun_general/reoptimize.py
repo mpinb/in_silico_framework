@@ -23,7 +23,7 @@ logger = isf_logger.getChild(__name__)
 def _check_needs_reoptimization(key, old_dumper_name, new_dumper_name):
     """Check if a key needs re-optimization.
     
-    Dumper formats that need to be re-optimized are saved in :py:mod:`~data_base.db_initializers.load_simrun_general.config`.
+    Dumper formats that need to be re-optimized are saved in :mod:`~data_base.db_initializers.load_simrun_general.config`.
     
     Args:
         key (str): The key to check.
@@ -106,7 +106,7 @@ def reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warn
     It recurses into subdatabases, and re-optimizes them as well.
     
     Args:
-        db (:py:mod:`~data_base.DataBase`): 
+        db (:mod:`~data_base.DataBase`): 
             The database to re-optimize.
         client (dask.distributed.Client):
             The dask client to use for re-optimizing the database.

@@ -32,7 +32,7 @@ class _Edge(object):
     The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
 
     See also:
-        :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader._Edge` class.
+        :mod:`single_cell_parser` also contains a :class:`~single_cell_parser.reader._Edge` class.
 
     Attributes:
         label (str): The type of the segment (e.g. 'Soma', 'Dendrite', 'ApicalDendrite')
@@ -46,7 +46,7 @@ class _Edge(object):
     def is_valid(self):
         """Check if this edge is valid.
         
-        Edges are only valid if they have a :paramref:`label`, a :paramref:`hocLabel`, and at least one :paramref:`edgePts`.
+        Edges are only valid if they have a :param:`label`, a :param:`hocLabel`, and at least one :param:`edgePts`.
         
         Returns:
             bool: True if the edge is valid, False otherwise.
@@ -67,18 +67,18 @@ class _Edge(object):
 def read_hoc_file(fname=''):
     """Reads a hoc file and returns a list of Edge objects.
     
-    This list of sections is parsed to a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` object
-    using :py:meth:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`.
+    This list of sections is parsed to a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.CellParser` object
+    using :func:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell`.
     
     See also:
-        The module :py:mod:`single_cell_parser` also conains a :py:meth:`~single_cell_parser.reader.read_hoc_file` 
+        The module :mod:`single_cell_parser` also conains a :func:`~single_cell_parser.reader.read_hoc_file` 
         method. A notable difference is that this method does **not** read in axon sections.
 
     Args:
         fname (str): The name of the file to be read.
 
     Returns:
-        list: A list of :py:class:`Edge` objects.
+        list: A list of :class:`Edge` objects.
     """
     #    TODO: skip reading axonal sections! Only interested in dendrites/soma here
     if not fname.endswith('.hoc') and not fname.endswith('.HOC'):
@@ -238,7 +238,7 @@ def read_scalar_field(fname='', dtype=np.float64):
         IOError: If the input file does not have a `.am` or `.AM` suffix.
         
     Returns:
-        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
+        :class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
     """
     if not fname.endswith(('.am', '.AM')):
         raise IOError('Input file is not an Amira Mesh file!')
@@ -294,10 +294,10 @@ def read_scalar_field_legacy(fname=''):
         IOError: If the input file does not have a `.am` or `.AM` suffix.
 
     Returns:
-        :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`: A scalar field object.
+        :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`: A scalar field object.
 
     .. deprecated:: 0.5.0
-       This has been deprecated in favor of the faster :py:meth:`read_scalar_field`
+       This has been deprecated in favor of the faster :func:`read_scalar_field`
 
     :skip-doc:
     """

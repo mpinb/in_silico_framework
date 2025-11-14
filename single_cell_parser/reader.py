@@ -18,7 +18,7 @@
 '''Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
 See also:
-    :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+    :mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 '''
 
 import numpy as np
@@ -36,19 +36,19 @@ logger = logging.getLogger("ISF").getChild(__name__)
 class _Edge(object):
     r'''Convenience class for NEURON segments.
 
-    Private class used in :py:meth:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
+    Private class used in :func:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
     These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
     If :math:`d-\lambda` segmentation is used, these edges are **not** comparable to NEURON segments.
     
     The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
         
     See also:
-        :py:meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
+        :func:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
         access to NEURON segments.
         
     See also:
-        :py:class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
-        that is used in the :py:mod:`singlecell_input_mapper` module.
+        :class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
+        that is used in the :mod:`singlecell_input_mapper` module.
 
     Attributes:
         label (str): label and ID of the segment (e.g. "Dendrite_1_0_0").
@@ -63,7 +63,7 @@ class _Edge(object):
     def is_valid(self):
         """Check if this edge is valid.
         
-        Edges are only valid if they have a :paramref:`label`, a :paramref:`hocLabel`, and at least one :paramref:`edgePts`.
+        Edges are only valid if they have a :param:`label`, a :param:`hocLabel`, and at least one :param:`edgePts`.
         
         Returns:
             bool: True if the edge is valid, False otherwise.
@@ -84,16 +84,16 @@ class _Edge(object):
 def read_hoc_file(fname=''):
     """Reads a hoc file and returns a list of Edge objects.
     
-    This list of sections is parsed to a :py:class:`~single_cell_parser.cell_parser.CellParser` object
-    using :py:meth:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
+    This list of sections is parsed to a :class:`~single_cell_parser.cell_parser.CellParser` object
+    using :func:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
 
     See :ref:`hoc_file_format` for more information on the hoc file format.
     
     See also:
-        The module :py:mod:`singlecell_input_mapper` also contains a method
-        :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`.
+        The module :mod:`singlecell_input_mapper` also contains a method
+        :func:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`.
         A notable **difference** is that this method reads in axon sections,
-        while the :py:mod:`singlecell_input_mapper` variant does not.
+        while the :mod:`singlecell_input_mapper` variant does not.
 
     Args:
         fname (str): The name of the file to be read.
@@ -102,7 +102,7 @@ def read_hoc_file(fname=''):
         IOError: If the input file does not have a `.hoc` or `.HOC` suffix.
 
     Returns:
-        list: A list of :py:class:`Edge` objects.
+        list: A list of :class:`Edge` objects.
 
     Example:
         >>> read_hoc_file(hoc_file)
@@ -273,7 +273,7 @@ def read_scalar_field(fname='', dtype=np.float64):
         IOError: If the input file does not have a `.am` or `.AM` suffix.
         
     Returns:
-        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
+        :class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
     """
     if not fname.endswith(('.am', '.AM')):
         raise IOError('Input file is not an Amira Mesh file!')
@@ -327,8 +327,8 @@ def read_synapse_realization(fname):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :py:meth:`~single_cell_parser.reader.read_pruned_synapse_realization`.
-    - :py:meth:`~single_cell_parser.writer.write_cell_synapse_locations` for the corresponding writer.
+    - :func:`~single_cell_parser.reader.read_pruned_synapse_realization`.
+    - :func:`~single_cell_parser.writer.write_cell_synapse_locations` for the corresponding writer.
     
     Args:
         fname (str): The name of the file to be read.
@@ -396,8 +396,8 @@ def read_pruned_synapse_realization(fname):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :py:meth:`~single_cell_parser.reader.read_synapse_realization`.
-    - :py:meth:`~single_cell_parser.writer.write_pruned_synapse_locations` for the corresponding writer.
+    - :func:`~single_cell_parser.reader.read_synapse_realization`.
+    - :func:`~single_cell_parser.writer.write_pruned_synapse_locations` for the corresponding writer.
     
     Args:
         fname (str): The name of the file to be read.
@@ -455,7 +455,7 @@ def read_functional_realization_map(fname):
     See also:
 
     - :ref:`con_file_format` for more information on the `.con` file format.
-    - :py:meth:`~single_cell_parser.writer.write_functional_realization_map` for the corresponding writer.
+    - :func:`~single_cell_parser.writer.write_functional_realization_map` for the corresponding writer.
 
     Args:
         fname (str): The name of the file to be read.
@@ -506,12 +506,12 @@ def read_synapse_activation_file(fname):
         using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
     
     
-    In contrast to :py:meth:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
+    In contrast to :func:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
     
     Args:
         fname (str): 
             Filename of a synapse activation file.
-            Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+            Such a file can be generated with :func:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
     
     Returns: 
         dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples: (synapse ID, section ID, section pt ID, [t1, t2, ... , tn])
@@ -565,7 +565,7 @@ def read_synapse_activation_file(fname):
 def read_complete_synapse_activation_file(fname):
     '''Reads list of all functional synapses and their activation times.
     
-    This reader also returns "structure label" in addition to the columns of :py:func:`read_synapse_activation_file`.
+    This reader also returns "structure label" in addition to the columns of :func:`read_synapse_activation_file`.
 
     .. deprecated::
         This format is now commonly a pandas or dask dataframe.
@@ -576,7 +576,7 @@ def read_complete_synapse_activation_file(fname):
     Args: 
         fname (str): 
             Filename of a synapse activation file.
-            Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+            Such a file can be generated with :func:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
     
     Returns: 
         dict: A dictionary with cell types as keys and list of synapse locations and activation times, coded as tuples: (synapse ID, soma distance, section ID, point ID, structure label, [t1, t2, ... , tn])
@@ -677,7 +677,7 @@ def read_synapse_weight_file(fname):
     Args: 
         fname (str): 
             Synapse weight filename. 
-            See: :py:meth:`~single_cell_parser.writer.write_synapse_weight_file`.
+            See: :func:`~single_cell_parser.writer.write_synapse_weight_file`.
     
     Returns: 
         tuple: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
@@ -768,10 +768,10 @@ def read_scalar_field_legacy(fname=''):
         IOError: If the input file does not have a `.am` or `.AM` suffix.
 
     Returns:
-        :py:class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object.
+        :class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object.
 
     .. deprecated:: 0.5.0
-       This has been deprecated in favor of the faster :py:meth:`read_scalar_field`
+       This has been deprecated in favor of the faster :func:`read_scalar_field`
 
     :skip-doc:
     """
