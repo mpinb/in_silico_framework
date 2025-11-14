@@ -850,7 +850,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/alsa-lib-1.2.14-hb9d3cd8_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/annotated-types-0.7.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyhd8ed1ab_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/astroid-4.0.1-py312h7900ff3_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/astroid-3.3.11-py312h7900ff3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/asttokens-2.4.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/at-spi2-atk-2.38.0-h0630a04_3.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-64/at-spi2-core-2.40.3-h0630a04_0.tar.bz2
@@ -1195,7 +1195,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-0.7.16-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/annotated-types-0.7.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyhd8ed1ab_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/astroid-4.0.1-py312h81bd7bf_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/astroid-3.3.11-py312h81bd7bf_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/asttokens-2.4.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/atk-1.0-2.38.0-hd03087b_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-25.4.0-pyh71513ae_0.conda
@@ -1482,7 +1482,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/alabaster-0.7.16-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/annotated-types-0.7.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/appdirs-1.4.4-pyhd8ed1ab_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/astroid-4.0.1-py312h2e8e312_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/astroid-3.3.11-py312h2e8e312_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/asttokens-2.4.1-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/attrs-25.4.0-pyh71513ae_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/aws-c-auth-0.9.1-h179d6b4_5.conda
@@ -1978,9 +1978,9 @@ packages:
   - pkg:pypi/asciitree?source=hash-mapping
   size: 6164
   timestamp: 1531050741142
-- conda: https://conda.anaconda.org/conda-forge/linux-64/astroid-4.0.1-py312h7900ff3_1.conda
-  sha256: 87980de4c4a27790a9f5495ec2dc976290ae9e586cf5d4e185ad3bcf6b401cd6
-  md5: 5d567570633a1f5bc83604fb737e2c71
+- conda: https://conda.anaconda.org/conda-forge/linux-64/astroid-3.3.11-py312h7900ff3_1.conda
+  sha256: e8ddf4c3e00cbf6350ab2f9a046b04c6b5df71fa111e5f172bce3723b0ab6ac1
+  md5: f68064e559452bab9180c8f90392d724
   depends:
   - python >=3.12,<3.13.0a0
   - python_abi 3.12.* *_cp312
@@ -1988,11 +1988,11 @@ packages:
   license_family: LGPL
   purls:
   - pkg:pypi/astroid?source=hash-mapping
-  size: 509461
-  timestamp: 1762506652970
-- conda: https://conda.anaconda.org/conda-forge/osx-arm64/astroid-4.0.1-py312h81bd7bf_1.conda
-  sha256: 3f83121f9f030969b458f69b143810b473592db634368259f2b504fb219eeea3
-  md5: a28842cffb37b9c6a6d53d27c4614cb3
+  size: 507982
+  timestamp: 1756814180904
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/astroid-3.3.11-py312h81bd7bf_1.conda
+  sha256: 89dd303180375f74475f2892e15293c5aa4848c3177316380b51b3c9d31c633a
+  md5: 5da2d6490240164a27ef602f232b7311
   depends:
   - python >=3.12,<3.13.0a0
   - python >=3.12,<3.13.0a0 *_cpython
@@ -2001,11 +2001,11 @@ packages:
   license_family: LGPL
   purls:
   - pkg:pypi/astroid?source=hash-mapping
-  size: 509926
-  timestamp: 1762507156892
-- conda: https://conda.anaconda.org/conda-forge/win-64/astroid-4.0.1-py312h2e8e312_1.conda
-  sha256: d4f892bdfd94e4792cf34b245c237dbb186820afcfa86cb61a8824c665f561f2
-  md5: 8d3deaeedb827ae841e0a332501b45f1
+  size: 509347
+  timestamp: 1756814448435
+- conda: https://conda.anaconda.org/conda-forge/win-64/astroid-3.3.11-py312h2e8e312_1.conda
+  sha256: 67bc3573865fa08809779fc94def9f8de220553507cc700e546a7ee952472e94
+  md5: 1f2355e2dae4d1cdfb625fbd4af95576
   depends:
   - python >=3.12,<3.13.0a0
   - python_abi 3.12.* *_cp312
@@ -2013,8 +2013,8 @@ packages:
   license_family: LGPL
   purls:
   - pkg:pypi/astroid?source=hash-mapping
-  size: 508631
-  timestamp: 1762506745196
+  size: 508091
+  timestamp: 1756814326800
 - conda: https://conda.anaconda.org/conda-forge/noarch/asttokens-2.4.1-pyhd8ed1ab_0.conda
   sha256: 708168f026df19a0344983754d27d1f7b28bb21afc7b97a82f02c4798a3d2111
   md5: 5f25798dcefd8252ce5f9dc494d5f571
