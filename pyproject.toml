@@ -84,6 +84,8 @@ pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 # Docs does not inherit the default dependencies
 [tool.pixi.feature.docs.dependencies]
+# astroid >=4 breaks autoapi API - filenames get mangled: last three chars are repeated
+astroid="<4"
 black = ">=21.12b0,<22"
 cloudpickle = ">=3.1.1,<4"
 dask = ">=2024.8.0,<2025"
