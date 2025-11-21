@@ -282,7 +282,7 @@ class RW:
             cloudpickle.dump(np.random.get_state(), f)
         shutil.move(path + '.saving', path)
 
-    def _propose_new_position(self, p_normalized_np, seed_normalized_np, dist, reached_aim_params, seed_pt_pd, tracking):
+    def _propose_new_position(self, p_normalized_np, seed_normalized_np, dist, reached_aim_params, seed_pt_pd):
         """Propose a new position to move to in the parameter space. 
         If applicable, the new position is proposed according to the mode and aim parameters.
 
@@ -325,7 +325,7 @@ class RW:
             return p_proposal, n_suggestion
         
     
-    def _concatenate_and_clean(self,seed_folder, particle_id, iteration  = None): 
+    def _concatenate_and_clean(self, seed_folder, particle_id): 
         """Concatenate the intermediate ``.pickle`` results and save as one parquet file. 
         Removes the pickle files.
         
@@ -395,20 +395,9 @@ class RW:
         """
         pickle_count = len([f for f in file_list if f.endswith('.pickle')])
         parquet_count = len([f for f in file_list if f.endswith('.parquet')])
-        if all([pickle_count, parquet_count]): #we have both pickle and parquet files saved
-            if os.path.isfile(os.path.join(OPERATION_DIR, f'{iteration_files[0]}.parquet')): # if the last one is parquet, we have leftover pickles, just clean
-                self._concatenate_and_clean()
-                pickle_count = 0
-                # load_mode = 'parquet_load'    
-            load_list = ['pickle'] * pickle_count + ['parquet'] * parquet_count
-        else: 
-            load_list = None
-            load_mode = (['pickle']*pickle_count + ['parquet']*parquet_count)[0] #load whichever is not zero  
+        load_list = ['pickle'] * pickle_count + ['parquet'] * parquet_count
         for i, iteration in enumerate(iteration_files):
-            if load_list: 
-                load_mode = load_list[i]
-            df, df_path = self._load_pickle_or_parquet(OPERATION_DIR, iteration, load_mode)
-            logger.info(f'Found preexisting RW, continue from there. Iteration {iteration}')
+            df, df_path = self._load_pickle_or_parquet(OPERATION_DIR, iteration, load_list[i])
             logger.info(f'Loaded file {df_path}')
             df = df[df.inside]
             try:
@@ -451,7 +440,7 @@ class RW:
         SEED_PT_DIR = os.path.join(self.MAIN_DIRECTORY, str(selected_seedpoint))
         OPERATION_DIR = os.path.join(SEED_PT_DIR, str(particle_id))
         os.makedirs(OPERATION_DIR, exist_ok=True)
-        logger.info(f"I am particle {particle_id}, and I write to {OPERATION_DIR}")
+        logger.info(f"I am particle  {particle_id}, and I write to {OPERATION_DIR}")
 
         concat_every = 60 #number of checkpoints after which the intermediate pickle files are concatenated to a single dataframe (".parquet")
         
@@ -462,6 +451,7 @@ class RW:
         iteration_files = sorted(iteration_files,reverse=True)
         if iteration_files and max(iteration_files) > self.n_iterations:
             logger.info('Max iterations reached. Exiting gracefully')
+            self._concatenate_and_clean(SEED_PT_DIR, particle_id)
             return 
         if len(iteration_files) == 0:
             logger.info(f"Starting fresh from seedpoint {selected_seedpoint}")
@@ -474,6 +464,7 @@ class RW:
             save_count = 0
         else:
             p, iteration, save_count, rngn = self._load_existing_exploration(OPERATION_DIR, iteration_files, file_list)
+            logger.info(f'Found preexisting RW, continue from there. Iteration {iteration}')
             logger.info('set state of random number generator')
             np.random.set_state(rngn)
             out = []
@@ -499,7 +490,7 @@ class RW:
                 out = []
                 save_count += 1 
             if save_count != 0 and save_count % concat_every == 0:
-                self._concatenate_and_clean(SEED_PT_DIR, particle_id, iteration)
+                self._concatenate_and_clean(SEED_PT_DIR, particle_id)
                 save_count = 0
 
             dist = get_vector_norm(p_normalized_np - seed_pt_normalized_np)
@@ -526,7 +517,7 @@ class RW:
                         logger.info('Reached aim params {} times for successful models. Exit gracefully'.format(count))
                         return
                 if iteration>self.n_iterations:
-                    self._concatenate_and_clean(SEED_PT_DIR, particle_id, iteration)
+                    self._concatenate_and_clean(SEED_PT_DIR, particle_id)
                     logger.info('Max iterations reached. Exiting gracefully')
                     return 
             iteration += 1
