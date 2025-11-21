@@ -1,10 +1,6 @@
-"""Parse simulation data generated with :py:mod:`simrun` for general purposes.
+"""Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
 
-The output format of :py:mod:`simrun` is a nested folder structure with ``.csv`` and/or ``.npz`` files.
-The voltage traces are written to a single ``.csv`` file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
-but the synapse and cell activation data is written to a separate file for each simulation trial (the amount 
-of spikes and synapse activations is not known in advance).
-
+The output format of :py:mod:`simrun` are :ref:`simresult_dir_format`: a nested folder structure with ``.csv`` and/or ``.npz`` files.
 This module provides functions to gather and parse this data to pandas and dask dataframes. It merges all trials in a single dataframe.
 This saves IO time, disk space, and is strongly recommended for HPC systems and other shared filesystems in general, as it reduces the amount of inodes required. 
 
@@ -66,7 +62,7 @@ Individual keys can afterwards be set to permanent, self-contained and efficient
 keys.
 
 See also:
-    :py:meth:`simrun.run_new_simulations.run_new_simulations` for more information on the raw output format of :py:mod:`simrun`.
+    :ref:`simresult_dir_format` for more information on the raw output format of :py:mod:`simrun`.
 
 See also:
     :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
@@ -84,9 +80,6 @@ from data_base.IO.LoaderDumper import get_dumper_string_by_dumper_module
 from data_base.utils import mkdtemp
 from .config import OPTIMIZED_PANDAS_DUMPER
 
-logger = logging.getLogger("ISF").getChild(__name__)
-
-
 from .builders import (
     _build_core,
     _build_dendritic_voltage_traces,
@@ -101,79 +94,107 @@ from .param_file_parser import load_param_files_from_db
 from .utils import _get_dumper
 from .reoptimize import reoptimize_db
 
+logger = logging.getLogger("ISF").getChild(__name__)
+
+DEFAULT_PARAMFILE_COPY_CONFIG = {
+    "copy_method": "remount",
+    "neup" : "parameterfiles_folder",
+    "netp" : "parameterfiles_folder",
+    "hoc" : "parameterfiles_folder",
+    "syn" : "parameterfiles_folder",
+    "con" : "parameterfiles_folder",
+    "recsites" : "parameterfiles_folder"
+}
 
 def init(
     db,
     simresult_path,
     core=True,
-    voltage_traces=True,
     synapse_activation=True,
     dendritic_voltage_traces=True,
     parameterfiles=True,
     spike_times=True,
-    burst_times=False,
     repartition=True,
     scheduler=None,
     rewrite_in_optimized_format=True,
     dendritic_spike_times=True,
     dendritic_spike_times_threshold=-30.0,
     client=None,
+    check_health=False,
     n_chunks=5000,
+    # deprecated args;
+    voltage_traces=None,
+    burst_times=None,
     dumper=None,
+    paramfile_copy_config=None
 ):
     """Initialize a database with simulation data.
 
     Use this function to load simulation data generated with the simrun module
-    into a :py:class:`~data_base.DataBase`.
+    into a :py:class:`~data_base.DataBase`. 
+
+    Most configuration options you would want to change on a init-by-init basis are given here as keyword arguments.
+    Additional options can be configured in :py:mod:`data_base.db_initializers.load_simrun_general.config`
 
     Args:
+        db (:class:`~data_base.DataBase`):
+            The database to store the simulation results in.
         core (bool, optional):
             Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_core`
-        voltage_traces (bool, optional):
-            Parse and write the somatic voltage traces to the database.
         spike_times (bool, optional):
             Parse and write the spike times into the database.
             See also: :py:meth:`data_base.analyze.spike_detection.spike_detection`
         dendritic_voltage_traces (bool, optional):
             Parse and write the dendritic voltage traces to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_dendritic_voltage_traces`
         dendritic_spike_times (bool, optional):
             Parse and write the dendritic spike times to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
         dendritic_spike_times_threshold (float, optional):
             Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
         synapse_activation (bool, optional):
             Parse and write the synapse activation data to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_synapse_activation`
         parameterfiles (bool, optional):
-            Parse and write the parameterfiles to the database.
-            See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_param_files`
+            Resolve and copy the parameterfiles used in each simulation to the database.
+            Since this copies all parameterfiels required to rerun simulations, this makes the database self-containing and portable.
+            You could then remove the original raw simulation data, provided you have selected all desired results in the keyword arguments here.
         rewrite_in_optimized_format (bool, optional):
-            If True (default): data is converted to a high performance binary
-            format and makes unpickling more robust against version changes of third party libraries.
-            Also, it makes the database self-containing, i.e. you can move it to another machine or
-            subfolder and everything still works. Deleting the data folder then would (should) not cause
-            loss of data.
-            If False: the db only contains links to the actual simulation data folder
-            and will not work if the data folder is deleted or moved or transferred to another machine
-            where the same absolute paths are not valid.
-        repartition (bool, optional):
-            If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
+            If True (default): data is converted to a high performance binary format
+            If False: the db only contains links (pickled objects) to the actual simulation data folder
+            and will not work if the data folder is deleted or moved or transferred to another machine.
+        repartition (bool|int): 
+            If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
+            If ``True``, the voltage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.data_parsing.DEFAULT_VT_PARTITION_SIZE`
+            If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
         n_chunks (int, optional):
-            Number of chunks to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
-            Default is 5000.
-        client (dask.distributed.Client, optional):
+            Amount of partitions to split the :ref:`syn_activation_format` and :ref:`spike_times_format` dataframes into.
+            Default is :math:`5000`.
+        paramfile_copy_config (dict, optional): 
+            Dictionary containing configuration on how to organise parameterfiles in the database. Options are:
+    
+            - ``copy_method`` (str): Which copy strategy to use. 
+              Must be either ``"hash_rename"`` or ``"remount"``. 
+              ``"hash_rename"`` will rename all parameterfiles to a hash of their content. Useful when you want all parameter files in one folder and avoid fielname clashes.
+              ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
+            - "neup" (str): Target directory name of :ref:`neuron_params_format`. Default is ``"parameterfiles_folder"``
+            - "netp" (str): Target directory name of :ref:`network_params_format`. Default is ``"parameterfiles_folder"``
+            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
+            - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"parameterfiles_folder"``
+            - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"parameterfiles_folder"``
+            - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is ``"parameterfiles_folder"``
+
+        client (:py:class:`distributed.Client`, optional):
             Distributed Client object for parallel parsing of anything that isn't a dask dataframe.
-        scheduler (dask.distributed.Client, optional)
+        scheduler (:py:class:`distributed.Client`, optional)
             Scheduler to use for parallellized parsing of dask dataframes.
             can e.g. be simply the ``distributed.Client.get`` method.
             Default is ``None``.
-        dumper (module, optional, deprecated):
-            Dumper to use for saving pandas dataframes.
-            Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
-            This has been deprecated in favor of a central configuration for the dumpers.
+            
+    Note:
+        Note the difference between *amount* of partitions (:paramref:`n_chunks`) and target partition *size* (:paramref:`repartition`)
+
+    .. versionadded:: 0.5.0
+       The keyword argument :paramref:`repartition` now accepts integers in addition to booleans.
+       Integers reflect the target size of each voltage trace dataframe partition. Booleans reflect either
+       ``True`` for a default lenght, or ``False`` for no repartitioning (i.e. one ``.csv`` file per partition)
 
     .. deprecated:: 0.2.0
         The :paramref:`burst_times` argument is deprecated and will be removed in a future version.
@@ -181,12 +202,29 @@ def init(
     .. deprecated:: 0.5.0
        The :paramref:`dumper` argument is deprecated and will be removed in a future version.
        Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
+    
+    .. deprecated:: 0.5.0
+       The :paramref:`voltage_traces` is deprecated and will be removed in a future version.
+       Voltage traces are always built when :paramref:`core` is ``True``. 
+
     """
-    if burst_times:
-        raise ValueError("deprecated!")
+    if burst_times is not None:
+        logger.warning("The burst_times argument is deprecated and will be removed in a future version. Ignoring and continuing...")
+    if voltage_traces is not None:
+        logger.warning("The voltage_trace argument is deprecated and will be removed in a future version. Voltage traces are always built when core=True, and don't need a duplicate kwarg. Ignoring and continuing...")
+    if dumper is not None:
+        logger.warning("The dumper argument is deprecated and will be removed in a future version. Dumpers for specific keys are configured in the data_base.db_initializers.load_simrun_general.config. Ignoring and continuing...")
     if rewrite_in_optimized_format:
         assert client is not None
         scheduler = client
+
+    # Update unspecified paramfile config settings to default
+    paramfile_copy_config = paramfile_copy_config or {}
+    assert all([k in DEFAULT_PARAMFILE_COPY_CONFIG for k in paramfile_copy_config]), "Please pass a recognized config option for parameterfiles: {}".format(DEFAULT_PARAMFILE_COPY_CONFIG.keys())
+    if "copy_method" in paramfile_copy_config:
+        assert paramfile_copy_config['copy_method'] in ("hash_rename", "remount"), "Please provide a recognized copy method option: hash_rename or remount"
+    for k, v in DEFAULT_PARAMFILE_COPY_CONFIG.items(): 
+        paramfile_copy_config.setdefault(k, v)
 
     # get = compatibility.multiprocessing_scheduler if get is None else get
     # with dask.set_options(scheduler=scheduler):
@@ -194,7 +232,13 @@ def init(
     db["simresult_path"] = simresult_path
 
     if core:
-        _build_core(db, repartition=repartition, metadata_dumper=OPTIMIZED_PANDAS_DUMPER)
+        _build_core(
+            db, 
+            repartition=repartition, 
+            metadata_dumper=OPTIMIZED_PANDAS_DUMPER,
+            client=client,
+            check_health=check_health,
+            )
         if rewrite_in_optimized_format:
             optimize(
                 db,
@@ -205,7 +249,7 @@ def init(
             )
 
     if parameterfiles:
-        _build_param_files(db, client=client)
+        _build_param_files(db, paramfile_copy_config=paramfile_copy_config, client=client)
 
     if synapse_activation:
         _build_synapse_activation(db, repartition=repartition, n_chunks=n_chunks)
@@ -275,10 +319,11 @@ def add_dendritic_voltage_traces(
     _build_dendritic_voltage_traces(db, repartition=repartition)
     
     if rewrite_in_optimized_format:
+        subselection = list(db["dendritic_recordings"].keys())
         # Actually load and parse the data to a format: this is not a symlink anymore
         optimize(
             db["dendritic_recordings"],
-            select=list(db["dendritic_recordings"].keys()),
+            select=subselection,       
             repartition=False,
             scheduler=scheduler,
             client=client,

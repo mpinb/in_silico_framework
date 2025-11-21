@@ -318,8 +318,9 @@ class ISFDataBase:
 
     def _check_is_legacy_mdb(self):
         if Path.exists(self._basedir/'dbcore.pickle'):
+            # Dev note: this should only be relevant for the IBS team in Bonn/Amsterdam. newer versions of ISF never shipped with ModelDataBase
             raise db_exceptions.DataBaseException(
-                "You are reading a legacy ModelDataBase using ISFDataBase. Please use the wrapper class data_base.Database, which automatically returns the correct database class."
+                "You are reading a legacy ModelDataBase using ISFDataBase. You should either configure your ISF to use ModelDataBase (in the config module), or import compatibility from ibs_projects"
             )
         
     def _infer_missing_metadata(self):

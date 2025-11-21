@@ -151,6 +151,9 @@ def universal(*args, **kwargs):
     See also:
         :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
         :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_dask`
+
+    Returns:
+        tuple: Bin borders and bin frequencies.
     '''
     if isinstance(args[0], pd.DataFrame):
         return temporal_binning_pd(*args, **kwargs)
