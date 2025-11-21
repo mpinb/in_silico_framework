@@ -65,8 +65,8 @@ def write_video_from_images(
     Returns:
         None. Writes the video to the specified path.
     '''
-    try:
-        subprocess.check_output(["module load", "ffmpeg"])
+    try: 
+        subprocess.check_output(["module load", "ffmpeg"], shell = True)
     except Exception as e:
         raise EnvironmentError("Could not load ffmpeg") from e
 
