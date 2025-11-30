@@ -15,6 +15,11 @@ This work includes software developed at:
   Included file: data_base/sqlite_backend/cloudsqlitedict.py
   (Modified to use cloudpickle)
 
+- JSAnimation (https://github.com/jakevdp/JSAnimation)
+  Copyright (c) 2013 Jake Vanderplas
+  Licensed under BSD 2-Clause
+  Included file: visualize/cell_to_ipython_animation.py
+
 The BluePyOpt-derived file is distributed under the LGPL-3.0-or-later license.
 See LICENSES/LGPL-3.0.txt for the corresponding license text.
 

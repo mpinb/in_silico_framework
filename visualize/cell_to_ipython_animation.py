@@ -15,11 +15,11 @@
 
 """Display animations in IPython sessions.
 
-This module proivdes functionality to create and render anmations in an IPython session.
+This module provides functionality to create and render anmations in an IPython session.
 It is of particular use when using Jupyter notebooks.
 
 Note:
-    Parts of this module are taken from the JSAnimation package, which is licensed under the BSD 2-Clause License.
+    Parts of this module are taken from the JSAnimation package (https://github.com/jakevdp/JSAnimation), which is licensed under the BSD 2-Clause License.
     The individual licensed components are appropriately marked with their corresponding license.
 """
 
