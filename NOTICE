@@ -23,5 +23,8 @@ This work includes software developed at:
 The BluePyOpt-derived file is distributed under the LGPL-3.0-or-later license.
 See LICENSES/LGPL-3.0.txt for the corresponding license text.
 
+Code taken from JSAnimation is distributed under the BSD-2 license,
+and are marked as such in their docstring.
+
 All other files in this project are provided under the Apache License, Version 2.0.
 See LICENSE.md for the corresponding license text.
