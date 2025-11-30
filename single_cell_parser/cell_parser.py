@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # The full license text is also available in the LICENSE file in the root of this repository.
 
-'''Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+'''Parse :ref:`neuron_parameters_format` to a :class:`~single_cell_parser.cell.Cell`.
 '''
 
 import warnings, traceback
@@ -35,11 +35,11 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
-    '''Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+    r'''Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
     
     This class is used to read a hoc file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
-    It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
-    membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
+    It segmentizes the morphology using the :math:`d-\lambda` rule based on passive properties (:cite:t:`hines2001neuron`), and sets active
+    mechanisms (Hodgkin-Huxley mechanisms or calcium buffering dynamics) as specified in a :ref:`cell_parameters_format` file.
     
     See also:
         This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
