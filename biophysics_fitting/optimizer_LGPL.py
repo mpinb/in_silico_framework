@@ -27,6 +27,9 @@ import random
 import deap.algorithms
 import deap.tools
 
+from data_base.IO.LoaderDumper import to_pickle as dumper_to_pickle
+from data_base.utils import wait_until_key_removed
+
 logger = logging.getLogger('__main__')
 
 
@@ -87,6 +90,7 @@ def eaAlphaMuPlusLambdaCheckpoint(
 
     if continue_cp:
         # A file name has been given, then load the data from the file
+        from .optimizer import get_max_generation  # lazy import to avoid circular dependency
         key = '{}_checkpoint'.format(get_max_generation(db_run))
         cp = db_run[key]  #pickle.load(open(cp_filename, "r"))
         population = cp["population"]
