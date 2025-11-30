@@ -14,31 +14,19 @@
 # limitations under the License.
 """Multi-objective optimization algorithm.
 
-This code has been adapted from `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
-such that:
+This module interfaces with `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+and provides:
 
 - a start population can be defined.
-- such that the optimizations can be organized in a data base.
-- to be executed on a distributed system using dask.
-- to return all objectives, not only the combined ones.
+- optimizations organized in a data base.
+- execution on a distributed system using dask.
+- return of all objectives, not only the combined ones.
 
 The top-level pipeline can be started with :py:meth:`start_run`.
 
-Note: 
-    Part of this module (as marked with comments) is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
-    
-    Copyright (c) 2016, EPFL/Blue Brain Project. 
-    Part of this file is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_. 
-    This library is free software; you can redistribute it and/or modify it under
-    the terms of the GNU Lesser General Public License version 3.0 as published
-    by the Free Software Foundation. 
-    This library is distributed in the hope that it will be useful, but WITHOUT 
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-    FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more 
-    details. 
-    You should have received a copy of the GNU Lesser General Public License
-    along with this library; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+Note:
+    The evolutionary algorithm implementation (adapted from BluePyOpt) is in
+    :py:mod:`biophysics_fitting.optimizer_LGPL`, which is licensed under LGPL-3.0-or-later.
 """
 import time
 
