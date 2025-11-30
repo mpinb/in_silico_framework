@@ -2,7 +2,7 @@ In Silico Framework
 Copyright (C) 2025
 Max Planck Institute for Neurobiology of Behavior – CAESAR
 
-This product includes software developed at:
+This work includes software developed at:
 
 - BluePyOpt (https://github.com/BlueBrain/BluePyOpt)
   Copyright (c) 2016, EPFL/Blue Brain Project
@@ -10,5 +10,7 @@ This product includes software developed at:
   Included file: biophysics_fitting/optimizer_LGPL.py
 
 The above file is distributed under the LGPL-3.0-or-later license.
-All other files in this project are provided under the Apache License, Version 2.0.
 See LICENSES/LGPL-3.0.txt for the corresponding license text.
+
+All other files in this project are provided under the Apache License, Version 2.0.
+See LICENSE.md for the corresponding license text.
