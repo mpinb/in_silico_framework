@@ -1,0 +1,19 @@
+
+
+_evaluate_invalid_fitness
+=========================
+
+
+.. Signature -------------------------------
+
+.. py:function:: biophysics_fitting.optimizer_LGPL._evaluate_invalid_fitness(toolbox, population)
+
+
+   Evaluate the individuals with an invalid fitness
+   Returns the count of individuals with invalid fitness
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

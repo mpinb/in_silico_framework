@@ -20,6 +20,7 @@ biophysics_fitting
    evaluator </api_reference/biophysics_fitting/evaluator/index>  
    model_selection </api_reference/biophysics_fitting/model_selection/index>  
    optimizer </api_reference/biophysics_fitting/optimizer/index>  
+   optimizer_LGPL </api_reference/biophysics_fitting/optimizer_LGPL/index>  
    parameters </api_reference/biophysics_fitting/parameters/index>  
    setup_stim </api_reference/biophysics_fitting/setup_stim/index>  
    simulator </api_reference/biophysics_fitting/simulator/index>  
@@ -99,6 +100,8 @@ Modules
      - Convenience methods to fetch biophysical models from a :py:class:`~data_base.DataBase`
    * - :py:obj:`optimizer <biophysics_fitting.optimizer>`
      - Multi-objective optimization algorithm.
+   * - :py:obj:`optimizer_LGPL <biophysics_fitting.optimizer_LGPL>`
+     - Optimisation class
    * - :py:obj:`parameters <biophysics_fitting.parameters>`
      - Fetch parameters with the dot naming convention.
    * - :py:obj:`setup_stim <biophysics_fitting.setup_stim>`

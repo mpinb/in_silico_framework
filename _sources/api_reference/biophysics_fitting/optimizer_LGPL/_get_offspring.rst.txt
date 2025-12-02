@@ -1,0 +1,18 @@
+
+
+_get_offspring
+==============
+
+
+.. Signature -------------------------------
+
+.. py:function:: biophysics_fitting.optimizer_LGPL._get_offspring(parents, toolbox, cxpb, mutpb)
+
+
+   return the offsprint, use toolbox.variate if possible
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

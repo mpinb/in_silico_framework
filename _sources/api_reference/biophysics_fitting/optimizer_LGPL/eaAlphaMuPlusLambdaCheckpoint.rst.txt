@@ -1,0 +1,41 @@
+
+
+eaAlphaMuPlusLambdaCheckpoint
+=============================
+
+
+.. Signature -------------------------------
+
+.. py:function:: biophysics_fitting.optimizer_LGPL.eaAlphaMuPlusLambdaCheckpoint(population, toolbox, mu, cxpb, mutpb, ngen, stats=None, halloffame=None, cp_frequency=1, db_run=None, continue_cp=False, db=None)
+
+
+   This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
+
+   :param population: list of deap Individuals
+   :type population: list
+   :param toolbox:
+   :type toolbox: deap Toolbox
+   :param mu: Total parent population size of EA
+   :type mu: int
+   :param cxpb: Crossover probability
+   :type cxpb: float
+   :param mutpb: Mutation probability
+   :type mutpb: float
+   :param ngen: Total number of generation to run
+   :type ngen: int
+   :param stats: generation of statistics
+   :type stats: deap.tools.Statistics
+   :param halloffame: hall of fame
+   :type halloffame: deap.tools.HallOfFame
+   :param cp_frequency: generations between checkpoints
+   :type cp_frequency: int
+   :param cp_filename: db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+   :type cp_filename: DataBase or None
+   :param continue_cp: whether to continue
+   :type continue_cp: bool
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_
