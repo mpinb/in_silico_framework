@@ -1,0 +1,30 @@
+In Silico Framework
+Copyright (C) 2025
+Max Planck Institute for Neurobiology of Behavior – CAESAR
+
+This work includes software developed at:
+
+- BluePyOpt (https://github.com/BlueBrain/BluePyOpt)
+  Copyright (c) 2016, EPFL/Blue Brain Project
+  Licensed under LGPL-3.0-or-later
+  Included file: biophysics_fitting/optimizer_LGPL.py
+
+- sqlitedict (https://github.com/RaRe-Technologies/sqlitedict)
+  Copyright (c) 2011-now Radim Řehůřek and contributors
+  Licensed under Apache-2.0
+  Included file: data_base/sqlite_backend/cloudsqlitedict.py
+  (Modified to use cloudpickle)
+
+- JSAnimation (https://github.com/jakevdp/JSAnimation)
+  Copyright (c) 2013 Jake Vanderplas
+  Licensed under BSD 2-Clause
+  Included file: visualize/cell_to_ipython_animation.py
+
+The BluePyOpt-derived file is distributed under the LGPL-3.0-or-later license.
+See LICENSES/LGPL-3.0.txt for the corresponding license text.
+
+Code taken from JSAnimation is distributed under the BSD-2 license,
+and are marked as such in their docstring.
+
+All other files in this project are provided under the Apache License, Version 2.0.
+See LICENSE.md for the corresponding license text.
