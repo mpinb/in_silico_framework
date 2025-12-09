@@ -1,21 +1,19 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
-
-"""Robustly execute all :class:`dask.delayed` objects in a :class:`ManagedFolder`
+"""Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
 
 Robust execution here is taken to mean:
 
@@ -94,7 +92,7 @@ def _wrapper(db, key_first_item):
     This wrapper is used to compute delayed objects stored in a database. It ensures that the computation is only done once.
     It also provides locks on the files wile they are being computed, to mitigate concurrent access issues.
     Before, during, and after computation, the delayed objects acquire the status ``'not_started'``, ``'started'``, and ``'finished'`` respectively.
-    This wrapper is being used in :func:`RobustDaskDelayedExecution.run_db`.
+    This wrapper is being used in :py:meth:`RobustDaskDelayedExecution.run_db`.
     
     Args:
         db (str): The path to the database.
@@ -123,23 +121,23 @@ def _wrapper(db, key_first_item):
 class RobustDaskDelayedExecution:
     '''Execute dask delayed objects in a robust way.
     
-    This class utilizes :class:`data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects to store delayed objects. 
+    This class utilizes :py:class:`data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects to store delayed objects. 
     It offers methods to run them exactly once. The return value is not saved if the dask delayeds objects don't save them. 
     
     This is used for long runing data generating simulations that can get interrupted (e.g. timeout on an HPC cluster, some error ...) 
     and you want to complete the remaining tasks later.
     
     Attributes:
-        db (:class:`data_base.dataBase`): 
-            The database containing the :class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects, 
+        db (:py:class:`data_base.dataBase`): 
+            The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects, 
             which in turn contain the dask delayed objects.
     '''
 
     def __init__(self, db):
         """
         Args:
-            db (:class:`data_base.dataBase`): 
-                The database containing the :class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
+            db (:py:class:`data_base.dataBase`): 
+                The database containing the :py:class:`~data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` objects,
                 which in turn contain the dask delayed objects.
         """
         self.db = db

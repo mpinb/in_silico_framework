@@ -1,46 +1,32 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 """Multi-objective optimization algorithm.
 
-This code has been adapted from `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
-such that:
+This module interfaces with `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_ :cite:`Van_Geit_Gevaert_Chindemi_Roessert_Courcol_Muller_Schuermann_Segev_Markram_2016`
+and provides:
 
 - a start population can be defined.
-- such that the optimizations can be organized in a data base.
-- to be executed on a distributed system using dask.
-- to return all objectives, not only the combined ones.
+- optimizations organized in a data base.
+- execution on a distributed system using dask.
+- return of all objectives, not only the combined ones.
 
 The top-level pipeline can be started with :func:`start_run`.
 
-Note: 
-    Part of this module (as marked with comments) is licensed under the GNU Lesser General Public License version 3.0 as published by the Free Software Foundation:
-    
-    Copyright (c) 2016, EPFL/Blue Brain Project. 
-    Part of this file is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_. 
-    This library is free software; you can redistribute it and/or modify it under
-    the terms of the GNU Lesser General Public License version 3.0 as published
-    by the Free Software Foundation. 
-    This library is distributed in the hope that it will be useful, but WITHOUT 
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-    FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more 
-    details. 
-    You should have received a copy of the GNU Lesser General Public License
-    along with this library; if not, write to the Free Software Foundation, Inc.,
-    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+Note:
+    The evolutionary algorithm implementation (adapted from BluePyOpt) is in
+    :py:mod:`biophysics_fitting.optimizer_LGPL`, which is licensed under LGPL-3.0-or-later.
 """
 import time
 
@@ -61,6 +47,8 @@ from data_base.IO.LoaderDumper import \
     pandas_to_parquet as dumper_pandas_to_parquet
 from data_base.IO.LoaderDumper import to_pickle as dumper_to_pickle
 from data_base.utils import wait_until_key_removed
+
+from .optimizer_LGPL import eaAlphaMuPlusLambdaCheckpoint
 
 
 def robust_int(x):
@@ -297,250 +285,6 @@ class my_ibea_evaluator(bpop.evaluators.Evaluator):
         # Instead, the mymap function defines which function is used to evaluate the parameters!!!
 
 
-############################################################
-# The code below is taken from bluepyopt.deapext.algorithms.py
-# it is changed by @abast on 11/11/2018 such that the checkpoint only saves the population, but not the history
-# and hall of fame, as this can be easily reconstructed from the data saved by mymap
-
-# Copyright (c) 2016, EPFL/Blue Brain Project
-#  The code below is part of `BluePyOpt <https://github.com/BlueBrain/BluePyOpt>`_
-#  This library is free software; you can redistribute it and/or modify it under
-#  the terms of the GNU Lesser General Public License version 3.0 as published
-#  by the Free Software Foundation.
-#  This library is distributed in the hope that it will be useful, but WITHOUT
-#  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
-#  details.
-#  You should have received a copy of the GNU Lesser General Public License
-#  along with this library; if not, write to the Free Software Foundation, Inc.,
-#  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-############################################################
-"""Optimisation class"""
-
-# pylint: disable=R0914, R0912
-
-import logging
-import pickle
-import random
-
-import deap.algorithms
-import deap.tools
-
-logger = logging.getLogger('__main__')
-
-
-def _evaluate_invalid_fitness(toolbox, population):
-    '''Evaluate the individuals with an invalid fitness
-    Returns the count of individuals with invalid fitness
-    '''
-    invalid_ind = [ind for ind in population if not ind.fitness.valid]
-    fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
-    for ind, fit in zip(invalid_ind, fitnesses):
-        ind.fitness.values = fit
-
-    return len(invalid_ind)
-
-
-def _update_history_and_hof(halloffame, history, population):
-    '''Update the hall of fame with the generated individuals
-    Note: History and Hall-of-Fame behave like dictionaries
-    '''
-    if halloffame is not None:
-        halloffame.update(population)
-
-    history.update(population)
-
-
-def _record_stats(stats, logbook, gen, population, invalid_count):
-    '''Update the statistics with the new population'''
-    record = stats.compile(population) if stats is not None else {}
-    logbook.record(gen=gen, nevals=invalid_count, **record)
-
-
-def _get_offspring(parents, toolbox, cxpb, mutpb):
-    '''return the offsprint, use toolbox.variate if possible'''
-    if hasattr(toolbox, 'variate'):
-        return toolbox.variate(parents, toolbox, cxpb, mutpb)
-    return deap.algorithms.varAnd(parents, toolbox, cxpb, mutpb)
-
-
-def eaAlphaMuPlusLambdaCheckpoint(
-        population,
-        toolbox,
-        mu,
-        cxpb,
-        mutpb,
-        ngen,
-        stats=None,
-        halloffame=None,
-        cp_frequency=1,
-        db_run=None,
-        continue_cp=False,
-        db=None):
-    r"""This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
-    
-    Args:
-        population (list): list of deap Individuals
-        toolbox(deap Toolbox)
-        mu (int): Total parent population size of EA
-        cxpb (float): Crossover probability
-        mutpb (float): Mutation probability
-        ngen (int): Total number of generation to run
-        stats (deap.tools.Statistics): generation of statistics
-        halloffame (deap.tools.HallOfFame): hall of fame
-        cp_frequency (int): generations between checkpoints
-        db_run (DataBase or None): db where the checkpoint is stored in [generation]_checkpoint.
-        continue_cp (bool): whether to continue
-
-    .. deprecated 0.5.0::
-       The argument ``cp_filename`` is deprecated. It has now been changed to ``db_run`` and ``continue_cp``.
-    """
-    # --- added by arco
-    if db_run is not None:
-        from data_base import is_data_base
-        assert is_data_base(db_run.basedir)
-        # assert db_run.__class__.__name__ in ("ModelDataBase", "ISFDataBase")  # db_run
-    assert halloffame is None
-    # --- end added by arco
-
-    if continue_cp:
-        # A file name has been given, then load the data from the file
-        key = '{}_checkpoint'.format(get_max_generation(db_run))
-        cp = db_run[key]  #pickle.load(open(cp_filename, "r"))
-        population = cp["population"]
-        parents = cp["parents"]
-        start_gen = cp["generation"]
-        halloffame = cp["halloffame"]
-        logbook = cp["logbook"]
-        history = cp["history"]
-        random.setstate(cp["rndstate"])
-        print('continuing optimization from generation {}'.format(start_gen))
-    else:
-        # Start a new evolution
-        start_gen = 1
-        parents = population[:]
-
-        ## commented out by arco ... as we record every evaluation, we do not need the bluepyopt history as it slows down the iteration
-        #logbook = deap.tools.Logbook()
-        #logbook.header = ['gen', 'nevals'] + (stats.fields if stats else [])
-        #history = deap.tools.History()
-        ## end commented out by arco
-
-        # TODO this first loop should be not be repeated !
-        invalid_count = _evaluate_invalid_fitness(toolbox, population)
-        ## commented out by arco ... as we record every evaluation, we do not need the bluepyopt history as it slows down the iteration
-        #_update_history_and_hof(halloffame, history, population)
-        #_record_stats(stats, logbook, start_gen, population, invalid_count)
-        ## end commented out by arco
-
-    # Begin the generational process
-    for gen in range(start_gen + 1, ngen + 1):
-
-        if db is not None:
-            wait_until_key_removed(db, 'pause')
-
-        offspring = _get_offspring(parents, toolbox, cxpb, mutpb)
-
-        population = parents + offspring
-
-        invalid_count = _evaluate_invalid_fitness(toolbox, offspring)
-        ## commented out by arco
-        #_update_history_and_hof(halloffame, history, population)
-        #_record_stats(stats, logbook, gen, population, invalid_count)
-        ## end commented out by arco
-
-        # Select the next generation parents
-        parents = toolbox.select(population, mu)
-
-        ## commented out by arco
-        #logger.info(logbook.stream)
-        ## end commented out by arco
-
-        if (db_run and cp_frequency and gen % cp_frequency == 0):
-            cp = dict(
-                population=population,
-                generation=gen,
-                parents=parents,
-                halloffame=None,  #halloffame, // arco
-                history=None,  # history, // arco
-                logbook=None,  # logbook, // arco
-                rndstate=random.getstate())
-            # save checkpoint in db
-            db_run.set('{}_checkpoint'.format(gen),
-                            cp,
-                            dumper=dumper_to_pickle)
-            #pickle.dump(cp, open(cp_filename, "wb"))
-            #logger.debug('Wrote checkpoint to %s', cp_filename)
-
-        if 'satisfactory' in db.keys(
-        ) and gen > 1:  #gen>1 to make sure a checkpoint is created
-            break
-
-    return population  #, logbook, history
-
-
-####################################################
-# end taken from bluepyopt
-#####################################################
-
-
-def run(
-        self,
-        max_ngen=10,
-        offspring_size=None,
-        continue_cp=False,
-        cp_filename=None,
-        cp_frequency=1,
-        pop=None,
-        db=None
-        ):
-    """
-    This method is a class method of the BluePyOpt optimisations.DEAPOptimisation class.
-    It is extended here such that a start population can be defined.
-    Running actual optimization is done with the :meth:`~biophysics_fitting.optimizer.start_run`, which further extends this method.
-    
-    Note: 
-        the population needs to be in a special format. Use methods in biophysics_fitting.population 
-        to create a population.
-    """
-    # Allow run function to override offspring_size
-    # TODO probably in the future this should not be an object field anymore
-    # keeping for backward compatibility
-    if offspring_size is None:
-        offspring_size = self.offspring_size
-
-    # Generate the population objec
-    if pop is None:
-        pop = self.toolbox.population(n=offspring_size)
-    else:
-        print("initialized with population of size {:s}".format(len(pop)))
-        assert continue_cp == False
-
-    ## commented out by arco
-    #stats = deap.tools.Statistics(key=lambda ind: ind.fitness.sum)
-    #import numpy
-    #stats.register("avg", numpy.mean)
-    #stats.register("std", numpy.std)
-    #stats.register("min", numpy.min)
-    #stats.register("max", numpy.max)
-    ## end commented out by arco
-
-    pop = eaAlphaMuPlusLambdaCheckpoint(
-        pop,
-        self.toolbox,
-        offspring_size,
-        self.cxpb,
-        self.mutpb,
-        max_ngen,
-        stats=None,  # arco
-        halloffame=None,  # self.hof,
-        cp_frequency=cp_frequency,
-        continue_cp=continue_cp,
-        cp_filename=cp_filename,
-        db=db)
-
-    return pop
-
 
 def get_population_with_different_n_objectives(old_pop, n_objectives):
     '''Adapt the number of objectives of individuals
@@ -684,12 +428,3 @@ def start_run(
         db_run=db_run,
         db=db_setup)
 
-    return pop
-
-    pop = run(opt,
-              max_ngen=max_ngen,
-              cp_filename=db_run,
-              continue_cp=continue_cp,
-              pop=pop,
-              db=db_setup)
-    return pop

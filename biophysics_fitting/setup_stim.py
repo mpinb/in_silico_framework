@@ -1,21 +1,19 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 r"""
-This module provides methods to set up stimuli by adding recording/injection pipettes to :class:`~single_cell_parser.cell.Cell` objects.
+This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
 
 Stimulus types included in this module are:
 
@@ -35,7 +33,7 @@ h = neuron.h
 
 
 def _append(cell, name, item):
-    """Append an item to a :class:`~single_cell_parser.Cell.cell` object.
+    """Append an item to a :py:class:`~single_cell_parser.Cell.cell` object.
     
     This is used to add e.g. injection/recording pipettes to the cell.
     
@@ -45,7 +43,7 @@ def _append(cell, name, item):
         item (object): The item to append.
         
     Returns:
-        None. Adds :param:`item` to the :param:`cell` under the name :param:`name`."""
+        None. Adds :paramref:`item` to the :paramref:`cell` under the name :paramref:`name`."""
     try:
         getattr(cell, name)
     except AttributeError:
@@ -54,10 +52,10 @@ def _append(cell, name, item):
 
 
 def setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0):
-    """Setup up a step current at the soma, or a given :param:`dist` from the soma.
+    """Setup up a step current at the soma, or a given :paramref:`dist` from the soma.
 
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         amplitude (float): The amplitude of the step current.
         delay (float): The delay of the step current.
         duration (float): The duration of the step current.
@@ -88,12 +86,12 @@ def setup_apical_epsp_injection(
     ):
     """Setup an EPSP injection at a given distance from the soma.
     
-    This method assumes the :param:`cell` has a soma and an apical dendrite.
+    This method assumes the :paramref:`cell` has a soma and an apical dendrite.
     It checks so by means of section label: it must contain a section 
-    labeled "ApicalDendrite". See :func:`~biophysics_fitting.utils.get_inner_section_at_distance` for more information.
+    labeled "ApicalDendrite". See :py:meth:`~biophysics_fitting.utils.get_inner_section_at_distance` for more information.
     
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma to the injection site (um).
         amplitude (float): The amplitude of the EPSP (nA).
         delay (float): The delay of the EPSP (ms).
@@ -122,7 +120,7 @@ def setup_bAP(cell, delay=295):
     - duration = 5 ms
     
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         delay (float): The delay of the bAP stimulus (ms).
         
     Returns:
@@ -149,7 +147,7 @@ def setup_BAC(cell, dist=970, delay=295):
     - delay = 300 ms
     
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         dist (float): The distance from the soma to the recording site (um).
         delay (float): The delay of the BAC stimulus (ms).
         
@@ -180,7 +178,7 @@ def setup_StepOne(cell, delay=700):
     - duration = 2000 ms   
     
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         delay (float): The delay of the step current stimulus (ms).
     
     Returns:
@@ -197,7 +195,7 @@ def setup_StepTwo(cell, delay=700):
     - duration = 2000 ms      
     
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         delay (float): The delay of the step current stimulus (ms).
         
     Returns:
@@ -214,7 +212,7 @@ def setup_StepThree(cell, delay=700):
     - duration = 2000 ms   
            
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
         delay (float): The delay of the step current stimulus (ms).
         
     Returns:
