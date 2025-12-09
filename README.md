@@ -31,7 +31,7 @@ Installation instructions can be found [here](https://mpinb.github.io/in_silico_
 
 ISF is available for Linux, Windows and macOS.
 For installation and environment management, ISF uses [pixi](https://pixi.sh/latest/). 
-Please follow the installation instructions on the [`pixi` documentation](https://pixi.sh/latest/#installation)
+Please follow the installation instructions on the [pixi documentation](https://pixi.sh/latest/#installation)
 
 To install ISF with pixi, simply:
 
