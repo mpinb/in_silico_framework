@@ -103,19 +103,19 @@ class RW:
             params_to_explore (list): list of parameters that should be explored. If None, all parameters are explored.
             evaluation_function (Callable): 
                 takes one argument (a new parameter vector) and returns:
-
                 - inside: boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not. 
                 - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain ephys features.
-
-            checkpoint_every (int): save the results every n iterations
-            check_point_by_time (float): time interval in minutes for checkpointing for using time-based checkpointing. If both
+            checkpoint_every (int): iteration interval at which the results are saved e.i., n for checkpointing every n iterations. If both 
                 checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
-            mode (str): Random walk mode. Options: (None, 'expand', 'custom'). default: None
+            check_point_by_time (float): time interval (in minutes) at which results are saved e.i., n for checkpointing every n minutes. If both
+                checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
+            mode (str): Random walk mode. Options: (None, 'expand', 'custom'). If none, no additional constraints will be considered when proposing new points.
                 'expand': only propose new points that move further away from seedpoint
                 'custom': use custom conditions to propose new points. If this mode is used, mode_condition_fun must be provided to evaluate the new points.
+                Default: None
             mode_condition_fun (Callable): 
-                Function that takes a parameter vector and returns a boolean indicating whether the point is acceptable or not.
-                This function is used in 'custom' mode to propose new points.
+                A function that takes a parameter vector and returns a boolean indicating if the proposed point 
+                is acceptable. Used if mode is set to custom. 
             aim_params (dict): this param will make the exploration algorithm propose only new points such that a set of 
                 parameters aims certain values during exploration.
                 Default: {}
