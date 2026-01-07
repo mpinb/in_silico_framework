@@ -183,7 +183,7 @@ def _resolve_rel_syncon_ref(fn, ref):
     return abs_ref
 
 def _resolve_syncon_ref(fn, ref):
-    """Resolve relative references in :ref:`syn_file_format` or :ref:`conf_file_format` files.
+    """Resolve relative references in :ref:`syn_file_format` or :ref:`con_file_format` files.
 
     Relative references can either be filenmaes without preceding directory structure, or reldb://-style relative paths.
     """
