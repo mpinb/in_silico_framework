@@ -51,10 +51,19 @@ def plot_hoc(hoc_file, **kwargs):
     
     Args:
         hoc_file (str): The path to the :ref:`hoc_file_format` file
-        kwargs: additional arguments to pass to :func:`CellMorphologyVisualizer.plot`
+        kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
 
     Returns:
         :class:`~matplotlib.figure.Figure`: The figure object
+
+    Example::
+    
+        from visualize import plot_hoc
+        fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
+        plot_hoc(fn)
+        
+    .. figure:: ../docs/_static/_images/86_hoc.png
+
     """
     cp = CellParser(hoc_file)
     cp.spatialgraph_to_cell()

@@ -1,6 +1,6 @@
 .. _home:
 
-The In Silico Framework (ISF)
+In Silico Framework (ISF)
 =============================
 
 .. toctree::
