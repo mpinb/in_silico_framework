@@ -170,6 +170,13 @@ def get_db_by_unique_id(unique_id):
         :class:`data_base.DataBase`: The database associated with the :param:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
+    if _is_isf_data_base(db_path):
+        from .isf_data_base import ISFDataBase
+        DataBase = ISFDataBase
+    elif _is_legacy_model_data_base(db_path):
+        try: from model_data_base import ModelDataBase
+        except ImportError: "The requested database with unique_id {} is a legacy ModelDataBase. Make sure you have this on your PATH, e.g. by importing ibs_projects.compatibility".format(unique_id)
+        DataBase = ModelDataBase
     db = DataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db
