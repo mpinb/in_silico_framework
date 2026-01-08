@@ -58,10 +58,6 @@ class DataBaseRegister():
             registry_basedir (str): The location of the db registry
             search_dbs (str|bool, optional): Whether to look for data_bases in all subfolders of the registry's directory. Defaults to "on_first_init", which only does this if the registry is newly created.
         """
-        registry_suffix = LOCAL_DATA_BASE_REGISTER_NAME[1:]  # note: this can be .data_base_register.db or .model_data_base_register.db
-        if not registry_basedir.endswith(registry_suffix):  
-            registry_basedir = os.path.join(registry_basedir, LOCAL_DATA_BASE_REGISTER_NAME)
-        assert registry_basedir.endswith(registry_suffix)
         self.registry_basedir = registry_basedir
         if not os.path.exists(self.registry_basedir):
             self._first_init = True
@@ -80,7 +76,7 @@ class DataBaseRegister():
             directory (str, optional): The directory to search in. Defaults to None, in which case the directory of the registry is searched.
         """
         for dir_ in [x[0] for x in os.walk(directory)]:
-            if dir_.endswith(LOCAL_DATA_BASE_REGISTER_NAME):
+            if dir_.endswith("data_base_register.db"):
                 continue
             if os.path.exists(os.path.join(dir_, "metadata.json")):
                 # it is an ISFDataBase
