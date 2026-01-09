@@ -15,7 +15,7 @@
 """Read and write a numpy array to ``npy`` format.
 
 See also:
-    :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy_to_npz` for saving multiple numpy arrays to a zipped file.
+    :mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy_to_npz` for saving multiple numpy arrays to a zipped file.
 """
 
 

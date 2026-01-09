@@ -16,12 +16,12 @@
 """Recreate and resimulate a single simulation trial from parameter files and return the cell object.
 
 This module provides a function to rebuild a network-embedded neuron model from 
-a :py:class:`~data_base.DataBase`. it also allows to change the :ref:`cell_parameters_format`, 
+a :class:`~data_base.DataBase`. it also allows to change the :ref:`cell_parameters_format`, 
 :ref:`network_parameters_format`, and :ref:`syn_activation_format` data before resimulating the trial.
 
 See also:
-    To rebuild and re-simulate a :py:mod:`simrun` simulation from parameter files instead of a :py:class:`~data_base.DataBase`, 
-    please refer to :py:mod:`~simrun.parameters_to_cell` instead.
+    To rebuild and re-simulate a :mod:`simrun` simulation from parameter files instead of a :class:`~data_base.DataBase`, 
+    please refer to :mod:`~simrun.parameters_to_cell` instead.
 """
 
 
@@ -128,12 +128,12 @@ def simtrial_to_cell_object(
     Synapse activation modify functions should take the synapse activation data as input and return the modified data.
     
     Args:
-        db (:py:class:`data_base.dataBase`): A simrun-initialized database object.
+        db (:class:`data_base.dataBase`): A simrun-initialized database object.
         sim_trial_index (int): Index of the simulation trial in the database.
         range_vars (str | list): Range variables to record.
         scale_apical (callable, DEPRECATED): Function to scale the apical dendrites.
         allPoints (bool): If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
-        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
+        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :class:`~single_cell_parser.cell.Cell` object.
         tStop (float): Stop time of the simulation.
         neuron_param_modify_functions (list): List of functions to modify the neuron parameters.
         network_param_modify_functions (list): List of functions to modify the network parameters.
@@ -145,15 +145,15 @@ def simtrial_to_cell_object(
         Use the `cell_modify_functions` key in the :ref:`cell_parameters_format` file instead.
         
     See also:
-        :py:func:`simrun.sim_trial_to_cell_object.trial_to_cell_object` 
+        :func:`simrun.sim_trial_to_cell_object.trial_to_cell_object` 
         to recreate a single simulation trial from parameter files instead of a database.
         
     See also:
-        :py:mod:`data_base.db_initializers.init_simrun_general` to initialize a database object
+        :mod:`data_base.db_initializers.init_simrun_general` to initialize a database object
         from raw `simrun` output, i.e. a "simrun-initialized" database object.
     
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
+        :class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
     """
     stdout_bak = sys.stdout
     if silent == True:
@@ -219,7 +219,7 @@ def trial_to_cell_object(
         range_vars (str | list): Range variables to record.
         scale_apical (callable, DEPRECATED): Function to scale the apical dendrites.
         allPoints (bool): If True, skip :math:`d-\lambda` segmentation and simulate at high resolution.
-        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :py:class:`~single_cell_parser.cell.Cell` object.
+        compute (bool): If True, compute the simulation. Otherwise return the simulation-ready :class:`~single_cell_parser.cell.Cell` object.
         tStop (float): Stop time of the simulation.
         neuron_param_modify_functions (list): List of functions to modify the neuron parameters.
         network_param_modify_functions (list): List of functions to modify the network parameters.
@@ -230,7 +230,7 @@ def trial_to_cell_object(
         Use the `cell_modify_functions` key in the :ref:`cell_parameters_format` file instead.
         
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
+        :class:`~single_cell_parser.cell.Cell`: The simulation-ready or simulated cell object.
     """
     tempdir = None
 

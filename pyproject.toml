@@ -70,11 +70,12 @@ blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 # OS specific dependencies
 [tool.pixi.target.osx]
-pypi-dependencies = { neuron = ">=8.2", "distributed"= ">=2.30.0"}
+# >=9 compiles to c++, not c, breaking our .mod files
+pypi-dependencies = { neuron = ">=8.2,<9",   "distributed"= ">=2.30.0" }
 dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
 
 [tool.pixi.target.linux]
-dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15" }
+dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15", gxx = "<15" }
 pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 [tool.pixi.target.win]
@@ -83,6 +84,8 @@ pypi-dependencies = { tables = ">=3.8.0,<4" }
 
 # Docs does not inherit the default dependencies
 [tool.pixi.feature.docs.dependencies]
+# astroid >=4 breaks autoapi API - filenames get mangled: last three chars are repeated
+astroid="<4"
 black = ">=21.12b0,<22"
 cloudpickle = ">=3.1.1,<4"
 dask = ">=2024.8.0,<2025"

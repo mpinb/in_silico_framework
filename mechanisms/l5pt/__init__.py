@@ -31,7 +31,7 @@ True
 ```
 
 See also:
-    :py:mod:`config.isf_configure`
+    :mod:`config.isf_configure`
 """
 
 import os, platform, six, neuron, glob, shutil, subprocess, sys, threading
@@ -115,8 +115,8 @@ def compile_mechanisms(force_recompile=False):
     if necessary using ``nrnivmodl``.
     
     See also:
-        :py:func:`check_nrnivmodl_is_available` to check if `nrnivmodl` is available in the ``PATH``, and
-        :py:func:`_compile_mechanisms_at_path` to compile the mechanisms in a given directory.
+        :func:`check_nrnivmodl_is_available` to check if `nrnivmodl` is available in the ``PATH``, and
+        :func:`_compile_mechanisms_at_path` to compile the mechanisms in a given directory.
         
     Args:
         force_recompile (bool): If True, forces recompilation of the mechanisms even if they are already compiled.

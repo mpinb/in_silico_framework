@@ -1,13 +1,13 @@
 """Patch napoleon to work nicely with the sphinx-immaterial html theme
 
 Sphinx immaterial interferes with Napoleon when ``napoleon.use_param=True``
-When argument types are explicit directives e.g. :py:class:`a.b.Class`, sphinx-immaterial weirdly omits them from the final html, 
+When argument types are explicit directives e.g. :class:`a.b.Class`, sphinx-immaterial weirdly omits them from the final html, 
 despite the fact they are perfectly fine and present in the rst stub files. 
 
 On the other hand, the sphinx-immaterial html theme has a built-in python domain resolver (which is definitely not default for html themes, but really nice).
 This means that these explicit directives ironically start working again when they are stripped of their directive, and just the content is passed to sphinx-immaterial.
 
-So :py:class:`~a.b.MyClass` will be omitted from the html, despite being an explicit role.
+So :class:`~a.b.MyClass` will be omitted from the html, despite being an explicit role.
 On the other hand: ~a.b.MyClass will render perfectly fine with working internal links, as long as it's in an argument block or inside numpy style directive-like syntax.
 
 This issue only exists when `napoleon.use_param=True` and Napoleon builds rst stubs with the :param myparam: role.

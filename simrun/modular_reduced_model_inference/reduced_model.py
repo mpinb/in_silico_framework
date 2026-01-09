@@ -13,17 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Construct reduced models and run optimization.
+r"""Construct reduced models and run optimization.
 
 This module provides a top-level class to run reduced model inference.
 Each reduced model contains:
-- a :py:class:~`DataView` object to access data
-- a :py:class:`DataSplitEvaluation` object to split data and evaluate the optimization results
-- one or more :py:class:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor` objects to preprocess the data
-- one or more :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` objects to run the optimization.
+- a :class:~`DataView` object to access data
+- a :class:`DataSplitEvaluation` object to split data and evaluate the optimization results
+- one or more :class:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor` objects to preprocess the data
+- one or more :class:`~simrun.modular_reduced_model_inference.strategy._Strategy` objects to run the optimization.
 
 The optimization run optimizes a set of free parameters :math:`\mathbf{x}` to minimize a cost function. 
-Both the cost function and the free parameters are defined in the :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+Both the cost function and the free parameters are defined in the :class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
 """
 
 
@@ -36,7 +36,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def get_n_workers_per_ip(workers, n):
     '''Convenience method to get a certain amount of workers per machine
 
-    Groups all workers by their IP, fetches :paramref:`n` workers per IP,
+    Groups all workers by their IP, fetches :param:`n` workers per IP,
     and returns them as a list.
 
     Args:
@@ -45,7 +45,7 @@ def get_n_workers_per_ip(workers, n):
         n (int): Amount fo workers to fetch per machine.
 
     Returns:
-        List[dask.distributed.worker.Worker]: List of :paramref:`n`*``n_machines`` workers.
+        List[dask.distributed.worker.Worker]: List of :param:`n`*``n_machines`` workers.
     '''
     s = pd.Series(workers)
     return s.groupby(s.str.split(':').str[1]).apply(lambda x: x[:n]).tolist()
@@ -63,12 +63,12 @@ class Rm(object):
         tmin (float): Minimum time for the simulation
         tmax (float): Maximum time for the simulation
         width (float): Width of the temporal kernel. 
-            This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+            This will be used as the domain e.g. the :math:`\\tau` domain in :class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
         n_trials (int): Amount of trials
-        data_extractors (dict): Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
-        strategies (dict): Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
-        Data (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`): Data view object
-        DataSplitEvaluation (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`): Data split evaluation object
+        data_extractors (dict): Dictionary of :class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
+        strategies (dict): Dictionary of :class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
+        Data (:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`): Data view object
+        DataSplitEvaluation (:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`): Data split evaluation object
         selected_indices (list): List/nested list of integer indices for selected simulation trials
         results_remote (bool): Flag that keeps track whether results are stored locally or on a remote scheduler.
     """
@@ -86,7 +86,7 @@ class Rm(object):
             db (str): Path to the database
             tmin (float): Minimum time for the simulation
             tmax (float): Maximum time for the simulation
-            width (float): Width of the temporal kernel. This will be used as the :math:`\\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+            width (float): Width of the temporal kernel. This will be used as the :math:`\\tau` domain in e.g. :class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
             selected_indices (list): List/nested list of integer indices for selected simulation trials
         """
         self.name = name
@@ -111,11 +111,11 @@ class Rm(object):
         
         Args:
             name (str): Name of the data extractor
-            data_extractor (:py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor`): Data extractor object
+            data_extractor (:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor`): Data extractor object
             setup (bool): If True, run the setup method of the data extractor
             
         See also:
-            :py:mod:`~simrun.modular_reduced_model_inference.data_extractor` for available data extractors.
+            :mod:`~simrun.modular_reduced_model_inference.data_extractor` for available data extractors.
         """
         self.data_extractors[name] = data_extractor
         if setup == True:
@@ -125,13 +125,13 @@ class Rm(object):
         """Add a strategy to the reduced model.
         
         Args:
-            strategy (:py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy`): Strategy object
+            strategy (:class:`~simrun.modular_reduced_model_inference.strategy.Strategy`): Strategy object
             setup (bool): If True, run the setup method of the strategy
-            view (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`): Data view object
+            view (:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`): Data view object
             
         See also:
-            :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies.
-            :py:mod:`DataView` for the data view object.
+            :mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies.
+            :mod:`DataView` for the data view object.
         """
         name = strategy.name
         assert name not in self.strategies.keys()
@@ -163,7 +163,7 @@ class Rm(object):
             obj: Data extracted by the data extractor
             
         See also:
-            :py:meth:`~simrun.modular_reduced_model_inference.data_extractor>get` for how a data extractor fetches data.
+            :func:`~simrun.modular_reduced_model_inference.data_extractor>get` for how a data extractor fetches data.
         """
         return self.data_extractors[name].get()
 
@@ -175,18 +175,18 @@ class Rm(object):
         1. Extracts data from the reduced model
         2. Splits the data into training and test sets
         3. Constructs a cost function to be optimized.
-        4. Solves the optimization problem using a :py:class:`~simrun.modular_reduced_model_inference.solver._Solver`
+        4. Solves the optimization problem using a :class:`~simrun.modular_reduced_model_inference.solver._Solver`
         
         Each strategy implements different cost functions, depending on what to optimize for.
-        However, they all implement a :py:meth:`get_score` method to evaluate the performance of the optimization.
+        However, they all implement a :func:`get_score` method to evaluate the performance of the optimization.
         
         Args:
-            client (:py:class:`~dask.distributed.Client`): Dask client for remote optimization
+            client (:class:`~dask.distributed.Client`): Dask client for remote optimization
             n_workers (int): Amount of workers to use for remote optimization
             strategy_selection (list): List of strategy names to run. If None, run all strategies.
             
         See also:
-            :py:mod:`simrun.modular_reduced_model_inference.strategy` for available strategies.
+            :mod:`simrun.modular_reduced_model_inference.strategy` for available strategies.
         
         """
         for strategy_name in sorted(self.strategies.keys()):
@@ -216,7 +216,7 @@ class Rm(object):
         """Fetch the solver results from the dask scheduler.
         
         Args:
-            client (:py:class:`~dask.distributed.Client`): Dask client.
+            client (:class:`~dask.distributed.Client`): Dask client.
         """
         assert client is not None
         self.DataSplitEvaluation.optimizer_results = \
@@ -227,13 +227,13 @@ class Rm(object):
         """Get the results of the optimization.
         
         Args:
-            client (:py:class:`~dask.distributed.Client`): Dask client.
+            client (:class:`~dask.distributed.Client`): Dask client.
             
         Returns:
             pd.DataFrame: DataFrame with the optimization results.
             
         See also:
-            :py:meth:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores` for how the scores are computed and their output format.
+            :func:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.compute_scores` for how the scores are computed and their output format.
         """
         if self.results_remote:
             self._gather_results(client)
@@ -244,7 +244,7 @@ class DataView(object):
     """Convenience wrapper class to access data.
 
     This wrapper class redirects data extractors based on a key mapping.
-    This API is used by default in :py:class:`~simrun.modular_reduced_model_inference.Rm`
+    This API is used by default in :class:`~simrun.modular_reduced_model_inference.Rm`
     If no mapping is provided, or a requested key does not exist in the mapping, the original key is used instead.
 
     Example:
@@ -262,8 +262,8 @@ class DataView(object):
         mapping_dict (dict):
             Mapping between requested keys and target keys.
             Used to redirect data fetching.
-        Rm (:py:class:`Rm`):
-            Reduced model. Set after running :py:meth:`setup`
+        Rm (:class:`Rm`):
+            Reduced model. Set after running :func:`setup`
     """
 
     def __init__(self, mapping_dict = None):
@@ -279,17 +279,17 @@ class DataView(object):
     def setup(self, Rm):
         """Initialize from a reduced model.
 
-        Allow access to parent :py:class:`Rm` attributes.
+        Allow access to parent :class:`Rm` attributes.
 
         Args:
-            Rm (:py:class:`Rm`): The reduced model to initialize from.
+            Rm (:class:`Rm`): The reduced model to initialize from.
         """
         self.Rm = Rm
 
     def __getitem__(self, key):
         """Fetch data from key.
 
-        If the key exists in :paramref:`mapping_dict`, return the data
+        If the key exists in :param:`mapping_dict`, return the data
         associated to the key redirect instead.
 
         Args:
@@ -308,7 +308,7 @@ class DataSplitEvaluation(object):
     and to evaluate the reduced model performance scores corresponding to the splits.
     
     Attributes:
-        Rm (:py:class:`Rm`): Reduced model. Set after running :py:meth:`setup`
+        Rm (:class:`Rm`): Reduced model. Set after running :func:`setup`
         splits (dict): Dictionary of splits
         solvers (list): List of solvers
         optimizer_results (list): List of optimization results
@@ -320,7 +320,7 @@ class DataSplitEvaluation(object):
     def __init__(self, Rm):
         """
         Args:
-            Rm (:py:class:`Rm`): Reduced model. Set after running :py:meth:`setup`
+            Rm (:class:`Rm`): Reduced model. Set after running :func:`setup`
         """
         self.Rm = Rm
         self.splits = {}
@@ -400,7 +400,7 @@ class DataSplitEvaluation(object):
         ``strategy``, ``solver``, and ``run``.
         
         Args:
-            solver (:py:class:`~simrun.modular_reduced_model_inference.solver._Solver`): Solver object
+            solver (:class:`~simrun.modular_reduced_model_inference.solver._Solver`): Solver object
             x (dict): Optimization result        
         """
         #         assert len(self.splits) == len(x) #rieke - want to run individual splits sometimes
@@ -421,7 +421,7 @@ class DataSplitEvaluation(object):
         This method extracts the optimization results and computes the resulting score of the cost function.
         
         See also:
-            :py:meth:`~simrun.modular_reduced_model_inference.strategy.Strategy._objective_function` for the cost function.
+            :func:`~simrun.modular_reduced_model_inference.strategy.Strategy._objective_function` for the cost function.
         
         Returns:
             pd.DataFrame: DataFrame with the optimization results.

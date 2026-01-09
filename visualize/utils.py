@@ -49,7 +49,7 @@ def write_video_from_images(
 
     Note:
         Globbing is not enabled by default on Windows machines.
-        If running this command on windows, please set the :paramref:`glob` argument to False and specify a non-glob type match pattern.
+        If running this command on windows, please set the :param:`glob` argument to False and specify a non-glob type match pattern.
     
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images
@@ -131,7 +131,7 @@ def write_gif_from_images(
         interval=40,
         images_format='.png',
         auto_sort_paths=True):
-    '''Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+    '''Creates a gif from a set of images, and saves it to :param:`out_path`.
 
     Args:
         images (list | str): list of images, a directory with images or a list of directories with images
@@ -206,7 +206,7 @@ def write_gif_from_images(
 def _load_base64(filename, extension='png'):
     """Load a base64 file from a filename.
 
-    Used in :py:meth:`display_animation_from_images` to embed animations.
+    Used in :func:`display_animation_from_images` to embed animations.
     
     See: https://github.com/jakevdp/JSAnimation/blob/master/JSAnimation/html_writer.py
     """
@@ -352,8 +352,8 @@ class Arrow3D(FancyArrowPatch):
             dx (float): x coordinate difference of the arrow direction.
             dy (float): y coordinate difference of the arrow direction.
             dz (float): z coordinate difference of the arrow direction.
-            *args: Additional positional arguments passed to FancyArrowPatch.
-            **kwargs: Additional keyword arguments passed to FancyArrowPatch.
+            args: Additional positional arguments passed to FancyArrowPatch.
+            kwargs: Additional keyword arguments passed to FancyArrowPatch.
         """
         super().__init__((0, 0), (0, 0), *args, **kwargs)
         self._xyz = (x, y, z)
@@ -396,16 +396,16 @@ def draw_arrow(
         highlight_x=None,
         highlight_arrow_kwargs=None,
         arrow_size=50):
-    """Highlight a morphology section with an :py:class:`Arrow3D`.
+    """Highlight a morphology section with an :class:`Arrow3D`.
 
-    This method is used by :py:class:`CellMorphologyVisualizer` to annotate morphology sections.
+    This method is used by :class:`CellMorphologyVisualizer` to annotate morphology sections.
     
     Args:
         morphology (pd.DataFrame): The morphology dataframe containing the coordinates of the sections.
         ax (matplotlib.axes.Axes): The matplotlib axes object to draw the arrow on.
         highlight_section (int, optional): The section index to highlight. If None, no section is highlighted. Default is ``None``.
         highlight_x (float, optional): The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
-        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+        highlight_arrow_kwargs (dict, optional): Additional keyword arguments to pass to the :class:`Arrow3D` constructor. Default is ``None``.
         arrow_size (int, optional): The size of the arrow. Default is 50.
     
     Returns:
@@ -413,32 +413,33 @@ def draw_arrow(
     
     """
 
-    assert type(
-        highlight_section
-    ) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(
-        highlight_section)
-    assert highlight_section in morphology[
-        'sec_n'], "The given section id is not present in the cell morphology"
+    assert type(highlight_section) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(highlight_section)
+    assert highlight_section in morphology['sec_n'], "The given section id is not present in the cell morphology"
 
     setattr(Axes3D, 'arrow3D', _arrow3D)
     if highlight_arrow_kwargs is None:
         highlight_arrow_kwargs = {}
 
     # overwrite defaults if they were set
-    x = dict(mutation_scale=20, ec='black', fc='white')
-    x.update(highlight_arrow_kwargs)
-    highlight_arrow_kwargs = x
+    default_arrow_kwargs = dict(mutation_scale=20, ec='black', fc='white')
+    default_arrow_kwargs.update(highlight_arrow_kwargs)
+    highlight_arrow_kwargs = default_arrow_kwargs
 
     morphology = morphology.copy()
     morphology = morphology.fillna(0)  # soma section gets 0 as section ID
-    df = morphology[morphology['sec_n'] == highlight_section]
+    sec_pts = morphology[morphology['sec_n'] == highlight_section][['x', 'y', 'z']]
     if highlight_x is not None:
-        index = np.argmin(np.abs(df.relPts - highlight_x))
-        x, y, z = df.iloc[index][['x', 'y', 'z']]
+        assert highlight_section is not None, "Please provide a section index to highlight when passing a distance from soma x."
+        assert 0 <= highlight_x <= 1, "The distance from soma x must be between 0 and 1. You passed {}".format(highlight_x)
+        segment_lengths = np.linalg.norm(np.diff(sec_pts, axis=0), axis=1)
+        cum_length = np.concatenate([[0], np.cumsum(segment_lengths)])
+        total_length = cum_length[-1]
+        target_length = highlight_x * total_length
+        idx = np.searchsorted(cum_length, target_length)
+        x, y, z = sec_pts.iloc[idx]
     elif highlight_section is not None:
-        x, y, z = morphology[morphology['sec_n'] == highlight_section][[
-            'x', 'y', 'z'
-        ]].mean(axis=0)
+        assert highlight_section < morphology['sec_n'].max(), "Morphology only has {} sections, but you passed highlight_section={}".format(cmv.morphology['sec_n'].max(), highlight_section)
+        x, y, z = sec_pts.mean(axis=0)
     else:
         raise ValueError(
             "Please provide either a section index to highlight, or a distance from soma x."
@@ -447,10 +448,8 @@ def draw_arrow(
     # get start of arrow: point down
     start_x, start_y, start_z = x, y, z
     dx, dy, dz = 0, 0, 0
-    ddx = ddy = 0
     if 'orientation' in highlight_arrow_kwargs:
-        orientation = highlight_arrow_kwargs['orientation']
-        del highlight_arrow_kwargs['orientation']
+        orientation = highlight_arrow_kwargs.pop('orientation')
         if 'x' in orientation:
             start_x += arrow_size
             dx -= arrow_size

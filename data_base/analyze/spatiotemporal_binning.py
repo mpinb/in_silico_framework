@@ -15,7 +15,7 @@
 """Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
 
 See also:
-    :py:mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
+    :mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
     by time, and a variety of other metrics (e.g. space, cell type ...)
 """
 
@@ -35,13 +35,13 @@ def universal_pd(
     min_time = 0,
     max_time = 300, 
     time_distance_bins = 1):
-    '''Bin a pandas DataFrame by both distance and time.
+    r'''Bin a pandas DataFrame by both distance and time.
     
-    This is a speed-optimized binning code for 2d-binning of a :py:class:`pandas.DataFrame`.
+    This is a speed-optimized binning code for 2d-binning of a :class:`pandas.DataFrame`.
     
     Args:
-        df (:py:class:`pandas.DataFrame`): 
-            DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+        df (:class:`pandas.DataFrame`): 
+            DataFrame to bin. Must contain a column with the name :param:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
         spatial_distance_bins (int): 
@@ -54,7 +54,7 @@ def universal_pd(
             Size of the time bins. Default is :math:`1 ms`.
     
     Returns:
-        :py:class:`~numpy.array`:
+        :class:`~numpy.array`:
             A 2D array of the binned values.
     '''
     if not isinstance(df, pd.DataFrame):
@@ -82,13 +82,13 @@ def universal(
     min_time = 0, 
     max_time = 300, 
     time_distance_bins = 1):
-    '''Bin a pandas or dask DataFrame by both distance and time.
+    r'''Bin a pandas or dask DataFrame by both distance and time.
     
     Infers the type of the input DataFrame and calls the appropriate binning function.
     
     Args:
-        df (:py:class:`~pandas.DataFrame` or :py:class:`~dask.dataframe.DataFrame`): 
-            DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+        df (:class:`~pandas.DataFrame` or :class:`~dask.dataframe.DataFrame`): 
+            DataFrame to bin. Must contain a column with the name :param:`distance_column` that contains the distance values.
         distance_column (str): 
             Column name of the distance values.
         spatial_distance_bins (int): 
@@ -101,11 +101,11 @@ def universal(
             Size of the time bins. Default is :math:`1ms`.
             
     Returns:
-        :py:class:`~numpy.array`:
+        :class:`~numpy.array`:
             A 2D array of the binned values.
     
     See also:
-        :py:meth:`~data_base.analyze.spatial_binning.universal_pd`
+        :func:`~data_base.analyze.spatial_binning.universal_pd`
     '''
 
     fun = lambda x: universal_pd(x, distance_column, spatial_distance_bins =  \

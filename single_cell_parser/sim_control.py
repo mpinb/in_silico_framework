@@ -15,7 +15,7 @@
 
 '''Run a NEURON current injection simulation.
 
-Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+Deprecated. Simulations are set up using the high-level interface :class:`~biophysics_fitting.simulator.Simulator`.
 Can still be useful for low-level control with NEURON.
 '''
 
@@ -33,7 +33,7 @@ __date__ = '2012-03-19'
 class SimControl(object):
     '''Control a current clamp simulation.
 
-    Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+    Deprecated. Simulations are set up using the high-level interface :class:`~biophysics_fitting.simulator.Simulator`.
     Can still be useful for low-level control with NEURON.
     
     Example:
@@ -45,19 +45,19 @@ class SimControl(object):
     
 
     Attributes:
-        cell (:py:class:`neuron:Section`): The cell to simulate.
+        cell (:class:`neuron:Section`): The cell to simulate.
         simTime (float): Simulation time [ms]. Default: 5 [ms]
         dt (float): Time step [ms]. Default: 0.001 [ms]
         T (float): Temperature [C]. Default
         goAlready (bool): Simulation status
-        h (:py:class:`neuron.h`): NEURON interface
+        h (:class:`neuron.h`): NEURON interface
     '''
 
     def __init__(self, cell=None, sim_time=5, dt=0.001, T=37):
         '''
         Args:
-            cell (:py:class:`neuron:Section`): The cell to simulate.
-            simTime (float): Simulation time (ms). Default: 5
+            cell (:class:`neuron:Section`): The cell to simulate.
+            sim_time (float): Simulation time (ms). Default: 5
             dt (float): Time step (ms). Default: 0.001
             T (float): Temperature (Celsius). Default: 37
         '''

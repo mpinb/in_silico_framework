@@ -63,7 +63,7 @@ class LoaderWrapper:
 class MetadataAccessor:
     """Access the metadata of some database key.
     
-    Used by :py:class:`~data_base.isf_data_base.ISFDataBase` to conveniently acces metadata as such::
+    Used by :class:`~data_base.isf_data_base.ISFDataBase` to conveniently acces metadata as such::
     
         >>> db = ISFDataBase('path')
         >>> db.metadata
@@ -79,10 +79,10 @@ class MetadataAccessor:
         }
     
     It does not have a set method, as the metadata is set automatically when a key is set.
-    Upon accidental metadata removal, the DataBase will try to estimate the metadata itself using :py:meth:`~data_base.isf_data_base.ISFDataBase._update_metadata_if_necessary`.
+    Upon accidental metadata removal, the DataBase will try to estimate the metadata itself using :func:`~data_base.isf_data_base.ISFDataBase._update_metadata_if_necessary`.
     
     Args:
-        db (:py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to access the metadata of.
+        db (:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`): The database to access the metadata of.
     """
     def __init__(self, db):
         self.db = db
@@ -109,7 +109,7 @@ class MetadataAccessor:
             return json.load(f)
 
     def keys(self):
-        """Return the keys of the :paramref:`db`"""
+        """Return the keys of the Database"""
         return [ k for k in self.db.keys() if Path.exists(self.db._basedir/k/"Loader.[json][pickle]") ]
         
 
@@ -141,12 +141,12 @@ def _check_working_dir_clean_for_build(working_dir):
        
             
 def make_all_str(dict_):
-    """Convert all items in a (nested) dictionary to string.
+    r"""Convert all items in a (nested) dictionary to string.
     
     Used to write out metadata in JSON format.
     
     Args:
-        dict_ (dict): The dictionary to convert.
+        dict\_ (dict): The dictionary to convert.
     
     Returns:
         dict: The converted dictionary.    
@@ -164,11 +164,11 @@ def make_all_str(dict_):
 
 
 def get_dumper_from_folder(folder, return_ = 'module'):
-    """Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
+    r"""Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
 
     Args:
         folder (str): The folder in which the data is stored.
-        return_ (str, optional): Whether to return the dumper as a string or the actual module. Defaults to 'module'.
+        return\_ (str, optional): Whether to return the dumper as a string or the actual module. Defaults to 'module'.
 
     Returns:
         str | module: The dumper that was used to save the data in that folder/key.
@@ -201,7 +201,7 @@ class ISFDataBase:
         Keep in mind that the default dumper is usually optimized for flexibility (e.g. `cloudpickle`),
         not for speed, size, or long-term storage.
 
-    To read out all existing keys, use the :py:meth:`~data_base.isf_data_base.ISFDataBase.keys` method,
+    To read out all existing keys, use the :func:`~data_base.isf_data_base.ISFDataBase.keys` method,
     or simply print out the database object::
 
         >>> db.keys()
@@ -213,9 +213,9 @@ class ISFDataBase:
         ├── my_new_element
         └── dataframe
 
-    All saved elements are stored in the :paramref:`basedir` along with a ``Loader.json`` object. 
-    The ``Loader.json`` object defines which :py:mod:`~data_base.IO.LoaderDumper` module should be used to load the data with, 
-    along with all the necessary information to initialize this :py:mod:`~data_base.IO.LoaderDumper`.
+    All saved elements are stored in the :attr:`basedir` along with a ``Loader.json`` object. 
+    The ``Loader.json`` object defines which :mod:`~data_base.IO.LoaderDumper` module should be used to load the data with, 
+    along with all the necessary information to initialize this :mod:`~data_base.IO.LoaderDumper`.
     In addition, the following metadata is saved:
 
     .. list-table:: Metadata Associated with Saved Elements
@@ -224,15 +224,15 @@ class ISFDataBase:
         * - Metadata
             - Description
         * - ``dumper``
-            - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
+            - Which data dumper was used to save this result. Its corresponding Loader can always be found in the same file. See :mod:`~data_base.isf_data_base.IO.LoaderDumper` for all dumpers and loaders.
         * - ``time``
             - Time at which this results was saved.
         * - ``module_list``
             - A full list of all modules installed in the conda environment that was used to produce this result.
         * - ``module_versions``
-            - The versions of all modules in the environment that was used to produce this result. See also: :py:mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
+            - The versions of all modules in the environment that was used to produce this result. See also: :mod:`~data_base._module_versions.Versions_cached.get_module_versions`.
         * - ``history``
-            - The history of the code that was used to produce this result. Only supported if the code was run using IPython (e.g. from within a Jupyter Notebook). See also: :py:mod:`~data_base._module_versions.Versions_cached.get_history`.
+            - The history of the code that was used to produce this result. Only supported if the code was run using IPython (e.g. from within a Jupyter Notebook). See also: :mod:`~data_base._module_versions.Versions_cached.get_history`.
         * - ``hostname``
             - Name of the machine the code was run on.
 
@@ -243,12 +243,12 @@ class ISFDataBase:
         basedir (str): The directory in which the database will be created, or read from.
         readonly (bool): If True, the database will be read-only.
         nocreate (bool): If True, a new database will not be created if it does not exist.
-        metadata (dict): A dictionary containing metadata for the database. See also: :py:class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
+        metadata (dict): A dictionary containing metadata for the database. See also: :class:`~data_base.isf_data_base.isf_data_base.MetadataAccessor`.
         parent_db (ISFDataBase): The parent database, if this is a sub-database. Default: None.
         _unique_id (str): A unique identifier for this database.
         _registered_to_path (str): The path that this database has been registered to on the current filesystem.
         _registeredDumpers (list): A list of all registered dumpers. 
-            Dumpers are data-type and file-type specific modules to write out data. See: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+            Dumpers are data-type and file-type specific modules to write out data. See: :mod:`~data_base.isf_data_base.IO.LoaderDumper`
         _suppress_errors (bool): If True, errors will be suppressed and raised as warnings instead. Use with caution.
         _db_state_fn (str): 
             The path to the database state file. Contains information on:
@@ -258,7 +258,7 @@ class ISFDataBase:
             - ``_registered_to_path``: The path that this database has been registered to on the current filesystem.
             
         _forbidden_keys (list): A list of keys that are not allowed to be used: ``["Loader.json", "metadata.db.lock", "sqlitedict.db.lock", "db_state.json"]``
-        _basedir (Path): :py:class:`pathlib.Path` object of :paramref:`basedir`, to use internally.
+        _basedir (Path): :class:`pathlib.Path` object of :attr:`basedir`, to use internally.
         
     '''
     def __init__(self, basedir, readonly = False, nocreate = False, suppress_errors=False):
@@ -369,7 +369,7 @@ class ISFDataBase:
     def _set_unique_id(self):
         """Sets a unique ID for the DataBase as class attribute. 
         
-        Does not save this ID as metadata (this is taken care of by :py:meth:`_initialize`)
+        Does not save this ID as metadata (this is taken care of by :func:`_initialize`)
 
         Raises:
             ValueError: If the unique ID is already set.
@@ -453,7 +453,7 @@ class ISFDataBase:
         For this reason, ``key`` is not a pathlib.Path object in this method, but a string or tuple.
 
         Args:
-            key (str|tuple): The key
+            key_str_tuple (str|tuple): The key, either as a string or a tuple
 
         Raises:
             ValueError: If the key is over 100 characters long.
@@ -594,14 +594,14 @@ class ISFDataBase:
     def register_dumper(self, dumper_module):
         """Register a dumper with this database, so it can be used to save data.
         
-        Note that a dumper can also be specified when saving data (see :py:meth:`setitem`), so this is not strictly necessary.
+        Note that a dumper can also be specified when saving data (see :func:`setitem`), so this is not strictly necessary.
         Make sure to provide the dumper module, not the class or string.
 
         Args:
             dumper_module (module): A module from data_base.IO.LoaderDumper. Must contain a ``Loader`` class and a ``dump()`` method.
             
         See also:
-            :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+            :mod:`~data_base.isf_data_base.IO.LoaderDumper`
         """
         self._registered_dumpers.append(dumper_module)
     
@@ -668,16 +668,16 @@ class ISFDataBase:
         return absolute_path, relative_path
 
     def create_managed_folder(self, key, raise_ = True):
-        '''Create a folder in the db directory.
+        r'''Create a folder in the db directory.
         
         You can delete the folder using del db[key]
         
         Args:
             key (str|tuple|pathlib.Path): The key of the folder to create.
-            raise_ (bool, optional): Whether to raise an error if the folder already exists. Defaults to True.
+            raise\_ (bool, optional): Whether to raise an error if the folder already exists. Defaults to True.
             
         Returns:
-            :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: The created folder.
+            :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`: The created folder.
         '''
         #todo: make sure that existing key will not be overwritten
         if key in list(self.keys()):
@@ -690,10 +690,10 @@ class ISFDataBase:
     def create_shared_numpy_store(self, key, raise_ = True):
         """Create a shared numpy store in the db directory.
         
-        You can also save numpy arrays as a shared umpy store by specifying the dumper in :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+        You can also save numpy arrays as a shared umpy store by specifying the dumper in :func:`~data_base.isf_data_base.ISFDataBase.set`.
         
         See also:
-            :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore`
+            :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore`
         """
         if key in list(self.keys()):
             if raise_:
@@ -703,7 +703,7 @@ class ISFDataBase:
         return self[key]
     
     def create_sub_db(self, key, register = 'as_parent', **kwargs):
-        '''Creates a database within a database. 
+        r'''Creates a database within a database. 
         
         Example::
             >>> db.create_sub_db('my_sub_database')
@@ -711,15 +711,14 @@ class ISFDataBase:
         
         Args:
             key (str|tuple): The key of the sub_db
-            register (str, optional): ? TODO. Defaults to 'as_parent'.
-            raise_ (bool, optional): Whether to raise an error if the sub_db already exists. Defaults to True.
-            **kwargs (dict): 
+            kwargs (dict): 
                 overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
                 Additional kwargs are passed to the dumper.
 
         Returns:
             ISFDataBase: The newly created sub_db
         '''
+        # TODO: What does "register = as_parent" do?
         self._check_key_format(key)
         if isinstance(key, str):
             key = key,  # convert to tuple
@@ -757,7 +756,7 @@ class ISFDataBase:
         
         This is the main method to get data from a DataBase.
         This method allows to pass additional arguments to the Loader.
-        Modules in :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` make use of this feature
+        Modules in :mod:`~data_base.isf_data_base.IO.LoaderDumper` make use of this feature
         if they require additional arguments in their ``load()`` method.
         
         This method is thread safe, if you provide a lock.
@@ -765,7 +764,7 @@ class ISFDataBase:
         Args:
             key (str): The key to get from the database.
             lock (Lock, optional): If you use file locking, provide the lock that grants access. Defaults to None.
-            **kwargs: Additional arguments to pass to the Loader.
+            kwargs: Additional arguments to pass to the Loader.
 
         Returns:
             object: The object saved under ``db[key]``
@@ -811,7 +810,7 @@ class ISFDataBase:
         
         The advantage of using this method is that you can specify a dumper and pass additional arguments to the dumper with kwargs.
         This method is thread safe, if you provide a lock.
-        :py:meth:`__setitem__` calls this method.
+        :func:`__setitem__` calls this method.
 
         Args:
             key (str): The key to save the data under.
@@ -819,7 +818,7 @@ class ISFDataBase:
             lock (Lock, optional): If you use file locking, provide the lock that grants access. Defaults to None.
             dumper (module | str | None, optional): 
                 The dumper module to use when saving data. 
-                If None is passed, it will use the default dumper :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle`. 
+                If None is passed, it will use the default dumper :mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle`. 
                 Defaults to None.
 
         Raises:
@@ -898,10 +897,10 @@ class ISFDataBase:
         Args:
             key (str): The key where the item can be accessed.
             fun (function): The function that calculates a value if the key does not exist.
-            **kwargs: Additional arguments that are passed to :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+            kwargs: Additional arguments that are passed to :func:`~data_base.isf_data_base.ISFDataBase.set`.
             
         Attention:
-            ``kwargs`` are not passed to the function ``fun``, but to the :py:meth:`set` method.
+            ``kwargs`` are not passed to the function ``fun``, but to the :func:`set` method.
         
         Example::
             
@@ -982,7 +981,7 @@ class ISFDataBase:
             value (obj): The data to save.
             
         See also:
-            :py:meth:`~data_base.isf_data_base.ISFDataBase.set`
+            :func:`~data_base.isf_data_base.ISFDataBase.set`
         """
         self.set(key, value)
     
@@ -998,7 +997,7 @@ class ISFDataBase:
             object: The object saved under ``db[key]``
             
         See also:
-            :py:meth:`~data_base.isf_data_base.ISFDataBase.get`
+            :func:`~data_base.isf_data_base.ISFDataBase.get`
         """
         return self.get(key)
     

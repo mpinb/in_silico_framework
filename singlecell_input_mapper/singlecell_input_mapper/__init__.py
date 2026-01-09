@@ -19,7 +19,7 @@ Based on methods and data presented in :cite:t:`Egger_Dercksen_Udvary_Hege_Oberl
 
 This package contains methods to create anatomical realizations for the connectivity of single neurons.
 To create anatomical realizations, it is recommended to use the high-level
-pipeline :py:meth:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`, which call supon various methods and classes presented in this package.
+pipeline :func:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`, which call supon various methods and classes presented in this package.
 
 Inputs:
 

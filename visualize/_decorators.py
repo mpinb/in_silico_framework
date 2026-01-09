@@ -66,8 +66,8 @@ def pr(*args, **kwargs):
     """Prints the types of the passed arguments.
     
     Args:
-        *args: The arguments to print.
-        **kwargs: The keyword arguments to print.
+        args: The arguments to print.
+        kwargs: The keyword arguments to print.
     """
 
     for x in args:
@@ -79,13 +79,13 @@ def pr(*args, **kwargs):
 def subsequent_calls_per_line(plotfun):
     '''Call a function on each row of a dataframe separately.
     
-    Useful for plotfunctions that are designed to operate on :py:class:`pandas.Series` instances,
-    rather than on :py:class:`pandas.DataFrame` instances.
+    Useful for plotfunctions that are designed to operate on :class:`pandas.Series` instances,
+    rather than on :class:`pandas.DataFrame` instances.
     Also useful for parallelizing plotting functions.
     
     The first input argument (i.e. ``args[0]``) is assumed to be an pd.DataFrame instance. 
     
-    If the first n args are of type :py:class:`pandas.DataFrame`, each frame
+    If the first n args are of type :class:`pandas.DataFrame`, each frame
     will be iterated as described above. 
     In this case, it is assumed that all n DataFrames have the same indexes.
     

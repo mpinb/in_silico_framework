@@ -44,17 +44,17 @@ def evaluation_function_incremental_helper(
     and provides an early stopping criterion if a model is not able to match these objectives.
 
     Args:
-        s (:py:class:`~biophysics_fitting.simulator.Simulator`): Simulator object
-        e (:py:class:`~biophysics_fitting.evaluator.Evaluator`): Evaluator object
+        s (:class:`~biophysics_fitting.simulator.Simulator`): Simulator object
+        e (:class:`~biophysics_fitting.evaluator.Evaluator`): Evaluator object
         stim_order ([str] | [(str)]):
             Order in which stimuli are simulated. 
             List consisting of strings and tuples of strings. 
             Use strings if only one stimulus is to be simulated.
             Use tuples of strings to simulate several stimuli in one go. 
-        cutoffs ({str: float}): 
+        cutoffs (Dict[str,float]): 
             Keys (str) must appear in stim_order. 
             Values (float)indicate the maximum error allowed for these stimuli
-        objectives_by_stimulus ({str: list}): 
+        objectives_by_stimulus (Dict[str,list]): 
             Keys (str) must appear in stim_order. 
             Values (list) are objective names returned by the evaluator object.
         additional_evaluation_functions (list): additional functions to be applied onto the final voltage 

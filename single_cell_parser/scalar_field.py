@@ -16,7 +16,7 @@
 '''
 Implementation of 3D scalar fields based on numpy arrays.
 
-Note that this class is identical to :py:class:`singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+Note that this class is identical to :class:`singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
 It is duplicated here for package independence.
 '''
 
@@ -93,7 +93,7 @@ class ScalarField(object):
          
     #     This method resizes the mesh such that the bounding box 
     #     wraps around voxels that contain non-zero scalar data.
-    #     Also updates :py:attr:`extent` and :py:attr:`boundingBox`
+    #     Also updates :attr:`extent` and :attr:`boundingBox`
     #     '''
     #     roi = np.nonzero(self.mesh)
     #     iMin = np.min(roi[0])
@@ -151,7 +151,7 @@ class ScalarField(object):
         '''Fetch the scalar value of the voxel containing the point xyz.
 
         Warning:
-            Returns 0 if :paramref:`xyz` is outside the bounding box.
+            Returns 0 if :param:`xyz` is outside the bounding box.
 
         Args:
             xyz (tuple): The 3D coordinates of the point.
@@ -208,13 +208,13 @@ class ScalarField(object):
 
         Warning:
             This method does not perform range checking.
-            If :paramref:`xyz` is outside the bounding box, the index will be out of bounds for the :py:attr:`mesh`.
+            If :param:`xyz` is outside the bounding box, the index will be out of bounds for the :attr:`mesh`.
 
         Args:
             xyz (tuple): The 3D coordinates of the point.
 
         Returns:
-            tuple: The :py:attr:`mesh` index of the voxel containing the point. 
+            tuple: The :attr:`mesh` index of the voxel containing the point. 
         '''
         x, y, z = xyz
         i = int((x - self.origin[0]) // self.spacing[0])

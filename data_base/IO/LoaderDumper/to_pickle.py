@@ -15,7 +15,7 @@
 """Read and write objects to the pickle format.
 
 See also:
-    :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle` for saving to the cloudpickle format.
+    :mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle` for saving to the cloudpickle format.
 """
 import os
 from . import parent_classes

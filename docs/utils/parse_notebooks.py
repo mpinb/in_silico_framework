@@ -59,18 +59,20 @@ def copy_and_parse_notebooks_to_docs(
     source_dir=os.path.join(project_root, 'getting_started', 'tutorials'),
     dest_dir=os.path.join(project_root, 'docs', 'tutorials'),
     api_output_dir="autoapi",
+    ignore=['.ipynb_checkpoints', "auxiliary notebooks"]
     ):
     """Copy notebooks from the source directory to the destination directory and parse the links.
     
     Removes the destination directory if it already exists.
     """
     
-    def ignore_checkpoints(dir, files):
-        return [f for f in files if f == '.ipynb_checkpoints']
-    
     if os.path.exists(dest_dir):
         shutil.rmtree(dest_dir)
-    shutil.copytree(source_dir, dest_dir, ignore=ignore_checkpoints)
+    shutil.copytree(
+        source_dir, 
+        dest_dir, 
+        ignore=shutil.ignore_patterns(*ignore)
+    )
     
     # Process each notebook in the destination directory
     for root, _, files in os.walk(dest_dir):
