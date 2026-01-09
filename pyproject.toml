@@ -14,7 +14,7 @@ authors = [
 description = "An In Silico Framework for the generation, simulation and analysis of neuron-network interactions during in vivo conditions."
 name = "ISF"
 requires-python = ">=3.8"
-version = "0.5.0-beta"
+version = "0.6.0-beta"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
