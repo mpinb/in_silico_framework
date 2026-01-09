@@ -586,14 +586,6 @@ class CMVDataParser:
         if keyword.lower() in ("dendrites", "dendritic group"):
             pass
 
-        elif keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
-            # These colors are defined per section, not per segment.
-            return_data = [[keyword]]
-            for sec in self.cell.sections:
-                if not sec.label in ("AIS", "Myelin", "Soma"):
-                    return_data.append([keyword for _ in sec.pts])
-            return return_data
-
         # -------------- Keyword colors       
         elif keyword.lower() in ("voltage", "vm"):
             self._calc_voltage_timeseries()  # Only happens if necessary
@@ -647,12 +639,23 @@ class CMVDataParser:
                     return_data.append('grey')
             return return_data
 
+        elif keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
+            # These colors are defined per section, not per segment.
+            return_data = [[keyword]]
+            for sec in self.cell.sections:
+                if not sec.label in ("AIS", "Myelin", "Soma"):
+                    return_data.append([keyword for _ in sec.pts])
+            return return_data
+
         # -------------- Keyword colors       
         elif keyword.lower() in ("voltage", "vm"):
             data_per_section = self._get_voltages_at_timepoint(time_point)
         
         elif keyword in self.possible_scalars:
             data_per_section = self._get_ion_dynamics_at_timepoint(time_point, keyword)
+            
+        else:
+            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
 
         if return_as_color:
             self.update_cmap(keyword)
