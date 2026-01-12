@@ -43,7 +43,8 @@ def _get_swc_lines_per_section(
                 "Section {} is an only child of the parent section {} with the same label \"{}\". "
                 "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. "
                 "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. "
-                "Please consider remapping the section label/type via the keyword argument `remap_sections`.".format(sec_ind, parent_sec_ind, sec.label))
+                "If you want to preserve this information in SWC, consider remapping one of these sections to a custom type via the keyword argument `remap_sections`.".format(
+                    sec_ind, parent_sec_ind, sec.label))
         
         if sec.label == "Soma":
             x, y, z = np.mean(sec.pts, axis=0)
