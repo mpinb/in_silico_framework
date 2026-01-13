@@ -1359,7 +1359,9 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
     def _get_interactive_dash_app(
         self,
         color,
-        t_start, t_stop, t_step,
+        t_start, 
+        t_stop, 
+        t_step,
         ):
         """This is the main function to set up an interactive plot with scalar data overlayed.
         It fetches the scalar data of interest (usually membrane voltage, but others are possible; check with self.possible_scalars).
@@ -1371,12 +1373,13 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         Returns:
             ipywidgets.VBox object: an interactive render of the cell.
         """
+        assert self.voltage_timeseries is not None, "The interactive dash app includes the voltage trace, but no voltage was calculated yet. Have you specified a time range?"
         self._update_times_to_show(t_start, t_stop, t_step)
         sections = self._morphology_unconnected['sec_n']
 
         #------------ Create figure
         # Interactive cell
-        fig_cell = self._get_interactive_cell()
+        fig_cell = self._get_interactive_cell(color=color)
         fig_cell.add_trace(
             go.Scatter3d(
                 x=[0], y=[0], z=[0],
@@ -1497,7 +1500,34 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
                 Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
             time_point (float | int): time_point at which to plot some scalar data. Ignored when color does not refer to scalar data.
             diameter: If the actual diameter is poorly visible, set this value to a fixed diameter.
-        
+            renderer (str): Type of backend renderer to use for rendering the javascript/HTML VBox. 
+                Defaults to "notebook_connected". Available renderers are:
+                
+                - 'plotly_mimetype'
+                - 'jupyterlab'
+                - 'nteract'
+                - 'vscode'
+                - 'notebook'
+                - 'notebook_connected'
+                - 'kaggle'
+                - 'azure'
+                - 'colab'
+                - 'cocalc'
+                - 'databricks'
+                - 'json'
+                - 'png'
+                - 'jpeg'
+                - 'jpg'
+                - 'svg'
+                - 'pdf'
+                - 'browser'
+                - 'firefox'
+                - 'chrome'
+                - 'chromium'
+                - 'iframe'
+                - 'iframe_connected'
+                - 'sphinx_gallery'
+                - 'sphinx_gallery_png'
         """
         if self._keyword_is_scalar_data(color) and time_point is None:
             raise ValueError("You passed scalar data {} as a color, but didn't provide a timepoint at which to plot this. Please specify time_point.".format(color))
