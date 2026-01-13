@@ -1,21 +1,19 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
-
-"""Utility and convenience functions for the :mod:`simrun` package.
+"""Utility and convenience functions for the :py:mod:`simrun` package.
 
 Provides functions to parse out specific info from parameter files, silence stdout,
 subdivide arrays for multiprocessing purposes, and more.
@@ -40,7 +38,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def get_cellnumbers_from_confile(confile):
     """Get the amount of cells of each type from a confile.
 
-    :func:`get_cellnumbers_from_confile` reads the confile and returns (alongisde the anatomical ID, here unused) a dictionary of the format::
+    :py:meth:`get_cellnumbers_from_confile` reads the confile and returns (alongisde the anatomical ID, here unused) a dictionary of the format::
 
         {cell_type: [(cellType, cellID, synID), ...]}
 
@@ -58,13 +56,13 @@ def get_cellnumbers_from_confile(confile):
 
 
 def split_network_param_in_one_elem_dicts(dict_):
-    r"""Split a network parameter dictionary into a list of dictionaries.
+    """Split a network parameter dictionary into a list of dictionaries.
 
     This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
     for each key in the original dictionary.
 
     Args:
-        dict\_ (dict | :class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
+        dict_ (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
 
     Returns:
         list: A list of dictionaries, each containing only one element of the original dictionary.
@@ -121,10 +119,10 @@ def load_param_file_if_path_is_provided(pathOrParam):
     """Convenience function to load a parameter file whether it is a string or a dictionary.
 
     Args:
-        pathOrParam (str | dict | :class:`~single_cell_parser.parameters.NTParameterSet`): The path to the parameter file or the parameter dictionary.
+        pathOrParam (str | dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The path to the parameter file or the parameter dictionary.
 
     Returns:
-        :class:`~single_cell_parser.parameters.NTParameterSet`: The parameter object.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter object.
     """
 
     if isinstance(pathOrParam, str):
@@ -244,7 +242,7 @@ def get_fraction_of_landmarkAscii(frac, path):
         pd.DataFrame: A pandas DataFrame containing the sampled landmarks and the cell type.
 
     See also:
-        :func:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
+        :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii_dir` to sample landmarks from all landmarkAscii files in a directory.
     """
     f = os.path.basename(path)
     celltype = f.split(".")[-2]
@@ -271,7 +269,7 @@ def get_fraction_of_landmarkAscii_dir(frac, basedir=None):
         pd.DataFrame: A pandas DataFrame containing the sampled landmarks and the cell type.
 
     See also:
-        :func:`~simrun.utils.get_fraction_of_landmarkAscii` to sample landmarks from a single file.
+        :py:meth:`~simrun.utils.get_fraction_of_landmarkAscii` to sample landmarks from a single file.
     """
     out = []
     for f in os.listdir(basedir):

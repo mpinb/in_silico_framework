@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 '''Calculate the cell type specific synaptic strengths of synapses based on the neuron model and network parameters.
 
@@ -22,7 +20,7 @@ calculate statistics per synapse type (e.g. mean, median and max voltage deflect
 It can linearly interpolates the relationship between the synaptic strength and the EPSP statistics, and
 infers the optimal synaptic strength for each synapse type based on empirical data.
 
-The main class :class:`~simrun.synaptic_strength_fitting.PSPs` is used to manage the synaptic strength fitting process.
+The main class :py:class:`~simrun.synaptic_strength_fitting.PSPs` is used to manage the synaptic strength fitting process.
 '''
 
 import cloudpickle, logging, six
@@ -49,7 +47,7 @@ class PSPs:
     r'''Calculate PSP amlitudes of single synapses and fit synaptic strength
     
     Attributes:
-        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
         confile (str): Path to a :ref:`con_file_format` file.
         gExRange (list): List of allowed synaptic strength values (in :math:`\mu S`).
         AMPA_component (float): 
@@ -57,7 +55,7 @@ class PSPs:
         vardt (bool): Whether to use the variable step size solver.
         mode (str): 
             Whether to activate each synapse one by one, or each cell one by one.
-            A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :class:`~single_cell_parser.cell.Cell`).
+            A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
             Options: ``('cells', 'synapses')``
             Default: ``'cells'``
         exc_inh (str):
@@ -69,9 +67,9 @@ class PSPs:
         tEnd (float): End time of the simulation.
         futures (list): List of futures returned by the dask client, containing the future results of the synaptic strength fitting simulations.
         result (list): List of results returned by the dask client, containing the results of the synaptic strength fitting simulations.
-        network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): 
+        network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): 
             The :ref:`network_parameters_format` for either excitatory or inhibitory synapses to be fitted.
-            The synapse type is defined by :param:`exc_inh`.
+            The synapse type is defined by :paramref:`exc_inh`.
         network_params_by_celltype (list):
             List of network parameters for each cell type in the network.
     '''
@@ -90,18 +88,17 @@ class PSPs:
         tEnd=150):
         r''' 
         Args:
-            neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+            neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
             confile (str): Path to a :ref:`con_file_format` file.
-            gExRange (List[float]): 
-                List of synaptic strength scaling factors to simulate. 
-                These will be multiplied with the synaptic strengths in the :ref:`network_parameters_format`.
+            gExRange (list): 
+                List of synaptic strength values to simulate (in :math:`\mu S`). 
                 The resulting ePSPs will be interpolated and compared to empirical data to find an optimal synaptic strength.
             AMPA_component (float): 
             NMDA_component (float):
             vardt (bool): Whether to use the variable step size solver.
             mode (str): 
                 Whether to activate each synapse one by one, or each cell one by one.
-                A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :class:`~single_cell_parser.cell.Cell`).
+                A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
                 Options: ``('cells', 'synapses')``
                 Default: ``'cells'``
             exc_inh (str):
@@ -139,18 +136,18 @@ class PSPs:
     def _setup_computation(self, exc_inh):
         """Construct delayed functions for running single-synapse simulations.
         
-        For each celltype in :param:`network_params_by_celltype`, create a delayed
+        For each celltype in :paramref:`network_params_by_celltype`, create a delayed
         function that activates each synapse of that particular celltype one by one.
         Simulations are reset after each synapse activation.
-        The simulations are parallelized across the synaptic strength values in :param:`gExRange` and the 
-        amount of celltypes in :param:`network_params_by_celltype`, so the amount of delayed simulations is 
+        The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the 
+        amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is 
         ``len(gExRange) * len(network_params_by_celltype)``.
         
         Args:
             exc_inh (str): Whether to fit excitatory or inhibitory synapses.
             
         Returns:
-            None. updates the :param:`_keys` and :param:`_delayeds` attributes.
+            None. updates the :paramref:`_keys` and :paramref:`_delayeds` attributes.
         """
         if exc_inh == 'exc':
             logger.info('setting up computation for exc cells')
@@ -191,10 +188,10 @@ class PSPs:
                     self._delayeds.append(d)
 
     def run(self, client, rerun=False):
-        '''Run the single-cell simulations from the :param:`_delayeds`.
+        '''Run the single-cell simulations from the :paramref:`_delayeds`.
         
-        The simulations are parallelized across the synaptic strength values in :param:`gExRange` and the 
-        amount of celltypes in :param:`network_params_by_celltype`, so the amount of delayed simulations is 
+        The simulations are parallelized across the synaptic strength values in :paramref:`gExRange` and the 
+        amount of celltypes in :paramref:`network_params_by_celltype`, so the amount of delayed simulations is 
         ``len(gExRange) * len(network_params_by_celltype)``.
         
         Args:
@@ -205,7 +202,7 @@ class PSPs:
                 Default: ``False``
                 
         Returns:
-            None. Updates the :param:`futures` attribute.
+            None. Updates the :paramref:`futures` attribute.
         '''
         if (self.futures is None) or rerun:
             self.result = None
@@ -280,7 +277,7 @@ class PSPs:
                     returned. 
             merged (bool): Whether to merge the EPSPs of some cell types.
             merge_celltype_kwargs (dict):
-                Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+                Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
         
         Returns:
             defaultdict: A dictionary of voltage traces and activation times.
@@ -315,9 +312,9 @@ class PSPs:
                     The maximum and timepoint of the maximum after :math:`t = 110ms` is
                     returned.
             merge_celltype_kwargs (dict):
-                Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+                Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
             ePSP_summary_statistics_kwargs (dict):
-                Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
+                Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
                 Options: ("threashold", "tPSPStart")
 
         Returns:
@@ -350,13 +347,13 @@ class PSPs:
                 A table containing the empirical EPSP statistics (mean, median and maximum) for each celltype.
                 Must contain the keys: ``[EPSP_mean_measured, EPSP_median_measured, EPSP_max_measured]`` and the index ``celltype``.
             method (str): ``dynamic_baseline`` or ``constant_baseline``.
-            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
             
         Returns:
             pd.DataFrame: A table of the optimal synaptic conductance for each celltype.
             
         See also:
-            :func:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
+            :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
         """
         if merge_celltype_kwargs is None: merge_celltype_kwargs = {}
         pdf = self.get_summary_statistics(method=method, merge_celltype_kwargs=merge_celltype_kwargs)
@@ -377,7 +374,7 @@ class PSPs:
         Args:
             g (float): The simulated synaptic strength value to plot.
             method (str): ``dynamic_baseline`` or ``constant_baseline``.
-            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
             fig (plt.Figure): A matplotlib figure to plot the histograms on.
             
         Returns:
@@ -403,14 +400,14 @@ class PSPs:
             ax=ax)
 
     def _get_cell_and_nw_map(self, network_param=None):
-        """Get a network-embedded neuron model and its :class:`single_cell_parser.network.Networkmapper` from parameter files.
+        """Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.
         
         Args:
-            network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format` file.
+            network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format` file.
             
         Returns:
-            tuple: A tuple of the neuron model (:class:`single_cell_parser.cell.Cell`) 
-                and the :class:`single_cell_parser.network.NetworkMapper` that assigns synapses onto it.
+            tuple: A tuple of the neuron model (:py:class:`single_cell_parser.cell.Cell`) 
+                and the :py:class:`single_cell_parser.network.NetworkMapper` that assigns synapses onto it.
         
         """
         neuron_param = self.neuron_param
@@ -490,7 +487,7 @@ class PSPs:
             np.array: An array of synapse coordinates and PSP amplitudes.
             
         See also:
-            :func:`~simrun.synaptic_strength_fitting.merge_celltypes` for merging
+            :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes` for merging
             the voltage traces of certain cell types.
         """
         if merged:
@@ -538,7 +535,7 @@ class PSPs:
             opacity (float): The opacity of the voltage traces. Default: ``1``.
             g (float): The synaptic strength value to plot the voltage traces for.
             merge (bool): Whether to merge the EPSPs of some cell types.
-            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+            merge_celltype_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
             fig (plt.Figure): A matplotlib figure to plot the voltage traces on.
             
         Returns:
@@ -569,10 +566,10 @@ class PSPs:
 # Second part: functions to simulate PSPs
 #############################################
 def set_ex_synapse_weight(syn, weight):
-    """Set the synaptic strength of an excitatory :class:`single_cell_parser.synapse.Synapse`.
+    """Set the synaptic strength of an excitatory :py:class:`single_cell_parser.synapse.Synapse`.
     
     Args:
-        syn (:class:`single_cell_parser.synapse.Synapse`): The excitatory synapse to set the synaptic strength for.
+        syn (:py:class:`single_cell_parser.synapse.Synapse`): The excitatory synapse to set the synaptic strength for.
         weight (list): The synaptic strength values for the AMPA and NMDA components.
         
     Returns:
@@ -586,7 +583,7 @@ def set_ex_synapse_weight(syn, weight):
 
 
 def set_inh_synapse_weight(syn, weight):
-    """Set the synaptic strength of an inhibitory :class:`single_cell_parser.synapse.Synapse`.
+    """Set the synaptic strength of an inhibitory :py:class:`single_cell_parser.synapse.Synapse`.
     
     Args:
         syn (single_cell_parser.synapse.Synapse): The inhibitory synapse to set the synaptic strength for.
@@ -617,22 +614,22 @@ def run_ex_synapse(
     '''Simulate a single excitatory or inhibitory synapse.
     
     This is the core function to activate a single synapse and run the simulation.
-    Used in the :class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
+    Used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
     
-    For excitatory synapses, :param:`gAMPA` and :param:`gNMDA` must be specified, and not :param:`gGABA`.
-    For inhibitory synapses, only :param:`gGABA` may be specified.
+    For excitatory synapses, :paramref:`gAMPA` and :paramref:`gNMDA` must be specified, and not :paramref:`gGABA`.
+    For inhibitory synapses, only :paramref:`gGABA` may be specified.
     
     Args:
-        cell_nw_generator (callable): A callable that returns a :class:`~single_cell_parser.cell.Cell` and :class:`~single_cell_parser.network.NetworkMapper` when called.
-        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
-        network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
+        cell_nw_generator (callable): A callable that returns a :py:class:`~single_cell_parser.cell.Cell` and :py:class:`~single_cell_parser.network.NetworkMapper` when called.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
         celltype (str): The celltype to activate the synapse for. Used to fetch the correct network parameters.
         preSynCellID (int): The presynaptic cell ID to activate the synapse for. Default: ``None``.
         gAMPA (float): The AMPA conductance value. Default: ``None``.
         gNMDA (float): The NMDA conductance value. Default: ``None``.
         gGABA (float): The GABA conductance value. Default: ``None``.
         vardt (bool): Whether to use the variable step size solver. Default: ``False``.
-        return_cell (bool): Whether to return the :class:`~single_cell_parser.cell.Cell` object. Default: ``False``.
+        return_cell (bool): Whether to return the :py:class:`~single_cell_parser.cell.Cell` object. Default: ``False``.
         synapseID (int): The synapse ID to activate. 
             If ``None``, all synapses assigned to the presynaptic cell get activated synchronously during the simulation.
             Default: ``None``.
@@ -722,11 +719,11 @@ def run_ex_synapses(
     This function reads the network parameter file, selects one celltype, and activates each synapse of that celltype,
     as defined by their corresponding :ref:`syn_file_format` file. The simulation is reset after each synapse activation run.
     
-    This function is used in the :class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
+    This function is used in the :py:class:`~simrun.synaptic_strength_fitting.PSPs` class to simulate each synapse.
     
     Args:
-        neuron_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
-        network_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
+        neuron_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`cell_parameters_format`.
+        network_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The :ref:`network_parameters_format`.
         celltype (str): The celltype to activate the synapse for. Used to fetch the correct network parameters.
         gAMPA (float): The AMPA conductance value. Default: ``None``.
         gNMDA (float): The NMDA conductance value. Default: ``None``.
@@ -736,14 +733,14 @@ def run_ex_synapses(
         tEnd (float): The end time of the simulation. Default: ``None``.
         mode (str):
             Whether to activate each synapse one by one, or each cell one by one.
-            A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :class:`~single_cell_parser.cell.Cell`).
+            A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the :py:class:`~single_cell_parser.cell.Cell`).
             Options: ``('cells', 'synapses')``
             
     Returns:
         tuple: A tuple containing the voltage baseline, and voltage traces of all synapses. Format: ``(t_baseline, v_baseline, [t_vecs], [v_vecs])``
     
     See also:
-        :func:`~simrun.synaptic_strength_fitting.PSPs.run_ex_synapse` for the core function to
+        :py:meth:`~simrun.synaptic_strength_fitting.PSPs.run_ex_synapse` for the core function to
         simulate a single synapse.
     
     '''
@@ -826,10 +823,10 @@ def generate_ex_network_param_from_network_embedding(confile):
     activate the presynaptic cells one by one.
     
     Returns:
-        :class:`~single_cell_parser.parameters.NTParameterSet`: Network parameter file.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: Network parameter file.
         
     See also:
-        :func:`simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding`
+        :py:meth:`simrun.synaptic_strength_fitting.generate_inh_network_param_from_network_embedding`
         for the template of inhibitory synapses.
     '''
     param_template = {
@@ -875,10 +872,10 @@ def generate_inh_network_param_from_network_embedding(confile):
     activate the presynaptic cells one by one.
     
     Returns:
-        :class:`~single_cell_parser.parameters.NTParameterSet`: Network parameter file.
+        :py:class:`~single_cell_parser.parameters.NTParameterSet`: Network parameter file.
         
     See also:
-        :func:`simrun.synaptic_strength_fitting.generate_exc_network_param_from_network_embedding`
+        :py:meth:`simrun.synaptic_strength_fitting.generate_exc_network_param_from_network_embedding`
         for the template of excitatory synapses.
     '''
     param_template = {
@@ -942,7 +939,7 @@ def get_voltage_and_timing(
         }
     
     Args:
-        vt (defaultdict): Voltage traces and activation times, as returned by :func:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
+        vt (defaultdict): Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
         method (str):
             ``dynamic_baseline``: a simulation without any synaptic activation is 
                 substracted from a simulation with cell activation. The maximum and 
@@ -1001,14 +998,14 @@ def get_summary_statistics(
     
     Args:
         method (str): ``dynamic_baseline`` or ``constant_baseline``.
-        merge_celltype_kwargs (dict): Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.merge_celltypes`.
-        ePSP_summary_statistics_kwargs (dict): Additional keyword arguments to pass to :func:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
+        merge_celltype_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.merge_celltypes`.
+        ePSP_summary_statistics_kwargs (dict): Additional keyword arguments to pass to :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`.
         
     Returns:
         pd.DataFrame: A table of summary statistics.
     
     See also:
-        :func:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics` for which statistics are calculated.
+        :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics` for which statistics are calculated.
     """
     vt = self.get_voltage_and_timing(
         method, merged=True, merge_celltype_kwargs=merge_celltype_kwargs)
@@ -1038,7 +1035,7 @@ def get_optimal_g(
         pd.DataFrame: A table of the optimal synaptic conductance for each celltype.
         
     See also:
-        :func:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
+        :py:meth:`~simrun.synaptic_strength_fitting.calculate_optimal_g`.
     """
     pdf = self.get_summary_statistics(method=method, threashold=threashold)
     pdf = pdf.reset_index()
@@ -1133,7 +1130,7 @@ def merge_celltypes(
     This essentially groups the EPSPs of the given celltypes together, and considers them as one celltype.
     
     Args:
-        vt (defaultdict): Voltage traces, as returned by :func:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
+        vt (defaultdict): Voltage traces, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
         detection_strings (list): List of celltypes to concatenate.
         celltype_must_be_in (list): List of celltypes that must be included.
         
@@ -1171,7 +1168,7 @@ def ePSP_summary_statistics(vt, threashold=0.1, tPSPStart=100.0):
     """Calculate summary statistics of the PSP voltage and timing.
     
     Args:
-        vt (defaultdict): Voltage traces and activation times, as returned by :func:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
+        vt (defaultdict): Voltage traces and activation times, as returned by :py:meth:`~simrun.synaptic_strength_fitting.PSPs.get_voltage_traces`.
         threashold (float): Minimum voltage deflection to be considered as a response.
         tPSPStart (float): Timepoint of synapse activation (ms).
         
@@ -1249,7 +1246,7 @@ def linear_fit_pdf(pdf):
     
     Args:
         pdf (pd.DataFrame): 
-            A table of summary statistics, as returned by :func:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`,
+            A table of summary statistics, as returned by :py:meth:`~simrun.synaptic_strength_fitting.ePSP_summary_statistics`,
             but without an index.
             
     Returns:
@@ -1275,7 +1272,7 @@ def calculate_optimal_g(pdf):
     to a linear model. Each statistic provides a different estimate of the optimal ``g``.
     The final optimal ``g`` is then a weighed average of the three statistics, where the weights for ``mean:median:max`` are ``2:2:1`` respectively.
     
-    This function is used in :class:`~simrun.synaptic_strength_fitting.PSPs` to calculate the optimal synaptic conductance for each celltype.
+    This function is used in :py:class:`~simrun.synaptic_strength_fitting.PSPs` to calculate the optimal synaptic conductance for each celltype.
     
     Args:
         pdf (pd.DataFrame): 
@@ -1285,7 +1282,7 @@ def calculate_optimal_g(pdf):
         None. Updates the original table inplace. Adds the columns ``optimal g``, ``optimal g mean``, ``optimal g median``, and ``optimal g max``.
     
     See also:
-        :func:`~simrun.synaptic_strength_fitting.linear_fit_pdf` for the linear model that relates the EPSP statistics to the synaptic conductance.
+        :py:meth:`~simrun.synaptic_strength_fitting.linear_fit_pdf` for the linear model that relates the EPSP statistics to the synaptic conductance.
         
     Example::
     

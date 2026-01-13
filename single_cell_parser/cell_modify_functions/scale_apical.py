@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Scale the apical dendrite of a cell."""
 import logging
@@ -25,15 +23,15 @@ def scale_apical(cell, scale=None, compartment='ApicalDendrite'):
     '''Scale the apical dendrite of a cell.
 
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
         compartment (str): The compartment to scale.
             If "ApicalDendrite", the cell is assumed to have sections with label "ApicalDendrite".
-            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :func:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+            If "Trunk", the cell is assumed to have ``detailed_labels`` assigned manually, or by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
             Currently, only "ApicalDendrite" and "Trunk" are supported compartments.
     
     Returns:
-        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
 
     Raises:
         ValueError: If the compartment is not "ApicalDendrite" or "Trunk".
@@ -52,11 +50,11 @@ def scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite'):
     If not, nothing gets scaled.
 
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
         scale (float): The scaling factor.
 
     Returns:
-        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
     '''
 
     # This is the function used to scale the apical dendrite in the following
@@ -81,22 +79,22 @@ def scale_apical_dendrite(cell, scale=None, compartment='ApicalDendrite'):
 def scale_by_detailed_compartment(cell, **kwargs):
     '''Scales subcellular compartments based on ``detailed_labels``.
 
-    If not yet assigned, detailed labels are assigned by :func:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+    If not yet assigned, detailed labels are assigned by :py:meth:`biophysics_fitting.utils.augment_cell_with_detailed_labels`.
     and include ``basal``, ``trunk``, ``tuft``, and ``oblique``.
     
     Attention:
         For non-L5PT neurons or L5PT neurons from any other brain area than barrel cortex, 
-        make sure :func:`~biophysics_fitting.utils.augment_cell_with_detailed_labels` 
+        make sure :py:meth:`~biophysics_fitting.utils.augment_cell_with_detailed_labels` 
         assigns labels as you want them to be.
         
-        Alternatively, assign them manually with the :attr:`biophysics_fitting.cell.Cell.sections.label_detailed` attribute.
+        Alternatively, assign them manually with the :py:attr:`biophysics_fitting.cell.Cell.sections.label_detailed` attribute.
 
     Args:
-        cell (:class:`~single_cell_parser.cell.Cell`): The cell to scale.
-        kwargs (dict): Detailed lables with associated scaling factors.
+        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
+        **kwargs (dict): Detailed lables with associated scaling factors.
 
     Returns:
-        :class:`~single_cell_parser.cell.Cell`: The scaled cell.
+        :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.
     '''
     # check if detailed labels are available
     try:

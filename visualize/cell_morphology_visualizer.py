@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Plot out the cell morphology and its activity during a simulation.
 
@@ -411,11 +409,11 @@ class CMVDataParser:
         t2 = time.time()
         logger.info('Voltage retrieval runtime (s): ' + str(np.around(t2 - t1, 2)))
         
-        # Update cmap if necessary
+        # Update cmap
         self.set_cmap(
             self.cmap, 
-            vmin=min(min([min(e) for e in self.voltage_timeseries])) if self.vmin is None else self.vmin, 
-            vmax=max(max([max(e) for e in self.voltage_timeseries])) if self.vmax is None else self.vmax)
+            vmin=min(min([min(e) for e in self.voltage_timeseries])), 
+            vmax=max(max([max(e) for e in self.voltage_timeseries])))
 
     def _calc_ion_dynamics_timeseries(self, ion_keyword):
         '''
@@ -451,11 +449,11 @@ class CMVDataParser:
         logger.info('Ion dynamics retrieval runtime (s): ' +
               str(np.around(t2 - t1, 2)))
         
-        # Update cmap if necessary
+        # Update cmap
         self.set_cmap(
             self.cmap, 
-            vmin=min(min([min(e) for e in self.ion_dynamics_timeseries[ion_keyword]])) if self.vmin is None else self.vmin, 
-            vmax=max(max([max(e) for e in self.ion_dynamics_timeseries[ion_keyword]])) if self.vmax is None else self.vmax)
+            vmin=min(min([min(e) for e in self.ion_dynamics_timeseries[ion_keyword]])), 
+            vmax=max(max([max(e) for e in self.ion_dynamics_timeseries[ion_keyword]])))
 
     def _get_synapses_at_timepoint(self, time_point):
         '''Retrieves the active synapses at a particular time point.
@@ -575,7 +573,30 @@ class CMVDataParser:
                     self.synapses_timeseries = []
             self.times_to_show = new_time
 
-    def _calc_scalar_data_from_keyword(
+    def _calc_scalar_data(self, keyword):
+        """Updates the scalar data according to some keyword (ion dynamics or membrane voltage).
+        
+        Args:
+            keyword (str): keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+            
+        Returns:
+            None. Updates the scalar data.
+        """
+
+        if keyword.lower() in ("dendrites", "dendritic group"):
+            pass
+
+        # -------------- Keyword colors       
+        elif keyword.lower() in ("voltage", "vm"):
+            self._calc_voltage_timeseries()  # Only happens if necessary
+        
+        elif keyword in self.possible_scalars:
+            self._calc_ion_dynamics_timeseries(keyword)  # Only happens if necessary
+
+        else:
+            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
+
+    def _get_scalar_data(
         self, 
         keyword, 
         time_point,
@@ -601,6 +622,7 @@ class CMVDataParser:
         Returns:
             list: list of scalar data. If :param:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
         """
+        self._calc_scalar_data(keyword)
 
         # -------------- Fixed colors
         if keyword.lower() in ("dendrites", "dendritic group"):
@@ -616,7 +638,7 @@ class CMVDataParser:
                 else:
                     return_data.append('grey')
             return return_data
-        
+
         elif keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
             # These colors are defined per section, not per segment.
             return_data = [[keyword]]
@@ -627,16 +649,19 @@ class CMVDataParser:
 
         # -------------- Keyword colors       
         elif keyword.lower() in ("voltage", "vm"):
-            self._calc_voltage_timeseries()  # Only happens if necessary
             data_per_section = self._get_voltages_at_timepoint(time_point)
         
         elif keyword in self.possible_scalars:
-            self._calc_ion_dynamics_timeseries(keyword)  # Only happens if necessary
             data_per_section = self._get_ion_dynamics_at_timepoint(time_point, keyword)
-
+            
         else:
             raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
-        return_data = self._get_color_per_section(data_per_section) if return_as_color else data_per_section
+
+        if return_as_color:
+            self.update_cmap(keyword)
+            return_data = self._get_color_per_section(data_per_section) 
+        else: 
+            return_data = data_per_section
         return return_data
         
     def _keyword_is_scalar_data(self, keyword):
@@ -686,7 +711,8 @@ class CMVDataParser:
         self, 
         cmap=None, 
         vmin=None, 
-        vmax=None):
+        vmax=None
+        ):
         """Update the colormap, vmin, and vmax of the visualization.
         
         Args:
@@ -702,6 +728,29 @@ class CMVDataParser:
         self.norm = mpl.colors.Normalize(self.vmin, self.vmax)
         self.cmap = cmap if cmap is not None else self.cmap
         self.scalar_mappable = mpl.cm.ScalarMappable(norm=self.norm, cmap=self.cmap)
+
+    def update_cmap(self, keyword):
+        """Update the currently used cmap based on a keyword
+        
+        This function is useful when the user wants to visualize different scalar data types
+        Each consecutive plot will then need a different cmap with different vmin and vmax.
+
+        Args:
+            keyword (str): keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+            
+        Returns:
+            None. Updates the class level cmap to reflect the correct scalar data.
+        """
+        logger.info("Updating cmap")
+        assert keyword in ("voltage", "vm") + tuple(self.possible_scalars), \
+            "Keyword \"{}\" not recognised. Possible keywords are: {}".format(keyword, ("voltage", "vm") + tuple(self.possible_scalars))
+        if keyword in ("voltage", "vm"): data_array = self.voltage_timeseries
+        elif keyword in self.possible_scalars: data_array = self.ion_dynamics_timeseries[keyword]
+        self.set_cmap(
+            self.cmap, 
+            vmin=min(min([min(e) for e in data_array])), 
+            vmax=max(max([max(e) for e in data_array])))
+        
 
 class CellMorphologyVisualizer(CMVDataParser):
     """Plot a cell morphology using matplotlib.
@@ -795,7 +844,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         shown for a set of time points. These images will then be used for a time-series visualization (video/gif/animation)
         and in each image the neuron rotates a bit (3 degrees) over its axis.
 
-        The parameters :param self.t_start:, :param self.t_stop: and :param self.t_step: will define the :param self.times_to_show: attribute
+        The parameters :param:`self.t_start`, :param:`self.t_stop` and :param:`self.t_step` will define the :param:`self.times_to_show` attribute
 
         Args:
             path (str): path were the images should be stored
@@ -822,8 +871,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         # Gathers the voltage and synapse activations time series.
         # Then images are generated for each specified time step.
         self._update_times_to_show()
-        if show_synapses:
-            self._calc_synapses_timeseries()
+        if show_synapses: self._calc_synapses_timeseries()
 
         highlight_section_kwargs={
             'sec_n': highlight_section,
@@ -838,11 +886,10 @@ class CellMorphologyVisualizer(CMVDataParser):
         if client is None:
             logger.warning("No dask client provided. Images will be generated on a single thread, which may take some time.")
             client = Client(LocalCluster(n_workers=1, threads_per_worker=1))
-        legend = self.scalar_mappable if show_legend else None
         
         count = 0
         for time_point in self.times_to_show:
-            color_per_section = self._calc_scalar_data_from_keyword(color, time_point, return_as_color=True)
+            color_per_section = self._get_scalar_data(color, time_point, return_as_color=True)
             count += 1
             filename = os.path.join(path, '{0:0=5d}.png'.format(count))
             delayeds.append(
@@ -855,7 +902,7 @@ class CellMorphologyVisualizer(CMVDataParser):
                     save=filename,
                     population_to_color_dict=self.population_to_color_dict,
                     camera_position=self.camera_position,
-                    legend=legend,
+                    legend=self.scalar_mappable if show_legend else None,
                     synapse_legend=show_legend and show_synapses,
                     dpi=self.dpi,
                     highlight_section_kwargs=highlight_section_kwargs,
@@ -896,7 +943,6 @@ class CellMorphologyVisualizer(CMVDataParser):
         '''
         assert not (self._keyword_is_scalar_data(color) and time_point is None), "Please provide a timepoint at which to plot {}".format(color)
         
-        legend = None
         if self._keyword_is_scalar_data(color):
             if time_point is None:
                 logger.info("No timepoint provided. Plotting at earliest timepoint...")
@@ -904,9 +950,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             assert time_point < self.times_to_show[-1], "Time point exceeds simulation time"
             logger.info("updating_times_to_show")
             self._update_times_to_show()
-            if show_legend:
-                legend = self.scalar_mappable
-            colors = self._calc_scalar_data_from_keyword(color, time_point, return_as_color=True)
+            colors = self._get_scalar_data(color, time_point, return_as_color=True)
         else:
             colors = color
         if show_synapses:
@@ -925,7 +969,7 @@ class CellMorphologyVisualizer(CMVDataParser):
                 'highlight_x': highlight_x,
                 'arrow_args': self.highlight_arrow_kwargs},
             population_to_color_dict=self.population_to_color_dict,
-            legend=legend,
+            legend=self.scalar_mappable if show_legend else None,
             synapse_legend=self.synapse_legend and show_synapses,
             dpi=self.dpi,
             save=save,
@@ -1280,7 +1324,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
             'size': self._morphology_unconnected['diameter']
             }  # remove outline of markers
         color = self._data_per_section_to_data_per_point(
-                self._calc_scalar_data_from_keyword(
+                self._get_scalar_data(
                     color, time_point, return_as_color=False))
         if color is not None:
             marker_markup['color'] = color
@@ -1345,7 +1389,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         # Voltage traces
         scalar_pointdata_per_time = [
             self._data_per_section_to_data_per_point(
-                self._calc_scalar_data_from_keyword(color, time_point, return_as_color=False))
+                self._get_scalar_data(color, time_point, return_as_color=False))
             for time_point in self.times_to_show]
         color_per_time = {
             time_point: scalar_pointdata_per_time[t_idx]
@@ -1573,11 +1617,12 @@ def get_3d_plot_morphology(
     
     #----------------- plot arrow, if necessary
     if highlight_section_kwargs['sec_n'] is not None or highlight_section_kwargs['highlight_x'] is not None:
-        draw_arrow(lookup_table,
-                    ax,
-                    highlight_section=highlight_section_kwargs['sec_n'],
-                    highlight_x=highlight_section_kwargs['highlight_x'],
-                    highlight_arrow_kwargs=highlight_section_kwargs['arrow_args'])
+        draw_arrow(
+            lookup_table,
+            ax,
+            highlight_section=highlight_section_kwargs['sec_n'],
+            highlight_x=highlight_section_kwargs['highlight_x'],
+            highlight_arrow_kwargs=highlight_section_kwargs['arrow_args'])
     ax.set_box_aspect([
         ub - lb
         for lb, ub in (getattr(ax, 'get_{}lim'.format(a))() for a in 'xyz')

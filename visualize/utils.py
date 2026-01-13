@@ -1,19 +1,17 @@
 # In Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
-# The full license text is also available in the LICENSE file in the root of this repository.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """
 Visualization utilities.
@@ -415,32 +413,33 @@ def draw_arrow(
     
     """
 
-    assert type(
-        highlight_section
-    ) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(
-        highlight_section)
-    assert highlight_section in morphology[
-        'sec_n'], "The given section id is not present in the cell morphology"
+    assert type(highlight_section) == int, "Please provide the section index as an argument for highlight_arrow. You passed {}".format(highlight_section)
+    assert highlight_section in morphology['sec_n'], "The given section id is not present in the cell morphology"
 
     setattr(Axes3D, 'arrow3D', _arrow3D)
     if highlight_arrow_kwargs is None:
         highlight_arrow_kwargs = {}
 
     # overwrite defaults if they were set
-    x = dict(mutation_scale=20, ec='black', fc='white')
-    x.update(highlight_arrow_kwargs)
-    highlight_arrow_kwargs = x
+    default_arrow_kwargs = dict(mutation_scale=20, ec='black', fc='white')
+    default_arrow_kwargs.update(highlight_arrow_kwargs)
+    highlight_arrow_kwargs = default_arrow_kwargs
 
     morphology = morphology.copy()
     morphology = morphology.fillna(0)  # soma section gets 0 as section ID
-    df = morphology[morphology['sec_n'] == highlight_section]
+    sec_pts = morphology[morphology['sec_n'] == highlight_section][['x', 'y', 'z']]
     if highlight_x is not None:
-        index = np.argmin(np.abs(df.relPts - highlight_x))
-        x, y, z = df.iloc[index][['x', 'y', 'z']]
+        assert highlight_section is not None, "Please provide a section index to highlight when passing a distance from soma x."
+        assert 0 <= highlight_x <= 1, "The distance from soma x must be between 0 and 1. You passed {}".format(highlight_x)
+        segment_lengths = np.linalg.norm(np.diff(sec_pts, axis=0), axis=1)
+        cum_length = np.concatenate([[0], np.cumsum(segment_lengths)])
+        total_length = cum_length[-1]
+        target_length = highlight_x * total_length
+        idx = np.searchsorted(cum_length, target_length)
+        x, y, z = sec_pts.iloc[idx]
     elif highlight_section is not None:
-        x, y, z = morphology[morphology['sec_n'] == highlight_section][[
-            'x', 'y', 'z'
-        ]].mean(axis=0)
+        assert highlight_section < morphology['sec_n'].max(), "Morphology only has {} sections, but you passed highlight_section={}".format(cmv.morphology['sec_n'].max(), highlight_section)
+        x, y, z = sec_pts.mean(axis=0)
     else:
         raise ValueError(
             "Please provide either a section index to highlight, or a distance from soma x."
@@ -449,10 +448,8 @@ def draw_arrow(
     # get start of arrow: point down
     start_x, start_y, start_z = x, y, z
     dx, dy, dz = 0, 0, 0
-    ddx = ddy = 0
     if 'orientation' in highlight_arrow_kwargs:
-        orientation = highlight_arrow_kwargs['orientation']
-        del highlight_arrow_kwargs['orientation']
+        orientation = highlight_arrow_kwargs.pop('orientation')
         if 'x' in orientation:
             start_x += arrow_size
             dx -= arrow_size
