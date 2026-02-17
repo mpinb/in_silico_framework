@@ -621,7 +621,10 @@ def STEP_adaptation_index(t, v, stim_end=2000, thresh=None):
 
     Args:
 
-        end_time (float): End time of the stimulus.
+        t (:class:`np.array`): Time vector
+        v (:class:`np.array`): Voltage vector
+        stim_end (float): End time of the stimulus.
+        thresh (float): Voltage threshold for finding APs with :func:`find_crossing`
 
     Returns:
         float: Adaptation index.
@@ -729,10 +732,10 @@ def STEP_fast_ahp_depth(t, v, thresh=None, time_scale=5, start=1):
     """
     Computes the average depth of the fast afterhyperpolarization (fAHP) of a voltage trace for a step stimulus.
 
-    The fAHP is computed as the deepest point right after (i.e. within :paramref:`timescale`) the spike.
+    The fAHP is computed as the deepest point right after (i.e. within :param:`time_scale`) the spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :param:`time_scale` apart,
         the fAHP is computed as simply minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 
@@ -772,10 +775,10 @@ def STEP_slow_ahp_depth(t, v, thresh=None, time_scale=5, start=1):
     """
     Computes the average depth of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
 
-    The sAHP is computed as the deepest point between :paramref:`timescale` after the spike and the next spike.
+    The sAHP is computed as the deepest point between :param:`time_scale` after the spike and the next spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :param:`time_scale` apart,
         the sAHP is computed as the minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 
@@ -813,10 +816,10 @@ def STEP_slow_ahp_time(t, v, thresh=None, time_scale=5, start=1):
     """
     Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
 
-    The sAHP is computed as the time of the deepest point between :paramref:`timescale` after the spike and the next spike.
+    The sAHP is computed as the time of the deepest point between :param:`time_scale` after the spike and the next spike.
 
     Note:
-        If two consecutive spikes are less than :paramref:`timescale` apart,
+        If two consecutive spikes are less than :param:`time_scale` apart,
         the sAHP is computed as the minimum between the first spike and the next spike,
         and there is no difference between fast and slow AHP.
 

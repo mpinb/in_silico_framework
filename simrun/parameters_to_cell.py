@@ -20,8 +20,8 @@ This module provides a function to rebuild a network-embedded neuron model from
 The function also reconnects synapses from a :ref:`syn_file_format` file and simulate the network.
 
 See also:
-    To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.DataBase` instead of parameter files, 
-    please refer to :py:mod:`~simrun.sim_trial_to_cell_object` instead
+    To rebuild and re-simulate a :mod:`simrun` simulation from a :class:`~data_base.DataBase` instead of parameter files, 
+    please refer to :mod:`~simrun.sim_trial_to_cell_object` instead
 """
 
 
@@ -62,15 +62,15 @@ def parameters_to_cell(
         scale_apical (callable, DEPRECATED): Function to scale the apical dendrite.
         range_vars (str or list): Range variables to record.
         allPoints (bool): Record all points in the cell.
-        cell (Cell): A cell object to use for the simulation.
-        evokedNW (NetworkMapper): A network object to use for the simulation.
+        cell (:class:`~single_cell_parser.cell.Cell`): A cell object to use for the simulation.
+        evokedNW (:class:`~single_cell_parser.network.NetworkMapper`): A network object to use for the simulation.
         
     .. deprecated:: 0.1
         The `scale_apical` argument is deprecated. 
         Use the `cell_modify_funs` key in the :ref:`cell_parameters_format` file instead.
         
     Returns:
-        tuple: A tuple containing the :py:class:`~single_cell_parser.cell.Cell` and the evoked network (:py:class:`~single_cell_parser.network.Networkmapper`).
+        tuple: A tuple containing the :class:`~single_cell_parser.cell.Cell` and the evoked network (:class:`~single_cell_parser.network.Networkmapper`).
     """
 
     neuronParam = load_param_file_if_path_is_provided(neuronParam)

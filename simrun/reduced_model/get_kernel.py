@@ -156,7 +156,7 @@ def _kernel_preprocess_data(
 
 
 def _kernel_dict_from_clfs(clfs, boundaries):
-    '''Split the result of :py:class:`~simrun.reduced_model.get_kernel.LDA` per data base
+    '''Split the result of :class:`~simrun.reduced_model.get_kernel.LDA` per data base
     
     
     
@@ -270,7 +270,7 @@ def plot_LUT(lookup_series, lda_values=None, min_items=None, ax=None):
 
 
 class ReducedLdaModelResult():
-    """Convenience dataclass to store the result of a :py:class:`ReducedLdaModel`.
+    """Convenience dataclass to store the result of a :class:`ReducedLdaModel`.
     
     Used to minimize data transfer during parallel computing.
     """
@@ -376,16 +376,16 @@ class ReducedLdaModel():
     def fit(self, db_list, clfs=None):
         """Fit an LDA model to synapse activations and save the prediction rates.
         
-        This method iterates over all databases in :paramref:`db_list` and extracts the synapse activation data
-        using the keys provided in :paramref:`keys_to_synapse_activation_data`. The data is then used to fit an LDA model.
-        The predictions of the LDA model are saved in :paramref:`clfs`.
+        This method iterates over all databases in :param:`db_list` and extracts the synapse activation data
+        using the keys provided in :param:`keys_to_synapse_activation_data`. The data is then used to fit an LDA model.
+        The predictions of the LDA model are saved in :param:`clfs`.
         
         Args:
             db_list (list): List of data_base instances
             clfs (dict): Dictionary describing a fitted LDA model. If None, a new fit is performed.
             
         See also:
-            :py:meth:`data_base.analyze.LDA.prediction_rates` for the output format of :paramref:`clfs`,
+            :func:`data_base.analyze.LDA.prediction_rates` for the output format of :param:`clfs`,
             i.e. an LDA and its predictions.
         """
         self.db_list = db_list

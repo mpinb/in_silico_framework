@@ -29,15 +29,15 @@
                  fillcolor="white", style=filled];
 
         scim [label="single_cell_input_mapper", shape="folder",
-                 xref=":py:mod:`singlecell_input_mapper`"];
+                 xref=":mod:`singlecell_input_mapper`"];
         scim2 [label="single_cell_input_mapper", shape="folder",
-                 xref=":py:mod:`singlecell_input_mapper`"];
+                 xref=":mod:`singlecell_input_mapper`"];
         scp [label="single_cell_processor", shape="folder",
-                xref=":py:mod:`single_cell_parser`"];
+                xref=":mod:`single_cell_parser`"];
         simrun [label="simrun", shape="folder",
-                 xref=":py:mod:`simrun`"];
+                 xref=":mod:`simrun`"];
         biophysics_fitting [label="biophysics_fitting", shape="folder",
-                 xref=":py:mod:`biophysics_fitting`"];
+                 xref=":mod:`biophysics_fitting`"];
 
         subgraph cluster_syncon {
 		style=filled;

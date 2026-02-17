@@ -5,9 +5,10 @@ import re
 from data_base.dbopen import (
     create_modular_db_path,
     create_reldb_path,
+    _find_parent_db,
+    resolve_db_path,
 )
 from data_base.exceptions import DataBaseException
-
 logger = logging.getLogger("ISF").getChild(__name__)
 
 
@@ -15,7 +16,7 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
     """Convert all paths in a :ref:`cell_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
+        :func:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
     """
     orig_hoc = neup["neuron"]["filename"]
     original_recsite_fns = neup["sim"]["recordingSites"]
@@ -42,7 +43,7 @@ def _convert_netp_fns_to_reldb(netp, syn_fn_map, con_fn_map):
     """Convert all paths in a :ref:`network_parameters_format` file to point to a hash filename.
 
     See also:
-        :py:meth:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
+        :func:`~data_base.dbopen.resolve_netp_reldb_paths` to resolve the relative database paths in the network parameter file.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:
@@ -76,8 +77,8 @@ def _convert_syn_fns_to_reldb(syn_content, hoc_fn_map):
     The :ref:`syn_file_format` file is copied to the target directory, renamed to its hash, and the hoc file name is replaced.
 
     Args:
-        syn_fn (str): Path to the synapse distribution file.
-        new_hoc (str): Path to the new hoc file.
+        syn_content (List[str]): Content of the :ref:`syn_file_format` file as a list of strings, each element representing a line.
+        hoc_fn_map (str): Mapping from old to new :ref:`hoc_file_format` files.
     """
 
     def find_hoc_file(match):
@@ -139,14 +140,9 @@ def _convert_con_fns_to_reldb(con_content, syn_fn_map, con_fn):
         target_syn_file = list(syn_fn_map.values())[0]
     else:
         if not os.path.isabs(matches[0]):
-            dir_path = os.path.dirname(con_fn)
-            matches[0] = os.path.join(dir_path, matches[0])
-            assert os.path.exists(
-                matches[0]
-            ), "The .syn file referenced in the .con file was not found:\n{}".format(
-                matches[0]
-            )
-        target_syn_file = syn_fn_map[matches[0]]
+            abs_fn = _resolve_syncon_ref(con_fn, matches[0])
+        else: abs_fn = matches[0]
+        target_syn_file = syn_fn_map[abs_fn]
 
     relative_syn_file = create_reldb_path(target_syn_file)
     con_content[1] = "# {}\n".format(relative_syn_file)
@@ -169,3 +165,34 @@ def _create_db_path_print(path, replace_dict=None):
     except DataBaseException as e:
         # print e
         return path, False
+
+
+def _resolve_rel_syncon_ref(fn, ref):
+    """Resolve a relative database style path of .syn or .con files
+
+    Args:
+        fn (str): The filename containing the reference
+        ref (str): The relative reference to a .syn or .con file.
+
+    Returns:
+        str: The absolute path to the referenced file.
+    """
+    assert ref.startswith("reldb://")
+    db_basedir = _find_parent_db(fn)
+    abs_ref = resolve_db_path(ref, db_basedir=db_basedir)
+    return abs_ref
+
+def _resolve_syncon_ref(fn, ref):
+    """Resolve relative references in :ref:`syn_file_format` or :ref:`conf_file_format` files.
+
+    Relative references can either be filenmaes without preceding directory structure, or reldb://-style relative paths.
+    """
+    if ref.startswith("reldb://"): 
+        abs_fn = _resolve_rel_syncon_ref(fn, ref)
+    else:
+        dir_path = os.path.dirname(fn)
+        abs_fn = os.path.join(dir_path, ref)
+    assert os.path.exists(
+        abs_fn
+    ), "The .syn file referenced in the .con file was not found:\n{}".format(abs_fn)
+    return abs_fn

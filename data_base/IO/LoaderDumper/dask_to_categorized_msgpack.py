@@ -1,4 +1,4 @@
-# In Silico Framework
+# It Silico Framework
 # Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ This dumper is designed for dataframes with the following properties:
 - The index is str
 - The columns have a lot of repetitive values, so they can be grouped.
  
-If the number of partitions is very large (>10000), it will repartition the 
+If the number of partitions is very large (:math:`>10000`), it will repartition the 
 dataframe to 5000 partitions. 
 Loading such a dataframe is normaly possible within 1 second.
 
@@ -29,7 +29,7 @@ will be restored if the dataframe is loaded.
 This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes. 
 Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.
 
-This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_
+This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`__
 """
 
 import os, yaml
@@ -337,16 +337,14 @@ def dump(
     This is only still available for testing purposes in support of backwards compatibility.
 
     Args:
-        obj (_type_): The object to be saved
+        obj (any): The object to be saved
         savedir (str or Path): Output directory to save the file in.
         repartition (bool, optional): Whether or not to repartition.. Defaults to False.
-        get (_type_, optional): A getter method, e.g. dask.get. Defaults to None.
         categorize (bool, optional): Defaults to True.
         client (distributed.Client, optional): distributed.Client for parallellization. Defaults to None.
-        test (bool, optional): Whether or not the dumper is called from within a test method. Defaults to False.
 
-    Raises:
-        RuntimeError: _description_
+    .. deprecated 0.5.0::
+       the ``get`` and ``scheduler`` arguments are deprecated. ``dump()`` now expects a ``client`` instead.
     """
     import os
     if client is None:

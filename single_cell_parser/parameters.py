@@ -3,8 +3,8 @@
 
 from collections.abc import MutableMapping
 from pathlib import Path
-import json, re, neuron, os
-from data_base.dbopen import dbopen, resolve_modular_db_path, resolve_db_path
+import json, re, neuron
+from data_base.dbopen import dbopen, resolve_db_path
 from data_base import is_data_base
 
 
@@ -61,7 +61,7 @@ def build_parameters(filename):
         filename (str): path to the parameter file
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :py:class:`~single_cell_parser.parameters.NTParameterSet` object.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :class:`~single_cell_parser.parameters.NTParameterSet` object.
     """
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
@@ -69,9 +69,9 @@ def build_parameters(filename):
 
 
 def fast_extract_values_from_param_file_key(param_file, keys, val_is_array=False):
-    """Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+    """Extract parameter values from :ref:`cell_parameters_format` or :ref:`network_parameters_format`.
     
-    In contrast to building the parameters using :py:meth:`~build_parameters`, this method uses regex
+    In contrast to building the parameters using :func:`~build_parameters`, this method uses regex
     to quickly parse out the parameter values. 
     """
     assert not isinstance(keys, str), "You must provide the keys as an array that is not a string"
@@ -111,7 +111,7 @@ def load_NMODL_parameters(parameters):
     See also: https://www.neuron.yale.edu/neuron/static/new_doc/programming/neuronpython.html#important-names-and-sub-packages
 
     Args:
-        parameters (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict):
+        parameters (:class:`~single_cell_parser.parameters.NTParameterSet` | dict):
             The neuron parameters to load.
             Must contain the key `NMODL_mechanisms`.
             May contain the key `mech_globals`.
@@ -136,11 +136,12 @@ def resolve_parameter_paths(parameters, params_fn):
     """Resolve relative database paths in the parameters.
 
     Args:
+        parameters (:class:`single_cell_parser.parameters.NTParameterSet`):
+            The parameters whose internal paths need to be resolved to the new database location.
         params_fn (str): The path to the parameters file.
-        db (str): The database path to resolve against.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The parameters with resolved paths.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The parameters with resolved paths.
     """
 
     def _find_parent_db_basedir(fn):
@@ -239,7 +240,7 @@ class NTParameterSet(MutableMapping):
         leaf values are shared between original and copy.
         
         Returns:
-            :py:class:`NTParameterSet`: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
+            :class:`NTParameterSet`: A new :class:`NTParameterSet` with the same structure but shared references to leaf values.
         """
         def _copy_tree_structure(node):
             if isinstance(node, NTParameterSet):
@@ -319,7 +320,7 @@ class NTParameterSet(MutableMapping):
 
         Args:
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
-            **kwargs: Additional keyword arguments to merge into this NTParameterSet.
+            kwargs: Additional keyword arguments to merge into this NTParameterSet.
         """
         def deep_merge(d, u):
             for k, v in u.items():

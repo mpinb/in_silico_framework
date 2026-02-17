@@ -269,7 +269,7 @@ def run_existing_synapse_activations(
         Use the ``cell_modify_functions`` key in the :ref:`cell_parameters_format` file instead.
         
     See also:
-        :py:meth:`simrun,rerun_db.rerun_db` to rerun simulations from a database, instead of a list
+        :func:`simrun,rerun_db.rerun_db` to rerun simulations from a database, instead of a list
         of synapse activation files.
     '''
 

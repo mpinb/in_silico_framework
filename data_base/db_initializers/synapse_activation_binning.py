@@ -55,13 +55,13 @@ def prefun(df):
     This method is used by default during the binning of synapse activations.
     
     Args:
-        df (:py:class:`pandas.DataFrame`): synapse activation dataframe
+        df (:class:`pandas.DataFrame`): synapse activation dataframe
         
     Returns:
-        :py:class:`pandas.DataFrame`: The modified dataframe with additional columns.
+        :class:`pandas.DataFrame`: The modified dataframe with additional columns.
         
     See also:
-        :py:meth:`~data_base.db_initializers.init`
+        :func:`~data_base.db_initializers.init`
     """
     dummy = df.synapse_type.str.split('_')
     df['celltype'] = dummy.str[0]
@@ -82,14 +82,14 @@ def postfun(s, maxtime=None):
     It is used by default during the binning of synapse activations.
     
     Args:
-        s (:py:class:`pandas.Series`): A column of the binned synapse activations.
+        s (:class:`pandas.Series`): A column of the binned synapse activations.
         maxtime (int): The maximum time of the synapse activations.
         
     Returns:
         numpy.array: The processed column of synapse activations.
         
     See also:
-        :py:meth:`~data_base.db_initializers.init`
+        :func:`~data_base.db_initializers.init`
     """
     # default_value_size = s.dropna().iloc[0].shape
     default_value_size = (maxtime,)
@@ -101,19 +101,19 @@ def postfun(s, maxtime=None):
 
 
 def applyfun(pdf, maxtime=None):
-    """Bin the synapse activations using :py:meth:`~data_base.analyze.temporal_binning.universal`.
+    """Bin the synapse activations using :func:`~data_base.analyze.temporal_binning.universal`.
     
     This is used by default during the binning of synapse activations.
     
     Args:
-        pdf (:py:class:`pandas.DataFrame`): synapse activation dataframe
+        pdf (:class:`pandas.DataFrame`): synapse activation dataframe
         maxtime (int): The maximum time of the synapse activations.
         
     Returns:
         numpy.array: The binned synapse activations.
     
     See also:
-        :py:meth:`~data_base.db_initializers.init`
+        :func:`~data_base.db_initializers.init`
     """
     return temporal_binning(
         pdf,
@@ -132,7 +132,7 @@ def synapse_activation_postprocess_pandas(
     '''Calculates bins of synapse activation per trial from a pandas dataframe.
     
     Args:
-        pdf (:py:class:`pandas.DataFrame`): synapse activation dask dataframe
+        pdf (:class:`pandas.DataFrame`): synapse activation dask dataframe
         groupby (str): species for which subgroups the bins should be calculated. Available values include:
         
           - ``celltype``
@@ -142,26 +142,24 @@ def synapse_activation_postprocess_pandas(
           - ``binned_somadist``: synapse counts for all 50 microns
           - any column in the specified dataframe.
         
-        db (DataBase): if specified, the result will be computed immediately and saved in the database immediately.
-        get (dask scheduler): Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
         prefun (callable):
             A function to preprocess the synapse activation dataframe before binning.
             The function should take a pandas dataframe and return a pandas dataframe.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.prefun`
         applyfun (callable):
             A function to bin the synapse activations.
             The function should take a pandas dataframe and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
         postfun (callable):
             A function to postprocess the binned synapse activations.
             The function should take a pandas series and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.postfun`
     
     Returns: 
-        dict: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :paramref:`groupby`.
+        dict: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :param:`groupby`.
         
     See also:
-        :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
+        :func:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
     '''
     if not isinstance(groupby, list):
         groupby = [groupby]
@@ -216,23 +214,23 @@ def merge_results_together(dicts):
 def tree_reduction(delayeds, aggregate_fun, length=7):
     """Recursively aggregate the results of a list of delayed objects.
     
-    This is used in :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask`
-    and :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` to aggregate
+    This is used in :func:`~data_base.db_initializers.synapse_activation_postprocess_dask`
+    and :func:`~data_base.db_initializers.synapse_activation_postprocess_pandas` to aggregate
     the resulting synapse binning (which is in dictionary format) to a single dictionary.
     
     Args:
         delayeds (array): 
-            list of :py:class:`~dask.delayed` objects
-        aggregate_fun (:py:class:`~dask.delayed`): 
-            Function to aggregate the results with (e.g. :py:func:`~data_base.db_initializers.merge_results_together`)
+            list of :class:`~dask.delayed` objects
+        aggregate_fun (:class:`~dask.delayed`): 
+            Function to aggregate the results with (e.g. :func:`~data_base.db_initializers.merge_results_together`)
         length (int): chunk size for aggregation
         
     Note:
-        Once the delayed objects are evaluated, :paramref:`aggregate_fun` is applied to the results of :paramref:`delayeds`, 
-        and thus :paramref:`aggregate_fun` should be able to handle the results of :paramref:`delayeds`.
+        Once the delayed objects are evaluated, :param:`aggregate_fun` is applied to the results of :param:`delayeds`, 
+        and thus :param:`aggregate_fun` should be able to handle the results of :param:`delayeds`.
         
     Returns:
-        :py:class:`dask.delayed`: The aggregated result.
+        :class:`dask.delayed`: The aggregated result.
     """
     if len(delayeds) > length:
         chunks = [
@@ -246,6 +244,12 @@ def tree_reduction(delayeds, aggregate_fun, length=7):
 
 def synapse_activation_postprocess_dask(
     ddf, 
+    db=None,
+    groupby=None,
+    prefun=None,
+    applyfun=None,
+    postfun=None,
+    scheduler=None,
     **kwargs
     ):
     '''Calculates bins of synapse activation per trial from a dask dataframe.
@@ -259,59 +263,47 @@ def synapse_activation_postprocess_dask(
           - ``EI`` (Lumping the EXC / INH celltypes together)
           - ``binned_somadist``: synapse counts for all 50 microns
           - any column in the specified dataframe.
-        db (DataBase): if specified, the result will be computed immediately and saved in the database immediately.
-        get (dask scheduler): only has an effect if 'db' kwarg is provided. In this case, it allows to specify a dask scheduler for the computation.
-        scheduler (dask scheduler): 
-            Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
-        prefun (callable):
+        db (:class:`data_base.DataBase`, optional): if specified, the result will be computed immediately and saved in the database immediately.
+        scheduler (dask scheduler, optional): 
+            Specify a dask scheduler for the computation (e.g. :func:`dask.distributed.Client.get`)
+        prefun (callable, optional):
             A function to preprocess the synapse activation dataframe before binning.
             The function should take a pandas dataframe and return a pandas dataframe.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
-        applyfun (callable):
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.prefun`
+        applyfun (callable, optional):
             A function to bin the synapse activations.
             The function should take a pandas dataframe and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
-        postfun (callable):
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+        postfun (callable, optional):
             A function to postprocess the binned synapse activations.
             The function should take a pandas series and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.postfun`
     
     Returns: 
-        :py:class:`dask.delayed`: 
+        :class:`dask.delayed`: 
             If computed, this will return a dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins.
-            The dictionary keys are defined by :paramref:`groupby`.
+            The dictionary keys are defined by :param:`groupby`.
             
     See also:
-        :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
+        :func:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
         version of this method.
+
+    .. deprecated:: 0.5.0
+       The ``"get"`` keyword is deprecated. Please us ``'scheduler'`` instead.
     '''
     # TODO: make this method out of core
+    assert "groupby" is not None, "Please specify what to groupby on: celltype, presynaptic_column, proximal, EI, binned_somadist, or a column name from the dataframe"
+    if "get" in kwargs: raise DeprecationWarning("The get keyword is deprecated. Please specify a scheduler instead.")
+
     fun = dask.delayed(synapse_activation_postprocess_pandas)
     ds = ddf.to_delayed()
 
-    # special case: if db is defined: isolate that keyword for later use
-    if 'db' in kwargs:
-        db = kwargs['db']
-        del kwargs['db']
-    else:
-        db = None
-    if 'get' in kwargs:
-        get = kwargs['get']
-        del kwargs['get']
-    if "scheduler" in kwargs:
-        scheduler = kwargs["scheduler"]
-        del kwargs["scheduler"]
-    else:
-        get = None
-        scheduler=None
-
-    ds = [fun(d, **kwargs) for d in ds]
+    ds = [fun(d, groupby=groupby, prefun=prefun, applyfun=applyfun, postfun=postfun) for d in ds]
     ret = tree_reduction(ds, merge_results_together)
 
     if db is not None:
-        assert 'groupby' in kwargs
         save_groupby_delayed = dask.delayed(save_groupby)
-        ret_saved = save_groupby_delayed(db, ret, kwargs['groupby'])
+        ret_saved = save_groupby_delayed(db, ret, groupby)
         ret_saved.compute(scheduler=scheduler)
         # data = ret.compute(scheduler=get)
         # save_groupby(db, data, kwargs['groupby'])
@@ -323,10 +315,10 @@ def synapse_activation_postprocess_dask(
 def save_groupby(db, result, groupby):
     '''Save the result of synapse_activation_postprocess_dask to a database.
     
-    A new model data base within :paramref:`db` is created and the numpy arrays are stored there.
+    A new model data base within :param:`db` is created and the numpy arrays are stored there.
     
     Args:
-        db (:py:class:`~data_base.DataBase`): The simrun-initialized database object.
+        db (:class:`~data_base.DataBase`): The simrun-initialized database object.
         result (dict): The result of the synapse activation binning.
         groupby (str): The groupby key for the synapse activation bins.
         
@@ -334,7 +326,7 @@ def save_groupby(db, result, groupby):
         None.
         
     See also:
-        :py:meth:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
+        :func:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
     '''
     if not isinstance(groupby, list):
         groupby = [groupby]
@@ -360,7 +352,7 @@ def init(
     '''Main pipeline to bin synapse activations from a :ref:`syn_activation_format` dataframe.
     
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The simrun-initialized database object.
             Must contain the key ``synapse_activation``.
         groupby (str):
@@ -375,30 +367,30 @@ def init(
             - Can be a list, if "sub-subgroups" should be calculated.
         
         scheduler (dask scheduler):
-            A dask scheduler for the comptation (e.g. :py:func:`dask.distributed.Client.get`)
+            A dask scheduler for the comptation (e.g. :func:`dask.distributed.Client.get`)
         prefun (callable):
             A function to preprocess the synapse activation dataframe before binning.
             The function should take a pandas dataframe and return a pandas dataframe.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.prefun`
         applyfun (callable):
             A function to bin the synapse activations.
             The function should take a pandas dataframe and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
         postfun (callable):
             A function to postprocess the binned synapse activations.
             The function should take a pandas series and return a numpy array.
-            Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+            Default: :func:`~data_base.db_initializers.synapse_activation_binning.postfun`
         
     Returns: 
-        None. The binned synapse activation data will be stored in :paramref:`db`.
+        None. The binned synapse activation data will be stored in :param:`db`.
         
     See also:
-        :py:meth:`~data_base.db_initializers.prefun`, 
-        :py:meth:`~data_base.db_initializers.applyfun`, and
-        :py:meth:`~data_base.db_initializers.postfun` for the default functions that bin the synapse activations.
+        :func:`~data_base.db_initializers.prefun`, 
+        :func:`~data_base.db_initializers.applyfun`, and
+        :func:`~data_base.db_initializers.postfun` for the default functions that bin the synapse activations.
         
     See also:
-        :py:meth:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
+        :func:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
     '''
     applyfun = partial(applyfun, maxtime=maxtime)
     postfun = partial(postfun, maxtime=maxtime)

@@ -15,7 +15,7 @@
 """
 This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
 
-These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :py:mod:`~biophysics_fitting.simulator`.
+These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :mod:`~biophysics_fitting.simulator`.
 """
 
 
@@ -32,7 +32,7 @@ def hay_param_to_scp_neuron_param(p):
     """Convert a Hay parameter name to a SCP neuron parameter name.
 
     This function is a simple converter that converts the Hay naming convention to what ISF
-    uses internally in :py:mod:`~single_cell_parser.cell.Cell`
+    uses internally in :mod:`~single_cell_parser.cell.Cell`
     
     Args:
         p (str): The Hay parameter name.
@@ -85,7 +85,7 @@ def get_L5tt_template():
     
     This method returns a nested dictionary-like object that can be used to set up a L5PT cell for simulations.
     The values of each key are set to None or default values, and need to be filled in with the actual values.
-    This dictionary-like parameter structure is used by e.g. the :py:class:`~biophysics_fitting.simulator.Simulator` object.
+    This dictionary-like parameter structure is used by e.g. the :class:`~biophysics_fitting.simulator.Simulator` object.
     It provides information on:
     
     - For each section label (for an L5PT: Soma, AIS, ApicalDendrite, Dendrite, Myelin):
@@ -100,7 +100,7 @@ def get_L5tt_template():
         - ``tStop``: stop time
             
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.       
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.       
     
     """
     p = {
@@ -352,13 +352,13 @@ def get_L5tt_template():
 def get_L5tt_template_v2():
     """Get a template cell parameter dictionary for a L5PT cell.
     
-    This method is identical to :py:meth:`get_L5tt_template`, but adds the following specifications:
+    This method is identical to :func:`get_L5tt_template`, but adds the following specifications:
     
-    - The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see :py:mod:`mechanisms`).
+    - The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see :mod:`mechanisms`).
     - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
         
     Returns:
-        :py:class:~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.
+        :class:~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.
     """
     neup = get_L5tt_template()
     for loc in neup:
@@ -396,11 +396,11 @@ def set_morphology(cell_param, filename=None):
     The morphology is simply a path to a :ref:`hoc_file_format` file in string format.
     
     Args:
-        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
+        cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
         filename (str): The path to the :ref:`hoc_file_format` file.
         
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell parameter dictionary."""
+        :class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell parameter dictionary."""
     cell_param.filename = filename
     return cell_param
 
@@ -421,7 +421,7 @@ def set_ephys(cell_param, params=None):
     Parameter names reflect the Hay naming convention.
 
     Args:
-        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet`): The cell parameter dictionary.
+        cell_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The cell parameter dictionary.
         params (pd.Series): The parameter vector as a pandas Series.
 
     Raises:
@@ -430,7 +430,7 @@ def set_ephys(cell_param, params=None):
         AssertionError: If some parameters are not set after the update.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The updated cell_param, with the biphysical parameters set.  
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The updated cell_param, with the biphysical parameters set.  
     
     See also:
         See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
@@ -460,7 +460,7 @@ def set_param(cell_param, params=None):
         # returns {'a': {'b': {'c': 3}}}
         
     Args:
-        cell_param (:py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
+        cell_param (~:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
     
     Returns:
@@ -477,8 +477,8 @@ def set_param(cell_param, params=None):
 def set_many_param(cell_param, params=None):
     """Updates cell_param given a dict of params in the dot naming convention.
     
-    This method is almost identical to :py:meth:`set_param`, but it has a different behavior when
-    a parameter name appears both as a top-level key and as a nested key in :paramref:`params`. In this case, the top-level
+    This method is almost identical to :func:`set_param`, but it has a different behavior when
+    a parameter name appears both as a top-level key and as a nested key in :param:`params`. In this case, the top-level
     key will be used as the master value.
     
     Example::
@@ -489,7 +489,7 @@ def set_many_param(cell_param, params=None):
         # Output: {'a': {'b': {'c': True}}}, NOT {'a': {'b': {'c': False}}}
         
     Args:
-        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
+        cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
         params (dict): The parameter flat dictionary.
         
     Returns:
@@ -514,16 +514,16 @@ def set_many_param(cell_param, params=None):
 
 
 def set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None):
-    """Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+    r"""Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
     
     Args:
-        cell_param (:py:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
-        min_ (float): The minimum distance from the soma.
-        max_ (float): The maximum distance from the soma.
+        cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
+        min\_ (float): The minimum distance from the soma.
+        max\_ (float): The maximum distance from the soma.
         outsidescale_sections (list): A list of sections where the channels should be inserted.
         
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell_param.
+        :class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell_param.
         
     Note:
         This method is specific for a L5PT.

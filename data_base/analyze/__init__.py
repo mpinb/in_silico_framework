@@ -15,10 +15,10 @@
 """Analyze simrun-initialized databases.
 
 This module provides methods for binning and aggregating synapse activations, spike times, and voltage traces, as well
-as convenience methods to analyze the results of :py:mod:`simrun.reduced_model`.
+as convenience methods to analyze the results of :mod:`simrun.reduced_model`.
 
 See also:
-    :py:mod:`data_base.db_initializers.load_simrun_general` for initializing databases from :py:mod:`simrun` results.
+    :mod:`data_base.db_initializers.load_simrun_general` for initializing databases from :mod:`simrun` results.
 """
 
 
@@ -36,7 +36,7 @@ def split_synapse_activation(
     '''Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
     
     Args:
-        sa (:py:class:`~pandas.DataFrame`): 
+        sa (:class:`~pandas.DataFrame`): 
             A :ref:`syn_activation_format` dataframe.
             Must contain the column ``synapse_type``.
         selfcheck (bool): If ``True``, check if all cell types are either excitatory or inhibitory.
@@ -44,7 +44,7 @@ def split_synapse_activation(
         inhibitory (list): List of inhibitory cell types.
         
     Returns:
-        tuple: a :py:class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
+        tuple: a :class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
     '''
     if selfcheck:
         celltypes = sa.apply(

@@ -158,7 +158,7 @@ class DocumentMePlease():
       Another example, just in text.
 
   See also:
-      A link to :py:class:`~package.subpackage.module.AnotherClass`
+      A link to :class:`~package.subpackage.module.AnotherClass`
 
   Attributes:
       test_attribute (bool): a test attribute

@@ -65,6 +65,17 @@ def cache(function):
     return wrapper
 
 
+def _find_parent_db(path):
+    parent_db_path = path
+    while not is_data_base(parent_db_path):
+        new_parent_db_path = os.path.dirname(parent_db_path)
+        if new_parent_db_path == parent_db_path:
+            raise DataBaseException(
+                "The path {} does not seem to be within a DataBase!".format(path))
+        parent_db_path = new_parent_db_path
+    return parent_db_path
+
+
 def resolve_reldb_path(path, db_basedir=None):
     """Resolve a relative database path
     
@@ -80,7 +91,7 @@ def resolve_reldb_path(path, db_basedir=None):
         the parent database.
     Args:
         path (str): The relative path of the form ``reldb://...``.
-        db (:py:class:`~data_base.DataBase`): The database.
+        db_basedir (:class:`~data_base.DataBase`): The directory containing the database.
         
     Returns:
         str: The resolved path.
@@ -88,6 +99,8 @@ def resolve_reldb_path(path, db_basedir=None):
     if not path.startswith('reldb://'):
         return path
     
+    # Could use _find_parent_db here, but that may yeild bad performance if used nilly-willy
+    # it should be the responsibility of the caller to handle this function correctly - Bjorge.
     assert db_basedir is not None, "If the path is in reldb:// format, the database basedir must be provided in order to resolve it."
 
     abs_path = os.path.join(db_basedir, *path.split('/')[2:])
@@ -111,7 +124,6 @@ def create_reldb_path(path):
     
     Args:
         path (str): The absolute path.
-        db (:py:class:`~data_base.DataBase`): The database.
         
     Returns:
         str: The relative path of the form ``reldb://...``.
@@ -120,12 +132,7 @@ def create_reldb_path(path):
         logger.debug('Path {} already in reldb:// format'.format(path))
         return path
     
-    parent_db_path = path
-    while not is_data_base(parent_db_path):
-        parent_db_path = os.path.dirname(parent_db_path)
-        if parent_db_path == '/':
-            raise DataBaseException(
-                "The path {} does not seem to be within a DataBase!".format(path))
+    parent_db_path = _find_parent_db(path)
 
     relpath = os.path.relpath(path, parent_db_path)
     return os.path.join('reldb://', relpath)
@@ -188,22 +195,12 @@ def create_modular_db_path(path):
     Returns:
         str: The database path.
     """
-    db_path = path
     if path.startswith('mdb://'):
         logger.debug('Path {} already in mdb:// format'.format(path))
         return path
     
     # Find mother database
-    while True:
-        if (os.path.isdir(db_path)) and (
-            'dbcore.pickle' in os.listdir(db_path) or 'db_state.json' in os.listdir(db_path) or 'dbcore.pickle' in os.listdir(db_path)):
-            break
-        else:
-            db_path = os.path.dirname(db_path)
-        if db_path == '/':
-            raise DataBaseException(
-                "The path {} does not seem to be within a DataBase!".
-                format(path))
+    db_path = _find_parent_db(path)
     
     # Instantiate mother database
     db = DataBase(db_path, nocreate=True, readonly=True)
@@ -234,6 +231,9 @@ def resolve_db_path(path, db_basedir=None):
     
     Args:
         path (str): The path to resolve.
+        db_basedir (str, optional): 
+            Directory of a :class:`data_base.DataBase`. 
+            Only needed if the path is a relative database path (``reldb://``), not for modular database paths (``mdb://``).
         
     Returns:
         str: The resolved path.
@@ -249,7 +249,7 @@ def resolve_db_path(path, db_basedir=None):
 def find_common_db_path(paths):
     """Find the common path of a list of db paths.
     
-    Similar to :py:meth:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
+    Similar to :func:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
     
     
     """
@@ -272,7 +272,7 @@ def resolve_neup_reldb_paths(neup, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The modified neuron parameter set, with absolute paths.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The modified neuron parameter set, with absolute paths.
     """
     neup["neuron"]["filename"] = resolve_reldb_path(
         neup["neuron"]["filename"], db_basedir
@@ -290,7 +290,7 @@ def resolve_netp_reldb_paths(netp, db_basedir):
         db_basedir (str): Path to the database directory.
 
     Returns:
-        :py:class:`~single_cell_parser.parameters.NTParameterSet`: The modified network parameter set, with absolute paths.
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The modified network parameter set, with absolute paths.
     """
     for cell_type in list(netp["network"].keys()):
         if not "synapses" in netp["network"][cell_type]:
