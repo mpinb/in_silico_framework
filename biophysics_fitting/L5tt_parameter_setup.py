@@ -185,15 +185,15 @@ def get_L5tt_template():
                             'spatial': 'uniform'
                         },
                         'Ca_HVA': {
-                            'begin': 900.0,
-                            'end': 1100.0,
+                            'begin': None,
+                            'end': None,
                             'gCa_HVAbar': None,
                             'outsidescale': 0.1,
                             'spatial': 'uniform_range'
                         },
                         'Ca_LVAst': {
-                            'begin': 900.0,
-                            'end': 1100.0,
+                            'begin': None,
+                            'end': None,
                             'gCa_LVAstbar': None,
                             'outsidescale': 0.01,
                             'spatial': 'uniform_range'
@@ -387,6 +387,7 @@ def get_L5tt_template_v2():
         'mech_globals': {},
         'neuron': neup}
     return NTParameterSet(p['neuron'])
+
 
 
 def set_morphology(cell_param, filename=None):

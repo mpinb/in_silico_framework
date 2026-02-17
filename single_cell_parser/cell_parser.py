@@ -429,7 +429,7 @@ class CellParser(object):
                                 h.pop_section()
 
             elif mech.spatial == 'linear':
-                ''' spatially linear distribution with negative slope'''
+                ''' spatially linear distribution with slope'''
                 maxDist = self.cell.max_distance(label)
                 #                set origin to 0 of first branch with this label
                 if label == 'Soma':
@@ -457,8 +457,11 @@ class CellParser(object):
                             dist = self.cell.distance_to_soma(sec, seg.x)
                             if relDistance:
                                 dist = dist / maxDist
-                            #rangeVarVal = mech[param]*(dist*slope + offset)
-                            rangeVarVal = max(mech[param] * (dist * slope + 1),
+                            if slope > 0: # positive slope
+                                rangeVarVal = min(mech[param] * (dist * slope + 1),
+                                              mech[param] * offset)
+                            else: 
+                                rangeVarVal = max(mech[param] * (dist * slope + 1),
                                               mech[param] * offset)
                             s = param + '=' + str(rangeVarVal)
                             paramStrings.append(s)

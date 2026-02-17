@@ -1529,6 +1529,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
             port=5050,
             host=self.dash_ip)
 
+
 def get_3d_plot_morphology(
     lookup_table=None,
     colors="grey",
@@ -1544,7 +1545,9 @@ def get_3d_plot_morphology(
     synapse_legend=True,
     legend=None,
     return_figax = True,
-    proj_type="ortho"
+    proj_type="ortho",
+    fig = None,  
+    ax = None
     ):
     """Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
     
@@ -1570,21 +1573,25 @@ def get_3d_plot_morphology(
         synapse_legend (bool): Whether the synapse activations legend should appear in the plot
         legend (bool): Whether the legend for scalar data (e.g. membrane voltage) should appear in the plot
         return_figax (bool): Whether to return the figure and axis objects. Default: True
-        proj_type (str): Projection type for the 3D plot. Default: "ortho"
+        proj_type (str): Projection type for the 3D plot, ignored if fig and ax are provided. Default: "ortho"
+        fig (matplotlib.figure.Figure): Figure object to plot on. If None, a new figure and axes will be created.
+        ax (matplotlib.axes._subplots.Axes3DSubplot): Axes object. Ignored if fig is None. Note that it must be created as a 3D axes with the intended projection type.
     
     Returns:
         tuple | None: fig and ax object if :param:`return_figax` is True. None otherwise.
     """
     #----------------- Generic axes setup
-    fig = plt.figure(
-        figsize=(15, 15), 
-        dpi=dpi,
-        num=str(time_point) if time_point is not None else None)
-    ax = plt.axes(projection='3d', proj_type=proj_type)
+    if not fig: 
+        assert not ax, "If no figure is given, ax argument is ignored!"
+        fig = plt.figure(
+            figsize=(15, 15), 
+            dpi=dpi,
+            num=str(time_point) if time_point is not None else None)
+        ax = plt.axes(projection='3d', proj_type=proj_type)
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
-    plt.axis('off')
+    ax.axis('off')
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')
