@@ -258,7 +258,7 @@ def print_module_versions():
     logger.info("Loaded modules with __version__ attribute are:\n" + ', '.join(module_versions))
 
 
-def get_client(ip=None, client_port=38786, timeout=120, cluster=None):
+def get_client(ip=None, client_port=38786, timeout=120):
     """
     Gets the distributed.client object if dask has been setup
     
@@ -286,10 +286,7 @@ def get_client(ip=None, client_port=38786, timeout=120, cluster=None):
             hostname
         )  # fetches the ip of the current host
     logger.info("Getting dask client with ip {}".format(ip))
-    if cluster:
-        c = cluster.get_client()
-    else:
-        c = Client(ip + ':' + client_port, timeout=timeout)
+    c = Client(ip + ':' + client_port, timeout=timeout)
     logger.info("Got dask client {}".format(c))
     logger.debug("Making mechanisms visible on client side")
     local_pythonpath = os.environ.get('PYTHONPATH', '')
