@@ -1376,7 +1376,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
 
         #------------ Create figure
         # Interactive cell
-        fig_cell = self._get_interactive_cell()
+        fig_cell = self._get_interactive_cell(color=color)
         fig_cell.add_trace(
             go.Scatter3d(
                 x=[0], y=[0], z=[0],
