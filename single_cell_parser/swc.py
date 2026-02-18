@@ -1,8 +1,6 @@
 import numpy as np
 import warnings
 
-SWC_LABEL_MAP = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
-
 def _get_swc_lines_per_section(
     cell, 
     skip_myelin=False, 
@@ -18,6 +16,14 @@ def _get_swc_lines_per_section(
             Must contain the ``sections`` attribute returning a generator for NEURON sections.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
+        n_hillock_sections (int):
+            Interpret the first ``n`` axonal sections as a hillock.
+            NEURON allows to define separate sections that are direct descendants, such as the AIS
+            being the direct and only child of the axon hillock. This information is lost in swc if
+            they are the same label, since the second section's parent is simply the last point of the
+            first section. This can be mitigated by assigning different labels to both.
+            Passing an integer to this arg will force this writer to interpret the first ``n`` sections with label
+            ``"AIS"`` to be assigned the label ``"Hillock"`` (label number ``6``) instead.
         remap_sections (dict): 
             A dictionary mapping section indices to a custom label. 
             Custom labels can often be re-assigned to a type of choice anyways after loading the SWC morphology.
@@ -27,11 +33,17 @@ def _get_swc_lines_per_section(
     Returns:
         List[List[List]]: 
             Nested list of swc lines (index, type, x, y, z, radius, parent), organized per section.
-    """
+    """          
+    # Remap sections to a custom type
     remap_sections = remap_sections or dict()
     only_child_sections = _get_only_child_sections(cell)
+    # Default types
+    label_map = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
+    
+    # Construct the per-section swc lines
     swc_lines_per_section = []
     n = 1
+    n_assigned_hillock_sections = 0
     for sec_ind, sec in enumerate(cell.sections):
         parent = sec.parent
         parent_sec_ind = cell.sections.index(parent) if parent is not None else None
@@ -43,8 +55,7 @@ def _get_swc_lines_per_section(
                 "Section {} is an only child of the parent section {} with the same label \"{}\". "
                 "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. "
                 "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. "
-                "If you want to preserve this information in SWC, consider remapping one of these sections to a custom type via the keyword argument `remap_sections`.".format(
-                    sec_ind, parent_sec_ind, sec.label))
+                "Please consider remapping the section label/type via the keyword argument `remap_sections`.".format(sec_ind, parent_sec_ind, sec.label))
         
         if sec.label == "Soma":
             x, y, z = np.mean(sec.pts, axis=0)
@@ -60,8 +71,8 @@ def _get_swc_lines_per_section(
             # Infer the section type
             if sec_ind in remap_sections: 
                 label_nr = remap_sections[sec_ind]
-            elif sec.label in SWC_LABEL_MAP: 
-                label_nr = SWC_LABEL_MAP[sec.label]
+            elif sec.label in label_map: 
+                label_nr = label_map[sec.label]
             else: 
                 label_nr = -1
 
@@ -73,14 +84,18 @@ def _get_swc_lines_per_section(
             
             for pt_ind, pt in enumerate(sec.pts):
                 x, y, z = pt
+                # diamList is not a robust way to fetch point diameters
+                # cell_modify_functions.scale_apical scales D per point, but does not update diamList
+                # However, we want to segmentize AS IF the diam has not been scaled, for reproducibility
+                # And afterwards scale the diameter
                 radius = sec.diamList[pt_ind]/2
+                # radius = sec.diam3d(pt_ind) / 2  # more robust way to fetch updated D
                 parent_point = n_parent_points if pt_ind == 0 else n - 1
                 swc_line = [n, label_nr, x, y, z, radius, parent_point]
                 swc_lines_this_section.append(swc_line)
                 n += 1
             swc_lines_per_section.append(swc_lines_this_section)
     return swc_lines_per_section
-
 
 def _get_only_child_sections(cell):
     """Check if a cell has sections that are only children.
@@ -101,13 +116,10 @@ def _get_only_child_sections(cell):
     return direct_desc_sections
     
 
-def cell_to_swc(
-    cell, 
-    of, 
-    skip_myelin=False, 
-    remap_sections=None
-):
-    """Write out a :class:`~single_cell_parser.cell.Cell` object to swc format.
+def cell_to_swc(cell, of, skip_myelin=False, remap_sections=None):
+    """Write out a cell object to swc format::
+    
+        index type x y z radius parent
         
     Args:
         cell (:class:`single_cell_parser.cell.Cell`): 
@@ -115,6 +127,14 @@ def cell_to_swc(
             Must contain the ``sections`` attribute returning a generator for NEURON sections.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
+        n_hillock_sections (int):
+            Interpret the first ``n`` axonal sections as a hillock.
+            NEURON allows to define separate sections that are direct descendants, such as the AIS
+            being the direct and only child of the axon hillock. This information is lost in swc if
+            they are the same label, since the second section's parent is simply the last point of the
+            first section. This can be mitigated by assigning different labels to both.
+            Passing an integer to this arg will force this writer to interpret the first ``n`` sections with label
+            ``"AIS"`` to be assigned the label ``"Hillock"`` (label number ``6``) instead.
         remap_sections (dict): 
             A dictionary mapping section indices to a custom label. 
             Custom labels can often be re-assigned to a type of choice anyways after loading the SWC morphology.
@@ -127,7 +147,6 @@ def cell_to_swc(
     Returns:
         List[List[List]]: 
             Nested list of swc lines (index, type, x, y, z, radius, parent), organized per section.
-
     """
     remap_sections = remap_sections or dict()
     swc_lines_per_section = _get_swc_lines_per_section(
@@ -146,38 +165,3 @@ def cell_to_swc(
             line = [str(e) for e in line]
             f.write(' '.join(line))
             f.write('\n')  
-            
-            
-def hoc_to_swc(
-    hoc_fn, 
-    of,
-    axon=True,
-    skip_myelin=False, 
-    remap_sections=None):
-    """Convert a :ref:`hoc_file_format` morphology file to swc format.
-    
-    Args:
-        hoc_fn (str): Path to the :ref:`hoc_file_format` morphology file.
-        of (str): Output path for the resulting swc file.
-        skip_myelin (bool):
-            If True, myelin will not be written to the resulting .swc file.
-        remap_sections (dict): 
-            A dictionary mapping section indices to a custom label. 
-            Custom labels
-        axon (bool):
-            Whether or not to include the axon in the resulting swc file.
-            Default is `True``.
-
-    Attention:
-        When :param:`axon` is set to True, the axon is built according to :meth:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`,
-        and has nothing to do with any axon that may be present in the :ref:`hoc_file_format` file.
-    """
-    from single_cell_parser.cell_parser import CellParser
-    cell_parser = CellParser(hoc_fn)
-    cell_parser.spatialgraph_to_cell(axon=axon)
-    cell_to_swc(
-        cell_parser.cell, 
-        of, 
-        skip_myelin=skip_myelin, 
-        remap_sections=remap_sections
-    )
