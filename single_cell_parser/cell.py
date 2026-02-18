@@ -926,7 +926,7 @@ class PySection(nrn.Section):
                 for seg in self:
                     vec = h.Vector()
                     hRef = eval('seg._ref_' + var)
-                    logger.info('seg._ref_' + var)
+                    # logger.debug('seg._ref_' + var)
                     vec.record(hRef, sec=self)
                     self.recordVars[var].append(vec)
         else:
