@@ -289,6 +289,11 @@ class RW:
             reached_aim_params (list): list of booleans indicating whether each aim parameter has been reached or not.
             seed_pt_pd (pd.Series): seed point parameters
 
+        Attention:
+            :param:`p_normalized_np` and :param:`seed_normalized_np` do not necessarily need to include parameters that are not actively being explored. 
+            However, they may, since frozen parameters do not contribute to the distance. 
+            Both arguments simply need to be consistent about including or not including parameters that aren't explored.
+
         Returns:
             tuple: proposed position (np.array) and number of suggestions it took to find an acceptable position (int)        
         """
@@ -422,11 +427,11 @@ class RW:
         except AttributeError as e:
             self.mode = None
         # get the parameters of the seed point (there might be more info in df_seeds than just the parameters)
-        seed_pt_pd = self.df_seeds[self.params_to_explore].iloc[selected_seedpoint]
-        logger.info(str(len(seed_pt_pd)))
+        seed_params_all_pd = self.df_seeds[self.all_param_names].iloc[selected_seedpoint]
+        logger.info(str(len(seed_params_all_pd)))
         # normalize seed point parameters
-        seed_pt_normalized_pd = self._normalize_params(seed_pt_pd)
-        seed_pt_normalized_np = seed_pt_normalized_pd[self.params_to_explore].values
+        seed_params_all_normalized_pd = self._normalize_params(seed_params_all_pd)
+        seed_params_expl_normalized_np = seed_params_all_normalized_pd[self.params_to_explore].values
         # set seed
         assert(seed is not None)
         np.random.seed(seed)
@@ -451,7 +456,7 @@ class RW:
             return 
         if len(iteration_files) == 0:
             logger.info(f"Starting fresh from seedpoint {selected_seedpoint}")
-            p = seed_pt_pd
+            p = seed_params_all_pd
             iteration = 0
             inside, initial_evaluation = self.evaluation_function(p)
             assert inside
@@ -465,9 +470,9 @@ class RW:
             np.random.set_state(rngn)
             out = []
 
-        p_normalized = self._normalize_params(p)
-        p_normalized_np = p_normalized[self.params_to_explore].values
-        reached_aim_params = self.assess_aim_params_reached(p_normalized)
+        params_all_normalized = self._normalize_params(p)
+        params_expl_normalized_np = params_all_normalized[self.params_to_explore].values
+        reached_aim_params = self.assess_aim_params_reached(params_all_normalized)
 
         logger.info("Exploration loop")
         save_time = time.time()
@@ -489,12 +494,17 @@ class RW:
                 self._concatenate_and_clean(SEED_PT_DIR, particle_id)
                 save_count = 0
 
-            dist = get_vector_norm(p_normalized_np - seed_pt_normalized_np)
-            p_proposal, n_suggestion = self._propose_new_position(p_normalized_np, seed_pt_normalized_np, 
-                                                                  dist, reached_aim_params, seed_pt_pd)
-            p = seed_pt_normalized_pd.copy()
-            p[self.params_to_explore] = p_proposal
-            p_normalized = p.copy()
+            dist = get_vector_norm(params_expl_normalized_np - seed_params_expl_normalized_np)
+            params_expl_proposal, n_suggestion = self._propose_new_position(
+                params_expl_normalized_np, 
+                seed_params_expl_normalized_np, 
+                dist, 
+                reached_aim_params, 
+                seed_params_all_pd
+                )
+            p = seed_params_all_normalized_pd.copy()
+            p[self.params_to_explore] = params_expl_proposal
+            params_all_normalized = p.copy()
             p = self._unnormalize_params(p)
             # evaluate new point
             inside, evaluation = self.evaluation_function(p)
@@ -503,9 +513,9 @@ class RW:
             evaluation['inside'] = inside
             out.append(evaluation)
             if inside:
-                p_normalized_np = p_proposal
+                params_expl_normalized_np = params_expl_proposal
                 logger.info(f"Accepted new point. Distance from seed: {dist}")
-                reached_aim_params = self.assess_aim_params_reached(p_normalized)
+                reached_aim_params = self.assess_aim_params_reached(params_all_normalized)
                 if all(reached_aim_params) and reached_aim_params:
                     logger.info('Reached all aim parameters! Creating flag in seedpoint directory...')
                     count = self._flag_aim_params_success(SEED_PT_DIR)
