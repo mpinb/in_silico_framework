@@ -16,9 +16,35 @@
 
 import numpy as np
 import pandas as pd
-from data_base.utils import silence_stdout
 
-
+class silence_stdout():
+    '''Silence stdout
+    
+    Can be used as context manager and decorator.
+    
+    See also:
+        https://stackoverflow.com/a/2829036/5082048
+    '''
+    
+    def __init__(self, fun = None):
+        self.save_stdout = sys.stdout
+        if fun is not None:
+            return self(fun)
+        
+    def __enter__(self):
+        logging.disable(logging.CRITICAL)
+        sys.stdout = six.StringIO()
+        
+    def __exit__(self, *args, **kwargs):
+        logging.disable(logging.NOTSET)
+        sys.stdout = self.save_stdout
+        
+    def __call__(self, func):
+        def wrapper(*args, **kwds):
+            with self:
+                return func(*args, **kwds)
+        return wrapper
+    
 def get_vector_norm(v):
     """Calculate the norm of a vector v.
     
@@ -80,7 +106,7 @@ def evaluation_function_incremental_helper(
     for stim in stim_order:
         if verbose:
             print('evaluating stimulus', stim)
-        with silence_stdout:
+        with silence_stdout():
             voltage_traces_ = s.run(p, stims = stim)
             voltage_traces.update(voltage_traces_)
             # this is currently specific to the hay simulator / evaluator, which gets confused if 
