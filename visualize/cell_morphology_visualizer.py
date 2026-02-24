@@ -622,6 +622,15 @@ class CMVDataParser:
         Returns:
             list: list of scalar data. If :param:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
         """
+        # Keyword is a fixed color: no scalar data needs to be calculated.
+        if keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
+            # These colors are defined per section, not per segment.
+            return_data = [[keyword]]
+            for sec in self.cell.sections:
+                if not sec.label in ("AIS", "Myelin", "Soma"):
+                    return_data.append([keyword for _ in sec.pts])
+            return return_data
+
         self._calc_scalar_data(keyword)
 
         # -------------- Fixed colors
@@ -639,13 +648,6 @@ class CMVDataParser:
                     return_data.append('grey')
             return return_data
 
-        elif keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
-            # These colors are defined per section, not per segment.
-            return_data = [[keyword]]
-            for sec in self.cell.sections:
-                if not sec.label in ("AIS", "Myelin", "Soma"):
-                    return_data.append([keyword for _ in sec.pts])
-            return return_data
 
         # -------------- Keyword colors       
         elif keyword.lower() in ("voltage", "vm"):
