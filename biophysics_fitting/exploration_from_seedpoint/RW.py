@@ -272,7 +272,7 @@ class RW:
             None. Saves the results to a pickle file in the specified directory.
         """
         path = os.path.join(op_dir, f'{iteration}.pickle')
-        pd.DataFrame(out).to_pickle(path + '.saving')
+        pd.concat(out).to_pickle(path + '.saving')
         logger.info('Checkpointing')
         with open(path + '.rngn', 'wb') as f:
             cloudpickle.dump(np.random.get_state(), f)
