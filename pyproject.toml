@@ -256,3 +256,8 @@ remove_tutorial_content = {cmd = [
   ], description = "Remove tutorial content from docs"}
 build_docs = {cmd = ["make", "html"], description = "Build the documentation", cwd="docs", depends-on = ["remove_tutorial_content"]}
 host_docs = {cmd = ["python", "-m", "http.server", "8000"], description = "Host the documentation", cwd="docs/_build/html"}
+
+
+[tool.coverage.run]
+# Ignore temporary dask files during test suite.
+omit = ["dask-worker-space/*", "*/dask-worker-space/*"]
