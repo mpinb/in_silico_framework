@@ -594,7 +594,7 @@ class CMVDataParser:
             self._calc_ion_dynamics_timeseries(keyword)  # Only happens if necessary
 
         else:
-            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
+            raise ValueError("Scalar data keyword \"{}\" not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\"".format(keyword))
 
     def _get_scalar_data(
         self, 
@@ -657,7 +657,7 @@ class CMVDataParser:
             data_per_section = self._get_ion_dynamics_at_timepoint(time_point, keyword)
             
         else:
-            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
+            raise ValueError("Color keyword \"{}\" not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors".format(keyword))
 
         if return_as_color:
             self.update_cmap(keyword)
