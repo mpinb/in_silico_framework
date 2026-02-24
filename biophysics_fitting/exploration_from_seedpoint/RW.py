@@ -48,7 +48,7 @@ class RW:
             Must take one argument (a parameter vector as a ``pd.Series``) and return a tuple of  ``(inside, evaluation)``:
         
             - inside (bool): Boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
-            - evaluation (dict): Dictionary of evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
+            - evaluation (dict|:class:`pd.DataFrame`|:class:`pd.Series`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters. 
 
             This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
         
