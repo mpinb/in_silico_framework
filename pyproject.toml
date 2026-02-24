@@ -59,13 +59,13 @@ seaborn = ">=0.12.2,<0.13"
 scipy = "1.5.2.*"
 wheel = ">=0.45.1,<0.46"
 zarr = ">=2.15.0,<3"
+pyarrow = ">=18.0.0,<22"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
 redis = ">=5.2.0,<6"
 isf-pandas-msgpack = ">=0.4.0"
 blosc = ">=1.11.1,<2"
-pyarrow = ">=7.0.0,<12"
 blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 # OS specific dependencies
