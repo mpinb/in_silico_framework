@@ -45,12 +45,12 @@ class RW:
         params_to_explore (list): list of parameters that should be explored. If None, all parameters are explored.
         evaluation_function (Callable): 
             Function use to evaluate a vector of biphysical parameters.
-            Must take one argument (a parameter vector) and return a tuple of  ``(inside, evaluation)``:
+            Must take one argument (a parameter vector as a ``pd.Series``) and return a tuple of  ``(inside, evaluation)``:
         
-            - inside: boolean that indicates if the parameter vector is within experimental constraits
-                (i.e. results in acceptable physiology) or not.
-            - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain
-                ephys features.
+            - inside (bool): Boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
+            - evaluation (dict): Dictionary that will be saved alongside the parameters. 
+                This dictionary should include the names and values of parameters, if you plan on continuing exploration from previous results (recommended).
+                In addition, this can contain evaluation features, such as electrophysiological objectives.
 
             This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
         
