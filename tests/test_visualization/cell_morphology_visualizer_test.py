@@ -110,7 +110,7 @@ class TestCellMorphologyInteractiveVisualizer:
             cell=self.cell,
             t_start=0, t_stop=1, t_step=0.5,
             align_trunk=six.PY3,
-            show=False
+            show=False,
             notebook_mode=False
             )
         self.cmiv.show = False
