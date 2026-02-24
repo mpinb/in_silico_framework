@@ -1225,6 +1225,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             point_scalar_data=scalar_data)
         logger.info("VTK files written to {}".format(out_dir))
 
+
 class CellMorphologyInteractiveVisualizer(CMVDataParser):
     """Plot an interactive 3D render of a cell morphology using Plotly and Dash.
     
@@ -1270,7 +1271,8 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         dash_ip=None,
         show=True,
         renderer="notebook_connected",
-        t_start=None, t_stop=None, t_step=None
+        t_start=None, t_stop=None, t_step=None,
+        notebook_mode=True,
         ):
         """Initializes the CellMorphologyInteractiveVisualizer object.
         
@@ -1291,12 +1293,14 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         self.show = show  # set to False for testing
         self.renderer = renderer
         self.background_color="#f0f0f0"
+        self.notebook_mode = True
 
     def _get_interactive_cell(
         self, 
         color=None,
         time_point=None,
-        diameter=None):
+        diameter=None
+        ):
         '''Setup plotly for rendering in notebooks.
         Shows an interactive 3D render of the Cell with NO data overlayed.
 
@@ -1310,7 +1314,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
             plotly.graph_objs._figure.Figure: an interactive figure. Usually added to a ipywidgets.VBox object
         '''
 
-        py.init_notebook_mode()
+        if self.notebook_mode: py.init_notebook_mode()
         pio.renderers.default = self.renderer
         transparent = "rgba(0, 0, 0, 0)"
         ax_layout = dict(
