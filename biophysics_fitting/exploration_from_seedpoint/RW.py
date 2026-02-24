@@ -127,7 +127,7 @@ class RW:
         self.max_step_size = max_step_size
         self.checkpoint_every = checkpoint_every
         self.checkpoint_by_time = checkpoint_by_time
-        self.all_param_names = list(self.param_ranges.index)
+        self.all_param_names = self.param_ranges.index
         self.n_iterations = n_iterations
         self.mode = mode
         self.mode_condition_fun = mode_condition_fun
