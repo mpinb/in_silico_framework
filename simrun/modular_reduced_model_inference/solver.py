@@ -85,7 +85,7 @@ class _Solver(object):
             :func:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
         """
         out = {}
-        for name, split in self.strategy.DataSplitEvaluation.splits.iteritems():
+        for name, split in self.strategy.DataSplitEvaluation.splits.items():
             x0 = self.strategy._get_x0()
             self.strategy.set_split(split['train'])
             if client:
@@ -115,7 +115,7 @@ class _Solver(object):
         """
         out = {}
         names = sorted(self.strategy.DataSplitEvaluation.splits.keys())
-        #         for name, split in self.strategy.DataSplitEvaluation.splits.iteritems():
+        #         for name, split in self.strategy.DataSplitEvaluation.splits.items():
         name = names[index]
         split = self.strategy.DataSplitEvaluation.splits[name]
         x0 = self.strategy._get_x0()
