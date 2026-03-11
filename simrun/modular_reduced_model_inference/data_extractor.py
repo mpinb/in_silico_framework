@@ -177,7 +177,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
                 ]
             else:
                 out = [
-                    single_db[key][k][:, self.tmax - self.width:self.tmax]
+                    single_db[key][k][:, int(self.tmax - self.width):int(self.tmax)]
                     for k in keys
                 ]
             out = numpy.dstack(out)

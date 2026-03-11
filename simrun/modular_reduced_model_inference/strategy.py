@@ -1000,7 +1000,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _convert_x_static(groups, len_z, x):
         len_groups = len(groups)
         out = {}
-        x = x.reshape(len_groups, len(x) / len_groups)
+        x = x.reshape(len_groups, int(len(x) / len_groups))
         for lv, group in enumerate(groups):
             x_z = x[lv, :len_z]
             x_t = x[lv, len_z:]
