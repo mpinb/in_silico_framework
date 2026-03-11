@@ -246,7 +246,7 @@ class _Strategy(object):
             self.get_score, 
             self.get_y)
         if setup:
-            for solver in self.solvers.values():
+            for solver in list(self.solvers.values()):
                 solver._setup()
         return self
 
@@ -337,7 +337,8 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self._get_score = partial(
             self._get_score_static,
             self.base_vectors_arrays_dict)
@@ -348,7 +349,7 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
         stSa_dict = self.data['categorizedTemporalSa']
         base_vectors_arrays_dict = {}
 
-        for group, tSa in stSa_dict.iteritems():
+        for group, tSa in stSa_dict.items():
             len_trials, len_t = tSa.shape
             base_vector_rows = []
             for t in self.RaisedCosineBasis_temporal.compute(len_t).get():
@@ -721,7 +722,8 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
@@ -971,7 +973,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values())[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
