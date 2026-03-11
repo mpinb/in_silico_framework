@@ -914,6 +914,22 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             return 'grey'
         else:
             return None
+        
+    def get_kernel_dict(self, x, normalize = False):
+        if normalize:
+            x = convert_to_numpy(self.normalize(x))
+        dict_ = self.convert_x(x)
+        out = dict()
+        for group, (x_z, x_t) in dict_.items():
+            x_z =  convert_to_numpy(x_z)
+            x_t = convert_to_numpy(x_t)
+            if group == ('EXC',):
+                out['s_exc'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_exc'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+            elif group == ('INH',):
+                out['s_inh'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_inh'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+        return out
 
     def visualize(
         self,
