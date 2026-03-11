@@ -130,7 +130,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         level = self._get_spatial_bin_level(key)
         out = []
         for single_db in db:
-            for k in single_db[key].keys():
+            for k in single_db[key].keys(recurse=True):
                 k = list(k)
                 k.pop(level)
                 out.append(tuple(k))
@@ -146,7 +146,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         key = self.key
         group = list(group)
         level = self._get_spatial_bin_level(key)
-        keys = db[key].keys()
+        keys = db[key].keys(recurse=True)
         keys = sorted(keys, key=lambda x: float(x[level].split('to')[0]))
         out = []
         for k in keys:
@@ -177,7 +177,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
                 ]
             else:
                 out = [
-                    single_db[key][k][:, self.tmax - self.width:self.tmax]
+                    single_db[key][k][:, int(self.tmax - self.width):int(self.tmax)]
                     for k in keys
                 ]
             out = numpy.dstack(out)
