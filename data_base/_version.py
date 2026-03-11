@@ -126,11 +126,11 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
     Source tarballs conventionally unpack into a directory that includes
     both the project name and a version string.
     """
+    
     dirname = os.path.basename(root)
     if not dirname.startswith(parentdir_prefix):
         if verbose:
-            print(("guessing rootdir is '{:s}', but '{:s}' doesn't start with "
-                   "prefix '{:s}'".format((root, dirname, parentdir_prefix))))
+            print("guessing rootdir is '{}', but '{}' doesn't start with prefix '{}'".format(root, dirname, parentdir_prefix))
         raise NotThisMethod("rootdir doesn't start with parentdir_prefix")
     return {
         "version": dirname[len(parentdir_prefix):],
