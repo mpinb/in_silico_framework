@@ -60,7 +60,7 @@ def plot_hoc(hoc_file, **kwargs):
         fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
         plot_hoc(fn)
         
-    .. figure:: ../docs/_static/_images/86_hoc.png
+    .. figure:: ../../docs/_static/_images/86_hoc.png
 
     """
     cp = CellParser(hoc_file)
