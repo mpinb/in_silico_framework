@@ -84,7 +84,11 @@ def _compile_mechanisms_at_path(path):
         nrn_cmd.append('-incflags')
         nrn_cmd.append(user_inc_flags)
     logger.info(f"nrnivmodl command: {nrn_cmd}")
-    subprocess.run(nrn_cmd, cwd=path, check=True, env=os.environ.copy())
+    try:
+        subprocess.check_output(nrn_cmd, cwd=path, env=os.environ.copy())
+    except subprocess.CalledProcessError as e:
+        print(e.output)
+        raise e
 
 def are_compiled():
     """

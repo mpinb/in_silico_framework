@@ -15,6 +15,7 @@ from .fixtures.data_base_fixtures import (
     empty_db,
     fresh_db,
     sqlite_db,
+    data_base_register,
 )
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]

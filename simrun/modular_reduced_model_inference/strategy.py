@@ -246,7 +246,7 @@ class _Strategy(object):
             self.get_score, 
             self.get_y)
         if setup:
-            for solver in self.solvers.values():
+            for solver in list(self.solvers.values()):
                 solver._setup()
         return self
 
@@ -337,7 +337,8 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self._get_score = partial(
             self._get_score_static,
             self.base_vectors_arrays_dict)
@@ -348,7 +349,7 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
         stSa_dict = self.data['categorizedTemporalSa']
         base_vectors_arrays_dict = {}
 
-        for group, tSa in stSa_dict.iteritems():
+        for group, tSa in stSa_dict.items():
             len_trials, len_t = tSa.shape
             base_vector_rows = []
             for t in self.RaisedCosineBasis_temporal.compute(len_t).get():
@@ -721,7 +722,8 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
@@ -768,7 +770,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             return np.array(base_vector_array).astype('f4')
 
         base_vectors_arrays_dict = {}
-        for group, spatiotemp_SA in self.data['spatiotemporalSa'].iteritems():
+        for group, spatiotemp_SA in self.data['spatiotemporalSa'].items():
             base_vector_array = _compute_base_vector_array(spatiotemp_SA)
             base_vectors_arrays_dict[group] = make_weakref(np.array(np.array(base_vector_array).astype('f4')))
         self.base_vectors_arrays_dict = base_vectors_arrays_dict
@@ -816,7 +818,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """
         len_groups = len(groups)
         out = {}
-        x = x.reshape(len_groups, len(x) / len_groups)
+        x = x.reshape(len_groups, int(len(x) / len_groups))
         for lv, group in enumerate(groups):
             x_z = x[lv, :len_z]
             x_t = x[lv, len_z:]
@@ -851,7 +853,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             array: The weighted net input :math:`WNI(t)` of length ``n_trials``.
         """
         outs = []
-        for group, (x_z, x_t) in convert_x(x).iteritems():
+        for group, (x_z, x_t) in convert_x(x).items():
             array = base_vectors_arrays_dict[group]  # shape: (len_z, len_t, n_trials)
             time_weighed_input = np.dot(dereference(x_t), dereference(array)).squeeze()
             spacetime_weighed_input = np.dot(dereference(x_z), dereference(time_weighed_input)).squeeze()
@@ -912,6 +914,22 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             return 'grey'
         else:
             return None
+        
+    def get_kernel_dict(self, x, normalize = False):
+        if normalize:
+            x = convert_to_numpy(self.normalize(x))
+        dict_ = self.convert_x(x)
+        out = dict()
+        for group, (x_z, x_t) in dict_.items():
+            x_z =  convert_to_numpy(x_z)
+            x_t = convert_to_numpy(x_t)
+            if group == ('EXC',):
+                out['s_exc'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_exc'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+            elif group == ('INH',):
+                out['s_inh'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_inh'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+        return out
 
     def visualize(
         self,
@@ -943,7 +961,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
                 dict_ = self.convert_x(self.normalize(out.x))
             else:
                 dict_ = self.convert_x(out.x)
-            for group, (x_z, x_t) in dict_.iteritems():
+            for group, (x_z, x_t) in dict_.items():
                 c = self.get_color_by_group(group)
                 self.RaisedCosineBasis_temporal.visualize_x(
                     x_t, ax=ax_t, plot_kwargs={'c': c})
@@ -971,7 +989,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values())[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
@@ -980,7 +998,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
         st = self.data['st']
         stSa_dict = self.data['spatiotemporalSa']
         base_vectors_arrays_dict = {}
-        for group, stSa in stSa_dict.iteritems():
+        for group, stSa in stSa_dict.items():
             len_trials, len_t, len_z = stSa.shape
             base_vector_array = []
             for z in self.RaisedCosineBasis_spatial.compute(len_z).get():
@@ -1000,7 +1018,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _convert_x_static(groups, len_z, x):
         len_groups = len(groups)
         out = {}
-        x = x.reshape(len_groups, len(x) / len_groups)
+        x = x.reshape(len_groups, int(len(x) / len_groups))
         for lv, group in enumerate(groups):
             x_z = x[lv, :len_z]
             x_t = x[lv, len_z:]
@@ -1010,7 +1028,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     @staticmethod
     def _get_score_static(convert_x, base_vectors_arrays_dict, x):
         outs = []
-        for group, (x_z, x_t) in convert_x(x).iteritems():
+        for group, (x_z, x_t) in convert_x(x).items():
             array = base_vectors_arrays_dict[group]
             out = np.dot(dereference(x_t), dereference(array)).squeeze()
             out = np.dot(dereference(x_z), dereference(out)).squeeze()
@@ -1070,7 +1088,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
                 dict_ = self.convert_x(self.normalize(out.x))
             else:
                 dict_ = self.convert_x(out.x)
-            for group, (x_z, x_t) in dict_.iteritems():
+            for group, (x_z, x_t) in dict_.items():
                 c = self.get_color_by_group(group)
                 self.RaisedCosineBasis_temporal.visualize_x(
                     x_t, ax=ax_t, plot_kwargs={'c': c})

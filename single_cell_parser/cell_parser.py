@@ -209,11 +209,11 @@ class CellParser(object):
             #if not 'rieke_spines' in parameters.spatialgraph_modify_functions.keys():
             #    if label == 'SpineHead' or label == 'SpineNeck':
             #        continue
-            logger.info('    Adding membrane properties to %s' % label)
+            logger.debug('    Adding membrane properties to %s' % label)
             self.insert_membrane_properties(label, parameters[label].properties)
 
         #  spatial discretization
-        logger.info('    Setting up spatial discretization...')
+        logger.debug('    Setting up spatial discretization...')
         if 'discretization' in parameters:
             f = parameters['discretization']['f']
             max_seg_length = parameters['discretization']['max_seg_length']
@@ -238,7 +238,7 @@ class CellParser(object):
             except AttributeError:
                 pass
             
-            logger.info('    Adding membrane range mechanisms to %s' % label)
+            logger.debug('    Adding membrane range mechanisms to %s' % label)
             self.insert_range_mechanisms(
                 label,
                 parameters[label].mechanisms.range)
@@ -390,7 +390,7 @@ class CellParser(object):
 
         for mechName in list(mechs.keys()):
             mech = mechs[mechName]
-            logger.info('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
+            logger.debug('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
             
             if mech.spatial == 'uniform':
                 ''' spatially uniform distribution'''
@@ -429,7 +429,7 @@ class CellParser(object):
                                 h.pop_section()
 
             elif mech.spatial == 'linear':
-                ''' spatially linear distribution with negative slope'''
+                ''' spatially linear distribution with slope'''
                 maxDist = self.cell.max_distance(label)
                 #                set origin to 0 of first branch with this label
                 if label == 'Soma':
@@ -457,8 +457,11 @@ class CellParser(object):
                             dist = self.cell.distance_to_soma(sec, seg.x)
                             if relDistance:
                                 dist = dist / maxDist
-                            #rangeVarVal = mech[param]*(dist*slope + offset)
-                            rangeVarVal = max(mech[param] * (dist * slope + 1),
+                            if slope > 0: # positive slope
+                                rangeVarVal = min(mech[param] * (dist * slope + 1),
+                                              mech[param] * offset)
+                            else: 
+                                rangeVarVal = max(mech[param] * (dist * slope + 1),
                                               mech[param] * offset)
                             s = param + '=' + str(rangeVarVal)
                             paramStrings.append(s)
@@ -1047,13 +1050,13 @@ class CellParser(object):
                     # logger.info '\tnr of segments: %d' % sec.nseg
         totalL = avgL
         avgL /= totalNSeg
-        logger.info(
+        logger.debug(
             '    frequency used for determining discretization: {}'.format(f))
-        logger.info('    maximum segment length: {}'.format(max_seg_length))
-        logger.info('    Total number of compartments in model: %d' % totalNSeg)
-        logger.info('    Total length of model cell: %.2f' % totalL)
-        logger.info('    Average compartment length: %.2f' % avgL)
-        logger.info('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
+        logger.debug('    maximum segment length: {}'.format(max_seg_length))
+        logger.debug('    Total number of compartments in model: %d' % totalNSeg)
+        logger.debug('    Total length of model cell: %.2f' % totalL)
+        logger.debug('    Average compartment length: %.2f' % avgL)
+        logger.debug('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
 
     def _create_ais(self):
         '''Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
@@ -1089,10 +1092,10 @@ class CellParser(object):
         hillTaper = (aisDiam - hillBeginDiam) / (nseg - 1)  # from 4mu to 1mu
         hillStep = hillLength / (nseg - 1)
 
-        logger.info('Creating AIS:')
-        logger.info('    soma diameter: %.2f' % somaDiam)
-        logger.info('    axon hillock diameter: %.2f' % hillBeginDiam)
-        logger.info('    initial segment diameter: %.2f' % aisDiam)
+        logger.info('Creating AIS')
+        logger.debug('    soma diameter: %.2f' % somaDiam)
+        logger.debug('    axon hillock diameter: %.2f' % hillBeginDiam)
+        logger.debug('    initial segment diameter: %.2f' % aisDiam)
         '''myelin & nodes'''
         myelinSeg = 25  # nr of segments internode section
         #        myelinDiam = 1.5 # [um]
@@ -1227,10 +1230,10 @@ class CellParser(object):
         #        hillTaper = (aisDiam-hillBeginDiam)/(hillSeg-1)
         #        hillStep = hillLength/(hillSeg-1)
 
-        logger.info('Creating AIS:')
-        logger.info('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
-        logger.info('    initial segment diameter: {:.2f}'.format(aisDiam))
-        logger.info('    myelin diameter: {:.2f}'.format(myelinDiam))
+        logger.info('Creating AIS')
+        logger.debug('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
+        logger.debug('    initial segment diameter: {:.2f}'.format(aisDiam))
+        logger.debug('    myelin diameter: {:.2f}'.format(myelinDiam))
 
         zAxis = np.array([0, 0, 1])
 
