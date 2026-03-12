@@ -181,3 +181,171 @@ def hoc_to_swc(
         skip_myelin=skip_myelin, 
         remap_sections=remap_sections
     )
+
+
+
+    
+import sys
+from pathlib import Path
+import os
+import Interface as I
+import math as m
+logger = I.logger
+sys.setrecursionlimit(5000)  
+
+def parse_swc(swc_file):
+
+    points = {}
+    parent_point = -1
+
+    # Open file and differentiate the lines
+    with open(swc_file, 'r') as f:
+        for line in f:
+            if line.startswith('#'): continue
+
+            # Create a dict to organize each point's info
+            n, t, x, y, z, r, p = map(float, line.split())
+            points[int(n)] ={
+                'type' : int(t),
+                'coords' : (x,y,z),
+                'radius' : r,
+                'parent' : int(p)
+            }
+
+    # Iterate over points to disocover the children of each point
+    for point_id, point_info in points.items():
+        point_info['children'] = []
+
+    for point_id, point_info in points.items():
+        parent_id = point_info['parent']
+
+        if parent_id != -1:
+            points[parent_id]['children'].append(point_id)
+
+    return points
+
+def traverse(point_id, sec_id, points_dict, primary_branch, basal_branch, f):
+
+
+    """
+        1st condition: current point has only 1 child
+            - Add this child to the section the parent point belongs as well and continue linearly
+
+        2nd condition: current point is a branch point with more than one child
+            - For each child, create a new section and add the current branch point in new section (therefore last 
+              point of previous section and first point of new section is the current branch point)
+        
+        3rd condition: current point is the end of a branch
+            - It is already added to the section the parent belongs to in the beginning of the code
+            - Therefore the traversing continues for the other child of the directly previous branch point, until the end point of that branch 
+    """
+    
+    children_id = points_dict[point_id]['children']
+    x,y,z = points_dict[point_id]['coords']
+    r = points_dict[point_id]['radius']
+
+    
+    # This way we avoid adding the root point before the creation of the soma
+    if sec_id != 'soma':
+        f.write(f'\n{{pt3dadd{x,y,z,(r*2)}}}')
+
+    # Detect start/end of sections according to the conditions described above
+    if len(children_id) == 1:
+        traverse(children_id[0], sec_id, points_dict, primary_branch, basal_branch, f)
+    
+    if len(children_id) > 1:
+        if sec_id == 'soma':
+
+            for i in range(len(children_id)):
+
+                if points_dict[children_id[i]]['type'] == 4:
+                    primary_branch = 1
+                    sec_id = f'apical_1_0'
+
+                elif points_dict[children_id[i]]['type'] == 2:
+                    sec_id = 'axon' 
+                   
+                else:
+                    basal_branch += 1     # For each of the other children of the soma we simply add one as they are all basal dendrites
+                    sec_id = f'BasalDendrite_{basal_branch}_0'
+
+                f.write(f'\n\n{{create {sec_id}}}')
+                f.write(f'\n{{connect {sec_id}(0), soma(1)}}')
+                f.write(f'\n{{access {sec_id}}}\n{{nseg = 1}}\n{{pt3dclear()}}')
+                
+
+                traverse(children_id[i], sec_id, points_dict, primary_branch, basal_branch, f)
+            
+        else:
+            for i in range(len(children_id)):
+                
+                if points_dict[children_id[i]]['type'] == 2:
+                    sec_id_copy = sec_id
+                    sec_id = 'axon' 
+                    
+                else:
+                    sec_id_copy = sec_id    # We keep the parent section id in memory for when we come back to traverse again for the other child (or children)
+                    sec_id = f'{sec_id}_{i}'
+                
+                f.write(f'\n\n{{create {sec_id}}}')
+                f.write(f'\n{{connect {sec_id}(0), {sec_id_copy}(1)}}')
+                f.write(f'\n{{access {sec_id}}}\n{{nseg = 1}}\n{{pt3dclear()}}')
+                
+
+                traverse(children_id[i], sec_id, points_dict, primary_branch, basal_branch, f)
+                sec_id = sec_id_copy
+                
+    if len(children_id) == 0:
+        return
+
+
+def complete_soma(root_id, points_dict, file_name, soma_structure):
+
+    xs, ys, zs = points_dict[root_id]['coords']
+    rs = (points_dict[root_id]['radius'])
+
+    if soma_structure == 'cable':
+        logger.warning('One soma point transformed to a cable structure of three points')
+
+        y2 = ys-rs
+        y3 = ys+rs
+
+        file_name.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,y2,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,ys,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,y3,zs,(rs*2)}}}')
+    
+    elif soma_structure == 'soma' :
+
+        file_name.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,ys,zs,rs}}}')
+
+        for point_id, point_info in points_dict.items():
+            if point_info['type'] == 1:
+                x, y, z = points_dict[point_id]['coords']
+                r = (points_dict[point_id]['radius'])*2
+                file_name.write(f'\n{{pt3dadd{x,y,z,r}}}')
+
+
+"""
+Arg soma: Used to autocomplete missing points of the soma
+    - 'cable' to make the soma a cable-like structure
+    - 'soma = soma' to keep the structure of the soma as it is in the swc file
+"""
+
+def swc_to_hoc(swc_file):
+
+    points_dict = parse_swc(swc_file)
+    root_id = None
+    soma = 'cable'
+    # Detect root-soma
+    for point_id, point_info in points_dict.items():
+        if point_id == 2 and point_info['type'] == 1:
+            soma = 'soma'
+        if point_info['parent'] == -1:
+            root_id = point_id
+            
+
+    sec = 'soma'
+
+    with open(file_path, "w") as f:
+    
+        f.write(f'{{create soma}}\n{{access soma}}')
+        complete_soma(root_id, points_dict, f, soma_structure = soma)
+        traverse(root_id, sec, points_dict, primary_branch = 0, basal_branch = 0, f=f)
