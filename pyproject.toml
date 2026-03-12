@@ -15,10 +15,57 @@ description = "An In Silico Framework for the generation, simulation and analysi
 name = "ISF"
 requires-python = ">=3.8"
 version = "0.5.0-beta"
+dependencies = [
+  'numpy==1.19.2 ; platform_system == "Linux"',
+  'numpy==1.21 ; platform_system == "Darwin"',
+  'numpy==1.19.2 ; platform_system == "Windows"',
+  "pandas==1.1.3.*",
+  "scipy==1.5.2.*",
+  "scikit-learn == 0.23.2.*",
+  'neuron==7.8.2 ; platform_system == "Linux"',
+  'distributed==2.30.0 ; platform_system == "Linux"',
+  'tables>=3.8.0,<4 ; platform_system == "Linux"',
+  'neuron ; platform_system == "Darwin"',
+  'distributed>=2.30.0 ; platform_system == "Darwin"',
+  # check if tables from pypi is the same as pytables from conda-forge. otherwise, just drop support for tables.
+  'tables ; platform_system == "Darwin"',
+  'distributed==2.30.0 ; platform_system == "Windows"',
+  # 'tables>=3.8.0,<4 ; platform_system == "Windows"',
+  "cmasher>=1.6.3,<2",
+  "cython>=3.0.11,<4",
+  "dash>=2.18.1,<3",
+  "dask[complete]==2.30.0",
+  "fasteners>=0.17.3,<0.18",
+  "flask==1.1.4",
+  "ipywidgets>=8.1.5,<9",
+  "jupyterlab>=3.5.3,<4",
+  "jupyter-scatter>=0.19.1,<0.20",
+  "kazoo>=2.10.0,<3",
+  "matplotlib>=3.3.2,<4",
+  "mock>=5.1.0,<6",
+  "plotly>=5.24.1,<6",
+  "pypdf2>=3.0.1,<4",
+  "pytest>=8.3.3,<9",
+  "pytest-cov>=5.0.0,<6",
+  "pytest-xdist>=3.6.1,<4",
+  "pytest-timeout>=2.3.1,<3",
+  "seaborn>=0.12.2,<0.13",
+  "wheel>=0.45.1,<0.46",
+  "zarr",
+  "pyarrow",
+  "bluepyopt ==1.9.126",
+  "redis >=5.2.0,<6",
+  "isf-pandas-msgpack >=0.4.0",
+  "blosc >=1.11.1,<2",
+]
+
+[tool.pixi.target.linux-64.build-dependencies]
+gcc = "<15"
+gxx = "<15"
 
 [tool.pixi.project]
 channels = ["conda-forge"]
-platforms = ["linux-64", "osx-arm64", "win-64"]
+platforms = ["linux-64", "osx-64", "win-64"]
 
 [tool.pixi.system-requirements]
 libc = "2.17"
@@ -31,56 +78,22 @@ linux = "3.10.0"
 build-backend = "hatchling.build"
 requires = ["hatchling"]
 
-# -------------------------------------------------------------------------
-# Dependencies
-# -------------------------------------------------------------------------
-[tool.pixi.dependencies]
-cmasher = ">=1.6.3,<2"
-cython = ">=3.0.11,<4"
-dash = ">=2.18.1,<3"
-dask = "2.30.0.*"
-fasteners = ">=0.17.3,<0.18"
-flask = "==1.1.4"
-ipywidgets = ">=8.1.5,<9"
-jupyterlab = ">=3.5.3,<4"
-jupyter-scatter = ">=0.19.1,<0.20"
-kazoo = ">=2.10.0,<3"
-matplotlib = ">=3.3.2,<4"
-mock = ">=5.1.0,<6"
-pandas = "1.1.3.*"
-plotly = ">=5.24.1,<6"
-pypdf2 = ">=3.0.1,<4"
-pytest = ">=8.3.3,<9"
-pytest-cov = ">=5.0.0,<6"
-pytest-xdist = ">=3.6.1,<4"
-pytest-timeout = ">=2.3.1,<3"
-scikit-learn = "0.23.2.*"
-seaborn = ">=0.12.2,<0.13"
-scipy = "1.5.2.*"
-wheel = ">=0.45.1,<0.46"
-zarr = ">=2.15.0,<3"
-pyarrow = ">=18.0.0,<22"
-
-[tool.pixi.pypi-dependencies]
-bluepyopt = "==1.9.126"
-redis = ">=5.2.0,<6"
-isf-pandas-msgpack = ">=0.4.0"
-blosc = ">=1.11.1,<2"
-blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
-
-# OS specific dependencies
-[tool.pixi.target.osx]
-# >=9 compiles to c++, not c, breaking our .mod files
-pypi-dependencies = { neuron = ">=8.2,<9",   "distributed"= ">=2.30.0" }
-dependencies = { numpy = "==1.21", pytables = ">=3.7.0,<4" }
-
-[tool.pixi.target.linux]
-dependencies = { neuron = "==7.8.2", numpy = "==1.19.2", distributed = "==2.30.0", gcc = "<15", gxx = "<15" }
-pypi-dependencies = { tables = ">=3.8.0,<4" }
-
-[tool.pixi.target.win]
-dependencies = { numpy = "==1.19.2", distributed = "==2.30.0"}
-pypi-dependencies = { tables = ">=3.8.0,<4" }
+[tool.hatch.build]
+include = [
+ "Interface",
+ "barrel_cortex",
+ "biophysics_fitting",
+ "compatibility",
+ "config",
+ "data_base",
+ "getting_started",
+ "mechanisms",
+ "simrun",
+ "single_cell_parser",
+ "singlecell_input_mapper",
+ "spike_analysis",
+ "visualize"
+]
 
 # Docs does not inherit the default dependencies
 [tool.pixi.feature.docs.dependencies]
