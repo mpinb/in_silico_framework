@@ -56,13 +56,13 @@ def get_cellnumbers_from_confile(confile):
 
 
 def split_network_param_in_one_elem_dicts(dict_):
-    """Split a network parameter dictionary into a list of dictionaries.
+    r"""Split a network parameter dictionary into a list of dictionaries.
 
     This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
     for each key in the original dictionary.
 
     Args:
-        dict_ (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
+        dict\_ (dict | :py:class:`~single_cell_parser.parameters.NTParameterSet`): The network parameter dictionary.
 
     Returns:
         list: A list of dictionaries, each containing only one element of the original dictionary.

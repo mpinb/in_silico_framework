@@ -436,9 +436,9 @@ class DataSplitEvaluation(object):
         runs_index = []
         
         for k, solver, x in zip(self.optimizer_results_keys, self.solvers, self.optimizer_results):
-            for split_name, xx in x.iteritems():
+            for split_name, xx in x.items():
                 split = self.splits[split_name]
-                for subsplit_name, subsplit in split.iteritems():
+                for subsplit_name, subsplit in split.items():
                     runs_index.append(k[2])
                     x_index.append(xx.x)
                     success_index.append(xx.success)

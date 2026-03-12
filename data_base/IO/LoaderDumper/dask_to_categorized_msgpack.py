@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Save and load dask dataframes to msgpack with categorical columns.
+r"""Save and load dask dataframes to msgpack with categorical columns.
 
 This dumper is designed for dataframes with the following properties:
 
@@ -29,7 +29,7 @@ will be restored if the dataframe is loaded.
 This therefore only serves as optimization to increase loading speed and reduce network traffic for suitable dataframes. 
 Suitable dataframes are for example the :ref:`syn_activation_format` dataframe.
 
-This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`__
+This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_.
 """
 
 import os, yaml

@@ -495,14 +495,14 @@ class Simulator:
         # get cell object with biophysics
         cell, params = self.setup.get(params)
         # set up stimulus
-        name, fun = self.setup.get_stim_setup_fun_by_stim(stim)
+        name, setup_fun = self.setup.get_stim_setup_fun_by_stim(stim)
         #print name, param_selector(params, name)
-        fun(cell, params=param_selector(params, name))
+        setup_fun(cell, params=param_selector(params, name))
         # run simulation
-        name, fun = self.setup.get_stim_run_fun_by_stim(stim)
+        name, run_fun = self.setup.get_stim_run_fun_by_stim(stim)
         #print name,param_selector(params, name)
         if simulate:
-            cell = fun(cell, params = param_selector(params, name))
+            cell = run_fun(cell, params = param_selector(params, name))
             logger.info("simulating {} took {} seconds".format(stim, time.time()-t))
         return cell, params
 

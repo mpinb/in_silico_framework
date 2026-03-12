@@ -680,7 +680,7 @@ class SpikeDetectionCreastTrough(object):
             max_creast_trough_interval (float): Maximum interval between creast and trough such that a spike is recognized.
             tdelta (float): minimum interval between spikes
             stimulus_period (int): number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
-            stimulus_period_offse (int): Number of stimulus that initiates first trial.
+            stimulus_period_offset (int): Number of stimulus that initiates first trial.
             cellid (str): name to be used in spike times dataframe
         """
         self.reader = reader_object
