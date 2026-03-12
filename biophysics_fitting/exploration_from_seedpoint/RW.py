@@ -99,7 +99,7 @@ class RW:
                 - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain ephys features.
             checkpoint_every (int): iteration interval at which the results are saved e.i., n for checkpointing every n iterations. If both 
                 checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
-            check_point_by_time (float): time interval (in minutes) at which results are saved e.i., n for checkpointing every n minutes. If both
+            checkpoint_by_time (float): time interval (in minutes) at which results are saved e.i., n for checkpointing every n minutes. If both
                 checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
             mode (str): Random walk mode. Options: (None, 'expand', 'custom'). If none, no additional constraints will be considered when proposing new points.
                 'expand': only propose new points that move further away from seedpoint
@@ -203,7 +203,7 @@ class RW:
         Args:
             movement (np.array): movement vector to adjust
             reached_aim_params (list): list of booleans indicating whether each aim parameter has been reached or not.
-            seed_point (pd.Series): seed point parameters
+            seed_pt_pd (pd.Series): seed point parameters
         
         Returns:
             np.array: adjusted movement vector
@@ -329,7 +329,6 @@ class RW:
         Args:
             seed_folder (str): folder where the seedpoint is located
             particle_id (int): id of the particle
-            iteration (int): iteration number. Default: None
         """
         outdir = os.path.join(seed_folder, str(particle_id))
         iterations = sorted(list(set([int(f.split('.')[0]) for f in os.listdir(outdir)

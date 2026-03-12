@@ -1,3 +1,20 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
+"""
 import numpy as np
 import warnings
 
@@ -16,14 +33,6 @@ def _get_swc_lines_per_section(
             Must contain the ``sections`` attribute returning a generator for NEURON sections.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
-        n_hillock_sections (int):
-            Interpret the first ``n`` axonal sections as a hillock.
-            NEURON allows to define separate sections that are direct descendants, such as the AIS
-            being the direct and only child of the axon hillock. This information is lost in swc if
-            they are the same label, since the second section's parent is simply the last point of the
-            first section. This can be mitigated by assigning different labels to both.
-            Passing an integer to this arg will force this writer to interpret the first ``n`` sections with label
-            ``"AIS"`` to be assigned the label ``"Hillock"`` (label number ``6``) instead.
         remap_sections (dict): 
             A dictionary mapping section indices to a custom label. 
             Custom labels can often be re-assigned to a type of choice anyways after loading the SWC morphology.
@@ -127,14 +136,6 @@ def cell_to_swc(cell, of, skip_myelin=False, remap_sections=None):
             Must contain the ``sections`` attribute returning a generator for NEURON sections.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
-        n_hillock_sections (int):
-            Interpret the first ``n`` axonal sections as a hillock.
-            NEURON allows to define separate sections that are direct descendants, such as the AIS
-            being the direct and only child of the axon hillock. This information is lost in swc if
-            they are the same label, since the second section's parent is simply the last point of the
-            first section. This can be mitigated by assigning different labels to both.
-            Passing an integer to this arg will force this writer to interpret the first ``n`` sections with label
-            ``"AIS"`` to be assigned the label ``"Hillock"`` (label number ``6``) instead.
         remap_sections (dict): 
             A dictionary mapping section indices to a custom label. 
             Custom labels can often be re-assigned to a type of choice anyways after loading the SWC morphology.
