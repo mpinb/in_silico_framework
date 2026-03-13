@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from data_base.IO.roberts_formats import read_InputMapper_summary
 from ..utils import select
-from config.cell_types import EXCITATORY
+from config.model_system import EXCITATORY
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 

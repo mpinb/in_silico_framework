@@ -19,7 +19,7 @@ import single_cell_parser as scp
 import single_cell_parser.analyze as sca
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.model_system import EXCITATORY, INHIBITORY
 # import Interface as I # moved to bottom becose auf circular import
 
 

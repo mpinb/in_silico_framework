@@ -1308,7 +1308,7 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        from config.cell_types import EXCITATORY
+        from config.model_system import EXCITATORY
         excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):
