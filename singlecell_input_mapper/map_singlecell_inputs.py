@@ -165,11 +165,9 @@ def map_singlecell_inputs(
         - For each anatomical area
         - For each presynaptic cell type
 
-    3. Creates a scalar field (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
-       for each bouton density.
+    3. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField` for each bouton density.
     4. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
-    5. Creates a network embedding for the cell using
-       :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
+    5. Creates a network embedding for the cell using :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
 
     The naming of each anatomical area needs to be consistent between:
 
@@ -197,7 +195,10 @@ def map_singlecell_inputs(
             anatomical_area/presynaptic_cell_type/\*.am
 
     Returns:
-        None. Writes the results to disk, at the same location as the input :param:`cellName`.
+        None. 
+            Writes the results to disk, at the same location as the input :param:`cellName`.
+            Results consist of a :ref:`syn_file_format`, :ref:`conf_file_format` file, and a ``.csv`` file containing the amount of connected 
+            presynaptic cells per cell type, and per anatomical area.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
         errstr = "Unknown cell type %s!"

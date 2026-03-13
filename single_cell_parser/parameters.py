@@ -219,14 +219,15 @@ class NTParameterSet(MutableMapping):
         """
         return self._unwrap(self._data)
 
-    def save(self, filename):
+    def save(self, filename, **kwargs):
         """Save the NTParameterSet to a file in JSON format.
 
         Args:
             filename (str): The path to the file where the parameters will be saved.
         """
+        indent = kwargs.pop("indent", 4)
         with open(filename, 'w') as f:
-            json.dump(self.as_dict(), f, indent=4)
+            json.dump(self.as_dict(), f, indent=indent, **kwargs)
 
     def keys(self):
         return self._data.keys()
