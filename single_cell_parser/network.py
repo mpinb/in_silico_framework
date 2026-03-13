@@ -489,106 +489,25 @@ class NetworkMapper:
         1. For :class:`~single_cell_parser.cell.PointCell`: see :func:`_create_pointcell_activities`
         2. For :class:`~single_cell_parser.cell.SpikeTrain`: see :func:`_create_spiketrain_activities`
         '''
-        for synType in list(self.nwParam.keys()):  
-            # contains list of celltypes in network: 
-            # ['L45Peak_D1', 'L45Peak_D2', 'L5tt_B3', 'L45Peak_Delta', 'L2_C1', 'L6ct_E3' ...]
-            if synType == 'network_modify_functions':  # not a synapse type
-                continue
-            if self.nwParam[synType].celltype == 'pointcell':
-                self._create_pointcell_activities(synType, self.nwParam[synType])
-                """old code:
-                # nrOfCells = self.nwParam[synType].cellNr
-                # active, = np.where(np.random.uniform(size=nrOfCells) < self.nwParam[synType].activeFrac)
-                # try:
-                #     dist = self.nwParam[synType].distribution
-                # except AttributeError:
-                #     logger.info 'WARNING: Could not find attribute \"distribution\" for \"pointcell\" of cell type %s.' % synType
-                #     logger.info '         Support of \"pointcell\" without this attribute is deprecated.'
-                #     dist = 'normal'
-                # if dist == 'normal':
-                #     mean = self.nwParam[synType].spikeT
-                #     sigma = self.nwParam[synType].spikeWidth
-                #     try:
-                #         offset = self.nwParam[synType].offset
-                #     except AttributeError:
-                #         logger.info 'WARNING: Could not find attribute \"offset\" for \"pointcell\" of cell type %s.' % synType
-                #         logger.info '         Support of \"pointcell\" without this attribute is deprecated.'
-                #         offset = 10.0
-                #     spikeTimes = offset + mean + sigma*np.random.randn(len(active))
-                # elif dist == 'uniform':
-                #     window = self.nwParam[synType].window
-                #     offset = self.nwParam[synType].offset
-                #     spikeTimes = offset + window*np.random.rand(len(active))
-                # elif dist == 'lognormal':
-                #     mu = self.nwParam[synType].mu
-                #     sigma = self.nwParam[synType].sigma
-                #     offset = self.nwParam[synType].offset
-                #     spikeTimes = offset + np.random.lognormal(mu, sigma, len(active))
-                # else:
-                #     errstr = 'Unknown spike time distribution: %s' % dist
-                #     raise RuntimeError(errstr)
-                # logger.info 'initializing spike times for cell type %s' % (synType)
-                # for i in range(len(active)):
-                #     if spikeTimes[i] < 0.1:
-                #         spikeTimes[i] = 0.1
-                #     self.cells[synType][active[i]].append(spikeTimes[i])
-                #      self.cells[synType][active[i]].play()
-                #      self.cells[synType][active[i]].playing = True
-                #      logger.info 'Presynaptic cell %d active at time %.1f' % (i+1, spikeTimes[i])
-                """
-            elif self.nwParam[synType].celltype == 'spiketrain':
-                self._create_spiketrain_activities(synType, self.nwParam[synType])
-                """old code:
-#                interval = self.nwParam[synType].interval
-#                noise = 1.0
-#                start = 0.0
-#                stop = -1.0
-#                nSpikes = None
-#                try:
-#                    noise = self.nwParam[synType].noise
-#                    start = self.nwParam[synType].start
-#                except AttributeError:
-#                    logger.info 'WARNING: Could not find attributes \"noise\" or \"start\" for \"spiketrain\" of cell type %s.' % synType
-#                    logger.info '         Support of \"spiketrains\" without these attributes is deprecated.'
-##                optional argument: nr. of spikes
-#                try:
-#                    nSpikes = self.nwParam[synType].nspikes
-#                except AttributeError:
-#                    pass
-#                if self.simParam is not None:
-#                    stop = self.simParam.tStop
-#                logger.info 'initializing spike trains with mean rate %.2f Hz for cell type %s' % (1000.0/interval, synType)
-#                for cell in self.cells[synType]:
-#                    cell.compute_spike_train_times(interval, noise, start, stop, nSpikes)
-##                    cell.set_interval(interval)
-##                    cell.set_noise(noise)
-##                    cell.set_start(start)
-##                    cell.set_stop(stop)
-##                    cell.compute_spike_times(nSpikes)
-##                    cell.play()
-##                    cell.playing = True
-            """
+        for presyn_cell_name, presyn_cell_netp in self.nwParam.items():  
+            if presyn_cell_name == 'network_modify_functions':  continue
+            spike_source_type = presyn_cell_netp.celltype
+            if spike_source_type == 'pointcell':
+                self._create_pointcell_activities(preCellType=presyn_cell_name, networkParameters=presyn_cell_netp)
+            elif spike_source_type == 'spiketrain':
+                self._create_spiketrain_activities(preCellType=presyn_cell_name, networkParameters=presyn_cell_netp)
             else:
+                # This cell has multiple spike source types associated with it
+                # This is common for e.g. separating ongoing activity (spiketriain i.e. poisson) from evoked activity (pointcell with empirical PSTH values)
+                # You can define as many spike sources per cell type as you want
                 try:  
-                    # seems to be build for the case where self.nwParam[synType].celltype 
-                    # contains the actual celltypes instead of being one
-                    cellTypes = list(self.nwParam[synType].celltype.keys())
-                    for cellType in cellTypes:
-                        if cellType == "spiketrain":
-                            networkParameters = self.nwParam[
-                                synType].celltype.spiketrain
-                            self._create_spiketrain_activities(
-                                synType, networkParameters)
-                        elif cellType == "pointcell":
-                            networkParameters = self.nwParam[
-                                synType].celltype.pointcell
-                            self._create_pointcell_activities(
-                                synType, networkParameters)
-                        else:
-                            errstr = 'Cell type \"%s\" not implemented as spike source!'
-                            raise RuntimeError(errstr)
-                except AttributeError:
-                    pass
+                    for spike_source_subtype, activity_params in presyn_cell_netp.celltype.items():
+                        if spike_source_subtype == "spiketrain": 
+                            self._create_spiketrain_activities(preCellType=presyn_cell_name, networkParameters=activity_params)
+                        elif spike_source_subtype == "pointcell": 
+                            self._create_pointcell_activities(preCellType=presyn_cell_name, networkParameters=activity_params)
+                        else: raise RuntimeError('Cell type \"%s\" not implemented as spike source!')
+                except AttributeError: pass
         logger.info('---------------------------')
 
     def _create_spiketrain_activities(
