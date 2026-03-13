@@ -1334,24 +1334,16 @@ def activate_functional_synapse(
     if 'releaseProb' in synParameters and synParameters.releaseProb == 'dynamic':
         syn.hocRNG = h.Random(int(1000000 * np.random.rand()))
         syn.hocRNG.negexp(1)
-#    set properties for all receptors here
-    for recepStr in list(receptors.keys()):
-        recep = receptors[recepStr]
-        for param in list(recep.parameter.keys()):
-            #            try treating parameters as hoc range variables,
-            #            then as hoc global variables
-            try:
-                # e.g. syn.receptors['glutamate_syn'].decayampa = 1.0
-                paramStr = 'syn.receptors[\'' + recepStr + '\'].'
-                paramStr += param + '=' + str(recep.parameter[param])
-                exec(paramStr)
-            except LookupError:
-                paramStr = param + '_' + recepStr + '='
-                paramStr += str(recep.parameter[param])
-                h(paramStr)
+
+    # set properties for all receptors here
+    for receptor_name, receptor_params in receptors.items():
+        for receptor_param_name, receptor_param_value in receptor_params.parameter.items():
+            if getattr(syn.receptors[receptor_name], receptor_param_name) != None:
+                setattr(syn.receptors[receptor_name], receptor_param_name, receptor_param_value)
+            else : # otherwise as hoc global variables
+                h(f"{receptor_param_name}_{receptor_name}={receptor_param_value}")
         if 'releaseProb' in synParameters and synParameters.releaseProb == 'dynamic':
-            paramStr = 'syn.receptors[\'' + recepStr + '\'].setRNG(syn.hocRNG)'
-            exec(paramStr)
+            syn.receptors[receptor_name].setRNG(syn.hocRNG)
 
 
 # backup by arco

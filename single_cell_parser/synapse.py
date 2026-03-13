@@ -121,23 +121,21 @@ class Synapse(object):
         if x > maxX:
             x = maxX
         hocSec = targetCell.sections[self.secID]
-        for recepStr in list(receptors.keys()):
-            recep = receptors[recepStr]
-            hocStr = 'h.'
-            hocStr += recepStr
-            hocStr += '(x, sec=hocSec)'
-            newSyn = eval(hocStr)
-            newNetcon = h.NetCon(source.spikes, newSyn)
-            newNetcon.threshold = recep.threshold
-            newNetcon.delay = recep.delay
+        for receptor_name, receptor in receptors.items():
+            receptor = receptors[receptor_name]
+            # newSyn = eval("h.{}(x, sec=hocSec)".format(receptor_name))
+            new_synapse = getattr(h, receptor_name)(x, sec=hocSec)
+            new_netcon = h.NetCon(source.spikes, new_synapse)
+            new_netcon.threshold = receptor.threshold
+            new_netcon.delay = receptor.delay
             if self.weight is None:
                 errstr = 'Synaptic weights are not set! This should not occur!'
                 raise RuntimeError(errstr)
             else:
-                for i in range(len(self.weight[recepStr])):
-                    newNetcon.weight[i] = self.weight[recepStr][i]
-            self.receptors[recepStr] = newSyn
-            self.netcons.append(newNetcon)
+                for i in range(len(self.weight[receptor_name])):
+                    new_netcon.weight[i] = self.weight[receptor_name][i]
+            self.receptors[receptor_name] = new_synapse
+            self.netcons.append(new_netcon)
         self._active = True
 
     def disconnect_hoc_synapse(self):
