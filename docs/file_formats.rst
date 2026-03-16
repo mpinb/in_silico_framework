@@ -319,50 +319,21 @@ The first column must be the cell type. This may include the anatomical area as 
 
    * - Cell type	
      - Ongoing firing interval (ms)
-   * - L1	
+   * - celltype1	
      - 909.1
-   * - L2	
+   * - celltype2
      - 2173.9
-   * - L23Trans
+   * - celltype3
      - 142.9
-   * - L34
+   * - celltype4
      - 3225.8
-   * - L45Peak
+   * - celltype5
      - 142.9
-   * - L45Sym
+   * - celltype6
      - 142.9
-   * - L4py
-     - 1562.5
-   * - L4sp
-     - 1666.7
-   * - L4ss
-     - 1886.8
-   * - L56Trans
-     - 142.9
-   * - L5st
-     - 909.1
-   * - L5tt
-     - 283.3
-   * - L6cc
-     - 1052.6
-   * - L6ccinv	
-     - 232.6
-   * - L6ct
-     - 12500.0
-   * - SymLocal1
-     - 142.9
-   * - SymLocal2
-     - 142.9
-   * - SymLocal3
-     - 142.9
-   * - SymLocal4
-     - 142.9
-   * - SymLocal5
-     - 142.9
-   * - SymLocal6
-     - 142.9
-   * - VPM
-     - 4761.9
+   * - ...
+     - ..
+
   
 .. note::
    While you can specify the anatomical area as a suffix for each cell type, the default behavior of ISF is to asusme this is not the case, and
