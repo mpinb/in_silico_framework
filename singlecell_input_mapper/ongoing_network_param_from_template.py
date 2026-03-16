@@ -21,8 +21,8 @@ Create a network parameter template file.
 import sys
 import single_cell_parser as scp
 from data_base.dbopen import dbopen
-from . import load_cell_number_file
 import logging
+from .reader import read_cell_number_file
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -67,7 +67,7 @@ def create_network_parameter(
     logger.info('*************')
 
     templateParam = scp.build_parameters(templateParamName)
-    cellTypeColumnNumbers = load_cell_number_file(cellNumberFileName)
+    cellTypeColumnNumbers = read_cell_number_file(cellNumberFileName)
 
     ongoing_netp = scp.NTParameterSet({
         'info': templateParam.info,

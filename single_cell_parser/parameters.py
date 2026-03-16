@@ -1,7 +1,7 @@
 """Handle :ref:`param_file_format` files in ISF.
 """
 
-from collections.abc import MutableMapping
+from collections.abc import MutableMapping, Mapping
 from pathlib import Path
 import json, re, neuron
 from data_base.dbopen import dbopen, resolve_db_path
@@ -58,11 +58,12 @@ def build_parameters(filename):
     """Read in a :ref:`param_file_format` file and return a NTParameterSet object.
 
     Args:
-        filename (str): path to the parameter file
+        filename (str | Path): path to the parameter file
 
     Returns:
         :class:`~single_cell_parser.parameters.NTParameterSet`: The parameter file as a :class:`~single_cell_parser.parameters.NTParameterSet` object.
     """
+    filename = str(filename)
     data = _read_params_to_dict(filename)
     data = resolve_parameter_paths(data, filename)
     return NTParameterSet(data)
@@ -323,16 +324,14 @@ class NTParameterSet(MutableMapping):
             other (dict, optional): Another dictionary to merge into this NTParameterSet.
             kwargs: Additional keyword arguments to merge into this NTParameterSet.
         """
-        def deep_merge(d, u):
-            for k, v in u.items():
-                if isinstance(v, dict) and isinstance(d.get(k), dict):
-                    deep_merge(d[k], v)
+        def deep_update(this, other):
+            for other_key, other_value in other.items():
+                if isinstance(other_value, Mapping):
+                    this[other_key] = deep_update(this=this.get(other_key, {}), other=other_value)
                 else:
-                    d[k] = self._wrap(v)
-        if other:
-            if isinstance(other, dict):
-                deep_merge(self._data, other)
-            else:
-                raise TypeError("update() expects a dict or keyword arguments")
-        if kwargs:
-            deep_merge(self._data, kwargs)
+                    this[other_key] = other_value
+            return this
+        if isinstance(other, NTParameterSet):
+            other = other._data
+        deep_update(this=self, other=other)
+        return self

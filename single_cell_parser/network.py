@@ -566,13 +566,13 @@ class NetworkMapper:
            :header-rows: 1
         
            * - Distribution Type
-             - Required Parameters
+             - Parameters
            * - "normal"
-             - "spikeT", "spikeWidth", "offset"
+             - "spikeT", "spikeWidth", "offset", "activeFrac" (optional, default=1)
            * - "uniform"
-             - "window", "offset"
+             - "window", "offset", "activeFrac" (optional, default=1)
            * - "lognormal"
-             - "mu", "sigma", "offset"
+             - "mu", "sigma", "offset", "activeFrac" (optional, default=1)
            * - "PSTH"
              - "intervals", "probabilities", "offset"
            * - "PSTH_absolute_number"
@@ -601,7 +601,8 @@ class NetworkMapper:
             logger.debug('Defaulting to distribution = \"normal\".')
             dist = 'normal'
         if dist == 'normal':
-            active, = np.where(np.random.uniform(size=nrOfCells) < networkParameters.activeFrac)
+            active_fraction = networkParameters.get("activeFrac", 1)
+            active, = np.where(np.random.uniform(size=nrOfCells) < active_fraction)
             mean = networkParameters.spikeT
             sigma = networkParameters.spikeWidth
             try:
@@ -618,7 +619,8 @@ class NetworkMapper:
                     spikeTimes[i], spike_source='pointcell_normal')
         
         elif dist == 'uniform':
-            active, = np.where(np.random.uniform(size=nrOfCells) < networkParameters.activeFrac)
+            active_fraction = networkParameters.get("activeFrac", 1)
+            active, = np.where(np.random.uniform(size=nrOfCells) < active_fraction)
             window = networkParameters.window
             offset = networkParameters.offset
             spikeTimes = offset + window * np.random.rand(len(active))
@@ -629,7 +631,8 @@ class NetworkMapper:
                     spikeTimes[i], spike_source='pointcell_uniform')
         
         elif dist == 'lognormal':
-            active, = np.where(np.random.uniform(size=nrOfCells) < networkParameters.activeFrac)
+            active_fraction = networkParameters.get("activeFrac", 1)
+            active, = np.where(np.random.uniform(size=nrOfCells) < active_fraction)
             mu = networkParameters.mu
             sigma = networkParameters.sigma
             offset = networkParameters.offset

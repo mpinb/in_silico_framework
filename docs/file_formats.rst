@@ -69,10 +69,10 @@ ISF custom file format to save JSON-like ASCII data for cell parameters, network
 The ``.param`` format is valid Python code, but differs from JSON, as it allows trailing comma's, single quotes, and tuples. JSON does not.
 ``.param`` files can be read using :mod:`~single_cell_parser.parameters.build_parameters`.
 
-See also: 
+.. seealso:: 
   :mod:`simrun.parameters_to_cell` to rerun a simulation from these parameterfiles.
 
-See also:
+.. seealso::
   :mod:`~single_cell_parser.parameters.build_parameters` to read these parameterfiles.
 
 .. _cell_parameters_format:
@@ -189,7 +189,7 @@ Each ``synapses.receptors.<receptor type>`` in ``synapses.receptors`` contains t
      - Receptor-specific parameters for the synapse dynamics. 
        For example, for an AMPA synapse, this could be the decay time constant, the facilitation, etc.
 
-See also:
+.. seealso::
   The receptor parameters are used for NEURON's `NetCon <https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html#NetCon>`_.
         
 Example::
@@ -241,23 +241,137 @@ Example::
 
 Activity data
 =============
-:ref:`param_file_format` files are used to store activity data covering spike times and time bins for specific cell types in response to a stimulus, as seen in e.g. getting_started/example_data/functional_constraints/evoked_activity/
+:ref:`param_file_format` files are used to store activity data. Activity data can be defined by the following activity distributions:
+
+
+.. list-table:: Activity Distributions
+    :header-rows: 1
+
+    * - Distribution Type
+      - Required Parameters
+    * - "normal"
+      - "spikeT", "spikeWidth", "offset"
+    * - "uniform"
+      - "window", "offset"
+    * - "lognormal"
+      - "mu", "sigma", "offset"
+    * - "PSTH"
+      - "intervals", "probabilities", "offset"
+    * - "PSTH_absolute_number"
+      - "intervals", "number_active_synapses", "offset"
+    * - "PSTH_poissontrain" (deprecated)
+      - "intervals", "rates", "offset"
+    * - "PSTH_poissontrain_v2"
+      - "bins", "rates", "offset"
+    * - "poissontrain_modulated"
+      - "rate_before_t_offset", "mean_rate", "max_modulation", "modulation_frequency", "bin_size", "phase_distribution", "offset"
+
+A single :ref:`activity_data_format` file must specify the activity data for a single cell type, for all anatomical areas.
+Anatomical areas can e.g. be columns in the barrel cortex (:math:`A1` - :math:`D4` & :math:`\alpha` - :math:`\delta`), or hippocampal subfields (:math:`CA1` - :math:`CA4`). 
+If you do not want to make a distinction between individual anatomical areas in the model system you are using, 
+or it simply doesn't make sense to do so, it is fine to set this value to a single area. 
+In that case, the parameter file below would contain only one entry.
 
 Example::
 
     {
-    "L4ss_B1": {
+    "celltypeA_area1": {
     "distribution": "PSTH",
     "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
     "probabilities": [-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,0.0062,-0.0004,0.0129,0.0062,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,0.0062,0.0062,-0.0004,-0.0004,-0.0004],
     },
-    "L4ss_B2": {
+    "celltypeA_area2": {
     "distribution": "PSTH",
     "intervals": [(0.0,1.0),(1.0,2.0),(2.0,3.0),(3.0,4.0),(4.0,5.0),(5.0,6.0),(6.0,7.0),(7.0,8.0),(8.0,9.0),(9.0,10.0),(10.0,11.0),(11.0,12.0),(12.0,13.0),(13.0,14.0),(14.0,15.0),(15.0,16.0),(16.0,17.0),(17.0,18.0),(18.0,19.0),(19.0,20.0),(20.0,21.0),(21.0,22.0),(22.0,23.0),(23.0,24.0),(24.0,25.0),(25.0,26.0),(26.0,27.0),(27.0,28.0),(28.0,29.0),(29.0,30.0),(30.0,31.0),(31.0,32.0),(32.0,33.0),(33.0,34.0),(34.0,35.0),(35.0,36.0),(36.0,37.0),(37.0,38.0),(38.0,39.0),(39.0,40.0),(40.0,41.0),(41.0,42.0),(42.0,43.0),(43.0,44.0),(44.0,45.0),(45.0,46.0),(46.0,47.0),(47.0,48.0),(48.0,49.0),(49.0,50.0)],
     "probabilities": [-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,0.0129,0.0062,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,0.0062,-0.0004,-0.0004,-0.0004,-0.0004,-0.0004],
     },
+    "celltypeA_area3": {
+    "distribution": "lognormal",
+    "mu": 1.0,
+    "sigma": 0.5,
+    "offset": 15
+    }
+    "celltypeA_area4": {
+    "distribution": "uniform",
+    "offset": 140,
+    "window": 50,
+    "activeFrac": 0.8,
+    }
     ...
     }
+
+.. seealso::
+  :meth:`~singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_activity`
+
+
+.. _ongoing_activity_data_format:
+
+Ongoing activity data
+=====================
+In addition to :ref:`activity_data_format`, ISF provides additional API for ongoing activity separately.
+Ongoing activity is modeled as a Poisson spiketrain with a certain interval.
+
+The data format should be a two-column table. The column names are ignored, and only present for clarity.
+The first column must be the cell type. This may include the anatomical area as a suffix, but does not need to.
+
+.. list-table:: Ongoing activity example data format
+   :header-rows: 1
+
+   * - Cell type	
+     - Ongoing firing interval (ms)
+   * - L1	
+     - 909.1
+   * - L2	
+     - 2173.9
+   * - L23Trans
+     - 142.9
+   * - L34
+     - 3225.8
+   * - L45Peak
+     - 142.9
+   * - L45Sym
+     - 142.9
+   * - L4py
+     - 1562.5
+   * - L4sp
+     - 1666.7
+   * - L4ss
+     - 1886.8
+   * - L56Trans
+     - 142.9
+   * - L5st
+     - 909.1
+   * - L5tt
+     - 283.3
+   * - L6cc
+     - 1052.6
+   * - L6ccinv	
+     - 232.6
+   * - L6ct
+     - 12500.0
+   * - SymLocal1
+     - 142.9
+   * - SymLocal2
+     - 142.9
+   * - SymLocal3
+     - 142.9
+   * - SymLocal4
+     - 142.9
+   * - SymLocal5
+     - 142.9
+   * - SymLocal6
+     - 142.9
+   * - VPM
+     - 4761.9
+  
+.. note::
+   While you can specify the anatomical area as a suffix for each cell type, the default behavior of ISF is to asusme this is not the case, and
+   ongoing activity is defined per cell type, independent of the anatomical area.
+   If you do need per-area specificity in the ongoing activity, consult the arguments of the corresponding :ref:`network_parameters_format` builder function.
+
+.. seealso::
+   :meth:`~singlecell_input_mapper.network_param_builder.NetworkParamBuilder.add_ongoing_activity`
+
 
 
 .. _simresult_dir_format:
@@ -304,13 +418,13 @@ Example:
   simulation_run0004_synapses.csv
 
 
-See also:
+.. seealso::
   The :mod:`simrun` functions used to produce these simulation results:
 
   - :mod:`simrun.run_new_simulations`
   - :mod:`simrun.rerun_db`
 
-See also:
+.. seealso::
   To get a :class:`~single_cell_parser.cell.Cell` object from such a simulation, refer to :mod:`simrun.sim_trial_to_cell_object`
 
 
