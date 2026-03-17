@@ -1284,7 +1284,7 @@ def activate_functional_synapse(
         syn (:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         cell (:class:`~single_cell_parser.cell.Cell`): Postsynaptic cell.
         preSynCell (:class:`~single_cell_parser.cell.PointCell`): Presynaptic cell.
-        synParameters (:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters, see also the ``synapses.rerceptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
+        synParameters (:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters, see also the ``synapses.receptors.<syn_type>`` key in the :ref:`network_parameters_format` file.
         tChange (float): Time at which the synapse parameters change (e.g. the release probability due to a spike).
         synParametersChange (:class:`~single_cell_parser.parameters.NTParameterSet`): Synapse parameters after change (including e.g. the release probability).
         forceSynapseActivation (bool): If True, the synapse is activated regardless of the release probability.
@@ -1294,10 +1294,6 @@ def activate_functional_synapse(
             If None and ``releaseprob`` does not appear in :param:`synapseParameters`, the release probability is assumed to equal 1,
             and synapse release times equal presynaptic spike times without delay.
     '''
-    #     try:
-    #         conductance_delay = synParameters.delay
-    #     except KeyError:
-    #         conductance_delay = 0.0
     conductance_delay = 0.0
 
     if releaseTimes is None:
@@ -1320,12 +1316,10 @@ def activate_functional_synapse(
                 t + conductance_delay for t in preSynCell.spikeTimes
             ]
             spike_source = preSynCell.spike_source
-    else:
-        pass
-        #logger.info "releaseTimes have been explicitly set", releaseTimes
+    else: pass
 
-    if not len(releaseTimes):
-        return
+    if not len(releaseTimes): return
+
     releaseTimes.sort()
     releaseSite = PointCell(releaseTimes)
     releaseSite.spike_source = preSynCell.spike_source
@@ -1344,126 +1338,10 @@ def activate_functional_synapse(
             if getattr(syn.receptors[receptor_name], receptor_param_name) != None:
                 setattr(syn.receptors[receptor_name], receptor_param_name, receptor_param_value)
             else : # otherwise as hoc global variables
+                # e.g. tau1_glutamate_syn=1.0
                 h(f"{receptor_param_name}_{receptor_name}={receptor_param_value}")
         if 'releaseProb' in synParameters and synParameters.releaseProb == 'dynamic':
             syn.receptors[receptor_name].setRNG(syn.hocRNG)
-
-
-# backup by arco
-# def activate_functional_synapse(syn, cell, preSynCell, synParameters, tChange=None, synParametersChange=None):
-#     '''Default method to activate single synapse.
-#     Currently, this implementation expects all presynaptic spike
-#     times to be pre-computed; can thus not be used in recurrent
-#     network models at this point.'''
-#     releaseTimes = []
-#     if synParameters.has_key('releaseProb') and synParameters.releaseProb != 'dynamic':
-#         prel = synParameters.releaseProb
-#         if tChange is not None:
-#             prelChange = synParametersChange.releaseProb
-#         for t in preSynCell.spikeTimes:
-#             if tChange is not None:
-#                 if t >= tChange:
-#                     if np.random.rand() < prelChange:
-#                         releaseTimes.append(t)
-#                     continue
-#             if np.random.rand() < prel:
-#                 releaseTimes.append(t)
-#     else:
-#         releaseTimes = preSynCell.spikeTimes[:]
-#     if not len(releaseTimes):
-#         return
-#     releaseTimes.sort()
-#     releaseSite = PointCell(releaseTimes)
-#     releaseSite.play()
-#     receptors = synParameters.receptors
-#     syn.activate_hoc_syn(releaseSite, preSynCell, cell, receptors)
-#     if synParameters.has_key('releaseProb') and synParameters.releaseProb == 'dynamic':
-#         syn.hocRNG = h.Random(int(1000000*np.random.rand()))
-#         syn.hocRNG.negexp(1)
-# #    set properties for all receptors here
-#     for recepStr in receptors.keys():
-#         recep = receptors[recepStr]
-#         for param in recep.parameter.keys():
-# #            try treating parameters as hoc range variables,
-# #            then as hoc global variables
-#             try:
-#                 paramStr = 'syn.receptors[\'' + recepStr + '\'].'
-#                 paramStr += param + '=' + str(recep.parameter[param])
-#                 exec(paramStr)
-#             except LookupError:
-#                 paramStr = param + '_' + recepStr + '='
-#                 paramStr += str(recep.parameter[param])
-#                 h(paramStr)
-#         if synParameters.has_key('releaseProb') and synParameters.releaseProb == 'dynamic':
-#             paramStr = 'syn.receptors[\'' + recepStr + '\'].setRNG(syn.hocRNG)'
-#             exec(paramStr)
-
-
-def functional_connectivity_visualization(functionalMap, cell):
-    """Visualize functional connectivity.
-
-    Left undocumented, as this seems to be a specific testing/convenience method.
-    
-    :skip-doc:
-    """
-    nrL4ssCells = 3168
-    nrL1Cells = 104
-
-    L4origin = np.array([-150, -150, 0])
-    #    L4colSpacing = np.array([1,0,0])
-    #    L4rowSpacing = np.array([0,30,0])
-    L4rowSpacing = np.array([1, 0, 0])
-    L4colSpacing = np.array([0, 30, 0])
-    L1origin = np.array([-550, -150, 700])
-    L1colSpacing = np.array([30, 0, 0])
-    L1rowSpacing = np.array([0, 30, 0])
-
-    rows = 10
-    L4cols = nrL4ssCells // rows
-    L1cols = nrL1Cells // rows
-
-    L4grid = {}
-    L1grid = {}
-
-    for i in range(nrL4ssCells):
-        #        row = i//rows
-        #        col = i - row*L4cols
-        col = i // L4cols
-        row = i - col * L4cols
-        #        logger.info 'row = %d' % row
-        #        logger.info 'col = %d' % col
-        cellPos = L4origin + row * L4rowSpacing + col * L4colSpacing
-        L4grid[i] = cellPos
-    for i in range(nrL1Cells):
-        row = i // rows
-        col = i - row * L1cols
-        cellPos = L1origin + row * L1rowSpacing + col * L1colSpacing
-        L1grid[i] = cellPos
-
-    L4map = {}
-    L1map = {}
-
-    for con in functionalMap['L4ssD2']:
-        cellType, cellID, synID = con
-        synPos = cell.synapses[cellType][synID].coordinates
-        if cellID not in list(L4map.keys()):
-            L4map[cellID] = []
-        L4map[cellID].append((L4grid[cellID], synPos))
-    for i in range(nrL4ssCells):
-        if i not in list(L4map.keys()):
-            L4map[i] = [(L4grid[i], L4grid[i])]
-    for con in functionalMap['L1D1']:
-        cellType, cellID, synID = con
-        synPos = cell.synapses[cellType][synID].coordinates
-        if cellID not in list(L1map.keys()):
-            L1map[cellID] = []
-        L1map[cellID].append((L1grid[cellID], synPos))
-    for i in range(nrL1Cells):
-        if i not in list(L1map.keys()):
-            L1map[i] = [(L1grid[i], L1grid[i])]
-
-    writer.write_functional_map('L4ss_func_map3.am', L4map)
-    writer.write_functional_map('L1_func_map3.am', L1map)
 
 
 def sample_times_from_rates(bins, rate):
