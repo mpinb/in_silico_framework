@@ -307,11 +307,11 @@ Example::
 .. _ongoing_activity_data_format:
 
 Ongoing activity data
-=====================
+*********************
 In addition to :ref:`activity_data_format`, ISF provides additional API for ongoing activity separately.
 Ongoing activity is modeled as a Poisson spiketrain with a certain interval.
 
-The data format should be a two-column table. The column names are ignored, and only present for clarity.
+The data format should be a two-column ``.csv`` table. The column names are ignored, and only present for clarity.
 The first column must be the cell type. This may include the anatomical area as a suffix, but does not need to.
 
 .. list-table:: Ongoing activity example data format
