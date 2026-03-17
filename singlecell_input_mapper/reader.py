@@ -56,7 +56,7 @@ def read_cell_number_file(cell_nr_fn):
     return df.groupby("anatomical_area").apply(lambda x: dict(zip(x["cell_type"], x["nr_of_cells"]))).to_dict()
 
 
-def read_evoked_PSTH(fn, key):
+def read_activity_param_by_key(fn, key):
     """
     Fetch the PSTHs of each celltype in a barrel cortex :param:`column` for evoked activity reflecting 
     a passive whisker touch scenario.

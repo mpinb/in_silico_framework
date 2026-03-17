@@ -82,57 +82,21 @@ import time
 
 import getting_started
 
+from config.model_system import EXCITATORY, INHIBITORY
+
 from . import singlecell_input_mapper as sim
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
 __author__ = "Robert Egger"
 
-# ===============================================================================
-# This is the only line that needs to be adapted to your system.
-# Change the string 'prefix' to the folder where all anatomical data is
-# located on your system (assuming you just unpack the data and do not change
-# the directory structure)
-# ===============================================================================
 prefix = os.path.join(os.path.dirname(getting_started.parent), "barrel_cortex")
 
-# ===============================================================================
-# If you change the directory structure of the anatomical input data,
-# you need to update the following lines accordingly.
-# Otherwise, you can leave everything from here on as is.
-# ===============================================================================
 numberOfCellsSpreadsheetName = os.path.join(prefix, "nrCells.csv")
 connectionsSpreadsheetName = os.path.join(prefix, "ConnectionsV8.csv")
 ExPSTDensityName = os.path.join(prefix, "PST/EXNormalizationPSTs.am")
 InhPSTDensityName = os.path.join(prefix, "PST/INHNormalizationPSTs.am")
 boutonDensityFolderName = os.path.join(prefix, "singleaxon_boutons_ascii")
-
-exTypes = (
-    "VPM",
-    "L2",
-    "L34",
-    "L4py",
-    "L4sp",
-    "L4ss",
-    "L5st",
-    "L5tt",
-    "L6cc",
-    "L6ccinv",
-    "L6ct",
-)
-inhTypes = (
-    "SymLocal1",
-    "SymLocal2",
-    "SymLocal3",
-    "SymLocal4",
-    "SymLocal5",
-    "SymLocal6",
-    "L1",
-    "L23Trans",
-    "L45Sym",
-    "L45Peak",
-    "L56Trans",
-)
 
 
 def map_singlecell_inputs(
@@ -200,7 +164,7 @@ def map_singlecell_inputs(
             Results consist of a :ref:`syn_file_format`, :ref:`conf_file_format` file, and a ``.csv`` file containing the amount of connected 
             presynaptic cells per cell type, and per anatomical area.
     """
-    if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
+    if not (cellTypeName in EXCITATORY) and not (cellTypeName in INHIBITORY):
         errstr = "Unknown cell type %s!"
         raise TypeError(errstr)
 
@@ -253,15 +217,15 @@ def map_singlecell_inputs(
 
     # Actually create the network embedding
     inputMapper = sim.NetworkMapper(
-        singleCell,
-        cellTypeName,
-        numberOfCellsSpreadsheet,
-        connectionsSpreadsheet,
-        ExPSTDensity,
-        InhPSTDensity,
+        postCell=singleCell,
+        postCellType=cellTypeName,
+        cellTypeNumbersSpreadsheet=numberOfCellsSpreadsheet,
+        connectionsSpreadsheet=connectionsSpreadsheet,
+        exPST=ExPSTDensity,
+        inhPST=InhPSTDensity,
     )
-    inputMapper.exCellTypes = exTypes
-    inputMapper.inhCellTypes = inhTypes
+    inputMapper.exCellTypes = EXCITATORY
+    inputMapper.inhCellTypes = INHIBITORY
 
     logger.info("Creating network embedding for  {:s}".format(cellName))
     inputMapper.create_network_embedding(cellName, boutonDensities, nrOfSamples=nrOfSamples)
@@ -270,14 +234,3 @@ def map_singlecell_inputs(
     endTime = time.time()
     duration = (endTime - startTime) / 60.0
     logger.info("Runtime: {:.1f} minutes".format(duration))
-
-
-if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        fname = sys.argv[1]
-        cellTypeName = sys.argv[2]
-        map_singlecell_inputs(fname, cellTypeName)
-    else:
-        print(
-            "Usage: python map_singlecell_inputs.py [morphology filename] [postsynaptic cell type name]"
-        )
