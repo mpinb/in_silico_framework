@@ -89,3 +89,20 @@ def read_evoked_PSTH(fn, key):
     cell_type_evoked_activity = scp.build_parameters(filename=fn) 
     PSTH = cell_type_evoked_activity.get(key)
     return PSTH
+
+
+def read_nr_connected_cells_from_con(con_file):
+    """Read a :ref:`con_file_format` and infer how many cells of each cell type are connected
+    
+    Args:
+        con_file (str): Filename of the :ref:`con_file_format` file
+
+    Returns:
+        pd.Series: A pandas series mapping each cell type to how many of them are connected to the postsynaptic neuron.
+    """
+    con_pdf = pd.read_csv(
+            con_file, sep="\t", skiprows=3, names=["celltype", "cell_ID", "synapse_ID"]
+        )
+
+    con_series = con_pdf.groupby("celltype").apply(func=lambda x: len(x.cell_ID.drop_duplicates()))
+    return con_series
