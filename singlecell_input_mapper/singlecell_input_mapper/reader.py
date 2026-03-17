@@ -360,6 +360,8 @@ def read_scalar_field_legacy(fname=''):
 def read_connections_spreadsheet(fname):
     """Reads a spreadsheet with connection probabilities between cell types
 
+    Assigns rows that contain "INHIBITORY" or "EXCITATORY" in their first column to "INH" and "EXC" in the output.
+
     Args:
         fname (str): The name of the file to be read
     

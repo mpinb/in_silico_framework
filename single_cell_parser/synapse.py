@@ -104,7 +104,7 @@ class Synapse(object):
                 Note that in the context of a synapse, ``spikes`` means release times, which is not necessarily the same as the presynaptic spike times.
             preCell (:class:`single_cell_parser.cell.PointCell`): Presynaptic cell.
             targetCell (:class:`single_cell_parser.cell.Cell`): Postsynaptic cell.
-            receptors (dict | Dict[:class:`~single_cell_parser.parameters.NTParameterSet`]): 
+            receptors (:class:`~single_cell_parser.parameters.NTParameterSet`): 
                 Dictionary or :class:`~single_cell_parser.parameters.NTParameterSet` of receptors. 
                 Each individual receptor in this collection must be of the type :class:`~single_cell_parser.parameters.NTParameterSet`.
         '''
