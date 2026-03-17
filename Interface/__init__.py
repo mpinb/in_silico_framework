@@ -63,7 +63,7 @@ import math
 
 ### logging setup
 import logging
-from config.isf_logging import logger
+from config.isf_logging import logger, silence_logger
 
 try:
     from IPython import display
