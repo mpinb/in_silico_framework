@@ -23,6 +23,16 @@ activity data of this stimulus fixed.
 This user configuration allows you to set default paths to such data. Some pipelines fall back to these paths when
 no data is explicitly passed. 
 
+.. caution::
+   Please be careful when using these default fallback values. 
+
+   1. Code is not explicitly reproducible when relying on these fallback values. If the fallback values change, the same code can give different results.
+   2. It can be very easy to forget you set these.
+
+   It should always be preferred to pass data directly to the pipelines that require them.
+   Only those configurations that you expect to _never_ change, or settings that are deemed truly baseline 
+   (e.g. a stimulus offset that is inherently tied to _all_ data) should be considered here.
+
 """
 from pathlib import Path
 from getting_started import example_data_dir

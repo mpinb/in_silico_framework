@@ -21,7 +21,6 @@ This should be set on a per-project basis. Adapting this file usually invalidate
 These cell types are used to keep track of presynaptic cells in network modeling, and their
 associated synapse types.
 """
-from pathlib import Path
 
 # - Barrel cortex cell types
 EXCITATORY = [
