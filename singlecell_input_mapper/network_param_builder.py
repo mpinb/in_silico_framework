@@ -1,7 +1,9 @@
+from __future__ import annotations # so I can typehing the class lazily
 from logging import Logger
 from typing_extensions import Self
 from typing import Any, Iterable, Dict
 from collections.abc import Mapping
+
 
 from single_cell_parser.parameters import NTParameterSet
 from single_cell_parser.parameters import build_parameters
@@ -27,7 +29,7 @@ class NetworkParamBuilder:
     # Normally, the amount of cell types is < O(100), so efficiency is not the biggest concern here.
     """Builder for :ref:`network_parameters_format`.
 
-    This class adds network data to a :ref:`~single_cell_parser.paramters.NTParameterSet`.
+    This class adds network data to a :class:`~single_cell_parser.paramters.NTParameterSet`.
     Network data can include:
 
     - Network embedding data (locations of synapses on the dendrite and their presynaptic origin, i.e. :ref:`syn_file_format` and :ref:`con_file_format` files)
@@ -37,26 +39,27 @@ class NetworkParamBuilder:
 
     Example::
 
-        >>> netp = NetworkParamBuilder(
-            ).add_ongoing_activity(
-                ongoing_interval_per_ct = celltype_to_ongoing_map
-            ).add_synapse_dynamics(
-            ).subcategorize_celltypes(
-                cell_type_map = subcategorized_celltypes_map
-            ).add_network_embedding(
-                syn_fn = syn_fn,
-                con_fn = con_fn,
-            ).add_activity(
-                activity_per_ct   = activity_data_per_subct,
-                additional_params = additional_evoked_parameters
-            ).network_parameters
-        >>> netp.save(
-                filename=save_filename
-            )
+        netp = NetworkParamBuilder(
+        ).add_ongoing_activity(
+            ongoing_interval_per_ct = celltype_to_ongoing_map
+        ).add_synapse_dynamics(
+        ).subcategorize_celltypes(
+            cell_type_map = subcategorized_celltypes_map
+        ).add_network_embedding(
+            syn_fn = syn_fn,
+            con_fn = con_fn,
+        ).add_activity(
+            activity_per_ct   = activity_data_per_subct,
+            additional_params = additional_evoked_parameters
+        ).network_parameters
+
+        netp.save(
+            filename=save_filename
+        )
     """
     def __init__(
         self,
-        netp: NTParameterSet = None,
+        netp: NetworkParamBuilder | NTParameterSet | None = None,
         embedding_include_all_celltypes: bool = False
     ) -> None:
         """
@@ -70,7 +73,7 @@ class NetworkParamBuilder:
                 Default is False
         """
         if netp == None:
-            self.network_parameters: NTParameterSet = NTParameterSet(
+            self.network_parameters = NTParameterSet(
                 data={
                     "info": self._generate_param_info(),
                     "network": {},
