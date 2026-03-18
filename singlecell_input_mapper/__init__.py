@@ -67,16 +67,5 @@ The general workflow is as follows:
 3. Create a network parameter file from the PSTHs.
 
 """
-import pandas as pd
-import single_cell_parser as scp
 
-from .network_param_builder import NetworkParamBuilder
-
-__author__  = "Robert Egger"
-__credits__ = ["Robert Egger", "Arco Bast"]
-
-
-
-
-
-
+__author__  = ["Robert Egger", "Arco Bast", "Bjorge Meulemeester"]
