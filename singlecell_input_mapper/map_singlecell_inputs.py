@@ -82,7 +82,7 @@ import time
 
 import getting_started
 
-from config.model_system import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 from . import singlecell_input_mapper as sim
 

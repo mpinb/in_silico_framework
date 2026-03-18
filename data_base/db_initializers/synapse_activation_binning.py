@@ -33,7 +33,7 @@ from functools import partial
 import numpy as np
 import dask
 from data_base.analyze.temporal_binning import universal as temporal_binning
-from config.model_system import EXCITATORY
+from config.user.cell_types import EXCITATORY
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 

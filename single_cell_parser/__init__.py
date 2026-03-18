@@ -41,7 +41,7 @@ import warnings
 import neuron
 import tables  # so florida servers have no problem with neuron
 
-from config.model_system import EXCITATORY
+from config.user.cell_types import EXCITATORY
 
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger

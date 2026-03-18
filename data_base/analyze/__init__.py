@@ -26,7 +26,7 @@ from .spike_detection import spike_detection
 from . import spatiotemporal_binning
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
-from config.model_system import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 def split_synapse_activation(
     sa,

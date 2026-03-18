@@ -35,7 +35,7 @@ from collections import defaultdict
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 from .utils import get_cellnumbers_from_confile, split_network_param_in_one_elem_dicts
 from .get_cell_with_network import get_cell_with_network
-from config.model_system import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger = logging.getLogger("ISF").getChild(__name__)
 

@@ -299,6 +299,6 @@ def get_client(ip=None, client_port=38786, timeout=120):
 print("\n\n")
 print_module_versions()
 
-from config.model_system import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger.setLevel(logging.ATTENTION)

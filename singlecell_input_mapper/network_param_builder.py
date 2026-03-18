@@ -15,7 +15,7 @@ from pathlib import Path
 import getting_started
 import copy
 
-from config.model_system import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger: Logger = logging.getLogger(name="ISF").getChild(suffix=__name__)
 
