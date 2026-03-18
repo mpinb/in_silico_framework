@@ -212,7 +212,6 @@ class NetworkParamBuilder:
     def add_activity(
         self,
         activity_per_ct=None,
-        key_modify_fun=None,
         additional_params=None
         ) -> Self:
         """
@@ -234,22 +233,15 @@ class NetworkParamBuilder:
         """
         assert isinstance(activity_per_ct, Mapping), "Please provide a mapping between cell types and their activity data." 
 
-        assert key_modify_fun is None or callable(key_modify_fun), "If passing a value for key_modify_fun, it must be a function that takes a celltype string and returns it changed."
-
-        for celltype_anarea in self.network_parameters.network.keys():
+        for celltype in self.network_parameters.network.keys():
             # Read PSTh data and add to netp
-            activity_data_key = key_modify_fun(celltype_anarea) if key_modify_fun is not None else celltype_anarea
-            if activity_data_key == None: 
-                psth = None
-                logger.debug(f"Could not convert celltype {celltype_anarea} to activity data key {activity_data_key}")
-                continue
-
-            psth = activity_per_ct.get(activity_data_key, None)
+            psth = activity_per_ct.get(celltype, None)
             if psth == None:
-                logger.warning(f"No activity data found under key: {activity_data_key}")
+                # No activity data for this cell type in the network params was found in the passed activity data
+                # This is fine.
                 continue
-            self.network_parameters.network[celltype_anarea].celltype["pointcell"] = psth
+            self.network_parameters.network[celltype].celltype["pointcell"] = psth
             if additional_params is not None:
-                self.network_parameters.network[celltype_anarea].celltype['pointcell'].update(additional_params)
+                self.network_parameters.network[celltype].celltype['pointcell'].update(additional_params)
 
         return self
