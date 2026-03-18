@@ -227,8 +227,8 @@ class NTParameterSet(MutableMapping):
             filename (str): The path to the file where the parameters will be saved.
         """
         indent = kwargs.pop("indent", 4)
-        with open(filename, 'w') as f:
-            json.dump(self.as_dict(), f, indent=indent, **kwargs)
+        with open(file=filename, mode='w') as f:
+            json.dump(obj=self.as_dict(), fp=f, cls=CompactListEncoder, indent=indent, **kwargs)
 
     def keys(self):
         return self._data.keys()
@@ -335,3 +335,29 @@ class NTParameterSet(MutableMapping):
             other = other._data
         deep_update(this=self, other=other)
         return self
+
+
+class CompactListEncoder(json.JSONEncoder):
+    def _encode(self, obj, level):
+        indent_str = ' ' * self.indent * level
+        inner_indent = ' ' * self.indent * (level + 1)
+
+        if isinstance(obj, list):
+            return '[' + ', '.join(self._encode(item, level + 1) for item in obj) + ']'
+        if isinstance(obj, dict):
+            if not obj:
+                return '{}'
+            keys = sorted(obj.keys()) if self.sort_keys else obj.keys()
+            items = [
+                f'{inner_indent}{json.dumps(k, ensure_ascii=self.ensure_ascii)}: {self._encode(v, level + 1)}'
+                for k in keys
+                for v in [obj[k]]
+            ]
+            return '{\n' + ',\n'.join(items) + '\n' + indent_str + '}'
+        return json.dumps(obj, ensure_ascii=self.ensure_ascii, allow_nan=self.allow_nan, default=self.default)
+
+    def encode(self, obj):
+        return self._encode(obj, 0)
+
+    def iterencode(self, obj, _one_shot=False):
+        return iter([self.encode(obj)])
