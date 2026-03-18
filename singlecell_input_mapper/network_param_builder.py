@@ -25,39 +25,88 @@ class NetworkParamBuilder:
     # Build network parameters using a builder pattern
     # Not the most efficient, as you iterate all cell types multiple times, but way more clear what's happening
     # Normally, the amount of cell types is < O(100), so efficiency is not the biggest concern here.
-    """
+    """Builder for :ref:`network_parameters_format`.
 
-    For example, if we have ongoing activity defined per cell type, and additional evoked activity defined per cell type
-    AND per anatomical area, we would do:
+    This class adds network data to a :ref:`~single_cell_parser.paramters.NTParameterSet`.
+    Network data can include:
+
+    - Network embedding data (locations of synapses on the dendrite and their presynaptic origin, i.e. :ref:`syn_file_format` and :ref:`con_file_format` files)
+    - Activity data (i.e. when does each presynaptic cell activate)
+    - Synapse dynamics
+
 
     Example::
 
-        >>> 
+        >>> netp = NetworkParamBuilder(
+            ).add_ongoing_activity(
+                ongoing_interval_per_ct = celltype_to_ongoing_map
+            ).add_synapse_dynamics(
+            ).subcategorize_celltypes(
+                cell_type_map = subcategorized_celltypes_map
+            ).add_network_embedding(
+                syn_fn = syn_fn,
+                con_fn = con_fn,
+            ).add_activity(
+                activity_per_ct   = activity_data_per_subct,
+                additional_params = additional_evoked_parameters
+            ).network_parameters
+        >>> netp.save(
+                filename=save_filename
+            )
     """
     def __init__(
         self,
         netp: NTParameterSet = None,
-        write_all_celltypes: bool = False
+        embedding_include_all_celltypes: bool = False
     ) -> None:
-        self.network_parameters: NTParameterSet = netp or NTParameterSet(
-            data={
-                "info": {},
-                "network": {},
-                "NMODL_mechanisms": {} # TODO
-        })
+        """
+        Args:
+            netp (:class:`~single_cell_parser.parameters.NTParameterSet`):
+                An existing :ref:`network_parameters_format` object.
+                If not given, a new one is initialized from scratch.
+            embedding_include_all_celltypes (bool): 
+                Whether to write network embedding information for all cell types, even if they are not connected
+                to the postsynaptic cell.
+                Default is False
+        """
+        if netp == None:
+            self.network_parameters: NTParameterSet = NTParameterSet(
+                data={
+                    "info": self._generate_param_info(),
+                    "network": {},
+                    "NMODL_mechanisms": {} # TODO
+            })
+        elif isinstance(netp, NTParameterSet):
+            self.network_parameters = netp
+        elif isinstance(netp, NetworkParamBuilder):
+            self.network_parameters = netp.network_parameters
+        else:
+            raise ValueError(f"Could not instantiate a NetworkParamBuilder from an object of type {type(netp)}")
 
-        self.write_all_celltypes = write_all_celltypes
-        self.contains_network_embedding_data = False
-        self.contains_ongoing_activity_data = False
-        self.contains_synapse_dynamics = False
-        self.contains_evoked_activity_data = False
+        self.write_all_celltypes = embedding_include_all_celltypes
 
+
+    def _generate_param_info(self):
+        from datetime import datetime
+        import getpass
+        return {
+            "date": datetime.today().strftime('%Y-%m-%d'),
+            "name": getpass.getuser()
+        }
 
     def add_network_embedding(
         self,
         syn_fn,
         con_fn=None
         ) -> Self:
+        """Add network embedding data.
+
+        Args:
+            syn_fn (str): Path to the :ref:`syn_file_format` file
+            con_fn (str): Path to the :ref:`con_file_format` file. 
+                If not given, it is assumed it has the same name and location as the :ref:`syn_file_format` file, and only the suffix is different.
+                Default: None.
+        """
         if con_fn is None:
             logger.warning(msg="No .con filename passed. Assuming it has the same name as the .syn file...")
             con_fn = syn_fn[:-3] + "con"  # assume same name.
@@ -80,7 +129,6 @@ class NetworkParamBuilder:
                 })
                 )
 
-        self.contains_network_embedding_data = True
         return self
 
     def subcategorize_celltypes(
@@ -132,6 +180,11 @@ class NetworkParamBuilder:
         ):
         """Add synapse dynamics based on EXC/INH
 
+        Infers if the cell type is excitatory or inhibitory (based on the user configuration), and assigns
+        generic glutamate and GABA-ergic receptors instead.
+
+        See also:
+            :meth:`add_synapse_dynamics`
         """
         if len(self.network_parameters.network.keys()) == 0: raise RuntimeError(
             "No cell types found in the network parameters. Can't infer generic synapse dynamics if I don't know for which cell types. " +
@@ -145,27 +198,31 @@ class NetworkParamBuilder:
 
     def add_synapse_dynamics(
         self,
-        cell_type_synapse_map=None
+        synapse_params_per_ct=None
         ) -> Self:
         """Add synapse dynamics to the :ref:`network_parameters_format`.
 
-        Synapse dynamics parameters must have names that match 
+        Args:
+            synapse_params_per_ct (dict | :class:`~single_cell_parser.parameters.NTParameterSet`):
+                Mapping between cell types and synapse parameters. If none are given, this method 
+                infers if the cell type is excitatory or inhibitory (based on the user configuration), and assigns
+                generic glutamate and GABA-ergic receptors instead.
 
+        See also:
+            :meth:`_add_synapse_dynamics_generic`
         """
-        if cell_type_synapse_map is None:
+        if synapse_params_per_ct is None:
             logger.warning(msg="No cell type specific synapse dynamics passed. Using generic synapse dynamics for excitatory and inhibitory instead. These can be configured in the user config.")
             self._add_synapse_dynamics_generic()
         else:
-            assert isinstance(cell_type_synapse_map, Mapping), "If passing specific synapse dynamics per cell type, please do so as a Mapping (e.g. a dict or NTParameterSet)."
-            self.network_parameters.network.update(other=cell_type_synapse_map)
+            assert isinstance(synapse_params_per_ct, Mapping), "If passing specific synapse dynamics per cell type, please do so as a Mapping (e.g. a dict or NTParameterSet)."
+            self.network_parameters.network.update(other=synapse_params_per_ct)
 
-        self.contains_synapse_dynamics = True
         return self
 
     def add_ongoing_activity(
         self,
-        ongoing_interval_per_ct: Mapping[str, float] = None,  # TODO: default value?
-        **kwargs
+        ongoing_interval_per_ct: Mapping[str, float] = None,
         ) -> Self:
         """Add :ref:`ongoing_activity_data_format` to the :ref:`network_parameters_format`
 
@@ -174,26 +231,10 @@ class NetworkParamBuilder:
         (see :meth:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
 
         Args:
-            ongoing_rates_fn (str): 
-                Filename of a .csv file containing the ongoing firing rates of all cell types. 
-                Cell types must be of the form ``celltype[_<anatomical_area>]``,
-                where ``celltype`` must exist in the configured celltypes, and ``_<anatomical_area>`` is an optional subdivision for these celltypes.
-            includes_anatomical_area (bool): 
-                Whether the :param:`ongoing_rates_fn` specifies ongoing activity per anatomical area or simply per cell type.
-                If true, the cell types in :param:`ongoing_rates_fn` must be of the form ``<cell type>_<anatomical area>``
-                Default is False, i.e. a cell type has the same onoging activity rate, independent of which anatomical area it is located in.
-            kwargs: Additional keyword arguments to pass to :pd:meth:`read_csv`
-
-        Attention:
-            By default, ongoing firing rates are defined per cell type, but **not** per anatomical area (in contrast to e.g. evoked activity). 
-            If you want to specify ongoing activity per anatomical area, remember to set :param:`includes_anatomical_area` to ``True``.
-
-        Attention:
-            Unless specified otherwise, the ongoing firing rates will be read with a tab separator and ``index_col=0`` by default.
-            First column must contain the ongoing rates. Index column must be cell types.
+            ongoing_interval_per_ct (str): Mapping between cell types and their ongoing firing interval in ms
 
         See also:
-            :meth:`add_evoked_activity`
+            :meth:`add_activity` for a general-purpose method of adding activity data.
         """
         for celltype in ongoing_interval_per_ct:
             self.network_parameters.network.update(
@@ -205,8 +246,6 @@ class NetworkParamBuilder:
                             }
                         }
                     }})
-        self.contains_ongoing_activity_data = True
-
         return self
 
     def add_activity(
@@ -222,10 +261,9 @@ class NetworkParamBuilder:
         It is distinct form ongoing activity, which is modeled as a Poisson ``"spiketrain"``.
         
         Args:
-            ct_to_activity_fn_map (dict): 
-                Dictionary mapping cell types to corresponding :ref:`activity_file_format` files, containing activity 
-            key_modify_fun (callable): Function that takes a key and returns it changed.
-            additional_evoked_params (dict | :class:`~single_cell_parser.parameters.NTParameterSet`):
+            activity_per_ct (dict | :class:`~single_cell_parser.parameters.NTParameterSet`): 
+                Mapping between cell types and their corresponding activity data. Can e.g. be read from a :ref:`activity_data_format` file.
+            additional_params (dict | :class:`~single_cell_parser.parameters.NTParameterSet`):
                 Additional parameters to add to the evoked network activity parameters. Useful for e.g. setting a time offset value. 
 
         See also:
