@@ -6,7 +6,7 @@ get_client
 
 .. Signature -------------------------------
 
-.. py:function:: Interface.get_client(ip=None, client_port=38786, timeout=120)
+.. function:: Interface.get_client(ip=None, client_port=38786, timeout=120)
 
 
    Gets the distributed.client object if dask has been setup

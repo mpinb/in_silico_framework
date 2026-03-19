@@ -6,7 +6,7 @@ get_hay_params_pdf
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.specification.get_hay_params_pdf()
+.. function:: biophysics_fitting.hay.specification.get_hay_params_pdf()
 
 
    Get the parameter boundaries used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.

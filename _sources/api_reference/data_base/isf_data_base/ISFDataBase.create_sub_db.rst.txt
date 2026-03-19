@@ -1,13 +1,12 @@
 
 
+create_sub_db
+=============
 
 
+.. Signature -------------------------------
 
-ISFDataBase.create_sub_db
-=========================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.create_sub_db(key, register='as_parent', **kwargs)
+.. function:: data_base.isf_data_base.ISFDataBase.create_sub_db(key, register='as_parent', **kwargs)
 
 
    Creates a database within a database.
@@ -18,13 +17,9 @@ ISFDataBase.create_sub_db
 
    :param key: The key of the sub_db
    :type key: str|tuple
-   :param register: ? TODO. Defaults to 'as_parent'.
-   :type register: str, optional
-   :param raise_: Whether to raise an error if the sub_db already exists. Defaults to True.
-   :type raise_: bool, optional
-   :param \*\*kwargs: overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
-                      Additional kwargs are passed to the dumper.
-   :type \*\*kwargs: dict
+   :param kwargs: overwrite (bool, optional): Whether to overwrite the sub_db if it already exists. Defaults to True.
+                  Additional kwargs are passed to the dumper.
+   :type kwargs: dict
 
    :returns: The newly created sub_db
    :rtype: ISFDataBase

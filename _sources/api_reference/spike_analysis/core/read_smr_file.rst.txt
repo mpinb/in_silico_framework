@@ -6,7 +6,7 @@ read_smr_file
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.read_smr_file(path)
+.. function:: spike_analysis.core.read_smr_file(path)
 
 
    Reads a Spike2 file and returns its content as a neo.core.block.Block object.

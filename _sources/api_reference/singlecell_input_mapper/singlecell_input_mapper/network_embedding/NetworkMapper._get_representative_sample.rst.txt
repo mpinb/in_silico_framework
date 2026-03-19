@@ -1,13 +1,12 @@
 
 
+_get_representative_sample
+==========================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._get_representative_sample
-========================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample(realizationPopulation, populationDistribution)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample(realizationPopulation, populationDistribution)
 
 
    Determine which sample of a population of anatomical realizations

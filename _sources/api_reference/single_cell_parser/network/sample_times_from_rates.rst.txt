@@ -6,12 +6,12 @@ sample_times_from_rates
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network.sample_times_from_rates(bins, rate)
+.. function:: single_cell_parser.network.sample_times_from_rates(bins, rate)
 
 
    Sample spike times from spike rates.
 
-   Used in :py:meth:`~_create_presyn_cells` to generate spike times for a Poisson spike train.
+   Used in :func:`~_create_presyn_cells` to generate spike times for a Poisson spike train.
 
 
 

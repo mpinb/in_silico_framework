@@ -1,0 +1,25 @@
+
+
+_flag_aim_params_success
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._flag_aim_params_success(seed_dir)
+
+
+   Create a flag in the seedpoint directory to indicate that aim parameters have been reached
+   or adjust the flag to indicate how many times the aim parameters have been reached.
+
+   :param seed_dir: directory where the seedpoint is located
+   :type seed_dir: str
+
+   :returns: count of how many times the aim parameters have been reached
+   :rtype: int
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,18 +1,17 @@
 
 
+get_params
+==========
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get_params
-==========================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_params(params)
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get_params(params)
 
 
    Get the modified biophysical parameters.
 
-   Applies each method in :paramref:`params_modify_funs` to the parameter vector.
+   Applies each method in :param:`params_modify_funs` to the parameter vector.
 
    :param params: The parameter vector.
    :type params: pd.Series

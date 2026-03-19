@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ 
 
 
@@ -22,10 +21,11 @@ default_setup
    get_Combiner </api_reference/biophysics_fitting/hay/default_setup/get_Combiner>
    get_fixed_params_example </api_reference/biophysics_fitting/hay/default_setup/get_fixed_params_example>
 
-.. py:module:: biophysics_fitting.hay.default_setup
+.. module:: biophysics_fitting.hay.default_setup
 
 .. autoapi-nested-parse::
    A Python translation of the setup for in silico current injection experiments as described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+
 
 
 
@@ -47,17 +47,19 @@ Functions
    * - :py:obj:`record_Step <biophysics_fitting.hay.default_setup.record_Step>`\ (cell)
      - Extract the voltage trace from the soma.
    * - :py:obj:`get_Simulator <biophysics_fitting.hay.default_setup.get_Simulator>`\ (fixed\_params, step, vInit)
-     - Get a set up :py:class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+     - Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
    * - :py:obj:`interpolate_vt <biophysics_fitting.hay.default_setup.interpolate_vt>`\ (voltage\_trace\_)
      - Interpolate a voltage trace so that is has fixed time interval
    * - :py:obj:`map_truefalse_to_str <biophysics_fitting.hay.default_setup.map_truefalse_to_str>`\ (dict\_)
      - Convert True/False to 'True'/'False' in a dictionary
    * - :py:obj:`get_Evaluator <biophysics_fitting.hay.default_setup.get_Evaluator>`\ (step, vInit, bAP\_kwargs, BAC\_kwargs, StepOne\_kwargs, StepTwo\_kwargs, StepThree\_kwargs, interpolate\_voltage\_trace)
-     - Get a :py:class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
+     - Get a :class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
    * - :py:obj:`get_Combiner <biophysics_fitting.hay.default_setup.get_Combiner>`\ (step, include\_DI3)
-     - Get a set up :py:class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
+     - Get a set up :class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
    * - :py:obj:`get_fixed_params_example <biophysics_fitting.hay.default_setup.get_fixed_params_example>`\ ()
      - Get an example of cell-specific fixed params.
+
+
 
 
 

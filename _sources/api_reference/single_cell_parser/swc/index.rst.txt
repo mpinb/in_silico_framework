@@ -1,0 +1,46 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
+
+
+swc
+===
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   _get_swc_lines_per_section </api_reference/single_cell_parser/swc/_get_swc_lines_per_section>
+   _get_only_child_sections </api_reference/single_cell_parser/swc/_get_only_child_sections>
+   cell_to_swc </api_reference/single_cell_parser/swc/cell_to_swc>
+
+.. module:: single_cell_parser.swc
+
+.. autoapi-nested-parse::
+   Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell_to_swc <single_cell_parser.swc.cell_to_swc>`\ (cell, of, skip\_myelin, remap\_sections)
+     - Write out a cell object to swc format::
+
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

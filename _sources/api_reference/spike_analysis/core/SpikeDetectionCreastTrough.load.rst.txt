@@ -1,13 +1,12 @@
 
 
+load
+====
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.load
-===============================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.load(path, init_reader=False)
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.load(path, init_reader=False)
 
    :staticmethod:
 

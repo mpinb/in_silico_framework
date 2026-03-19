@@ -6,7 +6,7 @@ _convert_con_fns_to_reldb
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_con_fns_to_reldb(con_content, syn_fn_map, con_fn)
+.. function:: data_base.db_initializers.load_simrun_general.filepath_resolution._convert_con_fns_to_reldb(con_content, syn_fn_map, con_fn)
 
 
 

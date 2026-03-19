@@ -6,7 +6,7 @@ BPAPatt
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BPAPatt(t, v_dend, thresh='+2mV', stim_onset=None)
+.. function:: biophysics_fitting.ephys.BPAPatt(t, v_dend, thresh='+2mV', stim_onset=None)
 
 
    Computes the amplitude of the backpropagating action potential (bAP) at the dendrite.

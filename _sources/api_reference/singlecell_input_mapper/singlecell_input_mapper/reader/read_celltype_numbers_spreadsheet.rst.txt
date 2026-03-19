@@ -6,7 +6,7 @@ read_celltype_numbers_spreadsheet
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet(fname)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet(fname)
 
 
    Reads a spreadsheet with cell type numbers for each anatomical area.

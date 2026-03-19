@@ -6,7 +6,7 @@ compute_AP_array
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_AP_array(st, min_time, max_time, fillna=1000, step=1)
+.. function:: data_base.db_initializers.prepare_ANN_batches.compute_AP_array(st, min_time, max_time, fillna=1000, step=1)
 
 
    One-hot encode spike times to a binned time vector.

@@ -6,7 +6,7 @@ STEP_check_2_ISIs
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.STEP_check_2_ISIs(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.STEP_check_2_ISIs(t, v, thresh=None)
 
 
    Check if there are more than 2 ISIs in the trace.

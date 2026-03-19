@@ -6,7 +6,7 @@ get_file_or_folder_that_startswith
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.get_file_or_folder_that_startswith(path, startswith)
+.. function:: data_base.utils.get_file_or_folder_that_startswith(path, startswith)
 
 
    Get the file or folder in a directory that starts with a certain string

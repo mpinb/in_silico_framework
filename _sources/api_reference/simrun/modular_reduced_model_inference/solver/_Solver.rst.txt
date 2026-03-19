@@ -22,14 +22,15 @@ _Solver
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.solver._Solver(name)
+.. class:: simrun.modular_reduced_model_inference.solver._Solver(name)
+
+   Bases: :py:obj:`object`
    
    Solver base class
 
-   Each child must implement the :py:meth:`_setup_optimizer` method.
+   Each child must implement the :func:`_setup_optimizer` method.
 
    :param name: name of the solver
    :type name: str
@@ -50,9 +51,9 @@ _Solver
 
       .. attribute:: strategy
 
-         The strategy object. This is set during :py:meth:`setup`.
+         The strategy object. This is set during :func:`setup`.
 
-         :type: :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`
+         :type: :class:`~simrun.modular_reduced_model_inference.strategy._Strategy`
 
    :Methods:
 

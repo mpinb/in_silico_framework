@@ -6,7 +6,7 @@ _filter_filelist_by_health
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health(filelist, simresult_path, client)
+.. function:: data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health(filelist, simresult_path, client)
 
 
    Filter out simulation results if they can't be reproduced due to missing files.
@@ -16,9 +16,9 @@ _filter_filelist_by_health
    or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
    :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
 
-   This function checks if this is the case, and filters out such results from :paramref:`filelist`
+   This function checks if this is the case, and filters out such results from :param:`filelist`
 
-   :param filelist: List of voltage trace results, relative to :paramref:`simresult_path`.
+   :param filelist: List of voltage trace results, relative to :param:`simresult_path`.
    :type filelist: List
    :param simresult_path: Single path where all simulation results are stored.
    :type simresult_path: str
@@ -28,7 +28,7 @@ _filter_filelist_by_health
    :returns: A filelist of reproducible simulation results.
    :rtype: List
 
-   :raises ValueError: if no simulations in :paramref:`filelist` can be reproduced.
+   :raises ValueError: if no simulations in :param:`filelist` can be reproduced.
 
 
 

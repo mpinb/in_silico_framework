@@ -6,7 +6,7 @@ find_files_and_order_them
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.find_files_and_order_them(files, files_format='.png')
+.. function:: visualize.utils.find_files_and_order_them(files, files_format='.png')
 
 
    Find files in a list of directories or a directory and order them.

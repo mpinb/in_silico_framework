@@ -6,13 +6,13 @@ _read_object_meta_json
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta._read_object_meta_json(meta_fn)
+.. function:: data_base.IO.LoaderDumper.meta._read_object_meta_json(meta_fn)
 
 
    Get the meta of a saved database key in JSON.
 
-   :param savedir: The directory where the meta file is stored.
-   :type savedir: str
+   :param meta_fn: The path of the meta file
+   :type meta_fn: str
 
    :returns: The metadata of the saved object.
    :rtype: pd.DataFrame

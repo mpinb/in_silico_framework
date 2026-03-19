@@ -6,7 +6,7 @@ _get_sim_trial_index_from_simresult_dir
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing._get_sim_trial_index_from_simresult_dir(prefix, dir_path, check_n_traces=None)
+.. function:: data_base.db_initializers.load_simrun_general.data_parsing._get_sim_trial_index_from_simresult_dir(prefix, dir_path, check_n_traces=None)
 
 
 

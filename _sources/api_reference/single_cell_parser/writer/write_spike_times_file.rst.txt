@@ -6,7 +6,7 @@ write_spike_times_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_spike_times_file(fname=None, spikeTimes=None)
+.. function:: single_cell_parser.writer.write_spike_times_file(fname=None, spikeTimes=None)
 
 
    Write trial numbers and all spike times in each trial (may be empty).
@@ -16,7 +16,7 @@ write_spike_times_file
    :param spikeTimes: A dictionary with trial numbers as keys (int) and tuples of spike times in each trial as values.
    :type spikeTimes: dict
 
-   :returns: None. Writes out the spike times file to :paramref:`fname`.
+   :returns: None. Writes out the spike times file to :param:`fname`.
 
    .. rubric:: Example
       :class: example

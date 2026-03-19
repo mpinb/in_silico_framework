@@ -1,0 +1,36 @@
+
+
+shared_array_from_disk
+======================
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.shared_array_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
+
+
+   Loads a numpy array from disk and puts it into shared memory
+
+   :param path: Path to the file on disk.
+   :type path: str
+   :param shape: Shape of the array.
+   :type shape: tuple, optional
+   :param dtype: Data type of the array.
+   :type dtype: str, optional
+   :param name: Name of the shared memory block.
+                To be passed to :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
+                Default: None.
+   :type name: str, optional
+   :param start_row: The starting row of the array. Default: None.
+   :type start_row: int, optional
+   :param end_row: The ending row of the array. Default: None.
+   :type end_row: int, optional
+
+   :returns: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

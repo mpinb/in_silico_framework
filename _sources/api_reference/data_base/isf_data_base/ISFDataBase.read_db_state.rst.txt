@@ -1,13 +1,12 @@
 
 
+read_db_state
+=============
 
 
+.. Signature -------------------------------
 
-ISFDataBase.read_db_state
-=========================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.read_db_state()
+.. function:: data_base.isf_data_base.ISFDataBase.read_db_state()
 
 
    Sets the state of the database according to ``db_state.json``

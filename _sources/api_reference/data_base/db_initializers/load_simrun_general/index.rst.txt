@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ 
 
 
@@ -13,6 +12,7 @@ load_simrun_general
    :hidden:
 
    builders </api_reference/data_base/db_initializers/load_simrun_general/builders/index>  
+   config </api_reference/data_base/db_initializers/load_simrun_general/config/index>  
    data_parsing </api_reference/data_base/db_initializers/load_simrun_general/data_parsing/index>  
    file_handling </api_reference/data_base/db_initializers/load_simrun_general/file_handling/index>  
    filepath_resolution </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/index>  
@@ -27,16 +27,16 @@ load_simrun_general
    optimize </api_reference/data_base/db_initializers/load_simrun_general/optimize>
    load_initialized_cell_and_evokedNW_from_db </api_reference/data_base/db_initializers/load_simrun_general/load_initialized_cell_and_evokedNW_from_db>
 
-.. py:module:: data_base.db_initializers.load_simrun_general
+.. module:: data_base.db_initializers.load_simrun_general
 
 .. autoapi-nested-parse::
-   Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
+   Parse :ref:`simresult_dir_format` generated with :mod:`simrun` and write to a :class:`data_base.DataBase`
 
-   The output format of :py:mod:`simrun` are :ref:`simresult_dir_format`: a nested folder structure with ``.csv`` and/or ``.npz`` files.
+   The output format of :mod:`simrun` are :ref:`simresult_dir_format`: a nested folder structure with ``.csv`` and/or ``.npz`` files.
    This module provides functions to gather and parse this data to pandas and dask dataframes. It merges all trials in a single dataframe.
    This saves IO time, disk space, and is strongly recommended for HPC systems and other shared filesystems in general, as it reduces the amount of inodes required.
 
-   After running :py:meth:`~data_base.db_initializers.load_simrun_general.init`, a database is created containing
+   After running :func:`~data_base.db_initializers.load_simrun_general.init`, a database is created containing
    the following keys:
 
    .. list-table::
@@ -45,7 +45,7 @@ load_simrun_general
        * - Key
          - Description
        * - ``simresult_path``
-         - Filepath to the raw simulation output of :py:mod:`simrun`
+         - Filepath to the raw simulation output of :mod:`simrun`
        * - ``filelist``
          - List containing paths to all original somatic voltage trace files.
        * - ``sim_trial_index``
@@ -55,10 +55,10 @@ load_simrun_general
        * - ``voltage_traces``
          - Dask dataframe containing the somatic voltage traces
        * - ``parameterfiles_cell_folder``
-         - A :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
+         - A :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
            containing the :ref:`cell_parameters_format` file, renamed to its file hash.
        * - ``parameterfiles_network_folder``
-         - A :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
+         - A :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
            containing the :ref:`network_parameters_format` file, renamed to its file hash.
        * - ``parameterfiles``
          - A pandas dataframe containing the original paths of the parameter files and their hashes.
@@ -75,6 +75,45 @@ load_simrun_general
        * - ``spike_times``
          - Dask dataframe containing the spike times of the postsynaptic cell for all trials.
 
+
+   If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
+   If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
+   This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
+   Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling
+   :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
+   keys.
+
+   Example::
+
+       >>> paramfile_copy_config = {
+       ...     "copy_method": "remount",
+       ...     "neup" : "parameterfiles_folder",
+       ...     "netp" : "parameterfiles_folder",
+       ...     "hoc" : "morphology_folder",
+       ...     "syn" : "parameterfiles_folder",
+       ...     "con" : "parameterfiles_folder",
+       ...     "recsites" : "parameterfiles_folder"
+       ... }
+       >>> simresult_path = '/path/to/raw/simrun/output/folder'
+       >>> db = I.DataBase("db_parsed_data")
+       >>> client = distributed.Client("localhost:8786")
+       >>> I.db_init_simrun_general.init(
+       ... db = db,
+       ... simresult_path = p,
+       ... core = True,
+       ... repartition = 500,
+       ... parameterfiles = True,
+       ... synapse_activation = True,
+       ... n_chunks = 5000,
+       ... dendritic_voltage_traces = True,
+       ... spike_times = True,
+       ... dendritic_spike_times = False,
+       ... rewrite_in_optimized_format = True,
+       ... client = client,
+       ... check_health = True,
+       ... paramfile_copy_config = paramfile_copy_config
+       ... )
+
    After initialization, you can access the data from the data_base in the following manner::
 
        >>> db['synapse_activation']
@@ -86,16 +125,17 @@ load_simrun_general
        >>> db['spike_times']
        <spike times dataframe>
 
-   If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :py:mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
+   If you intialize the database with ``rewrite_in_optimized_format=True`` (default), the keys are written as dask dataframes to whichever format is configured as the optimized format (see :mod:`~data_base.isf_data_base.db_initializers.load_simrun_general.config`).
    If ``rewrite_in_optimized_format=False`` instead, these keys are pickled dask dataframes, containing the instructions to build the dataframe, not the data itself.
    This is useful for fast intermediate analysis, but strongly discouraged for long term storage, since these instructions contain absolute paths to the original data files, which invalidates once they are moved or deleted.
    Individual keys can afterwards be set to permanent, self-contained and efficient dask dataframes by calling
-   :py:meth:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
+   :func:`~data_base.db_initializers.load_simrun_general.load_simrun_general.optimize` on specific database
    keys.
 
-   .. seealso:: :ref:`simresult_dir_format` for more information on the raw output format of :py:mod:`simrun`.
+   .. seealso:: :ref:`simresult_dir_format` for more information on the raw output format of :mod:`simrun`.
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
+   .. seealso:: :func:`~data_base.db_initializers.load_simrun_general.init` for the initialization of the database.
+
 
 
 
@@ -110,7 +150,7 @@ Functions
    :widths: auto
    :class: summarytable
    
-   * - :py:obj:`init <data_base.db_initializers.load_simrun_general.init>`\ (db, simresult\_path, core, synapse\_activation, dendritic\_voltage\_traces, parameterfiles, spike\_times, repartition, scheduler, rewrite\_in\_optimized\_format, dendritic\_spike\_times, dendritic\_spike\_times\_threshold, client, check\_health, n\_chunks, voltage\_traces, burst\_times, dumper, paramfile\_copy\_config)
+   * - :py:obj:`init <data_base.db_initializers.load_simrun_general.init>`\ (db, simresult\_path, core, synapse\_activation, dendritic\_voltage\_traces, parameterfiles, spike\_times, repartition, scheduler, rewrite\_in\_optimized\_format, dendritic\_spike\_times, dendritic\_spike\_times\_threshold, client, check\_health, n\_chunks, paramfile\_copy\_config, voltage\_traces, burst\_times, dumper)
      - Initialize a database with simulation data.
    * - :py:obj:`add_dendritic_voltage_traces <data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces>`\ (db, rewrite\_in\_optimized\_format, dendritic\_spike\_times, repartition, dendritic\_spike\_times\_threshold, scheduler, client)
      - Add dendritic voltage traces to the database.
@@ -120,6 +160,23 @@ Functions
      - Rewrite existing data with a new dumper.
    * - :py:obj:`load_initialized_cell_and_evokedNW_from_db <data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db>`\ (db, sti, allPoints, reconnect\_synapses)
      - Load and set up the cell and network from the database.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.db_initializers.load_simrun_general.logger>`
+     - \-
+   * - :py:obj:`DEFAULT_PARAMFILE_COPY_CONFIG <data_base.db_initializers.load_simrun_general.DEFAULT_PARAMFILE_COPY_CONFIG>`
+     - \-
 
 
 .. rst-class:: absolute-paragraph
@@ -134,7 +191,9 @@ Modules
    :class: summarytable
    
    * - :py:obj:`builders <data_base.db_initializers.load_simrun_general.builders>`
-     - Pipelines for building database keys containing results from :py:mod:`simrun`.
+     - Pipelines for building database keys containing results from :mod:`simrun`.
+   * - :py:obj:`config <data_base.db_initializers.load_simrun_general.config>`
+     - Central configuration for simrun-initializing databases.
    * - :py:obj:`data_parsing <data_base.db_initializers.load_simrun_general.data_parsing>`
      - \-
    * - :py:obj:`file_handling <data_base.db_initializers.load_simrun_general.file_handling>`
@@ -151,6 +210,7 @@ Modules
      - Re-optimize a database with a new dumper
    * - :py:obj:`utils <data_base.db_initializers.load_simrun_general.utils>`
      - \-
+
 
 
 .. container:: doc-feedback

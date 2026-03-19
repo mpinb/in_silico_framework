@@ -11,22 +11,23 @@ Synapse
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.Synapse(edgeID, edgePtID, edgex, preCellType='', postCellType='')
+.. class:: singlecell_input_mapper.singlecell_input_mapper.cell.Synapse(edgeID, edgePtID, edgex, preCellType='', postCellType='')
+
+   Bases: :py:obj:`object`
    
    Leightweight dataclass to store basic synapse information.
 
-   Synapses are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` objects,
-   which in turn are direct attributes of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` objects.
+   Synapses are direct attributes of :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2` objects,
+   which in turn are direct attributes of :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell` objects.
    Contains information on: pre- and postsynaptic cell type, branch ID of postsynaptic cell, branch pt ID,
    and xyz-coordinates of synapse location
 
    .. seealso::
 
-      This is not the same class as :py:class:`single_cell_parser.synapse.Synapse`.
-      This is a leightweight dataclass specialized for use with :py:mod:`single_cell_input_mapper.synapse_mapper`,
+      This is not the same class as :class:`single_cell_parser.synapse.Synapse`.
+      This is a leightweight dataclass specialized for use with :mod:`single_cell_input_mapper.synapse_mapper`,
       and does not contain any methods for NEURON API or synapse activations during simulations.
 
    :param edgeID: Section ID.
@@ -70,7 +71,7 @@ Synapse
 
          Presynaptic cell.
 
-         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PointCell`
 
       .. attribute:: postCellType
 

@@ -6,7 +6,7 @@ _is_running_on_dask_worker
 
 .. Signature -------------------------------
 
-.. py:function:: Interface._is_running_on_dask_worker()
+.. function:: Interface._is_running_on_dask_worker()
 
 
 

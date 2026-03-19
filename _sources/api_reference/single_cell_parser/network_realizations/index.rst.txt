@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -15,12 +14,13 @@ network_realizations
    create_synapse_realization </api_reference/single_cell_parser/network_realizations/create_synapse_realization>
    create_functional_network </api_reference/single_cell_parser/network_realizations/create_functional_network>
 
-.. py:module:: single_cell_parser.network_realizations
+.. module:: single_cell_parser.network_realizations
 
 .. autoapi-nested-parse::
    Create anatomical and functional network realizations.
 
-   For more fine-grained control over the creation of anatomical network realizations, please refer to :py:mod:`singlecell_input_mapper.singlecell_input_mapper`.
+   For more fine-grained control over the creation of anatomical network realizations, please refer to :mod:`singlecell_input_mapper.singlecell_input_mapper`.
+
 
 
 
@@ -39,6 +39,8 @@ Functions
      - Create a synapse realization from a :ref:`network_parameters_format` file.
    * - :py:obj:`create_functional_network <single_cell_parser.network_realizations.create_functional_network>`\ (cellParamName, nwParamName)
      - Create fixed functional connectivity based on ``convergence``.
+
+
 
 
 

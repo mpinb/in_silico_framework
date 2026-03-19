@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_ISIn.setup
-====================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_ISIn.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_ISIn.setup(spike_times_analysis)
 
 
    Sets up the analysis: Computes the inter spike interval (ISI) to the next, second next, nth spike.

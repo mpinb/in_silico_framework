@@ -6,7 +6,7 @@ get_locking_client
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock.get_locking_client()
+.. function:: data_base.distributed_lock.get_locking_client()
 
 
    Get the locking client

@@ -6,7 +6,7 @@ postfun
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.postfun(s, maxtime=None)
+.. function:: data_base.db_initializers.synapse_activation_binning.postfun(s, maxtime=None)
 
 
    Postprocess a column of the binned synapse activations.
@@ -22,7 +22,7 @@ postfun
    :returns: The processed column of synapse activations.
    :rtype: numpy.array
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.init`
+   .. seealso:: :func:`~data_base.db_initializers.init`
 
 
 

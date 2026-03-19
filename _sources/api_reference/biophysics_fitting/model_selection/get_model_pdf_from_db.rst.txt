@@ -6,7 +6,7 @@ get_model_pdf_from_db
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.model_selection.get_model_pdf_from_db(db)
+.. function:: biophysics_fitting.model_selection.get_model_pdf_from_db(db)
 
 
    Get a DataFrame with all models from the database.

@@ -1,13 +1,12 @@
 
 
+BAC_caSpike_height
+==================
 
 
+.. Signature -------------------------------
 
-BAC.BAC_caSpike_height
-======================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_height(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_height(voltage_traces)
 
 
    Get the height of the calcium spike in the dendritic voltage trace.
@@ -23,7 +22,7 @@ BAC.BAC_caSpike_height
                  and ``".raw"`` to the height of the calcium spike in the dendritic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:func:`BAC_caSpike_height`
+   .. seealso:: :func:`BAC_caSpike_height`
 
 
 

@@ -6,7 +6,7 @@ spike_in_interval
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.spike_detection.spike_in_interval(st, tmin, tmax)
+.. function:: data_base.analyze.spike_detection.spike_in_interval(st, tmin, tmax)
 
 
    Check whether each trial contains at least one spike within the specified interval
@@ -25,7 +25,7 @@ spike_in_interval
        [False, True, True]
 
    :returns:  1D array of boolean values, indicating whether each trial contains at least one spike within the specified interval.
-   :rtype: :py:class:``~numpy.array``
+   :rtype: :class:``~numpy.array``
 
 
 

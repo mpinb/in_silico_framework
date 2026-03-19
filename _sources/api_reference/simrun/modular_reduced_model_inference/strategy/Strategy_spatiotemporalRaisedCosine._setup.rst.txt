@@ -1,13 +1,12 @@
 
 
+_setup
+======
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine._setup
-==========================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._setup()
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._setup()
 
 
    Compute the strategy's basis vectors and set up the objective function.

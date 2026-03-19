@@ -1,13 +1,12 @@
 
 
+show
+====
 
 
+.. Signature -------------------------------
 
-SimControl.show
-===============
-
-
-.. py:method:: single_cell_parser.sim_control.SimControl.show()
+.. function:: single_cell_parser.sim_control.SimControl.show()
 
 
    Plot the voltage trace.

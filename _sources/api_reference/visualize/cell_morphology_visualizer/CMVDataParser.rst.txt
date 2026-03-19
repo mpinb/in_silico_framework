@@ -26,22 +26,23 @@ CMVDataParser
    _calc_synapses_timeseries <CMVDataParser._calc_synapses_timeseries>
    _get_timeseries_minmax <CMVDataParser._get_timeseries_minmax>
    _update_times_to_show <CMVDataParser._update_times_to_show>
-   _calc_scalar_data_from_keyword <CMVDataParser._calc_scalar_data_from_keyword>
+   _calc_scalar_data <CMVDataParser._calc_scalar_data>
+   _get_scalar_data <CMVDataParser._get_scalar_data>
    _keyword_is_scalar_data <CMVDataParser._keyword_is_scalar_data>
    _get_color_per_section <CMVDataParser._get_color_per_section>
    scale_diameter <CMVDataParser.scale_diameter>
    set_cmap <CMVDataParser.set_cmap>
+   update_cmap <CMVDataParser.update_cmap>
 
 
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.cell_morphology_visualizer.CMVDataParser(cell, align_trunk=True, t_start=None, t_stop=None, t_step=None)
+.. class:: visualize.cell_morphology_visualizer.CMVDataParser(cell, align_trunk=True, t_start=None, t_stop=None, t_step=None)
    
-   Parse data from a :py:class:`~single_cell_parser.cell.Cell` object to a format that is easier to work with for visualization purposes.
+   Parse data from a :class:`~single_cell_parser.cell.Cell` object to a format that is easier to work with for visualization purposes.
 
    :param cell: Cell object
    :type cell: ~single_cell_parser.cell.Cell
@@ -60,7 +61,7 @@ CMVDataParser
 
          Cell object
 
-         :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :class:`~single_cell_parser.cell.Cell`
 
       .. attribute:: line_pairs
 
@@ -72,7 +73,7 @@ CMVDataParser
 
          Soma of the cell.
 
-         :type: :py:class:`~single_cell_parser.cell.Section`
+         :type: :class:`~single_cell_parser.cell.Section`
 
       .. attribute:: soma_center
 
@@ -186,7 +187,7 @@ CMVDataParser
 
       .. attribute:: times_to_show
 
-         An array of time points to visualize. Gets calculated from :paramref:`self.t_start`, :paramref:`self.t_stop` and :paramref:`self.t_step`.
+         An array of time points to visualize. Gets calculated from :param:`self.t_start`, :param:`self.t_stop` and :param:`self.t_step`.
 
          :type: np.ndarray
 
@@ -207,7 +208,7 @@ CMVDataParser
 
       .. attribute:: synapses_timeseries
 
-         List containing the synapse activations during a timeseries (Similarly to :paramref:`voltage_timeseries`).
+         List containing the synapse activations during a timeseries (Similarly to :param:`voltage_timeseries`).
          Each element corresponds to a time point.
          Each element is a dictionary where each key is the type of input population and the value is the list of active synapses for that type of population at that time point.
          The list contains the 3d coordinates where each active synapse is located. None means it has no simulation data.
@@ -217,7 +218,7 @@ CMVDataParser
 
       .. attribute:: ion_dynamics_timeseries
 
-         Dictionary containing the ion dynamics during a timeseries (Similarly to :paramref:`voltage_timeseries`).
+         Dictionary containing the ion dynamics during a timeseries (Similarly to :param:`voltage_timeseries`).
          Each value is a list corresponding where each element corresponds 1 timepoint, containing per-point info on the ion channel state or ion concentration.
          None means it has no simulation data.
          Empty means it has simulation data that has not been initialized yet.
@@ -253,27 +254,31 @@ CMVDataParser
       * - :py:obj:`_get_ion_dynamics_at_timepoint <visualize.cell_morphology_visualizer.CMVDataParser._get_ion_dynamics_at_timepoint>`\ (time\_point, ion\_keyword)
         - Retrieves the ion dynamics along the whole cell morphology from cell object at a particular time point.
       * - :py:obj:`_calc_voltage_timeseries <visualize.cell_morphology_visualizer.CMVDataParser._calc_voltage_timeseries>`\ ()
-        - Retrieves voltage data along the whole cell body during a set of time points (specified in :paramref:`self.times_to_show`).
+        - Retrieves voltage data along the whole cell body during a set of time points (specified in :param:`self.times_to_show`).
       * - :py:obj:`_calc_ion_dynamics_timeseries <visualize.cell_morphology_visualizer.CMVDataParser._calc_ion_dynamics_timeseries>`\ (ion\_keyword)
         - Retrieves ion dynamics info along the whole cell body during a set of time points (specified in self.times_to_show).
       * - :py:obj:`_get_synapses_at_timepoint <visualize.cell_morphology_visualizer.CMVDataParser._get_synapses_at_timepoint>`\ (time\_point)
         - Retrieves the active synapses at a particular time point.
       * - :py:obj:`_calc_synapses_timeseries <visualize.cell_morphology_visualizer.CMVDataParser._calc_synapses_timeseries>`\ ()
-        - Retrieves the active synapses during a set of time points (specified in :paramref:`times_to_show`).
+        - Retrieves the active synapses during a set of time points (specified in :param:`times_to_show`).
       * - :py:obj:`_get_timeseries_minmax <visualize.cell_morphology_visualizer.CMVDataParser._get_timeseries_minmax>`\ (timeseries)
         - Get the min and max values of a timeseries that is nested per section and timepoint.
       * - :py:obj:`_update_times_to_show <visualize.cell_morphology_visualizer.CMVDataParser._update_times_to_show>`\ (t\_start, t\_stop, t\_step)
         - Checks if the specified time range equals the previously defined one. If not, updates the time range.
-      * - :py:obj:`_calc_scalar_data_from_keyword <visualize.cell_morphology_visualizer.CMVDataParser._calc_scalar_data_from_keyword>`\ (keyword, time\_point, return\_as\_color, color\_dict)
+      * - :py:obj:`_calc_scalar_data <visualize.cell_morphology_visualizer.CMVDataParser._calc_scalar_data>`\ (keyword)
+        - Updates the scalar data according to some keyword (ion dynamics or membrane voltage).
+      * - :py:obj:`_get_scalar_data <visualize.cell_morphology_visualizer.CMVDataParser._get_scalar_data>`\ (keyword, time\_point, return\_as\_color, color\_dict)
         - Returns a scalar data array based on some keyword (ion dynamics or membrane voltage).
       * - :py:obj:`_keyword_is_scalar_data <visualize.cell_morphology_visualizer.CMVDataParser._keyword_is_scalar_data>`\ (keyword)
         - Check if a keyword is a scalar data type.
       * - :py:obj:`_get_color_per_section <visualize.cell_morphology_visualizer.CMVDataParser._get_color_per_section>`\ (array, nan\_color)
-        - Given an array of scalar values of length n_points, bin them per section and assign a color according to :paramref:`scalar_mappable`.
+        - Given an array of scalar values of length n_points, bin them per section and assign a color according to :param:`scalar_mappable`.
       * - :py:obj:`scale_diameter <visualize.cell_morphology_visualizer.CMVDataParser.scale_diameter>`\ (scale\_func)
         - Scale the diameter of the visualization with a scaling function.
       * - :py:obj:`set_cmap <visualize.cell_morphology_visualizer.CMVDataParser.set_cmap>`\ (cmap, vmin, vmax)
         - Update the colormap, vmin, and vmax of the visualization.
+      * - :py:obj:`update_cmap <visualize.cell_morphology_visualizer.CMVDataParser.update_cmap>`\ (keyword)
+        - Update the currently used cmap based on a keyword
 
 
 .. container:: doc-feedback

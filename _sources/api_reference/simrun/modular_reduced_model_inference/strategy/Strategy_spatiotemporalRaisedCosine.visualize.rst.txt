@@ -1,26 +1,25 @@
 
 
+visualize
+=========
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine.visualize
-=============================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize(optimizer_output, only_successful=False, normalize=True)
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize(optimizer_output, only_successful=False, normalize=True)
 
 
    Plot the basis functions.
 
    .. attention::
 
-      These are the same basis functions as in :py:class:`RaisedCosineBasis`.
-      These are thus not multiplied with the synapse activation data, as is the case with :paramref:`basis`.
+      These are the same basis functions as in :class:`RaisedCosineBasis`.
+      These are thus not multiplied with the synapse activation data, as is the case with :param:`basis`.
 
    :param optimizer_output: An array of optimizer outputs. usually one element per data split.
    :type optimizer_output: List[scipy.optimize.OptimizeResult]
-   :param only_succesful: Whether to only plot the successful optimizer outputs. Default is ``False``.
-   :type only_succesful: bool
+   :param only_successful: Whether to only plot the successful optimizer outputs. Default is ``False``.
+   :type only_successful: bool
    :param normalize: Whether to normalize the basis functions. Default is ``True``.
    :type normalize: bool
 

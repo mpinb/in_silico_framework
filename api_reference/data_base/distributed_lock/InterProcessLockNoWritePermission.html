@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -638,26 +638,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission-parameters" class="md-nav__link">
-    <span class="md-ellipsis">Parameters</span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path" class="md-nav__link">
-    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path (Python parameter) — path to check." class="md-ellipsis">path</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission-attributes" class="md-nav__link">
     <span class="md-ellipsis">Attributes</span>
   </a>
@@ -1027,6 +1007,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1150,26 +1145,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission-parameters" class="md-nav__link">
-    <span class="md-ellipsis">Parameters</span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path" class="md-nav__link">
-    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path (Python parameter) — path to check." class="md-ellipsis">path</span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#data_base.distributed_lock.InterProcessLockNoWritePermission-attributes" class="md-nav__link">
     <span class="md-ellipsis">Attributes</span>
   </a>
@@ -1236,14 +1211,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../index.html#module-data_base" title="data_base (Python module)"><span class="sig-name descname"><span class="pre">data_base</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-data_base.distributed_lock" title="data_base.distributed_lock (Python module)"><span class="sig-name descname"><span class="pre">distributed_lock</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">InterProcessLockNoWritePermission</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path" title="data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path (Python parameter) — path to check."><span class="n"><span class="pre">path</span></span></a></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.distributed_lock.InterProcessLockNoWritePermission" title="Link to this definition">¶</a></dt>
 <dd><p>Check if the target file or directory has write access, and only lock it if so.</p>
 <p>If the user has write permissions to the path, then locking is necessary. Otherwise not, and lock acquire returns True without a lock</p>
-<dl class="field-list simple">
-<dt class="field-odd" id="data_base.distributed_lock.InterProcessLockNoWritePermission-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.distributed_lock.InterProcessLockNoWritePermission-parameters" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path"><span class="sig-name descname">path</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#data_base.distributed_lock.InterProcessLockNoWritePermission.__init__.path" title="Permalink to this definition">¶</a></dt><dd><p>path to check.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://fasteners.readthedocs.io/en/latest/guide/inter_process/">Fasteners InterProcessLock</a></p>
@@ -1273,10 +1240,10 @@
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="InterProcessLockNoWritePermission.acquire.html#data_base.distributed_lock.InterProcessLockNoWritePermission.acquire" title="data_base.distributed_lock.InterProcessLockNoWritePermission.acquire (Python method) — Acquire the lock on a path if the user has write permissions."><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquire</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="InterProcessLockNoWritePermission.acquire.html#data_base.distributed_lock.InterProcessLockNoWritePermission.acquire" title="data_base.distributed_lock.InterProcessLockNoWritePermission.acquire (Python function) — Acquire the lock on a path if the user has write permissions."><code class="xref py py-obj docutils literal notranslate"><span class="pre">acquire</span></code></a>()</p></td>
 <td><p>Acquire the lock on a path if the user has write permissions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="InterProcessLockNoWritePermission.release.html#data_base.distributed_lock.InterProcessLockNoWritePermission.release" title="data_base.distributed_lock.InterProcessLockNoWritePermission.release (Python method) — Release the lock on a path if it was acquired."><code class="xref py py-obj docutils literal notranslate"><span class="pre">release</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="InterProcessLockNoWritePermission.release.html#data_base.distributed_lock.InterProcessLockNoWritePermission.release" title="data_base.distributed_lock.InterProcessLockNoWritePermission.release (Python function) — Release the lock on a path if it was acquired."><code class="xref py py-obj docutils literal notranslate"><span class="pre">release</span></code></a>()</p></td>
 <td><p>Release the lock on a path if it was acquired.</p></td>
 </tr>
 </tbody>
@@ -1323,13 +1290,13 @@
       
       
         
-        <a href="InterProcessLockNoWritePermission.acquire.html" class="md-footer__link md-footer__link--next" aria-label="Next: InterProcessLockNoWritePermission.acquire" rel="next">
+        <a href="InterProcessLockNoWritePermission.acquire.html" class="md-footer__link md-footer__link--next" aria-label="Next: acquire" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              InterProcessLockNoWritePermission.acquire
+              acquire
             </div>
           </div>
           <div class="md-footer__button md-icon">

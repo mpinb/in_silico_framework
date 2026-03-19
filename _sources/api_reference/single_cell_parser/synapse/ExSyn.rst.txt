@@ -19,10 +19,11 @@ ExSyn
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.synapse.ExSyn(edgeID, edgePtID, preCellType='', postCellType='')
+.. class:: single_cell_parser.synapse.ExSyn(edgeID, edgePtID, preCellType='', postCellType='')
+
+   Bases: :py:obj:`Synapse`
    
    Simple excitatory synapse.
 
@@ -32,9 +33,9 @@ ExSyn
    :type edgeID: int
    :param edgePtID: ID of attached point in cell.sections[edgeID].pts
    :type edgePtID: int
-   :param preCellType: reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param preCellType: reference to presynaptic :class:`~single_cell_parser.cell.PointCell`
    :type preCellType: str
-   :param postCellType: reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param postCellType: reference to postsynaptic :class:`~single_cell_parser.cell.PointCell`
    :type postCellType: str
 
    :Attributes:

@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="_static/sphinx_paramlinks.css" />
@@ -1027,11 +1027,11 @@ to each synapse. ISF’s workflow is designed to create these files in tandem, s
 <h2 id="param"><span id="param-file-format"></span>.param<a class="headerlink" href="#param" title="Link to this heading">¶</a></h2>
 <p>ISF custom file format to save JSON-like ASCII data for cell parameters, network parameters, and activity data.
 The <code class="docutils literal notranslate"><span class="pre">.param</span></code> format is valid Python code, but differs from JSON, as it allows trailing comma’s, single quotes, and tuples. JSON does not.
-All <code class="docutils literal notranslate"><span class="pre">.param</span></code> files can be read using <code class="xref py py-mod docutils literal notranslate"><span class="pre">single_cell_parser.build_parameters</span></code>. However, specific files that use this format have more
-specialized readers, which provide additional for <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> and <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a>.</p>
-<p>Both the <a class="reference internal" href="#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> and the <a class="reference internal" href="#network-parameters-format"><span class="std std-ref">Network parameters</span></a> are used as inputs for multi-scale simulations using <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a>.</p>
+<code class="docutils literal notranslate"><span class="pre">.param</span></code> files can be read using <a class="reference internal" href="api_reference/single_cell_parser/parameters/build_parameters.html#single_cell_parser.parameters.build_parameters" title="single_cell_parser.parameters.build_parameters (Python function) — Read in a param_file_format file and return a NTParameterSet object."><code class="xref py py-mod docutils literal notranslate"><span class="pre">build_parameters</span></code></a>.</p>
 <dl class="simple">
 <dt>See also:</dt><dd><p><a class="reference internal" href="api_reference/simrun/parameters_to_cell/index.html#module-simrun.parameters_to_cell" title="simrun.parameters_to_cell (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.parameters_to_cell</span></code></a> to rerun a simulation from these parameterfiles.</p>
+</dd>
+<dt>See also:</dt><dd><p><a class="reference internal" href="api_reference/single_cell_parser/parameters/build_parameters.html#single_cell_parser.parameters.build_parameters" title="single_cell_parser.parameters.build_parameters (Python function) — Read in a param_file_format file and return a NTParameterSet object."><code class="xref py py-mod docutils literal notranslate"><span class="pre">build_parameters</span></code></a> to read these parameterfiles.</p>
 </dd>
 </dl>
 <h3 id="cell-parameters"><span id="cell-parameters-format"></span>Cell parameters<a class="headerlink" href="#cell-parameters" title="Link to this heading">¶</a></h3>
@@ -1159,7 +1159,7 @@ For example, for an AMPA synapse, this could be the decay time constant, the fac
 </tbody>
 </table>
 <dl class="simple">
-<dt>See also:</dt><dd><p>The receptor parameters are used for NEURON’s <a class="reference external" href="https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html#NetCon.threshold">NetCon</a>.</p>
+<dt>See also:</dt><dd><p>The receptor parameters are used for NEURON’s <a class="reference external" href="https://www.neuron.yale.edu/neuron/static/py_doc/modelspec/programmatic/network/netcon.html#NetCon">NetCon</a>.</p>
 </dd>
 </dl>
 <p>Example:</p>
@@ -1232,7 +1232,8 @@ one file of dendritic <a class="reference internal" href="#voltage-traces-format
 <p>The voltage traces are written to a single <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file (since the amount of timesteps is known in advance, at least for non-variable timesteps),
 but the synapse and cell activation data is written to a separate file for each simulation trial (the amount
 of spikes and synapse activations is not known in advance).</p>
-<p>The amount of simulation runs per parameter configuration (i.e. the <code class="xref py py-paramref docutils literal notranslate"><span class="pre">nSweeps</span></code> keyword argument in any simrun function) corresponds
+<p>The amount of simulation runs per parameter configuration (i.e. the product of <a class="reference internal" href="api_reference/simrun/run_new_simulations/run_new_simulations.html#simrun.run_new_simulations.run_new_simulations.nSweeps" title="simrun.run_new_simulations.run_new_simulations.nSweeps (Python parameter) — Number of simulations to run per process with these parameters. Trial-to-trial variability is introduced by the random seed in terms of different network activity and connectivity realizations (see create_saved_network2())."><code class="xref py py-param docutils literal notranslate"><span class="pre">nSweeps</span></code></a>
+and <a class="reference internal" href="api_reference/simrun/run_new_simulations/run_new_simulations.html#simrun.run_new_simulations.run_new_simulations.nprocs" title="simrun.run_new_simulations.run_new_simulations.nprocs (Python parameter) — Number of parallel processes to run."><code class="xref py py-param docutils literal notranslate"><span class="pre">nprocs</span></code></a> keyword arguments in any simrun function) corresponds
 to:</p>
 <ul class="simple">
 <li><p>The amount of voltage columns in the <a class="reference internal" href="#voltage-traces-format"><span class="std std-ref">Voltage traces</span></a> files</p></li>
@@ -1240,7 +1241,7 @@ to:</p>
 <li><p>The amount of <a class="reference internal" href="#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a> files</p></li>
 </ul>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code>$ user@host:/path/to/results/20241212-1542_seed379159821_pid209402$ ls | column
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>user@host:/path/to/results/20241212-1542_seed379159821_pid209402$<span class="w"> </span>ls<span class="w"> </span><span class="p">|</span><span class="w"> </span>column
 hostname_somacpu042
 seed379159821_pid209402_network_model.param
 seed379159821_pid209402_neuron_model.param
@@ -1260,13 +1261,13 @@ simulation_run0004_synapses.csv
 </code></pre></div>
 </div>
 <dl class="simple">
-<dt>See also:</dt><dd><p>The <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> functions used to prouce these simulation results (and their <cite>nSweeps</cite> keyword argument, as mentioned above):</p>
+<dt>See also:</dt><dd><p>The <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> functions used to produce these simulation results:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="api_reference/simrun/run_new_simulations/index.html#module-simrun.run_new_simulations" title="simrun.run_new_simulations (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.run_new_simulations</span></code></a></p></li>
 <li><p><a class="reference internal" href="api_reference/simrun/rerun_db/index.html#module-simrun.rerun_db" title="simrun.rerun_db (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.rerun_db</span></code></a></p></li>
 </ul>
 </dd>
-<dt>See also:</dt><dd><p>To get a <a class="reference internal" href="api_reference/single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from such a simulation, refer to <a class="reference internal" href="api_reference/simrun/sim_trial_to_cell_object/index.html#module-simrun.sim_trial_to_cell_object" title="simrun.sim_trial_to_cell_object (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.sim_trial_to_cell_object</span></code></a></p>
+<dt>See also:</dt><dd><p>To get a <a class="reference internal" href="api_reference/single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from such a simulation, refer to <a class="reference internal" href="api_reference/simrun/sim_trial_to_cell_object/index.html#module-simrun.sim_trial_to_cell_object" title="simrun.sim_trial_to_cell_object (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun.sim_trial_to_cell_object</span></code></a></p>
 </dd>
 </dl>
 <h2 id="dataframes">Dataframes<a class="headerlink" href="#dataframes" title="Link to this heading">¶</a></h2>
@@ -1485,11 +1486,11 @@ An example of the raw and parsed format is shown below:</p>
 <p>Writers:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_presynaptic_spike_file()</span></code> is used by <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> and <a class="reference internal" href="api_reference/single_cell_parser/analyze/synanalysis/index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synanalysis</span></code></a></dt><dd><p>to write raw output data.</p>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">write_presynaptic_spike_file()</span></code> is used by <a class="reference internal" href="api_reference/simrun/index.html#module-simrun" title="simrun (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">simrun</span></code></a> and <a class="reference internal" href="api_reference/single_cell_parser/analyze/synanalysis/index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">synanalysis</span></code></a></dt><dd><p>to write raw output data.</p>
 </dd>
 </dl>
 </li>
-<li><p><a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> parses these files into a pandas dataframe.</p></li>
+<li><p><a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-func docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> parses these files into a pandas dataframe.</p></li>
 </ul>
 <div class="attention admonition">
 <p class="admonition-title">Attention</p>
@@ -1542,7 +1543,7 @@ Unlike the synapse activations and spike times, it is possible for one such file
 </code></pre></div>
 </div>
 <h4 id="voltage-trace-dataframe"><span id="voltage-traces-df-format"></span>Voltage trace dataframe<a class="headerlink" href="#voltage-trace-dataframe" title="Link to this heading">¶</a></h4>
-<p>The parsed dataframe is usually created by the <a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> function.</p>
+<p>The parsed dataframe is usually created by the <a class="reference internal" href="api_reference/data_base/db_initializers/load_simrun_general/init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-func docutils literal notranslate"><span class="pre">data_base.db_initializers.load_simrun_general.init()</span></code></a> function.</p>
 <table class="docutils data align-default" id="id15">
 <caption><span class="caption-text"><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">trace</span> <span class="pre">dataframe</span></code></span><a class="headerlink" href="#id15" title="Link to this table">¶</a></caption>
 <thead>
@@ -1581,7 +1582,7 @@ neuron structure at that point <code class="docutils literal notranslate"><span 
 <p>Readers:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="api_reference/single_cell_parser/cell_parser/index.html#module-single_cell_parser.cell_parser" title="single_cell_parser.cell_parser (Python module)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cell_parser</span></code></a></p></li>
-<li><p><a class="reference internal" href="api_reference/single_cell_parser/reader/read_hoc_file.html#single_cell_parser.reader.read_hoc_file" title="single_cell_parser.reader.read_hoc_file (Python function) — Reads a hoc file and returns a list of Edge objects."><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_hoc_file()</span></code></a></p></li>
+<li><p><a class="reference internal" href="api_reference/single_cell_parser/reader/read_hoc_file.html#single_cell_parser.reader.read_hoc_file" title="single_cell_parser.reader.read_hoc_file (Python function) — Reads a hoc file and returns a list of Edge objects."><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hoc_file()</span></code></a></p></li>
 </ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="p">{</span><span class="n">create</span> <span class="n">soma</span><span class="p">}</span>
@@ -1605,7 +1606,7 @@ neuron structure at that point <code class="docutils literal notranslate"><span 
 </div>
 <h2 id="mod"><span id="mod-file-format"></span>.mod<a class="headerlink" href="#mod" title="Link to this heading">¶</a></h2>
 <p>NEURON <span id="id4">[<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> file format for neuron mechanisms. Refer to the <a class="reference external" href="https://neuronline.github.io/compneuro/software/neuron/nmodl/">NEURON NMODL documentation</a>
-or <span id="id5"></span> (chapters 9 and 10) for more info.
+or <span id="id5">Hines and Carnevale [<a class="reference internal" href="bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span> (chapters 9 and 10) for more info.
 Used to define channel and synapse dynamics in NEURON simulations.
 See the folder <cite>mechanisms</cite> in the project source.</p>
 <h2 id="am"><span id="am-file-format"></span>.am<a class="headerlink" href="#am" title="Link to this heading">¶</a></h2>

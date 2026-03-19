@@ -6,7 +6,7 @@ save_result
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.save_result(db_run, features, objectives)
+.. function:: biophysics_fitting.optimizer.save_result(db_run, features, objectives)
 
 
    Save the results of an optimization iteration in a database.

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -14,13 +13,14 @@ synapse_mapper
 
    SynapseMapper </api_reference/single_cell_parser/synapse_mapper/SynapseMapper>
 
-.. py:module:: single_cell_parser.synapse_mapper
+.. module:: single_cell_parser.synapse_mapper
 
 .. autoapi-nested-parse::
    Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
 
    For more fine-grained control over the creation of synapse distributions onto a morphology,
-   please refer to the :py:mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
+   please refer to the :mod:`singlecell_input_mapper.singlecell_input_mapper` package instead.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -36,6 +36,8 @@ Classes
    
    * - :py:obj:`SynapseMapper <single_cell_parser.synapse_mapper.SynapseMapper>`
      - Assign synapses to a neuron morphology based on an existing synapse distribution.
+
+
 
 
 

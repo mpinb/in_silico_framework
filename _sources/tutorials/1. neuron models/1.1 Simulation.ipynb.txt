@@ -90,7 +90,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "Which format do these parameters need to have?"
+        "Which format do these neuron parameters have?"
       ]
     },
     {
@@ -251,14 +251,17 @@
         "- default simulation parameters (time interval and resolution)\n",
         "- recording site locations\n",
         "- passive properties (capacitance, input resistance, and reversal potentials)\n",
-        "- a morphology file"
+        "- a morphology file\n",
+        "- cell modify functions"
       ]
     },
     {
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "Using these parameters, we can create a [Cell](../../api_reference/single_cell_parser/cell/index.rst) object, containing all the information on morphology and simulation data in a Python wrapper. For our usecase, we need to pass an additional argument to scale the apical dendrite of the L5PT with. Why this is necessary is outlined [here](../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.ipynb)"
+        "For our neuron, we need to pass a function to scale the apical dendrite of the L5PT. this is visible in the key `cell_modify_functions`. Why this is necessary is outlined [here](../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.ipynb)\n",
+        "\n",
+        "Using these parameters, we can create a [Cell](../../api_reference/single_cell_parser/cell/index.rst) object, containing all the information on morphology and simulation data. "
       ]
     },
     {
@@ -354,7 +357,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "We now have a biophysically detailed [Cell](../../api_reference/single_cell_parser/cell/index.rst) object. Let's start by figuring out some general morphological properties of the example cell"
+        "We now have a biophysically detailed [Cell](../../api_reference/single_cell_parser/cell/index.rst) object. Let's start by figuring out some general morphological properties of our neuron."
       ]
     },
     {
@@ -424,7 +427,7 @@
       "source": [
         "## The ISF [Simulator](../../api_reference/biophysics_fitting/simulator/index.rst)\n",
         "\n",
-        "This [Cell](../../api_reference/single_cell_parser/cell/index.rst) object can be simulated using NEURON's Python API, as outlined in [this auxiliary tutorial](../auxiliary%20notebooks/A.2%20Neuron%20API.ipynb). However, ISF provides convenient wrappers for simulating fixed stimuli.\n",
+        "This [Cell](../../api_reference/single_cell_parser/cell/index.rst) object can be directly simulated using NEURON's Python API, as outlined in [this auxiliary tutorial](../auxiliary%20notebooks/A.2%20Neuron%20API.ipynb). However, ISF provides convenient wrappers for simulating fixed stimuli that makes this process more convenient.\n",
         "\n",
         "This Section will provide a walkthrough on how to interact with the biophysical properties of a [Cell](../../api_reference/single_cell_parser/cell/index.rst) using the [Simulator](../../api_reference/biophysics_fitting/simulator/index.rst) object, rather than directly interacting with the NEURON hoc interface. This object can be configured once per cell, and re-used for various simulation protocols. It operates on biophysical parameters of the `pandas.dataFrame` type.\n",
         "\n",
@@ -435,7 +438,9 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "### Biophysical parameters"
+        "### Biophysical parameters\n",
+        "\n",
+        "Rather than using the [cell parameters](https://mpinb.github.io/in_silico_framework/file_formats.html#cell-parameters) as described above directly, we will instead use vectors, here in the form of pandas Series. The [Simulator](../../api_reference/biophysics_fitting/simulator/index.rst) handles the rest."
       ]
     },
     {
@@ -528,7 +533,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "Apart from the passive properties, we have 35 biophysical parameters, relating to varying biophysical aspects for the soma, axon (AIS), apical dendrite, and other dendrites (taken to be passive for current injection experiments).\n",
+        "We have 35 biophysical parameters, relating to varying biophysical aspects for the soma, axon (AIS), apical dendrite, and other dendrites (taken to be passive for current injection experiments).\n",
         "\n",
         "|Name|Meaning|Unit|\n",
         "|---|---|---|\n",
@@ -536,7 +541,7 @@
         "|scale_apical.scale|Scaling factor for the diameter of the apical dendrite|None|\n",
         "|ephys.CaDynamics_E2_v2.\\<location\\>.gamma| Ratio of free $Ca^{2+}$ | None|\n",
         "|ephys.CaDynamics_E2_v2.\\<location\\>.gamma | Time constant of first-order dynamic $Ca^{2+}$-buffering| [$ms$]|\n",
-        "|ephys.SKv3_1.apic.offset/slope|Distribution parameters of $SKv3.1$ channels|[$\\mu m$]/None|"
+        "|ephys.SKv3_1.apic.offset/slope|Distribution parameters of $SK_V3.1$ channels|[$\\mu m$]/None|"
       ]
     },
     {
@@ -649,7 +654,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "We now have a Simulator object with morphology-specific `fixed_params`.\n",
+        "After this setup, we now have a Simulator object with morphology-specific `fixed_params`. This was most of the work. Actually simulating is easy now.\n",
         "\n",
         "For a Simulator object `s`, the main functions are:\n",
         "\n",

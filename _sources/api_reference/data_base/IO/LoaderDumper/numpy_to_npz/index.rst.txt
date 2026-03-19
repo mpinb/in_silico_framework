@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -16,12 +15,13 @@ numpy_to_npz
    check </api_reference/data_base/IO/LoaderDumper/numpy_to_npz/check>
    dump </api_reference/data_base/IO/LoaderDumper/numpy_to_npz/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.numpy_to_npz
+.. module:: data_base.IO.LoaderDumper.numpy_to_npz
 
 .. autoapi-nested-parse::
    Read and write a numpy array to the compressed ``.npz`` format.
 
-   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy_to_npy` for saving a single numpy array to a ``npy`` file.
+   .. seealso:: :mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy_to_npy` for saving a single numpy array to a ``npy`` file.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -54,6 +54,8 @@ Functions
      - Check whether the object can be saved with this dumper
    * - :py:obj:`dump <data_base.IO.LoaderDumper.numpy_to_npz.dump>`\ (obj, savedir)
      - Write an object to a ``.npz`` file.
+
+
 
 
 

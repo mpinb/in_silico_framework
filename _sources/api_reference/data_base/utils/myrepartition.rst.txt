@@ -6,7 +6,7 @@ myrepartition
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.myrepartition(ddf, N)
+.. function:: data_base.utils.myrepartition(ddf, N)
 
 
    Repartition a dask dataframe without generating more tasks.

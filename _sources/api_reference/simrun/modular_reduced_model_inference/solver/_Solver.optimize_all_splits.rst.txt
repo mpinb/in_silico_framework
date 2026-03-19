@@ -1,26 +1,25 @@
 
 
+optimize_all_splits
+===================
 
 
+.. Signature -------------------------------
 
-_Solver.optimize_all_splits
-===========================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.solver._Solver.optimize_all_splits(client=None, workers=None)
+.. function:: simrun.modular_reduced_model_inference.solver._Solver.optimize_all_splits(client=None, workers=None)
 
 
    Optimize the cost function for all splits of the strategy.
 
    :param client: A dask client object.
    :type client: dask.distributed.Client
-   :param workers: List of worker names. Passed to :py:meth:`dask.distributed.Client.submit`
+   :param workers: List of worker names. Passed to :func:`dask.distributed.Client.submit`
    :type workers: list
 
    :returns: A dictionary with the keys being the split names and the values being the optimization results.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
+   .. seealso:: :func:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
 
 
 

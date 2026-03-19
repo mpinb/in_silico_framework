@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~spike_analysis` ❭ 
 
 
@@ -14,10 +13,12 @@ spike_analysis
 
    core </api_reference/spike_analysis/core/index>  
 
-.. py:module:: spike_analysis
+.. module:: spike_analysis
 
 .. autoapi-nested-parse::
    Read and analyze electrophysiological data.
+
+
 
 
 
@@ -35,6 +36,7 @@ Modules
    
    * - :py:obj:`core <spike_analysis.core>`
      - Read and analyze electrophysiological data.
+
 
 
 .. container:: doc-feedback

@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
@@ -837,6 +837,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span title="/api_reference/biophysics_fitting/index.rst#attributes (reference label)" class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modules" class="md-nav__link">
     <span title="/api_reference/biophysics_fitting/index.rst#modules (reference label)" class="md-ellipsis">Modules</span>
   </a>
@@ -936,6 +943,21 @@
     <li class="md-nav__item">
       <a href="../visualize/index.html" class="md-nav__link">
         <span title="/api_reference/visualize/index.rst (reference label)" class="md-ellipsis">visualize</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
       </a>
     </li>
   
@@ -1044,6 +1066,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span title="/api_reference/biophysics_fitting/index.rst#attributes (reference label)" class="md-ellipsis">Attributes</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#modules" class="md-nav__link">
     <span title="/api_reference/biophysics_fitting/index.rst#modules (reference label)" class="md-ellipsis">Modules</span>
   </a>
@@ -1064,7 +1093,7 @@
                   
 
 
-<p><a href="/" class="nav-link" aria-label="Home">
+<p><a href="https://mpinb.github.io/in_silico_framework" class="nav-link" aria-label="Home">
      <svg class="home-icon" viewBox="0 0 576 512" width="16" height="16">
          <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
      </svg>
@@ -1085,7 +1114,7 @@ If you need to generate models from scratch, we recommend using the MOEA algorit
 <table class="summarytable docutils data align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="connected_to_dend_beyond.html#biophysics_fitting.connected_to_dend_beyond" title="biophysics_fitting.connected_to_dend_beyond (Python function) — Check if a given section is connected to dendrites that reach beyon beyond_dist."><code class="xref py py-obj docutils literal notranslate"><span class="pre">connected_to_dend_beyond</span></code></a>(cell, sec, beyond_dist, n_children_required)</p></td>
-<td><p>Check if a given section is connected to dendrites that reach beyon <code class="xref py py-paramref docutils literal notranslate"><span class="pre">beyond_dist</span></code>.</p></td>
+<td><p>Check if a given section is connected to dendrites that reach beyon <code class="xref py py-param docutils literal notranslate"><span class="pre">beyond_dist</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="get_inner_sec_dist_list.html#biophysics_fitting.get_inner_sec_dist_list" title="biophysics_fitting.get_inner_sec_dist_list (Python function) — Find all sections that are connected to dendrites that reach beyond a certain distance. Useful for filtering out outer terminating dendrites."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inner_sec_dist_list</span></code></a>(cell, select, connected_to_dend_beyond_distance, z_offset)</p></td>
 <td><p>Find all sections that are connected to dendrites that reach beyond a certain distance.</p></td>
@@ -1094,13 +1123,27 @@ If you need to generate models from scratch, we recommend using the MOEA algorit
 <td><p>Given a Cell object and a section number, this method returns the branching depth (i.e. branching order) of that section.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="get_branching_depth_series.html#biophysics_fitting.get_branching_depth_series" title="biophysics_fitting.get_branching_depth_series (Python function) — Find the branching depth of the inner sections of a Cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_branching_depth_series</span></code></a>(cell, z_offset)</p></td>
-<td><p>Find the branching depth of the inner sections of a <a class="reference internal" href="../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>.</p></td>
+<td><p>Find the branching depth of the inner sections of a <a class="reference internal" href="../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="get_main_bifurcation_section.html#biophysics_fitting.get_main_bifurcation_section" title="biophysics_fitting.get_main_bifurcation_section (Python function) — Find the main bifurcation of a cell. This is the unique inner section whose branching depth is 1. In some morphologies, this section is unique, and no other sections are inner sections with branching depth 1. This is True for e.g. pyramidal cells with an apical dendrite."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_main_bifurcation_section</span></code></a>(cell)</p></td>
 <td><p>Find the main bifurcation of a cell.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="get_first_order_bifurcation_sections.html#biophysics_fitting.get_first_order_bifurcation_sections" title="biophysics_fitting.get_first_order_bifurcation_sections (Python function) — Find all sections that are both inner sections, and are of branching order 1."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_first_order_bifurcation_sections</span></code></a>(cell)</p></td>
 <td><p>Find all sections that are both inner sections, and are of branching order 1.</p></td>
+</tr>
+</tbody>
+</table>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h2>
+<table class="summarytable docutils data align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">RANGE_VARS_APICAL</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">RANGE_VARS_ALL_CHANNELS</span></code></p></td>
+<td><p>-</p></td>
 </tr>
 </tbody>
 </table>
@@ -1138,7 +1181,7 @@ If you need to generate models from scratch, we recommend using the MOEA algorit
 <td><p>Fetch parameters with the dot naming convention.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="setup_stim/index.html#module-biophysics_fitting.setup_stim" title="biophysics_fitting.setup_stim (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_stim</span></code></a></p></td>
-<td><p>This module provides methods to set up stimuli by adding recording/injection pipettes to <a class="reference internal" href="../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> objects.</p></td>
+<td><p>This module provides methods to set up stimuli by adding recording/injection pipettes to <a class="reference internal" href="../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> objects.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="simulator/index.html#module-biophysics_fitting.simulator" title="biophysics_fitting.simulator (Python module)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulator</span></code></a></p></td>
 <td><p>This module concerns itself with setting up a cell with biophysical details and simulation parameters.</p></td>

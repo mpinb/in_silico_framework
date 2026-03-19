@@ -6,7 +6,7 @@ prefun
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.prefun(df)
+.. function:: data_base.db_initializers.synapse_activation_binning.prefun(df)
 
 
    Augment a :ref:`syn_activation_format` dataframe with additional columns.
@@ -25,9 +25,9 @@ prefun
    :type df: pandas.DataFrame
 
    :returns: The modified dataframe with additional columns.
-   :rtype: :py:class:`pandas.DataFrame`
+   :rtype: :class:`pandas.DataFrame`
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.init`
+   .. seealso:: :func:`~data_base.db_initializers.init`
 
 
 

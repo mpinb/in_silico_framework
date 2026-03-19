@@ -6,13 +6,13 @@ map_truefalse_to_str
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.map_truefalse_to_str(dict_)
+.. function:: biophysics_fitting.hay.default_setup.map_truefalse_to_str(dict_)
 
 
    Convert True/False to 'True'/'False' in a dictionary
 
-   :param dict_: A dictionary with boolean values.
-   :type dict_: dict
+   :param dict\_: A dictionary with boolean values.
+   :type dict\_: dict
 
    :returns: A dictionary with boolean values converted to strings.
    :rtype: dict

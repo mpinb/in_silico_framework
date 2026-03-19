@@ -6,18 +6,18 @@ resolve_parameter_paths
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.parameters.resolve_parameter_paths(parameters, params_fn)
+.. function:: single_cell_parser.parameters.resolve_parameter_paths(parameters, params_fn)
 
 
    Resolve relative database paths in the parameters.
 
+   :param parameters: The parameters whose internal paths need to be resolved to the new database location.
+   :type parameters: single_cell_parser.parameters.NTParameterSet
    :param params_fn: The path to the parameters file.
    :type params_fn: str
-   :param db: The database path to resolve against.
-   :type db: str
 
    :returns: The parameters with resolved paths.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 

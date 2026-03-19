@@ -6,16 +6,16 @@ universal
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.temporal_binning.universal(*args, **kwargs)
+.. function:: data_base.analyze.temporal_binning.universal(df, bin_size=1, min_time=None, max_time=None, normalize=False, **kwargs)
 
 
    Bin spike times for dask or pandas dataframes.
 
    Infers the dataframe type and calls the appropriate binning function.
 
-   :param df | ddf: DataFrame with containing time values in columns whose name are integer-convertible.
-   :type df | ddf: dask.dataframe.DataFrame
-   :param bin_size: Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+   :param df: DataFrame with containing time values in columns whose name are integer-convertible.
+   :type df: dask.dataframe.DataFrame
+   :param bin_size: Size of the bins. If not specified, :param:`bin_borders` have to be specified.
    :type bin_size: float, optional
    :param min_time: Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
    :type min_time: float, optional
@@ -23,15 +23,13 @@ universal
    :type max_time: float, optional
    :param normalize: If True, normalize the output to the total number of elements in the DataFrame.
    :type normalize: bool, optional
-   :param rate: If True, normalize the output to the bin size. Only valid if :paramref:`df` is a pandas DataFrame.
-   :type rate: bool, optional
-   :param client: Dask client to use for parallel computation. Only valid if :paramref:`ddf` is a dask DataFrame.
-   :type client: dask.distributed.Client
+   :param kwargs: Additional keyword arguments for pandas or dask, depending on the dataframe type. Refer to the corresponding methods below to check which additional keyword arguments these functions expect
+   :type kwargs: dict
 
    .. seealso::
 
-      :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
-      :py:meth:`~data_base.analyze.temporal_binning.temporal_binning_dask`
+      :func:`~data_base.analyze.temporal_binning.temporal_binning_pd` and
+      :func:`~data_base.analyze.temporal_binning.temporal_binning_dask`
 
    :returns: Bin borders and bin frequencies.
    :rtype: tuple

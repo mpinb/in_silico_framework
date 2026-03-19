@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -907,6 +907,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1028,7 +1043,7 @@
 <a class="reference internal" href="../../index.html#module-simrun" title="simrun (Python module)"><span class="sig-name descname"><span class="pre">simrun</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-simrun.modular_reduced_model_inference" title="simrun.modular_reduced_model_inference (Python module)"><span class="sig-name descname"><span class="pre">modular_reduced_model_inference</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-simrun.modular_reduced_model_inference.strategy" title="simrun.modular_reduced_model_inference.strategy (Python module)"><span class="sig-name descname"><span class="pre">strategy</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">clear_memory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.modular_reduced_model_inference.strategy.clear_memory" title="Link to this definition">¶</a></dt>
 <dd><p>Remove all weak references</p>
 <p>Cupy frees GPU memory when all references are deleted
-As this is difficult to track, use the <code class="xref py py-meth docutils literal notranslate"><span class="pre">simrun.modular_reduced_model_inference.make_weakref()</span></code> method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object.
+As this is difficult to track, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">simrun.modular_reduced_model_inference.make_weakref()</span></code> method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object.
 This can be used to interact with the data, but is not a reference.
 Therefore, it is sufficient to empty _WEAKREF_ARRAY_LIST, which frees the GPU memory.
 All weakref objects pointing to GPU arrays will then be invalidated.</p>

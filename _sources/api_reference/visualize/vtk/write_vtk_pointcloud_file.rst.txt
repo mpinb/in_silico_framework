@@ -6,7 +6,7 @@ write_vtk_pointcloud_file
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.vtk.write_vtk_pointcloud_file(out_name=None, out_dir='.', points=None, scalar_data=None, scalar_data_names=None)
+.. function:: visualize.vtk.write_vtk_pointcloud_file(out_name=None, out_dir='.', points=None, scalar_data=None, scalar_data_names=None)
 
 
    Write out 3D point data as a VTK point cloud.

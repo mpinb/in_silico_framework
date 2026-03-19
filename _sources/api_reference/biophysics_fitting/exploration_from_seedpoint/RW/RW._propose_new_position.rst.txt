@@ -1,0 +1,39 @@
+
+
+_propose_new_position
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._propose_new_position(p_normalized_np, seed_normalized_np, dist, reached_aim_params, seed_pt_pd)
+
+
+   Propose a new position to move to in the parameter space.
+   If applicable, the new position is proposed according to the mode and aim parameters.
+
+   :param p_normalized_np: normalized parameter vector of the current position
+   :type p_normalized_np: np.array
+   :param seed_normalized_np: normalized parameter vector of the seed point
+   :type seed_normalized_np: np.array
+   :param dist: distance from the seed point to the current position
+   :type dist: float
+   :param reached_aim_params: list of booleans indicating whether each aim parameter has been reached or not.
+   :type reached_aim_params: list
+   :param seed_pt_pd: seed point parameters
+   :type seed_pt_pd: pd.Series
+
+   .. attention::
+
+      :param:`p_normalized_np` and :param:`seed_normalized_np` do not necessarily need to include parameters that are not actively being explored.
+      However, they may, since frozen parameters do not contribute to the distance.
+      Both arguments simply need to be consistent about including or not including parameters that aren't explored.
+
+   :returns: proposed position (np.array) and number of suggestions it took to find an acceptable position (int)
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

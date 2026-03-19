@@ -6,7 +6,7 @@ _sta_input_checker
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core._sta_input_checker(t_start, t_end, period)
+.. function:: spike_analysis.core._sta_input_checker(t_start, t_end, period)
 
 
    Checks if the input is valid.

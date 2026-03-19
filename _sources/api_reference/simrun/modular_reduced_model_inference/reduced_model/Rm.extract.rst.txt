@@ -1,13 +1,12 @@
 
 
+extract
+=======
 
 
+.. Signature -------------------------------
 
-Rm.extract
-==========
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.extract(name)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.Rm.extract(name)
 
 
    Extract data using the data extractor.
@@ -18,7 +17,7 @@ Rm.extract
    :returns: Data extracted by the data extractor
    :rtype: obj
 
-   .. seealso:: :py:meth:`~simrun.modular_reduced_model_inference.data_extractor>get` for how a data extractor fetches data.
+   .. seealso:: :func:`~simrun.modular_reduced_model_inference.data_extractor>get` for how a data extractor fetches data.
 
 
 

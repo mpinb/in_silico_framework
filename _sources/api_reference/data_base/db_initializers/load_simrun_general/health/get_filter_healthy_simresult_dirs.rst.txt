@@ -6,7 +6,7 @@ get_filter_healthy_simresult_dirs
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.health.get_filter_healthy_simresult_dirs(sim_result_dirs, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.health.get_filter_healthy_simresult_dirs(sim_result_dirs, client=None)
 
 
 

@@ -6,7 +6,7 @@ get_upcross
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.get_upcross(t, v, lim)
+.. function:: spike_analysis.core.get_upcross(t, v, lim)
 
 
    Finds the times and corresponding voltages of upcrossings of a given threshold.

@@ -1,13 +1,12 @@
 
 
+handler
+=======
 
 
+.. Signature -------------------------------
 
-DelayedKeyboardInterrupt.handler
-================================
-
-
-.. py:method:: data_base.utils.DelayedKeyboardInterrupt.handler(sig, frame)
+.. function:: data_base.utils.DelayedKeyboardInterrupt.handler(sig, frame)
 
 
    Handle KeyboardInterrupt signals and delay them

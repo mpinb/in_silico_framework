@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -23,12 +22,13 @@ L5tt_parameter_setup
    set_many_param </api_reference/biophysics_fitting/L5tt_parameter_setup/set_many_param>
    set_hot_zone </api_reference/biophysics_fitting/L5tt_parameter_setup/set_hot_zone>
 
-.. py:module:: biophysics_fitting.L5tt_parameter_setup
+.. module:: biophysics_fitting.L5tt_parameter_setup
 
 .. autoapi-nested-parse::
    This module provides method to set up the parameters for a Layer 5 Pyramidal Tract neuron (L5PT/L5tt)
 
-   These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :py:mod:`~biophysics_fitting.simulator`.
+   These parameters and templates are used to set up the biophysical constraints for the L5PT cell in e.g. :mod:`~biophysics_fitting.simulator`.
+
 
 
 
@@ -63,6 +63,22 @@ Functions
      - Updates cell_param given a dict of params in the dot naming convention.
    * - :py:obj:`set_hot_zone <biophysics_fitting.L5tt_parameter_setup.set_hot_zone>`\ (cell\_param, min\_, max\_, outsidescale\_sections)
      - Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <biophysics_fitting.L5tt_parameter_setup.logger>`
+     - \-
+
 
 
 

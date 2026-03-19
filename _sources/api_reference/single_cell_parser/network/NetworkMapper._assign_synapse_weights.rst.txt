@@ -1,13 +1,12 @@
 
 
+_assign_synapse_weights
+=======================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._assign_synapse_weights
-=====================================
-
-
-.. py:method:: single_cell_parser.network.NetworkMapper._assign_synapse_weights(receptor, recepStr, syn)
+.. function:: single_cell_parser.network.NetworkMapper._assign_synapse_weights(receptor, recepStr, syn)
 
 
    Assign synapse weights according to distribution specified in network parameters.
@@ -17,7 +16,7 @@ NetworkMapper._assign_synapse_weights
    :param recepStr: Receptor name.
    :type recepStr: str
    :param syn: Synapse object.
-   :type syn: Synapse
+   :type syn: ~single_cell_parser.synapse.Synapse
 
 
 

@@ -6,7 +6,7 @@ highpass_filter
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.highpass_filter(y, sr)
+.. function:: spike_analysis.core.highpass_filter(y, sr)
 
 
    Apply a highpass filter to the data.

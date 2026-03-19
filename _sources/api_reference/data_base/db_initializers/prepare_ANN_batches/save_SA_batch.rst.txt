@@ -6,13 +6,13 @@ save_SA_batch
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.save_SA_batch(sa_, selected_stis, batch_id, outdir=None, section_distances_df=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, synaptic_weight_dict=None)
+.. function:: data_base.db_initializers.prepare_ANN_batches.save_SA_batch(sa_, selected_stis, batch_id, outdir=None, section_distances_df=None, spatial_bin_names=None, min_time=0, max_time=600, bin_size=1, synaptic_weight_dict=None)
 
 
    Save a batch of synapse activation times to a file.
 
-   :param sa_: Augmented synapse activation dataframe
-   :type sa_: pd.DataFrame
+   :param sa\_: Augmented synapse activation dataframe
+   :type sa\_: pd.DataFrame
    :param selected_stis: List of selected spike times
    :type selected_stis: list
    :param batch_id: Batch id

@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.pandas_to_msgpack.dump(obj, savedir, rows_per_file=None)
+.. function:: data_base.IO.LoaderDumper.pandas_to_msgpack.dump(obj, savedir, rows_per_file=None)
 
 
    rows_per_file: automatically splits dataframe, such that rows_per_file rows of the df are

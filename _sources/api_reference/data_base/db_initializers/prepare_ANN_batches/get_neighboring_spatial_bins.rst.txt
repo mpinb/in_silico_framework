@@ -6,10 +6,10 @@ get_neighboring_spatial_bins
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins(cell, bin_id, section_distances_df)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins(cell, bin_id, section_distances_df)
 
 
-   Get all the neighboring bins from a :paramref:`bin_id`.
+   Get all the neighboring bins from a :param:`bin_id`.
 
    :param cell: cell object
    :type cell: cell

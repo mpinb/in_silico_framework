@@ -1,13 +1,12 @@
 
 
+_get_interactive_dash_app
+=========================
 
 
+.. Signature -------------------------------
 
-CellMorphologyInteractiveVisualizer._get_interactive_dash_app
-=============================================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_dash_app(color, t_start, t_stop, t_step)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_dash_app(color, t_start, t_stop, t_step)
 
 
    This is the main function to set up an interactive plot with scalar data overlayed.
@@ -16,10 +15,6 @@ CellMorphologyInteractiveVisualizer._get_interactive_dash_app
 
    :param color: Scalar data to overlay on interactive plot. Defaults to None.
    :type color: str, optional
-   :param background_color: Background color of plot. Defaults to "rgb(180,180,180)".
-   :type background_color: str, optional
-   :param renderer: Type of backend renderer to use for rendering the javascript/HTML VBox. Defaults to "notebook_connected".
-   :type renderer: str, optional
 
    :returns: an interactive render of the cell.
    :rtype: ipywidgets.VBox object

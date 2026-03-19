@@ -6,7 +6,7 @@ write_sim_results
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_sim_results(fname, t, v)
+.. function:: single_cell_parser.writer.write_sim_results(fname, t, v)
 
 
    Write out a voltage trace file.
@@ -18,7 +18,7 @@ write_sim_results
    :param v: The voltage trace.
    :type v: list
 
-   :returns: None. Writes out the voltage trace file to :paramref:`fname`.
+   :returns: None. Writes out the voltage trace file to :param:`fname`.
 
    .. rubric:: Example
       :class: example

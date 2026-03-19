@@ -6,7 +6,7 @@ write_video_from_images
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.write_video_from_images(images, out_path, fps=24, images_format='.png', quality=5, codec='mpeg4', auto_sort_paths=True)
+.. function:: visualize.utils.write_video_from_images(images, out_path, fps=24, images_format='.png', quality=5, codec='mpeg4', auto_sort_paths=True)
 
 
    Creates a video from a set of images.
@@ -17,7 +17,7 @@ write_video_from_images
    .. note::
 
       Globbing is not enabled by default on Windows machines.
-      If running this command on windows, please set the :paramref:`glob` argument to False and specify a non-glob type match pattern.
+      If running this command on windows, please set the :param:`glob` argument to False and specify a non-glob type match pattern.
 
    :param images: list of images, a directory with images or a list of directories with images
    :type images: list | str

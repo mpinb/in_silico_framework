@@ -1,20 +1,19 @@
 
 
+turn_off
+========
 
 
+.. Signature -------------------------------
 
-PointCell.turn_off
-==================
-
-
-.. py:method:: single_cell_parser.cell.PointCell.turn_off()
+.. function:: single_cell_parser.cell.PointCell.turn_off()
 
 
    Turns off the spike source.
 
-   Calls ``play()`` with no arguments to turn off the :py:class:`neuron:VecStim`.
+   Calls ``play()`` with no arguments to turn off the :class:`neuron:VecStim`.
    This is necessary because ``VecStim`` does not implement reference counting.
-   Resizes the :py:class:`neuron:Vector` to 0.
+   Resizes the :class:`neuron:Vector` to 0.
 
    .. note::
 

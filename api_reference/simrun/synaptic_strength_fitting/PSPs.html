@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -1670,6 +1670,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2184,7 +2199,7 @@
 <dl class="field-list">
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="simrun.synaptic_strength_fitting.PSPs.__init__.neuron_param"><span class="sig-name descname">neuron_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format.">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.__init__.neuron_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
+<dt id="simrun.synaptic_strength_fitting.PSPs.__init__.neuron_param"><span class="sig-name descname">neuron_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.__init__.neuron_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
 </dd>
 <dt id="simrun.synaptic_strength_fitting.PSPs.__init__.confile"><span class="sig-name descname">confile</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.__init__.confile" title="Permalink to this definition">¶</a></dt><dd><p>Path to a <a class="reference internal" href="../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file.</p>
 </dd>
@@ -2198,7 +2213,7 @@ The resulting ePSPs will be interpolated and compared to empirical data to find 
 <dt id="simrun.synaptic_strength_fitting.PSPs.__init__.vardt"><span class="sig-name descname">vardt</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.__init__.vardt" title="Permalink to this definition">¶</a></dt><dd><p>Whether to use the variable step size solver.</p>
 </dd>
 <dt id="simrun.synaptic_strength_fitting.PSPs.__init__.mode"><span class="sig-name descname">mode</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.__init__.mode" title="Permalink to this definition">¶</a></dt><dd><p>Whether to activate each synapse one by one, or each cell one by one.
-A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
+A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
 Options: <code class="docutils literal notranslate"><span class="pre">('cells',</span> <span class="pre">'synapses')</span></code>
 Default: <code class="docutils literal notranslate"><span class="pre">'cells'</span></code></p>
 </dd>
@@ -2220,7 +2235,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">'exc'</spa
 <dd><p>The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.neuron_param-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.neuron_param-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format."><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2282,7 +2297,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">'exc'</spa
 <dt class="sig sig-object highlight py" id="simrun.synaptic_strength_fitting.PSPs.mode">
 <span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.mode" title="Link to this definition">¶</a></dt>
 <dd><p>Whether to activate each synapse one by one, or each cell one by one.
-A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
+A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
 Options: <code class="docutils literal notranslate"><span class="pre">('cells',</span> <span class="pre">'synapses')</span></code>
 Default: <code class="docutils literal notranslate"><span class="pre">'cells'</span></code></p>
 <dl class="field-list simple">
@@ -2357,7 +2372,7 @@ Default: <code class="docutils literal notranslate"><span class="pre">'exc'</spa
 The synapse type is defined by <code class="xref py py-paramref docutils literal notranslate"><span class="pre">exc_inh</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.PSPs.network_param-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.PSPs.network_param-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format."><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -2379,40 +2394,40 @@ The synapse type is defined by <code class="xref py py-paramref docutils literal
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs._setup_computation.html#simrun.synaptic_strength_fitting.PSPs._setup_computation" title="simrun.synaptic_strength_fitting.PSPs._setup_computation (Python method) — Construct delayed functions for running single-synapse simulations."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_setup_computation</span></code></a>(exc_inh)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs._setup_computation.html#simrun.synaptic_strength_fitting.PSPs._setup_computation" title="simrun.synaptic_strength_fitting.PSPs._setup_computation (Python function) — Construct delayed functions for running single-synapse simulations."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_setup_computation</span></code></a>(exc_inh)</p></td>
 <td><p>Construct delayed functions for running single-synapse simulations.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs.run.html#simrun.synaptic_strength_fitting.PSPs.run" title="simrun.synaptic_strength_fitting.PSPs.run (Python method) — Run the single-cell simulations from the _delayeds."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(client, rerun)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.run.html#simrun.synaptic_strength_fitting.PSPs.run" title="simrun.synaptic_strength_fitting.PSPs.run (Python function) — Run the single-cell simulations from the _delayeds."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(client, rerun)</p></td>
 <td><p>Run the single-cell simulations from the <code class="xref py py-paramref docutils literal notranslate"><span class="pre">_delayeds</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_voltage_traces.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_traces" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_traces (Python method) — Gather the ePSP voltage traces for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_traces</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_voltage_traces.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_traces" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_traces (Python function) — Gather the ePSP voltage traces for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_traces</span></code></a>()</p></td>
 <td><p>Gather the ePSP voltage traces for each synapse.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_voltage_and_timing.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing (Python method) — Calculate a PSP's maximum voltage deflection and timing thereof."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_and_timing</span></code></a>(method, merged, merge_celltype_kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_voltage_and_timing.html#simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing" title="simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing (Python function) — Calculate a PSP's maximum voltage deflection and timing thereof."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_voltage_and_timing</span></code></a>(method, merged, merge_celltype_kwargs)</p></td>
 <td><p>Calculate a PSP’s maximum voltage deflection and timing thereof.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_summary_statistics.html#simrun.synaptic_strength_fitting.PSPs.get_summary_statistics" title="simrun.synaptic_strength_fitting.PSPs.get_summary_statistics (Python method) — Calculate summary statistics of the PSP voltage and timing."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_summary_statistics</span></code></a>(method, merge_celltype_kwargs, ePSP_summary_statistics_kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_summary_statistics.html#simrun.synaptic_strength_fitting.PSPs.get_summary_statistics" title="simrun.synaptic_strength_fitting.PSPs.get_summary_statistics (Python function) — Calculate summary statistics of the PSP voltage and timing."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_summary_statistics</span></code></a>(method, merge_celltype_kwargs, ePSP_summary_statistics_kwargs)</p></td>
 <td><p>Calculate summary statistics of the PSP voltage and timing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_optimal_g.html#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python method) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_optimal_g</span></code></a>(measured_data, method, merge_celltype_kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_optimal_g.html#simrun.synaptic_strength_fitting.PSPs.get_optimal_g" title="simrun.synaptic_strength_fitting.PSPs.get_optimal_g (Python function) — Calculate the optimal synaptic conductance such that the EPSP matches empirical data."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_optimal_g</span></code></a>(measured_data, method, merge_celltype_kwargs)</p></td>
 <td><p>Calculate the optimal synaptic conductance such that the EPSP matches empirical data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.visualize_psps.html#simrun.synaptic_strength_fitting.PSPs.visualize_psps" title="simrun.synaptic_strength_fitting.PSPs.visualize_psps (Python method) — Plot a histogram of the EPSP max voltage deflections for each celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_psps</span></code></a>(g, method, merge_celltype_kwargs, fig)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.visualize_psps.html#simrun.synaptic_strength_fitting.PSPs.visualize_psps" title="simrun.synaptic_strength_fitting.PSPs.visualize_psps (Python function) — Plot a histogram of the EPSP max voltage deflections for each celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize_psps</span></code></a>(g, method, merge_celltype_kwargs, fig)</p></td>
 <td><p>Plot a histogram of the EPSP max voltage deflections for each celltype.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs._get_cell_and_nw_map.html#simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map" title="simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map (Python method) — Get a network-embedded neuron model and its single_cell_parser.network.Networkmapper from parameter files."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_cell_and_nw_map</span></code></a>(network_param)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs._get_cell_and_nw_map.html#simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map" title="simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map (Python function) — Get a network-embedded neuron model and its single_cell_parser.network.Networkmapper from parameter files."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_get_cell_and_nw_map</span></code></a>(network_param)</p></td>
 <td><p>Get a network-embedded neuron model and its <code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.network.Networkmapper</span></code> from parameter files.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates (Python method) — Get the coordinates of all synapses of a particular celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates</span></code></a>(population, flatten, cell_indices)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates (Python function) — Get the coordinates of all synapses of a particular celltype."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates</span></code></a>(population, flatten, cell_indices)</p></td>
 <td><p>Get the coordinates of all synapses of a particular celltype.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_merged_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates (Python method) — Get the coordinates of all synapses that contain a certain string in their name."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_merged_synapse_coordinates</span></code></a>(mergestring, flatten)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.get_merged_synapse_coordinates.html#simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates" title="simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates (Python function) — Get the coordinates of all synapses that contain a certain string in their name."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_merged_synapse_coordinates</span></code></a>(mergestring, flatten)</p></td>
 <td><p>Get the coordinates of all synapses that contain a certain string in their name.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates_with_psp_amplitude.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude (Python method) — Get the synapse coordinates and the PSP amplitude for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates_with_psp_amplitude</span></code></a>(population, g, merged, select_synapses_per_cell)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PSPs.get_synapse_coordinates_with_psp_amplitude.html#simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude" title="simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude (Python function) — Get the synapse coordinates and the PSP amplitude for each synapse."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_synapse_coordinates_with_psp_amplitude</span></code></a>(population, g, merged, select_synapses_per_cell)</p></td>
 <td><p>Get the synapse coordinates and the PSP amplitude for each synapse.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PSPs.plot_vt.html#simrun.synaptic_strength_fitting.PSPs.plot_vt" title="simrun.synaptic_strength_fitting.PSPs.plot_vt (Python method) — Plot the voltage traces of the PSPs."><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vt</span></code></a>(population, opacity, g, merge, merge_celltype_kwargs, fig)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PSPs.plot_vt.html#simrun.synaptic_strength_fitting.PSPs.plot_vt" title="simrun.synaptic_strength_fitting.PSPs.plot_vt (Python function) — Plot the voltage traces of the PSPs."><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vt</span></code></a>(population, opacity, g, merge, merge_celltype_kwargs, fig)</p></td>
 <td><p>Plot the voltage traces of the PSPs.</p></td>
 </tr>
 </tbody>
@@ -2459,13 +2474,13 @@ The synapse type is defined by <code class="xref py py-paramref docutils literal
       
       
         
-        <a href="PSPs._setup_computation.html" class="md-footer__link md-footer__link--next" aria-label="Next: PSPs._setup_computation" rel="next">
+        <a href="PSPs._setup_computation.html" class="md-footer__link md-footer__link--next" aria-label="Next: _setup_computation" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              PSPs._setup_computation
+              _setup_computation
             </div>
           </div>
           <div class="md-footer__button md-icon">

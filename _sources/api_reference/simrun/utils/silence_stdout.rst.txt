@@ -6,7 +6,7 @@ silence_stdout
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.silence_stdout(fun)
+.. function:: simrun.utils.silence_stdout(fun)
 
 
    Decorator function to silence a function's output.

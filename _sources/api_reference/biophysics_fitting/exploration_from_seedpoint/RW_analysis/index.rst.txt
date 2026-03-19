@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ 
 
 
@@ -26,12 +25,13 @@ RW_analysis
    augment_ddf_with_PCA_space </api_reference/biophysics_fitting/exploration_from_seedpoint/RW_analysis/augment_ddf_with_PCA_space>
    pandas_binby </api_reference/biophysics_fitting/exploration_from_seedpoint/RW_analysis/pandas_binby>
 
-.. py:module:: biophysics_fitting.exploration_from_seedpoint.RW_analysis
+.. module:: biophysics_fitting.exploration_from_seedpoint.RW_analysis
 
 .. autoapi-nested-parse::
    This module provides routines to analyze the results of a random walk exploration through biophysical parameter space.
 
-   .. seealso:: :py:mod:`~biophysics_fitting.exploration_from_seedpoint.RW`
+   .. seealso:: :mod:`~biophysics_fitting.exploration_from_seedpoint.RW`
+
 
 
 .. rst-class:: absolute-paragraph
@@ -84,6 +84,32 @@ Functions
      - Augment a dask dataframe with the first two principal components of the hz current space.
    * - :py:obj:`pandas_binby <biophysics_fitting.exploration_from_seedpoint.RW_analysis.pandas_binby>`\ (df, c1, c2, binsize)
      - Bin a pandas dataframe by two columns.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`idx <biophysics_fitting.exploration_from_seedpoint.RW_analysis.idx>`
+     - \-
+   * - :py:obj:`hz_current_columns <biophysics_fitting.exploration_from_seedpoint.RW_analysis.hz_current_columns>`
+     - \-
+   * - :py:obj:`hz_current_columns_short <biophysics_fitting.exploration_from_seedpoint.RW_analysis.hz_current_columns_short>`
+     - \-
+   * - :py:obj:`depo_channels <biophysics_fitting.exploration_from_seedpoint.RW_analysis.depo_channels>`
+     - \-
+   * - :py:obj:`hyperpo_channels <biophysics_fitting.exploration_from_seedpoint.RW_analysis.hyperpo_channels>`
+     - \-
+   * - :py:obj:`pca_components <biophysics_fitting.exploration_from_seedpoint.RW_analysis.pca_components>`
+     - \-
+
 
 
 

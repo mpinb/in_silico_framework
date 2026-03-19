@@ -1,13 +1,12 @@
 
 
+maybe_calculate
+===============
 
 
+.. Signature -------------------------------
 
-ISFDataBase.maybe_calculate
-===========================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.maybe_calculate(key, fun, **kwargs)
+.. function:: data_base.isf_data_base.ISFDataBase.maybe_calculate(key, fun, **kwargs)
 
 
    Get or calculate a value in the database.
@@ -20,9 +19,9 @@ ISFDataBase.maybe_calculate
    :type key: str
    :param fun: The function that calculates a value if the key does not exist.
    :type fun: function
-   :param \*\*kwargs: Additional arguments that are passed to :py:meth:`~data_base.isf_data_base.ISFDataBase.set`.
+   :param kwargs: Additional arguments that are passed to :func:`~data_base.isf_data_base.ISFDataBase.set`.
 
-   .. attention:: ``kwargs`` are not passed to the function ``fun``, but to the :py:meth:`set` method.
+   .. attention:: ``kwargs`` are not passed to the function ``fun``, but to the :func:`set` method.
 
    Example::
 

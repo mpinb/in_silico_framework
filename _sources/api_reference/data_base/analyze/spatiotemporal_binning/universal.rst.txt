@@ -6,14 +6,14 @@ universal
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.spatiotemporal_binning.universal(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
+.. function:: data_base.analyze.spatiotemporal_binning.universal(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
 
 
    Bin a pandas or dask DataFrame by both distance and time.
 
    Infers the type of the input DataFrame and calls the appropriate binning function.
 
-   :param df: DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+   :param df: DataFrame to bin. Must contain a column with the name :param:`distance_column` that contains the distance values.
    :type df: ~dask.dataframe.DataFrame
    :param distance_column: Column name of the distance values.
    :type distance_column: str
@@ -27,9 +27,9 @@ universal
    :type time_distance_bins: int
 
    :returns:     A 2D array of the binned values.
-   :rtype: :py:class:`~numpy.array`
+   :rtype: :class:`~numpy.array`
 
-   .. seealso:: :py:meth:`~data_base.analyze.spatial_binning.universal_pd`
+   .. seealso:: :func:`~data_base.analyze.spatial_binning.universal_pd`
 
 
 

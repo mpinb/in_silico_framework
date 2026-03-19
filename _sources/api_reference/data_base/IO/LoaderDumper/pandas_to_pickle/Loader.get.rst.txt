@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.pandas_to_pickle.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.pandas_to_pickle.Loader.get(savedir)
 
 
    Load the pandas DataFrame from the specified folder

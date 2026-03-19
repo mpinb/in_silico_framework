@@ -6,10 +6,10 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.just_create_isf_db.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.just_create_isf_db.dump(obj, savedir)
 
 
-   Create a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :paramref:`savedir`
+   Create a :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :param:`savedir`
 
    :param obj: No object is required. If an object is passed, it is ignored.
    :type obj: None, optional

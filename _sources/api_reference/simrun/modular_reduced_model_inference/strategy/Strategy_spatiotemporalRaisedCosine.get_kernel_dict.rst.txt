@@ -1,0 +1,15 @@
+
+
+get_kernel_dict
+===============
+
+
+.. Signature -------------------------------
+
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_kernel_dict(x, normalize=False)
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

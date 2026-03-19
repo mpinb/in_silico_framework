@@ -1,16 +1,15 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.cell.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.cell.Loader.get(savedir)
 
 
-   Loads a :py:class:`~single_cell_parser.cell.Cell` object from a directory
+   Loads a :class:`~single_cell_parser.cell.Cell` object from a directory
 
 
 

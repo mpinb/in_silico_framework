@@ -6,7 +6,7 @@ compute_ISI_from_st
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st(st, timepoint, fillna=None)
+.. function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st(st, timepoint, fillna=None)
 
 
    Calculate the time since the last spike in ms for each element in a spike time pd.Series or pd.DataFrame.
@@ -26,8 +26,8 @@ compute_ISI_from_st
 
    .. seealso::
 
-      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
-      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
+      :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+      :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_array` for the array version.
 
 
 

@@ -1,0 +1,98 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~mechanisms` ❭ 
+
+
+l5pt
+====
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   check_nrnivmodl_is_available </api_reference/mechanisms/l5pt/check_nrnivmodl_is_available>
+   _check_if_mechanisms_are_compiled_at_path </api_reference/mechanisms/l5pt/_check_if_mechanisms_are_compiled_at_path>
+   _compile_mechanisms_at_path </api_reference/mechanisms/l5pt/_compile_mechanisms_at_path>
+   are_compiled </api_reference/mechanisms/l5pt/are_compiled>
+   are_loaded </api_reference/mechanisms/l5pt/are_loaded>
+   compile_mechanisms </api_reference/mechanisms/l5pt/compile_mechanisms>
+   load </api_reference/mechanisms/l5pt/load>
+
+.. module:: mechanisms.l5pt
+
+.. autoapi-nested-parse::
+   This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
+   In addition, it contains network connectivity parameters that define synaptic connections.
+
+   Importing this module on UNIX systems registers the mechanisms in NEURON namespace.
+   This only works if they are compiled, which should have happened upon configuring ISF.
+   If this is not the case, you can:
+
+   ```python
+   >>> import mechanisms.l5pt
+   >>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+   False
+   >>> mechanisms.l5pt.compile_mechanisms(force_recompile=False)  # compile mechanisms if not already compiled
+   >>> mechanisms.l5pt.are_compiled()  # check if all mechanisms are compiled
+   True
+   ```
+
+   .. seealso:: :mod:`config.isf_configure`
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`check_nrnivmodl_is_available <mechanisms.l5pt.check_nrnivmodl_is_available>`\ ()
+     - Check if nrnivmodl is available in the PATH.
+   * - :py:obj:`are_compiled <mechanisms.l5pt.are_compiled>`\ ()
+     - Check if all mechanisms are compiled.
+   * - :py:obj:`are_loaded <mechanisms.l5pt.are_loaded>`\ ()
+     - Check if all mechanisms are loaded into NEURON namespace.
+   * - :py:obj:`compile_mechanisms <mechanisms.l5pt.compile_mechanisms>`\ (force\_recompile)
+     - Compile the mechanisms for L5PTs.
+   * - :py:obj:`load <mechanisms.l5pt.load>`\ ()
+     - Load the mechanisms into NEURON namespace.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <mechanisms.l5pt.logger>`
+     - \-
+   * - :py:obj:`parent <mechanisms.l5pt.parent>`
+     - \-
+   * - :py:obj:`channels_path <mechanisms.l5pt.channels_path>`
+     - \-
+   * - :py:obj:`netcon_path <mechanisms.l5pt.netcon_path>`
+     - \-
+   * - :py:obj:`arch <mechanisms.l5pt.arch>`
+     - \-
+   * - :py:obj:`mech_lock <mechanisms.l5pt.mech_lock>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

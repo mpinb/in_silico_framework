@@ -1,20 +1,19 @@
 
 
+reconnect_network
+=================
 
 
+.. Signature -------------------------------
 
-NetworkMapper.reconnect_network
-===============================
-
-
-.. py:method:: single_cell_parser.network.NetworkMapper.reconnect_network()
+.. function:: single_cell_parser.network.NetworkMapper.reconnect_network()
 
 
    Re-generate activity and connectivity patterns for a network.
 
    .. deprecated:: 0.1.0
-       This method still uses the deprecated methods :py:meth:`~_connect_functional_synapses`
-       and :py:meth:`~_connect_spike_trains`, instead of :py:meth:`~_map_complete_synapse_realization`.
+       This method still uses the deprecated methods :func:`~_connect_functional_synapses`
+       and :func:`~_connect_spike_trains`, instead of :func:`~_map_complete_synapse_realization`.
 
 
 

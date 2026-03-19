@@ -1,13 +1,12 @@
 
 
+_has_simulation_data
+====================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._has_simulation_data
-==================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._has_simulation_data()
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._has_simulation_data()
 
 
    Test if the cell object has been simulated by checking if it has voltage data at the soma.

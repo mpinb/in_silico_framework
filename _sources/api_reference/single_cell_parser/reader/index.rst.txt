@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -24,13 +23,28 @@ reader
    read_synapse_weight_file </api_reference/single_cell_parser/reader/read_synapse_weight_file>
    read_landmark_file </api_reference/single_cell_parser/reader/read_landmark_file>
 
-.. py:module:: single_cell_parser.reader
+.. module:: single_cell_parser.reader
 
 .. autoapi-nested-parse::
    Read and parse :ref:`hoc_file_format`, :ref:`syn_file_format`, :ref:`con_file_format`, and :ref:`am_file_format` files.
 
-   .. seealso:: :py:mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
+   .. seealso:: :mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`_Edge <single_cell_parser.reader._Edge>`
+     - Convenience class for NEURON segments.
 
 
 .. rst-class:: absolute-paragraph
@@ -64,6 +78,24 @@ Functions
      - Reads list of all anatomical synapses and their maximum conductance values.
    * - :py:obj:`read_landmark_file <single_cell_parser.reader.read_landmark_file>`\ (landmarkFilename)
      - Read an AMIRA landmark file
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.reader.logger>`
+     - \-
+   * - :py:obj:`testAmFname <single_cell_parser.reader.testAmFname>`
+     - \-
+
 
 
 

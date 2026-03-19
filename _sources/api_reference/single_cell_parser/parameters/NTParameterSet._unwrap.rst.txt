@@ -1,13 +1,12 @@
 
 
+_unwrap
+=======
 
 
+.. Signature -------------------------------
 
-NTParameterSet._unwrap
-======================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet._unwrap(value)
+.. function:: single_cell_parser.parameters.NTParameterSet._unwrap(value)
 
 
 

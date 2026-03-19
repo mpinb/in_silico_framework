@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ 
 
 
@@ -31,11 +30,12 @@ evaluation
    hay_evaluate_StepTwo </api_reference/biophysics_fitting/hay/evaluation/hay_evaluate_StepTwo>
    hay_evaluate_StepThree </api_reference/biophysics_fitting/hay/evaluation/hay_evaluate_StepThree>
 
-.. py:module:: biophysics_fitting.hay.evaluation
+.. module:: biophysics_fitting.hay.evaluation
 
 .. autoapi-nested-parse::
    A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
    This module provides methods to run Hay's stimulus protocols, and evaluate the resulting voltage traces.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -53,6 +53,8 @@ Classes
      - Evaluate the :math:`BAC` stimulus protocol.
    * - :py:obj:`bAP <biophysics_fitting.hay.evaluation.bAP>`
      - Evaluate the :math:`bAP` stimulus protocol.
+   * - :py:obj:`_Step <biophysics_fitting.hay.evaluation._Step>`
+     - Template class for evaluating step current injections.
    * - :py:obj:`StepOne <biophysics_fitting.hay.evaluation.StepOne>`
      - Evaluate Step current one.
    * - :py:obj:`StepTwo <biophysics_fitting.hay.evaluation.StepTwo>`
@@ -96,6 +98,24 @@ Functions
      - Evaluate the :math:`StepTwo` stimulus protocol.
    * - :py:obj:`hay_evaluate_StepThree <biophysics_fitting.hay.evaluation.hay_evaluate_StepThree>`\ (\*\*kwargs)
      - Evaluate the :math:`StepTwo` stimulus protocol.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`objectives_step <biophysics_fitting.hay.evaluation.objectives_step>`
+     - \-
+   * - :py:obj:`objectives_BAC <biophysics_fitting.hay.evaluation.objectives_BAC>`
+     - \-
+
 
 
 

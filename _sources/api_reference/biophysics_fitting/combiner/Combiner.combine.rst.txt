@@ -1,13 +1,12 @@
 
 
+combine
+=======
 
 
+.. Signature -------------------------------
 
-Combiner.combine
-================
-
-
-.. py:method:: biophysics_fitting.combiner.Combiner.combine(features)
+.. function:: biophysics_fitting.combiner.Combiner.combine(features)
 
 
    Combines features that are computed by an Evaluator class.

@@ -1,0 +1,20 @@
+
+
+flush
+=====
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore.flush()
+
+
+   Rename all files according to the new names in :paramref:`_pending_renames`.
+
+   Deletes the old files and updates the :paramref:`_files` dictionary.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

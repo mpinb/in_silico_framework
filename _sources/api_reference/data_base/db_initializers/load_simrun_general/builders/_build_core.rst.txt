@@ -6,10 +6,10 @@ _build_core
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack, check_health=False, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.builders._build_core(db, repartition=None, metadata_dumper=pandas_to_msgpack, check_health=False, client=None)
 
 
-   Parse the essential simulation results and add it to :paramref:`db`.
+   Parse the essential simulation results and add it to :param:`db`.
 
    The following data is parsed and added to the database:
 
@@ -22,22 +22,22 @@ _build_core
          - Amount of spikes
        * - APheight
          - AP height
-   * - ``voltage traces``
-     - Somatic voltage traces
-   * - ``metadata``
-     - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
-   * - ``sim_trial_index``
-     - Simulation trial indices containing unique identifiers, and run numbers
-   * - ``simresult_path``
-     - top-level directory from where all simulation results were fetched
-   * - ``filelist``
-     - a list of voltage trace files, relative to the ``simresult_path``
+       * - ``voltage traces``
+         - Somatic voltage traces
+       * - ``metadata``
+         - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
+       * - ``sim_trial_index``
+         - Simulation trial indices containing unique identifiers, and run numbers
+       * - ``simresult_path``
+         - top-level directory from where all simulation results were fetched
+       * - ``filelist``
+         - a list of voltage trace files, relative to the ``simresult_path``
 
    :param db: The database to which the data should be added.
    :type db: ~data_base.DataBase
    :param repartition: If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
    :type repartition: bool
-   :param metadata_dumper: Function to dump the metadata to disk. Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
+   :param metadata_dumper: Function to dump the metadata to disk. Default is :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
    :type metadata_dumper: function
 
    :returns: None

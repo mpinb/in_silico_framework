@@ -1,13 +1,12 @@
 
 
+add_random_split
+================
 
 
+.. Signature -------------------------------
 
-DataSplitEvaluation.add_random_split
-====================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_random_split(name, percentage_train=0.7, l=None)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_random_split(name, percentage_train=0.7, l=None)
 
 
    Set the train-test split randomly.

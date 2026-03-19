@@ -1,13 +1,12 @@
 
 
+plot
+====
 
 
+.. Signature -------------------------------
 
-CellMorphologyVisualizer.plot
-=============================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot(color='grey', show_legend=True, show_synapses=False, time_point=None, save='', highlight_section=None, highlight_x=None)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot(color='grey', show_legend=True, show_synapses=False, time_point=None, save='', highlight_section=None, highlight_x=None)
 
 
    Plot the cell morphology in 3D.
@@ -17,8 +16,8 @@ CellMorphologyVisualizer.plot
    :param color: If you want some other color overlayed on the cell morphology.
                  Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
    :type color: str | [[float]]
-   :param legend: whether the voltage legend should appear in the plot
-   :type legend: bool
+   :param show_legend: whether the voltage legend should appear in the plot
+   :type show_legend: bool
    :param show_synapses: whether the synapse activations should be shown
    :type show_synapses: bool
    :param time_point: time point from which we want to gather the voltage/synapses. Defaults to 0

@@ -1,18 +1,17 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-DataView.setup
-==============
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataView.setup(Rm)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.DataView.setup(Rm)
 
 
    Initialize from a reduced model.
 
-   Allow access to parent :py:class:`Rm` attributes.
+   Allow access to parent :class:`Rm` attributes.
 
    :param Rm: The reduced model to initialize from.
    :type Rm: Rm

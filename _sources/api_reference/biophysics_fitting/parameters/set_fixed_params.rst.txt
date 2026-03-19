@@ -6,7 +6,7 @@ set_fixed_params
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.parameters.set_fixed_params(params, fixed_params=None)
+.. function:: biophysics_fitting.parameters.set_fixed_params(params, fixed_params=None)
 
 
    Add fixed_params to params.

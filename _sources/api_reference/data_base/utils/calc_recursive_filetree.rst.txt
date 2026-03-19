@@ -6,7 +6,7 @@ calc_recursive_filetree
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.calc_recursive_filetree(db, root_dir_path, max_lines=30, depth=0, max_depth=2, max_lines_per_key=3, lines=None, indent=None, all_files=False, colorize=True)
+.. function:: data_base.utils.calc_recursive_filetree(db, root_dir_path, max_lines=30, depth=0, max_depth=2, max_lines_per_key=3, lines=None, indent=None, all_files=False, colorize=True)
 
 
    Fetches the contents of an db and formats them as a string representing a tree structure

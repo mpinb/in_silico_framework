@@ -1,13 +1,12 @@
 
 
+get_mesh_coordinates_vectorized
+===============================
 
 
+.. Signature -------------------------------
 
-ScalarField.get_mesh_coordinates_vectorized
-===========================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates_vectorized(coords)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_mesh_coordinates_vectorized(coords)
 
 
    Vectorized sampling of scalar values at multiple coordinates.

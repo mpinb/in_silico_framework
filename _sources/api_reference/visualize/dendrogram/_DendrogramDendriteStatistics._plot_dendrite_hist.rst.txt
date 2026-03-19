@@ -1,16 +1,15 @@
 
 
+_plot_dendrite_hist
+===================
 
 
+.. Signature -------------------------------
 
-_DendrogramDendriteStatistics._plot_dendrite_hist
-=================================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._plot_dendrite_hist(ax, xlim, binsize=50)
+.. function:: visualize.dendrogram._DendrogramDendriteStatistics._plot_dendrite_hist(ax, xlim, binsize=50)
 
 
-   Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
+   Base method for plotting a histogram of dendrite length on an :class:`matplotlib.axes.Axes` object.
 
    :param ax: The matplotlib axes object.
    :type ax: matplotlib.axes.Axes
@@ -20,7 +19,7 @@ _DendrogramDendriteStatistics._plot_dendrite_hist
    :type binsize: float
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.axes.Axes`
+   :rtype: :class:`matplotlib.axes.Axes`
 
 
 

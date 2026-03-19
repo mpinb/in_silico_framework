@@ -6,7 +6,7 @@ get_recsite_labels_from_dend_vt_filelist
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix)
+.. function:: data_base.db_initializers.load_simrun_general.file_handling.get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix)
 
 
    Get the recording site labels from a list of dendritic voltage trace files.
@@ -22,7 +22,7 @@ get_recsite_labels_from_dend_vt_filelist
    :param filelist: List of filenames to dendritic voltage trace results.
    :type filelist: List[str]
    :param full_suffix: Shared suffix of the filenames that is mutually exclusive from the recsite label.
-                       This is normally fetched by the higher-level :py:func:`load_dendritic_voltage_traces`
+                       This is normally fetched by the higher-level :func:`load_dendritic_voltage_traces`
    :type full_suffix: str
 
    :returns: List of recording site labels.

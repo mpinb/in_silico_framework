@@ -6,7 +6,7 @@ dask_to_pandas
 
 .. Signature -------------------------------
 
-.. py:function:: visualize._decorators.dask_to_pandas(fun)
+.. function:: visualize._decorators.dask_to_pandas(fun)
 
 
    Decorator that converts function arguments from dask to pandas.

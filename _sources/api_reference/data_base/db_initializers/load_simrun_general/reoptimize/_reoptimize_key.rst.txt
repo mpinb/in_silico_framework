@@ -6,7 +6,7 @@ _reoptimize_key
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.reoptimize._reoptimize_key(db, key, new_dumper, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.reoptimize._reoptimize_key(db, key, new_dumper, client=None)
 
 
 

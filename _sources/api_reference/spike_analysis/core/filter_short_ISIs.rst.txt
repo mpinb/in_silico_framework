@@ -6,7 +6,7 @@ filter_short_ISIs
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.filter_short_ISIs(t, tdelta=0.0)
+.. function:: spike_analysis.core.filter_short_ISIs(t, tdelta=0.0)
 
 
    Filters out any events that occur in an interval shorter than tdelta.

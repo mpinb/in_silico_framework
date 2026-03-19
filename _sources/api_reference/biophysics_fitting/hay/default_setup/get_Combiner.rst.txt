@@ -6,10 +6,10 @@ get_Combiner
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.get_Combiner(step=False, include_DI3=True)
+.. function:: biophysics_fitting.hay.default_setup.get_Combiner(step=False, include_DI3=True)
 
 
-   Get a set up :py:class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
+   Get a set up :class:`~biophysics_fitting.combiner.Combiner` object for the Hay protocol.
 
    :param step: Whether to include step current measurements.
    :type step: bool
@@ -18,7 +18,7 @@ get_Combiner
    :type include_DI3: bool
 
    :returns: A combiner object.
-   :rtype: :py:class:`~biophysics_fitting.combiner.Combiner`
+   :rtype: :class:`~biophysics_fitting.combiner.Combiner`
 
    .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 

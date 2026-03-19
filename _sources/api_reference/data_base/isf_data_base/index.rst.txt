@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -19,10 +18,11 @@ isf_data_base
    make_all_str </api_reference/data_base/isf_data_base/make_all_str>
    get_dumper_from_folder </api_reference/data_base/isf_data_base/get_dumper_from_folder>
 
-.. py:module:: data_base.isf_data_base
+.. module:: data_base.isf_data_base
 
 .. autoapi-nested-parse::
    The :py:class:`~data_base.isf_data_base.ISFDataBase` class for robust and efficient data storage.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -59,6 +59,26 @@ Functions
      - Convert all items in a (nested) dictionary to string.
    * - :py:obj:`get_dumper_from_folder <data_base.isf_data_base.get_dumper_from_folder>`\ (folder, return\_)
      - Given a folder (i.e. database key), return the dumper that was used to save the data in that folder/key.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`DEFAULT_DUMPER <data_base.isf_data_base.DEFAULT_DUMPER>`
+     - \-
+   * - :py:obj:`VC <data_base.isf_data_base.VC>`
+     - \-
+   * - :py:obj:`logger <data_base.isf_data_base.logger>`
+     - \-
+
 
 
 

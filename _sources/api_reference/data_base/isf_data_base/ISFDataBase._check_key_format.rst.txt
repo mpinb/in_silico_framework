@@ -1,13 +1,12 @@
 
 
+_check_key_format
+=================
 
 
+.. Signature -------------------------------
 
-ISFDataBase._check_key_format
-=============================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase._check_key_format(key_str_tuple)
+.. function:: data_base.isf_data_base.ISFDataBase._check_key_format(key_str_tuple)
 
 
    Checks if a key is valid for setting data.
@@ -15,8 +14,8 @@ ISFDataBase._check_key_format
    This is the first line of checks when a user sets a key.
    For this reason, ``key`` is not a pathlib.Path object in this method, but a string or tuple.
 
-   :param key: The key
-   :type key: str|tuple
+   :param key_str_tuple: The key, either as a string or a tuple
+   :type key_str_tuple: str|tuple
 
    :raises ValueError: If the key is over 100 characters long.
    :raises ValueError: If the key contains characters that are not allowed (only numeric or latin alphabetic characters, "-" and "_" are allowed)

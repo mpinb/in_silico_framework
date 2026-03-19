@@ -6,7 +6,7 @@ get_bin_adjacency_map_in_section
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section(cell, section_id, section_distances_df)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section(cell, section_id, section_distances_df)
 
 
    Create an adjacency map with bin-specific resolution for a given section.
@@ -21,7 +21,7 @@ get_bin_adjacency_map_in_section
    Eeach section always has one or more bins.
 
    :param cell: the Cell object
-   :type cell: Cell
+   :type cell: ~single_cell_parser.cell.Cell
    :param section_id: index of the neuron section
    :type section_id: int
    :param section_distances_df: the dataframe describing distance to soma for all sections, as provided by :meth:get_section_distances_df

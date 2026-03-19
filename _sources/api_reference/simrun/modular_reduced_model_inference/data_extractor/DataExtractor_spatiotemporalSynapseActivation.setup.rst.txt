@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation.setup
-===================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.setup(Rm)
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.setup(Rm)
 
 
    Set up the data extractor.

@@ -6,15 +6,15 @@ hay_evaluate_BAC
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_BAC(**kwargs)
+.. function:: biophysics_fitting.hay.evaluation.hay_evaluate_BAC(**kwargs)
 
 
    Evaluate the :math:`BAC` stimulus protocol.
 
-   Initializes a :py:class:`BAC` object with the default keyword arguments,
+   Initializes a :class:`BAC` object with the default keyword arguments,
    and calls the evaluation on the voltage traces.
 
-   :param \*\*kwargs: Additional or overriding keyword arguments for the :py:class:`BAC` object. Defaults to None.
+   :param kwargs: Additional or overriding keyword arguments for the :class:`BAC` object. Defaults to None.
 
    :returns: Dictionary with evaluation metrics.
    :rtype: dict

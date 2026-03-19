@@ -1,13 +1,12 @@
 
 
+_assign_anatomical_synapses
+===========================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._assign_anatomical_synapses
-=========================================
-
-
-.. py:method:: single_cell_parser.network.NetworkMapper._assign_anatomical_synapses()
+.. function:: single_cell_parser.network.NetworkMapper._assign_anatomical_synapses()
 
 
    Assigns synapses to postsynaptic cell from :ref:`syn_file_format` files.

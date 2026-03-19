@@ -1,0 +1,28 @@
+
+
+isf_is_using_legacy_mdb
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_is_using_legacy_mdb()
+
+
+   Check if ISF is configured to use :mod:`model_data_base`
+
+   The use of :mod:`model_data_base` is strongly discouraged, as the saved data is not robust under API changes.
+
+   There are two reasons to use it anyways:
+
+   - Reading in existing data that has already been saved with this database system (i.e. the IBS Oberlaender Lab), in which case one must also `from ibs_projects import compatibility`
+   - Testing purposes
+
+   :returns: whether or not ISF needs to use :mod:`model_data_base` as a database backend.
+   :rtype: bool
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -6,7 +6,7 @@ find_crossing
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.find_crossing(v, thresh)
+.. function:: biophysics_fitting.ephys.find_crossing(v, thresh)
 
 
    Original NEURON doc:

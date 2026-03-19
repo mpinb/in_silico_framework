@@ -1,13 +1,12 @@
 
 
+interactive_plot
+================
 
 
+.. Signature -------------------------------
 
-CellMorphologyInteractiveVisualizer.interactive_plot
-====================================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot(color='grey', renderer='notebook_connected', diameter=None, time_point=None, show=True)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_plot(color='grey', renderer='notebook_connected', diameter=None, time_point=None, show=True)
 
 
    This method shows a plot with an interactive cell, overlayed with scalar data (if provided with the data argument).
@@ -18,6 +17,35 @@ CellMorphologyInteractiveVisualizer.interactive_plot
    :param time_point: time_point at which to plot some scalar data. Ignored when color does not refer to scalar data.
    :type time_point: float | int
    :param diameter: If the actual diameter is poorly visible, set this value to a fixed diameter.
+   :param renderer: Type of backend renderer to use for rendering the javascript/HTML VBox.
+                    Defaults to "notebook_connected". Available renderers are:
+
+                    - 'plotly_mimetype'
+                    - 'jupyterlab'
+                    - 'nteract'
+                    - 'vscode'
+                    - 'notebook'
+                    - 'notebook_connected'
+                    - 'kaggle'
+                    - 'azure'
+                    - 'colab'
+                    - 'cocalc'
+                    - 'databricks'
+                    - 'json'
+                    - 'png'
+                    - 'jpeg'
+                    - 'jpg'
+                    - 'svg'
+                    - 'pdf'
+                    - 'browser'
+                    - 'firefox'
+                    - 'chrome'
+                    - 'chromium'
+                    - 'iframe'
+                    - 'iframe_connected'
+                    - 'sphinx_gallery'
+                    - 'sphinx_gallery_png'
+   :type renderer: str
 
 
 

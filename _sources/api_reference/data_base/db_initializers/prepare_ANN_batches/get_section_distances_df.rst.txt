@@ -6,13 +6,13 @@ get_section_distances_df
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_section_distances_df(neuron_param_file, silent=True)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_section_distances_df(neuron_param_file, silent=True)
 
 
    Bin the morphology of a neuron from a :ref:`cell_parameters_format` file.
 
    This method reads the neuron parameter file and bins the morphology of the neuron into spatial bins.
-   The amount of bins is inferred by :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`.
+   The amount of bins is inferred by :func:`~data_base.db_initializers.prepare_ANN_batches.get_binsize`.
 
    :param neuron_param_file: The path to the neuron parameter file.
    :type neuron_param_file: str

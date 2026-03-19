@@ -1,0 +1,71 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~config` ❭ 
+
+
+isf_configure
+=============
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+
+.. module:: config.isf_configure
+
+.. autoapi-nested-parse::
+   Configure ISF for your local system.
+
+   This script is intended to be run once after installing ISF.
+   It generates parameter files with resolved filepaths for your filesystem.
+   In addition, it compiles the L5PT mechanisms if not already compiled,
+   and loads them into NEURON namespace.
+
+   Configuring ISF using the pixi installation can be done with::
+
+       pixi r configure <force_recompile> <overwrite_param_files>
+
+   This `pixi` command has positional boolean arguments: `force_recompile` and `overwrite_param_files`.
+   Make sure their value maps to a Python-interpretable boolean, such as `1`, `True`, `0` and `False`.
+
+   Example::
+
+       pixi r configure 1 0          # force recompile, don't overwrite existing parameter files
+       pixi r configure False True   # don't force recompile, overwrite existing parameter files
+       pixi r configure  # (default) don't force recompile or overwrite existing parameter files
+
+   Alternatively, this script can also be run directly from the command line using::
+
+       python -m config.isf_configure --force-recompile=True/False --overwrite-param-files=True/False
+
+   Make sure you run this from within the ISF environment, so Python can find the ISF packages and dependencies.
+
+   .. seealso:: :func:`getting_started.generate_param_files_with_valid_references`
+
+   .. seealso:: :func:`mechanisms.l5pt.compile_l5pt_mechanisms`
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`parser <config.isf_configure.parser>`
+     - \-
+
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

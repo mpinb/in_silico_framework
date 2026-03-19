@@ -6,7 +6,7 @@ value_to_color
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.value_to_color(v, vmin=0, vmax=1)
+.. function:: visualize.utils.value_to_color(v, vmin=0, vmax=1)
 
 
    Map a value to a color.

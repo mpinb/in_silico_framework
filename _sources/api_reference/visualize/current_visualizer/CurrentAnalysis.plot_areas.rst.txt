@@ -1,13 +1,12 @@
 
 
+plot_areas
+==========
 
 
+.. Signature -------------------------------
 
-CurrentAnalysis.plot_areas
-==========================
-
-
-.. py:method:: visualize.current_visualizer.CurrentAnalysis.plot_areas(ax=None, normalized=False, plot_net=False, plot_voltage=False, t_stim=295, select_window_relative_to_stim=(0, 55))
+.. function:: visualize.current_visualizer.CurrentAnalysis.plot_areas(ax=None, normalized=False, plot_net=False, plot_voltage=False, t_stim=295, select_window_relative_to_stim=(0, 55))
 
 
    Plot the ion currents and the net current of a cell simulation.

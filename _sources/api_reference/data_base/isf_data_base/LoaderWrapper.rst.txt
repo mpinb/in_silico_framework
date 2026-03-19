@@ -11,10 +11,9 @@ LoaderWrapper
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.isf_data_base.LoaderWrapper(relpath)
+.. class:: data_base.isf_data_base.LoaderWrapper(relpath)
    
    This is a pointer to data, which is stored elsewhere.
 

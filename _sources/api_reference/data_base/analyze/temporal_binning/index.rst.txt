@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.analyze` ❭ 
 
 
@@ -16,13 +15,14 @@ temporal_binning
    temporal_binning_dask </api_reference/data_base/analyze/temporal_binning/temporal_binning_dask>
    universal </api_reference/data_base/analyze/temporal_binning/universal>
 
-.. py:module:: data_base.analyze.temporal_binning
+.. module:: data_base.analyze.temporal_binning
 
 .. autoapi-nested-parse::
    Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
 
-   This is used in :py:mod:`data_base.db_initializers.synapse_activation_binning` to bin
+   This is used in :mod:`data_base.db_initializers.synapse_activation_binning` to bin
    synapse activations.
+
 
 
 
@@ -41,8 +41,10 @@ Functions
      - Bin timevalues in a pandas DataFrame.
    * - :py:obj:`temporal_binning_dask <data_base.analyze.temporal_binning.temporal_binning_dask>`\ (ddf, bin\_size, min\_time, max\_time, normalize, client)
      - Bin timevalues in a dask DataFrame.
-   * - :py:obj:`universal <data_base.analyze.temporal_binning.universal>`\ (\*args, \*\*kwargs)
+   * - :py:obj:`universal <data_base.analyze.temporal_binning.universal>`\ (df, bin\_size, min\_time, max\_time, normalize, \*\*kwargs)
      - Bin spike times for dask or pandas dataframes.
+
+
 
 
 

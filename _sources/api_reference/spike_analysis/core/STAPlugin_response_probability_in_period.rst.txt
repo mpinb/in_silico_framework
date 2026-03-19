@@ -19,10 +19,11 @@ STAPlugin_response_probability_in_period
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: spike_analysis.core.STAPlugin_response_probability_in_period(name='frequency_in_period', source='st_df', period=None, t_start=None, t_end=None)
+.. class:: spike_analysis.core.STAPlugin_response_probability_in_period(name='frequency_in_period', source='st_df', period=None, t_start=None, t_end=None)
+
+   Bases: :py:obj:`STAPlugin_TEMPLATE`
    
    SpikeTimeAnalysis (STA) plugin to compute the response probability in a period.
 

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -15,13 +14,14 @@ histogram
    histogram </api_reference/visualize/histogram/histogram>
    histogram2 </api_reference/visualize/histogram/histogram2>
 
-.. py:module:: visualize.histogram
+.. module:: visualize.histogram
 
 .. autoapi-nested-parse::
    Plot line histograms
 
    This module provides convenience methods for plotting line histograms (so no filled surfaces) from precomputed bins.
    This is used to plot out e.g. activity data for multiple populations.
+
 
 
 
@@ -40,6 +40,8 @@ Functions
      - Efficiently plot a histogram from bins.
    * - :py:obj:`histogram2 <visualize.histogram.histogram2>`\ (hist\_bins, color, ax, label, mode)
      - Plot a histogram from bins.
+
+
 
 
 

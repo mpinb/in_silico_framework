@@ -29,22 +29,21 @@ Simulator_Setup
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.simulator.Simulator_Setup
+.. class:: biophysics_fitting.simulator.Simulator_Setup
    
    Class for setting up cells with biophysical details.
 
-   This class is an inherent attribute of the :py:class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
+   This class is an inherent attribute of the :class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
    This class concerns with setting up a cell with biophysical details.
 
    Usually, a simulation contains fixed parameters, specific to the cell (e.g. the filename of the morphology)
    and/or stimulus protocol (e.g. recording sites). Such fixed parameters can be defined by adding
-   :py:meth:`~biophysics_fitting.parameters.set_fixed_params` to :paramref:`param_modify_funs`.
+   :func:`~biophysics_fitting.parameters.set_fixed_params` to :param:`param_modify_funs`.
    A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace
-   of the apical dendrite. Make sure that the :py:class:`~biophysics_fitting.simulator.Simulator` :paramref:`stim_run_fun` reads the
-   parameter :paramref:`recSite` and sets up the stimulus accordingly (see :py:class:`~biophysics_fitting.simulator.Simulator`).
+   of the apical dendrite. Make sure that the :attr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the
+   parameter :param:`recSite` and sets up the stimulus accordingly (see :class:`~biophysics_fitting.simulator.Simulator`).
 
    Example::
 
@@ -86,7 +85,7 @@ Simulator_Setup
        cell, params
 
    Each function that receives the biophysical parameter vector
-   (i.e. :paramref:`cell_param_modify_funs` and :paramref:`cell_modify_funs`)
+   (i.e. :param:`cell_param_modify_funs` and :param:`cell_modify_funs`)
    only sees a subset of the parameter vector that is provided by the user. This subset is determined
    by the name by which the function is registered.
 
@@ -116,7 +115,7 @@ Simulator_Setup
 
       .. attribute:: cell_param_generator
 
-         A function that generates a :py:class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
+         A function that generates a :class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
 
          :type: callable
 
@@ -128,7 +127,7 @@ Simulator_Setup
 
       .. attribute:: cell_generator
 
-         A function that generates a :py:class:`~single_cell_parser.cell.Cell` object.
+         A function that generates a :class:`~single_cell_parser.cell.Cell` object.
 
          :type: callable
 
@@ -193,7 +192,7 @@ Simulator_Setup
       * - :py:obj:`get_params <biophysics_fitting.simulator.Simulator_Setup.get_params>`\ (params)
         - Get the modified biophysical parameters.
       * - :py:obj:`get_cell_params <biophysics_fitting.simulator.Simulator_Setup.get_cell_params>`\ (params)
-        - Get the cell parameters as an :py:class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
+        - Get the cell parameters as an :class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
       * - :py:obj:`get_cell_params_with_default_sim_prams <biophysics_fitting.simulator.Simulator_Setup.get_cell_params_with_default_sim_prams>`\ (params, recordingSites, tStart, tStop, dt, Vinit, T)
         - Get a neuron parameter object.
       * - :py:obj:`get <biophysics_fitting.simulator.Simulator_Setup.get>`\ (params)

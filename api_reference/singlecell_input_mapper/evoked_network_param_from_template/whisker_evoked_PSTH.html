@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -711,6 +711,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -884,12 +899,12 @@
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH">
 <a class="reference internal" href="../index.html#module-singlecell_input_mapper" title="singlecell_input_mapper (Python module)"><span class="sig-name descname"><span class="pre">singlecell_input_mapper</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-singlecell_input_mapper.evoked_network_param_from_template" title="singlecell_input_mapper.evoked_network_param_from_template (Python module)"><span class="sig-name descname"><span class="pre">evoked_network_param_from_template</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">whisker_evoked_PSTH</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.column" title="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.column (Python parameter) — the column in the barrel cortex for which to parse the PSTHs."><span class="n"><span class="pre">column</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.deflectedWhisker" title="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.deflectedWhisker (Python parameter) — Which whisker was deflected."><span class="n"><span class="pre">deflectedWhisker</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.cellType" title="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.cellType (Python parameter) — Which cell type you want the PSTH for."><span class="n"><span class="pre">cellType</span></span></a></em></span><span class="sig-paren">)</span><a class="headerlink" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH" title="Link to this definition">¶</a></dt>
-<dd><p>Fetch the PSTHs of each celltype in a barrel cortex <code class="xref py py-paramref docutils literal notranslate"><span class="pre">column</span></code> for evoked activity reflecting
+<dd><p>Fetch the PSTHs of each celltype in a barrel cortex <a class="reference internal" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.column" title="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH.column (Python parameter) — the column in the barrel cortex for which to parse the PSTHs."><code class="xref py py-param docutils literal notranslate"><span class="pre">column</span></code></a> for evoked activity reflecting
 a passive whisker touch scenario.
 This method does not generate such data, but reads it in from existing files containing such empirical measurements,
 and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.</p>
 <p>The data linked in this runfile are for experiments where the C2 whisker was deflected.
-For situations where other <code class="xref py py-paramref docutils literal notranslate"><span class="pre">deflectedwhisker</span></code> are requested, activity data of equivalent
+For situations where other <code class="xref py py-param docutils literal notranslate"><span class="pre">deflectedwhisker</span></code> are requested, activity data of equivalent
 columns relative to the C2 is requested.</p>
 <p class="example rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">column</span> <span class="o">=</span> <span class="s1">&#39;B2&#39;</span>  <span class="c1"># I want activity from B2 column</span>
@@ -919,7 +934,7 @@ columns relative to the C2 is requested.</p>
 <dd class="field-even"><p>The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.</p>
 </dd>
 <dt class="field-odd" id="singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH-return-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format.">parameters.NTParameterSet</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping">parameters.NTParameterSet</a></p>
 </dd>
 </dl>
 </dd></dl>

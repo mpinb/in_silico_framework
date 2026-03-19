@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -14,7 +13,7 @@ parameters_to_cell
 
    parameters_to_cell </api_reference/simrun/parameters_to_cell/parameters_to_cell>
 
-.. py:module:: simrun.parameters_to_cell
+.. module:: simrun.parameters_to_cell
 
 .. autoapi-nested-parse::
    Rebuild and re-simulate a network-embedded cell from :ref:`param_file_format` files.
@@ -25,8 +24,9 @@ parameters_to_cell
 
    .. seealso::
 
-      To rebuild and re-simulate a :py:mod:`simrun` simulation from a :py:class:`~data_base.DataBase` instead of parameter files,
-      please refer to :py:mod:`~simrun.sim_trial_to_cell_object` instead
+      To rebuild and re-simulate a :mod:`simrun` simulation from a :class:`~data_base.DataBase` instead of parameter files,
+      please refer to :mod:`~simrun.sim_trial_to_cell_object` instead
+
 
 
 
@@ -43,6 +43,22 @@ Functions
    
    * - :py:obj:`parameters_to_cell <simrun.parameters_to_cell.parameters_to_cell>`\ (neuronParam, networkParam, synfile, dirPrefix, tStop, scale\_apical, range\_vars, allPoints, cell, evokedNW)
      - Rebuild and simulate a network-embedded cell.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`h <simrun.parameters_to_cell.h>`
+     - \-
+
 
 
 

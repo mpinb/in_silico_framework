@@ -6,7 +6,7 @@ optimize
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.optimize(db, dumper=None, select=None, scheduler=None, repartition=False, categorized=False, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.optimize(db, dumper=None, select=None, scheduler=None, repartition=False, categorized=False, client=None)
 
 
    Rewrite existing data with a new dumper.
@@ -25,12 +25,12 @@ optimize
    :type client: distributed.Client, optional
    :param dumper: Dumper to use for re-saving the data in a new format.
                   Default is ``None``, and the dumper is inferred from the data type.
-                  See also: :py:meth:`~data_base.db_initializers._get_dumper`
+                  See also: :func:`~data_base.db_initializers._get_dumper`
    :type dumper: module, deprecated
 
    .. deprecated:: 0.5.0
-       The :paramref:`dumper` argument is deprecated and will be removed in a future version.
-       Dumpers are configured in the centralized :py:mod:`~data_base.db_initializers.load_simrun_general.config` module.
+       The :param:`dumper` argument is deprecated and will be removed in a future version.
+       Dumpers are configured in the centralized :mod:`~data_base.db_initializers.load_simrun_general.config` module.
 
    :returns: None
 

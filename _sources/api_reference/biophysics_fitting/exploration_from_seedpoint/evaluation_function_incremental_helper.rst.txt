@@ -6,20 +6,20 @@ evaluation_function_incremental_helper
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.evaluation_function_incremental_helper(p, s=None, cutoffs=None, stim_order=['bAP', 'BAC', 'StepOne', 'StepTwo', 'StepThree'], verbose=True, evaluators_by_stimulus=None, additional_evaluation_functions=[], objectives_by_stimulus=None)
+.. function:: biophysics_fitting.exploration_from_seedpoint.evaluation_function_incremental_helper(p, s=None, cutoffs=None, stim_order=['bAP', 'BAC', 'StepOne', 'StepTwo', 'StepThree'], verbose=True, evaluators_by_stimulus=None, additional_evaluation_functions=[], objectives_by_stimulus=None)
 
 
    Helper function for the evaluation function.
    As soon as a single stimulus shows that a biophysical model does not match the objectives,
    it is not necessary to evaluate the other stimuli.
    This method runs the evaluation functions one by one and exits prematurely as soon as an objective
-   is above the desired cutoff defined in :paramref:`cutoffs`.
+   is above the desired cutoff defined in :param:`cutoffs`.
 
-   :param p: Parameter values used in the simulation. See :py:mod:`~biophysics_fitting.hay_complete_default_setup` for an example.
+   :param p: Parameter values used in the simulation. See :mod:`~biophysics_fitting.hay_complete_default_setup` for an example.
    :type p: pandas.Series
    :param s: Simulator object.
    :type s: Simulator
-   :param cutoffs: Dictionary with keys that are in :paramref:`stim_order`. Values are floats that define a maximum allowed error for any objective corresponding to that stimulus.
+   :param cutoffs: Dictionary with keys that are in :param:`stim_order`. Values are floats that define a maximum allowed error for any objective corresponding to that stimulus.
                    Note that each stimulus evokes a voltage trace that is parametrized by multiple objectives, each with their own error.
                    This method checks if the largest error exceeds some value.
                    Default: {'bAP':3.2, 'BAC': 3.2, 'StepOne':4.5, 'StepTwo': 4.5, 'StepThree': 4.5}, as used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`
@@ -29,11 +29,11 @@ evaluation_function_incremental_helper
    :type stim_order: array-like
    :param verbose: If True, print intermediate results.
    :type verbose: bool
-   :param evaluators_by_stimulus: Dictionary with keys that are in :paramref:`stim_order`. Values are evaluators that are used to evaluate the voltage traces.
+   :param evaluators_by_stimulus: Dictionary with keys that are in :param:`stim_order`. Values are evaluators that are used to evaluate the voltage traces.
    :type evaluators_by_stimulus: dict
    :param additional_evaluation_functions: List of functions that are called after the voltage traces are evaluated. The results are added to the evaluation dict, and returned.
    :type additional_evaluation_functions: list
-   :param objectives_by_stimulus: Dictionary with keys that are in :paramref:`stim_order`. Values are lists of objectives that are used to evaluate the voltage traces.
+   :param objectives_by_stimulus: Dictionary with keys that are in :param:`stim_order`. Values are lists of objectives that are used to evaluate the voltage traces.
    :type objectives_by_stimulus: dict
 
    :returns:

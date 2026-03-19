@@ -6,14 +6,14 @@ _helper
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.spike_detection._helper(x, threshold=0)
+.. function:: data_base.analyze.spike_detection._helper(x, threshold=0)
 
 
-   Parse a :ref:`voltage_traces_df_format` and return a :py:class:`pandas.Series` containing the spikes,
+   Parse a :ref:`voltage_traces_df_format` and return a :class:`pandas.Series` containing the spikes,
 
    Reads out a :ref:`voltage_traces_df_format`, so it can be fed into
-   :py:meth:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`.
-   The results are converted back to a :py:class:`pandas.Series`, so it can be concatenated
+   :func:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`.
+   The results are converted back to a :class:`pandas.Series`, so it can be concatenated
    to a dask dataframe
 
    :param x: A dataframe containing the voltage traces
@@ -22,9 +22,9 @@ _helper
    :type threshold: float
 
    :returns: A series containing the spikes
-   :rtype: :py:class:`~pandas.Series`
+   :rtype: :class:`~pandas.Series`
 
-   .. seealso:: :py:meth:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`
+   .. seealso:: :func:`~single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection`
 
 
 

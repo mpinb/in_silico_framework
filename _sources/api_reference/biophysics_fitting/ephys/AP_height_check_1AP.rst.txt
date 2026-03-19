@@ -6,7 +6,7 @@ AP_height_check_1AP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.AP_height_check_1AP(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.AP_height_check_1AP(t, v, thresh=None)
 
 
    Determines if an action potential (AP) is present in a voltage trace by checking if the voltage crosses a given threshold.

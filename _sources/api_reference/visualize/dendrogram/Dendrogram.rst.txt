@@ -21,12 +21,11 @@ Dendrogram
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.dendrogram.Dendrogram(cell)
+.. class:: visualize.dendrogram.Dendrogram(cell)
    
-   Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+   Plot a dendrogram of a :class:`~single_cell_parser.cell.Cell` object.
 
    Dendrograms are schematic representations of neuron morphologies.
 
@@ -47,11 +46,11 @@ Dendrogram
 
          The cell object.
 
-         :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :class:`~single_cell_parser.cell.Cell`
 
       .. attribute:: dendrogram_db
 
-         A list of :py:class:`_DendrogramSection` objects.
+         A list of :class:`_DendrogramSection` objects.
 
          :type: list
 

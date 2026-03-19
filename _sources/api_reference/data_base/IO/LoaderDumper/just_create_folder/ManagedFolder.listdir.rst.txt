@@ -1,13 +1,12 @@
 
 
+listdir
+=======
 
 
+.. Signature -------------------------------
 
-ManagedFolder.listdir
-=====================
-
-
-.. py:method:: data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.listdir()
+.. function:: data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.listdir()
 
 
    List the files in the folder

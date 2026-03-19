@@ -1,13 +1,12 @@
 
 
+_intersect_bboxes
+=================
 
 
+.. Signature -------------------------------
 
-SynapseMapper._intersect_bboxes
-===============================
-
-
-.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._intersect_bboxes(bbox1, bbox2)
+.. function:: single_cell_parser.synapse_mapper.SynapseMapper._intersect_bboxes(bbox1, bbox2)
 
 
    Check if two bounding boxes overlap

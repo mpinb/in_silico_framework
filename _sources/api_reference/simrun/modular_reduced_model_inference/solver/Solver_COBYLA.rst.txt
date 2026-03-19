@@ -20,16 +20,17 @@ Solver_COBYLA
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA(name)
+.. class:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA(name)
+
+   Bases: :py:obj:`_Solver`
    
    A :cite:t:`COBYLA` solver strategy for reduced models.
 
    .. seealso::
 
-      :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their
+      :mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their
       respective objective functions.
 
    :param name: name of the solver
@@ -45,7 +46,7 @@ Solver_COBYLA
 
       .. attribute:: optimize
 
-         Optimization function: :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
+         Optimization function: :func:`scipy.optimize.minimize` with ``method='COBYLA'``.
          Optimization function need an objective function to minimize.
          These objecetive functions depend on the strategy.
 

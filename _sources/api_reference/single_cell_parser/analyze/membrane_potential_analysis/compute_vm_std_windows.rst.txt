@@ -6,7 +6,7 @@ compute_vm_std_windows
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_std_windows(vStd, tStim, dt, width=35.0, window_start_times=None)
 
 
    Compute the standard deviation of the voltage during different time windows.

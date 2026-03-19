@@ -6,7 +6,7 @@ get_dumper_string_by_dumper_module
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.get_dumper_string_by_dumper_module(dumper_module)
+.. function:: data_base.IO.LoaderDumper.get_dumper_string_by_dumper_module(dumper_module)
 
 
    Convert a dumper submodule to a string.

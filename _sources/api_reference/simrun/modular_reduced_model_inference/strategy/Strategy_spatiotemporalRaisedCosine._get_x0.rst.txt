@@ -1,13 +1,12 @@
 
 
+_get_x0
+=======
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine._get_x0
-===========================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_x0()
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_x0()
 
 
    Get an initial guess for the learnable weights  :math:`\mathbf{x}` and :math:`\mathbf{y}` of the basis functions :math:`\mathbf{f}(\tau)` and :math:`\mathbf{g}(z)`.

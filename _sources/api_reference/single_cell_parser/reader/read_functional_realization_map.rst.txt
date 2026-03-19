@@ -6,7 +6,7 @@ read_functional_realization_map
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_functional_realization_map(fname)
+.. function:: single_cell_parser.reader.read_functional_realization_map(fname)
 
 
    Read in a :ref:`con_file_format` file and return a dictionary of functional connections.
@@ -16,7 +16,7 @@ read_functional_realization_map
    See also:
 
    - :ref:`con_file_format` for more information on the `.con` file format.
-   - :py:meth:`~single_cell_parser.writer.write_functional_realization_map` for the corresponding writer.
+   - :func:`~single_cell_parser.writer.write_functional_realization_map` for the corresponding writer.
 
    :param fname: The name of the file to be read.
    :type fname: str

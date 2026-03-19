@@ -1,20 +1,19 @@
 
 
+re_init_network
+===============
 
 
+.. Signature -------------------------------
 
-NetworkMapper.re_init_network
-=============================
-
-
-.. py:method:: single_cell_parser.network.NetworkMapper.re_init_network(replayMode=False)
+.. function:: single_cell_parser.network.NetworkMapper.re_init_network(replayMode=False)
 
 
    Reinitialize the network for a new simulation run.
 
    Sets all the presynaptic cells to ``off``.
 
-   .. seealso:: :py:meth:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
+   .. seealso:: :func:`~single_cell_parser.cell.PointCell.turn_off` for more information on turning cells off.
 
    :param replayMode: Whether or not to destroy the presynaptic cells as well. Default: False.
                       Set to False if you want to keep the presynaptic cells for a new simulation run.

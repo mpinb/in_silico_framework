@@ -1,0 +1,20 @@
+
+
+_resolve_syncon_ref
+===================
+
+
+.. Signature -------------------------------
+
+.. function:: data_base.db_initializers.load_simrun_general.filepath_resolution._resolve_syncon_ref(fn, ref)
+
+
+   Resolve relative references in :ref:`syn_file_format` or :ref:`con_file_format` files.
+
+   Relative references can either be filenmaes without preceding directory structure, or reldb://-style relative paths.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

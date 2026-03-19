@@ -6,7 +6,7 @@ compute_uPSP_amplitude
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_uPSP_amplitude(t, v, tSyn, isEPSP=True, t_width_baseline=10.0)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.compute_uPSP_amplitude(t, v, tSyn, isEPSP=True, t_width_baseline=10.0)
 
 
    Compute the amplitude of a uPSP.

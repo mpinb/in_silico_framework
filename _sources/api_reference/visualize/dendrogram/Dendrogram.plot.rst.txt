@@ -1,13 +1,12 @@
 
 
+plot
+====
 
 
+.. Signature -------------------------------
 
-Dendrogram.plot
-===============
-
-
-.. py:method:: visualize.dendrogram.Dendrogram.plot(ax=None)
+.. function:: visualize.dendrogram.Dendrogram.plot(ax=None)
 
 
    Plot the dendrogram.
@@ -16,7 +15,7 @@ Dendrogram.plot
    :type ax: matplotlib.axes.Axes
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.axes.Axes`
+   :rtype: :class:`matplotlib.axes.Axes`
 
 
 

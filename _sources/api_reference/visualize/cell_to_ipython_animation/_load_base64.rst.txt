@@ -6,7 +6,7 @@ _load_base64
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation._load_base64(filename, extension='png')
+.. function:: visualize.cell_to_ipython_animation._load_base64(filename, extension='png')
 
 
    Load a file and encode it in base64.

@@ -6,7 +6,7 @@ record_Step
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.record_Step(cell)
+.. function:: biophysics_fitting.hay.default_setup.record_Step(cell)
 
 
    Extract the voltage trace from the soma.

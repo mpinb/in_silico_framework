@@ -6,7 +6,7 @@ _build_synapse_activation
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_synapse_activation(db, repartition=False, n_chunks=5000)
+.. function:: data_base.db_initializers.load_simrun_general.builders._build_synapse_activation(db, repartition=False, n_chunks=5000)
 
 
    Parse the :ref:`syn_activation_format` and :ref:`spike_times_format` data.

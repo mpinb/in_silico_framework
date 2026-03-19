@@ -6,7 +6,7 @@ setup_soma_step
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim.setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0)
+.. function:: biophysics_fitting.setup_stim.setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0)
 
 
    Setup up a step current at the soma, or a given :paramref:`dist` from the soma.

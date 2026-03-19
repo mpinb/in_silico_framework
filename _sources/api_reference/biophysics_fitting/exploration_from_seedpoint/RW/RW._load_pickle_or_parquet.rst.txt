@@ -1,13 +1,12 @@
 
 
+_load_pickle_or_parquet
+=======================
 
 
+.. Signature -------------------------------
 
-RW._load_pickle_or_parquet
-==========================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet(outdir, iteration, mode='parquet_load')
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet(outdir, iteration, mode: Literal['pickle', 'parquet'])
 
 
    Load the results of a iteration from a pickle or parquet file.

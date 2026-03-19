@@ -1,13 +1,12 @@
 
 
+_get_amount_of_dendrite_in_bin
+==============================
 
 
+.. Signature -------------------------------
 
-_DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin
-============================================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin(min_, max_)
+.. function:: visualize.dendrogram._DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin(min_, max_)
 
 
    Get the amount of dendritic length in a certain bin of soma distance.

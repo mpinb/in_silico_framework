@@ -6,12 +6,12 @@ wait_until_key_removed
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.wait_until_key_removed(db, key, delay=5)
+.. function:: data_base.utils.wait_until_key_removed(db, key, delay=5)
 
 
    Wait until a key is removed from a database.
 
-   This function checks every :paramref:`delay` seconds if the key is still in the database.
+   This function checks every :param:`delay` seconds if the key is still in the database.
    Useful for waiting until a process has finished.
 
    :param db: the database

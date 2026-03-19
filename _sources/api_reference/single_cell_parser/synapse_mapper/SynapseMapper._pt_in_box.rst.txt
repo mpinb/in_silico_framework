@@ -1,13 +1,12 @@
 
 
+_pt_in_box
+==========
 
 
+.. Signature -------------------------------
 
-SynapseMapper._pt_in_box
-========================
-
-
-.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._pt_in_box(pt, box)
+.. function:: single_cell_parser.synapse_mapper.SynapseMapper._pt_in_box(pt, box)
 
 
    Check if a point is within a bounding box

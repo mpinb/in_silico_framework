@@ -1,13 +1,12 @@
 
 
+_get_cell_and_nw_map
+====================
 
 
+.. Signature -------------------------------
 
-PSPs._get_cell_and_nw_map
-=========================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map(network_param=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs._get_cell_and_nw_map(network_param=None)
 
 
    Get a network-embedded neuron model and its :py:class:`single_cell_parser.network.Networkmapper` from parameter files.

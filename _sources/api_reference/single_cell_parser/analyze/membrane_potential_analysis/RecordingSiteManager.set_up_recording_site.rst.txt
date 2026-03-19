@@ -1,19 +1,18 @@
 
 
+set_up_recording_site
+=====================
 
 
+.. Signature -------------------------------
 
-RecordingSiteManager.set_up_recording_site
-==========================================
-
-
-.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.set_up_recording_site(location, ID, filename)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.set_up_recording_site(location, ID, filename)
 
 
-   Set up a :py:class:`RecordingSite` from a location.
+   Set up a :class:`RecordingSite` from a location.
 
    Determines the section and segment on the cell corresponding
-   to the recording site location and creates new :py:class:`RecordingSite`.
+   to the recording site location and creates new :class:`RecordingSite`.
 
    Used during initialization.
 

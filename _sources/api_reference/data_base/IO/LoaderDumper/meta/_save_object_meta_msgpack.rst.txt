@@ -6,7 +6,7 @@ _save_object_meta_msgpack
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta._save_object_meta_msgpack(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.meta._save_object_meta_msgpack(obj, savedir)
 
 
    Save the meta of an object in msgpack format.

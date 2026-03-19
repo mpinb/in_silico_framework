@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -16,11 +15,13 @@ hay
    evaluation </api_reference/biophysics_fitting/hay/evaluation/index>  
    specification </api_reference/biophysics_fitting/hay/specification/index>  
 
-.. py:module:: biophysics_fitting.hay
+.. module:: biophysics_fitting.hay
 
 .. autoapi-nested-parse::
    Configuration and setup for simulating and evaluating biophysical models of Layer 5 Pyramidal Tract neurons according to the
    methods described in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
+
+
 
 
 
@@ -42,6 +43,7 @@ Modules
      - A Python translation of the evaluation functions used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.
    * - :py:obj:`specification <biophysics_fitting.hay.specification>`
      - This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+
 
 
 .. container:: doc-feedback

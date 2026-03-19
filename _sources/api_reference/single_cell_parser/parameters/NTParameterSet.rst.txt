@@ -26,10 +26,11 @@ NTParameterSet
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.parameters.NTParameterSet(data=None)
+.. class:: single_cell_parser.parameters.NTParameterSet(data=None)
+
+   Bases: :py:obj:`collections.abc.MutableMapping`
    
    NeuroTools Parameter Set format.
 

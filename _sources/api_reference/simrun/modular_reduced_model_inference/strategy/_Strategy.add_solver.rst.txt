@@ -1,13 +1,12 @@
 
 
+add_solver
+==========
 
 
+.. Signature -------------------------------
 
-_Strategy.add_solver
-====================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.add_solver(solver, setup=True)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy.add_solver(solver, setup=True)
 
 
    Add a solver to the strategy.

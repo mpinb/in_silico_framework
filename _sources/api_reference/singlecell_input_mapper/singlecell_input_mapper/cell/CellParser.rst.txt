@@ -20,17 +20,18 @@ CellParser
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser(hocFilename='')
+.. class:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser(hocFilename='')
+
+   Bases: :py:obj:`object`
    
    Extract cell morphology from an AMIRA hoc file.
 
    .. seealso::
 
-      This is not the same class as :py:class:`single_cell_parser.cell_parser.CellParser`.
-      This is a leightweight dataclass specialized for use with :py:mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
+      This is not the same class as :class:`single_cell_parser.cell_parser.CellParser`.
+      This is a leightweight dataclass specialized for use with :mod:`single_cell_parser.synapse_mapper.SynapseMapper`,
       and does not contain any biophysical details.
 
    :param hocFilename: File name of the hoc file. Default: ''.
@@ -48,7 +49,7 @@ CellParser
 
          Cell object.
 
-         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
    :Methods:
 

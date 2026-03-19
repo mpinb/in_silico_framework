@@ -22,14 +22,15 @@ SimControl
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.sim_control.SimControl(cell=None, sim_time=5, dt=0.001, T=37)
+.. class:: single_cell_parser.sim_control.SimControl(cell=None, sim_time=5, dt=0.001, T=37)
+
+   Bases: :py:obj:`object`
    
    Control a current clamp simulation.
 
-   Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+   Deprecated. Simulations are set up using the high-level interface :class:`~biophysics_fitting.simulator.Simulator`.
    Can still be useful for low-level control with NEURON.
 
    .. rubric:: Example
@@ -42,8 +43,8 @@ SimControl
 
    :param cell: The cell to simulate.
    :type cell: neuron:Section
-   :param simTime: Simulation time (ms). Default: 5
-   :type simTime: float
+   :param sim_time: Simulation time (ms). Default: 5
+   :type sim_time: float
    :param dt: Time step (ms). Default: 0.001
    :type dt: float
    :param T: Temperature (Celsius). Default: 37
@@ -55,7 +56,7 @@ SimControl
 
          The cell to simulate.
 
-         :type: :py:class:`neuron:Section`
+         :type: :class:`neuron:Section`
 
       .. attribute:: simTime
 
@@ -85,7 +86,7 @@ SimControl
 
          NEURON interface
 
-         :type: :py:class:`neuron.h`
+         :type: :class:`neuron.h`
 
    :Methods:
 

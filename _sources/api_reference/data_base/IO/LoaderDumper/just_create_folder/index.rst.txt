@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -17,10 +16,11 @@ just_create_folder
    check </api_reference/data_base/IO/LoaderDumper/just_create_folder/check>
    dump </api_reference/data_base/IO/LoaderDumper/just_create_folder/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.just_create_folder
+.. module:: data_base.IO.LoaderDumper.just_create_folder
 
 .. autoapi-nested-parse::
    Create a folder and return it as a ManagedFolder object.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -37,7 +37,7 @@ Classes
    * - :py:obj:`ManagedFolder <data_base.IO.LoaderDumper.just_create_folder.ManagedFolder>`
      - Wrapper class for a folder path
    * - :py:obj:`Loader <data_base.IO.LoaderDumper.just_create_folder.Loader>`
-     - Load a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+     - Load a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
 
 
 .. rst-class:: absolute-paragraph
@@ -55,6 +55,8 @@ Functions
      - Check whether the object can be saved with this dumper
    * - :py:obj:`dump <data_base.IO.LoaderDumper.just_create_folder.dump>`\ (obj, savedir)
      - Create a folder
+
+
 
 
 

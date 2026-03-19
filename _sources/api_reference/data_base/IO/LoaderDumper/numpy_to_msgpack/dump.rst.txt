@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.numpy_to_msgpack.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_msgpack.dump(obj, savedir)
 
 
 

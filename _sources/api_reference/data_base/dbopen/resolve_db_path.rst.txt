@@ -6,13 +6,16 @@ resolve_db_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.resolve_db_path(path, db_basedir=None)
+.. function:: data_base.dbopen.resolve_db_path(path, db_basedir=None)
 
 
    Resolve modular or relative database paths
 
    :param path: The path to resolve.
    :type path: str
+   :param db_basedir: Directory of a :class:`data_base.DataBase`.
+                      Only needed if the path is a relative database path (``reldb://``), not for modular database paths (``mdb://``).
+   :type db_basedir: str, optional
 
    :returns: The resolved path.
    :rtype: str

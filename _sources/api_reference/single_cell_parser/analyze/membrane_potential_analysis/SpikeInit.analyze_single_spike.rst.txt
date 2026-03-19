@@ -1,13 +1,12 @@
 
 
+analyze_single_spike
+====================
 
 
+.. Signature -------------------------------
 
-SpikeInit.analyze_single_spike
-==============================
-
-
-.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike(cell, tVec, thresh)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.analyze_single_spike(cell, tVec, thresh)
 
    :staticmethod:
 

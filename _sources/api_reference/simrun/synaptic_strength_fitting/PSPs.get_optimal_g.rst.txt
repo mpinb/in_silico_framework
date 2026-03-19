@@ -1,13 +1,12 @@
 
 
+get_optimal_g
+=============
 
 
+.. Signature -------------------------------
 
-PSPs.get_optimal_g
-==================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_optimal_g(measured_data, method='dynamic_baseline', merge_celltype_kwargs=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_optimal_g(measured_data, method='dynamic_baseline', merge_celltype_kwargs=None)
 
 
    Calculate the optimal synaptic conductance such that the EPSP matches empirical data.

@@ -1,13 +1,12 @@
 
 
+_gather_results
+===============
 
 
+.. Signature -------------------------------
 
-Rm._gather_results
-==================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm._gather_results(client)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.Rm._gather_results(client)
 
 
    Fetch the solver results from the dask scheduler.

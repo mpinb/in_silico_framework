@@ -1,13 +1,12 @@
 
 
+sAHPt
+=====
 
 
+.. Signature -------------------------------
 
-_Step.sAHPt
-===========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.sAHPt(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.sAHPt(voltage_traces)
 
 
    Get the slow afterhyperpolarization time in the somatic voltage trace.

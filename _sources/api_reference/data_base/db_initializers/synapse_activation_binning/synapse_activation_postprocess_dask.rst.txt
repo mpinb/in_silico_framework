@@ -6,7 +6,7 @@ synapse_activation_postprocess_dask
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask(ddf, **kwargs)
+.. function:: data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_dask(ddf, db=None, groupby=None, prefun=None, applyfun=None, postfun=None, scheduler=None, **kwargs)
 
 
    Calculates bins of synapse activation per trial from a dask dataframe.
@@ -22,32 +22,33 @@ synapse_activation_postprocess_dask
                    - any column in the specified dataframe.
    :type groupby: str
    :param db: if specified, the result will be computed immediately and saved in the database immediately.
-   :type db: DataBase
-   :param get: only has an effect if 'db' kwarg is provided. In this case, it allows to specify a dask scheduler for the computation.
-   :type get: dask scheduler
-   :param scheduler: Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
-   :type scheduler: dask scheduler
+   :type db: data_base.DataBase
+   :param scheduler: Specify a dask scheduler for the computation (e.g. :func:`dask.distributed.Client.get`)
+   :type scheduler: dask scheduler, optional
    :param prefun: A function to preprocess the synapse activation dataframe before binning.
                   The function should take a pandas dataframe and return a pandas dataframe.
-                  Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
-   :type prefun: callable
+                  Default: :func:`~data_base.db_initializers.synapse_activation_binning.prefun`
+   :type prefun: callable, optional
    :param applyfun: A function to bin the synapse activations.
                     The function should take a pandas dataframe and return a numpy array.
-                    Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
-   :type applyfun: callable
+                    Default: :func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+   :type applyfun: callable, optional
    :param postfun: A function to postprocess the binned synapse activations.
                    The function should take a pandas series and return a numpy array.
-                   Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
-   :type postfun: callable
+                   Default: :func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+   :type postfun: callable, optional
 
    :returns:     If computed, this will return a dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins.
-                 The dictionary keys are defined by :paramref:`groupby`.
-   :rtype: :py:class:`dask.delayed`
+                 The dictionary keys are defined by :param:`groupby`.
+   :rtype: :class:`dask.delayed`
 
    .. seealso::
 
-      :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
+      :func:`~data_base.db_initializers.synapse_activation_postprocess_pandas` for the non-delayed
       version of this method.
+
+   .. deprecated:: 0.5.0
+      The ``"get"`` keyword is deprecated. Please us ``'scheduler'`` instead.
 
 
 

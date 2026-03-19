@@ -1,13 +1,12 @@
 
 
+get_serialize_dict
+==================
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.get_serialize_dict
-=============================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict()
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.get_serialize_dict()
 
 
    Get a dictionary containing the attributes of the SpikeDetectionCreastTrough object.

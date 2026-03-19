@@ -1,13 +1,12 @@
 
 
+_setup
+======
 
 
+.. Signature -------------------------------
 
-_Strategy._setup
-================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._setup()
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy._setup()
 
 
    Strategy-specific setup.

@@ -6,7 +6,7 @@ temporal_binning_pd
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.temporal_binning.temporal_binning_pd(df, bin_size=None, min_time=None, max_time=None, normalize=True, bin_borders=None, rate=False)
+.. function:: data_base.analyze.temporal_binning.temporal_binning_pd(df, bin_size=1, min_time=None, max_time=None, normalize=True, bin_borders=None, rate=False)
 
 
    Bin timevalues in a pandas DataFrame.
@@ -17,13 +17,13 @@ temporal_binning_pd
 
    :param df: DataFrame with containing time values in columns whose name are integer-convertible.
    :type df: pandas.DataFrame
-   :param bin_size: Size of the bins. If not specified, :paramref:`bin_borders` have to be specified.
+   :param bin_size: Size of the bins. If not specified, :param:`bin_borders` have to be specified.
    :type bin_size: float, optional
    :param min_time: Minimum time to consider. If not specified, the minimum value in the DataFrame is used.
    :type min_time: float, optional
    :param max_time: Maximum time to consider. If not specified, the maximum value in the DataFrame is used.
    :type max_time: float, optional
-   :param bin_borders: List of bin borders. If not specified, :paramref:`bin_size` has to be specified.
+   :param bin_borders: List of bin borders. If not specified, :param:`bin_size` has to be specified.
    :type bin_borders: list, optional
    :param normalize: If True, normalize the output to the total number of elements in the DataFrame.
    :type normalize: bool, optional

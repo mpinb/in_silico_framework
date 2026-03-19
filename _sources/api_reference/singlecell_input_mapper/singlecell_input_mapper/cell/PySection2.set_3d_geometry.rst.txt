@@ -1,13 +1,12 @@
 
 
+set_3d_geometry
+===============
 
 
+.. Signature -------------------------------
 
-PySection2.set_3d_geometry
-==========================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2.set_3d_geometry(pts, diams)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2.set_3d_geometry(pts, diams)
 
 
    Invokes NEURON :cite:`hines2001neuron` 3D geometry setup

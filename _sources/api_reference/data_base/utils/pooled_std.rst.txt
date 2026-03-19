@@ -6,7 +6,7 @@ pooled_std
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.pooled_std(m, s, n)
+.. function:: data_base.utils.pooled_std(m, s, n)
 
 
    Calculates the pooled standard deviation out of samples.

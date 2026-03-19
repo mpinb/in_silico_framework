@@ -1,13 +1,12 @@
 
 
+save
+====
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.save
-=====================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save(arr, name)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save(arr, name)
 
 
    Save a numpy array to disk at the working_dir of this instance of NumpyStore.

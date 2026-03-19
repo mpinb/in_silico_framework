@@ -1,13 +1,12 @@
 
 
+get_voxel_bounds
+================
 
 
+.. Signature -------------------------------
 
-ScalarField.get_voxel_bounds
-============================
-
-
-.. py:method:: single_cell_parser.scalar_field.ScalarField.get_voxel_bounds(ijk)
+.. function:: single_cell_parser.scalar_field.ScalarField.get_voxel_bounds(ijk)
 
 
    Gets the bounding box of voxel given by indices i,j,k.

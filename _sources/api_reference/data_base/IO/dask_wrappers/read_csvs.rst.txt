@@ -6,7 +6,7 @@ read_csvs
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.dask_wrappers.read_csvs(*args, **kwargs)
+.. function:: data_base.IO.dask_wrappers.read_csvs(*args, **kwargs)
 
 
    Read dask dataframes from csv files.

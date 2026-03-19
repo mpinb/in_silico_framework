@@ -1,0 +1,24 @@
+
+
+get_isf_logger
+==============
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging.get_isf_logger(force_reconfigure=False)
+
+
+   Lazy initialization of the ISF logger.
+
+   :param force_reconfigure: If True, reconfigure the logger even if it has already been set up.
+   :type force_reconfigure: bool
+
+   :returns: The configured ISF logger instance.
+   :rtype: logging.Logger
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -23,7 +22,7 @@ cell_to_ipython_animation
    cell_to_animation </api_reference/visualize/cell_to_ipython_animation/cell_to_animation>
    cell_to_ipython_animation </api_reference/visualize/cell_to_ipython_animation/cell_to_ipython_animation>
 
-.. py:module:: visualize.cell_to_ipython_animation
+.. module:: visualize.cell_to_ipython_animation
 
 .. autoapi-nested-parse::
    Display animations in IPython sessions.
@@ -35,6 +34,7 @@ cell_to_ipython_animation
 
       Parts of this module are taken from the JSAnimation package (https://github.com/jakevdp/JSAnimation), which is licensed under the BSD 2-Clause License.
       The individual licensed components are appropriately marked with their corresponding license.
+
 
 
 
@@ -54,9 +54,9 @@ Functions
    * - :py:obj:`find_closest_index <visualize.cell_to_ipython_animation.find_closest_index>`\ (list\_, value)
      - Finds the index of the value which is closest to the value specified in the arguments
    * - :py:obj:`get_lines <visualize.cell_to_ipython_animation.get_lines>`\ (cell, time\_index, range\_vars)
-     - Get list of dictionaries of lines that can be displayed using the :py:meth:`plot_lines` function
+     - Get list of dictionaries of lines that can be displayed using the :func:`plot_lines` function
    * - :py:obj:`init_fig <visualize.cell_to_ipython_animation.init_fig>`\ (xlim, ylim)
-     - Initialize figure for :py:meth:`cell_to_animation`
+     - Initialize figure for :func:`cell_to_animation`
    * - :py:obj:`plot_lines_fun <visualize.cell_to_ipython_animation.plot_lines_fun>`\ (lines, ax)
      - Generate plots out of lines
    * - :py:obj:`parallelMovieMaker <visualize.cell_to_ipython_animation.parallelMovieMaker>`\ (basedir, lines, xlim, ylim)
@@ -65,6 +65,26 @@ Functions
      - Takes a cell object and creates a 2d animation plotting the range_vars vs soma distance over time.
    * - :py:obj:`cell_to_ipython_animation <visualize.cell_to_ipython_animation.cell_to_ipython_animation>`\ (\*args, \*\*kwargs)
      - Wrapper function to display the animation in the IPython notebook
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`isf_logger <visualize.cell_to_ipython_animation.isf_logger>`
+     - \-
+   * - :py:obj:`logger <visualize.cell_to_ipython_animation.logger>`
+     - \-
+   * - :py:obj:`html_template <visualize.cell_to_ipython_animation.html_template>`
+     - \-
+
 
 
 

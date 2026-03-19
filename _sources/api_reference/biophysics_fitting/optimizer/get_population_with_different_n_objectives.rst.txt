@@ -6,7 +6,7 @@ get_population_with_different_n_objectives
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.get_population_with_different_n_objectives(old_pop, n_objectives)
+.. function:: biophysics_fitting.optimizer.get_population_with_different_n_objectives(old_pop, n_objectives)
 
 
    Adapt the number of objectives of individuals

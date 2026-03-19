@@ -6,7 +6,7 @@ read_spike_times_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_spike_times_file(fname)
+.. function:: single_cell_parser.reader.read_spike_times_file(fname)
 
 
    Reads all trials and spike times within these trials.

@@ -6,10 +6,10 @@ get_lines
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.get_lines(cell, time_index, range_vars='Vm')
+.. function:: visualize.cell_to_ipython_animation.get_lines(cell, time_index, range_vars='Vm')
 
 
-   Get list of dictionaries of lines that can be displayed using the :py:meth:`plot_lines` function
+   Get list of dictionaries of lines that can be displayed using the :func:`plot_lines` function
 
    This is used to generate videos of membrane voltage vs soma distance.
 

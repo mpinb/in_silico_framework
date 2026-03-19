@@ -1,25 +1,24 @@
 
 
+plot
+====
 
 
+.. Signature -------------------------------
 
-_DendrogramDendriteStatistics.plot
-==================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics.plot(ax=None)
+.. function:: visualize.dendrogram._DendrogramDendriteStatistics.plot(ax=None)
 
 
    Plot the dendrite statistics.
 
    This method is usually not used alone. Its base method
-   :py:meth:`~DendrogramdendriteStatistics._plot_dendrite_hist` is used to plot the dendrogram statistics.
+   :func:`~DendrogramdendriteStatistics._plot_dendrite_hist` is used to plot the dendrogram statistics.
 
    :param ax: The matplotlib axes object. Default is ``None`` and a new figure is created.
    :type ax: matplotlib.axes.Axes
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.axes.Axes`
+   :rtype: :class:`matplotlib.axes.Axes`
 
 
 

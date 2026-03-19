@@ -1,0 +1,27 @@
+
+
+
+Uninterruptible
+===============
+
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+.. class signature --------------------------------------------------------------
+
+.. class:: shared_numpy_store.Uninterruptible
+   
+   Context manager to create an uninterruptible section of code.
+
+   This context manager temporarily ignores ``SIGINT`` and ``SIGTERM`` signals.
+
+   .. warning:: This context manager should be used with caution, as it can lead to unresponsive code (by design).
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

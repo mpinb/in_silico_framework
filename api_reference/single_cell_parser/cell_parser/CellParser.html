@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -927,7 +927,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell_parser.CellParser (Python class) — Configure a Cell object from a NEURON hoc file." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parser</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell_parser.CellParser (Python class) — Bases: object" class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parser</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercell_parserCellParser">
@@ -1187,6 +1187,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../swc/index.html" class="md-nav__link">
+        <span title="/api_reference/single_cell_parser/swc/index.rst (reference label)" class="md-ellipsis">swc</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../synapse/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/synapse/index.rst (reference label)" class="md-ellipsis">synapse</span>
       </a>
@@ -1368,6 +1383,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1464,7 +1494,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell_parser.CellParser" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell_parser.CellParser (Python class) — Configure a Cell object from a NEURON hoc file." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parser</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell_parser.CellParser (Python class) — Bases: object" class="md-ellipsis">single_<wbr>cell_<wbr>parsercell_<wbr>parser<wbr>Cell<wbr>Parser</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercell_parserCellParser">
@@ -1615,13 +1645,14 @@
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="single_cell_parser.cell_parser.CellParser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.cell_parser" title="single_cell_parser.cell_parser (Python module)"><span class="sig-name descname"><span class="pre">cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">CellParser</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell_parser.CellParser.__init__.hocFilename" title="single_cell_parser.cell_parser.CellParser.__init__.hocFilename (Python parameter) — Path to hoc_file_format file."><span class="n"><span class="pre">hocFilename</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser" title="Link to this definition">¶</a></dt>
-<dd><p>Configure a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from a NEURON hoc file.</p>
-<p>This class is used to read a hoc file and set up a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object for single cell simulations.
-It segmentizes the morphology accroding to <span id="id1">Hines and Carnevale [<a class="reference internal" href="../../../bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span>, and sets the <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object’s
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Configure a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from a NEURON hoc file.</p>
+<p>This class is used to read a hoc file and set up a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object for single cell simulations.
+It segmentizes the morphology accroding to <span id="id1">Hines and Carnevale [<a class="reference internal" href="../../../bibliography.html#id10" title="Michael L Hines and Nicholas T Carnevale. Neuron: a tool for neuroscientists. The neuroscientist, 7(2):123–135, 2001.">7</a>]</span>, and sets the <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object’s
 membrane properties, mechanisms, and ion properties based on a <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a> file.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
-<p>This is not the same class as <a class="reference internal" href="../../singlecell_input_mapper/singlecell_input_mapper/cell/CellParser.html#singlecell_input_mapper.singlecell_input_mapper.cell.CellParser" title="singlecell_input_mapper.singlecell_input_mapper.cell.CellParser (Python class) — Extract cell morphology from an AMIRA hoc file."><code class="xref py py-class docutils literal notranslate"><span class="pre">singlecell_input_mapper.singlecell_input_mapper.cell.CellParser</span></code></a>.
+<p>This is not the same class as <a class="reference internal" href="../../singlecell_input_mapper/singlecell_input_mapper/cell/CellParser.html#singlecell_input_mapper.singlecell_input_mapper.cell.CellParser" title="singlecell_input_mapper.singlecell_input_mapper.cell.CellParser (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">singlecell_input_mapper.singlecell_input_mapper.cell.CellParser</span></code></a>.
 This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.</p>
 </div>
 <dl class="field-list">
@@ -1657,7 +1688,7 @@ This class provides biophysical details, such as segmentation, channel mechanism
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="single_cell_parser.cell_parser.CellParser.cell_modify_functions_applied">
 <span class="sig-name descname"><span class="pre">cell_modify_functions_applied</span></span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.cell_modify_functions_applied" title="Link to this definition">¶</a></dt>
-<dd><p>Whether or not cell modify functions have already been applied. See: <a class="reference internal" href="CellParser.apply_cell_modify_functions.html#single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions" title="single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions (Python method) — Apply cell modify functions to the cell object."><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply_cell_modify_functions()</span></code></a></p>
+<dd><p>Whether or not cell modify functions have already been applied. See: <a class="reference internal" href="CellParser.apply_cell_modify_functions.html#single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions" title="single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions (Python function) — Apply cell modify functions to the cell object."><code class="xref py py-func docutils literal notranslate"><span class="pre">apply_cell_modify_functions()</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.cell_parser.CellParser.cell_modify_functions_applied-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.cell_modify_functions_applied-type" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><p>bool</p>
@@ -1671,7 +1702,7 @@ This class provides biophysical details, such as segmentation, channel mechanism
 <dd><p>Cell object.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.cell_parser.CellParser.cell-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell_parser.CellParser.cell-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1682,49 +1713,49 @@ This class provides biophysical details, such as segmentation, channel mechanism
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.spatialgraph_to_cell.html#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python method) — Create a Cell object from an AMIRA spatial graph in hoc_file_format format."><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatialgraph_to_cell</span></code></a>(parameters, axon, scaleFunc)</p></td>
-<td><p>Create a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from an AMIRA spatial graph in <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> format.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.spatialgraph_to_cell.html#single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell" title="single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell (Python function) — Create a Cell object from an AMIRA spatial graph in hoc_file_format format."><code class="xref py py-obj docutils literal notranslate"><span class="pre">spatialgraph_to_cell</span></code></a>(parameters, axon, scaleFunc)</p></td>
+<td><p>Create a <a class="reference internal" href="../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a> object from an AMIRA spatial graph in <a class="reference internal" href="../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> format.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser.set_up_biophysics.html#single_cell_parser.cell_parser.CellParser.set_up_biophysics" title="single_cell_parser.cell_parser.CellParser.set_up_biophysics (Python method) — Initialize membrane properties."><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_up_biophysics</span></code></a>(parameters, full)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser.set_up_biophysics.html#single_cell_parser.cell_parser.CellParser.set_up_biophysics" title="single_cell_parser.cell_parser.CellParser.set_up_biophysics (Python function) — Initialize membrane properties."><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_up_biophysics</span></code></a>(parameters, full)</p></td>
 <td><p>Initialize membrane properties.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.apply_cell_modify_functions.html#single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions" title="single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions (Python method) — Apply cell modify functions to the cell object."><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_cell_modify_functions</span></code></a>(parameters)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.apply_cell_modify_functions.html#single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions" title="single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions (Python function) — Apply cell modify functions to the cell object."><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_cell_modify_functions</span></code></a>(parameters)</p></td>
 <td><p>Apply cell modify functions to the cell object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser.get_cell.html#single_cell_parser.cell_parser.CellParser.get_cell" title="single_cell_parser.cell_parser.CellParser.get_cell (Python method) — Returns cell if it is set up for simulations."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cell</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser.get_cell.html#single_cell_parser.cell_parser.CellParser.get_cell" title="single_cell_parser.cell_parser.CellParser.get_cell (Python function) — Returns cell if it is set up for simulations."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cell</span></code></a>()</p></td>
 <td><p>Returns cell if it is set up for simulations.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.insert_membrane_properties.html#single_cell_parser.cell_parser.CellParser.insert_membrane_properties" title="single_cell_parser.cell_parser.CellParser.insert_membrane_properties (Python method) — Inserts membrane properties into all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_membrane_properties</span></code></a>(label, props)</p></td>
-<td><p>Inserts membrane properties into all structures named as <code class="xref py py-paramref docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.insert_membrane_properties.html#single_cell_parser.cell_parser.CellParser.insert_membrane_properties" title="single_cell_parser.cell_parser.CellParser.insert_membrane_properties (Python function) — Inserts membrane properties into all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_membrane_properties</span></code></a>(label, props)</p></td>
+<td><p>Inserts membrane properties into all structures named as <code class="xref py py-param docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser.insert_range_mechanisms.html#single_cell_parser.cell_parser.CellParser.insert_range_mechanisms" title="single_cell_parser.cell_parser.CellParser.insert_range_mechanisms (Python method) — Inserts range mechanisms into all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_range_mechanisms</span></code></a>(label, mechs)</p></td>
-<td><p>Inserts range mechanisms into all structures named as <code class="xref py py-paramref docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser.insert_range_mechanisms.html#single_cell_parser.cell_parser.CellParser.insert_range_mechanisms" title="single_cell_parser.cell_parser.CellParser.insert_range_mechanisms (Python function) — Inserts range mechanisms into all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_range_mechanisms</span></code></a>(label, mechs)</p></td>
+<td><p>Inserts range mechanisms into all structures named as <code class="xref py py-param docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.update_range_mechanisms.html#single_cell_parser.cell_parser.CellParser.update_range_mechanisms" title="single_cell_parser.cell_parser.CellParser.update_range_mechanisms (Python method) — Updates range mechanism updateMechName in all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_range_mechanisms</span></code></a>(label, updateMechName, mechs)</p></td>
-<td><p>Updates range mechanism <code class="xref py py-paramref docutils literal notranslate"><span class="pre">updateMechName</span></code> in all structures named as <code class="xref py py-paramref docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.update_range_mechanisms.html#single_cell_parser.cell_parser.CellParser.update_range_mechanisms" title="single_cell_parser.cell_parser.CellParser.update_range_mechanisms (Python function) — Updates range mechanism updateMechName in all structures named as label."><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_range_mechanisms</span></code></a>(label, updateMechName, mechs)</p></td>
+<td><p>Updates range mechanism <code class="xref py py-param docutils literal notranslate"><span class="pre">updateMechName</span></code> in all structures named as <code class="xref py py-param docutils literal notranslate"><span class="pre">label</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser._insert_ion_properties.html#single_cell_parser.cell_parser.CellParser._insert_ion_properties" title="single_cell_parser.cell_parser.CellParser._insert_ion_properties (Python method) — Inserts ion properties into all structures named as label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_insert_ion_properties</span></code></a>(label, ionParam)</p></td>
-<td><p>Inserts ion properties into all structures named as <code class="xref py py-paramref docutils literal notranslate"><span class="pre">label</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser._insert_ion_properties.html#single_cell_parser.cell_parser.CellParser._insert_ion_properties" title="single_cell_parser.cell_parser.CellParser._insert_ion_properties (Python function) — Inserts ion properties into all structures named as label"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_insert_ion_properties</span></code></a>(label, ionParam)</p></td>
+<td><p>Inserts ion properties into all structures named as <code class="xref py py-param docutils literal notranslate"><span class="pre">label</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser._add_spines.html#single_cell_parser.cell_parser.CellParser._add_spines" title="single_cell_parser.cell_parser.CellParser._add_spines (Python method) — Adds passive spines to the membrane."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_spines</span></code></a>(label, spineParam)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser._add_spines.html#single_cell_parser.cell_parser.CellParser._add_spines" title="single_cell_parser.cell_parser.CellParser._add_spines (Python function) — Adds passive spines to the membrane."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_spines</span></code></a>(label, spineParam)</p></td>
 <td><p>Adds passive spines to the membrane.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser._add_spines_ar.html#single_cell_parser.cell_parser.CellParser._add_spines_ar" title="single_cell_parser.cell_parser.CellParser._add_spines_ar (Python method) — Adds passive spines to anomalously rectifying membrane Waters_Helmchen_2006."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_spines_ar</span></code></a>(label, spineParam)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser._add_spines_ar.html#single_cell_parser.cell_parser.CellParser._add_spines_ar" title="single_cell_parser.cell_parser.CellParser._add_spines_ar (Python function) — Adds passive spines to anomalously rectifying membrane Waters_Helmchen_2006."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_spines_ar</span></code></a>(label, spineParam)</p></td>
 <td><p>Adds passive spines to anomalously rectifying membrane <span id="id2">[<a class="reference internal" href="../../../bibliography.html#id15" title="Jack Waters and Fritjof Helmchen. Background synaptic activity is sparse in neocortex. Journal of Neuroscience, 26(32):8267–8277, August 2006. doi:10.1523/JNEUROSCI.2152-06.2006.">8</a>]</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.insert_passive_membrane.html#single_cell_parser.cell_parser.CellParser.insert_passive_membrane" title="single_cell_parser.cell_parser.CellParser.insert_passive_membrane (Python method) — Set up a passive membrane with default values."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_passive_membrane</span></code></a>(label)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.insert_passive_membrane.html#single_cell_parser.cell_parser.CellParser.insert_passive_membrane" title="single_cell_parser.cell_parser.CellParser.insert_passive_membrane (Python function) — Set up a passive membrane with default values."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_passive_membrane</span></code></a>(label)</p></td>
 <td><p>Set up a passive membrane with default values.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser.insert_hh_membrane.html#single_cell_parser.cell_parser.CellParser.insert_hh_membrane" title="single_cell_parser.cell_parser.CellParser.insert_hh_membrane (Python method) — Set up a Hodgkin-Huxley membrane with default values."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_hh_membrane</span></code></a>(label)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser.insert_hh_membrane.html#single_cell_parser.cell_parser.CellParser.insert_hh_membrane" title="single_cell_parser.cell_parser.CellParser.insert_hh_membrane (Python function) — Set up a Hodgkin-Huxley membrane with default values."><code class="xref py py-obj docutils literal notranslate"><span class="pre">insert_hh_membrane</span></code></a>(label)</p></td>
 <td><p>Set up a Hodgkin-Huxley membrane with default values.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.determine_nseg.html#single_cell_parser.cell_parser.CellParser.determine_nseg" title="single_cell_parser.cell_parser.CellParser.determine_nseg (Python method) — Determine the number of segments for each section according to the d-lambda rule."><code class="xref py py-obj docutils literal notranslate"><span class="pre">determine_nseg</span></code></a>(f, full, max_seg_length)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser.determine_nseg.html#single_cell_parser.cell_parser.CellParser.determine_nseg" title="single_cell_parser.cell_parser.CellParser.determine_nseg (Python function) — Determine the number of segments for each section according to the d-lambda rule."><code class="xref py py-obj docutils literal notranslate"><span class="pre">determine_nseg</span></code></a>(f, full, max_seg_length)</p></td>
 <td><p>Determine the number of segments for each section according to the d-lambda rule.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="CellParser._create_ais.html#single_cell_parser.cell_parser.CellParser._create_ais" title="single_cell_parser.cell_parser.CellParser._create_ais (Python method) — Create axon hillock and AIS according to Mainen_Joerges_Huguenard_Sejnowski_1995"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_create_ais</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="CellParser._create_ais.html#single_cell_parser.cell_parser.CellParser._create_ais" title="single_cell_parser.cell_parser.CellParser._create_ais (Python function) — Create axon hillock and AIS according to Mainen_Joerges_Huguenard_Sejnowski_1995"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_create_ais</span></code></a>()</p></td>
 <td><p>Create axon hillock and AIS according to <span id="id3">Mainen <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id13" title="Z. F. Mainen, J. Joerges, J. R. Huguenard, and T. J. Sejnowski. A model of spike initiation in neocortical pyramidal neurons. Neuron, 15(6):1427–1439, December 1995. doi:10.1016/0896-6273(95)90020-9.">9</a>]</span></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="CellParser._create_ais_Hay2013.html#single_cell_parser.cell_parser.CellParser._create_ais_Hay2013" title="single_cell_parser.cell_parser.CellParser._create_ais_Hay2013 (Python method) — Create axon hillock and AIS according to Hay_Schuermann_Markram_Segev_2013"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_create_ais_Hay2013</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="CellParser._create_ais_Hay2013.html#single_cell_parser.cell_parser.CellParser._create_ais_Hay2013" title="single_cell_parser.cell_parser.CellParser._create_ais_Hay2013 (Python function) — Create axon hillock and AIS according to Hay_Schuermann_Markram_Segev_2013"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_create_ais_Hay2013</span></code></a>()</p></td>
 <td><p>Create axon hillock and AIS according to <span id="id4">Hay <em>et al.</em> [<a class="reference internal" href="../../../bibliography.html#id12" title="Etay Hay, Felix Schürmann, Henry Markram, and Idan Segev. Preserving axosomatic spiking features despite diverse dendritic morphology. Journal of Neurophysiology, 109(12):2972–2981, June 2013. doi:10.1152/jn.00048.2013.">10</a>]</span></p></td>
 </tr>
 </tbody>
@@ -1771,13 +1802,13 @@ This class provides biophysical details, such as segmentation, channel mechanism
       
       
         
-        <a href="CellParser.spatialgraph_to_cell.html" class="md-footer__link md-footer__link--next" aria-label="Next: CellParser.spatialgraph_to_cell" rel="next">
+        <a href="CellParser.spatialgraph_to_cell.html" class="md-footer__link md-footer__link--next" aria-label="Next: spatialgraph_to_cell" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              CellParser.spatialgraph_to_cell
+              spatialgraph_to_cell
             </div>
           </div>
           <div class="md-footer__button md-icon">

@@ -1,13 +1,12 @@
 
 
+get_merged_synapse_coordinates
+==============================
 
 
+.. Signature -------------------------------
 
-PSPs.get_merged_synapse_coordinates
-===================================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates(mergestring, flatten=False)
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_merged_synapse_coordinates(mergestring, flatten=False)
 
 
    Get the coordinates of all synapses that contain a certain string in their name.

@@ -1,13 +1,12 @@
 
 
+get_expected_file_length
+========================
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.get_expected_file_length
-=========================================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.get_expected_file_length(name)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.get_expected_file_length(name)
 
 
    Get the expected length in bytes of a file given its metadata (shape and dtype).

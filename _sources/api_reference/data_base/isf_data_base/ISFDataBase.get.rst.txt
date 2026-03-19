@@ -1,20 +1,19 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-ISFDataBase.get
-===============
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.get(key, lock=None, **kwargs)
+.. function:: data_base.isf_data_base.ISFDataBase.get(key, lock=None, **kwargs)
 
 
    Get data from the database.
 
    This is the main method to get data from a DataBase.
    This method allows to pass additional arguments to the Loader.
-   Modules in :py:mod:`~data_base.isf_data_base.IO.LoaderDumper` make use of this feature
+   Modules in :mod:`~data_base.isf_data_base.IO.LoaderDumper` make use of this feature
    if they require additional arguments in their ``load()`` method.
 
    This method is thread safe, if you provide a lock.
@@ -23,7 +22,7 @@ ISFDataBase.get
    :type key: str
    :param lock: If you use file locking, provide the lock that grants access. Defaults to None.
    :type lock: Lock, optional
-   :param \*\*kwargs: Additional arguments to pass to the Loader.
+   :param kwargs: Additional arguments to pass to the Loader.
 
    :returns: The object saved under ``db[key]``
    :rtype: object

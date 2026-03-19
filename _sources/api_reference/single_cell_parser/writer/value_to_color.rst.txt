@@ -6,7 +6,7 @@ value_to_color
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.value_to_color(v, vmin=0, vmax=1)
+.. function:: single_cell_parser.writer.value_to_color(v, vmin=0, vmax=1)
 
 
    Map a value to a color.

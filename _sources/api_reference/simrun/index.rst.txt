@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -25,7 +24,7 @@ simrun
    synaptic_strength_fitting </api_reference/simrun/synaptic_strength_fitting/index>  
    utils </api_reference/simrun/utils/index>  
 
-.. py:module:: simrun
+.. module:: simrun
 
 .. autoapi-nested-parse::
    Run simulations of network-embedded neuron models.
@@ -33,6 +32,8 @@ simrun
    This package provides a framework to run simulations of network-embedded neuron models.
    They allow to run new simulations from existing parameter files, or to re-run existing simulations with
    adapted parameters for the cell and/or network.
+
+
 
 
 
@@ -72,6 +73,7 @@ Modules
      - Calculate the cell type specific synaptic strengths of synapses based on the neuron model and network parameters.
    * - :py:obj:`utils <simrun.utils>`
      - Utility and convenience functions for the :py:mod:`simrun` package.
+
 
 
 .. container:: doc-feedback

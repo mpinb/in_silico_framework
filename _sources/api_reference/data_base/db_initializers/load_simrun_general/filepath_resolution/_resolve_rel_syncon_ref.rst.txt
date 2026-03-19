@@ -1,0 +1,26 @@
+
+
+_resolve_rel_syncon_ref
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: data_base.db_initializers.load_simrun_general.filepath_resolution._resolve_rel_syncon_ref(fn, ref)
+
+
+   Resolve a relative database style path of .syn or .con files
+
+   :param fn: The filename containing the reference
+   :type fn: str
+   :param ref: The relative reference to a .syn or .con file.
+   :type ref: str
+
+   :returns: The absolute path to the referenced file.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

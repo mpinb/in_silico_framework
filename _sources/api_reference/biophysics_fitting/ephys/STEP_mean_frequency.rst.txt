@@ -6,7 +6,7 @@ STEP_mean_frequency
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.STEP_mean_frequency(t, v, stim_duration=2000, thresh=None)
+.. function:: biophysics_fitting.ephys.STEP_mean_frequency(t, v, stim_duration=2000, thresh=None)
 
 
    Computes the mean frequency of action potentials in a voltage trace for a step stimulus.

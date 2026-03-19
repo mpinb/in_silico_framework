@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -15,15 +14,16 @@ synapse
    Synapse </api_reference/single_cell_parser/synapse/Synapse>
    ExSyn </api_reference/single_cell_parser/synapse/ExSyn>
 
-.. py:module:: single_cell_parser.synapse
+.. module:: single_cell_parser.synapse
 
 .. autoapi-nested-parse::
    Synapse class for synaptic activations and NEURON API.
 
-   Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+   Used in :class:`single_cell_parser.cell.Cell` to store synapse information,
    and to activate/deactivate synapses in NEURON.
 
-   .. seealso:: :py:class:`single_cell_parser.cell.Cell`.
+   .. seealso:: :class:`single_cell_parser.cell.Cell`.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -41,6 +41,8 @@ Classes
      - Synapse class for synaptic activations and NEURON API.
    * - :py:obj:`ExSyn <single_cell_parser.synapse.ExSyn>`
      - Simple excitatory synapse.
+
+
 
 
 

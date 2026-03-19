@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -16,7 +15,8 @@ metadata_utils
    create_metadata_parallelization_helper </api_reference/data_base/db_initializers/load_simrun_general/metadata_utils/create_metadata_parallelization_helper>
    create_metadata </api_reference/data_base/db_initializers/load_simrun_general/metadata_utils/create_metadata>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.metadata_utils
+.. module:: data_base.db_initializers.load_simrun_general.metadata_utils
+
 
 
 
@@ -37,6 +37,8 @@ Functions
      - Parallelize creating metadata across multiple simulation trials.
    * - :py:obj:`create_metadata <data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata>`\ (db)
      - Generate metadata out of a pd.Series containing the sim_trial_index.
+
+
 
 
 

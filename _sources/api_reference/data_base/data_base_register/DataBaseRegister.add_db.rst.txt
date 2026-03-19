@@ -1,13 +1,12 @@
 
 
+add_db
+======
 
 
+.. Signature -------------------------------
 
-DataBaseRegister.add_db
-=======================
-
-
-.. py:method:: data_base.data_base_register.DataBaseRegister.add_db(unique_id, db_basedir)
+.. function:: data_base.data_base_register.DataBaseRegister.add_db(unique_id, db_basedir)
 
 
    Add a database to the registry.

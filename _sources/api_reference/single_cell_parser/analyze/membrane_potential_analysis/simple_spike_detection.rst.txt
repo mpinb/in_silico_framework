@@ -6,13 +6,13 @@ simple_spike_detection
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode='regular')
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.simple_spike_detection(t, v, tBegin=None, tEnd=None, threshold=0.0, mode='regular')
 
 
    Detect spike times in a voltage trace.
 
    Simple spike detection method. Identifies spike times within optional window ``[tBegin, tEnd]``
-   by determining :paramref:`threshold` crossing times from below.
+   by determining :param:`threshold` crossing times from below.
 
    :param t: Time vector
    :type t: array
@@ -25,8 +25,8 @@ simple_spike_detection
    :param threshold: Threshold for spike detection (mV). Default is :math:`0.0 mV`.
    :type threshold: float, optional
    :param mode: Mode for spike detection. Default is ``regular``.
-                - ``regular``: Checks if the membrane potential crosses an absolute :paramref:`threshold`.
-                - ``slope``: Checks if :math:`dV/dt` is larger than a :paramref:`threshold`.
+                - ``regular``: Checks if the membrane potential crosses an absolute :param:`threshold`.
+                - ``slope``: Checks if :math:`dV/dt` is larger than a :param:`threshold`.
    :type mode: str, optional
 
    :returns: List of spike times.

@@ -1,0 +1,41 @@
+
+
+load
+====
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore.load(name, mode='shared_memory', start_row=None, end_row=None, allow_create_shm=False)
+
+
+   Load an array from shared memory.
+
+   :param mode: 'memmap': memory map the file and return a numpy memmap object.
+                'memory': load file into (not shared) memory and return a numpy array
+                'shared_memory': access file in shared memory and return numpy array.
+   :type mode: str
+   :param allow_create_shm: only relevant in mode shared_memory.
+                            If True, if the file on disk is not yet loaded into shared memory, load it.
+                            If False, requires that file already exists in shared memory. Use this e.g. in child processes
+                            in which you want to be sure they don't create a new shared memory file.
+   :type allow_create_shm: bool
+   :param start_row: first row from the array to load
+   :type start_row: int
+   :param end_row: last row of the array to load
+   :type end_row: int
+   :param Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent
+                file is created.
+
+   :returns: the array
+   :rtype: np.ndarray
+
+   :raises ValueError: if mode is not one of 'memmap', 'memory', or 'shared_memory'
+
+   :raises AssertionError: if the file is not in shared memory yet and allow_create_shm is False
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

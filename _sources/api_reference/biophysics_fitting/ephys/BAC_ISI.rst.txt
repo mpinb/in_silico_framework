@@ -6,7 +6,7 @@ BAC_ISI
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_ISI(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.BAC_ISI(t, v, thresh=None)
 
 
    Computes the Inter-Spike Interval (ISI) of a voltage trace for a BAC stimulus.

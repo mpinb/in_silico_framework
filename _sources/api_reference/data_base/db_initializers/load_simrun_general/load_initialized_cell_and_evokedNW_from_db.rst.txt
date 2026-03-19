@@ -6,7 +6,7 @@ load_initialized_cell_and_evokedNW_from_db
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db(db, sti, allPoints=False, reconnect_synapses=True)
+.. function:: data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db(db, sti, allPoints=False, reconnect_synapses=True)
 
 
    Load and set up the cell and network from the database.
@@ -19,18 +19,18 @@ load_initialized_cell_and_evokedNW_from_db
    :param sti: For which simulation trial index to load the parameter files.
    :type sti: str
    :param allPoints: If True, all points of the cell are used. Default is ``False``.
-                     See also: :py:meth:`single_cell_parser.create_cell`
+                     See also: :func:`single_cell_parser.create_cell`
    :type allPoints: bool, optional
    :param reconnect_synapses: If True, the synapses are reconnected to the cell. Default is ``True``.
-                              See also: :py:meth:`single_cell_parser.NetworkMapper.reconnect_saved_synapses`
+                              See also: :func:`single_cell_parser.NetworkMapper.reconnect_saved_synapses`
    :type reconnect_synapses: bool, optional
 
    .. seealso::
 
-      :py:meth:`simrun.rerun_db.rerun_db` for the recommended high-level method
+      :func:`simrun.rerun_db.rerun_db` for the recommended high-level method
       of re-running simulations from a database.
 
-   :returns: The re-initialized :py:class:`single_cell_parser.cell.Cell` and the :py:class:`single_cell_parser.NetworkMapper` objects.
+   :returns: The re-initialized :class:`single_cell_parser.cell.Cell` and the :class:`single_cell_parser.NetworkMapper` objects.
    :rtype: tuple
 
 

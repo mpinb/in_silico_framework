@@ -6,10 +6,10 @@ compute_synapse_distances_times
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.synanalysis.compute_synapse_distances_times(fname, cell, t=None, synTypes=None)
+.. function:: single_cell_parser.analyze.synanalysis.compute_synapse_distances_times(fname, cell, t=None, synTypes=None)
 
 
-   Save a :py:class:`single_cell_parser.cell.Cell` object's synapse distances and activation times to a ``.csv`` file.
+   Save a :class:`single_cell_parser.cell.Cell` object's synapse distances and activation times to a ``.csv`` file.
 
    The following information is saved:
 
@@ -21,14 +21,14 @@ compute_synapse_distances_times
    - dendrite label: label of the dendrite that contains this synapse.
    - activation times: times at which the synapse was active (ms).
 
-   :param fname: The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
+   :param fname: The output file name as a ful path, including the file extension. Preferably unique (see e.g. :func:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
    :type fname: str
    :param cell: Cell object
    :type cell: single_cell_parser.cell.Cell
    :param synTypes: list of synapse types. Default: the keys of the `cell.synapses` dictionary
    :type synTypes: list
 
-   :returns: None. Writes out the synapse .csv file to :paramref:`fname`.
+   :returns: None. Writes out the synapse .csv file to :param:`fname`.
 
    .. seealso:: The :ref:`syn_activation_format` file format.
 

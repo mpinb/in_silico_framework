@@ -1,13 +1,12 @@
 
 
+_create_anatomical_connectivity_map
+===================================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._create_anatomical_connectivity_map
-=================================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_anatomical_connectivity_map()
 
 
    Connects anatomical synapses to PointCells.

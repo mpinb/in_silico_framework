@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -20,7 +19,7 @@ dendrogram
    _get_max_somadistance </api_reference/visualize/dendrogram/_get_max_somadistance>
    _get_db_by_sec </api_reference/visualize/dendrogram/_get_db_by_sec>
 
-.. py:module:: visualize.dendrogram
+.. module:: visualize.dendrogram
 
 .. autoapi-nested-parse::
    Plot a dendrogram of a neuron morphology.
@@ -29,6 +28,7 @@ dendrogram
    This module provides a class to plot dendrograms, as well as denddritic length and synapse count statistics.
 
    .. figure:: ../../../_static/_images/dendrogram.png
+
 
 
 .. rst-class:: absolute-paragraph
@@ -42,10 +42,18 @@ Classes
    :widths: auto
    :class: summarytable
    
+   * - :py:obj:`_DendrogramSection <visualize.dendrogram._DendrogramSection>`
+     - A class to represent a dendrogram section.
    * - :py:obj:`Dendrogram <visualize.dendrogram.Dendrogram>`
-     - Plot a dendrogram of a :py:class:`~single_cell_parser.cell.Cell` object.
+     - Plot a dendrogram of a :class:`~single_cell_parser.cell.Cell` object.
+   * - :py:obj:`_DendrogramDendriteStatistics <visualize.dendrogram._DendrogramDendriteStatistics>`
+     - Compute dendrite statistics from a dendrogram.
+   * - :py:obj:`_DendrogramSynapseStatistics <visualize.dendrogram._DendrogramSynapseStatistics>`
+     - Compute synapse statistics for a :class:`~single_cell_parser.cell.Cell` object.
    * - :py:obj:`DendrogramStatistics <visualize.dendrogram.DendrogramStatistics>`
      - Plot dendrogram statistics.
+
+
 
 
 

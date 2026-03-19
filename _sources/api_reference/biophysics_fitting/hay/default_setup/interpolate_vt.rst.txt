@@ -6,7 +6,7 @@ interpolate_vt
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.interpolate_vt(voltage_trace_)
+.. function:: biophysics_fitting.hay.default_setup.interpolate_vt(voltage_trace_)
 
 
    Interpolate a voltage trace so that is has fixed time interval
@@ -15,8 +15,8 @@ interpolate_vt
    comparing voltage traces difficult. This function interpolates the voltage
    traces so that they have a fixed time interval of 0.025 ms.
 
-   :param voltage_trace_: A dictionary of voltage traces.
-   :type voltage_trace_: dict
+   :param voltage_trace\_: A dictionary of voltage traces.
+   :type voltage_trace\_: dict
 
    :returns: A dictionary of voltage traces with a fixed time interval.
    :rtype: dict

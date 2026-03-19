@@ -6,7 +6,7 @@ calculate_vdensity_array_pd
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pd(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
+.. function:: data_base.analyze.voltage_binning.calculate_vdensity_array_pd(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
 
 
    Bin a :ref:`voltage_traces_df_format` in timebins across trials.
@@ -25,7 +25,7 @@ calculate_vdensity_array_pd
       If dask dataframe is passed, it will be monolithically load into memory.
       For large-scale simulations, this is likely not what you want.
 
-   .. seealso:: :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask` for the dask version.
+   .. seealso:: :func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_dask` for the dask version.
 
 
 

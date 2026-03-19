@@ -6,7 +6,7 @@ normalize
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.normalize(raw, mean, std)
+.. function:: biophysics_fitting.hay.evaluation.normalize(raw, mean, std)
 
 
    Normalize a raw value.

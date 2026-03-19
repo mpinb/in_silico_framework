@@ -6,13 +6,13 @@ read_synapse_weight_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_synapse_weight_file(fname)
+.. function:: single_cell_parser.reader.read_synapse_weight_file(fname)
 
 
    Reads list of all anatomical synapses and their maximum conductance values.
 
    :param fname: Synapse weight filename.
-                 See: :py:meth:`~single_cell_parser.writer.write_synapse_weight_file`.
+                 See: :func:`~single_cell_parser.writer.write_synapse_weight_file`.
    :type fname: str
 
    :returns: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:

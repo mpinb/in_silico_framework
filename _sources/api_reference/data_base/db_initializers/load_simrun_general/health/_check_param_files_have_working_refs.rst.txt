@@ -6,7 +6,7 @@ _check_param_files_have_working_refs
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.health._check_param_files_have_working_refs(sim_result_dir)
+.. function:: data_base.db_initializers.load_simrun_general.health._check_param_files_have_working_refs(sim_result_dir)
 
 
 

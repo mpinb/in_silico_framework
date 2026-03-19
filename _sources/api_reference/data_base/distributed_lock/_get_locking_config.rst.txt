@@ -6,7 +6,7 @@ _get_locking_config
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock._get_locking_config()
+.. function:: data_base.distributed_lock._get_locking_config()
 
 
    Get the locking configuration from the environment variable ``ISF_DISTRIBUTED_LOCK_CONFIG``.

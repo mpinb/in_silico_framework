@@ -6,7 +6,7 @@ write_cell_simulation
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoints=False, step_frames=10, selected_index=None)
+.. function:: single_cell_parser.writer.write_cell_simulation(fname=None, cell=None, traces=None, tVec=None, allPoints=False, step_frames=10, selected_index=None)
 
 
    Write Amira SpatialGraph files corresponding to time steps of entire simulation run.

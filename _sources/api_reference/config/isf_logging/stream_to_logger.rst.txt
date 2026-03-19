@@ -1,0 +1,24 @@
+
+
+stream_to_logger
+================
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging.stream_to_logger(logger, level=None)
+
+
+   Wrapper for a stream object that redirects writes to a logger instance.
+   Can be used as a context manager::
+
+       >>> with StreamToLogger(logger, logging.INFO) as sys.stdout:
+       >>>    do_something()
+
+   Used for reading in :ref:`hoc_file_format` files that provide output due to various print statements in the `.hoc` file, or capturing NEURON output.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

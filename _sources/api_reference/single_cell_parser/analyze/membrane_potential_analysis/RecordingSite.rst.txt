@@ -11,16 +11,17 @@ RecordingSite
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSite(secID, segID, label)
+.. class:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSite(secID, segID, label)
+
+   Bases: :py:obj:`object`
    
    Dataclass for a recording site.
 
    .. seealso::
 
-      The :py:class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
+      The :class:`~single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager`
       class for setting up recording sites and parsing their voltage traces.
 
    :param secID: Section ID of the recording site.
@@ -53,7 +54,7 @@ RecordingSite
       .. attribute:: vRecordings
 
          List of recorded voltage vectors.
-         Parsed from the :py:class:`~single_cell_parser.cell.Cell`.
+         Parsed from the :class:`~single_cell_parser.cell.Cell`.
 
          :type: list
 

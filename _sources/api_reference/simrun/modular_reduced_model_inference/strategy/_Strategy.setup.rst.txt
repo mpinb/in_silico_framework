@@ -1,20 +1,19 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-_Strategy.setup
-===============
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.setup(data, DataSplitEvaluation)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy.setup(data, DataSplitEvaluation)
 
 
    Setup the strategy with the given data.
 
    This method sets up the strategy with the given data and the DataSplitEvaluation object.
 
-   Strategy-specific setup is performed by :py:meth:`~simrun.modular_reduced_model_inference._Strategy._setup`,
+   Strategy-specific setup is performed by :func:`~simrun.modular_reduced_model_inference._Strategy._setup`,
    which is overloaded by child classes.
 
    :param data: The data to use.

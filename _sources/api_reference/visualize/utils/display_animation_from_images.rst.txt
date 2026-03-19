@@ -6,7 +6,7 @@ display_animation_from_images
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.display_animation_from_images(files, interval=10, style=False, animID=None, embedded=False)
+.. function:: visualize.utils.display_animation_from_images(files, interval=10, style=False, animID=None, embedded=False)
 
 
    Creates an IPython animation out of files specified in a globstring or a list of paths.

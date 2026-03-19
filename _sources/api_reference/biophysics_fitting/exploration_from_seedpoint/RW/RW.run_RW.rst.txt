@@ -1,13 +1,12 @@
 
 
+run_RW
+======
 
 
+.. Signature -------------------------------
 
-RW.run_RW
-=========
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW.run_RW(selected_seedpoint, particle_id, seed=None)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW.run_RW(selected_seedpoint, particle_id, seed=None)
 
 
    Run random walk exploration from a seed point.
@@ -19,7 +18,7 @@ RW.run_RW
    :param seed: random seed for the random number generator
    :type seed: int
 
-   :returns: None. Saves the results to :paramref:`MAIN_DIRECTORY`/:paramref:`selected_seedpoint`/:paramref:`particle_id`
+   :returns: None. Saves the results to :attr:`MAIN_DIRECTORY`/:param:`selected_seedpoint`/:param:`particle_id`
 
 
 

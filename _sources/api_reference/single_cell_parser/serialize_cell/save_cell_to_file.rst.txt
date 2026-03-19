@@ -6,17 +6,17 @@ save_cell_to_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.serialize_cell.save_cell_to_file(path, cell)
+.. function:: single_cell_parser.serialize_cell.save_cell_to_file(path, cell)
 
 
-   Save a :py:class:`~single_cell_parser.cell.Cell` object to a file in .pickle format.
+   Save a :class:`~single_cell_parser.cell.Cell` object to a file in .pickle format.
 
    :param path: path to file
    :type path: str
    :param cell: cell object
    :type cell: ~single_cell_parser.cell.Cell
 
-   :returns: None. Writes out the cell object to :paramref:`path` in .pickle format.
+   :returns: None. Writes out the cell object to :param:`path` in .pickle format.
 
 
 

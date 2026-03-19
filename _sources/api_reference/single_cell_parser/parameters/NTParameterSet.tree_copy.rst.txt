@@ -1,13 +1,12 @@
 
 
+tree_copy
+=========
 
 
+.. Signature -------------------------------
 
-NTParameterSet.tree_copy
-========================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet.tree_copy()
+.. function:: single_cell_parser.parameters.NTParameterSet.tree_copy()
 
 
    Return a copy of the ParameterSet tree structure.
@@ -16,8 +15,8 @@ NTParameterSet.tree_copy
    of the tree structure where the hierarchy is duplicated but the
    leaf values are shared between original and copy.
 
-   :returns: A new :py:class:`NTParameterSet` with the same structure but shared references to leaf values.
-   :rtype: :py:class:`NTParameterSet`
+   :returns: A new :class:`NTParameterSet` with the same structure but shared references to leaf values.
+   :rtype: :class:`NTParameterSet`
 
 
 

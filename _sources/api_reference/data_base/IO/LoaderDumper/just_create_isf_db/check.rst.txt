@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.just_create_isf_db.check(obj)
+.. function:: data_base.IO.LoaderDumper.just_create_isf_db.check(obj)
 
 
    Check whether the object can be saved with this dumper

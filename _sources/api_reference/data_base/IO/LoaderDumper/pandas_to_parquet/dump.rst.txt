@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.pandas_to_parquet.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.pandas_to_parquet.dump(obj, savedir)
 
 
    Save the pandas DataFrame in the specified directory.
@@ -14,7 +14,7 @@ dump
    In addition to the pandas DataFrame itself,
    meta information is also saved in the form of a JSON file.
 
-   .. seealso:: :py:func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
+   .. seealso:: :func:`~data_base.isf_data_base.IO.LoaderDumper.utils.save_object_meta` for saving meta information
 
    :param obj: Pandas DataFrame to be saved.
    :type obj: pd.DataFrame

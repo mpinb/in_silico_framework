@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -23,7 +22,7 @@ distributed_lock
    get_read_lock </api_reference/data_base/distributed_lock/get_read_lock>
    get_write_lock </api_reference/data_base/distributed_lock/get_write_lock>
 
-.. py:module:: data_base.distributed_lock
+.. module:: data_base.distributed_lock
 
 .. autoapi-nested-parse::
    Configuration for locking servers
@@ -45,7 +44,7 @@ distributed_lock
         - `Zookeeper Documentation <https://kazoo.readthedocs.io/en/latest/index.html>`_
       * - File
         - Fasteners file-based locking.
-        - :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` and `Fasteners Documentation <https://fasteners.readthedocs.io/en/latest/>`_
+        - :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` and `Fasteners Documentation <https://fasteners.readthedocs.io/en/latest/>`_
 
 
    If no such file exists, or the environment variable is not set, a default configuration is used, which uses (in order of decreasing precedence):
@@ -66,6 +65,7 @@ distributed_lock
        [{'type': 'redis', 'config': {'host': 'spock', 'port': 8885, 'socket_timeout': 1}},
        {'type': 'redis', 'config': {'host': 'localhost', 'port': 6379, 'socket_timeout': 1}},
        {'type': 'file'}]
+
 
 
 .. rst-class:: absolute-paragraph
@@ -108,6 +108,28 @@ Functions
      - Fetch the correct read lock, depending on global locking server configuration.
    * - :py:obj:`get_write_lock <data_base.distributed_lock.get_write_lock>`\ (name)
      - Fetch the correct write lock, depending on global locking server configuration.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.distributed_lock.logger>`
+     - \-
+   * - :py:obj:`_SERVER <data_base.distributed_lock._SERVER>`
+     - \-
+   * - :py:obj:`_CLIENT <data_base.distributed_lock._CLIENT>`
+     - \-
+   * - :py:obj:`_CONFIG <data_base.distributed_lock._CONFIG>`
+     - \-
+
 
 
 

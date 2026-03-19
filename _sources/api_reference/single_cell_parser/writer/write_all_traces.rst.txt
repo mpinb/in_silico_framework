@@ -6,7 +6,7 @@ write_all_traces
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_all_traces(fname, t, vTraces)
+.. function:: single_cell_parser.writer.write_all_traces(fname, t, vTraces)
 
 
    Write out a list of voltage traces.
@@ -18,7 +18,7 @@ write_all_traces
    :param vTraces: A list of voltage traces.
    :type vTraces: list
 
-   :returns: None. Writes out the voltage traces to :paramref:`fname`.
+   :returns: None. Writes out the voltage traces to :param:`fname`.
 
    .. rubric:: Example
       :class: example

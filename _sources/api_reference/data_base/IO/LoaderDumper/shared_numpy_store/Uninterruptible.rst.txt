@@ -11,10 +11,9 @@ Uninterruptible
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.IO.LoaderDumper.shared_numpy_store.Uninterruptible
+.. class:: data_base.IO.LoaderDumper.shared_numpy_store.Uninterruptible
    
    Context manager to create an uninterruptible section of code.
 

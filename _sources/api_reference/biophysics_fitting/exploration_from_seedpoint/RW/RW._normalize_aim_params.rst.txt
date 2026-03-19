@@ -1,13 +1,12 @@
 
 
+_normalize_aim_params
+=====================
 
 
+.. Signature -------------------------------
 
-RW._normalize_aim_params
-========================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params(aim_params)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params(aim_params)
 
 
    Normalize aim parameters to be between 0 and 1.

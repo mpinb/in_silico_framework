@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -14,14 +13,15 @@ dask_to_msgpack
 
    dump </api_reference/data_base/IO/LoaderDumper/dask_to_msgpack/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.dask_to_msgpack
+.. module:: data_base.IO.LoaderDumper.dask_to_msgpack
 
 .. autoapi-nested-parse::
    Save and load dask dataframes to msgpack.
 
    This uses a fork of the original `pandas_to_msgpack` package, `available on PyPI <https://pypi.org/project/isf-pandas-msgpack/>`_
 
-   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for saving dask dataframes to parquet files.
+   .. seealso:: :mod:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet` for saving dask dataframes to parquet files.
+
 
 
 
@@ -38,6 +38,24 @@ Functions
    
    * - :py:obj:`dump <data_base.IO.LoaderDumper.dask_to_msgpack.dump>`\ (obj, savedir, repartition, scheduler, client)
      - \-
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Loader <data_base.IO.LoaderDumper.dask_to_msgpack.Loader>`
+     - \-
+   * - :py:obj:`check <data_base.IO.LoaderDumper.dask_to_msgpack.check>`
+     - \-
+
 
 
 

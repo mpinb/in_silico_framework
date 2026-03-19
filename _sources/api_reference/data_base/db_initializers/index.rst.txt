@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -16,18 +15,20 @@ db_initializers
    prepare_ANN_batches </api_reference/data_base/db_initializers/prepare_ANN_batches/index>  
    synapse_activation_binning </api_reference/data_base/db_initializers/synapse_activation_binning/index>  
 
-.. py:module:: data_base.db_initializers
+.. module:: data_base.db_initializers
 
 .. autoapi-nested-parse::
    Initialize a database from raw simulation data.
 
    This package provides modules for initializing databases from simulation results.
 
-   :py:mod:`~data_base.db_initializers.load_simrun_general` provides a general
+   :mod:`~data_base.db_initializers.load_simrun_general` provides a general
    way to parse raw simulation output to intermediate pickle files, or permanent dask and pandas dataframes.
    A database that has been initialized with this module is herafter called a "simrun-initialized" database.
 
    Each other submodule provides an ``init`` method, which builds on top of raw simrun data.
+
+
 
 
 
@@ -44,11 +45,12 @@ Modules
    :class: summarytable
    
    * - :py:obj:`load_simrun_general <data_base.db_initializers.load_simrun_general>`
-     - Parse :ref:`simresult_dir_format` generated with :py:mod:`simrun` and write to a :py:class:`data_base.DataBase`
+     - Parse :ref:`simresult_dir_format` generated with :mod:`simrun` and write to a :class:`data_base.DataBase`
    * - :py:obj:`prepare_ANN_batches <data_base.db_initializers.prepare_ANN_batches>`
      - Parse a simrun-initialized database for ANN batch preparation.
    * - :py:obj:`synapse_activation_binning <data_base.db_initializers.synapse_activation_binning>`
      - Methods for fast binning of :ref:`syn_activation_format` dataframes.
+
 
 
 .. container:: doc-feedback

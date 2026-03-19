@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
 
 
@@ -18,7 +17,7 @@ evoked_PSTH_from_spike_times
    load_cluster_trials </api_reference/singlecell_input_mapper/evoked_PSTH_from_spike_times/load_cluster_trials>
    scan_directory </api_reference/singlecell_input_mapper/evoked_PSTH_from_spike_times/scan_directory>
 
-.. py:module:: singlecell_input_mapper.evoked_PSTH_from_spike_times
+.. module:: singlecell_input_mapper.evoked_PSTH_from_spike_times
 
 .. autoapi-nested-parse::
    Create PSTHs from spike times.
@@ -27,6 +26,7 @@ evoked_PSTH_from_spike_times
 
       This module is specific to the data gathering process and file formats used by the `Oberlaender lab in Bonn <https://mpinb.mpg.de/en/research-groups/groups/in silico-brain-sciences/research-focus-ibs.html>`_.
       If you are in the process of adapting this module to your own data, please focus on the output format of each method, rather than trying to apply these blindly to your files.
+
 
 
 
@@ -51,6 +51,26 @@ Functions
      - Reads in a cluster file and returns a dictionary with the spike times for each trial.
    * - :py:obj:`scan_directory <singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory>`\ (path, fnames, suffix)
      - Recursively scans a directory for files with a specific suffix.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`surroundColumns <singlecell_input_mapper.evoked_PSTH_from_spike_times.surroundColumns>`
+     - \-
+   * - :py:obj:`index2WhiskerLUT <singlecell_input_mapper.evoked_PSTH_from_spike_times.index2WhiskerLUT>`
+     - \-
+   * - :py:obj:`spikeTimesName <singlecell_input_mapper.evoked_PSTH_from_spike_times.spikeTimesName>`
+     - \-
+
 
 
 

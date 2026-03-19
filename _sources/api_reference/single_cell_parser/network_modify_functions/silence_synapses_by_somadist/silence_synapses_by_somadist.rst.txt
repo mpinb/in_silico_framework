@@ -6,7 +6,7 @@ silence_synapses_by_somadist
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist.silence_synapses_by_somadist(cell, evokedNW, soma_dist_ranges=None)
+.. function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist.silence_synapses_by_somadist(cell, evokedNW, soma_dist_ranges=None)
 
 
    Silence synapses at a certain soma distance.

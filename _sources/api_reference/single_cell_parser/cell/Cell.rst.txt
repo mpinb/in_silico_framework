@@ -29,20 +29,21 @@ Cell
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.cell.Cell
+.. class:: single_cell_parser.cell.Cell
+
+   Bases: :py:obj:`object`
    
    Cell object providing API to the NEURON hoc interface.
 
    This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
    The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
-   Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
+   Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
 
    .. seealso::
 
-      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
+      This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
       This class concerns itself with providing API to NEURON, not with mapping input to the cell.
 
    :Attributes:
@@ -63,38 +64,38 @@ Cell
 
          The soma section of the cell.
 
-         :type: :py:class:`~single_cell_parser.cell.PySection`
+         :type: :class:`~single_cell_parser.cell.PySection`
 
       .. attribute:: tree
 
          NEURON SectionList containing all sections of the cell.
 
-         :type: :py:class:`neuron:SectionList`
+         :type: :class:`neuron:SectionList`
 
       .. attribute:: branches
 
-         maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
+         maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:class:`neuron:SectionList`).
 
          :type: dict
 
       .. attribute:: structures
 
          All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...).
-         Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
+         Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
 
-         :type: Dict[:py:class:`~single_cell_parser.cell.PySection`]
+         :type: Dict[:class:`~single_cell_parser.cell.PySection`]
 
       .. attribute:: sections
 
-         List of :py:class:`~single_cell_parser.cell.PySection` objects.
+         List of :class:`~single_cell_parser.cell.PySection` objects.
          First element is the soma.
          Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
 
-         :type: List[:py:class:`~single_cell_parser.cell.PySection`]
+         :type: List[:class:`~single_cell_parser.cell.PySection`]
 
       .. attribute:: synapses
 
-         a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
+         a dictionary of lists of :class:`single_cell_parser.synapse.Synapse` objects
 
          :type: dict
 
@@ -114,7 +115,7 @@ Cell
 
          a NEURON Vector recording time.
 
-         :type: :py:class:`neuron:Vector`
+         :type: :class:`neuron:Vector`
 
       .. attribute:: neuron_param
 
@@ -147,7 +148,7 @@ Cell
       * - :py:obj:`max_distance <single_cell_parser.cell.Cell.max_distance>`\ (label)
         - Computes maximum path length to soma of all branches with label :paramref:`label`
       * - :py:obj:`add_synapse <single_cell_parser.cell.Cell.add_synapse>`\ (secID, ptID, ptx, preType, postType)
-        - Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell object.
+        - Add a :class:`~single_cell_parser.synapse.Synapse` to the cell object.
       * - :py:obj:`remove_synapses <single_cell_parser.cell.Cell.remove_synapses>`\ (preType)
         - Remove synapses from the cell object of type :paramref:`preType`.
       * - :py:obj:`init_time_recording <single_cell_parser.cell.Cell.init_time_recording>`\ ()

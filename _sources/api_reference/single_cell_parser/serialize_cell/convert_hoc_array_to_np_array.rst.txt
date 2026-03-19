@@ -6,7 +6,7 @@ convert_hoc_array_to_np_array
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.serialize_cell.convert_hoc_array_to_np_array(hoc_array)
+.. function:: single_cell_parser.serialize_cell.convert_hoc_array_to_np_array(hoc_array)
 
 
    Convert hoc array to list of lists

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -18,7 +17,8 @@ file_handling
    get_recsite_labels_from_dend_vt_filelist </api_reference/data_base/db_initializers/load_simrun_general/file_handling/get_recsite_labels_from_dend_vt_filelist>
    _get_recsite_ids_from_recsite_labels </api_reference/data_base/db_initializers/load_simrun_general/file_handling/_get_recsite_ids_from_recsite_labels>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.file_handling
+.. module:: data_base.db_initializers.load_simrun_general.file_handling
+
 
 
 
@@ -34,13 +34,29 @@ Functions
    :class: summarytable
    
    * - :py:obj:`make_filelist <data_base.db_initializers.load_simrun_general.file_handling.make_filelist>`\ (directory, suffix)
-     - Generate a list of all files with :paramref:`suffix` in the specified directory.
+     - Generate a list of all files with :param:`suffix` in the specified directory.
    * - :py:obj:`get_file <data_base.db_initializers.load_simrun_general.file_handling.get_file>`\ (self, suffix)
      - Get the filename of the unique file in the current directory with the specified suffix.
    * - :py:obj:`get_max_commas <data_base.db_initializers.load_simrun_general.file_handling.get_max_commas>`\ (paths)
      - Get the maximum amount of delimiters across many files.
    * - :py:obj:`get_recsite_labels_from_dend_vt_filelist <data_base.db_initializers.load_simrun_general.file_handling.get_recsite_labels_from_dend_vt_filelist>`\ (filelist, full\_suffix)
      - Get the recording site labels from a list of dendritic voltage trace files.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.db_initializers.load_simrun_general.file_handling.logger>`
+     - \-
+
 
 
 

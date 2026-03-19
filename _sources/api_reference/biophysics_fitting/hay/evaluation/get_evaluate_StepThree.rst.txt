@@ -6,15 +6,15 @@ get_evaluate_StepThree
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_StepThree(**kwargs)
+.. function:: biophysics_fitting.hay.evaluation.get_evaluate_StepThree(**kwargs)
 
 
    Get the evaluation function for the :math:`StepThree` stimulus protocol.
 
-   Initializes a :py:class:`StepThree` object with the given keyword arguments,
+   Initializes a :class:`StepThree` object with the given keyword arguments,
    and returns a function that evaluates the voltage traces.
 
-   :param \*\*kwargs: Additional or overriding keyword arguments for the :py:class:`StepThree` object. Defaults to None.
+   :param kwargs: Additional or overriding keyword arguments for the :class:`StepThree` object. Defaults to None.
 
    :returns: function that evaluates the voltage traces.
    :rtype: Callable

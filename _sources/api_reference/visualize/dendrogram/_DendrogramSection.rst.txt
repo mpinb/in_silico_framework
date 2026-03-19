@@ -19,16 +19,15 @@ _DendrogramSection
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.dendrogram._DendrogramSection(name, x_dist_start, x_dist_end, sec, main_bifurcation=False, sec_id=None)
+.. class:: visualize.dendrogram._DendrogramSection(name, x_dist_start, x_dist_end, sec, main_bifurcation=False, sec_id=None)
    
    A class to represent a dendrogram section.
 
    A dendrogram section is a single neuron section, as it is represented in a dendrogram.
    It does not necessarily contain any morphological information.
-   The usecase of this class is to be a leightweight dataclass, used in the :py:class:`Dendrogram` and :py:class:`DendrogramStatistics` classes.
+   The usecase of this class is to be a leightweight dataclass, used in the :class:`Dendrogram` and :class:`DendrogramStatistics` classes.
 
 
    :param name: The name of the section.
@@ -68,7 +67,7 @@ _DendrogramSection
 
          The neuron section.
 
-         :type: :py:class:`~single_cell_parser.cell.PySection`
+         :type: :class:`~single_cell_parser.cell.PySection`
 
       .. attribute:: synapses
 

@@ -1,13 +1,12 @@
 
 
+_next_interval
+==============
 
 
+.. Signature -------------------------------
 
-PointCell._next_interval
-========================
-
-
-.. py:method:: single_cell_parser.cell.PointCell._next_interval()
+.. function:: single_cell_parser.cell.PointCell._next_interval()
 
 
    Calculate the next spike interval :math:`t` for a simple spike train.

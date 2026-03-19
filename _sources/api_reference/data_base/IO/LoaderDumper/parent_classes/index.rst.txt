@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -14,13 +13,14 @@ parent_classes
 
    Loader </api_reference/data_base/IO/LoaderDumper/parent_classes/Loader>
 
-.. py:module:: data_base.IO.LoaderDumper.parent_classes
+.. module:: data_base.IO.LoaderDumper.parent_classes
 
 .. autoapi-nested-parse::
    Base class for child Loader classes
 
    This module provides a base class, to be used as a template for all child classes.
-   Every Loader class in the :py:mod:`data_base.isf_data_base.IO.LoaderDumper` package inherits from this class.
+   Every Loader class in the :mod:`data_base.isf_data_base.IO.LoaderDumper` package inherits from this class.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -36,6 +36,8 @@ Classes
    
    * - :py:obj:`Loader <data_base.IO.LoaderDumper.parent_classes.Loader>`
      - Base class for child Loader classes
+
+
 
 
 

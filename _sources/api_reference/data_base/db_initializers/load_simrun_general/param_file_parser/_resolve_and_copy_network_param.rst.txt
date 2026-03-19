@@ -6,7 +6,7 @@ _resolve_and_copy_network_param
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_network_param(netp_fn, scattered_fn_map)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_network_param(netp_fn, scattered_fn_map)
 
 
    Convert all references to  :ref:`syn_file_format` and :ref:`con_file_format` files

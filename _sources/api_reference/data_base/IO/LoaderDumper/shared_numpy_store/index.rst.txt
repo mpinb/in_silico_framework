@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -24,7 +23,7 @@ shared_numpy_store
    check </api_reference/data_base/IO/LoaderDumper/shared_numpy_store/check>
    dump </api_reference/data_base/IO/LoaderDumper/shared_numpy_store/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.shared_numpy_store
+.. module:: data_base.IO.LoaderDumper.shared_numpy_store
 
 .. autoapi-nested-parse::
    Read and write numpy arrays to and from shared memory.
@@ -35,6 +34,7 @@ shared_numpy_store
 
       This module is speicalized for use with SLURM HPC systems.
       To use with other systems, set the JOB_SHMTMPDIR environment variable to a directory in shared memory.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -53,7 +53,7 @@ Classes
    * - :py:obj:`SharedNumpyStore <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore>`
      - Store numpy arrays on disk and share them between processes.
    * - :py:obj:`Loader <data_base.IO.LoaderDumper.shared_numpy_store.Loader>`
-     - Loader for :py:class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
+     - Loader for :class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
 
 
 .. rst-class:: absolute-paragraph
@@ -79,6 +79,26 @@ Functions
      - Check whether the object can be saved with this dumper.
    * - :py:obj:`dump <data_base.IO.LoaderDumper.shared_numpy_store.dump>`\ (obj, savedir)
      - Dump the shared numpy store in the specified directory.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.IO.LoaderDumper.shared_numpy_store.logger>`
+     - \-
+   * - :py:obj:`_O_CREX <data_base.IO.LoaderDumper.shared_numpy_store._O_CREX>`
+     - \-
+   * - :py:obj:`sns_list <data_base.IO.LoaderDumper.shared_numpy_store.sns_list>`
+     - \-
+
 
 
 

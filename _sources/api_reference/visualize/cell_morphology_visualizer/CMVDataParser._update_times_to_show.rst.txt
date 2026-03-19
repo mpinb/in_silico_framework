@@ -1,13 +1,12 @@
 
 
+_update_times_to_show
+=====================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._update_times_to_show
-===================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._update_times_to_show(t_start=None, t_stop=None, t_step=None)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._update_times_to_show(t_start=None, t_stop=None, t_step=None)
 
 
    Checks if the specified time range equals the previously defined one. If not, updates the time range.
@@ -20,7 +19,7 @@ CMVDataParser._update_times_to_show
    :param t_step: time interval
    :type t_step: float
 
-   :returns: None. Updates :paramref:`times_to_show`.
+   :returns: None. Updates :param:`times_to_show`.
 
 
 

@@ -1,13 +1,12 @@
 
 
+check_if_key_exists
+===================
 
 
+.. Signature -------------------------------
 
-ISFDataBase.check_if_key_exists
-===============================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.check_if_key_exists(key)
+.. function:: data_base.isf_data_base.ISFDataBase.check_if_key_exists(key)
 
 
    Check if a key exists in the database.

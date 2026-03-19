@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
 
 
@@ -16,19 +15,20 @@ evoked_network_param_from_template
    whisker_evoked_PSTH </api_reference/singlecell_input_mapper/evoked_network_param_from_template/whisker_evoked_PSTH>
    load_cell_number_file </api_reference/singlecell_input_mapper/evoked_network_param_from_template/load_cell_number_file>
 
-.. py:module:: singlecell_input_mapper.evoked_network_param_from_template
+.. module:: singlecell_input_mapper.evoked_network_param_from_template
 
 .. autoapi-nested-parse::
    Runfile to create a :ref:`network_parameters_format` file that captures the population activity of a rat barrel cortex during passive whisker touch in anasthesized animals.
 
    Reads in a template parameter file and sets the PSTHs for each celltype to the PSTHs of the evoked activity.
-   Such PSTHs can be computed from spike time recordings using e.g. :py:mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
+   Such PSTHs can be computed from spike time recordings using e.g. :mod:`~singlecell_input_mapper.evoked_PSTH_from_spike_times`.
 
    .. attention::
 
       This module is specific to the model of the rat barrel cortex and the experimental conditions of the passive whisker touch experiment.
       It is not intended to be used for other models or experiments.
       However, it may serve as a template for other experimental conditions.
+
 
 
 
@@ -46,9 +46,125 @@ Functions
    * - :py:obj:`create_network_parameter <singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter>`\ (templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write\_all\_celltypes)
      - Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
    * - :py:obj:`whisker_evoked_PSTH <singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH>`\ (column, deflectedWhisker, cellType)
-     - Fetch the PSTHs of each celltype in a barrel cortex :paramref:`column` for evoked activity reflecting
+     - Fetch the PSTHs of each celltype in a barrel cortex :param:`column` for evoked activity reflecting
    * - :py:obj:`load_cell_number_file <singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file>`\ (cellNumberFileName)
      - Load the cell number file.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`evokedPrefix <singlecell_input_mapper.evoked_network_param_from_template.evokedPrefix>`
+     - \-
+   * - :py:obj:`L2EvokedName <singlecell_input_mapper.evoked_network_param_from_template.L2EvokedName>`
+     - \-
+   * - :py:obj:`L34EvokedName <singlecell_input_mapper.evoked_network_param_from_template.L34EvokedName>`
+     - \-
+   * - :py:obj:`L4pyEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L4pyEvokedName>`
+     - \-
+   * - :py:obj:`L4spEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L4spEvokedName>`
+     - \-
+   * - :py:obj:`L4ssEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L4ssEvokedName>`
+     - \-
+   * - :py:obj:`L5stEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L5stEvokedName>`
+     - \-
+   * - :py:obj:`L5ttEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L5ttEvokedName>`
+     - \-
+   * - :py:obj:`L6ccEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L6ccEvokedName>`
+     - \-
+   * - :py:obj:`L6ccinvEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L6ccinvEvokedName>`
+     - \-
+   * - :py:obj:`L6ctEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L6ctEvokedName>`
+     - \-
+   * - :py:obj:`VPMEvokedName <singlecell_input_mapper.evoked_network_param_from_template.VPMEvokedName>`
+     - \-
+   * - :py:obj:`L1EvokedName <singlecell_input_mapper.evoked_network_param_from_template.L1EvokedName>`
+     - \-
+   * - :py:obj:`L23TransEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L23TransEvokedName>`
+     - \-
+   * - :py:obj:`L45PeakEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L45PeakEvokedName>`
+     - \-
+   * - :py:obj:`L45SymEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L45SymEvokedName>`
+     - \-
+   * - :py:obj:`L56TransEvokedName <singlecell_input_mapper.evoked_network_param_from_template.L56TransEvokedName>`
+     - \-
+   * - :py:obj:`SymLocal1EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal1EvokedName>`
+     - \-
+   * - :py:obj:`SymLocal2EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal2EvokedName>`
+     - \-
+   * - :py:obj:`SymLocal3EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal3EvokedName>`
+     - \-
+   * - :py:obj:`SymLocal4EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal4EvokedName>`
+     - \-
+   * - :py:obj:`SymLocal5EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal5EvokedName>`
+     - \-
+   * - :py:obj:`SymLocal6EvokedName <singlecell_input_mapper.evoked_network_param_from_template.SymLocal6EvokedName>`
+     - \-
+   * - :py:obj:`L2EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L2EvokedParam>`
+     - \-
+   * - :py:obj:`L34EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L34EvokedParam>`
+     - \-
+   * - :py:obj:`L4pyEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L4pyEvokedParam>`
+     - \-
+   * - :py:obj:`L4spEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L4spEvokedParam>`
+     - \-
+   * - :py:obj:`L4ssEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L4ssEvokedParam>`
+     - \-
+   * - :py:obj:`L5stEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L5stEvokedParam>`
+     - \-
+   * - :py:obj:`L5ttEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L5ttEvokedParam>`
+     - \-
+   * - :py:obj:`L6ccEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L6ccEvokedParam>`
+     - \-
+   * - :py:obj:`L6ccinvEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L6ccinvEvokedParam>`
+     - \-
+   * - :py:obj:`L6ctEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L6ctEvokedParam>`
+     - \-
+   * - :py:obj:`VPMEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.VPMEvokedParam>`
+     - \-
+   * - :py:obj:`L1EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L1EvokedParam>`
+     - \-
+   * - :py:obj:`L23TransEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L23TransEvokedParam>`
+     - \-
+   * - :py:obj:`L45PeakEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L45PeakEvokedParam>`
+     - \-
+   * - :py:obj:`L45SymEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L45SymEvokedParam>`
+     - \-
+   * - :py:obj:`L56TransEvokedParam <singlecell_input_mapper.evoked_network_param_from_template.L56TransEvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal1EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal1EvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal2EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal2EvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal3EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal3EvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal4EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal4EvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal5EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal5EvokedParam>`
+     - \-
+   * - :py:obj:`SymLocal6EvokedParam <singlecell_input_mapper.evoked_network_param_from_template.SymLocal6EvokedParam>`
+     - \-
+   * - :py:obj:`evokedTemplates <singlecell_input_mapper.evoked_network_param_from_template.evokedTemplates>`
+     - \-
+   * - :py:obj:`surroundColumns <singlecell_input_mapper.evoked_network_param_from_template.surroundColumns>`
+     - \-
+   * - :py:obj:`surroundPSTHLookup <singlecell_input_mapper.evoked_network_param_from_template.surroundPSTHLookup>`
+     - \-
+   * - :py:obj:`deflectionOffset <singlecell_input_mapper.evoked_network_param_from_template.deflectionOffset>`
+     - \-
+   * - :py:obj:`clusterParameters <singlecell_input_mapper.evoked_network_param_from_template.clusterParameters>`
+     - \-
+   * - :py:obj:`templateParamName <singlecell_input_mapper.evoked_network_param_from_template.templateParamName>`
+     - \-
+
 
 
 

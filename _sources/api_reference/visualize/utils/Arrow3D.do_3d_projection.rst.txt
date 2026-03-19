@@ -1,13 +1,12 @@
 
 
+do_3d_projection
+================
 
 
+.. Signature -------------------------------
 
-Arrow3D.do_3d_projection
-========================
-
-
-.. py:method:: visualize.utils.Arrow3D.do_3d_projection(renderer=None)
+.. function:: visualize.utils.Arrow3D.do_3d_projection(renderer=None)
 
 
    Project the arrow onto the Axes3D object.

@@ -11,10 +11,11 @@ StepTwo
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.hay.evaluation.StepTwo
+.. class:: biophysics_fitting.hay.evaluation.StepTwo(soma_thresh=-30, stim_onset=700, stim_duration=2000, punish=250.0, punish_last_spike_after_deadline=True, punish_minspikenum=5, punish_returning_to_rest_tolerance=2.0, definitions=HAY_STEP2_DEFINITIONS, name='StepTwo', step_index=2)
+
+   Bases: :py:obj:`_Step`
    
    Evaluate Step current two.
 
@@ -36,7 +37,7 @@ StepTwo
 
    Here, the format of each line is: ``acronym: [full name, mean, std]``
 
-   .. seealso:: :py:class:`_Step` for the template class, and :py:meth:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
+   .. seealso:: :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
 
    :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
    :type soma_thresh: float
@@ -54,7 +55,7 @@ StepTwo
    :type punish_minspikenum: int
    :param punish_returning_to_rest_tolerance: The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
    :type punish_returning_to_rest_tolerance: float
-   :param definitions: The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :param definitions: The definitions for the evaluation metrics. See also: :attr:`definitions`.
    :type definitions: dict
    :param name: The name of the stimulus protocol. Defaults to ``'StepTemplate'``.
    :type name: str

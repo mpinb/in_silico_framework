@@ -6,7 +6,7 @@ dereference
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.modular_reduced_model_inference.strategy.dereference(weakrefobj)
+.. function:: simrun.modular_reduced_model_inference.strategy.dereference(weakrefobj)
 
 
    Dereference a reference and fetch the referent.

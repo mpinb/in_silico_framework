@@ -6,7 +6,7 @@ create_reldb_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.create_reldb_path(path)
+.. function:: data_base.dbopen.create_reldb_path(path)
 
 
    Create a relative database path
@@ -25,8 +25,6 @@ create_reldb_path
 
    :param path: The absolute path.
    :type path: str
-   :param db: The database.
-   :type db: ~data_base.DataBase
 
    :returns: The relative path of the form ``reldb://...``.
    :rtype: str

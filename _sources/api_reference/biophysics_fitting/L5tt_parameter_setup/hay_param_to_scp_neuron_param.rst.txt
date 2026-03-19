@@ -6,13 +6,13 @@ hay_param_to_scp_neuron_param
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.hay_param_to_scp_neuron_param(p)
+.. function:: biophysics_fitting.L5tt_parameter_setup.hay_param_to_scp_neuron_param(p)
 
 
    Convert a Hay parameter name to a SCP neuron parameter name.
 
    This function is a simple converter that converts the Hay naming convention to what ISF
-   uses internally in :py:mod:`~single_cell_parser.cell.Cell`
+   uses internally in :mod:`~single_cell_parser.cell.Cell`
 
    :param p: The Hay parameter name.
    :type p: str

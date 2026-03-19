@@ -1,0 +1,21 @@
+
+
+_get_log_formatter
+==================
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging._get_log_formatter()
+
+
+   Get the appropriate log formatter.
+
+   Regular usage has a concise format, while testing uses a verbose format with timestamps.
+   This is determined by the environment variable `ISF_IS_TESTING`.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,13 +1,12 @@
 
 
+run
+===
 
 
+.. Signature -------------------------------
 
-PSPs.run
-========
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.run(client, rerun=False)
+.. function:: simrun.synaptic_strength_fitting.PSPs.run(client, rerun=False)
 
 
    Run the single-cell simulations from the :paramref:`_delayeds`.

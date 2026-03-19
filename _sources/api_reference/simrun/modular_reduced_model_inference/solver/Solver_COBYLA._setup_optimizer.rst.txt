@@ -1,13 +1,12 @@
 
 
+_setup_optimizer
+================
 
 
+.. Signature -------------------------------
 
-Solver_COBYLA._setup_optimizer
-==============================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA._setup_optimizer()
+.. function:: simrun.modular_reduced_model_inference.solver.Solver_COBYLA._setup_optimizer()
 
 
    Set up the optimization strategy.

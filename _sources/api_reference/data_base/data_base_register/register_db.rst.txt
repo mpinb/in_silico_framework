@@ -6,7 +6,7 @@ register_db
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.data_base_register.register_db(unique_id, db_basedir)
+.. function:: data_base.data_base_register.register_db(unique_id, db_basedir)
 
 
    Register a database.

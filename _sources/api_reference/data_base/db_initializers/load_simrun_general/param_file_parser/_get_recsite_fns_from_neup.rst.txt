@@ -6,13 +6,13 @@ _get_recsite_fns_from_neup
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_recsite_fns_from_neup(neup_fn)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_recsite_fns_from_neup(neup_fn)
 
 
    Get the unique recsite files from a list of neuron parameter files.
 
-   :param neup_fns: Path to the neuron parameter file.
-   :type neup_fns: str
+   :param neup_fn: Path to the neuron parameter file.
+   :type neup_fn: str
 
    :returns: List containing the unique recsite files.
    :rtype: list

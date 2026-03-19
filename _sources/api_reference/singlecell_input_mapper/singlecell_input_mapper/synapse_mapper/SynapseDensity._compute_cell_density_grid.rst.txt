@@ -1,13 +1,12 @@
 
 
+_compute_cell_density_grid
+==========================
 
 
+.. Signature -------------------------------
 
-SynapseDensity._compute_cell_density_grid
-=========================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_cell_density_grid()
 
 
    Create an empty mesh for the postsynaptic neuron to match the mesh of the synapse distribution.

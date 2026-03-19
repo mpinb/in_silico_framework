@@ -1,16 +1,15 @@
 
 
+_insert_ion_properties
+======================
 
 
+.. Signature -------------------------------
 
-CellParser._insert_ion_properties
-=================================
-
-
-.. py:method:: single_cell_parser.cell_parser.CellParser._insert_ion_properties(label, ionParam)
+.. function:: single_cell_parser.cell_parser.CellParser._insert_ion_properties(label, ionParam)
 
 
-   Inserts ion properties into all structures named as :paramref:`label`
+   Inserts ion properties into all structures named as :param:`label`
 
    :param label: Label of the structure.
    :type label: str

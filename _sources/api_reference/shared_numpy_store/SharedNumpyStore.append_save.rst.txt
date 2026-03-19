@@ -1,0 +1,18 @@
+
+
+append_save
+===========
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore.append_save(arr, name, autoflush=True)
+
+
+   Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

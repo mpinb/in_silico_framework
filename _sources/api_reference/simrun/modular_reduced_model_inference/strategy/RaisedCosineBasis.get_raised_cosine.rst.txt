@@ -1,13 +1,12 @@
 
 
+get_raised_cosine
+=================
 
 
+.. Signature -------------------------------
 
-RaisedCosineBasis.get_raised_cosine
-===================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_raised_cosine(a=1, c=1, phi=0, t=None, backend=np)
+.. function:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get_raised_cosine(a=1, c=1, phi=0, t=None, backend=np)
 
    :staticmethod:
 

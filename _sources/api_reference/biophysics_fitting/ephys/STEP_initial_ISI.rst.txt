@@ -6,7 +6,7 @@ STEP_initial_ISI
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.STEP_initial_ISI(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.STEP_initial_ISI(t, v, thresh=None)
 
 
    Computes the Inter-Spike Interval (ISI) for the first two spikes of a voltage trace for a step stimulus.

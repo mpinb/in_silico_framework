@@ -6,7 +6,7 @@ save_object_meta
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta.save_object_meta(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.meta.save_object_meta(obj, savedir)
 
 
    Save an object's meta in the file format configured in py:mod:`config`.

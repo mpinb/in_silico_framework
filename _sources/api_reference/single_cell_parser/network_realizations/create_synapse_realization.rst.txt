@@ -6,7 +6,7 @@ create_synapse_realization
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_realizations.create_synapse_realization(pname, write_synapses=False)
+.. function:: single_cell_parser.network_realizations.create_synapse_realization(pname, write_synapses=False)
 
 
    Create a synapse realization from a :ref:`network_parameters_format` file.

@@ -1,13 +1,12 @@
 
 
+create_network_embedding_from_synapse_densities
+===============================================
 
 
+.. Signature -------------------------------
 
-NetworkMapper.create_network_embedding_from_synapse_densities
-=============================================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities(postCellName, synapseDensities)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_from_synapse_densities(postCellName, synapseDensities)
 
 
    Create a single network realization from pre-computed synapse densities.

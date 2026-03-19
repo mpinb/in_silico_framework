@@ -6,13 +6,19 @@ STEP_adaptation_index
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.STEP_adaptation_index(t, v, stim_end=2000, thresh=None)
+.. function:: biophysics_fitting.ephys.STEP_adaptation_index(t, v, stim_end=2000, thresh=None)
 
 
    Calculate the adaptation index for a step current stimulus.
 
-   :param end_time: End time of the stimulus.
-   :type end_time: float
+   :param t: Time vector
+   :type t: np.array
+   :param v: Voltage vector
+   :type v: np.array
+   :param stim_end: End time of the stimulus.
+   :type stim_end: float
+   :param thresh: Voltage threshold for finding APs with :func:`find_crossing`
+   :type thresh: float
 
    :returns: Adaptation index.
    :rtype: float

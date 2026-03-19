@@ -1,13 +1,12 @@
 
 
+_get_interactive_cell
+=====================
 
 
+.. Signature -------------------------------
 
-CellMorphologyInteractiveVisualizer._get_interactive_cell
-=========================================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_cell(color=None, time_point=None, diameter=None)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer._get_interactive_cell(color=None, time_point=None, diameter=None)
 
 
    Setup plotly for rendering in notebooks.

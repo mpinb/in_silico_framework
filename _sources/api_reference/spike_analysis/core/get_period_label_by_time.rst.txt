@@ -6,7 +6,7 @@ get_period_label_by_time
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.get_period_label_by_time(periods, t)
+.. function:: spike_analysis.core.get_period_label_by_time(periods, t)
 
 
    Classifies timepoint based on whether it falls within a period.

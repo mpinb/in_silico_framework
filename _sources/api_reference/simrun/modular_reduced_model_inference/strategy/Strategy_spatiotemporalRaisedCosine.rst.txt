@@ -20,20 +20,22 @@ Strategy_spatiotemporalRaisedCosine
    _get_score_static <Strategy_spatiotemporalRaisedCosine._get_score_static>
    normalize <Strategy_spatiotemporalRaisedCosine.normalize>
    get_color_by_group <Strategy_spatiotemporalRaisedCosine.get_color_by_group>
+   get_kernel_dict <Strategy_spatiotemporalRaisedCosine.get_kernel_dict>
    visualize <Strategy_spatiotemporalRaisedCosine.visualize>
 
 
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine(name, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal)
+.. class:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine(name, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal)
+
+   Bases: :py:obj:`_Strategy`
    
    Spatiotemporal raised cosine strategy.
 
-   Uses the :py:class:``RaisedCosineBasis`` to create a set of basis functions.
+   Uses the :class:``RaisedCosineBasis`` to create a set of basis functions.
 
    .. attention::
 
@@ -68,7 +70,7 @@ Strategy_spatiotemporalRaisedCosine
 
          The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
          These basis vectors are used for the optimizer, and are already multiplied with the data.
-         Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
+         Do not confuse them with the basis vectors of :param:`RaisedCosineBasis_spatial` and :param:`RaisedCosineBasis_temporal`,
          as the latter are not multiplied with the synapse activaiton data.
 
          :type: dict
@@ -131,6 +133,8 @@ Strategy_spatiotemporalRaisedCosine
         - Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
       * - :py:obj:`get_color_by_group <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group>`\ (group)
         - Map groups to a color.
+      * - :py:obj:`get_kernel_dict <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_kernel_dict>`\ (x, normalize)
+        - \-
       * - :py:obj:`visualize <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.visualize>`\ (optimizer\_output, only\_successful, normalize)
         - Plot the basis functions.
 

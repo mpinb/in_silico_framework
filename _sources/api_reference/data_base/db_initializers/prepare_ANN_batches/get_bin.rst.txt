@@ -6,7 +6,7 @@ get_bin
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_bin(value, bin_min, bin_max, n_bins, tolerance=0.1)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_bin(value, bin_min, bin_max, n_bins, tolerance=0.1)
 
 
    Find the bin index of a given value.

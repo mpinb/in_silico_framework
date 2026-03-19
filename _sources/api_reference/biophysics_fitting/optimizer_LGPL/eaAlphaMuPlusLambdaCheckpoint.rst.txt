@@ -6,7 +6,7 @@ eaAlphaMuPlusLambdaCheckpoint
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer_LGPL.eaAlphaMuPlusLambdaCheckpoint(population, toolbox, mu, cxpb, mutpb, ngen, stats=None, halloffame=None, cp_frequency=1, db_run=None, continue_cp=False, db=None)
+.. function:: biophysics_fitting.optimizer_LGPL.eaAlphaMuPlusLambdaCheckpoint(population, toolbox, mu, cxpb, mutpb, ngen, stats=None, halloffame=None, cp_frequency=1, db_run=None, continue_cp=False, db=None)
 
 
    This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
@@ -29,10 +29,13 @@ eaAlphaMuPlusLambdaCheckpoint
    :type halloffame: deap.tools.HallOfFame
    :param cp_frequency: generations between checkpoints
    :type cp_frequency: int
-   :param cp_filename: db_run, where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
-   :type cp_filename: DataBase or None
+   :param db_run: Database where the checkpoint is stored in [generation]_checkpoint. Was: path to checkpoint filename
+   :type db_run: data_base.DataBase
    :param continue_cp: whether to continue
    :type continue_cp: bool
+
+   .. deprecated 0.6.0::
+      The argument ``cp_filename`` (``str``) has been changed to ``db_run`` (:class:`data_base.DataBase`) instead.
 
 
 

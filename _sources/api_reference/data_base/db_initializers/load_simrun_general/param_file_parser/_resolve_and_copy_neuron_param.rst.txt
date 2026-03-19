@@ -6,14 +6,14 @@ _resolve_and_copy_neuron_param
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_neuron_param(neup_fn, scattered_fn_map)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_neuron_param(neup_fn, scattered_fn_map)
 
 
-   Convert all references to  :ref:`.hoc` and recsite .landmarkAscii files
+   Convert all references to  :ref:`hoc_file_format` and recsite .landmarkAscii files
    in a :ref:`network_parameters_format` file and copy to a new location.
 
-   :param netp_fn: Path to a :ref:`neuron_parameters_format` file.
-   :type netp_fn: str
+   :param neup_fn: Path to a :ref:`cell_parameters_format` file.
+   :type neup_fn: str
    :param scattered_fn_map: A future dictionary with filename mappings. Must contain the keys "syn", "con" and "netp"
    :type scattered_fn_map: distributed.Future
 

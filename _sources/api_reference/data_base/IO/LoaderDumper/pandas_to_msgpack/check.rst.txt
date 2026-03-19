@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.pandas_to_msgpack.check(obj)
+.. function:: data_base.IO.LoaderDumper.pandas_to_msgpack.check(obj)
 
 
    checks wherther obj can be saved with this dumper

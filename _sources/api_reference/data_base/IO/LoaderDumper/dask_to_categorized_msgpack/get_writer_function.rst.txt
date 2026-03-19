@@ -6,7 +6,7 @@ get_writer_function
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_writer_function(categorize)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_writer_function(categorize)
 
 
    returns function, that stores pandas dataframe

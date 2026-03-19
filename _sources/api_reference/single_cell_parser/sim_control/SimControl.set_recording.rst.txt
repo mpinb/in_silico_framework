@@ -1,13 +1,12 @@
 
 
+set_recording
+=============
 
 
+.. Signature -------------------------------
 
-SimControl.set_recording
-========================
-
-
-.. py:method:: single_cell_parser.sim_control.SimControl.set_recording()
+.. function:: single_cell_parser.sim_control.SimControl.set_recording()
 
 
    Record the voltage trace.

@@ -6,12 +6,12 @@ save_groupby
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.save_groupby(db, result, groupby)
+.. function:: data_base.db_initializers.synapse_activation_binning.save_groupby(db, result, groupby)
 
 
    Save the result of synapse_activation_postprocess_dask to a database.
 
-   A new model data base within :paramref:`db` is created and the numpy arrays are stored there.
+   A new model data base within :param:`db` is created and the numpy arrays are stored there.
 
    :param db: The simrun-initialized database object.
    :type db: ~data_base.DataBase
@@ -22,7 +22,7 @@ save_groupby
 
    :returns: None.
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
+   .. seealso:: :func:`~data_base.db_initializers.load_simrun_general.init` for how to simrun-initialize a database.
 
 
 

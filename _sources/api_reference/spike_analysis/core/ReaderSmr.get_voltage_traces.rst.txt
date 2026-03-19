@@ -1,13 +1,12 @@
 
 
+get_voltage_traces
+==================
 
 
+.. Signature -------------------------------
 
-ReaderSmr.get_voltage_traces
-============================
-
-
-.. py:method:: spike_analysis.core.ReaderSmr.get_voltage_traces()
+.. function:: spike_analysis.core.ReaderSmr.get_voltage_traces()
 
 
    Get the time points and voltage values of the traces.

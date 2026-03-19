@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ 
 
 
@@ -14,15 +13,16 @@ RW
 
    RW </api_reference/biophysics_fitting/exploration_from_seedpoint/RW/RW>
 
-.. py:module:: biophysics_fitting.exploration_from_seedpoint.RW
+.. module:: biophysics_fitting.exploration_from_seedpoint.RW
 
 .. autoapi-nested-parse::
    Perform a random walk through parameter space starting from a seed point.
 
-   This module provides the :py:class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
+   This module provides the :class:`~biophysics_fitting.exploration_from_seedpoint.RW` class,
    which implements a random walk procedure through parameter space.
    Every random parameter iteration provides new biophsyical parameters,
    which are evaluated by running a set of stimulus protocols with early stopping criteria.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -38,6 +38,22 @@ Classes
    
    * - :py:obj:`RW <biophysics_fitting.exploration_from_seedpoint.RW.RW>`
      - Class to perform RW exploration from a seedpoint.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <biophysics_fitting.exploration_from_seedpoint.RW.logger>`
+     - \-
 
 
 

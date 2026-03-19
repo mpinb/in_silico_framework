@@ -6,7 +6,7 @@ shared_array_from_disk
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
 
 
    Loads a numpy array from disk and puts it into shared memory
@@ -18,7 +18,7 @@ shared_array_from_disk
    :param dtype: Data type of the array.
    :type dtype: str, optional
    :param name: Name of the shared memory block.
-                To be passed to :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
+                To be passed to :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
                 Default: None.
    :type name: str, optional
    :param start_row: The starting row of the array. Default: None.
@@ -26,7 +26,7 @@ shared_array_from_disk
    :param end_row: The ending row of the array. Default: None.
    :type end_row: int, optional
 
-   :returns: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+   :returns: The :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
    :rtype: tuple
 
 

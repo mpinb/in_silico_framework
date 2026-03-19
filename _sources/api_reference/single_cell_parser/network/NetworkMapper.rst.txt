@@ -37,16 +37,15 @@ NetworkMapper
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.network.NetworkMapper(postCell, nwParam, simParam=None)
+.. class:: single_cell_parser.network.NetworkMapper(postCell, nwParam, simParam=None)
    
    Map active presynaptic cells to a multi-compartmental neuron model.
 
    .. seealso::
 
-      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`.
+      This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`.
       This class is specialized for synapse activations and simulation control and re-creating already existing network realizations,
       not for creating such anatomical network realizations from empirical data.
 
@@ -77,19 +76,19 @@ NetworkMapper
 
          reference to postsynaptic (multi-compartment) cell model.
 
-         :type: :py:class:`~single_cell_parser.cell.Cell`
+         :type: :class:`~single_cell_parser.cell.Cell`
 
       .. attribute:: nwParam
 
          network parameter set (see :ref:`network_parameters_format` for more info).
 
-         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :class:`~single_cell_parser.parameters.NTParameterSet`
 
       .. attribute:: simParam
 
          simulation parameter set.
 
-         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :class:`~single_cell_parser.parameters.NTParameterSet`
 
    :Methods:
 

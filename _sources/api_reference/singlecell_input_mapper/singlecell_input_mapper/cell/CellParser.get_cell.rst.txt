@@ -1,13 +1,12 @@
 
 
+get_cell
+========
 
 
+.. Signature -------------------------------
 
-CellParser.get_cell
-===================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.get_cell()
 
 
    Returns cell if it is set up
@@ -15,7 +14,7 @@ CellParser.get_cell
    :raises RuntimeError: If cell is not set up.
 
    :returns: Cell object.
-   :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+   :rtype: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
 
 

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.exploration_from_seedpoint` ❭ 
 
 
@@ -12,15 +11,31 @@ utils
 .. toctree::
    :hidden:
 
+   silence_stdout </api_reference/biophysics_fitting/exploration_from_seedpoint/utils/silence_stdout>
    get_vector_norm </api_reference/biophysics_fitting/exploration_from_seedpoint/utils/get_vector_norm>
    evaluation_function_incremental_helper </api_reference/biophysics_fitting/exploration_from_seedpoint/utils/evaluation_function_incremental_helper>
    convert_all_check_columns_bool_to_float </api_reference/biophysics_fitting/exploration_from_seedpoint/utils/convert_all_check_columns_bool_to_float>
 
-.. py:module:: biophysics_fitting.exploration_from_seedpoint.utils
+.. module:: biophysics_fitting.exploration_from_seedpoint.utils
 
 .. autoapi-nested-parse::
    Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module.
 
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`silence_stdout <biophysics_fitting.exploration_from_seedpoint.utils.silence_stdout>`
+     - Silence stdout
 
 
 .. rst-class:: absolute-paragraph
@@ -40,6 +55,8 @@ Functions
      - Evaluate a model shows one stimulus at a time.
    * - :py:obj:`convert_all_check_columns_bool_to_float <biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float>`\ (df)
      - Convert all boolean values to float in a pandas dataframe.
+
+
 
 
 

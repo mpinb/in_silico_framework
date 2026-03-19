@@ -6,19 +6,19 @@ read_object_meta
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta.read_object_meta(savedir, raise_=True)
+.. function:: data_base.IO.LoaderDumper.meta.read_object_meta(savedir, raise_=True)
 
 
    Read the meta of a dask/parquet object.
 
-   Assumes there is a meta file present in :paramref:`savedir`
-   (see :py:meth:`get_meta_filename` for allowed formats).
+   Assumes there is a meta file present in :param:`savedir`
+   (see :func:`get_meta_filename` for allowed formats).
 
    :param savedir: directory where the file partitions and object meta are saved.
                    This corresponds to the database key filepath.
    :type savedir: str
-   :param raise_: Whether to raise an errror if the meta object is not found on disk.
-   :type raise_: bool, optional
+   :param raise\_: Whether to raise an errror if the meta object is not found on disk.
+   :type raise\_: bool, optional
 
    :returns: A pandas dataframe representing the object meta: column names, column dtypes, index name and index dtype.
    :rtype: pd.DataFrame

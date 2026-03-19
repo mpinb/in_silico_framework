@@ -6,7 +6,7 @@ voltage_base2
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID='recSiteID')
+.. function:: biophysics_fitting.ephys.voltage_base2(voltage_traces, t0, recSiteID='recSiteID')
 
 
    Fetch the voltage at a given time point t0 for a specific recording site ID.

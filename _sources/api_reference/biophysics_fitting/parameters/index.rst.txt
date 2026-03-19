@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -16,10 +15,11 @@ parameters
    param_selector </api_reference/biophysics_fitting/parameters/param_selector>
    set_fixed_params </api_reference/biophysics_fitting/parameters/set_fixed_params>
 
-.. py:module:: biophysics_fitting.parameters
+.. module:: biophysics_fitting.parameters
 
 .. autoapi-nested-parse::
    Fetch parameters with the dot naming convention.
+
 
 
 
@@ -40,6 +40,8 @@ Functions
      - Select parameters from a Series with an Index like a.b.c, a.b.d.
    * - :py:obj:`set_fixed_params <biophysics_fitting.parameters.set_fixed_params>`\ (params, fixed\_params)
      - Add fixed_params to params.
+
+
 
 
 

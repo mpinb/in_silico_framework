@@ -1,13 +1,12 @@
 
 
+_compute_bounds
+===============
 
 
+.. Signature -------------------------------
 
-PySection2._compute_bounds
-==========================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_bounds()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_bounds()
 
 
    Compute the bounding box of the section.

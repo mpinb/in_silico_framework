@@ -6,7 +6,7 @@ get_param_range_evolution_from_ddf
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf(ddf, params, return_mi_ma=False)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_param_range_evolution_from_ddf(ddf, params, return_mi_ma=False)
 
 
    Compute the range of parameters explored by a RW exploration, as a fraction of the total parameter range.

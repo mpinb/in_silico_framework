@@ -6,7 +6,7 @@ fig2np
 
 .. Signature -------------------------------
 
-.. py:function:: visualize._figure_array_converter.fig2np(fig)
+.. function:: visualize._figure_array_converter.fig2np(fig)
 
 
    Converts fig-object to pixels as numpy arrays.

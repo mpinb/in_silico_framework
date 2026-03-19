@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -15,19 +14,20 @@ voltage_trace_visualizer
    plot_vt </api_reference/visualize/voltage_trace_visualizer/plot_vt>
    visualize_vt </api_reference/visualize/voltage_trace_visualizer/visualize_vt>
 
-.. py:module:: visualize.voltage_trace_visualizer
+.. module:: visualize.voltage_trace_visualizer
 
 .. autoapi-nested-parse::
-   Visualize voltage traces from the results of a :py:class:`~biophysics_fitting.simulator.Simulator` object.
+   Visualize voltage traces from the results of a :class:`~biophysics_fitting.simulator.Simulator` object.
 
    this module provides convenience methods to visualize the voltage traces of all stimuli run by a
-   :py:class:`~biophysics_fitting.simulator.Simulator` object.
+   :class:`~biophysics_fitting.simulator.Simulator` object.
 
    .. figure:: ../../../_static/_images/voltage_traces.png
 
       Example voltage traces from the Hay stimulus protocols (:cite:`Hay_Hill_Schuermann_Markram_Segev_2011`).
-      The top row show the :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` and :py:class:`~biophysics_fitting.hay_evaluation_python.bAP` stimuli.
+      The top row show the :class:`~biophysics_fitting.hay_evaluation_python.BAC` and :class:`~biophysics_fitting.hay_evaluation_python.bAP` stimuli.
       The bottom row show the three step currents.
+
 
 
 
@@ -46,6 +46,8 @@ Functions
      - Plot voltage traces from simulation results.
    * - :py:obj:`visualize_vt <visualize.voltage_trace_visualizer.visualize_vt>`\ (vt, fig, soma\_color, dend\_color, BAC\_select, lw, \*\*kwargs)
      - Visualize voltage traces from the Hay stimulus protocols.
+
+
 
 
 

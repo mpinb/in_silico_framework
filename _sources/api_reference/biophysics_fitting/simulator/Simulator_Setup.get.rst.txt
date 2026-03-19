@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get
-===================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get(params)
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get(params)
 
 
    Get the cell with set up biophysics and params.

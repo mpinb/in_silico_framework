@@ -1,13 +1,12 @@
 
 
+write_vtk_frames
+================
 
 
+.. Signature -------------------------------
 
-CellMorphologyVisualizer.write_vtk_frames
-=========================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames(out_name='frame', out_dir='.', t_start=None, t_stop=None, t_step=None, color=None, n_decimals=2, client=None)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames(out_name='frame', out_dir='.', t_start=None, t_stop=None, t_step=None, color=None, n_decimals=2, client=None)
 
 
    Write the cell morphology to a series of VTK files.

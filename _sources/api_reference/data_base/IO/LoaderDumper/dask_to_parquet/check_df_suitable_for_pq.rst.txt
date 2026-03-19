@@ -6,7 +6,7 @@ check_df_suitable_for_pq
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_parquet.check_df_suitable_for_pq(delayed_df)
+.. function:: data_base.IO.LoaderDumper.dask_to_parquet.check_df_suitable_for_pq(delayed_df)
 
 
 

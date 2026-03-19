@@ -6,7 +6,7 @@ parameters_to_cell
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.parameters_to_cell.parameters_to_cell(neuronParam, networkParam, synfile=None, dirPrefix='', tStop=345.0, scale_apical=None, range_vars=None, allPoints=False, cell=None, evokedNW=None)
+.. function:: simrun.parameters_to_cell.parameters_to_cell(neuronParam, networkParam, synfile=None, dirPrefix='', tStop=345.0, scale_apical=None, range_vars=None, allPoints=False, cell=None, evokedNW=None)
 
 
    Rebuild and simulate a network-embedded cell.
@@ -33,15 +33,15 @@ parameters_to_cell
    :param allPoints: Record all points in the cell.
    :type allPoints: bool
    :param cell: A cell object to use for the simulation.
-   :type cell: Cell
+   :type cell: ~single_cell_parser.cell.Cell
    :param evokedNW: A network object to use for the simulation.
-   :type evokedNW: NetworkMapper
+   :type evokedNW: ~single_cell_parser.network.NetworkMapper
 
    .. deprecated:: 0.1
        The `scale_apical` argument is deprecated.
        Use the `cell_modify_funs` key in the :ref:`cell_parameters_format` file instead.
 
-   :returns: A tuple containing the :py:class:`~single_cell_parser.cell.Cell` and the evoked network (:py:class:`~single_cell_parser.network.Networkmapper`).
+   :returns: A tuple containing the :class:`~single_cell_parser.cell.Cell` and the evoked network (:class:`~single_cell_parser.network.Networkmapper`).
    :rtype: tuple
 
 

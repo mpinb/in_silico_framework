@@ -6,14 +6,14 @@ select
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.select(df, **kwargs)
+.. function:: data_base.utils.select(df, **kwargs)
 
 
    Selects rows from a dataframe based on the values of the columns
 
    :param df: the dataframe
    :type df: pd.DataFrame
-   :param \*\*kwargs: the columns and values to be selected
+   :param kwargs: the columns and values to be selected
 
    :returns: the dataframe with the selected rows
    :rtype: pd.DataFrame

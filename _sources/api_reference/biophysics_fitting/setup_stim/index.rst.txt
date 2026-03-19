@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -21,7 +20,7 @@ setup_stim
    setup_StepTwo </api_reference/biophysics_fitting/setup_stim/setup_StepTwo>
    setup_StepThree </api_reference/biophysics_fitting/setup_stim/setup_StepThree>
 
-.. py:module:: biophysics_fitting.setup_stim
+.. module:: biophysics_fitting.setup_stim
 
 .. autoapi-nested-parse::
    This module provides methods to set up stimuli by adding recording/injection pipettes to :py:class:`~single_cell_parser.cell.Cell` objects.
@@ -34,6 +33,7 @@ setup_stim
        - a bAP (backpropagating AP) stimulus.
        - a BAC (bAP-Activated :math:`Ca^{2+}`) stimulus.
        - Three step current stimuli with amplitudes :math:`[0.619, 0.793, 1.507]\ nA`.
+
 
 
 
@@ -63,6 +63,22 @@ Functions
      - Setup a step current stimulus at the soma:
    * - :py:obj:`setup_StepThree <biophysics_fitting.setup_stim.setup_StepThree>`\ (cell, delay)
      - Setup a step current stimulus at the soma:
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`h <biophysics_fitting.setup_stim.h>`
+     - \-
+
 
 
 

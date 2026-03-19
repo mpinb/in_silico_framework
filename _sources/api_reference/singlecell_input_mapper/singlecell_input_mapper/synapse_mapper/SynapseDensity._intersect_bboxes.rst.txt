@@ -1,13 +1,12 @@
 
 
+_intersect_bboxes
+=================
 
 
+.. Signature -------------------------------
 
-SynapseDensity._intersect_bboxes
-================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._intersect_bboxes(bbox1, bbox2)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._intersect_bboxes(bbox1, bbox2)
 
 
    Check if two bounding boxes overlap

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -16,13 +15,14 @@ to_cloudpickle
    check </api_reference/data_base/IO/LoaderDumper/to_cloudpickle/check>
    dump </api_reference/data_base/IO/LoaderDumper/to_cloudpickle/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.to_cloudpickle
+.. module:: data_base.IO.LoaderDumper.to_cloudpickle
 
 .. autoapi-nested-parse::
    Read and write an object to the cloudpickle format.
 
-   This is the default dumper for :py:class:`~data_base.DataBase` objects,
+   This is the default dumper for :class:`~data_base.DataBase` objects,
    since they can save basically any Python object.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -55,6 +55,8 @@ Functions
      - Check whether the object can be saved with this dumper
    * - :py:obj:`dump <data_base.IO.LoaderDumper.to_cloudpickle.dump>`\ (obj, savedir)
      - Save the object in the specified directory
+
+
 
 
 

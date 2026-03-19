@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
 
 
@@ -15,10 +14,11 @@ ongoing_network_param_from_template
    create_network_parameter </api_reference/singlecell_input_mapper/ongoing_network_param_from_template/create_network_parameter>
    load_cell_number_file </api_reference/singlecell_input_mapper/ongoing_network_param_from_template/load_cell_number_file>
 
-.. py:module:: singlecell_input_mapper.ongoing_network_param_from_template
+.. module:: singlecell_input_mapper.ongoing_network_param_from_template
 
 .. autoapi-nested-parse::
    Create a network parameter template file.
+
 
 
 
@@ -37,6 +37,22 @@ Functions
      - Create a template :ref:`network_parameters_format` file from a template parameter file and a cell number file.
    * - :py:obj:`load_cell_number_file <singlecell_input_mapper.ongoing_network_param_from_template.load_cell_number_file>`\ (cellNumberFileName)
      - Load the cell number file.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`templateParamName <singlecell_input_mapper.ongoing_network_param_from_template.templateParamName>`
+     - \-
+
 
 
 

@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -1650,6 +1650,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2054,10 +2069,10 @@
 <dt class="sig sig-object highlight sig-wrap py" id="biophysics_fitting.hay.evaluation.bAP">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><span class="sig-name descname"><span class="pre">biophysics_fitting</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-biophysics_fitting.hay" title="biophysics_fitting.hay (Python module)"><span class="sig-name descname"><span class="pre">hay</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><span class="sig-name descname"><span class="pre">evaluation</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">bAP</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.soma_thresh" title="biophysics_fitting.hay.evaluation.bAP.__init__.soma_thresh (Python parameter) — The threshold for APs in the somatic voltage trace."><span class="n"><span class="pre">soma_thresh</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="o">-</span><span class="mi">30</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.stim_onset" title="biophysics_fitting.hay.evaluation.bAP.__init__.stim_onset (Python parameter) — The onset of the stimulus (ms)."><span class="n"><span class="pre">stim_onset</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">295</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.stim_duration" title="biophysics_fitting.hay.evaluation.bAP.__init__.stim_duration (Python parameter) — The duration of the stimulus (ms)."><span class="n"><span class="pre">stim_duration</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.bAP_thresh" title="biophysics_fitting.hay.evaluation.bAP.__init__.bAP_thresh (Python parameter) — The threshold for the backpropagating action potential."><span class="n"><span class="pre">bAP_thresh</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;+2mV&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.punish" title="biophysics_fitting.hay.evaluation.bAP.__init__.punish (Python parameter) — The punishment value in units of \sigma. Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g."><span class="n"><span class="pre">punish</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">250.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.punish_last_spike_after_deadline" title="biophysics_fitting.hay.evaluation.bAP.__init__.punish_last_spike_after_deadline (Python parameter) — Whether to punish if the last spike is after the deadline."><span class="n"><span class="pre">punish_last_spike_after_deadline</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.punish_minspikenum" title="biophysics_fitting.hay.evaluation.bAP.__init__.punish_minspikenum (Python parameter) — The minimum number of spikes required for this stimulus protocol."><span class="n"><span class="pre">punish_minspikenum</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">1</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.punish_returning_to_rest_tolerance" title="biophysics_fitting.hay.evaluation.bAP.__init__.punish_returning_to_rest_tolerance (Python parameter) — The tolerance for returning to rest (mV)."><span class="n"><span class="pre">punish_returning_to_rest_tolerance</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation.bAP.__init__.definitions" title="biophysics_fitting.hay.evaluation.bAP.__init__.definitions (Python parameter) — The definitions for the evaluation metrics."><span class="n"><span class="pre">definitions</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="n">HAY_BAP_DEFINITIONS</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation.bAP" title="Link to this definition">¶</a></dt>
 <dd><p>Evaluate the <span class="math notranslate nohighlight">\(bAP\)</span> stimulus protocol.</p>
-<p>These metrics were introduced by <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, and illustrated in <span id="id2">Bast <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id7" title="Arco Bast, Jason M. Guest, Rieke Fruengel, Rajeevan T. Narayanan, Christiaan P.J. de Kock, and Marcel Oberlaender. Thalamus drives active dendritic computations in cortex. bioRxiv : the preprint server for biology, 2023. Citation Key: Bast2021.10.21.465325 tex.elocation-id: 2021.10.21.465325 tex.eprint: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325.full.pdf. URL: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325, doi:10.1101/2021.10.21.465325.">3</a>]</span>.</p>
+<p>These metrics were introduced by <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, and illustrated in <span id="id2">Bast <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id7" title="Arco Bast, Jason M Guest, Rieke Fruengel, Rajeevan T Narayanan, Christiaan P J de Kock, and Marcel Oberlaender. Thalamus enables active dendritic coupling of inputs arriving at different cortical layers. Nat. Commun., 16(1):8327, September 2025. doi:10.1038/s41467-025-64152-0.">3</a>]</span>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../../setup_stim/setup_bAP.html#biophysics_fitting.setup_stim.setup_bAP" title="biophysics_fitting.setup_stim.setup_bAP (Python function) — Setup a bAP (backpropagating action potential) stimulus for the cell."><code class="xref py py-meth docutils literal notranslate"><span class="pre">biophysics_fitting.setup_stim.setup_bAP()</span></code></a> for more information on the stimulus protocol.</p>
+<p><a class="reference internal" href="../../setup_stim/setup_bAP.html#biophysics_fitting.setup_stim.setup_bAP" title="biophysics_fitting.setup_stim.setup_bAP (Python function) — Setup a bAP (backpropagating action potential) stimulus for the cell."><code class="xref py py-func docutils literal notranslate"><span class="pre">biophysics_fitting.setup_stim.setup_bAP()</span></code></a> for more information on the stimulus protocol.</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation.bAP-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation.bAP-parameters" title="Permalink to this headline">¶</a></dt>
@@ -2203,28 +2218,28 @@ Here, the format of each line is: ``acronym: [full name, mean, std]``
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="bAP.get.html#biophysics_fitting.hay.evaluation.bAP.get" title="biophysics_fitting.hay.evaluation.bAP.get (Python method) — Get the full evaluation of the voltage traces for bAP firing."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(**voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="bAP.get.html#biophysics_fitting.hay.evaluation.bAP.get" title="biophysics_fitting.hay.evaluation.bAP.get (Python function) — Get the full evaluation of the voltage traces for bAP firing."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(**voltage_traces)</p></td>
 <td><p>Get the full evaluation of the voltage traces for bAP firing.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="bAP.check.html#biophysics_fitting.hay.evaluation.bAP.check" title="biophysics_fitting.hay.evaluation.bAP.check (Python method) — Check for problems in the voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>(out, voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="bAP.check.html#biophysics_fitting.hay.evaluation.bAP.check" title="biophysics_fitting.hay.evaluation.bAP.check (Python function) — Check for problems in the voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>(out, voltage_traces)</p></td>
 <td><p>Check for problems in the voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_APheight.html#biophysics_fitting.hay.evaluation.bAP.bAP_APheight" title="biophysics_fitting.hay.evaluation.bAP.bAP_APheight (Python method) — Get the height of the first action potential in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_APheight</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_APheight.html#biophysics_fitting.hay.evaluation.bAP.bAP_APheight" title="biophysics_fitting.hay.evaluation.bAP.bAP_APheight (Python function) — Get the height of the first action potential in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_APheight</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the height of the first action potential in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="bAP.bAP_APwidth.html#biophysics_fitting.hay.evaluation.bAP.bAP_APwidth" title="biophysics_fitting.hay.evaluation.bAP.bAP_APwidth (Python method) — Get the width of the first action potential in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_APwidth</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="bAP.bAP_APwidth.html#biophysics_fitting.hay.evaluation.bAP.bAP_APwidth" title="biophysics_fitting.hay.evaluation.bAP.bAP_APwidth (Python function) — Get the width of the first action potential in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_APwidth</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the width of the first action potential in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_spikecount.html#biophysics_fitting.hay.evaluation.bAP.bAP_spikecount" title="biophysics_fitting.hay.evaluation.bAP.bAP_spikecount (Python method) — Get the number of spikes in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_spikecount</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_spikecount.html#biophysics_fitting.hay.evaluation.bAP.bAP_spikecount" title="biophysics_fitting.hay.evaluation.bAP.bAP_spikecount (Python function) — Get the number of spikes in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_spikecount</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the number of spikes in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="bAP._bAP_att.html#biophysics_fitting.hay.evaluation.bAP._bAP_att" title="biophysics_fitting.hay.evaluation.bAP._bAP_att (Python method) — Get the backpropagating action potential attenuation."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_bAP_att</span></code></a>(voltage_traces, _n)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="bAP._bAP_att.html#biophysics_fitting.hay.evaluation.bAP._bAP_att" title="biophysics_fitting.hay.evaluation.bAP._bAP_att (Python function) — Get the backpropagating action potential attenuation."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_bAP_att</span></code></a>(voltage_traces, _n)</p></td>
 <td><p>Get the backpropagating action potential attenuation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_att2.html#biophysics_fitting.hay.evaluation.bAP.bAP_att2" title="biophysics_fitting.hay.evaluation.bAP.bAP_att2 (Python method) — Get the backpropagating action potential attenuation between the soma and first dendritic pipette location."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_att2</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="bAP.bAP_att2.html#biophysics_fitting.hay.evaluation.bAP.bAP_att2" title="biophysics_fitting.hay.evaluation.bAP.bAP_att2 (Python function) — Get the backpropagating action potential attenuation between the soma and first dendritic pipette location."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_att2</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the backpropagating action potential attenuation between the soma and first dendritic pipette location.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="bAP.bAP_att3.html#biophysics_fitting.hay.evaluation.bAP.bAP_att3" title="biophysics_fitting.hay.evaluation.bAP.bAP_att3 (Python method) — Get the backpropagating action potential attenuation between the soma and second dendritic pipette location."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_att3</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="bAP.bAP_att3.html#biophysics_fitting.hay.evaluation.bAP.bAP_att3" title="biophysics_fitting.hay.evaluation.bAP.bAP_att3 (Python function) — Get the backpropagating action potential attenuation between the soma and second dendritic pipette location."><code class="xref py py-obj docutils literal notranslate"><span class="pre">bAP_att3</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the backpropagating action potential attenuation between the soma and second dendritic pipette location.</p></td>
 </tr>
 </tbody>
@@ -2255,7 +2270,7 @@ Here, the format of each line is: ``acronym: [full name, mean, std]``
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="BAC.BAC_caSpike_width.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: BAC.BAC_caSpike_width" rel="prev">
+        <a href="BAC.BAC_caSpike_width.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: BAC_caSpike_width" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -2264,20 +2279,20 @@ Here, the format of each line is: ``acronym: [full name, mean, std]``
               <span class="md-footer__direction">
                 Previous
               </span>
-              BAC.BAC_caSpike_width
+              BAC_caSpike_width
             </div>
           </div>
         </a>
       
       
         
-        <a href="bAP.get.html" class="md-footer__link md-footer__link--next" aria-label="Next: bAP.get" rel="next">
+        <a href="bAP.get.html" class="md-footer__link md-footer__link--next" aria-label="Next: get" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              bAP.get
+              get
             </div>
           </div>
           <div class="md-footer__button md-icon">

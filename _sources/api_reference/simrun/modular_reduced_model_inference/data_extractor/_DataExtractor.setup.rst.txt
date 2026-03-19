@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-_DataExtractor.setup
-====================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor.setup(Rm)
+.. function:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor.setup(Rm)
 
 
    Setup necessary parameters, depending on which RM is passed

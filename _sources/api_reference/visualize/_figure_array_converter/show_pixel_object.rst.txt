@@ -6,7 +6,7 @@ show_pixel_object
 
 .. Signature -------------------------------
 
-.. py:function:: visualize._figure_array_converter.show_pixel_object(pixelObject, ax=None)
+.. function:: visualize._figure_array_converter.show_pixel_object(pixelObject, ax=None)
 
 
    Displays a PixelObject on an axis

@@ -6,7 +6,7 @@ get_spike_times_from_row
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.get_spike_times_from_row(row)
+.. function:: spike_analysis.core.get_spike_times_from_row(row)
 
 
    Returns a list containing all non-NaN elements in the given pandas Series.

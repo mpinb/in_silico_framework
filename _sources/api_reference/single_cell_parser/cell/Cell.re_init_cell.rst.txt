@@ -1,13 +1,12 @@
 
 
+re_init_cell
+============
 
 
+.. Signature -------------------------------
 
-Cell.re_init_cell
-=================
-
-
-.. py:method:: single_cell_parser.cell.Cell.re_init_cell(replayMode=False)
+.. function:: single_cell_parser.cell.Cell.re_init_cell(replayMode=False)
 
 
    Re-initialize for next simulation run.

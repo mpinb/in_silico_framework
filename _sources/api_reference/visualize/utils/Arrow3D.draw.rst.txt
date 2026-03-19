@@ -1,13 +1,12 @@
 
 
+draw
+====
 
 
+.. Signature -------------------------------
 
-Arrow3D.draw
-============
-
-
-.. py:method:: visualize.utils.Arrow3D.draw(renderer)
+.. function:: visualize.utils.Arrow3D.draw(renderer)
 
 
    Draw the arrow.

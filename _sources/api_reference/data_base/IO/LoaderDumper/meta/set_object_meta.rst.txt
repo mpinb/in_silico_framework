@@ -6,7 +6,7 @@ set_object_meta
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta.set_object_meta(obj, meta)
+.. function:: data_base.IO.LoaderDumper.meta.set_object_meta(obj, meta)
 
 
    Set/reset the meta of a dataframe.

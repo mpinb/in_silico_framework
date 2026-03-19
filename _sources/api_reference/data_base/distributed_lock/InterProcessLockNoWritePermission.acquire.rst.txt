@@ -1,13 +1,12 @@
 
 
+acquire
+=======
 
 
+.. Signature -------------------------------
 
-InterProcessLockNoWritePermission.acquire
-=========================================
-
-
-.. py:method:: data_base.distributed_lock.InterProcessLockNoWritePermission.acquire()
+.. function:: data_base.distributed_lock.InterProcessLockNoWritePermission.acquire()
 
 
    Acquire the lock on a path if the user has write permissions.

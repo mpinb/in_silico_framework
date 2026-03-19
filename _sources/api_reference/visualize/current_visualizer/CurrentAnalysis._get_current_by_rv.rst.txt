@@ -1,13 +1,12 @@
 
 
+_get_current_by_rv
+==================
 
 
+.. Signature -------------------------------
 
-CurrentAnalysis._get_current_by_rv
-==================================
-
-
-.. py:method:: visualize.current_visualizer.CurrentAnalysis._get_current_by_rv(rv)
+.. function:: visualize.current_visualizer.CurrentAnalysis._get_current_by_rv(rv)
 
 
    Get the section current by the range variable name.

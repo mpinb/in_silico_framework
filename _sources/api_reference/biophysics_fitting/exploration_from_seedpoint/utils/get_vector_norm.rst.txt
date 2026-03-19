@@ -6,7 +6,7 @@ get_vector_norm
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.get_vector_norm(v)
+.. function:: biophysics_fitting.exploration_from_seedpoint.utils.get_vector_norm(v)
 
 
    Calculate the norm of a vector v.

@@ -6,7 +6,7 @@ BAC_caSpike_width
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_caSpike_width(t, v, v_dend, thresh=None)
+.. function:: biophysics_fitting.ephys.BAC_caSpike_width(t, v, v_dend, thresh=None)
 
 
    Calculates the width of a calcium spike action potential.

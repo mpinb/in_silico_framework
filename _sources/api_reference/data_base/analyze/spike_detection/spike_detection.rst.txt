@@ -6,7 +6,7 @@ spike_detection
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.spike_detection.spike_detection(ddf, scheduler=None, threshold=0)
+.. function:: data_base.analyze.spike_detection.spike_detection(ddf, scheduler=None, threshold=0)
 
 
    Detect spikes in a dask :ref:`voltage_traces_df_format`.
@@ -19,7 +19,7 @@ spike_detection
    :type threshold: float
 
    :returns: A pandas dataframe containing the spikes
-   :rtype: :py:class:`~pandas.DataFrame`
+   :rtype: :class:`~pandas.DataFrame`
 
 
 

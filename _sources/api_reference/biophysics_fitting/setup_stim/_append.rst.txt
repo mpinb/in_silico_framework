@@ -6,7 +6,7 @@ _append
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim._append(cell, name, item)
+.. function:: biophysics_fitting.setup_stim._append(cell, name, item)
 
 
    Append an item to a :py:class:`~single_cell_parser.Cell.cell` object.

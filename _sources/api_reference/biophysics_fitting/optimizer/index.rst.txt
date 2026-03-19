@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -21,7 +20,7 @@ optimizer
    get_population_with_different_n_objectives </api_reference/biophysics_fitting/optimizer/get_population_with_different_n_objectives>
    start_run </api_reference/biophysics_fitting/optimizer/start_run>
 
-.. py:module:: biophysics_fitting.optimizer
+.. module:: biophysics_fitting.optimizer
 
 .. autoapi-nested-parse::
    Multi-objective optimization algorithm.
@@ -34,12 +33,13 @@ optimizer
    - execution on a distributed system using dask.
    - return of all objectives, not only the combined ones.
 
-   The top-level pipeline can be started with :py:meth:`start_run`.
+   The top-level pipeline can be started with :func:`start_run`.
 
    .. note::
 
       The evolutionary algorithm implementation (adapted from BluePyOpt) is in
       :py:mod:`biophysics_fitting.optimizer_LGPL`, which is licensed under LGPL-3.0-or-later.
+
 
 
 
@@ -70,6 +70,8 @@ Functions
      - Adapt the number of objectives of individuals
    * - :py:obj:`start_run <biophysics_fitting.optimizer.start_run>`\ (db\_setup, n, pop, client, continue\_cp, offspring\_size, eta, mutpb, cxpb, max\_ngen, satisfactory\_boundary\_dict)
      - Start an optimization run as specified in db_setup.
+
+
 
 
 

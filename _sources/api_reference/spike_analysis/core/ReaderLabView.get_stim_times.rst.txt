@@ -1,13 +1,12 @@
 
 
+get_stim_times
+==============
 
 
+.. Signature -------------------------------
 
-ReaderLabView.get_stim_times
-============================
-
-
-.. py:method:: spike_analysis.core.ReaderLabView.get_stim_times()
+.. function:: spike_analysis.core.ReaderLabView.get_stim_times()
 
 
    Get the times of the stimuli.

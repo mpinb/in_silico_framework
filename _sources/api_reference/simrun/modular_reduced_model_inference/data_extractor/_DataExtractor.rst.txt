@@ -19,10 +19,11 @@ _DataExtractor
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor
+.. class:: simrun.modular_reduced_model_inference.data_extractor._DataExtractor
+
+   Bases: :py:obj:`object`
    
    Simple base class for data extractors.
 

@@ -1,13 +1,12 @@
 
 
+plot_creast_trough_histogram
+============================
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.plot_creast_trough_histogram
-=======================================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram(ax=None)
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.plot_creast_trough_histogram(ax=None)
 
 
    skip-doc:

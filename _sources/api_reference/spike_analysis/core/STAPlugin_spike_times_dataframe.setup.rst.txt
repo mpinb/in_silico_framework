@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_spike_times_dataframe.setup
-=====================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_spike_times_dataframe.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_spike_times_dataframe.setup(spike_times_analysis)
 
 
    Sets up the analysis: creates a spike times dataframe.

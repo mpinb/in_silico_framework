@@ -1,16 +1,15 @@
 
 
+append_save
+===========
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.append_save
-============================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.append_save(arr, name, autoflush=True)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.append_save(arr, name, autoflush=True)
 
 
-   Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+   Appends the given numpy array :param:`arr` to an existing array with the specified :param:`name`.
 
 
 

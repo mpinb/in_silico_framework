@@ -6,7 +6,7 @@ get_fixed_params_example
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.get_fixed_params_example()
+.. function:: biophysics_fitting.hay.default_setup.get_fixed_params_example()
 
 
    Get an example of cell-specific fixed params.

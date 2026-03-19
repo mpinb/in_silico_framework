@@ -1,13 +1,12 @@
 
 
+compute_basis
+=============
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine.compute_basis
-=================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.compute_basis()
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.compute_basis()
 
 
    Compute the basis vectors for the dataset.
@@ -22,7 +21,7 @@ Strategy_spatiotemporalRaisedCosine.compute_basis
 
    .. attention::
 
-      These are not the same basis vectors as in :py:class:`RaisedCosineBasis`.
+      These are not the same basis vectors as in :class:`RaisedCosineBasis`.
       These basis vectors are already multiplied with the data :math:`\mathbf{D}`.
       Since dot product is commutative, the order of this multiplication does not matter for calculating
       the weighted net input, but these intermediate basis vectors are different.

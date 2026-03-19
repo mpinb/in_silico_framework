@@ -6,13 +6,13 @@ pr
 
 .. Signature -------------------------------
 
-.. py:function:: visualize._decorators.pr(*args, **kwargs)
+.. function:: visualize._decorators.pr(*args, **kwargs)
 
 
    Prints the types of the passed arguments.
 
-   :param \*args: The arguments to print.
-   :param \*\*kwargs: The keyword arguments to print.
+   :param args: The arguments to print.
+   :param kwargs: The keyword arguments to print.
 
 
 

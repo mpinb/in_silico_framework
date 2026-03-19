@@ -6,7 +6,7 @@ select_cells_that_spike_in_interval
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.select_cells_that_spike_in_interval(sa, tmin, tmax, set_index=['synapse_ID', 'synapse_type'])
+.. function:: simrun.utils.select_cells_that_spike_in_interval(sa, tmin, tmax, set_index=['synapse_ID', 'synapse_type'])
 
 
    Select cells whose synapses were active in a given time interval.

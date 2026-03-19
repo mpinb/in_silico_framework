@@ -6,7 +6,7 @@ run_ex_synapses
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.run_ex_synapses(neuron_param, network_param, celltype, gAMPA=None, gNMDA=None, gGABA=None, vardt=False, tStim=None, tEnd=None, mode='cells')
+.. function:: simrun.synaptic_strength_fitting.run_ex_synapses(neuron_param, network_param, celltype, gAMPA=None, gNMDA=None, gGABA=None, vardt=False, tStim=None, tEnd=None, mode='cells')
 
 
    Simulate all EPSPs of a given celltype, one by one.

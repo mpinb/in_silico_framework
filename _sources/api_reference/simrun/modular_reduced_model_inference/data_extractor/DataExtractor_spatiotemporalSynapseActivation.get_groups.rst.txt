@@ -1,13 +1,12 @@
 
 
+get_groups
+==========
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation.get_groups
-========================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_groups()
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_groups()
 
 
    Get all groups (other than spatial binning)

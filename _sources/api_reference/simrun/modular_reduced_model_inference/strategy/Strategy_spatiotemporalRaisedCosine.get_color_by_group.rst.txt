@@ -1,13 +1,12 @@
 
 
+get_color_by_group
+==================
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine.get_color_by_group
-======================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group(group)
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine.get_color_by_group(group)
 
 
    Map groups to a color.

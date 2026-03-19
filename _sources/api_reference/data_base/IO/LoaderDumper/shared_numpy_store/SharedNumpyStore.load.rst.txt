@@ -1,13 +1,12 @@
 
 
+load
+====
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.load
-=====================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load(name, mode='shared_memory', start_row=None, end_row=None, allow_create_shm=False)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load(name, mode='shared_memory', start_row=None, end_row=None, allow_create_shm=False)
 
 
    Load an array from shared memory.
@@ -25,11 +24,11 @@ SharedNumpyStore.load
    :type start_row: int
    :param end_row: last row of the array to load
    :type end_row: int
-   :param Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent
-                file is created.
 
    :returns: the array
    :rtype: np.ndarray
+
+   .. note:: In shared_memory mode, for each call with different start_row or end_row parameters, a new independent file is created.
 
    :raises ValueError: if mode is not one of 'memmap', 'memory', or 'shared_memory'
 

@@ -1,0 +1,21 @@
+
+
+_get_metadata_from_name
+=======================
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore._get_metadata_from_name(name)
+
+
+   Get metadata from a name that follows the convention of NumpyStore.
+
+   :returns: the filename, shape, and dtype from an array with 'name' saved in this instance of NumpyStore
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

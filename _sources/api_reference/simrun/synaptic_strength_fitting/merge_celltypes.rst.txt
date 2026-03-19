@@ -6,7 +6,7 @@ merge_celltypes
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.merge_celltypes(vt, detection_strings=['L2', 'L34', 'L4', 'L5st', 'L5tt', 'L6cc', 'L6ct', 'VPM_C2'], celltype_must_be_in=None)
+.. function:: simrun.synaptic_strength_fitting.merge_celltypes(vt, detection_strings=['L2', 'L34', 'L4', 'L5st', 'L5tt', 'L6cc', 'L6ct', 'VPM_C2'], celltype_must_be_in=None)
 
 
    Concatenate the EPSPs of given celltypes.

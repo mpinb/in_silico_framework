@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.just_create_folder.check(obj)
+.. function:: data_base.IO.LoaderDumper.just_create_folder.check(obj)
 
 
    Check whether the object can be saved with this dumper

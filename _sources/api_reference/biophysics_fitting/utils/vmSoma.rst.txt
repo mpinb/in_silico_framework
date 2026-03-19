@@ -6,7 +6,7 @@ vmSoma
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.vmSoma(cell)
+.. function:: biophysics_fitting.utils.vmSoma(cell)
 
 
    Convenience method to extract the soma voltage trace from a cell

@@ -1,0 +1,21 @@
+
+
+get_default_db
+==============
+
+
+.. Signature -------------------------------
+
+.. function:: config.get_default_db()
+
+
+   Get the database class to be used by default throughout ISF.
+
+   :returns: The default database settings.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

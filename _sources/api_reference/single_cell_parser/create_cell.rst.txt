@@ -6,7 +6,7 @@ create_cell
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.create_cell(parameters, scaleFunc=None, allPoints=False, setUpBiophysics=True, silent=False)
+.. function:: single_cell_parser.create_cell(parameters, scaleFunc=None, allPoints=False, setUpBiophysics=True, silent=False)
 
 
    Creating NEURON cell models from cell parameters.

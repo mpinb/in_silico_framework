@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -21,7 +20,7 @@ cell_modify_functions
    synaptic_input </api_reference/single_cell_parser/cell_modify_functions/synaptic_input/index>  
    get </api_reference/single_cell_parser/cell_modify_functions/get>
 
-.. py:module:: single_cell_parser.cell_modify_functions
+.. module:: single_cell_parser.cell_modify_functions
 
 .. autoapi-nested-parse::
    Modify the cell after it is initalized.
@@ -61,6 +60,7 @@ cell_modify_functions
 
 
 
+
 .. rst-class:: absolute-paragraph
 
 Functions
@@ -74,6 +74,7 @@ Functions
    
    * - :py:obj:`get <single_cell_parser.cell_modify_functions.get>`\ (funname)
      - Get a cell modification function by their name.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -101,6 +102,7 @@ Modules
      - Inject a step current at the soma.
    * - :py:obj:`synaptic_input <single_cell_parser.cell_modify_functions.synaptic_input>`
      - Add synaptic activations to the cell from a network.
+
 
 
 .. container:: doc-feedback

@@ -20,10 +20,11 @@ STAPlugin_TEMPLATE
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: spike_analysis.core.STAPlugin_TEMPLATE
+.. class:: spike_analysis.core.STAPlugin_TEMPLATE
+
+   Bases: :py:obj:`object`
    
    Base class for spike time analysis plugins.
 

@@ -19,16 +19,17 @@ _Edge
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.reader._Edge
+.. class:: singlecell_input_mapper.singlecell_input_mapper.reader._Edge
+
+   Bases: :py:obj:`object`
    
    Convenience class around NEURON's section objects.
 
    The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
 
-   .. seealso:: :py:mod:`single_cell_parser` also contains a :py:class:`~single_cell_parser.reader._Edge` class.
+   .. seealso:: :mod:`single_cell_parser` also contains a :class:`~single_cell_parser.reader._Edge` class.
 
    :Attributes:
 

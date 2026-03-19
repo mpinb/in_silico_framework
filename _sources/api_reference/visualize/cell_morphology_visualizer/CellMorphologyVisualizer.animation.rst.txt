@@ -1,20 +1,19 @@
 
 
+animation
+=========
 
 
+.. Signature -------------------------------
 
-CellMorphologyVisualizer.animation
-==================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.animation(images_path, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, display=True, tpf=20)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.animation(images_path, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, display=True, tpf=20)
 
 
    Show an animation of the simulated neuron.
 
    Creates a set of images of a neuron color-coded with voltage together with synapse activations.
-   These images are then put together into a IPython animation using :py:mod:`visualize.utils.display_animation_from_images`
-   The parameters :paramref:t_start, :paramref:t_stop and :paramref:t_step update the :paramref:self.time attribute
+   These images are then put together into a IPython animation using :mod:`visualize.utils.display_animation_from_images`
+   The parameters :paramt_start, :paramt_stop and :paramt_step update the :paramself.time attribute
 
    :param images_path: path where the images for the gif will be generated.
    :type images_path: str

@@ -6,7 +6,7 @@ voltage_base
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.voltage_base(t, v, stim_delay)
+.. function:: biophysics_fitting.ephys.voltage_base(t, v, stim_delay)
 
 
    Calculates the mean voltage between 0.5 * stim_delay and 0.75 * stim_delay.

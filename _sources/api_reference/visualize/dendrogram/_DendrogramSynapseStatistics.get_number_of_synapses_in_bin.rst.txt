@@ -1,13 +1,12 @@
 
 
+get_number_of_synapses_in_bin
+=============================
 
 
+.. Signature -------------------------------
 
-_DendrogramSynapseStatistics.get_number_of_synapses_in_bin
-==========================================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics.get_number_of_synapses_in_bin(min_, max_, select=['Dendrite', 'ApicalDendrite'], label=None)
+.. function:: visualize.dendrogram._DendrogramSynapseStatistics.get_number_of_synapses_in_bin(min_, max_, select=['Dendrite', 'ApicalDendrite'], label=None)
 
 
    Get the number of synapses in a certain bin of soma distance.

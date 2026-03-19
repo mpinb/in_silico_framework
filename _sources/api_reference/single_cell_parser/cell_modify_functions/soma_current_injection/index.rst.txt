@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ 
 
 
@@ -14,10 +13,11 @@ soma_current_injection
 
    soma_current_injection </api_reference/single_cell_parser/cell_modify_functions/soma_current_injection/soma_current_injection>
 
-.. py:module:: single_cell_parser.cell_modify_functions.soma_current_injection
+.. module:: single_cell_parser.cell_modify_functions.soma_current_injection
 
 .. autoapi-nested-parse::
    Inject a step current at the soma.
+
 
 
 
@@ -34,6 +34,8 @@ Functions
    
    * - :py:obj:`soma_current_injection <single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection>`\ (cell, amplitude, delay, duration)
      - Inject a step current at the soma.
+
+
 
 
 

@@ -6,7 +6,7 @@ param_selector
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.parameters.param_selector(params, s)
+.. function:: biophysics_fitting.parameters.param_selector(params, s)
 
 
    Select parameters from a Series with an Index like a.b.c, a.b.d.

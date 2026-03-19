@@ -1,13 +1,12 @@
 
 
+_get_metadata_from_fname
+========================
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore._get_metadata_from_fname
-=========================================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_fname(fname)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_fname(fname)
 
    :staticmethod:
 

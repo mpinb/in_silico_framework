@@ -6,12 +6,12 @@ histogram
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.histogram.histogram(hist_bins, colormap=None, ax=None, label=None, groupby_attribute=None)
+.. function:: visualize.histogram.histogram(hist_bins, colormap=None, ax=None, label=None, groupby_attribute=None)
 
 
    Efficiently plot a histogram from bins.
 
-   Uses the decorated function :py:meth:`subsequent_calls_per_line` to speed up plotting bins from pandas or dask dataframes.
+   Uses the decorated function :func:`subsequent_calls_per_line` to speed up plotting bins from pandas or dask dataframes.
 
    Supports groups: simply pass a Series of the format::
 
@@ -25,7 +25,7 @@ histogram
    :param colormap: dictionary with labels as keys and colors as values. Default is ``None``.
    :type colormap: dict
    :param ax: The matplotlib axes object. Default is ``None``.
-   :type ax: Axes
+   :type ax: ~matplotlib.axes.Axes
    :param label: The label of the histogram. Default is ``None``.
    :type label: str
 

@@ -6,7 +6,7 @@ _get_dumper
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.utils._get_dumper(value, categorized=False)
+.. function:: data_base.db_initializers.load_simrun_general.utils._get_dumper(value, categorized=False)
 
 
    Infer the best dumper for a dataframe.

@@ -13,23 +13,28 @@ RW
 .. toctree::
    :hidden:
 
-   _normalize_aim_params <RW._normalize_aim_params>
    _normalize_params <RW._normalize_params>
    _unnormalize_params <RW._unnormalize_params>
+   _normalize_aim_params <RW._normalize_aim_params>
+   assess_aim_params_reached <RW.assess_aim_params_reached>
+   _ensure_direction_toward_aim <RW._ensure_direction_toward_aim>
+   _check_movement_towards_aim <RW._check_movement_towards_aim>
+   _flag_aim_params_success <RW._flag_aim_params_success>
+   _save_checkpoint <RW._save_checkpoint>
+   _propose_new_position <RW._propose_new_position>
    _concatenate_and_clean <RW._concatenate_and_clean>
    _clean_the_pickles <RW._clean_the_pickles>
    _load_pickle_or_parquet <RW._load_pickle_or_parquet>
-   assess_aim_params_reached <RW.assess_aim_params_reached>
+   _load_existing_exploration <RW._load_existing_exploration>
    run_RW <RW.run_RW>
 
 
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.exploration_from_seedpoint.RW.RW(df_seeds=None, param_ranges=None, params_to_explore=None, evaluation_function=None, MAIN_DIRECTORY=None, min_step_size=0, max_step_size=0.02, checkpoint_every=100, checkpoint_by_time=None, concat_every_n_save=60, n_iterations=60000, mode=None, aim_params=None, stop_n_inside_with_aim_params=-1)
+.. class:: biophysics_fitting.exploration_from_seedpoint.RW.RW(df_seeds=None, param_ranges=None, params_to_explore=None, evaluation_function=None, MAIN_DIRECTORY=None, min_step_size=0, max_step_size=0.02, checkpoint_every=100, checkpoint_by_time=None, n_iterations=60000, mode=None, mode_condition_fun=None, aim_params=None, stop_n_inside_with_aim_params=-1)
    
    Class to perform RW exploration from a seedpoint.
 
@@ -40,20 +45,23 @@ RW
    :param params_to_explore: list of parameters that should be explored. If None, all parameters are explored.
    :type params_to_explore: list
    :param evaluation_function: takes one argument (a new parameter vector) and returns:
-
                                - inside: boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
                                - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain ephys features.
    :type evaluation_function: Callable
-   :param checkpoint_every: save the results every n iterations
+   :param checkpoint_every: iteration interval at which the results are saved e.i., n for checkpointing every n iterations. If both
+                            checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
    :type checkpoint_every: int
-   :param check_point_by_time: time interval in minutes for checkpointing for using time-based checkpointing. If both
-                               checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
-   :type check_point_by_time: float
-   :param concat_every_n_save: number of checkpoints after which the intermediate ``.pickle` files are concatenated to a single ``.parquet`` dataframe.
-   :type concat_every_n_save: int
-   :param mode: Random walk mode. Options: (None, 'expand'). default: None
+   :param checkpoint_by_time: time interval (in minutes) at which results are saved e.i., n for checkpointing every n minutes. If both
+                              checkpoint_every and checkpoint_by_time are set, checkpointing will be done by time.
+   :type checkpoint_by_time: float
+   :param mode: Random walk mode. Options: (None, 'expand', 'custom'). If none, no additional constraints will be considered when proposing new points.
                 'expand': only propose new points that move further away from seedpoint
+                'custom': use custom conditions to propose new points. If this mode is used, mode_condition_fun must be provided to evaluate the new points.
+                Default: None
    :type mode: str
+   :param mode_condition_fun: A function that takes a parameter vector and returns a boolean indicating if the proposed point
+                              is acceptable. Used if mode is set to custom.
+   :type mode_condition_fun: Callable
    :param aim_params: this param will make the exploration algorithm propose only new points such that a set of
                       parameters aims certain values during exploration.
                       Default: {}
@@ -87,14 +95,12 @@ RW
       .. attribute:: evaluation_function
 
          Function use to evaluate a vector of biphysical parameters.
-         Must take one argument (a parameter vector) and return a tuple of  ``(inside, evaluation)``:
+         Must take one argument (a parameter vector as a ``pd.Series``) and return a tuple of  ``(inside, evaluation)``:
          
-         - inside: boolean that indicates if the parameter vector is within experimental constraits
-             (i.e. results in acceptable physiology) or not.
-         - evaluation: dictionary that will be saved alongside the parameters. For example, this should contain
-             ephys features.
+         - inside (bool): Boolean that indicates if the parameter vector is within experimental constraits (i.e. results in acceptable physiology) or not.
+         - evaluation (dict|:class:`pd.DataFrame`|:class:`pd.Series`): Evaluation metrics, containing relevant evaluation metrics, and their corresponing parameters.
          
-         This function is usually :py:meth:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
+         This function is usually :func:`~biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper`.
 
          :type: Callable
 
@@ -129,12 +135,6 @@ RW
 
          :type: float
 
-      .. attribute:: concat_every_n_save
-
-         number of checkpoints after which the pickle files are concatenated and cleaned
-
-         :type: int
-
       .. attribute:: n_iterations
 
          number of iterations to run the random walk
@@ -143,10 +143,18 @@ RW
 
       .. attribute:: mode
 
-         Random walk mode. Options: (None, 'expand'). default: None
+         Random walk mode. Options: (None, 'expand', 'custom'). default: None
          'expand': only propose new points that move further away from seedpoint
+         'custom': use custom conditions to propose new points. If this mode is used, mode_condition_fun must be provided to evaluate the new points.
 
          :type: str
+
+      .. attribute:: mode_condition_fun
+
+         Function that takes a parameter vector and returns a boolean indicating whether the point is acceptable or not.
+         This function is used in 'custom' mode to propose new points.
+
+         :type: Callable
 
       .. attribute:: aim_params
 
@@ -177,20 +185,32 @@ RW
       :widths: auto
       :class: summarytable
       
-      * - :py:obj:`_normalize_aim_params <biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params>`\ (aim\_params)
-        - Normalize aim parameters to be between 0 and 1.
       * - :py:obj:`_normalize_params <biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_params>`\ (p)
         - Normalize parameters to be between 0 and 1.
       * - :py:obj:`_unnormalize_params <biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params>`\ (p)
         - Unnormalize parameters to be between min and max.
-      * - :py:obj:`_concatenate_and_clean <biophysics_fitting.exploration_from_seedpoint.RW.RW._concatenate_and_clean>`\ (seed\_folder, particle\_id, iteration)
+      * - :py:obj:`_normalize_aim_params <biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_aim_params>`\ (aim\_params)
+        - Normalize aim parameters to be between 0 and 1.
+      * - :py:obj:`assess_aim_params_reached <biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached>`\ (normalized\_params, tolerance)
+        - Check whether the aim parameters have been reached.
+      * - :py:obj:`_ensure_direction_toward_aim <biophysics_fitting.exploration_from_seedpoint.RW.RW._ensure_direction_toward_aim>`\ (movement, reached\_aim\_params, seed\_pt\_pd)
+        - Ensure that the movement is in the right direction for the aim parameters,
+      * - :py:obj:`_check_movement_towards_aim <biophysics_fitting.exploration_from_seedpoint.RW.RW._check_movement_towards_aim>`\ (current\_np, proposal)
+        - Check if the proposed parameters are closer to the aim parameters than the current parameters.
+      * - :py:obj:`_flag_aim_params_success <biophysics_fitting.exploration_from_seedpoint.RW.RW._flag_aim_params_success>`\ (seed\_dir)
+        - Create a flag in the seedpoint directory to indicate that aim parameters have been reached
+      * - :py:obj:`_save_checkpoint <biophysics_fitting.exploration_from_seedpoint.RW.RW._save_checkpoint>`\ (iteration, out, op\_dir)
+        - Save the results saved in "out" to a pickle file.
+      * - :py:obj:`_propose_new_position <biophysics_fitting.exploration_from_seedpoint.RW.RW._propose_new_position>`\ (p\_normalized\_np, seed\_normalized\_np, dist, reached\_aim\_params, seed\_pt\_pd)
+        - Propose a new position to move to in the parameter space.
+      * - :py:obj:`_concatenate_and_clean <biophysics_fitting.exploration_from_seedpoint.RW.RW._concatenate_and_clean>`\ (seed\_folder, particle\_id)
         - Concatenate the intermediate ``.pickle`` results and save as one parquet file.
       * - :py:obj:`_clean_the_pickles <biophysics_fitting.exploration_from_seedpoint.RW.RW._clean_the_pickles>`\ (outdir, files, iteration)
         - Remove the pickle files that correspond to the intermediate results of a iteration.
       * - :py:obj:`_load_pickle_or_parquet <biophysics_fitting.exploration_from_seedpoint.RW.RW._load_pickle_or_parquet>`\ (outdir, iteration, mode)
         - Load the results of a iteration from a pickle or parquet file.
-      * - :py:obj:`assess_aim_params_reached <biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached>`\ (normalized\_params, tolerance)
-        - Check whether the aim parameters have been reached.
+      * - :py:obj:`_load_existing_exploration <biophysics_fitting.exploration_from_seedpoint.RW.RW._load_existing_exploration>`\ (OPERATION\_DIR, iteration\_files, file\_list)
+        - Load the existing exploration results from the specified directory to continue the random walk.
       * - :py:obj:`run_RW <biophysics_fitting.exploration_from_seedpoint.RW.RW.run_RW>`\ (selected\_seedpoint, particle\_id, seed)
         - Run random walk exploration from a seed point.
 

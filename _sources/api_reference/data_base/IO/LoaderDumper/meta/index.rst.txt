@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -20,13 +19,14 @@ meta
    read_object_meta </api_reference/data_base/IO/LoaderDumper/meta/read_object_meta>
    set_object_meta </api_reference/data_base/IO/LoaderDumper/meta/set_object_meta>
 
-.. py:module:: data_base.IO.LoaderDumper.meta
+.. module:: data_base.IO.LoaderDumper.meta
 
 .. autoapi-nested-parse::
    Read and write dataframe meta.
 
    The meta of a dataframe is an empty dataframe containing only the columns, column dtypes, index, index name, and index dtype.
    These meta objects are used by dask and parquet to infer these properties during reading.
+
 
 
 
@@ -49,6 +49,22 @@ Functions
      - Read the meta of a dask/parquet object.
    * - :py:obj:`set_object_meta <data_base.IO.LoaderDumper.meta.set_object_meta>`\ (obj, meta)
      - Set/reset the meta of a dataframe.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.IO.LoaderDumper.meta.logger>`
+     - \-
+
 
 
 

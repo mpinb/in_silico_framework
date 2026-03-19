@@ -6,7 +6,7 @@ set_param
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_param(cell_param, params=None)
+.. function:: biophysics_fitting.L5tt_parameter_setup.set_param(cell_param, params=None)
 
 
    Updates cell_param given a dict of params in the dot naming convention.
@@ -18,7 +18,8 @@ set_param
        set_param(cell_param, params)
        # returns {'a': {'b': {'c': 3}}}
 
-   :param cell_param (: py:class`~:py:class:`~single_cell_parser.parameters.NTParameterSet`` | dict): The cell parameter nested dictionary.
+   :param cell_param: The cell parameter nested dictionary.
+   :type cell_param: ~single_cell_parser.parameters.NTParameterSet
    :param params: The parameter flat dictionary.
    :type params: dict
 

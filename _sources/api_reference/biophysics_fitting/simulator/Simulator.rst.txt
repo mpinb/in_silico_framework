@@ -20,19 +20,18 @@ Simulator
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.simulator.Simulator
+.. class:: biophysics_fitting.simulator.Simulator
    
    This class can be used to transform a parameter vector into simulated voltage traces.
 
    This is typically done in two steps:
 
-   1. Set up a cell with biophysics from a parameter vector. See :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
+   1. Set up a cell with biophysics from a parameter vector. See :class:`~biophysics_fitting.simulator.Simulator_Setup`
    2. Apply a variety of stimuli to the cell and extract voltage traces.
 
-   An examplary specification of such a program flow can be found in the module :py:meth:`~biophysics_fitting.hay_complete_default_setup.get_Simulator`.
+   An examplary specification of such a program flow can be found in the module :func:`~biophysics_fitting.hay_complete_default_setup.get_Simulator`.
 
    The usual application is to specify biophysical parameters in a parameter vector and simulate
    current injection responses depending on these parameters.
@@ -66,13 +65,13 @@ Simulator
        ['stim_1.measure', stim_response_measure_fun])
 
    Often, it is easier to write functions that accept keyword arguments instead of full parameter vectors
-   This can be done by using :py:meth:`~biophysics_fitting.parameters.params_to_kwargs`.
+   This can be done by using :func:`~biophysics_fitting.parameters.params_to_kwargs`.
 
    .. rubric:: Example
       :class: example
 
    >>> def stim_setup_function(cell, recSite = None):
-   >>>    # I dont need the :paramref:`params` argument, but I ask recSite directly
+   >>>    # I dont need the :param:`params` argument, but I ask recSite directly
    >>>    # set up current injection at soma distance recSite
    >>>    return cell
 
@@ -110,7 +109,7 @@ Simulator
 
          A Simulator_Setup object that keeps track of the simulation setup.
 
-         :type: :py:class:`~biophysics_fitting.simulator.Simulator_Setup`
+         :type: :class:`~biophysics_fitting.simulator.Simulator_Setup`
 
    :Methods:
 

@@ -25,19 +25,20 @@ PointCell
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.cell.PointCell(spikeTimes=None)
+.. class:: single_cell_parser.cell.PointCell(spikeTimes=None)
+
+   Bases: :py:obj:`object`
    
    Cell without morphological or biophysical attributes.
 
    Used as a presynaptic spike source for synapses.
-   Stores spike times in :py:class:`neuron:Vector` and :py:class:`numpy.array`.
-   Requires :py:class:`neuron:VecStim` to trigger spikes at specified times.
+   Stores spike times in :class:`neuron:Vector` and :class:`numpy.array`.
+   Requires :class:`neuron:VecStim` to trigger spikes at specified times.
 
    :param spikeTimes: List of precomputed spike times.
-                      Used to initialize release sites with precomputed release times from presynaptic spike times (see :py:meth:`single_cell_parser.network.activate_functional_synapse`)
+                      Used to initialize release sites with precomputed release times from presynaptic spike times (see :func:`single_cell_parser.network.activate_functional_synapse`)
                       Defaults to None.
    :type spikeTimes: list
 
@@ -53,18 +54,18 @@ PointCell
 
          hoc Vector containing spike times
 
-         :type: :py:class:`neuron:Vector`
+         :type: :class:`neuron:Vector`
 
       .. attribute:: spikes
 
-         VecStim object to use as a spike source in :py:class:`neuron:NetCon` objects.
+         VecStim object to use as a spike source in :class:`neuron:NetCon` objects.
          These are initialized from :paramref:`spikeTimes`.
 
-         :type: :py:class:`neuron:VecStim`
+         :type: :class:`neuron:VecStim`
 
       .. attribute:: playing
 
-         flag indicating whether the :py:class:`neuron:VecStim` spike source is playing
+         flag indicating whether the :class:`neuron:VecStim` spike source is playing
 
          :type: bool
 
@@ -93,7 +94,7 @@ PointCell
       * - :py:obj:`_next_interval <single_cell_parser.cell.PointCell._next_interval>`\ ()
         - Calculate the next spike interval :math:`t` for a simple spike train.
       * - :py:obj:`_add_synapse_pointer <single_cell_parser.cell.PointCell._add_synapse_pointer>`\ (synapse)
-        - Add a :py:class:`Synapse` to the cell.
+        - Add a :class:`~single_cell_parser.synapse.Synapse` to the cell.
       * - :py:obj:`turn_off <single_cell_parser.cell.PointCell.turn_off>`\ ()
         - Turns off the spike source.
 

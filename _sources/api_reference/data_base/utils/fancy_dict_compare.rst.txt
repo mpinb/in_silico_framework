@@ -6,7 +6,7 @@ fancy_dict_compare
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.fancy_dict_compare(dict_1, dict_2, dict_1_name='d1', dict_2_name='d2', path='')
+.. function:: data_base.utils.fancy_dict_compare(dict_1, dict_2, dict_1_name='d1', dict_2_name='d2', path='')
 
 
    Compare two dictionaries recursively to find non-matching elements

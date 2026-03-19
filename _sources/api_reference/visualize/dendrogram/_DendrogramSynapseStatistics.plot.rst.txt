@@ -1,13 +1,12 @@
 
 
+plot
+====
 
 
+.. Signature -------------------------------
 
-_DendrogramSynapseStatistics.plot
-=================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics.plot(ax=None)
+.. function:: visualize.dendrogram._DendrogramSynapseStatistics.plot(ax=None)
 
 
    Plot the synapse statistics
@@ -18,7 +17,7 @@ _DendrogramSynapseStatistics.plot
    :type ax: matplotlib.axes.Axes
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.axes.Axes`
+   :rtype: :class:`matplotlib.axes.Axes`
 
 
 

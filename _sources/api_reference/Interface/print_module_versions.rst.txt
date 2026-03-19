@@ -6,7 +6,7 @@ print_module_versions
 
 .. Signature -------------------------------
 
-.. py:function:: Interface.print_module_versions()
+.. function:: Interface.print_module_versions()
 
 
    Print the version of each module in ISF.

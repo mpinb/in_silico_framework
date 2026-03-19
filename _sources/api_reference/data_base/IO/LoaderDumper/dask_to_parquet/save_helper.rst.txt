@@ -6,7 +6,7 @@ save_helper
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_parquet.save_helper(savedir, delayed_df, n_partitions, partition)
+.. function:: data_base.IO.LoaderDumper.dask_to_parquet.save_helper(savedir, delayed_df, n_partitions, partition)
 
 
    Save a single partition of a dask dataframe to a parquet file

@@ -6,14 +6,14 @@ _resolve_and_copy_con
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_con(con_fn, scattered_fn_map)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_con(con_fn, scattered_fn_map)
 
 
    Resolve the reference to a :ref:`syn_file_format` file and
    copy a single :ref:`con_file_format` file to a new location.
 
-   :param syn_fn: Path to the synapse distribution file.
-   :type syn_fn: str
+   :param con_fn: Path to the synapse distribution file.
+   :type con_fn: str
    :param scattered_fn_map: A future dictionary with filename mappings. Must contain the keys "syn" and "con".
    :type scattered_fn_map: distributed.Future
 

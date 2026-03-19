@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.Loader.get(savedir, verbose=False)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.Loader.get(savedir, verbose=False)
 
 
 

@@ -26,16 +26,15 @@ bAP
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.hay.evaluation.bAP(soma_thresh=-30, stim_onset=295, stim_duration=5, bAP_thresh='+2mV', punish=250.0, punish_last_spike_after_deadline=True, punish_minspikenum=1, punish_returning_to_rest_tolerance=2.0, definitions=HAY_BAP_DEFINITIONS)
+.. class:: biophysics_fitting.hay.evaluation.bAP(soma_thresh=-30, stim_onset=295, stim_duration=5, bAP_thresh='+2mV', punish=250.0, punish_last_spike_after_deadline=True, punish_minspikenum=1, punish_returning_to_rest_tolerance=2.0, definitions=HAY_BAP_DEFINITIONS)
    
    Evaluate the :math:`bAP` stimulus protocol.
 
    These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
-   .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_bAP` for more information on the stimulus protocol.
+   .. seealso:: :func:`biophysics_fitting.setup_stim.setup_bAP` for more information on the stimulus protocol.
 
    :param soma_thresh: The threshold for APs in the somatic voltage trace. Defaults to :math:`-30\ mV`.
    :type soma_thresh: float
@@ -55,7 +54,7 @@ bAP
    :type punish_minspikenum: int
    :param punish_returning_to_rest_tolerance: The tolerance for returning to rest (:math:`mV`). Defaults to :math:`2 mV`.
    :type punish_returning_to_rest_tolerance: float
-   :param definitions: The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :param definitions: The definitions for the evaluation metrics. See also: :attr:`definitions`.
    :type definitions: dict
 
    :Attributes:

@@ -6,7 +6,7 @@ analyze_voltage_trace
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.analyze_voltage_trace(vTrace, tTrace)
+.. function:: simrun.synaptic_strength_fitting.analyze_voltage_trace(vTrace, tTrace)
 
 
    Calculate a voltage trace's extremum and time point thereof.

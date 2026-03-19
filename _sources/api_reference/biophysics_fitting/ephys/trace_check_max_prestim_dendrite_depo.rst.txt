@@ -6,7 +6,7 @@ trace_check_max_prestim_dendrite_depo
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.trace_check_max_prestim_dendrite_depo(t, vmax, stim_onset, max_prestim_dendrite_depo=None)
+.. function:: biophysics_fitting.ephys.trace_check_max_prestim_dendrite_depo(t, vmax, stim_onset, max_prestim_dendrite_depo=None)
 
 
    Check whether anywhere in the dendritic, there is a spike before stimulus onset

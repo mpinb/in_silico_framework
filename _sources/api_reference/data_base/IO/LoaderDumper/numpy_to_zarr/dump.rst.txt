@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.numpy_to_zarr.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_zarr.dump(obj, savedir)
 
 
    Write out an object in .zarr format.

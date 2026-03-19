@@ -6,7 +6,7 @@ tVec
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.tVec(cell)
+.. function:: biophysics_fitting.utils.tVec(cell)
 
 
    Convenience method to convert a py:attr:`~single_cell_parser.cell.Cell.tVec` to a numpy array.

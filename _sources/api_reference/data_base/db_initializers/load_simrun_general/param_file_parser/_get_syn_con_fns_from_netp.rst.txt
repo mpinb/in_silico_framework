@@ -6,12 +6,12 @@ _get_syn_con_fns_from_netp
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_syn_con_fns_from_netp(netp_fn)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._get_syn_con_fns_from_netp(netp_fn)
 
 
    Get the unique synapse and connection files from a list of network parameter files.
 
-   :param netp_fn: Path to the network parameter file.
+   :param netp_fn: Path to the :ref:`network_parameters_format` file.
    :type netp_fn: str
 
    :returns: Tuple containing the unique synapse and connection files.

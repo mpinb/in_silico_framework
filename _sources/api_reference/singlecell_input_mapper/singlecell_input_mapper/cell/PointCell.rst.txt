@@ -19,10 +19,11 @@ PointCell
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell(column=None, cellType=None)
+.. class:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell(column=None, cellType=None)
+
+   Bases: :py:obj:`object`
    
    Cell object without morphological or biophysical attributes.
 
@@ -63,7 +64,7 @@ PointCell
       :class: summarytable
       
       * - :py:obj:`_add_synapse_pointer <singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer>`\ (synapse)
-        - Add a :py:class:`Synapse` to the cell.
+        - Add a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
 
 
 .. container:: doc-feedback

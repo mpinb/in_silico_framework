@@ -6,16 +6,16 @@ _get_db_by_sec
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.dendrogram._get_db_by_sec(dendrogram_db, sec)
+.. function:: visualize.dendrogram._get_db_by_sec(dendrogram_db, sec)
 
 
-   Get the :py:class:`_DendrogramSection` object by its section ID.
+   Get the :class:`_DendrogramSection` object by its section ID.
 
    :param sec: The section ID.
    :type sec: int
 
    :returns: The dendrogram section.
-   :rtype: :py:class:`_DendrogramSection`
+   :rtype: :class:`_DendrogramSection`
 
 
 

@@ -6,7 +6,7 @@ _get_offset_and_size_in_bytes
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes(start_row, end_row, shape, dtype)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store._get_offset_and_size_in_bytes(start_row, end_row, shape, dtype)
 
 
    Get the offset and size in bytes for a given ``start_row`` and ``end_row``.

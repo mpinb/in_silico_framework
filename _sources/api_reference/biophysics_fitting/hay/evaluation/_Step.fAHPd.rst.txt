@@ -1,13 +1,12 @@
 
 
+fAHPd
+=====
 
 
+.. Signature -------------------------------
 
-_Step.fAHPd
-===========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.fAHPd(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.fAHPd(voltage_traces)
 
 
    Get the fast afterhyperpolarization depth in the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.fAHPd
                  and ``".raw"`` to the fast afterhyperpolarization depth in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_fast_ahp_depth`
+   .. seealso:: :func:`~biophysics_fitting.ephys.STEP_fast_ahp_depth`
 
 
 

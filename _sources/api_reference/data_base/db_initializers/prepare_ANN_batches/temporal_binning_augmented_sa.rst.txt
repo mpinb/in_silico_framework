@@ -6,7 +6,7 @@ temporal_binning_augmented_sa
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.temporal_binning_augmented_sa(sa_augmented, min_time, max_time, bin_size, use_weights=False)
+.. function:: data_base.db_initializers.prepare_ANN_batches.temporal_binning_augmented_sa(sa_augmented, min_time, max_time, bin_size, use_weights=False)
 
 
    Bin synapse activation times into temporal bins.
@@ -26,7 +26,7 @@ temporal_binning_augmented_sa
    :returns: A tuple containing the bin borders and the histogram of synapse activation times.
    :rtype: tuple
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
+   .. seealso:: :func:`~data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin`
 
 
 

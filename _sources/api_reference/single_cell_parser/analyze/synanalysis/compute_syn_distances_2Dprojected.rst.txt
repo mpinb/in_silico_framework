@@ -6,7 +6,7 @@ compute_syn_distances_2Dprojected
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distances_2Dprojected(cell, synType, label=None)
+.. function:: single_cell_parser.analyze.synanalysis.compute_syn_distances_2Dprojected(cell, synType, label=None)
 
 
    Computes the XY-projected distances (to soma) of all synapses on dendrite.

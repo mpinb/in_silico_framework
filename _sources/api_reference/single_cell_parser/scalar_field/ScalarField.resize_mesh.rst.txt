@@ -1,13 +1,12 @@
 
 
+resize_mesh
+===========
 
 
+.. Signature -------------------------------
 
-ScalarField.resize_mesh
-=======================
-
-
-.. py:method:: single_cell_parser.scalar_field.ScalarField.resize_mesh()
+.. function:: single_cell_parser.scalar_field.ScalarField.resize_mesh()
 
 
    Resizes mesh to non-zero scalar data using slicing views (no copy).

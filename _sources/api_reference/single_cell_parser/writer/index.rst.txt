@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -29,10 +28,11 @@ writer
    write_landmarks_colorcoded_to_folder </api_reference/single_cell_parser/writer/write_landmarks_colorcoded_to_folder>
    value_to_color </api_reference/single_cell_parser/writer/value_to_color>
 
-.. py:module:: single_cell_parser.writer
+.. module:: single_cell_parser.writer
 
 .. autoapi-nested-parse::
    Write out anatomical, morphology or simulation data.
+
 
 
 
@@ -79,6 +79,26 @@ Functions
      - Write landmarks to a folder, colorcoded by their values.
    * - :py:obj:`value_to_color <single_cell_parser.writer.value_to_color>`\ (v, vmin, vmax)
      - Map a value to a color.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`labels2int <single_cell_parser.writer.labels2int>`
+     - \-
+   * - :py:obj:`template_init <single_cell_parser.writer.template_init>`
+     - \-
+   * - :py:obj:`template_landmark <single_cell_parser.writer.template_landmark>`
+     - \-
+
 
 
 

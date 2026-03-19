@@ -6,17 +6,17 @@ get_L5tt_template_v2
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2()
+.. function:: biophysics_fitting.L5tt_parameter_setup.get_L5tt_template_v2()
 
 
    Get a template cell parameter dictionary for a L5PT cell.
 
-   This method is identical to :py:meth:`get_L5tt_template`, but adds the following specifications:
+   This method is identical to :func:`get_L5tt_template`, but adds the following specifications:
 
-   - The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see :py:mod:`mechanisms`).
+   - The CaDynamics_E2 mechanism is replaced with CaDynamics_E2_v2 (see :mod:`mechanisms`).
    - The SKv3_1 mechanism is set to have a linear spatial distribution with intercept (see :cite:t:`Schaefer_Helmstaedter_Schmitt_Bar_Yehuda_Almog_Ben_Porat_Sakmann_Korngreen_2007`).
 
-   :returns: py:class:~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.
+   :returns: class:~single_cell_parser.parameters.NTParameterSet`: The template cell parameters.
 
 
 

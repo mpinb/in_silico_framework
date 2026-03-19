@@ -6,7 +6,7 @@ get_cell_with_network
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.get_cell_with_network.get_cell_with_network(neuron_param, network_param, cache=True)
+.. function:: simrun.get_cell_with_network.get_cell_with_network(neuron_param, network_param, cache=True)
 
 
    Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.

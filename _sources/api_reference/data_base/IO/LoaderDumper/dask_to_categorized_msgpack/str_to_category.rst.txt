@@ -6,7 +6,7 @@ str_to_category
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.str_to_category(pdf)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.str_to_category(pdf)
 
 
    careful: changes pdf!

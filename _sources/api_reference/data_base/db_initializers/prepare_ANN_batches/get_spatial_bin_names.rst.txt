@@ -6,13 +6,13 @@ get_spatial_bin_names
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_spatial_bin_names(section_distances_df)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_spatial_bin_names(section_distances_df)
 
 
    Get the bin names from a dataframe describing the distance to soma of all sections.
 
    Given a dataframe describing the distance to soma of all sections, as provided by
-   :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`,
+   :func:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`,
    this method returns the names for all the spatial bins of the format ``section_id/bin_id``.
    E.g.: ``5/2`` denotes the second bin of section 5.
 
@@ -22,7 +22,7 @@ get_spatial_bin_names
    :returns: A list containing the bin ids in string format.
    :rtype: list
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
+   .. seealso:: :func:`~data_base.db_initializers.prepare_ANN_batches.get_section_distances_df`
 
 
 

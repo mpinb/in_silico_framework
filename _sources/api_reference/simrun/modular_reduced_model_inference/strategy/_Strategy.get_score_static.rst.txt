@@ -1,13 +1,12 @@
 
 
+get_score_static
+================
 
 
+.. Signature -------------------------------
 
-_Strategy.get_score_static
-==========================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static(_get_score, x, cupy_split=None)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy.get_score_static(_get_score, x, cupy_split=None)
 
    :staticmethod:
 

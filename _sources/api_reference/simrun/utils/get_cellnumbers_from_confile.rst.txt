@@ -6,7 +6,7 @@ get_cellnumbers_from_confile
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.get_cellnumbers_from_confile(confile)
+.. function:: simrun.utils.get_cellnumbers_from_confile(confile)
 
 
    Get the amount of cells of each type from a confile.

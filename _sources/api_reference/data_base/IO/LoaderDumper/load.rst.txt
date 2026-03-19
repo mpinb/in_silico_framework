@@ -6,7 +6,7 @@ load
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.load(savedir, load_data=True, loader_kwargs={})
+.. function:: data_base.IO.LoaderDumper.load(savedir, load_data=True, loader_kwargs={})
 
 
    Standard interface to load data.

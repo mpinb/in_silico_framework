@@ -1,13 +1,12 @@
 
 
+visualize
+=========
 
 
+.. Signature -------------------------------
 
-RaisedCosineBasis.visualize
-===========================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize(ax=None, plot_kwargs=None)
+.. function:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize(ax=None, plot_kwargs=None)
 
 
    Visualize the basis functions :math:`\mathbf{f}`.

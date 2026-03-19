@@ -21,10 +21,11 @@ RecordingSiteManager
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager(landmarkFilename, cell)
+.. class:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager(landmarkFilename, cell)
+
+   Bases: :py:obj:`object`
    
    Parse AMIRA recording sites from a ``.landmarkAscii`` file.
 
@@ -45,7 +46,7 @@ RecordingSiteManager
 
          Cell object.
 
-         :type: :py:class:`single_cell_parser.cell.Cell`
+         :type: :class:`single_cell_parser.cell.Cell`
 
    :Methods:
 
@@ -56,9 +57,9 @@ RecordingSiteManager
       :class: summarytable
       
       * - :py:obj:`set_up_recording_site <single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.set_up_recording_site>`\ (location, ID, filename)
-        - Set up a :py:class:`RecordingSite` from a location.
+        - Set up a :class:`RecordingSite` from a location.
       * - :py:obj:`update_recordings <single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings>`\ ()
-        - Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :paramref:`recordingSites`.
+        - Add the :class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :param:`recordingSites`.
       * - :py:obj:`_read_landmark_file <single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file>`\ (landmarkFilename)
         - Read the AMIRA landmark file and return the landmarks.
 

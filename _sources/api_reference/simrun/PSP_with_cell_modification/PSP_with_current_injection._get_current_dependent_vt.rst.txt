@@ -1,13 +1,12 @@
 
 
+_get_current_dependent_vt
+=========================
 
 
+.. Signature -------------------------------
 
-PSP_with_current_injection._get_current_dependent_vt
-====================================================
-
-
-.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection._get_current_dependent_vt(current)
+.. function:: simrun.PSP_with_cell_modification.PSP_with_current_injection._get_current_dependent_vt(current)
 
 
    Run the current injection simulation

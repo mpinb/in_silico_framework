@@ -1,19 +1,18 @@
 
 
+map_synapse_model_distribution
+==============================
 
 
+.. Signature -------------------------------
 
-SynapseMapper.map_synapse_model_distribution
-============================================
-
-
-.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution(synType, structLabel=None)
+.. function:: single_cell_parser.synapse_mapper.SynapseMapper.map_synapse_model_distribution(synType, structLabel=None)
 
 
    Maps modeled synapse distribution (e.g. normal, uniform, ...) onto dendritic tree.
 
-   For each distance in :paramref:`synDist`, a synapse is placed on a random dendritic branch at that distance from the soma.
-   In this case, :paramref:`synDist` has to be iterable of distances of synapses.
+   For each distance in :param:`synDist`, a synapse is placed on a random dendritic branch at that distance from the soma.
+   In this case, :param:`synDist` has to be iterable of distances of synapses.
    Substructure may be indicated by structLabel.
 
    :param synType: The type of synapse to be placed.

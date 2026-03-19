@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -946,6 +946,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1134,14 +1149,14 @@
 <dt class="sig sig-object highlight sig-wrap py" id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../index.html#module-simrun" title="simrun (Python module)"><span class="sig-name descname"><span class="pre">simrun</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-simrun.robust_dask_delayed_execution" title="simrun.robust_dask_delayed_execution (Python module)"><span class="sig-name descname"><span class="pre">robust_dask_delayed_execution</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">RobustDaskDelayedExecution</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db (Python parameter) — The database containing the ManagedFolder objects, which in turn contain the dask delayed objects."><span class="n"><span class="pre">db</span></span></a></em></span><span class="sig-paren">)</span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution" title="Link to this definition">¶</a></dt>
 <dd><p>Execute dask delayed objects in a robust way.</p>
-<p>This class utilizes <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Wrapper class for a folder path"><code class="xref py py-class docutils literal notranslate"><span class="pre">data_base.IO.LoaderDumper.just_create_folder.ManagedFolder</span></code></a> objects to store delayed objects.
+<p>This class utilizes <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Bases: str"><code class="xref py py-class docutils literal notranslate"><span class="pre">data_base.IO.LoaderDumper.just_create_folder.ManagedFolder</span></code></a> objects to store delayed objects.
 It offers methods to run them exactly once. The return value is not saved if the dask delayeds objects don’t save them.</p>
 <p>This is used for long runing data generating simulations that can get interrupted (e.g. timeout on an HPC cluster, some error …)
 and you want to complete the remaining tasks later.</p>
 <dl class="field-list">
 <dt class="field-odd" id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">data_base.dataBase</span></span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db" title="Permalink to this definition">¶</a></dt><dd><p>The database containing the <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Wrapper class for a folder path"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManagedFolder</span></code></a> objects,
+<dt id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db"><span class="sig-name descname">db</span><span class="p"> : </span><span class="desctype"><span class="desctype">data_base.dataBase</span></span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.__init__.db" title="Permalink to this definition">¶</a></dt><dd><p>The database containing the <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Bases: str"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManagedFolder</span></code></a> objects,
 which in turn contain the dask delayed objects.</p>
 </dd>
 </dl>
@@ -1150,7 +1165,7 @@ which in turn contain the dask delayed objects.</p>
 <dd class="field-even"><dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.db">
 <span class="sig-name descname"><span class="pre">db</span></span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.db" title="Link to this definition">¶</a></dt>
-<dd><p>The database containing the <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Wrapper class for a folder path"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManagedFolder</span></code></a> objects,
+<dd><p>The database containing the <a class="reference internal" href="../../data_base/IO/LoaderDumper/just_create_folder/ManagedFolder.html#data_base.IO.LoaderDumper.just_create_folder.ManagedFolder" title="data_base.IO.LoaderDumper.just_create_folder.ManagedFolder (Python class) — Bases: str"><code class="xref py py-class docutils literal notranslate"><span class="pre">ManagedFolder</span></code></a> objects,
 which in turn contain the dask delayed objects.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.db-type">Type<span class="colon">:</span><a class="headerlink" href="#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.db-type" title="Permalink to this headline">¶</a></dt>
@@ -1165,16 +1180,16 @@ which in turn contain the dask delayed objects.</p>
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.get_status.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.get_status" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.get_status (Python method) — Get the status on the computation of the delayed objects."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.get_status.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.get_status" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.get_status (Python function) — Get the status on the computation of the delayed objects."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_status</span></code></a>()</p></td>
 <td><p>Get the status on the computation of the delayed objects.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.add_delayed_to_db.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.add_delayed_to_db" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.add_delayed_to_db (Python method) — Add a delayed object to the database."><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_delayed_to_db</span></code></a>(d)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.add_delayed_to_db.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.add_delayed_to_db" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.add_delayed_to_db (Python function) — Add a delayed object to the database."><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_delayed_to_db</span></code></a>(d)</p></td>
 <td><p>Add a delayed object to the database.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.reset_status.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status (Python method) — Reset the status of the delayed objects to 'not_started'."><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_status</span></code></a>(only_started)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.reset_status.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.reset_status (Python function) — Reset the status of the delayed objects to 'not_started'."><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_status</span></code></a>(only_started)</p></td>
 <td><p>Reset the status of the delayed objects to <code class="docutils literal notranslate"><span class="pre">'not_started'</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.run_db.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.run_db" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.run_db (Python method) — Run all delayed objects in the database."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_db</span></code></a>(error_started)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="RobustDaskDelayedExecution.run_db.html#simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.run_db" title="simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution.run_db (Python function) — Run all delayed objects in the database."><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_db</span></code></a>(error_started)</p></td>
 <td><p>Run all delayed objects in the database.</p></td>
 </tr>
 </tbody>
@@ -1221,13 +1236,13 @@ which in turn contain the dask delayed objects.</p>
       
       
         
-        <a href="RobustDaskDelayedExecution.get_status.html" class="md-footer__link md-footer__link--next" aria-label="Next: RobustDaskDelayedExecution.get_status" rel="next">
+        <a href="RobustDaskDelayedExecution.get_status.html" class="md-footer__link md-footer__link--next" aria-label="Next: get_status" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              RobustDaskDelayedExecution.get_status
+              get_status
             </div>
           </div>
           <div class="md-footer__button md-icon">

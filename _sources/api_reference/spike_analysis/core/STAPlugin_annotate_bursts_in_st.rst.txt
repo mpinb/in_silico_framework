@@ -19,10 +19,11 @@ STAPlugin_annotate_bursts_in_st
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: spike_analysis.core.STAPlugin_annotate_bursts_in_st(name='bursts_st', source='st', event_maxtimes=None, event_names=None)
+.. class:: spike_analysis.core.STAPlugin_annotate_bursts_in_st(name='bursts_st', source='st', event_maxtimes=None, event_names=None)
+
+   Bases: :py:obj:`STAPlugin_TEMPLATE`
    
    SpikeTimeAnalysis (STA) plugin to annotate bursts in a spike times dataframe.
 

@@ -6,7 +6,7 @@ _read_n_vtraces
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing._read_n_vtraces(fname)
+.. function:: data_base.db_initializers.load_simrun_general.data_parsing._read_n_vtraces(fname)
 
 
    Read the amount of voltage traces in a voltage trace file.
@@ -16,7 +16,7 @@ _read_n_vtraces
 
    :raises NotImplementedError: If the voltage trace file is in .npz format.
 
-   :returns: Amount of voltage traces in :paramref:`fname`.
+   :returns: Amount of voltage traces in :param:`fname`.
    :rtype: int
 
 

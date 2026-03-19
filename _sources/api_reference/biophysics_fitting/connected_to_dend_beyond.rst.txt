@@ -6,14 +6,14 @@ connected_to_dend_beyond
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2)
+.. function:: biophysics_fitting.connected_to_dend_beyond(cell, sec, beyond_dist, n_children_required=2)
 
 
-   Check if a given section is connected to dendrites that reach beyon :paramref:`beyond_dist`.
+   Check if a given section is connected to dendrites that reach beyon :param:`beyond_dist`.
 
-   Given a :py:class:`~single_cell_parser.cell.Cell` object and section number,
-   this method returns True if at least :paramref:`n_children_required` children
-   of the branchpoint reach beyond :paramref:`dist`.
+   Given a :class:`~single_cell_parser.cell.Cell` object and section number,
+   this method returns True if at least :param:`n_children_required` children
+   of the branchpoint reach beyond :param:`beyond_dist`.
 
    :param cell: The Cell object
    :type cell: ~single_cell_parser.cell.Cell
@@ -24,7 +24,7 @@ connected_to_dend_beyond
    :param n_children_required: Least amount of children required. Defaults to 2.
    :type n_children_required: int, optional
 
-   :returns: Whether or not two of the section's children reach beyond :paramref:`beyond_dist`
+   :returns: Whether or not two of the section's children reach beyond :param:`beyond_dist`
    :rtype: bool
 
 

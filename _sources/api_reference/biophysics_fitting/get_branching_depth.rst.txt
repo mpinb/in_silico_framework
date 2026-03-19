@@ -6,21 +6,21 @@ get_branching_depth
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.get_branching_depth(cell, sec, beyond_dist=1000)
+.. function:: biophysics_fitting.get_branching_depth(cell, sec, beyond_dist=1000)
 
 
    Given a Cell object and a section number, this method returns the branching depth (i.e. branching order) of that section.
-   It counts the amount of sections that have children beyond some distance :paramref:`beyond_dist` inbetween the soma and the given section :paramref:`sec`.
+   It counts the amount of sections that have children beyond some distance :param:`beyond_dist` inbetween the soma and the given section :param:`sec`.
 
    If this number is 0, that means that the given section, and all its parent sections up to the soma,
-   have no children (that exceed a distance to soma of :paramref:`beyond_dist`).
+   have no children (that exceed a distance to soma of :param:`beyond_dist`).
 
    :param cell: The Cell object
    :type cell: ~single_cell_parser.cell.Cell
    :param sec: The section number
    :type sec: int
 
-   :returns: Amount of sections between :paramref:`sec` and soma that have at least 2 children that are further from the soma than :paramref:`beyond_dist`
+   :returns: Amount of sections between :param:`sec` and soma that have at least 2 children that are further from the soma than :param:`beyond_dist`
    :rtype: int
 
 

@@ -1,13 +1,12 @@
 
 
+append
+======
 
 
+.. Signature -------------------------------
 
-Combiner_Setup.append
-=====================
-
-
-.. py:method:: biophysics_fitting.combiner.Combiner_Setup.append(name, combination)
+.. function:: biophysics_fitting.combiner.Combiner_Setup.append(name, combination)
 
 
    Appends feature names and combinations to the Combiner_Setup object.

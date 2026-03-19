@@ -1,13 +1,12 @@
 
 
+_init_range_var_recording
+=========================
 
 
+.. Signature -------------------------------
 
-PySection._init_range_var_recording
-===================================
-
-
-.. py:method:: single_cell_parser.cell.PySection._init_range_var_recording(var, mech=None)
+.. function:: single_cell_parser.cell.PySection._init_range_var_recording(var, mech=None)
 
 
    Initialize recording of a range mechanism.

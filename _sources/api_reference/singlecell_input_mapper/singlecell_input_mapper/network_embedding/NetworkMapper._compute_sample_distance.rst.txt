@@ -1,13 +1,12 @@
 
 
+_compute_sample_distance
+========================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._compute_sample_distance
-======================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_sample_distance(realizationSample, realizationPopulationDistribution)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_sample_distance(realizationSample, realizationPopulationDistribution)
 
 
    Compute the distance of network realization samples to the population mean.

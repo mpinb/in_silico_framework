@@ -1,21 +1,20 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.just_create_isf_db.Loader.get(savedir, **kwargs)
+.. function:: data_base.IO.LoaderDumper.just_create_isf_db.Loader.get(savedir, **kwargs)
 
 
    Load the database from the specified folder.
 
    :param savedir: Directory where the database is stored.
    :type savedir: str
-   :param \*\*kwargs: Additional keyword arguments.
-                      These are passed to the :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
+   :param kwargs: Additional keyword arguments.
+                  These are passed to the :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
 
 
 

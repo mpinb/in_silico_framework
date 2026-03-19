@@ -6,7 +6,7 @@ _read_params_to_dict
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.parameters._read_params_to_dict(filename)
+.. function:: single_cell_parser.parameters._read_params_to_dict(filename)
 
 
 

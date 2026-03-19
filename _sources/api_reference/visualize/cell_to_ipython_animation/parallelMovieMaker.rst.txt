@@ -6,7 +6,7 @@ parallelMovieMaker
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.parallelMovieMaker(basedir, lines, xlim=(0, 1500), ylim=(-80, 0))
+.. function:: visualize.cell_to_ipython_animation.parallelMovieMaker(basedir, lines, xlim=(0, 1500), ylim=(-80, 0))
 
 
    Creates figures in parallel and returns animation object.

@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -853,6 +853,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1034,14 +1049,14 @@
 <dt class="sig sig-object highlight sig-wrap py" id="visualize.rasterplot.rasterplot2_pdf_grouped">
 <a class="reference internal" href="../index.html#module-visualize" title="visualize (Python module)"><span class="sig-name descname"><span class="pre">visualize</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-visualize.rasterplot" title="visualize.rasterplot (Python module)"><span class="sig-name descname"><span class="pre">rasterplot</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">rasterplot2_pdf_grouped</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.pdf" title="visualize.rasterplot.rasterplot2_pdf_grouped.pdf (Python parameter) — A DataFrame containing the spike times. Must contain a column with label grouplabel."><span class="n"><span class="pre">pdf</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel" title="visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel (Python parameter) — The column name in the DataFrame to group by."><span class="n"><span class="pre">grouplabel</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.ax" title="visualize.rasterplot.rasterplot2_pdf_grouped.ax (Python parameter) — An optional Matplotlib Axes object to plot on."><span class="n"><span class="pre">ax</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.xlim" title="visualize.rasterplot.rasterplot2_pdf_grouped.xlim (Python parameter) — The x-axis limits for the plot."><span class="n"><span class="pre">xlim</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.x_offset" title="visualize.rasterplot.rasterplot2_pdf_grouped.x_offset (Python parameter) — An offset to apply to the x-values (event times)."><span class="n"><span class="pre">x_offset</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.color" title="visualize.rasterplot.rasterplot2_pdf_grouped.color (Python parameter) — The color to use for the plot."><span class="n"><span class="pre">color</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;k&#39;</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#visualize.rasterplot.rasterplot2_pdf_grouped" title="Link to this definition">¶</a></dt>
 <dd><p>Plot a rasterplot per group of <a class="reference internal" href="../../../file_formats.html#spike-times-format"><span class="std std-ref">Presynaptic spike times</span></a>.</p>
-<p>Similar to <a class="reference internal" href="rasterplot2.html#visualize.rasterplot.rasterplot2" title="visualize.rasterplot.rasterplot2 (Python function) — Plot a rasterplot from spike_times_format."><code class="xref py py-meth docutils literal notranslate"><span class="pre">rasterplot2()</span></code></a>, this method plots a rasterplot from a spike times dataframe,
+<p>Similar to <a class="reference internal" href="rasterplot2.html#visualize.rasterplot.rasterplot2" title="visualize.rasterplot.rasterplot2 (Python function) — Plot a rasterplot from spike_times_format."><code class="xref py py-func docutils literal notranslate"><span class="pre">rasterplot2()</span></code></a>, this method plots a rasterplot from a spike times dataframe,
 but groups them with horizontal lines, based on the grouplabel.
-Assumes the spike times dataframe has a column <code class="xref py py-paramref docutils literal notranslate"><span class="pre">grouplabel</span></code></p>
+Assumes the spike times dataframe has a column <a class="reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel" title="visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel (Python parameter) — The column name in the DataFrame to group by."><code class="xref py py-param docutils literal notranslate"><span class="pre">grouplabel</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd" id="visualize.rasterplot.rasterplot2_pdf_grouped-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#visualize.rasterplot.rasterplot2_pdf_grouped-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
 <dt id="visualize.rasterplot.rasterplot2_pdf_grouped.pdf"><span class="sig-name descname">pdf</span><span class="p"> : </span><span class="desctype"><span class="desctype">pandas.DataFrame</span></span><a class="headerlink" href="#visualize.rasterplot.rasterplot2_pdf_grouped.pdf" title="Permalink to this definition">¶</a></dt><dd><p>A DataFrame containing the spike times.
-Must contain a column with label <code class="xref py py-paramref docutils literal notranslate"><span class="pre">grouplabel</span></code>.</p>
+Must contain a column with label <a class="reference internal" href="#visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel" title="visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel (Python parameter) — The column name in the DataFrame to group by."><code class="xref py py-param docutils literal notranslate"><span class="pre">grouplabel</span></code></a>.</p>
 </dd>
 <dt id="visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel"><span class="sig-name descname">grouplabel</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#visualize.rasterplot.rasterplot2_pdf_grouped.grouplabel" title="Permalink to this definition">¶</a></dt><dd><p>The column name in the DataFrame to group by.</p>
 </dd>

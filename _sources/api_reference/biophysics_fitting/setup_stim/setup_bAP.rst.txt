@@ -6,7 +6,7 @@ setup_bAP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim.setup_bAP(cell, delay=295)
+.. function:: biophysics_fitting.setup_stim.setup_bAP(cell, delay=295)
 
 
    Setup a bAP (backpropagating action potential) stimulus for the cell.

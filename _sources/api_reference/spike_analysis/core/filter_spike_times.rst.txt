@@ -6,7 +6,7 @@ filter_spike_times
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.filter_spike_times(spike_times, spike_times_trough, creast_trough_interval=2, mode='latest', spike_times_amplitude=None, upper_creast_threshold=None, creast_upcross_times=None)
+.. function:: spike_analysis.core.filter_spike_times(spike_times, spike_times_trough, creast_trough_interval=2, mode='latest', spike_times_amplitude=None, upper_creast_threshold=None, creast_upcross_times=None)
 
 
    Filter spike times based on timepoints of detected creasts and troughs.

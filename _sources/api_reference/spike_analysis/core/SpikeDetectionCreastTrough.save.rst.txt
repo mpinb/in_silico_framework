@@ -1,13 +1,12 @@
 
 
+save
+====
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.save
-===============================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.save(path)
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.save(path)
 
 
    Saves the SpikeDetectionCreastTrough object to a JSON file.

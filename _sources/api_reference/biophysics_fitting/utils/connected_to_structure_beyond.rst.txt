@@ -6,7 +6,7 @@ connected_to_structure_beyond
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.connected_to_structure_beyond(cell, sec, beyond_dist, beyond_struct=['ApicalDendrite'], n_children_required=1)
+.. function:: biophysics_fitting.utils.connected_to_structure_beyond(cell, sec, beyond_dist, beyond_struct=['ApicalDendrite'], n_children_required=1)
 
 
    Checks if a :py:class:`~single_cell_parser.cell.Cell` section is connected to a structure

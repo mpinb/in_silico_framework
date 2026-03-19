@@ -6,12 +6,12 @@ find_common_db_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.find_common_db_path(paths)
+.. function:: data_base.dbopen.find_common_db_path(paths)
 
 
    Find the common path of a list of db paths.
 
-   Similar to :py:meth:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
+   Similar to :func:`os.path.commonpath`, but works for reldb://-style and mdb://-style paths.
 
 
 

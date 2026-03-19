@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
 
 
@@ -18,11 +17,26 @@ reader
    read_connections_spreadsheet </api_reference/singlecell_input_mapper/singlecell_input_mapper/reader/read_connections_spreadsheet>
    read_celltype_numbers_spreadsheet </api_reference/singlecell_input_mapper/singlecell_input_mapper/reader/read_celltype_numbers_spreadsheet>
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper.reader
+.. module:: singlecell_input_mapper.singlecell_input_mapper.reader
 
 .. autoapi-nested-parse::
    Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
 
+
+
+.. rst-class:: absolute-paragraph
+
+Classes
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`_Edge <singlecell_input_mapper.singlecell_input_mapper.reader._Edge>`
+     - Convenience class around NEURON's section objects.
 
 
 .. rst-class:: absolute-paragraph
@@ -44,6 +58,22 @@ Functions
      - Reads a spreadsheet with connection probabilities between cell types
    * - :py:obj:`read_celltype_numbers_spreadsheet <singlecell_input_mapper.singlecell_input_mapper.reader.read_celltype_numbers_spreadsheet>`\ (fname)
      - Reads a spreadsheet with cell type numbers for each anatomical area.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`testFname <singlecell_input_mapper.singlecell_input_mapper.reader.testFname>`
+     - \-
+
 
 
 

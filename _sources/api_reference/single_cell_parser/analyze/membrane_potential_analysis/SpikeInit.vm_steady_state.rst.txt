@@ -1,13 +1,12 @@
 
 
+vm_steady_state
+===============
 
 
+.. Signature -------------------------------
 
-SpikeInit.vm_steady_state
-=========================
-
-
-.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.vm_steady_state(cell, tVec, tStim, dtStim)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.SpikeInit.vm_steady_state(cell, tVec, tStim, dtStim)
 
    :staticmethod:
 

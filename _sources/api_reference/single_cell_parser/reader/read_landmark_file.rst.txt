@@ -6,7 +6,7 @@ read_landmark_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_landmark_file(landmarkFilename)
+.. function:: single_cell_parser.reader.read_landmark_file(landmarkFilename)
 
 
    Read an AMIRA landmark file

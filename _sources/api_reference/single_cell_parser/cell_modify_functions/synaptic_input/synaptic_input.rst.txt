@@ -6,7 +6,7 @@ synaptic_input
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input(cell, network_param=None, synapse_activation_file=None, tStop=None)
+.. function:: single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input(cell, network_param=None, synapse_activation_file=None, tStop=None)
 
 
    Add synaptic activations to the cell from a network.

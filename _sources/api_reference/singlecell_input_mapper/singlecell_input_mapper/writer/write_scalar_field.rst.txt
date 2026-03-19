@@ -6,12 +6,12 @@ write_scalar_field
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field(fname=None, scalarField=None)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field(fname=None, scalarField=None)
 
 
    Write a scalar field to an AmiraMesh file.
 
-   These can be visualized in AMIRA, or converted to VTK using :py:meth:`~visualize.vtk.convert_amira_lattice_to_vtk`
+   These can be visualized in AMIRA, or converted to VTK using :func:`~visualize.vtk.convert_amira_lattice_to_vtk`
    for visualization in VTK-compatible renderers.
 
    :param fname: Name of the output file

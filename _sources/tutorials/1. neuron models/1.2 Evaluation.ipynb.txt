@@ -680,7 +680,7 @@
     },
     {
       "cell_type": "code",
-      "execution_count": 11,
+      "execution_count": null,
       "metadata": {},
       "outputs": [
         {
@@ -696,7 +696,11 @@
       ],
       "source": [
         "from visualize.current_visualizer import CurrentAnalysis\n",
-        "ca = CurrentAnalysis(cell, rangeVars = record_vars)\n",
+        "ca = CurrentAnalysis(\n",
+        "    cell, \n",
+        "    rangeVars = record_vars\n",
+        "    secID=\"bifurcation\"  # section indices also supportd\n",
+        "    )\n",
         "fig = ca.plot_areas(plot_voltage = True, t_stim=295)\n",
         "fig.set_size_inches(8,6)\n",
         "for ax in fig.axes: ax.grid(False)"
@@ -706,7 +710,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "The black and orange line denote membrane voltage at the soma and dendritic recording location respectively. The filled in areas are a spatial sum of ionic current across time: $I_{ion}(t) = \\sum_{dendrites} \\int_x I_{ion} dx$\n",
+        "The black and orange line denote membrane voltage at the soma and dendritic recording location respectively. The filled in areas show the amount of current flowing through the bifurcation section of the cell.\n",
         "\n",
         "Bear in mind that the first spike is mostly due to somatic currents. While these are very much present, they are not very visible on the plot above, since they pale in comparison to the total amount of current through all dendrites. You can plot again on a logscale to verify this."
       ]

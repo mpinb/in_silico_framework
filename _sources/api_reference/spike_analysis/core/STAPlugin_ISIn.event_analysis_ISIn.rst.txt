@@ -1,13 +1,12 @@
 
 
+event_analysis_ISIn
+===================
 
 
+.. Signature -------------------------------
 
-STAPlugin_ISIn.event_analysis_ISIn
-==================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn(spike_times, n=5)
+.. function:: spike_analysis.core.STAPlugin_ISIn.event_analysis_ISIn(spike_times, n=5)
 
    :staticmethod:
 

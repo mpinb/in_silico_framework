@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -27,7 +26,8 @@ param_file_parser
    parallel_resolve_and_copy_paramfiles_to_db </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/parallel_resolve_and_copy_paramfiles_to_db>
    load_param_files_from_db </api_reference/data_base/db_initializers/load_simrun_general/param_file_parser/load_param_files_from_db>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.param_file_parser
+.. module:: data_base.db_initializers.load_simrun_general.param_file_parser
+
 
 
 
@@ -48,6 +48,22 @@ Functions
      - Resolve and copy all relevant parameter files to a database.
    * - :py:obj:`load_param_files_from_db <data_base.db_initializers.load_simrun_general.param_file_parser.load_param_files_from_db>`\ (db, sti)
      - Load the :ref:`cell_parameters_format` and :ref:`network_parameters_format` files from the database.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.db_initializers.load_simrun_general.param_file_parser.logger>`
+     - \-
+
 
 
 

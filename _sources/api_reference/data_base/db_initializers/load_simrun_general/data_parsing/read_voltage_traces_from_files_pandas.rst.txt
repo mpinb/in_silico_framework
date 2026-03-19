@@ -6,14 +6,14 @@ read_voltage_traces_from_files_pandas
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas(prefix, fnames, meta=None)
+.. function:: data_base.db_initializers.load_simrun_general.data_parsing.read_voltage_traces_from_files_pandas(prefix, fnames, meta=None)
 
 
    Reads a list of **multiple** voltage trace files and parses it to a single pandas dataframe.
 
    The delayed version of this method is used to construct a dask dataframe containing the voltage traces
-   in :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
-   Each singular file is read using :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_file`.
+   in :func:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
+   Each singular file is read using :func:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_from_file`.
 
    :param prefix: Path to the directory containing the simulation results.
    :type prefix: str
@@ -23,7 +23,7 @@ read_voltage_traces_from_files_pandas
    :returns: A pandas dataframe containing the voltage traces.
    :rtype: pandas.DataFrame
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
+   .. seealso:: :func:`~data_base.db_initializers.load_simrun_general.read_voltage_traces_by_filenames`.
 
 
 

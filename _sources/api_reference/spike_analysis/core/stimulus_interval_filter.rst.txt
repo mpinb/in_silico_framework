@@ -6,7 +6,7 @@ stimulus_interval_filter
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.stimulus_interval_filter(stim_times, period_length=1, offset=0)
+.. function:: spike_analysis.core.stimulus_interval_filter(stim_times, period_length=1, offset=0)
 
 
    Filters periodic stimuli such that only the first stimulus of each period is retained.

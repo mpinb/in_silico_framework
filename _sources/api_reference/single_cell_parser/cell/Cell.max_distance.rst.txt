@@ -1,13 +1,12 @@
 
 
+max_distance
+============
 
 
+.. Signature -------------------------------
 
-Cell.max_distance
-=================
-
-
-.. py:method:: single_cell_parser.cell.Cell.max_distance(label)
+.. function:: single_cell_parser.cell.Cell.max_distance(label)
 
 
    Computes maximum path length to soma of all branches with label :paramref:`label`

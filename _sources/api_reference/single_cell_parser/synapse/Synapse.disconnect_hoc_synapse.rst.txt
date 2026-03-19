@@ -1,20 +1,19 @@
 
 
+disconnect_hoc_synapse
+======================
 
 
+.. Signature -------------------------------
 
-Synapse.disconnect_hoc_synapse
-==============================
-
-
-.. py:method:: single_cell_parser.synapse.Synapse.disconnect_hoc_synapse()
+.. function:: single_cell_parser.synapse.Synapse.disconnect_hoc_synapse()
 
 
    Disconnect the synapse from the neuron model.
 
-   Disconnecting the synapse turns off the release site and removes the :py:class:`neuron:NetCon`
+   Disconnecting the synapse turns off the release site and removes the :class:`neuron:NetCon`
 
-   .. seealso:: :py:meth:`activate_hoc_syn`.
+   .. seealso:: :func:`activate_hoc_syn`.
 
 
 

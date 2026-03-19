@@ -1,0 +1,18 @@
+
+
+_compile_mechanisms_at_path
+===========================
+
+
+.. Signature -------------------------------
+
+.. function:: mechanisms.l5pt._compile_mechanisms_at_path(path)
+
+
+   Compile the mechanisms in the given path using nrnivmodl.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

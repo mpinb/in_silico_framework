@@ -1,13 +1,12 @@
 
 
+_get_metadata_from_name
+=======================
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore._get_metadata_from_name
-========================================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_name(name)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_metadata_from_name(name)
 
 
    Get metadata from a name that follows the convention of NumpyStore.

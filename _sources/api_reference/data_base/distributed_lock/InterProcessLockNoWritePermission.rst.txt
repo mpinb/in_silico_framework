@@ -20,17 +20,13 @@ InterProcessLockNoWritePermission
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.distributed_lock.InterProcessLockNoWritePermission(path)
+.. class:: data_base.distributed_lock.InterProcessLockNoWritePermission(path)
    
    Check if the target file or directory has write access, and only lock it if so.
 
    If the user has write permissions to the path, then locking is necessary. Otherwise not, and lock acquire returns True without a lock
-
-   :param path: path to check.
-   :type path: str
 
    .. seealso:: `Fasteners InterProcessLock <https://fasteners.readthedocs.io/en/latest/guide/inter_process/>`_
 
@@ -43,7 +39,7 @@ InterProcessLockNoWritePermission
 
          The lock object if the user has write permissions, None otherwise.
 
-         :type: :py:class:`~fasteners.InterProcessLock` or None
+         :type: :class:`~fasteners.InterProcessLock` or None
 
    :Methods:
 

@@ -1,20 +1,19 @@
 
 
+create_network_embedding_for_simulations
+========================================
 
 
+.. Signature -------------------------------
 
-NetworkMapper.create_network_embedding_for_simulations
-======================================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_for_simulations(postCellName, boutonDensities, nrOfRealizations)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding_for_simulations(postCellName, boutonDensities, nrOfRealizations)
 
 
    Create multiple network realizations from a bouton density field.
 
    Main method used for creating fixed network connectivity for use in Monte Carlo simulations.
-   Same principle as :py:meth:`~create_network_embedding`, but rather than taking
-   the most representative sample, this method saves all :paramref:`nrOfRealizations` network
+   Same principle as :func:`~create_network_embedding`, but rather than taking
+   the most representative sample, this method saves all :param:`nrOfRealizations` network
    realizations to allow investigating the effects of anatomical variability on neuron responses.
 
    .. warning::

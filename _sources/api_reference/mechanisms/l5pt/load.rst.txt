@@ -1,0 +1,23 @@
+
+
+load
+====
+
+
+.. Signature -------------------------------
+
+.. function:: mechanisms.l5pt.load()
+
+
+   Load the mechanisms into NEURON namespace.
+
+   Also implements a thread lock to avoid concurrent loading of shared objects or dynamically linked libraries.
+   This is especially important on Windows, since DLLs are sensitive to concurrent loading.
+
+   :raises AssertionError: If the mechanisms could not be loaded.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

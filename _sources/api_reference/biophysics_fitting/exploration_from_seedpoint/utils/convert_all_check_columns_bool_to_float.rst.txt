@@ -6,7 +6,7 @@ convert_all_check_columns_bool_to_float
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float(df)
+.. function:: biophysics_fitting.exploration_from_seedpoint.utils.convert_all_check_columns_bool_to_float(df)
 
 
    Convert all boolean values to float in a pandas dataframe.

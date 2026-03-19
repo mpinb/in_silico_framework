@@ -1,19 +1,18 @@
 
 
+_add_synapses
+=============
 
 
+.. Signature -------------------------------
 
-_DendrogramSynapseStatistics._add_synapses
-==========================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._add_synapses()
+.. function:: visualize.dendrogram._DendrogramSynapseStatistics._add_synapses()
 
 
    Add synapses to the dendrogram sections.
 
-   This method iterates the :py:class:`~single_cell_parser.cell.Cell` object, extracts the relevant synapse
-   information, and adds it to the corresponding :py:class:`_DendrogramSection` objects.
+   This method iterates the :class:`~single_cell_parser.cell.Cell` object, extracts the relevant synapse
+   information, and adds it to the corresponding :class:`_DendrogramSection` objects.
    It is called upon initialization.
 
 

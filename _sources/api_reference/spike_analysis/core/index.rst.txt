@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~spike_analysis` ❭ 
 
 
@@ -42,10 +41,11 @@ core
    get_period_label_by_time </api_reference/spike_analysis/core/get_period_label_by_time>
    _sta_input_checker </api_reference/spike_analysis/core/_sta_input_checker>
 
-.. py:module:: spike_analysis.core
+.. module:: spike_analysis.core
 
 .. autoapi-nested-parse::
    Read and analyze electrophysiological data.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -126,6 +126,22 @@ Functions
      - Returns a list containing all non-NaN elements in the given pandas Series.
    * - :py:obj:`get_period_label_by_time <spike_analysis.core.get_period_label_by_time>`\ (periods, t)
      - Classifies timepoint based on whether it falls within a period.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <spike_analysis.core.logger>`
+     - \-
+
 
 
 

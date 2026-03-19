@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -15,7 +14,7 @@ generate_synapse_activations
    _evoked_activity </api_reference/simrun/generate_synapse_activations/_evoked_activity>
    generate_synapse_activations </api_reference/simrun/generate_synapse_activations/generate_synapse_activations>
 
-.. py:module:: simrun.generate_synapse_activations
+.. module:: simrun.generate_synapse_activations
 
 .. autoapi-nested-parse::
    Generate synapse activation files.
@@ -28,18 +27,19 @@ generate_synapse_activations
    for the purpose of analyzing the synapse activations and presynaptic spike times. It allows for modularity between the steps of creating
    synapse activations and simulating their effect on the postsynaptic neuron.
 
-   These :ref:`syn_activation_format` files can afterwards be used to re-run simulations afterwards with the :py:mod:`simrun.run_existing_synapse_activations` module.
-   To generate :ref:`syn_activation_format` files **and** simulate the effect on the postsynaptic neuron model in one go, use the :py:mod:`simrun.run_new_simulations` module instead.
+   These :ref:`syn_activation_format` files can afterwards be used to re-run simulations afterwards with the :mod:`simrun.run_existing_synapse_activations` module.
+   To generate :ref:`syn_activation_format` files **and** simulate the effect on the postsynaptic neuron model in one go, use the :mod:`simrun.run_new_simulations` module instead.
 
    .. hint::
       If the postsynaptic neuron is not simulated, why does this module need the :ref:`cell_parameters_format`?
       On the one hand, it needs morphoplogical information in order to connect these synapses. The :ref:`cell_parameters_format` contains
       a backlink to the original :ref:`hoc_file_format` file, which contains the morphological information. But then why not start from the :ref:'hoc_file_format' file directly?
-      Because this module does in fact create a biophsyically detailed neuron model to pass to :py:class:`~single_cell_parser.network.NetworkMapper` to create the network,
+      Because this module does in fact create a biophsyically detailed neuron model to pass to :class:`~single_cell_parser.network.NetworkMapper` to create the network,
       despite the fact that the postsynaptic activity is not saved.
 
 
-   .. seealso:: :py:mod:`simrun.run_new_simulations` for running simulations.
+   .. seealso:: :mod:`simrun.run_new_simulations` for running simulations.
+
 
 
 
@@ -55,7 +55,25 @@ Functions
    :class: summarytable
    
    * - :py:obj:`generate_synapse_activations <simrun.generate_synapse_activations.generate_synapse_activations>`\ (cellParamName, evokedUpParamName, dirPrefix, nSweeps, nprocs, tStop, silent)
-     - Generates :paramref:`nSweeps` * :paramref:`nprocs` synapse activation files and writes them to
+     - Generates :param:`nSweeps` * :param:`nprocs` synapse activation files and writes them to
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`h <simrun.generate_synapse_activations.h>`
+     - \-
+   * - :py:obj:`logger <simrun.generate_synapse_activations.logger>`
+     - \-
+
 
 
 

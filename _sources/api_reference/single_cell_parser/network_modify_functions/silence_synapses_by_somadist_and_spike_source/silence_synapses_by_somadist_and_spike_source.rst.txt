@@ -6,11 +6,11 @@ silence_synapses_by_somadist_and_spike_source
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.silence_synapses_by_somadist_and_spike_source(cell, evokedNW, soma_dist_ranges=None, spike_sources=None)
+.. function:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.silence_synapses_by_somadist_and_spike_source(cell, evokedNW, soma_dist_ranges=None, spike_sources=None)
 
 
-   Silences synapse activation at a :paramref:`soma_dist_ranges`,
-   that are from presynaptic origins **not** listed in :paramref:`spike_sources`.
+   Silences synapse activation at a :param:`soma_dist_ranges`,
+   that are from presynaptic origins **not** listed in :param:`spike_sources`.
 
    :param cell: The cell to modify.
    :type cell: single_cell_parser.cell.Cell

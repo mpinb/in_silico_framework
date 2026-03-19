@@ -6,7 +6,7 @@ get_file
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_file(self, suffix)
+.. function:: data_base.db_initializers.load_simrun_general.file_handling.get_file(self, suffix)
 
 
    Get the filename of the unique file in the current directory with the specified suffix.

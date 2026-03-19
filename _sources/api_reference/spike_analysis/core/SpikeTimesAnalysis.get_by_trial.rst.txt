@@ -1,13 +1,12 @@
 
 
+get_by_trial
+============
 
 
+.. Signature -------------------------------
 
-SpikeTimesAnalysis.get_by_trial
-===============================
-
-
-.. py:method:: spike_analysis.core.SpikeTimesAnalysis.get_by_trial(key)
+.. function:: spike_analysis.core.SpikeTimesAnalysis.get_by_trial(key)
 
 
    Get spike information by trial.

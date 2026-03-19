@@ -1,18 +1,17 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-_Solver.setup
-=============
-
-
-.. py:method:: simrun.modular_reduced_model_inference.solver._Solver.setup(strategy)
+.. function:: simrun.modular_reduced_model_inference.solver._Solver.setup(strategy)
 
 
    Setup the solver for a given strategy and optimizer.
 
-   The strategy needs to be passed as an argument, while the optimizer is set by the :py:meth:`_setup_optimizer` method.
+   The strategy needs to be passed as an argument, while the optimizer is set by the :func:`_setup_optimizer` method.
 
    :param strategy: The strategy object.
    :type strategy: ~simrun.modular_reduced_model_inference.strategy._Strategy

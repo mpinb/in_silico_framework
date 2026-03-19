@@ -1,16 +1,15 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.just_create_folder.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.just_create_folder.Loader.get(savedir)
 
 
-   Get a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+   Get a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
 
    :param savedir: Folder path
    :type savedir: str

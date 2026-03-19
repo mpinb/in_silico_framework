@@ -6,7 +6,7 @@ flatten
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.flatten(l)
+.. function:: data_base.utils.flatten(l)
 
 
    Flatten a nested list

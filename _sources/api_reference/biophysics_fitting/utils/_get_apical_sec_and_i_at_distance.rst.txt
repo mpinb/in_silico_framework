@@ -6,7 +6,7 @@ _get_apical_sec_and_i_at_distance
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils._get_apical_sec_and_i_at_distance(cell, dist)
+.. function:: biophysics_fitting.utils._get_apical_sec_and_i_at_distance(cell, dist)
 
 
    Get the apical section and segment at a certain distance from the soma.

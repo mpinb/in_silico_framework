@@ -1,13 +1,12 @@
 
 
+_objective_function_static
+==========================
 
 
+.. Signature -------------------------------
 
-_Strategy._objective_function_static
-====================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static(get_score, get_y, x)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy._objective_function_static(get_score, get_y, x)
 
    :staticmethod:
 

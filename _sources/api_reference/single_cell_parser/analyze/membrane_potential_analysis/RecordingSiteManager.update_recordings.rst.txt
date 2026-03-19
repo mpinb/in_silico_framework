@@ -1,16 +1,15 @@
 
 
+update_recordings
+=================
 
 
+.. Signature -------------------------------
 
-RecordingSiteManager.update_recordings
-======================================
-
-
-.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings()
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager.update_recordings()
 
 
-   Add the :py:class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :paramref:`recordingSites`.
+   Add the :class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :param:`recordingSites`.
 
 
 

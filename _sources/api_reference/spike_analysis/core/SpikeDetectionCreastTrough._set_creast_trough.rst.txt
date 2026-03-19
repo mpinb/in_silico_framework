@@ -1,13 +1,12 @@
 
 
+_set_creast_trough
+==================
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough._set_creast_trough
-=============================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough(lim_creast, lim_trough)
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough._set_creast_trough(lim_creast, lim_trough)
 
 
    Sets the creast and trough limits based on the given values.

@@ -1,16 +1,15 @@
 
 
+remove_synapses
+===============
 
 
+.. Signature -------------------------------
 
-Cell.remove_synapses
-====================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses(preType=None)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.remove_synapses(preType=None)
 
 
-   Remove all synapses of type :paramref:`preType` from the cell.
+   Remove all synapses of type :param:`preType` from the cell.
 
    :param preType: Presynaptic cell type. Default: None. Set to 'All' or 'all' to remove all synapses.
    :type preType: str

@@ -6,7 +6,7 @@ compute_ISI_array
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_array(st, min_time, max_time, fillna=1000, step=1)
+.. function:: data_base.db_initializers.prepare_ANN_batches.compute_ISI_array(st, min_time, max_time, fillna=1000, step=1)
 
 
    Calculate the time since the last spike in ms for each element in a spike time Array.
@@ -16,8 +16,12 @@ compute_ISI_array
 
    :param st: pandas DataFrame or Series of spike times
    :type st: pd.DataFrame | pd.Series
-   :param timepoint: Time point in ms
-   :type timepoint: int
+   :param min_time: Start time
+   :type min_time: int | float
+   :param max_time: End time
+   :type max_time: int | float
+   :param step: Temporal resolution of ISI calculation.
+   :type step: int | float
    :param fillna: Fill with NaN until the array has this length. Defaults to None.
    :type fillna: int, optional
 
@@ -26,8 +30,8 @@ compute_ISI_array
 
    .. seealso::
 
-      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
-      :py:meth:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
+      :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st_list` for the list version.
+      :func:`~data_base.db_initializers.prepare_ANN_batches.compute_ISI_from_st` for the pandas version.
 
 
 

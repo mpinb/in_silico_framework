@@ -1,13 +1,12 @@
 
 
+_align_trunk_with_z_axis
+========================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._align_trunk_with_z_axis
-======================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis(cell)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._align_trunk_with_z_axis(cell)
 
 
    Calculates the polar angle between the trunk and z-axis (zenith).

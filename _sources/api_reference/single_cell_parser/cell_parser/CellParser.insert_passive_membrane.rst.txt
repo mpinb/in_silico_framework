@@ -1,18 +1,17 @@
 
 
+insert_passive_membrane
+=======================
 
 
+.. Signature -------------------------------
 
-CellParser.insert_passive_membrane
-==================================
-
-
-.. py:method:: single_cell_parser.cell_parser.CellParser.insert_passive_membrane(label)
+.. function:: single_cell_parser.cell_parser.CellParser.insert_passive_membrane(label)
 
 
    Set up a passive membrane with default values.
 
-   Sets up the cell structure :paramref:`label` with a passive membrane that has the following properties:
+   Sets up the cell structure :param:`label` with a passive membrane that has the following properties:
 
    * :math:`R_a = 200 \Omega \cdot cm`
    * :math:`C_m = 0.75 \mu F/cm^2`

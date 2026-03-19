@@ -1,13 +1,12 @@
 
 
+get_futures
+===========
 
 
+.. Signature -------------------------------
 
-Load.get_futures
-================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_futures()
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_futures()
 
 
    Get the futures of the delayed computations.

@@ -1,13 +1,12 @@
 
 
+BAC_spikecount
+==============
 
 
+.. Signature -------------------------------
 
-BAC.BAC_spikecount
-==================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_spikecount(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.BAC_spikecount(voltage_traces)
 
 
    Get the number of spikes in the somatic voltage trace.

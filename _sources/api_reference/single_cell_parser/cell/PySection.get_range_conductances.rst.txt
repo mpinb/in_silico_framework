@@ -1,13 +1,12 @@
 
 
+get_range_conductances
+======================
 
 
+.. Signature -------------------------------
 
-PySection.get_range_conductances
-================================
-
-
-.. py:method:: single_cell_parser.cell.PySection.get_range_conductances(range_vars, density=True)
+.. function:: single_cell_parser.cell.PySection.get_range_conductances(range_vars, density=True)
 
 
    Get the transmembrane conductance of each range variable separately.

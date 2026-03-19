@@ -6,7 +6,7 @@ cache
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.cache(function)
+.. function:: data_base.dbopen.cache(function)
 
 
    Cache the result of a function.

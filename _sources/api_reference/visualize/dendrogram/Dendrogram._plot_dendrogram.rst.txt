@@ -1,25 +1,24 @@
 
 
+_plot_dendrogram
+================
 
 
+.. Signature -------------------------------
 
-Dendrogram._plot_dendrogram
-===========================
-
-
-.. py:method:: visualize.dendrogram.Dendrogram._plot_dendrogram(ax, colormap={'Dendrite': 'grey', 'ApicalDendrite': 'r'})
+.. function:: visualize.dendrogram.Dendrogram._plot_dendrogram(ax, colormap={'Dendrite': 'grey', 'ApicalDendrite': 'r'})
 
 
    Plot the dendogram on an axes object.
 
    This is the main plotting method used to either plot the dendogram alone, or to plot the
-   dendrogram in :py:class:`DendrogramStatistics`.
+   dendrogram in :class:`DendrogramStatistics`.
 
    :param ax: The matplotlib axes object.
    :type ax: matplotlib.axes.Axes
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.axes.Axes`
+   :rtype: :class:`matplotlib.axes.Axes`
 
 
 

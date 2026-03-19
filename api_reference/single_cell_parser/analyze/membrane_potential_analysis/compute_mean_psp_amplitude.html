@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -974,6 +974,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../swc/index.html" class="md-nav__link">
+        <span title="/api_reference/single_cell_parser/swc/index.rst (reference label)" class="md-ellipsis">swc</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../synapse/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/synapse/index.rst (reference label)" class="md-ellipsis">synapse</span>
       </a>
@@ -1149,6 +1164,21 @@
     <li class="md-nav__item">
       <a href="../../../visualize/index.html" class="md-nav__link">
         <span title="/api_reference/visualize/index.rst (reference label)" class="md-ellipsis">visualize</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
       </a>
     </li>
   
@@ -1344,7 +1374,7 @@
 <a class="reference internal" href="../../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-single_cell_parser.analyze" title="single_cell_parser.analyze (Python module)"><span class="sig-name descname"><span class="pre">analyze</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.analyze.membrane_potential_analysis" title="single_cell_parser.analyze.membrane_potential_analysis (Python module)"><span class="sig-name descname"><span class="pre">membrane_potential_analysis</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">compute_mean_psp_amplitude</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.vTraces" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.vTraces (Python parameter) — List of voltage traces."><span class="n"><span class="pre">vTraces</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim (Python parameter) — Timepoint of stimulation (in ms)."><span class="n"><span class="pre">tStim</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.dt" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.dt (Python parameter) — Time step of the voltage traces."><span class="n"><span class="pre">dt</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.width" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.width (Python parameter) — Width of the PSP window."><span class="n"><span class="pre">width</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">35.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay (Python parameter) — Delay of the PSP window (i.e."><span class="n"><span class="pre">t_delay</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">15.0</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude" title="Link to this definition">¶</a></dt>
 <dd><p>Compute the mean amplitude of all PSPs across multiple voltage traces.</p>
 <p>The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
-between <code class="xref py py-paramref docutils literal notranslate"><span class="pre">tStim</span></code> + <code class="xref py py-paramref docutils literal notranslate"><span class="pre">t_delay</span></code> and <code class="xref py py-paramref docutils literal notranslate"><span class="pre">tStim</span></code> + <code class="xref py py-paramref docutils literal notranslate"><span class="pre">delay</span></code> + <code class="xref py py-paramref docutils literal notranslate"><span class="pre">width</span></code>.</p>
+between <a class="reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim (Python parameter) — Timepoint of stimulation (in ms)."><code class="xref py py-param docutils literal notranslate"><span class="pre">tStim</span></code></a> + <a class="reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay (Python parameter) — Delay of the PSP window (i.e."><code class="xref py py-param docutils literal notranslate"><span class="pre">t_delay</span></code></a> and <a class="reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.tStim (Python parameter) — Timepoint of stimulation (in ms)."><code class="xref py py-param docutils literal notranslate"><span class="pre">tStim</span></code></a> + <a class="reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.t_delay (Python parameter) — Delay of the PSP window (i.e."><code class="xref py py-param docutils literal notranslate"><span class="pre">t_delay</span></code></a> + <a class="reference internal" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.width" title="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude.width (Python parameter) — Width of the PSP window."><code class="xref py py-param docutils literal notranslate"><span class="pre">width</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">

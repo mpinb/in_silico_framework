@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -25,20 +24,25 @@ data_base
    is_sub_data_base </api_reference/data_base/is_sub_data_base>
    get_db_by_unique_id </api_reference/data_base/get_db_by_unique_id>
 
-.. py:module:: data_base
+.. module:: data_base
 
 .. autoapi-nested-parse::
    Efficient, reproducible and flexible database with dictionary-like API.
+
    This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
-   Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
-   A wide variety of input data and output file formats are supported (see :py:mod:`data_base.IO.LoaderDumper`), including:
+   A wide variety of input data and output file formats are supported (see :mod:`data_base.IO.LoaderDumper`), including:
 
    - 1D and ND numpy arrays
    - pandas and dask dataframes
-   - :py:class:`~single_cell_parser.cell.Cell` objects
-   - :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+   - :class:`~single_cell_parser.cell.Cell` objects
 
-   Simulation results from :py:mod:`single_cell_parser` and :py:mod:`simrun` can be imported and converted to a high performance binary format using the :py:mod:`data_base.db_initializers` subpackage.
+   Databases saves keys as folders containing at least three files:
+
+   - ``Loader``: JSON file containing information on how to load the data
+   - ``metadata``: JSON file containing metadata.
+   - Data file(s): The actual data, in a format specified by the ``Loader`` file. Some file formats split up the data in multiple files, such as parquet and msgpack.
+
+   Simulation results from :mod:`single_cell_parser` and :mod:`simrun` can be imported and converted to a high performance binary format using the :mod:`data_base.db_initializers` subpackage.
 
    .. rubric:: Example
       :class: example
@@ -69,6 +73,23 @@ data_base
            "error": null
        }
 
+   Saving and loading data is easily achieved::
+
+       from data_base import DataBase
+
+       db = DataBase('/path/to/database')
+       obj = pd.DataFrame(...)  # some pandas dataframe for example
+       db['my_key'] = obj  # saves the object to the database with the default format
+       loaded_obj = db['my_key']  # loads the object from the database
+       db.set('my_other_key', obj, dumper='pandas_to_msgpack')  # saves the object with a specific format
+
+   When you don't specify the dumper, the default dumper as specified in the configuration file is used.
+   The default dumper is purposely chosen to prioritize flexibility (i.e. save anything), not performance (i.e. save something specific very efficiently).
+   Performant data formats will need to be specified explicitly, as they often depend on the object being saved and the intended use case.
+   You can (but shouldn't) reconfigure the default dumper in ``config/db_settings.json``
+
+
+
 
 
 .. rst-class:: absolute-paragraph
@@ -83,11 +104,26 @@ Functions
    :class: summarytable
    
    * - :py:obj:`is_data_base <data_base.is_data_base>`\ (path)
-     - Checks if a given path contains a :py:class:`~data_base.DataBase`.
+     - Checks if a given path contains a :class:`~data_base.DataBase`.
    * - :py:obj:`is_sub_data_base <data_base.is_sub_data_base>`\ (parent\_db, key)
      - Check if a given key is a sub-database of the parent database.
    * - :py:obj:`get_db_by_unique_id <data_base.get_db_by_unique_id>`\ (unique\_id)
      - Get a DataBase by its unique ID, as registered in the data base register.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`DataBase <data_base.DataBase>`
+     - \-
 
 
 .. rst-class:: absolute-paragraph
@@ -119,6 +155,7 @@ Modules
      - The :py:class:`~data_base.isf_data_base.ISFDataBase` class for robust and efficient data storage.
    * - :py:obj:`utils <data_base.utils>`
      - Database utility and convenience functions.
+
 
 
 .. container:: doc-feedback

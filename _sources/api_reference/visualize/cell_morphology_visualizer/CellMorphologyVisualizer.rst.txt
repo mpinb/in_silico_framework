@@ -25,10 +25,11 @@ CellMorphologyVisualizer
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer(cell, align_trunk=True, t_start=None, t_stop=None, t_step=None)
+.. class:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer(cell, align_trunk=True, t_start=None, t_stop=None, t_step=None)
+
+   Bases: :py:obj:`CMVDataParser`
    
    Plot a cell morphology using matplotlib.
 
@@ -59,7 +60,7 @@ CellMorphologyVisualizer
 
    .. note::
 
-      :paramref:`align_trunk` assumes the cell has a trunk, which is defined as the dendrite between the soma
+      :param:`align_trunk` assumes the cell has a trunk, which is defined as the dendrite between the soma
       and the main bifurcation section.
 
    .. seealso:: :meth:`~biophysics_fitting.get_main_bifurcation_section`.

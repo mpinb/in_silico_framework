@@ -1,13 +1,12 @@
 
 
+_get_spatiotemporal_input
+=========================
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation._get_spatiotemporal_input
-=======================================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatiotemporal_input(group)
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatiotemporal_input(group)
 
 
    returns spatiotemporal input in the following dimensions:

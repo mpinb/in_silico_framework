@@ -6,7 +6,7 @@ get_max_per_ms_on_pandas_dataframe
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_max_per_ms_on_pandas_dataframe(vt_pandas)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_max_per_ms_on_pandas_dataframe(vt_pandas)
 
 
    Subsample a voltage trace pandas dataframe to 1ms bins based on the maximum depolarization.

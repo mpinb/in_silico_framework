@@ -6,7 +6,7 @@ evaluation_function_incremental_helper
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper(p, s=None, e=None, cutoffs=None, stim_order=None, verbose=True, additional_evaluation_functions=None, objectives_by_stimulus=None)
+.. function:: biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper(p, s=None, e=None, cutoffs=None, stim_order=None, verbose=True, additional_evaluation_functions=None, objectives_by_stimulus=None)
 
 
    Evaluate a model shows one stimulus at a time.
@@ -23,12 +23,12 @@ evaluation_function_incremental_helper
                       Use strings if only one stimulus is to be simulated.
                       Use tuples of strings to simulate several stimuli in one go.
    :type stim_order: [str] | [(str)]
-   :param cutoffs ({str: float}):
-                         Keys (str) must appear in stim_order.
-                         Values (float)indicate the maximum error allowed for these stimuli
-   :param objectives_by_stimulus ({str: list}):
-                                        Keys (str) must appear in stim_order.
-                                        Values (list) are objective names returned by the evaluator object.
+   :param cutoffs: Keys (str) must appear in stim_order.
+                   Values (float)indicate the maximum error allowed for these stimuli
+   :type cutoffs: Dict[str,float]
+   :param objectives_by_stimulus: Keys (str) must appear in stim_order.
+                                  Values (list) are objective names returned by the evaluator object.
+   :type objectives_by_stimulus: Dict[str,list]
    :param additional_evaluation_functions: additional functions to be applied onto the final voltage
                                            traces dictionary, which return a dictionary which is appended to the
                                            evaluations.

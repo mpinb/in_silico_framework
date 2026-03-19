@@ -6,7 +6,7 @@ vmApical
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.vmApical(cell, dist=None)
+.. function:: biophysics_fitting.utils.vmApical(cell, dist=None)
 
 
    Fetch the membrane voltage of the apical dendrite at a certain distance from the soma.

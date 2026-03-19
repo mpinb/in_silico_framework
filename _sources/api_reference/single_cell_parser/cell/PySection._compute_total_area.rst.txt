@@ -1,13 +1,12 @@
 
 
+_compute_total_area
+===================
 
 
+.. Signature -------------------------------
 
-PySection._compute_total_area
-=============================
-
-
-.. py:method:: single_cell_parser.cell.PySection._compute_total_area()
+.. function:: single_cell_parser.cell.PySection._compute_total_area()
 
 
    Computes total area of all NEURON segments in this section

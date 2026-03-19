@@ -6,7 +6,7 @@ calculate_optimal_g
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.calculate_optimal_g(pdf)
+.. function:: simrun.synaptic_strength_fitting.calculate_optimal_g(pdf)
 
 
    Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data.

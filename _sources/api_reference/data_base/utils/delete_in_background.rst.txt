@@ -6,7 +6,7 @@ delete_in_background
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.delete_in_background(key)
+.. function:: data_base.utils.delete_in_background(key)
 
 
    Starts a background process that deletes a key

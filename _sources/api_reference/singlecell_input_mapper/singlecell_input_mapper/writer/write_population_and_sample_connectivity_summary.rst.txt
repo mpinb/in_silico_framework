@@ -6,15 +6,15 @@ write_population_and_sample_connectivity_summary
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_population_and_sample_connectivity_summary(fname=None, populationDistribution=None, cellTypeSummaryData=None, columnSummaryData=None)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_population_and_sample_connectivity_summary(fname=None, populationDistribution=None, cellTypeSummaryData=None, columnSummaryData=None)
 
 
    Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
 
    Useful for comparing the results of a single realization to the average over multiple realizations.
-   Consult :py:meth:`write_sample_connectivity_summary` and :py:meth:`write_population_connectivity_summary` for details on the input data.
-   :paramref:`populationDistribution` can be computes using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
-   :paramref:`cellTypeSummaryData` and :paramref:`columnSummaryData` can be computed using :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
+   Consult :func:`write_sample_connectivity_summary` and :func:`write_population_connectivity_summary` for details on the input data.
+   :param:`populationDistribution` can be computes using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
+   :param:`cellTypeSummaryData` and :param:`columnSummaryData` can be computed using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
 
    :param fname: Name of the output file
    :type fname: str

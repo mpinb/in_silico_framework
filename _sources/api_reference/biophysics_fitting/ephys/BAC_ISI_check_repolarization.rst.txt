@@ -6,7 +6,7 @@ BAC_ISI_check_repolarization
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_ISI_check_repolarization(t, v, stim_end=None, repolarization=None)
+.. function:: biophysics_fitting.ephys.BAC_ISI_check_repolarization(t, v, stim_end=None, repolarization=None)
 
 
    Checks if the membrane potential has repolarized to a certain value after a stimulus for a BAC stimulus.

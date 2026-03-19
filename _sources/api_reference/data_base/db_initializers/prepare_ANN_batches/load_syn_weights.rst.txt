@@ -6,7 +6,7 @@ load_syn_weights
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.load_syn_weights(db, client, excitatory_celltypes=None)
+.. function:: data_base.db_initializers.prepare_ANN_batches.load_syn_weights(db, client, excitatory_celltypes=None)
 
 
    Load synapse weights from a simrun-initialized database
@@ -22,7 +22,7 @@ load_syn_weights
    :returns: A dictionary mapping the synapse type to a weight.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.load_simrun_general.init` for the database initialization.
+   .. seealso:: :func:`~data_base.db_initializers.load_simrun_general.init` for the database initialization.
 
 
 

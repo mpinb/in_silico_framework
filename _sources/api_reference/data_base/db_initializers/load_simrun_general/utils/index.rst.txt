@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -15,7 +14,10 @@ utils
    _hash_file_content </api_reference/data_base/db_initializers/load_simrun_general/utils/_hash_file_content>
    _get_dumper </api_reference/data_base/db_initializers/load_simrun_general/utils/_get_dumper>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.utils
+.. module:: data_base.db_initializers.load_simrun_general.utils
+
+
+
 
 
 

@@ -6,7 +6,7 @@ write_PSTH
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_PSTH(fname=None, PSTH=None, bins=None)
+.. function:: single_cell_parser.writer.write_PSTH(fname=None, PSTH=None, bins=None)
 
 
    Write PSTH and time bins of PSTH,
@@ -20,7 +20,7 @@ write_PSTH
    :param bins: A list of time bins, including begin and end
    :type bins: list
 
-   :returns: None. Writes out the PSTH file to :paramref:`fname`.
+   :returns: None. Writes out the PSTH file to :param:`fname`.
 
    .. rubric:: Example
       :class: example

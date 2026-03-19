@@ -6,7 +6,7 @@ spike_count
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.spike_count(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.spike_count(t, v, thresh=None)
 
 
    Counts the number of spikes in a voltage trace.

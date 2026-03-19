@@ -1,26 +1,25 @@
 
 
+get_cell_params
+===============
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get_cell_params
-===============================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_cell_params(params)
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get_cell_params(params)
 
 
-   Get the cell parameters as an :py:class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
+   Get the cell parameters as an :class:`~single_cell_parser.parameters.NTParameterSet` from the parameter vector.
 
-   This can be used with :py:meth:`single_cell_parser.create_cell` to
-   create a :py:class:`~single_cell_parser.cell.Cell` object.
+   This can be used with :func:`single_cell_parser.create_cell` to
+   create a :class:`~single_cell_parser.cell.Cell` object.
    This is helpful for inspecting what parameters have effectively been used for the simulation.
 
    :param params: The parameter vector.
    :type params: pd.Series
 
    :returns: The cell parameters.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 

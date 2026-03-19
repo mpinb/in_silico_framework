@@ -1,20 +1,19 @@
 
 
+update
+======
 
 
+.. Signature -------------------------------
 
-NTParameterSet.update
-=====================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet.update(other=None, **kwargs)
+.. function:: single_cell_parser.parameters.NTParameterSet.update(other=None, **kwargs)
 
 
    Update the NTParameterSet with another dictionary or keyword arguments.
 
    :param other: Another dictionary to merge into this NTParameterSet.
    :type other: dict, optional
-   :param \*\*kwargs: Additional keyword arguments to merge into this NTParameterSet.
+   :param kwargs: Additional keyword arguments to merge into this NTParameterSet.
 
 
 

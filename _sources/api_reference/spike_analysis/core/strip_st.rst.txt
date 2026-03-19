@@ -6,7 +6,7 @@ strip_st
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.strip_st(st)
+.. function:: spike_analysis.core.strip_st(st)
 
 
    Get a DataFrame containing only spike times, without metadata.

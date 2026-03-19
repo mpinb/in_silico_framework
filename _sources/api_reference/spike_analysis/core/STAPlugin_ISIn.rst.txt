@@ -20,10 +20,11 @@ STAPlugin_ISIn
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: spike_analysis.core.STAPlugin_ISIn(name='ISIn', source='spike_times', max_n=5)
+.. class:: spike_analysis.core.STAPlugin_ISIn(name='ISIn', source='spike_times', max_n=5)
+
+   Bases: :py:obj:`STAPlugin_TEMPLATE`
    
    SpikeTimeAnalysis (STA) plugin to compute the inter spike interval (ISI) to the next, second next, nth spike.
 

@@ -6,7 +6,7 @@ vmApical_position
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.vmApical_position(cell, dist=None)
+.. function:: biophysics_fitting.utils.vmApical_position(cell, dist=None)
 
 
    Fetch the exact location on the apical dendrite at a certain distance from the soma.

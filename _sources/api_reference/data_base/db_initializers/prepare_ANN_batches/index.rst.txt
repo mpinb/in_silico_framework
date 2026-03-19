@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ 
 
 
@@ -35,13 +34,14 @@ prepare_ANN_batches
    get_max_depolarization_per_ms </api_reference/data_base/db_initializers/prepare_ANN_batches/get_max_depolarization_per_ms>
    run_delayeds_incrementally </api_reference/data_base/db_initializers/prepare_ANN_batches/run_delayeds_incrementally>
 
-.. py:module:: data_base.db_initializers.prepare_ANN_batches
+.. module:: data_base.db_initializers.prepare_ANN_batches
 
 .. autoapi-nested-parse::
    Parse a simrun-initialized database for ANN batch preparation.
 
    This module provides various methods to bin synapse actications, morphologies, and voltage traces.
    This binned data can be used as input data for training an artificial neural network (ANN).
+
 
 
 
@@ -71,7 +71,7 @@ Functions
    * - :py:obj:`get_bin_adjacency_map_in_section <data_base.db_initializers.prepare_ANN_batches.get_bin_adjacency_map_in_section>`\ (cell, section\_id, section\_distances\_df)
      - Create an adjacency map with bin-specific resolution for a given section.
    * - :py:obj:`get_neighboring_spatial_bins <data_base.db_initializers.prepare_ANN_batches.get_neighboring_spatial_bins>`\ (cell, bin\_id, section\_distances\_df)
-     - Get all the neighboring bins from a :paramref:`bin_id`.
+     - Get all the neighboring bins from a :param:`bin_id`.
    * - :py:obj:`augment_synapse_activation_df_with_branch_bin <data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin>`\ (sa\_, section\_distances\_df, synaptic\_weight\_dict, excitatory\_celltypes)
      - Augment a :ref:`syn_activation_format` dataframe with bin information.
    * - :py:obj:`spike_times_to_onehot <data_base.db_initializers.prepare_ANN_batches.spike_times_to_onehot>`\ (spike\_times, min\_time, max\_time, time\_step)
@@ -100,6 +100,8 @@ Functions
      - Subsample a voltage trace dask dataframe to 1ms bins based on the maximum depolarization.
    * - :py:obj:`run_delayeds_incrementally <data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally>`\ (client, delayeds)
      - Convenience method to run a list of dask delayed objects incrementally.
+
+
 
 
 

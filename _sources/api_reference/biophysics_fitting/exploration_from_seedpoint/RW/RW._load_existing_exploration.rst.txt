@@ -1,0 +1,29 @@
+
+
+_load_existing_exploration
+==========================
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._load_existing_exploration(OPERATION_DIR, iteration_files, file_list)
+
+
+   Load the existing exploration results from the specified directory to continue the random walk.
+
+   :param OPERATION_DIR: directory where the results are stored
+   :type OPERATION_DIR: str
+   :param iteration_files: list of iteration files
+   :type iteration_files: list
+   :param file_list: list of files in the directory
+   :type file_list: list
+
+   :returns: parameters of the last iteration, next iteration number, count of pickle files, and
+             the state of the random number generator.
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

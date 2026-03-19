@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
 
 
@@ -20,7 +19,7 @@ singlecell_input_mapper
    synapse_mapper </api_reference/singlecell_input_mapper/singlecell_input_mapper/synapse_mapper/index>  
    writer </api_reference/singlecell_input_mapper/singlecell_input_mapper/writer/index>  
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper
+.. module:: singlecell_input_mapper.singlecell_input_mapper
 
 .. autoapi-nested-parse::
    Calculate the connectivity of individual neuron morphologies.
@@ -28,7 +27,7 @@ singlecell_input_mapper
 
    This package contains methods to create anatomical realizations for the connectivity of single neurons.
    To create anatomical realizations, it is recommended to use the high-level
-   pipeline :py:meth:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`, which call supon various methods and classes presented in this package.
+   pipeline :func:`~singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs`, which call supon various methods and classes presented in this package.
 
    Inputs:
 
@@ -37,6 +36,8 @@ singlecell_input_mapper
    - The 3D density of post-synaptic targets (PSTs) in the neuropil (cell type unspecific)
    - The 3D density of boutons in the neuropil (cell type specific)
    - The 1D and 2D densities of PSTs onto the postsynaptic neuron per length and area (cell type specific)
+
+
 
 
 
@@ -66,6 +67,7 @@ Modules
      - This module allows to compute synapse density fields from a Post-Synaptic Target (PST) density field and assign synapses to a neuron morphology based on this synapse density field.
    * - :py:obj:`writer <singlecell_input_mapper.singlecell_input_mapper.writer>`
      - Write out the results of a single connectivity realization or a population of realizations.
+
 
 
 .. container:: doc-feedback

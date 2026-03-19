@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ 
 
 
@@ -14,7 +13,8 @@ blender_recorder
 
    blender_recorder </api_reference/single_cell_parser/cell_modify_functions/blender_recorder/blender_recorder>
 
-.. py:module:: single_cell_parser.cell_modify_functions.blender_recorder
+.. module:: single_cell_parser.cell_modify_functions.blender_recorder
+
 
 
 
@@ -31,6 +31,8 @@ Functions
    
    * - :py:obj:`blender_recorder <single_cell_parser.cell_modify_functions.blender_recorder.blender_recorder>`\ (cell)
      - \-
+
+
 
 
 

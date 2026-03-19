@@ -6,7 +6,7 @@ _try_delete_folder_until_permission
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core._try_delete_folder_until_permission(dest_path, n_attempts=3)
+.. function:: spike_analysis.core._try_delete_folder_until_permission(dest_path, n_attempts=3)
 
 
    Try to delete a folder until permission is granted.

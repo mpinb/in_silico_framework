@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -886,6 +886,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../swc/index.html" class="md-nav__link">
+        <span title="/api_reference/single_cell_parser/swc/index.rst (reference label)" class="md-ellipsis">swc</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../synapse/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/synapse/index.rst (reference label)" class="md-ellipsis">synapse</span>
       </a>
@@ -1067,6 +1082,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1227,13 +1257,13 @@
 <dt class="sig sig-object highlight sig-wrap py" id="single_cell_parser.analyze.synanalysis.compute_syn_distance">
 <a class="reference internal" href="../../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-single_cell_parser.analyze" title="single_cell_parser.analyze (Python module)"><span class="sig-name descname"><span class="pre">analyze</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.analyze.synanalysis" title="single_cell_parser.analyze.synanalysis (Python module)"><span class="sig-name descname"><span class="pre">synanalysis</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">compute_syn_distance</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.cell" title="single_cell_parser.analyze.synanalysis.compute_syn_distance.cell (Python parameter) — cell object with attached synapses."><span class="n"><span class="pre">cell</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.syn" title="single_cell_parser.analyze.synanalysis.compute_syn_distance.syn (Python parameter) — synapse object."><span class="n"><span class="pre">syn</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.consider_gap_to_soma" title="single_cell_parser.analyze.synanalysis.compute_syn_distance.consider_gap_to_soma (Python parameter) — Account for the fact that dendrites don't actually touch the soma, and add the distance between the last point of the parent section and the first point of the current section to the distance. Default: False"><span class="n"><span class="pre">consider_gap_to_soma</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the distance from a single synapse to the soma.</p>
-<p>Used in <a class="reference internal" href="compute_syn_distances.html#single_cell_parser.analyze.synanalysis.compute_syn_distances" title="single_cell_parser.analyze.synanalysis.compute_syn_distances (Python function) — Computes distances (to soma) of all synapses on the dendrite."><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_syn_distances()</span></code></a>.</p>
+<p>Used in <a class="reference internal" href="compute_syn_distances.html#single_cell_parser.analyze.synanalysis.compute_syn_distances" title="single_cell_parser.analyze.synanalysis.compute_syn_distances (Python function) — Computes distances (to soma) of all synapses on the dendrite."><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_syn_distances()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.analyze.synanalysis.compute_syn_distance-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="single_cell_parser.analyze.synanalysis.compute_syn_distance.cell"><span class="sig-name descname">cell</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface.">single_cell_parser.cell.Cell</a></span></span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.cell" title="Permalink to this definition">¶</a></dt><dd><p>cell object with attached synapses.</p>
+<dt id="single_cell_parser.analyze.synanalysis.compute_syn_distance.cell"><span class="sig-name descname">cell</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object">single_cell_parser.cell.Cell</a></span></span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.cell" title="Permalink to this definition">¶</a></dt><dd><p>cell object with attached synapses.</p>
 </dd>
-<dt id="single_cell_parser.analyze.synanalysis.compute_syn_distance.syn"><span class="sig-name descname">syn</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../synapse/Synapse.html#single_cell_parser.synapse.Synapse" title="single_cell_parser.synapse.Synapse (Python class) — Synapse class for synaptic activations and NEURON API.">single_cell_parser.synapse.Synapse</a></span></span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.syn" title="Permalink to this definition">¶</a></dt><dd><p>synapse object.</p>
+<dt id="single_cell_parser.analyze.synanalysis.compute_syn_distance.syn"><span class="sig-name descname">syn</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../synapse/Synapse.html#single_cell_parser.synapse.Synapse" title="single_cell_parser.synapse.Synapse (Python class) — Bases: object">single_cell_parser.synapse.Synapse</a></span></span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.syn" title="Permalink to this definition">¶</a></dt><dd><p>synapse object.</p>
 </dd>
 <dt id="single_cell_parser.analyze.synanalysis.compute_syn_distance.consider_gap_to_soma"><span class="sig-name descname">consider_gap_to_soma</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#single_cell_parser.analyze.synanalysis.compute_syn_distance.consider_gap_to_soma" title="Permalink to this definition">¶</a></dt><dd><p>Account for the fact that dendrites don’t actually touch the soma, and add the
 distance between the last point of the parent section and the first point of the

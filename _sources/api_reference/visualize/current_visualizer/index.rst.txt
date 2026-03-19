@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -14,7 +13,7 @@ current_visualizer
 
    CurrentAnalysis </api_reference/visualize/current_visualizer/CurrentAnalysis>
 
-.. py:module:: visualize.current_visualizer
+.. module:: visualize.current_visualizer
 
 .. autoapi-nested-parse::
    Visulize all transmembrane ionic currents of a cell simulation.
@@ -22,7 +21,7 @@ current_visualizer
 
    This module provides a class to visualize the transmembrane ionic currents of a cell simulation.
    It assumes that these have been recorded during the simulation. If this was not the case,
-   consider re-simulating the cell and recording the currents, e.g. with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+   consider re-simulating the cell and recording the currents, e.g. with a :class:`~biophysics_fitting.simulator.Simulator`.
 
    .. rubric:: Example
       :class: example
@@ -38,7 +37,8 @@ current_visualizer
 
    .. figure:: ../../../_static/_images/current_analysis.png
 
-       Example of a current analysis plot for a :py:class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :py:class:`~biophysics_fitting.simulator.Simulator`.
+       Example of a current analysis plot for a :class:`~biophysics_fitting.hay_evaluation_python.BAC` stimulus, simulated with a :class:`~biophysics_fitting.simulator.Simulator`.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -54,6 +54,24 @@ Classes
    
    * - :py:obj:`CurrentAnalysis <visualize.current_visualizer.CurrentAnalysis>`
      - Plot the individual ion currents and the net current of a cell simulation.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`COLORMAP <visualize.current_visualizer.COLORMAP>`
+     - \-
+   * - :py:obj:`CALCIUM_ORANGE <visualize.current_visualizer.CALCIUM_ORANGE>`
+     - \-
 
 
 

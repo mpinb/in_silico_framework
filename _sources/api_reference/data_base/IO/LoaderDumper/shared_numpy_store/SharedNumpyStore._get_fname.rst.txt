@@ -1,13 +1,12 @@
 
 
+_get_fname
+==========
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore._get_fname
-===========================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname(arr, name)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname(arr, name)
 
 
    Get the filename of an array.

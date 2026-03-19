@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -18,15 +17,16 @@ analyze
    voltage_binning </api_reference/data_base/analyze/voltage_binning/index>  
    split_synapse_activation </api_reference/data_base/analyze/split_synapse_activation>
 
-.. py:module:: data_base.analyze
+.. module:: data_base.analyze
 
 .. autoapi-nested-parse::
    Analyze simrun-initialized databases.
 
    This module provides methods for binning and aggregating synapse activations, spike times, and voltage traces, as well
-   as convenience methods to analyze the results of :py:mod:`simrun.reduced_model`.
+   as convenience methods to analyze the results of :mod:`simrun.reduced_model`.
 
-   .. seealso:: :py:mod:`data_base.db_initializers.load_simrun_general` for initializing databases from :py:mod:`simrun` results.
+   .. seealso:: :mod:`data_base.db_initializers.load_simrun_general` for initializing databases from :mod:`simrun` results.
+
 
 
 
@@ -43,6 +43,21 @@ Functions
    
    * - :py:obj:`split_synapse_activation <data_base.analyze.split_synapse_activation>`\ (sa, selfcheck, excitatory, inhibitory)
      - Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.analyze.logger>`
+     - \-
 
 
 .. rst-class:: absolute-paragraph
@@ -64,6 +79,7 @@ Modules
      - Bin :ref:`spike_times_format` and :ref:`syn_activation_format` dataframes by time.
    * - :py:obj:`voltage_binning <data_base.analyze.voltage_binning>`
      - Calculate the voltage as a density array.
+
 
 
 .. container:: doc-feedback

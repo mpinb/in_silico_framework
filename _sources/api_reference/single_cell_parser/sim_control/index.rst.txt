@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -14,13 +13,14 @@ sim_control
 
    SimControl </api_reference/single_cell_parser/sim_control/SimControl>
 
-.. py:module:: single_cell_parser.sim_control
+.. module:: single_cell_parser.sim_control
 
 .. autoapi-nested-parse::
    Run a NEURON current injection simulation.
 
-   Deprecated. Simulations are set up using the high-level interface :py:class:`~biophysics_fitting.simulator.Simulator`.
+   Deprecated. Simulations are set up using the high-level interface :class:`~biophysics_fitting.simulator.Simulator`.
    Can still be useful for low-level control with NEURON.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -36,6 +36,22 @@ Classes
    
    * - :py:obj:`SimControl <single_cell_parser.sim_control.SimControl>`
      - Control a current clamp simulation.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`fname <single_cell_parser.sim_control.fname>`
+     - \-
 
 
 

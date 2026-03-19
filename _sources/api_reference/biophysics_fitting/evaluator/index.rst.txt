@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -15,10 +14,11 @@ evaluator
    Evaluator_Setup </api_reference/biophysics_fitting/evaluator/Evaluator_Setup>
    Evaluator </api_reference/biophysics_fitting/evaluator/Evaluator>
 
-.. py:module:: biophysics_fitting.evaluator
+.. module:: biophysics_fitting.evaluator
 
 .. autoapi-nested-parse::
    Extract features from voltage traces.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -33,9 +33,11 @@ Classes
    :class: summarytable
    
    * - :py:obj:`Evaluator_Setup <biophysics_fitting.evaluator.Evaluator_Setup>`
-     - Setup for an :py:class:`~Evaluator` object
+     - Setup for an :class:`~Evaluator` object
    * - :py:obj:`Evaluator <biophysics_fitting.evaluator.Evaluator>`
      - Extract features from voltage traces.
+
+
 
 
 

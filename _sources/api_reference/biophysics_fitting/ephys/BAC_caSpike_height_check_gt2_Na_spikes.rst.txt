@@ -6,7 +6,7 @@ BAC_caSpike_height_check_gt2_Na_spikes
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes(t, v, v_dend, thresh=None)
+.. function:: biophysics_fitting.ephys.BAC_caSpike_height_check_gt2_Na_spikes(t, v, v_dend, thresh=None)
 
 
    Checks if the number of spikes in the voltage trace is greater than or equal to 2.

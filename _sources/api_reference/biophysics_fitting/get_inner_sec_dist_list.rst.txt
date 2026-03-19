@@ -6,7 +6,7 @@ get_inner_sec_dist_list
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.get_inner_sec_dist_list(cell, select=['ApicalDendrite', 'Dendrite'], connected_to_dend_beyond_distance=1000, z_offset=706)
+.. function:: biophysics_fitting.get_inner_sec_dist_list(cell, select=['ApicalDendrite', 'Dendrite'], connected_to_dend_beyond_distance=1000, z_offset=706)
 
 
    Find all sections that are connected to dendrites that reach beyond a certain distance.
@@ -21,7 +21,7 @@ get_inner_sec_dist_list
    :param z_offset: Offset for z-value. Defaults to 706 um (the average pia distance of a rat barrel cortex).
    :type z_offset: int|float, optional
 
-   :returns: Dictionary mapping the z-coordinate (float) of each section point to the section (:py:class:`~single_cell_parser.cell.PySection`) object, including only sections that pass the filter.
+   :returns: Dictionary mapping the z-coordinate (float) of each section point to the section (:class:`~single_cell_parser.cell.PySection`) object, including only sections that pass the filter.
    :rtype: dict
 
 

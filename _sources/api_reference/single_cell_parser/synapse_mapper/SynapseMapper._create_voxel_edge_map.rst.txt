@@ -1,16 +1,15 @@
 
 
+_create_voxel_edge_map
+======================
 
 
+.. Signature -------------------------------
 
-SynapseMapper._create_voxel_edge_map
-====================================
-
-
-.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._create_voxel_edge_map()
+.. function:: single_cell_parser.synapse_mapper.SynapseMapper._create_voxel_edge_map()
 
 
-   Fills dictionary :paramref:`voxelEdgeMap` with indices of voxels pts within that voxel
+   Fills dictionary :param:`voxelEdgeMap` with indices of voxels pts within that voxel
 
    The dictionary is structured as follows:
 

@@ -6,7 +6,7 @@ synchronous_ddf_concat
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None)
+.. function:: data_base.utils.synchronous_ddf_concat(ddf_path, meta, N, n, scheduler=None)
 
 
    Concatenate a pickles dask dataframe to a pandas dataframe.

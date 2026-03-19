@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-bAP.get
-=======
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.bAP.get(**voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.bAP.get(**voltage_traces)
 
 
    Get the full evaluation of the voltage traces for bAP firing.

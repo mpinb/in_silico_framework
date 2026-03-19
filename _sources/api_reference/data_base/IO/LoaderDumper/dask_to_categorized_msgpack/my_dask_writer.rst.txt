@@ -6,7 +6,7 @@ my_dask_writer
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.my_dask_writer(ddf, path, optimize_graph=False, categorize=True, client=None)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.my_dask_writer(ddf, path, optimize_graph=False, categorize=True, client=None)
 
 
    Very simple method to store a dask dataframe to a bunch of files.

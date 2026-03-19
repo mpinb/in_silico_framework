@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -16,7 +15,7 @@ robust_dask_delayed_execution
    _assert_value </api_reference/simrun/robust_dask_delayed_execution/_assert_value>
    _wrapper </api_reference/simrun/robust_dask_delayed_execution/_wrapper>
 
-.. py:module:: simrun.robust_dask_delayed_execution
+.. module:: simrun.robust_dask_delayed_execution
 
 .. autoapi-nested-parse::
    Robustly execute all :py:class:`dask.delayed` objects in a :py:class:`ManagedFolder`
@@ -26,6 +25,7 @@ robust_dask_delayed_execution
    - The delayed objects are only executed once.
    - File locking is used to ensure each delayed object is only handled by a single process
    - The status (``["not_started", "started", "finished"]``) of the delayed objects is saved during execution.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -41,6 +41,8 @@ Classes
    
    * - :py:obj:`RobustDaskDelayedExecution <simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution>`
      - Execute dask delayed objects in a robust way.
+
+
 
 
 

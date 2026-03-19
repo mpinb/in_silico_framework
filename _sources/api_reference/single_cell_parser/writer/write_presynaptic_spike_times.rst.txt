@@ -6,7 +6,7 @@ write_presynaptic_spike_times
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_presynaptic_spike_times(fname=None, cells=None)
+.. function:: single_cell_parser.writer.write_presynaptic_spike_times(fname=None, cells=None)
 
 
    Write cell type, presynaptic cell ID and spike times of all connected
@@ -17,7 +17,7 @@ write_presynaptic_spike_times
    :param cells: A dictionary with cell types as keys and lists of cells as values.
    :type cells: dict
 
-   :returns: None. Writes out the presynaptic spike times file to :paramref:`fname`.
+   :returns: None. Writes out the presynaptic spike times file to :param:`fname`.
 
    .. rubric:: Example
       :class: example

@@ -1,13 +1,12 @@
 
 
+plot
+====
 
 
+.. Signature -------------------------------
 
-DendrogramStatistics.plot
-=========================
-
-
-.. py:method:: visualize.dendrogram.DendrogramStatistics.plot(figsize=None, colormap_synapses=None)
+.. function:: visualize.dendrogram.DendrogramStatistics.plot(figsize=None, colormap_synapses=None)
 
 
    Plot the dendrogram statistics.
@@ -19,7 +18,7 @@ DendrogramStatistics.plot
    :type colormap_synapses: dict
 
    :returns: The matplotlib figure object.
-   :rtype: :py:class:`matplotlib.figure.Figure`
+   :rtype: :class:`matplotlib.figure.Figure`
 
 
 

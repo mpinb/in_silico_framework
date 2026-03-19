@@ -6,7 +6,7 @@ augment_ddf_with_PCA_space
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.augment_ddf_with_PCA_space(ddf)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.augment_ddf_with_PCA_space(ddf)
 
 
    Augment a dask dataframe with the first two principal components of the hz current space.

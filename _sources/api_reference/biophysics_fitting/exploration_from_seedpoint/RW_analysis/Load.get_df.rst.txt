@@ -1,13 +1,12 @@
 
 
+get_df
+======
 
 
+.. Signature -------------------------------
 
-Load.get_df
-===========
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_df()
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.Load.get_df()
 
 
    Get the exploration results as a pandas dataframe.

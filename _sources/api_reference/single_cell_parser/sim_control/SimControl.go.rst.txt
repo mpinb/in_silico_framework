@@ -1,13 +1,12 @@
 
 
+go
+==
 
 
+.. Signature -------------------------------
 
-SimControl.go
-=============
-
-
-.. py:method:: single_cell_parser.sim_control.SimControl.go(simTime=None)
+.. function:: single_cell_parser.sim_control.SimControl.go(simTime=None)
 
 
    Run the simulation.

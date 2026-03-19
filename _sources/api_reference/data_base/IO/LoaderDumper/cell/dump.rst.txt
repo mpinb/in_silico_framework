@@ -6,17 +6,17 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.cell.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.cell.dump(obj, savedir)
 
 
-   Dumps a :py:class:`~single_cell_parser.cell.Cell` object to a directory
+   Dumps a :class:`~single_cell_parser.cell.Cell` object to a directory
 
    :param obj: Object to be saved
    :type obj: ~single_cell_parser.cell.Cell
    :param savedir: Directory to save the object to
    :type savedir: str
 
-   .. seealso:: :py:meth:`~single_cell_parser.serialize_cell.save_cell_to_file`
+   .. seealso:: :func:`~single_cell_parser.serialize_cell.save_cell_to_file`
 
 
 

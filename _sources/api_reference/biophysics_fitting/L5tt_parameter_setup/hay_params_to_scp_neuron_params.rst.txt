@@ -6,7 +6,7 @@ hay_params_to_scp_neuron_params
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.hay_params_to_scp_neuron_params(params)
+.. function:: biophysics_fitting.L5tt_parameter_setup.hay_params_to_scp_neuron_params(params)
 
 
    Convert a list of Hay parameter names to a list of SCP neuron parameter names.

@@ -1,13 +1,12 @@
 
 
+_compute_current_arrays
+=======================
 
 
+.. Signature -------------------------------
 
-CurrentAnalysis._compute_current_arrays
-=======================================
-
-
-.. py:method:: visualize.current_visualizer.CurrentAnalysis._compute_current_arrays()
+.. function:: visualize.current_visualizer.CurrentAnalysis._compute_current_arrays()
 
 
    Compute the ionic currents of a section.

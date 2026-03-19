@@ -6,7 +6,7 @@ split_network_param_in_one_elem_dicts
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.split_network_param_in_one_elem_dicts(dict_)
+.. function:: simrun.utils.split_network_param_in_one_elem_dicts(dict_)
 
 
    Split a network parameter dictionary into a list of dictionaries.
@@ -14,8 +14,8 @@ split_network_param_in_one_elem_dicts
    This method is used to split a network parameter dictionary into a list of dictionaries, each containing only one element
    for each key in the original dictionary.
 
-   :param dict_: The network parameter dictionary.
-   :type dict_: ~single_cell_parser.parameters.NTParameterSet
+   :param dict\_: The network parameter dictionary.
+   :type dict\_: ~single_cell_parser.parameters.NTParameterSet
 
    :returns: A list of dictionaries, each containing only one element of the original dictionary.
    :rtype: list

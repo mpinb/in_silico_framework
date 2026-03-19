@@ -1,13 +1,12 @@
 
 
+TTFS
+====
 
 
+.. Signature -------------------------------
 
-_Step.TTFS
-==========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.TTFS(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.TTFS(voltage_traces)
 
 
    Get the time to first spike in the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.TTFS
                  and ``".raw"`` to the time to first spike in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_time_to_first_spike`
+   .. seealso:: :func:`~biophysics_fitting.ephys.STEP_time_to_first_spike`
 
 
 

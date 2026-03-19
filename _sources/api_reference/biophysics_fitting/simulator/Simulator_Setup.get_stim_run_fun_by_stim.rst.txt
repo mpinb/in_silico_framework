@@ -1,20 +1,19 @@
 
 
+get_stim_run_fun_by_stim
+========================
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get_stim_run_fun_by_stim
-========================================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stim_run_fun_by_stim(stim)
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get_stim_run_fun_by_stim(stim)
 
 
    Get the stimulus run function by stimulus name.
 
    Stimulus run functions are functions that run the simulation.
    They are saved under the name ``stimulus_name.run``, and accessible
-   under :paramref:`stim_run_funs`.
+   under :param:`stim_run_funs`.
 
    :param stim: The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
    :type stim: str

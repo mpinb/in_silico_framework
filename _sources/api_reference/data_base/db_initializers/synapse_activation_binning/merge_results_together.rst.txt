@@ -6,7 +6,7 @@ merge_results_together
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.merge_results_together(dicts)
+.. function:: data_base.db_initializers.synapse_activation_binning.merge_results_together(dicts)
 
 
    Aggregate many dictionaries with the same keys.

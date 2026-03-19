@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-_Step.get
-=========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.get(**voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.get(**voltage_traces)
 
 
    Get the full evaluation of the voltage traces for the step current injection.

@@ -6,7 +6,7 @@ get_max_commas
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.file_handling.get_max_commas(paths)
+.. function:: data_base.db_initializers.load_simrun_general.file_handling.get_max_commas(paths)
 
 
    Get the maximum amount of delimiters across many files.

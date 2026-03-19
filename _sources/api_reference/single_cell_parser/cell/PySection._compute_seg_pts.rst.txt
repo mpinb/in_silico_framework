@@ -1,13 +1,12 @@
 
 
+_compute_seg_pts
+================
 
 
+.. Signature -------------------------------
 
-PySection._compute_seg_pts
-==========================
-
-
-.. py:method:: single_cell_parser.cell.PySection._compute_seg_pts()
+.. function:: single_cell_parser.cell.PySection._compute_seg_pts()
 
 
    Computes the 3D center points of each segment in this section.

@@ -6,7 +6,7 @@ pool_helper
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.pool_helper(callable_partial)
+.. function:: biophysics_fitting.utils.pool_helper(callable_partial)
 
 
    Unserialize a function and its arguments, run it, and serialize the output.

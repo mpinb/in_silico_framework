@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.reduced_lda_model.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.reduced_lda_model.dump(obj, savedir)
 
 
    Save the reduced model in the specified directory as a DataBase.

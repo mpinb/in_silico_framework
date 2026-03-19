@@ -1,16 +1,15 @@
 
 
+_compute_path_length
+====================
 
 
+.. Signature -------------------------------
 
-SynapseMapper._compute_path_length
-==================================
-
-
-.. py:method:: single_cell_parser.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
+.. function:: single_cell_parser.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
 
 
-   Compute the path length to soma from location :paramref:`x` on section :paramref:`sec`
+   Compute the path length to soma from location :param:`x` on section :param:`sec`
 
    :param sec: The section to compute the path length on.
    :type sec: ~single_cell_parser.section.Section

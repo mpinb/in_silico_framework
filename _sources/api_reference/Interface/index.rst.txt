@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~Interface` ❭ 
 
 
@@ -16,7 +15,7 @@ Interface
    print_module_versions </api_reference/Interface/print_module_versions>
    get_client </api_reference/Interface/get_client>
 
-.. py:module:: Interface
+.. module:: Interface
 
 .. autoapi-nested-parse::
    Interface provides top-level API access to the In Silico Framework (ISF).
@@ -39,6 +38,7 @@ Interface
 
 
 
+
 .. rst-class:: absolute-paragraph
 
 Functions
@@ -54,6 +54,30 @@ Functions
      - Print the version of each module in ISF.
    * - :py:obj:`get_client <Interface.get_client>`\ (ip, client\_port, timeout)
      - Gets the distributed.client object if dask has been setup
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`versions <Interface.versions>`
+     - \-
+   * - :py:obj:`load_param_files_from_db <Interface.load_param_files_from_db>`
+     - \-
+   * - :py:obj:`load_initialized_cell_and_evokedNW_from_db <Interface.load_initialized_cell_and_evokedNW_from_db>`
+     - \-
+   * - :py:obj:`synapse_activation_binning_dask <Interface.synapse_activation_binning_dask>`
+     - \-
+   * - :py:obj:`defaultdict_defaultdict <Interface.defaultdict_defaultdict>`
+     - \-
+
 
 
 

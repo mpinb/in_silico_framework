@@ -1,0 +1,26 @@
+
+
+update_cmap
+===========
+
+
+.. Signature -------------------------------
+
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser.update_cmap(keyword)
+
+
+   Update the currently used cmap based on a keyword
+
+   This function is useful when the user wants to visualize different scalar data types
+   Each consecutive plot will then need a different cmap with different vmin and vmax.
+
+   :param keyword: keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+   :type keyword: str
+
+   :returns: None. Updates the class level cmap to reflect the correct scalar data.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

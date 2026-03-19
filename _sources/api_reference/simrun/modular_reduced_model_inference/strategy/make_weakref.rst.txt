@@ -6,7 +6,7 @@ make_weakref
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.modular_reduced_model_inference.strategy.make_weakref(obj)
+.. function:: simrun.modular_reduced_model_inference.strategy.make_weakref(obj)
 
 
    Create a weak reference of a Python object.

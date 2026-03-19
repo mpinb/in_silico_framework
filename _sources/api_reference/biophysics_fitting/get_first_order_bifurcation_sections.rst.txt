@@ -6,7 +6,7 @@ get_first_order_bifurcation_sections
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.get_first_order_bifurcation_sections(cell)
+.. function:: biophysics_fitting.get_first_order_bifurcation_sections(cell)
 
 
    Find all sections that are both inner sections, and are of branching order 1.
@@ -14,7 +14,7 @@ get_first_order_bifurcation_sections
    :param cell: The Cell object for which to find the main bifurcation section.
    :type cell: ~single_cell_parser.cell.Cell
 
-   :returns: A list of :py:class:`~single_cell_parser.cell.PySection` sections that are both inner sections, and are of branching order 1.
+   :returns: A list of :class:`~single_cell_parser.cell.PySection` sections that are both inner sections, and are of branching order 1.
    :rtype: list
 
 

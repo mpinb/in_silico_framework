@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.check(obj)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.check(obj)
 
 
    checks wherther obj can be saved with this dumper

@@ -6,7 +6,7 @@ set_ephys
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_ephys(cell_param, params=None)
+.. function:: biophysics_fitting.L5tt_parameter_setup.set_ephys(cell_param, params=None)
 
 
    Updates cell_param file.
@@ -23,7 +23,7 @@ set_ephys
    :raises AssertionError: If some parameters are not set after the update.
 
    :returns: The updated cell_param, with the biphysical parameters set.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
 
    .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 

@@ -1,13 +1,12 @@
 
 
+create_managed_folder
+=====================
 
 
+.. Signature -------------------------------
 
-ISFDataBase.create_managed_folder
-=================================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.create_managed_folder(key, raise_=True)
+.. function:: data_base.isf_data_base.ISFDataBase.create_managed_folder(key, raise_=True)
 
 
    Create a folder in the db directory.
@@ -16,11 +15,11 @@ ISFDataBase.create_managed_folder
 
    :param key: The key of the folder to create.
    :type key: str|tuple|pathlib.Path
-   :param raise_: Whether to raise an error if the folder already exists. Defaults to True.
-   :type raise_: bool, optional
+   :param raise\_: Whether to raise an error if the folder already exists. Defaults to True.
+   :type raise\_: bool, optional
 
    :returns: The created folder.
-   :rtype: :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
+   :rtype: :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder`
 
 
 

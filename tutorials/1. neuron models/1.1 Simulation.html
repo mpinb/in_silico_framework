@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
@@ -793,7 +793,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 </div>
 <h2 id="Equipping-a-morphology-with-biophysical-parameters">Equipping a morphology with biophysical parameters<a class="headerlink" href="#Equipping-a-morphology-with-biophysical-parameters" title="Link to this heading">¶</a></h2>
 <p>This section will introduce a format for biophysical parameters, and how to apply them to a cell morphology using the <a class="reference internal" href="../../api_reference/single_cell_parser/index.html"><span class="doc">single_cell_parser</span></a> package. We will use the layer 5 Pyramidal Tract neuron as an example application.</p>
-<p>Which format do these parameters need to have?</p>
+<p>Which format do these neuron parameters have?</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[3]:
 </code></pre></div>
@@ -946,8 +946,10 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 <li><p>recording site locations</p></li>
 <li><p>passive properties (capacitance, input resistance, and reversal potentials)</p></li>
 <li><p>a morphology file</p></li>
+<li><p>cell modify functions</p></li>
 </ul>
-<p>Using these parameters, we can create a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object, containing all the information on morphology and simulation data in a Python wrapper. For our usecase, we need to pass an additional argument to scale the apical dendrite of the L5PT with. Why this is necessary is outlined <a class="reference internal" href="../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.html"><span class="doc">here</span></a></p>
+<p>For our neuron, we need to pass a function to scale the apical dendrite of the L5PT. this is visible in the key <code class="docutils literal notranslate"><span class="pre">cell_modify_functions</span></code>. Why this is necessary is outlined <a class="reference external" href="../auxiliary%20notebooks/A.1%20Morphology%20Reconstruction.ipynb">here</a></p>
+<p>Using these parameters, we can create a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object, containing all the information on morphology and simulation data.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[4]:
 </code></pre></div>
@@ -1036,7 +1038,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 [INFO] scale_apical_morph_86: Scaled 33 apical sections...
 </pre></div></div>
 </div>
-<p>We now have a biophysically detailed <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object. Let’s start by figuring out some general morphological properties of the example cell</p>
+<p>We now have a biophysically detailed <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object. Let’s start by figuring out some general morphological properties of our neuron.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[5]:
 </code></pre></div>
@@ -1087,10 +1089,11 @@ apical dendrite area = 16855 micron^2
 </div>
 </div>
 <h2 id="The-ISF-Simulator">The ISF <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a><a class="headerlink" href="#The-ISF-Simulator" title="Link to this heading">¶</a></h2>
-<p>This <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object can be simulated using NEURON’s Python API, as outlined in <a class="reference internal" href="../auxiliary%20notebooks/A.2%20Neuron%20API.html"><span class="doc">this auxiliary tutorial</span></a>. However, ISF provides convenient wrappers for simulating fixed stimuli.</p>
+<p>This <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> object can be directly simulated using NEURON’s Python API, as outlined in <a class="reference external" href="../auxiliary%20notebooks/A.2%20Neuron%20API.ipynb">this auxiliary tutorial</a>. However, ISF provides convenient wrappers for simulating fixed stimuli that makes this process more convenient.</p>
 <p>This Section will provide a walkthrough on how to interact with the biophysical properties of a <a class="reference internal" href="../../api_reference/single_cell_parser/cell/index.html"><span class="doc">Cell</span></a> using the <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object, rather than directly interacting with the NEURON hoc interface. This object can be configured once per cell, and re-used for various simulation protocols. It operates on biophysical parameters of the <code class="docutils literal notranslate"><span class="pre">pandas.dataFrame</span></code> type.</p>
 <p>We will load in an existing configuration to showcase the syntax. More information on how this <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> object can be configures is given in <a class="reference internal" href="1.3%20Generation.html"><span class="doc">Tutorial 1.3: Generation</span></a>.</p>
 <h3 id="Biophysical-parameters">Biophysical parameters<a class="headerlink" href="#Biophysical-parameters" title="Link to this heading">¶</a></h3>
+<p>Rather than using the <a class="reference external" href="https://mpinb.github.io/in_silico_framework/file_formats.html#cell-parameters">cell parameters</a> as described above directly, we will instead use vectors, here in the form of pandas Series. The <a class="reference internal" href="../../api_reference/biophysics_fitting/simulator/index.html"><span class="doc">Simulator</span></a> handles the rest.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[8]:
 </code></pre></div>
@@ -1166,7 +1169,7 @@ scale_apical.scale                       1.69117
 Name: 0, dtype: object
 </pre></div></div>
 </div>
-<p>Apart from the passive properties, we have 35 biophysical parameters, relating to varying biophysical aspects for the soma, axon (AIS), apical dendrite, and other dendrites (taken to be passive for current injection experiments).</p>
+<p>We have 35 biophysical parameters, relating to varying biophysical aspects for the soma, axon (AIS), apical dendrite, and other dendrites (taken to be passive for current injection experiments).</p>
 <table class="docutils data align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -1192,7 +1195,7 @@ Name: 0, dtype: object
 <td><p>[<span class="math notranslate nohighlight">\(ms\)</span>]</p></td>
 </tr>
 <tr class="row-even"><td><p>ephys.SKv3_1.apic.offset/slope</p></td>
-<td><p>Distribution parameters of <span class="math notranslate nohighlight">\(SKv3.1\)</span> channels</p></td>
+<td><p>Distribution parameters of <span class="math notranslate nohighlight">\(SK_V3.1\)</span> channels</p></td>
 <td><p>[<span class="math notranslate nohighlight">\(\mu m\)</span>]/None</p></td>
 </tr>
 </tbody>
@@ -1281,7 +1284,7 @@ morphologies, simulations etc. The setup below will highlight which parts are sp
 </code></pre></div>
 </div>
 </div>
-<p>We now have a Simulator object with morphology-specific <code class="docutils literal notranslate"><span class="pre">fixed_params</span></code>.</p>
+<p>After this setup, we now have a Simulator object with morphology-specific <code class="docutils literal notranslate"><span class="pre">fixed_params</span></code>. This was most of the work. Actually simulating is easy now.</p>
 <p>For a Simulator object <code class="docutils literal notranslate"><span class="pre">s</span></code>, the main functions are:</p>
 <table class="docutils data align-default">
 <thead>

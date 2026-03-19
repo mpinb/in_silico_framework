@@ -1,13 +1,12 @@
 
 
+get_file
+========
 
 
+.. Signature -------------------------------
 
-ManagedFolder.get_file
-======================
-
-
-.. py:method:: data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.get_file(suffix)
+.. function:: data_base.IO.LoaderDumper.just_create_folder.ManagedFolder.get_file(suffix)
 
 
    Get the files that end with the specified suffix.
@@ -17,7 +16,7 @@ ManagedFolder.get_file
 
    :raises ValueError: If there are no files with the specified suffix or more than one file with the specified suffix
 
-   :returns: The filepath of the file with :paramref:`suffix` (only if there is exactly one file with this suffix)
+   :returns: The filepath of the file with :param:`suffix` (only if there is exactly one file with this suffix)
    :rtype: str
 
 

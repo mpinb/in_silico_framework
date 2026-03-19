@@ -6,7 +6,7 @@ write_synapse_weight_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_synapse_weight_file(fname=None, cell=None)
+.. function:: single_cell_parser.writer.write_synapse_weight_file(fname=None, cell=None)
 
 
    Write out a synapse weight file.
@@ -25,7 +25,7 @@ write_synapse_weight_file
    :param cell: The cell object, containing synapses.
    :type cell: single_cell_parser.cell.Cell
 
-   :returns: None. Writes out the synapse weight file to :paramref:`fname`.
+   :returns: None. Writes out the synapse weight file to :param:`fname`.
 
 
 

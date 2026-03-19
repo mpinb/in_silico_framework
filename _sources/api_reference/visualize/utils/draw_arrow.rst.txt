@@ -6,12 +6,12 @@ draw_arrow
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.draw_arrow(morphology, ax, highlight_section=None, highlight_x=None, highlight_arrow_kwargs=None, arrow_size=50)
+.. function:: visualize.utils.draw_arrow(morphology, ax, highlight_section=None, highlight_x=None, highlight_arrow_kwargs=None, arrow_size=50)
 
 
-   Highlight a morphology section with an :py:class:`Arrow3D`.
+   Highlight a morphology section with an :class:`Arrow3D`.
 
-   This method is used by :py:class:`CellMorphologyVisualizer` to annotate morphology sections.
+   This method is used by :class:`CellMorphologyVisualizer` to annotate morphology sections.
 
    :param morphology: The morphology dataframe containing the coordinates of the sections.
    :type morphology: pd.DataFrame
@@ -21,7 +21,7 @@ draw_arrow
    :type highlight_section: int, optional
    :param highlight_x: The x-coordinate within the section to place the arrow. If None, the arrow is placed at the section's midpoint. Default is ``None``.
    :type highlight_x: float, optional
-   :param highlight_arrow_kwargs: Additional keyword arguments to pass to the :py:class:`Arrow3D` constructor. Default is ``None``.
+   :param highlight_arrow_kwargs: Additional keyword arguments to pass to the :class:`Arrow3D` constructor. Default is ``None``.
    :type highlight_arrow_kwargs: dict, optional
    :param arrow_size: The size of the arrow. Default is 50.
    :type arrow_size: int, optional

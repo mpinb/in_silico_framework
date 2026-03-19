@@ -1,13 +1,12 @@
 
 
+_keyword_is_scalar_data
+=======================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._keyword_is_scalar_data
-=====================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._keyword_is_scalar_data(keyword)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._keyword_is_scalar_data(keyword)
 
 
    Check if a keyword is a scalar data type.

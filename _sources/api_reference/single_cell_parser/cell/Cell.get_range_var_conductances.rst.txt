@@ -1,13 +1,12 @@
 
 
+get_range_var_conductances
+==========================
 
 
+.. Signature -------------------------------
 
-Cell.get_range_var_conductances
-===============================
-
-
-.. py:method:: single_cell_parser.cell.Cell.get_range_var_conductances(density=True)
+.. function:: single_cell_parser.cell.Cell.get_range_var_conductances(density=True)
 
 
    Get the conductances of each section, categorized by range variable and segment.

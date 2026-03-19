@@ -1,13 +1,12 @@
 
 
+get_voltage_and_timing
+======================
 
 
+.. Signature -------------------------------
 
-PSPs.get_voltage_and_timing
-===========================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing(method='dynamic_baseline', merged=False, merge_celltype_kwargs=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_voltage_and_timing(method='dynamic_baseline', merged=False, merge_celltype_kwargs=None)
 
 
    Calculate a PSP's maximum voltage deflection and timing thereof.

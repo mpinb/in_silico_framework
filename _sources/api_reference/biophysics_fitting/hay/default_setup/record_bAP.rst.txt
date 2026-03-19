@@ -6,7 +6,7 @@ record_bAP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.record_bAP(cell, recSite1=None, recSite2=None)
+.. function:: biophysics_fitting.hay.default_setup.record_bAP(cell, recSite1=None, recSite2=None)
 
 
    Extract the voltage traces from the soma and two apical dendritic locations.

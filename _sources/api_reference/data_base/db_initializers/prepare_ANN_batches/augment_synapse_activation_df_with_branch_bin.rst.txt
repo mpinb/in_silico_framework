@@ -6,7 +6,7 @@ augment_synapse_activation_df_with_branch_bin
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin(sa_, section_distances_df=None, synaptic_weight_dict=None, excitatory_celltypes=None)
+.. function:: data_base.db_initializers.prepare_ANN_batches.augment_synapse_activation_df_with_branch_bin(sa_, section_distances_df=None, synaptic_weight_dict=None, excitatory_celltypes=None)
 
 
    Augment a :ref:`syn_activation_format` dataframe with bin information.
@@ -15,8 +15,8 @@ augment_synapse_activation_df_with_branch_bin
    This method infers to which bin that location belongs and adds it as an additional column.
    This information is represented in a specific format: section_id/bin_within_section.
 
-   :param sa_: The dataframe of synaptic activity
-   :type sa_: pd.DataFrame
+   :param sa\_: The dataframe of synaptic activity
+   :type sa\_: pd.DataFrame
    :param section_distances_df: DataFrame representing each section's spatial bins and binsizes. Defaults to None.
    :type section_distances_df: pd.DataFrame
    :param synaptic_weight_dict: A dictionary mapping the synapse type to a weight.

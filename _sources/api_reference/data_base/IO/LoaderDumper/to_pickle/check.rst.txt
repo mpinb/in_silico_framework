@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.to_pickle.check(obj)
+.. function:: data_base.IO.LoaderDumper.to_pickle.check(obj)
 
 
    Check whether the object can be saved with this dumper

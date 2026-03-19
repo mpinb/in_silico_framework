@@ -6,7 +6,7 @@ get_summary_statistics
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.get_summary_statistics(self, method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
+.. function:: simrun.synaptic_strength_fitting.get_summary_statistics(self, method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
 
 
    Calculate summary statistics of the EPSPs.

@@ -1,20 +1,19 @@
 
 
+set_split
+=========
 
 
+.. Signature -------------------------------
 
-_Strategy.set_split
-===================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.set_split(split, setup=True)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy.set_split(split, setup=True)
 
 
    Set the split for this strategy.
 
    Scoring is usually performed on multiple splits of the data.
    This method assigns one such split to the strategy, so that
-   all consequent calls to :py:meth:`get_score` and :py:meth:`get_y` will use this split.
+   all consequent calls to :func:`get_score` and :func:`get_y` will use this split.
 
    :param split: An array of indices to use for the split.
    :type split: array

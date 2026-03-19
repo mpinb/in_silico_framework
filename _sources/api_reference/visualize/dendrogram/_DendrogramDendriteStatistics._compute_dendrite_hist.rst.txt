@@ -1,13 +1,12 @@
 
 
+_compute_dendrite_hist
+======================
 
 
+.. Signature -------------------------------
 
-_DendrogramDendriteStatistics._compute_dendrite_hist
-====================================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist(dist_end=None, binsize=50)
+.. function:: visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist(dist_end=None, binsize=50)
 
 
    Compute the dendrite density histogram.
@@ -17,7 +16,7 @@ _DendrogramDendriteStatistics._compute_dendrite_hist
    :param binsize: The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
    :type binsize: float
 
-   :returns: Nothing. Updates :paramref:`bins` and :paramref:`dendrite_density`.
+   :returns: Nothing. Updates :param:`bins` and :param:`dendrite_density`.
    :rtype: None
 
 

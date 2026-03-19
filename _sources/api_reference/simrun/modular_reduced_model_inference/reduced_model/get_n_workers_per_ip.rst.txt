@@ -6,12 +6,12 @@ get_n_workers_per_ip
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip(workers, n)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip(workers, n)
 
 
    Convenience method to get a certain amount of workers per machine
 
-   Groups all workers by their IP, fetches :paramref:`n` workers per IP,
+   Groups all workers by their IP, fetches :param:`n` workers per IP,
    and returns them as a list.
 
    :param workers: List or array of dask workers.
@@ -19,7 +19,7 @@ get_n_workers_per_ip
    :param n: Amount fo workers to fetch per machine.
    :type n: int
 
-   :returns: List of :paramref:`n`*``n_machines`` workers.
+   :returns: List of :param:`n`*``n_machines`` workers.
    :rtype: List[dask.distributed.worker.Worker]
 
 

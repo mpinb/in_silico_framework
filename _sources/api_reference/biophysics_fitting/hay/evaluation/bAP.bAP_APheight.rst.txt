@@ -1,13 +1,12 @@
 
 
+bAP_APheight
+============
 
 
+.. Signature -------------------------------
 
-bAP.bAP_APheight
-================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_APheight(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.bAP.bAP_APheight(voltage_traces)
 
 
    Get the height of the first action potential in the somatic voltage trace.
@@ -19,7 +18,7 @@ bAP.bAP_APheight
              and ``".raw"`` to the height of the first action potential in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.APheight`
+   .. seealso:: :func:`~biophysics_fitting.ephys.APheight`
 
 
 

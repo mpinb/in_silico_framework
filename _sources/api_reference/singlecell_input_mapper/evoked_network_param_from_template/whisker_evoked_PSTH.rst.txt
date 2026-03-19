@@ -6,16 +6,16 @@ whisker_evoked_PSTH
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH(column, deflectedWhisker, cellType)
+.. function:: singlecell_input_mapper.evoked_network_param_from_template.whisker_evoked_PSTH(column, deflectedWhisker, cellType)
 
 
-   Fetch the PSTHs of each celltype in a barrel cortex :paramref:`column` for evoked activity reflecting
+   Fetch the PSTHs of each celltype in a barrel cortex :param:`column` for evoked activity reflecting
    a passive whisker touch scenario.
    This method does not generate such data, but reads it in from existing files containing such empirical measurements,
    and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.
 
    The data linked in this runfile are for experiments where the C2 whisker was deflected.
-   For situations where other :paramref:`deflectedwhisker` are requested, activity data of equivalent
+   For situations where other :param:`deflectedwhisker` are requested, activity data of equivalent
    columns relative to the C2 is requested.
 
    .. rubric:: Example

@@ -19,14 +19,13 @@ MetadataAccessor
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.isf_data_base.MetadataAccessor(db)
+.. class:: data_base.isf_data_base.MetadataAccessor(db)
    
    Access the metadata of some database key.
 
-   Used by :py:class:`~data_base.isf_data_base.ISFDataBase` to conveniently acces metadata as such::
+   Used by :class:`~data_base.isf_data_base.ISFDataBase` to conveniently acces metadata as such::
 
        >>> db = ISFDataBase('path')
        >>> db.metadata
@@ -42,7 +41,7 @@ MetadataAccessor
        }
 
    It does not have a set method, as the metadata is set automatically when a key is set.
-   Upon accidental metadata removal, the DataBase will try to estimate the metadata itself using :py:meth:`~data_base.isf_data_base.ISFDataBase._update_metadata_if_necessary`.
+   Upon accidental metadata removal, the DataBase will try to estimate the metadata itself using :func:`~data_base.isf_data_base.ISFDataBase._update_metadata_if_necessary`.
 
    :param db: The database to access the metadata of.
    :type db: ~data_base.isf_data_base.isf_data_base.ISFDataBase
@@ -56,7 +55,7 @@ MetadataAccessor
       :class: summarytable
       
       * - :py:obj:`keys <data_base.isf_data_base.MetadataAccessor.keys>`\ ()
-        - Return the keys of the :paramref:`db`
+        - Return the keys of the Database
 
 
 .. container:: doc-feedback

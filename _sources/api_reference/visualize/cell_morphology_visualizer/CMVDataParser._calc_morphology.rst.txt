@@ -1,13 +1,12 @@
 
 
+_calc_morphology
+================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._calc_morphology
-==============================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology(cell)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._calc_morphology(cell)
 
 
    Retrieve cell morphology from cell object.

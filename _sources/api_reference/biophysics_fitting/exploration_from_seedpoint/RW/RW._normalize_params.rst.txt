@@ -1,13 +1,12 @@
 
 
+_normalize_params
+=================
 
 
+.. Signature -------------------------------
 
-RW._normalize_params
-====================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_params(p)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._normalize_params(p)
 
 
    Normalize parameters to be between 0 and 1.

@@ -6,7 +6,7 @@ update_config
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock.update_config(c)
+.. function:: data_base.distributed_lock.update_config(c)
 
 
    Update the global configuration variables with the provided configuration.

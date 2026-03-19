@@ -1,0 +1,21 @@
+
+
+filter
+======
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging.LastPartFilter.filter(record)
+
+
+   Determine if the specified record is to be logged.
+
+   Returns True if the record should be logged, or False otherwise.
+   If deemed appropriate, the record may be modified in-place.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

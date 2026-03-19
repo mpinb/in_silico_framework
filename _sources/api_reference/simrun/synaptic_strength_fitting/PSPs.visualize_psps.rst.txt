@@ -1,13 +1,12 @@
 
 
+visualize_psps
+==============
 
 
+.. Signature -------------------------------
 
-PSPs.visualize_psps
-===================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.visualize_psps(g=1.0, method='dynamic_baseline', merge_celltype_kwargs={}, fig=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.visualize_psps(g=1.0, method='dynamic_baseline', merge_celltype_kwargs={}, fig=None)
 
 
    Plot a histogram of the EPSP max voltage deflections for each celltype.

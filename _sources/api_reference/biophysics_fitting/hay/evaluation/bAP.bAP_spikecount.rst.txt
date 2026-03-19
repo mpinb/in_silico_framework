@@ -1,13 +1,12 @@
 
 
+bAP_spikecount
+==============
 
 
+.. Signature -------------------------------
 
-bAP.bAP_spikecount
-==================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_spikecount(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.bAP.bAP_spikecount(voltage_traces)
 
 
    Get the number of spikes in the somatic voltage trace.
@@ -18,7 +17,7 @@ bAP.bAP_spikecount
    :returns: Dictionary mapping ``".raw"`` to the number of spikes in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.spike_count`
+   .. seealso:: :func:`~biophysics_fitting.ephys.spike_count`
 
 
 

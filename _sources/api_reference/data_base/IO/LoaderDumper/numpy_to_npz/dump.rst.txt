@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.numpy_to_npz.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_npz.dump(obj, savedir)
 
 
    Write an object to a ``.npz`` file.

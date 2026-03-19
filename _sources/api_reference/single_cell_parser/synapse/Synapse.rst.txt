@@ -21,28 +21,29 @@ Synapse
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.synapse.Synapse(edgeID, edgePtID, edgex=None, preCellType='', postCellType='')
+.. class:: single_cell_parser.synapse.Synapse(edgeID, edgePtID, edgex=None, preCellType='', postCellType='')
+
+   Bases: :py:obj:`object`
    
    Synapse class for synaptic activations and NEURON API.
 
-   Used in :py:class:`single_cell_parser.cell.Cell` to store synapse information,
+   Used in :class:`single_cell_parser.cell.Cell` to store synapse information,
    and to activate/deactivate synapses in NEURON.
 
    .. seealso::
 
-      This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
+      This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`.
       This class is specialized for the NEURON simulator, and is used to store synapse information and activate/deactivate synapses in NEURON.
 
    :param edgeID: ID of attached section in cell.sections
    :type edgeID: int
    :param edgePtID: ID of attached point in cell.sections[edgeID].pts
    :type edgePtID: int
-   :param preCellType: reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param preCellType: reference to presynaptic :class:`~single_cell_parser.cell.PointCell`
    :type preCellType: str
-   :param postCellType: reference to postsynaptic :py:class:`~single_cell_parser.cell.PointCell`
+   :param postCellType: reference to postsynaptic :class:`~single_cell_parser.cell.PointCell`
    :type postCellType: str
 
    :Attributes:
@@ -67,21 +68,21 @@ Synapse
 
       .. attribute:: preCellType
 
-         Type of the presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+         Type of the presynaptic :class:`~single_cell_parser.cell.PointCell`
 
          :type: str
 
       .. attribute:: preCell
 
-         Reference to presynaptic :py:class:`~single_cell_parser.cell.PointCell`
+         Reference to presynaptic :class:`~single_cell_parser.cell.PointCell`
 
-         :type: :py:class:`~single_cell_parser.cell.PointCell`
+         :type: :class:`~single_cell_parser.cell.PointCell`
 
       .. attribute:: releaseSite
 
          Release site of presynaptic cell.
 
-         :type: :py:class:`~single_cell_parser.cell.PointCell`
+         :type: :class:`~single_cell_parser.cell.PointCell`
 
       .. attribute:: postCellType
 
@@ -99,7 +100,7 @@ Synapse
 
          Stores hoc mechanisms
 
-         :type: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+         :type: :class:`~single_cell_parser.parameters.NTParameterSet`
 
       .. attribute:: netcons
 

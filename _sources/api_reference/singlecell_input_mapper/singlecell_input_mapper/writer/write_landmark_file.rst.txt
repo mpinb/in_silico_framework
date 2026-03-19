@@ -6,7 +6,7 @@ write_landmark_file
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_landmark_file(fname=None, landmarkList=None)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_landmark_file(fname=None, landmarkList=None)
 
 
    Write Amira landmark file

@@ -1,13 +1,12 @@
 
 
+apply_extractor
+===============
 
 
+.. Signature -------------------------------
 
-SpikeTimesAnalysis.apply_extractor
-==================================
-
-
-.. py:method:: spike_analysis.core.SpikeTimesAnalysis.apply_extractor(sta_plugin, name=None)
+.. function:: spike_analysis.core.SpikeTimesAnalysis.apply_extractor(sta_plugin, name=None)
 
 
    Applies an event analysis routine.

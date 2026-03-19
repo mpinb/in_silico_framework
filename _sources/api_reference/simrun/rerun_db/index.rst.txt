@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -15,23 +14,24 @@ rerun_db
    Opaque </api_reference/simrun/rerun_db/Opaque>
    rerun_db </api_reference/simrun/rerun_db/rerun_db>
 
-.. py:module:: simrun.rerun_db
+.. module:: simrun.rerun_db
 
 .. autoapi-nested-parse::
    Recreate and resimulate network-embedded neuron simulation from a simrun-initialized database.
 
    This module provides a function to resimulate a network-embedded neuron simulation from a simrun-initialized database.
    It allows to modify either the cell or the network with modification functions.
-   The database is expected to have been initialized with :py:mod:`data_base.db_initializers.load_simrun_general`.
-   The function :py:func:`rerun_db` takes a database and a directory as input and resimulates the network-embedded neuron simulation for each simulation trial in the database.
+   The database is expected to have been initialized with :mod:`data_base.db_initializers.load_simrun_general`.
+   The function :func:`rerun_db` takes a database and a directory as input and resimulates the network-embedded neuron simulation for each simulation trial in the database.
    The results are stored in the specified directory.
 
-   .. seealso:: :py:mod:`~data_base.db_initializers.load_simrun_general` for initializing a database from raw :py:mod:`simrun` output.
+   .. seealso:: :mod:`~data_base.db_initializers.load_simrun_general` for initializing a database from raw :mod:`simrun` output.
 
    .. seealso::
 
-      :py:mod:`~single_cell_parser.cell_modify_functions` and :py:mod:`~single_cell_parser.network_modify_functions`
+      :mod:`~single_cell_parser.cell_modify_functions` and :mod:`~single_cell_parser.network_modify_functions`
       for example functions to modify the :ref:`cell_parameters_format` and :ref:`network_parameters_format`.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -62,6 +62,22 @@ Functions
    
    * - :py:obj:`rerun_db <simrun.rerun_db.rerun_db>`\ (db, outdir, tStop, neuron\_param\_modify\_functions, network\_param\_modify\_functions, synapse\_activation\_modify\_functions, stis, silent, additional\_network\_params, child\_process)
      - Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <simrun.rerun_db.logger>`
+     - \-
+
 
 
 

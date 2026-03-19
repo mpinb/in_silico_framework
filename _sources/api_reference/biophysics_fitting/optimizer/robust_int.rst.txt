@@ -6,7 +6,7 @@ robust_int
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.robust_int(x)
+.. function:: biophysics_fitting.optimizer.robust_int(x)
 
 
    Robustly convert something to an integer.

@@ -1,13 +1,12 @@
 
 
+bAP_APwidth
+===========
 
 
+.. Signature -------------------------------
 
-bAP.bAP_APwidth
-===============
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.bAP.bAP_APwidth(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.bAP.bAP_APwidth(voltage_traces)
 
 
    Get the width of the first action potential in the somatic voltage trace.
@@ -19,7 +18,7 @@ bAP.bAP_APwidth
              and ``".raw"`` to the width of the first action potential in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.APwidth`
+   .. seealso:: :func:`~biophysics_fitting.ephys.APwidth`
 
 
 

@@ -6,7 +6,7 @@ resolve_modular_db_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.resolve_modular_db_path(path)
+.. function:: data_base.dbopen.resolve_modular_db_path(path)
 
 
    Resolve the path of a database.

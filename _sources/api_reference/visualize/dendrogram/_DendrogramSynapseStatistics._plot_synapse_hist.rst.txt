@@ -1,16 +1,15 @@
 
 
+_plot_synapse_hist
+==================
 
 
+.. Signature -------------------------------
 
-_DendrogramSynapseStatistics._plot_synapse_hist
-===============================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist(ax, dendrite_density)
+.. function:: visualize.dendrogram._DendrogramSynapseStatistics._plot_synapse_hist(ax, dendrite_density)
 
 
-   Plot the synapse histogram on an :py:class:`matplotlib.Axes` object.
+   Plot the synapse histogram on an :class:`matplotlib.Axes` object.
 
    :param ax: The matplotlib axes object.
    :type ax: matplotlib.Axes
@@ -18,7 +17,7 @@ _DendrogramSynapseStatistics._plot_synapse_hist
    :type dendrite_density: np.array
 
    :returns: The matplotlib axes object.
-   :rtype: :py:class:`matplotlib.Axes`
+   :rtype: :class:`matplotlib.Axes`
 
 
 

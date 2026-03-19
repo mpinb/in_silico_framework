@@ -6,7 +6,7 @@ STEP_time_to_first_spike
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.STEP_time_to_first_spike(t, v, stim_onset, thresh=None)
+.. function:: biophysics_fitting.ephys.STEP_time_to_first_spike(t, v, stim_onset, thresh=None)
 
 
    Computes the time to first spike (TTFS) of a voltage trace for a step stimulus.

@@ -23,10 +23,11 @@ SynapseMapper
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper(cell=None, synDist=None, isDensity=True)
+.. class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper(cell=None, synDist=None, isDensity=True)
+
+   Bases: :py:obj:`object`
    
    Assign synapses to neuron morphology from density meshes.
 
@@ -47,14 +48,14 @@ SynapseMapper
 
          The postsynaptic neuron.
 
-         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`
 
       .. attribute:: synDist
 
          Synapse distribution mesh. Can be either a density or a realization
          (i.e. whole number values per voxel).
 
-         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`
 
       .. attribute:: isDensity
 
@@ -83,13 +84,13 @@ SynapseMapper
       * - :py:obj:`create_synapses <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses>`\ (preType)
         - Creates instantiation of synapses on cell from synapse distribution.
       * - :py:obj:`_create_voxel_edge_map <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._create_voxel_edge_map>`\ ()
-        - Fills :paramref:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
+        - Fills :param:`voxelEdgeMap` with voxel indices, and the section and point indices that the voxel contains.
       * - :py:obj:`_intersect_bboxes <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._intersect_bboxes>`\ (bbox1, bbox2)
         - Check if two bounding boxes overlap
       * - :py:obj:`_pt_in_box <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._pt_in_box>`\ (pt, box)
         - Check if a point is inside a bounding box.
       * - :py:obj:`_compute_path_length <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length>`\ (sec, x)
-        - Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
+        - Calculate the path length betwen the soma and location :param:`x` on section :param:`sec`
 
 
 .. container:: doc-feedback

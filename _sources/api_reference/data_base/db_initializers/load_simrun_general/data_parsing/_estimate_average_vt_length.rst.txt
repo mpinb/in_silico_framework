@@ -6,18 +6,18 @@ _estimate_average_vt_length
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing._estimate_average_vt_length(fnames, sample_size=1)
+.. function:: data_base.db_initializers.load_simrun_general.data_parsing._estimate_average_vt_length(fnames, sample_size=1)
 
 
-   Estimate the length of all voltage traces in :paramref:`fnames`
+   Estimate the length of all voltage traces in :param:`fnames`
 
-   Reads the headers of :paramref:`sample_size` random files in :paramref:`fnames` to fetch
+   Reads the headers of :param:`sample_size` random files in :param:`fnames` to fetch
    how many voltage traces they contain. Returns the average amount.
 
    :param fnames: List of voltage trace filenames.
    :type fnames: List[str]
    :param sample_size: Amount of voltage traces headers to read in order to infer their length.
-                       Set to ``1`` if you expect all votlage trace filenames in :paramref:`fnames` to be of equal length.
+                       Set to ``1`` if you expect all votlage trace filenames in :param:`fnames` to be of equal length.
    :type sample_size: int
 
    :returns: Estimated average length of all voltage trace files.

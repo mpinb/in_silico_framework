@@ -1,22 +1,21 @@
 
 
+create_network_embedding
+========================
 
 
+.. Signature -------------------------------
 
-NetworkMapper.create_network_embedding
-======================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding(postCellName, boutonDensities, nrOfSamples=50)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding(postCellName, boutonDensities, nrOfSamples=50)
 
 
    Create a single network realization from a bouton density field.
 
    This is the main method to create anatomical realizations of connectivity.
-   It creates :paramref:`nrOfSamples` network realizations, and saves the most representative
+   It creates :param:`nrOfSamples` network realizations, and saves the most representative
    realization to disk. The most representative realization is determined by comparing
    the distribution of anatomical parameters across the population of realizations using
-   :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
+   :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._get_representative_sample`.
 
    :param postCellName: Path to the postsynaptic :ref:`hoc_file_format` morphology file.
    :type postCellName: str

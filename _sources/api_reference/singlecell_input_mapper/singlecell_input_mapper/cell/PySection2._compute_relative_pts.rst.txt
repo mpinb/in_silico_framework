@@ -1,13 +1,12 @@
 
 
+_compute_relative_pts
+=====================
 
 
+.. Signature -------------------------------
 
-PySection2._compute_relative_pts
-================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_relative_pts()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2._compute_relative_pts()
 
 
    Compute the relative position of 3D points along the section.

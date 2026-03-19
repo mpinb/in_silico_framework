@@ -6,7 +6,7 @@ read_labview_junk1_dat_files
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.read_labview_junk1_dat_files(path, scale=100, sampling_rate=32000)
+.. function:: spike_analysis.core.read_labview_junk1_dat_files(path, scale=100, sampling_rate=32000)
 
 
    Read in LabView binary data files.

@@ -6,7 +6,7 @@ execute_in_child_process
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.execute_in_child_process(fun)
+.. function:: biophysics_fitting.utils.execute_in_child_process(fun)
 
 
    Execute a function in a child process.

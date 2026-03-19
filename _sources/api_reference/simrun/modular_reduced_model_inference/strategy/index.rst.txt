@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ 
 
 
@@ -20,7 +19,7 @@ strategy
    clear_memory </api_reference/simrun/modular_reduced_model_inference/strategy/clear_memory>
    convert_to_numpy </api_reference/simrun/modular_reduced_model_inference/strategy/convert_to_numpy>
 
-.. py:module:: simrun.modular_reduced_model_inference.strategy
+.. module:: simrun.modular_reduced_model_inference.strategy
 
 .. autoapi-nested-parse::
    Strategies for creating reduced models.
@@ -39,6 +38,7 @@ strategy
    The parameters that are being optimized are the weights of the raised cosine basis functions.
 
 
+
 .. rst-class:: absolute-paragraph
 
 Classes
@@ -50,6 +50,8 @@ Classes
    :widths: auto
    :class: summarytable
    
+   * - :py:obj:`_Strategy <simrun.modular_reduced_model_inference.strategy._Strategy>`
+     - Strategy base class.
    * - :py:obj:`RaisedCosineBasis <simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis>`
      - Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
    * - :py:obj:`Strategy_spatiotemporalRaisedCosine <simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine>`
@@ -75,6 +77,28 @@ Functions
      - Remove all weak references
    * - :py:obj:`convert_to_numpy <simrun.modular_reduced_model_inference.strategy.convert_to_numpy>`\ (x)
      - Convert a numpy to a cupy array
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <simrun.modular_reduced_model_inference.strategy.logger>`
+     - \-
+   * - :py:obj:`CUPY_ENABLED <simrun.modular_reduced_model_inference.strategy.CUPY_ENABLED>`
+     - \-
+   * - :py:obj:`np <simrun.modular_reduced_model_inference.strategy.np>`
+     - \-
+   * - :py:obj:`_WEAKREF_ARRAY_LIST <simrun.modular_reduced_model_inference.strategy._WEAKREF_ARRAY_LIST>`
+     - \-
+
 
 
 

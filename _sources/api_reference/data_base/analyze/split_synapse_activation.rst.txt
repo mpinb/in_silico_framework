@@ -6,7 +6,7 @@ split_synapse_activation
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.split_synapse_activation(sa, selfcheck=True, excitatory=EXCITATORY, inhibitory=INHIBITORY)
+.. function:: data_base.analyze.split_synapse_activation(sa, selfcheck=True, excitatory=EXCITATORY, inhibitory=INHIBITORY)
 
 
    Augment a :ref:`syn_activation_format` dataframe with a boolean column for excitatory/inhibitory.
@@ -21,7 +21,7 @@ split_synapse_activation
    :param inhibitory: List of inhibitory cell types.
    :type inhibitory: list
 
-   :returns: a :py:class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
+   :returns: a :class:`~pandas.DataFrame` with excitatory synapse activations, and one for inhibitory synapse activations.
    :rtype: tuple
 
 

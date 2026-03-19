@@ -6,16 +6,16 @@ _safe_copy
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._safe_copy(source, target)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._safe_copy(source, target)
 
 
-   Copy a file from :paramref:`source` to :paramref:`target`.
+   Copy a file from :param:`source` to :param:`target`.
 
    Creates the parent directories if they do not exist yet.
 
    :param source: Original filename
    :type source: str
-   :param target: Desired target location to copy :paramref:`source` to.
+   :param target: Desired target location to copy :param:`source` to.
    :type target: str
 
 

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
 
 
@@ -20,10 +19,11 @@ writer
    write_population_and_sample_connectivity_summary </api_reference/singlecell_input_mapper/singlecell_input_mapper/writer/write_population_and_sample_connectivity_summary>
    write_scalar_field </api_reference/singlecell_input_mapper/singlecell_input_mapper/writer/write_scalar_field>
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper.writer
+.. module:: singlecell_input_mapper.singlecell_input_mapper.writer
 
 .. autoapi-nested-parse::
    Write out the results of a single connectivity realization or a population of realizations.
+
 
 
 
@@ -52,6 +52,24 @@ Functions
      - Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
    * - :py:obj:`write_scalar_field <singlecell_input_mapper.singlecell_input_mapper.writer.write_scalar_field>`\ (fname, scalarField)
      - Write a scalar field to an AmiraMesh file.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.singlecell_input_mapper.writer.logger>`
+     - \-
+   * - :py:obj:`labels2int <singlecell_input_mapper.singlecell_input_mapper.writer.labels2int>`
+     - \-
+
 
 
 

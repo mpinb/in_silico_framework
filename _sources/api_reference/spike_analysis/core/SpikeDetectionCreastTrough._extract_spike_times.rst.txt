@@ -1,13 +1,12 @@
 
 
+_extract_spike_times
+====================
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough._extract_spike_times
-===============================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times()
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough._extract_spike_times()
 
 
    Extracts spike times from voltage traces.

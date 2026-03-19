@@ -19,12 +19,13 @@ Loader
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.IO.LoaderDumper.just_create_folder.Loader
+.. class:: data_base.IO.LoaderDumper.just_create_folder.Loader
+
+   Bases: :py:obj:`data_base.IO.LoaderDumper.parent_classes.Loader`
    
-   Load a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+   Load a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
 
 
    :Methods:
@@ -36,7 +37,7 @@ Loader
       :class: summarytable
       
       * - :py:obj:`get <data_base.IO.LoaderDumper.just_create_folder.Loader.get>`\ (savedir)
-        - Get a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
+        - Get a :class:`~data_base.isf_data_base.IO.LoaderDumper.just_create_folder.ManagedFolder` object from a folder path
 
 
 .. container:: doc-feedback

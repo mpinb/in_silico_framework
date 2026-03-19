@@ -1,13 +1,12 @@
 
 
+add_data_extractor
+==================
 
 
+.. Signature -------------------------------
 
-Rm.add_data_extractor
-=====================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_data_extractor(name, data_extractor, setup=True)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_data_extractor(name, data_extractor, setup=True)
 
 
    Add a data extractor to the reduced model.
@@ -21,7 +20,7 @@ Rm.add_data_extractor
    :param setup: If True, run the setup method of the data extractor
    :type setup: bool
 
-   .. seealso:: :py:mod:`~simrun.modular_reduced_model_inference.data_extractor` for available data extractors.
+   .. seealso:: :mod:`~simrun.modular_reduced_model_inference.data_extractor` for available data extractors.
 
 
 

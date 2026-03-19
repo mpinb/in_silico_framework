@@ -6,15 +6,15 @@ is_db
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.is_db(dir_to_data)
+.. function:: data_base.utils.is_db(dir_to_data)
 
 
-   Check if a path is a :py:class:`~data_base.DataBase`.
+   Check if a path is a :class:`~data_base.DataBase`.
 
    :param dir_to_data: The path to the directory
    :type dir_to_data: pathlib.Path
 
-   :returns: ``True`` if :paramref:`dir_to_data` is a (sub)db, ``False`` otherwise.
+   :returns: ``True`` if :param:`dir_to_data` is a (sub)db, ``False`` otherwise.
    :rtype: bool
 
 

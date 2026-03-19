@@ -6,7 +6,7 @@ trace_check_err
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.trace_check_err(t, v, stim_onset=None, stim_duration=None, punish=250)
+.. function:: biophysics_fitting.ephys.trace_check_err(t, v, stim_onset=None, stim_duration=None, punish=250)
 
 
    Returns a basic trace error that penalizes traces with low variance.

@@ -6,7 +6,7 @@ is_sub_data_base
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.is_sub_data_base(parent_db, key)
+.. function:: data_base.is_sub_data_base(parent_db, key)
 
 
    Check if a given key is a sub-database of the parent database.

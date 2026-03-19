@@ -6,10 +6,10 @@ init_fig
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.init_fig(xlim=(0, 1500), ylim=(-80, 0))
+.. function:: visualize.cell_to_ipython_animation.init_fig(xlim=(0, 1500), ylim=(-80, 0))
 
 
-   Initialize figure for :py:meth:`cell_to_animation`
+   Initialize figure for :func:`cell_to_animation`
 
    :param xlim: x axis limits
    :type xlim: tuple

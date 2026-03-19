@@ -6,7 +6,7 @@ memmap_from_disk
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store.memmap_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.memmap_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
 
 
    Memory map a numpy array on disk.

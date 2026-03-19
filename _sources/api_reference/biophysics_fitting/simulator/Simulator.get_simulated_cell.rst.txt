@@ -1,13 +1,12 @@
 
 
+get_simulated_cell
+==================
 
 
+.. Signature -------------------------------
 
-Simulator.get_simulated_cell
-============================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator.get_simulated_cell(params, stim, simulate=True)
+.. function:: biophysics_fitting.simulator.Simulator.get_simulated_cell(params, stim, simulate=True)
 
 
    Get the simulated cell.

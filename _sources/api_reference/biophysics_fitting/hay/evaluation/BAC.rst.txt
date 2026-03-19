@@ -26,16 +26,15 @@ BAC
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.hay.evaluation.BAC(hot_zone_thresh=-55, soma_thresh=-30, ca_max_after_nth_somatic_spike=2, stim_onset=295, stim_duration=45, repolarization=-55, punish=250, punish_last_spike_after_deadline=True, punish_minspikenum=2, punish_returning_to_rest_tolerance=2.0, punish_max_prestim_dendrite_depo=-50, prefix='', definitions=HAY_BAC_DEFINITIONS)
+.. class:: biophysics_fitting.hay.evaluation.BAC(hot_zone_thresh=-55, soma_thresh=-30, ca_max_after_nth_somatic_spike=2, stim_onset=295, stim_duration=45, repolarization=-55, punish=250, punish_last_spike_after_deadline=True, punish_minspikenum=2, punish_returning_to_rest_tolerance=2.0, punish_max_prestim_dendrite_depo=-50, prefix='', definitions=HAY_BAC_DEFINITIONS)
    
    Evaluate the :math:`BAC` stimulus protocol.
 
    These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
-   .. seealso:: :py:meth:`biophysics_fitting.setup_stim.setup_BAC` for more information on the stimulus protocol.
+   .. seealso:: :func:`biophysics_fitting.setup_stim.setup_BAC` for more information on the stimulus protocol.
 
    :param hot_zone_thresh: The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
    :type hot_zone_thresh: float
@@ -48,7 +47,7 @@ BAC
    :param stim_duration: The duration of the stimulus (ms). Defaults to :math:`45` ms.
    :type stim_duration: float
    :param repolarization: The target repolarization voltage after the stimulus.
-                          See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
+                          See :func:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
                           Defaults to :math:`-55` mV.
    :type repolarization: float
    :param punish: The punishment value in units of :math:`\sigma`.
@@ -63,7 +62,7 @@ BAC
    :type punish_returning_to_rest_tolerance: float
    :param prefix: The prefix for the evaluation metric checks. Defaults to an empty string.
    :type prefix: str
-   :param definitions: The definitions for the evaluation metrics. See also: :py:attr:`definitions`.
+   :param definitions: The definitions for the evaluation metrics. See also: :attr:`definitions`.
    :type definitions: dict
 
    :Attributes:
@@ -101,7 +100,7 @@ BAC
       .. attribute:: repolarization
 
          The target repolarization voltage after the stimulus.
-         See :py:meth:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
+         See :func:`~biophysics_fitting.ephys.BAC_ISI_check_repolarization`.
          Defaults to :math:`-55` mV.
 
          :type: float

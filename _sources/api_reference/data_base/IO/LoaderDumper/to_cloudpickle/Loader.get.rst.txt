@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.to_cloudpickle.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.to_cloudpickle.Loader.get(savedir)
 
 
    Load the object from the specified folder

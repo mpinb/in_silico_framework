@@ -1,13 +1,12 @@
 
 
+AHP_depth_abs
+=============
 
 
+.. Signature -------------------------------
 
-_Step.AHP_depth_abs
-===================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.AHP_depth_abs(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.AHP_depth_abs(voltage_traces)
 
 
    Get the afterhyperpolarization depth in the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.AHP_depth_abs
                  and ``".raw"`` to the afterhyperpolarization depth in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.AHP_depth_abs`
+   .. seealso:: :func:`~biophysics_fitting.ephys.AHP_depth_abs`
 
 
 

@@ -6,7 +6,7 @@ get
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.get(funname)
+.. function:: single_cell_parser.cell_modify_functions.get(funname)
 
 
    Get a cell modification function by their name.

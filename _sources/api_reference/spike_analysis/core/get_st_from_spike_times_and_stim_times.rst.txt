@@ -6,7 +6,7 @@ get_st_from_spike_times_and_stim_times
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.get_st_from_spike_times_and_stim_times(spike_times, stim_times, offset=0, mode='spike_times')
+.. function:: spike_analysis.core.get_st_from_spike_times_and_stim_times(spike_times, stim_times, offset=0, mode='spike_times')
 
 
    Computes spike times dataframe based on list of spike times and stimulus times.

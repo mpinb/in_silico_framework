@@ -1,24 +1,23 @@
 
 
+register_dumper
+===============
 
 
+.. Signature -------------------------------
 
-ISFDataBase.register_dumper
-===========================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.register_dumper(dumper_module)
+.. function:: data_base.isf_data_base.ISFDataBase.register_dumper(dumper_module)
 
 
    Register a dumper with this database, so it can be used to save data.
 
-   Note that a dumper can also be specified when saving data (see :py:meth:`setitem`), so this is not strictly necessary.
+   Note that a dumper can also be specified when saving data (see :func:`setitem`), so this is not strictly necessary.
    Make sure to provide the dumper module, not the class or string.
 
    :param dumper_module: A module from data_base.IO.LoaderDumper. Must contain a ``Loader`` class and a ``dump()`` method.
    :type dumper_module: module
 
-   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper`
+   .. seealso:: :mod:`~data_base.isf_data_base.IO.LoaderDumper`
 
 
 

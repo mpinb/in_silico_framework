@@ -1,13 +1,12 @@
 
 
+_get_score
+==========
 
 
+.. Signature -------------------------------
 
-_Strategy._get_score
-====================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._get_score(x)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy._get_score(x)
 
 
    Compute the score for the given parameters x.
@@ -18,8 +17,8 @@ _Strategy._get_score
    .. rubric:: Example
       :class: example
 
-   :py:class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
-   which is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
+   :class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
+   which is assigned to :func:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
 
 
 

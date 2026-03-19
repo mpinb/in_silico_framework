@@ -6,7 +6,7 @@ load_cluster_trials
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials(fname)
+.. function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.load_cluster_trials(fname)
 
 
    Reads in a cluster file and returns a dictionary with the spike times for each trial.

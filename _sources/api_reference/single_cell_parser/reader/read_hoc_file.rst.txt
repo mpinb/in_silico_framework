@@ -6,29 +6,29 @@ read_hoc_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_hoc_file(fname='')
+.. function:: single_cell_parser.reader.read_hoc_file(fname='')
 
 
    Reads a hoc file and returns a list of Edge objects.
 
-   This list of sections is parsed to a :py:class:`~single_cell_parser.cell_parser.CellParser` object
-   using :py:meth:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
+   This list of sections is parsed to a :class:`~single_cell_parser.cell_parser.CellParser` object
+   using :func:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
 
    See :ref:`hoc_file_format` for more information on the hoc file format.
 
    .. seealso::
 
-      The module :py:mod:`singlecell_input_mapper` also contains a method
-      :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`.
+      The module :mod:`singlecell_input_mapper` also contains a method
+      :func:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`.
       A notable **difference** is that this method reads in axon sections,
-      while the :py:mod:`singlecell_input_mapper` variant does not.
+      while the :mod:`singlecell_input_mapper` variant does not.
 
    :param fname: The name of the file to be read.
    :type fname: str
 
    :raises IOError: If the input file does not have a `.hoc` or `.HOC` suffix.
 
-   :returns: A list of :py:class:`Edge` objects.
+   :returns: A list of :class:`Edge` objects.
    :rtype: list
 
    .. rubric:: Example

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -16,7 +15,7 @@ network
    activate_functional_synapse </api_reference/single_cell_parser/network/activate_functional_synapse>
    sample_times_from_rates </api_reference/single_cell_parser/network/sample_times_from_rates>
 
-.. py:module:: single_cell_parser.network
+.. module:: single_cell_parser.network
 
 .. autoapi-nested-parse::
    Connect and activate presynaptic neuron populations.
@@ -28,21 +27,22 @@ network
 
    Reading existing network realizations
    -------------------------------------
-   Network realizations that have been created with :py:mod:`~singlecell_input_mapper`'s :py:mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding`
-   can be read in here using the method :py:meth:`create_saved_network2`.
+   Network realizations that have been created with :mod:`~singlecell_input_mapper`'s :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding`
+   can be read in here using the method :func:`create_saved_network2`.
    This approach allows for the most fine-grained control over the network realization, as it offloads all the network embedding details to the specialized
-   :py:mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` module.
+   :mod:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding` module.
 
    Creating new network realizations
    ---------------------------------
    Creating a new network realization from scratch can be done using the ``convergence`` parameter in the
    :ref:`network_parameters_format` file.
-   Convergence is the probability of a connection existing between the :py:class:`~single_cell_parser.cell.Cell` and a presynaptic cell.
+   Convergence is the probability of a connection existing between the :class:`~single_cell_parser.cell.Cell` and a presynaptic cell.
    It is specific for each presynaptic cell type, and depends on the postsynaptic cell type.
-   This approach is used by :py:meth:`~single_cell_parser.network_mapper.NetworkMapper.create_functional_realization`
-   and :py:meth:`~single_cell_parser.network_mapper.NetworkMapper.create_network`.
+   This approach is used by :func:`~single_cell_parser.network_mapper.NetworkMapper.create_functional_realization`
+   and :func:`~single_cell_parser.network_mapper.NetworkMapper.create_network`.
 
-   .. seealso:: :py:mod:`~singlecell_input_mapper.singlecell_input_mapper`.
+   .. seealso:: :mod:`~singlecell_input_mapper.singlecell_input_mapper`.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -75,6 +75,22 @@ Functions
      - Activate a single synapse.
    * - :py:obj:`sample_times_from_rates <single_cell_parser.network.sample_times_from_rates>`\ (bins, rate)
      - Sample spike times from spike rates.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.network.logger>`
+     - \-
+
 
 
 

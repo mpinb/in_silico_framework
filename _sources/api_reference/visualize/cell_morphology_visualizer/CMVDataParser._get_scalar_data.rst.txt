@@ -1,0 +1,39 @@
+
+
+_get_scalar_data
+================
+
+
+.. Signature -------------------------------
+
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._get_scalar_data(keyword, time_point, return_as_color=False, color_dict={})
+
+
+   Returns a scalar data array based on some keyword (ion dynamics or membrane voltage).
+
+   If :param:`return_as_color` is True (default), the returned array is a map from the input keyword to a color
+   Otherwise, it is the raw data, not mapped to a colorscale. Which data is returned (mapped to colors or not)
+   depends on the keyword (case-insensitive):
+
+   - ("voltage", "vm"): voltage
+   - Some rangeVar: ion dynamics. See self.available_scalars for possibilities.
+   - "dendrites", "dendritic group": dendritic groups. Requires a color_dict to map section labels to colors.
+   - regular string: will try to convert to amatplotlib accepted color string
+
+   :param keyword: keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+   :type keyword: str
+   :param time_point: time point at which we want to retrieve the data.
+   :type time_point: float
+   :param return_as_color: whether to return the data as a color. Default is ``False``.
+   :type return_as_color: bool
+   :param color_dict: dictionary mapping section labels to colors. Only used if keyword is "dendrites" or "dendritic group".
+   :type color_dict: dict
+
+   :returns: list of scalar data. If :param:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
+   :rtype: list
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

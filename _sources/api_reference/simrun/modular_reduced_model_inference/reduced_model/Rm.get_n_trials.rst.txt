@@ -1,13 +1,12 @@
 
 
+get_n_trials
+============
 
 
+.. Signature -------------------------------
 
-Rm.get_n_trials
-===============
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials()
+.. function:: simrun.modular_reduced_model_inference.reduced_model.Rm.get_n_trials()
 
 
    Get the amount of trials.

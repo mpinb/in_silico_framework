@@ -1,0 +1,84 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~config` ❭ 
+
+
+config
+======
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   cell_types </api_reference/config/cell_types/index>  
+   file_locking </api_reference/config/file_locking/index>  
+   isf_configure </api_reference/config/isf_configure/index>  
+   isf_logging </api_reference/config/isf_logging/index>  
+   _read_db_settings </api_reference/config/_read_db_settings>
+   isf_is_using_legacy_mdb </api_reference/config/isf_is_using_legacy_mdb>
+   get_default_db </api_reference/config/get_default_db>
+   get_db_register_path </api_reference/config/get_db_register_path>
+   get_default_db_dumper </api_reference/config/get_default_db_dumper>
+   get_meta_file_format </api_reference/config/get_meta_file_format>
+
+.. module:: config
+
+.. autoapi-nested-parse::
+   Configuration for ISF
+
+   This package provides ISF-wide configuration settings, such as `dask` memory overflow, file locking server configuration, logging configuration, cell types etc.
+   In general, these settings may change when switching hardware or animal species, but are unlikely to be varied otherwise.
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Functions
+---------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`isf_is_using_legacy_mdb <config.isf_is_using_legacy_mdb>`\ ()
+     - Check if ISF is configured to use :mod:`model_data_base`
+   * - :py:obj:`get_default_db <config.get_default_db>`\ ()
+     - Get the database class to be used by default throughout ISF.
+   * - :py:obj:`get_db_register_path <config.get_db_register_path>`\ ()
+     - Get the path to the database register.
+   * - :py:obj:`get_default_db_dumper <config.get_default_db_dumper>`\ ()
+     - Get the default database dumper.
+   * - :py:obj:`get_meta_file_format <config.get_meta_file_format>`\ ()
+     - \-
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`cell_types <config.cell_types>`
+     - Cell type configuration.
+   * - :py:obj:`file_locking <config.file_locking>`
+     - \-
+   * - :py:obj:`isf_configure <config.isf_configure>`
+     - Configure ISF for your local system.
+   * - :py:obj:`isf_logging <config.isf_logging>`
+     - Set up logging for ISF.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

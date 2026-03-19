@@ -1,0 +1,27 @@
+
+
+_check_filesize_matches_shape
+=============================
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store._check_filesize_matches_shape(path, shape, dtype)
+
+
+   Check whether the file size matches the expected size based on the shape and dtype.
+
+   :param path: Path to the file.
+   :type path: str
+   :param shape: Shape of the array.
+   :type shape: tuple
+   :param dtype: Data type of the array.
+   :type dtype: str
+
+   :raises ValueError: If the file size does not match the expected size.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

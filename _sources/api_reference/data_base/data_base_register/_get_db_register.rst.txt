@@ -6,13 +6,13 @@ _get_db_register
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.data_base_register._get_db_register()
+.. function:: data_base.data_base_register._get_db_register()
 
 
    Get the database register.
 
    :returns: The database register.
-   :rtype: :py:class:`~data_base.data_base_register.DataBaseRegister`
+   :rtype: :class:`~data_base.data_base_register.DataBaseRegister`
 
 
 

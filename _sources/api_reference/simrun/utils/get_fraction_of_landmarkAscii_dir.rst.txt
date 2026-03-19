@@ -6,7 +6,7 @@ get_fraction_of_landmarkAscii_dir
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.get_fraction_of_landmarkAscii_dir(frac, basedir=None)
+.. function:: simrun.utils.get_fraction_of_landmarkAscii_dir(frac, basedir=None)
 
 
    Sample landmarks from all landmarkAscii files in a directory.

@@ -6,7 +6,7 @@ linear_fit_pdf
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.linear_fit_pdf(pdf)
+.. function:: simrun.synaptic_strength_fitting.linear_fit_pdf(pdf)
 
 
    Calculate linear fits between the synaptic conductance and the EPSP.

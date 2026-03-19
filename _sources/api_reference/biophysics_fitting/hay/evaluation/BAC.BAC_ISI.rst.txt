@@ -1,13 +1,12 @@
 
 
+BAC_ISI
+=======
 
 
+.. Signature -------------------------------
 
-BAC.BAC_ISI
-===========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_ISI(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.BAC_ISI(voltage_traces)
 
 
    Get the interspike interval in the somatic voltage trace.
@@ -22,7 +21,7 @@ BAC.BAC_ISI
                  and ``".raw"`` to the interspike interval in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:func:`BAC_ISI`
+   .. seealso:: :func:`BAC_ISI`
 
 
 

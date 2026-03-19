@@ -6,7 +6,7 @@ shared_array_from_numpy
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_numpy(arr, name=None)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_numpy(arr, name=None)
 
 
    Takes an array in memory and puts it into shared memory
@@ -16,7 +16,7 @@ shared_array_from_numpy
    :param name: The name of the shared memory block. Default: None.
    :type name: str, optional
 
-   :returns:     A tuple containing the :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
+   :returns:     A tuple containing the :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
                  object and the shared memory array.
    :rtype: tuple
 

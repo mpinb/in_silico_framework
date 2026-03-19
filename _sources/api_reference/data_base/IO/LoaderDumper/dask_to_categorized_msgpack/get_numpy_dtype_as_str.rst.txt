@@ -6,7 +6,7 @@ get_numpy_dtype_as_str
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_numpy_dtype_as_str(obj)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.get_numpy_dtype_as_str(obj)
 
 
    Get a string representation of the numpy dtype of an object.

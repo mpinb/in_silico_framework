@@ -25,10 +25,11 @@ Rm
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.reduced_model.Rm(name, db, tmin=None, tmax=None, width=None, selected_indices=None)
+.. class:: simrun.modular_reduced_model_inference.reduced_model.Rm(name, db, tmin=None, tmax=None, width=None, selected_indices=None)
+
+   Bases: :py:obj:`object`
    
    Reduced model class.
 
@@ -43,7 +44,7 @@ Rm
    :type tmin: float
    :param tmax: Maximum time for the simulation
    :type tmax: float
-   :param width: Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+   :param width: Width of the temporal kernel. This will be used as the :math:`\tau` domain in e.g. :class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
    :type width: float
    :param selected_indices: List/nested list of integer indices for selected simulation trials
    :type selected_indices: list
@@ -77,7 +78,7 @@ Rm
       .. attribute:: width
 
          Width of the temporal kernel.
-         This will be used as the domain e.g. the :math:`\\tau` domain in :py:class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
+         This will be used as the domain e.g. the :math:`\\tau` domain in :class:`~simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis`
 
          :type: float
 
@@ -89,13 +90,13 @@ Rm
 
       .. attribute:: data_extractors
 
-         Dictionary of :py:class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
+         Dictionary of :class:`~simrun.modular_reduced_model_inference.data_extractor._DataExtractor` objects
 
          :type: dict
 
       .. attribute:: strategies
 
-         Dictionary of :py:class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
+         Dictionary of :class:`~simrun.modular_reduced_model_inference.strategy.Strategy` objects
 
          :type: dict
 
@@ -103,13 +104,13 @@ Rm
 
          Data view object
 
-         :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
+         :type: :class:`~simrun.modular_reduced_model_inference.reduced_model.DataView`
 
       .. attribute:: DataSplitEvaluation
 
          Data split evaluation object
 
-         :type: :py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
+         :type: :class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`
 
       .. attribute:: selected_indices
 

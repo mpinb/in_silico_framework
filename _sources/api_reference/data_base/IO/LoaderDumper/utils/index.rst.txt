@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -14,10 +13,11 @@ utils
 
    get_numpy_dtype_as_str </api_reference/data_base/IO/LoaderDumper/utils/get_numpy_dtype_as_str>
 
-.. py:module:: data_base.IO.LoaderDumper.utils
+.. module:: data_base.IO.LoaderDumper.utils
 
 .. autoapi-nested-parse::
    Convenience methods for data IO.
+
 
 
 
@@ -34,6 +34,22 @@ Functions
    
    * - :py:obj:`get_numpy_dtype_as_str <data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str>`\ (obj)
      - Get a string representation of the numpy dtype of an object.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.IO.LoaderDumper.utils.logger>`
+     - \-
+
 
 
 

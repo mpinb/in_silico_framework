@@ -6,7 +6,7 @@ create_network_parameter
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, outFileName, write_all_celltypes=False)
+.. function:: singlecell_input_mapper.ongoing_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, outFileName, write_all_celltypes=False)
 
 
    Create a template :ref:`network_parameters_format` file from a template parameter file and a cell number file.
@@ -20,7 +20,7 @@ create_network_parameter
    - release probabilities
 
    :param templateParamName: Name of the template param containing the PSTHs for each cell type.
-                             These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
+                             These can be generated from .cluster files of spike time recordings by e.g. :func:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
    :type templateParamName: str
    :param cellNumberFileName: Name of the file containing the amount of cells per column in the barrel cortex.
    :type cellNumberFileName: str

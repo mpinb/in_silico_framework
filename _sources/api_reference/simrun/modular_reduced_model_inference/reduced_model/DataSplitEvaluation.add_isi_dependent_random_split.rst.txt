@@ -1,13 +1,12 @@
 
 
+add_isi_dependent_random_split
+==============================
 
 
+.. Signature -------------------------------
 
-DataSplitEvaluation.add_isi_dependent_random_split
-==================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_isi_dependent_random_split(name, min_isi=10, percentage_train=0.7)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_isi_dependent_random_split(name, min_isi=10, percentage_train=0.7)
 
 
    Split data based on the inter-spike interval.

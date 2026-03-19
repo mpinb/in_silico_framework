@@ -1,13 +1,12 @@
 
 
+get_y_static
+============
 
 
+.. Signature -------------------------------
 
-_Strategy.get_y_static
-======================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static(y, numpy_split=None)
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy.get_y_static(y, numpy_split=None)
 
    :staticmethod:
 

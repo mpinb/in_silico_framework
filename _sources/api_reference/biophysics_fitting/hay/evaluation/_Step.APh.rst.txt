@@ -1,13 +1,12 @@
 
 
+APh
+===
 
 
+.. Signature -------------------------------
 
-_Step.APh
-=========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.APh(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.APh(voltage_traces)
 
 
    Get the AP heights fo all APs in the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.APh
                  and ``".raw"`` to the AP heights in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.AP_height`
+   .. seealso:: :func:`~biophysics_fitting.ephys.AP_height`
 
 
 

@@ -6,7 +6,7 @@ multi_stimulus_trial
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.multi_stimulus_trial(netp, inter_stimulus_interval=100, stims=100, scale_factors=None, pop=None)
+.. function:: single_cell_parser.network_param_modify_functions.multi_stimulus_trial(netp, inter_stimulus_interval=100, stims=100, scale_factors=None, pop=None)
 
 
    Makes a network param file for repeatedly stimulating the same whisker during a single trial.

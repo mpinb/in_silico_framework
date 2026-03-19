@@ -6,13 +6,13 @@ find_closest_index
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.find_closest_index(list_, value)
+.. function:: visualize.cell_to_ipython_animation.find_closest_index(list_, value)
 
 
    Finds the index of the value which is closest to the value specified in the arguments
 
-   :param list_: list of values
-   :type list_: list
+   :param list\_: list of values
+   :type list\_: list
    :param value: value to find closest index for
    :type value: float
 

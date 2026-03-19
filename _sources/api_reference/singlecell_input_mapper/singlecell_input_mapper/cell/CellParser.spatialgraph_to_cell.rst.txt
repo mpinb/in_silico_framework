@@ -1,13 +1,12 @@
 
 
+spatialgraph_to_cell
+====================
 
 
+.. Signature -------------------------------
 
-CellParser.spatialgraph_to_cell
-===============================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.CellParser.spatialgraph_to_cell()
 
 
    Set up a cell object from an AMIRA hoc file.
@@ -18,7 +17,7 @@ CellParser.spatialgraph_to_cell
    .. deprecated:: 1.0
        The `scaleFunc` argument is deprecated and will be removed in a future version.
        To ensure reproducability, scaleFunc should be specified in the cell parameters, as
-       described in :py:mod:`~single_cell_parser.cell_modify_funs`
+       described in :mod:`~single_cell_parser.cell_modify_funs`
 
 
 

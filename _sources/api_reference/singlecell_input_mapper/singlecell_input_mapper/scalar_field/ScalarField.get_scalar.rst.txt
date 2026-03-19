@@ -1,18 +1,17 @@
 
 
+get_scalar
+==========
 
 
+.. Signature -------------------------------
 
-ScalarField.get_scalar
-======================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar(xyz)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_scalar(xyz)
 
 
    Fetch the scalar value of the voxel containing the point xyz.
 
-   .. warning:: Returns 0 if :paramref:`xyz` is outside the bounding box.
+   .. warning:: Returns 0 if :param:`xyz` is outside the bounding box.
 
    :param xyz: The 3D coordinates of the point.
    :type xyz: tuple

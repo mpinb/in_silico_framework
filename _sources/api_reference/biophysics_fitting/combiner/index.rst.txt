@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -15,11 +14,12 @@ combiner
    Combiner_Setup </api_reference/biophysics_fitting/combiner/Combiner_Setup>
    Combiner </api_reference/biophysics_fitting/combiner/Combiner>
 
-.. py:module:: biophysics_fitting.combiner
+.. module:: biophysics_fitting.combiner
 
 .. autoapi-nested-parse::
-   This module provides the :py:class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
-   The :py:class:`~biophysics_fitting.combiner.Combiner` class can be used to combine features computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+   This module provides the :class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
+   The :class:`~biophysics_fitting.combiner.Combiner` class can be used to combine features computed by an :class:`~biophysics_fitting.evaluator.Evaluator` object.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -34,9 +34,11 @@ Classes
    :class: summarytable
    
    * - :py:obj:`Combiner_Setup <biophysics_fitting.combiner.Combiner_Setup>`
-     - Setup class for the :py:class:`~biophysics_fitting.combiner.Combiner` class.
+     - Setup class for the :class:`~biophysics_fitting.combiner.Combiner` class.
    * - :py:obj:`Combiner <biophysics_fitting.combiner.Combiner>`
-     - This class can be used to combine features (usually) computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+     - This class can be used to combine features (usually) computed by an :class:`~biophysics_fitting.evaluator.Evaluator` object.
+
+
 
 
 

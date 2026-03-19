@@ -1,13 +1,12 @@
 
 
+get_bounding_box
+================
 
 
+.. Signature -------------------------------
 
-Cell.get_bounding_box
-=====================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.get_bounding_box()
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.get_bounding_box()
 
 
    Calculate the bounding box around the cell.

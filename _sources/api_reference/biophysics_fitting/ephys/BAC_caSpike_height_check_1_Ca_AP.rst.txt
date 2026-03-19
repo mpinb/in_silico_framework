@@ -6,7 +6,7 @@ BAC_caSpike_height_check_1_Ca_AP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_1_Ca_AP(t, v, v_dend, thresh=None)
+.. function:: biophysics_fitting.ephys.BAC_caSpike_height_check_1_Ca_AP(t, v, v_dend, thresh=None)
 
 
    Checks if there is exactly one calcium spike in the dendritic voltage trace.

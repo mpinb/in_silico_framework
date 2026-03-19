@@ -6,7 +6,7 @@ get_dist
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.synanalysis.get_dist(x1, x2)
+.. function:: single_cell_parser.analyze.synanalysis.get_dist(x1, x2)
 
 
    Compute the Euclidean distance between two points.

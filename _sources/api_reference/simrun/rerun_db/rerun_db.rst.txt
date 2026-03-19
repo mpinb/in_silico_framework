@@ -6,7 +6,7 @@ rerun_db
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.rerun_db.rerun_db(db, outdir, tStop=None, neuron_param_modify_functions=[], network_param_modify_functions=[], synapse_activation_modify_functions=[], stis=None, silent=False, additional_network_params=[], child_process=False)
+.. function:: simrun.rerun_db.rerun_db(db, outdir, tStop=None, neuron_param_modify_functions=[], network_param_modify_functions=[], synapse_activation_modify_functions=[], stis=None, silent=False, additional_network_params=[], child_process=False)
 
 
    Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database.
@@ -17,8 +17,8 @@ rerun_db
 
    .. attention::
 
-      This function uses the *exact* same synapse activations as already present in the database, except if :paramref:`synapse_activation_modify_functions` is given.
-      In other words, adapting release probabilities of synapses with :paramref:`network_param_modify_functions` will have no effect, as the synapse activations are not
+      This function uses the *exact* same synapse activations as already present in the database, except if :param:`synapse_activation_modify_functions` is given.
+      In other words, adapting release probabilities of synapses with :param:`network_param_modify_functions` will have no effect, as the synapse activations are not
       regenerated.
 
    :param db: A simrun-initialized database to resimulate.
@@ -29,9 +29,9 @@ rerun_db
    :type outdir: str
    :param tStop: Time in ms at which the simulation should stop.
    :type tStop: float
-   :param neuron_param_modify_functions: List of functions which take :py:class:`~single_cell_parser.parameters.NTParameterSet` neuron parameters and may return it changed.
+   :param neuron_param_modify_functions: List of functions which take :class:`~single_cell_parser.parameters.NTParameterSet` neuron parameters and may return it changed.
    :type neuron_param_modify_functions: list
-   :param network_param_modify_functions: List of functions which take :py:class:`~single_cell_parser.parameters.NTParameterSet` network parameters and may return it changed.
+   :param network_param_modify_functions: List of functions which take :class:`~single_cell_parser.parameters.NTParameterSet` network parameters and may return it changed.
    :type network_param_modify_functions: list
    :param synapse_activation_modify_functions: List of functions which take a :ref:`syn_activation_format` dataframe and may return it changed.
    :type synapse_activation_modify_functions: list
@@ -45,7 +45,7 @@ rerun_db
    :returns: A list of dask delayed objects. When computed with a dask scheduler, it writes the simulation results to the specified directory.
    :rtype: list
 
-   .. seealso:: :py:mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :py:mod:`simrun` output and its available keys.
+   .. seealso:: :mod:`~data_base.db_initializers.init_simrun_general` for initializing a database from raw :mod:`simrun` output and its available keys.
 
 
 

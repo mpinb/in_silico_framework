@@ -6,7 +6,7 @@ create_modular_db_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.create_modular_db_path(path)
+.. function:: data_base.dbopen.create_modular_db_path(path)
 
 
    Create a database path from a given path.

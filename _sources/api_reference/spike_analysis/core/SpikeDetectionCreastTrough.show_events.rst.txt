@@ -1,13 +1,12 @@
 
 
+show_events
+===========
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.show_events
-======================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.show_events(events='auto', savepdf=None, showfig=True, ylim=(-5, 5))
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.show_events(events='auto', savepdf=None, showfig=True, ylim=(-5, 5))
 
 
    Shows voltage trace, thresholds and events.

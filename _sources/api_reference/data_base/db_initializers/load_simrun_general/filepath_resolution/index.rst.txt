@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -16,9 +15,28 @@ filepath_resolution
    _convert_netp_fns_to_reldb </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_netp_fns_to_reldb>
    _convert_syn_fns_to_reldb </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_syn_fns_to_reldb>
    _convert_con_fns_to_reldb </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/_convert_con_fns_to_reldb>
+   _resolve_rel_syncon_ref </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/_resolve_rel_syncon_ref>
+   _resolve_syncon_ref </api_reference/data_base/db_initializers/load_simrun_general/filepath_resolution/_resolve_syncon_ref>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.filepath_resolution
+.. module:: data_base.db_initializers.load_simrun_general.filepath_resolution
 
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.db_initializers.load_simrun_general.filepath_resolution.logger>`
+     - \-
 
 
 

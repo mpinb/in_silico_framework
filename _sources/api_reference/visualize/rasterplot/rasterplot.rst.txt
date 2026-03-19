@@ -6,7 +6,7 @@ rasterplot
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.rasterplot.rasterplot(df, colormap=None, ax=None, label=None, groupby_attribute=None, tlim=None, reset_index=True)
+.. function:: visualize.rasterplot.rasterplot(df, colormap=None, ax=None, label=None, groupby_attribute=None, tlim=None, reset_index=True)
 
 
    Creates a rasterplot from :ref:`spike_times_format`.
@@ -17,7 +17,7 @@ rasterplot
    :param df: A DataFrame containing the spike times.
    :type df: pandas.DataFrame
    :param colormap: A colormap to use for the plot.
-                    Must map a label from :paramref:`groupby_attribute` to a color.
+                    Must map a label from :param:`groupby_attribute` to a color.
    :type colormap: dict, optional
    :param ax: An optional Matplotlib Axes object to plot on. If not provided, a new figure and axes are created.
    :type ax: matplotlib.axes.Axes, optional
@@ -31,7 +31,7 @@ rasterplot
    :type reset_index: bool, optional
 
    :returns: Figure object containing the rasterplot.
-   :rtype: :py:class:`~matplotlib.figure.Figure`
+   :rtype: :class:`~matplotlib.figure.Figure`
 
 
 

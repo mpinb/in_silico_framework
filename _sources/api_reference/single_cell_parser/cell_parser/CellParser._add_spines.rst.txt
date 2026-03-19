@@ -1,13 +1,12 @@
 
 
+_add_spines
+===========
 
 
+.. Signature -------------------------------
 
-CellParser._add_spines
-======================
-
-
-.. py:method:: single_cell_parser.cell_parser.CellParser._add_spines(label, spineParam)
+.. function:: single_cell_parser.cell_parser.CellParser._add_spines(label, spineParam)
 
 
    Adds passive spines to the membrane.

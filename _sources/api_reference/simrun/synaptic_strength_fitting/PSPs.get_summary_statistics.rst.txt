@@ -1,13 +1,12 @@
 
 
+get_summary_statistics
+======================
 
 
+.. Signature -------------------------------
 
-PSPs.get_summary_statistics
-===========================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_summary_statistics(method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_summary_statistics(method='dynamic_baseline', merge_celltype_kwargs={}, ePSP_summary_statistics_kwargs={})
 
 
    Calculate summary statistics of the PSP voltage and timing.

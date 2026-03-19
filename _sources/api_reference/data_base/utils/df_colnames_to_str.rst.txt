@@ -6,7 +6,7 @@ df_colnames_to_str
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.df_colnames_to_str(df)
+.. function:: data_base.utils.df_colnames_to_str(df)
 
 
    Convert the column names and index names of a dataframe to string.

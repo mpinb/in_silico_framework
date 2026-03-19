@@ -1,13 +1,12 @@
 
 
+_compute_bounds
+===============
 
 
+.. Signature -------------------------------
 
-PySection._compute_bounds
-=========================
-
-
-.. py:method:: single_cell_parser.cell.PySection._compute_bounds()
+.. function:: single_cell_parser.cell.PySection._compute_bounds()
 
 
    Computes the bounding box around the 3D coordinates.

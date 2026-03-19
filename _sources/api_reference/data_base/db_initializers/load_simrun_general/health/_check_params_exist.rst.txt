@@ -6,7 +6,7 @@ _check_params_exist
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.health._check_params_exist(sim_result_dir)
+.. function:: data_base.db_initializers.load_simrun_general.health._check_params_exist(sim_result_dir)
 
 
 

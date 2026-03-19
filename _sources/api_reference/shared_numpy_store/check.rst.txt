@@ -1,0 +1,24 @@
+
+
+check
+=====
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.check(obj)
+
+
+   Check whether the object can be saved with this dumper.
+
+   :param obj: Object to be saved.
+   :type obj: object
+
+   :returns: Whether the object is None. This dumper requires no object to be saved.
+   :rtype: bool
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

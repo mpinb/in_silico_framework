@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -766,7 +766,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell.PointCell" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.PointCell (Python class) — Cell without morphological or biophysical attributes." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell<wbr>Point<wbr>Cell</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.PointCell (Python class) — Bases: object" class="md-ellipsis">single_<wbr>cell_<wbr>parsercell<wbr>Point<wbr>Cell</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercellPointCell">
@@ -1061,6 +1061,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../swc/index.html" class="md-nav__link">
+        <span title="/api_reference/single_cell_parser/swc/index.rst (reference label)" class="md-ellipsis">swc</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../synapse/index.html" class="md-nav__link">
         <span title="/api_reference/single_cell_parser/synapse/index.rst (reference label)" class="md-ellipsis">synapse</span>
       </a>
@@ -1242,6 +1257,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1338,7 +1368,7 @@
       
         <li class="md-nav__item">
   <a href="#single_cell_parser.cell.PointCell" class="md-nav__link">
-    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.PointCell (Python class) — Cell without morphological or biophysical attributes." class="md-ellipsis">single_<wbr>cell_<wbr>parsercell<wbr>Point<wbr>Cell</span>
+    <span aria-label="Python class" class="objinfo-icon objinfo-icon__data" title="Python class">C</span><span title="single_cell_parser.cell.PointCell (Python class) — Bases: object" class="md-ellipsis">single_<wbr>cell_<wbr>parsercell<wbr>Point<wbr>Cell</span>
   </a>
   
     <nav class="md-nav" aria-label="single_cell_parsercellPointCell">
@@ -1509,15 +1539,16 @@
 <dl class="py class objdesc">
 <dt class="sig sig-object highlight py" id="single_cell_parser.cell.PointCell">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../index.html#module-single_cell_parser" title="single_cell_parser (Python module)"><span class="sig-name descname"><span class="pre">single_cell_parser</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-single_cell_parser.cell" title="single_cell_parser.cell (Python module)"><span class="sig-name descname"><span class="pre">cell</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">PointCell</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#single_cell_parser.cell.PointCell.__init__.spikeTimes" title="single_cell_parser.cell.PointCell.__init__.spikeTimes (Python parameter) — List of precomputed spike times. Used to initialize release sites with precomputed release times from presynaptic spike times (see single_cell_parser.network.activate_functional_synapse()) Defaults to None."><span class="n"><span class="pre">spikeTimes</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#single_cell_parser.cell.PointCell" title="Link to this definition">¶</a></dt>
-<dd><p>Cell without morphological or biophysical attributes.</p>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cell without morphological or biophysical attributes.</p>
 <p>Used as a presynaptic spike source for synapses.
-Stores spike times in <a class="reference external" href="https://nrn.readthedocs.io/en/latest/progref/programming/math/vector.html#Vector" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>.
+Stores spike times in <a class="reference external" href="https://www.neuronsimulator.org/en/latest/progref/programming/math/vector.html#Vector" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a> and <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>.
 Requires <code class="xref py py-class docutils literal notranslate"><span class="pre">neuron:VecStim</span></code> to trigger spikes at specified times.</p>
 <dl class="field-list">
 <dt class="field-odd" id="single_cell_parser.cell.PointCell-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.PointCell-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
 <dt id="single_cell_parser.cell.PointCell.__init__.spikeTimes"><span class="sig-name descname">spikeTimes</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#single_cell_parser.cell.PointCell.__init__.spikeTimes" title="Permalink to this definition">¶</a></dt><dd><p>List of precomputed spike times.
-Used to initialize release sites with precomputed release times from presynaptic spike times (see <a class="reference internal" href="../network/activate_functional_synapse.html#single_cell_parser.network.activate_functional_synapse" title="single_cell_parser.network.activate_functional_synapse (Python function) — Activate a single synapse."><code class="xref py py-meth docutils literal notranslate"><span class="pre">single_cell_parser.network.activate_functional_synapse()</span></code></a>)
+Used to initialize release sites with precomputed release times from presynaptic spike times (see <a class="reference internal" href="../network/activate_functional_synapse.html#single_cell_parser.network.activate_functional_synapse" title="single_cell_parser.network.activate_functional_synapse (Python function) — Activate a single synapse."><code class="xref py py-func docutils literal notranslate"><span class="pre">single_cell_parser.network.activate_functional_synapse()</span></code></a>)
 Defaults to None.</p>
 </dd>
 </dl>
@@ -1540,7 +1571,7 @@ Defaults to None.</p>
 <dd><p>hoc Vector containing spike times</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.cell.PointCell.spikeVec-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.PointCell.spikeVec-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://nrn.readthedocs.io/en/latest/progref/programming/math/vector.html#Vector" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://www.neuronsimulator.org/en/latest/progref/programming/math/vector.html#Vector" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">Vector</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1548,7 +1579,7 @@ Defaults to None.</p>
 <dl class="py attribute objdesc">
 <dt class="sig sig-object highlight py" id="single_cell_parser.cell.PointCell.spikes">
 <span class="sig-name descname"><span class="pre">spikes</span></span><a class="headerlink" href="#single_cell_parser.cell.PointCell.spikes" title="Link to this definition">¶</a></dt>
-<dd><p>VecStim object to use as a spike source in <a class="reference external" href="https://nrn.readthedocs.io/en/latest/progref/modelspec/programmatic/network/netcon.html#NetCon" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">NetCon</span></code></a> objects.
+<dd><p>VecStim object to use as a spike source in <a class="reference external" href="https://www.neuronsimulator.org/en/latest/progref/modelspec/programmatic/network/netcon.html#NetCon" title="(in NEURON)"><code class="docutils literal notranslate"><span class="pre">NetCon</span></code></a> objects.
 These are initialized from <code class="xref py py-paramref docutils literal notranslate"><span class="pre">spikeTimes</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="single_cell_parser.cell.PointCell.spikes-type">Type<span class="colon">:</span><a class="headerlink" href="#single_cell_parser.cell.PointCell.spikes-type" title="Permalink to this headline">¶</a></dt>
@@ -1585,25 +1616,25 @@ These are initialized from <code class="xref py py-paramref docutils literal not
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.is_active.html#single_cell_parser.cell.PointCell.is_active" title="single_cell_parser.cell.PointCell.is_active (Python method) — Check if the point cell is active."><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_active</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.is_active.html#single_cell_parser.cell.PointCell.is_active" title="single_cell_parser.cell.PointCell.is_active (Python function) — Check if the point cell is active."><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_active</span></code></a>()</p></td>
 <td><p>Check if the point cell is active.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PointCell.play.html#single_cell_parser.cell.PointCell.play" title="single_cell_parser.cell.PointCell.play (Python method) — Activate point cell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PointCell.play.html#single_cell_parser.cell.PointCell.play" title="single_cell_parser.cell.PointCell.play (Python function) — Activate point cell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">play</span></code></a>()</p></td>
 <td><p>Activate point cell</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.append.html#single_cell_parser.cell.PointCell.append" title="single_cell_parser.cell.PointCell.append (Python method) — Append an additional spike time to the presynaptic cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(spikeT, spike_source)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.append.html#single_cell_parser.cell.PointCell.append" title="single_cell_parser.cell.PointCell.append (Python function) — Append an additional spike time to the presynaptic cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(spikeT, spike_source)</p></td>
 <td><p>Append an additional spike time to the presynaptic cell.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PointCell.compute_spike_train_times.html#single_cell_parser.cell.PointCell.compute_spike_train_times" title="single_cell_parser.cell.PointCell.compute_spike_train_times (Python method) — Compute a simple spike train for the presynaptic cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_spike_train_times</span></code></a>(interval, noise, start, stop, nSpikes, spike_source)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PointCell.compute_spike_train_times.html#single_cell_parser.cell.PointCell.compute_spike_train_times" title="single_cell_parser.cell.PointCell.compute_spike_train_times (Python function) — Compute a simple spike train for the presynaptic cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_spike_train_times</span></code></a>(interval, noise, start, stop, nSpikes, spike_source)</p></td>
 <td><p>Compute a simple spike train for the presynaptic cell.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PointCell._next_interval.html#single_cell_parser.cell.PointCell._next_interval" title="single_cell_parser.cell.PointCell._next_interval (Python method) — Calculate the next spike interval t for a simple spike train."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_next_interval</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PointCell._next_interval.html#single_cell_parser.cell.PointCell._next_interval" title="single_cell_parser.cell.PointCell._next_interval (Python function) — Calculate the next spike interval t for a simple spike train."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_next_interval</span></code></a>()</p></td>
 <td><p>Calculate the next spike interval <span class="math notranslate nohighlight">\(t\)</span> for a simple spike train.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="PointCell._add_synapse_pointer.html#single_cell_parser.cell.PointCell._add_synapse_pointer" title="single_cell_parser.cell.PointCell._add_synapse_pointer (Python method) — Add a Synapse to the cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_synapse_pointer</span></code></a>(synapse)</p></td>
-<td><p>Add a <code class="xref py py-class docutils literal notranslate"><span class="pre">Synapse</span></code> to the cell.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="PointCell._add_synapse_pointer.html#single_cell_parser.cell.PointCell._add_synapse_pointer" title="single_cell_parser.cell.PointCell._add_synapse_pointer (Python function) — Add a Synapse to the cell."><code class="xref py py-obj docutils literal notranslate"><span class="pre">_add_synapse_pointer</span></code></a>(synapse)</p></td>
+<td><p>Add a <a class="reference internal" href="../synapse/Synapse.html#single_cell_parser.synapse.Synapse" title="single_cell_parser.synapse.Synapse (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Synapse</span></code></a> to the cell.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.turn_off.html#single_cell_parser.cell.PointCell.turn_off" title="single_cell_parser.cell.PointCell.turn_off (Python method) — Turns off the spike source."><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn_off</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PointCell.turn_off.html#single_cell_parser.cell.PointCell.turn_off" title="single_cell_parser.cell.PointCell.turn_off (Python function) — Turns off the spike source."><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn_off</span></code></a>()</p></td>
 <td><p>Turns off the spike source.</p></td>
 </tr>
 </tbody>
@@ -1634,7 +1665,7 @@ These are initialized from <code class="xref py py-paramref docutils literal not
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="PySection._init_range_var_recording.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: PySection._init_range_var_recording" rel="prev">
+        <a href="PySection._init_range_var_recording.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: _init_range_var_recording" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1643,20 +1674,20 @@ These are initialized from <code class="xref py py-paramref docutils literal not
               <span class="md-footer__direction">
                 Previous
               </span>
-              PySection._init_range_var_recording
+              _init_range_var_recording
             </div>
           </div>
         </a>
       
       
         
-        <a href="PointCell.is_active.html" class="md-footer__link md-footer__link--next" aria-label="Next: PointCell.is_active" rel="next">
+        <a href="PointCell.is_active.html" class="md-footer__link md-footer__link--next" aria-label="Next: is_active" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              PointCell.is_active
+              is_active
             </div>
           </div>
           <div class="md-footer__button md-icon">

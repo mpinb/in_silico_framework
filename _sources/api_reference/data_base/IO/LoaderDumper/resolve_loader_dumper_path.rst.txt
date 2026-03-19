@@ -6,7 +6,7 @@ resolve_loader_dumper_path
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.resolve_loader_dumper_path(loader_path)
+.. function:: data_base.IO.LoaderDumper.resolve_loader_dumper_path(loader_path)
 
 
    Resolve a loader path to an absolute path.

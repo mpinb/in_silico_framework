@@ -6,7 +6,7 @@ get_max_generation
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.get_max_generation(db_run)
+.. function:: biophysics_fitting.optimizer.get_max_generation(db_run)
 
 
    Returns the index of the next iteration in a database.

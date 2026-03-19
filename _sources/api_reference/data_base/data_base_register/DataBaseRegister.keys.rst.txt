@@ -1,13 +1,12 @@
 
 
+keys
+====
 
 
+.. Signature -------------------------------
 
-DataBaseRegister.keys
-=====================
-
-
-.. py:method:: data_base.data_base_register.DataBaseRegister.keys()
+.. function:: data_base.data_base_register.DataBaseRegister.keys()
 
 
    Get all keys in the registry.

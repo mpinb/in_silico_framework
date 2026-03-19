@@ -6,7 +6,7 @@ get_hay_problem_description
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.specification.get_hay_problem_description()
+.. function:: biophysics_fitting.hay.specification.get_hay_problem_description()
 
 
    Get the problem description used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.

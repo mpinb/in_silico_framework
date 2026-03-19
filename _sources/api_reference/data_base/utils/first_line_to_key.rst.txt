@@ -6,7 +6,7 @@ first_line_to_key
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.first_line_to_key(stringios)
+.. function:: data_base.utils.first_line_to_key(stringios)
 
 
    Convert a list of StringIO objects to a dictionary.

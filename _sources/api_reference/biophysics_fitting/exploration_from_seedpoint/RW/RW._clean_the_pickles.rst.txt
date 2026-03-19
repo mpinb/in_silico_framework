@@ -1,13 +1,12 @@
 
 
+_clean_the_pickles
+==================
 
 
+.. Signature -------------------------------
 
-RW._clean_the_pickles
-=====================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._clean_the_pickles(outdir, files, iteration)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._clean_the_pickles(outdir, files, iteration)
 
 
    Remove the pickle files that correspond to the intermediate results of a iteration.

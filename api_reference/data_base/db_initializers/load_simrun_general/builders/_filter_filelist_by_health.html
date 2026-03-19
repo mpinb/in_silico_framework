@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_paramlinks.css" />
@@ -736,6 +736,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../config/index.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/config/index.rst (reference label)" class="md-ellipsis">config</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../data_parsing/index.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/data_parsing/index.rst (reference label)" class="md-ellipsis">data_<wbr>parsing</span>
       </a>
@@ -1188,6 +1203,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1373,11 +1403,11 @@
 directory is missing synapse activation files, cell activation files, parameter files,
 or the parameter files have references to missing <a class="reference internal" href="../../../../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a>, <a class="reference internal" href="../../../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a>,
 <a class="reference internal" href="../../../../../file_formats.html#hoc-file-format"><span class="std std-ref">.hoc</span></a> or recsite files, the resulting voltage traces are not reproducible.</p>
-<p>This function checks if this is the case, and filters out such results from <code class="xref py py-paramref docutils literal notranslate"><span class="pre">filelist</span></code></p>
+<p>This function checks if this is the case, and filters out such results from <a class="reference internal" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist" title="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist (Python parameter) — List of voltage trace results, relative to simresult_path."><code class="xref py py-param docutils literal notranslate"><span class="pre">filelist</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist"><span class="sig-name descname">filelist</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://nrn.readthedocs.io/en/latest/progref/programming/gui/list.html#List" title="(in NEURON)">List</a></span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist" title="Permalink to this definition">¶</a></dt><dd><p>List of voltage trace results, relative to <code class="xref py py-paramref docutils literal notranslate"><span class="pre">simresult_path</span></code>.</p>
+<dt id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist"><span class="sig-name descname">filelist</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference external" href="https://www.neuronsimulator.org/en/latest/progref/programming/gui/list.html#List" title="(in NEURON)">List</a></span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist" title="Permalink to this definition">¶</a></dt><dd><p>List of voltage trace results, relative to <a class="reference internal" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.simresult_path" title="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.simresult_path (Python parameter) — Single path where all simulation results are stored."><code class="xref py py-param docutils literal notranslate"><span class="pre">simresult_path</span></code></a>.</p>
 </dd>
 <dt id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.simresult_path"><span class="sig-name descname">simresult_path</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.simresult_path" title="Permalink to this definition">¶</a></dt><dd><p>Single path where all simulation results are stored.</p>
 </dd>
@@ -1389,10 +1419,10 @@ or the parameter files have references to missing <a class="reference internal" 
 <dd class="field-even"><p>A filelist of reproducible simulation results.</p>
 </dd>
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-return-type" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://nrn.readthedocs.io/en/latest/progref/programming/gui/list.html#List" title="(in NEURON)">List</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://www.neuronsimulator.org/en/latest/progref/programming/gui/list.html#List" title="(in NEURON)">List</a></p>
 </dd>
 <dt class="field-even" id="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-raises">Raises<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health-raises" title="Permalink to this headline">¶</a></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if no simulations in <code class="xref py py-paramref docutils literal notranslate"><span class="pre">filelist</span></code> can be reproduced.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – if no simulations in <a class="reference internal" href="#data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist" title="data_base.db_initializers.load_simrun_general.builders._filter_filelist_by_health.filelist (Python parameter) — List of voltage trace results, relative to simresult_path."><code class="xref py py-param docutils literal notranslate"><span class="pre">filelist</span></code></a> can be reproduced.</p>
 </dd>
 </dl>
 </dd></dl>

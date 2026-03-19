@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -18,10 +17,11 @@ vtk
    write_vtk_skeleton_file </api_reference/visualize/vtk/write_vtk_skeleton_file>
    convert_amira_lattice_to_vtk </api_reference/visualize/vtk/convert_amira_lattice_to_vtk>
 
-.. py:module:: visualize.vtk
+.. module:: visualize.vtk
 
 .. autoapi-nested-parse::
    Save simulation data in vtk compatible formats
+
 
 
 
@@ -46,6 +46,22 @@ Functions
      - Write out a .vtk file for a neuron morphology.
    * - :py:obj:`convert_amira_lattice_to_vtk <visualize.vtk.convert_amira_lattice_to_vtk>`\ (surf\_file, outname, outdir)
      - Convert an AMIRA lattice file to vtk structured points.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <visualize.vtk.logger>`
+     - \-
+
 
 
 

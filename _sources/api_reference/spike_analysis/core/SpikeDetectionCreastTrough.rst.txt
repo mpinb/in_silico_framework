@@ -28,10 +28,11 @@ SpikeDetectionCreastTrough
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: spike_analysis.core.SpikeDetectionCreastTrough(reader_object, lim_creast='minimum', lim_trough='minimum', max_creast_trough_interval=2.0, tdelta=1.0, stimulus_period=1, stimulus_period_offset=0, upper_creast_threshold=np.inf, cellid='__no_cellid_assigned__', spike_time_mode='latest')
+.. class:: spike_analysis.core.SpikeDetectionCreastTrough(reader_object, lim_creast='minimum', lim_trough='minimum', max_creast_trough_interval=2.0, tdelta=1.0, stimulus_period=1, stimulus_period_offset=0, upper_creast_threshold=np.inf, cellid='__no_cellid_assigned__', spike_time_mode='latest')
+
+   Bases: :py:obj:`object`
    
    Detects spikes by creast and trough amplitude.
 
@@ -52,8 +53,8 @@ SpikeDetectionCreastTrough
    :type tdelta: float
    :param stimulus_period: number of stimuli applied per trial. E.g., for paired pulse stimuli, it should be 2.
    :type stimulus_period: int
-   :param stimulus_period_offse: Number of stimulus that initiates first trial.
-   :type stimulus_period_offse: int
+   :param stimulus_period_offset: Number of stimulus that initiates first trial.
+   :type stimulus_period_offset: int
    :param cellid: name to be used in spike times dataframe
    :type cellid: str
 

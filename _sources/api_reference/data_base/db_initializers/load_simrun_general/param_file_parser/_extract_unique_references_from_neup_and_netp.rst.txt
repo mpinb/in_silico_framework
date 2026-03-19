@@ -6,16 +6,18 @@ _extract_unique_references_from_neup_and_netp
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._extract_unique_references_from_neup_and_netp(paramfile_hashmap_df, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._extract_unique_references_from_neup_and_netp(paramfile_hashmap_df, client=None, filter_param_files_by_content=False)
 
 
    Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
-   and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`neuron_parameters_format`.
+   and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`cell_parameters_format`.
 
-   :param paramfile_hashmap_df: A pandas dataframe containing all :ref:`neuron_parameters_format` and :ref:`network_parameters_format`,
+   :param paramfile_hashmap_df: A pandas dataframe containing all :ref:`cell_parameters_format` and :ref:`network_parameters_format`,
                                 as well as a hash of their content.
                                 Should normally be created by :py:meth:`construct_param_filename_hashmap_df`
    :type paramfile_hashmap_df: pandas.DataFrame
+   :param filter_param_files_by_content: Whether to filter out parameter files with identical content
+   :type filter_param_files_by_content: bool
    :param client: A parallellization client.
    :type client: distributed.client.Client
 

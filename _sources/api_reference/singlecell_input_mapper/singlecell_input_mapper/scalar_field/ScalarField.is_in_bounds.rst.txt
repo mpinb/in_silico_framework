@@ -1,13 +1,12 @@
 
 
+is_in_bounds
+============
 
 
+.. Signature -------------------------------
 
-ScalarField.is_in_bounds
-========================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds(xyz)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.is_in_bounds(xyz)
 
 
    Check if point is within bounding box of mesh.

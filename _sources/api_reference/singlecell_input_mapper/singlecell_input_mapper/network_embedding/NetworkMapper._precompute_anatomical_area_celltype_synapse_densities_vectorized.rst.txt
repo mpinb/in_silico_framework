@@ -1,13 +1,12 @@
 
 
+_precompute_anatomical_area_celltype_synapse_densities_vectorized
+=================================================================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized
-===============================================================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized(boutonDensities)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._precompute_anatomical_area_celltype_synapse_densities_vectorized(boutonDensities)
 
 
    Compute synapse densities of all presynaptic cell types in all anatomical_areas

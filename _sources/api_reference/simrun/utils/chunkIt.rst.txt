@@ -6,7 +6,7 @@ chunkIt
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.chunkIt(seq, num)
+.. function:: simrun.utils.chunkIt(seq, num)
 
 
    Split a sequence in multiple lists which have approximately equal size.

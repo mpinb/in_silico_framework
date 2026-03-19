@@ -6,7 +6,7 @@ get_objective_function
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.get_objective_function(db_setup)
+.. function:: biophysics_fitting.optimizer.get_objective_function(db_setup)
 
 
    Get the objective function for the optimization.

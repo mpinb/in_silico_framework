@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
 
 
@@ -14,13 +13,14 @@ scalar_field
 
    ScalarField </api_reference/singlecell_input_mapper/singlecell_input_mapper/scalar_field/ScalarField>
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper.scalar_field
+.. module:: singlecell_input_mapper.singlecell_input_mapper.scalar_field
 
 .. autoapi-nested-parse::
    Implementation of 3D scalar fields based on numpy arrays.
 
-   Note that this class is identical to :py:class:`single_cell_parser.scalar_field.ScalarField`.
+   Note that this class is identical to :class:`single_cell_parser.scalar_field.ScalarField`.
    It is duplicated here for package independence.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -36,6 +36,8 @@ Classes
    
    * - :py:obj:`ScalarField <singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField>`
      - 3D scalar fields based on numpy arrays
+
+
 
 
 

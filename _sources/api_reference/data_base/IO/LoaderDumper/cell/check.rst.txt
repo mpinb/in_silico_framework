@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.cell.check(obj)
+.. function:: data_base.IO.LoaderDumper.cell.check(obj)
 
 
    Checks whether obj can be saved with this dumper
@@ -14,7 +14,7 @@ check
    :param obj: Object to be saved
    :type obj: object
 
-   :returns: Whether the object is a :py:class:`single_cell_parser.cell.Cell` object
+   :returns: Whether the object is a :class:`single_cell_parser.cell.Cell` object
    :rtype: bool
 
 

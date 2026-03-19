@@ -6,7 +6,7 @@ setup_db_run
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.setup_db_run(db_setup, run)
+.. function:: biophysics_fitting.optimizer.setup_db_run(db_setup, run)
 
 
    Create a sub-database for each run of the optimization algorithm.

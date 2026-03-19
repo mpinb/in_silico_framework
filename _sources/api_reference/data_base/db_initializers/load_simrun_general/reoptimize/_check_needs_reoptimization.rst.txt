@@ -6,12 +6,12 @@ _check_needs_reoptimization
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization(key, old_dumper_name, new_dumper_name)
+.. function:: data_base.db_initializers.load_simrun_general.reoptimize._check_needs_reoptimization(key, old_dumper_name, new_dumper_name)
 
 
    Check if a key needs re-optimization.
 
-   Dumper formats that need to be re-optimized are saved in :py:mod:`~data_base.db_initializers.load_simrun_general.config`.
+   Dumper formats that need to be re-optimized are saved in :mod:`~data_base.db_initializers.load_simrun_general.config`.
 
    :param key: The key to check.
    :type key: str

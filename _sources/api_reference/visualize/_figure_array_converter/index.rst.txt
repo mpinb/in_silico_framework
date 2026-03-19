@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -16,7 +15,8 @@ _figure_array_converter
    show_pixel_object </api_reference/visualize/_figure_array_converter/show_pixel_object>
    fig2np </api_reference/visualize/_figure_array_converter/fig2np>
 
-.. py:module:: visualize._figure_array_converter
+.. module:: visualize._figure_array_converter
+
 
 
 .. rst-class:: absolute-paragraph
@@ -31,7 +31,7 @@ Classes
    :class: summarytable
    
    * - :py:obj:`PixelObject <visualize._figure_array_converter.PixelObject>`
-     - Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
+     - Dataclass to hold pixel information from either a :class:`matplotlib.pyplot.Axes` or a numpy array.
 
 
 .. rst-class:: absolute-paragraph
@@ -49,6 +49,22 @@ Functions
      - Displays a PixelObject on an axis
    * - :py:obj:`fig2np <visualize._figure_array_converter.fig2np>`\ (fig)
      - Converts fig-object to pixels as numpy arrays.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`__author_ <visualize._figure_array_converter.__author_>`
+     - \-
+
 
 
 

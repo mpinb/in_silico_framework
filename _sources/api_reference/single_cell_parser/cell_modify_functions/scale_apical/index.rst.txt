@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ 
 
 
@@ -16,10 +15,11 @@ scale_apical
    scale_apical_dendrite </api_reference/single_cell_parser/cell_modify_functions/scale_apical/scale_apical_dendrite>
    scale_by_detailed_compartment </api_reference/single_cell_parser/cell_modify_functions/scale_apical/scale_by_detailed_compartment>
 
-.. py:module:: single_cell_parser.cell_modify_functions.scale_apical
+.. module:: single_cell_parser.cell_modify_functions.scale_apical
 
 .. autoapi-nested-parse::
    Scale the apical dendrite of a cell.
+
 
 
 
@@ -40,6 +40,22 @@ Functions
      - Scales the apical dendrite of a cell.
    * - :py:obj:`scale_by_detailed_compartment <single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment>`\ (cell, \*\*kwargs)
      - Scales subcellular compartments based on ``detailed_labels``.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.cell_modify_functions.scale_apical.logger>`
+     - \-
+
 
 
 

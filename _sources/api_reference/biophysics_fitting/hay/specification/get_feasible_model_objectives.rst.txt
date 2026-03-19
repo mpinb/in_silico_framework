@@ -6,7 +6,7 @@ get_feasible_model_objectives
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.specification.get_feasible_model_objectives()
+.. function:: biophysics_fitting.hay.specification.get_feasible_model_objectives()
 
 
    Get the objectives of a feasible model.

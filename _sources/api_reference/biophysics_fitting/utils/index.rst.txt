@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -30,7 +29,7 @@ utils
    pool_helper </api_reference/biophysics_fitting/utils/pool_helper>
    execute_in_child_process_kept_alive </api_reference/biophysics_fitting/utils/execute_in_child_process_kept_alive>
 
-.. py:module:: biophysics_fitting.utils
+.. module:: biophysics_fitting.utils
 
 .. autoapi-nested-parse::
    Utility functions for biophysics fitting.
@@ -39,6 +38,7 @@ utils
    - Selection sections
    - Reading out Vm at a section
    - Multiprocessing
+
 
 
 .. rst-class:: absolute-paragraph
@@ -97,6 +97,22 @@ Functions
      - Unserialize a function and its arguments, run it, and serialize the output.
    * - :py:obj:`execute_in_child_process_kept_alive <biophysics_fitting.utils.execute_in_child_process_kept_alive>`\ (fun)
      - Execute a function in a child process, keeping the process alive.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`connected_to_dend_beyond <biophysics_fitting.utils.connected_to_dend_beyond>`
+     - \-
+
 
 
 

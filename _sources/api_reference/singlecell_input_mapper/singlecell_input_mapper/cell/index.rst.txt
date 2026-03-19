@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
 
 
@@ -18,13 +17,14 @@ cell
    Synapse </api_reference/singlecell_input_mapper/singlecell_input_mapper/cell/Synapse>
    CellParser </api_reference/singlecell_input_mapper/singlecell_input_mapper/cell/CellParser>
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper.cell
+.. module:: singlecell_input_mapper.singlecell_input_mapper.cell
 
 .. autoapi-nested-parse::
    Classes for setting up a cell morphology and mapping synapses onto it.
 
    Used to create network realizations.
-   For functional network realizations (i.e. known presynaptic origin of each synapse), see :py:mod:`single_cell_parser.network`
+   For functional network realizations (i.e. known presynaptic origin of each synapse), see :mod:`single_cell_parser.network`
+
 
 
 .. rst-class:: absolute-paragraph
@@ -48,6 +48,8 @@ Classes
      - Leightweight dataclass to store basic synapse information.
    * - :py:obj:`CellParser <singlecell_input_mapper.singlecell_input_mapper.cell.CellParser>`
      - Extract cell morphology from an AMIRA hoc file.
+
+
 
 
 

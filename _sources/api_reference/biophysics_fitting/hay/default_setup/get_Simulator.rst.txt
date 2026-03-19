@@ -6,10 +6,10 @@ get_Simulator
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.get_Simulator(fixed_params, step=False, vInit=False)
+.. function:: biophysics_fitting.hay.default_setup.get_Simulator(fixed_params, step=False, vInit=False)
 
 
-   Get a set up :py:class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
+   Get a set up :class:`~biophysics_fitting.simulator.Simulator` object for the Hay protocol.
 
    Given cell-specific fixed parameters, set up a simulator object for the Hay protocol,
    including measuring functions for bAP and BAC stimuli (no step currents)
@@ -22,7 +22,7 @@ get_Simulator
    :type vInit: bool
 
    :returns: A simulator object.
-   :rtype: :py:class:`~biophysics_fitting.simulator.Simulator`
+   :rtype: :class:`~biophysics_fitting.simulator.Simulator`
 
    .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 

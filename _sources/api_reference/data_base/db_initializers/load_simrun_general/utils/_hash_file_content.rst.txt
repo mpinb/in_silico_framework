@@ -6,7 +6,7 @@ _hash_file_content
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.utils._hash_file_content(fn)
+.. function:: data_base.db_initializers.load_simrun_general.utils._hash_file_content(fn)
 
 
 

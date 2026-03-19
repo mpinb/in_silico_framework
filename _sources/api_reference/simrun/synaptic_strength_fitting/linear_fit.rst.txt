@@ -6,7 +6,7 @@ linear_fit
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.linear_fit(gAMPANMDA, epsp)
+.. function:: simrun.synaptic_strength_fitting.linear_fit(gAMPANMDA, epsp)
 
 
    Calculate a linear fit between the synaptic conductance and the EPSP.

@@ -6,7 +6,7 @@ _resolve_and_copy_syn
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_syn(syn_fn, scattered_fn_map)
+.. function:: data_base.db_initializers.load_simrun_general.param_file_parser._resolve_and_copy_syn(syn_fn, scattered_fn_map)
 
 
    Resolve the reference to a :ref:`hoc_file_format` file and

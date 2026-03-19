@@ -24,10 +24,11 @@ ScalarField
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: single_cell_parser.scalar_field.ScalarField(mesh=None, origin=(), extent=(), spacing=(), bBox=())
+.. class:: single_cell_parser.scalar_field.ScalarField(mesh=None, origin=(), extent=(), spacing=(), bBox=())
+
+   Bases: :py:obj:`object`
    
    3D scalar fields based on numpy arrays
 

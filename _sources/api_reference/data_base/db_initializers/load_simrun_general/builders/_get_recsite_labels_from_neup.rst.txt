@@ -6,7 +6,7 @@ _get_recsite_labels_from_neup
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._get_recsite_labels_from_neup(neup)
+.. function:: data_base.db_initializers.load_simrun_general.builders._get_recsite_labels_from_neup(neup)
 
 
 

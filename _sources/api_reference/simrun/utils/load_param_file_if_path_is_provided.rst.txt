@@ -6,7 +6,7 @@ load_param_file_if_path_is_provided
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.load_param_file_if_path_is_provided(pathOrParam)
+.. function:: simrun.utils.load_param_file_if_path_is_provided(pathOrParam)
 
 
    Convenience function to load a parameter file whether it is a string or a dictionary.

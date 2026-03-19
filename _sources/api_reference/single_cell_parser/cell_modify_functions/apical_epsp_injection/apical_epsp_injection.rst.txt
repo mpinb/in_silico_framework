@@ -6,7 +6,7 @@ apical_epsp_injection
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.apical_epsp_injection.apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
+.. function:: single_cell_parser.cell_modify_functions.apical_epsp_injection.apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
 
 
    Injects an epsp-shaped current at a certain distance from the soma.

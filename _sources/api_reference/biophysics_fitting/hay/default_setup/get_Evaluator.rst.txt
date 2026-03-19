@@ -6,10 +6,10 @@ get_Evaluator
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.default_setup.get_Evaluator(step=False, vInit=False, bAP_kwargs={}, BAC_kwargs={}, StepOne_kwargs={}, StepTwo_kwargs={}, StepThree_kwargs={}, interpolate_voltage_trace=True)
+.. function:: biophysics_fitting.hay.default_setup.get_Evaluator(step=False, vInit=False, bAP_kwargs={}, BAC_kwargs={}, StepOne_kwargs={}, StepTwo_kwargs={}, StepThree_kwargs={}, interpolate_voltage_trace=True)
 
 
-   Get a :py:class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
+   Get a :class:`~biophysics_fitting.evaluator.Evaluator` object for the Hay protocol.
 
    Sets up an evaluator object for the Hay protocol, including measuring functions for bAP, BAC and three step current stimuli.
 
@@ -31,9 +31,9 @@ get_Evaluator
    :type interpolate_voltage_trace: bool
 
    :returns: An evaluator object.
-   :rtype: :py:class:`~biophysics_fitting.evaluator.Evaluator`
+   :rtype: :class:`~biophysics_fitting.evaluator.Evaluator`
 
-   :raises NotImplementedError: If :paramref:vInit is set to True.
+   :raises NotImplementedError: If :paramvInit is set to True.
 
    .. seealso:: See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
 

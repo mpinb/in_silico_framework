@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.dask_to_parquet.Loader.get(savedir, columns=None)
+.. function:: data_base.IO.LoaderDumper.dask_to_parquet.Loader.get(savedir, columns=None)
 
 
    Load a dask dataframe from one or more parquet files.
@@ -20,7 +19,7 @@ Loader.get
    :returns: The loaded dask dataframe
    :rtype: dask.dataframe
 
-   .. seealso:: Each individual partitoin is loaded using :py:meth:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.load_helper`.
+   .. seealso:: Each individual partitoin is loaded using :func:`~data_base.isf_data_base.IO.LoaderDumper.dask_to_parquet.load_helper`.
 
 
 

@@ -1,13 +1,12 @@
 
 
+_compute_seg_diameters
+======================
 
 
+.. Signature -------------------------------
 
-PySection._compute_seg_diameters
-================================
-
-
-.. py:method:: single_cell_parser.cell.PySection._compute_seg_diameters()
+.. function:: single_cell_parser.cell.PySection._compute_seg_diameters()
 
 
    Computes the diameter of each segment in this section.

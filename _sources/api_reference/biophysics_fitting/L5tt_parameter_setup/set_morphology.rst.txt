@@ -6,7 +6,7 @@ set_morphology
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_morphology(cell_param, filename=None)
+.. function:: biophysics_fitting.L5tt_parameter_setup.set_morphology(cell_param, filename=None)
 
 
    Add the morphology to a cell parameter object.
@@ -19,7 +19,7 @@ set_morphology
    :type filename: str
 
    :returns: The updated cell parameter dictionary.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet` | dict
 
 
 

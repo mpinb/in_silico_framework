@@ -6,10 +6,10 @@ write_gif_from_images
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.utils.write_gif_from_images(images, out_path, interval=40, images_format='.png', auto_sort_paths=True)
+.. function:: visualize.utils.write_gif_from_images(images, out_path, interval=40, images_format='.png', auto_sort_paths=True)
 
 
-   Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+   Creates a gif from a set of images, and saves it to :param:`out_path`.
 
    :param images: list of images, a directory with images or a list of directories with images
    :type images: list | str

@@ -1,13 +1,12 @@
 
 
+plot_vt
+=======
 
 
+.. Signature -------------------------------
 
-PSPs.plot_vt
-============
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.plot_vt(population, opacity=1, g=1.0, merge=True, merge_celltype_kwargs={}, fig=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.plot_vt(population, opacity=1, g=1.0, merge=True, merge_celltype_kwargs={}, fig=None)
 
 
    Plot the voltage traces of the PSPs.

@@ -6,7 +6,7 @@ _get_rec_site_label_fn_map
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._get_rec_site_label_fn_map(filelist)
+.. function:: data_base.db_initializers.load_simrun_general.builders._get_rec_site_label_fn_map(filelist)
 
 
    Get the recording sites from the cell parameter files.
@@ -14,8 +14,8 @@ _get_rec_site_label_fn_map
    Recording sites are locations onto the postsynaptic membrane where the voltage traces are recorded.
    This is used for recording the membrane voltage at non-somatic locations.
 
-   :param db: The database to which the data should be added.
-   :type db: ~data_base.DataBase
+   :param filelist: List of dendritic :ref:`voltage_traces_format` files. May be relative to the simulation results directory or abslute paths.
+   :type filelist: List[str]
 
    :returns: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.
    :rtype: dict

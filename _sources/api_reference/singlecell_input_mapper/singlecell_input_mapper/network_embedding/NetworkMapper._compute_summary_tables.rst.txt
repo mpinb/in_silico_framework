@@ -1,13 +1,12 @@
 
 
+_compute_summary_tables
+=======================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._compute_summary_tables
-=====================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_summary_tables(connectedCells, connectedCellsPerStructure)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._compute_summary_tables(connectedCells, connectedCellsPerStructure)
 
 
    Computes all summary data.
@@ -17,8 +16,8 @@ NetworkMapper._compute_summary_tables
    - numbers of synapses per cell type/anatomical_area,
    - distance of synapses to soma, convergence etc.
 
-   Used by :py:meth:`~create_network_embedding` and
-   :py:meth:`~create_network_embedding_for_simulations`.
+   Used by :func:`~create_network_embedding` and
+   :func:`~create_network_embedding_for_simulations`.
 
    :param connectedCells: Dictionary of connected cells.
    :type connectedCells: dict

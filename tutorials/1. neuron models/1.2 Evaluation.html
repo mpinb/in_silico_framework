@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../_static/sphinx_paramlinks.css" />
@@ -1328,11 +1328,15 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span><code>[ ]:
 </code></pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">visualize.current_visualizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">CurrentAnalysis</span>
-<span class="n">ca</span> <span class="o">=</span> <span class="n">CurrentAnalysis</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="n">rangeVars</span> <span class="o">=</span> <span class="n">record_vars</span><span class="p">)</span>
+<span class="n">ca</span> <span class="o">=</span> <span class="n">CurrentAnalysis</span><span class="p">(</span>
+    <span class="n">cell</span><span class="p">,</span>
+    <span class="n">rangeVars</span> <span class="o">=</span> <span class="n">record_vars</span>
+    <span class="n">secID</span><span class="o">=</span><span class="s2">&quot;bifurcation&quot;</span>  <span class="c1"># section indices also supportd</span>
+    <span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">ca</span><span class="o">.</span><span class="n">plot_areas</span><span class="p">(</span><span class="n">plot_voltage</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">t_stim</span><span class="o">=</span><span class="mi">295</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">:</span> <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -1346,7 +1350,7 @@ IPython: 8.12.2, Interface: heads/data+0.g1077bcf8.dirty, PIL: 10.4.0, _brotli: 
 <img alt="../../_images/tutorials_1._neuron_models_1.2_Evaluation_18_0.png" src="../../_images/tutorials_1._neuron_models_1.2_Evaluation_18_0.png" />
 </div>
 </div>
-<p>The black and orange line denote membrane voltage at the soma and dendritic recording location respectively. The filled in areas are a spatial sum of ionic current across time: <span class="math notranslate nohighlight">\(I_{ion}(t) = \sum_{dendrites} \int_x I_{ion} dx\)</span></p>
+<p>The black and orange line denote membrane voltage at the soma and dendritic recording location respectively. The filled in areas show the amount of current flowing through the bifurcation section of the cell.</p>
 <p>Bear in mind that the first spike is mostly due to somatic currents. While these are very much present, they are not very visible on the plot above, since they pale in comparison to the total amount of current through all dendrites. You can plot again on a logscale to verify this.</p>
 <h3 id="Animating-the-membrane-voltage">Animating the membrane voltage<a class="headerlink" href="#Animating-the-membrane-voltage" title="Link to this heading">¶</a></h3>
 <p>So far, we have only visualized the somatic membrane potential. Now, we create a short animation, where the whole dendrite is visualized.</p>

@@ -6,7 +6,7 @@ get_voltage_traces_divisions_by_metadata
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata(db, repartition=None)
+.. function:: data_base.db_initializers.load_simrun_general.metadata_utils.get_voltage_traces_divisions_by_metadata(db, repartition=None)
 
 
    Find the division indices based on the metadata.
@@ -15,10 +15,10 @@ get_voltage_traces_divisions_by_metadata
    the first entry of that simulation trial.
    If one wants to have one simulation directory per partition, this is a convenient way to infer partitions.
 
-   :param metadata: Metadata dataframe containing the simulation trial indices.
-   :type metadata: pd.DataFrame
+   :param db: A :class:`data_base.DataBase` containing the ``"metadata"`` key.
+   :type db: data_base.DataBase
    :param repartition: If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
-                       If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
+                       If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
                        If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
    :type repartition: bool|int
 

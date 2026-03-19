@@ -6,7 +6,7 @@ _check_n_vts_match
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.health._check_n_vts_match(sim_result_dir)
+.. function:: data_base.db_initializers.load_simrun_general.health._check_n_vts_match(sim_result_dir)
 
 
 

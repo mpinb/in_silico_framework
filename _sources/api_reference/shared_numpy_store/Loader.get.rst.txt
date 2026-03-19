@@ -1,0 +1,18 @@
+
+
+get
+===
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.Loader.get(savedir)
+
+
+   Load the shared numpy store from the specified folder.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

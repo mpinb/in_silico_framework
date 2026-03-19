@@ -1,13 +1,12 @@
 
 
+AI
+==
 
 
+.. Signature -------------------------------
 
-_Step.AI
-========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.AI(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.AI(voltage_traces)
 
 
    Get the adaptation index of the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.AI
                  and ``".raw"`` to the adaptation index of the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_adaptation_index`
+   .. seealso:: :func:`~biophysics_fitting.ephys.STEP_adaptation_index`
 
 
 

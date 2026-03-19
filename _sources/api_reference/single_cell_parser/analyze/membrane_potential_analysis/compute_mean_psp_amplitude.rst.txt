@@ -6,13 +6,13 @@ compute_mean_psp_amplitude
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.compute_mean_psp_amplitude(vTraces, tStim, dt, width=35.0, t_delay=15.0)
 
 
    Compute the mean amplitude of all PSPs across multiple voltage traces.
 
    The post-synaptic potential (PSP) amplitude is the maximum membrane voltage deflection
-   between :paramref:`tStim` + :paramref:`t_delay` and :paramref:`tStim` + :paramref:`delay` + :paramref:`width`.
+   between :param:`tStim` + :param:`t_delay` and :param:`tStim` + :param:`t_delay` + :param:`width`.
 
    :param vTraces: List of voltage traces.
    :type vTraces: list

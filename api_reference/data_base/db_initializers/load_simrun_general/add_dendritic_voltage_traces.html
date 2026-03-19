@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -494,6 +494,21 @@
     <li class="md-nav__item">
       <a href="builders/index.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/index.rst (reference label)" class="md-ellipsis">builders</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config/index.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/config/index.rst (reference label)" class="md-ellipsis">config</span>
       </a>
     </li>
   
@@ -1058,6 +1073,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1239,7 +1269,7 @@
 <dt class="sig sig-object highlight sig-wrap py" id="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces">
 <a class="reference internal" href="../../index.html#module-data_base" title="data_base (Python module)"><span class="sig-name descname"><span class="pre">data_base</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-data_base.db_initializers" title="data_base.db_initializers (Python module)"><span class="sig-name descname"><span class="pre">db_initializers</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><span class="sig-name descname"><span class="pre">load_simrun_general</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">add_dendritic_voltage_traces</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.db" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.db (Python parameter) — The database to which the data should be added."><span class="n"><span class="pre">db</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.rewrite_in_optimized_format" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.rewrite_in_optimized_format (Python parameter) — If True, the data is converted to a high performance format. Default is True."><span class="n"><span class="pre">rewrite_in_optimized_format</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times (Python parameter) — If True, the dendritic spike times are added to the database. Default is True."><span class="n"><span class="pre">dendritic_spike_times</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.repartition" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.repartition (Python parameter) — If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over 10000 entries). Default is True."><span class="n"><span class="pre">repartition</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times_threshold" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times_threshold (Python parameter) — Threshold for the dendritic spike times in mV."><span class="n"><span class="pre">dendritic_spike_times_threshold</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="o">-</span><span class="mf">30.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.scheduler (Python parameter)"><span class="n"><span class="pre">scheduler</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.client" title="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.client (Python parameter) — Distributed Client object for parallel computation."><span class="n"><span class="pre">client</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces" title="Link to this definition">¶</a></dt>
 <dd><p>Add dendritic voltage traces to the database.</p>
-<p>Used in <a class="reference internal" href="init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-meth docutils literal notranslate"><span class="pre">init()</span></code></a> to read, parse
+<p>Used in <a class="reference internal" href="init.html#data_base.db_initializers.load_simrun_general.init" title="data_base.db_initializers.load_simrun_general.init (Python function) — Initialize a database with simulation data."><code class="xref py py-func docutils literal notranslate"><span class="pre">init()</span></code></a> to read, parse
 and write the membrane voltage of recorded sites to the database.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces-parameters" title="Permalink to this headline">¶</a></dt>
@@ -1256,7 +1286,7 @@ Default is <code class="docutils literal notranslate"><span class="pre">True</sp
 Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd>
 <dt id="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times_threshold"><span class="sig-name descname">dendritic_spike_times_threshold</span><span class="p"> : </span><span class="desctype"><span class="desctype">float, optional</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.dendritic_spike_times_threshold" title="Permalink to this definition">¶</a></dt><dd><p>Threshold for the dendritic spike times in <span class="math notranslate nohighlight">\(mV\)</span>. Default is <span class="math notranslate nohighlight">\(-30 mV\)</span>.
-See also: <a class="reference internal" href="add_dendritic_spike_times.html#data_base.db_initializers.load_simrun_general.add_dendritic_spike_times" title="data_base.db_initializers.load_simrun_general.add_dendritic_spike_times (Python function) — Add dendritic spike times to the database."><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_dendritic_spike_times()</span></code></a></p>
+See also: <a class="reference internal" href="add_dendritic_spike_times.html#data_base.db_initializers.load_simrun_general.add_dendritic_spike_times" title="data_base.db_initializers.load_simrun_general.add_dendritic_spike_times (Python function) — Add dendritic spike times to the database."><code class="xref py py-func docutils literal notranslate"><span class="pre">add_dendritic_spike_times()</span></code></a></p>
 </dd>
 <dt id="data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.client"><span class="sig-name descname">client</span><span class="p"> : </span><span class="desctype"><span class="desctype">Client</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces.client" title="Permalink to this definition">¶</a></dt><dd><p>Distributed Client object for parallel computation.</p>
 </dd>

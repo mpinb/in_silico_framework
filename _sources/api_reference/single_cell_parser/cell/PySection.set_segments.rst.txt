@@ -1,13 +1,12 @@
 
 
+set_segments
+============
 
 
+.. Signature -------------------------------
 
-PySection.set_segments
-======================
-
-
-.. py:method:: single_cell_parser.cell.PySection.set_segments(nrOfSegments)
+.. function:: single_cell_parser.cell.PySection.set_segments(nrOfSegments)
 
 
    Set spatial discretization.
@@ -25,7 +24,7 @@ PySection.set_segments
    5. Initialize voltage recording.
 
    See also
-       :py:meth:`single_cell_parser.cell_parser.CellParser.determine_nseg`
+       :func:`single_cell_parser.cell_parser.CellParser.determine_nseg`
 
 
 

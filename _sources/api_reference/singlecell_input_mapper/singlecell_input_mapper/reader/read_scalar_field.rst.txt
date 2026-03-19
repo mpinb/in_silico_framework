@@ -6,7 +6,7 @@ read_scalar_field
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field(fname='', dtype=np.float64)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.reader.read_scalar_field(fname='', dtype=np.float64)
 
 
    Read ASCII AMIRA scalar field mesh files with high speed.
@@ -22,7 +22,7 @@ read_scalar_field
    :raises IOError: If the input file does not have a `.am` or `.AM` suffix.
 
    :returns: A scalar field object containing the mesh data, origin, extent, spacing, and bounds.
-   :rtype: :py:class:`~single_cell_parser.scalar_field.ScalarField`
+   :rtype: :class:`~single_cell_parser.scalar_field.ScalarField`
 
 
 

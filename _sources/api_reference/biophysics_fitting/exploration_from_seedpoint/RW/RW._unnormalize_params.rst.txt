@@ -1,13 +1,12 @@
 
 
+_unnormalize_params
+===================
 
 
+.. Signature -------------------------------
 
-RW._unnormalize_params
-======================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params(p)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._unnormalize_params(p)
 
 
    Unnormalize parameters to be between min and max.

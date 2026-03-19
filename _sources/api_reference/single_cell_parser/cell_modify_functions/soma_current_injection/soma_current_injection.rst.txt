@@ -6,7 +6,7 @@ soma_current_injection
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection(cell, amplitude=None, delay=None, duration=None)
+.. function:: single_cell_parser.cell_modify_functions.soma_current_injection.soma_current_injection(cell, amplitude=None, delay=None, duration=None)
 
 
    Inject a step current at the soma.

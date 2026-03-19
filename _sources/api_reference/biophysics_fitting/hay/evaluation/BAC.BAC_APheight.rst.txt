@@ -1,13 +1,12 @@
 
 
+BAC_APheight
+============
 
 
+.. Signature -------------------------------
 
-BAC.BAC_APheight
-================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_APheight(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.BAC_APheight(voltage_traces)
 
 
    Get the height of the first action potential in the somatic voltage trace.
@@ -21,7 +20,7 @@ BAC.BAC_APheight
                  and ``".raw"`` to the height of the first action potential in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:func:`AP_height`
+   .. seealso:: :func:`AP_height`
 
 
 

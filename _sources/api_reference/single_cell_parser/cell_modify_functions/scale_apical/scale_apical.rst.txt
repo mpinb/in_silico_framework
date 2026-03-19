@@ -6,7 +6,7 @@ scale_apical
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment='ApicalDendrite')
+.. function:: single_cell_parser.cell_modify_functions.scale_apical.scale_apical(cell, scale=None, compartment='ApicalDendrite')
 
 
    Scale the apical dendrite of a cell.

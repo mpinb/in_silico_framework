@@ -6,7 +6,7 @@ colorize_key
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.colorize_key(key)
+.. function:: data_base.utils.colorize_key(key)
 
 
    Colorizes a key based on its type.
@@ -19,7 +19,7 @@ colorize_key
    :returns: the colorized key
    :rtype: str
 
-   .. seealso:: :py:meth:`data_base.utils.colorize`
+   .. seealso:: :func:`data_base.utils.colorize`
 
 
 

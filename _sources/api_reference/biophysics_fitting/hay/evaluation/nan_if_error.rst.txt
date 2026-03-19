@@ -6,7 +6,7 @@ nan_if_error
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.nan_if_error(fun)
+.. function:: biophysics_fitting.hay.evaluation.nan_if_error(fun)
 
 
    Wrapper method that returns nan if an error occurs.

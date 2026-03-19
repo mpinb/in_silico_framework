@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -22,10 +21,11 @@ network_param_modify_functions
    inactivate_evoked_and_ongoing_activity_by_celltype_and_column </api_reference/single_cell_parser/network_param_modify_functions/inactivate_evoked_and_ongoing_activity_by_celltype_and_column>
    multi_stimulus_trial </api_reference/single_cell_parser/network_param_modify_functions/multi_stimulus_trial>
 
-.. py:module:: single_cell_parser.network_param_modify_functions
+.. module:: single_cell_parser.network_param_modify_functions
 
 .. autoapi-nested-parse::
    Modify the :ref:`network_parameters_format`.
+
 
 
 
@@ -54,6 +54,8 @@ Functions
      - Inactivates both the evoked and ongoing activity for the celltypes in the :ref:`network_parameters_format`.
    * - :py:obj:`multi_stimulus_trial <single_cell_parser.network_param_modify_functions.multi_stimulus_trial>`\ (netp, inter\_stimulus\_interval, stims, scale\_factors, pop)
      - Makes a network param file for repeatedly stimulating the same whisker during a single trial.
+
+
 
 
 

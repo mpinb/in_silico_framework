@@ -6,7 +6,7 @@ scan_directory
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory(path, fnames, suffix)
+.. function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.scan_directory(path, fnames, suffix)
 
 
    Recursively scans a directory for files with a specific suffix.
@@ -18,7 +18,7 @@ scan_directory
    :param suffix: The suffix of the files to look for.
    :type suffix: str
 
-   :returns: None. Updates :paramref:`fnames` in place.
+   :returns: None. Updates :param:`fnames` in place.
 
 
 

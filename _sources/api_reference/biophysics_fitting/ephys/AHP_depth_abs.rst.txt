@@ -6,7 +6,7 @@ AHP_depth_abs
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.AHP_depth_abs(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.AHP_depth_abs(t, v, thresh=None)
 
 
    Calculates the absolute afterhyperpolarization (AHP) depth for a given voltage trace.

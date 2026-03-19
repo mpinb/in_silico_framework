@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -494,6 +494,21 @@
     <li class="md-nav__item">
       <a href="builders/index.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/builders/index.rst (reference label)" class="md-ellipsis">builders</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config/index.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/config/index.rst (reference label)" class="md-ellipsis">config</span>
       </a>
     </li>
   
@@ -1058,6 +1073,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1249,22 +1279,22 @@ These can then be used to inspect the parameters for each, or to re-run simulati
 <dt id="data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.sti"><span class="sig-name descname">sti</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.sti" title="Permalink to this definition">¶</a></dt><dd><p>For which simulation trial index to load the parameter files.</p>
 </dd>
 <dt id="data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.allPoints"><span class="sig-name descname">allPoints</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.allPoints" title="Permalink to this definition">¶</a></dt><dd><p>If True, all points of the cell are used. Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.
-See also: <a class="reference internal" href="../../../single_cell_parser/create_cell.html#single_cell_parser.create_cell" title="single_cell_parser.create_cell (Python function) — Creating NEURON cell models from cell parameters."><code class="xref py py-meth docutils literal notranslate"><span class="pre">single_cell_parser.create_cell()</span></code></a></p>
+See also: <a class="reference internal" href="../../../single_cell_parser/create_cell.html#single_cell_parser.create_cell" title="single_cell_parser.create_cell (Python function) — Creating NEURON cell models from cell parameters."><code class="xref py py-func docutils literal notranslate"><span class="pre">single_cell_parser.create_cell()</span></code></a></p>
 </dd>
 <dt id="data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.reconnect_synapses"><span class="sig-name descname">reconnect_synapses</span><span class="p"> : </span><span class="desctype"><span class="desctype">bool, optional</span></span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db.reconnect_synapses" title="Permalink to this definition">¶</a></dt><dd><p>If True, the synapses are reconnected to the cell. Default is <code class="docutils literal notranslate"><span class="pre">True</span></code>.
-See also: <code class="xref py py-meth docutils literal notranslate"><span class="pre">single_cell_parser.NetworkMapper.reconnect_saved_synapses()</span></code></p>
+See also: <code class="xref py py-func docutils literal notranslate"><span class="pre">single_cell_parser.NetworkMapper.reconnect_saved_synapses()</span></code></p>
 </dd>
 </dl>
 </dd>
 </dl>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../../../simrun/rerun_db/rerun_db.html#simrun.rerun_db.rerun_db" title="simrun.rerun_db.rerun_db (Python function) — Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database."><code class="xref py py-meth docutils literal notranslate"><span class="pre">simrun.rerun_db.rerun_db()</span></code></a> for the recommended high-level method
+<p><a class="reference internal" href="../../../simrun/rerun_db/rerun_db.html#simrun.rerun_db.rerun_db" title="simrun.rerun_db.rerun_db (Python function) — Recreate and resimulate a network-embedded neuron simulation from a simrun-initialized database."><code class="xref py py-func docutils literal notranslate"><span class="pre">simrun.rerun_db.rerun_db()</span></code></a> for the recommended high-level method
 of re-running simulations from a database.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db-returns">Returns<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db-returns" title="Permalink to this headline">¶</a></dt>
-<dd class="field-odd"><p>The re-initialized <a class="reference internal" href="../../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.cell.Cell</span></code></a> and the <code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.NetworkMapper</span></code> objects.</p>
+<dd class="field-odd"><p>The re-initialized <a class="reference internal" href="../../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.cell.Cell</span></code></a> and the <code class="xref py py-class docutils literal notranslate"><span class="pre">single_cell_parser.NetworkMapper</span></code> objects.</p>
 </dd>
 <dt class="field-even" id="data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db-return-type">Return type<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.load_initialized_cell_and_evokedNW_from_db-return-type" title="Permalink to this headline">¶</a></dt>
 <dd class="field-even"><p>tuple</p>

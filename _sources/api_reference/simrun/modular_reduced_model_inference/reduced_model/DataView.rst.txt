@@ -19,15 +19,16 @@ DataView
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.reduced_model.DataView(mapping_dict=None)
+.. class:: simrun.modular_reduced_model_inference.reduced_model.DataView(mapping_dict=None)
+
+   Bases: :py:obj:`object`
    
    Convenience wrapper class to access data.
 
    This wrapper class redirects data extractors based on a key mapping.
-   This API is used by default in :py:class:`~simrun.modular_reduced_model_inference.Rm`
+   This API is used by default in :class:`~simrun.modular_reduced_model_inference.Rm`
    If no mapping is provided, or a requested key does not exist in the mapping, the original key is used instead.
 
    .. rubric:: Example
@@ -57,9 +58,9 @@ DataView
 
       .. attribute:: Rm
 
-         Reduced model. Set after running :py:meth:`setup`
+         Reduced model. Set after running :func:`setup`
 
-         :type: :py:class:`Rm`
+         :type: :class:`Rm`
 
    :Methods:
 

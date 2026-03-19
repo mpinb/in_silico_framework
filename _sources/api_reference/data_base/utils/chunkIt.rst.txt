@@ -6,10 +6,10 @@ chunkIt
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.chunkIt(seq, num)
+.. function:: data_base.utils.chunkIt(seq, num)
 
 
-   Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+   Splits :param:`seq` in :param:`num` lists, with approximately equal size.
 
    :param seq: array to be split
    :type seq: array

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ :mod:`~biophysics_fitting.hay` ❭ 
 
 
@@ -19,10 +18,11 @@ specification
    get_feasible_model_params </api_reference/biophysics_fitting/hay/specification/get_feasible_model_params>
    get_feasible_model_objectives </api_reference/biophysics_fitting/hay/specification/get_feasible_model_objectives>
 
-.. py:module:: biophysics_fitting.hay.specification
+.. module:: biophysics_fitting.hay.specification
 
 .. autoapi-nested-parse::
    This module provides convenience methods for Hay's model specification (see :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`).
+
 
 
 
@@ -49,6 +49,34 @@ Functions
      - Get a set of feasible model parameters.
    * - :py:obj:`get_feasible_model_objectives <biophysics_fitting.hay.specification.get_feasible_model_objectives>`\ ()
      - Get the objectives of a feasible model.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`CWD <biophysics_fitting.hay.specification.CWD>`
+     - \-
+   * - :py:obj:`objectives_empirical <biophysics_fitting.hay.specification.objectives_empirical>`
+     - \-
+   * - :py:obj:`HAY_BAP_DEFINITIONS <biophysics_fitting.hay.specification.HAY_BAP_DEFINITIONS>`
+     - \-
+   * - :py:obj:`HAY_BAC_DEFINITIONS <biophysics_fitting.hay.specification.HAY_BAC_DEFINITIONS>`
+     - \-
+   * - :py:obj:`HAY_STEP1_DEFINITIONS <biophysics_fitting.hay.specification.HAY_STEP1_DEFINITIONS>`
+     - \-
+   * - :py:obj:`HAY_STEP2_DEFINITIONS <biophysics_fitting.hay.specification.HAY_STEP2_DEFINITIONS>`
+     - \-
+   * - :py:obj:`HAY_STEP3_DEFINITIONS <biophysics_fitting.hay.specification.HAY_STEP3_DEFINITIONS>`
+     - \-
+
 
 
 

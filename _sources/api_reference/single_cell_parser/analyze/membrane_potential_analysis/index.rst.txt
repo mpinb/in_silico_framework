@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.analyze` ❭ 
 
 
@@ -24,10 +23,11 @@ membrane_potential_analysis
    simple_spike_detection </api_reference/single_cell_parser/analyze/membrane_potential_analysis/simple_spike_detection>
    PSTH_from_spike_times </api_reference/single_cell_parser/analyze/membrane_potential_analysis/PSTH_from_spike_times>
 
-.. py:module:: single_cell_parser.analyze.membrane_potential_analysis
+.. module:: single_cell_parser.analyze.membrane_potential_analysis
 
 .. autoapi-nested-parse::
    Analyze the membrane voltage.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -76,6 +76,8 @@ Functions
      - Detect spike times in a voltage trace.
    * - :py:obj:`PSTH_from_spike_times <single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times>`\ (spikeTimeVectors, binSize, tBegin, tEnd, aligned)
      - Calculates a PSTH from spike times.
+
+
 
 
 

@@ -1,13 +1,12 @@
 
 
+save
+====
 
 
+.. Signature -------------------------------
 
-NTParameterSet.save
-===================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet.save(filename)
+.. function:: single_cell_parser.parameters.NTParameterSet.save(filename)
 
 
    Save the NTParameterSet to a file in JSON format.

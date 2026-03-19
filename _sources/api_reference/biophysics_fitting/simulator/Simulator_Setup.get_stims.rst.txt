@@ -1,13 +1,12 @@
 
 
+get_stims
+=========
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get_stims
-=========================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stims()
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get_stims()
 
 
    Get the names of the stimuli.

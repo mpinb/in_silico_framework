@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -14,10 +13,11 @@ get_cell_with_network
 
    get_cell_with_network </api_reference/simrun/get_cell_with_network/get_cell_with_network>
 
-.. py:module:: simrun.get_cell_with_network
+.. module:: simrun.get_cell_with_network
 
 .. autoapi-nested-parse::
    Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
+
 
 
 
@@ -34,6 +34,8 @@ Functions
    
    * - :py:obj:`get_cell_with_network <simrun.get_cell_with_network.get_cell_with_network>`\ (neuron\_param, network\_param, cache)
      - Build a cell with realized synapses from a :ref:`cell_parameters_format` file and a :ref:`network_parameters_format` file.
+
+
 
 
 

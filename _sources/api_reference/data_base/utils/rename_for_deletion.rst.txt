@@ -6,7 +6,7 @@ rename_for_deletion
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.rename_for_deletion(key)
+.. function:: data_base.utils.rename_for_deletion(key)
 
 
    Renames some key to indicate it's in the process of being deleted.

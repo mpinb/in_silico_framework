@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-SpikeTimesAnalysis.get
-======================
-
-
-.. py:method:: spike_analysis.core.SpikeTimesAnalysis.get(key)
+.. function:: spike_analysis.core.SpikeTimesAnalysis.get(key)
 
 
    Get a key from the database.

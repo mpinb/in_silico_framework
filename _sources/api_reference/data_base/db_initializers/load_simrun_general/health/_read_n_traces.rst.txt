@@ -6,7 +6,7 @@ _read_n_traces
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.health._read_n_traces(vt_csv_file, sep='\t')
+.. function:: data_base.db_initializers.load_simrun_general.health._read_n_traces(vt_csv_file, sep='\t')
 
 
 

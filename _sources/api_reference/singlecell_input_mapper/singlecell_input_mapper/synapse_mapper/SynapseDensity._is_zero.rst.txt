@@ -1,13 +1,12 @@
 
 
+_is_zero
+========
 
 
+.. Signature -------------------------------
 
-SynapseDensity._is_zero
-=======================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._is_zero(number)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._is_zero(number)
 
 
    Check if a number is close to zero (tolerance of 1e-10)

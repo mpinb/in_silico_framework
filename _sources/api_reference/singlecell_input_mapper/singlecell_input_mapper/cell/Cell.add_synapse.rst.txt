@@ -1,16 +1,15 @@
 
 
+add_synapse
+===========
 
 
+.. Signature -------------------------------
 
-Cell.add_synapse
-================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
 
 
-   Add a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
+   Add a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
 
    :param secID: Section ID.
    :type secID: int
@@ -24,7 +23,7 @@ Cell.add_synapse
    :type postType: str
 
    :returns: The newly created synapse.
-   :rtype: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
+   :rtype: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse`
 
 
 

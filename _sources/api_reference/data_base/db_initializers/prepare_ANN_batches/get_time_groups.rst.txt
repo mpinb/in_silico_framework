@@ -6,7 +6,7 @@ get_time_groups
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_time_groups(vt_pandas)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_time_groups(vt_pandas)
 
 
    Get the time groups for binning voltage traces.

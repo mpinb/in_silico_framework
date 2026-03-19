@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -15,10 +14,11 @@ manylines
    manylines </api_reference/visualize/manylines/manylines>
    manylines_helper </api_reference/visualize/manylines/manylines_helper>
 
-.. py:module:: visualize.manylines
+.. module:: visualize.manylines
 
 .. autoapi-nested-parse::
    Make lineplots in parallel
+
 
 
 
@@ -37,6 +37,22 @@ Functions
      - Parallelizes the plot of many lines
    * - :py:obj:`manylines_helper <visualize.manylines.manylines_helper>`\ (pdf, axis, colormap, groupby\_attribute, ax, figsize)
      - Helper function which runs on a single core and can be called by map_partitions()
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`npartitions <visualize.manylines.npartitions>`
+     - \-
+
 
 
 

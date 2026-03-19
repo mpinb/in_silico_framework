@@ -6,7 +6,7 @@ convert_amira_surf_to_vtk
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.vtk.convert_amira_surf_to_vtk(surf_file, outname='surface', outdir='.')
+.. function:: visualize.vtk.convert_amira_surf_to_vtk(surf_file, outname='surface', outdir='.')
 
 
    Given the path to an amira .surf file, this method converts it to a .vtk surface file.

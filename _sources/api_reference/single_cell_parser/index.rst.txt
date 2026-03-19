@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -25,6 +24,7 @@ single_cell_parser
    scalar_field </api_reference/single_cell_parser/scalar_field/index>  
    serialize_cell </api_reference/single_cell_parser/serialize_cell/index>  
    sim_control </api_reference/single_cell_parser/sim_control/index>  
+   swc </api_reference/single_cell_parser/swc/index>  
    synapse </api_reference/single_cell_parser/synapse/index>  
    synapse_mapper </api_reference/single_cell_parser/synapse_mapper/index>  
    writer </api_reference/single_cell_parser/writer/index>  
@@ -35,26 +35,27 @@ single_cell_parser
    spines_update_synapse_distribution_file </api_reference/single_cell_parser/spines_update_synapse_distribution_file>
    spines_update_network_paramfile </api_reference/single_cell_parser/spines_update_network_paramfile>
 
-.. py:module:: single_cell_parser
+.. module:: single_cell_parser
 
 .. autoapi-nested-parse::
    Cell API for single cell simulations.
 
-   This package provides functionality to parse :py:class:`~single_cell_parser.cell.Cell` objects
+   This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
    from NEURON :ref:`hoc_file_format` files, map synapses onto these cells, and run biophysically
    detailed NEURON simulations with the resulting neuron-network models.
 
    .. seealso::
 
-      This package should not be confused with :py:mod:`singlecell_input_mapper`.
+      This package should not be confused with :mod:`singlecell_input_mapper`.
       
       This package is specialized to handle biophysical properties of neurons and simulation runs, and
       provides API access to the NEURON simulator :cite:`hines2001neuron`.
       It handles (among other things) synaptic activations onto a biophysically detailed neuron model.
       
-      :py:mod:`singlecell_input_mapper` provides extensive functionality to generate network realizations,
+      :mod:`singlecell_input_mapper` provides extensive functionality to generate network realizations,
       constrained by empirical data.
       The results of such pipelines can be read in with this package.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -88,11 +89,26 @@ Functions
    * - :py:obj:`init_neuron_run <single_cell_parser.init_neuron_run>`\ (simparam, vardt, \*events)
      - Default NEURON run with inital parameters according to parameter file.
    * - :py:obj:`sec_distance_to_soma <single_cell_parser.sec_distance_to_soma>`\ (currentSec)
-     - Compute the path length from ``sec(x=0)`` to :paramref:`currentSec`.
+     - Compute the path length from ``sec(x=0)`` to :param:`currentSec`.
    * - :py:obj:`spines_update_synapse_distribution_file <single_cell_parser.spines_update_synapse_distribution_file>`\ (cell, synapse\_distribution\_file, new\_synapse\_distribution\_file)
      - Update the :ref:`syn_file_format` file to correctly point to spine heads as excitatory synapse locations.
    * - :py:obj:`spines_update_network_paramfile <single_cell_parser.spines_update_network_paramfile>`\ (new\_synapse\_distribution\_file, network\_paramfile, new\_network\_paramfile)
      - Update a :ref:`network_parameters_format` file to point to a new :ref:`syn_file_format` file.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.logger>`
+     - \-
 
 
 .. rst-class:: absolute-paragraph
@@ -117,7 +133,7 @@ Modules
    * - :py:obj:`cell <single_cell_parser.cell>`
      - Cell objects for neuron models and cell activity.
    * - :py:obj:`cell_parser <single_cell_parser.cell_parser>`
-     - Read and parse a :py:class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+     - Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
    * - :py:obj:`network <single_cell_parser.network>`
      - Connect and activate presynaptic neuron populations.
    * - :py:obj:`network_realizations <single_cell_parser.network_realizations>`
@@ -129,15 +145,18 @@ Modules
    * - :py:obj:`scalar_field <single_cell_parser.scalar_field>`
      - Implementation of 3D scalar fields based on numpy arrays.
    * - :py:obj:`serialize_cell <single_cell_parser.serialize_cell>`
-     - Convert a :py:class:`~single_cell_parser.cell.Cell` object to a serializable object and vice versa.
+     - Convert a :class:`~single_cell_parser.cell.Cell` object to a serializable object and vice versa.
    * - :py:obj:`sim_control <single_cell_parser.sim_control>`
      - Run a NEURON current injection simulation.
+   * - :py:obj:`swc <single_cell_parser.swc>`
+     - Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
    * - :py:obj:`synapse <single_cell_parser.synapse>`
      - Synapse class for synaptic activations and NEURON API.
    * - :py:obj:`synapse_mapper <single_cell_parser.synapse_mapper>`
      - Basic synapse mapper to assign synapses to a neuron morphology, based on an existing synapse distribution.
    * - :py:obj:`writer <single_cell_parser.writer>`
      - Write out anatomical, morphology or simulation data.
+
 
 
 .. container:: doc-feedback

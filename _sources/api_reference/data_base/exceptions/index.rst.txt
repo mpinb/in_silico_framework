@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -15,10 +14,12 @@ exceptions
    DataBaseException </api_reference/data_base/exceptions/DataBaseException>
    ISFDataBaseException </api_reference/data_base/exceptions/ISFDataBaseException>
 
-.. py:module:: data_base.exceptions
+.. module:: data_base.exceptions
 
 .. autoapi-nested-parse::
    :py:mod:`data_base` specific exceptions.
+
+
 
 
 
@@ -39,6 +40,7 @@ Exceptions
      - Typical data_base errors
    * - :py:obj:`ISFDataBaseException <data_base.exceptions.ISFDataBaseException>`
      - Typical isf_data_base errors
+
 
 .. container:: doc-feedback
 

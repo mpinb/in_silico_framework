@@ -6,7 +6,7 @@ assimilate_remote_register
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.data_base_register.assimilate_remote_register(remote_path, local_path=None)
+.. function:: data_base.data_base_register.assimilate_remote_register(remote_path, local_path=None)
 
 
    Assimilate a remote register.

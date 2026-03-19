@@ -6,22 +6,22 @@ set_hot_zone
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None)
+.. function:: biophysics_fitting.L5tt_parameter_setup.set_hot_zone(cell_param, min_=None, max_=None, outsidescale_sections=None)
 
 
    Insert Ca_LVAst and Ca_HVA channels along the apical dendrite between ``min_`` and ``max_`` distance from the soma.
 
    :param cell_param: The cell parameter dictionary.
    :type cell_param: ~single_cell_parser.parameters.NTParameterSet
-   :param min_: The minimum distance from the soma.
-   :type min_: float
-   :param max_: The maximum distance from the soma.
-   :type max_: float
+   :param min\_: The minimum distance from the soma.
+   :type min\_: float
+   :param max\_: The maximum distance from the soma.
+   :type max\_: float
    :param outsidescale_sections: A list of sections where the channels should be inserted.
    :type outsidescale_sections: list
 
    :returns: The updated cell_param.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet` | dict
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet` | dict
 
    .. note::
 

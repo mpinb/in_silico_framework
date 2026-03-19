@@ -1,13 +1,12 @@
 
 
+save_db_state
+=============
 
 
+.. Signature -------------------------------
 
-ISFDataBase.save_db_state
-=========================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase.save_db_state()
+.. function:: data_base.isf_data_base.ISFDataBase.save_db_state()
 
 
    Saves the data which defines the state of this database to ``db_state.json``

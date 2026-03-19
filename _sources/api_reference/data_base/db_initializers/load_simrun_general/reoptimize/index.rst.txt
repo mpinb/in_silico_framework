@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -16,7 +15,7 @@ reoptimize
    _reoptimize_key </api_reference/data_base/db_initializers/load_simrun_general/reoptimize/_reoptimize_key>
    reoptimize_db </api_reference/data_base/db_initializers/load_simrun_general/reoptimize/reoptimize_db>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.reoptimize
+.. module:: data_base.db_initializers.load_simrun_general.reoptimize
 
 .. autoapi-nested-parse::
    Re-optimize a database with a new dumper
@@ -25,6 +24,7 @@ reoptimize
    It is sometimes of interest to re-write an already optimized database with a new (or old) data format.
    For example, in the past we have switched from `msgpack` to `parquet`, and back to `msgpack` after un-deprecating it.
    So all databases optimized with `parquet` could now in principle be re-optimized with `msgpack`.
+
 
 
 
@@ -41,6 +41,24 @@ Functions
    
    * - :py:obj:`reoptimize_db <data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db>`\ (db, client, progress, n\_db\_parents, suppress\_warnings)
      - Re-optimize a database with a new dumper.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`isf_logger <data_base.db_initializers.load_simrun_general.reoptimize.isf_logger>`
+     - \-
+   * - :py:obj:`logger <data_base.db_initializers.load_simrun_general.reoptimize.logger>`
+     - \-
+
 
 
 

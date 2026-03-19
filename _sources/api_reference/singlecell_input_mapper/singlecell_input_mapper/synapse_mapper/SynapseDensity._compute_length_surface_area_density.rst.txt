@@ -1,16 +1,15 @@
 
 
+_compute_length_surface_area_density
+====================================
 
 
+.. Signature -------------------------------
 
-SynapseDensity._compute_length_surface_area_density
-===================================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density(lengthDensity, surfaceAreaDensity, likeAmira=0)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density(lengthDensity, surfaceAreaDensity, likeAmira=0)
 
 
-   Fills the scalar fields :paramref:`lengthDensity` and :paramref:`surfaceDensity` to contain length and area per structure per voxel.
+   Fills the scalar fields :param:`lengthDensity` and :param:`surfaceDensity` to contain length and area per structure per voxel.
 
    This method is an implementation of line segment clipping using the
    Liang-barsky algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
@@ -24,10 +23,10 @@ SynapseDensity._compute_length_surface_area_density
    2. Use Liang-Barsky for clipping line segments between remaining points that are not located within same grid cell
 
    :param lengthDensity: dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
-                         :py:class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+                         :class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
    :type lengthDensity: dict
    :param surfaceAreaDensity: dictionary with structure labels as keys (e.g. "Soma", "Dendrite"...) and
-                              :py:class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
+                              :class:`~singlecell_input_mapper.singlecell_input_mapper.calar_field.ScalarField` objects as values
    :type surfaceAreaDensity: dict
    :param likeAmira: Set to True if the diamlist of each section denotes the radius, rather than the diameter.
                      Default is ``False``.

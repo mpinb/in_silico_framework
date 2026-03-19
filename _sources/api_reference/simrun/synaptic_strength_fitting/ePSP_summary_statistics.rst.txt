@@ -6,7 +6,7 @@ ePSP_summary_statistics
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.ePSP_summary_statistics(vt, threashold=0.1, tPSPStart=100.0)
+.. function:: simrun.synaptic_strength_fitting.ePSP_summary_statistics(vt, threashold=0.1, tPSPStart=100.0)
 
 
    Calculate summary statistics of the PSP voltage and timing.

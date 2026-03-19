@@ -6,7 +6,7 @@ _evaluate_invalid_fitness
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer_LGPL._evaluate_invalid_fitness(toolbox, population)
+.. function:: biophysics_fitting.optimizer_LGPL._evaluate_invalid_fitness(toolbox, population)
 
 
    Evaluate the individuals with an invalid fitness

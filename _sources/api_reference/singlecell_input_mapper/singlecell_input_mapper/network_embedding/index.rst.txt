@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ :mod:`~singlecell_input_mapper.singlecell_input_mapper` ❭ 
 
 
@@ -14,12 +13,13 @@ network_embedding
 
    NetworkMapper </api_reference/singlecell_input_mapper/singlecell_input_mapper/network_embedding/NetworkMapper>
 
-.. py:module:: singlecell_input_mapper.singlecell_input_mapper.network_embedding
+.. module:: singlecell_input_mapper.singlecell_input_mapper.network_embedding
 
 .. autoapi-nested-parse::
    Create anatomical realizations of connectivity.
-   In contrast to :py:mod:`single_cell_parser.network_embedding`,
+   In contrast to :mod:`single_cell_parser.network_embedding`,
    this module does not handle the activity of presynaptic populations, but provides functionality to fully investigate the network connectivity.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -35,6 +35,22 @@ Classes
    
    * - :py:obj:`NetworkMapper <singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper>`
      - Connect presynaptic cells to a postsynaptic cell model.
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.singlecell_input_mapper.network_embedding.logger>`
+     - \-
 
 
 

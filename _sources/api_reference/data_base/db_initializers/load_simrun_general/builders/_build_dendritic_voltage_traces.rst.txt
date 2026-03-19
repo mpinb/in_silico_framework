@@ -6,16 +6,13 @@ _build_dendritic_voltage_traces
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_dendritic_voltage_traces(db, repartition=None)
+.. function:: data_base.db_initializers.load_simrun_general.builders._build_dendritic_voltage_traces(db, repartition=None)
 
 
    Load dendritic voltage traces and add them to the database under the key ``dendritic_recordings``.
 
    :param db: The database to which the data should be added.
    :type db: ~data_base.DataBase
-   :param suffix_dict: Dictionary containing the suffixes of the dendritic voltage trace files.
-                       Default is ``None``, and they are inferred from the cell parameter files.
-   :type suffix_dict: dict
    :param repartition: If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
    :type repartition: bool
 

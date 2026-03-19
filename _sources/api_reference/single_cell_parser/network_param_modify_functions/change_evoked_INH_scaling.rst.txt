@@ -6,7 +6,7 @@ change_evoked_INH_scaling
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.change_evoked_INH_scaling(param, factor, pop=INHIBITORY)
+.. function:: single_cell_parser.network_param_modify_functions.change_evoked_INH_scaling(param, factor, pop=INHIBITORY)
 
 
    Scales the response probability for inhibitory cells in the :ref:`network_parameters_format`.

@@ -6,7 +6,7 @@ get_file_or_folder_that_endswith
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.get_file_or_folder_that_endswith(path, endswith)
+.. function:: data_base.utils.get_file_or_folder_that_endswith(path, endswith)
 
 
    Get the file or folder in a directory that ends with a certain string

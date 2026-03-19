@@ -1,13 +1,12 @@
 
 
+determine_nseg
+==============
 
 
+.. Signature -------------------------------
 
-CellParser.determine_nseg
-=========================
-
-
-.. py:method:: single_cell_parser.cell_parser.CellParser.determine_nseg(f=100.0, full=False, max_seg_length=None)
+.. function:: single_cell_parser.cell_parser.CellParser.determine_nseg(f=100.0, full=False, max_seg_length=None)
 
 
    Determine the number of segments for each section according to the d-lambda rule.

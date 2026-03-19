@@ -6,7 +6,7 @@ AHP_depth_abs_check_2AP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.AHP_depth_abs_check_2AP(t, v, thresh=None)
+.. function:: biophysics_fitting.ephys.AHP_depth_abs_check_2AP(t, v, thresh=None)
 
 
    Determines whether there are at least two action potentials (APs) in the voltage trace `v`

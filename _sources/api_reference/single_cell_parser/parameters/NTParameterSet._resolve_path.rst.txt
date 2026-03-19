@@ -1,13 +1,12 @@
 
 
+_resolve_path
+=============
 
 
+.. Signature -------------------------------
 
-NTParameterSet._resolve_path
-============================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet._resolve_path(dotted)
+.. function:: single_cell_parser.parameters.NTParameterSet._resolve_path(dotted)
 
 
 

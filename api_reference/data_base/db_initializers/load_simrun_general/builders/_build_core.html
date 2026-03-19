@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx_paramlinks.css" />
@@ -722,6 +722,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../config/index.html" class="md-nav__link">
+        <span title="/api_reference/data_base/db_initializers/load_simrun_general/config/index.rst (reference label)" class="md-ellipsis">config</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../data_parsing/index.html" class="md-nav__link">
         <span title="/api_reference/data_base/db_initializers/load_simrun_general/data_parsing/index.rst (reference label)" class="md-ellipsis">data_<wbr>parsing</span>
       </a>
@@ -1174,6 +1189,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1340,7 +1370,7 @@
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="data_base.db_initializers.load_simrun_general.builders._build_core">
 <a class="reference internal" href="../../../index.html#module-data_base" title="data_base (Python module)"><span class="sig-name descname"><span class="pre">data_base</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../../index.html#module-data_base.db_initializers" title="data_base.db_initializers (Python module)"><span class="sig-name descname"><span class="pre">db_initializers</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-data_base.db_initializers.load_simrun_general" title="data_base.db_initializers.load_simrun_general (Python module)"><span class="sig-name descname"><span class="pre">load_simrun_general</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-data_base.db_initializers.load_simrun_general.builders" title="data_base.db_initializers.load_simrun_general.builders (Python module)"><span class="sig-name descname"><span class="pre">builders</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">_build_core</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core.db" title="data_base.db_initializers.load_simrun_general.builders._build_core.db (Python parameter) — The database to which the data should be added."><span class="n"><span class="pre">db</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core.repartition" title="data_base.db_initializers.load_simrun_general.builders._build_core.repartition (Python parameter) — If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over 10000 entries)."><span class="n"><span class="pre">repartition</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core.metadata_dumper" title="data_base.db_initializers.load_simrun_general.builders._build_core.metadata_dumper (Python parameter) — Function to dump the metadata to disk."><span class="n"><span class="pre">metadata_dumper</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="n">pandas_to_msgpack</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core" title="data_base.db_initializers.load_simrun_general.builders._build_core.check_health (Python parameter)"><span class="n"><span class="pre">check_health</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">False</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core" title="data_base.db_initializers.load_simrun_general.builders._build_core.client (Python parameter)"><span class="n"><span class="pre">client</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_core" title="Link to this definition">¶</a></dt>
-<dd><p>Parse the essential simulation results and add it to <code class="xref py py-paramref docutils literal notranslate"><span class="pre">db</span></code>.</p>
+<dd><p>Parse the essential simulation results and add it to <a class="reference internal" href="#data_base.db_initializers.load_simrun_general.builders._build_core.db" title="data_base.db_initializers.load_simrun_general.builders._build_core.db (Python parameter) — The database to which the data should be added."><code class="xref py py-param docutils literal notranslate"><span class="pre">db</span></code></a>.</p>
 <p>The following data is parsed and added to the database:</p>
 <table class="docutils data align-default">
 <thead>
@@ -1355,35 +1385,23 @@
 <tr class="row-odd"><td><p>APheight</p></td>
 <td><p>AP height</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">traces</span></code></p></td>
+<td><p>Somatic voltage traces</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code></p></td>
+<td><p>pd.pandas Series containing the path, trial number, and filenames of the voltage traces.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sim_trial_index</span></code></p></td>
+<td><p>Simulation trial indices containing unique identifiers, and run numbers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">simresult_path</span></code></p></td>
+<td><p>top-level directory from where all simulation results were fetched</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filelist</span></code></p></td>
+<td><p>a list of voltage trace files, relative to the <code class="docutils literal notranslate"><span class="pre">simresult_path</span></code></p></td>
+</tr>
 </tbody>
 </table>
-<ul class="simple">
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">voltage</span> <span class="pre">traces</span></code></p></li>
-<li><p>Somatic voltage traces</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code></p></li>
-<li><p>pd.pandas Series containing the path, trial number, and filenames of the voltage traces.</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">sim_trial_index</span></code></p></li>
-<li><p>Simulation trial indices containing unique identifiers, and run numbers</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">simresult_path</span></code></p></li>
-<li><p>top-level directory from where all simulation results were fetched</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">filelist</span></code></p></li>
-<li><p>a list of voltage trace files, relative to the <code class="docutils literal notranslate"><span class="pre">simresult_path</span></code></p></li>
-</ul>
-</li>
-</ul>
 <dl class="field-list simple">
 <dt class="field-odd" id="data_base.db_initializers.load_simrun_general.builders._build_core-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#data_base.db_initializers.load_simrun_general.builders._build_core-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">

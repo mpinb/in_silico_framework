@@ -6,29 +6,29 @@ tree_reduction
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.tree_reduction(delayeds, aggregate_fun, length=7)
+.. function:: data_base.db_initializers.synapse_activation_binning.tree_reduction(delayeds, aggregate_fun, length=7)
 
 
    Recursively aggregate the results of a list of delayed objects.
 
-   This is used in :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask`
-   and :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_pandas` to aggregate
+   This is used in :func:`~data_base.db_initializers.synapse_activation_postprocess_dask`
+   and :func:`~data_base.db_initializers.synapse_activation_postprocess_pandas` to aggregate
    the resulting synapse binning (which is in dictionary format) to a single dictionary.
 
-   :param delayeds: list of :py:class:`~dask.delayed` objects
+   :param delayeds: list of :class:`~dask.delayed` objects
    :type delayeds: array
-   :param aggregate_fun: Function to aggregate the results with (e.g. :py:func:`~data_base.db_initializers.merge_results_together`)
+   :param aggregate_fun: Function to aggregate the results with (e.g. :func:`~data_base.db_initializers.merge_results_together`)
    :type aggregate_fun: ~dask.delayed
    :param length: chunk size for aggregation
    :type length: int
 
    .. note::
 
-      Once the delayed objects are evaluated, :paramref:`aggregate_fun` is applied to the results of :paramref:`delayeds`,
-      and thus :paramref:`aggregate_fun` should be able to handle the results of :paramref:`delayeds`.
+      Once the delayed objects are evaluated, :param:`aggregate_fun` is applied to the results of :param:`delayeds`,
+      and thus :param:`aggregate_fun` should be able to handle the results of :param:`delayeds`.
 
    :returns: The aggregated result.
-   :rtype: :py:class:`dask.delayed`
+   :rtype: :class:`dask.delayed`
 
 
 

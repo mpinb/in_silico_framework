@@ -11,12 +11,11 @@ PixelObject
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize._figure_array_converter.PixelObject(extent, ax=None, array=None)
+.. class:: visualize._figure_array_converter.PixelObject(extent, ax=None, array=None)
    
-   Dataclass to hold pixel information from either a :py:class:`matplotlib.pyplot.Axes` or a numpy array.
+   Dataclass to hold pixel information from either a :class:`matplotlib.pyplot.Axes` or a numpy array.
 
    :param extent: The extent of the plot.
    :type extent: list

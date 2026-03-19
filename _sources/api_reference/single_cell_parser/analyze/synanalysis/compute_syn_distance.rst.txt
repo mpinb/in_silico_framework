@@ -6,12 +6,12 @@ compute_syn_distance
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.synanalysis.compute_syn_distance(cell, syn, consider_gap_to_soma=False)
+.. function:: single_cell_parser.analyze.synanalysis.compute_syn_distance(cell, syn, consider_gap_to_soma=False)
 
 
    Computes the distance from a single synapse to the soma.
 
-   Used in :py:meth:`compute_syn_distances`.
+   Used in :func:`compute_syn_distances`.
 
    :param cell: cell object with attached synapses.
    :type cell: single_cell_parser.cell.Cell

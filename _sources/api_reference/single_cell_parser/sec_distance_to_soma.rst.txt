@@ -6,10 +6,10 @@ sec_distance_to_soma
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.sec_distance_to_soma(currentSec)
+.. function:: single_cell_parser.sec_distance_to_soma(currentSec)
 
 
-   Compute the path length from ``sec(x=0)`` to :paramref:`currentSec`.
+   Compute the path length from ``sec(x=0)`` to :param:`currentSec`.
 
    :param currentSec: The section for which to compute the distance.
    :type currentSec: neuron:Section

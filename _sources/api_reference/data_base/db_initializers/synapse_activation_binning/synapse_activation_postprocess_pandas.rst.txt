@@ -6,7 +6,7 @@ synapse_activation_postprocess_pandas
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_pandas(pdf, groupby='', prefun=None, applyfun=None, postfun=None)
+.. function:: data_base.db_initializers.synapse_activation_binning.synapse_activation_postprocess_pandas(pdf, groupby='', prefun=None, applyfun=None, postfun=None)
 
 
    Calculates bins of synapse activation per trial from a pandas dataframe.
@@ -22,27 +22,23 @@ synapse_activation_postprocess_pandas
                    - ``binned_somadist``: synapse counts for all 50 microns
                    - any column in the specified dataframe.
    :type groupby: str
-   :param db: if specified, the result will be computed immediately and saved in the database immediately.
-   :type db: DataBase
-   :param get: Specify a dask scheduler for the computation (e.g. :py:func:`dask.distributed.Client.get`)
-   :type get: dask scheduler
    :param prefun: A function to preprocess the synapse activation dataframe before binning.
                   The function should take a pandas dataframe and return a pandas dataframe.
-                  Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.prefun`
+                  Default: :func:`~data_base.db_initializers.synapse_activation_binning.prefun`
    :type prefun: callable
    :param applyfun: A function to bin the synapse activations.
                     The function should take a pandas dataframe and return a numpy array.
-                    Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
+                    Default: :func:`~data_base.db_initializers.synapse_activation_binning.applyfun`
    :type applyfun: callable
    :param postfun: A function to postprocess the binned synapse activations.
                    The function should take a pandas series and return a numpy array.
-                   Default: :py:func:`~data_base.db_initializers.synapse_activation_binning.postfun`
+                   Default: :func:`~data_base.db_initializers.synapse_activation_binning.postfun`
    :type postfun: callable
 
-   :returns: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :paramref:`groupby`.
+   :returns: Dictionary containing numpy arrays, whose rows are sim trials, and columns are time bins. The dictionary keys are defined by :param:`groupby`.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
+   .. seealso:: :func:`~data_base.db_initializers.synapse_activation_postprocess_dask` for the delayed version of this method.
 
 
 

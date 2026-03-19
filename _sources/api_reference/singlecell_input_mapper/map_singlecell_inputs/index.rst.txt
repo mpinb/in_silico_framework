@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~singlecell_input_mapper` ❭ 
 
 
@@ -14,7 +13,7 @@ map_singlecell_inputs
 
    map_singlecell_inputs </api_reference/singlecell_input_mapper/map_singlecell_inputs/map_singlecell_inputs>
 
-.. py:module:: singlecell_input_mapper.map_singlecell_inputs
+.. module:: singlecell_input_mapper.map_singlecell_inputs
 
 .. autoapi-nested-parse::
    Map synapses onto a postsynaptic cell.
@@ -49,7 +48,7 @@ map_singlecell_inputs
       If this is not the case, please consult ``installer/download_bc_model`` and extract,
       or adapt the paths in this file to your data.
 
-   This module then uses :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   This module then uses :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
    to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
    This happens according to the following pipeline:
 
@@ -64,9 +63,9 @@ map_singlecell_inputs
       These are randomly placed onto the dendritic branch within that voxel. One such sample is called an "anatomical realization".
    6. (optional) Repeat steps 4 and 5 to create a collection of anatomical realizations.
 
-   Density meshes are accessed using :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
-   :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of
-   :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
+   Density meshes are accessed using :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+   :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of
+   :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
    and finalizes step 5 by itself.
 
    Outputs:
@@ -75,7 +74,8 @@ map_singlecell_inputs
      and column of anatomical synapses
    - AmiraMesh landmark file containing 3D synapse locations of anatomical
      synapses of each presynaptic type and column
-   - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :py:mod:`simrun`.
+   - Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :mod:`simrun`.
+
 
 
 
@@ -92,6 +92,40 @@ Functions
    
    * - :py:obj:`map_singlecell_inputs <singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs>`\ (cellName, cellTypeName, nrOfSamples, numberOfCellsSpreadsheetName, connectionsSpreadsheetName, ExPSTDensityName, InhPSTDensityName, boutonDensityFolderName)
      - Map inputs to a single cell morphology.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <singlecell_input_mapper.map_singlecell_inputs.logger>`
+     - \-
+   * - :py:obj:`prefix <singlecell_input_mapper.map_singlecell_inputs.prefix>`
+     - \-
+   * - :py:obj:`numberOfCellsSpreadsheetName <singlecell_input_mapper.map_singlecell_inputs.numberOfCellsSpreadsheetName>`
+     - \-
+   * - :py:obj:`connectionsSpreadsheetName <singlecell_input_mapper.map_singlecell_inputs.connectionsSpreadsheetName>`
+     - \-
+   * - :py:obj:`ExPSTDensityName <singlecell_input_mapper.map_singlecell_inputs.ExPSTDensityName>`
+     - \-
+   * - :py:obj:`InhPSTDensityName <singlecell_input_mapper.map_singlecell_inputs.InhPSTDensityName>`
+     - \-
+   * - :py:obj:`boutonDensityFolderName <singlecell_input_mapper.map_singlecell_inputs.boutonDensityFolderName>`
+     - \-
+   * - :py:obj:`exTypes <singlecell_input_mapper.map_singlecell_inputs.exTypes>`
+     - \-
+   * - :py:obj:`inhTypes <singlecell_input_mapper.map_singlecell_inputs.inhTypes>`
+     - \-
+   * - :py:obj:`fname <singlecell_input_mapper.map_singlecell_inputs.fname>`
+     - \-
+
 
 
 

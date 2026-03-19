@@ -6,7 +6,7 @@ get_seed
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.seed_manager.get_seed(recursion_depth=0)
+.. function:: simrun.seed_manager.get_seed(recursion_depth=0)
 
 
    Get a random seed.

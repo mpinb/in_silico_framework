@@ -6,7 +6,7 @@ manylines_helper
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.manylines.manylines_helper(pdf, axis=None, colormap=None, groupby_attribute=None, ax=None, figsize=(15, 3))
+.. function:: visualize.manylines.manylines_helper(pdf, axis=None, colormap=None, groupby_attribute=None, ax=None, figsize=(15, 3))
 
 
    Helper function which runs on a single core and can be called by map_partitions()
@@ -16,17 +16,17 @@ manylines_helper
    :param axis: axis limits, e.g. (1, 10, 1, 10)
    :type axis: tuple | list, optional
    :param colormap: A colormap to use for the plot.
-                    Must map a label from :paramref:groupby_attribute to a color
+                    Must map a label from :paramgroupby_attribute to a color
    :type colormap: dict
-   :param fig: A Figure object to plot on.
-               If specified, will plot on the current active axis.
-               If not, it will create one.
-   :type fig: ~matplotlib.figure.Figure
+   :param ax: An axes object to plot on.
+              If specified, will plot on the current active axis.
+              If not, it will create one.
+   :type ax: ~matplotlib.axes.Axes
    :param figsize: size of the figure.
    :type figsize: tuple
 
-   :returns: Figure object containing the lines as specified in pdf.
-   :rtype: maptlotlib.pyplot.Figure
+   :returns: Figure and Axes object containing the lines as specified in pdf.
+   :rtype: Tuple[:class:`~maptlotlib.figure.Figure`,:class:`~matplotlib.axes.Axes`]
 
 
 

@@ -1,13 +1,12 @@
 
 
+_get_x0
+=======
 
 
+.. Signature -------------------------------
 
-_Strategy._get_x0
-=================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy._Strategy._get_x0()
+.. function:: simrun.modular_reduced_model_inference.strategy._Strategy._get_x0()
 
 
    Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.

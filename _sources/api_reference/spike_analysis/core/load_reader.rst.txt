@@ -6,7 +6,7 @@ load_reader
 
 .. Signature -------------------------------
 
-.. py:function:: spike_analysis.core.load_reader(dict_)
+.. function:: spike_analysis.core.load_reader(dict_)
 
 
    Load a reader object from a dictionary.

@@ -1,13 +1,12 @@
 
 
+get_result
+==========
 
 
+.. Signature -------------------------------
 
-STAPlugin_TEMPLATE.get_result
-=============================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_TEMPLATE.get_result()
+.. function:: spike_analysis.core.STAPlugin_TEMPLATE.get_result()
 
 
    Gets the result of the analysis.

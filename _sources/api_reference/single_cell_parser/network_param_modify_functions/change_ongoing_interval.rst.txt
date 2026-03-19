@@ -6,7 +6,7 @@ change_ongoing_interval
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.change_ongoing_interval(n, factor=1, pop=None)
+.. function:: single_cell_parser.network_param_modify_functions.change_ongoing_interval(n, factor=1, pop=None)
 
 
    Scales the ongoing frequency with a :paramref:`factor`.

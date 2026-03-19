@@ -6,21 +6,28 @@ plot_hoc
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.plot_hoc(hoc_file, **kwargs)
+.. function:: visualize.plot_hoc(hoc_file, **kwargs)
 
 
    Plot a hoc file using matplotlib.
 
-   Instatiate a :py:class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
+   Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
 
    :param hoc_file: The path to the :ref:`hoc_file_format` file
    :type hoc_file: str
-   :param show: Whether to show the plot
-   :type show: bool
-   :param \*\*kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
+   :param kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
 
    :returns: The figure object
-   :rtype: :py:class:`~matplotlib.figure.Figure`
+   :rtype: :class:`~matplotlib.figure.Figure`
+
+   Example::
+
+       from visualize import plot_hoc
+       fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
+       plot_hoc(fn)
+
+   .. figure:: ../../docs/_static/_images/86_hoc.png
+
 
 
 

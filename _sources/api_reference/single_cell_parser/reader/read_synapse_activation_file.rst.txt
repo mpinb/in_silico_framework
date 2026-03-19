@@ -6,7 +6,7 @@ read_synapse_activation_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_synapse_activation_file(fname)
+.. function:: single_cell_parser.reader.read_synapse_activation_file(fname)
 
 
    Reads list of all functional synapses and their activation times.
@@ -17,10 +17,10 @@ read_synapse_activation_file
        using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
 
 
-   In contrast to :py:meth:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
+   In contrast to :func:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
 
    :param fname: Filename of a synapse activation file.
-                 Such a file can be generated with :py:meth:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
+                 Such a file can be generated with :func:`single_cell_parser.analyze.synanalysis.comute_synapse_distances_times`.
    :type fname: str
 
    :returns: (synapse ID, section ID, section pt ID, [t1, t2, ... , tn])

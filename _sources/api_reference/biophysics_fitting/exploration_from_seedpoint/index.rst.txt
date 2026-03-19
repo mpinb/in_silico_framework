@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -17,7 +16,7 @@ exploration_from_seedpoint
    utils </api_reference/biophysics_fitting/exploration_from_seedpoint/utils/index>  
    evaluation_function_incremental_helper </api_reference/biophysics_fitting/exploration_from_seedpoint/evaluation_function_incremental_helper>
 
-.. py:module:: biophysics_fitting.exploration_from_seedpoint
+.. module:: biophysics_fitting.exploration_from_seedpoint
 
 .. autoapi-nested-parse::
    Explore viable biophysical models from a given seedpoint.
@@ -25,11 +24,12 @@ exploration_from_seedpoint
 
    - a set of biophysical parameters
    - a morphology
-   - empirically recorded responses to defined stimulus protocols (see e.g. :py:meth:`~biophysics_fitting.hay.specification.get_hay_problem_description`).
+   - empirically recorded responses to defined stimulus protocols (see e.g. :func:`~biophysics_fitting.hay.specification.get_hay_problem_description`).
 
    this package provides methods and full workflows that allow you to make random variations on the input biophysical parameters,
    run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
    Eventually, this random walk through parameter space can explore very diverse biophysical models that are all within the empirical constraints.
+
 
 
 
@@ -46,6 +46,7 @@ Functions
    
    * - :py:obj:`evaluation_function_incremental_helper <biophysics_fitting.exploration_from_seedpoint.evaluation_function_incremental_helper>`\ (p, s, cutoffs, stim\_order, verbose, evaluators\_by\_stimulus, additional\_evaluation\_functions, objectives\_by\_stimulus)
      - Helper function for the evaluation function.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -65,6 +66,7 @@ Modules
      - This module provides routines to analyze the results of a random walk exploration through biophysical parameter space.
    * - :py:obj:`utils <biophysics_fitting.exploration_from_seedpoint.utils>`
      - Convenience functions for the :py:mod:`~biophysics_fitting.exploration_from_seedpoint` module.
+
 
 
 .. container:: doc-feedback

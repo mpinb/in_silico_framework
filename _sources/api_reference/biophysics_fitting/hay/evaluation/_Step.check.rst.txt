@@ -1,13 +1,12 @@
 
 
+check
+=====
 
 
+.. Signature -------------------------------
 
-_Step.check
-===========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.check(out, voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.check(out, voltage_traces)
 
 
    Check for problems in the voltage trace.

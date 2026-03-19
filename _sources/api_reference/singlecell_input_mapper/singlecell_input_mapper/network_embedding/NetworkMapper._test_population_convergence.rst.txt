@@ -1,13 +1,12 @@
 
 
+_test_population_convergence
+============================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._test_population_convergence
-==========================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
 
 
    Test how many samples are needed to get a representative sample.

@@ -6,13 +6,13 @@ create_network_parameter
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write_all_celltypes=False)
+.. function:: singlecell_input_mapper.evoked_network_param_from_template.create_network_parameter(templateParamName, cellNumberFileName, synFileName, conFileName, whisker, outFileName, write_all_celltypes=False)
 
 
    Generate and write out a :ref:`network_parameters_format` file defining the evoked activity of a passive whisker touch scenario.
 
    Reads in a template file for a network, where the parameters of each celltype are already defined, but the values are not set.
-   Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :paramref:`whisker` was deflected.
+   Sets the PSTHs (i.e. spike probability per temporal bin) for each cell in the network, depending on the celltype, columnm, and which :param:`whisker` was deflected.
    Spike probabilities only depend on the celltype, column, and deflected whisker.
    Spike times are then Poisson sampled from these PSTHs.
    A spike does not guarantee a synapse relase, but rather the probability of release upon a spike is set for each celltype.

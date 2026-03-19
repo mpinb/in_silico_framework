@@ -1,19 +1,18 @@
 
 
+check
+=====
 
 
+.. Signature -------------------------------
 
-BAC.check
-=========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.check(out, voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.check(out, voltage_traces)
 
 
    Check for problems in the voltage trace.
 
    This should be called after evaluating the voltage traces.
-   it is e.g. the last step in :py:meth:`get`, where it adds the checks to the output dictionary.
+   it is e.g. the last step in :func:`get`, where it adds the checks to the output dictionary.
 
    This method checks if the voltage trace:
 

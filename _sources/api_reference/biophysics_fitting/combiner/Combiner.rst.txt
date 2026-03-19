@@ -19,14 +19,13 @@ Combiner
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: biophysics_fitting.combiner.Combiner
+.. class:: biophysics_fitting.combiner.Combiner
    
-   This class can be used to combine features (usually) computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+   This class can be used to combine features (usually) computed by an :class:`~biophysics_fitting.evaluator.Evaluator` object.
 
-   For a :py:class:`~biophysics_fitting.simulator.Simulator` object `s`, an :py:class:`~biophysics_fitting.evaluator.Evaluator` object `e`, and a :py:class:`~biophysics_fitting.combiner.Combiner` object `c`, the typical usecase is:
+   For a :class:`~biophysics_fitting.simulator.Simulator` object `s`, an :class:`~biophysics_fitting.evaluator.Evaluator` object `e`, and a :class:`~biophysics_fitting.combiner.Combiner` object `c`, the typical usecase is:
 
        >>> voltage_traces_dict = s.run(params)
        >>> features = e.evaluate(voltage_traces_dict)
@@ -55,7 +54,7 @@ Combiner
 
          A Combiner_Setup object that keeps track of the feature combinations.
 
-         :type: :py:class:`~biophysics_fitting.combiner.Combiner_Setup`
+         :type: :class:`~biophysics_fitting.combiner.Combiner_Setup`
 
    :Methods:
 

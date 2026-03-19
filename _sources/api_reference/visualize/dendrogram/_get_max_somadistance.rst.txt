@@ -6,12 +6,12 @@ _get_max_somadistance
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.dendrogram._get_max_somadistance(dendrogram_db)
+.. function:: visualize.dendrogram._get_max_somadistance(dendrogram_db)
 
 
    Get the coordinate of the point that is furthest away from the soma.
 
-   :param dendrogram_db: A list of :py:class:`_DendrogramSection` objects.
+   :param dendrogram_db: A list of :class:`_DendrogramSection` objects.
    :type dendrogram_db: list
 
    :returns: The coordinate of the point that is furthest away from the soma.

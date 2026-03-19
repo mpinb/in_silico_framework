@@ -6,7 +6,7 @@ svg2emf
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.svg2emf(filename, path_to_inkscape='/usr/bin/inkscape')
+.. function:: visualize.svg2emf(filename, path_to_inkscape='/usr/bin/inkscape')
 
 
    Converts svg to emf, which can be imported in Word using inkscape.

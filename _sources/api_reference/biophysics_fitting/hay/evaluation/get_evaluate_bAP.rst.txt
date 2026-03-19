@@ -6,15 +6,15 @@ get_evaluate_bAP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.get_evaluate_bAP(**kwargs)
+.. function:: biophysics_fitting.hay.evaluation.get_evaluate_bAP(**kwargs)
 
 
    Get the evaluation function for the :math:`bAP` stimulus protocol.
 
-   Initializes a :py:class:`bAP` object with the given keyword arguments,
+   Initializes a :class:`bAP` object with the given keyword arguments,
    and returns a function that evaluates the voltage traces.
 
-   :param \*\*kwargs: Additional or overriding keyword arguments for the :py:class:`bAP` object. Defaults to None.
+   :param kwargs: Additional or overriding keyword arguments for the :class:`bAP` object. Defaults to None.
 
    :returns: function that evaluates the voltage traces.
    :rtype: Callable

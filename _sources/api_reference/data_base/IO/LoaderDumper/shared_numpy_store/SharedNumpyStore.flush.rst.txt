@@ -1,18 +1,17 @@
 
 
+flush
+=====
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.flush
-======================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.flush()
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.flush()
 
 
-   Rename all files according to the new names in :paramref:`_pending_renames`.
+   Rename all files according to the new names in :param:`_pending_renames`.
 
-   Deletes the old files and updates the :paramref:`_files` dictionary.
+   Deletes the old files and updates the :param:`_files` dictionary.
 
 
 

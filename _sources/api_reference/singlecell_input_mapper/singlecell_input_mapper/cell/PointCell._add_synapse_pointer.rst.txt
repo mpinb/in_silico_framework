@@ -1,22 +1,21 @@
 
 
+_add_synapse_pointer
+====================
 
 
+.. Signature -------------------------------
 
-PointCell._add_synapse_pointer
-==============================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer(synapse)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.PointCell._add_synapse_pointer(synapse)
 
 
-   Add a :py:class:`Synapse` to the cell.
+   Add a :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` to the cell.
 
-   The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects
-   to a postsynaptic :py:class:`~single_cell_parser.cell.Cell` object.
+   The purpose of this synapse is to keep track of where this :class:`PointCell` connects
+   to a postsynaptic :class:`~single_cell_parser.cell.Cell` object.
 
    :param synapse: Synapse object.
-   :type synapse: Synapse
+   :type synapse: ~singlecell_input_mapper.singlecell_input_mapper.synapse.Synapse
 
 
 

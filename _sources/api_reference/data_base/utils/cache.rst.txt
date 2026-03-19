@@ -6,7 +6,7 @@ cache
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.cache(function)
+.. function:: data_base.utils.cache(function)
 
 
    Decorator to cache the result of a function

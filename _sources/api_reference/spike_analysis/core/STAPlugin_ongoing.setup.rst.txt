@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_ongoing.setup
-=======================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_ongoing.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_ongoing.setup(spike_times_analysis)
 
 
    Sets up the analysis: calculates the ongoing activity.

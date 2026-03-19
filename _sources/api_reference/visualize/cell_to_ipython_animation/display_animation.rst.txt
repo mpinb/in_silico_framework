@@ -6,7 +6,7 @@ display_animation
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.display_animation(files, interval=10, style=False, animID=None, embedded=False)
+.. function:: visualize.cell_to_ipython_animation.display_animation(files, interval=10, style=False, animID=None, embedded=False)
 
 
    Creates an IPython animation out of files specified in a globstring or a list of paths.
@@ -18,8 +18,8 @@ display_animation
    :param style: whether to use the style specified in the system default html_template.
    :type style: bool
    :param animID: unique integer to identify the animation in the javascript environment of IPython
-   :param embedde: whether to embed the images as base64 in the html file.
-   :type embedde: bool
+   :param embedded: whether to embed the images as base64 in the html file.
+   :type embedded: bool
 
    .. attention::
 

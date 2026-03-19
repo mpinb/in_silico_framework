@@ -1,18 +1,17 @@
 
 
+_write_landmark_files
+=====================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._write_landmark_files
-===================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_landmark_files(synapseLocations, id1, id2, cellName, dirName)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._write_landmark_files(synapseLocations, id1, id2, cellName, dirName)
 
 
    Write out landmark files for each synapse location.
 
-   This is used in :py:meth:`_generate_output_files` to write out landmark files for each synapse location.
+   This is used in :func:`_generate_output_files` to write out landmark files for each synapse location.
 
    :param synapseLocations: Dictionary of synapse locations.
    :type synapseLocations: dict

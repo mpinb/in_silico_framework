@@ -1,20 +1,19 @@
 
 
+_calc_ion_dynamics_timeseries
+=============================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._calc_ion_dynamics_timeseries
-===========================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._calc_ion_dynamics_timeseries(ion_keyword)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._calc_ion_dynamics_timeseries(ion_keyword)
 
 
    Retrieves ion dynamics info along the whole cell body during a set of time points (specified in self.times_to_show).
    Fills the self.ion_dynamics attribute.
    Only does so when it has not been computed yet.
 
-   :param ion_keyword: keyword for the ion dynamics we want to retrieve. Must be one of the keys in the recordVars of the sections. Use :paramref:`possible_scalars` to see the available options.
+   :param ion_keyword: keyword for the ion dynamics we want to retrieve. Must be one of the keys in the recordVars of the sections. Use :param:`possible_scalars` to see the available options.
    :type ion_keyword: str
 
    :returns: Nothing. Updates the self.timeseries_voltage attribute

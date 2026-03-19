@@ -6,7 +6,7 @@ load_cell_number_file
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file(cellNumberFileName)
+.. function:: singlecell_input_mapper.evoked_network_param_from_template.load_cell_number_file(cellNumberFileName)
 
 
    Load the cell number file.

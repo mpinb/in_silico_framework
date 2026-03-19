@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_response_probability_in_period.setup
-==============================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_response_probability_in_period.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_response_probability_in_period.setup(spike_times_analysis)
 
 
    Sets up the analysis: computes the response probability in a period.

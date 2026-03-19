@@ -6,7 +6,7 @@ vmMax
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.vmMax(cell)
+.. function:: biophysics_fitting.utils.vmMax(cell)
 
 
    Calculate the maximum voltage of a cell at any timepoint, at any dendrite.

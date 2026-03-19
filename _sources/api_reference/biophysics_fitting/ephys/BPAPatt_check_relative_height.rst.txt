@@ -6,7 +6,7 @@ BPAPatt_check_relative_height
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BPAPatt_check_relative_height(t, v_soma, v_dend, bAP_thresh=None, stim_onset=None)
+.. function:: biophysics_fitting.ephys.BPAPatt_check_relative_height(t, v_soma, v_dend, bAP_thresh=None, stim_onset=None)
 
 
    Computes the ratio of the backpropagating action potential (bAP) amplitude at the soma and dendrite

@@ -1,13 +1,12 @@
 
 
+set_cmap
+========
 
 
+.. Signature -------------------------------
 
-CMVDataParser.set_cmap
-======================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser.set_cmap(cmap=None, vmin=None, vmax=None)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser.set_cmap(cmap=None, vmin=None, vmax=None)
 
 
    Update the colormap, vmin, and vmax of the visualization.

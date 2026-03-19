@@ -6,7 +6,7 @@ run_delayeds_incrementally
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally(client, delayeds)
+.. function:: data_base.db_initializers.prepare_ANN_batches.run_delayeds_incrementally(client, delayeds)
 
 
    Convenience method to run a list of dask delayed objects incrementally.

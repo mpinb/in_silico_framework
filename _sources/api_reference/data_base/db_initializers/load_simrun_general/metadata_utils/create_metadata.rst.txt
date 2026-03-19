@@ -6,7 +6,7 @@ create_metadata
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata(db)
+.. function:: data_base.db_initializers.load_simrun_general.metadata_utils.create_metadata(db)
 
 
    Generate metadata out of a pd.Series containing the sim_trial_index.

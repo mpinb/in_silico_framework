@@ -6,7 +6,7 @@ AP_width
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.AP_width(t, v, thresh)
+.. function:: biophysics_fitting.ephys.AP_width(t, v, thresh)
 
 
    Calculates the action potential (AP) width given the time and voltage arrays and a threshold value.

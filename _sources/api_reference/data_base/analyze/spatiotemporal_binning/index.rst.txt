@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.analyze` ❭ 
 
 
@@ -15,15 +14,16 @@ spatiotemporal_binning
    universal_pd </api_reference/data_base/analyze/spatiotemporal_binning/universal_pd>
    universal </api_reference/data_base/analyze/spatiotemporal_binning/universal>
 
-.. py:module:: data_base.analyze.spatiotemporal_binning
+.. module:: data_base.analyze.spatiotemporal_binning
 
 .. autoapi-nested-parse::
    Bin :ref:`spike_times_format` or :ref:`syn_activation_format` dataframes by time and space.
 
    .. seealso::
 
-      :py:mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
+      :mod:`data_base.db_initializers.synapse_activation_binning` for binning synapse activations
       by time, and a variety of other metrics (e.g. space, cell type ...)
+
 
 
 
@@ -42,6 +42,8 @@ Functions
      - Bin a pandas DataFrame by both distance and time.
    * - :py:obj:`universal <data_base.analyze.spatiotemporal_binning.universal>`\ (df, distance\_column, spatial\_distance\_bins, min\_time, max\_time, time\_distance\_bins)
      - Bin a pandas or dask DataFrame by both distance and time.
+
+
 
 
 

@@ -1,0 +1,21 @@
+
+
+get_db_register_path
+====================
+
+
+.. Signature -------------------------------
+
+.. function:: config.get_db_register_path()
+
+
+   Get the path to the database register.
+
+   :returns: The path to the database register.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

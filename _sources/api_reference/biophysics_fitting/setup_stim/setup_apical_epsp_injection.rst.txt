@@ -6,7 +6,7 @@ setup_apical_epsp_injection
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim.setup_apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
+.. function:: biophysics_fitting.setup_stim.setup_apical_epsp_injection(cell, dist=None, amplitude=None, delay=None, rise=1.0, decay=5)
 
 
    Setup an EPSP injection at a given distance from the soma.

@@ -1,13 +1,12 @@
 
 
+ISIcv
+=====
 
 
+.. Signature -------------------------------
 
-_Step.ISIcv
-===========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.ISIcv(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.ISIcv(voltage_traces)
 
 
    Get the coefficient of variation of the interspike interval in the somatic voltage trace.
@@ -19,7 +18,7 @@ _Step.ISIcv
              and ``".raw"`` to the coefficient of variation of the interspike interval in the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_coef_var`
+   .. seealso:: :func:`~biophysics_fitting.ephys.STEP_coef_var`
 
 
 

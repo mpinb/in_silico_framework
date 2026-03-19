@@ -22,10 +22,11 @@ PySection2
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2(name=None, cell=None, label=None)
+.. class:: singlecell_input_mapper.singlecell_input_mapper.cell.PySection2(name=None, cell=None, label=None)
+
+   Bases: :py:obj:`object`
    
    Convenience class around NEURON's Section class.
 
@@ -58,7 +59,7 @@ PySection2
 
          Parent section.
 
-         :type: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
+         :type: :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2`
 
       .. attribute:: parentx
 

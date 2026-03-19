@@ -6,7 +6,7 @@ calculate_vdensity_array_dask
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array_dask(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
+.. function:: data_base.analyze.voltage_binning.calculate_vdensity_array_dask(v, bin_size=0.05, ymin=-100, ymax=50, xmin=None, xmax=None)
 
 
    Bin a :ref:`voltage_traces_df_format` in timebins across trials.
@@ -19,15 +19,11 @@ calculate_vdensity_array_dask
    :type ymin: float
    :param ymax: the maximum voltage value
    :type ymax: float
-   :param xmin: the minimum time value (unused)
-   :type xmin: float
-   :param xmax: the maximum time value (unused)
-   :type xmax: float
 
    :returns: the binned voltage traces dataframe
-   :rtype: :py:class:`dask.dataframe.DataFrame`
+   :rtype: :class:`dask.dataframe.DataFrame`
 
-   .. seealso:: :py:func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd` for the pandas version.
+   .. seealso:: :func:`~data_base.analyze.voltage_binning.calculate_vdensity_array_pd` for the pandas version.
 
 
 

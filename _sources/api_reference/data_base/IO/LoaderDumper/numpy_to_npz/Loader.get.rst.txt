@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.numpy_to_npz.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_npz.Loader.get(savedir)
 
 
    Read in an object in ``.npz`` format.

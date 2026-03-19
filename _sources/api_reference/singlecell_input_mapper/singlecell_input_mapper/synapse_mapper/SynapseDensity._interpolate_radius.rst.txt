@@ -1,13 +1,12 @@
 
 
+_interpolate_radius
+===================
 
 
+.. Signature -------------------------------
 
-SynapseDensity._interpolate_radius
-==================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._interpolate_radius(p0, p1, radius0, radius1, targetPt)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._interpolate_radius(p0, p1, radius0, radius1, targetPt)
 
 
    Interpolate the radius of a segment between two points.
@@ -23,7 +22,7 @@ SynapseDensity._interpolate_radius
    :param targetPt: Point at which to interpolate the radius.
    :type targetPt: array
 
-   :returns: Interpolated radius at :paramref:`targetPt`.
+   :returns: Interpolated radius at :param:`targetPt`.
    :rtype: float
 
 

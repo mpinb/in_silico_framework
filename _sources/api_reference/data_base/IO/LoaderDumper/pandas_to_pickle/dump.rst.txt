@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.pandas_to_pickle.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.pandas_to_pickle.dump(obj, savedir)
 
 
    Save the pandas DataFrame to a ``.pickle`` file in the specified directory

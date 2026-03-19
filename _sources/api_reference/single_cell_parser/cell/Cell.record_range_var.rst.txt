@@ -1,13 +1,12 @@
 
 
+record_range_var
+================
 
 
+.. Signature -------------------------------
 
-Cell.record_range_var
-=====================
-
-
-.. py:method:: single_cell_parser.cell.Cell.record_range_var(var, mech=None)
+.. function:: single_cell_parser.cell.Cell.record_range_var(var, mech=None)
 
 
    Record a range mechanism in all sections.

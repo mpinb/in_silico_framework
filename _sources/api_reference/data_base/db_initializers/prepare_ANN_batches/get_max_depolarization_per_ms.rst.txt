@@ -6,7 +6,7 @@ get_max_depolarization_per_ms
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_max_depolarization_per_ms(vt_dask)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_max_depolarization_per_ms(vt_dask)
 
 
    Subsample a voltage trace dask dataframe to 1ms bins based on the maximum depolarization.

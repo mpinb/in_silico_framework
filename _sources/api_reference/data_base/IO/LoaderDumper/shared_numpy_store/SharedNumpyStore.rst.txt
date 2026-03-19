@@ -29,10 +29,9 @@ SharedNumpyStore
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore(working_dir)
+.. class:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore(working_dir)
    
    Store numpy arrays on disk and share them between processes.
 
@@ -98,11 +97,11 @@ SharedNumpyStore
       * - :py:obj:`save <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.save>`\ (arr, name)
         - Save a numpy array to disk at the working_dir of this instance of NumpyStore.
       * - :py:obj:`flush <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.flush>`\ ()
-        - Rename all files according to the new names in :paramref:`_pending_renames`.
+        - Rename all files according to the new names in :param:`_pending_renames`.
       * - :py:obj:`close <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.close>`\ ()
         - Close all shared memory objects and remove them from the dictionary.
       * - :py:obj:`append_save <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.append_save>`\ (arr, name, autoflush)
-        - Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+        - Appends the given numpy array :param:`arr` to an existing array with the specified :param:`name`.
       * - :py:obj:`load <data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.load>`\ (name, mode, start\_row, end\_row, allow\_create\_shm)
         - Load an array from shared memory.
 

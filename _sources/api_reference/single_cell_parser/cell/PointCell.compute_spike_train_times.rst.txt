@@ -1,18 +1,17 @@
 
 
+compute_spike_train_times
+=========================
 
 
+.. Signature -------------------------------
 
-PointCell.compute_spike_train_times
-===================================
-
-
-.. py:method:: single_cell_parser.cell.PointCell.compute_spike_train_times(interval, noise, start=0.0, stop=-1.0, nSpikes=None, spike_source=None)
+.. function:: single_cell_parser.cell.PointCell.compute_spike_train_times(interval, noise, start=0.0, stop=-1.0, nSpikes=None, spike_source=None)
 
 
    Compute a simple spike train for the presynaptic cell.
 
-   For more sophisticated methods than a simple spike train, see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`.
+   For more sophisticated methods than a simple spike train, see :func:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`.
 
    :param interval: Mean interval between spikes.
    :type interval: float
@@ -24,7 +23,7 @@ PointCell.compute_spike_train_times
    :type stop: float, optional
    :param nSpikes: Number of spikes. Defaults to None.
    :type nSpikes: int, optional
-   :param spike_source: Spike source category (see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
+   :param spike_source: Spike source category (see :func:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
    :type spike_source: str, optional
 
 

@@ -1,20 +1,19 @@
 
 
+_get_spatial_bin_level
+======================
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level
-====================================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level(key)
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation._get_spatial_bin_level(key)
 
    :staticmethod:
 
 
    Get the string index of the database key that relects the spatial dimension
 
-   :param key: key to access the data in the :py:class:`DataBase`
+   :param key: key to access the data in the :class:`DataBase`
    :type key: tuple
 
    :returns: index of the spatial dimension in the key

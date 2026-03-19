@@ -1,13 +1,12 @@
 
 
+interactive_app
+===============
 
 
+.. Signature -------------------------------
 
-CellMorphologyInteractiveVisualizer.interactive_app
-===================================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app(color='grey', t_start=None, t_stop=None, t_step=None)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer.interactive_app(color='grey', t_start=None, t_stop=None, t_step=None)
 
 
    :param color: If you want some other color overlayed on the cell morphology.

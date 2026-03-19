@@ -1,23 +1,22 @@
 
 
+_compute_path_length
+====================
 
 
+.. Signature -------------------------------
 
-SynapseMapper._compute_path_length
-==================================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper._compute_path_length(sec, x)
 
 
-   Calculate the path length betwen the soma and location :paramref:`x` on section :paramref:`sec`
+   Calculate the path length betwen the soma and location :param:`x` on section :param:`sec`
 
    :param sec: Section to calculate path length on.
    :type sec: ~singlecell_input_mapper.singlecell_input_mapper.cell.Section
    :param x: Location on section to calculate path length to.
    :type x: float
 
-   :returns: Path length between soma and location :paramref:`x` on section :paramref:`sec`.
+   :returns: Path length between soma and location :param:`x` on section :param:`sec`.
    :rtype: float
 
 

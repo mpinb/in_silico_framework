@@ -1,16 +1,15 @@
 
 
+spatialgraph_to_cell
+====================
 
 
+.. Signature -------------------------------
 
-CellParser.spatialgraph_to_cell
-===============================
-
-
-.. py:method:: single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell(parameters=None, axon=False, scaleFunc=None)
+.. function:: single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell(parameters=None, axon=False, scaleFunc=None)
 
 
-   Create a :py:class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+   Create a :class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
 
    Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
 
@@ -20,11 +19,11 @@ CellParser.spatialgraph_to_cell
    .. deprecated:: 0.1.0
        The `scaleFunc` argument is deprecated and will be removed in a future version.
        To ensure simulation reproducability, scaleFunc should be specified in the parameters, as
-       described in :py:mod:`~single_cell_parser.cell_modify_funs`
+       described in :mod:`~single_cell_parser.cell_modify_funs`
 
    .. deprecated:: 0.1.0
        The ``parameters`` keyword is optional for this method. It was previously used to check for spines.
-       Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :py:meth:`set_up_biophysics`.
+       Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
 
 
 

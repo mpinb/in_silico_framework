@@ -30,10 +30,9 @@ PSPs
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.synaptic_strength_fitting.PSPs(neuron_param=None, confile=None, gExRange=[0.5, 1.0, 1.5, 2.0], AMPA_component=1, NMDA_component=1, vardt=True, mode='cells', exc_inh='exc', tStim=110, tEnd=150)
+.. class:: simrun.synaptic_strength_fitting.PSPs(neuron_param=None, confile=None, gExRange=[0.5, 1.0, 1.5, 2.0], AMPA_component=1, NMDA_component=1, vardt=True, mode='cells', exc_inh='exc', tStim=110, tEnd=150)
    
    Calculate PSP amlitudes of single synapses and fit synaptic strength
 

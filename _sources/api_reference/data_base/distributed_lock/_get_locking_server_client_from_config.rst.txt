@@ -6,7 +6,7 @@ _get_locking_server_client_from_config
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock._get_locking_server_client_from_config()
+.. function:: data_base.distributed_lock._get_locking_server_client_from_config()
 
 
 

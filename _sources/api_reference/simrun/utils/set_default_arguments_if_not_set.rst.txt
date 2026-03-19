@@ -6,7 +6,7 @@ set_default_arguments_if_not_set
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.set_default_arguments_if_not_set(o, kwargs)
+.. function:: simrun.utils.set_default_arguments_if_not_set(o, kwargs)
 
 
    Set default arguments of an object if they are not set.

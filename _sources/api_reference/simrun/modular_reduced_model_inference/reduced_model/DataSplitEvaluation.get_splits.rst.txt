@@ -1,13 +1,12 @@
 
 
+get_splits
+==========
 
 
+.. Signature -------------------------------
 
-DataSplitEvaluation.get_splits
-==============================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits()
+.. function:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.get_splits()
 
 
    Get the train-test splits.

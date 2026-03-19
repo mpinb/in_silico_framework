@@ -1,13 +1,12 @@
 
 
+mf
+==
 
 
+.. Signature -------------------------------
 
-_Step.mf
-========
-
-
-.. py:method:: biophysics_fitting.hay.evaluation._Step.mf(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation._Step.mf(voltage_traces)
 
 
    Get the mean frequency of the somatic voltage trace.
@@ -21,7 +20,7 @@ _Step.mf
                  and ``".raw"`` to the mean frequency of the somatic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:meth:`~biophysics_fitting.ephys.STEP_mean_frequency`
+   .. seealso:: :func:`~biophysics_fitting.ephys.STEP_mean_frequency`
 
 
 

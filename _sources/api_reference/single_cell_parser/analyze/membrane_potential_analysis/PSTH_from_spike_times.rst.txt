@@ -6,7 +6,7 @@ PSTH_from_spike_times
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times(spikeTimeVectors, binSize=1.0, tBegin=None, tEnd=None, aligned=True)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.PSTH_from_spike_times(spikeTimeVectors, binSize=1.0, tBegin=None, tEnd=None, aligned=True)
 
 
    Calculates a PSTH from spike times.
@@ -15,9 +15,9 @@ PSTH_from_spike_times
    :type spikeTimeVectors: list
    :param binSize: Bin size for the PSTH. Default is `1.0 ms`.
    :type binSize: float, optional
-   :param tBegin: Start time of the PSTH. Default is ``None`` (min of :paramref:`spikeTimeVectors`).
+   :param tBegin: Start time of the PSTH. Default is ``None`` (min of :param:`spikeTimeVectors`).
    :type tBegin: float, optional
-   :param tEnd: End time of the PSTH. Default is ``None`` (max of :paramref:`spikeTimeVectors`).
+   :param tEnd: End time of the PSTH. Default is ``None`` (max of :param:`spikeTimeVectors`).
    :type tEnd: float, optional
    :param aligned: If True, aligns the bins to integer multiples of the bin size. Default is ``True``.
    :type aligned: bool, optional

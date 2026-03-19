@@ -6,7 +6,7 @@ combine_PSP_objects
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.PSP_with_cell_modification.combine_PSP_objects(PSPexc, PSPinh)
+.. function:: simrun.PSP_with_cell_modification.combine_PSP_objects(PSPexc, PSPinh)
 
 
    Combine two PSPs objects into one.

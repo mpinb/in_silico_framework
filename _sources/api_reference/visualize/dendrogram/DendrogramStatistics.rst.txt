@@ -19,10 +19,11 @@ DendrogramStatistics
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.dendrogram.DendrogramStatistics(cell)
+.. class:: visualize.dendrogram.DendrogramStatistics(cell)
+
+   Bases: :py:obj:`Dendrogram`
    
    Plot dendrogram statistics.
 
@@ -50,19 +51,19 @@ DendrogramStatistics
 
          The dendrogram object.
 
-         :type: :py:class:`Dendrogram`
+         :type: :class:`Dendrogram`
 
       .. attribute:: dend_statistics
 
          The dendrite statistics object.
 
-         :type: :py:class:`_DendrogramDendriteStatistics`
+         :type: :class:`_DendrogramDendriteStatistics`
 
       .. attribute:: syn_statistics
 
          The synapse statistics object.
 
-         :type: :py:class:`_DendrogramSynapseStatistics`
+         :type: :class:`_DendrogramSynapseStatistics`
 
    :Methods:
 

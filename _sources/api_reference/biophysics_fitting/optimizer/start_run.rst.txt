@@ -6,7 +6,7 @@ start_run
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.start_run(db_setup, n, pop=None, client=None, continue_cp=False, offspring_size=1000, eta=10, mutpb=0.3, cxpb=0.7, max_ngen=600, satisfactory_boundary_dict=None)
+.. function:: biophysics_fitting.optimizer.start_run(db_setup, n, pop=None, client=None, continue_cp=False, offspring_size=1000, eta=10, mutpb=0.3, cxpb=0.7, max_ngen=600, satisfactory_boundary_dict=None)
 
 
    Start an optimization run as specified in db_setup.

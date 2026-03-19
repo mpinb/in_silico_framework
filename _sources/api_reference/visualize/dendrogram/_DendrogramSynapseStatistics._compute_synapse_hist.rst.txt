@@ -1,23 +1,20 @@
 
 
+_compute_synapse_hist
+=====================
 
 
+.. Signature -------------------------------
 
-_DendrogramSynapseStatistics._compute_synapse_hist
-==================================================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_hist(binsize=50)
+.. function:: visualize.dendrogram._DendrogramSynapseStatistics._compute_synapse_hist(binsize=50)
 
 
    Compute the synapse density histogram.
 
-   :param dist_end: The maximum soma distance. Default is ``None`` and the maximum soma distance is calculated.
-   :type dist_end: float
    :param binsize: The size of the bins in :math:`\mu m`. Default is :math:`50 \mu m`.
    :type binsize: float
 
-   :returns: Nothing. Updates :paramref:`bins`, :paramref:`synapse_density`, :paramref:`synapse_density_apical`, and :paramref:`synapse_density_basal`.
+   :returns: Nothing. Updates :param:`bins`, :param:`synapse_density`, :param:`synapse_density_apical`, and :param:`synapse_density_basal`.
    :rtype: None
 
 

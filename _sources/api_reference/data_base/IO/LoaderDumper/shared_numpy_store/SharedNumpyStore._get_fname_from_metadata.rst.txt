@@ -1,13 +1,12 @@
 
 
+_get_fname_from_metadata
+========================
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore._get_fname_from_metadata
-=========================================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname_from_metadata(name, shape, dtype)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore._get_fname_from_metadata(name, shape, dtype)
 
 
    Get the filename from metadata.

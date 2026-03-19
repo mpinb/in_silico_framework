@@ -6,7 +6,7 @@ check_unset_range_mechanisms
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.L5tt_parameter_setup.check_unset_range_mechanisms(cell_param)
+.. function:: biophysics_fitting.L5tt_parameter_setup.check_unset_range_mechanisms(cell_param)
 
 
 

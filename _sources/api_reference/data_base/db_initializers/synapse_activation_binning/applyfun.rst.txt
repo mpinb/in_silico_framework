@@ -6,10 +6,10 @@ applyfun
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.synapse_activation_binning.applyfun(pdf, maxtime=None)
+.. function:: data_base.db_initializers.synapse_activation_binning.applyfun(pdf, maxtime=None)
 
 
-   Bin the synapse activations using :py:meth:`~data_base.analyze.temporal_binning.universal`.
+   Bin the synapse activations using :func:`~data_base.analyze.temporal_binning.universal`.
 
    This is used by default during the binning of synapse activations.
 
@@ -21,7 +21,7 @@ applyfun
    :returns: The binned synapse activations.
    :rtype: numpy.array
 
-   .. seealso:: :py:meth:`~data_base.db_initializers.init`
+   .. seealso:: :func:`~data_base.db_initializers.init`
 
 
 

@@ -28,21 +28,22 @@ SynapseDensity
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity(cell, postCellType, connectionSpreadsheet, exTypes, inhTypes, exPST, inhPST)
+.. class:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity(cell, postCellType, connectionSpreadsheet, exTypes, inhTypes, exPST, inhPST)
+
+   Bases: :py:obj:`object`
    
    Compute synapse density mesh from a PST density mesh.
 
-   Given a PST density mesh, create a 3D mesh of synapse densities for a single postsynaptic neuron using :py:meth:`compute_synapse_density`.
-   It is assumed that :py:attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.exPST` and :py:attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.inhPST` have the same bounding box and voxel size.
-   This density mesh is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` to assign synapses to the postsynaptic neuron.
+   Given a PST density mesh, create a 3D mesh of synapse densities for a single postsynaptic neuron using :func:`compute_synapse_density`.
+   It is assumed that :attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.exPST` and :attr:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.inhPST` have the same bounding box and voxel size.
+   This density mesh is used in :class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` to assign synapses to the postsynaptic neuron.
 
-   This class is used in :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   This class is used in :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
    to compute synapse densities per presynaptic cell type for a given postsynaptic cell type and morphology.
 
-   :paramref:`exPST` and :paramref:`inhPST` are density meshes for normalizing post-synaptic targets.
+   :param:`exPST` and :param:`inhPST` are density meshes for normalizing post-synaptic targets.
    Shown below is an example for such density field: the (25000, 50000, 75000, 100000) isosurfaces of the excitatory
    PST density field for a rat somatosensory cortex (pia and white matter shown in grey at the top and bottom).
 
@@ -54,7 +55,7 @@ SynapseDensity
       Cell type wiring specificity is only considered in the network realization phase, when the synapse density field is Poisson sampled and normalized.
       Then the normalization values depend on the exact presynaptic cell type.
 
-   .. seealso:: See: :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+   .. seealso:: See: :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
 
    :param cell: the postsynaptic neuron
    :type cell: ~singlecell_input_mapper.singlecell_input_mapper.cell.Cell
@@ -76,7 +77,7 @@ SynapseDensity
       .. attribute:: cellPST
 
          Nested dictionary containing the 3D length/surface area density of the postsynaptic neuron.
-         See :py:meth:`~SynapseDensity.compute_cell_PST` for details.
+         See :func:`~SynapseDensity.compute_cell_PST` for details.
 
          :type: dict
 
@@ -95,7 +96,7 @@ SynapseDensity
       * - :py:obj:`compute_cell_PST <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity.compute_cell_PST>`\ ()
         - Compute 3D length/surface area density of the postsynaptic targets in the mesh.
       * - :py:obj:`_compute_length_surface_area_density <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._compute_length_surface_area_density>`\ (lengthDensity, surfaceAreaDensity, likeAmira)
-        - Fills the scalar fields :paramref:`lengthDensity` and :paramref:`surfaceDensity` to contain length and area per structure per voxel.
+        - Fills the scalar fields :param:`lengthDensity` and :param:`surfaceDensity` to contain length and area per structure per voxel.
       * - :py:obj:`_clip_u <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._clip_u>`\ (pq, u1u2)
         - Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.
       * - :py:obj:`_get_truncated_cone_area <singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity._get_truncated_cone_area>`\ (height, radius1, radius2)

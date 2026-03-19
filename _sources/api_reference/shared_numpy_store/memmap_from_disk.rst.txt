@@ -1,0 +1,38 @@
+
+
+memmap_from_disk
+================
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.memmap_from_disk(path, shape=None, dtype=None, name=None, start_row=None, end_row=None)
+
+
+   Memory map a numpy array on disk.
+
+   Create a numpy memory map from a file on disk. This allows for the array to be accessed without loading the entire array into memory.
+
+   :param path: Path to the file on disk.
+   :type path: str
+   :param shape: Shape of the array.
+   :type shape: tuple, optional
+   :param dtype: Data type of the array.
+   :type dtype: str, optional
+   :param name: Name of the shared memory block. Default: None.
+   :type name: str, optional
+   :param start_row: The starting row of the array. Default: None.
+   :type start_row: int, optional
+   :param end_row: The ending row of the array. Default: None.
+   :type end_row: int, optional
+
+   :returns: A numpy memory map object.
+   :rtype: np.memmap
+
+   .. seealso:: https://numpy.org/doc/stable/reference/generated/numpy.memmap.html
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

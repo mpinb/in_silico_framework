@@ -6,16 +6,16 @@ get_3d_plot_morphology
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_morphology_visualizer.get_3d_plot_morphology(lookup_table=None, colors='grey', color_keyword=None, synapses={}, time_point=None, highlight_section_kwargs={'sec_n': None, 'highlight_x': None, 'arrow_args': {}}, camera_position={'azim': 0, 'dist': 10, 'elev': 30, 'roll': 0}, dpi=72, population_to_color_dict={}, save='', plot=False, synapse_legend=True, legend=None, return_figax=True, proj_type='ortho')
+.. function:: visualize.cell_morphology_visualizer.get_3d_plot_morphology(lookup_table=None, colors='grey', color_keyword=None, synapses={}, time_point=None, highlight_section_kwargs={'sec_n': None, 'highlight_x': None, 'arrow_args': {}}, camera_position={'azim': 0, 'dist': 10, 'elev': 30, 'roll': 0}, dpi=72, population_to_color_dict={}, save='', plot=False, synapse_legend=True, legend=None, return_figax=True, proj_type='ortho', fig=None, ax=None)
 
 
    Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
 
-   This is the main method called by :py:class:`~CellMorphologyVisualizer` to generate a 3D plot of the cell morphology.
+   This is the main method called by :class:`~CellMorphologyVisualizer` to generate a 3D plot of the cell morphology.
    This method Uses LineCollections to plot the morphology, with a round joinstyle.
-   This method is usually not called directly. Rather, :py:class:`~CellMorphologyVisualizer` calls this method to generate a plot,
+   This method is usually not called directly. Rather, :class:`~CellMorphologyVisualizer` calls this method to generate a plot,
    depending on parameters such as parallellization client, scalar data overlay, viewing angles etc...
-   It is recommended to use the high-level method :py:class:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot` instead of trying to use this one directly.
+   It is recommended to use the high-level method :class:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot` instead of trying to use this one directly.
 
    :param lookup_table: pandas DataFrame with the morphology of the cell, where the initial point of each section is duplicated: once for the same section, and once as the last point of the previous section.
    :type lookup_table: pd.DataFrame
@@ -45,10 +45,14 @@ get_3d_plot_morphology
    :type legend: bool
    :param return_figax: Whether to return the figure and axis objects. Default: True
    :type return_figax: bool
-   :param proj_type: Projection type for the 3D plot. Default: "ortho"
+   :param proj_type: Projection type for the 3D plot, ignored if fig and ax are provided. Default: "ortho"
    :type proj_type: str
+   :param fig: Figure object to plot on. If None, a new figure and axes will be created.
+   :type fig: matplotlib.figure.Figure
+   :param ax: Axes object. Ignored if fig is None. Note that it must be created as a 3D axes with the intended projection type.
+   :type ax: matplotlib.axes._subplots.Axes3DSubplot
 
-   :returns: fig and ax object if :paramref:`return_figax` is True. None otherwise.
+   :returns: fig and ax object if :param:`return_figax` is True. None otherwise.
    :rtype: tuple | None
 
 

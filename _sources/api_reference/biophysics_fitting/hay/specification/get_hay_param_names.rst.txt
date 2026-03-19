@@ -6,7 +6,7 @@ get_hay_param_names
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.specification.get_hay_param_names()
+.. function:: biophysics_fitting.hay.specification.get_hay_param_names()
 
 
    Get the names of the parameters used in :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`.

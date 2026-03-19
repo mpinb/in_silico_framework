@@ -1,13 +1,12 @@
 
 
+get_synapse_coordinates
+=======================
 
 
+.. Signature -------------------------------
 
-PSPs.get_synapse_coordinates
-============================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates(population, flatten=False, cell_indices=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates(population, flatten=False, cell_indices=None)
 
 
    Get the coordinates of all synapses of a particular celltype.

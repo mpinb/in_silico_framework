@@ -6,7 +6,7 @@ set_ex_synapse_weight
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.set_ex_synapse_weight(syn, weight)
+.. function:: simrun.synaptic_strength_fitting.set_ex_synapse_weight(syn, weight)
 
 
    Set the synaptic strength of an excitatory :py:class:`single_cell_parser.synapse.Synapse`.

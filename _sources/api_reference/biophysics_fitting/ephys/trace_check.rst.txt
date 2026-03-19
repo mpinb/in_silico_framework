@@ -6,7 +6,7 @@ trace_check
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.trace_check(t, v, stim_onset=None, stim_duration=None, minspikenum=None, soma_threshold=None, returning_to_rest=2, max_prestim_dendrite_depo=-50, vmax=None, name='')
+.. function:: biophysics_fitting.ephys.trace_check(t, v, stim_onset=None, stim_duration=None, minspikenum=None, soma_threshold=None, returning_to_rest=2, max_prestim_dendrite_depo=-50, vmax=None, name='')
 
 
    Check the properties of a voltage trace:

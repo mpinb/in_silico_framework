@@ -6,15 +6,15 @@ make_all_str
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.isf_data_base.make_all_str(dict_)
+.. function:: data_base.isf_data_base.make_all_str(dict_)
 
 
    Convert all items in a (nested) dictionary to string.
 
    Used to write out metadata in JSON format.
 
-   :param dict_: The dictionary to convert.
-   :type dict_: dict
+   :param dict\_: The dictionary to convert.
+   :type dict\_: dict
 
    :returns: The converted dictionary.
    :rtype: dict

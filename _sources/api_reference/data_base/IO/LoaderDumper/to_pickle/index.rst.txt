@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ :mod:`~data_base.IO.LoaderDumper` ❭ 
 
 
@@ -16,12 +15,13 @@ to_pickle
    check </api_reference/data_base/IO/LoaderDumper/to_pickle/check>
    dump </api_reference/data_base/IO/LoaderDumper/to_pickle/dump>
 
-.. py:module:: data_base.IO.LoaderDumper.to_pickle
+.. module:: data_base.IO.LoaderDumper.to_pickle
 
 .. autoapi-nested-parse::
    Read and write objects to the pickle format.
 
-   .. seealso:: :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle` for saving to the cloudpickle format.
+   .. seealso:: :mod:`~data_base.isf_data_base.IO.LoaderDumper.to_cloudpickle` for saving to the cloudpickle format.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -54,6 +54,8 @@ Functions
      - Check whether the object can be saved with this dumper
    * - :py:obj:`dump <data_base.IO.LoaderDumper.to_pickle.dump>`\ (obj, savedir)
      - Save the object in the specified directory
+
+
 
 
 

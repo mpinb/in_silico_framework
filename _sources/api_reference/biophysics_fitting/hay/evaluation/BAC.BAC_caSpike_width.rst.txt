@@ -1,13 +1,12 @@
 
 
+BAC_caSpike_width
+=================
 
 
+.. Signature -------------------------------
 
-BAC.BAC_caSpike_width
-=====================
-
-
-.. py:method:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_width(voltage_traces)
+.. function:: biophysics_fitting.hay.evaluation.BAC.BAC_caSpike_width(voltage_traces)
 
 
    Get the width of the calcium spike in the dendritic voltage trace.
@@ -21,7 +20,7 @@ BAC.BAC_caSpike_width
                  and ``".raw"`` to the width of the calcium spike in the dendritic voltage trace.
    :rtype: dict
 
-   .. seealso:: :py:func:`BAC_caSpike_width`
+   .. seealso:: :func:`BAC_caSpike_width`
 
 
 

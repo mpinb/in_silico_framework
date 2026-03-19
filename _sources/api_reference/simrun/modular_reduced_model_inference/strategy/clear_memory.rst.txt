@@ -6,13 +6,13 @@ clear_memory
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.modular_reduced_model_inference.strategy.clear_memory()
+.. function:: simrun.modular_reduced_model_inference.strategy.clear_memory()
 
 
    Remove all weak references
 
    Cupy frees GPU memory when all references are deleted
-   As this is difficult to track, use the :py:meth:`simrun.modular_reduced_model_inference.make_weakref` method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object.
+   As this is difficult to track, use the :func:`simrun.modular_reduced_model_inference.make_weakref` method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object.
    This can be used to interact with the data, but is not a reference.
    Therefore, it is sufficient to empty _WEAKREF_ARRAY_LIST, which frees the GPU memory.
    All weakref objects pointing to GPU arrays will then be invalidated.

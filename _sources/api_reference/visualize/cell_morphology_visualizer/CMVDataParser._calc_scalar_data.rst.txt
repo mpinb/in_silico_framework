@@ -1,0 +1,23 @@
+
+
+_calc_scalar_data
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._calc_scalar_data(keyword)
+
+
+   Updates the scalar data according to some keyword (ion dynamics or membrane voltage).
+
+   :param keyword: keyword to determine the scalar data. Can be a color, ion dynamics, or membrane voltage.
+   :type keyword: str
+
+   :returns: None. Updates the scalar data.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

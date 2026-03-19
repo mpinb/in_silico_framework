@@ -6,12 +6,12 @@ plot_vt
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.voltage_trace_visualizer.plot_vt(voltage_traces, key='BAC.hay_measure')
+.. function:: visualize.voltage_trace_visualizer.plot_vt(voltage_traces, key='BAC.hay_measure')
 
 
    Plot voltage traces from simulation results.
 
-   The results of e.g. :py:class:`biophysics_fitting.simulator.Simulator` are nested dictionaries,
+   The results of e.g. :class:`biophysics_fitting.simulator.Simulator` are nested dictionaries,
    containing various voltage traces. NEURON simulation results are NEURON vectors.
    This is a helper method to extract that data and plot out specific voltage traces from those results.
 

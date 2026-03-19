@@ -1,13 +1,12 @@
 
 
+run_analysis
+============
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.run_analysis
-=======================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.run_analysis()
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.run_analysis()
 
 
    Runs the spike detection analysis.

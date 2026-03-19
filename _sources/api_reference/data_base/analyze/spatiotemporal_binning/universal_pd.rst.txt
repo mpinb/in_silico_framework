@@ -6,14 +6,14 @@ universal_pd
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.spatiotemporal_binning.universal_pd(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
+.. function:: data_base.analyze.spatiotemporal_binning.universal_pd(df, distance_column, spatial_distance_bins=50, min_time=0, max_time=300, time_distance_bins=1)
 
 
    Bin a pandas DataFrame by both distance and time.
 
-   This is a speed-optimized binning code for 2d-binning of a :py:class:`pandas.DataFrame`.
+   This is a speed-optimized binning code for 2d-binning of a :class:`pandas.DataFrame`.
 
-   :param df: DataFrame to bin. Must contain a column with the name :paramref:`distance_column` that contains the distance values.
+   :param df: DataFrame to bin. Must contain a column with the name :param:`distance_column` that contains the distance values.
    :type df: pandas.DataFrame
    :param distance_column: Column name of the distance values.
    :type distance_column: str
@@ -27,7 +27,7 @@ universal_pd
    :type time_distance_bins: int
 
    :returns:     A 2D array of the binned values.
-   :rtype: :py:class:`~numpy.array`
+   :rtype: :class:`~numpy.array`
 
 
 

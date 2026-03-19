@@ -1,13 +1,12 @@
 
 
+as_dict
+=======
 
 
+.. Signature -------------------------------
 
-NTParameterSet.as_dict
-======================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet.as_dict()
+.. function:: single_cell_parser.parameters.NTParameterSet.as_dict()
 
 
    Convert the NTParameterSet to a regular dictionary.

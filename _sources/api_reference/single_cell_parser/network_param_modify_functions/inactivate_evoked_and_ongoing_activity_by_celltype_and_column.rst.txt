@@ -6,7 +6,7 @@ inactivate_evoked_and_ongoing_activity_by_celltype_and_column
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, inact_celltypes, inact_column)
+.. function:: single_cell_parser.network_param_modify_functions.inactivate_evoked_and_ongoing_activity_by_celltype_and_column(param, inact_celltypes, inact_column)
 
 
    Inactivates both the evoked and ongoing activity for the celltypes in the :ref:`network_parameters_format`.

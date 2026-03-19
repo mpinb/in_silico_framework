@@ -6,7 +6,7 @@ change_glutamate_syn_weights
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights(param, g_optimal=None, pop=EXCITATORY)
+.. function:: single_cell_parser.network_param_modify_functions.change_glutamate_syn_weights(param, g_optimal=None, pop=EXCITATORY)
 
 
    Changes the glutamate synapse weights in the :ref:`network_parameters_format` to the optimal values.

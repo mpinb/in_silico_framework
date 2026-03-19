@@ -6,13 +6,13 @@ load_dendritic_voltage_traces
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=None, divisions=None)
+.. function:: data_base.db_initializers.load_simrun_general.data_parsing.load_dendritic_voltage_traces(db, filelist, recsite_labels, repartition=None, divisions=None)
 
 
    Load the voltage traces from dendritic recording sites.
 
    This functions reads in all dendritic voltage trace files corresponding
-   to each recsite label in :paramref:`suffix_key_dict`.
+   to each recsite label in :param:`suffix_key_dict`.
    Dendritic voltage traces recorded with recsites of the same label are aggregated in a single file.
 
    .. attention::
@@ -23,14 +23,15 @@ load_dendritic_voltage_traces
 
    :param db: The target database that should contain the parsed simulation results.
    :type db: ~data_base.DataBase
-   :param suffix_key_dict: Dictionary containing the suffixes of the dendritic voltage trace files.
-                           The keys are the labels of the recording sites, and the values are the suffixes of the dendritic voltage trace files.
-   :type suffix_key_dict: dict
+   :param filelist: List of paths to dendritic :ref:`voltage_traces_format` files, relative to the simulation results directory
+   :type filelist: List[str]
+   :param recsite_labels: List of recording site labels, ordered the same way as :attr:`filelist`. Used to merge voltage traces fromt he same recording site together.
+   :type recsite_labels: List[str]
    :param repartition: If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
    :type repartition: bool
 
    :returns:     Dictionary mapping each recsite label to a dask dataframe containing the associated voltage traces.
-   :rtype: Dict[str, :py:class:`dask.dataframe.DataFrame`]
+   :rtype: Dict[str, :class:`dask.dataframe.DataFrame`]
 
 
 

@@ -6,7 +6,7 @@ calculate_vdensity_array
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.voltage_binning.calculate_vdensity_array(*args, **kwargs)
+.. function:: data_base.analyze.voltage_binning.calculate_vdensity_array(v, bin_size=0.05, ymin=-100, ymax=50, **kwargs)
 
 
    Calculate the voltage density array.
@@ -22,10 +22,6 @@ calculate_vdensity_array
    :type ymin: float
    :param ymax: the maximum voltage value
    :type ymax: float
-   :param xmin: the minimum time value (unused)
-   :type xmin: float
-   :param xmax: the maximum time value (unused)
-   :type xmax: float
 
 
 

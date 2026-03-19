@@ -6,7 +6,7 @@ run_cloudpickled_remotely
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.run_cloudpickled_remotely(queue)
+.. function:: biophysics_fitting.utils.run_cloudpickled_remotely(queue)
 
 
    Unserialize a function and its arguments, run it, and serialize the output.

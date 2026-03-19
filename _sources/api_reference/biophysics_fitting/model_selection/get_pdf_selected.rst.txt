@@ -6,7 +6,7 @@ get_pdf_selected
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.model_selection.get_pdf_selected(pdf, BAC_limit=3.5, step_limit=4.5, objectives_BAC=objectives_BAC, objectives_step=objectives_step)
+.. function:: biophysics_fitting.model_selection.get_pdf_selected(pdf, BAC_limit=3.5, step_limit=4.5, objectives_BAC=objectives_BAC, objectives_step=objectives_step)
 
 
    Select models based on cutoffs from a DataFrame.

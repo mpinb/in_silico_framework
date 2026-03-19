@@ -6,17 +6,17 @@ rasterplot2_pdf_grouped
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color='k')
+.. function:: visualize.rasterplot.rasterplot2_pdf_grouped(pdf, grouplabel, ax=None, xlim=None, x_offset=0, color='k')
 
 
    Plot a rasterplot per group of :ref:`spike_times_format`.
 
-   Similar to :py:meth:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
+   Similar to :func:`~rasterplot2`, this method plots a rasterplot from a spike times dataframe,
    but groups them with horizontal lines, based on the grouplabel.
-   Assumes the spike times dataframe has a column :paramref:`grouplabel`
+   Assumes the spike times dataframe has a column :param:`grouplabel`
 
    :param pdf: A DataFrame containing the spike times.
-               Must contain a column with label :paramref:`grouplabel`.
+               Must contain a column with label :param:`grouplabel`.
    :type pdf: pandas.DataFrame
    :param grouplabel: The column name in the DataFrame to group by.
    :type grouplabel: str

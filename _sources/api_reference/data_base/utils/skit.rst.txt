@@ -6,14 +6,14 @@ skit
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.skit(*funcs, **kwargs)
+.. function:: data_base.utils.skit(*funcs, **kwargs)
 
 
    Splits kwargs up to supply different functions with the right subset.
 
-   :param \*funcs: functions to be supplied with the right subset of kwargs
-   :type \*funcs: function
-   :param \*\*kwargs: keyword arguments to be split up
+   :param funcs: functions to be supplied with the right subset of kwargs
+   :type funcs: List[callable]
+   :param kwargs: keyword arguments to be split up
 
    .. seealso:: Adapted from http://stackoverflow.com/a/23430335/5082048
 

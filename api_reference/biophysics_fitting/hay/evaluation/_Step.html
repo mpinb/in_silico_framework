@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -1807,6 +1807,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2258,10 +2273,10 @@
 <dt class="sig sig-object highlight sig-wrap py" id="biophysics_fitting.hay.evaluation._Step">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><span class="sig-name descname"><span class="pre">biophysics_fitting</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-biophysics_fitting.hay" title="biophysics_fitting.hay (Python module)"><span class="sig-name descname"><span class="pre">hay</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-biophysics_fitting.hay.evaluation" title="biophysics_fitting.hay.evaluation (Python module)"><span class="sig-name descname"><span class="pre">evaluation</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">_Step</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh" title="biophysics_fitting.hay.evaluation._Step.__init__.soma_thresh (Python parameter) — The threshold for APs in the somatic voltage trace."><span class="n"><span class="pre">soma_thresh</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="o">-</span><span class="mi">30</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_onset" title="biophysics_fitting.hay.evaluation._Step.__init__.stim_onset (Python parameter) — The onset of the stimulus (ms)."><span class="n"><span class="pre">stim_onset</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">700</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.stim_duration" title="biophysics_fitting.hay.evaluation._Step.__init__.stim_duration (Python parameter) — The duration of the stimulus (ms)."><span class="n"><span class="pre">stim_duration</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">2000</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish" title="biophysics_fitting.hay.evaluation._Step.__init__.punish (Python parameter) — The punishment value in units of \sigma. Used as a baseline if the voltage trace cannot be evaluated on a metric (e.g."><span class="n"><span class="pre">punish</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">250.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_last_spike_after_deadline (Python parameter) — Whether to punish if the last spike is after the deadline."><span class="n"><span class="pre">punish_last_spike_after_deadline</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_minspikenum (Python parameter) — The minimum number of spikes required for this stimulus protocol."><span class="n"><span class="pre">punish_minspikenum</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">5</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance" title="biophysics_fitting.hay.evaluation._Step.__init__.punish_returning_to_rest_tolerance (Python parameter) — The tolerance for returning to rest (mV)."><span class="n"><span class="pre">punish_returning_to_rest_tolerance</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mf">2.0</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.definitions" title="biophysics_fitting.hay.evaluation._Step.__init__.definitions (Python parameter) — The definitions for the evaluation metrics."><span class="n"><span class="pre">definitions</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.name" title="biophysics_fitting.hay.evaluation._Step.__init__.name (Python parameter) — The name of the stimulus protocol."><span class="n"><span class="pre">name</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="s1">&#39;StepTemplate&#39;</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.hay.evaluation._Step.__init__.step_index" title="biophysics_fitting.hay.evaluation._Step.__init__.step_index (Python parameter) — The index of the step stimulus protocol."><span class="n"><span class="pre">step_index</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="mi">0</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step" title="Link to this definition">¶</a></dt>
 <dd><p>Template class for evaluating step current injections.</p>
-<p>These metrics were introduced by <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, and illustrated in <span id="id2">Bast <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id7" title="Arco Bast, Jason M. Guest, Rieke Fruengel, Rajeevan T. Narayanan, Christiaan P.J. de Kock, and Marcel Oberlaender. Thalamus drives active dendritic computations in cortex. bioRxiv : the preprint server for biology, 2023. Citation Key: Bast2021.10.21.465325 tex.elocation-id: 2021.10.21.465325 tex.eprint: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325.full.pdf. URL: https://www.biorxiv.org/content/early/2023/07/20/2021.10.21.465325, doi:10.1101/2021.10.21.465325.">3</a>]</span>.</p>
+<p>These metrics were introduced by <span id="id1">Hay <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id4" title="Etay Hay, Sean Hill, Felix Schuermann, Henry Markram, and Idan Segev. Models of neocortical layer 5b pyramidal cells capturing a wide range of dendritic and perisomatic active properties. PLOS Computational Biology, 7(7):e1002107, July 2011. doi:10.1371/journal.pcbi.1002107.">2</a>]</span>, and illustrated in <span id="id2">Bast <em>et al.</em> [<a class="reference internal" href="../../../../bibliography.html#id7" title="Arco Bast, Jason M Guest, Rieke Fruengel, Rajeevan T Narayanan, Christiaan P J de Kock, and Marcel Oberlaender. Thalamus enables active dendritic coupling of inputs arriving at different cortical layers. Nat. Commun., 16(1):8327, September 2025. doi:10.1038/s41467-025-64152-0.">3</a>]</span>.</p>
 <div class="seealso admonition">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="../../setup_stim/index.html#module-biophysics_fitting.setup_stim" title="biophysics_fitting.setup_stim (Python module)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">biophysics_fitting.setup_stim()</span></code></a> for more information on the stimulus protocols.</p>
+<p><a class="reference internal" href="../../setup_stim/index.html#module-biophysics_fitting.setup_stim" title="biophysics_fitting.setup_stim (Python module)"><code class="xref py py-func docutils literal notranslate"><span class="pre">biophysics_fitting.setup_stim()</span></code></a> for more information on the stimulus protocols.</p>
 </div>
 <dl class="field-list">
 <dt class="field-odd" id="biophysics_fitting.hay.evaluation._Step-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#biophysics_fitting.hay.evaluation._Step-parameters" title="Permalink to this headline">¶</a></dt>
@@ -2420,43 +2435,43 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
 </dl>
 <table class="summarytable docutils data align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.get.html#biophysics_fitting.hay.evaluation._Step.get" title="biophysics_fitting.hay.evaluation._Step.get (Python method) — Get the full evaluation of the voltage traces for the step current injection."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(**voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.get.html#biophysics_fitting.hay.evaluation._Step.get" title="biophysics_fitting.hay.evaluation._Step.get (Python function) — Get the full evaluation of the voltage traces for the step current injection."><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(**voltage_traces)</p></td>
 <td><p>Get the full evaluation of the voltage traces for the step current injection.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.check.html#biophysics_fitting.hay.evaluation._Step.check" title="biophysics_fitting.hay.evaluation._Step.check (Python method) — Check for problems in the voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>(out, voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.check.html#biophysics_fitting.hay.evaluation._Step.check" title="biophysics_fitting.hay.evaluation._Step.check (Python function) — Check for problems in the voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>(out, voltage_traces)</p></td>
 <td><p>Check for problems in the voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.mf.html#biophysics_fitting.hay.evaluation._Step.mf" title="biophysics_fitting.hay.evaluation._Step.mf (Python method) — Get the mean frequency of the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">mf</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.mf.html#biophysics_fitting.hay.evaluation._Step.mf" title="biophysics_fitting.hay.evaluation._Step.mf (Python function) — Get the mean frequency of the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">mf</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the mean frequency of the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.AI.html#biophysics_fitting.hay.evaluation._Step.AI" title="biophysics_fitting.hay.evaluation._Step.AI (Python method) — Get the adaptation index of the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">AI</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.AI.html#biophysics_fitting.hay.evaluation._Step.AI" title="biophysics_fitting.hay.evaluation._Step.AI (Python function) — Get the adaptation index of the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">AI</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the adaptation index of the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.ISIcv.html#biophysics_fitting.hay.evaluation._Step.ISIcv" title="biophysics_fitting.hay.evaluation._Step.ISIcv (Python method) — Get the coefficient of variation of the interspike interval in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISIcv</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.ISIcv.html#biophysics_fitting.hay.evaluation._Step.ISIcv" title="biophysics_fitting.hay.evaluation._Step.ISIcv (Python function) — Get the coefficient of variation of the interspike interval in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">ISIcv</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the coefficient of variation of the interspike interval in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.DI.html#biophysics_fitting.hay.evaluation._Step.DI" title="biophysics_fitting.hay.evaluation._Step.DI (Python method) — Get the ISI of the first two spikes in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">DI</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.DI.html#biophysics_fitting.hay.evaluation._Step.DI" title="biophysics_fitting.hay.evaluation._Step.DI (Python function) — Get the ISI of the first two spikes in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">DI</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the ISI of the first two spikes in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.TTFS.html#biophysics_fitting.hay.evaluation._Step.TTFS" title="biophysics_fitting.hay.evaluation._Step.TTFS (Python method) — Get the time to first spike in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">TTFS</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.TTFS.html#biophysics_fitting.hay.evaluation._Step.TTFS" title="biophysics_fitting.hay.evaluation._Step.TTFS (Python function) — Get the time to first spike in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">TTFS</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the time to first spike in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.AHP_depth_abs.html#biophysics_fitting.hay.evaluation._Step.AHP_depth_abs" title="biophysics_fitting.hay.evaluation._Step.AHP_depth_abs (Python method) — Get the afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">AHP_depth_abs</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.AHP_depth_abs.html#biophysics_fitting.hay.evaluation._Step.AHP_depth_abs" title="biophysics_fitting.hay.evaluation._Step.AHP_depth_abs (Python function) — Get the afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">AHP_depth_abs</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the afterhyperpolarization depth in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.APh.html#biophysics_fitting.hay.evaluation._Step.APh" title="biophysics_fitting.hay.evaluation._Step.APh (Python method) — Get the AP heights fo all APs in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">APh</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.APh.html#biophysics_fitting.hay.evaluation._Step.APh" title="biophysics_fitting.hay.evaluation._Step.APh (Python function) — Get the AP heights fo all APs in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">APh</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the AP heights fo all APs in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.fAHPd.html#biophysics_fitting.hay.evaluation._Step.fAHPd" title="biophysics_fitting.hay.evaluation._Step.fAHPd (Python method) — Get the fast afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">fAHPd</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.fAHPd.html#biophysics_fitting.hay.evaluation._Step.fAHPd" title="biophysics_fitting.hay.evaluation._Step.fAHPd (Python function) — Get the fast afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">fAHPd</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the fast afterhyperpolarization depth in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.sAHPd.html#biophysics_fitting.hay.evaluation._Step.sAHPd" title="biophysics_fitting.hay.evaluation._Step.sAHPd (Python method) — Get the slow afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">sAHPd</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.sAHPd.html#biophysics_fitting.hay.evaluation._Step.sAHPd" title="biophysics_fitting.hay.evaluation._Step.sAHPd (Python function) — Get the slow afterhyperpolarization depth in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">sAHPd</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the slow afterhyperpolarization depth in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_Step.sAHPt.html#biophysics_fitting.hay.evaluation._Step.sAHPt" title="biophysics_fitting.hay.evaluation._Step.sAHPt (Python method) — Get the slow afterhyperpolarization time in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">sAHPt</span></code></a>(voltage_traces)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_Step.sAHPt.html#biophysics_fitting.hay.evaluation._Step.sAHPt" title="biophysics_fitting.hay.evaluation._Step.sAHPt (Python function) — Get the slow afterhyperpolarization time in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">sAHPt</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the slow afterhyperpolarization time in the somatic voltage trace.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_Step.APw.html#biophysics_fitting.hay.evaluation._Step.APw" title="biophysics_fitting.hay.evaluation._Step.APw (Python method) — Get the AP widths of all APs in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">APw</span></code></a>(voltage_traces)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_Step.APw.html#biophysics_fitting.hay.evaluation._Step.APw" title="biophysics_fitting.hay.evaluation._Step.APw (Python function) — Get the AP widths of all APs in the somatic voltage trace."><code class="xref py py-obj docutils literal notranslate"><span class="pre">APw</span></code></a>(voltage_traces)</p></td>
 <td><p>Get the AP widths of all APs in the somatic voltage trace.</p></td>
 </tr>
 </tbody>
@@ -2487,7 +2502,7 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="bAP.bAP_att3.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: bAP.bAP_att3" rel="prev">
+        <a href="bAP.bAP_att3.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: bAP_att3" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -2496,20 +2511,20 @@ Defaults to <span class="math notranslate nohighlight">\(250\)</span>.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              bAP.bAP_att3
+              bAP_att3
             </div>
           </div>
         </a>
       
       
         
-        <a href="_Step.get.html" class="md-footer__link md-footer__link--next" aria-label="Next: _Step.get" rel="next">
+        <a href="_Step.get.html" class="md-footer__link md-footer__link--next" aria-label="Next: get" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              _Step.get
+              get
             </div>
           </div>
           <div class="md-footer__button md-icon">

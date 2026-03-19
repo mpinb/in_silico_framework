@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -16,10 +15,11 @@ rasterplot
    rasterplot2_pdf_grouped </api_reference/visualize/rasterplot/rasterplot2_pdf_grouped>
    rasterplot </api_reference/visualize/rasterplot/rasterplot>
 
-.. py:module:: visualize.rasterplot
+.. module:: visualize.rasterplot
 
 .. autoapi-nested-parse::
    Efficiently create rasterplots from spike time dataframes.
+
 
 
 
@@ -40,6 +40,8 @@ Functions
      - Plot a rasterplot per group of :ref:`spike_times_format`.
    * - :py:obj:`rasterplot <visualize.rasterplot.rasterplot>`\ (df, colormap, ax, label, groupby\_attribute, tlim, reset\_index)
      - Creates a rasterplot from :ref:`spike_times_format`.
+
+
 
 
 

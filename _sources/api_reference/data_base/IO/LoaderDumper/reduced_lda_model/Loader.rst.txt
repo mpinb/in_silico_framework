@@ -19,12 +19,13 @@ Loader
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.IO.LoaderDumper.reduced_lda_model.Loader
+.. class:: data_base.IO.LoaderDumper.reduced_lda_model.Loader
+
+   Bases: :py:obj:`data_base.IO.LoaderDumper.parent_classes.Loader`
    
-   Loader for :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+   Loader for :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
 
    :Methods:
 

@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation.get
-=================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get()
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get()
 
 
    Get the spatiotemporal input patterns.

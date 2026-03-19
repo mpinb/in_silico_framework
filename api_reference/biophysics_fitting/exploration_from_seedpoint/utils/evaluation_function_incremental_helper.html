@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -477,6 +477,21 @@
   
   
     <li class="md-nav__item">
+      <a href="silence_stdout.html" class="md-nav__link">
+        <span title="/api_reference/biophysics_fitting/exploration_from_seedpoint/utils/silence_stdout.rst (reference label)" class="md-ellipsis">silence_<wbr>stdout</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="get_vector_norm.html" class="md-nav__link">
         <span title="/api_reference/biophysics_fitting/exploration_from_seedpoint/utils/get_vector_norm.rst (reference label)" class="md-ellipsis">get_<wbr>vector_<wbr>norm</span>
       </a>
@@ -555,6 +570,20 @@
           <li class="md-nav__item">
   <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order" class="md-nav__link">
     <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order (Python parameter) — Order in which stimuli are simulated. List consisting of strings and tuples of strings. Use strings if only one stimulus is to be simulated. Use tuples of strings to simulate several stimuli in one go." class="md-ellipsis">stim_<wbr>order</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs (Python parameter) — Keys (str) must appear in stim_order. Values (float)indicate the maximum error allowed for these stimuli" class="md-ellipsis">cutoffs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus (Python parameter) — Keys (str) must appear in stim_order. Values (list) are objective names returned by the evaluator object." class="md-ellipsis">objectives_<wbr>by_<wbr>stimulus</span>
   </a>
   
 </li>
@@ -1006,6 +1035,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1138,6 +1182,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs (Python parameter) — Keys (str) must appear in stim_order. Values (float)indicate the maximum error allowed for these stimuli" class="md-ellipsis">cutoffs</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus" class="md-nav__link">
+    <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus (Python parameter) — Keys (str) must appear in stim_order. Values (list) are objective names returned by the evaluator object." class="md-ellipsis">objectives_<wbr>by_<wbr>stimulus</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions" class="md-nav__link">
     <span aria-label="Python parameter" class="objinfo-icon objinfo-icon__sub-data" title="Python parameter">p</span><span title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions (Python parameter) — additional functions to be applied onto the final voltage traces dictionary, which return a dictionary which is appended to the evaluations." class="md-ellipsis">additional_<wbr>evaluation_<wbr>functions</span>
   </a>
@@ -1178,7 +1236,7 @@
 <h1 id="evaluation-function-incremental-helper">evaluation_function_incremental_helper<a class="headerlink" href="#evaluation-function-incremental-helper" title="Link to this heading">¶</a></h1>
 <dl class="py function objdesc">
 <dt class="sig sig-object highlight sig-wrap py" id="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper">
-<a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><span class="sig-name descname"><span class="pre">biophysics_fitting</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-biophysics_fitting.exploration_from_seedpoint" title="biophysics_fitting.exploration_from_seedpoint (Python module)"><span class="sig-name descname"><span class="pre">exploration_from_seedpoint</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-biophysics_fitting.exploration_from_seedpoint.utils" title="biophysics_fitting.exploration_from_seedpoint.utils (Python module)"><span class="sig-name descname"><span class="pre">utils</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">evaluation_function_incremental_helper</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.p (Python parameter)"><span class="n"><span class="pre">p</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.s" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.s (Python parameter) — Simulator object"><span class="n"><span class="pre">s</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.e" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.e (Python parameter) — Evaluator object"><span class="n"><span class="pre">e</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs (Python parameter)"><span class="n"><span class="pre">cutoffs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order (Python parameter) — Order in which stimuli are simulated. List consisting of strings and tuples of strings. Use strings if only one stimulus is to be simulated. Use tuples of strings to simulate several stimuli in one go."><span class="n"><span class="pre">stim_order</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.verbose (Python parameter)"><span class="n"><span class="pre">verbose</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions (Python parameter) — additional functions to be applied onto the final voltage traces dictionary, which return a dictionary which is appended to the evaluations."><span class="n"><span class="pre">additional_evaluation_functions</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus (Python parameter)"><span class="n"><span class="pre">objectives_by_stimulus</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="Link to this definition">¶</a></dt>
+<a class="reference internal" href="../../index.html#module-biophysics_fitting" title="biophysics_fitting (Python module)"><span class="sig-name descname"><span class="pre">biophysics_fitting</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-biophysics_fitting.exploration_from_seedpoint" title="biophysics_fitting.exploration_from_seedpoint (Python module)"><span class="sig-name descname"><span class="pre">exploration_from_seedpoint</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-biophysics_fitting.exploration_from_seedpoint.utils" title="biophysics_fitting.exploration_from_seedpoint.utils (Python module)"><span class="sig-name descname"><span class="pre">utils</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">evaluation_function_incremental_helper</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.p (Python parameter)"><span class="n"><span class="pre">p</span></span></a></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.s" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.s (Python parameter) — Simulator object"><span class="n"><span class="pre">s</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.e" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.e (Python parameter) — Evaluator object"><span class="n"><span class="pre">e</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs (Python parameter) — Keys (str) must appear in stim_order. Values (float)indicate the maximum error allowed for these stimuli"><span class="n"><span class="pre">cutoffs</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.stim_order (Python parameter) — Order in which stimuli are simulated. List consisting of strings and tuples of strings. Use strings if only one stimulus is to be simulated. Use tuples of strings to simulate several stimuli in one go."><span class="n"><span class="pre">stim_order</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.verbose (Python parameter)"><span class="n"><span class="pre">verbose</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">True</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions (Python parameter) — additional functions to be applied onto the final voltage traces dictionary, which return a dictionary which is appended to the evaluations."><span class="n"><span class="pre">additional_evaluation_functions</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus" title="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus (Python parameter) — Keys (str) must appear in stim_order. Values (list) are objective names returned by the evaluator object."><span class="n"><span class="pre">objectives_by_stimulus</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper" title="Link to this definition">¶</a></dt>
 <dd><p>Evaluate a model shows one stimulus at a time.</p>
 <p>This is useful for performace, as it allows to run the fastest simulations first,
 and provides an early stopping criterion if a model is not able to match these objectives.</p>
@@ -1194,12 +1252,10 @@ List consisting of strings and tuples of strings.
 Use strings if only one stimulus is to be simulated.
 Use tuples of strings to simulate several stimuli in one go.</p>
 </dd>
-<dt><span class="sig-name descname">({str</span><span class="p"> : </span><span class="desctype"><span class="desctype">objectives_by_stimulus</span></span></dt><dd><p>float}):
-Keys (str) must appear in stim_order.
+<dt id="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs"><span class="sig-name descname">cutoffs</span><span class="p"> : </span><span class="desctype"><span class="desctype">Dict[str,float]</span></span><a class="headerlink" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.cutoffs" title="Permalink to this definition">¶</a></dt><dd><p>Keys (str) must appear in stim_order.
 Values (float)indicate the maximum error allowed for these stimuli</p>
 </dd>
-<dt><span class="sig-name descname">({str</span></dt><dd><p>list}):
-Keys (str) must appear in stim_order.
+<dt id="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus"><span class="sig-name descname">objectives_by_stimulus</span><span class="p"> : </span><span class="desctype"><span class="desctype">Dict[str,list]</span></span><a class="headerlink" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.objectives_by_stimulus" title="Permalink to this definition">¶</a></dt><dd><p>Keys (str) must appear in stim_order.
 Values (list) are objective names returned by the evaluator object.</p>
 </dd>
 <dt id="biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions"><span class="sig-name descname">additional_evaluation_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#biophysics_fitting.exploration_from_seedpoint.utils.evaluation_function_incremental_helper.additional_evaluation_functions" title="Permalink to this definition">¶</a></dt><dd><p>additional functions to be applied onto the final voltage

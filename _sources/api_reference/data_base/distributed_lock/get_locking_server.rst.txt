@@ -6,7 +6,7 @@ get_locking_server
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock.get_locking_server()
+.. function:: data_base.distributed_lock.get_locking_server()
 
 
    Get the locking server

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -16,7 +15,7 @@ _decorators
    pr </api_reference/visualize/_decorators/pr>
    subsequent_calls_per_line </api_reference/visualize/_decorators/subsequent_calls_per_line>
 
-.. py:module:: visualize._decorators
+.. module:: visualize._decorators
 
 .. autoapi-nested-parse::
    Convenience methods for visualizastion
@@ -26,6 +25,7 @@ _decorators
    - convert dask dataframes to pandas dataframes
    - iterate over individual rows of a dataframe
    - print the types of some function's arguments (useful for debugging)
+
 
 
 
@@ -46,6 +46,24 @@ Functions
      - Prints the types of the passed arguments.
    * - :py:obj:`subsequent_calls_per_line <visualize._decorators.subsequent_calls_per_line>`\ (plotfun)
      - Call a function on each row of a dataframe separately.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`Figure <visualize._decorators.Figure>`
+     - \-
+   * - :py:obj:`Axes <visualize._decorators.Axes>`
+     - \-
+
 
 
 

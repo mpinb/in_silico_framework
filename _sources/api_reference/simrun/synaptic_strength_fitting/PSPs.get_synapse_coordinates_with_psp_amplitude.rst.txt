@@ -1,13 +1,12 @@
 
 
+get_synapse_coordinates_with_psp_amplitude
+==========================================
 
 
+.. Signature -------------------------------
 
-PSPs.get_synapse_coordinates_with_psp_amplitude
-===============================================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude(population, g=1.0, merged=True, select_synapses_per_cell=None)
+.. function:: simrun.synaptic_strength_fitting.PSPs.get_synapse_coordinates_with_psp_amplitude(population, g=1.0, merged=True, select_synapses_per_cell=None)
 
 
    Get the synapse coordinates and the PSP amplitude for each synapse.

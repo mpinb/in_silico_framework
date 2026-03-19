@@ -1,0 +1,27 @@
+
+
+_get_only_child_sections
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: single_cell_parser.swc._get_only_child_sections(cell)
+
+
+   Check if a cell has sections that are only children.
+
+   Only children sections are child sections that are connected via a non-branching point, yet where both sections still
+   have a different section number. This is not uncommon for e.g. the axon hillock and axon initial segment.
+
+   :param cell: The cell object to check.
+   :type cell: single_cell_parser.cell.Cell
+
+   :returns: Dictionary mapping only-child sections to their parent section.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

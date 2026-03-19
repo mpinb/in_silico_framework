@@ -1,13 +1,12 @@
 
 
+run
+===
 
 
+.. Signature -------------------------------
 
-Simulator.run
-=============
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator.run(params, stims=None)
+.. function:: biophysics_fitting.simulator.Simulator.run(params, stims=None)
 
 
    Simulates all stimuli for a given parameter vector.

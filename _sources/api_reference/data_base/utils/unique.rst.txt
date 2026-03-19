@@ -6,13 +6,13 @@ unique
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.unique(list_)
+.. function:: data_base.utils.unique(list_)
 
 
    Get the unique elements of a list
 
-   :param list_: the list
-   :type list_: list
+   :param list\_: the list
+   :type list\_: list
 
    :returns: the unique elements of the list
    :rtype: list

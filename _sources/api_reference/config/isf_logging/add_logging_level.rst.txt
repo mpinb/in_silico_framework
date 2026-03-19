@@ -1,0 +1,39 @@
+
+
+add_logging_level
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: config.isf_logging.add_logging_level(levelName, levelNum, methodName=None)
+
+
+   Comprehensively adds a new logging level to the ``logging`` module and the
+   currently configured logging class.
+
+   ``levelName`` becomes an attribute of the ``logging`` module with the value
+   ``levelNum``. `methodName` becomes a convenience method for both ``logging``
+   itself and the class returned by `logging.getLoggerClass()` (usually just
+   ``logging.Logger``). If ``methodName`` is not specified, ``levelName.lower()`` is
+   used.
+
+   To avoid accidental clobberings of existing attributes, this method will
+   raise an `AttributeError` if the level name is already an attribute of the
+   `logging` module or if the method name is already present
+
+   .. rubric:: Example
+      :class: example
+
+   >>> addLoggingLevel('TRACE', logging.DEBUG - 5)
+   >>> logging.getLogger(__name__).setLevel("TRACE")
+   >>> logging.getLogger(__name__).trace('that worked')
+   >>> logging.trace('so did this')
+   >>> logging.TRACE
+   5
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

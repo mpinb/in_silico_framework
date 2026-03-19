@@ -1,13 +1,12 @@
 
 
+play
+====
 
 
+.. Signature -------------------------------
 
-PointCell.play
-==============
-
-
-.. py:method:: single_cell_parser.cell.PointCell.play()
+.. function:: single_cell_parser.cell.PointCell.play()
 
 
    Activate point cell

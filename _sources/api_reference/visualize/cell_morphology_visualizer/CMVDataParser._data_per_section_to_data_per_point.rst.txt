@@ -1,13 +1,12 @@
 
 
+_data_per_section_to_data_per_point
+===================================
 
 
+.. Signature -------------------------------
 
-CMVDataParser._data_per_section_to_data_per_point
-=================================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CMVDataParser._data_per_section_to_data_per_point(data_per_section)
+.. function:: visualize.cell_morphology_visualizer.CMVDataParser._data_per_section_to_data_per_point(data_per_section)
 
 
    Unravel a list of lists of data per section to a flat list of data per point.
@@ -16,8 +15,6 @@ CMVDataParser._data_per_section_to_data_per_point
 
    :param data_per_section: List of lists of data per section. Each element of the list is a list point data for that section. Shape: (n_sections, n_points_in_section)
    :type data_per_section: list
-
-   :param list: List of data per point. Shape: (n_points,)
 
 
 

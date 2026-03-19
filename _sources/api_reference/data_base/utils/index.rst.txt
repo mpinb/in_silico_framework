@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -41,10 +40,11 @@ utils
    delete_in_background </api_reference/data_base/utils/delete_in_background>
    is_db </api_reference/data_base/utils/is_db>
 
-.. py:module:: data_base.utils
+.. module:: data_base.utils
 
 .. autoapi-nested-parse::
    Database utility and convenience functions.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -80,11 +80,11 @@ Functions
    :class: summarytable
    
    * - :py:obj:`chunkIt <data_base.utils.chunkIt>`\ (seq, num)
-     - Splits :paramref:`seq` in :paramref:`num` lists, with approximately equal size.
+     - Splits :param:`seq` in :param:`num` lists, with approximately equal size.
    * - :py:obj:`convertible_to_int <data_base.utils.convertible_to_int>`\ (x)
      - Returns True if x can be converted to an integer, False otherwise
    * - :py:obj:`split_file_to_buffers <data_base.utils.split_file_to_buffers>`\ (f, split\_str)
-     - Reads a file f and splits it wherever :paramref:`split_str` is found.
+     - Reads a file f and splits it wherever :param:`split_str` is found.
    * - :py:obj:`first_line_to_key <data_base.utils.first_line_to_key>`\ (stringios)
      - Convert a list of StringIO objects to a dictionary.
    * - :py:obj:`pandas_to_array <data_base.utils.pandas_to_array>`\ (pdf, x\_component\_fun, y\_component\_fun, value\_fun)
@@ -126,7 +126,25 @@ Functions
    * - :py:obj:`delete_in_background <data_base.utils.delete_in_background>`\ (key)
      - Starts a background process that deletes a key
    * - :py:obj:`is_db <data_base.utils.is_db>`\ (dir\_to\_data)
-     - Check if a path is a :py:class:`~data_base.DataBase`.
+     - Check if a path is a :class:`~data_base.DataBase`.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.utils.logger>`
+     - \-
+   * - :py:obj:`silence_stdout <data_base.utils.silence_stdout>`
+     - \-
+
 
 
 

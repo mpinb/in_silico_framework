@@ -6,7 +6,7 @@ spines_update_network_paramfile
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.spines_update_network_paramfile(new_synapse_distribution_file, network_paramfile, new_network_paramfile)
+.. function:: single_cell_parser.spines_update_network_paramfile(new_synapse_distribution_file, network_paramfile, new_network_paramfile)
 
 
    Update a :ref:`network_parameters_format` file to point to a new :ref:`syn_file_format` file.

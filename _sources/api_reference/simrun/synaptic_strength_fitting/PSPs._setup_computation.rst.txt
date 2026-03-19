@@ -1,13 +1,12 @@
 
 
+_setup_computation
+==================
 
 
+.. Signature -------------------------------
 
-PSPs._setup_computation
-=======================
-
-
-.. py:method:: simrun.synaptic_strength_fitting.PSPs._setup_computation(exc_inh)
+.. function:: simrun.synaptic_strength_fitting.PSPs._setup_computation(exc_inh)
 
 
    Construct delayed functions for running single-synapse simulations.

@@ -6,7 +6,7 @@ apical_current_injection
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.apical_current_injection.apical_current_injection(cell, amplitude=None, delay=None, duration=None, dist=None)
+.. function:: single_cell_parser.cell_modify_functions.apical_current_injection.apical_current_injection(cell, amplitude=None, delay=None, duration=None, dist=None)
 
 
    Inject a current at a given distance from the soma.

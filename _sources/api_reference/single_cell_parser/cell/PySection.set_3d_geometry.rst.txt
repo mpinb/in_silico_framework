@@ -1,13 +1,12 @@
 
 
+set_3d_geometry
+===============
 
 
+.. Signature -------------------------------
 
-PySection.set_3d_geometry
-=========================
-
-
-.. py:method:: single_cell_parser.cell.PySection.set_3d_geometry(pts, diams)
+.. function:: single_cell_parser.cell.PySection.set_3d_geometry(pts, diams)
 
 
    Invokes NEURON 3D geometry setup.

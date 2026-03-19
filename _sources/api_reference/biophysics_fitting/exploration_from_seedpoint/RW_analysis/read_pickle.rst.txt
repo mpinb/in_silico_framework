@@ -6,7 +6,7 @@ read_pickle
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle(seed_folder, particle_id)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.read_pickle(seed_folder, particle_id)
 
 
    Read the results of a single particle of a RW exploration.

@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_annotate_bursts_in_st.setup
-=====================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_annotate_bursts_in_st.setup(spike_times_analysis)
 
 
    Sets up the analysis: annotates bursts in a spike times dataframe.

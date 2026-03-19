@@ -6,7 +6,7 @@ _check_filesize_matches_shape
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store._check_filesize_matches_shape(path, shape, dtype)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store._check_filesize_matches_shape(path, shape, dtype)
 
 
    Check whether the file size matches the expected size based on the shape and dtype.

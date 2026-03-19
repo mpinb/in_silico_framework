@@ -6,7 +6,7 @@ get_depolarization_index
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_depolarization_index(dataframe)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.get_depolarization_index(dataframe)
 
 
    Compute the relative difference in depolarization contribution of Ca_LVA and Ca_HVA during the BAC stimulus.

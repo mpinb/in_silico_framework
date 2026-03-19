@@ -1,13 +1,12 @@
 
 
+keys
+====
 
 
+.. Signature -------------------------------
 
-NTParameterSet.keys
-===================
-
-
-.. py:method:: single_cell_parser.parameters.NTParameterSet.keys()
+.. function:: single_cell_parser.parameters.NTParameterSet.keys()
 
 
    D.keys() -> a set-like object providing a view on D's keys

@@ -1,13 +1,12 @@
 
 
+assess_aim_params_reached
+=========================
 
 
+.. Signature -------------------------------
 
-RW.assess_aim_params_reached
-============================
-
-
-.. py:method:: biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached(normalized_params, tolerance=0.0001)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW.assess_aim_params_reached(normalized_params, tolerance=0.0001)
 
 
    Check whether the aim parameters have been reached.

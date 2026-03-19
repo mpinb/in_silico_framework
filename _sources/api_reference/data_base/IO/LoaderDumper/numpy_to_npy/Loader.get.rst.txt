@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-Loader.get
-==========
-
-
-.. py:method:: data_base.IO.LoaderDumper.numpy_to_npy.Loader.get(savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_npy.Loader.get(savedir)
 
 
    Load the numpy array from the specified folder

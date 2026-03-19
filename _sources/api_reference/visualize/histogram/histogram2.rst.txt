@@ -6,19 +6,19 @@ histogram2
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.histogram.histogram2(hist_bins, color=None, ax=None, label=None, mode='step')
+.. function:: visualize.histogram.histogram2(hist_bins, color=None, ax=None, label=None, mode='step')
 
 
    Plot a histogram from bins.
 
-   Does not use the decorated function :py:meth:`subsequent_calls_per_line` like :py:meth:`histogram`.
+   Does not use the decorated function :func:`subsequent_calls_per_line` like :func:`histogram`.
 
    :param hist_bins: tuple of the format (bins,hist) where bins are the bin edges and hist the bin values. Length of bins needs to be one element longer than hist.
    :type hist_bins: tuple
    :param color: The color of the histogram. Default is ``None``.
    :type color: str
    :param ax: The matplotlib axes object. Default is ``None``.
-   :type ax: Axes
+   :type ax: ~matplotlib.axes.Axes
    :param label: The label of the histogram. Default is ``None``.
    :type label: str
    :param mode: The mode of the histogram. Default is `step`. Options: ('step', 'filled').

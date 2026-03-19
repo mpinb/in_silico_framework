@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.analyze` ❭ 
 
 
@@ -18,13 +17,14 @@ voltage_binning
    calculate_vdensity_array </api_reference/data_base/analyze/voltage_binning/calculate_vdensity_array>
    calculate_vdensity_array_pixelObject </api_reference/data_base/analyze/voltage_binning/calculate_vdensity_array_pixelObject>
 
-.. py:module:: data_base.analyze.voltage_binning
+.. module:: data_base.analyze.voltage_binning
 
 .. autoapi-nested-parse::
    Calculate the voltage as a density array.
 
    This module provides methods to calculate the voltage as a histogram across many trials,
    and bin them in timebins.
+
 
 
 
@@ -45,10 +45,12 @@ Functions
      - Construct bin edges from a sice and range.
    * - :py:obj:`calculate_vdensity_array_dask <data_base.analyze.voltage_binning.calculate_vdensity_array_dask>`\ (v, bin\_size, ymin, ymax, xmin, xmax)
      - Bin a :ref:`voltage_traces_df_format` in timebins across trials.
-   * - :py:obj:`calculate_vdensity_array <data_base.analyze.voltage_binning.calculate_vdensity_array>`\ (\*args, \*\*kwargs)
+   * - :py:obj:`calculate_vdensity_array <data_base.analyze.voltage_binning.calculate_vdensity_array>`\ (v, bin\_size, ymin, ymax, \*\*kwargs)
      - Calculate the voltage density array.
-   * - :py:obj:`calculate_vdensity_array_pixelObject <data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject>`\ (\*args, \*\*kwargs)
+   * - :py:obj:`calculate_vdensity_array_pixelObject <data_base.analyze.voltage_binning.calculate_vdensity_array_pixelObject>`\ (v, bin\_size, ymin, ymax, xmin, xmax, \*\*kwargs)
      - Calculate the voltage density array as a PixelObject.
+
+
 
 
 

@@ -6,13 +6,13 @@ get_mymap
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.optimizer.get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error=3)
+.. function:: biophysics_fitting.optimizer.get_mymap(db_setup, db_run, c, satisfactory_boundary_dict=None, n_reschedule_on_runtime_error=3)
 
 
    Get a map function for evaluating the parameters.
 
    This function is a hook into BluePyOpt's optimization.
-   It is used as a mapping function in :py:class:`bluepyopt.optimisations.DEAPOptimisation` during :py:meth:`start_run`.
+   It is used as a mapping function in :class:`bluepyopt.optimisations.DEAPOptimisation` during :func:`start_run`.
    Rather than just returning the combined objectives, it also saves the features and the objectives in the database.
    This is useful for debugging and for analyzing the optimization results.
 
@@ -27,7 +27,7 @@ get_mymap
    :param n_reschedule_on_runtime_error: The number of times the optimization is rescheduled if a runtime error occurs.
    :type n_reschedule_on_runtime_error: int
 
-   :returns: The map function for evaluating the parameters. this function is passed to the :py:class:`bluepyopt.optimisations.DEAPOptimisation` object.
+   :returns: The map function for evaluating the parameters. this function is passed to the :class:`bluepyopt.optimisations.DEAPOptimisation` object.
    :rtype: Callable
 
 

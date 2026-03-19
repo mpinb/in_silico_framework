@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_extract_column_in_filtered_dataframe.setup
-====================================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_extract_column_in_filtered_dataframe.setup(spike_times_analysis)
 
 
    Sets up the analysis: extracts a column from a filtered dataframe.

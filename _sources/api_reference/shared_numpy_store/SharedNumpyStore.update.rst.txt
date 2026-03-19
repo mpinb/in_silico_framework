@@ -1,0 +1,18 @@
+
+
+update
+======
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore.update()
+
+
+   Update the list of files in the working directory.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

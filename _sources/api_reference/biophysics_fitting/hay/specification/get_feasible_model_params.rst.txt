@@ -6,7 +6,7 @@ get_feasible_model_params
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.specification.get_feasible_model_params()
+.. function:: biophysics_fitting.hay.specification.get_feasible_model_params()
 
 
    Get a set of feasible model parameters.

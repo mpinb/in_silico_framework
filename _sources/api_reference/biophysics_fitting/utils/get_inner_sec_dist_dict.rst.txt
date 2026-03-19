@@ -6,7 +6,7 @@ get_inner_sec_dist_dict
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.get_inner_sec_dist_dict(cell, beyond_dist=1000, beyond_struct=['ApicalDendrite'], n_children_required=1)
+.. function:: biophysics_fitting.utils.get_inner_sec_dist_dict(cell, beyond_dist=1000, beyond_struct=['ApicalDendrite'], n_children_required=1)
 
 
    Get sections that connect to specific structures beyond a minimum distance.

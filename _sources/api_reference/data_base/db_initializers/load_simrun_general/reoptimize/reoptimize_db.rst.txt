@@ -6,7 +6,7 @@ reoptimize_db
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warnings=False)
+.. function:: data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db(db, client=None, progress=False, n_db_parents=0, suppress_warnings=False)
 
 
    Re-optimize a database with a new dumper.

@@ -6,7 +6,7 @@ colorize_str
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.colorize_str(key, bcolor)
+.. function:: data_base.utils.colorize_str(key, bcolor)
 
 
    Colorize a string with a terminal color.
@@ -21,7 +21,7 @@ colorize_str
    :returns: the colorized string
    :rtype: str
 
-   .. seealso:: :py:class:`data_base.utils.bcolors` For color escape sequences.
+   .. seealso:: :class:`data_base.utils.bcolors` For color escape sequences.
 
 
 

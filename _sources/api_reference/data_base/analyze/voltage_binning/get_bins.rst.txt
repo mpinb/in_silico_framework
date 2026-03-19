@@ -6,17 +6,17 @@ get_bins
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.analyze.voltage_binning.get_bins(bin_size=None, min_=None, max_=None)
+.. function:: data_base.analyze.voltage_binning.get_bins(bin_size=None, min_=None, max_=None)
 
 
    Construct bin edges from a sice and range.
 
    :param bin_size: the size of the bins
    :type bin_size: float
-   :param min_: the minimum value
-   :type min_: float
-   :param max_: the maximum value
-   :type max_: float
+   :param min\_: the minimum value
+   :type min\_: float
+   :param max\_: the maximum value
+   :type max\_: float
 
    :returns: the bin edges
    :rtype: np.array

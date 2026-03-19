@@ -1,13 +1,12 @@
 
 
+create_synapses
+===============
 
 
+.. Signature -------------------------------
 
-SynapseMapper.create_synapses
-=============================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses(preType='Generic')
+.. function:: singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper.create_synapses(preType='Generic')
 
 
    Creates instantiation of synapses on cell from synapse distribution.
@@ -19,8 +18,8 @@ SynapseMapper.create_synapses
    :param preType: Type of presynaptic cell. Default is 'Generic'.
    :type preType: str
 
-   :returns: list of :py:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
-             Also updates the :paramref:`cell` attribute to contain synapses.
+   :returns: list of :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
+             Also updates the :param:`cell` attribute to contain synapses.
    :rtype: list
 
 

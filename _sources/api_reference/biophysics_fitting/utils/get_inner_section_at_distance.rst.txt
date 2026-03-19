@@ -6,7 +6,7 @@ get_inner_section_at_distance
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.get_inner_section_at_distance(cell, dist, beyond_dist=1000, beyond_struct=['ApicalDendrite'])
+.. function:: biophysics_fitting.utils.get_inner_section_at_distance(cell, dist, beyond_dist=1000, beyond_struct=['ApicalDendrite'])
 
 
    Get sections that connect to specific structures at a particular distance.

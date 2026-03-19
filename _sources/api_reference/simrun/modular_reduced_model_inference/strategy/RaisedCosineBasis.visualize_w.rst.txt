@@ -1,13 +1,12 @@
 
 
+visualize_w
+===========
 
 
+.. Signature -------------------------------
 
-RaisedCosineBasis.visualize_w
-=============================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w(x, ax=None, plot_kwargs=None)
+.. function:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.visualize_w(x, ax=None, plot_kwargs=None)
 
 
    Visualize the superposition :math:`\mathbf{w}(\tau)` of the basis functions :math:`\mathbf{f}`.

@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.dump(obj, savedir, repartition=False, scheduler=None, categorize=True, client=None)
+.. function:: data_base.IO.LoaderDumper.dask_to_categorized_msgpack.dump(obj, savedir, repartition=False, scheduler=None, categorize=True, client=None)
 
 
    Save an object to a file in a DataBase in the pandas-msgpack format.
@@ -14,21 +14,18 @@ dump
    This is only still available for testing purposes in support of backwards compatibility.
 
    :param obj: The object to be saved
-   :type obj: _type_
+   :type obj: any
    :param savedir: Output directory to save the file in.
    :type savedir: str or Path
    :param repartition: Whether or not to repartition.. Defaults to False.
    :type repartition: bool, optional
-   :param get: A getter method, e.g. dask.get. Defaults to None.
-   :type get: _type_, optional
    :param categorize: Defaults to True.
    :type categorize: bool, optional
    :param client: distributed.Client for parallellization. Defaults to None.
    :type client: distributed.Client, optional
-   :param test: Whether or not the dumper is called from within a test method. Defaults to False.
-   :type test: bool, optional
 
-   :raises RuntimeError: _description_
+   .. deprecated 0.5.0::
+      the ``get`` and ``scheduler`` arguments are deprecated. ``dump()`` now expects a ``client`` instead.
 
 
 

@@ -6,7 +6,7 @@ normalize
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.normalize(df, params)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.normalize(df, params)
 
 
    Normalize a pd.DataFrame according to the values of specified parameters.

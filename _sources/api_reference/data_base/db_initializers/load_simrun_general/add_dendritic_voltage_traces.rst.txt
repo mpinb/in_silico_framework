@@ -6,12 +6,12 @@ add_dendritic_voltage_traces
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces(db, rewrite_in_optimized_format=True, dendritic_spike_times=True, repartition=True, dendritic_spike_times_threshold=-30.0, scheduler=None, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.add_dendritic_voltage_traces(db, rewrite_in_optimized_format=True, dendritic_spike_times=True, repartition=True, dendritic_spike_times_threshold=-30.0, scheduler=None, client=None)
 
 
    Add dendritic voltage traces to the database.
 
-   Used in :py:meth:`~data_base.db_initializers.load_simrun_general.init` to read, parse
+   Used in :func:`~data_base.db_initializers.load_simrun_general.init` to read, parse
    and write the membrane voltage of recorded sites to the database.
 
    :param db: The database to which the data should be added.
@@ -26,7 +26,7 @@ add_dendritic_voltage_traces
                        Default is ``True``.
    :type repartition: bool, optional
    :param dendritic_spike_times_threshold: Threshold for the dendritic spike times in :math:`mV`. Default is :math:`-30 mV`.
-                                           See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
+                                           See also: :func:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`
    :type dendritic_spike_times_threshold: float, optional
    :param client: Distributed Client object for parallel computation.
    :type client: ~dask.distributed.client.Client

@@ -6,12 +6,12 @@ _get_recsite_ids_from_recsite_labels
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.file_handling._get_recsite_ids_from_recsite_labels(recsite_labels)
+.. function:: data_base.db_initializers.load_simrun_general.file_handling._get_recsite_ids_from_recsite_labels(recsite_labels)
 
 
    Fetch the recsite ID number from the entrie recsite ID string.
 
-   This function assumes all recsite ids in :paramref:`recsite_ids` have a substring containing "ID_[digit]",
+   This function assumes all recsite ids in :param:`recsite_ids` have a substring containing "ID_[digit]",
    where digit is any numeric combination.
 
    :param recsite_labels: List of recording site labels.

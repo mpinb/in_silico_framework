@@ -6,7 +6,7 @@ BAC_injection
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection(cell, dist=None)
+.. function:: single_cell_parser.cell_modify_functions.BAC_injection.BAC_injection(cell, dist=None)
 
 
    Injects the BAC stimulus :cite:`Hay_Hill_Schuermann_Markram_Segev_2011` at a specified distance.

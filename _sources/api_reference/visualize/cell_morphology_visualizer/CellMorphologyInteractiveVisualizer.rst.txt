@@ -22,10 +22,11 @@ CellMorphologyInteractiveVisualizer
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer(cell, align_trunk=True, dash_ip=None, show=True, renderer='notebook_connected', t_start=None, t_stop=None, t_step=None)
+.. class:: visualize.cell_morphology_visualizer.CellMorphologyInteractiveVisualizer(cell, align_trunk=True, dash_ip=None, show=True, renderer='notebook_connected', t_start=None, t_stop=None, t_step=None, notebook_mode=True)
+
+   Bases: :py:obj:`CMVDataParser`
    
    Plot an interactive 3D render of a cell morphology using Plotly and Dash.
 

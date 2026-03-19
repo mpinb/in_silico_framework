@@ -22,17 +22,16 @@ _DendrogramDendriteStatistics
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.dendrogram._DendrogramDendriteStatistics(dendrogram_db, colormap_synapses=None)
+.. class:: visualize.dendrogram._DendrogramDendriteStatistics(dendrogram_db, colormap_synapses=None)
    
    Compute dendrite statistics from a dendrogram.
 
    Dendrite statistics includes the total amount of dendritic length in a certain bin of soma distance.
    This is useful for calculating synapse statistics as well.
 
-   :param dendrogram_db: A list of :py:class:`_DendrogramSection` objects.
+   :param dendrogram_db: A list of :class:`_DendrogramSection` objects.
    :type dendrogram_db: list
    :param colormap_synapses: A dictionary mapping color to synapse types. The keys must match the synapse types in the dendrogram.
                              Missing keys will be omitted from the visualization alltogether. Default: `None` (plot all synapses in black).
@@ -42,7 +41,7 @@ _DendrogramDendriteStatistics
 
       .. attribute:: dendrogram_db
 
-         A list of :py:class:`_DendrogramSection` objects.
+         A list of :class:`_DendrogramSection` objects.
 
          :type: list
 
@@ -78,7 +77,7 @@ _DendrogramDendriteStatistics
       * - :py:obj:`_get_amount_of_dendrite_in_bin <visualize.dendrogram._DendrogramDendriteStatistics._get_amount_of_dendrite_in_bin>`\ (min\_, max\_)
         - Get the amount of dendritic length in a certain bin of soma distance.
       * - :py:obj:`_plot_dendrite_hist <visualize.dendrogram._DendrogramDendriteStatistics._plot_dendrite_hist>`\ (ax, xlim, binsize)
-        - Base method for plotting a histogram of dendrite length on an :py:class:`matplotlib.axes.Axes` object.
+        - Base method for plotting a histogram of dendrite length on an :class:`matplotlib.axes.Axes` object.
       * - :py:obj:`_compute_dendrite_hist <visualize.dendrogram._DendrogramDendriteStatistics._compute_dendrite_hist>`\ (dist\_end, binsize)
         - Compute the dendrite density histogram.
 

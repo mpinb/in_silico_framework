@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -31,7 +30,7 @@ synaptic_strength_fitting
    linear_fit_pdf </api_reference/simrun/synaptic_strength_fitting/linear_fit_pdf>
    calculate_optimal_g </api_reference/simrun/synaptic_strength_fitting/calculate_optimal_g>
 
-.. py:module:: simrun.synaptic_strength_fitting
+.. module:: simrun.synaptic_strength_fitting
 
 .. autoapi-nested-parse::
    Calculate the cell type specific synaptic strengths of synapses based on the neuron model and network parameters.
@@ -42,6 +41,7 @@ synaptic_strength_fitting
    infers the optimal synaptic strength for each synapse type based on empirical data.
 
    The main class :py:class:`~simrun.synaptic_strength_fitting.PSPs` is used to manage the synaptic strength fitting process.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -104,6 +104,24 @@ Functions
      - Calculate linear fits between the synaptic conductance and the EPSP.
    * - :py:obj:`calculate_optimal_g <simrun.synaptic_strength_fitting.calculate_optimal_g>`\ (pdf)
      - Calculate the optimal synaptic conductance such that the EPSP statistics match empirical data.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`defaultdict_defaultdict <simrun.synaptic_strength_fitting.defaultdict_defaultdict>`
+     - \-
+   * - :py:obj:`logger <simrun.synaptic_strength_fitting.logger>`
+     - \-
+
 
 
 

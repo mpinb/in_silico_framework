@@ -6,14 +6,14 @@ cell_to_ipython_animation
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.cell_to_ipython_animation.cell_to_ipython_animation(*args, **kwargs)
+.. function:: visualize.cell_to_ipython_animation.cell_to_ipython_animation(*args, **kwargs)
 
 
    Wrapper function to display the animation in the IPython notebook
 
 
-   :param \*args: arguments for :py:meth:`cell_to_animation`
-   :param \*\*kwargs: keyword arguments for :py:meth:`cell_to_animation`
+   :param args: arguments for :func:`cell_to_animation`
+   :param kwargs: keyword arguments for :func:`cell_to_animation`
 
    :returns: the animation object
    :rtype: IPython.display.HTML

@@ -1,0 +1,21 @@
+
+
+_read_db_settings
+=================
+
+
+.. Signature -------------------------------
+
+.. function:: config._read_db_settings()
+
+
+   Read the database settings from the JSON file in the config directory.
+
+   :returns: The database settings.
+   :rtype: dict
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.to_cloudpickle.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.to_cloudpickle.dump(obj, savedir)
 
 
    Save the object in the specified directory

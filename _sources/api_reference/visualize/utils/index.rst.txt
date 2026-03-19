@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~visualize` ❭ 
 
 
@@ -22,10 +21,11 @@ utils
    draw_arrow </api_reference/visualize/utils/draw_arrow>
    value_to_color </api_reference/visualize/utils/value_to_color>
 
-.. py:module:: visualize.utils
+.. module:: visualize.utils
 
 .. autoapi-nested-parse::
    Visualization utilities.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -57,15 +57,17 @@ Functions
    * - :py:obj:`write_video_from_images <visualize.utils.write_video_from_images>`\ (images, out\_path, fps, images\_format, quality, codec, auto\_sort\_paths)
      - Creates a video from a set of images.
    * - :py:obj:`write_gif_from_images <visualize.utils.write_gif_from_images>`\ (images, out\_path, interval, images\_format, auto\_sort\_paths)
-     - Creates a gif from a set of images, and saves it to :paramref:`out_path`.
+     - Creates a gif from a set of images, and saves it to :param:`out_path`.
    * - :py:obj:`display_animation_from_images <visualize.utils.display_animation_from_images>`\ (files, interval, style, animID, embedded)
      - Creates an IPython animation out of files specified in a globstring or a list of paths.
    * - :py:obj:`find_files_and_order_them <visualize.utils.find_files_and_order_them>`\ (files, files\_format)
      - Find files in a list of directories or a directory and order them.
    * - :py:obj:`draw_arrow <visualize.utils.draw_arrow>`\ (morphology, ax, highlight\_section, highlight\_x, highlight\_arrow\_kwargs, arrow\_size)
-     - Highlight a morphology section with an :py:class:`Arrow3D`.
+     - Highlight a morphology section with an :class:`Arrow3D`.
    * - :py:obj:`value_to_color <visualize.utils.value_to_color>`\ (v, vmin, vmax)
      - Map a value to a color.
+
+
 
 
 

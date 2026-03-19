@@ -1,13 +1,12 @@
 
 
+event_analysis_bursts
+=====================
 
 
+.. Signature -------------------------------
 
-STAPlugin_bursts.event_analysis_bursts
-======================================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_bursts.event_analysis_bursts(row, event_maxtimes=None, event_names=None)
+.. function:: spike_analysis.core.STAPlugin_bursts.event_analysis_bursts(row, event_maxtimes=None, event_names=None)
 
    :staticmethod:
 

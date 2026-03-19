@@ -6,7 +6,7 @@ write_landmarks_colorcoded_to_folder
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin=0, vmax=10, vbinsize=0.1)
+.. function:: single_cell_parser.writer.write_landmarks_colorcoded_to_folder(basedir, landmarks, values, vmin=0, vmax=10, vbinsize=0.1)
 
 
    Write landmarks to a folder, colorcoded by their values.
@@ -24,7 +24,7 @@ write_landmarks_colorcoded_to_folder
    :param vbinsize: The size of the bins to color by.
    :type vbinsize: float
 
-   :returns: None. Writes out the landmarks to the directory :paramref:`basedir`.
+   :returns: None. Writes out the landmarks to the directory :param:`basedir`.
 
 
 

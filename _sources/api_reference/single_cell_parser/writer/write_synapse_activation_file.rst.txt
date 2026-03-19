@@ -6,12 +6,12 @@ write_synapse_activation_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDistances=None, synTimes=None, activeSyns=None)
+.. function:: single_cell_parser.writer.write_synapse_activation_file(fname=None, cell=None, synTypes=None, synDistances=None, synTimes=None, activeSyns=None)
 
 
    Write out a :ref:`syn_activation_format` file.
 
-   Used in :py:meth:`~single_cell_parser.analyze.synanalysis.compute_synapse_distances_times`
+   Used in :func:`~single_cell_parser.analyze.synanalysis.compute_synapse_distances_times`
    to write out a synapse activation file.
 
    The following information is saved:
@@ -24,7 +24,7 @@ write_synapse_activation_file
    - dendrite label: label of the dendrite that contains this synapse.
    - activation times: times at which the synapse was active (ms).
 
-   :param fname: The output file name as a ful path, including the file extension. Preferably unique (see e.g. :py:meth:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
+   :param fname: The output file name as a ful path, including the file extension. Preferably unique (see e.g. :func:`~simrun.generate_synapse_activations._evoked_activity` for the generation of unique syapse activation filenames)
    :type fname: str
    :param cell: Cell object.
    :type cell: single_cell_parser.cell.Cell
@@ -37,7 +37,7 @@ write_synapse_activation_file
    :param activeSyns: dictionary of active synapses per synapse type. Values are a list of booleans indicating whether each synapse of that type is active.
    :type activeSyns: dict
 
-   :returns: None. Writes out the synapse activation file to :paramref:`fname`.
+   :returns: None. Writes out the synapse activation file to :param:`fname`.
 
    .. rubric:: Example
       :class: example

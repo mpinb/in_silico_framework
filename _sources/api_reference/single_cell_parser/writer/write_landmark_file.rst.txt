@@ -6,7 +6,7 @@ write_landmark_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_landmark_file(fname=None, landmarkList=None)
+.. function:: single_cell_parser.writer.write_landmark_file(fname=None, landmarkList=None)
 
 
    Write an AMIRA landmark file from 3D coordinates
@@ -16,7 +16,7 @@ write_landmark_file
    :param landmarkList: list of tuples, each of which holds 3 float coordinates
    :type landmarkList: list
 
-   :returns: None. Writes out the landmark file to :paramref:`fname`
+   :returns: None. Writes out the landmark file to :param:`fname`
 
    :raises RuntimeError: if no file name is given or if the landmark list is empty
    :raises RuntimeError: if the landmarks have the wrong format (not 3 coordinates)

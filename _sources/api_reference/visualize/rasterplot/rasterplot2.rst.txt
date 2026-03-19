@@ -6,7 +6,7 @@ rasterplot2
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.rasterplot.rasterplot2(st, ax=None, x_offset=0, c=None, plot_kwargs=dict(solid_capstyle='butt'), y_offset=None, y_plot_length=1, marker='line')
+.. function:: visualize.rasterplot.rasterplot2(st, ax=None, x_offset=0, c=None, plot_kwargs=dict(solid_capstyle='butt'), y_offset=None, y_plot_length=1, marker='line')
 
 
    Plot a rasterplot from :ref:`spike_times_format`.

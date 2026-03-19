@@ -1,13 +1,12 @@
 
 
+_check_not_none
+===============
 
 
+.. Signature -------------------------------
 
-Simulator_Setup._check_not_none
-===============================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup._check_not_none(var, varname, procedure_description)
+.. function:: biophysics_fitting.simulator.Simulator_Setup._check_not_none(var, varname, procedure_description)
 
 
    Convenience method to check if the output of some method is not None.
@@ -20,7 +19,7 @@ Simulator_Setup._check_not_none
    :param procedure_description: A description of the procedure that produced the variable.
    :type procedure_description: str
 
-   :raises ValueError: If :paramref:`var` is None.
+   :raises ValueError: If :param:`var` is None.
 
 
 

@@ -1,13 +1,12 @@
 
 
+close
+=====
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.close
-======================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.close()
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.close()
 
 
    Close all shared memory objects and remove them from the dictionary.

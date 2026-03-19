@@ -1,13 +1,12 @@
 
 
+get_spatial_binsize
+===================
 
 
+.. Signature -------------------------------
 
-DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize
-=================================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize()
+.. function:: simrun.modular_reduced_model_inference.data_extractor.DataExtractor_spatiotemporalSynapseActivation.get_spatial_binsize()
 
 
    Get the spatial binsize

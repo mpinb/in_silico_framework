@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ 
 
 
@@ -15,15 +14,31 @@ IO
    LoaderDumper </api_reference/data_base/IO/LoaderDumper/index>  
    dask_wrappers </api_reference/data_base/IO/dask_wrappers/index>  
 
-.. py:module:: data_base.IO
+.. module:: data_base.IO
 
 .. autoapi-nested-parse::
    Read and write data.
 
-   This subpackage provides the :py:mod:`~data_base.IO.LoaderDumper` subpackage to read and write data
+   This subpackage provides the :mod:`~data_base.IO.LoaderDumper` subpackage to read and write data
    in various file formats and data types.
 
 
+
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <data_base.IO.logger>`
+     - \-
 
 
 .. rst-class:: absolute-paragraph
@@ -41,6 +56,7 @@ Modules
      - Read and write data in various formats.
    * - :py:obj:`dask_wrappers <data_base.IO.dask_wrappers>`
      - Read dask csv from an explicit filelist instead of only globstring.
+
 
 
 .. container:: doc-feedback

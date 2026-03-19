@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -16,18 +15,19 @@ simulator
    Simulator </api_reference/biophysics_fitting/simulator/Simulator>
    run_fun </api_reference/biophysics_fitting/simulator/run_fun>
 
-.. py:module:: biophysics_fitting.simulator
+.. module:: biophysics_fitting.simulator
 
 .. autoapi-nested-parse::
    This module concerns itself with setting up a cell with biophysical details and simulation parameters.
 
-   The :py:class:`~biophysics_fitting.simulator.Simulator_Setup` class is an inherent attribute of the :py:class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
+   The :class:`~biophysics_fitting.simulator.Simulator_Setup` class is an inherent attribute of the :class:`~biophysics_fitting.simulator.Simulator` class, and should only be accessed as such.
    It takes care of equipping a cell with biophysical details, using convenient pd.Series objects as parameter vectors.
 
-   The class :py:class:`~biophysics_fitting.simulator.Simulator` is used to transform a parameter vector into simulated voltage traces.
+   The class :class:`~biophysics_fitting.simulator.Simulator` is used to transform a parameter vector into simulated voltage traces.
    It allows to apply a variety of stimuli to the cell and extract voltage traces.
 
-   The results of this module can be used in conjunction with :py:mod:`~biophysics_fitting.evaluator` to iteratively run and evaluate simulations.
+   The results of this module can be used in conjunction with :mod:`~biophysics_fitting.evaluator` to iteratively run and evaluate simulations.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -60,6 +60,22 @@ Functions
    
    * - :py:obj:`run_fun <biophysics_fitting.simulator.run_fun>`\ (cell, T, Vinit, dt, recordingSites, tStart, tStop, vardt, silent)
      - Default function to run a simulation.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <biophysics_fitting.simulator.logger>`
+     - \-
+
 
 
 

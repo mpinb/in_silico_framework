@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -20,10 +19,11 @@ parameters
    load_NMODL_parameters </api_reference/single_cell_parser/parameters/load_NMODL_parameters>
    resolve_parameter_paths </api_reference/single_cell_parser/parameters/resolve_parameter_paths>
 
-.. py:module:: single_cell_parser.parameters
+.. module:: single_cell_parser.parameters
 
 .. autoapi-nested-parse::
    Handle :ref:`param_file_format` files in ISF.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -55,11 +55,13 @@ Functions
    * - :py:obj:`build_parameters <single_cell_parser.parameters.build_parameters>`\ (filename)
      - Read in a :ref:`param_file_format` file and return a NTParameterSet object.
    * - :py:obj:`fast_extract_values_from_param_file_key <single_cell_parser.parameters.fast_extract_values_from_param_file_key>`\ (param\_file, keys, val\_is\_array)
-     - Extract parameter values from :ref:`neuron_parameters_format` or :ref:`network_params_format`.
+     - Extract parameter values from :ref:`cell_parameters_format` or :ref:`network_parameters_format`.
    * - :py:obj:`load_NMODL_parameters <single_cell_parser.parameters.load_NMODL_parameters>`\ (parameters)
      - Load NMODL mechanisms from paths in parameter file.
    * - :py:obj:`resolve_parameter_paths <single_cell_parser.parameters.resolve_parameter_paths>`\ (parameters, params\_fn)
      - Resolve relative database paths in the parameters.
+
+
 
 
 

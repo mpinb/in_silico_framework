@@ -1,13 +1,12 @@
 
 
+set_IClamp
+==========
 
 
+.. Signature -------------------------------
 
-SimControl.set_IClamp
-=====================
-
-
-.. py:method:: single_cell_parser.sim_control.SimControl.set_IClamp(delay=1, amp=-1, dur=3)
+.. function:: single_cell_parser.sim_control.SimControl.set_IClamp(delay=1, amp=-1, dur=3)
 
 
    Initializes values for current clamp.

@@ -1,13 +1,12 @@
 
 
+get
+===
 
 
+.. Signature -------------------------------
 
-RaisedCosineBasis.get
-=====================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get()
+.. function:: simrun.modular_reduced_model_inference.strategy.RaisedCosineBasis.get()
 
 
    Get the basis functions :math:`\mathbf{f}`.

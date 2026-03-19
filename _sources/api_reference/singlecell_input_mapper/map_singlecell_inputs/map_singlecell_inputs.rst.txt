@@ -6,7 +6,7 @@ map_singlecell_inputs
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs(cellName, cellTypeName, nrOfSamples=50, numberOfCellsSpreadsheetName=numberOfCellsSpreadsheetName, connectionsSpreadsheetName=connectionsSpreadsheetName, ExPSTDensityName=ExPSTDensityName, InhPSTDensityName=InhPSTDensityName, boutonDensityFolderName=boutonDensityFolderName)
+.. function:: singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs(cellName, cellTypeName, nrOfSamples=50, numberOfCellsSpreadsheetName=numberOfCellsSpreadsheetName, connectionsSpreadsheetName=connectionsSpreadsheetName, ExPSTDensityName=ExPSTDensityName, InhPSTDensityName=InhPSTDensityName, boutonDensityFolderName=boutonDensityFolderName)
 
 
    Map inputs to a single cell morphology.
@@ -29,11 +29,11 @@ map_singlecell_inputs
        - For each anatomical area
        - For each presynaptic cell type
 
-   3. Creates a scalar field (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
+   3. Creates a scalar field (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
       for each bouton density.
-   4. Creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
+   4. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
    5. Creates a network embedding for the cell using
-      :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
+      :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
 
    The naming of each anatomical area needs to be consistent between:
 
@@ -58,7 +58,7 @@ map_singlecell_inputs
    :param boutonDensityFolderName: A directory containing the following subdirectory structure:
                                    anatomical_area/presynaptic_cell_type/\*.am
 
-   :returns: None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
+   :returns: None. Writes the results to disk, at the same location as the input :param:`cellName`.
 
 
 

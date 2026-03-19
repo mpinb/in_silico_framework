@@ -6,7 +6,7 @@ get_voltage_and_timing
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method='dynamic_baseline', tStim=None, tEnd=None)
+.. function:: simrun.synaptic_strength_fitting.get_voltage_and_timing(vt, method='dynamic_baseline', tStim=None, tEnd=None)
 
 
    Calculate the maximum amplitude (and their timing) of an ePSP for all synapses.

@@ -6,7 +6,7 @@ _build_param_files
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.load_simrun_general.builders._build_param_files(db, paramfile_copy_config=None, client=None)
+.. function:: data_base.db_initializers.load_simrun_general.builders._build_param_files(db, paramfile_copy_config=None, client=None)
 
 
    Copy, transform and rename parameterfiles to a db.
@@ -20,7 +20,7 @@ _build_param_files
    :param client: The Dask client to use for parallel computation.
    :type client: ~dask.distributed.client.Client
    :param paramfile_copy_config: Dictionary containing configuration on how to organise parameterfiles in the database.
-                                 See :py:func:`data_base.db_initializers.load_simrun_general.init` for more info.
+                                 See :func:`data_base.db_initializers.load_simrun_general.init` for more info.
    :type paramfile_copy_config: dict, optional
 
    :returns: None. Sets the keys ``parameterfiles_cell_folder`` and ``parameterfiles_network_folder`` in the database.
@@ -30,7 +30,7 @@ _build_param_files
    .. attention::
 
       This function assumes the database keys ``simresult_path`` and ``sim_trial_index`` already exist, which is likely
-      only true when used in the context of the :py:meth:`~data_base.db_initializers.load_simrun_general.init` function.
+      only true when used in the context of the :func:`~data_base.db_initializers.load_simrun_general.init` function.
 
 
 

@@ -13,7 +13,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "![](../../docs/_static/_images/organigram_v5.png)"
+        "![](../../docs/_static/_images/organigram_v6.png)"
       ]
     },
     {
@@ -175,32 +175,32 @@
             "Initialize a database with simulation data.\n",
             "\n",
             "Use this function to load simulation data generated with the simrun module \n",
-            "into a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`.\n",
+            "into a :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase`.\n",
             "\n",
             "Args:\n",
             "    core (bool, optional):\n",
             "        Parse and write the core data to the database: voltage traces, metadata, sim_trial_index and filelist.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_core`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general._build_core`\n",
             "    voltage_traces (bool, optional):\n",
             "        Parse and write the somatic voltage traces to the database.\n",
             "    spike_times (bool, optional):\n",
             "        Parse and write the spike times into the database.\n",
-            "        See also: :py:meth:`data_base.analyze.spike_detection.spike_detection`\n",
+            "        See also: :func:`data_base.analyze.spike_detection.spike_detection`\n",
             "    dendritic_voltage_traces (bool, optional):\n",
             "        Parse and write the dendritic voltage traces to the database.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_dendritic_voltage_traces`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general._build_dendritic_voltage_traces`\n",
             "    dendritic_spike_times (bool, optional):\n",
             "        Parse and write the dendritic spike times to the database.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`\n",
             "    dendritic_spike_times_threshold (float, optional):\n",
             "        Threshold for the dendritic spike times in mV. Default is :math:`-30`.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general.add_dendritic_spike_times`\n",
             "    synapse_activation (bool, optional):\n",
             "        Parse and write the synapse activation data to the database.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_synapse_activation`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general._build_synapse_activation`\n",
             "    parameterfiles (bool, optional):\n",
             "        Parse and write the parameterfiles to the database.\n",
-            "        See also: :py:meth:`~data_base.db_initializers.load_simrun_general._build_param_files`\n",
+            "        See also: :func:`~data_base.db_initializers.load_simrun_general._build_param_files`\n",
             "    rewrite_in_optimized_format (bool, optional): \n",
             "        If True (default): data is converted to a high performance binary \n",
             "        format and makes unpickling more robust against version changes of third party libraries. \n",
@@ -223,7 +223,7 @@
             "        Default is None.\n",
             "    dumper (module, optional):\n",
             "        Dumper to use for saving pandas dataframes.\n",
-            "        Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.\n",
+            "        Default is :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.\n",
             "        \n",
             ".. deprecated:: 0.2.0\n",
             "    The :paramref:`burst_times` argument is deprecated and will be removed in a future version.\n",
@@ -464,7 +464,7 @@
       "cell_type": "markdown",
       "metadata": {},
       "source": [
-        "We use the `data_base` module through `Interface` to parse the data."
+        "We use the [data_base](../../api_reference/data_base//index.rst) module via [Interface](../../api_reference/Interface//index.rst) to parse the data."
       ]
     },
     {
@@ -733,7 +733,6 @@
     }
   ],
   "metadata": {
-    "license": "GPL-3.0-or-later",
     "authors": [
       "Max Planck Institute for Neurobiology of Behavior - CAESAR"
     ],
@@ -753,7 +752,8 @@
       "nbconvert_exporter": "python",
       "pygments_lexer": "ipython3",
       "version": "3.8.20"
-    }
+    },
+    "license": "GPL-3.0-or-later"
   },
   "nbformat": 4,
   "nbformat_minor": 4

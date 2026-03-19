@@ -6,7 +6,7 @@ convert_to_numpy
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.modular_reduced_model_inference.strategy.convert_to_numpy(x)
+.. function:: simrun.modular_reduced_model_inference.strategy.convert_to_numpy(x)
 
 
    Convert a numpy to a cupy array

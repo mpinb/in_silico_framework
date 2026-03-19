@@ -6,7 +6,7 @@ get_read_lock
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.distributed_lock.get_read_lock(name)
+.. function:: data_base.distributed_lock.get_read_lock(name)
 
 
    Fetch the correct read lock, depending on global locking server configuration.
@@ -15,7 +15,7 @@ get_read_lock
    :type name: str
 
    :returns:     The lock object.
-   :rtype: :py:class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :py:class:`redis.lock` | :py:class:`kazoo.client.Lock`
+   :rtype: :class:`~data_base.distributed_lock.InterProcessLockNoWritePermission` | :class:`redis.lock` | :class:`kazoo.client.Lock`
 
 
 

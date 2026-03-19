@@ -6,7 +6,7 @@ write_pruned_synapse_locations
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_pruned_synapse_locations(fname=None, synapses=None, cellID=None)
+.. function:: single_cell_parser.writer.write_pruned_synapse_locations(fname=None, synapses=None, cellID=None)
 
 
    Write a :ref:`syn_file_format` file with a `pruned` flag.
@@ -17,17 +17,17 @@ write_pruned_synapse_locations
    See also:
 
    - :ref:`syn_file_format` for more information on the `.syn` file format.
-   - :py:meth:`single_cell_parser.reader.read_pruned_synapse_realization` for the corresponding reader function.
-   - :py:meth:`write_cell_synapse_locations` for a similar function that does not include a `pruned` flag.
+   - :func:`single_cell_parser.reader.read_pruned_synapse_realization` for the corresponding reader function.
+   - :func:`write_cell_synapse_locations` for a similar function that does not include a `pruned` flag.
 
    :param fname: The name of the file to write to.
    :type fname: str
-   :param synapses: A dictionary of synapses (see :py:meth:`~single_cell_parser.reader.read_pruned_synapse_locations`).
+   :param synapses: A dictionary of synapses (see :func:`~single_cell_parser.reader.read_pruned_synapse_locations`).
    :type synapses: dict
    :param cellID: The ID of the cell.
    :type cellID: str
 
-   :returns: None. Writes out the synapse location file to :paramref:`fname`.
+   :returns: None. Writes out the synapse location file to :param:`fname`.
 
 
 

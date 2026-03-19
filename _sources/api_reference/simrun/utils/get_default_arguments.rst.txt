@@ -6,7 +6,7 @@ get_default_arguments
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.get_default_arguments(func)
+.. function:: simrun.utils.get_default_arguments(func)
 
 
    Gets the keyword arguments with their default value from any function.

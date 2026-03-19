@@ -22,10 +22,9 @@ RobustDaskDelayedExecution
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution(db)
+.. class:: simrun.robust_dask_delayed_execution.RobustDaskDelayedExecution(db)
    
    Execute dask delayed objects in a robust way.
 

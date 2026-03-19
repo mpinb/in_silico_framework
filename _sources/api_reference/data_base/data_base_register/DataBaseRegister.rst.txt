@@ -21,18 +21,17 @@ DataBaseRegister
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.data_base_register.DataBaseRegister(registry_basedir, search_dbs='on_first_init')
+.. class:: data_base.data_base_register.DataBaseRegister(registry_basedir, search_dbs='on_first_init')
    
    Two column registry mapping data bases to their locations.
 
-   This registry keeps track of all :py:class:`DataBase` ``id`` tags and their locations on disk.
+   This registry keeps track of all :class:`DataBase` ``id`` tags and their locations on disk.
    This is useful when sharing data with other people, resolving relative database paths, and moving databases to other file systems.
    This registry implements an SQLite backend to store these locations and corresponding database IDs.
 
-   You can explicitly walk through a directory and add all :py:class:`DataBase` it encounters to the registry with :py:meth:`DataBaseRegister.search_dbs`.
+   You can explicitly walk through a directory and add all :class:`DataBase` it encounters to the registry with :func:`DataBaseRegister.search_dbs`.
 
    :param registry_basedir: The location of the db registry
    :type registry_basedir: str
@@ -51,7 +50,7 @@ DataBaseRegister
 
          The registry itself as an SQLite database.
 
-         :type: :py:class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`
+         :type: :class:`~data_base.sqlite_backend.sqlite_backend.SQLiteBackend`
 
    :Methods:
 
@@ -62,7 +61,7 @@ DataBaseRegister
       :class: summarytable
       
       * - :py:obj:`search_dbs <data_base.data_base_register.DataBaseRegister.search_dbs>`\ (directory)
-        - Look for :py:class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
+        - Look for :class:`DataBase` in all subfolders of the registry's directory and add them to the registry.
       * - :py:obj:`add_db <data_base.data_base_register.DataBaseRegister.add_db>`\ (unique\_id, db\_basedir)
         - Add a database to the registry.
       * - :py:obj:`keys <data_base.data_base_register.DataBaseRegister.keys>`\ ()

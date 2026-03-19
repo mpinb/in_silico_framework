@@ -1,13 +1,12 @@
 
 
+get_section_adjacancy_map
+=========================
 
 
+.. Signature -------------------------------
 
-Cell.get_section_adjacancy_map
-==============================
-
-
-.. py:method:: single_cell_parser.cell.Cell.get_section_adjacancy_map()
+.. function:: single_cell_parser.cell.Cell.get_section_adjacancy_map()
 
 
    Generates a map that shows which sections are connected to which sections.

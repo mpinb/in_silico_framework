@@ -1,13 +1,12 @@
 
 
+distance_to_soma
+================
 
 
+.. Signature -------------------------------
 
-Cell.distance_to_soma
-=====================
-
-
-.. py:method:: single_cell_parser.cell.Cell.distance_to_soma(sec, x)
+.. function:: single_cell_parser.cell.Cell.distance_to_soma(sec, x)
 
 
    Computes the path length between the soma and a specified point.

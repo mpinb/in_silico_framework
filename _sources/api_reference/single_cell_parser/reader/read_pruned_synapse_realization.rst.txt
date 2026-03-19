@@ -6,7 +6,7 @@ read_pruned_synapse_realization
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.reader.read_pruned_synapse_realization(fname)
+.. function:: single_cell_parser.reader.read_pruned_synapse_realization(fname)
 
 
    Read in a :ref:`syn_file_format` and returns a dictionary of synapse locations and whether they are pruned or not.
@@ -17,8 +17,8 @@ read_pruned_synapse_realization
    See also:
 
    - :ref:`syn_file_format` for more information on the `.syn` file format.
-   - :py:meth:`~single_cell_parser.reader.read_synapse_realization`.
-   - :py:meth:`~single_cell_parser.writer.write_pruned_synapse_locations` for the corresponding writer.
+   - :func:`~single_cell_parser.reader.read_synapse_realization`.
+   - :func:`~single_cell_parser.writer.write_pruned_synapse_locations` for the corresponding writer.
 
    :param fname: The name of the file to be read.
    :type fname: str

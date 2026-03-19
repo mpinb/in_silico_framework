@@ -6,7 +6,7 @@ check
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.reduced_lda_model.check(obj)
+.. function:: data_base.IO.LoaderDumper.reduced_lda_model.check(obj)
 
 
    Check whether the object can be saved with this dumper
@@ -14,7 +14,7 @@ check
    :param obj: Object to be saved
    :type obj: object
 
-   :returns: Whether the object is a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
+   :returns: Whether the object is a :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
    :rtype: bool
 
 

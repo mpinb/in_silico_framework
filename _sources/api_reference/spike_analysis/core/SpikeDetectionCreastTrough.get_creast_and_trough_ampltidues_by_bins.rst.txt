@@ -1,13 +1,12 @@
 
 
+get_creast_and_trough_ampltidues_by_bins
+========================================
 
 
+.. Signature -------------------------------
 
-SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins
-===================================================================
-
-
-.. py:method:: spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins(mode='zero')
+.. function:: spike_analysis.core.SpikeDetectionCreastTrough.get_creast_and_trough_ampltidues_by_bins(mode='zero')
 
 
    Get the creast and trough amplitudes based on the histogram of the creasts and troughs.

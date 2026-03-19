@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx_paramlinks.css" />
@@ -894,6 +894,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1062,8 +1077,8 @@
 <a class="reference internal" href="../../index.html#module-singlecell_input_mapper" title="singlecell_input_mapper (Python module)"><span class="sig-name descname"><span class="pre">singlecell_input_mapper</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="../index.html#module-singlecell_input_mapper.singlecell_input_mapper" title="singlecell_input_mapper.singlecell_input_mapper (Python module)"><span class="sig-name descname"><span class="pre">singlecell_input_mapper</span></span></a><span class="p"><span class="pre">.</span></span><a class="reference internal" href="index.html#module-singlecell_input_mapper.singlecell_input_mapper.writer" title="singlecell_input_mapper.singlecell_input_mapper.writer (Python module)"><span class="sig-name descname"><span class="pre">writer</span></span></a><span class="p"><span class="pre">.</span></span><span class="sig-name descname"><span class="pre">write_anatomical_realization_map</span></span><span class="sig-paren">(</span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.fname" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.fname (Python parameter) — Name of the output file"><span class="n"><span class="pre">fname</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.functionalMap" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.functionalMap (Python parameter) — List of tuples, each containing the cell type, presynaptic cell index and synapse index"><span class="n"><span class="pre">functionalMap</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em>, </span><span class="sig-param-decl"><em class="sig-param"><a class="n reference internal" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.anatomicalID" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.anatomicalID (Python parameter) — ID of the anatomical realization"><span class="n"><span class="pre">anatomicalID</span></span></a><span class="o"><span class="pre">=</span></span><code class="code python default_value docutils literal highlight highlight-python"><span class="kc">None</span></code></em></span><span class="sig-paren">)</span><a class="headerlink" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map" title="Link to this definition">¶</a></dt>
 <dd><p>Writes a <a class="reference internal" href="../../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file containing a list of all functional connections.</p>
 <p>Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
-Only valid for an anatomical synapse realization with ID <code class="xref py py-paramref docutils literal notranslate"><span class="pre">anatomicalID</span></code>.
-Uses <a class="reference internal" href="../generate_nr_of_cells_spreadsheet/con_file_to_NumberOfConnectedCells_sheet.html#singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet" title="singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet (Python function) — Convert a con_file_format file to a dataframe with the number of connected presynaptic cells for each celltype and column."><code class="xref py py-meth docutils literal notranslate"><span class="pre">con_file_to_NumberOfConnectedCells_sheet()</span></code></a>
+Only valid for an anatomical synapse realization with ID <a class="reference internal" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.anatomicalID" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map.anatomicalID (Python parameter) — ID of the anatomical realization"><code class="xref py py-param docutils literal notranslate"><span class="pre">anatomicalID</span></code></a>.
+Uses <a class="reference internal" href="../generate_nr_of_cells_spreadsheet/con_file_to_NumberOfConnectedCells_sheet.html#singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet" title="singlecell_input_mapper.singlecell_input_mapper.generate_nr_of_cells_spreadsheet.con_file_to_NumberOfConnectedCells_sheet (Python function) — Convert a con_file_format file to a dataframe with the number of connected presynaptic cells for each celltype and column."><code class="xref py py-func docutils literal notranslate"><span class="pre">con_file_to_NumberOfConnectedCells_sheet()</span></code></a>
 to generate the number of connected cells spreadsheet.</p>
 <dl class="field-list simple">
 <dt class="field-odd" id="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map-parameters" title="Permalink to this headline">¶</a></dt>
@@ -1080,7 +1095,7 @@ to generate the number of connected cells spreadsheet.</p>
 <div class="warning admonition">
 <p class="admonition-title">Warning</p>
 <p>A <a class="reference internal" href="../../../../file_formats.html#con-file-format"><span class="std std-ref">.con</span></a> file is only valid with a corresponding <a class="reference internal" href="../../../../file_formats.html#syn-file-format"><span class="std std-ref">.syn</span></a> file.
-See <a class="reference internal" href="write_cell_synapse_locations.html#singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations (Python function) — Write a syn_file_format file, containing all synapses and their corresponding cellID, sectionID and x."><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_cell_synapse_locations()</span></code></a></p>
+See <a class="reference internal" href="write_cell_synapse_locations.html#singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations" title="singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations (Python function) — Write a syn_file_format file, containing all synapses and their corresponding cellID, sectionID and x."><code class="xref py py-func docutils literal notranslate"><span class="pre">write_cell_synapse_locations()</span></code></a></p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd" id="singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map-returns">Returns<span class="colon">:</span><a class="headerlink" href="#singlecell_input_mapper.singlecell_input_mapper.writer.write_anatomical_realization_map-returns" title="Permalink to this headline">¶</a></dt>

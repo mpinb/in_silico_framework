@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ 
 
 
@@ -38,7 +37,7 @@ LoaderDumper
    get_dumper_string_by_dumper_module </api_reference/data_base/IO/LoaderDumper/get_dumper_string_by_dumper_module>
    get_dumper_string_by_savedir </api_reference/data_base/IO/LoaderDumper/get_dumper_string_by_savedir>
 
-.. py:module:: data_base.IO.LoaderDumper
+.. module:: data_base.IO.LoaderDumper
 
 .. autoapi-nested-parse::
    Read and write data in various formats.
@@ -61,6 +60,7 @@ LoaderDumper
 
 
 
+
 .. rst-class:: absolute-paragraph
 
 Functions
@@ -80,6 +80,7 @@ Functions
      - Convert a dumper submodule to a string.
    * - :py:obj:`get_dumper_string_by_savedir <data_base.IO.LoaderDumper.get_dumper_string_by_savedir>`\ (savedir)
      - Get the dumper string from a filepath.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -135,6 +136,7 @@ Modules
      - Read and write objects to the pickle format.
    * - :py:obj:`utils <data_base.IO.LoaderDumper.utils>`
      - Convenience methods for data IO.
+
 
 
 .. container:: doc-feedback

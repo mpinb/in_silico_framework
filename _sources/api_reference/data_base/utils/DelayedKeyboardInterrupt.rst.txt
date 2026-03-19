@@ -19,10 +19,11 @@ DelayedKeyboardInterrupt
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: data_base.utils.DelayedKeyboardInterrupt
+.. class:: data_base.utils.DelayedKeyboardInterrupt
+
+   Bases: :py:obj:`object`
    
    Context manager that allows to delay a KeyboardInterrupt such that it also works in subthreads.
 

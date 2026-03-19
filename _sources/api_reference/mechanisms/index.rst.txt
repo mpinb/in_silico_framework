@@ -1,0 +1,49 @@
+
+|home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~mechanisms` ❭ 
+
+
+mechanisms
+==========
+
+.. a hidden toctree for sidebar navigation
+.. Include all visible children, except for attributes (makes things verbose)
+.. These names need to match either a python object in the Python space, or (as done here) a direct link to an .rst file (without the suffix), either relative or absolute.
+.. toctree::
+   :hidden:
+
+   l5pt </api_reference/mechanisms/l5pt/index>  
+
+.. module:: mechanisms
+
+.. autoapi-nested-parse::
+   This directory contains the `.mod` files that define the biophysical behaviour of ion channels, such as conductivity, states, derivative states and initial conditions.
+   In addition, it contains network connectivity parameters that define synaptic connections.
+
+   These are used by the NEURON simulator as variable parameters for solving the partial differential equations that describe the biophysics of a neuron.
+
+   In this direrctory, you will find cell-specific biphysical mechanisms organizeed per folder. Each folder has its own __init__ file that sets up these mechanisms using NEURON.
+
+
+
+
+
+
+.. rst-class:: absolute-paragraph
+
+Modules
+-------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`l5pt <mechanisms.l5pt>`
+     - This directory contains the `.mod` files that define the biophysical behaviour of ion channels found in a Layer 5 Pyramidal Tract neuron (L5PT).
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

@@ -1,20 +1,19 @@
 
 
+get_stim_setup_fun_by_stim
+==========================
 
 
+.. Signature -------------------------------
 
-Simulator_Setup.get_stim_setup_fun_by_stim
-==========================================
-
-
-.. py:method:: biophysics_fitting.simulator.Simulator_Setup.get_stim_setup_fun_by_stim(stim)
+.. function:: biophysics_fitting.simulator.Simulator_Setup.get_stim_setup_fun_by_stim(stim)
 
 
    Get the stimulus setup function by stimulus name.
 
    Stimulus setup functions are functions that set up the stimulus.
    They are saved under the name ``stimulus_name.setup``, and accessible
-   under :paramref:`stim_setup_funs`.
+   under :param:`stim_setup_funs`.
 
    :param stim: The stimulus name, e.g. ``'stim_1'``, ``'bAP'``, ``'StepOne'``.
    :type stim: str

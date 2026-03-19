@@ -1,0 +1,23 @@
+
+
+_get_metadata_from_fname
+========================
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore._get_metadata_from_fname(fname)
+
+   :staticmethod:
+
+
+   Get metadata from a filename that follows the convention of NumpyStore.
+
+   :returns: the name, shape, and dtype from a filename that follows the convention of NumpyStore
+   :rtype: tuple
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

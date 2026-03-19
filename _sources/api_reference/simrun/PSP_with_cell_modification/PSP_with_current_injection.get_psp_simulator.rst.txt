@@ -1,27 +1,31 @@
 
 
+get_psp_simulator
+=================
 
 
+.. Signature -------------------------------
 
-PSP_with_current_injection.get_psp_simulator
-============================================
-
-
-.. py:method:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator(gExRange=[1.0], exc_inh='exc', mode='synapses')
+.. function:: simrun.PSP_with_cell_modification.PSP_with_current_injection.get_psp_simulator(gExRange=[1.0], exc_inh='exc', mode='synapses')
 
 
    Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
 
    This method initializes a PSPs object with the given parameters to simulate excitatory or inhibitory postsynaptic potentials.
 
-   :param mode: Mode of the simulation. Options:
+   :param mode: Mode of the simulation.
+                Options:
+
+                - ``'synapses'`` to activate individual synapses (default)
+                - ``'cells'`` to activate individual cells
    :type mode: str
-   :param - ``'synapses'`` to activate individual synapses:
-   :type - ``'synapses'`` to activate individual synapses: default
-   :param - ``'cells'`` to activate individual cells:
+   :param gExRange: Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
+   :type gExRange: list
+   :param exc_inh: Whether to fetch a :class:`~simrun.synaptic_strength_fitting.PSPs` for excitatory or inhibitory synapses.
+   :type exc_inh: str
 
    :returns: Object to simulate PSPs
-   :rtype: PSPs
+   :rtype: :class:`~simrun.synaptic_strength_fitting.PSPs`
 
 
 

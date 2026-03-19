@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.cell_modify_functions` ❭ 
 
 
@@ -14,10 +13,11 @@ synaptic_input
 
    synaptic_input </api_reference/single_cell_parser/cell_modify_functions/synaptic_input/synaptic_input>
 
-.. py:module:: single_cell_parser.cell_modify_functions.synaptic_input
+.. module:: single_cell_parser.cell_modify_functions.synaptic_input
 
 .. autoapi-nested-parse::
    Add synaptic activations to the cell from a network.
+
 
 
 
@@ -34,6 +34,22 @@ Functions
    
    * - :py:obj:`synaptic_input <single_cell_parser.cell_modify_functions.synaptic_input.synaptic_input>`\ (cell, network\_param, synapse\_activation\_file, tStop)
      - Add synaptic activations to the cell from a network.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.cell_modify_functions.synaptic_input.logger>`
+     - \-
+
 
 
 

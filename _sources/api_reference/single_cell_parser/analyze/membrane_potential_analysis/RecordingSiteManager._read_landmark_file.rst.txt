@@ -1,13 +1,12 @@
 
 
+_read_landmark_file
+===================
 
 
+.. Signature -------------------------------
 
-RecordingSiteManager._read_landmark_file
-========================================
-
-
-.. py:method:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file(landmarkFilename)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.RecordingSiteManager._read_landmark_file(landmarkFilename)
 
 
    Read the AMIRA landmark file and return the landmarks.

@@ -1,13 +1,12 @@
 
 
+get_seg_conductance
+===================
 
 
+.. Signature -------------------------------
 
-PySection.get_seg_conductance
-=============================
-
-
-.. py:method:: single_cell_parser.cell.PySection.get_seg_conductance(seg, var, param_name)
+.. function:: single_cell_parser.cell.PySection.get_seg_conductance(seg, var, param_name)
 
 
    Get the conductance of a segment.
@@ -26,7 +25,7 @@ PySection.get_seg_conductance
 
    :raises ValueError: If the segment does not have the specified variable.
 
-   :raises AssertionError: If the segment is not an instance of :py:class:`neuron.nrn.Segment`.
+   :raises AssertionError: If the segment is not an instance of :class:`neuron.nrn.Segment`.
 
 
 

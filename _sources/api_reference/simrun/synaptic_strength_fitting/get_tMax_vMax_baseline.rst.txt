@@ -6,7 +6,7 @@ get_tMax_vMax_baseline
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.get_tMax_vMax_baseline(t_baseline, v_baseline, t, v, tStim=None, tEnd=None)
+.. function:: simrun.synaptic_strength_fitting.get_tMax_vMax_baseline(t_baseline, v_baseline, t, v, tStim=None, tEnd=None)
 
 
    Calculate the ePSP amplitude.

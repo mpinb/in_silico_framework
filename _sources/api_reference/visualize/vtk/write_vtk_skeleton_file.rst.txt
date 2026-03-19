@@ -6,15 +6,15 @@ write_vtk_skeleton_file
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.vtk.write_vtk_skeleton_file(lookup_table, out_name, out_dir, point_scalar_data=None, n_decimals=2)
+.. function:: visualize.vtk.write_vtk_skeleton_file(lookup_table, out_name, out_dir, point_scalar_data=None, n_decimals=2)
 
 
    Write out a .vtk file for a neuron morphology.
 
-   This method is used by :py:meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
+   This method is used by :func:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_vtk_frames`.
 
    :param lookup_table: Lookup table for the neuron morphology.
-                        Can be accessed from :py:class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
+                        Can be accessed from :class:`visualize.cell_morphology_visualizer.CellMorphologyVisualizer`.
    :type lookup_table: pd.DataFrame
    :param out_name: Name of the output file.
    :type out_name: str

@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -20,10 +19,10 @@ builders
    _get_recsite_labels_from_neup </api_reference/data_base/db_initializers/load_simrun_general/builders/_get_recsite_labels_from_neup>
    _get_rec_site_label_fn_map </api_reference/data_base/db_initializers/load_simrun_general/builders/_get_rec_site_label_fn_map>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.builders
+.. module:: data_base.db_initializers.load_simrun_general.builders
 
 .. autoapi-nested-parse::
-   Pipelines for building database keys containing results from :py:mod:`simrun`.
+   Pipelines for building database keys containing results from :mod:`simrun`.
 
    Note that all pipelines assume that the database ``core`` is built. This adds the essential
    information to the database that other builders need:
@@ -32,8 +31,11 @@ builders
    - ``simresult_path``: top-level directory from where all simulation results were fetched
    - ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
 
-   In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+   In addition, :func:`_build_core` also builds the somatic voltage traces, assuming this data is
    always desirable.
+
+
+
 
 
 

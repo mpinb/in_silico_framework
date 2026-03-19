@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -16,10 +15,11 @@ optimizer_LGPL
    _get_offspring </api_reference/biophysics_fitting/optimizer_LGPL/_get_offspring>
    eaAlphaMuPlusLambdaCheckpoint </api_reference/biophysics_fitting/optimizer_LGPL/eaAlphaMuPlusLambdaCheckpoint>
 
-.. py:module:: biophysics_fitting.optimizer_LGPL
+.. module:: biophysics_fitting.optimizer_LGPL
 
 .. autoapi-nested-parse::
    Optimisation class
+
 
 
 
@@ -36,6 +36,22 @@ Functions
    
    * - :py:obj:`eaAlphaMuPlusLambdaCheckpoint <biophysics_fitting.optimizer_LGPL.eaAlphaMuPlusLambdaCheckpoint>`\ (population, toolbox, mu, cxpb, mutpb, ngen, stats, halloffame, cp\_frequency, db\_run, continue\_cp, db)
      - This is the :math:`(~\alpha,\mu~,~\lambda)` evolutionary algorithm
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <biophysics_fitting.optimizer_LGPL.logger>`
+     - \-
+
 
 
 

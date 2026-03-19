@@ -6,7 +6,7 @@ shared_array_from_shared_mem_name
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_shared_mem_name(fname, shape=None, dtype=None)
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.shared_array_from_shared_mem_name(fname, shape=None, dtype=None)
 
 
    Loads an existing shared array by its name
@@ -18,7 +18,7 @@ shared_array_from_shared_mem_name
    :param dtype: Data type of the array. Default: None.
    :type dtype: str, optional
 
-   :returns: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+   :returns: The :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
    :rtype: tuple
 
 

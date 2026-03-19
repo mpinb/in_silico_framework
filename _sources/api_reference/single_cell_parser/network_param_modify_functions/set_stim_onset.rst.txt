@@ -6,7 +6,7 @@ set_stim_onset
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.network_param_modify_functions.set_stim_onset(n, onset=None)
+.. function:: single_cell_parser.network_param_modify_functions.set_stim_onset(n, onset=None)
 
 
    Changes the offset when pointcells get activated

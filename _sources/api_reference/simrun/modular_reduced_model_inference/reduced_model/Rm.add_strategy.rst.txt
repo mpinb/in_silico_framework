@@ -1,13 +1,12 @@
 
 
+add_strategy
+============
 
 
+.. Signature -------------------------------
 
-Rm.add_strategy
-===============
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_strategy(strategy, setup=True, view=None)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.Rm.add_strategy(strategy, setup=True, view=None)
 
 
    Add a strategy to the reduced model.
@@ -21,8 +20,8 @@ Rm.add_strategy
 
    .. seealso::
 
-      :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies.
-      :py:mod:`DataView` for the data view object.
+      :mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies.
+      :mod:`DataView` for the data view object.
 
 
 

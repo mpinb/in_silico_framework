@@ -6,7 +6,7 @@ setup_StepTwo
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim.setup_StepTwo(cell, delay=700)
+.. function:: biophysics_fitting.setup_stim.setup_StepTwo(cell, delay=700)
 
 
    Setup a step current stimulus at the soma:

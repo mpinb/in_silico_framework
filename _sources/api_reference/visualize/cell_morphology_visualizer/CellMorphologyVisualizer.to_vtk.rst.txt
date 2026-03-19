@@ -1,13 +1,12 @@
 
 
+to_vtk
+======
 
 
+.. Signature -------------------------------
 
-CellMorphologyVisualizer.to_vtk
-===============================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk(out_dir='.', fn='')
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.to_vtk(out_dir='.', fn='')
 
 
    Write out the cell morphology to a VTK file.

@@ -6,15 +6,15 @@ hay_evaluate_StepOne
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepOne(**kwargs)
+.. function:: biophysics_fitting.hay.evaluation.hay_evaluate_StepOne(**kwargs)
 
 
    Evaluate the :math:`StepOne` stimulus protocol.
 
-   Initializes a :py:class:`StepOne` object with the default keyword arguments,
+   Initializes a :class:`StepOne` object with the default keyword arguments,
    and calls the evaluation function on the voltage traces.
 
-   :param \*\*kwargs: Additional or overriding keyword arguments for the :py:class:`StepOne` object. Defaults to None.
+   :param kwargs: Additional or overriding keyword arguments for the :class:`StepOne` object. Defaults to None.
 
    :returns: Dictionary with evaluation metrics.
    :rtype: dict

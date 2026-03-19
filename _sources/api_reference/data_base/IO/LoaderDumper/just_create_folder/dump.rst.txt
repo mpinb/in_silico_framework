@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.just_create_folder.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.just_create_folder.dump(obj, savedir)
 
 
    Create a folder

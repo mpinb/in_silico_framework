@@ -1,19 +1,18 @@
 
 
+write_video
+===========
 
 
+.. Signature -------------------------------
 
-CellMorphologyVisualizer.write_video
-====================================
-
-
-.. py:method:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_video(images_path, out_name, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, quality=5, codec='mpeg4', tpf=20)
+.. function:: visualize.cell_morphology_visualizer.CellMorphologyVisualizer.write_video(images_path, out_name, overwrite_frames=False, color='grey', show_synapses=False, show_legend=False, client=None, t_start=None, t_stop=None, t_step=None, highlight_section=None, highlight_x=None, quality=5, codec='mpeg4', tpf=20)
 
 
    Write the individual frames of a neuron during a simulation and merge them into a video.
 
    Creates a set of images of a neuron color-coded with voltage together with synapse activations.
-   The parameters :paramref:`t_start`, :paramref:`t_stop` and :paramref:`t_step` update the :paramref:`times_to_show` attribute.
+   The parameters :param:`t_start`, :param:`t_stop` and :param:`t_step` update the :param:`times_to_show` attribute.
 
    :param images_path: dir where the images for the gif will be generated
    :type images_path: str
@@ -39,9 +38,7 @@ CellMorphologyVisualizer.write_video
    :type highlight_section: int
    :param highlight_x: x coordinate of the section that should be highlighted with an arrow.
    :type highlight_x: float
-   :param framerate: frames per second
-   :type framerate: int
-   :param quality: quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :paramref:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
+   :param quality: quality of the output video. 1 is the highest quality and 31 is the lowest quality. This is ignored if :param:`codec` is not MPEG* (mpeg4, mpeg2video, mpeg1video, mjpeg, libxvid, msmpeg4).
    :type quality: int
    :param codec: codec to use for the video. Default is mpeg4.
    :type codec: str

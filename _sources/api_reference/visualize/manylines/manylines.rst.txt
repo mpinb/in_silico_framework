@@ -6,7 +6,7 @@ manylines
 
 .. Signature -------------------------------
 
-.. py:function:: visualize.manylines.manylines(df, ax=None, axis=None, colormap=None, groupby_attribute=None, figsize=(15, 3), returnPixelObject=False, scheduler=None)
+.. function:: visualize.manylines.manylines(df, ax=None, axis=None, colormap=None, groupby_attribute=None, figsize=(15, 3), returnPixelObject=False, scheduler=None)
 
 
    Parallelizes the plot of many lines
@@ -17,7 +17,7 @@ manylines
    :type ax: matplotlib.pyplot.Axes
    :param axis: the ax limits, e.g. [1, 10, 1, 10]
    :type axis: list
-   :param colormap: a colormap, mapping values for :paramref:groupby_attribute to colors.
+   :param colormap: a colormap, mapping values for :paramgroupby_attribute to colors.
    :type colormap: dict
    :param groupby_attribute: column name to group by.
    :type groupby_attribute: str
@@ -28,8 +28,8 @@ manylines
    :param scheduler: a distributed scheduler.
    :type scheduler: distributed.client.Client | str, optional
 
-   :returns: Figure object containing all lines defined in :paramref:`df`
-   :rtype: :py:class:`~matplotlib.figure.Figure`
+   :returns: Figure object containing all lines defined in :param:`df`
+   :rtype: :class:`~matplotlib.figure.Figure`
 
 
 

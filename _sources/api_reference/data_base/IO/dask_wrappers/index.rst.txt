@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.IO` ❭ 
 
 
@@ -14,10 +13,11 @@ dask_wrappers
 
    read_csvs </api_reference/data_base/IO/dask_wrappers/read_csvs>
 
-.. py:module:: data_base.IO.dask_wrappers
+.. module:: data_base.IO.dask_wrappers
 
 .. autoapi-nested-parse::
    Read dask csv from an explicit filelist instead of only globstring.
+
 
 
 
@@ -34,6 +34,8 @@ Functions
    
    * - :py:obj:`read_csvs <data_base.IO.dask_wrappers.read_csvs>`\ (\*args, \*\*kwargs)
      - Read dask dataframes from csv files.
+
+
 
 
 

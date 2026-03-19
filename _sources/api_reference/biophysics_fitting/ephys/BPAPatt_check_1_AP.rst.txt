@@ -6,7 +6,7 @@ BPAPatt_check_1_AP
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BPAPatt_check_1_AP(t, v_soma, thresh=None, stim_onset=None)
+.. function:: biophysics_fitting.ephys.BPAPatt_check_1_AP(t, v_soma, thresh=None, stim_onset=None)
 
 
    Checks if there is exactly one action potential in the somatic voltage trace.

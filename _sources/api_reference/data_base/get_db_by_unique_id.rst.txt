@@ -6,7 +6,7 @@ get_db_by_unique_id
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.get_db_by_unique_id(unique_id)
+.. function:: data_base.get_db_by_unique_id(unique_id)
 
 
    Get a DataBase by its unique ID, as registered in the data base register.
@@ -16,8 +16,8 @@ get_db_by_unique_id
    :param unique_id: The data base's unique identifier
    :type unique_id: str
 
-   :returns: The database associated with the :paramref:`unique_id`.
-   :rtype: :py:class:`data_base.DataBase`
+   :returns: The database associated with the :param:`unique_id`.
+   :rtype: :class:`data_base.DataBase`
 
 
 

@@ -1,13 +1,12 @@
 
 
+_convert_x_static
+=================
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine._convert_x_static
-=====================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static(groups, len_z, x)
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._convert_x_static(groups, len_z, x)
 
    :staticmethod:
 

@@ -1,19 +1,18 @@
 
 
+_create_pointcell_activities
+============================
 
 
+.. Signature -------------------------------
 
-NetworkMapper._create_pointcell_activities
-==========================================
-
-
-.. py:method:: single_cell_parser.network.NetworkMapper._create_pointcell_activities(preCellType, networkParameters)
+.. function:: single_cell_parser.network.NetworkMapper._create_pointcell_activities(preCellType, networkParameters)
 
 
    Create point cell spike times based on the network parameters ``distribution`` keyword.
 
-   Depending on the ``distribution`` given by :paramref:`networkParameters`, this method creates
-   spike times for each presynaptic cell of type :paramref:`preCellType`.
+   Depending on the ``distribution`` given by :param:`networkParameters`, this method creates
+   spike times for each presynaptic cell of type :param:`preCellType`.
 
    The following spike time distributions are supported, and require the following parameters:
 

@@ -6,7 +6,7 @@ setup_BAC
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.setup_stim.setup_BAC(cell, dist=970, delay=295)
+.. function:: biophysics_fitting.setup_stim.setup_BAC(cell, dist=970, delay=295)
 
 
    Setup a BAC (bAP-activated Ca2+-spike) stimulus for the cell.

@@ -6,7 +6,7 @@ create_evoked_PSTH
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName)
+.. function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_evoked_PSTH(spikeTimesName, cellType, ongoingRate, outFileName)
 
 
    Reads in spike times and creates a PSTH for evoked activity for each whisker.

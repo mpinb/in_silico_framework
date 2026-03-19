@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -850,6 +850,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1078,8 +1093,8 @@ It allows to adapt the cell parameters, network parameters, and the synaptic act
 The results are stored in the specified directory, relative to the original unmodified simulation results.</p>
 <div class="attention admonition">
 <p class="admonition-title">Attention</p>
-<p>This function uses the <em>exact</em> same synapse activations as already present in the database, except if <code class="xref py py-paramref docutils literal notranslate"><span class="pre">synapse_activation_modify_functions</span></code> is given.
-In other words, adapting release probabilities of synapses with <code class="xref py py-paramref docutils literal notranslate"><span class="pre">network_param_modify_functions</span></code> will have no effect, as the synapse activations are not
+<p>This function uses the <em>exact</em> same synapse activations as already present in the database, except if <a class="reference internal" href="#simrun.rerun_db.rerun_db.synapse_activation_modify_functions" title="simrun.rerun_db.rerun_db.synapse_activation_modify_functions (Python parameter) — List of functions which take a syn_activation_format dataframe and may return it changed."><code class="xref py py-param docutils literal notranslate"><span class="pre">synapse_activation_modify_functions</span></code></a> is given.
+In other words, adapting release probabilities of synapses with <a class="reference internal" href="#simrun.rerun_db.rerun_db.network_param_modify_functions" title="simrun.rerun_db.rerun_db.network_param_modify_functions (Python parameter) — List of functions which take NTParameterSet network parameters and may return it changed."><code class="xref py py-param docutils literal notranslate"><span class="pre">network_param_modify_functions</span></code></a> will have no effect, as the synapse activations are not
 regenerated.</p>
 </div>
 <dl class="field-list simple">
@@ -1093,9 +1108,9 @@ regenerated.</p>
 </dd>
 <dt id="simrun.rerun_db.rerun_db.tStop"><span class="sig-name descname">tStop</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.tStop" title="Permalink to this definition">¶</a></dt><dd><p>Time in ms at which the simulation should stop.</p>
 </dd>
-<dt id="simrun.rerun_db.rerun_db.neuron_param_modify_functions"><span class="sig-name descname">neuron_param_modify_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.neuron_param_modify_functions" title="Permalink to this definition">¶</a></dt><dd><p>List of functions which take <a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format."><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a> neuron parameters and may return it changed.</p>
+<dt id="simrun.rerun_db.rerun_db.neuron_param_modify_functions"><span class="sig-name descname">neuron_param_modify_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.neuron_param_modify_functions" title="Permalink to this definition">¶</a></dt><dd><p>List of functions which take <a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a> neuron parameters and may return it changed.</p>
 </dd>
-<dt id="simrun.rerun_db.rerun_db.network_param_modify_functions"><span class="sig-name descname">network_param_modify_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.network_param_modify_functions" title="Permalink to this definition">¶</a></dt><dd><p>List of functions which take <a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format."><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a> network parameters and may return it changed.</p>
+<dt id="simrun.rerun_db.rerun_db.network_param_modify_functions"><span class="sig-name descname">network_param_modify_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.network_param_modify_functions" title="Permalink to this definition">¶</a></dt><dd><p>List of functions which take <a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">NTParameterSet</span></code></a> network parameters and may return it changed.</p>
 </dd>
 <dt id="simrun.rerun_db.rerun_db.synapse_activation_modify_functions"><span class="sig-name descname">synapse_activation_modify_functions</span><span class="p"> : </span><span class="desctype"><span class="desctype">list</span></span><a class="headerlink" href="#simrun.rerun_db.rerun_db.synapse_activation_modify_functions" title="Permalink to this definition">¶</a></dt><dd><p>List of functions which take a <a class="reference internal" href="../../../file_formats.html#syn-activation-format"><span class="std std-ref">Synapse activation</span></a> dataframe and may return it changed.</p>
 </dd>

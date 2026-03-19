@@ -6,21 +6,21 @@ spines_update_synapse_distribution_file
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.spines_update_synapse_distribution_file(cell, synapse_distribution_file, new_synapse_distribution_file)
+.. function:: single_cell_parser.spines_update_synapse_distribution_file(cell, synapse_distribution_file, new_synapse_distribution_file)
 
 
    Update the :ref:`syn_file_format` file to correctly point to spine heads as excitatory synapse locations.
 
-   Spines must already exist, so call this after :py:meth:`create_cell`,
+   Spines must already exist, so call this after :func:`create_cell`,
    using the same :ref:`syn_file_format` file that was used to create the cell.
 
    :param cell: The cell object.
    :type cell: ~single_cell_parser.cell.Cell
    :param synapse_distribution_file: The path to the original :ref:`syn_file_format` file.
    :type synapse_distribution_file: str
-   :param new_synfile: The path to the new :ref:`syn_file_format` file.
-                       A new_synfile will be created if it does not already exist.
-   :type new_synfile: str
+   :param new_synapse_distribution_file: The path to the new :ref:`syn_file_format` file.
+                                         A new_synfile will be created if it does not already exist.
+   :type new_synapse_distribution_file: str
 
 
 

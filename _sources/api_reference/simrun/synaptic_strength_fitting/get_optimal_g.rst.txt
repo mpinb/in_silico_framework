@@ -6,7 +6,7 @@ get_optimal_g
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.synaptic_strength_fitting.get_optimal_g(self, measured_data, method='dynamic_baseline', threashold=0.1)
+.. function:: simrun.synaptic_strength_fitting.get_optimal_g(self, measured_data, method='dynamic_baseline', threashold=0.1)
 
 
    Calculate the optimal synaptic conductance such that the EPSP matches empirical data.

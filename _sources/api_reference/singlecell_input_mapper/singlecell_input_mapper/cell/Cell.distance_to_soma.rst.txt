@@ -1,16 +1,15 @@
 
 
+distance_to_soma
+================
 
 
+.. Signature -------------------------------
 
-Cell.distance_to_soma
-=====================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.distance_to_soma(sec, x)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.cell.Cell.distance_to_soma(sec, x)
 
 
-   Calculate the path length to soma from location :paramref:`x` on section :paramref:`sec`
+   Calculate the path length to soma from location :param:`x` on section :param:`sec`
 
    :param sec: Section object.
    :type sec: ~singlecell_input_mapper.singlecell_input_mapper.cell.PySection2

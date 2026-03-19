@@ -6,7 +6,7 @@ BAC_caSpike_height_check_Ca_spikes_after_Na_spike
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike(t, v, v_dend, n=2, thresh=None)
+.. function:: biophysics_fitting.ephys.BAC_caSpike_height_check_Ca_spikes_after_Na_spike(t, v, v_dend, n=2, thresh=None)
 
 
    Checks if a calcium spike occurs after the nth sodium spike.

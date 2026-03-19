@@ -1,13 +1,12 @@
 
 
+_register_this_database
+=======================
 
 
+.. Signature -------------------------------
 
-ISFDataBase._register_this_database
-===================================
-
-
-.. py:method:: data_base.isf_data_base.ISFDataBase._register_this_database()
+.. function:: data_base.isf_data_base.ISFDataBase._register_this_database()
 
 
    Register this database with the database register.

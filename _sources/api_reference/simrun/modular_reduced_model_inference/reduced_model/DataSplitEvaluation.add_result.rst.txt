@@ -1,13 +1,12 @@
 
 
+add_result
+==========
 
 
+.. Signature -------------------------------
 
-DataSplitEvaluation.add_result
-==============================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result(solver, x)
+.. function:: simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation.add_result(solver, x)
 
 
    Save the optimization result.

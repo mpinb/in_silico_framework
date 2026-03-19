@@ -6,7 +6,7 @@ get_main_bifurcation_section
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.utils.get_main_bifurcation_section(cell)
+.. function:: biophysics_fitting.utils.get_main_bifurcation_section(cell)
 
 
    Get the main bifurcation section of a cell

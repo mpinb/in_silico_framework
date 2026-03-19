@@ -1,13 +1,12 @@
 
 
+_get_score_static
+=================
 
 
+.. Signature -------------------------------
 
-Strategy_spatiotemporalRaisedCosine._get_score_static
-=====================================================
-
-
-.. py:method:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static(convert_x, base_vectors_arrays_dict, x)
+.. function:: simrun.modular_reduced_model_inference.strategy.Strategy_spatiotemporalRaisedCosine._get_score_static(convert_x, base_vectors_arrays_dict, x)
 
    :staticmethod:
 
@@ -15,7 +14,7 @@ Strategy_spatiotemporalRaisedCosine._get_score_static
    Calculate the weighted net input :math:`WNI(t)` for the given weights :math:`\mathbf{x}`.
 
    This is the method that calculates the cost function for the optimizer.
-   It is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine._get_score` during
+   It is assigned to :func:`~simrun.modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine._get_score` during
    the setup of the strategy.
 
    This method left-multiplies the basis vectors :math:`\mathbf{f}(\tau) \cdot \mathbf{g}(z) \cdot \mathbf{D}`
@@ -27,13 +26,13 @@ Strategy_spatiotemporalRaisedCosine._get_score_static
    :param base_vectors_arrays_dict: The dictionary of basis vectors for each group.
    :type base_vectors_arrays_dict: dict
    :param x: The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
-             These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+             These are converted to spatial and temporal weights per group with :param:`convert_x`.
    :type x: array
 
    .. attention::
 
       These basis vectors are already multiplied with the data, and are thus not the same
-      as the basis vectors in :py:class:`RaisedCosineBasis`.
+      as the basis vectors in :class:`RaisedCosineBasis`.
       Since dot product is commutative, the order of this multiplication does not matter.
 
    :returns: The weighted net input :math:`WNI(t)` of length ``n_trials``.

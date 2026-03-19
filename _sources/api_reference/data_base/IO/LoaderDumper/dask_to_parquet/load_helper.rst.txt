@@ -6,7 +6,7 @@ load_helper
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.dask_to_parquet.load_helper(savedir, n_partitions, partition, meta=None, columns=None)
+.. function:: data_base.IO.LoaderDumper.dask_to_parquet.load_helper(savedir, n_partitions, partition, meta=None, columns=None)
 
 
    Load a single partition of a dask dataframe from a parquet file

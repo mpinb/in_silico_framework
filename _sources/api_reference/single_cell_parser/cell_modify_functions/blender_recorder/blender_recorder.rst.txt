@@ -6,7 +6,7 @@ blender_recorder
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.cell_modify_functions.blender_recorder.blender_recorder(cell)
+.. function:: single_cell_parser.cell_modify_functions.blender_recorder.blender_recorder(cell)
 
 
 

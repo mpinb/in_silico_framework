@@ -6,15 +6,15 @@ get_meta_filename
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.meta.get_meta_filename(savedir, raise_=True)
+.. function:: data_base.IO.LoaderDumper.meta.get_meta_filename(savedir, raise_=True)
 
 
    Get the filename of the meta file in the savedir.
 
    :param savedir: The directory to look for the meta file.
    :type savedir: str
-   :param raise_: Whether to raise an error if no meta file is found. Defaults to True.
-   :type raise_: bool, optional
+   :param raise\_: Whether to raise an error if no meta file is found. Defaults to True.
+   :type raise\_: bool, optional
 
    :raises FileNotFoundError: If no meta file is found in the savedir.
 

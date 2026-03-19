@@ -1,0 +1,21 @@
+
+
+get_default_db_dumper
+=====================
+
+
+.. Signature -------------------------------
+
+.. function:: config.get_default_db_dumper()
+
+
+   Get the default database dumper.
+
+   :returns: The default database dumper.
+   :rtype: str
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

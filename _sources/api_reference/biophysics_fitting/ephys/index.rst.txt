@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~biophysics_fitting` ❭ 
 
 
@@ -46,11 +45,12 @@ ephys
    STEP_slow_ahp_depth </api_reference/biophysics_fitting/ephys/STEP_slow_ahp_depth>
    STEP_slow_ahp_time </api_reference/biophysics_fitting/ephys/STEP_slow_ahp_time>
 
-.. py:module:: biophysics_fitting.ephys
+.. module:: biophysics_fitting.ephys
 
 .. autoapi-nested-parse::
    The content of this module is mostly a reimplementation of the Hay et.al. 2011 methods used for extracting features.
    See :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011` for more information.
+
 
 
 
@@ -131,6 +131,24 @@ Functions
      - Computes the average depth of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
    * - :py:obj:`STEP_slow_ahp_time <biophysics_fitting.ephys.STEP_slow_ahp_time>`\ (t, v, thresh, time\_scale, start)
      - Calculates the time of the slow afterhyperpolarization (sAHP) of a voltage trace for a step stimulus.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`AP_width_check_1AP <biophysics_fitting.ephys.AP_width_check_1AP>`
+     - \-
+   * - :py:obj:`BAC_caSpike_width_check_1_Ca_AP <biophysics_fitting.ephys.BAC_caSpike_width_check_1_Ca_AP>`
+     - \-
+
 
 
 

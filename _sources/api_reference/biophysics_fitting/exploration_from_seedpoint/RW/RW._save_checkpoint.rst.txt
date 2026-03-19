@@ -1,0 +1,28 @@
+
+
+_save_checkpoint
+================
+
+
+.. Signature -------------------------------
+
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW.RW._save_checkpoint(iteration, out, op_dir)
+
+
+   Save the results saved in "out" to a pickle file.
+   Additionally, save the state of the random number generator.
+
+   :param iteration: current iteration number
+   :type iteration: int
+   :param out: list of dictionaries containing the evaluation results for each parameter vector
+   :type out: list
+   :param op_dir: directory where the results are saved
+   :type op_dir: str
+
+   :returns: None. Saves the results to a pickle file in the specified directory.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

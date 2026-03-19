@@ -32,7 +32,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.4cae3f01fd198a0b4.min.css?v=29f70320" />
+        <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_immaterial_theme.05dbe8238782c8a6f.min.css?v=2d5a597a" />
         <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
         <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css?v=4c969af8" />
         <link rel="stylesheet" type="text/css" href="../../../_static/sphinx_paramlinks.css" />
@@ -1090,6 +1090,21 @@
 
             
           
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanisms/index.html" class="md-nav__link">
+        <span title="/api_reference/mechanisms/index.rst (reference label)" class="md-ellipsis">mechanisms</span>
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1319,9 +1334,9 @@ as defined by their corresponding <a class="reference internal" href="../../../f
 <dl class="field-list simple">
 <dt class="field-odd" id="simrun.synaptic_strength_fitting.run_ex_synapses-parameters">Parameters<span class="colon">:</span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses-parameters" title="Permalink to this headline">¶</a></dt>
 <dd class="field-odd"><dl class="simple api-field highlight">
-<dt id="simrun.synaptic_strength_fitting.run_ex_synapses.neuron_param"><span class="sig-name descname">neuron_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format.">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.neuron_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
+<dt id="simrun.synaptic_strength_fitting.run_ex_synapses.neuron_param"><span class="sig-name descname">neuron_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.neuron_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#cell-parameters-format"><span class="std std-ref">Cell parameters</span></a>.</p>
 </dd>
-<dt id="simrun.synaptic_strength_fitting.run_ex_synapses.network_param"><span class="sig-name descname">network_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — NeuroTools Parameter Set format.">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.network_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a>.</p>
+<dt id="simrun.synaptic_strength_fitting.run_ex_synapses.network_param"><span class="sig-name descname">network_param</span><span class="p"> : </span><span class="desctype"><span class="desctype"><a class="reference internal" href="../../single_cell_parser/parameters/NTParameterSet.html#single_cell_parser.parameters.NTParameterSet" title="single_cell_parser.parameters.NTParameterSet (Python class) — Bases: collections.abc.MutableMapping">NTParameterSet</a></span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.network_param" title="Permalink to this definition">¶</a></dt><dd><p>The <a class="reference internal" href="../../../file_formats.html#network-parameters-format"><span class="std std-ref">Network parameters</span></a>.</p>
 </dd>
 <dt id="simrun.synaptic_strength_fitting.run_ex_synapses.celltype"><span class="sig-name descname">celltype</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.celltype" title="Permalink to this definition">¶</a></dt><dd><p>The celltype to activate the synapse for. Used to fetch the correct network parameters.</p>
 </dd>
@@ -1338,7 +1353,7 @@ as defined by their corresponding <a class="reference internal" href="../../../f
 <dt id="simrun.synaptic_strength_fitting.run_ex_synapses.tEnd"><span class="sig-name descname">tEnd</span><span class="p"> : </span><span class="desctype"><span class="desctype">float</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.tEnd" title="Permalink to this definition">¶</a></dt><dd><p>The end time of the simulation. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd>
 <dt id="simrun.synaptic_strength_fitting.run_ex_synapses.mode"><span class="sig-name descname">mode</span><span class="p"> : </span><span class="desctype"><span class="desctype">str</span></span><a class="headerlink" href="#simrun.synaptic_strength_fitting.run_ex_synapses.mode" title="Permalink to this definition">¶</a></dt><dd><p>Whether to activate each synapse one by one, or each cell one by one.
-A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Cell object providing API to the NEURON hoc interface."><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
+A presynaptic cell may have multiple synaptic connections with the neuron model (i.e. the <a class="reference internal" href="../../single_cell_parser/cell/Cell.html#single_cell_parser.cell.Cell" title="single_cell_parser.cell.Cell (Python class) — Bases: object"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cell</span></code></a>).
 Options: <code class="docutils literal notranslate"><span class="pre">('cells',</span> <span class="pre">'synapses')</span></code></p>
 </dd>
 </dl>

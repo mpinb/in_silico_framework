@@ -6,7 +6,7 @@ convertible_to_int
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.utils.convertible_to_int(x)
+.. function:: data_base.utils.convertible_to_int(x)
 
 
    Returns True if x can be converted to an integer, False otherwise

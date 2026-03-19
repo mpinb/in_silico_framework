@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~data_base` ❭ :mod:`~data_base.db_initializers` ❭ :mod:`~data_base.db_initializers.load_simrun_general` ❭ 
 
 
@@ -21,7 +20,8 @@ health
    _check_neup_has_working_refs </api_reference/data_base/db_initializers/load_simrun_general/health/_check_neup_has_working_refs>
    _check_param_files_have_working_refs </api_reference/data_base/db_initializers/load_simrun_general/health/_check_param_files_have_working_refs>
 
-.. py:module:: data_base.db_initializers.load_simrun_general.health
+.. module:: data_base.db_initializers.load_simrun_general.health
+
 
 
 
@@ -40,6 +40,8 @@ Functions
      - \-
    * - :py:obj:`check_is_simresult_dir_healthy <data_base.db_initializers.load_simrun_general.health.check_is_simresult_dir_healthy>`\ (sim\_result\_dir)
      - \-
+
+
 
 
 

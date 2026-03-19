@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -14,10 +13,11 @@ seed_manager
 
    get_seed </api_reference/simrun/seed_manager/get_seed>
 
-.. py:module:: simrun.seed_manager
+.. module:: simrun.seed_manager
 
 .. autoapi-nested-parse::
    Get a random seed
+
 
 
 
@@ -34,6 +34,22 @@ Functions
    
    * - :py:obj:`get_seed <simrun.seed_manager.get_seed>`\ (recursion\_depth)
      - Get a random seed.
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`path <simrun.seed_manager.path>`
+     - \-
+
 
 
 

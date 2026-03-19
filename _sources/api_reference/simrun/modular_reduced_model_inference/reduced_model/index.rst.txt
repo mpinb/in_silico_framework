@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ :mod:`~simrun.modular_reduced_model_inference` ❭ 
 
 
@@ -17,20 +16,21 @@ reduced_model
    DataSplitEvaluation </api_reference/simrun/modular_reduced_model_inference/reduced_model/DataSplitEvaluation>
    get_n_workers_per_ip </api_reference/simrun/modular_reduced_model_inference/reduced_model/get_n_workers_per_ip>
 
-.. py:module:: simrun.modular_reduced_model_inference.reduced_model
+.. module:: simrun.modular_reduced_model_inference.reduced_model
 
 .. autoapi-nested-parse::
    Construct reduced models and run optimization.
 
    This module provides a top-level class to run reduced model inference.
    Each reduced model contains:
-   - a :py:class:~`DataView` object to access data
-   - a :py:class:`DataSplitEvaluation` object to split data and evaluate the optimization results
-   - one or more :py:class:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor` objects to preprocess the data
-   - one or more :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` objects to run the optimization.
+   - a :class:~`DataView` object to access data
+   - a :class:`DataSplitEvaluation` object to split data and evaluate the optimization results
+   - one or more :class:`~simrun.modular_reduced_model_inference.data_extractor.DataExtractor` objects to preprocess the data
+   - one or more :class:`~simrun.modular_reduced_model_inference.strategy._Strategy` objects to run the optimization.
 
    The optimization run optimizes a set of free parameters :math:`\mathbf{x}` to minimize a cost function.
-   Both the cost function and the free parameters are defined in the :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+   Both the cost function and the free parameters are defined in the :class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+
 
 
 .. rst-class:: absolute-paragraph
@@ -65,6 +65,22 @@ Functions
    
    * - :py:obj:`get_n_workers_per_ip <simrun.modular_reduced_model_inference.reduced_model.get_n_workers_per_ip>`\ (workers, n)
      - Convenience method to get a certain amount of workers per machine
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <simrun.modular_reduced_model_inference.reduced_model.logger>`
+     - \-
+
 
 
 

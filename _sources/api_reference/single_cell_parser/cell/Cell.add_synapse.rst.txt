@@ -1,16 +1,15 @@
 
 
+add_synapse
+===========
 
 
+.. Signature -------------------------------
 
-Cell.add_synapse
-================
-
-
-.. py:method:: single_cell_parser.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
+.. function:: single_cell_parser.cell.Cell.add_synapse(secID, ptID, ptx, preType='Generic', postType='Generic')
 
 
-   Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell object.
+   Add a :class:`~single_cell_parser.synapse.Synapse` to the cell object.
 
    :param secID: The section ID of the synapse location.
    :type secID: int
@@ -24,7 +23,7 @@ Cell.add_synapse
    :type postType: str, optional
 
    :returns: The newly created synapse.
-   :rtype: :py:class:`~single_cell_parser.synapse.Synapse`
+   :rtype: :class:`~single_cell_parser.synapse.Synapse`
 
 
 

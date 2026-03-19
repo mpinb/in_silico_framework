@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ :mod:`~single_cell_parser.network_modify_functions` ❭ 
 
 
@@ -14,13 +13,14 @@ silence_synapses_by_somadist_and_spike_source
 
    silence_synapses_by_somadist_and_spike_source </api_reference/single_cell_parser/network_modify_functions/silence_synapses_by_somadist_and_spike_source/silence_synapses_by_somadist_and_spike_source>
 
-.. py:module:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source
+.. module:: single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source
 
 .. autoapi-nested-parse::
    Modify network activity by silencing synapses based on soma distance and spike source.
 
-   These functions can be used in e.g. :py:mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
+   These functions can be used in e.g. :mod:`simrun.rerun_db` to re-simulate a network with modified activity patterns,
    silencing synapses based on their postsynaptic location, or synapse type (i.e. spike source).
+
 
 
 
@@ -36,7 +36,23 @@ Functions
    :class: summarytable
    
    * - :py:obj:`silence_synapses_by_somadist_and_spike_source <single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.silence_synapses_by_somadist_and_spike_source>`\ (cell, evokedNW, soma\_dist\_ranges, spike\_sources)
-     - Silences synapse activation at a :paramref:`soma_dist_ranges`,
+     - Silences synapse activation at a :param:`soma_dist_ranges`,
+
+
+.. rst-class:: absolute-paragraph
+
+Attributes
+----------
+
+
+.. list-table:: 
+   :header-rows: 0
+   :widths: auto
+   :class: summarytable
+   
+   * - :py:obj:`logger <single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source.logger>`
+     - \-
+
 
 
 

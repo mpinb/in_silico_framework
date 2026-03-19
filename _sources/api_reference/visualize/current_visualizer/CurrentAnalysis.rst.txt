@@ -22,10 +22,9 @@ CurrentAnalysis
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: visualize.current_visualizer.CurrentAnalysis(cell_or_dict=None, secID='bifurcation', segID=-1, rangeVars=None, colormap=None, tVec=None)
+.. class:: visualize.current_visualizer.CurrentAnalysis(cell_or_dict=None, secID='bifurcation', segID=-1, rangeVars=None, colormap=None, tVec=None)
    
    Plot the individual ion currents and the net current of a cell simulation.
 
@@ -33,8 +32,8 @@ CurrentAnalysis
 
    Initialize the CurrentAnalysis object.
 
-   :param cell_or_dict: The cell object, or a dictionary containing equivalent simulation data.
-   :type cell_or_dict: dict or Cell
+   :param cell_or_dict: The cell object, or a dictionary containing equivalent data.
+   :type cell_or_dict: ~single_cell_parser.cell.Cell
    :param secID: The index of the section. Default is 'bifurcation'.
    :type secID: int
    :param segID: The index of the segment. Default is -1.
@@ -43,7 +42,7 @@ CurrentAnalysis
    :type rangeVars: list
    :param colormap: The colormap for the ion currents. Default is ``None``.
    :type colormap: dict
-   :param tVec: The time vector. Default is ``None``. Only necessary if :paramref:`cell_or_dict` is a dictionary.
+   :param tVec: The time vector. Default is ``None``. Only necessary if :param:`cell_or_dict` is a dictionary.
    :type tVec: list
 
    :Attributes:
@@ -56,9 +55,9 @@ CurrentAnalysis
 
       .. attribute:: cell
 
-         The cell object, or a dictionary containing equivalent simulation data.
+         The cell object, or a dictionary containing equivalent data.
 
-         :type: :py:class:`~single_cell_parser.cell.Cell` | dict
+         :type: :class:`~single_cell_parser.cell.Cell` | dict
 
       .. attribute:: t
 

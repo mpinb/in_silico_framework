@@ -27,20 +27,21 @@ _Strategy
 .. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
 .. fetch attributes and docstring from class docstring
 .. fetch arguments from __init__ or __new__ docstring
-
 .. class signature --------------------------------------------------------------
 
-.. py:class:: simrun.modular_reduced_model_inference.strategy._Strategy(name)
+.. class:: simrun.modular_reduced_model_inference.strategy._Strategy(name)
+
+   Bases: :py:obj:`object`
    
    Strategy base class.
 
    This class is used to define a strategy for the optimizer. Each strategy sets up all necessary components
-   to define a single cost function :py:meth:`get_score`.
-   This cost function is used by a :py:mod:`simrun.modular_reduced_model_inference.solver`
+   to define a single cost function :func:`get_score`.
+   This cost function is used by a :mod:`simrun.modular_reduced_model_inference.solver`
    to optimize the parameters of the strategy.
 
    Each child class must implement a ``_get_score`` class method.
-   These are used here to construct :py:meth:`~simrun.modular_reduced_model_inference._Strategy.get_score`.
+   These are used here to construct :func:`~simrun.modular_reduced_model_inference._Strategy.get_score`.
    It is this `get_score` method that is optimized during optimization.
 
    As a function of the parameters, compute a value for each trial.

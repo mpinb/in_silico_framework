@@ -6,7 +6,7 @@ resolve_netp_reldb_paths
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.dbopen.resolve_netp_reldb_paths(netp, db_basedir)
+.. function:: data_base.dbopen.resolve_netp_reldb_paths(netp, db_basedir)
 
 
    Convert all relative database paths in a :ref:`network_parameters_format` file to absolute paths.
@@ -17,7 +17,7 @@ resolve_netp_reldb_paths
    :type db_basedir: str
 
    :returns: The modified network parameter set, with absolute paths.
-   :rtype: :py:class:`~single_cell_parser.parameters.NTParameterSet`
+   :rtype: :class:`~single_cell_parser.parameters.NTParameterSet`
 
 
 

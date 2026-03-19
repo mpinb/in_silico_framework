@@ -1,13 +1,12 @@
 
 
+get_voxel_center
+================
 
 
+.. Signature -------------------------------
 
-ScalarField.get_voxel_center
-============================
-
-
-.. py:method:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_center(ijk)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField.get_voxel_center(ijk)
 
 
    Fetch the center of the voxel given by indices i,j,k.

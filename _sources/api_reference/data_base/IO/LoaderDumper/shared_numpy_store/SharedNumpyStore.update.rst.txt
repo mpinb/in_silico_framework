@@ -1,13 +1,12 @@
 
 
+update
+======
 
 
+.. Signature -------------------------------
 
-SharedNumpyStore.update
-=======================
-
-
-.. py:method:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.update()
+.. function:: data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore.update()
 
 
    Update the list of files in the working directory.

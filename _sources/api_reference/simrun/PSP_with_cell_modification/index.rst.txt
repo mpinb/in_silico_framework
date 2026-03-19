@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~simrun` ❭ 
 
 
@@ -15,7 +14,7 @@ PSP_with_cell_modification
    PSP_with_current_injection </api_reference/simrun/PSP_with_cell_modification/PSP_with_current_injection>
    combine_PSP_objects </api_reference/simrun/PSP_with_cell_modification/combine_PSP_objects>
 
-.. py:module:: simrun.PSP_with_cell_modification
+.. module:: simrun.PSP_with_cell_modification
 
 .. autoapi-nested-parse::
    Calculate PSPs depending on cell modifications.
@@ -25,6 +24,7 @@ PSP_with_cell_modification
    - A current injection into the soma, to ensure a certain resting potential
    - A coincident current injection triggering a burst, to investigate the effect of bursts on somatic integration of consecutive input
    - Synaptic input, to investigate the effect of one more synapse activation on top of such input to the somatic subthreshold potential
+
 
 
 .. rst-class:: absolute-paragraph
@@ -55,6 +55,8 @@ Functions
    
    * - :py:obj:`combine_PSP_objects <simrun.PSP_with_cell_modification.combine_PSP_objects>`\ (PSPexc, PSPinh)
      - Combine two PSPs objects into one.
+
+
 
 
 

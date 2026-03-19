@@ -1,5 +1,4 @@
 
-
 |home-icon-link| ❭ :ref:`api_reference` ❭ :mod:`~single_cell_parser` ❭ 
 
 
@@ -16,12 +15,13 @@ network_modify_functions
    silence_synapses_by_somadist_and_spike_source </api_reference/single_cell_parser/network_modify_functions/silence_synapses_by_somadist_and_spike_source/index>  
    get </api_reference/single_cell_parser/network_modify_functions/get>
 
-.. py:module:: single_cell_parser.network_modify_functions
+.. module:: single_cell_parser.network_modify_functions
 
 .. autoapi-nested-parse::
    Modify the cell and/or network after both have been initalized.
 
    Such a function can for example be used to deactivate specific synapses at a soma distance.
+
 
 
 
@@ -40,6 +40,7 @@ Functions
      - Get the function with the given name.
 
 
+
 .. rst-class:: absolute-paragraph
 
 Modules
@@ -55,6 +56,7 @@ Modules
      - Modify network activity by silencing synapses based on soma distance.
    * - :py:obj:`silence_synapses_by_somadist_and_spike_source <single_cell_parser.network_modify_functions.silence_synapses_by_somadist_and_spike_source>`
      - Modify network activity by silencing synapses based on soma distance and spike source.
+
 
 
 .. container:: doc-feedback

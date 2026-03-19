@@ -6,7 +6,7 @@ robust_read_pickle
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.robust_read_pickle(path)
+.. function:: biophysics_fitting.exploration_from_seedpoint.RW_analysis.robust_read_pickle(path)
 
 
    Read a pickled dataframe. If it cannot be read, still return a dataframe, containing an error as content.

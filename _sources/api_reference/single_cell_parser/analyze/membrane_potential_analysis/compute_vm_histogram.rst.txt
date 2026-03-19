@@ -6,7 +6,7 @@ compute_vm_histogram
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram(vTraces, bins=None)
+.. function:: single_cell_parser.analyze.membrane_potential_analysis.compute_vm_histogram(vTraces, bins=None)
 
 
    Compute the histogram of membrane voltage traces.

@@ -6,7 +6,7 @@ get_neuron_param_file
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.db_initializers.prepare_ANN_batches.get_neuron_param_file(db)
+.. function:: data_base.db_initializers.prepare_ANN_batches.get_neuron_param_file(db)
 
 
    Get the path to the :ref:`cell_parameters_format` file from a simrun-initialized database.

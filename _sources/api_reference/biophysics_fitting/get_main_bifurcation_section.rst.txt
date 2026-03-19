@@ -6,7 +6,7 @@ get_main_bifurcation_section
 
 .. Signature -------------------------------
 
-.. py:function:: biophysics_fitting.get_main_bifurcation_section(cell)
+.. function:: biophysics_fitting.get_main_bifurcation_section(cell)
 
 
    Find the main bifurcation of a cell.
@@ -16,14 +16,11 @@ get_main_bifurcation_section
 
    :param cell: The Cell object for which to find the main bifurcation section.
    :type cell: ~single_cell_parser.cell.Cell
-   :param assert_unique: whether or not to check if this section is unique in the morphology.
-                         Default: True
-   :type assert_unique: bool, optional
 
    :raises AssertionError: If there are multiple sections who are both inner, and have branching depth 1. This means that there is no "main" bifurcation in the morphology.
 
    :returns: The unique section that contains the main bifurcation.
-   :rtype: :py:class:`~single_cell_parser.cell.PySection`
+   :rtype: :class:`~single_cell_parser.cell.PySection`
 
 
 

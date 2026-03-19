@@ -6,7 +6,7 @@ tar_folder
 
 .. Signature -------------------------------
 
-.. py:function:: simrun.utils.tar_folder(source_dir, delete_folder=True)
+.. function:: simrun.utils.tar_folder(source_dir, delete_folder=True)
 
 
    Compress a folder to ``.tar`` format.

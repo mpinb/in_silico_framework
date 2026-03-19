@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_bursts.setup
-======================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_bursts.setup(spike_times_analysis)
+.. function:: spike_analysis.core.STAPlugin_bursts.setup(spike_times_analysis)
 
 
    Sets up the analysis: Detects high frequency events (doublet, triplet, ...) that occur within a timewindow.

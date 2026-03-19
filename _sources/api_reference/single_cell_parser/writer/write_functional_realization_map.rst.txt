@@ -6,7 +6,7 @@ write_functional_realization_map
 
 .. Signature -------------------------------
 
-.. py:function:: single_cell_parser.writer.write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None)
+.. function:: single_cell_parser.writer.write_functional_realization_map(fname=None, functionalMap=None, anatomicalID=None)
 
 
    Write out a :ref:`con_file_format` file.
@@ -17,7 +17,7 @@ write_functional_realization_map
    See also:
 
    - :ref:`con_file_format` for more information on the `.con` file format.
-   - :py:meth:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
+   - :func:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
 
    :param fname: The name of the file to write to.
    :type fname: str

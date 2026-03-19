@@ -6,12 +6,12 @@ write_cell_synapse_locations
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
+.. function:: singlecell_input_mapper.singlecell_input_mapper.writer.write_cell_synapse_locations(fname=None, synapses=None, cellID=None)
 
 
    Write a :ref:`syn_file_format` file, containing all synapses and their corresponding cellID, sectionID and x.
 
-   The locations of each synapse are coded by section ID and section x of cell with ID :paramref:`cellID`.
+   The locations of each synapse are coded by section ID and section x of cell with ID :param:`cellID`.
 
    :param fname: Name of the output file. May or may not contain the suffix `.syn` or `.SYN`
    :type fname: str

@@ -1,13 +1,12 @@
 
 
+_add_synapse
+============
 
 
+.. Signature -------------------------------
 
-_DendrogramSection._add_synapse
-===============================
-
-
-.. py:method:: visualize.dendrogram._DendrogramSection._add_synapse(label, x)
+.. function:: visualize.dendrogram._DendrogramSection._add_synapse(label, x)
 
 
    Add a synapse to a dendrogram section.

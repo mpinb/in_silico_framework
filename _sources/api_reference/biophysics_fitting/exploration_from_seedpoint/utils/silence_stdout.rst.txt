@@ -1,0 +1,27 @@
+
+
+
+silence_stdout
+==============
+
+
+.. setup: which children to show -------------------------------------------------
+
+
+.. parse out arguments and attributes from class, __init__ & __new__ docstring --------------------
+.. fetch attributes and docstring from class docstring
+.. fetch arguments from __init__ or __new__ docstring
+.. class signature --------------------------------------------------------------
+
+.. class:: biophysics_fitting.exploration_from_seedpoint.utils.silence_stdout(fun=None)
+   
+   Silence stdout
+
+   Can be used as context manager and decorator.
+
+   .. seealso:: https://stackoverflow.com/a/2829036/5082048
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

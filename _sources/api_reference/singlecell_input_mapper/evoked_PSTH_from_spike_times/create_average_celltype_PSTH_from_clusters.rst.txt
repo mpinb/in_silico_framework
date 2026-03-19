@@ -6,7 +6,7 @@ create_average_celltype_PSTH_from_clusters
 
 .. Signature -------------------------------
 
-.. py:function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName)
+.. function:: singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters(cellTypeFolder, outFileName)
 
 
    Loads cluster recording files and writes out the average ongoing activity for a given cell type.

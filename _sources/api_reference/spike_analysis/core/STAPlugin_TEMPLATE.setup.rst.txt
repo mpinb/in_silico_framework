@@ -1,13 +1,12 @@
 
 
+setup
+=====
 
 
+.. Signature -------------------------------
 
-STAPlugin_TEMPLATE.setup
-========================
-
-
-.. py:method:: spike_analysis.core.STAPlugin_TEMPLATE.setup()
+.. function:: spike_analysis.core.STAPlugin_TEMPLATE.setup()
 
    :abstractmethod:
 

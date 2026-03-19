@@ -6,7 +6,7 @@ dump
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.numpy_to_npy.dump(obj, savedir)
+.. function:: data_base.IO.LoaderDumper.numpy_to_npy.dump(obj, savedir)
 
 
    Save the numpy array in the specified directory

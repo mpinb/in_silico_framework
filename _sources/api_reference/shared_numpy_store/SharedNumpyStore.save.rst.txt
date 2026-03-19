@@ -1,0 +1,28 @@
+
+
+save
+====
+
+
+.. Signature -------------------------------
+
+.. function:: shared_numpy_store.SharedNumpyStore.save(arr, name)
+
+
+   Save a numpy array to disk at the working_dir of this instance of NumpyStore.
+
+   :param arr: The array to be saved.
+   :type arr: np.ndarray
+   :param name: The name of the array.
+   :type name: str
+
+   .. warning:: This method does not check if the array already exists in the store. If it does, it will be overwritten.
+
+   :raises AssertionError: If the name is reserved for a Database ``Loader``.
+   :raises AssertionError: If the name contains double underscores, which would throw off the NumpyStore convention.
+
+
+
+.. container:: doc-feedback
+
+   Documentation unclear, incomplete, broken or wrong? `Let us know <https://github.com/mpinb/in_silico_framework/issues/new?template=documentation.md&labels=docs>`_

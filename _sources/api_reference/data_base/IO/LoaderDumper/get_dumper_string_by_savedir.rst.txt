@@ -6,7 +6,7 @@ get_dumper_string_by_savedir
 
 .. Signature -------------------------------
 
-.. py:function:: data_base.IO.LoaderDumper.get_dumper_string_by_savedir(savedir)
+.. function:: data_base.IO.LoaderDumper.get_dumper_string_by_savedir(savedir)
 
 
    Get the dumper string from a filepath.
