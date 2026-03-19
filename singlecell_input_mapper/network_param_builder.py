@@ -116,13 +116,17 @@ class NetworkParamBuilder:
             assert os.path.exists(con_fn), "You did not pass a con_fn and I couldn't find it based on the .syn file. File does not exist: {}".format(con_fn)
         nr_cells = read_nr_connected_cells_from_con(con_fn)
 
-        for celltype_anarea, nr_cells_this_ct in nr_cells.items():
-            cell_type, anatomical_area = celltype_anarea.split("_")
-            if nr_cells_this_ct == 0 and not self.write_all_celltypes: continue
-            cell_type_name_full = cell_type + '_' + anatomical_area
+        mark_celltype_for_deletion = []
+        for celltype in self.network_parameters.network.keys():
+            if not celltype in nr_cells:
+                if not self.write_all_celltypes:
+                    mark_celltype_for_deletion.append(celltype)
+                    continue
+            nr_cells_this_ct = int(nr_cells.get(celltype, 0))
+            
             self.network_parameters.network.update(
                 other=NTParameterSet({
-                    cell_type_name_full: {
+                    celltype: {
                         "cellNr": nr_cells_this_ct,
                         "synapses": {
                             "distributionFile": syn_fn,
@@ -131,6 +135,9 @@ class NetworkParamBuilder:
                     }
                 })
                 )
+
+        for ct in mark_celltype_for_deletion:
+            self.network_parameters.network.pop(ct)
 
         return self
 
