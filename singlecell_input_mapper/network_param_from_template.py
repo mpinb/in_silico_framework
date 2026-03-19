@@ -39,11 +39,51 @@ def build_network_param_from_template(
 ) -> NTParameterSet:
     """Build :ref:`network_parameters_format` from a template.
 
+    A :ref:`network_parameters_format` template is a partially built :ref:`network_parameters_format` object that already contains info on:
+
+    - Synapse dynamics per cell type
+    - Ongoing activity per cell type
+    - Any additional preconfigured activity parameters (e.g. "offset")
+
+    It is assumed that the cell types in the template have no subcategorization per anatomical area.
+    It is also asusmed that the network embedding and activity information **does** have cell types defined per anatomical area, separated by an underscore.
+
+    Example::
+
+        >>> template.network.keys()
+        ['type1', 'type2', ...]
+        >>> netp = build_network_param_from_template(template, ...)
+        >>> netp.keys()
+        ['type1_area1' ... 'type2_area4' ...]
+
+    Args:
+        template_fn (str | :class:`pathlib.Path`): The name of the template file. If not given, defaults to the one configured in the user settings. Default: None (user settings fallback).
+        syn_fn (str | :class:`pathlib.Path`): The name or Path to a :ref:`syn_file_format` file.
+        con_fn (str | :class:`pathlib.Path`): The name or Path to a :ref:`con_file_format` file.
+        activity_per_ct (dict | :class:`~single_cell_parser.parameters.NTParameterSet` | str): 
+            Mapping between cell types and their corresponding activity data. Can e.g. be read from a :ref:`activity_data_format` file.
+            If this is a string instead, it is interpreted as a globstring, and I look for activity data files in :param:`activity_data_dir`.
+        activity_data_dir (str | :class:`pathlib.Path`):
+            Directory containing :ref:`activity_data_format`. If not given, defaults to the one configured in the user settings. Default: None (user settings fallback).
+        out_fn (str): Where to save the :ref:`network_parameters_format` to. Default: None (don't save).
+        write_all_celltypes (bool): Whether to write out information of celltypes, even if they are not connected. Default: False.
+        additional_activity_params (:class:`~single_cell_parser.parameters.NTParameterSet`):
+            Additional network parameters to add.
+
+    Returns:
+        :class:`~single_cell_parser.parameters.NTParameterSet`: The :ref:`network_parameters_format`.
+
+
+    .. deprecated 0.6.0::
+       The :param:`cell_nr_fn` is deprecated and no longer needed. It may be removed in a future version.
     """
 
     if template_fn == None:
         logger.info(f"No network parameter template passed. Falling back to the default: {NETWORK_PARAM_TEMPLATE_FN}")    
         template_fn = NETWORK_PARAM_TEMPLATE_FN
+
+    if cell_nr_fn is not None:
+        logger.warning("The cell number filename is no longer needed, as all relevant info exists in the .con file Cell ID.")
 
     if activity_per_ct == None:
         logger.info(f"No network parameter template passed. Falling back to the default: {NETWORK_PARAM_TEMPLATE_FN}")    
