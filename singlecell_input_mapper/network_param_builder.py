@@ -1,9 +1,24 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Builder object for :ref:`network_parameters_format`.
+"""
 from __future__ import annotations # so I can typehing the class lazily
 from logging import Logger
 from typing_extensions import Self
 from typing import Any, Iterable, Dict
 from collections.abc import Mapping
-
 
 from single_cell_parser.parameters import NTParameterSet
 from single_cell_parser.parameters import build_parameters
@@ -35,11 +50,12 @@ class NetworkParamBuilder:
     - Network embedding data (locations of synapses on the dendrite and their presynaptic origin, i.e. :ref:`syn_file_format` and :ref:`con_file_format` files)
     - Activity data (i.e. when does each presynaptic cell activate)
     - Synapse dynamics
+    - Any relevant additional information, such as a stimulus "offset"
 
 
     Example::
 
-        netp = NetworkParamBuilder(
+        netpb = NetworkParamBuilder(
         ).add_ongoing_activity(
             ongoing_interval_per_ct = celltype_to_ongoing_map
         ).add_synapse_dynamics(
@@ -90,6 +106,13 @@ class NetworkParamBuilder:
 
 
     def _generate_param_info(self):
+        """Generate basic info for the :ref:`network_parameters_format`
+
+        The info includes:
+
+        - The creation date
+        - The name of the user
+        """
         from datetime import datetime
         import getpass
         return {
@@ -305,6 +328,11 @@ class NetworkParamBuilder:
         return self
 
     def _convert_flat_to_nested_ongoing_activity(self, celltype):
+        """Convert flat ongoing activity to a nested format.
+
+        Args:
+            celltype (str): Which celltype to convert ongoing activity for.
+        """
         interval = self.network_parameters.network[celltype].pop("interval")
         self.network_parameters.network[celltype].celltype = {
             'spiketrain': {

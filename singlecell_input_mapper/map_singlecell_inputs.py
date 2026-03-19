@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Map synapses onto a postsynaptic cell.
+"""Top-level pipeline to map synapses onto a postsynaptic cell.
 
 This module provides a full pipeline for creating dense connectome models
 of the rat barrel cortex, based on methods and data presented in 
