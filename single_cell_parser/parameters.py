@@ -226,7 +226,7 @@ class NTParameterSet(MutableMapping):
         Args:
             filename (str): The path to the file where the parameters will be saved.
         """
-        indent = kwargs.pop("indent", 4)
+        indent = kwargs.pop("indent", 2)  # default indent of 2
         with open(file=filename, mode='w') as f:
             json.dump(obj=self.as_dict(), fp=f, cls=CompactListEncoder, indent=indent, **kwargs)
 
