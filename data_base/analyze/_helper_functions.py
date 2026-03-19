@@ -50,11 +50,11 @@ def time_list_from_pd(df):
         array([ 7,  8,  9, 10, 11, 12, 13, 14, 15])
         
     Args:
-        df (:py:class:`~pandas.DataFrame`): 
+        df (:class:`~pandas.DataFrame`): 
             Dataframe to extract values from. Normally a :ref:`spike_times_format` or :ref:`syn_activation_format` simrun-initialized dataframe.
             
     Returns:
-        :py:class:`~numpy.array`: 
+        :class:`~numpy.array`: 
             A 1D array of all values in columns that can be converted to int without NaN.
     
     '''

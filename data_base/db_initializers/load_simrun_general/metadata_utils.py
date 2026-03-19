@@ -17,10 +17,10 @@ def get_voltage_traces_divisions_by_metadata(db, repartition=None):
     If one wants to have one simulation directory per partition, this is a convenient way to infer partitions.
 
     Args:
-        metadata (pd.DataFrame): Metadata dataframe containing the simulation trial indices.
+        db (:class:`data_base.DataBase`): A :class:`data_base.DataBase` containing the ``"metadata"`` key.
         repartition (bool|int): 
             If ``int``, the voltage trace dataframes will be partitioned to be of this length (approximately).
-            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :py:attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
+            If ``True``, the votlage trace dataframes will be partitioned to be of a default length: :attr:`~data_base.db_initializers.load_simrun_general.DEFAULT_VT_PARTITION_SIZE`
             If ``False``, the voltage trace dataframe will not be repartitioned, and the dask dataframe will be one ``.csv`` file per partition.
 
     Returns:
@@ -45,7 +45,7 @@ def create_metadata_parallelization_helper(sim_trial_index, simresult_path):
 
     See also:
         This is used in
-        :py:meth:`~data_base.db_initializers.load_simrun_general.create_metadata`.
+        :func:`~data_base.db_initializers.load_simrun_general.create_metadata`.
 
     Args:
         sim_trial_index (pd.Series): A pandas series containing the sim_trial_index.
@@ -173,7 +173,7 @@ def create_metadata(db):
     - ``simresult_path`` Path to the simulation results folder.
 
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The target database that should contain the parsed simulation results.
 
     Returns:

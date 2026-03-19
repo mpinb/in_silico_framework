@@ -1,10 +1,11 @@
 """Central configuration for simrun-initializing databases.
 
-This config section contains configuration options for :py:func:`~data_base.db_initializers.load_simrun_general.init` beyond the keyword arguments.
+This config section contains configuration options for :func:`~data_base.db_initializers.load_simrun_general.init` beyond the keyword arguments.
 This typically includes configuration options you would normally not change from one database initialization to the next, but rather on a user-based long-term level.
-They are configured separately here to keep the options in :py:func:`~data_base.db_initializers.load_simrun_general.init` to a manageable level, 
+They are configured separately here to keep the options in :func:`~data_base.db_initializers.load_simrun_general.init` to a manageable level, 
 and to avoid bombarding the user with config options they may not be interested in.
 """
+
 from data_base.IO.LoaderDumper import (
     # dask_to_parquet,
     dask_to_msgpack,
@@ -29,7 +30,7 @@ This is used for e.g. synapse and cell activations, where the cell types are oft
 # Re-optimization config
 DUMPERS_TO_REOPTIMIZE = ["pandas_to_parquet", "dask_to_parquet"]
 """List[str]: List of dumper names that will be re-optimized to the current optimized dumpers 
-during :py:mod:`data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db`."""
+during :mod:`data_base.db_initializers.load_simrun_general.reoptimize.reoptimize_db`."""
 
 # Dendritic voltage trace config
 USE_RECSITE_SHORT_NAME = True

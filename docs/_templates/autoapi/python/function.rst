@@ -12,7 +12,7 @@
 
 .. Signature -------------------------------
 
-.. py:function:: {{ obj.id }}({{ obj.args }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
+.. function:: {{ obj.id }}({{ obj.args }}){% if obj.return_annotation is not none %} -> {{ obj.return_annotation }}{% endif %}
 
    {% for (args, return_annotation) in obj.overloads %}
 

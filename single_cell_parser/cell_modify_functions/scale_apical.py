@@ -91,7 +91,7 @@ def scale_by_detailed_compartment(cell, **kwargs):
 
     Args:
         cell (:py:class:`~single_cell_parser.cell.Cell`): The cell to scale.
-        **kwargs (dict): Detailed lables with associated scaling factors.
+        kwargs (dict): Detailed lables with associated scaling factors.
 
     Returns:
         :py:class:`~single_cell_parser.cell.Cell`: The scaled cell.

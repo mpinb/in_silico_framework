@@ -14,6 +14,7 @@ API reference
    ./api_reference/singlecell_input_mapper/index
    ./api_reference/spike_analysis/index
    ./api_reference/visualize/index
+   ./api_reference/mechanisms/index
 
 .. autoapisummary::
 
@@ -25,3 +26,4 @@ API reference
    singlecell_input_mapper
    spike_analysis
    visualize
+   mechanisms

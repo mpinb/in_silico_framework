@@ -14,7 +14,7 @@
 # limitations under the License.
 """Read and write an object to the cloudpickle format.
 
-This is the default dumper for :py:class:`~data_base.DataBase` objects,
+This is the default dumper for :class:`~data_base.DataBase` objects,
 since they can save basically any Python object.
 """
 

@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This module provides the :py:class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
-The :py:class:`~biophysics_fitting.combiner.Combiner` class can be used to combine features computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+This module provides the :class:`~biophysics_fitting.combiner.Combiner` class and associated classes and functions.
+The :class:`~biophysics_fitting.combiner.Combiner` class can be used to combine features computed by an :class:`~biophysics_fitting.evaluator.Evaluator` object.
 '''
 
 __author__ = 'Arco Bast'
@@ -23,7 +23,7 @@ __date__ = '2018-11-08'
 
 class Combiner_Setup:
     """
-    Setup class for the :py:class:`~biophysics_fitting.combiner.Combiner` class.
+    Setup class for the :class:`~biophysics_fitting.combiner.Combiner` class.
     Keeps track of feature combinations and their names.
     """
     def __init__(self):
@@ -45,9 +45,9 @@ class Combiner_Setup:
 
 class Combiner:
     '''
-    This class can be used to combine features (usually) computed by an :py:class:`~biophysics_fitting.evaluator.Evaluator` object.
+    This class can be used to combine features (usually) computed by an :class:`~biophysics_fitting.evaluator.Evaluator` object.
     
-    For a :py:class:`~biophysics_fitting.simulator.Simulator` object `s`, an :py:class:`~biophysics_fitting.evaluator.Evaluator` object `e`, and a :py:class:`~biophysics_fitting.combiner.Combiner` object `c`, the typical usecase is:
+    For a :class:`~biophysics_fitting.simulator.Simulator` object `s`, an :class:`~biophysics_fitting.evaluator.Evaluator` object `e`, and a :class:`~biophysics_fitting.combiner.Combiner` object `c`, the typical usecase is:
     
         >>> voltage_traces_dict = s.run(params)
         >>> features = e.evaluate(voltage_traces_dict)
@@ -70,7 +70,7 @@ class Combiner:
         {'combination1': 2, 'combination2': 4}
     
     Attributes:
-        setup (:py:class:`~biophysics_fitting.combiner.Combiner_Setup`): A Combiner_Setup object that keeps track of the feature combinations.
+        setup (:class:`~biophysics_fitting.combiner.Combiner_Setup`): A Combiner_Setup object that keeps track of the feature combinations.
     '''
 
     def __init__(self):

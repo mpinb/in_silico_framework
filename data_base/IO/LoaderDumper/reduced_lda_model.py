@@ -18,7 +18,7 @@ During saving, the data undergoes the following changes:
 
 - Spike times and lda values are kept with an accuracy of :math:`.01`.
 - The index of the spike times is reset, i.e. the ``sim_trial_index`` is not kept.
-- The :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` attribute ``db_list``, which normally contains ``DataBase`` instances, 
+- The :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` attribute ``db_list``, which normally contains ``DataBase`` instances, 
   is replaced by a list of strings that only contain the unique_id of each database. 
   This prevents unpickling errors in case the ``DataBase`` has been removed.
 - Older versions of reduced models do not have the attribute `st`. 
@@ -66,13 +66,13 @@ def check(obj):
         obj (object): Object to be saved
         
     Returns:
-        bool: Whether the object is a :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
+        bool: Whether the object is a :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`
     """
     return isinstance(obj, ReducedLdaModel)
 
 
 class Loader(parent_classes.Loader):
-    """Loader for :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects"""
+    """Loader for :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects"""
     def get(self, savedir):
         """Load the reduced model from the specified folder"""
         db = DataBase(savedir)
@@ -101,7 +101,7 @@ def dump(obj, savedir):
     - ``Rm``: The reduced model.    
     
     Args:
-        obj (:py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`): Reduced model to be saved.
+        obj (:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel`): Reduced model to be saved.
         savedir (str): Directory where the reduced model should be stored.
     """
     db = DataBase(savedir)

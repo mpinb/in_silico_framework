@@ -16,14 +16,14 @@
 '''
 Analyze the results of single cell simulations and its network embeddings:
 
-- :py:mod:`membrane_potential_analysis`
+- :mod:`membrane_potential_analysis`
     - Post-synaptic time histograms (PSTHs)
     - Spike detection
     - Simple statistics of membrane voltage
-- :py:mod:`currents`
+- :mod:`currents`
     - Find time and voltage of max depolarisation
     - Compute currents in the soma
-- :py:mod:`synapse analysis`
+- :mod:`synapse analysis`
     - Activation times of synapses
     - intracellular distances
     - distances to synapses

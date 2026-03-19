@@ -26,10 +26,10 @@ Alternatively, this script can also be run directly from the command line using:
 Make sure you run this from within the ISF environment, so Python can find the ISF packages and dependencies.
 
 See also:
-    :py:func:`getting_started.generate_param_files_with_valid_references`
+    :func:`getting_started.generate_param_files_with_valid_references`
     
 See also:
-    :py:func:`mechanisms.l5pt.compile_l5pt_mechanisms`
+    :func:`mechanisms.l5pt.compile_l5pt_mechanisms`
 """
 import argparse
 

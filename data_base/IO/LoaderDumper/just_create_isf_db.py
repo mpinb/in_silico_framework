@@ -33,20 +33,20 @@ def check(obj):
 
 
 class Loader(parent_classes.Loader):
-    """Loader for :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects"""
+    """Loader for :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` objects"""
     def get(self, savedir, **kwargs):
         """Load the database from the specified folder.
         
         Args:
             savedir (str): Directory where the database is stored.
-            **kwargs: Additional keyword arguments. 
-                These are passed to the :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
+            kwargs: Additional keyword arguments. 
+                These are passed to the :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` constructor.
         """
         return ISFDataBase(os.path.join(savedir, 'db'), **kwargs)
 
 
 def dump(obj, savedir):
-    """Create a :py:class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :paramref:`savedir`
+    """Create a :class:`~data_base.isf_data_base.isf_data_base.ISFDataBase` object in the specified :param:`savedir`
     
     Args:
         obj (None, optional): No object is required. If an object is passed, it is ignored.

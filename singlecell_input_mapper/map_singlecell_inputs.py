@@ -43,7 +43,7 @@ Attention:
     If this is not the case, please consult ``installer/download_bc_model`` and extract,
     or adapt the paths in this file to your data.
 
-This module then uses :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
+This module then uses :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper`
 to assign synapses to a single post-synaptic cell morphology, based on the inputs mentioned above.
 This happens according to the following pipeline:
 
@@ -58,9 +58,9 @@ This happens according to the following pipeline:
    These are randomly placed onto the dendritic branch within that voxel. One such sample is called an "anatomical realization".
 6. (optional) Repeat steps 4 and 5 to create a collection of anatomical realizations. 
 
-Density meshes are accessed using :py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
-:py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of 
-:py:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
+Density meshes are accessed using :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`.
+:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseMapper` makes use of 
+:class:`~singlecell_input_mapper.singlecell_input_mapper.synapse_mapper.SynapseDensity` for steps 2, 3 and 4,
 and finalizes step 5 by itself.
 
 Outputs:
@@ -69,7 +69,7 @@ Outputs:
   and column of anatomical synapses
 - AmiraMesh landmark file containing 3D synapse locations of anatomical
   synapses of each presynaptic type and column
-- Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :py:mod:`simrun`.
+- Synapse location (:ref:`syn_file_format`) and connectivity (:ref:`con_file_format`) file compatible with :mod:`simrun`.
 """
 
 from __future__ import absolute_import
@@ -165,11 +165,11 @@ def map_singlecell_inputs(
         - For each anatomical area
         - For each presynaptic cell type
 
-    3. Creates a scalar field (:py:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
+    3. Creates a scalar field (:class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`)
        for each bouton density.
-    4. Creates a :py:class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
+    4. Creates a :class:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper` object.
     5. Creates a network embedding for the cell using
-       :py:meth:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
+       :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper.create_network_embedding`.
 
     The naming of each anatomical area needs to be consistent between:
 
@@ -197,7 +197,7 @@ def map_singlecell_inputs(
             anatomical_area/presynaptic_cell_type/\*.am
 
     Returns:
-        None. Writes the results to disk, at the same location as the input :paramref:`cellName`.
+        None. Writes the results to disk, at the same location as the input :param:`cellName`.
     """
     if not (cellTypeName in exTypes) and not (cellTypeName in inhTypes):
         errstr = "Unknown cell type %s!"

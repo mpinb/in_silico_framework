@@ -221,7 +221,7 @@ def shared_array_from_numpy(arr, name=None):
         
     Returns:
         tuple: 
-            A tuple containing the :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
+            A tuple containing the :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory`
             object and the shared memory array.
     '''
     shm = SharedMemory(create=True, size=arr.nbytes, name=name)
@@ -289,13 +289,13 @@ def shared_array_from_disk(
         dtype (str, optional): Data type of the array.
         name (str, optional): 
             Name of the shared memory block. 
-            To be passed to :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` 
+            To be passed to :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` 
             Default: None.
         start_row (int, optional): The starting row of the array. Default: None.
         end_row (int, optional): The ending row of the array. Default: None.
         
     Returns:
-        tuple: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+        tuple: The :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
     '''
     #_check_filesize_matches_shape(path, shape, dtype)
     start_row, end_row, bytes_offset, bytes_size, final_shape = _get_offset_and_size_in_bytes(
@@ -365,7 +365,7 @@ def shared_array_from_shared_mem_name(fname, shape=None, dtype=None):
         dtype (str, optional): Data type of the array. Default: None.
         
     Returns:
-        tuple: The :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
+        tuple: The :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedMemory` object and the shared memory array.
     '''
     shm = SharedMemory(name=fname)
     shm_arr = np.ndarray(shape, dtype, buffer=shm.buf)
@@ -538,9 +538,9 @@ class SharedNumpyStore:
         os.rename(full_path + '.saving', full_path)
 
     def flush(self):
-        """Rename all files according to the new names in :paramref:`_pending_renames`.
+        """Rename all files according to the new names in :param:`_pending_renames`.
         
-        Deletes the old files and updates the :paramref:`_files` dictionary.
+        Deletes the old files and updates the :param:`_files` dictionary.
         """
         with Uninterruptible():
             keys = list(self._pending_renames.keys())
@@ -563,7 +563,7 @@ class SharedNumpyStore:
 
     def append_save(self, arr, name, autoflush=True):
         """
-        Appends the given numpy array :paramref:`arr` to an existing array with the specified :paramref:`name`.
+        Appends the given numpy array :param:`arr` to an existing array with the specified :param:`name`.
         """
         assert name != 'Loader.pickle'  # reserved to model data base
         assert not '__' in name
@@ -635,12 +635,12 @@ class SharedNumpyStore:
             start_row (int): first row from the array to load
             end_row (int): last row of the array to load
             
-            Note: in shared_memory mode, for each call with different start_row or end_row parameters, a new independent 
-                file is created.
-        
         Returns:
             np.ndarray: the array
             
+        Note:
+           In shared_memory mode, for each call with different start_row or end_row parameters, a new independent file is created.
+        
         Raises:
             ValueError: if mode is not one of 'memmap', 'memory', or 'shared_memory'
             
@@ -722,7 +722,7 @@ def check(obj):
 
 
 class Loader(parent_classes.Loader):
-    """Loader for :py:class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
+    """Loader for :class:`~data_base.isf_data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` objects.
     """
     def get(self, savedir):
         """Load the shared numpy store from the specified folder."""
@@ -738,11 +738,11 @@ def dump(obj, savedir):
     
     Note:
         This method does not require the numpy arrays themselves.
-        Rather, it saves a :py:class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` object,
+        Rather, it saves a :class:`~data_base.isf_data_base.IO.LoaderDumper.shared_numpy_store.SharedNumpyStore` object,
         which can further be used to save and load numpy arrays to and from shared memory.
         
     See also:
-        :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npy` and :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npz`
+        :mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npy` and :mod:`~data_base.isf_data_base.IO.LoaderDumper.numpy.npz`
         for directly saving numpy arrays to disk (non-shared memory).
     """
     compatibility.cloudpickle_fun(Loader(),

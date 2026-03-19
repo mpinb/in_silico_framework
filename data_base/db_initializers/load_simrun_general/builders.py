@@ -1,4 +1,4 @@
-"""Pipelines for building database keys containing results from :py:mod:`simrun`.
+"""Pipelines for building database keys containing results from :mod:`simrun`.
 
 Note that all pipelines assume that the database ``core`` is built. This adds the essential
 information to the database that other builders need:
@@ -7,7 +7,7 @@ information to the database that other builders need:
 - ``simresult_path``: top-level directory from where all simulation results were fetched
 - ``filelist``: a list of voltage trace files, relative to the ``simresult_path``
 
-In addition, :py:meth:`_build_core` also builds the somatic voltage traces, assuming this data is
+In addition, :func:`_build_core` also builds the somatic voltage traces, assuming this data is
 always desirable.
 """
 import glob
@@ -54,19 +54,19 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
     or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
     :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
     
-    This function checks if this is the case, and filters out such results from :paramref:`filelist`
+    This function checks if this is the case, and filters out such results from :param:`filelist`
     
     Args:
         filelist (List): 
-            List of voltage trace results, relative to :paramref:`simresult_path`. 
+            List of voltage trace results, relative to :param:`simresult_path`. 
         simresult_path (str): Single path where all simulation results are stored.
-        client (:py:class:`distributed.client.Client`): A parallellization client.
+        client (:class:`distributed.client.Client`): A parallellization client.
 
     Returns:
         List: A filelist of reproducible simulation results.
         
     Raises:
-        ValueError: if no simulations in :paramref:`filelist` can be reproduced.
+        ValueError: if no simulations in :param:`filelist` can be reproduced.
     """
     sim_dirs = [os.path.join(simresult_path, os.path.dirname(f)) for f in filelist]
     is_healthy_mask = get_filter_healthy_simresult_dirs(sim_dirs, client=client)
@@ -85,7 +85,7 @@ def _build_core(
     check_health=False,
     client=None,
     ):
-    """Parse the essential simulation results and add it to :paramref:`db`.
+    """Parse the essential simulation results and add it to :param:`db`.
 
     The following data is parsed and added to the database:
 
@@ -98,21 +98,21 @@ def _build_core(
           - Amount of spikes
         * - APheight
           - AP height
-    * - ``voltage traces``
-      - Somatic voltage traces
-    * - ``metadata``
-      - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
-    * - ``sim_trial_index``
-      - Simulation trial indices containing unique identifiers, and run numbers
-    * - ``simresult_path``
-      - top-level directory from where all simulation results were fetched
-    * - ``filelist``
-      - a list of voltage trace files, relative to the ``simresult_path``
+        * - ``voltage traces``
+          - Somatic voltage traces
+        * - ``metadata``
+          - pd.pandas Series containing the path, trial number, and filenames of the voltage traces.
+        * - ``sim_trial_index``
+          - Simulation trial indices containing unique identifiers, and run numbers
+        * - ``simresult_path``
+          - top-level directory from where all simulation results were fetched
+        * - ``filelist``
+          - a list of voltage trace files, relative to the ``simresult_path``
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
-        metadata_dumper (function): Function to dump the metadata to disk. Default is :py:mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
+        metadata_dumper (function): Function to dump the metadata to disk. Default is :mod:`~data_base.isf_data_base.IO.LoaderDumper.pandas_to_msgpack`.
 
     Returns:
         None
@@ -171,7 +171,7 @@ def _build_synapse_activation(db, repartition=False, n_chunks=5000):
     ``synapse_activation`` and ``cell_activation`` respectively.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
         n_chunks (int): Number of chunks to split the data into. Default is 5000.
 
@@ -236,9 +236,7 @@ def _build_dendritic_voltage_traces(db, repartition=None):
     """Load dendritic voltage traces and add them to the database under the key ``dendritic_recordings``.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
-        suffix_dict (dict): Dictionary containing the suffixes of the dendritic voltage trace files.
-            Default is ``None``, and they are inferred from the cell parameter files.
+        db (:class:`~data_base.DataBase`): The database to which the data should be added.
         repartition (bool): If True, the dask dataframe is repartitioned to 5000 partitions (only if it contains over :math:`10000` entries).
 
     Returns:
@@ -249,40 +247,39 @@ def _build_dendritic_voltage_traces(db, repartition=None):
 
     # Construct dendritic filelist from existing filelist, as built by _build_core
     # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
-    suffix = "*vm_dend_traces*"
-    path_globs = [
-        os.path.join(
-            db['simresult_path'],
-            os.path.dirname(e),
-            suffix)
-        for e in db['filelist']
-    ]
-    filelist = [
-        path_glob_match 
-        for path_glob in path_globs 
-        for path_glob_match in glob.glob(path_glob)
+    # Careful: keep the file order in sync with divisions - bjorge
+    filelist = []
+    suffix = "vm_dend_traces"
+    for vt_file in db['filelist']:
+        folder = os.path.dirname(vt_file)
+        matches = glob.glob(os.path.join(db['simresult_path'], folder, f"*{suffix}*"))
+        matches = sorted(matches)
+        filelist.extend(matches)
+
+    relative_filelist = [
+        os.path.relpath(p, db['simresult_path'])
+        for p in filelist
     ]
 
     recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
     if USE_RECSITE_SHORT_NAME: recsite_labels = _get_recsite_ids_from_recsite_labels(recsite_labels)
-    
+
     logger.info("Loading dendritic voltage traces")
-    divisions = db["voltage_traces"].divisions 
+    divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
     dend_vt_per_recsite_label = load_dendritic_voltage_traces(
         db, 
-        filelist, 
+        relative_filelist, 
         recsite_labels, 
         repartition=repartition, 
         divisions=divisions)
     if not "dendritic_recordings" in list(db.keys()): 
         db.create_sub_db("dendritic_recordings")
+    # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
     for recSiteLabel in dend_vt_per_recsite_label:
         db["dendritic_recordings"].set(
             recSiteLabel, 
             dend_vt_per_recsite_label[recSiteLabel], 
             dumper=DEFAULT_DUMPER)
-        
-    # db.set('dendritic_voltage_traces_keys', out.keys(), dumper = DEFAULT_DUMPER)
 
 
 def _build_param_files(db, paramfile_copy_config=None, client=None):
@@ -293,12 +290,12 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     In the process, it renames each file to its hash and transforms the internal file references in the parameter files accordingly.
 
     Args:
-        db (:py:class:`~data_base.DataBase`):
+        db (:class:`~data_base.DataBase`):
             The database to which the parameterfiles should be added.
-        client (:py:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
+        client (:class:`~dask.distributed.client.Client`): The Dask client to use for parallel computation.
         paramfile_copy_config (dict, optional): 
             Dictionary containing configuration on how to organise parameterfiles in the database. 
-            See :py:func:`data_base.db_initializers.load_simrun_general.init` for more info.
+            See :func:`data_base.db_initializers.load_simrun_general.init` for more info.
 
     Returns:
         None. Sets the keys ``parameterfiles_cell_folder`` and ``parameterfiles_network_folder`` in the database.
@@ -308,7 +305,7 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
 
     Attention:
         This function assumes the database keys ``simresult_path`` and ``sim_trial_index`` already exist, which is likely
-        only true when used in the context of the :py:meth:`~data_base.db_initializers.load_simrun_general.init` function.
+        only true when used in the context of the :func:`~data_base.db_initializers.load_simrun_general.init` function.
     """
     assert paramfile_copy_config is not None
     logging.info("Moving parameter files")
@@ -332,7 +329,7 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     db.set("parameterfiles", param_file_hash_df, dumper=pandas_to_msgpack)
 
     # Copy and parameterfiles and adapt internal references
-    fn_map = parallel_resolve_and_copy_paramfiles_to_db(
+    source_to_target_fn_maps = parallel_resolve_and_copy_paramfiles_to_db(
         paramfile_hashmap_df=param_file_hash_df,
         db=db,
         paramfile_target_dirs=paramfile_target_dirs,
@@ -341,12 +338,10 @@ def _build_param_files(db, paramfile_copy_config=None, client=None):
     )
 
     logger.info("Updating parameter file locations under `parameterfiles` key")
-    # Dev note: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
-    # Dev note: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
-    neup_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['neup'].items()}
-    netp_hash_map = {_hash_file_content(fn): v for fn, v in fn_map['netp'].items()}
-    param_file_hash_df['path_neuron'] = param_file_hash_df['hash_neuron'].apply(neup_hash_map.get).apply(create_reldb_path)
-    param_file_hash_df['path_network'] = param_file_hash_df['hash_network'].apply(netp_hash_map.get).apply(create_reldb_path)
+    # Bjorge: this takes a little time. create_reldb_path() walks up until it finds a db, which is overhead that can be avoided
+    # Bjorge: and _hash_file_content() simply takes some minimal time. Maybe can be parallellized?
+    param_file_hash_df['path_neuron'] = param_file_hash_df['path_neuron'].apply(source_to_target_fn_maps['neup'].get).apply(create_reldb_path)
+    param_file_hash_df['path_network'] = param_file_hash_df['path_network'].apply(source_to_target_fn_maps['netp'].get).apply(create_reldb_path)
     db.set("parameterfiles", param_file_hash_df)
 
 
@@ -365,7 +360,7 @@ def _get_rec_site_label_fn_map(filelist):
     This is used for recording the membrane voltage at non-somatic locations.
 
     Args:
-        db (:py:class:`~data_base.DataBase`): The database to which the data should be added.
+        filelist (List[str]): List of dendritic :ref:`voltage_traces_format` files. May be relative to the simulation results directory or abslute paths.
 
     Returns:
         dict: Dictionary containing the recording sites. It maps the label of the recording site to the suffix of the dendritic voltage trace files.

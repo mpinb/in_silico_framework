@@ -61,8 +61,8 @@ def register_vcs_handler(vcs, method):  # decorator
     """Decorator to mark a method as the handler for a particular VCS.
     
     Tries to keep the metadata of the original method by using functools.wraps().
-    This breaks in Py2 if :paramref:method does not have a __module__ atrribute,
-    Which is the case if :paramref:method is e.g. a lambda function or string (see :py:meth:`git_get_keywords`).
+    This breaks in Py2 if :parammethod does not have a __module__ atrribute,
+    Which is the case if :parammethod is e.g. a lambda function or string (see :func:`git_get_keywords`).
     
     Example:
     
@@ -126,11 +126,11 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
     Source tarballs conventionally unpack into a directory that includes
     both the project name and a version string.
     """
+    
     dirname = os.path.basename(root)
     if not dirname.startswith(parentdir_prefix):
         if verbose:
-            print(("guessing rootdir is '{:s}', but '{:s}' doesn't start with "
-                   "prefix '{:s}'".format((root, dirname, parentdir_prefix))))
+            print("guessing rootdir is '{}', but '{}' doesn't start with prefix '{}'".format(root, dirname, parentdir_prefix))
         raise NotThisMethod("rootdir doesn't start with parentdir_prefix")
     return {
         "version": dirname[len(parentdir_prefix):],

@@ -24,7 +24,7 @@ def _save_object_meta_json(obj, savedir):
     The dtypes of the columns and index are saved as string in numpy format.
     
     See also:
-        :py:meth:`~data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str`
+        :func:`~data_base.IO.LoaderDumper.utils.get_numpy_dtype_as_str`
     
     Args:
         obj (dask.DataFrame | parquet.DataFrame): The object to save the meta of.
@@ -86,11 +86,11 @@ def save_object_meta(obj, savedir):
         
 
 def get_meta_filename(savedir, raise_=True):
-    """Get the filename of the meta file in the savedir.
+    r"""Get the filename of the meta file in the savedir.
     
     Args:
         savedir (str): The directory to look for the meta file.
-        raise_ (bool, optional): Whether to raise an error if no meta file is found. Defaults to True.
+        raise\_ (bool, optional): Whether to raise an error if no meta file is found. Defaults to True.
         
     Raises:
         FileNotFoundError: If no meta file is found in the savedir.
@@ -119,7 +119,7 @@ def _read_object_meta_json(meta_fn):
     """Get the meta of a saved database key in JSON.
     
     Args:
-        savedir (str): The directory where the meta file is stored.
+        meta_fn (str): The path of the meta file
         
     Returns:
         pd.DataFrame: The metadata of the saved object.
@@ -152,15 +152,15 @@ def _read_object_meta_json(meta_fn):
 
 
 def read_object_meta(savedir, raise_=True):
-    """Read the meta of a dask/parquet object.
+    r"""Read the meta of a dask/parquet object.
     
-    Assumes there is a meta file present in :paramref:`savedir` 
-    (see :py:meth:`get_meta_filename` for allowed formats).
+    Assumes there is a meta file present in :param:`savedir` 
+    (see :func:`get_meta_filename` for allowed formats).
     
     Args:
         savedir (str): directory where the file partitions and object meta are saved. 
             This corresponds to the database key filepath.
-        raise_ (bool, optional): Whether to raise an errror if the meta object is not found on disk.
+        raise\_ (bool, optional): Whether to raise an errror if the meta object is not found on disk.
 
     Returns:
         pd.DataFrame: A pandas dataframe representing the object meta: column names, column dtypes, index name and index dtype.

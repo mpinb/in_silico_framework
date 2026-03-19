@@ -44,7 +44,7 @@ def create_network_parameter(
     Args:
         templateParamName (str): 
             Name of the template param containing the PSTHs for each cell type. 
-            These can be generated from .cluster files of spike time recordings by e.g. :py:meth:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
+            These can be generated from .cluster files of spike time recordings by e.g. :func:`~singlecell_input_mapper.evoked_PSTH_from_spike_times.create_average_celltype_PSTH_from_clusters`.
         cellNumberFileName (str):
             Name of the file containing the amount of cells per column in the barrel cortex.
         synFileName (str): 

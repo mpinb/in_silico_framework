@@ -17,9 +17,9 @@
 
 Data extractors initialize from ReducedModel objects.
 Depending on the reduced model object, the data extractors fetch data from the database and return it in a structured way.
-These data extractors are specific to match a :py:class:`simrun.modular_reduced_model_inference.Strategy` object.
+These data extractors are specific to match a :class:`simrun.modular_reduced_model_inference.Strategy` object.
 For example, the spatiotemporal raised cosine strategy requires to bin the synapse activations spatiotemporally.
-This is then handled with the :py:class:`DataExtractor_spatiotemporalSynapseActivation` class.
+This is then handled with the :class:`DataExtractor_spatiotemporalSynapseActivation` class.
 """
 
 
@@ -43,7 +43,7 @@ class _DataExtractor(object):
         """Setup necessary parameters, depending on which RM is passed
         
         Args:
-            Rm (:py:class:`Rm`): Reduced model object
+            Rm (:class:`Rm`): Reduced model object
         """        
         pass
 
@@ -52,14 +52,14 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
     '''Extracts matrix of the shape ``(trial, time, space)`` from spatiotemporal synapse activation binning
     
     Attributes:
-        key (tuple|str): key to access the data in the :py:class:`DataBase`
+        key (tuple|str): key to access the data in the :class:`DataBase`
         data (dict): dictionary with groups as keys and spatiotemporal inputpatterns as keys.
     '''
 
     def __init__(self, key):
         """
         Args:
-            key (tuple|str): key to access the data in the :py:class:`DataBase`
+            key (tuple|str): key to access the data in the :class:`DataBase`
         """
         self.key = key
         self.data = None
@@ -71,7 +71,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         synaptse input data.
         
         Args:
-            Rm (:py:class:`Rm`): Reduced model object. Must have the atttributes ``db``, ``tmin``, ``tmax``, ``width``, and ``selected_indices``.
+            Rm (:class:`Rm`): Reduced model object. Must have the atttributes ``db``, ``tmin``, ``tmax``, ``width``, and ``selected_indices``.
         """
         self.db = Rm.db
         self.tmin = Rm.tmin
@@ -87,7 +87,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         '''Get the string index of the database key that relects the spatial dimension
         
         Args:
-            key (tuple): key to access the data in the :py:class:`DataBase`
+            key (tuple): key to access the data in the :class:`DataBase`
             
         Returns:
             int: index of the spatial dimension in the key
@@ -102,7 +102,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         return key[-1].split('__').index('binned_somadist')
 
     def get_spatial_binsize(self):
-        '''Get the spatial binsize
+        r'''Get the spatial binsize
         
         Fetches the spatial bin size from a grouped synapse activation dataframe based on the database key.
         
@@ -130,7 +130,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         level = self._get_spatial_bin_level(key)
         out = []
         for single_db in db:
-            for k in single_db[key].keys():
+            for k in single_db[key].keys(recurse=True):
                 k = list(k)
                 k.pop(level)
                 out.append(tuple(k))
@@ -146,7 +146,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
         key = self.key
         group = list(group)
         level = self._get_spatial_bin_level(key)
-        keys = db[key].keys()
+        keys = db[key].keys(recurse=True)
         keys = sorted(keys, key=lambda x: float(x[level].split('to')[0]))
         out = []
         for k in keys:
@@ -177,7 +177,7 @@ class DataExtractor_spatiotemporalSynapseActivation(_DataExtractor):
                 ]
             else:
                 out = [
-                    single_db[key][k][:, self.tmax - self.width:self.tmax]
+                    single_db[key][k][:, int(self.tmax - self.width):int(self.tmax)]
                     for k in keys
                 ]
             out = numpy.dstack(out)

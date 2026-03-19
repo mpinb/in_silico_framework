@@ -96,8 +96,8 @@ MODULES_TO_SKIP = [
     "**compatibility**",
     "**.pixi**",
     "**dendrite_thickness**",
-    "**mechanisms**",
-    "**config**",
+    # "**mechanisms**",
+    # "**config**",
     "**docs**",
     "**.ipynb_checkpoints**",
     "**download_google_fonts**"

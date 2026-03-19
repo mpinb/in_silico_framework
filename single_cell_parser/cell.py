@@ -16,10 +16,10 @@
 '''Cell objects for neuron models and cell activity.
 
 This module contains classes for representing cells in NEURON simulations.
-This includes :py:class:`Cell` and :py:class:`PySection` for neuron models, containing morphological and biophysical properties.
-It also includes the :py:class:`~single_cell_parser.PointCell` class for handling presynaptic cell activations.
+This includes :class:`Cell` and :class:`PySection` for neuron models, containing morphological and biophysical properties.
+It also includes the :class:`PointCell` class for handling presynaptic cell activations.
 The latter does not contain any morphological or biophysical properties, but handles the activation of presynaptic cells in a network.
-For neuron-network multiscale simulations, you should consult :py:mod:`simrun`.
+For neuron-network multiscale simulations, you should consult :mod:`simrun`.
 '''
 
 #from neuron import h, nrn
@@ -48,29 +48,29 @@ class Cell(object):
     
     This class contains the neuron cell morphology, biophysical parameters, and simulation data of single-cell simulations.
     The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
-    Its attributes are set by :py:class:`~single_cell_parser.cell_parser.CellParser`.
+    Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
     
     See also: 
-        This is not the same class as :py:class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
+        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
         This class concerns itself with providing API to NEURON, not with mapping input to the cell.
     
     Attributes: 
         hoc_path (str): Path to the hoc file containing the cell morphology.
         id (str | int, optional): ID of the cell (often unused).
-        soma (:py:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
-        tree (:py:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
-        branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:py:class:`neuron:SectionList`).
-        structures (Dict[:py:class:`~single_cell_parser.cell.PySection`]): 
+        soma (:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
+        tree (:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
+        branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:class:`neuron:SectionList`).
+        structures (Dict[:class:`~single_cell_parser.cell.PySection`]): 
             All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). 
-            Keys are labels (str), values are lists of :py:class:`~single_cell_parser.cell.PySection` objects.
-        sections (List[:py:class:`~single_cell_parser.cell.PySection`]): 
-            List of :py:class:`~single_cell_parser.cell.PySection` objects. 
+            Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
+        sections (List[:class:`~single_cell_parser.cell.PySection`]): 
+            List of :class:`~single_cell_parser.cell.PySection` objects. 
             First element is the soma. 
             Each section contains recorded data (if any was recorded, e.g. membrane voltage): a 2D array where axis 0 is segment number, and axis 1 is time.
-        synapses (dict): a dictionary of lists of :py:class:`single_cell_parser.synapse.Synapse` objects
+        synapses (dict): a dictionary of lists of :class:`single_cell_parser.synapse.Synapse` objects
         E (float): Default resting membrane potential. Defaults to -70.0
         changeSynParamDict (dict): dictionary of network parameter sets with keys corresponding to time points. Allows automatic update of parameter sets according to their relative timing.
-        tVec (:py:class:`neuron:Vector`): a NEURON Vector recording time.
+        tVec (:class:`neuron:Vector`): a NEURON Vector recording time.
         neuron_param: The :ref:`cell_parameters_format`.
         section_adjacency_map (dict): maps each section (by ID) to its parent sections and children sections.
     '''
@@ -274,7 +274,7 @@ class Cell(object):
         ptx,
         preType='Generic',
         postType='Generic'):
-        """Add a :py:class:`~single_cell_parser.synapse.Synapse` to the cell object.
+        """Add a :class:`~single_cell_parser.synapse.Synapse` to the cell object.
         
         Args:
             secID (int): The section ID of the synapse location.
@@ -284,7 +284,7 @@ class Cell(object):
             postType (str, optional): The postsynaptic cell type. Defaults to 'Generic'.
         
         Returns:
-            :py:class:`~single_cell_parser.synapse.Synapse`: The newly created synapse.
+            :class:`~single_cell_parser.synapse.Synapse`: The newly created synapse.
         """
         if preType not in self.synapses:
             self.synapses[preType] = []
@@ -573,7 +573,7 @@ class Cell(object):
 
 
 class PySection(nrn.Section):
-    '''Wrapper around :py:class:`neuron:Section` providing additional functionality for geometry and mechanisms.
+    '''Wrapper around :class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
     NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
     Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
@@ -593,8 +593,8 @@ class PySection(nrn.Section):
         label (str): label of the section (e.g. "Soma", "Dendrite", "Myelin").
         label_detailed (str, optional): 
             Detailed label of the section (e.g. "oblique", "basal", "trunk").
-            These are manually assigned or automatically generated by :py:meth:`~biophysics_fitting.utils.augment_cell_with_detailed_labels`.
-            Used in :py:meth:`~single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment`.
+            These are manually assigned or automatically generated by :func:`~biophysics_fitting.utils.augment_cell_with_detailed_labels`.
+            Used in :func:`~single_cell_parser.cell_modify_functions.scale_apical.scale_by_detailed_compartment`.
         parent (PySection): reference to parent section.
         parentx (float): connection point at parent section.
         bounds (tuple): bounding box around 3D coordinates.
@@ -614,7 +614,7 @@ class PySection(nrn.Section):
         '''
         Args:
             name (str, optional): name of the section
-            cell (Cell, optional): reference to the cell object
+            cell (:class:`~single_cell_parser.cell.Cell`, optional): reference to the cell object
             label (str, optional): label of the section
         '''
         if name is None:
@@ -689,7 +689,7 @@ class PySection(nrn.Section):
         5. Initialize voltage recording.
         
         See also
-            :py:meth:`single_cell_parser.cell_parser.CellParser.determine_nseg`
+            :func:`single_cell_parser.cell_parser.CellParser.determine_nseg`
         '''
         self.nseg = nrOfSegments
         self._compute_seg_pts()
@@ -705,7 +705,7 @@ class PySection(nrn.Section):
         Given a segment and a variable name, this function retrieves the conductance of the specified variable in the segment.
         
         Args:
-            seg (:py:class:`neuron.nrn.Segment`): The segment to retrieve the conductance from.
+            seg (:class:`neuron.nrn.Segment`): The segment to retrieve the conductance from.
             var (str): The variable name of the mechanism e.g. ``NaTa_t``.
             param_name (str): The parameter name of the mechanism e.g. ``gNaTa_tbar``.
             
@@ -716,7 +716,7 @@ class PySection(nrn.Section):
             ValueError: If the segment does not have the specified variable.
             
         Raises:
-            AssertionError: If the segment is not an instance of :py:class:`neuron.nrn.Segment`.
+            AssertionError: If the segment is not an instance of :class:`neuron.nrn.Segment`.
         """
         assert isinstance(seg, nrn.Segment)
         if not hasattr(seg, var): raise ValueError(f"Segment {seg} does not have variable {var}")
@@ -870,7 +870,7 @@ class PySection(nrn.Section):
     def _init_vm_recording(self):
         '''Record the membrane voltage at every point in this section.
         
-        Sets up a :py:class:`neuron:Vector` for recording membrane voltage at every segment in this section.
+        Sets up a :class:`neuron:Vector` for recording membrane voltage at every segment in this section.
         '''
         # TODO: recVList[0] should store voltage recorded at
         # intermediate node between this and parent segment?
@@ -890,7 +890,7 @@ class PySection(nrn.Section):
     def _re_init_vm_recording(self):
         '''Reinitialize votage recordings
         
-        Resizes the :py:class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
+        Resizes the :class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
         '''
         for vec in self.recVList:
             vec.resize(0)
@@ -898,7 +898,7 @@ class PySection(nrn.Section):
     def _re_init_range_var_recording(self):
         '''Re-initialize the range mechanism recordings.
         
-        Resizes the :py:class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
+        Resizes the :class:`neuron:Vector` objects to 0 to avoid NEURON segfaults
         '''
         for key in list(self.recordVars.keys()):
             for vec in self.recordVars[key]:
@@ -926,7 +926,7 @@ class PySection(nrn.Section):
                 for seg in self:
                     vec = h.Vector()
                     hRef = eval('seg._ref_' + var)
-                    logger.info('seg._ref_' + var)
+                    # logger.debug('seg._ref_' + var)
                     vec.record(hRef, sec=self)
                     self.recordVars[var].append(vec)
         else:
@@ -945,16 +945,16 @@ class PointCell(object):
     '''Cell without morphological or biophysical attributes.
 
     Used as a presynaptic spike source for synapses. 
-    Stores spike times in :py:class:`neuron:Vector` and :py:class:`numpy.array`.
-    Requires :py:class:`neuron:VecStim` to trigger spikes at specified times.
+    Stores spike times in :class:`neuron:Vector` and :class:`numpy.array`.
+    Requires :class:`neuron:VecStim` to trigger spikes at specified times.
         
     Attributes:
         spikeTimes (list): list of spike times. Default=None.
-        spikeVec (:py:class:`neuron:Vector`): hoc Vector containing spike times
-        spikes (:py:class:`neuron:VecStim`): 
-            VecStim object to use as a spike source in :py:class:`neuron:NetCon` objects.
+        spikeVec (:class:`neuron:Vector`): hoc Vector containing spike times
+        spikes (:class:`neuron:VecStim`): 
+            VecStim object to use as a spike source in :class:`neuron:NetCon` objects.
             These are initialized from :paramref:`spikeTimes`.
-        playing (bool): flag indicating whether the :py:class:`neuron:VecStim` spike source is playing
+        playing (bool): flag indicating whether the :class:`neuron:VecStim` spike source is playing
         synapseList (list): list of synapses connected to this cell. 
     '''
 
@@ -963,7 +963,7 @@ class PointCell(object):
         Args:
             spikeTimes (list): 
                 List of precomputed spike times. 
-                Used to initialize release sites with precomputed release times from presynaptic spike times (see :py:meth:`single_cell_parser.network.activate_functional_synapse`)
+                Used to initialize release sites with precomputed release times from presynaptic spike times (see :func:`single_cell_parser.network.activate_functional_synapse`)
                 Defaults to None.
         '''
         if spikeTimes is not None:
@@ -991,11 +991,11 @@ class PointCell(object):
     def append(self, spikeT, spike_source=None):
         '''Append an additional spike time to the presynaptic cell.
         
-        Used in :py:meth:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities` to create a variety of spike times for presynaptic cells.
+        Used in :func:`~single_cell_parser.network.NetworkMapper._create_pointcell_activities` to create a variety of spike times for presynaptic cells.
         
         Args:
             spikeT (float): Spike time.
-            spike_source (str): Spike source category (see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
+            spike_source (str): Spike source category (see :func:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
         
         Raises:
             AssertionError: If the spike source is unknown.
@@ -1018,7 +1018,7 @@ class PointCell(object):
             spike_source=None):
         '''Compute a simple spike train for the presynaptic cell.
         
-        For more sophisticated methods than a simple spike train, see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`.
+        For more sophisticated methods than a simple spike train, see :func:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`.
         
         Args:
             interval (float): Mean interval between spikes.
@@ -1026,7 +1026,7 @@ class PointCell(object):
             start (float, optional): Start time of spike train. Defaults to 0.0.
             stop (float, optional): Stop time of spike train. Defaults to -1.0.
             nSpikes (int, optional): Number of spikes. Defaults to None.
-            spike_source (str, optional): Spike source category (see :py:meth:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
+            spike_source (str, optional): Spike source category (see :func:`single_cell_parser.network.NetworkMapper._create_pointcell_activities`)
         '''
         assert spike_source is not None
         self.rand = np.random.RandomState(np.random.randint(123456, 1234567))
@@ -1089,13 +1089,13 @@ class PointCell(object):
             return (1 - self.noiseParam) * self.spikeInterval + self.noiseParam * self.spikeInterval * self.rand.exponential()
 
     def _add_synapse_pointer(self, synapse):
-        """Add a :py:class:`Synapse` to the cell.
+        """Add a :class:`~single_cell_parser.synapse.Synapse` to the cell.
         
-        The purpose of this synapse is to keep track of where this :py:class:`PointCell` connects 
-        to a postsynaptic :py:class:`Cell` object.
+        The purpose of this synapse is to keep track of where this :class:`PointCell` connects 
+        to a postsynaptic :class:`Cell` object.
         
         Args:
-            synapse (:py:class:`Synapse`): Synapse object.
+            synapse (:class:`~single_cell_parser.synapse.Synapse`): Synapse object.
         """
         if self.synapseList is None:
             self.synapseList = [synapse]
@@ -1105,9 +1105,9 @@ class PointCell(object):
     def turn_off(self):
         '''Turns off the spike source.
         
-        Calls ``play()`` with no arguments to turn off the :py:class:`neuron:VecStim`.
+        Calls ``play()`` with no arguments to turn off the :class:`neuron:VecStim`.
         This is necessary because ``VecStim`` does not implement reference counting.
-        Resizes the :py:class:`neuron:Vector` to 0.
+        Resizes the :class:`neuron:Vector` to 0.
         
         Note:
             M. Hines: Note that one can turn off a VecStim without destroying it by using VecStim.play() with no args. 
@@ -1211,8 +1211,8 @@ class SynParameterChanger():
     """Change synapse parameters during simulation.
     
     Attributes:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet`.
+        cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+        synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :class:`~single_cell_parser.parameters.NTParameterSet`.
         tEvent (float): Time at which the synapse parameters should change.
         
     :skip-doc:
@@ -1221,8 +1221,8 @@ class SynParameterChanger():
     def __init__(self, cell, synParam, t):
         """
         Args:
-            cell (:py:class:`~single_cell_parser.cell.Cell`): The cell object.
-            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :py:class:`~single_cell_parser.parameters.NTParameterSet`.
+            cell (:class:`~single_cell_parser.cell.Cell`): The cell object.
+            synParam (dict): The new :ref:`network_parameters_format` as a dictionary or :class:`~single_cell_parser.parameters.NTParameterSet`.
             t (float): Time at which the synapse parameters should change.
         """
         self.cell = cell

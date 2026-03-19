@@ -24,12 +24,17 @@ from docs.utils.sphinx_hooks import (
 
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
-# Parse pyproject.toml to get the release version
-pyproject_path = os.path.join(project_root, "pyproject.toml")
-with open(pyproject_path, "r") as f:
-    pyproject_data = toml.load(f)
-    release = pyproject_data["project"]["version"]
-    version = release
+
+def get_project_version():
+    # Parse pyproject.toml to get the release version
+    pyproject_path = os.path.join(project_root, "pyproject.toml")
+    with open(pyproject_path, "r") as f:
+        pyproject_data = toml.load(f)
+        release = pyproject_data["project"]["version"]
+        version = release
+    return version
+
+version = get_project_version()
 project = "ISF"
 copyright = "2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
 author = "Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio"
@@ -72,7 +77,13 @@ graphviz_output_format = "svg"
 
 rst_prolog = """
 .. role:: summarylabel
-.. include:: /_static/icons.rst
+.. |home-icon-link| raw:: html
+
+   <a href="https://mpinb.github.io/in_silico_framework" class="nav-link" aria-label="Home">
+        <svg class="home-icon" viewBox="0 0 576 512" width="16" height="16">
+            <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+        </svg>
+    </a>
 """
 
 # -- Settings for omitting members from documentation ----------------------
@@ -114,6 +125,8 @@ autoapi_options = [
     "undoc-members",
     "private-members",
     "show-module-summary",
+    "show-inheritance",
+    "inherited-members",
 ]
 autoapi_own_page_level = "method"
 
@@ -121,7 +134,6 @@ autoapi_own_page_level = "method"
 bibtex_bibfiles = ["bibliography.bib"]
 
 # -- Napoleon settings -----------------------------------------------------
-# Napoleon is an 
 napoleon_google_docstring = True
 napoleon_include_init_with_doc = True
 napoleon_include_private_with_doc = True

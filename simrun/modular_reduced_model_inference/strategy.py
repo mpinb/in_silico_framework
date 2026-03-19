@@ -96,7 +96,7 @@ def clear_memory():
     """Remove all weak references
     
     Cupy frees GPU memory when all references are deleted
-    As this is difficult to track, use the :py:meth:`simrun.modular_reduced_model_inference.make_weakref` method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object. 
+    As this is difficult to track, use the :func:`simrun.modular_reduced_model_inference.make_weakref` method, which storesall GPU arrays in the _WEAKREF_ARRAY_LIST and returns a weakref object. 
     This can be used to interact with the data, but is not a reference.
     Therefore, it is sufficient to empty _WEAKREF_ARRAY_LIST, which frees the GPU memory.
     All weakref objects pointing to GPU arrays will then be invalidated.
@@ -122,12 +122,12 @@ class _Strategy(object):
     """Strategy base class.
     
     This class is used to define a strategy for the optimizer. Each strategy sets up all necessary components
-    to define a single cost function :py:meth:`get_score`. 
-    This cost function is used by a :py:mod:`simrun.modular_reduced_model_inference.solver` 
+    to define a single cost function :func:`get_score`. 
+    This cost function is used by a :mod:`simrun.modular_reduced_model_inference.solver` 
     to optimize the parameters of the strategy.
     
     Each child class must implement a ``_get_score`` class method.
-    These are used here to construct :py:meth:`~simrun.modular_reduced_model_inference._Strategy.get_score`.
+    These are used here to construct :func:`~simrun.modular_reduced_model_inference._Strategy.get_score`.
     It is this `get_score` method that is optimized during optimization.
     
     As a function of the parameters, compute a value for each trial.
@@ -165,8 +165,8 @@ class _Strategy(object):
         This score will be optimized by the solver.
         
         Example:
-            :py:class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
-            which is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
+            :class:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score_static`,
+            which is assigned to :func:`~simrun.modular_reduced_model_inference.Strategy_categorizedTemporalRaisedCosine._get_score`.
         """
         pass
 
@@ -175,12 +175,12 @@ class _Strategy(object):
         
         This method sets up the strategy with the given data and the DataSplitEvaluation object.
         
-        Strategy-specific setup is performed by :py:meth:`~simrun.modular_reduced_model_inference._Strategy._setup`,
+        Strategy-specific setup is performed by :func:`~simrun.modular_reduced_model_inference._Strategy._setup`,
         which is overloaded by child classes.
         
         Args:
             data (dict): The data to use.
-            DataSplitEvaluation (:py:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`): 
+            DataSplitEvaluation (:class:`~simrun.modular_reduced_model_inference.reduced_model.DataSplitEvaluation`): 
                 The DataSplitEvaluation object to use.
         """
         if self.setup_done:
@@ -202,7 +202,7 @@ class _Strategy(object):
         pass
 
     def _get_x0(self):
-        """Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+        r"""Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
         
         This method is overloaded specific to the strategy.
         """
@@ -213,7 +213,7 @@ class _Strategy(object):
         
         Scoring is usually performed on multiple splits of the data.
         This method assigns one such split to the strategy, so that
-        all consequent calls to :py:meth:`get_score` and :py:meth:`get_y` will use this split.
+        all consequent calls to :func:`get_score` and :func:`get_y` will use this split.
         
         Args:
             split (array): An array of indices to use for the split.
@@ -246,7 +246,7 @@ class _Strategy(object):
             self.get_score, 
             self.get_y)
         if setup:
-            for solver in self.solvers.values():
+            for solver in list(self.solvers.values()):
                 solver._setup()
         return self
 
@@ -311,7 +311,7 @@ class _Strategy(object):
         """Add a solver to the strategy.
         
         Args:
-            solver (:py:class:`~simrun.modular_reduced_model_inference.solver.Solver`): The solver to add.
+            solver (:class:`~simrun.modular_reduced_model_inference.solver.Solver`): The solver to add.
             setup (bool): Whether to setup the solver. Default is ``True``.
             
         Returns:
@@ -337,7 +337,8 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self._get_score = partial(
             self._get_score_static,
             self.base_vectors_arrays_dict)
@@ -348,7 +349,7 @@ class Strategy_categorizedTemporalRaisedCosine(_Strategy):
         stSa_dict = self.data['categorizedTemporalSa']
         base_vectors_arrays_dict = {}
 
-        for group, tSa in stSa_dict.iteritems():
+        for group, tSa in stSa_dict.items():
             len_trials, len_t = tSa.shape
             base_vector_rows = []
             for t in self.RaisedCosineBasis_temporal.compute(len_t).get():
@@ -439,7 +440,7 @@ class Strategy_ISIexponential(_Strategy):
 
 
 class RaisedCosineBasis(object):
-    """Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
+    r"""Set of raised cosine basis functions to use as a kernel for weighing synaptic activation patterns.
     
     A raised cosine is defined as:
     
@@ -482,13 +483,13 @@ class RaisedCosineBasis(object):
         width=80,
         reversed_=False,
         backend=np):
-        """
+        r"""
         Args:
             a (int): The steepness of the raised cosine. Default is :math:`2`.
             c (int): The offset of the raised cosine. Default is :math:`1`.
             phis (array): The phases of the raised cosine. Default is ``np.arange(1, 11, 0.5)``.
             width (int): The width of the basis functions. Default is :math:`80`.
-            reversed_ (bool): Whether to reverse the basis functions. Default is ``False``.
+            reversed\_ (bool): Whether to reverse the basis functions. Default is ``False``.
             backend (module): The backend to use (cupy or numpy). Default is ``numpy``.
         """
         self.a = a
@@ -502,7 +503,7 @@ class RaisedCosineBasis(object):
 
 
     def compute(self, width=80):
-        """Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
+        r"""Compute the vector of raised cosine basis functions :math:`\mathbf{f}`.
         
         Each element :math:`f_i` in the vector :math:`\mathbf{f}` is a raised cosine basis function 
         with a different :math:`\phi_i`. The domain of each :math:`f_i` is :math:`[0, width]`.
@@ -511,7 +512,7 @@ class RaisedCosineBasis(object):
             width (int): The width of the basis functions.
             
         Returns:
-            RaisedCosineBasis: The object itself, with a defined :paramref:`basis` attribute.
+            RaisedCosineBasis: The object itself, with a defined :param:`basis` attribute.
         """
         self.width = width
         self.t = np.arange(width)
@@ -530,7 +531,7 @@ class RaisedCosineBasis(object):
 
 
     def get(self):
-        """Get the basis functions :math:`\mathbf{f}`.
+        r"""Get the basis functions :math:`\mathbf{f}`.
         
         Returns:
             list: The list of basis functions."""
@@ -538,10 +539,10 @@ class RaisedCosineBasis(object):
 
 
     def get_superposition(self, x):
-        """Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
+        r"""Get the weighed sum :math:`\mathbf{w}(\\tau)` of the basis functions :math:`f`.
         
         The superposition of all basis functions, weighed by the input weights,
-        is a single filter of length :paramref:`width` that can be used to weigh the input data: synapse activations.
+        is a single filter of length :param:`width` that can be used to weigh the input data: synapse activations.
         
         .. math::
     
@@ -557,7 +558,7 @@ class RaisedCosineBasis(object):
 
 
     def visualize(self, ax=None, plot_kwargs=None):
-        """Visualize the basis functions :math:`\mathbf{f}`.
+        r"""Visualize the basis functions :math:`\mathbf{f}`.
         
         Args:
             ax (plt.axis): The axis to plot on. Default is ``None``.
@@ -636,15 +637,15 @@ class Strategy_ISIraisedCosine(_Strategy):
         self._get_score = partial(self._get_score_static, self.RaisedCosineBasis_postspike, self.ISI)
 
     def _get_x0(self):
-        """Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
+        r"""Get an initial guess for the learnable weights of the basis functions :math:`\mathbf{x}`.
         
         These weights are optimized by the solver.
         
         See also:
-            :math:`x_i` in :py:class:`~simrun.modular_reduced_model_inference.RaisedCosineBasis`
+            :math:`x_i` in :class:`~simrun.modular_reduced_model_inference.RaisedCosineBasis`
             
         See also:
-            :py:mod:`simrun.modular_reduced_model_inference.solver` for the optimization process.
+            :mod:`simrun.modular_reduced_model_inference.solver` for the optimization process.
         
         Returns:
             np.array: An array of random values in the range :math:`[-5, 5)`, with the same length as the basis parameters.
@@ -657,11 +658,11 @@ class Strategy_ISIraisedCosine(_Strategy):
         kernel = RaisedCosineBasis_postspike.get_superposition(x)
         return kernel[dereference(ISI)]
 
-    def visualize(self, optimizer_output, normalize=True, only_succesful=True):
+    def visualize(self, optimizer_output, normalize=True, only_successful=True):
         fig = plt.figure()
         ax = fig.add_subplot(111)
         for x in optimizer_output:
-            if only_succesful:
+            if only_successful:
                 if not x.success:
                     continue
             if normalize:
@@ -680,7 +681,7 @@ class Strategy_ISIraisedCosine(_Strategy):
 class Strategy_spatiotemporalRaisedCosine(_Strategy):
     r'''Spatiotemporal raised cosine strategy.
     
-    Uses the :py:class:``RaisedCosineBasis`` to create a set of basis functions.
+    Uses the :class:``RaisedCosineBasis`` to create a set of basis functions.
     
     Attention:
         The input data must contain the following keys:
@@ -695,7 +696,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         base_vectors_arrays_dict (dict): 
             The basis vectors for each group. basis vectors are of shape (:math:`N_{trials}`, :math:`N_\tau`, :math:`N_z`)
             These basis vectors are used for the optimizer, and are already multiplied with the data.
-            Do not confuse them with the basis vectors of :paramref:`RaisedCosineBasis_spatial` and :paramref:`RaisedCosineBasis_temporal`,
+            Do not confuse them with the basis vectors of :param:`RaisedCosineBasis_spatial` and :param:`RaisedCosineBasis_temporal`,
             as the latter are not multiplied with the synapse activaiton data.
         groups (list): The list of groups. Usually simply ``['EXC', 'INH']``.
         len_z (int): The length of the spatial domain i.e. the amount of spatial basis vectors.
@@ -706,7 +707,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
     '''
 
     def __init__(self, name, RaisedCosineBasis_spatial, RaisedCosineBasis_temporal):
-        """
+        r"""
         Args:
             name (str): The name of the strategy.
             RaisedCosineBasis_spatial (RaisedCosineBasis): The spatial basis functions :math:`\mathbf{g}(z)`.
@@ -721,7 +722,8 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values(
+        ))[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
@@ -737,7 +739,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             WNI(t) = \int_{t-width}^{t} \int_z \mathbf{w}_{\\tau}(\\tau) \cdot \mathbf{w}_{z}(z) \cdot \mathbf{D} = \int_{t-width}^{t} \int_z \mathbf{x} \cdot \mathbf{y} \cdot \mathbf{f}(t) \cdot \mathbf{g}(z) \cdot \mathbf{D}
         
         Attention:
-            These are not the same basis vectors as in :py:class:`RaisedCosineBasis`.
+            These are not the same basis vectors as in :class:`RaisedCosineBasis`.
             These basis vectors are already multiplied with the data :math:`\mathbf{D}`.
             Since dot product is commutative, the order of this multiplication does not matter for calculating
             the weighted net input, but these intermediate basis vectors are different.
@@ -768,7 +770,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             return np.array(base_vector_array).astype('f4')
 
         base_vectors_arrays_dict = {}
-        for group, spatiotemp_SA in self.data['spatiotemporalSa'].iteritems():
+        for group, spatiotemp_SA in self.data['spatiotemporalSa'].items():
             base_vector_array = _compute_base_vector_array(spatiotemp_SA)
             base_vectors_arrays_dict[group] = make_weakref(np.array(np.array(base_vector_array).astype('f4')))
         self.base_vectors_arrays_dict = base_vectors_arrays_dict
@@ -783,7 +785,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
 
     @staticmethod
     def _convert_x_static(groups, len_z, x):
-        """Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
+        r"""Convert the input array :math:`\mathbf{x}` into a dictionary of basis vectors.
         
         Useful for passing the learnable weights to the optimizer as a one-dimensional array,
         but keeping track of the basis vectors for each group and dimension.
@@ -816,7 +818,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """
         len_groups = len(groups)
         out = {}
-        x = x.reshape(len_groups, len(x) / len_groups)
+        x = x.reshape(len_groups, int(len(x) / len_groups))
         for lv, group in enumerate(groups):
             x_z = x[lv, :len_z]
             x_t = x[lv, len_z:]
@@ -828,7 +830,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         r"""Calculate the weighted net input :math:`WNI(t)` for the given weights :math:`\mathbf{x}`.
         
         This is the method that calculates the cost function for the optimizer.
-        It is assigned to :py:meth:`~simrun.modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine._get_score` during
+        It is assigned to :func:`~simrun.modular_reduced_model_inference.Strategy_spatiotemporalRaisedCosine._get_score` during
         the setup of the strategy.
         
         This method left-multiplies the basis vectors :math:`\mathbf{f}(\tau) \cdot \mathbf{g}(z) \cdot \mathbf{D}` 
@@ -840,18 +842,18 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             base_vectors_arrays_dict (dict): The dictionary of basis vectors for each group.
             x (array): 
                 The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a single array.
-                These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+                These are converted to spatial and temporal weights per group with :param:`convert_x`.
             
         Attention:
             These basis vectors are already multiplied with the data, and are thus not the same
-            as the basis vectors in :py:class:`RaisedCosineBasis`.
+            as the basis vectors in :class:`RaisedCosineBasis`.
             Since dot product is commutative, the order of this multiplication does not matter.
             
         Returns:
             array: The weighted net input :math:`WNI(t)` of length ``n_trials``.
         """
         outs = []
-        for group, (x_z, x_t) in convert_x(x).iteritems():
+        for group, (x_z, x_t) in convert_x(x).items():
             array = base_vectors_arrays_dict[group]  # shape: (len_z, len_t, n_trials)
             time_weighed_input = np.dot(dereference(x_t), dereference(array)).squeeze()
             spacetime_weighed_input = np.dot(dereference(x_z), dereference(time_weighed_input)).squeeze()
@@ -860,15 +862,15 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         return wni  # shape: (n_trials,)
 
     def normalize(self, x, flipkey=None):
-        '''Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
+        r'''Normalize the kernel basis functions such that sum of all absolute values of all kernels is 1.
         
         Attention:
-            These are the same basis functions as in :py:class:`RaisedCosineBasis`.
-            These are thus not multiplied with the synapse activation data, as is the case with :py:meth:`compute_basis`
+            These are the same basis functions as in :class:`RaisedCosineBasis`.
+            These are thus not multiplied with the synapse activation data, as is the case with :func:`compute_basis`
             
         Args:
             x (array): The learnable weights :math:`\mathbf{x}` and :math:`\mathbf{y}` as a 1D array.
-                These are converted to spatial and temporal weights per group with :paramref:`convert_x`.
+                These are converted to spatial and temporal weights per group with :param:`convert_x`.
             
         Returns:
             array: The normalized learnable weights :math:`\mathbf{x}`.
@@ -912,6 +914,22 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
             return 'grey'
         else:
             return None
+        
+    def get_kernel_dict(self, x, normalize = False):
+        if normalize:
+            x = convert_to_numpy(self.normalize(x))
+        dict_ = self.convert_x(x)
+        out = dict()
+        for group, (x_z, x_t) in dict_.items():
+            x_z =  convert_to_numpy(x_z)
+            x_t = convert_to_numpy(x_t)
+            if group == ('EXC',):
+                out['s_exc'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_exc'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+            elif group == ('INH',):
+                out['s_inh'] = self.RaisedCosineBasis_spatial.get_superposition(x_z)
+                out['t_inh'] = self.RaisedCosineBasis_temporal.get_superposition(x_t)
+        return out
 
     def visualize(
         self,
@@ -921,12 +939,12 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
         """Plot the basis functions.
         
         Attention:
-            These are the same basis functions as in :py:class:`RaisedCosineBasis`.
-            These are thus not multiplied with the synapse activation data, as is the case with :paramref:`basis`.
+            These are the same basis functions as in :class:`RaisedCosineBasis`.
+            These are thus not multiplied with the synapse activation data, as is the case with :param:`basis`.
             
         Args:
             optimizer_output (List[scipy.optimize.OptimizeResult]): An array of optimizer outputs. usually one element per data split.
-            only_succesful (bool): Whether to only plot the successful optimizer outputs. Default is ``False``.
+            only_successful (bool): Whether to only plot the successful optimizer outputs. Default is ``False``.
             normalize (bool): Whether to normalize the basis functions. Default is ``True``.
             
         Returns:
@@ -943,7 +961,7 @@ class Strategy_spatiotemporalRaisedCosine(_Strategy):
                 dict_ = self.convert_x(self.normalize(out.x))
             else:
                 dict_ = self.convert_x(out.x)
-            for group, (x_z, x_t) in dict_.iteritems():
+            for group, (x_z, x_t) in dict_.items():
                 c = self.get_color_by_group(group)
                 self.RaisedCosineBasis_temporal.visualize_x(
                     x_t, ax=ax_t, plot_kwargs={'c': c})
@@ -971,7 +989,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _setup(self):
         self.compute_basis()
         self.groups = sorted(self.base_vectors_arrays_dict.keys())
-        self.len_z, self.len_t, self.len_trials = self.base_vectors_arrays_dict.values()[0].shape
+        self.len_z, self.len_t, self.len_trials = list(self.base_vectors_arrays_dict.values())[0].shape
         self.convert_x = partial(self._convert_x_static, self.groups, self.len_z)
         self._get_score = partial(self._get_score_static, self.convert_x, self.base_vectors_arrays_dict)
 
@@ -980,7 +998,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
         st = self.data['st']
         stSa_dict = self.data['spatiotemporalSa']
         base_vectors_arrays_dict = {}
-        for group, stSa in stSa_dict.iteritems():
+        for group, stSa in stSa_dict.items():
             len_trials, len_t, len_z = stSa.shape
             base_vector_array = []
             for z in self.RaisedCosineBasis_spatial.compute(len_z).get():
@@ -1000,7 +1018,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     def _convert_x_static(groups, len_z, x):
         len_groups = len(groups)
         out = {}
-        x = x.reshape(len_groups, len(x) / len_groups)
+        x = x.reshape(len_groups, int(len(x) / len_groups))
         for lv, group in enumerate(groups):
             x_z = x[lv, :len_z]
             x_t = x[lv, len_z:]
@@ -1010,7 +1028,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
     @staticmethod
     def _get_score_static(convert_x, base_vectors_arrays_dict, x):
         outs = []
-        for group, (x_z, x_t) in convert_x(x).iteritems():
+        for group, (x_z, x_t) in convert_x(x).items():
             array = base_vectors_arrays_dict[group]
             out = np.dot(dereference(x_t), dereference(array)).squeeze()
             out = np.dot(dereference(x_z), dereference(out)).squeeze()
@@ -1070,7 +1088,7 @@ class Strategy_temporalRaisedCosine_spatial_cutoff(_Strategy):
                 dict_ = self.convert_x(self.normalize(out.x))
             else:
                 dict_ = self.convert_x(out.x)
-            for group, (x_z, x_t) in dict_.iteritems():
+            for group, (x_z, x_t) in dict_.items():
                 c = self.get_color_by_group(group)
                 self.RaisedCosineBasis_temporal.visualize_x(
                     x_t, ax=ax_t, plot_kwargs={'c': c})

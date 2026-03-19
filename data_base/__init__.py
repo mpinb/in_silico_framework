@@ -14,16 +14,21 @@
 # limitations under the License.
 """
 Efficient, reproducible and flexible database with dictionary-like API. 
+
 This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
-Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
-A wide variety of input data and output file formats are supported (see :py:mod:`data_base.IO.LoaderDumper`), including:
+A wide variety of input data and output file formats are supported (see :mod:`data_base.IO.LoaderDumper`), including:
 
 - 1D and ND numpy arrays
 - pandas and dask dataframes
-- :py:class:`~single_cell_parser.cell.Cell` objects
-- :py:class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+- :class:`~single_cell_parser.cell.Cell` objects
 
-Simulation results from :py:mod:`single_cell_parser` and :py:mod:`simrun` can be imported and converted to a high performance binary format using the :py:mod:`data_base.db_initializers` subpackage.
+Databases saves keys as folders containing at least three files:
+
+- ``Loader``: JSON file containing information on how to load the data
+- ``metadata``: JSON file containing metadata.
+- Data file(s): The actual data, in a format specified by the ``Loader`` file. Some file formats split up the data in multiple files, such as parquet and msgpack.
+
+Simulation results from :mod:`single_cell_parser` and :mod:`simrun` can be imported and converted to a high performance binary format using the :mod:`data_base.db_initializers` subpackage.
 
 Example:
 
@@ -52,6 +57,22 @@ Example:
             "dirty": false, 
             "error": null
         }
+
+Saving and loading data is easily achieved::
+
+    from data_base import DataBase
+    
+    db = DataBase('/path/to/database')
+    obj = pd.DataFrame(...)  # some pandas dataframe for example
+    db['my_key'] = obj  # saves the object to the database with the default format
+    loaded_obj = db['my_key']  # loads the object from the database
+    db.set('my_other_key', obj, dumper='pandas_to_msgpack')  # saves the object with a specific format
+    
+When you don't specify the dumper, the default dumper as specified in the configuration file is used.
+The default dumper is purposely chosen to prioritize flexibility (i.e. save anything), not performance (i.e. save something specific very efficiently). 
+Performant data formats will need to be specified explicitly, as they often depend on the object being saved and the intended use case.
+You can (but shouldn't) reconfigure the default dumper in ``config/db_settings.json``
+ 
 """
 import os
 from . import data_base_register
@@ -62,13 +83,13 @@ DataBase = get_default_db()
 
 def _is_legacy_model_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+    Checks if a given path contains a :class:`~data_base.model_data_base.ModelDataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.model_data_base.ModelDataBase`.
+        bool: True if the path contains a :class:`~data_base.model_data_base.ModelDataBase`.
 
     :skip-doc:
     """
@@ -77,13 +98,13 @@ def _is_legacy_model_data_base(path):
 
 def _is_isf_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+    Checks if a given path contains a :class:`~data_base.isf_data_base.ISFDataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.isf_data_base.ISFDataBase`.
+        bool: True if the path contains a :class:`~data_base.isf_data_base.ISFDataBase`.
 
     :skip-doc:
     """
@@ -92,13 +113,13 @@ def _is_isf_data_base(path):
 
 def is_data_base(path):
     """
-    Checks if a given path contains a :py:class:`~data_base.DataBase`.
+    Checks if a given path contains a :class:`~data_base.DataBase`.
     
     Args:
         path (str): The path to check.
         
     Returns:
-        bool: True if the path contains a :py:class:`~data_base.DataBase`.
+        bool: True if the path contains a :class:`~data_base.DataBase`.
     """
     return _is_legacy_model_data_base(path) or _is_isf_data_base(path)
 
@@ -167,9 +188,16 @@ def get_db_by_unique_id(unique_id):
         unique_id (str): The data base's unique identifier
         
     Returns:
-        :py:class:`data_base.DataBase`: The database associated with the :paramref:`unique_id`.
+        :class:`data_base.DataBase`: The database associated with the :param:`unique_id`.
     """
     db_path = data_base_register._get_db_register().registry[unique_id]
+    if _is_isf_data_base(db_path):
+        from .isf_data_base import ISFDataBase
+        DataBase = ISFDataBase
+    elif _is_legacy_model_data_base(db_path):
+        try: from model_data_base import ModelDataBase
+        except ImportError: "The requested database with unique_id {} is a legacy ModelDataBase. Make sure you have this on your PATH, e.g. by importing ibs_projects.compatibility".format(unique_id)
+        DataBase = ModelDataBase
     db = DataBase(db_path, nocreate=True)
     assert db.get_id() == unique_id, "The unique_id of the database {} does not match the requested unique_id {}. Check for duplicates in your data base registry.".format(db.get_id(), unique_id)
     return db

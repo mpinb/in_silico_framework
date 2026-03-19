@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-'''Convert a :py:class:`~single_cell_parser.cell.Cell` object to a serializable object and vice versa.
+'''Convert a :class:`~single_cell_parser.cell.Cell` object to a serializable object and vice versa.
 '''
 from __future__ import absolute_import
 import numpy as np
@@ -47,7 +47,7 @@ def convert_dict_of_hoc_arrays_to_dict_of_np_arrays(hoc_array_dict):
 
 
 def cell_to_serializable_object(cell):
-    '''Convert a :py:class:`~single_cell_parser.cell.Cell` object to a dict, so that it can be serialized.
+    '''Convert a :class:`~single_cell_parser.cell.Cell` object to a dict, so that it can be serialized.
 
     Useful for parallellization using e.g. Dask or Joblib.
     
@@ -68,7 +68,7 @@ def cell_to_serializable_object(cell):
     - hoc: hoc file content
 
     Args:
-        cell (:py:class:`~single_cell_parser.cell.Cell`): cell object
+        cell (:class:`~single_cell_parser.cell.Cell`): cell object
 
     Returns:
         dict: serializable cell object
@@ -115,13 +115,13 @@ import os
 
 
 def restore_cell_from_serializable_object(sc):
-    """Restore a :py:class:`~single_cell_parser.cell.Cell` object from a serializable object.
+    """Restore a :class:`~single_cell_parser.cell.Cell` object from a serializable object.
     
     Args:
         sc (dict): serializable object
         
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: cell object
+        :class:`~single_cell_parser.cell.Cell`: cell object
     """
     # create hoc file
     with mkdtemp() as tempdir:
@@ -168,27 +168,27 @@ def restore_cell_from_serializable_object(sc):
 
 
 def save_cell_to_file(path, cell):
-    """Save a :py:class:`~single_cell_parser.cell.Cell` object to a file in .pickle format.
+    """Save a :class:`~single_cell_parser.cell.Cell` object to a file in .pickle format.
     
     Args:
         path (str): path to file
-        cell (:py:class:`~single_cell_parser.cell.Cell`): cell object
+        cell (:class:`~single_cell_parser.cell.Cell`): cell object
         
     Returns:
-        None. Writes out the cell object to :paramref:`path` in .pickle format.
+        None. Writes out the cell object to :param:`path` in .pickle format.
     """
     sc = cell_to_serializable_object(cell)
     pd.Series([sc]).to_pickle(path)
 
 
 def load_cell_from_file(path):
-    """Load a :py:class:`~single_cell_parser.cell.Cell` object from a file in .pickle format.
+    """Load a :class:`~single_cell_parser.cell.Cell` object from a file in .pickle format.
     
     Args:
         path (str): path to .pickle file
         
     Returns:
-        :py:class:`~single_cell_parser.cell.Cell`: cell object
+        :class:`~single_cell_parser.cell.Cell`: cell object
     """
     pds = pd.read_pickle(path)
     sc = pds[0]

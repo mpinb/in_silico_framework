@@ -70,3 +70,9 @@ def sqlite_db():
     # cleanup
     if os.path.exists(tempdir):
         shutil.rmtree(tempdir)
+
+@pytest.fixture
+def data_base_register():
+    from data_base.data_base_register import _get_db_register
+    return _get_db_register()
+

@@ -45,15 +45,23 @@ def svg2emf(filename, path_to_inkscape="/usr/bin/inkscape"):
 def plot_hoc(hoc_file, **kwargs):
     """Plot a hoc file using matplotlib.
 
-    Instatiate a :py:class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
+    Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`hoc_file_format` file.
     
     Args:
         hoc_file (str): The path to the :ref:`hoc_file_format` file
-        show (bool): Whether to show the plot
-        **kwargs: additional arguments to pass to :py:meth:`CellMorphologyVisualizer.plot`
+        kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
 
     Returns:
-        :py:class:`~matplotlib.figure.Figure`: The figure object
+        :class:`~matplotlib.figure.Figure`: The figure object
+
+    Example::
+    
+        from visualize import plot_hoc
+        fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
+        plot_hoc(fn)
+        
+    .. figure:: ../../docs/_static/_images/86_hoc.png
+
     """
     cp = CellParser(hoc_file)
     cp.spatialgraph_to_cell()

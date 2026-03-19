@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Optimize a cost function.
+r"""Optimize a cost function.
 
 This module implements solvers that can optimize a given cost function by adapting a vector of free parameters :math:`\mathbf{x}`.
-The cost function is usually defined by a :py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
+The cost function is usually defined by a :class:`~simrun.modular_reduced_model_inference.strategy._Strategy` object.
 
 Different solvers can be defined here, to provide different optimization schemes.
 Currently, we provide a :cite:t:`COBYLA` solver.
@@ -29,13 +29,13 @@ import scipy.optimize
 class _Solver(object):
     """Solver base class
     
-    Each child must implement the :py:meth:`_setup_optimizer` method.
+    Each child must implement the :func:`_setup_optimizer` method.
     
     Attributes:
         name (str): name of the solver
         optimize (callable): The solver-specific optimization function.
-        strategy (:py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`): 
-            The strategy object. This is set during :py:meth:`setup`.
+        strategy (:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`): 
+            The strategy object. This is set during :func:`setup`.
     """
     def __init__(self, name):
         """
@@ -51,10 +51,10 @@ class _Solver(object):
     def setup(self, strategy):
         """Setup the solver for a given strategy and optimizer.
         
-        The strategy needs to be passed as an argument, while the optimizer is set by the :py:meth:`_setup_optimizer` method.
+        The strategy needs to be passed as an argument, while the optimizer is set by the :func:`_setup_optimizer` method.
         
         Args:
-            strategy (:py:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`): The strategy object.
+            strategy (:class:`~simrun.modular_reduced_model_inference.strategy._Strategy`): The strategy object.
         """
         # set strategy
         self.strategy = strategy
@@ -67,7 +67,7 @@ class _Solver(object):
         This method is overloaded by child classes to set the optimizer.
         
         Example:
-            :py:meth:`Solver_COBYLA._setup_optimizer`
+            :func:`Solver_COBYLA._setup_optimizer`
         """
         pass
 
@@ -75,17 +75,17 @@ class _Solver(object):
         """Optimize the cost function for all splits of the strategy.
         
         Args:
-            client (:py:class:`dask.distributed.Client`): A dask client object.
-            workers (list): List of worker names. Passed to :py:meth:`dask.distributed.Client.submit`
+            client (:class:`dask.distributed.Client`): A dask client object.
+            workers (list): List of worker names. Passed to :func:`dask.distributed.Client.submit`
             
         Returns:
             dict: A dictionary with the keys being the split names and the values being the optimization results.
             
         See also:
-            :py:meth:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
+            :func:`~simrun.modular_reduced_model_inference.solver._Solver.optimize_one_split`
         """
         out = {}
-        for name, split in self.strategy.DataSplitEvaluation.splits.iteritems():
+        for name, split in self.strategy.DataSplitEvaluation.splits.items():
             x0 = self.strategy._get_x0()
             self.strategy.set_split(split['train'])
             if client:
@@ -100,12 +100,12 @@ class _Solver(object):
         """Optimize the cost function for a single split.
         
         Args:
-            client (:py:class:`dask.distributed.Client`): A dask client object.
-            workers (list): List of worker names. Passed to :py:meth:`dask.distributed.Client.submit`
+            client (:class:`dask.distributed.Client`): A dask client object.
+            workers (list): List of worker names. Passed to :func:`dask.distributed.Client.submit`
             index (int): 
                 Index of the split to optimize.
                 Splits are saved as a dictionary in the
-                :py:attr:`~simrun.modular_reduced_model_inference.strategy.DataSplitEvaluation.splits` attribute.
+                :attr:`~simrun.modular_reduced_model_inference.strategy.DataSplitEvaluation.splits` attribute.
                 The index then refers to the index of the names (i.e. keys) of the splits.
                 Note that dictionaries are in general unordered, so this index is only useful to differentiate between splits,
                 not to refer to a specific split or order of splits.
@@ -115,7 +115,7 @@ class _Solver(object):
         """
         out = {}
         names = sorted(self.strategy.DataSplitEvaluation.splits.keys())
-        #         for name, split in self.strategy.DataSplitEvaluation.splits.iteritems():
+        #         for name, split in self.strategy.DataSplitEvaluation.splits.items():
         name = names[index]
         split = self.strategy.DataSplitEvaluation.splits[name]
         x0 = self.strategy._get_x0()
@@ -132,13 +132,13 @@ class Solver_COBYLA(_Solver):
     """A :cite:t:`COBYLA` solver strategy for reduced models.
     
     See also:
-        :py:mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their
+        :mod:`~simrun.modular_reduced_model_inference.strategy` for available strategies and their
         respective objective functions.
     
     Attributes:
         name (str): name of the solver
         optimize (callable): 
-            Optimization function: :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
+            Optimization function: :func:`scipy.optimize.minimize` with ``method='COBYLA'``.
             Optimization function need an objective function to minimize.
             These objecetive functions depend on the strategy.
     """
@@ -166,8 +166,8 @@ class Solver_COBYLA(_Solver):
     def _optimize(_objective_function, maxiter=5000, x0=None):
         """Static optimization method.
         
-        This method is the core optimizer. It minimizes :paramref:`_objective_function` using
-        :py:meth:`scipy.optimize.minimize` with ``method='COBYLA'``.
+        This method is the core optimizer. It minimizes :param:`_objective_function` using
+        :func:`scipy.optimize.minimize` with ``method='COBYLA'``.
         
         Args:
             _objective_function (callable): 
