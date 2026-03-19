@@ -288,8 +288,38 @@ class NetworkParamBuilder:
                 # No activity data for this cell type in the network params was found in the passed activity data
                 # This is fine.
                 continue
+            if self._has_flat_ongoing_activity(celltype): self._convert_flat_to_nested_ongoing_activity(celltype)
             self.network_parameters.network[celltype].celltype["pointcell"] = psth
             if additional_params is not None:
                 self.network_parameters.network[celltype].celltype['pointcell'].update(additional_params)
 
         return self
+
+    def _convert_flat_to_nested_ongoing_activity(self, celltype):
+        interval = self.network_parameters.network[celltype].pop("interval")
+        self.network_parameters.network[celltype].celltype = {
+            'spiketrain': {
+                'interval': interval
+            }
+        }
+
+    def _has_flat_ongoing_activity(self, celltype):
+        """Check if the :ref:`network_parameters_format` has ongoing activity in flat format.
+        
+        Some older :ref:`network_parameters_format' have ongoing activity data in a format that is
+        incompatible with adding multiple sources of activity afterwards::
+
+            <cell_type>: {
+                'cell_type': 'spiketrain',
+                'interval': int,
+            }
+
+        Ideally, the 'cell_type' key contains a dictionary, which in turn contains all sources of activity. Not a string "spiketrain".
+        This function checks if the flat hierarchy exists.
+
+        See also:
+            :meth:`~_nest_existing_ongoing_activity_data` to transform this to a nested hierarchy, compatible
+            with adding multiple sources of activity data.
+        """
+        return self.network_parameters.network[celltype].celltype == "spiketrain"
+        
