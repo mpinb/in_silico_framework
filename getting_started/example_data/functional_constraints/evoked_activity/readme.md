@@ -11,7 +11,7 @@ whisker stimuli. We augmented the data by reassigning the same data based on the
 This is explained in more detail below.
 
 ## Recordings from C2
-All data in this "recordings_from_C2" contains activity data for various cell types in the juvenile Wistar rat Barrel Cortex.
+All data in this "empirical_recordings" contains activity data for various cell types in the juvenile Wistar rat Barrel Cortex.
 All recordings were made in the C2 column.
 Data is split so that each file contains one particular cell type.
 Within each file, you will find multiple activity measurements for various cell types, corresponding for different whisker deflections.
@@ -55,7 +55,7 @@ is a reflection around C2, assuming C2 is the whisker stimulated.
 For other whisker stimuli, reflect around C2 and perform a translation (up-down, left-right)
 
 We have taken the liberty to perform this data augmentation already. This is the data you find in each "\*_stim.param" file.
-Please take note that this activity data is actually the same activity data present in "recordings_from_C2", just reassigned to different 
+Please take note that this activity data is actually the same activity data present in "empirical_recordings", just reassigned to different 
 cell type, depending on their location and whisker stimulus.
 
 
