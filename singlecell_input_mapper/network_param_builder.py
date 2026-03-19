@@ -280,6 +280,15 @@ class NetworkParamBuilder:
             :meth:`add_ongoing_activity`
         """
         assert isinstance(activity_per_ct, Mapping), "Please provide a mapping between cell types and their activity data." 
+        keys_in_data_not_in_netp = [k for k in activity_per_ct.keys() if k not in self.network_parameters.network]
+        keys_in_netp_not_in_data = [k for k in self.network_parameters.network if k not in activity_per_ct.keys()]
+        if len(keys_in_data_not_in_netp) > 1: 
+            logger.debug(msg=f"Found {len(keys_in_data_not_in_netp)} keys in the passed activity data not present in the netwok paramters: {keys_in_data_not_in_netp}")
+            logger.debug(msg="This likely means that you already added anatomical embedding data, while omitting non-connected cells. This is OK.")
+        if len(keys_in_netp_not_in_data) > 1:
+            # Cells are allowed to be connected or otherwise appear in the network params, and not in the activity data.
+            # Either activity data is passed one by one, each time defining a subset of cell types, or these cells simply don't have activity. This is OK.
+            logger.debug(msg=f"{len(keys_in_netp_not_in_data)} cell types in the network parameters do not appear in the passed activity data: {keys_in_netp_not_in_data}")
 
         for celltype in self.network_parameters.network.keys():
             # Read PSTh data and add to netp
