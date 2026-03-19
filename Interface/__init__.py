@@ -225,10 +225,7 @@ from simrun.reduced_model \
 import simrun.synaptic_strength_fitting
 
 from singlecell_input_mapper.map_singlecell_inputs import map_singlecell_inputs
-from singlecell_input_mapper.evoked_network_param_from_template import build_evoked_network_activity
-from singlecell_input_mapper.ongoing_network_param_from_template \
-    import create_network_parameter \
-    as create_ongoing_network_parameter
+from singlecell_input_mapper.network_param_from_template import build_network_param_from_template as create_evoked_network_parameter
 
 if not 'ISF_MINIMIZE_IO' in os.environ:
     if get_versions()['dirty']: logger.attention('The source folder has uncommited changes!')
