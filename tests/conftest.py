@@ -145,11 +145,8 @@ def pytest_configure(config):
         config.option.basetemp = win_basetemp
     
     _setup_pytest_logging()
-    import mechanisms.l5pt
-    mechanisms.l5pt.load()   
-    
-    from tests.reproducibility import init_backwards_compatibility
-    init_backwards_compatibility()
+    import mechanisms
+    mechanisms.load()   
 
 
 def pytest_sessionstart(session):

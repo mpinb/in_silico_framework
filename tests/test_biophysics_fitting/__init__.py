@@ -1,4 +1,4 @@
-import mechanisms.l5pt as l5pt_mechanisms
+import mechanisms
 import os
 import numpy as np
 import pandas as pd

@@ -29,10 +29,10 @@ trash_it_now/
 # compiler output
 *.pyc
 **__pycache__**
-mechanisms/*/*/x86_64**
-mechanisms/*/*/*.dll
-mechanisms/*/*/*.c
-mechanisms/*/*/*.o
+config/user/mechanisms/*/x86_64**
+config/user/mechanisms/*/*.dll
+config/user/mechanisms/*/*.c
+config/user/mechanisms/*/*.o
 
 # Barrel cortex model
 barrel_cortex/*
@@ -55,6 +55,7 @@ getting_started/radii/data/neuron1/output**
 # Ignore example param files generated from templates, but don't ignore templates themselves
 getting_started/example_data/biophysical_constraints/*.param
 getting_started/example_data/simulation_data/C2_center_example/*.param
+tests/test_simrun/data/*.param
 
 
 # Virtual enviroments
