@@ -1,0 +1,192 @@
+{
+  "info": {
+    "date": "15Oct2014",
+    "name": "hay_2011_dend_test",
+    "author": "regger",
+  },
+  "neuron": {
+    "Soma": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -80,
+            "g": 4.79e-05,
+            "spatial": "uniform",
+          },
+          "Ca_HVA": {
+            "gCa_HVAbar": 0.000685,
+            "spatial": "uniform",
+          },
+          "SKv3_1": {
+            "gSKv3_1bar": 0.52,
+            "spatial": "uniform",
+          },
+          "SK_E2": {
+            "gSK_E2bar": 0.0619,
+            "spatial": "uniform",
+          },
+          "Ca_LVAst": {
+            "gCa_LVAstbar": 0.00207,
+            "spatial": "uniform",
+          },
+          "Nap_Et2": {
+            "gNap_Et2bar": 0.000494,
+            "spatial": "uniform",
+          },
+          "Ih": {
+            "gIhbar": 0.0002,
+            "spatial": "uniform",
+          },
+          "CaDynamics_E2": {
+            "spatial": "uniform",
+            "gamma": 0.00101,
+            "decay": 754.0,
+          },
+          "K_Pst": {
+            "gK_Pstbar": 0.0251,
+            "spatial": "uniform",
+          },
+          "K_Tst": {
+            "gK_Tstbar": 0.0534,
+            "spatial": "uniform",
+          },
+          "NaTa_t": {
+            "gNaTa_tbar": 2.1,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "ions": {
+          "ena": 50.0,
+          "ek": -85.0,
+        },
+        "Ra": 100.0,
+        "cm": 1.0,
+      },
+    },
+    "Dendrite": {
+      "mechanisms": {
+        "range": {
+          "Ih": {
+            "gIhbar": 0.0002,
+            "spatial": "uniform",
+          },
+          "pas": {
+            "e": -80,
+            "g": 5.51e-05,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "Ra": 100.0,
+        "cm": 2.0,
+      },
+    },
+    "ApicalDendrite": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -80,
+            "g": 6.8e-05,
+            "spatial": "uniform",
+          },
+          "Ca_HVA": {
+            "outsidescale": 0.1,
+            "begin": 685.0,
+            "end": 885.0,
+            "gCa_HVAbar": 0.00329,
+            "spatial": "uniform_range",
+          },
+          "SKv3_1": {
+            "gSKv3_1bar": 0.00812,
+            "spatial": "uniform",
+          },
+          "SK_E2": {
+            "gSK_E2bar": 0.00236,
+            "spatial": "uniform",
+          },
+          "NaTa_t": {
+            "gNaTa_tbar": 0.0209,
+            "spatial": "uniform",
+          },
+          "Ih": {
+            "distance": "relative",
+            "spatial": "exponential",
+            "_lambda": 3.6161,
+            "offset": -0.8696,
+            "linScale": 2.087,
+            "gIhbar": 0.0002,
+            "xOffset": 0.0,
+          },
+          "Im": {
+            "gImbar": 0.000232,
+            "spatial": "uniform",
+          },
+          "Ca_LVAst": {
+            "outsidescale": 0.01,
+            "begin": 685.0,
+            "gCa_LVAstbar": 0.0628,
+            "end": 885.0,
+            "spatial": "uniform_range",
+          },
+          "CaDynamics_E2": {
+            "spatial": "uniform",
+            "gamma": 0.0005,
+            "decay": 199.0,
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "ions": {
+          "ena": 50.0,
+          "ek": -85.0,
+        },
+        "Ra": 100.0,
+        "cm": 2.0,
+      },
+    },
+    "AIS": {
+      "mechanisms": {
+        "range": {
+          "pas": {
+            "e": -80,
+            "g": 4.02e-05,
+            "spatial": "uniform",
+          },
+        },
+        "global": {
+
+        },
+      },
+      "properties": {
+        "Ra": 100.0,
+        "cm": 1.0,
+      },
+    },
+    "filename": "/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/first_testing/cell_model/86_L5_CDK20041214_nr3L5B_dend_PC_neuron_transform_registered_C2.hoc",
+  },
+  "mech_globals": {
+
+  },
+  "sim": {
+    "tStop": 150.0,
+    "dt": 0.025,
+    "Vinit": -75.0,
+    "tStart": 0.0,
+    "T": 37.0,
+  },
+  "NMODL_mechanisms": {
+    "channels": "/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/L5tt/first_testing/mechanisms",
+  },
+}
