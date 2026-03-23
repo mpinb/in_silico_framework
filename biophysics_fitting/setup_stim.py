@@ -68,7 +68,7 @@ def setup_soma_step(cell, amplitude=None, delay=None, duration=None, dist=0):
     iclamp.delay = delay  # give the cell time to reach steady state
     iclamp.dur = duration  # 5ms rectangular pulse
     iclamp.amp = amplitude  # 1.9 ?? todo ampere
-    _append(cell, 'iclamp', iclamp)
+    _append(cell, name='iclamp', item=iclamp)
 
 
 def setup_apical_epsp_injection(
@@ -101,4 +101,4 @@ def setup_apical_epsp_injection(
     iclamp2.imax = amplitude
     iclamp2.tau0 = rise  # rise time constant
     iclamp2.tau1 = decay  # decay time constant
-    _append(cell, 'epsp', iclamp2)
+    _append(cell, name='epsp', item=iclamp2)
