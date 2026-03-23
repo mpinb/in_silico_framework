@@ -182,21 +182,48 @@ def hoc_to_swc(
         remap_sections=remap_sections
     )
 
-
-
-    
 import sys
 from pathlib import Path
 import os
 import Interface as I
-import math as m
 logger = I.logger
-sys.setrecursionlimit(5000)  
+sys.setrecursionlimit(10000)  
+
+
+swc = Path("/to/your/swc_file.swc")
+folder_path = "/path/to/output/folder" # Where the hoc file will be saved
+file_path = os.path.join(folder_path, "output_name.hoc")
+os.makedirs(folder_path, exist_ok=True)
+
+
+"""
+
+    Converts swc file format to hoc file format
+        - No need to input any arguments. 
+        - Just define the paths above and the rest is handled by the converter 
+
+    NOTE:
+        - If soma consists of only 1 point, the resulting hoc file will describe a soma of 3 points, with the 
+        original soma point being at the center and all the sections connecting only to this point.
+
+        - If the soma consists of more than one point, the resulting hoc file will maintain the same structure of 
+        the soma as it is in the swc file.
+
+"""
 
 def parse_swc(swc_file):
+    """
+    Extract and organize point coordinate information.
+    
+    
+    Args:
+        swc_file (file): The file to be converted.
+        
+    Returns:
+        dict: Dictionary mapping point IDs to their properties (type, coords, radius, parent, children).
+    """
 
     points = {}
-    parent_point = -1
 
     # Open file and differentiate the lines
     with open(swc_file, 'r') as f:
@@ -212,7 +239,7 @@ def parse_swc(swc_file):
                 'parent' : int(p)
             }
 
-    # Iterate over points to disocover the children of each point
+    # Iterate over points to discover the children of each point
     for point_id, point_info in points.items():
         point_info['children'] = []
 
@@ -224,47 +251,51 @@ def parse_swc(swc_file):
 
     return points
 
-def traverse(point_id, sec_id, points_dict, primary_branch, basal_branch, f):
-
-
+def traverse(point_id, sec_id, points_dict, apical_branch, basal_branch, f):
     """
-        1st condition: current point has only 1 child
-            - Add this child to the section the parent point belongs as well and continue linearly
+    Starting from the root(soma) point, this function traverses through all point coordinates
+    to identify and name sections/branches with the correpsodning points that make up a section
+     while at the same time writes in the output file the resulting structure in hoc format
 
-        2nd condition: current point is a branch point with more than one child
-            - For each child, create a new section and add the current branch point in new section (therefore last 
-              point of previous section and first point of new section is the current branch point)
-        
-        3rd condition: current point is the end of a branch
-            - It is already added to the section the parent belongs to in the beginning of the code
-            - Therefore the traversing continues for the other child of the directly previous branch point, until the end point of that branch 
-    """
     
+    Args:
+        point_id (int): ID of a point.
+        sec_id (str): Section/branch label.
+        points_dict (dict): Point coords organized in a dict from the previous function (parse_swc).
+        apical_branch (int):Apical branch ID.
+        basal_branch (int): Basal branch ID.
+        f (file): open file handle where the HOC code is written
+
+        
+    Returns:
+        None (writes morphology structure directly to the output file)
+
+    """
+
     children_id = points_dict[point_id]['children']
     x,y,z = points_dict[point_id]['coords']
     r = points_dict[point_id]['radius']
 
-    
     # This way we avoid adding the root point before the creation of the soma
     if sec_id != 'soma':
         f.write(f'\n{{pt3dadd{x,y,z,(r*2)}}}')
 
     # Detect start/end of sections according to the conditions described above
     if len(children_id) == 1:
-        traverse(children_id[0], sec_id, points_dict, primary_branch, basal_branch, f)
-    
+        traverse(children_id[0], sec_id, points_dict, apical_branch, basal_branch, f)
+
     if len(children_id) > 1:
         if sec_id == 'soma':
 
             for i in range(len(children_id)):
 
                 if points_dict[children_id[i]]['type'] == 4:
-                    primary_branch = 1
-                    sec_id = f'apical_1_0'
+                    apical_branch += 1
+                    sec_id = f'apical_{apical_branch}_0'
 
                 elif points_dict[children_id[i]]['type'] == 2:
                     sec_id = 'axon' 
-                   
+                    
                 else:
                     basal_branch += 1     # For each of the other children of the soma we simply add one as they are all basal dendrites
                     sec_id = f'BasalDendrite_{basal_branch}_0'
@@ -273,9 +304,8 @@ def traverse(point_id, sec_id, points_dict, primary_branch, basal_branch, f):
                 f.write(f'\n{{connect {sec_id}(0), soma(1)}}')
                 f.write(f'\n{{access {sec_id}}}\n{{nseg = 1}}\n{{pt3dclear()}}')
                 
-
-                traverse(children_id[i], sec_id, points_dict, primary_branch, basal_branch, f)
-            
+                traverse(children_id[i], sec_id, points_dict, apical_branch, basal_branch, f)
+        
         else:
             for i in range(len(children_id)):
                 
@@ -291,15 +321,29 @@ def traverse(point_id, sec_id, points_dict, primary_branch, basal_branch, f):
                 f.write(f'\n{{connect {sec_id}(0), {sec_id_copy}(1)}}')
                 f.write(f'\n{{access {sec_id}}}\n{{nseg = 1}}\n{{pt3dclear()}}')
                 
-
-                traverse(children_id[i], sec_id, points_dict, primary_branch, basal_branch, f)
+                traverse(children_id[i], sec_id, points_dict, apical_branch, basal_branch, f)
                 sec_id = sec_id_copy
-                
+            
     if len(children_id) == 0:
         return
 
 
-def complete_soma(root_id, points_dict, file_name, soma_structure):
+def complete_soma(root_id, points_dict, f, soma_structure):
+    """
+    Depending on the structure of the soma in the swc file, this function will either add two 
+    more points to the soma section if soma consists of only 1 point or the structure of the soma will remain as 
+    it is in the swc file if soma consists of more than one point.
+    
+    
+    Args:
+        root_id (int): ID of original soma point.
+        points_dict (dict): Point information mapped to point ID
+        f (file): Open file handle where the HOC code is written.
+        soma_structure (str): Defines if soma structure is kept the same or not.
+        
+    Returns:
+        None (writes morphology structure directly to the output file)
+    """
 
     xs, ys, zs = points_dict[root_id]['coords']
     rs = (points_dict[root_id]['radius'])
@@ -310,26 +354,29 @@ def complete_soma(root_id, points_dict, file_name, soma_structure):
         y2 = ys-rs
         y3 = ys+rs
 
-        file_name.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,y2,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,ys,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,y3,zs,(rs*2)}}}')
+        f.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,y2,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,ys,zs,(rs*2)}}}' f'\n{{pt3dadd{xs,y3,zs,(rs*2)}}}')
     
     elif soma_structure == 'soma' :
 
-        file_name.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,ys,zs,rs}}}')
+        f.write(f'\n{{nseg = 1}}' f'\n{{pt3dclear()}}' f'\n{{pt3dadd{xs,ys,zs,rs}}}')
 
         for point_id, point_info in points_dict.items():
             if point_info['type'] == 1:
                 x, y, z = points_dict[point_id]['coords']
                 r = (points_dict[point_id]['radius'])*2
-                file_name.write(f'\n{{pt3dadd{x,y,z,r}}}')
+                f.write(f'\n{{pt3dadd{x,y,z,r}}}')
 
-
-"""
-Arg soma: Used to autocomplete missing points of the soma
-    - 'cable' to make the soma a cable-like structure
-    - 'soma = soma' to keep the structure of the soma as it is in the swc file
-"""
 
 def swc_to_hoc(swc_file):
+    """
+    This function finds the root point (soma) and integrates all previous functions to conduct the conversion.
+    
+    
+    Args:
+        swc_file (file): The file ot be converted.
+    Returns:
+        None (writes morphology structure directly to the output file)
+    """
 
     points_dict = parse_swc(swc_file)
     root_id = None
@@ -341,11 +388,11 @@ def swc_to_hoc(swc_file):
         if point_info['parent'] == -1:
             root_id = point_id
             
-
     sec = 'soma'
-
     with open(file_path, "w") as f:
     
         f.write(f'{{create soma}}\n{{access soma}}')
         complete_soma(root_id, points_dict, f, soma_structure = soma)
-        traverse(root_id, sec, points_dict, primary_branch = 0, basal_branch = 0, f=f)
+        traverse(root_id, sec, points_dict, apical_branch = 0, basal_branch = 0, f=f)
+
+swc_to_hoc(swc)
