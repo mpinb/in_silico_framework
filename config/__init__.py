@@ -20,6 +20,12 @@ In general, these settings may change when switching hardware or animal species,
 
 import os, json, importlib
 
+AVAILABLE_SYNAPSE_MAPPING_METHODS = (
+    "udvary2022",
+    # no other methods have been implemented yet
+)
+
+
 def _read_db_settings():
     """Read the database settings from the JSON file in the config directory.
     

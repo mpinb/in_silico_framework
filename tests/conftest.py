@@ -26,6 +26,7 @@ from tests.reproducibility import scale_apical_morph_86
 setattr(single_cell_parser.cell_modify_functions, "scale_apical_morph_86", scale_apical_morph_86)
 
 
+
 class ModuleFilter(logging.Filter):
     """
     Given an array of module names, suppress logs from those modules
@@ -151,6 +152,10 @@ def pytest_configure(config):
     _setup_pytest_logging()
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
+    
+    # This cell modify function has since been removed, but is still useful for reproducibility tests.
+    from tests.reproducibility import scale_apical_morph_86
+    sys.modules["single_cell_parser.cell_modify_functions.scale_apical_morph_86"] = scale_apical_morph_86
 
 
 def pytest_sessionstart(session):

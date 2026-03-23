@@ -24,7 +24,6 @@ Stimulus types include the stimuli used by :cite:t:`Hay_Hill_Schuermann_Markram_
 """
 
 import neuron
-from . import utils
 from ..setup_stim import setup_soma_step, setup_apical_epsp_injection
 
 h = neuron.h
