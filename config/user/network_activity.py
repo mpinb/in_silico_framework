@@ -40,6 +40,7 @@ ACTIVITY_DATA_DIR = Path(example_data_dir) / "functional_constraints" / "evoked_
 
 NETWORK_PARAM_TEMPLATE_FN = Path(example_data_dir) / "functional_constraints" / "ongoing_activity" / "ongoing_activity_celltype_template_exc_conductances_fitted.param"
 """A template :ref:`network_parameters_format` file containing filled-in values for synapse dynamics and ongoing firing intervals.
+Useful for setting data that is not expected to change throughout a project.
 
 If no template is passed to :meth:`~singlecell_input_mapper.network_param_from_tepmlate.build_network_param_from_template`,
 this is the fallback file that will be used instead.

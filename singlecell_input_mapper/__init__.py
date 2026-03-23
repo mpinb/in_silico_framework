@@ -18,36 +18,16 @@
 This package provides classes and methods to create a dense connectome model with defined activity patterns.
 It can be largely divided in two parts: :ref:`connectivity` and :ref:`activity`.
 
-See also:
-    This package should not be confused with :mod:`single_cell_parser`. 
-    
-    This package is specialized to create empirically consistent network models, providing fine-grained control over the
-    network realization process, and ability to constrain it with empirical data.
-    
-    :mod:`single_cell_parser` provides only basic functionality to recreate such network realizations from the results generated here.
-    The purpose of :mod:`single_cell_parser` is to provide an API to the NEURON simulator, and read in results from network realizations.
-  
 .. _connectivity:
  
 Connectivity
 ------------
 
-:mod:`singlecell_input_mapper.singlecell_input_mapper` is responsible for assigning synapses to the morphology of a postsynaptic neuron, 
-and keeping track of the synapse type and associated presynaptic cell type. Based on this presynaptic cell type, different spike times can be generated (see section Activity below).
-Assigning synapses onto the postsynaptic morphology is referred to as a 'network realization'. The network realization in ISF is based on the following inputs:
-
-- The morphology and location of the postsynaptic neuron
-- The 3D density of post-synaptic targets (PSTs) in the brain region of interest (cell type unspecific)
-- The 3D density of boutons in the brain region of interest (cell type specific)
-- The 1D and 2D densities of PSTs onto the postsynaptic neuron per length and area (cell type specific)
-
-See :mod:`singlecell_input_mapper.singlecell_input_mapper` for more information, and :func:`singlecell_input_mapper.map_singlecell_inputs.map_singlecell_inputs` for a pipeline to create anatomical realizations.
-
-Other ways of network realization are also possible, depending on the empirical data available.
-If you want to use other methods, please familiarize yourself with the data formats such that you can either:
-
-1. Convert the input data to the required input format for ISF and run the same network realization pipeline. Input file formats are described in more detail in :mod:`singlecell_input_mapper.map_singlecell_inputs`.
-2. Create your own network realization, and convert the output to the format used in ISF. These are :ref:`syn_file_format` and :ref:`con_file_format` files. For more info on how to generate and use these, refer to the network modeling section of the :ref:`tutorials`
+:mod:`singlecell_input_mapper.map_singlecell_inputs` is responsible for assigning synapses to the morphology of a postsynaptic neuron, 
+and keeping track of the synapse type and associated presynaptic cell type. 
+Based on this presynaptic cell type, different spike times can be generated (see section Activity below).
+Assigning synapses onto the postsynaptic morphology is referred to as a 'network embedding'. 
+A network embedding for a given morphology is uniquely defined as a :ref:`syn_file_format` and :ref:`conf_file_format` file.
 
 .. _activity:
 

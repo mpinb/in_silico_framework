@@ -50,10 +50,6 @@ class Cell(object):
     The main purpose is to be a dataclass containing this information, but not to create or configure it on its own.
     Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
     
-    See also: 
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.Cell`.
-        This class concerns itself with providing API to NEURON, not with mapping input to the cell.
-    
     Attributes: 
         hoc_path (str): Path to the hoc file containing the cell morphology.
         id (str | int, optional): ID of the cell (often unused).
