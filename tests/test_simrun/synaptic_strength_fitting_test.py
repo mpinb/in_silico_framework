@@ -34,6 +34,7 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     Attention:
         This test is specific to the barrel cortex and assumes that the barrel cortex model is downloaded
     """
+
     PSPs = simrun.synaptic_strength_fitting.PSPs
     confile = os.path.join(
         context.data_dir,

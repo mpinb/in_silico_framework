@@ -21,6 +21,7 @@ from .fixtures.data_base_fixtures import (
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
 
+
 class ModuleFilter(logging.Filter):
     """
     Given an array of module names, suppress logs from those modules
@@ -146,6 +147,9 @@ def pytest_configure(config):
     _setup_pytest_logging()
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
+    
+    from tests.reproducibility import init_backwards_compatibility
+    init_backwards_compatibility()
 
 
 def pytest_sessionstart(session):

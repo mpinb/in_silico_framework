@@ -422,7 +422,7 @@ def set_ephys(cell_param, params=None):
 
     Args:
         cell_param (:class:`~single_cell_parser.parameters.NTParameterSet`): The cell parameter dictionary.
-        params (pd.Series): The parameter vector as a pandas Series.
+        params (pd.Series): The parameter vector as a pandas Series. This is usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions.
 
     Raises:
         AssertionError: If the parameter vector is None or not a pandas Series.
@@ -461,7 +461,7 @@ def set_param(cell_param, params=None):
         
     Args:
         cell_param (~:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
-        params (dict): The parameter flat dictionary.
+        params (pd.Series): The parameter vector as a pandas Series. This is usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions.
     
     Returns:
         dict: The updated cell_param.
@@ -490,7 +490,7 @@ def set_many_param(cell_param, params=None):
         
     Args:
         cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter nested dictionary.
-        params (dict): The parameter flat dictionary.
+        params (pd.Series): The parameter vector as a pandas Series. This is usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions.
         
     Returns:
         dict: The updated cell_param.

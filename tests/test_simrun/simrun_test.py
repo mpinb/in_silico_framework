@@ -5,7 +5,7 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 import dask
 import single_cell_parser as scp
-from single_cell_parser.cell_modify_functions.scale_apical_morph_86 import scale_apical_morph_86
+from tests.reproducibility.scale_apical_morph_86 import scale_apical_morph_86
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
