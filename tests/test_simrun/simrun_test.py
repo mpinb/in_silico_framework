@@ -5,7 +5,6 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 import dask
 import single_cell_parser as scp
-from tests.reproducibility.scale_apical_morph_86 import scale_apical_morph_86
 import simrun.generate_synapse_activations
 import simrun.run_new_simulations
 import simrun.run_existing_synapse_activations
@@ -153,7 +152,7 @@ def test_reproduce_simulation_trial_from_roberts_model_control(tmp_path, client)
             nprocs=1,
             tStop=345,
             silent=True,
-            scale_apical=scale_apical_morph_86)
+            scale_apical=scale_apical)
         dummy = client.compute(dummy).result()
 
         #synapse activation
