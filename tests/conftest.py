@@ -20,11 +20,6 @@ from .fixtures.data_base_fixtures import (
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
-# This cell modify function has since been removed, but is still useful for reproducibility tests.
-import single_cell_parser.cell_modify_functions
-from tests.reproducibility import scale_apical_morph_86
-setattr(single_cell_parser.cell_modify_functions, "scale_apical_morph_86", scale_apical_morph_86)
-
 
 
 class ModuleFilter(logging.Filter):
@@ -153,9 +148,8 @@ def pytest_configure(config):
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
     
-    # This cell modify function has since been removed, but is still useful for reproducibility tests.
-    from tests.reproducibility import scale_apical_morph_86
-    sys.modules["single_cell_parser.cell_modify_functions.scale_apical_morph_86"] = scale_apical_morph_86
+    from tests.reproducibility import init_backwards_compatibility
+    init_backwards_compatibility()
 
 
 def pytest_sessionstart(session):

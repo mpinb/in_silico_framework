@@ -36,6 +36,9 @@ def client(dask_cluster, pytestconfig, n_workers=None):
     n_workers = n_workers or default_n_workers
     client = Client(dask_cluster)
     client.wait_for_workers(n_workers)
+
+    from tests.reproducibility import init_backwards_compatibility
+    client.run(function=init_backwards_compatibility)
     
     yield client
     client.close()
