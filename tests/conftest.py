@@ -20,6 +20,11 @@ from .fixtures.data_base_fixtures import (
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
+# This cell modify function has since been removed, but is still useful for reproducibility tests.
+import single_cell_parser.cell_modify_functions
+from tests.reproducibility import scale_apical_morph_86
+setattr(single_cell_parser.cell_modify_functions, "scale_apical_morph_86", scale_apical_morph_86)
+
 
 class ModuleFilter(logging.Filter):
     """
