@@ -13,5 +13,4 @@ sys.path.insert(0, parent)
 import distributed
 from data_base import utils
 import getting_started
-from mechanisms import l5pt as l5pt_mechanisms
-
+import mechanisms

@@ -29,7 +29,7 @@ See also:
     :func:`getting_started.generate_param_files_with_valid_references`
     
 See also:
-    :func:`mechanisms.l5pt.compile_l5pt_mechanisms`
+    :func:`mechanisms.compile_mechanisms`
 """
 import argparse
 
