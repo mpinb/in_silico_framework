@@ -47,6 +47,8 @@ class Simulator_Setup:
     A typical usecase is to use the fixed parameters to specify to soma distance for a voltage trace 
     of the apical dendrite. Make sure that the :attr:`~biophysics_fitting.simulator.Simulator.stim_run_fun` reads the 
     parameter :param:`recSite` and sets up the stimulus accordingly (see :class:`~biophysics_fitting.simulator.Simulator`).
+
+
     
     Example::
 
@@ -117,14 +119,18 @@ class Simulator_Setup:
     Attributes:
         cell_param_generator (callable): A function that generates a :class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
         cell_param_modify_funs (list): list of functions that modify the cell parameters.
-        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object.
+        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object from :ref:`neuron_parameters_format`.
         cell_modify_funs (list): List of functions that modify the cell object.
-        stim_setup_funs (list): List of functions that set up the stimulus.
-        stim_run_funs (list): List of functions that each run a simulation.
-        stim_response_measure_funs (list): List of functions that extract voltage traces from the cell.
+        stim_setup_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
+        stim_run_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
+        stim_response_measure_funs (list): List of functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
         params_modify_funs (list): List of functions that modify the biophysical parameter vector.
         check_funs (list): List of functions that check the setup. Useful for debugging.
-    
+
+    See also:
+        :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions for how ``cell_param_modify_functions`` are used to transform input
+        parameter vectors to :ref:`neuron_parameters_format` objects.
+
     """
     def __init__(self):    
         self.cell_param_generator = None

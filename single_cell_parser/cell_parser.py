@@ -39,10 +39,6 @@ class CellParser(object):
     It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
     membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
-    See also:
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
-        This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
-    
     Attributes:
         hoc_path (str): Path to hoc file
         membraneParams (dict): Membrane parameters
@@ -366,8 +362,6 @@ class CellParser(object):
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | exponential_by_z_dist  | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{z - \text{xOffset}}{\lambda}}`                                           |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | sigmoid                | ``offset``, ``linScale``, ``xOffset``, ``width``                | :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`                                 |
@@ -537,61 +531,6 @@ class CellParser(object):
                             dist = h.distance(seg.x, sec=sec)
                             if relDistance:
                                 dist = dist / maxDist
-                            rangeVarVal = mech[param] * (
-                                offset + linScale * np.exp(_lambda *
-                                                           (dist - xOffset)))
-                            s = param + '=' + str(rangeVarVal)
-                            paramStrings.append(s)
-                        for s in paramStrings:
-                            s = '.'.join(('seg', mechName, s))
-                            exec(s)
-
-            # exponential distribution in the apical dendrite based on the distance by z
-            elif mech.spatial == 'exponential_by_z_dist':
-                ''' spatially exponential distribution:
-                f(x) = offset + linScale*exp(_lambda*(x-xOffset))'''
-                maxDist = self.cell.max_distance(label)
-                #                set origin to 0 of first branch with this label
-                if label == 'Soma':
-                    silent = h.distance(0, 0.0, sec=self.cell.soma)
-                else:
-                    for sec in self.cell.sections:
-                        if sec.label != label:
-                            continue
-                        if sec.parent.label == 'Soma':
-                            silent = h.distance(0, 0.0, sec=sec)
-                            break
-                relDistance = False
-                if mech['distance'] == 'relative':
-                    relDistance = True
-                offset = mech['offset']
-                linScale = mech['linScale']
-                _lambda = mech['_lambda']
-                xOffset = mech['xOffset']
-                for sec in self.cell.structures[label]:
-                    sec.insert(mechName)
-                    if label == 'ApicalDendrite':
-                        relPts_list = sec.relPts
-                        mid_soma = int(self.cell.soma.nrOfPts / 2)
-                        z_distance_per_relPts = [
-                            sec.pts[i][2] - self.cell.soma.pts[mid_soma][2]
-                            for i in range(len(relPts_list))
-                        ]
-                    for seg in sec:
-                        paramStrings = []
-                        for param in list(mech.keys()):
-                            if param == 'spatial' or param == 'distance' or param == 'offset'\
-                            or param == 'linScale' or param == '_lambda' or param == 'xOffset':
-                                continue
-                            if label == 'ApicalDendrite':
-                                dist = np.interp(seg.x, relPts_list,
-                                                 z_distance_per_relPts)
-                            else:
-                                dist = h.distance(seg.x, sec=sec)
-                            if relDistance:
-                                dist = dist / maxDist
-                            if not relDistance:
-                                dist = dist / 1000
                             rangeVarVal = mech[param] * (
                                 offset + linScale * np.exp(_lambda *
                                                            (dist - xOffset)))
@@ -1308,7 +1247,7 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        from config.cell_types import EXCITATORY
+        from config.user.cell_types import EXCITATORY
         excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):

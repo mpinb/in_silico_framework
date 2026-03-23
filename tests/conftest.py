@@ -21,6 +21,7 @@ from .fixtures.data_base_fixtures import (
 suppress_modules_list = ["biophysics_fitting", "distributed"]
 
 
+
 class ModuleFilter(logging.Filter):
     """
     Given an array of module names, suppress logs from those modules

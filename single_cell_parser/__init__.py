@@ -41,7 +41,7 @@ import warnings
 import neuron
 import tables  # so florida servers have no problem with neuron
 
-from config.cell_types import EXCITATORY
+from config.user.cell_types import EXCITATORY
 
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
@@ -91,8 +91,8 @@ def create_cell(
     Adds spatial discretization and inserts biophysical mechanisms according to parameter file
 
     Args:
-        parameters (dict | dict-like):
-            A nested dictionary structure, read from a :ref:`cell_parameters_format` file.
+        parameters (:class:`~single_cell_parser.parameters.NTParameterSet`):
+            A :ref:`cell_parameters_format` object.
             Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc_file_format` file (e.g. "AIS", "Soma" ...).
             Optional keys include: ``cell_modify_functions``, ``discretization``
         scaleFunc (bool):
@@ -103,6 +103,9 @@ def create_cell(
         setUpBiophysics (bool):
             Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
 
+    .. deprecated 0.5.0::
+       The ``scaleFunc` argument is depracated and may be removed in a future version.
+       For scaling the morphoplogy, use ``cell_param_modify_funs`` instead.
     """
     if scaleFunc is not None:
         warnings.warn(

@@ -54,7 +54,6 @@ getting_started/radii/data/neuron1/output**
 
 # Ignore example param files generated from templates, but don't ignore templates themselves
 getting_started/example_data/biophysical_constraints/*.param
-getting_started/example_data/functional_constraints/*.param
 getting_started/example_data/simulation_data/C2_center_example/*.param
 
 
