@@ -26,7 +26,7 @@ from functools import partial
 import pandas as pd
 from simrun.somatic_summation_model import ParseVT
 from data_base.IO.LoaderDumper import dask_to_msgpack
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 import single_cell_parser as scp
 
 

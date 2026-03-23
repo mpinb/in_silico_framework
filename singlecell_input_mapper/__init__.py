@@ -67,5 +67,5 @@ The general workflow is as follows:
 3. Create a network parameter file from the PSTHs.
 
 """
-__author__  = "Robert Egger"
-__credits__ = ["Robert Egger", "Arco Bast"]
+
+__author__  = ["Robert Egger", "Arco Bast", "Bjorge Meulemeester"]
