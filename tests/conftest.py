@@ -144,7 +144,7 @@ def pytest_configure(config):
         config.option.basetemp = win_basetemp
     
     _setup_pytest_logging()
-    from config.user import mechanisms
+    import mechanisms
     mechanisms.load()   
 
 
