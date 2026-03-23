@@ -34,6 +34,11 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     Attention:
         This test is specific to the barrel cortex and assumes that the barrel cortex model is downloaded
     """
+    # This cell modify function has since been removed, but is still useful for reproducibility tests.
+    import single_cell_parser.cell_modify_functions
+    from tests.reproducibility import scale_apical_morph_86
+    setattr(single_cell_parser.cell_modify_functions, "scale_apical_morph_86", scale_apical_morph_86)
+
     PSPs = simrun.synaptic_strength_fitting.PSPs
     confile = os.path.join(
         context.data_dir,
