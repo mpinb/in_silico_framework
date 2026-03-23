@@ -237,7 +237,7 @@ defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 
 import biophysics_fitting
 from biophysics_fitting.hay import (
-    default_setup as bfit_hay_complete_default_setup
+    default_setup as bfit_hay_complete_default_setup,
     L5tt_parameter_setup as bfit_L5tt_parameter_setup
 )
 from biophysics_fitting.parameters import param_to_kwargs as bfit_param_to_kwargs
