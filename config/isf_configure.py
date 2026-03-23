@@ -29,7 +29,7 @@ See also:
     :func:`getting_started.generate_param_files_with_valid_references`
     
 See also:
-    :func:`mechanisms.l5pt.compile_l5pt_mechanisms`
+    :func:`mechanisms.compile_mechanisms`
 """
 import argparse
 
@@ -49,6 +49,6 @@ if __name__ == "__main__":
     overwrite_param_files = False if args.overwrite_param_files.lower() in ["none", "false", "0"] else True
 
     from getting_started import generate_param_files_with_valid_references
-    from mechanisms.l5pt import compile_mechanisms
+    from mechanisms import compile_mechanisms
     compile_mechanisms(force_recompile=force_recompile)
     generate_param_files_with_valid_references(overwrite_param_files=overwrite_param_files)

@@ -19,7 +19,7 @@
 	"neuron":
 	{
 		"filename": "[IN_SILICO_FRAMEWORK_DIR]/getting_started/example_data/anatomical_constraints/86_C2_center.hoc",
-        "cell_modify_functions": {"scale_apical": {"scale": 2.5}},
+        "cell_modify_functions": {"scale_apical_morph_86": {}},
 		
 		"Soma":
 		{

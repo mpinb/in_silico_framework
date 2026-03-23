@@ -29,10 +29,10 @@ trash_it_now/
 # compiler output
 *.pyc
 **__pycache__**
-mechanisms/*/*/x86_64**
-mechanisms/*/*/*.dll
-mechanisms/*/*/*.c
-mechanisms/*/*/*.o
+config/user/mechanisms/*/x86_64**
+config/user/mechanisms/*/*.dll
+config/user/mechanisms/*/*.c
+config/user/mechanisms/*/*.o
 
 # Barrel cortex model
 barrel_cortex/*
