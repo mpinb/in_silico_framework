@@ -148,9 +148,6 @@ def pytest_configure(config):
     import mechanisms.l5pt
     mechanisms.l5pt.load()   
     
-    from tests.reproducibility import init_backwards_compatibility
-    init_backwards_compatibility()
-
 
 def pytest_sessionstart(session):
     _set_mpl_backend_non_gui()
