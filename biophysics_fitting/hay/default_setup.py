@@ -29,7 +29,7 @@ import single_cell_parser as scp
 from .. import setup_stim
 from ..combiner import Combiner
 from ..evaluator import Evaluator
-from ..L5tt_parameter_setup import (
+from .L5tt_parameter_setup import (
     get_L5tt_template,
     get_L5tt_template_v2,
     set_ephys,

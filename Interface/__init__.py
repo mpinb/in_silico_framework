@@ -238,8 +238,10 @@ if not 'ISF_MINIMIZE_IO' in os.environ:
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
 
 import biophysics_fitting
-from biophysics_fitting.hay import default_setup as bfit_hay_complete_default_setup
-from biophysics_fitting import L5tt_parameter_setup as bfit_L5tt_parameter_setup
+from biophysics_fitting.hay import (
+    default_setup as bfit_hay_complete_default_setup
+    L5tt_parameter_setup as bfit_L5tt_parameter_setup
+)
 from biophysics_fitting.parameters import param_to_kwargs as bfit_param_to_kwargs
 from biophysics_fitting.optimizer import start_run as bfit_start_run
 from biophysics_fitting.exploration_from_seedpoint import RW
