@@ -26,7 +26,7 @@ from toolz.dicttoolz import merge
 
 import single_cell_parser as scp
 
-from .. import setup_stim
+from . import setup_stim
 from ..combiner import Combiner
 from ..evaluator import Evaluator
 from .L5tt_parameter_setup import (

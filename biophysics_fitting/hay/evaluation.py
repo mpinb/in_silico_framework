@@ -120,7 +120,7 @@ class BAC:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim.setup_BAC` for more information on the stimulus protocol.
+        :func:`biophysics_fitting.hay.setup_stim.setup_BAC` for more information on the stimulus protocol.
 
     Attributes:
         hot_zone_thresh (float): The threshold for APs in the dendritic voltage trace. Defaults to :math:`-55` mV.
@@ -455,7 +455,7 @@ class bAP:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim.setup_bAP` for more information on the stimulus protocol.
+        :func:`biophysics_fitting.hay.setup_stim.setup_bAP` for more information on the stimulus protocol.
 
     Attributes:
         soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
@@ -721,7 +721,7 @@ class _Step:
     These metrics were introduced by :cite:t:`Hay_Hill_Schuermann_Markram_Segev_2011`, and illustrated in :cite:t:`Bast_Guest_Fruengel_Narayanan_de_Kock_Oberlaender_2023`.
 
     See also:
-        :func:`biophysics_fitting.setup_stim` for more information on the stimulus protocols.
+        :func:`biophysics_fitting.hay.setup_stim` for more information on the stimulus protocols.
 
     Attributes:
         soma_thresh (float): The threshold for APs in the somatic voltage trace. Defaults to :math:`-30` mV.
@@ -1128,7 +1128,7 @@ class StepOne(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
     
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepOne` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepOne` for more information on the stimulus protocol.
     """
 
     def __init__(
@@ -1180,7 +1180,7 @@ class StepTwo(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepTwo` for more information on the stimulus protocol.
     """
 
     def __init__(
@@ -1232,7 +1232,7 @@ class StepThree(_Step):
     Here, the format of each line is: ``acronym: [full name, mean, std]`` 
 
     See also:
-        :class:`_Step` for the template class, and :func:`biophysics_fitting.setup_stim.setup_StepThree` for more information on the stimulus protocol.
+        :class:`_Step` for the template class, and :func:`biophysics_fitting.hay.setup_stim.setup_StepThree` for more information on the stimulus protocol.
     """
 
     def __init__(
