@@ -144,8 +144,8 @@ def pytest_configure(config):
         config.option.basetemp = win_basetemp
     
     _setup_pytest_logging()
-    import mechanisms.l5pt
-    mechanisms.l5pt.load()   
+    from config.user import mechanisms
+    mechanisms.load()   
 
 
 def pytest_sessionstart(session):
