@@ -63,7 +63,7 @@ import math
 
 ### logging setup
 import logging
-from config.isf_logging import logger
+from config.isf_logging import logger, silence_logger
 
 try:
     from IPython import display
@@ -225,12 +225,10 @@ from simrun.reduced_model \
 import simrun.synaptic_strength_fitting
 
 from singlecell_input_mapper.map_singlecell_inputs import map_singlecell_inputs
-from singlecell_input_mapper.evoked_network_param_from_template \
-    import create_network_parameter \
-    as create_evoked_network_parameter
-from singlecell_input_mapper.ongoing_network_param_from_template \
-    import create_network_parameter \
-    as create_ongoing_network_parameter
+from singlecell_input_mapper.network_param_from_template import (
+    build_network_param_from_template as create_evoked_network_parameter,
+    build_ongoing_network_param_from_template as create_ongoing_network_parameter
+)
 
 if not 'ISF_MINIMIZE_IO' in os.environ:
     if get_versions()['dirty']: logger.attention('The source folder has uncommited changes!')
@@ -303,6 +301,6 @@ def get_client(ip=None, client_port=38786, timeout=120):
 print("\n\n")
 print_module_versions()
 
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 logger.setLevel(logging.ATTENTION)

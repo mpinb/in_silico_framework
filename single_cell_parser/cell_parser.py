@@ -39,10 +39,6 @@ class CellParser(object):
     It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
     membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
-    See also:
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
-        This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
-    
     Attributes:
         hoc_path (str): Path to hoc file
         membraneParams (dict): Membrane parameters
@@ -1308,7 +1304,7 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        from config.cell_types import EXCITATORY
+        from config.user.cell_types import EXCITATORY
         excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):
