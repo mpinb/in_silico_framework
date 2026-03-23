@@ -34,6 +34,11 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     Attention:
         This test is specific to the barrel cortex and assumes that the barrel cortex model is downloaded
     """
+    # This cell modify function has since been removed, but is still useful for reproducibility tests.
+    import single_cell_parser.cell_modify_functions
+    from tests.reproducibility import scale_apical_morph_86
+    setattr(single_cell_parser.cell_modify_functions, "scale_apical_morph_86", scale_apical_morph_86)
+
     PSPs = simrun.synaptic_strength_fitting.PSPs
     confile = os.path.join(
         context.data_dir,
@@ -52,6 +57,6 @@ def test_VPM_synaptic_strength_is_between_1_72_and_1_85(client):
     psps._delayeds = [psps._delayeds[index] for index in indexes]
     psps._keys = [psps._keys[index] for index in indexes]
     psps.run(client)
-    optimal_g_pdf = psps.get_optimal_g(get_EPSP_measurement())
+    optimal_g_pdf = psps.get_optimal_g(measured_data=get_EPSP_measurement())
     gVPM = optimal_g_pdf.loc['VPM_C2']['optimal g']
     assert 1.85 >= gVPM >= 1.72
