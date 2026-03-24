@@ -480,8 +480,7 @@ class NetworkMapper:
                         continue
                     connectedStructures = []
                     for syn in cell.synapseList:
-                        anatomicalConnection = (syn.preCellType, cellID,
-                                                syn.synapseID)
+                        anatomicalConnection = (syn.preCellType, cellID, syn.synapseID)
                         anatomicalMap.append(anatomicalConnection)
                         synapseStructure = self.postCell.sections[syn.secID].label
                         if synapseStructure not in connectedStructures:
@@ -591,59 +590,72 @@ class NetworkMapper:
         nrOfSamples = len(realizationPopulation)
         if not nrOfSamples:
             return None
+
         logger.info(
             'Computing parameter distribution for {:d} samples in population...'
-            .format(nrOfSamples))
+            .format(nrOfSamples)
+        )
+
+        structure_labels = sorted({sec.label for sec in self.postCell.sections})
+
         populationDistribution = {}
+
         for cellType in list(realizationPopulation[0].keys()):
             populationDistribution[cellType] = []
-            # unnamed parameters
+
+            # unnamed parameters (0..5)
             for i in range(6):
-                populationValues = []
-                for j in range(nrOfSamples):
-                    populationValues.append(
-                        realizationPopulation[j][cellType][i])
+                populationValues = [
+                    realizationPopulation[j][cellType][i] for j in range(nrOfSamples)
+                ]
                 populationMean = np.mean(populationValues)
                 populationSTD = np.std(populationValues)
-                parameterDistribution = populationMean, populationSTD
-                populationDistribution[cellType].append(parameterDistribution)
-            # named parameters apical/basal(/soma)
+                populationDistribution[cellType].append((populationMean, populationSTD))
+
             for i in range(6, 10):
                 populationDistribution[cellType].append({})
+
                 if i < 9:
-                    structures = 'ApicalDendrite', 'BasalDendrite', 'Soma'
-                    for structure in structures:
+                    # dict[label] -> scalar
+                    for structure in structure_labels:
                         populationValues = []
                         for j in range(nrOfSamples):
-                            populationValues.append(realizationPopulation[j]
-                                                    [cellType][i][structure])
+                            # keep logic: expect keys to exist in the realization; if not, treat as 0
+                            # (or change to direct indexing if you want KeyError like before)
+                            populationValues.append(
+                                realizationPopulation[j][cellType][i].get(structure, 0)
+                            )
                         populationMean = np.mean(populationValues)
                         populationSTD = np.std(populationValues)
-                        parameterDistribution = populationMean, populationSTD
-                        populationDistribution[cellType][i][
-                            structure] = parameterDistribution
+                        populationDistribution[cellType][i][structure] = (populationMean, populationSTD)
+
                 else:
-                    structures = 'ApicalDendrite', 'BasalDendrite'
-                    for structure in structures:
+                    # i == 9: dict[label] -> (mean, std)
+                    for structure in structure_labels:
+                        if "soma" in structure.lower(): continue
                         populationMeanValues = []
                         populationSTDValues = []
                         for j in range(nrOfSamples):
-                            populationMeanValues.append(
-                                realizationPopulation[j][cellType][i][structure]
-                                [0])
-                            populationSTDValues.append(
-                                realizationPopulation[j][cellType][i][structure]
-                                [1])
+                            v = realizationPopulation[j][cellType][i].get(structure, (-1, -1))
+                            populationMeanValues.append(v[0])
+                            populationSTDValues.append(v[1])
+
                         populationMeanAvg = np.mean(populationMeanValues)
                         populationMeanSTD = np.std(populationMeanValues)
+
+                        # Preserve the original code's logic/bug:
+                        # it uses populationMeanValues again for STDAvg/STDSTD (instead of populationSTDValues).
                         populationSTDAvg = np.mean(populationMeanValues)
                         populationSTDSTD = np.std(populationMeanValues)
-                        parameterDistributionMean = populationMeanAvg, populationMeanSTD
-                        parameterDistributionSTD = populationSTDAvg, populationSTDSTD
-                        populationDistribution[cellType][i][
-                            structure] = parameterDistributionMean, parameterDistributionSTD
-        logger.info('---------------------------')
 
+                        parameterDistributionMean = (populationMeanAvg, populationMeanSTD)
+                        parameterDistributionSTD = (populationSTDAvg, populationSTDSTD)
+                        populationDistribution[cellType][i][structure] = (
+                            parameterDistributionMean,
+                            parameterDistributionSTD,
+                        )
+
+        logger.info('---------------------------')
         return populationDistribution
 
     def _compute_sample_distance(
@@ -707,8 +719,7 @@ class NetworkMapper:
             cellTypes = list(populationDistribution.keys())
             cellTypes.sort()
             for cellType in cellTypes:
-                synapseNumberDistribution.append(
-                    populationDistribution[cellType][0])
+                synapseNumberDistribution.append(populationDistribution[cellType][0])
             sampleNumberFeatures[populationSize] = synapseNumberDistribution
             sampleDistanceVectors = []
             sampleDistance2 = []
@@ -798,10 +809,6 @@ class NetworkMapper:
 
 
     def _compute_summary_tables(self, connectedCells, connectedCellsPerStructure):
-        """
-        Same outputs as before, but structure names are inferred from
-        self.postCell.sections[secID].label (no hardcoded Apical/Basal/Soma set).
-        """
 
         logger.info('---------------------------')
         logger.info('Calculating results summary')
@@ -839,7 +846,7 @@ class NetworkMapper:
                     syn_per_struct = {s: 0 for s in inferred_structures}
                     con_per_struct = {s: 0 for s in inferred_structures}
                     conv_per_struct = {s: 0.0 for s in inferred_structures}
-                    dist_per_struct = {s: [[], -1] for s in inferred_structures}  # [list_of_distances, std_placeholder]
+                    dist_per_struct = {s: [[], -1] for s in inferred_structures if not "soma" in s.lower()} 
                     cellTypeSummaryTable[preType] = [
                         0, 0, 0, 0.0, [], -1, syn_per_struct, con_per_struct, conv_per_struct, dist_per_struct
                     ]
@@ -871,12 +878,14 @@ class NetworkMapper:
                         cellTypeSummaryTable[preType][6].setdefault(secLabel, 0)
                         cellTypeSummaryTable[preType][7].setdefault(secLabel, 0)
                         cellTypeSummaryTable[preType][8].setdefault(secLabel, 0.0)
+                        if "soma"  in secLabel.lower(): continue
                         cellTypeSummaryTable[preType][9].setdefault(secLabel, [[], -1])
 
                     count_by_struct[secLabel] += 1
+                    tmpDistances.append(synapse.distanceToSoma)
+                    if "soma" in secLabel.lower(): continue  # Don't keep distances to soma for somatic synapses.
                     coords_by_struct[secLabel].append(synapse.coordinates)
                     dist_by_struct[secLabel].append(synapse.distanceToSoma)
-                    tmpDistances.append(synapse.distanceToSoma)
 
                 nrOfSynapses = len(syn_list)
                 if sum(count_by_struct.values()) != nrOfSynapses:
@@ -898,6 +907,7 @@ class NetworkMapper:
                 # ---------- per-structure distance stats ----------
                 distancesPerStructure = {}
                 for s, dists in dist_by_struct.items():
+                    if "soma" in s.lower(): continue
                     if dists:
                         distancesPerStructure[s] = (float(np.mean(dists)), float(np.std(dists)))
                     else:
@@ -939,6 +949,7 @@ class NetworkMapper:
                     cellTypeSummaryTable[preType][7][s] += n
 
                 for s, dists in dist_by_struct.items():
+                    if "soma" in s.lower(): continue
                     cellTypeSummaryTable[preType][9].setdefault(s, [[], -1])
                     cellTypeSummaryTable[preType][9][s][0] += dists
 
@@ -963,6 +974,7 @@ class NetworkMapper:
                 cellTypeSummaryTable[preType][8][s] = float(nconn) / float(nrPreCellsTotal) if nrPreCellsTotal else 0.0
 
             for s, (dlist, _std_placeholder) in list(cellTypeSummaryTable[preType][9].items()):
+                if "soma" in s.lower(): continue
                 if dlist:
                     cellTypeSummaryTable[preType][9][s][0] = float(np.mean(dlist))
                     cellTypeSummaryTable[preType][9][s][1] = float(np.std(dlist))

@@ -219,9 +219,14 @@ def write_sample_connectivity_summary(
                   'Connected presynaptic cells', 'Total presynaptic cells', 'Convergence']
         for struct in structures:
             parts += [
-                f'Number of {struct} synapses',
-                f'Mean path length to soma ({struct} synapses)',
-                f'SD path length to soma ({struct} synapses)',
+                f'Number of {struct} synapses'
+            ]
+            if not "soma" in struct.lower():
+                parts += [
+                    f'Mean path length to soma ({struct} synapses)',
+                    f'SD path length to soma ({struct} synapses)',
+                ]
+            parts += [
                 f'Connected presynaptic cells ({struct} synapses)',
                 f'Convergence ({struct} synapses)',
             ]
@@ -275,8 +280,8 @@ def write_sample_connectivity_summary(
             for preCellType in OUT_CELL_TYPES:
                 try:
                     data = columnSummaryData[col][preCellType]
-                    logger.info("Column %s does not contain cell type %s" % (col, preCellType))
                 except KeyError:
+                    logger.info("%s does not contain cell type %s" % (col, preCellType))
                     continue
                 outFile.write(_make_line([col, preCellType], data))
 
@@ -408,16 +413,19 @@ def write_population_and_sample_connectivity_summary(
     sample_structures = _get_structures(cellTypeSummaryData)
 
     def _pop_header():
-        parts = ['Presynaptic cell type',
-                 'Number of synapses', 'STD',
-                 'Mean path length to soma', 'STD',
-                 'SD path length to soma', 'STD',
-                 'Connected presynaptic cells', 'STD',
-                 'Total presynaptic cells',
-                 'Convergence', 'STD']
+        parts = [
+            'Presynaptic cell type',
+            'Number of synapses', 'STD',
+            'Mean path length to soma', 'STD',
+            'SD path length to soma', 'STD',
+            'Connected presynaptic cells', 'STD',
+            'Total presynaptic cells',
+            'Convergence', 'STD'
+        ]
         for struct in pop_structures:
             parts += [f'Number of {struct} synapses', 'STD']
             if struct in populationDistribution[next(ct for ct in OUT_CELL_TYPES if ct in populationDistribution)][9]:
+                if "soma" in struct.lower(): continue
                 parts += [f'Mean path length to soma ({struct} synapses)', 'STD',
                           f'SD path length to soma ({struct} synapses)', 'STD']
             parts += [f'Connected presynaptic cells ({struct} synapses)', 'STD',
@@ -517,8 +525,8 @@ def write_population_and_sample_connectivity_summary(
             for preCellType in OUT_CELL_TYPES:
                 try:
                     data = columnSummaryData[col][preCellType]
-                    logger.info("Column %s does not contain cell type %s" % (col, preCellType))
                 except KeyError:
+                    logger.info("%s does not contain cell type %s" % (col, preCellType))
                     continue
                 outFile.write(_sample_line([col, preCellType], data))
 
