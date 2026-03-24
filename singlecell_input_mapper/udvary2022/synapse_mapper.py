@@ -21,6 +21,7 @@ Consult the module :mod:`~singlecell_input_mapper.map_singlecell_inputs` for suc
 '''
 import numpy as np
 from .scalar_field import ScalarField
+from .cell import Cell
 import sys
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -50,7 +51,12 @@ class SynapseMapper(object):
             points inside that voxel.
     '''
 
-    def __init__(self, cell=None, synDist=None, isDensity=True):
+    def __init__(
+        self, 
+        cell: Cell, 
+        synDist=None, 
+        isDensity=True
+        ):
         '''
         Args:
             cell (:class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Cell`): 
@@ -84,6 +90,7 @@ class SynapseMapper(object):
             list: list of :class:`~singlecell_input_mapper.singlecell_input_mapper.cell.Synapse` objects.
             Also updates the :param:`cell` attribute to contain synapses.
         '''
+        assert self.synDist != None, "Can't create synapses if I don't know the density distribution of synapses"
         newSynapses = []
         if not self.voxelEdgeMap:
             self._create_voxel_edge_map()
@@ -98,8 +105,7 @@ class SynapseMapper(object):
                     # ------- random 1: 
                     # poisson sample the synapse density distribution
                     nrOfSyn = np.random.poisson(nrOfSyn)
-                    if not nrOfSyn:
-                        continue
+                    if not nrOfSyn: continue
                     
                     # ------- random 2: 
                     # choose random synapse target onto the dendrite
@@ -108,22 +114,20 @@ class SynapseMapper(object):
                     candidatePts = list(np.random.permutation(candEdges))
                     # fix for situation where nrOfSyn > len(candidatePts):
                     while len(candidatePts) < nrOfSyn:
-                        candidatePts.append(
-                            candEdges[np.random.randint(len(candEdges))])
+                        candidatePts.append(candEdges[np.random.randint(len(candEdges))])
                         
                     # Save synapses
                     for n in range(nrOfSyn):
                         edgeID = candidatePts[n][0]
                         edgePtID = candidatePts[n][1]
                         edgex = self.cell.sections[edgeID].relPts[edgePtID]
-                        if edgex < 0.0 or edgex > 1.0:
-                            raise RuntimeError('Edge x out of range')
-                        newSynapses.append(
-                            self.cell.add_synapse(
-                                edgeID, 
-                                edgePtID, 
-                                edgex,
-                                preType))
+                        if edgex < 0.0 or edgex > 1.0: raise RuntimeError('Edge x out of range')
+                        synapse = self.cell.add_synapse(
+                            edgeID, 
+                            edgePtID, 
+                            edgex,
+                            preType)
+                        newSynapses.append(synapse)
         return newSynapses
 
     def _create_voxel_edge_map(self):
@@ -131,6 +135,7 @@ class SynapseMapper(object):
         
         Only needs to be called once at the beginning.
         '''
+        assert self.synDist != None, "Can't create the edge map if I don't know the density distribution of synapses"
         voxelEdgeMap = self.voxelEdgeMap
         for structure in list(self.cell.structures.keys()):
             #            use cell.sections, not cell.structures

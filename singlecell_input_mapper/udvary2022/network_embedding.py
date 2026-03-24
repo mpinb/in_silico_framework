@@ -76,7 +76,7 @@ class NetworkMapper:
             postCellType (str): The type of the postsynaptic cell.
             cellTypeNumbersSpreadsheet (dict): Number of presynaptic cells per cell type and anatomical_area.
         '''
-        self.cells = {}
+        self.cells: dict[str, dict[str, PointCell]] = {}
         self.connected_cells = {}
         self.exCellTypes = []
         self.inhCellTypes = []
@@ -175,13 +175,6 @@ class NetworkMapper:
             cellTypeSummaryTable,
             anatomicalAreaSummaryTable)
 
-        #        for testing convergence:
-        #        self._test_population_convergence(nrOfSamples, sampleConnectivityData, postCellName)
-
-        #        for testing basic functionality:
-        #        connectivityMap, synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable = sampleConnectivityData[0]
-        #        self._write_output_files(postCellName, connectivityMap, synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable)
-
         logger.info('Done generating network embedding!')
         logger.info('---------------------------')
 
@@ -231,68 +224,16 @@ class NetworkMapper:
                 for preCellType in preCellTypes:
                     for preCell in self.cells[anatomical_area][preCellType]:
                         preCell.synapseList = None
-            # for anatomical_area in anatomical_areas:
-            #     for preCellType in preCellTypes:
-            #         nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
-            #         if not nrOfDensities:
-            #             continue
-            #         #=======================================================================
-            #         # for testing purposes: write 3D synapse density
-            #         #=======================================================================
-            ##          for structure in self.postCell.structures.keys():
-            ##              for i in range(nrOfDensities):
-            ##                  outDensity = cellTypeSynapseDensities[anatomical_area][preCellType][i][structure]
-            ##                  outNamePrefix = postCellName[:-4]
-            ##                  synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,anatomical_area,preCellType,str(i)))
-            ##                  writer.write_scalar_field(synapseDensityName, outDensity)
 
-            #         print '---------------------------'
-            #         print 'Computed %d synapse densities of type %s in anatomical_area %s!' % (nrOfDensities,preCellType,anatomical_area)
-            #         print 'Assigning synapses from cell type %s in anatomical_area %s' % (preCellType, anatomical_area)
-            #         totalNumber = len(self.cells[anatomical_area][preCellType])
-            #         densityIDs = np.random.randint(0, nrOfDensities, totalNumber)
-            #         count = 0
-            #         skipCount = 0
-            #         for i in range(totalNumber):
-            #             preCell = self.cells[anatomical_area][preCellType][i]
-            #             count += 1
-            #             print '    Computing synapses for presynaptic cell %d of %d...\r' %  (count,totalNumber),
-            #             sys.stdout.flush()
-            #             densityID = densityIDs[i]
-            #             synapseDensity = cellTypeSynapseDensities[anatomical_area][preCellType][densityID]
-            #             if synapseDensity is None:
-            #                 skipCount += 1
-            #                 continue
-            #             self.mapper.synDist = synapseDensity
-            #             synapseType = '_'.join((preCellType,anatomical_area))
-            #             preCell.synapseList = self.mapper.create_synapses(synapseType)
-            #             for newSyn in preCell.synapseList:
-            #                 newSyn.preCell = preCell
-            #         print ''
-            #         print '    Skipped %d empty synapse densities...' % skipCount
-
-            # connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_connectivity_map()
-            connectivityMap, connectedCells, connectedCellsPerStructure = \
-                self._create_anatomical_realization(cellTypeSynapseDensities)
+            connectivityMap, connectedCells, connectedCellsPerStructure = self._create_anatomical_realization(cellTypeSynapseDensities)
             self._generate_output_files(
                 postCellName, 
                 connectivityMap,
                 connectedCells,
                 connectedCellsPerStructure)
-            (synapseLocations,  # unused 
-             cellSynapseLocations,  # unused
-             cellTypeSummaryTable, 
-             anatomicalAreaSummaryTable  # unused
-             ) = self._compute_summary_tables(
-                connectedCells, connectedCellsPerStructure)
+            _,  _,  cellTypeSummaryTable, _ = self._compute_summary_tables(connectedCells, connectedCellsPerStructure)
             cellTypeSpecificPopulation.append(cellTypeSummaryTable)
             logger.info('---------------------------')
-
-        # print '    Writing output files...'
-        # populationDistribution = self._compute_parameter_distribution(cellTypeSpecificPopulation)
-        # outNamePrefix = postCellName[:-4]
-        # summaryName = outNamePrefix + '_synapses_%d_realizations_summary' % nrOfRealizations
-        # writer.write_population_connectivity_summary(summaryName, populationDistribution)
 
     def create_network_embedding_from_synapse_densities(
         self, 
@@ -520,6 +461,7 @@ class NetworkMapper:
         '''
         logger.info('---------------------------')
         logger.info('Creating anatomical connectivity map for output...')
+
         anatomicalMap = []
         connectedCells = {}
         connectedCellsPerStructure = {}
