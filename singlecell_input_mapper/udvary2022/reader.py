@@ -17,6 +17,7 @@
 '''
 
 import numpy as np
+import os
 from config.isf_logging import logger
 from . import scalar_field
 from data_base.dbopen import dbopen
@@ -445,16 +446,34 @@ def read_celltype_numbers_spreadsheet(fname):
     return cellTypeNumbers
 
 
-if __name__ == '__main__':
-    #    testHocFname = raw_input('Enter hoc filename: ')
-    #    testReader = Reader(testHocFname)
-    #    testReader.read_hoc_file()
-    #    testAmFname = raw_input('Enter Amira filename: ')
-    #    for i in range(1000):
-    #        testAmFname = 'SynapseCount.14678.am'
-    #        read_scalar_field(testAmFname)
-    #    print 'Done!'
-    from six.moves import input
-    testFname = input('Enter filename: ')
-    #    spreadsheet = read_celltype_numbers_spreadsheet(testFname)
-    spreadsheet = read_connections_spreadsheet(testFname)
+def read_bouton_densities_per_area_per_ct(dirname, anatomical_areas, cell_types):
+    boutonDensities = {}
+    for anatomical_area in anatomical_areas:
+        boutonDensities[anatomical_area] = {}  # type is Dict[str, Dict[str, List[scim.ScalarField]]]
+
+        for preCellType in cell_types:
+            boutonDensities[anatomical_area][preCellType] = []  # type is List[scim.ScalarField]
+
+            boutonDensityFolder = os.path.join(dirname, anatomical_area, preCellType)
+            if not os.path.isdir(boutonDensityFolder):
+                raise FileNotFoundError("Could not find bouton density folder: {}".format(boutonDensityFolder))
+
+            boutonDensityNames = []
+            with os.scandir(boutonDensityFolder) as it:
+                for entry in it:
+                    if entry.is_file():
+                        name = entry.name
+                        if name.endswith(".am") or name.endswith(".AM"):
+                            boutonDensityNames.append(entry.path)
+
+            logger.debug("    Loading {:d} bouton densities from {:s}".format(len(boutonDensityNames), boutonDensityFolder))
+
+            # small local bindings reduce overhead in the tight loop
+            _read_scalar_field = read_scalar_field
+            _append = boutonDensities[anatomical_area][preCellType].append
+
+            for densityName in boutonDensityNames:
+                boutonDensity = _read_scalar_field(densityName)
+                boutonDensity.resize_mesh()
+                _append(boutonDensity)
+    return boutonDensities
