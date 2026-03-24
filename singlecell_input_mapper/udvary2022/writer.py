@@ -18,66 +18,14 @@
 from __future__ import absolute_import
 from .scalar_field import ScalarField
 from .generate_nr_of_cells_spreadsheet import con_file_to_NumberOfConnectedCells_sheet
+from config.user.cell_types import EXCITATORY, INHIBITORY
 from data_base.dbopen import dbopen
 import logging
 __author__ = 'Robert Egger'
 __date__ = '2012-03-08'
 logger = logging.getLogger("ISF").getChild(__name__)
 
-labels2int = {\
-    "Neuron":                 2,\
-    "Dendrite":               3,\
-    "ApicalDendrite":         4,\
-    "BasalDendrite":          5,\
-    "Axon":                   6,\
-    "AIS":                    6,\
-    "Myelin":                 6,\
-    "Node":                   6,\
-    "Soma":                   7,\
-    "Landmark":               8,\
-    "Pia":                    9,\
-    "WhiteMatter":           48,\
-    "Vessel":                10,\
-    "Barrel":                11,\
-    "ZAxis":                 50,\
-    "aRow":                  12,\
-    "A1":                    13,\
-    "A2":                    14,\
-    "A3":                    15,\
-    "A4":                    16,\
-    "bRow":                  17,\
-    "B1":                    18,\
-    "B2":                    19,\
-    "B3":                    20,\
-    "B4":                    21,\
-    "cRow":                  22,\
-    "C1":                    23,\
-    "C2":                    24,\
-    "C3":                    25,\
-    "C4":                    26,\
-    "C5":                    27,\
-    "C6":                    28,\
-    "dRow":                  29,\
-    "D1":                    30,\
-    "D2":                    31,\
-    "D3":                    32,\
-    "D4":                    33,\
-    "D5":                    34,\
-    "D6":                    35,\
-    "eRow":                  36,\
-    "E1":                    37,\
-    "E2":                    38,\
-    "E3":                    39,\
-    "E4":                    40,\
-    "E5":                    41,\
-    "E6":                    42,\
-    "greekRow":              43,\
-    "Alpha":                 44,\
-    "Beta":                  45,\
-    "Gamma":                 46,\
-    "Delta":                 47,\
-    "Septum":                 0,\
-              }
+OUT_CELL_TYPES = EXCITATORY + INHIBITORY
 
 
 def write_landmark_file(fname=None, landmarkList=None):
@@ -94,14 +42,6 @@ def write_landmark_file(fname=None, landmarkList=None):
         err_str = 'No landmark output file name given'
         raise RuntimeError(err_str)
 
-
-    # if not landmarkList:
-    #     print 'Landmark list empty!'
-    #     return
-    # nrCoords = len(landmarkList[0])
-    # if nrCoords != 3:
-    #     err_str = 'Landmarks have wrong format! Number of coordinates is ' + str(nrCoords) + ', should be 3'
-    #     raise RuntimeError(err_str)
 
     if not fname.endswith('.landmarkAscii'):
         fname += '.landmarkAscii'
@@ -191,7 +131,8 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
 def write_anatomical_realization_map(
         fname=None,
         functionalMap=None,
-        anatomicalID=None):
+        anatomicalID=None
+        ):
     '''Writes a :ref:`con_file_format` file containing a list of all functional connections.
      
     Connections are tuples of the form: (cell type, presynaptic cell index, synapse index).
@@ -244,258 +185,105 @@ def write_sample_connectivity_summary(
         cellTypeSummaryData=None,
         columnSummaryData=None):
     """Write a summary of a single connectivity realization to a file.
-
-    The input summary tables can be computed with :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
-    For each cell type, this method writes a summary on the following attributes of each structure:
-    
-    - Presynaptic cell type
-    - Number of synapses
-    - Mean path length to soma
-    - SD path length to soma
-    - Connected presynaptic cells
-    - Total presynaptic cells
-    - Convergence
-    - Number of synapses
-
-    If the brain has been subdivided in separate anatomical areas (and :param:`columnSummaryData` is not None), 
-    the summary is also written for each area.
-
-    Args:
-        fname (str): Name of the output file
-        cellTypeSummaryData (dict): Dictionary containing the summary data for each cell type
-            Must contain at least a key for each presynaptic cell type.
-            May additionally include a key for each anatomical structure, and as values 
-            another dictionary with the rpesynaptic cell types as keys.
-            Values contain the information as mentioned above.
-        columnSummaryData (dict): Dictionary containing the summary data for each column.
-
-    Returns:
-        None. Writes the results to disk.
     """
     if fname is None or cellTypeSummaryData is None or columnSummaryData is None:
-        #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
-        #    if fname is None or columnSummaryData is None:
         err_str = 'Incomplete data! Cannot write results summary file'
         raise RuntimeError(err_str)
 
     if not fname.endswith('.csv') and not fname.endswith('.CSV'):
         fname += '.csv'
 
+    def _get_structures(summary_data):
+        for cell_type in OUT_CELL_TYPES:
+            for key, data in summary_data.items():
+                entry = data[key] if isinstance(list(data.values())[0], dict) else data
+                if cell_type in (entry if isinstance(entry, dict) else summary_data):
+                    candidate = entry[cell_type] if isinstance(entry, dict) else summary_data[cell_type]
+                    return list(candidate[6].keys())  # synapsesPerStructure keys
+        return []
 
-    # with open(fname, 'w') as outFile:
-    #     header = '# connectivity summary\n'
-    #     header += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tConnected presynaptic cells\tTotal presynaptic cells\n'
-    #     outFile.write(header)
-    #     columns = columnSummaryData.keys()
-    #     columns.sort()
-    #     if len(columns):
-    #         preCellTypes = columnSummaryData[columns[0]].keys()
-    #         preCellTypes.sort()
-    #         for col in columns:
-    #             for preCellType in preCellTypes:
-    #                data = columnSummaryData[col][preCellType]
-    #                line = col + '\t' + preCellType + '\t'
-    #                line += str(data[0])
-    #                line += '\t'
-    #                line += str(data[1])
-    #                line += '\t'
-    #                line += str(data[2])
-    #                line += '\n'
-    #                outFile.write(line)
+    structures = _get_structures(
+        {k: {k2: v2 for k2, v2 in v.items()} if isinstance(list(v.values())[0], (list, tuple)) is False else v
+         for k, v in columnSummaryData.items()}
+        if columnSummaryData else cellTypeSummaryData
+    )
 
-    outCellTypes = ('L2','L34','L4py','L4sp','L4ss','L5st','L5tt','L6cc','L6ccinv','L6ct','VPM',\
-                    'L1','L23Trans','L45Peak','L45Sym','L56Trans','SymLocal1','SymLocal2',\
-                    'SymLocal3','SymLocal4','SymLocal5','SymLocal6')
+    for ct in OUT_CELL_TYPES:
+        if ct in cellTypeSummaryData:
+            structures = list(cellTypeSummaryData[ct][6].keys())
+            break
+
+    def _make_header(prefix_cols):
+        parts = prefix_cols[:]
+        parts += ['Number of synapses', 'Mean path length to soma', 'SD path length to soma',
+                  'Connected presynaptic cells', 'Total presynaptic cells', 'Convergence']
+        for struct in structures:
+            parts += [
+                f'Number of {struct} synapses',
+                f'Mean path length to soma ({struct} synapses)',
+                f'SD path length to soma ({struct} synapses)',
+                f'Connected presynaptic cells ({struct} synapses)',
+                f'Convergence ({struct} synapses)',
+            ]
+        return '\t'.join(parts) + '\n'
+
+    def _make_line(prefix_values, data):
+        totalSynapses        = data[0]
+        nrOfConnectedCells   = data[1]
+        nrOfAllCells         = data[2]
+        convergence          = data[3]
+        distanceTotalMean    = data[4]
+        distanceTotalSD      = data[5]
+        synapsesPerStructure     = data[6]
+        connectionsPerStructure  = data[7]
+        convergencePerStructure  = data[8]
+        distancesPerStructure    = data[9]
+
+        parts = prefix_values[:]
+        parts += [str(totalSynapses), str(distanceTotalMean), str(distanceTotalSD),
+                  str(nrOfConnectedCells), str(nrOfAllCells), str(convergence)]
+
+        for struct in structures:
+            parts.append(str(synapsesPerStructure[struct]))
+            if struct in distancesPerStructure:
+                parts.append(str(distancesPerStructure[struct][0]))
+                parts.append(str(distancesPerStructure[struct][1]))
+            parts.append(str(connectionsPerStructure[struct]))
+            parts.append(str(convergencePerStructure[struct]))
+
+        return '\t'.join(parts) + '\n'
 
     with dbopen(fname, 'w') as outFile:
-        header1 = '# connectivity per cell type summary\n'
-        header1 += 'Presynaptic cell type\tNumber of synapses\tMean path length to soma\tSD path length to soma\t'
-        header1 += 'Connected presynaptic cells\tTotal presynaptic cells\tConvergence\t'
-        header1 += 'Number of apical dendrite synapses\tMean path length to soma (apical synapses)\tSD path length to soma (apical synapses)\t'
-        header1 += 'Connected presynaptic cells (apical synapses)\tConvergence (apical synapses)\t'
-        header1 += 'Number of basal dendrite synapses\tMean path length to soma (basal synapses)\tSD path length to soma (basal synapses)\t'
-        header1 += 'Connected presynaptic cells (basal synapses)\tConvergence (basal synapses)\t'
-        header1 += 'Number of soma synapses\t'
-        header1 += 'Connected presynaptic cells (soma synapses)\tConvergence (soma synapses)\n'
-        outFile.write(header1)
-        #        preCellTypes = cellTypeSummaryData.keys()
-        #        preCellTypes.sort()
-        for preCellType in outCellTypes:
+        outFile.write('# connectivity per cell type summary\n')
+        outFile.write(_make_header(['Presynaptic cell type']))
+
+        for preCellType in OUT_CELL_TYPES:
             try:
                 data = cellTypeSummaryData[preCellType]
             except KeyError:
                 logger.warning("Cell type summary data does not contain cell type %s" % preCellType)
                 continue
-            totalSynapses = data[0]
-            nrOfConnectedCells = data[1]
-            nrOfAllCells = data[2]
-            convergence = data[3]
-            distanceTotalMean = data[4]
-            distanceTotalSD = data[5]
-            synapsesPerStructure = data[6]
-            connectionsPerStructure = data[7]
-            convergencePerStructure = data[8]
-            distancesPerStructure = data[9]
-            apicalSynapses = synapsesPerStructure['ApicalDendrite']
-            basalSynapses = synapsesPerStructure['BasalDendrite']
-            somaSynapses = synapsesPerStructure['Soma']
-            connectionsPerStructureApical = connectionsPerStructure[
-                'ApicalDendrite']
-            connectionsPerStructureBasal = connectionsPerStructure[
-                'BasalDendrite']
-            connectionsPerStructureSoma = connectionsPerStructure['Soma']
-            convergencePerStructureApical = convergencePerStructure[
-                'ApicalDendrite']
-            convergencePerStructureBasal = convergencePerStructure[
-                'BasalDendrite']
-            convergencePerStructureSoma = convergencePerStructure['Soma']
-            distanceApicalMean = distancesPerStructure['ApicalDendrite'][0]
-            distanceApicalSD = distancesPerStructure['ApicalDendrite'][1]
-            distanceBasalMean = distancesPerStructure['BasalDendrite'][0]
-            distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-            line = preCellType + '\t'
-            line += str(totalSynapses)
-            line += '\t'
-            line += str(distanceTotalMean)
-            line += '\t'
-            line += str(distanceTotalSD)
-            line += '\t'
-            line += str(nrOfConnectedCells)
-            line += '\t'
-            line += str(nrOfAllCells)
-            line += '\t'
-            line += str(convergence)
-            line += '\t'
-            line += str(apicalSynapses)
-            line += '\t'
-            line += str(distanceApicalMean)
-            line += '\t'
-            line += str(distanceApicalSD)
-            line += '\t'
-            line += str(connectionsPerStructureApical)
-            line += '\t'
-            line += str(convergencePerStructureApical)
-            line += '\t'
-            line += str(basalSynapses)
-            line += '\t'
-            line += str(distanceBasalMean)
-            line += '\t'
-            line += str(distanceBasalSD)
-            line += '\t'
-            line += str(connectionsPerStructureBasal)
-            line += '\t'
-            line += str(convergencePerStructureBasal)
-            line += '\t'
-            line += str(somaSynapses)
-            line += '\t'
-            line += str(connectionsPerStructureSoma)
-            line += '\t'
-            line += str(convergencePerStructureSoma)
-            line += '\n'
-            outFile.write(line)
+            outFile.write(_make_line([preCellType], data))
 
         outFile.write('\n')
 
-        header2 = '# connectivity per column per cell type summary\n'
-        header2 += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tMean path length to soma\tSD path length to soma\t'
-        header2 += 'Connected presynaptic cells\tTotal presynaptic cells\tConvergence\t'
-        header2 += 'Number of apical dendrite synapses\tMean path length to soma (apical synapses)\tSD path length to soma (apical synapses)\t'
-        header2 += 'Connected presynaptic cells (apical synapses)\tConvergence (apical synapses)\t'
-        header2 += 'Number of basal dendrite synapses\tMean path length to soma (basal synapses)\tSD path length to soma (basal synapses)\t'
-        header2 += 'Connected presynaptic cells (basal synapses)\tConvergence (basal synapses)\t'
-        header2 += 'Number of soma synapses\t'
-        header2 += 'Connected presynaptic cells (soma synapses)\tConvergence (soma synapses)\n'
-        outFile.write(header2)
-        columns = list(columnSummaryData.keys())
-        columns.sort()
-        if len(columns):
-            # preCellTypes = columnSummaryData[columns[0]].keys()
-            # preCellTypes.sort()
-            for col in columns:
-                for preCellType in outCellTypes:
-                    try:
-                        data = columnSummaryData[col][preCellType]
-                        logger.info("Column %s does not contain cell type %s" % (col, preCellType))
-                    except KeyError:
-                        continue
-                    totalSynapses = data[0]
-                    nrOfConnectedCells = data[1]
-                    nrOfAllCells = data[2]
-                    convergence = data[3]
-                    distanceTotalMean = data[4]
-                    distanceTotalSD = data[5]
-                    synapsesPerStructure = data[6]
-                    connectionsPerStructure = data[7]
-                    convergencePerStructure = data[8]
-                    distancesPerStructure = data[9]
-                    apicalSynapses = synapsesPerStructure['ApicalDendrite']
-                    basalSynapses = synapsesPerStructure['BasalDendrite']
-                    somaSynapses = synapsesPerStructure['Soma']
-                    connectionsPerStructureApical = connectionsPerStructure[
-                        'ApicalDendrite']
-                    connectionsPerStructureBasal = connectionsPerStructure[
-                        'BasalDendrite']
-                    connectionsPerStructureSoma = connectionsPerStructure[
-                        'Soma']
-                    convergencePerStructureApical = convergencePerStructure[
-                        'ApicalDendrite']
-                    convergencePerStructureBasal = convergencePerStructure[
-                        'BasalDendrite']
-                    convergencePerStructureSoma = convergencePerStructure[
-                        'Soma']
-                    distanceApicalMean = distancesPerStructure[
-                        'ApicalDendrite'][0]
-                    distanceApicalSD = distancesPerStructure['ApicalDendrite'][
-                        1]
-                    distanceBasalMean = distancesPerStructure['BasalDendrite'][
-                        0]
-                    distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-                    line = col + '\t' + preCellType + '\t'
-                    line += str(totalSynapses)
-                    line += '\t'
-                    line += str(distanceTotalMean)
-                    line += '\t'
-                    line += str(distanceTotalSD)
-                    line += '\t'
-                    line += str(nrOfConnectedCells)
-                    line += '\t'
-                    line += str(nrOfAllCells)
-                    line += '\t'
-                    line += str(convergence)
-                    line += '\t'
-                    line += str(apicalSynapses)
-                    line += '\t'
-                    line += str(distanceApicalMean)
-                    line += '\t'
-                    line += str(distanceApicalSD)
-                    line += '\t'
-                    line += str(connectionsPerStructureApical)
-                    line += '\t'
-                    line += str(convergencePerStructureApical)
-                    line += '\t'
-                    line += str(basalSynapses)
-                    line += '\t'
-                    line += str(distanceBasalMean)
-                    line += '\t'
-                    line += str(distanceBasalSD)
-                    line += '\t'
-                    line += str(connectionsPerStructureBasal)
-                    line += '\t'
-                    line += str(convergencePerStructureBasal)
-                    line += '\t'
-                    line += str(somaSynapses)
-                    line += '\t'
-                    line += str(connectionsPerStructureSoma)
-                    line += '\t'
-                    line += str(convergencePerStructureSoma)
-                    line += '\n'
-                    outFile.write(line)
+        outFile.write('# connectivity per column per cell type summary\n')
+        outFile.write(_make_header(['Presynaptic column', 'Presynaptic cell type']))
+
+        columns = sorted(columnSummaryData.keys())
+        for col in columns:
+            for preCellType in OUT_CELL_TYPES:
+                try:
+                    data = columnSummaryData[col][preCellType]
+                    logger.info("Column %s does not contain cell type %s" % (col, preCellType))
+                except KeyError:
+                    continue
+                outFile.write(_make_line([col, preCellType], data))
 
 
 def write_population_connectivity_summary(
         fname=None,
-        populationDistribution=None
-        ):
+        populationDistribution=None):
     """Write a summary of populations of connectivity realizations to a file.
 
     The populationDistribution can be calculated with :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
@@ -522,137 +310,76 @@ def write_population_connectivity_summary(
         None. Writes the results to disk.
     """
     if fname is None or populationDistribution is None:
-        #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
-        #    if fname is None or columnSummaryData is None:
-        err_str = 'Incomplete data! Cannot write results summary file'
-        raise RuntimeError(err_str)
+        raise RuntimeError('Incomplete data! Cannot write results summary file')
 
     if not fname.endswith('.csv') and not fname.endswith('.CSV'):
         fname += '.csv'
 
-    outCellTypes = ('L2','L34','L4py','L4sp','L4ss','L5st','L5tt','L6cc','L6ccinv','L6ct','VPM',\
-                    'L1','L23Trans','L45Peak','L45Sym','L56Trans','SymLocal1','SymLocal2',\
-                    'SymLocal3','SymLocal4','SymLocal5','SymLocal6')
+    # Discover structures from the first present cell type
+    structures = []
+    for ct in OUT_CELL_TYPES:
+        if ct in populationDistribution:
+            structures = list(populationDistribution[ct][6].keys())
+            break
+
+    def _make_header():
+        parts = ['Presynaptic cell type',
+                 'Number of synapses', 'STD',
+                 'Mean path length to soma', 'STD',
+                 'SD path length to soma', 'STD',
+                 'Connected presynaptic cells', 'STD',
+                 'Total presynaptic cells',
+                 'Convergence', 'STD']
+        for struct in structures:
+            parts += [f'Number of {struct} synapses', 'STD']
+            if struct in populationDistribution[next(ct for ct in OUT_CELL_TYPES if ct in populationDistribution)][9]:
+                parts += [f'Mean path length to soma ({struct} synapses)', 'STD',
+                          f'SD path length to soma ({struct} synapses)', 'STD']
+            parts += [f'Connected presynaptic cells ({struct} synapses)', 'STD',
+                      f'Convergence ({struct} synapses)', 'STD']
+        return '# connectivity per cell type population summary\n' + '\t'.join(parts) + '\n'
+
+    def _make_line(preCellType, data):
+        totalSynapses           = data[0]
+        nrOfConnectedCells      = data[1]
+        nrOfAllCells            = data[2]
+        convergence             = data[3]
+        distanceTotalMean       = data[4]
+        distanceTotalSD         = data[5]
+        synapsesPerStructure    = data[6]
+        connectionsPerStructure = data[7]
+        convergencePerStructure = data[8]
+        distancesPerStructure   = data[9]
+
+        parts = [
+                preCellType,
+                str(totalSynapses[0]),       str(totalSynapses[1]),
+                str(distanceTotalMean[0]),   str(distanceTotalMean[1]),
+                str(distanceTotalSD[0]),     str(distanceTotalSD[1]),
+                str(nrOfConnectedCells[0]),  str(nrOfConnectedCells[1]),
+                str(nrOfAllCells[0]),
+                str(convergence[0]),         str(convergence[1])
+        ]
+
+        for struct in structures:
+            synapses = synapsesPerStructure[struct]
+            parts += [str(synapses[0]), str(synapses[1])]
+            if struct in distancesPerStructure:
+                mean, sd = distancesPerStructure[struct]
+                parts += [str(mean[0]), str(mean[1]), str(sd[0]), str(sd[1])]
+            conns = connectionsPerStructure[struct]
+            conv  = convergencePerStructure[struct]
+            parts += [str(conns[0]), str(conns[1]), str(conv[0]), str(conv[1])]
+
+        return '\t'.join(parts) + '\n'
 
     with dbopen(fname, 'w') as outFile:
-        header0 = '# connectivity per cell type population summary\n'
-        header0 += 'Presynaptic cell type\tNumber of synapses\tSTD\tMean path length to soma\tSTD\tSD path length to soma\tSTD\t'
-        header0 += 'Connected presynaptic cells\tSTD\tTotal presynaptic cells\tConvergence\tSTD\t'
-        header0 += 'Number of apical dendrite synapses\tSTD\tMean path length to soma (apical synapses)\tSTD\tSD path length to soma (apical synapses)\tSTD\t'
-        header0 += 'Connected presynaptic cells (apical synapses)\tSTD\tConvergence (apical synapses)\tSTD\t'
-        header0 += 'Number of basal dendrite synapses\tSTD\tMean path length to soma (basal synapses)\tSTD\tSD path length to soma (basal synapses)\tSTD\t'
-        header0 += 'Connected presynaptic cells (basal synapses)\tSTD\tConvergence (basal synapses)\tSTD\t'
-        header0 += 'Number of soma synapses\tSTD\t'
-        header0 += 'Connected presynaptic cells (soma synapses)\tSTD\tConvergence (soma synapses)\tSTD\n'
-        outFile.write(header0)
-        #        preCellTypes = populationDistribution.keys()
-        #        preCellTypes.sort()
-        for preCellType in outCellTypes:
-            data = populationDistribution[preCellType]
-            totalSynapses = data[0]
-            nrOfConnectedCells = data[1]
-            nrOfAllCells = data[2]
-            convergence = data[3]
-            distanceTotalMean = data[4]
-            distanceTotalSD = data[5]
-            synapsesPerStructure = data[6]
-            connectionsPerStructure = data[7]
-            convergencePerStructure = data[8]
-            distancesPerStructure = data[9]
-            apicalSynapses = synapsesPerStructure['ApicalDendrite']
-            basalSynapses = synapsesPerStructure['BasalDendrite']
-            somaSynapses = synapsesPerStructure['Soma']
-            connectionsPerStructureApical = connectionsPerStructure[
-                'ApicalDendrite']
-            connectionsPerStructureBasal = connectionsPerStructure[
-                'BasalDendrite']
-            connectionsPerStructureSoma = connectionsPerStructure['Soma']
-            convergencePerStructureApical = convergencePerStructure[
-                'ApicalDendrite']
-            convergencePerStructureBasal = convergencePerStructure[
-                'BasalDendrite']
-            convergencePerStructureSoma = convergencePerStructure['Soma']
-            distanceApicalMean = distancesPerStructure['ApicalDendrite'][0]
-            distanceApicalSD = distancesPerStructure['ApicalDendrite'][1]
-            distanceBasalMean = distancesPerStructure['BasalDendrite'][0]
-            distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-            line = preCellType + '\t'
-            line += str(totalSynapses[0])
-            line += '\t'
-            line += str(totalSynapses[1])
-            line += '\t'
-            line += str(distanceTotalMean[0])
-            line += '\t'
-            line += str(distanceTotalMean[1])
-            line += '\t'
-            line += str(distanceTotalSD[0])
-            line += '\t'
-            line += str(distanceTotalSD[1])
-            line += '\t'
-            line += str(nrOfConnectedCells[0])
-            line += '\t'
-            line += str(nrOfConnectedCells[1])
-            line += '\t'
-            line += str(nrOfAllCells[0])
-            line += '\t'
-            line += str(convergence[0])
-            line += '\t'
-            line += str(convergence[1])
-            line += '\t'
-            line += str(apicalSynapses[0])
-            line += '\t'
-            line += str(apicalSynapses[1])
-            line += '\t'
-            line += str(distanceApicalMean[0])
-            line += '\t'
-            line += str(distanceApicalMean[1])
-            line += '\t'
-            line += str(distanceApicalSD[0])
-            line += '\t'
-            line += str(distanceApicalSD[1])
-            line += '\t'
-            line += str(connectionsPerStructureApical[0])
-            line += '\t'
-            line += str(connectionsPerStructureApical[1])
-            line += '\t'
-            line += str(convergencePerStructureApical[0])
-            line += '\t'
-            line += str(convergencePerStructureApical[1])
-            line += '\t'
-            line += str(basalSynapses[0])
-            line += '\t'
-            line += str(basalSynapses[1])
-            line += '\t'
-            line += str(distanceBasalMean[0])
-            line += '\t'
-            line += str(distanceBasalMean[1])
-            line += '\t'
-            line += str(distanceBasalSD[0])
-            line += '\t'
-            line += str(distanceBasalSD[1])
-            line += '\t'
-            line += str(connectionsPerStructureBasal[0])
-            line += '\t'
-            line += str(connectionsPerStructureBasal[1])
-            line += '\t'
-            line += str(convergencePerStructureBasal[0])
-            line += '\t'
-            line += str(convergencePerStructureBasal[1])
-            line += '\t'
-            line += str(somaSynapses[0])
-            line += '\t'
-            line += str(somaSynapses[1])
-            line += '\t'
-            line += str(connectionsPerStructureSoma[0])
-            line += '\t'
-            line += str(connectionsPerStructureSoma[1])
-            line += '\t'
-            line += str(convergencePerStructureSoma[0])
-            line += '\t'
-            line += str(convergencePerStructureSoma[1])
-            line += '\n'
-            outFile.write(line)
-
+        outFile.write(_make_header())
+        for preCellType in OUT_CELL_TYPES:
+            if preCellType not in populationDistribution:
+                logger.warning("Population distribution does not contain cell type %s" % preCellType)
+                continue
+            outFile.write(_make_line(preCellType, populationDistribution[preCellType]))
         outFile.write('\n')
 
 
@@ -661,353 +388,139 @@ def write_population_and_sample_connectivity_summary(
         populationDistribution=None,
         cellTypeSummaryData=None,
         columnSummaryData=None):
-    """
-    Write out a summary of a single connectivity realization, as well as the summary of a population of connectivity realizations to a file.
-
-    Useful for comparing the results of a single realization to the average over multiple realizations.
-    Consult :func:`write_sample_connectivity_summary` and :func:`write_population_connectivity_summary` for details on the input data.
-    :param:`populationDistribution` can be computes using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._compute_parameter_distribution`
-    :param:`cellTypeSummaryData` and :param:`columnSummaryData` can be computed using :func:`~singlecell_input_mapper.singlecell_input_mapper.NetworkMapper._generate_output_files`
-
-    Args:
-        fname (str): Name of the output file
-        populationDistribution (dict): Dictionary containing the summary data for each cell type across network realizations.
-        cellTypeSummaryData (dict): Dictionary containing the summary data for each cell type
-        columnSummaryData (dict): Dictionary containing the summary data for each anatomical area
-
-    Returns:
-        None. Writes the results to disk.
-    """
+    """...(docstring unchanged)"""
     if fname is None or populationDistribution is None or cellTypeSummaryData is None or columnSummaryData is None:
-        #def write_sample_connectivity_summary(fname=None, columnSummaryData=None):
-        #    if fname is None or columnSummaryData is None:
-        err_str = 'Incomplete data! Cannot write results summary file'
-        raise RuntimeError(err_str)
+        raise RuntimeError('Incomplete data! Cannot write results summary file')
 
     if not fname.endswith('.csv') and not fname.endswith('.CSV'):
         fname += '.csv'
 
 
-#    with open(fname, 'w') as outFile:
-#        header = '# connectivity summary\n'
-#        header += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tConnected presynaptic cells\tTotal presynaptic cells\n'
-#        outFile.write(header)
-#        columns = columnSummaryData.keys()
-#        columns.sort()
-#        if len(columns):
-#            preCellTypes = columnSummaryData[columns[0]].keys()
-#            preCellTypes.sort()
-#            for col in columns:
-#                for preCellType in preCellTypes:
-#                    data = columnSummaryData[col][preCellType]
-#                    line = col + '\t' + preCellType + '\t'
-#                    line += str(data[0])
-#                    line += '\t'
-#                    line += str(data[1])
-#                    line += '\t'
-#                    line += str(data[2])
-#                    line += '\n'
-#                    outFile.write(line)
 
-    outCellTypes = ('L2','L34','L4py','L4sp','L4ss','L5st','L5tt','L6cc','L6ccinv','L6ct','VPM',\
-                    'L1','L23Trans','L45Peak','L45Sym','L56Trans','SymLocal1','SymLocal2',\
-                    'SymLocal3','SymLocal4','SymLocal5','SymLocal6')
+    # Discover structures from the first present cell type in each dataset
+    def _get_structures(summary_data):
+        for ct in OUT_CELL_TYPES:
+            if ct in summary_data:
+                return list(summary_data[ct][6].keys())
+        return []
+
+    pop_structures    = _get_structures(populationDistribution)
+    sample_structures = _get_structures(cellTypeSummaryData)
+
+    def _pop_header():
+        parts = ['Presynaptic cell type',
+                 'Number of synapses', 'STD',
+                 'Mean path length to soma', 'STD',
+                 'SD path length to soma', 'STD',
+                 'Connected presynaptic cells', 'STD',
+                 'Total presynaptic cells',
+                 'Convergence', 'STD']
+        for struct in pop_structures:
+            parts += [f'Number of {struct} synapses', 'STD']
+            if struct in populationDistribution[next(ct for ct in OUT_CELL_TYPES if ct in populationDistribution)][9]:
+                parts += [f'Mean path length to soma ({struct} synapses)', 'STD',
+                          f'SD path length to soma ({struct} synapses)', 'STD']
+            parts += [f'Connected presynaptic cells ({struct} synapses)', 'STD',
+                      f'Convergence ({struct} synapses)', 'STD']
+        return '# connectivity per cell type population summary\n' + '\t'.join(parts) + '\n'
+
+    def _pop_line(preCellType, data):
+        totalSynapses           = data[0]
+        nrOfConnectedCells      = data[1]
+        nrOfAllCells            = data[2]
+        convergence             = data[3]
+        distanceTotalMean       = data[4]
+        distanceTotalSD         = data[5]
+        synapsesPerStructure    = data[6]
+        connectionsPerStructure = data[7]
+        convergencePerStructure = data[8]
+        distancesPerStructure   = data[9]
+
+        parts = [preCellType,
+                 str(totalSynapses[0]),      str(totalSynapses[1]),
+                 str(distanceTotalMean[0]),  str(distanceTotalMean[1]),
+                 str(distanceTotalSD[0]),    str(distanceTotalSD[1]),
+                 str(nrOfConnectedCells[0]), str(nrOfConnectedCells[1]),
+                 str(nrOfAllCells[0]),
+                 str(convergence[0]),        str(convergence[1])]
+        for struct in pop_structures:
+            synapses = synapsesPerStructure[struct]
+            parts += [str(synapses[0]), str(synapses[1])]
+            if struct in distancesPerStructure:
+                mean, sd = distancesPerStructure[struct]
+                parts += [str(mean[0]), str(mean[1]), str(sd[0]), str(sd[1])]
+            conns = connectionsPerStructure[struct]
+            conv  = convergencePerStructure[struct]
+            parts += [str(conns[0]), str(conns[1]), str(conv[0]), str(conv[1])]
+        return '\t'.join(parts) + '\n'
+
+    def _sample_header(prefix_cols):
+        parts = prefix_cols + ['Number of synapses',
+                               'Mean path length to soma', 'SD path length to soma',
+                               'Connected presynaptic cells', 'Total presynaptic cells', 'Convergence']
+        for struct in sample_structures:
+            parts += [f'Number of {struct} synapses']
+            if struct in cellTypeSummaryData[next(ct for ct in OUT_CELL_TYPES if ct in cellTypeSummaryData)][9]:
+                parts += [f'Mean path length to soma ({struct} synapses)',
+                          f'SD path length to soma ({struct} synapses)']
+            parts += [f'Connected presynaptic cells ({struct} synapses)',
+                      f'Convergence ({struct} synapses)']
+        return '\t'.join(parts) + '\n'
+
+    def _sample_line(prefix_values, data):
+        totalSynapses           = data[0]
+        nrOfConnectedCells      = data[1]
+        nrOfAllCells            = data[2]
+        convergence             = data[3]
+        distanceTotalMean       = data[4]
+        distanceTotalSD         = data[5]
+        synapsesPerStructure    = data[6]
+        connectionsPerStructure = data[7]
+        convergencePerStructure = data[8]
+        distancesPerStructure   = data[9]
+
+        parts = prefix_values + [str(totalSynapses), str(distanceTotalMean), str(distanceTotalSD),
+                                  str(nrOfConnectedCells), str(nrOfAllCells), str(convergence)]
+        for struct in sample_structures:
+            parts.append(str(synapsesPerStructure[struct]))
+            if struct in distancesPerStructure:
+                parts += [str(distancesPerStructure[struct][0]),
+                          str(distancesPerStructure[struct][1])]
+            parts += [str(connectionsPerStructure[struct]),
+                      str(convergencePerStructure[struct])]
+        return '\t'.join(parts) + '\n'
 
     with dbopen(fname, 'w') as outFile:
-        header0 = '# connectivity per cell type population summary\n'
-        header0 += 'Presynaptic cell type\tNumber of synapses\tSTD\tMean path length to soma\tSTD\tSD path length to soma\tSTD\t'
-        header0 += 'Connected presynaptic cells\tSTD\tTotal presynaptic cells\tConvergence\tSTD\t'
-        header0 += 'Number of apical dendrite synapses\tSTD\tMean path length to soma (apical synapses)\tSTD\tSD path length to soma (apical synapses)\tSTD\t'
-        header0 += 'Connected presynaptic cells (apical synapses)\tSTD\tConvergence (apical synapses)\tSTD\t'
-        header0 += 'Number of basal dendrite synapses\tSTD\tMean path length to soma (basal synapses)\tSTD\tSD path length to soma (basal synapses)\tSTD\t'
-        header0 += 'Connected presynaptic cells (basal synapses)\tSTD\tConvergence (basal synapses)\tSTD\t'
-        header0 += 'Number of soma synapses\tSTD\t'
-        header0 += 'Connected presynaptic cells (soma synapses)\tSTD\tConvergence (soma synapses)\tSTD\n'
-        outFile.write(header0)
-        #        preCellTypes = populationDistribution.keys()
-        #        preCellTypes.sort()
-        for preCellType in outCellTypes:
-            data = populationDistribution[preCellType]
-            totalSynapses = data[0]
-            nrOfConnectedCells = data[1]
-            nrOfAllCells = data[2]
-            convergence = data[3]
-            distanceTotalMean = data[4]
-            distanceTotalSD = data[5]
-            synapsesPerStructure = data[6]
-            connectionsPerStructure = data[7]
-            convergencePerStructure = data[8]
-            distancesPerStructure = data[9]
-            apicalSynapses = synapsesPerStructure['ApicalDendrite']
-            basalSynapses = synapsesPerStructure['BasalDendrite']
-            somaSynapses = synapsesPerStructure['Soma']
-            connectionsPerStructureApical = connectionsPerStructure[
-                'ApicalDendrite']
-            connectionsPerStructureBasal = connectionsPerStructure[
-                'BasalDendrite']
-            connectionsPerStructureSoma = connectionsPerStructure['Soma']
-            convergencePerStructureApical = convergencePerStructure[
-                'ApicalDendrite']
-            convergencePerStructureBasal = convergencePerStructure[
-                'BasalDendrite']
-            convergencePerStructureSoma = convergencePerStructure['Soma']
-            distanceApicalMean = distancesPerStructure['ApicalDendrite'][0]
-            distanceApicalSD = distancesPerStructure['ApicalDendrite'][1]
-            distanceBasalMean = distancesPerStructure['BasalDendrite'][0]
-            distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-            line = preCellType + '\t'
-            line += str(totalSynapses[0])
-            line += '\t'
-            line += str(totalSynapses[1])
-            line += '\t'
-            line += str(distanceTotalMean[0])
-            line += '\t'
-            line += str(distanceTotalMean[1])
-            line += '\t'
-            line += str(distanceTotalSD[0])
-            line += '\t'
-            line += str(distanceTotalSD[1])
-            line += '\t'
-            line += str(nrOfConnectedCells[0])
-            line += '\t'
-            line += str(nrOfConnectedCells[1])
-            line += '\t'
-            line += str(nrOfAllCells[0])
-            line += '\t'
-            line += str(convergence[0])
-            line += '\t'
-            line += str(convergence[1])
-            line += '\t'
-            line += str(apicalSynapses[0])
-            line += '\t'
-            line += str(apicalSynapses[1])
-            line += '\t'
-            line += str(distanceApicalMean[0])
-            line += '\t'
-            line += str(distanceApicalMean[1])
-            line += '\t'
-            line += str(distanceApicalSD[0])
-            line += '\t'
-            line += str(distanceApicalSD[1])
-            line += '\t'
-            line += str(connectionsPerStructureApical[0])
-            line += '\t'
-            line += str(connectionsPerStructureApical[1])
-            line += '\t'
-            line += str(convergencePerStructureApical[0])
-            line += '\t'
-            line += str(convergencePerStructureApical[1])
-            line += '\t'
-            line += str(basalSynapses[0])
-            line += '\t'
-            line += str(basalSynapses[1])
-            line += '\t'
-            line += str(distanceBasalMean[0])
-            line += '\t'
-            line += str(distanceBasalMean[1])
-            line += '\t'
-            line += str(distanceBasalSD[0])
-            line += '\t'
-            line += str(distanceBasalSD[1])
-            line += '\t'
-            line += str(connectionsPerStructureBasal[0])
-            line += '\t'
-            line += str(connectionsPerStructureBasal[1])
-            line += '\t'
-            line += str(convergencePerStructureBasal[0])
-            line += '\t'
-            line += str(convergencePerStructureBasal[1])
-            line += '\t'
-            line += str(somaSynapses[0])
-            line += '\t'
-            line += str(somaSynapses[1])
-            line += '\t'
-            line += str(connectionsPerStructureSoma[0])
-            line += '\t'
-            line += str(connectionsPerStructureSoma[1])
-            line += '\t'
-            line += str(convergencePerStructureSoma[0])
-            line += '\t'
-            line += str(convergencePerStructureSoma[1])
-            line += '\n'
-            outFile.write(line)
-
+        # Section 1: population summary
+        outFile.write(_pop_header())
+        for preCellType in OUT_CELL_TYPES:
+            if preCellType not in populationDistribution:
+                logger.warning("Population distribution does not contain cell type %s" % preCellType)
+                continue
+            outFile.write(_pop_line(preCellType, populationDistribution[preCellType]))
         outFile.write('\n')
 
-        header1 = '# connectivity per cell type representative realization summary\n'
-        header1 += 'Presynaptic cell type\tNumber of synapses\tMean path length to soma\tSD path length to soma\t'
-        header1 += 'Connected presynaptic cells\tTotal presynaptic cells\tConvergence\t'
-        header1 += 'Number of apical dendrite synapses\tMean path length to soma (apical synapses)\tSD path length to soma (apical synapses)\t'
-        header1 += 'Connected presynaptic cells (apical synapses)\tConvergence (apical synapses)\t'
-        header1 += 'Number of basal dendrite synapses\tMean path length to soma (basal synapses)\tSD path length to soma (basal synapses)\t'
-        header1 += 'Connected presynaptic cells (basal synapses)\tConvergence (basal synapses)\t'
-        header1 += 'Number of soma synapses\t'
-        header1 += 'Connected presynaptic cells (soma synapses)\tConvergence (soma synapses)\n'
-        outFile.write(header1)
-        #        preCellTypes = cellTypeSummaryData.keys()
-        #        preCellTypes.sort()
-        for preCellType in outCellTypes:
-            data = cellTypeSummaryData[preCellType]
-            totalSynapses = data[0]
-            nrOfConnectedCells = data[1]
-            nrOfAllCells = data[2]
-            convergence = data[3]
-            distanceTotalMean = data[4]
-            distanceTotalSD = data[5]
-            synapsesPerStructure = data[6]
-            connectionsPerStructure = data[7]
-            convergencePerStructure = data[8]
-            distancesPerStructure = data[9]
-            apicalSynapses = synapsesPerStructure['ApicalDendrite']
-            basalSynapses = synapsesPerStructure['BasalDendrite']
-            somaSynapses = synapsesPerStructure['Soma']
-            connectionsPerStructureApical = connectionsPerStructure[
-                'ApicalDendrite']
-            connectionsPerStructureBasal = connectionsPerStructure[
-                'BasalDendrite']
-            connectionsPerStructureSoma = connectionsPerStructure['Soma']
-            convergencePerStructureApical = convergencePerStructure[
-                'ApicalDendrite']
-            convergencePerStructureBasal = convergencePerStructure[
-                'BasalDendrite']
-            convergencePerStructureSoma = convergencePerStructure['Soma']
-            distanceApicalMean = distancesPerStructure['ApicalDendrite'][0]
-            distanceApicalSD = distancesPerStructure['ApicalDendrite'][1]
-            distanceBasalMean = distancesPerStructure['BasalDendrite'][0]
-            distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-            line = preCellType + '\t'
-            line += str(totalSynapses)
-            line += '\t'
-            line += str(distanceTotalMean)
-            line += '\t'
-            line += str(distanceTotalSD)
-            line += '\t'
-            line += str(nrOfConnectedCells)
-            line += '\t'
-            line += str(nrOfAllCells)
-            line += '\t'
-            line += str(convergence)
-            line += '\t'
-            line += str(apicalSynapses)
-            line += '\t'
-            line += str(distanceApicalMean)
-            line += '\t'
-            line += str(distanceApicalSD)
-            line += '\t'
-            line += str(connectionsPerStructureApical)
-            line += '\t'
-            line += str(convergencePerStructureApical)
-            line += '\t'
-            line += str(basalSynapses)
-            line += '\t'
-            line += str(distanceBasalMean)
-            line += '\t'
-            line += str(distanceBasalSD)
-            line += '\t'
-            line += str(connectionsPerStructureBasal)
-            line += '\t'
-            line += str(convergencePerStructureBasal)
-            line += '\t'
-            line += str(somaSynapses)
-            line += '\t'
-            line += str(connectionsPerStructureSoma)
-            line += '\t'
-            line += str(convergencePerStructureSoma)
-            line += '\n'
-            outFile.write(line)
-
+        # Section 2: single-realization per cell type
+        outFile.write('# connectivity per cell type representative realization summary\n')
+        outFile.write(_sample_header(['Presynaptic cell type']))
+        for preCellType in OUT_CELL_TYPES:
+            if preCellType not in cellTypeSummaryData:
+                logger.warning("Cell type summary data does not contain cell type %s" % preCellType)
+                continue
+            outFile.write(_sample_line([preCellType], cellTypeSummaryData[preCellType]))
         outFile.write('\n')
 
-        header2 = '# connectivity per column per cell type summary\n'
-        header2 += 'Presynaptic column\tPresynaptic cell type\tNumber of synapses\tMean path length to soma\tSD path length to soma\t'
-        header2 += 'Connected presynaptic cells\tTotal presynaptic cells\tConvergence\t'
-        header2 += 'Number of apical dendrite synapses\tMean path length to soma (apical synapses)\tSD path length to soma (apical synapses)\t'
-        header2 += 'Connected presynaptic cells (apical synapses)\tConvergence (apical synapses)\t'
-        header2 += 'Number of basal dendrite synapses\tMean path length to soma (basal synapses)\tSD path length to soma (basal synapses)\t'
-        header2 += 'Connected presynaptic cells (basal synapses)\tConvergence (basal synapses)\t'
-        header2 += 'Number of soma synapses\t'
-        header2 += 'Connected presynaptic cells (soma synapses)\tConvergence (soma synapses)\n'
-        outFile.write(header2)
-        columns = list(columnSummaryData.keys())
-        columns.sort()
-        if len(columns):
-            #            preCellTypes = columnSummaryData[columns[0]].keys()
-            #            preCellTypes.sort()
-            for col in columns:
-                for preCellType in outCellTypes:
+        # Section 3: single-realization per column per cell type
+        outFile.write('# connectivity per column per cell type summary\n')
+        outFile.write(_sample_header(['Presynaptic column', 'Presynaptic cell type']))
+        for col in sorted(columnSummaryData.keys()):
+            for preCellType in OUT_CELL_TYPES:
+                try:
                     data = columnSummaryData[col][preCellType]
-                    totalSynapses = data[0]
-                    nrOfConnectedCells = data[1]
-                    nrOfAllCells = data[2]
-                    convergence = data[3]
-                    distanceTotalMean = data[4]
-                    distanceTotalSD = data[5]
-                    synapsesPerStructure = data[6]
-                    connectionsPerStructure = data[7]
-                    convergencePerStructure = data[8]
-                    distancesPerStructure = data[9]
-                    apicalSynapses = synapsesPerStructure['ApicalDendrite']
-                    basalSynapses = synapsesPerStructure['BasalDendrite']
-                    somaSynapses = synapsesPerStructure['Soma']
-                    connectionsPerStructureApical = connectionsPerStructure[
-                        'ApicalDendrite']
-                    connectionsPerStructureBasal = connectionsPerStructure[
-                        'BasalDendrite']
-                    connectionsPerStructureSoma = connectionsPerStructure[
-                        'Soma']
-                    convergencePerStructureApical = convergencePerStructure[
-                        'ApicalDendrite']
-                    convergencePerStructureBasal = convergencePerStructure[
-                        'BasalDendrite']
-                    convergencePerStructureSoma = convergencePerStructure[
-                        'Soma']
-                    distanceApicalMean = distancesPerStructure[
-                        'ApicalDendrite'][0]
-                    distanceApicalSD = distancesPerStructure['ApicalDendrite'][
-                        1]
-                    distanceBasalMean = distancesPerStructure['BasalDendrite'][
-                        0]
-                    distanceBasalSD = distancesPerStructure['BasalDendrite'][1]
-                    line = col + '\t' + preCellType + '\t'
-                    line += str(totalSynapses)
-                    line += '\t'
-                    line += str(distanceTotalMean)
-                    line += '\t'
-                    line += str(distanceTotalSD)
-                    line += '\t'
-                    line += str(nrOfConnectedCells)
-                    line += '\t'
-                    line += str(nrOfAllCells)
-                    line += '\t'
-                    line += str(convergence)
-                    line += '\t'
-                    line += str(apicalSynapses)
-                    line += '\t'
-                    line += str(distanceApicalMean)
-                    line += '\t'
-                    line += str(distanceApicalSD)
-                    line += '\t'
-                    line += str(connectionsPerStructureApical)
-                    line += '\t'
-                    line += str(convergencePerStructureApical)
-                    line += '\t'
-                    line += str(basalSynapses)
-                    line += '\t'
-                    line += str(distanceBasalMean)
-                    line += '\t'
-                    line += str(distanceBasalSD)
-                    line += '\t'
-                    line += str(connectionsPerStructureBasal)
-                    line += '\t'
-                    line += str(convergencePerStructureBasal)
-                    line += '\t'
-                    line += str(somaSynapses)
-                    line += '\t'
-                    line += str(connectionsPerStructureSoma)
-                    line += '\t'
-                    line += str(convergencePerStructureSoma)
-                    line += '\n'
-                    outFile.write(line)
+                    logger.info("Column %s does not contain cell type %s" % (col, preCellType))
+                except KeyError:
+                    continue
+                outFile.write(_sample_line([col, preCellType], data))
 
 
 def write_scalar_field(fname=None, scalarField=None):

@@ -176,8 +176,7 @@ def read_hoc_file(fname=''):
                     name_end = parentStr.find('(')
                     conEnd = parentStr.find(')')
                     segmentParentMap[insertCnt - 1] = parentStr[:name_end]
-                    segmentConMap[insertCnt - 1] = float(parentStr[name_end +
-                                                                   1:conEnd])
+                    segmentConMap[insertCnt - 1] = float(parentStr[name_end +1:conEnd])
             # end for loop
         
         # 4. make sure EOF doesn't mess anything up

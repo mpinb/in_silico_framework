@@ -24,6 +24,7 @@ import os
 import sys
 import time
 import numpy as np
+from collections import defaultdict
 from .cell import PointCell
 from . import writer
 from .synapse_mapper import SynapseMapper, SynapseDensity
@@ -52,7 +53,7 @@ class NetworkMapper:
         not synapse activations or simulation parameters.
     
     Attributes:
-        cells (dict): 
+        cells (dict[str, dict[str, PointCell]]): 
             Presynaptic cells, ordered by anatomical area and cell type. 
             This attribute is filled by 
             :func:`~singlecell_input_mapper.singlecell_input_mapper.network_embedding.NetworkMapper._create_presyn_cells`.
@@ -465,17 +466,6 @@ class NetworkMapper:
                 nrOfDensities = len(cellTypeSynapseDensities[anatomical_area][preCellType])
                 if not nrOfDensities:
                     continue
-                #=======================================================================
-                # for testing purposes: write 3D synapse density
-                #=======================================================================
-
-
-                # for structure in self.postCell.structures.keys():
-                #     for i in range(nrOfDensities):
-                #         outDensity = cellTypeSynapseDensities[anatomical_area][preCellType][i][structure]
-                #         outNamePrefix = postCellName[:-4]
-                #         synapseDensityName = '_'.join((outNamePrefix,'synapse_density',structure,anatomical_area,preCellType,str(i)))
-                #         writer.write_scalar_field(synapseDensityName, outDensity)
 
                 logger.debug('---------------------------')
                 logger.debug('Computed {:d} synapse densities of type {:s} in anatomical_area {:s}'.format(nrOfDensities, preCellType, anatomical_area))
@@ -640,16 +630,16 @@ class NetworkMapper:
         
         Using parameters in :attr:`cellTypeSummaryTable` on a per cell type basis:
 
-                0.  nrOfSynapses
-                1.  nrConnectedCells
-                2.  nrPreCells
-                3.  convergence
-                4.  distanceMean
-                5.  distanceSTD
-                6.  cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                7.  cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                8.  cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-                9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
+        0.  nrOfSynapses
+        1.  nrConnectedCells
+        2.  nrPreCells
+        3.  convergence
+        4.  distanceMean
+        5.  distanceSTD
+        6.  cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+        7.  cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+        8.  cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
+        9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
 
         Returns:
             dict: dictionary organized the same way as :attr:`cellTypeSummaryTable`,
@@ -864,275 +854,179 @@ class NetworkMapper:
                 outFile.write(line)
         logger.info('---------------------------')
 
-    def _compute_summary_tables(
-            self, 
-            connectedCells,
-            connectedCellsPerStructure):
-        '''Computes all summary data.
 
-        Compute the following summary data:
+    def _compute_summary_tables(self, connectedCells, connectedCellsPerStructure):
+        """
+        Same outputs as before, but structure names are inferred from
+        self.postCell.sections[secID].label (no hardcoded Apical/Basal/Soma set).
+        """
 
-        - numbers of synapses per cell type/anatomical_area,
-        - distance of synapses to soma, convergence etc.
-
-        Used by :func:`~create_network_embedding` and 
-        :func:`~create_network_embedding_for_simulations`.
-
-        Args:
-            connectedCells (dict): Dictionary of connected cells.
-            connectedCellsPerStructure (dict): Dictionary of connected cells per structure.
-        
-        Returns: 
-            tuple: synapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
-        '''
         logger.info('---------------------------')
         logger.info('Calculating results summary')
         logger.info('    Computing path length to soma for all synapses...')
+
+        # --- Infer all structure labels that actually occur on the post cell ---
+        # (keep deterministic order for nicer tables/logs)
+        inferred_structures = sorted({sec.label for sec in self.postCell.sections})
+
+        # --- Compute soma distances for every synapse ---
         for preCellType in list(self.postCell.synapses.keys()):
             for synapse in self.postCell.synapses[preCellType]:
                 attachedSec = self.postCell.sections[synapse.secID]
-                if attachedSec.label == 'Soma':
-                    dist = 0.0
-                else:
-                    dist = self.postCell.distance_to_soma(
-                        attachedSec, synapse.x)
-                synapse.distanceToSoma = dist
+                synapse.distanceToSoma = 0.0 if attachedSec.label == 'Soma' else \
+                    self.postCell.distance_to_soma(attachedSec, synapse.x)
 
         synapseLocations = {}
         cellSynapseLocations = {}
         cellTypeSummaryTable = {}
-        anatomicalAreaSummaryTable = {
-        }  # note- this could probably be tidied using I.defaultdict
+        anatomicalAreaSummaryTable = {}
+
         anatomical_areas = list(self.cells.keys())
         for anatomical_area in anatomical_areas:
             cellTypes = list(self.cells[anatomical_area].keys())
             for preType in cellTypes:
                 preCellType = preType + '_' + anatomical_area
-                if anatomical_area not in anatomicalAreaSummaryTable:
-                    anatomicalAreaSummaryTable[anatomical_area] = {}
-                if anatomical_area not in synapseLocations:
-                    synapseLocations[anatomical_area] = {}
+
+                anatomicalAreaSummaryTable.setdefault(anatomical_area, {})
+                synapseLocations.setdefault(anatomical_area, {})
+
+                # Initialize per-celltype accumulator row once, with inferred structures
                 if preType not in cellTypeSummaryTable:
-                    #                    [nrOfSynapses,nrConnectedCells,nrPreCells,convergence,distanceMean,distanceSTD]
-                    cellTypeSummaryTable[preType] = [0, 0, 0, 0.0, [], -1]
-                    cellTypeSynapsesPerStructure = {}
-                    cellTypeSynapsesPerStructure['ApicalDendrite'] = 0
-                    cellTypeSynapsesPerStructure['BasalDendrite'] = 0
-                    cellTypeSynapsesPerStructure['Soma'] = 0
-                    cellTypeConnectionsPerStructure = {}
-                    cellTypeConnectionsPerStructure['ApicalDendrite'] = 0
-                    cellTypeConnectionsPerStructure['BasalDendrite'] = 0
-                    cellTypeConnectionsPerStructure['Soma'] = 0
-                    cellTypeConvergencePerStructure = {}
-                    cellTypeConvergencePerStructure['ApicalDendrite'] = 0.0
-                    cellTypeConvergencePerStructure['BasalDendrite'] = 0.0
-                    cellTypeConvergencePerStructure['Soma'] = 0.0
-                    cellTypeDistancesPerStructure = {}
-                    cellTypeDistancesPerStructure['ApicalDendrite'] = [[], -1]
-                    cellTypeDistancesPerStructure['BasalDendrite'] = [[], -1]
-                    cellTypeSummaryTable[preType].append(
-                        cellTypeSynapsesPerStructure)
-                    cellTypeSummaryTable[preType].append(
-                        cellTypeConnectionsPerStructure)
-                    cellTypeSummaryTable[preType].append(
-                        cellTypeConvergencePerStructure)
-                    cellTypeSummaryTable[preType].append(
-                        cellTypeDistancesPerStructure)
+                    # [nrOfSynapses, nrConnectedCells, nrPreCells, convergence, distanceMean, distanceSTD,
+                    #  synapsesPerStructure, connectionsPerStructure, convergencePerStructure, distancesPerStructure]
+                    syn_per_struct = {s: 0 for s in inferred_structures}
+                    con_per_struct = {s: 0 for s in inferred_structures}
+                    conv_per_struct = {s: 0.0 for s in inferred_structures}
+                    dist_per_struct = {s: [[], -1] for s in inferred_structures}  # [list_of_distances, std_placeholder]
+                    cellTypeSummaryTable[preType] = [
+                        0, 0, 0, 0.0, [], -1, syn_per_struct, con_per_struct, conv_per_struct, dist_per_struct
+                    ]
+
+                # ---------- collect synapses ----------
                 try:
-                    allSynapses = [
-                        syn.coordinates
-                        for syn in self.postCell.synapses[preCellType]
-                    ]
-                    cellSynapseLocations[preCellType] = [
-                        (syn.preCellType, syn.secID, syn.x)
-                        for syn in self.postCell.synapses[preCellType]
-                    ]
-                    apicalSynapses = []
-                    basalSynapses = []
-                    somaSynapses = []
-                    nrOfSynapses = len(self.postCell.synapses[preCellType])
-                    nrConnectedCells = connectedCells[preCellType]
-                    nrConnectedCellsApical = connectedCellsPerStructure[
-                        preCellType]['ApicalDendrite']
-                    nrConnectedCellsBasal = connectedCellsPerStructure[
-                        preCellType]['Dendrite']
-                    nrConnectedCellsSoma = connectedCellsPerStructure[
-                        preCellType]['Soma']
-                    nrOfApicalSynapses = 0
-                    nrOfBasalSynapses = 0
-                    nrOfSomaSynapses = 0
-                    tmpDistances = []
-                    tmpDistancesApical = []
-                    tmpDistancesBasal = []
-                    for synapse in self.postCell.synapses[preCellType]:
-                        secLabel = self.postCell.sections[synapse.secID].label
-                        if secLabel == 'ApicalDendrite':
-                            nrOfApicalSynapses += 1
-                            tmpDistancesApical.append(synapse.distanceToSoma)
-                            apicalSynapses.append(synapse.coordinates)
-                        if secLabel == 'Dendrite':
-                            nrOfBasalSynapses += 1
-                            tmpDistancesBasal.append(synapse.distanceToSoma)
-                            basalSynapses.append(synapse.coordinates)
-                        if secLabel == 'Soma':
-                            nrOfSomaSynapses += 1
-                            somaSynapses.append(synapse.coordinates)
-                        tmpDistances.append(synapse.distanceToSoma)
-                    distanceMean = np.mean(tmpDistances)
-                    distanceSTD = np.std(tmpDistances)
-                    if len(tmpDistancesApical):
-                        distanceApicalMean = np.mean(tmpDistancesApical)
-                        distanceApicalSTD = np.std(tmpDistancesApical)
-                    else:
-                        distanceApicalMean = -1
-                        distanceApicalSTD = -1
-                    if len(tmpDistancesBasal):
-                        distanceBasalMean = np.mean(tmpDistancesBasal)
-                        distanceBasalSTD = np.std(tmpDistancesBasal)
-                    else:
-                        distanceBasalMean = -1
-                        distanceBasalSTD = -1
+                    syn_list = self.postCell.synapses[preCellType]
                 except KeyError:
-                    allSynapses = []
-                    cellSynapseLocations[preCellType] = []
-                    apicalSynapses = []
-                    basalSynapses = []
-                    somaSynapses = []
-                    nrOfSynapses = 0
-                    nrConnectedCells = 0
-                    nrConnectedCellsApical = 0
-                    nrConnectedCellsBasal = 0
-                    nrConnectedCellsSoma = 0
-                    nrOfApicalSynapses = 0
-                    nrOfBasalSynapses = 0
-                    nrOfSomaSynapses = 0
-                    tmpDistances = []
-                    tmpDistancesApical = []
-                    tmpDistancesBasal = []
+                    syn_list = []
+
+                allSynapses = [syn.coordinates for syn in syn_list]
+                cellSynapseLocations[preCellType] = [(syn.preCellType, syn.secID, syn.x) for syn in syn_list]
+
+                # Per-structure synapse coordinate lists + counts/distances
+                coords_by_struct = {s: [] for s in inferred_structures}
+                count_by_struct = {s: 0 for s in inferred_structures}
+                dist_by_struct = {s: [] for s in inferred_structures}
+
+                tmpDistances = []
+                for synapse in syn_list:
+                    secLabel = self.postCell.sections[synapse.secID].label
+                    # If some section label appears that's not in inferred_structures (shouldn't happen),
+                    # create buckets on the fly.
+                    if secLabel not in coords_by_struct:
+                        coords_by_struct[secLabel] = []
+                        count_by_struct[secLabel] = 0
+                        dist_by_struct[secLabel] = []
+                        # Also extend the cellTypeSummaryTable accumulators so later updates won't KeyError
+                        cellTypeSummaryTable[preType][6].setdefault(secLabel, 0)
+                        cellTypeSummaryTable[preType][7].setdefault(secLabel, 0)
+                        cellTypeSummaryTable[preType][8].setdefault(secLabel, 0.0)
+                        cellTypeSummaryTable[preType][9].setdefault(secLabel, [[], -1])
+
+                    count_by_struct[secLabel] += 1
+                    coords_by_struct[secLabel].append(synapse.coordinates)
+                    dist_by_struct[secLabel].append(synapse.distanceToSoma)
+                    tmpDistances.append(synapse.distanceToSoma)
+
+                nrOfSynapses = len(syn_list)
+                if sum(count_by_struct.values()) != nrOfSynapses:
+                    raise RuntimeError('Logical error: Number of synapses does not add up')
+
+                # distances overall
+                if tmpDistances:
+                    distanceMean = float(np.mean(tmpDistances))
+                    distanceSTD = float(np.std(tmpDistances))
+                else:
                     distanceMean = -1
                     distanceSTD = -1
-                    distanceApicalMean = -1
-                    distanceApicalSTD = -1
-                    distanceBasalMean = -1
-                    distanceBasalSTD = -1
-                if nrOfApicalSynapses + nrOfBasalSynapses + nrOfSomaSynapses != nrOfSynapses:
-                    errstr = 'Logical error: Number of synapses does not add up'
-                    raise RuntimeError(errstr)
-                logger.debug('    Created {:d} synapses of type {:s}!'.format(
-                    nrOfSynapses, preCellType))
-                #===============================================================
-                # anatomical_area- and cell type-specific data
-                #===============================================================
-                nrPreCells = len(self.cells[anatomical_area][preType])
-                synapsesPerStructure = {}
-                synapsesPerStructure['ApicalDendrite'] = nrOfApicalSynapses
-                synapsesPerStructure['BasalDendrite'] = nrOfBasalSynapses
-                synapsesPerStructure['Soma'] = nrOfSomaSynapses
-                connectionsPerStructure = {}
-                connectionsPerStructure[
-                    'ApicalDendrite'] = nrConnectedCellsApical
-                connectionsPerStructure['BasalDendrite'] = nrConnectedCellsBasal
-                connectionsPerStructure['Soma'] = nrConnectedCellsSoma
-                convergence = float(nrConnectedCells) / float(nrPreCells)
-                convergencePerStructure = {}
-                convergencePerStructure['ApicalDendrite'] = float(
-                    nrConnectedCellsApical) / float(nrPreCells)
-                convergencePerStructure['BasalDendrite'] = float(
-                    nrConnectedCellsBasal) / float(nrPreCells)
-                convergencePerStructure['Soma'] = float(
-                    nrConnectedCellsSoma) / float(nrPreCells)
+
+                # ---------- connected-cells per structure (do not assume keys exist) ----------
+                nrConnectedCells = connectedCells.get(preCellType, 0)
+                ccps = connectedCellsPerStructure.get(preCellType, {})
+                nrConnectedCellsByStruct = {s: ccps.get(s, 0) for s in count_by_struct.keys()}
+
+                # ---------- per-structure distance stats ----------
                 distancesPerStructure = {}
-                distancesPerStructure[
-                    'ApicalDendrite'] = distanceApicalMean, distanceApicalSTD
-                distancesPerStructure[
-                    'BasalDendrite'] = distanceBasalMean, distanceBasalSTD
+                for s, dists in dist_by_struct.items():
+                    if dists:
+                        distancesPerStructure[s] = (float(np.mean(dists)), float(np.std(dists)))
+                    else:
+                        distancesPerStructure[s] = (-1, -1)
+
+                # ---------- anatomical_area + celltype table ----------
+                nrPreCells = len(self.cells[anatomical_area][preType])
+                convergence = float(nrConnectedCells) / float(nrPreCells) if nrPreCells else 0.0
+
+                synapsesPerStructure = dict(count_by_struct)
+                connectionsPerStructure = dict(nrConnectedCellsByStruct)
+                convergencePerStructure = {
+                    s: (float(connectionsPerStructure.get(s, 0)) / float(nrPreCells) if nrPreCells else 0.0)
+                    for s in synapsesPerStructure.keys()
+                }
+
                 anatomicalAreaSummaryTable[anatomical_area][preType] = [
-                    nrOfSynapses, nrConnectedCells, nrPreCells, convergence,
-                    distanceMean, distanceSTD
+                    nrOfSynapses, nrConnectedCells, nrPreCells, convergence, distanceMean, distanceSTD,
+                    synapsesPerStructure, connectionsPerStructure, convergencePerStructure, distancesPerStructure
                 ]
-                anatomicalAreaSummaryTable[anatomical_area][preType].append(synapsesPerStructure)
-                anatomicalAreaSummaryTable[anatomical_area][preType].append(connectionsPerStructure)
-                anatomicalAreaSummaryTable[anatomical_area][preType].append(convergencePerStructure)
-                anatomicalAreaSummaryTable[anatomical_area][preType].append(distancesPerStructure)
-                #                totalLandmarkName = totalDirName + '_'.join((cellName,'total_synapses',preCellType,id1,id2))
-                #                writer.write_landmark_file(totalLandmarkName, allSynapses)
-                #                apicalLandmarkName = apicalDirName + '_'.join((cellName,'apical_synapses',preCellType,id1,id2))
-                #                writer.write_landmark_file(apicalLandmarkName, apicalSynapses)
-                #                basalLandmarkName = basalDirName + '_'.join((cellName,'basal_synapses',preCellType,id1,id2))
-                #                writer.write_landmark_file(basalLandmarkName, basalSynapses)
-                #                somaLandmarkName = somaDirName + '_'.join((cellName,'soma_synapses',preCellType,id1,id2))
-                #                writer.write_landmark_file(somaLandmarkName, somaSynapses)
-                synapseLocations[anatomical_area][preType] = {}
-                synapseLocations[anatomical_area][preType]['Total'] = allSynapses
-                synapseLocations[anatomical_area][preType][
-                    'ApicalDendrite'] = apicalSynapses
-                synapseLocations[anatomical_area][preType]['BasalDendrite'] = basalSynapses
-                synapseLocations[anatomical_area][preType]['Soma'] = somaSynapses
-                #===============================================================
-                # cell type-specific data summary
-                #===============================================================
+
+                # ---------- synapse locations output ----------
+                synapseLocations[anatomical_area][preType] = {'Total': allSynapses}
+                for s in coords_by_struct.keys():
+                    synapseLocations[anatomical_area][preType][s] = coords_by_struct[s]
+
+                # ---------- accumulate into cellTypeSummaryTable ----------
                 cellTypeSummaryTable[preType][0] += nrOfSynapses
                 cellTypeSummaryTable[preType][1] += nrConnectedCells
                 cellTypeSummaryTable[preType][2] += nrPreCells
                 cellTypeSummaryTable[preType][4] += tmpDistances
-                cellTypeSummaryTable[preType][6][
-                    'ApicalDendrite'] += nrOfApicalSynapses
-                cellTypeSummaryTable[preType][6][
-                    'BasalDendrite'] += nrOfBasalSynapses
-                cellTypeSummaryTable[preType][6]['Soma'] += nrOfSomaSynapses
-                cellTypeSummaryTable[preType][7][
-                    'ApicalDendrite'] += nrConnectedCellsApical
-                cellTypeSummaryTable[preType][7][
-                    'BasalDendrite'] += nrConnectedCellsBasal
-                cellTypeSummaryTable[preType][7]['Soma'] += nrConnectedCellsSoma
-                cellTypeSummaryTable[preType][9]['ApicalDendrite'][
-                    0] += tmpDistancesApical
-                cellTypeSummaryTable[preType][9]['BasalDendrite'][
-                    0] += tmpDistancesBasal
 
+                for s, n in synapsesPerStructure.items():
+                    cellTypeSummaryTable[preType][6].setdefault(s, 0)
+                    cellTypeSummaryTable[preType][6][s] += n
+
+                for s, n in connectionsPerStructure.items():
+                    cellTypeSummaryTable[preType][7].setdefault(s, 0)
+                    cellTypeSummaryTable[preType][7][s] += n
+
+                for s, dists in dist_by_struct.items():
+                    cellTypeSummaryTable[preType][9].setdefault(s, [[], -1])
+                    cellTypeSummaryTable[preType][9][s][0] += dists
+
+        # --- finalize cellTypeSummaryTable means/stds ---
         for preType in list(cellTypeSummaryTable.keys()):
             nrConnectedCellsTotal = cellTypeSummaryTable[preType][1]
             nrPreCellsTotal = cellTypeSummaryTable[preType][2]
-            cellTypeSummaryTable[preType][3] = float(
-                nrConnectedCellsTotal) / float(nrPreCellsTotal)
+            cellTypeSummaryTable[preType][3] = float(nrConnectedCellsTotal) / float(nrPreCellsTotal) if nrPreCellsTotal else 0.0
+
             distancesTotal = cellTypeSummaryTable[preType][4]
-            if len(distancesTotal):
-                cellTypeSummaryTable[preType][4] = np.mean(distancesTotal)
-                cellTypeSummaryTable[preType][5] = np.std(distancesTotal)
+            if distancesTotal:
+                cellTypeSummaryTable[preType][4] = float(np.mean(distancesTotal))
+                cellTypeSummaryTable[preType][5] = float(np.std(distancesTotal))
             else:
                 cellTypeSummaryTable[preType][4] = -1
                 cellTypeSummaryTable[preType][5] = -1
-            nrConnectedCellsApical = cellTypeSummaryTable[preType][7][
-                'ApicalDendrite']
-            cellTypeSummaryTable[preType][8]['ApicalDendrite'] = float(
-                nrConnectedCellsApical) / float(nrPreCellsTotal)
-            nrConnectedCellsBasal = cellTypeSummaryTable[preType][7][
-                'BasalDendrite']
-            cellTypeSummaryTable[preType][8]['BasalDendrite'] = float(
-                nrConnectedCellsBasal) / float(nrPreCellsTotal)
-            nrConnectedCellsSoma = cellTypeSummaryTable[preType][7]['Soma']
-            cellTypeSummaryTable[preType][8]['Soma'] = float(
-                nrConnectedCellsSoma) / float(nrPreCellsTotal)
-            distancesApical = cellTypeSummaryTable[preType][9][
-                'ApicalDendrite'][0]
-            if len(distancesApical):
-                cellTypeSummaryTable[preType][9]['ApicalDendrite'][0] = np.mean(
-                    distancesApical)
-                cellTypeSummaryTable[preType][9]['ApicalDendrite'][1] = np.std(
-                    distancesApical)
-            else:
-                cellTypeSummaryTable[preType][9]['ApicalDendrite'][0] = -1
-                cellTypeSummaryTable[preType][9]['ApicalDendrite'][1] = -1
-            distancesBasal = cellTypeSummaryTable[preType][9]['BasalDendrite'][
-                0]
-            if len(distancesBasal):
-                cellTypeSummaryTable[preType][9]['BasalDendrite'][0] = np.mean(
-                    distancesBasal)
-                cellTypeSummaryTable[preType][9]['BasalDendrite'][1] = np.std(
-                    distancesBasal)
-            else:
-                cellTypeSummaryTable[preType][9]['BasalDendrite'][0] = -1
-                cellTypeSummaryTable[preType][9]['BasalDendrite'][1] = -1
+
+            # per-structure convergence + distance stats
+            for s in list(cellTypeSummaryTable[preType][7].keys()):
+                nconn = cellTypeSummaryTable[preType][7].get(s, 0)
+                cellTypeSummaryTable[preType][8].setdefault(s, 0.0)
+                cellTypeSummaryTable[preType][8][s] = float(nconn) / float(nrPreCellsTotal) if nrPreCellsTotal else 0.0
+
+            for s, (dlist, _std_placeholder) in list(cellTypeSummaryTable[preType][9].items()):
+                if dlist:
+                    cellTypeSummaryTable[preType][9][s][0] = float(np.mean(dlist))
+                    cellTypeSummaryTable[preType][9][s][1] = float(np.std(dlist))
+                else:
+                    cellTypeSummaryTable[preType][9][s][0] = -1
+                    cellTypeSummaryTable[preType][9][s][1] = -1
 
         return synapseLocations, cellSynapseLocations, cellTypeSummaryTable, anatomicalAreaSummaryTable
 
@@ -1309,19 +1203,19 @@ class NetworkMapper:
         synapseName = dirName + '_'.join((cellName, 'synapses', id1, id2))
         writer.write_cell_synapse_locations(
             synapseName, 
-            cellSynapseLocations,
-            self.postCell.id)
+            synapses=cellSynapseLocations,
+            cellID=self.postCell.id)
         anatomicalID = synapseName.split('/')[-1] + '.syn'
         writer.write_anatomical_realization_map(
             synapseName, 
-            connectivityMap,
-            anatomicalID)
+            functionalMap=connectivityMap,
+            anatomicalID=anatomicalID)
         summaryName = dirName + '_'.join((cellName, 'summary', id1, id2))
         writer.write_population_and_sample_connectivity_summary(
-            summaryName, 
-            populationDistribution, 
-            cellTypeSummaryTable,
-            anatomicalAreaSummaryTable)
+            fname=summaryName, 
+            populationDistribution=populationDistribution, 
+            cellTypeSummaryData=cellTypeSummaryTable,
+            columnSummaryData=anatomicalAreaSummaryTable)
         #=======================================================================
         # Begin BB3D-specific information for making results available (keep!!!)
         #=======================================================================
