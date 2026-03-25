@@ -314,11 +314,11 @@ class RecordingSiteManager(object):
     recordingSites = None
     cell = None
 
-    def __init__(self, landmarkFilename, cell, record_vars=['Vm']):
+    def __init__(self, landmarkFilename, cell, record_vars=[]):
         
         landmarks = self._read_landmark_file(landmarkFilename)
         self.cell = cell
-        self.record_vars = record_vars
+        self.record_vars = ['vm_dend'] + record_vars
         self.recordingSites = []
         for i in range(len(landmarks)):
             landmark = np.array(landmarks[i])
@@ -326,7 +326,7 @@ class RecordingSiteManager(object):
                 landmark, 
                 i,
                 landmarkFilename,
-                record_vars)
+                self.record_vars)
             self.recordingSites.append(newRecSite)
 
     def set_up_recording_site(self, location, ID, filename, record_vars):
@@ -381,7 +381,7 @@ class RecordingSiteManager(object):
         # Set up recsite
         
         for var in record_vars:
-            if var not in ['Vm','net_axial']:
+            if var not in ['vm_dend','net_axial']:
                 if var.endswith('.density'):
                     var = var.removesuffix('.density')
                 elif var.endswith('.total_current'):
@@ -466,8 +466,8 @@ class RecordingSiteManager(object):
             area = seg.area() * 1e-8 # micron2 to cm2
             for var in self.record_vars:
                 print(f'update recording {var}')
-                if var == 'Vm':
-                    recordingSite.vRecordings['Vm'].append(np.array(self.cell.sections[secID].recVList[segID]))
+                if var == 'vm_dend':
+                    recordingSite.vRecordings['vm_dend'].append(np.array(self.cell.sections[secID].recVList[segID]))
                 else:
                     if var.startswith('net_axial') and var.endswith('.density'): # mA / cm2
                         trace = get_axial_current(self.cell.sections[secID], segID, mode='current_density',area=area)['net_axial']
@@ -544,7 +544,7 @@ class RecordingSite(object):
     label = None
     vRecordings = None
 
-    def __init__(self, secID, segID, label, record_vars=['Vm']):
+    def __init__(self, secID, segID, label, record_vars=['vm_dend']):
         """    
         Args:
             secID (int): Section ID of the recording site.
