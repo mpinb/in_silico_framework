@@ -466,6 +466,7 @@ class NetworkMapper:
         connectedCells = {}
         connectedCellsPerStructure = {}
         synapseTypes = list(self.postCell.synapses.keys())
+        all_structures = set([s.label for s in self.postCell.sections])
         for synapseType in synapseTypes:
             nrOfSynapses = len(self.postCell.synapses[synapseType])
             for i in range(nrOfSynapses):
@@ -475,24 +476,24 @@ class NetworkMapper:
             cellTypes = list(self.cells[anatomical_area].keys())
             for cellType in cellTypes:
                 cellID = 0
-                for cell in self.cells[anatomical_area][cellType]:
-                    if not cell.synapseList:
-                        continue
+                for presyn_cell in self.cells[anatomical_area][cellType]:
+                    if not presyn_cell.synapseList: continue
                     connectedStructures = []
-                    for syn in cell.synapseList:
+
+                    for syn in presyn_cell.synapseList:
                         anatomicalConnection = (syn.preCellType, cellID, syn.synapseID)
                         anatomicalMap.append(anatomicalConnection)
                         synapseStructure = self.postCell.sections[syn.secID].label
                         if synapseStructure not in connectedStructures:
                             connectedStructures.append(synapseStructure)
-                    if cell.synapseList[0].preCellType not in connectedCells:
+
+                    if presyn_cell.synapseList[0].preCellType not in connectedCells:
                         connectedCells[syn.preCellType] = 1
-                        connectedCellsPerStructure[syn.preCellType] = {}
-                        connectedCellsPerStructure[syn.preCellType]['ApicalDendrite'] = 0
-                        connectedCellsPerStructure[syn.preCellType]['Dendrite'] = 0
-                        connectedCellsPerStructure[syn.preCellType]['Soma'] = 0
+                        connectedCellsPerStructure[syn.preCellType] = {
+                            structure: 0 for structure in all_structures
+                        }
                     else:
-                        connectedCells[cell.synapseList[0].preCellType] += 1
+                        connectedCells[presyn_cell.synapseList[0].preCellType] += 1
                     for synapseStructure in connectedStructures:
                         connectedCellsPerStructure[syn.preCellType][synapseStructure] += 1
                     cellID += 1
@@ -577,10 +578,10 @@ class NetworkMapper:
         3.  convergence
         4.  distanceMean
         5.  distanceSTD
-        6.  cellTypeSynapsesPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-        7.  cellTypeConnectionsPerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-        8.  cellTypeConvergencePerStructure (dict: ApicalDendrite, BasalDendrite, Soma)
-        9.  cellTypeDistancesPerStructure (dict: ApicalDendrite, BasalDendrite)
+        6.  cellTypeSynapsesPerStructure
+        7.  cellTypeConnectionsPerStructure
+        8.  cellTypeConvergencePerStructure
+        9.  cellTypeDistancesPerStructure
 
         Returns:
             dict: dictionary organized the same way as :attr:`cellTypeSummaryTable`,
@@ -1003,40 +1004,18 @@ class NetworkMapper:
             cellName (str): Name of the postsynaptic cell.
             dirName (str): Directory name for the output files.
         """
-        totalDirName = dirName + 'total_synapses/'
-        if not os.path.exists(totalDirName):
-            os.makedirs(totalDirName)
-        apicalDirName = dirName + 'apical_synapses/'
-        if not os.path.exists(apicalDirName):
-            os.makedirs(apicalDirName)
-        basalDirName = dirName + 'basal_synapses/'
-        if not os.path.exists(basalDirName):
-            os.makedirs(basalDirName)
-        somaDirName = dirName + 'soma_synapses/'
-        if not os.path.exists(somaDirName):
-            os.makedirs(somaDirName)
+
         anatomical_areas = list(self.cells.keys())
         for anatomical_area in anatomical_areas:
             cellTypes = list(self.cells[anatomical_area].keys())
             for preType in cellTypes:
                 preCellType = preType + '_' + anatomical_area
-                allSynapses = synapseLocations[anatomical_area][preType]['Total']
-                totalLandmarkName = totalDirName + '_'.join(
-                    (cellName, 'total_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(totalLandmarkName, allSynapses)
-                apicalSynapses = synapseLocations[anatomical_area][preType][
-                    'ApicalDendrite']
-                apicalLandmarkName = apicalDirName + '_'.join(
-                    (cellName, 'apical_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(apicalLandmarkName, apicalSynapses)
-                basalSynapses = synapseLocations[anatomical_area][preType]['BasalDendrite']
-                basalLandmarkName = basalDirName + '_'.join(
-                    (cellName, 'basal_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(basalLandmarkName, basalSynapses)
-                somaSynapses = synapseLocations[anatomical_area][preType]['Soma']
-                somaLandmarkName = somaDirName + '_'.join(
-                    (cellName, 'soma_synapses', preCellType, id1, id2))
-                writer.write_landmark_file(somaLandmarkName, somaSynapses)
+                for struct, synapses in synapseLocations[anatomical_area][preType].items():
+                    dirname_struct = dirName + struct
+                    if not os.path.exists(dirname_struct): os.makedirs(dirname_struct)
+                    totalLandmarkName = f"{dirname_struct}_{cellName}_{struct}_synapses_{preCellType}_{id1}_{id2}" 
+                    writer.write_landmark_file(fname=totalLandmarkName, landmarkList=synapses)
+
 
     def _generate_output_files(
             self, 
