@@ -46,8 +46,20 @@ from data_base.dbopen import resolve_db_path
 from biophysics_fitting.utils import execute_in_child_process
 import socket
 
-__author__ = ['Robert Egger', 'Arco Bast']
+__author__ = ['Robert Egger', 'Arco Bast', 'Bjorge Meulemeester', 'Maria Royo']
 __date__ = '2013-01-28'
+
+def get_recSiteManagers(neuronParameters, cell):
+    recordingSiteFiles = neuronParameters.sim.recordingSites
+    recSiteManagers = []
+    if isinstance(recordingSiteFiles, list):
+        for recFile in recordingSiteFiles:
+            recSiteManagers.append(sca.RecordingSiteManager(recFile, cell))
+    elif isinstance(recordingSiteFiles, scp.parameters.NTParameterSet):
+        recordingSiteFiles_dict = recordingSiteFiles.__dict__
+        for recFile, record_vars in recordingSiteFiles_dict['_data'].items():
+            recSiteManagers.append(sca.RecordingSiteManager(recFile, cell, record_vars))
+    return recSiteManagers
 
 def _evoked_activity(
         cellParamName, 
@@ -134,11 +146,8 @@ def _evoked_activity(
     # Simulation setup
     vTraces = []
     tTraces = []
-    recordingSiteFiles = neuronParameters.sim.recordingSites
-    recSiteManagers = []
-    for recFile in recordingSiteFiles:
-        recSiteManagers.append(sca.RecordingSiteManager(recFile, cell))
 
+    recSiteManagers = get_recSiteManagers(neuronParameters, cell)
     tOffset = 0.0  # avoid numerical transients
     neuronParameters.sim.tStop = tStop
     dt = neuronParameters.sim.dt
@@ -207,23 +216,21 @@ def _evoked_activity(
     logger.info('-------------------------------')
 
     # 3. Save output data ---------------------------------------------------
-    # 3.1 Parse and write out voltage traces
-    vTraces = np.array(vTraces)
-    dendTraces = []
-
-    scp.write_all_traces(
-        dirName + '/' + uniqueID + '_vm_all_traces.csv',
-        t[offsetBin:], 
-        vTraces)
+    # 3.1 Parse and write out voltage traces and other recorded variables
+    logger.info('Writing somatic voltage traces')
+    recSiteName = dirName + '/' + uniqueID + '_vm_all_traces.csv'
+    scp.write_all_traces(recSiteName, t[offsetBin:], np.array(vTraces))
+    
     for RSManager in recSiteManagers:
         for recSite in RSManager.recordingSites:
-            tmpTraces = []
-            for vTrace in recSite.vRecordings:
-                tmpTraces.append(vTrace[offsetBin:])
-            recSiteName = dirName + '/' + uniqueID + '_' + recSite.label + '_vm_dend_traces.csv'
-            scp.write_all_traces(recSiteName, t[offsetBin:], tmpTraces)
-            dendTraces.append(tmpTraces)
-    dendTraces = np.array(dendTraces)
+            for var in recSite.vRecordings.keys():
+                tmpTraces = []
+                for vTrace in recSite.vRecordings[var]:
+                    tmpTraces.append(vTrace[offsetBin:])
+                if len(tmpTraces[0])==0: continue
+                recSiteName = dirName + '/' + uniqueID + '_' + recSite.label + f'_{var}_traces.csv'
+                logger.info(f'Writing {recSiteName}')
+                scp.write_all_traces(recSiteName, t[offsetBin:], tmpTraces)
 
     # 3.2 Write out simulation parameters
     logger.info('Writing simulation parameter files')
