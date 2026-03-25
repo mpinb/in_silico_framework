@@ -480,11 +480,6 @@ class SynapseDensity(object):
             cellSurfaceAreaDensities,
             likeAmira=1)
 
-        #=======================================================================
-        # for testing only:
-        #=======================================================================
-        #        self.cellPST = cellLengthDensities
-
         self.cellPST['EXC'] = {}
         self.cellPST['INH'] = {}
         for structure in list(self.cell.structures.keys()):
@@ -496,32 +491,20 @@ class SynapseDensity(object):
             inhConstants = self.connectionSpreadsheet['INH'][self.postCellType]
 
             if structure == 'Soma':
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'SOMA_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'SOMA_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['SOMA_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['SOMA_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
             if structure == 'ApicalDendrite':
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'APICAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'APICAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['APICAL_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['APICAL_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
             if structure == 'Dendrite':
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'BASAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants[
-                    'BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'BASAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants[
-                    'BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['BASAL_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['EXC'][structure].mesh += exConstants['BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['BASAL_LENGTH'] * cellLengthDensities[structure].mesh
+                self.cellPST['INH'][structure].mesh += inhConstants['BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
 
     def _compute_length_surface_area_density(
         self,
