@@ -34,15 +34,10 @@ __date__ = '2012-03-08'
 class _Edge(object):
     r'''Convenience class for NEURON segments.
 
-    Private class used in :func:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
+    Private class used in :func:`~read_hoc_file` to store information about a single morphological segment spanning from point to point.
     These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
-    If :math:`d-\lambda` segmentation is used, these edges are **not** comparable to NEURON segments.
     
     The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
-        
-    See also:
-        :func:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
-        access to NEURON segments.
         
     See also:
         :class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
@@ -135,6 +130,8 @@ def read_hoc_file(
     # Build the effective mapping (caller overrides defaults)
     effective_label_map = HOC_LABEL_MAP
     if label_map is not None: effective_label_map.update(label_map)
+    # ignore axons here
+    label_map['axon'] = None
 
     with dbopen(fname, 'r') as fh:
         logger.info("Reading hoc file: %s", fname)

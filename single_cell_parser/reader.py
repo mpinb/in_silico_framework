@@ -39,18 +39,15 @@ class _Edge(object):
     r'''Convenience class for NEURON segments.
 
     Private class used in :func:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
-    These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
-    If :math:`d-\lambda` segmentation is used, these edges are **not** comparable to NEURON segments.
+    These edges should not be used as API to neuron segments or sections - they merely serve as a convenience class during the creation of a morphology.
     
-    The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
-        
     See also:
         :func:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
         access to NEURON segments.
         
     See also:
-        :class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
-        that is used in the :mod:`singlecell_input_mapper` module.
+        :class:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
+        that is used in the :mod:`singlecell_input_mapper` reader.
 
     Attributes:
         label (str): label and ID of the segment (e.g. "Dendrite_1_0_0").
