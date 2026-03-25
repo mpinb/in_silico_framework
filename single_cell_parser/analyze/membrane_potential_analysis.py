@@ -304,27 +304,32 @@ class RecordingSiteManager(object):
     Args:
         landmarkFilename (str): Path to the landmark file.
         cell (:class:`single_cell_parser.cell.Cell`): Cell object associated with the landmarks.
+        record_vars (list): list of variables to record.
 
     Attributes:
         recordingSites (list): List of recording sites.
         cell (:class:`single_cell_parser.cell.Cell`): Cell object.
+        record_vars (list): list of variables to record.
     '''
     recordingSites = None
     cell = None
 
-    def __init__(self, landmarkFilename, cell):
+    def __init__(self, landmarkFilename, cell, record_vars=['Vm']):
+        
         landmarks = self._read_landmark_file(landmarkFilename)
         self.cell = cell
+        self.record_vars = record_vars
         self.recordingSites = []
         for i in range(len(landmarks)):
             landmark = np.array(landmarks[i])
             newRecSite = self.set_up_recording_site(
                 landmark, 
                 i,
-                landmarkFilename)
+                landmarkFilename,
+                record_vars)
             self.recordingSites.append(newRecSite)
 
-    def set_up_recording_site(self, location, ID, filename):
+    def set_up_recording_site(self, location, ID, filename, record_vars):
         '''Set up a :class:`RecordingSite` from a location.
         
         Determines the section and segment on the cell corresponding
@@ -336,30 +341,8 @@ class RecordingSiteManager(object):
             location (numpy.ndarray): Location of the recording site.
             ID (int): ID of the recording site.
             filename (str): Path to the AMIRA landmark file containing all recording sites.
+            record_vars (list): list of variables to record.
         '''
-        # inaccurate version
-        #        minDist = 1e9
-        #        minSecID = None
-        #        minSegID = None
-        #        for i in range(len(self.cell.sections)):
-        #            sec = self.cell.sections[i]
-        #            for j in range(len(sec.segPts)):
-        #                pt = sec.segPts[j]
-        #                dist = np.sqrt(np.dot(pt-location, pt-location))
-        #                if(dist < minDist):
-        #                    minDist = dist
-        #                    minSecID = i
-        #                    minSegID = j
-        #
-        #        sec = self.cell.sections[minSecID]
-        #        somaDist = self.cell.distance_to_soma(sec, sec.relPts[minSegID])
-        #        splitName = filename.split('/')[-1]
-        #        tmpIndex = splitName.find('.landmarkAscii')
-        #        label = splitName[:tmpIndex] + '_ID_%03d_sec_%03d_seg_%03d_somaDist_%.1f' % (ID, minSecID, minSegID, somaDist)
-        #        newRecSite = RecordingSite(minSecID, minSegID, label)
-        #        return newRecSite
-
-        # precise version
         minDist = 1e9
         minSecID = None
         minSegID = None
@@ -396,17 +379,117 @@ class RecordingSiteManager(object):
             splitName[:tmpIndex] + \
             '_ID_%03d_sec_%03d_seg_%03d_x_%.3f_somaDist_%.1f' % (ID, minSecID, minSegID, minSegx, somaDist)
         # Set up recsite
-        newRecSite = RecordingSite(minSecID, minSegID, label)
+        
+        for var in record_vars:
+            if var not in ['Vm','net_axial']:
+                if var.endswith('.density'):
+                    var = var.removesuffix('.density')
+                elif var.endswith('.total_current'):
+                    var = var.removesuffix('.total_current')
+                mech=None
+                if '.' in var: mech, var = var.split('.')
+                try:
+                    sec._init_range_var_recording(var, mech)
+                except (NameError, AttributeError):
+                    ## if mechanism not in segment: continue
+                    ## this leaves the duty to take care of missing range vars to
+                    ## all further functions relying on that values. I.e. they should
+                    ## check, if the range var is existent in the respective segment or not
+                    pass
+        
+        newRecSite = RecordingSite(minSecID, minSegID, label, record_vars)
         return newRecSite
 
     def update_recordings(self):
         '''Add the :class:`~single_cell_parser.cell.Cell`'s recorded voltages to the :param:`recordingSites`.
+        returns membrane currents in given segment in mA (total_current) or mA / cm2 (density).
         '''
+        def get_voltage_at_section_end_node(sec): # rewritten with more accurate ri
+            # because we didn't record v at the final internal node of the segment, we need to calculate it
+            rs = [sec(1).ri()] #ri from the center of the last segment to the end node
+            vs = [np.array(sec.recVList[-1])] # v of the last seg
+            for csec in sec.children():
+                rs.append([seg for seg in csec][0].ri()) # ri from the first internal node of sec to the center of the first seg
+                vs.append(I.np.array(csec.recVList[0])) #v at the first segments
+            gs = [1/r for r in rs]
+            return sum(vv*gg for vv,gg in zip(vs,gs))/sum(gs) 
+        
+        def get_axial_current(sec, segid, mode = 'segment_current', area=None): 
+            #this is the second version of the function and uses neuron's ri method
+            # ri is given in [1e+6 ohm]
+            # v in mV (1e-3 V)
+            # v/ri = current in nA (1e-9 A)
+            
+            current_from_dist = None
+            current_from_prox = None
+            segs = [seg for seg in sec]  
+            seg = segs[segid]
+            segid = segs.index(seg)
+            v_seg = np.array(sec.recVList[segid])# seg.v
+
+            if segid == 0: 
+                ri = seg.ri()
+                psec = sec.parent
+                if psec is None: # Soma: no parent segments that could provide current
+                    current_from_prox = np.zeros_like(v_seg)
+                else:   
+                    v0 = get_voltage_at_section_end_node(psec) #sec(0).v
+                    current_from_prox = (v_seg - v0)/ri  # mV / Megaohm = pA 
+            if current_from_prox is None:
+                ri = seg.ri()
+                v0 = np.array(sec.recVList[segid-1]) #segs[segid-1].v
+                current_from_prox = (v_seg - v0)/ri
+            if segid == sec.nseg -1:
+                ri = sec(1).ri()
+                v2 = get_voltage_at_section_end_node(sec) #sec(1).v
+                current_from_dist = (v_seg - v2)/ri
+            if current_from_dist is None: 
+                ri = segs[segid+1].ri()
+                v2 = np.array(sec.recVList[segid+1])
+                current_from_dist = (v_seg - v2)/ri
+            
+            current_from_prox = current_from_prox * 1e-9 # pA to mA
+            current_from_dist = current_from_dist * 1e-9 # pA to mA
+            if mode == 'segment_current':
+                return {'current_from_prox': current_from_prox, 
+                        'current_from_dist': current_from_dist,
+                        'net_axial':current_from_prox+current_from_dist} # mA
+            elif mode == 'current_density':
+                return {'current_from_prox': current_from_prox/area, 
+                        'current_from_dist': current_from_dist/area,
+                        'net_axial':(current_from_prox+current_from_dist)/area} # mA / cm2
+        
         for recordingSite in self.recordingSites:
             secID = recordingSite.secID
             segID = recordingSite.segID
-            vTrace = np.array(self.cell.sections[secID].recVList[segID])
-            recordingSite.vRecordings.append(vTrace)
+            seg = [seg for seg in self.cell.sections[secID]][segID]
+            area = seg.area() * 1e-8 # micron2 to cm2
+            for var in self.record_vars:
+                print(f'update recording {var}')
+                if var == 'Vm':
+                    recordingSite.vRecordings['Vm'].append(np.array(self.cell.sections[secID].recVList[segID]))
+                else:
+                    if var.startswith('net_axial') and var.endswith('.density'): # mA / cm2
+                        trace = get_axial_current(self.cell.sections[secID], segID, mode='current_density',area=area)['net_axial']
+                    elif var.startswith('net_axial') and var.endswith('.total_current'): # mA
+                        trace = get_axial_current(self.cell.sections[secID], segID, mode='segment_current')['net_axial']
+
+                    elif var.endswith('.density'): # units of membrane currents is mA / cm2
+                        var_name = var.removesuffix(".density")
+                        trace_sec = self.cell.sections[secID].recordVars[var_name]
+                        if len(trace_sec)>0: trace = trace_sec[segID]
+                        else: trace = []
+                    elif var.endswith('.total_current'):  # mA
+                        var_name = var.removesuffix(".total_current")
+                        trace_sec = self.cell.sections[secID].recordVars[var_name] 
+                        if len(trace_sec)>0: trace = trace_sec[segID]*area # mA / cm2 * cm2 = mA
+                        else: trace = []
+                    else:
+                        trace_sec = self.cell.sections[secID].recordVars[var] 
+                        if len(trace_sec)>0: trace = trace_sec[segID]
+                        else: trace = []
+                        
+                    recordingSite.vRecordings[var].append(np.array(trace))
 
     def _read_landmark_file(self, landmarkFilename):
         '''Read the AMIRA landmark file and return the landmarks.
@@ -461,7 +544,7 @@ class RecordingSite(object):
     label = None
     vRecordings = None
 
-    def __init__(self, secID, segID, label):
+    def __init__(self, secID, segID, label, record_vars=['Vm']):
         """    
         Args:
             secID (int): Section ID of the recording site.
@@ -471,8 +554,10 @@ class RecordingSite(object):
         self.secID = secID
         self.segID = segID
         self.label = label
-        self.vRecordings = []
-
+        self.vRecordings = {}
+        if record_vars is not None:
+            for var in record_vars:
+                self.vRecordings[var] = []
 
 class SpikeInit:
     '''Analyze spike initiation.
