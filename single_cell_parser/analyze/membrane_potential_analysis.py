@@ -410,7 +410,7 @@ class RecordingSiteManager(object):
             vs = [np.array(sec.recVList[-1])] # v of the last seg
             for csec in sec.children():
                 rs.append([seg for seg in csec][0].ri()) # ri from the first internal node of sec to the center of the first seg
-                vs.append(I.np.array(csec.recVList[0])) #v at the first segments
+                vs.append(np.array(csec.recVList[0])) #v at the first segments
             gs = [1/r for r in rs]
             return sum(vv*gg for vv,gg in zip(vs,gs))/sum(gs) 
         
