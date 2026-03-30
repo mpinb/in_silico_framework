@@ -24,12 +24,17 @@ from docs.utils.sphinx_hooks import (
 
 logger = isf_logger.getChild("DOCS")
 logger.setLevel("INFO")
-# Parse pyproject.toml to get the release version
-pyproject_path = os.path.join(project_root, "pyproject.toml")
-with open(pyproject_path, "r") as f:
-    pyproject_data = toml.load(f)
-    release = pyproject_data["project"]["version"]
-    version = release
+
+def get_project_version():
+    # Parse pyproject.toml to get the release version
+    pyproject_path = os.path.join(project_root, "pyproject.toml")
+    with open(pyproject_path, "r") as f:
+        pyproject_data = toml.load(f)
+        release = pyproject_data["project"]["version"]
+        version = release
+    return version
+
+version = get_project_version()
 project = "ISF"
 copyright = "2025 Max Planck Institute for Neurobiology of Behavior - CAESAR"
 author = "Arco Bast, Robert Egger, Bjorge Meulemeester, Maria Royo Cano, Rieke Fruengel, Matt Keaton, Omar Valerio"

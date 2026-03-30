@@ -25,7 +25,7 @@ class TestSingleCellParserInit:
         assert os.path.exists(self.network_param)
 
     def test_cell_modify_functions_in_neuron_param_is_respected(self):
-        from mechanisms import l5pt as l5pt_mechanisms
+        import mechanisms
         neuron_param = scp.build_parameters(getting_started.neuronParam)
         
         # unscaled diameters

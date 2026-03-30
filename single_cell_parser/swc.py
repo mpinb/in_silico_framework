@@ -1,11 +1,25 @@
+# In Silico Framework
+# Copyright (C) 2025  Max Planck Institute for Neurobiology of Behavior - CAESAR
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
+"""
 import numpy as np
 import warnings
 from pathlib import Path
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
-
-SWC_LABEL_MAP = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
-REVERSE_SWC_LABEL_MAP = {v: k for k, v in SWC_LABEL_MAP.items()}
 
 def _get_swc_lines_per_section(
     cell, 
@@ -31,11 +45,17 @@ def _get_swc_lines_per_section(
     Returns:
         List[List[List]]: 
             Nested list of swc lines (index, type, x, y, z, radius, parent), organized per section.
-    """
+    """          
+    # Remap sections to a custom type
     remap_sections = remap_sections or dict()
     only_child_sections = _get_only_child_sections(cell)
+    # Default types
+    label_map = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
+    
+    # Construct the per-section swc lines
     swc_lines_per_section = []
     n = 1
+    n_assigned_hillock_sections = 0
     for sec_ind, sec in enumerate(cell.sections):
         parent = sec.parent
         parent_sec_ind = cell.sections.index(parent) if parent is not None else None
@@ -47,8 +67,7 @@ def _get_swc_lines_per_section(
                 "Section {} is an only child of the parent section {} with the same label \"{}\". "
                 "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. "
                 "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. "
-                "If you want to preserve this information in SWC, consider remapping one of these sections to a custom type via the keyword argument `remap_sections`.".format(
-                    sec_ind, parent_sec_ind, sec.label))
+                "Please consider remapping the section label/type via the keyword argument `remap_sections`.".format(sec_ind, parent_sec_ind, sec.label))
         
         if sec.label == "Soma":
             x, y, z = np.mean(sec.pts, axis=0)
@@ -64,8 +83,8 @@ def _get_swc_lines_per_section(
             # Infer the section type
             if sec_ind in remap_sections: 
                 label_nr = remap_sections[sec_ind]
-            elif sec.label in SWC_LABEL_MAP: 
-                label_nr = SWC_LABEL_MAP[sec.label]
+            elif sec.label in label_map: 
+                label_nr = label_map[sec.label]
             else: 
                 label_nr = -1
 
@@ -77,14 +96,18 @@ def _get_swc_lines_per_section(
             
             for pt_ind, pt in enumerate(sec.pts):
                 x, y, z = pt
+                # diamList is not a robust way to fetch point diameters
+                # cell_modify_functions.scale_apical scales D per point, but does not update diamList
+                # However, we want to segmentize AS IF the diam has not been scaled, for reproducibility
+                # And afterwards scale the diameter
                 radius = sec.diamList[pt_ind]/2
+                # radius = sec.diam3d(pt_ind) / 2  # more robust way to fetch updated D
                 parent_point = n_parent_points if pt_ind == 0 else n - 1
                 swc_line = [n, label_nr, x, y, z, radius, parent_point]
                 swc_lines_this_section.append(swc_line)
                 n += 1
             swc_lines_per_section.append(swc_lines_this_section)
     return swc_lines_per_section
-
 
 def _get_only_child_sections(cell):
     """Check if a cell has sections that are only children.
@@ -105,13 +128,10 @@ def _get_only_child_sections(cell):
     return direct_desc_sections
     
 
-def cell_to_swc(
-    cell, 
-    of, 
-    skip_myelin=False, 
-    remap_sections=None
-):
-    """Write out a :class:`~single_cell_parser.cell.Cell` object to swc format.
+def cell_to_swc(cell, of, skip_myelin=False, remap_sections=None):
+    """Write out a cell object to swc format::
+    
+        index type x y z radius parent
         
     Args:
         cell (:class:`single_cell_parser.cell.Cell`): 
@@ -131,7 +151,6 @@ def cell_to_swc(
     Returns:
         List[List[List]]: 
             Nested list of swc lines (index, type, x, y, z, radius, parent), organized per section.
-
     """
     remap_sections = remap_sections or dict()
     swc_lines_per_section = _get_swc_lines_per_section(

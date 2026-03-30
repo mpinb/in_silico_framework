@@ -188,18 +188,23 @@ class PSP_with_current_injection:
         return scp.NTParameterSet(neuron_param)
 
     def get_psp_simulator(self, gExRange=[1.0], exc_inh='exc', mode='synapses'):
-        '''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
+        r'''Set up a :py:class:`~simrun.synaptic_strength_fitting.PSPs` object to simulate individual synapse PSPs.
         
         This method initializes a PSPs object with the given parameters to simulate excitatory or inhibitory postsynaptic potentials.
         
         Args:
-            mode (str): Mode of the simulation. Options:
+            mode (str): 
+                Mode of the simulation. 
+                Options:
             
-            - ``'synapses'`` to activate individual synapses (default)
-            - ``'cells'`` to activate individual cells
+                - ``'synapses'`` to activate individual synapses (default)
+                - ``'cells'`` to activate individual cells
+
+            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
+            exc_inh (str): Whether to fetch a :class:`~simrun.synaptic_strength_fitting.PSPs` for excitatory or inhibitory synapses.
             
         Returns:
-            PSPs: Object to simulate PSPs
+            :class:`~simrun.synaptic_strength_fitting.PSPs`: Object to simulate PSPs
         '''
         psp = PSPs(
             self.get_neuron_param_with_current_injection(),
@@ -215,20 +220,22 @@ class PSP_with_current_injection:
         self,
         gExRange=[1.0],
         mode='synapses'):
-        '''Set up and combine excitatory and inhibitory PSP simulators.
+        r'''Set up and combine excitatory and inhibitory PSP simulators.
         
         This method initializes two PSPs objects, one for excitatory and one for inhibitory postsynaptic potentials, 
         and combines them into a single PSPs object.
 
         Args:
-            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
-            mode (str): Mode of the simulation. Options:
+            mode (str): 
+                Mode of the simulation. Options:
             
-            - ``'synapses'`` to activate individual synapses (default)
-            - ``'cells'`` to activate individual cells
+                - ``'synapses'`` to activate individual synapses (default)
+                - ``'cells'`` to activate individual cells
+
+            gExRange (list): Range of excitatory conductance values to simulate (in :math:`\mu S`). Default: ``[1.0]``
             
         Returns:
-            PSPs: Combined PSPs object with both excitatory and inhibitory components.
+            :class:`~simrun.synaptic_strength_fitting.PSPs`: Object to simulate PSPs
         '''
         psp_inh = self.get_psp_simulator(exc_inh='inh',
                                          gExRange=gExRange,
