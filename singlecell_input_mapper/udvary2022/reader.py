@@ -16,6 +16,8 @@
 '''Read in hoc files, Amira Mesh files, and spreadsheets with connection probabilities.
 '''
 from __future__ import annotations
+from pandas.core.frame import DataFrame
+from pandas.core.frame import DataFrame
 import numpy as np
 import os, re
 from config.isf_logging import logger
@@ -24,6 +26,7 @@ from data_base.dbopen import dbopen
 from typing import List, Dict, Any, Optional
 from config.isf_logging import get_isf_logger
 from config.user.morphology import HOC_LABEL_MAP
+import pandas as pd
 import logging
 
 logger = get_isf_logger().getChild(__name__)
@@ -131,7 +134,7 @@ def read_hoc_file(
     effective_label_map = HOC_LABEL_MAP
     if label_map is not None: effective_label_map.update(label_map)
     # ignore axons here
-    label_map['axon'] = None
+    effective_label_map['axon'] = None
 
     with dbopen(fname, 'r') as fh:
         logger.info("Reading hoc file: %s", fname)
@@ -356,57 +359,48 @@ def read_scalar_field_legacy(fname=''):
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
-def read_connections_spreadsheet(fname):
-    """Reads a spreadsheet with connection probabilities between cell types
+def _rename_columns(df: DataFrame) -> DataFrame:
+    colmap = {}
+    for col in df:
+        parts = col.split("_")
+        struct = parts[-1]
+        struct = HOC_LABEL_MAP.get(struct.lower(), struct)
+        parts[-1] = struct
+        colmap[col] = "_".join(parts)
+    df = df.rename(columns=colmap)
+    return df
 
-    Assigns rows that contain "INHIBITORY" or "EXCITATORY" in their first column to "INH" and "EXC" in the output.
+
+def read_connections_spreadsheet(
+    fname, 
+    rename_presyn_map=None
+    ):
+    """
+    Read a connections spreadsheet.
+
+    Connections spreadsheets define the empirically measured connectivity between
+    presynaptic cells, and all structures of a postsynaptic cell, in units of 
+    connections per unit of area and length.
 
     Args:
-        fname (str): The name of the file to be read
-    
-    Returns:
-        dict: A dictionary with the following structure: {EXC: {celltype: {norm: value, ...}, ...}, INH: {...}}
-        
-    Example:
-        
-        >>> connectionsSpreadsheet = read_connections_spreadsheet('connections.csv')
-        >>> connectionsSpreadsheet
-        {'EXC': {
-            celltype_1: {
-                'SOMA_LENGTH': 0.1, 'SOMA_AREA': 0.2, ...
-                },
-            celltype_2: {...},
-            },
-        'INH': {...}
-        }    
+        fname (str): Filename of the connections spreadsheet file.
+        rename_presyn_map (dict): 
+            Mapping between presynaptic cell type names, and the internal representation to use.
+            If ``None`` (default), maps "ALL_EXCITATORY" to "EXC" and "ALL_INHIBITORY" to "INH".
     """
-    connectionSpreadsheet = {}
-    connectionSpreadsheet['EXC'] = {}
-    connectionSpreadsheet['INH'] = {}
-    targetStructures = (
-        'SOMA_LENGTH', 'APICAL_LENGTH', 'BASAL_LENGTH',
-        'SOMA_AREA', 'APICAL_AREA', 'BASAL_AREA')
+    if rename_presyn_map == None:
+        rename_presyn_map = {
+            "ALL_EXCITATORY": "EXC",
+            "ALL_INHIBITORY": "INH"
+        }
+    df = pd.read_csv(fname, sep='\t')
 
-    with dbopen(fname, 'r') as spreadsheet:
-        for line in spreadsheet:
-            stripLine = line.strip()
-            if not stripLine:
-                continue
-            splitLine = stripLine.split('\t')
-            if splitLine[0] == 'PRESYNAPTIC_CELLTYPE':
-                continue
-            else:
-                preCellTypeStr = None
-                if 'EXCITATORY' in splitLine[0]:
-                    preCellTypeStr = 'EXC'
-                if 'INHIBITORY' in splitLine[0]:
-                    preCellTypeStr = 'INH'
-                postCellType = splitLine[1]
-                connectionSpreadsheet[preCellTypeStr][postCellType] = {}
-                for i in range(len(targetStructures)):
-                    connectionSpreadsheet[preCellTypeStr][postCellType][targetStructures[i]] = float(splitLine[i + 2])
+    df['PRESYNAPTIC_CELLTYPE'] = df['PRESYNAPTIC_CELLTYPE'].map(
+        lambda x: rename_presyn_map.get(x, x)
+    )
 
-    return connectionSpreadsheet
+    df = _rename_columns(df)
+    return df
 
 
 def read_celltype_numbers_spreadsheet(fname):

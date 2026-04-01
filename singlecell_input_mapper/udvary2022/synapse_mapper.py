@@ -24,6 +24,7 @@ from .scalar_field import ScalarField
 from .cell import Cell
 import sys
 import logging
+from config.user.morphology import HOC_LABEL_MAP
 logger = logging.getLogger("ISF").getChild(__name__)
 
 __author__ = 'Robert Egger'
@@ -252,6 +253,9 @@ class SynapseDensity(object):
         cellPST (dict): 
             Nested dictionary containing the 3D length/surface area density of the postsynaptic neuron.
             See :func:`~SynapseDensity.compute_cell_PST` for details.
+        densityGrid (dict):
+            Dictionary mapping the cell's "mesh", "origin", "extent", "spacing" and "bBox" to their correpsonding tuple or 
+            :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarFieldScalarField`.
     '''
     def __init__(
         self, 
@@ -281,6 +285,10 @@ class SynapseDensity(object):
         self.exPST = exPST
         self.inhPST = inhPST
         self.cellPST = {}
+        # {"mesh": cellMesh, "origin": cellOrigin, "extent": cellExtent, "spacing": cellSpacing, "bBox": cellBoundingBox}
+        self.densityGrid = self._compute_cell_density_grid()
+        # Where the cell intersects the mesh
+        self.cellLengthDensities, self.cellSurfaceAreaDensities = self._compute_length_surface_area_density(likeAmira=1)
 
     def compute_synapse_density_vectorized(self, boutonDensity, preCellType):
         """Vectorized version of synapse density computation."""
@@ -427,94 +435,81 @@ class SynapseDensity(object):
         return synapseDensity
 
     def compute_cell_PST(self):
-        '''Compute 3D length/surface area density of the postsynaptic targets in the mesh.
+        '''Compute density of postsynaptic targets (PSTs) for each anatomical structure as a full bounding-box spanning mesh.
+
+        Densities are calculated both in units per neurite length, and units per membrane surface area.
         
-        Called once to compute 3D length/surface area densities and combine them with length/surface area PST densities to yield connection-specific 3D PST density of the postsynaptic neuron.
-        Creates a mesh for each structure of the postsynaptic neuron.
-        Calculates the length and surface area density of each structure with :func:`~SynapseDensity._compute_length_surface_area_density`.
-        Multiplies the length and area with PST densities per length/area according to the connection spreadsheet :attr:`~SynapseDensity.connectionSpreadsheet`, and adds them together.
-        This is PST density is normalized in :func:`~SynapseDensity.compute_synapse_density` to obtain synapse densities.
+        Creates a mesh for each structure of the postsynaptic neuron (e.g. "Soma", "Dendrite" etc).
+        Calculates the length and surface area density of each structure with :func:`~SynapseDensity._compute_length_surface_area_density` for each voxel in the mesh.
+        Multiplies these with (postsynaptic and presynaptic) cell type specific connectivity values from :attr:`~SynapseDensity.connectionSpreadsheet`.
+        Usually, poststynaptic cell type specificity is just EXC/INH.
+        This is the PST density used to normalize synapse densities on the postsynaptic structures in :func:`~SynapseDensity.compute_synapse_density` to obtain synapse densities.
         
         Returns:
-            None. 
-            Fills the scalar fields in place. 
-            :attr:`~SynapseDensity.cellPST` is a nested dictionary of the form:
-            {'EXC': {'structure_1': :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`, 'structure_2': ..., ...} 'INH': ...}.
-        
-        Todo:
-            Currently, structures are hardcoded for L5PTs. This method can be extended to accept a mapping
-            between the connection spreadsheet column names and cell structures.
+            None: Fills the scalar fields in place. 
         
         Example:
         
         >>> synapseDensity.compute_cell_PST()
-        >>> synapseDensity.cellPST['EXC']['Soma'].mesh  # spans the entire bounding box
+        >>> synapseDensity.cellPST['PRESYN_CELLTYPE_1']['Soma'].mesh  # spans the entire bounding box
         array([[[ 0.        ,  0.        ,  0.        ,  0.        ],
                 ...,
                 [ 0.        ,  0.        ,  0.        ,  0.        ]]])
         >>> synapseDensity.cellPST
         {
-            'EXC': {
+            'PRESYN_CELLTYPE_1': {
                 'Soma': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3b90>, 
                 'ApicalDendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c10>, 
                 'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c50>
                 }, 
-            'INH': {
-                'Soma': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3c90>, 
-                'ApicalDendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3cd0>, 
-                'Dendrite': <singlecell_input_mapper.scalar_field.ScalarField object at 0x7f7f3c0b3d10>}
-                }
+            'PRESYN_CELLTYPE_2': {...},
+            ...
+        }
         '''
-        cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox = \
-            self._compute_cell_density_grid()
-        cellLengthDensities = {}
-        cellSurfaceAreaDensities = {}
-        for structure in list(self.cell.structures.keys()):
-            cellLengthDensities[structure] = ScalarField(
-                cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox)
-            cellSurfaceAreaDensities[structure] = ScalarField(
-                cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox)
-        # Where the cell intersects the mesh
-        self._compute_length_surface_area_density(
-            cellLengthDensities,
-            cellSurfaceAreaDensities,
-            likeAmira=1)
-
-        self.cellPST['EXC'] = {}
-        self.cellPST['INH'] = {}
-        for structure in list(self.cell.structures.keys()):
-            self.cellPST['EXC'][structure] = ScalarField(
-                cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox)
-            self.cellPST['INH'][structure] = ScalarField(
-                cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox)
-            exConstants = self.connectionSpreadsheet['EXC'][self.postCellType]
-            inhConstants = self.connectionSpreadsheet['INH'][self.postCellType]
-
-            if structure == 'Soma':
-                self.cellPST['EXC'][structure].mesh += exConstants['SOMA_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants['SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['SOMA_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['SOMA_AREA'] * cellSurfaceAreaDensities[structure].mesh
-            if structure == 'ApicalDendrite':
-                self.cellPST['EXC'][structure].mesh += exConstants['APICAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants['APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['APICAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['APICAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
-            if structure == 'Dendrite':
-                self.cellPST['EXC'][structure].mesh += exConstants['BASAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['EXC'][structure].mesh += exConstants['BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['BASAL_LENGTH'] * cellLengthDensities[structure].mesh
-                self.cellPST['INH'][structure].mesh += inhConstants['BASAL_AREA'] * cellSurfaceAreaDensities[structure].mesh
+        def _get_norm_value_from_connections_df(connections_df, post_celltype: str, struct: str, prefix: str):
+            """Get the length or area normalization value from the connections spreadsheet, depending on (postsynaptic) cell type, and neurite structure label.
+            
+            It is assumed the :attr:`connections_df` is already filtered to contain only a single presynaptic cell type.
+            As a consequence, filtering on postsynaptic celltype should yield a unique row.
+            """
+            # Filter by postsynaptic celltype
+            norm_values_this_postsyn_ct = connections_df[connections_df['POSTSYNAPTIC_CELLTYPE'] == post_celltype]
+            # Should be unique
+            assert len(norm_values_this_postsyn_ct) == 1, f"Connectivity normalization values from {presyn_type} to {self.postCellType} are defined more than once in the connectionsSpreadSheet"
+            norm_values_this_postsyn_ct = norm_values_this_postsyn_ct.iloc[0]
+            # Filter by match column
+            norm_colname = [
+                col for col in connections_df.columns
+                if col.lower().startswith(prefix.lower())
+                and col.split("_")[-1].lower() == struct.lower()
+            ]
+            if not norm_colname: raise ValueError(
+                f"Could not find a {prefix} normalization value of form {prefix.upper()}*_{struct} in columns {connections_df.columns.tolist()}")
+            if len(norm_colname) > 1: raise ValueError(
+                f"Found more than 1 column matching struct {struct} and prefix {prefix}: {norm_colname}")
+            norm_colname = norm_colname[0]
+            return norm_values_this_postsyn_ct[norm_colname]
+        
+        for presyn_type, connections_df in self.connectionSpreadsheet.groupby("PRESYNAPTIC_CELLTYPE"):
+            self.cellPST[presyn_type] = {}
+            for struct in self.cell.structures:
+                # Initialize empty scalar field
+                self.cellPST[presyn_type][struct] = ScalarField(**self.densityGrid)
+                # Fetch normalization values for the postsyn type this mapper is mapping on
+                norm_area = _get_norm_value_from_connections_df(connections_df = connections_df, post_celltype=self.postCellType, struct=struct, prefix="AREA")
+                norm_length = _get_norm_value_from_connections_df(connections_df = connections_df, post_celltype=self.postCellType,struct=struct, prefix="LENGTH")
+                # Scale ScalarField with normalization values, multiplied by available length/surface
+                self.cellPST[presyn_type][struct].mesh += norm_length * self.cellLengthDensities[struct].mesh
+                self.cellPST[presyn_type][struct].mesh += norm_area   * self.cellSurfaceAreaDensities[struct].mesh
+        return self.cellPST
 
     def _compute_length_surface_area_density(
         self,
-        lengthDensity,
-        surfaceAreaDensity,
         likeAmira=0):
         '''Fills the scalar fields :param:`lengthDensity` and :param:`surfaceDensity` to contain length and area per structure per voxel.
         
-        This method is an implementation of line segment clipping using the 
-        Liang-barsky algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
+        This method is an implementation of line segment clipping using the
+        Liang-barsky :cite:`liang1984new` algorithm (http://en.wikipedia.org/wiki/Liang%E2%80%93Barsky_algorithm).
         This makes use of the fact that end points of individual sections are beginning points 
         of connected sections and represented in each section separately.
         This way, sections can be treated separately from each other.
@@ -538,19 +533,26 @@ class SynapseDensity(object):
         Returns:
             None. Fills the scalar fields in place.
         '''
+        lengthDensity = {
+            struct: ScalarField(**self.densityGrid) 
+            for struct in self.cell.structures
+        }
+        surfaceAreaDensity = {
+            struct: ScalarField(**self.densityGrid) 
+            for struct in self.cell.structures
+        }
+
+
         logger.info('---------------------------')
         totalLength = 0.0
         for structure in list(lengthDensity.keys()):
+            # -----------------------------------------------------------------------------
+            # 1. Compute length between all pairs of points that are located in the same grid cell (vast majority)
+            # -----------------------------------------------------------------------------
+
             logger.debug('Computing 3D length/surface area density of structures with label {:s}'.format(structure))
             density1 = lengthDensity[structure]
             density2 = surfaceAreaDensity[structure]
-            #===================================================================
-            # Two steps:
-            # 1. Compute length between all pairs of points that are located
-            # in the same grid cell (vast majority)
-            # 2. Use Liang-Barsky for clipping line segments between remaining
-            # points that are not located within same grid cell
-            #===================================================================
             clipSegments = []
             clipSegmentsRadius = []
             for sec in self.cell.structures[structure]:
@@ -580,27 +582,21 @@ class SynapseDensity(object):
                         clipSegmentsRadius.append((r1, r2))
 
 
-            # dims = density1.extent[1]+1, density1.extent[3]+1, density1.extent[5]+1
-            # nrOfVoxels = dims[0]*dims[1]*dims[2]
+            # -----------------------------------------------------------------------------
+            # 2. Use Liang-Barsky for clipping line segments between remaining points that are not located within same grid cell
+            # -----------------------------------------------------------------------------
+
             count = 0
-            #            print 'Checking %dx%dx%d = %d voxels...' % (dims[0],dims[1],dims[2],nrOfVoxels)
             nrOfSegments = len(clipSegments)
-            #            print 'Clipping %d segments...' % (nrOfSegments)
-            #            for segment in clipSegments:
             for n in range(len(clipSegments)):
                 segment = clipSegments[n]
                 segmentRadius = clipSegmentsRadius[n]
-                logger.debug('{:d} of {:d} done...\r'.format(
-                    count, nrOfSegments))  #, end=' ')
+                logger.debug('{:d} of {:d} done...\r'.format(count, nrOfSegments))  #, end=' ')
                 sys.stdout.flush()
                 count += 1
                 for i in range(density1.extent[0], density1.extent[1] + 1):
                     for j in range(density1.extent[2], density1.extent[3] + 1):
-                        for k in range(density1.extent[4],
-                                       density1.extent[5] + 1):
-                            #                            print '%d of %d done...\r' % (count,nrOfVoxels),
-                            #                            sys.stdout.flush()
-                            #                            count += 1
+                        for k in range(density1.extent[4], density1.extent[5] + 1):
                             ijk = i, j, k
                             voxelBounds = density1.get_voxel_bounds(ijk)
                             pt1 = segment[0]
@@ -637,11 +633,9 @@ class SynapseDensity(object):
                                 and self._clip_u(pq5, u1u2) and self._clip_u(pq6, u1u2):
                                 u1 = u1u2[0]
                                 u2 = u1u2[1]
-                            else:
-                                continue
+                            else: continue
 
-                            if u2 < u1:
-                                continue
+                            if u2 < u1: continue
 
                             clipPt1 = pt1 + u1 * dx_
                             clipPt2 = pt1 + u2 * dx_
@@ -650,16 +644,14 @@ class SynapseDensity(object):
                             length = np.sqrt(np.dot(diff, diff))
                             r1 = segmentRadius[0]
                             r2 = segmentRadius[1]
-                            r1Interpolated = self._interpolate_radius(
-                                pt1, pt2, r1, r2, clipPt1)
-                            r2Interpolated = self._interpolate_radius(
-                                pt1, pt2, r1, r2, clipPt2)
-                            area = self._get_truncated_cone_area(
-                                length, r1Interpolated, r2Interpolated)
+                            r1Interpolated = self._interpolate_radius(pt1, pt2, r1, r2, clipPt1)
+                            r2Interpolated = self._interpolate_radius(pt1, pt2, r1, r2, clipPt2)
+                            area = self._get_truncated_cone_area(length, r1Interpolated, r2Interpolated)
                             density1.mesh[ijk] += length
                             density2.mesh[ijk] += area
                             totalLength += length
         logger.debug('Total clipped length = {:f}'.format(totalLength))
+        return lengthDensity, surfaceAreaDensity
 
     def _clip_u(self, pq, u1u2):
         '''Liang-Barsky clipping algorithm :cite:`liang1984new` for line segments in 3D.
@@ -682,7 +674,7 @@ class SynapseDensity(object):
                 return False
             elif tmp < u2:
                 u2 = tmp
-        elif self._is_zero(p) and q < 0:
+        elif np.abs(p) < 1e-10 and q < 0:
             return False
         u1u2[0] = u1
         u1u2[1] = u2
@@ -743,18 +735,12 @@ class SynapseDensity(object):
                     voxelBounds = self.exPST.get_voxel_bounds(ijk)
                     if not self._intersect_bboxes(cellBounds, voxelBounds):
                         continue
-                    if i < iMin:
-                        iMin = i
-                    if i > iMax:
-                        iMax = i
-                    if j < jMin:
-                        jMin = j
-                    if j > jMax:
-                        jMax = j
-                    if k < kMin:
-                        kMin = k
-                    if k > kMax:
-                        kMax = k
+                    if i < iMin: iMin = i
+                    if i > iMax: iMax = i
+                    if j < jMin: jMin = j
+                    if j > jMax: jMax = j
+                    if k < kMin: kMin = k
+                    if k > kMax: kMax = k
 
         cellExtent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
         cellDims = cellExtent[1] + 1, cellExtent[3] + 1, cellExtent[5] + 1
@@ -771,25 +757,14 @@ class SynapseDensity(object):
         cellOrigin = xMin, yMin, zMin
         cellBoundingBox = xMin, xMax, yMin, yMax, zMin, zMax
         cellMesh = np.zeros(shape=cellDims)
-        #        print 'Cell structures grid'
-        #        print 'Origin:'
-        #        print cellOrigin
-        #        print 'Bounding box:'
-        #        print cellBoundingBox
-        #        print 'Extent:'
-        #        print cellExtent
-        #        print 'Dims:'
-        #        print cellDims
 
-        return cellMesh, cellOrigin, cellExtent, cellSpacing, cellBoundingBox
-
-    def _is_zero(self, number):
-        """Check if a number is close to zero (tolerance of 1e-10)
-        
-        Args:
-            number (float): Number to check."""
-        eps = 1e-10
-        return number < eps and number > -eps
+        return {
+            "mesh": cellMesh, 
+            "origin": cellOrigin, 
+            "extent": cellExtent, 
+            "spacing": cellSpacing, 
+            "bBox": cellBoundingBox
+        }
 
     def _intersect_bboxes(self, bbox1, bbox2):
         '''Check if two bounding boxes overlap

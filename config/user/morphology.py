@@ -17,9 +17,13 @@ HOC_LABEL_MAP = {
     'soma':          'Soma',
     'dend':          'Dendrite',
     'basaldendrite': 'Dendrite',
+    'basal':         'Dendrite',
     'apical':        'ApicalDendrite',
     'axon':          'Axon',
 }
-"""Mapping between labels found in :ref:`hoc_file_format` morphology files and the label to be used throughout ISF.
-Labels in the :ref:`hoc_file_format` are matched based on al characters before the first underscore on a case-insensitive basis.
+"""Mapping between labels found in :ref:`hoc_file_format` morphology files or connections spreadsheets, and the label to be used internally throughout ISF.
+Labels are matched based on a case-insensitive basis.
+
+For example, if a :ref:`hoc_file_format` contains the label "DEND", "Dend", or "BasalDendrite", these will be converted in ISF to just "Dendrite".
+If a connections spreadsheet contains labels "BASAL", it will be converted to "Dendrite".
 """

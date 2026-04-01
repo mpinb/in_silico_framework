@@ -320,7 +320,8 @@ class NetworkMapper:
             self.exCellTypes, 
             self.inhCellTypes, 
             self.exPST, 
-            self.inhPST)
+            self.inhPST
+            )
         anatomical_areas = list(boutonDensities.keys())
         preCellTypes = boutonDensities[anatomical_areas[0]]
         for anatomical_area in anatomical_areas:
@@ -346,13 +347,14 @@ class NetworkMapper:
         '''
         synapseDensities = {}
         synapseDensityComputation = SynapseDensity(
-            self.postCell, 
-            self.postCellType, 
-            self.connectionsSpreadsheet,
-            self.exCellTypes, 
-            self.inhCellTypes, 
-            self.exPST, 
-            self.inhPST)
+            cell=self.postCell, 
+            postCellType=self.postCellType, 
+            connectionSpreadsheet=self.connectionsSpreadsheet,
+            exTypes=self.exCellTypes, 
+            inhTypes=self.inhCellTypes, 
+            exPST=self.exPST, 
+            inhPST=self.inhPST
+            )
         anatomical_areas = list(boutonDensities.keys())
         preCellTypes = boutonDensities[anatomical_areas[0]]
         for anatomical_area in anatomical_areas:
