@@ -28,12 +28,11 @@ Attention:
 
 Inputs:
 
-- Morphology of the post-synaptic neuron
-- 3D field of synapse densities or synapse counts.
-- Number of cells per cell type in the brain area of interest.
-- Connections spreadsheet containing PST length/area constants of 
-  the post-synaptic cell for normalization.
-- Bouton locations of individual axon tracings.
+- Morphology of the postsynaptic neuron
+- 3D density field of synapses across the entire neuropil.
+- Number of cells per cell type in the neuropil.
+- Connections spreadsheet containing Post-Synaptic Targets (PSTs) per unit of length and area
+- Bouton locations of individual axon tracings per presynaptic cell type.
 
 Attention:
     This runfile has default values for the barrel cortex, and so assumes that you have downloaded 
