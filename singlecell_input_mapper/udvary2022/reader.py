@@ -285,7 +285,7 @@ def read_scalar_field(fname='', dtype=np.float64):
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
-def _rename_columns(df: DataFrame) -> DataFrame:
+def _rename_hoc_labels_in_columns(df: DataFrame) -> DataFrame:
     colmap = {}
     for col in df:
         parts = col.split("_")
@@ -325,7 +325,7 @@ def read_connections_spreadsheet(
         lambda x: rename_presyn_map.get(x, x)
     )
 
-    df = _rename_columns(df)
+    df = _rename_hoc_labels_in_columns(df)
     return df
 
 
