@@ -114,6 +114,9 @@ def are_loaded():
     # all_mechanisms = channels + netcons
     # return all(name in neuron.h.__dict__.keys() for name in all_mechanisms)
 
+def list_loaded():
+    return neuron.h.__dict__.keys()
+
 def compile_mechanisms(force_recompile=False):
     """Compile the mechanisms for L5PTs.
     
