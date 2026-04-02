@@ -18,6 +18,7 @@
 from __future__ import annotations
 from pandas.core.frame import DataFrame
 from pandas.core.frame import DataFrame
+from singlecell_input_mapper.udvary2022.scalar_field import ScalarField
 import numpy as np
 import os, re
 from config.isf_logging import logger
@@ -284,81 +285,6 @@ def read_scalar_field(fname='', dtype=np.float64):
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
 
 
-def read_scalar_field_legacy(fname=''):
-    """Read AMIRA scalar fields.
-    
-    Args:
-        fname (str): The name of the file to be read.
-
-    Raises:
-        IOError: If the input file does not have a `.am` or `.AM` suffix.
-
-    Returns:
-        :class:`~singlecell_input_mapper.singlecell_input_mapper.scalar_field.ScalarField`: A scalar field object.
-
-    .. deprecated:: 0.5.0
-       This has been deprecated in favor of the faster :func:`read_scalar_field`
-
-    :skip-doc:
-    """
-    if not fname.endswith('.am') and not fname.endswith('.AM'):
-        raise IOError('Input file is not an Amira Mesh file!')
-
-    with dbopen(fname, 'r') as meshFile:
-        #            print "Reading Amira Mesh file", fname
-        mesh = None
-        extent, dims, bounds, origin, spacing = [], [], [], [], []
-        dataSection, hasExtent, hasBounds, hasSpacing = False, False, False, False
-        index = 0
-        for line in meshFile:
-            if line.strip():
-                #                    set up lattice
-                if not dataSection:
-                    if 'define' in line and 'Lattice' in line:
-                        dimStr = line.strip().split()[-3:]
-                        for dim in dimStr:
-                            dims.append(int(dim))
-                        for dim in dims:
-                            extent.append(0)
-                            extent.append(dim - 1)
-                        hasExtent = True
-                    if 'BoundingBox' in line:
-                        bBoxStr = line.strip(' \t\n,').split()[-6:]
-                        for val in bBoxStr:
-                            bounds.append(float(val))
-                        for i in range(3):
-                            origin.append(bounds[2 * i])
-                        hasBounds = True
-                    if 'Spacing' in line:
-                        spacingStr = line.strip(' \t\n,').split()[-3:]
-                        for val in spacingStr:
-                            spacing.append(float(val))
-                        hasSpacing = True
-                    if hasExtent and hasBounds and hasSpacing and mesh is None:
-                        for i in range(3):
-                            #spacing[i] = (bounds[2*i+1]-bounds[2*i])/(extent[2*i+1]-extent[2*i])
-                            bounds[2 * i + 1] += 0.5 * spacing[i]
-                            bounds[2 * i] -= 0.5 * spacing[i]
-                            origin[i] -= 0.5 * spacing[i]
-                        mesh = np.empty(shape=dims)
-                    if '@1' in line and line[:2] == '@1':
-                        dataSection = True
-                        continue
-                    # main data loop
-                else:
-                    data = float(line.strip())
-                    k = index // (dims[0] * dims[1])
-                    j = index // dims[0] - dims[1] * k
-                    i = index - dims[0] * (j + dims[1] * k)
-                    mesh[i, j, k] = data
-                    index += 1
-
-
-                        # print 'i,j,k = %s,%s,%s' % (i, j, k)
-
-        return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
-
-
 def _rename_columns(df: DataFrame) -> DataFrame:
     colmap = {}
     for col in df:
@@ -461,12 +387,8 @@ def read_bouton_densities_per_area_per_ct(dirname, anatomical_areas, cell_types)
 
             logger.debug("    Loading {:d} bouton densities from {:s}".format(len(boutonDensityNames), boutonDensityFolder))
 
-            # small local bindings reduce overhead in the tight loop
-            _read_scalar_field = read_scalar_field
-            _append = boutonDensities[anatomical_area][preCellType].append
-
             for densityName in boutonDensityNames:
-                boutonDensity = _read_scalar_field(densityName)
+                boutonDensity = read_scalar_field(fname=densityName)
                 boutonDensity.resize_mesh()
-                _append(boutonDensity)
+                boutonDensities[anatomical_area][preCellType].append(boutonDensity)
     return boutonDensities
