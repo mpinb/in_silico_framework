@@ -64,7 +64,6 @@ from .reader import (
 from .synapse_mapper import SynapseMapper
 from .writer import (
     write_all_traces,
-    write_cell_simulation,
     write_cell_synapse_locations,
     write_landmark_file,
     write_presynaptic_spike_times,
