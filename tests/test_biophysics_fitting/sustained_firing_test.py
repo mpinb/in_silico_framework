@@ -104,12 +104,13 @@ def test_BAC_firing():
     # plt.show()
 
 
-def soma_injection(cell,
-                   amplitude,
-                   delay,
-                   duration,
-                   simParam,
-                   saveVisualization=False):
+def soma_injection(
+    cell,
+    amplitude,
+    delay,
+    duration,
+    simParam,
+    ):
     iclamp = h.IClamp(0.5, sec=cell.soma)
     iclamp.delay = delay
     iclamp.dur = duration
@@ -126,12 +127,6 @@ def soma_injection(cell,
 
     vmSoma = np.array(cell.soma.recVList[0])
     t = np.array(tVec)
-
-    if saveVisualization:
-        visFName = 'visualization/soma_injection_86/'
-        visFName += 'soma_current_injection_amp_%.1fnA_dur_%.0fms' % (amplitude,
-                                                                      duration)
-        scp.write_cell_simulation(visFName, cell, ['Vm'], t, allPoints=True)
 
     cell.re_init_cell()
 
