@@ -80,7 +80,7 @@ __credits__ = ["Robert Egger", "Arco Bast"]
 
 def create_cell(
     parameters, 
-    scaleFunc=None, 
+    scaleFunc=None,  # deprecated
     allPoints=False, 
     setUpBiophysics=True, 
     silent=False
@@ -94,8 +94,6 @@ def create_cell(
             A :ref:`cell_parameters_format` object.
             Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc_file_format` file (e.g. "AIS", "Soma" ...).
             Optional keys include: ``cell_modify_functions``, ``discretization``
-        scaleFunc (bool):
-            DEPRECATED,  should be specified in the parameters, as described in :meth:`~single_cell_parser.cell_modify_funs`
         allPoints (bool):
             Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule).
             Will be passed to ``full`` in :meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg`

@@ -123,7 +123,8 @@ class NetworkParamBuilder:
     def add_network_embedding(
         self,
         syn_fn,
-        con_fn=None
+        con_fn=None,
+        join="left"
         ) -> Self:
         """Add network embedding data.
 
@@ -132,6 +133,11 @@ class NetworkParamBuilder:
             con_fn (str): Path to the :ref:`con_file_format` file. 
                 If not given, it is assumed it has the same name and location as the :ref:`syn_file_format` file, and only the suffix is different.
                 Default: None.
+            join (str):
+                How to join the information for each cell type. Options are:
+
+                - "left": Fetch connectivity info for each cell type already present in the network parameters i.e. left-join the incoming connectivity data.
+                - "right" Fetch connectivity info for each cell type present in the incoming :ref:`syn_file_format` and :ref:`con_file_format` files, and add them (non-destructively) to the parameters, independent of whether they already exist or not i.e. right-join the incoming connectivity data.
         """
         if con_fn is None:
             logger.warning(msg="No .con filename passed. Assuming it has the same name as the .syn file...")
@@ -140,7 +146,11 @@ class NetworkParamBuilder:
         nr_cells = read_nr_connected_cells_from_con(con_fn)
 
         mark_celltype_for_deletion = []
-        for celltype in self.network_parameters.network.keys():
+
+        if join == "left": celltypes = self.network_parameters_network.keys()
+        elif join == "right": celltypes = nr_cells.index
+
+        for celltype in celltypes:
             if not celltype in nr_cells:
                 if not self.write_all_celltypes:
                     mark_celltype_for_deletion.append(celltype)
