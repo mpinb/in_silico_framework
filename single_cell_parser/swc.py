@@ -376,7 +376,6 @@ def write_hoc(sections, hoc_filepath):
             if sec["parent_name"] is None: 
                 # start the file with the soma section without newlines
                 f.write(f"{{create {sec['name']}}}")
-            elif sec["parent_name"] is 
             else:
                 f.write(f"\n\n{{create {sec['name']}}}")
                 f.write(f"\n{{connect {sec['name']}(0), {sec['parent_name']}(1)}}")
