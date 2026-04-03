@@ -58,7 +58,6 @@ def _get_swc_lines_per_section(
     # Construct the per-section swc lines
     swc_lines_per_section = []
     n = 1
-    n_assigned_hillock_sections = 0
     for sec_ind, sec in enumerate(cell.sections):
         parent = sec.parent
         parent_sec_ind = cell.sections.index(parent) if parent is not None else None
