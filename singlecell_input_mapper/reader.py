@@ -1,5 +1,4 @@
 import pandas as pd
-import single_cell_parser as scp
 
 def read_cell_number_file(cell_nr_fn):
     """Load the cell number file.
