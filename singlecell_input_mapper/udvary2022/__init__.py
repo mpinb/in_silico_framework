@@ -28,12 +28,11 @@ Attention:
 
 Inputs:
 
-- Morphology of the post-synaptic neuron
-- 3D field of synapse densities or synapse counts.
-- Number of cells per cell type in the brain area of interest.
-- Connections spreadsheet containing PST length/area constants of 
-  the post-synaptic cell for normalization.
-- Bouton locations of individual axon tracings.
+- Morphology of the postsynaptic neuron
+- 3D density field of synapses across the entire neuropil.
+- Number of cells per cell type in the neuropil.
+- Connections spreadsheet containing Post-Synaptic Targets (PSTs) per unit of length and area
+- Bouton locations of individual axon tracings per presynaptic cell type.
 
 Attention:
     This runfile has default values for the barrel cortex, and so assumes that you have downloaded 
@@ -220,19 +219,13 @@ def map_singlecell_inputs(
     preCellTypes = numberOfCellsSpreadsheet[anatomical_areas[0]]
 
     # --------------------- Load bouton densities ---------------------
-    logger.info("Loading bouton densities from folder {:s} (may take a while)".format(boutonDensityFolderName))
-    for anatomical_area in anatomical_areas:
-        boutonDensities[anatomical_area] = {}  # type is Dict[str, Dict[str, List[scim.ScalarField]]]
-        for preCellType in preCellTypes:
-            boutonDensities[anatomical_area][preCellType] = [] # type is List[scim.ScalarField]
-            boutonDensityFolder = os.path.join(boutonDensityFolderName, anatomical_area, preCellType)
-            assert os.path.exists(boutonDensityFolder), "Could not find bouton density folder: {}".format(boutonDensityFolder)
-            boutonDensityNames = glob.glob(os.path.join(boutonDensityFolder, "*"))
-            logger.debug("    Loading {:d} bouton densities from {:s}".format(len(boutonDensityNames), boutonDensityFolder))
-            for densityName in boutonDensityNames:
-                boutonDensity = read_scalar_field(densityName)
-                boutonDensity.resize_mesh()
-                boutonDensities[anatomical_area][preCellType].append(boutonDensity)
+    logger.info("    Loading bouton densities from folder {:s} (may take a while)".format(boutonDensityFolderName))
+
+    boutonDensities = read_bouton_densities_per_area_per_ct(
+        dirname=boutonDensityFolderName,
+        anatomical_areas=anatomical_areas,
+        cell_types=preCellTypes
+    )
 
     # Actually create the network embedding
     inputMapper = NetworkMapper(

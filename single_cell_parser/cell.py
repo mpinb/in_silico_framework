@@ -23,6 +23,7 @@ For neuron-network multiscale simulations, you should consult :mod:`simrun`.
 '''
 
 #from neuron import h, nrn
+from typing import Any, List, Dict
 import numpy as np
 from . import synapse
 from collections import Sequence
@@ -56,7 +57,7 @@ class Cell(object):
         soma (:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
         tree (:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
         branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:class:`neuron:SectionList`).
-        structures (Dict[:class:`~single_cell_parser.cell.PySection`]): 
+        structures (Dict[str, :class:`~single_cell_parser.cell.PySection`]): 
             All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). 
             Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
         sections (List[:class:`~single_cell_parser.cell.PySection`]): 
@@ -76,8 +77,8 @@ class Cell(object):
         self.soma = None
         self.tree = None  # TODO: implement trees in python to avoid NEURON section stack problems that may occur during use of SectionLists
         self.branches = {}
-        self.structures = {}
-        self.sections = []
+        self.structures: Dict[str, PySection] = {}
+        self.sections: List[PySection] = []
         self.synapses = {}
         self.E = -70.0  # TODO: this should be read in from the paramfile (e_pas)
         self.changeSynParamDict = {}

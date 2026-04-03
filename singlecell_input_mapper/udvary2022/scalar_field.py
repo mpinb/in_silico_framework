@@ -20,6 +20,7 @@ Note that this class is identical to :class:`single_cell_parser.scalar_field.Sca
 It is duplicated here for package independence.
 '''
 import numpy as np
+from scipy.ndimage import find_objects
 
 __author__ = 'Robert Egger'
 __date__ = '2012-03-27'
@@ -84,61 +85,27 @@ class ScalarField(object):
             self.boundingBox = tuple(bBox)
 
 
-        # if self.mesh is not None:
-        #     self.resize_mesh()
-
-    # def resize_mesh(self):
-    #     '''Resizes mesh to non-zero scalar data.
-         
-    #     This method resizes the mesh such that the bounding box 
-    #     wraps around voxels that contain non-zero scalar data.
-    #     Also updates :attr:`extent` and :attr:`boundingBox`
-    #     '''
-    #     roi = np.nonzero(self.mesh)
-    #     iMin = np.min(roi[0])
-    #     iMax = np.max(roi[0])
-    #     jMin = np.min(roi[1])
-    #     jMax = np.max(roi[1])
-    #     kMin = np.min(roi[2])
-    #     kMax = np.max(roi[2])
-    #     self.extent = 0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin
-    #     newDims = self.extent[1] + 1, self.extent[3] + 1, self.extent[5] + 1
-    #     dx = self.spacing[0]
-    #     dy = self.spacing[1]
-    #     dz = self.spacing[2]
-    #     xMin = self.origin[0] + iMin * dx
-    #     yMin = self.origin[1] + jMin * dy
-    #     zMin = self.origin[2] + kMin * dz
-    #     xMax = self.origin[0] + (iMax + 1) * dx
-    #     yMax = self.origin[1] + (jMax + 1) * dy
-    #     zMax = self.origin[2] + (kMax + 1) * dz
-    #     self.origin = xMin, yMin, zMin
-    #     self.boundingBox = xMin, xMax, yMin, yMax, zMin, zMax
-    #     newMesh = np.empty(shape=newDims)
-    #     newMesh[:, :, :] = self.mesh[iMin:iMax + 1, jMin:jMax + 1,
-    #                                  kMin:kMax + 1]
-    #     self.mesh = np.copy(newMesh)
-    #     del newMesh
-
     def resize_mesh(self):
         """Resizes mesh to non-zero scalar data using slicing views (no copy)."""
-        roi = np.where(self.mesh)
-        if roi[0].size == 0:
-            return  # no non-zero voxels
-
-        iMin, iMax = roi[0].min(), roi[0].max()
-        jMin, jMax = roi[1].min(), roi[1].max()
-        kMin, kMax = roi[2].min(), roi[2].max()
-
+        bbox = find_objects(self.mesh.astype(bool), max_label=1)[0]   # tuple of slices
+        if bbox is None:
+            return
+        iMin, iMax = bbox[0].start, bbox[0].stop - 1
+        jMin, jMax = bbox[1].start, bbox[1].stop - 1
+        kMin, kMax = bbox[2].start, bbox[2].stop - 1
         self.extent = (0, iMax - iMin, 0, jMax - jMin, 0, kMax - kMin)
 
         dx, dy, dz = self.spacing
-        xMin, yMin, zMin = (self.origin[0] + iMin * dx,
-                            self.origin[1] + jMin * dy,
-                            self.origin[2] + kMin * dz)
-        xMax, yMax, zMax = (self.origin[0] + (iMax + 1) * dx,
-                            self.origin[1] + (jMax + 1) * dy,
-                            self.origin[2] + (kMax + 1) * dz)
+        xMin, yMin, zMin = (
+            self.origin[0] + iMin * dx,
+            self.origin[1] + jMin * dy,
+            self.origin[2] + kMin * dz
+        )
+        xMax, yMax, zMax = (
+            self.origin[0] + (iMax + 1) * dx,
+            self.origin[1] + (jMax + 1) * dy,
+            self.origin[2] + (kMax + 1) * dz
+        )
 
         self.origin = (xMin, yMin, zMin)
         self.boundingBox = (xMin, xMax, yMin, yMax, zMin, zMax)

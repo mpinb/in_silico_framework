@@ -86,12 +86,8 @@ class CellParser(object):
         
         '''
         edgeList = reader.read_hoc_file(self.hoc_path)
-        #part1 = self.hoc_fname.split('_')[0]
-        #part2 = self.hoc_fname.split('_')[1]
-        #part3 = self.hoc_fname.split('.')[-2]
         self.cell = Cell()
-        #self.cell.id = '_'.join([part1, part2, part3])
-        self.cell.hoc_path = self.hoc_path  # sotre path to hoc_file in cell object
+        self.cell.hoc_path = self.hoc_path
 
         # 1. Create all Sections
         for secID, edge in enumerate(edgeList):
@@ -126,8 +122,8 @@ class CellParser(object):
         for sec in self.cell.sections:
             if sec.label != 'Soma':
                 if self.cell.sections[sec.parentID].label == 'Soma':
-                    #                    unfortunately, necessary to enforce that nothing
-                    #                    is connected to soma(0) b/c of ri computation in NEURON
+                    # unfortunately, necessary to enforce that nothing
+                    # is connected to soma(0) b/c of ri computation in NEURON
                     sec.parentx = 0.5
                 sec.connect(self.cell.sections[sec.parentID], sec.parentx, 0.0)
                 sr = h.SectionRef(sec=sec)

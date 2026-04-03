@@ -9,8 +9,8 @@
 /*---------------------------------------------------------------------------*/
 
 /* ######################################################################### */
-{create marcel_soma}
-{access marcel_soma}
+{create soma}
+{access soma}
 {nseg = 1}
 {strdef color color = "Yellow"}
 {pt3dclear()}
@@ -61,9 +61,9 @@
 {pt3dadd(-26.1183,278.853,-378.457,6.94396)}
 
 /* Type: unknown */
-{create marcel_dend_0_0}
-{connect marcel_dend_0_0(0), marcel_soma(0.977272727272727)}
-{access marcel_dend_0_0}
+{create dend_0_0}
+{connect dend_0_0(0), soma(0.977272727272727)}
+{access dend_0_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -86,10 +86,10 @@
 {pt3dadd(-13.1119,278.886,-384.329,2.6)}
 {pt3dadd(-13.1119,278.886,-384.329,2.6)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_1}
-{connect marcel_dend_0_0_1(0), marcel_dend_0_0(1)}
-{access marcel_dend_0_0_1}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_1}
+{connect dend_0_0_1(0), dend_0_0(1)}
+{access dend_0_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -169,10 +169,10 @@
 {pt3dadd(30.2036,329.736,-402.409,0.79)}
 {pt3dadd(33.0174,331.902,-403.635,0.79)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_2}
-{connect marcel_dend_0_0_2(0), marcel_dend_0_0_1(1)}
-{access marcel_dend_0_0_2}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_2}
+{connect dend_0_0_2(0), dend_0_0_1(1)}
+{access dend_0_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -298,10 +298,10 @@
 {pt3dadd(49.601,367.582,-454.73,0.45)}
 {pt3dadd(50.1053,368.599,-456.207,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_3}
-{connect marcel_dend_0_0_3(0), marcel_dend_0_0_1(1)}
-{access marcel_dend_0_0_3}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_3}
+{connect dend_0_0_3(0), dend_0_0_1(1)}
+{access dend_0_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -344,10 +344,10 @@
 {pt3dadd(46.2852,346.968,-404.749,0.45)}
 {pt3dadd(46.2977,346.984,-404.691,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_4}
-{connect marcel_dend_0_0_4(0), marcel_dend_0_0(1)}
-{access marcel_dend_0_0_4}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_4}
+{connect dend_0_0_4(0), dend_0_0(1)}
+{access dend_0_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -373,10 +373,10 @@
 {pt3dadd(-4.83962,275.417,-387.959,1.02)}
 {pt3dadd(-3.67594,274.916,-388.59,1.02)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_5}
-{connect marcel_dend_0_0_5(0), marcel_dend_0_0_4(1)}
-{access marcel_dend_0_0_5}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_5}
+{connect dend_0_0_5(0), dend_0_0_4(1)}
+{access dend_0_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -442,10 +442,10 @@
 {pt3dadd(6.19621,246.512,-405.857,0.79)}
 {pt3dadd(6.0292,246.209,-405.734,0.79)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_6}
-{connect marcel_dend_0_0_6(0), marcel_dend_0_0_5(1)}
-{access marcel_dend_0_0_6}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_6}
+{connect dend_0_0_6(0), dend_0_0_5(1)}
+{access dend_0_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -635,10 +635,10 @@
 {pt3dadd(32.3518,150.473,-438.778,0.45)}
 {pt3dadd(32.3781,150.508,-438.652,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_7}
-{connect marcel_dend_0_0_7(0), marcel_dend_0_0_5(1)}
-{access marcel_dend_0_0_7}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_7}
+{connect dend_0_0_7(0), dend_0_0_5(1)}
+{access dend_0_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -749,10 +749,10 @@
 {pt3dadd(-14.7869,168.721,-432.677,0.45)}
 {pt3dadd(-14.8394,168.651,-432.928,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_8}
-{connect marcel_dend_0_0_8(0), marcel_dend_0_0_4(1)}
-{access marcel_dend_0_0_8}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_8}
+{connect dend_0_0_8(0), dend_0_0_4(1)}
+{access dend_0_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -917,10 +917,10 @@
 {pt3dadd(88.28,261.75,-436.486,0.57)}
 {pt3dadd(90.2352,262.152,-437.458,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_9}
-{connect marcel_dend_0_0_9(0), marcel_dend_0_0_8(1)}
-{access marcel_dend_0_0_9}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_9}
+{connect dend_0_0_9(0), dend_0_0_8(1)}
+{access dend_0_0_9}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1090,10 +1090,10 @@
 {pt3dadd(191.421,222.575,-412.61,0.34)}
 {pt3dadd(191.45,222.613,-412.474,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_10}
-{connect marcel_dend_0_0_10(0), marcel_dend_0_0_8(1)}
-{access marcel_dend_0_0_10}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_10}
+{connect dend_0_0_10(0), dend_0_0_8(1)}
+{access dend_0_0_10}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1272,10 +1272,10 @@
 {pt3dadd(223.456,226.115,-499.334,0.34)}
 {pt3dadd(224.94,224.953,-499.909,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_0_0 */
-{create marcel_dend_0_0_11}
-{connect marcel_dend_0_0_11(0), marcel_dend_0_0(1)}
-{access marcel_dend_0_0_11}
+/* Type: unknown, Info: part of dend_0_0 */
+{create dend_0_0_11}
+{connect dend_0_0_11(0), dend_0_0(1)}
+{access dend_0_0_11}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1569,9 +1569,9 @@
 {pt3dadd(77.4309,74.4641,-361.25,0.34)}
 
 /* Type: unknown */
-{create marcel_dend_1_0}
-{connect marcel_dend_1_0(0), marcel_soma(0.781017325141213)}
-{access marcel_dend_1_0}
+{create dend_1_0}
+{connect dend_1_0(0), soma(0.781017325141213)}
+{access dend_1_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1616,10 +1616,10 @@
 {pt3dadd(-39.217,257.776,-391.039,1.81)}
 {pt3dadd(-39.217,257.776,-391.039,1.81)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_1}
-{connect marcel_dend_1_0_1(0), marcel_dend_1_0(1)}
-{access marcel_dend_1_0_1}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_1}
+{connect dend_1_0_1(0), dend_1_0(1)}
+{access dend_1_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1662,10 +1662,10 @@
 {pt3dadd(-35.1899,236.182,-390.964,1.02)}
 {pt3dadd(-35.1069,235.946,-390.914,1.02)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_2}
-{connect marcel_dend_1_0_2(0), marcel_dend_1_0_1(1)}
-{access marcel_dend_1_0_2}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_2}
+{connect dend_1_0_2(0), dend_1_0_1(1)}
+{access dend_1_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1834,10 +1834,10 @@
 {pt3dadd(47.6528,153.128,-442.985,0.57)}
 {pt3dadd(47.6551,153.131,-442.976,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_3}
-{connect marcel_dend_1_0_3(0), marcel_dend_1_0_1(1)}
-{access marcel_dend_1_0_3}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_3}
+{connect dend_1_0_3(0), dend_1_0_1(1)}
+{access dend_1_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1869,10 +1869,10 @@
 {pt3dadd(-35.3083,220.035,-385.949,1.02)}
 {pt3dadd(-35.3727,219.947,-385.921,1.02)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_4}
-{connect marcel_dend_1_0_4(0), marcel_dend_1_0_3(1)}
-{access marcel_dend_1_0_4}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_4}
+{connect dend_1_0_4(0), dend_1_0_3(1)}
+{access dend_1_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -1939,10 +1939,10 @@
 {pt3dadd(-13.5043,183.725,-368.696,0.57)}
 {pt3dadd(-13.5226,183.701,-368.784,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_5}
-{connect marcel_dend_1_0_5(0), marcel_dend_1_0_4(1)}
-{access marcel_dend_1_0_5}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_5}
+{connect dend_1_0_5(0), dend_1_0_4(1)}
+{access dend_1_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2041,10 +2041,10 @@
 {pt3dadd(46.3982,142.145,-346.586,0.57)}
 {pt3dadd(46.7249,142.216,-345.772,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_6}
-{connect marcel_dend_1_0_6(0), marcel_dend_1_0_4(1)}
-{access marcel_dend_1_0_6}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_6}
+{connect dend_1_0_6(0), dend_1_0_4(1)}
+{access dend_1_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2186,10 +2186,10 @@
 {pt3dadd(1.75401,108.225,-328.698,0.34)}
 {pt3dadd(1.81261,108.302,-328.417,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_7}
-{connect marcel_dend_1_0_7(0), marcel_dend_1_0_3(1)}
-{access marcel_dend_1_0_7}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_7}
+{connect dend_1_0_7(0), dend_1_0_3(1)}
+{access dend_1_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2205,10 +2205,10 @@
 {pt3dadd(-39.2239,210.617,-384.887,0.79)}
 {pt3dadd(-39.46,209.937,-384.639,0.79)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_8}
-{connect marcel_dend_1_0_8(0), marcel_dend_1_0_7(1)}
-{access marcel_dend_1_0_8}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_8}
+{connect dend_1_0_8(0), dend_1_0_7(1)}
+{access dend_1_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2351,10 +2351,10 @@
 {pt3dadd(-33.0593,107.125,-368.659,0.57)}
 {pt3dadd(-33.0247,104.007,-367.916,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_9}
-{connect marcel_dend_1_0_9(0), marcel_dend_1_0_8(1)}
-{access marcel_dend_1_0_9}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_9}
+{connect dend_1_0_9(0), dend_1_0_8(1)}
+{access dend_1_0_9}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2450,10 +2450,10 @@
 {pt3dadd(-30.4044,51.6644,-340.249,0.34)}
 {pt3dadd(-30.4806,51.5938,-340.212,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_10}
-{connect marcel_dend_1_0_10(0), marcel_dend_1_0_8(1)}
-{access marcel_dend_1_0_10}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_10}
+{connect dend_1_0_10(0), dend_1_0_8(1)}
+{access dend_1_0_10}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2593,10 +2593,10 @@
 {pt3dadd(-68.442,19.9303,-352.183,0.34)}
 {pt3dadd(-68.4568,19.9245,-351.885,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_11}
-{connect marcel_dend_1_0_11(0), marcel_dend_1_0_7(1)}
-{access marcel_dend_1_0_11}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_11}
+{connect dend_1_0_11(0), dend_1_0_7(1)}
+{access dend_1_0_11}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2756,10 +2756,10 @@
 {pt3dadd(-93.6516,98.6256,-368.198,0.45)}
 {pt3dadd(-95.0497,96.3305,-372.273,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_12}
-{connect marcel_dend_1_0_12(0), marcel_dend_1_0(1)}
-{access marcel_dend_1_0_12}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_12}
+{connect dend_1_0_12(0), dend_1_0(1)}
+{access dend_1_0_12}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2831,10 +2831,10 @@
 {pt3dadd(-13.2852,230.946,-417.826,0.57)}
 {pt3dadd(-13.1815,230.661,-417.766,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_13}
-{connect marcel_dend_1_0_13(0), marcel_dend_1_0_12(1)}
-{access marcel_dend_1_0_13}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_13}
+{connect dend_1_0_13(0), dend_1_0_12(1)}
+{access dend_1_0_13}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2864,10 +2864,10 @@
 {pt3dadd(-6.21845,219.336,-422.693,0.57)}
 {pt3dadd(-5.55308,218.528,-422.899,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_14}
-{connect marcel_dend_1_0_14(0), marcel_dend_1_0_13(1)}
-{access marcel_dend_1_0_14}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_14}
+{connect dend_1_0_14(0), dend_1_0_13(1)}
+{access dend_1_0_14}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -2979,10 +2979,10 @@
 {pt3dadd(49.8017,152.588,-443.992,0.45)}
 {pt3dadd(50.037,152.655,-444.062,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_15}
-{connect marcel_dend_1_0_15(0), marcel_dend_1_0_13(1)}
-{access marcel_dend_1_0_15}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_15}
+{connect dend_1_0_15(0), dend_1_0_13(1)}
+{access dend_1_0_15}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3030,10 +3030,10 @@
 {pt3dadd(7.4782,211.034,-454.494,0.45)}
 {pt3dadd(7.59063,210.951,-454.82,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_16}
-{connect marcel_dend_1_0_16(0), marcel_dend_1_0_12(1)}
-{access marcel_dend_1_0_16}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_16}
+{connect dend_1_0_16(0), dend_1_0_12(1)}
+{access dend_1_0_16}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3113,10 +3113,10 @@
 {pt3dadd(-10.9783,211.2,-455.538,0.45)}
 {pt3dadd(-11.0166,211.15,-455.721,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_17}
-{connect marcel_dend_1_0_17(0), marcel_dend_1_0(1)}
-{access marcel_dend_1_0_17}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_17}
+{connect dend_1_0_17(0), dend_1_0(1)}
+{access dend_1_0_17}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3131,10 +3131,10 @@
 {pt3dadd(-43.0412,254.843,-394.674,1.13)}
 {pt3dadd(-43.5816,254.63,-394.496,1.13)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_18}
-{connect marcel_dend_1_0_18(0), marcel_dend_1_0_17(1)}
-{access marcel_dend_1_0_18}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_18}
+{connect dend_1_0_18(0), dend_1_0_17(1)}
+{access dend_1_0_18}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3205,10 +3205,10 @@
 {pt3dadd(-42.1787,251.321,-433.223,0.79)}
 {pt3dadd(-42.2556,251.219,-433.591,0.79)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_19}
-{connect marcel_dend_1_0_19(0), marcel_dend_1_0_17(1)}
-{access marcel_dend_1_0_19}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_19}
+{connect dend_1_0_19(0), dend_1_0_17(1)}
+{access dend_1_0_19}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3223,10 +3223,10 @@
 {pt3dadd(-47.942,252.38,-399.984,0.68)}
 {pt3dadd(-48.5619,251.45,-400.006,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_20}
-{connect marcel_dend_1_0_20(0), marcel_dend_1_0_19(1)}
-{access marcel_dend_1_0_20}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_20}
+{connect dend_1_0_20(0), dend_1_0_19(1)}
+{access dend_1_0_20}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3262,10 +3262,10 @@
 {pt3dadd(-54.5127,240.259,-401.698,0.68)}
 {pt3dadd(-54.4365,240.22,-401.703,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_21}
-{connect marcel_dend_1_0_21(0), marcel_dend_1_0_20(1)}
-{access marcel_dend_1_0_21}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_21}
+{connect dend_1_0_21(0), dend_1_0_20(1)}
+{access dend_1_0_21}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3317,10 +3317,10 @@
 {pt3dadd(-75.1687,233.649,-412.229,0.79)}
 {pt3dadd(-75.328,233.665,-412.2,0.79)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_22}
-{connect marcel_dend_1_0_22(0), marcel_dend_1_0_21(1)}
-{access marcel_dend_1_0_22}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_22}
+{connect dend_1_0_22(0), dend_1_0_21(1)}
+{access dend_1_0_22}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3385,10 +3385,10 @@
 {pt3dadd(-102.269,221.743,-434.246,0.68)}
 {pt3dadd(-102.82,221.139,-435.207,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_23}
-{connect marcel_dend_1_0_23(0), marcel_dend_1_0_21(1)}
-{access marcel_dend_1_0_23}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_23}
+{connect dend_1_0_23(0), dend_1_0_21(1)}
+{access dend_1_0_23}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3456,10 +3456,10 @@
 {pt3dadd(-103.649,194.159,-426.23,0.57)}
 {pt3dadd(-104.224,193.549,-426.978,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_24}
-{connect marcel_dend_1_0_24(0), marcel_dend_1_0_20(1)}
-{access marcel_dend_1_0_24}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_24}
+{connect dend_1_0_24(0), dend_1_0_20(1)}
+{access dend_1_0_24}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3570,10 +3570,10 @@
 {pt3dadd(-84.3336,172.543,-417.113,0.45)}
 {pt3dadd(-85.5808,170.519,-417.191,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_25}
-{connect marcel_dend_1_0_25(0), marcel_dend_1_0_19(1)}
-{access marcel_dend_1_0_25}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_25}
+{connect dend_1_0_25(0), dend_1_0_19(1)}
+{access dend_1_0_25}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3616,10 +3616,10 @@
 {pt3dadd(-62.9827,243.978,-397.708,0.68)}
 {pt3dadd(-63.2666,243.947,-397.637,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_26}
-{connect marcel_dend_1_0_26(0), marcel_dend_1_0_25(1)}
-{access marcel_dend_1_0_26}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_26}
+{connect dend_1_0_26(0), dend_1_0_25(1)}
+{access dend_1_0_26}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3672,10 +3672,10 @@
 {pt3dadd(-80.2158,239.439,-410.248,0.57)}
 {pt3dadd(-80.5418,238.96,-410.041,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_27}
-{connect marcel_dend_1_0_27(0), marcel_dend_1_0_26(1)}
-{access marcel_dend_1_0_27}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_27}
+{connect dend_1_0_27(0), dend_1_0_26(1)}
+{access dend_1_0_27}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3767,10 +3767,10 @@
 {pt3dadd(-130.351,244.252,-434.9,0.57)}
 {pt3dadd(-130.428,244.195,-434.868,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_28}
-{connect marcel_dend_1_0_28(0), marcel_dend_1_0_26(1)}
-{access marcel_dend_1_0_28}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_28}
+{connect dend_1_0_28(0), dend_1_0_26(1)}
+{access dend_1_0_28}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -3818,10 +3818,10 @@
 {pt3dadd(-101.257,224.469,-434.735,0.23)}
 {pt3dadd(-102.588,223.016,-436.276,0.23)}
 
-/* Type: unknown, Info: part of marcel_dend_1_0 */
-{create marcel_dend_1_0_29}
-{connect marcel_dend_1_0_29(0), marcel_dend_1_0_25(1)}
-{access marcel_dend_1_0_29}
+/* Type: unknown, Info: part of dend_1_0 */
+{create dend_1_0_29}
+{connect dend_1_0_29(0), dend_1_0_25(1)}
+{access dend_1_0_29}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4058,9 +4058,9 @@
 {pt3dadd(-209.407,185.122,-380.669,0.34)}
 
 /* Type: unknown */
-{create marcel_dend_2_0}
-{connect marcel_dend_2_0(0), marcel_soma(0)}
-{access marcel_dend_2_0}
+{create dend_2_0}
+{connect dend_2_0(0), soma(0)}
+{access dend_2_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4101,10 +4101,10 @@
 {pt3dadd(-46.9197,311.564,-376.39,0.9)}
 {pt3dadd(-46.9197,311.564,-376.39,0.9)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_1}
-{connect marcel_dend_2_0_1(0), marcel_dend_2_0(1)}
-{access marcel_dend_2_0_1}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_1}
+{connect dend_2_0_1(0), dend_2_0(1)}
+{access dend_2_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4135,10 +4135,10 @@
 {pt3dadd(-57.0202,328.659,-379.188,0.68)}
 {pt3dadd(-56.944,328.73,-379.225,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_2}
-{connect marcel_dend_2_0_2(0), marcel_dend_2_0_1(1)}
-{access marcel_dend_2_0_2}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_2}
+{connect dend_2_0_2(0), dend_2_0_1(1)}
+{access dend_2_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4224,10 +4224,10 @@
 {pt3dadd(-88.4682,325.806,-410.948,0.57)}
 {pt3dadd(-88.8209,326.295,-411.012,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_3}
-{connect marcel_dend_2_0_3(0), marcel_dend_2_0_2(1)}
-{access marcel_dend_2_0_3}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_3}
+{connect dend_2_0_3(0), dend_2_0_2(1)}
+{access dend_2_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4307,10 +4307,10 @@
 {pt3dadd(-117.309,322.32,-459.115,0.45)}
 {pt3dadd(-117.39,322.212,-459.503,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_4}
-{connect marcel_dend_2_0_4(0), marcel_dend_2_0_2(1)}
-{access marcel_dend_2_0_4}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_4}
+{connect dend_2_0_4(0), dend_2_0_2(1)}
+{access dend_2_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4414,10 +4414,10 @@
 {pt3dadd(-148.07,342.417,-433.204,0.57)}
 {pt3dadd(-148.306,342.349,-433.134,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_5}
-{connect marcel_dend_2_0_5(0), marcel_dend_2_0_1(1)}
-{access marcel_dend_2_0_5}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_5}
+{connect dend_2_0_5(0), dend_2_0_1(1)}
+{access dend_2_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4553,10 +4553,10 @@
 {pt3dadd(-15.3224,416.479,-432.469,0.57)}
 {pt3dadd(-15.0413,417.55,-432.526,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_6}
-{connect marcel_dend_2_0_6(0), marcel_dend_2_0_5(1)}
-{access marcel_dend_2_0_6}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_6}
+{connect dend_2_0_6(0), dend_2_0_5(1)}
+{access dend_2_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4667,10 +4667,10 @@
 {pt3dadd(55.3102,473.321,-481.36,0.45)}
 {pt3dadd(55.146,473.103,-482.143,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_7}
-{connect marcel_dend_2_0_7(0), marcel_dend_2_0_5(1)}
-{access marcel_dend_2_0_7}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_7}
+{connect dend_2_0_7(0), dend_2_0_5(1)}
+{access dend_2_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4751,10 +4751,10 @@
 {pt3dadd(-48.5058,441.312,-442.797,0.45)}
 {pt3dadd(-49.7122,441.194,-443.518,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_8}
-{connect marcel_dend_2_0_8(0), marcel_dend_2_0(1)}
-{access marcel_dend_2_0_8}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_8}
+{connect dend_2_0_8(0), dend_2_0(1)}
+{access dend_2_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4781,10 +4781,10 @@
 {pt3dadd(-54.0072,320.007,-371.846,0.57)}
 {pt3dadd(-55.0036,320.84,-371.869,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_9}
-{connect marcel_dend_2_0_9(0), marcel_dend_2_0_8(1)}
-{access marcel_dend_2_0_9}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_9}
+{connect dend_2_0_9(0), dend_2_0_8(1)}
+{access dend_2_0_9}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -4807,10 +4807,10 @@
 {pt3dadd(-60.5391,332.732,-365.336,0.57)}
 {pt3dadd(-60.5667,332.802,-365.35,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_10}
-{connect marcel_dend_2_0_10(0), marcel_dend_2_0_9(1)}
-{access marcel_dend_2_0_10}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_10}
+{connect dend_2_0_10(0), dend_2_0_9(1)}
+{access dend_2_0_10}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5112,10 +5112,10 @@
 {pt3dadd(-78.2983,507.843,-388.055,0.57)}
 {pt3dadd(-78.1203,508.08,-387.204,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_11}
-{connect marcel_dend_2_0_11(0), marcel_dend_2_0_9(1)}
-{access marcel_dend_2_0_11}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_11}
+{connect dend_2_0_11(0), dend_2_0_9(1)}
+{access dend_2_0_11}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5234,10 +5234,10 @@
 {pt3dadd(-92.0389,377.875,-295.871,0.57)}
 {pt3dadd(-92.1756,377.926,-295.66,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_2_0 */
-{create marcel_dend_2_0_12}
-{connect marcel_dend_2_0_12(0), marcel_dend_2_0_8(1)}
-{access marcel_dend_2_0_12}
+/* Type: unknown, Info: part of dend_2_0 */
+{create dend_2_0_12}
+{connect dend_2_0_12(0), dend_2_0_8(1)}
+{access dend_2_0_12}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5263,9 +5263,9 @@
 {pt3dadd(-62.2291,328.255,-353.472,0.57)}
 
 /* Type: unknown */
-{create marcel_dend_3_0}
-{connect marcel_dend_3_0(0), marcel_soma(0)}
-{access marcel_dend_3_0}
+{create dend_3_0}
+{connect dend_3_0(0), soma(0)}
+{access dend_3_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5287,10 +5287,10 @@
 {pt3dadd(-46.1329,305.282,-381.766,1.13)}
 {pt3dadd(-46.5272,305.692,-381.799,1.13)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_1}
-{connect marcel_dend_3_0_1(0), marcel_dend_3_0(1)}
-{access marcel_dend_3_0_1}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_1}
+{connect dend_3_0_1(0), dend_3_0(1)}
+{access dend_3_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5355,10 +5355,10 @@
 {pt3dadd(-52.2228,324.882,-396.855,0.68)}
 {pt3dadd(-53.1434,325.336,-396.787,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_2}
-{connect marcel_dend_3_0_2(0), marcel_dend_3_0_1(1)}
-{access marcel_dend_3_0_2}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_2}
+{connect dend_3_0_2(0), dend_3_0_1(1)}
+{access dend_3_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5744,10 +5744,10 @@
 {pt3dadd(-27.177,542.372,-471.535,0.45)}
 {pt3dadd(-27.2162,542.485,-471.733,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_3}
-{connect marcel_dend_3_0_3(0), marcel_dend_3_0_1(1)}
-{access marcel_dend_3_0_3}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_3}
+{connect dend_3_0_3(0), dend_3_0_1(1)}
+{access dend_3_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5828,10 +5828,10 @@
 {pt3dadd(-78.0413,329.428,-462.68,0.23)}
 {pt3dadd(-78.4271,328.915,-464.529,0.23)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_4}
-{connect marcel_dend_3_0_4(0), marcel_dend_3_0(1)}
-{access marcel_dend_3_0_4}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_4}
+{connect dend_3_0_4(0), dend_3_0(1)}
+{access dend_3_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5895,10 +5895,10 @@
 {pt3dadd(-83.128,323.554,-384.086,0.68)}
 {pt3dadd(-83.5914,324.241,-384.182,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_5}
-{connect marcel_dend_3_0_5(0), marcel_dend_3_0_4(1)}
-{access marcel_dend_3_0_5}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_5}
+{connect dend_3_0_5(0), dend_3_0_4(1)}
+{access dend_3_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -5962,10 +5962,10 @@
 {pt3dadd(-112.485,348.982,-370.562,0.57)}
 {pt3dadd(-112.424,349.062,-370.271,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_6}
-{connect marcel_dend_3_0_6(0), marcel_dend_3_0_4(1)}
-{access marcel_dend_3_0_6}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_6}
+{connect dend_3_0_6(0), dend_3_0_4(1)}
+{access dend_3_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6009,10 +6009,10 @@
 {pt3dadd(-105.481,340.561,-396.109,0.45)}
 {pt3dadd(-106.201,341.309,-396.169,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_7}
-{connect marcel_dend_3_0_7(0), marcel_dend_3_0_6(1)}
-{access marcel_dend_3_0_7}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_7}
+{connect dend_3_0_7(0), dend_3_0_6(1)}
+{access dend_3_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6093,10 +6093,10 @@
 {pt3dadd(-140.384,328.918,-426.615,0.45)}
 {pt3dadd(-140.55,328.914,-426.578,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_3_0 */
-{create marcel_dend_3_0_8}
-{connect marcel_dend_3_0_8(0), marcel_dend_3_0_6(1)}
-{access marcel_dend_3_0_8}
+/* Type: unknown, Info: part of dend_3_0 */
+{create dend_3_0_8}
+{connect dend_3_0_8(0), dend_3_0_6(1)}
+{access dend_3_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6184,9 +6184,9 @@
 {pt3dadd(-136.294,380.783,-413.671,0.45)}
 
 /* Type: unknown */
-{create marcel_dend_4_0}
-{connect marcel_dend_4_0(0), marcel_soma(0.187136108225042)}
-{access marcel_dend_4_0}
+{create dend_4_0}
+{connect dend_4_0(0), soma(0.187136108225042)}
+{access dend_4_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6246,10 +6246,10 @@
 {pt3dadd(-68.7256,293.086,-382.158,0.9)}
 {pt3dadd(-68.7256,293.086,-382.158,0.9)}
 
-/* Type: unknown, Info: part of marcel_dend_4_0 */
-{create marcel_dend_4_0_1}
-{connect marcel_dend_4_0_1(0), marcel_dend_4_0(1)}
-{access marcel_dend_4_0_1}
+/* Type: unknown, Info: part of dend_4_0 */
+{create dend_4_0_1}
+{connect dend_4_0_1(0), dend_4_0(1)}
+{access dend_4_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6384,10 +6384,10 @@
 {pt3dadd(-109.964,304.634,-451.758,0.34)}
 {pt3dadd(-110.095,304.804,-452.073,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_4_0 */
-{create marcel_dend_4_0_2}
-{connect marcel_dend_4_0_2(0), marcel_dend_4_0(1)}
-{access marcel_dend_4_0_2}
+/* Type: unknown, Info: part of dend_4_0 */
+{create dend_4_0_2}
+{connect dend_4_0_2(0), dend_4_0(1)}
+{access dend_4_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6401,10 +6401,10 @@
 {pt3dadd(-70.8043,295.321,-380.049,0.68)}
 {pt3dadd(-72.1477,295.466,-379.798,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_4_0 */
-{create marcel_dend_4_0_3}
-{connect marcel_dend_4_0_3(0), marcel_dend_4_0_2(1)}
-{access marcel_dend_4_0_3}
+/* Type: unknown, Info: part of dend_4_0 */
+{create dend_4_0_3}
+{connect dend_4_0_3(0), dend_4_0_2(1)}
+{access dend_4_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6695,10 +6695,10 @@
 {pt3dadd(-200.567,383.752,-453.028,0.57)}
 {pt3dadd(-200.4,383.892,-453.105,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_4_0 */
-{create marcel_dend_4_0_4}
-{connect marcel_dend_4_0_4(0), marcel_dend_4_0_2(1)}
-{access marcel_dend_4_0_4}
+/* Type: unknown, Info: part of dend_4_0 */
+{create dend_4_0_4}
+{connect dend_4_0_4(0), dend_4_0_2(1)}
+{access dend_4_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -6987,9 +6987,9 @@
 {pt3dadd(-251.538,262.93,-341.133,0.45)}
 
 /* Type: unknown */
-{create marcel_dend_5_0}
-{connect marcel_dend_5_0(0), marcel_soma(0.977272727272727)}
-{access marcel_dend_5_0}
+{create dend_5_0}
+{connect dend_5_0(0), soma(0.977272727272727)}
+{access dend_5_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7031,10 +7031,10 @@
 {pt3dadd(-18.1023,277.021,-394.693,1.24)}
 {pt3dadd(-18.1023,277.021,-394.693,1.24)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_1}
-{connect marcel_dend_5_0_1(0), marcel_dend_5_0(1)}
-{access marcel_dend_5_0_1}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_1}
+{connect dend_5_0_1(0), dend_5_0(1)}
+{access dend_5_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7066,10 +7066,10 @@
 {pt3dadd(-2.40734,284.371,-406.757,1.02)}
 {pt3dadd(-2.03674,284.737,-407.026,1.02)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_2}
-{connect marcel_dend_5_0_2(0), marcel_dend_5_0_1(1)}
-{access marcel_dend_5_0_2}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_2}
+{connect dend_5_0_2(0), dend_5_0_1(1)}
+{access dend_5_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7267,10 +7267,10 @@
 {pt3dadd(52.8947,382.285,-504.446,0.57)}
 {pt3dadd(52.8925,382.282,-504.455,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_3}
-{connect marcel_dend_5_0_3(0), marcel_dend_5_0_1(1)}
-{access marcel_dend_5_0_3}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_3}
+{connect dend_5_0_3(0), dend_5_0_1(1)}
+{access dend_5_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7416,10 +7416,10 @@
 {pt3dadd(70.344,283.561,-482.518,0.57)}
 {pt3dadd(70.2632,283.454,-482.905,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_4}
-{connect marcel_dend_5_0_4(0), marcel_dend_5_0(1)}
-{access marcel_dend_5_0_4}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_4}
+{connect dend_5_0_4(0), dend_5_0(1)}
+{access dend_5_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7496,10 +7496,10 @@
 {pt3dadd(-21.516,260.08,-421.742,0.57)}
 {pt3dadd(-21.1998,259.747,-421.725,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_5}
-{connect marcel_dend_5_0_5(0), marcel_dend_5_0_4(1)}
-{access marcel_dend_5_0_5}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_5}
+{connect dend_5_0_5(0), dend_5_0_4(1)}
+{access dend_5_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7614,10 +7614,10 @@
 {pt3dadd(-7.92057,207.491,-445.042,0.57)}
 {pt3dadd(-8.00758,207.377,-445.459,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_6}
-{connect marcel_dend_5_0_6(0), marcel_dend_5_0_4(1)}
-{access marcel_dend_5_0_6}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_6}
+{connect dend_5_0_6(0), dend_5_0_4(1)}
+{access dend_5_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7641,10 +7641,10 @@
 {pt3dadd(-19.2832,256.496,-432.188,0.57)}
 {pt3dadd(-19.3156,256.454,-432.344,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_7}
-{connect marcel_dend_5_0_7(0), marcel_dend_5_0_6(1)}
-{access marcel_dend_5_0_7}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_7}
+{connect dend_5_0_7(0), dend_5_0_6(1)}
+{access dend_5_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7683,10 +7683,10 @@
 {pt3dadd(-18.7854,246.917,-455.539,0.45)}
 {pt3dadd(-18.8617,246.847,-455.502,0.45)}
 
-/* Type: unknown, Info: part of marcel_dend_5_0 */
-{create marcel_dend_5_0_8}
-{connect marcel_dend_5_0_8(0), marcel_dend_5_0_6(1)}
-{access marcel_dend_5_0_8}
+/* Type: unknown, Info: part of dend_5_0 */
+{create dend_5_0_8}
+{connect dend_5_0_8(0), dend_5_0_6(1)}
+{access dend_5_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7748,9 +7748,9 @@
 {pt3dadd(-30.4957,262.553,-457.749,0.45)}
 
 /* Type: unknown */
-{create marcel_dend_6_0}
-{connect marcel_dend_6_0(0), marcel_soma(0.345260598442771)}
-{access marcel_dend_6_0}
+{create dend_6_0}
+{connect dend_6_0(0), soma(0.345260598442771)}
+{access dend_6_0}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7845,10 +7845,10 @@
 {pt3dadd(-2.47346,343.167,-378.196,0.68)}
 {pt3dadd(-2.47346,343.167,-378.196,0.68)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_1}
-{connect marcel_dend_6_0_1(0), marcel_dend_6_0(1)}
-{access marcel_dend_6_0_1}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_1}
+{connect dend_6_0_1(0), dend_6_0(1)}
+{access dend_6_0_1}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7859,10 +7859,10 @@
 {pt3dadd(-0.658193,344.083,-378.848,1.02)}
 {pt3dadd(-0.0334813,344.673,-379.152,1.02)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_2}
-{connect marcel_dend_6_0_2(0), marcel_dend_6_0_1(1)}
-{access marcel_dend_6_0_2}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_2}
+{connect dend_6_0_2(0), dend_6_0_1(1)}
+{access dend_6_0_2}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -7927,10 +7927,10 @@
 {pt3dadd(49.8093,364.327,-400.496,0.57)}
 {pt3dadd(51.9438,364.966,-401.14,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_3}
-{connect marcel_dend_6_0_3(0), marcel_dend_6_0_2(1)}
-{access marcel_dend_6_0_3}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_3}
+{connect dend_6_0_3(0), dend_6_0_2(1)}
+{access dend_6_0_3}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8030,10 +8030,10 @@
 {pt3dadd(110.737,412.978,-420.005,0.34)}
 {pt3dadd(111.059,412.967,-420.015,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_4}
-{connect marcel_dend_6_0_4(0), marcel_dend_6_0_2(1)}
-{access marcel_dend_6_0_4}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_4}
+{connect dend_6_0_4(0), dend_6_0_2(1)}
+{access dend_6_0_4}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8077,10 +8077,10 @@
 {pt3dadd(87.2245,373.474,-424.217,0.57)}
 {pt3dadd(87.1723,373.404,-424.468,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_5}
-{connect marcel_dend_6_0_5(0), marcel_dend_6_0_1(1)}
-{access marcel_dend_6_0_5}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_5}
+{connect dend_6_0_5(0), dend_6_0_1(1)}
+{access dend_6_0_5}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8209,10 +8209,10 @@
 {pt3dadd(51.177,426.798,-400.933,0.57)}
 {pt3dadd(51.4053,427.172,-401.092,0.57)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_6}
-{connect marcel_dend_6_0_6(0), marcel_dend_6_0_5(1)}
-{access marcel_dend_6_0_6}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_6}
+{connect dend_6_0_6(0), dend_6_0_5(1)}
+{access dend_6_0_6}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8283,10 +8283,10 @@
 {pt3dadd(65.1151,463.891,-424.881,0.34)}
 {pt3dadd(64.8818,463.581,-425.994,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_7}
-{connect marcel_dend_6_0_7(0), marcel_dend_6_0_5(1)}
-{access marcel_dend_6_0_7}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_7}
+{connect dend_6_0_7(0), dend_6_0_5(1)}
+{access dend_6_0_7}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8303,10 +8303,10 @@
 {pt3dadd(57.8915,423.103,-409.757,0.34)}
 {pt3dadd(57.9499,422.769,-410.664,0.34)}
 
-/* Type: unknown, Info: part of marcel_dend_6_0 */
-{create marcel_dend_6_0_8}
-{connect marcel_dend_6_0_8(0), marcel_dend_6_0(1)}
-{access marcel_dend_6_0_8}
+/* Type: unknown, Info: part of dend_6_0 */
+{create dend_6_0_8}
+{connect dend_6_0_8(0), dend_6_0(1)}
+{access dend_6_0_8}
 {nseg = 1}
 {strdef color color = "Red"}
 {pt3dclear()}
@@ -8429,9 +8429,9 @@
 {pt3dadd(-5.34534,413.381,-379.252,0.45)}
 
 /* Type: unknown */
-{create marcel_apical_0_0}
-{connect marcel_apical_0_0(0), marcel_soma(0.313298637216741)}
-{access marcel_apical_0_0}
+{create apical_0_0}
+{connect apical_0_0(0), soma(0.313298637216741)}
+{access apical_0_0}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -8488,10 +8488,10 @@
 {pt3dadd(-25.2245,288.417,-350.321,1.58)}
 {pt3dadd(-25.2245,288.417,-350.321,1.58)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_1}
-{connect marcel_apical_0_0_1(0), marcel_apical_0_0(1)}
-{access marcel_apical_0_0_1}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_1}
+{connect apical_0_0_1(0), apical_0_0(1)}
+{access apical_0_0_1}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -8533,10 +8533,10 @@
 {pt3dadd(-24.0692,306.967,-349.315,0.79)}
 {pt3dadd(-24.0576,307.937,-349.127,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_2}
-{connect marcel_apical_0_0_2(0), marcel_apical_0_0_1(1)}
-{access marcel_apical_0_0_2}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_2}
+{connect apical_0_0_2(0), apical_0_0_1(1)}
+{access apical_0_0_2}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -8546,10 +8546,10 @@
 {pt3dadd(-25.9103,311.05,-349.619,0.79)}
 {pt3dadd(-26.0756,311.998,-349.856,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_3}
-{connect marcel_apical_0_0_3(0), marcel_apical_0_0_2(1)}
-{access marcel_apical_0_0_3}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_3}
+{connect apical_0_0_3(0), apical_0_0_2(1)}
+{access apical_0_0_3}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -8843,10 +8843,10 @@
 {pt3dadd(-64.4282,492.976,-400.657,0.45)}
 {pt3dadd(-64.5052,492.872,-401.024,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_4}
-{connect marcel_apical_0_0_4(0), marcel_apical_0_0_2(1)}
-{access marcel_apical_0_0_4}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_4}
+{connect apical_0_0_4(0), apical_0_0_2(1)}
+{access apical_0_0_4}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9112,10 +9112,10 @@
 {pt3dadd(-10.7815,503.196,-401.482,0.45)}
 {pt3dadd(-10.8363,503.088,-402.18,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_5}
-{connect marcel_apical_0_0_5(0), marcel_apical_0_0_1(1)}
-{access marcel_apical_0_0_5}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_5}
+{connect apical_0_0_5(0), apical_0_0_1(1)}
+{access apical_0_0_5}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9214,10 +9214,10 @@
 {pt3dadd(73.3298,394.163,-377.389,0.57)}
 {pt3dadd(73.3853,394.235,-377.127,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_6}
-{connect marcel_apical_0_0_6(0), marcel_apical_0_0(1)}
-{access marcel_apical_0_0_6}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_6}
+{connect apical_0_0_6(0), apical_0_0(1)}
+{access apical_0_0_6}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9232,10 +9232,10 @@
 {pt3dadd(-25.3297,287.4,-345.223,1.24)}
 {pt3dadd(-25.4966,286.838,-345.027,1.24)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_7}
-{connect marcel_apical_0_0_7(0), marcel_apical_0_0_6(1)}
-{access marcel_apical_0_0_7}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_7}
+{connect apical_0_0_7(0), apical_0_0_6(1)}
+{access apical_0_0_7}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9300,10 +9300,10 @@
 {pt3dadd(-22.7698,287.994,-319.318,1.24)}
 {pt3dadd(-22.7433,288.094,-318.351,1.24)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_8}
-{connect marcel_apical_0_0_8(0), marcel_apical_0_0_7(1)}
-{access marcel_apical_0_0_8}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_8}
+{connect apical_0_0_8(0), apical_0_0_7(1)}
+{access apical_0_0_8}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9386,10 +9386,10 @@
 {pt3dadd(16.528,256.689,-281.939,0.79)}
 {pt3dadd(16.5806,256.759,-281.688,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_9}
-{connect marcel_apical_0_0_9(0), marcel_apical_0_0_7(1)}
-{access marcel_apical_0_0_9}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_9}
+{connect apical_0_0_9(0), apical_0_0_7(1)}
+{access apical_0_0_9}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9457,10 +9457,10 @@
 {pt3dadd(-26.5214,288.016,-289.866,1.36)}
 {pt3dadd(-26.5057,287.922,-289.307,1.36)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_10}
-{connect marcel_apical_0_0_10(0), marcel_apical_0_0_9(1)}
-{access marcel_apical_0_0_10}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_10}
+{connect apical_0_0_10(0), apical_0_0_9(1)}
+{access apical_0_0_10}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9518,10 +9518,10 @@
 {pt3dadd(-35.4828,269.718,-263.452,0.45)}
 {pt3dadd(-35.3978,269.831,-263.046,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_11}
-{connect marcel_apical_0_0_11(0), marcel_apical_0_0_10(1)}
-{access marcel_apical_0_0_11}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_11}
+{connect apical_0_0_11(0), apical_0_0_10(1)}
+{access apical_0_0_11}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9634,10 +9634,10 @@
 {pt3dadd(-15.2548,234.879,-199.845,0.45)}
 {pt3dadd(-15.1092,235.072,-199.148,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_12}
-{connect marcel_apical_0_0_12(0), marcel_apical_0_0_10(1)}
-{access marcel_apical_0_0_12}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_12}
+{connect apical_0_0_12(0), apical_0_0_10(1)}
+{access apical_0_0_12}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9807,10 +9807,10 @@
 {pt3dadd(-60.9932,187.582,-176.68,0.45)}
 {pt3dadd(-60.977,187.604,-176.603,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_13}
-{connect marcel_apical_0_0_13(0), marcel_apical_0_0_9(1)}
-{access marcel_apical_0_0_13}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_13}
+{connect apical_0_0_13(0), apical_0_0_9(1)}
+{access apical_0_0_13}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -9864,10 +9864,10 @@
 {pt3dadd(-19.0452,286.915,-265.992,0.9)}
 {pt3dadd(-20.0584,287.249,-265.434,0.9)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_14}
-{connect marcel_apical_0_0_14(0), marcel_apical_0_0_13(1)}
-{access marcel_apical_0_0_14}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_14}
+{connect apical_0_0_14(0), apical_0_0_13(1)}
+{access apical_0_0_14}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10075,10 +10075,10 @@
 {pt3dadd(-99.8356,323.818,-377.702,0.45)}
 {pt3dadd(-100.286,323.794,-378.721,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_15}
-{connect marcel_apical_0_0_15(0), marcel_apical_0_0_13(1)}
-{access marcel_apical_0_0_15}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_15}
+{connect apical_0_0_15(0), apical_0_0_13(1)}
+{access apical_0_0_15}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10104,10 +10104,10 @@
 {pt3dadd(-16.3573,286.878,-258.106,0.9)}
 {pt3dadd(-16.3047,286.947,-257.855,0.9)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_16}
-{connect marcel_apical_0_0_16(0), marcel_apical_0_0_15(1)}
-{access marcel_apical_0_0_16}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_16}
+{connect apical_0_0_16(0), apical_0_0_15(1)}
+{access apical_0_0_16}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10134,10 +10134,10 @@
 {pt3dadd(-9.08849,281.463,-249.514,0.57)}
 {pt3dadd(-8.94997,281.469,-249.545,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_17}
-{connect marcel_apical_0_0_17(0), marcel_apical_0_0_16(1)}
-{access marcel_apical_0_0_17}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_17}
+{connect apical_0_0_17(0), apical_0_0_16(1)}
+{access apical_0_0_17}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10273,10 +10273,10 @@
 {pt3dadd(26.4221,184.834,-176.161,0.57)}
 {pt3dadd(26.6712,184.802,-175.511,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_18}
-{connect marcel_apical_0_0_18(0), marcel_apical_0_0_16(1)}
-{access marcel_apical_0_0_18}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_18}
+{connect apical_0_0_18(0), apical_0_0_16(1)}
+{access apical_0_0_18}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10404,10 +10404,10 @@
 {pt3dadd(69.6385,267.202,-185.798,0.57)}
 {pt3dadd(69.6545,267.224,-185.72,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_19}
-{connect marcel_apical_0_0_19(0), marcel_apical_0_0_15(1)}
-{access marcel_apical_0_0_19}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_19}
+{connect apical_0_0_19(0), apical_0_0_15(1)}
+{access apical_0_0_19}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10468,10 +10468,10 @@
 {pt3dadd(-16.9488,291.102,-225.786,1.13)}
 {pt3dadd(-16.9005,290.984,-225.762,1.13)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_20}
-{connect marcel_apical_0_0_20(0), marcel_apical_0_0_19(1)}
-{access marcel_apical_0_0_20}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_20}
+{connect apical_0_0_20(0), apical_0_0_19(1)}
+{access apical_0_0_20}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10500,10 +10500,10 @@
 {pt3dadd(-10.8805,292.136,-212.974,1.13)}
 {pt3dadd(-10.8076,292.234,-212.624,1.13)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_21}
-{connect marcel_apical_0_0_21(0), marcel_apical_0_0_20(1)}
-{access marcel_apical_0_0_21}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_21}
+{connect apical_0_0_21(0), apical_0_0_20(1)}
+{access apical_0_0_21}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10535,10 +10535,10 @@
 {pt3dadd(-1.49594,298.454,-220.649,0.68)}
 {pt3dadd(-1.25314,298.521,-221.353,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_22}
-{connect marcel_apical_0_0_22(0), marcel_apical_0_0_21(1)}
-{access marcel_apical_0_0_22}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_22}
+{connect apical_0_0_22(0), apical_0_0_21(1)}
+{access apical_0_0_22}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10645,10 +10645,10 @@
 {pt3dadd(-0.591391,325.555,-270.043,0.68)}
 {pt3dadd(-0.872339,325.742,-271.518,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_23}
-{connect marcel_apical_0_0_23(0), marcel_apical_0_0_22(1)}
-{access marcel_apical_0_0_23}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_23}
+{connect apical_0_0_23(0), apical_0_0_22(1)}
+{access apical_0_0_23}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10702,10 +10702,10 @@
 {pt3dadd(-1.93889,334.078,-303.048,0.68)}
 {pt3dadd(-2.04749,333.933,-303.571,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_24}
-{connect marcel_apical_0_0_24(0), marcel_apical_0_0_22(1)}
-{access marcel_apical_0_0_24}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_24}
+{connect apical_0_0_24(0), apical_0_0_22(1)}
+{access apical_0_0_24}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10728,10 +10728,10 @@
 {pt3dadd(0.0957099,321.228,-292.343,0.68)}
 {pt3dadd(-2.24349,321.109,-292.284,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_25}
-{connect marcel_apical_0_0_25(0), marcel_apical_0_0_21(1)}
-{access marcel_apical_0_0_25}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_25}
+{connect apical_0_0_25(0), apical_0_0_21(1)}
+{access apical_0_0_25}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10812,10 +10812,10 @@
 {pt3dadd(35.2351,272.936,-277.503,0.57)}
 {pt3dadd(35.3864,272.962,-277.063,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_26}
-{connect marcel_apical_0_0_26(0), marcel_apical_0_0_20(1)}
-{access marcel_apical_0_0_26}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_26}
+{connect apical_0_0_26(0), apical_0_0_20(1)}
+{access apical_0_0_26}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10856,10 +10856,10 @@
 {pt3dadd(-13.234,289.479,-200.364,1.02)}
 {pt3dadd(-13.3381,289.274,-200.283,1.02)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_27}
-{connect marcel_apical_0_0_27(0), marcel_apical_0_0_26(1)}
-{access marcel_apical_0_0_27}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_27}
+{connect apical_0_0_27(0), apical_0_0_26(1)}
+{access apical_0_0_27}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10922,10 +10922,10 @@
 {pt3dadd(-8.91985,244.756,-182.05,0.68)}
 {pt3dadd(-9.80548,240.934,-180.58,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_28}
-{connect marcel_apical_0_0_28(0), marcel_apical_0_0_27(1)}
-{access marcel_apical_0_0_28}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_28}
+{connect apical_0_0_28(0), apical_0_0_27(1)}
+{access apical_0_0_28}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -10985,10 +10985,10 @@
 {pt3dadd(-6.79966,210.616,-156.951,0.45)}
 {pt3dadd(-6.73563,210.7,-156.677,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_29}
-{connect marcel_apical_0_0_29(0), marcel_apical_0_0_27(1)}
-{access marcel_apical_0_0_29}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_29}
+{connect apical_0_0_29(0), apical_0_0_27(1)}
+{access apical_0_0_29}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -11096,10 +11096,10 @@
 {pt3dadd(-23.1797,157.844,-183.284,0.45)}
 {pt3dadd(-23.1246,157.596,-183.224,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_30}
-{connect marcel_apical_0_0_30(0), marcel_apical_0_0_26(1)}
-{access marcel_apical_0_0_30}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_30}
+{connect apical_0_0_30(0), apical_0_0_26(1)}
+{access apical_0_0_30}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -11115,10 +11115,10 @@
 {pt3dadd(-13.597,288.937,-192.559,0.79)}
 {pt3dadd(-13.5502,289.333,-188.509,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_31}
-{connect marcel_apical_0_0_31(0), marcel_apical_0_0_30(1)}
-{access marcel_apical_0_0_31}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_31}
+{connect apical_0_0_31(0), apical_0_0_30(1)}
+{access apical_0_0_31}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -11247,10 +11247,10 @@
 {pt3dadd(38.3939,191.748,-268.461,0.57)}
 {pt3dadd(38.3377,191.673,-268.733,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_32}
-{connect marcel_apical_0_0_32(0), marcel_apical_0_0_30(1)}
-{access marcel_apical_0_0_32}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_32}
+{connect apical_0_0_32(0), apical_0_0_30(1)}
+{access apical_0_0_32}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -11856,10 +11856,10 @@
 {pt3dadd(5.58705,325.189,348.498,0.79)}
 {pt3dadd(6.88084,326.413,357.356,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_33}
-{connect marcel_apical_0_0_33(0), marcel_apical_0_0_32(1)}
-{access marcel_apical_0_0_33}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_33}
+{connect apical_0_0_33(0), apical_0_0_32(1)}
+{access apical_0_0_33}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -11872,10 +11872,10 @@
 {pt3dadd(3.75427,325.063,362.3,0.79)}
 {pt3dadd(3.22481,325.108,363.126,0.79)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_34}
-{connect marcel_apical_0_0_34(0), marcel_apical_0_0_33(1)}
-{access marcel_apical_0_0_34}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_34}
+{connect apical_0_0_34(0), apical_0_0_33(1)}
+{access apical_0_0_34}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12092,10 +12092,10 @@
 {pt3dadd(-115.268,308.405,604.364,0.57)}
 {pt3dadd(-116.373,308.099,605.289,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_35}
-{connect marcel_apical_0_0_35(0), marcel_apical_0_0_34(1)}
-{access marcel_apical_0_0_35}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_35}
+{connect apical_0_0_35(0), apical_0_0_34(1)}
+{access apical_0_0_35}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12192,10 +12192,10 @@
 {pt3dadd(-317.335,281.844,672.581,0.57)}
 {pt3dadd(-318.056,281.824,672.826,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_36}
-{connect marcel_apical_0_0_36(0), marcel_apical_0_0_34(1)}
-{access marcel_apical_0_0_36}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_36}
+{connect apical_0_0_36(0), apical_0_0_34(1)}
+{access apical_0_0_36}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12212,10 +12212,10 @@
 {pt3dadd(-125.97,303.287,617.158,0.57)}
 {pt3dadd(-126.282,303.257,617.23,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_37}
-{connect marcel_apical_0_0_37(0), marcel_apical_0_0_36(1)}
-{access marcel_apical_0_0_37}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_37}
+{connect apical_0_0_37(0), apical_0_0_36(1)}
+{access apical_0_0_37}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12295,10 +12295,10 @@
 {pt3dadd(-110.883,364.11,662.198,0.57)}
 {pt3dadd(-110.809,364.299,662.288,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_38}
-{connect marcel_apical_0_0_38(0), marcel_apical_0_0_36(1)}
-{access marcel_apical_0_0_38}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_38}
+{connect apical_0_0_38(0), apical_0_0_36(1)}
+{access apical_0_0_38}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12320,10 +12320,10 @@
 {pt3dadd(-137.812,297.812,637.31,0.57)}
 {pt3dadd(-138.588,297.311,637.598,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_39}
-{connect marcel_apical_0_0_39(0), marcel_apical_0_0_38(1)}
-{access marcel_apical_0_0_39}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_39}
+{connect apical_0_0_39(0), apical_0_0_38(1)}
+{access apical_0_0_39}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12353,10 +12353,10 @@
 {pt3dadd(-175.999,310.87,655.055,0.57)}
 {pt3dadd(-177.934,310.32,655.95,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_40}
-{connect marcel_apical_0_0_40(0), marcel_apical_0_0_39(1)}
-{access marcel_apical_0_0_40}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_40}
+{connect apical_0_0_40(0), apical_0_0_39(1)}
+{access apical_0_0_40}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12395,10 +12395,10 @@
 {pt3dadd(-228.621,344.686,640.655,0.23)}
 {pt3dadd(-229.182,345.421,640.635,0.23)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_41}
-{connect marcel_apical_0_0_41(0), marcel_apical_0_0_39(1)}
-{access marcel_apical_0_0_41}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_41}
+{connect apical_0_0_41(0), apical_0_0_39(1)}
+{access apical_0_0_41}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12418,10 +12418,10 @@
 {pt3dadd(-197.838,307.446,671.254,0.57)}
 {pt3dadd(-198.433,307.998,671.928,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_42}
-{connect marcel_apical_0_0_42(0), marcel_apical_0_0_38(1)}
-{access marcel_apical_0_0_42}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_42}
+{connect apical_0_0_42(0), apical_0_0_38(1)}
+{access apical_0_0_42}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12441,10 +12441,10 @@
 {pt3dadd(-159.623,294.505,641.301,0.57)}
 {pt3dadd(-160.592,294.457,641.579,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_43}
-{connect marcel_apical_0_0_43(0), marcel_apical_0_0_42(1)}
-{access marcel_apical_0_0_43}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_43}
+{connect apical_0_0_43(0), apical_0_0_42(1)}
+{access apical_0_0_43}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12524,10 +12524,10 @@
 {pt3dadd(-306.326,347.823,655.788,0.34)}
 {pt3dadd(-306.78,347.066,656.288,0.34)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_44}
-{connect marcel_apical_0_0_44(0), marcel_apical_0_0_42(1)}
-{access marcel_apical_0_0_44}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_44}
+{connect apical_0_0_44(0), apical_0_0_42(1)}
+{access apical_0_0_44}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12615,10 +12615,10 @@
 {pt3dadd(-300.274,311.476,682.255,0.57)}
 {pt3dadd(-299.152,313.128,687.281,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_45}
-{connect marcel_apical_0_0_45(0), marcel_apical_0_0_33(1)}
-{access marcel_apical_0_0_45}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_45}
+{connect apical_0_0_45(0), apical_0_0_33(1)}
+{access apical_0_0_45}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12796,10 +12796,10 @@
 {pt3dadd(-10.8452,310.16,582.394,0.57)}
 {pt3dadd(-10.6059,309.907,583.272,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_46}
-{connect marcel_apical_0_0_46(0), marcel_apical_0_0_45(1)}
-{access marcel_apical_0_0_46}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_46}
+{connect apical_0_0_46(0), apical_0_0_45(1)}
+{access apical_0_0_46}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12949,10 +12949,10 @@
 {pt3dadd(79.926,96.734,654.387,0.57)}
 {pt3dadd(81.0404,95.2851,654.642,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_47}
-{connect marcel_apical_0_0_47(0), marcel_apical_0_0_45(1)}
-{access marcel_apical_0_0_47}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_47}
+{connect apical_0_0_47(0), apical_0_0_45(1)}
+{access apical_0_0_47}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -12985,10 +12985,10 @@
 {pt3dadd(22.2688,318.161,596.343,0.57)}
 {pt3dadd(22.7052,318.061,596.278,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_48}
-{connect marcel_apical_0_0_48(0), marcel_apical_0_0_47(1)}
-{access marcel_apical_0_0_48}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_48}
+{connect apical_0_0_48(0), apical_0_0_47(1)}
+{access apical_0_0_48}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13034,10 +13034,10 @@
 {pt3dadd(54.717,352.985,647.74,0.57)}
 {pt3dadd(55.2014,354.109,648.313,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_49}
-{connect marcel_apical_0_0_49(0), marcel_apical_0_0_48(1)}
-{access marcel_apical_0_0_49}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_49}
+{connect apical_0_0_49(0), apical_0_0_48(1)}
+{access apical_0_0_49}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13076,10 +13076,10 @@
 {pt3dadd(111.164,353.267,648.192,0.45)}
 {pt3dadd(112.138,353.196,647.929,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_50}
-{connect marcel_apical_0_0_50(0), marcel_apical_0_0_48(1)}
-{access marcel_apical_0_0_50}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_50}
+{connect apical_0_0_50(0), apical_0_0_48(1)}
+{access apical_0_0_50}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13113,10 +13113,10 @@
 {pt3dadd(62.7813,384.551,661.682,0.45)}
 {pt3dadd(62.61,386.088,663.473,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_51}
-{connect marcel_apical_0_0_51(0), marcel_apical_0_0_47(1)}
-{access marcel_apical_0_0_51}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_51}
+{connect apical_0_0_51(0), apical_0_0_47(1)}
+{access apical_0_0_51}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13232,10 +13232,10 @@
 {pt3dadd(210.518,256.972,641.887,0.45)}
 {pt3dadd(211.204,256.854,642.898,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_52}
-{connect marcel_apical_0_0_52(0), marcel_apical_0_0_45(1)}
-{access marcel_apical_0_0_52}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_52}
+{connect apical_0_0_52(0), apical_0_0_45(1)}
+{access apical_0_0_52}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13255,10 +13255,10 @@
 {pt3dadd(-24.3173,320.671,594.616,0.57)}
 {pt3dadd(-24.3795,320.709,594.619,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_53}
-{connect marcel_apical_0_0_53(0), marcel_apical_0_0_52(1)}
-{access marcel_apical_0_0_53}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_53}
+{connect apical_0_0_53(0), apical_0_0_52(1)}
+{access apical_0_0_53}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13340,10 +13340,10 @@
 {pt3dadd(-78.0984,338.88,680.818,0.57)}
 {pt3dadd(-79.3784,338.852,678.714,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_54}
-{connect marcel_apical_0_0_54(0), marcel_apical_0_0_52(1)}
-{access marcel_apical_0_0_54}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_54}
+{connect apical_0_0_54(0), apical_0_0_52(1)}
+{access apical_0_0_54}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13457,10 +13457,10 @@
 {pt3dadd(-172.262,436.178,647.963,0.45)}
 {pt3dadd(-170.265,437.778,651.052,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_55}
-{connect marcel_apical_0_0_55(0), marcel_apical_0_0_33(1)}
-{access marcel_apical_0_0_55}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_55}
+{connect apical_0_0_55(0), apical_0_0_33(1)}
+{access apical_0_0_55}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13606,10 +13606,10 @@
 {pt3dadd(58.5619,303.36,520.409,0.68)}
 {pt3dadd(59.0745,303.256,523.774,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_56}
-{connect marcel_apical_0_0_56(0), marcel_apical_0_0_55(1)}
-{access marcel_apical_0_0_56}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_56}
+{connect apical_0_0_56(0), apical_0_0_55(1)}
+{access apical_0_0_56}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13781,10 +13781,10 @@
 {pt3dadd(34.9743,115.783,691.983,0.45)}
 {pt3dadd(34.7049,115.699,692.903,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_57}
-{connect marcel_apical_0_0_57(0), marcel_apical_0_0_55(1)}
-{access marcel_apical_0_0_57}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_57}
+{connect apical_0_0_57(0), apical_0_0_55(1)}
+{access apical_0_0_57}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -13929,10 +13929,10 @@
 {pt3dadd(210.923,296.178,615.143,0.45)}
 {pt3dadd(211.624,295.752,615.115,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_58}
-{connect marcel_apical_0_0_58(0), marcel_apical_0_0_57(1)}
-{access marcel_apical_0_0_58}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_58}
+{connect apical_0_0_58(0), apical_0_0_57(1)}
+{access apical_0_0_58}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14019,10 +14019,10 @@
 {pt3dadd(360.414,316.655,587.658,0.45)}
 {pt3dadd(362.171,316.844,586.645,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_59}
-{connect marcel_apical_0_0_59(0), marcel_apical_0_0_57(1)}
-{access marcel_apical_0_0_59}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_59}
+{connect apical_0_0_59(0), apical_0_0_57(1)}
+{access apical_0_0_59}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14053,10 +14053,10 @@
 {pt3dadd(270.853,283.788,594.056,0.45)}
 {pt3dadd(273.284,283.197,593.231,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_60}
-{connect marcel_apical_0_0_60(0), marcel_apical_0_0_32(1)}
-{access marcel_apical_0_0_60}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_60}
+{connect apical_0_0_60(0), apical_0_0_32(1)}
+{access apical_0_0_60}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14209,10 +14209,10 @@
 {pt3dadd(14.0081,363.91,516.737,0.57)}
 {pt3dadd(14.5185,362.655,516.959,0.68)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_61}
-{connect marcel_apical_0_0_61(0), marcel_apical_0_0_60(1)}
-{access marcel_apical_0_0_61}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_61}
+{connect apical_0_0_61(0), apical_0_0_60(1)}
+{access apical_0_0_61}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14298,10 +14298,10 @@
 {pt3dadd(1.90118,414.155,585.658,0.57)}
 {pt3dadd(1.77516,414.853,586.334,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_62}
-{connect marcel_apical_0_0_62(0), marcel_apical_0_0_61(1)}
-{access marcel_apical_0_0_62}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_62}
+{connect apical_0_0_62(0), apical_0_0_61(1)}
+{access apical_0_0_62}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14323,10 +14323,10 @@
 {pt3dadd(0.128409,422.086,603.309,0.57)}
 {pt3dadd(-0.267282,422.079,603.626,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_63}
-{connect marcel_apical_0_0_63(0), marcel_apical_0_0_62(1)}
-{access marcel_apical_0_0_63}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_63}
+{connect apical_0_0_63(0), apical_0_0_62(1)}
+{access apical_0_0_63}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14342,10 +14342,10 @@
 {pt3dadd(-3.989,424.543,611.296,0.45)}
 {pt3dadd(-3.89328,424.581,612.678,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_64}
-{connect marcel_apical_0_0_64(0), marcel_apical_0_0_63(1)}
-{access marcel_apical_0_0_64}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_64}
+{connect apical_0_0_64(0), apical_0_0_63(1)}
+{access apical_0_0_64}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14369,10 +14369,10 @@
 {pt3dadd(-20.3429,429.276,623.53,0.45)}
 {pt3dadd(-20.5649,429.139,623.612,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_65}
-{connect marcel_apical_0_0_65(0), marcel_apical_0_0_64(1)}
-{access marcel_apical_0_0_65}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_65}
+{connect apical_0_0_65(0), apical_0_0_64(1)}
+{access apical_0_0_65}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14417,10 +14417,10 @@
 {pt3dadd(-28.8785,472.94,667.516,0.45)}
 {pt3dadd(-29.2607,473.536,668.949,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_66}
-{connect marcel_apical_0_0_66(0), marcel_apical_0_0_64(1)}
-{access marcel_apical_0_0_66}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_66}
+{connect apical_0_0_66(0), apical_0_0_64(1)}
+{access apical_0_0_66}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14455,10 +14455,10 @@
 {pt3dadd(-66.6867,442.801,639.332,0.45)}
 {pt3dadd(-68.8824,443.001,639.732,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_67}
-{connect marcel_apical_0_0_67(0), marcel_apical_0_0_66(1)}
-{access marcel_apical_0_0_67}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_67}
+{connect apical_0_0_67(0), apical_0_0_66(1)}
+{access apical_0_0_67}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14507,10 +14507,10 @@
 {pt3dadd(-149.386,464.009,638.83,0.45)}
 {pt3dadd(-150.084,464.349,639.124,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_68}
-{connect marcel_apical_0_0_68(0), marcel_apical_0_0_66(1)}
-{access marcel_apical_0_0_68}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_68}
+{connect apical_0_0_68(0), apical_0_0_66(1)}
+{access apical_0_0_68}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14529,10 +14529,10 @@
 {pt3dadd(-86.8321,437.324,646.38,0.45)}
 {pt3dadd(-87.5986,438.253,647.91,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_69}
-{connect marcel_apical_0_0_69(0), marcel_apical_0_0_68(1)}
-{access marcel_apical_0_0_69}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_69}
+{connect apical_0_0_69(0), apical_0_0_68(1)}
+{access apical_0_0_69}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14551,10 +14551,10 @@
 {pt3dadd(-113.707,437.839,651.35,0.45)}
 {pt3dadd(-114.479,437.495,650.948,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_70}
-{connect marcel_apical_0_0_70(0), marcel_apical_0_0_68(1)}
-{access marcel_apical_0_0_70}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_70}
+{connect apical_0_0_70(0), apical_0_0_68(1)}
+{access apical_0_0_70}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14568,10 +14568,10 @@
 {pt3dadd(-94.0633,447.573,641.103,0.45)}
 {pt3dadd(-91.5269,452.301,641.406,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_71}
-{connect marcel_apical_0_0_71(0), marcel_apical_0_0_63(1)}
-{access marcel_apical_0_0_71}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_71}
+{connect apical_0_0_71(0), apical_0_0_63(1)}
+{access apical_0_0_71}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14644,10 +14644,10 @@
 {pt3dadd(60.2707,528.251,613.732,0.45)}
 {pt3dadd(60.4321,528.463,614.435,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_72}
-{connect marcel_apical_0_0_72(0), marcel_apical_0_0_62(1)}
-{access marcel_apical_0_0_72}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_72}
+{connect apical_0_0_72(0), apical_0_0_62(1)}
+{access apical_0_0_72}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14729,10 +14729,10 @@
 {pt3dadd(72.9532,466.751,634.421,0.45)}
 {pt3dadd(73.6029,466.428,634.371,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_73}
-{connect marcel_apical_0_0_73(0), marcel_apical_0_0_61(1)}
-{access marcel_apical_0_0_73}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_73}
+{connect apical_0_0_73(0), apical_0_0_61(1)}
+{access apical_0_0_73}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14850,10 +14850,10 @@
 {pt3dadd(40.9148,585.549,620.524,0.57)}
 {pt3dadd(42.1521,586.464,620.722,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_74}
-{connect marcel_apical_0_0_74(0), marcel_apical_0_0_60(1)}
-{access marcel_apical_0_0_74}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_74}
+{connect apical_0_0_74(0), apical_0_0_60(1)}
+{access apical_0_0_74}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -14944,10 +14944,10 @@
 {pt3dadd(85.857,381.386,595.972,0.45)}
 {pt3dadd(87.3746,381.102,596.552,0.45)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_75}
-{connect marcel_apical_0_0_75(0), marcel_apical_0_0_74(1)}
-{access marcel_apical_0_0_75}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_75}
+{connect apical_0_0_75(0), apical_0_0_74(1)}
+{access apical_0_0_75}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -15049,10 +15049,10 @@
 {pt3dadd(191.535,470.253,615.448,0.23)}
 {pt3dadd(193.187,470.501,617.071,0.23)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_76}
-{connect marcel_apical_0_0_76(0), marcel_apical_0_0_74(1)}
-{access marcel_apical_0_0_76}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_76}
+{connect apical_0_0_76(0), apical_0_0_74(1)}
+{access apical_0_0_76}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -15151,10 +15151,10 @@
 {pt3dadd(242.394,346.552,621.746,0.23)}
 {pt3dadd(243.222,346.184,622.468,0.23)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_77}
-{connect marcel_apical_0_0_77(0), marcel_apical_0_0_19(1)}
-{access marcel_apical_0_0_77}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_77}
+{connect apical_0_0_77(0), apical_0_0_19(1)}
+{access apical_0_0_77}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
@@ -15254,10 +15254,10 @@
 {pt3dadd(-70.3457,269.54,-171.47,0.57)}
 {pt3dadd(-69.9787,269.376,-171.503,0.57)}
 
-/* Type: unknown, Info: part of marcel_apical_0_0 */
-{create marcel_apical_0_0_78}
-{connect marcel_apical_0_0_78(0), marcel_apical_0_0_6(1)}
-{access marcel_apical_0_0_78}
+/* Type: unknown, Info: part of apical_0_0 */
+{create apical_0_0_78}
+{connect apical_0_0_78(0), apical_0_0_6(1)}
+{access apical_0_0_78}
 {nseg = 1}
 {strdef color color = "RGB (255, 128, 128)"}
 {pt3dclear()}
