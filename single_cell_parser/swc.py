@@ -67,9 +67,9 @@ def _get_swc_lines_per_section(
         and sec.label == parent.label \
         and not (sec_ind in remap_sections or parent_sec_ind in remap_sections):
             warnings.warn(
-                "Section {} is an only child of the parent section {} with the same label \"{}\". "
-                "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. "
-                "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. "
+                "Section {} is an only child of the parent section {} with the same label \"{}\". " +\
+                "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. " +\
+                "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. " +\
                 "Please consider remapping the section label/type via the keyword argument `remap_sections`.".format(sec_ind, parent_sec_ind, sec.label))
         
         if sec.label == "Soma":
@@ -348,7 +348,7 @@ def complete_soma(sections):
     # check that the first section is the soma and has only one point
     if len(sections) == 0 or len(sections[0]["points"]) != 1:
         raise ValueError(
-            "Expected the first section to be the soma with exactly one point. "
+            "Expected the first section to be the soma with exactly one point. " +\
             "Cannot complete soma structure."
         )
     xs, ys, zs, ds = sections[0]["points"][0]
