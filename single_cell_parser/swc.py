@@ -321,10 +321,10 @@ def build_section_directory(root_id, points_dict):
         current_id = children_id[0]
     counters = {}
     for i, child_id in enumerate(points_dict[current_id]["children"]):
-        type = points_dict[child_id]["type"]
-        label = REVERSE_SWC_LABEL_MAP.get(type, f"type{type}")
-        counters[type] = counters.get(type, 0) + 1
-        child_sec_name = f"{label}_{counters[type]}_0"
+        section_type = points_dict[child_id]["type"]
+        label = REVERSE_SWC_LABEL_MAP.get(section_type, f"type{section_type}")
+        counters[section_type] = counters.get(section_type, 0) + 1
+        child_sec_name = f"{label}_{counters[section_type]}_0"
         _traverse(child_id, child_sec_name, "soma", points_dict, sections)
     return sections
 
