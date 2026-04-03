@@ -20,7 +20,6 @@ See also:
 '''
 
 import numpy as np
-import re
 from . import scalar_field
 from data_base.dbopen import dbopen
 import logging
@@ -315,7 +314,6 @@ def read_scalar_field(fname='', dtype=np.float64):
         mesh = data.reshape(dims, order='F')
 
         return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
-
 
 
 def read_synapse_realization(fname):
@@ -752,85 +750,3 @@ def read_landmark_file(landmarkFilename):
                 landmarks.append((x, y, z))
 
     return landmarks
-
-
-# Old versions ---------------------------------------------------
-
-def read_scalar_field_legacy(fname=''):
-    """Read AMIRA scalar fields.
-    
-    Args:
-        fname (str): The name of the file to be read.
-
-    Raises:
-        IOError: If the input file does not have a `.am` or `.AM` suffix.
-
-    Returns:
-        :class:`~single_cell_parser.scalar_field.ScalarField`: A scalar field object.
-
-    .. deprecated:: 0.5.0
-       This has been deprecated in favor of the faster :func:`read_scalar_field`
-
-    :skip-doc:
-    """
-    if not fname.endswith('.am') and not fname.endswith('.AM'):
-        raise IOError('Input file is not an Amira Mesh file!')
-
-    with dbopen(fname, 'r') as meshFile:
-        # logger.info "Reading Amira Mesh file", fname
-        mesh = None
-        extent, dims, bounds, origin, spacing = [], [], [], [], [0., 0., 0.]
-        dataSection, hasExtent, hasBounds = False, False, False
-        index = 0
-        for line in meshFile:
-            if line.strip():
-                # set up lattice
-                if not dataSection:
-                    if 'define' in line and 'Lattice' in line:
-                        dimStr = line.strip().split()[-3:]
-                        for dim in dimStr:
-                            dims.append(int(dim))
-                        for dim in dims:
-                            extent.append(0)
-                            extent.append(dim - 1)
-                        hasExtent = True
-                    if 'BoundingBox' in line:
-                        bBoxStr = line.strip(' \t\n,').split()[-6:]
-                        for val in bBoxStr:
-                            bounds.append(float(val))
-                        for i in range(3):
-                            origin.append(bounds[2 * i])
-                        hasBounds = True
-                    if hasExtent and hasBounds and mesh is None:
-                        for i in range(3):
-                            spacing[i] = (bounds[2 * i + 1] - bounds[2 * i]) / (
-                                extent[2 * i + 1] - extent[2 * i])
-                            bounds[2 * i + 1] += 0.5 * spacing[i]
-                            bounds[2 * i] -= 0.5 * spacing[i]
-                            origin[i] -= 0.5 * spacing[i]
-                        mesh = np.empty(shape=dims)
-                    if '@1' in line and line[:2] == '@1':
-                        dataSection = True
-                        continue
-                # main data loop
-                else:
-                    data = float(line.strip())
-                    k = index // (dims[0] * dims[1])
-                    j = index // dims[0] - dims[1] * k
-                    i = index - dims[0] * (j + dims[1] * k)
-                    mesh[i, j, k] = data
-                    index += 1
-                    # logger.info 'i,j,k = %s,%s,%s' % (i, j, k)
-
-        return scalar_field.ScalarField(mesh, origin, extent, spacing, bounds)
-
-
-if __name__ == '__main__':
-    #    testHocFname = raw_input('Enter hoc filename: ')
-    #    testReader = Reader(testHocFname)
-    #    testReader.read_hoc_file()
-    #    testAmFname = raw_input('Enter Amira filename: ')
-    for i in range(1000):
-        testAmFname = 'SynapseCount.14678.am'
-        read_scalar_field(testAmFname)
-    logger.info('Done!')
