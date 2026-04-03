@@ -56,41 +56,6 @@ def read_cell_number_file(cell_nr_fn):
     return df.groupby("anatomical_area").apply(lambda x: dict(zip(x["cell_type"], x["nr_of_cells"]))).to_dict()
 
 
-def read_activity_param_by_key(fn, key):
-    """
-    Fetch the PSTHs of each celltype in a barrel cortex :param:`column` for evoked activity reflecting 
-    a passive whisker touch scenario.
-    This method does not generate such data, but reads it in from existing files containing such empirical measurements, 
-    and parses it. These existing data files are set as global variables in this runfile. For other activity data, adapt these file names.
-    
-    The data linked in this runfile are for experiments where the C2 whisker was deflected.
-    For situations where other :param:`deflectedwhisker` are requested, activity data of equivalent
-    columns relative to the C2 is requested.
-    
-    Example:
-        >>> column = 'B2'  # I want activity from B2 column
-        >>> deflectedWhisker = 'C1'  # I want activity reflecting deflection of C1 whisker (not C2)
-        >>> cellType = 'L6ct'
-        >>> params = whisker_evoked_PSTH(column=column, deflectedWhisker=deflectedWhisker, cellType=cellType)
-        >>> print(params)  # This is activity data from the C3 column for C2 whisker deflection i.e. equivalent activity
-        {
-            'distribution': 'PSTH', 
-            'intervals': [(40.0, 41.0), (43.0, 44.0), (49.0, 50.0)], 
-            'probabilities': [0.0057, 0.0057, 0.0057]
-            }
-
-    Args:
-        cellType (str): Which cell type you want the PSTH for.
-
-    Returns:
-        parameters.NTParameterSet: 
-            The PSTH for the given cell type in a C2-relative equivalent column, reflecting the deflection of the given whisker.
-    """
-    cell_type_evoked_activity = scp.build_parameters(filename=fn) 
-    PSTH = cell_type_evoked_activity.get(key)
-    return PSTH
-
-
 def read_nr_connected_cells_from_con(con_file):
     """Read a :ref:`con_file_format` and infer how many cells of each cell type are connected
     
