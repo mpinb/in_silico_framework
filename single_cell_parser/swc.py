@@ -21,6 +21,9 @@ from pathlib import Path
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
+SWC_LABEL_MAP = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
+REVERSE_SWC_LABEL_MAP = {v: k for k, v in SWC_LABEL_MAP.items()}
+
 def _get_swc_lines_per_section(
     cell, 
     skip_myelin=False, 
@@ -55,7 +58,6 @@ def _get_swc_lines_per_section(
     # Construct the per-section swc lines
     swc_lines_per_section = []
     n = 1
-    n_assigned_hillock_sections = 0
     for sec_ind, sec in enumerate(cell.sections):
         parent = sec.parent
         parent_sec_ind = cell.sections.index(parent) if parent is not None else None
@@ -64,9 +66,9 @@ def _get_swc_lines_per_section(
         and sec.label == parent.label \
         and not (sec_ind in remap_sections or parent_sec_ind in remap_sections):
             warnings.warn(
-                "Section {} is an only child of the parent section {} with the same label \"{}\". "
-                "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. "
-                "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. "
+                "Section {} is an only child of the parent section {} with the same label \"{}\". " +\
+                "SWC will not be able to differentiate the two sections. This may induce undesirable behavior. " +\
+                "Notably, segmentation often works on a section-per-section basis, and will deviate if two different sections are considered as one by SWC. " +\
                 "Please consider remapping the section label/type via the keyword argument `remap_sections`.".format(sec_ind, parent_sec_ind, sec.label))
         
         if sec.label == "Soma":
@@ -271,9 +273,9 @@ def _traverse(point_id, sec_name, parent_name, points_dict, sections):
     })
     children_id = points_dict[current_id]["children"]
     for i, child_id in enumerate(children_id):
-        type = points_dict[child_id]["type"]
-        if type in REVERSE_SWC_LABEL_MAP:
-            child_sec_name = REVERSE_SWC_LABEL_MAP[type]
+        section_type = points_dict[child_id]["type"]
+        if section_type in REVERSE_SWC_LABEL_MAP:
+            child_sec_name = REVERSE_SWC_LABEL_MAP[section_type]
         else:
             child_sec_name = f"{sec_name}_{i}"
         _traverse(child_id, child_sec_name, sec_name, points_dict, sections)
@@ -319,10 +321,10 @@ def build_section_directory(root_id, points_dict):
         current_id = children_id[0]
     counters = {}
     for i, child_id in enumerate(points_dict[current_id]["children"]):
-        type = points_dict[child_id]["type"]
-        label = REVERSE_SWC_LABEL_MAP.get(type, f"type{type}")
-        counters[type] = counters.get(type, 0) + 1
-        child_sec_name = f"{label}_{counters[type]}_0"
+        section_type = points_dict[child_id]["type"]
+        label = REVERSE_SWC_LABEL_MAP.get(section_type, f"type{section_type}")
+        counters[section_type] = counters.get(section_type, 0) + 1
+        child_sec_name = f"{label}_{counters[section_type]}_0"
         _traverse(child_id, child_sec_name, "soma", points_dict, sections)
     return sections
 
@@ -345,7 +347,7 @@ def complete_soma(sections):
     # check that the first section is the soma and has only one point
     if len(sections) == 0 or len(sections[0]["points"]) != 1:
         raise ValueError(
-            "Expected the first section to be the soma with exactly one point. "
+            "Expected the first section to be the soma with exactly one point. " +\
             "Cannot complete soma structure."
         )
     xs, ys, zs, ds = sections[0]["points"][0]
@@ -374,7 +376,6 @@ def write_hoc(sections, hoc_filepath):
             if sec["parent_name"] is None: 
                 # start the file with the soma section without newlines
                 f.write(f"{{create {sec['name']}}}")
-            elif sec["parent_name"] is 
             else:
                 f.write(f"\n\n{{create {sec['name']}}}")
                 f.write(f"\n{{connect {sec['name']}(0), {sec['parent_name']}(1)}}")
