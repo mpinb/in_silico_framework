@@ -122,7 +122,6 @@ class Synapse(object):
             x = maxX
         hocSec = targetCell.sections[self.secID]
         for receptor_name, receptor in receptors.items():
-            receptor = receptors[receptor_name]
             # newSyn = eval("h.{}(x, sec=hocSec)".format(receptor_name))
             new_synapse = getattr(h, receptor_name)(x, sec=hocSec)
             new_netcon = h.NetCon(source.spikes, new_synapse)
