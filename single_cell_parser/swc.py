@@ -21,6 +21,9 @@ from pathlib import Path
 import logging
 logger = logging.getLogger("ISF").getChild(__name__)
 
+SWC_LABEL_MAP = {'Soma': 1, "AIS": 2, "Dendrite": 3, "ApicalDendrite": 4, "Myelin": 5}
+REVERSE_SWC_LABEL_MAP = {v: k for k, v in SWC_LABEL_MAP.items()}
+
 def _get_swc_lines_per_section(
     cell, 
     skip_myelin=False, 
