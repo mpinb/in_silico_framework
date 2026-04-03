@@ -273,9 +273,9 @@ def _traverse(point_id, sec_name, parent_name, points_dict, sections):
     })
     children_id = points_dict[current_id]["children"]
     for i, child_id in enumerate(children_id):
-        type = points_dict[child_id]["type"]
-        if type in REVERSE_SWC_LABEL_MAP:
-            child_sec_name = REVERSE_SWC_LABEL_MAP[type]
+        section_type = points_dict[child_id]["type"]
+        if section_type in REVERSE_SWC_LABEL_MAP:
+            child_sec_name = REVERSE_SWC_LABEL_MAP[section_type]
         else:
             child_sec_name = f"{sec_name}_{i}"
         _traverse(child_id, child_sec_name, sec_name, points_dict, sections)
