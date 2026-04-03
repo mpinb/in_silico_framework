@@ -24,16 +24,8 @@ this package provides methods and full workflows that allow you to make random v
 run the stimulus protocols on the cell, and evaluate how much they deviate from the empirically recorded mean.
 Eventually, this random walk through parameter space can explore very diverse biophysical models that are all within the empirical constraints.
 """
-from functools import partial
-import os
 import pandas as pd
-import numpy as np
-import cloudpickle
-import shutil
-from .utils import get_vector_norm
-from data_base.utils import silence_stdout
-import time
-import sys
+from .utils import silence_stdout
 from .RW import RW
 
 def evaluation_function_incremental_helper(

@@ -15,9 +15,11 @@ from .fixtures.data_base_fixtures import (
     empty_db,
     fresh_db,
     sqlite_db,
+    data_base_register,
 )
 
 suppress_modules_list = ["biophysics_fitting", "distributed"]
+
 
 
 class ModuleFilter(logging.Filter):
@@ -143,8 +145,8 @@ def pytest_configure(config):
         config.option.basetemp = win_basetemp
     
     _setup_pytest_logging()
-    import mechanisms.l5pt
-    mechanisms.l5pt.load()   
+    import mechanisms
+    mechanisms.load()   
 
 
 def pytest_sessionstart(session):

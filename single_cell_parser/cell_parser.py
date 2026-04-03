@@ -39,10 +39,6 @@ class CellParser(object):
     It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
     membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
-    See also:
-        This is not the same class as :class:`singlecell_input_mapper.singlecell_input_mapper.cell.CellParser`.
-        This class provides biophysical details, such as segmentation, channel mechanisms, and membrane properties.
-    
     Attributes:
         hoc_path (str): Path to hoc file
         membraneParams (dict): Membrane parameters
@@ -90,12 +86,8 @@ class CellParser(object):
         
         '''
         edgeList = reader.read_hoc_file(self.hoc_path)
-        #part1 = self.hoc_fname.split('_')[0]
-        #part2 = self.hoc_fname.split('_')[1]
-        #part3 = self.hoc_fname.split('.')[-2]
         self.cell = Cell()
-        #self.cell.id = '_'.join([part1, part2, part3])
-        self.cell.hoc_path = self.hoc_path  # sotre path to hoc_file in cell object
+        self.cell.hoc_path = self.hoc_path
 
         # 1. Create all Sections
         for secID, edge in enumerate(edgeList):
@@ -130,8 +122,8 @@ class CellParser(object):
         for sec in self.cell.sections:
             if sec.label != 'Soma':
                 if self.cell.sections[sec.parentID].label == 'Soma':
-                    #                    unfortunately, necessary to enforce that nothing
-                    #                    is connected to soma(0) b/c of ri computation in NEURON
+                    # unfortunately, necessary to enforce that nothing
+                    # is connected to soma(0) b/c of ri computation in NEURON
                     sec.parentx = 0.5
                 sec.connect(self.cell.sections[sec.parentID], sec.parentx, 0.0)
                 sr = h.SectionRef(sec=sec)
@@ -209,11 +201,11 @@ class CellParser(object):
             #if not 'rieke_spines' in parameters.spatialgraph_modify_functions.keys():
             #    if label == 'SpineHead' or label == 'SpineNeck':
             #        continue
-            logger.info('    Adding membrane properties to %s' % label)
+            logger.debug('    Adding membrane properties to %s' % label)
             self.insert_membrane_properties(label, parameters[label].properties)
 
         #  spatial discretization
-        logger.info('    Setting up spatial discretization...')
+        logger.debug('    Setting up spatial discretization...')
         if 'discretization' in parameters:
             f = parameters['discretization']['f']
             max_seg_length = parameters['discretization']['max_seg_length']
@@ -238,7 +230,7 @@ class CellParser(object):
             except AttributeError:
                 pass
             
-            logger.info('    Adding membrane range mechanisms to %s' % label)
+            logger.debug('    Adding membrane range mechanisms to %s' % label)
             self.insert_range_mechanisms(
                 label,
                 parameters[label].mechanisms.range)
@@ -366,8 +358,6 @@ class CellParser(object):
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | exponential            | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}`                                           |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
-            | exponential_by_z_dist  | ``offset``, ``linScale``, ``_lambda``, ``xOffset``              | :math:`y = \text{offset} + \text{linScale} \cdot e^{-\frac{z - \text{xOffset}}{\lambda}}`                                           |
-            +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | capped_exponential     | ``offset``, ``linScale``, ``_lambda``, ``xOffset``, ``max_g``   | :math:`y = \min(\text{offset} + \text{linScale} \cdot e^{-\frac{x - \text{xOffset}}{\lambda}}, \text{max_g})`                       |
             +------------------------+-----------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------+
             | sigmoid                | ``offset``, ``linScale``, ``xOffset``, ``width``                | :math:`y = \text{offset} + \frac{\text{linScale}}{1 + e^{\frac{x - \text{xOffset}}{\text{width}}}}`                                 |
@@ -390,7 +380,7 @@ class CellParser(object):
 
         for mechName in list(mechs.keys()):
             mech = mechs[mechName]
-            logger.info('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
+            logger.debug('        Inserting mechanism %s with spatial distribution %s' %(mechName, mech.spatial))
             
             if mech.spatial == 'uniform':
                 ''' spatially uniform distribution'''
@@ -429,7 +419,7 @@ class CellParser(object):
                                 h.pop_section()
 
             elif mech.spatial == 'linear':
-                ''' spatially linear distribution with negative slope'''
+                ''' spatially linear distribution with slope'''
                 maxDist = self.cell.max_distance(label)
                 #                set origin to 0 of first branch with this label
                 if label == 'Soma':
@@ -457,8 +447,11 @@ class CellParser(object):
                             dist = self.cell.distance_to_soma(sec, seg.x)
                             if relDistance:
                                 dist = dist / maxDist
-                            #rangeVarVal = mech[param]*(dist*slope + offset)
-                            rangeVarVal = max(mech[param] * (dist * slope + 1),
+                            if slope > 0: # positive slope
+                                rangeVarVal = min(mech[param] * (dist * slope + 1),
+                                              mech[param] * offset)
+                            else: 
+                                rangeVarVal = max(mech[param] * (dist * slope + 1),
                                               mech[param] * offset)
                             s = param + '=' + str(rangeVarVal)
                             paramStrings.append(s)
@@ -534,61 +527,6 @@ class CellParser(object):
                             dist = h.distance(seg.x, sec=sec)
                             if relDistance:
                                 dist = dist / maxDist
-                            rangeVarVal = mech[param] * (
-                                offset + linScale * np.exp(_lambda *
-                                                           (dist - xOffset)))
-                            s = param + '=' + str(rangeVarVal)
-                            paramStrings.append(s)
-                        for s in paramStrings:
-                            s = '.'.join(('seg', mechName, s))
-                            exec(s)
-
-            # exponential distribution in the apical dendrite based on the distance by z
-            elif mech.spatial == 'exponential_by_z_dist':
-                ''' spatially exponential distribution:
-                f(x) = offset + linScale*exp(_lambda*(x-xOffset))'''
-                maxDist = self.cell.max_distance(label)
-                #                set origin to 0 of first branch with this label
-                if label == 'Soma':
-                    silent = h.distance(0, 0.0, sec=self.cell.soma)
-                else:
-                    for sec in self.cell.sections:
-                        if sec.label != label:
-                            continue
-                        if sec.parent.label == 'Soma':
-                            silent = h.distance(0, 0.0, sec=sec)
-                            break
-                relDistance = False
-                if mech['distance'] == 'relative':
-                    relDistance = True
-                offset = mech['offset']
-                linScale = mech['linScale']
-                _lambda = mech['_lambda']
-                xOffset = mech['xOffset']
-                for sec in self.cell.structures[label]:
-                    sec.insert(mechName)
-                    if label == 'ApicalDendrite':
-                        relPts_list = sec.relPts
-                        mid_soma = int(self.cell.soma.nrOfPts / 2)
-                        z_distance_per_relPts = [
-                            sec.pts[i][2] - self.cell.soma.pts[mid_soma][2]
-                            for i in range(len(relPts_list))
-                        ]
-                    for seg in sec:
-                        paramStrings = []
-                        for param in list(mech.keys()):
-                            if param == 'spatial' or param == 'distance' or param == 'offset'\
-                            or param == 'linScale' or param == '_lambda' or param == 'xOffset':
-                                continue
-                            if label == 'ApicalDendrite':
-                                dist = np.interp(seg.x, relPts_list,
-                                                 z_distance_per_relPts)
-                            else:
-                                dist = h.distance(seg.x, sec=sec)
-                            if relDistance:
-                                dist = dist / maxDist
-                            if not relDistance:
-                                dist = dist / 1000
                             rangeVarVal = mech[param] * (
                                 offset + linScale * np.exp(_lambda *
                                                            (dist - xOffset)))
@@ -1047,13 +985,13 @@ class CellParser(object):
                     # logger.info '\tnr of segments: %d' % sec.nseg
         totalL = avgL
         avgL /= totalNSeg
-        logger.info(
+        logger.debug(
             '    frequency used for determining discretization: {}'.format(f))
-        logger.info('    maximum segment length: {}'.format(max_seg_length))
-        logger.info('    Total number of compartments in model: %d' % totalNSeg)
-        logger.info('    Total length of model cell: %.2f' % totalL)
-        logger.info('    Average compartment length: %.2f' % avgL)
-        logger.info('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
+        logger.debug('    maximum segment length: {}'.format(max_seg_length))
+        logger.debug('    Total number of compartments in model: %d' % totalNSeg)
+        logger.debug('    Total length of model cell: %.2f' % totalL)
+        logger.debug('    Average compartment length: %.2f' % avgL)
+        logger.debug('    Maximum compartment (%s) length: %.2f' % (maxLabel, maxL))
 
     def _create_ais(self):
         '''Create axon hillock and AIS according to :cite:t:`Mainen_Joerges_Huguenard_Sejnowski_1995`
@@ -1089,10 +1027,10 @@ class CellParser(object):
         hillTaper = (aisDiam - hillBeginDiam) / (nseg - 1)  # from 4mu to 1mu
         hillStep = hillLength / (nseg - 1)
 
-        logger.info('Creating AIS:')
-        logger.info('    soma diameter: %.2f' % somaDiam)
-        logger.info('    axon hillock diameter: %.2f' % hillBeginDiam)
-        logger.info('    initial segment diameter: %.2f' % aisDiam)
+        logger.info('Creating AIS')
+        logger.debug('    soma diameter: %.2f' % somaDiam)
+        logger.debug('    axon hillock diameter: %.2f' % hillBeginDiam)
+        logger.debug('    initial segment diameter: %.2f' % aisDiam)
         '''myelin & nodes'''
         myelinSeg = 25  # nr of segments internode section
         #        myelinDiam = 1.5 # [um]
@@ -1170,11 +1108,31 @@ class CellParser(object):
             myelinBegin = node[-1]
 
     def _create_ais_Hay2013(self):
-        '''Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+        r'''Create axon hillock and AIS according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`
+            
+        This method creates a straight axon hillock, AIS and myelinated axon along the z-axis starting from the bottom of the soma.
+        If the morphology already contains an axon, this axon is disconnected from the soma and left unused.
+        The dimensions of the axon hillock, AIS and myelin are as described in :cite:t:`Hay_Schuermann_Markram_Segev_2013`, but repeated
+        here for completeness:
+        
+        - Axon hillock:
+            - Length: 20 :math:`\mum`
+            - Diameter tapering from 3 :math:`\mum` (at soma) to 1.75 :math:`\mum` (at AIS)
+        - Axon Initial Segment (AIS):
+            - Length: 30 :math:`\mum`
+            - Diameter tapering from 1.75 :math:`\mum` (at hillock) to 1.0 :math:`\mum` (at myelin)
+        - Myelinated axon:
+            - Length: 1000 :math:`\mum`
+        
+        The amount of segments for the axon hillock, AIS and myelin is **not** determined using d-lambda segmentation.
+        Instead, they are set to fixed values to ensure sufficient spatial discretization of these important structures:
+        
+        - Axon hillock: 1 + 2 segments per 10 :math:`\mum`, i.e., 5 segments for a length of 20 :math:`\mum`
+        - AIS: 1 + 2 segments per 10 :math:`\mum`, i.e., 7 segments for a length of 30 :math:`\mum`
+        - Myelinated axon: 1 + 2 segments per 100 :math:`\mum`, i.e., 21 segments for a length of 1000 :math:`\mum`
         
         Note:
-            connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
-            
+            Connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
         '''
         
         '''myelin'''
@@ -1207,10 +1165,10 @@ class CellParser(object):
         #        hillTaper = (aisDiam-hillBeginDiam)/(hillSeg-1)
         #        hillStep = hillLength/(hillSeg-1)
 
-        logger.info('Creating AIS:')
-        logger.info('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
-        logger.info('    initial segment diameter: {:.2f}'.format(aisDiam))
-        logger.info('    myelin diameter: {:.2f}'.format(myelinDiam))
+        logger.info('Creating AIS')
+        logger.debug('    axon hillock diameter: {:.2f}'.format(hillBeginDiam))
+        logger.debug('    initial segment diameter: {:.2f}'.format(aisDiam))
+        logger.debug('    myelin diameter: {:.2f}'.format(myelinDiam))
 
         zAxis = np.array([0, 0, 1])
 
@@ -1285,7 +1243,7 @@ class CellParser(object):
         logger.info(("    spine head length: {}".format(spineheadLength)))
         logger.info(("    spine head diameter: {}".format(spineheadDiam)))
 
-        from config.cell_types import EXCITATORY
+        from config.user.cell_types import EXCITATORY
         excitatory = EXCITATORY.extend("GENERIC")
 
         def get_closest(lst, target):

@@ -1,0 +1,23 @@
+{
+    "synapses": {
+        "receptors": {
+            "glutamate_syn": {
+                "threshold": 0.0,
+                "delay": 0.0,
+                "parameter": {
+                    "tau1": 26.0,
+                    "tau2": 2.0,
+                    "tau3": 2.0,
+                    "tau4": 0.1,
+                    "decayampa": 1.0,
+                    "decaynmda": 1.0,
+                },
+                "weight": [
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        "releaseProb": 0.6,
+    },
+}

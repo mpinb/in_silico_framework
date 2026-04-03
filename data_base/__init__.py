@@ -14,14 +14,19 @@
 # limitations under the License.
 """
 Efficient, reproducible and flexible database with dictionary-like API. 
+
 This package provides efficient and scalable methods to store and access simulation results at a terrabyte scale.
-Each data base entry contains metadata, indicating when the data was written, and the exact version of the source code that was used at this timepoint.
 A wide variety of input data and output file formats are supported (see :mod:`data_base.IO.LoaderDumper`), including:
 
 - 1D and ND numpy arrays
 - pandas and dask dataframes
 - :class:`~single_cell_parser.cell.Cell` objects
-- :class:`~simrun.reduced_model.get_kernel.ReducedLdaModel` objects
+
+Databases saves keys as folders containing at least three files:
+
+- ``Loader``: JSON file containing information on how to load the data
+- ``metadata``: JSON file containing metadata.
+- Data file(s): The actual data, in a format specified by the ``Loader`` file. Some file formats split up the data in multiple files, such as parquet and msgpack.
 
 Simulation results from :mod:`single_cell_parser` and :mod:`simrun` can be imported and converted to a high performance binary format using the :mod:`data_base.db_initializers` subpackage.
 
@@ -52,6 +57,22 @@ Example:
             "dirty": false, 
             "error": null
         }
+
+Saving and loading data is easily achieved::
+
+    from data_base import DataBase
+    
+    db = DataBase('/path/to/database')
+    obj = pd.DataFrame(...)  # some pandas dataframe for example
+    db['my_key'] = obj  # saves the object to the database with the default format
+    loaded_obj = db['my_key']  # loads the object from the database
+    db.set('my_other_key', obj, dumper='pandas_to_msgpack')  # saves the object with a specific format
+    
+When you don't specify the dumper, the default dumper as specified in the configuration file is used.
+The default dumper is purposely chosen to prioritize flexibility (i.e. save anything), not performance (i.e. save something specific very efficiently). 
+Performant data formats will need to be specified explicitly, as they often depend on the object being saved and the intended use case.
+You can (but shouldn't) reconfigure the default dumper in ``config/db_settings.json``
+ 
 """
 import os
 from . import data_base_register

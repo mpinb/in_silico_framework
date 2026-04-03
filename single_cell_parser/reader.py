@@ -18,34 +18,35 @@
 See also:
     :mod:`data_base.IO.LoaderDumper` for dask and pandas related IO.
 '''
-
+from __future__ import annotations
+from typing import List, Dict, Any
 import numpy as np
 from . import scalar_field
 from data_base.dbopen import dbopen
+from config.isf_logging import get_isf_logger
+from typing import Optional
+from config.user.morphology import HOC_LABEL_MAP
 import logging
 
 __author__  = 'Robert Egger'
 __date__    = '2012-03-08'
 
-logger = logging.getLogger("ISF").getChild(__name__)
+logger = get_isf_logger().getChild(__name__)
 
 
 class _Edge(object):
     r'''Convenience class for NEURON segments.
 
     Private class used in :func:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
-    These edges are loosely similar to NEURON segments if full segmentation is used, but should not be used as API to neuron segments.
-    If :math:`d-\lambda` segmentation is used, these edges are **not** comparable to NEURON segments.
+    These edges should not be used as API to neuron segments or sections - they merely serve as a convenience class during the creation of a morphology.
     
-    The purpose of this class is for private use in reading in hoc files: it should not be invoked directly.
-        
     See also:
         :func:`~single_cell_parser.cell_parser.CellParser.determine_nseg` for determining the number of segments in a section, and API
         access to NEURON segments.
         
     See also:
-        :class:`singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
-        that is used in the :mod:`singlecell_input_mapper` module.
+        :class:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
+        that is used in the :mod:`singlecell_input_mapper` reader.
 
     Attributes:
         label (str): label and ID of the segment (e.g. "Dendrite_1_0_0").
@@ -56,6 +57,15 @@ class _Edge(object):
         parentConnect (float): How far along the parent section the connection is (i.e. the `x`-coordinate).
         valid (bool): Flag indicating if the segment is valid.
     '''
+    def __init__(self):
+        self.label: str | None = None
+        self.hocLabel: str | None = None
+        self.edgePts: List[List[float]] | None = None
+        self.diameterList: List[float] | None = None
+        self.parentID: int | None = None
+        self.parentConnect: float | None = None
+        self.valid: bool | None = None
+
 
     def is_valid(self):
         """Check if this edge is valid.
@@ -77,183 +87,141 @@ class _Edge(object):
         self.valid = True
         return True
 
+    def __eq__(self, other):
+        for attr, val in self.__dict__.items():
+            if not val == getattr(other, attr): return False 
+        for attr in other.__dict__:
+            if attr not in self.__dict__: return False
+        return True
 
-def read_hoc_file(fname=''):
-    """Reads a hoc file and returns a list of Edge objects.
-    
-    This list of sections is parsed to a :class:`~single_cell_parser.cell_parser.CellParser` object
-    using :func:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell`.
 
-    See :ref:`hoc_file_format` for more information on the hoc file format.
+def read_hoc_file(
+    fname: str = '',
+    label_map: Optional[Dict[str, str]] = None,
+) -> List[_Edge]:
+    """Read a .hoc morphology file and return a list of Edge objects.
+
+    Instead of hard-coding section-type names, the function extracts the raw
+    label from every ``create <label>`` statement via regex and resolves it
+    through *label_map*.  
     
-    See also:
-        The module :mod:`singlecell_input_mapper` also contains a method
-        :func:`~singlecell_input_mapper.singlecell_input_mapper.reader.read_hoc_file`.
-        A notable **difference** is that this method reads in axon sections,
-        while the :mod:`singlecell_input_mapper` variant does not.
+    The map key is compared against the **prefix** of
+    the raw label (everything before the first ``_``), case-
+    insensitively.  If no key matches, the raw label itself is used as the
+    semantic label so that unknown section types are preserved.
+
+    Mapping a prefix to ``None`` causes those sections to be skipped entirely.
 
     Args:
-        fname (str): The name of the file to be read.
-
-    Raises:
-        IOError: If the input file does not have a `.hoc` or `.HOC` suffix.
+        fname (str): Path to the :ref:`hoc_file_format`
+        label_map (dict[str, str]): Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
 
     Returns:
-        list: A list of :class:`Edge` objects.
+        A list of :class:`_Edge` objects representing the cell morphology
+        (axon sections excluded by default).
 
-    Example:
-        >>> read_hoc_file(hoc_file)
-        [
-            _Edge(
-                label='Soma', 
-                hocLabel='soma', 
-                edgePts=[(1.93339, 221.367004, -450.04599), ... , (13.9619, 210.149002, -447.901001)], 
-                diameterList=[12.542, 13.3094, ... , 3.5997), parentID=None, parentConnect=None),
-            _Edge(
-                label='BasalDendrite_1_0', 
-                hocLabel='BasalDendrite_1_0', 
-                edgePts=[(6.36964, 224.735992, -452.399994), (6.34155, 222.962997, -451.906006), ...], 
-                diameterList=[2.04, 2.04, ... , 2.04), parentID=0, parentConnect=0.009696),
-            ...
-        ]
+    Raises:
+        IOError: If :paramref:`fname` is not a :ref:`hoc_file_format` file, or if the parsed data are internally inconsistent.
     """
-    if not fname.endswith('.hoc') and not fname.endswith('.HOC'):
+    # Pre-compiled patterns
+    _RE_CREATE    = re.compile(r'{create\s+(\w+)}')
+    _RE_PT3DADD   = re.compile(r'{pt3dadd\(([^)]+)\)}')  # matches {pt3dadd(anything that isn't a closing bracket)}
+    _RE_CONNECT   = re.compile(r'{connect\s+\w+\((\d)\)\s*,\s*(\w+)\(([\d.]+)\)}') # matches {connect(anything that isn't a closing bracket)}
+
+
+    if not fname.lower().endswith('.hoc'):
         raise IOError('Input file is not a .hoc file!')
 
+    # Build the effective mapping (caller overrides defaults)
+    effective_map = HOC_LABEL_MAP
+    if label_map is not None: effective_map.update(label_map)
 
-    with dbopen(fname, 'r') as neuronFile:
-        logger.info("Reading hoc file: {}".format(fname))
-        #        cell = co.Cell()
-        #        simply store list of edges
-        #        cell is parsed in CellParser
-        cell = []
-        '''
-        set up all temporary data structures
-        that hold the cell morphology
-        before turning it into a Cell
-        '''
-        tmpEdgePtList = []
-        tmpEdgePtCntList = []
-        tmpDiamList = []
-        tmpLabelList = []
-        tmpHocLabelList = []
-        segmentInsertOrder = {}
-        segmentParentMap = {}
-        segmentConMap = {}
-        readPts = edgePtCnt = insertCnt = 0
+    with dbopen(fname, 'r') as fh:
+        logger.info("Reading hoc file: %s", fname)
+        text = fh.read()
 
-        for line in neuronFile:
-            if line:
-                '''skip comments'''
-                if '/*' in line and '*/' in line:
-                    continue
-                    # '''ignore daVinci registration'''
-                    # if '/* EOF */' in line:
-                    #     break
-                '''read pts belonging to current segment'''
-                if readPts:
-                    if 'Spine' in line:
-                        continue
-                    if 'pt3dadd' in line:
-                        ptStr = line.partition('(')[2].partition(')')[0]
-                        ptStrList = ptStr.split(',')
-                        tmpEdgePtList.append([
-                            float(ptStrList[0]),
-                            float(ptStrList[1]),
-                            float(ptStrList[2])
-                        ])
-                        tmpDiamList.append(float(ptStrList[3]))
-                        edgePtCnt += 1
-                        continue
-                    elif 'pt3dadd' not in line and edgePtCnt:
-                        readPts = 0
-                        tmpEdgePtCntList.append(edgePtCnt)
-                        edgePtCnt = 0
-                '''determine type of section'''
-                '''and insert section name'''
-                if 'soma' in line and 'create' in line:
-                    tmpLabelList.append('Soma')
-                    readPts = 1
-                    edgePtCnt = 0
-                    tmpLine = line.strip('{} \t\n\r')
-                    segmentInsertOrder[tmpLine.split()[1]] = insertCnt
-                    tmpHocLabelList.append(tmpLine.split()[1])
-                    insertCnt += 1
-                if ('dend' in line or
-                        'BasalDendrite' in line) and 'create' in line:
-                    tmpLabelList.append('Dendrite')
-                    readPts = 1
-                    edgePtCnt = 0
-                    tmpLine = line.strip('{} \t\n\r')
-                    segmentInsertOrder[tmpLine.split()[1]] = insertCnt
-                    tmpHocLabelList.append(tmpLine.split()[1])
-                    insertCnt += 1
-                if 'apical' in line and 'create' in line:
-                    tmpLabelList.append('ApicalDendrite')
-                    readPts = 1
-                    edgePtCnt = 0
-                    tmpLine = line.strip('{} \t\n\r')
-                    segmentInsertOrder[tmpLine.split()[1]] = insertCnt
-                    tmpHocLabelList.append(tmpLine.split()[1])
-                    insertCnt += 1
-                if 'axon' in line and 'create' in line:
-                    tmpLabelList.append('Axon')
-                    readPts = 1
-                    edgePtCnt = 0
-                    tmpLine = line.strip('{} \t\n\r')
-                    segmentInsertOrder[tmpLine.split()[1]] = insertCnt
-                    tmpHocLabelList.append(tmpLine.split()[1])
-                    insertCnt += 1
-                '''determine connectivity'''
-                if 'connect' in line:
-                    #                        if 'soma' in line:
-                    #                            segmentParentMap[insertCnt-1] = 'soma'
-                    #                            continue
-                    splitLine = line.split(',')
-                    parentStr = splitLine[1].strip()
-                    name_end = parentStr.find('(')
-                    conEnd = parentStr.find(')')
-                    segmentParentMap[insertCnt - 1] = parentStr[:name_end]
-                    segmentConMap[insertCnt - 1] = float(parentStr[name_end +
-                                                                   1:conEnd])
+    # Remove /* ... */ comments (including multi-line ones)
+    text = re.sub(r'/\*.*?\*/', '', text, flags=re.DOTALL)
+
+    create_idxs = [m.start() for m in _RE_CREATE.finditer(text)]
+    if not create_idxs: return []
+
+    block_texts = [
+        text[start:end]
+        for start, end in zip(
+            create_idxs,
+            create_idxs[1:] + [len(text)]
+        )
+    ]
+
+    sections: list[Dict[str, Any]] = [] 
+    insert_order: Dict[str, int] = {}  # hoc_label -> sequential index
+
+    for block in block_texts:
+        m_create = _RE_CREATE.search(block)
+        if not m_create: continue
+        hoc_label: str = m_create.group(1)          # e.g. "dend_1_0"
+
+        # Derive the base label: everything before the first '_' or digit
+        label = re.match(r'([A-Za-z\d]+)', hoc_label)  # match letters and numbers, NOT underscores
+        label = label.group(1).lower() if label else hoc_label.lower()
+
+        if label in effective_map:
+            semantic_label = effective_map[label]
+            if semantic_label is None: continue
+        else: semantic_label = hoc_label 
+
+        if 'Spine' in block: continue
+
+        pt_matches = _RE_PT3DADD.findall(block)    # list of "x,y,z,d" strings
+        if not pt_matches: continue  # ignore non-matches
+
+        coords = [list(map(float, s.split(','))) for s in pt_matches]
+        edge_pts      = [[c[0], c[1], c[2]] for c in coords]
+        diameter_list = [c[3]               for c in coords]
+
+        parent_hoc_label: Optional[str] = None
+        parent_connect:   Optional[float] = None
+        m_connect = _RE_CONNECT.search(block)
+        if m_connect and semantic_label != 'Soma':
+            if int(m_connect.group(1)) != 0: raise ValueError("HOC file contains sections whose starting point connects at a nonzero relative coordinate.")
+            parent_hoc_label = m_connect.group(2)
+            parent_connect   = float(m_connect.group(3))
+
+        insert_idx = len(sections)
+        insert_order[hoc_label] = insert_idx
+
+        sections.append({
+            'hoc_label':        hoc_label,
+            'semantic_label':   semantic_label,
+            'edge_pts':         edge_pts,
+            'diameter_list':    diameter_list,
+            'parent_hoc_label': parent_hoc_label,
+            'parent_connect':   parent_connect,
+        })
 
 
-            # end for loop
-        '''make sure EOF doesn't mess anything up'''
-        if len(tmpEdgePtCntList) == len(tmpLabelList) - 1 and edgePtCnt:
-            tmpEdgePtCntList.append(edgePtCnt)
-        '''put everything into Cell'''
-        ptListIndex = 0
-        if len(tmpEdgePtCntList) == len(tmpLabelList):
-            for n in range(len(tmpEdgePtCntList)):
-                #                data belonging to this segment
-                thisSegmentID = tmpLabelList[n]
-                thisNrOfEdgePts = tmpEdgePtCntList[n]
-                thisSegmentPtList = tmpEdgePtList[ptListIndex:ptListIndex +
-                                                  thisNrOfEdgePts]
-                thisSegmentDiamList = tmpDiamList[ptListIndex:ptListIndex +
-                                                  thisNrOfEdgePts]
-                ptListIndex += thisNrOfEdgePts
-                #                create edge
-                segment = _Edge()
-                segment.label = thisSegmentID
-                segment.hocLabel = tmpHocLabelList[n]
-                segment.edgePts = thisSegmentPtList
-                segment.diameterList = thisSegmentDiamList
-                if thisSegmentID != 'Soma':
-                    segment.parentID = segmentInsertOrder[segmentParentMap[n]]
-                    segment.parentConnect = segmentConMap[n]
-                else:
-                    segment.parentID = None
-                if segment.is_valid():
-                    cell.append(segment)
-                else:
-                    raise IOError('Logical error reading hoc file: invalid segment')
+    edge_list = []
+    for sec in sections:
+        edge     = _Edge()
+        edge.label      = sec['semantic_label']
+        edge.hocLabel   = sec['hoc_label']
+        edge.edgePts    = sec['edge_pts']
+        edge.diameterList = sec['diameter_list']
 
+        if sec['semantic_label'] != 'Soma' and sec['parent_hoc_label']:
+            if sec['parent_hoc_label'] not in insert_order:
+                raise IOError(f"Logical error: parent '{sec['parent_hoc_label']}' of section '{sec['hoc_label']}' was not found.")
+            edge.parentID      = insert_order[sec['parent_hoc_label']]
+            edge.parentConnect = sec['parent_connect']
         else:
-            raise IOError('Logical error reading hoc file: Number of labels does not equal number of edges')
+            edge.parentID = None
 
-        return cell
+        if edge.is_valid(): edge_list.append(edge)
+        else: raise IOError(f"Logical error reading hoc file: invalid segment '{sec['hoc_label']}'")
+
+    return edge_list
+
 
 
 def read_scalar_field(fname='', dtype=np.float64):

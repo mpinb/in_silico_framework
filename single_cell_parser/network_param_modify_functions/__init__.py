@@ -19,7 +19,7 @@
 
 # import Interface as I
 import pandas as pd
-from config.cell_types import EXCITATORY, INHIBITORY
+from config.user.cell_types import EXCITATORY, INHIBITORY
 
 def change_ongoing_interval(n, factor=1, pop=None):
     '''Scales the ongoing frequency with a :paramref:`factor`.

@@ -50,6 +50,15 @@ def stream_to_logger(logger, level=None):
         sys.stdout = stdout
         sys.stderr = stderr
 
+@contextmanager
+def silence_logger(name=None, level=logging.CRITICAL):
+    """Silence a named logger (or the root logger if name=None)."""
+    logger = get_isf_logger()
+    if name is not None: logger = logger.getChild(suffix=name)
+    old_level = logger.level
+    logger.setLevel(level)
+    try: yield logger
+    finally: logger.setLevel(old_level)
 
 class LastPartFilter(logging.Filter):
     """
@@ -150,6 +159,8 @@ def _get_log_formatter():
         formatter = logging.Formatter("[%(levelname)s] %(name_last)s: %(message)s")
 
     return formatter
+
+
 
 
 # Lazy logger setup

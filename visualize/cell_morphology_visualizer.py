@@ -594,7 +594,7 @@ class CMVDataParser:
             self._calc_ion_dynamics_timeseries(keyword)  # Only happens if necessary
 
         else:
-            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
+            raise ValueError("Scalar data keyword \"{}\" not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\"".format(keyword))
 
     def _get_scalar_data(
         self, 
@@ -622,6 +622,15 @@ class CMVDataParser:
         Returns:
             list: list of scalar data. If :param:`return_as_color` is True, this is a list of colors. Otherwise, it is the raw scalar data.
         """
+        # Keyword is a fixed color: no scalar data needs to be calculated.
+        if keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
+            # These colors are defined per section, not per segment.
+            return_data = [[keyword]]
+            for sec in self.cell.sections:
+                if not sec.label in ("AIS", "Myelin", "Soma"):
+                    return_data.append([keyword for _ in sec.pts])
+            return return_data
+
         self._calc_scalar_data(keyword)
 
         # -------------- Fixed colors
@@ -639,13 +648,6 @@ class CMVDataParser:
                     return_data.append('grey')
             return return_data
 
-        elif keyword in list(mcolors.BASE_COLORS) + list(mcolors.TABLEAU_COLORS) + list(mcolors.CSS4_COLORS) + list(mcolors.XKCD_COLORS):
-            # These colors are defined per section, not per segment.
-            return_data = [[keyword]]
-            for sec in self.cell.sections:
-                if not sec.label in ("AIS", "Myelin", "Soma"):
-                    return_data.append([keyword for _ in sec.pts])
-            return return_data
 
         # -------------- Keyword colors       
         elif keyword.lower() in ("voltage", "vm"):
@@ -655,7 +657,7 @@ class CMVDataParser:
             data_per_section = self._get_ion_dynamics_at_timepoint(time_point, keyword)
             
         else:
-            raise ValueError("Color keyword not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors")
+            raise ValueError("Color keyword \"{}\" not recognized. Available options are: \"voltage\", \"vm\", \"dendrites\", \"dendritic group\", a color from self.possible_scalars, or a color from matplotlib.colors".format(keyword))
 
         if return_as_color:
             self.update_cmap(keyword)
@@ -1223,6 +1225,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             point_scalar_data=scalar_data)
         logger.info("VTK files written to {}".format(out_dir))
 
+
 class CellMorphologyInteractiveVisualizer(CMVDataParser):
     """Plot an interactive 3D render of a cell morphology using Plotly and Dash.
     
@@ -1268,7 +1271,8 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         dash_ip=None,
         show=True,
         renderer="notebook_connected",
-        t_start=None, t_stop=None, t_step=None
+        t_start=None, t_stop=None, t_step=None,
+        notebook_mode=True,
         ):
         """Initializes the CellMorphologyInteractiveVisualizer object.
         
@@ -1289,12 +1293,14 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         self.show = show  # set to False for testing
         self.renderer = renderer
         self.background_color="#f0f0f0"
+        self.notebook_mode = True
 
     def _get_interactive_cell(
         self, 
         color=None,
         time_point=None,
-        diameter=None):
+        diameter=None
+        ):
         '''Setup plotly for rendering in notebooks.
         Shows an interactive 3D render of the Cell with NO data overlayed.
 
@@ -1308,7 +1314,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
             plotly.graph_objs._figure.Figure: an interactive figure. Usually added to a ipywidgets.VBox object
         '''
 
-        py.init_notebook_mode()
+        if self.notebook_mode: py.init_notebook_mode()
         pio.renderers.default = self.renderer
         transparent = "rgba(0, 0, 0, 0)"
         ax_layout = dict(
@@ -1359,7 +1365,9 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
     def _get_interactive_dash_app(
         self,
         color,
-        t_start, t_stop, t_step,
+        t_start, 
+        t_stop, 
+        t_step,
         ):
         """This is the main function to set up an interactive plot with scalar data overlayed.
         It fetches the scalar data of interest (usually membrane voltage, but others are possible; check with self.possible_scalars).
@@ -1371,12 +1379,13 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
         Returns:
             ipywidgets.VBox object: an interactive render of the cell.
         """
+        assert self.voltage_timeseries is not None, "The interactive dash app includes the voltage trace, but no voltage was calculated yet. Have you specified a time range?"
         self._update_times_to_show(t_start, t_stop, t_step)
         sections = self._morphology_unconnected['sec_n']
 
         #------------ Create figure
         # Interactive cell
-        fig_cell = self._get_interactive_cell()
+        fig_cell = self._get_interactive_cell(color=color)
         fig_cell.add_trace(
             go.Scatter3d(
                 x=[0], y=[0], z=[0],
@@ -1497,7 +1506,34 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
                 Options: "voltage", "vm", "synapses", "synapse", or a color string, or a nested list of colors for each section
             time_point (float | int): time_point at which to plot some scalar data. Ignored when color does not refer to scalar data.
             diameter: If the actual diameter is poorly visible, set this value to a fixed diameter.
-        
+            renderer (str): Type of backend renderer to use for rendering the javascript/HTML VBox. 
+                Defaults to "notebook_connected". Available renderers are:
+                
+                - 'plotly_mimetype'
+                - 'jupyterlab'
+                - 'nteract'
+                - 'vscode'
+                - 'notebook'
+                - 'notebook_connected'
+                - 'kaggle'
+                - 'azure'
+                - 'colab'
+                - 'cocalc'
+                - 'databricks'
+                - 'json'
+                - 'png'
+                - 'jpeg'
+                - 'jpg'
+                - 'svg'
+                - 'pdf'
+                - 'browser'
+                - 'firefox'
+                - 'chrome'
+                - 'chromium'
+                - 'iframe'
+                - 'iframe_connected'
+                - 'sphinx_gallery'
+                - 'sphinx_gallery_png'
         """
         if self._keyword_is_scalar_data(color) and time_point is None:
             raise ValueError("You passed scalar data {} as a color, but didn't provide a timepoint at which to plot this. Please specify time_point.".format(color))
@@ -1529,6 +1565,7 @@ class CellMorphologyInteractiveVisualizer(CMVDataParser):
             port=5050,
             host=self.dash_ip)
 
+
 def get_3d_plot_morphology(
     lookup_table=None,
     colors="grey",
@@ -1544,7 +1581,9 @@ def get_3d_plot_morphology(
     synapse_legend=True,
     legend=None,
     return_figax = True,
-    proj_type="ortho"
+    proj_type="ortho",
+    fig = None,  
+    ax = None
     ):
     """Constructs a 3d matplotlib plot of a cell morphology, overlayed with some scalar data.
     
@@ -1570,21 +1609,25 @@ def get_3d_plot_morphology(
         synapse_legend (bool): Whether the synapse activations legend should appear in the plot
         legend (bool): Whether the legend for scalar data (e.g. membrane voltage) should appear in the plot
         return_figax (bool): Whether to return the figure and axis objects. Default: True
-        proj_type (str): Projection type for the 3D plot. Default: "ortho"
+        proj_type (str): Projection type for the 3D plot, ignored if fig and ax are provided. Default: "ortho"
+        fig (matplotlib.figure.Figure): Figure object to plot on. If None, a new figure and axes will be created.
+        ax (matplotlib.axes._subplots.Axes3DSubplot): Axes object. Ignored if fig is None. Note that it must be created as a 3D axes with the intended projection type.
     
     Returns:
         tuple | None: fig and ax object if :param:`return_figax` is True. None otherwise.
     """
     #----------------- Generic axes setup
-    fig = plt.figure(
-        figsize=(15, 15), 
-        dpi=dpi,
-        num=str(time_point) if time_point is not None else None)
-    ax = plt.axes(projection='3d', proj_type=proj_type)
+    if not fig: 
+        assert not ax, "If no figure is given, ax argument is ignored!"
+        fig = plt.figure(
+            figsize=(15, 15), 
+            dpi=dpi,
+            num=str(time_point) if time_point is not None else None)
+        ax = plt.axes(projection='3d', proj_type=proj_type)
     ax.set_xticks([])
     ax.set_yticks([])
     ax.set_zticks([])
-    plt.axis('off')
+    ax.axis('off')
     ax.set_xlabel('x')
     ax.set_ylabel('y')
     ax.set_zlabel('z')

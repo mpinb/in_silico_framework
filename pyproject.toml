@@ -16,7 +16,7 @@ name = "ISF"
 requires-python = ">=3.8"
 version = "0.5.0-beta"
 
-[tool.pixi.project]
+[tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-arm64", "win-64"]
 
@@ -59,13 +59,15 @@ seaborn = ">=0.12.2,<0.13"
 scipy = "1.5.2.*"
 wheel = ">=0.45.1,<0.46"
 zarr = ">=2.15.0,<3"
+pyarrow = ">=18.0.0,<22"
+# for extracting barrel cortex data (optional)
+7zip = ">=26.0,<27"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"
 redis = ">=5.2.0,<6"
 isf-pandas-msgpack = ">=0.4.0"
 blosc = ">=1.11.1,<2"
-pyarrow = ">=7.0.0,<12"
 blenderspike-py = { git = "https://github.com/ArtemKirsanov/BlenderSpike.git" }
 
 # OS specific dependencies
@@ -256,3 +258,32 @@ remove_tutorial_content = {cmd = [
   ], description = "Remove tutorial content from docs"}
 build_docs = {cmd = ["make", "html"], description = "Build the documentation", cwd="docs", depends-on = ["remove_tutorial_content"]}
 host_docs = {cmd = ["python", "-m", "http.server", "8000"], description = "Host the documentation", cwd="docs/_build/html"}
+
+
+[tool.coverage.run]
+# Ignore temporary dask files during test suite.
+omit = ["dask-worker-space/*", "*/dask-worker-space/*"]
+
+[tool.basedpyright]
+pythonVersion = "3.8"
+# we don't typehint arguments
+reportUnknownArgumentType = false
+reportArgumentType = false
+# we don't typehint class instance variables
+reportUnknownMemberType = false
+# we don't typehing variables
+reportUnknownVariableType = false
+# Otherwise passing args to get or set gives error: No overloads for "__getitem__" match the provided arguments (basedpyrightreportCallIssue)
+reportCallIssue = false
+# We don't typehing parameters or functions
+reportUnknownParameterType = false
+reportMissingParameterType = false
+# usually caught by the linter. there are many reasons why imports may remain unused, this clutters warnings
+reportUnusedImport = false
+# we allow "private" imports
+reportPrivateLocalImportUsage = false
+# When you call a function and don't care about the return value
+reportUnusedCallResult = false
+reportUnannotatedClassAttribute = false
+ignore = ["**/*.ipynb"]
+exclude = ["**/*.ipynb", "**.pixi**"]

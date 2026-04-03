@@ -41,7 +41,7 @@ import warnings
 import neuron
 import tables  # so florida servers have no problem with neuron
 
-from config.cell_types import EXCITATORY
+from config.user.cell_types import EXCITATORY
 
 from . import network_param_modify_functions
 from .cell import Cell, PointCell, PySection, SynParameterChanger
@@ -64,7 +64,6 @@ from .reader import (
 from .synapse_mapper import SynapseMapper
 from .writer import (
     write_all_traces,
-    write_cell_simulation,
     write_cell_synapse_locations,
     write_landmark_file,
     write_presynaptic_spike_times,
@@ -81,7 +80,7 @@ __credits__ = ["Robert Egger", "Arco Bast"]
 
 def create_cell(
     parameters, 
-    scaleFunc=None, 
+    scaleFunc=None,  # deprecated
     allPoints=False, 
     setUpBiophysics=True, 
     silent=False
@@ -91,18 +90,19 @@ def create_cell(
     Adds spatial discretization and inserts biophysical mechanisms according to parameter file
 
     Args:
-        parameters (dict | dict-like):
-            A nested dictionary structure, read from a :ref:`cell_parameters_format` file.
+        parameters (:class:`~single_cell_parser.parameters.NTParameterSet`):
+            A :ref:`cell_parameters_format` object.
             Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc_file_format` file (e.g. "AIS", "Soma" ...).
             Optional keys include: ``cell_modify_functions``, ``discretization``
-        scaleFunc (bool):
-            DEPRECATED,  should be specified in the parameters, as described in :meth:`~single_cell_parser.cell_modify_funs`
         allPoints (bool):
             Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule).
             Will be passed to ``full`` in :meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
         setUpBiophysics (bool):
             Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
 
+    .. deprecated 0.5.0::
+       The ``scaleFunc` argument is depracated and may be removed in a future version.
+       For scaling the morphoplogy, use ``cell_param_modify_funs`` instead.
     """
     if scaleFunc is not None:
         warnings.warn(

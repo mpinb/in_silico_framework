@@ -7,7 +7,7 @@ from functools import partial
 import pandas as pd
 import single_cell_parser as scp
 
-from biophysics_fitting import L5tt_parameter_setup
+from biophysics_fitting.hay import L5tt_parameter_setup
 from biophysics_fitting.hay import default_setup as hay_default_setup
 from biophysics_fitting.optimizer import get_max_generation, start_run
 from data_base import utils
