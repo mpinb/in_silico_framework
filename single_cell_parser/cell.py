@@ -613,10 +613,9 @@ class PySection(nrn.Section):
             cell (:class:`~single_cell_parser.cell.Cell`, optional): reference to the cell object
             label (str, optional): label of the section
         '''
-        if name is None:
-            name = ''
+        if name is None: name = ''
         if cell is None:
-            nrn.Section.__init__(self)
+            nrn.Section.__init__(self, name=name)
         else:
             nrn.Section.__init__(self, name=name, cell=cell)
         self.label = label
