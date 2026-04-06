@@ -23,7 +23,7 @@ def read_synapse_weight_file(fname):
     Args: 
         fname (str): 
             Synapse weight filename. 
-            See: :func:`~single_cell_parser.writer.write_synapse_weight_file`.
+            See: :func:`~single_cell_parser.io.activity.write_synapse_weight_file`.
     
     Returns: 
         tuple: two dictionaries with cell types as keys, ordered the same as the anatomical synapses:
@@ -74,7 +74,7 @@ def read_synapse_activation_file(fname):
         using Python's ``open()`` and ``read()`` capabilities, but this is not recommended, or efficient.
     
     
-    In contrast to :func:`~single_cell_parser.reader.read_complete_synapse_activation_file`, this reader does not return the structure label.
+    In contrast to :func:`~single_cell_parser.io.connectivity.read_complete_synapse_activation_file`, this reader does not return the structure label.
     
     Args:
         fname (str): 

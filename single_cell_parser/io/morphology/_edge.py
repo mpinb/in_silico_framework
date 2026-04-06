@@ -27,7 +27,7 @@ class _Edge(object):
         access to NEURON segments.
         
     See also:
-        :class:`~singlecell_input_mapper.singlecell_input_mapper.reader._Edge` for a similar class 
+        :class:`~singlecell_input_mapper.singlecell_input_mapper.io.connectivity._Edge` for a similar class 
         that is used in the :mod:`singlecell_input_mapper` reader.
 
     Attributes:

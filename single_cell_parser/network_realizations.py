@@ -69,7 +69,7 @@ def create_synapse_realization(
             synapseList.append(syn.coordinates)
         tmpSyns = {}
         tmpSyns[synType] = cell.synapses[synType]
-        writer.write_cell_synapse_locations(name + '.syn', tmpSyns, cell.id)
+        write_cell_synapse_locations(name + '.syn', tmpSyns, cell.id)
 
 
 def create_functional_network(cellParamName, nwParamName):

@@ -24,8 +24,8 @@ def read_synapse_realization(fname):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :func:`~single_cell_parser.reader.read_pruned_synapse_realization`.
-    - :func:`~single_cell_parser.writer.write_cell_synapse_locations` for the corresponding writer.
+    - :func:`~single_cell_parser.io.connectivity.read_pruned_synapse_realization`.
+    - :func:`~single_cell_parser.io.connectivity.write_cell_synapse_locations` for the corresponding writer.
     
     Args:
         fname (str): The name of the file to be read.
@@ -93,8 +93,8 @@ def read_pruned_synapse_realization(fname):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :func:`~single_cell_parser.reader.read_synapse_realization`.
-    - :func:`~single_cell_parser.writer.write_pruned_synapse_locations` for the corresponding writer.
+    - :func:`~single_cell_parser.io.connectivity.read_synapse_realization`.
+    - :func:`~single_cell_parser.io.connectivity.write_pruned_synapse_locations` for the corresponding writer.
     
     Args:
         fname (str): The name of the file to be read.
@@ -152,7 +152,7 @@ def read_functional_realization_map(fname):
     See also:
 
     - :ref:`con_file_format` for more information on the `.con` file format.
-    - :func:`~single_cell_parser.writer.write_functional_realization_map` for the corresponding writer.
+    - :func:`~single_cell_parser.io.connectivity.write_functional_realization_map` for the corresponding writer.
 
     Args:
         fname (str): The name of the file to be read.
@@ -203,12 +203,12 @@ def write_pruned_synapse_locations(fname=None, synapses=None, cellID=None):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :func:`single_cell_parser.reader.read_pruned_synapse_realization` for the corresponding reader function.
+    - :func:`single_cell_parser.io.connectivity.read_pruned_synapse_realization` for the corresponding reader function.
     - :func:`write_cell_synapse_locations` for a similar function that does not include a `pruned` flag.
 
     Args:
         fname (str): The name of the file to write to.
-        synapses (dict): A dictionary of synapses (see :func:`~single_cell_parser.reader.read_pruned_synapse_locations`).
+        synapses (dict): A dictionary of synapses (see :func:`~single_cell_parser.io.connectivity.read_pruned_synapse_locations`).
         cellID (str): The ID of the cell.
 
     Returns:
@@ -251,7 +251,7 @@ def write_cell_synapse_locations(fname=None, synapses=None, cellID=None):
     See also:
 
     - :ref:`syn_file_format` for more information on the `.syn` file format.
-    - :func:`single_cell_parser.reader.read_synapse_realization` for the corresponding reader function.
+    - :func:`single_cell_parser.io.connectivity.read_synapse_realization` for the corresponding reader function.
     - :func:`write_pruned_synapse_locations` for a similar function that includes a `pruned` flag.
 
     Args:
@@ -300,7 +300,7 @@ def write_functional_realization_map(
     See also:
 
     - :ref:`con_file_format` for more information on the `.con` file format.
-    - :func:`single_cell_parser.reader.read_functional_realization_map` for the corresponding reader function.
+    - :func:`single_cell_parser.io.connectivity.read_functional_realization_map` for the corresponding reader function.
 
     Args:
         fname (str): The name of the file to write to.

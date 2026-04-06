@@ -46,7 +46,7 @@ from collections import Sequence
 import numpy as np
 from .cell import PointCell, SpikeTrain
 from .io.activity import read_synapse_weight_file, read_synapse_activation_file
-from .io.connectivity import write_functional_realization_map
+from .io.connectivity import write_functional_realization_map, read_synapse_realization, read_functional_realization_map
 from .synapse_mapper import SynapseMapper
 #import synapse
 from neuron import h
@@ -385,7 +385,7 @@ class NetworkMapper:
                     format(preType))
                 synapseFName = self.nwParam[preType].synapses.distributionFile
                 # ready .syn file
-                synDist = reader.read_synapse_realization(synapseFName)
+                synDist = read_synapse_realization(synapseFName)
                 #                TODO: implement fix that allows mapping of synapses of different
                 #                types from the same file in addition to the current setup.
                 #                Possible fix follows:
@@ -936,7 +936,7 @@ class NetworkMapper:
             activeSyn = 0
             connectedCells = set()
             funcMapName = self.nwParam[synType].synapses.connectionFile
-            connections, anatomicalID = reader.read_functional_realization_map(
+            connections, anatomicalID = read_functional_realization_map(
                 funcMapName)
             functionalMap = connections[synType]
             anatomicalRealizationName = self.nwParam[
@@ -1018,7 +1018,7 @@ class NetworkMapper:
             funcMapName = self.nwParam[synType].synapses.connectionFile
             if funcMapName != previousConnectionFile:
                 logger.info('loading anatomical connectivity file {:s}'.format(funcMapName))
-                connections, anatomicalID = reader.read_functional_realization_map(funcMapName)
+                connections, anatomicalID = read_functional_realization_map(funcMapName)
                 previousConnectionFile = funcMapName
             else:
                 logger.info('anatomical connectivity file already loaded')
