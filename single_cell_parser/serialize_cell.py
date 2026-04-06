@@ -130,15 +130,16 @@ def restore_cell_from_serializable_object(sc):
     # create morphology file
     with mkdtemp() as tempdir:
         if 'hoc' in sc.keys():
-            hoc_file_path = os.path.join(tempdir, 'morphology.hoc')
-            with dbopen(hoc_file_path, 'w') as hoc_file:
+            morph_fn = os.path.join(tempdir, 'morphology.hoc')
+            with dbopen(morph_fn, 'w') as hoc_file:
                 hoc_file.write(sc['hoc'])
-            morph_fn = sc['hoc']
         elif "swc" in sc.keys():
-            swc_file_path = os.path.join(tempdir, 'morphology.swc')
-            with dbopen(swc_file_path, 'w') as swc_file:
+            morph_fn = os.path.join(tempdir, 'morphology.swc')
+            with dbopen(morph_fn, 'w') as swc_file:
                 swc_file.write(sc['swc'])
-            morph_fn = sc['swc']
+
+
+        else: raise NotImplementedError("The morphology file format must be in: [.swc, .hoc]")
 
         ##############################
         # the following code has to be kept up to date with the
