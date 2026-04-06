@@ -20,10 +20,11 @@ import warnings, traceback
 from neuron import h
 import numpy as np
 import math
-from . import reader
+from .io.morphology import read_morphology
 from .cell import PySection, Cell
 from . import cell_modify_functions
 import logging
+from pathlib import Path
 
 __author__  = ["Robert Egger", "Arco Bast"]
 __credits__ = ["Robert Egger", "Arco Bast"]
@@ -46,24 +47,19 @@ class CellParser(object):
             Whether or not cell modify functions have already been applied. See: :func:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
         cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
     '''
-    #    h = neuron.h
     cell = None
 
-    def __init__(self, hocFilename=''):
+    def __init__(self, fn=''):
         '''
         Args:
             hocFilename (str): Path to :ref:`hoc_file_format` file.
         '''
-        if not hocFilename:
-            warnings.warn('No hoc file specified')
-        self.hoc_path = hocFilename
-        #         self.hoc_fname = self.hoc_path.split('/')[-1]
-
-        #        implement parameters to be read from
-        #        corresponding membrane file
-        #        (analogous to synapse distribution,
-        #        every cell could have its own optimized
-        #        channel distributions)
+        if not fn: warnings.warn('No morphology file specified')
+        self.path = fn
+        self.hoc_path = ""
+        self.swc_path = ""
+        if Path(fn).suffix.lower() == ".hoc": self.hoc_path = fn
+        elif Path(fn).suffix.lower() == ".swc": self.swc_path = fn
         self.membraneParams = {}
         self.cell_modify_functions_applied = False
 
@@ -85,18 +81,24 @@ class CellParser(object):
             Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
         
         '''
-        edgeList = reader.read_hoc_file(self.hoc_path)
+        edgeList = read_morphology(fn=self.path)
         self.cell = Cell()
         self.cell.hoc_path = self.hoc_path
+        self.cell.swc_path = self.swc_path
+        self.cell.path = self.path
 
         # 1. Create all Sections
         for secID, edge in enumerate(edgeList):
-            sec = PySection(edge.hocLabel, self.cell.id, edge.label)
+            sec = PySection(
+                name=edge.hocLabel, 
+                cell=self.cell.id, 
+                label=edge.label
+            )
             sec.secID = secID
             if sec.label != 'Soma':
                 sec.parentx = edge.parentConnect
                 sec.parentID = edge.parentID
-            sec.set_3d_geometry(edge.edgePts, edge.diameterList)
+            sec.set_3d_geometry(pts=edge.edgePts, diams=edge.diameterList)
             self.cell.sections.append(sec)
             if sec.label == 'Soma':
                 self.cell.soma = sec

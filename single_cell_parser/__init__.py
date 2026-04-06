@@ -51,28 +51,29 @@ from .parameters import NTParameterSet, build_parameters, load_NMODL_parameters
 # from synapse import activate_functional_synapse
 from .network import NetworkMapper
 from .network_realizations import create_functional_network, create_synapse_realization
-from .reader import (
+from .io.activity import (
     read_complete_synapse_activation_file,
-    read_functional_realization_map,
-    read_landmark_file,
-    read_scalar_field,
     read_spike_times_file,
     read_synapse_activation_file,
-    read_synapse_realization,
     read_synapse_weight_file,
-)
-from .synapse_mapper import SynapseMapper
-from .writer import (
     write_all_traces,
-    write_cell_synapse_locations,
-    write_landmark_file,
     write_presynaptic_spike_times,
     write_PSTH,
-    write_sim_results,
     write_spike_times_file,
     write_synapse_activation_file,
     write_synapse_weight_file,
 )
+from .io.connectivity import (
+    read_synapse_realization,
+    read_functional_realization_map,
+    write_cell_synapse_locations,
+)
+from .io.amira import (
+    read_landmark_file,
+    read_scalar_field,
+    write_landmark_file,
+)
+from .synapse_mapper import SynapseMapper
 
 __author__ = "Robert Egger"
 __credits__ = ["Robert Egger", "Arco Bast"]
@@ -117,7 +118,7 @@ def create_cell(
         axon = True
 
     logger.info("Loading cell morphology...")
-    parser = CellParser(parameters.filename)
+    parser = CellParser(fn=parameters.filename)
     parser.spatialgraph_to_cell(parameters, axon, scaleFunc)
     if setUpBiophysics:
         logger.info("Setting up biophysical model...")

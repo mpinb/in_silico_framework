@@ -28,6 +28,7 @@ import pandas as pd
 import six
 
 import single_cell_parser as scp
+from single_cell_parser.io.connectivity import read_functional_realization_map
 from data_base.dbopen import resolve_db_path, resolve_reldb_path
 
 defaultdict_defaultdict = lambda: defaultdict(lambda: defaultdict_defaultdict())
@@ -50,7 +51,7 @@ def get_cellnumbers_from_confile(confile):
     Returns:
         dict: A dictionary of the format ``{"cell_type": amount_of_cells}``
     """
-    con = scp.reader.read_functional_realization_map(confile)
+    con = read_functional_realization_map(confile)
     con = con[0]
     return {cell_type: con[cell_type][-1][1] + 1 for cell_type in list(con.keys())}
 

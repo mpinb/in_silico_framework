@@ -73,6 +73,9 @@ class Cell(object):
     '''
     def __init__(self):
         self.hoc_path = None
+        self.swc_path = None
+        self.path = None
+
         self.id = None
         self.soma = None
         self.tree = None  # TODO: implement trees in python to avoid NEURON section stack problems that may occur during use of SectionLists

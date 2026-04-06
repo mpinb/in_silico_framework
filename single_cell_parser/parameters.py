@@ -338,6 +338,12 @@ class NTParameterSet(MutableMapping):
 
 
 class CompactListEncoder(json.JSONEncoder):
+    """Custom JSON encoder to keep lists on a single line
+
+    Default JSON behavior is to break lines on commas. This makes many parameter files
+    unwieldy. This encoder is used in :meth:`~NTParameterSet.save` to keep lists in JSON files
+    on a single line.
+    """
     def _encode(self, obj, level):
         indent_str = ' ' * self.indent * level
         inner_indent = ' ' * self.indent * (level + 1)
