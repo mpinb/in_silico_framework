@@ -11,7 +11,7 @@ def setup_current_injection_experiment(
         rangevars=None
         ):
     """
-    Sets up a current injection experiment of some :ref:`hoc_file_format` and .param file.
+    Sets up a current injection experiment of some :ref:`morphology_file_format` and .param file.
     The following parameters define the experiment:
 
     Returns:
@@ -47,7 +47,7 @@ def setup_synapse_activation_experiment(
         rangevars=None
         ):
     """
-    Sets up a current injection experiment of some :ref:`hoc_file_format` and .param file.
+    Sets up a current injection experiment of some :ref:`morphology_file_format` and .param file.
     The following parameters define the experiment:
 
     Returns:

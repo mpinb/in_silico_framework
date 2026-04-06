@@ -213,8 +213,8 @@ def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
 
     Args:
         point_id (int): Starting point ID.
-        sec_name (str): HOC name for this section.
-        parent_name (str): HOC name of the parent section.
+        sec_name (str): Full name for this section.
+        parent_name (str): Full name of the parent section.
         points_dict (dict): Full point dictionary from :func:`parse_swc`.
         sections (list): Accumulator; section dicts are appended here in traversal order.
     """
@@ -263,7 +263,7 @@ def build_section_directory(root_id, points_dict):
     """Build an ordered list of section records from an SWC point dictionary.
 
     Traverses the morphology tree starting from the soma root and produces one
-    record per HOC section, including the soma as the first entry. Each record
+    record per section, including the soma as the first entry. Each record
     contains the section name, its parent section name (``None`` for soma), and
     the ordered list of 3D points (x, y, z, diameter) belonging to that section.
 
@@ -351,11 +351,10 @@ def read_swc(swc_fn):
     """Read a SWC morphology file.
     
     Args:
-        swc_filepath (str): Path to the SWC file to be converted.
-        hoc_filepath (str): Output path for the HOC file.
+        swc_fn (str): Path to the :ref:`swc_file_format` file to be converted.
 
     Raises:
-        ValueError: If no soma points (type 1) are found in the SWC file.
+        ValueError: If no soma points (type 1) are found in the :ref:`swc_file_format` file.
     """
     points_dict = swc_to_point_dict(swc_fn)
     last_soma_pt_id = max([idx for idx in points_dict if points_dict[idx]['type'] == 1])
@@ -375,6 +374,6 @@ def read_swc(swc_fn):
                 raise IOError(f"Logical error: parent '{sec.parentID}' of section '{sec.label}' was not found.")
 
         if sec.is_valid(): edge_list.append(sec)
-        else: raise IOError(f"Logical error reading hoc file: invalid segment '{sec.label}'")
+        else: raise IOError(f"Logical error reading SWC file: invalid segment '{sec.label}'")
 
     return edge_list

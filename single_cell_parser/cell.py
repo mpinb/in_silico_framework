@@ -52,7 +52,9 @@ class Cell(object):
     Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
     
     Attributes: 
-        hoc_path (str): Path to the hoc file containing the cell morphology.
+        path (str): Path to the morphology file
+        hoc_path (str): Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+        swc_path (str): Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
         id (str | int, optional): ID of the cell (often unused).
         soma (:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
         tree (:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
@@ -574,8 +576,9 @@ class Cell(object):
 class PySection(nrn.Section):
     '''Wrapper around :class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
-    NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
-    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
+    NEURON sections are a collection of points and their diameter of the form ``secname``
+    If no section name is known, they are printed as ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
+    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``secname(x)``,
     which looks similar to the section representation, but has an additional ``(x)``: a relative coordinate representing the
     center point of the segment.
     

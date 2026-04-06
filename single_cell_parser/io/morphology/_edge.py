@@ -19,7 +19,7 @@ import numpy
 class _Edge(object):
     r'''Convenience class for NEURON segments.
 
-    Private class used in :func:`~single_cell_parser.reader.read_hoc_file` to store information about a single morphological segment spanning from point to point.
+    Private class used in :func:`~single_cell_parser.io.morphology.read_morphology` to store information about a single morphological segment spanning from point to point.
     These edges should not be used as API to neuron segments or sections - they merely serve as a convenience class during the creation of a morphology.
     
     See also:
@@ -31,8 +31,8 @@ class _Edge(object):
         that is used in the :mod:`singlecell_input_mapper` reader.
 
     Attributes:
-        label (str): label and ID of the segment (e.g. "Dendrite_1_0_0").
-        hocLabel (str): Hoc label of the segment (e.g. "Soma", "Axon" ...).
+        label (str): label of the segment (e.g. "Dendrite").
+        hocLabel (str): Full name of the segment (e.g. "Dendrite_1_0_0_0").
         edgePts (list): List of points in the segment.
         diameterList (list): List of diameters at each point.
         parentID (int): label and ID of the parent segment.

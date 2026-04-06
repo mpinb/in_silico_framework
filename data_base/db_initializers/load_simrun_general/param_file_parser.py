@@ -123,20 +123,17 @@ def _get_syn_con_fns_from_netp(netp_fn):
     return syn_files, con_files
 
 
-def _get_hoc_fns_from_neup(neup_fn):
-    """Get the unique hoc files from a list of neuron parameter files.
+def _get_morph_fns_from_neup(neup_fn):
+    """Get the unique morphology files from a list of neuron parameter files.
 
     Args:
         neup_fn (str): Path to the neuron parameter file.
 
     Returns:
-        list: List containing the unique hoc files.
+        list: List containing the unique morphpology files.
     """
-    hoc_files, = scp.parameters.fast_extract_values_from_param_file_key(neup_fn, ["filename"])
-    # hoc_files = []
-    # neup = scp.build_parameters(neup_fn)
-    # hoc_files.append(neup["neuron"]["filename"])
-    return hoc_files
+    morph_files, = scp.parameters.fast_extract_values_from_param_file_key(neup_fn, ["filename"])
+    return morph_files
 
 
 def _get_recsite_fns_from_neup(neup_fn):
@@ -157,7 +154,7 @@ def _get_recsite_fns_from_neup(neup_fn):
 
 
 def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
-    """Convert all references to  :ref:`hoc_file_format` and recsite .landmarkAscii files 
+    """Convert all references to  :ref:`morphology_file_format` and recsite .landmarkAscii files 
     in a :ref:`network_parameters_format` file and copy to a new location.
 
     Args:
@@ -168,12 +165,12 @@ def _resolve_and_copy_neuron_param(neup_fn, scattered_fn_map):
     Attention:
         The resolved paths do not necessarily exist yet.
     """
-    hoc_fn_map = scattered_fn_map['hoc']
+    morph_fn_map = scattered_fn_map['morph']
     recsites_fn_map = scattered_fn_map['recsites']
     target_fn = scattered_fn_map['neup'][neup_fn] 
     
     neup = scp.build_parameters(neup_fn)
-    neup = _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map)
+    neup = _convert_neup_fns_to_reldb(neup, morph_fn_map, recsites_fn_map)
     try:
         neup.save(target_fn)
     except FileNotFoundError:
@@ -210,25 +207,25 @@ def _resolve_and_copy_network_param(netp_fn, scattered_fn_map):
 
 
 def _resolve_and_copy_syn(syn_fn, scattered_fn_map):
-    """Resolve the reference to a :ref:`hoc_file_format` file and 
+    """Resolve the reference to a :ref:`morphology_file_format` file and 
     copy a single :ref:`syn_file_format` file to a new location.
 
     Args:
         syn_fn (str): Path to the synapse distribution file.
         scattered_fn_map (:class:`distributed.Future`): 
-            A future dictionary with filename mappings. Must contain the keys "syn" and "hoc".
+            A future dictionary with filename mappings. Must contain the keys "syn" and "morph".
 
     Returns:
         str: The new :ref:`syn_file_format` filename.
     """
-    hoc_fn_map = scattered_fn_map['hoc']
+    morph_fn_map = scattered_fn_map['morph']
     target_fn = scattered_fn_map['syn'][syn_fn]
     
     with open(syn_fn, "r") as f:
         content = f.read()
 
-    logger.debug("Converting .hoc filenames in {}".format(syn_fn))
-    content = _convert_syn_fns_to_reldb(content, hoc_fn_map)
+    logger.debug("Converting morphology filenames in {}".format(syn_fn))
+    content = _convert_syn_fns_to_reldb(content, morph_fn_map)
     try:
         with open(target_fn, "w") as f:
             f.write("".join(content))
@@ -313,7 +310,7 @@ def _extract_unique_references_from_neup_and_netp(
 ):
     """
     Extract all unique references to :ref:`syn_file_format` and :ref:`con_file_format` files from :ref:`network_parameters_format`,
-    and all unique references to :ref:`hoc_file_format` and recsite files from :ref:`cell_parameters_format`.
+    and all unique references to :ref:`morphology_file_format` and recsite files from :ref:`cell_parameters_format`.
     
     Args:
         paramfile_hashmap_df (:class:`pandas.DataFrame`):
@@ -345,11 +342,11 @@ def _extract_unique_references_from_neup_and_netp(
     logger.info(f"{len(cell_param_fns)} unique neuron parameter files")
     
     # Extract unique files in parallel
-    logger.info("Extracting unique .syn, .con, .hoc, and recsite references from neuron and network parameters")
+    logger.info("Extracting unique .syn, .con, morphology, and recsite references from neuron and network parameters")
     
     # Submit all extraction jobs
     syn_con_futures = client.map(_get_syn_con_fns_from_netp, netp_param_fns)
-    hoc_futures = client.map(_get_hoc_fns_from_neup,  cell_param_fns)
+    morph_futures = client.map(_get_morph_fns_from_neup,  cell_param_fns)
     recsites_futures = client.map(_get_recsite_fns_from_neup,  cell_param_fns)
     
     # Collect and deduplicate results
@@ -361,10 +358,10 @@ def _extract_unique_references_from_neup_and_netp(
     syn_fns_unique = list(set(syn_fns_unique))
     con_fns_unique = list(set(con_fns_unique))
 
-    hoc_fns_unique = []
-    for worker_result in client.gather(hoc_futures):
-        hoc_fns_unique.extend(worker_result)
-    hoc_fns_unique = list(set(hoc_fns_unique))
+    morph_fns_unique = []
+    for worker_result in client.gather(morph_futures):
+        morph_fns_unique.extend(worker_result)
+    morph_fns_unique = list(set(morph_fns_unique))
 
     
     recsites_fns_unique = []
@@ -376,13 +373,13 @@ def _extract_unique_references_from_neup_and_netp(
     file_lists = {
         'syn': syn_fns_unique,
         'con': con_fns_unique, 
-        'hoc': hoc_fns_unique,
+        'morph': morph_fns_unique,
         'recsites': recsites_fns_unique,
         'neup': cell_param_fns,
         'netp': netp_param_fns,
     }
     
-    logger.info(f"{len(file_lists['hoc'])} unique .hoc files")
+    logger.info(f"{len(file_lists['morph'])} unique .morph files")
     logger.info(f"{len(file_lists['recsites'])} unique recsite files") 
     logger.info(f"{len(file_lists['syn'])} unique .syn files")
     logger.info(f"{len(file_lists['con'])} unique .con files")
@@ -426,7 +423,7 @@ def _create_filename_maps(source_files_dict, db, paramfile_target_dirs, copy_met
 
             - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
-            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "morph" (str): Target directory name of :ref:`morphology_file_format` files. Default is ``"anatomy_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
             - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
@@ -466,10 +463,10 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     This function:
     
     1. Fetches all :ref:`network_parameters_format` and :ref:`cell_parameters_format`
-    2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files from these parameter files
+    2. Fetches all unique references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`morphology_file_format` and recsite (.landmarkAscii) files from these parameter files
     3. Creates a mapping for each file from original location to target location, depending on the config.
     4. Scatters this filename mapping dict to a distsributed cluster
-    5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`hoc_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
+    5. Resolves all references to :ref:`syn_file_format`, :ref:`con_file_format`, :ref:`morphology_file_format` and recsite (.landmarkAscii) files in each file depending on this map.
     6. Copies over all resolved files from source to target.
     
     The resolution and copying is done in a single pass for efficiency.
@@ -488,7 +485,7 @@ def parallel_resolve_and_copy_paramfiles_to_db(
 
             - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
-            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"anatomy_folder"``
+            - "morph" (str): Target directory name of :ref:`morphology_file_format` files. Default is ``"anatomy_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"anatomy_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"anatomy_folder"``
             - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is "anatomy_folder"
@@ -515,7 +512,7 @@ def parallel_resolve_and_copy_paramfiles_to_db(
     scattered_maps = client.scatter(fn_maps, broadcast=True)
     
     # copy and transform param files to target location
-    fut_hoc = client.map(_safe_copy, *zip(*fn_maps['hoc'].items()))
+    fut_morph = client.map(_safe_copy, *zip(*fn_maps['morph'].items()))
     fut_recsites = client.map(_safe_copy, *zip(*fn_maps['recsites'].items()))
     fut_con = client.map(
         _resolve_and_copy_con,
@@ -538,8 +535,8 @@ def parallel_resolve_and_copy_paramfiles_to_db(
         [scattered_maps]*len(source_file_list['netp'])
     )
 
-    client.gather(fut_hoc)
-    logger.info("Morphology files (.hoc) copied to {}".format(paramfile_target_dirs['hoc']))
+    client.gather(fut_morph)
+    logger.info("Morphology files copied to {}".format(paramfile_target_dirs['morph']))
     client.gather(fut_recsites)
     logger.info("Recordings site files (.landmarkAscii) copied to {}".format(paramfile_target_dirs['recsites']))
     client.gather(fut_con)

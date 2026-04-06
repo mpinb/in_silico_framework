@@ -16,7 +16,7 @@
 """Cell API for single cell simulations.
 
 This package provides functionality to parse :class:`~single_cell_parser.cell.Cell` objects
-from NEURON :ref:`hoc_file_format` files, map synapses onto these cells, and run biophysically 
+from :ref:`neuron_parameters_format` files, map synapses onto these cells, and run biophysically 
 detailed NEURON simulations with the resulting neuron-network models.
 
 See also:
@@ -93,10 +93,10 @@ def create_cell(
     Args:
         parameters (:class:`~single_cell_parser.parameters.NTParameterSet`):
             A :ref:`cell_parameters_format` object.
-            Should include at least the keys 'filename' and one key per structure present in the :ref:`hoc_file_format` file (e.g. "AIS", "Soma" ...).
+            Should include at least the keys 'filename' and one key per structure present in the :ref:`morphology_file_format` file (e.g. "AIS", "Soma" ...).
             Optional keys include: ``cell_modify_functions``, ``discretization``
         allPoints (bool):
-            Whether or not to use all the points in the `.hoc` file, or one point per segment (according to the distance-lambda rule).
+            Whether or not to use all the points in the :ref:`morphology_file_format` file, or one point per segment (according to the distance-lambda rule).
             Will be passed to ``full`` in :meth:`~single_cell_parser.cell_parser.CellParser.determine_nseg`
         setUpBiophysics (bool):
             Whether or not to insert mechanisms corresponding to the biophysical parameters in ``parameters``
