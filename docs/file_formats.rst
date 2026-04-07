@@ -698,21 +698,62 @@ The parsed dataframe is usually created by the :func:`data_base.db_initializers.
 
 
 
+.. _morphology_file_format:
+
+Morphology
+**********
+
+ISF supports two file formats for morphologies:
+
+- A :ref:`hoc_file_format` file format
+- The :ref:`swc_file_format` (see )
+
 .. _hoc_file_format:
 
 .hoc
-****
-NEURON :cite:`hines2001neuron` file format for neuron morphologies. 
-refer to the `NEURON hoc documentation <https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html>`_ for more info.
-The morphology is specified as a tree structure: the different sections of a neuron 
-(pieces separated between branching points or branches endings) are connected in order. 
-Each section is formed by a set of points, defined by their 3D coordinates and the diameter of the 
-neuron structure at that point ``(pt3dadd -> x, y, z, diameter)``.
+====
+NEURON :cite:`hines2001neuron` file format for scripting in ``.hoc``.
+
+The :ref:`hoc_file_format` format is used for HOC scripts.
+HOC scripts support a whole lot more than simply specifying morphologies.
+However, throughout ISF, you may find some example morphologies in the :ref:`hoc_file_format` format.
+These specify for each section:
+
+- The section name in a standardized format: ``<label>_<child_idx>``
+- The :math:`(x, y, z)` coordinates of each point per section
+- The diameter of each point per section
+- To which parent section each section connects, and where
+
+Each section name follows the naming convention ``<label>_<child_idx>``, where the ``label``
+contains both a label name, and an index tracking how many sections of this label exist.
+For this reason, the label index starts at ``1``. The ``<child_idx>`` denotes the index of each child
+section that starts from this label. For example, the very first part of the first section of type ``"Dendrite"``
+will look like: ``"Dendrite_1_0"``. Here, the ``1`` denotes there are so far only 1 instances of a section with label ``"Dendrite"``
+All child sections of this section will start with the same string, e.g. ``"Dendrite_1_0_1_0"`` is the first child of ``"Dendrite_1_0_1"``,
+which is in turn the second child of ``"Dendrite_1_0"``. Other sections with the same label that are not children of ``"Dendrite_1_0"`` will e.g.
+look like ``"Dendrite_2_0*"`` or ``"Dendrite_3_0*"`` etc.
+
+Connectivity between sections is defined by a line::
+
+  {connect <label>_<chiconvert_swc_to_hocld_idx>(x1), <parent_label>(x2)}
+
+This defines how the current section ``<label>_<child_idx>`` connects to its parent section.
+``x1`` and ``x2`` denote the relative coordinates of the connection between both sections.
+``x1`` denotes where along the current section the connections occurs. Normally, ``x1`` always equals ``0``, meaning the connection point is at the start of the current section.
+``x2`` denotes where along the parent section the connection occurs. This almost always equals ``1`` (meaning the connection is at the end of the parent section), since sections are
+almost always defined as a piece of neurite between two connection points. A notable example is the soma; sections may (and often do) connect at
+different points on the soma, and not always at the end: ``Soma(1.0)``.
+
+.. seealso::
+  Refer to the `NEURON hoc documentation <https://nrn.readthedocs.io/en/latest/guide/hoc_chapter_11_old_reference.html>`_ for more info.
+
+.. seealso::
+  :meth:`~single_cell_parser.io.morphology.convert_hoc_to_swc` for a converter from :ref:`hoc_file_format` to :ref:`swc_file_format`.
 
 Readers:
 
 - :mod:`~single_cell_parser.cell_parser`
-- :func:`~single_cell_parser.reader.read_hoc_file`
+- :meth:`~single_cell_parser.io.morphology.hoc.read_hoc_file`
 
 Example::
 
@@ -734,14 +775,180 @@ Example::
     {pt3dadd(6.341550, 222.962997, -451.906006, 2.040000)}
     ...
 
+.. _swc_file_format:
+
+.swc
+====
+SWC (Stockley-Wheal-Cannon) is a simple morphology file format, specifying for each point the:
+
+- Point ID
+- Section type
+- :math:`(x, y, z)` coordinates
+- Radius
+- Parent point ID
+
+Connectivity between sections is inferred simply based on the parent point ID. If it is not consecutive, a new section starts.
+
+Section types in :ref:`swc_file_format` follow a fixed integer convention:
+
+.. list-table::
+   
+   * - 1
+     - "Soma"
+   * - 2
+     - "Axon"
+   * - 3
+     - "Dendrite"
+   * - 4
+     - "ApicalDendrite"
+   * - 5
+     - "Custom"
+   * - 6
+     - "Unspecified"
+   * - 7
+     - "Glial process"
+   * - >7
+     - "Custom"
+
+
+.. seealso::
+  Consult https://swc-specification.readthedocs.io/en/latest/swc.html
+  for the official documentation on SWC.
+
+.. seealso::
+  :meth:`~single_cell_parser.io.morphology.convert_swc_to_hoc` for a converter from :ref:`swc_file_format` to :ref:`hoc_file_format`
+
+
+Example::
+
+  # pID   type  x             y           z           r        parent ID     
+    1     1     -126.687302   397.872009  -379.372986 2.542405 -1
+    2     1     -126.425797   397.434021  -379.303009 2.801655  1
+    3     1     -126.164299   396.996002  -379.234009 3.0609    2
+    4     1     -125.9506     396.481995  -379.165985 3.295415  3
+    ...
+    43    1     -111.478897   383.348022 -378.470001  4.131965  42
+    44    1     -111.100601   383.018005 -378.457001  3.47198   43
+    45    3     -128.1241     390.917023 -377.123993  0.62      8
+    46    3     -126.512604   390.572998 -377.480988  0.62      45
+    ...
+
+
 .. _mod_file_format:
 
 .mod
 ****
-NEURON :cite:`hines2001neuron` file format for neuron mechanisms. Refer to the `NEURON NMODL documentation <https://neuronline.github.io/compneuro/software/neuron/nmodl/>`_
-or :cite:t:`hines2001neuron` (chapters 9 and 10) for more info.
-Used to define channel and synapse dynamics in NEURON simulations.
-See the folder `mechanisms` in the project source.
+``MODL`` is a file format Used to define dynamical systems as simply as reasonably possible.
+NEURON :cite:t:`hines2001` provides an extension to this format called ``NMODL``, in this
+case to define channel and synapse dynamics for use in NEURON simulations.
+NEURON translates these files to ``C`` (and to ``C++`` since NEURON 9.0), to be compiled to machine code on the host machine.
+
+``NMODL`` files are categorized in blocks. 
+We highlight some important ones below:
+
+.. list-table::
+
+  * - NEURON
+    - NEURON :cite:t:`hines2001` specific specification, such as ``READ`` and ``WRITE`` statements, 
+      defining which global variables this particular mechanism needs access to (e.g. intracellular :math:`Ca^{2+}` for :math:`Ca^{2+}`-activated channels).
+      The mechanism's name is defined as either a ``SUFFIX`` or ``POINTPROCESS`` in this block.
+      This is the name that will be accessible by the user, and how NEURON will register it in the NEURON or Python namespace.
+  * - PARAMETER
+    - Free parameters used in this mechanism. 
+      These are the parameters the user has direct access to, and can be tweaked during optimization or exploration.
+  * - STATE
+    - State variables. 
+      These are the time-dependent variables in the differential equations defining the system.
+  * - BREAKPOINT
+    - Main computation block. 
+      This will be evaluated every timestep. Configures what to solve, and which solver to use.
+  * - DERIVATIVE
+    - If the dynamical system is governed by differential equations, they are defined here.
+  * - PROCEDURE
+    - A set of instructions that can be named. 
+      This is the NMODL equivalent of defining a function. 
+      This is often used to define the equations of the dynamical system, or the most verbose aspects of it. 
+      That way, the DERIVATIVE block can use human-readable variable names.
+
+
+Example::
+
+  :Reference : :		Adams et al. 1982 - M-currents and other potassium currents in bullfrog sympathetic neurones
+
+  NEURON	{
+    SUFFIX Im
+    USEION k READ ek WRITE ik
+    RANGE gImbar, gIm, ik
+  }
+
+  UNITS	{
+    (S) = (siemens)
+    (mV) = (millivolt)
+    (mA) = (milliamp)
+  }
+
+  PARAMETER	{
+    gImbar = 0.00001 (S/cm2) 
+  }
+
+  ASSIGNED	{
+    v	(mV)
+    ek	(mV)
+    ik	(mA/cm2)
+    gIm	(S/cm2)
+    mInf
+    mTau
+    mAlpha
+    mBeta
+  }
+
+  STATE	{ 
+    m
+  }
+
+  BREAKPOINT	{
+    SOLVE states METHOD cnexp
+    gIm = gImbar*m
+    ik = gIm*(v-ek)
+  }
+
+  DERIVATIVE states	{
+    rates()
+    m' = (mInf-m)/mTau
+  }
+
+  INITIAL{
+    rates()
+    m = mInf
+  }
+
+  PROCEDURE rates(){
+
+    UNITSOFF
+      mAlpha = 3.3e-3*exp(2.5*0.04*(v - -35))
+      mBeta = 3.3e-3*exp(-2.5*0.04*(v - -35))
+      mInf = mAlpha/(mAlpha + mBeta)
+      mTau = (1/(mAlpha + mBeta))
+    UNITSON
+  }
+
+
+
+.. seealso::
+   Refer to the `NEURON NMODL documentation <https://www.neuronsimulator.org/en/9.0.0/nmodl/language/nmodl.html>`_,
+   `compneuro <https://neuronline.github.io/compneuro/software/neuron/nmodl/>`_, 
+   or :cite:t:`hines2001neuron` (chapters 9 and 10) for more info on ``BLOCKS`` and their meaning, usage, or any other
+   aspect of MODL/NMODL.
+
+.. seealso::
+   See the folder `mechanisms` in the project source for convenience methods for compiling mechanisms or checking
+   if they exist in the NEURON namespace.
+
+
+
+
+
+
 
 .. _am_file_format:
 

@@ -12,6 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Read and write :ref:`hoc_file_format` morphologies.
+"""
 from __future__ import annotations
 from ._edge import _Edge
 from typing import List, Optional, Dict, Any

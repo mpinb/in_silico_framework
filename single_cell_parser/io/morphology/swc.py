@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Convert :class:`single_cell_parser.cell.Cell` objects to ``SWC`` morphologies.
+Read and write :ref:`swc_file_format` morphologies.
 """
 from __future__ import annotations
 from typing import Any
