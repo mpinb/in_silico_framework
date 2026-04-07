@@ -35,7 +35,7 @@ class _Edge(object):
         hocLabel (str): Full name of the segment (e.g. "Dendrite_1_0_0_0").
         edgePts (list): List of points in the segment.
         diameterList (list): List of diameters at each point.
-        parentID (int): label and ID of the parent segment.
+        parentID (int): label and ID of the parent section.
         parentConnect (float): How far along the parent section the connection is (i.e. the `x`-coordinate).
         valid (bool): Flag indicating if the segment is valid.
     '''
