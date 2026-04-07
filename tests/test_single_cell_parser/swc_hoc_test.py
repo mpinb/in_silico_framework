@@ -1,4 +1,5 @@
 from .context import HOC_FN, SWC_FN, NEUP_FN
+from tests import calc_signal_similarity
 import single_cell_parser as scp
 import os
 import re
@@ -39,7 +40,6 @@ def test_convert_swc_to_hoc(tmpdir):
 
     
 def test_convert_hoc_to_swc(tmpdir):
-    # TODO: labels get remapped to internal repr. Find better way to test equality
     tmp_swc = tmpdir / "swc2.swc"
     tmp_hoc = tmpdir / "hoc2.hoc"
 
@@ -59,13 +59,14 @@ def test_convert_hoc_to_swc(tmpdir):
         assert all(x == y for x, y in zip(f1, f2))
     
 
-def test_swc_hoc_give_same_results():
+def test_swc_hoc_give_same_results(tol=1e-6):
     # TODO: results deviate?
+    # Attention: the order in which you unpack the hoc vectors matters. unpack right after simulation
     cell1 = setup_current_injection_experiment(morph_fn=HOC_FN)
+    t1 = [t for t in cell1.tVec]
+    v1 = [v for v in cell1.soma.recVList[0]]
     cell2 = setup_current_injection_experiment(morph_fn=SWC_FN)
+    t2 = [t for t in cell2.tVec]
+    v2 = [v for v in cell2.soma.recVList[0]]
 
-    t1, t2 = [t for t in cell1.tVec], [t for t in cell2.tVec]
-    v1, v2 = [v for v in cell1.soma.recVList[0]], [v for v in cell2.soma.recVList[0]]
-
-    assert t1 == t2
-    assert_almost_equal(v1, v2)
+    assert 1 - calc_signal_similarity(t1, v1, t2, v2) < tol

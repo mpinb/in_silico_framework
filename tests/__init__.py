@@ -1,6 +1,7 @@
 import os
 import neuron
 import socket
+import numpy as np
 
 h = neuron.h
 import single_cell_parser as scp
@@ -84,3 +85,14 @@ def is_port_open(host, port):
         sock.settimeout(1)  # 1 second timeout
         result = sock.connect_ex((host, port))
         return result == 0
+
+def calc_signal_similarity(t1, y1, t2, y2):
+    if len(t2) > len(t1):
+        base_x, base_y = t1, y1
+        interp_y = np.interp(base_x, t2, y2)
+    else:
+        base_x, base_y = t2, y2
+        interp_y = np.interp(base_x, t1, y1)
+
+    similarity = 1 - np.linalg.det(np.corrcoef(base_y, interp_y))
+    return similarity

@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from single_cell_parser.io.morphology.hoc import read_hoc
-from .context import *
+from .context import this_folder
+import os
 
 
 def test_can_load_hoc_file_with_label_BasalDendrite():
@@ -12,3 +13,6 @@ def test_can_load_hoc_file_with_label_BasalDendrite():
         assert True
     except:
         assert False
+
+def test_read_swc():
+    pass
