@@ -50,7 +50,10 @@ def convert_swc_to_hoc(
     from .swc import write_swc
     from single_cell_parser.cell_parser import CellParser
     cell_parser = CellParser(fn=swc_fn)
-    cell_parser.spatialgraph_to_cell(axon=axon)
+    cell_parser.spatialgraph_to_cell(
+        axon=axon,
+        force_connect_soma_halfway=False
+        )
     write_hoc(
         sections=cell_parser.cell.sections, 
         of=of, 
@@ -85,7 +88,10 @@ def convert_hoc_to_swc(
     from .swc import write_swc
     from single_cell_parser.cell_parser import CellParser
     cell_parser = CellParser(hoc_fn)
-    cell_parser.spatialgraph_to_cell(axon=axon)
+    cell_parser.spatialgraph_to_cell(
+        axon=axon,
+        force_connect_soma_halfway=False
+        )
     write_swc(
         sections=cell_parser.cell.sections, 
         of=of, 

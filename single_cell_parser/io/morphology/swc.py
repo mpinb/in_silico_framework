@@ -65,12 +65,9 @@ def _get_swc_lines_per_section(
         parent = sec.parent
         if parent == None:
             # Soma
-            parent_sec_ind = None
-            n_parent_points = 0
+            parent_sec_ind = -1
         else:
             parent_sec_ind = sections.index(parent)
-            # The amount of points in the parent sections, not including the current section
-            n_parent_points = sum([len(pts) for pts in swc_lines_per_section[:parent_sec_ind+1]])
         
         if sec_ind in only_child_sections \
         and sec.label == parent.label \
@@ -96,9 +93,19 @@ def _get_swc_lines_per_section(
         
         for pt_ind_this_sec, pt in enumerate(sec.pts):
             x, y, z = pt
-            if parent == None and pt_ind_this_sec == 0: parent_point = -1
-            elif pt_ind_this_sec == 0: parent_point = n_parent_points
-            else: parent_point = n
+            if parent == None and pt_ind_this_sec == 0: 
+                parent_point = -1
+            elif pt_ind_this_sec == 0: 
+                # The amount of points in the parent sections, 
+                # not including the current section or parent section
+                n_prev_points = sum([
+                    len(pts) 
+                    for pts in swc_lines_per_section[:parent_sec_ind]
+                    ])
+                n_points_before_connect = int(sec.parentx * len(parent.pts))
+                parent_point = n_prev_points + n_points_before_connect
+            else: 
+                parent_point = n
             # diamList is not a robust way to fetch point diameters
             # cell_modify_functions.scale_apical scales D per point, but does not update diamList
             # However, we want to segmentize AS IF the diam has not been scaled, for reproducibility
@@ -201,7 +208,25 @@ def swc_to_point_dict(swc_filepath):
     return points
 
 
-def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
+def _calc_soma_x(sections, point_id, points_dict):
+    """Infer where along the parent section (x) a given point connects
+
+    This function is only applicable when the :paramref:`sections` are organized
+    in the same order as the point IDs. 
+    When parsing SWC files, this is not necessarily true, as parsing SWC will iterate
+    child sections depth-first, potentially parsing a section whose point IDs exceed
+    the amount of already parsed points. 
+    However, if we assume all branches connect at x=1, except for the soma,
+    we can safely assume the soma has already been parsed.
+    """
+    parent_sec_id = 0  # soma
+    # estimated x coordinate along parent section - only works because it's the soma
+    parent_section_x = points_dict[point_id]['parent'] / len(sections[parent_sec_id].edgePts)
+    assert parent_section_x <= 1., f"Relative coordinate must be <= 1, but is: {parent_section_x}"
+    return parent_section_x
+
+
+def _traverse(point_id, sec_name, sec_label, parent_sec_id, points_dict, sections):
     """Recursively build the section directory from a non-soma starting point.
 
     Traverse from `point_id`, collecting all points that belong to the current
@@ -224,8 +249,13 @@ def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
     edge.diameterList = []
     edge.label = sec_label
     edge.hocLabel = sec_name
-    edge.parentConnect = 1.  # assume connect at end of parent
-    edge.parentID = parent_id
+    edge.parentConnect = 1.  # assume connect at end of parent, unless specified otherwise
+    edge.parentID = parent_sec_id
+
+    if parent_sec_id == 0:          
+        # infer where along soma sections connect - no other section x supported
+        parent_section_x = _calc_soma_x(sections, point_id, points_dict)
+        edge.parentConnect = parent_section_x
 
     current_pt_id = point_id
     while True:
@@ -242,7 +272,7 @@ def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
     # 2. create child edges
 
     children_pt_id = points_dict[current_pt_id]["children"]
-    parent_id= len(sections) - 1
+    parent_sec_id= len(sections) - 1
     for i, child_id in enumerate(children_pt_id):
         section_type = points_dict[child_id]["type"]
         child_sec_label = REVERSE_SWC_LABEL_MAP[section_type]
@@ -251,7 +281,7 @@ def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
             point_id=child_id, 
             sec_label=child_sec_label, 
             sec_name=child_sec_name, 
-            parent_id=parent_id, 
+            parent_sec_id=parent_sec_id, 
             points_dict=points_dict, 
             sections=sections
         )
@@ -259,7 +289,7 @@ def _traverse(point_id, sec_name, sec_label, parent_id, points_dict, sections):
     return sections
 
 
-def build_section_directory(root_id, points_dict):
+def build_section_directory(root_ids, points_dict):
     """Build an ordered list of section records from an SWC point dictionary.
 
     Traverses the morphology tree starting from the soma root and produces one
@@ -298,19 +328,21 @@ def build_section_directory(root_id, points_dict):
     sections = [edge]
 
     counters = {}
-    for i, child_id in enumerate(points_dict[root_id]["children"]):
-        section_type = points_dict[child_id]["type"]
-        label = REVERSE_SWC_LABEL_MAP.get(section_type, f"type{section_type}")
-        counters[section_type] = counters.get(section_type, 0) + 1
-        child_sec_name = f"{label}_{counters[section_type]}_0"
-        sections = _traverse(
-            point_id=child_id, 
-            sec_name=child_sec_name, 
-            sec_label=label, 
-            parent_id=0, 
-            points_dict=points_dict, 
-            sections=sections
-            )
+    for root_id in root_ids:
+        for child_id in points_dict[root_id]["children"]:
+            if child_id <= len(sections[0].edgePts): continue  # child is soma - already added
+            section_type = points_dict[child_id]["type"]
+            label = REVERSE_SWC_LABEL_MAP.get(section_type, f"type{section_type}")
+            counters[section_type] = counters.get(section_type, 0) + 1
+            child_sec_name = f"{label}_{counters[section_type]}_0"
+            sections = _traverse(
+                point_id=child_id, 
+                sec_name=child_sec_name, 
+                sec_label=label, 
+                parent_sec_id=0, 
+                points_dict=points_dict, 
+                sections=sections
+                )
     return sections
 
 
@@ -357,8 +389,16 @@ def read_swc(swc_fn):
         ValueError: If no soma points (type 1) are found in the :ref:`swc_file_format` file.
     """
     points_dict = swc_to_point_dict(swc_fn)
-    last_soma_pt_id = max([idx for idx in points_dict if points_dict[idx]['type'] == 1])
-    sections = build_section_directory(root_id=last_soma_pt_id, points_dict=points_dict)
+    soma_root_ids = [
+        idx 
+        for idx in points_dict 
+        if points_dict[idx]['type'] == 1
+        and len(points_dict[idx]['children']) > 1
+        ]
+    sections = build_section_directory(
+        root_ids=soma_root_ids, 
+        points_dict=points_dict
+    )
     soma_section = sections[0]
     if len(soma_section.edgePts) == 1:
         sections = complete_soma(sections)

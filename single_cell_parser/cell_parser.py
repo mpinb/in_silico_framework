@@ -65,13 +65,24 @@ class CellParser(object):
         self.membraneParams = {}
         self.cell_modify_functions_applied = False
 
-    def spatialgraph_to_cell(self, parameters=None, axon=False, scaleFunc=None):
+    def spatialgraph_to_cell(
+        self, 
+        parameters=None, 
+        axon=False, 
+        scaleFunc=None,
+        force_connect_soma_halfway=True
+        ):
         '''Create a :class:`~single_cell_parser.cell.Cell` object from the :ref:`morphology_file_format`.
         
         Reads a :ref:`morphology_file_format` file and sets up PySections and Cell object.
         
         Args:
             axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            force_connect_soma_halfway (bool): 
+                Force direct descendants of the soma to connect to the soma at :math:`x=0.5`.
+                Sections that connect to soma at :math:`x=0` mess up the calculation of :math:`R_a`.
+                In addition, this may be useful for consistency for those morphologies where the soma geometry is ill-defined.
+                Default is ``True``.
         
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
@@ -126,9 +137,11 @@ class CellParser(object):
         for sec in self.cell.sections:
             if sec.label != 'Soma':
                 if self.cell.sections[sec.parentID].label == 'Soma':
-                    # unfortunately, necessary to enforce that nothing
-                    # is connected to soma(0) b/c of ri computation in NEURON
-                    sec.parentx = 0.5
+                    if force_connect_soma_halfway == True:
+                        # unfortunately, necessary to enforce that nothing
+                        # is connected to soma(0) b/c of ri computation in NEURON
+                        sec.parentx = 0.5
+                    elif sec.parentx < 1e-6: raise ValueError("Direct descendants of the soma should not connect at x=0.")
                 sec.connect(self.cell.sections[sec.parentID], sec.parentx, 0.0)
                 sr = h.SectionRef(sec=sec)
                 sec.parent = sr.parent
