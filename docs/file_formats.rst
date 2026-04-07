@@ -821,7 +821,7 @@ Section types in :ref:`swc_file_format` follow a fixed integer convention:
 
 Example::
 
-  # pID   type  x             y           z           r        parent ID     
+    # pID type  x             y           z           r        parent ID     
     1     1     -126.687302   397.872009  -379.372986 2.542405 -1
     2     1     -126.425797   397.434021  -379.303009 2.801655  1
     3     1     -126.164299   396.996002  -379.234009 3.0609    2
