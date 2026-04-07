@@ -706,7 +706,7 @@ Morphology
 ISF supports two file formats for morphologies:
 
 - A :ref:`hoc_file_format` file format
-- The :ref:`swc_file_format` (see )
+- The :ref:`swc_file_format` file format
 
 .. _hoc_file_format:
 
