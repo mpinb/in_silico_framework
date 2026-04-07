@@ -12,7 +12,8 @@ import filecmp
 h = neuron.h
 
 def setup_current_injection_experiment(
-        morph_fn=None
+        morph_fn=None,
+        vardt = True
         ):
     cell_param = scp.build_parameters(NEUP_FN)
     # load scaled hoc morphology
@@ -23,9 +24,9 @@ def setup_current_injection_experiment(
     iclamp = h.IClamp(0.5, sec=cell.soma)
     iclamp.delay = 150  # give the cell time to reach steady state
     iclamp.dur = 5  # 5ms rectangular pulse
-    iclamp.amp = 1.9  # 1.9 ?? todo ampere
+    iclamp.amp = 1.9  # 1.9 mA
 
-    scp.init_neuron_run(cell_param.sim, vardt=True)  # run the simulation
+    scp.init_neuron_run(cell_param.sim, vardt=vardt)
 
     return cell
 
@@ -60,13 +61,19 @@ def test_convert_hoc_to_swc(tmpdir):
     
 
 def test_swc_hoc_give_same_results(tol=1e-6):
-    # TODO: results deviate?
+    """
+    Check if simulating on a .hoc or .swc file gives same results
+
+    NEURON initializes the time vector slightly differently if vardt is True
+    Unsure why.
+    """
     # Attention: the order in which you unpack the hoc vectors matters. unpack right after simulation
-    cell1 = setup_current_injection_experiment(morph_fn=HOC_FN)
+    cell1 = setup_current_injection_experiment(morph_fn=HOC_FN, vardt=False)
     t1 = [t for t in cell1.tVec]
     v1 = [v for v in cell1.soma.recVList[0]]
-    cell2 = setup_current_injection_experiment(morph_fn=SWC_FN)
+    cell2 = setup_current_injection_experiment(morph_fn=SWC_FN, vardt=False)
     t2 = [t for t in cell2.tVec]
     v2 = [v for v in cell2.soma.recVList[0]]
 
-    assert 1 - calc_signal_similarity(t1, v1, t2, v2) < tol
+    assert t1 == t2
+    assert v1 == v2
