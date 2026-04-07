@@ -170,7 +170,7 @@ def read_hoc(
 
 def write_hoc(
     sections, 
-    of
+    of,
     ):
     """Write a HOC morphology file from a pre-built section directory.
 
@@ -182,14 +182,29 @@ def write_hoc(
             :func:`build_section_directory`, with soma points already complete.
         hoc_filepath (str): Output path for the HOC file.
     """
+
+    def _get_precision(float_nr):
+        assert isinstance(float_nr, float), f"This method can only be used on floats. You passed a {type(float_nr)}"
+        return len(float_nr.__repr__().split('.')[-1])
+
+    def _get_max_float_padding(sections):
+        return max([
+            _get_precision(co)
+            for sec in sections
+            for pt in sec.pts
+            for co in pt
+        ])
+    zero_pad = _get_max_float_padding(sections)
     with open(of, "w") as f:
         for sec in sections:
+            sec_name = sec.name()
+            parent_connect = sec.parentx
             if not hasattr(sec, "parentID"): 
                 # start the file with the soma section without newlines
-                f.write(f"{{create {sec.name()}}}")
+                f.write(f"{{create {sec_name}}}")
             else:
-                f.write(f"\n\n{{create {sec.name()}}}")
-                f.write(f"\n{{connect {sec.name()}(0), {sections[int(sec.parentID)]}(1)}}")
-            f.write(f"\n{{access {sec.name()}}}\n{{nseg = 1}}\n{{pt3dclear()}}")
+                f.write(f"\n\n{{create {sec_name}}}")
+                f.write(f"\n{{connect {sec_name}(0), {sections[int(sec.parentID)]}({parent_connect:.{zero_pad}f})}}")
+            f.write(f"\n{{access {sec_name}}}\n{{nseg = 1}}\n{{pt3dclear()}}")
             for (x, y, z), d in zip(sec.pts, sec.diamList):
-                f.write(f"\n{{pt3dadd({x}, {y}, {z}, {d})}}")
+                f.write(f"\n{{pt3dadd({x:.{zero_pad}f}, {y:.{zero_pad}f}, {z:.{zero_pad}f}, {d:.{zero_pad}f})}}")
