@@ -102,7 +102,7 @@ def _get_swc_lines_per_section(
                     len(pts) 
                     for pts in swc_lines_per_section[:parent_sec_ind]
                     ])
-                n_points_before_connect = int(sec.parentx * len(parent.pts))
+                n_points_before_connect = np.round(sec.parentx * len(parent.pts))
                 parent_point = n_prev_points + n_points_before_connect
             else: 
                 parent_point = n
