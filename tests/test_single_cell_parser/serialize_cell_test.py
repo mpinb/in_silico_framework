@@ -42,8 +42,7 @@ class TestSerializeCell:
 
     def test_values_are_the_same_after_reload(self):
         silent = cell_to_serializable_object(self.cell)
-        cell2 = restore_cell_from_serializable_object(silent)
+        cell2 = restore_cell_from_serializable_object(sc=silent)
 
-        np.testing.assert_array_equal(np.array(self.cell.tVec), cell2.tVec)
-        np.testing.assert_array_equal(np.array(self.cell.soma.recVList[0]), \
-                                      cell2.soma.recVList[0])
+        np.testing.assert_array_equal(actual=np.array(self.cell.tVec), desired=cell2.tVec)
+        np.testing.assert_array_equal(actual=np.array(self.cell.soma.recVList[0]), desired=cell2.soma.recVList[0])
