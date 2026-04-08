@@ -787,7 +787,9 @@ SWC (Stockley-Wheal-Cannon) is a simple morphology file format, specifying for e
 - Radius
 - Parent point ID
 
-Connectivity between sections is inferred simply based on the parent point ID. If it is not consecutive, a new section starts.
+Connectivity between sections is inferred simply based on the parent point ID.
+If the point ID is not consecutive, a new section starts.
+If more than 1 other point refer to the same point ID, a new section starts.
 
 Section types in :ref:`swc_file_format` follow a fixed integer convention:
 
