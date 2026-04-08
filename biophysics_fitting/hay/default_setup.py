@@ -120,9 +120,9 @@ def get_Simulator(fixed_params, step=False, vInit=False):
 
     Sets up:
 
-    - ``cell_param_generator``: A function generating a :ref:`neuron_parameters_format` tempalate.
-    - ``cell_param_modify_funs``, which transform an input parameter vector (usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions) to :ref:`neuron_parameters_format`.
-    - ``cell_generator``: A function that takes the :ref:`neuron_parameters_format` as an argument and returns a :class:`~single_cell_parser.cell.Cell` object.
+    - ``cell_param_generator``: A function generating a :ref:`cell_parameters_format` tempalate.
+    - ``cell_param_modify_funs``, which transform an input parameter vector (usually the argument of e.g. :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions) to :ref:`cell_parameters_format`.
+    - ``cell_generator``: A function that takes the :ref:`cell_parameters_format` as an argument and returns a :class:`~single_cell_parser.cell.Cell` object.
     - ``stim_setup_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
     - ``stim_run_funs``: Functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
     - ``stim_response_measure_funs``: Functions that take the cell as an argument and extract relevant data (e.g. the ``tVec`` and ``VList``), organized per stimulus.
