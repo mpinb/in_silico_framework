@@ -12,6 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+Read, write and convert morphology files.
+
+Specific readers for morphology files are defined in submodules.
+This module specifies converters between :ref:`swc_file_format` and :ref:`hoc_file_format` morphologies.
+"""
 from __future__ import annotations
 from typing import List, Dict, Any
 import numpy as np
@@ -80,6 +86,14 @@ def convert_hoc_to_swc(
             Whether or not to include the axon in the resulting swc file.
             Default is `False``, because ISF by default ignores morphologically detailed axons in favor of a custom one 
             (see :meth:`~single_cell_parser.cell.Cell._create_ais_Hay2013`)
+
+    Attention:
+        The conversion from :ref:`hoc_file_format` to :ref:`swc_file_format` is slightly destructive.
+        :ref:`hoc_file_format` allows you to specify connectivity between sections in terms of a continuous
+        relative coordinate `x`. On the other hand, :ref:`swc_file_format` defines this based on a discrete point index.
+        We make a best effort to choose the point closest to the `x` coordinate as specified in the :ref:`hoc_file_format`,
+        but this is not guaranteed to exactly match the connection point.
+        In reality, this is often only used for the soma, and ISF by default connects soma children at ``x=0.5`` anyways.
 
     Attention:
         When :param:`axon` is set to True, the axon is built  and written out according to :meth:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`,

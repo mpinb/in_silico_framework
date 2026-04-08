@@ -12,6 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+"""
+Read and write data formats for AMIRA.
+
+The primary function of this module is to provide read and write acces to AMIRA ``ScalarField`` files.
+These are represented internally by the :class:`~ScalarField` object.
+"""
 from __future__ import annotations
 import numpy as np
 from data_base.dbopen import dbopen
