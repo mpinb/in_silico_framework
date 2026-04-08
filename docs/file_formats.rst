@@ -871,13 +871,19 @@ We highlight some important ones below:
       That way, the DERIVATIVE block can use human-readable variable names.
 
 
-Example::
+Example:
+
+.. code-block:: NMODL
 
   :Reference : :		Adams et al. 1982 - M-currents and other potassium currents in bullfrog sympathetic neurones
 
-  NEURON	{
+  NEURON {
+    : Name of this mechanism, defined as a SUFFIX
+    : For localized mechanisms (e.g. a single synapse), POINTPROCESS is used to name the mechanism
     SUFFIX Im
+    : Uses the ion Potassium (k), needs read access to the potassium reversal potential (ek), writes out potassium current (ik)
     USEION k READ ek WRITE ik
+    : Range variables - can be recorded by the user. These should also appear in PARAMETER or ASSIGNED
     RANGE gImbar, gIm, ik
   }
 
@@ -887,11 +893,14 @@ Example::
     (mA) = (milliamp)
   }
 
-  PARAMETER	{
+  PARAMETER {
+    : Free parameters. 
+    : Everything defined here will be accessible and tunable by the user.
+    : These are the ones e.g. optimized or explored.
     gImbar = 0.00001 (S/cm2) 
   }
 
-  ASSIGNED	{
+  ASSIGNED {
     v	(mV)
     ek	(mV)
     ik	(mA/cm2)
@@ -902,33 +911,45 @@ Example::
     mBeta
   }
 
-  STATE	{ 
+  STATE { 
+    : The time-dependent gating variable. This channel only has one.
     m
   }
 
-  BREAKPOINT	{
+  : What to calculate each time step
+  BREAKPOINT {
+    : solve the DERIVATIVE block named "states" using `sympy.dsolve` and fall back to `CNEXP` method
+    : For more info, see https://www.neuronsimulator.org/en/latest/nmodl/transpiler/notebooks/nmodl-sympy-solver-cnexp.html#Implementation
     SOLVE states METHOD cnexp
+    : Calculate the conductance of the Im current = conductance density * gating variable
     gIm = gImbar*m
-    ik = gIm*(v-ek)
+    : Calculate the Im current from the conductance
+    ik = gIm*(v - ek)
   }
 
-  DERIVATIVE states	{
-    rates()
-    m' = (mInf-m)/mTau
+  : The ODEs defining the dynamical system. We name it "states". Not to be confused with the "STATE" block.
+  DERIVATIVE states {
+    : Run the procedure named "rates" - evaluate mInf and mTau based on the current value of voltage
+    rates(v)
+    : Define the gating variable time dependency - linear first-order ODE
+    m' = (mInf-m) / mTau
   }
 
-  INITIAL{
-    rates()
+  INITIAL {
+    : Run the procedure named "rates" - evaluate mInf and mTau based on the current value of voltage
+    rates(v)
+    : Set the initial value of m to mInf i.e. the value of m if t -> inf for the current voltage
     m = mInf
   }
 
-  PROCEDURE rates(){
-
+  PROCEDURE rates(v) {
+    : Simple procedure named "rates"
+    : Calculates mTau and mInf, used in the DERIVATIVE block
     UNITSOFF
       mAlpha = 3.3e-3*exp(2.5*0.04*(v - -35))
       mBeta = 3.3e-3*exp(-2.5*0.04*(v - -35))
-      mInf = mAlpha/(mAlpha + mBeta)
-      mTau = (1/(mAlpha + mBeta))
+      mInf = mAlpha / (mAlpha + mBeta)
+      mTau = 1 / (mAlpha + mBeta)
     UNITSON
   }
 

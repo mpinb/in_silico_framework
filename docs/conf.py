@@ -67,7 +67,8 @@ extensions = [
     # Custom extensions
     # "docs.custom_extensions.short_signatures",  # Strip the prefix from signature handles
     "docs.custom_extensions.xrefs_in_signature_handle",
-    "docs.custom_extensions.monkey_patch_napoleon_immaterial"
+    "docs.custom_extensions.monkey_patch_napoleon_immaterial",
+    "docs.custom_extensions.nmodl_lexer"
 ]
 # object_description_options = [
 #     ("py:.*", dict(black_format_style={"line_length": 60})),
