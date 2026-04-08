@@ -17,6 +17,6 @@ Input/ouput operations for various file formats:
 
 - :ref:`activity_data_format` and associated files in :mod:`~activity`
 - Connectivity data such as :ref:`syn_file_format` and :ref:`con_file_format` files in :mod:`~connectivity`
-- AMIRA files such as :class:`single_cell_parser.io.amira.ScalarField` objects in :mod:`~amira`
+- AMIRA files such as :class:`~single_cell_parser.io.amira.ScalarField` objects in :mod:`~amira`
 - Morphologies in :ref:`hoc_file_format` and :ref:`swc_file_format` in :mod:`~morphology`
 """
