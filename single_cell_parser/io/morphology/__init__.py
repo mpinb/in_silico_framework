@@ -98,7 +98,7 @@ def convert_hoc_to_swc(
         axon (bool):
             Whether or not to include the axon in the resulting swc file.
             Default is `False``, because ISF by default ignores morphologically detailed axons in favor of a custom one 
-            (see :meth:`~single_cell_parser.cell.Cell._create_ais_Hay2013`)
+            (see :meth:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`)
 
     Attention:
         The conversion from :ref:`hoc_file_format` to :ref:`swc_file_format` is slightly destructive.
