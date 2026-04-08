@@ -753,7 +753,7 @@ different points on the soma, and not always at the end: ``Soma(1.0)``.
 Readers:
 
 - :mod:`~single_cell_parser.cell_parser`
-- :meth:`~single_cell_parser.io.morphology.hoc.read_hoc_file`
+- :func:`~single_cell_parser.io.morphology.hoc.read_hoc_file`
 
 Example::
 
@@ -810,6 +810,11 @@ Section types in :ref:`swc_file_format` follow a fixed integer convention:
    * - >7
      - "Custom"
 
+
+Readers:
+
+- :mod:`~single_cell_parser.cell_parser`
+- :func:`~single_cell_parser.io.morphology.swc.read_swc_file`
 
 .. seealso::
   Consult https://swc-specification.readthedocs.io/en/latest/swc.html
