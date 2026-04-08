@@ -31,6 +31,19 @@ from pathlib import Path
 logger = get_isf_logger().getChild(__name__)
 
 def read_morphology(fn):
+    """Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
+    
+    This function is a simply strategy pattern to decide which reader to use.
+
+    Args:
+        fn (str|:class:`~Path`): Name of the morphology file.
+
+    Returns:
+       List[_Edge]: List of :class:`~_Edge` objects for further parsing, usually by :meth:`~CellParser.spatialgraph_to_cell`
+
+    Raises:
+        NotImplementedError: If the given filename is not a :ref:`hoc_file_format` or :ref:`swc_file_format`
+    """
     suffix = Path(fn).suffix
     if suffix.lower().endswith(".hoc"):
         return read_hoc(fn)
