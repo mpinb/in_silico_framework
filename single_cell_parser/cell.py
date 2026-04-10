@@ -830,6 +830,11 @@ class PySection(nrn.Section):
         The relative position is the x-coordinate to the previous point.
         Ergo, the sum of :paramref:`relPts` should always equal 1.
         """
+        # edge case: the section only has 1 point
+        if len(self.pts) == 1:
+            self.relPts = [1.0]
+            return
+
         self.relPts = [0.0]
         ptLength = 0.0
         pts = self.pts
@@ -839,16 +844,17 @@ class PySection(nrn.Section):
             x = ptLength / self.L
             self.relPts.append(x)  # compared to previous point
         # avoid roundoff errors:
-        norm = 1.0 / self.relPts[-1]
-        for i in range(len(self.relPts) - 1):
-            self.relPts[i] *= norm
+        if len(self.relPts) > 1:
+            norm = 1.0 / self.relPts[-1]
+            for i in range(len(self.relPts) - 1):
+                self.relPts[i] *= norm
         self.relPts[-1] = 1.0
 
     def _compute_seg_pts(self):
         '''Computes the 3D center points of each segment in this section.
         
         Approximates sections as a straight line.
-        This data is only used for visualization purposes, not for simulating.        
+        This data is only used for visualization purposes, not for simulating.
         '''
         if len(self.pts) > 1:
             p0 = np.array(self.pts[0])
