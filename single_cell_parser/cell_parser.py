@@ -77,12 +77,16 @@ class CellParser(object):
         Reads a :ref:`morphology_file_format` file and sets up PySections and Cell object.
         
         Args:
-            axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            axon (bool): 
+                Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file. If ``True``, an AIS is created according to the methods described in :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
             force_connect_soma_halfway (bool): 
                 Force direct descendants of the soma to connect to the soma at :math:`x=0.5`.
                 Sections that connect to soma at :math:`x=0` mess up the calculation of :math:`R_a`.
                 In addition, this may be useful for consistency for those morphologies where the soma geometry is ill-defined.
                 Default is ``True``.
+
+        See also:
+            :meth:`~_create_ais_Hay2013` for how a custom AIS is created.
         
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
@@ -94,7 +98,9 @@ class CellParser(object):
             Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
         
         '''
-        edgeList = read_morphology(fn=self.path)
+        # Skip reading axon in morph file if we build it manually
+        label_map = {"axon": None, "myelin": None} if axon == True else {}
+        edgeList = read_morphology(fn=self.path, remap_labels=label_map)
         self.cell = Cell()
         self.cell.hoc_path = self.hoc_path
         self.cell.swc_path = self.swc_path
