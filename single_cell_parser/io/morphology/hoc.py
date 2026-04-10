@@ -30,6 +30,7 @@ def _extract_label_and_name_from_hoc(
     remap_labels=None
     ):
     remap_labels = remap_labels or {}
+    remap_labels = {k.lower(): v for k, v in remap_labels.items()}
     # Derive the base label: everything before the first '_' or digit
     hoc_name_match = re.match(r'([A-Za-z\d]+)(_.*)', hoc_label)  # match letters and numbers, NOT underscores
     if hoc_name_match:
@@ -39,7 +40,7 @@ def _extract_label_and_name_from_hoc(
         label = hoc_label
         hoc_suffix = None
 
-    if label.lower() in [k.lower() for k in remap_labels]:
+    if label.lower() in remap_labels:
         rename_label = [k for k in remap_labels if k.lower() == label.lower()][0]
         label = remap_labels[rename_label]
         sec_name = f"{label}"
@@ -52,7 +53,7 @@ def _extract_label_and_name_from_hoc(
 
 def read_hoc(
     fname: str = '',
-    label_map: Optional[Dict[str, str]] = None,
+    remap_labels: Optional[Dict[str, str]] = None,
 ) -> List[_Edge]:
     """Read a .hoc morphology file and return a list of Edge objects.
 
@@ -65,11 +66,14 @@ def read_hoc(
     insensitively.  If no key matches, the raw label itself is used as the
     semantic label so that unknown section types are preserved.
 
-    Mapping a prefix to ``None`` causes those sections to be skipped entirely.
+    Mapping a label to ``None`` causes those sections to be skipped entirely.
 
     Args:
         fname (str): Path to the :ref:`hoc_file_format`
-        label_map (dict[str, str]): Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
+        remap_labels (dict[str, str]): 
+            Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
+            If a label is mapped to ``None``, it is not read in its entirety. This can be useful to e.g.
+            create a custom AIS morphology instead of the one in the morphology file, as done in :class:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`
 
     Returns:
         A list of :class:`_Edge` objects representing the cell morphology
@@ -89,7 +93,8 @@ def read_hoc(
 
     # Build the effective mapping
     label_remapper = HOC_LABEL_MAP
-    if label_map is not None: label_remapper.update(label_map)
+    if remap_labels is not None: label_remapper.update(remap_labels)
+    label_remapper = {k.lower(): v for k, v in label_remapper.items()}
 
     with dbopen(fname, 'r') as fh:
         logger.info("Reading hoc file: %s", fname)
@@ -118,6 +123,9 @@ def read_hoc(
         hoc_label: str = m_create.group(1)          # e.g. "dend_1_0"
 
         label, sec_name = _extract_label_and_name_from_hoc(hoc_label, remap_labels=label_remapper)
+        if label.lower() in label_remapper and label_remapper[label.lower()] == None: 
+            # Skip this section, as its label is mapped to None
+            continue
 
         if 'Spine' in block: continue
 

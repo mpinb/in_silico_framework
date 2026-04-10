@@ -30,7 +30,10 @@ from pathlib import Path
 
 logger = get_isf_logger().getChild(__name__)
 
-def read_morphology(fn):
+def read_morphology(
+        fn,
+        remap_labels=None
+    ):
     """Read a morphology in :ref:`hoc_file_format` or :ref:`swc_file_format` format.
     
     This function is a simply strategy pattern to decide which reader to use.
@@ -44,11 +47,12 @@ def read_morphology(fn):
     Raises:
         NotImplementedError: If the given filename is not a :ref:`hoc_file_format` or :ref:`swc_file_format`
     """
+    remap_labels = remap_labels or {}
     suffix = Path(fn).suffix
     if suffix.lower().endswith(".hoc"):
-        return read_hoc(fn)
+        return read_hoc(fn, remap_labels=remap_labels)
     elif suffix.lower() == ".swc":
-        return read_swc(fn)
+        return read_swc(fn, remap_labels=remap_labels)
     else:
         raise NotImplementedError(f"No reader implemented for {suffix} files")
 

@@ -379,15 +379,24 @@ def complete_soma(sections):
     return [sections[0]] + sections[1:]
 
 
-def read_swc(swc_fn):
+def read_swc(
+        swc_fn,
+        remap_labels=None
+    ):
     """Read a SWC morphology file.
     
     Args:
         swc_fn (str): Path to the :ref:`swc_file_format` file to be converted.
+        remap_labels (dict[str, str]): 
+            Mapping between labels in the :ref:`hoc_file_format` and actual label used in ISF.
+            If a label is mapped to ``None``, it is not read in its entirety. This can be useful to e.g.
+            create a custom AIS morphology instead of the one in the morphology file, as done in :class:`~single_cell_parser.cell_parser.CellParser._create_ais_Hay2013`
 
     Raises:
         ValueError: If no soma points (type 1) are found in the :ref:`swc_file_format` file.
     """
+    remap_labels = remap_labels or {}
+    remap_labels = {k.lower(): v for k, v in remap_labels.items()}
     points_dict = swc_to_point_dict(swc_fn)
     soma_root_ids = [
         idx 
@@ -413,6 +422,9 @@ def read_swc(swc_fn):
             if sec.parentID not in insert_order:
                 raise IOError(f"Logical error: parent '{sec.parentID}' of section '{sec.label}' was not found.")
 
+        if sec.label.lower() in remap_labels:
+            if remap_labels[sec.label] == None: continue
+            else: sec.label = remap_labels[sec.label.lower()]
         if sec.is_valid(): edge_list.append(sec)
         else: raise IOError(f"Logical error reading SWC file: invalid segment '{sec.label}'")
 
