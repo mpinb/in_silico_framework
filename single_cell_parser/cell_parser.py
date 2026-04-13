@@ -82,8 +82,10 @@ class CellParser(object):
             force_connect_soma_halfway (bool): 
                 Force direct descendants of the soma to connect to the soma at :math:`x=0.5`.
                 Sections that connect to soma at :math:`x=0` mess up the calculation of :math:`R_a`.
-                In addition, this may be useful for consistency for those morphologies where the soma geometry is ill-defined.
-                Default is ``True``.
+                In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or
+                to preserve continuity between :ref:`swc_file_format` and :ref:`hoc_file_format` in those cases where :ref:`hoc_file_format` defines connectivity
+                between soma and child sections in ways that :ref:`swc_file_format` can't define (i.e. continuous coordinate that lands in-between points)
+                Default is ``True``. 
 
         See also:
             :meth:`~_create_ais_Hay2013` for how a custom AIS is created.

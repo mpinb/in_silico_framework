@@ -715,9 +715,22 @@ ISF supports two file formats for morphologies:
 NEURON :cite:`hines2001neuron` file format for scripting in ``.hoc``.
 
 The :ref:`hoc_file_format` format is used for HOC scripts.
-HOC scripts support a whole lot more than simply specifying morphologies.
-However, throughout ISF, you may find some example morphologies in the :ref:`hoc_file_format` format.
-These specify for each section:
+HOC scripts support a variety of commands and integrate directly with NEURON.
+Throughout ISF, you may find some example morphologies using the HOC scripting language to define morphology.
+These only use a subset of :ref:`hoc_file_format` commands.
+The information contained in this subset of HOC commands is nearly identical to the information that can be specified in :ref:`swc_file_format`. 
+The only information that this :ref:`hoc_file_format` subset can capture, that cannot be captured the same way in :ref:`swc_file_format`, is the connection coordinate between two sections.
+:ref:`hoc_file_format` allows the definition of a connection between two sections as a continuous coordinate, even if this coordinate lands between two points. 
+:ref:`swc_file_format` defines connectivity in terms of point ID, and so every connection in :ref:`swc` necessarily connects to a point, not in-between points.
+For most use-cases, this difference is trivial, since sections are generally defined as a neurite between connection points, and so every connection point is at relative coordinate ``x=0`` or ``x=1`` anyways.
+One notable example is the soma, where sections are sometimes allowed to connect at a relative coordinate that deviates from ``0`` and ``1``.
+Even then, ISF by default connects child sections to the soma at ``x=0.5`` anyways, so this information is not used in ISF.
+
+.. seealso::
+   :attr:`~single_cell_parser.cell_parser.CellParser.spatialgraph_to_cell.force_connect_soma_halfway` is ``True`` by default, meaning the default behavior of ISF is to connect direct
+   descendants of the soma at ``x=0.5``.
+
+The subset of :ref:`hoc_file_format` used in ISF for morphologies specifies (for each morphology section):
 
 - The section name in a standardized format: ``<label>_<child_idx>``
 - The :math:`(x, y, z)` coordinates of each point per section
