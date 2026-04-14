@@ -1,5 +1,5 @@
 # Anatomical connectivity realization file; only valid with synapse realization:
-# 86_C2_center.syn
+# example_embedding_86_C2_center.syn
 # Type - cell ID - synapse ID
 
 L6cc_A3	0	0
