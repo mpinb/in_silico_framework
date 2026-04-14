@@ -186,7 +186,7 @@ def map_singlecell_inputs(
         try: boutonDensityFolderName = str(DATA_REQS_UDVARY2022["boutonDensityFolderName"])
         except KeyError as e: raise RuntimeError("No boutonDensityFolderName configured in user configuration. Aborting... ") from e
 
-    startTime = time.time()
+    start_t_sec_total = time.time()
 
     logger.info("Loading cell morphology")
     parser = CellParser(cellName)
@@ -220,12 +220,13 @@ def map_singlecell_inputs(
 
     # --------------------- Load bouton densities ---------------------
     logger.info("    Loading bouton densities from folder {:s} (may take a while)".format(boutonDensityFolderName))
-
+    bouton_start = time.time()
     boutonDensities = read_bouton_densities_per_area_per_ct(
         dirname=boutonDensityFolderName,
         anatomical_areas=anatomical_areas,
         cell_types=preCellTypes
     )
+    logger.info("    Loaded bouton densities in {:.2f} s".format(time.time() - bouton_start))
 
     # Actually create the network embedding
     inputMapper = NetworkMapper(
@@ -243,6 +244,6 @@ def map_singlecell_inputs(
     inputMapper.create_network_embedding(cellName, boutonDensities, nrOfSamples=nrOfSamples)
 
     # Record time and write summary
-    endTime = time.time()
-    duration = (endTime - startTime) / 60.0
+    end_t_sec_total = time.time()
+    duration = (end_t_sec_total - start_t_sec_total) / 60.0
     logger.info("Runtime: {:.1f} minutes".format(duration))
