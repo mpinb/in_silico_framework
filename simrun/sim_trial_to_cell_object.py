@@ -38,6 +38,7 @@ from data_base.IO.roberts_formats import write_pandas_synapse_activation_to_robe
 import numpy as np
 import pandas as pd
 from .utils import *
+from data_base.dbopen import resolve_db_path
 import logging
 
 logger = logging.getLogger("ISF").getChild(__name__)
@@ -161,10 +162,8 @@ def simtrial_to_cell_object(
 
     try:
         parameter_table = db['parameterfiles']
-        cellName = parameter_table.loc[sim_trial_index].hash_neuron
-        cellName = os.path.join(db['parameterfiles_cell_folder'], cellName)
-        networkName = parameter_table.loc[sim_trial_index].hash_network
-        networkName = os.path.join(db['parameterfiles_network_folder'], networkName)
+        cellName = resolve_db_path(parameter_table.loc[sim_trial_index].path_neuron, db_basedir = db.basedir)
+        networkName = resolve_db_path(parameter_table.loc[sim_trial_index].path_network, db_basedir = db.basedir)
         sa = db['synapse_activation'].loc[sim_trial_index].compute()
         dummy =  trial_to_cell_object(
             cellName = cellName, \
