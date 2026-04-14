@@ -1206,7 +1206,7 @@ class CellMorphologyVisualizer(CMVDataParser):
             
         Args:
             out_dir (str): path of the directory where the VTK file will be stored.
-            fn (str): name of the VTK file. If empty, the file will be named after the cell's :ref:`hoc_file_format` filename.
+            fn (str): name of the VTK file. If empty, the file will be named after the cell's :ref:`morphology_file_format` filename.
 
         Returns:
             None: writes the .VTK file.
@@ -1217,7 +1217,7 @@ class CellMorphologyVisualizer(CMVDataParser):
         # add diameters by default
         scalar_data['diameter'] = self._morphology_unconnected['diameter'].values
 
-        out_name_ = fn or os.path.basename(self.cell.hoc_path).replace('.hoc', '.vtk')
+        out_name_ = fn
         write_vtk_skeleton_file(
             self._morphology_unconnected,
             out_name_,

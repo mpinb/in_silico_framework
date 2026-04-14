@@ -13,17 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-'''Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`hoc_file_format` file.
+'''Read and parse a :class:`~single_cell_parser.cell.Cell` object from a NEURON :ref:`morphology_file_format` file.
 '''
 
 import warnings, traceback
 from neuron import h
 import numpy as np
 import math
-from . import reader
+from .io.morphology import read_morphology
 from .cell import PySection, Cell
 from . import cell_modify_functions
 import logging
+from pathlib import Path
 
 __author__  = ["Robert Egger", "Arco Bast"]
 __credits__ = ["Robert Egger", "Arco Bast"]
@@ -33,47 +34,61 @@ logger = logging.getLogger("ISF").getChild(__name__)
 
 
 class CellParser(object):
-    '''Configure a :class:`~single_cell_parser.cell.Cell` object from a NEURON hoc file.
+    '''Configure a :class:`~single_cell_parser.cell.Cell` object from a :ref:`morphology_file_format` file.
     
-    This class is used to read a hoc file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
+    This class is used to read a :ref:`morphology_file_format`  file and set up a :class:`~single_cell_parser.cell.Cell` object for single cell simulations.
     It segmentizes the morphology accroding to :cite:t:`hines2001neuron`, and sets the :class:`~single_cell_parser.cell.Cell` object's 
     membrane properties, mechanisms, and ion properties based on a :ref:`cell_parameters_format` file.
     
     Attributes:
-        hoc_path (str): Path to hoc file
+        path (str): Path to the morphology file
+        hoc_path (str): Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+        swc_path (str): Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
         membraneParams (dict): Membrane parameters
         cell_modify_functions_applied (bool): 
             Whether or not cell modify functions have already been applied. See: :func:`~single_cell_parser.cell_parser.CellParser.apply_cell_modify_functions`
         cell (:class:`~single_cell_parser.cell.Cell`): Cell object.
     '''
-    #    h = neuron.h
     cell = None
 
-    def __init__(self, hocFilename=''):
+    def __init__(self, fn=''):
         '''
         Args:
-            hocFilename (str): Path to :ref:`hoc_file_format` file.
+            fn (str): Path to :ref:`morphology_file_format` file.
         '''
-        if not hocFilename:
-            warnings.warn('No hoc file specified')
-        self.hoc_path = hocFilename
-        #         self.hoc_fname = self.hoc_path.split('/')[-1]
-
-        #        implement parameters to be read from
-        #        corresponding membrane file
-        #        (analogous to synapse distribution,
-        #        every cell could have its own optimized
-        #        channel distributions)
+        if not fn: warnings.warn('No morphology file specified')
+        self.path = fn
+        self.hoc_path = ""
+        self.swc_path = ""
+        if Path(fn).suffix.lower() == ".hoc": self.hoc_path = fn
+        elif Path(fn).suffix.lower() == ".swc": self.swc_path = fn
         self.membraneParams = {}
         self.cell_modify_functions_applied = False
 
-    def spatialgraph_to_cell(self, parameters=None, axon=False, scaleFunc=None):
-        '''Create a :class:`~single_cell_parser.cell.Cell` object from an AMIRA spatial graph in :ref:`hoc_file_format` format.
+    def spatialgraph_to_cell(
+        self, 
+        parameters=None, 
+        axon=False, 
+        scaleFunc=None,
+        force_connect_soma_halfway=True
+        ):
+        '''Create a :class:`~single_cell_parser.cell.Cell` object from the :ref:`morphology_file_format`.
         
-        Reads cell morphology from Amira hoc file and sets up PySections and Cell object.
+        Reads a :ref:`morphology_file_format` file and sets up PySections and Cell object.
         
         Args:
-            axon (bool): Whether or not to add an axon initial segment (AIS). AIS creation is according to :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            axon (bool): 
+                Whether or not to add a custom axon initial segment (AIS) instead of the one in the morphology file. If ``True``, an AIS is created according to the methods described in :cite:t:`Hay_Schuermann_Markram_Segev_2013`.
+            force_connect_soma_halfway (bool): 
+                Force direct descendants of the soma to connect to the soma at :math:`x=0.5`.
+                Sections that connect to soma at :math:`x=0` mess up the calculation of :math:`R_a`.
+                In addition, this flag is useful for consistency for those morphologies where the soma geometry is ill-defined, or
+                to preserve continuity between :ref:`swc_file_format` and :ref:`hoc_file_format` in those cases where :ref:`hoc_file_format` defines connectivity
+                between soma and child sections in ways that :ref:`swc_file_format` can't define (i.e. continuous coordinate that lands in-between points)
+                Default is ``True``. 
+
+        See also:
+            :meth:`~_create_ais_Hay2013` for how a custom AIS is created.
         
         .. deprecated:: 0.1.0
             The `scaleFunc` argument is deprecated and will be removed in a future version.
@@ -85,18 +100,26 @@ class CellParser(object):
             Instead of passing parameters as a keyword, the :ref:`cell_parameters_format` file is used to apply biophysical mechanisms during :func:`set_up_biophysics`.
         
         '''
-        edgeList = reader.read_hoc_file(self.hoc_path)
+        # Skip reading axon in morph file if we build it manually
+        label_map = {"axon": None, "myelin": None} if axon == True else {}
+        edgeList = read_morphology(fn=self.path, remap_labels=label_map)
         self.cell = Cell()
         self.cell.hoc_path = self.hoc_path
+        self.cell.swc_path = self.swc_path
+        self.cell.path = self.path
 
         # 1. Create all Sections
         for secID, edge in enumerate(edgeList):
-            sec = PySection(edge.hocLabel, self.cell.id, edge.label)
+            sec = PySection(
+                name=edge.hocLabel, 
+                cell=self.cell.id, 
+                label=edge.label
+            )
             sec.secID = secID
             if sec.label != 'Soma':
                 sec.parentx = edge.parentConnect
                 sec.parentID = edge.parentID
-            sec.set_3d_geometry(edge.edgePts, edge.diameterList)
+            sec.set_3d_geometry(pts=edge.edgePts, diams=edge.diameterList)
             self.cell.sections.append(sec)
             if sec.label == 'Soma':
                 self.cell.soma = sec
@@ -122,9 +145,11 @@ class CellParser(object):
         for sec in self.cell.sections:
             if sec.label != 'Soma':
                 if self.cell.sections[sec.parentID].label == 'Soma':
-                    # unfortunately, necessary to enforce that nothing
-                    # is connected to soma(0) b/c of ri computation in NEURON
-                    sec.parentx = 0.5
+                    if force_connect_soma_halfway == True:
+                        # unfortunately, necessary to enforce that nothing
+                        # is connected to soma(0) b/c of ri computation in NEURON
+                        sec.parentx = 0.5
+                    elif sec.parentx < 1e-6: raise ValueError("Direct descendants of the soma should not connect at x=0.")
                 sec.connect(self.cell.sections[sec.parentID], sec.parentx, 0.0)
                 sr = h.SectionRef(sec=sec)
                 sec.parent = sr.parent
@@ -305,18 +330,18 @@ class CellParser(object):
                 as they are taken care of by :func:`insert_range_mechanisms` and :func:`_insert_ion_properties`.
                 
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
         '''
         if self.cell is None:
             raise RuntimeError(
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         propStrings = []
@@ -340,7 +365,7 @@ class CellParser(object):
             mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
             
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
             NotImplementedError: If the spatial distribution is not implemented.
                 
         The following table lists the possible spatial keywords of ``mech``, the additional keys each spatial key requires, and the corresponding math equations.
@@ -371,11 +396,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for mechName in list(mechs.keys()):
@@ -685,7 +710,7 @@ class CellParser(object):
             mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given in :func:`insert_range_mechanisms`.
             
         Raises:
-            RuntimeError: If the structure has not been parsed from the :ref:`hoc_file_format` file yet.
+            RuntimeError: If the structure has not been parsed from the :ref:`morphology_file_format` file yet.
             NotImplementedError: If the spatial distribution is not implemented.
         '''
         if self.cell is None:
@@ -731,11 +756,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         propStrings = []
@@ -767,11 +792,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         spineDens = spineParam.density
@@ -802,11 +827,11 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.structures:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         spineDens = spineParam.density
@@ -835,11 +860,11 @@ class CellParser(object):
             raise RuntimeError('Trying to insert membrane properties into empty morphology')
         if label != 'Soma' and label not in self.cell.branches:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
         elif label == 'Soma' and not self.cell.soma:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for branch in self.cell.branches[label]:
@@ -879,7 +904,7 @@ class CellParser(object):
                 'Trying to insert membrane properties into empty morphology')
         if label not in self.cell.branches:
             errstr = 'Trying to insert membrane properties, but %s has not' % label\
-                               +' yet been parsed as hoc'
+                               +' yet been parsed'
             raise RuntimeError(errstr)
 
         for branch in self.cell.branches[label]:

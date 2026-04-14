@@ -30,7 +30,7 @@ To generate :ref:`syn_activation_format` files **and** simulate the effect on th
 .. hint::
    If the postsynaptic neuron is not simulated, why does this module need the :ref:`cell_parameters_format`?
    On the one hand, it needs morphoplogical information in order to connect these synapses. The :ref:`cell_parameters_format` contains 
-   a backlink to the original :ref:`hoc_file_format` file, which contains the morphological information. But then why not start from the :ref:'hoc_file_format' file directly?
+   a backlink to the original :ref:`morphology_file_format` file, which contains the morphological information. But then why not start from the :ref:'morphology_file_format' file directly?
    Because this module does in fact create a biophsyically detailed neuron model to pass to :class:`~single_cell_parser.network.NetworkMapper` to create the network,
    despite the fact that the postsynaptic activity is not saved.
    
@@ -78,7 +78,7 @@ def _evoked_activity(
     Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+            containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): 
@@ -193,7 +193,7 @@ def generate_synapse_activations(
     Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+            containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to a :ref:`network_parameters_format` file,
             containing information on synapse and network parameters per cell type. 

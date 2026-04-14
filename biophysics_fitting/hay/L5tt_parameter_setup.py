@@ -393,11 +393,11 @@ def get_L5tt_template_v2():
 def set_morphology(cell_param, filename=None):
     """Add the morphology to a cell parameter object.
     
-    The morphology is simply a path to a :ref:`hoc_file_format` file in string format.
+    The morphology is simply a path to a :ref:`morphology_file_format` file in string format.
     
     Args:
         cell_param (:class:`~single_cell_parser.parameters.NTParameterSet` | dict): The cell parameter dictionary.
-        filename (str): The path to the :ref:`hoc_file_format` file.
+        filename (str): The path to the :ref:`morphology_file_format` file.
         
     Returns:
         :class:`~single_cell_parser.parameters.NTParameterSet` | dict: The updated cell parameter dictionary."""

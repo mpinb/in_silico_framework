@@ -119,7 +119,7 @@ class Simulator_Setup:
     Attributes:
         cell_param_generator (callable): A function that generates a :class:`~single_cell_parser.parameters.NTParameterSet` cell parameter object.
         cell_param_modify_funs (list): list of functions that modify the cell parameters.
-        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object from :ref:`neuron_parameters_format`.
+        cell_generator (callable): A function that generates a :class:`~single_cell_parser.cell.Cell` object from :ref:`cell_parameters_format`.
         cell_modify_funs (list): List of functions that modify the cell object.
         stim_setup_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument and add a NEURON stimulus to it (e.g. :func:`~biophysics_fitting.setup_stim.setup_soma_step`)
         stim_run_funs (list): List of functions that take a :class:`~single_cell_parser.cell.Cell` as an argument, simulate it, and return the simulated :class:`~single_cell_parser.cell.Cell` object (e.g. :func:`~single_cell_parser.init_neuron_run`)
@@ -129,7 +129,7 @@ class Simulator_Setup:
 
     See also:
         :meth:`~biophysics_fitting.simulator.Simulator_Setup.get_params` and related functions for how ``cell_param_modify_functions`` are used to transform input
-        parameter vectors to :ref:`neuron_parameters_format` objects.
+        parameter vectors to :ref:`cell_parameters_format` objects.
 
     """
     def __init__(self):    

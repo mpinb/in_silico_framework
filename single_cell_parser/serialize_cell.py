@@ -65,7 +65,7 @@ def cell_to_serializable_object(cell):
     - synapses: dictionary of synapse populations, each containing a list of synapses with the following information:
         - preCell: dictionary containing the spike times of the presynaptic cell
         - coordinates: coordinates of the synapse
-    - hoc: hoc file content
+    - hoc/swc: Morphology file content
 
     Args:
         cell (:class:`~single_cell_parser.cell.Cell`): cell object
@@ -105,8 +105,12 @@ def cell_to_serializable_object(cell):
             dummy_population.append(dummy_synapse)
         out['synapses'][population] = dummy_population
 
-    with dbopen(cell.hoc_path) as f:
-        out['hoc'] = f.read()
+    if cell.hoc_path is not None:
+        with dbopen(cell.hoc_path) as f:
+            out['hoc'] = f.read()
+    elif cell.swc_path is not None:
+        with dbopen(cell.path) as f:
+            out['swc'] = f.read()
     return out
 
 
@@ -123,11 +127,19 @@ def restore_cell_from_serializable_object(sc):
     Returns:
         :class:`~single_cell_parser.cell.Cell`: cell object
     """
-    # create hoc file
+    # create morphology file
     with mkdtemp() as tempdir:
-        hoc_file_path = os.path.join(tempdir, 'morphology.hoc')
-        with dbopen(hoc_file_path, 'w') as hoc_file:
-            hoc_file.write(sc['hoc'])
+        if 'hoc' in sc.keys():
+            morph_fn = os.path.join(tempdir, 'morphology.hoc')
+            with dbopen(morph_fn, 'w') as hoc_file:
+                hoc_file.write(sc['hoc'])
+        elif "swc" in sc.keys():
+            morph_fn = os.path.join(tempdir, 'morphology.swc')
+            with dbopen(morph_fn, 'w') as swc_file:
+                swc_file.write(sc['swc'])
+
+
+        else: raise NotImplementedError("The morphology file format must be in: [.swc, .hoc]")
 
         ##############################
         # the following code has to be kept up to date with the
@@ -138,7 +150,7 @@ def restore_cell_from_serializable_object(sc):
         if 'AIS' in set([sec['label'] for sec in sc['sections']]):
             axon = True
 
-        parser = CellParser(hoc_file_path)
+        parser = CellParser(morph_fn)
         with silence_stdout:
             # we do not scale! maybe trigger a warning?
             # or better deprecate the scale apical function?

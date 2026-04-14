@@ -39,7 +39,7 @@ logger = logging.getLogger("ISF").getChild(__name__)
 def scale_morphology(cell, scale, target_morphology):
     """Scale a morphology between its current shape and a target morphology.
 
-    Given a target morphology :ref:`hoc_file_format` file, this method scales the current
+    Given a target morphology :ref:`morphology_file_format` file, this method scales the current
     :param:`cell` to be closer to the target morphology. The scaling is done by linearly
     interpolating each point between the current and target morphology.
 
