@@ -147,7 +147,7 @@ class NetworkParamBuilder:
 
         mark_celltype_for_deletion = []
 
-        if join == "left": celltypes = self.network_parameters_network.keys()
+        if join == "left": celltypes = self.network_parameters.network.keys()
         elif join == "right": celltypes = nr_cells.index
 
         for celltype in celltypes:
