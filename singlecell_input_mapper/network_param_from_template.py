@@ -119,7 +119,7 @@ def build_network_param_from_template(
 
     if activity_per_ct == None:
         logger.info(f"No network parameter template passed. Falling back to the default: {NETWORK_PARAM_TEMPLATE_FN}")    
-        activity_per_ct = build_parameters()
+        activity_per_ct = build_parameters(NETWORK_PARAM_TEMPLATE_FN)
     elif isinstance(activity_per_ct, str):
         logger.info("Activity is passed as a string instead of explicit data as an NTParameterSet")
         if activity_data_dir == None:
