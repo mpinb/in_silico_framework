@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import single_cell_parser as scp
 
 from data_base.dbopen import (
     create_modular_db_path,
@@ -19,7 +20,8 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
         :func:`~data_base.dbopen.resolve_neup_reldb_paths` to resolve the relative database paths in the neuron parameter file.
     """
     orig_hoc = neup["neuron"]["filename"]
-    original_recsite_fns = neup["sim"]["recordingSites"]
+    #original_recsite_fns = neup["sim"]["recordingSites"]
+    original_recsite_fns = neup.sim.recordingSites
     assert (
         orig_hoc in hoc_fn_map
     ), "The hoc file referenced in the neuron parameter file was not found:\n{}".format(
@@ -29,11 +31,20 @@ def _convert_neup_fns_to_reldb(neup, hoc_fn_map, recsites_fn_map):
     rel_hoc_fn = create_reldb_path(new_hoc_fn)
     neup["neuron"]["filename"] = rel_hoc_fn
 
-    for i, recsite_fn in enumerate(original_recsite_fns):
-        assert (recsite_fn in recsites_fn_map), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(recsite_fn)
-        new_recsite_fn = recsites_fn_map[recsite_fn]
-        rel_recsite_fn = create_reldb_path(new_recsite_fn)
-        neup["sim"]["recordingSites"][i] = rel_recsite_fn
+    if isinstance(original_recsite_fns, list):
+        for i, recsite_fn in enumerate(original_recsite_fns):
+            assert (recsite_fn in recsites_fn_map), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(recsite_fn)
+            new_recsite_fn = recsites_fn_map[recsite_fn]
+            rel_recsite_fn = create_reldb_path(new_recsite_fn)
+            neup["sim"]["recordingSites"][i] = rel_recsite_fn
+    elif isinstance(original_recsite_fns, scp.parameters.NTParameterSet):
+        new_recsite_fns = {}
+        for recsite_fn, rec_vars in original_recsite_fns.__dict__['_data'].items():
+            assert (recsite_fn in recsites_fn_map), "The recording site file referenced in the neuron parameter file was not found:\n{}".format(recsite_fn)
+            new_recsite_fn = recsites_fn_map[recsite_fn]
+            rel_recsite_fn = create_reldb_path(new_recsite_fn)
+            new_recsite_fns[rel_recsite_fn] = rec_vars
+        neup["sim"]["recordingSites"] = new_recsite_fns
     # if 'channels' in neuron['NMODL_mechanisms']:
     #    neuron['NMODL_mechanisms']['channels'] = os.path.join(target_dir, os.path.basename(neuron['NMODL_mechanisms']['channels']))
     return neup

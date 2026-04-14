@@ -73,6 +73,7 @@ Example::
     ... parameterfiles = True,
     ... synapse_activation = True, 
     ... n_chunks = 5000,
+    ... recorded_variables = True,
     ... dendritic_voltage_traces = True,
     ... spike_times = True, 
     ... dendritic_spike_times = False,
@@ -124,6 +125,7 @@ from .builders import (
     _build_dendritic_voltage_traces,
     _build_param_files,
     _build_synapse_activation,
+    _build_recorded_variables_traces
 )
 from .data_parsing import (
     load_dendritic_voltage_traces,
@@ -150,6 +152,7 @@ def init(
     simresult_path,
     core=True,
     synapse_activation=True,
+    recorded_variables=True,
     dendritic_voltage_traces=True,
     parameterfiles=True,
     spike_times=True,
@@ -183,6 +186,8 @@ def init(
         spike_times (bool, optional):
             Parse and write the spike times into the database.
             See also: :func:`data_base.analyze.spike_detection.spike_detection`
+        recorded_variables (bool, optional):
+            Parse and write the recorded variables traces at each recording site to the database.
         dendritic_voltage_traces (bool, optional):
             Parse and write the dendritic voltage traces to the database.
         dendritic_spike_times (bool, optional):
@@ -283,6 +288,7 @@ def init(
             check_health=check_health,
             )
         if rewrite_in_optimized_format:
+            logging.info("---optimize spike times---")
             optimize(
                 db,
                 select=["voltage_traces"],
@@ -297,6 +303,7 @@ def init(
     if synapse_activation:
         _build_synapse_activation(db, repartition=repartition, n_chunks=n_chunks)
         if rewrite_in_optimized_format:
+            logging.info("---optimize synapse_activation---")
             optimize(
                 db,
                 select=["cell_activation", "synapse_activation"],
@@ -316,6 +323,20 @@ def init(
             scheduler,
             client,
         )
+    if recorded_variables:
+        _build_recorded_variables_traces(db, repartition)
+        if rewrite_in_optimized_format:
+            for var in db["variables_recorded"].keys():
+                logging.info(f"---optimize recorded variable: {var}---")
+                subselection = list(db["variables_recorded"][var].keys())
+                # Actually load and parse the data to a format: this is not a symlink anymore
+                optimize(
+                    db["variables_recorded"][var],
+                    select=subselection,       
+                    repartition=repartition,
+                    scheduler=scheduler,
+                    client=client
+                )
 
     if spike_times:
         # spike times are numbered after this
@@ -362,6 +383,7 @@ def add_dendritic_voltage_traces(
     _build_dendritic_voltage_traces(db, repartition=repartition)
     
     if rewrite_in_optimized_format:
+        logging.info("---optimize dendritic voltage traces---")
         subselection = list(db["dendritic_recordings"].keys())
         # Actually load and parse the data to a format: this is not a symlink anymore
         optimize(

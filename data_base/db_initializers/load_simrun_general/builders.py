@@ -281,7 +281,53 @@ def _build_dendritic_voltage_traces(db, repartition=None):
             dend_vt_per_recsite_label[recSiteLabel], 
             dumper=DEFAULT_DUMPER)
 
+def _build_recorded_variables_traces(db, repartition=None):
+    assert repartition is not None
+    logging.info("---building recorded variables traces dataframes---")
+    # Construct dendritic filelist from existing filelist, as built by _build_core
+    # Don't reconstruct it using make_filelist() here, otherwise you would have to rerun the health check (redundant)
+    # Careful: keep the file order in sync with divisions - bjorge
+    filelist = []
+    suffix = "vm_dend_traces"
+    all_files = []
+    for vt_file in db['filelist']:
+        folder = os.path.dirname(vt_file)
+        all_files += os.listdir(os.path.join(db['simresult_path'], folder))
+        matches = glob.glob(os.path.join(db['simresult_path'], folder, f"*{suffix}*"))
+        matches = sorted(matches)
+        filelist.extend(matches)
+    recsite_labels = get_recsite_labels_from_dend_vt_filelist(filelist, full_suffix=suffix)
 
+    variables = list(set([f[f.index(rec+'_') + len(rec+'_'):].replace('_traces.csv', '')
+                for f in all_files for rec in recsite_labels if rec in f]))
+    if USE_RECSITE_SHORT_NAME: recsite_labels = _get_recsite_ids_from_recsite_labels(recsite_labels)
+    divisions = get_voltage_traces_divisions_by_metadata(db, repartition=repartition)
+    
+    if not "variables_recorded" in list(db.keys()): 
+        db.create_sub_db("variables_recorded")
+    for var in variables:
+        logging.info(f"---building recorded variables traces dataframe: {var}---")
+        db["variables_recorded"].create_sub_db(var)
+        filelist = []
+        for vt_file in db['filelist']:
+            folder = os.path.dirname(vt_file)
+            matches = glob.glob(os.path.join(db['simresult_path'], folder, f"*{var}*"))
+            matches = sorted(matches)
+            filelist.extend(matches)
+        relative_filelist = [os.path.relpath(p, db['simresult_path']) for p in filelist]
+        var_trace_per_recsite_label = load_dendritic_voltage_traces(
+            db, 
+            relative_filelist, 
+            recsite_labels, 
+            repartition=repartition, 
+            divisions=divisions)
+        
+        for recSiteLabel in var_trace_per_recsite_label:
+            db["variables_recorded"][var].set(
+                recSiteLabel, 
+                var_trace_per_recsite_label[recSiteLabel], 
+                dumper=DEFAULT_DUMPER)        
+        
 def _build_param_files(db, paramfile_copy_config=None, client=None):
     """Copy, transform and rename parameterfiles to a db.
 
