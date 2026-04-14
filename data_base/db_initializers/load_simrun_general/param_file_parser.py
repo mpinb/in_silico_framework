@@ -15,7 +15,7 @@ from .filepath_resolution import (
     _convert_con_fns_to_reldb
 )
 from .file_handling import get_file
-from .utils import _hash_file_content
+from .utils import _get_fn_as_hash
 
 logger = logging.getLogger("ISF").getChild(__name__)
 
@@ -92,8 +92,8 @@ def construct_param_filename_hashmap_df(simresult_path, sim_trial_index):
         df["path_network"] = df.apply(
             lambda x: get_original_netp_fn_from_trial(x), axis=1
         )
-        df["hash_neuron"] = df["path_neuron"].map(_hash_file_content)
-        df["hash_network"] = df["path_network"].map(_hash_file_content)
+        df["hash_neuron"] = df["path_neuron"].map(_get_fn_as_hash)
+        df["hash_network"] = df["path_network"].map(_get_fn_as_hash)
         return df
 
     df = pd.DataFrame(dict(sim_trial_index=list(sim_trial_index)))
@@ -287,7 +287,7 @@ def _generate_target_filenames(db, db_target_dir, filelist, copy_method="remount
     if copy_method == "hash_rename":
         assert client is not None, "Please pass a parallellization client for hash renaming the files"
         # New param file name will be the content hash
-        new_base_fns = client.gather(client.map(_hash_file_content, filelist))
+        new_base_fns = client.gather(client.map(_get_fn_as_hash, filelist))
     elif copy_method == "remount":
         assert len(filelist) > 1, "Can't calculate the relative directory structure from a single file, so copy_method='remount' can't be used here. Consider using copy_method='hash_rename' instead. Filelist: {}".format(filelist)
         # paramfiles are copied over in the same folder structure.
