@@ -1141,20 +1141,20 @@ class CellParser(object):
         here for completeness:
         
         - Axon hillock:
-            - Length: 20 :math:`\mum`
-            - Diameter tapering from 3 :math:`\mum` (at soma) to 1.75 :math:`\mum` (at AIS)
+            - Length: 20 :math:`\mu m`
+            - Diameter tapering from 3 :math:`\mu m` (at soma) to 1.75 :math:`\mu m` (at AIS)
         - Axon Initial Segment (AIS):
-            - Length: 30 :math:`\mum`
-            - Diameter tapering from 1.75 :math:`\mum` (at hillock) to 1.0 :math:`\mum` (at myelin)
+            - Length: 30 :math:`\mu m`
+            - Diameter tapering from 1.75 :math:`\mu m` (at hillock) to 1.0 :math:`\mu m` (at myelin)
         - Myelinated axon:
-            - Length: 1000 :math:`\mum`
+            - Length: 1000 :math:`\mu m`
         
         The amount of segments for the axon hillock, AIS and myelin is **not** determined using d-lambda segmentation.
         Instead, they are set to fixed values to ensure sufficient spatial discretization of these important structures:
         
-        - Axon hillock: 1 + 2 segments per 10 :math:`\mum`, i.e., 5 segments for a length of 20 :math:`\mum`
-        - AIS: 1 + 2 segments per 10 :math:`\mum`, i.e., 7 segments for a length of 30 :math:`\mum`
-        - Myelinated axon: 1 + 2 segments per 100 :math:`\mum`, i.e., 21 segments for a length of 1000 :math:`\mum`
+        - Axon hillock: 1 + 2 segments per 10 :math:`\mu m`, i.e., 5 segments for a length of 20 :math:`\mu m`
+        - AIS: 1 + 2 segments per 10 :math:`\mu m`, i.e., 7 segments for a length of 30 :math:`\mu m`
+        - Myelinated axon: 1 + 2 segments per 100 :math:`\mu m`, i.e., 21 segments for a length of 1000 :math:`\mu m`
         
         Note:
             Connectivity is automatically taken care of since this should only be called from :func:`spatialgraph_to_cell`
