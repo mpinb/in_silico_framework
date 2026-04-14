@@ -859,7 +859,7 @@ Example::
 .mod
 ****
 ``MODL`` is a file format Used to define dynamical systems as simply as reasonably possible.
-NEURON :cite:t:`hines2001` provides an extension to this format called ``NMODL``, in this
+NEURON :cite:t:`hines2001neuron` provides an extension to this format called ``NMODL``, in this
 case to define channel and synapse dynamics for use in NEURON simulations.
 NEURON translates these files to ``C`` (and to ``C++`` since NEURON 9.0), to be compiled to machine code on the host machine.
 
@@ -869,7 +869,7 @@ We highlight some important ones below:
 .. list-table::
 
   * - NEURON
-    - NEURON :cite:t:`hines2001` specific specification, such as ``READ`` and ``WRITE`` statements, 
+    - NEURON :cite:t:`hines2001neuron` specific specification, such as ``READ`` and ``WRITE`` statements, 
       defining which global variables this particular mechanism needs access to (e.g. intracellular :math:`Ca^{2+}` for :math:`Ca^{2+}`-activated channels).
       The mechanism's name is defined as either a ``SUFFIX`` or ``POINTPROCESS`` in this block.
       This is the name that will be accessible by the user, and how NEURON will register it in the NEURON or Python namespace.
