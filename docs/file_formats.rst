@@ -85,7 +85,7 @@ Includes a reference to a :ref:`hoc_file_format` morphology file,
 biophysical properties of the cell per morphological structure (e.g. soma, dendrite, axon initial segment ...),
 and basic simulation parameters. Morphology structure labels should match those inferred from the morphology file.
 
-Range mechanisms under the key ``*.mechanisms.range`` are range mechanisms, and their name should match the name of a loaded :ref:`mod_file_format` file.
+Parameters under the key ``*.mechanisms.range`` are range mechanisms, and their name should match the name of a loaded :ref:`mod_file_format` file.
 Note that the mechanism name in :ref:`mod_file_format` files are defined in the ``NEURON`` block as a ``SUFFIX`` or ``POINTPROCESS``, and have little to do with the file name.
 Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF.
 All other range mechanism parameters must be valid attributes of a NEURON segment, such as passive properties, 
