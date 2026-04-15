@@ -325,7 +325,7 @@ def write_vtk_skeleton_file(
     
     
 def convert_amira_lattice_to_vtk(
-    surf_file,
+    fn,
     outname="lattice",
     outdir="."):
     """Convert an AMIRA lattice file to vtk structured points.
@@ -338,7 +338,7 @@ def convert_amira_lattice_to_vtk(
     Returns:
         None. Writes out a .vtk file to the specified directory.
     """
-    with open(surf_file) as f:
+    with open(fn) as f:
         lines = f.readlines()
 
         header_split = [

@@ -16,59 +16,9 @@
 """Convert a :ref:`con_file_format` file to a dataframe with the number of connected presynaptic cells for each celltype and column."""
 
 import os
-
 import pandas as pd
-
-presynaptic_cell_types = [
-    "L1",
-    "L2",
-    "L23Trans",
-    "L34",
-    "L45Peak",
-    "L45Sym",
-    "L4py",
-    "L4sp",
-    "L4ss",
-    "L56Trans",
-    "L5st",
-    "L5tt",
-    "L6cc",
-    "L6ccinv",
-    "L6ct",
-    "SymLocal1",
-    "SymLocal2",
-    "SymLocal3",
-    "SymLocal4",
-    "SymLocal5",
-    "SymLocal6",
-    "VPM",
-]
-presynaptic_columns = [
-    "A1",
-    "A2",
-    "A3",
-    "A4",
-    "Alpha",
-    "B1",
-    "B2",
-    "B3",
-    "B4",
-    "Beta",
-    "C1",
-    "C2",
-    "C3",
-    "C4",
-    "D1",
-    "D2",
-    "D3",
-    "D4",
-    "Delta",
-    "E1",
-    "E2",
-    "E3",
-    "E4",
-    "Gamma",
-]
+from .reader import read_celltype_numbers_spreadsheet
+from config.user.network_connectivity import DATA_REQS_UDVARY2022
 
 
 def con_file_to_NumberOfConnectedCells_sheet(con_file, write_output=True):
@@ -114,15 +64,17 @@ def con_file_to_NumberOfConnectedCells_sheet(con_file, write_output=True):
     )
     # cell-column combinations that do not contain a single cell do not appear at this point in the table
     # add entries for such cell populations
-    for c in presynaptic_columns:
-        c_selected_pdf = con_pdf[con_pdf["Presynaptic column"] == c]
-        for z in presynaptic_cell_types:
-            if len(c_selected_pdf[c_selected_pdf["Presynaptic cell type"] == z]) == 0:
+    nr_cells = read_celltype_numbers_spreadsheet(DATA_REQS_UDVARY2022['numberOfCellsSpreadsheetName'])
+    presynaptic_cell_types = {ct for v in nr_cells.values() for ct in v} 
+    for anatomical_area in nr_cells:
+        c_selected_pdf = con_pdf[con_pdf["Presynaptic column"] == anatomical_area]
+        for cell_type in presynaptic_cell_types:
+            if len(c_selected_pdf[c_selected_pdf["Presynaptic cell type"] == cell_type]) == 0:
                 con_pdf = con_pdf.append(
                     pd.DataFrame(
                         {
-                            "Presynaptic column": [c],
-                            "Presynaptic cell type": [z],
+                            "Presynaptic column": [anatomical_area],
+                            "Presynaptic cell type": [cell_type],
                             "Connected presynaptic cells": [0],
                         }
                     )

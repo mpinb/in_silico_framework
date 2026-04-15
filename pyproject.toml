@@ -60,6 +60,8 @@ scipy = "1.5.2.*"
 wheel = ">=0.45.1,<0.46"
 zarr = ">=2.15.0,<3"
 pyarrow = ">=18.0.0,<22"
+# for extracting barrel cortex data (optional)
+7zip = ">=26.0,<27"
 
 [tool.pixi.pypi-dependencies]
 bluepyopt = "==1.9.126"

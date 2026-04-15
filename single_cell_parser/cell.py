@@ -23,6 +23,7 @@ For neuron-network multiscale simulations, you should consult :mod:`simrun`.
 '''
 
 #from neuron import h, nrn
+from typing import Any, List, Dict
 import numpy as np
 from . import synapse
 from collections import Sequence
@@ -51,12 +52,14 @@ class Cell(object):
     Its attributes are set by :class:`~single_cell_parser.cell_parser.CellParser`.
     
     Attributes: 
-        hoc_path (str): Path to the hoc file containing the cell morphology.
+        path (str): Path to the morphology file
+        hoc_path (str): Path to the :ref:`hoc_file_format` morphology file (if the morphology is in the :ref:`hoc_file_format` format)
+        swc_path (str): Path to the :ref:`swc_file_format` morphology file (if the morphology is in the :ref:`swc_file_format` format)
         id (str | int, optional): ID of the cell (often unused).
         soma (:class:`~single_cell_parser.cell.PySection`): The soma section of the cell.
         tree (:class:`neuron:SectionList`): NEURON SectionList containing all sections of the cell.
         branches (dict): maps the section ID (str) of the root section of each dendritic subtree to its corresponding section list (:class:`neuron:SectionList`).
-        structures (Dict[:class:`~single_cell_parser.cell.PySection`]): 
+        structures (Dict[str, :class:`~single_cell_parser.cell.PySection`]): 
             All sections, aggregated by label (e.g. Dendrite, ApicalDendrite, ApicalTuft, Myelin...). 
             Keys are labels (str), values are lists of :class:`~single_cell_parser.cell.PySection` objects.
         sections (List[:class:`~single_cell_parser.cell.PySection`]): 
@@ -72,12 +75,15 @@ class Cell(object):
     '''
     def __init__(self):
         self.hoc_path = None
+        self.swc_path = None
+        self.path = None
+
         self.id = None
         self.soma = None
         self.tree = None  # TODO: implement trees in python to avoid NEURON section stack problems that may occur during use of SectionLists
         self.branches = {}
-        self.structures = {}
-        self.sections = []
+        self.structures: Dict[str, PySection] = {}
+        self.sections: List[PySection] = []
         self.synapses = {}
         self.E = -70.0  # TODO: this should be read in from the paramfile (e_pas)
         self.changeSynParamDict = {}
@@ -570,8 +576,9 @@ class Cell(object):
 class PySection(nrn.Section):
     '''Wrapper around :class:`neuron:Section` providing additional functionality for geometry and mechanisms.
 
-    NEURON sections are objects of the form ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
-    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``__nrnsec_0x------------(x)``,
+    NEURON sections are a collection of points and their diameter of the form ``secname``
+    If no section name is known, they are printed as ``__nrnsec_0x------------``, where the dashed code represents the memory pointer.
+    Each section consists of ``nseg`` segments of equal length. Each segment is represented by ``secname(x)``,
     which looks similar to the section representation, but has an additional ``(x)``: a relative coordinate representing the
     center point of the segment.
     
@@ -612,10 +619,9 @@ class PySection(nrn.Section):
             cell (:class:`~single_cell_parser.cell.Cell`, optional): reference to the cell object
             label (str, optional): label of the section
         '''
-        if name is None:
-            name = ''
+        if name is None: name = ''
         if cell is None:
-            nrn.Section.__init__(self)
+            nrn.Section.__init__(self, name=name)
         else:
             nrn.Section.__init__(self, name=name, cell=cell)
         self.label = label
@@ -824,6 +830,11 @@ class PySection(nrn.Section):
         The relative position is the x-coordinate to the previous point.
         Ergo, the sum of :paramref:`relPts` should always equal 1.
         """
+        # edge case: the section only has 1 point
+        if len(self.pts) == 1:
+            self.relPts = [1.0]
+            return
+
         self.relPts = [0.0]
         ptLength = 0.0
         pts = self.pts
@@ -833,16 +844,17 @@ class PySection(nrn.Section):
             x = ptLength / self.L
             self.relPts.append(x)  # compared to previous point
         # avoid roundoff errors:
-        norm = 1.0 / self.relPts[-1]
-        for i in range(len(self.relPts) - 1):
-            self.relPts[i] *= norm
+        if len(self.relPts) > 1:
+            norm = 1.0 / self.relPts[-1]
+            for i in range(len(self.relPts) - 1):
+                self.relPts[i] *= norm
         self.relPts[-1] = 1.0
 
     def _compute_seg_pts(self):
         '''Computes the 3D center points of each segment in this section.
         
         Approximates sections as a straight line.
-        This data is only used for visualization purposes, not for simulating.        
+        This data is only used for visualization purposes, not for simulating.
         '''
         if len(self.pts) > 1:
             p0 = np.array(self.pts[0])

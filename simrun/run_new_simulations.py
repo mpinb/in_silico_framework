@@ -71,7 +71,7 @@ def _evoked_activity(
     Args:
         cellParamName (str): 
             Path to a :ref:`cell_parameters_format` file, 
-            containing information about the neuron morphology (link to a :ref:`hoc_file_format` file) and biophysical properties.
+            containing information about the neuron morphology (link to a :ref:`morphology_file_format` file) and biophysical properties.
         evokedUpParamName (str): 
             Path to :ref:`network_parameters_format` file, containing information on synapse and network parameters per cell type.
         dirPrefix (str): Prefix of the output directory. The final directory name will be ":param:`dirPrefix`/results/%Y%M%D-%H%M_UID".

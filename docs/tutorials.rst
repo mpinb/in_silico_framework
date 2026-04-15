@@ -44,3 +44,11 @@ Manipulations & reduced models
    :glob:
 
    ../tutorials/4. analysis/*
+
+
+.. These are tutorials that can be linked to from other tutorials. They don't need to show up explicitly in the documentation page, but reflinks should work.
+
+.. toctree::
+   :hidden:
+
+   ../tutorials/auxiliary notebooks/*

@@ -1,5 +1,6 @@
-import hashlib
+import hashlib, os
 import pandas as pd
+from pathlib import Path
 import dask.dataframe as dd
 from .config import (
     OPTIMIZED_CATEGORIZED_DASK_DUMPER,
@@ -11,6 +12,15 @@ def _hash_file_content(fn):
     with open(fn, 'rb') as content:
         h = hashlib.md5(content.read()).hexdigest()
     return h
+
+
+def _get_fn_as_hash(fn, preserve_suffix = True):
+    new_fn = _hash_file_content(fn)
+    if preserve_suffix == True:
+        fn_basename = fn.split(os.sep)[-1]
+        fn_suffixes = fn_basename.split(".")[1:]
+        new_fn = ".".join([new_fn] + fn_suffixes)
+    return new_fn
 
 
 def _get_dumper(value, categorized=False):

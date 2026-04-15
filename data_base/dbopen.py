@@ -96,6 +96,7 @@ def resolve_reldb_path(path, db_basedir=None):
     Returns:
         str: The resolved path.
     """
+    path = str(path)
     if not path.startswith('reldb://'):
         return path
     
@@ -128,6 +129,7 @@ def create_reldb_path(path):
     Returns:
         str: The relative path of the form ``reldb://...``.
     """
+    path = str(path)
     if path.startswith('reldb://'):
         logger.debug('Path {} already in reldb:// format'.format(path))
         return path
@@ -163,6 +165,7 @@ def resolve_modular_db_path(path):
             '/nas1/Data_regger/AXON_SAGA/Axon4/PassiveTouch/')  # TODO: make this more general
         logger.debug('new path', path)
     
+    path = str(path)
     if not path.startswith('mdb://'):
         return path
 
@@ -195,6 +198,7 @@ def create_modular_db_path(path):
     Returns:
         str: The database path.
     """
+    path = str(path)
     if path.startswith('mdb://'):
         logger.debug('Path {} already in mdb:// format'.format(path))
         return path
@@ -238,6 +242,7 @@ def resolve_db_path(path, db_basedir=None):
     Returns:
         str: The resolved path.
     """
+    path = str(path)
     if path.startswith('reldb://'):
         return resolve_reldb_path(path, db_basedir=db_basedir)
     elif path.startswith('mdb://'):
@@ -253,9 +258,9 @@ def find_common_db_path(paths):
     
     
     """
-    if all([e.startswith("reldb://") for e in paths]):
+    if all([str(e).startswith("reldb://") for e in paths]):
         prefix = "reldb://"
-    elif all([e.startswith("mdb://") for e in paths]):
+    elif all([str(e).startswith("mdb://") for e in paths]):
         prefix = "mdb://"
     else:
         prefix = ""

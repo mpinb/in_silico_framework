@@ -57,7 +57,7 @@ Example::
     ...     "copy_method": "remount",
     ...     "neup" : "parameterfiles_folder",
     ...     "netp" : "parameterfiles_folder",
-    ...     "hoc" : "morphology_folder",
+    ...     "morph" : "morphology_folder",
     ...     "syn" : "parameterfiles_folder",
     ...     "con" : "parameterfiles_folder",
     ...     "recsites" : "parameterfiles_folder"
@@ -139,7 +139,7 @@ DEFAULT_PARAMFILE_COPY_CONFIG = {
     "copy_method": "remount",
     "neup" : "parameterfiles_folder",
     "netp" : "parameterfiles_folder",
-    "hoc" : "parameterfiles_folder",
+    "morph" : "parameterfiles_folder",
     "syn" : "parameterfiles_folder",
     "con" : "parameterfiles_folder",
     "recsites" : "parameterfiles_folder"
@@ -215,7 +215,7 @@ def init(
               ``"remount"`` will preserve the relative directory structure of the parameterfiles per file category (see below). Useful when parameterfiles are already organized.
             - "neup" (str): Target directory name of :ref:`cell_parameters_format`. Default is ``"parameterfiles_folder"``
             - "netp" (str): Target directory name of :ref:`network_parameters_format`. Default is ``"parameterfiles_folder"``
-            - "hoc" (str): Target directory name of :ref:`hoc_file_format` files. Default is ``"parameterfiles_folder"``
+            - "morph" (str): Target directory name of :ref:`morphology_file_format` files. Default is ``"parameterfiles_folder"``
             - "syn" (str): Target directory name of :ref:`syn_file_format` files. Default is ``"parameterfiles_folder"``
             - "con" (str): Target directory name of :ref:`con_file_format` files. Default is ``"parameterfiles_folder"``
             - "recsites" (str): Target directory name of recordingsites (``.landmarkAscii``). Default is ``"parameterfiles_folder"``

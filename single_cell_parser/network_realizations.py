@@ -19,8 +19,8 @@ For more fine-grained control over the creation of anatomical network realizatio
 '''
 
 import os, time
-from . import reader
-from . import writer
+from .io.amira import read_scalar_field
+from .io.connectivity import write_cell_synapse_locations
 from . import cell_parser
 from .synapse_mapper import SynapseMapper
 from .network import NetworkMapper
@@ -30,13 +30,18 @@ __author__  = 'Robert Egger'
 __date__    = '2013-02-01'
 
 
-def create_synapse_realization(pname, write_synapses=False):
+def create_synapse_realization(
+    pname,
+    write_synapses=False
+    ):
     """
     Create a synapse realization from a :ref:`network_parameters_format` file.
     
     Args:
         pname (str): :ref:`network_parameters_format` file.
-        write_synapses (bool): Write synapse locations to a `.landmarkAscii` file for visualization in AMIRA. Default is False.
+
+    .. deprecated:: 0.4.0
+        write_synapses has been deprecated.
     """
     parameters = build_parameters(pname)
     cellParam = parameters.network.post
@@ -47,7 +52,7 @@ def create_synapse_realization(pname, write_synapses=False):
     cell = parser.cell
     for preType in list(preParam.keys()):
         synapseFName = preParam[preType].synapses.distributionFile
-        synDist = reader.read_scalar_field(synapseFName)
+        synDist = read_scalar_field(synapseFName)
         mapper = SynapseMapper(cell, synDist)
         mapper.create_synapses(preType)
 
@@ -62,11 +67,9 @@ def create_synapse_realization(pname, write_synapses=False):
         synapseList = []
         for syn in cell.synapses[synType]:
             synapseList.append(syn.coordinates)
-        if write_synapses:
-            writer.write_synapse_file(name, synapseList)
         tmpSyns = {}
         tmpSyns[synType] = cell.synapses[synType]
-        writer.write_cell_synapse_locations(name + '.syn', tmpSyns, cell.id)
+        write_cell_synapse_locations(name + '.syn', tmpSyns, cell.id)
 
 
 def create_functional_network(cellParamName, nwParamName):

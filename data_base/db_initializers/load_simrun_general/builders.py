@@ -52,7 +52,7 @@ def _filter_filelist_by_health(filelist, simresult_path, client):
     Missing parameterfiles can happen when data is recovered incompletely. If a simualtion
     directory is missing synapse activation files, cell activation files, parameter files,
     or the parameter files have references to missing :ref:`syn_file_format`, :ref:`con_file_format`,
-    :ref:`hoc_file_format` or recsite files, the resulting voltage traces are not reproducible.
+    :ref:`morphology_file_format` or recsite files, the resulting voltage traces are not reproducible.
     
     This function checks if this is the case, and filters out such results from :param:`filelist`
     
