@@ -82,9 +82,21 @@ Cell parameters
 
 :ref:`param_file_format` file to store biophysical parameters of a cell.
 Includes a reference to a :ref:`hoc_file_format` morphology file, 
-biophysical properties of the cell per cellular structure (i.e. soma, dendrite, axon initial segment ...),
-and basic simulation parameters. Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
-Simulation parameters are usually overridden by higher level modules, such as :mod:`simrun`.
+biophysical properties of the cell per morphological structure (e.g. soma, dendrite, axon initial segment ...),
+and basic simulation parameters. Morphology structure labels should match those inferred from the morphology file.
+
+Range mechanisms under the key ``*.mechanisms.range`` are range mechanisms, and their name should match the name of a loaded :ref:`_mod_file_format` file.
+Note that the mechanism name in :ref:`_mod_file_format` files are defined in the ``NEURON`` block as a ``SUFFIX`` or ``POINTPROCESS``, and have little to do with the file name.
+Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF.
+All other range mechanism parameters must be valid attributes of a NEURON segment, such as passive properties, 
+or parameters defined in ``PARAMETER`` blocks in loaded :ref:`_mod_file_format` files.
+Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
+
+.. seealso::
+   :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
+
+.. seealso::
+   The :ref:`_mod_file_format` file documentation for how these files are structured.
 
 To access different structures of a cell::
 
@@ -766,7 +778,7 @@ different points on the soma, and not always at the end: ``Soma(1.0)``.
 Readers:
 
 - :mod:`~single_cell_parser.cell_parser`
-- :func:`~single_cell_parser.io.morphology.hoc.read_hoc_file`
+- :func:`~single_cell_parser.io.morphology.hoc.read_hoc`
 
 Example::
 
@@ -829,7 +841,7 @@ Section types in :ref:`swc_file_format` follow a fixed integer convention:
 Readers:
 
 - :mod:`~single_cell_parser.cell_parser`
-- :func:`~single_cell_parser.io.morphology.swc.read_swc_file`
+- :func:`~single_cell_parser.io.morphology.swc.read_swc`
 
 .. seealso::
   Consult https://swc-specification.readthedocs.io/en/latest/swc.html

@@ -358,8 +358,6 @@ class CellParser(object):
     def insert_range_mechanisms(self, label, mechs):
         r'''Inserts range mechanisms into all structures named as :param:`label`.
         
-        Range mechanism specifications can be found in :mod:`mechanisms`.
-        
         Args:
             label (str): Label of the structure.
             mechs (:class:`~single_cell_parser.parameters.NTParameterSet`): Range mechanisms. Must contain the key ``spatial`` to define the spatial distribution. Possible values for spatial distributions are given below.
