@@ -760,7 +760,7 @@ look like ``"Dendrite_2_0*"`` or ``"Dendrite_3_0*"`` etc.
 
 Connectivity between sections is defined by a line::
 
-  {connect <label>_<chiconvert_swc_to_hocld_idx>(x1), <parent_label>(x2)}
+  {connect <label>_<child_idx>(x1), <parent_label>(x2)}
 
 This defines how the current section ``<label>_<child_idx>`` connects to its parent section.
 ``x1`` and ``x2`` denote the relative coordinates of the connection between both sections.
