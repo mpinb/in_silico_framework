@@ -1023,8 +1023,8 @@ This flexible format can be used to store 3D scalar meshes, 3D neuron morphology
 
 Readers:
 
-- :mod:`~single_cell_parser.reader.read_scalar_field`
-- :mod:`~single_cell_parser.reader.read_landmark_file`
+- :mod:`~single_cell_parser.io.amira.read_scalar_field`
+- :mod:`~single_cell_parser.io.amira.read_landmark_file`
 
 
 .. container:: doc-feedback
