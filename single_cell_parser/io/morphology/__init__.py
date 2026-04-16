@@ -64,8 +64,8 @@ def convert_swc_to_hoc(
     """Convert a :ref:`swc_file_format` morphology file to :ref:`hoc_file_format` format.
     
     Args:
-        swc_filepath (str): Path to the :ref:`swc_file_format` file to be converted.
-        hoc_filepath (str): Output path for the :ref:`hoc_file_format` file.
+        swc_fn (str): Path to the :ref:`swc_file_format` file to be converted.
+        of (str): Output path for the :ref:`hoc_file_format` file.
 
     Raises:
         ValueError: If no soma points (type 1) are found in the SWC file.

@@ -425,7 +425,7 @@ class _DendrogramDendriteStatistics:
             ax=ax,
         )
         # ax.legend()
-        ax.set_ylabel("dendritic length $(\mu m)$", color="k")
+        ax.set_ylabel(r"dendritic length $(\mu m)$", color="k")
         ax.set_xlim(xlim)
         return ax
 
@@ -641,7 +641,7 @@ class _DendrogramSynapseStatistics:
             ax=ax,
         )
         ax.legend()
-        ax.set_ylabel("Synapse density $(\mu m ^{-1})$", color="k")
+        ax.set_ylabel(r"Synapse density $(\mu m ^{-1})$", color="k")
 
     def _plot_synapses_dendrogram_overlay(self, ax):
         """Plot the synapses on the dendrogram.

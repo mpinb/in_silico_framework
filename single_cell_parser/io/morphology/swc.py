@@ -37,9 +37,7 @@ def _get_swc_lines_per_section(
         index type x y z radius parent
         
     Args:
-        cell (:class:`single_cell_parser.cell.Cell`): 
-            A cell object. 
-            Must contain the ``sections`` attribute returning a generator for NEURON sections.
+        sections (List[:class:`single_cell_parser.cell.PySection`]): A list of sections.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
         remap_sections (dict): 
@@ -125,7 +123,7 @@ def _get_only_child_sections(sections):
     have a different section number. This is not uncommon for e.g. the axon hillock and axon initial segment.
     
     Args:
-        cell (:class:`single_cell_parser.cell.Cell`): The cell object to check.
+        sections (List[:class:`single_cell_parser.cell.PySection`]): A list of sections.
         
     Returns:
         dict: Dictionary mapping only-child sections to their parent section.
@@ -138,12 +136,11 @@ def _get_only_child_sections(sections):
     
 
 def write_swc(sections, of, skip_myelin=False, remap_sections=None):
-    """Write out a cell object to swc format::
-    
-        index type x y z radius parent
+    """
+    Write out a cell object to :ref:`swc_file_format`.
         
     Args:
-        sections (List[:class:`nrn.Section`]): 
+        sections (List[:class:`~single_cell_parser.cell.PySection`]): 
             A list of neuron ``Section`` objects.
         skip_myelin (bool):
             If True, myelin will not be written to the resulting .swc file.
@@ -238,8 +235,9 @@ def _traverse(point_id, sec_name, sec_label, parent_sec_id, points_dict, section
 
     Args:
         point_id (int): Starting point ID.
-        sec_name (str): Full name for this section.
-        parent_name (str): Full name of the parent section.
+        sec_name (str): Full name for this section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.hocLabel` attribute
+        sec_label (str): label of this section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.label` attribute
+        parent_sec_id (str): The ID of the parent section. Used to set the :attr:`~single_cell_parser.io.morphology._edge._Edge.parentID` attribute
         points_dict (dict): Full point dictionary from :func:`parse_swc`.
         sections (list): Accumulator; section dicts are appended here in traversal order.
     """
@@ -298,7 +296,7 @@ def build_section_directory(root_ids, points_dict):
     the ordered list of 3D points (x, y, z, diameter) belonging to that section.
 
     Args:
-        root_id (int): Point ID of the soma root (parent == -1).
+        root_ids (List[int]): Point IDs of the soma root (parent == -1). Multiple points on the soma are usually a root for child setions.
         points_dict (dict): Full point dictionary from :func:`parse_swc`.
 
     Returns:

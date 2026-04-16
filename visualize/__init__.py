@@ -48,7 +48,7 @@ def plot_morphology(fn, **kwargs):
     Instatiate a :class:`CellMorphologyVisualizer` object to plot a morphology from a :ref:`morphology_file_format` file.
     
     Args:
-        hoc_file (str): The path to the :ref:`morphology_file_format` file
+        fn (str): The path to the :ref:`morphology_file_format` file
         kwargs: additional arguments to pass to :meth:`~visualize.cell_morphology_visualizer.CellMorphologyVisualizer.plot`
 
     Returns:
@@ -60,7 +60,7 @@ def plot_morphology(fn, **kwargs):
         fn = "getting_started/example_data/anatomical_constraints/86_C2_center.hoc"
         plot_hoc(fn)
         
-    .. figure:: ../../docs/_static/_images/86_hoc.png
+    .. figure:: ../../_static/_images/86_hoc.png
 
     """
     cp = CellParser(fn=fn)

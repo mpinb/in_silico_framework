@@ -191,7 +191,7 @@ def write_hoc(
     Args:
         sections (list of dict): Ordered section records as returned by
             :func:`build_section_directory`, with soma points already complete.
-        hoc_filepath (str): Output path for the HOC file.
+        of (str): Output path for the HOC file.
     """
 
     def _get_precision(float_nr):
