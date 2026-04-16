@@ -4,7 +4,17 @@
 File & data formats
 ###################
 
-.. include:: paramfile_overview.rst
+
+.. md-tab-set::
+
+   .. md-tab-item:: Hide data sources
+
+      .. include:: paramfile_overview.rst
+
+   .. md-tab-item:: Show data sources
+
+      .. include:: paramfile_overview_w_data_sources.rst
+
 
 .. _syn_file_format:
 
