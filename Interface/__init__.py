@@ -16,12 +16,15 @@
 '''
 Interface provides top-level API access to the In Silico Framework (ISF).
 It is the main entry point for users to interact with ISF, providing access to various pacakges, modules and workflows.
-It is designed to be used in a jupyter notebook, but can also be used in scripts.
+
+The primary purpose of providing these workflows, subpackages, and external dependencies through Interface is to:
+
+1. keep the API stable
+2. give the user convenient top-level access to all major workflows
 
 The recommended way to use ISF is to import ``Interface`` in a jupyter notebook in the following manner::
 
     >>> import Interface as I
-
 
 You then have access to all important builtins and top-level pipelines via Interface::
 
@@ -30,7 +33,7 @@ You then have access to all important builtins and top-level pipelines via Inter
     >>> I.scp                           # access the single_cell_parser package
     ...
     
-Take a look at the :ref:`tutorials` for examples on how to use the Interface API.
+Take a look at the :ref:`tutorials` for examples on how to use ISF from the Interface API.
 '''
 import matplotlib
 
