@@ -97,21 +97,34 @@ and basic simulation parameters. Morphology structure labels should match those 
 
 Parameters under the key ``*.mechanisms.range`` are range mechanisms, and their name should match the name of a loaded :ref:`mod_file_format` file.
 Note that the mechanism name in :ref:`mod_file_format` files are defined in the ``NEURON`` block as a ``SUFFIX`` or ``POINTPROCESS``, and have little to do with the file name.
-Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF.
-All other range mechanism parameters must be valid attributes of a NEURON segment, such as passive properties, 
-or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files.
-Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
-
-.. seealso::
-   :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
 
 .. seealso::
    The :ref:`mod_file_format` file documentation for how these files are structured.
 
+Each range mechanism must have the key ``spatial``, and its value must match one of the supported spatial profiles in ISF. All spatial profiles except for ``"uniform"`` require additional parameters that need to be defined for a given range mechanism. E.g. the exponential profile expects the parameters ``offset``, ``linScale``, ``_lambda``, ``xOffset``. Distances for these spatial profiles are calculated in terms of distance to soma.
+If ``"distance": "relative"`` is passed for a range mechanism, the distance dependency is scaled by the maximum distance of all sections with the same label. E.g. for a simple dendrite, this means that all distance metrics are scaled with the length of the longest dendrite. This is useful for setting scaling parameters without necessarily having to worry about the exact dimensions of the neurites beforehand.
+Spatial profiles are evaluated on a segment-by-segment basis: the segment center is used as the distance dependency of each spatial profile, and channels are uniform within a single segment.
+
+.. seealso::
+   :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
+
+All other remaining parameters of a range mechanism must be valid attributes of a NEURON segment, such as passive properties, or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files. Typically, channels only expose their conductance density as a parameter, but there is nothing stopping you from also exposing e.g. :math:`\tau_m` and :math:`m_\inf`. The simplest range mechanism entry in a neuron parameter file is thus::
+
+  # The range mechanism name, defined as a SUFFIX in a loaded .mod file
+  'Ca_LVAst': {
+      # non-parametrized profile - simply uses gbar
+      'spatial': 'uniform',
+      # the conductance density parameter, exposed in the PARAMETER block of the .mod file
+      'gCa_LVAstbar': 0.00462
+      },
+
+Conductance densities are given in :math:`S/cm^2`, spatial coordinates and distances in :math:`\mu m`, and time in :math:`ms`.
+
+
 To access different structures of a cell::
 
     >>> cell_parameters.neuron.keys()
-    ['Myelin', 'Soma', 'AIS', 'filename', 'Dendrite', 'ApicalDendrite']
+    ['Myelin', 'Soma', 'AIS', 'Dendrite', 'ApicalDendrite']
 
 Example::
 
@@ -135,6 +148,14 @@ Example::
                         'Ca_LVAst': {
                             'spatial': 'uniform',
                             'gCa_LVAstbar': 0.00462},
+                        "Ih": {
+                            "spatial": "exponential",
+                            "distance": "relative",
+                            "gIhbar": 0.0002,
+                            "offset": -0.8696,
+                            "linScale": 2.0870,
+                            "_lambda": 3.6161,
+                            "xOffset": 0.0},
                         'Ca_HVA': {...},
                         ...,}}},
             'Dendrite': {...},
