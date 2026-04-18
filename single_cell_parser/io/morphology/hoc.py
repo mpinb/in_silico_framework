@@ -40,9 +40,20 @@ def _extract_label_and_name_from_hoc(
         label = hoc_label
         hoc_suffix = None
 
-    if label.lower() in remap_labels:
-        rename_label = [k for k in remap_labels if k.lower() == label.lower()][0]
-        label = remap_labels[rename_label]
+    matched_key = label.lower() if label.lower() in remap_labels else None
+
+    if matched_key is None:
+        # check if any map key appears anywhere in the full hoc label
+        nonprefix_matches = [k for k in remap_labels if k in hoc_label.lower()]
+        if len(nonprefix_matches) > 1:
+            raise ValueError(
+                f"Ambiguous label '{hoc_label}': multiple map keys match (non-perfix match) as: {nonprefix_matches}"
+            )
+        if nonprefix_matches:
+            matched_key = nonprefix_matches[0]
+
+    if matched_key is not None:
+        label = remap_labels[matched_key]
         sec_name = f"{label}"
         if hoc_suffix: sec_name += str(hoc_suffix)
     else:
