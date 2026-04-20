@@ -108,7 +108,7 @@ Spatial profiles are evaluated on a segment-by-segment basis: the segment center
 .. seealso::
    :meth:`~single_cell_parser.cell_parser.CellParser.insert_range_mechanisms` for an overview of the available spatial profiles for range mechanisms.
 
-All other remaining parameters of a range mechanism must be valid attributes of a NEURON segment, such as passive properties, or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files. Typically, channels only expose their conductance density as a parameter, but there is nothing stopping you from also exposing e.g. :math:`\tau_m` and :math:`m_\inf`. The simplest range mechanism entry in a neuron parameter file is thus::
+All other remaining parameters of a range mechanism must be valid attributes of a NEURON segment, such as passive properties, or parameters defined in ``PARAMETER`` blocks in loaded :ref:`mod_file_format` files. Typically, channels only expose their conductance density as a parameter, but there is nothing stopping you from also exposing e.g. :math:`\tau_m` and :math:`m_\infty`. The simplest range mechanism entry in a neuron parameter file is thus::
 
   # The range mechanism name, defined as a SUFFIX in a loaded .mod file
   'Ca_LVAst': {
@@ -766,7 +766,7 @@ The only information that this :ref:`hoc_file_format` subset can capture, that c
 :ref:`hoc_file_format` allows the definition of a connection between two sections as a continuous coordinate, even if this coordinate lands between two points. 
 :ref:`swc_file_format` defines connectivity in terms of point ID, and so every connection in :ref:`swc` necessarily connects to a point, not in-between points.
 For most use-cases, this difference is trivial, since sections are generally defined as a neurite between connection points, and so every connection point is at relative coordinate ``x=0`` or ``x=1`` anyways.
-One notable example is the soma, where sections are sometimes allowed to connect at a relative coordinate that deviates from ``0`` and ``1``.
+One notable exception is the soma, where sections are sometimes allowed to connect at a relative coordinate that deviates from ``0`` and ``1``.
 Even then, ISF by default connects child sections to the soma at ``x=0.5`` anyways, so this information is not used in ISF.
 
 .. seealso::
