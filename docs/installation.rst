@@ -33,7 +33,7 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
@@ -67,7 +67,7 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
@@ -110,23 +110,10 @@ Installation
 
       .. code-block:: bash
 
-         git clone https://github.com/mpinb/in_silico_framework.git --depth 1
+         git clone https://github.com/mpinb/in_silico_framework.git
          cd in_silico_framework
          pixi run install
 
-
-
-Developer installation
------------------------
-
-
-If you are planning to contribute to ISF and you have read the `contributor guidelines <https://github.com/mpinb/in_silico_framework/blob/master/CONTRIBUTE.md>`_, 
-you should also clone the ``develop`` branch of the repository:
-
-.. code-block:: bash
-
-   git remote set-branches origin 'develop'
-   git fetch --depth 1 origin develop
 
 
 Configuration
@@ -172,8 +159,6 @@ To test if all components of ISF are working as intended, you can run the test s
 .. code-block:: bash
 
    pixi run test
-
-
 
 
 
