@@ -114,6 +114,54 @@ Installation
          cd in_silico_framework
          pixi run install
 
+The ISF environment
+-------------------
+ISF provides two environments:
+
+- ``default``: the runtime environment used when you activate the ISF environment. This includes all dependencies of ISF necessary for normal operation
+- ``docs``: dependencies needed to build the ISF documentation
+
+Each ISF environment adapts the following environment variables:
+
+.. md-tab-set::
+
+   .. md-tab-item:: Linux
+
+      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+   .. md-tab-item:: macOS
+
+      - ``PYTHONPATH``: ISF packages are prepended to the ``PYTHONPATH``. In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+   .. md-tab-item:: Windows
+
+      - ``PYTHONPATH``: ISF packages and the python packages that ship with your NEURON installation are prepended to the ``PYTHONPATH`` in that order. 
+        The NEURON python packages can be found at ``%NEURONHOME%/lib/python``.
+        In addition, the ``PYTHONPATH`` that existed before activating the ISF environment is preserved within ISF. 
+        This allows the user to use ISF in conjunction with other projects, provided that package names and dependencies do not clash.
+      - ``PATH``: The location of your NEURON executables is appended to your ``PATH``, so that you can invoke them from within the environment. These are located at ``%NEURONHOME%/bin``
+      - ``HOME``: ISF registers your ``%USERPROFILE%`` under an additional environment variable named ``HOME`` for convenience.
+      - ``ISF_HOME``: the root directory of the ISF project, as installed on the user system.
+
+.. warning::
+   The ISF ``pixi`` environment is, similar to other virtual environments, not isolated from system-level or user-level site-packages by default. 
+   If you have installed site-packages on the system- or user-level (i.e. not in a virtual environment) for a python version that ISF also uses, 
+   you will likely contaminate the ISF environment, as well as any other virtual environment.
+   It is recommended to install all python packages for any project in a dedicated environment for each project.
+   You can check if you are at risk of contaminating virtual environments (such as the ISF one) by inspecting the result of:
+   
+   .. code-block:: bash
+
+      python -c "import site; print(site.getsitepackages())"
+
+   If this returns anything, then you have site packages installed system-wide, and these will interfere with the packages of any virtual environment that uses the same python version.
+
+   .. seealso::
+      https://docs.python.org/3/library/site.html
 
 
 Configuration
